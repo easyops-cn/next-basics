@@ -34,6 +34,8 @@ import classNames from "classnames";
 import i18n from "i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
+const { DirectoryTree } = Tree;
+
 export const compareFunMap: Record<string, any> = {
   $eq: eq,
   $lt: lt,
@@ -196,6 +198,7 @@ export interface BrickTreeProps {
   alsoSearchByKey?: boolean;
   isFilter?: boolean;
   iconUseBrick?: { useBrick: UseBrickConf };
+  isDirectory?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -220,6 +223,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     isFilter,
     onSearch,
     iconUseBrick,
+    isDirectory
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -381,6 +385,8 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     props.onExpand(expandedKeys);
   };
 
+  const TreeElement = isDirectory ? DirectoryTree : Tree;
+
   return (
     <>
       {searchable && (
@@ -425,7 +431,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         ref={treeContainerRef}
       >
         {treeData?.length ? (
-          <Tree
+          <TreeElement
             {...configProps}
             treeData={treeData}
             titleRender={(node) => {

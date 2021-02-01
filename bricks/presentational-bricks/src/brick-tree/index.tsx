@@ -133,6 +133,14 @@ export class BrickTreeElement extends UpdatingElement {
    */
   @property({ type: Boolean }) isFilter: boolean;
 
+    /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否目录树
+   */
+    @property({ type: Boolean }) isDirectory: boolean;
+
   /**
    * @kind boolean
    * @required false
@@ -320,6 +328,7 @@ export class BrickTreeElement extends UpdatingElement {
             alsoSearchByKey={this.alsoSearchByKey}
             isFilter={this.isFilter}
             iconUseBrick={this.iconUseBrick}
+            isDirectory={this.isDirectory}
           />
         </BrickWrapper>,
         this
