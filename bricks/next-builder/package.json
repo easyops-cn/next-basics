@@ -2,7 +2,7 @@
   "name": "@next-bricks/next-builder",
   "version": "1.23.0",
   "description": "> TODO: description",
-  "homepage": "https://git.easyops.local/anyclouds/next-basics/tree/master/bricks/next-builder",
+  "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/next-builder",
   "license": "UNLICENSED",
   "files": [
     "dist",

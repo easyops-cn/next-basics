@@ -2,7 +2,7 @@
   "name": "@next-bricks/general-auth",
   "version": "1.4.10",
   "description": "A brick package for general auth",
-  "homepage": "https://git.easyops.local/anyclouds/next-basics/tree/master/bricks/general-auth",
+  "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/general-auth",
   "license": "UNLICENSED",
   "files": [
     "dist",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@git.easyops.local:anyclouds/next-basics.git"
+    "url": "git@github.com:easyops-cn/next-basics.git"
   },
   "scripts": {
     "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
