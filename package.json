@@ -1,8 +1,8 @@
 {
-  "name": "YOUR-REPOSITORY",
+  "name": "next-basics",
   "private": true,
   "license": "UNLICENSED",
-  "homepage": "https://github.com/easyops-cn/YOUR-REPOSITORY",
+  "homepage": "https://github.com/easyops-cn/next-basics",
   "scripts": {
     "prepare": "lerna bootstrap",
     "start": "lerna run start",
