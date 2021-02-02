@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.4.11 (2021-02-02)
+
+
+### Bug Fixes
+
+* use @next-sdk/* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
+
+
+
+
+
 ## [1.4.10](https://git.easyops.local/anyclouds/next-basics/compare/@bricks/general-auth@1.4.9...@bricks/general-auth@1.4.10) (2021-01-29)
 
 

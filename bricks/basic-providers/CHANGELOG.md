@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.3 (2021-02-02)
+
+**Note:** Version bump only for package @next-bricks/basic-providers
+
+
+
+
+
 ## [1.2.2](https://git.easyops.local/anyclouds/next-basics/compare/@bricks/basic-providers@1.2.1...@bricks/basic-providers@1.2.2) (2021-01-29)
 
 
