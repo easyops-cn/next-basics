@@ -1,0 +1,24 @@
+{
+  "name": "@next-micro-apps/general-auth",
+  "version": "1.0.7",
+  "description": "> TODO: description",
+  "homepage": "https://git.easyops.local/anyclouds/next-basics/tree/master/micro-apps/general-auth",
+  "license": "UNLICENSED",
+  "files": [
+    "storyboard.json",
+    "deploy",
+    "icons"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@git.easyops.local:anyclouds/next-basics.git"
+  },
+  "scripts": {
+    "build": "echo 'nothing to build but lerna need this to build deps'",
+    "postbuild": "node scripts/post-build.js"
+  },
+  "peerDependencies": {
+    "@next-bricks/basic-bricks": "^1.9.1",
+    "@next-bricks/general-auth": "^1.0.0"
+  }
+}

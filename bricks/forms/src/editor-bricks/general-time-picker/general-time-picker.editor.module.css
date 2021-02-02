@@ -1,0 +1,4 @@
+.suffixIcon {
+  float: right;
+  color: var(--antd-input-placeholder-color);
+}

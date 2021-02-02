@@ -1,0 +1,23 @@
+.formButtonItem {
+  display: flex;
+  > .submitBtn,
+  .cancelBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    height: var(--editor-brick-base-height);
+    margin-right: 8px;
+    border-radius: var(--editor-brick-border-radius);
+  }
+
+  .submitBtn {
+    color: #fff;
+    background: var(--bg-color-button-primary);
+    border: 1px solid var(--bg-color-button-primary);
+  }
+
+  .cancelBtn {
+    color: var(--bg-color-button-link);
+  }
+}

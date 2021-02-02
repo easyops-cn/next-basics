@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollapsibleCardItem should work 1`] = `
+<div
+  className="brickCollapsibleCardContainer"
+>
+  <div
+    className="headerContainer"
+    style={
+      Object {
+        "borderBottom": "solid 1px #e8e8e8",
+      }
+    }
+  >
+    <div
+      className="collapsibleCardItemInfo"
+    >
+      <i
+        className="collapsibleCardItemIcon"
+      >
+        <GeneralIcon
+          icon={
+            Object {
+              "lib": "antd",
+              "type": "gitlab",
+            }
+          }
+        />
+      </i>
+      <div
+        className="collapsibleTitle"
+      >
+        gitlab
+        （
+        Easyops GIT
+        ）
+      </div>
+    </div>
+    <div
+      className="operatingArea"
+    >
+      <slot
+        id="operateSlot"
+        name="operate"
+      />
+    </div>
+  </div>
+  <div
+    className="contentContainer"
+  >
+    <slot
+      id="contentSlot"
+      name="content"
+    />
+  </div>
+</div>
+`;
+
+exports[`CollapsibleCardItem should work 2`] = `
+<div
+  className="brickCollapsibleCardContainer"
+>
+  <div
+    className="headerContainer"
+    style={Object {}}
+  >
+    <div
+      className="collapsibleCardItemInfo"
+    >
+      <i
+        className="collapsibleCardItemIcon"
+      >
+        <GeneralIcon
+          icon={
+            Object {
+              "lib": "antd",
+              "type": "gitlab",
+            }
+          }
+        />
+      </i>
+      <div
+        className="collapsibleTitle"
+      >
+        gitlab
+        （
+        Easyops GIT
+        ）
+      </div>
+    </div>
+    <div
+      className="operatingArea"
+    >
+      <slot
+        id="operateSlot"
+        name="operate"
+      />
+    </div>
+  </div>
+</div>
+`;

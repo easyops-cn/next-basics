@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickConditionalDisplay should work 1`] = `
+<DocumentFragment>
+  <div
+    class="label"
+    style="border-color: rgba(47, 194, 91, 1); background: rgb(22, 123, 224); color: rgb(255, 255, 255);"
+  >
+    优秀
+  </div>
+</DocumentFragment>
+`;

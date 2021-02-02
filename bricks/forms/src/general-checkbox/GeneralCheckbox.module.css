@@ -1,0 +1,28 @@
+.generalCheckBox {
+  :global(.ant-checkbox-wrapper) {
+    border-radius: 4px;
+    padding: 2px 4px;
+    &:hover {
+      background: #ebf3fd;
+    }
+  }
+  :global(.ant-checkbox-wrapper + .ant-checkbox-wrapper) {
+    margin-left: 16px;
+  }
+  :global(.ant-checkbox-wrapper-checked) {
+    background: #f5f5f5;
+  }
+}
+
+.checkboxColLayout {
+  margin-bottom: -6px !important;
+  :global(.ant-checkbox-wrapper) {
+    width: 100%;
+  }
+}
+
+.groupCollapse {
+  :global(.ant-collapse-content > .ant-collapse-content-box) {
+    padding-left: 40px;
+  }
+}

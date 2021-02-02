@@ -1,0 +1,15 @@
+.builderCanvas {
+  flex: auto;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.85);
+  margin-left: var(--page-card-gap);
+  border-radius: var(--editor-brick-border-radius);
+}
+
+.fullscreen {
+  margin: var(--page-card-gap);
+}
+
+.builderCanvas > :global(.ant-card) > :global(.ant-card-body) {
+  padding: 0;
+}

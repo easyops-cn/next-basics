@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickHumanizeTime should work 1`] = `
+<span>
+  Jul19日 11:26
+</span>
+`;
+
+exports[`BrickHumanizeTime should work, isCostTime 1`] = `
+<span>
+  18 天 2 小时
+</span>
+`;
+
+exports[`BrickHumanizeTime should work, link props 1`] = `
+<BrickLink
+  label="January 19, 1970 am10:18"
+  url="/a/b/c"
+/>
+`;

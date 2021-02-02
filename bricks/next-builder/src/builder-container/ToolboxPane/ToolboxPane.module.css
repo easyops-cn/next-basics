@@ -1,0 +1,23 @@
+.toolboxPane {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  color: var(--text-color-default);
+}
+
+.toolboxPaneTitle {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 42px;
+  padding: 0 12px;
+  color: #fff;
+}
+
+.toolboxPaneBody {
+  flex: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

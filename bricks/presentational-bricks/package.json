@@ -1,0 +1,57 @@
+{
+  "name": "@next-bricks/presentational-bricks",
+  "version": "1.168.0",
+  "description": "> TODO: description",
+  "homepage": "https://git.easyops.local/anyclouds/next-basics/tree/master/bricks/presentational-bricks",
+  "license": "UNLICENSED",
+  "files": [
+    "dist",
+    "deploy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@git.easyops.local:anyclouds/next-basics.git"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
+    "start:editors": "cross-env NODE_ENV='development' webpack --config webpack.editors.js --watch",
+    "start:both": "concurrently -k -n main,editors \"npm run start\" \"npm run start:editors\"",
+    "build": "cross-env NODE_ENV='production' npm run build:webpack && npm run build:stories",
+    "build:webpack": "npm run build:webpack:main && npm run build:webpack:editors",
+    "build:webpack:main": "webpack --config webpack.config.js",
+    "build:webpack:editors": "webpack --config webpack.editors.js",
+    "build:stories": "if [ -d stories ];then  tsc stories/index.ts --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck --outDir dist/stories; else echo \" no stories \"; fi",
+    "postbuild": "ENABLE_GENERATE_DOC=true node scripts/post-build.js",
+    "test": "cross-env NODE_ENV='test' jest",
+    "test:ci": "cross-env NODE_ENV='test' CI=true jest"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@next-libs/basic-components": "^2.0.0",
+    "@next-libs/clipboard": "^2.0.0",
+    "@next-libs/cmdb-utils": "^1.0.0",
+    "@next-libs/crontab": "^1.0.0",
+    "@next-libs/datetime": "^1.0.0",
+    "@next-libs/datetime-components": "^2.0.0",
+    "@next-libs/forms": "^2.0.0",
+    "@next-core/custom-antd-styles": "^1.6.2",
+    "@sdk/cmdb-sdk": "^0.7.2",
+    "@sdk/monitor-sdk": "^0.2.0",
+    "@sdk/object-store-sdk": "^1.2.0",
+    "@types/react-avatar-editor": "^10.3.5",
+    "classnames": "^2.2.6",
+    "dompurify": "^2.2.6",
+    "html-to-react": "^1.4.5",
+    "immutability-helper": "^3.1.1",
+    "marked": "^1.2.8",
+    "prismjs": "^1.23.0",
+    "react-avatar-editor": "^11.1.0",
+    "react-dnd": "^10.0.2",
+    "react-dnd-html5-backend": "^10.0.2",
+    "regexpu-core": "^4.7.1"
+  },
+  "sideEffects": true,
+  "peerDependencies": {
+    "@next-dll/ace": "*"
+  }
+}

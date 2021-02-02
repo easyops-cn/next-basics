@@ -1,0 +1,14 @@
+.microViewHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--page-title-margin-bottom);
+}
+
+.pageTitle {
+  font-size: 18px;
+  line-height: 32px;
+}
+
+.untitled {
+  color: rgba(0, 0, 0, 0.45);
+}

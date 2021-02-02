@@ -1,0 +1,18 @@
+// --- 官方样式 ---
+@import "~antd/lib/style/core/motion.less";
+@import "~antd/lib/modal/style/index.less";
+@import "~antd/lib/button/style/index.less";
+@import "~@ant-design/compatible/lib/form/style/index.less";
+@import "~antd/lib/grid/style/index.less";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/button.less";
+
+.openBtn{
+  color: var(--text-color-link);
+  cursor: pointer;
+  &:hover{
+    // Todo(lynette): replace it with text-color-hover
+    color: var(--bg-color-button-primary-hover);
+  }
+}

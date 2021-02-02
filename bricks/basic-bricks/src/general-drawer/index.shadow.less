@@ -1,0 +1,40 @@
+// --- 官方样式 ---
+@import "~antd/lib/drawer/style/index.less";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  overflow: auto;
+  height: 100%;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 56px;
+  background: var(--body-background);
+
+  .footer-inner {
+    flex: 1
+  }
+}
+
+.flexContainer {
+  display: flex;
+}
+
+.@{drawer-prefix-cls} {
+  &-body {
+    padding: 20px;
+  }
+}

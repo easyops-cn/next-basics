@@ -1,0 +1,10 @@
+.deleteConfirmContent {
+  strong {
+    padding-left: 3px;
+    padding-right: 3px;
+    color: #fc5043;
+    font-weight: normal;
+    background-color: #ffeeed;
+    border-radius: 2px;
+  }
+}

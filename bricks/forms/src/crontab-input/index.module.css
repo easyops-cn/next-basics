@@ -1,0 +1,13 @@
+.crontabContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 20px;
+  background: rgba(245, 245, 245, 1);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 5px;
+  .formatText {
+    grid-column: span 5;
+  }
+}

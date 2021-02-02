@@ -1,0 +1,23 @@
+.stepMark {
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-top: 1px solid var(--editor-brick-stroke-color);
+    border-left: 1px solid var(--editor-brick-stroke-color);
+  }
+
+  &::before {
+    top: 7px;
+    right: 8px;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    bottom: 7px;
+    right: 8px;
+    transform: rotate(-135deg);
+  }
+}

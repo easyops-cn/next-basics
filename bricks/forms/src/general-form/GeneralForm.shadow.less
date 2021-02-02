@@ -1,0 +1,23 @@
+// --- 官方样式 ---
+@import "~@ant-design/compatible/lib/form/style/index.less";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/legacy-form.less";
+
+:host {
+  display: block;
+}
+:host([hidden]) {
+  display: none;
+}
+::slotted([slot="toolbar"]) {
+  margin-left: 10px;
+}
+
+.form-container {
+  display: flex;
+
+  > .ant-legacy-form {
+    flex-grow: 1;
+  }
+}

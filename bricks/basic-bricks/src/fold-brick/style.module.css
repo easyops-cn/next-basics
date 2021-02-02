@@ -1,0 +1,6 @@
+.foldActive {
+  display: block;
+}
+.foldInactive {
+  display: none;
+}

@@ -1,0 +1,264 @@
+.uploadContainer {
+  :global(.ant-upload-list .ant-tooltip) {
+    display: none;
+  }
+
+  :global(.anticon-download) {
+    display: none;
+  }
+
+  :global(.ant-upload-picture-card-wrapper) {
+    display: block;
+  }
+
+  :global(.ant-upload-list-picture-card-container) {
+    background: #fff;
+  }
+
+  :global(.ant-upload-select-picture-card) {
+    background: var(--theme-gray-background);
+  }
+
+  /* text style */
+  :global(.ant-upload-list-text) {
+    margin-top: 6px;
+  }
+
+  :global(.ant-upload-list-item-list-type-text) {
+    /* 上传失败 */
+    &:global(.ant-upload-list-item-error) {
+      :global(.ant-upload-list-item-name) {
+        color: var(--bg-color-button-danger) !important;
+      }
+
+      :global(.ant-upload-list-item-card-actions-btn .anticon) {
+        position: initial;
+        opacity: 1;
+        color: var(--bg-color-button-danger) !important;
+      }
+    }
+
+    &:hover {
+      background-color: var(--theme-blue-background);
+
+      :global(.ant-upload-list-item-info) {
+        background-color: inherit;
+      }
+    }
+
+    /* 上传信息 */
+    margin-top: 2px;
+    padding: 5px 8px 5px 8px;
+    height: auto;
+    border-radius: 6px;
+
+    :global(.ant-upload-list-item-info) {
+      height: auto;
+      padding: 0;
+    }
+
+    :global(.ant-upload-list-item-info > span) {
+      height: auto;
+      position: relative;
+
+      /* 文件名 */
+      :global(.ant-upload-list-item-name) {
+        color: var(--text-color-default);
+        overflow: inherit;
+      }
+
+      /* 删除按钮 */
+      :global(.ant-upload-list-item-card-actions) {
+        :global(.ant-upload-list-item-card-actions-btn) {
+          &:hover {
+            background-color: transparent;
+          }
+
+          :global(.anticon) {
+            color: var(--text-color-disabled);
+            font-size: 14px;
+
+            &:hover {
+              color: #ed493c;
+            }
+          }
+        }
+      }
+    }
+
+    /* 进度条 */
+    :global(.ant-upload-list-item-progress) {
+      bottom: -4px;
+      padding-left: 22px;
+      width: calc(100% - 18px);
+    }
+  }
+
+  /* picture style */
+  :global(.ant-upload-list-item-list-type-picture) {
+    background: #f8f9fc;
+    border-color: #eceef3;
+    border-style: solid;
+
+    &:hover {
+      background: var(--theme-blue-background);
+      border-color: var(--theme-blue-background);
+      border-style: solid;
+
+      :global(.ant-upload-list-item-card-actions-btn) {
+        opacity: 1 !important;
+      }
+    }
+
+    /* 上传中 */
+    &:global(.ant-upload-list-item-uploading) {
+      border-style: dashed;
+    }
+
+    /* 上传失败 */
+    &:global(.ant-upload-list-item-error) {
+      background: rgba(237, 73, 60, 0.1);
+      border-color: rgba(237, 73, 60, 0.5);
+      border-style: solid;
+
+      /* 右上角删除按钮 */
+      :global(.ant-upload-list-item-card-actions-btn) {
+        opacity: 1 !important;
+
+        :global(.anticon) {
+          position: initial;
+          color: var(--bg-color-button-danger) !important;
+        }
+      }
+    }
+
+    /* 上传信息 */
+    padding: 14px 20px 14px 20px;
+    height: auto;
+
+    :global(.ant-upload-list-item-info) {
+      height: auto;
+    }
+
+    :global(.ant-upload-list-item-info > span) {
+      height: auto;
+      position: relative;
+
+      /* 缩略图 */
+      :global(.ant-upload-list-item-thumbnail) {
+        width: 38px;
+        height: 38px;
+        top: 0;
+        left: 0;
+
+        :global(.ant-upload-list-item-image) {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      /* 文件名 */
+      :global(.ant-upload-list-item-name) {
+        margin-left: 4px;
+        line-height: initial;
+
+        .upload-file-main-info {
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+
+          .upload-file-name {
+            margin-right: 12px;
+            color: var(--text-color-default);
+            line-height: 20px;
+          }
+
+          .upload-file-size {
+            color: var(--text-color-disabled);
+            line-height: 17px;
+            font-size: 12px;
+          }
+        }
+
+        .upload-file-else-info {
+          margin-top: 4px;
+
+          .upload-file-error-info {
+            display: inline-block;
+            color: #ed493c;
+            height: 18px;
+            line-height: 18px;
+          }
+        }
+      }
+
+      /* 右上角删除按钮 */
+      :global(.ant-upload-list-item-card-actions) {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        :global(.ant-upload-list-item-card-actions-btn) {
+          opacity: 0;
+
+          &:hover {
+            background-color: transparent;
+          }
+
+          :global(.anticon) {
+            color: var(--text-color-disabled);
+            font-size: 16px;
+
+            &:hover {
+              color: #ed493c;
+            }
+          }
+        }
+      }
+    }
+
+    /* 进度条 */
+    :global(.ant-upload-list-item-progress) {
+      padding-left: 50px;
+      bottom: 14px;
+      width: calc(100% - 40px);
+    }
+  }
+
+  /* draggableUpload style*/
+  :global(.ant-upload-drag) {
+    background: #f8f9fc !important;
+    border-color: #b9c6de !important;
+
+    &:hover {
+      background: var(--theme-blue-background) !important;
+      border-color: var(--color-brand) !important;
+    }
+
+    &:global(.ant-upload-drag-hover) {
+      background: var(--theme-blue-background) !important;
+      border-color: var(--color-brand) !important;
+    }
+
+    :global(.ant-upload-btn) {
+      padding: 24px 0 !important;
+
+      :global(.ant-upload-drag-icon) {
+        margin-bottom: 10px !important;
+      }
+    }
+  }
+}
+
+.textContainer {
+  margin-bottom: 10px;
+}
+
+.pictureCardImage {
+  width: 86px;
+  height: 86px;
+  object-fit: cover;
+}
+
+.uploadContainerDisplayNone {
+  display: none;
+}

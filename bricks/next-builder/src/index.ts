@@ -1,0 +1,14 @@
+import "./i18n";
+import "./data-providers/ScanBricksAndTemplates";
+import "./data-providers/GenerateBricksBasedOnModel";
+import "./data-providers/GetAttrBrickConf";
+import "./data-providers/GenerateTemplateProxy";
+import "./custom-processors/buildStoryboard";
+import "./custom-processors/getBrickConfig";
+import "./custom-processors/routeTree";
+import "./data-providers/BuilderGraphData";
+import "./data-providers/AddStoryboardNodeAndReorder";
+import "./data-providers/MoveStoryboardNodeAndReorder";
+import "./builder-container";
+import "./data-providers/GetAllProviders";
+import "./data-providers/GetBrickLibrary";

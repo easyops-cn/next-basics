@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WrapperFormItem should control the form item show/hidden 1`] = `""`;
+
+exports[`WrapperFormItem should control the form item show/hidden 2`] = `
+<FormItem
+  hasFeedback={false}
+  label="名称"
+>
+  <TestComponent
+    component="Input"
+    onChange={[Function]}
+  />
+</FormItem>
+`;
+
+exports[`WrapperFormItem should trigger change event 1`] = `
+<FormItem
+  hasFeedback={false}
+  label="名称"
+>
+  <TestComponent
+    onChange={[Function]}
+  />
+</FormItem>
+`;
+
+exports[`WrapperFormItem should work 1`] = `
+<FormItem
+  hasFeedback={false}
+  label="名称"
+>
+  <TestComponent
+    onChange={[Function]}
+    optionList={
+      Array [
+        Object {
+          "id": "a",
+          "text": "a",
+        },
+        Object {
+          "id": "b",
+          "text": "b",
+        },
+        Object {
+          "id": "c",
+          "text": "c",
+        },
+      ]
+    }
+  />
+</FormItem>
+`;

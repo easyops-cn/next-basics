@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollapseBar should work 1`] = `
+<a
+  className="collapseBar"
+  onClick={[Function]}
+  role="button"
+>
+  <svgr-mock
+    height={22}
+    width={22}
+  />
+</a>
+`;
+
+exports[`CollapseBar should work when collapsed 1`] = `
+<a
+  className="collapseBar collapsed"
+  onClick={[Function]}
+  role="button"
+>
+  <svgr-mock
+    height={22}
+    width={22}
+  />
+</a>
+`;

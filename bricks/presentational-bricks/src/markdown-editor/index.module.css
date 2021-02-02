@@ -1,0 +1,24 @@
+.markdownEditorContainer {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  min-height: 256px;
+  background-color: #ffffff;
+  :global(.ant-tabs-bar) {
+    margin: 0 0 10px 0;
+  }
+  :global(.ant-tabs-tab) {
+    margin: 0;
+  }
+  :global(.ant-input) {
+    border: 0;
+    min-height: 200px;
+    margin-bottom: 0;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .markdownPreviewContainer {
+    margin: 0 10px;
+    overflow-x: auto;
+  }
+}

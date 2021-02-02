@@ -1,0 +1,52 @@
+.brickItem {
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.brickItem:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.brickName {
+  flex: auto;
+  padding: 0 10px;
+  min-width: 0;
+  color: var(--text-color-title);
+  white-space: nowrap;
+}
+
+.brickItem:hover .brickName {
+  color: #4e93ef;
+}
+
+.brickIcon {
+  width: 26px;
+  height: 22px;
+  color: var(--text-color-secondary);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.brick .brickIcon {
+  color: var(--text-color-secondary);
+}
+
+.brick:hover .brickIcon {
+  color: #0071eb;
+}
+
+.provider .brickIcon {
+  color: var(--theme-orange-color);
+}
+
+.template .brickIcon {
+  color: var(--theme-red-color);
+}
+
+.customTemplate .brickIcon {
+  color: var(--theme-green-color);
+}

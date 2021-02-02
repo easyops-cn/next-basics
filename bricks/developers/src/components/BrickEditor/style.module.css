@@ -1,0 +1,31 @@
+.editorCard {
+  position: relative;
+  padding: 0px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.copyIcon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  color: white;
+  opacity: 0.2;
+  box-shadow: none;
+  transition: all 0.8s;
+  border-radius: 50%;
+  border: none;
+}
+
+.copyIcon:hover {
+  opacity: 1;
+}
+
+.copyIcon:active {
+  transition: 0s;
+  color: var(--bg-color-button-primary-hover);
+  box-shadow: 0 0 2px 2px var(--bg-color-button-primary-hover);
+}

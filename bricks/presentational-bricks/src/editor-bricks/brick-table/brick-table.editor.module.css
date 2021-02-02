@@ -1,0 +1,49 @@
+.table {
+  background: var(--editor-brick-stroke-color);
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+  display: grid;
+  grid-gap: 1px;
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  background: #fff;
+}
+
+.head {
+  background: #fafafa;
+}
+
+.body {
+  background: #fff;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  margin: 16px;
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+  background: var(--editor-brick-skeleton-bg-light);
+}
+
+.cell {
+  flex: 1;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  height: 12px;
+  width: 67%;
+  background: var(--editor-brick-skeleton-bg-light);
+}
+
+.body .cell:last-child .content {
+  background: var(--editor-brick-skeleton-bg-blue);
+}

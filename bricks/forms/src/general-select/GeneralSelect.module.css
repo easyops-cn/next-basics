@@ -1,0 +1,27 @@
+.option {
+  display: flex;
+  justify-content: space-between;
+
+  .label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+  }
+}
+
+.suffixBrickSelect {
+  :global {
+    .ant-select-selection-selected-value {
+      width: 100%;
+    }
+  }
+}
+
+.itemOption {
+  border-radius: 6px;
+}
+
+:global(.ant-select-selector) .suffixContainer {
+  margin-top: -1px;
+}

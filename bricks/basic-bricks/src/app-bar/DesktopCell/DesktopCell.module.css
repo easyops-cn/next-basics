@@ -1,0 +1,39 @@
+.cellWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* https://stackoverflow.com/a/43312314 */
+  overflow: hidden;
+  &.positionLeft {
+    justify-content: flex-start;
+  }
+}
+
+.cellItem {
+  height: 144px;
+  padding: 10px;
+  min-width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cellItem.active {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+
+@media (max-height: 860px), (max-width: 1280px) {
+  .cellItem {
+    height: 124px;
+    min-width: 100px;
+  }
+}
+
+@media (max-height: 700px), (max-width: 1024px) {
+  .cellItem {
+    height: 118px;
+    min-width: 80px;
+  }
+}

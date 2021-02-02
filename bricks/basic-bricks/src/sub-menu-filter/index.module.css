@@ -1,0 +1,70 @@
+.subMenuContainer {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 20px 12px;
+  .header {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 0 24px 16px 24px;
+    line-height: 26px;
+    color: #000;
+    i {
+      color: #8c8c8c;
+      width: 24px;
+      text-align: center;
+    }
+    > i + span {
+      margin-left: 5px;
+    }
+    .headerTitle {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  > :global(.ant-input-search) {
+    margin-bottom: 10px;
+  }
+  > :global(.ant-menu, ) {
+    :global(.ant-menu-item-group) {
+      :global(.ant-menu-item-group-title) {
+        padding: 8px;
+        font-size: 12px;
+      }
+    }
+
+    :global(.ant-menu-item) {
+      margin: 0;
+      border-radius: 6px;
+      &:after {
+        content: none;
+      }
+
+      &:not(:global(.ant-menu-item-selected)):hover {
+        background-color: #f2f5f9;
+      }
+
+      &:not(:global(.ant-menu-item-selected)):active {
+        background-color: #d8e4f0;
+      }
+    }
+
+    :global(.ant-menu-item-selected) {
+      background-color: #ebf3fd;
+    }
+
+    :global(.ant-menu-submenu-title) {
+      margin: 0;
+    }
+  }
+}
+
+.itemContainerInner {
+  padding: 8px;
+  margin-left: 4px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

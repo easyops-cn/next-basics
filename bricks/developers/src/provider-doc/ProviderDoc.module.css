@@ -1,0 +1,11 @@
+td.code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -66px;
+  visibility: hidden;
+}

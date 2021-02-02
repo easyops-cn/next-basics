@@ -1,0 +1,13 @@
+.avatarContainer:hover .avatarEditContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatarEditContainer {
+  display: none;
+}
+
+.avatarEditContainer:hover {
+  cursor: pointer;
+}

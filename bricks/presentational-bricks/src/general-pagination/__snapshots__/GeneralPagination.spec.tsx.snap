@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneralPagination should work 1`] = `
+<Pagination
+  className=""
+  current={1}
+  onChange={[MockFunction]}
+  onShowSizeChange={[MockFunction]}
+  pageSize={20}
+  pageSizeOptions={
+    Array [
+      "10",
+      "20",
+      "50",
+    ]
+  }
+  showSizeChanger={true}
+  showTotal={[Function]}
+  total={50}
+/>
+`;

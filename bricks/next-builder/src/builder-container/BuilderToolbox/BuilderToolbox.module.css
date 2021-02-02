@@ -1,0 +1,45 @@
+.builderToolbox {
+  width: 273px;
+  display: flex;
+  overflow: hidden;
+  background-color: #091732;
+  border-radius: var(--editor-brick-border-radius);
+}
+
+.fullscreen {
+  border-radius: 0;
+}
+
+.tabList {
+  list-style: none;
+  margin: 0;
+  padding: 3px 0;
+  width: 36px;
+  background-color: rgba(232, 232, 232, 0.1);
+}
+
+.tabLink {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition: none;
+  color: #bfbfbf;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.fullscreenToggle {
+  background-color: transparent;
+}
+
+.tabActive > .tabLink {
+  background-color: #167be0;
+  color: #fff;
+}
+
+.tabContent {
+  flex: auto;
+  min-width: 0;
+}

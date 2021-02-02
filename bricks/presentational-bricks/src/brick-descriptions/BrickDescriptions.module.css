@@ -1,0 +1,10 @@
+.descriptionItem {
+  :global(.ant-descriptions-item-content) {
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    p {
+      margin: 0 0 15px 0;
+    }
+  }
+}

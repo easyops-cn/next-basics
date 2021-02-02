@@ -1,0 +1,18 @@
+.launchpadLink {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.launchpadIcon {
+  vertical-align: top;
+  filter: grayscale(100%);
+  opacity: 0.8;
+}
+
+.launchpadLink:hover .launchpadIcon {
+  filter: none;
+  opacity: 1;
+}

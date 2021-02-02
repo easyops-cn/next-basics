@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarkdownEditor should work 1`] = `
+<FormItemWrapper
+  onChange={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "### test",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  value="### 123"
+>
+  <ForwardRef(MarkdownEditorItem)
+    onChange={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "### test",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    value="### 123"
+  />
+</FormItemWrapper>
+`;

@@ -1,0 +1,42 @@
+.dynamicForm {
+  --operator-columns-width: 30px;
+
+  .operatorBtn {
+    color: #8c8c8c;
+    font-size: 20px;
+    padding: 0;
+    padding-left: 4px;
+    &:hover {
+      color: #595959;
+    }
+    &[disabled] {
+      color: #bfbfbf;
+    }
+  }
+
+  &.showBackground {
+    background-color: rgb(245, 245, 245);
+    border-radius: 6px;
+    padding: 16px;
+  }
+
+  .headRow {
+    padding-right: var(--operator-columns-width);
+  }
+
+  .operatorColumns {
+    flex-basis: var(--operator-columns-width);
+  }
+
+  .removeColumn {
+    min-width: 38px;
+  }
+
+  :global(.ant-legacy-form-item) {
+    margin-bottom: 10px;
+  }
+
+  .addButton {
+    margin-right: 32px !important;
+  }
+}

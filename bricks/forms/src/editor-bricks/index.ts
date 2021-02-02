@@ -1,0 +1,15 @@
+import "./general-form/general-form.editor";
+import "./general-input/general-input.editor";
+import "./general-select/general-select.editor";
+import "./cmdb-instance-select/cmdb-instance-select.editor";
+import "./general-radio/general-radio.editor";
+import "./general-checkbox/general-checkbox.editor";
+import "./general-textarea/general-textarea.editor";
+import "./general-input-number/general-input-number.editor";
+import "./general-auto-complete/general-auto-complete.editor";
+import "./general-switch/general-switch.editor";
+import "./general-slide/general-slide.editor";
+import "./general-date-picker/general-date-picker.editor";
+import "./general-time-picker/general-time-picker.editor";
+import "./upload-img/upload-img.editor";
+import "./general-buttons/general-buttons.editor";

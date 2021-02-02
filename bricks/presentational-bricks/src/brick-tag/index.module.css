@@ -1,0 +1,54 @@
+.brickTag {
+  margin: -5px 0;
+
+  .closableTag {
+    &:hover {
+      background-color: var(--stroke-color-default);
+    }
+  }
+
+  .round {
+    border-radius: 12px;
+  }
+
+  :global(.ant-tag) {
+    margin: 5px 4px;
+  }
+
+  .tagsLabel {
+    margin-right: 14px;
+  }
+
+  &.tagTextOverflow {
+    :global(.ant-tag) {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 10px;
+    }
+  }
+
+  .tagCircleIcon {
+    :global(.anticon > .fa-circle) {
+      width: 6px;
+    }
+  }
+
+  .grayTag {
+    color: var(--text-color-disabled);
+    background-color: var(--theme-gray-background) !important;
+  }
+
+  .colorTag {
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+
+    &:global(.ant-tag-has-color) {
+      font-weight: 400;
+    }
+  }
+
+  .disabledTag {
+    cursor: not-allowed;
+  }
+}

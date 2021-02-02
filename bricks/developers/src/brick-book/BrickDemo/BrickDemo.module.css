@@ -1,0 +1,57 @@
+.demoContainer {
+  margin-bottom: 10px;
+  overflow: auto;
+  width: 100%;
+  background: #f8f8f8;
+  border-radius: 7px;
+
+  > :global(.ant-card-body) {
+    padding: 10px;
+  }
+}
+
+.demoContainerIcon {
+  display: flex;
+  align-items: center;
+  color: #3a3a3a;
+  font-weight: 500;
+  font-size: 14px;
+}
+.demoContainerIconSpan {
+  padding-right: 3px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #595959;
+  font-size: 16px;
+}
+
+.demoContainerEdit {
+  background: #e7e7e7;
+  border: 0;
+
+  overflow: hidden;
+
+  > :global(.ant-collapse-header) {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+}
+
+.demoContainerEditSingle {
+  border-radius: 0px 0px 6px 6px !important;
+}
+
+.demoContainerMemo {
+  background: #e7e7e7;
+  border: 0;
+  border-radius: 0px 0px 6px 6px !important;
+  overflow: hidden;
+  color: rgb(95 103 111);
+  font-size: 14px;
+  > :global(.ant-collapse-header) {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+}

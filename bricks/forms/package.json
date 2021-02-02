@@ -1,0 +1,42 @@
+{
+  "name": "@next-bricks/forms",
+  "version": "1.150.0",
+  "description": "> TODO: description",
+  "homepage": "https://git.easyops.local/anyclouds/next-basics/tree/master/bricks/forms",
+  "license": "UNLICENSED",
+  "files": [
+    "dist",
+    "deploy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@git.easyops.local:anyclouds/next-basics.git"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
+    "start:editors": "cross-env NODE_ENV='development' webpack --config webpack.editors.js --watch",
+    "start:both": "concurrently -k -n main,editors \"npm run start\" \"npm run start:editors\"",
+    "build": "cross-env NODE_ENV='production' npm run build:webpack && npm run build:stories",
+    "build:webpack": "npm run build:webpack:main && npm run build:webpack:editors",
+    "build:webpack:main": "webpack --config webpack.config.js",
+    "build:webpack:editors": "webpack --config webpack.editors.js",
+    "build:stories": "if [ -d stories ];then  tsc stories/index.ts --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck --outDir dist/stories; else echo \" no stories \"; fi",
+    "postbuild": "ENABLE_GENERATE_DOC=true node scripts/post-build.js",
+    "test": "cross-env NODE_ENV='test' jest",
+    "test:ci": "cross-env NODE_ENV='test' CI=true jest"
+  },
+  "devDependencies": {
+    "@next-libs/basic-components": "^2.0.0",
+    "@next-libs/clipboard": "^2.0.0",
+    "@next-libs/cmdb-instances": "^3.0.0",
+    "@next-libs/crontab": "^1.0.0",
+    "@next-libs/forms": "^2.0.0",
+    "@next-core/custom-antd-styles": "^1.6.2",
+    "@sdk/cmdb-sdk": "^0.15.14",
+    "@sdk/msgsender-sdk": "^0.1.0",
+    "@sdk/object-store-sdk": "^1.2.0",
+    "classnames": "^2.2.6",
+    "immutability-helper": "^3.1.1"
+  },
+  "sideEffects": true
+}

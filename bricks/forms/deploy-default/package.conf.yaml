@@ -1,0 +1,6 @@
+install_path: /usr/local/easyops/bricks/forms-NB
+user: 'easyops:easyops'
+dependencies:
+  - name: brick_next
+    version: ^2.15.8
+    local_deploy: true

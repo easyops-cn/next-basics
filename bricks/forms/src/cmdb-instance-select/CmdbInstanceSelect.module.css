@@ -1,0 +1,17 @@
+.avatar {
+  margin-right: 10px;
+
+  &.defaultIcon {
+    background-color: #167be0;
+    vertical-align: middle;
+  }
+}
+.moreChoices {
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #999;
+  white-space: nowrap;
+  font-style: italic;
+}

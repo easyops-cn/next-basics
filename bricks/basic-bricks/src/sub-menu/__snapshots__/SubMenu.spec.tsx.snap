@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubMenu should work 1`] = `
+<div
+  className="subMenuContainer"
+>
+  <div
+    className="header"
+  >
+    <GeneralIcon />
+    <span
+      className="headerTitle"
+    >
+      IP网段管理
+    </span>
+  </div>
+  <Sidebar
+    inlineIndent={16}
+    menuItems={
+      Array [
+        Object {
+          "exact": true,
+          "text": "基本信息",
+          "to": "/contract/subMenu",
+          "type": "default",
+        },
+        Object {
+          "items": Array [
+            Object {
+              "text": "所在机柜",
+              "to": "/contract/subMenu/host",
+            },
+            Object {
+              "text": "运维人员",
+              "to": "/contract/subMenu/person",
+            },
+          ],
+          "title": "资源关系",
+          "type": "group",
+        },
+      ]
+    }
+    theme="light"
+  />
+</div>
+`;

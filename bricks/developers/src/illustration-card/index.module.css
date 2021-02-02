@@ -1,0 +1,6 @@
+.illustrationCard {
+  :global(.ant-card-body) {
+    background-color: var(--theme-gray-border-color);
+    text-align: center;
+  }
+}

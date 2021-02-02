@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodeEditor should work 1`] = `
+<mockConstructor
+  className="aceContainer"
+  editorProps={
+    Object {
+      "$blockScrolling": Infinity,
+    }
+  }
+  mode="text"
+  name="commands-editor"
+  onBlur={[Function]}
+  onChange={[Function]}
+  onValidate={[Function]}
+  setOptions={
+    Object {
+      "tabSize": 2,
+    }
+  }
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  theme="tomorrow"
+  value="123"
+/>
+`;

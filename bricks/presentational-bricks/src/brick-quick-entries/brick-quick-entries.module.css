@@ -1,0 +1,51 @@
+.entranceWrapper,
+.multiCardEntranceWrapper {
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+.entranceWrapper {
+  grid-gap: 12px;
+}
+.linkWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #167be0;
+}
+
+.icon {
+  font-size: 32px;
+}
+
+.text {
+  text-align: center;
+  font-size: 14px;
+}
+.multiCardGeneralVerticalLine {
+  margin: 20px 0;
+  border-left: 1px solid #e8e8e8;
+  opacity: 0.55;
+}
+.verticalLine {
+  height: 100%;
+  border-left: 1px solid rgba(216, 216, 216, 1);
+}
+
+.horizontalLine {
+  width: 100%;
+  border-top: 1px solid rgba(216, 216, 216, 1);
+}

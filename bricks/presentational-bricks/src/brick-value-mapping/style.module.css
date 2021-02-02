@@ -1,0 +1,55 @@
+.wrapper {
+  :global(.ant-tag) {
+    cursor: pointer;
+  }
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 1px 12px;
+  border: 1px solid;
+  border-radius: 6px;
+}
+
+.round {
+  border-radius: 12px;
+}
+
+.customTag {
+  padding: 0 9px;
+}
+
+.unknownError {
+  color: red;
+}
+
+.tagCircleIcon {
+  :global(.anticon > .fa-circle) {
+    width: 6px;
+  }
+}
+
+.wrapIconText {
+  display: flex;
+  align-items: center;
+
+  :global(.anticon) {
+    vertical-align: middle;
+  }
+}
+
+/* 蓝湖多彩标签设计：https://lanhuapp.com/web/#/item/project/board/detail?pid=08ef7a67-b5e6-4aee-8b6d-6999377c4fdb&project_id=08ef7a67-b5e6-4aee-8b6d-6999377c4fdb&image_id=d55e4e48-327e-4f79-86da-191da1862a7e */
+.grayTag {
+  color: var(--theme-gray-color);
+  background-color: var(--theme-gray-background) !important;
+}
+
+.colorTag {
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+
+  &:global(.ant-tag-has-color) {
+    font-weight: 400;
+  }
+}

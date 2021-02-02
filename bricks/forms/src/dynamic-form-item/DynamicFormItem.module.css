@@ -1,0 +1,15 @@
+.select {
+  padding: 2px;
+}
+
+.option {
+  border-radius: 6px;
+
+  &:hover {
+    background: #ebf3fd;
+  }
+
+  &:global(.ant-select-item-option-selected) {
+    background: #f5f5f5;
+  }
+}

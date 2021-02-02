@@ -1,0 +1,13 @@
+:global(.ant-alert.ant-alert-closable).closeOnce {
+  padding-right: 96px;
+}
+.noBorderRadio {
+  border-radius: 0;
+}
+
+:global(.ant-alert) {
+  border: none !important;
+}
+:global(.ant-alert-message) {
+  line-height: 22px;
+}

@@ -1,0 +1,6 @@
+.nextTypography {
+  &:global(.ant-typography) {
+    overflow-wrap: anywhere;
+    margin-bottom: 0;
+  }
+}

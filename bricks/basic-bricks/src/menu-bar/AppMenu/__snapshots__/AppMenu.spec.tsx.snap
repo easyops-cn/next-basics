@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppMenu should work 1`] = `
+<div
+  className="appMenu"
+>
+  <div
+    className="menuGroup"
+  >
+    <MenuTooltip
+      title="Great"
+    >
+      <Link
+        className="menuTitleLink"
+        to="/mock-link"
+      >
+        <i
+          className="menuTitleIcon"
+        >
+          <GeneralIcon />
+        </i>
+        <span
+          className="menuTitleText"
+        >
+          Great
+        </span>
+      </Link>
+    </MenuTooltip>
+    <div
+      className="menuContainer"
+    >
+      <Sidebar
+        inlineIndent={30}
+        menuItems={
+          Array [
+            Object {
+              "text": "for-good",
+              "to": "/for/good",
+            },
+            Object {
+              "text": "for-better",
+              "to": Object {
+                "pathname": "/for-better",
+                "search": "?even-more",
+              },
+              "type": "default",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "icon": Object {
+                    "lib": "antd",
+                    "type": "up",
+                  },
+                  "text": "for-perfect",
+                  "to": "/for/perfect",
+                },
+              ],
+              "title": "grouped",
+              "type": "group",
+            },
+          ]
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AppMenu should work when collapsed 1`] = `
+<div
+  className="appMenu collapsed"
+>
+  <div
+    className="menuGroup"
+  >
+    <MenuTooltip
+      collapsed={true}
+      title="Great"
+    >
+      <a
+        className="menuTitleLink"
+        role="button"
+      >
+        <i
+          className="menuTitleIcon"
+        >
+          <GeneralIcon />
+        </i>
+        <span
+          className="menuTitleText"
+        >
+          Great
+        </span>
+      </a>
+    </MenuTooltip>
+    <div
+      className="menuContainer"
+    >
+      <Sidebar
+        collapsed={true}
+        inlineIndent={30}
+        menuItems={
+          Array [
+            Object {
+              "text": "for-good",
+              "to": "/for/good",
+            },
+            Object {
+              "text": "for-better",
+              "to": Object {
+                "pathname": "/for-better",
+                "search": "?even-more",
+              },
+              "type": "default",
+            },
+            Object {
+              "items": Array [
+                Object {
+                  "icon": Object {
+                    "lib": "antd",
+                    "type": "up",
+                  },
+                  "text": "for-perfect",
+                  "to": "/for/perfect",
+                },
+              ],
+              "title": "grouped",
+              "type": "group",
+            },
+          ]
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

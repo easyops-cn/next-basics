@@ -1,0 +1,56 @@
+// --- 官方样式 ---
+@import "~antd/lib/card/style/index.less";
+@import "~antd/lib/button/style/index.less";
+@import "~antd/lib/tooltip/style/index.less";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/button.less";
+@import "~@next-core/custom-antd-styles/src/card.less";
+
+:host {
+  display: block;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+.generalCardContainer{
+  .ant-card-head-wrapper {
+    min-height: 48px;
+  }
+  .generalCardExtra{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 10px;
+    align-items: center;
+  }
+  .ant-card-extra{
+    padding: 0;
+  }
+  &.generalCardWithoutExtra{
+    .ant-card-extra{
+      display: none;
+    }
+  }
+}
+
+:host-context(html[data-theme="dark"]) .ant-card {
+  background: url(../images/card-bg-top-left.svg) top left no-repeat,
+    url(../images/card-bg-top-right.svg) top right no-repeat,
+    url(../images/card-bg-bottom-right.svg) bottom right no-repeat,
+    url(../images/card-bg-bottom-left.svg) bottom left no-repeat,
+    var(--antd-card-background);
+}
+
+.generalCardFooter {
+  width: 100%;
+  box-shadow: 0px -2px 8px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 0 0 6px 6px;
+  position: absolute;
+  padding: 8px @card-padding-base;
+  left: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  background: #fff;
+}

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickClusterType should work 1`] = `
+<BrickValueMapping
+  mapping={
+    Object {
+      "-1": Object {
+        "color": "gray",
+        "text": "无",
+      },
+      "0": Object {
+        "color": "purple",
+        "text": "开发",
+      },
+      "1": Object {
+        "color": "green",
+        "text": "测试",
+      },
+      "2": Object {
+        "color": "blue",
+        "text": "生产",
+      },
+      "3": Object {
+        "color": "cyan",
+        "text": "预发布",
+      },
+    }
+  }
+  value="0"
+/>
+`;

@@ -1,0 +1,276 @@
+// --- 官方样式 ---
+@import "~antd/lib/avatar/style/index.less";
+@import "~antd/lib/card/style/index.less";
+@import "~antd/lib/button/style/index.less";
+@import "~antd/lib/style/index.less";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/card.less";
+@import "~@next-core/custom-antd-styles/src/button.less";
+
+@import "~@fortawesome/fontawesome-svg-core/styles.css";
+
+:host {
+  display: block;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+.easyops-icon {
+  width: 1em;
+}
+
+.showOperationAreaWhenHovering{
+  visibility: hidden;
+}
+
+.cardItem{
+  &:hover{
+    .showOperationAreaWhenHovering{
+      visibility: visible;
+    }
+  }
+}
+
+.cardTitleWithTagSlot {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 8px;
+  align-items: center;
+}
+
+.cardTitle {
+  font-size: 16px;
+  color: var(--text-color-title);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardSubtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-color-secondary);
+  line-height: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desc {
+  margin-top: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-color-secondary);
+  line-height: 20px;
+  position: relative;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
+  /* Todo(lynette): 这里多行文本ellipsis暂时只支持webkit内核浏览器，尝试了网上几种方式效果都不如意。 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.descList {
+  list-style: none;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  padding-left: 0px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 2;
+  overflow: hidden;
+
+  li {
+    line-height: 20px;
+    color: #8c8c8c;
+    font-size: 14px;
+    padding-bottom: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .withCircle:before {
+    content: ".";
+    padding-right: 8px;
+    color: #999;
+    position: relative;
+    bottom: 4px;
+  }
+}
+
+.cardItem {
+  position: relative;
+  overflow: hidden;
+
+  &.@{card-prefix-cls} {
+    box-shadow: none;
+    border: 1px solid var(--stroke-color-default);
+
+    &:hover {
+      box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &.noBordered {
+    border: none;
+  }
+  &.noHover{
+    &:hover {
+      box-shadow: none;
+      cursor: default;
+    }
+  }
+
+  .cardTag {
+    position: absolute;
+    box-sizing: border-box;
+    height: 40px;
+    width: 80px;
+    padding-top: 20px;
+    right: -32px;
+    top: -10px;
+    background: #167BE0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    transform: rotate(45deg);
+  }
+
+  .hideOperate {
+    visibility: hidden;
+  }
+
+  .titleWrapper {
+    display: grid;
+    align-items: center;
+  }
+}
+
+.operateArea {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.operatingArea {
+  display: grid;
+  grid-gap: 2px;
+  justify-content: left;
+  grid-auto-flow: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cardItemA {
+  position: relative;
+  overflow: hidden;
+
+  .cardIcon {
+    position: absolute;
+  }
+
+  .descList,
+  .desc {
+    margin-top: 8px;
+  }
+}
+
+.cardItemB {
+  .cardHeaderContainer {
+    display: grid;
+    grid-template-columns: 56px auto;
+  }
+
+  .descList {
+    margin-top: 12px;
+  }
+}
+
+.cardItemC {
+  .cardHeaderContainer {
+    display: grid;
+    column-gap: 16px;
+    grid-template-columns: auto 70px;
+  }
+
+  .desc {
+    margin-top: 8px;
+  }
+}
+
+.cardItemD {
+  .cardHeaderContainer {
+    display: grid;
+    grid-template-columns: 70px auto;
+  }
+
+  .desc {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .descList {
+    margin-bottom: 12px;
+    margin-top: 6px;
+
+    li {
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
+}
+
+.cardItemE {
+  .cardHeaderContainer {
+    display: grid;
+    margin-bottom: 28px;
+    .topRightOperatingArea{
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+    .iconContainer{
+      justify-self: center;
+    }
+  }
+
+  .desc {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .descList {
+    margin-bottom: 12px;
+    margin-top: 6px;
+
+    li {
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
+}
+
+.disabledCard{
+  .cardTitle,
+  .cardSubtitle,
+  .descList,
+  .descList li,
+  .desc {
+    color: #BFBFBF;
+  }
+
+  .iconContainer{
+    opacity: 0.45;
+  }
+}

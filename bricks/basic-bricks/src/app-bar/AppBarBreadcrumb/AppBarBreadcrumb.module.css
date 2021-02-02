@@ -1,0 +1,15 @@
+.breadcrumbContainer {
+  display: flex;
+}
+
+.workspaceButton {
+  margin-right: 16px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  background-color: #d6e8fb;
+  color: var(--text-color-default);
+  border-radius: 6px;
+}

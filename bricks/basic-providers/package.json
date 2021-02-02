@@ -1,0 +1,23 @@
+{
+  "name": "@next-bricks/basic-providers",
+  "version": "1.2.2",
+  "description": "> TODO: description",
+  "homepage": "https://git.easyops.local/anyclouds/next-basics/tree/master/bricks/basic-providers",
+  "license": "UNLICENSED",
+  "files": [
+    "dist",
+    "deploy",
+    "version.ini"
+  ],
+  "scripts": {
+    "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
+    "build": "cross-env NODE_ENV='production' webpack --config webpack.config.js",
+    "postbuild": "node scripts/post-build.js",
+    "test": "cross-env NODE_ENV='test' jest",
+    "test:ci": "cross-env NODE_ENV='test' CI=true jest",
+    "prepack:tar": "node scripts/generate-version-file.js && npm run build",
+    "pack:tar": "npm pack",
+    "postpack:tar": "node scripts/rename-tar-package.js"
+  },
+  "sideEffects": true
+}

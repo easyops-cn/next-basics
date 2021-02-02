@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageError should work 1`] = `
+<div
+  style={
+    Object {
+      "marginTop": 100,
+      "textAlign": "center",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "fontSize": "150%",
+      }
+    }
+  >
+    PAGE_ERROR_TITLE
+  </p>
+  <p>
+    oops
+  </p>
+</div>
+`;

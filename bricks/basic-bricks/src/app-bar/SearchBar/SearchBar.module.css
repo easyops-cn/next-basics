@@ -1,0 +1,50 @@
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 10%;
+
+  :global(.ant-input) {
+    color: #fff;
+    background-color: transparent;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  :global(.ant-input-affix-wrapper) {
+    height: 42px;
+    border-radius: 21px;
+    padding-left: 54px;
+    padding-right: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.06);
+    transition: padding-left 150ms ease-out;
+
+    &:hover {
+      border-color: #0071eb;
+      border-right-width: 2px !important;
+    }
+  }
+
+  &.focus :global(.ant-input-affix-wrapper),
+  :global(.ant-input-affix-wrapper-focused) {
+    padding-left: 4px;
+    border-color: #2893f7;
+    border-right-width: 2px !important;
+  }
+
+  :global(.ant-input-prefix) {
+    width: 30px;
+    margin-left: 0;
+    margin-right: 6px;
+    display: flex;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+
+.inputContainer {
+  width: 300px;
+}

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DesktopDir should render a custom item 1`] = `
+<Fragment>
+  <a
+    className="dirLink"
+    onClick={[Function]}
+    role="button"
+  >
+    <img
+      className="appIcon"
+      key="hello"
+      src="png-url"
+    />
+  </a>
+  <span
+    className="dirName"
+  >
+    hello
+  </span>
+</Fragment>
+`;
+
+exports[`DesktopDir should render absolute url icon 1`] = `
+<Fragment>
+  <a
+    className="dirLink"
+    onClick={[Function]}
+    role="button"
+  >
+    <img
+      className="appIcon"
+      key="hello"
+      src="/large.png"
+    />
+  </a>
+  <span
+    className="dirName"
+  >
+    hello
+  </span>
+</Fragment>
+`;
+
+exports[`DesktopDir should render relative url icon 1`] = `
+<Fragment>
+  <a
+    className="dirLink"
+    onClick={[Function]}
+    role="button"
+  >
+    <img
+      className="appIcon"
+      key="hello"
+      src="micro-apps/hello/large.png"
+    />
+  </a>
+  <span
+    className="dirName"
+  >
+    hello
+  </span>
+</Fragment>
+`;
+
+exports[`DesktopDir should work 1`] = `
+<Fragment>
+  <a
+    className="dirLink"
+    onClick={[Function]}
+    role="button"
+  >
+    <img
+      className="appIcon"
+      key="hello"
+      src="png-url"
+    />
+  </a>
+  <span
+    className="dirName"
+  >
+    hello
+  </span>
+</Fragment>
+`;

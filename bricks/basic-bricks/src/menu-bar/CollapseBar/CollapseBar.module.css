@@ -1,0 +1,16 @@
+.collapseBar {
+  height: 51px;
+  border-top: 1px solid rgba(194, 225, 255, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+
+  &.collapsed > :global(svg) {
+    transform: rotate(180deg);
+  }
+
+  &:hover {
+    background-color: rgba(194, 225, 255, 0.1);
+  }
+}

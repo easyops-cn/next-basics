@@ -1,0 +1,18 @@
+.descContainer {
+  list-style: none;
+  padding-left: 0;
+}
+
+.iconContainer {
+  position: relative;
+  top: -1px;
+  color: #167be0;
+}
+
+.iconContainer:hover {
+  color: #53a7fb;
+}
+
+.text {
+  margin-right: 5px;
+}

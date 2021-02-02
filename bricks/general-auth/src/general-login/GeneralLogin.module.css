@@ -1,0 +1,233 @@
+.loginWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.loginHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 56px;
+  background-color: #4e93ef;
+}
+
+.loginImg {
+  max-width: 100%;
+}
+
+.loginForm {
+  position: absolute;
+  top: 23%;
+  right: 20%;
+  .wxQRCodeLoginTab {
+    :global(.ant-card) {
+      height: auto;
+    }
+  }
+  :global(.ant-card) {
+    width: 446px;
+    height: 430px;
+    border-radius: 7px;
+    box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 0.15);
+    position: relative;
+
+    :global(.ant-card-body) {
+      padding: 20px 53px;
+
+      :global(.ant-legacy-form-item-with-help) {
+        margin-bottom: 0;
+      }
+
+      :global(.ant-input-affix-wrapper) {
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding-bottom: 0;
+        padding-right: 0;
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        :global(.ant-input) {
+          padding: 10px;
+          border-radius: 0;
+          box-shadow: inset 0px 0px 0px 40px #fff;
+          padding-left: 3px;
+
+          &:focus {
+            box-shadow: inset 0px 0px 0px 40px #fff;
+          }
+        }
+      }
+
+      :global(.ant-legacy-form-item) {
+        &:nth-child(3) {
+          position: absolute;
+          left: 0;
+          top: 200px;
+          width: 100%;
+          padding: 0 53px;
+        }
+
+        &:nth-child(4) {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          padding: 0 53px;
+        }
+
+        :global(.ant-legacy-form-explain) {
+          height: 0;
+          min-height: 0;
+          line-height: 0;
+        }
+      }
+    }
+
+    :global(.ant-card-head) {
+      border-bottom: none;
+      color: #0071eb;
+      font-size: 21px;
+      font-weight: 500;
+      text-align: center;
+
+      :global(.ant-card-head-title) {
+        padding-top: 46px;
+      }
+    }
+
+    .loginFormError {
+      color: #f0493c;
+      font-size: 16px;
+      font-weight: 400;
+      height: 24px;
+      margin-top: -10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .wxQRCodeLoginCard {
+    :global(.ant-card-body) {
+      display: flex;
+      justify-content: center;
+      padding-top: 40px;
+    }
+  }
+}
+
+.loginAppendix {
+  margin-top: 12px;
+  min-height: 32px;
+
+  a {
+    color: #afafaf;
+    font-size: 14px;
+
+    &:hover {
+      color: #0071eb;
+    }
+  }
+}
+
+.logoBar {
+  position: relative;
+  height: var(--app-bar-height);
+  width: 100%;
+  padding: 0 22px 0 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+:global(.first-rendered) .logoBar {
+  transition: padding var(--menu-bar-collapse-transition-duration)
+    var(--menu-bar-collapse-transition-timing-function);
+}
+
+@media screen and (max-width: 1440px) {
+  .loginForm {
+    .wxQRCodeLoginTab {
+      :global(.ant-card) {
+        height: auto;
+      }
+    }
+    :global(.ant-card) {
+      width: 346px;
+      height: 350px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.15);
+
+      :global(.ant-card-body) {
+        padding: 10px 43px;
+
+        :global(.ant-input-affix-wrapper) {
+          border-top: 0;
+          border-left: 0;
+          border-right: 0;
+          border-radius: 0;
+          box-shadow: none;
+          padding-bottom: 0;
+          padding-right: 0;
+
+          &:focus {
+            box-shadow: none;
+          }
+
+          :global(.ant-input) {
+            padding: 10px;
+            padding-left: 3px;
+            border-radius: 0;
+            box-shadow: inset 0px 0px 0px 40px #fff;
+
+            &:focus {
+              box-shadow: inset 0px 0px 0px 40px #fff;
+            }
+          }
+        }
+
+        :global(.ant-legacy-form-item) {
+          &:nth-child(3) {
+            top: 150px;
+            padding: 0 43px;
+          }
+
+          &:nth-child(4) {
+            padding: 0 43px;
+          }
+        }
+      }
+
+      :global(.ant-card-head) {
+        border-bottom: none;
+        color: #0071eb;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+
+        :global(.ant-card-head-title) {
+          padding-top: 26px;
+        }
+      }
+
+      .loginFormError {
+        font-size: 14px;
+      }
+    }
+    .wxQRCodeLoginCard {
+      :global(.ant-card-body) {
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+      }
+    }
+  }
+}

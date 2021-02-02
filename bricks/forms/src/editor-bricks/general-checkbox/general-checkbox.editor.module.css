@@ -1,0 +1,12 @@
+.formCheckboxItem {
+  flex: 1;
+  display: flex;
+  > .option {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+    border-radius: var(--editor-brick-border-radius);
+    border: 1px solid var(--editor-brick-stroke-color);
+    background: var(--editor-brick-skeleton-bg-light);
+  }
+}

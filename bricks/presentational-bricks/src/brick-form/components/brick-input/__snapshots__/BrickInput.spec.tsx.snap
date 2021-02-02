@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickInput should work 1`] = `
+<Input
+  onChange={[Function]}
+  type="text"
+/>
+`;

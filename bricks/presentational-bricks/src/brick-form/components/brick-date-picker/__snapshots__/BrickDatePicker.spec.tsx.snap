@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickDatePicker should work when componentType is 'MonthPicker' 1`] = `
+<MonthPicker
+  onChange={[Function]}
+/>
+`;
+
+exports[`BrickDatePicker should work when componentType is 'RangePicker' 1`] = `
+<RangePicker
+  onChange={[Function]}
+/>
+`;
+
+exports[`BrickDatePicker should work when componentType is 'WeekPicker' 1`] = `
+<WeekPicker
+  onChange={[Function]}
+/>
+`;
+
+exports[`BrickDatePicker should work when componentType undefined 1`] = `
+<Picker
+  onChange={[Function]}
+/>
+`;

@@ -1,0 +1,64 @@
+.formEditorHorizontal {
+  padding: 20px 10%;
+  .formItemWrapper {
+    display: flex;
+    align-items: center;
+
+    > .formInputItem {
+      flex: 1;
+    }
+    > .labelContainer {
+      text-align: right;
+    }
+  }
+}
+
+.formEditorVertical {
+  padding: 20px 10%;
+
+  .formItemWrapper > .labelContainer {
+    margin-bottom: 6px;
+  }
+}
+
+.formEditorInline {
+  padding: 20px;
+}
+
+.formItemWrapper {
+  > .labelContainer {
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+    > .formLabel {
+      &::after {
+        content: ":";
+        position: relative;
+        top: -0.5px;
+        margin: 0 8px 0 2px;
+      }
+    }
+  }
+
+  > .requireMark {
+    &::before {
+      content: "*";
+      display: inline-block;
+      margin-right: 4px;
+      color: #ff4d4f;
+      font-size: 14px;
+    }
+  }
+
+  > .formInputItem {
+    height: var(--editor-brick-base-height);
+    border-radius: var(--editor-brick-border-radius);
+    border: 1px solid var(--editor-brick-stroke-color);
+    padding: 4px 12px;
+
+    > .placeholder {
+      color: var(--antd-input-placeholder-color);
+    }
+  }
+}

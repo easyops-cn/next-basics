@@ -1,0 +1,39 @@
+.dropdownTrigger {
+  display: flex;
+  align-items: center;
+  color: #262626;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropdownLabel {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dropdownArrow {
+  flex-shrink: 0;
+  margin-left: 12px;
+  color: #595959;
+}
+
+.placeholder {
+  color: #bfbfbf;
+}
+
+.optionTitle {
+  margin-bottom: 1px;
+  color: #262626;
+}
+
+.optionContent {
+  margin-bottom: 0;
+  color: #595959;
+}
+
+:global(.ant-dropdown-menu-item) {
+  &:global(.active) {
+    background-color: #ebf3fd;
+  }
+}

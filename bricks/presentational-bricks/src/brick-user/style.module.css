@@ -1,0 +1,29 @@
+.user {
+  /* display: flex; */
+  padding: 3px;
+  align-content: center;
+}
+
+.avatarContainer {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgb(22, 123, 224);
+  text-align: center;
+  color: rgb(255, 255, 255);
+  user-select: none;
+}
+
+.avatar {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.usernameAdjust {
+  margin-left: 3px;
+  transform: translateY(7px);
+  width: 100px;
+}

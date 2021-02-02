@@ -1,0 +1,30 @@
+.onlyShowMode {
+  :global(.ant-slider-handle) {
+    display: none;
+  }
+  &:global(.ant-slider-disabled) {
+    cursor: default;
+  }
+  :global(.ant-slider-track) {
+    background-color: #7ac8ff !important;
+  }
+}
+
+.onlyShowMode.bigMode {
+  &:global(.ant-slider-disabled) {
+    margin: 0px 6px;
+    height: 22px;
+  }
+  :global(.ant-slider-rail) {
+    border-radius: 0px;
+    height: 14px;
+  }
+  :global(.ant-slider-track) {
+    background-color: #00ca4c !important;
+    border-radius: 0px;
+    height: 14px;
+  }
+  :global(.ant-slider-step) {
+    height: 14px;
+  }
+}

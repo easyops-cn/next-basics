@@ -1,0 +1,135 @@
+// --- 官方样式 ---
+@import "~antd/lib/style/core/motion.less";
+@import "~antd/lib/collapse/style/index.less";
+@import "~@fortawesome/fontawesome-svg-core/styles.css";
+// --- 自定义样式 ---
+@import "~@next-core/custom-antd-styles/src/var.less";
+@import "~@next-core/custom-antd-styles/src/collapse.less";
+@import "~@next-core/brick-icons/dist/styles/index.css";
+
+.ant-collapse.ant-collapse-ghost {
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+
+  .ant-collapse-item.ant-collapse-no-arrow {
+    border: none;
+
+    .ant-collapse-header {
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      cursor: inherit;
+
+      &::before,
+      &::after {
+        content: none;
+      }
+
+      .collapseTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 16px;
+
+        .headerIcon {
+          margin-right: 24px;
+          font-size: 60px;
+          line-height: 0;
+          color: var(--color-brand);
+        }
+
+        .headerContent {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+
+          .cardTitle {
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: var(--text-color-title);
+            line-height: 22px;
+            font-size: 16px;
+          }
+
+          .descriptionList {
+            line-height: 20px;
+            margin-top: 14px;
+            font-weight: 400;
+            font-size: 14px;
+
+            .descriptionItem {
+              &:not(:last-child) {
+                margin-right: 20px;
+              }
+
+              .descriptionItemLabel {
+                color: var(--text-color-secondary);
+                margin-right: 10px;
+              }
+
+              .descriptionItemText {
+                color: var(--text-color-title);
+              }
+            }
+          }
+        }
+      }
+
+      .ant-collapse-extra {
+        align-self: start;
+        margin-top: 2px;
+
+        .toggleCollapse {
+          color: var(--color-brand);
+          cursor: pointer;
+
+          .expandText {
+            margin-right: 5px;
+          }
+
+          .expandIcon {
+            vertical-align: middle;
+            line-height: 1;
+          }
+        }
+      }
+    }
+
+    .ant-collapse-content {
+      position: relative;
+
+      &::before {
+        content: " ";
+        display: inline-block;
+        width: calc(100% - 40px);
+        height: 1px;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        background: #e8e8e8;
+      }
+
+      .ant-collapse-content-box {
+        padding: 0;
+
+        .contentContainer {
+          padding: 20px;
+
+          &.verticalCenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

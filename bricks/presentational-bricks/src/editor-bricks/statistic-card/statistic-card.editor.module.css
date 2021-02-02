@@ -1,0 +1,49 @@
+.card {
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36px 46px;
+  flex-wrap: nowrap;
+}
+
+.description {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.value {
+  color: rgba(22, 123, 224, 0.6);
+  font-size: 42px;
+  line-height: 46px;
+  white-space: nowrap;
+}
+
+.valuePlaceholder {
+  width: 48px;
+  height: 46px;
+  background: var(--editor-brick-skeleton-bg-blue);
+}
+
+.title {
+  font-size: 16px;
+  color: #8c8c8c;
+  margin-top: 12px;
+  line-height: 20px;
+}
+
+.titlePlaceholder {
+  width: 64px;
+  height: 20px;
+  background: var(--editor-brick-skeleton-bg);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  background: rgba(199, 227, 255, 0.3);
+  border-radius: 50%;
+}

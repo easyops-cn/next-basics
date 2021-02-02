@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickAlertNumber should work, 0 1`] = `
+<BrickConditionalDisplay
+  data={0}
+  rules={
+    Array [
+      Object {
+        "condition": Object {
+          "$eq": 0,
+        },
+        "style": Object {
+          "backgroundColor": "var(--bg-color-button-success)",
+          "color": "white",
+        },
+      },
+      Object {
+        "condition": Object {
+          "$gte": 1,
+        },
+        "style": Object {
+          "backgroundColor": "var(--bg-color-button-warning)",
+          "color": "white",
+        },
+      },
+    ]
+  }
+  type={null}
+  value={0}
+/>
+`;
+
+exports[`BrickAlertNumber should work, 1 1`] = `
+<BrickConditionalDisplay
+  data={1}
+  rules={
+    Array [
+      Object {
+        "condition": Object {
+          "$eq": 0,
+        },
+        "style": Object {
+          "backgroundColor": "var(--bg-color-button-success)",
+          "color": "white",
+        },
+      },
+      Object {
+        "condition": Object {
+          "$gte": 1,
+        },
+        "style": Object {
+          "backgroundColor": "var(--bg-color-button-warning)",
+          "color": "white",
+        },
+      },
+    ]
+  }
+  type={null}
+  value={1}
+/>
+`;

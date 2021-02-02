@@ -1,0 +1,21 @@
+.showContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.showDescription {
+  font-size: 0.5em;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.showValue {
+  font-size: 1.5em;
+  margin-bottom: 0.12em;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+}

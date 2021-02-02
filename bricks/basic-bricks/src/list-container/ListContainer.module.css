@@ -1,0 +1,3 @@
+.listContainerAsGrid > * {
+  min-width: 0;
+}

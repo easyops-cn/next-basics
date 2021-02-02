@@ -1,0 +1,54 @@
+.treeNode {
+  position: relative;
+}
+
+.dragging {
+  opacity: 0.3;
+}
+
+.nodeNameWrapper {
+  position: relative;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nodeNameWrapper:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #4e93ef;
+}
+
+.icon {
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.provider > .nodeNameWrapper > .icon {
+  color: var(--theme-orange-color);
+}
+
+.portal > .nodeNameWrapper > .icon {
+  color: var(--theme-purple-color);
+}
+
+.dropCursor {
+  display: none;
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  right: 0;
+  background-color: #bb79bb;
+  pointer-events: none;
+}
+
+.draggingNodeOverCurrent > .dropCursor {
+  display: block;
+}
+
+.mountPointList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

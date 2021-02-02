@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalConfirm should work 1`] = `
+<ModalConfirm
+  content="## <strong>#{key2}</strong> $$"
+  dataSource={
+    Object {
+      "key1": "value1",
+      "key2": "value2",
+      "key3": "value3",
+    }
+  }
+  extraContent="###{key3}$$"
+  isDelete={true}
+  onCancel={[MockFunction]}
+  onOk={[MockFunction]}
+  title="###{key1}$$"
+  type="confirm"
+  visible={true}
+/>
+`;
+
+exports[`ModalConfirm should work 2`] = `
+<ModalConfirm
+  dataSource={
+    Object {
+      "key1": "value1",
+      "key2": "value2",
+      "key3": "value3",
+    }
+  }
+  type="confirm"
+  visible={false}
+/>
+`;

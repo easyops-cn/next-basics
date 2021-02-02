@@ -1,0 +1,6 @@
+.labelWrapper {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-gap: 6px;
+  vertical-align: middle;
+}

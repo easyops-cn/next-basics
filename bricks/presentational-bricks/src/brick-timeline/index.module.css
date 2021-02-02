@@ -1,0 +1,164 @@
+.itemContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .leftArea {
+    flex: 1;
+
+    .title {
+      line-height: 20px;
+      margin-bottom: 6px;
+      color: #262626;
+      font-weight: 500;
+    }
+
+    .description,
+    .dateTime {
+      line-height: 17px;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .description {
+      color: #595959;
+      margin-bottom: 4px;
+    }
+
+    .dateTime {
+      color: #bfbfbf;
+    }
+
+    .link {
+      cursor: pointer;
+      color: #262626;
+
+      &:hover {
+        color: #0071eb;
+      }
+    }
+  }
+
+  .rightArea {
+    .time {
+      line-height: 17px;
+      font-weight: 400;
+      font-size: 12px;
+      color: #8c8c8c;
+      margin-right: 24px;
+    }
+
+    .dateContainer {
+      position: absolute;
+      left: -75px;
+      top: 0;
+      text-align: center;
+
+      .month {
+        line-height: 17px;
+        font-weight: 400;
+        font-size: 12px;
+        color: #8c8c8c;
+      }
+
+      .day {
+        line-height: 25px;
+        font-weight: 500;
+        font-size: 18px;
+        color: #262626;
+      }
+    }
+  }
+}
+
+.groupName {
+  color: #8c8c8c;
+  line-height: 20px;
+  margin-left: 9px;
+}
+
+.brickTimeline {
+  padding: 20px 0 0 50px;
+
+  :global {
+    .ant-timeline-item-head {
+      width: 8px;
+      height: 8px;
+    }
+
+    .ant-timeline-item-last {
+      padding-bottom: 5px;
+    }
+
+    .ant-timeline-item-tail {
+      top: 18px;
+      left: 3px;
+      height: calc(100% - 26px);
+    }
+
+    .ant-timeline-item-head-blue {
+      color: var(--theme-blue-color);
+      border-color: var(--theme-blue-color);
+      background-color: var(--theme-blue-color);
+    }
+
+    .ant-timeline-item-head-green {
+      color: var(--theme-green-color);
+      border-color: var(--theme-green-color);
+      background-color: var(--theme-green-color);
+    }
+
+    .ant-timeline-item-head-red {
+      color: var(--theme-red-color);
+      border-color: var(--theme-red-color);
+      background-color: var(--theme-red-color);
+    }
+
+    .ant-timeline-item-head-gray {
+      border-color: #bfbfbf;
+      background-color: #bfbfbf;
+    }
+
+    .ant-timeline-item:hover {
+      .ant-timeline-item-head-blue,
+      .ant-timeline-item-head-green,
+      .ant-timeline-item-head-red,
+      .ant-timeline-item-head-gray {
+        transform: scale(1.5);
+
+        &:after {
+          content: "";
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          border-radius: 50%;
+          background-color: #fff;
+          top: 50%;
+          left: 50%;
+          transform: translate(-1.5px, -1.5px);
+        }
+      }
+
+      .ant-timeline-item-head-blue {
+        box-shadow: 0 2px 8px 0 rgba(0, 113, 235, 0.45);
+      }
+
+      .ant-timeline-item-head-green {
+        box-shadow: 0 2px 8px 0 rgba(47, 194, 91, 0.45);
+      }
+
+      .ant-timeline-item-head-red {
+        box-shadow: 0 2px 8px 0 rgba(240, 73, 60, 0.45);
+      }
+
+      .ant-timeline-item-head-gray {
+        box-shadow: 0 2px 8px 0 rgba(191, 191, 191, 0.45);
+      }
+    }
+  }
+}

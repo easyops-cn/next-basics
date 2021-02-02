@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrickInputNumber should work 1`] = `
+<ForwardRef
+  onChange={[Function]}
+  step={1}
+/>
+`;

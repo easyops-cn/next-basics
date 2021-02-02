@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--editor-brick-base-height);
+  padding: 0 10px;
+  border-radius: var(--editor-brick-border-radius);
+  background: var(--editor-brick-skeleton-bg-light);
+}
+
+.icon {
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.provider > .icon {
+  color: var(--theme-orange-color);
+}
+
+.template > .icon {
+  color: var(--theme-red-color);
+}
+
+.portal > .icon {
+  color: var(--theme-purple-color);
+}
+
+.name {
+  flex: 1;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.default > .name {
+  text-align: center;
+}

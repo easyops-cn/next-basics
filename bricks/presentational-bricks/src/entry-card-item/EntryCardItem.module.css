@@ -1,0 +1,66 @@
+.cardItem {
+  &:global(.ant-card-bordered) {
+    border: 0;
+    border-radius: 8px;
+  }
+  &:global(.ant-card):not(:hover) {
+    box-shadow: none;
+  }
+}
+
+.cardContent {
+  display: grid;
+  justify-items: center;
+  padding: 14px 0 12px 0;
+  &:hover {
+    .cardTitle {
+      color: var(--text-color-link);
+    }
+  }
+}
+
+.cardAvatar {
+  display: grid;
+  font-size: 32px;
+  margin-bottom: 10px;
+  .cardIcon {
+    display: grid;
+    font-size: 32px;
+    justify-self: center;
+    align-self: center;
+  }
+}
+
+.cardTitle {
+  text-align: center;
+  color: #595959;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 98px;
+}
+
+.purple {
+  background: #964dff;
+}
+.red {
+  background: #f15b3e;
+}
+.softOrange {
+  background: #fcb94c;
+}
+.cyan {
+  background: #2bacc3;
+}
+.blue {
+  background: #4d8fff;
+}
+.darkPurple {
+  background: #a75da9;
+}
+.lightCyan {
+  background: #00acc3;
+}
+.brightOrange {
+  background: #efa83b;
+}

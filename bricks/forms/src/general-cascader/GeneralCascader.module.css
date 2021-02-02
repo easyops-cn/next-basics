@@ -1,0 +1,18 @@
+.cascaderOption {
+  padding: 2px 0;
+
+  :global(.ant-cascader-menu) {
+    padding: 0 2px;
+
+    :global(.ant-cascader-menu-item) {
+      border-radius: 6px;
+
+      &:hover {
+        background: #ebf3fd;
+      }
+      &:global(.ant-cascader-menu-item-active) {
+        background: #f5f5f5;
+      }
+    }
+  }
+}

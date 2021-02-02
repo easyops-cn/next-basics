@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneralForm should work 1`] = `
+<LegacyGeneralForm
+  form={
+    Object {
+      "getFieldDecorator": [Function],
+      "getFieldError": [Function],
+      "getFieldInstance": [Function],
+      "getFieldProps": [Function],
+      "getFieldValue": [Function],
+      "getFieldsError": [Function],
+      "getFieldsValue": [Function],
+      "isFieldTouched": [Function],
+      "isFieldValidating": [Function],
+      "isFieldsTouched": [Function],
+      "isFieldsValidating": [Function],
+      "isSubmitting": [Function],
+      "resetFields": [Function],
+      "setFields": [Function],
+      "setFieldsInitialValue": [Function],
+      "setFieldsValue": [Function],
+      "submit": [Function],
+      "validateFields": [Function],
+      "validateFieldsAndScroll": [Function],
+    }
+  }
+  formElement={Object {}}
+  layout="inline"
+  valueTypes={
+    Object {
+      "date": "moment",
+      "password": "",
+      "time": "moment|HH:mm:ss",
+    }
+  }
+  values={
+    Object {
+      "date": "2019-10-01",
+      "password": "world",
+      "time": "09:14:30",
+      "username": "hello",
+    }
+  }
+/>
+`;
