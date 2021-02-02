@@ -2,7 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { InfoDisplayCardList } from "./InfoDisplayCardList";
 import { infoList } from "./__mocks__/infoList";
-import { List, Avatar, Empty } from "antd";
+import { Empty } from "antd";
 
 describe("InfoDisplayCardList", () => {
   it("should work", () => {

@@ -100,8 +100,8 @@ export function CommonItem(
   });
 
   const handleAdd = () => {
+    setTrackRows(trackRows => [...trackRows, uniqueId()]);
     setRows([...rows, defaultRow]);
-    setTrackRows([...trackRows, uniqueId()]);
 
     // important! notify form to detect changes
     setFieldsValue({
@@ -120,7 +120,7 @@ export function CommonItem(
     });
 
     setRows(filter);
-    setTrackRows(trackRows.filter((_, i) => index !== i));
+    setTrackRows(trackRows => trackRows.filter((_, i) => index !== i));
     props.onRemove?.(data);
     encrypted.current = filter;
     props.onChange?.(encrypted.current);
@@ -187,6 +187,9 @@ export function CommonItem(
     const editedValue = props.manualEditedValue;
     if (editedValue) {
       setRows(editedValue);
+      setTrackRows(Array(editedValue.length)
+        .fill(0)
+        .map(() => uniqueId()))
       setFieldsValue({
         [props.name]: editedValue,
       });

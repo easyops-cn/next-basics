@@ -10,6 +10,8 @@ const unmountComponentAtNode = jest
     // empty
   }) as any);
 
+  jest.spyOn(console, "warn").mockImplementation(() => void 0);
+
 describe("presentational-bricks.cost-time", () => {
   it("should create a custom element", async () => {
     const element = document.createElement("presentational-bricks.cost-time");

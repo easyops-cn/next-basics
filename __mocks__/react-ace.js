@@ -1,5 +1,6 @@
 import React from "react";
 
-export default jest.fn(function ReactAce(props) {
+export default React.forwardRef(function ReactAce(props, ref) {
+  // eslint-disable-next-line react/prop-types
   return <div id={props.name}>ReactAce</div>;
 });

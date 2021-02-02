@@ -9,6 +9,7 @@ import * as kit from "@next-core/brick-kit";
 import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import { Select } from "antd";
 import i18n from "i18next";
+import { act } from "react-dom/test-utils";
 
 jest.spyOn(i18n, "t").mockReturnValue("后台搜索");
 
@@ -108,7 +109,7 @@ describe("CmdbInstanceSelect", () => {
     expect(wrapper.find(Select).prop("children")).toHaveLength(3);
   });
 
-  it("should update value", () => {
+  it("should update value", async () => {
     const wrapper = mount(
       <CmdbInstanceSelect
         objectId="HOST"
@@ -118,12 +119,17 @@ describe("CmdbInstanceSelect", () => {
         firstRender={true}
       />
     );
-
+    await act(async() => {
+      await (global as any).flushPromises();
+    })
     expect(wrapper.find(Select).prop("value")).toEqual("world");
 
     wrapper.setProps({
       value: "new world",
     });
+    await act(async() => {
+      await (global as any).flushPromises();
+    })
     wrapper.update();
     expect(wrapper.find(Select).prop("value")).toEqual("new world");
   });

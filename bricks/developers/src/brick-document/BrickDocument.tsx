@@ -137,35 +137,34 @@ export function BrickDocument({
         </thead>
         <tbody>
           {values.map((value, index) => (
-            <>
-              <Tooltip
-                title={value?.deprecated ? "已废弃" : null}
-                placement={"leftTop"}
+            <Tooltip
+              key={index}
+              title={value?.deprecated ? "已废弃" : null}
+              placement={"leftTop"}
+            >
+              <tr
+                key={index}
+                className={classNames({
+                  [style.deprecated]: value?.deprecated,
+                })}
               >
-                <tr
-                  key={index}
-                  className={classNames({
-                    [style.deprecated]: value?.deprecated,
-                  })}
-                >
-                  {columns.map((column, i) => (
-                    <td key={i}>
-                      {column.key === "required" ? (
-                        renderRequiredAnnotation(value[column.key])
-                      ) : (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: convertMarkdownLinkToHtmlLink(
-                              value[column.key]
-                            ).__html,
-                          }}
-                        ></span>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              </Tooltip>
-            </>
+                {columns.map((column, i) => (
+                  <td key={i}>
+                    {column.key === "required" ? (
+                      renderRequiredAnnotation(value[column.key])
+                    ) : (
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: convertMarkdownLinkToHtmlLink(
+                            value[column.key]
+                          ).__html,
+                        }}
+                      ></span>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            </Tooltip>
           ))}
         </tbody>
       </table>
@@ -221,10 +220,10 @@ export function BrickDocument({
               <br />
               {(enums.children as StoryDocEnum[]).map((v) => {
                 return (
-                  <>
+                  <React.Fragment key={v.name}>
                     &nbsp;&nbsp;{v.name}{" "}
                     <span className={"token string"}>= {v.value}</span>,<br />
-                  </>
+                  </React.Fragment>
                 );
               })}
               &#125;

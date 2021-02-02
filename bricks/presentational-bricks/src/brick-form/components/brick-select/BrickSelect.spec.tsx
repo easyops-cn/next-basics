@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { LegacyBrickSelect } from "./BrickSelect";
 import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { act } from "react-dom/test-utils";
 
 jest.mock("@next-sdk/cmdb-sdk");
 const mockInstanceApiPostSearch = InstanceApi.postSearch as jest.Mock;
@@ -37,7 +38,7 @@ describe("BrickSelect", () => {
     expect(onChange).toHaveBeenCalled();
   });
 
-  it("searchInCmdb should work", () => {
+  it("searchInCmdb should work", async () => {
     const onChange = jest.fn();
     const wrapper = mount(
       <LegacyBrickSelect
@@ -54,7 +55,9 @@ describe("BrickSelect", () => {
         }}
       />
     );
-
+    await act(async () => {
+      await (global as any).flushPromises();
+    })
     expect(wrapper.find("option").length).toBe(0);
   });
 });

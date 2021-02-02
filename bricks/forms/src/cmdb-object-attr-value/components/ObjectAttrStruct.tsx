@@ -1,22 +1,15 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
-import { NS_FORMS, K } from "../../i18n/constants";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { Form } from "@ant-design/compatible";
 import { Modal, Row, Radio, Button, Table, Input, Select, Tag } from "antd";
 import {
   isNil,
   isEmpty,
-  debounce,
-  pick,
-  chain,
-  reject,
-  includes,
 } from "lodash";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";
-import { valueTypeList } from "../CmdbObjectAttrValue";
 import { CmdbObjectApi, CmdbModels } from "@next-sdk/cmdb-sdk";
+import { valueTypeList } from "../CmdbObjectAttrValue";
 
 const Option = Select.Option;
 
@@ -307,6 +300,7 @@ export function LegacyObjectAttrStructForm(
           }
           dataSource={value?.struct_define}
           pagination={false}
+          rowKey="id"
         />
       </div>
       <Modal

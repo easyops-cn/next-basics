@@ -1,9 +1,6 @@
 import React, {
-  createContext,
-  useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
@@ -22,7 +19,7 @@ interface MyDesktopProps {
 }
 
 export function MyDesktop(props: MyDesktopProps): React.ReactElement {
-  const [recentlyVisitedList, setRecentlyVisitedList] = useState(
+  const [recentlyVisitedList] = useState(
     launchpadService.getAllVisitors()
   );
   const [favoriteList, setFavoriteList] = useState([]);

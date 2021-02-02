@@ -1,10 +1,10 @@
 import React from "react";
 import { mount } from "enzyme";
-import { Form } from "@ant-design/compatible";
 import { Select } from "antd";
-import { DynamicUserSelectItem, RowFormItem } from "./DynamicUserSelectItem";
+import { RowFormItem } from "./DynamicUserSelectItem";
 import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
 import { columns } from "./";
+import { act } from "react-dom/test-utils";
 
 jest.mock("@next-sdk/cmdb-sdk");
 const onChangeMock = jest.fn();
@@ -22,7 +22,7 @@ const props = {
   batchChange: batchChangeMock,
 };
 
-const mockGetObjectRef = jest
+jest
   .spyOn(CmdbObjectApi, "getObjectRef")
   .mockResolvedValue({
     data: [
@@ -44,7 +44,7 @@ const mockGetObjectRef = jest
       },
     ],
   } as any);
-const mockGetObjectRelationRelatedKey = jest
+jest
   .spyOn(CmdbObjectApi, "getObjectRelationRelatedKey")
   .mockResolvedValue({
     data: [
@@ -57,12 +57,24 @@ const mockGetObjectRelationRelatedKey = jest
   } as any);
 
 describe("DynamicUserSelectItem", () => {
-  it("should work", () => {
+  it("should work", async () => {
     const wrapper = mount(<RowFormItem {...props} />);
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     wrapper.find(Select).at(0).invoke("onChange")("test", null);
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     wrapper.find(Select).at(1).invoke("onChange")("test", null);
     expect(onChangeMock).toHaveBeenCalled();
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     wrapper.find(Select).at(2).invoke("onChange")("test", null);
     expect(onChangeMock).toHaveBeenCalled();
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
   });
 });

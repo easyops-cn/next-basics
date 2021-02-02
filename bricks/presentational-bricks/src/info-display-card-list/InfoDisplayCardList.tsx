@@ -1,11 +1,8 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
-import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
-import { List, Avatar, Empty } from "antd";
+import { List, Empty } from "antd";
 import { CardDetail, CardItem } from "./index";
 import styles from "./index.module.css";
-import classNames from "classnames";
-import { Link, GeneralIcon } from "@next-libs/basic-components";
+import { GeneralIcon } from "@next-libs/basic-components";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { get, isEmpty } from "lodash";
@@ -21,10 +18,8 @@ export function InfoDisplayCardList({
   showIcon,
   optionConf,
 }: InfoDisplayCardListProps): React.ReactElement {
-  const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
-
-  const getCardItemDetail = (item: CardDetail): React.ReactNode => (
-    <div className={styles.infoCardDetailWrapper}>
+  const getCardItemDetail = (item: CardDetail, index: number): React.ReactNode => (
+    <div className={styles.infoCardDetailWrapper} key={index}>
       <h5>{item.title}</h5>
       <p>{item.desc}</p>
     </div>
@@ -55,7 +50,7 @@ export function InfoDisplayCardList({
         </div>
       </div>
       <div className={styles.infoCardRightSection}>
-        <div>{item.detail?.map((d) => getCardItemDetail(d))}</div>
+        <div>{item.detail?.map(getCardItemDetail)}</div>
         {!isEmpty(get(optionConf, "useBrick")) && (
           <BrickAsComponent
             useBrick={optionConf.useBrick}

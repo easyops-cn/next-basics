@@ -1,5 +1,6 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { mount } from "enzyme";
 import { MyDesktop } from "./MyDesktop";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
 import { FavoriteDesktopCell } from "../FavoriteDesktopCell/FavoriteDesktopCell";
@@ -28,7 +29,12 @@ const favoriteList = [
 
 jest.mock("@next-libs/basic-components", () => {
   return {
-    Link: () => jest.mock,
+    Link: function Link() {
+      return <div>Link</div>;
+    },
+    GeneralIcon: function GeneralIcon() {
+      return <div>GeneralIcon</div>;
+    },
   };
 });
 jest.mock("../LaunchpadService", () => {
@@ -120,8 +126,9 @@ jest.mock("../LaunchpadService", () => {
 describe("MyDesktop", () => {
   it("should work", async () => {
     const wrapper = mount(<MyDesktop desktopCount={2} arrowWidthPercent={9} />);
-
-    await (global as any).flushPromises();
+    await act(async() => {
+      await (global as any).flushPromises();
+    })
     wrapper.update();
     expect(wrapper.find(DesktopCell)).toHaveLength(5);
     expect(wrapper.find("DesktopCell").at(0).props()).toMatchObject({
@@ -140,7 +147,9 @@ describe("MyDesktop", () => {
       showAddIcon: true,
     });
 
-    await (global as any).flushPromises();
+    await act(async() => {
+      await (global as any).flushPromises();
+    })
     wrapper.update();
 
     expect(wrapper.find(FavoriteDesktopCell)).toHaveLength(1);
@@ -149,5 +158,8 @@ describe("MyDesktop", () => {
     expect(launchpadService.deleteFavorite).toHaveBeenCalledWith(
       "5b8ee4e5c352c"
     );
+    await act(async() => {
+      await (global as any).flushPromises();
+    })
   });
 });

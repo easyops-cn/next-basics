@@ -20,7 +20,9 @@ jest.mock("../LaunchpadService", () => {
 });
 jest.mock("@next-libs/basic-components", () => {
   return {
-    Link: () => jest.mock,
+    Link: function Link() {
+      return <div>Link</div>;
+    },
   };
 });
 jest.spyOn(context, "useLaunchpadSettingsContext").mockReturnValue({

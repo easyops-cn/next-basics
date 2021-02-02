@@ -1,6 +1,8 @@
 import "./";
 import { TransformAgentElement } from "./";
 
+jest.spyOn(console, "error").mockImplementation(() => void 0);
+
 describe("basic-bricks.transform-agent", () => {
   it("should transform properties", () => {
     const element = document.createElement(

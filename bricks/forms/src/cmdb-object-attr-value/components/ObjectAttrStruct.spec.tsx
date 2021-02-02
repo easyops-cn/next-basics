@@ -1,12 +1,11 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { mount } from "enzyme";
+import { Modal, Row, Radio, Button, Table, Input, Select } from "antd";
+import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
 import {
-  ObjectAttrStruct,
-  LegacyObjectAttrStructForm,
+  ObjectAttrStruct
 } from "./ObjectAttrStruct";
-import { Form } from "@ant-design/compatible";
-import { Modal, Row, Radio, Button, Table, Input, Select, Tag } from "antd";
-import { CmdbObjectApi, CmdbModels } from "@next-sdk/cmdb-sdk";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
@@ -48,7 +47,7 @@ const defaultValue = {
 };
 
 describe("ObjectAttrStruct", () => {
-  it("should work", () => {
+  it("should work", async () => {
     const props = {
       value: defaultValue,
       onChange: jest.fn(),
@@ -56,10 +55,13 @@ describe("ObjectAttrStruct", () => {
     const wrapper = mount(<ObjectAttrStruct {...props} />);
     expect(wrapper.find(Radio.Group).at(0).props().value).toBe("new");
     expect(wrapper.find(Row).at(1).children(0).text()).toBe("添加结构项");
-    wrapper.find(Radio.Group).at(0).invoke("onChange")({
-      target: {
-        value: "import",
-      },
+    await act(async () => {
+      wrapper.find(Radio.Group).at(0).invoke("onChange")({
+        target: {
+          value: "import",
+        },
+      });
+      await (global as any).flushPromises();
     });
     wrapper.update();
     expect(wrapper.find(Row).at(1).children(0).text()).toBe("选择模型");
@@ -74,11 +76,11 @@ describe("ObjectAttrStruct", () => {
     wrapper.find(Button).at(0).invoke("onClick")();
     expect(wrapper.find("Modal").at(0).props().visible).toBeTruthy();
     wrapper.update();
-    wrapper.find(Input).get(0).props["onChange"]("structId");
+    wrapper.find(Input).at(0).invoke("onChange")("structId");
     wrapper.find(Input).at(1).invoke("onChange")("structName");
     wrapper.find(Select).at(0).invoke("onChange")("date");
 
-    wrapper.find(Modal).get(0).props["onOk"](); // 点击弹窗确认按钮
+    wrapper.find(Modal).at(0).invoke("onOk")(); // 点击弹窗确认按钮
 
     expect(props.onChange).toBeCalledWith({
       default: "",
@@ -95,25 +97,28 @@ describe("ObjectAttrStruct", () => {
     expect(wrapper.find(Table).at(0).props().dataSource.length).toBe(1);
     const optionBtnDiv = wrapper.find(".struct-option-btn-group").at(0);
     expect(optionBtnDiv.props().children.length).toBe(2);
-    optionBtnDiv.props().children[0].props["onClick"]();
+    optionBtnDiv.childAt(0).invoke("onClick")();
+
     await jest.runAllTimers();
     wrapper.update();
     expect(wrapper.find("Modal").at(0).props().title).toBe("编辑结构项");
 
-    wrapper.find(Modal).get(0).props["onCancel"](); // 点击弹窗确认按钮
+    wrapper.find(Modal).at(0).invoke("onCancel")(); // 点击弹窗确认按钮
 
     await jest.runAllTimers();
     wrapper.update();
     expect(wrapper.find("Modal").at(0).props().visible).toBeFalsy();
-    optionBtnDiv.props().children[1].props["onClick"]();
+    optionBtnDiv.childAt(1).invoke("onClick")();
     expect(spyOnModalConfirm).toBeCalledWith(
       expect.objectContaining({
         title: "提示",
       })
     );
-    spyOnModalConfirm.mock.calls[
-      spyOnModalConfirm.mock.calls.length - 1
-    ][0].onOk(); // 点击弹窗确认按钮
+    act(() => {
+      spyOnModalConfirm.mock.calls[
+        spyOnModalConfirm.mock.calls.length - 1
+      ][0].onOk(); // 点击弹窗确认按钮
+    });
 
     expect(props.onChange).toBeCalledWith({
       default: "",
@@ -140,7 +145,7 @@ describe("ObjectAttrStruct", () => {
     wrapper.find(Select).at(0).invoke("onChange")("object2");
     wrapper.update();
     expect(wrapper.find("Table").at(2).props().dataSource.length).toBe(1);
-    wrapper.find("Modal").get(1).props["onOk"](); // 点击弹窗确认按钮
+    wrapper.find("Modal").at(1).invoke("onOk")(); // 点击弹窗确认按钮
 
     expect(props.onChange).toBeCalledWith({
       default: "",

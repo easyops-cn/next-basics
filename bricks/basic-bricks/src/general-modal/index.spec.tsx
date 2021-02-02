@@ -67,5 +67,7 @@ describe("basic-bricks.general-modal", () => {
     await jest.runAllTimers();
     // element.querySelector('.ant-btn:not(.ant-btn-primary)').click();
     element.click();
+    document.body.removeChild(element);
+    await jest.runAllTimers();
   });
 });

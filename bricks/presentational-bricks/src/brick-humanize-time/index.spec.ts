@@ -6,6 +6,8 @@ const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
   .mockImplementation((() => {}) as any);
 
+  jest.spyOn(console, "warn").mockImplementation(() => void 0);
+
 describe("presentational-bricks.brick-humanize-time", () => {
   it("should create a custom element", async () => {
     const element = document.createElement(
