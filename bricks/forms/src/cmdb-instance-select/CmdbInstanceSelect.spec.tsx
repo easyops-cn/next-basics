@@ -6,13 +6,13 @@ import {
   CmdbInstanceSelectItem,
 } from "./CmdbInstanceSelect";
 import * as kit from "@next-core/brick-kit";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import { Select } from "antd";
 import i18n from "i18next";
 
 jest.spyOn(i18n, "t").mockReturnValue("后台搜索");
 
-jest.mock("@sdk/cmdb-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
 const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 
 const mockPostSearch = InstanceApi.postSearch as jest.Mock;

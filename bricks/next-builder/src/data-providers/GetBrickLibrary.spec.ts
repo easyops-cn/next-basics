@@ -1,9 +1,9 @@
 import { developHelper } from "@next-core/brick-kit";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import { GetBrickLibrary } from "./GetBrickLibrary";
 
 jest.mock("@next-core/brick-kit");
-jest.mock("@sdk/cmdb-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
 
 jest.spyOn(developHelper, "getBrickPackages").mockReturnValue([
   {

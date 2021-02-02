@@ -1,6 +1,6 @@
 import { developHelper } from "@next-core/brick-kit";
 import { createProviderClass } from "@next-core/brick-utils";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 
 export interface BrickLibraryItem {
   type: "brick" | "template" | "customTemplate" | "provider";

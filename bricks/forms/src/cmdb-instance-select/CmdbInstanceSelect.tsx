@@ -5,7 +5,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 import { debounce, get, compact, castArray, defaults, isEqual } from "lodash";
 import { handleHttpError } from "@next-core/brick-kit";
 import { ModeOption } from "antd/lib/select";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import { getInstanceNameKey, parseTemplate } from "@next-libs/cmdb-utils";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import classNames from "classnames";

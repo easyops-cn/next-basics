@@ -3,11 +3,11 @@ import { render } from "@testing-library/react";
 
 import { InformMethodsFormItem } from "./InformMethodsForm";
 
-import { CustomSenderApi } from "@sdk/msgsender-sdk";
+import { CustomSenderApi } from "@next-sdk/msgsender-sdk";
 
 import { InformMethod } from "../interfaces";
 
-jest.mock("@sdk/msgsender-sdk");
+jest.mock("@next-sdk/msgsender-sdk");
 
 describe("InformMethodsForm", () => {
   beforeEach(() => {

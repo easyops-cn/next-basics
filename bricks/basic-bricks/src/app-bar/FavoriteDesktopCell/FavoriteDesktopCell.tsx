@@ -3,7 +3,7 @@ import { Link, GeneralIcon } from "@next-libs/basic-components";
 import classNames from "classnames";
 import styles from "./FavoriteDesktopCell.module.css";
 import { CloseCircleFilled } from "@ant-design/icons";
-import { LaunchpadApi } from "@sdk/user-service-sdk";
+import { LaunchpadApi } from "@next-sdk/user-service-sdk";
 import { launchpadService } from "../LaunchpadService";
 interface FavoriteDesktopCellProps {
   item: LaunchpadApi.ListCollectionResponseItem;

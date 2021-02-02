@@ -30,7 +30,7 @@
     "@next-libs/storage": "^1.0.0",
     "@next-core/brick-icons": "^2.7.3",
     "@next-core/custom-antd-styles": "^1.6.2",
-    "@sdk/user-service-sdk": "^0.2.14",
+    "@next-sdk/user-service-sdk": "^1.0.0",
     "classnames": "^2.2.6",
     "hotkeys-js": "^3.8.2",
     "immutability-helper": "^3.1.1"

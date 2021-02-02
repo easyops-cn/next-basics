@@ -21,8 +21,8 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@sdk/cmdb-sdk": "^0.15.13",
-    "@sdk/next-builder-sdk": "^1.16.12",
+    "@next-sdk/cmdb-sdk": "^1.0.0",
+    "@next-sdk/next-builder-sdk": "^1.0.0",
     "param-case": "^3.0.4"
   },
   "peerDependencies": {

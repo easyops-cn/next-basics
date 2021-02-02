@@ -4,8 +4,8 @@ import {
   NodeInstance,
   EventDetailOfNodeAddStored,
 } from "@next-core/editor-bricks-helper";
-import { InstanceApi } from "@sdk/cmdb-sdk";
-import { StoryboardApi } from "@sdk/next-builder-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { StoryboardApi } from "@next-sdk/next-builder-sdk";
 
 const STORYBOARD_BRICK = "STORYBOARD_BRICK";
 

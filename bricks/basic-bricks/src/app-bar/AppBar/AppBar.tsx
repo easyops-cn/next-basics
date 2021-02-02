@@ -6,7 +6,7 @@ import { AvatarProps } from "antd/lib/avatar";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { getAuth, getHistory, getRuntime } from "@next-core/brick-kit";
 import { Link } from "@next-libs/basic-components";
-import { UserAdminApi } from "@sdk/user-service-sdk";
+import { UserAdminApi } from "@next-sdk/user-service-sdk";
 import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
 import { AppBarBreadcrumb } from "../AppBarBreadcrumb/AppBarBreadcrumb";

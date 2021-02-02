@@ -12,7 +12,7 @@ import { SettingOutlined, LoadingOutlined } from "@ant-design/icons";
 import { FavoriteDesktopCell } from "../FavoriteDesktopCell/FavoriteDesktopCell";
 import classNames from "classnames";
 import { launchpadService } from "../LaunchpadService";
-import { LaunchpadApi } from "@sdk/user-service-sdk";
+import { LaunchpadApi } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { Spin } from "antd";
 

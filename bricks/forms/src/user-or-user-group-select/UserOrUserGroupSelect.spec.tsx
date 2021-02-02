@@ -1,12 +1,12 @@
 import React from "react";
 import { UserOrUserGroupSelect } from "./UserOrUserGroupSelect";
 import { act } from "@testing-library/react";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import { mount } from "enzyme";
 import { Select } from "antd";
 
 const mockPostSearch = InstanceApi.postSearch as jest.Mock;
-jest.mock("@sdk/cmdb-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
 mockPostSearch.mockResolvedValue({
   list: [
     {

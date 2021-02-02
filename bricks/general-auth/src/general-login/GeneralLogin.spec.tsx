@@ -4,7 +4,7 @@ import { createLocation } from "history";
 import { Form } from "@ant-design/compatible";
 import { Modal } from "antd";
 import * as kit from "@next-core/brick-kit";
-import * as authSdk from "@sdk/auth-sdk";
+import * as authSdk from "@next-sdk/auth-sdk";
 import { LegacyGeneralLogin } from "./GeneralLogin";
 import { WithTranslation } from "react-i18next";
 

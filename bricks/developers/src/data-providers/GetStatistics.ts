@@ -17,7 +17,7 @@ import {
   groupBy,
   compact,
 } from "lodash";
-import * as AuthSdk from "@sdk/auth-sdk";
+import * as AuthSdk from "@next-sdk/auth-sdk";
 import {
   scanBricksInStoryboard,
   scanTemplatesInStoryboard,

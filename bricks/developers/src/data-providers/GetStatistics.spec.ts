@@ -1,8 +1,8 @@
 import { GetStatistics } from "./GetStatistics";
-import * as AuthSdk from "@sdk/auth-sdk";
+import * as AuthSdk from "@next-sdk/auth-sdk";
 import { getAllStoryListV2 } from "../share/processor";
 
-jest.mock("@sdk/auth-sdk");
+jest.mock("@next-sdk/auth-sdk");
 
 const mockBootstrap = AuthSdk.bootstrap as jest.Mock;
 

@@ -1,6 +1,6 @@
 import { logout, httpErrorToString, getRuntime } from "@next-core/brick-kit";
 import { http } from "@next-core/brick-http";
-import { logout as apiLogout } from "@sdk/auth-sdk";
+import { logout as apiLogout } from "@next-sdk/auth-sdk";
 import resetLegacyIframe from "../shared/resetLegacyIframe";
 import { submitAsForm } from "./submitAsForm";
 

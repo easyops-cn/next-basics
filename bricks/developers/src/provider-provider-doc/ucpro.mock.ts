@@ -1,7 +1,7 @@
 // Mock data
 export default {
   id: 6109,
-  name: "@sdk/ucpro-sdk",
+  name: "@next-sdk/ucpro-sdk",
   kind: 0,
   flags: {},
   children: [
@@ -14,7 +14,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/desktop/clone.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/desktop/clone.d.ts",
       children: [
         {
           id: 6135,
@@ -295,7 +295,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/desktop/getAppDependencies.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/desktop/getAppDependencies.d.ts",
       children: [
         {
           id: 6147,
@@ -524,7 +524,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/desktop/getTaskStatus.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/desktop/getTaskStatus.d.ts",
       children: [
         {
           id: 6158,
@@ -794,7 +794,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/desktop/index.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/desktop/index.d.ts",
       sources: [
         {
           fileName: "api/ucpro/desktop/index.d.ts",
@@ -812,7 +812,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/desktop/installApp.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/desktop/installApp.d.ts",
       children: [
         {
           id: 6170,
@@ -1048,7 +1048,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/desktop/runningTasks.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/desktop/runningTasks.d.ts",
       children: [
         {
           id: 6181,
@@ -1246,7 +1246,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/desktop/uninstallApp.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/desktop/uninstallApp.d.ts",
       children: [
         {
           id: 6190,
@@ -1482,7 +1482,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/org/importModels.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/org/importModels.d.ts",
       children: [
         {
           id: 6202,
@@ -1580,7 +1580,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/org/index.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/org/index.d.ts",
       sources: [
         {
           fileName: "api/ucpro/org/index.d.ts",
@@ -1598,7 +1598,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/api/ucpro/org/registerOrg.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/api/ucpro/org/registerOrg.d.ts",
       children: [
         {
           id: 6207,
@@ -1696,7 +1696,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/index.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/index.d.ts",
       sources: [
         {
           fileName: "index.d.ts",
@@ -1714,7 +1714,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/model/micro_app/ModelInstalledMicroApp.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/model/micro_app/ModelInstalledMicroApp.d.ts",
       children: [
         {
           id: 6111,
@@ -2245,7 +2245,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/model/micro_app/index.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/model/micro_app/index.d.ts",
       sources: [
         {
           fileName: "model/micro_app/index.d.ts",
@@ -2263,7 +2263,7 @@ export default {
         isExported: true,
       },
       originalName:
-        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@sdk/ucpro-sdk/dist/types/wrapper.d.ts",
+        "/Users/wangshenwei/anyclouds/brick-next/node_modules/@next-sdk/ucpro-sdk/dist/types/wrapper.d.ts",
       children: [
         {
           id: 6214,

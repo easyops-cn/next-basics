@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CmdbModels } from "@sdk/cmdb-sdk";
+import { CmdbModels } from "@next-sdk/cmdb-sdk";
 
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { CmdbInstancesSelectPanel } from "@next-libs/cmdb-instances";

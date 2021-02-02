@@ -3,10 +3,10 @@ import { mount } from "enzyme";
 import { Form } from "@ant-design/compatible";
 import { Select } from "antd";
 import { DynamicUserSelectItem, RowFormItem } from "./DynamicUserSelectItem";
-import { CmdbObjectApi } from "@sdk/cmdb-sdk";
+import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
 import { columns } from "./";
 
-jest.mock("@sdk/cmdb-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
 const onChangeMock = jest.fn();
 const batchChangeMock = jest.fn();
 const props = {

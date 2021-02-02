@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
-import { MonitorModels } from "@sdk/monitor-sdk";
+import { MonitorModels } from "@next-sdk/monitor-sdk";
 import { BrickAlertValue } from "./BrickAlertValue";
 
 /**

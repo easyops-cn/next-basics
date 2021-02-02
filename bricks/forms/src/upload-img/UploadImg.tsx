@@ -16,7 +16,7 @@ import {
 import update from "immutability-helper";
 import styles from "./UploadImg.module.css";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { ObjectStoreApi } from "@sdk/object-store-sdk";
+import { ObjectStoreApi } from "@next-sdk/object-store-sdk";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";

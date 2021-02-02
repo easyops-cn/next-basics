@@ -2,12 +2,12 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { shallow } from "enzyme";
 
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import { FormItemWrapper } from "@next-libs/forms";
 
 import { CmdbInstanceSelectPanelWrapper } from "./CmdbInstanceSelectPanelWrapper";
 
-jest.mock("@sdk/cmdb-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
 
 describe("CmdbInstanceSelectPanel", () => {
   const objectMap = {

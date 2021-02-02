@@ -1,8 +1,8 @@
 import { DesktopData, MicroApp } from "@next-core/brick-types";
 import { launchpadService, LaunchpadService } from "./LaunchpadService";
 import { getRuntime } from "@next-core/brick-kit";
-import * as sdk from "@sdk/user-service-sdk";
-jest.mock("@sdk/user-service-sdk");
+import * as sdk from "@next-sdk/user-service-sdk";
+jest.mock("@next-sdk/user-service-sdk");
 
 const listCollectionData = [
   {
@@ -117,7 +117,7 @@ jest.mock("@next-core/brick-kit", () => {
     }),
   };
 });
-jest.mock("@sdk/user-service-sdk");
+jest.mock("@next-sdk/user-service-sdk");
 
 const visitorHelper = (app: MicroApp) => {
   return {

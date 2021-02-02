@@ -4,7 +4,7 @@ import React, { forwardRef, useState, useEffect } from "react";
 import { Checkbox } from "antd";
 
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
-import { CustomSenderApi } from "@sdk/msgsender-sdk";
+import { CustomSenderApi } from "@next-sdk/msgsender-sdk";
 
 import { InformMethod } from "../interfaces";
 

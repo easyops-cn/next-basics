@@ -10,7 +10,7 @@ import {
   UserOrUserGroupSelect,
   UserOrUserGroupSelectValue,
 } from "./UserOrUserGroupSelect";
-import { CmdbModels } from "@sdk/cmdb-sdk";
+import { CmdbModels } from "@next-sdk/cmdb-sdk";
 import { keyBy, groupBy, startsWith } from "lodash";
 import { FormItemElement } from "@next-libs/forms";
 

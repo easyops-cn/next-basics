@@ -1,6 +1,6 @@
 import * as kit from "@next-core/brick-kit";
 import { http } from "@next-core/brick-http";
-import * as authSdk from "@sdk/auth-sdk";
+import * as authSdk from "@next-sdk/auth-sdk";
 import { submitAsForm } from "./submitAsForm";
 import "./";
 

@@ -8,7 +8,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { CmdbModels } from "@sdk/cmdb-sdk";
+import { CmdbModels } from "@next-sdk/cmdb-sdk";
 
 import { CmdbInstanceSelectPanelWrapper } from "./CmdbInstanceSelectPanelWrapper";
 import { FormItemElement } from "@next-libs/forms";

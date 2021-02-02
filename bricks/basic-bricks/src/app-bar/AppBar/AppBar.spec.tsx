@@ -3,12 +3,12 @@ import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
 import { Dropdown, Avatar } from "antd";
 import * as brickKit from "@next-core/brick-kit";
-import { UserAdminApi } from "@sdk/user-service-sdk";
+import { UserAdminApi } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { AppBar } from "./AppBar";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
 
-jest.mock("@sdk/user-service-sdk");
+jest.mock("@next-sdk/user-service-sdk");
 jest.mock("../LaunchpadButton/LaunchpadButton");
 jest.mock("../AppBarBreadcrumb/AppBarBreadcrumb");
 jest.mock("../AppDocumentLink/AppDocumentLink");

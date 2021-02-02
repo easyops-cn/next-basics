@@ -4,7 +4,7 @@ import {
   DesktopItemCustom,
   DesktopItemApp,
 } from "@next-core/brick-types";
-import { LaunchpadApi, UserServiceModels } from "@sdk/user-service-sdk";
+import { LaunchpadApi, UserServiceModels } from "@next-sdk/user-service-sdk";
 import { getRuntime } from "@next-core/brick-kit";
 
 export class LaunchpadService {

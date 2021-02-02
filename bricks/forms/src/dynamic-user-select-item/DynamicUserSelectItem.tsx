@@ -3,7 +3,7 @@ import { Form } from "@ant-design/compatible";
 import { Col, Select } from "antd";
 import { omit } from "lodash";
 import { FormItemWrapper } from "@next-libs/forms";
-import { CmdbObjectApi } from "@sdk/cmdb-sdk";
+import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
 import { handleHttpError } from "@next-core/brick-kit";
 
 import {

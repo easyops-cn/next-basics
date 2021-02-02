@@ -16,7 +16,7 @@ import {
 import { RadioChangeEvent } from "antd/lib/radio";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";
 import { valueTypeList } from "../CmdbObjectAttrValue";
-import { CmdbObjectApi, CmdbModels } from "@sdk/cmdb-sdk";
+import { CmdbObjectApi, CmdbModels } from "@next-sdk/cmdb-sdk";
 
 const Option = Select.Option;
 

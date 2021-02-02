@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import { LegacyBrickSelect } from "./BrickSelect";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 
-jest.mock("@sdk/cmdb-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
 const mockInstanceApiPostSearch = InstanceApi.postSearch as jest.Mock;
 mockInstanceApiPostSearch.mockResolvedValue({ list: [] } as any);
 

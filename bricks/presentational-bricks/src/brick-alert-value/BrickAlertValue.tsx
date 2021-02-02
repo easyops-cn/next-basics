@@ -1,7 +1,7 @@
 import React from "react";
 import { get, find } from "lodash";
 
-import { MonitorModels } from "@sdk/monitor-sdk";
+import { MonitorModels } from "@next-sdk/monitor-sdk";
 
 interface BrickAlertValueProps {
   alertEvent: MonitorModels.ModelAlertEvent;

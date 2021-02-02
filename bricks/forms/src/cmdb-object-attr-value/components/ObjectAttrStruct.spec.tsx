@@ -6,9 +6,9 @@ import {
 } from "./ObjectAttrStruct";
 import { Form } from "@ant-design/compatible";
 import { Modal, Row, Radio, Button, Table, Input, Select, Tag } from "antd";
-import { CmdbObjectApi, CmdbModels } from "@sdk/cmdb-sdk";
+import { CmdbObjectApi, CmdbModels } from "@next-sdk/cmdb-sdk";
 
-jest.mock("@sdk/cmdb-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
 
 const spyOnModalConfirm = jest.spyOn(Modal, "confirm");
 const mockLoadObject = CmdbObjectApi.getObjectAll as jest.Mock;

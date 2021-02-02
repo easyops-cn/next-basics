@@ -5,7 +5,7 @@ import { debounce, isEmpty } from "lodash";
 import { WrapperFormItem } from "../wrapper-form-item/WrapperFormItem";
 import { BrickOptionProps } from "../../interfaces";
 import { SelectProps } from "antd/lib/select";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import { handleHttpError } from "@next-core/brick-kit";
 
 export interface SearchInCmdb {

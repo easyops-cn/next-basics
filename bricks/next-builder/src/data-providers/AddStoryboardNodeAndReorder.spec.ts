@@ -3,15 +3,15 @@ import {
   NodeInstance,
   EventDetailOfNodeAddStored,
 } from "@next-core/editor-bricks-helper";
-import { InstanceApi } from "@sdk/cmdb-sdk";
-import { StoryboardApi } from "@sdk/next-builder-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { StoryboardApi } from "@next-sdk/next-builder-sdk";
 import {
   AddStoryboardNodeAndReorder,
   AddStoryboardNodeAndReorderParams,
 } from "./AddStoryboardNodeAndReorder";
 
-jest.mock("@sdk/cmdb-sdk");
-jest.mock("@sdk/next-builder-sdk");
+jest.mock("@next-sdk/cmdb-sdk");
+jest.mock("@next-sdk/next-builder-sdk");
 
 const mockCreateInstance = (InstanceApi.createInstance as jest.MockedFunction<
   typeof InstanceApi.createInstance

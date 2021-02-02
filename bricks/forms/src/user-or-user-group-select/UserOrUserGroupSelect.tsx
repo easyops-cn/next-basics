@@ -8,7 +8,7 @@ import React, {
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, Button, Divider } from "antd";
 import styles from "./UserOrUserGroupSelect.module.css";
-import { InstanceApi } from "@sdk/cmdb-sdk";
+import { InstanceApi } from "@next-sdk/cmdb-sdk";
 import {
   zipObject,
   map,

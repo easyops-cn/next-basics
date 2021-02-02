@@ -4,7 +4,7 @@ import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import style from "./index.module.css";
 import { WrapperFormItem } from "../brick-form/components/wrapper-form-item/WrapperFormItem";
 import { MarkdownDisplay } from "../markdown-display/MarkdownDisplay";
-import { ObjectStoreApi } from "@sdk/object-store-sdk";
+import { ObjectStoreApi } from "@next-sdk/object-store-sdk";
 import { forEach } from "lodash";
 import { ImageInfo } from "./index";
 

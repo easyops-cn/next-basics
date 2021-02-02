@@ -11,7 +11,7 @@ import {
   httpErrorToString,
 } from "@next-core/brick-kit";
 import { loadScript } from "@next-core/brick-utils";
-import { login } from "@sdk/auth-sdk";
+import { login } from "@next-sdk/auth-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
