@@ -68,7 +68,7 @@ export class LaunchpadService {
     this.filteredFavoriteList = list.filter(
       (v) =>
         v.launchpadCollection.type === "microApp" ||
-        v.launchpadCollection.type === "customItem"
+        (v.launchpadCollection as any).type === "customItem"
     );
     this.favoriteList = list;
   }
@@ -115,7 +115,7 @@ export class LaunchpadService {
     return this.filteredFavoriteList.some(
       (f) =>
         this.typeAdaptor(f.launchpadCollection.type) === "custom" &&
-        f.customItemId === item.id
+        (f as any).customItemId === item.id
     );
   }
 
@@ -204,7 +204,7 @@ export class LaunchpadService {
     if (item.launchpadCollection.type === "microApp") {
       return this.microApps.find((app) => app.id === item.microAppId);
     } else {
-      return this.customList.find((custom) => custom.id === item.customItemId);
+      return this.customList.find((custom) => custom.id === (item as any).customItemId);
     }
   }
 

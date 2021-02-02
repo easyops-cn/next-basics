@@ -5,6 +5,8 @@ import { shallow } from "enzyme";
 import { Checkbox, Empty, Tree } from "antd";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 
+Element.prototype.scrollBy = jest.fn();
+
 const dataSource = [
   {
     title: "0",

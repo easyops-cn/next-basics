@@ -1,6 +1,7 @@
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { act } from "react-dom/test-utils";
+import { TextEncoder, TextDecoder } from "util";
 
 configure({ adapter: new Adapter() });
 
@@ -10,6 +11,14 @@ configure({ adapter: new Adapter() });
 
 Element.prototype.scrollIntoView = jest.fn();
 document.execCommand = jest.fn(() => true);
+
+if (!window.TextEncoder) {
+  window.TextEncoder = TextEncoder;
+}
+
+if (!window.TextDecoder) {
+  window.TextDecoder = TextDecoder;
+}
 
 if (!window.matchMedia) {
   Object.defineProperty(window, "matchMedia", {

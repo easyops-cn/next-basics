@@ -13,7 +13,6 @@ import {
 import { GeneralModal } from "./GeneralModal";
 import style from "./index.shadow.less";
 import { get, pick, forEach, set } from "lodash";
-import { TextAlignProperty } from "csstype";
 import { MenuIcon } from "@next-core/brick-types";
 import { ButtonType } from "antd/lib/button";
 
@@ -162,7 +161,7 @@ export class GeneralModalElement extends UpdatingElement {
    * @description 标题对齐方式
    */
   @property()
-  titleAlign?: TextAlignProperty;
+  titleAlign?: string;
 
   /**
    * @required false
