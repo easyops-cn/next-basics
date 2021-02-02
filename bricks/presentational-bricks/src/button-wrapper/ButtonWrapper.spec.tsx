@@ -4,7 +4,7 @@ import { ButtonWrapper } from "./ButtonWrapper";
 
 describe("ButtonWrapper", () => {
   it("should work", () => {
-    const wrapper = shallow(<ButtonWrapper />);
+    const wrapper = shallow(<ButtonWrapper brick="Component" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

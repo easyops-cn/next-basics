@@ -1,4 +1,5 @@
 import React from "react";
+import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
 import { getRuntime } from "@next-core/brick-kit";
 import { MicroApp, DesktopData } from "@next-core/brick-types";
@@ -8,12 +9,13 @@ import { DesktopSlider } from "../DesktopSlider/DesktopSlider";
 
 jest.mock("@next-core/brick-kit");
 jest.mock("../SearchBar/SearchBar");
+jest.mock("../DesktopSlider/DesktopSlider");
 jest.mock("../FavoriteDesktopCell/FavoriteDesktopCell");
 jest.mock("../LaunchpadService", () => {
   return {
     launchpadService: {
-      fetchFavoriteList: () => [],
-      getAllVisitors: () => [],
+      fetchFavoriteList: (): any[] => [],
+      getAllVisitors: (): any[] => [],
       setMaxVisitorLength: jest.fn(),
     },
   };
@@ -21,7 +23,9 @@ jest.mock("../LaunchpadService", () => {
 
 jest.mock("@next-libs/basic-components", () => {
   return {
-    Link: () => jest.mock,
+    Link: function Link() {
+      return <div>Link</div>;
+    },
   };
 });
 

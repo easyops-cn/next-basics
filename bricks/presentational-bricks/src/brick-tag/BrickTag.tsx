@@ -162,7 +162,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
       );
       return (props.disabledTooltip || item.disabledTooltip) &&
         item.disabled ? (
-        <Tooltip title={item.disabledTooltip || props.disabledTooltip}>
+        <Tooltip key={item.key} title={item.disabledTooltip || props.disabledTooltip}>
           {tagNode}
         </Tooltip>
       ) : (

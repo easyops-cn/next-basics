@@ -1,9 +1,8 @@
 import React from "react";
-import { mount } from "enzyme";
-import { UploadFilesV2 } from "./UploadFilesV2";
-import { Upload } from "antd";
 import { act } from "react-dom/test-utils";
-import { http } from "@next-core/brick-http";
+import { mount } from "enzyme";
+import { Upload } from "antd";
+import { UploadFilesV2 } from "./UploadFilesV2";
 
 jest.mock("@next-core/brick-http");
 
@@ -146,7 +145,6 @@ describe("UploadFilesV2", () => {
         },
       },
     });
-    await jest.runAllTimers();
     wrapper.update();
     expect(onRemove).toHaveBeenCalled();
   });
@@ -187,7 +185,9 @@ describe("UploadFilesV2", () => {
       },
       fileList: [],
     });
-    await jest.runAllTimers();
+    await act(async() => {
+      await jest.runAllTimers();
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
     expect(onError).toHaveBeenCalled();
@@ -228,7 +228,9 @@ describe("UploadFilesV2", () => {
         },
       ],
     });
-    await jest.runAllTimers();
+    await act(async() => {
+      await jest.runAllTimers();
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(2);
   });
@@ -284,7 +286,9 @@ describe("UploadFilesV2", () => {
         },
       ],
     });
-    await jest.runAllTimers();
+    await act(async() => {
+      await jest.runAllTimers();
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(2);
     expect(

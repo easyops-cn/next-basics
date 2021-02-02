@@ -1,11 +1,10 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
-import { UploadImg } from "./UploadImg";
-import { Upload, Modal, message, Input } from "antd";
+import {  mount } from "enzyme";
 import { act } from "react-dom/test-utils";
+import { Upload, Modal, message, Input } from "antd";
 import { RcFile } from "antd/lib/upload/interface";
-
 import { http } from "@next-core/brick-http";
+import { UploadImg } from "./UploadImg";
 
 jest.mock("@next-core/brick-http");
 
@@ -274,7 +273,9 @@ describe("UploadImg", () => {
       },
       fileList: [],
     });
-    await jest.runAllTimers();
+    await act(async () => {
+      await jest.runAllTimers();
+    })
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
   });
@@ -321,7 +322,9 @@ describe("UploadImg", () => {
         ],
       },
     });
-    await jest.runAllTimers();
+    await act(async () => {
+      await jest.runAllTimers();
+    })
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(2);
   });
@@ -384,7 +387,9 @@ describe("UploadImg", () => {
         ],
       },
     });
-    await jest.runAllTimers();
+    await act(async () => {
+      await jest.runAllTimers();
+    })
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(2);
     expect(wrapper.find(Input.TextArea).length).toBe(0);
@@ -442,7 +447,9 @@ describe("UploadImg", () => {
         },
       ],
     });
-    await jest.runAllTimers();
+    await act(async () => {
+      await jest.runAllTimers();
+    })
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(1);
     expect(wrapper.find(".upload-file-main-info").length).toBe(1);
@@ -465,7 +472,9 @@ describe("UploadImg", () => {
         },
       ],
     });
-    await jest.runAllTimers();
+    await act(async () => {
+      await jest.runAllTimers();
+    })
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
     expect(wrapper.find(".upload-file-main-info").length).toBe(0);

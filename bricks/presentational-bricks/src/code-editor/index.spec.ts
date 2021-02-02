@@ -10,6 +10,8 @@ const unmountComponentAtNode = jest
     //
   }) as any);
 
+jest.spyOn(console, "warn").mockImplementation(() => void 0);
+
 const props = {
   fields: {
     value: "value",

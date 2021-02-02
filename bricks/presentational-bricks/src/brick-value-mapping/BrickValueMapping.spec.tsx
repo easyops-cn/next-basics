@@ -4,6 +4,8 @@ import { BrickValueMapping, circleIcon } from "./BrickValueMapping";
 import { Color, MappingValue } from "./index";
 import { GeneralIcon } from "@next-libs/basic-components";
 
+jest.spyOn(console, "warn").mockImplementation(() => void 0);
+
 describe("BrickValueMapping", () => {
   it("should work", () => {
     const value = "0";

@@ -4,6 +4,8 @@ import { fireEvent, render } from "@testing-library/react";
 
 import { DatetimeSelector, ResolutionProps } from "./DatetimeSelector";
 
+jest.spyOn(console, "warn").mockImplementation(() => void 0);
+
 describe("DatetimeSelector", () => {
   beforeEach(() => {
     jest

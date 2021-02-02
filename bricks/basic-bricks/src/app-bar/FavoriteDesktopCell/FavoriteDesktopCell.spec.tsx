@@ -1,11 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { DesktopItem, DesktopItemCustom } from "@next-core/brick-types";
-import * as service from "../LaunchpadService";
 const mockOnDelete = jest.fn();
-const mockSetAsFavorite = jest.fn();
-import { launchpadService } from "../LaunchpadService";
-import { DesktopApp } from "../DesktopApp/DesktopApp";
 import { FavoriteDesktopCell } from "./FavoriteDesktopCell";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { CloseCircleFilled } from "@ant-design/icons";
@@ -20,7 +15,7 @@ jest.mock("../LaunchpadService", () => {
     },
   };
 });
-const spyOnWindowOpen = jest.spyOn(window, "open");
+const spyOnWindowOpen = window.open = jest.fn();
 const stopPropagation = jest.fn();
 const preventDefault = jest.fn();
 

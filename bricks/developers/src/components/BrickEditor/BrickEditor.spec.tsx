@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import { Card } from "antd";
 import AceEditor from "react-ace";
 import { BrickConf } from "@next-core/brick-types";
 import { BrickEditor } from "./BrickEditor";

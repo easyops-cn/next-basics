@@ -11,6 +11,8 @@ const unmountComponentAtNode = jest
   .mockImplementation((() => {}) as any);
 const mockEventListener = jest.fn(e => {});
 
+jest.spyOn(console, "warn").mockImplementation(() => void 0);
+
 describe("general-button", () => {
   it("should create a custom element", async () => {
     const element = document.createElement(

@@ -2,6 +2,8 @@ import React from "react";
 import { shallow } from "enzyme";
 import { BrickLink, BrickLinkProps } from "./BrickLink";
 
+jest.spyOn(console, "warn").mockImplementation(() => void 0);
+
 describe("BrickLink", () => {
   it("should work", () => {
     const wrapper = shallow<BrickLinkProps>(
