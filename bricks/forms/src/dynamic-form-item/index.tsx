@@ -144,14 +144,14 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 export class DynamicFormItemElement extends FormItemElement {
   private manualEditedValue: any[];
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 表单项字段说明
@@ -181,7 +181,7 @@ export class DynamicFormItemElement extends FormItemElement {
   columns: FormItemColumnsProps[];
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required ️ -
    * @default false
    * @description 是否禁止添加的按钮
@@ -192,7 +192,7 @@ export class DynamicFormItemElement extends FormItemElement {
   disabledAddButton: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required ️ -
    * @default false
    * @description 是否隐藏添加的按钮
@@ -203,7 +203,7 @@ export class DynamicFormItemElement extends FormItemElement {
   hideAddButton: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required ️ -
    * @default false
    * @description 是否禁止每一行删除的按钮
@@ -214,7 +214,7 @@ export class DynamicFormItemElement extends FormItemElement {
   disabledDeleteButton: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required ️ -
    * @default false
    * @description 是否隐藏每一行删除的按钮
@@ -225,7 +225,7 @@ export class DynamicFormItemElement extends FormItemElement {
   hideDeleteButton: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required ️ -
    * @default false
    * @deprecated
@@ -237,7 +237,7 @@ export class DynamicFormItemElement extends FormItemElement {
   showBackground: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required ️ -
    * @default true
    * @description 是否在初始化完成后额外触发一次动态表单项的 onChange 事件, 该事件会传出当前的初始值给到用户，这里因为历史原因之前默认行为就是在初始化后会触发该事件，这里为了兼容之前的行为，默认值只能设置为 true。

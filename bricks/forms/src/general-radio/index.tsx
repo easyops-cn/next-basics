@@ -6,7 +6,11 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { FormItemElement, formatOptions, GeneralOption } from "@next-libs/forms";
+import {
+  FormItemElement,
+  formatOptions,
+  GeneralOption,
+} from "@next-libs/forms";
 import { GeneralRadio } from "./GeneralRadio";
 import { RadioGroupButtonStyle } from "antd/lib/radio";
 
@@ -32,14 +36,14 @@ import { RadioGroupButtonStyle } from "antd/lib/radio";
  */
 export class GeneralRadioElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 单选框字段说明
@@ -53,7 +57,7 @@ export class GeneralRadioElement extends FormItemElement {
    */
   @property({ attribute: false }) message: Record<string, string>;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -92,7 +96,7 @@ export class GeneralRadioElement extends FormItemElement {
   })
   options: GeneralOption[];
   /**
-   * @kind `string[]`
+   * @kind string[]
    * @required true
    * @default -
    * @description 单选框当前选中始值
@@ -100,7 +104,7 @@ export class GeneralRadioElement extends FormItemElement {
   @property({ attribute: false })
   value: any;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default  `false`
    * @description 是否禁用

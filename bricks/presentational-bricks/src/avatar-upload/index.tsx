@@ -41,7 +41,7 @@ export class AvatarUploadElement extends UpdatingElement {
     this.changeEvent.emit(url);
   };
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 展示图片的src
@@ -50,7 +50,7 @@ export class AvatarUploadElement extends UpdatingElement {
   imgSrc: string;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default 150
    * @description 展示框大小
@@ -59,7 +59,7 @@ export class AvatarUploadElement extends UpdatingElement {
   size = 150;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default 确定
    * @description 展示框大小
@@ -68,7 +68,7 @@ export class AvatarUploadElement extends UpdatingElement {
   modalOkText = "确定";
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default 14px
    * @description 展示框大小

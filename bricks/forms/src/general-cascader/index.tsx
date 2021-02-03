@@ -34,21 +34,21 @@ import { CascaderOptionType } from "antd/lib/cascader";
  */
 export class GeneralCascaderElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 级联选择框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 级联选择框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -63,7 +63,7 @@ export class GeneralCascaderElement extends FormItemElement {
   @property({ attribute: false }) message: Record<string, string>;
 
   /**
-   * @kind `string[]`
+   * @kind string[]
    * @required false
    * @default -
    * @description 指定选中项
@@ -85,7 +85,7 @@ export class GeneralCascaderElement extends FormItemElement {
   options: GeneralCascaderProps["options"];
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 表单项禁用
@@ -96,7 +96,7 @@ export class GeneralCascaderElement extends FormItemElement {
   disabled: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 是否允许删除
@@ -129,7 +129,7 @@ export class GeneralCascaderElement extends FormItemElement {
   fieldNames = { label: "label", value: "value", children: "children" };
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default 暂无数据
    * @description 当下拉列表为空时显示的内容
@@ -138,7 +138,7 @@ export class GeneralCascaderElement extends FormItemElement {
   notFoundContent: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 输入框占位文本
@@ -158,7 +158,7 @@ export class GeneralCascaderElement extends FormItemElement {
   popupPlacement = "bottomLeft";
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 是否开启搜索
@@ -189,7 +189,7 @@ export class GeneralCascaderElement extends FormItemElement {
   cascaderStyle: React.CSSProperties;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 自定义的选择框后缀图标，仅支持 [antd 图标库](developers/icon?type=antd)， 配置图标的 `icon` 字段即可
@@ -198,7 +198,7 @@ export class GeneralCascaderElement extends FormItemElement {
   suffixIcon: string;
 
   /**
-   * @kind `number`
+   * @kind numberr
    * @required false
    * @default 50
    * @description  搜索结果展示数量

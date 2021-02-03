@@ -30,28 +30,28 @@ import { TimePickerProps } from "antd/lib/time-picker";
  */
 export class GeneralTimePickerElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 时间选择框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 时间选择框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 时间选择框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -65,7 +65,7 @@ export class GeneralTimePickerElement extends FormItemElement {
    */
   @property({ attribute: false }) message: Record<string, string>;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 时间选择框框初始值

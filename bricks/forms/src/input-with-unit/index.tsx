@@ -31,35 +31,35 @@ import { UnitType } from "./libs/constants";
  */
 export class InputWithUnitElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 初始值
@@ -68,7 +68,7 @@ export class InputWithUnitElement extends FormItemElement {
   value: number;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 使用单位
@@ -97,7 +97,7 @@ export class InputWithUnitElement extends FormItemElement {
   inputBoxStyle: React.CSSProperties;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default 0
    * @description 单位转换精确度；如果为 0，仅当整除时才转换
@@ -106,7 +106,7 @@ export class InputWithUnitElement extends FormItemElement {
   precision: number;
 
   /**
-   * @kind `string[]`
+   * @kind string[]
    * @required false
    * @default -
    * @description 可使用单位列表

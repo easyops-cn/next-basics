@@ -20,28 +20,28 @@ import { BrickRate } from "./BrickRate";
  */
 export class BrickRateElement extends UpdatingElement {
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default  3
    * @description 等级级数
    */
   @property({ attribute: false }) count = 3;
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 默认等级
    */
   @property({ attribute: false }) defaultValue: number;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default  true
    * @description 是否禁用
    */
   @property({ attribute: false }) disabled = true;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    *
    * @default  -

@@ -28,7 +28,7 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class GeneralInputElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 输入框字段名
@@ -36,21 +36,21 @@ export class GeneralInputElement extends FormItemElement {
   @property({ attribute: false }) name: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 输入框类型,可输入password/email或者其他
    */
   @property({ attribute: false }) type: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 输入框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 输入框占位说明
@@ -58,7 +58,7 @@ export class GeneralInputElement extends FormItemElement {
   @property({ attribute: false }) placeholder: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 输入框初始值
@@ -74,7 +74,7 @@ export class GeneralInputElement extends FormItemElement {
   @property({ attribute: false }) message: Record<string, string>;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 最小长度
@@ -85,7 +85,7 @@ export class GeneralInputElement extends FormItemElement {
   minLength: number;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 最大长度
@@ -95,7 +95,7 @@ export class GeneralInputElement extends FormItemElement {
   })
   maxLength: number;
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 最大长度
@@ -105,7 +105,7 @@ export class GeneralInputElement extends FormItemElement {
   })
   min: number;
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 最大长度
@@ -134,7 +134,7 @@ export class GeneralInputElement extends FormItemElement {
   addonAfter: string;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否只读
@@ -143,7 +143,7 @@ export class GeneralInputElement extends FormItemElement {
   readOnly: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否禁用
@@ -163,7 +163,7 @@ export class GeneralInputElement extends FormItemElement {
   inputBoxStyle: React.CSSProperties;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否显示复制按钮

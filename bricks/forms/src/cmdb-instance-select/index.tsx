@@ -33,35 +33,35 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class CmdbInstanceSelectElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框初始值
@@ -75,7 +75,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    */
   @property({ attribute: false }) message: Record<string, string>;
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 模型 id
@@ -117,7 +117,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   firstRender = true;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default 0
    * @description 输入多少个字符才触发搜索动作， 默认 0 表示在点击下拉框时触发一次，后面每次输入都会进行搜索操作。
@@ -128,7 +128,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   minimumInputLength = 0;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 支持清除选项
@@ -149,7 +149,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   })
   inputBoxStyle: React.CSSProperties = {};
   /**
-   * @kind `string[]`
+   * @kind string[]
    * @required false
    * @default -
    * @description 配置额外的字段进行搜索，默认的是 label，若配置为 ["memo"]，则会基于 memo 和 label 两个字段进行联合搜索
@@ -160,7 +160,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   extraSearchKey: string[];
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default 30
    * @description 配置搜索接口的pageSize，也是下拉框显示的条目数，默认30条
@@ -180,7 +180,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   popoverPositionType: CmdbInstanceSelectProps["popoverPositionType"];
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 控制下拉框中的label显示一个或者多个，当定义`labelTemplate`时，不起作用
@@ -188,7 +188,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property({ attribute: false })
   isMultiLabel = true;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @param showSearchTip
    * @default false
    * @description 下拉列表的最后一行是否显示提示：仅显示前**项，更多结果请搜索
@@ -197,7 +197,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   showSearchTip: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default
    * @description 可自定义`label` 显示的模板

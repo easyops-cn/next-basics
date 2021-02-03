@@ -121,7 +121,7 @@ export type DropdownPlacement =
  */
 export class GeneralCustomButtonsElement extends UpdatingElement {
   /**
-   * @kind `CustomButton[]`
+   * @kind CustomButton[]
    * @required true
    * @default -
    * @description 自定义按钮组
@@ -129,28 +129,28 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   @property({ attribute: false })
   customButtons: CustomButton[];
   /**
-   * @kind `any`
+   * @kind any
    * @required false
    * @default -
    * @description 按钮事件的 detail
    */
   @property({ attribute: false }) dataSource: any;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `"管理"`
    * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮文字
    */
   @property() dropdownBtnText: string;
   /**
-   * @kind `string | MenuIcon`
+   * @kind string | MenuIcon
    * @required false
    * @default `"setting"`
    * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮 icon，支持[icon 图标库](/next/developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
    */
   @property({ attribute: false }) dropdownBtnIcon: any;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 按钮组中 isDropdown 为 true 的按钮收纳成 dropdown。isMoreButton 为 true 时更多按钮显示纯icon样式，为 false 时显示icon+文字样式。
@@ -160,21 +160,21 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   })
   isMoreButton: boolean;
   /**
-   * @kind `"circle" | "no" | "rectangle" | "icon"`
+   * @kind "circle" | "no" | "rectangle" | "icon"
    * @required false
    * @default -
    * @description isMoreButton 为 true 时更多按钮的样式
    */
   @property() moreButtonShape: "no"; //UI规范中暂时只支持noShape。后面有需要可以支持circle。
   /**
-   * @kind `string | MenuIcon`
+   * @kind string | MenuIcon
    * @required false
    * @default -
    * @description isMoreButton 为 true 时更多按钮的图标，默认为`...`
    */
   @property({ attribute: false }) moreBtnIcon: any;
   /**
-   * @kind `"start" | "center" | "end" | "stretch"`
+   * @kind "start" | "center" | "end" | "stretch"
    * @required false
    * @default `"center"`
    * @description 对齐方式
@@ -182,7 +182,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   @property()
   alignment: "start" | "center" | "end" | "stretch";
   /**
-   * @kind `DropdownPlacement`
+   * @kind DropdownPlacement
    * @required false
    * @default `"bottomRight"`
    * @description dropdown 的弹出位置
@@ -190,7 +190,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   @property()
   dropdownPlacement: DropdownPlacement;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 点击按钮后自动禁用

@@ -29,7 +29,7 @@ export type Size = number | "large" | "small" | "default";
  */
 export class IconSelectElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 字段名
@@ -37,7 +37,7 @@ export class IconSelectElement extends FormItemElement {
   @property({ attribute: false }) name: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 字段说明
@@ -45,7 +45,7 @@ export class IconSelectElement extends FormItemElement {
   @property({ attribute: false }) label: string;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -75,7 +75,7 @@ export class IconSelectElement extends FormItemElement {
   visible: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否禁用

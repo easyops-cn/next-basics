@@ -18,7 +18,7 @@ import style from "./index.shadow.less";
  */
 export class MultipleColumnsCardElement extends UpdatingElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default 是否显示卡片边框
    * @description -

@@ -27,28 +27,28 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class GeneralInputNumberElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 数字输入框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 数字输入框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 数字输入框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -73,7 +73,7 @@ export class GeneralInputNumberElement extends FormItemElement {
   value: number | string;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 数字输框入步长
@@ -84,7 +84,7 @@ export class GeneralInputNumberElement extends FormItemElement {
   step = 1;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 数字输入框最小值
@@ -95,7 +95,7 @@ export class GeneralInputNumberElement extends FormItemElement {
   min: number;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 数字输入框最大值

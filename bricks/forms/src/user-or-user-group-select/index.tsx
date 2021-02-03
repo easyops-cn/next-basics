@@ -30,14 +30,14 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class UserOrUserGroupSelectElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框字段说明
@@ -45,14 +45,14 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   @property({ attribute: false }) label: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -70,7 +70,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   value: string[] | UserOrUserGroupSelectValue;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 是否隐藏“快速选择我”按钮
@@ -81,7 +81,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   hideAddMeQuickly: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 是否隐藏搜索 icon，即不支持通过 cmdb 的 modal 选择器选择

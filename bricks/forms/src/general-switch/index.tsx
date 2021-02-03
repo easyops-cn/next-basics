@@ -23,14 +23,14 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class GeneralSwitchElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 表单项字段说明
@@ -47,7 +47,7 @@ export class GeneralSwitchElement extends FormItemElement {
   size: "default" | "small" = "default";
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 初始值
@@ -55,7 +55,7 @@ export class GeneralSwitchElement extends FormItemElement {
   @property({ type: Boolean })
   value: boolean;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 是否禁用

@@ -77,7 +77,7 @@ export class GeneralModalElement extends FormItemElement {
   };
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 表单模态框标题
@@ -102,7 +102,7 @@ export class GeneralModalElement extends FormItemElement {
   isVisible: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否点击背景关闭模态框
@@ -113,7 +113,7 @@ export class GeneralModalElement extends FormItemElement {
   maskClosable: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 点击打开模态框的按钮文字
@@ -122,7 +122,7 @@ export class GeneralModalElement extends FormItemElement {
   btnText: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `"确定"`
    * @description 模态框确认按钮文字
@@ -131,7 +131,7 @@ export class GeneralModalElement extends FormItemElement {
   okText: string;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否禁用确认按钮
@@ -140,7 +140,7 @@ export class GeneralModalElement extends FormItemElement {
   okDisabled: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `"取消"`
    * @description 模态框取消按钮文字
@@ -162,7 +162,7 @@ export class GeneralModalElement extends FormItemElement {
   private _childFormElement: ChildeFormElement;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 关闭模态框时不重置表单
@@ -171,7 +171,7 @@ export class GeneralModalElement extends FormItemElement {
   notResetWhenClose: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 点击确定按钮后自动禁用

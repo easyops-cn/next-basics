@@ -109,7 +109,7 @@ export class GeneralFormElement
   })
   valueTypes: Record<string, string>;
   /**
-   * @kind `string`
+   * @kind string
    * @description 设置表单域内字段 id 的前缀
    * @default -
    * @required false
@@ -159,7 +159,7 @@ export class GeneralFormElement
   })
   layout: FormLayout;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @description 是否不显示冒号
    * @default `false`
    * @required false

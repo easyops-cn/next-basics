@@ -19,21 +19,21 @@ import { InformMethodsForm } from "./InformMethodsForm";
  */
 export class InformMethodsFormElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 表单项字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项

@@ -25,28 +25,28 @@ import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
  */
 export class GeneralTextAreaElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -60,7 +60,7 @@ export class GeneralTextAreaElement extends FormItemElement {
    */
   @property({ attribute: false }) message: Record<string, string>;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 初始值
@@ -78,7 +78,7 @@ export class GeneralTextAreaElement extends FormItemElement {
   autoSize: boolean | AutoSizeType;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 最小长度
@@ -89,7 +89,7 @@ export class GeneralTextAreaElement extends FormItemElement {
   min: number;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required false
    * @default -
    * @description 最大长度
@@ -100,7 +100,7 @@ export class GeneralTextAreaElement extends FormItemElement {
   max: number;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 是否禁用
@@ -128,9 +128,8 @@ export class GeneralTextAreaElement extends FormItemElement {
    * @detail handleBlurReturn
    * @description 失焦时触发，而且会传出当前输入框光标所在的前后部分
    */
-  @event({ type: "general.textarea.blur.V2" }) blurEventV2: EventEmitter<
-    BlurData
-  >;
+  @event({ type: "general.textarea.blur.V2" })
+  blurEventV2: EventEmitter<BlurData>;
   private _handleChange = (value: string): void => {
     this.value = value;
     this._render();
