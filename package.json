@@ -16,6 +16,7 @@
     "serve": "brick-container-serve",
     "test": "cross-env NODE_ENV='test' jest",
     "test:ci": "cross-env NODE_ENV='test' CI=true jest --ci --passWithNoTests",
+    "test:gc": "cross-env NODE_ENV='test' node --expose-gc ./node_modules/.bin/jest --logHeapUsage",
     "yo": "brick-scripts",
     "yo-debug": "node --inspect-brk ./node_modules/@next-core/brick-scripts/dist/index.js",
     "renew": "dev-dependencies-renew",
