@@ -2,19 +2,20 @@
   "$schema": "http://json.schemastore.org/renovate",
   "extends": ["config:base"],
   "rangeStrategy": "bump",
-  "semanticCommits": true,
+  "semanticCommits": "enabled",
   "commitMessagePrefix": "chore(deps):",
   "ignorePresets": [":ignoreModulesAndTests"],
   "packageRules": [
     {
-      "depTypeList": ["devDependencies"],
-      "automerge": true,
-      "major": {
-        "automerge": false
-      }
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true
     },
     {
-      "packagePatterns": [
+      "matchPackagePatterns": [
         "^@bricks/",
         "^@libs/",
         "^@micro-apps/",
@@ -26,7 +27,7 @@
         "^@next-sdk/",
         "^@next-legacy-templates/"
       ],
-      "packageNames": [
+      "matchPackageNames": [
         "@ant-design/compatible",
         "@ant-design/icons",
         "@fortawesome/react-fontawesome",
@@ -80,10 +81,14 @@
       "enabled": false
     },
     {
-      "packagePatterns": ["^@next-core/"],
       "groupName": "next-core packages",
-      "automerge": false,
-      "major": { "enabled": false }
+      "matchPackagePatterns": ["^@next-core/"],
+      "automerge": false
+    },
+    {
+      "matchPackagePatterns": ["^@next-core/"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ],
   "postUpdateOptions": ["yarnDedupeHighest"]
