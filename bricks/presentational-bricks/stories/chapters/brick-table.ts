@@ -557,7 +557,6 @@ export const BrickTableStory: Story = {
       properties: {
         id: "tree-data-demo",
         rowKey: "id",
-        selectAllChildren: true,
         configProps: {
           rowSelection: true,
         },
