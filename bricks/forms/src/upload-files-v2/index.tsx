@@ -21,7 +21,7 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class UploadFilesV2Element extends FormItemElement {
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 选择文件后是否直接上传。autoUpload为true时，文件会自动上传到url地址，每个value中存在response属性存储上传地址的返回信息。autoUpload为true时，文件不会自动上传，需要用户自行上传，每个value中存在file属性存储文件信息。
@@ -42,14 +42,14 @@ export class UploadFilesV2Element extends FormItemElement {
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否禁用

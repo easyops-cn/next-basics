@@ -41,7 +41,7 @@ export class ListContainerElement extends UpdatingElement {
   data: any[] = [];
 
   /**
-   * @kind `string | number`
+   * @kind string | number
    * @default `"var(--card-content-gap)"`
    * @description 间距
    */

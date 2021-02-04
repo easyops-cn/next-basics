@@ -36,7 +36,7 @@ const BUTTON_TYPES = [
  */
 export class GeneralButtonsElement extends FormItemElement {
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 显示取消按钮
@@ -47,7 +47,7 @@ export class GeneralButtonsElement extends FormItemElement {
   showCancelButton: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 提交按钮的文字，不设置则不显示提交按钮
@@ -56,7 +56,7 @@ export class GeneralButtonsElement extends FormItemElement {
   submitText: string;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 禁用提交按钮
@@ -67,7 +67,7 @@ export class GeneralButtonsElement extends FormItemElement {
   submitDisabled: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 提交按钮文字提示
@@ -100,7 +100,7 @@ export class GeneralButtonsElement extends FormItemElement {
   submitType: ButtonType;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 取消按钮的文字，不设置则不显示取消按钮
@@ -131,7 +131,7 @@ export class GeneralButtonsElement extends FormItemElement {
   cancelType: ButtonType;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 点击确定按钮后自动禁用

@@ -27,14 +27,14 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class CmdbInstanceSelectPanelElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框字段说明

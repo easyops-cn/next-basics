@@ -45,7 +45,7 @@ export interface OpenCloseOption {
  */
 export class GeneralModalElement extends UpdatingElement {
   /**
-   * @kind `Record<string, any>`
+   * @kind Record<string, any>
    * @required false
    * @default -
    * @description 数据来源
@@ -55,7 +55,7 @@ export class GeneralModalElement extends UpdatingElement {
   })
   dataSource: Record<string, any>;
   /**
-	* @kind `{modalTitle: string}`
+	* @kind {modalTitle: string}
 	* @required false
 	* @default -
 	* @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
@@ -68,7 +68,7 @@ export class GeneralModalElement extends UpdatingElement {
     modalTitle: string;
   };
   /**
-   * @kind `string | number`
+   * @kind string | number
    * @required false
    * @default -
    * @description 模态框宽度
@@ -76,7 +76,7 @@ export class GeneralModalElement extends UpdatingElement {
   @property({ attribute: false })
   width: string | number;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `"确认"`
    * @description 确认按钮文字
@@ -94,7 +94,7 @@ export class GeneralModalElement extends UpdatingElement {
   okType: ButtonType;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否禁用确认按钮
@@ -103,7 +103,7 @@ export class GeneralModalElement extends UpdatingElement {
   okDisabled: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `"取消"`
    * @description 取消按钮文字
@@ -112,7 +112,7 @@ export class GeneralModalElement extends UpdatingElement {
   cancelText: string;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否隐藏取消按钮
@@ -121,7 +121,7 @@ export class GeneralModalElement extends UpdatingElement {
   hideCancelButton: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 模态框标题
@@ -130,7 +130,7 @@ export class GeneralModalElement extends UpdatingElement {
   modalTitle: string;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `true`
    * @description 点击确定时，是否立即关闭模态框，如果设为`false`，则需要自行关闭。
@@ -138,7 +138,7 @@ export class GeneralModalElement extends UpdatingElement {
   @property({ attribute: false }) closeWhenOk = true;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否启用 footer 插槽
@@ -147,7 +147,7 @@ export class GeneralModalElement extends UpdatingElement {
   enableFooterSlot: boolean;
 
   /**
-   * @kind `object`
+   * @kind object
    * @required false
    * @default -
    * @description 完全透传给 antd 的 Modal 属性，详见：[https://ant.design/components/modal-cn/#API](https://ant.design/components/modal-cn/#API)

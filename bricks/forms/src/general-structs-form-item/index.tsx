@@ -28,14 +28,14 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   private _mountPoint: HTMLElement;
   private _childComponent: any;
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 添加结构体作为表单项时在表单中的字段说明
@@ -62,7 +62,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   })
   structDefaultValues: any;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default 添加
    * @description 点击打开模态框的按钮文字
@@ -82,7 +82,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   })
   fieldsMap: any;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default false
    * @description 是否点击背景关闭模态框
@@ -92,7 +92,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   })
   maskClosable: boolean;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default 添加结构体
    * @description 添加结构体时模态框的标题
@@ -100,7 +100,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @property()
   createModalTitle: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default 编辑结构体
    * @description 编辑结构体时模态框的标题
@@ -118,7 +118,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   })
   modalWidth: string | number;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default 确定
    * @description 模态框确认按钮文字
@@ -126,7 +126,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @property()
   okText: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default 取消
    * @description 模态框取消按钮文字
@@ -134,7 +134,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @property()
   cancelText: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default 确定要删除该结构体吗？
    * @description 删除确认框标题
@@ -142,7 +142,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   @property()
   deleteText: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 能否添加多个结构体

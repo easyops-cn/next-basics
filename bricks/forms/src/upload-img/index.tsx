@@ -28,28 +28,28 @@ import { FormItemElement } from "@next-libs/forms";
 export class UploadImgElement extends FormItemElement {
   // 对象存储桶名字，业务编排的时候创建，一般一个业务需求对应一个存储桶名称，相当于 namespace
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 下拉框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项

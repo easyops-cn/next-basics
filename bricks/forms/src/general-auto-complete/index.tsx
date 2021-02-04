@@ -6,7 +6,11 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { formatOptions, FormItemElement, GeneralOption } from "@next-libs/forms";
+import {
+  formatOptions,
+  FormItemElement,
+  GeneralOption,
+} from "@next-libs/forms";
 import { GeneralAutoComplete } from "./GeneralAutoComplete";
 import { OptionType } from "../interfaces";
 
@@ -24,28 +28,28 @@ import { OptionType } from "../interfaces";
  */
 export class GeneralAutoCompleteElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -59,7 +63,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    */
   @property({ attribute: false }) message: Record<string, string>;
   /**
-   * @kind `string[]`
+   * @kind string[]
    * @required true
    * @default -
    * @description 补全选项列表
@@ -68,7 +72,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
   options: string[] | OptionType[];
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 当前值

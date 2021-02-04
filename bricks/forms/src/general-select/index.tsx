@@ -44,28 +44,28 @@ export interface ComplexOption<T = string | number> {
  */
 export class GeneralSelectElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 选择框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind stringg
    * @required false
    * @default -
    * @description 选择框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 选择框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -79,7 +79,7 @@ export class GeneralSelectElement extends FormItemElement {
    */
   @property({ attribute: false }) message: Record<string, string>;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 下拉菜单和选择器同宽
@@ -110,7 +110,7 @@ export class GeneralSelectElement extends FormItemElement {
   options: GeneralOption[];
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 基于 `options` 列表中的某个字段进行分组显示
@@ -154,7 +154,7 @@ export class GeneralSelectElement extends FormItemElement {
   inputBoxStyle: React.CSSProperties;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 支持清除选项
@@ -209,7 +209,7 @@ export class GeneralSelectElement extends FormItemElement {
   suffixBrickStyle: React.CSSProperties = {};
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 支持搜索
@@ -243,7 +243,7 @@ export class GeneralSelectElement extends FormItemElement {
   emptyOption: GeneralComplexOption;
 
   /**
-   * @kind `string[]`
+   * @kind string[]
    * @required false
    * @default -
    * @description 在 mode 为 `tags` 和 `multiple` 的模式下定义自动分词的分隔符

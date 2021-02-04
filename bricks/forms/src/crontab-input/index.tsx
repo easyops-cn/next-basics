@@ -23,7 +23,7 @@ import { CrontabInput } from "./CrontabInput";
  */
 export class CrontabInputElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind stringg
    * @required true
    * @default -
    * @description 定时器字段名
@@ -32,14 +32,14 @@ export class CrontabInputElement extends FormItemElement {
   @property()
   name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 定时器字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default * * * * *(每分钟)
    * @description 定时器时间，格式为以空格为分隔的五位字符, 按顺序分别代表分钟，小时，天，月，星期。
@@ -47,7 +47,7 @@ export class CrontabInputElement extends FormItemElement {
   @property()
   value: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项

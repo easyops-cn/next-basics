@@ -65,7 +65,7 @@ export interface TooltipConfig {
  */
 export class GeneralButtonElement extends UpdatingElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 按钮名称
@@ -79,7 +79,7 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonProps: ButtonProps & { icon?: string };
 
   /**
-   * @kind `string | MenuIcon`
+   * @kind string | MenuIcon
    * @required false
    * @default -
    * @description 按钮 icon，支持[icon 图标库](developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
@@ -99,7 +99,7 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonType: ButtonType;
 
   /**
-   * @kind `"circle" | "round"`
+   * @kind "circle" | "round"
    * @required false
    * @default -
    * @description 按钮形状，支持圆形、椭圆形，不设置为默认方形
@@ -108,7 +108,7 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonShape: "circle" | "round";
 
   /**
-   * @kind `"small" | "large"`
+   * @kind "small" | "large"
    * @required false
    * @default -
    * @description 按钮大小，支持大、小，不设置为默认中
@@ -117,7 +117,7 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonSize: "small" | "large";
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 点击按钮跳转的 url
@@ -126,7 +126,7 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonUrl: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 是否使用原生 <a> 标签，通常用于外链的跳转
@@ -135,7 +135,7 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonHref: string;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 淡化按钮文字，按钮类型为 text 时可以设置。默认 `false` 文字按钮颜色和平台的字体颜色一样，在一些希望弱化文字颜色的场景下可以设置为 `true`。
@@ -144,7 +144,7 @@ export class GeneralButtonElement extends UpdatingElement {
   fadedText: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否禁用按钮
@@ -153,7 +153,7 @@ export class GeneralButtonElement extends UpdatingElement {
   disabled: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 禁用按钮的 tooltip
@@ -162,7 +162,7 @@ export class GeneralButtonElement extends UpdatingElement {
   disabledTooltip: string;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 按钮的 tooltip
@@ -171,7 +171,7 @@ export class GeneralButtonElement extends UpdatingElement {
   tooltip: string;
 
   /**
-   * @kind `TooltipConfig`
+   * @kind TooltipConfig
    * @required false
    * @default -
    * @description tooltip的配置,配置属性见TooltipConfig
@@ -180,7 +180,7 @@ export class GeneralButtonElement extends UpdatingElement {
   tooltipConfig: TooltipConfig;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 跳转的 target，例如可以设置为"\_blank"
@@ -189,7 +189,7 @@ export class GeneralButtonElement extends UpdatingElement {
   target: string;
 
   /**
-   * @kind `any`
+   * @kind any
    * @required false
    * @default {}
    * @description [已废弃]按钮点击事件传出的内容。当用于列表类构件，例如 `brick-table` 中，可通过传入传入 `detail` 来识别不通的行进行操作处理。
@@ -200,7 +200,7 @@ export class GeneralButtonElement extends UpdatingElement {
   detail: Record<string, any> = {};
 
   /**
-   * @kind `any`
+   * @kind any
    * @required false
    * @default `{}`
    * @description 替代之前 detail 属性，用法相同。暂存的数据在事件传出时使用
@@ -211,7 +211,7 @@ export class GeneralButtonElement extends UpdatingElement {
   dataSource: Record<string, any> = {};
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 点击按钮后自动禁用

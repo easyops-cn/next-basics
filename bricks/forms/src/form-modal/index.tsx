@@ -29,28 +29,28 @@ import { FormModal } from "./FormModal";
  */
 export class FormModalElement extends UpdatingElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 模态框标题
    */
   @property() modalTitle: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 确定按钮 loading
    */
   @property({ type: Boolean }) confirmLoading: boolean;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `true`
    * @description 是否显示右上角的关闭按钮
    */
   @property({ attribute: false }) closable = true;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 垂直居中展示模态框
@@ -64,7 +64,7 @@ export class FormModalElement extends UpdatingElement {
    */
   @property({ attribute: false }) width: string | number;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `"确定"`
    * @description 确认按钮文字
@@ -78,21 +78,21 @@ export class FormModalElement extends UpdatingElement {
    */
   @property({ attribute: false }) okType: ButtonType;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `"取消"`
    * @description 取消按钮文字
    */
   @property({ attribute: false }) cancelText: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `true`
    * @description 点击蒙层是否允许关闭
    */
   @property({ type: Boolean }) maskClosable: boolean;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 强制渲染模态框
@@ -113,14 +113,14 @@ export class FormModalElement extends UpdatingElement {
    */
   @property({ attribute: false }) cancelButtonProps: ButtonProps;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 关闭时销毁模态框里的子元素
    */
   @property({ type: Boolean }) destroyOnClose: boolean;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default true
    * @description 是否展示遮罩

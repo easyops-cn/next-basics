@@ -48,21 +48,21 @@ export interface OptionGroup {
 */
 export class GeneralCheckboxElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 多选框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 多选框字段说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
@@ -108,7 +108,7 @@ export class GeneralCheckboxElement extends FormItemElement {
   isGroup: boolean;
 
   /**
-   * @kind `string[]`
+   * @kind string[]
    * @required -
    * @default -
    * @description 输入框当前选中始值

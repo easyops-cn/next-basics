@@ -23,7 +23,7 @@ import { GeneralSlider, GeneralSliderProps } from "./GeneralSlider";
  */
 export class GeneralSliderElement extends UpdatingElement {
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required -️
    * @default false
    * @description 只用展示不能改变任何值的模式，该属性与 `disabled` 不同的地方在于呈现的样式不一样
@@ -34,7 +34,7 @@ export class GeneralSliderElement extends UpdatingElement {
   onlyShowMode: boolean;
 
   /**
-   * @kind `string`
+   * @kind string
    * @required -️
    * @default -
    * @description 为空则默认，也可为 large 模式，仅在 onlyShowMode 模式下有效
@@ -56,7 +56,7 @@ export class GeneralSliderElement extends UpdatingElement {
   value: GeneralSliderProps["value"];
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required -️
    * @default false
    * @description 是否禁止滑动
@@ -67,7 +67,7 @@ export class GeneralSliderElement extends UpdatingElement {
   disabled: boolean;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required -️
    * @default false
    * @description 是否只能拖拽到刻度上
@@ -78,7 +78,7 @@ export class GeneralSliderElement extends UpdatingElement {
   dots: boolean;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required -️
    * @default 0
    * @description 滑动条的最小值
@@ -89,7 +89,7 @@ export class GeneralSliderElement extends UpdatingElement {
   min = 0;
 
   /**
-   * @kind `number`
+   * @kind number
    * @required -️
    * @default 100
    * @description 滑动条的最大值
@@ -111,7 +111,7 @@ export class GeneralSliderElement extends UpdatingElement {
   marks: GeneralSliderProps["marks"];
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required -️
    * @default false
    * @description 是否显示双滑块模式，双滑块模式时，value 的格式为 `[number, number]` 分别代表所选择的起始值和终点值
@@ -133,7 +133,7 @@ export class GeneralSliderElement extends UpdatingElement {
   step: GeneralSliderProps["step"];
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required -️
    * @default true
    * @description marks 不为空对象时有效，值为 true 时表示值为包含关系，false 表示并列

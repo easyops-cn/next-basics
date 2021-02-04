@@ -68,21 +68,21 @@ export class TreeSelectElement extends FormItemElement {
    */
   @property({ attribute: false }) treeData: DataNode[];
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 显示 checkbox
    */
   @property({ type: Boolean }) treeCheckable: boolean;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 显示清除按钮
    */
   @property({ type: Boolean }) allowClear: boolean;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否禁用
@@ -96,7 +96,7 @@ export class TreeSelectElement extends FormItemElement {
    */
   @property({ attribute: false }) inputBoxStyle: React.CSSProperties;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `true`
    * @description 下拉菜单和选择器同宽。默认将设置 `min-width`
@@ -110,35 +110,35 @@ export class TreeSelectElement extends FormItemElement {
    */
   @property({ attribute: false }) dropdownStyle: React.CSSProperties;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 单选：`false`，多选：`true`（当设置 `treeCheckable` 时自动变为 `true`）
    */
   @property({ type: Boolean }) multiple: boolean;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 选择框默认文字
    */
   @property() placeholder: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 搜索框默认文字
    */
   @property() searchPlaceholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否支持搜索框
    */
   @property({ type: Boolean }) showSearch: boolean;
   /**
-   * @kind `boolean` | `SimpleModeConfig`
+   * @kind boolean | `SimpleModeConfig`
    * @required false
    * @default -
    * @description 使用简单格式的 treeData，具体设置参考可设置的类型 (此时 treeData 应变为这样的数据结构: [{id:1, pId:0, value:'1', title:"test1",...},...], pId 是父节点的 id)
@@ -147,14 +147,14 @@ export class TreeSelectElement extends FormItemElement {
     | boolean
     | SimpleModeConfig;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `'value'`
    * @description 输入项过滤对应的 treeNode 属性
    */
   @property({ attribute: false }) treeNodeFilterProp: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default `'title'`
    * @description 作为显示的 treeNode 属性

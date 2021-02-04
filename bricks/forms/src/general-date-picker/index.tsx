@@ -28,35 +28,35 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class GeneralDatePickerElement extends FormItemElement {
   /**
-   * @kind `string`
+   * @kind string
    * @required true
    * @default -
    * @description 日期选择框字段名
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind `string`
+   * @kind stringg
    * @required false
    * @default -
    * @description 日期选择框字段说明
    */
   @property({ attribute: false }) label: string;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 日期选择框占位说明
    */
   @property({ attribute: false }) placeholder: string;
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
   /**
-   * @kind `string`
+   * @kind string
    * @required false
    * @default -
    * @description 日期选择框初始值
@@ -80,7 +80,7 @@ export class GeneralDatePickerElement extends FormItemElement {
   @property({ attribute: false }) message: Record<string, string>;
 
   /**
-   * @kind `boolean`
+   * @kind boolean
    * @required false
    * @default `false`
    * @description 是否显示时间, 当设为 `true` 时, 请同时设置 `format` 为 `YYYY-MM-DD HH:mm:ss` 使其也显示具体时，分，秒 的时间
