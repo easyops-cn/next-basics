@@ -11,6 +11,7 @@ exports[`BrickLink should work 1`] = `
   transitionName="zoom-big-fast"
 >
   <a
+    className=""
     href="/url"
   >
     aaa
@@ -29,6 +30,7 @@ exports[`BrickLink should work 2`] = `
   transitionName="zoom-big-fast"
 >
   <Link
+    className=""
     to="/url"
   >
     aaa
@@ -39,6 +41,7 @@ exports[`BrickLink should work 2`] = `
 exports[`BrickLink target="_blank" should have external-link icon 1`] = `
 <Fragment>
   <Link
+    className=""
     target="_blank"
     to="/url"
   >

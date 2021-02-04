@@ -4,6 +4,7 @@ import { Link, LinkProps, GeneralIcon } from "@next-libs/basic-components";
 import cssStyle from "./style.module.css";
 import { isEmpty } from "lodash";
 import { MenuIcon } from "@next-core/brick-types";
+import classNames from "classnames";
 
 export interface BrickLinkProps extends Pick<LinkProps, "replace" | "target"> {
   native?: boolean;
@@ -15,10 +16,19 @@ export interface BrickLinkProps extends Pick<LinkProps, "replace" | "target"> {
   handleClick?: () => void;
   notToJumpWhenEmpty?: boolean;
   icon?: MenuIcon;
+  type?: "link" | "text";
 }
 
 export function BrickLink(props: BrickLinkProps): React.ReactElement {
-  const { native = false, label, url, href, tooltip, ...linkProps } = props;
+  const {
+    native = false,
+    label,
+    url,
+    href,
+    tooltip,
+    type,
+    ...linkProps
+  } = props;
   if (native) {
     // eslint-disable-next-line no-console
     console.warn(
@@ -40,21 +50,27 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
       </span>
     );
   } else {
+    const commonProps = {
+      onClick: props.handleClick,
+      className: classNames({
+        [cssStyle.textLink]: type === "text",
+      }),
+    };
     if (props.notToJumpWhenEmpty && isEmpty(url)) {
       link = (
-        <a onClick={props.handleClick}>
+        <a {...commonProps}>
           {icon}
           {label}
         </a>
       );
     } else {
       link = native ? (
-        <a href={url} {...linkProps} onClick={props.handleClick}>
+        <a href={url} {...linkProps} {...commonProps}>
           {icon}
           {label}
         </a>
       ) : (
-        <Link to={url} href={href} {...linkProps} onClick={props.handleClick}>
+        <Link to={url} href={href} {...linkProps} {...commonProps}>
           {icon}
           {label}
         </Link>

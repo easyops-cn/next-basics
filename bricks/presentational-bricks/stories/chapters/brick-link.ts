@@ -58,6 +58,18 @@ export const BrickLinkStory: Story = {
         tooltip: "提示",
       },
     },
+    {
+      brick: "presentational-bricks.brick-link",
+      description: {
+        title: '文本链接，`type` 为 "text"',
+        message: "适用场景：不希望链接过于突出的情况下使用。",
+      },
+      properties: {
+        label: "查看",
+        type: "text",
+        url: "/",
+      },
+    },
   ],
   previewColumns: 2,
 };

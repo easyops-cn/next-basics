@@ -25,3 +25,14 @@ presentational-bricks\.brick-link {
   color: #bfbfbf;
   cursor: not-allowed;
 }
+
+.textLink {
+  color: var(--text-color-default);
+  &:hover,
+  &:focus,
+  &.active,
+  &:active {
+    color: var(--text-color-default);
+    text-decoration: underline;
+  }
+}
