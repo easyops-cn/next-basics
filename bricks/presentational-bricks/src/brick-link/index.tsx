@@ -20,6 +20,7 @@ import { MenuIcon } from "@next-core/brick-types";
  * @author lynette
  * @slots
  * @history
+ * 1.169.0:新增属性`type`
  * 1.78.0:新增属性`detail`
  * 1.73.0:新增属性`disabled`,`tooltip`,`notToJumpWhenEmpty`，新增事件`link.click`
  * 1.89.11:使用 `dataSource` 代替之前 `detail`
@@ -83,6 +84,16 @@ export class BrickLinkElement extends UpdatingElement {
     attribute: false,
   })
   detail: any;
+
+  /**
+   * @default "link"
+   * @required false
+   * @description 链接类型：默认链接 - link 和 文本链接 - text
+   */
+  @property({
+    attribute: false,
+  })
+  type: "link" | "text" = "link";
 
   /**
    * @kind [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
@@ -209,6 +220,7 @@ export class BrickLinkElement extends UpdatingElement {
             tooltip={this.tooltip}
             notToJumpWhenEmpty={this.notToJumpWhenEmpty}
             icon={this.icon}
+            type={this.type}
           />
         </BrickWrapper>,
         this

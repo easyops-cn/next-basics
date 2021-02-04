@@ -32,4 +32,11 @@ describe("BrickLink", () => {
     expect(wrapper.find("Link").length).toBe(0);
     expect(wrapper.find("span").text()).toBe("aaa");
   });
+
+  it("should work when type is text", () => {
+    const wrapper = shallow<BrickLinkProps>(
+      <BrickLink label="aaa" url="/url" type="text" />
+    );
+    expect(wrapper.find(".textLink").length).toBe(1);
+  });
 });
