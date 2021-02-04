@@ -31,7 +31,7 @@ import {
   find,
   pull,
   filter,
-  reject,
+  flatten,
 } from "lodash";
 import { TablePaginationConfig, TableProps } from "antd/lib/table";
 import { TableRowSelection, SorterResult } from "antd/lib/table/interface";
@@ -576,7 +576,7 @@ export class BrickTableElement extends UpdatingElement {
   })
   defaultSelectAll: boolean;
 
-  private _disabledChildrenKeys: string[] = [];
+  private _disabledChildrenKeys: React.Key[] = [];
 
   /**
    * @kind string
@@ -880,35 +880,60 @@ export class BrickTableElement extends UpdatingElement {
   };
 
   // istanbul ignore next
-  private _handleSelectAll = (selected, selectedRows, changeRows) => {
+  private _handleSelectAll = (
+    selected: boolean,
+    selectedRows: Record<string, any>[],
+    changeRows: Record<string, any>[]
+  ): void => {
     this._isInSelect = true;
-    this._selectedRows = selectedRows;
     const rowKey =
       this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
-    if (selected) {
-      forEach(this._dataSource, (item) => {
-        const allChildren = this._getSelectedRowsWithChildren(item);
-        this._disabledChildrenKeys = uniq([
-          ...this._disabledChildrenKeys,
-          ...map(allChildren, rowKey),
-        ]);
-      });
-      this.selectedRowKeys = map(this._selectedRows, rowKey);
+    if (this.selectAllChildren) {
+      const allParentKeys = map(this._dataSource, rowKey);
+      const changedParentRows = changeRows.filter((v) =>
+        allParentKeys.includes(v[rowKey])
+      );
+      const toChangedChildrenKeys = flatten(
+        map(changedParentRows, (r) =>
+          map(this._getSelectedRowsWithChildren(r), (cr) => cr[rowKey])
+        )
+      );
+      if (selected) {
+        this._selectedRows = selectedRows;
+        this._disabledChildrenKeys = uniq(
+          this._disabledChildrenKeys.concat(toChangedChildrenKeys)
+        );
+      } else {
+        // disabled children in changeRows should be removed
+        const realSelectedRows = selectedRows.filter(
+          (v: Record<string, any>) =>
+            !(
+              this._disabledChildrenKeys.includes(v[rowKey]) &&
+              toChangedChildrenKeys.includes(v[rowKey])
+            )
+        );
+        this._selectedRows = realSelectedRows;
+        this._disabledChildrenKeys = this._disabledChildrenKeys.filter(
+          (v) => !toChangedChildrenKeys.includes(v)
+        );
+      }
     } else {
-      this._disabledChildrenKeys = [];
-      this.selectedRowKeys = [];
+      this._selectedRows = selectedRows;
     }
+    this.selectedRowKeys = map(this._selectedRows, rowKey);
     if (this.storeCheckedByUrl && !!rowKey) {
       this._updateUrlChecked(map(changeRows, rowKey), selected);
     }
-    this._handleRowSelectChange(this.selectedRowKeys, selectedRows);
+    this._handleRowSelectChange(this.selectedRowKeys, this._selectedRows);
   };
+
   private _getCheckedFromUrl = () => {
     const history = getHistory();
     const urlSearchParams = new URLSearchParams(history.location.search);
     const checked = urlSearchParams.get("checked");
     return isEmpty(checked) ? [] : checked.split(",");
   };
+
   private _updateUrlChecked = (options: any[], checked) => {
     const history = getHistory();
     let checkedOptions: string[] = this._getCheckedFromUrl();
