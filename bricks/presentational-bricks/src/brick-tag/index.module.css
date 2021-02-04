@@ -35,7 +35,7 @@
   }
 
   .grayTag {
-    color: var(--text-color-disabled);
+    color: var(--text-color-secondary);
     background-color: var(--theme-gray-background) !important;
   }
 
