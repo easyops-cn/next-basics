@@ -7,6 +7,10 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
         ref: "addCmdbObjectAttrForm",
         refProperty: "values",
       },
+      submitBtnHidden: {
+        ref: "submitButton",
+        refProperty: "hidden",
+      },
       attrIdInputDisabled: {
         ref: "attrIdInput",
         refProperty: "disabled",
@@ -44,7 +48,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               ref: "attrIdInput",
               properties: {
                 name: "id",
-                label: "ID",
+                label: "属性ID",
                 required: true,
                 pattern: "^[a-zA-Z][a-zA-Z_0-9]{0,31}$",
                 message: {
@@ -91,7 +95,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               brick: "forms.general-checkbox",
               properties: {
                 name: "attrOptions",
-                label: "属性",
+                label: "性质",
                 options: [
                   {
                     label: "必填",
@@ -110,6 +114,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
             },
             {
               brick: "forms.general-buttons",
+              ref: "submitButton",
               properties: {
                 id: "saveBtn",
                 submitText: "保存",
