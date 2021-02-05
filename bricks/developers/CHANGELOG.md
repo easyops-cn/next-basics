@@ -3,16 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.338.4 (2021-02-02)
+## [1.338.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.338.4...@next-bricks/developers@1.338.5) (2021-02-05)
 
+**Note:** Version bump only for package @next-bricks/developers
+
+## 1.338.4 (2021-02-02)
 
 ### Bug Fixes
 
-* use @next-sdk/* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
-
-
-
-
+- use @next-sdk/\* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
 
 ## [1.338.3](https://git.easyops.local/anyclouds/next-basics/compare/@bricks/developers@1.338.2...@bricks/developers@1.338.3) (2021-02-02)
 

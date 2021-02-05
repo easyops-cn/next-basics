@@ -3,33 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.103.1 (2021-02-02)
+## [1.103.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.103.1...@next-bricks/basic-bricks@1.103.2) (2021-02-05)
 
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+## 1.103.1 (2021-02-02)
 
 ### Bug Fixes
 
-* use @next-sdk/* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
-
-
-
-
+- use @next-sdk/\* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
 
 # [1.103.0](https://git.easyops.local/anyclouds/next-basics/compare/@bricks/basic-bricks@1.102.0...@bricks/basic-bricks@1.103.0) (2021-01-29)
 
-
 ### Bug Fixes
 
-* use @next-core/* and @next-dll/* ([d153603](https://git.easyops.local/anyclouds/next-basics/commits/d1536037b91654ceb15fa824ba5a307dcf273615))
-* use new libs ([bf8cd83](https://git.easyops.local/anyclouds/next-basics/commits/bf8cd83a65d3a24e3f4d026d29d64a370ecc6e12))
-
+- use @next-core/_ and @next-dll/_ ([d153603](https://git.easyops.local/anyclouds/next-basics/commits/d1536037b91654ceb15fa824ba5a307dcf273615))
+- use new libs ([bf8cd83](https://git.easyops.local/anyclouds/next-basics/commits/bf8cd83a65d3a24e3f4d026d29d64a370ecc6e12))
 
 ### Features
 
-* **app-bar:** add id ([f9bfe19](https://git.easyops.local/anyclouds/next-basics/commits/f9bfe19e287d99935de8c6587c42c2f6a2c203bc))
-
-
-
-
+- **app-bar:** add id ([f9bfe19](https://git.easyops.local/anyclouds/next-basics/commits/f9bfe19e287d99935de8c6587c42c2f6a2c203bc))
 
 # [1.102.0](https://git.easyops.local/anyclouds/next-basics/compare/@bricks/basic-bricks@1.101.1...@bricks/basic-bricks@1.102.0) (2021-01-22)
 

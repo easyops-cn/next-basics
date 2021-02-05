@@ -3,16 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.168.1 (2021-02-02)
-
+# [1.169.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.168.1...@next-bricks/presentational-bricks@1.169.0) (2021-02-05)
 
 ### Bug Fixes
 
-* use @next-sdk/* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
+- **brick-table:** selectAllChildren ([d42211d](https://github.com/easyops-cn/next-basics/commit/d42211dc30067860460898fd503a933e69346a37))
+- **brick-tag:** 修复灰色颜色不正确 ([86bcad8](https://github.com/easyops-cn/next-basics/commit/86bcad89391b03201d84b0d21dd5effebc55958a))
 
+### Features
 
+- **brick-link:** text type ([ec530dc](https://github.com/easyops-cn/next-basics/commit/ec530dc9680c7805dd6642ad7ae767cbef0e8974))
 
+## 1.168.1 (2021-02-02)
 
+### Bug Fixes
+
+- use @next-sdk/\* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
 
 # [1.168.0](https://git.easyops.local/anyclouds/next-basics/compare/@bricks/presentational-bricks@1.167.4...@bricks/presentational-bricks@1.168.0) (2021-01-30)
 

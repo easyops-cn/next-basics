@@ -3,16 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.150.1 (2021-02-02)
+## [1.150.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.150.1...@next-bricks/forms@1.150.2) (2021-02-05)
 
+**Note:** Version bump only for package @next-bricks/forms
+
+## 1.150.1 (2021-02-02)
 
 ### Bug Fixes
 
-* use @next-sdk/* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
-
-
-
-
+- use @next-sdk/\* ([fcd2345](https://github.com/easyops-cn/next-basics/commit/fcd2345e9d03b920290843c50c9a25faee32223e))
 
 # [1.150.0](https://git.easyops.local/anyclouds/next-basics/compare/@bricks/forms@1.149.0...@bricks/forms@1.150.0) (2021-02-01)
 
