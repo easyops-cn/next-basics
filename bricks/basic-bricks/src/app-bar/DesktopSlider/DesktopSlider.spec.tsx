@@ -6,6 +6,7 @@ import { Desktop } from "../Desktop/Desktop";
 import { MyDesktop } from "../MyDesktop/MyDesktop";
 import * as context from "../LaunchpadSettingsContext";
 import { act } from "react-dom/test-utils";
+import * as brickKit from "@next-core/brick-kit";
 
 jest.mock("../MyDesktop/MyDesktop");
 jest.mock("../LaunchpadService", () => {
@@ -29,6 +30,12 @@ jest.spyOn(context, "useLaunchpadSettingsContext").mockReturnValue({
   columns: 2,
   rows: 2,
 });
+const getFeatureFlags = jest
+  .fn()
+  .mockReturnValue({ "enable-my-desktop": true });
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getFeatureFlags,
+} as any);
 
 describe("Shallow FavoriteDesktopCell", () => {
   // Need the isolate modules cause `rememberedDesktopCursor`.

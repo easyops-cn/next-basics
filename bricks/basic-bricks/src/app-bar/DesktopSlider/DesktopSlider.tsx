@@ -19,9 +19,10 @@ interface DesktopSliderProps {
 }
 
 // Open launchpad with the previous visited desktop.
-const rememberedDesktopCursor = 0;
+let rememberedDesktopCursor = 0;
 
 export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
+  const enableMyDesktop = getRuntime().getFeatureFlags()["enable-my-desktop"];
   const [desktopCursor, setDesktopCursor] = React.useState(
     rememberedDesktopCursor
   );
@@ -31,8 +32,8 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   const slideDuration = 400;
 
   useEffect(() => {
-    launchpadService.setMaxVisitorLength(columns);
-  }, [columns]);
+    enableMyDesktop && launchpadService.setMaxVisitorLength(columns);
+  }, [columns, enableMyDesktop]);
   const mapAppsToDesktop = (apps: MicroApp[]): DesktopData => ({
     name: "-",
     items: apps.map((app) => ({
@@ -144,7 +145,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     if (lockRef.current) {
       return;
     }
-    // rememberedDesktopCursor = index;
+    !enableMyDesktop && (rememberedDesktopCursor = index);
     setDesktopCursor(index);
     // 一次滑动一个屏幕，锁定期间内，不能继续滑动屏幕。
     lockRef.current = true;
@@ -160,7 +161,8 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   }, [desktopCursor]);
 
   const slideRight = React.useCallback((): void => {
-    if (desktopCursor < desktops.length) {
+    const length = enableMyDesktop ? desktops.length : desktops.length + 1;
+    if (desktopCursor < length) {
       throttledSetDesktopCursor(desktopCursor + 1);
     }
   }, [desktopCursor, desktops.length]);
@@ -290,7 +292,9 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     }, 50);
   };
 
-  const sliderChildrenLength = desktops.length + 1;
+  const sliderChildrenLength = enableMyDesktop
+    ? desktops.length + 1
+    : desktops.length;
 
   return (
     <div
@@ -299,20 +303,22 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
       })}
     >
       <div className={styles.desktopSelector}>
-        {[{ name: "我的" }, ...desktops].map((desktop, index) => (
-          <React.Fragment key={index}>
-            {index !== 0 && <span className={styles.selectorSeparator} />}
-            <a
-              className={classNames(styles.desktopName, {
-                [styles.active]: desktopCursor === index,
-              })}
-              onClick={(e) => handleSlideTo(e, index)}
-              role="button"
-            >
-              {desktop.name}
-            </a>
-          </React.Fragment>
-        ))}
+        {[...(enableMyDesktop ? [{ name: "我的" }] : []), ...desktops].map(
+          (desktop, index) => (
+            <React.Fragment key={index}>
+              {index !== 0 && <span className={styles.selectorSeparator} />}
+              <a
+                className={classNames(styles.desktopName, {
+                  [styles.active]: desktopCursor === index,
+                })}
+                onClick={(e) => handleSlideTo(e, index)}
+                role="button"
+              >
+                {desktop.name}
+              </a>
+            </React.Fragment>
+          )
+        )}
       </div>
       <div className={styles.scrollContainer} onWheel={handleWheel}>
         <div
@@ -323,12 +329,12 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
             transition: `margin-left ${slideDuration}ms ease-out`,
           }}
         >
-          {
+          {enableMyDesktop && (
             <MyDesktop
-              desktopCount={columns}
+              desktopCount={desktops.length}
               arrowWidthPercent={props.arrowWidthPercent}
             />
-          }
+          )}
           {desktops.map((desktop, index) => (
             <Desktop
               key={index}
