@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.104.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.103.2...@next-bricks/basic-bricks@1.104.0) (2021-02-05)
+
+### Features
+
+- 我的桌面用`enable-my-desktop`开关打开 ([f7d1b85](https://github.com/easyops-cn/next-basics/commit/f7d1b852297c45e7c82440f7f50fde0b39702fd4))
+
 ## [1.103.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.103.1...@next-bricks/basic-bricks@1.103.2) (2021-02-05)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

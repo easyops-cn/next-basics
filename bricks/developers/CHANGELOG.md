@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.339.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.338.5...@next-bricks/developers@1.339.0) (2021-02-05)
+
+### Features
+
+- **forms:** forms.tpl-cmdb-object-attr-add 增加了 submitBtnHidden 属性 ([f89561e](https://github.com/easyops-cn/next-basics/commit/f89561ebcad3f2aa8c6a82534433b8bde4d9dc80))
+
 ## [1.338.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.338.4...@next-bricks/developers@1.338.5) (2021-02-05)
 
 **Note:** Version bump only for package @next-bricks/developers
