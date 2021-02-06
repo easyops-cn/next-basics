@@ -26,6 +26,12 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
         refEvent: "validate.error",
       },
     },
+    methods: {
+      setInitValue: {
+        ref: "addCmdbObjectAttrForm",
+        refMethod: "setInitValue",
+      },
+    },
   },
   bricks: [
     {
