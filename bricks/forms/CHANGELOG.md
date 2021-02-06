@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.151.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.0...@next-bricks/forms@1.151.1) (2021-02-06)
+
+### Bug Fixes
+
+- **forms:** forms.tpl-cmdb-object-attr-add,未暴露 setInitValue，导致编辑无法设置初始值 ([96cb93e](https://github.com/easyops-cn/next-basics/commit/96cb93ec49f0080ea7735a5bb464dcde231743ed))
+
 # [1.151.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.150.2...@next-bricks/forms@1.151.0) (2021-02-05)
 
 ### Features
