@@ -3,11 +3,8 @@
   "version": "1.169.2",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/presentational-bricks",
-  "license": "UNLICENSED",
-  "files": [
-    "dist",
-    "deploy"
-  ],
+  "license": "GPL-3.0",
+  "files": ["dist", "deploy"],
   "repository": {
     "type": "git",
     "url": "git@github.com:easyops-cn/next-basics.git"
@@ -27,7 +24,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@next-core/custom-antd-styles": "^1.6.2",
+    "@next-core/custom-antd-styles": "^1.6.3",
     "@next-libs/basic-components": "^2.0.0",
     "@next-libs/clipboard": "^2.0.0",
     "@next-libs/cmdb-utils": "^1.0.0",
@@ -51,7 +48,5 @@
     "regexpu-core": "^4.7.1"
   },
   "sideEffects": true,
-  "peerDependencies": {
-    "@next-dll/ace": "*"
-  }
+  "peerDependencies": { "@next-dll/ace": "*" }
 }

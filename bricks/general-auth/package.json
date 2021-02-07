@@ -3,11 +3,8 @@
   "version": "1.4.11",
   "description": "A brick package for general auth",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/general-auth",
-  "license": "UNLICENSED",
-  "files": [
-    "dist",
-    "deploy"
-  ],
+  "license": "GPL-3.0",
+  "files": ["dist", "deploy"],
   "repository": {
     "type": "git",
     "url": "git@github.com:easyops-cn/next-basics.git"
@@ -19,8 +16,6 @@
     "test": "cross-env NODE_ENV='test' jest",
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
-  "devDependencies": {
-    "@next-sdk/auth-sdk": "^1.0.0"
-  },
+  "devDependencies": { "@next-sdk/auth-sdk": "^1.0.0" },
   "sideEffects": true
 }

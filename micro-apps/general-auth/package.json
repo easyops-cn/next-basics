@@ -3,12 +3,8 @@
   "version": "1.0.8",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/micro-apps/general-auth",
-  "license": "UNLICENSED",
-  "files": [
-    "storyboard.json",
-    "deploy",
-    "icons"
-  ],
+  "license": "GPL-3.0",
+  "files": ["storyboard.json", "deploy", "icons"],
   "repository": {
     "type": "git",
     "url": "git@github.com:easyops-cn/next-basics.git"
