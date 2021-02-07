@@ -33,8 +33,10 @@ interface ObjectAttrStrProps {
 }
 
 export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
+  props.value.mode = props.value.mode || "default";
+
   const [popoverVisible, setPopoverVisible] = React.useState(false);
-  const [startValue, setStartValue] = React.useState(1);
+
   const [value, setValue] = React.useState<Partial<StrValueType>>({
     mode: "default",
     default_type: "value",
@@ -43,6 +45,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     prefix: "",
     default: "",
   });
+  const [startValue, setStartValue] = React.useState(1);
 
   React.useEffect(() => {
     !isNil(props.value) && setValue(props.value);
@@ -68,21 +71,27 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   const handleStrDefaultTypeChange = (default_type: string) => {
     if (default_type === "function") {
       handleValueChange({ ...value, default_type, default: "guid()" });
+    } else if (
+      value.default_type !== default_type &&
+      ["series-number", "auto-increment-id"].includes(default_type)
+    ) {
+      handleValueChange({
+        ...value,
+        default_type,
+        default: "",
+        start_value: 1,
+      });
     } else {
       handleValueChange({ ...value, default_type, default: "" });
     }
   };
 
   const handleVisibleChange = () => {
+    setStartValue(value.start_value);
     setPopoverVisible(true);
   };
   const hidePopover = () => {
-    setStartValue(1);
     setPopoverVisible(false);
-    handleValueChange({
-      ...value,
-      start_value: 1,
-    });
   };
 
   const handleStartValueChange = () => {
@@ -93,10 +102,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     setStartValue(e);
   };
 
-  const getPopoverContent = (detail: {
-    prefix: string;
-    series_number_length?: number;
-  }): React.ReactNode => (
+  const getPopoverContent = (): React.ReactNode => (
     <>
       <Row style={{ width: 200, marginBottom: 15 }} align="middle" type="flex">
         <Col span={6}>起始值</Col>
@@ -183,6 +189,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         <Row gutter={15}>
           <Col span={8}>
             <InputNumber
+              placeholder="流水号长度"
               value={value.series_number_length}
               onChange={(e) => {
                 handleValueChange({ ...value, series_number_length: e });
@@ -206,7 +213,6 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             <Popover
               content={getPopoverContent({
                 prefix: value.prefix,
-                series_number_length: value.series_number_length,
               })}
               trigger="click"
               visible={popoverVisible}

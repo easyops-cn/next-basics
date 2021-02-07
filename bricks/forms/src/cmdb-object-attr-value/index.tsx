@@ -185,7 +185,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
   ): void => {
     try {
       if (
-        this.hasValue(value) &&
+        !isNil(value) &&
         value.type === "str" &&
         value.default_type === "series-number"
       ) {
