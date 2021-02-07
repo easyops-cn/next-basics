@@ -1,0 +1,125 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import {
+  BrickWrapper,
+  UpdatingElement,
+  property,
+  method,
+  event,
+  EventEmitter,
+} from "@next-core/brick-kit";
+import {
+  VisualPropertyForm,
+  VisualPropertyFormProps,
+  visualFormUtils,
+} from "./VisualPropertyForm";
+import { processFormValue } from "./processor";
+
+/**
+ * @id brick-visualization.visual-property-form
+ * @author jiangzhefeng
+ * @history
+ * 1.x.0: 新增构件 `brick-visualization.visual-property-form`
+ * @docKind brick
+ * @noInheritDoc
+ */
+export class VisualPropertyFormElement extends UpdatingElement {
+  private _formUtils = React.createRef<visualFormUtils>();
+  /**
+   * @kind PropertyType[]
+   * @required true
+   * @default -
+   * @description 构件属性类型列表
+   */
+  @property({
+    attribute: false,
+  })
+  propertyTypeList: VisualPropertyFormProps["propertyTypeList"];
+
+  /**
+   * @kind {normal?: MenuIcon, advanced?: MenuIcon}
+   * @required true
+   * @default -
+   * @description 切换模式的按钮图标, normal 代表正常模式， advanced 代表高级模式
+   */
+  @property({
+    attribute: false,
+  })
+  labelIcon: VisualPropertyFormProps["labelIcon"];
+
+  /**
+   * @kind Record<string, any>
+   * @required true
+   * @default -
+   * @description 构件的属性值
+   */
+  @property({
+    attribute: false,
+  })
+  brickProperties: VisualPropertyFormProps["brickProperties"];
+
+  /**
+   * @description 表单验证成功时触发
+   */
+  @event({ type: "validate.success" }) successEvent: EventEmitter<
+    Record<string, any>
+  >;
+
+  /**
+   *
+   * @param object
+   * @description 触发表单校验
+   */
+  @method()
+  async validate(): Promise<any> {
+    try {
+      const values = await this._formUtils.current.validateFields();
+      this.successEvent.emit(processFormValue(values));
+    } catch (errInfo) {
+      // eslint-disable-next-line no-empty
+    }
+  }
+
+  @method()
+  resetFields(): void {
+    this._formUtils.current.resetPropertyFields(
+      this.propertyTypeList,
+      this.brickProperties
+    );
+  }
+
+  connectedCallback(): void {
+    // Don't override user's style settings.
+    // istanbul ignore else
+    if (!this.style.display) {
+      this.style.display = "block";
+    }
+    this._render();
+  }
+
+  disconnectedCallback(): void {
+    ReactDOM.unmountComponentAtNode(this);
+  }
+
+  protected _render(): void {
+    // istanbul ignore else
+    if (this.isConnected) {
+      ReactDOM.render(
+        <BrickWrapper>
+          <VisualPropertyForm
+            ref={this._formUtils}
+            labelIcon={this.labelIcon}
+            propertyTypeList={this.propertyTypeList}
+            brickProperties={this.brickProperties}
+          />
+        </BrickWrapper>,
+        this
+      );
+    }
+  }
+}
+
+customElements.define(
+  "brick-visualization.visual-property-form",
+  VisualPropertyFormElement
+);
