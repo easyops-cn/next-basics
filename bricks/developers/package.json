@@ -3,11 +3,8 @@
   "version": "1.339.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/developers",
-  "license": "UNLICENSED",
-  "files": [
-    "dist",
-    "deploy"
-  ],
+  "license": "GPL-3.0",
+  "files": ["dist", "deploy"],
   "repository": {
     "type": "git",
     "url": "git@github.com:easyops-cn/next-basics.git"
@@ -28,7 +25,5 @@
     "typedoc": "^0.20.20"
   },
   "sideEffects": true,
-  "peerDependencies": {
-    "@next-dll/ace": "*"
-  }
+  "peerDependencies": { "@next-dll/ace": "*" }
 }

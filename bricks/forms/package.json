@@ -3,11 +3,8 @@
   "version": "1.151.1",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/forms",
-  "license": "UNLICENSED",
-  "files": [
-    "dist",
-    "deploy"
-  ],
+  "license": "GPL-3.0",
+  "files": ["dist", "deploy"],
   "repository": {
     "type": "git",
     "url": "git@github.com:easyops-cn/next-basics.git"

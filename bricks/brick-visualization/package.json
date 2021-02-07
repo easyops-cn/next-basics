@@ -3,12 +3,8 @@
   "version": "0.0.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/brick-visualization",
-  "license": "UNLICENSED",
-  "files": [
-    "dist",
-    "deploy",
-    "version.ini"
-  ],
+  "license": "GPL-3.0",
+  "files": ["dist", "deploy", "version.ini"],
   "scripts": {
     "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
     "build": "cross-env NODE_ENV='production' webpack --config webpack.config.js",
@@ -24,7 +20,5 @@
     "@next-libs/basic-components": "^2.0.0",
     "@next-libs/editor-components": "^1.0.0"
   },
-  "peerDependencies": {
-    "@next-dll/ace": "*"
-  }
+  "peerDependencies": { "@next-dll/ace": "*" }
 }
