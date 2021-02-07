@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@next-core/brick-icons": "^2.7.3",
-    "@next-core/custom-antd-styles": "^1.6.2",
+    "@next-core/custom-antd-styles": "^1.6.3",
     "@next-libs/basic-components": "^2.0.0",
     "@next-libs/storage": "^1.0.0",
     "@next-sdk/user-service-sdk": "^1.0.0",
