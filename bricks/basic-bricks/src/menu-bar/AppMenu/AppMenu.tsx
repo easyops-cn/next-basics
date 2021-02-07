@@ -81,7 +81,13 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
   }, [app, location.pathname, showRelatedApps]);
 
   if (!menu) {
-    return null;
+    return (
+      <div
+        className={classNames(styles.appMenu, {
+          [styles.collapsed]: collapsed,
+        })}
+      />
+    );
   }
 
   return (
@@ -99,7 +105,7 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
         />
       ))}
       <div className={styles.menuGroup}>
-        {menu.title && (
+        {menu?.title && (
           <MenuTooltip collapsed={collapsed} title={menu.title}>
             {menu.link ? (
               <Link to={menu.link} className={styles.menuTitleLink}>
