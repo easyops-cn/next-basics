@@ -2370,7 +2370,7 @@
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 
-"@next-libs/clipboard@^2.0.0":
+"@next-libs/clipboard@^2.0.0", "@next-libs/clipboard@^2.0.3":
   version "2.0.3"
   resolved "https://registry.npm.taobao.org/@next-libs/clipboard/download/@next-libs/clipboard-2.0.3.tgz#99d362073983ec144ce6a22492922777975c81e5"
   integrity sha1-mdNiBzmD7BRM5qIkkpInd5dcgeU=
@@ -2411,6 +2411,18 @@
   version "1.0.3"
   resolved "https://registry.npm.taobao.org/@next-libs/datetime/download/@next-libs/datetime-1.0.3.tgz#8923065f0850f4f18ac72b70d92126aaba601af4"
   integrity sha1-iSMGXwhQ9PGKxytw2SEmqrpgGvQ=
+
+"@next-libs/editor-components@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/@next-libs/editor-components/download/@next-libs/editor-components-1.0.1.tgz#36b36bad4d933eaecf38b98a3fd325b77c10bcf8"
+  integrity sha1-NrNrrU2TPq7POLmKP9Mlt3wQvPg=
+  dependencies:
+    "@next-libs/clipboard" "^2.0.3"
+    ajv "^6.12.6"
+    classnames "^2.2.6"
+    file-saver "^2.0.5"
+    prismjs "^1.23.0"
+    resize-observer-polyfill "^1.5.1"
 
 "@next-libs/forms@^2.0.0":
   version "2.0.3"
@@ -3726,7 +3738,7 @@ ajv-keywords@^3.1.0, ajv-keywords@^3.4.1, ajv-keywords@^3.5.2:
   resolved "https://registry.npm.taobao.org/ajv-keywords/download/ajv-keywords-3.5.2.tgz?cache=0&sync_timestamp=1608059984992&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fajv-keywords%2Fdownload%2Fajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
   integrity sha1-MfKdpatuANHC0yms97WSlhTVAU0=
 
-ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
+ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5, ajv@^6.12.6:
   version "6.12.6"
   resolved "https://registry.npm.taobao.org/ajv/download/ajv-6.12.6.tgz?cache=0&sync_timestamp=1609583919173&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fajv%2Fdownload%2Fajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
   integrity sha1-uvWmLoArB9l3A0WG+MO69a3ybfQ=
