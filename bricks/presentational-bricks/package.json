@@ -1,10 +1,13 @@
 {
   "name": "@next-bricks/presentational-bricks",
-  "version": "1.169.2",
+  "version": "1.169.3",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/presentational-bricks",
   "license": "GPL-3.0",
-  "files": ["dist", "deploy"],
+  "files": [
+    "dist",
+    "deploy"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:easyops-cn/next-basics.git"
@@ -48,5 +51,7 @@
     "regexpu-core": "^4.7.1"
   },
   "sideEffects": true,
-  "peerDependencies": { "@next-dll/ace": "*" }
+  "peerDependencies": {
+    "@next-dll/ace": "*"
+  }
 }

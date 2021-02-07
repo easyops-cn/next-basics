@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.151.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.1...@next-bricks/forms@1.151.2) (2021-02-07)
+
+
+### Bug Fixes
+
+* **object-attr:** 修复模型属性构件，多行字符串和markdown输入框不对齐的问题 ([d8399fa](https://github.com/easyops-cn/next-basics/commit/d8399fa40c0baa3ac4192502425a4d0e9ad059be))
+* **object-attr:** 修复流水线号的bug ([a2de3e8](https://github.com/easyops-cn/next-basics/commit/a2de3e8aced2fdd9f03ff52b7abd3d9971b3aeac))
+
+
+
+
+
 ## [1.151.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.0...@next-bricks/forms@1.151.1) (2021-02-06)
 
 ### Bug Fixes
