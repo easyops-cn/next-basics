@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Menu, Dropdown, Divider, Avatar } from "antd";
 import { AvatarProps } from "antd/lib/avatar";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
@@ -78,7 +78,7 @@ export function AppBar({
   if (avatarSrc) {
     avatarProps.src = avatarSrc;
   } else {
-    avatarProps.icon = "user";
+    avatarProps.icon = <UserOutlined />;
     avatarProps.style.backgroundColor = "var(--color-brand)";
   }
 

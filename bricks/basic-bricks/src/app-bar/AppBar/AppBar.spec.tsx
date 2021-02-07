@@ -7,6 +7,7 @@ import { UserAdminApi } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { AppBar } from "./AppBar";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
+import { UserOutlined } from "@ant-design/icons";
 
 jest.mock("@next-sdk/user-service-sdk");
 jest.mock("../LaunchpadButton/LaunchpadButton");
@@ -54,10 +55,12 @@ describe("AppBar", () => {
 
   it("should render default avatar", () => {
     const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
-    expect(wrapper.find(Avatar).props()).toMatchObject({
-      size: "small",
-      icon: "user",
-    });
+    expect(wrapper.find(Avatar).prop("size")).toBe("small");
+    function Icon(): React.ReactElement {
+      return wrapper.find(Avatar).prop("icon") as React.ReactElement;
+    }
+    const icon = shallow(<Icon />);
+    expect(icon.find(UserOutlined).length).toBe(1);
   });
 
   it("should render user avatar", async () => {

@@ -62,7 +62,7 @@ describe("AppMenu", () => {
 
   it("should render nothing if menu is falsy", () => {
     const wrapper = shallow(<AppMenu menu={undefined} />);
-    expect(wrapper.html()).toBe(null);
+    expect(wrapper.text()).toBe("");
   });
 
   it("getRelatedAppsByPath should be ok", () => {
