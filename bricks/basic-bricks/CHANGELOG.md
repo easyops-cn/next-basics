@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.104.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.104.0...@next-bricks/basic-bricks@1.104.1) (2021-02-07)
+
+
+### Bug Fixes
+
+* fix default avatar icon ([f176060](https://github.com/easyops-cn/next-basics/commit/f17606038a97692cb39d90e7a07800b7b255bf29))
+* fix menu bar layout when there is no menu ([0eb3957](https://github.com/easyops-cn/next-basics/commit/0eb395714684445efb306e488f23f9944c6891a1))
+
+
+
+
+
 # [1.104.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.103.2...@next-bricks/basic-bricks@1.104.0) (2021-02-05)
 
 ### Features
