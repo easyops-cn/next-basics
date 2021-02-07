@@ -259,7 +259,15 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
                 <Option value="series-number">流水号</Option>
               </Select>
             </Col>
-            <Col span={value.default_type === "series-number" ? 18 : 12}>
+            <Col
+              span={value.default_type === "series-number" ? 18 : 12}
+              style={{
+                marginTop:
+                  value.mode === "multiple-lines" || value.mode === "markdown"
+                    ? "-5px"
+                    : "0px",
+              }}
+            >
               {getDefaultControl()}
             </Col>
           </Row>
