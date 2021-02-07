@@ -66,6 +66,12 @@ export class VisualPropertyFormElement extends UpdatingElement {
   >;
 
   /**
+   * @description 表单字段值更新时触发
+   */
+  @event({ type: "values.change" }) valuesChangeEvent: EventEmitter<
+    Record<string, any>
+  >;
+  /**
    *
    * @param object
    * @description 触发表单校验
@@ -87,6 +93,13 @@ export class VisualPropertyFormElement extends UpdatingElement {
       this.brickProperties
     );
   }
+
+  private _handleValuesChange = (changedValues: any, allValues: any) => {
+    this.valuesChangeEvent.emit({
+      changedValues,
+      allValues,
+    });
+  };
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -111,6 +124,7 @@ export class VisualPropertyFormElement extends UpdatingElement {
             labelIcon={this.labelIcon}
             propertyTypeList={this.propertyTypeList}
             brickProperties={this.brickProperties}
+            onValuesChange={this._handleValuesChange}
           />
         </BrickWrapper>,
         this

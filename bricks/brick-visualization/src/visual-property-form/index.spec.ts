@@ -40,6 +40,13 @@ describe("brick-visualization.visual-property-form", () => {
       "validate.success"
     );
 
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.onValuesChange();
+    expect((sypOnDispatchEvent.mock.calls[1][0] as CustomEvent).type).toEqual(
+      "values.change"
+    );
+
     expect(spyOnRender).toBeCalled();
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();

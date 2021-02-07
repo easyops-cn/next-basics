@@ -5,7 +5,7 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import update from "immutability-helper";
 import { isNil } from "lodash";
 import styles from "./VisualPropertyForm.module.css";
-import { FormInstance } from "antd/lib/form";
+import { FormInstance, FormProps } from "antd/lib/form";
 import { CodeEditorFormItem } from "./CodeEditorFormItem";
 import { mergeProperties, calculateValue } from "./processor";
 import { OTHER_FORM_ITEM_FIELD } from "./constant";
@@ -50,6 +50,7 @@ export interface VisualPropertyFormProps {
     advanced?: MenuIcon;
   };
   brickProperties: BrickProperties;
+  onValuesChange?: FormProps["onValuesChange"];
 }
 
 export function LegacyVisualPropertyForm(
@@ -225,6 +226,7 @@ export function LegacyVisualPropertyForm(
       name="propertyForm"
       layout="vertical"
       form={form}
+      onValuesChange={props.onValuesChange}
       initialValues={calculateValue(propertyTypeList, brickProperties)}
     >
       {typeList?.map((item) => {
