@@ -66,6 +66,8 @@ describe("processor test", () => {
       const propertyList = [
         { name: "name", type: "string", description: "名称" },
         { name: "age", type: "number", description: "年龄" },
+        { name: "nickname", type: "string", description: "昵称" },
+        { name: "count", type: "number", description: "数量" },
       ];
 
       const brickProperties = {
@@ -77,6 +79,8 @@ describe("processor test", () => {
       const result = calculateValue(propertyList, brickProperties);
       expect(result).toEqual({
         age: 123,
+        count: undefined,
+        nickname: undefined,
         name: "lucy\n",
         others: "hobby: run\ncategory: student\n",
       });
@@ -86,6 +90,7 @@ describe("processor test", () => {
       const propertyList = [
         { name: "name", type: "string", description: "名称" },
         { name: "age", type: "number", description: "年龄" },
+        { name: "label", type: "LabelProps", description: "标签" },
       ];
 
       const brickProperties = {
@@ -99,7 +104,22 @@ describe("processor test", () => {
       expect(result).toEqual({
         age: 123,
         name: "lucy\n",
+        lable: undefined,
         others: "hot: true\nhobby: run\ncategory: <% CTX.category %>\n",
+      });
+
+      const brickProperties2 = {
+        name: "lucy",
+        age: 12,
+        label: "name",
+      };
+      const result2 = calculateValue(propertyList, brickProperties2);
+
+      expect(result2).toEqual({
+        name: "lucy\n",
+        age: 12,
+        label: "name\n",
+        others: "",
       });
     });
   });

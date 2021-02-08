@@ -58,30 +58,34 @@ export function calculateValue(
   propertyList: PropertyType[] = [],
   brickProperties: BrickProperties = {}
 ): Record<string, any> {
-  const processValue: Record<string, any> = {};
-
+  const othersValue: Record<string, any> = {};
   for (const [key, value] of Object.entries(brickProperties)) {
     const find = propertyList.find((item) => item.name === key);
     if (!find) {
-      if (!processValue[OTHER_FORM_ITEM_FIELD]) {
-        processValue[OTHER_FORM_ITEM_FIELD] = {};
-      }
-      processValue[OTHER_FORM_ITEM_FIELD][key] = value;
-    } else {
-      processValue[key] = value;
-      processValue[key] =
-        !supportBasicType.includes(find.type as string) ||
-        isTransferrableType(value)
-          ? yamlStringify(value)
-          : value;
+      othersValue[key] = value;
     }
   }
 
-  processValue[OTHER_FORM_ITEM_FIELD] = yamlStringify(
-    processValue[OTHER_FORM_ITEM_FIELD]
-  );
+  const processValue = propertyList.reduce((obj: any, item) => {
+    const v = brickProperties[item.name];
+    obj[item.name] = v;
 
-  return processValue;
+    if (
+      v !== undefined &&
+      (!supportBasicType.includes(item.type as string) ||
+        isTransferrableType(v))
+    ) {
+      obj[item.name] = yamlStringify(v);
+    }
+    return obj;
+  }, {});
+
+  return {
+    ...processValue,
+    [OTHER_FORM_ITEM_FIELD]: isEmpty(othersValue)
+      ? ""
+      : yamlStringify(othersValue),
+  };
 }
 
 export function processFormValue(values = {}): Record<string, any> {

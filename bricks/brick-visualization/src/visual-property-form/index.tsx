@@ -58,6 +58,11 @@ export class VisualPropertyFormElement extends UpdatingElement {
   })
   brickProperties: VisualPropertyFormProps["brickProperties"];
 
+  @property({
+    attribute: false,
+  })
+  brickInfo: VisualPropertyFormProps["brickInfo"];
+
   /**
    * @description 表单验证成功时触发
    */
@@ -124,6 +129,7 @@ export class VisualPropertyFormElement extends UpdatingElement {
             labelIcon={this.labelIcon}
             propertyTypeList={this.propertyTypeList}
             brickProperties={this.brickProperties}
+            brickInfo={this.brickInfo}
             onValuesChange={this._handleValuesChange}
           />
         </BrickWrapper>,

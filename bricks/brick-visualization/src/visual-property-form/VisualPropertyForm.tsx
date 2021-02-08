@@ -33,6 +33,8 @@ export interface PropertyType {
 export interface UnionPropertyType extends PropertyType {
   mode?: ItemModeType;
   value?: any;
+  jsonSchema?: Record<string, any>;
+  schemaRef?: string;
 }
 
 export type BrickProperties = Record<string, any>;
@@ -51,13 +53,16 @@ export interface VisualPropertyFormProps {
   };
   brickProperties: BrickProperties;
   onValuesChange?: FormProps["onValuesChange"];
+  brickInfo?: {
+    type: "brick" | "provider" | "template";
+  };
 }
 
 export function LegacyVisualPropertyForm(
   props: VisualPropertyFormProps,
   ref: React.Ref<visualFormUtils>
 ): React.ReactElement {
-  const { labelIcon, propertyTypeList, brickProperties } = props;
+  const { labelIcon, propertyTypeList, brickProperties, brickInfo } = props;
   const [form] = Form.useForm();
   const [typeList, setTypeList] = useState<UnionPropertyType[]>(
     mergeProperties(propertyTypeList, brickProperties)
@@ -130,6 +135,8 @@ export function LegacyVisualPropertyForm(
         name={item.name}
         label={hideIcon ? item.name : renderLabel(item)}
         required={item.required === Required.True}
+        jsonSchema={item?.jsonSchema}
+        schemaRef={item?.schemaRef}
         mode="brick_next_yaml"
       />
     );
@@ -234,7 +241,9 @@ export function LegacyVisualPropertyForm(
       })}
       <CodeEditorFormItem
         name={OTHER_FORM_ITEM_FIELD}
-        label="other properties"
+        label={
+          brickInfo?.type === "template" ? "other params" : "other properties"
+        }
         mode="brick_next_yaml"
       />
     </Form>
