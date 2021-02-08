@@ -99,7 +99,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     setPopoverVisible(false);
   };
   const handleNumberChange = (e: number) => {
-    setStartValue(e);
+    setStartValue(e ?? 1);
   };
 
   const getPopoverContent = (): React.ReactNode => (
@@ -108,6 +108,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         <Col span={6}>起始值</Col>
         <Col span={16}>
           <InputNumber
+            placeholder="默认为1"
             data-testid="start-value-input"
             style={{ width: "100%" }}
             value={startValue}
