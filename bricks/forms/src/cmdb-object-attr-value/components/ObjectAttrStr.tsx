@@ -13,7 +13,7 @@ import {
   InputNumber,
 } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import { isNil } from "lodash";
+import { isNil, isNumber } from "lodash";
 
 const Option = Select.Option;
 
@@ -99,7 +99,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     setPopoverVisible(false);
   };
   const handleNumberChange = (e: number) => {
-    setStartValue(e);
+    setStartValue(isNumber(e) && e >= 1 ? e : 1);
   };
 
   const getPopoverContent = (): React.ReactNode => (
@@ -108,6 +108,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         <Col span={6}>起始值</Col>
         <Col span={16}>
           <InputNumber
+            placeholder="默认为1"
             data-testid="start-value-input"
             style={{ width: "100%" }}
             value={startValue}
@@ -117,7 +118,9 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         </Col>
       </Row>
       <Row justify="end" type="flex">
-        <Button onClick={hidePopover}>取消</Button>
+        <Button data-testid="start-value-cancel" onClick={hidePopover}>
+          取消
+        </Button>
         <Button
           onClick={handleStartValueChange}
           type="primary"
@@ -141,7 +144,8 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
             }}
           />
         );
-      } else if (value.mode === "multiple-lines" || value.mode === "markdown") {
+      } else {
+        // value.mode === "multiple-lines" || value.mode === "markdown"
         return (
           <Input.TextArea
             rows={4}

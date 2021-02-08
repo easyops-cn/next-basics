@@ -37,7 +37,7 @@ describe("ObjectAttrStr", () => {
 
   it("should change regex", () => {
     const props = {
-      value: defaultValue,
+      value: { ...defaultValue, mode: "" },
       onChange: jest.fn(),
     };
     const wrapper = shallow(<ObjectAttrStr {...props} />);
@@ -68,6 +68,47 @@ describe("ObjectAttrStr", () => {
       ...defaultValue,
       default: "test",
       mode: "url",
+    });
+
+    wrapper.find("Row").at(1).children(0).invoke("onChange")({
+      target: { value: "markdown" },
+    });
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      default: "test",
+      mode: "markdown",
+    });
+
+    wrapper.find("Row").at(1).children(0).invoke("onChange")({
+      target: { value: "multiple-lines" },
+    });
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      default: "test",
+      mode: "multiple-lines",
+    });
+  });
+
+  it("should change mode to markdown", () => {
+    const props = {
+      value: defaultValue,
+      onChange: jest.fn(),
+    };
+    const wrapper = shallow(<ObjectAttrStr {...props} />);
+    wrapper.find("Row").at(1).children(0).invoke("onChange")({
+      target: { value: "markdown" },
+    });
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      mode: "markdown",
+    });
+    wrapper.find("Col").at(1).children(0).invoke("onChange")({
+      target: { value: "test" },
+    });
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      default: "test",
+      mode: "markdown",
     });
   });
 
@@ -111,6 +152,11 @@ describe("ObjectAttrStr", () => {
     expect(props.onChange).toBeCalledWith({
       ...defaultValue,
       default_type: "series-number",
+    });
+    wrapper.find(Select).at(0).invoke("onChange")("normal", null);
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      default_type: "normal",
     });
   });
 
@@ -189,5 +235,62 @@ describe("ObjectAttrStr", () => {
       start_value: 5,
       series_number_length: 1,
     });
+  });
+
+  it("should change start_value to 1(default value)", () => {
+    const props = {
+      value: {
+        mode: "default",
+        default_type: "auto-increment-id",
+        regex: "",
+        start_value: 5,
+        prefix: "",
+        series_number_length: 1,
+      },
+      onChange: jest.fn(),
+    };
+    const { getByText, queryByTestId } = render(<ObjectAttrStr {...props} />);
+    const popoverBtn = getByText("高级");
+    fireEvent.click(popoverBtn);
+    fireEvent.change(queryByTestId("start-value-input"), {
+      target: { value: null },
+    });
+    const confirmBtn = queryByTestId("start-value-confirm");
+
+    fireEvent.click(confirmBtn);
+
+    expect(props.onChange).toBeCalledWith({
+      regex: "",
+      mode: "default",
+      prefix: "",
+      default_type: "auto-increment-id",
+      start_value: 1,
+      series_number_length: 1,
+    });
+  });
+
+  it("should not hange start_value", () => {
+    const props = {
+      value: {
+        mode: "default",
+        default_type: "auto-increment-id",
+        regex: "",
+        start_value: 1,
+        prefix: "",
+        series_number_length: 1,
+      },
+      onChange: jest.fn(),
+    };
+    const { getByText, queryByTestId } = render(<ObjectAttrStr {...props} />);
+    const popoverBtn = getByText("高级");
+    fireEvent.click(popoverBtn);
+    fireEvent.change(queryByTestId("start-value-input"), {
+      target: { value: 5 },
+    });
+    const cancelButton = queryByTestId("start-value-cancel");
+
+    fireEvent.click(cancelButton);
+
+    expect(props.onChange).toBeCalledTimes(0);
   });
 });
