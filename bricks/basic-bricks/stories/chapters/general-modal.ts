@@ -291,5 +291,68 @@ export const generalModalStory: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "标题后自定义构件",
+      },
+      brick: "div",
+      slots: {
+        content: {
+          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              events: {
+                "general.button.click": {
+                  method: "open",
+                  target: "#title-extra",
+                },
+              },
+              properties: {
+                buttonName: "点击弹出模态框",
+              },
+            },
+            {
+              brick: "basic-bricks.general-modal",
+              properties: {
+                id: "title-extra",
+                modalTitle: "执行结果",
+                okText: "ok",
+                titleAlign: "left",
+              },
+              slots: {
+                content: {
+                  bricks: [
+                    {
+                      brick: "h3",
+                      properties: {
+                        textContent: "modal content",
+                      },
+                    },
+                  ],
+                  type: "bricks",
+                },
+                headerExtra: {
+                  bricks: [
+                    {
+                      brick: "presentational-bricks.brick-tag",
+                      properties: {
+                        color: "var(--bg-color-button-warning)",
+                        showCard: false,
+                        tagList: ["警告"],
+                        tagStyle: {
+                          marginLeft: "-4px",
+                        },
+                      },
+                    },
+                  ],
+                  type: "bricks",
+                },
+              },
+            },
+          ],
+          type: "bricks",
+        },
+      },
+    },
   ],
 };
