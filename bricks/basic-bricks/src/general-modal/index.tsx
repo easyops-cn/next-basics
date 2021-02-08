@@ -27,6 +27,7 @@ export interface OpenCloseOption {
  * @author ice
  * @slots
  * content:模态框里面的内容
+ * headerExtra:模态框头部标题后面的内容
  * @history
  * 1.26.0:新增 `modal.close` 事件
  * 1.34.0:新增 `width` 属性

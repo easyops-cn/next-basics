@@ -2,11 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import classnames from "classnames";
 import { Modal, Button } from "antd";
 import { ModalProps } from "antd/lib/modal";
-import { TextAlignProperty } from "csstype";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 
 const fullscreenTopOffset = 40;
+
+const titleAlignPropertyMap: Record<string, string> = {
+  start: "flex-start",
+  left: "flex-start",
+  center: "center",
+  right: "flex-end",
+  end: "flex-end",
+};
 
 interface GeneralModalProps {
   visible: boolean;
@@ -14,7 +21,7 @@ interface GeneralModalProps {
   modalTitle: string;
   hideCancelButton?: boolean;
   enableFooterSlot?: boolean;
-  titleAlign?: TextAlignProperty;
+  titleAlign?: string;
   titleIcon?: MenuIcon;
   fullscreen?: boolean;
   okDisabled?: boolean;
@@ -112,11 +119,20 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
       className={classnames({ wrapper: hideCancelButton })}
       title={
         modalTitle && (
-          <div style={{ textAlign: titleAlign }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: titleAlignPropertyMap[titleAlign],
+            }}
+          >
             {titleIcon && (
               <GeneralIcon icon={titleIcon} style={{ marginRight: 8 }} />
             )}
             {modalTitle}
+            <span className="headerExtra">
+              <slot id="headerExtra" name="headerExtra"></slot>
+            </span>
           </div>
         )
       }
