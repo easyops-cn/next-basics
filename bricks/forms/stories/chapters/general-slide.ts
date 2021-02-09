@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/general-slide.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const generalSlideStory: Story = {
   storyId: "forms.general-slide",
+  category: "form-input",
   type: "brick",
   author: "jo",
   text: {
@@ -255,8 +255,5 @@ const story: Story = {
       },
     },
   ],
-  doc,
   previewColumns: 2,
 };
-
-export default story;

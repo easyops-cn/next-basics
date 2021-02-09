@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/cmdb-object-attr-value.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const cmdbObjectAttrValueStory: Story = {
   storyId: "forms.cmdb-object-attr-value",
+  category: "form-input",
   type: "brick",
   author: "dophi",
   text: {
@@ -77,7 +77,4 @@ const story: Story = {
     },
   ],
   previewColumns: 2,
-  doc,
 };
-
-export default story;

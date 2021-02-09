@@ -1,9 +1,9 @@
-import { Story } from "../../../interfaces";
-import docMD from "../../../docs/forms/user-or-user-group-select.md";
+import { Story } from "@next-core/brick-types";
 
-export const story: Story = {
+export const userGroupSelectStory: Story = {
   storyId: "forms.user-or-user-group-select",
   type: "brick",
+  category: "form-input",
   author: "lynette",
   text: {
     en: "user-or-user-group-select",
@@ -153,7 +153,4 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
 };
-
-export default story;

@@ -1,38 +1,38 @@
-import { Story } from "../../../interfaces";
-import docMD from "../../../docs/forms/crontab-input.md";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const crontabInputStory: Story = {
   storyId: "forms.crontab-input",
+  category: "form-input",
   type: "brick",
   author: "jo",
   text: {
     en: "Crontab Of Input",
-    zh: "定时器任务的输入"
+    zh: "定时器任务的输入",
   },
   description: {
     en: "Crontab Of Form",
-    zh: "定时器任务表单项"
+    zh: "定时器任务表单项",
   },
   icon: {
     lib: "fa",
-    icon: "clock"
+    icon: "clock",
   },
   conf: {
     brick: "forms.general-form",
     properties: {
       values: {
-        crontab: "6 * * * *"
-      }
+        crontab: "6 * * * *",
+      },
     },
     events: {
       "validate.success": {
         action: "console.log",
-        args: ["${EVENT.type}", "${EVENT.detail}"]
+        args: ["${EVENT.type}", "${EVENT.detail}"],
       },
       "validate.error": {
         action: "console.warn",
-        args: ["${EVENT.type}", "${EVENT.detail}"]
-      }
+        args: ["${EVENT.type}", "${EVENT.detail}"],
+      },
     },
     slots: {
       items: {
@@ -42,35 +42,32 @@ const story: Story = {
             brick: "forms.crontab-input",
             properties: {
               name: "crontab",
-              label: "执行周期"
+              label: "执行周期",
             },
             events: {
               "crontab.change": {
-                action: "console.log"
-              }
-            }
+                action: "console.log",
+              },
+            },
           },
           {
             brick: "forms.general-buttons",
             properties: {
               showCancelButton: true,
               submitText: "提交",
-              cancelText: "取消"
+              cancelText: "取消",
             },
             events: {
               "submit.button.click": {
-                action: "console.log"
+                action: "console.log",
               },
               "cancel.button.click": {
-                action: "console.log"
-              }
-            }
-          }
-        ]
-      }
-    }
+                action: "console.log",
+              },
+            },
+          },
+        ],
+      },
+    },
   },
-  doc: docMD
 };
-
-export default story;

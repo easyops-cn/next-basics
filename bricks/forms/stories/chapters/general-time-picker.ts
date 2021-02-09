@@ -1,21 +1,21 @@
-import doc from "../../../docs/forms/general-time-picker.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const generalTimePickerStory: Story = {
   storyId: "forms.general-time-picker",
   type: "brick",
+  category: "form-input",
   author: "steve",
   text: {
     en: "General Time Picker",
-    zh: "普通时间选择框"
+    zh: "普通时间选择框",
   },
   description: {
     en: "",
-    zh: ""
+    zh: "",
   },
   icon: {
     lib: "fa",
-    icon: "clock"
+    icon: "clock",
   },
   conf: [
     {
@@ -23,42 +23,42 @@ const story: Story = {
       properties: {
         configProps: {
           format: "HH:mm",
-          minuteStep: 5
+          minuteStep: 5,
         },
         name: "time",
         label: "hello",
         placeholder: "when",
-        value: "09:14:30"
+        value: "09:14:30",
       },
       events: {
         "general.time.change": {
           action: "console.log",
-          args: ["time", "${EVENT.detail}"]
+          args: ["time", "${EVENT.detail}"],
         },
         "general.time.close": {
-          action: "console.log"
-        }
-      }
+          action: "console.log",
+        },
+      },
     },
     {
       brick: "forms.general-form",
       properties: {
         values: {
-          time: "14:30:00"
+          time: "14:30:00",
         },
         valueTypes: {
-          time: "moment|HH:mm:ss"
-        }
+          time: "moment|HH:mm:ss",
+        },
       },
       events: {
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.type}", "${EVENT.detail}"]
+          args: ["${EVENT.type}", "${EVENT.detail}"],
         },
         "validate.error": {
           action: "console.warn",
-          args: ["${EVENT.type}", "${EVENT.detail}"]
-        }
+          args: ["${EVENT.type}", "${EVENT.detail}"],
+        },
       },
       slots: {
         items: {
@@ -69,40 +69,37 @@ const story: Story = {
               properties: {
                 name: "time",
                 label: "hello",
-                placeholder: "when"
+                placeholder: "when",
               },
               events: {
                 "general.time.change": {
                   action: "console.log",
-                  args: ["time", "${EVENT.detail}"]
+                  args: ["time", "${EVENT.detail}"],
                 },
                 "general.time.close": {
-                  action: "console.log"
-                }
-              }
+                  action: "console.log",
+                },
+              },
             },
             {
               brick: "forms.general-buttons",
               properties: {
                 showCancelButton: true,
                 submitText: "提交",
-                cancelText: "取消"
+                cancelText: "取消",
               },
               events: {
                 "submit.button.click": {
-                  action: "console.log"
+                  action: "console.log",
                 },
                 "cancel.button.click": {
-                  action: "console.log"
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
+                  action: "console.log",
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   ],
-  doc
 };
-
-export default story;
