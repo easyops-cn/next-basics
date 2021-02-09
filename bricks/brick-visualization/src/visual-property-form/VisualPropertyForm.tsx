@@ -143,7 +143,12 @@ export function LegacyVisualPropertyForm(
         key={item.name}
         label={renderLabel(item)}
         name={item.name}
-        rules={[{ required: item.required === Required.True }]}
+        rules={[
+          {
+            required: item.required === Required.True,
+            message: `请输入${item.name}`,
+          },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -158,7 +163,12 @@ export function LegacyVisualPropertyForm(
         key={item.name}
         label={renderLabel(item)}
         name={item.name}
-        rules={[{ required: item.required === Required.True }]}
+        rules={[
+          {
+            required: item.required === Required.True,
+            message: `请输入${item.name}`,
+          },
+        ]}
       >
         <Radio.Group>
           <Radio value={true}>true</Radio>
@@ -178,7 +188,12 @@ export function LegacyVisualPropertyForm(
         key={item.name}
         label={renderLabel(item)}
         name={item.name}
-        rules={[{ required: item.required === Required.True }]}
+        rules={[
+          {
+            required: item.required === Required.True,
+            message: `请输入${item.name}`,
+          },
+        ]}
       >
         <InputNumber />
       </Form.Item>
@@ -195,7 +210,12 @@ export function LegacyVisualPropertyForm(
         key={item.name}
         label={renderLabel(item)}
         name={item.name}
-        rules={[{ required: item.required === Required.True }]}
+        rules={[
+          {
+            required: item.required === Required.True,
+            message: `请输入${item.name}`,
+          },
+        ]}
       >
         <Select mode="tags" />
       </Form.Item>
