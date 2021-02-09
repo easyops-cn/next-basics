@@ -101,7 +101,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               brick: "forms.general-checkbox",
               properties: {
                 name: "attrOptions",
-                label: "性质",
+                label: "限制",
                 options: [
                   {
                     label: "必填",
