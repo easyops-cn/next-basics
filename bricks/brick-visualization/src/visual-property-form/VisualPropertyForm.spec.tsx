@@ -2,6 +2,7 @@ import React from "react";
 import { Input, Tooltip } from "antd";
 import { mount } from "enzyme";
 import { VisualPropertyForm } from "./VisualPropertyForm";
+import { CodeEditorFormItem } from "./CodeEditorFormItem";
 jest.mock("@next-libs/editor-components", () => ({
   CodeEditorItem: function MockEditor() {
     return <div>code editor</div>;
@@ -89,5 +90,48 @@ describe("VisualPropertyForm", () => {
     wrapper.find(".iconContainer").at(0).invoke("onClick")("name");
     expect(wrapper.find(Input).length).toEqual(1);
     expect(wrapper.find("MockEditor").length).toEqual(1);
+  });
+
+  it("should render template params", () => {
+    const props = {
+      brickProperties: {
+        name: "lucy",
+      },
+      propertyTypeList: [{ name: "name", type: "string", description: "名称" }],
+      labelIcon: {
+        normal: {
+          lib: "fa",
+          icon: "code",
+          prefix: "fas",
+          color: "#167be0",
+        },
+        advanced: {
+          lib: "fa",
+          icon: "cog",
+          prefix: "fas",
+          color: "#167be0",
+        },
+      },
+      brickInfo: {
+        type: "template",
+      },
+    } as any;
+
+    const wrapper = mount(<VisualPropertyForm {...props} />);
+    expect(wrapper.find(CodeEditorFormItem).prop("label")).toEqual(
+      "other params"
+    );
+
+    wrapper.setProps({
+      brickInfo: {
+        type: "brick",
+      },
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find(CodeEditorFormItem).prop("label")).toEqual(
+      "other properties"
+    );
   });
 });
