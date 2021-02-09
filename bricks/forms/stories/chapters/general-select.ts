@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/general-select.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const generalSelecttStory: Story = {
   storyId: "forms.general-select",
+  category: "form-input",
   type: "brick",
   author: "steve",
   text: {
@@ -211,7 +211,4 @@ const story: Story = {
       },
     },
   ],
-  doc,
 };
-
-export default story;

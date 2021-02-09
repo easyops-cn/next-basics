@@ -1,35 +1,35 @@
-import doc from "../../../docs/forms/general-switch.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const generalSwitch: Story = {
   storyId: "forms.general-switch",
+  category: "form-input",
   type: "brick",
   author: "ice",
   text: {
     en: "General Switch",
-    zh: "普通开关"
+    zh: "普通开关",
   },
   description: {
     en: "general switch",
-    zh: "通用的开关"
+    zh: "通用的开关",
   },
   icon: {
     lib: "fa",
-    icon: "lock"
+    icon: "lock",
   },
   conf: [
     {
       brick: "forms.general-form",
       properties: {
         values: {
-          enabled: false
-        }
+          enabled: false,
+        },
       },
       events: {
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.detail}"]
-        }
+          args: ["${EVENT.detail}"],
+        },
       },
       slots: {
         items: {
@@ -40,26 +40,23 @@ const story: Story = {
               properties: {
                 name: "enabled",
                 label: "启用采集",
-                size: "default"
+                size: "default",
               },
               events: {
                 "general.switch.change": {
-                  action: "console.log"
-                }
-              }
+                  action: "console.log",
+                },
+              },
             },
             {
               brick: "forms.general-buttons",
               properties: {
-                submitText: "提交"
-              }
-            }
-          ]
-        }
-      }
-    }
+                submitText: "提交",
+              },
+            },
+          ],
+        },
+      },
+    },
   ],
-  doc
 };
-
-export default story;

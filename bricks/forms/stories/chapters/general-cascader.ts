@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/general-cascader.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const generalCascaderStory: Story = {
   storyId: "forms.general-cascader",
+  category: "form-input",
   type: "brick",
   author: "jo",
   text: {
@@ -157,7 +157,4 @@ const story: Story = {
       },
     },
   ],
-  doc,
 };
-
-export default story;

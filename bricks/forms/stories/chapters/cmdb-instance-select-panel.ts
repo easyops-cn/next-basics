@@ -1,10 +1,9 @@
-import doc from "../../../docs/forms/cmdb-instance-select-panel.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
+import { CMDB_APP_INSTANCE_ID } from "../constants";
 
-import { CMDB_APP_INSTANCE_ID } from "../../../constants";
-
-const story: Story = {
+export const cmdbInstanceSelectPanelStory: Story = {
   storyId: "forms.cmdb-instance-select-panel",
+  category: "form-input",
   type: "brick",
   author: "cyril",
   text: {
@@ -83,7 +82,4 @@ const story: Story = {
       },
     },
   },
-  doc,
 };
-
-export default story;

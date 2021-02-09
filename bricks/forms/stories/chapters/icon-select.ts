@@ -1,8 +1,8 @@
-import { Story } from "../../../interfaces";
-import docMD from "../../../docs/forms/icon-select.md";
+import { Story } from "@next-core/brick-types";
 
-export const story: Story = {
+export const iconSelectStory: Story = {
   storyId: "forms.icon-select",
+  category: "form-input",
   type: "brick",
   author: "lynette",
   text: {
@@ -101,7 +101,4 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
 };
-
-export default story;

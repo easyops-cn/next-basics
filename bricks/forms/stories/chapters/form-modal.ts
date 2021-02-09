@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/form-modal.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const formModalStory: Story = {
   storyId: "forms.form-modal",
+  category: "form-input",
   type: "brick",
   text: {
     en: "Form Modal",
@@ -109,7 +109,4 @@ const story: Story = {
       },
     },
   ],
-  doc,
 };
-
-export default story;

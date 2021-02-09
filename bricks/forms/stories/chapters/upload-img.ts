@@ -1,9 +1,9 @@
-import { Story } from "../../../interfaces";
-import docMD from "../../../docs/forms/upload-img.md";
+import { Story } from "@next-core/brick-types";
 
-export const story: Story = {
+export const uploadImgStory: Story = {
   storyId: "forms.upload-img",
   type: "brick",
+  category: "form-input",
   author: "lynette",
   text: {
     en: "upload img",
@@ -222,7 +222,4 @@ export const story: Story = {
       },
     },
   ],
-  doc: docMD,
 };
-
-export default story;

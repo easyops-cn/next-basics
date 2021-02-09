@@ -1,21 +1,21 @@
-import doc from "../../../docs/forms/time-range-picker.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const timeRangePickerStory: Story = {
   storyId: "forms.time-range-picker",
+  category: "form-input",
   type: "brick",
   author: "ice",
   text: {
     en: "Time Range Picker",
-    zh: "时间段选择器"
+    zh: "时间段选择器",
   },
   description: {
     en: "combined by two time pickers",
-    zh: "由两个时间选择器组成"
+    zh: "由两个时间选择器组成",
   },
   icon: {
     lib: "fa",
-    icon: "clock"
+    icon: "clock",
   },
   conf: [
     {
@@ -24,19 +24,19 @@ const story: Story = {
         values: {
           time: {
             startTime: "01:23:45",
-            endTime: "12:34:56"
-          }
-        }
+            endTime: "12:34:56",
+          },
+        },
       },
       events: {
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.type}", "${EVENT.detail}"]
+          args: ["${EVENT.type}", "${EVENT.detail}"],
         },
         "validate.error": {
           action: "console.warn",
-          args: ["${EVENT.type}", "${EVENT.detail}"]
-        }
+          args: ["${EVENT.type}", "${EVENT.detail}"],
+        },
       },
       slots: {
         items: {
@@ -47,33 +47,33 @@ const story: Story = {
               properties: {
                 name: "time",
                 required: true,
-                label: "hello"
+                label: "hello",
               },
               events: {
                 "time.range.change": {
-                  action: "console.log"
-                }
-              }
+                  action: "console.log",
+                },
+              },
             },
             {
               brick: "forms.general-buttons",
               properties: {
                 showCancelButton: true,
                 submitText: "提交",
-                cancelText: "取消"
+                cancelText: "取消",
               },
               events: {
                 "submit.button.click": {
-                  action: "console.log"
+                  action: "console.log",
                 },
                 "cancel.button.click": {
-                  action: "console.log"
-                }
-              }
-            }
-          ]
-        }
-      }
+                  action: "console.log",
+                },
+              },
+            },
+          ],
+        },
+      },
     },
     {
       brick: "forms.time-range-picker",
@@ -83,19 +83,16 @@ const story: Story = {
         required: true,
         value: {
           startTime: "2020-03-16 01:23:45",
-          endTime: "2020-03-16 12:34:56"
+          endTime: "2020-03-16 12:34:56",
         },
-        label: "hello"
+        label: "hello",
       },
       events: {
         "time.range.change": {
-          action: "console.log"
-        }
-      }
-    }
+          action: "console.log",
+        },
+      },
+    },
   ],
   previewColumns: 2,
-  doc
 };
-
-export default story;

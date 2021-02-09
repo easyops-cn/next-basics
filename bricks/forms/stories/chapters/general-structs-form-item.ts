@@ -1,21 +1,21 @@
-import doc from "../../../docs/forms/general-structs-form-item.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const structsFormItemStory: Story = {
   storyId: "forms.general-structs-form-item",
+  category: "form-input",
   type: "brick",
   author: "ann",
   text: {
     en: "General Struct Form Item",
-    zh: "编辑结构体表单项"
+    zh: "编辑结构体表单项",
   },
   description: {
     en: "",
-    zh: "添加/编辑结构体"
+    zh: "添加/编辑结构体",
   },
   icon: {
     lib: "fa",
-    icon: "pen"
+    icon: "pen",
   },
   conf: [
     {
@@ -24,25 +24,25 @@ const story: Story = {
         label: "参数",
         btnText: "添加参数",
         structDefaultValues: {
-          type: "string"
+          type: "string",
         },
         value: [
           {
             name: "param1",
             type: "string",
-            description: "参数说明1"
+            description: "参数说明1",
           },
           {
             name: "param1",
             type: "string",
-            description: "参数说明1"
-          }
+            description: "参数说明1",
+          },
         ],
         fieldsMap: {
           name: "参数名",
           description: "参数说明",
-          type: "参数类型"
-        }
+          type: "参数类型",
+        },
       },
       slots: {
         items: {
@@ -52,11 +52,11 @@ const story: Story = {
               brick: "forms.general-form",
               properties: {
                 labelCol: {
-                  md: { span: 6 }
+                  md: { span: 6 },
                 },
                 wrapperCol: {
-                  md: { span: 18 }
-                }
+                  md: { span: 18 },
+                },
               },
               slots: {
                 items: {
@@ -67,8 +67,8 @@ const story: Story = {
                       properties: {
                         name: "name",
                         required: true,
-                        label: "参数名"
-                      }
+                        label: "参数名",
+                      },
                     },
                     {
                       brick: "forms.general-radio",
@@ -79,35 +79,35 @@ const story: Story = {
                         options: [
                           {
                             label: "字符串",
-                            value: "string"
+                            value: "string",
                           },
                           {
                             label: "整型",
-                            value: "int"
-                          }
-                        ]
-                      }
+                            value: "int",
+                          },
+                        ],
+                      },
                     },
                     {
                       brick: "forms.general-text-area",
                       properties: {
                         name: "description",
                         required: false,
-                        label: "说明"
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          ]
-        }
+                        label: "说明",
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
       },
       events: {
         "struct.change": {
-          action: "console.log"
-        }
-      }
+          action: "console.log",
+        },
+      },
     },
     {
       brick: "forms.general-form",
@@ -118,10 +118,10 @@ const story: Story = {
             {
               name: "param1",
               type: "string",
-              description: "参数说明1"
-            }
-          ]
-        }
+              description: "参数说明1",
+            },
+          ],
+        },
       },
       slots: {
         items: {
@@ -132,8 +132,8 @@ const story: Story = {
               properties: {
                 name: "username",
                 label: "用户名",
-                required: true
-              }
+                required: true,
+              },
             },
             {
               brick: "forms.general-structs-form-item",
@@ -146,8 +146,8 @@ const story: Story = {
                 fieldsMap: {
                   name: "参数名",
                   description: "参数说明",
-                  type: "参数类型"
-                }
+                  type: "参数类型",
+                },
               },
               slots: {
                 items: {
@@ -157,11 +157,11 @@ const story: Story = {
                       brick: "forms.general-form",
                       properties: {
                         labelCol: {
-                          md: { span: 6 }
+                          md: { span: 6 },
                         },
                         wrapperCol: {
-                          md: { span: 18 }
-                        }
+                          md: { span: 18 },
+                        },
                       },
                       slots: {
                         items: {
@@ -172,8 +172,8 @@ const story: Story = {
                               properties: {
                                 name: "name",
                                 required: true,
-                                label: "参数名"
-                              }
+                                label: "参数名",
+                              },
                             },
                             {
                               brick: "forms.general-radio",
@@ -184,63 +184,60 @@ const story: Story = {
                                 options: [
                                   {
                                     label: "字符串",
-                                    value: "string"
+                                    value: "string",
                                   },
                                   {
                                     label: "整型",
-                                    value: "int"
-                                  }
-                                ]
-                              }
+                                    value: "int",
+                                  },
+                                ],
+                              },
                             },
                             {
                               brick: "forms.general-text-area",
                               properties: {
                                 name: "description",
                                 required: false,
-                                label: "说明"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  ]
-                }
+                                label: "说明",
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                },
               },
               events: {
                 "struct.data.get": {
-                  action: "console.log"
+                  action: "console.log",
                 },
                 "struct.change": {
-                  action: "console.log"
-                }
-              }
+                  action: "console.log",
+                },
+              },
             },
             {
               brick: "forms.general-buttons",
               properties: {
-                submitText: "提交"
+                submitText: "提交",
               },
               events: {
                 "submit.button.click": {
                   target: "forms\\.general-form",
-                  method: "validate"
-                }
-              }
-            }
-          ]
-        }
+                  method: "validate",
+                },
+              },
+            },
+          ],
+        },
       },
       events: {
         "validate.success": {
           action: "console.log",
-          args: ["${event.detail}"]
-        }
-      }
-    }
+          args: ["${event.detail}"],
+        },
+      },
+    },
   ],
-  doc
 };
-
-export default story;

@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/general-textarea.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const generalTextareaStory: Story = {
   storyId: "forms.general-textarea",
+  category: "form-input",
   type: "brick",
   author: "ice",
   text: {
@@ -52,7 +52,4 @@ const story: Story = {
       },
     },
   },
-  doc,
 };
-
-export default story;

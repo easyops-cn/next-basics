@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/general-date-picker.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const datePickerStory: Story = {
   storyId: "forms.general-date-picker",
+  category: "form-input",
   type: "brick",
   author: "steve",
   text: {
@@ -112,7 +112,4 @@ const story: Story = {
       },
     },
   ],
-  doc,
 };
-
-export default story;

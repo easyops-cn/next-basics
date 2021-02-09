@@ -1,8 +1,8 @@
-import { Story } from "../../../interfaces";
-import doc from "../../../docs/forms/input-with-unit.md";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const inputWithUnitStory: Story = {
   storyId: "forms.input-with-unit",
+  category: "form-input",
   type: "brick",
   author: "ice",
   text: {
@@ -103,7 +103,4 @@ const story: Story = {
       },
     },
   ],
-  doc,
 };
-
-export default story;

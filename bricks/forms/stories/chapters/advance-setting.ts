@@ -1,8 +1,8 @@
-import doc from "../../../docs/forms/advance-setting.md";
-import { Story } from "../../../interfaces";
+import { Story } from "@next-core/brick-types";
 
-const story: Story = {
+export const advanceSettingStory: Story = {
   storyId: "forms.advance-setting",
+  category: "form-input",
   type: "brick",
   author: "momo",
   text: {
@@ -316,7 +316,4 @@ const story: Story = {
       },
     },
   ],
-  doc,
 };
-
-export default story;
