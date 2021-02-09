@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.151.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.2...@next-bricks/forms@1.151.3) (2021-02-09)
+
+
+### Bug Fixes
+
+* **object-attr:** 修复流水线号和自增ID起始值增加默认值 ([92a686c](https://github.com/easyops-cn/next-basics/commit/92a686cdfc6ef20b6c7025844d8b9a8e04bef7e7))
+
+
+
+
+
 ## [1.151.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.1...@next-bricks/forms@1.151.2) (2021-02-07)
 
 
