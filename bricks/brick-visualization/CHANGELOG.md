@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@0.1.0...@next-bricks/brick-visualization@0.1.1) (2021-02-09)
+
+
+### Bug Fixes
+
+* fix form set initValue problem ([2ed174a](https://github.com/easyops-cn/next-basics/commit/2ed174ae87eb70c576f49b7c0e2e9fe5270722bb))
+
+
+
+
+
 # 0.1.0 (2021-02-07)
 
 
