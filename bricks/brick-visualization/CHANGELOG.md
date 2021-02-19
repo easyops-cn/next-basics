@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@0.1.1...@next-bricks/brick-visualization@1.0.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* add validate message ([6801019](https://github.com/easyops-cn/next-basics/commit/680101909a6e4403e8c4b5ec213a48d2048ee97a))
+
+
+
+
+
 ## [0.1.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@0.1.0...@next-bricks/brick-visualization@0.1.1) (2021-02-09)
 
 
