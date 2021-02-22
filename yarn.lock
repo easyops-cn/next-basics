@@ -2436,6 +2436,11 @@
   resolved "https://registry.npm.taobao.org/@next-libs/forms/download/@next-libs/forms-2.0.3.tgz#4e2dcee71dc6db43798b2349211315209e136fce"
   integrity sha1-Ti3O5x3G20N5iyNJIRMVIJ4Tb84=
 
+"@next-libs/forms@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/@next-libs/forms/download/@next-libs/forms-2.1.0.tgz#e426406e3e5750c5011c90bdd49bedbdb0e8ba0c"
+  integrity sha1-5CZAbj5XUMUBHJC91JvtvbDougw=
+
 "@next-libs/storage@^1.0.0", "@next-libs/storage@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npm.taobao.org/@next-libs/storage/download/@next-libs/storage-1.0.3.tgz#0ce938439047e5b356cb8c7b08edebdae7bc4b30"
