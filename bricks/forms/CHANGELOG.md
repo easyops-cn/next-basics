@@ -3,36 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.151.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.4...@next-bricks/forms@1.151.5) (2021-02-22)
+
+### Bug Fixes
+
+- **forms:** forms.tpl-cmdb-object-attr-add,修改 template 编辑状态 ([136b6d6](https://github.com/easyops-cn/next-basics/commit/136b6d6f1fd6531a68af59723924a4ea6d2a5990))
+
 ## [1.151.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.3...@next-bricks/forms@1.151.4) (2021-02-09)
 
 **Note:** Version bump only for package @next-bricks/forms
 
-
-
-
-
 ## [1.151.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.2...@next-bricks/forms@1.151.3) (2021-02-09)
-
 
 ### Bug Fixes
 
-* **object-attr:** 修复流水线号和自增ID起始值增加默认值 ([92a686c](https://github.com/easyops-cn/next-basics/commit/92a686cdfc6ef20b6c7025844d8b9a8e04bef7e7))
-
-
-
-
+- **object-attr:** 修复流水线号和自增 ID 起始值增加默认值 ([92a686c](https://github.com/easyops-cn/next-basics/commit/92a686cdfc6ef20b6c7025844d8b9a8e04bef7e7))
 
 ## [1.151.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.1...@next-bricks/forms@1.151.2) (2021-02-07)
 
-
 ### Bug Fixes
 
-* **object-attr:** 修复模型属性构件，多行字符串和markdown输入框不对齐的问题 ([d8399fa](https://github.com/easyops-cn/next-basics/commit/d8399fa40c0baa3ac4192502425a4d0e9ad059be))
-* **object-attr:** 修复流水线号的bug ([a2de3e8](https://github.com/easyops-cn/next-basics/commit/a2de3e8aced2fdd9f03ff52b7abd3d9971b3aeac))
-
-
-
-
+- **object-attr:** 修复模型属性构件，多行字符串和 markdown 输入框不对齐的问题 ([d8399fa](https://github.com/easyops-cn/next-basics/commit/d8399fa40c0baa3ac4192502425a4d0e9ad059be))
+- **object-attr:** 修复流水线号的 bug ([a2de3e8](https://github.com/easyops-cn/next-basics/commit/a2de3e8aced2fdd9f03ff52b7abd3d9971b3aeac))
 
 ## [1.151.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.0...@next-bricks/forms@1.151.1) (2021-02-06)
 
