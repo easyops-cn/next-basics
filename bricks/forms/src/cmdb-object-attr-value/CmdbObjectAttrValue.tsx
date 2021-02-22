@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { Select, Input, Row, Col, Radio, Empty } from "antd";
-import { defaults, isNil, isEmpty } from "lodash";
+import { defaults, isEmpty } from "lodash";
 import {
   ObjectAttrStr,
   ObjectAttrInt,
@@ -160,6 +160,7 @@ export interface CmdbObjectAttrValueProps extends FormItemWrapperProps {
   placeholder?: string;
   inputBoxStyle?: React.CSSProperties;
   onChange?: (value: any) => void;
+  disabled?: boolean;
 }
 
 export function CmdbObjectAttrValueItem(
@@ -253,6 +254,7 @@ export function CmdbObjectAttrValueItem(
         placeholder={placeholder || "请选择值类型"}
         value={valueType}
         onChange={handleValueTypeChange}
+        disabled={props.disabled}
       >
         {valueOptions.map((option) => (
           <Option value={option.key} key={option.key}>

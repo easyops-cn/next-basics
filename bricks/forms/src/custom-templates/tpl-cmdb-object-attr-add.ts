@@ -3,6 +3,9 @@ import { getRuntime } from "@next-core/brick-kit";
 getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
   proxy: {
     properties: {
+      isProtected: {
+        asVariable: true,
+      },
       values: {
         ref: "addCmdbObjectAttrForm",
         refProperty: "values",
@@ -14,6 +17,14 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
       attrIdInputDisabled: {
         ref: "attrIdInput",
         refProperty: "disabled",
+      },
+      attrValueDisabled: {
+        ref: "attrValue",
+        refProperty: "disabled",
+      },
+      attrOptions: {
+        ref: "attrOptions",
+        refProperty: "options",
       },
     },
     events: {
@@ -30,6 +41,14 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
       setInitValue: {
         ref: "addCmdbObjectAttrForm",
         refMethod: "setInitValue",
+      },
+      resetFields: {
+        ref: "addCmdbObjectAttrForm",
+        refMethod: "resetFields",
+      },
+      validate: {
+        ref: "addCmdbObjectAttrForm",
+        refMethod: "validate",
       },
     },
   },
@@ -79,6 +98,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
             },
             {
               brick: "forms.cmdb-object-attr-value",
+              ref: "attrValue",
               properties: {
                 name: "attrValue",
                 label: "值类型",
@@ -87,6 +107,90 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                   required: "请选择值类型",
                 },
                 placeholder: "请选择值类型",
+              },
+              events: {
+                "forms.cmdb-object-attr-value.change": [
+                  {
+                    if:
+                      "<% EVENT.detail.type === 'str' && ( EVENT.detail.default_type === 'series-number' || EVENT.detail.default_type === 'auto-increment-id') %>",
+                    targetRef: "addCmdbObjectAttrForm",
+                    method: "setInitValue",
+                    args: [{ attrOptions: ["required", "readonly", "unique"] }],
+                  },
+                  {
+                    if:
+                      "<% !TPL.isProtected && EVENT.detail.default_type !== 'series-number' &&  EVENT.detail.default_type !== 'auto-increment-id' %>",
+                    targetRef: "addCmdbObjectAttrForm",
+                    method: "resetFields",
+                    args: ["attrOptions"],
+                  },
+                  {
+                    if:
+                      "<% !TPL.isProtected && EVENT.detail.type !== 'struct' && EVENT.detail.type !== 'structs' && EVENT.detail.type !== 'enums' && EVENT.detail.type !== 'arr' %>",
+                    targetRef: "attrOptions",
+                    properties: {
+                      options: [
+                        {
+                          label: "必填",
+                          value: "required",
+                        },
+                        {
+                          label: "只读",
+                          value: "readonly",
+                        },
+                        {
+                          label: "唯一",
+                          value: "unique",
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    if:
+                      "<% !TPL.isProtected && (EVENT.detail.type === 'struct' || EVENT.detail.type === 'structs') %>",
+                    targetRef: "attrOptions",
+                    properties: {
+                      options: [
+                        {
+                          label: "必填",
+                          value: "required",
+                        },
+                        {
+                          label: "只读",
+                          value: "readonly",
+                          disabled: true,
+                        },
+                        {
+                          label: "唯一",
+                          value: "unique",
+                          disabled: true,
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    if:
+                      "<% !TPL.isProtected && (EVENT.detail.type === 'enums' || EVENT.detail.type === 'arr') %>",
+                    targetRef: "attrOptions",
+                    properties: {
+                      options: [
+                        {
+                          label: "必填",
+                          value: "required",
+                        },
+                        {
+                          label: "只读",
+                          value: "readonly",
+                        },
+                        {
+                          label: "唯一",
+                          value: "unique",
+                          disabled: true,
+                        },
+                      ],
+                    },
+                  },
+                ],
               },
             },
             {
@@ -99,6 +203,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
             },
             {
               brick: "forms.general-checkbox",
+              ref: "attrOptions",
               properties: {
                 name: "attrOptions",
                 label: "限制",
