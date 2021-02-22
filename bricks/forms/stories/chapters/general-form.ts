@@ -179,6 +179,7 @@ export const story: Story = {
                         name: "time",
                         label: "时间",
                         placeholder: "when",
+                        helpBrick: "这里是一些说明信息",
                       },
                     },
                     {
