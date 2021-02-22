@@ -39,7 +39,7 @@ exports[`BrickLink should work 2`] = `
 `;
 
 exports[`BrickLink target="_blank" should have external-link icon 1`] = `
-<Fragment>
+<span>
   <Link
     className=""
     target="_blank"
@@ -59,5 +59,5 @@ exports[`BrickLink target="_blank" should have external-link icon 1`] = `
       }
     />
   </span>
-</Fragment>
+</span>
 `;

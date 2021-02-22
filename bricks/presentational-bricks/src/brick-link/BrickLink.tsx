@@ -79,12 +79,12 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
 
     if (props.target === "_blank") {
       link = (
-        <>
+        <span>
           {link}
           <span className={cssStyle.externalIcon}>
             <GeneralIcon icon={{ lib: "fa", icon: "external-link-alt" }} />
           </span>
-        </>
+        </span>
       );
     }
   }
