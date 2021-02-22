@@ -167,6 +167,14 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    */
   @property() moreButtonShape: "no"; //UI规范中暂时只支持noShape。后面有需要可以支持circle。
   /**
+   * @kind `ButtonType` (`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon" | "text"`)
+   * @required false
+   * @default -
+   * @description 更多按钮的类型，参考 general-button 构件
+   */
+  @property()
+  moreButtonType: ButtonType;
+  /**
    * @kind string | MenuIcon
    * @required false
    * @default -
@@ -260,6 +268,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
           isMoreButton={this.isMoreButton}
           moreBtnIcon={this.moreBtnIcon}
           moreButtonShape={this.moreButtonShape}
+          moreButtonType={this.moreButtonType}
           alignment={this.alignment}
           dropdownPlacement={this.dropdownPlacement}
         />,

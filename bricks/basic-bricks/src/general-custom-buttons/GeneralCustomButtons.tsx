@@ -13,6 +13,16 @@ import { CustomButton, DropdownPlacement } from "./index";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import style from "./index.module.css";
 
+declare const ButtonTypes: [
+  "default",
+  "primary",
+  "ghost",
+  "dashed",
+  "link",
+  "text",
+  "icon"
+];
+declare type ButtonType = typeof ButtonTypes[number];
 interface AdminButtonProps {
   buttons: CustomButton[];
   handleClick: (eventName: string, button: CustomButton) => void;
@@ -21,6 +31,7 @@ interface AdminButtonProps {
   isMoreButton?: boolean;
   moreBtnIcon?: any;
   moreButtonShape?: "circle" | "rectangle" | "no" | "icon";
+  moreButtonType?: ButtonType;
   alignment?: "start" | "center" | "end" | "stretch";
   dropdownPlacement?: DropdownPlacement;
 }
@@ -46,6 +57,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
       isMoreButton,
       moreButtonShape,
       moreBtnIcon,
+      moreButtonType,
       dropdownBtnIcon,
       dropdownBtnText,
       alignment,
@@ -177,6 +189,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
         >
           {isMoreButton ? (
             <Button
+              type={moreButtonType}
               icon={
                 moreBtnIcon &&
                 typeof moreBtnIcon === "string" && (
