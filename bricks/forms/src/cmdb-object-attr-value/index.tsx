@@ -88,6 +88,16 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     attribute: false,
   })
   inputBoxStyle: React.CSSProperties = {};
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否禁用
+   */
+  @property({
+    type: Boolean,
+  })
+  disabled: boolean;
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -240,6 +250,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
                 : this._builtInvalidator
             }
             inputBoxStyle={this.inputBoxStyle}
+            disabled={this.disabled}
           />
         </BrickWrapper>,
         this
