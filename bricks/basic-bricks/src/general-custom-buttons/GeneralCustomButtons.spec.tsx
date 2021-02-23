@@ -86,4 +86,94 @@ describe("topology view admin buttons", () => {
     });
     expect(mockSave).toBeCalledWith("save", buttons[0]);
   });
+
+  it("dropdownBtnIcon should work", () => {
+    const mockSave = jest.fn();
+    const buttons: Partial<CustomButton>[] = [
+      {
+        isDropdown: true,
+        disabled: true,
+        text: "a-button",
+        icon: "save",
+        eventName: "save",
+      },
+      {
+        isDropdown: true,
+        isDivider: true,
+      },
+    ];
+    const wrapper = shallow(
+      <GeneralCustomButtons
+        buttons={buttons}
+        handleClick={mockSave}
+        dropdownPlacement="topLeft"
+        dropdownBtnIcon="plus"
+      />
+    );
+    const saveButton = wrapper.find(Button).at(0);
+    expect(saveButton.prop("icon").props.type).toEqual("plus");
+
+    const wrapper2 = shallow(
+      <GeneralCustomButtons
+        buttons={buttons}
+        handleClick={mockSave}
+        dropdownPlacement="topLeft"
+        dropdownBtnIcon={{
+          lib: "fa",
+          icon: "plus",
+          prefix: "fas",
+        }}
+      />
+    );
+    const saveButtonIcon = wrapper2.find("GeneralIcon").at(0);
+    expect(saveButtonIcon.prop("icon")).toEqual(
+      expect.objectContaining({
+        lib: "fa",
+        icon: "plus",
+        prefix: "fas",
+      })
+    );
+  });
+
+  it("more button style should work", () => {
+    const buttons: Partial<CustomButton>[] = [
+      {
+        isDropdown: true,
+        text: "a-button",
+        icon: "save",
+        eventName: "save",
+      },
+    ];
+    const wrapper = shallow(
+      <GeneralCustomButtons
+        buttons={buttons}
+        isMoreButton={true}
+        moreButtonShape="circle"
+        moreButtonType="link"
+        moreBtnIcon="plus"
+      />
+    );
+    const moreButton = wrapper.find(Button).at(0);
+    expect(moreButton.prop("type")).toEqual("link");
+    expect(moreButton.hasClass("circleShapeButton")).toBeTruthy();
+    expect(moreButton.prop("icon").props.type).toEqual("plus");
+
+    const wrapper2 = shallow(
+      <GeneralCustomButtons
+        buttons={buttons}
+        isMoreButton={true}
+        moreButtonShape="circle"
+        moreButtonType="link"
+        moreBtnIcon={{ lib: "fa", icon: "plus", prefix: "fas" }}
+      />
+    );
+    const moreButtonIcon = wrapper2.find("GeneralIcon").at(0);
+    expect(moreButtonIcon.prop("icon")).toEqual(
+      expect.objectContaining({
+        lib: "fa",
+        icon: "plus",
+        prefix: "fas",
+      })
+    );
+  });
 });
