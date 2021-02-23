@@ -53,9 +53,16 @@ describe("BuilderContainer", () => {
   });
 
   it("should enter fullscreen", () => {
-    const wrapper = mount(<BuilderContainer initialFullscreen />);
+    const onToggleFullscreen = jest.fn();
+    const wrapper = mount(
+      <BuilderContainer
+        initialFullscreen
+        onToggleFullscreen={onToggleFullscreen}
+      />
+    );
     expect(wrapper.find(".builderContainer").prop("className")).toContain(
       "fullscreen"
     );
+    expect(onToggleFullscreen).toBeCalledWith(true);
   });
 });

@@ -23,7 +23,6 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { BrickOptionItem } from "./interfaces";
 import { BuilderContainer } from "./BuilderContainer";
-import { BuilderUIContext } from "./BuilderUIContext";
 
 interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
   nodeData: NodeInstance & {
@@ -85,6 +84,13 @@ export class BuilderContainerElement extends UpdatingElement {
   })
   private _nodeDeleteConfirmedEmitter: EventEmitter<BuilderRuntimeNode>;
 
+  @event({
+    type: "fullscreen.toggle",
+  })
+  private _fullscreenToggleEmitter: EventEmitter<{
+    fullscreen: boolean;
+  }>;
+
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
     this._nodeAddEmitter.emit({
       ...event.detail,
@@ -123,6 +129,17 @@ export class BuilderContainerElement extends UpdatingElement {
     });
   };
 
+  private _currentFullscreen?: boolean;
+
+  private _handleToggleFullscreen = (fullscreen: boolean): void => {
+    if (fullscreen !== this._currentFullscreen) {
+      this._currentFullscreen = fullscreen;
+      this._fullscreenToggleEmitter.emit({
+        fullscreen,
+      });
+    }
+  };
+
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
@@ -154,6 +171,7 @@ export class BuilderContainerElement extends UpdatingElement {
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
+      this._currentFullscreen = this.fullscreen;
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
@@ -169,6 +187,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onNodeMove={this._handleNodeMove}
                 onNodeClick={this._handleNodeClick}
                 onAskForDeletingNode={this._handleAskForDeletingNode}
+                onToggleFullscreen={this._handleToggleFullscreen}
               />
             </DndProvider>
           </BuilderProvider>
