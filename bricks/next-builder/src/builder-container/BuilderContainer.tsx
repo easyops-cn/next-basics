@@ -27,6 +27,7 @@ export interface BuilderContainerProps {
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
   onNodeClick?: (event: CustomEvent<BuilderRuntimeNode>) => void;
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
+  onToggleFullscreen?: (fullscreen?: boolean) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -40,6 +41,7 @@ export function LegacyBuilderContainer(
     onNodeMove,
     onNodeClick,
     onAskForDeletingNode,
+    onToggleFullscreen,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -65,6 +67,10 @@ export function LegacyBuilderContainer(
   React.useEffect(() => {
     setFullscreen(initialFullscreen);
   }, [initialFullscreen]);
+
+  React.useEffect(() => {
+    onToggleFullscreen?.(fullscreen);
+  }, [fullscreen, onToggleFullscreen]);
 
   return (
     <BuilderUIContext.Provider
