@@ -62,6 +62,14 @@ describe("BuilderToolbox", () => {
     expect(wrapper2.find("EventsView").length).toBe(1);
   });
 
+  it("should switch to data view", () => {
+    const wrapper = shallow(<BuilderToolbox />);
+    wrapper.find(".tabLink").at(3).invoke("onClick")(null);
+    expect(toolboxTab).toBe(ToolboxTab.DATA_VIEW);
+    const wrapper2 = shallow(<BuilderToolbox />);
+    expect(wrapper2.find("DataView").length).toBe(1);
+  });
+
   it("should enter fullscreen", () => {
     let fullscreen = false;
     const setFullscreen = jest.fn((update) => {

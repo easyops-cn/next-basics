@@ -10,7 +10,7 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
+import { BuilderRouteOrBrickNode, ContextConf } from "@next-core/brick-types";
 import {
   EventDetailOfNodeAdd,
   NodeInstance,
@@ -89,6 +89,11 @@ export class BuilderContainerElement extends UpdatingElement {
   private _nodeDeleteConfirmedEmitter: EventEmitter<BuilderRuntimeNode>;
 
   @event({
+    type: "context.update",
+  })
+  private _contextUpdateEmitter: EventEmitter<ContextConf[]>;
+
+  @event({
     type: "fullscreen.toggle",
   })
   private _fullscreenToggleEmitter: EventEmitter<{
@@ -164,6 +169,10 @@ export class BuilderContainerElement extends UpdatingElement {
 
   private _managerRef = React.createRef<AbstractBuilderDataManager>();
 
+  private _handleContextUpdate = (context: ContextConf[]): void => {
+    this._contextUpdateEmitter.emit(context);
+  };
+
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
@@ -213,6 +222,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onAskForDeletingNode={this._handleAskForDeletingNode}
                 onToggleFullscreen={this._handleToggleFullscreen}
                 onSwitchToolboxTab={this._handleSwitchToolboxTab}
+                onContextUpdate={this._handleContextUpdate}
               />
             </DndProvider>
           </BuilderProvider>

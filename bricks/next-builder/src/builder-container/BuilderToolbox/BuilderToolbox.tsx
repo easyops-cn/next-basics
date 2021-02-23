@@ -4,6 +4,7 @@ import {
   FullscreenExitOutlined,
   FullscreenOutlined,
   PartitionOutlined,
+  DatabaseOutlined,
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
@@ -12,11 +13,14 @@ import { BrickOptionItem, ToolboxTab } from "../interfaces";
 import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
+import { DataView } from "../DataView/DataView";
+import { BuilderRouteOrBrickNode, ContextConf } from "@next-core/brick-types";
 
 import styles from "./BuilderToolbox.module.css";
 
 export interface BuilderToolboxProps {
   brickList?: BrickOptionItem[];
+  onContextUpdate?: (context: ContextConf[]) => void;
 }
 
 interface ToolboxTabConf {
@@ -29,6 +33,7 @@ React.createElement;
 
 export function BuilderToolbox({
   brickList,
+  onContextUpdate,
 }: BuilderToolboxProps): React.ReactElement {
   const {
     fullscreen,
@@ -63,6 +68,17 @@ export function BuilderToolbox({
       },
       content() {
         return <EventsView />;
+      },
+    },
+    {
+      tab: ToolboxTab.DATA_VIEW,
+      icon() {
+        return <DatabaseOutlined />;
+      },
+      content() {
+        return (
+          <DataView brickList={brickList} onContextUpdate={onContextUpdate} />
+        );
       },
     },
   ];

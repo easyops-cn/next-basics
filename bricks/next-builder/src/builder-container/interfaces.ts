@@ -32,4 +32,5 @@ export enum ToolboxTab {
   LIBRARY = "library",
   TREE_VIEW = "tree-view",
   EVENTS_VIEW = "events-view",
+  DATA_VIEW = "data-view",
 }

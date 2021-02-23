@@ -1,0 +1,39 @@
+.wrapper {
+  padding: 0 12px;
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.searchWrapper {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 0 12px;
+}
+
+.varList {
+  overflow: auto;
+  display: grid;
+}
+
+.varItem {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0 10px;
+  overflow: hidden;
+}
+
+.varItem:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #4e93ef;
+}
+
+.varName {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
