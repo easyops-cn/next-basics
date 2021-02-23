@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.169.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.4...@next-bricks/presentational-bricks@1.169.5) (2021-02-23)
+
+
+### Bug Fixes
+
+* **brick-link:** should show tooltip when hovering over a link with the target "_blank" ([2307589](https://github.com/easyops-cn/next-basics/commit/2307589b08d4b09d67de33ba0f0e1d787b920810))
+
+
+
+
+
 ## [1.169.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.3...@next-bricks/presentational-bricks@1.169.4) (2021-02-19)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.106.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.105.0...@next-bricks/basic-bricks@1.106.0) (2021-02-23)
+
+
+### Features
+
+* custom-button支持定义moreButton的类型 ([5776459](https://github.com/easyops-cn/next-basics/commit/5776459dc9e812a1e724a10dac65b87f8123b439))
+
+
+
+
+
 # [1.105.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.104.2...@next-bricks/basic-bricks@1.105.0) (2021-02-09)
 
 
