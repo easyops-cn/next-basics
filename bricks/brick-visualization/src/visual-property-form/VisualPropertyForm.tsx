@@ -115,11 +115,14 @@ export function LegacyVisualPropertyForm(
     setTypeList(newTypeList);
   };
 
-  const renderLabel = (item: UnionPropertyType): React.ReactElement => {
+  const renderLabel = (
+    item: UnionPropertyType,
+    hideIcon?: boolean
+  ): React.ReactElement => {
     return (
       <span>
         <Tooltip title={item.description}>{item.name}</Tooltip>{" "}
-        {labelIcon && (
+        {!hideIcon && labelIcon && (
           <span
             className={styles.iconContainer}
             onClick={() => handleLabelClick(item.name)}
@@ -142,7 +145,7 @@ export function LegacyVisualPropertyForm(
       <CodeEditorFormItem
         key={item.name}
         name={item.name}
-        label={hideIcon ? item.name : renderLabel(item)}
+        label={renderLabel(item, hideIcon)}
         required={item.required === Required.True}
         jsonSchema={item?.jsonSchema}
         schemaRef={item?.schemaRef}
