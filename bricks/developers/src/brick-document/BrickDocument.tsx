@@ -76,6 +76,41 @@ export function BrickDocument({
     }
   };
 
+  const getCurHashHref = () => {
+    const history = getHistory();
+    return history.createHref({
+      ...history.location,
+      hash: undefined,
+    });
+  };
+
+  const generateInterfaceRef = (str: string, hashHref: string) => {
+    const reg = new RegExp(
+      `\\b(${interfaceIds.map((v) => v).join("|")})\\b`,
+      "g"
+    );
+
+    return {
+      __html: str.replace(reg, function (v: string) {
+        return `<a href='${hashHref}#${v}'>${v}</a>`;
+      }),
+    };
+  };
+
+  const renderTypeAnnotation = (value: string) => {
+    const str = value.replace(/`/g, "");
+    if (interfaceIds.includes(str) && renderLink) {
+      const hashHref = getCurHashHref();
+      return (
+        <span
+          dangerouslySetInnerHTML={generateInterfaceRef(str, hashHref)}
+        ></span>
+      );
+    }
+
+    return <code>{str}</code>;
+  };
+
   const convertMarkdownLinkToHtmlLink = (value: string) => {
     if (typeof value !== "string") return { __html: value || "-" };
 
@@ -83,11 +118,7 @@ export function BrickDocument({
     const link = renderLink ? "<a href='$2'>$1</a>" : "$1";
     const str = value.replace(/\[(.+?)\]\((.+?)\)/g, link);
 
-    const history = getHistory();
-    const hashHref = `${history.createHref({
-      ...history.location,
-      hash: undefined,
-    })}`;
+    const hashHref = getCurHashHref();
 
     const anchorReg = /\W(#[a-zA-Z_-]+\b)(?!;)/g;
     if (anchorReg.test(str) && renderLink) {
@@ -99,16 +130,7 @@ export function BrickDocument({
     }
 
     if (interfaceIds.length > 0 && renderLink) {
-      const reg = new RegExp(
-        `\\b(${interfaceIds.map((v) => v).join("|")})\\b`,
-        "g"
-      );
-
-      return {
-        __html: str.replace(reg, function (v: string) {
-          return `<a href='${hashHref}#${v}'>${v}</a>`;
-        }),
-      };
+      generateInterfaceRef(str, hashHref);
     }
 
     const subsetReg = /`\s*([^]+?.*?[^]+?[^]?)`/g;
@@ -152,6 +174,8 @@ export function BrickDocument({
                   <td key={i}>
                     {column.key === "required" ? (
                       renderRequiredAnnotation(value[column.key])
+                    ) : column.key === "type" ? (
+                      renderTypeAnnotation(value[column.key])
                     ) : (
                       <span
                         dangerouslySetInnerHTML={{
