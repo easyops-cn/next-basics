@@ -5,11 +5,13 @@ import {
   FullscreenOutlined,
   PartitionOutlined,
 } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { BrickLibrary } from "../BrickLibrary/BrickLibrary";
 import { BrickOptionItem } from "../interfaces";
 import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { EventsView } from "../EventsView/EventsView";
 
 import styles from "./BuilderToolbox.module.css";
 
@@ -20,6 +22,7 @@ export interface BuilderToolboxProps {
 export enum ToolboxTab {
   LIBRARY = "library",
   TREE_VIEW = "tree-view",
+  EVENTS_VIEW = "events-view",
 }
 
 export function BuilderToolbox({
@@ -62,6 +65,20 @@ export function BuilderToolbox({
             <PartitionOutlined />
           </a>
         </li>
+        <li
+          className={classNames({
+            [styles.tabActive]: activeTab === ToolboxTab.EVENTS_VIEW,
+          })}
+        >
+          <a
+            className={styles.tabLink}
+            role="button"
+            onClick={() => setActiveTab(ToolboxTab.EVENTS_VIEW)}
+            style={{ fontSize: 12 }}
+          >
+            <FontAwesomeIcon icon="broadcast-tower" />
+          </a>
+        </li>
         <li>
           <a
             className={`${styles.tabLink} ${styles.fullscreenToggle}`}
@@ -77,6 +94,7 @@ export function BuilderToolbox({
           <BrickLibrary brickList={brickList} />
         )}
         {activeTab === ToolboxTab.TREE_VIEW && <StoryboardTreeView />}
+        {activeTab === ToolboxTab.EVENTS_VIEW && <EventsView />}
       </div>
     </div>
   );
