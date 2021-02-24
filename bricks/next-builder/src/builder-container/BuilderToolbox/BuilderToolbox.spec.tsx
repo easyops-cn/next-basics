@@ -41,6 +41,15 @@ describe("BuilderToolbox", () => {
     wrapper.find(".tabLink").at(1).invoke("onClick")(null);
     expect(wrapper.find("BrickLibrary").length).toBe(0);
     expect(wrapper.find("StoryboardTreeView").length).toBe(1);
+    expect(wrapper.find("EventsView").length).toBe(0);
+  });
+
+  it("should switch to events view", () => {
+    const wrapper = shallow(<BuilderToolbox />);
+    wrapper.find(".tabLink").at(2).invoke("onClick")(null);
+    expect(wrapper.find("BrickLibrary").length).toBe(0);
+    expect(wrapper.find("StoryboardTreeView").length).toBe(0);
+    expect(wrapper.find("EventsView").length).toBe(1);
   });
 
   it("should enter fullscreen", () => {
@@ -55,7 +64,7 @@ describe("BuilderToolbox", () => {
     const wrapper = shallow(<BuilderToolbox />);
     expect(wrapper.find(FullscreenOutlined).length).toBe(1);
     expect(wrapper.find(FullscreenExitOutlined).length).toBe(0);
-    wrapper.find(".tabLink").at(2).invoke("onClick")(null);
+    wrapper.find(".tabLink").last().invoke("onClick")(null);
     expect(setFullscreen).toBeCalled();
     expect(fullscreen).toBe(true);
   });
@@ -72,7 +81,7 @@ describe("BuilderToolbox", () => {
     const wrapper = shallow(<BuilderToolbox />);
     expect(wrapper.find(FullscreenOutlined).length).toBe(0);
     expect(wrapper.find(FullscreenExitOutlined).length).toBe(1);
-    wrapper.find(".tabLink").at(2).invoke("onClick")(null);
+    wrapper.find(".tabLink").last().invoke("onClick")(null);
     expect(setFullscreen).toBeCalled();
     expect(fullscreen).toBe(false);
   });
