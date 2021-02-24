@@ -5,7 +5,7 @@ import {
   ItemModeType,
 } from "./VisualPropertyForm";
 import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
-import { omit, isEmpty } from "lodash";
+import { omit, isEmpty, groupBy } from "lodash";
 import { supportBasicType, OTHER_FORM_ITEM_FIELD } from "./constant";
 
 export function isAdvanceMode(value: unknown): boolean {
@@ -100,4 +100,10 @@ export function processFormValue(values = {}): Record<string, any> {
       ? {}
       : formData[OTHER_FORM_ITEM_FIELD]),
   };
+}
+
+export function groupByType(
+  typeList?: UnionPropertyType[]
+): Array<[string, UnionPropertyType[]]> {
+  return Object.entries(groupBy(typeList, (item) => item.group || "basic"));
 }

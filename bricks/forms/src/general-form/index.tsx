@@ -95,51 +95,22 @@ export class GeneralFormElement
   readonly isFormElement = true;
 
   private _mountPoint: HTMLElement;
-
-  // Will be Set in React component.
-  formUtils: WrappedFormUtils;
-  /**
-   * @kind `object`
-   * @required -
-   * @default -
-   * @description 对 `values` 属性的数据进行申明和格式化，提供了表单提交后格式化表单项数据的功能。目前仅支持时间相关的表单项数据的格式化（因为时间相关的表单项构件提交后的数据为 moment 对象，需要根据不同场景定义给后台的数据），`{time: moment|YYYY-MM-DD}` 表示该字段为 moment 类型，数据提交后格式化为 `YYYY-MM-DD` 字符串的形式，详情如 demo 所示
-   */
-  @property({
-    attribute: false,
-  })
-  valueTypes: Record<string, string>;
   /**
    * @kind string
    * @description 设置表单域内字段 id 的前缀
    * @default -
    * @required false
+   * @group basic
    */
   @property()
   name: string;
-  /**
-   * @kind `Record<string,any>`
-   * @default -
-   * @required false
-   * @description 默认值。因为目前使用了 `mapPropsToFields` 来将 `values` 映射到表单项的值，当 `values` 有多个层级时，需要按表单项的 `name` 平铺。如源数据为 `{a: {b: 123}}` ，表单项的 `name` 为 `a.b`，那么需要将源数据转换为 `{"a.b": 123}` 传给 `values`
-   *
-   */
-  @property({
-    attribute: false,
-  })
-  values: Record<string, any>;
-  /**
-   * @kind `Record<string, any>`
-   * @required false
-   * @default -
-   * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
-   */
-  staticValues: Record<string, any>;
-  private _GeneralForm: ConnectedForm;
+
   /**
    * @kind `'horizontal'|'vertical'|'inline'`
    * @required -
    * @default `horizontal`
    * @description 表单布局
+   * @group basic
    */
   @property({
     // Ensure `layout` is `FormLayout`.
@@ -158,11 +129,50 @@ export class GeneralFormElement
     },
   })
   layout: FormLayout;
+
+  /**
+   * @kind `Record<string,any>`
+   * @default -
+   * @required false
+   * @description 默认值。因为目前使用了 `mapPropsToFields` 来将 `values` 映射到表单项的值，当 `values` 有多个层级时，需要按表单项的 `name` 平铺。如源数据为 `{a: {b: 123}}` ，表单项的 `name` 为 `a.b`，那么需要将源数据转换为 `{"a.b": 123}` 传给 `values`
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  values: Record<string, any>;
+
+  /**
+   * @kind `Record<string, any>`
+   * @required false
+   * @default -
+   * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
+   * @group basic
+   */
+  staticValues: Record<string, any>;
+
+  // Will be Set in React component.
+  formUtils: WrappedFormUtils;
+  /**
+   * @kind `object`
+   * @required -
+   * @default -
+   * @description 对 `values` 属性的数据进行申明和格式化，提供了表单提交后格式化表单项数据的功能。目前仅支持时间相关的表单项数据的格式化（因为时间相关的表单项构件提交后的数据为 moment 对象，需要根据不同场景定义给后台的数据），`{time: moment|YYYY-MM-DD}` 表示该字段为 moment 类型，数据提交后格式化为 `YYYY-MM-DD` 字符串的形式，详情如 demo 所示
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  valueTypes: Record<string, string>;
+
+  private _GeneralForm: ConnectedForm;
+
   /**
    * @kind boolean
    * @description 是否不显示冒号
    * @default `false`
    * @required false
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -173,6 +183,7 @@ export class GeneralFormElement
    * @description 标签列布局样式（仅当 `layout="horizontal"` 时有效）
    * @default -
    * @require false
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -199,6 +210,7 @@ export class GeneralFormElement
    * @description 输入控件列布局样式（仅当 `layout="horizontal"` 时有效）
    * @default -
    * @require false
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -223,12 +235,14 @@ export class GeneralFormElement
   /**
    * @description 是否限制表单的最大宽度
    * @default `false`
+   * @group advanced
    */
   @property({ type: Boolean })
   maxWidthLimited: boolean;
   /**
    * @description 表单达到最大宽度后的对齐方式
    * @default `FormAlignment.Center`
+   * @group advanced
    */
   @property({ attribute: false })
   alignment: FormAlignment = FormAlignment.Center;

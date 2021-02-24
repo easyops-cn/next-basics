@@ -1,13 +1,21 @@
 import React, { useEffect, useImperativeHandle, useState } from "react";
-import { Form, Input, InputNumber, Radio, Select, Tooltip } from "antd";
+import {
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Select,
+  Tooltip,
+  Collapse,
+} from "antd";
 import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import update from "immutability-helper";
-import { isNil } from "lodash";
+import { isNil, upperFirst } from "lodash";
 import styles from "./VisualPropertyForm.module.css";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { CodeEditorFormItem } from "./CodeEditorFormItem";
-import { mergeProperties, calculateValue } from "./processor";
+import { mergeProperties, calculateValue, groupByType } from "./processor";
 import { OTHER_FORM_ITEM_FIELD } from "./constant";
 
 type FormItemType = boolean | string | string[] | number | Record<string, any>;
@@ -28,6 +36,7 @@ export interface PropertyType {
   required?: Required;
   description?: string;
   default?: string;
+  group?: string;
 }
 
 export interface UnionPropertyType extends PropertyType {
@@ -256,16 +265,30 @@ export function LegacyVisualPropertyForm(
       onValuesChange={props.onValuesChange}
       initialValues={calculateValue(propertyTypeList, brickProperties)}
     >
-      {typeList?.map((item) => {
-        return getFormItem(item);
-      })}
-      <CodeEditorFormItem
-        name={OTHER_FORM_ITEM_FIELD}
-        label={
-          brickInfo?.type === "template" ? "other params" : "other properties"
-        }
-        mode="brick_next_yaml"
-      />
+      <Collapse ghost defaultActiveKey="0" className={styles.panelContainer}>
+        {groupByType(typeList)?.map(([category, list], index) => {
+          return (
+            <Collapse.Panel header={upperFirst(category)} key={index}>
+              {list.map((item) => getFormItem(item))}
+            </Collapse.Panel>
+          );
+        })}
+
+        <Collapse.Panel
+          header={upperFirst(OTHER_FORM_ITEM_FIELD)}
+          key={OTHER_FORM_ITEM_FIELD}
+        >
+          <CodeEditorFormItem
+            name={OTHER_FORM_ITEM_FIELD}
+            label={
+              brickInfo?.type === "template"
+                ? "other params"
+                : "other properties"
+            }
+            mode="brick_next_yaml"
+          />
+        </Collapse.Panel>
+      </Collapse>
     </Form>
   );
 }

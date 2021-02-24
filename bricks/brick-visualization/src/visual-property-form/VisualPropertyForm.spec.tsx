@@ -63,7 +63,9 @@ describe("VisualPropertyForm", () => {
       brickProperties: {
         name: "lucy",
       },
-      propertyTypeList: [{ name: "name", type: "string", description: "名称" }],
+      propertyTypeList: [
+        { name: "name", type: "string", description: "名称", group: "basic" },
+      ],
       labelIcon: {
         normal: {
           lib: "fa",
@@ -85,6 +87,9 @@ describe("VisualPropertyForm", () => {
     expect(wrapper.find(Input).length).toEqual(1);
     wrapper.find(".iconContainer").at(0).invoke("onClick")("name");
     expect(wrapper.find(Input).length).toEqual(0);
+    expect(wrapper.find("MockEditor").length).toEqual(1);
+    wrapper.find(".ant-collapse-header").at(1).simulate("click");
+    wrapper.update();
     expect(wrapper.find("MockEditor").length).toEqual(2);
 
     wrapper.find(".iconContainer").at(0).invoke("onClick")("name");
@@ -118,6 +123,10 @@ describe("VisualPropertyForm", () => {
     } as any;
 
     const wrapper = mount(<VisualPropertyForm {...props} />);
+
+    wrapper.find(".ant-collapse-header").at(1).simulate("click");
+    wrapper.update();
+
     expect(wrapper.find(CodeEditorFormItem).prop("label")).toEqual(
       "other params"
     );
