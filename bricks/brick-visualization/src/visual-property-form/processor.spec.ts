@@ -3,6 +3,7 @@ import {
   mergeProperties,
   calculateValue,
   processFormValue,
+  groupByType,
 } from "./processor";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -155,6 +156,68 @@ describe("processor test", () => {
         b: 4,
         test: true,
       });
+    });
+  });
+
+  describe("groupbyType", () => {
+    it("shoould return empty if no value", () => {
+      const result = groupByType();
+      expect(result).toEqual([]);
+    });
+
+    it("should return new group", () => {
+      const typeList = [
+        {
+          name: "name",
+          type: "string",
+          description: "名称",
+          mode: "normal",
+          group: "basic",
+        },
+        { name: "age", type: "number", description: "年龄", mode: "normal" },
+        {
+          name: "value",
+          type: "Value",
+          description: "值",
+          mode: "advanced",
+          group: "advanced",
+        },
+      ] as any;
+
+      const result = groupByType(typeList);
+
+      expect(result).toEqual([
+        [
+          "basic",
+          [
+            {
+              name: "name",
+              type: "string",
+              description: "名称",
+              mode: "normal",
+              group: "basic",
+            },
+            {
+              name: "age",
+              type: "number",
+              description: "年龄",
+              mode: "normal",
+            },
+          ],
+        ],
+        [
+          "advanced",
+          [
+            {
+              name: "value",
+              type: "Value",
+              description: "值",
+              mode: "advanced",
+              group: "advanced",
+            },
+          ],
+        ],
+      ]);
     });
   });
 });
