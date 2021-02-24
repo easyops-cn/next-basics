@@ -24,7 +24,9 @@ export function BuilderCanvas({
     {}
   );
   const manager = useBuilderDataManager();
-  const valid = dataSource?.length === 1 && dataSource[0].type === "bricks";
+  const valid =
+    dataSource?.length === 1 &&
+    ["bricks", "custom-template"].includes(dataSource[0].type);
 
   React.useEffect(() => {
     if (valid) {

@@ -8,6 +8,7 @@ export interface BricksWithEvents {
   isTargetOfEvents: boolean;
 }
 
+// Todo(steve): `targetRef` in custom templates.
 export function getBricksWithEvents(
   nodes: BuilderRuntimeNode[]
 ): BricksWithEvents[] {

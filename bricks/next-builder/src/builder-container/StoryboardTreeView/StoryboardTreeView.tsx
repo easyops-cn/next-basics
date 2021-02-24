@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
-import { BranchesOutlined } from "@ant-design/icons";
+import { BlockOutlined, BranchesOutlined } from "@ant-design/icons";
 import {
   useBuilderGroupedChildNodes,
   useBuilderNode,
@@ -17,7 +17,7 @@ export function StoryboardTreeView(): React.ReactElement {
   const mountPoint = "bricks";
   const childNodes = React.useMemo(
     () =>
-      groups.find((group) => group.mountPoint === mountPoint).childNodes ?? [],
+      groups.find((group) => group.mountPoint === mountPoint)?.childNodes ?? [],
     [groups]
   );
 
@@ -27,8 +27,17 @@ export function StoryboardTreeView(): React.ReactElement {
         <div className={styles.treeView}>
           <div className={styles.treeWrapper}>
             <div className={styles.treeName}>
-              <BranchesOutlined />
-              <span>{node.alias}</span>
+              {node.type === "custom-template" ? (
+                <>
+                  <BlockOutlined />
+                  <span>{node.templateId}</span>
+                </>
+              ) : (
+                <>
+                  <BranchesOutlined />
+                  <span>{node.alias}</span>
+                </>
+              )}
             </div>
             <StoryboardTreeNodeList
               level={1}
