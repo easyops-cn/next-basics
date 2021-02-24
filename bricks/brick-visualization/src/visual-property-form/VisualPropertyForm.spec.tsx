@@ -3,6 +3,8 @@ import { Input, Tooltip } from "antd";
 import { mount } from "enzyme";
 import { VisualPropertyForm } from "./VisualPropertyForm";
 import { CodeEditorFormItem } from "./CodeEditorFormItem";
+import { act } from "react-dom/test-utils";
+
 jest.mock("@next-libs/editor-components", () => ({
   CodeEditorItem: function MockEditor() {
     return <div>code editor</div>;
@@ -122,7 +124,9 @@ describe("VisualPropertyForm", () => {
       },
     } as any;
 
-    const wrapper = mount(<VisualPropertyForm {...props} />);
+    const formRef = React.createRef<any>();
+
+    const wrapper = mount(<VisualPropertyForm {...props} ref={formRef} />);
 
     wrapper.find(".ant-collapse-header").at(1).simulate("click");
     wrapper.update();
@@ -142,5 +146,11 @@ describe("VisualPropertyForm", () => {
     expect(wrapper.find(CodeEditorFormItem).prop("label")).toEqual(
       "other properties"
     );
+
+    act(() => {
+      formRef.current.resetPropertyFields();
+    });
+
+    expect(wrapper.find(Input).at(0).prop("value")).toEqual("lucy\n");
   });
 });
