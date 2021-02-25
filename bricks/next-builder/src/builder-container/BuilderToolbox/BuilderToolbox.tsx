@@ -64,7 +64,9 @@ export function BuilderToolbox({
     {
       tab: ToolboxTab.EVENTS_VIEW,
       icon() {
-        return <FontAwesomeIcon icon="broadcast-tower" />;
+        return (
+          <FontAwesomeIcon icon="broadcast-tower" style={{ fontSize: 12 }} />
+        );
       },
       content() {
         return <EventsView />;

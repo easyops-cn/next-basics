@@ -11,6 +11,7 @@ import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import { useBuilderUIContext } from "../BuilderUIContext";
 
 import styles from "./BuilderCanvas.module.css";
+import { EventStreamCanvas } from "../EventStreamCanvas/EventStreamCanvas";
 
 export interface BuilderCanvasProps {
   dataSource?: BuilderRouteOrBrickNode[];
@@ -19,7 +20,11 @@ export interface BuilderCanvasProps {
 export function BuilderCanvas({
   dataSource,
 }: BuilderCanvasProps): React.ReactElement {
-  const { processing, fullscreen } = useBuilderUIContext();
+  const {
+    processing,
+    fullscreen,
+    eventStreamActiveNodeUid,
+  } = useBuilderUIContext();
   const [droppingStatus, setDroppingStatus] = React.useState<DroppingStatus>(
     {}
   );
@@ -46,13 +51,17 @@ export function BuilderCanvas({
         [styles.fullscreen]: fullscreen,
       })}
     >
-      <Spin spinning={processing} delay={500}>
-        <DroppingStatusContext.Provider
-          value={{ droppingStatus, setDroppingStatus }}
-        >
-          <DropZone isRoot fullscreen={fullscreen} mountPoint="bricks" />
-        </DroppingStatusContext.Provider>
-      </Spin>
+      {eventStreamActiveNodeUid ? (
+        <EventStreamCanvas nodeUid={eventStreamActiveNodeUid} />
+      ) : (
+        <Spin spinning={processing} delay={500}>
+          <DroppingStatusContext.Provider
+            value={{ droppingStatus, setDroppingStatus }}
+          >
+            <DropZone isRoot fullscreen={fullscreen} mountPoint="bricks" />
+          </DroppingStatusContext.Provider>
+        </Spin>
+      )}
     </div>
   );
 }
