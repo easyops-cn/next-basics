@@ -35,7 +35,7 @@ export class GeneralDatePickerElement extends FormItemElement {
    */
   @property({ attribute: false }) name: string;
   /**
-   * @kind stringg
+   * @kind string
    * @required false
    * @default -
    * @description 日期选择框字段说明
@@ -63,14 +63,7 @@ export class GeneralDatePickerElement extends FormItemElement {
    */
   @property()
   value: string;
-  /**
-   * @kind "date"|"week"
-   * @required false
-   * @default "date"
-   * @description 日期选择框初始值
-   */
-  @property({ attribute: false })
-  picker: "date" | "week" = "date";
+
   /**
    * @kind `Record<string,string>`
    * @required false
@@ -80,10 +73,22 @@ export class GeneralDatePickerElement extends FormItemElement {
   @property({ attribute: false }) message: Record<string, string>;
 
   /**
+   * @kind `object`
+   * @required false
+   * @default
+   * @description 输入框样式
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties;
+
+  /**
    * @kind boolean
    * @required false
    * @default `false`
    * @description 是否显示时间, 当设为 `true` 时, 请同时设置 `format` 为 `YYYY-MM-DD HH:mm:ss` 使其也显示具体时，分，秒 的时间
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -95,21 +100,23 @@ export class GeneralDatePickerElement extends FormItemElement {
    * @required false
    * @default -
    * @description 显示预览的格式，具体配置参考 [moment](https://momentjs.com/docs/#/displaying/format/)，注意，这里并非是定义给后台的数据格式，给后台的数据格式定义请参考 `general-form` 构件的 [valueTypes](developers/brick-book/brick/forms.general-form) 属性
+   * @group advanced
    */
   @property({
     attribute: false,
   })
   format: string;
+
   /**
-   * @kind `object`
+   * @kind "date"|"week"
    * @required false
-   * @default
-   * @description 输入框样式
+   * @default "date"
+   * @description 日期选择框初始值
+   * @group advanced
    */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties;
+  @property({ attribute: false })
+  picker: "date" | "week" = "date";
+
   /**
  * @description 	日期变化时触发
 

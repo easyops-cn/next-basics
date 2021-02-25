@@ -24,7 +24,7 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class GeneralSlideElement extends FormItemElement {
   /**
-   * @kind stringg
+   * @kind string
    * @required true
    * @default -
    * @description 表单项字段名
