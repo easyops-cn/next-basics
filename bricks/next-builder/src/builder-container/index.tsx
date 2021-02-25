@@ -17,6 +17,7 @@ import {
   EventDetailOfNodeMove,
   EventDetailOfNodeAddStored,
   EventDetailOfNodeReorder,
+  EventDetailOfContextUpdated,
   BuilderRuntimeNode,
   BuilderProvider,
   AbstractBuilderDataManager,
@@ -176,6 +177,11 @@ export class BuilderContainerElement extends UpdatingElement {
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
+  }
+
+  @method()
+  contextUpdated(detail: EventDetailOfContextUpdated): void {
+    this._managerRef.current.contextUpdated(detail);
   }
 
   @method()

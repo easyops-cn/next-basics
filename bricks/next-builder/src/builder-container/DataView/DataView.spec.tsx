@@ -51,10 +51,18 @@ describe("DataView", () => {
     );
     expect(wrapper.find(".varItem").length).toBe(2);
     wrapper.find(Input).invoke("onChange")({
-      target: { value: "123" },
+      target: { value: "data-a" },
     } as React.ChangeEvent<HTMLInputElement>);
+    expect(wrapper.find(".varItem").length).toBe(1);
+    wrapper.find(Input).invoke("onChange")({
+      target: { value: "" },
+    } as React.ChangeEvent<HTMLInputElement>);
+    expect(wrapper.find(".varItem").length).toBe(2);
 
-    wrapper.find(Button).simulate("click");
+    wrapper
+      .find(Button)
+      .filter("[data-testid='add-data-btn']")
+      .simulate("click");
     expect(wrapper.find("ContextItemFormModal").prop("visible")).toBe(true);
     wrapper.find("ContextItemFormModal").invoke("onContextItemUpdate")({
       name: "data-c",
@@ -76,5 +84,10 @@ describe("DataView", () => {
     });
     expect(onContextUpdate).toBeCalled();
     wrapper.find("ContextItemFormModal").invoke("onCancel")();
+    const mockStopPropagation = jest.fn();
+    wrapper.find(".deleteIcon").at(0).invoke("onClick")({
+      stopPropagation: mockStopPropagation,
+    } as any);
+    expect(mockStopPropagation).toBeCalled();
   });
 });

@@ -31,19 +31,14 @@ export const typeOptions = [
   { label: "Provider", value: "resolve" },
 ];
 
-export function filterOptions(
-  value: string,
-  options: OptionType[]
-): OptionType[] {
-  const filteredOptions: OptionType[] = [];
-
-  options.forEach((option) => {
-    if (option.label?.toLowerCase().includes(value.toLowerCase())) {
-      filteredOptions.push(option);
-    }
-  });
-
-  return filteredOptions;
+export function searchList(
+  list: Record<string, any>,
+  q: string,
+  field?: string
+) {
+  return list.filter((v: any) =>
+    (field ? v[field] : v)?.toLowerCase().includes(q?.toLowerCase() ?? "")
+  );
 }
 
 const safeDumpField = (value: any, field: string): string | undefined => {

@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { Input, Radio, Form, AutoComplete } from "antd";
 import {
   typeOptions,
-  filterOptions,
+  searchList,
   safeDumpFields,
   computeItemToSubmit,
   ContextItemFormValue,
@@ -68,7 +68,7 @@ export function ContextItemForm({
 
   const onSearch = (v: string) => {
     const q = v.trim().toLowerCase();
-    setProviderOptions(filterOptions(q, originalProviderList));
+    setProviderOptions(searchList(originalProviderList, q, "label"));
   };
 
   useEffect(() => {
