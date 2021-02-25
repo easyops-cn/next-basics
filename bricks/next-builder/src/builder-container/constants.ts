@@ -1,4 +1,4 @@
-import { BrickOptionItem } from "./interfaces";
+import { BrickOptionItem, ToolboxTab } from "./interfaces";
 
 export const brickSearchResultLimit = 20;
 
@@ -42,3 +42,5 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
 ];
 
 export const treeViewPaddingUnit = 14;
+
+export const defaultToolboxTab = ToolboxTab.LIBRARY;

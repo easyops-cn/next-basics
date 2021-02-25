@@ -21,8 +21,9 @@ import {
   BuilderProvider,
   AbstractBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
-import { BrickOptionItem } from "./interfaces";
+import { BrickOptionItem, ToolboxTab } from "./interfaces";
 import { BuilderContainer } from "./BuilderContainer";
+import { defaultToolboxTab } from "./constants";
 
 interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
   nodeData: NodeInstance & {
@@ -53,6 +54,9 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property({ type: Boolean })
   fullscreen: boolean;
+
+  @property()
+  toolboxTab: ToolboxTab;
 
   @event({
     type: "node.add",
@@ -89,6 +93,13 @@ export class BuilderContainerElement extends UpdatingElement {
   })
   private _fullscreenToggleEmitter: EventEmitter<{
     fullscreen: boolean;
+  }>;
+
+  @event({
+    type: "toolbox.tab.switch",
+  })
+  private _toolboxTabSwitchEmitter: EventEmitter<{
+    toolboxTab: ToolboxTab;
   }>;
 
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
@@ -140,6 +151,19 @@ export class BuilderContainerElement extends UpdatingElement {
     }
   };
 
+  private _currentToolboxTab?: ToolboxTab;
+
+  private _handleSwitchToolboxTab = (toolboxTab: ToolboxTab): void => {
+    if (toolboxTab !== this._currentToolboxTab) {
+      this._currentToolboxTab = toolboxTab;
+      this._toolboxTabSwitchEmitter.emit({
+        toolboxTab,
+      });
+    }
+  };
+
+  private _managerRef = React.createRef<AbstractBuilderDataManager>();
+
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
@@ -166,12 +190,11 @@ export class BuilderContainerElement extends UpdatingElement {
     ReactDOM.unmountComponentAtNode(this);
   }
 
-  private _managerRef = React.createRef<AbstractBuilderDataManager>();
-
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
       this._currentFullscreen = this.fullscreen;
+      this._currentToolboxTab = this.toolboxTab ?? defaultToolboxTab;
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
@@ -182,12 +205,14 @@ export class BuilderContainerElement extends UpdatingElement {
                 brickList={this.brickList}
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}
+                initialToolboxTab={this._currentToolboxTab}
                 onNodeAdd={this._handleNodeAdd}
                 onNodeReorder={this._handleNodeReorder}
                 onNodeMove={this._handleNodeMove}
                 onNodeClick={this._handleNodeClick}
                 onAskForDeletingNode={this._handleAskForDeletingNode}
                 onToggleFullscreen={this._handleToggleFullscreen}
+                onSwitchToolboxTab={this._handleSwitchToolboxTab}
               />
             </DndProvider>
           </BuilderProvider>

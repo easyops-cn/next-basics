@@ -11,7 +11,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
-import { BrickOptionItem } from "./interfaces";
+import { BrickOptionItem, ToolboxTab } from "./interfaces";
 import { BuilderContextMenu } from "./BuilderContextMenu/BuilderContextMenu";
 import { BuilderUIContext } from "./BuilderUIContext";
 
@@ -22,12 +22,14 @@ export interface BuilderContainerProps {
   brickList?: BrickOptionItem[];
   processing?: boolean;
   initialFullscreen?: boolean;
+  initialToolboxTab?: ToolboxTab;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
   onNodeClick?: (event: CustomEvent<BuilderRuntimeNode>) => void;
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
   onToggleFullscreen?: (fullscreen?: boolean) => void;
+  onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -36,16 +38,19 @@ export function LegacyBuilderContainer(
     brickList,
     processing,
     initialFullscreen,
+    initialToolboxTab,
     onNodeAdd,
     onNodeReorder,
     onNodeMove,
     onNodeClick,
     onAskForDeletingNode,
     onToggleFullscreen,
+    onSwitchToolboxTab,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
+  const [toolboxTab, setToolboxTab] = React.useState(initialToolboxTab);
 
   const manager = useBuilderDataManager();
 
@@ -72,12 +77,22 @@ export function LegacyBuilderContainer(
     onToggleFullscreen?.(fullscreen);
   }, [fullscreen, onToggleFullscreen]);
 
+  React.useEffect(() => {
+    setToolboxTab(initialToolboxTab);
+  }, [initialToolboxTab]);
+
+  React.useEffect(() => {
+    onSwitchToolboxTab?.(toolboxTab);
+  }, [toolboxTab, onSwitchToolboxTab]);
+
   return (
     <BuilderUIContext.Provider
       value={{
-        processing: processing,
-        fullscreen: fullscreen,
-        setFullscreen: setFullscreen,
+        processing,
+        fullscreen,
+        setFullscreen,
+        toolboxTab,
+        setToolboxTab,
       }}
     >
       <div
