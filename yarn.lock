@@ -2110,7 +2110,7 @@
   resolved "https://registry.npm.taobao.org/@next-core/brick-icons/download/@next-core/brick-icons-2.8.4.tgz#06b784f5e0dd4449d1cd7f6c67fc1d769be8ecc6"
   integrity sha1-BreE9eDdREnRzX9sZ/wddpvo7MY=
 
-"@next-core/brick-kit@^2.34.2", "@next-core/brick-kit@^2.34.3":
+"@next-core/brick-kit@^2.34.3":
   version "2.34.3"
   resolved "https://registry.npm.taobao.org/@next-core/brick-kit/download/@next-core/brick-kit-2.34.3.tgz#c36bb713b0ce2bf2d50ecb792e7df5f7b4829630"
   integrity sha1-w2u3E7DOK/LVDst5Ln3197SCljA=
@@ -2140,12 +2140,12 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.18.0", "@next-core/brick-types@^2.19.0":
-  version "2.18.0"
-  resolved "https://registry.npm.taobao.org/@next-core/brick-types/download/@next-core/brick-types-2.18.0.tgz#3ff6bbda0e47322148f9c82f4e0c92c114ff2032"
-  integrity sha1-P/a72g5HMiFI+cgvTgySwRT/IDI=
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.19.0":
+  version "2.19.0"
+  resolved "https://registry.npm.taobao.org/@next-core/brick-types/download/@next-core/brick-types-2.19.0.tgz#261dff1acf0795b30f1537bb43eb158e8eea76f3"
+  integrity sha1-Jh3/Gs8HlbMPFTe7Q+sVjo7qdvM=
 
-"@next-core/brick-utils@^2.11.2", "@next-core/brick-utils@^2.11.3":
+"@next-core/brick-utils@^2.11.3":
   version "2.11.3"
   resolved "https://registry.npm.taobao.org/@next-core/brick-utils/download/@next-core/brick-utils-2.11.3.tgz#a7f2f341bb884567a51fab821c5f74078b638197"
   integrity sha1-p/LzQbuIRWelH6uCHF90B4tjgZc=
@@ -2247,15 +2247,6 @@
   integrity sha1-wYWQRCpEe3QoDgBkL+J3KBRcr9o=
   dependencies:
     "@next-core/brick-types" "^2.19.0"
-    "@ungap/event-target" "^0.2.2"
-    classnames "^2.2.6"
-
-"@next-core/editor-bricks-helper@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.npm.taobao.org/@next-core/editor-bricks-helper/download/@next-core/editor-bricks-helper-0.9.0.tgz#c8336d53b7d8b0f0013299aaf1054c8fa3636144"
-  integrity sha1-yDNtU7fYsPABMpmq8QVMj6NjYUQ=
-  dependencies:
-    "@next-core/brick-types" "^2.18.0"
     "@ungap/event-target" "^0.2.2"
     classnames "^2.2.6"
 
