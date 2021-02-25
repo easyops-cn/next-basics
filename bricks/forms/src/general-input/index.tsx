@@ -54,6 +54,15 @@ export class GeneralInputElement extends FormItemElement {
   @property({ attribute: false }) placeholder: string;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   * @group basic
+   */
+  @property({ type: Boolean }) required: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -152,7 +161,7 @@ export class GeneralInputElement extends FormItemElement {
 
   /**
    * @kind string
-   * @required true
+   * @required false
    * @default -
    * @description 输入框类型,可输入password/email或者其他
    * @group advanced

@@ -23,7 +23,7 @@ import { CrontabInput } from "./CrontabInput";
  */
 export class CrontabInputElement extends FormItemElement {
   /**
-   * @kind stringg
+   * @kind string
    * @required true
    * @default -
    * @description 定时器字段名
