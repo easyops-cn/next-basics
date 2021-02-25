@@ -48,61 +48,24 @@ export class GeneralSelectElement extends FormItemElement {
    * @required true
    * @default -
    * @description 选择框字段名
+   * @group basic
    */
   @property({ attribute: false }) name: string;
-  /**
-   * @kind stringg
-   * @required false
-   * @default -
-   * @description 选择框字段说明
-   */
-  @property({ attribute: false }) label: string;
   /**
    * @kind string
    * @required false
    * @default -
-   * @description 选择框占位说明
+   * @description 选择框字段说明
+   * @group basic
    */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   */
-  @property({ attribute: false }) message: Record<string, string>;
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 下拉菜单和选择器同宽
-   */
-  @property({
-    attribute: false,
-  })
-  dropdownMatchSelectWidth = true;
+  @property({ attribute: false }) label: string;
 
   /**
-   * @kind `"multiple"|"tags"`
-   * @required false
-   * @default -
-   * @description 选择框模式
-   */
-  @property()
-  mode: string;
-
-  /**
-   * @kind `string[]|number[]|LabeledValue[]`
+   * @kind string[]|number[]|LabeledValue[]
    * @required true
    * @default -
    * @description 候选项列表
+   * @group basic
    */
   @property({
     attribute: false,
@@ -110,21 +73,11 @@ export class GeneralSelectElement extends FormItemElement {
   options: GeneralOption[];
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 基于 `options` 列表中的某个字段进行分组显示
-   */
-  @property({
-    attribute: false,
-  })
-  groupBy: string;
-
-  /**
-   * @kind `string|number|string[]|number[]`
+   * @kind string|number|string[]|number[]
    * @required false
    * @default -
    * @description 选择框初始值
+   * @group basic
    */
   @property({
     attribute: false,
@@ -132,21 +85,61 @@ export class GeneralSelectElement extends FormItemElement {
   value: any;
 
   /**
-   * @kind `{label: string, value: string}`
+   * @kind boolean
    * @required false
    * @default -
-   * @description 列表指定字段作为 label 和 value
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 选择框占位说明
+   * @group basic
+   */
+  @property({ attribute: false }) placeholder: string;
+
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 支持在文本后添加自定义构件
+   * @group basic
    */
   @property({
     attribute: false,
   })
-  fields: Partial<GeneralComplexOption>;
+  suffix: {
+    useBrick: UseBrickConf;
+  };
 
   /**
-   * @kind `object`
+   * @kind "multiple"|"tags"
+   * @required false
+   * @default -
+   * @description 选择框模式
+   * @group basic
+   */
+  @property()
+  mode: string;
+
+  /**
+   * @kind Record<string,string>
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   * @group basic
+   */
+  @property({ attribute: false }) message: Record<string, string>;
+
+  /**
+   * @kind object
    * @required false
    * @default
    * @description 输入框样式
+   * @group basic
    */
   @property({
     attribute: false,
@@ -158,6 +151,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 支持清除选项
+   * @group basic
    */
   @property({
     attribute: false,
@@ -165,88 +159,103 @@ export class GeneralSelectElement extends FormItemElement {
   allowClear = true;
 
   /**
-   * @kind <code>{ useBrick: <a href="http://docs.developers.easyops.cn/docs/brick-next/transform">UseBrickConf</a> }</code>
-   * @required false
-   * @default -
-   * @description 支持在文本后添加自定义构件
-   */
-  @property({
-    attribute: false,
-  })
-  suffix: {
-    useBrick: UseBrickConf;
-  };
-
-  /**
-   * @kind `object`
-   * @required false
-   * @default -
-   * @description 设置后置构件容器的样式
-   */
-  @property({
-    attribute: false,
-  })
-  suffixStyle: React.CSSProperties = {};
-  /**
-   * @kind [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
-   * @required false
-   * @default -
-   * @description  [已废弃] 支持在文本后添加自定义构件
-   */
-  @property({
-    attribute: false,
-  })
-  suffixBrick: UseBrickConf;
-  /**
-   * @kind `object`
-   * @required false
-   * @default -
-   * @description [已废弃]设置后置构件容器的样式
-   */
-  @property({
-    attribute: false,
-  })
-  suffixBrickStyle: React.CSSProperties = {};
-
-  /**
    * @kind boolean
    * @required false
-   * @default true
-   * @description 支持搜索
+   * @default false
+   * @description 是否禁用
+   * @group basic
    */
-  @property({
-    attribute: false,
-  })
-  showSearch = true;
-
   @property({
     type: Boolean,
   })
   disabled: boolean;
 
   /**
-   * @kind `"small" | "default" | "large"`
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 支持搜索
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  showSearch = true;
+
+  /**
+   * @kind "small" | "default" | "large"
    * @required false
    * @default "default"
    * @description 选择框大小
+   * @group advanced
    */
   @property()
   size: "small" | "default" | "large";
 
   /**
-   * @kind `LabeledValue`
+   * @kind LabeledValue
    * @required false
    * @default -
    * @description 空候选项，将插入到候选项列表最前面
+   * @group advanced
    */
   @property({ attribute: false })
   emptyOption: GeneralComplexOption;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 设置后置构件容器的样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  suffixStyle: React.CSSProperties = {};
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 下拉菜单和选择器同宽
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  dropdownMatchSelectWidth = true;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 基于 `options` 列表中的某个字段进行分组显示
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  groupBy: string;
+
+  /**
+   * @kind {label: string, value: string}
+   * @required false
+   * @default -
+   * @description 列表指定字段作为 label 和 value
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  fields: Partial<GeneralComplexOption>;
 
   /**
    * @kind string[]
    * @required false
    * @default -
    * @description 在 mode 为 `tags` 和 `multiple` 的模式下定义自动分词的分隔符
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -254,13 +263,39 @@ export class GeneralSelectElement extends FormItemElement {
   tokenSeparators: string[];
 
   /**
-   * @kind `default | parent`
+   * @kind default | parent
    * @required -
    * @default default
    * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
+   * @group advanced
    */
   @property()
   popoverPositionType: GeneralInputProps["popoverPositionType"];
+
+  /**
+   * @kind UseBrickConf
+   * @required false
+   * @default -
+   * @description 支持在文本后添加自定义构件 [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
+   * @group advanced
+   * @deprecated
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrick: UseBrickConf;
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description [已废弃]设置后置构件容器的样式
+   * @deprecated
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrickStyle: React.CSSProperties = {};
 
   /**
    * @detail `any`

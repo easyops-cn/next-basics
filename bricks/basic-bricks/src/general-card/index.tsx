@@ -34,21 +34,11 @@ import { isEmpty } from "lodash";
  */
 export class GeneralCardElement extends UpdatingElement {
   /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否右上角有操作区 slot
-   */
-  @property({
-    type: Boolean,
-  })
-  hasExtraSlot: boolean;
-
-  /**
    * @kind string
    * @required false
    * @default -
    * @description 卡片标题
+   * @group basic
    */
   @property()
   cardTitle: string;
@@ -58,6 +48,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 设置该属性后，设置卡片高度为 100%，卡片高度会自动撑满父容器
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -69,6 +60,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 设置该属性后，卡片内容区的元素自动垂直居中
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -78,8 +70,21 @@ export class GeneralCardElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
+   * @default false
+   * @description 是否右上角有操作区 slot
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  hasExtraSlot: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
    * @default true
    * @description footer滚动到窗口外时，是否需要将footer固定在窗口底部
+   * @group advanced
    */
   @property({
     attribute: false,

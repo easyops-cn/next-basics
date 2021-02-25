@@ -40,6 +40,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required true
    * @default -
    * @description 下拉框字段名
+   * @group basic
    */
   @property({ attribute: false }) name: string;
   /**
@@ -47,27 +48,66 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 单选框字段说明
+   * @group basic
    */
   @property({ attribute: false }) label: string;
+
   /**
-   * @kind `Record<string,string>`
-   * @required false
+   * @kind string[]|number[]|LabeledValue[]
+   * @required true
    * @default -
-   * @description 校验文本信息
+   * @description 单选框选项表
+   * @group basic
    */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({
+    attribute: false,
+  })
+  options: GeneralOption[];
+
   /**
    * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
+   * @group basic
    */
   @property({ type: Boolean }) required: boolean;
+
+  /**
+   * @kind Record<string,string>
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   * @group basic
+   */
+  @property({ attribute: false }) message: Record<string, string>;
+
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 单选框当前选中始值
+   * @group basic
+   */
+  @property({ attribute: false })
+  value: any;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default  `false`
+   * @description 是否禁用
+   * @group basic
+   */
+  @property({ type: Boolean })
+  disabled: boolean;
+
   /**
    * @kind `default | button`
    * @required true
    * @default `default`
    * @description 	单选框样式类型
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -79,38 +119,13 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default `solid`
    * @description 	单选框样式
+   * @group advanced
    */
   @property({
     attribute: false,
   })
   buttonStyle: RadioGroupButtonStyle = "solid";
 
-  /**
-   * @kind `string[]|number[]|LabeledValue[]`
-   * @required true
-   * @default -
-   * @description 单选框选项表
-   */
-  @property({
-    attribute: false,
-  })
-  options: GeneralOption[];
-  /**
-   * @kind string[]
-   * @required true
-   * @default -
-   * @description 单选框当前选中始值
-   */
-  @property({ attribute: false })
-  value: any;
-  /**
-   * @kind boolean
-   * @required false
-   * @default  `false`
-   * @description 是否禁用
-   */
-  @property({ type: Boolean })
-  disabled: boolean;
   /**
    * @detail `string | number`
    * @description 单选框变化时被触发，`event.detail` 为选项值

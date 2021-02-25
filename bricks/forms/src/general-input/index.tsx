@@ -32,21 +32,16 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框字段名
+   * @group basic
    */
   @property({ attribute: false }) name: string;
 
   /**
    * @kind string
-   * @required true
-   * @default -
-   * @description 输入框类型,可输入password/email或者其他
-   */
-  @property({ attribute: false }) type: string;
-  /**
-   * @kind string
    * @required false
    * @default -
    * @description 输入框字段说明
+   * @group basic
    */
   @property({ attribute: false }) label: string;
   /**
@@ -54,6 +49,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框占位说明
+   * @group basic
    */
   @property({ attribute: false }) placeholder: string;
 
@@ -62,14 +58,49 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框初始值
+   * @group basic
    */
   @property()
   value: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否禁用
+   * @group basic
+   */
+  @property({ attribute: false })
+  disabled: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否只读
+   * @group basic
+   */
+  @property()
+  readOnly: boolean;
+
+  /**
+   * @kind object
+   * @required false
+   * @default
+   * @description 输入框样式
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties;
+
   /**
    * @kind `Record<string,string>`
    * @required false
    * @default -
    * @description 校验文本信息
+   * @group basic
    */
   @property({ attribute: false }) message: Record<string, string>;
 
@@ -78,6 +109,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 最小长度
+   * @group basic
    */
   @property({
     type: Number,
@@ -89,6 +121,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 最大长度
+   * @group basic
    */
   @property({
     type: Number,
@@ -98,7 +131,8 @@ export class GeneralInputElement extends FormItemElement {
    * @kind number
    * @required false
    * @default -
-   * @description 最大长度
+   * @description 最小长度
+   * @group advanced
    */
   @property({
     type: Number,
@@ -109,6 +143,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 最大长度
+   * @group advanced
    */
   @property({
     type: Number,
@@ -117,9 +152,19 @@ export class GeneralInputElement extends FormItemElement {
 
   /**
    * @kind string
+   * @required true
+   * @default -
+   * @description 输入框类型,可输入password/email或者其他
+   * @group advanced
+   */
+  @property({ attribute: false }) type: string;
+
+  /**
+   * @kind string
    * @required false
    * @default
    * @description 设置前置标签
+   * @group advanced
    */
   @property()
   addonBefore: string;
@@ -129,6 +174,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default
    * @description 设置后置标签
+   * @group advanced
    */
   @property()
   addonAfter: string;
@@ -137,36 +183,8 @@ export class GeneralInputElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description 是否只读
-   */
-  @property()
-  readOnly: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否禁用
-   */
-  @property({ attribute: false })
-  disabled: boolean;
-
-  /**
-   * @kind `object`
-   * @required false
-   * @default
-   * @description 输入框样式
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
    * @description 是否显示复制按钮
+   * @group advanced
    */
   @property({ type: Boolean })
   copyButton: boolean;

@@ -95,6 +95,31 @@ export class GeneralFormElement
   readonly isFormElement = true;
 
   private _mountPoint: HTMLElement;
+
+  /**
+   * @kind `Record<string,any>`
+   * @default -
+   * @required false
+   * @description 默认值。因为目前使用了 `mapPropsToFields` 来将 `values` 映射到表单项的值，当 `values` 有多个层级时，需要按表单项的 `name` 平铺。如源数据为 `{a: {b: 123}}` ，表单项的 `name` 为 `a.b`，那么需要将源数据转换为 `{"a.b": 123}` 传给 `values`
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  values: Record<string, any>;
+
+  /**
+   * @kind `Record<string, any>`
+   * @required false
+   * @default -
+   * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  staticValues: Record<string, any>;
+
   /**
    * @kind string
    * @description 设置表单域内字段 id 的前缀
@@ -131,25 +156,60 @@ export class GeneralFormElement
   layout: FormLayout;
 
   /**
-   * @kind `Record<string,any>`
+   * @kind `ColProps`
+   * @description 标签列布局样式（仅当 `layout="horizontal"` 时有效）
    * @default -
-   * @required false
-   * @description 默认值。因为目前使用了 `mapPropsToFields` 来将 `values` 映射到表单项的值，当 `values` 有多个层级时，需要按表单项的 `name` 平铺。如源数据为 `{a: {b: 123}}` ，表单项的 `name` 为 `a.b`，那么需要将源数据转换为 `{"a.b": 123}` 传给 `values`
-   * @group basic
+   * @require false
+   * @group advanced
    */
   @property({
     attribute: false,
   })
-  values: Record<string, any>;
+  labelCol = {
+    sm: {
+      span: 24,
+    },
+    md: {
+      span: 24,
+    },
+    lg: {
+      span: 7,
+    },
+    xl: {
+      span: 5,
+    },
+    xxl: {
+      span: 4,
+    },
+  };
 
   /**
-   * @kind `Record<string, any>`
-   * @required false
+   * @kind `ColProps`
+   * @description 输入控件列布局样式（仅当 `layout="horizontal"` 时有效）
    * @default -
-   * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
-   * @group basic
+   * @require false
+   * @group advanced
    */
-  staticValues: Record<string, any>;
+  @property({
+    attribute: false,
+  })
+  wrapperCol = {
+    sm: {
+      span: 18,
+    },
+    md: {
+      span: 18,
+    },
+    lg: {
+      span: 13,
+    },
+    xl: {
+      span: 16,
+    },
+    xxl: {
+      span: 18,
+    },
+  };
 
   // Will be Set in React component.
   formUtils: WrappedFormUtils;
@@ -178,60 +238,7 @@ export class GeneralFormElement
     type: Boolean,
   })
   noColon: boolean;
-  /**
-   * @kind `ColProps`
-   * @description 标签列布局样式（仅当 `layout="horizontal"` 时有效）
-   * @default -
-   * @require false
-   * @group advanced
-   */
-  @property({
-    attribute: false,
-  })
-  labelCol = {
-    sm: {
-      span: 24,
-    },
-    md: {
-      span: 24,
-    },
-    lg: {
-      span: 7,
-    },
-    xl: {
-      span: 5,
-    },
-    xxl: {
-      span: 4,
-    },
-  };
-  /**
-   * @kind `ColProps`
-   * @description 输入控件列布局样式（仅当 `layout="horizontal"` 时有效）
-   * @default -
-   * @require false
-   * @group advanced
-   */
-  @property({
-    attribute: false,
-  })
-  wrapperCol = {
-    sm: {
-      span: 18,
-    },
-    md: {
-      span: 18,
-    },
-    lg: {
-      span: 13,
-    },
-    xl: {
-      span: 16,
-    },
-    xxl: {
-      span: 18,
-    },
-  };
+
   /**
    * @description 是否限制表单的最大宽度
    * @default `false`
