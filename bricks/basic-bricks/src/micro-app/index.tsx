@@ -43,6 +43,7 @@ export class MicroViewElement extends UpdatingElement {
    * @required -
    * @default -
    * @description 设置标题。如果要使用复杂的标题构件，请使用插槽 `titleBar`
+   * @group basic
    */
   @property()
   pageTitle: string;
@@ -52,47 +53,19 @@ export class MicroViewElement extends UpdatingElement {
    * @required -
    * @default `false`
    * @description 内容区是否需要设置`overflow-x: auto`
+   * @group basic
    */
   @property({
     type: Boolean,
   })
   overflowXAuto: boolean;
 
-  @property({
-    type: Boolean,
-  })
-  hasSubMenu: boolean;
-
-  @property({
-    type: Boolean,
-  })
-  hasTitleBar: boolean;
-
-  @property({
-    type: Boolean,
-  })
-  hasToolbar: boolean;
-
-  @property({
-    type: Boolean,
-  })
-  hasBanner: boolean;
-
-  @property({
-    type: Boolean,
-  })
-  hasBannerTitleBar: boolean;
-
-  @property({
-    type: Boolean,
-  })
-  hasBannerToolbar: boolean;
-
   /**
    * @kind boolean
    * @required -
    * @default `false`
    * @description 内容区默认为 grid 布局且有默认的 gap，设为 `true` 则使之没有 gap。
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -103,6 +76,7 @@ export class MicroViewElement extends UpdatingElement {
    * @kind boolean
    * @default `false`
    * @description 是否启用大屏模式。
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -113,6 +87,7 @@ export class MicroViewElement extends UpdatingElement {
    * @kind boolean
    * @default `false`
    * @description 是否隐藏工具栏（常用语大屏模式）。
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -124,6 +99,7 @@ export class MicroViewElement extends UpdatingElement {
    * @required -
    * @default -
    * @description 设置 banner 标题。如果要使用复杂的标题构件，请使用插槽 `bannerTitleBar`
+   * @group advanced
    */
   @property()
   bannerPageTitle: string;
@@ -131,11 +107,60 @@ export class MicroViewElement extends UpdatingElement {
   /**
    * @default -
    * @description banner 的样式
+   * @group advanced
    */
   @property({
     attribute: false,
   })
   bannerStyle: React.CSSProperties;
+
+  /**
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hasSubMenu: boolean;
+
+  /**
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hasTitleBar: boolean;
+
+  /**
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hasToolbar: boolean;
+
+  /**
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hasBanner: boolean;
+
+  /**
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hasBannerTitleBar: boolean;
+
+  /**
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hasBannerToolbar: boolean;
 
   /**
    * @description 用户点击退出大屏模式时触发。

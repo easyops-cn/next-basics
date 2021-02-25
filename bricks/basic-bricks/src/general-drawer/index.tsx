@@ -43,43 +43,61 @@ export class GeneralDrawerElement extends UpdatingElement {
   private isVisible = false;
 
   /**
-   * @kind boolean
+   * @kind string
    * @required false
    * @default -
-   * @description 是否显示右上角的关闭按钮
+   * @description 标题
+   * @group basic
    */
-  @property({ type: Boolean })
-  closable: boolean;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 点击蒙层是否允许关闭
-   */
-  @property({ type: Boolean })
-  maskClosable: boolean;
+  @property()
+  customTitle: string;
+
   /**
    * @kind number
    * @required false
    * @default -
    * @description 宽度
+   * @group basic
    */
   @property({ type: Number })
   width: number;
+
   /**
-   * @kind string
+   * @kind boolean
    * @required false
    * @default -
-   * @description 标题
+   * @description 是否显示右上角的关闭按钮
+   * @group basic
    */
-  @property()
-  customTitle: string;
+  @property({ type: Boolean })
+  closable: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 点击蒙层是否允许关闭
+   * @group basic
+   */
+  @property({ type: Boolean })
+  maskClosable: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否提供 `footer` 插槽
+   * @group basic
+   */
+  @property({ type: Boolean })
+  hasFooter: boolean;
 
   /**
    * @kind Record<string, any>
    * @required false
    * @default -
    * @description 可用于设置 Drawer 内容部分的样式
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -91,20 +109,12 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 用于设置 Drawer 弹出层的样式
+   * @group advanced
    */
   @property({
     attribute: false,
   })
   drawerStyle: Record<string, any>;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否提供 `footer` 插槽
-   */
-  @property({ type: Boolean })
-  hasFooter: boolean;
 
   constructor() {
     super();

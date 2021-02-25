@@ -46,50 +46,71 @@ export interface OpenCloseOption {
  */
 export class GeneralModalElement extends UpdatingElement {
   /**
-   * @kind Record<string, any>
+   * @kind string
    * @required false
    * @default -
-   * @description 数据来源
+   * @description 模态框标题
+   * @group basic
    */
-  @property({
-    attribute: false,
-  })
-  dataSource: Record<string, any>;
-  /**
-	* @kind {modalTitle: string}
-	* @required false
-	* @default -
-	* @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
+  @property()
+  modalTitle: string;
 
-	*/
-  @property({
-    attribute: false,
-  })
-  fields: {
-    modalTitle: string;
-  };
+  /**
+   * @required false
+   * @default -
+   * @description 标题图标
+   * @group basic
+   */
+  @property({ attribute: false })
+  titleIcon?: MenuIcon;
+
+  /**
+   * @required false
+   * @default -
+   * @description 标题对齐方式
+   * @group advanced
+   */
+  @property()
+  titleAlign?: string;
+
   /**
    * @kind string | number
    * @required false
    * @default -
    * @description 模态框宽度
+   * @group basic
    */
   @property({ attribute: false })
   width: string | number;
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description 数据来源
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  dataSource: Record<string, any>;
+
   /**
    * @kind string
    * @required false
    * @default `"确认"`
    * @description 确认按钮文字
+   * @group basic
    */
   @property()
   okText: string;
 
   /**
-   * @kind `ButtonType`("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
+   * @kind ButtonType
    * @required false
    * @default `"primary"`
-   * @description 模态框确认按钮类型
+   * @description 模态框确认按钮类型 ButtonType("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
+   * @group basic
    */
   @property()
   okType: ButtonType;
@@ -99,6 +120,7 @@ export class GeneralModalElement extends UpdatingElement {
    * @required false
    * @default `false`
    * @description 是否禁用确认按钮
+   * @group basic
    */
   @property({ type: Boolean })
   okDisabled: boolean;
@@ -108,6 +130,7 @@ export class GeneralModalElement extends UpdatingElement {
    * @required false
    * @default `"取消"`
    * @description 取消按钮文字
+   * @group basic
    */
   @property()
   cancelText: string;
@@ -117,24 +140,17 @@ export class GeneralModalElement extends UpdatingElement {
    * @required false
    * @default `false`
    * @description 是否隐藏取消按钮
+   * @group basic
    */
   @property({ type: Boolean })
   hideCancelButton: boolean;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 模态框标题
-   */
-  @property()
-  modalTitle: string;
 
   /**
    * @kind boolean
    * @required false
    * @default `true`
    * @description 点击确定时，是否立即关闭模态框，如果设为`false`，则需要自行关闭。
+   * @group basic
    */
   @property({ attribute: false }) closeWhenOk = true;
 
@@ -143,41 +159,42 @@ export class GeneralModalElement extends UpdatingElement {
    * @required false
    * @default `false`
    * @description 是否启用 footer 插槽
+   * @group basic
    */
   @property({ type: Boolean })
   enableFooterSlot: boolean;
+
+  /**
+   * @default `false`
+   * @description 全屏模式
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  fullscreen?: boolean;
 
   /**
    * @kind object
    * @required false
    * @default -
    * @description 完全透传给 antd 的 Modal 属性，详见：[https://ant.design/components/modal-cn/#API](https://ant.design/components/modal-cn/#API)
+   * @group advanced
    */
   @property({ attribute: false })
   configProps: ModalProps;
 
   /**
+   * @kind {modalTitle: string}
    * @required false
    * @default -
-   * @description 标题对齐方式
+   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
+   * @group advanced
    */
-  @property()
-  titleAlign?: string;
-
-  /**
-   * @required false
-   * @default -
-   * @description 标题图标
-   */
-  @property({ attribute: false })
-  titleIcon?: MenuIcon;
-
-  /**
-   * @default `false`
-   * @description 全屏模式
-   */
-  @property({ type: Boolean })
-  fullscreen?: boolean;
+  @property({
+    attribute: false,
+  })
+  fields: {
+    modalTitle: string;
+  };
 
   private _mountPoint: HTMLElement;
   private isVisible = false;

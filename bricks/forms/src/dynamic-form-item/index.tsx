@@ -70,7 +70,7 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 * @id forms.dynamic-form-item
 * @name forms.dynamic-form-item
 * @docKind brick
-* @description 多列显示可以动态增加或删除的表单项，目前支持 input 和 select 类型
+* @description 多列显示可以动态增加或删除的表单项，目前支持 input 和 select 等多种类型
 * @author jo
 * @slots
 * @history
@@ -143,37 +143,31 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 */
 export class DynamicFormItemElement extends FormItemElement {
   private manualEditedValue: any[];
+
   /**
    * @kind string
    * @required true
    * @default -
    * @description 表单项字段名
+   * @group basic
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
    * @default -
    * @description 表单项字段说明
+   * @group basic
    */
   @property({ attribute: false }) label: string;
 
   /**
-   * @kind `any[]`
-   * @required -️
-   * @default -
-   * @description 动态表单项的初始值，一般跟 `general-form` 搭配使用，则初始值的赋值在 `general-form` 的 `values` 属性上设置，具体格式如 demo 所示，把每一列 `name` 值作为 `key`，`value` 为该列的具体值
-   */
-  @property({
-    attribute: false,
-  })
-  value: any;
-
-  /**
-   * @kind `FormItemColumnsProps[]`
+   * @kind FormItemColumnsProps[]
    * @required true
    * @default -
    * @description 每一列表单项的配置， 详见下表
+   * @group basic
    */
   @property({
     attribute: false,
@@ -181,10 +175,34 @@ export class DynamicFormItemElement extends FormItemElement {
   columns: FormItemColumnsProps[];
 
   /**
+   * @kind any[]
+   * @required -️
+   * @default -
+   * @description 动态表单项的初始值，一般跟 `general-form` 搭配使用，则初始值的赋值在 `general-form` 的 `values` 属性上设置，具体格式如 demo 所示，把每一列 `name` 值作为 `key`，`value` 为该列的具体值
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  value: any;
+
+  /**
+   * @required ️ -
+   * @default false
+   * @description 当为 `true` 时表单只剩下一行时不允许被删除，隐藏对应的删除按钮，当某一列必填时可以达到整个表单项也是必填的效果
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  oneRowRequired: boolean;
+
+  /**
    * @kind boolean
    * @required ️ -
    * @default false
    * @description 是否禁止添加的按钮
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -196,6 +214,7 @@ export class DynamicFormItemElement extends FormItemElement {
    * @required ️ -
    * @default false
    * @description 是否隐藏添加的按钮
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -206,18 +225,8 @@ export class DynamicFormItemElement extends FormItemElement {
    * @kind boolean
    * @required ️ -
    * @default false
-   * @description 是否禁止每一行删除的按钮
-   */
-  @property({
-    type: Boolean,
-  })
-  disabledDeleteButton: boolean;
-
-  /**
-   * @kind boolean
-   * @required ️ -
-   * @default false
    * @description 是否隐藏每一行删除的按钮
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -228,19 +237,32 @@ export class DynamicFormItemElement extends FormItemElement {
    * @kind boolean
    * @required ️ -
    * @default false
-   * @deprecated
-   * @description 是否显示背景样式,根据 UI 规范该表单项都会提供背景样式，故已废弃
+   * @description 是否禁止每一行删除的按钮
+   * @group advanced
    */
   @property({
     type: Boolean,
   })
-  showBackground: boolean;
+  disabledDeleteButton: boolean;
+
+  /**
+   * @kind (row:any , index: number) => boolean
+   * @required ️ -
+   * @default  -
+   * @description 通过传入函数来控制每一行的的删除按钮是否 disabled， `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一行的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  rowDisabledhandler: CommonItemProps["rowDisabledhandler"];
 
   /**
    * @kind boolean
    * @required ️ -
    * @default true
    * @description 是否在初始化完成后额外触发一次动态表单项的 onChange 事件, 该事件会传出当前的初始值给到用户，这里因为历史原因之前默认行为就是在初始化后会触发该事件，这里为了兼容之前的行为，默认值只能设置为 true。
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -248,25 +270,17 @@ export class DynamicFormItemElement extends FormItemElement {
   emitChangeOnInit = true;
 
   /**
+   * @kind boolean
    * @required ️ -
    * @default false
-   * @description 当为 `true` 时表单只剩下一行时不允许被删除，隐藏对应的删除按钮，当某一列必填时可以达到整个表单项也是必填的效果
+   * @deprecated
+   * @description 是否显示背景样式,根据 UI 规范该表单项都会提供背景样式，故已废弃
+   * @group advanced
    */
   @property({
     type: Boolean,
   })
-  oneRowRequired: boolean;
-
-  /**
-   * @kind `(row:any , index: number) => boolean`
-   * @required ️ -
-   * @default  -
-   * @description 通过传入函数来控制每一行的的删除按钮是否 disabled， `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一行的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled
-   */
-  @property({
-    attribute: false,
-  })
-  rowDisabledhandler: CommonItemProps["rowDisabledhandler"];
+  showBackground: boolean;
 
   connectedCallback(): void {
     // Don't override user's style settings.
