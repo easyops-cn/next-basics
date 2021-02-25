@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
+import { BuilderRouteOrBrickNode, ContextConf } from "@next-core/brick-types";
 import {
   AbstractBuilderDataManager,
   BuilderRuntimeNode,
@@ -30,6 +30,7 @@ export interface BuilderContainerProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
   onToggleFullscreen?: (fullscreen?: boolean) => void;
   onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
+  onContextUpdate?: (context: ContextConf[]) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -46,6 +47,7 @@ export function LegacyBuilderContainer(
     onAskForDeletingNode,
     onToggleFullscreen,
     onSwitchToolboxTab,
+    onContextUpdate,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -100,7 +102,10 @@ export function LegacyBuilderContainer(
           [styles.fullscreen]: fullscreen,
         })}
       >
-        <BuilderToolbox brickList={brickList} />
+        <BuilderToolbox
+          brickList={brickList}
+          onContextUpdate={onContextUpdate}
+        />
         <BuilderCanvas dataSource={dataSource} />
       </div>
       <BuilderContextMenu onAskForDeletingNode={onAskForDeletingNode} />
