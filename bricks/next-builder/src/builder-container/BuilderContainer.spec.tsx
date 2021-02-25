@@ -2,6 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
 import { BuilderContainer } from "./BuilderContainer";
+import { ToolboxTab } from "./interfaces";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
@@ -64,5 +65,16 @@ describe("BuilderContainer", () => {
       "fullscreen"
     );
     expect(onToggleFullscreen).toBeCalledWith(true);
+  });
+
+  it("should switch toolbox tab", () => {
+    const onSwitchToolboxTab = jest.fn();
+    mount(
+      <BuilderContainer
+        initialToolboxTab={ToolboxTab.EVENTS_VIEW}
+        onSwitchToolboxTab={onSwitchToolboxTab}
+      />
+    );
+    expect(onSwitchToolboxTab).toBeCalledWith(ToolboxTab.EVENTS_VIEW);
   });
 });

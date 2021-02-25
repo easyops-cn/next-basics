@@ -3,6 +3,8 @@ import { shallow } from "enzyme";
 import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
 import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { defaultToolboxTab } from "../constants";
+import { ToolboxTab } from "../interfaces";
 
 jest.mock("../BuilderUIContext");
 
@@ -11,10 +13,16 @@ const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
 >;
 
 describe("BuilderToolbox", () => {
+  let toolboxTab: ToolboxTab;
   beforeEach(() => {
-    mockUseBuilderUIContext.mockReturnValue({
+    toolboxTab = defaultToolboxTab;
+    mockUseBuilderUIContext.mockImplementation(() => ({
       fullscreen: false,
-    });
+      toolboxTab,
+      setToolboxTab: ((tab: ToolboxTab) => {
+        toolboxTab = tab;
+      }) as any,
+    }));
   });
 
   it("should show brick library by default", () => {
@@ -37,19 +45,21 @@ describe("BuilderToolbox", () => {
   });
 
   it("should switch to tree view", () => {
+    expect(toolboxTab).toBe(defaultToolboxTab);
     const wrapper = shallow(<BuilderToolbox />);
     wrapper.find(".tabLink").at(1).invoke("onClick")(null);
-    expect(wrapper.find("BrickLibrary").length).toBe(0);
-    expect(wrapper.find("StoryboardTreeView").length).toBe(1);
-    expect(wrapper.find("EventsView").length).toBe(0);
+    expect(toolboxTab).toBe(ToolboxTab.TREE_VIEW);
+    const wrapper2 = shallow(<BuilderToolbox />);
+    expect(wrapper2.find("StoryboardTreeView").length).toBe(1);
   });
 
   it("should switch to events view", () => {
+    expect(toolboxTab).toBe(defaultToolboxTab);
     const wrapper = shallow(<BuilderToolbox />);
     wrapper.find(".tabLink").at(2).invoke("onClick")(null);
-    expect(wrapper.find("BrickLibrary").length).toBe(0);
-    expect(wrapper.find("StoryboardTreeView").length).toBe(0);
-    expect(wrapper.find("EventsView").length).toBe(1);
+    expect(toolboxTab).toBe(ToolboxTab.EVENTS_VIEW);
+    const wrapper2 = shallow(<BuilderToolbox />);
+    expect(wrapper2.find("EventsView").length).toBe(1);
   });
 
   it("should enter fullscreen", () => {
