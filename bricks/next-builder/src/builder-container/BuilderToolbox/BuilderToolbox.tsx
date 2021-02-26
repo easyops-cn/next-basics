@@ -14,7 +14,7 @@ import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
-import { BuilderRouteOrBrickNode, ContextConf } from "@next-core/brick-types";
+import { ContextConf } from "@next-core/brick-types";
 
 import styles from "./BuilderToolbox.module.css";
 

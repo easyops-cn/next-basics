@@ -29,6 +29,7 @@
   "peerDependencies": {
     "@next-dll/editor-bricks-helper": "*",
     "@next-dll/react-dnd": "*",
-    "@next-dll/ace": "*"
+    "@next-dll/ace": "*",
+    "@next-dll/d3": "*"
   }
 }
