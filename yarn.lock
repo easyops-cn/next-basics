@@ -2241,7 +2241,7 @@
   resolved "https://registry.npm.taobao.org/@next-core/easyops-analytics/download/@next-core/easyops-analytics-0.1.7.tgz#f4dc193eccf3dddc938bc76a587e304ce1741851"
   integrity sha1-9NwZPszz3dyTi8dqWH4wTOF0GFE=
 
-"@next-core/editor-bricks-helper@^0.10.0", "@next-core/editor-bricks-helper@^0.10.1":
+"@next-core/editor-bricks-helper@^0.10.1":
   version "0.10.1"
   resolved "https://registry.npm.taobao.org/@next-core/editor-bricks-helper/download/@next-core/editor-bricks-helper-0.10.1.tgz#376e8c157f0c249d3aa1945e297449f549e8d013"
   integrity sha1-N26MFX8MJJ06oZReKXRJ9Uno0BM=
