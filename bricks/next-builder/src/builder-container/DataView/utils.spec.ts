@@ -1,6 +1,6 @@
 import { ContextConf } from "@next-core/brick-types";
 import {
-  filterOptions,
+  searchList,
   OptionType,
   safeDumpFields,
   safeLoadFields,
@@ -8,8 +8,14 @@ import {
   ContextItemFormValue,
 } from "./utils";
 
-describe("filterOptions", () => {
-  it.each<[string, { value: string; options: OptionType[] }, OptionType[]]>([
+describe("searchList", () => {
+  it.each<
+    [
+      string,
+      { value: string; options: OptionType[]; field?: string },
+      OptionType[]
+    ]
+  >([
     [
       "should work",
       {
@@ -28,6 +34,7 @@ describe("filterOptions", () => {
             value: "next-builder.get-detail",
           },
         ],
+        field: "label",
       },
       [
         {
@@ -54,6 +61,7 @@ describe("filterOptions", () => {
             value: "packages.get-list",
           },
         ],
+        field: "label",
       },
       [
         {
@@ -72,11 +80,33 @@ describe("filterOptions", () => {
             value: "next-builder.get-list",
           },
         ],
+        field: "label",
       },
       [],
     ],
-  ])("filterOptions(%j) should work", async (condition, params, result) => {
-    expect(filterOptions(params.value, params.options)).toEqual(result);
+    [
+      "should return the whole list when value is empty",
+      {
+        value: "",
+        options: [
+          {
+            label: "next-builder.get-list",
+            value: "next-builder.get-list",
+          },
+        ],
+        field: "label",
+      },
+      [
+        {
+          label: "next-builder.get-list",
+          value: "next-builder.get-list",
+        },
+      ],
+    ],
+  ])("searchList(%j) should work", async (condition, params, result) => {
+    expect(searchList(params.options, params.value, params.field)).toEqual(
+      result
+    );
   });
 });
 

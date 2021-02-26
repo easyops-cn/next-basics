@@ -1,22 +1,31 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
-import { Button, Input, Form } from "antd";
+import { Button, Input, Form, Modal } from "antd";
 import {
   PlusOutlined,
   SearchOutlined,
   LinkOutlined,
   CodeOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
 } from "@ant-design/icons";
 import styles from "./DataView.module.css";
 import { ContextConf } from "@next-core/brick-types";
 import { BrickOptionItem } from "../interfaces";
-import { cloneDeep, set } from "lodash";
+import { cloneDeep, findIndex, set, uniqueId } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import { searchList } from "./utils";
+
+const symbolId = Symbol("uid");
 
 export interface DataViewProps {
   brickList?: BrickOptionItem[];
   onContextUpdate?: (context: ContextConf[]) => void;
+}
+
+interface ContextConfWithSymbolId extends ContextConf {
+  [symbolId]: string;
 }
 
 export function DataView({
@@ -24,12 +33,22 @@ export function DataView({
   onContextUpdate,
 }: DataViewProps): React.ReactElement {
   const rootNode = useBuilderNode({ isRoot: true });
-  const context = rootNode?.context ?? [];
+  const contextWithUniqueSymbolId: ContextConfWithSymbolId[] = useMemo(() => {
+    const originContext = ((rootNode?.context as ContextConf[]) ?? []).map(
+      (v) => ({
+        ...v,
+        [symbolId]: uniqueId(),
+      })
+    );
+    return originContext;
+  }, [rootNode?.context]);
+
   const [settingItemForm] = Form.useForm();
-  const [q, setQ] = useState<string>();
+  const [q, setQ] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(false);
   const [settingItem, setSettingItem] = useState<ContextConf>();
-  const settingItemIndex = useRef<number | undefined>();
+  const settingUid = useRef<string | undefined>();
+
   const handleSearch = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
       setQ(event.target.value);
@@ -37,10 +56,15 @@ export function DataView({
     []
   );
 
-  const setData = (context?: ContextConf, index?: number): void => {
-    setSettingItem(context);
+  const filteredContextList: ContextConfWithSymbolId[] = useMemo(
+    () => searchList(contextWithUniqueSymbolId, q, "name"),
+    [contextWithUniqueSymbolId, q]
+  );
+
+  const setData = (contextValue?: ContextConf, uid?: string): void => {
+    setSettingItem(contextValue);
     setVisible(true);
-    settingItemIndex.current = index;
+    settingUid.current = uid;
   };
 
   const handleOk = () => {
@@ -50,8 +74,10 @@ export function DataView({
 
   const handleContextItemUpdate = (contextItem: ContextConf) => {
     const contextToSubmit = set(
-      cloneDeep(context),
-      settingItemIndex.current ?? context.length,
+      cloneDeep(contextWithUniqueSymbolId),
+      settingUid.current
+        ? findIndex(contextWithUniqueSymbolId, [symbolId, settingUid.current])
+        : contextWithUniqueSymbolId.length,
       contextItem
     );
     onContextUpdate?.(contextToSubmit);
@@ -59,6 +85,33 @@ export function DataView({
 
   const handleCancel = () => {
     setVisible(false);
+  };
+
+  const handleContextItemDelete = (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    dataItem: ContextConfWithSymbolId
+  ): void => {
+    e.stopPropagation();
+    // istanbul ignore next
+    Modal.confirm({
+      title: "Delete Confirm",
+      icon: <ExclamationCircleOutlined />,
+      content: (
+        <span>
+          Are you sure delete data{" "}
+          <strong className={styles.dangerText}>{dataItem.name}</strong>?
+        </span>
+      ),
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        const contextToSubmit = contextWithUniqueSymbolId.filter(
+          (v) => v[symbolId] !== dataItem[symbolId]
+        );
+        onContextUpdate?.(contextToSubmit);
+      },
+    });
   };
 
   return (
@@ -72,15 +125,20 @@ export function DataView({
         />
       </div>
       <div className={styles.wrapper}>
-        <Button icon={<PlusOutlined />} size="small" onClick={() => setData()}>
+        <Button
+          icon={<PlusOutlined />}
+          size="small"
+          onClick={() => setData()}
+          data-testid="add-data-btn"
+        >
           Add Data
         </Button>
         <div className={styles.varList}>
-          {context?.length > 0 &&
-            context.map((data, index) => (
+          {filteredContextList?.length > 0 &&
+            filteredContextList.map((data) => (
               <div
                 className={styles.varItem}
-                onClick={() => setData(data, index)}
+                onClick={() => setData(data, data[symbolId])}
                 key={data.name}
               >
                 {data.resolve ? (
@@ -91,6 +149,13 @@ export function DataView({
                   <CodeOutlined style={{ color: "var(--theme-green-color)" }} />
                 )}
                 <span className={styles.varName}>{data.name}</span>
+                <Button
+                  type="link"
+                  danger
+                  icon={<DeleteOutlined />}
+                  className={styles.deleteIcon}
+                  onClick={(e) => handleContextItemDelete(e, data)}
+                />
               </div>
             ))}
         </div>
