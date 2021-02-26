@@ -115,10 +115,7 @@ export class GeneralFormElement
    * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
    * @group basic
    */
-  @property({
-    attribute: false,
-  })
-  staticValues: Record<string, any>;
+  staticValues: Record<string, any>; // PS: 暂时不能使用 @property 装饰, 因为更新 staticValues 会重新渲染表单，但是 values 不是跟表单当前的值同步的，结果导致表单被重置
 
   /**
    * @kind string
