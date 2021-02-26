@@ -86,6 +86,8 @@ function EventNodeHandlerComponent({
   let title: string;
   let content: string;
   let handlerClassName: string;
+  let targetNodeUid: number;
+  let isTargetOfSelf = false;
   if (isBuiltinHandler(handler)) {
     icon = <FontAwesomeIcon icon="code" />;
     title = "action:";
@@ -113,10 +115,9 @@ function EventNodeHandlerComponent({
     handlerClassName = styles.handlerTypeOfUnknown;
   }
 
-  let targetNodeUid: number;
-
   if (isExecuteHandler(handler) || isSetPropsHandler(handler)) {
     targetNodeUid = targetMap.get(handler.target as string);
+    isTargetOfSelf = handler.target === "_self";
   }
 
   const handleGotoTargetNode = React.useCallback(() => {
@@ -129,6 +130,7 @@ function EventNodeHandlerComponent({
     <li
       className={classNames(styles.handler, handlerClassName, {
         [styles.targetIsAvailable]: !!targetNodeUid,
+        [styles.isTargetOfSelf]: isTargetOfSelf,
       })}
       style={{
         ...styleConfig.item,
