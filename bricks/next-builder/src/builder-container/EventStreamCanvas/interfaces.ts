@@ -34,6 +34,7 @@ export interface EventDownstreamNodeOfEvent extends EventDownstreamNodeBase {
 export interface EventDownstreamNodeOfCallback extends EventDownstreamNodeBase {
   type: EventDownstreamType.CALLBACK;
   callbackType: keyof BrickEventHandlerCallback;
+  parentHandlerIndex: number;
   handlers: BrickEventHandler[];
 }
 

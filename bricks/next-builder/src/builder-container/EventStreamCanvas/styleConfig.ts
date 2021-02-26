@@ -4,12 +4,12 @@ export const styleConfig = {
     padding: 8,
   },
   title: {
-    height: 30,
+    height: 24,
     lineHeight: "24px",
   },
+  titleMarginBottom: 6,
   item: {
-    height: 28,
-    lineHeight: "28px",
+    height: 40,
     marginBottom: 7,
   },
 };
