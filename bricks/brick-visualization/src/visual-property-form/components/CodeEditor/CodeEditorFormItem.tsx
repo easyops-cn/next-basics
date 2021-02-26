@@ -34,7 +34,10 @@ export function CodeEditorFormItem(
       key={props.name}
       name={props.name}
       label={props.label}
-      rules={[{ required: props.required }, { validator: validatorFn }]}
+      rules={[
+        { required: props.required, message: `请输入${props.name}` },
+        { validator: validatorFn },
+      ]}
     >
       <CodeEditorItem
         tabSize={2}

@@ -14,8 +14,14 @@ import update from "immutability-helper";
 import { isNil, upperFirst } from "lodash";
 import styles from "./VisualPropertyForm.module.css";
 import { FormInstance, FormProps } from "antd/lib/form";
-import { CodeEditorFormItem } from "./CodeEditorFormItem";
-import { mergeProperties, calculateValue, groupByType } from "./processor";
+import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
+import { IconSelectFormItem } from "./components/IconSelect/IconSelectFormItem";
+import {
+  mergeProperties,
+  calculateValue,
+  groupByType,
+  yamlStringify,
+} from "./processor";
 import { OTHER_FORM_ITEM_FIELD } from "./constant";
 
 type FormItemType = boolean | string | string[] | number | Record<string, any>;
@@ -90,8 +96,11 @@ export function LegacyVisualPropertyForm(
   }));
 
   useEffect(() => {
-    setTypeList(mergeProperties(propertyTypeList, brickProperties));
-    form.setFieldsValue(calculateValue(propertyTypeList, brickProperties));
+    const newTypeList = mergeProperties(propertyTypeList, brickProperties);
+    setTypeList(newTypeList);
+
+    const newValue = calculateValue(propertyTypeList, brickProperties);
+    form.setFieldsValue(newValue);
   }, [propertyTypeList, brickProperties]);
 
   const handleLabelClick = (name: string): void => {
@@ -107,7 +116,7 @@ export function LegacyVisualPropertyForm(
           ? selected.value
           : isNil(selected.value)
           ? ""
-          : String(selected.value),
+          : yamlStringify(selected.value),
     });
     const newTypeList = update(typeList, {
       $splice: [[index, 1, { ...selected, mode: nextMode }]],
@@ -241,6 +250,17 @@ export function LegacyVisualPropertyForm(
     );
   };
 
+  const renderIconItem = (item: UnionPropertyType): React.ReactElement => {
+    return (
+      <IconSelectFormItem
+        key={item.name}
+        name={item.name}
+        label={renderLabel(item, true)}
+        required={item.required === Required.True}
+      />
+    );
+  };
+
   const renderCodeEditorItem = (item: PropertyType): React.ReactElement => {
     return renderEditorItem(item, true);
   };
@@ -255,6 +275,8 @@ export function LegacyVisualPropertyForm(
         return renderInputNumberItem(item);
       case "boolean":
         return renderBooleanItem(item);
+      case "MenuIcon":
+        return renderIconItem(item);
       default:
         return renderCodeEditorItem(item);
     }

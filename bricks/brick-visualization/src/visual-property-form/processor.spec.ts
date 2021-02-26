@@ -82,7 +82,7 @@ describe("processor test", () => {
         age: 123,
         count: undefined,
         nickname: undefined,
-        name: "lucy\n",
+        name: "lucy",
         others: "hobby: run\ncategory: student\n",
       });
     });
@@ -104,7 +104,7 @@ describe("processor test", () => {
       const result = calculateValue(propertyList, brickProperties);
       expect(result).toEqual({
         age: 123,
-        name: "lucy\n",
+        name: "lucy",
         lable: undefined,
         others: "hot: true\nhobby: run\ncategory: <% CTX.category %>\n",
       });
@@ -117,7 +117,7 @@ describe("processor test", () => {
       const result2 = calculateValue(propertyList, brickProperties2);
 
       expect(result2).toEqual({
-        name: "lucy\n",
+        name: "lucy",
         age: 12,
         label: "name\n",
         others: "",

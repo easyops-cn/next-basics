@@ -1,13 +1,19 @@
 import React from "react";
 import { Input, Tooltip } from "antd";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { VisualPropertyForm } from "./VisualPropertyForm";
-import { CodeEditorFormItem } from "./CodeEditorFormItem";
+import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { act } from "react-dom/test-utils";
 
 jest.mock("@next-libs/editor-components", () => ({
   CodeEditorItem: function MockEditor() {
     return <div>code editor</div>;
+  },
+}));
+
+jest.mock("@next-libs/forms", () => ({
+  IconSelectItem: function MockIconSelect() {
+    return <div>icon select editor</div>;
   },
 }));
 
@@ -151,6 +157,41 @@ describe("VisualPropertyForm", () => {
       formRef.current.resetPropertyFields();
     });
 
-    expect(wrapper.find(Input).at(0).prop("value")).toEqual("lucy\n");
+    expect(wrapper.find(Input).at(0).prop("value")).toEqual("lucy");
+  });
+
+  it("should render icon", () => {
+    const props = {
+      brickProperties: {
+        icon: {
+          lib: "fa",
+          icon: "ad",
+          prefix: "fas",
+        },
+      },
+      propertyTypeList: [
+        { name: "icon", type: "MenuIcon", description: "图标" },
+      ],
+      labelIcon: {
+        normal: {
+          lib: "fa",
+          icon: "code",
+          prefix: "fas",
+          color: "#167be0",
+        },
+        advanced: {
+          lib: "fa",
+          icon: "cog",
+          prefix: "fas",
+          color: "#167be0",
+        },
+      },
+    } as any;
+
+    const wrapper = shallow(<VisualPropertyForm {...props} />);
+
+    expect(wrapper.find("IconSelectFormItem").render().text()).toEqual(
+      expect.stringContaining("icon select editor")
+    );
   });
 });

@@ -22,7 +22,8 @@
   "sideEffects": true,
   "devDependencies": {
     "@next-libs/basic-components": "^2.0.0",
-    "@next-libs/editor-components": "^1.0.0"
+    "@next-libs/editor-components": "^1.0.0",
+    "@next-libs/forms": "^2.1.1"
   },
   "peerDependencies": {
     "@next-dll/ace": "*"
