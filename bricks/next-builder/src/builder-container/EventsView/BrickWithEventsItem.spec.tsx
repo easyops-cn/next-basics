@@ -10,10 +10,10 @@ const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
 >;
 
 describe("BrickWithEventsItem", () => {
-  const setEventStreamActiveNodeUid = jest.fn();
+  const setEventStreamNodeId = jest.fn();
   beforeEach(() => {
     mockUseBuilderUIContext.mockReturnValue({
-      setEventStreamActiveNodeUid,
+      setEventStreamNodeId,
     });
   });
 
@@ -61,10 +61,9 @@ describe("BrickWithEventsItem", () => {
     const wrapper = shallow(
       <BrickWithEventsItem
         node={{
-          $$uid: 1,
           type: "brick",
           brick: "my.any-brick",
-          id: "B-001",
+          id: "B-007",
           alias: "my-brick",
         }}
         hasEvents
@@ -73,6 +72,6 @@ describe("BrickWithEventsItem", () => {
     );
     expect(wrapper.find(".brickWithEventsItem").hasClass("active")).toBe(false);
     wrapper.find(".brickWithEventsItem").simulate("click");
-    expect(setEventStreamActiveNodeUid).toBeCalledWith(1);
+    expect(setEventStreamNodeId).toBeCalledWith("B-007");
   });
 });

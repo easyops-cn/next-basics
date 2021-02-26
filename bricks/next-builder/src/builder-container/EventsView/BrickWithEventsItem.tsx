@@ -11,18 +11,15 @@ export function BrickWithEventsItem({
   hasEvents,
   isTargetOfEvents,
 }: BricksWithEvents): React.ReactElement {
-  const {
-    eventStreamActiveNodeUid,
-    setEventStreamActiveNodeUid,
-  } = useBuilderUIContext();
+  const { eventStreamNodeId, setEventStreamNodeId } = useBuilderUIContext();
   const handleNodeClick = React.useCallback(() => {
-    setEventStreamActiveNodeUid(node.$$uid);
-  }, [node, setEventStreamActiveNodeUid]);
+    setEventStreamNodeId(node.id);
+  }, [node, setEventStreamNodeId]);
 
   return (
     <a
       className={classNames(styles.brickWithEventsItem, {
-        [styles.active]: eventStreamActiveNodeUid === node.$$uid,
+        [styles.active]: eventStreamNodeId === node.id,
       })}
       role="button"
       onClick={handleNodeClick}

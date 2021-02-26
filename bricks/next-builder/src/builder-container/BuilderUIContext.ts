@@ -7,8 +7,8 @@ export interface ContextOfBuilderUI {
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;
   toolboxTab?: ToolboxTab;
   setToolboxTab?: React.Dispatch<React.SetStateAction<ToolboxTab>>;
-  eventStreamActiveNodeUid?: number;
-  setEventStreamActiveNodeUid?: React.Dispatch<React.SetStateAction<number>>;
+  eventStreamNodeId?: string;
+  setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const BuilderUIContext = React.createContext<ContextOfBuilderUI>({});

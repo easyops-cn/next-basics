@@ -5,9 +5,10 @@ import {
   BuilderRuntimeNode,
   useBuilderData,
 } from "@next-core/editor-bricks-helper";
-import { EventDownstreamGraph } from "./EventDownstreamGraph";
+import { EventStreamGraph } from "./EventStreamGraph";
 import { EventDownstreamNode, EventDownstreamType } from "./interfaces";
 import { buildBrickEventDownstreamTree } from "./buildBrickEventDownstreamTree";
+import { buildBrickEventUpstreamTree } from "./buildBrickEventUpstreamTree";
 import { useBuilderUIContext } from "../BuilderUIContext";
 
 export interface EventDownstreamGraphComponentProps {
@@ -17,30 +18,35 @@ export interface EventDownstreamGraphComponentProps {
 export function EventDownstreamGraphComponent({
   node,
 }: EventDownstreamGraphComponentProps): React.ReactElement {
-  const { fullscreen, setEventStreamActiveNodeUid } = useBuilderUIContext();
+  const { fullscreen, setEventStreamNodeId } = useBuilderUIContext();
 
-  const eventRoot = React.useMemo(() => {
-    const root: EventDownstreamNode = {
+  const eventDownstreamTree = React.useMemo(() => {
+    const tree: EventDownstreamNode = {
       type: EventDownstreamType.ROOT,
       node,
       children: [],
     };
-    buildBrickEventDownstreamTree(root, node.$$parsedEvents);
-    return root;
+    buildBrickEventDownstreamTree(tree, node.$$parsedEvents);
+    return tree;
   }, [node]);
 
   const { nodes } = useBuilderData();
   const targetMap = React.useMemo(() => {
-    const map = new Map<string, number>();
+    const map = new Map<string, string>();
     for (const n of nodes) {
       for (const selector of n.$$matchedSelectors) {
-        map.set(selector, n.$$uid);
+        map.set(selector, n.id);
       }
     }
     return map;
   }, [nodes]);
 
-  const visual = React.useMemo(() => new EventDownstreamGraph(), []);
+  const eventUpstreamTree = React.useMemo(
+    () => buildBrickEventUpstreamTree(node, nodes),
+    [node, nodes]
+  );
+
+  const visual = React.useMemo(() => new EventStreamGraph(), []);
   const ref = React.useRef<HTMLDivElement>(null);
 
   const resize = React.useCallback(() => {
@@ -87,8 +93,17 @@ export function EventDownstreamGraphComponent({
   }, [resize]);
 
   const handleRender = React.useCallback(() => {
-    visual.render(eventRoot, { targetMap, setEventStreamActiveNodeUid });
-  }, [eventRoot, setEventStreamActiveNodeUid, targetMap, visual]);
+    visual.render(eventDownstreamTree, eventUpstreamTree, {
+      targetMap,
+      setEventStreamNodeId,
+    });
+  }, [
+    eventDownstreamTree,
+    eventUpstreamTree,
+    setEventStreamNodeId,
+    targetMap,
+    visual,
+  ]);
 
   React.useEffect(() => {
     handleRender();

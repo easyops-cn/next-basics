@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import classNames from "classnames";
-import { 
-  BuilderRouteOrBrickNode, 
+import {
+  BuilderRouteOrBrickNode,
   ContextConf,
-  BuilderRouteNode
+  BuilderRouteNode,
 } from "@next-core/brick-types";
 import {
   AbstractBuilderDataManager,
@@ -28,7 +28,7 @@ export interface BuilderContainerProps {
   processing?: boolean;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
-  initialEventStreamActiveNodeUid?: number;
+  initialEventStreamNodeId?: string;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
@@ -36,9 +36,9 @@ export interface BuilderContainerProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
   onToggleFullscreen?: (fullscreen?: boolean) => void;
   onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
-  onSwitchEventStreamActiveNode?: (nodeUid?: number) => void;
+  onSelectEventStreamNode?: (nodeId?: string) => void;
   onContextUpdate?: (context: ContextConf[]) => void;
-  onRouteSelect?: (route:BuilderRouteNode)=>void;
+  onRouteSelect?: (route: BuilderRouteNode) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -49,7 +49,7 @@ export function LegacyBuilderContainer(
     processing,
     initialFullscreen,
     initialToolboxTab,
-    initialEventStreamActiveNodeUid,
+    initialEventStreamNodeId,
     onNodeAdd,
     onNodeReorder,
     onNodeMove,
@@ -57,7 +57,7 @@ export function LegacyBuilderContainer(
     onAskForDeletingNode,
     onToggleFullscreen,
     onSwitchToolboxTab,
-    onSwitchEventStreamActiveNode,
+    onSelectEventStreamNode,
     onContextUpdate,
     onRouteSelect,
   }: BuilderContainerProps,
@@ -65,10 +65,9 @@ export function LegacyBuilderContainer(
 ): React.ReactElement {
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
   const [toolboxTab, setToolboxTab] = React.useState(initialToolboxTab);
-  const [
-    eventStreamActiveNodeUid,
-    setEventStreamActiveNodeUid,
-  ] = React.useState(initialEventStreamActiveNodeUid);
+  const [eventStreamNodeId, setEventStreamNodeId] = React.useState(
+    initialEventStreamNodeId
+  );
 
   const manager = useBuilderDataManager();
 
@@ -101,18 +100,18 @@ export function LegacyBuilderContainer(
 
   React.useEffect(() => {
     if (toolboxTab !== ToolboxTab.EVENTS_VIEW) {
-      setEventStreamActiveNodeUid(null);
+      setEventStreamNodeId(null);
     }
     onSwitchToolboxTab?.(toolboxTab);
   }, [toolboxTab, onSwitchToolboxTab]);
 
   React.useEffect(() => {
-    setEventStreamActiveNodeUid(initialEventStreamActiveNodeUid);
-  }, [initialEventStreamActiveNodeUid]);
+    setEventStreamNodeId(initialEventStreamNodeId);
+  }, [initialEventStreamNodeId]);
 
   React.useEffect(() => {
-    onSwitchEventStreamActiveNode?.(eventStreamActiveNodeUid);
-  }, [eventStreamActiveNodeUid, onSwitchEventStreamActiveNode]);
+    onSelectEventStreamNode?.(eventStreamNodeId);
+  }, [eventStreamNodeId, onSelectEventStreamNode]);
 
   return (
     <BuilderUIContext.Provider
@@ -122,8 +121,8 @@ export function LegacyBuilderContainer(
         setFullscreen,
         toolboxTab,
         setToolboxTab,
-        eventStreamActiveNodeUid,
-        setEventStreamActiveNodeUid,
+        eventStreamNodeId,
+        setEventStreamNodeId,
       }}
     >
       <div

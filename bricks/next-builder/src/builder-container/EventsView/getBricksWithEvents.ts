@@ -1,6 +1,9 @@
 import { isEmpty } from "lodash";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
-import { BrickEventHandler } from "@next-core/brick-types";
+import {
+  BrickEventHandler,
+  ExecuteCustomBrickEventHandler,
+} from "@next-core/brick-types";
 
 export interface BricksWithEvents {
   node: BuilderRuntimeNode;
@@ -21,7 +24,11 @@ export function getBricksWithEvents(
         targetToSelf: false,
       };
       for (const handlers of Object.values(node.$$parsedEvents)) {
-        collectEventTargetSelectors(handlers, eventTargetSelectors, flags);
+        collectEventTargetSelectors(
+          [].concat(handlers),
+          eventTargetSelectors,
+          flags
+        );
       }
       if (flags.targetToSelf) {
         nodesWhichTargetToSelf.add(node);
@@ -49,11 +56,11 @@ export function getBricksWithEvents(
 }
 
 function collectEventTargetSelectors(
-  handlers: BrickEventHandler | BrickEventHandler[],
+  handlers: BrickEventHandler[],
   eventTargetSelectors: Set<string>,
   flags: { targetToSelf: boolean }
 ): void {
-  for (const handler of [].concat(handlers)) {
+  for (const handler of handlers as ExecuteCustomBrickEventHandler[]) {
     if (isNonEmptyPlainString(handler.target)) {
       if (handler.target === "_self") {
         flags.targetToSelf = true;
@@ -64,12 +71,8 @@ function collectEventTargetSelectors(
       }
     }
     if (handler.callback) {
-      for (const cb of Object.values(handler.callback)) {
-        collectEventTargetSelectors(
-          cb as BrickEventHandler,
-          eventTargetSelectors,
-          flags
-        );
+      for (const cb of Object.values(handler.callback) as BrickEventHandler[]) {
+        collectEventTargetSelectors([].concat(cb), eventTargetSelectors, flags);
       }
     }
   }

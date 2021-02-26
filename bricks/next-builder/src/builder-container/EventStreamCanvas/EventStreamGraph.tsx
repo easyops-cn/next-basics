@@ -12,24 +12,30 @@ import { create, Selection } from "d3-selection";
 import { linkHorizontal } from "d3-shape";
 import { zoomIdentity } from "d3-zoom";
 import { drag } from "d3-drag";
-import { uniqueId, isNil, debounce } from "lodash";
+import { uniqueId } from "lodash";
 import classNames from "classnames";
 import { styleConfig } from "./styleConfig";
-import { EventDownstreamNode, EventDownstreamNodeOfRoot } from "./interfaces";
-import { EventNodeComponent } from "./EventNodeComponent";
-import { computeSourceX } from "./buildBrickEventDownstreamTree";
+import {
+  EventDownstreamNode,
+  EventDownstreamNodeOfRoot,
+  EventDownstreamType,
+  EventStreamNode,
+  EventUpstreamNode,
+  EventUpstreamNodeOfRoot,
+  EventUpstreamType,
+} from "./interfaces";
+import { EventStreamNodeComponent } from "./EventStreamNodeComponent";
+import { computeEventDownstreamSourceX } from "./buildBrickEventDownstreamTree";
 
-import styles from "./EventDownstreamGraph.module.css";
+import styles from "./EventStreamGraph.module.css";
+import { computeEventUpstreamSourceX } from "./buildBrickEventUpstreamTree";
 
 interface RenderOptions {
-  initialOffsetX?: number;
-  initialOffsetY?: number;
-  targetMap?: Map<string, number>;
-  setEventStreamActiveNodeUid?: React.Dispatch<React.SetStateAction<number>>;
-  onDragEnd?: (offsetX: number, offsetY: number) => void;
+  targetMap?: Map<string, string>;
+  setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export class EventDownstreamGraph {
+export class EventStreamGraph {
   private readonly canvas: Selection<
     HTMLDivElement,
     undefined,
@@ -64,18 +70,16 @@ export class EventDownstreamGraph {
   >;
   private links: Selection<
     SVGGElement,
-    HierarchyPointLink<EventDownstreamNode>,
+    HierarchyPointLink<EventStreamNode>,
     SVGGElement,
     undefined
   >;
   private nodes: Selection<
     HTMLDivElement,
-    HierarchyPointNode<EventDownstreamNode>,
+    HierarchyPointNode<EventStreamNode>,
     HTMLDivElement,
     undefined
   >;
-
-  private onDragEnd: (offsetX: number, offsetY: number) => void;
 
   private offsetX = 0;
   private offsetY = 0;
@@ -113,25 +117,16 @@ export class EventDownstreamGraph {
     this.nodes = this.nodesContainer.selectAll(`.${styles.nodeWrapper}`);
 
     /* istanbul ignore next */
-    let moved: boolean;
     this.canvas.call(
       drag<HTMLDivElement, any>()
         .on("start", () => {
-          moved = false;
           this.canvas.classed(styles.grabbing, true);
         })
         .on("drag", (event) => {
           const { dx, dy } = event as any;
           this.transform(-dx, -dy);
-          moved = true;
         })
         .on("end", () => {
-          if (moved) {
-            this.onDragEnd?.(
-              Math.floor(this.offsetX),
-              Math.floor(this.offsetY)
-            );
-          }
           this.canvas.classed(styles.grabbing, false);
         })
     );
@@ -148,7 +143,6 @@ export class EventDownstreamGraph {
           return;
         }
         this.transform(deltaX, deltaY);
-        this.onDragEnd?.(Math.floor(this.offsetX), Math.floor(this.offsetY));
       });
   }
 
@@ -189,40 +183,57 @@ export class EventDownstreamGraph {
 
   render(
     eventDownstreamTree: EventDownstreamNodeOfRoot,
+    eventUpstreamTree: EventUpstreamNodeOfRoot,
     options?: RenderOptions
   ): void {
-    this.onDragEnd = options?.onDragEnd
-      ? debounce(options?.onDragEnd, 500)
-      : undefined;
-    const initialOffsetX = options?.initialOffsetX;
-    const initialOffsetY = options?.initialOffsetY;
     const nodeWidth = styleConfig.node.width;
     // x and y is swapped in horizontal tree layout.
     const dx = 40;
     const dy = nodeWidth + 60;
     const markerOffset = 5;
 
-    const hierarchyRoot = hierarchy(eventDownstreamTree);
+    const hierarchyDownstreamRoot = hierarchy(eventDownstreamTree);
 
-    const root = tree<EventDownstreamNode>()
+    const downstreamRoot = tree<EventDownstreamNode>()
       .nodeSize([dx, dy])
       .separation((a, b) => {
         // Separation should be relative to `dx`.
         // Make extra one unit as spacing.
         return (a.data.height + b.data.height) / 2 / dx + 1;
-      })(hierarchyRoot);
+      })(hierarchyDownstreamRoot);
 
-    const width = dy * (root.height + 1);
+    const hierarchyUpstreamRoot = hierarchy(eventUpstreamTree);
+
+    const upstreamRoot = tree<EventUpstreamNode>()
+      .nodeSize([dx, dy])
+      .separation((a, b) => {
+        // Separation should be relative to `dx`.
+        // Make extra one unit as spacing.
+        return (a.data.height + b.data.height) / 2 / dx + 1;
+      })(hierarchyUpstreamRoot);
+
+    upstreamRoot.each((node) => {
+      // Upstream nodes are placed in left of canvas, and flipped horizontally.
+      node.y = -node.y;
+    });
+
+    const downstreamWidth = dy * (downstreamRoot.height + 1);
+    const upstreamWidth = dy * upstreamRoot.height;
+    const width = downstreamWidth + upstreamWidth;
     this.nodesContainerWidth = width;
 
     let x0 = Infinity;
     let x1 = -x0;
-    root.each((d) => {
+    const computeNodesContainerHeight = (
+      d: HierarchyPointNode<EventStreamNode>
+    ): void => {
       const xTop = d.x - d.data.height / 2;
       const xBottom = xTop + d.data.height;
       if (xBottom > x1) x1 = xBottom;
       if (xTop < x0) x0 = xTop;
-    });
+    };
+    downstreamRoot.each(computeNodesContainerHeight);
+    upstreamRoot.each(computeNodesContainerHeight);
     const height = x1 - x0 + dx * 2;
     this.nodesContainerHeight = height;
 
@@ -231,7 +242,7 @@ export class EventDownstreamGraph {
     this.linksLayer.attr("width", "100%");
     this.linksLayer.attr("height", height);
 
-    const offsetX = dy / 2;
+    const offsetX = dy / 2 + upstreamWidth;
     const offsetY = dx - x0;
     this.linksContainer.attr("transform", `translate(${offsetX},${offsetY})`);
     this.nodesContainer
@@ -240,27 +251,58 @@ export class EventDownstreamGraph {
 
     const linkFactory = linkHorizontal<
       unknown,
-      HierarchyPointNode<EventDownstreamNode>
+      HierarchyPointNode<EventStreamNode>
     >()
       .x((d) => d.y)
       .y((d) => d.x);
 
     this.links = this.links
-      .data(
-        root.links().map(({ source, target }) => {
-          const offset = nodeWidth / 2;
-          return {
-            source: {
-              ...source,
-              x: computeSourceX({ source, target }),
-              y: source.y + offset - 8,
-            },
-            target: {
-              ...target,
-              y: target.y - offset - 5 - markerOffset,
-            },
-          };
-        })
+      .data<HierarchyPointLink<EventStreamNode>>(
+        (downstreamRoot.links() as HierarchyPointLink<EventStreamNode>[])
+          .map(({ source, target }) => {
+            const offset = nodeWidth / 2;
+            return {
+              source: {
+                ...source,
+                x: computeEventDownstreamSourceX({
+                  source,
+                  target,
+                } as HierarchyPointLink<EventDownstreamNode>),
+                y:
+                  source.y +
+                  offset -
+                  (source.data.type === EventDownstreamType.ROOT
+                    ? 0
+                    : styleConfig.node.padding),
+              },
+              target: {
+                ...target,
+                y: target.y - offset - markerOffset * 2,
+              },
+            };
+          })
+          .concat(
+            // In upstream, source and target are reversed.
+            upstreamRoot.links().map(({ source: target, target: source }) => {
+              const offset = nodeWidth / 2;
+              return {
+                source: {
+                  ...source,
+                  x: computeEventUpstreamSourceX(source),
+                  y:
+                    source.y +
+                    offset -
+                    (source.data.type === EventUpstreamType.UPSTREAM_SOURCE
+                      ? 0
+                      : styleConfig.node.padding),
+                },
+                target: {
+                  ...target,
+                  y: target.y - offset - markerOffset * 2,
+                },
+              };
+            })
+          )
       )
       .join((enter) => {
         const link = enter.append("g");
@@ -275,7 +317,11 @@ export class EventDownstreamGraph {
       .attr("d", (d) => `${linkFactory(d)}h${markerOffset}`);
 
     this.nodes = this.nodes
-      .data(root.descendants())
+      .data<HierarchyPointNode<EventStreamNode>>(
+        (downstreamRoot.descendants() as HierarchyPointNode<EventStreamNode>[]).concat(
+          upstreamRoot.descendants().filter((node) => node !== upstreamRoot)
+        )
+      )
       .join("div")
       .attr("class", classNames(styles.nodeWrapper))
       .style("left", (d) => `${d.y}px`)
@@ -283,35 +329,24 @@ export class EventDownstreamGraph {
 
     this.nodes.each(function (d) {
       ReactDOM.render(
-        <EventNodeComponent eventNode={d.data} {...options} />,
+        <EventStreamNodeComponent eventNode={d.data} {...options} />,
         this
       );
     });
 
-    let dx0, dy0;
+    // When the nodesContainer width or height is smaller than the canvas width or height,
+    // transform the nodesContainer to the center of canvas.
+    const canvasWidth = this.canvas.node().offsetWidth;
+    const dx0 =
+      this.nodesContainerWidth < canvasWidth
+        ? this.nodesContainerWidth / 2 - canvasWidth / 2 - this.offsetX
+        : -this.offsetX;
 
-    // When the nodesContainer width or height is smaller than the canvas width or height, transform the nodesContainer to the middle of the x-axis or y-axis.
-    if (!isNil(initialOffsetX)) {
-      this.offsetX = initialOffsetX;
-      dx0 = 0;
-    } else {
-      const canvasWidth = this.canvas.node().offsetWidth;
-      dx0 =
-        this.nodesContainerWidth < canvasWidth
-          ? this.nodesContainerWidth / 2 - canvasWidth / 2 - this.offsetX
-          : -this.offsetX;
-    }
-
-    if (!isNil(initialOffsetY)) {
-      this.offsetY = initialOffsetY;
-      dy0 = 0;
-    } else {
-      const canvasHeight = this.canvas.node().offsetHeight;
-      dy0 =
-        this.nodesContainerHeight < canvasHeight
-          ? this.nodesContainerHeight / 2 - canvasHeight / 2 - this.offsetY
-          : -this.offsetY;
-    }
+    const canvasHeight = this.canvas.node().offsetHeight;
+    const dy0 =
+      this.nodesContainerHeight < canvasHeight
+        ? this.nodesContainerHeight / 2 - canvasHeight / 2 - this.offsetY
+        : -this.offsetY;
     this.transform(dx0, dy0);
   }
 }
