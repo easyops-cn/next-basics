@@ -2431,10 +2431,15 @@
     prismjs "^1.23.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/forms@^2.0.0", "@next-libs/forms@^2.1.0":
+"@next-libs/forms@^2.0.0":
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/@next-libs/forms/download/@next-libs/forms-2.1.0.tgz#e426406e3e5750c5011c90bdd49bedbdb0e8ba0c"
   integrity sha1-5CZAbj5XUMUBHJC91JvtvbDougw=
+
+"@next-libs/forms@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npm.taobao.org/@next-libs/forms/download/@next-libs/forms-2.1.1.tgz#a7ce000210311133bc3329098b76bdc344225007"
+  integrity sha1-p84AAhAxETO8MykJi3a9w0QiUAc=
 
 "@next-libs/storage@^1.0.0", "@next-libs/storage@^1.0.3":
   version "1.0.3"
