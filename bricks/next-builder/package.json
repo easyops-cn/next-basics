@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/next-builder",
-  "version": "1.23.2",
+  "version": "1.24.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/next-builder",
   "license": "GPL-3.0",
@@ -21,15 +21,15 @@
   },
   "sideEffects": true,
   "devDependencies": {
+    "@next-libs/editor-components": "^1.0.0",
     "@next-sdk/cmdb-sdk": "^1.0.0",
     "@next-sdk/next-builder-sdk": "^1.0.0",
-    "param-case": "^3.0.4",
-    "@next-libs/editor-components": "^1.0.0"
+    "param-case": "^3.0.4"
   },
   "peerDependencies": {
-    "@next-dll/editor-bricks-helper": "*",
-    "@next-dll/react-dnd": "*",
     "@next-dll/ace": "*",
-    "@next-dll/d3": "*"
+    "@next-dll/d3": "*",
+    "@next-dll/editor-bricks-helper": "*",
+    "@next-dll/react-dnd": "*"
   }
 }

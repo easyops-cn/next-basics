@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.23.2...@next-bricks/next-builder@1.24.0) (2021-02-26)
+
+
+### Bug Fixes
+
+* hide data view when node type is custom-template ([8b07b1c](https://github.com/easyops-cn/next-basics/commit/8b07b1cdd82cb98e4b955edfd606a77c884b9faf))
+
+
+### Features
+
+* **builder-container:** routes view ([8fdf37f](https://github.com/easyops-cn/next-basics/commit/8fdf37fdcbc32d5581b94f83ae7c3d76051e48ab))
+* **events-view:** support going to target node ([ed4c2e3](https://github.com/easyops-cn/next-basics/commit/ed4c2e3a38fbdb33c0569629df155483d16b0176))
+* go to events view from contextmenu ([2b26c27](https://github.com/easyops-cn/next-basics/commit/2b26c278691a4978f13c11a0255fbf192654d0ed))
+* remember current toolbox tab ([cadc94f](https://github.com/easyops-cn/next-basics/commit/cadc94f6c0f6cbcd7ff66a4b26f135b15931d47d))
+* scan bricks with events ([3d5e839](https://github.com/easyops-cn/next-basics/commit/3d5e83998e3a3290e3a366b20d559eabaf711490))
+* show brick event stream ([4fa681e](https://github.com/easyops-cn/next-basics/commit/4fa681e24b5526aa17a1a736cdad39e59e613597))
+* show event downstream ([afa9e25](https://github.com/easyops-cn/next-basics/commit/afa9e2565538393329932c04f823d6ccea1d2458))
+* **builder-container:** Data View ([8fa2856](https://github.com/easyops-cn/next-basics/commit/8fa2856ce6de41228ef7f601215b8eb3ec6d7e06))
+* **builder-container:** support fullscreen toggle event ([02b3315](https://github.com/easyops-cn/next-basics/commit/02b3315672cdfeb956be8aac8f3385646b865c5b))
+* **data-view:** update context and delete context item ([ae5809d](https://github.com/easyops-cn/next-basics/commit/ae5809d9c23ab7fdc5291b4c6aa632d247003091))
+* support events view ([5e749fc](https://github.com/easyops-cn/next-basics/commit/5e749fc9b340f37b10eda2af6543598e5a9ae4ab))
+* support to visualize custom templates ([2643269](https://github.com/easyops-cn/next-basics/commit/26432699e7fe89b5aefef34815bb925d504912bf))
+
+
+
+
+
 ## [1.23.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.23.1...@next-bricks/next-builder@1.23.2) (2021-02-07)
 
 **Note:** Version bump only for package @next-bricks/next-builder

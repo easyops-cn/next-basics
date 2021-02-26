@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.0.1...@next-bricks/brick-visualization@1.1.0) (2021-02-26)
+
+
+### Bug Fixes
+
+* 修复表单项 label 不显示 tooltips 问题 ([f99cabe](https://github.com/easyops-cn/next-basics/commit/f99cabe79f9b257b8d6786675742f0901fe31bc2))
+
+
+### Features
+
+* add icon selelct editor ([cad4623](https://github.com/easyops-cn/next-basics/commit/cad4623d4df5345aab5249ad401db7d0789549d6))
+* property visualization support category ([2c96cda](https://github.com/easyops-cn/next-basics/commit/2c96cdaff76468d161adcbc33d73de9fd8c41780))
+
+
+
+
+
 ## [1.0.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@0.1.1...@next-bricks/brick-visualization@1.0.1) (2021-02-19)
 
 

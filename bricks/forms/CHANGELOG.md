@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.152.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.5...@next-bricks/forms@1.152.0) (2021-02-26)
+
+
+### Bug Fixes
+
+* 修复表单赋值失效的问题 ([746ceb1](https://github.com/easyops-cn/next-basics/commit/746ceb1eb27e639023b971a6d091f6ed71316764))
+
+
+### Features
+
+* property visualization support category ([2c96cda](https://github.com/easyops-cn/next-basics/commit/2c96cdaff76468d161adcbc33d73de9fd8c41780))
+
+
+
+
+
 ## [1.151.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.4...@next-bricks/forms@1.151.5) (2021-02-22)
 
 ### Bug Fixes
