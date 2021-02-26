@@ -1,6 +1,5 @@
 import React from "react";
 import { mount } from "enzyme";
-import { Input } from "antd";
 import { BrickLibrary } from "./BrickLibrary";
 import { BrickItem } from "./BrickItem";
 
@@ -64,11 +63,7 @@ describe("BrickLibrary", () => {
         .shortName
     ).toBe("general-input");
 
-    wrapper.find(Input).invoke("onChange")({
-      target: {
-        value: "form",
-      },
-    } as any);
+    wrapper.find("SearchComponent").invoke("onSearch")("form");
     expect(wrapper.find(BrickItem).length).toBe(2);
     expect(wrapper.find(BrickItem).at(0).prop("brick").shortName).toBe(
       "general-form"

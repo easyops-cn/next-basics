@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { RoutesView } from "./RoutesView";
-import { Tree, Input } from "antd";
+import { Tree } from "antd";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderNode: jest.fn().mockReturnValue({
@@ -62,9 +62,7 @@ describe("RoutesView", () => {
       },
     });
     expect(onRouteSelect).toBeCalled();
-    wrapper.find(Input).invoke("onChange")({
-      target: { value: "detail" },
-    } as React.ChangeEvent<HTMLInputElement>);
+    wrapper.find("SearchComponent").invoke("onSearch")("detail");
     expect(wrapper.find(".matchedStr").length).toBe(2);
   });
 });

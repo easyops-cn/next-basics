@@ -1,9 +1,8 @@
 import React, { useState, useRef, useMemo } from "react";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
-import { Button, Input, Form, Modal } from "antd";
+import { Button, Form, Modal } from "antd";
 import {
   PlusOutlined,
-  SearchOutlined,
   LinkOutlined,
   CodeOutlined,
   DeleteOutlined,
@@ -16,6 +15,7 @@ import { cloneDeep, findIndex, set, uniqueId } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { searchList } from "./utils";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
 
 const symbolId = Symbol("uid");
 
@@ -49,12 +49,9 @@ export function DataView({
   const [settingItem, setSettingItem] = useState<ContextConf>();
   const settingUid = useRef<string | undefined>();
 
-  const handleSearch = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setQ(event.target.value);
-    },
-    []
-  );
+  const handleSearch = (value: string): void => {
+    setQ(value);
+  }
 
   const filteredContextList: ContextConfWithSymbolId[] = useMemo(
     () => searchList(contextWithUniqueSymbolId, q, "name"),
@@ -116,14 +113,18 @@ export function DataView({
 
   return (
     <ToolboxPane title="Data">
-      <div className={styles.searchWrapper}>
+      {/* <div className={styles.searchWrapper}>
         <Input
           prefix={<SearchOutlined />}
           placeholder="Search data..."
           value={q}
           onChange={handleSearch}
         />
-      </div>
+      </div> */}
+      <SearchComponent
+        placeholder="Search data..."
+        onSearch={handleSearch}
+      />
       <div className={styles.wrapper}>
         <Button
           icon={<PlusOutlined />}

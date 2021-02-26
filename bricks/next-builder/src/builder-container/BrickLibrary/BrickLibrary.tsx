@@ -1,10 +1,9 @@
 import React from "react";
-import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import { BrickOptionItem, GroupedBricks } from "../interfaces";
 import { searchBricks } from "./searchBricks";
 import { BrickItem } from "./BrickItem";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
 
 import styles from "./BrickLibrary.module.css";
 
@@ -17,12 +16,9 @@ export function BrickLibrary({
 }: BrickLibraryProps): React.ReactElement {
   const [q, setQ] = React.useState<string>();
 
-  const handleSearch = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setQ(event.target.value);
-    },
-    []
-  );
+  const handleSearch = (value: string): void => {
+    setQ(value);
+  }
 
   const filteredGroups = React.useMemo<GroupedBricks[]>(
     () => searchBricks(q, brickList),
@@ -31,14 +27,10 @@ export function BrickLibrary({
 
   return (
     <ToolboxPane title="Library">
-      <div className={styles.searchWrapper}>
-        <Input
-          prefix={<SearchOutlined />}
-          placeholder="Search bricks..."
-          value={q}
-          onChange={handleSearch}
-        />
-      </div>
+      <SearchComponent
+        placeholder="Search data..."
+        onSearch={handleSearch}
+      />
       <div className={styles.resultWrapper}>
         <ul className={styles.groupList}>
           {filteredGroups.map((group) => (
