@@ -32,7 +32,10 @@
   padding: 0 8px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 6px;
-  /* cursor: pointer; */
+}
+
+.targetIsAvailable {
+  cursor: pointer;
 }
 
 .handlerIcon {
@@ -56,6 +59,14 @@
 
 .handlerContent {
   text-indent: 1em;
+}
+
+.targetIsAvailable .handlerContent {
+  color: var(--antd-link-color);
+}
+
+.targetIsAvailable:hover .handlerContent {
+  color: var(--antd-link-hover-color);
 }
 
 .handlerTypeOfBuiltin .handlerIcon {

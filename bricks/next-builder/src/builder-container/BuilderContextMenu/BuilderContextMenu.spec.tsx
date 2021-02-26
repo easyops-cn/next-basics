@@ -6,12 +6,24 @@ import {
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { BuilderContextMenu } from "./BuilderContextMenu";
+import { ContextOfBuilderUI, useBuilderUIContext } from "../BuilderUIContext";
+import { ToolboxTab } from "../interfaces";
 
 jest.mock("@next-core/editor-bricks-helper");
+jest.mock("../BuilderUIContext");
 
 const mockUseBuilderContextMenuStatus = useBuilderContextMenuStatus as jest.MockedFunction<
   typeof useBuilderContextMenuStatus
 >;
+
+const mockBuilderUIContext: ContextOfBuilderUI = {
+  setToolboxTab: jest.fn(),
+  setEventStreamActiveNodeUid: jest.fn(),
+};
+
+(useBuilderUIContext as jest.MockedFunction<
+  typeof useBuilderUIContext
+>).mockReturnValue(mockBuilderUIContext);
 
 const mockManager = {
   contextMenuChange: jest.fn(),
@@ -71,6 +83,27 @@ describe("BuilderContextMenu", () => {
     });
   });
 
+  it("should show events view", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
+    });
+    const mockOnAskForDeletingNode = jest.fn();
+    const wrapper = shallow(
+      <BuilderContextMenu onAskForDeletingNode={mockOnAskForDeletingNode} />
+    );
+    wrapper.find(Menu.Item).at(0).invoke("onClick")(null);
+    expect(mockBuilderUIContext.setToolboxTab).toBeCalledWith(
+      ToolboxTab.EVENTS_VIEW
+    );
+    expect(mockBuilderUIContext.setEventStreamActiveNodeUid).toBeCalledWith(1);
+  });
+
   it("should invoke onAskForDeletingNode", () => {
     mockUseBuilderContextMenuStatus.mockReturnValueOnce({
       active: true,
@@ -78,19 +111,19 @@ describe("BuilderContextMenu", () => {
         $$uid: 1,
         type: "brick",
         id: "B-001",
-        brick: "$kebab-brick-last-name$",
+        brick: "my-brick",
       },
     });
     const mockOnAskForDeletingNode = jest.fn();
     const wrapper = shallow(
       <BuilderContextMenu onAskForDeletingNode={mockOnAskForDeletingNode} />
     );
-    wrapper.find(Menu.Item).invoke("onClick")(null);
+    wrapper.find(Menu.Item).at(1).invoke("onClick")(null);
     expect(mockOnAskForDeletingNode).toBeCalledWith({
       $$uid: 1,
       type: "brick",
       id: "B-001",
-      brick: "$kebab-brick-last-name$",
+      brick: "my-brick",
     });
   });
 });

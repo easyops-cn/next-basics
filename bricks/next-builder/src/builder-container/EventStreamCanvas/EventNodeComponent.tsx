@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
+import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   BrickEventHandler,
@@ -17,10 +18,14 @@ import styles from "./EventNodeComponent.module.css";
 
 export interface EventNodeComponentProps {
   eventNode: EventDownstreamNode;
+  targetMap?: Map<string, number>;
+  setEventStreamActiveNodeUid?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export function EventNodeComponent({
   eventNode,
+  targetMap,
+  setEventStreamActiveNodeUid,
 }: EventNodeComponentProps): React.ReactElement {
   return (
     <div
@@ -55,6 +60,8 @@ export function EventNodeComponent({
               key={index}
               handler={handler}
               isLast={index === eventNode.handlers.length - 1}
+              targetMap={targetMap}
+              setEventStreamActiveNodeUid={setEventStreamActiveNodeUid}
             />
           ))}
       </ul>
@@ -65,11 +72,15 @@ export function EventNodeComponent({
 interface EventNodeHandlerComponentProps {
   handler: BrickEventHandler;
   isLast?: boolean;
+  targetMap?: Map<string, number>;
+  setEventStreamActiveNodeUid?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function EventNodeHandlerComponent({
   handler,
   isLast,
+  targetMap,
+  setEventStreamActiveNodeUid,
 }: EventNodeHandlerComponentProps): React.ReactElement {
   let icon: React.ReactElement;
   let title: string;
@@ -101,13 +112,29 @@ function EventNodeHandlerComponent({
     content = JSON.stringify(handler);
     handlerClassName = styles.handlerTypeOfUnknown;
   }
+
+  let targetNodeUid: number;
+
+  if (isExecuteHandler(handler) || isSetPropsHandler(handler)) {
+    targetNodeUid = targetMap.get(handler.target as string);
+  }
+
+  const handleGotoTargetNode = React.useCallback(() => {
+    if (targetNodeUid) {
+      setEventStreamActiveNodeUid(targetNodeUid);
+    }
+  }, [setEventStreamActiveNodeUid, targetNodeUid]);
+
   return (
     <li
-      className={`${styles.handler} ${handlerClassName}`}
+      className={classNames(styles.handler, handlerClassName, {
+        [styles.targetIsAvailable]: !!targetNodeUid,
+      })}
       style={{
         ...styleConfig.item,
         marginBottom: isLast ? 0 : styleConfig.item.marginBottom,
       }}
+      onClick={handleGotoTargetNode}
     >
       <div className={styles.handlerIcon}>{icon}</div>
       <div className={styles.handlerBody}>
