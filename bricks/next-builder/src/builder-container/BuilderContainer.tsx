@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import classNames from "classnames";
-import { BuilderRouteOrBrickNode, ContextConf } from "@next-core/brick-types";
+import { 
+  BuilderRouteOrBrickNode, 
+  ContextConf,
+  BuilderRouteNode
+} from "@next-core/brick-types";
 import {
   AbstractBuilderDataManager,
   BuilderRuntimeNode,
@@ -19,6 +23,7 @@ import styles from "./BuilderContainer.module.css";
 
 export interface BuilderContainerProps {
   dataSource?: BuilderRouteOrBrickNode[];
+  routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
   processing?: boolean;
   initialFullscreen?: boolean;
@@ -33,11 +38,13 @@ export interface BuilderContainerProps {
   onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
   onSwitchEventStreamActiveNode?: (nodeUid?: number) => void;
   onContextUpdate?: (context: ContextConf[]) => void;
+  onRouteSelect?: (route:BuilderRouteNode)=>void;
 }
 
 export function LegacyBuilderContainer(
   {
     dataSource,
+    routeList,
     brickList,
     processing,
     initialFullscreen,
@@ -52,6 +59,7 @@ export function LegacyBuilderContainer(
     onSwitchToolboxTab,
     onSwitchEventStreamActiveNode,
     onContextUpdate,
+    onRouteSelect,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -125,7 +133,9 @@ export function LegacyBuilderContainer(
       >
         <BuilderToolbox
           brickList={brickList}
+          routeList={routeList}
           onContextUpdate={onContextUpdate}
+          onRouteSelect={onRouteSelect}
         />
         <BuilderCanvas dataSource={dataSource} />
       </div>

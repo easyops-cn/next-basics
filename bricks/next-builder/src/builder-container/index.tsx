@@ -10,7 +10,7 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { BuilderRouteOrBrickNode, ContextConf } from "@next-core/brick-types";
+import { BuilderRouteOrBrickNode, ContextConf, BuilderRouteNode } from "@next-core/brick-types";
 import {
   EventDetailOfNodeAdd,
   NodeInstance,
@@ -49,6 +49,9 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property({ attribute: false })
   brickList: BrickOptionItem[];
+
+  @property({ attribute: false })
+  routeList: BuilderRouteNode[];
 
   @property({ type: Boolean })
   processing: boolean;
@@ -96,6 +99,11 @@ export class BuilderContainerElement extends UpdatingElement {
     type: "context.update",
   })
   private _contextUpdateEmitter: EventEmitter<ContextConf[]>;
+
+  @event({
+    type: "route.select",
+  })
+  private _routeSelectEmitter: EventEmitter<BuilderRouteNode>;
 
   @event({
     type: "fullscreen.toggle",
@@ -195,6 +203,10 @@ export class BuilderContainerElement extends UpdatingElement {
     this._contextUpdateEmitter.emit(context);
   };
 
+  private _handleRouteSelect = (route: BuilderRouteNode): void=>{
+    this._routeSelectEmitter.emit(route);
+  }
+
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
@@ -239,6 +251,7 @@ export class BuilderContainerElement extends UpdatingElement {
               <BuilderContainer
                 ref={this._managerRef}
                 dataSource={this.dataSource}
+                routeList={this.routeList}
                 brickList={this.brickList}
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}
@@ -255,6 +268,7 @@ export class BuilderContainerElement extends UpdatingElement {
                   this._handleSwitchEventStreamActiveNode
                 }
                 onContextUpdate={this._handleContextUpdate}
+                onRouteSelect={this._handleRouteSelect}
               />
             </DndProvider>
           </BuilderProvider>
