@@ -1,8 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
-import { Input, Tree } from "antd";
+import { Tree } from "antd";
 import {
-  SearchOutlined,
   DownOutlined,
   BranchesOutlined
 } from "@ant-design/icons";
@@ -10,6 +9,7 @@ import styles from "./RoutesView.module.css";
 import { BuilderRouteNode } from "@next-core/brick-types";
 import { generateRouteTree } from "../../utils/generateRouteTree";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
 
 export interface RoutesViewProps {
   routeList?: BuilderRouteNode[];
@@ -46,12 +46,9 @@ export function RoutesView({
     setSelectRouteKey(select);
   };
 
-  const handleSearch = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setQ(event.target.value);
-    },
-    []
-  );
+  const handleSearch = (value: string): void => {
+    setQ(value);
+  }
 
   const titleRender = (
     nodeData: BuilderRouteNode
@@ -88,14 +85,10 @@ export function RoutesView({
       <div
         className={styles.routesViewContainer}
       >
-        <div className={styles.searchWrapper}>
-          <Input
-            prefix={<SearchOutlined />}
-            placeholder="Search route..."
-            value={q}
-            onChange={handleSearch}
-          />
-        </div>
+        <SearchComponent 
+          placeholder="Search route..."
+          onSearch={handleSearch}
+        />
         {!!routeTreeData.length && (
           <div 
             className={styles.treeWrapper}

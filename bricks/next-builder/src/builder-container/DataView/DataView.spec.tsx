@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { DataView } from "./DataView";
-import { Input, Button } from "antd";
+import { Button } from "antd";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderNode: jest.fn().mockReturnValue({
@@ -50,13 +50,9 @@ describe("DataView", () => {
       />
     );
     expect(wrapper.find(".varItem").length).toBe(2);
-    wrapper.find(Input).invoke("onChange")({
-      target: { value: "data-a" },
-    } as React.ChangeEvent<HTMLInputElement>);
+    wrapper.find("SearchComponent").invoke("onSearch")("data-a");
     expect(wrapper.find(".varItem").length).toBe(1);
-    wrapper.find(Input).invoke("onChange")({
-      target: { value: "" },
-    } as React.ChangeEvent<HTMLInputElement>);
+    wrapper.find("SearchComponent").invoke("onSearch")("");
     expect(wrapper.find(".varItem").length).toBe(2);
 
     wrapper
