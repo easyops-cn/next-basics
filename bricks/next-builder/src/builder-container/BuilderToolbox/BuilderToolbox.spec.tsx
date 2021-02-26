@@ -5,6 +5,12 @@ import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { defaultToolboxTab } from "../constants";
 import { ToolboxTab } from "../interfaces";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
+
+jest.mock("@next-core/editor-bricks-helper");
+(useBuilderNode as jest.Mock).mockReturnValue({
+  type: "routes"
+});
 
 jest.mock("../BuilderUIContext");
 
@@ -69,6 +75,23 @@ describe("BuilderToolbox", () => {
     const wrapper2 = shallow(<BuilderToolbox />);
     expect(wrapper2.find("DataView").length).toBe(1);
   });
+
+  it("should switch to routes view", () => {
+    const wrapper = shallow(<BuilderToolbox />);
+    wrapper.find(".tabLink").at(4).invoke("onClick")(null);
+    expect(toolboxTab).toBe(ToolboxTab.ROUTES_VIEW);
+    const wrapper2 = shallow(<BuilderToolbox />);
+    expect(wrapper2.find("RoutesView").length).toBe(1);
+    expect(wrapper.find(".tabLink").length).toBe(6);
+  });
+
+  it("should display 4 tabLink",()=>{
+    (useBuilderNode as jest.Mock).mockReturnValueOnce({
+      type: "custom-template"
+    });
+    const wrapper = shallow(<BuilderToolbox />);
+    expect(wrapper.find(".tabLink").length).toBe(4);
+  })
 
   it("should enter fullscreen", () => {
     let fullscreen = false;

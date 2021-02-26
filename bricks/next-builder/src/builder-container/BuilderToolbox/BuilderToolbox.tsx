@@ -5,6 +5,7 @@ import {
   FullscreenOutlined,
   PartitionOutlined,
   DatabaseOutlined,
+  BranchesOutlined
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
@@ -14,13 +15,17 @@ import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
-import { ContextConf } from "@next-core/brick-types";
+import { RoutesView } from "../RoutesView/RoutesView";
+import { BuilderRouteNode, ContextConf } from "@next-core/brick-types";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
 
 import styles from "./BuilderToolbox.module.css";
 
 export interface BuilderToolboxProps {
   brickList?: BrickOptionItem[];
+  routeList?: BuilderRouteNode[];
   onContextUpdate?: (context: ContextConf[]) => void;
+  onRouteSelect?: (route:BuilderRouteNode)=>void;
 }
 
 interface ToolboxTabConf {
@@ -33,7 +38,9 @@ React.createElement;
 
 export function BuilderToolbox({
   brickList,
+  routeList,
   onContextUpdate,
+  onRouteSelect
 }: BuilderToolboxProps): React.ReactElement {
   const {
     fullscreen,
@@ -41,7 +48,7 @@ export function BuilderToolbox({
     toolboxTab: activeTab,
     setToolboxTab: setActiveTab,
   } = useBuilderUIContext();
-
+  const rootNode = useBuilderNode({ isRoot: true });
   const tabList: ToolboxTabConf[] = [
     {
       tab: ToolboxTab.LIBRARY,
@@ -72,17 +79,39 @@ export function BuilderToolbox({
         return <EventsView />;
       },
     },
-    {
-      tab: ToolboxTab.DATA_VIEW,
-      icon() {
-        return <DatabaseOutlined />;
-      },
-      content() {
-        return (
-          <DataView brickList={brickList} onContextUpdate={onContextUpdate} />
-        );
-      },
-    },
+    ...(rootNode && rootNode.type !== "custom-template"
+      ? [
+          {
+            tab: ToolboxTab.DATA_VIEW,
+            icon() {
+              return <DatabaseOutlined />;
+            },
+            content() {
+              return (
+                <DataView
+                  brickList={brickList}
+                  onContextUpdate={onContextUpdate}
+                />
+              );
+            },
+          },
+          {
+            tab: ToolboxTab.ROUTES_VIEW,
+            icon() {
+              return <BranchesOutlined />;
+            },
+            content() {
+              return (
+                <RoutesView
+                  routeList={routeList}
+                  onRouteSelect={onRouteSelect}
+                />
+              );
+            },
+            
+          }
+        ]
+      : []),
   ];
 
   return (
