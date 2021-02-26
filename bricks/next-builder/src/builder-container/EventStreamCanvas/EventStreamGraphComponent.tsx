@@ -1,7 +1,10 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
-import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
+import {
+  BuilderRuntimeNode,
+  useBuilderData,
+} from "@next-core/editor-bricks-helper";
 import { EventDownstreamGraph } from "./EventDownstreamGraph";
 import { EventDownstreamNode, EventDownstreamType } from "./interfaces";
 import { buildBrickEventDownstreamTree } from "./buildBrickEventDownstreamTree";
@@ -14,7 +17,8 @@ export interface EventDownstreamGraphComponentProps {
 export function EventDownstreamGraphComponent({
   node,
 }: EventDownstreamGraphComponentProps): React.ReactElement {
-  const { fullscreen } = useBuilderUIContext();
+  const { fullscreen, setEventStreamActiveNodeUid } = useBuilderUIContext();
+
   const eventRoot = React.useMemo(() => {
     const root: EventDownstreamNode = {
       type: EventDownstreamType.ROOT,
@@ -24,6 +28,17 @@ export function EventDownstreamGraphComponent({
     buildBrickEventDownstreamTree(root, node.$$parsedEvents);
     return root;
   }, [node]);
+
+  const { nodes } = useBuilderData();
+  const targetMap = React.useMemo(() => {
+    const map = new Map<string, number>();
+    for (const n of nodes) {
+      for (const selector of n.$$matchedSelectors) {
+        map.set(selector, n.$$uid);
+      }
+    }
+    return map;
+  }, [nodes]);
 
   const visual = React.useMemo(() => new EventDownstreamGraph(), []);
   const ref = React.useRef<HTMLDivElement>(null);
@@ -36,7 +51,10 @@ export function EventDownstreamGraphComponent({
     let maxHeight = "100%";
     if (!fullscreen) {
       // Make the graph does not overflow the screen.
-      const { top, bottom } = graphContainer.getBoundingClientRect();
+      const {
+        top,
+        bottom,
+      } = graphContainer.parentElement.getBoundingClientRect();
       // The bottom spacing is the height of RootLayout subtract the bottom of the graph.
       const bottomSpacing =
         process.env.NODE_ENV === "test"
@@ -69,8 +87,8 @@ export function EventDownstreamGraphComponent({
   }, [resize]);
 
   const handleRender = React.useCallback(() => {
-    visual.render(eventRoot);
-  }, [eventRoot, visual]);
+    visual.render(eventRoot, { targetMap, setEventStreamActiveNodeUid });
+  }, [eventRoot, setEventStreamActiveNodeUid, targetMap, visual]);
 
   React.useEffect(() => {
     handleRender();

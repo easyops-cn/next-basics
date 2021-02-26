@@ -22,9 +22,11 @@ import { computeSourceX } from "./buildBrickEventDownstreamTree";
 import styles from "./EventDownstreamGraph.module.css";
 
 interface RenderOptions {
-  onDragEnd?: (offsetX: number, offsetY: number) => void;
   initialOffsetX?: number;
   initialOffsetY?: number;
+  targetMap?: Map<string, number>;
+  setEventStreamActiveNodeUid?: React.Dispatch<React.SetStateAction<number>>;
+  onDragEnd?: (offsetX: number, offsetY: number) => void;
 }
 
 export class EventDownstreamGraph {
@@ -281,7 +283,7 @@ export class EventDownstreamGraph {
 
     this.nodes.each(function (d) {
       ReactDOM.render(
-        <EventNodeComponent eventNode={d.data} /*{...options}*/ />,
+        <EventNodeComponent eventNode={d.data} {...options} />,
         this
       );
     });
