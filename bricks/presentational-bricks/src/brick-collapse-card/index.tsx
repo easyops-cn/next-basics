@@ -87,7 +87,7 @@ export class BrickCollapseCardElement extends UpdatingElement {
   expandInactiveText = "展开";
 
   /**
-   * @kind `MenuIcon` | `string`
+   * @kind MenuIcon
    * @required false
    * @default up
    * @description 卡片展开的时候右上角的 icon，支持 ant-design 的 icon
@@ -98,7 +98,7 @@ export class BrickCollapseCardElement extends UpdatingElement {
   expandActiveIcon = "up";
 
   /**
-   * @kind `MenuIcon` | `string`
+   * @kind MenuIcon
    * @required false
    * @default down
    * @description 卡片收起的时候右上角的 icon，支持 ant-design 的 icon
@@ -164,7 +164,7 @@ export class BrickCollapseCardElement extends UpdatingElement {
   hasHeaderSlot: boolean;
 
   /**
-   * @kind `MenuIcon` | `string`
+   * @kind MenuIcon
    * @required false
    * @default {lib: "easyops", category: "default", icon: "collapse-card-default"}
    * @description 卡片标题图标，仅在`titleWithIconAndDesc`为true时有效

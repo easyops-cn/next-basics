@@ -61,10 +61,10 @@ export class IconSelectElement extends FormItemElement {
   @property({ attribute: false }) message: Record<string, string>;
 
   /**
-   * @kind [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @kind MenuIcon
    * @required false
    * @default -
-   * @description 值
+   * @description 值[MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
    */
   @property({
     attribute: false,

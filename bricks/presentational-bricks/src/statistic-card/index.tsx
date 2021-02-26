@@ -43,10 +43,10 @@ export class StatisticCardElement extends UpdatingElement {
   @property() iconType: string;
 
   /**
-   * @kind [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @kind MenuIcon
    * @required false
    * @default -
-   * @description 图标配置
+   * @description 图标配置 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    */
   @property({ attribute: false }) icon: MenuIcon | string;
 

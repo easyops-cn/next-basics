@@ -70,7 +70,7 @@ export class BrickRateElement extends UpdatingElement {
    */
   @property({ attribute: false }) rateStyle: Record<string, any>;
   /**
-   * @kind `string | MenuIcon`
+   * @kind MenuIcon
    * @required false
    * @default -
    * @description 等级icon，优先级高于type，支持[icon 图标库](developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价

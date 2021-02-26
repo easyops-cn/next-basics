@@ -56,6 +56,7 @@ export class GeneralModalElement extends UpdatingElement {
   modalTitle: string;
 
   /**
+   * @kind MenuIcon
    * @required false
    * @default -
    * @description 标题图标

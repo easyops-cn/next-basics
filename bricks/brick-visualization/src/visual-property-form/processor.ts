@@ -46,14 +46,6 @@ export function yaml(value: string): any {
   return safeLoad(value, { schema: JSON_SCHEMA, json: true });
 }
 
-export function isTransferrableType(value: unknown): boolean {
-  return (
-    typeof value !== "number" &&
-    typeof value !== "boolean" &&
-    typeof value !== "undefined"
-  );
-}
-
 export function calculateValue(
   propertyList: PropertyType[] = [],
   brickProperties: BrickProperties = {}
@@ -70,11 +62,7 @@ export function calculateValue(
     const v = brickProperties[item.name];
     obj[item.name] = v;
 
-    if (
-      v !== undefined &&
-      (!supportBasicType.includes(item.type as string) ||
-        isTransferrableType(v))
-    ) {
+    if (v !== undefined && !supportBasicType.includes(item.type as string)) {
       obj[item.name] = yamlStringify(v);
     }
     return obj;
@@ -91,7 +79,7 @@ export function calculateValue(
 export function processFormValue(values = {}): Record<string, any> {
   const formData: Record<string, any> = {};
   for (const [key, value] of Object.entries(values)) {
-    formData[key] = isTransferrableType(value) ? yaml(value) : value;
+    formData[key] = typeof value === "string" ? yaml(value) : value;
   }
 
   return {
