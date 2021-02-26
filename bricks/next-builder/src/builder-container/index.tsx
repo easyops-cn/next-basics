@@ -59,6 +59,9 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   toolboxTab: ToolboxTab;
 
+  @property({ type: Number })
+  eventStreamActiveNodeUid: number;
+
   @event({
     type: "node.add",
   })
@@ -106,6 +109,13 @@ export class BuilderContainerElement extends UpdatingElement {
   })
   private _toolboxTabSwitchEmitter: EventEmitter<{
     toolboxTab: ToolboxTab;
+  }>;
+
+  @event({
+    type: "eventStream.activeNodeUid.switch",
+  })
+  private _eventStreamActiveNodeUidSwitchEmitter: EventEmitter<{
+    nodeUid: number;
   }>;
 
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
@@ -168,6 +178,17 @@ export class BuilderContainerElement extends UpdatingElement {
     }
   };
 
+  private _currentEventStreamActiveNodeUid?: number;
+
+  private _handleSwitchEventStreamActiveNode = (nodeUid: number): void => {
+    if (nodeUid !== this._currentEventStreamActiveNodeUid) {
+      this._currentEventStreamActiveNodeUid = nodeUid;
+      this._eventStreamActiveNodeUidSwitchEmitter.emit({
+        nodeUid,
+      });
+    }
+  };
+
   private _managerRef = React.createRef<AbstractBuilderDataManager>();
 
   private _handleContextUpdate = (context: ContextConf[]): void => {
@@ -210,6 +231,7 @@ export class BuilderContainerElement extends UpdatingElement {
     if (this.isConnected) {
       this._currentFullscreen = this.fullscreen;
       this._currentToolboxTab = this.toolboxTab ?? defaultToolboxTab;
+      this._currentEventStreamActiveNodeUid = this.eventStreamActiveNodeUid;
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
@@ -221,6 +243,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}
                 initialToolboxTab={this._currentToolboxTab}
+                initialEventStreamActiveNodeUid={this.eventStreamActiveNodeUid}
                 onNodeAdd={this._handleNodeAdd}
                 onNodeReorder={this._handleNodeReorder}
                 onNodeMove={this._handleNodeMove}
@@ -228,6 +251,9 @@ export class BuilderContainerElement extends UpdatingElement {
                 onAskForDeletingNode={this._handleAskForDeletingNode}
                 onToggleFullscreen={this._handleToggleFullscreen}
                 onSwitchToolboxTab={this._handleSwitchToolboxTab}
+                onSwitchEventStreamActiveNode={
+                  this._handleSwitchEventStreamActiveNode
+                }
                 onContextUpdate={this._handleContextUpdate}
               />
             </DndProvider>

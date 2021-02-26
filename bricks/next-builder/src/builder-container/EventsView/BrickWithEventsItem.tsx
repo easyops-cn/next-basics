@@ -4,14 +4,29 @@ import classNames from "classnames";
 import { BricksWithEvents } from "./getBricksWithEvents";
 
 import styles from "./BrickWithEventsItem.module.css";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
 export function BrickWithEventsItem({
   node,
   hasEvents,
   isTargetOfEvents,
 }: BricksWithEvents): React.ReactElement {
+  const {
+    eventStreamActiveNodeUid,
+    setEventStreamActiveNodeUid,
+  } = useBuilderUIContext();
+  const handleNodeClick = React.useCallback(() => {
+    setEventStreamActiveNodeUid(node.$$uid);
+  }, [node, setEventStreamActiveNodeUid]);
+
   return (
-    <div className={styles.brickWithEventsItem}>
+    <a
+      className={classNames(styles.brickWithEventsItem, {
+        [styles.active]: eventStreamActiveNodeUid === node.$$uid,
+      })}
+      role="button"
+      onClick={handleNodeClick}
+    >
       <span className={styles.nodeAlias}>{node.alias}</span>
       <span className={styles.icons}>
         <span
@@ -33,6 +48,6 @@ export function BrickWithEventsItem({
           <FontAwesomeIcon icon="share" rotation={180} />
         </span>
       </span>
-    </div>
+    </a>
   );
 }

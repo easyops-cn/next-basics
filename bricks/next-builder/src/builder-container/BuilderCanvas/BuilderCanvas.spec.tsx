@@ -1,7 +1,10 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { BuilderCanvas } from "./BuilderCanvas";
-import { DropZone, useBuilderDataManager } from "@next-core/editor-bricks-helper";
+import {
+  DropZone,
+  useBuilderDataManager,
+} from "@next-core/editor-bricks-helper";
 import { useBuilderUIContext } from "../BuilderUIContext";
 
 jest.mock("@next-core/editor-bricks-helper");
@@ -26,10 +29,13 @@ jest.spyOn(console, "error").mockImplementation(() => void 0);
 jest.spyOn(window, "dispatchEvent");
 
 describe("BuilderCanvas", () => {
+  let eventStreamActiveNodeUid: number = null;
+  let fullscreen = false;
   beforeEach(() => {
-    mockUseBuilderUIContext.mockReturnValue({
-      fullscreen: false,
-    });
+    mockUseBuilderUIContext.mockImplementation(() => ({
+      fullscreen,
+      eventStreamActiveNodeUid,
+    }));
   });
 
   afterEach(() => {
@@ -78,9 +84,7 @@ describe("BuilderCanvas", () => {
   });
 
   it("should enter fullscreen", () => {
-    mockUseBuilderUIContext.mockReturnValue({
-      fullscreen: true,
-    });
+    fullscreen = true;
     const wrapper = shallow(
       <BuilderCanvas
         dataSource={[
@@ -96,5 +100,24 @@ describe("BuilderCanvas", () => {
       "fullscreen"
     );
     expect(wrapper.find("DropZone").prop("fullscreen")).toBe(true);
+    fullscreen = false;
+  });
+
+  it("should show event stream canvas", () => {
+    eventStreamActiveNodeUid = 1;
+    const wrapper = shallow(
+      <BuilderCanvas
+        dataSource={[
+          {
+            type: "bricks",
+            path: "/home",
+            id: "B-001",
+          },
+        ]}
+      />
+    );
+    expect(wrapper.find("EventStreamCanvas").prop("nodeUid")).toBe(1);
+    expect(wrapper.find("DropZone").length).toBe(0);
+    eventStreamActiveNodeUid = null;
   });
 });

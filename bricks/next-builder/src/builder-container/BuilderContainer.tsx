@@ -23,6 +23,7 @@ export interface BuilderContainerProps {
   processing?: boolean;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
+  initialEventStreamActiveNodeUid?: number;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
@@ -30,6 +31,7 @@ export interface BuilderContainerProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
   onToggleFullscreen?: (fullscreen?: boolean) => void;
   onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
+  onSwitchEventStreamActiveNode?: (nodeUid?: number) => void;
   onContextUpdate?: (context: ContextConf[]) => void;
 }
 
@@ -40,6 +42,7 @@ export function LegacyBuilderContainer(
     processing,
     initialFullscreen,
     initialToolboxTab,
+    initialEventStreamActiveNodeUid,
     onNodeAdd,
     onNodeReorder,
     onNodeMove,
@@ -47,12 +50,17 @@ export function LegacyBuilderContainer(
     onAskForDeletingNode,
     onToggleFullscreen,
     onSwitchToolboxTab,
+    onSwitchEventStreamActiveNode,
     onContextUpdate,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
   const [toolboxTab, setToolboxTab] = React.useState(initialToolboxTab);
+  const [
+    eventStreamActiveNodeUid,
+    setEventStreamActiveNodeUid,
+  ] = React.useState(initialEventStreamActiveNodeUid);
 
   const manager = useBuilderDataManager();
 
@@ -84,8 +92,19 @@ export function LegacyBuilderContainer(
   }, [initialToolboxTab]);
 
   React.useEffect(() => {
+    if (toolboxTab !== ToolboxTab.EVENTS_VIEW) {
+      setEventStreamActiveNodeUid(null);
+    }
     onSwitchToolboxTab?.(toolboxTab);
   }, [toolboxTab, onSwitchToolboxTab]);
+
+  React.useEffect(() => {
+    setEventStreamActiveNodeUid(initialEventStreamActiveNodeUid);
+  }, [initialEventStreamActiveNodeUid]);
+
+  React.useEffect(() => {
+    onSwitchEventStreamActiveNode?.(eventStreamActiveNodeUid);
+  }, [eventStreamActiveNodeUid, onSwitchEventStreamActiveNode]);
 
   return (
     <BuilderUIContext.Provider
@@ -95,6 +114,8 @@ export function LegacyBuilderContainer(
         setFullscreen,
         toolboxTab,
         setToolboxTab,
+        eventStreamActiveNodeUid,
+        setEventStreamActiveNodeUid,
       }}
     >
       <div
