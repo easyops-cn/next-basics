@@ -14,7 +14,8 @@ import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
-import { ContextConf } from "@next-core/brick-types";
+import { BuilderRouteOrBrickNode, ContextConf } from "@next-core/brick-types";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
 
 import styles from "./BuilderToolbox.module.css";
 
@@ -41,7 +42,7 @@ export function BuilderToolbox({
     toolboxTab: activeTab,
     setToolboxTab: setActiveTab,
   } = useBuilderUIContext();
-
+  const rootNode = useBuilderNode({ isRoot: true });
   const tabList: ToolboxTabConf[] = [
     {
       tab: ToolboxTab.LIBRARY,
@@ -72,17 +73,24 @@ export function BuilderToolbox({
         return <EventsView />;
       },
     },
-    {
-      tab: ToolboxTab.DATA_VIEW,
-      icon() {
-        return <DatabaseOutlined />;
-      },
-      content() {
-        return (
-          <DataView brickList={brickList} onContextUpdate={onContextUpdate} />
-        );
-      },
-    },
+    ...(rootNode && rootNode.type !== "custom-template"
+      ? [
+          {
+            tab: ToolboxTab.DATA_VIEW,
+            icon() {
+              return <DatabaseOutlined />;
+            },
+            content() {
+              return (
+                <DataView
+                  brickList={brickList}
+                  onContextUpdate={onContextUpdate}
+                />
+              );
+            },
+          },
+        ]
+      : []),
   ];
 
   return (
