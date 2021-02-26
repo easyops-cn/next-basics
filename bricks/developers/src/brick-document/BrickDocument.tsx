@@ -98,6 +98,8 @@ export function BrickDocument({
   };
 
   const renderTypeAnnotation = (value: string) => {
+    if (!value) return "-";
+
     const str = value.replace(/`/g, "");
     if (interfaceIds.includes(str) && renderLink) {
       const hashHref = getCurHashHref();
