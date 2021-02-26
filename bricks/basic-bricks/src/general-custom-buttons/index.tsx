@@ -143,7 +143,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    */
   @property() dropdownBtnText: string;
   /**
-   * @kind string | MenuIcon
+   * @kind MenuIcon
    * @required false
    * @default `"setting"`
    * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮 icon，支持[icon 图标库](/next/developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
@@ -175,7 +175,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   @property()
   moreButtonType: ButtonType;
   /**
-   * @kind string | MenuIcon
+   * @kind MenuIcon
    * @required false
    * @default -
    * @description isMoreButton 为 true 时更多按钮的图标，默认为`...`

@@ -96,10 +96,10 @@ export class BrickLinkElement extends UpdatingElement {
   type: "link" | "text" = "link";
 
   /**
-   * @kind [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @kind MenuIcon
    * @required false
    * @default false
-   * @description 图标
+   * @description 图标 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    */
   @property({
     attribute: false,

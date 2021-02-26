@@ -42,10 +42,10 @@ export interface TooltipConfig {
  */
 export class GeneralTooltipElement extends UpdatingElement {
   /**
-   * @kind [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @kind MenuIcon
    * @required true
    * @default -
-   * @description 图标配置
+   * @description 图标配置 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    */
   @property({
     attribute: false,
