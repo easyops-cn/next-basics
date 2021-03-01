@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import { isEmpty } from "lodash";
+import { HierarchyPointNode } from "d3";
 import {
   BrickEventHandler,
   ExecuteCustomBrickEventHandler,
@@ -12,7 +13,6 @@ import {
   EventUpstreamType,
 } from "./interfaces";
 import { styleConfig } from "./styleConfig";
-import { HierarchyPointLink, HierarchyPointNode } from "d3";
 
 export function buildBrickEventUpstreamTree(
   targetNode: BuilderRuntimeNode,
@@ -80,11 +80,14 @@ function collectEventUpstream({
         handler,
       },
     ] as EventUpstreamStack).concat(stack);
-    if (
-      handler.target &&
-      targetNode.$$matchedSelectors.includes(handler.target as string)
-    ) {
-      buildByStack(rootEventNode, currentStack, sourceNode);
+    if (handler.target) {
+      if (targetNode.$$matchedSelectors.includes(handler.target as string)) {
+        buildByStack(rootEventNode, currentStack, sourceNode);
+      }
+    } else if (handler.targetRef) {
+      if (targetNode.ref && handler.targetRef === targetNode.ref) {
+        buildByStack(rootEventNode, currentStack, sourceNode);
+      }
     }
     if (handler.callback) {
       for (const [callbackType, callbackHandlers] of Object.entries(

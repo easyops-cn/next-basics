@@ -20,24 +20,28 @@ import styles from "./EventStreamNodeComponent.module.css";
 export interface EventStreamNodeComponentProps<T = EventStreamNode> {
   eventNode: T;
   targetMap?: Map<string, string>;
+  targetRefMap?: Map<string, string>;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function EventStreamNodeComponent({
   eventNode,
   targetMap,
+  targetRefMap,
   setEventStreamNodeId,
 }: EventStreamNodeComponentProps): React.ReactElement {
   return isEventDownstreamNode(eventNode) ? (
     <EventDownstreamNodeComponent
       eventNode={eventNode}
       targetMap={targetMap}
+      targetRefMap={targetRefMap}
       setEventStreamNodeId={setEventStreamNodeId}
     />
   ) : (
     <EventUpstreamNodeComponent
       eventNode={eventNode}
       targetMap={targetMap}
+      targetRefMap={targetRefMap}
       setEventStreamNodeId={setEventStreamNodeId}
     />
   );
@@ -46,6 +50,7 @@ export function EventStreamNodeComponent({
 export function EventDownstreamNodeComponent({
   eventNode,
   targetMap,
+  targetRefMap,
   setEventStreamNodeId,
 }: EventStreamNodeComponentProps<EventDownstreamNode>): React.ReactElement {
   return (
@@ -85,6 +90,7 @@ export function EventDownstreamNodeComponent({
               handler={handler}
               isLast={index === eventNode.handlers.length - 1}
               targetMap={targetMap}
+              targetRefMap={targetRefMap}
               setEventStreamNodeId={setEventStreamNodeId}
             />
           ))}
@@ -96,6 +102,7 @@ export function EventDownstreamNodeComponent({
 export function EventUpstreamNodeComponent({
   eventNode,
   targetMap,
+  targetRefMap,
   setEventStreamNodeId,
 }: EventStreamNodeComponentProps<EventUpstreamNode>): React.ReactElement {
   const isUpstreamSource = eventNode.type === EventUpstreamType.UPSTREAM_SOURCE;
@@ -144,6 +151,7 @@ export function EventUpstreamNodeComponent({
             handler={(eventNode as EventUpstreamNodeOfCallback).handler}
             isLast
             targetMap={targetMap}
+            targetRefMap={targetRefMap}
             setEventStreamNodeId={setEventStreamNodeId}
           />
         </ul>

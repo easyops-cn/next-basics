@@ -21,6 +21,7 @@ export interface EventNodeHandlerProps {
   handler: BrickEventHandler;
   isLast?: boolean;
   targetMap?: Map<string, string>;
+  targetRefMap?: Map<string, string>;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -29,6 +30,7 @@ export function EventStreamHandler({
   handler,
   isLast,
   targetMap,
+  targetRefMap,
   setEventStreamNodeId,
 }: EventNodeHandlerProps): React.ReactElement {
   let icon: React.ReactElement;
@@ -37,6 +39,7 @@ export function EventStreamHandler({
   let handlerClassName: string;
   let targetNodeId: string;
   let isTargetOfSelf = false;
+  let usingTargetRef = false;
   if (isBuiltinHandler(handler)) {
     icon = <FontAwesomeIcon icon="code" />;
     title = "action:";
@@ -64,12 +67,18 @@ export function EventStreamHandler({
     handlerClassName = styles.handlerTypeOfUnknown;
   }
 
-  if (
-    isEventDownstreamNode(eventNode) &&
-    (isExecuteHandler(handler) || isSetPropsHandler(handler))
-  ) {
-    targetNodeId = targetMap.get(handler.target as string);
-    isTargetOfSelf = handler.target === "_self";
+  if (isExecuteHandler(handler) || isSetPropsHandler(handler)) {
+    if (isEventDownstreamNode(eventNode)) {
+      if (handler.target) {
+        targetNodeId = targetMap.get(handler.target as string);
+        isTargetOfSelf = handler.target === "_self";
+      } else {
+        targetNodeId = targetRefMap.get(handler.targetRef);
+      }
+    }
+    if (!handler.target) {
+      usingTargetRef = true;
+    }
   }
 
   const handleGotoTargetNode = React.useCallback(() => {
@@ -93,7 +102,10 @@ export function EventStreamHandler({
       <div className={styles.handlerIcon}>{icon}</div>
       <div className={styles.handlerBody}>
         <div className={styles.handlerTitle}>{title}</div>
-        <div className={styles.handlerContent}>{content}</div>
+        <div className={styles.handlerContent}>
+          {usingTargetRef && <span className={styles.usingTargetRef}>@</span>}
+          {content}
+        </div>
       </div>
     </li>
   );

@@ -16,6 +16,7 @@ export function getBricksWithEvents(
   nodes: BuilderRuntimeNode[]
 ): BricksWithEvents[] {
   const eventTargetSelectors = new Set<string>();
+  const eventTargetRefs = new Set<string>();
   const nodesWhichTargetToSelf = new WeakSet<BuilderRuntimeNode>();
 
   for (const node of nodes) {
@@ -27,6 +28,7 @@ export function getBricksWithEvents(
         collectEventTargetSelectors(
           [].concat(handlers),
           eventTargetSelectors,
+          eventTargetRefs,
           flags
         );
       }
@@ -42,7 +44,9 @@ export function getBricksWithEvents(
     const isTargetOfEvents =
       (node.$$matchedSelectors as string[]).some((selector) =>
         eventTargetSelectors.has(selector)
-      ) || nodesWhichTargetToSelf.has(node);
+      ) ||
+      nodesWhichTargetToSelf.has(node) ||
+      (!!node.ref && eventTargetRefs.has(node.ref as string));
     if (hasEvents || isTargetOfEvents) {
       bricksWithEvents.push({
         node: node,
@@ -58,21 +62,30 @@ export function getBricksWithEvents(
 function collectEventTargetSelectors(
   handlers: BrickEventHandler[],
   eventTargetSelectors: Set<string>,
+  eventTargetRefs: Set<string>,
   flags: { targetToSelf: boolean }
 ): void {
   for (const handler of handlers as ExecuteCustomBrickEventHandler[]) {
-    if (isNonEmptyPlainString(handler.target)) {
+    if (handler.target) {
       if (handler.target === "_self") {
         flags.targetToSelf = true;
-      } else {
+      } else if (isNonEmptyPlainString(handler.target)) {
+        // Split multiple css selectors, such as `#a,#b`.
         for (const target of handler.target.split(/\s*,\s*/)) {
           eventTargetSelectors.add(target);
         }
       }
+    } else if (isNonEmptyPlainString(handler.targetRef)) {
+      eventTargetRefs.add(handler.targetRef);
     }
     if (handler.callback) {
       for (const cb of Object.values(handler.callback) as BrickEventHandler[]) {
-        collectEventTargetSelectors([].concat(cb), eventTargetSelectors, flags);
+        collectEventTargetSelectors(
+          [].concat(cb),
+          eventTargetSelectors,
+          eventTargetRefs,
+          flags
+        );
       }
     }
   }

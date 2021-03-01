@@ -27,9 +27,9 @@ describe("getBricksWithEvents", () => {
         },
         {
           type: "brick",
-          brick: "my.my-brick-d",
+          brick: "my.brick-d",
           id: "B-004",
-          $$matchedSelectors: ["my\\.my-brick-d"],
+          $$matchedSelectors: ["my\\.brick-d"],
           $$parsedEvents: {
             ignored: {
               action: "console.log",
@@ -68,6 +68,32 @@ describe("getBricksWithEvents", () => {
             },
           },
         },
+        {
+          type: "brick",
+          brick: "my.brick-f",
+          id: "B-006",
+          ref: "refBrickF",
+          $$matchedSelectors: ["my\\.brick-f"],
+          $$parsedEvents: {},
+        },
+        {
+          type: "brick",
+          brick: "my.brick-g",
+          id: "B-007",
+          $$matchedSelectors: ["my\\.brick-g"],
+          $$parsedEvents: {
+            click: [
+              {
+                targetRef: "refBrickF",
+                method: "open",
+              },
+              {
+                target: "<% oops %>",
+                method: "open",
+              },
+            ],
+          },
+        },
       ])
     ).toEqual([
       {
@@ -89,6 +115,16 @@ describe("getBricksWithEvents", () => {
         node: expect.objectContaining({ id: "B-005" }),
         hasEvents: true,
         isTargetOfEvents: true,
+      },
+      {
+        node: expect.objectContaining({ id: "B-006" }),
+        hasEvents: false,
+        isTargetOfEvents: true,
+      },
+      {
+        node: expect.objectContaining({ id: "B-007" }),
+        hasEvents: true,
+        isTargetOfEvents: false,
       },
     ]);
   });
