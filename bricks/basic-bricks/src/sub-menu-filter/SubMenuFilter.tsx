@@ -208,7 +208,7 @@ export function SubMenuFilter({
       setOpenKeys(keys);
     } else {
       setMenuItems([...rowMenuItem]);
-      setOpenKeys(defaultOpenKeys);
+      setOpenKeys(defaultOpenKeys || []);
     }
   };
 
