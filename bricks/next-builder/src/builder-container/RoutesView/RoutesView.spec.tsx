@@ -1,16 +1,17 @@
 import React from "react";
+import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { RoutesView } from "./RoutesView";
 import { Tree } from "antd";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderNode: jest.fn().mockReturnValue({
-    id: "R-01"
+    id: "R-01",
   }),
 }));
 
 describe("RoutesView", () => {
-  it("should work", () => {
+  it("should work", async () => {
     const onRouteSelect = jest.fn();
     const wrapper = mount(
       <RoutesView
@@ -53,11 +54,14 @@ describe("RoutesView", () => {
         onRouteSelect={onRouteSelect}
       />
     );
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     expect(wrapper.find(Tree).length).toBe(1);
     wrapper.find(Tree).invoke("onSelect")([], {
       node: {
         props: {
-          id: "R-03"
+          id: "R-03",
         },
       },
     });
