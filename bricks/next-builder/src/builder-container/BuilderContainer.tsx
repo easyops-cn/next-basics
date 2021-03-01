@@ -84,6 +84,8 @@ export function LegacyBuilderContainer(
       } else if (rootNode.type === "custom-template") {
         type = BuilderDataType.CUSTOM_TEMPLATE;
       }
+      // Rest types are currently not supported,
+      // such as `"routes"` or `"redirect"`.
     }
     if (type !== BuilderDataType.UNKNOWN) {
       manager.dataInit(dataSource[0]);

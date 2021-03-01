@@ -5,16 +5,15 @@ import {
   ExecuteCustomBrickEventHandler,
 } from "@next-core/brick-types";
 
-export interface BricksWithEvents {
+export interface BrickWithEvents {
   node: BuilderRuntimeNode;
   hasEvents: boolean;
   isTargetOfEvents: boolean;
 }
 
-// Todo(steve): `targetRef` in custom templates.
 export function getBricksWithEvents(
   nodes: BuilderRuntimeNode[]
-): BricksWithEvents[] {
+): BrickWithEvents[] {
   const eventTargetSelectors = new Set<string>();
   const eventTargetRefs = new Set<string>();
   const nodesWhichTargetToSelf = new WeakSet<BuilderRuntimeNode>();
@@ -38,7 +37,7 @@ export function getBricksWithEvents(
     }
   }
 
-  const bricksWithEvents: BricksWithEvents[] = [];
+  const bricksWithEvents: BrickWithEvents[] = [];
   for (const node of nodes) {
     const hasEvents = !isEmpty(node.$$parsedEvents);
     const isTargetOfEvents =
