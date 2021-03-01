@@ -7,7 +7,17 @@ jest.spyOn(console, "warn").mockImplementation(() => void 0);
 describe("BrickLink", () => {
   it("should work", () => {
     const wrapper = shallow<BrickLinkProps>(
-      <BrickLink native={true} label="aaa" url="/url" tooltip="tips.." />
+      <BrickLink
+        native={true}
+        label="aaa"
+        url="/url"
+        tooltip="tips.."
+        icon={{
+          lib: "antd",
+          theme: "outlined",
+          type: "file-search",
+        }}
+      />
     );
 
     expect(wrapper).toMatchSnapshot();

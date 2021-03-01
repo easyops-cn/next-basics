@@ -13,7 +13,28 @@ exports[`BrickLink should work 1`] = `
   <a
     className=""
     href="/url"
+    icon={
+      Object {
+        "lib": "antd",
+        "theme": "outlined",
+        "type": "file-search",
+      }
+    }
   >
+    <GeneralIcon
+      icon={
+        Object {
+          "lib": "antd",
+          "theme": "outlined",
+          "type": "file-search",
+        }
+      }
+      style={
+        Object {
+          "marginRight": 6,
+        }
+      }
+    />
     aaa
   </a>
 </Tooltip>
@@ -31,8 +52,29 @@ exports[`BrickLink should work 2`] = `
 >
   <Link
     className=""
+    icon={
+      Object {
+        "lib": "antd",
+        "theme": "outlined",
+        "type": "file-search",
+      }
+    }
     to="/url"
   >
+    <GeneralIcon
+      icon={
+        Object {
+          "lib": "antd",
+          "theme": "outlined",
+          "type": "file-search",
+        }
+      }
+      style={
+        Object {
+          "marginRight": 6,
+        }
+      }
+    />
     aaa
   </Link>
 </Tooltip>
