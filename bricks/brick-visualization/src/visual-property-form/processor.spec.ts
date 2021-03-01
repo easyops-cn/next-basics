@@ -4,6 +4,7 @@ import {
   calculateValue,
   processFormValue,
   groupByType,
+  isUseYamlParse,
 } from "./processor";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -52,7 +53,7 @@ describe("processor test", () => {
           type: "number",
           description: "年龄",
           value: "<% CTX.age %>",
-          mode: "andvanced",
+          mode: "advanced",
         },
       ]);
     });
@@ -143,7 +144,10 @@ describe("processor test", () => {
         others: "a: 3\nb: 4\ntest: true",
       };
 
-      const result = processFormValue(values);
+      const result = processFormValue(values, [
+        { name: "options", type: "OptionsProps" },
+        { name: "type", type: "string", mode: "advanced" },
+      ]);
 
       expect(result).toEqual({
         name: "reuqired",
@@ -218,6 +222,40 @@ describe("processor test", () => {
           ],
         ],
       ]);
+    });
+  });
+
+  describe("useYamlParse", () => {
+    it.each([
+      [
+        { key: "name", value: "tester" },
+        [{ name: "name", type: "string", mode: "normal" }],
+        false,
+      ],
+      [
+        { key: "showCard", value: "${CTX.showCard}" },
+        [{ name: "showCard", type: "boolean", mode: "advanced" }],
+        true,
+      ],
+      [
+        { key: "label", value: ["a", "b"] },
+        [{ name: "label", type: "LabelProps" }],
+        false,
+      ],
+      [
+        { key: "options", value: "a: 3\nb: 4\n" },
+        [{ name: "options", type: "OptionsProps" }],
+        true,
+      ],
+      [
+        { key: "color", value: "#efefef" },
+        [{ name: "color", type: "Color", mode: "normal" }],
+        false,
+      ],
+      [{ key: "tooltips", value: "some text" }, [], false],
+      [{ key: "others", value: "label: name\nvalue: tester\n" }, [], true],
+    ])("%s and %p should return %s", (field, typeList, result) => {
+      expect(isUseYamlParse(field, typeList)).toEqual(result);
     });
   });
 });

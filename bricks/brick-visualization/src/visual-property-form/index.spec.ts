@@ -24,6 +24,7 @@ describe("brick-visualization.visual-property-form", () => {
         "lucy";
       }),
       resetPropertyFields: jest.fn(),
+      getCurTypeList: jest.fn(),
     };
     element._formUtils = {
       current: formUtilsMock,

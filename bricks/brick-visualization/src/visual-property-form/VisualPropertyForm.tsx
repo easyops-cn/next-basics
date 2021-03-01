@@ -11,11 +11,12 @@ import {
 import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import update from "immutability-helper";
-import { isNil, upperFirst } from "lodash";
+import { isNil, pick, upperFirst } from "lodash";
 import styles from "./VisualPropertyForm.module.css";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { IconSelectFormItem } from "./components/IconSelect/IconSelectFormItem";
+import { ColorEditorItem } from "./components/ColorEditor/ColorEditorItem";
 import {
   mergeProperties,
   calculateValue,
@@ -33,7 +34,7 @@ enum Required {
 
 export enum ItemModeType {
   Normal = "normal",
-  Advanced = "andvanced",
+  Advanced = "advanced",
 }
 
 export interface PropertyType {
@@ -58,6 +59,7 @@ export interface visualFormUtils extends Partial<FormInstance> {
     typeList: PropertyType[],
     properties: BrickProperties
   ) => void;
+  getCurTypeList: () => UnionPropertyType[];
 }
 
 export interface VisualPropertyFormProps {
@@ -92,6 +94,9 @@ export function LegacyVisualPropertyForm(
       const restValue = mergeProperties(typeList, properties);
       setTypeList(restValue);
       form.resetFields();
+    },
+    getCurTypeList: (): UnionPropertyType[] => {
+      return typeList?.map((item) => pick(item, ["name", "type", "mode"]));
     },
   }));
 
@@ -265,6 +270,17 @@ export function LegacyVisualPropertyForm(
     return renderEditorItem(item, true);
   };
 
+  const renderColorItem = (item: PropertyType): React.ReactElement => {
+    return (
+      <ColorEditorItem
+        key={item.name}
+        name={item.name}
+        label={renderLabel(item, true)}
+        required={item.required === Required.True}
+      />
+    );
+  };
+
   const getFormItem = (item: PropertyType): React.ReactElement => {
     switch (item.type) {
       case "string":
@@ -277,6 +293,8 @@ export function LegacyVisualPropertyForm(
         return renderBooleanItem(item);
       case "MenuIcon":
         return renderIconItem(item);
+      case "Color":
+        return renderColorItem(item);
       default:
         return renderCodeEditorItem(item);
     }
@@ -311,6 +329,7 @@ export function LegacyVisualPropertyForm(
                 : "other properties"
             }
             mode="brick_next_yaml"
+            maxLines={Infinity}
           />
         </Collapse.Panel>
       </Collapse>

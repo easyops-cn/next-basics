@@ -17,6 +17,12 @@ jest.mock("@next-libs/forms", () => ({
   },
 }));
 
+jest.mock("react-color", () => ({
+  SketchPicker: function MockColorEditor() {
+    return <div>color editor</div>;
+  },
+}));
+
 describe("VisualPropertyForm", () => {
   it("should work", () => {
     const props = {
@@ -193,5 +199,35 @@ describe("VisualPropertyForm", () => {
     expect(wrapper.find("IconSelectFormItem").render().text()).toEqual(
       expect.stringContaining("icon select editor")
     );
+  });
+
+  it("should render color", () => {
+    const props = {
+      brickProperties: {
+        color: "#e8e8e8",
+      },
+      propertyTypeList: [{ name: "color", type: "Color", description: "颜色" }],
+      labelIcon: {
+        normal: {
+          lib: "fa",
+          icon: "code",
+          prefix: "fas",
+          color: "#167be0",
+        },
+        advanced: {
+          lib: "fa",
+          icon: "cog",
+          prefix: "fas",
+          color: "#167be0",
+        },
+      },
+    } as any;
+
+    const wrapper = mount(<VisualPropertyForm {...props} />);
+
+    wrapper.debug();
+    wrapper.find(".colorCube").simulate("click");
+    wrapper.update();
+    expect(wrapper.find(".popover").text()).toEqual("color editor");
   });
 });
