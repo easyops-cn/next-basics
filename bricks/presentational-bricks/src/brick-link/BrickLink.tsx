@@ -37,7 +37,7 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
   }
 
   const icon = props.icon ? (
-    <GeneralIcon icon={props.icon} style={{ marginRight: 6 }} />
+    <GeneralIcon icon={props.icon} style={label ? { marginRight: 6 } : {}} />
   ) : null;
 
   let link;
