@@ -1,7 +1,8 @@
 import React from "react";
-import { ToolboxTab } from "./interfaces";
+import { BuilderDataType, ToolboxTab } from "./interfaces";
 
 export interface ContextOfBuilderUI {
+  dataType?: BuilderDataType;
   processing?: boolean;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;

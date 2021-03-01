@@ -5,19 +5,18 @@ import {
   FullscreenOutlined,
   PartitionOutlined,
   DatabaseOutlined,
-  BranchesOutlined
+  BranchesOutlined,
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { BrickLibrary } from "../BrickLibrary/BrickLibrary";
-import { BrickOptionItem, ToolboxTab } from "../interfaces";
+import { BrickOptionItem, BuilderDataType, ToolboxTab } from "../interfaces";
 import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
 import { RoutesView } from "../RoutesView/RoutesView";
 import { BuilderRouteNode, ContextConf } from "@next-core/brick-types";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
 
 import styles from "./BuilderToolbox.module.css";
 
@@ -25,7 +24,7 @@ export interface BuilderToolboxProps {
   brickList?: BrickOptionItem[];
   routeList?: BuilderRouteNode[];
   onContextUpdate?: (context: ContextConf[]) => void;
-  onRouteSelect?: (route:BuilderRouteNode)=>void;
+  onRouteSelect?: (route: BuilderRouteNode) => void;
 }
 
 interface ToolboxTabConf {
@@ -40,15 +39,15 @@ export function BuilderToolbox({
   brickList,
   routeList,
   onContextUpdate,
-  onRouteSelect
+  onRouteSelect,
 }: BuilderToolboxProps): React.ReactElement {
   const {
+    dataType,
     fullscreen,
     setFullscreen,
     toolboxTab: activeTab,
     setToolboxTab: setActiveTab,
   } = useBuilderUIContext();
-  const rootNode = useBuilderNode({ isRoot: true });
   const tabList: ToolboxTabConf[] = [
     {
       tab: ToolboxTab.LIBRARY,
@@ -79,7 +78,7 @@ export function BuilderToolbox({
         return <EventsView />;
       },
     },
-    ...(rootNode && rootNode.type !== "custom-template"
+    ...(dataType === BuilderDataType.ROUTE
       ? [
           {
             tab: ToolboxTab.DATA_VIEW,
@@ -108,8 +107,7 @@ export function BuilderToolbox({
                 />
               );
             },
-            
-          }
+          },
         ]
       : []),
   ];

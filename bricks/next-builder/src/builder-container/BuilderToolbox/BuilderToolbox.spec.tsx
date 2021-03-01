@@ -4,13 +4,7 @@ import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
 import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { defaultToolboxTab } from "../constants";
-import { ToolboxTab } from "../interfaces";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
-
-jest.mock("@next-core/editor-bricks-helper");
-(useBuilderNode as jest.Mock).mockReturnValue({
-  type: "routes"
-});
+import { BuilderDataType, ToolboxTab } from "../interfaces";
 
 jest.mock("../BuilderUIContext");
 
@@ -20,9 +14,12 @@ const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
 
 describe("BuilderToolbox", () => {
   let toolboxTab: ToolboxTab;
+  let dataType: BuilderDataType;
   beforeEach(() => {
     toolboxTab = defaultToolboxTab;
+    dataType = BuilderDataType.ROUTE;
     mockUseBuilderUIContext.mockImplementation(() => ({
+      dataType,
       fullscreen: false,
       toolboxTab,
       setToolboxTab: ((tab: ToolboxTab) => {
@@ -85,13 +82,11 @@ describe("BuilderToolbox", () => {
     expect(wrapper.find(".tabLink").length).toBe(6);
   });
 
-  it("should display 4 tabLink",()=>{
-    (useBuilderNode as jest.Mock).mockReturnValueOnce({
-      type: "custom-template"
-    });
+  it("should display 4 tabLink", () => {
+    dataType = BuilderDataType.CUSTOM_TEMPLATE;
     const wrapper = shallow(<BuilderToolbox />);
     expect(wrapper.find(".tabLink").length).toBe(4);
-  })
+  });
 
   it("should enter fullscreen", () => {
     let fullscreen = false;

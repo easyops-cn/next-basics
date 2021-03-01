@@ -32,6 +32,7 @@ import { computeEventUpstreamSourceX } from "./buildBrickEventUpstreamTree";
 
 interface RenderOptions {
   targetMap?: Map<string, string>;
+  targetRefMap?: Map<string, string>;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
 }
 

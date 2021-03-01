@@ -2,7 +2,8 @@ import React from "react";
 import { mount } from "enzyme";
 import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
 import { BuilderContainer } from "./BuilderContainer";
-import { ToolboxTab } from "./interfaces";
+import { BuilderDataType, ToolboxTab } from "./interfaces";
+import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
@@ -10,16 +11,25 @@ jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
     return <div>BuilderToolbox</div>;
   },
 }));
-jest.mock("./BuilderCanvas/BuilderCanvas", () => ({
-  BuilderCanvas() {
-    return <div>BuilderCanvas</div>;
-  },
-}));
+jest.mock("./BuilderCanvas/BuilderCanvas", () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { useBuilderUIContext } = require("./BuilderUIContext");
+  return {
+    BuilderCanvas() {
+      const { dataType } = useBuilderUIContext();
+      return <div>BuilderCanvas({dataType})</div>;
+    },
+  };
+});
 jest.mock("./BuilderContextMenu/BuilderContextMenu", () => ({
   BuilderContextMenu() {
     return <div>BuilderContextMenu</div>;
   },
 }));
+
+const mockConsoleError = jest
+  .spyOn(console, "error")
+  .mockImplementation(() => void 0);
 
 const mockRemoveListenersOfNodeAdd = jest.fn();
 const mockRemoveListenersOfNodeMove = jest.fn();
@@ -31,13 +41,29 @@ const mockManager = {
   onNodeMove: jest.fn(() => mockRemoveListenersOfNodeMove),
   onNodeReorder: jest.fn(() => mockRemoveListenersOfNodeReorder),
   onNodeClick: jest.fn(() => mockRemoveListenersOfNodeClick),
+  dataInit: jest.fn(),
 };
 (useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
 
 describe("BuilderContainer", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should work", () => {
     const ref = React.createRef<any>();
-    const wrapper = mount(<BuilderContainer ref={ref} />);
+    const wrapper = mount(
+      <BuilderContainer
+        ref={ref}
+        dataSource={[
+          {
+            type: "bricks",
+            path: "/home",
+            id: "B-001",
+          },
+        ]}
+      />
+    );
     expect(ref.current).toBe(mockManager);
     expect(wrapper.find(".builderContainer").prop("className")).not.toContain(
       "fullscreen"
@@ -46,11 +72,65 @@ describe("BuilderContainer", () => {
     expect(mockManager.onNodeMove).toBeCalled();
     expect(mockManager.onNodeReorder).toBeCalled();
     expect(mockManager.onNodeClick).toBeCalled();
+    expect(mockManager.dataInit).toBeCalledWith({
+      type: "bricks",
+      path: "/home",
+      id: "B-001",
+    });
+    expect(mockConsoleError).not.toBeCalled();
+    expect(wrapper.find(BuilderCanvas).text()).toBe(
+      `BuilderCanvas(${BuilderDataType.ROUTE})`
+    );
     wrapper.unmount();
     expect(mockRemoveListenersOfNodeAdd).toBeCalled();
     expect(mockRemoveListenersOfNodeMove).toBeCalled();
     expect(mockRemoveListenersOfNodeReorder).toBeCalled();
     expect(mockRemoveListenersOfNodeClick).toBeCalled();
+  });
+
+  it("should work for custom template", () => {
+    const wrapper = mount(
+      <BuilderContainer
+        dataSource={[
+          {
+            type: "custom-template",
+            templateId: "tpl-test",
+            id: "B-001",
+          },
+        ]}
+      />
+    );
+    expect(mockManager.dataInit).toBeCalledWith({
+      type: "custom-template",
+      templateId: "tpl-test",
+      id: "B-001",
+    });
+    expect(mockConsoleError).not.toBeCalled();
+    expect(wrapper.find(BuilderCanvas).text()).toBe(
+      `BuilderCanvas(${BuilderDataType.CUSTOM_TEMPLATE})`
+    );
+  });
+
+  it("should warn if data source is routes", () => {
+    mount(
+      <BuilderContainer
+        dataSource={[
+          {
+            type: "routes",
+            path: "/home",
+            id: "B-001",
+          },
+        ]}
+      />
+    );
+    expect(mockManager.dataInit).not.toBeCalled();
+    expect(mockConsoleError).toBeCalled();
+  });
+
+  it("should warn if data source is empty", () => {
+    mount(<BuilderContainer dataSource={[]} />);
+    expect(mockManager.dataInit).not.toBeCalled();
+    expect(mockConsoleError).toBeCalled();
   });
 
   it("should enter fullscreen", () => {

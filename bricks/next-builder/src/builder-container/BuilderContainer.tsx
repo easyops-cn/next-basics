@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import classNames from "classnames";
 import {
   BuilderRouteOrBrickNode,
@@ -15,7 +15,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
-import { BrickOptionItem, ToolboxTab } from "./interfaces";
+import { BrickOptionItem, BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderContextMenu } from "./BuilderContextMenu/BuilderContextMenu";
 import { BuilderUIContext } from "./BuilderUIContext";
 
@@ -68,10 +68,31 @@ export function LegacyBuilderContainer(
   const [eventStreamNodeId, setEventStreamNodeId] = React.useState(
     initialEventStreamNodeId
   );
+  const [dataType, setDataType] = React.useState<BuilderDataType>();
 
   const manager = useBuilderDataManager();
 
   React.useImperativeHandle(ref, () => manager);
+
+  React.useEffect(() => {
+    let type = BuilderDataType.UNKNOWN;
+    let rootNode: BuilderRouteOrBrickNode;
+    if (dataSource?.length === 1) {
+      rootNode = dataSource[0];
+      if (rootNode.type === "bricks") {
+        type = BuilderDataType.ROUTE;
+      } else if (rootNode.type === "custom-template") {
+        type = BuilderDataType.CUSTOM_TEMPLATE;
+      }
+    }
+    if (type !== BuilderDataType.UNKNOWN) {
+      manager.dataInit(dataSource[0]);
+    } else {
+      // eslint-disable-next-line no-console
+      console.error("Unexpected dataSource", dataSource);
+    }
+    setDataType(type);
+  }, [dataSource, manager]);
 
   React.useEffect(() => {
     const removeListenersOfNodeAdd = manager.onNodeAdd(onNodeAdd);
@@ -116,6 +137,7 @@ export function LegacyBuilderContainer(
   return (
     <BuilderUIContext.Provider
       value={{
+        dataType,
         processing,
         fullscreen,
         setFullscreen,
@@ -136,7 +158,7 @@ export function LegacyBuilderContainer(
           onContextUpdate={onContextUpdate}
           onRouteSelect={onRouteSelect}
         />
-        <BuilderCanvas dataSource={dataSource} />
+        <BuilderCanvas />
       </div>
       <BuilderContextMenu onAskForDeletingNode={onAskForDeletingNode} />
     </BuilderUIContext.Provider>

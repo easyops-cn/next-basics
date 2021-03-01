@@ -10,6 +10,7 @@ import { EventDownstreamNode, EventDownstreamType } from "./interfaces";
 import { buildBrickEventDownstreamTree } from "./buildBrickEventDownstreamTree";
 import { buildBrickEventUpstreamTree } from "./buildBrickEventUpstreamTree";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { BuilderDataType } from "../interfaces";
 
 export interface EventDownstreamGraphComponentProps {
   node: BuilderRuntimeNode;
@@ -18,7 +19,7 @@ export interface EventDownstreamGraphComponentProps {
 export function EventDownstreamGraphComponent({
   node,
 }: EventDownstreamGraphComponentProps): React.ReactElement {
-  const { fullscreen, setEventStreamNodeId } = useBuilderUIContext();
+  const { dataType, fullscreen, setEventStreamNodeId } = useBuilderUIContext();
 
   const eventDownstreamTree = React.useMemo(() => {
     const tree: EventDownstreamNode = {
@@ -40,6 +41,17 @@ export function EventDownstreamGraphComponent({
     }
     return map;
   }, [nodes]);
+  const targetRefMap = React.useMemo(() => {
+    const map = new Map<string, string>();
+    if (dataType === BuilderDataType.CUSTOM_TEMPLATE) {
+      for (const n of nodes) {
+        if (n.ref) {
+          map.set(n.ref as string, n.id);
+        }
+      }
+    }
+    return map;
+  }, [dataType, nodes]);
 
   const eventUpstreamTree = React.useMemo(
     () => buildBrickEventUpstreamTree(node, nodes),
@@ -95,6 +107,7 @@ export function EventDownstreamGraphComponent({
   const handleRender = React.useCallback(() => {
     visual.render(eventDownstreamTree, eventUpstreamTree, {
       targetMap,
+      targetRefMap,
       setEventStreamNodeId,
     });
   }, [
@@ -102,6 +115,7 @@ export function EventDownstreamGraphComponent({
     eventUpstreamTree,
     setEventStreamNodeId,
     targetMap,
+    targetRefMap,
     visual,
   ]);
 
