@@ -10,7 +10,11 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { BuilderRouteOrBrickNode, ContextConf, BuilderRouteNode } from "@next-core/brick-types";
+import {
+  BuilderRouteOrBrickNode,
+  ContextConf,
+  BuilderRouteNode,
+} from "@next-core/brick-types";
 import {
   EventDetailOfNodeAdd,
   NodeInstance,
@@ -62,8 +66,8 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   toolboxTab: ToolboxTab;
 
-  @property({ type: Number })
-  eventStreamActiveNodeUid: number;
+  @property()
+  eventStreamNodeId: string;
 
   @event({
     type: "node.add",
@@ -120,10 +124,10 @@ export class BuilderContainerElement extends UpdatingElement {
   }>;
 
   @event({
-    type: "eventStream.activeNodeUid.switch",
+    type: "eventStream.node.select",
   })
-  private _eventStreamActiveNodeUidSwitchEmitter: EventEmitter<{
-    nodeUid: number;
+  private _eventStreamNodeSelectEmitter: EventEmitter<{
+    id: string;
   }>;
 
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
@@ -186,13 +190,13 @@ export class BuilderContainerElement extends UpdatingElement {
     }
   };
 
-  private _currentEventStreamActiveNodeUid?: number;
+  private _currentEventStreamNodeId?: string;
 
-  private _handleSwitchEventStreamActiveNode = (nodeUid: number): void => {
-    if (nodeUid !== this._currentEventStreamActiveNodeUid) {
-      this._currentEventStreamActiveNodeUid = nodeUid;
-      this._eventStreamActiveNodeUidSwitchEmitter.emit({
-        nodeUid,
+  private _handleSelectEventsViewNode = (id: string): void => {
+    if (id !== this._currentEventStreamNodeId) {
+      this._currentEventStreamNodeId = id;
+      this._eventStreamNodeSelectEmitter.emit({
+        id,
       });
     }
   };
@@ -203,9 +207,9 @@ export class BuilderContainerElement extends UpdatingElement {
     this._contextUpdateEmitter.emit(context);
   };
 
-  private _handleRouteSelect = (route: BuilderRouteNode): void=>{
+  private _handleRouteSelect = (route: BuilderRouteNode): void => {
     this._routeSelectEmitter.emit(route);
-  }
+  };
 
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
@@ -243,7 +247,7 @@ export class BuilderContainerElement extends UpdatingElement {
     if (this.isConnected) {
       this._currentFullscreen = this.fullscreen;
       this._currentToolboxTab = this.toolboxTab ?? defaultToolboxTab;
-      this._currentEventStreamActiveNodeUid = this.eventStreamActiveNodeUid;
+      this._currentEventStreamNodeId = this.eventStreamNodeId;
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
@@ -256,7 +260,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}
                 initialToolboxTab={this._currentToolboxTab}
-                initialEventStreamActiveNodeUid={this.eventStreamActiveNodeUid}
+                initialEventStreamNodeId={this.eventStreamNodeId}
                 onNodeAdd={this._handleNodeAdd}
                 onNodeReorder={this._handleNodeReorder}
                 onNodeMove={this._handleNodeMove}
@@ -264,9 +268,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onAskForDeletingNode={this._handleAskForDeletingNode}
                 onToggleFullscreen={this._handleToggleFullscreen}
                 onSwitchToolboxTab={this._handleSwitchToolboxTab}
-                onSwitchEventStreamActiveNode={
-                  this._handleSwitchEventStreamActiveNode
-                }
+                onSelectEventStreamNode={this._handleSelectEventsViewNode}
                 onContextUpdate={this._handleContextUpdate}
                 onRouteSelect={this._handleRouteSelect}
               />

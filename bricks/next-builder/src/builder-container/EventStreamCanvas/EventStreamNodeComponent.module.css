@@ -1,0 +1,44 @@
+.eventNode {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.rootNode {
+  box-shadow: 0 0 0 2px var(--antd-primary-color);
+}
+
+.title,
+.handlerTitle,
+.handlerContent {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title {
+  color: #6d6d6d;
+  text-align: center;
+  position: relative;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.upstreamSource {
+  cursor: pointer;
+}
+
+.upstreamSource .title {
+  color: var(--antd-link-color);
+  font-weight: 400;
+}
+
+.upstreamSource:hover .title {
+  color: var(--antd-link-hover-color);
+}

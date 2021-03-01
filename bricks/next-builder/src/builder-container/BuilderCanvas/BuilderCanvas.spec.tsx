@@ -1,14 +1,16 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import { BuilderCanvas } from "./BuilderCanvas";
 import {
   DropZone,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { EventStreamCanvas } from "../EventStreamCanvas/EventStreamCanvas";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
+jest.mock("../EventStreamCanvas/EventStreamCanvas");
 
 const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
@@ -20,6 +22,12 @@ const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   }
 );
 
+(EventStreamCanvas as jest.MockedFunction<
+  typeof EventStreamCanvas
+>).mockImplementation(function MockEventStreamCanvas() {
+  return <div>MockEventStreamCanvas</div>;
+});
+
 const mockManager = {
   dataInit: jest.fn(),
 };
@@ -29,12 +37,12 @@ jest.spyOn(console, "error").mockImplementation(() => void 0);
 jest.spyOn(window, "dispatchEvent");
 
 describe("BuilderCanvas", () => {
-  let eventStreamActiveNodeUid: number = null;
+  let eventStreamNodeId: string = null;
   let fullscreen = false;
   beforeEach(() => {
     mockUseBuilderUIContext.mockImplementation(() => ({
       fullscreen,
-      eventStreamActiveNodeUid,
+      eventStreamNodeId,
     }));
   });
 
@@ -58,7 +66,7 @@ describe("BuilderCanvas", () => {
     expect(wrapper.find(".builderCanvas").prop("className")).not.toContain(
       "fullscreen"
     );
-    expect(wrapper.find("DropZone").prop("fullscreen")).toBe(false);
+    expect(wrapper.find(DropZone).prop("fullscreen")).toBe(false);
   });
 
   it("should warn if dataSource is unexpected empty array", () => {
@@ -85,7 +93,7 @@ describe("BuilderCanvas", () => {
 
   it("should enter fullscreen", () => {
     fullscreen = true;
-    const wrapper = shallow(
+    const wrapper = mount(
       <BuilderCanvas
         dataSource={[
           {
@@ -99,13 +107,13 @@ describe("BuilderCanvas", () => {
     expect(wrapper.find(".builderCanvas").prop("className")).toContain(
       "fullscreen"
     );
-    expect(wrapper.find("DropZone").prop("fullscreen")).toBe(true);
+    expect(wrapper.find(DropZone).prop("fullscreen")).toBe(true);
     fullscreen = false;
   });
 
   it("should show event stream canvas", () => {
-    eventStreamActiveNodeUid = 1;
-    const wrapper = shallow(
+    eventStreamNodeId = "B-007";
+    const wrapper = mount(
       <BuilderCanvas
         dataSource={[
           {
@@ -116,8 +124,8 @@ describe("BuilderCanvas", () => {
         ]}
       />
     );
-    expect(wrapper.find("EventStreamCanvas").prop("nodeUid")).toBe(1);
-    expect(wrapper.find("DropZone").length).toBe(0);
-    eventStreamActiveNodeUid = null;
+    expect(wrapper.find(EventStreamCanvas).prop("nodeId")).toBe("B-007");
+    expect(wrapper.find(DropZone).length).toBe(0);
+    eventStreamNodeId = null;
   });
 });

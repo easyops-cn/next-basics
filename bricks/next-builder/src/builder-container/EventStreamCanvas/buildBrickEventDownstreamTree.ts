@@ -16,7 +16,7 @@ export function buildBrickEventDownstreamTree(
   parentHandlerIndex?: number
 ): void {
   if (eventNode.type === EventDownstreamType.ROOT) {
-    eventNode.height = computeEventNodeHeight(eventNode);
+    eventNode.height = computeEventDownstreamNodeHeight(eventNode);
   }
   for (const [eventType, handlerOrList] of Object.entries(events)) {
     const handlers: BrickEventHandler[] = [].concat(handlerOrList);
@@ -35,7 +35,7 @@ export function buildBrickEventDownstreamTree(
             handlers,
             children: [],
           };
-    childEventNode.height = computeEventNodeHeight(childEventNode);
+    childEventNode.height = computeEventDownstreamNodeHeight(childEventNode);
     eventNode.children.push(childEventNode);
     // for (const handler of handlers) {
     handlers.forEach((handler, index) => {
@@ -50,7 +50,9 @@ export function buildBrickEventDownstreamTree(
   }
 }
 
-function computeEventNodeHeight(eventNode: EventDownstreamNode): number {
+function computeEventDownstreamNodeHeight(
+  eventNode: EventDownstreamNode
+): number {
   let height = styleConfig.node.padding * 2 + styleConfig.title.height;
   if (eventNode.type !== EventDownstreamType.ROOT) {
     height +=
@@ -61,7 +63,7 @@ function computeEventNodeHeight(eventNode: EventDownstreamNode): number {
   return height;
 }
 
-export function computeSourceX({
+export function computeEventDownstreamSourceX({
   source,
   target,
 }: HierarchyPointLink<EventDownstreamNode>): number {

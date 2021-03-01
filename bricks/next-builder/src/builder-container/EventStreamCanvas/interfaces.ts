@@ -4,6 +4,8 @@ import {
 } from "@next-core/brick-types";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
+export type EventStreamNode = EventDownstreamNode | EventUpstreamNode;
+
 export type EventDownstreamNode =
   | EventDownstreamNodeOfRoot
   | EventDownstreamNodeOfEvent
@@ -38,17 +40,42 @@ export interface EventDownstreamNodeOfCallback extends EventDownstreamNodeBase {
   handlers: BrickEventHandler[];
 }
 
-export enum EventHandlerType {
-  BUILTIN_ACTION = "builtin-action",
-  USE_PROVIDER = "use-provider",
-  BRICK_METHOD = "brick-method",
-  BRICK_PROPERTIES = "brick-properties",
+export type EventUpstreamNode =
+  | EventUpstreamNodeOfRoot
+  | EventUpstreamNodeOfEvent
+  | EventUpstreamNodeOfCallback
+  | EventUpstreamNodeOfSource;
+
+export interface EventUpstreamNodeBase {
+  children: EventUpstreamNode[];
+  height?: number;
 }
 
-export interface EventDownstreamSubnodeOfEventHandler {
-  type: EventHandlerType;
-  action?: string;
-  useProvider?: string;
-  target?: string;
-  method?: string;
+export enum EventUpstreamType {
+  UPSTREAM_ROOT = "upstream-root",
+  UPSTREAM_EVENT = "upstream-event",
+  UPSTREAM_CALLBACK = "upstream-callback",
+  UPSTREAM_SOURCE = "upstream-source",
+}
+
+export interface EventUpstreamNodeOfRoot extends EventUpstreamNodeBase {
+  type: EventUpstreamType.UPSTREAM_ROOT;
+  node: BuilderRuntimeNode;
+}
+
+export interface EventUpstreamNodeOfEvent extends EventUpstreamNodeBase {
+  type: EventUpstreamType.UPSTREAM_EVENT;
+  eventType: string;
+  handler: BrickEventHandler;
+}
+
+export interface EventUpstreamNodeOfCallback extends EventUpstreamNodeBase {
+  type: EventUpstreamType.UPSTREAM_CALLBACK;
+  callbackType: string;
+  handler: BrickEventHandler;
+}
+
+export interface EventUpstreamNodeOfSource extends EventUpstreamNodeBase {
+  type: EventUpstreamType.UPSTREAM_SOURCE;
+  node: BuilderRuntimeNode;
 }

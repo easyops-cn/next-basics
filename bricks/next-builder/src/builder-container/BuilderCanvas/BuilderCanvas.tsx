@@ -9,9 +9,9 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { EventStreamCanvas } from "../EventStreamCanvas/EventStreamCanvas";
 
 import styles from "./BuilderCanvas.module.css";
-import { EventStreamCanvas } from "../EventStreamCanvas/EventStreamCanvas";
 
 export interface BuilderCanvasProps {
   dataSource?: BuilderRouteOrBrickNode[];
@@ -20,29 +20,33 @@ export interface BuilderCanvasProps {
 export function BuilderCanvas({
   dataSource,
 }: BuilderCanvasProps): React.ReactElement {
-  const {
-    processing,
-    fullscreen,
-    eventStreamActiveNodeUid,
-  } = useBuilderUIContext();
+  const { processing, fullscreen, eventStreamNodeId } = useBuilderUIContext();
   const [droppingStatus, setDroppingStatus] = React.useState<DroppingStatus>(
     {}
   );
   const manager = useBuilderDataManager();
-  const valid =
-    dataSource?.length === 1 &&
-    ["bricks", "custom-template"].includes(dataSource[0].type);
+  const [initialized, setInitialized] = React.useState(false);
+  const [valid, setValid] = React.useState(true);
 
   React.useEffect(() => {
-    if (valid) {
+    const validity =
+      dataSource?.length === 1 &&
+      ["bricks", "custom-template"].includes(dataSource[0].type);
+    setValid(validity);
+    if (validity) {
       manager.dataInit(dataSource[0]);
     }
-  }, [dataSource, manager, valid]);
+    setInitialized(true);
+  }, [dataSource, manager]);
 
   if (!valid) {
     // eslint-disable-next-line no-console
     console.error("Unexpected dataSource", dataSource);
     return <div>Unexpected dataSource</div>;
+  }
+
+  if (!initialized) {
+    return null;
   }
 
   return (
@@ -51,8 +55,8 @@ export function BuilderCanvas({
         [styles.fullscreen]: fullscreen,
       })}
     >
-      {eventStreamActiveNodeUid ? (
-        <EventStreamCanvas nodeUid={eventStreamActiveNodeUid} />
+      {eventStreamNodeId ? (
+        <EventStreamCanvas nodeId={eventStreamNodeId} />
       ) : (
         <Spin spinning={processing} delay={500}>
           <DroppingStatusContext.Provider
