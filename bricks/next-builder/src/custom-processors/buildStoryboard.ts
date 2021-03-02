@@ -45,7 +45,7 @@ interface MenuItemNode {
   children?: MenuItemNode[];
 }
 
-interface StoryboardToBuild {
+export interface StoryboardToBuild {
   routes: RouteConf[];
   meta: {
     customTemplates?: CustomTemplate[];
@@ -147,14 +147,20 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
 
   // Ignore nodes with unknown ancients,
   // which are probably contained by custom templates.
-  let list = fullList.filter(checkNode);
+  let list = fullList.filter((node) => checkNode(node, []));
 
-  function checkNode(node: BuilderRouteOrBrickNode): boolean {
-    return node
-      ? node.parent?.length
-        ? checkNode(idToNode.get(node.parent[0].id))
-        : true
-      : false;
+  function checkNode(node: BuilderRouteOrBrickNode, stack: string[]): boolean {
+    if (!node) {
+      return false;
+    }
+    if (stack.includes(node.id)) {
+      throw new Error(
+        `Circular nodes found: ${stack.concat(node.id).join(",")}`
+      );
+    }
+    return node.parent?.length
+      ? checkNode(idToNode.get(node.parent[0].id), stack.concat(node.id))
+      : true;
   }
 
   // Ensure parent nodes presented before child nodes.

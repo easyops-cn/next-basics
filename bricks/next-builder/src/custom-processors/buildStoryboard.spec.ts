@@ -163,7 +163,6 @@ describe("buildStoryboard", () => {
               },
               {
                 text: "Menu Item 2",
-                target: "_blank",
                 children: [
                   {
                     text: "Menu Item 2-1",
@@ -291,7 +290,6 @@ describe("buildStoryboard", () => {
                 },
                 {
                   text: "Menu Item 2",
-                  target: "_blank",
                   children: [
                     {
                       text: "Menu Item 2-1",
@@ -654,5 +652,43 @@ describe("buildStoryboard", () => {
     buildStoryboard(input);
     expect(consoleError).toBeCalledTimes(1);
     expect(consoleError.mock.calls[0][0]).toBe(message);
+  });
+
+  it("should throw if direct circular nodes found", () => {
+    expect(() => {
+      buildStoryboard({
+        brickList: [
+          {
+            id: "B-01",
+            type: "brick",
+            brick: "a",
+            parent: [{ id: "B-01" }],
+          },
+        ],
+        routeList: [],
+      });
+    }).toThrowError("Circular nodes found: B-01,B-01");
+  });
+
+  it("should throw if indirect circular nodes found", () => {
+    expect(() => {
+      buildStoryboard({
+        brickList: [
+          {
+            id: "B-01",
+            type: "brick",
+            brick: "a",
+            parent: [{ id: "B-02" }],
+          },
+          {
+            id: "B-02",
+            type: "brick",
+            brick: "b",
+            parent: [{ id: "B-01" }],
+          },
+        ],
+        routeList: [],
+      });
+    }).toThrowError("Circular nodes found: B-01,B-02,B-01");
   });
 });
