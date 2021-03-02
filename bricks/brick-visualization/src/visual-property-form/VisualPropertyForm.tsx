@@ -311,13 +311,18 @@ export function LegacyVisualPropertyForm(
       <Collapse ghost defaultActiveKey="0" className={styles.panelContainer}>
         {groupByType(typeList)?.map(([category, list], index) => {
           return (
-            <Collapse.Panel header={upperFirst(category)} key={index}>
+            <Collapse.Panel
+              header={upperFirst(category)}
+              key={index}
+              forceRender={true}
+            >
               {list.map((item) => getFormItem(item))}
             </Collapse.Panel>
           );
         })}
 
         <Collapse.Panel
+          forceRender={true}
           header={upperFirst(OTHER_FORM_ITEM_FIELD)}
           key={OTHER_FORM_ITEM_FIELD}
         >

@@ -101,9 +101,6 @@ describe("VisualPropertyForm", () => {
     expect(wrapper.find(Input).length).toEqual(1);
     wrapper.find(".iconContainer").at(0).invoke("onClick")("name");
     expect(wrapper.find(Input).length).toEqual(0);
-    expect(wrapper.find("MockEditor").length).toEqual(1);
-    wrapper.find(".ant-collapse-header").at(1).simulate("click");
-    wrapper.update();
     expect(wrapper.find("MockEditor").length).toEqual(2);
 
     wrapper.find(".iconContainer").at(0).invoke("onClick")("name");
