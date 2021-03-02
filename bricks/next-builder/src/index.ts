@@ -12,3 +12,4 @@ import "./data-providers/MoveStoryboardNodeAndReorder";
 import "./builder-container";
 import "./data-providers/GetAllProviders";
 import "./data-providers/GetBrickLibrary";
+import "./data-providers/StoryboardAssembly";
