@@ -1,11 +1,8 @@
-.eventsView {
-  height: 100%;
-  overflow: hidden;
-  overflow-y: auto;
-}
-
 .eventsWrapper {
   padding: 0 12px;
+  flex: 1;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .brickList {
