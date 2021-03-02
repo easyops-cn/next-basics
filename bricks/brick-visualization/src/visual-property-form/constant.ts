@@ -4,6 +4,7 @@ export const supportBasicType = [
   "string",
   "string[]",
   "MenuIcon",
+  "Color",
 ];
 
 export const OTHER_FORM_ITEM_FIELD = "others";

@@ -13,6 +13,8 @@ export function IconSelectFormItem(props: IconSelectProps): React.ReactElement {
       rules={[{ required: props.required, message: `请输入${props.name}` }]}
     >
       <IconSelectItem
+        setColor={true}
+        bg={true}
         visible={visible}
         openModal={() => setVisible(true)}
         handleCancel={() => setVisible(false)}

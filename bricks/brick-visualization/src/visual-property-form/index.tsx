@@ -85,7 +85,8 @@ export class VisualPropertyFormElement extends UpdatingElement {
   async validate(): Promise<any> {
     try {
       const values = await this._formUtils.current.validateFields();
-      this.successEvent.emit(processFormValue(values));
+      const curTypeList = this._formUtils.current.getCurTypeList();
+      this.successEvent.emit(processFormValue(values, curTypeList));
     } catch (errInfo) {
       // eslint-disable-next-line no-empty
     }

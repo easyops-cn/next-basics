@@ -52,6 +52,28 @@ export class BrickTagElement extends UpdatingElement {
   >;
 
   /**
+   * @kind TagListType[] 或者 string[]
+   * @required false
+   * @default -
+   * @description 标签列表，当已知的时候可直接在 storyboard 中声明
+   */
+  @property({
+    attribute: false,
+  })
+  tagList: TagListType;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否在标签内显示小圆点
+   */
+  @property({
+    type: Boolean,
+  })
+  showTagCircle: boolean;
+
+  /**
    * @kind boolean
    * @required false
    * @default true
@@ -61,6 +83,26 @@ export class BrickTagElement extends UpdatingElement {
     attribute: false,
   })
   showCard = true;
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description 数据源，通过 useResolves 从后台接口获取
+   */
+  @property({
+    attribute: false,
+  })
+  dataSource: Record<string, any>;
+
+  /**
+   * @kind Color
+   * @required false
+   * @default -
+   * @description 标签的颜色配置，当 `componentType=Tag` 且 `closable!=true` 时才有效，除了提供内置八种主题色，也支持直接赋色值（如 `#f5f5f5`）使用
+   */
+  @property()
+  color: string;
 
   /**
    * @kind "Tag"/"CheckableTag"
@@ -74,10 +116,44 @@ export class BrickTagElement extends UpdatingElement {
   componentType: TagTypeProps;
 
   /**
+   * @kind string|string[]
+   * @required false
+   * @default -
+   * @description componentType 为`CheckableTag`的时候默认选中的标签 key
+   */
+  @property({
+    attribute: false,
+  })
+  default: string | string[];
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否能多选，多选场景下右上角会有小圆点提示
+   */
+  @property({
+    attribute: false,
+  })
+  multipleCheck = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 标签是否可以关闭
+   */
+  @property({
+    type: Boolean,
+  })
+  closable: boolean;
+
+  /**
    * @kind object
    * @required false
    * @default -
    * @description ant-design 相关配置项, [具体查阅](https://ant.design/components/tag-cn/#Tag) ，只有在 componentType=Tag 时才有效
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -85,10 +161,31 @@ export class BrickTagElement extends UpdatingElement {
   configProps: Record<string, any>;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 禁用标签的 tooltip
+   * @group advanced
+   */
+  @property()
+  disabledTooltip: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 标签前的 label
+   * @group advanced
+   */
+  @property()
+  label: string;
+
+  /**
    * @kind { label: string; key: string; icon?: string; tagList?: string; }
    * @required false
    * @default { label: "label", key: "key", icon: "icon"}
    * @description 这里可以规定从 dataSource 中的哪个字段取标签渲染的数据，例如 dataSource 返回的数据为 [{key:"1"},{key:"2"}]，则可写成 {label: "key", key: "key"}
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -107,19 +204,9 @@ export class BrickTagElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default true
-   * @description 是否能多选，多选场景下右上角会有小圆点提示
-   */
-  @property({
-    attribute: false,
-  })
-  multipleCheck = true;
-
-  /**
-   * @kind boolean
-   * @required false
    * @default false
    * @description 文字是否超出省略
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -127,30 +214,11 @@ export class BrickTagElement extends UpdatingElement {
   textEllipsis: boolean;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 标签前的 label
-   */
-  @property()
-  label: string;
-
-  /**
-   * @kind string|string[]
-   * @required false
-   * @default -
-   * @description componentType 为`CheckableTag`的时候默认选中的标签 key
-   */
-  @property({
-    attribute: false,
-  })
-  default: string | string[];
-
-  /**
    * @kind Record<string, any>
    * @required false
    * @default -
    * @description 标签的自定义样式
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -162,6 +230,7 @@ export class BrickTagElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 标签选中的自定义样式
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -173,73 +242,12 @@ export class BrickTagElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 标签 Hover 的自定义样式
+   * @group advanced
    */
   @property({
     attribute: false,
   })
   tagHoverStyle: Record<string, any>;
-
-  /**
-   * @kind TagListType[] 或者 string[]
-   * @required false
-   * @default -
-   * @description 标签列表，当已知的时候可直接在 storyboard 中声明
-   */
-  @property({
-    attribute: false,
-  })
-  tagList: TagListType;
-
-  /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description 数据源，通过 useResolves 从后台接口获取
-   */
-  @property({
-    attribute: false,
-  })
-  dataSource: Record<string, any>;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否在标签内显示小圆点
-   */
-  @property({
-    type: Boolean,
-  })
-  showTagCircle: boolean;
-
-  /**
-   * @kind string|green|red|blue|orange|cyan|purple|geekblue|gray
-   * @required false
-   * @default -
-   * @description 标签的颜色配置，当 `componentType=Tag` 且 `closable!=true` 时才有效，除了提供内置八种主题色，也支持直接赋色值（如 `#f5f5f5`）使用
-   */
-  @property()
-  color: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 禁用标签的 tooltip
-   */
-  @property()
-  disabledTooltip: string;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 标签是否可以关闭
-   */
-  @property({
-    type: Boolean,
-  })
-  closable: boolean;
 
   connectedCallback(): void {
     // istanbul ignore else

@@ -47,6 +47,17 @@ export class GeneralBadgeElement extends UpdatingElement {
   dataSource: any;
 
   /**
+   * @kind Color
+   * @required false
+   * @default red
+   * @description 徽标的颜色
+   */
+  @property({
+    attribute: false,
+  })
+  color = "red";
+
+  /**
    * @required false
    * @default -
    * @description 展示的数字，大于 overflowCount 时显示为 ${overflowCount}+，为 0 时隐藏
@@ -68,18 +79,9 @@ export class GeneralBadgeElement extends UpdatingElement {
 
   /**
    * @required false
-   * @default red
-   * @description 徽标的颜色
-   */
-  @property({
-    attribute: false,
-  })
-  color = "red";
-
-  /**
-   * @required false
    * @default false
    * @description 不展示数字，只有一个小圆点.
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -91,6 +93,7 @@ export class GeneralBadgeElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 设置状态点的位置偏移，格式为 [x, y]
+   * @group advanced
    */
   @property({
     attribute: false,
