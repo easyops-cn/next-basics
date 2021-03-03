@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.25.1...@next-bricks/next-builder@1.26.0) (2021-03-03)
+
+
+### Features
+
+* add a custom provider of scan-i18n-in-storyboard ([5ad1e4a](https://github.com/easyops-cn/next-basics/commit/5ad1e4a97a870a3c72ee75f1cc024202baaa38af))
+
+
+
+
+
 ## [1.25.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.25.0...@next-bricks/next-builder@1.25.1) (2021-03-03)
 
 
