@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.24.0...@next-bricks/next-builder@1.25.0) (2021-03-03)
+
+
+### Bug Fixes
+
+* **buildStoryboard:** throw error if circular nodes found ([bcf40e0](https://github.com/easyops-cn/next-basics/commit/bcf40e07279a8e1897e24b90895b062a797c8de4))
+* **route-view:** add act in test ([e3f3eed](https://github.com/easyops-cn/next-basics/commit/e3f3eed0584a4474f0cc28a45abbe8e9b869940d))
+* distinguish nodes which target to self ([0045a9f](https://github.com/easyops-cn/next-basics/commit/0045a9fccb49f292a3635d8733e571eb443f6e4c))
+
+
+### Features
+
+* add a custom provider of storyboard assembly ([92e0723](https://github.com/easyops-cn/next-basics/commit/92e07233a3f3259541607ab6d7fdac6eb3c6798e))
+* scan events defined by targetRef for custom templates ([d889f31](https://github.com/easyops-cn/next-basics/commit/d889f31bb48fbb64a9d9b299943ea7099e3cc84f))
+* search bricks with events ([c759e4c](https://github.com/easyops-cn/next-basics/commit/c759e4cd6415bd03f080ac36c7fb05a46135ff13))
+* **builder-container:** search component ([0e43b68](https://github.com/easyops-cn/next-basics/commit/0e43b685f5a263248e8f2a752771c3a8b276666b))
+* **events-view:** show event upstream ([b667130](https://github.com/easyops-cn/next-basics/commit/b6671301c0c4a05668edd8266624022fd9c8e2ee))
+
+
+
+
+
 # [1.24.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.23.2...@next-bricks/next-builder@1.24.0) (2021-02-26)
 
 

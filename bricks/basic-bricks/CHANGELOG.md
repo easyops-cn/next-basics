@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.106.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.1...@next-bricks/basic-bricks@1.106.2) (2021-03-03)
+
+
+### Bug Fixes
+
+* **sub-menu-filter:** 修复没有设置defaultOpenKeys时搜索出错 ([b9c23df](https://github.com/easyops-cn/next-basics/commit/b9c23df5f61f201144d55610a5c5999a49f29282))
+
+
+
+
+
 ## [1.106.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.0...@next-bricks/basic-bricks@1.106.1) (2021-02-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.1.0...@next-bricks/brick-visualization@1.2.0) (2021-03-03)
+
+
+### Bug Fixes
+
+* fix property form validate missing some value ([a43235e](https://github.com/easyops-cn/next-basics/commit/a43235e01e5af611f4ff38a33968a8e1b0fb8e49))
+
+
+### Features
+
+* add color property editor ([01192c9](https://github.com/easyops-cn/next-basics/commit/01192c9b797f8fea741a49e2f45f8eae64ff564c))
+
+
+
+
+
 # [1.1.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.0.1...@next-bricks/brick-visualization@1.1.0) (2021-02-26)
 
 
