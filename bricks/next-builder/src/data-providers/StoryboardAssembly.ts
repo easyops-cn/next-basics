@@ -16,10 +16,15 @@ export interface StoryboardAssemblyParams {
   projectId: string;
 }
 
+export interface StoryboardAssemblyResult {
+  projectId: string;
+  storyboard: StoryboardToBuild;
+}
+
 export async function StoryboardAssembly({
   appId,
   projectId,
-}: StoryboardAssemblyParams): Promise<StoryboardToBuild> {
+}: StoryboardAssemblyParams): Promise<StoryboardAssemblyResult> {
   const routeListReq = InstanceApi.postSearch(MODEL_STORYBOARD_ROUTE, {
     fields: {
       "*": 1,
@@ -92,25 +97,28 @@ export async function StoryboardAssembly({
     projectInfoReq,
   ]);
 
-  return buildStoryboard({
-    routeList: routeListResponse.list as BuilderRouteNode[],
-    brickList: brickListResponse.list as BuilderBrickNode[],
-    templateList: pipes
-      .graphTree(templateGraphResponse as pipes.GraphData, {
-        sort: {
-          key: "sort",
-          order: 1,
-        },
-      })
-      .map((template) => ({
-        templateId: template.templateId,
-        children: template.children,
-        proxy: pipes.yaml(template.proxy),
-      })),
-    menus: projectInfoResponse.menus,
-    i18n: projectInfoResponse.i18n,
-    dependsAll: projectInfoResponse.dependsAll,
-  });
+  return {
+    projectId: projectInfoResponse.projectId,
+    storyboard: buildStoryboard({
+      routeList: routeListResponse.list as BuilderRouteNode[],
+      brickList: brickListResponse.list as BuilderBrickNode[],
+      templateList: pipes
+        .graphTree(templateGraphResponse as pipes.GraphData, {
+          sort: {
+            key: "sort",
+            order: 1,
+          },
+        })
+        .map((template) => ({
+          templateId: template.templateId,
+          children: template.children,
+          proxy: pipes.yaml(template.proxy),
+        })),
+      menus: projectInfoResponse.menus,
+      i18n: projectInfoResponse.i18n,
+      dependsAll: projectInfoResponse.dependsAll,
+    }),
+  };
 }
 
 customElements.define(
