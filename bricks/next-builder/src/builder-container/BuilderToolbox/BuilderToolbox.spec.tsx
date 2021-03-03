@@ -73,15 +73,6 @@ describe("BuilderToolbox", () => {
     expect(wrapper2.find("DataView").length).toBe(1);
   });
 
-  it("should switch to routes view", () => {
-    const wrapper = shallow(<BuilderToolbox />);
-    wrapper.find(".tabLink").at(4).invoke("onClick")(null);
-    expect(toolboxTab).toBe(ToolboxTab.ROUTES_VIEW);
-    const wrapper2 = shallow(<BuilderToolbox />);
-    expect(wrapper2.find("RoutesView").length).toBe(1);
-    expect(wrapper.find(".tabLink").length).toBe(6);
-  });
-
   it("should display 4 tabLink", () => {
     dataType = BuilderDataType.CUSTOM_TEMPLATE;
     const wrapper = shallow(<BuilderToolbox />);

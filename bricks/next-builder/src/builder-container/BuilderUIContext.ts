@@ -1,5 +1,6 @@
 import React from "react";
 import { BuilderDataType, ToolboxTab } from "./interfaces";
+import { BuilderRouteNode } from "@next-core/brick-types";
 
 export interface ContextOfBuilderUI {
   dataType?: BuilderDataType;
@@ -10,6 +11,7 @@ export interface ContextOfBuilderUI {
   setToolboxTab?: React.Dispatch<React.SetStateAction<ToolboxTab>>;
   eventStreamNodeId?: string;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
+  onRouteSelect?: (route: BuilderRouteNode) => void;
 }
 
 export const BuilderUIContext = React.createContext<ContextOfBuilderUI>({});
