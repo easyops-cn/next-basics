@@ -3,6 +3,7 @@ import { StoryboardToBuild } from "../custom-processors/buildStoryboard";
 import {
   StoryboardAssembly,
   StoryboardAssemblyParams,
+  StoryboardAssemblyResult,
 } from "./StoryboardAssembly";
 
 jest.mock("@next-core/brick-kit", () => ({
@@ -182,6 +183,7 @@ jest.mock("@next-sdk/cmdb-sdk");
 const mockGetDetail = (InstanceApi.getDetail as jest.MockedFunction<
   typeof InstanceApi.getDetail
 >).mockResolvedValue({
+  projectId: "P-239",
   menus: [
     {
       menuId: "menu-a",
@@ -224,137 +226,140 @@ const mockGetDetail = (InstanceApi.getDetail as jest.MockedFunction<
 });
 
 describe("StoryboardAssembly", () => {
-  it.each<[StoryboardAssemblyParams, StoryboardToBuild]>([
+  it.each<[StoryboardAssemblyParams, StoryboardAssemblyResult]>([
     [
       { appId: "test-app", projectId: "test-project" },
       {
-        routes: [
-          {
-            path: "/a",
-            type: "bricks",
-            providers: ["p1"],
-            bricks: [
-              {
-                brick: "m",
-                if: false,
-                slots: {
-                  m1: {
-                    type: "bricks",
-                    bricks: [{ brick: "p" }, { template: "q" }],
+        projectId: "P-239",
+        storyboard: {
+          routes: [
+            {
+              path: "/a",
+              type: "bricks",
+              providers: ["p1"],
+              bricks: [
+                {
+                  brick: "m",
+                  if: false,
+                  slots: {
+                    m1: {
+                      type: "bricks",
+                      bricks: [{ brick: "p" }, { template: "q" }],
+                    },
+                    m2: {
+                      type: "routes",
+                      routes: [
+                        {
+                          path: "/a/d",
+                          type: "bricks",
+                          bricks: [],
+                        },
+                        {
+                          path: "/a/e",
+                          type: "bricks",
+                          bricks: [],
+                        },
+                      ],
+                    },
                   },
-                  m2: {
-                    type: "routes",
-                    routes: [
-                      {
-                        path: "/a/d",
+                },
+                { brick: "n" },
+              ],
+            },
+            {
+              path: "/b",
+              type: "routes",
+              permissionsPreCheck: [
+                "<% `cmdb:${QUERY.objectId}_instance_create` %>",
+              ],
+              routes: [
+                {
+                  path: "/b/c",
+                  type: "bricks",
+                  bricks: [{ brick: "o" }],
+                },
+              ],
+            },
+          ],
+          meta: {
+            customTemplates: [
+              {
+                name: "tpl-01",
+                proxy: {
+                  properties: {
+                    one: {
+                      ref: "ref-01",
+                      refProperty: "two",
+                    },
+                  },
+                },
+                bricks: [
+                  {
+                    brick: "z",
+                    slots: {
+                      m5: {
                         type: "bricks",
-                        bricks: [],
+                        bricks: [
+                          {
+                            brick: "y",
+                            ref: "two",
+                            slots: {
+                              m6: {
+                                type: "bricks",
+                                bricks: [{ brick: "x" }],
+                              },
+                            },
+                          },
+                        ],
                       },
+                    },
+                  },
+                ],
+              },
+            ],
+            menus: [
+              {
+                menuId: "menu-a",
+                items: [
+                  {
+                    text: "Menu Item 1",
+                  },
+                  {
+                    text: "Menu Item 2",
+                    children: [
                       {
-                        path: "/a/e",
-                        type: "bricks",
-                        bricks: [],
+                        text: "Menu Item 2-1",
+                        children: [
+                          {
+                            text: "Menu Item 2-1-1",
+                          },
+                        ],
                       },
                     ],
                   },
-                },
+                ],
               },
-              { brick: "n" },
-            ],
-          },
-          {
-            path: "/b",
-            type: "routes",
-            permissionsPreCheck: [
-              "<% `cmdb:${QUERY.objectId}_instance_create` %>",
-            ],
-            routes: [
               {
-                path: "/b/c",
-                type: "bricks",
-                bricks: [{ brick: "o" }],
+                menuId: "menu-b",
+                dynamicItems: true,
+                itemsResolve: {
+                  useProvider: "my.menu-provider",
+                },
               },
             ],
-          },
-        ],
-        meta: {
-          customTemplates: [
-            {
-              name: "tpl-01",
-              proxy: {
-                properties: {
-                  one: {
-                    ref: "ref-01",
-                    refProperty: "two",
-                  },
-                },
+            i18n: {
+              en: {
+                FILES: "Files",
+                SETTINGS: "Settings",
               },
-              bricks: [
-                {
-                  brick: "z",
-                  slots: {
-                    m5: {
-                      type: "bricks",
-                      bricks: [
-                        {
-                          brick: "y",
-                          ref: "two",
-                          slots: {
-                            m6: {
-                              type: "bricks",
-                              bricks: [{ brick: "x" }],
-                            },
-                          },
-                        },
-                      ],
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-          menus: [
-            {
-              menuId: "menu-a",
-              items: [
-                {
-                  text: "Menu Item 1",
-                },
-                {
-                  text: "Menu Item 2",
-                  children: [
-                    {
-                      text: "Menu Item 2-1",
-                      children: [
-                        {
-                          text: "Menu Item 2-1-1",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              menuId: "menu-b",
-              dynamicItems: true,
-              itemsResolve: {
-                useProvider: "my.menu-provider",
+              zh: {
+                FILES: "文件",
+                SETTINGS: "设置",
               },
             },
-          ],
-          i18n: {
-            en: {
-              FILES: "Files",
-              SETTINGS: "Settings",
-            },
-            zh: {
-              FILES: "文件",
-              SETTINGS: "设置",
-            },
           },
+          dependsAll: false,
         },
-        dependsAll: false,
       },
     ],
   ])("StoryboardAssembly(%j) should work", async (params, result) => {
