@@ -1,5 +1,4 @@
 import { InstanceApi, InstanceGraphApi } from "@next-sdk/cmdb-sdk";
-import { StoryboardToBuild } from "../custom-processors/buildStoryboard";
 import {
   StoryboardAssembly,
   StoryboardAssemblyParams,
@@ -362,7 +361,7 @@ describe("StoryboardAssembly", () => {
         },
       },
     ],
-  ])("StoryboardAssembly(%j) should work", async (params, result) => {
+  ])("StoryboardAssembly() should work", async (params, result) => {
     expect(await StoryboardAssembly(params)).toEqual(result);
   });
 
