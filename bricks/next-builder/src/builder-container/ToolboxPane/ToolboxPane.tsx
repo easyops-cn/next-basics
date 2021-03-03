@@ -1,4 +1,5 @@
 import React from "react";
+import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
 
 import styles from "./ToolboxPane.module.css";
 
@@ -12,7 +13,12 @@ export function ToolboxPane({
 }: React.PropsWithChildren<ToolboxPaneProps>): React.ReactElement {
   return (
     <div className={styles.toolboxPane}>
-      <div className={styles.toolboxPaneTitle}>{title}</div>
+      <div className={styles.toolboxPaneHeading}>
+        <div className={styles.toolboxPaneTitle}>{title}</div>
+        <div className={styles.toolboxPaneActions}>
+          <RootNodeSelect />
+        </div>
+      </div>
       <div className={styles.toolboxPaneBody}>{children}</div>
     </div>
   );

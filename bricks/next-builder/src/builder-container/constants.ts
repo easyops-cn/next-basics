@@ -43,4 +43,4 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
 
 export const treeViewPaddingUnit = 14;
 
-export const defaultToolboxTab = ToolboxTab.LIBRARY;
+export const defaultToolboxTab = ToolboxTab.TREE_VIEW;

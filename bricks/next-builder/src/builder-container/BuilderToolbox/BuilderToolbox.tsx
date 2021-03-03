@@ -50,21 +50,21 @@ export function BuilderToolbox({
   } = useBuilderUIContext();
   const tabList: ToolboxTabConf[] = [
     {
-      tab: ToolboxTab.LIBRARY,
-      icon() {
-        return <AppstoreAddOutlined />;
-      },
-      content() {
-        return <BrickLibrary brickList={brickList} />;
-      },
-    },
-    {
       tab: ToolboxTab.TREE_VIEW,
       icon() {
         return <PartitionOutlined />;
       },
       content() {
         return <StoryboardTreeView />;
+      },
+    },
+    {
+      tab: ToolboxTab.LIBRARY,
+      icon() {
+        return <AppstoreAddOutlined />;
+      },
+      content() {
+        return <BrickLibrary brickList={brickList} />;
       },
     },
     {
