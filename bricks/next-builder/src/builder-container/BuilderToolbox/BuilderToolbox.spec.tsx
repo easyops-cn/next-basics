@@ -28,10 +28,10 @@ describe("BuilderToolbox", () => {
     }));
   });
 
-  it("should show brick library by default", () => {
+  it("should show storyboard tree view by default", () => {
     const wrapper = shallow(<BuilderToolbox />);
-    expect(wrapper.find("BrickLibrary").length).toBe(1);
-    expect(wrapper.find("StoryboardTreeView").length).toBe(0);
+    expect(wrapper.find("StoryboardTreeView").length).toBe(1);
+    expect(wrapper.find("BrickLibrary").length).toBe(0);
     expect(wrapper.find(".builderToolbox").prop("className")).not.toContain(
       "fullscreen"
     );
@@ -47,13 +47,13 @@ describe("BuilderToolbox", () => {
     );
   });
 
-  it("should switch to tree view", () => {
+  it("should switch to library", () => {
     expect(toolboxTab).toBe(defaultToolboxTab);
     const wrapper = shallow(<BuilderToolbox />);
     wrapper.find(".tabLink").at(1).invoke("onClick")(null);
-    expect(toolboxTab).toBe(ToolboxTab.TREE_VIEW);
+    expect(toolboxTab).toBe(ToolboxTab.LIBRARY);
     const wrapper2 = shallow(<BuilderToolbox />);
-    expect(wrapper2.find("StoryboardTreeView").length).toBe(1);
+    expect(wrapper2.find("BrickLibrary").length).toBe(1);
   });
 
   it("should switch to events view", () => {

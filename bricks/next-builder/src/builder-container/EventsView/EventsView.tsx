@@ -23,7 +23,7 @@ export function EventsView(): React.ReactElement {
   );
 
   return (
-    <ToolboxPane title="Events View">
+    <ToolboxPane title="Events">
       <SearchComponent
         placeholder="Search bricks with events"
         onSearch={handleSearch}

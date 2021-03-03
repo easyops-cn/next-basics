@@ -4,6 +4,7 @@ import { BrickLibrary } from "./BrickLibrary";
 import { BrickItem } from "./BrickItem";
 
 jest.mock("./BrickItem");
+jest.mock("./../ToolboxPane/ToolboxPane");
 
 jest.mock("../constants", () => ({
   brickSearchResultLimit: 20,
