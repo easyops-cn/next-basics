@@ -13,3 +13,4 @@ import "./builder-container";
 import "./data-providers/GetAllProviders";
 import "./data-providers/GetBrickLibrary";
 import "./data-providers/StoryboardAssembly";
+import "./data-providers/ScanI18nInStoryboard";
