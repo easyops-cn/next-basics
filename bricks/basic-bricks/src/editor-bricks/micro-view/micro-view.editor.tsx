@@ -9,6 +9,7 @@ import {
   EditorSlotContentLayout,
   useBuilderNode,
 } from "@next-core/editor-bricks-helper";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
 import styles from "./micro-view.editor.module.css";
 
@@ -22,6 +23,7 @@ export function MicroViewEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<MicroViewProperties>({ nodeUid });
   const { pageTitle } = node.$$parsedProperties;
+  const displayPageTitle = smartDisplayForEvaluableString(pageTitle);
 
   return (
     <EditorContainer
@@ -40,8 +42,8 @@ export function MicroViewEditor({
       }}
     >
       <div className={styles.microViewHeader}>
-        {pageTitle ? (
-          <div className={styles.pageTitle}>{pageTitle}</div>
+        {displayPageTitle ? (
+          <div className={styles.pageTitle}>{displayPageTitle}</div>
         ) : (
           <div className={`${styles.pageTitle} ${styles.untitled}`}>
             Untitled Page
