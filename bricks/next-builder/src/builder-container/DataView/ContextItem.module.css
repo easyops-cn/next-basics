@@ -1,0 +1,50 @@
+.dropOverDownward {
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    border-bottom: 2px solid #bb79bb;
+  }
+}
+
+.dropOverUpward {
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: 0;
+    border-top: 2px solid #bb79bb;
+  }
+}
+
+.varItem {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.deleteIcon {
+  display: none;
+}
+
+.varItem:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #4e93ef;
+  .deleteIcon {
+    display: inline-block;
+    margin-left: auto;
+  }
+}
+
+.varName {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

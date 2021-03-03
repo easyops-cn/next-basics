@@ -10,36 +10,6 @@
   display: grid;
 }
 
-.varItem {
-  height: 36px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 0 10px;
-  overflow: hidden;
-}
-
-.deleteIcon {
-  display: none;
-}
-
-.varItem:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #4e93ef;
-  .deleteIcon {
-    display: inline-block;
-    margin-left: auto;
-  }
-}
-
-.varName {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
 .dangerText {
   padding-left: 3px;
   padding-right: 3px;

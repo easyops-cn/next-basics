@@ -49,11 +49,11 @@ describe("DataView", () => {
         onContextUpdate={onContextUpdate}
       />
     );
-    expect(wrapper.find(".varItem").length).toBe(2);
+    expect(wrapper.find("ContextItem").length).toBe(2);
     wrapper.find("SearchComponent").invoke("onSearch")("data-a");
-    expect(wrapper.find(".varItem").length).toBe(1);
+    expect(wrapper.find("ContextItem").length).toBe(1);
     wrapper.find("SearchComponent").invoke("onSearch")("");
-    expect(wrapper.find(".varItem").length).toBe(2);
+    expect(wrapper.find("ContextItem").length).toBe(2);
 
     wrapper
       .find(Button)
@@ -68,7 +68,7 @@ describe("DataView", () => {
     });
     expect(onContextUpdate).toBeCalled();
 
-    wrapper.find(".varItem").at(1).simulate("click");
+    wrapper.find("ContextItem").at(1).invoke("handleItemClick")();
     expect(wrapper.find("ContextItemFormModal").prop("visible")).toBe(true);
     wrapper.find("ContextItemFormModal").invoke("onOk")();
     expect(wrapper.find("ContextItemFormModal").prop("visible")).toBe(false);
@@ -81,9 +81,36 @@ describe("DataView", () => {
     expect(onContextUpdate).toBeCalled();
     wrapper.find("ContextItemFormModal").invoke("onCancel")();
     const mockStopPropagation = jest.fn();
-    wrapper.find(".deleteIcon").at(0).invoke("onClick")({
+    wrapper.find("ContextItem").at(0).invoke("handleItemDelete")({
       stopPropagation: mockStopPropagation,
     } as any);
     expect(mockStopPropagation).toBeCalled();
+  });
+
+  it("should handleDropItem work", () => {
+    const onContextUpdate = jest.fn();
+    const wrapper = shallow(
+      <DataView
+        brickList={[
+          {
+            type: "provider",
+            name: "provider-a",
+          },
+          {
+            type: "provider",
+            name: "provider-b",
+          },
+        ]}
+        onContextUpdate={onContextUpdate}
+      />
+    );
+    wrapper.find("ContextItem").at(0).invoke("handleDropItem")(1, 0);
+    expect(onContextUpdate).toBeCalledWith([
+      expect.objectContaining({ name: "data-b" }),
+      expect.objectContaining({ name: "data-a" }),
+    ]);
+    onContextUpdate.mockClear();
+    wrapper.find("ContextItem").at(0).invoke("handleDropItem")(1, 1);
+    expect(onContextUpdate).not.toBeCalled();
   });
 });
