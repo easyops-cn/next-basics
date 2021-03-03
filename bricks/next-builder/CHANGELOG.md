@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.25.0...@next-bricks/next-builder@1.25.1) (2021-03-03)
+
+
+### Bug Fixes
+
+* **storyboard-assembly:** return projectId ([c10b72e](https://github.com/easyops-cn/next-basics/commit/c10b72ea984db89f52d932fe9dcf844da55bf006))
+
+
+
+
+
 # [1.25.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.24.0...@next-bricks/next-builder@1.25.0) (2021-03-03)
 
 
