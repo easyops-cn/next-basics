@@ -8,6 +8,7 @@ import {
   EditorSelfLayout,
   useBuilderNode,
 } from "@next-core/editor-bricks-helper";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
 import styles from "./general-card.editor.module.css";
 
@@ -21,6 +22,7 @@ export function GeneralCardEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralCardProperties>({ nodeUid });
   const { cardTitle } = node.$$parsedProperties;
+  const displayTitle = smartDisplayForEvaluableString(cardTitle, "", "<% … %>");
 
   return (
     <EditorContainer
@@ -29,7 +31,7 @@ export function GeneralCardEditor({
       type={EditorBrickType.CONTAINER}
     >
       <div className={styles.card}>
-        {cardTitle && <div className={styles.cardHead}>{cardTitle}</div>}
+        {displayTitle && <div className={styles.cardHead}>{displayTitle}</div>}
         <div className={styles.cardBody}>
           <SlotContainer nodeUid={nodeUid} slotName="content" />
         </div>

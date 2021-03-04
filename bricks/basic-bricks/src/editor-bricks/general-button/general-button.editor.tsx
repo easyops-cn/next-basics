@@ -6,6 +6,7 @@ import {
   EditorElementFactory,
   useBuilderNode,
 } from "@next-core/editor-bricks-helper";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
 import styles from "./general-button.editor.module.css";
 
@@ -24,6 +25,11 @@ export function GeneralButtonEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralButtonProperties>({ nodeUid });
   const { buttonName, buttonType } = node.$$parsedProperties;
+  const displayName = smartDisplayForEvaluableString(
+    buttonName,
+    node.alias,
+    node.alias
+  );
 
   return (
     <EditorContainer nodeUid={nodeUid} brick={brick}>
@@ -32,7 +38,7 @@ export function GeneralButtonEditor({
           [styles.primary]: buttonType === GeneralButtonType.PRIMARY,
         })}
       >
-        {buttonName || node.alias}
+        <div className={styles.buttonName}>{displayName}</div>
       </div>
     </EditorContainer>
   );
