@@ -49,3 +49,6 @@ jobs:
         token: ${{ secrets.GH_TOKEN_EVE }}
         branch: easyops-eve/renew
         title: Yarn renew
+        committer: easyops-eve <easyops-eve@users.noreply.github.com>
+        commit-message: 'chore(): yarn renew'
+        body: Manually yarn renew by Github Actions.
