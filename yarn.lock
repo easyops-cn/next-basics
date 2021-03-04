@@ -12833,7 +12833,7 @@ react-avatar-editor@^11.1.0:
     "@babel/runtime" "^7.12.5"
     prop-types "^15.7.2"
 
-react-color@^2.18.1:
+react-color@^2.19.3:
   version "2.19.3"
   resolved "https://registry.npm.taobao.org/react-color/download/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
   integrity sha1-7GxrRWgxKjxqGEIKsEcuFGqlaD0=
