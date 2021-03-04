@@ -1,21 +1,17 @@
 import React, { useState, useRef, useMemo } from "react";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { Button, Form, Modal } from "antd";
-import {
-  PlusOutlined,
-  LinkOutlined,
-  CodeOutlined,
-  DeleteOutlined,
-  ExclamationCircleOutlined,
-} from "@ant-design/icons";
+import { PlusOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import styles from "./DataView.module.css";
 import { ContextConf } from "@next-core/brick-types";
 import { BrickOptionItem } from "../interfaces";
-import { cloneDeep, findIndex, set, uniqueId } from "lodash";
+import { findIndex, uniqueId } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { searchList } from "./utils";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
+import { ContextItem } from "./ContextItem";
+import update from "immutability-helper";
 
 const symbolId = Symbol("uid");
 
@@ -51,7 +47,7 @@ export function DataView({
 
   const handleSearch = (value: string): void => {
     setQ(value);
-  }
+  };
 
   const filteredContextList: ContextConfWithSymbolId[] = useMemo(
     () => searchList(contextWithUniqueSymbolId, q, "name"),
@@ -69,15 +65,16 @@ export function DataView({
     settingItemForm.submit();
   };
 
-  const handleContextItemUpdate = (contextItem: ContextConf) => {
-    const contextToSubmit = set(
-      cloneDeep(contextWithUniqueSymbolId),
-      settingUid.current
-        ? findIndex(contextWithUniqueSymbolId, [symbolId, settingUid.current])
-        : contextWithUniqueSymbolId.length,
-      contextItem
-    );
-    onContextUpdate?.(contextToSubmit);
+  const handleContextItemUpdate = (contextItem: ContextConfWithSymbolId) => {
+    const targetIndex = settingUid.current
+      ? findIndex(contextWithUniqueSymbolId, [symbolId, settingUid.current])
+      : contextWithUniqueSymbolId.length;
+    const newContext = update(contextWithUniqueSymbolId, {
+      [targetIndex]: {
+        $set: contextItem,
+      },
+    });
+    onContextUpdate?.(newContext);
   };
 
   const handleCancel = () => {
@@ -111,20 +108,23 @@ export function DataView({
     });
   };
 
+  const handleDropItem = (dragIndex: number, hoverIndex: number): void => {
+    if (dragIndex === hoverIndex) {
+      return;
+    }
+    const dragItem = contextWithUniqueSymbolId[dragIndex];
+    const newContext = update(contextWithUniqueSymbolId, {
+      $splice: [
+        [dragIndex, 1],
+        [hoverIndex, 0, dragItem],
+      ],
+    });
+    onContextUpdate?.(newContext);
+  };
+
   return (
     <ToolboxPane title="Data">
-      {/* <div className={styles.searchWrapper}>
-        <Input
-          prefix={<SearchOutlined />}
-          placeholder="Search data..."
-          value={q}
-          onChange={handleSearch}
-        />
-      </div> */}
-      <SearchComponent
-        placeholder="Search data..."
-        onSearch={handleSearch}
-      />
+      <SearchComponent placeholder="Search data..." onSearch={handleSearch} />
       <div className={styles.wrapper}>
         <Button
           icon={<PlusOutlined />}
@@ -136,28 +136,16 @@ export function DataView({
         </Button>
         <div className={styles.varList}>
           {filteredContextList?.length > 0 &&
-            filteredContextList.map((data) => (
-              <div
-                className={styles.varItem}
-                onClick={() => setData(data, data[symbolId])}
-                key={data.name}
-              >
-                {data.resolve ? (
-                  <LinkOutlined
-                    style={{ color: "var(--theme-orange-color)" }}
-                  />
-                ) : (
-                  <CodeOutlined style={{ color: "var(--theme-green-color)" }} />
-                )}
-                <span className={styles.varName}>{data.name}</span>
-                <Button
-                  type="link"
-                  danger
-                  icon={<DeleteOutlined />}
-                  className={styles.deleteIcon}
-                  onClick={(e) => handleContextItemDelete(e, data)}
-                />
-              </div>
+            filteredContextList.map((data, index) => (
+              <ContextItem
+                data={data}
+                handleItemClick={() => setData(data, data[symbolId])}
+                handleItemDelete={(e) => handleContextItemDelete(e, data)}
+                handleDropItem={handleDropItem}
+                index={index}
+                canDrag={!q}
+                key={data[symbolId]}
+              />
             ))}
         </div>
       </div>
