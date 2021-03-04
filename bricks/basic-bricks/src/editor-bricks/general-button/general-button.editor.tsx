@@ -25,8 +25,11 @@ export function GeneralButtonEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralButtonProperties>({ nodeUid });
   const { buttonName, buttonType } = node.$$parsedProperties;
-  const displayName =
-    smartDisplayForEvaluableString(buttonName, node.alias) ?? node.alias;
+  const displayName = smartDisplayForEvaluableString(
+    buttonName,
+    node.alias,
+    node.alias
+  );
 
   return (
     <EditorContainer nodeUid={nodeUid} brick={brick}>

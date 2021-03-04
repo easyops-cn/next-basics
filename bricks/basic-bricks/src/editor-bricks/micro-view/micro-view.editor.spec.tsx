@@ -60,6 +60,6 @@ describe("MicroViewEditor", () => {
     });
     const wrapper = shallow(<MicroViewEditor nodeUid={1} brick="micro-view" />);
     expect(wrapper.find(".pageTitle.untitled").length).toBe(0);
-    expect(wrapper.find(".pageTitle").text()).toBe("<% CTX.pageTitle %>");
+    expect(wrapper.find(".pageTitle").text()).toBe("<% … %>");
   });
 });

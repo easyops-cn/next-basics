@@ -23,7 +23,11 @@ export function MicroViewEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<MicroViewProperties>({ nodeUid });
   const { pageTitle } = node.$$parsedProperties;
-  const displayPageTitle = smartDisplayForEvaluableString(pageTitle);
+  const displayPageTitle = smartDisplayForEvaluableString(
+    pageTitle,
+    "",
+    "<% … %>"
+  );
 
   return (
     <EditorContainer
