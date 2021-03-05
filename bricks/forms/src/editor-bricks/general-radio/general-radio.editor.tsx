@@ -11,6 +11,7 @@ import {
 import { FormItemProps } from "../shared/interface";
 import styles from "./general-radio.editor.module.css";
 import formSharedStyle from "../shared/style/base-form-item.module.css";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralRadioProperties extends FormItemProps {
@@ -36,7 +37,7 @@ export function GeneralRadioEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div className={styles.formRadioItem}>

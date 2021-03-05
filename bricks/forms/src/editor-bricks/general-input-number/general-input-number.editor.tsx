@@ -10,6 +10,7 @@ import {
 import { FormItemProps } from "../shared/interface";
 import formSharedStyle from "../shared/style/base-form-item.module.css";
 import styles from "./general-input-number.editor.module.css";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralInputNumberProperties extends FormItemProps {
@@ -34,14 +35,16 @@ export function GeneralInputNumberEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div
           className={formSharedStyle.formInputItem}
           style={{ flex: "0 0 90px", position: "relative" }}
         >
-          <span className={formSharedStyle.placeholder}>{placeholder}</span>
+          <span className={formSharedStyle.placeholder}>
+            {formCommonFieldDisplay(placeholder)}
+          </span>
           <span className={styles.stepMark}></span>
         </div>
       </div>

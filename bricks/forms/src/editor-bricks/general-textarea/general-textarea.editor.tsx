@@ -10,6 +10,7 @@ import {
 import { FormItemProps } from "../shared/interface";
 import styles from "./general-textarea.editor.module.css";
 import formSharedStyle from "../shared/style/base-form-item.module.css";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralTextareaProperties extends FormItemProps {
@@ -34,14 +35,16 @@ export function GeneralTextareaEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div
           className={formSharedStyle.formInputItem}
           style={{ minHeight: 100 }}
         >
-          <span className={formSharedStyle.placeholder}>{placeholder}</span>
+          <span className={formSharedStyle.placeholder}>
+            {formCommonFieldDisplay(placeholder)}
+          </span>
         </div>
       </div>
     </EditorContainer>

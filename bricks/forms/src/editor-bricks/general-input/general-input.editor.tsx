@@ -9,6 +9,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import formSharedStyle from "../shared/style/base-form-item.module.css";
 import { FormItemProps } from "../shared/interface";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralInputProperties extends FormItemProps {
@@ -33,11 +34,13 @@ export function GeneralInputEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div className={formSharedStyle.formInputItem}>
-          <span className={formSharedStyle.placeholder}>{placeholder}</span>
+          <span className={formSharedStyle.placeholder}>
+            {formCommonFieldDisplay(placeholder)}
+          </span>
         </div>
       </div>
     </EditorContainer>

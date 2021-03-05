@@ -11,6 +11,7 @@ import {
 import formSharedStyle from "../shared/style/base-form-item.module.css";
 import { FormItemProps } from "../shared/interface";
 import styles from "./general-time-picker.editor.module.css";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralTimePickerProperties extends FormItemProps {
@@ -35,14 +36,16 @@ export function GeneralTimePickerEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div
           className={formSharedStyle.formInputItem}
           style={{ flex: "0 0 200px" }}
         >
-          <span className={formSharedStyle.placeholder}>{placeholder}</span>
+          <span className={formSharedStyle.placeholder}>
+            {formCommonFieldDisplay(placeholder)}
+          </span>
           <span className={styles.suffixIcon}>
             <ClockCircleOutlined />
           </span>
