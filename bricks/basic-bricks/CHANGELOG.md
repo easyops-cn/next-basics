@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.106.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.2...@next-bricks/basic-bricks@1.106.3) (2021-03-05)
+
+
+### Bug Fixes
+
+* refine brick editor display ([365c816](https://github.com/easyops-cn/next-basics/commit/365c816f80e56efecc4b350adee24d762f81acc4))
+
+
+
+
+
 ## [1.106.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.1...@next-bricks/basic-bricks@1.106.2) (2021-03-03)
 
 

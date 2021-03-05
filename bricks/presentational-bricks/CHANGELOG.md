@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.169.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.7...@next-bricks/presentational-bricks@1.169.8) (2021-03-05)
+
+
+### Bug Fixes
+
+* **brick-table:** sortOrder & pageSize & page ([572dcdf](https://github.com/easyops-cn/next-basics/commit/572dcdf14fcdca06cdb41fb7ace3b8f3a2fae86d))
+
+
+
+
+
 ## [1.169.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.6...@next-bricks/presentational-bricks@1.169.7) (2021-03-03)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

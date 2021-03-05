@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.153.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.152.0...@next-bricks/forms@1.153.0) (2021-03-05)
+
+
+### Features
+
+* **general-form-item:** passthrough pattern property ([e59773b](https://github.com/easyops-cn/next-basics/commit/e59773bf63457a573c0a453f82fa52209e46abac))
+
+
+
+
+
 # [1.152.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.151.5...@next-bricks/forms@1.152.0) (2021-02-26)
 
 

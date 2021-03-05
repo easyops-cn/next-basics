@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.26.0...@next-bricks/next-builder@1.27.0) (2021-03-05)
+
+
+### Bug Fixes
+
+* **builder-container:** refine toolbox ([32d3cfb](https://github.com/easyops-cn/next-basics/commit/32d3cfb7ce254efeeaa444ca036a875c2aca2164))
+
+
+### Features
+
+* **builder-container:** root node select ([5e7787c](https://github.com/easyops-cn/next-basics/commit/5e7787ca5f320e7ec3bde0a57f3e9b7f5a18111e))
+* **data-view:** draggable item ([45a1228](https://github.com/easyops-cn/next-basics/commit/45a1228b6f678f5e902f3e358ef134b33e8691bf))
+
+
+
+
+
 # [1.26.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.25.1...@next-bricks/next-builder@1.26.0) (2021-03-03)
 
 
