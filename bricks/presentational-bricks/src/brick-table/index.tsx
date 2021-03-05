@@ -969,11 +969,12 @@ export class BrickTableElement extends UpdatingElement {
         this.page = 1;
         this.pageSize = pagination.pageSize;
       } else if (pagination.current !== this.page) {
-        urlSearchParams.set("page", pagination.current.toString());
+        const newPage = pagination.current || 1;
+        urlSearchParams.set("page", newPage.toString());
         this.pageUpdate.emit({
-          [this._fields.page]: pagination.current, // 可配置的 path
+          [this._fields.page]: newPage, // 可配置的 path
         });
-        this.page = pagination.current;
+        this.page = newPage;
       }
     }
     this.filters = filters;
@@ -983,7 +984,6 @@ export class BrickTableElement extends UpdatingElement {
         urlSearchParams.set(key, value);
       });
     }
-
     // 排序
     if (
       sorter.columnKey !== this.sort ||
@@ -1085,8 +1085,6 @@ export class BrickTableElement extends UpdatingElement {
     filters: Record<string, string[]>,
     sorter: SorterResult<Record<string, any>>
   ): void {
-    this.page = pagination.current;
-    this.pageSize = pagination.pageSize;
     this.sort = isNil(sorter.order) ? null : (sorter.columnKey as string);
     this.order = isNil(sorter.order) ? null : this._fields[sorter.order];
   }
@@ -1325,6 +1323,7 @@ export class BrickTableElement extends UpdatingElement {
         }
         if (item.sorter) {
           item.sortOrder = (this.sort === item.key &&
+            !isNil(this.order) &&
             (this._fields.ascend === this.order
               ? "ascend"
               : "descend")) as SortOrder;
@@ -1376,7 +1375,8 @@ export class BrickTableElement extends UpdatingElement {
     this._total = get(value, this._fields.total);
     this.page = this.page ?? (get(value, "page") || 1);
     this.pageSize =
-      this.pageSize ?? (get(value, "page_size") || get(value, "pageSize"));
+      this.pageSize ??
+      (get(value, "page_size") || get(value, "pageSize") || 10);
     this._render();
   }
 
