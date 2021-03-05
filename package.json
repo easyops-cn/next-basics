@@ -32,13 +32,13 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@next-core/babel-runtime-helpers": "^1.0.7",
     "@next-core/brick-http": "^2.2.6",
-    "@next-core/brick-icons": "^2.8.4",
+    "@next-core/brick-icons": "^2.8.5",
     "@next-core/brick-kit": "^2.34.7",
     "@next-core/brick-types": "^2.19.0",
     "@next-core/brick-utils": "^2.13.1",
-    "@next-core/dev-dependencies": "^1.2.51",
+    "@next-core/dev-dependencies": "^1.2.52",
     "@next-core/easyops-analytics": "^0.1.7",
-    "@next-core/editor-bricks-helper": "^0.11.0",
+    "@next-core/editor-bricks-helper": "^0.12.0",
     "@next-core/fontawesome-library": "^1.1.13",
     "@next-core/illustrations": "^0.3.5",
     "@size-limit/file": "^4.9.2",
@@ -88,5 +88,5 @@
     "lodash": "^4.17.20",
     "@next-core/brick-types": "^2.19.0"
   },
-  "easyops": { "dev-dependencies": "1.2.51" }
+  "easyops": { "dev-dependencies": "1.2.52" }
 }
