@@ -10,6 +10,7 @@ import {
 import formSharedStyle from "../shared//style/base-form-item.module.css";
 import styles from "./general-switch.editor.module.css";
 import { FormItemProps } from "../shared/interface";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralSwitchProperties extends FormItemProps {}
@@ -33,7 +34,7 @@ export function GeneralSwitchEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div className={styles.formSwitchItem}>

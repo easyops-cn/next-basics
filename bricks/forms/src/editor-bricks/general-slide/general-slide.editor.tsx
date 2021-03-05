@@ -10,6 +10,7 @@ import {
 import styles from "./general-slide.editor.module.css";
 import { FormItemProps } from "../shared/interface";
 import formSharedStyle from "../shared/style/base-form-item.module.css";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralSlideProperties extends FormItemProps {}
@@ -33,7 +34,7 @@ export function GeneralSlideEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div className={styles.formSlideItem}>

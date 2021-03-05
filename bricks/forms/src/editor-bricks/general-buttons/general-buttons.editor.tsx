@@ -11,6 +11,7 @@ import {
 import formSharedStyle from "../shared/style/base-form-item.module.css";
 import { FormItemProps } from "../shared/interface";
 import styles from "./general-buttons.editor.module.css";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
 export type BtnType = "default" | "primary" | "dashed" | "danger" | "link";
 
@@ -27,14 +28,28 @@ export function GeneralButtonsEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralButtonsProperties>({ nodeUid });
   const { submitText, cancelText, showCancelButton } = node.$$parsedProperties;
+  const displaySubmitText = smartDisplayForEvaluableString(
+    submitText,
+    "",
+    node.alias
+  );
+  const displayCancelText = smartDisplayForEvaluableString(
+    cancelText,
+    "",
+    node.alias
+  );
   return (
     <EditorContainer nodeUid={nodeUid} brick={brick}>
       <div className={formSharedStyle.formItemWrapper}>
         <div className={formSharedStyle.labelContainer}></div>
         <div className={styles.formButtonItem}>
-          {<div className={classNames(styles.submitBtn)}>{submitText}</div>}
+          {
+            <div className={classNames(styles.submitBtn)}>
+              {displaySubmitText}
+            </div>
+          }
           {showCancelButton && (
-            <div className={styles.cancelBtn}>{cancelText}</div>
+            <div className={styles.cancelBtn}>{displayCancelText}</div>
           )}
         </div>
       </div>

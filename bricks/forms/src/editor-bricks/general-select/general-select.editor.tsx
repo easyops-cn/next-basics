@@ -10,6 +10,7 @@ import {
 import formSharedStyle from "../shared/style/base-form-item.module.css";
 import styles from "./general-select.editor.module.css";
 import { FormItemProps } from "../shared/interface";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralSelectProperties extends FormItemProps {
@@ -34,11 +35,13 @@ export function GeneralSelectEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div className={formSharedStyle.formInputItem}>
-          <span className={formSharedStyle.placeholder}>{placeholder}</span>
+          <span className={formSharedStyle.placeholder}>
+            {formCommonFieldDisplay(placeholder)}
+          </span>
           <span className={styles.arrow}></span>
         </div>
       </div>

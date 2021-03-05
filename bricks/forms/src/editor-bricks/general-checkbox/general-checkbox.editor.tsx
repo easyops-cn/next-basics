@@ -11,6 +11,7 @@ import {
 import { FormItemProps } from "../shared/interface";
 import styles from "./general-checkbox.editor.module.css";
 import formSharedStyle from "../shared/style/base-form-item.module.css";
+import { formCommonFieldDisplay } from "../shared/utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GeneralCheckboxProperties extends FormItemProps {}
@@ -34,7 +35,7 @@ export function GeneralCheckboxEditor({
           <span
             className={classNames({ [formSharedStyle.formLabel]: !!label })}
           >
-            {label}
+            {formCommonFieldDisplay(label)}
           </span>
         </div>
         <div className={styles.formCheckboxItem}>

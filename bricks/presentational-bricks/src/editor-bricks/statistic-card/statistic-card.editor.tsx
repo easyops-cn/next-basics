@@ -6,6 +6,7 @@ import {
   EditorSelfLayout,
   useBuilderNode,
 } from "@next-core/editor-bricks-helper";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
 import styles from "./statistic-card.editor.module.css";
 
@@ -20,6 +21,7 @@ export function StatisticCardEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<StatisticCardProperties>({ nodeUid });
   const { cardTitle, value } = node.$$parsedProperties;
+  const displayTitle = smartDisplayForEvaluableString(cardTitle, "", "<% … %>");
   return (
     <EditorContainer nodeUid={nodeUid} brick={brick}>
       <div className={styles.card}>
@@ -28,7 +30,7 @@ export function StatisticCardEditor({
             {value || <div className={styles.valuePlaceholder}></div>}
           </div>
           <div className={styles.title}>
-            {cardTitle || <div className={styles.titlePlaceholder}></div>}
+            {displayTitle || <div className={styles.titlePlaceholder}></div>}
           </div>
         </div>
         <div className={styles.icon}></div>
