@@ -12,4 +12,8 @@ export const styleConfig = {
     height: 40,
     marginBottom: 7,
   },
+  divider: {
+    height: 24,
+    lineHeight: "20px",
+  },
 };

@@ -1,27 +1,23 @@
 .eventNode {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 6px;
 }
 
 .rootNode {
-  box-shadow: 0 0 0 2px var(--antd-primary-color);
+  background: #bae7ff;
 }
 
-.title,
 .handlerTitle,
-.handlerContent {
+.handlerContent,
+.divider {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.title {
-  color: #6d6d6d;
-  text-align: center;
-  position: relative;
-  font-size: 14px;
-  font-weight: 600;
+.divider {
+  color: var(--antd-text-color-secondary);
 }
 
 .items {
@@ -32,13 +28,4 @@
 
 .upstreamSource {
   cursor: pointer;
-}
-
-.upstreamSource .title {
-  color: var(--antd-link-color);
-  font-weight: 400;
-}
-
-.upstreamSource:hover .title {
-  color: var(--antd-link-hover-color);
 }

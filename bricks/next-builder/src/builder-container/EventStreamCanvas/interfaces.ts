@@ -88,6 +88,7 @@ export interface EventUpstreamNodeOfEvent
 export interface EventUpstreamNodeOfLifeCycle
   extends EventUpstreamNodeBaseWithHandler {
   type: EventUpstreamType.UPSTREAM_LIFE_CYCLE;
+  channel?: string;
 }
 
 export interface EventUpstreamNodeOfCallback

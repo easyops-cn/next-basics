@@ -7,19 +7,25 @@ import {
 } from "@next-core/brick-types";
 import {
   EventDownstreamNode,
+  EventDownstreamNodeOfLifeCycle,
   EventDownstreamType,
   EventStreamNode,
+  EventUpstreamNodeOfLifeCycle,
+  EventUpstreamType,
 } from "./interfaces";
 
 export function isEventDownstreamNode(
   eventNode: EventStreamNode
 ): eventNode is EventDownstreamNode {
-  return [
-    EventDownstreamType.ROOT,
-    EventDownstreamType.EVENT,
-    EventDownstreamType.LIFE_CYCLE,
-    EventDownstreamType.CALLBACK,
-  ].includes((eventNode as EventDownstreamNode).type);
+  switch (eventNode.type) {
+    case EventDownstreamType.ROOT:
+    case EventDownstreamType.EVENT:
+    case EventDownstreamType.LIFE_CYCLE:
+    case EventDownstreamType.CALLBACK:
+      return true;
+    default:
+      return false;
+  }
 }
 
 export function isBuiltinHandler(
@@ -51,5 +57,15 @@ export function isSetPropsHandler(
     ((handler as SetPropsCustomBrickEventHandler).target ||
       (handler as SetPropsCustomBrickEventHandler).targetRef) &&
     (handler as SetPropsCustomBrickEventHandler).properties
+  );
+}
+
+export function hasChannel(
+  eventNode: EventStreamNode
+): eventNode is EventDownstreamNodeOfLifeCycle | EventUpstreamNodeOfLifeCycle {
+  return (
+    (eventNode.type === EventDownstreamType.LIFE_CYCLE ||
+      eventNode.type === EventUpstreamType.UPSTREAM_LIFE_CYCLE) &&
+    eventNode.eventType === "onMessage"
   );
 }
