@@ -134,6 +134,7 @@ export class GeneralFormItemElement extends FormItemElement {
             labelTooltip={this.labelTooltip}
             required={this.required}
             message={this.message}
+            pattern={this.pattern}
             validator={this.validator}
             notRender={this.notRender}
             helpBrick={this.helpBrick}
