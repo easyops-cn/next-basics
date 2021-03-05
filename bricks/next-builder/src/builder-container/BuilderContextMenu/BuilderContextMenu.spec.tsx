@@ -18,7 +18,7 @@ const mockUseBuilderContextMenuStatus = useBuilderContextMenuStatus as jest.Mock
 
 const mockBuilderUIContext: ContextOfBuilderUI = {
   setToolboxTab: jest.fn(),
-  setEventStreamActiveNodeUid: jest.fn(),
+  setEventStreamNodeId: jest.fn(),
 };
 
 (useBuilderUIContext as jest.MockedFunction<
@@ -101,7 +101,7 @@ describe("BuilderContextMenu", () => {
     expect(mockBuilderUIContext.setToolboxTab).toBeCalledWith(
       ToolboxTab.EVENTS_VIEW
     );
-    expect(mockBuilderUIContext.setEventStreamActiveNodeUid).toBeCalledWith(1);
+    expect(mockBuilderUIContext.setEventStreamNodeId).toBeCalledWith("B-001");
   });
 
   it("should invoke onAskForDeletingNode", () => {
