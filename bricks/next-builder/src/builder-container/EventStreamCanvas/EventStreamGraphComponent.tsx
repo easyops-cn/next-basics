@@ -6,7 +6,6 @@ import {
   useBuilderData,
 } from "@next-core/editor-bricks-helper";
 import { EventStreamGraph } from "./EventStreamGraph";
-import { EventDownstreamNode, EventDownstreamType } from "./interfaces";
 import { buildBrickEventDownstreamTree } from "./buildBrickEventDownstreamTree";
 import { buildBrickEventUpstreamTree } from "./buildBrickEventUpstreamTree";
 import { useBuilderUIContext } from "../BuilderUIContext";
@@ -21,15 +20,10 @@ export function EventDownstreamGraphComponent({
 }: EventDownstreamGraphComponentProps): React.ReactElement {
   const { dataType, fullscreen, setEventStreamNodeId } = useBuilderUIContext();
 
-  const eventDownstreamTree = React.useMemo(() => {
-    const tree: EventDownstreamNode = {
-      type: EventDownstreamType.ROOT,
-      node,
-      children: [],
-    };
-    buildBrickEventDownstreamTree(tree, node.$$parsedEvents);
-    return tree;
-  }, [node]);
+  const eventDownstreamTree = React.useMemo(
+    () => buildBrickEventDownstreamTree(node),
+    [node]
+  );
 
   const { nodes } = useBuilderData();
   const targetMap = React.useMemo(() => {

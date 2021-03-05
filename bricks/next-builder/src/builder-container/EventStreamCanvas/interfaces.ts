@@ -1,7 +1,4 @@
-import {
-  BrickEventHandler,
-  BrickEventHandlerCallback,
-} from "@next-core/brick-types";
+import { BrickEventHandler } from "@next-core/brick-types";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export type EventStreamNode = EventDownstreamNode | EventUpstreamNode;
@@ -9,17 +6,25 @@ export type EventStreamNode = EventDownstreamNode | EventUpstreamNode;
 export type EventDownstreamNode =
   | EventDownstreamNodeOfRoot
   | EventDownstreamNodeOfEvent
+  | EventDownstreamNodeOfLifeCycle
   | EventDownstreamNodeOfCallback;
 
 export interface EventDownstreamNodeBase {
-  children: (EventDownstreamNodeOfEvent | EventDownstreamNodeOfCallback)[];
+  children: EventDownstreamNode[];
   height?: number;
 }
 
 export enum EventDownstreamType {
   ROOT = "root",
   EVENT = "event",
+  LIFE_CYCLE = "life-cycle",
   CALLBACK = "callback",
+}
+
+export interface EventDownstreamNodeBaseWithHandlers
+  extends EventDownstreamNodeBase {
+  eventType: string;
+  handlers: BrickEventHandler[];
 }
 
 export interface EventDownstreamNodeOfRoot extends EventDownstreamNodeBase {
@@ -27,22 +32,27 @@ export interface EventDownstreamNodeOfRoot extends EventDownstreamNodeBase {
   node: BuilderRuntimeNode;
 }
 
-export interface EventDownstreamNodeOfEvent extends EventDownstreamNodeBase {
+export interface EventDownstreamNodeOfEvent
+  extends EventDownstreamNodeBaseWithHandlers {
   type: EventDownstreamType.EVENT;
-  eventType: string;
-  handlers: BrickEventHandler[];
 }
 
-export interface EventDownstreamNodeOfCallback extends EventDownstreamNodeBase {
+export interface EventDownstreamNodeOfLifeCycle
+  extends EventDownstreamNodeBaseWithHandlers {
+  type: EventDownstreamType.LIFE_CYCLE;
+  channel?: string;
+}
+
+export interface EventDownstreamNodeOfCallback
+  extends EventDownstreamNodeBaseWithHandlers {
   type: EventDownstreamType.CALLBACK;
-  callbackType: keyof BrickEventHandlerCallback;
   parentHandlerIndex: number;
-  handlers: BrickEventHandler[];
 }
 
 export type EventUpstreamNode =
   | EventUpstreamNodeOfRoot
   | EventUpstreamNodeOfEvent
+  | EventUpstreamNodeOfLifeCycle
   | EventUpstreamNodeOfCallback
   | EventUpstreamNodeOfSource;
 
@@ -51,9 +61,16 @@ export interface EventUpstreamNodeBase {
   height?: number;
 }
 
+export interface EventUpstreamNodeBaseWithHandler
+  extends EventUpstreamNodeBase {
+  eventType: string;
+  handler: BrickEventHandler;
+}
+
 export enum EventUpstreamType {
   UPSTREAM_ROOT = "upstream-root",
   UPSTREAM_EVENT = "upstream-event",
+  UPSTREAM_LIFE_CYCLE = "upstream-life-cycle",
   UPSTREAM_CALLBACK = "upstream-callback",
   UPSTREAM_SOURCE = "upstream-source",
 }
@@ -63,16 +80,19 @@ export interface EventUpstreamNodeOfRoot extends EventUpstreamNodeBase {
   node: BuilderRuntimeNode;
 }
 
-export interface EventUpstreamNodeOfEvent extends EventUpstreamNodeBase {
+export interface EventUpstreamNodeOfEvent
+  extends EventUpstreamNodeBaseWithHandler {
   type: EventUpstreamType.UPSTREAM_EVENT;
-  eventType: string;
-  handler: BrickEventHandler;
 }
 
-export interface EventUpstreamNodeOfCallback extends EventUpstreamNodeBase {
+export interface EventUpstreamNodeOfLifeCycle
+  extends EventUpstreamNodeBaseWithHandler {
+  type: EventUpstreamType.UPSTREAM_LIFE_CYCLE;
+}
+
+export interface EventUpstreamNodeOfCallback
+  extends EventUpstreamNodeBaseWithHandler {
   type: EventUpstreamType.UPSTREAM_CALLBACK;
-  callbackType: string;
-  handler: BrickEventHandler;
 }
 
 export interface EventUpstreamNodeOfSource extends EventUpstreamNodeBase {

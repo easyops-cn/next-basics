@@ -3,6 +3,7 @@ import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 import {
   BrickEventHandler,
   ExecuteCustomBrickEventHandler,
+  MessageConf,
 } from "@next-core/brick-types";
 
 export interface BrickWithEvents {
@@ -17,29 +18,61 @@ export function getBricksWithEvents(
   const eventTargetSelectors = new Set<string>();
   const eventTargetRefs = new Set<string>();
   const nodesWhichTargetToSelf = new WeakSet<BuilderRuntimeNode>();
+  const nodesWhichHasEvents = new WeakSet<BuilderRuntimeNode>();
 
   for (const node of nodes) {
+    const flags = {
+      targetToSelf: false,
+    };
+    let handlers: BrickEventHandler[] = [];
     if (!isEmpty(node.$$parsedEvents)) {
-      const flags = {
-        targetToSelf: false,
-      };
-      for (const handlers of Object.values(node.$$parsedEvents)) {
-        collectEventTargetSelectors(
-          [].concat(handlers),
-          eventTargetSelectors,
-          eventTargetRefs,
-          flags
-        );
-      }
-      if (flags.targetToSelf) {
-        nodesWhichTargetToSelf.add(node);
-      }
+      handlers = Object.values(node.$$parsedEvents).flat();
+    }
+    if (!isEmpty(node.$$parsedLifeCycle)) {
+      handlers = handlers.concat(
+        Object.entries(node.$$parsedLifeCycle).flatMap(
+          ([lifeCycleName, lifeCycleConf]) => {
+            switch (lifeCycleName) {
+              case "onBeforePageLoad":
+              case "onPageLoad":
+              case "onPageLeave":
+              case "onBeforePageLeave":
+              case "onAnchorLoad":
+              case "onAnchorUnload":
+              case "onMessageClose":
+                return lifeCycleConf as BrickEventHandler[];
+              case "onMessage":
+                return ([] as MessageConf[])
+                  .concat(lifeCycleConf)
+                  .flatMap((messageConf) =>
+                    ([] as BrickEventHandler[]).concat(messageConf.handlers)
+                  );
+              default:
+                // eslint-disable-next-line no-console
+                console.warn(`unknown lifeCycle: ${lifeCycleName}`);
+                return [];
+            }
+          }
+        )
+      );
+    }
+    if (handlers.length > 0) {
+      collectEventTargetSelectors(
+        handlers,
+        eventTargetSelectors,
+        eventTargetRefs,
+        flags
+      );
+      nodesWhichHasEvents.add(node);
+    }
+    if (flags.targetToSelf) {
+      nodesWhichTargetToSelf.add(node);
     }
   }
 
   const bricksWithEvents: BrickWithEvents[] = [];
   for (const node of nodes) {
-    const hasEvents = !isEmpty(node.$$parsedEvents);
+    const hasEvents = nodesWhichHasEvents.has(node);
     const isTargetOfEvents =
       (node.$$matchedSelectors as string[]).some((selector) =>
         eventTargetSelectors.has(selector)

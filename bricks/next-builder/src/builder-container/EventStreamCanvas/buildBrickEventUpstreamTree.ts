@@ -5,6 +5,7 @@ import { HierarchyPointNode } from "d3";
 import {
   BrickEventHandler,
   ExecuteCustomBrickEventHandler,
+  MessageConf,
 } from "@next-core/brick-types";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 import {
@@ -25,21 +26,68 @@ export function buildBrickEventUpstreamTree(
   };
   rootEventNode.height = computeEventUpstreamNodeHeight(rootEventNode);
   for (const node of nodes) {
-    if (isEmpty(node.$$parsedEvents)) {
-      continue;
-    }
     const stack: EventUpstreamStack = [
       {
         type: EventUpstreamType.UPSTREAM_SOURCE,
       },
     ];
-    for (const [eventType, handlers] of Object.entries(node.$$parsedEvents)) {
+    let mergedEvents: {
+      type: EventUpstreamType;
+      eventType: string;
+      handlers: BrickEventHandler[];
+    }[] = [];
+    if (!isEmpty(node.$$parsedEvents)) {
+      mergedEvents = Object.entries(node.$$parsedEvents).map(
+        ([eventType, handlers]) => ({
+          type: EventUpstreamType.UPSTREAM_EVENT,
+          eventType,
+          handlers: [].concat(handlers),
+        })
+      );
+    }
+    if (!isEmpty(node.$$parsedLifeCycle)) {
+      mergedEvents = mergedEvents.concat(
+        Object.entries(node.$$parsedLifeCycle).map(
+          ([lifeCycleName, lifeCycleConf]) => {
+            let handlers: BrickEventHandler[] = [];
+            switch (lifeCycleName) {
+              case "onBeforePageLoad":
+              case "onPageLoad":
+              case "onPageLeave":
+              case "onBeforePageLeave":
+              case "onAnchorLoad":
+              case "onAnchorUnload":
+              case "onMessageClose":
+                handlers = [].concat(lifeCycleConf);
+                break;
+              case "onMessage":
+                handlers = ([] as MessageConf[])
+                  .concat(lifeCycleConf)
+                  .flatMap((messageConf) =>
+                    ([] as BrickEventHandler[]).concat(messageConf.handlers)
+                  );
+                break;
+              default:
+                // eslint-disable-next-line no-console
+                console.warn(`unknown lifeCycle: ${lifeCycleName}`);
+            }
+            return {
+              type: EventUpstreamType.UPSTREAM_LIFE_CYCLE,
+              eventType: lifeCycleName,
+              handlers,
+            };
+          }
+        )
+      );
+    }
+    for (const { type, eventType, handlers } of mergedEvents) {
       collectEventUpstream({
         sourceNode: node,
         targetNode,
         rootEventNode,
+        type,
         eventType,
-        handlers: [].concat(handlers),
+        handlers,
         stack,
       });
     }
@@ -59,6 +107,7 @@ interface CollectEventUpstreamParams {
   sourceNode: BuilderRuntimeNode;
   targetNode: BuilderRuntimeNode;
   rootEventNode: EventUpstreamNode;
+  type: EventUpstreamType;
   eventType: string;
   handlers: BrickEventHandler[];
   stack: EventUpstreamStack;
@@ -68,6 +117,7 @@ function collectEventUpstream({
   sourceNode,
   targetNode,
   rootEventNode,
+  type,
   eventType,
   handlers,
   stack,
@@ -75,7 +125,7 @@ function collectEventUpstream({
   for (const handler of handlers as ExecuteCustomBrickEventHandler[]) {
     const currentStack = ([
       {
-        type: getNextUpstreamType(stack[0].type),
+        type,
         eventType,
         handler,
       },
@@ -97,23 +147,13 @@ function collectEventUpstream({
           sourceNode,
           targetNode,
           rootEventNode,
-          stack: currentStack,
+          type: EventUpstreamType.UPSTREAM_CALLBACK,
           eventType: callbackType,
           handlers: [].concat(callbackHandlers),
+          stack: currentStack,
         });
       }
     }
-  }
-}
-
-function getNextUpstreamType(type: EventUpstreamType): EventUpstreamType {
-  switch (type) {
-    case EventUpstreamType.UPSTREAM_ROOT:
-      return EventUpstreamType.UPSTREAM_SOURCE;
-    case EventUpstreamType.UPSTREAM_SOURCE:
-      return EventUpstreamType.UPSTREAM_EVENT;
-    default:
-      return EventUpstreamType.UPSTREAM_CALLBACK;
   }
 }
 
@@ -133,18 +173,10 @@ function buildByStack(
           children: [],
         };
         break;
-      case EventUpstreamType.UPSTREAM_EVENT:
-        childEventNode = {
-          type: item.type,
-          eventType: item.eventType,
-          handler: item.handler,
-          children: [],
-        };
-        break;
       default:
         childEventNode = {
-          type: item.type as EventUpstreamType.UPSTREAM_CALLBACK,
-          callbackType: item.eventType,
+          type: item.type as EventUpstreamType.UPSTREAM_EVENT,
+          eventType: item.eventType,
           handler: item.handler,
           children: [],
         };
