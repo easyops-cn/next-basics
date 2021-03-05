@@ -288,9 +288,9 @@ export const story: Story = {
                             properties: {
                               icon: {
                                 lib: "antd",
-                                icon: "info-circle",
-                                theme: "outlined",
-                                color: "#0071eb",
+                                icon: "question-circle",
+                                theme: "filled",
+                                color: "#595959",
                               },
                             },
                             events: {
