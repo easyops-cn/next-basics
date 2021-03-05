@@ -14,6 +14,14 @@ import {
   EventUpstreamType,
 } from "./interfaces";
 import { styleConfig } from "./styleConfig";
+import { hasChannel } from "./assertions";
+
+interface MergeableEventConf {
+  type: EventUpstreamType;
+  eventType: string;
+  handlers: BrickEventHandler[];
+  channel?: string;
+}
 
 export function buildBrickEventUpstreamTree(
   targetNode: BuilderRuntimeNode,
@@ -31,11 +39,7 @@ export function buildBrickEventUpstreamTree(
         type: EventUpstreamType.UPSTREAM_SOURCE,
       },
     ];
-    let mergedEvents: {
-      type: EventUpstreamType;
-      eventType: string;
-      handlers: BrickEventHandler[];
-    }[] = [];
+    let mergedEvents: MergeableEventConf[] = [];
     if (!isEmpty(node.$$parsedEvents)) {
       mergedEvents = Object.entries(node.$$parsedEvents).map(
         ([eventType, handlers]) => ({
@@ -47,9 +51,8 @@ export function buildBrickEventUpstreamTree(
     }
     if (!isEmpty(node.$$parsedLifeCycle)) {
       mergedEvents = mergedEvents.concat(
-        Object.entries(node.$$parsedLifeCycle).map(
+        Object.entries(node.$$parsedLifeCycle).flatMap<MergeableEventConf>(
           ([lifeCycleName, lifeCycleConf]) => {
-            let handlers: BrickEventHandler[] = [];
             switch (lifeCycleName) {
               case "onBeforePageLoad":
               case "onPageLoad":
@@ -58,29 +61,32 @@ export function buildBrickEventUpstreamTree(
               case "onAnchorLoad":
               case "onAnchorUnload":
               case "onMessageClose":
-                handlers = [].concat(lifeCycleConf);
-                break;
+                return {
+                  type: EventUpstreamType.UPSTREAM_LIFE_CYCLE,
+                  eventType: lifeCycleName,
+                  handlers: [].concat(lifeCycleConf),
+                };
               case "onMessage":
-                handlers = ([] as MessageConf[])
+                return ([] as MessageConf[])
                   .concat(lifeCycleConf)
-                  .flatMap((messageConf) =>
-                    ([] as BrickEventHandler[]).concat(messageConf.handlers)
-                  );
-                break;
+                  .map((messageConf) => ({
+                    type: EventUpstreamType.UPSTREAM_LIFE_CYCLE,
+                    eventType: lifeCycleName,
+                    handlers: ([] as BrickEventHandler[]).concat(
+                      messageConf.handlers
+                    ),
+                    channel: messageConf.channel,
+                  }));
               default:
                 // eslint-disable-next-line no-console
                 console.warn(`unknown lifeCycle: ${lifeCycleName}`);
+                return [];
             }
-            return {
-              type: EventUpstreamType.UPSTREAM_LIFE_CYCLE,
-              eventType: lifeCycleName,
-              handlers,
-            };
           }
         )
       );
     }
-    for (const { type, eventType, handlers } of mergedEvents) {
+    for (const { type, eventType, handlers, channel } of mergedEvents) {
       collectEventUpstream({
         sourceNode: node,
         targetNode,
@@ -89,6 +95,7 @@ export function buildBrickEventUpstreamTree(
         eventType,
         handlers,
         stack,
+        channel,
       });
     }
   }
@@ -101,6 +108,7 @@ interface EventUpstreamStackItem {
   type: EventUpstreamType;
   eventType?: string;
   handler?: BrickEventHandler;
+  channel?: string;
 }
 
 interface CollectEventUpstreamParams {
@@ -111,6 +119,7 @@ interface CollectEventUpstreamParams {
   eventType: string;
   handlers: BrickEventHandler[];
   stack: EventUpstreamStack;
+  channel?: string;
 }
 
 function collectEventUpstream({
@@ -121,6 +130,7 @@ function collectEventUpstream({
   eventType,
   handlers,
   stack,
+  channel,
 }: CollectEventUpstreamParams): void {
   for (const handler of handlers as ExecuteCustomBrickEventHandler[]) {
     const currentStack = ([
@@ -128,6 +138,7 @@ function collectEventUpstream({
         type,
         eventType,
         handler,
+        channel,
       },
     ] as EventUpstreamStack).concat(stack);
     if (handler.target) {
@@ -175,10 +186,11 @@ function buildByStack(
         break;
       default:
         childEventNode = {
-          type: item.type as EventUpstreamType.UPSTREAM_EVENT,
+          type: item.type as EventUpstreamType.UPSTREAM_LIFE_CYCLE,
           eventType: item.eventType,
           handler: item.handler,
           children: [],
+          channel: item.channel,
         };
     }
     childEventNode.height = computeEventUpstreamNodeHeight(childEventNode);
@@ -192,6 +204,9 @@ function computeEventUpstreamNodeHeight(eventNode: EventUpstreamNode): number {
   if (eventNode.type !== EventUpstreamType.UPSTREAM_SOURCE) {
     height += styleConfig.titleMarginBottom + styleConfig.item.height;
   }
+  if (hasChannel(eventNode)) {
+    height += styleConfig.divider.height;
+  }
   return height;
 }
 
@@ -199,14 +214,17 @@ export function computeEventUpstreamSourceX(
   source: HierarchyPointNode<EventUpstreamNode>
 ): number {
   if (source.data.type !== EventUpstreamType.UPSTREAM_SOURCE) {
-    return (
+    let x =
       source.x -
       source.data.height / 2 +
       styleConfig.node.padding +
       styleConfig.title.height +
       styleConfig.titleMarginBottom +
-      styleConfig.item.height / 2
-    );
+      styleConfig.item.height / 2;
+    if (hasChannel(source.data)) {
+      x += styleConfig.divider.height;
+    }
+    return x;
   }
   return source.x;
 }

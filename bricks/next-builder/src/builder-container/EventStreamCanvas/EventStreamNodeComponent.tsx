@@ -10,12 +10,11 @@ import {
   EventUpstreamNode,
   EventDownstreamNode,
   EventUpstreamNodeOfSource,
-  EventUpstreamNodeOfEvent,
-  EventDownstreamNodeOfEvent,
 } from "./interfaces";
 import { styleConfig } from "./styleConfig";
-import { isEventDownstreamNode } from "./assertions";
+import { hasChannel, isEventDownstreamNode } from "./assertions";
 import { EventStreamHandler } from "./EventStreamHandler";
+import { EventStreamTitle } from "./EventStreamTitle";
 
 import styles from "./EventStreamNodeComponent.module.css";
 
@@ -67,24 +66,12 @@ export function EventDownstreamNodeComponent({
         height: eventNode.height,
       }}
     >
-      <div
-        className={styles.title}
-        style={{
-          ...styleConfig.title,
-          marginBottom:
-            eventNode.type === EventDownstreamType.ROOT
-              ? undefined
-              : styleConfig.titleMarginBottom,
-        }}
-      >
-        {eventNode.type === EventDownstreamType.ROOT
-          ? `${eventNode.node.alias}`
-          : eventNode.type === EventDownstreamType.CALLBACK
-          ? `[callback] ${eventNode.eventType}`
-          : eventNode.type === EventDownstreamType.LIFE_CYCLE
-          ? `[lifeCycle] ${eventNode.eventType}`
-          : (eventNode as EventDownstreamNodeOfEvent).eventType}
-      </div>
+      <EventStreamTitle eventNode={eventNode} />
+      {hasChannel(eventNode) && (
+        <div className={styles.divider} style={styleConfig.divider}>
+          {eventNode.channel}
+        </div>
+      )}
       <ul className={styles.items}>
         {eventNode.type !== EventDownstreamType.ROOT &&
           eventNode.handlers.map((handler, index) => (
@@ -130,24 +117,12 @@ export function EventUpstreamNodeComponent({
       }}
       onClick={handleClick}
     >
-      <div
-        className={styles.title}
-        style={{
-          ...styleConfig.title,
-          marginBottom:
-            eventNode.type === EventUpstreamType.UPSTREAM_SOURCE
-              ? undefined
-              : styleConfig.titleMarginBottom,
-        }}
-      >
-        {eventNode.type === EventUpstreamType.UPSTREAM_SOURCE
-          ? eventNode.node.alias
-          : eventNode.type === EventUpstreamType.UPSTREAM_CALLBACK
-          ? `[callback] ${eventNode.eventType}`
-          : eventNode.type === EventUpstreamType.UPSTREAM_LIFE_CYCLE
-          ? `[lifeCycle] ${eventNode.eventType}`
-          : (eventNode as EventUpstreamNodeOfEvent).eventType}
-      </div>
+      <EventStreamTitle eventNode={eventNode} />
+      {hasChannel(eventNode) && (
+        <div className={styles.divider} style={styleConfig.divider}>
+          {eventNode.channel}
+        </div>
+      )}
       {eventNode.type !== EventUpstreamType.UPSTREAM_SOURCE && (
         <ul className={styles.items}>
           <EventStreamHandler

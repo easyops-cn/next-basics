@@ -19,7 +19,7 @@ export function BuilderContextMenu({
 }: BuilderContextMenuProps): React.ReactElement {
   const contextMenuStatus = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
-  const { setToolboxTab, setEventStreamActiveNodeUid } = useBuilderUIContext();
+  const { setToolboxTab, setEventStreamNodeId } = useBuilderUIContext();
 
   const handleCloseMenu = React.useCallback(
     (event: React.MouseEvent) => {
@@ -37,8 +37,8 @@ export function BuilderContextMenu({
 
   const handleShowEventsView = React.useCallback(() => {
     setToolboxTab(ToolboxTab.EVENTS_VIEW);
-    setEventStreamActiveNodeUid(contextMenuStatus.node.$$uid);
-  }, [contextMenuStatus.node, setEventStreamActiveNodeUid, setToolboxTab]);
+    setEventStreamNodeId(contextMenuStatus.node.id);
+  }, [contextMenuStatus.node, setEventStreamNodeId, setToolboxTab]);
 
   return (
     <div

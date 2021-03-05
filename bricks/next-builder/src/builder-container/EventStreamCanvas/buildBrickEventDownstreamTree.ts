@@ -8,6 +8,7 @@ import {
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 import { HierarchyPointLink } from "d3";
 import { isEmpty } from "lodash";
+import { hasChannel } from "./assertions";
 import {
   EventDownstreamNode,
   EventDownstreamNodeOfRoot,
@@ -130,6 +131,9 @@ function computeEventDownstreamNodeHeight(
       eventNode.handlers.length * styleConfig.item.height +
       (eventNode.handlers.length - 1) * styleConfig.item.marginBottom;
   }
+  if (hasChannel(eventNode)) {
+    height += styleConfig.divider.height;
+  }
   return height;
 }
 
@@ -138,7 +142,7 @@ export function computeEventDownstreamSourceX({
   target,
 }: HierarchyPointLink<EventDownstreamNode>): number {
   if (target.data.type === EventDownstreamType.CALLBACK) {
-    return (
+    let x =
       source.x -
       source.data.height / 2 +
       styleConfig.node.padding +
@@ -146,8 +150,11 @@ export function computeEventDownstreamSourceX({
       styleConfig.titleMarginBottom +
       target.data.parentHandlerIndex *
         (styleConfig.item.height + styleConfig.item.marginBottom) +
-      styleConfig.item.height / 2
-    );
+      styleConfig.item.height / 2;
+    if (hasChannel(source.data)) {
+      x += styleConfig.divider.height;
+    }
+    return x;
   }
   return source.x;
 }
