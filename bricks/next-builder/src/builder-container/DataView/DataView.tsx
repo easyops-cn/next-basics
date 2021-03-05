@@ -124,7 +124,7 @@ export function DataView({
 
   return (
     <ToolboxPane title="Data">
-      <SearchComponent placeholder="Search data..." onSearch={handleSearch} />
+      <SearchComponent placeholder="Search data" onSearch={handleSearch} />
       <div className={styles.wrapper}>
         <Button
           icon={<PlusOutlined />}

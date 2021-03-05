@@ -1,5 +1,9 @@
 import { getBricksWithEvents } from "./getBricksWithEvents";
 
+const mockConsoleWarn = jest
+  .spyOn(console, "warn")
+  .mockImplementation(() => void 0);
+
 describe("getBricksWithEvents", () => {
   it("should work", () => {
     expect(
@@ -94,6 +98,59 @@ describe("getBricksWithEvents", () => {
             ],
           },
         },
+        {
+          // This brick has both lifeCycle and events.
+          type: "brick",
+          brick: "my.brick-h",
+          id: "B-008",
+          $$matchedSelectors: ["my\\.brick-h"],
+          $$parsedLifeCycle: {
+            onBeforePageLoad: {
+              target: "#myBrickI",
+              method: "open",
+            },
+          },
+          $$parsedEvents: {
+            click: {
+              target: "#myBrickK",
+              method: "open",
+            },
+          },
+        },
+        {
+          type: "brick",
+          brick: "my.brick-i",
+          id: "B-009",
+          $$matchedSelectors: ["my\\.brick-i", "#myBrickI"],
+          $$parsedLifeCycle: {
+            onMessage: {
+              channel: "any",
+              handlers: {
+                target: "#myBrickJ",
+                method: "open",
+              },
+            },
+          },
+        },
+        {
+          // This brick has an unknown lifeCycle.
+          type: "brick",
+          brick: "my.brick-j",
+          id: "B-010",
+          $$matchedSelectors: ["my\\.brick-j", "#myBrickJ"],
+          $$parsedLifeCycle: {
+            onOthers: {
+              target: "#myBrickX",
+              method: "open",
+            },
+          } as any,
+        },
+        {
+          type: "brick",
+          brick: "my.brick-k",
+          id: "B-011",
+          $$matchedSelectors: ["my\\.brick-k", "#myBrickK"],
+        },
       ])
     ).toEqual([
       {
@@ -126,6 +183,28 @@ describe("getBricksWithEvents", () => {
         hasEvents: true,
         isTargetOfEvents: false,
       },
+      {
+        node: expect.objectContaining({ id: "B-008" }),
+        hasEvents: true,
+        isTargetOfEvents: false,
+      },
+      {
+        node: expect.objectContaining({ id: "B-009" }),
+        hasEvents: true,
+        isTargetOfEvents: true,
+      },
+      {
+        node: expect.objectContaining({ id: "B-010" }),
+        hasEvents: false,
+        isTargetOfEvents: true,
+      },
+      {
+        node: expect.objectContaining({ id: "B-011" }),
+        hasEvents: false,
+        isTargetOfEvents: true,
+      },
     ]);
+    expect(mockConsoleWarn).toBeCalledTimes(1);
+    expect(mockConsoleWarn).toBeCalledWith("unknown lifeCycle: onOthers");
   });
 });

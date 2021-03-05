@@ -10,6 +10,8 @@ import {
   EventUpstreamNode,
   EventDownstreamNode,
   EventUpstreamNodeOfSource,
+  EventUpstreamNodeOfEvent,
+  EventDownstreamNodeOfEvent,
 } from "./interfaces";
 import { styleConfig } from "./styleConfig";
 import { isEventDownstreamNode } from "./assertions";
@@ -77,9 +79,11 @@ export function EventDownstreamNodeComponent({
       >
         {eventNode.type === EventDownstreamType.ROOT
           ? `${eventNode.node.alias}`
-          : eventNode.type === EventDownstreamType.EVENT
-          ? eventNode.eventType
-          : `[callback] ${eventNode.callbackType}`}
+          : eventNode.type === EventDownstreamType.CALLBACK
+          ? `[callback] ${eventNode.eventType}`
+          : eventNode.type === EventDownstreamType.LIFE_CYCLE
+          ? `[lifeCycle] ${eventNode.eventType}`
+          : (eventNode as EventDownstreamNodeOfEvent).eventType}
       </div>
       <ul className={styles.items}>
         {eventNode.type !== EventDownstreamType.ROOT &&
@@ -138,11 +142,11 @@ export function EventUpstreamNodeComponent({
       >
         {eventNode.type === EventUpstreamType.UPSTREAM_SOURCE
           ? eventNode.node.alias
-          : eventNode.type === EventUpstreamType.UPSTREAM_EVENT
-          ? eventNode.eventType
-          : `[callback] ${
-              (eventNode as EventUpstreamNodeOfCallback).callbackType
-            }`}
+          : eventNode.type === EventUpstreamType.UPSTREAM_CALLBACK
+          ? `[callback] ${eventNode.eventType}`
+          : eventNode.type === EventUpstreamType.UPSTREAM_LIFE_CYCLE
+          ? `[lifeCycle] ${eventNode.eventType}`
+          : (eventNode as EventUpstreamNodeOfEvent).eventType}
       </div>
       {eventNode.type !== EventUpstreamType.UPSTREAM_SOURCE && (
         <ul className={styles.items}>

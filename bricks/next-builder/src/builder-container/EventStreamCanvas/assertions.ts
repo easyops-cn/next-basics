@@ -17,6 +17,7 @@ export function isEventDownstreamNode(
   return [
     EventDownstreamType.ROOT,
     EventDownstreamType.EVENT,
+    EventDownstreamType.LIFE_CYCLE,
     EventDownstreamType.CALLBACK,
   ].includes((eventNode as EventDownstreamNode).type);
 }
