@@ -1,10 +1,17 @@
-import { BlockOutlined, BranchesOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import {
+  BlockOutlined,
+  BranchesOutlined,
+  DownOutlined,
+} from "@ant-design/icons";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
-import React from "react";
+import { Dropdown, Button, Menu } from "antd";
+import { RoutesView } from "../RoutesView/RoutesView";
 
 import styles from "./RootNodeSelect.module.css";
 
 export function RootNodeSelect(): React.ReactElement {
+  const [visible, setVisible] = useState(false);
   const rootNode = useBuilderNode({ isRoot: true });
   if (!rootNode) {
     return null;
@@ -17,11 +24,47 @@ export function RootNodeSelect(): React.ReactElement {
       </div>
     );
   }
-  // Todo(lynette): click to switch between routes.
+
+  const onVisibleChange = (v: boolean) => {
+    setVisible(v);
+  };
+
+  const handleRouteClick = () => {
+    setVisible(!visible);
+  };
+
+  const handleRouteSelect = (): void => {
+    setVisible(false);
+  };
+
+  const route = (
+    <Menu>
+      <RoutesView
+        contentStyle={{
+          height: "400px",
+          width: "220px",
+        }}
+        handleRouteSelect={handleRouteSelect}
+      />
+    </Menu>
+  );
+
   return (
-    <div className={styles.rootNodeBox}>
-      <BranchesOutlined />
-      <span>{rootNode.alias}</span>
-    </div>
+    <Dropdown
+      overlay={route}
+      trigger={["click"]}
+      placement="bottomLeft"
+      onVisibleChange={onVisibleChange}
+      visible={visible}
+    >
+      <Button
+        onClick={handleRouteClick}
+        size="small"
+        className={styles.rootNodeWrapper}
+      >
+        <BranchesOutlined />{" "}
+        <span className={styles.alias}>{rootNode.alias}</span> <DownOutlined />
+      </Button>
+    </Dropdown>
   );
 }

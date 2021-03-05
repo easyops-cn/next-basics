@@ -12,3 +12,18 @@
   flex: 1;
   white-space: nowrap;
 }
+
+.rootNodeWrapper {
+  width: 130px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alias {
+  display: inline-block;
+  width: 76px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

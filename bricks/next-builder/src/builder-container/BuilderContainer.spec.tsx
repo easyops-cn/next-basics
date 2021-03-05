@@ -42,6 +42,7 @@ const mockManager = {
   onNodeReorder: jest.fn(() => mockRemoveListenersOfNodeReorder),
   onNodeClick: jest.fn(() => mockRemoveListenersOfNodeClick),
   dataInit: jest.fn(),
+  routeListInit: jest.fn(),
 };
 (useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
 

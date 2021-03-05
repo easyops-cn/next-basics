@@ -15,7 +15,6 @@ import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
-import { RoutesView } from "../RoutesView/RoutesView";
 import { BuilderRouteNode, ContextConf } from "@next-core/brick-types";
 
 import styles from "./BuilderToolbox.module.css";
@@ -24,7 +23,6 @@ export interface BuilderToolboxProps {
   brickList?: BrickOptionItem[];
   routeList?: BuilderRouteNode[];
   onContextUpdate?: (context: ContextConf[]) => void;
-  onRouteSelect?: (route: BuilderRouteNode) => void;
 }
 
 interface ToolboxTabConf {
@@ -39,7 +37,6 @@ export function BuilderToolbox({
   brickList,
   routeList,
   onContextUpdate,
-  onRouteSelect,
 }: BuilderToolboxProps): React.ReactElement {
   const {
     dataType,
@@ -90,20 +87,6 @@ export function BuilderToolbox({
                 <DataView
                   brickList={brickList}
                   onContextUpdate={onContextUpdate}
-                />
-              );
-            },
-          },
-          {
-            tab: ToolboxTab.ROUTES_VIEW,
-            icon() {
-              return <BranchesOutlined />;
-            },
-            content() {
-              return (
-                <RoutesView
-                  routeList={routeList}
-                  onRouteSelect={onRouteSelect}
                 />
               );
             },

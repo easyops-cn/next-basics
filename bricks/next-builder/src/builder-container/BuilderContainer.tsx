@@ -97,6 +97,10 @@ export function LegacyBuilderContainer(
   }, [dataSource, manager]);
 
   React.useEffect(() => {
+    manager.routeListInit(routeList);
+  }, [routeList, manager]);
+
+  React.useEffect(() => {
     const removeListenersOfNodeAdd = manager.onNodeAdd(onNodeAdd);
     const removeListenersOfNodeMove = manager.onNodeMove(onNodeMove);
     const removeListenersOfNodeReorder = manager.onNodeReorder(onNodeReorder);
@@ -147,6 +151,7 @@ export function LegacyBuilderContainer(
         setToolboxTab,
         eventStreamNodeId,
         setEventStreamNodeId,
+        onRouteSelect,
       }}
     >
       <div
@@ -158,7 +163,6 @@ export function LegacyBuilderContainer(
           brickList={brickList}
           routeList={routeList}
           onContextUpdate={onContextUpdate}
-          onRouteSelect={onRouteSelect}
         />
         <BuilderCanvas />
       </div>
