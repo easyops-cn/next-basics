@@ -75,7 +75,7 @@ export function RoutesView({
 
   return (
     <div className={styles.routesViewContainer} style={contentStyle}>
-      <SearchComponent placeholder="Search route..." onSearch={handleSearch} />
+      <SearchComponent placeholder="Search route" onSearch={handleSearch} />
       {!!routeTreeData.length && (
         <div className={styles.treeWrapper}>
           <Tree

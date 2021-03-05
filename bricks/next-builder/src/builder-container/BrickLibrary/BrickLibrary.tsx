@@ -18,7 +18,7 @@ export function BrickLibrary({
 
   const handleSearch = (value: string): void => {
     setQ(value);
-  }
+  };
 
   const filteredGroups = React.useMemo<GroupedBricks[]>(
     () => searchBricks(q, brickList),
@@ -28,7 +28,7 @@ export function BrickLibrary({
   return (
     <ToolboxPane title="Library">
       <SearchComponent
-        placeholder="Search data..."
+        placeholder="Search bricks in library"
         onSearch={handleSearch}
       />
       <div className={styles.resultWrapper}>

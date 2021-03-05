@@ -7,15 +7,12 @@ describe("SearchComponent", () => {
   it("should work", () => {
     const onSearch = jest.fn();
     const wrapper = shallow(
-      <SearchComponent
-        placeholder="Search data..."
-        onSearch={onSearch}
-      />
+      <SearchComponent placeholder="Search data" onSearch={onSearch} />
     );
     wrapper.find(Input).invoke("onChange")({
       target: {
-        value: "query"
-      }
+        value: "query",
+      },
     } as React.ChangeEvent<HTMLInputElement>);
     expect(onSearch).toBeCalledWith("query");
   });
