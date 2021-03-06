@@ -69,7 +69,7 @@ export class GeneralModalElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 标题对齐方式
-   * @group advanced
+   * @group basic
    */
   @property()
   titleAlign?: string;

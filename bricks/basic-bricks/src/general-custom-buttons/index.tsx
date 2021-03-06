@@ -128,27 +128,16 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    */
   @property({ attribute: false })
   customButtons: CustomButton[];
+
   /**
-   * @kind any
+   * @kind "start" | "center" | "end" | "stretch"
    * @required false
-   * @default -
-   * @description 按钮事件的 detail
+   * @default `"center"`
+   * @description 对齐方式
    */
-  @property({ attribute: false }) dataSource: any;
-  /**
-   * @kind string
-   * @required false
-   * @default `"管理"`
-   * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮文字
-   */
-  @property() dropdownBtnText: string;
-  /**
-   * @kind MenuIcon
-   * @required false
-   * @default `"setting"`
-   * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮 icon，支持[icon 图标库](/next/developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
-   */
-  @property({ attribute: false }) dropdownBtnIcon: any;
+  @property()
+  alignment: "start" | "center" | "end" | "stretch";
+
   /**
    * @kind boolean
    * @required false
@@ -159,13 +148,15 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
     type: Boolean,
   })
   isMoreButton: boolean;
+
   /**
-   * @kind "circle" | "no" | "rectangle" | "icon"
+   * @kind MenuIcon
    * @required false
    * @default -
-   * @description isMoreButton 为 true 时更多按钮的样式
+   * @description isMoreButton 为 true 时更多按钮的图标，默认为`...`
    */
-  @property() moreButtonShape: "no"; //UI规范中暂时只支持noShape。后面有需要可以支持circle。
+  @property({ attribute: false }) moreBtnIcon: any;
+
   /**
    * @kind `ButtonType` (`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon" | "text"`)
    * @required false
@@ -174,34 +165,57 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    */
   @property()
   moreButtonType: ButtonType;
+
+  /**
+   * @kind "circle" | "no" | "rectangle" | "icon"
+   * @required false
+   * @default -
+   * @description isMoreButton 为 true 时更多按钮的样式
+   */
+  @property() moreButtonShape: "no"; //UI规范中暂时只支持noShape。后面有需要可以支持circle。
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description 按钮事件的 detail
+   */
+  @property({ attribute: false }) dataSource: any;
+
+  /**
+   * @kind string
+   * @required false
+   * @default `"管理"`
+   * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮文字
+   * @group advanced
+   */
+  @property() dropdownBtnText: string;
+
   /**
    * @kind MenuIcon
    * @required false
-   * @default -
-   * @description isMoreButton 为 true 时更多按钮的图标，默认为`...`
+   * @default `"setting"`
+   * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮 icon，支持[icon 图标库](/next/developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
+   * @group advanced
    */
-  @property({ attribute: false }) moreBtnIcon: any;
-  /**
-   * @kind "start" | "center" | "end" | "stretch"
-   * @required false
-   * @default `"center"`
-   * @description 对齐方式
-   */
-  @property()
-  alignment: "start" | "center" | "end" | "stretch";
+  @property({ attribute: false }) dropdownBtnIcon: any;
+
   /**
    * @kind DropdownPlacement
    * @required false
    * @default `"bottomRight"`
    * @description dropdown 的弹出位置
+   * @group advanced
    */
   @property()
   dropdownPlacement: DropdownPlacement;
+
   /**
    * @kind boolean
    * @required false
    * @default `false`
    * @description 点击按钮后自动禁用
+   * @group advanced
    */
   @property({ type: Boolean })
   disableAfterClick: boolean;

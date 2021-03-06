@@ -18,17 +18,6 @@ import style from "./index.shadow.less";
  */
 export class MultipleColumnsCardElement extends UpdatingElement {
   /**
-   * @kind string
-   * @required true
-   * @default 是否显示卡片边框
-   * @description -
-   */
-  @property({
-    attribute: false,
-  })
-  cardBorder = true;
-
-  /**
    * @kind `Array<string | number>`
    * @required false
    * @default -
@@ -38,6 +27,17 @@ export class MultipleColumnsCardElement extends UpdatingElement {
     attribute: false,
   })
   gridColumns: string;
+
+  /**
+   * @kind string
+   * @required true
+   * @default 是否显示卡片边框
+   * @description -
+   */
+  @property({
+    attribute: false,
+  })
+  cardBorder = true;
 
   private _mountPoint: HTMLElement;
 

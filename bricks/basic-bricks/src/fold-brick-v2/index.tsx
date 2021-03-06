@@ -37,46 +37,13 @@ export class FoldBrickV2Element extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default -
-   * @description 是否展开
-   */
-  @property({
-    type: Boolean,
-  })
-  showDivider: boolean;
-
-  /**
-   * @kind "left"|"right"
-   * @required false
-   * @default center
-   * @description 分割线标题的位置
+   * @default true
+   * @description 是否显示展开图标
    */
   @property({
     attribute: false,
   })
-  dividerOrientation: "left" | "right";
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否虚线
-   */
-  @property({
-    type: Boolean,
-  })
-  dividerDashed: boolean;
-
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description 折叠展示的样式编写
-   */
-  @property({
-    attribute: false,
-  })
-  foldStyle: Record<string, string>;
+  isShowFoldIcon = true;
 
   /**
    * @kind boolean
@@ -89,21 +56,16 @@ export class FoldBrickV2Element extends UpdatingElement {
   })
   defaultShow?: boolean;
 
-  @property({
-    type: Boolean,
-  })
-  show: boolean;
-
   /**
    * @kind boolean
    * @required false
-   * @default true
-   * @description 是否显示展开图标
+   * @default -
+   * @description 是否展开
    */
   @property({
-    attribute: false,
+    type: Boolean,
   })
-  isShowFoldIcon = true;
+  showDivider: boolean;
 
   /**
    * @kind "normal" | "primary"
@@ -115,6 +77,47 @@ export class FoldBrickV2Element extends UpdatingElement {
     attribute: false,
   })
   type: "normal" | "primary";
+
+  /**
+   * @kind "left"|"right"
+   * @required false
+   * @default center
+   * @description 分割线标题的位置
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  dividerOrientation: "left" | "right";
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否虚线
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  dividerDashed: boolean;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 折叠展示的样式编写
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  foldStyle: Record<string, string>;
+
+  @property({
+    type: Boolean,
+  })
+  show: boolean;
 
   constructor() {
     super();
