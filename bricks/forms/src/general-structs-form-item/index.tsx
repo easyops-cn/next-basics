@@ -34,6 +34,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -41,26 +42,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
    * @description 添加结构体作为表单项时在表单中的字段说明
    */
   @property({ attribute: false }) label: string;
-  /**
-   * @kind `any[]`
-   * @required true
-   * @default -
-   * @description 结构体数组数据源
-   */
-  @property({
-    attribute: false,
-  })
-  value: any;
-  /**
-   * @kind `any`
-   * @required false
-   * @default -
-   * @description 新建结构体时给表单设置默认值
-   */
-  @property({
-    attribute: false,
-  })
-  structDefaultValues: any;
+
   /**
    * @kind string
    * @required false
@@ -71,6 +53,29 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     attribute: false,
   })
   btnText: string;
+
+  /**
+   * @kind `any[]`
+   * @required true
+   * @default -
+   * @description 结构体数组数据源
+   */
+  @property({
+    attribute: false,
+  })
+  value: any;
+
+  /**
+   * @kind `any`
+   * @required false
+   * @default -
+   * @description 新建结构体时给表单设置默认值
+   */
+  @property({
+    attribute: false,
+  })
+  structDefaultValues: any;
+
   /**
    * @kind `any`
    * @required true
@@ -81,66 +86,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     attribute: false,
   })
   fieldsMap: any;
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否点击背景关闭模态框
-   */
-  @property({
-    type: Boolean,
-  })
-  maskClosable: boolean;
-  /**
-   * @kind string
-   * @required false
-   * @default 添加结构体
-   * @description 添加结构体时模态框的标题
-   */
-  @property()
-  createModalTitle: string;
-  /**
-   * @kind string
-   * @required false
-   * @default 编辑结构体
-   * @description 编辑结构体时模态框的标题
-   */
-  @property()
-  editModalTitle: string;
-  /**
-   * @kind `string|number`
-   * @required false
-   * @default 520px
-   * @description 模态框宽度
-   */
-  @property({
-    attribute: false,
-  })
-  modalWidth: string | number;
-  /**
-   * @kind string
-   * @required false
-   * @default 确定
-   * @description 模态框确认按钮文字
-   */
-  @property()
-  okText: string;
-  /**
-   * @kind string
-   * @required false
-   * @default 取消
-   * @description 模态框取消按钮文字
-   */
-  @property()
-  cancelText: string;
-  /**
-   * @kind string
-   * @required false
-   * @default 确定要删除该结构体吗？
-   * @description 删除确认框标题
-   */
-  @property()
-  deleteText: string;
+
   /**
    * @kind boolean
    * @required false
@@ -151,16 +97,94 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     attribute: false,
   })
   multiple = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否点击背景关闭模态框
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  maskClosable: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default 添加结构体
+   * @description 添加结构体时模态框的标题
+   * @group advanced
+   */
+  @property()
+  createModalTitle: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default 编辑结构体
+   * @description 编辑结构体时模态框的标题
+   * @group advanced
+   */
+  @property()
+  editModalTitle: string;
+
+  /**
+   * @kind `string|number`
+   * @required false
+   * @default 520px
+   * @description 模态框宽度
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  modalWidth: string | number;
+
+  /**
+   * @kind string
+   * @required false
+   * @default 确定
+   * @description 模态框确认按钮文字
+   * @group advanced
+   */
+  @property()
+  okText: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default 取消
+   * @description 模态框取消按钮文字
+   * @group advanced
+   */
+  @property()
+  cancelText: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default 确定要删除该结构体吗？
+   * @description 删除确认框标题
+   * @group advanced
+   */
+  @property()
+  deleteText: string;
+
   @property({
     type: Boolean,
   })
   isVisible: boolean;
+
   @property({
     type: Boolean,
   })
   confirmVisible: boolean;
+
   private _isEdit = false;
   private _editIndex: number;
+
   @property({
     type: Boolean,
   })

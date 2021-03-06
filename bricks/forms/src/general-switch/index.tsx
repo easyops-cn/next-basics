@@ -29,6 +29,7 @@ export class GeneralSwitchElement extends FormItemElement {
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -36,6 +37,24 @@ export class GeneralSwitchElement extends FormItemElement {
    * @description 表单项字段说明
    */
   @property({ attribute: false }) label: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 初始值
+   */
+  @property({ type: Boolean })
+  value: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否禁用
+   */
+  @property({ type: Boolean })
+  disabled: boolean;
 
   /**
    * @kind `'default' | 'small'`
@@ -46,22 +65,6 @@ export class GeneralSwitchElement extends FormItemElement {
   @property({ attribute: false })
   size: "default" | "small" = "default";
 
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 初始值
-   */
-  @property({ type: Boolean })
-  value: boolean;
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否禁用
-   */
-  @property({ type: Boolean })
-  disabled: boolean;
   /**
    * @detail `boolean`
    * @description 开关改变时触发, `event.detail` 为当前选择的值

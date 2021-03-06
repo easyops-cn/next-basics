@@ -40,34 +40,15 @@ export class GeneralFormItemElement extends FormItemElement {
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
    * @default -
    * @description 表单项字段说明
    */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   */
-  @property({ attribute: false }) message: Record<string, string>;
-  /**
-   * @kind `ControlConfig`
-   * @required false
-   * @default -
-   * @description 表单控件配置（已废弃，请使用 control 插槽）
-   */
-  @property({ attribute: false }) control: ControlConfig;
+  @property({ attribute: false }) label: string;
+
   /**
    * @kind `any`
    * @required false
@@ -75,6 +56,40 @@ export class GeneralFormItemElement extends FormItemElement {
    * @description 表单项的值
    */
   @property({ attribute: false }) value: any;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 表单项字段说明
+   */
+  @property({ attribute: false }) placeholder: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
+
+  /**
+   * @kind `Record<string,string>`
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   */
+  @property({ attribute: false }) message: Record<string, string>;
+
+  /**
+   * @kind `ControlConfig`
+   * @required false
+   * @default -
+   * @description 表单控件配置（已废弃，请使用 control 插槽）
+   * @group advanced
+   */
+  @property({ attribute: false }) control: ControlConfig;
+
   private _mountPoint: HTMLElement;
 
   constructor() {

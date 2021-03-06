@@ -43,6 +43,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @group basic
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -65,6 +66,16 @@ export class GeneralRadioElement extends FormItemElement {
   options: GeneralOption[];
 
   /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 单选框当前选中始值
+   * @group basic
+   */
+  @property({ attribute: false })
+  value: any;
+
+  /**
    * @kind boolean
    * @required false
    * @default -
@@ -81,16 +92,6 @@ export class GeneralRadioElement extends FormItemElement {
    * @group basic
    */
   @property({ attribute: false }) message: Record<string, string>;
-
-  /**
-   * @kind string
-   * @required true
-   * @default -
-   * @description 单选框当前选中始值
-   * @group basic
-   */
-  @property({ attribute: false })
-  value: any;
 
   /**
    * @kind boolean

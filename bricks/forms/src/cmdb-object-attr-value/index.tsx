@@ -44,6 +44,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -51,6 +52,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
    * @description 表单项字段说明
    */
   @property({ attribute: false }) label: string;
+
   /**
    * @kind string[]
    * @required false
@@ -61,6 +63,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     attribute: false,
   })
   value: string[];
+
   /**
    * @kind `ValueType[]`
    * @required false
@@ -71,6 +74,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     attribute: false,
   })
   valueType: ValueType[];
+
   /**
    * @kind boolean
    * @required false
@@ -78,16 +82,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
-  /**
-   * @kind `object`
-   * @required false
-   * @default -
-   * @description 输入框样式
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties = {};
+
   /**
    * @kind boolean
    * @required false
@@ -98,6 +93,17 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     type: Boolean,
   })
   disabled: boolean;
+
+  /**
+   * @kind `object`
+   * @required false
+   * @default -
+   * @description 输入框样式
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties = {};
 
   connectedCallback(): void {
     // Don't override user's style settings.

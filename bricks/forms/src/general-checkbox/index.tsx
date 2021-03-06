@@ -54,27 +54,15 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @description 多选框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
    * @default -
    * @description 多选框字段说明
    */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({ attribute: false }) label: string;
+
   /**
    * @kind `string[]|number[]|LabeledValue[]`
    * @required false
@@ -85,6 +73,42 @@ export class GeneralCheckboxElement extends FormItemElement {
     attribute: false,
   })
   options: CheckboxOptionType[];
+
+  /**
+   * @kind string[]
+   * @required -
+   * @default -
+   * @description 输入框当前选中始值
+
+   */
+  @property({
+    attribute: false,
+  })
+  value: CheckboxValueType[];
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 多选框字段说明
+   */
+  @property({ attribute: false }) placeholder: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
+
+  /**
+   * @kind `Record<string,string>`
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   */
+  @property({ attribute: false }) message: Record<string, string>;
 
   /**
    * @kind OptionGroup[]
@@ -107,18 +131,6 @@ export class GeneralCheckboxElement extends FormItemElement {
   })
   isGroup: boolean;
 
-  /**
-   * @kind string[]
-   * @required -
-   * @default -
-   * @description 输入框当前选中始值
-
-   */
-  @property({
-    attribute: false,
-  })
-  value: CheckboxValueType[];
-
   @property({
     type: Number,
   })
@@ -127,6 +139,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @detail `any[]`
    * @description 复选框变化时触发，`event.detail` 为当前选中的值列表
    */
+
   @event({ type: "general.checkbox.change" }) changeEvent: EventEmitter<
     Record<string, any>
   >;

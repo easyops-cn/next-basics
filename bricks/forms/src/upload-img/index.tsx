@@ -34,6 +34,7 @@ export class UploadImgElement extends FormItemElement {
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -41,20 +42,7 @@ export class UploadImgElement extends FormItemElement {
    * @description 下拉框字段说明
    */
   @property({ attribute: false }) label: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 下拉框占位说明
-   */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
+
   /**
    * @kind string
    * @required true
@@ -74,15 +62,20 @@ export class UploadImgElement extends FormItemElement {
   value: UploadImgValue;
 
   /**
-   * @kind number
+   * @kind string
    * @required false
    * @default -
-   * @description 最大上传图片数量
+   * @description 下拉框占位说明
    */
-  @property({
-    type: Number,
-  })
-  maxNumber: number;
+  @property({ attribute: false }) placeholder: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
 
   /**
    * @kind boolean
@@ -106,17 +99,24 @@ export class UploadImgElement extends FormItemElement {
   })
   listType?: "picture" | "picture-card" | "text" = "picture-card";
 
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最大上传图片数量
+   * @group advanced
+   */
   @property({
-    type: Boolean,
-    __deprecated_and_for_compatibility_only: true,
+    type: Number,
   })
-  draggable: boolean;
+  maxNumber: number;
 
   /**
    * @kind boolean
    * @required false
    * @default false
    * @description 是否可以拖拽上传
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -128,6 +128,7 @@ export class UploadImgElement extends FormItemElement {
    * @required false
    * @default false
    * @description 是否隐藏上传按钮，当`uploadDraggable`为`true`时不生效
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -139,6 +140,7 @@ export class UploadImgElement extends FormItemElement {
    * @required false
    * @default 单击或拖拽图像到此区域上传
    * @description 拖拽上传的文字
+   * @group advanced
    */
   @property()
   draggableUploadText: string;
@@ -148,6 +150,7 @@ export class UploadImgElement extends FormItemElement {
    * @required false
    * @default 支持扩展名：.jpg .jpeg .png .gif ...
    * @description 拖拽上传的提示信息
+   * @group advanced
    */
   @property()
   draggableUploadHint: string;
@@ -157,6 +160,7 @@ export class UploadImgElement extends FormItemElement {
    * @required false
    * @default false
    * @description 自适应内容高度，可设置为 true|false 或对象：{ minRows: 2, maxRows: 6 }
+   * @group advanced
    */
   @property({ attribute: false })
   autoSize: boolean | { minRows: number; maxRows: number };
@@ -166,9 +170,23 @@ export class UploadImgElement extends FormItemElement {
    * @required false
    * @default false
    * @description 配置图片上传事件(change，remove等)返回的 url 是否为绝对路径，不配置该属性为相对路径。采用绝对路径时会加上 `/next/` 前缀，其中一个使用场景是当上传的图片用在 markdown 构件内展示时，请设置该属性
+   * @group advanced
    */
   @property({ type: Boolean })
   useFullUrlPath: boolean;
+
+  /**
+   * @required false
+   * @default -
+   * @description 是否可拖拽
+   * @deprecated
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+    __deprecated_and_for_compatibility_only: true,
+  })
+  draggable: boolean;
 
   connectedCallback(): void {
     // istanbul ignore else

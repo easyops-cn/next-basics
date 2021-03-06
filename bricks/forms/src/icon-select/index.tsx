@@ -45,6 +45,26 @@ export class IconSelectElement extends FormItemElement {
   @property({ attribute: false }) label: string;
 
   /**
+   * @kind MenuIcon
+   * @required false
+   * @default -
+   * @description 值[MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
+   */
+  @property({
+    attribute: false,
+  })
+  value: MenuIcon;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否禁用
+   */
+  @property({ type: Boolean })
+  disabled: boolean;
+
+  /**
    * @kind boolean
    * @required false
    * @default -
@@ -61,33 +81,20 @@ export class IconSelectElement extends FormItemElement {
   @property({ attribute: false }) message: Record<string, string>;
 
   /**
-   * @kind MenuIcon
+   * @kind boolean
    * @required false
-   * @default -
-   * @description 值[MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
+   * @default false
+   * @description 是否可见
    */
-  @property({
-    attribute: false,
-  })
-  value: MenuIcon;
-
   @property({ type: Boolean })
   visible: boolean;
 
   /**
    * @kind boolean
    * @required false
-   * @default -
-   * @description 是否禁用
-   */
-  @property({ type: Boolean })
-  disabled: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
    * @default true
    * @description 是否显示背景。当 bg 为 false 时，选择颜色的输出为icon的字体颜色，数值为平台颜色变量，形如 `var(--theme-red-color)`。当 bg 为 true 时，选择颜色的输出为颜色描述字符串，形如 "green" | "red" | "blue" | "orange" | "cyan" | "purple" | "geekblue" | "gray"，可搭配 [card-item](developers/brick-book/brick/presentational-bricks.card-item) 等构件使用。
+   * @group advanced
    */
   @property({ attribute: false })
   bg = true;
@@ -97,12 +104,14 @@ export class IconSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 是否支持设置颜色
+   * @group advanced
    */
   @property({ attribute: false })
   setColor = true;
   /**
    * @description 打开图标选择模态框
    */
+
   @method()
   open(): void {
     if (this.disabled) {
