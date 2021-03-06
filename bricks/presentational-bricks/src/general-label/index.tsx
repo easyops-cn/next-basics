@@ -33,6 +33,15 @@ export class GeneralLabelElement extends UpdatingElement {
   labelClick: EventEmitter<any>;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 文字内容
+   */
+  @property()
+  text: string;
+
+  /**
    * @kind MenuIcon
    * @required false
    * @default -
@@ -58,15 +67,6 @@ export class GeneralLabelElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description 文字内容
-   */
-  @property()
-  text: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 链接的 URL
    */
   @property()
@@ -85,23 +85,25 @@ export class GeneralLabelElement extends UpdatingElement {
    * @kind any
    * @required false
    * @default -
-   * @description `label.click`事件的详情
-   */
-  @property({
-    attribute: false,
-  })
-  data: any;
-
-  /**
-   * @kind any
-   * @required false
-   * @default -
    * @description 代替 `data`， 同样为 `label.click`事件的传出的数据
    */
   @property({
     attribute: false,
   })
   dataSource: any;
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description `label.click`事件的详情
+   * @deprecated
+   * @group advnaced
+   */
+  @property({
+    attribute: false,
+  })
+  data: any;
 
   connectedCallback(): void {
     this._render();

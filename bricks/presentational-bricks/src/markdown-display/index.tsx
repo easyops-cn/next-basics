@@ -17,10 +17,20 @@ import { get } from "lodash";
  */
 export class MarkdownDisplayElement extends UpdatingElement {
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description markdown 展示内容
+   */
+  @property({ attribute: false }) value: string;
+
+  /**
    * @kind Record<string, any>
    * @required false
    * @default -
    * @description [已废弃]数据来源
+   * @deprecated
+   * @group advanced
    */
   @property({ attribute: false }) dataSource: Record<string, any>;
 
@@ -29,17 +39,12 @@ export class MarkdownDisplayElement extends UpdatingElement {
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @deprecated
+   * @group advanced
    */
   @property({ attribute: false }) fields: {
     value?: string;
   };
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description markdown 展示内容
-   */
-  @property({ attribute: false }) value: string;
 
   connectedCallback(): void {
     // istanbul ignore else

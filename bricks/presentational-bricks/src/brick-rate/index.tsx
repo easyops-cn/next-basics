@@ -26,6 +26,7 @@ export class BrickRateElement extends UpdatingElement {
    * @description 等级级数
    */
   @property({ attribute: false }) count = 3;
+
   /**
    * @kind number
    * @required false
@@ -33,6 +34,7 @@ export class BrickRateElement extends UpdatingElement {
    * @description 默认等级
    */
   @property({ attribute: false }) defaultValue: number;
+
   /**
    * @kind boolean
    * @required false
@@ -40,6 +42,7 @@ export class BrickRateElement extends UpdatingElement {
    * @description 是否禁用
    */
   @property({ attribute: false }) disabled = true;
+
   /**
    * @kind boolean
    * @required false
@@ -48,6 +51,7 @@ export class BrickRateElement extends UpdatingElement {
    * @description 是否允许半选
    */
   @property({ attribute: false }) allowHalf: boolean;
+
   /**
    * @kind `any[]`
    * @required false
@@ -55,6 +59,7 @@ export class BrickRateElement extends UpdatingElement {
    * @description 等级颜色分类，每一级别对应的颜色，只在`disabled:true`的情况下显示
    */
   @property({ attribute: false }) colors: any[];
+
   /**
    * @kind  "string"
    * @required false
@@ -62,6 +67,7 @@ export class BrickRateElement extends UpdatingElement {
    * @description 可选任意字符（非图标类）比如字母、数字、中文，表示等级图标
    */
   @property() type: string;
+
   /**
    * @kind  Record<string,any>
    * @required false
@@ -69,6 +75,7 @@ export class BrickRateElement extends UpdatingElement {
    * @description  设置样式
    */
   @property({ attribute: false }) rateStyle: Record<string, any>;
+
   /**
    * @kind MenuIcon
    * @required false

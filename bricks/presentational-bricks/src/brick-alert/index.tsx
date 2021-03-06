@@ -32,15 +32,6 @@ export type AlertType = "success" | "error" | "info" | "warning";
  */
 export class BrickAlertElement extends UpdatingElement {
   /**
-   * @kind AlertType
-   * @required true
-   * @default -
-   * @description 指定警告提示的样式，有四种选择 success、info、warning、error
-   */
-  @property()
-  type: AlertType;
-
-  /**
    * @kind string
    * @required true
    * @default -
@@ -50,6 +41,15 @@ export class BrickAlertElement extends UpdatingElement {
   message: string;
 
   /**
+   * @kind CSSProperties
+   * @required false
+   * @default -
+   * @description 标题样式，对message插槽有效
+   */
+  @property({ attribute: false })
+  messageStyle: CSSProperties = {};
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -57,6 +57,15 @@ export class BrickAlertElement extends UpdatingElement {
    */
   @property()
   description: string;
+
+  /**
+   * @kind AlertType
+   * @required true
+   * @default -
+   * @description 指定警告提示的样式，有四种选择 success、info、warning、error
+   */
+  @property()
+  type: AlertType;
 
   /**
    * @kind boolean
@@ -75,24 +84,6 @@ export class BrickAlertElement extends UpdatingElement {
    */
   @property({ type: Boolean })
   closable: boolean;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 当设置该属性时，且 `closable` 为真，用户点击关闭后写入 localStorage(浏览器存储), 之后就不再显示该警告提示。以页面 url 为命名空间，注意同一页面下该值的唯一性。
-   */
-  @property()
-  localStorageKey: string;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 搭配localStorageKey使用，为true时，关闭localStorageKey的url命名空间。
-   */
-  @property({ type: Boolean })
-  stripLocalStorageUrlSuffix: boolean;
 
   /**
    * @kind boolean
@@ -122,10 +113,39 @@ export class BrickAlertElement extends UpdatingElement {
   enableActionSlot: boolean;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 当设置该属性时，且 `closable` 为真，用户点击关闭后写入 localStorage(浏览器存储), 之后就不再显示该警告提示。以页面 url 为命名空间，注意同一页面下该值的唯一性。
+   */
+  @property()
+  localStorageKey: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 搭配localStorageKey使用，为true时，关闭localStorageKey的url命名空间。
+   */
+  @property({ type: Boolean })
+  stripLocalStorageUrlSuffix: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 描述区折叠模式,仅enableMessageSlot为true时可用
+   * @group advanced
+   */
+  @property({ attribute: false })
+  foldDesc: boolean;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
    * @description 是否关闭圆角
+   * @group advanced
    */
   @property({ type: Boolean })
   noBorderRadio: boolean;
@@ -135,27 +155,10 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description icon大小，为big时使用大图标，否则为根据是否有描述来渲染大小的默认图标
+   * @group advanced
    */
   @property()
   iconSize: "big" | "small" | "default";
-
-  /**
-   * @kind CSSProperties
-   * @required false
-   * @default -
-   * @description 标题样式，对message插槽有效
-   */
-  @property({ attribute: false })
-  messageStyle: CSSProperties = {};
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 描述区折叠模式,仅enableMessageSlot为true时可用
-   */
-  @property({ attribute: false })
-  foldDesc: boolean;
 
   private key = "";
   private pseudoSlotMounted = {

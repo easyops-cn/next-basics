@@ -85,26 +85,15 @@ export interface LogicalCondition
  */
 export class BrickConditionalDisplayElement extends UpdatingElement {
   /**
-   * @kind default | label
+   * @kind RuleProps[]
    * @required false
-   * @default label
-   * @description 展示类型，label 表示通过标签的风格展示相关内容，default 表示默认的风格展示(display: block)
-   */
-  @property({
-    attribute: false,
-  })
-  type: DisplayType = "label";
-
-  /**
-   * @kind DataType
-   * @required true
    * @default -
-   * @description 数据
+   * @description 展示规则
    */
   @property({
     attribute: false,
   })
-  dataSource: DataType;
+  rules: RuleProps[] = [];
 
   /**
    * @kind { value: string }
@@ -118,15 +107,26 @@ export class BrickConditionalDisplayElement extends UpdatingElement {
   fields: { value: string };
 
   /**
-   * @kind RuleProps[]
-   * @required false
+   * @kind DataType
+   * @required true
    * @default -
-   * @description 展示规则
+   * @description 数据
    */
   @property({
     attribute: false,
   })
-  rules: RuleProps[] = [];
+  dataSource: DataType;
+
+  /**
+   * @kind default | label
+   * @required false
+   * @default label
+   * @description 展示类型，label 表示通过标签的风格展示相关内容，default 表示默认的风格展示(display: block)
+   */
+  @property({
+    attribute: false,
+  })
+  type: DisplayType = "label";
 
   connectedCallback(): void {
     this.style.display = this.style.display || "block";

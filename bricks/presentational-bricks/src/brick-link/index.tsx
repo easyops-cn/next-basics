@@ -29,10 +29,22 @@ import { MenuIcon } from "@next-core/brick-types";
  */
 export class BrickLinkElement extends UpdatingElement {
   /**
-   * @detail any
-   * @description 击 link 触发的事件，detail 为编排者输入的 detail
+   * @kind string
+   * @required false
+   * @default -
+   * @description 链接的文字
    */
-  @event({ type: "link.click", cancelable: true }) linkClick: EventEmitter<any>;
+  @property()
+  label: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 链接的 URL
+   */
+  @property()
+  url: string;
 
   /**
    * @kind string
@@ -47,10 +59,30 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
+   * @description 当将其配置成 `_blank` 时，默认在 label 后添加 external-link-alt icon
+   */
+  @property()
+  target: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
    * @description 提示
    */
   @property()
   tooltip: string;
+
+  /**
+   * @kind MenuIcon
+   * @required false
+   * @default false
+   * @description 图标 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   */
+  @property({
+    attribute: false,
+  })
+  icon: MenuIcon;
 
   /**
    * @kind boolean
@@ -75,38 +107,6 @@ export class BrickLinkElement extends UpdatingElement {
   notToJumpWhenEmpty: boolean;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description [已废弃]`link.click`事件的详情
-   */
-  @property({
-    attribute: false,
-  })
-  detail: any;
-
-  /**
-   * @default "link"
-   * @required false
-   * @description 链接类型：默认链接 - link 和 文本链接 - text
-   */
-  @property({
-    attribute: false,
-  })
-  type: "link" | "text" = "link";
-
-  /**
-   * @kind MenuIcon
-   * @required false
-   * @default false
-   * @description 图标 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
-   */
-  @property({
-    attribute: false,
-  })
-  icon: MenuIcon;
-
-  /**
    * @kind Record<string, any>
    * @required false
    * @default -
@@ -118,10 +118,23 @@ export class BrickLinkElement extends UpdatingElement {
   dataSource: Record<string, any>;
 
   /**
+   * @default "link"
+   * @required false
+   * @description 链接类型：默认链接 - link 和 文本链接 - text
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  type: "link" | "text" = "link";
+
+  /**
    * @kind boolean
    * @required false
    * @default false
    * @description 是否使用原生 \<a\> 标签, 为了跟平台规范一致准备废弃该属性，统一采用 href 属性表示原生标签跳转。
+   * @deprecated
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -132,46 +145,42 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description 链接的文字
-   */
-  @property()
-  label: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
    * @description [已废弃]链接的文字在数据源上的字段
+   * @deprecated
+   * @group advanced
    */
   @property()
   labelField: string;
 
   /**
-   * @kind string
+   * @kind boolean
    * @required false
-   * @default -
-   * @description 链接的 URL
+   * @default false
+   * @description [已废弃]`link.click`事件的详情
+   * @description
+   * @group advanced
    */
-  @property()
-  url: string;
+  @property({
+    attribute: false,
+  })
+  detail: any;
 
   /**
    * @kind string
    * @required false
    * @default -
    * @description [已废弃]链接的 URL 的模板，可使用 #{a.b} 的标记使用数据源里的属性值
+   * @deprecated
+   * @group advanced
    */
   @property()
   urlTemplate: string;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 当将其配置成 `_blank` 时，默认在 label 后添加 external-link-alt icon
+   * @detail any
+   * @description 击 link 触发的事件，detail 为编排者输入的 detail
    */
-  @property()
-  target: string;
+  @event({ type: "link.click", cancelable: true }) linkClick: EventEmitter<any>;
 
   connectedCallback(): void {
     this._render();

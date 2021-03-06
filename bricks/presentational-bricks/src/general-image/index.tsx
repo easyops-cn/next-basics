@@ -14,16 +14,6 @@ import { GeneralImage, GeneralImageProps } from "./GeneralImage";
  */
 export class GeneralImageElement extends UpdatingElement {
   /**
-   * @default true
-   * @required
-   * @description 是否开启预览
-   */
-  @property({
-    attribute: false,
-  })
-  preview = true;
-
-  /**
    * @default -
    * @required
    * @description 图片地址
@@ -32,28 +22,14 @@ export class GeneralImageElement extends UpdatingElement {
   imgSrc: string;
 
   /**
-   * @default -
+   * @default true
    * @required
-   * @description 图像描述
+   * @description 是否开启预览
    */
-  @property()
-  imgAlt: string;
-
-  /**
-   * @default -
-   * @required
-   * @description 加载失败容错地址
-   */
-  @property()
-  fallback: string;
-
-  /**
-   * @default -
-   * @required
-   * @description 加载占位, 为 true 时使用默认占位
-   */
-  @property()
-  placeholder: string;
+  @property({
+    attribute: false,
+  })
+  preview = true;
 
   /**
    * @default -
@@ -87,10 +63,38 @@ export class GeneralImageElement extends UpdatingElement {
   dataSource: GeneralImageProps["dataSource"];
 
   /**
+   * @default -
+   * @required
+   * @description 加载占位, 为 true 时使用默认占位
+   * @group advanced
+   */
+  @property()
+  placeholder: string;
+
+  /**
+   * @default -
+   * @required
+   * @description 图像描述
+   * @group advanced
+   */
+  @property()
+  imgAlt: string;
+
+  /**
+   * @default -
+   * @required
+   * @description 加载失败容错地址
+   * @group advanced
+   */
+  @property()
+  fallback: string;
+
+  /**
    * @kind UseBrickConf
    * @default -
    * @required -
    * @description 支持在图片下方增加自定义构件
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -102,6 +106,7 @@ export class GeneralImageElement extends UpdatingElement {
    * @default -
    * @required -
    * @description 包裹自定义构件容器的样式
+   * @group advanced
    */
   @property({
     attribute: false,

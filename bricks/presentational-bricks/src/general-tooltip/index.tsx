@@ -42,6 +42,17 @@ export interface TooltipConfig {
  */
 export class GeneralTooltipElement extends UpdatingElement {
   /**
+   * @kind string | string[]
+   * @required true
+   * @default -
+   * @description 提示内容, 数组表示多行显示, 可根据平台提供的 transform 机制转换成所需的提示内容
+   */
+  @property({
+    attribute: false,
+  })
+  content: GeneralTooltipProps["content"];
+
+  /**
    * @kind MenuIcon
    * @required true
    * @default -
@@ -73,26 +84,6 @@ export class GeneralTooltipElement extends UpdatingElement {
   iconContainerStyle: React.CSSProperties;
 
   /**
-   * @kind string | string[]
-   * @required true
-   * @default -
-   * @description 提示内容, 数组表示多行显示, 可根据平台提供的 transform 机制转换成所需的提示内容
-   */
-  @property({
-    attribute: false,
-  })
-  content: GeneralTooltipProps["content"];
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 提示内容的标题， 当 type = popover 时才生效
-   */
-  @property()
-  header: string;
-
-  /**
    * @kind tooltip | popover
    * @required false
    * @default tooltip
@@ -102,6 +93,15 @@ export class GeneralTooltipElement extends UpdatingElement {
     attribute: false,
   })
   type: GeneralTooltipProps["type"] = "tooltip";
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 提示内容的标题， 当 type = popover 时才生效
+   */
+  @property()
+  header: string;
 
   /**
    * @kind `TooltipConfig`

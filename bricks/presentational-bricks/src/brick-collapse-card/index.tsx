@@ -26,15 +26,6 @@ export class BrickCollapseCardElement extends UpdatingElement {
 
   /**
    * @kind string
-   * @required false
-   * @default -
-   * @description [已废弃]卡片标题，请使用cardTitle
-   */
-  @property({ __deprecated_and_for_compatibility_only: true })
-  title: string;
-
-  /**
-   * @kind string
    * @required true
    * @default -
    * @description 卡片标题
@@ -43,37 +34,15 @@ export class BrickCollapseCardElement extends UpdatingElement {
   cardTitle: string;
 
   /**
-   * @kind Record<string, any>
+   * @kind `descriptionsItemProps[]`
    * @required false
    * @default -
-   * @description [已废弃]数据来源
+   * @description 标题描述信息，仅在`titleWithIconAndDesc`为true时有效
    */
   @property({
     attribute: false,
   })
-  dataSource: Record<string, any>;
-
-  /**
-   * @kind { dataSource?: string; title: string; }
-   * @required false
-   * @default -
-   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段的值
-   */
-  @property({
-    attribute: false,
-  })
-  fields: { dataSource?: string; title: string };
-
-  /**
-   * @kind string
-   * @required false
-   * @default 收起
-   * @description 卡片展开的时候右上角的文案
-   */
-  @property({
-    attribute: false,
-  })
-  expandActiveText = "收起";
+  descriptionList: descriptionsItemProps[];
 
   /**
    * @kind string
@@ -85,6 +54,17 @@ export class BrickCollapseCardElement extends UpdatingElement {
     attribute: false,
   })
   expandInactiveText = "展开";
+
+  /**
+   * @kind string
+   * @required false
+   * @default 收起
+   * @description 卡片展开的时候右上角的文案
+   */
+  @property({
+    attribute: false,
+  })
+  expandActiveText = "收起";
 
   /**
    * @kind MenuIcon
@@ -109,61 +89,6 @@ export class BrickCollapseCardElement extends UpdatingElement {
   expandInactiveIcon = "down";
 
   /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 卡片默认收起／展开
-   */
-  @property({
-    type: Boolean,
-  })
-  isActive: boolean;
-
-  /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description 容器自定义样式
-   */
-  @property({
-    attribute: false,
-  })
-  containerStyle: any;
-
-  /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description header 自定义样式
-   */
-  @property({
-    attribute: false,
-  })
-  headerStyle: any;
-
-  /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description 内容自定义样式
-   */
-  @property({
-    attribute: false,
-  })
-  contentStyle: any;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description header 是否为自定义的 slot
-   */
-  @property({
-    type: Boolean,
-  })
-  hasHeaderSlot: boolean;
-
-  /**
    * @kind MenuIcon
    * @required false
    * @default {lib: "easyops", category: "default", icon: "collapse-card-default"}
@@ -177,17 +102,6 @@ export class BrickCollapseCardElement extends UpdatingElement {
     category: "default",
     icon: "collapse-card-default",
   };
-
-  /**
-   * @kind `descriptionsItemProps[]`
-   * @required false
-   * @default -
-   * @description 标题描述信息，仅在`titleWithIconAndDesc`为true时有效
-   */
-  @property({
-    attribute: false,
-  })
-  descriptionList: descriptionsItemProps[];
 
   /**
    * @kind boolean
@@ -204,12 +118,106 @@ export class BrickCollapseCardElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
+   * @description 卡片默认收起／展开
+   */
+  @property({
+    type: Boolean,
+  })
+  isActive: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description header 是否为自定义的 slot
+   */
+  @property({
+    type: Boolean,
+  })
+  hasHeaderSlot: boolean;
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description 容器自定义样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  containerStyle: any;
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description header 自定义样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  headerStyle: any;
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description 内容自定义样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  contentStyle: any;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
    * @description 设置该属性后，卡片内容区的元素自动垂直居中
+   * @group advanced
    */
   @property({
     type: Boolean,
   })
   verticalCenter: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @deprecated
+   * @description [已废弃]卡片标题，请使用cardTitle
+   * @group advanced
+   */
+  @property({ __deprecated_and_for_compatibility_only: true })
+  title: string;
+
+  /**
+   * @kind { dataSource?: string; title: string; }
+   * @required false
+   * @default -
+   * @deprecated
+   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段的值
+   */
+  @property({
+    attribute: false,
+  })
+  fields: { dataSource?: string; title: string };
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @deprecated
+   * @description [已废弃]数据来源
+   */
+  @property({
+    attribute: false,
+  })
+  dataSource: Record<string, any>;
 
   constructor() {
     super();

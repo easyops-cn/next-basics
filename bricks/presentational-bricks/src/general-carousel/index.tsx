@@ -44,6 +44,17 @@ export class GeneralCarouselElement extends UpdatingElement {
   generalCarouselClick: EventEmitter<number>;
 
   /**
+   * @kind UseBrickConf
+   * @required false
+   * @default -
+   * @description 统一定义轮播图显示的内容, 相当于自定义构件
+   */
+  @property({
+    attribute: false,
+  })
+  useBrick: GeneralCarouselProps["useBrick"];
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -66,25 +77,16 @@ export class GeneralCarouselElement extends UpdatingElement {
   dots = true;
 
   /**
-   * @kind CustomCompProps|CustomCompProps[]
+   * @kind boolean
    * @required false
-   * @default -
-   * @description 定义轮播图显示的内容, 相当于自定义构件
+   * @default true
+   * @description 是否显示左右翻页按钮
    */
   @property({
     attribute: false,
   })
-  components: GeneralCarouselProps["components"];
-  /**
-   * @kind UseBrickConf
-   * @required false
-   * @default -
-   * @description 统一定义轮播图显示的内容, 相当于自定义构件
-   */
-  @property({
-    attribute: false,
-  })
-  useBrick: GeneralCarouselProps["useBrick"];
+  arrows = true;
+
   /**
    * @kind  any[]
    * @required false
@@ -133,6 +135,7 @@ export class GeneralCarouselElement extends UpdatingElement {
    * @required false
    * @default 500
    * @description 动效播放速度
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -144,6 +147,7 @@ export class GeneralCarouselElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 鼠标移上去是否停止自动切换
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -155,6 +159,7 @@ export class GeneralCarouselElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 自适应轮播内容高度
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -166,6 +171,7 @@ export class GeneralCarouselElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 内容是否循环轮播
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -177,6 +183,7 @@ export class GeneralCarouselElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 相应式布局设置
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -188,6 +195,7 @@ export class GeneralCarouselElement extends UpdatingElement {
    * @required false
    * @default 暂无数据
    * @description 没有轮播内容时显示的提示语
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -195,26 +203,29 @@ export class GeneralCarouselElement extends UpdatingElement {
   noDataDesc: string;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否显示左右翻页按钮
-   */
-  @property({
-    attribute: false,
-  })
-  arrows = true;
-
-  /**
    * @kind light | dark
    * @required false
    * @default light
    * @description 面板指示点的主题样式分为浅色和深色，浅色的图片对应深色的面板指示点样式
+   * @group advanced
    */
   @property({
     attribute: false,
   })
   dotsTheme: GeneralCarouselProps["dotsTheme"] = "light";
+
+  /**
+   * @kind CustomCompProps|CustomCompProps[]
+   * @required false
+   * @default -
+   * @deprecated
+   * @description 定义轮播图显示的内容, 相当于自定义构件, 请使用 useBrick
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  components: GeneralCarouselProps["components"];
 
   connectedCallback(): void {
     this._render();

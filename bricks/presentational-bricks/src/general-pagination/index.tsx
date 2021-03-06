@@ -132,15 +132,15 @@ export class GeneralPaginationElement extends UpdatingElement {
   total: number;
 
   /**
-   * @kind object
+   * @kind boolean
    * @required false
-   * @default -
-   * @description ant-design 的 Pagination 相关配置项,具体查阅：[https://ant.design/components/pagination-cn/#API](https://ant.design/components/pagination-cn/#API)
+   * @default false
+   * @description 是否只显示 total
    */
   @property({
-    attribute: false,
+    type: Boolean,
   })
-  configProps: PaginationProps;
+  onlyShowTotal: boolean;
 
   /**
    * @kind Record<string,any>
@@ -154,10 +154,24 @@ export class GeneralPaginationElement extends UpdatingElement {
   dataSource: Record<string, any>;
 
   /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description ant-design 的 Pagination 相关配置项,具体查阅：[https://ant.design/components/pagination-cn/#API](https://ant.design/components/pagination-cn/#API)
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  configProps: PaginationProps;
+
+  /**
    * @kind Record<string,any>
    * @required false
    * @default { total: "total" }
    * @description [已废弃]指定 total 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 total
+   * @deprecated
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -165,17 +179,6 @@ export class GeneralPaginationElement extends UpdatingElement {
   fields = {
     total: "total",
   };
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否只显示 total
-   */
-  @property({
-    type: Boolean,
-  })
-  onlyShowTotal: boolean;
 }
 
 customElements.define(
