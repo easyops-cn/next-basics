@@ -44,7 +44,15 @@ export function BuilderCanvas(): React.ReactElement {
           <DroppingStatusContext.Provider
             value={{ droppingStatus, setDroppingStatus }}
           >
-            <DropZone isRoot fullscreen={fullscreen} mountPoint="bricks" />
+            <DropZone
+              isRoot
+              fullscreen={fullscreen}
+              mountPoint={
+                dataType === BuilderDataType.ROUTE_OF_ROUTES
+                  ? "routes"
+                  : "bricks"
+              }
+            />
           </DroppingStatusContext.Provider>
         </Spin>
       )}

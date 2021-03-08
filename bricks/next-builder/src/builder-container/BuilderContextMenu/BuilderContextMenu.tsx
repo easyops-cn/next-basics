@@ -6,7 +6,7 @@ import {
   BuilderRuntimeNode,
 } from "@next-core/editor-bricks-helper";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import { ToolboxTab } from "../interfaces";
+import { BuilderDataType, ToolboxTab } from "../interfaces";
 
 import styles from "./BuilderContextMenu.module.css";
 
@@ -19,7 +19,11 @@ export function BuilderContextMenu({
 }: BuilderContextMenuProps): React.ReactElement {
   const contextMenuStatus = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
-  const { setToolboxTab, setEventStreamNodeId } = useBuilderUIContext();
+  const {
+    dataType,
+    setToolboxTab,
+    setEventStreamNodeId,
+  } = useBuilderUIContext();
 
   const handleCloseMenu = React.useCallback(
     (event: React.MouseEvent) => {
@@ -58,10 +62,12 @@ export function BuilderContextMenu({
             width: "fit-content",
           }}
         >
-          <Menu.Item key={0} onClick={handleShowEventsView}>
-            Events View
-          </Menu.Item>
-          <Menu.Item key={1} onClick={handleDeleteNode}>
+          {dataType !== BuilderDataType.ROUTE_OF_ROUTES && (
+            <Menu.Item key="events-view" onClick={handleShowEventsView}>
+              Events View
+            </Menu.Item>
+          )}
+          <Menu.Item key="delete" onClick={handleDeleteNode}>
             Delete
           </Menu.Item>
         </Menu>

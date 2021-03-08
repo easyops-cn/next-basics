@@ -33,7 +33,7 @@ describe("BuilderCanvas", () => {
   let fullscreen: boolean;
   let eventStreamNodeId: string;
   beforeEach(() => {
-    dataType = BuilderDataType.ROUTE;
+    dataType = BuilderDataType.ROUTE_OF_BRICKS;
     fullscreen = false;
     eventStreamNodeId = null;
     mockUseBuilderUIContext.mockImplementation(() => ({

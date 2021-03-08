@@ -25,6 +25,8 @@ import {
   BuilderRuntimeNode,
   BuilderProvider,
   AbstractBuilderDataManager,
+  isRouteNode,
+  isBrickNode,
 } from "@next-core/editor-bricks-helper";
 import { BrickOptionItem, ToolboxTab } from "./interfaces";
 import { BuilderContainer } from "./BuilderContainer";
@@ -88,6 +90,16 @@ export class BuilderContainerElement extends UpdatingElement {
     type: "node.click",
   })
   private _nodeClickEmitter: EventEmitter<BuilderRuntimeNode>;
+
+  @event({
+    type: "brick.click",
+  })
+  private _brickClickEmitter: EventEmitter<BuilderRuntimeNode>;
+
+  @event({
+    type: "route.click",
+  })
+  private _routeClickEmitter: EventEmitter<BuilderRuntimeNode>;
 
   @event({
     type: "node.delete.ask",
@@ -160,6 +172,15 @@ export class BuilderContainerElement extends UpdatingElement {
     this._nodeClickEmitter.emit({
       ...event.detail,
     });
+    if (isRouteNode(event.detail)) {
+      this._routeClickEmitter.emit({
+        ...event.detail,
+      });
+    } else if (isBrickNode(event.detail)) {
+      this._brickClickEmitter.emit({
+        ...event.detail,
+      });
+    }
   };
 
   private _handleAskForDeletingNode = (node: BuilderRuntimeNode): void => {

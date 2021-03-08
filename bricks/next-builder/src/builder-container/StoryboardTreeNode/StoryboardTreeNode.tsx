@@ -3,6 +3,7 @@
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import classNames from "classnames";
+import { DatabaseFilled, MessageFilled } from "@ant-design/icons";
 import {
   useBuilderDataManager,
   useBuilderNode,
@@ -17,7 +18,6 @@ import { DraggingNodeItem, StoryboardTreeTransferType } from "../interfaces";
 import { handleDropOnNode } from "./handleDropOnNode";
 
 import styles from "./StoryboardTreeNode.module.css";
-import { DatabaseFilled, MessageFilled } from "@ant-design/icons";
 
 export interface StoryboardTreeNodeProps {
   nodeUid: number;
@@ -128,16 +128,18 @@ export function StoryboardTreeNode({
         {icon && <div className={styles.icon}>{icon}</div>}
         <div className={styles.nodeName}>{node.alias}</div>
       </div>
-      <ul className={styles.mountPointList}>
-        {mountPoints.map((childMountPoint) => (
-          <StoryboardTreeMountPoint
-            level={level + 1}
-            key={childMountPoint}
-            nodeUid={nodeUid}
-            mountPoint={childMountPoint}
-          />
-        ))}
-      </ul>
+      {mountPoints.length > 0 && (
+        <ul className={styles.mountPointList}>
+          {mountPoints.map((childMountPoint) => (
+            <StoryboardTreeMountPoint
+              level={level + 1}
+              key={childMountPoint}
+              nodeUid={nodeUid}
+              mountPoint={childMountPoint}
+            />
+          ))}
+        </ul>
+      )}
       <div
         className={styles.dropCursor}
         style={{
