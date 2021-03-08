@@ -35,97 +35,15 @@ export class FormModalElement extends UpdatingElement {
    * @description 模态框标题
    */
   @property() modalTitle: string;
+
   /**
-   * @kind boolean
+   * @kind `{ useBrick: UseSingleBrickConf[] }`
    * @required false
    * @default -
-   * @description 确定按钮 loading
+   * @description 表单构件的 items 插槽的构件配置
    */
-  @property({ type: Boolean }) confirmLoading: boolean;
-  /**
-   * @kind boolean
-   * @required false
-   * @default `true`
-   * @description 是否显示右上角的关闭按钮
-   */
-  @property({ attribute: false }) closable = true;
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 垂直居中展示模态框
-   */
-  @property({ type: Boolean }) centered: boolean;
-  /**
-   * @kind `string | number`
-   * @required false
-   * @default `520`
-   * @description 模态框宽度
-   */
-  @property({ attribute: false }) width: string | number;
-  /**
-   * @kind string
-   * @required false
-   * @default `"确定"`
-   * @description 确认按钮文字
-   */
-  @property({ attribute: false }) okText: string;
-  /**
-   * @kind `"default" | "primary" | "ghost" | "dashed" | "danger" | "link"`
-   * @required false
-   * @default `"primary"`
-   * @description 确认按钮类型
-   */
-  @property({ attribute: false }) okType: ButtonType;
-  /**
-   * @kind string
-   * @required false
-   * @default `"取消"`
-   * @description 取消按钮文字
-   */
-  @property({ attribute: false }) cancelText: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default `true`
-   * @description 点击蒙层是否允许关闭
-   */
-  @property({ type: Boolean }) maskClosable: boolean;
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 强制渲染模态框
-   */
-  @property({ type: Boolean }) forceRender: boolean;
-  /**
-   * @kind `ButtonProps`
-   * @required false
-   * @default -
-   * @description 确认按钮 props，详细属性参见 <https://3x.ant.design/components/button-cn/>
-   */
-  @property({ attribute: false }) okButtonProps: ButtonProps;
-  /**
-   * @kind `ButtonProps`
-   * @required false
-   * @default -
-   * @description 取消按钮 props，详细属性参见 <https://3x.ant.design/components/button-cn/>
-   */
-  @property({ attribute: false }) cancelButtonProps: ButtonProps;
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 关闭时销毁模态框里的子元素
-   */
-  @property({ type: Boolean }) destroyOnClose: boolean;
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否展示遮罩
-   */
-  @property({ attribute: false }) mask = true;
+  @property({ attribute: false }) items: { useBrick: UseSingleBrickConf[] };
+
   /**
    * @kind `{ useBrick: Omit<UseSingleBrickConf, 'brick'> }`
    * @required false
@@ -135,27 +53,7 @@ export class FormModalElement extends UpdatingElement {
   @property({ attribute: false }) form: {
     useBrick: Omit<UseSingleBrickConf, "brick">;
   };
-  /**
-   * @kind `Omit<UseSingleBrickConf, 'brick'>`
-   * @required false
-   * @default `useBrick: { brick: "forms.general-form" { properties: { layout: "vertical" } } }`
-   * @description [已废弃]表单构件配置，请使用 `form` 属性
-   */
-  @property({ attribute: false }) formBrick: Omit<UseSingleBrickConf, "brick">; // Deprecated
-  /**
-   * @kind `{ useBrick: UseSingleBrickConf[] }`
-   * @required false
-   * @default -
-   * @description 表单构件的 items 插槽的构件配置
-   */
-  @property({ attribute: false }) items: { useBrick: UseSingleBrickConf[] };
-  /**
-   * @kind `{ useBrick: UseSingleBrickConf[] }`
-   * @required false
-   * @default -
-   * @description [已废弃]表单构件的 items 插槽的构件配置，请使用 `items` 属性
-   */
-  @property({ attribute: false }) itemBricks: UseSingleBrickConf[]; // Deprecated
+
   /**
    * @kind `any`
    * @required false
@@ -163,6 +61,139 @@ export class FormModalElement extends UpdatingElement {
    * @description 用于 `formBrick` 和 `itemBricks` 的 `transform` 的 `DATA` 上下文
    */
   @property({ attribute: false }) dataSource: any;
+
+  /**
+   * @kind `string | number`
+   * @required false
+   * @default `520`
+   * @description 模态框宽度
+   */
+  @property({ attribute: false }) width: string | number;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 确定按钮 loading
+   */
+  @property({ type: Boolean }) confirmLoading: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 是否显示右上角的关闭按钮
+   */
+  @property({ attribute: false }) closable = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 垂直居中展示模态框
+   * @group advanced
+   */
+  @property({ type: Boolean }) centered: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default `"确定"`
+   * @description 确认按钮文字
+   * @group advanced
+   */
+  @property({ attribute: false }) okText: string;
+
+  /**
+   * @kind `"default" | "primary" | "ghost" | "dashed" | "danger" | "link"`
+   * @required false
+   * @default `"primary"`
+   * @description 确认按钮类型
+   * @group advanced
+   */
+  @property({ attribute: false }) okType: ButtonType;
+
+  /**
+   * @kind string
+   * @required false
+   * @default `"取消"`
+   * @description 取消按钮文字
+   * @group advanced
+   */
+  @property({ attribute: false }) cancelText: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 点击蒙层是否允许关闭
+   * @group advanced
+   */
+  @property({ type: Boolean }) maskClosable: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 强制渲染模态框
+   * @group advanced
+   */
+  @property({ type: Boolean }) forceRender: boolean;
+
+  /**
+   * @kind `ButtonProps`
+   * @required false
+   * @default -
+   * @description 确认按钮 props，详细属性参见 <https://3x.ant.design/components/button-cn/>
+   * @group advanced
+   */
+  @property({ attribute: false }) okButtonProps: ButtonProps;
+
+  /**
+   * @kind `ButtonProps`
+   * @required false
+   * @default -
+   * @description 取消按钮 props，详细属性参见 <https://3x.ant.design/components/button-cn/>
+   * @group advanced
+   */
+  @property({ attribute: false }) cancelButtonProps: ButtonProps;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 关闭时销毁模态框里的子元素
+   * @group advanced
+   */
+  @property({ type: Boolean }) destroyOnClose: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否展示遮罩
+   * @group advanced
+   */
+  @property({ attribute: false }) mask = true;
+
+  /**
+   * @kind `{ useBrick: UseSingleBrickConf[] }`
+   * @required false
+   * @default -
+   * @description [已废弃]表单构件的 items 插槽的构件配置，请使用 `items` 属性
+   * @group advanced
+   */
+  @property({ attribute: false }) itemBricks: UseSingleBrickConf[]; // Deprecated
+
+  /**
+   * @kind `Omit<UseSingleBrickConf, 'brick'>`
+   * @required false
+   * @default `useBrick: { brick: "forms.general-form" { properties: { layout: "vertical" } } }`
+   * @description [已废弃]表单构件配置，请使用 `form` 属性
+   * @group advanced
+   */
+  @property({ attribute: false }) formBrick: Omit<UseSingleBrickConf, "brick">; // Deprecated
+
   private _visible = false;
 
   connectedCallback(): void {

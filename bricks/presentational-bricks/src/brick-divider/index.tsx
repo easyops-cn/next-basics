@@ -17,12 +17,22 @@ import { BrickDivider } from "./BrickDivider";
  */
 export class BrickDividerElement extends UpdatingElement {
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 标题
+   */
+  @property()
+  dividerTitle: string;
+
+  /**
    * @kind "horizontal" \| "vertical"
    * @required false
    * @default horizontal
    * @description 水平还是垂直类型
    */
   @property() type: "horizontal" | "vertical";
+
   /**
    * @kind boolean
    * @required false
@@ -30,6 +40,7 @@ export class BrickDividerElement extends UpdatingElement {
    * @description 是否虚线
    */
   @property() dashed: boolean;
+
   /**
    * @kind Record<string,any>
    * @required false
@@ -40,15 +51,6 @@ export class BrickDividerElement extends UpdatingElement {
     attribute: false,
   })
   dividerStyle: any;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 标题
-   */
-  @property()
-  dividerTitle: string;
 
   /**
    * @kind "center" 或 "left" 或 "right"

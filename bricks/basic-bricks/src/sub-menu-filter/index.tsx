@@ -75,24 +75,25 @@ import { UseBrickConf } from "@next-core/brick-types";
  */
 export class SubMenuFilterElement extends UpdatingElement {
   /**
-   * @kind string
-   * @required false
+   * @required -
    * @default -
-   * @description 搜索框 placeholder
-   */
-  @property()
-  placeholder: string;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否允许选中
+   * @description 菜单项
    */
   @property({
-    type: Boolean,
+    attribute: false,
   })
-  selectable: boolean;
+  menuItems: SubMenuFilterItem[];
+
+  /**
+   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @required false
+   * @default -
+   * @description 列表项 extra 位置（右边）
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrick: { useBrick: UseBrickConf };
 
   /**
    * @kind boolean
@@ -106,15 +107,13 @@ export class SubMenuFilterElement extends UpdatingElement {
   unsearchable: boolean;
 
   /**
-   * @kind boolean
+   * @kind string
    * @required false
-   * @default false
-   * @description 是否多选
+   * @default -
+   * @description 搜索框 placeholder
    */
-  @property({
-    type: Boolean,
-  })
-  multiple: boolean;
+  @property()
+  placeholder: string;
 
   /**
    * @kind string[]
@@ -139,20 +138,26 @@ export class SubMenuFilterElement extends UpdatingElement {
   defaultOpenKeys: string[];
 
   /**
-   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @kind boolean
    * @required false
-   * @default -
-   * @description 列表项 extra 位置（右边）
+   * @default true
+   * @description 是否允许选中
    */
   @property({
-    attribute: false,
+    type: Boolean,
   })
-  suffixBrick: { useBrick: UseBrickConf };
+  selectable: boolean;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否多选
+   */
   @property({
-    attribute: false,
+    type: Boolean,
   })
-  menuItems: SubMenuFilterItem[];
+  multiple: boolean;
 
   connectedCallback(): void {
     // Don't override user's style settings.

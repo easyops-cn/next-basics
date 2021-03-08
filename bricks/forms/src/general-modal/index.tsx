@@ -53,30 +53,6 @@ export interface ChildeFormElement extends HTMLElement {
 */
 export class GeneralModalElement extends FormItemElement {
   /**
-   * @kind `Record<string, any>`
-   * @required false
-   * @default -
-   * @description 打开和关闭弹窗事件的 `detail` 的数据源
-   */
-  @property({
-    attribute: false,
-  })
-  dataSource: Record<string, any>;
-
-  /**
-   * @kind `{modalTitle: string}	`
-   * @required false
-   * @default -
-   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
-   */
-  @property({
-    attribute: false,
-  })
-  fields: {
-    modalTitle: string;
-  };
-
-  /**
    * @kind string
    * @required false
    * @default -
@@ -96,30 +72,16 @@ export class GeneralModalElement extends FormItemElement {
   })
   modalWidth: string | number;
 
-  @property({
-    type: Boolean,
-  })
-  isVisible: boolean;
-
   /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 是否点击背景关闭模态框
-   */
-  @property({
-    type: Boolean,
-  })
-  maskClosable: boolean;
-
-  /**
-   * @kind string
+   * @kind `Record<string, any>`
    * @required false
    * @default -
-   * @description 点击打开模态框的按钮文字
+   * @description 打开和关闭弹窗事件的 `detail` 的数据源
    */
-  @property()
-  btnText: string;
+  @property({
+    attribute: false,
+  })
+  dataSource: Record<string, any>;
 
   /**
    * @kind string
@@ -144,31 +106,19 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default `"取消"`
    * @description 模态框取消按钮文字
+   * @group advanced
    */
   @property()
   cancelText: string;
 
   /**
-   * @kind `ButtonType`("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
+   * @kind string
    * @required false
-   * @default `"primary"`
-   * @description 模态框确认按钮类型
+   * @default -
+   * @description 点击打开模态框的按钮文字
    */
   @property()
-  okType: ButtonType;
-
-  private _mountPoint: HTMLElement;
-
-  private _childFormElement: ChildeFormElement;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 关闭模态框时不重置表单
-   */
-  @property({ type: Boolean })
-  notResetWhenClose: boolean;
+  btnText: string;
 
   /**
    * @kind boolean
@@ -178,6 +128,68 @@ export class GeneralModalElement extends FormItemElement {
    */
   @property({ type: Boolean })
   disableAfterClick: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 关闭模态框时不重置表单
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  notResetWhenClose: boolean;
+
+  /**
+   * @kind `ButtonType`("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
+   * @required false
+   * @default `"primary"`
+   * @description 模态框确认按钮类型
+   * @group advanced
+   */
+  @property()
+  okType: ButtonType;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 是否点击背景关闭模态框
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  maskClosable: boolean;
+
+  /**
+   * @kind boolean
+   * @required -
+   * @default false
+   * @description 是否显示模态框
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  isVisible: boolean;
+
+  /**
+   * @kind `{modalTitle: string}	`
+   * @required false
+   * @default -
+   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  fields: {
+    modalTitle: string;
+  };
+
+  private _mountPoint: HTMLElement;
+
+  private _childFormElement: ChildeFormElement;
 
   constructor() {
     super();

@@ -36,17 +36,6 @@ const BUTTON_TYPES = [
  */
 export class GeneralButtonsElement extends FormItemElement {
   /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 显示取消按钮
-   */
-  @property({
-    type: Boolean,
-  })
-  showCancelButton: boolean;
-
-  /**
    * @kind string
    * @required false
    * @default -
@@ -54,6 +43,19 @@ export class GeneralButtonsElement extends FormItemElement {
    */
   @property()
   submitText: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 点击确定按钮后自动禁用
+   */
+  @property({ type: Boolean })
+  disableAfterClick: boolean;
+  /**
+   * @detail -
+   * @description 点击提交按钮触发的事件，tips:点击提交按钮会先自动触发表单的 validate 方法，参考[通用表单](developers/brick-book/brick/forms.general-form)
+   */
 
   /**
    * @kind boolean
@@ -100,6 +102,17 @@ export class GeneralButtonsElement extends FormItemElement {
   submitType: ButtonType;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 显示取消按钮
+   */
+  @property({
+    type: Boolean,
+  })
+  showCancelButton: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -107,6 +120,7 @@ export class GeneralButtonsElement extends FormItemElement {
    */
   @property()
   cancelText: string;
+
   /**
    * @kind `"default" | "primary" | "ghost" | "dashed" | "danger" | "link"`
    * @default `"link"`
@@ -130,18 +144,6 @@ export class GeneralButtonsElement extends FormItemElement {
   })
   cancelType: ButtonType;
 
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 点击确定按钮后自动禁用
-   */
-  @property({ type: Boolean })
-  disableAfterClick: boolean;
-  /**
-   * @detail -
-   * @description 点击提交按钮触发的事件，tips:点击提交按钮会先自动触发表单的 validate 方法，参考[通用表单](developers/brick-book/brick/forms.general-form)
-   */
   @event({ type: "submit.button.click" }) submitEvent: EventEmitter;
   private _handleSubmitClick = (): void => {
     if (this.getFormElement()) {

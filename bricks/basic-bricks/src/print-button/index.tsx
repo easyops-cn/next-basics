@@ -19,26 +19,6 @@ export class PrintButtonElement extends UpdatingElement {
 
   /**
    * @kind string
-   * @required false
-   * @default -
-   * @description fixed 布局下，按钮的位置
-   */
-  @property({
-    attribute: false,
-  })
-  right: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description fixed 布局下，按钮的位置
-   */
-  @property({
-    attribute: false,
-  })
-  bottom: string;
-  /**
-   * @kind string
    * @required true
    * @default -
    * @description 打印保存的 pdf 文件前缀
@@ -52,12 +32,23 @@ export class PrintButtonElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description 按钮边框
+   * @description fixed 布局下，按钮的位置
    */
   @property({
     attribute: false,
   })
-  border: string;
+  right: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description fixed 布局下，按钮的位置
+   */
+  @property({
+    attribute: false,
+  })
+  bottom: string;
 
   /**
    * @kind string
@@ -69,6 +60,17 @@ export class PrintButtonElement extends UpdatingElement {
     attribute: false,
   })
   color: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 按钮边框
+   */
+  @property({
+    attribute: false,
+  })
+  border: string;
 
   /**
    * @kind string

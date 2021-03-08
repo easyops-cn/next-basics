@@ -5,12 +5,8 @@ import { BrickDescriptions } from "./BrickDescriptions";
 import { UseBrickConf } from "@next-core/brick-types";
 import { Card } from "antd";
 import { get, map } from "lodash";
-import {
-  DescriptionsProps,
-} from "antd/lib/descriptions";
-import {
-  DescriptionsItemProps,
-} from "antd/lib/descriptions/Item";
+import { DescriptionsProps } from "antd/lib/descriptions";
+import { DescriptionsItemProps } from "antd/lib/descriptions/Item";
 import styles from "./BrickDescriptions.module.css";
 
 export interface BrickDescriptionsItemProps
@@ -72,70 +68,15 @@ export class BrickDescriptionsElement extends UpdatingElement {
   descriptionTitle: string;
 
   /**
-   * @kind number|object
-   * @required false
-   * @default 3
-   * @description 一行的 DescriptionItems 数量，可以写成像素值或支持响应式的对象写法 { xs: 8, sm: 16, md: 24}
-   */
-  @property({
-    attribute: false,
-  })
-  column: number;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否展示边框
-   */
-  @property({
-    type: Boolean,
-  })
-  bordered: boolean;
-
-  /**
-   * @kind SizeType
-   * @required false
+   * @kind BrickDescriptionsItemProps[]
+   * @required true
    * @default -
-   * @description 设置列表的大小。可以设置为 middle 、small, 或不填（只有设置 bordered={true} 生效）
+   * @description 描述列表项，扩展自 ant-design DescriptionItem 相关配置项，额外扩展项如下，其他项查阅：[https://ant.design/components/descriptions-cn/#DescriptionItem](https://ant.design/components/descriptions-cn/#DescriptionItem)
    */
   @property({
     attribute: false,
   })
-  size: SizeType;
-
-  /**
-   * @kind LayoutType
-   * @required false
-   * @default horizontal
-   * @description 描述布局
-   */
-  @property({
-    attribute: false,
-  })
-  layout: LayoutType;
-
-  /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
-   * @description [已废弃]数据来源，通常来源于后台
-   */
-  @property({
-    attribute: false,
-  })
-  dataSource: Record<string, any>;
-
-  /**
-   * @kind DescriptionsProps
-   * @required false
-   * @default -
-   * @description ant-design 相关配置项,具体查阅：[https://ant.design/components/descriptions-cn/#Descriptions](https://ant.design/components/descriptions-cn/#Descriptions)
-   */
-  @property({
-    attribute: false,
-  })
-  configProps: DescriptionsProps;
+  itemList: BrickDescriptionsItemProps[];
 
   /**
    * @kind boolean
@@ -148,6 +89,78 @@ export class BrickDescriptionsElement extends UpdatingElement {
   })
   showCard = true;
 
+  /**
+   * @kind number|object
+   * @required false
+   * @default 3
+   * @description 一行的 DescriptionItems 数量，可以写成像素值或支持响应式的对象写法 { xs: 8, sm: 16, md: 24}
+   */
+  @property({
+    attribute: false,
+  })
+  column: number;
+
+  /**
+   * @kind LayoutType
+   * @required false
+   * @default horizontal
+   * @description 描述布局
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  layout: LayoutType;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否展示边框
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  bordered: boolean;
+
+  /**
+   * @kind SizeType
+   * @required false
+   * @default -
+   * @description 设置列表的大小。可以设置为 middle 、small, 或不填（只有设置 bordered={true} 生效）
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  size: SizeType;
+
+  /**
+   * @kind DescriptionsProps
+   * @required false
+   * @default -
+   * @description ant-design 相关配置项,具体查阅：[https://ant.design/components/descriptions-cn/#Descriptions](https://ant.design/components/descriptions-cn/#Descriptions)
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  configProps: DescriptionsProps;
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @deprecated
+   * @description [已废弃]数据来源，通常来源于后台
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  dataSource: Record<string, any>;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -159,17 +172,6 @@ export class BrickDescriptionsElement extends UpdatingElement {
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
   }
-
-  /**
-   * @kind BrickDescriptionsItemProps[]
-   * @required true
-   * @default -
-   * @description 描述列表项，扩展自 ant-design DescriptionItem 相关配置项，额外扩展项如下，其他项查阅：[https://ant.design/components/descriptions-cn/#DescriptionItem](https://ant.design/components/descriptions-cn/#DescriptionItem)
-   */
-  @property({
-    attribute: false,
-  })
-  itemList: BrickDescriptionsItemProps[];
 
   // istanbul ignore next
   protected _getBrickDescriptionsNode(): React.ReactElement {

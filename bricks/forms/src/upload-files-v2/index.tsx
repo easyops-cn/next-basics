@@ -21,19 +21,13 @@ import { FormItemElement } from "@next-libs/forms";
  */
 export class UploadFilesV2Element extends FormItemElement {
   /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 选择文件后是否直接上传。autoUpload为true时，文件会自动上传到url地址，每个value中存在response属性存储上传地址的返回信息。autoUpload为false时，文件不会自动上传，需要用户自行上传，每个value中存在file属性存储文件信息。
-   */
-  @property({ type: Boolean }) autoUpload: boolean;
-  /**
    * @kind string
    * @required true
    * @default -
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -41,6 +35,7 @@ export class UploadFilesV2Element extends FormItemElement {
    * @description 表单项字段说明
    */
   @property({ attribute: false }) label: string;
+
   /**
    * @kind boolean
    * @required false
@@ -48,6 +43,7 @@ export class UploadFilesV2Element extends FormItemElement {
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
+
   /**
    * @kind boolean
    * @required false
@@ -55,6 +51,15 @@ export class UploadFilesV2Element extends FormItemElement {
    * @description 是否禁用
    */
   @property({ type: Boolean }) disabled: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 选择文件后是否直接上传。autoUpload为true时，文件会自动上传到url地址，每个value中存在response属性存储上传地址的返回信息。autoUpload为false时，文件不会自动上传，需要用户自行上传，每个value中存在file属性存储文件信息。
+   */
+  @property({ type: Boolean }) autoUpload: boolean;
+
   /**
    * @kind string
    * @required false
@@ -63,6 +68,7 @@ export class UploadFilesV2Element extends FormItemElement {
    */
   @property()
   url: string;
+
   /**
    * @kind string
    * @required false
@@ -71,6 +77,7 @@ export class UploadFilesV2Element extends FormItemElement {
    */
   @property({ attribute: false })
   method: string;
+
   /**
    * @kind string
    * @required false
@@ -79,6 +86,7 @@ export class UploadFilesV2Element extends FormItemElement {
    */
   @property({ attribute: false })
   uploadName: string;
+
   /**
    * @kind string
    * @required false
@@ -87,6 +95,7 @@ export class UploadFilesV2Element extends FormItemElement {
    */
   @property({ attribute: false })
   accept: string;
+
   /**
    * @kind { [key: string]: string; }
    * @required false

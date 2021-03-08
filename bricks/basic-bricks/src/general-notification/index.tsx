@@ -27,36 +27,13 @@ import { NotificationApi } from "antd/es/notification";
 export class GeneralNotificationElement extends UpdatingElement {
   /**
    * @kind string
-   * @required false
-   * @default -
-   * @description icon，具体查阅：[react icon](https://3x.ant.design/components/icon-cn/)
-   */
-  @property()
-  icon: string;
-  /**
-   * @kind string
    * @required true
    * @default -
    * @description 通知提醒标题，必选
    */
   @property()
   message: string;
-  /**
-   * @kind number
-   * @required false
-   * @default 4.5
-   * @description 默认 4.5 秒后自动关闭，配置为 null 则不自动关闭
-   */
-  @property({ type: Number })
-  duration: number;
-  /**
-   * @kind `topLeft` `topRight` `bottomLeft` `bottomRight`
-   * @required false
-   * @default topRight
-   * @description 弹出位置，可选
-   */
-  @property()
-  placement: NotificationPlacement;
+
   /**
    * @kind string
    * @required true
@@ -65,11 +42,42 @@ export class GeneralNotificationElement extends UpdatingElement {
    */
   @property()
   description: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description icon，具体查阅：[react icon](https://3x.ant.design/components/icon-cn/)
+   */
+  @property()
+  icon: string;
+
+  /**
+   * @kind `topLeft` `topRight` `bottomLeft` `bottomRight`
+   * @required false
+   * @default topRight
+   * @description 弹出位置，可选
+   * @group advanced
+   */
+  @property()
+  placement: NotificationPlacement;
+
+  /**
+   * @kind number
+   * @required false
+   * @default 4.5
+   * @description 默认 4.5 秒后自动关闭，配置为 null 则不自动关闭
+   * @group advanced
+   */
+  @property({ type: Number })
+  duration: number;
+
   /**
    * @kind [React.CSSProperties](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/e434515761b36830c3e58a970abf5186f005adac/types/react/index.d.ts#L794)
    * @required false
    * @default -
    * @description icon css 样式
+   * @group advanced
    */
   @property({
     attribute: false,

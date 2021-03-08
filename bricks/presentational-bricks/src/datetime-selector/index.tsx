@@ -148,6 +148,7 @@ export class DatetimeSelectorElement extends UpdatingElement {
    * @required false
    * @default "bottom"
    * @description 弹出位置
+   * @group advanced
    */
   @property()
   placement: TooltipPlacement;
@@ -157,6 +158,7 @@ export class DatetimeSelectorElement extends UpdatingElement {
    * @required false
    * @default `ms`
    * @description 指定时间戳的单位，目前支持秒和毫秒，默认为毫秒，切换为秒时，url 和事件传出的时间戳都会调整成以秒为单位
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -168,6 +170,7 @@ export class DatetimeSelectorElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 打开选择器的按钮的大小
+   * @group advanced
    */
   @property()
   size: ButtonSize;

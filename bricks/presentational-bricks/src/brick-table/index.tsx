@@ -290,14 +290,6 @@ export interface CellStatusProps {
  */
 export class BrickTableElement extends UpdatingElement {
   /**
-   * @default -
-   * @required false
-   * @description 设置容器空状态时显示`empty`构件属性
-   */
-  @property({ attribute: false })
-  wrapperConfig: BrickWrapperConfig = {};
-
-  /**
    * @detail {[pagePath]: xxx}
    * @description 页码变化,pagePath 可在 fields.page 中设置，默认为 page
    */
@@ -356,6 +348,15 @@ export class BrickTableElement extends UpdatingElement {
   }>;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 指定每一行的 key，不指定则默认为索引 index。强烈建议设置该属性，否则在某些情况下可能行为不如预期。
+   */
+  @property()
+  rowKey: string;
+
+  /**
    * @kind (string|number)[]
    * @required false
    * @default -
@@ -378,14 +379,12 @@ export class BrickTableElement extends UpdatingElement {
   optimizedColumns: Array<string | number>;
 
   /**
+   * @default -
    * @required false
-   * @default false
-   * @description 树形数据展示时是否需要去除空数组
+   * @description 设置容器空状态时显示`empty`构件属性
    */
-  @property({
-    attribute: false,
-  })
-  stripEmptyExpandableChildren = false;
+  @property({ attribute: false })
+  wrapperConfig: BrickWrapperConfig = {};
 
   /**
    * @kind boolean
@@ -442,15 +441,6 @@ export class BrickTableElement extends UpdatingElement {
   sort: string;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 指定每一行的 key，不指定则默认为索引 index。强烈建议设置该属性，否则在某些情况下可能行为不如预期。
-   */
-  @property()
-  rowKey: string;
-
-  /**
    * @kind string | number
    * @required false
    * @default -
@@ -473,6 +463,28 @@ export class BrickTableElement extends UpdatingElement {
   frontSearchQuery = "";
 
   /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否显示外层卡片
+   */
+  @property({
+    attribute: false,
+  })
+  showCard = true;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description ant-design 的 Table 相关配置项,具体查阅：[https://ant.design/components/table-cn/#Table](https://ant.design/components/table-cn/#Table)，其中分页配置和行选择配值在构件中设置了常用的默认配置，也可自行覆盖，具体描述见下表
+   */
+  @property({
+    attribute: false,
+  })
+  configProps: any;
+
+  /**
    * @kind RowDisabledProps
    * @required false
    * @default -
@@ -482,6 +494,16 @@ export class BrickTableElement extends UpdatingElement {
     attribute: false,
   })
   rowDisabledConfig: RowDisabledProps;
+
+  /**
+   * @required false
+   * @default false
+   * @description 树形数据展示时是否需要去除空数组
+   */
+  @property({
+    attribute: false,
+  })
+  stripEmptyExpandableChildren = false;
 
   // start -- 行展开相关属性
   /**
@@ -1424,28 +1446,6 @@ export class BrickTableElement extends UpdatingElement {
   get columns(): CustomColumn[] {
     return this._columns;
   }
-
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description ant-design 的 Table 相关配置项,具体查阅：[https://ant.design/components/table-cn/#Table](https://ant.design/components/table-cn/#Table)，其中分页配置和行选择配值在构件中设置了常用的默认配置，也可自行覆盖，具体描述见下表
-   */
-  @property({
-    attribute: false,
-  })
-  configProps: any;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否显示外层卡片
-   */
-  @property({
-    attribute: false,
-  })
-  showCard = true;
 
   /**
    * @kind object

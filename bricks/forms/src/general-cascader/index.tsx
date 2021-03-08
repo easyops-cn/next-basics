@@ -40,6 +40,7 @@ export class GeneralCascaderElement extends FormItemElement {
    * @description 级联选择框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -47,20 +48,28 @@ export class GeneralCascaderElement extends FormItemElement {
    * @description 级联选择框字段说明
    */
   @property({ attribute: false }) label: string;
+
   /**
-   * @kind boolean
-   * @required false
+   * @kind CascaderOptionType[]
+   * @required true
    * @default -
-   * @description 是否必填项
+   * @description 可选项数据源
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({
+    attribute: false,
+  })
+  options: GeneralCascaderProps["options"];
+
   /**
-   * @kind `Record<string,string>`
+   * @kind {label: string, value: string, children: string}
    * @required false
-   * @default -
-   * @description 校验文本信息
+   * @default { label: 'label', value: 'value', children: 'children' }
+   * @description 自定义 options 中 label name children 的字段，相关详情可查看 [fieldNames](https://3x.ant.design/components/cascader-cn/#API)
    */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({
+    attribute: false,
+  })
+  fieldNames = { label: "label", value: "value", children: "children" };
 
   /**
    * @kind string[]
@@ -74,15 +83,29 @@ export class GeneralCascaderElement extends FormItemElement {
   value: GeneralCascaderProps["value"];
 
   /**
-   * @kind `CascaderOptionType[]`
-   * @required true
+   * @kind string
+   * @required false
    * @default -
-   * @description 可选项数据源
+   * @description 输入框占位文本
    */
-  @property({
-    attribute: false,
-  })
-  options: GeneralCascaderProps["options"];
+  @property()
+  placeholder: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
+
+  /**
+   * @kind Record<string,string>
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   */
+  @property({ attribute: false }) message: Record<string, string>;
 
   /**
    * @kind boolean
@@ -107,57 +130,6 @@ export class GeneralCascaderElement extends FormItemElement {
   allowClear = true;
 
   /**
-   * @kind `click | hover`
-   * @required false
-   * @default click
-   * @description 次级菜单的展开方式
-   */
-  @property({
-    attribute: false,
-  })
-  expandTrigger = "click" as GeneralCascaderProps["expandTrigger"];
-
-  /**
-   * @kind `{label: string, value: string, children: string}`
-   * @required false
-   * @default { label: 'label', value: 'value', children: 'children' }
-   * @description 自定义 options 中 label name children 的字段，相关详情可查看 [fieldNames](https://3x.ant.design/components/cascader-cn/#API)
-   */
-  @property({
-    attribute: false,
-  })
-  fieldNames = { label: "label", value: "value", children: "children" };
-
-  /**
-   * @kind string
-   * @required false
-   * @default 暂无数据
-   * @description 当下拉列表为空时显示的内容
-   */
-  @property()
-  notFoundContent: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 输入框占位文本
-   */
-  @property()
-  placeholder: string;
-
-  /**
-   * @kind `bottomLeft | bottomRight | topLeft | topRight`
-   * @required false
-   * @default bottomLeft
-   * @description 浮层的显示位置
-   */
-  @property({
-    attribute: false,
-  })
-  popupPlacement = "bottomLeft";
-
-  /**
    * @kind boolean
    * @required false
    * @default true
@@ -169,26 +141,6 @@ export class GeneralCascaderElement extends FormItemElement {
   showSearch = true;
 
   /**
-   * @kind `large | default | small`
-   * @required false
-   * @default default
-   * @description 输入框大小
-   */
-  @property()
-  size: string;
-
-  /**
-   * @kind `Object`
-   * @required false
-   * @default -
-   * @description 级联选择器自定义样式
-   */
-  @property({
-    attribute: false,
-  })
-  cascaderStyle: React.CSSProperties;
-
-  /**
    * @kind string
    * @required false
    * @default -
@@ -198,10 +150,67 @@ export class GeneralCascaderElement extends FormItemElement {
   suffixIcon: string;
 
   /**
+   * @kind click | hover
+   * @required false
+   * @default click
+   * @description 次级菜单的展开方式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  expandTrigger = "click" as GeneralCascaderProps["expandTrigger"];
+
+  /**
+   * @kind string
+   * @required false
+   * @default 暂无数据
+   * @description 当下拉列表为空时显示的内容
+   * @group advanced
+   */
+  @property()
+  notFoundContent: string;
+
+  /**
+   * @kind bottomLeft | bottomRight | topLeft | topRight
+   * @required false
+   * @default bottomLeft
+   * @description 浮层的显示位置
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  popupPlacement = "bottomLeft";
+
+  /**
+   * @kind large | default | small
+   * @required false
+   * @default default
+   * @description 输入框大小
+   * @group advanced
+   */
+  @property()
+  size: string;
+
+  /**
+   * @kind Object
+   * @required false
+   * @default -
+   * @description 级联选择器自定义样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  cascaderStyle: React.CSSProperties;
+
+  /**
    * @kind numberr
    * @required false
    * @default 50
    * @description  搜索结果展示数量
+   * @group advanced
    */
   @property({ attribute: false })
   limit = 50;

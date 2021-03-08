@@ -30,6 +30,7 @@ export class GeneralSlideElement extends FormItemElement {
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -37,6 +38,7 @@ export class GeneralSlideElement extends FormItemElement {
    * @description 表单项字段说明
    */
   @property({ attribute: false }) label: string;
+
   /**
    * @kind boolean
    * @required false
@@ -44,27 +46,6 @@ export class GeneralSlideElement extends FormItemElement {
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
-  /**
-   * @kind boolean
-   * @required -️
-   * @default false
-   * @description 只用展示不能改变任何值的模式，该属性与 `disabled` 不同的地方在于呈现的样式不一样
-   */
-  @property({
-    type: Boolean,
-  })
-  onlyShowMode: boolean;
-
-  /**
-   * @kind string
-   * @required -️
-   * @default -
-   * @description 为空则默认，也可为 large 模式，仅在 onlyShowMode 模式下有效
-   */
-  @property({
-    attribute: false,
-  })
-  size: string;
 
   /**
    * @kind `number | [number, number]`
@@ -89,39 +70,6 @@ export class GeneralSlideElement extends FormItemElement {
   disabled: boolean;
 
   /**
-   * @kind boolean
-   * @required -️
-   * @default false
-   * @description 是否只能拖拽到刻度上
-   */
-  @property({
-    type: Boolean,
-  })
-  dots: boolean;
-
-  /**
-   * @kind number
-   * @required -️
-   * @default 0
-   * @description 滑动条的最小值
-   */
-  @property({
-    attribute: false,
-  })
-  min = 0;
-
-  /**
-   * @kind number
-   * @required -️
-   * @default 100
-   * @description 滑动条的最大值
-   */
-  @property({
-    attribute: false,
-  })
-  max = 100;
-
-  /**
    * @kind `{number: string} | number: {style: CSSProperties, label: string}`
    * @required -️
    * @default -
@@ -144,17 +92,6 @@ export class GeneralSlideElement extends FormItemElement {
   range: boolean;
 
   /**
-   * @kind `number | null`
-   * @required -️
-   * @default 1
-   * @description 步长，当 marks 不为空对象时有效，取值必须大于 0，并且可被 (max - min) 整除。当 marks 不为空对象时，可以设置 step 为 null，此时滑动条的可选值仅有 marks 标出来的部分
-   */
-  @property({
-    attribute: false,
-  })
-  step: GeneralSlideProps["step"];
-
-  /**
    * @kind boolean
    * @required -️
    * @default true
@@ -164,6 +101,78 @@ export class GeneralSlideElement extends FormItemElement {
     attribute: false,
   })
   included = true;
+
+  /**
+   * @kind boolean
+   * @required -️
+   * @default false
+   * @description 是否只能拖拽到刻度上
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  dots: boolean;
+
+  /**
+   * @kind number
+   * @required -️
+   * @default 0
+   * @description 滑动条的最小值
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  min = 0;
+
+  /**
+   * @kind number
+   * @required -️
+   * @default 100
+   * @description 滑动条的最大值
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  max = 100;
+
+  /**
+   * @kind `number | null`
+   * @required -️
+   * @default 1
+   * @description 步长，当 marks 不为空对象时有效，取值必须大于 0，并且可被 (max - min) 整除。当 marks 不为空对象时，可以设置 step 为 null，此时滑动条的可选值仅有 marks 标出来的部分
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  step: GeneralSlideProps["step"];
+
+  /**
+   * @kind boolean
+   * @required -️
+   * @default false
+   * @description 只用展示不能改变任何值的模式，该属性与 `disabled` 不同的地方在于呈现的样式不一样
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  onlyShowMode: boolean;
+
+  /**
+   * @kind string
+   * @required -️
+   * @default -
+   * @description 为空则默认，也可为 large 模式，仅在 onlyShowMode 模式下有效
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  size: string;
 
   connectedCallback(): void {
     // Don't override user's style settings.

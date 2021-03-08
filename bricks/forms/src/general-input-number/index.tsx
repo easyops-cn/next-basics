@@ -33,6 +33,7 @@ export class GeneralInputNumberElement extends FormItemElement {
    * @description 数字输入框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -40,27 +41,7 @@ export class GeneralInputNumberElement extends FormItemElement {
    * @description 数字输入框字段说明
    */
   @property({ attribute: false }) label: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 数字输入框占位说明
-   */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   */
-  @property({ attribute: false }) message: Record<string, string>;
+
   /**
    * @kind `number|string`
    * @required false
@@ -73,37 +54,28 @@ export class GeneralInputNumberElement extends FormItemElement {
   value: number | string;
 
   /**
-   * @kind number
+   * @kind string
    * @required false
    * @default -
-   * @description 数字输框入步长
+   * @description 数字输入框占位说明
    */
-  @property({
-    attribute: false,
-  })
-  step = 1;
+  @property({ attribute: false }) placeholder: string;
 
   /**
-   * @kind number
+   * @kind boolean
    * @required false
    * @default -
-   * @description 数字输入框最小值
+   * @description 是否必填项
    */
-  @property({
-    type: Number,
-  })
-  min: number;
+  @property({ type: Boolean }) required: boolean;
 
   /**
-   * @kind number
+   * @kind `Record<string,string>`
    * @required false
    * @default -
-   * @description 数字输入框最大值
+   * @description 校验文本信息
    */
-  @property({
-    attribute: false,
-  })
-  max = Infinity;
+  @property({ attribute: false }) message: Record<string, string>;
 
   /**
    * @kind `object`
@@ -115,6 +87,43 @@ export class GeneralInputNumberElement extends FormItemElement {
     attribute: false,
   })
   inputBoxStyle: React.CSSProperties;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 数字输框入步长
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  step = 1;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 数字输入框最小值
+   * @group advanced
+   */
+  @property({
+    type: Number,
+  })
+  min: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 数字输入框最大值
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  max = Infinity;
+
   /**
    * @detail `string`
    * @description 输入改变，`event.detail` 是当前值

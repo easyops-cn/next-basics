@@ -39,37 +39,13 @@ export class AdvanceSettingElement extends FormItemElement {
   foldName: string;
 
   /**
-   * @kind "left"|"right"
-   * @required false
-   * @default center
-   * @description 分割线标题的位置
-   */
-  @property({
-    attribute: false,
-  })
-  dividerOrientation: "left" | "right";
-
-  /**
    * @kind boolean
    * @required false
-   * @default false
-   * @description 是否虚线
+   * @default true
+   * @description 是否分割线
    */
-  @property({
-    type: Boolean,
-  })
-  dividerDashed: boolean;
-
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description 折叠展示的样式编写
-   */
-  @property({
-    attribute: false,
-  })
-  foldStyle: Record<string, string>;
+  @property({ attribute: false })
+  showDivider = true;
 
   /**
    * @kind boolean
@@ -83,15 +59,6 @@ export class AdvanceSettingElement extends FormItemElement {
   /**
    * @kind boolean
    * @required false
-   * @default true
-   * @description 是否分割线
-   */
-  @property({ attribute: false })
-  showDivider = true;
-
-  /**
-   * @kind boolean
-   * @required false
    * @default -
    * @description 是否展开
    */
@@ -99,6 +66,43 @@ export class AdvanceSettingElement extends FormItemElement {
     type: Boolean,
   })
   show: boolean;
+
+  /**
+   * @kind "left"|"right"
+   * @required false
+   * @default center
+   * @description 分割线标题的位置
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  dividerOrientation: "left" | "right";
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否虚线
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  dividerDashed: boolean;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 折叠展示的样式编写
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  foldStyle: Record<string, string>;
+
   /**
    * @detail {show: true}
    * @description 展开时发生事件

@@ -42,33 +42,13 @@ export class ModalConfirmElement extends UpdatingElement {
   confirmCancel: EventEmitter<any>;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 模态框是否可见
-   */
-  @property({ type: Boolean }) visible: boolean;
-  /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
-   * @description 解析模板时的数据源
-   */
-  @property({ attribute: false }) dataSource: Record<string, any>;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description [已废弃]请使用 modalTitle 代替
-   */
-  @property({ __deprecated_and_for_compatibility_only: true }) title: string;
-  /**
    * @kind string
    * @required false
    * @default -
    * @description 模态框标题，代替之前 title 属性, 支持模板(即通过 #{xxx} 方式获取数据源字段的上值，由于框架目前提供了 transform 机制也可以达到此需求，推荐使用框架提供的能力)
    */
   @property() modalTitle: string;
+
   /**
    * @kind string
    * @required false
@@ -76,6 +56,7 @@ export class ModalConfirmElement extends UpdatingElement {
    * @description 模态框内容，支持模板和 HTML（自动消毒）
    */
   @property() content: string;
+
   /**
    * @kind string
    * @required false
@@ -83,48 +64,7 @@ export class ModalConfirmElement extends UpdatingElement {
    * @description 模态框的额外内容，支持模板和 HTML（自动消毒）
    */
   @property() extraContent: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 确定按钮文字
-   */
-  @property() okText: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 支持模板，若设置，需输入该文本方可删除
-   */
-  @property() expect: string;
-  /**
-   * @kind ButtonType ("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
-   * @required false
-   * @default -
-   * @description 确定按钮类型
-   */
-  @property() okType: ButtonType;
-  /**
-   * @kind ButtonProps
-   * @required false
-   * @default -
-   * @description 确定按钮属性，同 ant design 的 Modal 的 [okButtonProps](https://ant.design/components/modal-cn/#API)
-   */
-  @property({ attribute: false }) okButtonProps?: ButtonProps;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 取消按钮文字
-   */
-  @property() cancelText: string;
-  /**
-   * @kind ButtonProps
-   * @required false
-   * @default -
-   * @description 取消按钮属性，同 ant design 的 Modal 的 [cancelButtonProps](https://ant.design/components/modal-cn/#API)
-   */
-  @property({ attribute: false }) cancelButtonProps?: ButtonProps;
+
   /**
    * @kind boolean
    * @required false
@@ -132,6 +72,18 @@ export class ModalConfirmElement extends UpdatingElement {
    * @description 是否是删除模式的模态框（确定按钮的文本为删除，并红色高亮显示）
    */
   @property() isDelete: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 点击确定按钮是否关闭模态框
+   */
+  @property({
+    attribute: false,
+  })
+  closeWhenOk = true;
+
   /**
    * @kind "info" | "success" | "error" | "warning" | "confirm"
    * @required false
@@ -144,6 +96,14 @@ export class ModalConfirmElement extends UpdatingElement {
   type: ModalConfirmProps["type"] = "confirm";
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 支持模板，若设置，需输入该文本方可删除
+   */
+  @property() expect: string;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -152,15 +112,76 @@ export class ModalConfirmElement extends UpdatingElement {
   @property({ type: Boolean }) confirmLoading: boolean;
 
   /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description 解析模板时的数据源
+   */
+  @property({ attribute: false }) dataSource: Record<string, any>;
+
+  /**
    * @kind boolean
    * @required false
-   * @default true
-   * @description 点击确定按钮是否关闭模态框
+   * @default -
+   * @description 模态框是否可见
+   * @group advanced
    */
-  @property({
-    attribute: false,
-  })
-  closeWhenOk = true;
+  @property({ type: Boolean }) visible: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 确定按钮文字
+   * @group advanced
+   */
+  @property() okText: string;
+
+  /**
+   * @kind ButtonType ("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
+   * @required false
+   * @default -
+   * @description 确定按钮类型
+   * @group advanced
+   */
+  @property() okType: ButtonType;
+
+  /**
+   * @kind ButtonProps
+   * @required false
+   * @default -
+   * @description 确定按钮属性，同 ant design 的 Modal 的 [okButtonProps](https://ant.design/components/modal-cn/#API)
+   * @group advanced
+   */
+  @property({ attribute: false }) okButtonProps?: ButtonProps;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 取消按钮文字
+   * @group advanced
+   */
+  @property() cancelText: string;
+
+  /**
+   * @kind ButtonProps
+   * @required false
+   * @default -
+   * @description 取消按钮属性，同 ant design 的 Modal 的 [cancelButtonProps](https://ant.design/components/modal-cn/#API)
+   * @group advanced
+   */
+  @property({ attribute: false }) cancelButtonProps?: ButtonProps;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description [已废弃]请使用 modalTitle 代替
+   * @deprecated
+   * @group advanced
+   */
+  @property({ __deprecated_and_for_compatibility_only: true }) title: string;
 
   connectedCallback(): void {
     // istanbul ignore else

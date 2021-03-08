@@ -42,15 +42,6 @@ export interface ColorObj {
  */
 export class BasicProgressElement extends UpdatingElement {
   /**
-   * @kind line|circle|dashboard
-   * @required circle
-   * @default dashboard
-   * @description 类型
-   */
-  @property({ attribute: false })
-  type: "line" | "circle" | "dashboard";
-
-  /**
    * @kind number
    * @required true
    * @default -
@@ -58,6 +49,15 @@ export class BasicProgressElement extends UpdatingElement {
    */
   @property({ attribute: false })
   value: number;
+
+  /**
+   * @kind line|circle|dashboard
+   * @required circle
+   * @default dashboard
+   * @description 类型
+   */
+  @property({ attribute: false })
+  type: "line" | "circle" | "dashboard";
 
   /**
    * @kind string
@@ -87,22 +87,24 @@ export class BasicProgressElement extends UpdatingElement {
   colorMap: ColorObj[];
 
   /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
-   * @description 透传[antd progress](https://3x.ant.design/components/progress-cn/)
-   */
-  @property({ attribute: false })
-  configProps: Record<string, any>;
-
-  /**
    * @kind string
    * @required false
    * @default -
    * @description 设定展示内容大小
+   * @group advanced
    */
   @property({ attribute: false })
   fontSize: string;
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description 透传[antd progress](https://3x.ant.design/components/progress-cn/)
+   * @group advanced
+   */
+  @property({ attribute: false })
+  configProps: Record<string, any>;
 
   connectedCallback(): void {
     // istanbul ignore else

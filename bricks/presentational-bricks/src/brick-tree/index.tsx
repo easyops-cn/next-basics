@@ -75,6 +75,7 @@ export class BrickTreeElement extends UpdatingElement {
    * @description 树列表项，具体项见下表
    */
   @property({ attribute: false }) dataSource: BrickTreeNodeProps[];
+
   /**
    * @kind string[]
    * @required false
@@ -82,6 +83,7 @@ export class BrickTreeElement extends UpdatingElement {
    * @description 选择项
    */
   @property({ attribute: false }) selectedKeys: string[];
+
   /**
    * @kind string[]
    * @required false
@@ -89,6 +91,7 @@ export class BrickTreeElement extends UpdatingElement {
    * @description 选中项
    */
   @property({ attribute: false }) checkedKeys: string[];
+
   /**
    * @kind string[]
    * @required false
@@ -96,13 +99,7 @@ export class BrickTreeElement extends UpdatingElement {
    * @description 展开项
    */
   @property({ attribute: false }) expandedKeys: string[];
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description ant-design 的 tree 的相关配置项（除 selectedKeys、checkedKeys 和 expandedKeys）,具体查阅：[https://ant.design/components/tree-cn/#Tree-props](https://ant.design/components/tree-cn/#Tree-props)
-   */
-  @property({ attribute: false }) configProps: TreeProps;
+
   /**
    * @kind boolean
    * @required false
@@ -110,6 +107,7 @@ export class BrickTreeElement extends UpdatingElement {
    * @description 搜索功能
    */
   @property({ type: Boolean }) searchable: boolean;
+
   /**
    * @kind string
    * @required false
@@ -117,18 +115,31 @@ export class BrickTreeElement extends UpdatingElement {
    * @description 搜索框 placeholder
    */
   @property({ type: String }) placeholder: string;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description ant-design 的 tree 的相关配置项（除 selectedKeys、checkedKeys 和 expandedKeys）,具体查阅：[https://ant.design/components/tree-cn/#Tree-props](https://ant.design/components/tree-cn/#Tree-props)
+   * @group advanced
+   */
+  @property({ attribute: false }) configProps: TreeProps;
+
   /**
    * @kind boolean
    * @required false
    * @default false
    * @description 是否搜索父节点
+   * @group advanced
    */
   @property({ type: Boolean }) searchParent: boolean;
+
   /**
    * @kind boolean
    * @required false
    * @default false
    * @description 全选功能，只有当 `configProps.checkable` 为 `true` 时生效
+   * @group advanced
    */
   @property({ type: Boolean }) checkAllEnabled: boolean;
 

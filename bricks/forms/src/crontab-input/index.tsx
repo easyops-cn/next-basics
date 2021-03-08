@@ -28,9 +28,9 @@ export class CrontabInputElement extends FormItemElement {
    * @default -
    * @description 定时器字段名
    */
-
   @property()
   name: string;
+
   /**
    * @kind string
    * @required false
@@ -38,6 +38,7 @@ export class CrontabInputElement extends FormItemElement {
    * @description 定时器字段说明
    */
   @property({ attribute: false }) label: string;
+
   /**
    * @kind string
    * @required false
@@ -46,6 +47,7 @@ export class CrontabInputElement extends FormItemElement {
    */
   @property()
   value: string;
+
   /**
    * @kind boolean
    * @required false

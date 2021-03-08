@@ -20,24 +20,6 @@ import { GeneralTransform } from "@next-core/brick-types";
  */
 export class TransformAgentElement extends UpdatingElement {
   /**
-   * @kind string
-   * @required true
-   * @default -
-   * @description 目标构件的 css selector
-   */
-  @property()
-  target: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description	目标构件是否为多个
-   */
-  @property({
-    type: Boolean,
-  })
-  multiple: boolean;
-  /**
    * @kind object
    * @required true
    * @default -
@@ -47,6 +29,16 @@ export class TransformAgentElement extends UpdatingElement {
     attribute: false,
   })
   source: Record<string, string>;
+
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 目标构件的 css selector
+   */
+  @property()
+  target: string;
+
   /**
    * @kind GeneralTransform
    * @required true
@@ -57,6 +49,17 @@ export class TransformAgentElement extends UpdatingElement {
     attribute: false,
   })
   transform: GeneralTransform;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description	目标构件是否为多个
+   */
+  @property({
+    type: Boolean,
+  })
+  multiple: boolean;
 
   protected _render(): void {
     // Do nothing

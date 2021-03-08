@@ -62,6 +62,7 @@ export class BrickResultElement extends UpdatingElement {
    */
   @property()
   customTitle: string;
+
   /**
    * @kind `BrickResultStatus` | `EmptyResultStatus` | `IllustrationsStatus`
    * @required true
@@ -70,6 +71,7 @@ export class BrickResultElement extends UpdatingElement {
    */
   @property({ attribute: false })
   status: string;
+
   /**
    * @kind string
    * @required false
@@ -78,6 +80,7 @@ export class BrickResultElement extends UpdatingElement {
    */
   @property()
   subTitle: string;
+
   /**
    * @kind string
    * @required false

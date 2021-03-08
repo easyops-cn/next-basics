@@ -33,6 +33,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -42,6 +43,15 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
   @property({ attribute: false }) label: string;
 
   /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 模型 ID
+   */
+  @property({ attribute: false })
+  objectId: string;
+
+  /**
    * @kind string[]
    * @required false
    * @default []
@@ -49,8 +59,16 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
    */
   @property({ attribute: false })
   value: string[];
+
+  /**
+   * @kind string
+   * @required false
+   * @default 选择实例
+   * @description 添加实例按钮的文本
+   */
   @property({ attribute: false })
   addButtonText: string;
+
   /**
    * @kind any
    * @required false
@@ -59,6 +77,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
    */
   @property({ attribute: false })
   instanceQuery: any;
+
   /**
    * @kind string[]
    * @required false
@@ -67,6 +86,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
    */
   @property({ attribute: false })
   fields: string[];
+
   /**
    * @kind CmdbModels.ModelCmdbObject
    * @required true
@@ -75,38 +95,37 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
    */
   @property({ attribute: false })
   objectList: Partial<CmdbModels.ModelCmdbObject>[];
+
   /**
    * @kind number
    * @required false
    * @default 10
    * @description 添加实例弹窗的默认分页个数
+   * @group advanced
    */
   @property({ type: Number })
   addInstancesModalPageSize: number;
+
   /**
    * @kind boolean
    * @required false
    * @default false
    * @description 添加实例弹窗是否展示分页
+   * @group advanced
    */
   @property({ type: Boolean })
   showSizeChanger: boolean;
+
   /**
    * @kind string[]
    * @required false
    * @default -
    * @description 添加实例弹窗的分页个数选项
+   * @group advanced
    */
   @property({ attribute: false })
   pageSizeOptions: string[];
-  /**
-   * @kind string
-   * @required true
-   * @default -
-   * @description 模型 ID
-   */
-  @property({ attribute: false })
-  objectId: string;
+
   /**
    * @detail `string[]`
    * @description 当选择项变化时触发，detail 为所有选择实例的实例 ID

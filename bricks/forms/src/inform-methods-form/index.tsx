@@ -25,6 +25,7 @@ export class InformMethodsFormElement extends FormItemElement {
    * @description 表单项字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -32,6 +33,7 @@ export class InformMethodsFormElement extends FormItemElement {
    * @description 表单项字段说明
    */
   @property({ attribute: false }) label: string;
+
   /**
    * @kind boolean
    * @required false
@@ -39,6 +41,7 @@ export class InformMethodsFormElement extends FormItemElement {
    * @description 是否必填项
    */
   @property({ type: Boolean }) required: boolean;
+
   connectedCallback(): void {
     this.style.display = "block";
     this._render();

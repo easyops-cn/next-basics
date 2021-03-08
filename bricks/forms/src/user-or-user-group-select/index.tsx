@@ -36,6 +36,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -44,20 +45,6 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
    */
   @property({ attribute: false }) label: string;
 
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 下拉框占位说明
-   */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
   /**
    * @kind {selectedUser: string[],selectedUserGroup: string[]}|string[]
    * @required false
@@ -70,6 +57,22 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   value: string[] | UserOrUserGroupSelectValue;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 下拉框占位说明
+   */
+  @property({ attribute: false }) placeholder: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -79,28 +82,6 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
     type: Boolean,
   })
   hideAddMeQuickly: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否隐藏搜索 icon，即不支持通过 cmdb 的 modal 选择器选择
-   */
-  @property({
-    type: Boolean,
-  })
-  hideSelectByCMDB: boolean;
-
-  /**
-   * @kind `Record<string, any>`
-   * @required false
-   * @default -
-   * @description 是否隐藏搜索 icon，即不支持通过 cmdb 的 modal 选择器选择
-   */
-  @property({
-    attribute: false,
-  })
-  query: Record<string, any>;
 
   /**
    * @kind string[]
@@ -125,15 +106,6 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   mergeUseAndUserGroup: boolean;
 
   /**
-   * @kind CmdbModels.ModelCmdbObject
-   * @required true
-   * @default -
-   * @description 模型列表，直接来自"providers-of-cmdb.cmdb-object-api-get-object-all"
-   */
-  @property({ attribute: false })
-  objectList: Partial<CmdbModels.ModelCmdbObject>[];
-
-  /**
    * @kind "all"|"group"|"user"
    * @required false
    * @default "all"
@@ -147,9 +119,44 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
    * @required false
    * @default false
    * @description 隐藏无效用户
+   * @group advanced
    */
   @property({ type: Boolean })
   hideInvalidUser: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否隐藏搜索 icon，即不支持通过 cmdb 的 modal 选择器选择
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hideSelectByCMDB: boolean;
+
+  /**
+   * @kind `Record<string, any>`
+   * @required false
+   * @default -
+   * @description 是否隐藏搜索 icon，即不支持通过 cmdb 的 modal 选择器选择
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  query: Record<string, any>;
+
+  /**
+   * @kind CmdbModels.ModelCmdbObject
+   * @required true
+   * @default -
+   * @description 模型列表，直接来自"providers-of-cmdb.cmdb-object-api-get-object-all"
+   * @group advanced
+   */
+  @property({ attribute: false })
+  objectList: Partial<CmdbModels.ModelCmdbObject>[];
 
   /**
    * @detail `string[]|{selectedUser: string[],selectedUserGroup: string[]}`

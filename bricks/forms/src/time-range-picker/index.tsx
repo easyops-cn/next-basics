@@ -37,6 +37,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 */
 export class TimeRangePickerElement extends FormItemElement {
   private _defaultFormat = "HH:mm:ss";
+
   /**
    * @kind string
    * @required true
@@ -44,6 +45,7 @@ export class TimeRangePickerElement extends FormItemElement {
    * @description 字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -51,13 +53,7 @@ export class TimeRangePickerElement extends FormItemElement {
    * @description 字段说明
    */
   @property({ attribute: false }) label: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
+
   /**
    * @kind `TimeRange`
    * @required false
@@ -66,6 +62,14 @@ export class TimeRangePickerElement extends FormItemElement {
    */
   @property({ attribute: false })
   value: TimeRange;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
 
   /**
    * @kind `RangeType`

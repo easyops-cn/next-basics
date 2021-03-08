@@ -104,24 +104,6 @@ export class GridLayoutElement extends UpdatingElement {
 
   /**
    * @kind number
-   * @default 1
-   * @description 	网格布局行数，通常不需设置，各行高度由内容决定。设置为 > 1 时，各行高度相同。
-   */
-  @property({
-    type: Number,
-  })
-  rows: number;
-
-  /**
-   * @kind string
-   * @default -
-   * @description 	网格布局模板列，即 CSS 的 gridTemplateColumns，优先于 `columns`。
-   */
-  @property()
-  templateColumns: string;
-
-  /**
-   * @kind number
    * @default auto
    * @description 自己在父级网格中所占列数
    */
@@ -133,12 +115,30 @@ export class GridLayoutElement extends UpdatingElement {
   /**
    * @kind number
    * @default 1
+   * @description 	网格布局行数，通常不需设置，各行高度由内容决定。设置为 > 1 时，各行高度相同。
+   */
+  @property({
+    type: Number,
+  })
+  rows: number;
+
+  /**
+   * @kind number
+   * @default 1
    * @description 自己在父级网格中所占行数
    */
   @property({
     type: Number,
   })
   rowSpan: number;
+
+  /**
+   * @kind string
+   * @default -
+   * @description 	网格布局模板列，即 CSS 的 gridTemplateColumns，优先于 `columns`。
+   */
+  @property()
+  templateColumns: string;
 
   /**
    * @kind ResponsiveSettings

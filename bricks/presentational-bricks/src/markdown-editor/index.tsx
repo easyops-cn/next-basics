@@ -44,23 +44,6 @@ export class MarkdownEditorElement extends FormItemElement {
   UploadImage: EventEmitter<ImageInfo>;
 
   /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
-   * @description [已废弃]数据来源
-   */
-  @property({ attribute: false }) dataSource: Record<string, any>;
-
-  /**
-   * @kind { value?: string; }
-   * @required false
-   * @default -
-   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
-   */
-  @property({ attribute: false }) fields: {
-    value?: string;
-  };
-  /**
    * @kind string
    * @required false
    * @default -
@@ -98,6 +81,28 @@ export class MarkdownEditorElement extends FormItemElement {
    */
   @property()
   bucketName: string;
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description [已废弃]数据来源
+   * @deprecated
+   * @group advanced
+   */
+  @property({ attribute: false }) dataSource: Record<string, any>;
+
+  /**
+   * @kind { value?: string; }
+   * @required false
+   * @default -
+   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @description
+   * @group advanced
+   */
+  @property({ attribute: false }) fields: {
+    value?: string;
+  };
 
   connectedCallback(): void {
     // istanbul ignore else

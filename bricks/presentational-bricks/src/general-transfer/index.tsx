@@ -36,21 +36,6 @@ import { BrickWrapperConfig } from "../interfaces";
  */
 export class GeneralTransferElement extends UpdatingElement {
   /**
-   * @default -
-   * @required false
-   * @description 设置容器空状态时显示`empty`构件属性
-   */
-  @property({ attribute: false })
-  wrapperConfig: BrickWrapperConfig = {};
-
-  /**
-   * @detail string[]
-   * @description 右侧框数据的 key 集合
-   */
-  @event({ type: "general.transfer.change" })
-  generalTransferChange: EventEmitter<string[]>;
-
-  /**
    * @kind any[]
    * @required true
    * @default -
@@ -60,33 +45,6 @@ export class GeneralTransferElement extends UpdatingElement {
   dataSource: any[];
 
   /**
-   * @kind { key: string, title: string }
-   * @required false
-   * @default -
-   * @description 当 `dataSource` 中的每一项没有 key 或 title 字段时，须设置该属性。`key` 和 `title` 均须设置
-   */
-  @property({ attribute: false })
-  dataDescriptor: { [k in keyof TransferItem]: string };
-
-  /**
-   * @kind string[]
-   * @required false
-   * @default -
-   * @description 显示在右侧框数据的 key 集合
-   */
-  @property({ attribute: false })
-  targetKeys: string[] = [];
-
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 最多选择数，当 `dataSource` 个数大于该值时，不显示全勾选框
-   */
-  @property({ type: Number })
-  maxSelected: number;
-
-  /**
    * @kind CSSProperties
    * @required false
    * @default -
@@ -94,24 +52,6 @@ export class GeneralTransferElement extends UpdatingElement {
    */
   @property({ attribute: false })
   listStyle: React.CSSProperties;
-
-  /**
-   * @kind [string, string]
-   * @required false
-   * @default -
-   * @description 标题集合，顺序从左至右
-   */
-  @property({ attribute: false })
-  titles: string[];
-
-  /**
-   * @kind [string, string]
-   * @required false
-   * @default -
-   * @description 操作文案集合，顺序从上至下
-   */
-  @property({ attribute: false })
-  operations: string[];
 
   /**
    * @kind string[]
@@ -132,6 +72,15 @@ export class GeneralTransferElement extends UpdatingElement {
   disabled: boolean;
 
   /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最多选择数，当 `dataSource` 个数大于该值时，不显示全勾选框
+   */
+  @property({ type: Number })
+  maxSelected: number;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -141,10 +90,60 @@ export class GeneralTransferElement extends UpdatingElement {
   showSearch: boolean;
 
   /**
+   * @default -
+   * @required false
+   * @description 设置容器空状态时显示`empty`构件属性
+   * @group advanced
+   */
+  @property({ attribute: false })
+  wrapperConfig: BrickWrapperConfig = {};
+
+  /**
+   * @kind { key: string, title: string }
+   * @required false
+   * @default -
+   * @description 当 `dataSource` 中的每一项没有 key 或 title 字段时，须设置该属性。`key` 和 `title` 均须设置
+   * @group advanced
+   */
+  @property({ attribute: false })
+  dataDescriptor: { [k in keyof TransferItem]: string };
+
+  /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 显示在右侧框数据的 key 集合
+   * @group advanced
+   */
+  @property({ attribute: false })
+  targetKeys: string[] = [];
+
+  /**
+   * @kind [string, string]
+   * @required false
+   * @default -
+   * @description 标题集合，顺序从左至右
+   * @group advanced
+   */
+  @property({ attribute: false })
+  titles: string[];
+
+  /**
+   * @kind [string, string]
+   * @required false
+   * @default -
+   * @description 操作文案集合，顺序从上至下
+   * @group advanced
+   */
+  @property({ attribute: false })
+  operations: string[];
+
+  /**
    * @kind { itemUnit: string, itemsUnit: string, searchPlaceholder: string }
    * @required false
    * @default [DEFAULT_LOCALE](#default_locale)
    * @description 文案
+   * @group advanced
    */
   @property({ attribute: false })
   locale: Partial<TransferLocale>;
@@ -154,9 +153,17 @@ export class GeneralTransferElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 当选项发生转移时，是否需要实时发出 `general.transfer.change` 事件
+   * @group advanced
    */
   @property({ attribute: false })
   realTimeNotification = true;
+
+  /**
+   * @detail string[]
+   * @description 右侧框数据的 key 集合
+   */
+  @event({ type: "general.transfer.change" })
+  generalTransferChange: EventEmitter<string[]>;
 
   private realDataSource: TransferItem[];
   private previousTargetKeys: string[] = [];

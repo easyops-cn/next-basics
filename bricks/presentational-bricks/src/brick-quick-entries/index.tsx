@@ -55,23 +55,23 @@ export class BrickQuickEntriesElement extends UpdatingElement {
    * @kind number
    * @required false
    * @default 1
-   * @description 行数
-   */
-  @property({
-    attribute: false,
-  })
-  row = 1;
-
-  /**
-   * @kind number
-   * @required false
-   * @default 1
    * @description 列数
    */
   @property({
     attribute: false,
   })
   column = 1;
+
+  /**
+   * @kind number
+   * @required false
+   * @default 1
+   * @description 行数
+   */
+  @property({
+    attribute: false,
+  })
+  row = 1;
 
   /**
    * @kind LinkProps[]
@@ -83,16 +83,6 @@ export class BrickQuickEntriesElement extends UpdatingElement {
     attribute: false,
   })
   links: LinkProps[] = [];
-
-  /**
-   * @kind [UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)
-   * @required false
-   * @default -
-   * @description 使用的子构件配置（已废弃，请使用 useBrick 替代）
-   * @deprecated
-   */
-  @property({ attribute: false, __deprecated_and_for_compatibility_only: true })
-  useBricks: UseBrickConf;
 
   /**
    * @kind [UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)
@@ -128,6 +118,7 @@ export class BrickQuickEntriesElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 子项的容器的样式
+   * @group advanced
    */
   @property({ attribute: false })
   containerStyle: React.CSSProperties;
@@ -137,9 +128,21 @@ export class BrickQuickEntriesElement extends UpdatingElement {
    * @default "default"
    * @description （已废弃）值为 `multiCardGeneral`或 `multiCardNoLine`时为多卡片模式，`multiCardGeneral` 含分隔线，`multiCardNoLine` 无分隔线，样例见构件统计卡片 `general-charts.statistic-card`
    * @deprecated
+   * @group advanced
    */
   @property({ attribute: false })
   mode: "multiCardGeneral" | "multiCardNoLine" | "default" = "default";
+
+  /**
+   * @kind [UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)
+   * @required false
+   * @default -
+   * @description 使用的子构件配置（已废弃，请使用 useBrick 替代）
+   * @deprecated
+   * @group advanced
+   */
+  @property({ attribute: false, __deprecated_and_for_compatibility_only: true })
+  useBricks: UseBrickConf;
 
   connectedCallback(): void {
     // istanbul ignore else

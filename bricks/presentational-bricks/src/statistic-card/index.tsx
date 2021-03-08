@@ -35,14 +35,6 @@ export class StatisticCardElement extends UpdatingElement {
   @property({ attribute: false }) value: string | number;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description [已废弃]请使用 icon 代替
-   */
-  @property() iconType: string;
-
-  /**
    * @kind MenuIcon
    * @required false
    * @default -
@@ -51,43 +43,12 @@ export class StatisticCardElement extends UpdatingElement {
   @property({ attribute: false }) icon: MenuIcon | string;
 
   /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
-   * @description [已废弃]数据来源
-   */
-  @property({ attribute: false }) dataSource: Record<string, any>;
-
-  /**
-   * @kind {icon?: string; disabled?: string;tip?: string;url?: string;cardTitle?: string;value?: string;}
-   * @required false
-   * @default -
-   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段
-   */
-  @property({ attribute: false }) fields: {
-    icon?: string;
-    disabled?: string;
-    tip?: string;
-    url?: string;
-    cardTitle?: string;
-    value?: string;
-  };
-
-  /**
    * @kind string
    * @required false
    * @default -
    * @description 点击跳转的 url
    */
   @property() url: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description [已废弃]点击跳转 url，支持模版变量
-   */
-  @property() urlTemplate: string;
 
   /**
    * @kind string
@@ -112,6 +73,53 @@ export class StatisticCardElement extends UpdatingElement {
    * @description 是否用 Card 包裹
    */
   @property({ attribute: false }) showCard = true;
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description [已废弃]数据来源
+   * @deprecated
+   * @group advanced
+   */
+  @property({ attribute: false }) dataSource: Record<string, any>;
+
+  /**
+   * @kind {icon?: string; disabled?: string;tip?: string;url?: string;cardTitle?: string;value?: string;}
+   * @required false
+   * @default -
+   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段
+   * @deprecated
+   * @group advanced
+   */
+  @property({ attribute: false }) fields: {
+    icon?: string;
+    disabled?: string;
+    tip?: string;
+    url?: string;
+    cardTitle?: string;
+    value?: string;
+  };
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description [已废弃]点击跳转 url，支持模版变量
+   * @deprecated
+   * @group advanced
+   */
+  @property() urlTemplate: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description [已废弃]请使用 icon 代替
+   * @deprecated
+   * @group advanced
+   */
+  @property() iconType: string;
 
   connectedCallback(): void {
     // istanbul ignore else

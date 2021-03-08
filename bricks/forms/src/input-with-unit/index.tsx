@@ -37,6 +37,7 @@ export class InputWithUnitElement extends FormItemElement {
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -44,20 +45,7 @@ export class InputWithUnitElement extends FormItemElement {
    * @description 字段说明
    */
   @property({ attribute: false }) label: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 占位说明
-   */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
+
   /**
    * @kind number
    * @required false
@@ -66,6 +54,22 @@ export class InputWithUnitElement extends FormItemElement {
    */
   @property()
   value: number;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 占位说明
+   */
+  @property({ attribute: false }) placeholder: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
 
   /**
    * @kind string
@@ -101,6 +105,7 @@ export class InputWithUnitElement extends FormItemElement {
    * @required false
    * @default 0
    * @description 单位转换精确度；如果为 0，仅当整除时才转换
+   * @group advanced
    */
   @property({ type: Number })
   precision: number;
@@ -110,6 +115,7 @@ export class InputWithUnitElement extends FormItemElement {
    * @required false
    * @default -
    * @description 可使用单位列表
+   * @group advanced
    */
   @property({ attribute: false })
   availableUnits: string[];

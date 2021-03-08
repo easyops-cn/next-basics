@@ -31,6 +31,7 @@ export class GeneralTextAreaElement extends FormItemElement {
    * @description 下拉框字段名
    */
   @property({ attribute: false }) name: string;
+
   /**
    * @kind string
    * @required false
@@ -38,27 +39,7 @@ export class GeneralTextAreaElement extends FormItemElement {
    * @description 下拉框字段说明
    */
   @property({ attribute: false }) label: string;
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 下拉框占位说明
-   */
-  @property({ attribute: false }) placeholder: string;
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否必填项
-   */
-  @property({ type: Boolean }) required: boolean;
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
-   * @description 校验文本信息
-   */
-  @property({ attribute: false }) message: Record<string, string>;
+
   /**
    * @kind string
    * @required false
@@ -67,6 +48,41 @@ export class GeneralTextAreaElement extends FormItemElement {
    */
   @property()
   value: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 下拉框占位说明
+   */
+  @property({ attribute: false }) placeholder: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否禁用
+   */
+  @property({
+    type: Boolean,
+  })
+  disabled: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否必填项
+   */
+  @property({ type: Boolean }) required: boolean;
+
+  /**
+   * @kind `Record<string,string>`
+   * @required false
+   * @default -
+   * @description 校验文本信息
+   */
+  @property({ attribute: false }) message: Record<string, string>;
 
   /**
    * @kind `boolean / AutoSizeType`
@@ -99,16 +115,6 @@ export class GeneralTextAreaElement extends FormItemElement {
   })
   max: number;
 
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否禁用
-   */
-  @property({
-    type: Boolean,
-  })
-  disabled: boolean;
   /**
    * @detail `string`
    * @description 输入变化时被触发，`event.detail` 为当前值
