@@ -2115,10 +2115,10 @@
   resolved "https://registry.npm.taobao.org/@next-core/custom-antd-styles/download/@next-core/custom-antd-styles-1.6.5.tgz#6d78ab51d288f7dd7efd6d097e7c7f3358b498bb"
   integrity sha1-bXirUdKI991+/W0Jfnx/M1i0mLs=
 
-"@next-core/dev-dependencies@^1.2.57":
-  version "1.2.57"
-  resolved "https://registry.npm.taobao.org/@next-core/dev-dependencies/download/@next-core/dev-dependencies-1.2.57.tgz#e0e4cc971e56fd8ef87db99218aa670bc67122e9"
-  integrity sha1-4OTMlx5W/Y74fbmSGKpnC8ZxIuk=
+"@next-core/dev-dependencies@^1.2.58":
+  version "1.2.58"
+  resolved "https://registry.npm.taobao.org/@next-core/dev-dependencies/download/@next-core/dev-dependencies-1.2.58.tgz#3f6414cdc10ecc55b31698114be0e4ba6312143d"
+  integrity sha1-P2QUzcEOzFWzFpgRS+DkumMSFD0=
   dependencies:
     "@babel/core" "^7.13.8"
     "@next-core/babel-preset-next" "^0.6.23"
@@ -3793,7 +3793,7 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.12.3, antd@~4.12.3:
+antd@~4.12.3:
   version "4.12.3"
   resolved "https://registry.npm.taobao.org/antd/download/antd-4.12.3.tgz#b9f1401e4f2899a3b33c1953491775efbbaa4da3"
   integrity sha1-ufFAHk8omaOzPBlTSRd177uqTaM=

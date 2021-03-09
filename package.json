@@ -36,7 +36,7 @@
     "@next-core/brick-kit": "^2.35.3",
     "@next-core/brick-types": "^2.19.1",
     "@next-core/brick-utils": "^2.13.2",
-    "@next-core/dev-dependencies": "^1.2.57",
+    "@next-core/dev-dependencies": "^1.2.58",
     "@next-core/easyops-analytics": "^0.1.8",
     "@next-core/editor-bricks-helper": "^0.13.0",
     "@next-core/fontawesome-library": "^1.1.13",
@@ -58,7 +58,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-test-renderer": "^17.0.1",
     "@types/react-transition-group": "^4.4.1",
-    "antd": "^4.12.3",
+    "antd": "~4.12.3",
     "d3-drag": "^2.0.0",
     "d3-force": "^2.1.1",
     "d3-hierarchy": "^2.0.0",
@@ -88,5 +88,5 @@
     "lodash": "^4.17.20",
     "@next-core/brick-types": "^2.19.1"
   },
-  "easyops": { "dev-dependencies": "1.2.57" }
+  "easyops": { "dev-dependencies": "1.2.58" }
 }
