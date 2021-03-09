@@ -15,6 +15,6 @@ describe("AnyRouteEditor", () => {
       $$parsedProperties: {},
     });
     const wrapper = shallow(<AnyRouteEditor nodeUid={1} />);
-    expect(wrapper.find("div").text()).toBe("my-brick");
+    expect(wrapper.find(".name").text()).toBe("my-brick");
   });
 });
