@@ -64,5 +64,7 @@ describe("RoutesView", () => {
     expect(onRouteSelect).toBeCalled();
     wrapper.find("SearchComponent").invoke("onSearch")("detail");
     expect(wrapper.find(".matchedStr").length).toBe(2);
+    wrapper.find("SearchComponent").invoke("onSearch")(" ");
+    expect(wrapper.find(".matchedStr").length).toBe(0);
   });
 });
