@@ -38,7 +38,7 @@ export function RootNodeSelect(): React.ReactElement {
   };
 
   const route = (
-    <Menu>
+    <Menu data-override-theme="dark">
       <RoutesView
         contentStyle={{
           height: "400px",

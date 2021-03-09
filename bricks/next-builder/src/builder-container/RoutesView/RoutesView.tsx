@@ -52,19 +52,20 @@ export function RoutesView({
   const titleRender = (nodeData: BuilderRouteNode): React.ReactElement => {
     let title = <span>{nodeData.alias}</span>;
     if (q) {
-      const index = nodeData.alias
-        .toLowerCase()
-        .indexOf(q.trim().toLowerCase());
+      const trimQ = q.trim();
+      const index = nodeData.alias.toLowerCase().indexOf(trimQ.toLowerCase());
       if (index !== -1) {
         const [beforeStr, matchStr, afterStr] = [
           nodeData.alias.substr(0, index),
-          nodeData.alias.substr(index, q.length),
-          nodeData.alias.substr(index + q.length),
+          nodeData.alias.substr(index, trimQ.length),
+          nodeData.alias.substr(index + trimQ.length),
         ];
         title = (
           <span>
             {beforeStr}
-            <span className={styles.matchedStr}>{matchStr}</span>
+            {!!matchStr && (
+              <span className={styles.matchedStr}>{matchStr}</span>
+            )}
             {afterStr}
           </span>
         );
