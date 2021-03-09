@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.153.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.0...@next-bricks/forms@1.153.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* editor-bricks add smart display ([171026e](https://github.com/easyops-cn/next-basics/commit/171026e3689ec66d4193fb6339becb9bad76a3b5))
+
+
+
+
+
 # [1.153.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.152.0...@next-bricks/forms@1.153.0) (2021-03-05)
 
 

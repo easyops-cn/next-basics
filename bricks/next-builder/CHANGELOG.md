@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.27.0...@next-bricks/next-builder@1.28.0) (2021-03-09)
+
+
+### Bug Fixes
+
+* **builder-canvas:** fix context-menu ([31e3dba](https://github.com/easyops-cn/next-basics/commit/31e3dba5fc50ec7d08d5cd8166e6955284ae00f4))
+* **events-view:** refine events view ([66369cd](https://github.com/easyops-cn/next-basics/commit/66369cdad4b485b094997c3a79bf2bbf0f4308ea))
+* **route-node-select:** theme and search ([dfb4879](https://github.com/easyops-cn/next-basics/commit/dfb4879f833282385efda3ebc8419d98333b44ba))
+* refine search placeholder ([4b2828a](https://github.com/easyops-cn/next-basics/commit/4b2828a9eea1f3280e1457a824722bdfd86b2f57))
+
+
+### Features
+
+* consider lifeCycle as events ([06e4e44](https://github.com/easyops-cn/next-basics/commit/06e4e4483e0003a02e14068bbe8ce03738816521))
+
+
+
+
+
 # [1.27.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.26.0...@next-bricks/next-builder@1.27.0) (2021-03-05)
 
 

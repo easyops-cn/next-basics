@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.169.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.8...@next-bricks/presentational-bricks@1.169.9) (2021-03-09)
+
+
+### Bug Fixes
+
+* **brick-link:** 没有label时取消icon的margin ([bd3fab4](https://github.com/easyops-cn/next-basics/commit/bd3fab4cdfeaaeaeae126756a51c000215cb8924))
+* editor-bricks add smart display ([171026e](https://github.com/easyops-cn/next-basics/commit/171026e3689ec66d4193fb6339becb9bad76a3b5))
+
+
+
+
+
 ## [1.169.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.7...@next-bricks/presentational-bricks@1.169.8) (2021-03-05)
 
 
