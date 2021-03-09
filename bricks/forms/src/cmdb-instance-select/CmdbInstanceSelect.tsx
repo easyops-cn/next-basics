@@ -29,6 +29,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   isMultiLabel?: boolean;
   showSearchTip?: boolean;
   labelTemplate?: string;
+  disabled?: boolean;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -219,6 +220,7 @@ export function CmdbInstanceSelectItem(
         onSearch={debounceSearch}
         onFocus={fetchInstanceData}
         optionLabelProp="label"
+        disabled={props.disabled}
         dropdownRender={(menu) => {
           return (
             <div>
