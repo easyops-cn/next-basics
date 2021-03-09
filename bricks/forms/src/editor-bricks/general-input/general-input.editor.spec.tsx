@@ -18,9 +18,7 @@ describe("GeneralInputEditor", () => {
         placeholder: "请输入名称",
       },
     });
-    const wrapper = shallow(
-      <GeneralInputEditor nodeUid={1} brick="general-input" />
-    );
+    const wrapper = shallow(<GeneralInputEditor nodeUid={1} />);
 
     expect(wrapper.find(".placeholder").text()).toEqual("请输入名称");
     expect(wrapper.find(".formLabel").text()).toEqual("名称");

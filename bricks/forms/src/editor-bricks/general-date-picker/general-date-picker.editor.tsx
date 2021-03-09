@@ -20,13 +20,12 @@ interface GeneralDatePickerProperties extends FormItemProps {
 
 export function GeneralDatePickerEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralDatePickerProperties>({ nodeUid });
   const { label, required, placeholder } = node.$$parsedProperties;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div
           className={classNames(formSharedStyle.labelContainer, {

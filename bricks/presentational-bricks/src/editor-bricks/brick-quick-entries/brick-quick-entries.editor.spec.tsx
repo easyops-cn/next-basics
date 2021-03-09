@@ -14,9 +14,7 @@ describe("BrickQuickEntriesEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <BrickQuickEntriesEditor nodeUid={1} brick="brick-quick-entries" />
-    );
+    const wrapper = shallow(<BrickQuickEntriesEditor nodeUid={1} />);
     expect(wrapper.find(".row").length).toBe(1);
     expect(wrapper.find(".row").prop("style")).toMatchObject({
       gridTemplateColumns: "repeat(1, 1fr)",
@@ -35,9 +33,7 @@ describe("BrickQuickEntriesEditor", () => {
         row: 2,
       },
     });
-    const wrapper = shallow(
-      <BrickQuickEntriesEditor nodeUid={1} brick="brick-quick-entries" />
-    );
+    const wrapper = shallow(<BrickQuickEntriesEditor nodeUid={1} />);
     expect(wrapper.find(".row").length).toBe(2);
     expect(wrapper.find(".row").at(0).prop("style")).toMatchObject({
       gridTemplateColumns: "repeat(2, 1fr)",

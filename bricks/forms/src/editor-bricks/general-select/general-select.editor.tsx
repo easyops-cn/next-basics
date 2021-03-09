@@ -19,13 +19,12 @@ interface GeneralSelectProperties extends FormItemProps {
 
 export function GeneralSelectEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralSelectProperties>({ nodeUid });
   const { label, required, placeholder } = node.$$parsedProperties;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div
           className={classNames(formSharedStyle.labelContainer, {

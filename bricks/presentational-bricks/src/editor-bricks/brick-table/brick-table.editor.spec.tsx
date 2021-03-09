@@ -12,9 +12,7 @@ describe("BrickTableEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <BrickTableEditor nodeUid={1} brick="brick-table" />
-    );
+    const wrapper = shallow(<BrickTableEditor nodeUid={1} />);
     expect(wrapper.find(".row").length).toBe(3);
     expect(wrapper.find(".row").at(0).find(".cell").length).toBe(3);
   });
@@ -48,9 +46,7 @@ describe("BrickTableEditor", () => {
       },
     });
 
-    const wrapper = shallow(
-      <BrickTableEditor nodeUid={1} brick="brick-table" />
-    );
+    const wrapper = shallow(<BrickTableEditor nodeUid={1} />);
 
     expect(wrapper.find(".checkbox").length).toEqual(3);
     expect(wrapper.find(".head .cell").at(0).text()).toEqual("名称");

@@ -16,9 +16,7 @@ describe("GeneralButtonsEditor", () => {
         submitText: "提交",
       },
     });
-    const wrapper = shallow(
-      <GeneralButtonsEditor nodeUid={1} brick="general-buttons" />
-    );
+    const wrapper = shallow(<GeneralButtonsEditor nodeUid={1} />);
     expect(wrapper.find(".submitBtn").text()).toBe("提交");
   });
 
@@ -34,9 +32,7 @@ describe("GeneralButtonsEditor", () => {
         showCancelButton: true,
       },
     });
-    const wrapper = shallow(
-      <GeneralButtonsEditor nodeUid={1} brick="general-buttons" />
-    );
+    const wrapper = shallow(<GeneralButtonsEditor nodeUid={1} />);
     expect(wrapper.find(".cancelBtn").text()).toBe("取消");
   });
 });

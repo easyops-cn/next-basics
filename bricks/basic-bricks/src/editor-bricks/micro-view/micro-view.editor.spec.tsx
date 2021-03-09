@@ -14,7 +14,7 @@ describe("MicroViewEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(<MicroViewEditor nodeUid={1} brick="micro-view" />);
+    const wrapper = shallow(<MicroViewEditor nodeUid={1} />);
     expect(wrapper.find(".pageTitle.untitled").length).toBe(1);
   });
 
@@ -28,7 +28,7 @@ describe("MicroViewEditor", () => {
         pageTitle: "Hello World",
       },
     });
-    const wrapper = shallow(<MicroViewEditor nodeUid={1} brick="micro-view" />);
+    const wrapper = shallow(<MicroViewEditor nodeUid={1} />);
     expect(wrapper.find(".pageTitle.untitled").length).toBe(0);
     expect(wrapper.find(".pageTitle").text()).toBe("Hello World");
   });
@@ -43,7 +43,7 @@ describe("MicroViewEditor", () => {
         pageTitle: "<% I18N('HELLO_WORLD') %>",
       },
     });
-    const wrapper = shallow(<MicroViewEditor nodeUid={1} brick="micro-view" />);
+    const wrapper = shallow(<MicroViewEditor nodeUid={1} />);
     expect(wrapper.find(".pageTitle.untitled").length).toBe(0);
     expect(wrapper.find(".pageTitle").text()).toBe("HELLO_WORLD");
   });
@@ -58,7 +58,7 @@ describe("MicroViewEditor", () => {
         pageTitle: "<% CTX.pageTitle %>",
       },
     });
-    const wrapper = shallow(<MicroViewEditor nodeUid={1} brick="micro-view" />);
+    const wrapper = shallow(<MicroViewEditor nodeUid={1} />);
     expect(wrapper.find(".pageTitle.untitled").length).toBe(0);
     expect(wrapper.find(".pageTitle").text()).toBe("<% … %>");
   });

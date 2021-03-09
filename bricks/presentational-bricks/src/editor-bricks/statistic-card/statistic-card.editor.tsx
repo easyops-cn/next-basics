@@ -17,13 +17,12 @@ interface StatisticCardProperties {
 
 export function StatisticCardEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<StatisticCardProperties>({ nodeUid });
   const { cardTitle, value } = node.$$parsedProperties;
   const displayTitle = smartDisplayForEvaluableString(cardTitle, "", "<% … %>");
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={styles.card}>
         <div className={styles.description}>
           <div className={styles.value}>

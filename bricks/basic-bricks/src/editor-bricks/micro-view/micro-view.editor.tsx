@@ -19,7 +19,6 @@ interface MicroViewProperties {
 
 export function MicroViewEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<MicroViewProperties>({ nodeUid });
   const { pageTitle } = node.$$parsedProperties;
@@ -32,7 +31,6 @@ export function MicroViewEditor({
   return (
     <EditorContainer
       nodeUid={nodeUid}
-      brick={brick}
       type={EditorBrickType.TRANSPARENT_CONTAINER}
       editorContainerStyle={{
         height: "100%",

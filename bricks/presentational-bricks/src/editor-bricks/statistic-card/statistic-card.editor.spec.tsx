@@ -14,9 +14,7 @@ describe("StatisticCardEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <StatisticCardEditor nodeUid={1} brick="statistic-card" />
-    );
+    const wrapper = shallow(<StatisticCardEditor nodeUid={1} />);
     expect(wrapper.find(".valuePlaceholder").length).toBe(1);
     expect(wrapper.find(".titlePlaceholder").length).toBe(1);
   });
@@ -31,9 +29,7 @@ describe("StatisticCardEditor", () => {
         cardTitle: "Hello World",
       },
     });
-    const wrapper = shallow(
-      <StatisticCardEditor nodeUid={1} brick="statistic-card" />
-    );
+    const wrapper = shallow(<StatisticCardEditor nodeUid={1} />);
     expect(wrapper.find(".title").text()).toBe("Hello World");
   });
 
@@ -47,9 +43,7 @@ describe("StatisticCardEditor", () => {
         value: 99,
       },
     });
-    const wrapper = shallow(
-      <StatisticCardEditor nodeUid={1} brick="statistic-card" />
-    );
+    const wrapper = shallow(<StatisticCardEditor nodeUid={1} />);
     expect(wrapper.find(".value").text()).toBe("99");
   });
 });

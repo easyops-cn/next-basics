@@ -18,18 +18,13 @@ interface GeneralCardProperties {
 
 export function GeneralCardEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralCardProperties>({ nodeUid });
   const { cardTitle } = node.$$parsedProperties;
   const displayTitle = smartDisplayForEvaluableString(cardTitle, "", "<% … %>");
 
   return (
-    <EditorContainer
-      nodeUid={nodeUid}
-      brick={brick}
-      type={EditorBrickType.CONTAINER}
-    >
+    <EditorContainer nodeUid={nodeUid} type={EditorBrickType.CONTAINER}>
       <div className={styles.card}>
         {displayTitle && <div className={styles.cardHead}>{displayTitle}</div>}
         <div className={styles.cardBody}>

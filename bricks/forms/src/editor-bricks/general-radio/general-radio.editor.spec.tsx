@@ -14,9 +14,7 @@ describe("GeneralRadioEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <GeneralRadioEditor nodeUid={1} brick="general-radio" />
-    );
+    const wrapper = shallow(<GeneralRadioEditor nodeUid={1} />);
     expect(wrapper.find(".option").length).toEqual(3);
   });
 
@@ -30,9 +28,7 @@ describe("GeneralRadioEditor", () => {
         type: "button",
       },
     });
-    const wrapper = shallow(
-      <GeneralRadioEditor nodeUid={1} brick="general-radio" />
-    );
+    const wrapper = shallow(<GeneralRadioEditor nodeUid={1} />);
     expect(wrapper.find(".buttonOption").length).toEqual(3);
   });
 });

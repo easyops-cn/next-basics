@@ -14,9 +14,7 @@ describe("GridLayoutEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <GridLayoutEditor nodeUid={1} brick="grid-layout" />
-    );
+    const wrapper = shallow(<GridLayoutEditor nodeUid={1} />);
     expect(wrapper.find(helper.SlotContainer).prop("dropZoneBodyStyle")).toBe(
       undefined
     );
@@ -32,9 +30,7 @@ describe("GridLayoutEditor", () => {
         columns: 3,
       },
     });
-    const wrapper = shallow(
-      <GridLayoutEditor nodeUid={1} brick="grid-layout" />
-    );
+    const wrapper = shallow(<GridLayoutEditor nodeUid={1} />);
     expect(
       wrapper.find(helper.SlotContainer).prop("dropZoneBodyStyle")
     ).toEqual({
