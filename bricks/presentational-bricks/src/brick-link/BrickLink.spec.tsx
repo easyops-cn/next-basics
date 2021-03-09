@@ -20,11 +20,11 @@ describe("BrickLink", () => {
       />
     );
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find("a").text()).toEqual("aaa");
     wrapper.setProps({
       native: false,
     });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find("Link")).toBeTruthy();
   });
 
   it('target="_blank" should have external-link icon', () => {

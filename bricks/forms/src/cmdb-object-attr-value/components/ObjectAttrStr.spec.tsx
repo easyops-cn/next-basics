@@ -253,7 +253,7 @@ describe("ObjectAttrStr", () => {
     const popoverBtn = getByText("高级");
     fireEvent.click(popoverBtn);
     fireEvent.change(queryByTestId("start-value-input"), {
-      target: { value: null },
+      target: { value: -1 },
     });
     const confirmBtn = queryByTestId("start-value-confirm");
 

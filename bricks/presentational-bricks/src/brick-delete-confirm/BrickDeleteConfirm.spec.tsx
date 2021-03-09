@@ -18,7 +18,7 @@ describe("BrickDeleteConfirm", () => {
         loading={false}
       />
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(CardBody).prop("name")).toEqual("console-w");
   });
 
   it("should trigger onDelete when modal is ok", () => {
