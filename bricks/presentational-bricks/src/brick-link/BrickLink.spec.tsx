@@ -10,11 +10,11 @@ describe("BrickLink", () => {
       <BrickLink native={true} label="aaa" url="/url" tooltip="tips.." />
     );
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find("a").text()).toEqual("aaa");
     wrapper.setProps({
       native: false,
     });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find("Link").text()).toEqual("aaa");
   });
 
   it('target="_blank" should have external-link icon', () => {
