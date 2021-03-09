@@ -58,7 +58,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-test-renderer": "^17.0.1",
     "@types/react-transition-group": "^4.4.1",
-    "antd": "^4.12.3",
+    "antd": "~4.12.3",
     "d3-drag": "^2.0.0",
     "d3-force": "^2.1.1",
     "d3-hierarchy": "^2.0.0",
@@ -88,5 +88,5 @@
     "lodash": "^4.17.20",
     "@next-core/brick-types": "^2.19.1"
   },
-  "easyops": { "dev-dependencies": "1.2.57" }
+  "easyops": { "dev-dependencies": "1.2.58" }
 }
