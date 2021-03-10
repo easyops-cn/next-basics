@@ -38,6 +38,7 @@ export enum ToolboxTab {
 export enum BuilderDataType {
   ROUTE_OF_BRICKS = "route-of-bricks",
   ROUTE_OF_ROUTES = "route-of-routes",
+  ROUTE_OF_REDIRECT = "route-of-redirect",
   CUSTOM_TEMPLATE = "custom-template",
   UNKNOWN = "unknown",
 }

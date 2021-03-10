@@ -83,14 +83,17 @@ export function LegacyBuilderContainer(
         case "bricks":
           type = BuilderDataType.ROUTE_OF_BRICKS;
           break;
-        case "custom-template":
-          type = BuilderDataType.CUSTOM_TEMPLATE;
-          break;
         case "routes":
           type = BuilderDataType.ROUTE_OF_ROUTES;
           break;
+        case "redirect":
+          type = BuilderDataType.ROUTE_OF_REDIRECT;
+          break;
+        case "custom-template":
+          type = BuilderDataType.CUSTOM_TEMPLATE;
+          break;
         // Rest types are currently not supported,
-        // such as `"redirect"`.
+        // such as `"brick"`.
       }
     }
     if (type !== BuilderDataType.UNKNOWN) {
