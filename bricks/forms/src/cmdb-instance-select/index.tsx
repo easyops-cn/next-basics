@@ -220,6 +220,15 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    */
   @property({ attribute: false })
   labelTemplate: string;
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 是否禁用
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  disabled: boolean;
 
   updateObjectIdManual(objectId: string) {
     this.objectId = objectId;
@@ -279,6 +288,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             isMultiLabel={this.isMultiLabel}
             showSearchTip={this.showSearchTip}
             labelTemplate={this.labelTemplate}
+            disabled={this.disabled}
           />
         </BrickWrapper>,
         this
