@@ -10,23 +10,30 @@ import styles from "./StoryboardTreeView.module.css";
 export function StoryboardTreeView(): React.ReactElement {
   const groups = useBuilderGroupedChildNodes({ isRoot: true });
   const { dataType } = useBuilderUIContext();
-  const mountPoint =
-    dataType === BuilderDataType.ROUTE_OF_ROUTES ? "routes" : "bricks";
+  const showTreeNodes =
+    dataType === BuilderDataType.ROUTE_OF_BRICKS ||
+    dataType === BuilderDataType.CUSTOM_TEMPLATE;
+  const mountPoint = "bricks";
   const childNodes = React.useMemo(
     () =>
-      groups.find((group) => group.mountPoint === mountPoint)?.childNodes ?? [],
-    [groups, mountPoint]
+      showTreeNodes
+        ? groups.find((group) => group.mountPoint === mountPoint)?.childNodes ??
+          []
+        : [],
+    [groups, showTreeNodes]
   );
 
   return (
     <ToolboxPane title="Storyboard">
       <div className={styles.treeView}>
         <div className={styles.treeWrapper}>
-          <StoryboardTreeNodeList
-            level={1}
-            mountPoint={mountPoint}
-            childNodes={childNodes}
-          />
+          {showTreeNodes && (
+            <StoryboardTreeNodeList
+              level={1}
+              mountPoint={mountPoint}
+              childNodes={childNodes}
+            />
+          )}
         </div>
       </div>
     </ToolboxPane>

@@ -24,7 +24,6 @@ export function RoutesView({
   const routeTreeData = useMemo(() => {
     const result = generateRouteTree({
       data: routeList,
-      disableParentNodeSelectable: true,
     });
     return result;
   }, [routeList]);
