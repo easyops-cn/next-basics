@@ -20,3 +20,8 @@
     }
   }
 }
+
+.otherPanel {
+  /* hiden temporary */
+  display: none;
+}
