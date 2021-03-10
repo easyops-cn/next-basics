@@ -11,6 +11,11 @@ jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
     return <div>BuilderToolbox</div>;
   },
 }));
+jest.mock("./BuilderToolbar/BuilderToolbar", () => ({
+  BuilderToolbar() {
+    return <div>BuilderToolbar</div>;
+  },
+}));
 jest.mock("./BuilderCanvas/BuilderCanvas", () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { useBuilderUIContext } = require("./BuilderUIContext");

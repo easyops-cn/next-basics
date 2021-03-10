@@ -1,0 +1,33 @@
+.toolbarContainer {
+  height: var(--editor-brick-toolbar-height);
+  display: grid;
+  padding: 0 var(--page-card-gap);
+  align-items: center;
+  justify-content: space-between;
+  grid-auto-flow: column;
+  box-shadow: 0px 3px 10px 0px rgb(128 128 128 / 15%);
+  background: rgba(255, 255, 255, 1);
+}
+
+.tabLink {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition: none;
+  color: var(--text-color-default);
+}
+
+.toolbarRight {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+}
+
+.toolbarLeft {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+}

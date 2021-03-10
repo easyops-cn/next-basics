@@ -122,6 +122,21 @@ export class BuilderContainerElement extends UpdatingElement {
   private _routeSelectEmitter: EventEmitter<BuilderRouteNode>;
 
   @event({
+    type: "current.route.click",
+  })
+  private _currentRouteClickEmitter: EventEmitter<BuilderRouteNode>;
+
+  @event({
+    type: "project.buildAndPush",
+  })
+  private _buildAndPushEmitter: EventEmitter;
+
+  @event({
+    type: "project.preview",
+  })
+  private _previewEmitter: EventEmitter;
+
+  @event({
     type: "fullscreen.toggle",
   })
   private _fullscreenToggleEmitter: EventEmitter<{
@@ -232,6 +247,18 @@ export class BuilderContainerElement extends UpdatingElement {
     this._routeSelectEmitter.emit(route);
   };
 
+  private _handleCurrentRouteClick = (route: BuilderRouteNode): void => {
+    this._currentRouteClickEmitter.emit(route);
+  };
+
+  private _handleBuildAndPush = (): void => {
+    this._buildAndPushEmitter.emit();
+  };
+
+  private _handlePreview = (): void => {
+    this._previewEmitter.emit();
+  };
+
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
@@ -292,6 +319,9 @@ export class BuilderContainerElement extends UpdatingElement {
                 onSelectEventStreamNode={this._handleSelectEventsViewNode}
                 onContextUpdate={this._handleContextUpdate}
                 onRouteSelect={this._handleRouteSelect}
+                onCurrentRouteClick={this._handleCurrentRouteClick}
+                onBuildAndPush={this._handleBuildAndPush}
+                onPreview={this._handlePreview}
               />
             </DndProvider>
           </BuilderProvider>
