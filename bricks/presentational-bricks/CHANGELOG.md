@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.10...@next-bricks/presentational-bricks@1.170.0) (2021-03-10)
+
+
+### Features
+
+* **InfoDisplayCard:** infoDisplayCard支持titleBrick ([58d76da](https://github.com/easyops-cn/next-basics/commit/58d76da0006b4addf95a41ff84058b567c03e4a8))
+
+
+
+
+
 ## [1.169.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.9...@next-bricks/presentational-bricks@1.169.10) (2021-03-10)
 
 
