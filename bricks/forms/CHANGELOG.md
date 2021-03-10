@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.154.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.2...@next-bricks/forms@1.154.0) (2021-03-10)
+
+
+### Features
+
+* 实例选择器添加disabled属性 ([73d4ed6](https://github.com/easyops-cn/next-basics/commit/73d4ed60f59faaf634c428a930fc713b224e6631))
+
+
+
+
+
 ## [1.153.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.1...@next-bricks/forms@1.153.2) (2021-03-10)
 
 
