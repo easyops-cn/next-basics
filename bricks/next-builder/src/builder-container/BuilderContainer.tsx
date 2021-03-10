@@ -79,13 +79,19 @@ export function LegacyBuilderContainer(
     let rootNode: BuilderRouteOrBrickNode;
     if (dataSource?.length === 1) {
       rootNode = dataSource[0];
-      if (rootNode.type === "bricks") {
-        type = BuilderDataType.ROUTE;
-      } else if (rootNode.type === "custom-template") {
-        type = BuilderDataType.CUSTOM_TEMPLATE;
+      switch (rootNode.type) {
+        case "bricks":
+          type = BuilderDataType.ROUTE_OF_BRICKS;
+          break;
+        case "custom-template":
+          type = BuilderDataType.CUSTOM_TEMPLATE;
+          break;
+        case "routes":
+          type = BuilderDataType.ROUTE_OF_ROUTES;
+          break;
+        // Rest types are currently not supported,
+        // such as `"redirect"`.
       }
-      // Rest types are currently not supported,
-      // such as `"routes"` or `"redirect"`.
     }
     if (type !== BuilderDataType.UNKNOWN) {
       manager.dataInit(dataSource[0]);
@@ -161,7 +167,6 @@ export function LegacyBuilderContainer(
       >
         <BuilderToolbox
           brickList={brickList}
-          routeList={routeList}
           onContextUpdate={onContextUpdate}
         />
         <BuilderCanvas />

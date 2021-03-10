@@ -16,9 +16,7 @@ describe("GeneralTextareaEditor", () => {
         placeholder: "请输入文本内容",
       },
     });
-    const wrapper = shallow(
-      <GeneralTextareaEditor nodeUid={1} brick="general-textarea" />
-    );
+    const wrapper = shallow(<GeneralTextareaEditor nodeUid={1} />);
     expect(wrapper.find(".placeholder").text()).toBe("请输入文本内容");
   });
 });

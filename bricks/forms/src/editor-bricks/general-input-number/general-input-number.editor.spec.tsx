@@ -16,9 +16,7 @@ describe("GeneralInputNumberEditor", () => {
         placeholder: "请输入数字",
       },
     });
-    const wrapper = shallow(
-      <GeneralInputNumberEditor nodeUid={1} brick="general-input-number" />
-    );
+    const wrapper = shallow(<GeneralInputNumberEditor nodeUid={1} />);
     expect(wrapper.find(".placeholder").text()).toBe("请输入数字");
   });
 });

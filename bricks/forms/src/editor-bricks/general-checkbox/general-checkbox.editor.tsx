@@ -18,14 +18,13 @@ interface GeneralCheckboxProperties extends FormItemProps {}
 
 export function GeneralCheckboxEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralCheckboxProperties>({ nodeUid });
 
   const { required, label } = node.$$parsedProperties;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div
           className={classNames(formSharedStyle.labelContainer, {

@@ -7,7 +7,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { BuilderContextMenu } from "./BuilderContextMenu";
 import { ContextOfBuilderUI, useBuilderUIContext } from "../BuilderUIContext";
-import { ToolboxTab } from "../interfaces";
+import { BuilderDataType, ToolboxTab } from "../interfaces";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
@@ -17,6 +17,7 @@ const mockUseBuilderContextMenuStatus = useBuilderContextMenuStatus as jest.Mock
 >;
 
 const mockBuilderUIContext: ContextOfBuilderUI = {
+  dataType: BuilderDataType.ROUTE_OF_BRICKS,
   setToolboxTab: jest.fn(),
   setEventStreamNodeId: jest.fn(),
 };

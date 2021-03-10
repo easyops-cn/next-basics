@@ -5,23 +5,21 @@ import {
   FullscreenOutlined,
   PartitionOutlined,
   DatabaseOutlined,
-  BranchesOutlined,
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
+import { ContextConf } from "@next-core/brick-types";
 import { BrickLibrary } from "../BrickLibrary/BrickLibrary";
 import { BrickOptionItem, BuilderDataType, ToolboxTab } from "../interfaces";
 import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
-import { BuilderRouteNode, ContextConf } from "@next-core/brick-types";
 
 import styles from "./BuilderToolbox.module.css";
 
 export interface BuilderToolboxProps {
   brickList?: BrickOptionItem[];
-  routeList?: BuilderRouteNode[];
   onContextUpdate?: (context: ContextConf[]) => void;
 }
 
@@ -29,13 +27,13 @@ interface ToolboxTabConf {
   tab: ToolboxTab;
   icon: () => React.ReactElement;
   content: () => React.ReactElement;
+  availableDataTypes?: BuilderDataType[];
 }
 
 React.createElement;
 
 export function BuilderToolbox({
   brickList,
-  routeList,
   onContextUpdate,
 }: BuilderToolboxProps): React.ReactElement {
   const {
@@ -63,6 +61,10 @@ export function BuilderToolbox({
       content() {
         return <BrickLibrary brickList={brickList} />;
       },
+      availableDataTypes: [
+        BuilderDataType.ROUTE_OF_BRICKS,
+        BuilderDataType.CUSTOM_TEMPLATE,
+      ],
     },
     {
       tab: ToolboxTab.EVENTS_VIEW,
@@ -74,25 +76,26 @@ export function BuilderToolbox({
       content() {
         return <EventsView />;
       },
+      availableDataTypes: [
+        BuilderDataType.ROUTE_OF_BRICKS,
+        BuilderDataType.CUSTOM_TEMPLATE,
+      ],
     },
-    ...(dataType === BuilderDataType.ROUTE
-      ? [
-          {
-            tab: ToolboxTab.DATA_VIEW,
-            icon() {
-              return <DatabaseOutlined />;
-            },
-            content() {
-              return (
-                <DataView
-                  brickList={brickList}
-                  onContextUpdate={onContextUpdate}
-                />
-              );
-            },
-          },
-        ]
-      : []),
+    {
+      tab: ToolboxTab.DATA_VIEW,
+      icon() {
+        return <DatabaseOutlined />;
+      },
+      content() {
+        return (
+          <DataView brickList={brickList} onContextUpdate={onContextUpdate} />
+        );
+      },
+      availableDataTypes: [
+        BuilderDataType.ROUTE_OF_BRICKS,
+        BuilderDataType.ROUTE_OF_ROUTES,
+      ],
+    },
   ];
 
   return (
@@ -103,22 +106,26 @@ export function BuilderToolbox({
       data-override-theme="dark"
     >
       <ul className={styles.tabList}>
-        {tabList.map((tabConf) => (
-          <li
-            key={tabConf.tab}
-            className={classNames({
-              [styles.tabActive]: activeTab === tabConf.tab,
-            })}
-          >
-            <a
-              className={styles.tabLink}
-              role="button"
-              onClick={() => setActiveTab(tabConf.tab)}
-            >
-              {tabConf.icon()}
-            </a>
-          </li>
-        ))}
+        {tabList.map(
+          (tabConf) =>
+            (!tabConf.availableDataTypes ||
+              tabConf.availableDataTypes.includes(dataType)) && (
+              <li
+                key={tabConf.tab}
+                className={classNames({
+                  [styles.tabActive]: activeTab === tabConf.tab,
+                })}
+              >
+                <a
+                  className={styles.tabLink}
+                  role="button"
+                  onClick={() => setActiveTab(tabConf.tab)}
+                >
+                  {tabConf.icon()}
+                </a>
+              </li>
+            )
+        )}
         <li>
           <a
             className={`${styles.tabLink} ${styles.fullscreenToggle}`}

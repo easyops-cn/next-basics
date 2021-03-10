@@ -80,7 +80,7 @@ describe("BuilderContainer", () => {
     });
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
-      `BuilderCanvas(${BuilderDataType.ROUTE})`
+      `BuilderCanvas(${BuilderDataType.ROUTE_OF_BRICKS})`
     );
     wrapper.unmount();
     expect(mockRemoveListenersOfNodeAdd).toBeCalled();
@@ -117,7 +117,7 @@ describe("BuilderContainer", () => {
       <BuilderContainer
         dataSource={[
           {
-            type: "routes",
+            type: "redirect",
             path: "/home",
             id: "B-001",
           },

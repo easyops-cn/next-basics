@@ -14,9 +14,7 @@ describe("GeneralCardEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <GeneralCardEditor nodeUid={1} brick="general-card" />
-    );
+    const wrapper = shallow(<GeneralCardEditor nodeUid={1} />);
     expect(wrapper.find(helper.SlotContainer).prop("slotName")).toBe("content");
     expect(wrapper.find(".cardHead").length).toBe(0);
   });
@@ -31,9 +29,7 @@ describe("GeneralCardEditor", () => {
         cardTitle: "Hello World",
       },
     });
-    const wrapper = shallow(
-      <GeneralCardEditor nodeUid={1} brick="general-card" />
-    );
+    const wrapper = shallow(<GeneralCardEditor nodeUid={1} />);
     expect(wrapper.find(".cardHead").text()).toBe("Hello World");
   });
 
@@ -47,9 +43,7 @@ describe("GeneralCardEditor", () => {
         cardTitle: "<% I18N('HELLO_WORLD') %>",
       },
     });
-    const wrapper = shallow(
-      <GeneralCardEditor nodeUid={1} brick="general-card" />
-    );
+    const wrapper = shallow(<GeneralCardEditor nodeUid={1} />);
     expect(wrapper.find(".cardHead").text()).toBe("HELLO_WORLD");
   });
 
@@ -63,9 +57,7 @@ describe("GeneralCardEditor", () => {
         cardTitle: "<% CTX.cardTitle %>",
       },
     });
-    const wrapper = shallow(
-      <GeneralCardEditor nodeUid={1} brick="general-card" />
-    );
+    const wrapper = shallow(<GeneralCardEditor nodeUid={1} />);
     expect(wrapper.find(".cardHead").text()).toBe("<% … %>");
   });
 });

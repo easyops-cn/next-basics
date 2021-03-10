@@ -17,7 +17,7 @@ describe("UploadImgEditor", () => {
         label: "上传图片",
       },
     });
-    const wrapper = shallow(<UploadImgEditor nodeUid={1} brick="upload-img" />);
+    const wrapper = shallow(<UploadImgEditor nodeUid={1} />);
     expect(wrapper.find(".formLabel").text()).toBe("上传图片");
     expect(wrapper.find(PictureOutlined).length).toEqual(1);
   });

@@ -17,7 +17,6 @@ export enum DisplayType {
 
 export function AnyBrickEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode({ nodeUid });
 
@@ -36,7 +35,7 @@ export function AnyBrickEditor({
   }
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={`${styles.wrapper} ${styles[displayType]}`}>
         {icon && <div className={styles.icon}>{icon}</div>}
         <div className={styles.name}>{node.alias}</div>

@@ -14,7 +14,7 @@ describe("AnyBrickEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(<AnyBrickEditor nodeUid={1} brick="any-brick" />);
+    const wrapper = shallow(<AnyBrickEditor nodeUid={1} />);
     expect(wrapper.find(".wrapper").prop("className")).toContain("default");
     expect(wrapper.find(".icon").length).toBe(0);
     expect(wrapper.find(".name").text()).toBe("my-brick");
@@ -28,9 +28,7 @@ describe("AnyBrickEditor", () => {
       alias: "my-provider",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <AnyBrickEditor nodeUid={1} brick="any-provider" />
-    );
+    const wrapper = shallow(<AnyBrickEditor nodeUid={1} />);
     expect(wrapper.find(".wrapper").prop("className")).toContain("provider");
     expect(wrapper.find(".icon").length).toBe(1);
     expect(wrapper.find(".name").text()).toBe("my-provider");
@@ -45,9 +43,7 @@ describe("AnyBrickEditor", () => {
       alias: "my-provider",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <AnyBrickEditor nodeUid={1} brick="any-provider" />
-    );
+    const wrapper = shallow(<AnyBrickEditor nodeUid={1} />);
     expect(wrapper.find(".wrapper").prop("className")).toContain("provider");
     expect(wrapper.find(".icon").length).toBe(1);
     expect(wrapper.find(".name").text()).toBe("my-provider");
@@ -61,9 +57,7 @@ describe("AnyBrickEditor", () => {
       alias: "my-template",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <AnyBrickEditor nodeUid={1} brick="any-template" />
-    );
+    const wrapper = shallow(<AnyBrickEditor nodeUid={1} />);
     expect(wrapper.find(".wrapper").prop("className")).toContain("template");
     expect(wrapper.find(".icon").length).toBe(1);
     expect(wrapper.find(".name").text()).toBe("my-template");
@@ -78,7 +72,7 @@ describe("AnyBrickEditor", () => {
       portal: true,
       $$parsedProperties: {},
     });
-    const wrapper = shallow(<AnyBrickEditor nodeUid={1} brick="any-portal" />);
+    const wrapper = shallow(<AnyBrickEditor nodeUid={1} />);
     expect(wrapper.find(".wrapper").prop("className")).toContain("portal");
     expect(wrapper.find(".icon").length).toBe(1);
     expect(wrapper.find(".name").text()).toBe("my-portal");

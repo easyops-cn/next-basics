@@ -27,7 +27,6 @@ interface BrickTableProps {
 
 export function BrickTableEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<BrickTableProps>({ nodeUid });
   const {
@@ -39,7 +38,7 @@ export function BrickTableEditor({
   const columns = tableColumnsProps?.length || 3;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={styles.table}>
         {range(0, rows).map((rowIndex) => (
           <div

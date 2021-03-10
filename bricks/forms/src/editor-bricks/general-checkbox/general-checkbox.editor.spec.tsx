@@ -14,9 +14,7 @@ describe("GeneralCheckboxEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <GeneralCheckboxEditor nodeUid={1} brick="general-checkbox" />
-    );
+    const wrapper = shallow(<GeneralCheckboxEditor nodeUid={1} />);
     expect(wrapper.find(".option").length).toEqual(3);
   });
 });
