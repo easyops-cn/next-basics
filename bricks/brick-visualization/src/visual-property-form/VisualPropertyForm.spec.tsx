@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Tooltip } from "antd";
+import { Input, Tooltip, Empty } from "antd";
 import { mount, shallow } from "enzyme";
 import { VisualPropertyForm } from "./VisualPropertyForm";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
@@ -70,6 +70,30 @@ describe("VisualPropertyForm", () => {
     expect(wrapper.find(Tooltip).at(0).prop("title")).toEqual("名称");
     expect(wrapper.find(Tooltip).at(1).prop("title")).toEqual("提示");
     expect(wrapper.find(Tooltip).at(2).prop("title")).toEqual("数量");
+  });
+
+  it("should render empty status", () => {
+    const props = {
+      brickProperties: {
+        name: "lucy",
+        palceholder: "<% CTX.placeholder %>",
+        age: 123,
+        count: "<% CTX.count %>",
+        disabled: true,
+        required: "<% CTX.required %>",
+        value: ["a", "b", "c"],
+        fieds: "<%  CTX.fieds %>",
+        options: ["a", "b", "c"],
+        category: "<% CTX.category %>",
+      },
+      propertyTypeList: [],
+      emptyConfig: {
+        description: "no data",
+      },
+    } as any;
+
+    const wrapper = shallow(<VisualPropertyForm {...props} />);
+    expect(wrapper.find(Empty).render().text()).toEqual("no data");
   });
 
   it("should work with differnt mode", () => {

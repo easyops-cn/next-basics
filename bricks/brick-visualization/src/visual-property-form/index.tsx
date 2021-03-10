@@ -64,6 +64,17 @@ export class VisualPropertyFormElement extends UpdatingElement {
   brickInfo: VisualPropertyFormProps["brickInfo"];
 
   /**
+   * @kind emptyConfig
+   * @required -
+   * @default -
+   * @description 空状态配置
+   */
+  @property({
+    attribute: false,
+  })
+  emptyConfig: VisualPropertyFormProps["emptyConfig"];
+
+  /**
    * @description 表单验证成功时触发
    */
   @event({ type: "validate.success" }) successEvent: EventEmitter<
@@ -131,6 +142,7 @@ export class VisualPropertyFormElement extends UpdatingElement {
             propertyTypeList={this.propertyTypeList}
             brickProperties={this.brickProperties}
             brickInfo={this.brickInfo}
+            emptyConfig={this.emptyConfig}
             onValuesChange={this._handleValuesChange}
           />
         </BrickWrapper>,

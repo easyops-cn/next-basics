@@ -7,11 +7,13 @@ import {
   Select,
   Tooltip,
   Collapse,
+  Empty,
 } from "antd";
+import { EmptyProps } from "antd/lib/empty";
 import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import update from "immutability-helper";
-import { isNil, pick, upperFirst } from "lodash";
+import { isNil, pick, upperFirst, isEmpty } from "lodash";
 import styles from "./VisualPropertyForm.module.css";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
@@ -73,13 +75,20 @@ export interface VisualPropertyFormProps {
   brickInfo?: {
     type: "brick" | "provider" | "template";
   };
+  emptyConfig?: EmptyProps;
 }
 
 export function LegacyVisualPropertyForm(
   props: VisualPropertyFormProps,
   ref: React.Ref<visualFormUtils>
 ): React.ReactElement {
-  const { labelIcon, propertyTypeList, brickProperties, brickInfo } = props;
+  const {
+    labelIcon,
+    propertyTypeList,
+    brickProperties,
+    brickInfo,
+    emptyConfig,
+  } = props;
   const [form] = Form.useForm();
   const [typeList, setTypeList] = useState<UnionPropertyType[]>(
     mergeProperties(propertyTypeList, brickProperties)
@@ -300,7 +309,13 @@ export function LegacyVisualPropertyForm(
     }
   };
 
-  return (
+  return isEmpty(typeList) ? (
+    <Empty
+      description={emptyConfig?.description}
+      image={Empty.PRESENTED_IMAGE_SIMPLE}
+      imageStyle={emptyConfig?.imageStyle}
+    />
+  ) : (
     <Form
       name="propertyForm"
       layout="vertical"
@@ -322,6 +337,7 @@ export function LegacyVisualPropertyForm(
         })}
 
         <Collapse.Panel
+          className={styles.otherPanel}
           forceRender={true}
           header={upperFirst(OTHER_FORM_ITEM_FIELD)}
           key={OTHER_FORM_ITEM_FIELD}
