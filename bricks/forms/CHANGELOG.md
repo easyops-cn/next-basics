@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.153.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.1...@next-bricks/forms@1.153.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
+
+
+
+
+
 ## [1.153.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.0...@next-bricks/forms@1.153.1) (2021-03-09)
 
 

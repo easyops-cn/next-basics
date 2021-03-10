@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.28.0...@next-bricks/next-builder@1.29.0) (2021-03-10)
+
+
+### Features
+
+* **visual-builder:** support route nodes ([0a0c0b0](https://github.com/easyops-cn/next-basics/commit/0a0c0b0531a19a10f134594f56cbebabbda914d4))
+
+
+
+
+
 # [1.28.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.27.0...@next-bricks/next-builder@1.28.0) (2021-03-09)
 
 

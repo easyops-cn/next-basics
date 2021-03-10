@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.169.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.9...@next-bricks/presentational-bricks@1.169.10) (2021-03-10)
+
+
+### Bug Fixes
+
+* **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
+
+
+
+
+
 ## [1.169.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.8...@next-bricks/presentational-bricks@1.169.9) (2021-03-09)
 
 
