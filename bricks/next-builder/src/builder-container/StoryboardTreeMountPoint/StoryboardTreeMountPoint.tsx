@@ -9,6 +9,7 @@ import {
   BuilderGroupedChildNode,
   useCanDrop,
   useBuilderNode,
+  isRouteNode,
 } from "@next-core/editor-bricks-helper";
 import { StoryboardTreeNodeList } from "../StoryboardTreeNodeList/StoryboardTreeNodeList";
 import {
@@ -42,6 +43,10 @@ export function StoryboardTreeMountPoint({
         ?.childNodes ?? [],
     [siblingGroups, mountPoint]
   );
+  const isRouteMountPoint = React.useMemo(
+    () => childNodes[0] && isRouteNode(childNodes[0]),
+    [childNodes]
+  );
   const canDrop = useCanDrop();
 
   const [{ isDragging }, dragRef, draggingPreviewRef] = useDrag({
@@ -51,12 +56,12 @@ export function StoryboardTreeMountPoint({
     }),
   });
 
-  const [{ isDraggingMountPointOverCurrent }, mountPointDropRef] = useDrop({
+  const [{ mountPointMoveDirection }, mountPointDropRef] = useDrop({
     accept: StoryboardTreeTransferType.MOUNT_POINT,
     canDrop: (item: DraggingMountPointItem) =>
       item.nodeUid === nodeUid && item.mountPoint !== mountPoint,
     collect: (monitor) => ({
-      isDraggingMountPointOverCurrent:
+      mountPointMoveDirection:
         monitor.isOver({ shallow: true }) &&
         monitor.canDrop() &&
         getMountPointMoveDirection({
@@ -81,7 +86,11 @@ export function StoryboardTreeMountPoint({
 
   const [{ isDraggingNodeOverCurrent }, nodeDropRef] = useDrop({
     accept: StoryboardTreeTransferType.NODE,
-    canDrop: (item: DraggingNodeItem) => canDrop(item.nodeUid, nodeUid),
+    canDrop: (item: DraggingNodeItem) =>
+      canDrop(item.nodeUid, nodeUid) &&
+      (Number(isRouteMountPoint) ^
+        Number(isRouteNode({ type: item.nodeType } as any))) ===
+        0,
     collect: (monitor) => ({
       isDraggingNodeOverCurrent: monitor.isOver() && monitor.canDrop(),
     }),
@@ -107,11 +116,11 @@ export function StoryboardTreeMountPoint({
         styles.mountPoint,
         {
           [styles.dragging]: isDragging,
-          [styles.draggingMountPointOverCurrent]: !!isDraggingMountPointOverCurrent,
+          [styles.draggingMountPointOverCurrent]: !!mountPointMoveDirection,
           [styles.draggingNodeOverCurrent]: isDraggingNodeOverCurrent,
+          [styles.routeMountPoint]: isRouteMountPoint,
         },
-        isDraggingMountPointOverCurrent &&
-          styles[isDraggingMountPointOverCurrent]
+        mountPointMoveDirection && styles[mountPointMoveDirection]
       )}
       ref={(node) => draggingPreviewRef(mountPointDropRef(node))}
     >

@@ -33,6 +33,10 @@
   color: var(--theme-purple-color);
 }
 
+.route > .nodeNameWrapper > .icon {
+  color: var(--theme-cyan-color);
+}
+
 .dropCursor {
   display: none;
   position: absolute;

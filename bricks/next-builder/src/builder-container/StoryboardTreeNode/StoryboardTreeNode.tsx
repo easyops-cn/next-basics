@@ -3,7 +3,11 @@
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import classNames from "classnames";
-import { DatabaseFilled, MessageFilled } from "@ant-design/icons";
+import {
+  BranchesOutlined,
+  DatabaseFilled,
+  MessageFilled,
+} from "@ant-design/icons";
 import {
   useBuilderDataManager,
   useBuilderNode,
@@ -11,6 +15,7 @@ import {
   useBuilderParentNode,
   useCanDrop,
   useBuilderGroupedChildNodes,
+  isRouteNode,
 } from "@next-core/editor-bricks-helper";
 import { StoryboardTreeMountPoint } from "../StoryboardTreeMountPoint/StoryboardTreeMountPoint";
 import { treeViewPaddingUnit } from "../constants";
@@ -29,6 +34,7 @@ export enum DisplayType {
   DEFAULT = "default",
   PROVIDER = "provider",
   PORTAL = "portal",
+  ROUTE = "route",
 }
 
 export function StoryboardTreeNode({
@@ -55,6 +61,7 @@ export function StoryboardTreeNode({
       nodeUid,
       nodeId: node.id,
       nodeInstanceId: node.instanceId,
+      nodeType: node.type,
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -63,7 +70,11 @@ export function StoryboardTreeNode({
 
   const [{ isDraggingOverCurrent }, dropRef] = useDrop({
     accept: StoryboardTreeTransferType.NODE,
-    canDrop: (item: DraggingNodeItem) => canDrop(item.nodeUid, nodeUid),
+    canDrop: (item: DraggingNodeItem) =>
+      canDrop(item.nodeUid, nodeUid) &&
+      (Number(isRouteNode(node)) ^
+        Number(isRouteNode({ type: item.nodeType } as any))) ===
+        0,
     collect: (monitor) => ({
       isDraggingOverCurrent: monitor.isOver() && monitor.canDrop(),
     }),
@@ -103,6 +114,9 @@ export function StoryboardTreeNode({
   } else if (node.portal) {
     displayType = DisplayType.PORTAL;
     icon = <MessageFilled />;
+  } else if (isRouteNode(node)) {
+    displayType = DisplayType.ROUTE;
+    icon = <BranchesOutlined />;
   }
 
   return (

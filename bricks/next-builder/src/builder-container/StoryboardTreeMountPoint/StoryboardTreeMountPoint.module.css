@@ -18,6 +18,10 @@
   color: var(--antd-text-color-secondary);
 }
 
+.routeMountPoint > .slotNameWrapper > .slotName {
+  color: var(--theme-cyan-color);
+}
+
 .dropMountPointCursor,
 .dropNodeCursor {
   display: none;
