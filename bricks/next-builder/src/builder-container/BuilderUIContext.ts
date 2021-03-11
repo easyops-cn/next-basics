@@ -1,5 +1,5 @@
 import React from "react";
-import { BuilderDataType, ToolboxTab } from "./interfaces";
+import { BuilderClipboard, BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderRouteNode } from "@next-core/brick-types";
 
 export interface ContextOfBuilderUI {
@@ -11,6 +11,8 @@ export interface ContextOfBuilderUI {
   setToolboxTab?: React.Dispatch<React.SetStateAction<ToolboxTab>>;
   eventStreamNodeId?: string;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
+  clipboard?: BuilderClipboard;
+  setClipboard?: React.Dispatch<React.SetStateAction<BuilderClipboard>>;
   onRouteSelect?: (route: BuilderRouteNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;
   onBuildAndPush?: () => void;

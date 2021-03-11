@@ -15,14 +15,25 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
-import { BrickOptionItem, BuilderDataType, ToolboxTab } from "./interfaces";
-import { BuilderContextMenu } from "./BuilderContextMenu/BuilderContextMenu";
+import {
+  BrickOptionItem,
+  BuilderClipboard,
+  BuilderClipboardType,
+  BuilderDataType,
+  ToolboxTab,
+} from "./interfaces";
+import {
+  BuilderContextMenu,
+  BuilderContextMenuProps,
+} from "./BuilderContextMenu/BuilderContextMenu";
 import { BuilderUIContext } from "./BuilderUIContext";
 import { BuilderToolbar } from "./BuilderToolbar/BuilderToolbar";
+import { getBuilderClipboard } from "./getBuilderClipboard";
+import { defaultToolboxTab } from "./constants";
 
 import styles from "./BuilderContainer.module.css";
 
-export interface BuilderContainerProps {
+export interface BuilderContainerProps extends BuilderContextMenuProps {
   dataSource?: BuilderRouteOrBrickNode[];
   routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
@@ -30,14 +41,16 @@ export interface BuilderContainerProps {
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
   initialEventStreamNodeId?: string;
+  initialClipboardType?: BuilderClipboardType;
+  initialClipboardSource?: string;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
   onNodeClick?: (event: CustomEvent<BuilderRuntimeNode>) => void;
-  onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
   onToggleFullscreen?: (fullscreen?: boolean) => void;
   onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
   onSelectEventStreamNode?: (nodeId?: string) => void;
+  onClipboardChange?: (clipboard: BuilderClipboard) => void;
   onContextUpdate?: (context: ContextConf[]) => void;
   onRouteSelect?: (route: BuilderRouteNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;
@@ -54,6 +67,8 @@ export function LegacyBuilderContainer(
     initialFullscreen,
     initialToolboxTab,
     initialEventStreamNodeId,
+    initialClipboardType,
+    initialClipboardSource,
     onNodeAdd,
     onNodeReorder,
     onNodeMove,
@@ -62,6 +77,9 @@ export function LegacyBuilderContainer(
     onToggleFullscreen,
     onSwitchToolboxTab,
     onSelectEventStreamNode,
+    onClipboardChange,
+    onNodeCopyPaste,
+    onNodeCutPaste,
     onContextUpdate,
     onRouteSelect,
     onCurrentRouteClick,
@@ -71,11 +89,22 @@ export function LegacyBuilderContainer(
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
-  const [toolboxTab, setToolboxTab] = React.useState(initialToolboxTab);
+  const memoToolboxTab = React.useMemo(
+    () => initialToolboxTab ?? defaultToolboxTab,
+    [initialToolboxTab]
+  );
+  const [toolboxTab, setToolboxTab] = React.useState(memoToolboxTab);
   const [eventStreamNodeId, setEventStreamNodeId] = React.useState(
     initialEventStreamNodeId
   );
   const [dataType, setDataType] = React.useState<BuilderDataType>();
+  const memoClipboard = React.useMemo(
+    () => getBuilderClipboard(initialClipboardType, initialClipboardSource),
+    [initialClipboardType, initialClipboardSource]
+  );
+  const [clipboard, setClipboard] = React.useState<BuilderClipboard>(
+    memoClipboard
+  );
 
   const manager = useBuilderDataManager();
 
@@ -138,8 +167,8 @@ export function LegacyBuilderContainer(
   }, [fullscreen, onToggleFullscreen]);
 
   React.useEffect(() => {
-    setToolboxTab(initialToolboxTab);
-  }, [initialToolboxTab]);
+    setToolboxTab(memoToolboxTab);
+  }, [memoToolboxTab]);
 
   React.useEffect(() => {
     if (toolboxTab !== ToolboxTab.EVENTS_VIEW) {
@@ -156,6 +185,14 @@ export function LegacyBuilderContainer(
     onSelectEventStreamNode?.(eventStreamNodeId);
   }, [eventStreamNodeId, onSelectEventStreamNode]);
 
+  React.useEffect(() => {
+    setClipboard(memoClipboard);
+  }, [memoClipboard]);
+
+  React.useEffect(() => {
+    onClipboardChange?.(clipboard);
+  }, [clipboard, onClipboardChange]);
+
   return (
     <BuilderUIContext.Provider
       value={{
@@ -167,6 +204,8 @@ export function LegacyBuilderContainer(
         setToolboxTab,
         eventStreamNodeId,
         setEventStreamNodeId,
+        clipboard,
+        setClipboard,
         onRouteSelect,
         onCurrentRouteClick,
         onBuildAndPush,
@@ -187,7 +226,11 @@ export function LegacyBuilderContainer(
           <BuilderCanvas />
         </div>
       </div>
-      <BuilderContextMenu onAskForDeletingNode={onAskForDeletingNode} />
+      <BuilderContextMenu
+        onAskForDeletingNode={onAskForDeletingNode}
+        onNodeCopyPaste={onNodeCopyPaste}
+        onNodeCutPaste={onNodeCutPaste}
+      />
     </BuilderUIContext.Provider>
   );
 }
