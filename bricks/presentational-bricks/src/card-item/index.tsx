@@ -286,7 +286,7 @@ export class CardItemElement extends UpdatingElement {
   iconOpacity: number;
 
   /**
-   * @kind {text: string;field: string;value?: any;isNotEqual?: boolean;hideOperate?: boolean;}
+   * @kind {text: string;color:Color;triangle?:boolean;field: string;value?: any;isNotEqual?: boolean;hideOperate?: boolean;}
    * @required false
    * @default -
    * @description 右上角 tag 标签
@@ -300,6 +300,8 @@ export class CardItemElement extends UpdatingElement {
     value?: any;
     isNotEqual?: boolean; //增加下逻辑
     hideOperate?: boolean;
+    color?: Color;
+    triangle?: boolean;
   };
 
   /**
@@ -384,6 +386,24 @@ export class CardItemElement extends UpdatingElement {
     type: Boolean,
   })
   reverseBgColor: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 图片图标的src
+   */
+  @property({ attribute: false })
+  imgSrc: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否显示图片，默认显示图标，设置显示图片后，可配置 `imgSrc` 属性
+   */
+  @property({ type: Boolean })
+  showImg: boolean;
 
   constructor() {
     super();
@@ -485,7 +505,10 @@ export class CardItemElement extends UpdatingElement {
         iconOpacity: this.iconOpacity,
         showTag: false,
         hideOperate: false,
-        tagText: this.tagConfig && this.tagConfig.text,
+        tagText: this.tagConfig?.text,
+        tagColor: this.tagConfig?.color || "blue",
+        tagTriangle: this.tagConfig?.triangle !== false,
+        imgSrc: this.imgSrc
       };
       if (this.dataSource) {
         if (this.urlTemplate) {
@@ -535,6 +558,8 @@ export class CardItemElement extends UpdatingElement {
             showTag={mutableProps.showTag}
             hideOperate={mutableProps.hideOperate}
             tagText={mutableProps.tagText}
+            tagColor={mutableProps.tagColor}
+            tagTriangle={mutableProps.tagTriangle}
             descMaxLine={this.descMaxLine}
             hasOperateSlot={this.hasOperateSlot}
             hasBottomRightOperateSlot={this.hasBottomRightOperateSlot}
@@ -549,6 +574,8 @@ export class CardItemElement extends UpdatingElement {
             alwaysShowDescription={this.alwaysShowDescription}
             descriptionDataType={this.descriptionDataType}
             disabled={mutableProps.disabled}
+            imgSrc={mutableProps.imgSrc}
+            showImg={this.showImg}
           />
         </BrickWrapper>,
         this._mountPoint,
@@ -628,6 +655,7 @@ export class CardItemElement extends UpdatingElement {
       "iconOffsetY",
       "iconOpacity",
       "disabled",
+      "imgSrc"
     ]);
     forEach(pickFields, (fieldKey, field: string) => {
       set(mutableProps, field, get(this.dataSource, fieldKey));
