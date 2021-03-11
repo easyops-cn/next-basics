@@ -42,3 +42,30 @@ export enum BuilderDataType {
   CUSTOM_TEMPLATE = "custom-template",
   UNKNOWN = "unknown",
 }
+
+export type BuilderClipboard = BuilderClipboardOfCopy | BuilderClipboardOfCut;
+
+export interface BuilderClipboardOfCopy {
+  type: BuilderClipboardType.COPY;
+  sourceId: string;
+}
+
+export interface BuilderClipboardOfCut {
+  type: BuilderClipboardType.CUT;
+  sourceInstanceId: string;
+}
+
+export enum BuilderClipboardType {
+  CUT = "cut",
+  COPY = "copy",
+}
+
+export interface BuilderPasteDetailOfCopy {
+  sourceId: string;
+  targetId: string;
+}
+
+export interface BuilderPasteDetailOfCut {
+  sourceInstanceId: string;
+  targetInstanceId: string;
+}
