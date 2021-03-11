@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.2.1...@next-bricks/brick-visualization@1.2.2) (2021-03-11)
+
+
+### Bug Fixes
+
+* refine property form ([5f09466](https://github.com/easyops-cn/next-basics/commit/5f0946601416a3d38413d1ea90c8b3cc72c93321))
+
+
+
+
+
 ## [1.2.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.2.0...@next-bricks/brick-visualization@1.2.1) (2021-03-05)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization

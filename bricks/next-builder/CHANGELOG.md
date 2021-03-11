@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.29.1...@next-bricks/next-builder@1.30.0) (2021-03-11)
+
+
+### Features
+
+* **builder-container:** toolbar ([d0f43a0](https://github.com/easyops-cn/next-basics/commit/d0f43a01aec5b20bf121c22d4c986915a252230b))
+
+
+
+
+
 ## [1.29.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.29.0...@next-bricks/next-builder@1.29.1) (2021-03-10)
 
 
