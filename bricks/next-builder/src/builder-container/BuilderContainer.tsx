@@ -18,6 +18,7 @@ import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 import { BrickOptionItem, BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderContextMenu } from "./BuilderContextMenu/BuilderContextMenu";
 import { BuilderUIContext } from "./BuilderUIContext";
+import { BuilderToolbar } from "./BuilderToolbar/BuilderToolbar";
 
 import styles from "./BuilderContainer.module.css";
 
@@ -39,6 +40,9 @@ export interface BuilderContainerProps {
   onSelectEventStreamNode?: (nodeId?: string) => void;
   onContextUpdate?: (context: ContextConf[]) => void;
   onRouteSelect?: (route: BuilderRouteNode) => void;
+  onCurrentRouteClick?: (route: BuilderRouteNode) => void;
+  onBuildAndPush?: () => void;
+  onPreview?: () => void;
 }
 
 export function LegacyBuilderContainer(
@@ -60,6 +64,9 @@ export function LegacyBuilderContainer(
     onSelectEventStreamNode,
     onContextUpdate,
     onRouteSelect,
+    onCurrentRouteClick,
+    onBuildAndPush,
+    onPreview,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -161,6 +168,9 @@ export function LegacyBuilderContainer(
         eventStreamNodeId,
         setEventStreamNodeId,
         onRouteSelect,
+        onCurrentRouteClick,
+        onBuildAndPush,
+        onPreview,
       }}
     >
       <div
@@ -172,7 +182,10 @@ export function LegacyBuilderContainer(
           brickList={brickList}
           onContextUpdate={onContextUpdate}
         />
-        <BuilderCanvas />
+        <div className={styles.builderWrapper}>
+          <BuilderToolbar />
+          <BuilderCanvas />
+        </div>
       </div>
       <BuilderContextMenu onAskForDeletingNode={onAskForDeletingNode} />
     </BuilderUIContext.Provider>

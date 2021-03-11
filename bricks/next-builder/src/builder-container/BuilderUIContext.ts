@@ -12,6 +12,9 @@ export interface ContextOfBuilderUI {
   eventStreamNodeId?: string;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
   onRouteSelect?: (route: BuilderRouteNode) => void;
+  onCurrentRouteClick?: (route: BuilderRouteNode) => void;
+  onBuildAndPush?: () => void;
+  onPreview?: () => void;
 }
 
 export const BuilderUIContext = React.createContext<ContextOfBuilderUI>({});

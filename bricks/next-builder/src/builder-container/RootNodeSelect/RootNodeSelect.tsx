@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  BlockOutlined,
-  BranchesOutlined,
-  DownOutlined,
-} from "@ant-design/icons";
+import { BlockOutlined, DownOutlined } from "@ant-design/icons";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { Dropdown, Button, Menu } from "antd";
 import { RoutesView } from "../RoutesView/RoutesView";
@@ -38,7 +34,7 @@ export function RootNodeSelect(): React.ReactElement {
   };
 
   const route = (
-    <Menu data-override-theme="dark">
+    <Menu>
       <RoutesView
         contentStyle={{
           height: "400px",
@@ -59,11 +55,11 @@ export function RootNodeSelect(): React.ReactElement {
     >
       <Button
         onClick={handleRouteClick}
-        size="small"
+        type="text"
         className={styles.rootNodeWrapper}
       >
-        <BranchesOutlined />{" "}
-        <span className={styles.alias}>{rootNode.alias}</span> <DownOutlined />
+        <span className={styles.alias}>{rootNode.alias}</span>{" "}
+        <DownOutlined className={styles.downIcon} />
       </Button>
     </Dropdown>
   );
