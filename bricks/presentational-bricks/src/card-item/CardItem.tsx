@@ -103,27 +103,24 @@ export function CardItem(props: CardItemProps): React.ReactElement {
 
   const topRightTag = (
     <>
-      { props.showTag && 
-        <div className={classNames(
-          "cardTag", 
-          props.tagColor,
-          {
-            "tagTriangle": props.tagTriangle
-          })}>
+      {props.showTag && (
+        <div
+          className={classNames("cardTag", props.tagColor, {
+            tagTriangle: props.tagTriangle,
+          })}
+        >
           {props.tagText}
         </div>
-      }
+      )}
     </>
-  )
+  );
 
   const avatarImg = (size: number): React.ReactElement => (
-    <span
-      className="iconContainer"
-      style={{ border: "1px solid #d9d9d9", borderRadius: "50%" }}
-    >
+    <span className="iconContainer">
       <Avatar
         src={props.imgSrc}
         size={size}
+        style={{ border: "1px solid #d9d9d9", borderRadius: "50%" }}
       />
     </span>
   );
@@ -272,7 +269,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     >
       {topRightTag}
       <div className="cardHeaderContainer">
-        {props.showImg?avatarImg(40):avatarIcon(40)}
+        {props.showImg ? avatarImg(40) : avatarIcon(40)}
         <div className="titleWrapper">
           {titleWithOperateArea}
           {props.cardSubtitle && subtitle}
@@ -302,7 +299,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
           {cardTitle}
           {(!isNil(descriptionList) || alwaysShowDescription) && description()}
         </div>
-        {props.showImg?avatarImg(70):avatarIcon(70)}
+        {props.showImg ? avatarImg(70) : avatarIcon(70)}
       </div>
       {bottomOperateArea}
     </Card>
@@ -324,7 +321,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     >
       {topRightTag}
       <div className="cardHeaderContainer">
-        {props.showImg?avatarImg(54):avatarIcon(54)}
+        {props.showImg ? avatarImg(54) : avatarIcon(54)}
         <div className="titleWrapper">
           {titleWithOperateArea}
           {props.cardSubtitle && subtitle}
@@ -352,7 +349,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       {topRightTag}
       <div className="cardHeaderContainer">
         {topRightOperateArea}
-        {props.showImg?avatarImg(54):avatarIcon(48)}
+        {props.showImg ? avatarImg(54) : avatarIcon(48)}
       </div>
       {cardTitle}
       {(!isNil(descriptionList) || alwaysShowDescription) && description(20)}

@@ -593,13 +593,13 @@ export const CardItemStory: Story = {
       brick: "presentational-bricks.card-item",
       description: {
         title: "可配置角标和图片图标",
-        message: "角标可选颜色 `tagConfig.color` 以及文字 `tagConfig.text` 等信息。图片图标需要配置 `showImg` 和对应的图片资源地址 `imgSrc`",
+        message:
+          "角标可选颜色 `tagConfig.color` 以及文字 `tagConfig.text` 等信息。图片图标需要配置 `showImg` 和对应的图片资源地址 `imgSrc`",
       },
       properties: {
         style: {
           width: "300px",
         },
-        reverseBgColor: true,
         cardLayoutType: "icon-align-middle",
         urlTemplate: "/#{id}",
         fields: {
@@ -615,10 +615,11 @@ export const CardItemStory: Story = {
         tagConfig: {
           text: "已审批",
           color: "blue",
-          triangle: false
+          triangle: false,
         },
         showImg: true,
-        imgSrc: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        imgSrc:
+          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
       },
       slots: {
         operate: {
