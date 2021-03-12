@@ -357,6 +357,30 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     </Card>
   );
 
+  // CardLayoutType.BLOCK_ICON_ALIGN_LEFT
+  const cardNodeF = (
+    <Card
+      hoverable={hoverable}
+      className={classNames("cardItem", "cardItemF", {
+        noBordered: !bordered,
+        noHover: !hoverable || props.disabled,
+        disabledCard: props.disabled,
+      })}
+      bodyStyle={{ padding: "28px" }}
+      {...configProps}
+      bordered={bordered}
+    >
+      {topRightTag}
+      <div className="cardHeaderContainer">
+        {topRightOperateArea}
+        {props.showImg ? avatarImg(54) : avatarIcon(48)}
+      </div>
+      {cardTitle}
+      {(!isNil(descriptionList) || alwaysShowDescription) && description(20)}
+      {bottomLeftOperateArea}
+    </Card>
+  );
+
   const getCardNode = (): ReactElement => {
     switch (cardLayoutType) {
       case CardLayoutType.ICON_AS_BACKGROUND:
@@ -369,6 +393,8 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         return cardNodeD;
       case CardLayoutType.ICON_ALIGN_MIDDLE:
         return cardNodeE;
+      case CardLayoutType.BLOCK_ICON_ALIGN_LEFT:
+        return cardNodeF;
     }
   };
 

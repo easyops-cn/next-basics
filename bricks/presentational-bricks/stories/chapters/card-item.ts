@@ -600,7 +600,7 @@ export const CardItemStory: Story = {
         style: {
           width: "300px",
         },
-        cardLayoutType: "icon-align-middle",
+        cardLayoutType: "block-icon-align-left",
         urlTemplate: "/#{id}",
         fields: {
           cardTitle: "name",

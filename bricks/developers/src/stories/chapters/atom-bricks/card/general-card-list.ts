@@ -657,7 +657,7 @@ export const story: Story = {
       },
       template: "general-list.general-card-list",
       params: {
-        cardLayoutType: "icon-align-middle",
+        cardLayoutType: "block-icon-align-left",
         showPagination: false,
         fields: {
           cardTitle: "title",
