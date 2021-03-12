@@ -30,7 +30,7 @@ export class MultipleColumnsCardElement extends UpdatingElement {
 
   /**
    * @kind string
-   * @required true
+   * @required false
    * @default 是否显示卡片边框
    * @description -
    */
