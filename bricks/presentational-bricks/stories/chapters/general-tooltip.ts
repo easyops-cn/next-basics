@@ -52,6 +52,43 @@ export const GeneralTooltipStory: Story = {
         content: ["名称：APP", "创建时间：2019-12-21", "修改时间: 2020-02-21"],
       },
     },
+    {
+      description: {
+        title: "使用displayBrick自定义展示内容",
+      },
+      brick: "presentational-bricks.general-tooltip",
+      properties: {
+        displayBrick: {
+          useBrick: {
+            brick: "presentational-bricks.brick-value-mapping",
+            properties: {
+              mapping: {
+                "0": {
+                  color: "red",
+                  text: "紧急",
+                },
+              },
+              showTagCircle: true,
+              value: 0,
+            },
+          },
+        },
+        content: "这是一个 tooltips",
+        type: "tooltip",
+      },
+    },
+    {
+      description: {
+        title: "在整体内容上hover时显示tooltip",
+      },
+      brick: "presentational-bricks.general-tooltip",
+      properties: {
+        content: "这是一个 tooltips",
+        text: "文案信息",
+        type: "tooltip",
+        triggerByIcon: false,
+      },
+    },
   ],
   previewColumns: 2,
 };
