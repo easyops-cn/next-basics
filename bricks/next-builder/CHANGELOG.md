@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.30.0...@next-bricks/next-builder@1.31.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* **builder:** fix canvas style that caused events view not working ([7a47df1](https://github.com/easyops-cn/next-basics/commit/7a47df1701df24729d32d9e85f5a9459db29747a))
+* **builder:** handle root nodes ([4b9ca4b](https://github.com/easyops-cn/next-basics/commit/4b9ca4bc76b44976b689f5c5dfa41e2ac8ced67f))
+* **builder:** show events view in context menu only for brick nodes ([02a9c7a](https://github.com/easyops-cn/next-basics/commit/02a9c7a7973f52a00a76e1639e6184109afb0cb5))
+
+
+### Features
+
+* **builder:** support to copy, cut and paste nodes ([41815f3](https://github.com/easyops-cn/next-basics/commit/41815f3a26fb8a3a6e231db77bca13e3df7f5595))
+
+
+
+
+
 # [1.30.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.29.1...@next-bricks/next-builder@1.30.0) (2021-03-11)
 
 

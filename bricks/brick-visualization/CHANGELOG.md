@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.2.2...@next-bricks/brick-visualization@1.3.0) (2021-03-12)
+
+
+### Features
+
+* extract common properties ([b8d0bd2](https://github.com/easyops-cn/next-basics/commit/b8d0bd2c0b425d10ffbcc0c017ceb86f20983134))
+
+
+
+
+
 ## [1.2.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.2.1...@next-bricks/brick-visualization@1.2.2) (2021-03-11)
 
 

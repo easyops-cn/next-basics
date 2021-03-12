@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.340.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.339.3...@next-bricks/developers@1.340.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* **card-item:** style & demo ([4595684](https://github.com/easyops-cn/next-basics/commit/4595684aeed98623f3c96a57794d593a296a556e))
+
+
+### Features
+
+* **card-item:** block-icon-align-left ([20a7335](https://github.com/easyops-cn/next-basics/commit/20a7335dd752a9bfac7277ea81c9210feebec375))
+
+
+
+
+
 ## [1.339.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.339.2...@next-bricks/developers@1.339.3) (2021-02-26)
 
 
