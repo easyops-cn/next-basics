@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.31.0...@next-bricks/next-builder@1.32.0) (2021-03-12)
+
+
+### Features
+
+* show children in any-brick--editor ([7f8d6da](https://github.com/easyops-cn/next-basics/commit/7f8d6da9267b7db2395e3df23829d10a71b7bd38))
+
+
+
+
+
 # [1.31.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.30.0...@next-bricks/next-builder@1.31.0) (2021-03-12)
 
 
