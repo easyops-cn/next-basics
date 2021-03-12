@@ -5,6 +5,7 @@ import {
   processFormValue,
   groupByType,
   isUseYamlParse,
+  extractCommonProps,
 } from "./processor";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -256,6 +257,43 @@ describe("processor test", () => {
       [{ key: "others", value: "label: name\nvalue: tester\n" }, [], true],
     ])("%s and %p should return %s", (field, typeList, result) => {
       expect(isUseYamlParse(field, typeList)).toEqual(result);
+    });
+  });
+
+  describe("extractCommonProps", () => {
+    it("should extra common properties", () => {
+      const typeList = [
+        {
+          name: "name",
+          type: "stirng",
+          description: "名称",
+        },
+        {
+          name: "age",
+          type: "number",
+          description: "年龄",
+        },
+      ];
+
+      const result = extractCommonProps(typeList);
+      expect(result).toEqual([
+        { name: "id", type: "string", description: "构件 ID" },
+        {
+          name: "name",
+          type: "stirng",
+          description: "名称",
+        },
+        {
+          name: "age",
+          type: "number",
+          description: "年龄",
+        },
+      ]);
+    });
+
+    it("should return empty array if typeList is empty", () => {
+      const result = extractCommonProps([]);
+      expect(result).toEqual([]);
     });
   });
 });

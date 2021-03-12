@@ -3,10 +3,14 @@ import {
   UnionPropertyType,
   BrickProperties,
   ItemModeType,
-} from "./VisualPropertyForm";
+} from "../interfaces";
 import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
-import { omit, isEmpty, groupBy } from "lodash";
-import { supportBasicType, OTHER_FORM_ITEM_FIELD } from "./constant";
+import _, { omit, isEmpty, groupBy } from "lodash";
+import {
+  supportBasicType,
+  OTHER_FORM_ITEM_FIELD,
+  commonProps,
+} from "./constant";
 
 export function isAdvanceMode(value: unknown): boolean {
   if (
@@ -130,4 +134,10 @@ export function groupByType(
   typeList?: UnionPropertyType[]
 ): Array<[string, UnionPropertyType[]]> {
   return Object.entries(groupBy(typeList, (item) => item.group || "basic"));
+}
+
+export function extractCommonProps(typeList: PropertyType[]): PropertyType[] {
+  if (isEmpty(typeList)) return [];
+
+  return commonProps.concat(typeList);
 }
