@@ -1,8 +1,9 @@
 .builderCanvas {
   flex: auto;
+  min-height: 0;
   background-color: #fff;
   color: rgba(0, 0, 0, 0.85);
-  margin-left: var(--page-card-gap);
+  margin: var(--page-card-gap) 0 0 var(--page-card-gap);
   border-radius: var(--editor-brick-border-radius);
 }
 
