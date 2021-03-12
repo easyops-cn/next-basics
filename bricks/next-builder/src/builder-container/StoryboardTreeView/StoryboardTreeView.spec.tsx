@@ -9,7 +9,6 @@ jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderGroupedChildNodes: jest.fn(),
 }));
 jest.mock("../BuilderUIContext");
-
 jest.mock("../ToolboxPane/ToolboxPane");
 jest.mock("../StoryboardTreeNodeList/StoryboardTreeNodeList");
 
@@ -20,6 +19,28 @@ describe("StoryboardTreeView", () => {
   it("should work for route of bricks", () => {
     mockUseBuilderUIContext.mockReturnValueOnce({
       dataType: BuilderDataType.ROUTE_OF_BRICKS,
+    });
+    mockUseBuilderGroupedChildNodes.mockReturnValueOnce([
+      {
+        mountPoint: "bricks",
+        childNodes: [
+          {
+            $$uid: 1,
+          },
+        ],
+      },
+    ]);
+    const wrapper = shallow(<StoryboardTreeView />);
+    expect(wrapper.find("StoryboardTreeNodeList").prop("childNodes")).toEqual([
+      {
+        $$uid: 1,
+      },
+    ]);
+  });
+
+  it("should work for custom template", () => {
+    mockUseBuilderUIContext.mockReturnValueOnce({
+      dataType: BuilderDataType.CUSTOM_TEMPLATE,
     });
     mockUseBuilderGroupedChildNodes.mockReturnValueOnce([
       {

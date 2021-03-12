@@ -1,3 +1,5 @@
+import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
+
 export interface BrickOptionItem {
   type: "brick" | "template" | "customTemplate" | "provider";
   name: string;
@@ -20,6 +22,7 @@ export interface DraggingNodeItem {
   nodeUid: number;
   nodeId: string;
   nodeInstanceId: string;
+  nodeType: Pick<BuilderRouteOrBrickNode, "type">;
 }
 
 export interface DraggingMountPointItem {
