@@ -589,5 +589,71 @@ export const CardItemStory: Story = {
         },
       },
     },
+    {
+      brick: "presentational-bricks.card-item",
+      description: {
+        title: "可配置角标和图片图标",
+        message: "角标可选颜色 `tagConfig.color` 以及文字 `tagConfig.text` 等信息。图片图标需要配置 `showImg` 和对应的图片资源地址 `imgSrc`",
+      },
+      properties: {
+        style: {
+          width: "300px",
+        },
+        reverseBgColor: true,
+        cardLayoutType: "icon-align-middle",
+        urlTemplate: "/#{id}",
+        fields: {
+          cardTitle: "name",
+          descriptionList: "descriptionList",
+        },
+        dataSource: {
+          id: "1",
+          name: "标题在这里",
+          descriptionList:
+            "http://chphl pgkk boli faa iihall/15 55 5onetab.html",
+        },
+        tagConfig: {
+          text: "已审批",
+          color: "blue",
+          triangle: false
+        },
+        showImg: true,
+        imgSrc: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      },
+      slots: {
+        operate: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              properties: {
+                buttonName: "编辑",
+                buttonIcon: "edit",
+                buttonSize: "small",
+              },
+              events: {
+                "general.button.click": {
+                  action: "console.log",
+                },
+              },
+            },
+            {
+              brick: "basic-bricks.general-button",
+              properties: {
+                buttonName: "了解详情",
+                buttonType: "text",
+                buttonSize: "small",
+                fadedText: true,
+              },
+              events: {
+                "general.button.click": {
+                  action: "console.log",
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   ],
 };

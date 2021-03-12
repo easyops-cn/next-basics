@@ -132,16 +132,48 @@
   .cardTag {
     position: absolute;
     box-sizing: border-box;
-    height: 40px;
     width: 80px;
-    padding-top: 20px;
-    right: -32px;
-    top: -10px;
-    background: #167BE0;
     color: #ffffff;
     text-align: center;
-    font-size: 12px;
     transform: rotate(45deg);
+    z-index: 1;
+    line-height: 24px;
+    height: 22px;
+    font-size: 10px;
+    top: 8px;
+    right: -24px;
+    &.tagTriangle{
+      padding-top: 20px;
+      right: -32px;
+      top: -10px;
+      height: 40px;
+      line-height: normal;
+    }
+
+    &.blue{
+      background: linear-gradient(180deg, #56B8FF 0%, #0169DA 100%);
+    }
+    &.green{
+      background: linear-gradient(180deg, #4CEAA2 0%, #1DB049 100%);
+    }
+    &.orange{
+      background: linear-gradient(180deg, #F9D760 0%, #E29725 100%);
+    }
+    &.red{
+      background: linear-gradient(180deg, #FE9C6D 0%, #DE382B 100%);
+    }
+    &.cyan{
+      background: linear-gradient(180deg, #6AD3F8 0%, #10A9AE 100%);
+    }
+    &.geekblue{
+      background: linear-gradient(180deg, #67B7F6 0%, #1452CC 100%);
+    }
+    &.purple{
+      background: linear-gradient(180deg, #9DA0FC 0%, #8347D8 100%);
+    }
+    &.gray{
+      background: linear-gradient(139deg, #F5F5F5 0%, #D9D9D9 100%);
+    }
   }
 
   .hideOperate {
