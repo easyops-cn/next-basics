@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.109.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.108.0...@next-bricks/basic-bricks@1.109.0) (2021-03-13)
+
+
+### Features
+
+* **basic-bricks:** subMenuFilter 支持treeMode ([26230bb](https://github.com/easyops-cn/next-basics/commit/26230bb96f903402c2d615331cdd38e92faa7ec9))
+
+
+
+
+
 # [1.108.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.107.1...@next-bricks/basic-bricks@1.108.0) (2021-03-12)
 
 
