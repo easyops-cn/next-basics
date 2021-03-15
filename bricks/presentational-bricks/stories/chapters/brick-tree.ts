@@ -18,75 +18,158 @@ export const BrickTreeStory: Story = {
     zh:
       "常用于展示应用业务树、模型树等，可以完整展现其中层级关系，并具有展开收起选择等交互功能",
   },
-  conf: {
-    brick: "presentational-bricks.brick-tree",
-    properties: {
-      dataSource: [
-        {
-          title: "0",
-          key: "0",
-          icon: { lib: "fa", icon: "briefcase" },
-          children: [
-            {
-              title: "0-0",
-              key: "00",
-              icon: { lib: "fa", icon: "cube" },
-            },
-            {
-              title: "0-1",
-              key: "01",
-              icon: { lib: "fa", icon: "briefcase" },
-              children: [
-                {
-                  title: "0-1-0",
-                  key: "010",
-                  icon: { lib: "fa", icon: "briefcase" },
-                  children: [
-                    {
-                      title: "0-1-0-1",
-                      key: "0101",
-                      icon: { lib: "fa", icon: "cube" },
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
+  conf: [
+    {
+      brick: "presentational-bricks.brick-tree",
+      properties: {
+        dataSource: [
+          {
+            title: "0",
+            key: "0",
+            icon: { lib: "fa", icon: "briefcase" },
+            children: [
+              {
+                title: "0-0",
+                key: "00",
+                icon: { lib: "fa", icon: "cube" },
+              },
+              {
+                title: "0-1",
+                key: "01",
+                icon: { lib: "fa", icon: "briefcase" },
+                children: [
+                  {
+                    title: "0-1-0",
+                    key: "010",
+                    icon: { lib: "fa", icon: "briefcase" },
+                    children: [
+                      {
+                        title: "0-1-0-1",
+                        key: "0101",
+                        icon: { lib: "fa", icon: "cube" },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            title: "1",
+            key: "1",
+            icon: { lib: "fa", icon: "briefcase" },
+            children: [
+              {
+                title: "1-0",
+                key: "10",
+                icon: { lib: "fa", icon: "cube" },
+              },
+            ],
+          },
+        ],
+        configProps: {
+          checkable: true,
+          showIcon: true,
         },
-        {
-          title: "1",
-          key: "1",
-          icon: { lib: "fa", icon: "briefcase" },
-          children: [
-            {
-              title: "1-0",
-              key: "10",
-              icon: { lib: "fa", icon: "cube" },
-            },
-          ],
+        searchable: true,
+        placeholder: "text here to search",
+        checkedKeys: ["00"],
+        expandedKeys: ["0"],
+      },
+      events: {
+        "tree.select": {
+          action: "console.info",
         },
-      ],
-      configProps: {
-        checkable: true,
-        showIcon: true,
+        "tree.check": {
+          action: "console.info",
+        },
       },
-      searchable: true,
-      placeholder: "text here to search",
-      checkedKeys: ["00"],
-      expandedKeys: ["0"],
-    },
-    events: {
-      "tree.select": {
-        action: "console.info",
-      },
-      "tree.check": {
-        action: "console.info",
+      description: {
+        title: "基础用法",
+        message:
+          "checkedKeys和configProps.checkable实现多选，expandedKeys可以设置默认展开项，configProps.showIcon设置是否显示图标（图标需要在dataSource中维护）",
       },
     },
-    description: {
-      title: "基础用法",
-      message:
-        "checkedKeys和configProps.checkable实现多选，expandedKeys可以设置默认展开项，configProps.showIcon设置是否显示图标（图标需要在dataSource中维护）",
+    {
+      brick: "presentational-bricks.brick-tree",
+      properties: {
+        dataSource: [
+          {
+            title: "0",
+            key: "0",
+            icon: { lib: "fa", icon: "briefcase" },
+            children: [
+              {
+                title: "0-0",
+                key: "00",
+                icon: { lib: "fa", icon: "cube" },
+              },
+              {
+                title: "0-1",
+                key: "01",
+                icon: { lib: "fa", icon: "briefcase" },
+                children: [
+                  {
+                    title: "0-1-0",
+                    key: "010",
+                    icon: { lib: "fa", icon: "briefcase" },
+                    children: [
+                      {
+                        title: "0-1-0-1",
+                        key: "0101",
+                        icon: { lib: "fa", icon: "cube" },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            title: "1",
+            key: "1",
+            icon: { lib: "fa", icon: "briefcase" },
+            children: [
+              {
+                title: "1-0",
+                key: "10",
+                icon: { lib: "fa", icon: "cube" },
+              },
+            ],
+          },
+        ],
+        configProps: {
+          showIcon: true,
+        },
+        searchable: true,
+        placeholder: "text here to search",
+        checkedKeys: ["00"],
+        expandedKeys: ["0"],
+        suffixBrick: {
+          ussBrick: {
+            brick: "span",
+            properties: {
+              style: {
+                color: "#8c8c8c",
+              },
+              textContent: "1",
+            },
+          },
+        },
+      },
+      events: {
+        "tree.select": {
+          action: "console.info",
+        },
+        "tree.check": {
+          action: "console.info",
+        },
+      },
+      description: {
+        title: "基础用法",
+        message:
+          "checkedKeys和configProps.checkable实现多选，expandedKeys可以设置默认展开项，configProps.showIcon设置是否显示图标（图标需要在dataSource中维护）",
+      },
     },
-  },
+  ],
 };
