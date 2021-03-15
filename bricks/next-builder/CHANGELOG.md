@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.32.0...@next-bricks/next-builder@1.33.0) (2021-03-15)
+
+
+### Features
+
+* **builder-toolbar:** tooltip ([f196652](https://github.com/easyops-cn/next-basics/commit/f1966525e0d35b6671bf539208842ec2e7ac4602))
+* **route-view:** filter route data by query ([0919925](https://github.com/easyops-cn/next-basics/commit/09199257166e400f2de99692c16ee4201bc97ec3))
+
+
+
+
+
 # [1.32.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.31.0...@next-bricks/next-builder@1.32.0) (2021-03-12)
 
 
