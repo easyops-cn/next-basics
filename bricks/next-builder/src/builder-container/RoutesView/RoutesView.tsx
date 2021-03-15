@@ -7,6 +7,8 @@ import { generateRouteTree } from "../../utils/generateRouteTree";
 import { useBuilderNode, useRouteList } from "@next-core/editor-bricks-helper";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { useTranslation } from "react-i18next";
+import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 export interface RoutesViewProps {
   contentStyle?: CSSProperties;
@@ -30,6 +32,7 @@ export function RoutesView({
   contentStyle,
   handleRouteSelect,
 }: RoutesViewProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const routeList = useRouteList();
   const rootNode = useBuilderNode({ isRoot: true });
   const { onRouteSelect } = useBuilderUIContext();
@@ -100,7 +103,7 @@ export function RoutesView({
 
   return (
     <div className={styles.routesViewContainer} style={contentStyle}>
-      <SearchComponent placeholder="Search route" onSearch={handleSearch} />
+      <SearchComponent placeholder={t(K.SEARCH_ROUTE)} onSearch={handleSearch} />
       {!!routeTreeData.length && (
         <div className={styles.treeWrapper}>
           <Tree

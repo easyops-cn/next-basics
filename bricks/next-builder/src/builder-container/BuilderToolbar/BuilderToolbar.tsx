@@ -11,8 +11,11 @@ import { useBuilderUIContext } from "../BuilderUIContext";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { BuilderDataType } from "../interfaces";
 import { Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
+import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 export function BuilderToolbar(): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const {
     onCurrentRouteClick,
     onBuildAndPush,
@@ -36,7 +39,7 @@ export function BuilderToolbar(): React.ReactElement {
     <div className={styles.toolbarContainer}>
       <div className={styles.toolbarLeft}>
         {dataType !== BuilderDataType.CUSTOM_TEMPLATE && (
-          <Tooltip title="View Route" placement="bottom">
+          <Tooltip title={t(K.VIEW_ROUTE)} placement="bottom">
             <a
               className={styles.tabLink}
               role="button"
@@ -50,7 +53,7 @@ export function BuilderToolbar(): React.ReactElement {
         <RootNodeSelect />
       </div>
       <div className={styles.toolbarRight}>
-        <Tooltip title="Build & Push (Ctrl+B)" placement="bottom">
+        <Tooltip title={t(K.BUILD_AND_PUSH_TOOLTIP)} placement="bottom">
           <a
             className={styles.tabLink}
             role="button"
@@ -60,7 +63,7 @@ export function BuilderToolbar(): React.ReactElement {
             <ApiOutlined />
           </a>
         </Tooltip>
-        <Tooltip title="Preview" placement="bottom">
+        <Tooltip title={t(K.PREVIEW)} placement="bottom">
           <a
             className={styles.tabLink}
             role="button"

@@ -12,6 +12,9 @@ import { searchList } from "./utils";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { ContextItem } from "./ContextItem";
 import update from "immutability-helper";
+import { useTranslation } from "react-i18next";
+import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
+
 
 const symbolId = Symbol("uid");
 
@@ -28,6 +31,7 @@ export function DataView({
   brickList,
   onContextUpdate,
 }: DataViewProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const rootNode = useBuilderNode({ isRoot: true });
   const contextWithUniqueSymbolId: ContextConfWithSymbolId[] = useMemo(() => {
     const originContext = ((rootNode?.context as ContextConf[]) ?? []).map(
@@ -123,8 +127,8 @@ export function DataView({
   };
 
   return (
-    <ToolboxPane title="Data">
-      <SearchComponent placeholder="Search data" onSearch={handleSearch} />
+    <ToolboxPane title={t(K.DATA)}>
+      <SearchComponent placeholder={t(K.SEARCH_DATA)} onSearch={handleSearch} />
       <div className={styles.wrapper}>
         <Button
           icon={<PlusOutlined />}
@@ -132,7 +136,7 @@ export function DataView({
           onClick={() => setData()}
           data-testid="add-data-btn"
         >
-          Add Data
+          {t(K.ADD_DATA)}
         </Button>
         <div className={styles.varList}>
           {filteredContextList?.length > 0 &&
