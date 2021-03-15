@@ -18,7 +18,8 @@
       display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 150px;
+      max-width: 70px;
+      white-space: nowrap;
     }
   }
 
