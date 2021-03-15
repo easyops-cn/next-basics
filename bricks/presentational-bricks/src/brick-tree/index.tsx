@@ -11,6 +11,7 @@ import { BrickTree } from "./BrickTree";
 import { TreeProps, AntTreeNodeProps, DataNode } from "antd/lib/tree";
 import { MenuIcon } from "@next-core/brick-types";
 import { EventDataNode } from "rc-tree/lib/interface";
+import { UseBrickConf } from "@next-core/brick-types";
 
 export type TreeIcon =
   | MenuIcon
@@ -143,6 +144,17 @@ export class BrickTreeElement extends UpdatingElement {
    */
   @property({ type: Boolean }) checkAllEnabled: boolean;
 
+  /**
+   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @required false
+   * @default -
+   * @description 树的最右边自定义项
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrick: { useBrick: UseBrickConf };
+
   connectedCallback(): void {
     this.style.display = "flex";
     this.style.flexDirection = "column";
@@ -190,6 +202,7 @@ export class BrickTreeElement extends UpdatingElement {
             checkAllEnabled={this.checkAllEnabled}
             onSelect={this._handleSelect}
             onCheck={this._handleCheck}
+            suffixBrick={this.suffixBrick}
           />
         </BrickWrapper>,
         this
