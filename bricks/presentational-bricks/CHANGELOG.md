@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.172.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.172.1...@next-bricks/presentational-bricks@1.172.2) (2021-03-15)
+
+
+### Bug Fixes
+
+* **brick-table:** use react-dnd dll ([9b331f6](https://github.com/easyops-cn/next-basics/commit/9b331f63e7a09a10cf8ad825e04bf2a4fedd2ce1))
+
+
+
+
+
 ## [1.172.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.172.0...@next-bricks/presentational-bricks@1.172.1) (2021-03-15)
 
 
