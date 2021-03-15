@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper } from "@next-core/brick-kit";
+import { BrickWrapper, property } from "@next-core/brick-kit";
 
 import { IndexCard } from "./IndexCard";
 import styles from "./IndexCard.shadow.css";
@@ -27,6 +27,9 @@ export class IndexCardElement extends HTMLElement {
    * @default 24
    * @description 内容区的 gap，内容区固定为 grid 布局
    */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
   set contentGridGap(value: number) {
     this._contentGridGap = value;
     this._render();
@@ -65,6 +68,9 @@ export class IndexCardElement extends HTMLElement {
    * @default -
    * @description 卡片标题
    */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
   set title(value: string) {
     this._title = value;
     this._render();
