@@ -46,12 +46,11 @@
     "marked": "^2.0.1",
     "prismjs": "^1.23.0",
     "react-avatar-editor": "^11.1.0",
-    "react-dnd": "^10.0.2",
-    "react-dnd-html5-backend": "^10.0.2",
     "regexpu-core": "^4.7.1"
   },
   "sideEffects": true,
   "peerDependencies": {
-    "@next-dll/ace": "*"
+    "@next-dll/ace": "*",
+    "@next-dll/react-dnd": "*"
   }
 }
