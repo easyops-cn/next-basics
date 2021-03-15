@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.171.1...@next-bricks/presentational-bricks@1.172.0) (2021-03-15)
+
+
+### Bug Fixes
+
+* **InfoDisplayCardList:** enable detail tooltip ([90976a7](https://github.com/easyops-cn/next-basics/commit/90976a7670dafe7958f1f221187e6c2e0bcdb2d1))
+
+
+### Features
+
+* **brick-tree:** brick-tree support suffix ([5d4fabb](https://github.com/easyops-cn/next-basics/commit/5d4fabb7abb1894be7cb7f8c63fddc90b2c2c623))
+
+
+
+
+
 ## [1.171.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.171.0...@next-bricks/presentational-bricks@1.171.1) (2021-03-15)
 
 
