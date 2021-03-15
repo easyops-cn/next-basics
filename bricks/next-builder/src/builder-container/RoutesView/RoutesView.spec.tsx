@@ -60,11 +60,19 @@ describe("RoutesView", () => {
           id: "R-03",
         },
       },
-    });
+    } as any);
     expect(onRouteSelect).toBeCalled();
-    wrapper.find("SearchComponent").invoke("onSearch")("detail");
+    await act(async ()=>{
+      wrapper.find("SearchComponent").invoke("onSearch")("detail");
+      await (global as any).flushPromises();
+    })
+    wrapper.update();
     expect(wrapper.find(".matchedStr").length).toBe(2);
-    wrapper.find("SearchComponent").invoke("onSearch")(" ");
+    await act(async ()=>{
+      wrapper.find("SearchComponent").invoke("onSearch")(" ");
+      await (global as any).flushPromises();
+    })
+    wrapper.update();
     expect(wrapper.find(".matchedStr").length).toBe(0);
   });
 });
