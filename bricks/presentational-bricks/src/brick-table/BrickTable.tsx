@@ -10,7 +10,7 @@ import { pickBy, isNil, toPath, isEqual } from "lodash";
 import classNames from "classnames";
 import styles from "./BrickTable.module.css";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import update from "immutability-helper";
 import { CustomColumn, CustomColumnComponent } from "./index";
 import { GeneralIcon } from "@next-libs/basic-components";
@@ -515,7 +515,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
 
   if (props.tableDraggable) {
     table = (
-      <DndProvider backend={HTML5Backend} context={window}>
+      <DndProvider backend={HTML5Backend}>
         {table}
       </DndProvider>
     );
