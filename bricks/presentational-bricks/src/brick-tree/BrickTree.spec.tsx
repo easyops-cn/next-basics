@@ -12,26 +12,31 @@ const dataSource = [
     title: "0",
     key: "0",
     icon: { lib: "fa", icon: "briefcase" },
+    filter: "a",
     children: [
       {
         title: "0-0",
         key: "00",
-        disabled: true,
+        filter: "b",
+        disabled: true, // disabled
       },
       {
         title: "0-1",
         key: "01",
         icon: { lib: "fa", icon: "briefcase" },
+        filter: "a",
         children: [
           {
             title: "0-1-0",
             key: "010",
             icon: { lib: "fa", icon: "briefcase" },
+            filter: "a",
             children: [
               {
                 title: "0-1-0-0",
                 key: "0100",
                 icon: { lib: "fa", icon: "cube" },
+                filter: "b",
               },
             ],
           },
@@ -43,11 +48,13 @@ const dataSource = [
     title: "1",
     key: "1",
     icon: { lib: "fa", icon: "briefcase" },
+    filter: "a",
     children: [
       {
         title: "1-0",
         key: "10",
         icon: { lib: "fa", icon: "cube" },
+        filter: "b",
       },
     ],
   },
@@ -139,5 +146,64 @@ describe("BrickTree", () => {
       .props();
     expect(checkAllCheckboxProps.checked).toBe(false);
     expect(checkAllCheckboxProps.indeterminate).toBe(false);
+  });
+
+  it("should work when set checkedFilterConfig", () => {
+    const onCheck = jest.fn();
+    const wrapper = shallow<BrickTreeProps>(
+      <BrickTree
+        dataSource={dataSource}
+        searchable
+        checkAllEnabled
+        onCheck={onCheck}
+        configProps={{
+          checkable: true,
+        }}
+        checkedFilterConfig={{
+          field: "filter",
+          value: "b",
+          operator: "$ne",
+        }}
+      />
+    );
+
+    const checkedKeys = ["0", "00", "01", "010", "0100", "1", "10"];
+
+    // 全选
+    const checkAllCheckbox = wrapper
+      .find(Checkbox)
+      .filter("[data-testid='check-all-checkbox']");
+    expect(checkAllCheckbox).toHaveLength(1);
+
+    checkAllCheckbox.invoke("onChange")({
+      target: { checked: true },
+    } as CheckboxChangeEvent);
+    let checkedNum = wrapper.find(".checkedNum");
+    expect(checkedNum.text()).toEqual("已选 2 项");
+    expect(onCheck).lastCalledWith(["0100", "10"]);
+
+    // 取消全选
+    checkAllCheckbox.invoke("onChange")({
+      target: { checked: false },
+    } as CheckboxChangeEvent);
+    checkedNum = wrapper.find(".checkedNum");
+    expect(checkedNum.text()).toEqual("已选 0 项");
+    expect(onCheck).lastCalledWith([]);
+
+    // 树部分选择
+    const tree = wrapper.find(Tree);
+    tree.invoke("onCheck")(
+      checkedKeys.filter((key) => !key.startsWith("0")),
+      {}
+    );
+    checkedNum = wrapper.find(".checkedNum");
+    expect(checkedNum.text()).toEqual("已选 1 项");
+    expect(onCheck).lastCalledWith(["10"]);
+
+    // 树全选
+    tree.invoke("onCheck")(checkedKeys, {});
+    checkedNum = wrapper.find(".checkedNum");
+    expect(checkedNum.text()).toEqual("已选 3 项");
+    expect(onCheck).lastCalledWith(["00", "0100", "10"]);
   });
 });
