@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.154.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.1...@next-bricks/forms@1.154.2) (2021-03-15)
+
+
+### Bug Fixes
+
+* **forms:** TimeRangePicker render with no initValue ([503f253](https://github.com/easyops-cn/next-basics/commit/503f253fcdbb60d6c1925f5068ffbf9679f8b545))
+
+
+
+
+
 ## [1.154.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.0...@next-bricks/forms@1.154.1) (2021-03-12)
 
 **Note:** Version bump only for package @next-bricks/forms
