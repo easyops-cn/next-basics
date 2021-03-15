@@ -12,6 +12,7 @@ import { TreeProps, AntTreeNodeProps, DataNode } from "antd/lib/tree";
 import { checkedFilterProps } from "../interfaces/brick-tree";
 import { MenuIcon } from "@next-core/brick-types";
 import { EventDataNode } from "rc-tree/lib/interface";
+import { UseBrickConf } from "@next-core/brick-types";
 
 export type TreeIcon =
   | MenuIcon
@@ -148,12 +149,23 @@ export class BrickTreeElement extends UpdatingElement {
    * @kind checkedFilterProps
    * @required false
    * @default -
-   * @description 配置每一行是否禁用，其中 `filed` 表示数据源中的字段路径， `value` 表示与其字段比较的值， `operator` 表示两者比较的方法，结果为 `true` 时会禁用当前行, 需要注意的是该配置需要在 `rowSelection: true` 的前提下使用，并且设置 `rowKey` 属性赋予每行唯一的 key，防止顺序变化时造成的错误勾选（如上 demo 所示）
+   * @description `tree.check`事件和全选计数中是否过滤掉某些节点，其中 `filed` 表示数据源中的字段路径， `value` 表示与其字段比较的值， `operator` 表示两者比较的方法。仅在设置 `configProps.checkable` 为 `true` 时生效
    */
   @property({
     attribute: false,
   })
   checkedFilterConfig: checkedFilterProps;
+  
+  /**
+   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @required false
+   * @default -
+   * @description 树的最右边自定义项
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrick: { useBrick: UseBrickConf };
 
   connectedCallback(): void {
     this.style.display = "flex";
@@ -203,6 +215,7 @@ export class BrickTreeElement extends UpdatingElement {
             onSelect={this._handleSelect}
             onCheck={this._handleCheck}
             checkedFilterConfig={this.checkedFilterConfig}
+            suffixBrick={this.suffixBrick}
           />
         </BrickWrapper>,
         this

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { isEqual } from "lodash";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
@@ -25,10 +26,20 @@ import {
   BuilderRuntimeNode,
   BuilderProvider,
   AbstractBuilderDataManager,
+  isRouteNode,
+  isBrickNode,
 } from "@next-core/editor-bricks-helper";
-import { BrickOptionItem, ToolboxTab } from "./interfaces";
+import {
+  BrickOptionItem,
+  BuilderClipboard,
+  BuilderClipboardType,
+  BuilderPasteDetailOfCopy,
+  BuilderPasteDetailOfCut,
+  ToolboxTab,
+} from "./interfaces";
 import { BuilderContainer } from "./BuilderContainer";
 import { defaultToolboxTab } from "./constants";
+import { getBuilderClipboard } from "./getBuilderClipboard";
 
 interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
   nodeData: NodeInstance & {
@@ -69,6 +80,12 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   eventStreamNodeId: string;
 
+  @property()
+  clipboardType: BuilderClipboardType;
+
+  @property()
+  clipboardSource: string;
+
   @event({
     type: "node.add",
   })
@@ -88,6 +105,16 @@ export class BuilderContainerElement extends UpdatingElement {
     type: "node.click",
   })
   private _nodeClickEmitter: EventEmitter<BuilderRuntimeNode>;
+
+  @event({
+    type: "brick.click",
+  })
+  private _brickClickEmitter: EventEmitter<BuilderRuntimeNode>;
+
+  @event({
+    type: "route.click",
+  })
+  private _routeClickEmitter: EventEmitter<BuilderRuntimeNode>;
 
   @event({
     type: "node.delete.ask",
@@ -110,6 +137,21 @@ export class BuilderContainerElement extends UpdatingElement {
   private _routeSelectEmitter: EventEmitter<BuilderRouteNode>;
 
   @event({
+    type: "current.route.click",
+  })
+  private _currentRouteClickEmitter: EventEmitter<BuilderRouteNode>;
+
+  @event({
+    type: "project.buildAndPush",
+  })
+  private _buildAndPushEmitter: EventEmitter;
+
+  @event({
+    type: "project.preview",
+  })
+  private _previewEmitter: EventEmitter;
+
+  @event({
     type: "fullscreen.toggle",
   })
   private _fullscreenToggleEmitter: EventEmitter<{
@@ -129,6 +171,23 @@ export class BuilderContainerElement extends UpdatingElement {
   private _eventStreamNodeSelectEmitter: EventEmitter<{
     id: string;
   }>;
+
+  @event({
+    type: "clipboard.change",
+  })
+  private _eventClipboardChangeEmitter: EventEmitter<{
+    clipboard: BuilderClipboard;
+  }>;
+
+  @event({
+    type: "node.copy.paste",
+  })
+  private _eventNodeCopyPasteEmitter: EventEmitter<BuilderPasteDetailOfCopy>;
+
+  @event({
+    type: "node.cut.paste",
+  })
+  private _eventNodeCutPasteEmitter: EventEmitter<BuilderPasteDetailOfCut>;
 
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
     this._nodeAddEmitter.emit({
@@ -160,6 +219,15 @@ export class BuilderContainerElement extends UpdatingElement {
     this._nodeClickEmitter.emit({
       ...event.detail,
     });
+    if (isRouteNode(event.detail)) {
+      this._routeClickEmitter.emit({
+        ...event.detail,
+      });
+    } else if (isBrickNode(event.detail)) {
+      this._brickClickEmitter.emit({
+        ...event.detail,
+      });
+    }
   };
 
   private _handleAskForDeletingNode = (node: BuilderRuntimeNode): void => {
@@ -168,37 +236,56 @@ export class BuilderContainerElement extends UpdatingElement {
     });
   };
 
-  private _currentFullscreen?: boolean;
-
   private _handleToggleFullscreen = (fullscreen: boolean): void => {
-    if (fullscreen !== this._currentFullscreen) {
-      this._currentFullscreen = fullscreen;
+    if (fullscreen !== this.fullscreen) {
+      this.fullscreen = fullscreen;
       this._fullscreenToggleEmitter.emit({
         fullscreen,
       });
     }
   };
 
-  private _currentToolboxTab?: ToolboxTab;
-
   private _handleSwitchToolboxTab = (toolboxTab: ToolboxTab): void => {
-    if (toolboxTab !== this._currentToolboxTab) {
-      this._currentToolboxTab = toolboxTab;
+    if (toolboxTab !== (this.toolboxTab ?? defaultToolboxTab)) {
+      this.toolboxTab = toolboxTab;
       this._toolboxTabSwitchEmitter.emit({
         toolboxTab,
       });
     }
   };
 
-  private _currentEventStreamNodeId?: string;
-
   private _handleSelectEventsViewNode = (id: string): void => {
-    if (id !== this._currentEventStreamNodeId) {
-      this._currentEventStreamNodeId = id;
+    if (id !== this.eventStreamNodeId) {
+      this.eventStreamNodeId = id;
       this._eventStreamNodeSelectEmitter.emit({
         id,
       });
     }
+  };
+
+  private _handleClipboardChange = (clipboard: BuilderClipboard): void => {
+    if (
+      !isEqual(
+        clipboard,
+        getBuilderClipboard(this.clipboardType, this.clipboardSource)
+      )
+    ) {
+      this.clipboardType = clipboard?.type;
+      this.clipboardSource =
+        clipboard &&
+        (clipboard.type === BuilderClipboardType.CUT
+          ? clipboard.sourceInstanceId
+          : clipboard.sourceId);
+      this._eventClipboardChangeEmitter.emit({ clipboard });
+    }
+  };
+
+  private _handleNodeCopyPaste = (detail: BuilderPasteDetailOfCopy): void => {
+    this._eventNodeCopyPasteEmitter.emit(detail);
+  };
+
+  private _handleNodeCutPaste = (detail: BuilderPasteDetailOfCut): void => {
+    this._eventNodeCutPasteEmitter.emit(detail);
   };
 
   private _managerRef = React.createRef<AbstractBuilderDataManager>();
@@ -209,6 +296,18 @@ export class BuilderContainerElement extends UpdatingElement {
 
   private _handleRouteSelect = (route: BuilderRouteNode): void => {
     this._routeSelectEmitter.emit(route);
+  };
+
+  private _handleCurrentRouteClick = (route: BuilderRouteNode): void => {
+    this._currentRouteClickEmitter.emit(route);
+  };
+
+  private _handleBuildAndPush = (): void => {
+    this._buildAndPushEmitter.emit();
+  };
+
+  private _handlePreview = (): void => {
+    this._previewEmitter.emit();
   };
 
   @method()
@@ -245,9 +344,6 @@ export class BuilderContainerElement extends UpdatingElement {
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
-      this._currentFullscreen = this.fullscreen;
-      this._currentToolboxTab = this.toolboxTab ?? defaultToolboxTab;
-      this._currentEventStreamNodeId = this.eventStreamNodeId;
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
@@ -259,8 +355,10 @@ export class BuilderContainerElement extends UpdatingElement {
                 brickList={this.brickList}
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}
-                initialToolboxTab={this._currentToolboxTab}
+                initialToolboxTab={this.toolboxTab}
                 initialEventStreamNodeId={this.eventStreamNodeId}
+                initialClipboardType={this.clipboardType}
+                initialClipboardSource={this.clipboardSource}
                 onNodeAdd={this._handleNodeAdd}
                 onNodeReorder={this._handleNodeReorder}
                 onNodeMove={this._handleNodeMove}
@@ -269,8 +367,14 @@ export class BuilderContainerElement extends UpdatingElement {
                 onToggleFullscreen={this._handleToggleFullscreen}
                 onSwitchToolboxTab={this._handleSwitchToolboxTab}
                 onSelectEventStreamNode={this._handleSelectEventsViewNode}
+                onClipboardChange={this._handleClipboardChange}
+                onNodeCopyPaste={this._handleNodeCopyPaste}
+                onNodeCutPaste={this._handleNodeCutPaste}
                 onContextUpdate={this._handleContextUpdate}
                 onRouteSelect={this._handleRouteSelect}
+                onCurrentRouteClick={this._handleCurrentRouteClick}
+                onBuildAndPush={this._handleBuildAndPush}
+                onPreview={this._handlePreview}
               />
             </DndProvider>
           </BuilderProvider>

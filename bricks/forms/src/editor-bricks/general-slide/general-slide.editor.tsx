@@ -17,14 +17,13 @@ interface GeneralSlideProperties extends FormItemProps {}
 
 export function GeneralSlideEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralSlideProperties>({ nodeUid });
 
   const { label, required } = node.$$parsedProperties;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div
           className={classNames(formSharedStyle.labelContainer, {

@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.109.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.108.0...@next-bricks/basic-bricks@1.109.0) (2021-03-13)
+
+
+### Features
+
+* **basic-bricks:** subMenuFilter 支持treeMode ([26230bb](https://github.com/easyops-cn/next-basics/commit/26230bb96f903402c2d615331cdd38e92faa7ec9))
+
+
+
+
+
+# [1.108.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.107.1...@next-bricks/basic-bricks@1.108.0) (2021-03-12)
+
+
+### Features
+
+* show children in any-brick--editor ([7f8d6da](https://github.com/easyops-cn/next-basics/commit/7f8d6da9267b7db2395e3df23829d10a71b7bd38))
+
+
+
+
+
+## [1.107.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.107.0...@next-bricks/basic-bricks@1.107.1) (2021-03-12)
+
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+
+
+
+
+# [1.107.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.4...@next-bricks/basic-bricks@1.107.0) (2021-03-10)
+
+
+### Bug Fixes
+
+* **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
+
+
+### Features
+
+* **visual-builder:** support route nodes ([0a0c0b0](https://github.com/easyops-cn/next-basics/commit/0a0c0b0531a19a10f134594f56cbebabbda914d4))
+
+
+
+
+
+## [1.106.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.3...@next-bricks/basic-bricks@1.106.4) (2021-03-09)
+
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+
+
+
+
 ## [1.106.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.2...@next-bricks/basic-bricks@1.106.3) (2021-03-05)
 
 

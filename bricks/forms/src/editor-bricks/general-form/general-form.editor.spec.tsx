@@ -17,9 +17,7 @@ describe("GeneralFormEditor", () => {
         layout: "vertical",
       },
     });
-    const wrapper = shallow(
-      <GeneralFormEditor nodeUid={1} brick="general-form" />
-    );
+    const wrapper = shallow(<GeneralFormEditor nodeUid={1} />);
     expect(wrapper.find(".form").hasClass("formEditorVertical")).toEqual(true);
   });
 
@@ -31,9 +29,7 @@ describe("GeneralFormEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <GeneralFormEditor nodeUid={1} brick="general-form" />
-    );
+    const wrapper = shallow(<GeneralFormEditor nodeUid={1} />);
     expect(wrapper.find(".form").hasClass("formEditorHorizontal")).toEqual(
       true
     );
@@ -49,9 +45,7 @@ describe("GeneralFormEditor", () => {
         layout: "inline",
       },
     });
-    const wrapper = shallow(
-      <GeneralFormEditor nodeUid={1} brick="general-form" />
-    );
+    const wrapper = shallow(<GeneralFormEditor nodeUid={1} />);
     expect(wrapper.find(".form").hasClass("formEditorInline")).toEqual(true);
   });
 });

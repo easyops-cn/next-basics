@@ -17,7 +17,6 @@ interface BrickQuickEntriesProperties {
 
 export function BrickQuickEntriesEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<BrickQuickEntriesProperties>({ nodeUid });
   let { column, row } = node.$$parsedProperties;
@@ -28,7 +27,7 @@ export function BrickQuickEntriesEditor({
     row = 1;
   }
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={styles.card}>
         {range(0, row).map((r) => (
           <div

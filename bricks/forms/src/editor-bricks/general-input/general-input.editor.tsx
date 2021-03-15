@@ -18,13 +18,12 @@ interface GeneralInputProperties extends FormItemProps {
 
 export function GeneralInputEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralInputProperties>({ nodeUid });
   const { label, placeholder, required } = node.$$parsedProperties;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div
           className={classNames(formSharedStyle.labelContainer, {

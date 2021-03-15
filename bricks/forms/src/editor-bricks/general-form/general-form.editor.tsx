@@ -26,18 +26,13 @@ interface GeneralFormProperties {
 
 export function GeneralFormEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralFormProperties>({ nodeUid });
 
   const { layout = LayoutType.Horizontal } = node.$$parsedProperties;
 
   return (
-    <EditorContainer
-      nodeUid={nodeUid}
-      brick={brick}
-      type={EditorBrickType.CONTAINER}
-    >
+    <EditorContainer nodeUid={nodeUid} type={EditorBrickType.CONTAINER}>
       <div
         className={className(
           styles.form,

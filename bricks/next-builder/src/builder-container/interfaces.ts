@@ -1,3 +1,5 @@
+import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
+
 export interface BrickOptionItem {
   type: "brick" | "template" | "customTemplate" | "provider";
   name: string;
@@ -20,6 +22,7 @@ export interface DraggingNodeItem {
   nodeUid: number;
   nodeId: string;
   nodeInstanceId: string;
+  nodeType: Pick<BuilderRouteOrBrickNode, "type">;
 }
 
 export interface DraggingMountPointItem {
@@ -36,7 +39,36 @@ export enum ToolboxTab {
 }
 
 export enum BuilderDataType {
-  ROUTE = "route",
+  ROUTE_OF_BRICKS = "route-of-bricks",
+  ROUTE_OF_ROUTES = "route-of-routes",
+  ROUTE_OF_REDIRECT = "route-of-redirect",
   CUSTOM_TEMPLATE = "custom-template",
   UNKNOWN = "unknown",
+}
+
+export type BuilderClipboard = BuilderClipboardOfCopy | BuilderClipboardOfCut;
+
+export interface BuilderClipboardOfCopy {
+  type: BuilderClipboardType.COPY;
+  sourceId: string;
+}
+
+export interface BuilderClipboardOfCut {
+  type: BuilderClipboardType.CUT;
+  sourceInstanceId: string;
+}
+
+export enum BuilderClipboardType {
+  CUT = "cut",
+  COPY = "copy",
+}
+
+export interface BuilderPasteDetailOfCopy {
+  sourceId: string;
+  targetId: string;
+}
+
+export interface BuilderPasteDetailOfCut {
+  sourceInstanceId: string;
+  targetInstanceId: string;
 }

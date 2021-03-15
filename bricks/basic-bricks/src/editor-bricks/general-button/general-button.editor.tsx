@@ -21,7 +21,6 @@ enum GeneralButtonType {
 
 export function GeneralButtonEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralButtonProperties>({ nodeUid });
   const { buttonName, buttonType } = node.$$parsedProperties;
@@ -32,7 +31,7 @@ export function GeneralButtonEditor({
   );
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div
         className={classNames(styles.button, {
           [styles.primary]: buttonType === GeneralButtonType.PRIMARY,

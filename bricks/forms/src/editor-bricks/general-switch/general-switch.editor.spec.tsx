@@ -16,9 +16,7 @@ describe("GeneralSwitchEditor", () => {
         label: "是否启用",
       },
     });
-    const wrapper = shallow(
-      <GeneralSwitchEditor nodeUid={1} brick="general-switch" />
-    );
+    const wrapper = shallow(<GeneralSwitchEditor nodeUid={1} />);
     expect(wrapper.find(".formLabel").text()).toBe("是否启用");
   });
 });

@@ -24,7 +24,6 @@ interface GeneralButtonsProperties extends FormItemProps {
 
 export function GeneralButtonsEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralButtonsProperties>({ nodeUid });
   const { submitText, cancelText, showCancelButton } = node.$$parsedProperties;
@@ -39,7 +38,7 @@ export function GeneralButtonsEditor({
     node.alias
   );
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div className={formSharedStyle.labelContainer}></div>
         <div className={styles.formButtonItem}>

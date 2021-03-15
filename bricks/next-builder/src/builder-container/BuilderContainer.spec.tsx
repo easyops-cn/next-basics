@@ -11,6 +11,11 @@ jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
     return <div>BuilderToolbox</div>;
   },
 }));
+jest.mock("./BuilderToolbar/BuilderToolbar", () => ({
+  BuilderToolbar() {
+    return <div>BuilderToolbar</div>;
+  },
+}));
 jest.mock("./BuilderCanvas/BuilderCanvas", () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { useBuilderUIContext } = require("./BuilderUIContext");
@@ -80,13 +85,59 @@ describe("BuilderContainer", () => {
     });
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
-      `BuilderCanvas(${BuilderDataType.ROUTE})`
+      `BuilderCanvas(${BuilderDataType.ROUTE_OF_BRICKS})`
     );
     wrapper.unmount();
     expect(mockRemoveListenersOfNodeAdd).toBeCalled();
     expect(mockRemoveListenersOfNodeMove).toBeCalled();
     expect(mockRemoveListenersOfNodeReorder).toBeCalled();
     expect(mockRemoveListenersOfNodeClick).toBeCalled();
+  });
+
+  it("should work for route of routes", () => {
+    const wrapper = mount(
+      <BuilderContainer
+        dataSource={[
+          {
+            type: "routes",
+            path: "/",
+            id: "B-001",
+          },
+        ]}
+      />
+    );
+    expect(mockManager.dataInit).toBeCalledWith({
+      type: "routes",
+      path: "/",
+      id: "B-001",
+    });
+    expect(mockConsoleError).not.toBeCalled();
+    expect(wrapper.find(BuilderCanvas).text()).toBe(
+      `BuilderCanvas(${BuilderDataType.ROUTE_OF_ROUTES})`
+    );
+  });
+
+  it("should work for route of redirect", () => {
+    const wrapper = mount(
+      <BuilderContainer
+        dataSource={[
+          {
+            type: "redirect",
+            path: "/",
+            id: "B-001",
+          },
+        ]}
+      />
+    );
+    expect(mockManager.dataInit).toBeCalledWith({
+      type: "redirect",
+      path: "/",
+      id: "B-001",
+    });
+    expect(mockConsoleError).not.toBeCalled();
+    expect(wrapper.find(BuilderCanvas).text()).toBe(
+      `BuilderCanvas(${BuilderDataType.ROUTE_OF_REDIRECT})`
+    );
   });
 
   it("should work for custom template", () => {
@@ -112,13 +163,13 @@ describe("BuilderContainer", () => {
     );
   });
 
-  it("should warn if data source is routes", () => {
+  it("should warn if data source is unknown", () => {
     mount(
       <BuilderContainer
         dataSource={[
           {
-            type: "routes",
-            path: "/home",
+            type: "brick",
+            brick: "my-brick",
             id: "B-001",
           },
         ]}

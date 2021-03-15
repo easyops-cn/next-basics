@@ -59,6 +59,28 @@ export class InfoDisplayCardListElement extends UpdatingElement {
   })
   optionConf: { useBrick: UseBrickConf };
 
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 设置titleBrick，不设置就不显示
+   */
+  @property({
+    attribute: false,
+  })
+  titleBrickConf: { useBrick: UseBrickConf };
+
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 设置iconBrick，不设置就不显示
+   */
+  @property({
+    attribute: false,
+  })
+  iconBrickConf: { useBrick: UseBrickConf };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -81,6 +103,8 @@ export class InfoDisplayCardListElement extends UpdatingElement {
             dataSource={this.dataSource}
             showIcon={this.showIcon}
             optionConf={this.optionConf}
+            titleBrickConf={this.titleBrickConf}
+            iconBrickConf={this.iconBrickConf}
           />
         </BrickWrapper>,
         this

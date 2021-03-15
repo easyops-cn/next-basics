@@ -17,9 +17,7 @@ describe("GeneralDatePickerEditor", () => {
         placeholder: "请选择日期",
       },
     });
-    const wrapper = shallow(
-      <GeneralDatePickerEditor nodeUid={1} brick="general-date-picker" />
-    );
+    const wrapper = shallow(<GeneralDatePickerEditor nodeUid={1} />);
     expect(wrapper.find(".placeholder").text()).toBe("请选择日期");
     expect(wrapper.find(CalendarOutlined).length).toEqual(1);
   });

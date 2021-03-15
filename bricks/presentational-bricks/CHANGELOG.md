@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.171.1...@next-bricks/presentational-bricks@1.172.0) (2021-03-15)
+
+
+### Bug Fixes
+
+* **InfoDisplayCardList:** enable detail tooltip ([90976a7](https://github.com/easyops-cn/next-basics/commit/90976a7670dafe7958f1f221187e6c2e0bcdb2d1))
+
+
+### Features
+
+* **brick-tree:** brick-tree support suffix ([5d4fabb](https://github.com/easyops-cn/next-basics/commit/5d4fabb7abb1894be7cb7f8c63fddc90b2c2c623))
+
+
+
+
+
+## [1.171.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.171.0...@next-bricks/presentational-bricks@1.171.1) (2021-03-15)
+
+
+### Bug Fixes
+
+* **forms:** TimeRangePicker render with no initValue ([503f253](https://github.com/easyops-cn/next-basics/commit/503f253fcdbb60d6c1925f5068ffbf9679f8b545))
+
+
+
+
+
+# [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.170.0...@next-bricks/presentational-bricks@1.171.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* **card-item:** style & demo ([4595684](https://github.com/easyops-cn/next-basics/commit/4595684aeed98623f3c96a57794d593a296a556e))
+
+
+### Features
+
+* **card-item:** block-icon-align-left ([20a7335](https://github.com/easyops-cn/next-basics/commit/20a7335dd752a9bfac7277ea81c9210feebec375))
+* **card-item:** tagConfig and imgSrc ([c7e1526](https://github.com/easyops-cn/next-basics/commit/c7e1526ddfc25adcc7962849b6779b64a4aaa27b))
+* **general-tooltip:** 支持displayBrick和triggerByIcon ([1634168](https://github.com/easyops-cn/next-basics/commit/16341683b5357685d8fb364ebd062beea196edb1))
+
+
+
+
+
+# [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.10...@next-bricks/presentational-bricks@1.170.0) (2021-03-10)
+
+
+### Features
+
+* **InfoDisplayCard:** infoDisplayCard支持titleBrick ([58d76da](https://github.com/easyops-cn/next-basics/commit/58d76da0006b4addf95a41ff84058b567c03e4a8))
+
+
+
+
+
+## [1.169.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.9...@next-bricks/presentational-bricks@1.169.10) (2021-03-10)
+
+
+### Bug Fixes
+
+* **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
+
+
+
+
+
+## [1.169.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.8...@next-bricks/presentational-bricks@1.169.9) (2021-03-09)
+
+
+### Bug Fixes
+
+* **brick-link:** 没有label时取消icon的margin ([bd3fab4](https://github.com/easyops-cn/next-basics/commit/bd3fab4cdfeaaeaeae126756a51c000215cb8924))
+* editor-bricks add smart display ([171026e](https://github.com/easyops-cn/next-basics/commit/171026e3689ec66d4193fb6339becb9bad76a3b5))
+
+
+
+
+
 ## [1.169.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.7...@next-bricks/presentational-bricks@1.169.8) (2021-03-05)
 
 

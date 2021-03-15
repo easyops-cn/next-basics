@@ -164,6 +164,7 @@ export const story: Story = {
           value: true,
           text: "默认",
           hideOperate: true,
+          triangle: false,
         },
       },
     },
@@ -646,12 +647,70 @@ export const story: Story = {
             },
           },
         ],
-        tagConfig: {
-          field: "default",
-          value: true,
-          text: "默认",
-          hideOperate: true,
+      },
+    },
+    {
+      description: {
+        title: "可配置角标和图片图标",
+        message:
+          "角标可选颜色 `tagConfig.color` 以及文字 `tagConfig.text` 等信息。图片图标需要配置 `showImg` 和对应的图片资源地址 `imgSrc`",
+      },
+      template: "general-list.general-card-list",
+      params: {
+        cardLayoutType: "block-icon-align-left",
+        showPagination: false,
+        fields: {
+          cardTitle: "title",
+          descriptionList: "descriptionList",
         },
+        urlTemplate: "/#{id}",
+        showImg: true,
+        dataSource: [
+          {
+            id: "1",
+            title: "Ansible-PlayBook",
+            descriptionList: ["应用/北方公司"],
+            imgSrc:
+              "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            tagConfig: {
+              text: "已审批",
+              color: "green",
+              triangle: false,
+            },
+          },
+          {
+            id: "2",
+            title: "Ansible-PlayBook",
+            descriptionList: ["应用/南方公司"],
+            imgSrc:
+              "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            tagConfig: {
+              text: "待审批",
+              color: "orange",
+              triangle: false,
+            },
+          },
+        ],
+        operateBricks: [
+          {
+            brick: "basic-bricks.general-button",
+            propertyFieldMap: {
+              detail: "id",
+              disabled: "cardDisabled",
+            },
+            properties: {
+              buttonName: "执行",
+              buttonType: "primary",
+              buttonShape: "round",
+              buttonSize: "small",
+            },
+            events: {
+              "general.button.click": {
+                action: "console.log",
+              },
+            },
+          },
+        ],
       },
     },
   ],

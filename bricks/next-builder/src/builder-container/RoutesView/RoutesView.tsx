@@ -13,6 +13,19 @@ export interface RoutesViewProps {
   handleRouteSelect?: (route: BuilderRouteNode) => void;
 }
 
+const setParent = (node: BuilderRouteNode,filteredMap: Map<string, BuilderRouteNode>,idToRoute:Map<string, BuilderRouteNode>): void => {
+  if(node.parent?.length){
+    const parentId = node.parent[0].id;
+    const parent = idToRoute.get(parentId);
+    if(parent){
+      if(!filteredMap.get(parentId)){
+        filteredMap.set(parentId,parent)
+      }
+      setParent(parent,filteredMap,idToRoute);
+    }
+  }
+}
+
 export function RoutesView({
   contentStyle,
   handleRouteSelect,
@@ -21,13 +34,24 @@ export function RoutesView({
   const rootNode = useBuilderNode({ isRoot: true });
   const { onRouteSelect } = useBuilderUIContext();
   const [q, setQ] = useState<string>("");
+
   const routeTreeData = useMemo(() => {
+    const idToRoute = new Map<string, BuilderRouteNode>(
+      routeList.map((node) => [node.id, node])
+    );
+    const filteredMap = new Map();
+    routeList.forEach(v=>{
+      const matched = v.alias?.toLowerCase().includes(q.trim().toLowerCase() ?? "");
+      if(matched){
+        filteredMap.set(v.id,idToRoute.get(v.id));
+        setParent(v,filteredMap,idToRoute);
+      }
+    });
     const result = generateRouteTree({
-      data: routeList,
-      disableParentNodeSelectable: true,
+      data: [...filteredMap.values()],
     });
     return result;
-  }, [routeList]);
+  }, [routeList,q]);
 
   const [selectRouteKey, setSelectRouteKey] = useState(
     rootNode ? [rootNode.id] : []
@@ -52,19 +76,20 @@ export function RoutesView({
   const titleRender = (nodeData: BuilderRouteNode): React.ReactElement => {
     let title = <span>{nodeData.alias}</span>;
     if (q) {
-      const index = nodeData.alias
-        .toLowerCase()
-        .indexOf(q.trim().toLowerCase());
+      const trimQ = q.trim();
+      const index = nodeData.alias.toLowerCase().indexOf(trimQ.toLowerCase());
       if (index !== -1) {
         const [beforeStr, matchStr, afterStr] = [
           nodeData.alias.substr(0, index),
-          nodeData.alias.substr(index, q.length),
-          nodeData.alias.substr(index + q.length),
+          nodeData.alias.substr(index, trimQ.length),
+          nodeData.alias.substr(index + trimQ.length),
         ];
         title = (
           <span>
             {beforeStr}
-            <span className={styles.matchedStr}>{matchStr}</span>
+            {!!matchStr && (
+              <span className={styles.matchedStr}>{matchStr}</span>
+            )}
             {afterStr}
           </span>
         );

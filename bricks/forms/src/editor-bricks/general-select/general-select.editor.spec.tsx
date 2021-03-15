@@ -17,9 +17,7 @@ describe("GeneralSelectEditor", () => {
         requred: true,
       },
     });
-    const wrapper = shallow(
-      <GeneralSelectEditor nodeUid={1} brick="general-select" />
-    );
+    const wrapper = shallow(<GeneralSelectEditor nodeUid={1} />);
     expect(wrapper.find(".formLabel").text()).toEqual("用户列表");
   });
 });

@@ -31,6 +31,7 @@ export enum CardLayoutType {
   ICON_ALIGN_RIGHT = "icon-align-right",
   ICON_ALIGN_LEFT = "icon-align-left",
   ICON_ALIGN_MIDDLE = "icon-align-middle",
+  BLOCK_ICON_ALIGN_LEFT = "block-icon-align-left",
 }
 
 export interface DescriptionItem {
@@ -48,9 +49,10 @@ export interface DescriptionItem {
  * @slots
  * afterTitle: 标题后面的slot，通常搭配"presentational-bricks.brick-value-mapping"使用
  * operate:操作区 slot，通常搭配"basic-bricks.general-button"使用。
- * topRightOperate:右上角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-as-background" | "icon-small-align-left" | "icon-align-left" | "icon-align-middle" 时可用。
+ * topRightOperate:右上角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-as-background" | "icon-small-align-left" | "icon-align-left" | "icon-align-middle" | "block-icon-align-left"时可用。
  * bottomRightOperate:右下角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-small-align-left" | "icon-align-right" | "icon-align-left" 时可用。
  * @history
+ * 1.171.0: `cardLayoutType` 增加 "block-icon-align-left" 类型，新增属性 `showImg`,`imgSrc`,`tagConfig.color`,`tagConfig.triangle`
  * 1.160.0: `cardLayoutType` 增加 "icon-align-middle" 类型
  * 1.160.0: 新增属性`disabled`,`fields.disabled`
  * 1.150.0: 新增属性`alwaysShowDescription`
@@ -286,7 +288,7 @@ export class CardItemElement extends UpdatingElement {
   iconOpacity: number;
 
   /**
-   * @kind {text: string;field: string;value?: any;isNotEqual?: boolean;hideOperate?: boolean;}
+   * @kind {text: string;color:Color;triangle?:boolean;field: string;value?: any;isNotEqual?: boolean;hideOperate?: boolean;}
    * @required false
    * @default -
    * @description 右上角 tag 标签
@@ -300,6 +302,8 @@ export class CardItemElement extends UpdatingElement {
     value?: any;
     isNotEqual?: boolean; //增加下逻辑
     hideOperate?: boolean;
+    color?: Color;
+    triangle?: boolean;
   };
 
   /**
@@ -384,6 +388,24 @@ export class CardItemElement extends UpdatingElement {
     type: Boolean,
   })
   reverseBgColor: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 图片图标的src
+   */
+  @property({ attribute: false })
+  imgSrc: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否显示图片，默认显示图标，设置显示图片后，可配置 `imgSrc` 属性
+   */
+  @property({ type: Boolean })
+  showImg: boolean;
 
   constructor() {
     super();
@@ -485,7 +507,10 @@ export class CardItemElement extends UpdatingElement {
         iconOpacity: this.iconOpacity,
         showTag: false,
         hideOperate: false,
-        tagText: this.tagConfig && this.tagConfig.text,
+        tagText: this.tagConfig?.text,
+        tagColor: this.tagConfig?.color || "blue",
+        tagTriangle: this.tagConfig?.triangle !== false,
+        imgSrc: this.imgSrc,
       };
       if (this.dataSource) {
         if (this.urlTemplate) {
@@ -535,6 +560,8 @@ export class CardItemElement extends UpdatingElement {
             showTag={mutableProps.showTag}
             hideOperate={mutableProps.hideOperate}
             tagText={mutableProps.tagText}
+            tagColor={mutableProps.tagColor}
+            tagTriangle={mutableProps.tagTriangle}
             descMaxLine={this.descMaxLine}
             hasOperateSlot={this.hasOperateSlot}
             hasBottomRightOperateSlot={this.hasBottomRightOperateSlot}
@@ -549,6 +576,8 @@ export class CardItemElement extends UpdatingElement {
             alwaysShowDescription={this.alwaysShowDescription}
             descriptionDataType={this.descriptionDataType}
             disabled={mutableProps.disabled}
+            imgSrc={mutableProps.imgSrc}
+            showImg={this.showImg}
           />
         </BrickWrapper>,
         this._mountPoint,
@@ -628,6 +657,7 @@ export class CardItemElement extends UpdatingElement {
       "iconOffsetY",
       "iconOpacity",
       "disabled",
+      "imgSrc",
     ]);
     forEach(pickFields, (fieldKey, field: string) => {
       set(mutableProps, field, get(this.dataSource, fieldKey));

@@ -1,5 +1,5 @@
 import React from "react";
-import { uniqueId } from "lodash";
+import { uniqueId, isEmpty } from "lodash";
 import { useTranslation } from "react-i18next";
 import Icon from "@ant-design/icons";
 import { TimePicker, Input, DatePicker } from "antd";
@@ -45,7 +45,10 @@ export function RealTimeRangePicker(
   };
 
   const { t } = useTranslation(NS_FORMS);
-  const initValue = props.value ? props.value : initRange;
+  const initValue =
+    !isEmpty(props.value?.startTime) || !isEmpty(props.value?.endTime)
+      ? props.value
+      : initRange;
 
   const [startTime, setStartTime] = React.useState(
     moment(initValue.startTime, props.format)
@@ -115,6 +118,10 @@ export function RealTimeRangePicker(
   ) => {
     setStartTime(dates[0]);
     setEndTime(dates[1]);
+    props.onChange?.({
+      startTime: dates[0].format(props.format),
+      endTime: dates[1].format(props.format),
+    });
   };
 
   const needConfirm = React.useRef(false);

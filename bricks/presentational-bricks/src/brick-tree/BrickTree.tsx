@@ -7,8 +7,12 @@ import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { TreeIcon, BrickTreeNodeProps } from "./index";
 import { checkedFilterProps } from "../interfaces/brick-tree";
-import { eq, lt, lte, gt, gte, uniqueId, get, difference } from "lodash";
+import { uniqueId, isEmpty, eq, lt, lte, gt, gte, get, difference } from "lodash";
 import { EventDataNode } from "rc-tree/lib/interface";
+import { UseBrickConf } from "@next-core/brick-types";
+import { BrickAsComponent } from "@next-core/brick-kit";
+import styles from "./index.module.css";
+import classNames from "classnames";
 
 export const compareFunMap: Record<string, any> = {
   $eq: eq,
@@ -102,6 +106,7 @@ export interface BrickTreeProps {
       | React.Key[]
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ): void;
+  suffixBrick?: { useBrick: UseBrickConf };
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -116,6 +121,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     placeholder = "",
     checkAllEnabled,
     checkedFilterConfig: { field, value, operator } = {},
+    suffixBrick,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -299,12 +305,11 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         </div>
       )}
       <div
-        style={{
-          overflow: "auto",
-          flexGrow: 1,
-          padding: "10px 10px 6px",
-          background: "var(--antd-component-background)",
-        }}
+        className={classNames(
+          isEmpty(suffixBrick?.useBrick)
+            ? styles.treeWrapper
+            : styles.treeWithSuffixWrapper
+        )}
         ref={treeContainerRef}
       >
         {treeData?.length ? (
@@ -360,6 +365,18 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                     </span>
                   );
                 }
+              }
+
+              if (!isEmpty(suffixBrick?.useBrick)) {
+                return (
+                  <div className={styles.suffixBrickWrapper}>
+                    <span>{title}</span>
+                    <BrickAsComponent
+                      useBrick={suffixBrick.useBrick}
+                      data={node}
+                    />
+                  </div>
+                );
               }
 
               return title;

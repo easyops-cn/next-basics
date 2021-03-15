@@ -17,9 +17,7 @@ describe("GeneralTimePickerEditor", () => {
         placeholder: "请选择时间",
       },
     });
-    const wrapper = shallow(
-      <GeneralTimePickerEditor nodeUid={1} brick="general-time-picker" />
-    );
+    const wrapper = shallow(<GeneralTimePickerEditor nodeUid={1} />);
     expect(wrapper.find(".placeholder").text()).toBe("请选择时间");
     expect(wrapper.find(ClockCircleOutlined).length).toEqual(1);
   });

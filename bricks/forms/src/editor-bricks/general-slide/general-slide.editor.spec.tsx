@@ -16,9 +16,7 @@ describe("GeneralSlideEditor", () => {
         label: "滑动条",
       },
     });
-    const wrapper = shallow(
-      <GeneralSlideEditor nodeUid={1} brick="general-slide" />
-    );
+    const wrapper = shallow(<GeneralSlideEditor nodeUid={1} />);
     expect(wrapper.find(".formLabel").text()).toBe("滑动条");
   });
 });

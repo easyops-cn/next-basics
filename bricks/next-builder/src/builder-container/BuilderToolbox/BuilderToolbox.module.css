@@ -1,5 +1,6 @@
 .builderToolbox {
   width: 273px;
+  flex-shrink: 0;
   display: flex;
   overflow: hidden;
   background-color: #091732;

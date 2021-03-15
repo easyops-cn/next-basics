@@ -20,14 +20,13 @@ interface GeneralRadioProperties extends FormItemProps {
 
 export function GeneralRadioEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralRadioProperties>({ nodeUid });
 
   const { label, type = "default", required } = node.$$parsedProperties;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div
           className={classNames(formSharedStyle.labelContainer, {

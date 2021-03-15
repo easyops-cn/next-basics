@@ -105,7 +105,7 @@ export class GeneralRadioElement extends FormItemElement {
 
   /**
    * @kind `default | button`
-   * @required true
+   * @required false
    * @default `default`
    * @description 	单选框样式类型
    * @group advanced

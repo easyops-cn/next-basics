@@ -11,9 +11,9 @@ import {
 import {
   VisualPropertyForm,
   VisualPropertyFormProps,
-  visualFormUtils,
 } from "./VisualPropertyForm";
-import { processFormValue } from "./processor";
+import { visualFormUtils } from "../interfaces";
+import { processFormValue, extractCommonProps } from "./processor";
 
 /**
  * @id brick-visualization.visual-property-form
@@ -62,6 +62,17 @@ export class VisualPropertyFormElement extends UpdatingElement {
     attribute: false,
   })
   brickInfo: VisualPropertyFormProps["brickInfo"];
+
+  /**
+   * @kind emptyConfig
+   * @required -
+   * @default -
+   * @description 空状态配置
+   */
+  @property({
+    attribute: false,
+  })
+  emptyConfig: VisualPropertyFormProps["emptyConfig"];
 
   /**
    * @description 表单验证成功时触发
@@ -128,9 +139,10 @@ export class VisualPropertyFormElement extends UpdatingElement {
           <VisualPropertyForm
             ref={this._formUtils}
             labelIcon={this.labelIcon}
-            propertyTypeList={this.propertyTypeList}
+            propertyTypeList={extractCommonProps(this.propertyTypeList)}
             brickProperties={this.brickProperties}
             brickInfo={this.brickInfo}
+            emptyConfig={this.emptyConfig}
             onValuesChange={this._handleValuesChange}
           />
         </BrickWrapper>,

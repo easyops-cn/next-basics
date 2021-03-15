@@ -1,4 +1,9 @@
-import React, { useEffect, useImperativeHandle, useState } from "react";
+import React, {
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from "react";
 import {
   Form,
   Input,
@@ -7,13 +12,15 @@ import {
   Select,
   Tooltip,
   Collapse,
+  Empty,
 } from "antd";
+import { EmptyProps } from "antd/lib/empty";
 import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import update from "immutability-helper";
-import { isNil, pick, upperFirst } from "lodash";
+import { isNil, pick, upperFirst, isEmpty } from "lodash";
 import styles from "./VisualPropertyForm.module.css";
-import { FormInstance, FormProps } from "antd/lib/form";
+import { FormProps } from "antd/lib/form";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { IconSelectFormItem } from "./components/IconSelect/IconSelectFormItem";
 import { ColorEditorItem } from "./components/ColorEditor/ColorEditorItem";
@@ -24,43 +31,14 @@ import {
   yamlStringify,
 } from "./processor";
 import { OTHER_FORM_ITEM_FIELD } from "./constant";
-
-type FormItemType = boolean | string | string[] | number | Record<string, any>;
-
-enum Required {
-  True = "true",
-  False = "false",
-}
-
-export enum ItemModeType {
-  Normal = "normal",
-  Advanced = "advanced",
-}
-
-export interface PropertyType {
-  type: FormItemType;
-  name: string;
-  required?: Required;
-  description?: string;
-  default?: string;
-  group?: string;
-}
-
-export interface UnionPropertyType extends PropertyType {
-  mode?: ItemModeType;
-  value?: any;
-  jsonSchema?: Record<string, any>;
-  schemaRef?: string;
-}
-
-export type BrickProperties = Record<string, any>;
-export interface visualFormUtils extends Partial<FormInstance> {
-  resetPropertyFields: (
-    typeList: PropertyType[],
-    properties: BrickProperties
-  ) => void;
-  getCurTypeList: () => UnionPropertyType[];
-}
+import {
+  PropertyType,
+  BrickProperties,
+  visualFormUtils,
+  ItemModeType,
+  UnionPropertyType,
+  Required,
+} from "../interfaces";
 
 export interface VisualPropertyFormProps {
   propertyTypeList: PropertyType[];
@@ -73,13 +51,20 @@ export interface VisualPropertyFormProps {
   brickInfo?: {
     type: "brick" | "provider" | "template";
   };
+  emptyConfig?: EmptyProps;
 }
 
 export function LegacyVisualPropertyForm(
   props: VisualPropertyFormProps,
   ref: React.Ref<visualFormUtils>
 ): React.ReactElement {
-  const { labelIcon, propertyTypeList, brickProperties, brickInfo } = props;
+  const {
+    labelIcon,
+    propertyTypeList,
+    brickProperties,
+    brickInfo,
+    emptyConfig,
+  } = props;
   const [form] = Form.useForm();
   const [typeList, setTypeList] = useState<UnionPropertyType[]>(
     mergeProperties(propertyTypeList, brickProperties)
@@ -300,7 +285,13 @@ export function LegacyVisualPropertyForm(
     }
   };
 
-  return (
+  return isEmpty(typeList) ? (
+    <Empty
+      description={emptyConfig?.description}
+      image={Empty.PRESENTED_IMAGE_SIMPLE}
+      imageStyle={emptyConfig?.imageStyle}
+    />
+  ) : (
     <Form
       name="propertyForm"
       layout="vertical"
@@ -322,6 +313,7 @@ export function LegacyVisualPropertyForm(
         })}
 
         <Collapse.Panel
+          className={styles.otherPanel}
           forceRender={true}
           header={upperFirst(OTHER_FORM_ITEM_FIELD)}
           key={OTHER_FORM_ITEM_FIELD}

@@ -1,10 +1,23 @@
 .wrapper {
+  border-radius: var(--editor-brick-border-radius);
+}
+
+.hasChildren {
+  min-height: var(--editor-brick-base-height);
+  border: 1px solid var(--editor-brick-stroke-color);
+  padding: var(--editor-brick-gap);
+}
+
+.hasChildren > * + * {
+  margin-top: var(--editor-brick-gap);
+}
+
+.noChildren {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--editor-brick-base-height);
   padding: 0 10px;
-  border-radius: var(--editor-brick-border-radius);
+  height: var(--editor-brick-base-height);
   background: var(--editor-brick-skeleton-bg-light);
 }
 

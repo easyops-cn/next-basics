@@ -4,12 +4,18 @@ import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import classNames from "classnames";
 import {
+  BranchesOutlined,
+  DatabaseFilled,
+  MessageFilled,
+} from "@ant-design/icons";
+import {
   useBuilderDataManager,
   useBuilderNode,
   useBuilderNodeMountPoints,
   useBuilderParentNode,
   useCanDrop,
   useBuilderGroupedChildNodes,
+  isRouteNode,
 } from "@next-core/editor-bricks-helper";
 import { StoryboardTreeMountPoint } from "../StoryboardTreeMountPoint/StoryboardTreeMountPoint";
 import { treeViewPaddingUnit } from "../constants";
@@ -17,7 +23,6 @@ import { DraggingNodeItem, StoryboardTreeTransferType } from "../interfaces";
 import { handleDropOnNode } from "./handleDropOnNode";
 
 import styles from "./StoryboardTreeNode.module.css";
-import { DatabaseFilled, MessageFilled } from "@ant-design/icons";
 
 export interface StoryboardTreeNodeProps {
   nodeUid: number;
@@ -29,6 +34,7 @@ export enum DisplayType {
   DEFAULT = "default",
   PROVIDER = "provider",
   PORTAL = "portal",
+  ROUTE = "route",
 }
 
 export function StoryboardTreeNode({
@@ -55,6 +61,7 @@ export function StoryboardTreeNode({
       nodeUid,
       nodeId: node.id,
       nodeInstanceId: node.instanceId,
+      nodeType: node.type,
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -63,7 +70,11 @@ export function StoryboardTreeNode({
 
   const [{ isDraggingOverCurrent }, dropRef] = useDrop({
     accept: StoryboardTreeTransferType.NODE,
-    canDrop: (item: DraggingNodeItem) => canDrop(item.nodeUid, nodeUid),
+    canDrop: (item: DraggingNodeItem) =>
+      canDrop(item.nodeUid, nodeUid) &&
+      (Number(isRouteNode(node)) ^
+        Number(isRouteNode({ type: item.nodeType } as any))) ===
+        0,
     collect: (monitor) => ({
       isDraggingOverCurrent: monitor.isOver() && monitor.canDrop(),
     }),
@@ -103,6 +114,9 @@ export function StoryboardTreeNode({
   } else if (node.portal) {
     displayType = DisplayType.PORTAL;
     icon = <MessageFilled />;
+  } else if (isRouteNode(node)) {
+    displayType = DisplayType.ROUTE;
+    icon = <BranchesOutlined />;
   }
 
   return (
@@ -128,16 +142,18 @@ export function StoryboardTreeNode({
         {icon && <div className={styles.icon}>{icon}</div>}
         <div className={styles.nodeName}>{node.alias}</div>
       </div>
-      <ul className={styles.mountPointList}>
-        {mountPoints.map((childMountPoint) => (
-          <StoryboardTreeMountPoint
-            level={level + 1}
-            key={childMountPoint}
-            nodeUid={nodeUid}
-            mountPoint={childMountPoint}
-          />
-        ))}
-      </ul>
+      {mountPoints.length > 0 && (
+        <ul className={styles.mountPointList}>
+          {mountPoints.map((childMountPoint) => (
+            <StoryboardTreeMountPoint
+              level={level + 1}
+              key={childMountPoint}
+              nodeUid={nodeUid}
+              mountPoint={childMountPoint}
+            />
+          ))}
+        </ul>
+      )}
       <div
         className={styles.dropCursor}
         style={{

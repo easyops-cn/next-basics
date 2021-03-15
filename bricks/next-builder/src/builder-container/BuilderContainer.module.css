@@ -14,3 +14,9 @@
   bottom: 0;
   z-index: 110;
 }
+
+.builderWrapper {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+}

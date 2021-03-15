@@ -20,13 +20,12 @@ interface GeneralTimePickerProperties extends FormItemProps {
 
 export function GeneralTimePickerEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralTimePickerProperties>({ nodeUid });
   const { label, required, placeholder } = node.$$parsedProperties;
 
   return (
-    <EditorContainer nodeUid={nodeUid} brick={brick}>
+    <EditorContainer nodeUid={nodeUid}>
       <div className={formSharedStyle.formItemWrapper}>
         <div
           className={classNames(formSharedStyle.labelContainer, {

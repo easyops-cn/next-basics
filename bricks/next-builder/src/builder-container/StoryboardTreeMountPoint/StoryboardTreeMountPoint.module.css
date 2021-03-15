@@ -15,7 +15,13 @@
 }
 
 .slotName {
+  height: 22px;
+  line-height: 22px;
   color: var(--antd-text-color-secondary);
+}
+
+.routeMountPoint > .slotNameWrapper > .slotName {
+  color: var(--theme-cyan-color);
 }
 
 .dropMountPointCursor,

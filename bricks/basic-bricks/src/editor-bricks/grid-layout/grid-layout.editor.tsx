@@ -16,7 +16,6 @@ interface GridLayoutProperties {
 
 export function GridLayoutEditor({
   nodeUid,
-  brick,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GridLayoutProperties>({ nodeUid });
   const { columns } = node.$$parsedProperties;
@@ -24,7 +23,6 @@ export function GridLayoutEditor({
   return (
     <EditorContainer
       nodeUid={nodeUid}
-      brick={brick}
       type={EditorBrickType.CONTAINER}
       isTransparentContainer
     >

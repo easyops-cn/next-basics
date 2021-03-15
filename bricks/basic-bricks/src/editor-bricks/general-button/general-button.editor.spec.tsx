@@ -14,9 +14,7 @@ describe("GeneralButtonEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
-    const wrapper = shallow(
-      <GeneralButtonEditor nodeUid={1} brick="general-button" />
-    );
+    const wrapper = shallow(<GeneralButtonEditor nodeUid={1} />);
     expect(wrapper.find(".button").text()).toBe("my-brick");
     expect(wrapper.find(".button").prop("className")).not.toContain("primary");
   });
@@ -31,9 +29,7 @@ describe("GeneralButtonEditor", () => {
         buttonName: "Save",
       },
     });
-    const wrapper = shallow(
-      <GeneralButtonEditor nodeUid={1} brick="general-button" />
-    );
+    const wrapper = shallow(<GeneralButtonEditor nodeUid={1} />);
     expect(wrapper.find(".button").text()).toBe("Save");
   });
 
@@ -47,9 +43,7 @@ describe("GeneralButtonEditor", () => {
         buttonName: "<% I18N('BTN_SAVE') %>",
       },
     });
-    const wrapper = shallow(
-      <GeneralButtonEditor nodeUid={1} brick="general-button" />
-    );
+    const wrapper = shallow(<GeneralButtonEditor nodeUid={1} />);
     expect(wrapper.find(".button").text()).toBe("BTN_SAVE");
   });
 
@@ -63,9 +57,7 @@ describe("GeneralButtonEditor", () => {
         buttonName: "<% CTX.buttonName %>",
       },
     });
-    const wrapper = shallow(
-      <GeneralButtonEditor nodeUid={1} brick="general-button" />
-    );
+    const wrapper = shallow(<GeneralButtonEditor nodeUid={1} />);
     expect(wrapper.find(".button").text()).toBe("my-brick");
   });
 
@@ -79,9 +71,7 @@ describe("GeneralButtonEditor", () => {
         buttonType: "primary",
       },
     });
-    const wrapper = shallow(
-      <GeneralButtonEditor nodeUid={1} brick="general-button" />
-    );
+    const wrapper = shallow(<GeneralButtonEditor nodeUid={1} />);
     expect(wrapper.find(".button").prop("className")).toContain("primary");
   });
 });

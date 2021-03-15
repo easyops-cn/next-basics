@@ -19,9 +19,6 @@
 .toolboxPaneTitle {
 }
 
-.toolboxPaneActions {
-}
-
 .toolboxPaneBody {
   flex: auto;
   overflow: hidden;

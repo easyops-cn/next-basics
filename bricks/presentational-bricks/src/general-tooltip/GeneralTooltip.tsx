@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Popover, Tooltip } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { MenuIcon } from "@next-core/brick-types";
+import { UseBrickConf, MenuIcon } from "@next-core/brick-types";
+import { BrickAsComponent } from "@next-core/brick-kit";
 import style from "./GeneralTooltip.module.css";
 import { TooltipConfig } from ".";
 
@@ -13,6 +14,11 @@ export interface GeneralTooltipProps {
   type: "tooltip" | "popover";
   text?: string;
   tooltipConfig?: TooltipConfig;
+  triggerByIcon?: boolean;
+  displayBrick?: {
+    useBrick: UseBrickConf;
+    data?: any;
+  };
 }
 
 export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
@@ -24,8 +30,32 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     title,
     text,
     tooltipConfig,
+    triggerByIcon,
+    displayBrick,
   } = props;
+  let element: React.ReactElement;
+  const customElementRef = useRef<HTMLDivElement>();
   const { placement, arrowPointAtCenter } = tooltipConfig || {};
+
+  useEffect(() => {
+    if (displayBrick?.useBrick) {
+      const handleMouseover = (): void => {
+        customElementRef.current?.parentNode?.dispatchEvent(
+          new MouseEvent("mouseover", {
+            bubbles: true,
+          })
+        );
+      };
+      customElementRef.current?.addEventListener("mouseover", handleMouseover);
+      return () => {
+        customElementRef.current?.removeEventListener(
+          "mouseover",
+          handleMouseover
+        );
+      };
+    }
+  }, []);
+
   let tipsElem;
   if (Array.isArray(content)) {
     tipsElem = (
@@ -85,38 +115,54 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     }
     return offset;
   };
-  const toolTipNode =
-    type === "popover" ? (
-      <Popover
-        align={{
-          offset: placement ? getOffset(placement) : [0, 1],
-        }}
-        placement={placement}
-        arrowPointAtCenter={arrowPointAtCenter}
-        content={tipsElem}
-        title={title}
-      >
-        {iconNode}
-      </Popover>
+
+  const popoverProps = {
+    align: {
+      offset: placement ? getOffset(placement) : [0, 1],
+    },
+    placement,
+    arrowPointAtCenter,
+    title,
+    content: tipsElem,
+  };
+  const tooltipProps = {
+    align: {
+      offset: placement ? getOffset(placement) : [0, 1],
+    },
+    placement,
+    arrowPointAtCenter,
+    title: tipsElem,
+  };
+
+  const renderElement = (Component: any, componentProps: any) =>
+    displayBrick?.useBrick ? (
+      <Component {...componentProps}>
+        <div className="contentContainer">
+          <div ref={customElementRef}>
+            <BrickAsComponent
+              data={displayBrick.data}
+              useBrick={displayBrick.useBrick}
+            />
+          </div>
+        </div>
+      </Component>
     ) : (
-      <Tooltip
-        align={{
-          offset: placement ? getOffset(placement) : [0, 1],
-        }}
-        placement={placement}
-        arrowPointAtCenter={arrowPointAtCenter}
-        title={tipsElem}
-      >
-        {iconNode}
-      </Tooltip>
+      <>
+        {triggerByIcon && text && <span className={style.text}>{text}</span>}
+        <Component {...componentProps}>
+          {!triggerByIcon && text && <span className={style.text}>{text}</span>}
+          {iconNode}
+        </Component>
+      </>
     );
 
-  return text ? (
-    <>
-      <span className={style.text}>{text}</span>
-      {toolTipNode}
-    </>
-  ) : (
-    toolTipNode
-  );
+  switch (type) {
+    case "popover":
+      element = renderElement(Popover, popoverProps);
+      break;
+    default:
+      element = renderElement(Tooltip, tooltipProps);
+  }
+
+  return element;
 }

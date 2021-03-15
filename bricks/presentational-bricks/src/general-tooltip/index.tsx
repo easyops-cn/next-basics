@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { UseBrickConf } from "@next-core/brick-types";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { GeneralTooltip, GeneralTooltipProps } from "./GeneralTooltip";
 
@@ -112,6 +113,31 @@ export class GeneralTooltipElement extends UpdatingElement {
   @property({ attribute: false })
   tooltipConfig: TooltipConfig;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否只在icon上hover才显示tooltip，仅在不设置`displayBrick`时有效
+   */
+  @property({
+    attribute: false,
+  })
+  triggerByIcon = true;
+
+  /**
+   * @kind CustomBrick
+   * @required false
+   * @default -
+   * @description 自定义展示内容构件，设置后`icon`和`text`会无效
+   */
+  @property({
+    attribute: false,
+  })
+  displayBrick: {
+    useBrick: UseBrickConf;
+    data?: any;
+  };
+
   connectedCallback(): void {
     this.style.display = "inline-block";
     this._render();
@@ -134,6 +160,8 @@ export class GeneralTooltipElement extends UpdatingElement {
             title={this.header}
             type={this.type}
             tooltipConfig={this.tooltipConfig}
+            triggerByIcon={this.triggerByIcon}
+            displayBrick={this.displayBrick}
           />
         </BrickWrapper>,
         this

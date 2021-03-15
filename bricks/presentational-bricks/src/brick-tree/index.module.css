@@ -1,0 +1,32 @@
+.treeWrapper {
+  overflow: auto;
+  flex-grow: 1;
+  padding: 10px 10px 6px;
+  background: "var(--antd-component-background)";
+}
+.treeWithSuffixWrapper {
+  overflow: auto;
+  flex-grow: 1;
+  padding: 10px 10px 6px;
+  background: "var(--antd-component-background)";
+
+  .suffixBrickWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    > span:first-child {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+  }
+
+  :global(.ant-tree-treenode) {
+    width: 100%;
+  }
+
+  :global(.ant-tree-node-content-wrapper) {
+    width: 100%;
+  }
+}

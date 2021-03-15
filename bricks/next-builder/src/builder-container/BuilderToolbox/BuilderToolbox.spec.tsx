@@ -17,7 +17,7 @@ describe("BuilderToolbox", () => {
   let dataType: BuilderDataType;
   beforeEach(() => {
     toolboxTab = defaultToolboxTab;
-    dataType = BuilderDataType.ROUTE;
+    dataType = BuilderDataType.ROUTE_OF_BRICKS;
     mockUseBuilderUIContext.mockImplementation(() => ({
       dataType,
       fullscreen: false,

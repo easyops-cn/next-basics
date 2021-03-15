@@ -15,9 +15,6 @@ export function ToolboxPane({
     <div className={styles.toolboxPane}>
       <div className={styles.toolboxPaneHeading}>
         <div className={styles.toolboxPaneTitle}>{title}</div>
-        <div className={styles.toolboxPaneActions}>
-          <RootNodeSelect />
-        </div>
       </div>
       <div className={styles.toolboxPaneBody}>{children}</div>
     </div>

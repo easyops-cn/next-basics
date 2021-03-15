@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.154.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.1...@next-bricks/forms@1.154.2) (2021-03-15)
+
+
+### Bug Fixes
+
+* **forms:** TimeRangePicker render with no initValue ([503f253](https://github.com/easyops-cn/next-basics/commit/503f253fcdbb60d6c1925f5068ffbf9679f8b545))
+
+
+
+
+
+## [1.154.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.0...@next-bricks/forms@1.154.1) (2021-03-12)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
+# [1.154.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.2...@next-bricks/forms@1.154.0) (2021-03-10)
+
+
+### Features
+
+* 实例选择器添加disabled属性 ([73d4ed6](https://github.com/easyops-cn/next-basics/commit/73d4ed60f59faaf634c428a930fc713b224e6631))
+
+
+
+
+
+## [1.153.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.1...@next-bricks/forms@1.153.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
+
+
+
+
+
+## [1.153.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.153.0...@next-bricks/forms@1.153.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* editor-bricks add smart display ([171026e](https://github.com/easyops-cn/next-basics/commit/171026e3689ec66d4193fb6339becb9bad76a3b5))
+
+
+
+
+
 # [1.153.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.152.0...@next-bricks/forms@1.153.0) (2021-03-05)
 
 
