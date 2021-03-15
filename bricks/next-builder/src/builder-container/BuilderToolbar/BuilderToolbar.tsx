@@ -10,6 +10,7 @@ import { BuilderRouteNode } from "@next-core/brick-types";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { BuilderDataType } from "../interfaces";
+import { Tooltip } from "antd";
 
 export function BuilderToolbar(): React.ReactElement {
   const {
@@ -35,37 +36,40 @@ export function BuilderToolbar(): React.ReactElement {
     <div className={styles.toolbarContainer}>
       <div className={styles.toolbarLeft}>
         {dataType !== BuilderDataType.CUSTOM_TEMPLATE && (
-          <a
-            className={styles.tabLink}
-            role="button"
-            onClick={handleRouteClick}
-            title="View Route"
-            data-testid="view-route"
-          >
-            <BranchesOutlined />
-          </a>
+          <Tooltip title="View Route" placement="bottom">
+            <a
+              className={styles.tabLink}
+              role="button"
+              onClick={handleRouteClick}
+              data-testid="view-route"
+            >
+              <BranchesOutlined />
+            </a>
+          </Tooltip>
         )}
         <RootNodeSelect />
       </div>
       <div className={styles.toolbarRight}>
-        <a
-          className={styles.tabLink}
-          role="button"
-          onClick={handleBuildAndPush}
-          title="Build & Push (Ctrl+B)"
-          data-testid="build-and-push"
-        >
-          <ApiOutlined />
-        </a>
-        <a
-          className={styles.tabLink}
-          role="button"
-          onClick={handlePreview}
-          title="Preview"
-          data-testid="preview"
-        >
-          <CaretRightOutlined />
-        </a>
+        <Tooltip title="Build & Push (Ctrl+B)" placement="bottom">
+          <a
+            className={styles.tabLink}
+            role="button"
+            onClick={handleBuildAndPush}
+            data-testid="build-and-push"
+          >
+            <ApiOutlined />
+          </a>
+        </Tooltip>
+        <Tooltip title="Preview" placement="bottom">
+          <a
+            className={styles.tabLink}
+            role="button"
+            onClick={handlePreview}
+            data-testid="preview"
+          >
+            <CaretRightOutlined />
+          </a>
+        </Tooltip>
       </div>
     </div>
   );
