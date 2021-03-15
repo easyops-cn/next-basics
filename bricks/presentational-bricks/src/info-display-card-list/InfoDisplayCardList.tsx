@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Empty, Card } from "antd";
+import { List, Empty, Card, Tooltip } from "antd";
 import { CardDetail, CardItem } from "./index";
 import styles from "./index.module.css";
 import { GeneralIcon } from "@next-libs/basic-components";
@@ -28,7 +28,9 @@ export function InfoDisplayCardList({
   ): React.ReactNode => (
     <div className={styles.infoCardDetailWrapper} key={index}>
       <h5>{item.title}</h5>
-      <p>{item.desc}</p>
+      <Tooltip title={item.desc}>
+        <p>{item.desc}</p>
+      </Tooltip>
     </div>
   );
 
