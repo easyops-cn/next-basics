@@ -1,6 +1,6 @@
 import { BrickOptionItem, ToolboxTab } from "./interfaces";
 
-export const brickSearchResultLimit = 20;
+export const brickSearchResultLimit = 24;
 
 export const frequentlyUsedBricks: BrickOptionItem[] = [
   {
@@ -17,6 +17,30 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
   },
   {
     type: "brick",
+    name: "basic-bricks.grid-layout",
+  },
+  {
+    type: "brick",
+    name: "basic-bricks.general-modal",
+  },
+  {
+    type: "brick",
+    name: "basic-bricks.general-drawer",
+  },
+  {
+    type: "brick",
+    name: "basic-bricks.general-custom-buttons",
+  },
+  {
+    type: "brick",
+    name: "basic-bricks.popover-container",
+  },
+  {
+    type: "brick",
+    name: "forms.general-form",
+  },
+  {
+    type: "brick",
     name: "forms.general-input",
   },
   {
@@ -25,7 +49,23 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
   },
   {
     type: "brick",
+    name: "forms.general-radio",
+  },
+  {
+    type: "brick",
+    name: "forms.general-textarea",
+  },
+  {
+    type: "brick",
+    name: "forms.general-time-picker",
+  },
+  {
+    type: "brick",
     name: "forms.cmdb-instance-select",
+  },
+  {
+    type: "brick",
+    name: "forms.general-buttons",
   },
   {
     type: "brick",
@@ -37,7 +77,27 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
   },
   {
     type: "brick",
+    name: "presentational-bricks.brick-descriptions",
+  },
+  {
+    type: "brick",
+    name: "presentational-bricks.brick-tag",
+  },
+  {
+    type: "brick",
     name: "presentational-bricks.modal-confirm",
+  },
+  {
+    type: "brick",
+    name: "presentational-bricks.brick-general-search",
+  },
+  {
+    type: "brick",
+    name: "presentational-bricks.brick-tree",
+  },
+  {
+    type: "brick",
+    name: "presentational-bricks.general-image",
   },
 ];
 

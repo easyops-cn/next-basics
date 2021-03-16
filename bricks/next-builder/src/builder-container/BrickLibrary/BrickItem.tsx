@@ -64,7 +64,7 @@ export function BrickItem({ brick, onDraggingChange }: BrickItemProps): React.Re
   return (
     <div className={`${styles.brickItem} ${styles[brick.type]}`} ref={dragRef}>
       <span className={styles.brickIcon}>{icon}</span>
-      <span className={styles.brickName}>{brick.shortName}</span>
+      <span className={styles.brickName} title={brick.shortName}>{brick.shortName}</span>
     </div>
   );
 }
