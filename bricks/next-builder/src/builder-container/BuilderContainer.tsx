@@ -221,7 +221,6 @@ export function LegacyBuilderContainer(
         <BuilderToolbar />
         <div className={styles.builderWrapper}>
           <BuilderToolbox
-            brickList={brickList}
             onContextUpdate={onContextUpdate}
           />
           <BuilderCanvas />

@@ -4,7 +4,8 @@ import {
   FullscreenOutlined,
   PartitionOutlined,
   DatabaseOutlined,
-  PlusSquareOutlined
+  PlusSquareOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
@@ -19,7 +20,6 @@ import { DataView } from "../DataView/DataView";
 import styles from "./BuilderToolbox.module.css";
 
 export interface BuilderToolboxProps {
-  brickList?: BrickOptionItem[];
   onContextUpdate?: (context: ContextConf[]) => void;
 }
 
@@ -33,7 +33,6 @@ interface ToolboxTabConf {
 React.createElement;
 
 export function BuilderToolbox({
-  brickList,
   onContextUpdate,
 }: BuilderToolboxProps): React.ReactElement {
   const {
@@ -56,7 +55,7 @@ export function BuilderToolbox({
     {
       tab: ToolboxTab.LIBRARY,
       icon() {
-        return <PlusSquareOutlined />;
+        return <PlusOutlined />;
       },
       content() {
         return <BrickLibrary />;

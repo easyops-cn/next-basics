@@ -7,6 +7,7 @@ import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { Trans, useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import classNames from "classnames";
 
 import styles from "./BrickLibrary.module.css";
 
@@ -39,9 +40,13 @@ export function BrickLibrary({
         onSearch={handleSearch}
       />
       <div className={styles.resultWrapper}>
-        <ul className={styles.groupList}>
+        <ul 
+          className={classNames(styles.groupList,{
+            [styles.columnGroupList]: hideToolboxPane
+          })}
+        >
           {filteredGroups.map((group) => (
-            <li key={group.scope}>
+            <li key={group.scope} className={styles.groupWrapper}>
               <div className={styles.groupName}>{group.scope}</div>
               <ul className={styles.brickList}>
                 {group.bricks.map((brick) => (
