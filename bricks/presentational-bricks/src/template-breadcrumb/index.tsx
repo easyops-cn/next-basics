@@ -1,4 +1,4 @@
-import { getRuntime } from "@next-core/brick-kit";
+import { getRuntime, property } from "@next-core/brick-kit";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 
@@ -64,6 +64,9 @@ export class TemplateBreadcrumbElement extends HTMLElement {
    * @default -
    * @description 解析模板时的数据源
    */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
   set dataSource(value: Record<string, any>) {
     if (this._dataSource !== value) {
       this._dataSource = value;

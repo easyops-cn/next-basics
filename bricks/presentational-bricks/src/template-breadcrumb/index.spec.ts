@@ -1,26 +1,25 @@
 import "./";
-import { getRuntime } from "@next-core/brick-kit";
+import * as brickKit from "@next-core/brick-kit";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { TemplateBreadcrumbElement } from "./";
 
-jest.mock("@next-core/brick-kit");
+const mockGetRuntime = jest.spyOn(brickKit, "getRuntime");
 
-const mockGetRuntime = getRuntime as jest.Mock;
 const breadcrumbs: BreadcrumbItemConf[] = [
   {
     text: "#{name1}",
-    to: "/url/#{id1}"
+    to: "/url/#{id1}",
   },
   {
     text: "#{name2}",
     to: {
       pathname: "/url",
-      search: "?id=#{id2}"
-    }
+      search: "?id=#{id2}",
+    },
   },
   {
-    text: "#{name3}"
-  }
+    text: "#{name3}",
+  },
 ];
 const mockSetBreadcrumb = jest.fn();
 const dataSource = {
@@ -28,14 +27,14 @@ const dataSource = {
   name2: "bbb",
   name3: "ccc",
   id1: 111,
-  id2: 222
+  id2: 222,
 };
 
 mockGetRuntime.mockReturnValue({
   appBar: {
     element: { breadcrumb: breadcrumbs },
-    setBreadcrumb: mockSetBreadcrumb
-  }
+    setBreadcrumb: mockSetBreadcrumb,
+  },
 });
 
 describe("presentational-bricks.template-breadcrumb", () => {
@@ -50,35 +49,35 @@ describe("presentational-bricks.template-breadcrumb", () => {
     expect(mockSetBreadcrumb).toBeCalledWith([
       {
         text: "#{name1}",
-        to: "/url/"
+        to: "/url/",
       },
       {
         text: "#{name2}",
         to: {
           pathname: "/url",
-          search: "?id="
-        }
+          search: "?id=",
+        },
       },
       {
-        text: "#{name3}"
-      }
+        text: "#{name3}",
+      },
     ]);
     element.dataSource = dataSource;
     expect(mockSetBreadcrumb).toBeCalledWith([
       {
         text: "aaa",
-        to: "/url/111"
+        to: "/url/111",
       },
       {
         text: "bbb",
         to: {
           pathname: "/url",
-          search: "?id=222"
-        }
+          search: "?id=222",
+        },
       },
       {
-        text: "ccc"
-      }
+        text: "ccc",
+      },
     ]);
     document.body.removeChild(element);
   });

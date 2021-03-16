@@ -348,6 +348,53 @@ export class BrickTableElement extends UpdatingElement {
   }>;
 
   /**
+   * @kind CustomColumn[]
+   * @required false
+   * @default -
+   * @description 扩展自 ant-design 的 Column 相关配置项,具体查阅：<a href="https://ant.design/components/table-cn/#Column" target="_blank">https://ant.design/components/table-cn/#Column</a>
+   */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
+  set columns(value: CustomColumn[]) {
+    this._columns = value;
+    this._render();
+  }
+  get columns(): CustomColumn[] {
+    return this._columns;
+  }
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description 数据源，通过 useResolves 从后台接口获取或者直接在 storyboard 中配置
+   */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
+  set dataSource(value: Record<string, any>[]) {
+    this._isInSelect = false;
+    this._originalDataSource = value;
+    this._dataSource = cloneDeep(
+      this._fields.dataSource ? get(value, this._fields.dataSource) : value
+    );
+    // 前端搜索需要保留一个干净的数据
+    this._pureSource = cloneDeep(this._dataSource);
+    if (this.stripEmptyExpandableChildren) {
+      const columnName =
+        this.configProps?.expandable?.childrenColumnName || "children";
+      stripEmptyExpandableChildrenByName(columnName, this._dataSource);
+    }
+    this._total = get(value, this._fields.total);
+    this.page = this.page ?? (get(value, "page") || 1);
+    this.pageSize =
+      this.pageSize ??
+      (get(value, "page_size") || get(value, "pageSize") || 10);
+    this._render();
+  }
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -1375,33 +1422,6 @@ export class BrickTableElement extends UpdatingElement {
     }
   };
 
-  /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description 数据源，通过 useResolves 从后台接口获取或者直接在 storyboard 中配置
-   */
-  set dataSource(value: Record<string, any>[]) {
-    this._isInSelect = false;
-    this._originalDataSource = value;
-    this._dataSource = cloneDeep(
-      this._fields.dataSource ? get(value, this._fields.dataSource) : value
-    );
-    // 前端搜索需要保留一个干净的数据
-    this._pureSource = cloneDeep(this._dataSource);
-    if (this.stripEmptyExpandableChildren) {
-      const columnName =
-        this.configProps?.expandable?.childrenColumnName || "children";
-      stripEmptyExpandableChildrenByName(columnName, this._dataSource);
-    }
-    this._total = get(value, this._fields.total);
-    this.page = this.page ?? (get(value, "page") || 1);
-    this.pageSize =
-      this.pageSize ??
-      (get(value, "page_size") || get(value, "pageSize") || 10);
-    this._render();
-  }
-
   _test_only_getOriginalDataSource(): Record<string, any>[] {
     return this._originalDataSource;
   }
@@ -1434,25 +1454,14 @@ export class BrickTableElement extends UpdatingElement {
   }
 
   /**
-   * @kind CustomColumn[]
-   * @required false
-   * @default -
-   * @description 扩展自 ant-design 的 Column 相关配置项,具体查阅：<a href="https://ant.design/components/table-cn/#Column" target="_blank">https://ant.design/components/table-cn/#Column</a>
-   */
-  set columns(value: CustomColumn[]) {
-    this._columns = value;
-    this._render();
-  }
-  get columns(): CustomColumn[] {
-    return this._columns;
-  }
-
-  /**
    * @kind object
    * @required false
    * @default -
    * @description 设置相关字段取自哪里，具体描述见下表
    */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
   set fields(value: any) {
     this._fields = { ...this._fields, ...value };
     this._render();
