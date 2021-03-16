@@ -99,12 +99,7 @@ export function BuilderToolbox({
   ];
 
   return (
-    <div
-      className={classNames(styles.builderToolbox, {
-        [styles.fullscreen]: fullscreen,
-      })}
-      data-override-theme="dark"
-    >
+    <div className={styles.builderToolbox} data-override-theme="dark">
       <ul className={styles.tabList}>
         {tabList.map(
           (tabConf) =>

@@ -4,7 +4,7 @@ import { searchBricks } from "./searchBricks";
 import { BrickItem } from "./BrickItem";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { useBuilderUIContext } from "../BuilderUIContext";
 
@@ -46,8 +46,8 @@ export function BrickLibrary({
               <ul className={styles.brickList}>
                 {group.bricks.map((brick) => (
                   <li key={brick.name}>
-                    <BrickItem 
-                      brick={brick} 
+                    <BrickItem
+                      brick={brick}
                       onDraggingChange={onDraggingChange}
                     />
                   </li>
@@ -59,13 +59,25 @@ export function BrickLibrary({
       </div>
     </>
   )
-  
+
   if(hideToolboxPane){
     return content;
   }
 
   return (
-    <ToolboxPane title={t(K.LIBRARY)}>
+    <ToolboxPane
+      title={t(K.LIBRARY)}
+      tooltips={
+        <>
+          <p>
+            <Trans t={t} i18nKey={K.LIBRARY_VIEW_TIPS_1} />
+          </p>
+          <p>
+            <Trans t={t} i18nKey={K.LIBRARY_VIEW_TIPS_2} />
+          </p>
+        </>
+      }
+    >
       {content}
     </ToolboxPane>
   );

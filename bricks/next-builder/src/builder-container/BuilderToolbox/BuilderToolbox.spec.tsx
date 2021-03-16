@@ -32,19 +32,6 @@ describe("BuilderToolbox", () => {
     const wrapper = shallow(<BuilderToolbox />);
     expect(wrapper.find("StoryboardTreeView").length).toBe(1);
     expect(wrapper.find("BrickLibrary").length).toBe(0);
-    expect(wrapper.find(".builderToolbox").prop("className")).not.toContain(
-      "fullscreen"
-    );
-  });
-
-  it("should display as fullscreen", () => {
-    mockUseBuilderUIContext.mockReturnValueOnce({
-      fullscreen: true,
-    });
-    const wrapper = shallow(<BuilderToolbox />);
-    expect(wrapper.find(".builderToolbox").prop("className")).toContain(
-      "fullscreen"
-    );
   });
 
   it("should switch to library", () => {

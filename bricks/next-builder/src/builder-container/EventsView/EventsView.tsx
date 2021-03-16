@@ -1,11 +1,11 @@
 import React from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { useBuilderData } from "@next-core/editor-bricks-helper";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { getBricksWithEvents } from "./getBricksWithEvents";
 import { BrickWithEventsItem } from "./BrickWithEventsItem";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { filterBricksWithEvents } from "./filterBricksWithEvents";
-import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 import styles from "./EventsView.module.css";
@@ -26,7 +26,19 @@ export function EventsView(): React.ReactElement {
   );
 
   return (
-    <ToolboxPane title={t(K.EVENTS)}>
+    <ToolboxPane
+      title={t(K.EVENTS)}
+      tooltips={
+        <>
+          <p>
+            <Trans t={t} i18nKey={K.EVENTS_VIEW_TIPS_1} />
+          </p>
+          <p>
+            <Trans t={t} i18nKey={K.EVENTS_VIEW_TIPS_2} />
+          </p>
+        </>
+      }
+    >
       <SearchComponent
         placeholder={t(K.SEARCH_BRICKS_WITH_EVENTS)}
         onSearch={handleSearch}

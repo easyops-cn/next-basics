@@ -19,9 +19,17 @@
 .toolboxPaneTitle {
 }
 
+.toolboxPaneTooltips {
+  color: var(--text-color-secondary);
+}
+
 .toolboxPaneBody {
   flex: auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.toolboxPaneTooltips :global(.ant-popover-inner-content) > p + p {
+  margin-bottom: 0;
 }
