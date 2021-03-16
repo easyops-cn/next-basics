@@ -5,10 +5,13 @@ import { getBricksWithEvents } from "./getBricksWithEvents";
 import { BrickWithEventsItem } from "./BrickWithEventsItem";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { filterBricksWithEvents } from "./filterBricksWithEvents";
+import { useTranslation } from "react-i18next";
+import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 import styles from "./EventsView.module.css";
 
 export function EventsView(): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const { nodes } = useBuilderData();
   const bricksWithEvents = getBricksWithEvents(nodes);
   const [q, setQ] = React.useState<string>(null);
@@ -23,9 +26,9 @@ export function EventsView(): React.ReactElement {
   );
 
   return (
-    <ToolboxPane title="Events">
+    <ToolboxPane title={t(K.EVENTS)}>
       <SearchComponent
-        placeholder="Search bricks with events"
+        placeholder={t(K.SEARCH_BRICKS_WITH_EVENTS)}
         onSearch={handleSearch}
       />
       <div className={styles.eventsWrapper}>

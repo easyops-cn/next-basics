@@ -3,6 +3,9 @@ import { shallow } from "enzyme";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { Modal } from "antd";
 
+import i18next from "i18next";
+import { K } from "../../i18n/constants";
+
 jest.mock("./ContextItemForm", () => ({
   ContextItemForm: function MockContextItemForm() {
     return <div>form</div>;
@@ -51,10 +54,11 @@ describe("ContextItemFormModal", () => {
         onCancel={handleCancel}
       />
     );
-    expect(wrapper.find(Modal).prop("title")).toBe("Setting - data-a");
+    expect(wrapper.find(Modal).prop("title")).toBe(`${i18next.t(K.SETTING)} - data-a`);
+    
     wrapper.setProps({
       data: undefined,
     });
-    expect(wrapper.find(Modal).prop("title")).toBe("Add Data");
+    expect(wrapper.find(Modal).prop("title")).toBe(i18next.t(K.ADD_DATA));
   });
 });

@@ -4,6 +4,8 @@ import { ContextConf } from "@next-core/brick-types";
 import { BrickOptionItem } from "../interfaces";
 import { FormInstance } from "antd/lib/form";
 import { ContextItemForm } from "./ContextItemForm";
+import { useTranslation } from "react-i18next";
+import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 interface ContextItemFormProps {
   data: ContextConf;
@@ -24,10 +26,11 @@ export function ContextItemFormModal({
   onOk,
   onCancel,
 }: ContextItemFormProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const isCreate = useMemo(() => !data, [data]);
   return (
     <Modal
-      title={isCreate ? "Add Data" : `Setting - ${data.name}`}
+      title={isCreate ? t(K.ADD_DATA) : `${t(K.SETTING)} - ${data.name}`}
       visible={visible}
       onOk={onOk}
       onCancel={onCancel}

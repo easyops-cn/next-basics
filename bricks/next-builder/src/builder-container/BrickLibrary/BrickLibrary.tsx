@@ -4,6 +4,8 @@ import { searchBricks } from "./searchBricks";
 import { BrickItem } from "./BrickItem";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
+import { useTranslation } from "react-i18next";
+import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 import styles from "./BrickLibrary.module.css";
 
@@ -14,6 +16,7 @@ interface BrickLibraryProps {
 export function BrickLibrary({
   brickList,
 }: BrickLibraryProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const [q, setQ] = React.useState<string>();
 
   const handleSearch = (value: string): void => {
@@ -26,9 +29,9 @@ export function BrickLibrary({
   );
 
   return (
-    <ToolboxPane title="Library">
+    <ToolboxPane title={t(K.LIBRARY)}>
       <SearchComponent
-        placeholder="Search bricks in library"
+        placeholder={t(K.SEARCH_BRICKS_IN_LIBRARY)}
         onSearch={handleSearch}
       />
       <div className={styles.resultWrapper}>
