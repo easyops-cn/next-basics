@@ -39,7 +39,7 @@ export function BuilderToolbar(): React.ReactElement {
     <div className={styles.toolbarContainer}>
       <div className={styles.toolbarLeft}>
         {dataType !== BuilderDataType.CUSTOM_TEMPLATE && (
-          <Tooltip title={t(K.VIEW_ROUTE)} placement="bottom">
+          <Tooltip title={t(K.VIEW_ROUTE)} placement="bottomLeft">
             <a
               className={styles.tabLink}
               role="button"
@@ -53,7 +53,7 @@ export function BuilderToolbar(): React.ReactElement {
         <RootNodeSelect />
       </div>
       <div className={styles.toolbarRight}>
-        <Tooltip title={t(K.BUILD_AND_PUSH_TOOLTIP)} placement="bottom">
+        <Tooltip title={t(K.BUILD_AND_PUSH_TOOLTIP)} placement="bottomRight">
           <a
             className={styles.tabLink}
             role="button"
@@ -63,7 +63,7 @@ export function BuilderToolbar(): React.ReactElement {
             <ApiOutlined />
           </a>
         </Tooltip>
-        <Tooltip title={t(K.PREVIEW)} placement="bottom">
+        <Tooltip title={t(K.PREVIEW)} placement="bottomRight">
           <a
             className={styles.tabLink}
             role="button"

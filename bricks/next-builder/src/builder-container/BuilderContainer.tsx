@@ -217,12 +217,12 @@ export function LegacyBuilderContainer(
           [styles.fullscreen]: fullscreen,
         })}
       >
-        <BuilderToolbox
-          brickList={brickList}
-          onContextUpdate={onContextUpdate}
-        />
+        <BuilderToolbar />
         <div className={styles.builderWrapper}>
-          <BuilderToolbar />
+          <BuilderToolbox
+            brickList={brickList}
+            onContextUpdate={onContextUpdate}
+          />
           <BuilderCanvas />
         </div>
       </div>

@@ -1,8 +1,8 @@
 .builderContainer {
-  display: flex;
   overflow: hidden;
   background-color: #f3f4f7;
   height: calc(100vh - 148px);
+  display: grid;
 }
 
 .fullscreen {
@@ -16,7 +16,6 @@
 }
 
 .builderWrapper {
-  flex: auto;
   display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
