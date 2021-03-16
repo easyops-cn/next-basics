@@ -16,6 +16,8 @@ import InstanceNameMD from "../docs/cmdb-instances/instance-name.md";
 import InstanceChangeHistoryMD from "../docs/cmdb-instances/instance-change-history.md";
 import InstanceListMD from "../docs/cmdb-instances/instance-list.md";
 import InstanceListModalMD from "../docs/cmdb-instances/instance-list-modal.md";
+import CmdbInstancesImportMD from "../docs/cmdb-instances/cmdb-instances-import.md";
+import CmdbInstancesExportMD from "../docs/cmdb-instances/cmdb-instances-export.md";
 
 const instanceListProperties = {
   objectId: "HOST",
@@ -41,15 +43,15 @@ const instanceListProperties = {
             "ip",
             "agentVersion",
             "_agentStatus",
-            "_agentHeartBeat"
+            "_agentHeartBeat",
           ],
           hide_columns: ["diskSize", "_deviceList_CLUSTER"],
           relation_view: {
-            APP: ["name"]
+            APP: ["name"],
           },
           showHideAttrs: true,
           show_key: ["hostname"],
-          visible: true
+          visible: true,
         },
         attrList: [
           {
@@ -72,9 +74,9 @@ const instanceListProperties = {
               mode: "default",
               prefix: "",
               start_value: 0,
-              series_number_length: 0
+              series_number_length: 0,
             },
-            wordIndexDenied: false
+            wordIndexDenied: false,
           },
           {
             id: "ip",
@@ -97,9 +99,9 @@ const instanceListProperties = {
               mode: "",
               prefix: "",
               start_value: 0,
-              series_number_length: 0
+              series_number_length: 0,
             },
-            wordIndexDenied: false
+            wordIndexDenied: false,
           },
           {
             id: "agentVersion",
@@ -121,9 +123,9 @@ const instanceListProperties = {
               mode: "default",
               prefix: "",
               start_value: 0,
-              series_number_length: 0
+              series_number_length: 0,
             },
-            wordIndexDenied: false
+            wordIndexDenied: false,
           },
           {
             id: "_agentStatus",
@@ -145,9 +147,9 @@ const instanceListProperties = {
               mode: "",
               prefix: "",
               start_value: 0,
-              series_number_length: 0
+              series_number_length: 0,
             },
-            wordIndexDenied: false
+            wordIndexDenied: false,
           },
           {
             id: "_agentHeartBeat",
@@ -169,9 +171,9 @@ const instanceListProperties = {
               mode: "",
               prefix: "",
               start_value: 0,
-              series_number_length: 0
+              series_number_length: 0,
             },
-            wordIndexDenied: false
+            wordIndexDenied: false,
           },
           {
             id: "status",
@@ -194,7 +196,7 @@ const instanceListProperties = {
                 "开发机",
                 "测试机",
                 "维修中",
-                "报废"
+                "报废",
               ],
               default_type: "",
               default: null,
@@ -202,9 +204,9 @@ const instanceListProperties = {
               mode: "",
               prefix: "",
               start_value: 0,
-              series_number_length: 0
+              series_number_length: 0,
             },
-            wordIndexDenied: false
+            wordIndexDenied: false,
           },
           {
             id: "_environment",
@@ -226,32 +228,32 @@ const instanceListProperties = {
               mode: "",
               prefix: "",
               start_value: 0,
-              series_number_length: 0
+              series_number_length: 0,
             },
-            wordIndexDenied: false
-          }
+            wordIndexDenied: false,
+          },
         ],
         relation_groups: [
           {
             id: "_user",
             name: "负责人",
-            protected: true
+            protected: true,
           },
           {
             id: "_relate_connect",
             name: "位置信息",
-            protected: true
+            protected: true,
           },
           {
             id: "basic_info",
             name: "基本属性",
-            protected: true
+            protected: true,
           },
           {
             id: "rer",
             name: "erere",
-            protected: false
-          }
+            protected: false,
+          },
         ],
         relation_list: [
           {
@@ -274,41 +276,41 @@ const instanceListProperties = {
             right_max: -1,
             right_groups: [],
             right_tags: [],
-            _version: 1
-          }
+            _version: 1,
+          },
         ],
         wordIndexDenied: false,
         _version: 140,
         creator: "",
-        modifier: "easyops"
-      }
-    ]
-  }
+        modifier: "easyops",
+      },
+    ],
+  },
 };
 
 const chapter: Chapter = {
   title: {
     en: "CMDB Instances",
-    zh: "CMDB 实例"
+    zh: "CMDB 实例",
   },
   stories: [
     {
       storyId: "instance-list",
       text: {
         en: "Instance List",
-        zh: "实例列表"
+        zh: "实例列表",
       },
       conf: {
         brick: "cmdb-instances.instance-list",
-        properties: instanceListProperties
+        properties: instanceListProperties,
       },
-      doc: InstanceListMD
+      doc: InstanceListMD,
     },
     {
       storyId: "instance-list-modal",
       text: {
         en: "Instance List Modal",
-        zh: "实例列表模态框"
+        zh: "实例列表模态框",
       },
       conf: {
         brick: "cmdb-instances.instance-list-modal",
@@ -317,35 +319,35 @@ const chapter: Chapter = {
           relatedToMeDisabled: true,
           autoCloseOnOkWithSelection: true,
           moreButtonsDisabled: true,
-          aliveHostsDisabled: true
+          aliveHostsDisabled: true,
         },
         events: {
           "read.selection.change": {
-            action: "console.info"
-          }
-        }
+            action: "console.info",
+          },
+        },
       },
       actions: [
         {
           text: "open()",
-          method: "open"
+          method: "open",
         },
         {
           text: "close()",
-          method: "close"
+          method: "close",
         },
         {
           text: "destroy()",
-          method: "destroy"
-        }
+          method: "destroy",
+        },
       ],
-      doc: InstanceListModalMD
+      doc: InstanceListModalMD,
     },
     {
       storyId: "instance-card-list",
       text: {
         en: "Instance Card List",
-        zh: "实例卡片列表"
+        zh: "实例卡片列表",
       },
       conf: {
         brick: "cmdb-instances.instance-card-list",
@@ -355,53 +357,53 @@ const chapter: Chapter = {
           selectedCategory: "${query.selectedCategory}",
           category: {
             field: "modifier",
-            pageSize: 10
+            pageSize: 10,
           },
           column: 4,
           card: {
             fields: ["creator", "modifier"],
             btnLeft: {
               style: { width: "60px", padding: 0 },
-              text: "编辑"
+              text: "编辑",
             },
             btnRight: {
               style: { color: "red" },
-              text: "删除"
+              text: "删除",
             },
             badge: {
               field: "modifier",
               default: {
-                text: "默认"
-              }
-            }
+                text: "默认",
+              },
+            },
           },
-          showStatistics: false
+          showStatistics: false,
         },
         events: {
           "read.search.change": {
-            action: "console.warn"
+            action: "console.warn",
           },
           "read.category.change": {
-            action: "console.warn"
+            action: "console.warn",
           },
           "read.multiple.clickItem": {
-            action: "console.log"
+            action: "console.log",
           },
           "read.card.leftBtn.click": {
-            action: "console.log"
+            action: "console.log",
           },
           "read.card.rightBtn.click": {
-            action: "console.warn"
-          }
-        }
+            action: "console.warn",
+          },
+        },
       },
-      doc: instanceCardListMD
+      doc: instanceCardListMD,
     },
     {
       storyId: "instance-detail",
       text: {
         en: "Instance Detail",
-        zh: "实例详情"
+        zh: "实例详情",
       },
       conf: {
         brick: "cmdb-instances.instance-detail",
@@ -415,118 +417,118 @@ const chapter: Chapter = {
                 properties: {
                   dataSource: {
                     name: "#{instanceData}.hostname",
-                    id: "#{instanceData}.instanceId"
+                    id: "#{instanceData}.instanceId",
                   },
                   labelField: "name",
-                  urlTemplate: "/cmdb-instances/HOST/instance/#{id}"
-                }
-              }
-            }
+                  urlTemplate: "/cmdb-instances/HOST/instance/#{id}",
+                },
+              },
+            },
           },
           fieldsByTag: [
             {
               name: "基本信息",
-              fields: ["hostname", "ip", "memSize", "memo", "disk"]
+              fields: ["hostname", "ip", "memSize", "memo", "disk"],
             },
             {
               name: "agent信息",
-              fields: ["agentVersion", "_agentStatus", "_agentHeartBeat"]
-            }
-          ]
-        }
+              fields: ["agentVersion", "_agentStatus", "_agentHeartBeat"],
+            },
+          ],
+        },
       },
-      doc: instanceDetailMD
+      doc: instanceDetailMD,
     },
     {
       storyId: "instance-single-delete",
       text: {
         en: "Instance Single Delete",
-        zh: "单实例删除"
+        zh: "单实例删除",
       },
       conf: {
         brick: "cmdb-instances.instance-single-delete",
         properties: {
           instanceId: "584e75fd61d82",
-          objectId: "HOST"
-        }
+          objectId: "HOST",
+        },
       },
-      doc: InstanceSingleDeleteMD
+      doc: InstanceSingleDeleteMD,
     },
     {
       storyId: "instance-multi-delete",
       text: {
         en: "Instance Multi Delete",
-        zh: "多实例删除"
+        zh: "多实例删除",
       },
       conf: {
         brick: "cmdb-instances.instance-delete",
         properties: {
           selectedKeys: ["585289a3c77d0", "5865023100a3d"],
-          objectId: "HOST"
-        }
+          objectId: "HOST",
+        },
       },
       actions: [
         {
           text: "Open Modal",
           method: "onHandleVisible",
-          args: [true]
+          args: [true],
         },
         {
           text: "Close Modal",
           method: "onHandleVisible",
-          args: [false]
-        }
+          args: [false],
+        },
       ],
-      doc: InstanceDeleteMD
+      doc: InstanceDeleteMD,
     },
     {
       storyId: "instance-edit",
       text: {
         en: "Instance Edit",
-        zh: "单实例多属性编辑"
+        zh: "单实例多属性编辑",
       },
       conf: {
         brick: "cmdb-instances.instance-edit",
         properties: {
           instanceId: "583db4de28a07",
           objectId: "HOST",
-          blackList: ["_agentStatus", "_agentHeartBeat"]
-        }
+          blackList: ["_agentStatus", "_agentHeartBeat"],
+        },
       },
-      doc: InstanceEditMD
+      doc: InstanceEditMD,
     },
     {
       storyId: "instance-multi-edit",
       text: {
         en: "Instance Multi Edit",
-        zh: "多实例单属性编辑"
+        zh: "多实例单属性编辑",
       },
       conf: {
         brick: "cmdb-instances.instance-multi-edit",
         properties: {
           selectedKeys: ["5865157839b8a"],
-          objectId: "APP"
-        }
+          objectId: "APP",
+        },
       },
       actions: [
         {
           text: "Open Modal",
           method: "onHandleVisible",
-          args: [true]
+          args: [true],
         },
         {
           text: "Close Modal",
           method: "onHandleVisible",
-          args: [false]
-        }
+          args: [false],
+        },
       ],
-      doc: InstanceMultiEditMD
+      doc: InstanceMultiEditMD,
     },
     {
       storyId: "instance-create",
       text: {
         en: "Instance Create",
-        zh: "单一表单创建"
+        zh: "单一表单创建",
       },
       conf: {
         brick: "cmdb-instances.instance-create",
@@ -535,63 +537,63 @@ const chapter: Chapter = {
           fieldsByTag: [
             {
               name: "基本信息",
-              fields: ["hostname", "ip"]
+              fields: ["hostname", "ip"],
             },
             {
               name: "默认属性",
-              fields: ["_mac", "_agentStatus", "_agentHeartBeat"]
-            }
-          ]
+              fields: ["_mac", "_agentStatus", "_agentHeartBeat"],
+            },
+          ],
         },
         events: {
           "create.single.success": {
-            action: "console.log"
+            action: "console.log",
           },
           "create.single.failed": {
-            action: "console.warn"
-          }
-        }
+            action: "console.warn",
+          },
+        },
       },
-      doc: instanceCreateMD
+      doc: instanceCreateMD,
     },
     {
       storyId: "instance-batch-set-permissions",
       text: {
         en: "instance-batch-set-permissions",
-        zh: "批量设置权限"
+        zh: "批量设置权限",
       },
       conf: {
         brick: "cmdb-instances.instance-batch-set-permissions",
         properties: {
           objectId: "APP",
-          selectedKeys: ["584eb1e04263e"]
-        }
-      }
+          selectedKeys: ["584eb1e04263e"],
+        },
+      },
     },
     {
       storyId: "instance-set-permissions",
       text: {
         en: "instance-set-permissions",
-        zh: "设置权限"
+        zh: "设置权限",
       },
       conf: {
         brick: "cmdb-instances.instance-set-permissions",
         properties: {
           objectId: "APP",
-          instanceId: "5865157839b8a"
+          instanceId: "5865157839b8a",
         },
         events: {
           "update.single.select": {
-            action: "console.info"
-          }
-        }
-      }
+            action: "console.info",
+          },
+        },
+      },
     },
     {
       storyId: "instance-version-list",
       text: {
         en: "instance-version-list",
-        zh: "时间线卡片列表"
+        zh: "时间线卡片列表",
       },
       conf: {
         brick: "cmdb-instances.instance-version-list",
@@ -599,70 +601,70 @@ const chapter: Chapter = {
           objectId: "TOOL_HISTORY_VERSION",
           showFilter: true,
           card: {
-            fields: ["vName", "vCreator", "checkType", "ctime"]
-          }
-        }
+            fields: ["vName", "vCreator", "checkType", "ctime"],
+          },
+        },
       },
-      doc: InstanceVersionListMD
+      doc: InstanceVersionListMD,
     },
     {
       storyId: "instance-create-modal",
       text: {
         en: "instance-create-modal",
-        zh: "单一表单创建容器-模态框"
+        zh: "单一表单创建容器-模态框",
       },
       conf: {
         brick: "cmdb-instances.instance-create-modal",
         properties: {
           objectId: "_PROVIDER",
           title: "单一表单创建模态框",
-          attributeKeys: ["type", "api_url", "name"]
+          attributeKeys: ["type", "api_url", "name"],
         },
         events: {
           "create.single.success": {
-            action: "console.log"
+            action: "console.log",
           },
           "create.single.failed": {
-            action: "console.warn"
-          }
-        }
+            action: "console.warn",
+          },
+        },
       },
       doc: instanceCreateModalMD,
       actions: [
         {
           text: "Open Modal",
-          method: "openModal"
-        }
-      ]
+          method: "openModal",
+        },
+      ],
     },
     {
       storyId: "instance-timeline",
       text: {
         en: "instance-timeline",
-        zh: "时间线事件列表"
+        zh: "时间线事件列表",
       },
       conf: {
         brick: "cmdb-instances.instance-timeline",
         properties: {
           objectId: "PROGRESS_LOG",
           instanceId: "58a7a85b77b7a",
-          showFilter: true
-        }
+          showFilter: true,
+        },
       },
-      doc: InstanceTimelineMD
+      doc: InstanceTimelineMD,
     },
     {
       storyId: "instance-change-history",
       text: {
         en: "instance-change-history",
-        zh: "实例变更详情"
+        zh: "实例变更详情",
       },
       conf: {
         brick: "cmdb-instances.instance-change-history",
         properties: {
           showCard: true,
           detailUrlTemplates: {
-            default: "/search/detail/#{objectId}/#{instanceId}"
+            default: "/search/detail/#{objectId}/#{instanceId}",
           },
           dataSource: {
             detail: {
@@ -687,18 +689,18 @@ const chapter: Chapter = {
                 diff_data: {
                   array: {
                     new: ["sd"],
-                    old: null
+                    old: null,
                   },
                   ip: {
                     new: "192.168.100.12",
-                    old: "192.168.100.1"
-                  }
+                    old: "192.168.100.1",
+                  },
                 },
                 instance_id: "5932fea4fa078",
                 instance_name: "lynette-test",
                 object_id: "HOST",
                 object_name: "主机",
-                object_version: 140
+                object_version: 140,
               },
               notifiers: [],
               trigger: "",
@@ -718,68 +720,68 @@ const chapter: Chapter = {
               mtime: 1571038857,
               ctime: 1571038857,
               msg: {
-                category: "编辑实例"
+                category: "编辑实例",
               },
               month: "2019-10",
               date: {
                 month: "10",
                 date: "14",
-                time: "15:40:57"
-              }
+                time: "15:40:57",
+              },
             },
             changelogTable: {
               headers: [
                 {
                   title: "变更对象",
                   dataIndex: "changeObject",
-                  key: "changeObject"
+                  key: "changeObject",
                 },
                 {
                   title: "内容（变更前）",
                   dataIndex: "contentBefore",
-                  key: "contentBefore"
+                  key: "contentBefore",
                 },
                 {
                   title: "内容（变更后）",
                   dataIndex: "contentAfter",
-                  key: "contentAfter"
-                }
+                  key: "contentAfter",
+                },
               ],
               content: [
                 [
                   {
-                    value: "数组"
+                    value: "数组",
                   },
                   {
-                    value: ""
+                    value: "",
                   },
                   {
-                    value: "sd"
-                  }
+                    value: "sd",
+                  },
                 ],
                 [
                   {
-                    value: "IP"
+                    value: "IP",
                   },
                   {
-                    value: "192.168.100.1"
+                    value: "192.168.100.1",
                   },
                   {
-                    value: "192.168.100.12"
-                  }
-                ]
-              ]
-            }
-          }
-        }
+                    value: "192.168.100.12",
+                  },
+                ],
+              ],
+            },
+          },
+        },
       },
-      doc: InstanceChangeHistoryMD
+      doc: InstanceChangeHistoryMD,
     },
     {
       storyId: "instance-add-relation",
       text: {
         en: "instance-add-relation",
-        zh: "添加实例关系"
+        zh: "添加实例关系",
       },
       conf: {
         brick: "cmdb-instances.instance-add-relation",
@@ -787,73 +789,73 @@ const chapter: Chapter = {
           objectId: "HOST",
           instanceId: "584e79ff71c5f",
           // selectedKeys: ["58491c28d1d81"],
-          relationSideId: "backupowner"
+          relationSideId: "backupowner",
         },
         events: {
           "update.single.success": {
-            action: "console.log"
+            action: "console.log",
           },
           "update.single.failed": {
-            action: "console.warn"
-          }
-        }
+            action: "console.warn",
+          },
+        },
       },
       actions: [
         {
           text: "添加关系",
           method: "handleReadSelection",
           args: [{ detail: { selectedKeys: ["58491c28d1d81"] } }],
-          prompt: true
-        }
+          prompt: true,
+        },
       ],
-      doc: InstanceAddRelationMD
+      doc: InstanceAddRelationMD,
     },
     {
       storyId: "instance-multi-create",
       text: {
         en: "instance-multi-create",
-        zh: "多实例创建"
+        zh: "多实例创建",
       },
       conf: {
         brick: "cmdb-instances.instance-multi-create",
         properties: {
           objectId: "_PROVIDER",
-          attributeKeys: ["api_url", "name", "type"]
+          attributeKeys: ["api_url", "name", "type"],
         },
         events: {
           "create.multi.success": {
-            action: "console.log"
+            action: "console.log",
           },
           "create.multi.failed": {
-            action: "console.warn"
+            action: "console.warn",
           },
           "create.multi.canceled": {
-            action: "console.warn"
-          }
-        }
+            action: "console.warn",
+          },
+        },
       },
-      doc: instanceMultiCreateMD
+      doc: instanceMultiCreateMD,
     },
     {
       storyId: "instance-name",
       text: {
         en: "instance-name",
-        zh: "实例名称"
+        zh: "实例名称",
       },
       conf: {
         brick: "cmdb-instances.instance-name",
         properties: {
           objectId: "APP",
-          instanceId: "584eb1e04263e"
-        }
+          instanceId: "584eb1e04263e",
+        },
       },
-      doc: InstanceNameMD
+      doc: InstanceNameMD,
     },
     {
       storyId: "instance-remove-relation",
       text: {
         en: "instance-remove-relation",
-        zh: "移除实例关系"
+        zh: "移除实例关系",
       },
       conf: {
         brick: "cmdb-instances.instance-remove-relation",
@@ -861,19 +863,173 @@ const chapter: Chapter = {
           objectId: "HOST",
           instanceId: "584e79ff71c5f",
           selectedKeys: ["58491c28d1d81"],
-          relationSideId: "backupowner"
+          relationSideId: "backupowner",
         },
         events: {
           "update.single.success": {
-            action: "console.log"
+            action: "console.log",
           },
           "update.single.failed": {
-            action: "console.warn"
-          }
-        }
+            action: "console.warn",
+          },
+        },
       },
-      doc: InstanceRemoveRelationMD
-    }
-  ]
+      doc: InstanceRemoveRelationMD,
+    },
+    {
+      storyId: "cmdb-instances-import",
+      text: {
+        en: "Cmdb Instances Import",
+        zh: "实例导入构件",
+      },
+      conf: [
+        {
+          brick: "cmdb-instances.cmdb-instances-import",
+          properties: {
+            objectId: "HOST",
+          },
+          events: {
+            "import.cancel": {
+              action: "console.log",
+            },
+            "import.success.ok": {
+              action: "console.log",
+            },
+            "import.error.ok": {
+              action: "console.log",
+            },
+          },
+        },
+        {
+          description: {
+            title: "弹窗模式",
+          },
+          brick: "div",
+          slots: {
+            "": {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "basic-bricks.general-button",
+                  events: {
+                    "general.button.click": [
+                      {
+                        target: "#cmdb-instances-import-modal",
+                        method: "open",
+                      },
+                    ],
+                  },
+                  properties: {
+                    buttonName: "Open",
+                    buttonType: "primary",
+                  },
+                },
+                {
+                  brick: "cmdb-instances.cmdb-instances-import",
+                  properties: {
+                    id: "cmdb-instances-import-modal",
+                    objectId: "HOST",
+                    modalMode: true,
+                  },
+                  events: {
+                    "modal.open": {
+                      action: "console.log",
+                    },
+                    "modal.close": {
+                      action: "console.log",
+                    },
+                    "import.success.ok": {
+                      action: "console.log",
+                    },
+                    "import.error.ok": {
+                      action: "console.log",
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+      doc: CmdbInstancesImportMD,
+    },
+    {
+      storyId: "cmdb-instances-export",
+      text: {
+        en: "Cmdb Instances Export",
+        zh: "实例导出构件",
+      },
+      conf: [
+        {
+          brick: "cmdb-instances.cmdb-instances-export",
+          properties: {
+            objectId: "_MICROAPP_CONTAINER",
+          },
+          events: {
+            "export.cancel": {
+              action: "console.log",
+            },
+            "export.success": {
+              action: "console.log",
+            },
+            "export.error": {
+              action: "console.log",
+            },
+          },
+        },
+        {
+          description: {
+            title: "弹窗模式",
+          },
+          brick: "div",
+          slots: {
+            "": {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "basic-bricks.general-button",
+                  events: {
+                    "general.button.click": [
+                      {
+                        target: "#cmdb-instances-export-modal",
+                        method: "open",
+                      },
+                    ],
+                  },
+                  properties: {
+                    buttonName: "Open",
+                    buttonType: "primary",
+                  },
+                },
+                {
+                  brick: "cmdb-instances.cmdb-instances-export",
+                  properties: {
+                    id: "cmdb-instances-export-modal",
+                    objectId: "_MICROAPP_CONTAINER",
+                    modalMode: true,
+                  },
+                  events: {
+                    "modal.open": {
+                      action: "console.log",
+                    },
+                    "modal.close": {
+                      action: "console.log",
+                    },
+                    "export.success": {
+                      action: "console.log",
+                    },
+                    "export.error": {
+                      action: "console.log",
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+      doc: CmdbInstancesExportMD,
+    },
+  ],
 };
 export default chapter;

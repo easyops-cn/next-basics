@@ -35,6 +35,8 @@ import { story as resourceChartViewer } from "./resource-chart-viewer";
 import { story as relationPathTree } from "./relation-path-tree";
 import { story as instanceGroupChart } from "./instance-group-chart";
 import { story as UserOrUserGroupDisplay } from "./user-or-user-group-display";
+import { story as CmdbInstancesExport } from "./cmdb-instances-export";
+import { story as CmdbInstancesImport } from "./cmdb-instances-import";
 
 export const chapter: Chapter = {
   category: "cmdb-instances",
@@ -79,5 +81,7 @@ export const chapter: Chapter = {
     relationPathTree,
     instanceGroupChart,
     UserOrUserGroupDisplay,
+    CmdbInstancesExport,
+    CmdbInstancesImport,
   ],
 };
