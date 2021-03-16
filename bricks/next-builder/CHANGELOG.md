@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.34.0...@next-bricks/next-builder@1.35.0) (2021-03-16)
+
+
+### Bug Fixes
+
+* **builder:** fix builder container layout ([7063ce6](https://github.com/easyops-cn/next-basics/commit/7063ce623b63ceb8cb97704d9b2b1a38504712c8))
+
+
+### Features
+
+* **builder:** show tips in toolbox ([d3c240c](https://github.com/easyops-cn/next-basics/commit/d3c240c9c5c66e0d22624278b69939b3c05535a2))
+* **builder-container:** add frequently used bricks ([d45d0fe](https://github.com/easyops-cn/next-basics/commit/d45d0fec732d7bd2afcf46c9c2a21717a7f75d54))
+* **builder-container:** library dropdown ([7d15c6f](https://github.com/easyops-cn/next-basics/commit/7d15c6fabfba32d7ce0481b56e7128334334198e))
+* **builder-container:** pin toolbar to the top ([b27077b](https://github.com/easyops-cn/next-basics/commit/b27077b2179b0d05d05278a561c57bbc6f807965))
+
+
+
+
+
 # [1.34.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.33.0...@next-bricks/next-builder@1.34.0) (2021-03-16)
 
 
