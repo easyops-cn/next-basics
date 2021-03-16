@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.33.0...@next-bricks/next-builder@1.34.0) (2021-03-16)
+
+
+### Features
+
+* **builder-container:** translate ([df32206](https://github.com/easyops-cn/next-basics/commit/df322062651075b379531b77176312474be4f6d2))
+
+
+
+
+
 # [1.33.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.32.0...@next-bricks/next-builder@1.33.0) (2021-03-15)
 
 
