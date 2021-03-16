@@ -3,6 +3,7 @@ import { mount } from "enzyme";
 import { BrickLibrary } from "./BrickLibrary";
 import { BrickItem } from "./BrickItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
 
 jest.mock("../BuilderUIContext");
 jest.mock("./BrickItem");
@@ -67,7 +68,7 @@ describe("BrickLibrary", () => {
         .shortName
     ).toBe("general-input");
 
-    wrapper.find("SearchComponent").invoke("onSearch")("form");
+    wrapper.find(SearchComponent).invoke("onSearch")("form");
     expect(wrapper.find(BrickItem).length).toBe(2);
     expect(wrapper.find(BrickItem).at(0).prop("brick").shortName).toBe(
       "general-form"

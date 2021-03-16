@@ -4,11 +4,6 @@
   display: flex;
   overflow: hidden;
   background-color: #091732;
-  border-radius: var(--editor-brick-border-radius);
-}
-
-.fullscreen {
-  border-radius: 0;
 }
 
 .tabList {

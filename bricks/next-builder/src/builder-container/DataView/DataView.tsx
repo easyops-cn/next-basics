@@ -1,20 +1,19 @@
 import React, { useState, useRef, useMemo } from "react";
-import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { Button, Form, Modal } from "antd";
 import { PlusOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
-import styles from "./DataView.module.css";
+import { Trans, useTranslation } from "react-i18next";
+import update from "immutability-helper";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { ContextConf } from "@next-core/brick-types";
+import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
+import styles from "./DataView.module.css";
 import { findIndex, uniqueId } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { searchList } from "./utils";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { ContextItem } from "./ContextItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import update from "immutability-helper";
-import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
-
 
 const symbolId = Symbol("uid");
 
@@ -126,7 +125,22 @@ export function DataView({
   };
 
   return (
-    <ToolboxPane title={t(K.DATA)}>
+    <ToolboxPane
+      title={t(K.DATA)}
+      tooltips={
+        <>
+          <p>
+            <Trans t={t} i18nKey={K.DATA_VIEW_TIPS_1} />
+          </p>
+          <p>
+            <Trans t={t} i18nKey={K.DATA_VIEW_TIPS_2} />
+          </p>
+          <p>
+            <Trans t={t} i18nKey={K.DATA_VIEW_TIPS_3} />
+          </p>
+        </>
+      }
+    >
       <SearchComponent placeholder={t(K.SEARCH_DATA)} onSearch={handleSearch} />
       <div className={styles.wrapper}>
         <Button
