@@ -13,6 +13,7 @@ import {
   BuilderPasteDetailOfCut,
   ToolboxTab,
 } from "../interfaces";
+import { useCanPaste } from "./useCanPaste";
 
 import styles from "./BuilderContextMenu.module.css";
 
@@ -35,6 +36,11 @@ export function BuilderContextMenu({
     setToolboxTab,
     setEventStreamNodeId,
   } = useBuilderUIContext();
+  const canPasteCallback = useCanPaste();
+  const canPaste = React.useMemo(
+    () => canPasteCallback(clipboard, contextMenuStatus.node),
+    [canPasteCallback, clipboard, contextMenuStatus.node]
+  );
 
   const handleCloseMenu = React.useCallback(
     (event: React.MouseEvent) => {
@@ -132,11 +138,7 @@ export function BuilderContextMenu({
           >
             Cut
           </Menu.Item>
-          <Menu.Item
-            key="paste"
-            onClick={handlePasteNode}
-            disabled={!clipboard}
-          >
+          <Menu.Item key="paste" onClick={handlePasteNode} disabled={!canPaste}>
             Paste
           </Menu.Item>
           <Menu.Item key="delete" onClick={handleDeleteNode}>

@@ -16,6 +16,9 @@ import {
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
+jest.mock("./useCanPaste", () => ({
+  useCanPaste: () => (clipboard: BuilderClipboard) => !!clipboard,
+}));
 
 const mockUseBuilderContextMenuStatus = useBuilderContextMenuStatus as jest.MockedFunction<
   typeof useBuilderContextMenuStatus
