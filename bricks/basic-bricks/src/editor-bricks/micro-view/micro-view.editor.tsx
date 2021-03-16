@@ -54,8 +54,11 @@ export function MicroViewEditor({
         <SlotContainer
           nodeUid={nodeUid}
           slotName="toolbar"
-          slotContainerStyle={{ minWidth: "var(--editor-brick-inline-width)" }}
+          slotContainerStyle={{
+            flex: 2,
+          }}
           slotContentLayout={EditorSlotContentLayout.INLINE}
+          dropZoneBodyStyle={{ justifyContent: "flex-end" }}
         />
       </div>
       <SlotContainer
