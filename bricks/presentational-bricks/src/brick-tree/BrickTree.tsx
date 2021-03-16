@@ -6,12 +6,30 @@ import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { TreeIcon, BrickTreeNodeProps } from "./index";
-import { uniqueId, isEmpty } from "lodash";
+import { checkedFilterProps } from "../interfaces/brick-tree";
+import { uniqueId, isEmpty, eq, lt, lte, gt, gte, get, difference } from "lodash";
 import { EventDataNode } from "rc-tree/lib/interface";
 import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import styles from "./index.module.css";
 import classNames from "classnames";
+
+export const compareFunMap: Record<string, any> = {
+  $eq: eq,
+  $lt: lt,
+  $lte: lte,
+  $gt: gt,
+  $gte: gte,
+  $ne: (value1: any, value2: any): boolean => !eq(value1, value2),
+};
+
+function flat(arr: BrickTreeNodeProps[]): BrickTreeNodeProps[] {
+  return [].concat(
+    ...arr.map((item: BrickTreeNodeProps) =>
+      item.children ? [].concat(item, ...flat(item?.children)) : [item]
+    )
+  );
+}
 
 function isMenuIcon(icon: TreeIcon): icon is MenuIcon {
   return (icon as MenuIcon).lib !== undefined;
@@ -72,6 +90,7 @@ export interface BrickTreeProps {
   placeholder?: string;
   searchParent?: boolean;
   checkAllEnabled?: boolean;
+  checkedFilterConfig?: checkedFilterProps;
   onSelect?(
     selectedKeys: React.Key[],
     info: {
@@ -101,11 +120,13 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     searchParent = false,
     placeholder = "",
     checkAllEnabled,
+    checkedFilterConfig: { field, value, operator } = {},
     suffixBrick,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>();
+  const [filterCheckedKeys, setFilterCheckedKeys] = useState<React.Key[]>();
   const [checkedKeys, setCheckedKeys] = useState<
     React.Key[] | { checked: React.Key[]; halfChecked: React.Key[] }
   >();
@@ -115,12 +136,22 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const nodeMatchedRef = useRef<boolean>(false);
 
   const treeData = useMemo(() => getTreeNodes(dataSource), [dataSource]);
+  const filterTreeKeys = useMemo(
+    () =>
+      flat(dataSource)
+        .filter((v) => compareFunMap[operator]?.(value, get(v, field)))
+        .map((v) => v.key) || [],
+    [dataSource]
+  );
 
   useEffect(() => {
     setSelectedKeys(_selectedKeys);
   }, [_selectedKeys]);
   useEffect(() => {
     setCheckedKeys(_checkedKeys);
+  }, [_checkedKeys]);
+  useEffect(() => {
+    setFilterCheckedKeys(difference(_checkedKeys, filterTreeKeys));
   }, [_checkedKeys]);
   useEffect(() => {
     setExpandedKeys(_expandedKeys);
@@ -179,10 +210,17 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const onCheckAllChange = (e: CheckboxChangeEvent) => {
     const checked = e.target.checked;
     const checkedKeys = checked ? getAllKeys(treeData) : [];
+    let _filterCheckedKeys: React.Key[] = [];
+    if (props.checkedFilterConfig) {
+      _filterCheckedKeys = difference(checkedKeys, filterTreeKeys);
+      setFilterCheckedKeys(_filterCheckedKeys);
+    }
     setAllChecked(checked);
     setIndeterminate(false);
     setCheckedKeys(checkedKeys);
-    props.onCheck?.(checkedKeys);
+    props.onCheck?.(
+      props.checkedFilterConfig ? _filterCheckedKeys : checkedKeys
+    );
   };
 
   const onSelect = (
@@ -204,6 +242,14 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       | React.Key[]
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ) => {
+    let _filterCheckedKeys: React.Key[] = [];
+    if (props.checkedFilterConfig) {
+      _filterCheckedKeys = difference(
+        checkedKeys as React.Key[],
+        filterTreeKeys
+      );
+      Array.isArray(checkedKeys) && setFilterCheckedKeys(_filterCheckedKeys);
+    }
     setCheckedKeys(checkedKeys);
 
     if (Array.isArray(checkedKeys)) {
@@ -220,8 +266,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         setIndeterminate(allChecked ? false : true);
       }
     }
-
-    props.onCheck?.(checkedKeys);
+    props.onCheck?.(
+      props.checkedFilterConfig ? _filterCheckedKeys : checkedKeys
+    );
   };
 
   const onExpand = (expandedKeys: React.Key[]) => {
@@ -248,8 +295,12 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
           >
             全选
           </Checkbox>
-          <span style={{ marginLeft: "auto" }}>
-            已选 {(Array.isArray(checkedKeys) && checkedKeys?.length) || 0} 项
+          <span style={{ marginLeft: "auto" }} className="checkedNum">
+            已选{" "}
+            {props.checkedFilterConfig
+              ? filterCheckedKeys?.length
+              : (Array.isArray(checkedKeys) && checkedKeys?.length) || 0}{" "}
+            项
           </span>
         </div>
       )}

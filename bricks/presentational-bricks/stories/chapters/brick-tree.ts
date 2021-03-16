@@ -170,6 +170,153 @@ export const BrickTreeStory: Story = {
         message:
           "checkedKeys和configProps.checkable实现多选，expandedKeys可以设置默认展开项，configProps.showIcon设置是否显示图标（图标需要在dataSource中维护）",
       },
+    },{
+      description: {
+        title: "设置checkedFilterConfig",
+        message:
+          "在某些场景下我们只需要计数部分节点，如此处需要过滤掉属于分类的节点，可以设置checkedFilterConfig进行筛选",
+      },
+  "brick": "presentational-bricks.brick-tree",
+  "events": {
+    "tree.check": {
+      "action": "console.info",
+      "args": [
+        "${EVENT.detail}"
+      ]
+    }
+  },
+  "properties": {
+    "checkAllEnabled": true,
+    "configProps": {
+      "checkable": true
     },
+    "checkedFilterConfig": {
+      "field": "category",
+      "value": "item",
+      "operator": "$ne"
+    },
+    "dataSource": [
+      {
+        "children": [
+          {
+            "key": "00",
+            "title": "二级分类1",
+            "category": "category",
+            "children": [
+              {
+                "key": "000",
+                "title": "A",
+                "category": "item"
+              },
+              {
+                "key": "001",
+                "title": "B",
+                "category": "item"
+              },
+              {
+                "key": "002",
+                "title": "C",
+                "category": "item"
+              }
+            ]
+          },
+          {
+            "children": [
+              {
+                "key": "010",
+                "title": "D",
+                "category": "item"
+              },
+              {
+                "key": "011",
+                "title": "E",
+                "category": "item"
+              }
+            ],
+            "key": "01",
+            "title": "二级分类2",
+            "category": "category"
+          }
+        ],
+        "key": "0",
+        "title": "一级分类1",
+        "category": "category"
+      },
+      {
+        "children": [
+          {
+            "key": "10",
+            "title": "二级分类1",
+            "category": "category",
+            "children": [
+              {
+                "key": "100",
+                "title": "Q",
+                "category": "item"
+              },
+              {
+                "key": "101",
+                "title": "W",
+                "category": "item"
+              },
+              {
+                "key": "102",
+                "title": "R",
+                "category": "item"
+              }
+            ]
+          },
+          {
+            "children": [
+              {
+                "key": "110",
+                "title": "T",
+                "category": "item"
+              },
+              {
+                "key": "111",
+                "title": "Y",
+                "category": "item"
+              }
+            ],
+            "key": "11",
+            "title": "二级分类2",
+            "category": "category"
+          }
+        ],
+        "key": "1",
+        "title": "一级分类2",
+        "category": "category"
+      },
+      {
+        "children": [
+          {
+            "key": "20",
+            "title": "Z",
+            "category": "item"
+          },
+          {
+            "key": "21",
+            "title": "X",
+            "category": "item"
+          },
+          {
+            "key": "22",
+            "title": "V",
+            "category": "item"
+          }
+        ],
+        "key": "2",
+        "title": "其他",
+        "category": "category"
+      }
+    ],
+    "expandedKeys": [
+      "0"
+    ],
+    "placeholder": "text here to search",
+    "searchable": true
+  }
+}
   ],
 };

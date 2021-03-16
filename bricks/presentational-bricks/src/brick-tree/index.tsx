@@ -9,6 +9,7 @@ import {
 } from "@next-core/brick-kit";
 import { BrickTree } from "./BrickTree";
 import { TreeProps, AntTreeNodeProps, DataNode } from "antd/lib/tree";
+import { checkedFilterProps } from "../interfaces/brick-tree";
 import { MenuIcon } from "@next-core/brick-types";
 import { EventDataNode } from "rc-tree/lib/interface";
 import { UseBrickConf } from "@next-core/brick-types";
@@ -145,6 +146,17 @@ export class BrickTreeElement extends UpdatingElement {
   @property({ type: Boolean }) checkAllEnabled: boolean;
 
   /**
+   * @kind checkedFilterProps
+   * @required false
+   * @default -
+   * @description `tree.check`事件和全选计数中是否过滤掉某些节点，其中 `filed` 表示数据源中的字段路径， `value` 表示与其字段比较的值， `operator` 表示两者比较的方法。仅在设置 `configProps.checkable` 为 `true` 时生效
+   */
+  @property({
+    attribute: false,
+  })
+  checkedFilterConfig: checkedFilterProps;
+  
+  /**
    * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
    * @required false
    * @default -
@@ -202,6 +214,7 @@ export class BrickTreeElement extends UpdatingElement {
             checkAllEnabled={this.checkAllEnabled}
             onSelect={this._handleSelect}
             onCheck={this._handleCheck}
+            checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}
           />
         </BrickWrapper>,
