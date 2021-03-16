@@ -2,7 +2,9 @@ import React from "react";
 import { mount } from "enzyme";
 import { BrickLibrary } from "./BrickLibrary";
 import { BrickItem } from "./BrickItem";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
+jest.mock("../BuilderUIContext");
 jest.mock("./BrickItem");
 jest.mock("./../ToolboxPane/ToolboxPane");
 
@@ -30,23 +32,24 @@ jest.mock("../constants", () => ({
 
 describe("BrickLibrary", () => {
   it("should work", () => {
+    (useBuilderUIContext as jest.Mock).mockReturnValue({
+      brickList: [
+        {
+          type: "brick",
+          name: "basic-bricks.micro-view",
+        },
+        {
+          type: "brick",
+          name: "forms.general-form",
+        },
+        {
+          type: "brick",
+          name: "forms.general-select",
+        },
+      ]
+    });
     const wrapper = mount(
-      <BrickLibrary
-        brickList={[
-          {
-            type: "brick",
-            name: "basic-bricks.micro-view",
-          },
-          {
-            type: "brick",
-            name: "forms.general-form",
-          },
-          {
-            type: "brick",
-            name: "forms.general-select",
-          },
-        ]}
-      />
+      <BrickLibrary />
     );
     expect(wrapper.find(".groupList > li").length).toBe(2);
     expect(wrapper.find(".groupName").at(0).text()).toBe("basic-bricks");

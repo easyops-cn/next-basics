@@ -1,7 +1,7 @@
 .toolbarContainer {
   height: var(--editor-brick-toolbar-height);
   display: grid;
-  padding: 0 var(--page-card-gap);
+  padding: 0 10px 0 0;
   align-items: center;
   justify-content: space-between;
   grid-auto-flow: column;

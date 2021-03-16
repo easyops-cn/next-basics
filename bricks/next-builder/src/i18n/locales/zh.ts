@@ -12,6 +12,7 @@ const locale: Locale = {
   [K.SEARCH_ROUTE]: "搜索路由",
   [K.ADD_DATA]: "添加数据",
   [K.SETTING]: "设置",
+  [K.BRICK_LIBRARY]: "构件库",
 };
 
 export default locale;

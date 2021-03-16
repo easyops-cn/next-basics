@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  AppstoreAddOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
   PartitionOutlined,
   DatabaseOutlined,
+  PlusSquareOutlined
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
@@ -56,10 +56,10 @@ export function BuilderToolbox({
     {
       tab: ToolboxTab.LIBRARY,
       icon() {
-        return <AppstoreAddOutlined />;
+        return <PlusSquareOutlined />;
       },
       content() {
-        return <BrickLibrary brickList={brickList} />;
+        return <BrickLibrary />;
       },
       availableDataTypes: [
         BuilderDataType.ROUTE_OF_BRICKS,
@@ -88,7 +88,7 @@ export function BuilderToolbox({
       },
       content() {
         return (
-          <DataView brickList={brickList} onContextUpdate={onContextUpdate} />
+          <DataView onContextUpdate={onContextUpdate} />
         );
       },
       availableDataTypes: [

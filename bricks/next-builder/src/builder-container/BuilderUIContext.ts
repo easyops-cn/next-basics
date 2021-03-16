@@ -1,9 +1,10 @@
 import React from "react";
-import { BuilderClipboard, BuilderDataType, ToolboxTab } from "./interfaces";
+import { BuilderClipboard, BuilderDataType, ToolboxTab, BrickOptionItem } from "./interfaces";
 import { BuilderRouteNode } from "@next-core/brick-types";
 
 export interface ContextOfBuilderUI {
   dataType?: BuilderDataType;
+  brickList?: BrickOptionItem[];
   processing?: boolean;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;

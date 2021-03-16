@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BuildFilled,
   CopyFilled,
@@ -10,14 +10,14 @@ import {
 import { useDrag } from "react-dnd";
 import { BuilderDataTransferType } from "@next-core/editor-bricks-helper";
 import { BrickOptionItem } from "../interfaces";
-
 import styles from "./BrickItem.module.css";
 
 export interface BrickItemProps {
   brick: BrickOptionItem;
+  onDraggingChange?: (isDragging: boolean) => void;
 }
 
-export function BrickItem({ brick }: BrickItemProps): React.ReactElement {
+export function BrickItem({ brick, onDraggingChange }: BrickItemProps): React.ReactElement {
   let brickType: string;
   switch (brick.type) {
     case "provider":
@@ -39,6 +39,11 @@ export function BrickItem({ brick }: BrickItemProps): React.ReactElement {
       isDragging: monitor.isDragging(),
     }),
   });
+
+  useEffect(()=>{
+    onDraggingChange?.(isDragging);
+  },[isDragging])
+
 
   let icon: JSX.Element;
 

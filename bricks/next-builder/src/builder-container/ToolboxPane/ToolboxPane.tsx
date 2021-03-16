@@ -1,5 +1,4 @@
 import React from "react";
-import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
 
 import styles from "./ToolboxPane.module.css";
 
