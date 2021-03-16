@@ -13,7 +13,8 @@ export enum K {
   SETTING = "SETTING",
   VIEW_ROUTE = "VIEW_ROUTE",
   BUILD_AND_PUSH_TOOLTIP = "BUILD_AND_PUSH_TOOLTIP",
-  PREVIEW = "PREVIEW"
+  PREVIEW = "PREVIEW",
+  BRICK_LIBRARY = "BRICK_LIBRARY"
 }
 
 export type Locale = { [key in K]: string };

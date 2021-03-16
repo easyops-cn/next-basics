@@ -2,7 +2,8 @@
   overflow: hidden;
   background-color: #f3f4f7;
   height: calc(100vh - 148px);
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 
 .fullscreen {

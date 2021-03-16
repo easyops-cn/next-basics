@@ -14,6 +14,7 @@ const locale: Locale = {
   [K.VIEW_ROUTE]: "View Route",
   [K.BUILD_AND_PUSH_TOOLTIP]: "Build & Push (Ctrl+B)",
   [K.PREVIEW]: "Preview",
+  [K.BRICK_LIBRARY]: "Brick Library",
 };
 
 export default locale;

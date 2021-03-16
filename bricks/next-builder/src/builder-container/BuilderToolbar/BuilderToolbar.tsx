@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./BuilderToolbar.module.css";
 import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
+import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
 import {
   BranchesOutlined,
   CaretRightOutlined,
@@ -53,6 +54,7 @@ export function BuilderToolbar(): React.ReactElement {
         <RootNodeSelect />
       </div>
       <div className={styles.toolbarRight}>
+        <LibraryDropdown />
         <Tooltip title={t(K.BUILD_AND_PUSH_TOOLTIP)} placement="bottomRight">
           <a
             className={styles.tabLink}

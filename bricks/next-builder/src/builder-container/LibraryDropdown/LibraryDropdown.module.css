@@ -1,0 +1,10 @@
+.libraryContainer{
+  height: 400px;
+  width: 220px;
+  display: grid;
+  grid-template-rows: 62px 1fr;
+}
+
+.customAnimation{
+  animation-duration: 0s !important;
+}

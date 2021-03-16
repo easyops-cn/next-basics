@@ -4,13 +4,13 @@ import { Button, Form, Modal } from "antd";
 import { PlusOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import styles from "./DataView.module.css";
 import { ContextConf } from "@next-core/brick-types";
-import { BrickOptionItem } from "../interfaces";
 import { findIndex, uniqueId } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { searchList } from "./utils";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { ContextItem } from "./ContextItem";
+import { useBuilderUIContext } from "../BuilderUIContext";
 import update from "immutability-helper";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
@@ -19,7 +19,6 @@ import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 const symbolId = Symbol("uid");
 
 export interface DataViewProps {
-  brickList?: BrickOptionItem[];
   onContextUpdate?: (context: ContextConf[]) => void;
 }
 
@@ -28,10 +27,10 @@ interface ContextConfWithSymbolId extends ContextConf {
 }
 
 export function DataView({
-  brickList,
   onContextUpdate,
 }: DataViewProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
+  const { brickList } = useBuilderUIContext();
   const rootNode = useBuilderNode({ isRoot: true });
   const contextWithUniqueSymbolId: ContextConfWithSymbolId[] = useMemo(() => {
     const originContext = ((rootNode?.context as ContextConf[]) ?? []).map(

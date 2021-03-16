@@ -1,22 +1,26 @@
 import React from "react";
-import { BrickOptionItem, GroupedBricks } from "../interfaces";
+import { GroupedBricks } from "../interfaces";
 import { searchBricks } from "./searchBricks";
 import { BrickItem } from "./BrickItem";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
 import styles from "./BrickLibrary.module.css";
 
 interface BrickLibraryProps {
-  brickList?: BrickOptionItem[];
+  hideToolboxPane?: boolean;
+  onDraggingChange?: (isDragging: boolean) => void;
 }
 
 export function BrickLibrary({
-  brickList,
+  hideToolboxPane,
+  onDraggingChange
 }: BrickLibraryProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
+  const { brickList } = useBuilderUIContext();
   const [q, setQ] = React.useState<string>();
 
   const handleSearch = (value: string): void => {
@@ -28,8 +32,8 @@ export function BrickLibrary({
     [brickList, q]
   );
 
-  return (
-    <ToolboxPane title={t(K.LIBRARY)}>
+  const content = (
+    <>
       <SearchComponent
         placeholder={t(K.SEARCH_BRICKS_IN_LIBRARY)}
         onSearch={handleSearch}
@@ -42,7 +46,10 @@ export function BrickLibrary({
               <ul className={styles.brickList}>
                 {group.bricks.map((brick) => (
                   <li key={brick.name}>
-                    <BrickItem brick={brick} />
+                    <BrickItem 
+                      brick={brick} 
+                      onDraggingChange={onDraggingChange}
+                    />
                   </li>
                 ))}
               </ul>
@@ -50,6 +57,16 @@ export function BrickLibrary({
           ))}
         </ul>
       </div>
+    </>
+  )
+  
+  if(hideToolboxPane){
+    return content;
+  }
+
+  return (
+    <ToolboxPane title={t(K.LIBRARY)}>
+      {content}
     </ToolboxPane>
   );
 }

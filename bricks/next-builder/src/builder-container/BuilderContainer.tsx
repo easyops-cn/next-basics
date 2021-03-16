@@ -197,6 +197,7 @@ export function LegacyBuilderContainer(
     <BuilderUIContext.Provider
       value={{
         dataType,
+        brickList,
         processing,
         fullscreen,
         setFullscreen,

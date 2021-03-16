@@ -2,6 +2,9 @@ import React from "react";
 import { shallow } from "enzyme";
 import { DataView } from "./DataView";
 import { Button } from "antd";
+import { useBuilderUIContext } from "../BuilderUIContext";
+
+jest.mock("../BuilderUIContext");
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderNode: jest.fn().mockReturnValue({
@@ -29,23 +32,25 @@ jest.mock("@next-core/editor-bricks-helper", () => ({
 
 describe("DataView", () => {
   it("should work", () => {
+    (useBuilderUIContext as jest.Mock).mockReturnValue({
+      brickList: [
+        {
+          type: "brick",
+          name: "brick-a",
+        },
+        {
+          type: "provider",
+          name: "provider-a",
+        },
+        {
+          type: "provider",
+          name: "provider-b",
+        },
+      ]
+    });
     const onContextUpdate = jest.fn();
     const wrapper = shallow(
       <DataView
-        brickList={[
-          {
-            type: "brick",
-            name: "brick-a",
-          },
-          {
-            type: "provider",
-            name: "provider-a",
-          },
-          {
-            type: "provider",
-            name: "provider-b",
-          },
-        ]}
         onContextUpdate={onContextUpdate}
       />
     );
@@ -88,19 +93,21 @@ describe("DataView", () => {
   });
 
   it("should handleDropItem work", () => {
+    (useBuilderUIContext as jest.Mock).mockReturnValue({
+      brickList: [
+        {
+          type: "provider",
+          name: "provider-a",
+        },
+        {
+          type: "provider",
+          name: "provider-b",
+        },
+      ]
+    });
     const onContextUpdate = jest.fn();
     const wrapper = shallow(
       <DataView
-        brickList={[
-          {
-            type: "provider",
-            name: "provider-a",
-          },
-          {
-            type: "provider",
-            name: "provider-b",
-          },
-        ]}
         onContextUpdate={onContextUpdate}
       />
     );
