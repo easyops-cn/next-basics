@@ -41,6 +41,7 @@ interface CardItemProps {
   reverseBgColor?: boolean;
   imgSrc?: string;
   showImg?: boolean;
+  imgSize?: number;
 }
 
 export function CardItem(props: CardItemProps): React.ReactElement {
@@ -71,6 +72,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   const iconOffsetX = props.iconOffsetX || 0;
   const iconOffsetY = props.iconOffsetY || 0;
   const iconOpacity = props.iconOpacity || 0.45;
+  const imgSize = props.imgSize;
 
   // 标题和标题后的slot
   const cardTitle = (
@@ -116,12 +118,19 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   );
 
   const avatarImg = (size: number): React.ReactElement => (
-    <span className="iconContainer">
-      <Avatar
-        src={props.imgSrc}
-        size={size}
-        style={{ border: "1px solid #d9d9d9", borderRadius: "50%" }}
-      />
+    <span
+      className="iconContainer"
+      style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "50%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: `${size}px`,
+        height: `${size}px`,
+      }}
+    >
+      <Avatar src={props.imgSrc} size={imgSize ?? size} />
     </span>
   );
 

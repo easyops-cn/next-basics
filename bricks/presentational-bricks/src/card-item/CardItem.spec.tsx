@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { CardItem } from "./CardItem";
 import { CardLayoutType } from "./index";
+import { Avatar } from "antd";
 
 describe("CardItem", () => {
   it("should work", () => {
@@ -107,5 +108,26 @@ describe("CardItem", () => {
     expect(wrapper.find(".descList").length).toBe(0);
     expect(wrapper.find(".desc").length).toBe(1);
     expect(wrapper.find(".iconContainer").length).toBe(1);
+  });
+
+  it("should work when showImg", () => {
+    const wrapper = shallow(
+      <CardItem
+        cardLayoutType={CardLayoutType.ICON_ALIGN_MIDDLE}
+        cardTitle="k8s"
+        descriptionList="描述信息"
+        showImg={true}
+        imgSize={32}
+        dataSource={{
+          id: "1",
+          name: "k8s",
+          imgSrc: "/test.png",
+        }}
+        url="/"
+      />
+    );
+    expect(wrapper.find(".descList").length).toBe(0);
+    expect(wrapper.find(".desc").length).toBe(1);
+    expect(wrapper.find(Avatar).length).toBe(1);
   });
 });
