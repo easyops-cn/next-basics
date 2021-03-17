@@ -31,16 +31,6 @@ export const typeOptions = [
   { label: "Provider", value: "resolve" },
 ];
 
-export function searchList(
-  list: Record<string, any>,
-  q: string,
-  field?: string
-) {
-  return list.filter((v: any) =>
-    (field ? v[field] : v)?.toLowerCase().includes(q?.toLowerCase() ?? "")
-  );
-}
-
 const safeDumpField = (value: any, field: string): string | undefined => {
   let result;
   try {

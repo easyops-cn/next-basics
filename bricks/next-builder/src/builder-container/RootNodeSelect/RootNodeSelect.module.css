@@ -1,18 +1,3 @@
-.rootNodeBox {
-  height: 30px;
-  display: flex;
-  align-items: center;
-}
-
-.rootNodeBox > :first-child {
-  width: 20px;
-}
-
-.rootNodeBox > :last-child {
-  flex: 1;
-  white-space: nowrap;
-}
-
 .rootNodeWrapper {
   display: flex;
   align-items: center;

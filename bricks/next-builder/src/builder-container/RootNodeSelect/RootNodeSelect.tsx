@@ -1,64 +1,65 @@
 import React, { useState } from "react";
-import { BlockOutlined, DownOutlined } from "@ant-design/icons";
+import { DownOutlined } from "@ant-design/icons";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { Dropdown, Button, Menu } from "antd";
 import { RoutesView } from "../RoutesView/RoutesView";
+import { TemplateList } from "../TemplateList/TemplateList";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
 import styles from "./RootNodeSelect.module.css";
+import { BuilderDataType } from "../interfaces";
 
 export function RootNodeSelect(): React.ReactElement {
+  const { dataType } = useBuilderUIContext();
   const [visible, setVisible] = useState(false);
   const rootNode = useBuilderNode({ isRoot: true });
+
   if (!rootNode) {
     return null;
-  }
-  if (rootNode.type === "custom-template") {
-    return (
-      <div className={styles.rootNodeBox}>
-        <BlockOutlined />
-        <span>{rootNode.templateId}</span>
-      </div>
-    );
   }
 
   const onVisibleChange = (v: boolean) => {
     setVisible(v);
   };
 
-  const handleRouteClick = () => {
+  const triggerVisible = () => {
     setVisible(!visible);
   };
 
-  const handleRouteSelect = (): void => {
+  const handleClose = (): void => {
     setVisible(false);
   };
 
   const route = (
     <Menu>
-      <RoutesView
-        contentStyle={{
-          height: "400px",
-          width: "220px",
-        }}
-        handleRouteSelect={handleRouteSelect}
-      />
+      <RoutesView handleRouteSelect={handleClose} />
+    </Menu>
+  );
+
+  const template = (
+    <Menu>
+      <TemplateList handleTemplateSelect={handleClose} />
     </Menu>
   );
 
   return (
     <Dropdown
-      overlay={route}
+      overlay={dataType === BuilderDataType.CUSTOM_TEMPLATE ? template : route}
       trigger={["click"]}
       placement="bottomLeft"
       onVisibleChange={onVisibleChange}
       visible={visible}
     >
       <Button
-        onClick={handleRouteClick}
+        onClick={triggerVisible}
         type="text"
         className={styles.rootNodeWrapper}
       >
-        <span className={styles.alias}>{rootNode.alias}</span>{" "}
+        <span className={styles.alias}>
+          {dataType === BuilderDataType.CUSTOM_TEMPLATE
+            ? rootNode.templateId
+            : rootNode.alias}
+        </span>{" "}
         <DownOutlined className={styles.downIcon} />
       </Button>
     </Dropdown>

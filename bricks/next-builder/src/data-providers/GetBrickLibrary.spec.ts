@@ -44,10 +44,12 @@ jest.spyOn(InstanceApi, "postSearch").mockResolvedValue({
     {
       instanceId: "a",
       templateId: "tpl-a",
+      id: "P-01",
     },
     {
       instanceId: "b",
       templateId: "tpl-b",
+      id: "P-02",
     },
   ],
 });
@@ -82,10 +84,12 @@ describe("GetBrickLibrary", () => {
           "type": "provider",
         },
         Object {
+          "id": "P-01",
           "name": "tpl-a",
           "type": "customTemplate",
         },
         Object {
+          "id": "P-02",
           "name": "tpl-b",
           "type": "customTemplate",
         },

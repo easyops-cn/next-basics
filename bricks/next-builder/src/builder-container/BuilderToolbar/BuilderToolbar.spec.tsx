@@ -61,6 +61,6 @@ describe("BuilderToolbar", () => {
       templateId: "tpl-test",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(2);
+    expect(wrapper.find(".tabLink").length).toBe(3);
   });
 });

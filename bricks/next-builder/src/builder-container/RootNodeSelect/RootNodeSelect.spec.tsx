@@ -2,6 +2,10 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { RootNodeSelect } from "./RootNodeSelect";
+import { useBuilderUIContext } from "../BuilderUIContext";
+import { BuilderDataType } from "../interfaces";
+
+jest.mock("../BuilderUIContext");
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderNode: jest.fn(),
@@ -13,10 +17,19 @@ jest.mock("../RoutesView/RoutesView", () => ({
   },
 }));
 
+jest.mock("../TemplateList/TemplateList", () => ({
+  TemplateList() {
+    return <div>TemplateList</div>;
+  },
+}));
+
 const mockUseBuilderNode = useBuilderNode as jest.Mock;
 
 describe("RootNodeSelect", () => {
   it("should work for bricks", async () => {
+    (useBuilderUIContext as jest.Mock).mockReturnValue({
+      dataType: BuilderDataType.ROUTE_OF_BRICKS,
+    });
     mockUseBuilderNode.mockReturnValue({
       type: "brick",
       alias: "my-brick",
@@ -30,12 +43,16 @@ describe("RootNodeSelect", () => {
   });
 
   it("should work for custom templates", () => {
-    mockUseBuilderNode.mockReturnValueOnce({
+    (useBuilderUIContext as jest.Mock).mockReturnValue({
+      dataType: BuilderDataType.CUSTOM_TEMPLATE,
+    });
+    mockUseBuilderNode.mockReturnValue({
       type: "custom-template",
       templateId: "tpl-test",
     });
-    const wrapper = shallow(<RootNodeSelect />);
-    expect(wrapper.find(".rootNodeBox").find("span").text()).toBe("tpl-test");
+    const wrapper = mount(<RootNodeSelect />);
+    wrapper.find(".rootNodeWrapper").at(0).simulate("click");
+    expect(wrapper.find("TemplateList").length).toBe(1);
   });
 
   it("should return null if no root node", () => {

@@ -1,17 +1,15 @@
-import React, { useState, useMemo, useEffect, CSSProperties } from "react";
-import { Tree } from "antd";
-import { DownOutlined, BranchesOutlined } from "@ant-design/icons";
+import React, { useState, useMemo } from "react";
+import { BranchesOutlined } from "@ant-design/icons";
 import styles from "./RoutesView.module.css";
 import { BuilderRouteNode } from "@next-core/brick-types";
 import { generateRouteTree } from "../../utils/generateRouteTree";
 import { useBuilderNode, useRouteList } from "@next-core/editor-bricks-helper";
-import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
+import { SearchableTree } from "../components/SearchableTree/SearchableTree";
 
 export interface RoutesViewProps {
-  contentStyle?: CSSProperties;
   handleRouteSelect?: (route: BuilderRouteNode) => void;
 }
 
@@ -29,7 +27,6 @@ const setParent = (node: BuilderRouteNode,filteredMap: Map<string, BuilderRouteN
 }
 
 export function RoutesView({
-  contentStyle,
   handleRouteSelect,
 }: RoutesViewProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -56,69 +53,25 @@ export function RoutesView({
     return result;
   }, [routeList,q]);
 
-  const [selectRouteKey, setSelectRouteKey] = useState(
-    rootNode ? [rootNode.id] : []
-  );
-
-  useEffect(() => {
-    setSelectRouteKey(rootNode ? [rootNode.id] : []);
-  }, [rootNode?.id]);
-
-  const handleClick = (selectedKeys: React.Key[], value: any): void => {
-    const selectedProps = value.node.props;
+  const handleSelect = (selectedProps: any) => {
     onRouteSelect?.(selectedProps);
     handleRouteSelect?.(selectedProps);
-    const select = selectedProps.id ? [selectedProps.id] : [];
-    setSelectRouteKey(select);
-  };
+  }
 
-  const handleSearch = (value: string): void => {
-    setQ(value);
-  };
-
-  const titleRender = (nodeData: BuilderRouteNode): React.ReactElement => {
-    let title = <span>{nodeData.alias}</span>;
-    if (q) {
-      const trimQ = q.trim();
-      const index = nodeData.alias.toLowerCase().indexOf(trimQ.toLowerCase());
-      if (index !== -1) {
-        const [beforeStr, matchStr, afterStr] = [
-          nodeData.alias.substr(0, index),
-          nodeData.alias.substr(index, trimQ.length),
-          nodeData.alias.substr(index + trimQ.length),
-        ];
-        title = (
-          <span>
-            {beforeStr}
-            {!!matchStr && (
-              <span className={styles.matchedStr}>{matchStr}</span>
-            )}
-            {afterStr}
-          </span>
-        );
-      }
-    }
-    return <span title={nodeData.path}>{title}</span>;
-  };
+  const handleQChange = (q: string) => {
+    setQ(q)
+  }
 
   return (
-    <div className={styles.routesViewContainer} style={contentStyle}>
-      <SearchComponent placeholder={t(K.SEARCH_ROUTE)} onSearch={handleSearch} />
-      {!!routeTreeData.length && (
-        <div className={styles.treeWrapper}>
-          <Tree
-            showIcon
-            defaultExpandAll={true}
-            treeData={routeTreeData}
-            selectedKeys={selectRouteKey}
-            switcherIcon={<DownOutlined />}
-            onSelect={handleClick}
-            titleRender={titleRender}
-            icon={<BranchesOutlined />}
-            blockNode={true}
-          ></Tree>
-        </div>
-      )}
-    </div>
-  );
+    <SearchableTree 
+      list={routeTreeData}
+      defaultSelectedKeys={rootNode ? [rootNode.id] : []}
+      icon={<BranchesOutlined />}
+      field="alias"
+      searchPlaceholder={t(K.SEARCH_ROUTE)}
+      onSelect={handleSelect}
+      onQChange={handleQChange}
+      customClassName={styles.customTree}
+    />
+  )
 }

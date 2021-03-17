@@ -5,7 +5,7 @@ import {
   ToolboxTab,
   BrickOptionItem,
 } from "./interfaces";
-import { BuilderRouteNode } from "@next-core/brick-types";
+import { BuilderRouteNode, BuilderCustomTemplateNode } from "@next-core/brick-types";
 
 export interface ContextOfBuilderUI {
   appId?: string;
@@ -21,7 +21,9 @@ export interface ContextOfBuilderUI {
   clipboard?: BuilderClipboard;
   setClipboard?: React.Dispatch<React.SetStateAction<BuilderClipboard>>;
   onRouteSelect?: (route: BuilderRouteNode) => void;
+  onTemplateSelect?: (template: BuilderCustomTemplateNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;
+  onCurrentTemplateClick?: (template: BuilderCustomTemplateNode) => void;
   onBuildAndPush?: () => void;
   onPreview?: () => void;
 }

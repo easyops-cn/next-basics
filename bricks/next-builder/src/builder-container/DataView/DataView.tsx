@@ -9,11 +9,11 @@ import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import styles from "./DataView.module.css";
 import { findIndex, uniqueId } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
-import { searchList } from "./utils";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { ContextItem } from "./ContextItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
+import { searchList } from "../utils/utils";
 
 const symbolId = Symbol("uid");
 
