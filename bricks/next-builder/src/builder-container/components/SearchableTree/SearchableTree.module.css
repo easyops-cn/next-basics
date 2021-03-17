@@ -1,0 +1,38 @@
+.treeWrapper {
+  overflow: auto;
+  padding: 4px 10px;
+  z-index: 5;
+  :global(.ant-tree){
+    background: transparent;
+  }
+  :global(.ant-tree .ant-tree-node-content-wrapper){
+    color: var(--text-color-default);
+    line-height: 30px;
+    white-space: nowrap;
+  }
+  :global(.ant-tree .ant-tree-node-content-wrapper .ant-tree-iconEle){
+    line-height: 30px;
+  }
+  :global(.ant-tree .ant-tree-switcher){
+    line-height: 30px;
+  }
+  :global(.ant-tree .ant-tree-node-content-wrapper.ant-tree-node-selected){
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #4e93ef;
+  }
+  :global(.ant-tree .ant-tree-node-content-wrapper:hover){
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #4e93ef;
+  }
+}
+
+.container {
+  overflow: hidden;
+  display: grid;
+  height: 100%;
+  grid-template-rows: 62px 1fr;
+}
+
+.matchedStr{
+  color: #E6922F;
+}

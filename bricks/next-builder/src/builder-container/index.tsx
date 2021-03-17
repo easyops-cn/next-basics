@@ -15,6 +15,7 @@ import {
   BuilderRouteOrBrickNode,
   ContextConf,
   BuilderRouteNode,
+  BuilderCustomTemplateNode
 } from "@next-core/brick-types";
 import {
   EventDetailOfNodeAdd,
@@ -137,9 +138,19 @@ export class BuilderContainerElement extends UpdatingElement {
   private _routeSelectEmitter: EventEmitter<BuilderRouteNode>;
 
   @event({
+    type: "template.select",
+  })
+  private _templateSelectEmitter: EventEmitter<BuilderCustomTemplateNode>;
+
+  @event({
     type: "current.route.click",
   })
   private _currentRouteClickEmitter: EventEmitter<BuilderRouteNode>;
+
+  @event({
+    type: "current.template.click",
+  })
+  private _currentTemplateClickEmitter: EventEmitter<BuilderCustomTemplateNode>;
 
   @event({
     type: "project.buildAndPush",
@@ -298,8 +309,16 @@ export class BuilderContainerElement extends UpdatingElement {
     this._routeSelectEmitter.emit(route);
   };
 
+  private _handleTemplateSelect = (template: BuilderCustomTemplateNode): void => {
+    this._templateSelectEmitter.emit(template);
+  };
+
   private _handleCurrentRouteClick = (route: BuilderRouteNode): void => {
     this._currentRouteClickEmitter.emit(route);
+  };
+
+  private _handleCurrentTemplateClick = (template: BuilderCustomTemplateNode): void => {
+    this._currentTemplateClickEmitter.emit(template);
   };
 
   private _handleBuildAndPush = (): void => {
@@ -373,7 +392,9 @@ export class BuilderContainerElement extends UpdatingElement {
                 onNodeCutPaste={this._handleNodeCutPaste}
                 onContextUpdate={this._handleContextUpdate}
                 onRouteSelect={this._handleRouteSelect}
+                onTemplateSelect={this._handleTemplateSelect}
                 onCurrentRouteClick={this._handleCurrentRouteClick}
+                onCurrentTemplateClick={this._handleCurrentTemplateClick}
                 onBuildAndPush={this._handleBuildAndPush}
                 onPreview={this._handlePreview}
               />

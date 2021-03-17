@@ -2,7 +2,6 @@ import React, { useMemo, useState, useEffect } from "react";
 import { Input, Radio, Form, AutoComplete } from "antd";
 import {
   typeOptions,
-  searchList,
   safeDumpFields,
   computeItemToSubmit,
   ContextItemFormValue,
@@ -13,6 +12,7 @@ import { CodeEditorItem } from "@next-libs/editor-components";
 import { BrickOptionItem } from "../interfaces";
 import { FormInstance } from "antd/lib/form";
 import { RadioChangeEvent } from "antd/lib/radio";
+import { searchList } from "../utils/utils";
 
 export interface ContextItemFormProps {
   data: ContextConf;

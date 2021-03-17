@@ -4,6 +4,7 @@ import {
   BuilderRouteOrBrickNode,
   ContextConf,
   BuilderRouteNode,
+  BuilderCustomTemplateNode
 } from "@next-core/brick-types";
 import {
   AbstractBuilderDataManager,
@@ -54,7 +55,9 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onClipboardChange?: (clipboard: BuilderClipboard) => void;
   onContextUpdate?: (context: ContextConf[]) => void;
   onRouteSelect?: (route: BuilderRouteNode) => void;
+  onTemplateSelect?: (template: BuilderCustomTemplateNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;
+  onCurrentTemplateClick?: (template: BuilderCustomTemplateNode) => void;
   onBuildAndPush?: () => void;
   onPreview?: () => void;
 }
@@ -84,7 +87,9 @@ export function LegacyBuilderContainer(
     onNodeCutPaste,
     onContextUpdate,
     onRouteSelect,
+    onTemplateSelect,
     onCurrentRouteClick,
+    onCurrentTemplateClick,
     onBuildAndPush,
     onPreview,
   }: BuilderContainerProps,
@@ -211,7 +216,9 @@ export function LegacyBuilderContainer(
         clipboard,
         setClipboard,
         onRouteSelect,
+        onTemplateSelect,
         onCurrentRouteClick,
+        onCurrentTemplateClick,
         onBuildAndPush,
         onPreview,
       }}

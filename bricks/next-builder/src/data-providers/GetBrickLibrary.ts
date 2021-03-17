@@ -29,6 +29,7 @@ export async function GetBrickLibrary({
         await InstanceApi.postSearch("STORYBOARD_TEMPLATE", {
           fields: {
             templateId: 1,
+            id: 1
           },
           page: 1,
           page_size: 3000,
@@ -39,6 +40,7 @@ export async function GetBrickLibrary({
       ).list.map<BrickLibraryItem>((item) => ({
         type: "customTemplate",
         name: item.templateId,
+        id: item.id
       }))
     )
     .concat(
