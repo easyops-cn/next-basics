@@ -27,7 +27,6 @@ import { UnitType } from "./libs/constants";
  * const byteUnits = ["b", "B", "KB", "MB", "GB"];
  * const byteRateUnits = ["bps", "Bps", "KBps", "MBps", "GBps"];
  * ```
- * @noInheritDoc
  */
 export class InputWithUnitElement extends FormItemElement {
   /**

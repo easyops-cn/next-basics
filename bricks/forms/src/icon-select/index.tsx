@@ -25,7 +25,6 @@ export type Size = number | "large" | "small" | "default";
  * 1.102.0:新增属性 `bg`,`setColor`，支持选择颜色
  * 1.67.0:新增构件 `forms.icon-select`
  * @memo
- * @noInheritDoc
  */
 export class IconSelectElement extends FormItemElement {
   /**

@@ -15,7 +15,6 @@ import { InformMethodsForm } from "./InformMethodsForm";
  * @slots
  * @history
  * @memo
- * @noInheritDoc
  */
 export class InformMethodsFormElement extends FormItemElement {
   /**

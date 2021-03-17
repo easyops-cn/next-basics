@@ -29,7 +29,6 @@ import { FormItemElement } from "@next-libs/forms";
  * @memo
  * ### 注意
  * 该构件是下拉框对 cmdb 列表的一个简单封装，只适用于于简单的数据选择和搜索，如果涉及到复杂的数据选择，可能需要有高级的过滤（比如主机数据，需要按 IP，按主机名，按状态等过滤），则建议用：[CMDB 实例输入表单项 ](developers/brick-book/brick/cmdb-instances.cmdb-instances-input-form)
- * @noInheritDoc
  */
 export class CmdbInstanceSelectElement extends FormItemElement {
   /**

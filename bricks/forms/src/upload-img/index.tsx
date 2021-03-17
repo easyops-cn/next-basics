@@ -23,7 +23,6 @@ import { FormItemElement } from "@next-libs/forms";
  * 1.54.0:新增属性 `draggableUploadText`
  * 1.46.0:新增构件 `draggableUploadHint`
  * @memo
- * @noInheritDoc
  */
 export class UploadImgElement extends FormItemElement {
   // 对象存储桶名字，业务编排的时候创建，一般一个业务需求对应一个存储桶名称，相当于 namespace

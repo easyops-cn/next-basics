@@ -22,7 +22,6 @@ import { clone, pullAt } from "lodash";
  * @history
  * 1.x.0:新增构件 `forms.general-structs-form-item`
  * @memo
- * @noInheritDoc
  */
 export class GeneralStructsFormItemElement extends FormItemElement {
   private _mountPoint: HTMLElement;

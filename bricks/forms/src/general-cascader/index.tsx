@@ -30,7 +30,6 @@ import { CascaderOptionType } from "antd/lib/cascader";
  *  [key: string]: any;
  *}
  *```
- * @noInheritDoc
  */
 export class GeneralCascaderElement extends FormItemElement {
   /**

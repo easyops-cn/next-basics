@@ -57,7 +57,6 @@ import {
  *   rootPId?: React.Key;
  * }
  * ```
- * @noInheritDoc
  */
 export class TreeSelectElement extends FormItemElement {
   /**

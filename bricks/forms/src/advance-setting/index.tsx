@@ -21,7 +21,6 @@ import style from "./style.shadow.less";
  * @history
  * 1.87.0:新增构件 `forms.advance-setting`
  * @memo
- * @noInheritDoc
  */
 export class AdvanceSettingElement extends FormItemElement {
   private _mountPoint: HTMLElement;

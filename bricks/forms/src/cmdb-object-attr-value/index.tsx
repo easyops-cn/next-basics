@@ -34,7 +34,6 @@ import { isNil } from "lodash";
   * | "bool"
   * | "float";
 
-* @noInheritDoc
 */
 export class CmdbObjectAttrValueElement extends FormItemElement {
   /**
