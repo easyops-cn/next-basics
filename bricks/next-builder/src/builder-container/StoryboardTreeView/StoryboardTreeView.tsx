@@ -31,6 +31,13 @@ export function StoryboardTreeView(): React.ReactElement {
         childNodes.length > 0 && (
           <>
             <p>
+              {
+                // Use `<Trans>` to integrate HTML element in translated text.
+                // See https://react.i18next.com/latest/trans-component
+                //
+                // However, we cannot nest elements in translated text.
+                // See https://react.i18next.com/latest/trans-component#using-for-less-than-br-greater-than-and-other-simple-html-elements-in-translations-v-10-4-0
+              }
               <Trans
                 t={t}
                 i18nKey={

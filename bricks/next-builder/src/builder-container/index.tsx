@@ -350,6 +350,7 @@ export class BuilderContainerElement extends UpdatingElement {
             <DndProvider backend={HTML5Backend}>
               <BuilderContainer
                 ref={this._managerRef}
+                appId={this.appId}
                 dataSource={this.dataSource}
                 routeList={this.routeList}
                 brickList={this.brickList}

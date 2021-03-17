@@ -1,8 +1,14 @@
 import React from "react";
-import { BuilderClipboard, BuilderDataType, ToolboxTab, BrickOptionItem } from "./interfaces";
+import {
+  BuilderClipboard,
+  BuilderDataType,
+  ToolboxTab,
+  BrickOptionItem,
+} from "./interfaces";
 import { BuilderRouteNode } from "@next-core/brick-types";
 
 export interface ContextOfBuilderUI {
+  appId?: string;
   dataType?: BuilderDataType;
   brickList?: BrickOptionItem[];
   processing?: boolean;

@@ -34,6 +34,7 @@ import { defaultToolboxTab } from "./constants";
 import styles from "./BuilderContainer.module.css";
 
 export interface BuilderContainerProps extends BuilderContextMenuProps {
+  appId?: string;
   dataSource?: BuilderRouteOrBrickNode[];
   routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
@@ -60,6 +61,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
 
 export function LegacyBuilderContainer(
   {
+    appId,
     dataSource,
     routeList,
     brickList,
@@ -196,6 +198,7 @@ export function LegacyBuilderContainer(
   return (
     <BuilderUIContext.Provider
       value={{
+        appId,
         dataType,
         brickList,
         processing,
@@ -220,9 +223,7 @@ export function LegacyBuilderContainer(
       >
         <BuilderToolbar />
         <div className={styles.builderWrapper}>
-          <BuilderToolbox
-            onContextUpdate={onContextUpdate}
-          />
+          <BuilderToolbox onContextUpdate={onContextUpdate} />
           <BuilderCanvas />
         </div>
       </div>

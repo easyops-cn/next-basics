@@ -44,7 +44,7 @@ const brickList: BrickOptionItem[] = [
 
 describe("searchBricks", () => {
   it("should show frequently used bricks by default", () => {
-    const result = searchBricks(undefined, brickList);
+    const result = searchBricks(undefined, brickList, "my-app");
     expect(result).toEqual([
       {
         scope: "basic-bricks",
@@ -84,7 +84,7 @@ describe("searchBricks", () => {
   });
 
   it("should show matched bricks with single keyword", () => {
-    const result = searchBricks("general", brickList);
+    const result = searchBricks("general", brickList, "my-app");
     expect(result).toEqual([
       {
         scope: "basic-bricks",
@@ -118,7 +118,7 @@ describe("searchBricks", () => {
   });
 
   it("should show matched bricks with multiple keywords", () => {
-    const result = searchBricks(" general Form ", brickList);
+    const result = searchBricks(" general Form ", brickList, "my-app");
     expect(result).toEqual([
       {
         scope: "forms",
@@ -141,7 +141,7 @@ describe("searchBricks", () => {
   });
 
   it("should show matched bricks with limit", () => {
-    const result = searchBricks("general", brickList, 2);
+    const result = searchBricks("general", brickList, "my-app", 2);
     expect(result).toEqual([
       {
         scope: "basic-bricks",
