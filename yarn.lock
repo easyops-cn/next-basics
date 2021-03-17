@@ -2129,12 +2129,12 @@
   resolved "https://registry.npm.taobao.org/@next-core/brick-http/download/@next-core/brick-http-2.2.7.tgz#3a036b476a1ac6a8c4b0b19a0b19815e2716ecb9"
   integrity sha1-OgNrR2oaxqjEsLGaCxmBXicW7Lk=
 
-"@next-core/brick-icons@^2.7.3", "@next-core/brick-icons@^2.9.0", "@next-core/brick-icons@^2.9.1":
+"@next-core/brick-icons@^2.7.3", "@next-core/brick-icons@^2.9.1":
   version "2.9.1"
   resolved "https://registry.npm.taobao.org/@next-core/brick-icons/download/@next-core/brick-icons-2.9.1.tgz#f06322291bf4f24b96ca99ee83d1ee062fa33132"
   integrity sha1-8GMiKRv08kuWypnug9HuBi+jMTI=
 
-"@next-core/brick-kit@^2.36.0", "@next-core/brick-kit@^2.37.0":
+"@next-core/brick-kit@^2.37.0":
   version "2.37.0"
   resolved "https://registry.npm.taobao.org/@next-core/brick-kit/download/@next-core/brick-kit-2.37.0.tgz#8968f133be29ba052ed45c900a6dd281b1372855"
   integrity sha1-iWjxM74pugUu1FyQCm3SgbE3KFU=
@@ -2164,12 +2164,12 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.19.1", "@next-core/brick-types@^2.20.0":
-  version "2.19.1"
-  resolved "https://registry.npm.taobao.org/@next-core/brick-types/download/@next-core/brick-types-2.19.1.tgz#d80c3b8f9d880b78f93ebf606009262f42c8c895"
-  integrity sha1-2Aw7j52IC3j5Pr9gYAkmL0LIyJU=
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.20.0":
+  version "2.20.0"
+  resolved "https://registry.npm.taobao.org/@next-core/brick-types/download/@next-core/brick-types-2.20.0.tgz#50e84d00190b8c425baa7c0d7a228f93ec98d9ae"
+  integrity sha1-UOhNABkLjEJbqnwNeiKPk+yY2a4=
 
-"@next-core/brick-utils@^2.13.2", "@next-core/brick-utils@^2.13.3":
+"@next-core/brick-utils@^2.13.3":
   version "2.13.3"
   resolved "https://registry.npm.taobao.org/@next-core/brick-utils/download/@next-core/brick-utils-2.13.3.tgz#0937f372b1138a54b15525ccf854291c7e87453f"
   integrity sha1-CTfzcrETilSxVSXM+FQpHH6HRT8=
@@ -2266,7 +2266,7 @@
   resolved "https://registry.npm.taobao.org/@next-core/easyops-analytics/download/@next-core/easyops-analytics-0.1.8.tgz#c8cd83d184fa0cc244b3d46c3658af5e3ee194aa"
   integrity sha1-yM2D0YT6DMJEs9RsNlivXj7hlKo=
 
-"@next-core/editor-bricks-helper@^0.14.4", "@next-core/editor-bricks-helper@^0.14.5":
+"@next-core/editor-bricks-helper@^0.14.5":
   version "0.14.5"
   resolved "https://registry.npm.taobao.org/@next-core/editor-bricks-helper/download/@next-core/editor-bricks-helper-0.14.5.tgz#f40d077c727121836c88bf6d9bd8ab504e3b9805"
   integrity sha1-9A0HfHJxIYNsiL9tm9irUE47mAU=
