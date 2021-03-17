@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.154.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.2...@next-bricks/forms@1.154.3) (2021-03-17)
+
+
+### Bug Fixes
+
+* **TimeRangePicker:** time-range-picker不给value时无法定位默认日期位置 ([32f0db9](https://github.com/easyops-cn/next-basics/commit/32f0db9bc57f091f372a9e8ba4980a9b2bcd1a3c))
+
+
+
+
+
 ## [1.154.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.1...@next-bricks/forms@1.154.2) (2021-03-15)
 
 

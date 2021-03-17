@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.35.0...@next-bricks/next-builder@1.35.1) (2021-03-17)
+
+
+### Bug Fixes
+
+* **builder:** restrict node pasting ([6b53ad9](https://github.com/easyops-cn/next-basics/commit/6b53ad9429103f94200452fc7499135f7fdea57f))
+
+
+
+
+
 # [1.35.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.34.0...@next-bricks/next-builder@1.35.0) (2021-03-16)
 
 
