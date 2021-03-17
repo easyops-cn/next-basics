@@ -139,7 +139,6 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| fieldNames        | `{label: string, value: string, children: string}`                      | -        | -       | 自定义 options 中 label name children 的字段 |
 *| allowClear  | `boolean`                               | -        | true   | 是否支持清除                 |
 *| expandTrigger  | `click \| hover`                               | -        | 'click'   | 次级菜单的展开方式                 |
-* @noInheritDoc
 */
 export class DynamicFormItemElement extends FormItemElement {
   private manualEditedValue: any[];

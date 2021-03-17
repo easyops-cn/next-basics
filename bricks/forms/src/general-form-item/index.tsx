@@ -30,7 +30,6 @@ export interface ControlConfig {
  * 1.49.0:新增构件 `forms.general-form-item`
  * 1.53.0:新增 `control` 插槽，废弃 `control` 属性
  * @memo
- * @noInheritDoc
  */
 export class GeneralFormItemElement extends FormItemElement {
   /**

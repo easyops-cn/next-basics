@@ -24,7 +24,6 @@ import { OptionType } from "../interfaces";
  * @history
  * 1.36.0:新增构件 `forms.general-auto-complete`
  * @memo
- * @noInheritDoc
  */
 export class GeneralAutoCompleteElement extends FormItemElement {
   /**

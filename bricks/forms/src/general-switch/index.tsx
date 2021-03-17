@@ -19,7 +19,6 @@ import { FormItemElement } from "@next-libs/forms";
  * @history
  * 1.28.0:新增 `general.switch.change` 事件
  * @memo
- * @noInheritDoc
  */
 export class GeneralSwitchElement extends FormItemElement {
   /**

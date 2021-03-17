@@ -23,7 +23,6 @@ import { FormItemElement } from "@next-libs/forms";
  * @history
  * 1.28.0:新增 `instance.select.change` 事件
  * @memo
- * @noInheritDoc
  */
 export class CmdbInstanceSelectPanelElement extends FormItemElement {
   /**

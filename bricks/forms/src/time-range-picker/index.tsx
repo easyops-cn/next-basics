@@ -33,7 +33,6 @@ import { NS_FORMS, K } from "../i18n/constants";
 
 *export type RangeType = "time" | "date" | "dateTime";
 *```
-* @noInheritDoc
 */
 export class TimeRangePickerElement extends FormItemElement {
   private _defaultFormat = "HH:mm:ss";

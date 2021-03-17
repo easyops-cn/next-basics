@@ -44,7 +44,6 @@ export interface OptionGroup {
 *  disabled: boolean;
 *}
 *```
-* @noInheritDoc
 */
 export class GeneralCheckboxElement extends FormItemElement {
   /**

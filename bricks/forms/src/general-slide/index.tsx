@@ -20,7 +20,6 @@ import { FormItemElement } from "@next-libs/forms";
  * 1.x.0:新增构件 `forms.general-slide`
  * 1.100.0:新增属性 `onlyShowMode`、`size`
  * @memo
- * @noInheritDoc
  */
 export class GeneralSlideElement extends FormItemElement {
   /**

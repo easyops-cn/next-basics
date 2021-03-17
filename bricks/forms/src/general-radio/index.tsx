@@ -32,7 +32,6 @@ import { RadioGroupButtonStyle } from "antd/lib/radio";
  *  disabled: boolean;
  *}
  *```
- * @noInheritDoc
  */
 export class GeneralRadioElement extends FormItemElement {
   /**

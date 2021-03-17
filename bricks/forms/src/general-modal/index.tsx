@@ -49,7 +49,6 @@ export interface ChildeFormElement extends HTMLElement {
 *| property | type      | required | default | description |
 *| -------- | --------- | -------- | ------- | ----------- |
 *| noEvent  | `boolean` | -        | -       | 不触发事件  |
-* @noInheritDoc
 */
 export class GeneralModalElement extends FormItemElement {
   /**

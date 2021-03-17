@@ -78,7 +78,6 @@ export const columns = [
  * @history
  * 1.x.0:新增构件 `forms.dynamic-user-select-item`
  * @memo
- * @noInheritDoc
  */
 export class DynamicUserSelectItemElement extends FormItemElement {
   @property({

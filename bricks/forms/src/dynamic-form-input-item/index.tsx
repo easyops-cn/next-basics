@@ -36,7 +36,6 @@ import {
 *| placeholder | `string`                          | -        | -       | 配置该列 placeholder                                                                                                              |
 *| type        | `text` \| `checkbox`\| `number`... | -        | -       | 该列表单项的类型，详情可查看 [<input> types](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#%3Cinput%3E_types) |
 *| disabled    | `boolean`                         | -        | -       | 该列表单项是否禁止                                                                                                                |
-* @noInheritDoc
 */
 export class DynamicFormInputItemElement extends FormItemElement {
   /**

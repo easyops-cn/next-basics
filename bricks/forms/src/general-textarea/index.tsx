@@ -21,7 +21,6 @@ import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
  * 1.70.0:新增 `general.textarea.blur.V2` 事件
  * 1.91.0:新增 `disabled` 属性，构件正名为 `forms.general-textarea`
  * @memo
- * @noInheritDoc
  */
 export class GeneralTextAreaElement extends FormItemElement {
   /**

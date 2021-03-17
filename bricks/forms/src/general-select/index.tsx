@@ -40,7 +40,6 @@ export interface ComplexOption<T = string | number> {
  * value: string | number;
  * }
  * ```
- * @noInheritDoc
  */
 export class GeneralSelectElement extends FormItemElement {
   /**

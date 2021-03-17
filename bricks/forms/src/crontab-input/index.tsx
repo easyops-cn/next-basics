@@ -19,7 +19,6 @@ import { CrontabInput } from "./CrontabInput";
  * @history
  * 1.28.0:新增 `crontab.change` 事件
  * @memo
- * @noInheritDoc
  */
 export class CrontabInputElement extends FormItemElement {
   /**
