@@ -99,14 +99,14 @@ export function RealTimeRangePicker(
       <TimePicker
         {...{ id: uniqueId("start-time-") }}
         onChange={onStartTimeChange}
-        value={startTime}
+        value={!isEmpty(props.value?.startTime) ? startTime : undefined}
         format={props.format}
       ></TimePicker>
       <Input disabled value="~" style={{ width: 32 }} />
       <TimePicker
         {...{ id: uniqueId("end-time-") }}
         onChange={onEndTimeChange}
-        value={endTime}
+        value={!isEmpty(props.value?.endTime) ? endTime : undefined}
         format={props.format}
       ></TimePicker>
     </Input.Group>
@@ -116,11 +116,11 @@ export function RealTimeRangePicker(
     dates: RangeValue<moment.Moment>,
     dateStrings: [string, string]
   ) => {
-    setStartTime(dates[0]);
-    setEndTime(dates[1]);
+    setStartTime(dates?.[0]);
+    setEndTime(dates?.[1]);
     props.onChange?.({
-      startTime: dates[0].format(props.format),
-      endTime: dates[1].format(props.format),
+      startTime: dates?.[0].format(props.format),
+      endTime: dates?.[1].format(props.format),
     });
   };
 
@@ -137,11 +137,11 @@ export function RealTimeRangePicker(
   const rangeOk = (selectedTime: RangeValue<moment.Moment>) => {
     needConfirm.current = false;
     const dates = selectedTime;
-    setPrevStartTime(dates[0].clone());
-    setPrevEndTime(dates[1].clone());
+    setPrevStartTime(dates?.[0].clone());
+    setPrevEndTime(dates?.[1].clone());
     props.onChange?.({
-      startTime: dates[0].format(props.format),
-      endTime: dates[1].format(props.format),
+      startTime: dates?.[0].format(props.format),
+      endTime: dates?.[1].format(props.format),
     });
   };
 
@@ -149,7 +149,11 @@ export function RealTimeRangePicker(
     <DatePicker.RangePicker
       style={{ width: 400 }}
       showTime={rangeType === "dateTime"}
-      value={[startTime, endTime]}
+      value={
+        !isEmpty(props.value?.startTime) || !isEmpty(props.value?.endTime)
+          ? [startTime, endTime]
+          : []
+      }
       format={props.format}
       onChange={rangeChange}
       onOpenChange={onOpenChange}
