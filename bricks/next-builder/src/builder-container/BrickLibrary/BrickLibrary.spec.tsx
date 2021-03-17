@@ -34,6 +34,7 @@ jest.mock("../constants", () => ({
 describe("BrickLibrary", () => {
   it("should work", () => {
     (useBuilderUIContext as jest.Mock).mockReturnValue({
+      appId: "my-app",
       brickList: [
         {
           type: "brick",
@@ -47,11 +48,9 @@ describe("BrickLibrary", () => {
           type: "brick",
           name: "forms.general-select",
         },
-      ]
+      ],
     });
-    const wrapper = mount(
-      <BrickLibrary />
-    );
+    const wrapper = mount(<BrickLibrary />);
     expect(wrapper.find(".groupList > li").length).toBe(2);
     expect(wrapper.find(".groupName").at(0).text()).toBe("basic-bricks");
     expect(wrapper.find(".groupName").at(1).text()).toBe("forms");

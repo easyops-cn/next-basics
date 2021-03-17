@@ -18,10 +18,10 @@ interface BrickLibraryProps {
 
 export function BrickLibrary({
   hideToolboxPane,
-  onDraggingChange
+  onDraggingChange,
 }: BrickLibraryProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const { brickList } = useBuilderUIContext();
+  const { appId, brickList } = useBuilderUIContext();
   const [q, setQ] = React.useState<string>();
 
   const handleSearch = (value: string): void => {
@@ -29,8 +29,8 @@ export function BrickLibrary({
   };
 
   const filteredGroups = React.useMemo<GroupedBricks[]>(
-    () => searchBricks(q, brickList),
-    [brickList, q]
+    () => searchBricks(q, brickList, appId),
+    [appId, brickList, q]
   );
 
   const content = (
@@ -40,9 +40,9 @@ export function BrickLibrary({
         onSearch={handleSearch}
       />
       <div className={styles.resultWrapper}>
-        <ul 
-          className={classNames(styles.groupList,{
-            [styles.columnGroupList]: hideToolboxPane
+        <ul
+          className={classNames(styles.groupList, {
+            [styles.columnGroupList]: hideToolboxPane,
           })}
         >
           {filteredGroups.map((group) => (
@@ -63,9 +63,9 @@ export function BrickLibrary({
         </ul>
       </div>
     </>
-  )
+  );
 
-  if(hideToolboxPane){
+  if (hideToolboxPane) {
     return content;
   }
 

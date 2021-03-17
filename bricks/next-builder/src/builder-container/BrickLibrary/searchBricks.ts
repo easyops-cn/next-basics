@@ -5,11 +5,12 @@ import { BrickOptionItem, GroupedBricks } from "../interfaces";
 export function searchBricks(
   q: string,
   brickList: BrickOptionItem[],
+  appId: string,
   limit = brickSearchResultLimit
 ): GroupedBricks[] {
   const keywords = (q ?? "").toLowerCase().match(/\S+/g);
   if (!keywords || !brickList) {
-    return groupBricks(frequentlyUsedBricks.slice(0, limit));
+    return groupBricks(frequentlyUsedBricks.slice(0, limit), appId);
   }
   const bricks: BrickOptionItem[] = [];
   for (const brick of brickList) {
@@ -22,5 +23,5 @@ export function searchBricks(
       }
     }
   }
-  return groupBricks(bricks);
+  return groupBricks(bricks, appId);
 }
