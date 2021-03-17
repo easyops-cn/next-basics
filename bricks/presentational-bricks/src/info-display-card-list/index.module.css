@@ -1,9 +1,18 @@
 .infoCard {
   margin-top: 20px;
+  box-shadow: none;
+
   &:nth-child(1) {
     margin-top: 0;
   }
+
+  &:global(.ant-card) {
+    &:hover {
+      border-style: hidden;
+    }
+  }
 }
+
 .infoCardWrapper {
   display: flex;
   padding: 10px;
@@ -47,13 +56,16 @@
   .cardIcon {
     min-width: 44px;
   }
+
   .cardDefaultIcon {
   }
 }
+
 .infoCardDetailDiv {
   display: flex;
   align-items: center;
 }
+
 .infoCardRightSection {
   display: flex;
   align-items: center;

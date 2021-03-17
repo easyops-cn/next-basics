@@ -407,6 +407,17 @@ export class CardItemElement extends UpdatingElement {
   @property({ type: Boolean })
   showImg: boolean;
 
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 图标是img时，可以设置 img 的大小，不设置时会铺满
+   */
+  @property({
+    type: Number,
+  })
+  imgSize: number;
+
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -578,6 +589,7 @@ export class CardItemElement extends UpdatingElement {
             disabled={mutableProps.disabled}
             imgSrc={mutableProps.imgSrc}
             showImg={this.showImg}
+            imgSize={this.imgSize}
           />
         </BrickWrapper>,
         this._mountPoint,
