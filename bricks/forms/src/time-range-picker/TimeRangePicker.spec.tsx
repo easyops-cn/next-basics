@@ -45,9 +45,7 @@ describe("TimeRangePicker", () => {
 
   it("should update value", () => {
     const wrapper = mount(<TimeRangePicker format="HH:mm:ss" />);
-    expect(
-      wrapper.find(TimePicker).first().prop("value").format("HH:mm:ss")
-    ).toBe("00:00:00");
+    expect(wrapper.find(TimePicker).first().prop("value")).toBeUndefined();
 
     wrapper.setProps({
       value: { startTime: "01:23:45", endTime: "12:34:56" },
@@ -79,6 +77,28 @@ describe("TimeRangePicker", () => {
     rangePicker.invoke("onOpenChange")(false);
     expect(fn).toBeCalled();
   });
+
+  it("date range should work when startTime or endTime undefined", () => {
+    const fn = jest.fn();
+    const wrapper = mount(
+      <TimeRangePicker
+        format="YYYY-MM-DD HH:mm:ss"
+        rangeType="dateTime"
+        onChange={fn}
+        value={{
+          startTime: undefined,
+          endTime: undefined,
+        }}
+      />
+    );
+    expect(wrapper.find(DatePicker.RangePicker)).toHaveLength(1);
+    const rangePicker = wrapper.find(DatePicker.RangePicker).first();
+    rangePicker.invoke("onChange")([moment(), moment()], ["", ""]);
+    rangePicker.invoke("onOk")([moment(), moment()]);
+    rangePicker.invoke("onOpenChange")(true);
+    rangePicker.invoke("onOpenChange")(false);
+    expect(fn).toBeCalled();
+  });
 });
 
 describe("RefTimeRangePicker", () => {
@@ -98,7 +118,6 @@ describe("RefTimeRangePicker", () => {
       "00:24:00"
     );
     startTimePicker = wrapper.find(TimePicker).first();
-    expect(startTimePicker.prop("value").format("HH:mm:ss")).toBe("00:24:00");
 
     let endTimePicker = wrapper.find(TimePicker).last();
     endTimePicker.invoke("onChange")(
@@ -108,7 +127,7 @@ describe("RefTimeRangePicker", () => {
       "23:59:00"
     );
     endTimePicker = wrapper.find(TimePicker).last();
-    expect(endTimePicker.prop("value").format("HH:mm:ss")).toBe("23:59:00");
+    expect(endTimePicker.prop("value")).toBeUndefined();
 
     wrapper.setProps({ value: { startTime: "01:23:45", endTime: "23:59:59" } });
   });
