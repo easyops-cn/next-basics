@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.35.1...@next-bricks/next-builder@1.35.2) (2021-03-17)
+
+
+### Bug Fixes
+
+* **builder:** fix custom template scope in brick library ([d3992e7](https://github.com/easyops-cn/next-basics/commit/d3992e72b551744e861007819ec01fbe7c45f95e))
+
+
+
+
+
 ## [1.35.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.35.0...@next-bricks/next-builder@1.35.1) (2021-03-17)
 
 

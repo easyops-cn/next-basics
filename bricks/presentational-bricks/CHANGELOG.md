@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.173.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.173.0...@next-bricks/presentational-bricks@1.173.1) (2021-03-17)
+
+
+### Bug Fixes
+
+* **Card:** CardItem support imgSize ([5a8d65e](https://github.com/easyops-cn/next-basics/commit/5a8d65e4e1e9a815fe19501254453efa5c182f93))
+
+
+
+
+
 # [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.172.3...@next-bricks/presentational-bricks@1.173.0) (2021-03-16)
 
 
