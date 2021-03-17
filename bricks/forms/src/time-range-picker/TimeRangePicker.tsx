@@ -116,11 +116,11 @@ export function RealTimeRangePicker(
     dates: RangeValue<moment.Moment>,
     dateStrings: [string, string]
   ) => {
-    setStartTime(dates[0]);
-    setEndTime(dates[1]);
+    setStartTime(dates && dates[0]);
+    setEndTime(dates && dates[1]);
     props.onChange?.({
-      startTime: dates[0].format(props.format),
-      endTime: dates[1].format(props.format),
+      startTime: dates && dates[0].format(props.format),
+      endTime: dates && dates[1].format(props.format),
     });
   };
 
@@ -149,7 +149,11 @@ export function RealTimeRangePicker(
     <DatePicker.RangePicker
       style={{ width: 400 }}
       showTime={rangeType === "dateTime"}
-      value={[startTime, endTime]}
+      defaultValue={
+        !isEmpty(props.value?.startTime) || !isEmpty(props.value?.endTime)
+          ? [startTime, endTime]
+          : []
+      }
       format={props.format}
       onChange={rangeChange}
       onOpenChange={onOpenChange}

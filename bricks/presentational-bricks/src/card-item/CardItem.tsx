@@ -120,7 +120,13 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       <Avatar
         src={props.imgSrc}
         size={size}
-        style={{ border: "1px solid #d9d9d9", borderRadius: "50%" }}
+        style={{
+          border: "1px solid #d9d9d9",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       />
     </span>
   );

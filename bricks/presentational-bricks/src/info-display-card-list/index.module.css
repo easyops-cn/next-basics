@@ -1,5 +1,6 @@
 .infoCard {
   margin-top: 20px;
+  box-shadow: none;
   &:nth-child(1) {
     margin-top: 0;
   }
