@@ -15,7 +15,7 @@ import {
   BuilderRouteOrBrickNode,
   ContextConf,
   BuilderRouteNode,
-  BuilderCustomTemplateNode
+  BuilderCustomTemplateNode,
 } from "@next-core/brick-types";
 import {
   EventDetailOfNodeAdd,
@@ -32,6 +32,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import {
   BrickOptionItem,
+  BuilderAppendBrickDetail,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
@@ -200,6 +201,11 @@ export class BuilderContainerElement extends UpdatingElement {
   })
   private _eventNodeCutPasteEmitter: EventEmitter<BuilderPasteDetailOfCut>;
 
+  @event({
+    type: "node.appendBrick.ask",
+  })
+  private _eventNodeAppendBrickAskEmitter: EventEmitter<BuilderAppendBrickDetail>;
+
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
     this._nodeAddEmitter.emit({
       ...event.detail,
@@ -309,7 +315,9 @@ export class BuilderContainerElement extends UpdatingElement {
     this._routeSelectEmitter.emit(route);
   };
 
-  private _handleTemplateSelect = (template: BuilderCustomTemplateNode): void => {
+  private _handleTemplateSelect = (
+    template: BuilderCustomTemplateNode
+  ): void => {
     this._templateSelectEmitter.emit(template);
   };
 
@@ -317,7 +325,9 @@ export class BuilderContainerElement extends UpdatingElement {
     this._currentRouteClickEmitter.emit(route);
   };
 
-  private _handleCurrentTemplateClick = (template: BuilderCustomTemplateNode): void => {
+  private _handleCurrentTemplateClick = (
+    template: BuilderCustomTemplateNode
+  ): void => {
     this._currentTemplateClickEmitter.emit(template);
   };
 
@@ -327,6 +337,12 @@ export class BuilderContainerElement extends UpdatingElement {
 
   private _handlePreview = (): void => {
     this._previewEmitter.emit();
+  };
+
+  private _handleAskForAppendingBrick = (
+    detail: BuilderAppendBrickDetail
+  ): void => {
+    this._eventNodeAppendBrickAskEmitter.emit(detail);
   };
 
   @method()
@@ -397,6 +413,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onCurrentTemplateClick={this._handleCurrentTemplateClick}
                 onBuildAndPush={this._handleBuildAndPush}
                 onPreview={this._handlePreview}
+                onAskForAppendingBrick={this._handleAskForAppendingBrick}
               />
             </DndProvider>
           </BuilderProvider>

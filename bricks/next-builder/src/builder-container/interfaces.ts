@@ -1,4 +1,5 @@
 import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
+import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export interface BrickOptionItem {
   type: "brick" | "template" | "customTemplate" | "provider";
@@ -71,4 +72,9 @@ export interface BuilderPasteDetailOfCopy {
 export interface BuilderPasteDetailOfCut {
   sourceInstanceId: string;
   targetInstanceId: string;
+}
+
+export interface BuilderAppendBrickDetail {
+  node: BuilderRuntimeNode;
+  defaultSort: number;
 }
