@@ -97,6 +97,7 @@ export function LegacyBuilderContainer(
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
+  const [highlightNodes, setHighlightNodes] = React.useState(new Set<number>());
   const memoToolboxTab = React.useMemo(
     () => initialToolboxTab ?? defaultToolboxTab,
     [initialToolboxTab]
@@ -212,6 +213,8 @@ export function LegacyBuilderContainer(
         setFullscreen,
         toolboxTab,
         setToolboxTab,
+        highlightNodes,
+        setHighlightNodes,
         eventStreamNodeId,
         setEventStreamNodeId,
         clipboard,

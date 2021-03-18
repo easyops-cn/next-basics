@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useBuilderGroupedChildNodes } from "@next-core/editor-bricks-helper";
+import {
+  useBuilderGroupedChildNodes,
+  useBuilderData,
+} from "@next-core/editor-bricks-helper";
 import { StoryboardTreeNodeList } from "../StoryboardTreeNodeList/StoryboardTreeNodeList";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { BuilderDataType } from "../interfaces";
 import { K, NS_NEXT_BUILDER } from "../../i18n/constants";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
+import { findQueryInNode } from "../utils/findQueryInNode";
 
 import styles from "./StoryboardTreeView.module.css";
 
 export function StoryboardTreeView(): React.ReactElement {
+  const { nodes } = useBuilderData();
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const groups = useBuilderGroupedChildNodes({ isRoot: true });
-  const { dataType } = useBuilderUIContext();
+  const { dataType, setHighlightNodes } = useBuilderUIContext();
   const mountPoint = "bricks";
   const childNodes = React.useMemo(
     () =>
@@ -23,6 +29,24 @@ export function StoryboardTreeView(): React.ReactElement {
         : [],
     [groups, dataType]
   );
+  const [q, setQ] = React.useState<string>();
+
+  const handleSearch = (value: string): void => {
+    setQ(value);
+  };
+
+  useEffect(() => {
+    const nodesToHighlight = new Set<number>();
+    const trimQ = q?.trim().toLowerCase();
+    if (trimQ) {
+      nodes?.forEach((node) => {
+        if (findQueryInNode(node, trimQ)) {
+          nodesToHighlight.add(node.$$uid);
+        }
+      });
+    }
+    setHighlightNodes(nodesToHighlight);
+  }, [q, nodes]);
 
   return (
     <ToolboxPane
@@ -50,10 +74,14 @@ export function StoryboardTreeView(): React.ReactElement {
             <p>
               <Trans t={t} i18nKey={K.STORYBOARD_VIEW_TIPS_2} />
             </p>
+            <p>
+              <Trans t={t} i18nKey={K.STORYBOARD_VIEW_TIPS_3} />
+            </p>
           </>
         )
       }
     >
+      <SearchComponent placeholder={t(K.FIND)} onSearch={handleSearch} />
       <div className={styles.treeView}>
         <div className={styles.treeWrapper}>
           {childNodes.length > 0 && (
