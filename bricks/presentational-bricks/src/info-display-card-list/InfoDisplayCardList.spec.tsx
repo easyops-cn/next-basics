@@ -44,4 +44,14 @@ describe("InfoDisplayCardList", () => {
     );
     expect(wrapper.find("BrickAsComponent").length).toBe(infoList.length);
   });
+
+  it("should render detailOfDescBrickConf", () => {
+    const wrapper = mount(
+      <InfoDisplayCardList
+        dataSource={infoList}
+        detailOfDescBrickConf={{ useBrick: { brick: "div" } }}
+      />
+    );
+    expect(wrapper.find("BrickAsComponent").length).toBe(1);
+  });
 });

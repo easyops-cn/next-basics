@@ -188,6 +188,7 @@ export const infoList = [
       {
         title: "大小",
         desc: "7M",
+        useBrick: true,
       },
       {
         title: "下载次数",
@@ -236,52 +237,137 @@ export const InfoDisplayCardList: Story = {
     lib: "fa",
     icon: "clock",
   },
-  conf: {
-    brick: "presentational-bricks.info-display-card-list",
-    properties: {
-      dataSource: infoList,
-      optionConf: {
-        useBrick: {
-          brick: "basic-bricks.general-custom-buttons",
-          properties: {
-            isMoreButton: true,
-            alignment: "end",
-            moreButtonShape: "no",
-            style: {
-              transform: "scaleY(1.5) rotate(90deg)",
-            },
-            customButtons: [
-              {
-                isDropdown: true,
-                text: "编辑",
-                icon: "edit",
-                color: "#8c8c8c",
-                eventName: "instance.edit",
+  conf: [
+    {
+      brick: "presentational-bricks.info-display-card-list",
+      properties: {
+        dataSource: infoList,
+        optionConf: {
+          useBrick: {
+            brick: "basic-bricks.general-custom-buttons",
+            properties: {
+              isMoreButton: true,
+              alignment: "end",
+              moreButtonShape: "no",
+              moreBtnIcon: {
+                lib: "antd",
+                icon: "more",
+                theme: "outlined",
               },
-              {
-                isDropdown: true,
-                text: "删除",
-                icon: "delete",
-                color: "#E02020",
-                eventName: "instance.delete",
-              },
-            ],
-          },
-          transform: {
-            dataSource: "<% DATA %>",
-          },
-          events: {
-            "instance.edit": {
-              action: "console.log",
-              args: ["<% EVENT.detail %>"],
+              customButtons: [
+                {
+                  isDropdown: true,
+                  text: "编辑",
+                  icon: "edit",
+                  color: "#8c8c8c",
+                  eventName: "instance.edit",
+                },
+                {
+                  isDropdown: true,
+                  text: "删除",
+                  icon: "delete",
+                  color: "#E02020",
+                  eventName: "instance.delete",
+                },
+              ],
             },
-            "instance.delete": {
-              action: "console.log",
-              args: ["<% EVENT.detail %>"],
+            transform: {
+              dataSource: "<% DATA %>",
+            },
+            events: {
+              "instance.edit": {
+                action: "console.log",
+                args: ["<% EVENT.detail %>"],
+              },
+              "instance.delete": {
+                action: "console.log",
+                args: ["<% EVENT.detail %>"],
+              },
             },
           },
         },
       },
     },
-  },
+    {
+      brick: "presentational-bricks.info-display-card-list",
+      properties: {
+        dataSource: infoList,
+        titleFontSize: 18,
+        detailDescFontSize: 14,
+        iconBrickConf: {
+          useBrick: {
+            brick: "div",
+            properties: {
+              style: {
+                width: "8px",
+                height: "60px",
+                borderRadius: "10px",
+                background: "linear-gradient(223deg, #5FD8E5 0%,#5BCCCF 100%)",
+              },
+            },
+          },
+        },
+        detailOfDescBrickConf: {
+          useBrick: {
+            brick: "presentational-bricks.brick-user",
+            properties: {
+              userNameOrId: "easyops",
+              style: {
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                minHeight: "28px",
+              },
+            },
+          },
+        },
+        titleBrickConf: {
+          useBrick: {
+            brick: "presentational-bricks.brick-tag",
+            properties: {
+              showCard: false,
+              style: {
+                marginBottom: "8px",
+                marginLeft: "5px",
+              },
+              color: "blue",
+              tagList: ["开发版本"],
+            },
+          },
+        },
+        optionConf: {
+          useBrick: {
+            brick: "basic-bricks.general-custom-buttons",
+            properties: {
+              isMoreButton: true,
+              alignment: "end",
+              moreButtonShape: "no",
+              moreBtnIcon: {
+                lib: "antd",
+                icon: "more",
+                theme: "outlined",
+              },
+              customButtons: [
+                {
+                  isDropdown: true,
+                  text: "编辑",
+                  icon: "edit",
+                  color: "#8c8c8c",
+                  eventName: "instance.edit",
+                },
+              ],
+            },
+            transform: {
+              dataSource: "<% DATA %>",
+            },
+            events: {
+              "instance.edit": {
+                action: "console.log",
+                args: ["<% EVENT.detail %>"],
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
 };

@@ -13,6 +13,9 @@ interface InfoDisplayCardListProps {
   optionConf?: { useBrick: UseBrickConf };
   titleBrickConf?: { useBrick: UseBrickConf };
   iconBrickConf?: { useBrick: UseBrickConf };
+  detailOfDescBrickConf?: { useBrick: UseBrickConf };
+  titleFontSize?: number | string;
+  detailDescFontSize?: number | string;
 }
 
 export function InfoDisplayCardList({
@@ -21,6 +24,9 @@ export function InfoDisplayCardList({
   optionConf,
   titleBrickConf,
   iconBrickConf,
+  detailOfDescBrickConf,
+  titleFontSize,
+  detailDescFontSize,
 }: InfoDisplayCardListProps): React.ReactElement {
   const getCardItemDetail = (
     item: CardDetail,
@@ -28,9 +34,23 @@ export function InfoDisplayCardList({
   ): React.ReactNode => (
     <div className={styles.infoCardDetailWrapper} key={index}>
       <h5>{item.title}</h5>
-      <Tooltip title={item.desc}>
-        <p>{item.desc}</p>
-      </Tooltip>
+      {(isEmpty(get(detailOfDescBrickConf, "useBrick")) || !item.useBrick) && (
+        <Tooltip title={item.desc}>
+          <p
+            style={{
+              fontSize: detailDescFontSize ?? "18px",
+            }}
+          >
+            {item.desc}
+          </p>
+        </Tooltip>
+      )}
+      {!isEmpty(get(detailOfDescBrickConf, "useBrick")) && !!item.useBrick && (
+        <BrickAsComponent
+          useBrick={detailOfDescBrickConf.useBrick}
+          data={item}
+        ></BrickAsComponent>
+      )}
     </div>
   );
 
@@ -62,7 +82,13 @@ export function InfoDisplayCardList({
           )}
           <div className={styles.infoCardDetail}>
             <div className={styles.infoCardDetailDiv}>
-              <h5>{item.title}</h5>
+              <h5
+                style={{
+                  fontSize: titleFontSize ?? "16px",
+                }}
+              >
+                {item.title}
+              </h5>
               {!isEmpty(get(titleBrickConf, "useBrick")) && (
                 <BrickAsComponent
                   useBrick={titleBrickConf.useBrick}
