@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
-import React from "react";
+import React, { useMemo } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import classNames from "classnames";
 import {
@@ -16,6 +16,7 @@ import {
   useCanDrop,
   useBuilderGroupedChildNodes,
   isRouteNode,
+  useHoverNodeUid,
 } from "@next-core/editor-bricks-helper";
 import { StoryboardTreeMountPoint } from "../StoryboardTreeMountPoint/StoryboardTreeMountPoint";
 import { treeViewPaddingUnit } from "../constants";
@@ -45,6 +46,7 @@ export function StoryboardTreeNode({
 }: StoryboardTreeNodeProps): React.ReactElement {
   const node = useBuilderNode({ nodeUid });
   const { highlightNodes } = useBuilderUIContext();
+  const hoverNodeUid = useHoverNodeUid();
   const mountPoints = useBuilderNodeMountPoints({ nodeUid });
   const parentNode = useBuilderParentNode(nodeUid);
   const siblingGroups = useBuilderGroupedChildNodes({
@@ -56,6 +58,8 @@ export function StoryboardTreeNode({
   const handleClick = React.useCallback(() => {
     manager.nodeClick(node);
   }, [manager, node]);
+
+  const hover = useMemo(() => hoverNodeUid === nodeUid, [hoverNodeUid]);
 
   const [{ isDragging }, dragRef, draggingPreviewRef] = useDrag({
     item: {
@@ -121,6 +125,19 @@ export function StoryboardTreeNode({
     icon = <BranchesOutlined />;
   }
 
+  const handleMouseEnter = () => {
+    const prevUid = manager.getHoverNodeUid();
+    if (prevUid !== node.$$uid) {
+      manager.setHoverNodeUid(node.$$uid);
+    }
+  };
+  const handleMouseLeave = () => {
+    const prevUid = manager.getHoverNodeUid();
+    if (prevUid === node.$$uid) {
+      manager.setHoverNodeUid(undefined);
+    }
+  };
+
   return (
     <li
       className={classNames(
@@ -136,11 +153,14 @@ export function StoryboardTreeNode({
       <div
         className={classNames(styles.nodeNameWrapper, {
           [styles.highlightNode]: highlightNodes.has(nodeUid),
+          [styles.nodeNameWrapperHover]: hover,
         })}
         style={{
           paddingLeft: level * treeViewPaddingUnit,
         }}
         onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         ref={(node) => dragRef(dropRef(node))}
       >
         {icon && <div className={styles.icon}>{icon}</div>}
