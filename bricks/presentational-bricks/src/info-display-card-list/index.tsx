@@ -8,6 +8,7 @@ import { UseBrickConf } from "@next-core/brick-types";
 export interface CardDetail {
   title: string;
   desc: string;
+  useBrick?: boolean;
 }
 
 export interface CardItem {
@@ -81,6 +82,39 @@ export class InfoDisplayCardListElement extends UpdatingElement {
   })
   iconBrickConf: { useBrick: UseBrickConf };
 
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 设置detailOfDescBrickConf，不设置显示为纯文本
+   */
+  @property({
+    attribute: false,
+  })
+  detailOfDescBrickConf: { useBrick: UseBrickConf };
+
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default 16px
+   * @description 设置卡片 title 的字体大小，默认为 16px
+   */
+  @property({
+    attribute: false,
+  })
+  titleFontSize: number | string;
+
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default 18px
+   * @description 设置卡片右侧描述部分 desc 的字体大小，默认为18px
+   */
+  @property({
+    attribute: false,
+  })
+  detailDescFontSize: number | string;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -105,6 +139,9 @@ export class InfoDisplayCardListElement extends UpdatingElement {
             optionConf={this.optionConf}
             titleBrickConf={this.titleBrickConf}
             iconBrickConf={this.iconBrickConf}
+            detailOfDescBrickConf={this.detailOfDescBrickConf}
+            titleFontSize={this.titleFontSize}
+            detailDescFontSize={this.detailDescFontSize}
           />
         </BrickWrapper>,
         this

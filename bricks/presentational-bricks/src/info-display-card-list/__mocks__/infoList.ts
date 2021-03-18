@@ -195,6 +195,7 @@ export const infoList = [
       {
         title: "下载率",
         desc: "80%",
+        useBrick: true,
       },
       {
         title: "失败率",
