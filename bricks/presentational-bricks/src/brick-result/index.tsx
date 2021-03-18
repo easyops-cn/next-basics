@@ -56,7 +56,7 @@ export class BrickResultElement extends UpdatingElement {
 
   /**
    * @kind string
-   * @required true
+   * @required false
    * @default -
    * @description 主标题文字
    */
