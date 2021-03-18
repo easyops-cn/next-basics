@@ -82,6 +82,13 @@ export class VisualPropertyFormElement extends UpdatingElement {
   >;
 
   /**
+   * @description 表单验证错误时触发
+   */
+  @event({ type: "validate.error" }) errorEvent: EventEmitter<
+    Record<string, any>
+  >;
+
+  /**
    * @description 表单字段值更新时触发
    */
   @event({ type: "values.change" }) valuesChangeEvent: EventEmitter<
@@ -99,7 +106,7 @@ export class VisualPropertyFormElement extends UpdatingElement {
       const curTypeList = this._formUtils.current.getCurTypeList();
       this.successEvent.emit(processFormValue(values, curTypeList));
     } catch (errInfo) {
-      // eslint-disable-next-line no-empty
+      this.errorEvent.emit(errInfo);
     }
   }
 

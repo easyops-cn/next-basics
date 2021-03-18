@@ -52,4 +52,28 @@ describe("brick-visualization.visual-property-form", () => {
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });
+
+  it("should dispatch validate error event", async () => {
+    const element = document.createElement(
+      "brick-visualization.visual-property-form"
+    ) as any;
+
+    document.body.appendChild(element);
+
+    element._formUtils = {
+      current: {
+        validateFields: jest
+          .fn()
+          .mockReturnValue(new Error("please input name")),
+      },
+    };
+
+    const sypOnDispatchEvent = jest.spyOn(element, "dispatchEvent");
+
+    await element.validate();
+
+    expect((sypOnDispatchEvent.mock.calls[0][0] as CustomEvent).type).toEqual(
+      "validate.error"
+    );
+  });
 });
