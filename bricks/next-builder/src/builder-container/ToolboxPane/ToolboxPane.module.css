@@ -30,6 +30,6 @@
   flex-direction: column;
 }
 
-.toolboxPaneTooltips :global(.ant-popover-inner-content) > p + p {
+.toolboxPaneTooltips :global(.ant-popover-inner-content) > p:last-child {
   margin-bottom: 0;
 }

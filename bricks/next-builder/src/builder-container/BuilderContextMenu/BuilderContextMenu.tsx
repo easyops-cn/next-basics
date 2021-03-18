@@ -6,6 +6,7 @@ import {
   BuilderRuntimeNode,
   isBrickNode,
 } from "@next-core/editor-bricks-helper";
+import { useTranslation } from "react-i18next";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import {
   BuilderAppendBrickDetail,
@@ -15,6 +16,7 @@ import {
   ToolboxTab,
 } from "../interfaces";
 import { useCanPaste } from "./useCanPaste";
+import { K, NS_NEXT_BUILDER } from "../../i18n/constants";
 
 import styles from "./BuilderContextMenu.module.css";
 
@@ -31,6 +33,7 @@ export function BuilderContextMenu({
   onNodeCutPaste,
   onAskForAppendingBrick,
 }: BuilderContextMenuProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const contextMenuStatus = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
   const {
@@ -136,7 +139,7 @@ export function BuilderContextMenu({
         >
           {activeNodeIsBrick && (
             <Menu.Item key="events-view" onClick={handleShowEventsView}>
-              Events View
+              {t(K.NODE_ACTION_EVENTS_VIEW)}
             </Menu.Item>
           )}
           <Menu.Item
@@ -144,25 +147,25 @@ export function BuilderContextMenu({
             onClick={handleCopyNode}
             disabled={!activeNodeIsBrick}
           >
-            Copy
+            {t(K.NODE_ACTION_COPY)}
           </Menu.Item>
           <Menu.Item
             key="cut"
             onClick={handleCutNode}
             disabled={!activeNodeIsBrick}
           >
-            Cut
+            {t(K.NODE_ACTION_CUT)}
           </Menu.Item>
           <Menu.Item key="paste" onClick={handlePasteNode} disabled={!canPaste}>
-            Paste
+            {t(K.NODE_ACTION_PASTE)}
           </Menu.Item>
           {activeNodeIsBrick && (
             <Menu.Item key="append-brick" onClick={handleAppendBrick}>
-              Append Brick
+              {t(K.NODE_ACTION_APPEND_BRICK)}
             </Menu.Item>
           )}
           <Menu.Item key="delete" onClick={handleDeleteNode}>
-            Delete
+            {t(K.NODE_ACTION_DELETE)}
           </Menu.Item>
         </Menu>
       )}
