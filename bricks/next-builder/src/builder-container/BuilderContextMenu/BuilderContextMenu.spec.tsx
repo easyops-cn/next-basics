@@ -5,6 +5,7 @@ import {
   useBuilderContextMenuStatus,
   useBuilderDataManager,
   isBrickNode,
+  useBuilderData,
 } from "@next-core/editor-bricks-helper";
 import { BuilderContextMenu } from "./BuilderContextMenu";
 import { useBuilderUIContext } from "../BuilderUIContext";
@@ -44,6 +45,18 @@ const setEventStreamNodeId = jest.fn();
 
 const mockManager = {
   contextMenuChange: jest.fn(),
+  getData: jest.fn(() => ({
+    edges: [
+      {
+        child: 1,
+        parent: 2,
+      },
+      {
+        child: 3,
+        parent: 1,
+      },
+    ],
+  })),
 };
 (useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
 
@@ -79,7 +92,7 @@ describe("BuilderContextMenu", () => {
     expect(wrapper.find(".menuWrapper").prop("style").display).toBe("block");
 
     const menuItems = wrapper.find(Menu.Item);
-    expect(menuItems.length).toBe(5);
+    expect(menuItems.length).toBe(6);
     menuItems.forEach((item) => {
       switch (item.key()) {
         case "events-view":
@@ -330,6 +343,35 @@ describe("BuilderContextMenu", () => {
     expect(onNodeCutPaste).toBeCalledWith({
       sourceInstanceId: "instance-b",
       targetInstanceId: "instance-a",
+    });
+  });
+
+  it("should invoke onAskForAppendingBrick", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
+    });
+    const mockOnAskForAppendingBrick = jest.fn();
+    const wrapper = shallow(
+      <BuilderContextMenu onAskForAppendingBrick={mockOnAskForAppendingBrick} />
+    );
+    wrapper
+      .find(Menu.Item)
+      .filterWhere((n) => n.key() === "append-brick")
+      .invoke("onClick")(null);
+    expect(mockOnAskForAppendingBrick).toBeCalledWith({
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
+      defaultSort: 1,
     });
   });
 });

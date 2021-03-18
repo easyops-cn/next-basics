@@ -4,7 +4,7 @@ import {
   BuilderRouteOrBrickNode,
   ContextConf,
   BuilderRouteNode,
-  BuilderCustomTemplateNode
+  BuilderCustomTemplateNode,
 } from "@next-core/brick-types";
 import {
   AbstractBuilderDataManager,
@@ -79,6 +79,7 @@ export function LegacyBuilderContainer(
     onNodeMove,
     onNodeClick,
     onAskForDeletingNode,
+    onAskForAppendingBrick,
     onToggleFullscreen,
     onSwitchToolboxTab,
     onSelectEventStreamNode,
@@ -236,6 +237,7 @@ export function LegacyBuilderContainer(
       </div>
       <BuilderContextMenu
         onAskForDeletingNode={onAskForDeletingNode}
+        onAskForAppendingBrick={onAskForAppendingBrick}
         onNodeCopyPaste={onNodeCopyPaste}
         onNodeCutPaste={onNodeCutPaste}
       />

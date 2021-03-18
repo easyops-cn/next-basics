@@ -8,6 +8,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import {
+  BuilderAppendBrickDetail,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
   BuilderPasteDetailOfCut,
@@ -21,12 +22,14 @@ export interface BuilderContextMenuProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
   onNodeCopyPaste?: (detail: BuilderPasteDetailOfCopy) => void;
   onNodeCutPaste?: (detail: BuilderPasteDetailOfCut) => void;
+  onAskForAppendingBrick?: (detail: BuilderAppendBrickDetail) => void;
 }
 
 export function BuilderContextMenu({
   onAskForDeletingNode,
   onNodeCopyPaste,
   onNodeCutPaste,
+  onAskForAppendingBrick,
 }: BuilderContextMenuProps): React.ReactElement {
   const contextMenuStatus = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
@@ -101,6 +104,18 @@ export function BuilderContextMenu({
     [contextMenuStatus.node]
   );
 
+  const handleAppendBrick = React.useCallback(() => {
+    onAskForAppendingBrick({
+      node: contextMenuStatus.node,
+      defaultSort: Math.max(
+        manager
+          .getData()
+          .edges.filter((edge) => edge.parent === contextMenuStatus.node.$$uid)
+          .length
+      ),
+    });
+  }, [contextMenuStatus.node, manager, onAskForAppendingBrick]);
+
   return (
     <div
       className={styles.menuWrapper}
@@ -141,6 +156,11 @@ export function BuilderContextMenu({
           <Menu.Item key="paste" onClick={handlePasteNode} disabled={!canPaste}>
             Paste
           </Menu.Item>
+          {activeNodeIsBrick && (
+            <Menu.Item key="append-brick" onClick={handleAppendBrick}>
+              Append Brick
+            </Menu.Item>
+          )}
           <Menu.Item key="delete" onClick={handleDeleteNode}>
             Delete
           </Menu.Item>
