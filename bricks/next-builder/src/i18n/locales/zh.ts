@@ -18,12 +18,18 @@ const locale: Locale = {
   [K.BUILD_AND_PUSH_TOOLTIP]: "构建并推送 (Ctrl+B)",
   [K.PREVIEW]: "预览",
   [K.TIPS]: "提示",
+  [K.NODE_ACTION_EVENTS_VIEW]: "事件视图",
+  [K.NODE_ACTION_COPY]: "拷贝",
+  [K.NODE_ACTION_CUT]: "剪切",
+  [K.NODE_ACTION_PASTE]: "粘贴",
+  [K.NODE_ACTION_APPEND_BRICK]: "添加子构件",
+  [K.NODE_ACTION_DELETE]: "删除",
   [K.STORYBOARD_VIEW_TIPS_1_ROUTE]:
     "<i>Storyboard</i> 视图显示当前路由的构件树。",
   [K.STORYBOARD_VIEW_TIPS_1_TEMPLATE]:
     "<i>Storyboard</i> 视图显示当前模板的构件树。",
   [K.STORYBOARD_VIEW_TIPS_2]:
-    "拖放构件或挂载点来更改它们的排列顺序。或者拖放构件来更改挂载点。",
+    "拖放构件或挂载点来更改它们的排列顺序。或者拖放构件到其它挂载点。",
   [K.STORYBOARD_VIEW_TIPS_3]:
     "在搜索框中输入关键字，根据配置信息来搜索 Storyboard 中的构件。",
   [K.LIBRARY_VIEW_TIPS_1]: "<i>构件库</i>列出所有可用构件。",

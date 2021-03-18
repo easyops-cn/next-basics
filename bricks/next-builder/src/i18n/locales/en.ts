@@ -18,14 +18,20 @@ const locale: Locale = {
   [K.PREVIEW]: "Preview",
   [K.BRICK_LIBRARY]: "Brick Library",
   [K.TIPS]: "Tips",
+  [K.NODE_ACTION_EVENTS_VIEW]: "Events View",
+  [K.NODE_ACTION_COPY]: "Copy",
+  [K.NODE_ACTION_CUT]: "Cut",
+  [K.NODE_ACTION_PASTE]: "Paste",
+  [K.NODE_ACTION_APPEND_BRICK]: "Append Brick",
+  [K.NODE_ACTION_DELETE]: "Delete",
   [K.STORYBOARD_VIEW_TIPS_1_ROUTE]:
     "<i>Storyboard</i> view shows the brick tree of current route.",
   [K.STORYBOARD_VIEW_TIPS_1_TEMPLATE]:
     "<i>Storyboard</i> view shows the brick tree of current template.",
   [K.STORYBOARD_VIEW_TIPS_2]:
-    "Drag bricks or mount-points to reorder them. Or drag bricks to move them between mount-points.",
+    "Drag bricks or mount-points to reorder them. Or drag a brick to move it to another mount-point.",
   [K.STORYBOARD_VIEW_TIPS_3]:
-    "Enter keywords in the search box,and search for bricks in the Storyboard based on the configuration information.",
+    "Enter keywords in the search box, and search for bricks in the Storyboard based on their configurations.",
   [K.LIBRARY_VIEW_TIPS_1]: "<i>Library</i> lists available bricks in library.",
   [K.LIBRARY_VIEW_TIPS_2]: "Search and drag bricks onto canvas.",
   [K.EVENTS_VIEW_TIPS_1]:

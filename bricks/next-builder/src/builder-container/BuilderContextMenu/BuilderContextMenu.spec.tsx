@@ -5,7 +5,6 @@ import {
   useBuilderContextMenuStatus,
   useBuilderDataManager,
   isBrickNode,
-  useBuilderData,
 } from "@next-core/editor-bricks-helper";
 import { BuilderContextMenu } from "./BuilderContextMenu";
 import { useBuilderUIContext } from "../BuilderUIContext";
