@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.173.1...@next-bricks/presentational-bricks@1.174.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* some optimization ([23daa17](https://github.com/easyops-cn/next-basics/commit/23daa17843af8f81ec4ed276aecd0b87224e6560))
+
+
+### Features
+
+* **InfoDisplayCardList:** InfoDisplayCardList support detailOfDescBrickConf ([417d1b5](https://github.com/easyops-cn/next-basics/commit/417d1b5fd78706c611a7728020bea07bfdc6f768))
+
+
+
+
+
 ## [1.173.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.173.0...@next-bricks/presentational-bricks@1.173.1) (2021-03-17)
 
 

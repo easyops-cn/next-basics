@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.36.0...@next-bricks/next-builder@1.37.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* **builder:** translate node actions ([c5359fd](https://github.com/easyops-cn/next-basics/commit/c5359fd827f5d97b6decc88d6102caf2cd714ba1))
+
+
+### Features
+
+* **builder:** support to append bricks ([11b291a](https://github.com/easyops-cn/next-basics/commit/11b291a71618f519bb79cf207936155e022b7cc5))
+* **tree-view:** highlight nodes ([675e949](https://github.com/easyops-cn/next-basics/commit/675e94912e65525af2f4a7054d41abfcdd657161))
+
+
+
+
+
 # [1.36.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.35.2...@next-bricks/next-builder@1.36.0) (2021-03-17)
 
 
