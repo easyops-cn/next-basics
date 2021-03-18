@@ -15,7 +15,8 @@
   cursor: pointer;
 }
 
-.nodeNameWrapper:hover {
+.nodeNameWrapper:hover,
+.nodeNameWrapperHover {
   background: rgba(255, 255, 255, 0.06);
   &:not(.highlightNode) {
     color: #4e93ef;
