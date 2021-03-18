@@ -1,0 +1,44 @@
+.drawer {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  border-radius: var(--editor-brick-border-radius);
+  border: 1px solid var(--editor-brick-stroke-color);
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: center;
+  height: var(--editor-brick-toolbar-height);
+  border-bottom: 1px solid var(--editor-brick-stroke-color);
+  padding: 0 15px;
+
+  .title {
+    flex: 1;
+    line-height: var(--editor-brick-toolbar-height);
+    font-size: 16px;
+  }
+
+  .leftHeaderSlot,
+  .rightHeaderSlot {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .rightHeaderSlot {
+    justify-content: flex-end;
+  }
+}
+
+.contentSlot {
+  flex: 1;
+  padding: 20px;
+}
+
+.footerSlot {
+  flex-basis: var(--editor-brick-toolbar-height);
+  display: flex;
+  align-items: center;
+  background-color: #f5f6f8;
+}
