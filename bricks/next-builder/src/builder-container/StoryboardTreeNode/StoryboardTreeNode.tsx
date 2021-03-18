@@ -21,6 +21,7 @@ import { StoryboardTreeMountPoint } from "../StoryboardTreeMountPoint/Storyboard
 import { treeViewPaddingUnit } from "../constants";
 import { DraggingNodeItem, StoryboardTreeTransferType } from "../interfaces";
 import { handleDropOnNode } from "./handleDropOnNode";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
 import styles from "./StoryboardTreeNode.module.css";
 
@@ -43,6 +44,7 @@ export function StoryboardTreeNode({
   level,
 }: StoryboardTreeNodeProps): React.ReactElement {
   const node = useBuilderNode({ nodeUid });
+  const { highlightNodes } = useBuilderUIContext();
   const mountPoints = useBuilderNodeMountPoints({ nodeUid });
   const parentNode = useBuilderParentNode(nodeUid);
   const siblingGroups = useBuilderGroupedChildNodes({
@@ -132,7 +134,9 @@ export function StoryboardTreeNode({
       ref={draggingPreviewRef}
     >
       <div
-        className={styles.nodeNameWrapper}
+        className={classNames(styles.nodeNameWrapper, {
+          [styles.highlightNode]: highlightNodes.has(nodeUid),
+        })}
         style={{
           paddingLeft: level * treeViewPaddingUnit,
         }}

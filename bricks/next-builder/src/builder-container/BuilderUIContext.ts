@@ -5,7 +5,10 @@ import {
   ToolboxTab,
   BrickOptionItem,
 } from "./interfaces";
-import { BuilderRouteNode, BuilderCustomTemplateNode } from "@next-core/brick-types";
+import {
+  BuilderRouteNode,
+  BuilderCustomTemplateNode,
+} from "@next-core/brick-types";
 
 export interface ContextOfBuilderUI {
   appId?: string;
@@ -14,6 +17,8 @@ export interface ContextOfBuilderUI {
   processing?: boolean;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;
+  highlightNodes?: Set<number>;
+  setHighlightNodes?: React.Dispatch<React.SetStateAction<Set<number>>>;
   toolboxTab?: ToolboxTab;
   setToolboxTab?: React.Dispatch<React.SetStateAction<ToolboxTab>>;
   eventStreamNodeId?: string;

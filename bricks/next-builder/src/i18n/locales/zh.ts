@@ -24,6 +24,8 @@ const locale: Locale = {
     "<i>Storyboard</i> 视图显示当前模板的构件树。",
   [K.STORYBOARD_VIEW_TIPS_2]:
     "拖放构件或挂载点来更改它们的排列顺序。或者拖放构件来更改挂载点。",
+  [K.STORYBOARD_VIEW_TIPS_3]:
+    "在搜索框中输入关键字，根据配置信息来搜索 Storyboard 中的构件。",
   [K.LIBRARY_VIEW_TIPS_1]: "<i>构件库</i>列出所有可用构件。",
   [K.LIBRARY_VIEW_TIPS_2]: "可以搜索并拖放构件到画布中。",
   [K.EVENTS_VIEW_TIPS_1]:
@@ -33,6 +35,7 @@ const locale: Locale = {
   [K.DATA_VIEW_TIPS_2]:
     "数据可以是变量值，也可以是使用 Provider 构件调用获取的远端接口数据。",
   [K.DATA_VIEW_TIPS_3]: "数据在 Storyboard 中也被称作 <i>Context</i>。",
+  [K.FIND]: "查找",
 };
 
 export default locale;

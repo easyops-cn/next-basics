@@ -24,6 +24,8 @@ const locale: Locale = {
     "<i>Storyboard</i> view shows the brick tree of current template.",
   [K.STORYBOARD_VIEW_TIPS_2]:
     "Drag bricks or mount-points to reorder them. Or drag bricks to move them between mount-points.",
+  [K.STORYBOARD_VIEW_TIPS_3]:
+    "Enter keywords in the search box,and search for bricks in the Storyboard based on the configuration information.",
   [K.LIBRARY_VIEW_TIPS_1]: "<i>Library</i> lists available bricks in library.",
   [K.LIBRARY_VIEW_TIPS_2]: "Search and drag bricks onto canvas.",
   [K.EVENTS_VIEW_TIPS_1]:
@@ -34,6 +36,7 @@ const locale: Locale = {
   [K.DATA_VIEW_TIPS_2]:
     "Data can be variable values, or responses from remote by using a provider brick.",
   [K.DATA_VIEW_TIPS_3]: "It is also as known as <i>Context</i> in storyboard.",
+  [K.FIND]: "Find",
 };
 
 export default locale;

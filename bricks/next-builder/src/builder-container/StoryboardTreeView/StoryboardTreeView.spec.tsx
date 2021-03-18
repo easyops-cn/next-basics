@@ -1,16 +1,31 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { useBuilderGroupedChildNodes } from "@next-core/editor-bricks-helper";
 import { StoryboardTreeView } from "./StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { BuilderDataType } from "../interfaces";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderGroupedChildNodes: jest.fn(),
+  useBuilderData: () => ({
+    nodes: [
+      {
+        $$uid: 1,
+        type: "brick",
+        brick: "my-brick",
+        id: "B-001",
+        instanceId: "instance-a",
+      },
+    ],
+  }),
 }));
 jest.mock("../BuilderUIContext");
-jest.mock("../ToolboxPane/ToolboxPane");
-jest.mock("../StoryboardTreeNodeList/StoryboardTreeNodeList");
+jest.mock("../StoryboardTreeNodeList/StoryboardTreeNodeList", () => ({
+  StoryboardTreeNodeList() {
+    return <div>StoryboardTreeNodeList</div>;
+  },
+}));
 
 const mockUseBuilderGroupedChildNodes = useBuilderGroupedChildNodes as jest.Mock;
 const mockUseBuilderUIContext = useBuilderUIContext as jest.Mock;
@@ -36,6 +51,27 @@ describe("StoryboardTreeView", () => {
         $$uid: 1,
       },
     ]);
+  });
+
+  it("should setHighlightNodes", () => {
+    const mockSetHighlightNodes = jest.fn();
+    mockUseBuilderUIContext.mockReturnValue({
+      dataType: BuilderDataType.CUSTOM_TEMPLATE,
+      setHighlightNodes: mockSetHighlightNodes,
+    });
+    mockUseBuilderGroupedChildNodes.mockReturnValue([
+      {
+        mountPoint: "bricks",
+        childNodes: [
+          {
+            $$uid: 1,
+          },
+        ],
+      },
+    ]);
+    const wrapper = mount(<StoryboardTreeView />);
+    wrapper.find(SearchComponent).invoke("onSearch")("my");
+    expect(mockSetHighlightNodes).toBeCalled();
   });
 
   it("should work for custom template", () => {
