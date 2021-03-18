@@ -1,9 +1,10 @@
 .arrow {
   float: right;
-  margin-top: 6px;
+  margin-top: 9px;
+  margin-right: -5px;
   width: 0;
   height: 0;
-  border-top: 8px solid var(--editor-brick-skeleton-bg-light);
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
+  border-top: 6px solid var(--editor-brick-skeleton-bg-light);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
 }

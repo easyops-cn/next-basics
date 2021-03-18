@@ -66,7 +66,7 @@ export interface TooltipConfig {
 export class GeneralButtonElement extends UpdatingElement {
   /**
    * @kind string
-   * @required true
+   * @required false
    * @default -
    * @description 按钮名称
    * @group basic
