@@ -58,6 +58,18 @@ describe("findQueryInNode", () => {
       "null",
       false,
     ],
+    [
+      "letter case should be ignored",
+      {
+        $$uid: 1,
+        type: "brick",
+        brick: "MY-brick",
+        id: "B-001",
+        instanceId: "instance-a",
+      },
+      "my",
+      true,
+    ],
   ])("searchList(%j) should work", async (condition, node, query, found) => {
     expect(findQueryInNode(node, query)).toEqual(found);
   });
