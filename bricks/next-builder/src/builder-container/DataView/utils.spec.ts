@@ -70,11 +70,18 @@ describe("computeItemToSubmit", () => {
         type: "value",
         value: "age: 18",
         name: "userInfo",
+        onChange: 'target: "#id"\nproperties:\n  a: 1',
       },
       {
         name: "userInfo",
         value: {
           age: 18,
+        },
+        onChange: {
+          target: "#id",
+          properties: {
+            a: 1,
+          },
         },
       },
     ],
@@ -87,6 +94,7 @@ describe("computeItemToSubmit", () => {
         args: "- P-1",
         transform: "value: <% DATA %>\n",
         name: "new",
+        onChange: '- target: "#id"\n  properties:\n    a: 1',
       },
       {
         name: "new",
@@ -98,6 +106,14 @@ describe("computeItemToSubmit", () => {
             value: "<% DATA %>",
           },
         },
+        onChange: [
+          {
+            target: "#id",
+            properties: {
+              a: 1,
+            },
+          },
+        ],
       },
     ],
   ])(
