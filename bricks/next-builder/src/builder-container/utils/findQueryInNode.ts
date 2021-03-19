@@ -37,7 +37,7 @@ export function findQueryInNode(
       }
       const strValue =
         typeof value === "string" ? value : JSON.stringify(value);
-      if (strValue.includes(query)) {
+      if (strValue?.toLowerCase().includes(query)) {
         found = true;
         break;
       }
