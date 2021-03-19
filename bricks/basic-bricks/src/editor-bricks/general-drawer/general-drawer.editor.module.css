@@ -33,12 +33,13 @@
 
 .contentSlot {
   flex: 1;
-  padding: 20px;
+  padding: var(--editor-brick-gap);
 }
 
 .footerSlot {
   flex-basis: var(--editor-brick-toolbar-height);
   display: flex;
   align-items: center;
-  background-color: #f5f6f8;
+  background-color: var(--editor-brick-footer-color);
+  padding: 0 var(--editor-brick-gap);
 }

@@ -39,8 +39,8 @@ export function GeneralDrawerEditor({
               <SlotContainer
                 nodeUid={nodeUid}
                 slotName="headerLeft"
+                slotContainerStyle={{ flex: 1 }}
                 slotContentLayout={EditorSlotContentLayout.INLINE}
-                dropZoneBodyStyle={{ justifyContent: "flex-end" }}
               />
             </div>
           )}
@@ -48,6 +48,7 @@ export function GeneralDrawerEditor({
             <SlotContainer
               nodeUid={nodeUid}
               slotName="headerRight"
+              slotContainerStyle={{ flex: 1 }}
               slotContentLayout={EditorSlotContentLayout.INLINE}
               dropZoneBodyStyle={{ justifyContent: "flex-end" }}
             />
@@ -63,7 +64,12 @@ export function GeneralDrawerEditor({
           />
         </div>
         <div className={styles.footerSlot}>
-          <SlotContainer nodeUid={nodeUid} slotName="footer" />
+          <SlotContainer
+            nodeUid={nodeUid}
+            slotName="footer"
+            slotContentLayout={EditorSlotContentLayout.INLINE}
+            slotContainerStyle={{ flex: 1 }}
+          />
         </div>
       </div>
     </EditorContainer>
