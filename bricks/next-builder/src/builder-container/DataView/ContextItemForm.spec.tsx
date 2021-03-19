@@ -43,7 +43,7 @@ describe("ContextItemForm", () => {
         onContextItemUpdate={onContextItemUpdate}
       />
     );
-    expect(wrapper.find(Form.Item).length).toBe(6);
+    expect(wrapper.find(Form.Item).length).toBe(7);
     wrapper.find(Form).invoke("onFinish")({
       name: "data-a",
       type: "resolve",
@@ -62,13 +62,13 @@ describe("ContextItemForm", () => {
         value: "value",
       },
     } as RadioChangeEvent);
-    expect(wrapper.find(Form.Item).length).toBe(3);
+    expect(wrapper.find(Form.Item).length).toBe(4);
     wrapper.setProps({
       data: {
         name: "data-b",
         value: "<% QUERY.objectId %>",
       },
     });
-    expect(wrapper.find(Form.Item).length).toBe(3);
+    expect(wrapper.find(Form.Item).length).toBe(4);
   });
 });

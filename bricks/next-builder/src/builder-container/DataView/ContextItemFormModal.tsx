@@ -30,6 +30,7 @@ export function ContextItemFormModal({
   const isCreate = useMemo(() => !data, [data]);
   return (
     <Modal
+      width={640}
       title={isCreate ? t(K.ADD_DATA) : `${t(K.SETTING)} - ${data.name}`}
       visible={visible}
       onOk={onOk}

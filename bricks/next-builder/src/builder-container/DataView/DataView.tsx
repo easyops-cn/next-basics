@@ -14,6 +14,7 @@ import { ContextItem } from "./ContextItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { searchList } from "../utils/utils";
+import { safeDumpFields } from "./utils";
 
 const symbolId = Symbol("uid");
 
@@ -57,6 +58,33 @@ export function DataView({
   );
 
   const setData = (contextValue?: ContextConf, uid?: string): void => {
+    const isValue = !contextValue?.resolve;
+    settingItemForm.resetFields();
+    if (isValue) {
+      const formValue = {
+        name: contextValue?.name,
+        type: "value",
+        ...safeDumpFields({
+          value: contextValue?.value,
+          onChange: contextValue?.onChange,
+        }),
+      };
+      settingItemForm.setFieldsValue(formValue);
+    } else {
+      const formValue = {
+        name: contextValue?.name,
+        type: "resolve",
+        useProvider: contextValue.resolve.useProvider,
+        ...safeDumpFields({
+          args: contextValue.resolve.args,
+          if: contextValue.resolve.if,
+          transform: contextValue.resolve.transform,
+          onChange: contextValue?.onChange,
+        }),
+      };
+      settingItemForm.setFieldsValue(formValue);
+    }
+
     setSettingItem(contextValue);
     setVisible(true);
     settingUid.current = uid;

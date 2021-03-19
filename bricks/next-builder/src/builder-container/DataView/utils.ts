@@ -11,6 +11,7 @@ interface contextItemValueConf {
   type: "value";
   name?: string;
   value?: string;
+  onChange?: string;
 }
 
 interface contextItemResolveConf {
@@ -20,6 +21,7 @@ interface contextItemResolveConf {
   args?: string;
   transform?: string;
   if?: string;
+  onChange?: string;
 }
 
 export type ContextItemFormValue =
@@ -95,19 +97,25 @@ export function computeItemToSubmit(
       name: contextValue.name,
       ...safeLoadFields({
         value: (contextValue as contextItemValueConf).value,
+        onChange: (contextValue as contextItemResolveConf).onChange,
       }),
     };
   } else {
+    const computedFields = safeLoadFields({
+      if: (contextValue as contextItemResolveConf).if,
+      args: (contextValue as contextItemResolveConf).args,
+      transform: (contextValue as contextItemResolveConf).transform,
+      onChange: (contextValue as contextItemResolveConf).onChange,
+    });
     return {
       name: contextValue.name,
       resolve: {
         useProvider: (contextValue as contextItemResolveConf).useProvider,
-        ...safeLoadFields({
-          if: (contextValue as contextItemResolveConf).if,
-          args: (contextValue as contextItemResolveConf).args,
-          transform: (contextValue as contextItemResolveConf).transform,
-        }),
+        if: computedFields.if,
+        args: computedFields.args,
+        transform: computedFields.transform,
       },
+      onChange: computedFields.onChange,
     };
   }
 }
@@ -124,5 +132,8 @@ export const fieldCodeEditorConfigMap: Record<string, { schemaRef: string }> = {
   },
   if: {
     schemaRef: "#/definitions/UseProviderResolveConf/properties/if",
+  },
+  onChange: {
+    schemaRef: "#/definitions/ContextConf/properties/onChange",
   },
 };

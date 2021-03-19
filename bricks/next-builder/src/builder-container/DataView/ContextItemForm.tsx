@@ -39,27 +39,6 @@ export function ContextItemForm({
   useEffect(() => {
     const isValue = !data?.resolve;
     setItemIsValue(isValue);
-    settingItemForm.resetFields();
-    if (isValue) {
-      const formValue = {
-        name: data?.name,
-        type: "value",
-        ...safeDumpFields({ value: data?.value }),
-      };
-      settingItemForm.setFieldsValue(formValue);
-    } else {
-      const formValue = {
-        name: data?.name,
-        type: "resolve",
-        useProvider: data.resolve.useProvider,
-        ...safeDumpFields({
-          args: data.resolve.args,
-          if: data.resolve.if,
-          transform: data.resolve.transform,
-        }),
-      };
-      settingItemForm.setFieldsValue(formValue);
-    }
   }, [data]);
 
   const onTypeChange = (event: RadioChangeEvent) => {
@@ -145,6 +124,9 @@ export function ContextItemForm({
           </Form.Item>
         </>
       )}
+      <Form.Item label="onChange" name="onChange">
+        {getCodeEditorItem("onChange")}
+      </Form.Item>
     </Form>
   );
 }
