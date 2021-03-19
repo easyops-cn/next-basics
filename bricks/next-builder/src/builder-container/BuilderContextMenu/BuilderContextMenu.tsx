@@ -47,6 +47,8 @@ export function BuilderContextMenu({
     () => canPasteCallback(clipboard, contextMenuStatus.node),
     [canPasteCallback, clipboard, contextMenuStatus.node]
   );
+  const [menuPosition, setMenuPosition] = React.useState<React.CSSProperties>();
+  const wrapperRef = React.useRef<HTMLDivElement>();
 
   const handleCloseMenu = React.useCallback(
     (event: React.MouseEvent) => {
@@ -119,12 +121,36 @@ export function BuilderContextMenu({
     });
   }, [contextMenuStatus.node, manager, onAskForAppendingBrick]);
 
+  React.useEffect(() => {
+    // Keep menu in viewport.
+    const menu = wrapperRef.current?.firstElementChild as HTMLElement;
+    if (menu) {
+      const { width, height } = menu.getBoundingClientRect();
+      setMenuPosition({
+        left:
+          contextMenuStatus.x + width > document.documentElement.clientWidth
+            ? contextMenuStatus.x - width
+            : contextMenuStatus.x,
+        top:
+          contextMenuStatus.y + height > document.documentElement.clientHeight
+            ? contextMenuStatus.y - height
+            : contextMenuStatus.y,
+      });
+    } else {
+      setMenuPosition({
+        left: -9999,
+        top: -9999,
+      });
+    }
+  }, [contextMenuStatus]);
+
   return (
     <div
       className={styles.menuWrapper}
       style={{
         display: contextMenuStatus.active ? "block" : "none",
       }}
+      ref={wrapperRef}
       onClick={handleCloseMenu}
       onContextMenu={handleCloseMenu}
     >
@@ -132,9 +158,10 @@ export function BuilderContextMenu({
         <Menu
           prefixCls="ant-dropdown-menu"
           style={{
-            left: contextMenuStatus.x,
-            top: contextMenuStatus.y,
+            // left: contextMenuStatus.x,
+            // top: contextMenuStatus.y,
             width: "fit-content",
+            ...menuPosition,
           }}
         >
           {activeNodeIsBrick && (

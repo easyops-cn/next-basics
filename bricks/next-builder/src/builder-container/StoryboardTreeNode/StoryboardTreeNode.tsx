@@ -17,6 +17,7 @@ import {
   useBuilderGroupedChildNodes,
   isRouteNode,
   useHoverNodeUid,
+  useBuilderContextMenuStatus,
 } from "@next-core/editor-bricks-helper";
 import { StoryboardTreeMountPoint } from "../StoryboardTreeMountPoint/StoryboardTreeMountPoint";
 import { treeViewPaddingUnit } from "../constants";
@@ -54,12 +55,16 @@ export function StoryboardTreeNode({
   });
   const manager = useBuilderDataManager();
   const canDrop = useCanDrop();
+  const contextMenuStatus = useBuilderContextMenuStatus();
 
   const handleClick = React.useCallback(() => {
     manager.nodeClick(node);
   }, [manager, node]);
 
-  const hover = useMemo(() => hoverNodeUid === nodeUid, [hoverNodeUid]);
+  const hover = useMemo(() => hoverNodeUid === nodeUid, [
+    hoverNodeUid,
+    nodeUid,
+  ]);
 
   const [{ isDragging }, dragRef, draggingPreviewRef] = useDrag({
     item: {
@@ -111,6 +116,19 @@ export function StoryboardTreeNode({
     },
   });
 
+  const handleContextMenu = React.useCallback(
+    (event: React.MouseEvent) => {
+      event.preventDefault();
+      manager.contextMenuChange({
+        active: true,
+        node,
+        x: event.clientX,
+        y: event.clientY,
+      });
+    },
+    [manager, node]
+  );
+
   let icon: JSX.Element;
   let displayType = DisplayType.DEFAULT;
 
@@ -125,13 +143,13 @@ export function StoryboardTreeNode({
     icon = <BranchesOutlined />;
   }
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (): void => {
     const prevUid = manager.getHoverNodeUid();
     if (prevUid !== node.$$uid) {
       manager.setHoverNodeUid(node.$$uid);
     }
   };
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (): void => {
     const prevUid = manager.getHoverNodeUid();
     if (prevUid === node.$$uid) {
       manager.setHoverNodeUid(undefined);
@@ -153,7 +171,10 @@ export function StoryboardTreeNode({
       <div
         className={classNames(styles.nodeNameWrapper, {
           [styles.highlightNode]: highlightNodes.has(nodeUid),
-          [styles.nodeNameWrapperHover]: hover,
+          [styles.nodeNameWrapperHover]:
+            hover ||
+            (contextMenuStatus.active &&
+              contextMenuStatus.node.$$uid === nodeUid),
         })}
         style={{
           paddingLeft: level * treeViewPaddingUnit,
@@ -161,6 +182,7 @@ export function StoryboardTreeNode({
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onContextMenu={handleContextMenu}
         ref={(node) => dragRef(dropRef(node))}
       >
         {icon && <div className={styles.icon}>{icon}</div>}
