@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.39.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.38.0...@next-bricks/next-builder@1.39.0) (2021-03-19)
+
+
+### Bug Fixes
+
+* **builder:** keep contextmenu in viewport ([cb318f9](https://github.com/easyops-cn/next-basics/commit/cb318f92793c98cd6fc52a4c6a819d256ca642ec))
+
+
+### Features
+
+* **builder:** support contextmenu in tree view ([f08cfd7](https://github.com/easyops-cn/next-basics/commit/f08cfd70de227fd6fa4ed416022553de1bb6e630))
+* **data-view:** add onChange to context ([36da153](https://github.com/easyops-cn/next-basics/commit/36da15365ecbed5148bad0fadc4e5b1f81df1a29))
+
+
+
+
+
 # [1.38.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.37.0...@next-bricks/next-builder@1.38.0) (2021-03-19)
 
 
