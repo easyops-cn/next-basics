@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { Menu } from "antd";
 import {
   useBuilderContextMenuStatus,
@@ -59,26 +59,39 @@ const mockManager = {
 };
 (useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
 
+jest
+  .spyOn(document.documentElement, "clientWidth", "get")
+  .mockReturnValue(1280);
+jest
+  .spyOn(document.documentElement, "clientHeight", "get")
+  .mockReturnValue(800);
+
 describe("BuilderContextMenu", () => {
+  const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect;
   beforeEach(() => {
     clipboard = null;
+    Element.prototype.getBoundingClientRect = jest.fn(() => ({
+      width: 100,
+      height: 400,
+    })) as any;
   });
 
   afterEach(() => {
     jest.clearAllMocks();
+    Element.prototype.getBoundingClientRect = originalGetBoundingClientRect;
   });
 
   it("should display nothing if context menu is not active", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: false,
     });
-    const wrapper = shallow(<BuilderContextMenu />);
+    const wrapper = mount(<BuilderContextMenu />);
     expect(wrapper.find(".menuWrapper").prop("style").display).toBe("none");
     expect(wrapper.find(".menuWrapper").text()).toBe("");
   });
 
   it("should show menu for bricks if context menu is active", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -86,9 +99,17 @@ describe("BuilderContextMenu", () => {
         id: "B-001",
         brick: "my-brick",
       },
+      x: 200,
+      y: 300,
     });
-    const wrapper = shallow(<BuilderContextMenu />);
+    const wrapper = mount(<BuilderContextMenu />);
+
     expect(wrapper.find(".menuWrapper").prop("style").display).toBe("block");
+
+    expect(wrapper.find(Menu).prop("style")).toMatchObject({
+      left: 200,
+      top: 300,
+    });
 
     const menuItems = wrapper.find(Menu.Item);
     expect(menuItems.length).toBe(6);
@@ -108,8 +129,28 @@ describe("BuilderContextMenu", () => {
     });
   });
 
+  it("should keep menu in viewport", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValue({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
+      x: 1200,
+      y: 600,
+    });
+    const wrapper = mount(<BuilderContextMenu />);
+
+    expect(wrapper.find(Menu).prop("style")).toMatchObject({
+      left: 1100,
+      top: 200,
+    });
+  });
+
   it("should close menu when click the delete menu item", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -130,7 +171,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should close menu when click", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -151,7 +192,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should close menu when right click", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -172,7 +213,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should show menu for routes", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -198,7 +239,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should go to events view", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -217,7 +258,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should invoke onAskForDeletingNode", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -243,7 +284,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should copy a node", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -264,7 +305,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should cut a node", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -290,7 +331,7 @@ describe("BuilderContextMenu", () => {
       type: BuilderClipboardType.COPY,
       sourceId: "B-007",
     };
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -320,7 +361,7 @@ describe("BuilderContextMenu", () => {
       type: BuilderClipboardType.CUT,
       sourceInstanceId: "instance-b",
     };
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
@@ -346,7 +387,7 @@ describe("BuilderContextMenu", () => {
   });
 
   it("should invoke onAskForAppendingBrick", () => {
-    mockUseBuilderContextMenuStatus.mockReturnValueOnce({
+    mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
         $$uid: 1,
