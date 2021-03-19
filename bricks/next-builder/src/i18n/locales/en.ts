@@ -42,7 +42,7 @@ const locale: Locale = {
   [K.DATA_VIEW_TIPS_2]:
     "Data can be variable values, or responses from remote by using a provider brick.",
   [K.DATA_VIEW_TIPS_3]: "It is also as known as <i>Context</i> in storyboard.",
-  [K.FIND]: "Find",
+  [K.FIND_BRICKS_BY_CONFIGURATION]: "Find bricks by configuration",
 };
 
 export default locale;

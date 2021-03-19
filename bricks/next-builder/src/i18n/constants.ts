@@ -35,7 +35,7 @@ export enum K {
   DATA_VIEW_TIPS_1 = "DATA_VIEW_TIPS_1",
   DATA_VIEW_TIPS_2 = "DATA_VIEW_TIPS_2",
   DATA_VIEW_TIPS_3 = "DATA_VIEW_TIPS_3",
-  FIND = "FIND",
+  FIND_BRICKS_BY_CONFIGURATION = "FIND_BRICKS_BY_CONFIGURATION",
 }
 
 export type Locale = { [key in K]: string };

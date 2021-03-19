@@ -81,7 +81,10 @@ export function StoryboardTreeView(): React.ReactElement {
         )
       }
     >
-      <SearchComponent placeholder={t(K.FIND)} onSearch={handleSearch} />
+      <SearchComponent
+        placeholder={t(K.FIND_BRICKS_BY_CONFIGURATION)}
+        onSearch={handleSearch}
+      />
       <div className={styles.treeView}>
         <div className={styles.treeWrapper}>
           {childNodes.length > 0 && (

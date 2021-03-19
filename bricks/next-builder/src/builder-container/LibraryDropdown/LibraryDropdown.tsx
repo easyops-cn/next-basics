@@ -20,32 +20,24 @@ export function LibraryDropdown(): React.ReactElement {
   const handleClose = () => {
     isOpen.current = false;
     setVisible(false);
-  }
+  };
 
   const onDraggingChange = (isDragging: boolean): void => {
-    if(isOpen.current){
+    if (isOpen.current) {
       setVisible(!isDragging);
     }
-  }
+  };
 
   const content = (
     <Menu>
       <div>
-        <div
-          className={styles.headerContainer}
-        >
+        <div className={styles.headerContainer}>
           <span>{t(K.BRICK_LIBRARY)}</span>
-          <Button 
-            type="text" 
-            onClick={handleClose} 
-            data-testid="close-btn"
-          >
+          <Button type="text" onClick={handleClose} data-testid="close-btn">
             <CloseOutlined />
           </Button>
         </div>
-        <div
-          className={styles.libraryContainer}
-        >
+        <div className={styles.libraryContainer}>
           <BrickLibrary
             hideToolboxPane={true}
             onDraggingChange={onDraggingChange}
@@ -58,22 +50,24 @@ export function LibraryDropdown(): React.ReactElement {
   return (
     <Dropdown
       overlay={content}
-      overlayClassName={
-        styles.customAnimation
-      }
+      overlayClassName={styles.customAnimation}
       trigger={["click"]}
       placement="bottomLeft"
       visible={visible}
     >
-      <Tooltip 
+      <Tooltip
         title={t(K.BRICK_LIBRARY)}
         placement="bottomRight"
+        overlayStyle={{
+          // Hide tooltip when dropdown is open.
+          display: visible ? "none" : undefined,
+        }}
       >
         <Button
           onClick={handleClick}
           type="primary"
           size="small"
-          style={{marginRight: "10px"}}
+          style={{ marginRight: "10px" }}
           data-testid="trigger-btn"
         >
           <PlusOutlined />
