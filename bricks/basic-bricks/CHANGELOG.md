@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.111.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.110.0...@next-bricks/basic-bricks@1.111.0) (2021-03-19)
+
+
+### Features
+
+* add general-modal editor ([f58956c](https://github.com/easyops-cn/next-basics/commit/f58956c5b869abe6b465cefe1d899c32ccd2eca6))
+
+
+
+
+
 # [1.110.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.4...@next-bricks/basic-bricks@1.110.0) (2021-03-19)
 
 
