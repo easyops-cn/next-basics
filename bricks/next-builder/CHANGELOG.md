@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.37.0...@next-bricks/next-builder@1.38.0) (2021-03-19)
+
+
+### Features
+
+* **builder-container:** set hoverNodeUid ([5a45fd1](https://github.com/easyops-cn/next-basics/commit/5a45fd1141f57300d9f6c3fd346e4092e7f7f68c))
+
+
+
+
+
 # [1.37.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.36.0...@next-bricks/next-builder@1.37.0) (2021-03-18)
 
 

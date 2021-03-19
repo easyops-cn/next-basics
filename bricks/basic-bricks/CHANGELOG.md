@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.110.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.4...@next-bricks/basic-bricks@1.110.0) (2021-03-19)
+
+
+### Features
+
+* add general-drawer ui editor ([48c28c8](https://github.com/easyops-cn/next-basics/commit/48c28c8a76116e92b7a8e4609ef8e2fbc4af23e0))
+
+
+
+
+
 ## [1.109.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.3...@next-bricks/basic-bricks@1.109.4) (2021-03-18)
 
 
