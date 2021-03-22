@@ -16,15 +16,15 @@
 
 .modalBody {
   padding: var(--editor-brick-gap);
-  min-height: 60px;
+  min-height: 80px;
 }
 
 .footer {
   display: flex;
   justify-content: flex-end;
-  height: var(--editor-brick-toolbar-height);
+  height: 55px;
   background-color: var(--editor-brick-footer-color);
-  padding: 0 15px 10px;
+  padding: 12px 30px;
 
   .okBtn,
   .cancelBtn {
