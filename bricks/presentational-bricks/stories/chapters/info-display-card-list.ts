@@ -300,6 +300,7 @@ export const InfoDisplayCardList: Story = {
             properties: {
               style: {
                 width: "8px",
+                minWidth: "8px",
                 height: "60px",
                 borderRadius: "10px",
                 background: "linear-gradient(223deg, #5FD8E5 0%,#5BCCCF 100%)",

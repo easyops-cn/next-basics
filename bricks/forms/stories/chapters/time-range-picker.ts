@@ -23,8 +23,8 @@ export const timeRangePickerStory: Story = {
       properties: {
         values: {
           time: {
-            startTime: "01:23:45",
-            endTime: "12:34:56",
+            startTime: null,
+            endTime: null,
           },
         },
       },
@@ -48,6 +48,7 @@ export const timeRangePickerStory: Story = {
                 name: "time",
                 required: true,
                 label: "hello",
+                rangeType: "time",
               },
               events: {
                 "time.range.change": {
