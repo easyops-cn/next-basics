@@ -123,7 +123,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
       try {
         const res = (
           await CmdbObjectApi.getObjectRef({ ref_object: "USER,USER_GROUP" })
-        ).data;
+        ).data.filter((item) => !relationSearch.includes(item.objectId));
         const objectOpt = res.map((item) => {
           return {
             label: item.name,
