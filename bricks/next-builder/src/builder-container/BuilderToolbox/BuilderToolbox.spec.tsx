@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
 import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { defaultToolboxTab } from "../constants";
@@ -20,7 +19,6 @@ describe("BuilderToolbox", () => {
     dataType = BuilderDataType.ROUTE_OF_BRICKS;
     mockUseBuilderUIContext.mockImplementation(() => ({
       dataType,
-      fullscreen: false,
       toolboxTab,
       setToolboxTab: ((tab: ToolboxTab) => {
         toolboxTab = tab;
@@ -60,43 +58,9 @@ describe("BuilderToolbox", () => {
     expect(wrapper2.find("DataView").length).toBe(1);
   });
 
-  it("should display 4 tabLink", () => {
+  it("should display 3 tabLink", () => {
     dataType = BuilderDataType.CUSTOM_TEMPLATE;
     const wrapper = shallow(<BuilderToolbox />);
-    expect(wrapper.find(".tabLink").length).toBe(4);
-  });
-
-  it("should enter fullscreen", () => {
-    let fullscreen = false;
-    const setFullscreen = jest.fn((update) => {
-      fullscreen = update(fullscreen);
-    });
-    mockUseBuilderUIContext.mockImplementation(() => ({
-      fullscreen,
-      setFullscreen,
-    }));
-    const wrapper = shallow(<BuilderToolbox />);
-    expect(wrapper.find(FullscreenOutlined).length).toBe(1);
-    expect(wrapper.find(FullscreenExitOutlined).length).toBe(0);
-    wrapper.find(".tabLink").last().invoke("onClick")(null);
-    expect(setFullscreen).toBeCalled();
-    expect(fullscreen).toBe(true);
-  });
-
-  it("should exit fullscreen", () => {
-    let fullscreen = true;
-    const setFullscreen = jest.fn((update) => {
-      fullscreen = update(fullscreen);
-    });
-    mockUseBuilderUIContext.mockImplementation(() => ({
-      fullscreen,
-      setFullscreen,
-    }));
-    const wrapper = shallow(<BuilderToolbox />);
-    expect(wrapper.find(FullscreenOutlined).length).toBe(0);
-    expect(wrapper.find(FullscreenExitOutlined).length).toBe(1);
-    wrapper.find(".tabLink").last().invoke("onClick")(null);
-    expect(setFullscreen).toBeCalled();
-    expect(fullscreen).toBe(false);
+    expect(wrapper.find(".tabLink").length).toBe(3);
   });
 });

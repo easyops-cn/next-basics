@@ -193,9 +193,7 @@ describe("BuilderContainer", () => {
         onToggleFullscreen={onToggleFullscreen}
       />
     );
-    expect(wrapper.find(".builderContainer").prop("className")).toContain(
-      "fullscreen"
-    );
+    expect(wrapper.find(".builderOverlay").hasClass("fullscreen")).toBe(true);
     expect(onToggleFullscreen).toBeCalledWith(true);
   });
 

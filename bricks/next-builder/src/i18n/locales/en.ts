@@ -18,6 +18,8 @@ const locale: Locale = {
   [K.PREVIEW]: "Preview",
   [K.BRICK_LIBRARY]: "Brick Library",
   [K.TIPS]: "Tips",
+  [K.ENTER_FULLSCREEN]: "Enter fullscreen",
+  [K.EXIT_FULLSCREEN]: "Exit fullscreen",
   [K.NODE_ACTION_EVENTS_VIEW]: "Events View",
   [K.NODE_ACTION_COPY]: "Copy",
   [K.NODE_ACTION_CUT]: "Cut",
@@ -42,7 +44,7 @@ const locale: Locale = {
   [K.DATA_VIEW_TIPS_2]:
     "Data can be variable values, or responses from remote by using a provider brick.",
   [K.DATA_VIEW_TIPS_3]: "It is also as known as <i>Context</i> in storyboard.",
-  [K.FIND]: "Find",
+  [K.FIND_BRICKS_BY_CONFIGURATION]: "Find bricks by configuration",
 };
 
 export default locale;

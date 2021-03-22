@@ -18,6 +18,8 @@ const locale: Locale = {
   [K.BUILD_AND_PUSH_TOOLTIP]: "构建并推送 (Ctrl+B)",
   [K.PREVIEW]: "预览",
   [K.TIPS]: "提示",
+  [K.ENTER_FULLSCREEN]: "进入全屏模式",
+  [K.EXIT_FULLSCREEN]: "退出全屏模式",
   [K.NODE_ACTION_EVENTS_VIEW]: "事件视图",
   [K.NODE_ACTION_COPY]: "拷贝",
   [K.NODE_ACTION_CUT]: "剪切",
@@ -41,7 +43,7 @@ const locale: Locale = {
   [K.DATA_VIEW_TIPS_2]:
     "数据可以是变量值，也可以是使用 Provider 构件调用获取的远端接口数据。",
   [K.DATA_VIEW_TIPS_3]: "数据在 Storyboard 中也被称作 <i>Context</i>。",
-  [K.FIND]: "查找",
+  [K.FIND_BRICKS_BY_CONFIGURATION]: "根据配置信息查找构件",
 };
 
 export default locale;
