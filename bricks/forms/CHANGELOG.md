@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.154.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.4...@next-bricks/forms@1.154.5) (2021-03-22)
+
+
+### Bug Fixes
+
+* **forms:** forms.dynamic-user-select-item第一选项，应排除用户和用户组的选项 ([570a593](https://github.com/easyops-cn/next-basics/commit/570a59379cc0508a2f395cb674192cac2daa61ab))
+
+
+
+
+
 ## [1.154.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.3...@next-bricks/forms@1.154.4) (2021-03-18)
 
 

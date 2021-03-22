@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.39.1...@next-bricks/next-builder@1.39.2) (2021-03-22)
+
+
+### Bug Fixes
+
+* **searchable-tree:** width & height ([60d2a2b](https://github.com/easyops-cn/next-basics/commit/60d2a2b972f54d761180b3159b2ba06e08b79f60))
+
+
+
+
+
 ## [1.39.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.39.0...@next-bricks/next-builder@1.39.1) (2021-03-19)
 
 
