@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.39.2...@next-bricks/next-builder@1.39.3) (2021-03-22)
+
+
+### Bug Fixes
+
+* **builder:** make builder container as a modal ([0d76779](https://github.com/easyops-cn/next-basics/commit/0d76779ae0bea73195a0f6829e20988874eb2e54))
+* **builder:** refine text ([eabd99a](https://github.com/easyops-cn/next-basics/commit/eabd99a0bebcb6eb107770e76e198276e77d4763))
+
+
+
+
+
 ## [1.39.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.39.1...@next-bricks/next-builder@1.39.2) (2021-03-22)
 
 
