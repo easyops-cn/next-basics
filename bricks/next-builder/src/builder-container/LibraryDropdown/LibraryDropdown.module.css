@@ -1,21 +1,21 @@
-.libraryContainer{
+.libraryContainer {
   height: 400px;
-  width: 660px;
+  width: 668px;
   display: grid;
   grid-template-rows: 62px 1fr;
 }
 
-.headerContainer{
+.headerContainer {
   display: grid;
   grid-auto-flow: column;
-  justify-content: space-between;    
+  justify-content: space-between;
   height: 42px;
   align-items: center;
   padding: 0 0 0 14px;
   border-bottom: 1px solid var(--theme-gray-border-color);
 }
 
-.customAnimation{
+.customAnimation {
   animation-duration: 0s !important;
   z-index: 999;
 }
