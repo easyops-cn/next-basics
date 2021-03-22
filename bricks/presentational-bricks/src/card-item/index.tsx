@@ -416,7 +416,7 @@ export class CardItemElement extends UpdatingElement {
   @property({
     type: Number,
   })
-  imgSize: number;
+  imgSize: string | number;
 
   constructor() {
     super();

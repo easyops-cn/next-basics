@@ -117,7 +117,7 @@ describe("CardItem", () => {
         cardTitle="k8s"
         descriptionList="描述信息"
         showImg={true}
-        imgSize={32}
+        imgSize={"50%"}
         dataSource={{
           id: "1",
           name: "k8s",
@@ -128,6 +128,14 @@ describe("CardItem", () => {
     );
     expect(wrapper.find(".descList").length).toBe(0);
     expect(wrapper.find(".desc").length).toBe(1);
-    expect(wrapper.find(Avatar).length).toBe(1);
+    expect(wrapper.find(Avatar).at(0).props().size).toBe(27);
+    wrapper.setProps({
+      imgSize: "32.9px",
+    });
+    expect(wrapper.find(Avatar).at(0).props().size).toBe(32.9);
+    wrapper.setProps({
+      imgSize: 50,
+    });
+    expect(wrapper.find(Avatar).at(0).props().size).toBe(50);
   });
 });

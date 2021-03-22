@@ -3,7 +3,7 @@ import { Card, Avatar } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import classNames from "classnames";
-import { isArray, map, isNil } from "lodash";
+import { isArray, map, isNil, isString } from "lodash";
 import { CardLayoutType, Color } from "./index";
 import { CardProps } from "antd/lib/card";
 
@@ -41,7 +41,7 @@ interface CardItemProps {
   reverseBgColor?: boolean;
   imgSrc?: string;
   showImg?: boolean;
-  imgSize?: number;
+  imgSize?: string | number;
 }
 
 export function CardItem(props: CardItemProps): React.ReactElement {
@@ -117,6 +117,20 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     </>
   );
 
+  const getAvatarSize = (imgSize: string | number, size: number): number => {
+    try {
+      if (isString(imgSize)) {
+        if (imgSize.includes("%")) {
+          return +((Number(imgSize.slice(0, -1)) * size) / 100).toPrecision(10);
+        }
+        return +parseFloat(imgSize).toPrecision(10);
+      }
+      return imgSize as number;
+    } catch (error) {
+      // console.error("data transform error");
+    }
+  };
+
   const avatarImg = (size: number): React.ReactElement => (
     <span
       className="iconContainer"
@@ -130,7 +144,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         height: `${size}px`,
       }}
     >
-      <Avatar src={props.imgSrc} size={imgSize ?? size} />
+      <Avatar src={props.imgSrc} size={getAvatarSize(imgSize, size) ?? size} />
     </span>
   );
 
