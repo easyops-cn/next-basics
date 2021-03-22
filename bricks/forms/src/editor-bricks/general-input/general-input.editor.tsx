@@ -37,9 +37,9 @@ export function GeneralInputEditor({
           </span>
         </div>
         <div className={formSharedStyle.formInputItem}>
-          <span className={formSharedStyle.placeholder}>
-            {formCommonFieldDisplay(placeholder)}
-          </span>
+          <div className={formSharedStyle.placeholder}>
+            <span>{formCommonFieldDisplay(placeholder)}</span>
+          </div>
         </div>
       </div>
     </EditorContainer>
