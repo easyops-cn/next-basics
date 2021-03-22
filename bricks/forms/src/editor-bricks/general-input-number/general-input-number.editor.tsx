@@ -41,9 +41,9 @@ export function GeneralInputNumberEditor({
           className={formSharedStyle.formInputItem}
           style={{ flex: "0 0 90px", position: "relative" }}
         >
-          <span className={formSharedStyle.placeholder}>
-            {formCommonFieldDisplay(placeholder)}
-          </span>
+          <div className={formSharedStyle.placeholder}>
+            <span>{formCommonFieldDisplay(placeholder)}</span>
+          </div>
           <span className={styles.stepMark}></span>
         </div>
       </div>

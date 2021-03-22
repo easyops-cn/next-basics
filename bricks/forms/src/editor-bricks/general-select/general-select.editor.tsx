@@ -38,12 +38,14 @@ export function GeneralSelectEditor({
           </span>
         </div>
         <div className={formSharedStyle.formInputItem}>
-          <span
-            className={classNames(formSharedStyle.placeholder)}
-            style={{ width: "90%" }}
+          <div
+            className={classNames(
+              formSharedStyle.placeholder,
+              formSharedStyle.placeholderOffset
+            )}
           >
-            {formCommonFieldDisplay(placeholder)}
-          </span>
+            <span>{formCommonFieldDisplay(placeholder)}</span>
+          </div>
           <span className={styles.arrow}></span>
         </div>
       </div>

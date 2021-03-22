@@ -1,7 +1,7 @@
 .arrow {
-  float: right;
-  margin-top: 9px;
-  margin-right: -5px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
   width: 0;
   height: 0;
   border-top: 6px solid var(--editor-brick-skeleton-bg-light);

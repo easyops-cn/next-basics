@@ -52,17 +52,22 @@
   }
 
   > .formInputItem {
+    position: relative;
     height: var(--editor-brick-base-height);
     border-radius: var(--editor-brick-border-radius);
     border: 1px solid var(--editor-brick-stroke-color);
     padding: 4px 12px;
+    min-width: 0;
 
     > .placeholder {
-      display: inline-block;
-      width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
       color: var(--antd-input-placeholder-color);
+    }
+
+    > .placeholderOffset {
+      margin-right: 12px;
     }
   }
 }

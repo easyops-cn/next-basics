@@ -42,9 +42,14 @@ export function GeneralTimePickerEditor({
           className={formSharedStyle.formInputItem}
           style={{ flex: "0 0 200px" }}
         >
-          <span className={formSharedStyle.placeholder}>
-            {formCommonFieldDisplay(placeholder)}
-          </span>
+          <div
+            className={classNames(
+              formSharedStyle.placeholder,
+              formSharedStyle.placeholderOffset
+            )}
+          >
+            <span>{formCommonFieldDisplay(placeholder)}</span>
+          </div>
           <span className={styles.suffixIcon}>
             <ClockCircleOutlined />
           </span>

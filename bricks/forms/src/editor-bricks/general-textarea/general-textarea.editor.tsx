@@ -41,9 +41,9 @@ export function GeneralTextareaEditor({
           className={formSharedStyle.formInputItem}
           style={{ minHeight: 100 }}
         >
-          <span className={formSharedStyle.placeholder}>
-            {formCommonFieldDisplay(placeholder)}
-          </span>
+          <div className={formSharedStyle.placeholder}>
+            <span>{formCommonFieldDisplay(placeholder)}</span>
+          </div>
         </div>
       </div>
     </EditorContainer>
