@@ -228,22 +228,24 @@ export function LegacyBuilderContainer(
       }}
     >
       <div
-        className={classNames(styles.builderContainer, {
+        className={classNames(styles.builderOverlay, {
           [styles.fullscreen]: fullscreen,
         })}
       >
-        <BuilderToolbar />
-        <div className={styles.builderWrapper}>
-          <BuilderToolbox onContextUpdate={onContextUpdate} />
-          <BuilderCanvas />
+        <div className={styles.builderContainer}>
+          <BuilderToolbar />
+          <div className={styles.builderBodyWrapper}>
+            <BuilderToolbox onContextUpdate={onContextUpdate} />
+            <BuilderCanvas />
+          </div>
         </div>
+        <BuilderContextMenu
+          onAskForDeletingNode={onAskForDeletingNode}
+          onAskForAppendingBrick={onAskForAppendingBrick}
+          onNodeCopyPaste={onNodeCopyPaste}
+          onNodeCutPaste={onNodeCutPaste}
+        />
       </div>
-      <BuilderContextMenu
-        onAskForDeletingNode={onAskForDeletingNode}
-        onAskForAppendingBrick={onAskForAppendingBrick}
-        onNodeCopyPaste={onNodeCopyPaste}
-        onNodeCutPaste={onNodeCutPaste}
-      />
     </BuilderUIContext.Provider>
   );
 }

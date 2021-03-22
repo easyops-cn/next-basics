@@ -1,13 +1,18 @@
 import React from "react";
 import { shallow } from "enzyme";
+import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
+import * as helper from "@next-core/editor-bricks-helper";
 import { BuilderToolbar } from "./BuilderToolbar";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import * as helper from "@next-core/editor-bricks-helper";
 import { BuilderDataType } from "../interfaces";
 
 const mockUseBuilderNode = jest.spyOn(helper, "useBuilderNode");
 
 jest.mock("../BuilderUIContext");
+
+const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
+  typeof useBuilderUIContext
+>;
 
 const [mockCurrentRouteClick, mockBuildAndPush, mockPreview] = [
   jest.fn(),
@@ -23,7 +28,7 @@ describe("BuilderToolbar", () => {
   });
 
   it("should work", async () => {
-    (useBuilderUIContext as jest.Mock).mockReturnValue({
+    mockUseBuilderUIContext.mockReturnValue({
       onCurrentRouteClick: mockCurrentRouteClick,
       onBuildAndPush: mockBuildAndPush,
       onPreview: mockPreview,
@@ -35,7 +40,7 @@ describe("BuilderToolbar", () => {
       path: "/",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(3);
+    expect(wrapper.find(".tabLink").length).toBe(4);
     wrapper.find(".tabLink[data-testid='view-route']").simulate("click");
     expect(mockCurrentRouteClick).toBeCalledWith({
       id: "R-01",
@@ -49,7 +54,7 @@ describe("BuilderToolbar", () => {
   });
 
   it("should work with custom template", async () => {
-    (useBuilderUIContext as jest.Mock).mockReturnValue({
+    mockUseBuilderUIContext.mockReturnValue({
       onCurrentRouteClick: mockCurrentRouteClick,
       onBuildAndPush: mockBuildAndPush,
       onPreview: mockPreview,
@@ -61,6 +66,44 @@ describe("BuilderToolbar", () => {
       templateId: "tpl-test",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(3);
+    expect(wrapper.find(".tabLink").length).toBe(4);
+  });
+
+  it("should enter fullscreen", () => {
+    let fullscreen = false;
+    const setFullscreen = jest.fn((update) => {
+      fullscreen = update(fullscreen);
+    });
+    mockUseBuilderUIContext.mockImplementation(() => ({
+      fullscreen,
+      setFullscreen,
+    }));
+    const wrapper = shallow(<BuilderToolbar />);
+    expect(wrapper.find(FullscreenOutlined).length).toBe(1);
+    expect(wrapper.find(FullscreenExitOutlined).length).toBe(0);
+    wrapper.find(".tabLink[data-testid='toggle-fullscreen']").invoke("onClick")(
+      null
+    );
+    expect(setFullscreen).toBeCalled();
+    expect(fullscreen).toBe(true);
+  });
+
+  it("should exit fullscreen", () => {
+    let fullscreen = true;
+    const setFullscreen = jest.fn((update) => {
+      fullscreen = update(fullscreen);
+    });
+    mockUseBuilderUIContext.mockImplementation(() => ({
+      fullscreen,
+      setFullscreen,
+    }));
+    const wrapper = shallow(<BuilderToolbar />);
+    expect(wrapper.find(FullscreenOutlined).length).toBe(0);
+    expect(wrapper.find(FullscreenExitOutlined).length).toBe(1);
+    wrapper.find(".tabLink[data-testid='toggle-fullscreen']").invoke("onClick")(
+      null
+    );
+    expect(setFullscreen).toBeCalled();
+    expect(fullscreen).toBe(false);
   });
 });

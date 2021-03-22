@@ -1,9 +1,6 @@
-.builderContainer {
-  overflow: hidden;
-  background-color: #f3f4f7;
+.builderOverlay {
   height: calc(100vh - 148px);
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
 
 .fullscreen {
@@ -14,9 +11,20 @@
   right: 0;
   bottom: 0;
   z-index: 110;
+  background: rgba(11, 26, 47, 0.45);
+  padding: var(--editor-brick-overlay-padding, 20px);
 }
 
-.builderWrapper {
+.builderContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: #f3f4f7;
+  border-radius: var(--card-default-border-radius);
+}
+
+.builderBodyWrapper {
   display: flex;
   overflow: hidden;
   flex: 1;

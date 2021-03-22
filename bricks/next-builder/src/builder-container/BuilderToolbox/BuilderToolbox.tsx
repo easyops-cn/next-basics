@@ -1,17 +1,14 @@
 import React from "react";
 import {
-  FullscreenExitOutlined,
-  FullscreenOutlined,
   PartitionOutlined,
   DatabaseOutlined,
-  PlusSquareOutlined,
-  PlusOutlined
+  PlusOutlined,
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ContextConf } from "@next-core/brick-types";
 import { BrickLibrary } from "../BrickLibrary/BrickLibrary";
-import { BrickOptionItem, BuilderDataType, ToolboxTab } from "../interfaces";
+import { BuilderDataType, ToolboxTab } from "../interfaces";
 import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
@@ -37,8 +34,6 @@ export function BuilderToolbox({
 }: BuilderToolboxProps): React.ReactElement {
   const {
     dataType,
-    fullscreen,
-    setFullscreen,
     toolboxTab: activeTab,
     setToolboxTab: setActiveTab,
   } = useBuilderUIContext();
@@ -86,9 +81,7 @@ export function BuilderToolbox({
         return <DatabaseOutlined />;
       },
       content() {
-        return (
-          <DataView onContextUpdate={onContextUpdate} />
-        );
+        return <DataView onContextUpdate={onContextUpdate} />;
       },
       availableDataTypes: [
         BuilderDataType.ROUTE_OF_BRICKS,
@@ -120,15 +113,6 @@ export function BuilderToolbox({
               </li>
             )
         )}
-        <li>
-          <a
-            className={`${styles.tabLink} ${styles.fullscreenToggle}`}
-            role="button"
-            onClick={() => setFullscreen((prev) => !prev)}
-          >
-            {fullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-          </a>
-        </li>
       </ul>
       <div className={styles.tabContent}>
         {tabList.find((tabConf) => tabConf.tab === activeTab)?.content()}

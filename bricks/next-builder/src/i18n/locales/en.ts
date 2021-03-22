@@ -18,6 +18,8 @@ const locale: Locale = {
   [K.PREVIEW]: "Preview",
   [K.BRICK_LIBRARY]: "Brick Library",
   [K.TIPS]: "Tips",
+  [K.ENTER_FULLSCREEN]: "Enter fullscreen",
+  [K.EXIT_FULLSCREEN]: "Exit fullscreen",
   [K.NODE_ACTION_EVENTS_VIEW]: "Events View",
   [K.NODE_ACTION_COPY]: "Copy",
   [K.NODE_ACTION_CUT]: "Cut",

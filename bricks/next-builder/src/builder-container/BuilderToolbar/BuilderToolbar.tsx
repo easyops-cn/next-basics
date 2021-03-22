@@ -1,30 +1,37 @@
 import React from "react";
-import styles from "./BuilderToolbar.module.css";
-import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
-import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
+import { Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
 import {
   BranchesOutlined,
   CaretRightOutlined,
   ApiOutlined,
-  BlockOutlined
+  BlockOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
 } from "@ant-design/icons";
-import { BuilderRouteNode, BuilderCustomTemplateNode } from "@next-core/brick-types";
-import { useBuilderUIContext } from "../BuilderUIContext";
+import {
+  BuilderRouteNode,
+  BuilderCustomTemplateNode,
+} from "@next-core/brick-types";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import styles from "./BuilderToolbar.module.css";
+import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
+import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
+import { useBuilderUIContext } from "../BuilderUIContext";
 import { BuilderDataType } from "../interfaces";
-import { Tooltip } from "antd";
-import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 export function BuilderToolbar(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  
+
   const {
     onCurrentRouteClick,
     onCurrentTemplateClick,
     onBuildAndPush,
     onPreview,
     dataType,
+    fullscreen,
+    setFullscreen,
   } = useBuilderUIContext();
 
   const rootNode = useBuilderNode({ isRoot: true });
@@ -45,10 +52,14 @@ export function BuilderToolbar(): React.ReactElement {
     onBuildAndPush?.();
   };
 
+  const handleToggleFullscreen = React.useCallback(() => {
+    setFullscreen((prev) => !prev);
+  }, [setFullscreen]);
+
   return (
     <div className={styles.toolbarContainer}>
       <div className={styles.toolbarLeft}>
-        {dataType===BuilderDataType.CUSTOM_TEMPLATE?(
+        {dataType === BuilderDataType.CUSTOM_TEMPLATE ? (
           <Tooltip title={t(K.VIEW_TEMPLATE)} placement="bottomLeft">
             <a
               className={styles.tabLink}
@@ -59,7 +70,7 @@ export function BuilderToolbar(): React.ReactElement {
               <BlockOutlined />
             </a>
           </Tooltip>
-        ):(
+        ) : (
           <Tooltip title={t(K.VIEW_ROUTE)} placement="bottomLeft">
             <a
               className={styles.tabLink}
@@ -93,6 +104,19 @@ export function BuilderToolbar(): React.ReactElement {
             data-testid="preview"
           >
             <CaretRightOutlined />
+          </a>
+        </Tooltip>
+        <Tooltip
+          title={t(fullscreen ? K.EXIT_FULLSCREEN : K.ENTER_FULLSCREEN)}
+          placement="bottomRight"
+        >
+          <a
+            className={styles.tabLink}
+            role="button"
+            onClick={handleToggleFullscreen}
+            data-testid="toggle-fullscreen"
+          >
+            {fullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
           </a>
         </Tooltip>
       </div>
