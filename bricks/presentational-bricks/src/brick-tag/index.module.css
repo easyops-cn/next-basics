@@ -1,10 +1,13 @@
 .brickTag {
   margin: -5px 0;
 
-  .closableTag {
+  .closableTag:not(.disabledTag) {
     &:hover {
       background-color: var(--stroke-color-default);
     }
+  }
+  .closableTag.disabledTag > span:global(.ant-tag-close-icon) {
+    display: none;
   }
 
   .round {

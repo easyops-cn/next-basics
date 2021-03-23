@@ -486,10 +486,12 @@ export const BrickTagStory: Story = {
                   {
                     key: "p1",
                     label: "紧急变更",
+                    disabled: true,
                   },
                   {
                     key: "p2",
                     label: "计划变更",
+                    disabled: true,
                   },
                   {
                     key: "p3",
@@ -510,11 +512,9 @@ export const BrickTagStory: Story = {
                 ],
               },
               events: {
-                "checked.update": {
+                "tag.close": {
                   action: "console.log",
-                },
-                "checked.update.v2": {
-                  action: "console.log",
+                  args: ["${EVENT.detail}"],
                 },
               },
             },

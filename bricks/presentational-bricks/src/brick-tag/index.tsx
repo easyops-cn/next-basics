@@ -52,6 +52,15 @@ export class BrickTagElement extends UpdatingElement {
   >;
 
   /**
+   * @detail { current: Record<string, any>; tagList: Record<string, any>[] }
+   * @description 当前关闭的tag和剩余的tagList
+   */
+  @event({ type: "tag.close" }) tagClose: EventEmitter<{
+    current: Record<string, any>;
+    tagList: Record<string, any>[];
+  }>;
+
+  /**
    * @kind TagListType[] 或者 string[]
    * @required false
    * @default -
@@ -284,6 +293,7 @@ export class BrickTagElement extends UpdatingElement {
         textEllipsis={this.textEllipsis}
         tagStyle={this.tagStyle}
         handleOnChange={this._handleOnChange}
+        handleOnClose={this._handleOnClose}
         tagCheckedStyle={this.tagCheckedStyle}
         tagHoverStyle={this.tagHoverStyle}
         multipleCheck={this.multipleCheck}
@@ -332,6 +342,10 @@ export class BrickTagElement extends UpdatingElement {
       );
     }
   }
+
+  private _handleOnClose = (current, tagList: TagListType): void => {
+    this.tagClose.emit({ current, tagList });
+  };
 
   private _handleOnChange = (items: TagListType): void => {
     const checkedKeys = map(items, "key");
