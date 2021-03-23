@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.174.1...@next-bricks/presentational-bricks@1.175.0) (2021-03-23)
+
+
+### Bug Fixes
+
+* **brick-tree:** 默认选中项改变时，全选状态对应改变 ([377a53f](https://github.com/easyops-cn/next-basics/commit/377a53f5ebccf4f395432b0197865fd7621896ea))
+
+
+### Features
+
+* **brick-tag:** 增加tag close event ([e1016ec](https://github.com/easyops-cn/next-basics/commit/e1016ec3907227a80304995e19ea120d04c38ed0))
+
+
+
+
+
 ## [1.174.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.174.0...@next-bricks/presentational-bricks@1.174.1) (2021-03-22)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
