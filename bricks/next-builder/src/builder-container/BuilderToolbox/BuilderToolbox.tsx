@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ContextConf } from "@next-core/brick-types";
+import { JsonStorage } from "@next-libs/storage";
 import { BrickLibrary } from "../BrickLibrary/BrickLibrary";
 import { BuilderDataType, ToolboxTab } from "../interfaces";
 import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
@@ -27,7 +28,14 @@ interface ToolboxTabConf {
   availableDataTypes?: BuilderDataType[];
 }
 
-React.createElement;
+interface ToolboxResizerStatus {
+  startWidth: number;
+  startX: number;
+}
+
+const toolboxWidthKey = "next-builder-toolbox-width";
+const defaultToolboxWidth = 273;
+const minToolboxWidth = defaultToolboxWidth;
 
 export function BuilderToolbox({
   onContextUpdate,
@@ -37,6 +45,16 @@ export function BuilderToolbox({
     toolboxTab: activeTab,
     setToolboxTab: setActiveTab,
   } = useBuilderUIContext();
+  const storage = React.useMemo(() => new JsonStorage(localStorage), []);
+  const [toolboxWidth, setToolboxWidth] = React.useState(
+    storage.getItem(toolboxWidthKey) ?? defaultToolboxWidth
+  );
+  const [
+    resizerStatus,
+    setResizerStatus,
+  ] = React.useState<ToolboxResizerStatus>(null);
+  const [resized, setResized] = React.useState(false);
+
   const tabList: ToolboxTabConf[] = [
     {
       tab: ToolboxTab.TREE_VIEW,
@@ -90,8 +108,63 @@ export function BuilderToolbox({
     },
   ];
 
+  const handleColResizeMouseDown = React.useCallback(
+    (event: React.MouseEvent) => {
+      event.preventDefault();
+      setResizerStatus({
+        startWidth: toolboxWidth,
+        startX: event.clientX,
+      });
+      setResized(false);
+    },
+    [toolboxWidth]
+  );
+
+  React.useEffect(() => {
+    if (!resizerStatus) {
+      return;
+    }
+
+    const handleColResizeMouseMove = (event: MouseEvent): void => {
+      setResized(true);
+      setToolboxWidth(
+        Math.max(
+          minToolboxWidth,
+          Math.min(
+            document.documentElement.clientWidth - 300,
+            resizerStatus.startWidth + event.clientX - resizerStatus.startX
+          )
+        )
+      );
+    };
+
+    const handleColResizeMouseUp = (): void => {
+      setResizerStatus(null);
+    };
+
+    window.addEventListener("mousemove", handleColResizeMouseMove);
+    window.addEventListener("mouseup", handleColResizeMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleColResizeMouseMove);
+      window.removeEventListener("mouseup", handleColResizeMouseUp);
+    };
+  }, [resizerStatus]);
+
+  React.useEffect(() => {
+    if (!resizerStatus && resized) {
+      storage.setItem(toolboxWidthKey, toolboxWidth);
+    }
+  }, [resized, resizerStatus, storage, toolboxWidth]);
+
   return (
-    <div className={styles.builderToolbox} data-override-theme="dark">
+    <div
+      className={styles.builderToolbox}
+      data-override-theme="dark"
+      style={{
+        width: toolboxWidth,
+      }}
+    >
       <ul className={styles.tabList}>
         {tabList.map(
           (tabConf) =>
@@ -117,6 +190,10 @@ export function BuilderToolbox({
       <div className={styles.tabContent}>
         {tabList.find((tabConf) => tabConf.tab === activeTab)?.content()}
       </div>
+      <div
+        className={styles.toolboxResizer}
+        onMouseDown={handleColResizeMouseDown}
+      />
     </div>
   );
 }

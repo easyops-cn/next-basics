@@ -1,20 +1,36 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { mount, shallow } from "enzyme";
+import { JsonStorage } from "@next-libs/storage";
 import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { defaultToolboxTab } from "../constants";
 import { BuilderDataType, ToolboxTab } from "../interfaces";
 
+jest.mock("@next-libs/storage");
 jest.mock("../BuilderUIContext");
+jest.mock("../StoryboardTreeView/StoryboardTreeView", () => ({
+  StoryboardTreeView() {
+    return <div>StoryboardTreeView</div>;
+  },
+}));
 
 const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
 >;
 
+const mockJsonStorage = JsonStorage as jest.MockedClass<typeof JsonStorage>;
+
+jest
+  .spyOn(document.documentElement, "clientWidth", "get")
+  .mockReturnValue(1280);
+
 describe("BuilderToolbox", () => {
   let toolboxTab: ToolboxTab;
   let dataType: BuilderDataType;
+
   beforeEach(() => {
+    jest.clearAllMocks();
     toolboxTab = defaultToolboxTab;
     dataType = BuilderDataType.ROUTE_OF_BRICKS;
     mockUseBuilderUIContext.mockImplementation(() => ({
@@ -62,5 +78,39 @@ describe("BuilderToolbox", () => {
     dataType = BuilderDataType.CUSTOM_TEMPLATE;
     const wrapper = shallow(<BuilderToolbox />);
     expect(wrapper.find(".tabLink").length).toBe(3);
+  });
+
+  it("should handle col-resize", () => {
+    const wrapper = mount(<BuilderToolbox />);
+    const getWidth = (): number =>
+      wrapper.find(".builderToolbox").prop("style").width as number;
+
+    expect(getWidth()).toBe(273);
+
+    const mockPreventDefault = jest.fn();
+    wrapper.find(".toolboxResizer").invoke("onMouseDown")({
+      clientX: 300,
+      preventDefault: mockPreventDefault,
+    } as any);
+    expect(mockPreventDefault).toBeCalled();
+
+    act(() => {
+      window.dispatchEvent(
+        new MouseEvent("mousemove", {
+          clientX: 310,
+        })
+      );
+    });
+    wrapper.update();
+    expect(getWidth()).toBe(283);
+
+    act(() => {
+      window.dispatchEvent(new MouseEvent("mouseup"));
+    });
+    const mockJsonStorageSetItem = mockJsonStorage.mock.instances[0].setItem;
+    expect(mockJsonStorageSetItem).toBeCalledWith(
+      "next-builder-toolbox-width",
+      283
+    );
   });
 });

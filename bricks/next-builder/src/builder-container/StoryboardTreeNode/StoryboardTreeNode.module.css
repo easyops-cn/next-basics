@@ -23,6 +23,11 @@
   }
 }
 
+.nodeName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .icon {
   width: 20px;
   flex-shrink: 0;

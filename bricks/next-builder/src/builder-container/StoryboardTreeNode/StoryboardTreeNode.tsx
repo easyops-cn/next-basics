@@ -186,7 +186,9 @@ export function StoryboardTreeNode({
         ref={(node) => dragRef(dropRef(node))}
       >
         {icon && <div className={styles.icon}>{icon}</div>}
-        <div className={styles.nodeName}>{node.alias}</div>
+        <div className={styles.nodeName} title={node.alias}>
+          {node.alias}
+        </div>
       </div>
       {mountPoints.length > 0 && (
         <ul className={styles.mountPointList}>

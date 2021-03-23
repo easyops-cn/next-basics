@@ -12,7 +12,7 @@
   bottom: 0;
   z-index: 110;
   background: rgba(11, 26, 47, 0.45);
-  padding: var(--editor-brick-overlay-padding, 20px);
+  padding: var(--editor-brick-overlay-padding);
 }
 
 .builderContainer {
