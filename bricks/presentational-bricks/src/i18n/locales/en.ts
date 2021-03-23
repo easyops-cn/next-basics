@@ -22,6 +22,8 @@ const locale: Locale = {
   [K.CROP_TITLE]: "Crop your new profile picture",
   [K.COPY]: "Copy",
   [K.COPIED]: "Copied",
+  [K.CHOSEN_OPTIONS]: "Chosen {{count}} options",
+  [K.CLEAR]: "Clear",
 };
 
 export default locale;

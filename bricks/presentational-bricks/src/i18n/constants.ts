@@ -22,6 +22,8 @@ export enum K {
   CROP_TITLE = "CROP_TITLE",
   COPY = "COPY",
   COPIED = "COPIED",
+  CHOSEN_OPTIONS = "CHOSEN_OPTIONS",
+  CLEAR = "CLEAR",
 }
 
 export type Locale = { [key in K]: string };
