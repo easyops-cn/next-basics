@@ -4,7 +4,7 @@ import { TagProps } from "antd/lib/tag";
 import { CheckableTagProps } from "antd/lib/tag/CheckableTag";
 import classNames from "classnames";
 import style from "./index.module.css";
-import { isArray } from "lodash";
+import { isArray, differenceBy } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { MenuIcon } from "@next-core/brick-types";
@@ -39,6 +39,7 @@ export interface BrickTagProps extends TagProps {
   tagCheckedStyle?: any;
   tagHoverStyle?: any;
   handleOnChange?: (items: TagListType) => void;
+  handleOnClose?: (current, tagList: TagListType) => void;
   multipleCheck?: boolean;
   label?: string;
   defaultCheckedTag?: string | string[];
@@ -60,6 +61,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
   } = props;
 
   const [checkedTag, setCheckedTag] = useState([]);
+  const [closedTag, setClosedTag] = useState(tagList);
 
   useEffect(() => {
     setCheckedTag(
@@ -87,6 +89,12 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
       nextCheckedTag?.includes(item.key)
     );
     props.handleOnChange(nextCheckedItems);
+  };
+
+  const onClose = (item) => {
+    const newClosedTag = differenceBy(closedTag, [item], "key");
+    setClosedTag(newClosedTag);
+    props?.handleOnClose(item, newClosedTag);
   };
 
   const onMouseEnter = (item, e) => {
@@ -139,6 +147,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
             typeof item.icon === "string" && <LegacyIcon type={item.icon} />
           }
           closable={closable}
+          {...(closable ? { onClose: () => onClose(item) } : {})}
           color={!closable && specificColor}
           {...configProps}
           {...restProps}
@@ -162,7 +171,10 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
       );
       return (props.disabledTooltip || item.disabledTooltip) &&
         item.disabled ? (
-        <Tooltip key={item.key} title={item.disabledTooltip || props.disabledTooltip}>
+        <Tooltip
+          key={item.key}
+          title={item.disabledTooltip || props.disabledTooltip}
+        >
           {tagNode}
         </Tooltip>
       ) : (

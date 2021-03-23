@@ -130,4 +130,34 @@ describe("BrickTag", () => {
     expect(wrapper.find("Tag").at(2).prop("color")).toBe("gray");
     expect(wrapper.find("Tooltip")).toHaveLength(1);
   });
+
+  it("should work when Tag is closable", () => {
+    const handleOnClose = jest.fn();
+    const props = {
+      closable: true,
+      tagList: [
+        { key: "a", label: "a" },
+        { key: "b", label: "b" },
+        { key: "c", label: "c" },
+        { key: "d", label: "d" },
+        { key: "e", label: "e", disabled: true },
+      ],
+      handleOnClose,
+    };
+    const wrapper = mount(<BrickTag {...props} />);
+    expect(wrapper.find("Tag").length).toEqual(5);
+    expect(
+      wrapper.find("Tag").at(0).find("span.anticon-close.ant-tag-close-icon")
+        .length
+    ).toEqual(1);
+    expect(
+      wrapper.find("Tag").at(5).find("span.anticon-close.ant-tag-close-icon")
+    ).toEqual({});
+    wrapper
+      .find("Tag")
+      .at(0)
+      .find("span.anticon-close.ant-tag-close-icon")
+      .simulate("click");
+    expect(handleOnClose).toHaveBeenCalled();
+  });
 });
