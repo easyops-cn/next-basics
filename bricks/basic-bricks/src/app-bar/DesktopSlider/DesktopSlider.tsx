@@ -32,7 +32,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   const slideDuration = 400;
 
   useEffect(() => {
-    enableMyDesktop && launchpadService.setMaxVisitorLength(columns);
+    enableMyDesktop && launchpadService.setMaxVisitorLength(8);
   }, [columns, enableMyDesktop]);
   const mapAppsToDesktop = (apps: MicroApp[]): DesktopData => ({
     name: "-",

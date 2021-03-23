@@ -1,8 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
 import styles from "./MyDesktop.module.css";
 import { SettingOutlined, LoadingOutlined } from "@ant-design/icons";
@@ -12,6 +8,7 @@ import { launchpadService } from "../LaunchpadService";
 import { LaunchpadApi } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { Spin } from "antd";
+import { isEmpty } from "lodash";
 
 interface MyDesktopProps {
   desktopCount: number;
@@ -19,9 +16,7 @@ interface MyDesktopProps {
 }
 
 export function MyDesktop(props: MyDesktopProps): React.ReactElement {
-  const [recentlyVisitedList] = useState(
-    launchpadService.getAllVisitors()
-  );
+  const [recentlyVisitedList] = useState(launchpadService.getAllVisitors());
   const [favoriteList, setFavoriteList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstRendered, setFirstRendered] = useState(true);
@@ -97,15 +92,26 @@ export function MyDesktop(props: MyDesktopProps): React.ReactElement {
             className={styles.spin}
           />
         )}
-        <div className={styles.favoriteContainer}>
-          {favoriteList?.map((item, index) => (
-            <FavoriteDesktopCell
-              key={index}
-              item={item}
-              onDelete={handleDeleteFavorite}
-            />
-          ))}
-        </div>
+        {!isEmpty(favoriteList) ? (
+          <div className={styles.favoriteContainer}>
+            {favoriteList?.map((item, index) => (
+              <FavoriteDesktopCell
+                key={index}
+                item={item}
+                onDelete={handleDeleteFavorite}
+              />
+            ))}
+          </div>
+        ) : (
+          !isLoading && (
+            <span>
+              把常用的页面链接加入收藏夹，方便快速访问 ~{" "}
+              <Link to="/launchpad-collection" style={{ marginLeft: 15 }}>
+                管理我的收藏夹
+              </Link>
+            </span>
+          )
+        )}
       </div>
     );
   }, [favoriteList, isLoading, firstRendered]);

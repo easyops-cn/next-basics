@@ -40,28 +40,7 @@ jest.mock("@next-libs/basic-components", () => {
 jest.mock("../LaunchpadService", () => {
   return {
     launchpadService: {
-      fetchFavoriteList: () => {
-        return [
-          {
-            launchpadCollection: {
-              instanceId: "5b8ee4e5c352c",
-              type: "microApp",
-              name: "开发者中心",
-              icon: {
-                type: "",
-                theme: "",
-                icon: "developers",
-                lib: "easyops",
-                category: "app",
-                prefix: "",
-              },
-              link: "/developers",
-            },
-            microAppId: "developers",
-            customItemId: "",
-          },
-        ];
-      },
+      fetchFavoriteList: jest.fn(),
       isFavorite: () => true,
       deleteFavorite: jest.fn(),
       getAllVisitors: () => {
@@ -125,10 +104,30 @@ jest.mock("../LaunchpadService", () => {
 });
 describe("MyDesktop", () => {
   it("should work", async () => {
+    (launchpadService.fetchFavoriteList as jest.Mock).mockReturnValueOnce([
+      {
+        launchpadCollection: {
+          instanceId: "5b8ee4e5c352c",
+          type: "microApp",
+          name: "开发者中心",
+          icon: {
+            type: "",
+            theme: "",
+            icon: "developers",
+            lib: "easyops",
+            category: "app",
+            prefix: "",
+          },
+          link: "/developers",
+        },
+        microAppId: "developers",
+        customItemId: "",
+      },
+    ]);
     const wrapper = mount(<MyDesktop desktopCount={2} arrowWidthPercent={9} />);
-    await act(async() => {
+    await act(async () => {
       await (global as any).flushPromises();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(DesktopCell)).toHaveLength(5);
     expect(wrapper.find("DesktopCell").at(0).props()).toMatchObject({
@@ -147,9 +146,9 @@ describe("MyDesktop", () => {
       showAddIcon: true,
     });
 
-    await act(async() => {
+    await act(async () => {
       await (global as any).flushPromises();
-    })
+    });
     wrapper.update();
 
     expect(wrapper.find(FavoriteDesktopCell)).toHaveLength(1);
@@ -158,8 +157,22 @@ describe("MyDesktop", () => {
     expect(launchpadService.deleteFavorite).toHaveBeenCalledWith(
       "5b8ee4e5c352c"
     );
-    await act(async() => {
+    await act(async () => {
       await (global as any).flushPromises();
-    })
+    });
+  });
+
+  it("should show prompt if empty favoriteList", async () => {
+    (launchpadService.fetchFavoriteList as jest.Mock).mockReturnValueOnce([]);
+    const wrapper = mount(<MyDesktop desktopCount={2} arrowWidthPercent={9} />);
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find(".favorites span").text()).toEqual(
+      expect.stringContaining("把常用的页面链接加入收藏夹，方便快速访问 ~")
+    );
   });
 });

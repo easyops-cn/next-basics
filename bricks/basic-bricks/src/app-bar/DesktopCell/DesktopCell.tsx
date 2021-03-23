@@ -24,7 +24,7 @@ interface DesktopCellProps {
 export function DesktopCell(props: DesktopCellProps): React.ReactElement {
   const checkFavoriteUpperLimit = () => {
     const favoriteLength = launchpadService.getFavoritesLength();
-    if (favoriteLength >= 24) {
+    if (favoriteLength >= 25) {
       Modal.warning({
         // launchpad 遮罩层z-index为5000
         zIndex: 5001,
