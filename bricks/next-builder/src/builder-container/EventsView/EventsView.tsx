@@ -1,6 +1,10 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useBuilderData } from "@next-core/editor-bricks-helper";
+import {
+  useBuilderData,
+  useBuilderDataManager,
+  useHoverNodeUid,
+} from "@next-core/editor-bricks-helper";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import { getBricksWithEvents } from "./getBricksWithEvents";
 import { BrickWithEventsItem } from "./BrickWithEventsItem";
@@ -15,6 +19,8 @@ export function EventsView(): React.ReactElement {
   const { nodes } = useBuilderData();
   const bricksWithEvents = getBricksWithEvents(nodes);
   const [q, setQ] = React.useState<string>(null);
+  const hoverNodeUid = useHoverNodeUid();
+  const manager = useBuilderDataManager();
 
   const handleSearch = React.useCallback((value: string): void => {
     setQ(value);
@@ -24,6 +30,19 @@ export function EventsView(): React.ReactElement {
     () => filterBricksWithEvents(bricksWithEvents, q),
     [bricksWithEvents, q]
   );
+
+  const handleMouseEnter = (uid: number): void => {
+    const prevUid = manager.getHoverNodeUid();
+    if (prevUid !== uid) {
+      manager.setHoverNodeUid(uid);
+    }
+  };
+  const handleMouseLeave = (uid: number): void => {
+    const prevUid = manager.getHoverNodeUid();
+    if (prevUid === uid) {
+      manager.setHoverNodeUid(undefined);
+    }
+  };
 
   return (
     <ToolboxPane
@@ -46,8 +65,16 @@ export function EventsView(): React.ReactElement {
       <div className={styles.eventsWrapper}>
         <ul className={styles.brickList}>
           {filteredBricks.map((brick) => (
-            <li key={brick.node.$$uid}>
-              <BrickWithEventsItem {...brick} />
+            <li
+              key={brick.node.$$uid}
+              data-testid={`brick-with-events-item-${brick.node.$$uid}`}
+              onMouseEnter={() => handleMouseEnter(brick.node.$$uid)}
+              onMouseLeave={() => handleMouseLeave(brick.node.$$uid)}
+            >
+              <BrickWithEventsItem
+                {...brick}
+                hover={brick.node.$$uid === hoverNodeUid}
+              />
             </li>
           ))}
         </ul>

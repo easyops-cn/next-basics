@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { BricksWithEvents } from "./getBricksWithEvents";
+import { BrickWithEvents } from "./getBricksWithEvents";
 
 import styles from "./BrickWithEventsItem.module.css";
 import { useBuilderUIContext } from "../BuilderUIContext";
@@ -10,16 +10,18 @@ export function BrickWithEventsItem({
   node,
   hasEvents,
   isTargetOfEvents,
-}: BricksWithEvents): React.ReactElement {
+  hover,
+}: BrickWithEvents & { hover?: boolean }): React.ReactElement {
   const { eventStreamNodeId, setEventStreamNodeId } = useBuilderUIContext();
   const handleNodeClick = React.useCallback(() => {
-    setEventStreamNodeId(node.id);
-  }, [node, setEventStreamNodeId]);
+    setEventStreamNodeId(eventStreamNodeId === node.id ? null : node.id);
+  }, [node, setEventStreamNodeId, eventStreamNodeId]);
 
   return (
     <a
       className={classNames(styles.brickWithEventsItem, {
         [styles.active]: eventStreamNodeId === node.id,
+        [styles.nodeHover]: hover,
       })}
       role="button"
       onClick={handleNodeClick}

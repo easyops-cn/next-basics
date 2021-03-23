@@ -14,17 +14,16 @@ const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
 >;
 
-const [mockCurrentRouteClick, mockBuildAndPush, mockPreview] = [
-  jest.fn(),
-  jest.fn(),
-  jest.fn(),
-];
+const [
+  mockCurrentTemplateClick,
+  mockCurrentRouteClick,
+  mockBuildAndPush,
+  mockPreview,
+] = [jest.fn(), jest.fn(), jest.fn(), jest.fn()];
 
 describe("BuilderToolbar", () => {
   beforeEach(() => {
-    mockCurrentRouteClick.mockClear();
-    mockBuildAndPush.mockClear();
-    mockPreview.mockClear();
+    jest.clearAllMocks();
   });
 
   it("should work", async () => {
@@ -55,6 +54,7 @@ describe("BuilderToolbar", () => {
 
   it("should work with custom template", async () => {
     mockUseBuilderUIContext.mockReturnValue({
+      onCurrentTemplateClick: mockCurrentTemplateClick,
       onCurrentRouteClick: mockCurrentRouteClick,
       onBuildAndPush: mockBuildAndPush,
       onPreview: mockPreview,
@@ -67,6 +67,14 @@ describe("BuilderToolbar", () => {
     });
     const wrapper = shallow(<BuilderToolbar />);
     expect(wrapper.find(".tabLink").length).toBe(4);
+    expect(
+      wrapper.find(".tabLink").filter("[data-testid='view-template']").length
+    ).toBe(1);
+    wrapper
+      .find(".tabLink")
+      .filter("[data-testid='view-template']")
+      .simulate("click");
+    expect(mockCurrentTemplateClick).toBeCalled();
   });
 
   it("should enter fullscreen", () => {

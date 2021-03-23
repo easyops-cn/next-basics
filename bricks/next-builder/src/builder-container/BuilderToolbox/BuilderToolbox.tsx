@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   PartitionOutlined,
   DatabaseOutlined,
@@ -14,6 +14,11 @@ import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
+import {
+  useBuilderDataManager,
+  useShowRelatedNodesBasedOnEvents,
+} from "@next-core/editor-bricks-helper";
+import { localStorageKeyForShowRelatedNodesBasedOnEvents } from "../constants";
 
 import styles from "./BuilderToolbox.module.css";
 
@@ -54,6 +59,19 @@ export function BuilderToolbox({
     setResizerStatus,
   ] = React.useState<ToolboxResizerStatus>(null);
   const [resized, setResized] = React.useState(false);
+
+  const manager = useBuilderDataManager();
+  const showRelatedEvents = useShowRelatedNodesBasedOnEvents();
+
+  useEffect(() => {
+    const showFromStorage = storage.getItem(
+      localStorageKeyForShowRelatedNodesBasedOnEvents
+    );
+    const shouldShow = activeTab === ToolboxTab.EVENTS_VIEW || showFromStorage;
+    if (shouldShow !== showRelatedEvents) {
+      manager.setShowRelatedNodesBasedOnEvents(shouldShow);
+    }
+  }, [activeTab]);
 
   const tabList: ToolboxTabConf[] = [
     {
