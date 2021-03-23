@@ -56,6 +56,11 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
     {
       brick: "forms.general-form",
       ref: "addCmdbObjectAttrForm",
+      properties: {
+        dataset: {
+          testid: "cmdb-object-attr-add-form",
+        },
+      },
       events: {
         "validate.success": {
           action: "console.log",
@@ -72,6 +77,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               brick: "forms.general-input",
               ref: "attrIdInput",
               properties: {
+                dataset: {
+                  testid: "cmdb-object-attr-add-id-input",
+                },
                 name: "id",
                 label: "属性ID",
                 required: true,
@@ -87,6 +95,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
             {
               brick: "forms.general-input",
               properties: {
+                dataset: {
+                  testid: "cmdb-object-attr-add-name-input",
+                },
                 name: "name",
                 label: "属性名称",
                 required: true,
@@ -100,6 +111,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               brick: "forms.cmdb-object-attr-value",
               ref: "attrValue",
               properties: {
+                dataset: {
+                  testid: "cmdb-object-attr-add-value-type-select",
+                },
                 name: "attrValue",
                 label: "值类型",
                 required: true,
@@ -196,6 +210,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
             {
               brick: "forms.general-input",
               properties: {
+                dataset: {
+                  testid: "cmdb-object-attr-add-tag-input",
+                },
                 name: "tag",
                 label: "属性分类",
                 placeholder: "请输入属性分类",
@@ -205,6 +222,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               brick: "forms.general-checkbox",
               ref: "attrOptions",
               properties: {
+                dataset: {
+                  testid: "cmdb-object-attr-add-limit-option",
+                },
                 name: "attrOptions",
                 label: "限制",
                 options: [
@@ -227,6 +247,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               brick: "forms.general-buttons",
               ref: "submitButton",
               properties: {
+                dataset: {
+                  testid: "cmdb-object-attr-add-submit-button",
+                },
                 id: "saveBtn",
                 submitText: "保存",
               },
