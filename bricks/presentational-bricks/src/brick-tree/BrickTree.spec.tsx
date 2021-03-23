@@ -62,9 +62,7 @@ const dataSource = [
 
 describe("BrickTree", () => {
   it("should show up empty component when tree data is null", () => {
-    const wrapper = shallow<BrickTreeProps>(
-      <BrickTree dataSource={[]} searchable />
-    );
+    const wrapper = shallow<BrickTreeProps>(<BrickTree dataSource={[]} />);
 
     expect(wrapper.find(Empty).length).toBe(1);
   });
@@ -83,8 +81,9 @@ describe("BrickTree", () => {
   });
 
   it("should be able to check all", () => {
+    const onCheck = jest.fn();
     const wrapper = shallow<BrickTreeProps>(
-      <BrickTree dataSource={dataSource} searchable />
+      <BrickTree dataSource={dataSource} searchable onCheck={onCheck} />
     );
 
     let checkAllCheckbox = wrapper
@@ -101,6 +100,12 @@ describe("BrickTree", () => {
       .find(Checkbox)
       .filter("[data-testid='check-all-checkbox']");
     expect(checkAllCheckbox).toHaveLength(1);
+    let checkAllCheckboxProps = wrapper
+      .find(Checkbox)
+      .filter("[data-testid='check-all-checkbox']")
+      .props();
+    expect(checkAllCheckboxProps.checked).toBe(false);
+    expect(checkAllCheckboxProps.indeterminate).toBe(false);
 
     // 全选
     checkAllCheckbox.invoke("onChange")({
@@ -122,12 +127,17 @@ describe("BrickTree", () => {
       checkedKeys.filter((key) => !key.startsWith("1")),
       {}
     );
-    let checkAllCheckboxProps = wrapper
+    checkAllCheckboxProps = wrapper
       .find(Checkbox)
       .filter("[data-testid='check-all-checkbox']")
       .props();
     expect(checkAllCheckboxProps.checked).toBe(false);
     expect(checkAllCheckboxProps.indeterminate).toBe(true);
+    let checkedNum = wrapper.find(".checkedNum");
+    expect(checkedNum.text()).toEqual("已选 4 项");
+    expect(onCheck).lastCalledWith(
+      checkedKeys.filter((key) => !key.startsWith("1"))
+    );
 
     // 树全选
     tree.invoke("onCheck")(checkedKeys, {});
@@ -137,6 +147,9 @@ describe("BrickTree", () => {
       .props();
     expect(checkAllCheckboxProps.checked).toBe(true);
     expect(checkAllCheckboxProps.indeterminate).toBe(false);
+    checkedNum = wrapper.find(".checkedNum");
+    expect(checkedNum.text()).toEqual("已选 6 项");
+    expect(onCheck).lastCalledWith(checkedKeys);
 
     // 树全不勾选
     tree.invoke("onCheck")([], {});
@@ -146,6 +159,9 @@ describe("BrickTree", () => {
       .props();
     expect(checkAllCheckboxProps.checked).toBe(false);
     expect(checkAllCheckboxProps.indeterminate).toBe(false);
+    checkedNum = wrapper.find(".checkedNum");
+    expect(checkedNum.text()).toEqual("已选 0 项");
+    expect(onCheck).lastCalledWith([]);
   });
 
   it("should work when set checkedFilterConfig", () => {

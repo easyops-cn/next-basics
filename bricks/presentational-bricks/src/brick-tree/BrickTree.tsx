@@ -7,7 +7,18 @@ import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { TreeIcon, BrickTreeNodeProps } from "./index";
 import { checkedFilterProps } from "../interfaces/brick-tree";
-import { uniqueId, isEmpty, eq, lt, lte, gt, gte, get, difference } from "lodash";
+import {
+  uniqueId,
+  isEmpty,
+  eq,
+  lt,
+  lte,
+  gt,
+  gte,
+  get,
+  difference,
+  intersection,
+} from "lodash";
 import { EventDataNode } from "rc-tree/lib/interface";
 import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
@@ -75,6 +86,22 @@ function getAllKeys(nodes: DataNode[], keys?: React.Key[]): React.Key[] {
   });
 
   return keys;
+}
+
+// istanbul ignore next
+function getAllCheckedState(
+  treeData: DataNode[],
+  checkedKeySet: Set<React.Key>
+): boolean {
+  return treeData
+    .filter((v) => !v.disabled)
+    .every((node) =>
+      checkedKeySet.has(node.key)
+        ? true
+        : node.children && node.children.filter((v) => !v.disabled).length !== 0
+        ? getAllCheckedState(node.children, checkedKeySet)
+        : false
+    );
 }
 
 export interface BrickTreeProps {
@@ -147,11 +174,24 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   useEffect(() => {
     setSelectedKeys(_selectedKeys);
   }, [_selectedKeys]);
+  // istanbul ignore next
   useEffect(() => {
     setCheckedKeys(_checkedKeys);
-  }, [_checkedKeys]);
-  useEffect(() => {
     setFilterCheckedKeys(difference(_checkedKeys, filterTreeKeys));
+    if (Array.isArray(_checkedKeys)) {
+      if (
+        _checkedKeys.length === 0 ||
+        intersection(_checkedKeys, getAllKeys(treeData))?.length === 0
+      ) {
+        setAllChecked(false);
+        setIndeterminate(false);
+      } else {
+        const checkedKeySet = new Set(_checkedKeys);
+        const allChecked = getAllCheckedState(treeData, checkedKeySet);
+        setAllChecked(allChecked);
+        setIndeterminate(!allChecked);
+      }
+    }
   }, [_checkedKeys]);
   useEffect(() => {
     setExpandedKeys(_expandedKeys);
