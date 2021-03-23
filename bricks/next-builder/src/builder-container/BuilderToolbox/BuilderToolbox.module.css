@@ -1,9 +1,8 @@
 .builderToolbox {
-  width: 273px;
   flex-shrink: 0;
   display: flex;
-  overflow: hidden;
   background-color: #091732;
+  position: relative;
 }
 
 .tabList {
@@ -34,4 +33,18 @@
 .tabContent {
   flex: auto;
   min-width: 0;
+}
+
+.toolboxResizer {
+  position: absolute;
+  width: 4px;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  cursor: col-resize;
+
+  &:hover {
+    background: #007fd4;
+    transition: background 0.1s 0.3ms ease-out;
+  }
 }
