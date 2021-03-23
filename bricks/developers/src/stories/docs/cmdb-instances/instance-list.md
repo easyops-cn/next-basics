@@ -21,12 +21,13 @@
 
 # EVENTS
 
-| type                         | detail                                                 | description          |
-| ---------------------------- | ------------------------------------------------------ | -------------------- |
-| "read.search.change"         | {q:string}                                             | 搜索参数变化         |
-| "read.advancedSearch.change" | {aq:json}                                              | 高级搜索参数变化     |
-| "read.multiple.clickItem"    | {id:string}                                            | 点击某条实例         |
-| "read.pagination.change"     | {page:number;pageSize:string}                          | 页码和每页条数变化   |
-| "read.selection.change"      | {selectedKeys:string[] \| number[];selectedItems:T[];} | 勾选变化             |
-| "read.relatedToMe.change"    | {relatedToMe:boolean}                                  | "与我有关"勾选框变化 |
-| "read.alive.hosts.change"    | {aliveHosts:boolean}                                   | "正常主机"勾选框变化 |
+| type                         | detail                                                                               | description                     |
+| ---------------------------- | ------------------------------------------------------------------------------------ | ------------------------------- |
+| "read.search.change"         | {q:string}                                                                           | 搜索参数变化                    |
+| "read.search.execute"        | {query: Record<string, any>, fields: Record<string, any>, only_my_instance: boolean} | 搜索请求的实际参数（http body） |
+| "read.advancedSearch.change" | {aq:json}                                                                            | 高级搜索参数变化                |
+| "read.multiple.clickItem"    | {id:string}                                                                          | 点击某条实例                    |
+| "read.pagination.change"     | {page:number;pageSize:string}                                                        | 页码和每页条数变化              |
+| "read.selection.change"      | {selectedKeys:string[] \| number[];selectedItems:T[];}                               | 勾选变化                        |
+| "read.relatedToMe.change"    | {relatedToMe:boolean}                                                                | "与我有关"勾选框变化            |
+| "read.alive.hosts.change"    | {aliveHosts:boolean}                                                                 | "正常主机"勾选框变化            |
