@@ -145,7 +145,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     if (lockRef.current) {
       return;
     }
-    !enableMyDesktop && (rememberedDesktopCursor = index);
+    rememberedDesktopCursor = index;
     setDesktopCursor(index);
     // 一次滑动一个屏幕，锁定期间内，不能继续滑动屏幕。
     lockRef.current = true;
