@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.39.3...@next-bricks/next-builder@1.40.0) (2021-03-23)
+
+
+### Features
+
+* **builder:** support resizing toolbox column ([fa54ca3](https://github.com/easyops-cn/next-basics/commit/fa54ca33f7b0088be849f769b98adf8fc9cb1ae9))
+
+
+
+
+
 ## [1.39.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.39.2...@next-bricks/next-builder@1.39.3) (2021-03-22)
 
 
