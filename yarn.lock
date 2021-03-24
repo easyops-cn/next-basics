@@ -2038,7 +2038,7 @@
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.9.2.tgz#c8ba72d683ed5135b602710fc811d40196eab4ec"
   integrity sha1-yLpy1oPtUTW2AnEPyBHUAZbqtOw=
 
-"@next-core/brick-kit@^2.37.3", "@next-core/brick-kit@^2.38.0":
+"@next-core/brick-kit@^2.38.0":
   version "2.38.0"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.38.0.tgz#da8e841f1be6978d8708cd69927c52e8378561d9"
   integrity sha512-XVva7c2mt4JHdQm/bTi2HAs3RLd0/og0mM+z6z9S1Xjb1rgJTp9KLRbqhazBmdk8GOIVFxZGJeWVuY69ErqiCw==
@@ -2170,7 +2170,7 @@
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/-/easyops-analytics-0.1.8.tgz#c8cd83d184fa0cc244b3d46c3658af5e3ee194aa"
   integrity sha1-yM2D0YT6DMJEs9RsNlivXj7hlKo=
 
-"@next-core/editor-bricks-helper@^0.16.0", "@next-core/editor-bricks-helper@^0.16.1":
+"@next-core/editor-bricks-helper@^0.16.1":
   version "0.16.1"
   resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.16.1.tgz#ffc5199a04535fe66663fbd6fd7e6b0818de9227"
   integrity sha512-gN52STiNxZeiubc8+kVoqJW6amnih1CDAyPOK6anv9eMs1O4ReHVXcLO7Eyd8wc44/zniP2g1TMeeWpVsqg7Kg==
