@@ -5,6 +5,7 @@
   align-items: center;
 }
 
+.nodeHover,
 .brickWithEventsItem:hover,
 .brickWithEventsItem.active {
   background-color: rgba(255, 255, 255, 0.06);
@@ -20,6 +21,7 @@
   text-overflow: ellipsis;
 }
 
+.nodeHover .nodeAlias,
 .brickWithEventsItem:hover .nodeAlias,
 .brickWithEventsItem.active .nodeAlias {
   color: #4e93ef;

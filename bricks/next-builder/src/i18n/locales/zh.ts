@@ -11,7 +11,7 @@ const locale: Locale = {
   [K.SEARCH_ROUTE]: "搜索路由",
   [K.SEARCH_TEMPLATE]: "搜索模板",
   [K.ADD_DATA]: "添加数据",
-  [K.SETTING]: "设置",
+  [K.SETTINGS]: "设置",
   [K.BRICK_LIBRARY]: "构件库",
   [K.VIEW_ROUTE]: "查看路由",
   [K.VIEW_TEMPLATE]: "查看模板",
@@ -44,6 +44,8 @@ const locale: Locale = {
     "数据可以是变量值，也可以是使用 Provider 构件调用获取的远端接口数据。",
   [K.DATA_VIEW_TIPS_3]: "数据在 Storyboard 中也被称作 <i>Context</i>。",
   [K.FIND_BRICKS_BY_CONFIGURATION]: "根据配置信息查找构件",
+  [K.SHOW_RELATED_NODES_BASED_ON_EVENTS_WHEN_HOVERING]:
+    "悬停时根据事件显示关联构件",
 };
 
 export default locale;

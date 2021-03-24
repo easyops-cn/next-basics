@@ -104,3 +104,6 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
 export const treeViewPaddingUnit = 14;
 
 export const defaultToolboxTab = ToolboxTab.TREE_VIEW;
+
+export const localStorageKeyForShowRelatedNodesBasedOnEvents =
+  "next-builder-show-related-bricks-based-on-events";

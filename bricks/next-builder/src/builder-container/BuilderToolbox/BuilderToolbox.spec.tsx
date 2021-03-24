@@ -6,6 +6,10 @@ import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { defaultToolboxTab } from "../constants";
 import { BuilderDataType, ToolboxTab } from "../interfaces";
+import {
+  useBuilderDataManager,
+  useShowRelatedNodesBasedOnEvents,
+} from "@next-core/editor-bricks-helper";
 
 jest.mock("@next-libs/storage");
 jest.mock("../BuilderUIContext");
@@ -14,6 +18,14 @@ jest.mock("../StoryboardTreeView/StoryboardTreeView", () => ({
     return <div>StoryboardTreeView</div>;
   },
 }));
+jest.mock("@next-core/editor-bricks-helper");
+
+const mockSetShowRelatedNodesBasedOnEvents = jest.fn();
+const mockManager = {
+  setShowRelatedNodesBasedOnEvents: mockSetShowRelatedNodesBasedOnEvents,
+};
+(useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
+(useShowRelatedNodesBasedOnEvents as jest.Mock).mockReturnValue(true);
 
 const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext

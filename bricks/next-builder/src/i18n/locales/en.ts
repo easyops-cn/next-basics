@@ -11,7 +11,7 @@ const locale: Locale = {
   [K.SEARCH_ROUTE]: "Search route",
   [K.SEARCH_TEMPLATE]: "Search template",
   [K.ADD_DATA]: "Add Data",
-  [K.SETTING]: "Setting",
+  [K.SETTINGS]: "Settings",
   [K.VIEW_ROUTE]: "View Route",
   [K.VIEW_TEMPLATE]: "View Template",
   [K.BUILD_AND_PUSH_TOOLTIP]: "Build & Push (Ctrl+B)",
@@ -45,6 +45,8 @@ const locale: Locale = {
     "Data can be variable values, or responses from remote by using a provider brick.",
   [K.DATA_VIEW_TIPS_3]: "It is also as known as <i>Context</i> in storyboard.",
   [K.FIND_BRICKS_BY_CONFIGURATION]: "Find bricks by configuration",
+  [K.SHOW_RELATED_NODES_BASED_ON_EVENTS_WHEN_HOVERING]:
+    "Show related nodes based on events when hovering",
 };
 
 export default locale;

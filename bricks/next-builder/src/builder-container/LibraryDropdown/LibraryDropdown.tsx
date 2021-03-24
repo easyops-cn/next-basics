@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 import styles from "./LibraryDropdown.module.css";
+import shareStyles from "../share.module.css";
 
 export function LibraryDropdown(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -50,7 +51,7 @@ export function LibraryDropdown(): React.ReactElement {
   return (
     <Dropdown
       overlay={content}
-      overlayClassName={styles.customAnimation}
+      overlayClassName={shareStyles.customAnimation}
       trigger={["click"]}
       placement="bottomLeft"
       visible={visible}

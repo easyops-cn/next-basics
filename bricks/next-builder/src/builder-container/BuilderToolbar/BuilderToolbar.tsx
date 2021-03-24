@@ -8,6 +8,7 @@ import {
   BlockOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import {
   BuilderRouteNode,
@@ -17,9 +18,11 @@ import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import styles from "./BuilderToolbar.module.css";
 import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
 import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
+import { SettingDropdown } from "../SettingDropdown/SettingDropdown";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { BuilderDataType } from "../interfaces";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
+import shareStyles from "../share.module.css";
 
 export function BuilderToolbar(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -62,7 +65,7 @@ export function BuilderToolbar(): React.ReactElement {
         {dataType === BuilderDataType.CUSTOM_TEMPLATE ? (
           <Tooltip title={t(K.VIEW_TEMPLATE)} placement="bottomLeft">
             <a
-              className={styles.tabLink}
+              className={shareStyles.tabLink}
               role="button"
               onClick={handleTemplateClick}
               data-testid="view-template"
@@ -73,7 +76,7 @@ export function BuilderToolbar(): React.ReactElement {
         ) : (
           <Tooltip title={t(K.VIEW_ROUTE)} placement="bottomLeft">
             <a
-              className={styles.tabLink}
+              className={shareStyles.tabLink}
               role="button"
               onClick={handleRouteClick}
               data-testid="view-route"
@@ -88,7 +91,7 @@ export function BuilderToolbar(): React.ReactElement {
         <LibraryDropdown />
         <Tooltip title={t(K.BUILD_AND_PUSH_TOOLTIP)} placement="bottomRight">
           <a
-            className={styles.tabLink}
+            className={shareStyles.tabLink}
             role="button"
             onClick={handleBuildAndPush}
             data-testid="build-and-push"
@@ -98,7 +101,7 @@ export function BuilderToolbar(): React.ReactElement {
         </Tooltip>
         <Tooltip title={t(K.PREVIEW)} placement="bottomRight">
           <a
-            className={styles.tabLink}
+            className={shareStyles.tabLink}
             role="button"
             onClick={handlePreview}
             data-testid="preview"
@@ -106,12 +109,13 @@ export function BuilderToolbar(): React.ReactElement {
             <CaretRightOutlined />
           </a>
         </Tooltip>
+        <SettingDropdown />
         <Tooltip
           title={t(fullscreen ? K.EXIT_FULLSCREEN : K.ENTER_FULLSCREEN)}
           placement="bottomRight"
         >
           <a
-            className={styles.tabLink}
+            className={shareStyles.tabLink}
             role="button"
             onClick={handleToggleFullscreen}
             data-testid="toggle-fullscreen"

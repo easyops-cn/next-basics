@@ -31,7 +31,7 @@ export function ContextItemFormModal({
   return (
     <Modal
       width={640}
-      title={isCreate ? t(K.ADD_DATA) : `${t(K.SETTING)} - ${data.name}`}
+      title={isCreate ? t(K.ADD_DATA) : `${t(K.SETTINGS)} - ${data.name}`}
       visible={visible}
       onOk={onOk}
       onCancel={onCancel}

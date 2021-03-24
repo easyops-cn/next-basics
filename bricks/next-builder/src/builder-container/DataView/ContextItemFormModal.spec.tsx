@@ -54,8 +54,10 @@ describe("ContextItemFormModal", () => {
         onCancel={handleCancel}
       />
     );
-    expect(wrapper.find(Modal).prop("title")).toBe(`${i18next.t(K.SETTING)} - data-a`);
-    
+    expect(wrapper.find(Modal).prop("title")).toBe(
+      `${i18next.t(K.SETTINGS)} - data-a`
+    );
+
     wrapper.setProps({
       data: undefined,
     });
