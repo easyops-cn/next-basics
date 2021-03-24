@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.111.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.1...@next-bricks/basic-bricks@1.111.2) (2021-03-24)
+
+
+### Bug Fixes
+
+* 恢复记忆上次 launchpad 打开tab ([e5ee754](https://github.com/easyops-cn/next-basics/commit/e5ee7545ab8836187752fa4c1f39a75e2a112ea1))
+* 我的收藏增加为空提示 ([a0e68aa](https://github.com/easyops-cn/next-basics/commit/a0e68aab2cc789da5e3d0599da80d6ba2b831086))
+* 扩展最近访问和收藏个数 ([47c153a](https://github.com/easyops-cn/next-basics/commit/47c153a5ae0890294a5a211c1f63e9d04b43e205))
+
+
+
+
+
 ## [1.111.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.0...@next-bricks/basic-bricks@1.111.1) (2021-03-22)
 
 

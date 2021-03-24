@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.40.0...@next-bricks/next-builder@1.41.0) (2021-03-24)
+
+
+### Features
+
+* **editor-container:** get related nodes based on events ([8141b6d](https://github.com/easyops-cn/next-basics/commit/8141b6d147bf0e6b08a9fc85c5d48be699269fa5))
+
+
+
+
+
 # [1.40.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.39.3...@next-bricks/next-builder@1.40.0) (2021-03-23)
 
 
