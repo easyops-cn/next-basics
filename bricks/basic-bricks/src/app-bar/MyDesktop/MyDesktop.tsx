@@ -5,7 +5,6 @@ import { SettingOutlined, LoadingOutlined } from "@ant-design/icons";
 import { FavoriteDesktopCell } from "../FavoriteDesktopCell/FavoriteDesktopCell";
 import classNames from "classnames";
 import { launchpadService } from "../LaunchpadService";
-import { LaunchpadApi } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { Spin } from "antd";
 import { isEmpty } from "lodash";
@@ -31,20 +30,6 @@ export function MyDesktop(props: MyDesktopProps): React.ReactElement {
       getFavoriteList();
     })();
   }, []);
-
-  const handleDeleteFavorite = async (
-    item: LaunchpadApi.ListCollectionResponseItem
-  ) => {
-    try {
-      await launchpadService.deleteFavorite(
-        item.launchpadCollection.instanceId
-      );
-    } catch (e) {
-      // Nothing to cache
-    }
-
-    await getFavoriteList();
-  };
 
   const handleOnSetAsFavorite = async () => {
     await getFavoriteList();
@@ -95,11 +80,7 @@ export function MyDesktop(props: MyDesktopProps): React.ReactElement {
         {!isEmpty(favoriteList) ? (
           <div className={styles.favoriteContainer}>
             {favoriteList?.map((item, index) => (
-              <FavoriteDesktopCell
-                key={index}
-                item={item}
-                onDelete={handleDeleteFavorite}
-              />
+              <FavoriteDesktopCell key={index} item={item} />
             ))}
           </div>
         ) : (

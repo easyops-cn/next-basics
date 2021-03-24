@@ -153,10 +153,6 @@ describe("MyDesktop", () => {
 
     expect(wrapper.find(FavoriteDesktopCell)).toHaveLength(1);
 
-    wrapper.find(FavoriteDesktopCell).at(0).invoke("onDelete")(favoriteList[0]);
-    expect(launchpadService.deleteFavorite).toHaveBeenCalledWith(
-      "5b8ee4e5c352c"
-    );
     await act(async () => {
       await (global as any).flushPromises();
     });
