@@ -2038,7 +2038,7 @@
   resolved "https://registry.npmjs.org/@next-core/brick-icons/download/@next-core/brick-icons-2.9.2.tgz#c8ba72d683ed5135b602710fc811d40196eab4ec"
   integrity sha1-yLpy1oPtUTW2AnEPyBHUAZbqtOw=
 
-"@next-core/brick-kit@^2.37.2", "@next-core/brick-kit@^2.37.3":
+"@next-core/brick-kit@^2.37.3":
   version "2.37.3"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.37.3.tgz#41c489775ed0b9b1a45de87c85974d8eeddae758"
   integrity sha512-LGsqJe1ZzBmUCMg0nmBAO3uyhC15A0dfi2VptEDMlm0FkmAR6pECVARummVV17bgG6eINEiIx/dnZXtQ3UyQ0A==
@@ -2068,12 +2068,12 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.20.0", "@next-core/brick-types@^2.20.1":
-  version "2.20.0"
-  resolved "https://registry.npmjs.org/@next-core/brick-types/download/@next-core/brick-types-2.20.0.tgz#50e84d00190b8c425baa7c0d7a228f93ec98d9ae"
-  integrity sha1-UOhNABkLjEJbqnwNeiKPk+yY2a4=
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.20.1":
+  version "2.20.1"
+  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.20.1.tgz#b3f69c1a87509da82f5f17c2b857b59aa06cadc1"
+  integrity sha512-CikergYVSYs56wAsLwgP/OSpEUs1bftBAi7pDtTmbc0P2RqnQJaHCoqGJy1WysbqgqJLYuqyAXeLAu4xI7IbCw==
 
-"@next-core/brick-utils@^2.14.0", "@next-core/brick-utils@^2.14.1":
+"@next-core/brick-utils@^2.14.1":
   version "2.14.1"
   resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.14.1.tgz#2ab18a28d869869846edf23cee4710be64a927a5"
   integrity sha512-jsH8RWcdRqJhwzzIToYMSk0CKRsN8n39v2FQLA+NH2BKsDbYdXIYNk+D+07VwBU0nVhdsIFen3zhJCvKhp1Bxw==
@@ -2169,15 +2169,6 @@
   version "0.1.8"
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/download/@next-core/easyops-analytics-0.1.8.tgz#c8cd83d184fa0cc244b3d46c3658af5e3ee194aa"
   integrity sha1-yM2D0YT6DMJEs9RsNlivXj7hlKo=
-
-"@next-core/editor-bricks-helper@^0.15.1":
-  version "0.15.1"
-  resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/download/@next-core/editor-bricks-helper-0.15.1.tgz#7183f2dd618f310050951cbbfe37ee3e89e50b33"
-  integrity sha1-cYPy3WGPMQBQlRy7/jfuPonlCzM=
-  dependencies:
-    "@next-core/brick-types" "^2.20.0"
-    "@ungap/event-target" "^0.2.2"
-    classnames "^2.2.6"
 
 "@next-core/editor-bricks-helper@^0.16.0":
   version "0.16.0"
