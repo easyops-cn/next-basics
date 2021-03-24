@@ -199,9 +199,11 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
         if (appCursor >= 0 && appCursor < currentDesktop.items.length) {
           const cell = currentDesktop.items[appCursor];
           if (cell.type === "app") {
+            launchpadService.pushVisitor("app", cell.app);
             getRuntime().resetWorkspaceStack();
             getHistory().push(cell.app.homepage);
           } else if (cell.type === "custom") {
+            launchpadService.pushVisitor("custom", cell);
             window.open(cell.url);
           } else if (cell.type === "dir") {
             // Calculate the approximate coordinates of a dir.
