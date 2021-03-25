@@ -128,6 +128,7 @@ export function BuilderToolbox({
 
   const handleColResizeMouseDown = React.useCallback(
     (event: React.MouseEvent) => {
+      // Prevent text selecting.
       event.preventDefault();
       setResizerStatus({
         startWidth: toolboxWidth,
@@ -209,9 +210,14 @@ export function BuilderToolbox({
         {tabList.find((tabConf) => tabConf.tab === activeTab)?.content()}
       </div>
       <div
-        className={styles.toolboxResizer}
+        className={classNames(styles.toolboxResizer, {
+          [styles.toolboxResizerActive]: !!resizerStatus,
+        })}
         onMouseDown={handleColResizeMouseDown}
-      />
+      >
+        {/* Use a fullscreen mask to keep cursor status when dragging the resizer. */}
+        <div className={styles.toolboxResizerMask} />
+      </div>
     </div>
   );
 }

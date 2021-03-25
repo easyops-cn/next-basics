@@ -48,3 +48,17 @@
     transition: background 0.1s 0.3ms ease-out;
   }
 }
+
+.toolboxResizerMask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  display: none;
+}
+
+.toolboxResizerActive .toolboxResizerMask {
+  display: block;
+}

@@ -94,18 +94,24 @@ describe("BuilderToolbox", () => {
 
   it("should handle col-resize", () => {
     const wrapper = mount(<BuilderToolbox />);
-    const getWidth = (): number =>
+    const getToolboxWidth = (): number =>
       wrapper.find(".builderToolbox").prop("style").width as number;
+    const isResizerActive = (): boolean =>
+      wrapper.find(".toolboxResizer").hasClass("toolboxResizerActive");
 
-    expect(getWidth()).toBe(273);
+    expect(getToolboxWidth()).toBe(273);
+    expect(isResizerActive()).toBe(false);
 
+    // Start dragging.
     const mockPreventDefault = jest.fn();
     wrapper.find(".toolboxResizer").invoke("onMouseDown")({
       clientX: 300,
       preventDefault: mockPreventDefault,
     } as any);
     expect(mockPreventDefault).toBeCalled();
+    expect(isResizerActive()).toBe(true);
 
+    // Make a move.
     act(() => {
       window.dispatchEvent(
         new MouseEvent("mousemove", {
@@ -114,15 +120,18 @@ describe("BuilderToolbox", () => {
       );
     });
     wrapper.update();
-    expect(getWidth()).toBe(283);
+    expect(getToolboxWidth()).toBe(283);
 
+    // Stop dragging.
     act(() => {
       window.dispatchEvent(new MouseEvent("mouseup"));
     });
+    wrapper.update();
     const mockJsonStorageSetItem = mockJsonStorage.mock.instances[0].setItem;
     expect(mockJsonStorageSetItem).toBeCalledWith(
       "next-builder-toolbox-width",
       283
     );
+    expect(isResizerActive()).toBe(false);
   });
 });
