@@ -2,12 +2,11 @@ import React, { useMemo } from "react";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import classNames from "classnames";
 import styles from "./FavoriteDesktopCell.module.css";
-import { CloseCircleFilled } from "@ant-design/icons";
 import { LaunchpadApi } from "@next-sdk/user-service-sdk";
 import { launchpadService } from "../LaunchpadService";
 interface FavoriteDesktopCellProps {
   item: LaunchpadApi.ListCollectionResponseItem;
-  onDelete: (item: LaunchpadApi.ListCollectionResponseItem) => void;
+  onDelete?: (item: LaunchpadApi.ListCollectionResponseItem) => void;
 }
 
 export function FavoriteDesktopCell({
@@ -47,11 +46,6 @@ export function FavoriteDesktopCell({
     }
   };
 
-  const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onDelete?.(item);
-  };
-
   const realLink = useMemo(() => {
     const link = item.launchpadCollection.link;
     if (item.launchpadCollection.type === "microApp") return link;
@@ -78,11 +72,6 @@ export function FavoriteDesktopCell({
             </span>
           </>
         </Link>
-
-        <CloseCircleFilled
-          className={styles.closeIcon}
-          onClick={handleDelete}
-        />
       </div>
     </div>
   );

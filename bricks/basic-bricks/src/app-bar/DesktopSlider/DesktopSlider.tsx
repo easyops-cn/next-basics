@@ -187,21 +187,25 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   // Press arrow key to select an app.
   React.useEffect(() => {
     const onKeydown = (event: KeyboardEvent): void => {
+      // 第一栏为我的面板，须过滤掉(PS: 但是搜索时 desktopCursor 为0是可以的)
+      if (enableMyDesktop && desktopCursor === 0 && !props.q) return;
       const key =
         event.key ||
         /* istanbul ignore next: compatibility */ event.keyCode ||
         /* istanbul ignore next: compatibility */ event.which;
       const currentDesktop = props.q
         ? filteredDesktop
-        : desktops[desktopCursor];
+        : desktops[enableMyDesktop ? desktopCursor - 1 : desktopCursor];
       if (key === "Enter" || key === 13) {
         event.preventDefault();
         if (appCursor >= 0 && appCursor < currentDesktop.items.length) {
           const cell = currentDesktop.items[appCursor];
           if (cell.type === "app") {
+            launchpadService.pushVisitor("app", cell.app);
             getRuntime().resetWorkspaceStack();
             getHistory().push(cell.app.homepage);
           } else if (cell.type === "custom") {
+            launchpadService.pushVisitor("custom", cell);
             window.open(cell.url);
           } else if (cell.type === "dir") {
             // Calculate the approximate coordinates of a dir.
@@ -341,7 +345,11 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
               desktop={desktop}
               desktopCount={desktops.length}
               arrowWidthPercent={props.arrowWidthPercent}
-              activeIndex={desktopCursor === index ? appCursor : -1}
+              activeIndex={
+                (enableMyDesktop ? desktopCursor - 1 : desktopCursor) === index
+                  ? appCursor
+                  : -1
+              }
             />
           ))}
         </div>

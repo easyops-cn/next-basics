@@ -3,7 +3,6 @@ import { shallow } from "enzyme";
 const mockOnDelete = jest.fn();
 import { FavoriteDesktopCell } from "./FavoriteDesktopCell";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
-import { CloseCircleFilled } from "@ant-design/icons";
 
 jest.mock("../LaunchpadService", () => {
   return {
@@ -15,8 +14,7 @@ jest.mock("../LaunchpadService", () => {
     },
   };
 });
-const spyOnWindowOpen = window.open = jest.fn();
-const stopPropagation = jest.fn();
+const spyOnWindowOpen = (window.open = jest.fn());
 const preventDefault = jest.fn();
 
 describe("FavoriteDesktopCell", () => {
@@ -46,19 +44,10 @@ describe("FavoriteDesktopCell", () => {
     );
     expect(wrapper.find(".name").text()).toBe("world");
 
-    wrapper.find(CloseCircleFilled).invoke("onClick")({
-      stopPropagation,
-      preventDefault,
-    } as any);
-    expect(mockOnDelete).toHaveBeenCalledWith(item);
-    expect(stopPropagation).toHaveBeenCalled();
-
     wrapper.find(Link).invoke("onClick")({
-      stopPropagation,
       preventDefault,
     } as any);
     expect(wrapper.find(Link).prop("to")).toBe("/home");
-    expect(stopPropagation).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
       item: {
@@ -83,11 +72,9 @@ describe("FavoriteDesktopCell", () => {
     wrapper.update();
 
     wrapper.find(Link).invoke("onClick")({
-      stopPropagation,
       preventDefault,
     } as any);
     expect(wrapper.find(Link).prop("to")).toBe("http://www.baidu.com");
-    expect(stopPropagation).toHaveBeenCalledTimes(1);
     expect(preventDefault).toHaveBeenCalledTimes(1);
     expect(spyOnWindowOpen).toHaveBeenCalledWith(
       "http://www.baidu.com",
