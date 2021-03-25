@@ -1,13 +1,17 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import { Button, Form, Modal } from "antd";
 import { PlusOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { Trans, useTranslation } from "react-i18next";
 import update from "immutability-helper";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import {
+  useBuilderNode,
+  useBuilderData,
+  useBuilderDataManager,
+} from "@next-core/editor-bricks-helper";
 import { ContextConf } from "@next-core/brick-types";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import styles from "./DataView.module.css";
-import { findIndex, uniqueId } from "lodash";
+import { findIndex, uniqueId, escape } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { ContextItem } from "./ContextItem";
@@ -15,6 +19,7 @@ import { useBuilderUIContext } from "../BuilderUIContext";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { searchList } from "../utils/utils";
 import { safeDumpFields } from "./utils";
+import { findQueryInNode } from "../utils/findQueryInNode";
 
 const symbolId = Symbol("uid");
 
@@ -29,6 +34,7 @@ interface ContextConfWithSymbolId extends ContextConf {
 export function DataView({
   onContextUpdate,
 }: DataViewProps): React.ReactElement {
+  const { nodes } = useBuilderData();
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const { brickList } = useBuilderUIContext();
   const rootNode = useBuilderNode({ isRoot: true });
@@ -47,6 +53,8 @@ export function DataView({
   const [visible, setVisible] = useState<boolean>(false);
   const [settingItem, setSettingItem] = useState<ContextConf>();
   const settingUid = useRef<string | undefined>();
+  const [hoverContextName, setHoverContextName] = useState<string>();
+  const manager = useBuilderDataManager();
 
   const handleSearch = (value: string): void => {
     setQ(value);
@@ -56,6 +64,20 @@ export function DataView({
     () => searchList(contextWithUniqueSymbolId, q),
     [contextWithUniqueSymbolId, q]
   );
+
+  useEffect(() => {
+    const nodesToHighlight = new Set<number>();
+    if (hoverContextName) {
+      const escapeContextName = escape(hoverContextName);
+      const reg = new RegExp(`CTX\\.${escapeContextName}(?!\\w)`);
+      nodes?.forEach((node) => {
+        if (findQueryInNode(node, reg)) {
+          nodesToHighlight.add(node.$$uid);
+        }
+      });
+    }
+    manager.setHighlightNodes(nodesToHighlight);
+  }, [hoverContextName, nodes]);
 
   const setData = (contextValue?: ContextConf, uid?: string): void => {
     const isValue = !contextValue?.resolve;
@@ -91,7 +113,6 @@ export function DataView({
   };
 
   const handleOk = () => {
-    setVisible(false);
     settingItemForm.submit();
   };
 
@@ -105,6 +126,7 @@ export function DataView({
       },
     });
     onContextUpdate?.(newContext);
+    setVisible(false);
   };
 
   const handleCancel = () => {
@@ -152,6 +174,10 @@ export function DataView({
     onContextUpdate?.(newContext);
   };
 
+  const handleItemHover = (contextName?: string): void => {
+    setHoverContextName(contextName);
+  };
+
   return (
     <ToolboxPane
       title={t(K.DATA)}
@@ -183,6 +209,7 @@ export function DataView({
           {filteredContextList?.length > 0 &&
             filteredContextList.map((data, index) => (
               <ContextItem
+                handleItemHover={handleItemHover}
                 data={data}
                 handleItemClick={() => setData(data, data[symbolId])}
                 handleItemDelete={(e) => handleContextItemDelete(e, data)}

@@ -3,7 +3,7 @@ import { findQueryInObjectValues } from "./utils";
 
 export function findQueryInNode(
   node: BuilderRuntimeNode,
-  query: string
+  query: string | RegExp
 ): boolean {
   const fieldsToSearch = [
     "id",

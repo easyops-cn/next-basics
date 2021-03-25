@@ -144,7 +144,7 @@ describe("findQueryInNode", () => {
   it.each<
     [
       string,
-      { data: Record<string, any>; query: string; keys?: string[] },
+      { data: Record<string, any>; query: string | RegExp; keys?: string[] },
       boolean
     ]
   >([
@@ -176,6 +176,29 @@ describe("findQueryInNode", () => {
         keys: ["type"],
       },
       false,
+    ],
+    [
+      "should work when query is regexp",
+      {
+        data: {
+          $$uid: 1,
+          type: "brick",
+          brick: "my-brick",
+          id: "B-001",
+          instanceId: "instance-a",
+          events: {
+            click: {
+              action: "console.log",
+            },
+          },
+          properties: {
+            data: ["<% CTX.contextA %>"],
+          },
+        },
+        query: new RegExp("CTX\\.contextA(?!\\w)"),
+        keys: ["events", "properties"],
+      },
+      true,
     ],
   ])(
     "findQueryInObjectValues(%j) should work",
