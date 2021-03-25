@@ -7,7 +7,7 @@ const locale: Locale = {
   [K.DATA]: "数据 (Context)",
   [K.SEARCH_BRICKS_IN_LIBRARY]: "搜索构件",
   [K.SEARCH_DATA]: "根据配置信息查找数据",
-  [K.SEARCH_BRICKS_WITH_EVENTS]: "搜索内含事件的构件",
+  [K.SEARCH_BRICKS_WITH_EVENTS]: "搜索有事件关联的构件",
   [K.SEARCH_ROUTE]: "搜索路由",
   [K.SEARCH_TEMPLATE]: "搜索模板",
   [K.ADD_DATA]: "添加数据",
