@@ -6,7 +6,7 @@ const locale: Locale = {
   [K.EVENTS]: "Events",
   [K.DATA]: "Data (Context)",
   [K.SEARCH_BRICKS_IN_LIBRARY]: "Search bricks in library",
-  [K.SEARCH_DATA]: "Search data",
+  [K.SEARCH_DATA]: "Find data by configuration",
   [K.SEARCH_BRICKS_WITH_EVENTS]: "Search bricks with events",
   [K.SEARCH_ROUTE]: "Search route",
   [K.SEARCH_TEMPLATE]: "Search template",
