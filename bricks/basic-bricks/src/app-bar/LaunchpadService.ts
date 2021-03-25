@@ -42,7 +42,7 @@ export class LaunchpadService {
 
   async fetchFavoriteList() {
     const result = (
-      await LaunchpadApi.listCollection({ page: 1, pageSize: 24 })
+      await LaunchpadApi.listCollection({ page: 1, pageSize: 25 })
     ).list;
     this.setFavorites(result);
     return result;
