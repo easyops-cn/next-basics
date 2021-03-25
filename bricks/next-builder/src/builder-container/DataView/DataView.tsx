@@ -53,7 +53,7 @@ export function DataView({
   };
 
   const filteredContextList: ContextConfWithSymbolId[] = useMemo(
-    () => searchList(contextWithUniqueSymbolId, q, "name"),
+    () => searchList(contextWithUniqueSymbolId, q),
     [contextWithUniqueSymbolId, q]
   );
 
