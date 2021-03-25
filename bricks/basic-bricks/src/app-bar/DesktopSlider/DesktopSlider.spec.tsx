@@ -7,8 +7,16 @@ import { MyDesktop } from "../MyDesktop/MyDesktop";
 import * as context from "../LaunchpadSettingsContext";
 import { act } from "react-dom/test-utils";
 import * as brickKit from "@next-core/brick-kit";
+import { launchpadService } from "../LaunchpadService";
 
 jest.mock("../MyDesktop/MyDesktop");
+jest.mock("../DesktopDirContext", () => {
+  return {
+    useDesktopDirContext: jest.fn().mockReturnValue({
+      setDesktopDir: jest.fn(),
+    }),
+  };
+});
 jest.mock("../LaunchpadService", () => {
   return {
     launchpadService: {
@@ -33,8 +41,12 @@ jest.spyOn(context, "useLaunchpadSettingsContext").mockReturnValue({
 const getFeatureFlags = jest
   .fn()
   .mockReturnValue({ "enable-my-desktop": true });
-jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+const mockGetRuntime = jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getFeatureFlags,
+} as any);
+
+jest.spyOn(brickKit, "getHistory").mockReturnValue({
+  push: jest.fn,
 } as any);
 
 describe("Shallow FavoriteDesktopCell", () => {
@@ -397,6 +409,10 @@ describe("Mount DesktopSlider", () => {
     ["ArrowUp", 2],
     ["a", -1],
   ])("when press %s, new active should be %d", (key, index) => {
+    mockGetRuntime.mockReturnValue({
+      getFeatureFlags: () => ({ "enable-my-desktop": false }),
+    } as any);
+
     const wrapper = mount(
       <IsolatedDesktopSlider
         microApps={apps}
@@ -413,5 +429,30 @@ describe("Mount DesktopSlider", () => {
     });
     wrapper.update();
     expect(wrapper.find("Desktop").prop("activeIndex")).toBe(index);
+  });
+
+  it("active item with enter hotkey", () => {
+    mockGetRuntime.mockReturnValue({
+      getFeatureFlags: () => ({ "enable-my-desktop": true }),
+      resetWorkspaceStack: jest.fn(),
+    } as any);
+
+    const wrapper = mount(
+      <IsolatedDesktopSlider
+        microApps={apps}
+        desktops={desktops}
+        arrowWidthPercent={9}
+      />
+    );
+
+    act(() => {
+      window.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Enter",
+        })
+      );
+    });
+
+    expect(launchpadService.pushVisitor).toBeCalled();
   });
 });
