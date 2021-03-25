@@ -415,25 +415,6 @@ export class BrickTableElement extends UpdatingElement {
   hiddenColumns: Array<string | number>;
 
   /**
-   * @kind (string|number)[]
-   * @required false
-   * @default -
-   * @description 优化渲染的列（输入对应的 dataIndex），针对配置了 useBrick 的列。当前 antd 在更新 state 的时候，会全量渲染单元格，如果确定某一列在后续操作中不需要重新渲染，例如仅作为展示的单元格，可通过该属性设置以优化性能。注意，在树形表格中，当某一列内包含展开/收起按钮，则不应该设置该列。
-   */
-  @property({
-    attribute: false,
-  })
-  optimizedColumns: Array<string | number>;
-
-  /**
-   * @default -
-   * @required false
-   * @description 设置容器空状态时显示`empty`构件属性
-   */
-  @property({ attribute: false })
-  wrapperConfig: BrickWrapperConfig = {};
-
-  /**
    * @kind boolean
    * @required false
    * @default true
@@ -443,28 +424,6 @@ export class BrickTableElement extends UpdatingElement {
     attribute: false,
   })
   shouldUpdateUrlParams = true;
-
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 页码。后台搜索的时候一般不需要配置，列表接口返回格式通常为{list:[],page:1,pageSize:10,total:20}，即默认取自 page；前台搜索的时候，一般配置成 "${query.page=1|number}"
-   */
-  @property({
-    attribute: false,
-  })
-  page: number;
-
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 页码条数。后台搜索的时候一般不需要配置，列表接口返回格式通常为{list:[],page:1,pageSize:10,total:20}，即默认取自 pageSize/page_size；前台搜索的时候，一般配置成 "${query.pageSize=10|number}"
-   */
-  @property({
-    attribute: false,
-  })
-  pageSize: number;
 
   // 表头过滤的 filters
   /**
@@ -477,6 +436,29 @@ export class BrickTableElement extends UpdatingElement {
     attribute: false,
   })
   filters: Record<string, string[]>;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否显示外层卡片
+   */
+  @property({
+    attribute: false,
+  })
+  showCard = true;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description ant-design 的 Table 相关配置项,具体查阅：[https://ant.design/components/table-cn/#Table](https://ant.design/components/table-cn/#Table)，其中分页配置和行选择配值在构件中设置了常用的默认配置，也可自行覆盖，具体描述见下表
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  configProps: any;
 
   /**
    * @kind string
@@ -499,39 +481,6 @@ export class BrickTableElement extends UpdatingElement {
   order: string | number;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 前端搜索参数
-   */
-  @property({
-    attribute: false,
-  })
-  frontSearchQuery = "";
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否显示外层卡片
-   */
-  @property({
-    attribute: false,
-  })
-  showCard = true;
-
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description ant-design 的 Table 相关配置项,具体查阅：[https://ant.design/components/table-cn/#Table](https://ant.design/components/table-cn/#Table)，其中分页配置和行选择配值在构件中设置了常用的默认配置，也可自行覆盖，具体描述见下表
-   */
-  @property({
-    attribute: false,
-  })
-  configProps: any;
-
-  /**
    * @kind RowDisabledProps
    * @required false
    * @default -
@@ -542,22 +491,13 @@ export class BrickTableElement extends UpdatingElement {
   })
   rowDisabledConfig: RowDisabledProps;
 
-  /**
-   * @required false
-   * @default false
-   * @description 树形数据展示时是否需要去除空数组
-   */
-  @property({
-    attribute: false,
-  })
-  stripEmptyExpandableChildren = false;
-
   // start -- 行展开相关属性
   /**
    * @kind {useBrick:UseBrickConf}
    * @required false
    * @default -
    * @description 自定义行展开的构件
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -567,10 +507,26 @@ export class BrickTableElement extends UpdatingElement {
   };
 
   /**
+   * @kind { collapsedIcon: MenuIcon,expandedIcon: MenuIcon}
+   * @required false
+   * @default {collapsedIcon:{lib:'antd',icon:'down',theme:'outlined'},expandedIcon:{lib:'antd',icon:'right',theme:'outlined'}}
+   * @description 自定义展开图标。
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  expandIcon: {
+    collapsedIcon: MenuIcon;
+    expandedIcon: MenuIcon;
+  };
+
+  /**
    * @kind boolean
    * @required false
    * @default true
    * @description 展开的图标是否为一个单元格，默认显示在第一列；设置为 false 的时候，可以通过`expandIconColumnIndex`属性设置展开的图标在哪一列
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -578,21 +534,11 @@ export class BrickTableElement extends UpdatingElement {
   expandIconAsCell = true;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 通过点击行来展开子行
-   */
-  @property({
-    type: Boolean,
-  })
-  expandRowByClick: boolean;
-
-  /**
    * @kind number
    * @required false
    * @default -
    * @description 展开的图标显示在哪一列，如果没有 rowSelection，默认显示在第一列，否则显示在选择框后面。当`expandIconAsCell`为 false 时，该属性生效。
+   * @group advanced
    */
   @property({
     type: Number,
@@ -603,7 +549,52 @@ export class BrickTableElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
+   * @description 通过点击行来展开子行
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  expandRowByClick: boolean;
+
+  /**
+   * @kind (string|number)[]
+   * @required false
+   * @default -
+   * @description 优化渲染的列（输入对应的 dataIndex），针对配置了 useBrick 的列。当前 antd 在更新 state 的时候，会全量渲染单元格，如果确定某一列在后续操作中不需要重新渲染，例如仅作为展示的单元格，可通过该属性设置以优化性能。注意，在树形表格中，当某一列内包含展开/收起按钮，则不应该设置该列。
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  optimizedColumns: Array<string | number>;
+
+  /**
+   * @default -
+   * @required false
+   * @description 设置容器空状态时显示`empty`构件属性
+   * @group advanced
+   */
+  @property({ attribute: false })
+  wrapperConfig: BrickWrapperConfig = {};
+
+  /**
+   * @required false
+   * @default false
+   * @description 树形数据展示时是否需要去除空数组
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  stripEmptyExpandableChildren = false;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
    * @description 初始时，是否展开所有行
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -615,6 +606,7 @@ export class BrickTableElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 展开的行的 rowKey
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -628,6 +620,7 @@ export class BrickTableElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 表格树形数据展示的时候，行选择父节点的时候是否同步勾选/取消勾选所有子节点，并且被同步勾选的子节点不能单独取消。注意，该属性必须设置 `rowKey` 属性。
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -652,6 +645,7 @@ export class BrickTableElement extends UpdatingElement {
    * @required false
    * @default children
    * @description 指定树形结构的列名
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -670,21 +664,91 @@ export class BrickTableElement extends UpdatingElement {
   sortable = true;
 
   /**
- * @kind {
-  collapsedIcon: MenuIcon,
-  expandedIcon: MenuIcon
-}
- * @required false
- * @default {collapsedIcon:{lib:'antd',icon:'down',theme:'outlined'},expandedIcon:{lib:'antd',icon:'right',theme:'outlined'}}
- * @description 自定义展开图标。
- */
+   * @kind object
+   * @required false
+   * @default -
+   * @description 设置相关字段取自哪里，具体描述见下表
+   * @group advanced
+   */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
+  set fields(value: any) {
+    this._fields = { ...this._fields, ...value };
+    this._render();
+  }
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否前端进行搜索，配合`presentational-bricks.brick-input`使用
+   */
+  @property({
+    type: Boolean,
+  })
+  frontSearch: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 前端搜索参数
+   */
   @property({
     attribute: false,
   })
-  expandIcon: {
-    collapsedIcon: MenuIcon;
-    expandedIcon: MenuIcon;
-  };
+  frontSearchQuery = "";
+
+  /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 进行前端搜索的字段，支持嵌套的写法如["name","value.a"]，不配置的时候默认为对所有 columns 的 dataIndex[]进行前端搜索
+   */
+  @property({
+    attribute: false,
+  })
+  frontSearchFilterKeys: string[];
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 页码。后台搜索的时候一般不需要配置，列表接口返回格式通常为{list:[],page:1,pageSize:10,total:20}，即默认取自 page；前台搜索的时候，一般配置成 "${query.page=1|number}"
+   */
+  @property({
+    attribute: false,
+  })
+  page: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 页码条数。后台搜索的时候一般不需要配置，列表接口返回格式通常为{list:[],page:1,pageSize:10,total:20}，即默认取自 pageSize/page_size；前台搜索的时候，一般配置成 "${query.pageSize=10|number}"
+   */
+  @property({
+    attribute: false,
+  })
+  pageSize: number;
+
+  /**
+   * @kind {
+   *   x?: string | number | true;
+   *   y?: number | string;
+   * } & {
+   *   scrollToFirstRowOnChange?: boolean;
+   * }
+   * @required false
+   * @default -
+   * @description 表格是否可滚动，也可以指定滚动区域的宽、高，配置项。详见 https://ant.design/components/table-cn/#scroll
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  scrollConfigs: TableProps<unknown>["scroll"];
 
   /**
    * @kind string
@@ -694,17 +758,6 @@ export class BrickTableElement extends UpdatingElement {
    */
   @property({ attribute: false })
   qField = "q";
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description [已废弃]请用 tableDraggable 代替
-   */
-  @property({
-    __deprecated_and_for_compatibility_only: true,
-  })
-  draggable: boolean;
 
   /**
    * @kind boolean
@@ -722,19 +775,34 @@ export class BrickTableElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否展示斑马纹
+   * @group advanced
    */
   @property({
     type: Boolean,
   })
   zebraPattern: boolean;
+
   /**
    * @kind boolean
    * @required false
    * @default false
    * @description 翻页时是否记住之前选中的项。注意，选中项的rowKey将保存在url中，如果不设置rowKey，该设置不生效。如果选择太多可能会造成url过长，请谨慎使用
+   * @group advanced
    */
   @property({ type: Boolean })
   storeCheckedByUrl: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description [已废弃]请用 tableDraggable 代替
+   * @group advanced
+   */
+  @property({
+    __deprecated_and_for_compatibility_only: true,
+  })
+  draggable: boolean;
 
   // 对外获取内部 _dataSource 的值
   // istanbul ignore next
@@ -1452,58 +1520,6 @@ export class BrickTableElement extends UpdatingElement {
   set selectUpdateEventDetailExtra(value: any) {
     this._selectUpdateEventDetailExtra = value;
   }
-
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description 设置相关字段取自哪里，具体描述见下表
-   */
-  @property({
-    __unstable_doNotDecorate: true,
-  })
-  set fields(value: any) {
-    this._fields = { ...this._fields, ...value };
-    this._render();
-  }
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否前端进行搜索，配合`presentational-bricks.brick-input`使用
-   */
-  @property({
-    type: Boolean,
-  })
-  frontSearch: boolean;
-
-  /**
-   * @kind string[]
-   * @required false
-   * @default -
-   * @description 进行前端搜索的字段，支持嵌套的写法如["name","value.a"]，不配置的时候默认为对所有 columns 的 dataIndex[]进行前端搜索
-   */
-  @property({
-    attribute: false,
-  })
-  frontSearchFilterKeys: string[];
-
-  /**
-   * @kind {
-   *   x?: string | number | true;
-   *   y?: number | string;
-   * } & {
-   *   scrollToFirstRowOnChange?: boolean;
-   * }
-   * @required false
-   * @default -
-   * @description 表格是否可滚动，也可以指定滚动区域的宽、高，配置项。详见 https://ant.design/components/table-cn/#scroll
-   */
-  @property({
-    attribute: false,
-  })
-  scrollConfigs: TableProps<unknown>["scroll"];
 }
 
 customElements.define("presentational-bricks.brick-table", BrickTableElement);
