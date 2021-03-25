@@ -16,7 +16,7 @@
 | relatedToMeDisabled    | boolean                                             | -        | false   | 是否展示"与我相关"的勾选框。                                                                                                                 |
 | moreButtonsDisabled    | boolean                                             | -        | false   | 是否展示"更多"的按钮。                                                                                                                       |
 | advancedSearchDisabled | boolean                                             | -        | false   | 是否展示高级搜索                                                                                                                             |
-| notifyUrl              | boolean                                             | -        | false   | 是否把搜索条件放上 url(刷新路由仍能保持条件)                                                                                                 |
+| notifyUrl              | boolean                                             | -        | true    | 是否把搜索条件放上 url(刷新路由仍能保持条件)                                                                                                 |
 | events                 | object                                              | -        | -       | 相关事件，具体如下表                                                                                                                         |
 
 # EVENTS
