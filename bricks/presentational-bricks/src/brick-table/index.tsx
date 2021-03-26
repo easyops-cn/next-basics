@@ -861,13 +861,13 @@ export class BrickTableElement extends UpdatingElement {
     ascend?: string | number; // 指定 ascend 排序对应字段，例如有些后台对应为 1 ，有些对应为 "asc"。这里默认为 "ascend"。
     descend?: string | number; // 指定 descend 排序对应字段，例如有些后台对应为 0 ，有些对应为 "desc"。这里默认为 "descend"。
   } = {
-      page: "page",
-      pageSize: "pageSize",
-      dataSource: "list",
-      total: "total",
-      ascend: "ascend",
-      descend: "descend",
-    };
+    page: "page",
+    pageSize: "pageSize",
+    dataSource: "list",
+    total: "total",
+    ascend: "ascend",
+    descend: "descend",
+  };
 
   /**
    * @default []
@@ -930,8 +930,8 @@ export class BrickTableElement extends UpdatingElement {
     const order = isNil(this.order)
       ? null
       : this._fields.ascend === this.order
-        ? "ascend"
-        : "descend";
+      ? "ascend"
+      : "descend";
     tempDataSource = this.handleFrontendSorter(tempDataSource, {
       columnKey: this.sort,
       order,
@@ -984,8 +984,8 @@ export class BrickTableElement extends UpdatingElement {
     const data = isEmpty(this._selectUpdateEventDetailField)
       ? this._selectedRows
       : map(this._selectedRows, (row) =>
-        get(row, this._selectUpdateEventDetailField)
-      );
+          get(row, this._selectUpdateEventDetailField)
+        );
     detail =
       isEmpty(this._selectUpdateEventDetailKeys) || isEmpty(data)
         ? data
@@ -1185,12 +1185,15 @@ export class BrickTableElement extends UpdatingElement {
     }
   };
 
+  // istanbul ignore next
   private renderSelectInfo = () => {
     // eslint-disable-next-line react/display-name
     return (
       <span style={{ marginLeft: 20 }}>
         <span>
-          {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.CHOSEN_OPTIONS}`, { count: this.selectedRowKeys.length })}
+          {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.CHOSEN_OPTIONS}`, {
+            count: this.selectedRowKeys.length,
+          })}
         </span>
         <a
           role="button"
@@ -1200,6 +1203,14 @@ export class BrickTableElement extends UpdatingElement {
             this._selectedRows = [];
             this._disabledChildrenKeys = [];
             this._allChildren = [];
+            if (!this._selectUpdateEventName) {
+              this.selectUpdate.emit([]);
+            } else {
+              const eventName = this._selectUpdateEventName
+                ? this._selectUpdateEventName
+                : "select.update";
+              this.dispatchEvent(new CustomEvent(eventName, { detail: [] }));
+            }
           }}
         >
           {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.CLEAR}`)}
@@ -1441,6 +1452,7 @@ export class BrickTableElement extends UpdatingElement {
           </span>
           {this.configProps?.rowSelection &&
             this.showSelectInfo &&
+            this.selectedRowKeys.length !== 0 &&
             this.renderSelectInfo()}
         </>
       ),
@@ -1460,23 +1472,23 @@ export class BrickTableElement extends UpdatingElement {
         const defaultRowSelection: TableRowSelection<any> = {
           ...(rowKey
             ? {
-              selectedRowKeys: this._isInSelect
-                ? this.selectedRowKeys
-                : this.storeCheckedByUrl
+                selectedRowKeys: this._isInSelect
+                  ? this.selectedRowKeys
+                  : this.storeCheckedByUrl
                   ? this._getCheckedFromUrl()
                   : this.defaultSelectAll
-                    ? this._handleDefaultSelectAll()
-                    : this.selectedRowKeys,
-              onSelect: this._handleOnSelect,
-              onSelectAll: this._handleSelectAll,
-              onChange: this._handleRowSelectChange,
-              preserveSelectedRowKeys: true,
-            }
+                  ? this._handleDefaultSelectAll()
+                  : this.selectedRowKeys,
+                onSelect: this._handleOnSelect,
+                onSelectAll: this._handleSelectAll,
+                onChange: this._handleRowSelectChange,
+                preserveSelectedRowKeys: true,
+              }
             : {
-              // 当用户没有设置rowKey时的兼容处理
-              onChange: this._handleRowSelectChange,
-              preserveSelectedRowKeys: true,
-            }),
+                // 当用户没有设置rowKey时的兼容处理
+                onChange: this._handleRowSelectChange,
+                preserveSelectedRowKeys: true,
+              }),
           getCheckboxProps: (record: any) => {
             if (
               !isEmpty(this._disabledChildrenKeys) &&
