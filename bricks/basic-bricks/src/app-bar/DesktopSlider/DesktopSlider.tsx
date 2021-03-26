@@ -10,6 +10,7 @@ import { useDesktopDirContext } from "../DesktopDirContext";
 import styles from "./DesktopSlider.module.css";
 import { MyDesktop } from "../MyDesktop/MyDesktop";
 import { launchpadService } from "../LaunchpadService";
+import { HomeFilled } from "@ant-design/icons";
 
 interface DesktopSliderProps {
   microApps: MicroApp[];
@@ -307,22 +308,23 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
       })}
     >
       <div className={styles.desktopSelector}>
-        {[...(enableMyDesktop ? [{ name: "我的" }] : []), ...desktops].map(
-          (desktop, index) => (
-            <React.Fragment key={index}>
-              {index !== 0 && <span className={styles.selectorSeparator} />}
-              <a
-                className={classNames(styles.desktopName, {
-                  [styles.active]: desktopCursor === index,
-                })}
-                onClick={(e) => handleSlideTo(e, index)}
-                role="button"
-              >
-                {desktop.name}
-              </a>
-            </React.Fragment>
-          )
-        )}
+        {[
+          ...(enableMyDesktop ? [{ name: <HomeFilled /> }] : []),
+          ...desktops,
+        ].map((desktop, index) => (
+          <React.Fragment key={index}>
+            {index !== 0 && <span className={styles.selectorSeparator} />}
+            <a
+              className={classNames(styles.desktopName, {
+                [styles.active]: desktopCursor === index,
+              })}
+              onClick={(e) => handleSlideTo(e, index)}
+              role="button"
+            >
+              {desktop.name}
+            </a>
+          </React.Fragment>
+        ))}
       </div>
       <div className={styles.scrollContainer} onWheel={handleWheel}>
         <div

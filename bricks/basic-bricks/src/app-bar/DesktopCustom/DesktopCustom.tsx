@@ -12,6 +12,7 @@ interface DesktopCustomProps {
   showAddIcon?: boolean;
   onAddClick: () => void;
   onClick?: () => void;
+  size?: string;
 }
 
 export function DesktopCustom({
@@ -21,6 +22,7 @@ export function DesktopCustom({
   isFavorite,
   onClick,
   onAddClick,
+  size,
 }: DesktopCustomProps): React.ReactElement {
   const handleItemClick = (e: React.MouseEvent): void => {
     e.stopPropagation();
@@ -35,7 +37,7 @@ export function DesktopCustom({
   return (
     <>
       <Link
-        className={classNames(styles.appLink, styles.circle)}
+        className={classNames(styles.appLink, styles.circle, styles[size])}
         href={url}
         target="_blank"
         onClick={handleItemClick}

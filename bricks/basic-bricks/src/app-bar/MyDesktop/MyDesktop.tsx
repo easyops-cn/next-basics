@@ -47,6 +47,7 @@ export function MyDesktop(props: MyDesktopProps): React.ReactElement {
           {recentlyVisitedList?.map((item, index) => (
             <DesktopCell
               position={"left"}
+              size="small"
               key={index}
               item={item}
               showAddIcon={true}

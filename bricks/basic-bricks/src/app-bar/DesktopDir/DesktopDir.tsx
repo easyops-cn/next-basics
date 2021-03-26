@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import { useDesktopDirContext } from "../DesktopDirContext";
 import styles from "./DesktopDir.module.css";
 import defaultAppIcon from "../../images/default-app-icon.png";
@@ -24,7 +25,11 @@ export function DesktopDir(props: NormalizedDesktopDir): React.ReactElement {
 
   return (
     <>
-      <a className={styles.dirLink} onClick={handleDirClick} role="button">
+      <a
+        className={classNames(styles.dirLink, styles[props.size])}
+        onClick={handleDirClick}
+        role="button"
+      >
         {props.items
           .slice(0, 4)
           .map((item) =>

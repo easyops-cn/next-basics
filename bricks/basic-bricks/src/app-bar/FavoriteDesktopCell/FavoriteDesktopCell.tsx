@@ -65,7 +65,10 @@ export function FavoriteDesktopCell({
         <Link className={styles.link} to={realLink} onClick={handleCellClick}>
           <>
             <span className={classNames(styles.appLink, styles.square)}>
-              <GeneralIcon icon={item?.launchpadCollection.icon} />
+              <GeneralIcon
+                icon={item?.launchpadCollection.icon}
+                style={{ fontSize: 18 }}
+              />
             </span>
             <span className={styles.name}>
               {item?.launchpadCollection?.name}

@@ -17,6 +17,8 @@ interface DesktopAppProps {
   showAddIcon?: boolean;
   onAddClick?: () => void;
   onClick?: () => void;
+  size?: string;
+  responsive?: boolean;
 }
 
 export function DesktopApp({
@@ -25,6 +27,8 @@ export function DesktopApp({
   onClick,
   isFavorite,
   showAddIcon,
+  size,
+  responsive = true,
 }: DesktopAppProps): React.ReactElement {
   const installing = app.installStatus === "running";
 
@@ -48,9 +52,11 @@ export function DesktopApp({
       <Link
         className={classNames(
           styles.appLink,
+          styles[size],
           app.iconBackground === "circle" ? styles.circle : styles.square,
           {
             [styles.installing]: installing,
+            [styles.responsive]: responsive,
           }
         )}
         to={app.homepage}
