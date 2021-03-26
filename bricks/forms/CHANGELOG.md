@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.156.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.155.0...@next-bricks/forms@1.156.0) (2021-03-26)
+
+
+### Features
+
+* **general-radio:** size ([430c2b4](https://github.com/easyops-cn/next-basics/commit/430c2b48a156b7fc6d353ff8af05327cc3ae2614))
+
+
+
+
+
 # [1.155.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.7...@next-bricks/forms@1.155.0) (2021-03-26)
 
 

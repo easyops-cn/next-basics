@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.175.1...@next-bricks/presentational-bricks@1.176.0) (2021-03-26)
+
+
+### Features
+
+* **brick-tag:** cancelable ([5652acc](https://github.com/easyops-cn/next-basics/commit/5652acc8bfd2a12ea1b4020e5dc8f14e24cf0b7f))
+
+
+
+
+
 ## [1.175.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.175.0...@next-bricks/presentational-bricks@1.175.1) (2021-03-26)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
