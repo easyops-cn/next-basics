@@ -22,6 +22,8 @@ const locale: Locale = {
   [K.CROP_TITLE]: "修改头像",
   [K.COPY]: "复制",
   [K.COPIED]: "复制成功",
+  [K.CHOSEN_OPTIONS]: "已选择 {{count}} 项",
+  [K.CLEAR]: "清空",
 };
 
 export default locale;
