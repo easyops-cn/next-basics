@@ -1,4 +1,4 @@
-import { isNil } from "lodash";
+import { isNil, isRegExp } from "lodash";
 
 export function searchList<T>(
   list: Array<T>,
@@ -20,7 +20,7 @@ export function searchList<T>(
 
 export function findQueryInObjectValues(
   data: Record<string, any>,
-  query: string,
+  query: string | RegExp,
   keys?: string[]
 ): boolean {
   let found = false;
@@ -32,6 +32,14 @@ export function findQueryInObjectValues(
       }
       const strValue =
         typeof value === "string" ? value : JSON.stringify(value);
+      if (isRegExp(query)) {
+        const matched = query.test(strValue);
+        if (matched) {
+          found = true;
+          break;
+        }
+        continue;
+      }
       if (strValue?.toLowerCase().includes(query)) {
         found = true;
         break;

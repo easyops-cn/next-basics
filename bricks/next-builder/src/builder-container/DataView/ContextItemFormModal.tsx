@@ -28,6 +28,7 @@ export function ContextItemFormModal({
 }: ContextItemFormProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const isCreate = useMemo(() => !data, [data]);
+
   return (
     <Modal
       width={640}
@@ -35,6 +36,7 @@ export function ContextItemFormModal({
       visible={visible}
       onOk={onOk}
       onCancel={onCancel}
+      destroyOnClose
     >
       <ContextItemForm
         data={data}

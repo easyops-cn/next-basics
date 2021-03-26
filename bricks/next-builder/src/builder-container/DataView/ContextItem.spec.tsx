@@ -15,6 +15,7 @@ describe("ContextItem", () => {
     const handleItemClick = jest.fn();
     const handleItemDelete = jest.fn();
     const handleDropItem = jest.fn();
+    const handleItemHover = jest.fn();
     const wrapper = shallow(
       <ContextItem
         data={{
@@ -28,6 +29,7 @@ describe("ContextItem", () => {
         handleDropItem={handleDropItem}
         index={1}
         canDrag={true}
+        handleItemHover={handleItemHover}
       />
     );
     expect(wrapper.find(CodeOutlined).length).toBe(1);
@@ -49,5 +51,10 @@ describe("ContextItem", () => {
     expect(wrapper.find(LinkOutlined).length).toBe(1);
     wrapper.find(".varItem").simulate("click");
     expect(handleItemClick).toBeCalled();
+    wrapper.find(".varItem").invoke("onMouseEnter")({} as any);
+    expect(handleItemHover).toBeCalledWith("data-a");
+    handleItemHover.mockClear();
+    wrapper.find(".varItem").invoke("onMouseLeave")({} as any);
+    expect(handleItemHover).toBeCalledWith();
   });
 });

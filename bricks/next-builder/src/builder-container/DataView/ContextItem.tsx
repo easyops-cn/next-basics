@@ -15,6 +15,7 @@ interface ContextItemProps {
   handleDropItem: (dragIndex: number, hoverIndex: number) => void;
   handleItemClick: () => void;
   handleItemDelete: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  handleItemHover?: (contextName?: string) => void;
 }
 
 export function ContextItem({
@@ -24,6 +25,7 @@ export function ContextItem({
   handleDropItem,
   handleItemClick,
   handleItemDelete,
+  handleItemHover,
 }: ContextItemProps): React.ReactElement {
   const ref = useRef();
   const [{ isOver, dropClassName }, drop] = useDrop({
@@ -53,6 +55,15 @@ export function ContextItem({
     }),
   });
   drop(drag(ref));
+
+  const handleMouseEnter = (): void => {
+    handleItemHover(data.name);
+  };
+
+  const handleMouseLeave = (): void => {
+    handleItemHover();
+  };
+
   return (
     <div
       ref={ref}
@@ -61,6 +72,8 @@ export function ContextItem({
       })}
       onClick={handleItemClick}
       key={data.name}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {data.resolve ? (
         <LinkOutlined style={{ color: "var(--theme-orange-color)" }} />
