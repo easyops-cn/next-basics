@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.155.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.7...@next-bricks/forms@1.155.0) (2021-03-26)
+
+
+### Features
+
+* **general-textarea:** add property inputBoxStyle ([9ec71d6](https://github.com/easyops-cn/next-basics/commit/9ec71d675da4e5320302b4a1727dff42d5fc842e))
+
+
+
+
+
 ## [1.154.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.154.6...@next-bricks/forms@1.154.7) (2021-03-23)
 
 **Note:** Version bump only for package @next-bricks/forms

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.111.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.2...@next-bricks/basic-bricks@1.111.3) (2021-03-26)
+
+
+### Bug Fixes
+
+* modify favorite count ([98501c8](https://github.com/easyops-cn/next-basics/commit/98501c89822975288f0788416b8cf9335612f016))
+* search and enter app also push visitor ([8fa1ef5](https://github.com/easyops-cn/next-basics/commit/8fa1ef5e0290e4ebc7d5a081ebd577ae0383d69b))
+* 修复通过键盘上下左右操作无效的问题 ([b1b1225](https://github.com/easyops-cn/next-basics/commit/b1b12256e20c9b4859223285e2b88ec22c6fb5f7))
+* 移除每个图标项快速删除的动作，统一到管理页处理 ([d312216](https://github.com/easyops-cn/next-basics/commit/d312216146477c8c9d4cba29d70efa42f1e48ae3))
+
+
+
+
+
 ## [1.111.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.1...@next-bricks/basic-bricks@1.111.2) (2021-03-24)
 
 

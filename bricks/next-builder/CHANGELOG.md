@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.41.0...@next-bricks/next-builder@1.42.0) (2021-03-26)
+
+
+### Bug Fixes
+
+* **builder:** keep cursor status when dragging resizer ([c5e5521](https://github.com/easyops-cn/next-basics/commit/c5e55210033a32f8038eb330a26f8c0a0d625b5d))
+
+
+### Features
+
+* **data-view:** find data by configuration ([f7b6918](https://github.com/easyops-cn/next-basics/commit/f7b6918ed2090dde21ff9ec1e5214904e03df913))
+* **data-view:** higtlight matching nodes when context is hovering ([f0cb258](https://github.com/easyops-cn/next-basics/commit/f0cb2583aa569b7dced57a1d05498f556e28c43a))
+
+
+
+
+
 # [1.41.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.40.0...@next-bricks/next-builder@1.41.0) (2021-03-24)
 
 
