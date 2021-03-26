@@ -1,11 +1,9 @@
 import { clone } from "lodash";
-import { buildStoryboard } from "./buildStoryboard";
-
-jest.mock("@next-core/brick-kit", () => ({
-  getRuntime: () => ({
-    registerCustomProcessor: jest.fn(),
-  }),
-}));
+import {
+  buildStoryboard,
+  symbolForNodeId,
+  symbolForNodeInstanceId,
+} from "./buildStoryboard";
 
 const consoleError = jest
   .spyOn(console, "error")
@@ -30,6 +28,7 @@ describe("buildStoryboard", () => {
         routeList: [
           {
             id: "R-01",
+            instanceId: "instance-r01",
             path: "/a",
             type: "bricks",
             parent: [], // Empty parent also works.
@@ -41,6 +40,7 @@ describe("buildStoryboard", () => {
           },
           {
             id: "R-02",
+            instanceId: "instance-r02",
             path: "/b",
             type: "routes",
             permissionsPreCheck:
@@ -48,12 +48,14 @@ describe("buildStoryboard", () => {
           },
           {
             id: "R-03",
+            instanceId: "instance-r03",
             path: "/b/c",
             type: "bricks",
             parent: [{ id: "R-02" }],
           },
           {
             id: "R-04",
+            instanceId: "instance-r04",
             path: "/a/d",
             type: "bricks",
             parent: [{ id: "B-01" }],
@@ -61,6 +63,7 @@ describe("buildStoryboard", () => {
           },
           {
             id: "R-05",
+            instanceId: "instance-r05",
             path: "/a/e",
             type: "bricks",
             parent: [{ id: "B-01" }],
@@ -70,6 +73,7 @@ describe("buildStoryboard", () => {
         brickList: [
           {
             id: "B-01",
+            instanceId: "instance-b01",
             type: "brick",
             brick: "m",
             parent: [{ id: "R-01" }],
@@ -78,18 +82,21 @@ describe("buildStoryboard", () => {
           },
           {
             id: "B-02",
+            instanceId: "instance-b02",
             type: "brick",
             brick: "n",
             parent: [{ id: "R-01" }],
           },
           {
             id: "B-03",
+            instanceId: "instance-b03",
             type: "brick",
             brick: "o",
             parent: [{ id: "R-03" }],
           },
           {
             id: "B-04",
+            instanceId: "instance-b04",
             type: "brick",
             brick: "p",
             parent: [{ id: "B-01" }],
@@ -97,6 +104,7 @@ describe("buildStoryboard", () => {
           },
           {
             id: "B-05",
+            instanceId: "instance-b05",
             type: "template",
             brick: "q",
             parent: [{ id: "B-01" }],
@@ -105,6 +113,7 @@ describe("buildStoryboard", () => {
           {
             // This brick's parent not found.
             id: "T-01",
+            instanceId: "instance-x01",
             type: "brick",
             brick: "t1",
             parent: [{ id: "R-00" }],
@@ -112,6 +121,7 @@ describe("buildStoryboard", () => {
           {
             // This brick's grand-parent not found.
             id: "T-02",
+            instanceId: "instance-x02",
             type: "brick",
             brick: "t2",
             parent: [{ id: "T-01" }],
@@ -120,6 +130,7 @@ describe("buildStoryboard", () => {
         templateList: [
           {
             templateId: "tpl-01",
+            id: "B-T-01",
             proxy: {
               properties: {
                 one: {
@@ -131,11 +142,13 @@ describe("buildStoryboard", () => {
             children: [
               {
                 id: "T-B-01",
+                instanceId: "instance-t-b01",
                 type: "brick",
                 brick: "z",
                 children: [
                   {
                     id: "T-B-02",
+                    instanceId: "instance-t-b02",
                     type: "brick",
                     brick: "y",
                     ref: "two",
@@ -143,6 +156,7 @@ describe("buildStoryboard", () => {
                     children: [
                       {
                         id: "T-B-03",
+                        instanceId: "instance-t-b03",
                         type: "brick",
                         brick: "x",
                         mountPoint: "m6",
@@ -463,6 +477,96 @@ describe("buildStoryboard", () => {
         },
         dependsAll: false,
       },
+    ],
+    [
+      "test keepIds",
+      // Input
+      {
+        routeList: [
+          {
+            id: "R-01",
+            path: "/a",
+            type: "bricks",
+            parent: [], // Empty parent also works.
+            providers: '["p1"]',
+            segues: null,
+            // Fields should be removed.
+            _ts: 123,
+            org: 1,
+          },
+        ],
+        brickList: [
+          {
+            id: "B-01",
+            instanceId: "instance-b01",
+            type: "brick",
+            brick: "m",
+            parent: [{ id: "R-01" }],
+            if: "false",
+            lifeCycle: undefined,
+          },
+        ],
+        templateList: [
+          {
+            templateId: "menu-a",
+            id: "B-T-01",
+            children: [
+              {
+                id: "T-B-01",
+                instanceId: "instance-t-b01",
+                type: "brick",
+                brick: "z",
+              },
+            ],
+          },
+        ],
+        menus: [],
+        i18n: [],
+        dependsAll: false,
+        options: {
+          keepIds: true,
+        },
+      },
+      // Output,
+      {
+        routes: [
+          {
+            [symbolForNodeId]: "R-01",
+            path: "/a",
+            type: "bricks",
+            providers: ["p1"],
+            bricks: [
+              {
+                [symbolForNodeId]: "B-01",
+                [symbolForNodeInstanceId]: "instance-b01",
+                brick: "m",
+                if: false,
+              },
+            ],
+          },
+        ],
+        meta: {
+          customTemplates: [
+            {
+              [symbolForNodeId]: "B-T-01",
+              name: "menu-a",
+              bricks: [
+                {
+                  [symbolForNodeId]: "T-B-01",
+                  [symbolForNodeInstanceId]: "instance-t-b01",
+                  brick: "z",
+                },
+              ],
+            },
+          ],
+          menus: [],
+          i18n: {
+            en: {},
+            zh: {},
+          },
+        },
+        dependsAll: false,
+      } as any,
     ],
   ])("buildStoryboard should work %s", (condition, input, output) => {
     const cloneOfInput = clone(input);
