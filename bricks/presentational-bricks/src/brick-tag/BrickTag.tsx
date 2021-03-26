@@ -47,6 +47,7 @@ export interface BrickTagProps extends TagProps {
   shape?: "default" | "round";
   closable?: boolean;
   disabledTooltip?: string;
+  cancelable?: boolean;
 }
 
 export function BrickTag(props: BrickTagProps): React.ReactElement {
@@ -58,6 +59,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     showTagCircle,
     color,
     closable,
+    cancelable,
   } = props;
 
   const [checkedTag, setCheckedTag] = useState([]);
@@ -83,6 +85,9 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
         ? [...checkedTag, key]
         : checkedTag.filter((t) => t !== key);
     } else {
+      if (!cancelable && !checked) {
+        return;
+      }
       nextCheckedTag = checked ? [key] : [];
     }
     const nextCheckedItems = tagList?.filter((item) =>
