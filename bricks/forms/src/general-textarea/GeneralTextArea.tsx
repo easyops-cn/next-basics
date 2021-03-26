@@ -5,18 +5,19 @@ import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 
 export interface BlurData {
-    startPos: number;
-    endPos: number;
-    startStr: string;
-    endStr: string;
-    wholeStr: string;
-  }
+  startPos: number;
+  endPos: number;
+  startStr: string;
+  endStr: string;
+  wholeStr: string;
+}
 
 interface GeneralTextAreaProps extends FormItemWrapperProps {
   placeholder?: string;
   value?: string;
   autoSize?: boolean | AutoSizeType;
   disabled?: boolean;
+  inputBoxStyle?: React.CSSProperties;
   onChange?: (value: string) => void;
   onHandleBlur?: (value: string) => void;
   onHandleBlurV2?(data: BlurData): void;
@@ -53,6 +54,7 @@ export function GeneralTextArea(
     <FormItemWrapper {...props}>
       <Input.TextArea
         ref={ref}
+        style={props.inputBoxStyle}
         autoSize={props.autoSize}
         disabled={props.disabled}
         value={props.name && props.formElement ? undefined : props.value}
