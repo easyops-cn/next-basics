@@ -15,6 +15,7 @@ export interface GeneralRadioProps extends FormItemWrapperProps {
   disabled?: boolean;
   onChange?: (value: any) => void;
   buttonStyle?: RadioGroupButtonStyle;
+  size?: "large" | "middle" | "small";
 }
 
 export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
@@ -49,6 +50,7 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
         onChange={handleChange}
         disabled={disabled}
         buttonStyle={props.buttonStyle}
+        size={props.size}
       >
         {props.type === "button"
           ? renderRadio(Radio.Button, options)

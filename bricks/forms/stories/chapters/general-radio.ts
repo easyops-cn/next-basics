@@ -122,6 +122,9 @@ export const GeneralRadioStory: Story = {
     },
     {
       brick: "forms.general-form",
+      description: {
+        title: "禁用选项",
+      },
       properties: {
         values: {
           city: "Beijing",
@@ -215,6 +218,89 @@ export const GeneralRadioStory: Story = {
         ],
         type: "button",
         value: "Shanghai",
+      },
+    },
+    {
+      brick: "forms.general-form",
+      description: {
+        title:
+          "可以设置大小`size`：大-`large`、中-`middle`、小-`small`。只对按钮样式生效。",
+      },
+      slots: {
+        items: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "forms.general-radio",
+              properties: {
+                type: "button",
+                name: "large",
+                label: "大",
+                size: "large",
+                options: [
+                  {
+                    label: "上海",
+                    value: "Shanghai",
+                  },
+                  {
+                    label: "北京",
+                    value: "Beijing",
+                  },
+                  {
+                    label: "成都",
+                    value: "Chengdu",
+                  },
+                ],
+              },
+            },
+            {
+              brick: "forms.general-radio",
+              properties: {
+                type: "button",
+                name: "middle",
+                label: "中",
+                size: "middle",
+                options: [
+                  {
+                    label: "上海",
+                    value: "Shanghai",
+                  },
+                  {
+                    label: "北京",
+                    value: "Beijing",
+                  },
+                  {
+                    label: "成都",
+                    value: "Chengdu",
+                  },
+                ],
+              },
+            },
+            {
+              brick: "forms.general-radio",
+              properties: {
+                type: "button",
+                name: "small",
+                label: "小",
+                size: "small",
+                options: [
+                  {
+                    label: "上海",
+                    value: "Shanghai",
+                  },
+                  {
+                    label: "北京",
+                    value: "Beijing",
+                  },
+                  {
+                    label: "成都",
+                    value: "Chengdu",
+                  },
+                ],
+              },
+            },
+          ],
+        },
       },
     },
   ],
