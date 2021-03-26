@@ -39,7 +39,7 @@ describe("BrickTag", () => {
     expect(wrapper.find("CheckableTag").at(0).prop("style").color).toBe("red");
     wrapper.find("CheckableTag").at(0).simulate("mouseleave");
     expect(wrapper.find("CheckableTag").at(0).prop("style").color).toBe("#fff");
-    wrapper.find("CheckableTag").at(0).invoke("onChange")("a", true);
+    wrapper.find("CheckableTag").at(0).invoke("onChange")(true);
     expect(handleOnChange).toHaveBeenCalled();
     wrapper.setProps({
       defaultCheckedTag: ["a"],
@@ -52,7 +52,7 @@ describe("BrickTag", () => {
     });
     wrapper.update();
 
-    wrapper.find("CheckableTag").at(1).invoke("onChange")("b", true);
+    wrapper.find("CheckableTag").at(1).invoke("onChange")(true);
     expect(handleOnChange).toHaveBeenCalled();
     wrapper.setProps({
       defaultCheckedTag: ["b"],
@@ -159,5 +159,27 @@ describe("BrickTag", () => {
       .find("span.anticon-close.ant-tag-close-icon")
       .simulate("click");
     expect(handleOnClose).toHaveBeenCalled();
+  });
+
+  it("should work when cancelable is false", () => {
+    const handleOnChange = jest.fn();
+    const props = {
+      componentType: TagTypeProps.CheckableTag,
+      handleOnChange,
+      multipleCheck: false,
+      cancelable: false,
+      tagList: [
+        { key: "a", label: "a" },
+        { key: "b", label: "b" },
+        { key: "c", label: "c" },
+      ],
+    };
+    const wrapper = mount(<BrickTag {...props} />);
+    expect(wrapper.find("CheckableTag").length).toEqual(3);
+    wrapper.find("CheckableTag").at(0).invoke("onChange")(true);
+    expect(handleOnChange).toBeCalled();
+    handleOnChange.mockClear();
+    wrapper.find("CheckableTag").at(0).invoke("onChange")(false);
+    expect(handleOnChange).not.toBeCalled();
   });
 });

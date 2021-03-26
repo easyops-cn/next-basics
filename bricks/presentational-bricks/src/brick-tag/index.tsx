@@ -149,6 +149,17 @@ export class BrickTagElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
+   * @default true
+   * @description 标签是否可以取消单选，在 `componentType` 为 `CheckableTag` 且 `multipleCheck` 为 `false` 时生效。
+   */
+  @property({
+    attribute: false,
+  })
+  cancelable = true;
+
+  /**
+   * @kind boolean
+   * @required false
    * @default false
    * @description 标签是否可以关闭
    */
@@ -303,6 +314,7 @@ export class BrickTagElement extends UpdatingElement {
         color={this.color}
         closable={this.closable}
         disabledTooltip={this.disabledTooltip}
+        cancelable={this.cancelable}
       />
     );
   }
