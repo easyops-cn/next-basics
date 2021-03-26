@@ -115,6 +115,18 @@ export class GeneralTextAreaElement extends FormItemElement {
   max: number;
 
   /**
+   * @kind object
+   * @required false
+   * @default
+   * @description 输入框样式
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties;
+
+  /**
    * @detail `string`
    * @description 输入变化时被触发，`event.detail` 为当前值
    */
@@ -184,6 +196,7 @@ export class GeneralTextAreaElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            inputBoxStyle={this.inputBoxStyle}
           />
         </BrickWrapper>,
         this
