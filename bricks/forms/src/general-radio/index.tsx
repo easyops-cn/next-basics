@@ -115,6 +115,18 @@ export class GeneralRadioElement extends FormItemElement {
   type: "button" | "default" = "default";
 
   /**
+   * @kind "large" | "middle" | "small"
+   * @required false
+   * @default -
+   * @description 	大小，只对按钮样式生效
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  size: "large" | "middle" | "small";
+
+  /**
    * @kind RadioGroupButtonStyle
    * @required false
    * @default `solid`
@@ -155,6 +167,7 @@ export class GeneralRadioElement extends FormItemElement {
             options={formatOptions(this.options)}
             value={this.value}
             type={this.type}
+            size={this.size}
             message={this.message}
             validator={this.validator}
             notRender={this.notRender}
