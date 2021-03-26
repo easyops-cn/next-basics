@@ -15,6 +15,7 @@ export function IconSelect(props: IconSelectProps): React.ReactElement {
         openModal={props.openModal}
         onChange={props.onChange}
         handleCancel={props.handleCancel}
+        defaultColor={props.defaultColor}
       />
     </FormItemWrapper>
   );
