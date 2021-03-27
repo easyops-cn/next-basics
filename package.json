@@ -88,5 +88,5 @@
     "lodash": "^4.17.20",
     "@next-core/brick-types": "^2.20.1"
   },
-  "easyops": { "dev-dependencies": "1.2.78" }
+  "easyops": { "dev-dependencies": "1.2.79" }
 }
