@@ -1,7 +1,7 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
-import { MyDesktop } from "./MyDesktop";
+import { MyDesktop, SiteMapDirection } from "./MyDesktop";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
 import { FavoriteDesktopCell } from "../FavoriteDesktopCell/FavoriteDesktopCell";
 import { launchpadService } from "../LaunchpadService";
@@ -103,7 +103,7 @@ jest.mock("../LaunchpadService", () => {
   };
 });
 describe("MyDesktop", () => {
-  it("should work", async () => {
+  it("should work with favorite tab", async () => {
     (launchpadService.fetchFavoriteList as jest.Mock).mockReturnValueOnce([
       {
         launchpadCollection: {
@@ -128,6 +128,7 @@ describe("MyDesktop", () => {
     await act(async () => {
       await (global as any).flushPromises();
     });
+    wrapper.find(".modeIcon").at(0).simulate("click");
     wrapper.update();
     expect(wrapper.find(DesktopCell)).toHaveLength(5);
     expect(wrapper.find("DesktopCell").at(0).props()).toMatchObject({
@@ -153,9 +154,9 @@ describe("MyDesktop", () => {
 
     expect(wrapper.find(FavoriteDesktopCell)).toHaveLength(1);
 
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
+    wrapper.find(".modeIcon").at(0).simulate("click");
+    wrapper.update();
+    expect(wrapper.find(".header .title").text()).toEqual("系统地图");
   });
 
   it("should show prompt if empty favoriteList", async () => {
@@ -166,9 +167,31 @@ describe("MyDesktop", () => {
     });
 
     wrapper.update();
+    wrapper.find(".modeIcon").at(0).simulate("click");
 
     expect(wrapper.find(".favorites span").text()).toEqual(
       expect.stringContaining("把常用的页面链接加入收藏夹，方便快速访问 ~")
     );
+  });
+
+  it("should work with ref", async () => {
+    const ref = React.createRef<any>();
+    const wrapper = mount(
+      <MyDesktop desktopCount={2} arrowWidthPercent={9} ref={ref} />
+    );
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    ref.current.handleSlider(SiteMapDirection.Up);
+    wrapper.update();
+    expect(
+      wrapper.find({ "test-id": "my-destop" }).prop("style").marginTop
+    ).toEqual("-190px");
+
+    ref.current.handleSlider(SiteMapDirection.Down);
+    wrapper.update();
+    expect(
+      wrapper.find({ "test-id": "my-destop" }).prop("style").marginTop
+    ).toEqual("0");
   });
 });

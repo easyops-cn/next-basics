@@ -26,7 +26,9 @@ export function DesktopDir(props: NormalizedDesktopDir): React.ReactElement {
   return (
     <>
       <a
-        className={classNames(styles.dirLink, styles[props.size])}
+        className={classNames(styles.dirLink, {
+          [styles[props.size]]: !!props.size,
+        })}
         onClick={handleDirClick}
         role="button"
       >

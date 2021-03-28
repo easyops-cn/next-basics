@@ -7,23 +7,60 @@ import classNames from "classnames";
 import { launchpadService } from "../LaunchpadService";
 import { Link } from "@next-libs/basic-components";
 import { Spin } from "antd";
+import Icon from "@ant-design/icons";
 import { isEmpty } from "lodash";
+import { BrickIcon } from "@next-core/brick-icons";
+import { SiteMap } from "../site-map/SiteMap";
+import { data as mockData } from "../site-map/mockData";
 
 interface MyDesktopProps {
   desktopCount: number;
   arrowWidthPercent: number;
 }
 
-export function MyDesktop(props: MyDesktopProps): React.ReactElement {
+enum ModeType {
+  Favorities = "favorities",
+  Sitemap = "sitemap",
+}
+
+export enum SiteMapDirection {
+  Up,
+  Down,
+}
+
+export function MyDesktops(
+  props: MyDesktopProps,
+  ref: any
+): React.ReactElement {
   const [recentlyVisitedList] = useState(launchpadService.getAllVisitors());
   const [favoriteList, setFavoriteList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstRendered, setFirstRendered] = useState(true);
+  const [mode, setMode] = useState<ModeType>(ModeType.Sitemap);
+  const [mapCursor, setMapCursor] = useState(0);
+
+  const handleSlider = (direction: SiteMapDirection) => {
+    if (direction === SiteMapDirection.Up) {
+      setMapCursor(1);
+    } else if (direction === SiteMapDirection.Down) {
+      setMapCursor(0);
+    }
+  };
+
+  React.useImperativeHandle(ref, () => ({
+    handleSlider,
+  }));
+
   const getFavoriteList = async () => {
     setIsLoading(true);
     const favoriteList = await launchpadService.fetchFavoriteList();
     setIsLoading(false);
     setFavoriteList(favoriteList);
+  };
+
+  const handleMode = (e: React.MouseEvent, mode: ModeType): void => {
+    e.stopPropagation();
+    setMode(mode);
   };
   useEffect(() => {
     (async () => {
@@ -48,6 +85,7 @@ export function MyDesktop(props: MyDesktopProps): React.ReactElement {
             <DesktopCell
               position={"left"}
               size="small"
+              responsive={false}
               key={index}
               item={item}
               showAddIcon={true}
@@ -63,13 +101,6 @@ export function MyDesktop(props: MyDesktopProps): React.ReactElement {
   const renderMyFavorites = useMemo(() => {
     return (
       <div className={classNames([styles.section, styles.favorites])}>
-        <div className={styles.title}>
-          我的收藏
-          <Link to={"/launchpad-collection"}>
-            <SettingOutlined className={styles.settings} />
-          </Link>
-        </div>
-
         {firstRendered && isLoading && (
           <Spin
             indicator={antIcon}
@@ -98,15 +129,62 @@ export function MyDesktop(props: MyDesktopProps): React.ReactElement {
     );
   }, [favoriteList, isLoading, firstRendered]);
 
+  const renderSiteMap = useMemo(() => {
+    return <SiteMap categoryList={mockData} />;
+  }, []);
+
   return (
     <div
+      test-id="my-destop"
       style={{
         flex: 1,
         padding: `0 ${props.arrowWidthPercent / props.desktopCount}%`,
+        marginTop: `${mapCursor === 1 ? "-190px" : 0}`,
+        transition: "margin-top 400ms ease-out",
       }}
     >
       {!!recentlyVisitedList?.length && renderRecentlyVisited}
-      {renderMyFavorites}
+      <div className={styles.modeWrapper}>
+        <div className={styles.header}>
+          {mode === ModeType.Favorities ? (
+            <div className={styles.title}>
+              {" "}
+              我的收藏
+              <Icon
+                className={styles.modeIcon}
+                component={() => (
+                  <BrickIcon icon="launchpad-collection" category="app" />
+                )}
+                onClick={(e) => handleMode(e, ModeType.Sitemap)}
+              />
+            </div>
+          ) : (
+            <div className={styles.title}>
+              系统地图
+              <Icon
+                style={{ fontSize: 12 }}
+                className={styles.modeIcon}
+                component={() => (
+                  <BrickIcon icon="launchpad-sitmap" category="app" />
+                )}
+                onClick={(e) => handleMode(e, ModeType.Favorities)}
+              />
+            </div>
+          )}
+          {mode === ModeType.Favorities && (
+            <div>
+              <Link to={"/launchpad-collection"}>
+                <SettingOutlined className={styles.settings} />
+              </Link>
+              管理收藏
+            </div>
+          )}
+        </div>
+
+        {mode === ModeType.Favorities ? renderMyFavorites : renderSiteMap}
+      </div>
     </div>
   );
 }
+
+export const MyDesktop = React.forwardRef(MyDesktops);
