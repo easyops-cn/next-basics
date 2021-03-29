@@ -5,6 +5,7 @@
 
 | Version | Change                                                                                    |
 | ------- | ----------------------------------------------------------------------------------------- |
+| 1.44.0  | 新增属性 `disableWheel` - 禁用鼠标滚动,`graphMaxHeight` - 设置画布最大高度。              |
 | 1.39.0  | 支持节点高亮，新增属性 `highlightNode`,`highlightOptions`                                 |
 | 1.33.0  | 支持边类型 `polyline`                                                                     |
 | 1.27.0  | `force` 布局支持设置保存拖动后的节点位置：`saveDraggedNodes`                              |
@@ -42,7 +43,9 @@
 | fitVertical      | boolean          | -        | false   | 是否撑满页面。                                                                                                              |
 | hideZoomBar      | boolean          | -        | false   | 隐藏右下角的缩放面板                                                                                                        |
 | disableDrag      | boolean          | -        | false   | 禁用移动视图，开启后不能拖动／滚动视图。                                                                                    |
+| disableWheel     | boolean          | -        | false   | 禁用鼠标滚动，开启后不能滚动视图。                                                                                          |
 | graphMinHeight   | number           | -        | 225     | 画布最小高度。                                                                                                              |
+| graphMaxHeight   | number           | -        | -       | 画布最大高度。                                                                                                              |
 | highlightNode    | string \|number  | -        | -       | 需要高亮的节点 ID（通过绑定节点构件的 `mouseenter` `mouseleave` `click` 事件设置该属性可以实现悬浮高亮等特性）              |
 | highlightOptions | HighlightOptions | -        | -       | 高亮选项设置，可以设置条件过滤                                                                                              |
 
