@@ -1,12 +1,23 @@
+.scrollContainer {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .siteMapContainer {
+  padding-top: 10px;
   column-count: 5;
 
   .groupWrapper {
+    margin: 0 30px;
     break-inside: avoid;
 
     .group {
       padding: 0;
-      margin-bottom: 30px;
+      margin: 9px 0 58px;
     }
     .item {
       list-style-type: none;

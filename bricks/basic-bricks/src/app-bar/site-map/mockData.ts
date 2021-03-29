@@ -89,4 +89,31 @@ export const data = [
       { name: "任务历史" },
     ],
   },
+  {
+    name: "低代码开发",
+    items: [
+      { name: "Next Builder" },
+      { name: "开发者中心" },
+      { name: "小产品编排管理" },
+      { name: "API Gateway" },
+      { name: "微应用配置中心" },
+    ],
+  },
+  {
+    name: "ITSC",
+    items: [{ name: "IT服务中心" }, { name: "门户网站" }],
+  },
+  {
+    name: "公共服务",
+    items: [
+      { name: "个人信息 / 账户设置" },
+      { name: "LaunchPad配置" },
+      { name: "API密钥管理" },
+      { name: "Agent管理" },
+      { name: "产品文档中心 (Next Document)" },
+      { name: "Micro Apps" },
+      { name: "用户与权限" },
+      { name: "密钥管理" },
+    ],
+  },
 ];

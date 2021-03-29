@@ -5,6 +5,7 @@ import { MyDesktop, SiteMapDirection } from "./MyDesktop";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
 import { FavoriteDesktopCell } from "../FavoriteDesktopCell/FavoriteDesktopCell";
 import { launchpadService } from "../LaunchpadService";
+import { SiteMap } from "../site-map/SiteMap";
 
 const favoriteList = [
   {
@@ -188,7 +189,11 @@ describe("MyDesktop", () => {
       wrapper.find({ "test-id": "my-destop" }).prop("style").marginTop
     ).toEqual("-190px");
 
-    ref.current.handleSlider(SiteMapDirection.Down);
+    wrapper.find(SiteMap).invoke("onScrollCallback")(false);
+
+    act(() => {
+      ref.current.handleSlider(SiteMapDirection.Down);
+    });
     wrapper.update();
     expect(
       wrapper.find({ "test-id": "my-destop" }).prop("style").marginTop
