@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.177.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.176.0...@next-bricks/presentational-bricks@1.177.0) (2021-03-29)
+
+
+### Features
+
+* **brick-table:** 支持换页勾选 ([d8ece35](https://github.com/easyops-cn/next-basics/commit/d8ece35dfadfdaba4666d7edaf5dab84a2864cc3))
+* **brick-table:** 支持换页勾选 ([e659be3](https://github.com/easyops-cn/next-basics/commit/e659be3fa37039a6dcb003aab572944a3e71c8a1))
+* **icon-select:** defaultColor ([b855b09](https://github.com/easyops-cn/next-basics/commit/b855b092dc43b3248589cfd1b84c38d955f7e2fd))
+
+
+
+
+
 # [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.175.1...@next-bricks/presentational-bricks@1.176.0) (2021-03-26)
 
 

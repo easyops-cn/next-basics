@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.4.0...@next-bricks/brick-visualization@1.5.0) (2021-03-29)
+
+
+### Features
+
+* **icon-select:** defaultColor ([b855b09](https://github.com/easyops-cn/next-basics/commit/b855b092dc43b3248589cfd1b84c38d955f7e2fd))
+
+
+
+
+
 # [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.3.1...@next-bricks/brick-visualization@1.4.0) (2021-03-19)
 
 
