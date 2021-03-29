@@ -9,6 +9,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { TableProps } from "antd/lib/table";
 import { UseBrickConf } from "@next-core/brick-types";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
 import styles from "./brick-table.editor.module.css";
 
@@ -50,12 +51,14 @@ export function BrickTableEditor({
             {configProps.rowSelection && <span className={styles.checkbox} />}
             {range(0, columns).map((columnIndex) => {
               const curColumn = tableColumnsProps?.[columnIndex];
-              const title = curColumn?.title;
+              const columnTitle = smartDisplayForEvaluableString(
+                curColumn?.title
+              );
               const isUseBrick = curColumn?.headerBrick;
               return (
                 <div key={columnIndex} className={styles.cell}>
-                  {rowIndex === 0 && title && !isUseBrick ? (
-                    <span>{title}</span>
+                  {rowIndex === 0 && columnTitle && !isUseBrick ? (
+                    <span>{columnTitle}</span>
                   ) : (
                     <div className={styles.content}></div>
                   )}

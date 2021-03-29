@@ -16,6 +16,7 @@ describe("BrickTableEditor", () => {
     expect(wrapper.find(".row").length).toBe(3);
     expect(wrapper.find(".row").at(0).find(".cell").length).toBe(3);
   });
+
   it("should render table with specified properties", () => {
     jest.spyOn(helper, "useBuilderNode").mockReturnValueOnce({
       type: "brick",
@@ -27,7 +28,7 @@ describe("BrickTableEditor", () => {
           {
             dataIndex: "name",
             key: "name",
-            title: "名称",
+            title: '<% I18N("TABLE_HEAD_NAME", "名称") %>',
           },
           {
             dataIndex: "hobby",
@@ -50,5 +51,6 @@ describe("BrickTableEditor", () => {
 
     expect(wrapper.find(".checkbox").length).toEqual(3);
     expect(wrapper.find(".head .cell").at(0).text()).toEqual("名称");
+    expect(wrapper.find(".head .cell").at(1).text()).toEqual("");
   });
 });
