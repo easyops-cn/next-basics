@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.43.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.42.0...@next-bricks/next-builder@1.43.0) (2021-03-29)
+
+
+### Features
+
+* support to find references of a template ([2d247fe](https://github.com/easyops-cn/next-basics/commit/2d247fe823f88333829298ab9ea8fffb4600dcd8))
+
+
+
+
+
 # [1.42.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.41.0...@next-bricks/next-builder@1.42.0) (2021-03-26)
 
 
