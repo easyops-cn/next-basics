@@ -8,8 +8,9 @@ import { Desktop } from "../Desktop/Desktop";
 import { useLaunchpadSettingsContext } from "../LaunchpadSettingsContext";
 import { useDesktopDirContext } from "../DesktopDirContext";
 import styles from "./DesktopSlider.module.css";
-import { MyDesktop } from "../MyDesktop/MyDesktop";
+import { MyDesktop, SiteMapDirection } from "../MyDesktop/MyDesktop";
 import { launchpadService } from "../LaunchpadService";
+import { HomeFilled } from "@ant-design/icons";
 
 interface DesktopSliderProps {
   microApps: MicroApp[];
@@ -30,6 +31,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   const { columns, rows } = useLaunchpadSettingsContext();
   const { setDesktopDir } = useDesktopDirContext();
   const slideDuration = 400;
+  const myDeskRef = React.createRef<any>();
 
   useEffect(() => {
     enableMyDesktop && launchpadService.setMaxVisitorLength(8);
@@ -267,9 +269,15 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     // 经测试，滚轮纵轴一次位移 4，横轴一次位移 40。
     const threshold = axisRef === deltaYRef ? 4 : 40;
     if (axisRef.current >= threshold) {
-      slideRight();
+      enableMyDesktop
+        ? desktopCursor === 0 &&
+          myDeskRef.current?.handleSlider(SiteMapDirection.Up)
+        : slideRight();
     } else if (axisRef.current <= -threshold) {
-      slideLeft();
+      enableMyDesktop
+        ? desktopCursor === 0 &&
+          myDeskRef.current?.handleSlider(SiteMapDirection.Down)
+        : slideLeft();
     } else {
       return;
     }
@@ -307,22 +315,23 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
       })}
     >
       <div className={styles.desktopSelector}>
-        {[...(enableMyDesktop ? [{ name: "我的" }] : []), ...desktops].map(
-          (desktop, index) => (
-            <React.Fragment key={index}>
-              {index !== 0 && <span className={styles.selectorSeparator} />}
-              <a
-                className={classNames(styles.desktopName, {
-                  [styles.active]: desktopCursor === index,
-                })}
-                onClick={(e) => handleSlideTo(e, index)}
-                role="button"
-              >
-                {desktop.name}
-              </a>
-            </React.Fragment>
-          )
-        )}
+        {[
+          ...(enableMyDesktop ? [{ name: <HomeFilled /> }] : []),
+          ...desktops,
+        ].map((desktop, index) => (
+          <React.Fragment key={index}>
+            {index !== 0 && <span className={styles.selectorSeparator} />}
+            <a
+              className={classNames(styles.desktopName, {
+                [styles.active]: desktopCursor === index,
+              })}
+              onClick={(e) => handleSlideTo(e, index)}
+              role="button"
+            >
+              {desktop.name}
+            </a>
+          </React.Fragment>
+        ))}
       </div>
       <div className={styles.scrollContainer} onWheel={handleWheel}>
         <div
@@ -335,6 +344,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
         >
           {enableMyDesktop && (
             <MyDesktop
+              ref={myDeskRef}
               desktopCount={desktops.length}
               arrowWidthPercent={props.arrowWidthPercent}
             />

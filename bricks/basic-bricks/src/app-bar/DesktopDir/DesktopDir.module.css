@@ -13,6 +13,11 @@
   padding: 7px;
   /* overflow: hidden; */
 
+  &.size {
+    width: 56px;
+    height: 56px;
+  }
+
   .appIcon,
   :global(.anticon) {
     width: 33px;

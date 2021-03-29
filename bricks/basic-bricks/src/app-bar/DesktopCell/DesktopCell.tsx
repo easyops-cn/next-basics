@@ -19,6 +19,8 @@ interface DesktopCellProps {
   position?: "left" | "center" | "right";
   onSetAsFavorite?: () => void;
   isFavorite?: boolean;
+  responsive?: boolean;
+  size?: string;
 }
 
 export function DesktopCell(props: DesktopCellProps): React.ReactElement {
@@ -29,7 +31,7 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
         // launchpad 遮罩层z-index为5000
         zIndex: 5001,
         title: "收藏数量已达上限",
-        content: "当前收藏链接数量已达上限（24个），请删除部分链接后再添加。",
+        content: "当前收藏链接数量已达上限（25个），请删除部分链接后再添加。",
       });
 
       return false;
@@ -82,10 +84,11 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
     <div
       className={classNames(styles.cellWrapper, {
         [styles.positionLeft]: props?.position === "left",
+        [styles.responsive]: props.responsive ?? true,
       })}
     >
       <div
-        className={classNames(styles.cellItem, {
+        className={classNames(styles.cellItem, styles[props.size], {
           [styles.active]: props.active,
         })}
       >
@@ -96,6 +99,8 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
             app={props.item.app}
             onClick={handleAppClick}
             onAddClick={addItemToFavorite}
+            size={props.size}
+            responsive={props.responsive}
           />
         ) : props.item.type === "custom" ? (
           <DesktopCustom
@@ -105,9 +110,14 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
             url={props.item.url}
             onClick={handleCustomClick}
             onAddClick={addItemToFavorite}
+            size={props.size}
           />
         ) : (
-          <DesktopDir name={props.item.name} items={props.item.items} />
+          <DesktopDir
+            name={props.item.name}
+            items={props.item.items}
+            size={props.size}
+          />
         )}
       </div>
     </div>
