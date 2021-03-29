@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
 import styles from "./MyDesktop.module.css";
 import { SettingOutlined, LoadingOutlined } from "@ant-design/icons";
@@ -38,11 +38,20 @@ export function MyDesktops(
   const [firstRendered, setFirstRendered] = useState(true);
   const [mode, setMode] = useState<ModeType>(ModeType.Sitemap);
   const [mapCursor, setMapCursor] = useState(0);
+  const siteMapRef = createRef<HTMLDivElement>();
+  const deskContainerRef = useRef<HTMLDivElement>();
+  const [siteMapHeight, setSiteMapHeight] = useState<number>();
+  const [disableWheel, setDisableWheel] = useState<boolean>(false);
 
   const handleSlider = (direction: SiteMapDirection) => {
-    if (direction === SiteMapDirection.Up) {
+    if (direction === SiteMapDirection.Up && !disableWheel) {
       setMapCursor(1);
-    } else if (direction === SiteMapDirection.Down) {
+      setDisableWheel(true);
+    } else if (
+      direction === SiteMapDirection.Down &&
+      (mode === ModeType.Favorities ||
+        (mode === ModeType.Sitemap && !disableWheel))
+    ) {
       setMapCursor(0);
     }
   };
@@ -71,6 +80,20 @@ export function MyDesktops(
   const handleOnSetAsFavorite = async () => {
     await getFavoriteList();
   };
+
+  const handleCallback = (flag: boolean) => {
+    setDisableWheel(flag);
+  };
+
+  useEffect(() => {
+    Promise.resolve().then(() => {
+      const siteMapDom = siteMapRef.current.getBoundingClientRect();
+      const deskContainerDom = deskContainerRef.current.getBoundingClientRect();
+      const siteMapHeight = deskContainerDom.bottom - siteMapDom.top;
+
+      setSiteMapHeight(siteMapHeight);
+    });
+  }, []);
 
   useEffect(() => {
     !isLoading && firstRendered && setFirstRendered(false);
@@ -130,12 +153,23 @@ export function MyDesktops(
   }, [favoriteList, isLoading, firstRendered]);
 
   const renderSiteMap = useMemo(() => {
-    return <SiteMap categoryList={mockData} />;
-  }, []);
+    return (
+      <SiteMap
+        ref={siteMapRef}
+        onScrollCallback={handleCallback}
+        categoryList={mockData}
+        containerStyle={{
+          height: siteMapHeight,
+          overflow: mapCursor === 1 ? "auto" : "hidden",
+        }}
+      />
+    );
+  }, [siteMapHeight, mapCursor]);
 
   return (
     <div
       test-id="my-destop"
+      ref={deskContainerRef}
       style={{
         flex: 1,
         padding: `0 ${props.arrowWidthPercent / props.desktopCount}%`,
@@ -151,9 +185,10 @@ export function MyDesktops(
               {" "}
               我的收藏
               <Icon
+                style={{ fontSize: 12 }}
                 className={styles.modeIcon}
                 component={() => (
-                  <BrickIcon icon="launchpad-collection" category="app" />
+                  <BrickIcon icon="launchpad-sitmap" category="app" />
                 )}
                 onClick={(e) => handleMode(e, ModeType.Sitemap)}
               />
@@ -162,21 +197,20 @@ export function MyDesktops(
             <div className={styles.title}>
               系统地图
               <Icon
-                style={{ fontSize: 12 }}
                 className={styles.modeIcon}
                 component={() => (
-                  <BrickIcon icon="launchpad-sitmap" category="app" />
+                  <BrickIcon icon="launchpad-collection" category="app" />
                 )}
                 onClick={(e) => handleMode(e, ModeType.Favorities)}
               />
             </div>
           )}
           {mode === ModeType.Favorities && (
-            <div>
+            <div className={styles.settingsContainer}>
               <Link to={"/launchpad-collection"}>
                 <SettingOutlined className={styles.settings} />
+                管理收藏
               </Link>
-              管理收藏
             </div>
           )}
         </div>

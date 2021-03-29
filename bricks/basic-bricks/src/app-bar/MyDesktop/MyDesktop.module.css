@@ -9,7 +9,7 @@
 .title {
   color: #fff;
   font-size: 16px;
-  padding-bottom: 1.3rem;
+  padding-bottom: 6px;
 }
 
 .modeWrapper {
@@ -20,7 +20,7 @@
     justify-content: space-between;
   }
   .section {
-    padding-bottom: 20px;
+    padding: 10px 30px 20px;
     &.visited {
       border-bottom: 1px rgba(255, 255, 255, 0.25) solid;
     }
@@ -34,7 +34,7 @@
     }
   }
   .modeIcon {
-    padding-left: 14px;
+    padding-left: 10px;
   }
 }
 
@@ -45,15 +45,23 @@
   line-height: 200px;
 }
 
-.settings {
-  cursor: pointer;
-  margin-right: 14px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
-  transition-duration: 0.8s;
-  transition-property: transform;
+.settingsContainer {
+  a {
+    color: #fff;
+  }
+
+  .settings {
+    cursor: pointer;
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    transition-duration: 0.8s;
+    transition-property: transform;
+  }
   &:hover {
-    transform: rotate(180deg);
+    .settings {
+      transform: rotate(180deg);
+    }
   }
 }
 

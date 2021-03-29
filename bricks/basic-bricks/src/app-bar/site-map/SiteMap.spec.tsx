@@ -12,10 +12,22 @@ describe("SiteMap", () => {
         },
       ],
     };
-    const wrapper = shallow(<SiteMap {...props} />);
+
+    const callbackFn = jest.fn();
+    const wrapper = shallow(
+      <SiteMap
+        {...props}
+        ref={{ current: { scrollTop: 0 } }}
+        onScrollCallback={callbackFn}
+      />
+    );
     expect(wrapper.find(".groupWrapper").length).toEqual(1);
     expect(wrapper.find(".groupWrapper").text()).toEqual(
       expect.stringContaining("资源管理")
     );
+
+    wrapper.find(".scrollContainer").invoke("onWheel")({ deltaY: -1 } as any);
+
+    expect(callbackFn).toHaveBeenCalledWith(false);
   });
 });
