@@ -10,6 +10,7 @@ import {
 import { IconSelect } from "./IconSelect";
 import { FormItemElement } from "@next-libs/forms";
 import { MenuIcon } from "@next-core/brick-types";
+import { Colors } from "@next-libs/basic-components";
 
 export type Size = number | "large" | "small" | "default";
 
@@ -107,10 +108,20 @@ export class IconSelectElement extends FormItemElement {
    */
   @property({ attribute: false })
   setColor = true;
+
+  /**
+   * @kind Colors
+   * @required false
+   * @default -
+   * @description 默认颜色
+   * @group advanced
+   */
+  @property({ attribute: false })
+  defaultColor?: Colors;
+
   /**
    * @description 打开图标选择模态框
    */
-
   @method()
   open(): void {
     if (this.disabled) {
@@ -186,6 +197,7 @@ export class IconSelectElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             bg={this.bg}
             setColor={this.setColor}
+            defaultColor={this.defaultColor}
           />
         </BrickWrapper>,
         this
