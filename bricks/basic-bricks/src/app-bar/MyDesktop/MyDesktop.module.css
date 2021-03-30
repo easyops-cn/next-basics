@@ -34,7 +34,13 @@
     }
   }
   .modeIcon {
-    padding-left: 10px;
+    margin-left: 7px;
+    padding: 3px;
+    border-radius: 50%;
+    &:hover {
+      opacity: 0.8;
+      background: rgba(255, 255, 255, 0.1);
+    }
   }
 }
 

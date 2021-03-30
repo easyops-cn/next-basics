@@ -185,7 +185,6 @@ export function MyDesktops(
               {" "}
               我的收藏
               <Icon
-                style={{ fontSize: 12 }}
                 className={styles.modeIcon}
                 component={() => (
                   <BrickIcon icon="launchpad-sitmap" category="app" />
