@@ -31,7 +31,6 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   const { columns, rows } = useLaunchpadSettingsContext();
   const { setDesktopDir } = useDesktopDirContext();
   const slideDuration = 400;
-  const myDeskRef = React.createRef<any>();
 
   useEffect(() => {
     enableMyDesktop && launchpadService.setMaxVisitorLength(8);
@@ -269,15 +268,9 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     // 经测试，滚轮纵轴一次位移 4，横轴一次位移 40。
     const threshold = axisRef === deltaYRef ? 4 : 40;
     if (axisRef.current >= threshold) {
-      enableMyDesktop
-        ? desktopCursor === 0 &&
-          myDeskRef.current?.handleSlider(SiteMapDirection.Up)
-        : slideRight();
+      slideRight();
     } else if (axisRef.current <= -threshold) {
-      enableMyDesktop
-        ? desktopCursor === 0 &&
-          myDeskRef.current?.handleSlider(SiteMapDirection.Down)
-        : slideLeft();
+      slideLeft();
     } else {
       return;
     }
@@ -344,7 +337,6 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
         >
           {enableMyDesktop && (
             <MyDesktop
-              ref={myDeskRef}
               desktopCount={desktops.length}
               arrowWidthPercent={props.arrowWidthPercent}
             />

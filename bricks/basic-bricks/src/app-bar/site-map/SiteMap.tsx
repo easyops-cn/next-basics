@@ -1,7 +1,6 @@
 import React, { forwardRef, useMemo } from "react";
 import styles from "./SiteMap.module.css";
 import { Link } from "@next-libs/basic-components";
-import { throttle } from "lodash";
 
 interface SiteCategory {
   name: string;
@@ -10,7 +9,6 @@ interface SiteCategory {
 export interface SiteMapProps {
   categoryList: SiteCategory[];
   containerStyle?: React.CSSProperties;
-  onScrollCallback?: (flag: boolean) => void;
 }
 
 export function LeacySiteMap(
@@ -18,21 +16,15 @@ export function LeacySiteMap(
   ref: any
 ): React.ReactElement {
   const handleWheel = (e: React.WheelEvent) => {
-    const scrolltop = ref.current?.scrollTop;
-    // istanbul ignore else
-    if (scrolltop === 0 && e.deltaY < 0) {
-      props.onScrollCallback?.(false);
-    }
+    e.stopPropagation();
   };
-
-  const throttleWheel = throttle(handleWheel, 300);
 
   return (
     <div
       className={styles.scrollContainer}
       style={props.containerStyle}
       ref={ref}
-      onWheel={throttleWheel}
+      onWheel={handleWheel}
     >
       <div className={styles.siteMapContainer}>
         {props.categoryList?.map((item) => (
