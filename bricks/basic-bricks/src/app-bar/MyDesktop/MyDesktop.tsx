@@ -28,37 +28,15 @@ export enum SiteMapDirection {
   Down,
 }
 
-export function MyDesktops(
-  props: MyDesktopProps,
-  ref: any
-): React.ReactElement {
+export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
   const [recentlyVisitedList] = useState(launchpadService.getAllVisitors());
   const [favoriteList, setFavoriteList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstRendered, setFirstRendered] = useState(true);
   const [mode, setMode] = useState<ModeType>(ModeType.Sitemap);
-  const [mapCursor, setMapCursor] = useState(0);
   const siteMapRef = createRef<HTMLDivElement>();
   const deskContainerRef = useRef<HTMLDivElement>();
   const [siteMapHeight, setSiteMapHeight] = useState<number>();
-  const [disableWheel, setDisableWheel] = useState<boolean>(false);
-
-  const handleSlider = (direction: SiteMapDirection) => {
-    if (direction === SiteMapDirection.Up && !disableWheel) {
-      setMapCursor(1);
-      setDisableWheel(true);
-    } else if (
-      direction === SiteMapDirection.Down &&
-      (mode === ModeType.Favorities ||
-        (mode === ModeType.Sitemap && !disableWheel))
-    ) {
-      setMapCursor(0);
-    }
-  };
-
-  React.useImperativeHandle(ref, () => ({
-    handleSlider,
-  }));
 
   const getFavoriteList = async () => {
     setIsLoading(true);
@@ -79,10 +57,6 @@ export function MyDesktops(
 
   const handleOnSetAsFavorite = async () => {
     await getFavoriteList();
-  };
-
-  const handleCallback = (flag: boolean) => {
-    setDisableWheel(flag);
   };
 
   useEffect(() => {
@@ -156,15 +130,14 @@ export function MyDesktops(
     return (
       <SiteMap
         ref={siteMapRef}
-        onScrollCallback={handleCallback}
         categoryList={mockData}
         containerStyle={{
           height: siteMapHeight,
-          overflow: mapCursor === 1 ? "auto" : "hidden",
+          overflow: "auto",
         }}
       />
     );
-  }, [siteMapHeight, mapCursor]);
+  }, [siteMapHeight]);
 
   return (
     <div
@@ -173,8 +146,6 @@ export function MyDesktops(
       style={{
         flex: 1,
         padding: `0 ${props.arrowWidthPercent / props.desktopCount}%`,
-        marginTop: `${mapCursor === 1 ? "-171px" : 0}`,
-        transition: "margin-top 400ms ease-out",
       }}
     >
       {!!recentlyVisitedList?.length && renderRecentlyVisited}
@@ -219,5 +190,3 @@ export function MyDesktops(
     </div>
   );
 }
-
-export const MyDesktop = React.forwardRef(MyDesktops);

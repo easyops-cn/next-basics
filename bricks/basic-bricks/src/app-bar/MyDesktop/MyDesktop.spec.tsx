@@ -158,6 +158,9 @@ describe("MyDesktop", () => {
     wrapper.find(".modeIcon").at(0).simulate("click");
     wrapper.update();
     expect(wrapper.find(".header .title").text()).toEqual("系统地图");
+
+    wrapper.find(DesktopCell).at(0).invoke("onSetAsFavorite")();
+    expect(launchpadService.fetchFavoriteList).toHaveBeenCalled();
   });
 
   it("should show prompt if empty favoriteList", async () => {
@@ -173,30 +176,5 @@ describe("MyDesktop", () => {
     expect(wrapper.find(".favorites span").text()).toEqual(
       expect.stringContaining("把常用的页面链接加入收藏夹，方便快速访问 ~")
     );
-  });
-
-  it("should work with ref", async () => {
-    const ref = React.createRef<any>();
-    const wrapper = mount(
-      <MyDesktop desktopCount={2} arrowWidthPercent={9} ref={ref} />
-    );
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
-    ref.current.handleSlider(SiteMapDirection.Up);
-    wrapper.update();
-    expect(
-      wrapper.find({ "test-id": "my-destop" }).prop("style").marginTop
-    ).toEqual("-171px");
-
-    wrapper.find(SiteMap).invoke("onScrollCallback")(false);
-
-    act(() => {
-      ref.current.handleSlider(SiteMapDirection.Down);
-    });
-    wrapper.update();
-    expect(
-      wrapper.find({ "test-id": "my-destop" }).prop("style").marginTop
-    ).toEqual("0");
   });
 });

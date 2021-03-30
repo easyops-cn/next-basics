@@ -14,20 +14,17 @@ describe("SiteMap", () => {
     };
 
     const callbackFn = jest.fn();
-    const wrapper = shallow(
-      <SiteMap
-        {...props}
-        ref={{ current: { scrollTop: 0 } }}
-        onScrollCallback={callbackFn}
-      />
-    );
+    const wrapper = shallow(<SiteMap {...props} />);
     expect(wrapper.find(".groupWrapper").length).toEqual(1);
     expect(wrapper.find(".groupWrapper").text()).toEqual(
       expect.stringContaining("资源管理")
     );
 
-    wrapper.find(".scrollContainer").invoke("onWheel")({ deltaY: -1 } as any);
+    const stopPropagationFn = jest.fn();
+    wrapper.find(".scrollContainer").invoke("onWheel")({
+      stopPropagation: stopPropagationFn,
+    } as any);
 
-    expect(callbackFn).toHaveBeenCalledWith(false);
+    expect(stopPropagationFn).toHaveBeenCalled();
   });
 });
