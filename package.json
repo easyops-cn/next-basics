@@ -32,7 +32,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@next-core/babel-runtime-helpers": "^1.0.8",
     "@next-core/brick-http": "^2.2.7",
-    "@next-core/brick-icons": "^2.10.0",
+    "@next-core/brick-icons": "^2.10.1",
     "@next-core/brick-kit": "^2.38.0",
     "@next-core/brick-types": "^2.20.1",
     "@next-core/brick-utils": "^2.14.1",
@@ -88,5 +88,5 @@
     "lodash": "^4.17.20",
     "@next-core/brick-types": "^2.20.1"
   },
-  "easyops": { "dev-dependencies": "1.2.80" }
+  "easyops": { "dev-dependencies": "1.2.81" }
 }
