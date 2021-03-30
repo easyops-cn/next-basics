@@ -187,7 +187,7 @@ describe("MyDesktop", () => {
     wrapper.update();
     expect(
       wrapper.find({ "test-id": "my-destop" }).prop("style").marginTop
-    ).toEqual("-190px");
+    ).toEqual("-171px");
 
     wrapper.find(SiteMap).invoke("onScrollCallback")(false);
 

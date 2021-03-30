@@ -173,7 +173,7 @@ export function MyDesktops(
       style={{
         flex: 1,
         padding: `0 ${props.arrowWidthPercent / props.desktopCount}%`,
-        marginTop: `${mapCursor === 1 ? "-190px" : 0}`,
+        marginTop: `${mapCursor === 1 ? "-171px" : 0}`,
         transition: "margin-top 400ms ease-out",
       }}
     >
