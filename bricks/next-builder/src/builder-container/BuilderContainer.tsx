@@ -202,6 +202,13 @@ export function LegacyBuilderContainer(
     onClipboardChange?.(clipboard);
   }, [clipboard, onClipboardChange]);
 
+  const handleClickOverlay = React.useCallback(() => {
+    if (!fullscreen) {
+      return;
+    }
+    setFullscreen(false);
+  }, [fullscreen]);
+
   return (
     <BuilderUIContext.Provider
       value={{
@@ -228,10 +235,14 @@ export function LegacyBuilderContainer(
       }}
     >
       <div
-        className={classNames(styles.builderOverlay, {
+        className={classNames(styles.builderWrapper, {
           [styles.fullscreen]: fullscreen,
         })}
       >
+        <div
+          className={styles.builderOverlay}
+          onClick={handleClickOverlay}
+        ></div>
         <div className={styles.builderContainer}>
           <BuilderToolbar />
           <div className={styles.builderBodyWrapper}>
