@@ -79,7 +79,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
             src_object_id: props.srcObjectId,
             dst_object_id: value,
             with_cycle: true,
-            show_inherit_node: true,
+            show_inherit_node: false,
           })
         ).data;
         setPathOptions(
