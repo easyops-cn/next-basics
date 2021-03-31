@@ -25,7 +25,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   allowClear?: boolean;
   inputBoxStyle?: React.CSSProperties;
   extraSearchKey?: string[];
-  popoverPositionType: "default" | "parent";
+  popoverPositionType?: "default" | "parent";
   isMultiLabel?: boolean;
   showSearchTip?: boolean;
   labelTemplate?: string;
@@ -175,6 +175,7 @@ export function CmdbInstanceSelectItem(
 
   React.useEffect(() => {
     // 初始化时通过用户的 value 得出首次 label 的值
+    // 由于value的不确定性，可能存在首次查询的值不唯一，初始化时也添加instanceQuery
     if (!isEqual(props.value, value) && props.value !== undefined) {
       handleSearch(
         "",
@@ -184,6 +185,7 @@ export function CmdbInstanceSelectItem(
               $in: castArray(props.value),
             },
           },
+          ...userQuery,
         ],
         true
       );
