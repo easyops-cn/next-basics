@@ -9,6 +9,7 @@ import {
   BuilderRouteNode,
   BuilderCustomTemplateNode,
 } from "@next-core/brick-types";
+import { EventStreamNode } from "./EventStreamCanvas/interfaces";
 
 export interface ContextOfBuilderUI {
   appId?: string;
@@ -31,6 +32,7 @@ export interface ContextOfBuilderUI {
   onCurrentTemplateClick?: (template: BuilderCustomTemplateNode) => void;
   onBuildAndPush?: () => void;
   onPreview?: () => void;
+  onEventNodeClick?: (eventNode: EventStreamNode) => void;
 }
 
 export const BuilderUIContext = React.createContext<ContextOfBuilderUI>({});

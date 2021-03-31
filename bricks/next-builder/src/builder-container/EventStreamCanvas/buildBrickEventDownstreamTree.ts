@@ -101,6 +101,7 @@ function processBrickEventDownstreamTree({
     parentHandlerIndex,
     channel,
     children: [],
+    node: eventNode.node,
   } as EventDownstreamNode;
   childEventNode.height = computeEventDownstreamNodeHeight(childEventNode);
   eventNode.children.push(childEventNode);

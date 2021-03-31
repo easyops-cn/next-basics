@@ -23,6 +23,7 @@ export interface EventStreamNodeComponentProps<T = EventStreamNode> {
   targetMap?: Map<string, string>;
   targetRefMap?: Map<string, string>;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
+  onEventNodeClick?: (eventNode: EventStreamNode) => void;
 }
 
 export function EventStreamNodeComponent({
@@ -30,12 +31,14 @@ export function EventStreamNodeComponent({
   targetMap,
   targetRefMap,
   setEventStreamNodeId,
+  onEventNodeClick,
 }: EventStreamNodeComponentProps): React.ReactElement {
   return isEventDownstreamNode(eventNode) ? (
     <EventDownstreamNodeComponent
       eventNode={eventNode}
       targetMap={targetMap}
       targetRefMap={targetRefMap}
+      onEventNodeClick={onEventNodeClick}
       setEventStreamNodeId={setEventStreamNodeId}
     />
   ) : (
@@ -43,6 +46,7 @@ export function EventStreamNodeComponent({
       eventNode={eventNode}
       targetMap={targetMap}
       targetRefMap={targetRefMap}
+      onEventNodeClick={onEventNodeClick}
       setEventStreamNodeId={setEventStreamNodeId}
     />
   );
@@ -53,6 +57,7 @@ export function EventDownstreamNodeComponent({
   targetMap,
   targetRefMap,
   setEventStreamNodeId,
+  onEventNodeClick,
 }: EventStreamNodeComponentProps<EventDownstreamNode>): React.ReactElement {
   return (
     <div
@@ -66,7 +71,10 @@ export function EventDownstreamNodeComponent({
         height: eventNode.height,
       }}
     >
-      <EventStreamTitle eventNode={eventNode} />
+      <EventStreamTitle
+        eventNode={eventNode}
+        onEventNodeClick={onEventNodeClick}
+      />
       {hasChannel(eventNode) && (
         <div className={styles.divider} style={styleConfig.divider}>
           {eventNode.channel}
@@ -95,6 +103,7 @@ export function EventUpstreamNodeComponent({
   targetMap,
   targetRefMap,
   setEventStreamNodeId,
+  onEventNodeClick,
 }: EventStreamNodeComponentProps<EventUpstreamNode>): React.ReactElement {
   const isUpstreamSource = eventNode.type === EventUpstreamType.UPSTREAM_SOURCE;
 
@@ -117,7 +126,10 @@ export function EventUpstreamNodeComponent({
       }}
       onClick={handleClick}
     >
-      <EventStreamTitle eventNode={eventNode} />
+      <EventStreamTitle
+        eventNode={eventNode}
+        onEventNodeClick={onEventNodeClick}
+      />
       {hasChannel(eventNode) && (
         <div className={styles.divider} style={styleConfig.divider}>
           {eventNode.channel}

@@ -7,6 +7,10 @@ import {
   BuilderPasteDetailOfCopy,
   BuilderPasteDetailOfCut,
 } from "./interfaces";
+import {
+  EventDownstreamType,
+  EventStreamNode,
+} from "./EventStreamCanvas/interfaces";
 import { BuilderContainerElement } from "./";
 import "./";
 
@@ -170,6 +174,58 @@ describe("next-builder.builder-container", () => {
     };
     wrapper.find(BuilderContainer).invoke("onNodeCutPaste")(detail);
     expect(onNodeCutPaste).toBeCalledWith(
+      expect.objectContaining({
+        detail,
+      })
+    );
+
+    document.body.removeChild(element);
+  });
+
+  it("should handle event node click", () => {
+    const element = document.createElement(
+      "next-builder.builder-container"
+    ) as BuilderContainerElement;
+
+    document.body.appendChild(element);
+
+    const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onEventNodeClick = jest.fn();
+    element.addEventListener("event.node.click", onEventNodeClick);
+
+    const detail: EventStreamNode = {
+      node: {
+        type: "brick",
+        brick: "brick-a",
+        id: "id",
+      },
+      type: EventDownstreamType.EVENT,
+      eventType: "click",
+      children: [],
+      handlers: [
+        {
+          target: "#modal",
+          method: "open",
+        },
+      ],
+    };
+    wrapper.find(BuilderContainer).invoke("onEventNodeClick")({
+      node: {
+        type: "brick",
+        brick: "brick-a",
+        id: "id",
+      },
+      type: EventDownstreamType.EVENT,
+      eventType: "click",
+      children: [],
+      handlers: [
+        {
+          target: "#modal",
+          method: "open",
+        },
+      ],
+    });
+    expect(onEventNodeClick).toBeCalledWith(
       expect.objectContaining({
         detail,
       })

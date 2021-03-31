@@ -42,6 +42,7 @@ import {
 import { BuilderContainer } from "./BuilderContainer";
 import { defaultToolboxTab } from "./constants";
 import { getBuilderClipboard } from "./getBuilderClipboard";
+import { EventStreamNode } from "./EventStreamCanvas/interfaces";
 
 interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
   nodeData: NodeInstance & {
@@ -185,6 +186,11 @@ export class BuilderContainerElement extends UpdatingElement {
   }>;
 
   @event({
+    type: "event.node.click",
+  })
+  private _eventNodeClickEmitter: EventEmitter<EventStreamNode>;
+
+  @event({
     type: "clipboard.change",
   })
   private _eventClipboardChangeEmitter: EventEmitter<{
@@ -278,6 +284,10 @@ export class BuilderContainerElement extends UpdatingElement {
         id,
       });
     }
+  };
+
+  private _handleEventNodeClick = (eventNode: EventStreamNode): void => {
+    this._eventNodeClickEmitter.emit(eventNode);
   };
 
   private _handleClipboardChange = (clipboard: BuilderClipboard): void => {
@@ -414,6 +424,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onBuildAndPush={this._handleBuildAndPush}
                 onPreview={this._handlePreview}
                 onAskForAppendingBrick={this._handleAskForAppendingBrick}
+                onEventNodeClick={this._handleEventNodeClick}
               />
             </DndProvider>
           </BuilderProvider>

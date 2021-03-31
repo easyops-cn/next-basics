@@ -191,6 +191,7 @@ function buildByStack(
           handler: item.handler,
           children: [],
           channel: item.channel,
+          node: sourceNode,
         };
     }
     childEventNode.height = computeEventUpstreamNodeHeight(childEventNode);

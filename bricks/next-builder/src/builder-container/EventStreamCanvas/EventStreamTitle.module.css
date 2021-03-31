@@ -23,3 +23,8 @@
 .title.upstreamSource:hover {
   color: var(--antd-link-hover-color);
 }
+
+.clickable:hover {
+  color: var(--antd-link-color);
+  cursor: pointer;
+}
