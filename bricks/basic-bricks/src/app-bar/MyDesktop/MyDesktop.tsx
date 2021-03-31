@@ -59,7 +59,8 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
     await getFavoriteList();
   };
 
-  useEffect(() => {
+  const handleSiteMapLoad = () => {
+    // wait for launchpad open
     Promise.resolve().then(() => {
       const siteMapDom = siteMapRef.current.getBoundingClientRect();
       const deskContainerDom = deskContainerRef.current.getBoundingClientRect();
@@ -67,7 +68,7 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
 
       setSiteMapHeight(siteMapHeight);
     });
-  }, []);
+  };
 
   useEffect(() => {
     !isLoading && firstRendered && setFirstRendered(false);
@@ -135,6 +136,7 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
           height: siteMapHeight,
           overflow: "auto",
         }}
+        onLoad={handleSiteMapLoad}
       />
     );
   }, [siteMapHeight]);

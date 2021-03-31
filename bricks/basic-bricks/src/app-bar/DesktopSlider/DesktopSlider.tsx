@@ -303,6 +303,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
 
   return (
     <div
+      onWheel={handleWheel}
       className={classNames(styles.desktopSlider, {
         [styles.filtered]: props.q,
       })}
@@ -326,7 +327,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
           </React.Fragment>
         ))}
       </div>
-      <div className={styles.scrollContainer} onWheel={handleWheel}>
+      <div className={styles.scrollContainer}>
         <div
           className={styles.desktopList}
           style={{

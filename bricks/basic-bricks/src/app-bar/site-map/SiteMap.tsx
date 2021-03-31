@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef, useEffect, useMemo } from "react";
 import styles from "./SiteMap.module.css";
 import { Link } from "@next-libs/basic-components";
 
@@ -9,6 +9,7 @@ interface SiteCategory {
 export interface SiteMapProps {
   categoryList: SiteCategory[];
   containerStyle?: React.CSSProperties;
+  onLoad?: () => void;
 }
 
 export function LeacySiteMap(
@@ -18,6 +19,10 @@ export function LeacySiteMap(
   const handleWheel = (e: React.WheelEvent) => {
     e.stopPropagation();
   };
+
+  useEffect(() => {
+    props.onLoad?.();
+  }, []);
 
   return (
     <div
