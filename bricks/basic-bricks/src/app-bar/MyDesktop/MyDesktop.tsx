@@ -114,12 +114,12 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
           </div>
         ) : (
           !isLoading && (
-            <span>
+            <div className={styles.emptyTips}>
               把常用的页面链接加入收藏夹，方便快速访问 ~{" "}
-              <Link to="/launchpad-collection" style={{ marginLeft: 15 }}>
-                管理我的收藏夹
+              <Link to="/launchpad-collection" style={{ marginLeft: 30 }}>
+                管理我的收藏
               </Link>
-            </span>
+            </div>
           )
         )}
       </div>
