@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.178.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.0...@next-bricks/presentational-bricks@1.178.1) (2021-03-31)
+
+
+### Bug Fixes
+
+* **InfoDisplayCardList:** InfoDisplayCardList css bug fix ([4121a94](https://github.com/easyops-cn/next-basics/commit/4121a94c8d2279664dba883e6bfce14985b32d7d))
+
+
+
+
+
 # [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.177.2...@next-bricks/presentational-bricks@1.178.0) (2021-03-31)
 
 
