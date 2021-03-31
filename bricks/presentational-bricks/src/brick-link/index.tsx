@@ -129,6 +129,17 @@ export class BrickLinkElement extends UpdatingElement {
   type: "link" | "text" = "link";
 
   /**
+   * @default "left"
+   * @required false
+   * @description 链接图标位置：左边 - left 右边 - right
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  iconAlign: "left" | "right" = "left";
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -230,6 +241,7 @@ export class BrickLinkElement extends UpdatingElement {
             notToJumpWhenEmpty={this.notToJumpWhenEmpty}
             icon={this.icon}
             type={this.type}
+            iconAlign={this.iconAlign}
           />
         </BrickWrapper>,
         this
