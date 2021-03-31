@@ -8,7 +8,7 @@
 
   &:global(.ant-card) {
     &:hover {
-      border-style: hidden;
+      border-color: transparent;
     }
   }
 }
@@ -20,7 +20,7 @@
   width: 100%;
   color: #8c8c8c;
   box-sizing: border-box;
-  grid-template-columns: minmax(0, 3fr) 2fr;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
 }
 
 .infoCardMain {
@@ -74,7 +74,6 @@
       align-items: center;
       width: 90%;
       grid-auto-rows: min-content;
-      grid-template-columns: repeat(4, 1fr);
 
       h5 {
         color: #bfbfbf;
