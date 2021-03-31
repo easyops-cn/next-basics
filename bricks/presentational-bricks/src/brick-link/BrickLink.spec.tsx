@@ -49,4 +49,25 @@ describe("BrickLink", () => {
     );
     expect(wrapper.find(".textLink").length).toBe(1);
   });
+
+  it("should work when iconAlign is right", () => {
+    const wrapper = shallow<BrickLinkProps>(
+      <BrickLink
+        label="aaa"
+        url="/url"
+        type="text"
+        iconAlign="right"
+        icon={{
+          lib: "antd",
+          theme: "outlined",
+          type: "file-search",
+        }}
+      />
+    );
+    expect(wrapper.find("Link").childAt(1).props().icon).toEqual({
+      lib: "antd",
+      theme: "outlined",
+      type: "file-search",
+    });
+  });
 });

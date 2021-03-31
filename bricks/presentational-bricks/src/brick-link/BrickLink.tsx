@@ -17,6 +17,7 @@ export interface BrickLinkProps extends Pick<LinkProps, "replace" | "target"> {
   notToJumpWhenEmpty?: boolean;
   icon?: MenuIcon;
   type?: "link" | "text";
+  iconAlign?: "left" | "right";
 }
 
 export function BrickLink(props: BrickLinkProps): React.ReactElement {
@@ -27,6 +28,7 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
     href,
     tooltip,
     type,
+    iconAlign = "left",
     ...linkProps
   } = props;
   if (native) {
@@ -37,18 +39,34 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
   }
 
   const icon = props.icon ? (
-    <GeneralIcon icon={props.icon} style={label ? { marginRight: 6 } : {}} />
+    <GeneralIcon
+      icon={props.icon}
+      style={
+        label
+          ? iconAlign === "left"
+            ? { marginRight: 6 }
+            : { marginLeft: 6 }
+          : {}
+      }
+    />
   ) : null;
 
   let link;
-
-  if (props.disabled) {
-    link = (
-      <span className={cssStyle.disabledLink}>
+  const linkContent =
+    iconAlign === "left" ? (
+      <>
         {icon}
         {label}
-      </span>
+      </>
+    ) : (
+      <>
+        {label}
+        {icon}
+      </>
     );
+
+  if (props.disabled) {
+    link = <span className={cssStyle.disabledLink}>{linkContent}</span>;
   } else {
     const commonProps = {
       onClick: props.handleClick,
@@ -57,22 +75,15 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
       }),
     };
     if (props.notToJumpWhenEmpty && isEmpty(url)) {
-      link = (
-        <a {...commonProps}>
-          {icon}
-          {label}
-        </a>
-      );
+      link = <a {...commonProps}>{linkContent}</a>;
     } else {
       link = native ? (
         <a href={url} {...linkProps} {...commonProps}>
-          {icon}
-          {label}
+          {linkContent}
         </a>
       ) : (
         <Link to={url} href={href} {...linkProps} {...commonProps}>
-          {icon}
-          {label}
+          {linkContent}
         </Link>
       );
     }
