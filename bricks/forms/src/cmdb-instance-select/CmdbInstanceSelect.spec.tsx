@@ -119,17 +119,17 @@ describe("CmdbInstanceSelect", () => {
         firstRender={true}
       />
     );
-    await act(async() => {
+    await act(async () => {
       await (global as any).flushPromises();
-    })
+    });
     expect(wrapper.find(Select).prop("value")).toEqual("world");
 
     wrapper.setProps({
       value: "new world",
     });
-    await act(async() => {
+    await act(async () => {
       await (global as any).flushPromises();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(Select).prop("value")).toEqual("new world");
   });
@@ -261,6 +261,69 @@ describe("CmdbInstanceSelect", () => {
         .map((child) => child.props.children[1])
     ).toEqual(list.map((item) => item.mem));
   });
+  it("should work if user set instanceQuery ", async () => {
+    mockPostSearch.mockResolvedValueOnce({
+      list: [
+        {
+          objectId: "_ISSUE",
+          instanceId: "59bda0461dd2b",
+          name: "MICRO_APP-32",
+        },
+        {
+          objectId: "_ISSUE",
+          instanceId: "59bda0461df59",
+          name: "DATA_QUALITY",
+        },
+        {
+          objectId: "_ISSUE",
+          instanceId: "59bda0461df61",
+          name: "DATA",
+        },
+      ],
+    });
+    const wrapper = mount(
+      <CmdbInstanceSelect
+        firstRender={true}
+        objectId="_ISSUE"
+        name="ack"
+        label="问题"
+        placeholder="选择"
+        value="59bda0461df59"
+        instanceQuery={{
+          name: "DATA_QUALITY",
+        }}
+      />
+    );
+    expect(mockPostSearch.mock.calls[0][1]).toEqual({
+      fields: {
+        name: true,
+        instanceId: true,
+      },
+      page_size: undefined,
+      query: {
+        $and: [
+          {
+            $or: [
+              {
+                name: { $like: "%%" },
+              },
+            ],
+          },
+          {
+            instanceId: {
+              $in: ["59bda0461df59"],
+            },
+          },
+          {
+            name: "DATA_QUALITY",
+          },
+        ],
+      },
+    });
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(Select).prop("children")).toHaveLength(3);
+  });
   it("should render special label if user  set field props and field.label is Array", async () => {
     mockPostSearch.mockResolvedValueOnce({
       list: [
@@ -284,15 +347,14 @@ describe("CmdbInstanceSelect", () => {
         },
       ],
     });
-
     const wrapper = mount(
       <CmdbInstanceSelect
         firstRender={true}
-        objectId="HOST"
+        objectId="_ISSUE"
         name="ack"
-        label="host"
-        placeholder="选择主机"
-        value="world"
+        label="问题"
+        placeholder="选择"
+        value="59bda0461df61"
         fields={{ label: ["name", "title"], value: "instanceId" }}
       />
     );
@@ -317,7 +379,7 @@ describe("CmdbInstanceSelect", () => {
           },
           {
             instanceId: {
-              $in: ["world"],
+              $in: ["59bda0461df61"],
             },
           },
         ],
@@ -325,7 +387,6 @@ describe("CmdbInstanceSelect", () => {
     });
     await (global as any).flushPromises();
     wrapper.update();
-
     expect(wrapper.find(Select).prop("children")).toHaveLength(3);
   });
 
