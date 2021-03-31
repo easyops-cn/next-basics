@@ -31,6 +31,7 @@ import { BuilderUIContext } from "./BuilderUIContext";
 import { BuilderToolbar } from "./BuilderToolbar/BuilderToolbar";
 import { getBuilderClipboard } from "./getBuilderClipboard";
 import { defaultToolboxTab } from "./constants";
+import { EventStreamNode } from "./EventStreamCanvas/interfaces";
 
 import styles from "./BuilderContainer.module.css";
 
@@ -60,6 +61,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onCurrentTemplateClick?: (template: BuilderCustomTemplateNode) => void;
   onBuildAndPush?: () => void;
   onPreview?: () => void;
+  onEventNodeClick?: (eventNode: EventStreamNode) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -93,6 +95,7 @@ export function LegacyBuilderContainer(
     onCurrentTemplateClick,
     onBuildAndPush,
     onPreview,
+    onEventNodeClick,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -232,6 +235,7 @@ export function LegacyBuilderContainer(
         onCurrentTemplateClick,
         onBuildAndPush,
         onPreview,
+        onEventNodeClick,
       }}
     >
       <div

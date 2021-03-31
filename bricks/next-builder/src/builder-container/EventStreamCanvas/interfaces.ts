@@ -12,6 +12,7 @@ export type EventDownstreamNode =
 export interface EventDownstreamNodeBase {
   children: EventDownstreamNode[];
   height?: number;
+  node: BuilderRuntimeNode;
 }
 
 export enum EventDownstreamType {
@@ -29,7 +30,6 @@ export interface EventDownstreamNodeBaseWithHandlers
 
 export interface EventDownstreamNodeOfRoot extends EventDownstreamNodeBase {
   type: EventDownstreamType.ROOT;
-  node: BuilderRuntimeNode;
 }
 
 export interface EventDownstreamNodeOfEvent
@@ -59,6 +59,7 @@ export type EventUpstreamNode =
 export interface EventUpstreamNodeBase {
   children: EventUpstreamNode[];
   height?: number;
+  node: BuilderRuntimeNode;
 }
 
 export interface EventUpstreamNodeBaseWithHandler
@@ -77,7 +78,6 @@ export enum EventUpstreamType {
 
 export interface EventUpstreamNodeOfRoot extends EventUpstreamNodeBase {
   type: EventUpstreamType.UPSTREAM_ROOT;
-  node: BuilderRuntimeNode;
 }
 
 export interface EventUpstreamNodeOfEvent
@@ -98,5 +98,4 @@ export interface EventUpstreamNodeOfCallback
 
 export interface EventUpstreamNodeOfSource extends EventUpstreamNodeBase {
   type: EventUpstreamType.UPSTREAM_SOURCE;
-  node: BuilderRuntimeNode;
 }

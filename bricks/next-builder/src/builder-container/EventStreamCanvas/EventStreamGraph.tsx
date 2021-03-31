@@ -82,12 +82,19 @@ export class EventStreamGraph {
     undefined
   >;
 
+  private onEventNodeClick: (eventNode: EventStreamNode) => void;
+
   private offsetX = 0;
   private offsetY = 0;
   private nodesContainerWidth: number;
   private nodesContainerHeight: number;
 
-  constructor() {
+  constructor({
+    onEventNodeClick,
+  }: {
+    onEventNodeClick: (eventNode: EventStreamNode) => void;
+  }) {
+    this.onEventNodeClick = onEventNodeClick;
     this.canvas = create("div").attr("class", styles.canvas);
     this.linksLayer = this.canvas
       .append("svg")
@@ -327,10 +334,14 @@ export class EventStreamGraph {
       .attr("class", classNames(styles.nodeWrapper))
       .style("left", (d) => `${d.y}px`)
       .style("top", (d) => `${d.x}px`);
-
+    const onEventNodeClick = this.onEventNodeClick;
     this.nodes.each(function (d) {
       ReactDOM.render(
-        <EventStreamNodeComponent eventNode={d.data} {...options} />,
+        <EventStreamNodeComponent
+          eventNode={d.data}
+          {...options}
+          onEventNodeClick={onEventNodeClick}
+        />,
         this
       );
     });

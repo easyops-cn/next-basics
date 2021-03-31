@@ -15,10 +15,12 @@ import styles from "./EventStreamTitle.module.css";
 
 export interface EventStreamTitleProps {
   eventNode: EventStreamNode;
+  onEventNodeClick?: (eventNode: EventStreamNode) => void;
 }
 
 export function EventStreamTitle({
   eventNode,
+  onEventNodeClick,
 }: EventStreamTitleProps): React.ReactElement {
   const isUpstreamSource = eventNode.type === EventUpstreamType.UPSTREAM_SOURCE;
   if (isUpstreamSource || eventNode.type === EventDownstreamType.ROOT) {
@@ -49,13 +51,18 @@ export function EventStreamTitle({
       eventCategory = "event";
   }
 
+  const handleClick = () => {
+    onEventNodeClick?.(eventNode);
+  };
+
   return (
     <div
-      className={styles.title}
+      className={classNames(styles.title, styles.clickable)}
       style={{
         ...styleConfig.title,
         marginBottom: styleConfig.titleMarginBottom,
       }}
+      onClick={handleClick}
     >
       <span className={styles.eventCategory}>{`${eventCategory}: `}</span>
       <span>{(eventNode as EventDownstreamNodeOfEvent).eventType}</span>

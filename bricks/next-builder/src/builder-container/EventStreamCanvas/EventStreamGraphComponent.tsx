@@ -18,7 +18,12 @@ export interface EventDownstreamGraphComponentProps {
 export function EventDownstreamGraphComponent({
   node,
 }: EventDownstreamGraphComponentProps): React.ReactElement {
-  const { dataType, fullscreen, setEventStreamNodeId } = useBuilderUIContext();
+  const {
+    dataType,
+    fullscreen,
+    setEventStreamNodeId,
+    onEventNodeClick,
+  } = useBuilderUIContext();
 
   const eventDownstreamTree = React.useMemo(
     () => buildBrickEventDownstreamTree(node),
@@ -52,7 +57,10 @@ export function EventDownstreamGraphComponent({
     [node, nodes]
   );
 
-  const visual = React.useMemo(() => new EventStreamGraph(), []);
+  const visual = React.useMemo(
+    () => new EventStreamGraph({ onEventNodeClick }),
+    [onEventNodeClick]
+  );
   const ref = React.useRef<HTMLDivElement>(null);
 
   const resize = React.useCallback(() => {
