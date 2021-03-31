@@ -1,4 +1,4 @@
-.builderOverlay {
+.builderWrapper {
   height: calc(100vh - 148px);
   overflow: hidden;
 }
@@ -11,8 +11,22 @@
   right: 0;
   bottom: 0;
   z-index: 110;
-  background: rgba(11, 26, 47, 0.45);
   padding: var(--editor-brick-overlay-padding);
+}
+
+.builderOverlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: rgba(11, 26, 47, 0.45);
+}
+
+.fullscreen .builderOverlay {
+  display: block;
 }
 
 .builderContainer {
