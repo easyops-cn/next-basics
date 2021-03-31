@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.157.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.1...@next-bricks/forms@1.157.2) (2021-03-31)
+
+
+### Bug Fixes
+
+* **forms:** cmdb-instance-select初始化赋值，拉取数据不对 ([a980743](https://github.com/easyops-cn/next-basics/commit/a98074398a0251a39e113369fe7f4e20087a8437))
+
+
+
+
+
 ## [1.157.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.0...@next-bricks/forms@1.157.1) (2021-03-31)
 
 
