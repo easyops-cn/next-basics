@@ -13,6 +13,7 @@ interface DesktopCustomProps {
   onAddClick: () => void;
   onClick?: () => void;
   size?: string;
+  responsive?: boolean;
 }
 
 export function DesktopCustom({
@@ -23,6 +24,7 @@ export function DesktopCustom({
   onClick,
   onAddClick,
   size,
+  responsive = true,
 }: DesktopCustomProps): React.ReactElement {
   const handleItemClick = (e: React.MouseEvent): void => {
     e.stopPropagation();
@@ -37,7 +39,9 @@ export function DesktopCustom({
   return (
     <>
       <Link
-        className={classNames(styles.appLink, styles.circle, styles[size])}
+        className={classNames(styles.appLink, styles.circle, styles[size], {
+          [styles.responsive]: responsive,
+        })}
         href={url}
         target="_blank"
         onClick={handleItemClick}

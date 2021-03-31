@@ -197,17 +197,17 @@ describe("Shallow FavoriteDesktopCell", () => {
     ).toBe(2);
 
     // Wheeling
-    wrapper.find(".scrollContainer").invoke("onWheel")({
+    wrapper.find(".desktopSlider").invoke("onWheel")({
       deltaX: 0,
       deltaY: 2,
     } as any);
-    wrapper.find(".scrollContainer").invoke("onWheel")({
+    wrapper.find(".desktopSlider").invoke("onWheel")({
       deltaX: 0,
       deltaY: 2,
     } as any);
 
     jest.advanceTimersByTime(50);
-    wrapper.find(".scrollContainer").invoke("onWheel")({
+    wrapper.find(".desktopSlider").invoke("onWheel")({
       deltaX: -40,
       deltaY: 0,
     } as any);

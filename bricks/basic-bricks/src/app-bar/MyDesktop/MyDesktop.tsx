@@ -59,7 +59,8 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
     await getFavoriteList();
   };
 
-  useEffect(() => {
+  const handleSiteMapLoad = () => {
+    // wait for launchpad open
     Promise.resolve().then(() => {
       const siteMapDom = siteMapRef.current.getBoundingClientRect();
       const deskContainerDom = deskContainerRef.current.getBoundingClientRect();
@@ -67,7 +68,7 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
 
       setSiteMapHeight(siteMapHeight);
     });
-  }, []);
+  };
 
   useEffect(() => {
     !isLoading && firstRendered && setFirstRendered(false);
@@ -114,12 +115,12 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
           </div>
         ) : (
           !isLoading && (
-            <span>
+            <div className={styles.emptyTips}>
               把常用的页面链接加入收藏夹，方便快速访问 ~{" "}
-              <Link to="/launchpad-collection" style={{ marginLeft: 15 }}>
-                管理我的收藏夹
+              <Link to="/launchpad-collection" style={{ marginLeft: 30 }}>
+                管理我的收藏
               </Link>
-            </span>
+            </div>
           )
         )}
       </div>
@@ -135,6 +136,7 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
           height: siteMapHeight,
           overflow: "auto",
         }}
+        onLoad={handleSiteMapLoad}
       />
     );
   }, [siteMapHeight]);
