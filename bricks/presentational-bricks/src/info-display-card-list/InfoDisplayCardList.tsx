@@ -100,7 +100,17 @@ export function InfoDisplayCardList({
           </div>
         </div>
         <div className={styles.infoCardRightSection}>
-          <div>{item.detail?.map(getCardItemDetail)}</div>
+          <div
+            style={
+              item.detail?.length
+                ? {
+                    gridTemplateColumns: `repeat(${item.detail.length}, minmax(0, 1fr))`,
+                  }
+                : null
+            }
+          >
+            {item.detail?.map(getCardItemDetail)}
+          </div>
           {!isEmpty(get(optionConf, "useBrick")) && (
             <BrickAsComponent
               useBrick={optionConf.useBrick}
