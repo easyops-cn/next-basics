@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.157.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.0...@next-bricks/forms@1.157.1) (2021-03-31)
+
+
+### Bug Fixes
+
+* **forms:** 选择关联资源负责人，出现多个相同的选项 ([6ef5662](https://github.com/easyops-cn/next-basics/commit/6ef5662502a70083df76f59834b17d24fd502df0))
+
+
+
+
+
 # [1.157.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.156.0...@next-bricks/forms@1.157.0) (2021-03-29)
 
 

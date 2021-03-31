@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.177.2...@next-bricks/presentational-bricks@1.178.0) (2021-03-31)
+
+
+### Features
+
+* **BrickLink:** BrickLink support iconAlign ([7ccd528](https://github.com/easyops-cn/next-basics/commit/7ccd52878be998e10b7e67bd41fd2e5556db376b))
+
+
+
+
+
 ## [1.177.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.177.1...@next-bricks/presentational-bricks@1.177.2) (2021-03-29)
 
 

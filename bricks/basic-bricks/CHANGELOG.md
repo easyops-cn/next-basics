@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.112.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.0...@next-bricks/basic-bricks@1.112.1) (2021-03-31)
+
+
+### Bug Fixes
+
+* modify style ([f4988b3](https://github.com/easyops-cn/next-basics/commit/f4988b3252a1f0103c28b589bda2ea4abddddebc))
+* refactor sitemap ([b1ff61f](https://github.com/easyops-cn/next-basics/commit/b1ff61f11aaecfab82f57ccab44c5cfc25c5521d))
+* refine icon ([5b83a60](https://github.com/easyops-cn/next-basics/commit/5b83a608b4a686dd9086fbe11ee42f4ed0e98ec9))
+* refine sitemap ([a0e97f3](https://github.com/easyops-cn/next-basics/commit/a0e97f335b1fd6c324ac3edc7385f9d509b70f8d))
+
+
+
+
+
 # [1.112.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.3...@next-bricks/basic-bricks@1.112.0) (2021-03-29)
 
 
