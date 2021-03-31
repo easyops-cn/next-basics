@@ -173,7 +173,7 @@ describe("MyDesktop", () => {
     wrapper.update();
     wrapper.find(".modeIcon").at(0).simulate("click");
 
-    expect(wrapper.find(".favorites span").text()).toEqual(
+    expect(wrapper.find(".emptyTips").text()).toEqual(
       expect.stringContaining("把常用的页面链接加入收藏夹，方便快速访问 ~")
     );
   });

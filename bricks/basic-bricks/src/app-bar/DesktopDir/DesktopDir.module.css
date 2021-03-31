@@ -13,7 +13,7 @@
   padding: 7px;
   /* overflow: hidden; */
 
-  &.size {
+  &.small {
     width: 56px;
     height: 56px;
   }

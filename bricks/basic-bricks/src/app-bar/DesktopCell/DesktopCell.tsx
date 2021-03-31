@@ -111,6 +111,7 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
             onClick={handleCustomClick}
             onAddClick={addItemToFavorite}
             size={props.size}
+            responsive={props.responsive}
           />
         ) : (
           <DesktopDir

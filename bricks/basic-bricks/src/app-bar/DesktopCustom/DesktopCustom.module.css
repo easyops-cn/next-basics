@@ -11,7 +11,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  &.size {
+  &.small {
     width: 56px;
     height: 56px;
   }
@@ -63,28 +63,30 @@
   text-align: center;
 }
 
-@media (max-height: 860px), (max-width: 1280px) {
-  .appLink {
-    transform: scale(0.75);
+.responsive {
+  @media (max-height: 860px), (max-width: 1280px) {
+    &.appLink {
+      transform: scale(0.75);
+    }
+    .appName {
+      font-size: 14px;
+      height: 21px;
+    }
   }
-  .appName {
-    font-size: 14px;
-    height: 21px;
-  }
-}
 
-@media (max-height: 700px), (max-width: 1024px) {
-  .appLink {
-    transform: scale(0.6);
+  @media (max-height: 700px), (max-width: 1024px) {
+    &.appLink {
+      transform: scale(0.6);
+    }
+    .appName {
+      font-size: 12px;
+      height: 18px;
+    }
   }
-  .appName {
-    font-size: 12px;
-    height: 18px;
-  }
-}
 
-@media (max-height: 640px), (max-width: 900px) {
-  .appLink {
-    transform: scale(0.5);
+  @media (max-height: 640px), (max-width: 900px) {
+    &.appLink {
+      transform: scale(0.5);
+    }
   }
 }
