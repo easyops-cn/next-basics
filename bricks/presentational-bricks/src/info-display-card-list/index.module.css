@@ -96,7 +96,7 @@
         text-overflow: ellipsis;
       }
       div {
-        max-width: 120px;
+        max-width: 80%;
         white-space: nowrap;
       }
     }
