@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
-import { get, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 
 interface InfoDisplayCardListProps {
   dataSource: CardItem[];
@@ -28,13 +28,16 @@ export function InfoDisplayCardList({
   titleFontSize,
   detailDescFontSize,
 }: InfoDisplayCardListProps): React.ReactElement {
+  const isEmptyDetailOfDescBrickConf = isEmpty(detailOfDescBrickConf?.useBrick);
+  const isEmptyIconBrickConf = isEmpty(iconBrickConf?.useBrick);
+
   const getCardItemDetail = (
     item: CardDetail,
     index: number
   ): React.ReactNode => (
     <div className={styles.infoCardDetailWrapper} key={index}>
       <h5>{item.title}</h5>
-      {(isEmpty(get(detailOfDescBrickConf, "useBrick")) || !item.useBrick) && (
+      {(isEmptyDetailOfDescBrickConf || !item.useBrick) && (
         <Tooltip title={item.desc}>
           <p
             style={{
@@ -45,7 +48,7 @@ export function InfoDisplayCardList({
           </p>
         </Tooltip>
       )}
-      {!isEmpty(get(detailOfDescBrickConf, "useBrick")) && !!item.useBrick && (
+      {!isEmptyDetailOfDescBrickConf && !!item.useBrick && (
         <BrickAsComponent
           useBrick={detailOfDescBrickConf.useBrick}
           data={item}
@@ -58,7 +61,7 @@ export function InfoDisplayCardList({
     <Card className={styles.infoCard} hoverable={true}>
       <div className={styles.infoCardWrapper}>
         <div className={styles.infoCardMain}>
-          {isEmpty(get(iconBrickConf, "useBrick")) && showIcon && (
+          {isEmptyIconBrickConf && showIcon && (
             <div className={styles.cardIcon}>
               <GeneralIcon
                 icon={
@@ -74,7 +77,7 @@ export function InfoDisplayCardList({
               />
             </div>
           )}
-          {!isEmpty(get(iconBrickConf, "useBrick")) && (
+          {!isEmptyIconBrickConf && (
             <BrickAsComponent
               useBrick={iconBrickConf.useBrick}
               data={item}
@@ -89,7 +92,7 @@ export function InfoDisplayCardList({
               >
                 {item.title}
               </h5>
-              {!isEmpty(get(titleBrickConf, "useBrick")) && (
+              {!isEmpty(titleBrickConf?.useBrick) && (
                 <BrickAsComponent
                   useBrick={titleBrickConf.useBrick}
                   data={item}
@@ -111,7 +114,7 @@ export function InfoDisplayCardList({
           >
             {item.detail?.map(getCardItemDetail)}
           </div>
-          {!isEmpty(get(optionConf, "useBrick")) && (
+          {!isEmpty(optionConf?.useBrick) && (
             <BrickAsComponent
               useBrick={optionConf.useBrick}
               data={item}
