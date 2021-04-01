@@ -8,6 +8,7 @@
       flex: 1;
     }
     > .labelContainer {
+      width: 110px;
       text-align: right;
     }
   }
@@ -17,7 +18,7 @@
   padding: 20px 10%;
 
   .formItemWrapper > .labelContainer {
-    margin-bottom: 6px;
+    line-height: 28px;
   }
 }
 
@@ -27,10 +28,9 @@
 
 .formItemWrapper {
   > .labelContainer {
-    width: 100px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: clip;
+    text-overflow: ellipsis;
     > .formLabel {
       &::after {
         content: ":";

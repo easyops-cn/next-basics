@@ -59,6 +59,6 @@ export function GeneralButtonsEditor({
 customElements.define(
   "forms.general-buttons--editor",
   EditorElementFactory(GeneralButtonsEditor, {
-    selfLayout: EditorSelfLayout.INLINE,
+    selfLayout: EditorSelfLayout.BLOCK,
   })
 );
