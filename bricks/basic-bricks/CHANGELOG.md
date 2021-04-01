@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.112.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.1...@next-bricks/basic-bricks@1.112.2) (2021-04-01)
+
+
+### Bug Fixes
+
+* desktop custom cell support responsive ([8b2e078](https://github.com/easyops-cn/next-basics/commit/8b2e07849600533a6d66bf7623e910e4c57e6a40))
+* refactor sitemap ([830a599](https://github.com/easyops-cn/next-basics/commit/830a5995718fb245e5c49b9158f8b061bea0d6b9))
+* refine icon ([a5486e5](https://github.com/easyops-cn/next-basics/commit/a5486e504330c58be76480b4c0cbc643f768fd66))
+
+
+
+
+
 ## [1.112.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.0...@next-bricks/basic-bricks@1.112.1) (2021-03-31)
 
 
