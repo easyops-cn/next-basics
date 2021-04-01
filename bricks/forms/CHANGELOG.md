@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.157.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.2...@next-bricks/forms@1.157.3) (2021-04-01)
+
+
+### Bug Fixes
+
+* fix style ([2fda844](https://github.com/easyops-cn/next-basics/commit/2fda844a17f1c2ac8dc1ab27b0d8648db8d6cb20))
+
+
+
+
+
 ## [1.157.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.1...@next-bricks/forms@1.157.2) (2021-03-31)
 
 

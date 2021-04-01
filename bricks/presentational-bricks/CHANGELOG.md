@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.178.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.2...@next-bricks/presentational-bricks@1.178.3) (2021-04-01)
+
+
+### Bug Fixes
+
+* **brick-table:** 修复黑暗模式表格斑马纹 ([0887128](https://github.com/easyops-cn/next-basics/commit/088712879072a7569326093e9de3f0429f0af9a1))
+
+
+
+
+
 ## [1.178.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.1...@next-bricks/presentational-bricks@1.178.2) (2021-04-01)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
