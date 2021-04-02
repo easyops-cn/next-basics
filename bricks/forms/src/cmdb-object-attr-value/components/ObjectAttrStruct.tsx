@@ -344,7 +344,7 @@ export function LegacyObjectAttrStructForm(
               </Select>
             )}
           </Form.Item>
-          {curValueType === "enum" && (
+          {(curValueType === "enum" || curValueType === "enums") && (
             <Form.Item label="枚举值">
               {getFieldDecorator("regex", {
                 initialValue: isEmpty(currentStruct) ? [] : currentStruct.regex,
