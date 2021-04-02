@@ -8,12 +8,10 @@ import {
 } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Menu, Input } from "antd";
-import { uniq, cloneDeep, isEmpty } from "lodash";
+import { uniq, cloneDeep } from "lodash";
 import style from "./index.module.css";
 import { SelectParam } from "antd/lib/menu";
 import { BrickAsComponent } from "@next-core/brick-kit";
-import { CaretRightFilled, CaretDownFilled } from "@ant-design/icons";
-import { leastIndex } from "d3";
 
 export interface SubMenuFilterSimpleItem {
   title: string;
@@ -50,7 +48,6 @@ export interface SubMenuFilterProps {
   onSelect: (menuItem: SubMenuFilterItem[]) => void;
   onSearch: (query: string) => void;
   multiple: boolean;
-  treeMode: boolean;
 }
 
 export function SubMenuFilter({
@@ -64,24 +61,10 @@ export function SubMenuFilter({
   onSelect,
   onSearch,
   multiple,
-  treeMode,
 }: SubMenuFilterProps): React.ReactElement {
   const [menuItems, setMenuItems] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [openKeys, setOpenKeys] = useState([]);
-  const [expandStateMap, setExpandStateMap] = useState<any>({});
-
-  const computeNewDefaultOpenKeys = () => {
-    const newDefaultOpenKeys = [...defaultOpenKeys];
-    defaultOpenKeys.forEach((key) => {
-      while (key.includes("/")) {
-        const nextKey = key.slice(0, key.lastIndexOf("/"));
-        newDefaultOpenKeys.push(nextKey);
-        key = nextKey;
-      }
-    });
-    return uniq(newDefaultOpenKeys);
-  };
 
   useEffect(() => {
     setMenuItems(cloneDeep(rowMenuItem));
@@ -92,11 +75,7 @@ export function SubMenuFilter({
   }, [defaultSelectedKeys]);
 
   useEffect(() => {
-    if (treeMode && !isEmpty(defaultOpenKeys)) {
-      setOpenKeys(computeNewDefaultOpenKeys());
-    } else {
-      defaultOpenKeys && setOpenKeys(defaultOpenKeys);
-    }
+    defaultOpenKeys && setOpenKeys(defaultOpenKeys);
   }, [defaultOpenKeys]);
 
   const renderIcon = (item: SubMenuFilterSimpleItem) => (
@@ -141,57 +120,15 @@ export function SubMenuFilter({
       </Menu.ItemGroup>
     );
   };
-  const handleSubMenuclick = (item) => {
-    setExpandStateMap({
-      ...expandStateMap,
-      [item.key]: {
-        subMenuExpand: !expandStateMap[item.key]?.subMenuExpand,
-      },
-    });
-    onSelect([item]);
-  };
-
-  const renderTreeModeMenuTitle = (item: SubMenuFilterGroup) => {
-    let newDefaultOpenKeys: any = [];
-    if (!isEmpty(defaultOpenKeys)) {
-      newDefaultOpenKeys = computeNewDefaultOpenKeys();
-    }
-
-    return (
-      <div
-        onClick={(e) => handleSubMenuclick(item)}
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
-        <span>
-          {!expandStateMap[item.key]?.subMenuExpand &&
-          !newDefaultOpenKeys.includes(item.key) ? (
-            <CaretRightFilled />
-          ) : (
-            <CaretDownFilled />
-          )}
-          {renderIcon(item)}
-          {item.title}
-        </span>
-        <span style={{ marginRight: "8px", color: "#8c8c8c" }}>
-          {item.count}
-        </span>
-      </div>
-    );
-  };
-
   const renderMenuTitle = (item: SubMenuFilterGroup) => (
     <div>
       {renderIcon(item)}
       {item.title}
     </div>
   );
-
   const renderSubMenu = (item: SubMenuFilterGroup): React.ReactNode => {
     return (
-      <Menu.SubMenu
-        key={item.key}
-        title={treeMode ? renderTreeModeMenuTitle(item) : renderMenuTitle(item)}
-      >
+      <Menu.SubMenu key={item.key} title={renderMenuTitle(item)}>
         {item.items.map((innerItem) => renderMenuItem(innerItem))}
       </Menu.SubMenu>
     );
@@ -315,7 +252,6 @@ export function SubMenuFilter({
         onSelect={handleSelect}
         onDeselect={handleDeselect}
         onOpenChange={handleOpenChange}
-        expandIcon={treeMode ? <></> : null}
       >
         {menuItems && menuItems.map((item) => renderMenuItem(item))}
       </Menu>

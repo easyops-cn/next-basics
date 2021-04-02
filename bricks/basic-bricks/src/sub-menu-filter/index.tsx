@@ -159,17 +159,6 @@ export class SubMenuFilterElement extends UpdatingElement {
   })
   multiple: boolean;
 
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否支持树模式
-   */
-  @property({
-    type: Boolean,
-  })
-  treeMode: boolean;
-
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -216,7 +205,6 @@ export class SubMenuFilterElement extends UpdatingElement {
             menuItems={this.menuItems}
             defaultOpenKeys={this.defaultOpenKeys}
             defaultSelectedKeys={this.defaultSelectedKeys}
-            treeMode={this.treeMode}
           />
         </BrickWrapper>,
         this
