@@ -6,6 +6,7 @@
       background-color: var(--stroke-color-default);
     }
   }
+
   .closableTag.disabledTag > span:global(.ant-tag-close-icon) {
     display: none;
   }
@@ -38,8 +39,8 @@
   }
 
   .grayTag {
-    color: var(--text-color-secondary);
-    background-color: var(--theme-gray-background) !important;
+    color: var(--tag-gray-color);
+    background-color: var(--tag-gray-background) !important;
   }
 
   .colorTag {
@@ -53,5 +54,11 @@
 
   .disabledTag {
     cursor: not-allowed;
+  }
+}
+
+html[data-theme="dark"] {
+  .grayTag {
+    border: 1px solid #ffffff33 !important;
   }
 }

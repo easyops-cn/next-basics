@@ -41,8 +41,14 @@
 
 /* 蓝湖多彩标签设计：https://lanhuapp.com/web/#/item/project/board/detail?pid=08ef7a67-b5e6-4aee-8b6d-6999377c4fdb&project_id=08ef7a67-b5e6-4aee-8b6d-6999377c4fdb&image_id=d55e4e48-327e-4f79-86da-191da1862a7e */
 .grayTag {
-  color: var(--theme-gray-color);
-  background-color: var(--theme-gray-background) !important;
+  color: var(--tag-gray-color);
+  background-color: var(--tag-gray-background) !important;
+}
+
+html[data-theme="dark"] {
+  .grayTag {
+    border: 1px solid #ffffff33 !important;
+  }
 }
 
 .colorTag {

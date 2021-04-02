@@ -2116,6 +2116,11 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.6.6.tgz#c8331e1df4a15adb9bb4642d2b1d8f6598f00b8c"
   integrity sha512-UOPB2YJVGmX9RKAkLHHir2+la2T3GLjOz4AB6C3nlasmLhEOrnzjqO+3YEi/ZTMo7sbJqHAXsYkVERKJA7xyjg==
 
+"@next-core/custom-antd-styles@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.8.0.tgz#b527929795e5557e207942d0c13341244a8c7aaa"
+  integrity sha512-Z8Ze4eFcUDFaxzt6cL7197rPh+yva/GVQmMMy9qOE/9kpz+4gDuKdogyMSNd/a6W64CnNXf2tyDu4oBdcY/3Gg==
+
 "@next-core/dev-dependencies@^1.2.81":
   version "1.2.81"
   resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.2.81.tgz#dc80482fc6f0cae4e035edb0c0f7caa3c00115bb"
