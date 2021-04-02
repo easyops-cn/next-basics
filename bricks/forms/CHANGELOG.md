@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.157.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.3...@next-bricks/forms@1.157.4) (2021-04-02)
+
+
+### Bug Fixes
+
+* **forms:** 结构项enums类型没有枚举值项 ([f01359c](https://github.com/easyops-cn/next-basics/commit/f01359cccc0ce942beccba97afe945b015e176ad))
+
+
+
+
+
 ## [1.157.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.2...@next-bricks/forms@1.157.3) (2021-04-01)
 
 
