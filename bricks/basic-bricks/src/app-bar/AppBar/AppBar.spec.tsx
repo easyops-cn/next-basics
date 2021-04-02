@@ -37,7 +37,7 @@ const getMicroApps = jest
   .mockReturnValueOnce([])
   .mockReturnValue([
     {
-      id: "account-management",
+      id: "cmdb-account-setting",
     },
   ]);
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
@@ -91,7 +91,7 @@ describe("AppBar", () => {
     (wrapper
       .find(Dropdown)
       .prop("overlay") as React.ReactElement).props.children[0].props.onClick();
-    expect(spyOnHistoryPush).toBeCalledWith("/account-management");
+    expect(spyOnHistoryPush).toBeCalledWith("/account-setting");
   });
 
   it("should render when user is not logged in", () => {

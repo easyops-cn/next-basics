@@ -46,7 +46,7 @@ export function AppBar({
     const isEnable = getRuntime()
       .getMicroApps()
       .some((item) => {
-        return item.id === "account-management";
+        return item.id === "cmdb-account-setting";
       });
     setAccountEntry(isEnable);
   }, []);
@@ -87,7 +87,7 @@ export function AppBar({
   };
 
   const handleRedirectToMe = (): void => {
-    getHistory().push("/account-management");
+    getHistory().push("/account-setting");
   };
 
   return (
