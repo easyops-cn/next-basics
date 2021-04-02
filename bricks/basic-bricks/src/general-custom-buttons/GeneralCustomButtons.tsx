@@ -34,6 +34,7 @@ interface AdminButtonProps {
   moreButtonType?: ButtonType;
   alignment?: "start" | "center" | "end" | "stretch";
   dropdownPlacement?: DropdownPlacement;
+  dropdownBtnType?: "default" | "link";
 }
 
 export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
@@ -61,6 +62,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
       dropdownBtnIcon,
       dropdownBtnText,
       alignment,
+      dropdownBtnType,
     } = this.props;
     const propsButtons = buttonConfigs.filter((btn) => !btn.hide);
     const buttons = propsButtons
@@ -213,6 +215,10 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                 <GeneralIcon icon={moreBtnIcon} />
               )}
               {!moreBtnIcon && <EllipsisOutlined />}
+            </Button>
+          ) : dropdownBtnType === "link" ? (
+            <Button type="link" className={style.dropdownBtnContainer}>
+              {dropdownBtnText || "管理"}
             </Button>
           ) : (
             <Button

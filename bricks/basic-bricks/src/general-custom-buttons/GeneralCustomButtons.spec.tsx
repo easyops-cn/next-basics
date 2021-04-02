@@ -176,4 +176,22 @@ describe("topology view admin buttons", () => {
       })
     );
   });
+
+  it("dropdownBtnType should work", () => {
+    const buttons: Partial<CustomButton>[] = [
+      {
+        isDropdown: true,
+        text: "a-button",
+        icon: "save",
+        eventName: "save",
+      },
+    ];
+    const wrapper = shallow(
+      <GeneralCustomButtons buttons={buttons} dropdownBtnType="link" />
+    );
+    const moreButton = wrapper.find(Button).at(0);
+    expect(moreButton.prop("type")).toEqual("link");
+    expect(moreButton.hasClass("dropdownBtnContainer")).toBeTruthy();
+    expect(moreButton.text()).toEqual("管理");
+  });
 });
