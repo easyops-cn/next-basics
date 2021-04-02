@@ -192,6 +192,15 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   @property() dropdownBtnText: string;
 
   /**
+   * @kind `"default" | "link"`
+   * @required false
+   * @default `"default"`
+   * @description dropdown按钮的类型
+   */
+  @property({ attribute: false })
+  dropdownBtnType: "default" | "link" = "default";
+
+  /**
    * @kind MenuIcon
    * @required false
    * @default `"setting"`
@@ -285,6 +294,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
           moreButtonType={this.moreButtonType}
           alignment={this.alignment}
           dropdownPlacement={this.dropdownPlacement}
+          dropdownBtnType={this.dropdownBtnType}
         />,
         this
       );

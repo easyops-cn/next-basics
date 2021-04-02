@@ -22,14 +22,13 @@ export const generalCardStory: Story = {
     {
       brick: "basic-bricks.general-card",
       properties: {
-        hasExtraSlot: true,
         configProps: {
           title: "卡片标题",
         },
+        hasExtraSlot: true,
       },
       slots: {
         content: {
-          type: "bricks",
           bricks: [
             {
               brick: "div",
@@ -38,22 +37,25 @@ export const generalCardStory: Story = {
               },
             },
           ],
+          type: "bricks",
         },
         extra: {
-          type: "bricks",
           bricks: [
             {
               brick: "basic-bricks.general-button",
-              properties: {
-                buttonIcon: "plus",
-              },
               events: {
                 "general.button.click": {
                   action: "console.log",
                 },
               },
+              properties: {
+                buttonIcon: "plus",
+                buttonShape: "circle",
+                buttonType: "icon",
+              },
             },
           ],
+          type: "bricks",
         },
       },
     },
@@ -380,6 +382,8 @@ export const generalCardStory: Story = {
                       },
                       properties: {
                         buttonIcon: "plus",
+                        buttonShape: "circle",
+                        buttonType: "icon",
                       },
                     },
                   ],

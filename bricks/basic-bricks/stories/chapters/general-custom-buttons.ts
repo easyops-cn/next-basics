@@ -184,7 +184,6 @@ export const generalCustomButtonsStory: Story = {
         },
       },
     },
-
     {
       description: {
         title: "组合按钮2",
@@ -372,18 +371,84 @@ export const generalCustomButtonsStory: Story = {
     },
     {
       description: {
-        title: "卡片操作区",
-        message: "在卡片的操作区中，通常会使用圆形图标按钮的样式。",
+        title: "仅在卡片内部使用按钮",
+        message: "仅在卡片内部操作区使用按钮时，使用圆形图标按钮的样式。",
       },
       brick: "basic-bricks.general-card",
+      properties: {
+        cardTitle: "卡片标题",
+      },
       slots: {
         content: {
           bricks: [
             {
               brick: "container-brick.search-bar",
               slots: {
-                start: {
+                end: {
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-custom-buttons",
+                      events: {
+                        "instance.topology.delete": {
+                          action: "console.log",
+                        },
+                        "instance.topology.saveAs": {
+                          action: "console.log",
+                        },
+                        "instance.topology.update": {
+                          action: "console.log",
+                        },
+                      },
+                      properties: {
+                        alignment: "end",
+                        customButtons: [
+                          {
+                            buttonShape: "circle",
+                            buttonType: "icon",
+                            eventName: "instance.topology.update",
+                            icon: "plus",
+                            isDropdown: false,
+                            tooltip: "Add",
+                            tooltipPlacement: "left",
+                          },
+                          {
+                            buttonShape: "circle",
+                            buttonType: "icon",
+                            eventName: "instance.topology.update",
+                            icon: "save",
+                            isDropdown: false,
+                            tooltip: "Save",
+                            tooltipPlacement: "left",
+                          },
+                          {
+                            buttonHref:
+                              "/developers/brick-book/brick/basic-bricks.general-custom-buttons",
+                            eventName: "instance.topology.delete",
+                            icon: "search",
+                            isDropdown: true,
+                            text: "Detail",
+                            tooltip: "Open Detail in New Window",
+                            tooltipPlacement: "left",
+                            urlTarget: "_blank",
+                          },
+                          {
+                            color: "var(--theme-red-color)",
+                            eventName: "instance.topology.delete",
+                            icon: "delete",
+                            isDropdown: true,
+                            text: "Delete",
+                            tooltip: "删除",
+                            tooltipPlacement: "right",
+                          },
+                        ],
+                        isMoreButton: true,
+                        moreButtonShape: "icon",
+                      },
+                    },
+                  ],
                   type: "bricks",
+                },
+                start: {
                   bricks: [
                     {
                       brick: "presentational-bricks.brick-general-search",
@@ -392,77 +457,240 @@ export const generalCustomButtonsStory: Story = {
                       },
                     },
                   ],
-                },
-                end: {
                   type: "bricks",
+                },
+              },
+            },
+            {
+              brick: "span",
+              properties: {
+                textContent: "内容",
+              },
+            },
+          ],
+          type: "bricks",
+        },
+      },
+    },
+    {
+      description: {
+        title: "仅在卡片右上角操作区使用按钮",
+        message: "仅在卡片右上角操作区使用按钮时，使用圆形图标按钮的样式。",
+      },
+      brick: "basic-bricks.general-card",
+      properties: {
+        cardTitle: "卡片标题",
+        hasExtraSlot: true,
+      },
+      slots: {
+        extra: {
+          bricks: [
+            {
+              brick: "basic-bricks.general-custom-buttons",
+              events: {
+                "instance.topology.delete": {
+                  action: "console.log",
+                },
+                "instance.topology.saveAs": {
+                  action: "console.log",
+                },
+                "instance.topology.update": {
+                  action: "console.log",
+                },
+              },
+              properties: {
+                alignment: "end",
+                customButtons: [
+                  {
+                    buttonShape: "circle",
+                    buttonType: "icon",
+                    eventName: "instance.topology.update",
+                    icon: "plus",
+                    isDropdown: false,
+                    tooltip: "Add",
+                    tooltipPlacement: "left",
+                  },
+                  {
+                    buttonShape: "circle",
+                    buttonType: "icon",
+                    eventName: "instance.topology.update",
+                    icon: "save",
+                    isDropdown: false,
+                    tooltip: "Save",
+                    tooltipPlacement: "left",
+                  },
+                  {
+                    buttonHref:
+                      "/developers/brick-book/brick/basic-bricks.general-custom-buttons",
+                    eventName: "instance.topology.delete",
+                    icon: "search",
+                    isDropdown: true,
+                    text: "Detail",
+                    tooltip: "Open Detail in New Window",
+                    tooltipPlacement: "left",
+                    urlTarget: "_blank",
+                  },
+                  {
+                    color: "var(--theme-red-color)",
+                    eventName: "instance.topology.delete",
+                    icon: "delete",
+                    isDropdown: true,
+                    text: "Delete",
+                    tooltip: "删除",
+                    tooltipPlacement: "right",
+                  },
+                ],
+                isMoreButton: true,
+                moreButtonShape: "icon",
+              },
+            },
+          ],
+          type: "bricks",
+        },
+        content: {
+          bricks: [
+            {
+              brick: "div",
+              properties: {
+                textContent: "内容",
+              },
+            },
+          ],
+          type: "bricks",
+        },
+      },
+    },
+    {
+      description: {
+        title: "卡片右上角操作区和内部同时使用按钮",
+        message:
+          "卡片内部操作区按钮使用圆形图标按钮的样式。卡片右上角操作区按钮使用文字按钮样式，且若有多个按钮需收纳在一起",
+      },
+      brick: "basic-bricks.general-card",
+      properties: {
+        cardTitle: "卡片标题",
+        hasExtraSlot: true,
+      },
+      slots: {
+        extra: {
+          bricks: [
+            {
+              brick: "basic-bricks.general-custom-buttons",
+              properties: {
+                style: {
+                  "margin-right": "-15px",
+                },
+                alignment: "end",
+                dropdownBtnType: "link",
+                dropdownBtnText: "更多",
+                customButtons: [
+                  {
+                    eventName: "instance.topology.saveAs",
+                    icon: "file-add",
+                    id: "save-as-btn",
+                    isDropdown: true,
+                    text: "另存为",
+                  },
+                  {
+                    color: "var(--theme-red-color)",
+                    eventName: "instance.topology.delete",
+                    icon: "delete",
+                    id: "delete-btn",
+                    isDropdown: true,
+                    text: "删除视图",
+                  },
+                ],
+              },
+            },
+          ],
+          type: "bricks",
+        },
+        content: {
+          bricks: [
+            {
+              brick: "container-brick.search-bar",
+              slots: {
+                end: {
                   bricks: [
                     {
                       brick: "basic-bricks.general-custom-buttons",
-                      properties: {
-                        isMoreButton: true,
-                        moreButtonShape: "icon",
-                        alignment: "end",
-                        customButtons: [
-                          {
-                            isDropdown: false,
-                            buttonType: "icon",
-                            buttonShape: "circle",
-                            icon: "plus",
-                            tooltip: "Add",
-                            tooltipPlacement: "left",
-                            eventName: "instance.topology.update",
-                          },
-                          {
-                            isDropdown: false,
-                            buttonType: "icon",
-                            buttonShape: "circle",
-                            icon: "save",
-                            tooltip: "Save",
-                            tooltipPlacement: "left",
-                            eventName: "instance.topology.update",
-                          },
-                          {
-                            isDropdown: true,
-                            text: "Detail",
-                            icon: "search",
-                            tooltip: "Open Detail in New Window",
-                            tooltipPlacement: "left",
-                            buttonHref:
-                              "/developers/brick-book/brick/basic-bricks.general-custom-buttons",
-                            urlTarget: "_blank",
-                            eventName: "instance.topology.delete",
-                          },
-                          {
-                            isDropdown: true,
-                            text: "Delete",
-                            icon: "delete",
-                            color: "var(--theme-red-color)",
-                            tooltip: "删除",
-                            tooltipPlacement: "right",
-                            eventName: "instance.topology.delete",
-                          },
-                        ],
-                      },
                       events: {
-                        "instance.topology.update": {
+                        "instance.topology.delete": {
                           action: "console.log",
                         },
                         "instance.topology.saveAs": {
                           action: "console.log",
                         },
-                        "instance.topology.delete": {
+                        "instance.topology.update": {
                           action: "console.log",
                         },
                       },
+                      properties: {
+                        alignment: "end",
+                        customButtons: [
+                          {
+                            buttonShape: "circle",
+                            buttonType: "icon",
+                            eventName: "instance.topology.update",
+                            icon: "plus",
+                            isDropdown: false,
+                            tooltip: "Add",
+                            tooltipPlacement: "left",
+                          },
+                          {
+                            buttonShape: "circle",
+                            buttonType: "icon",
+                            eventName: "instance.topology.update",
+                            icon: "save",
+                            isDropdown: false,
+                            tooltip: "Save",
+                            tooltipPlacement: "left",
+                          },
+                          {
+                            buttonHref:
+                              "/developers/brick-book/brick/basic-bricks.general-custom-buttons",
+                            eventName: "instance.topology.delete",
+                            icon: "search",
+                            isDropdown: true,
+                            text: "Detail",
+                            tooltip: "Open Detail in New Window",
+                            tooltipPlacement: "left",
+                            urlTarget: "_blank",
+                          },
+                          {
+                            color: "var(--theme-red-color)",
+                            eventName: "instance.topology.delete",
+                            icon: "delete",
+                            isDropdown: true,
+                            text: "Delete",
+                            tooltip: "删除",
+                            tooltipPlacement: "right",
+                          },
+                        ],
+                        isMoreButton: true,
+                        moreButtonShape: "icon",
+                      },
                     },
                   ],
+                  type: "bricks",
+                },
+                start: {
+                  bricks: [
+                    {
+                      brick: "presentational-bricks.brick-general-search",
+                      properties: {
+                        placeholder: "text here to search",
+                      },
+                    },
+                  ],
+                  type: "bricks",
                 },
               },
             },
             {
-              brick: "h1",
+              brick: "span",
               properties: {
-                textContent: "Content",
+                textContent: "内容",
               },
             },
           ],
@@ -511,7 +739,7 @@ export const generalCustomButtonsStory: Story = {
       description: {
         title: "按钮收纳",
         message:
-          "在卡片操作区中使用圆形图标按钮时，支持自定义更多按钮的样式，区分不同dropdown的内容。",
+          "在卡片中使用圆形图标按钮时，支持自定义更多按钮的样式，区分不同dropdown的内容。",
       },
       brick: "basic-bricks.general-card",
       slots: {
