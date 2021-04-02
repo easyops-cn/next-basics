@@ -2,6 +2,7 @@
   background: #ffffff;
   border-radius: 6px;
   padding: 20px 12px;
+  height: 100%;
   .header {
     display: flex;
     align-items: center;
@@ -27,6 +28,7 @@
     margin-bottom: 10px;
   }
   > :global(.ant-menu, ) {
+    background: transparent;
     :global(.ant-menu-item-group) {
       :global(.ant-menu-item-group-title) {
         padding: 8px;
