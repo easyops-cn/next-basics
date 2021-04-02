@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.113.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.3...@next-bricks/basic-bricks@1.113.0) (2021-04-02)
+
+
+### Features
+
+* **general-custom-buttons:** 支持设置更多按钮为link类型 ([5477ca4](https://github.com/easyops-cn/next-basics/commit/5477ca444c13b6885e788a6c7527d35e69c3b686))
+
+
+
+
+
 ## [1.112.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.2...@next-bricks/basic-bricks@1.112.3) (2021-04-02)
 
 

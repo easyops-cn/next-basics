@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.3...@next-bricks/presentational-bricks@1.179.0) (2021-04-02)
+
+
+### Features
+
+* collapsible-card-item新增`hoverable`,`cardStyle`property ([59c3813](https://github.com/easyops-cn/next-basics/commit/59c38138987a58aad2255b09b460d6685ec6b758))
+
+
+
+
+
 ## [1.178.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.2...@next-bricks/presentational-bricks@1.178.3) (2021-04-01)
 
 
