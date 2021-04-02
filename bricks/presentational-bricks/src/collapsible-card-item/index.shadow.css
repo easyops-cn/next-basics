@@ -64,7 +64,7 @@
     grid-auto-flow: column;
     align-items: center;
   }
-  &:hover {
+  &.hoverable:hover {
     border-color: #ffffff;
     border-radius: 4px;
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);

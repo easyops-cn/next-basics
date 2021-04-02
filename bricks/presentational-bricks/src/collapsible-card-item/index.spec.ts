@@ -1,10 +1,12 @@
 import ReactDOM from "react-dom";
 import "./";
 
-const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {});
+const spyOnRender = jest
+  .spyOn(ReactDOM, "render")
+  .mockImplementation(() => null);
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
-  .mockImplementation((() => {}) as any);
+  .mockImplementation(() => null);
 
 describe("presentational-bricks.collapsible-card-item", () => {
   it("should create a custom element", async () => {
@@ -13,11 +15,15 @@ describe("presentational-bricks.collapsible-card-item", () => {
     );
     Object.assign(element, {
       fields: {
-        cardTitle: "name"
+        cardTitle: "name",
       },
       dataSource: {
-        name: "gitlab"
-      }
+        name: "gitlab",
+      },
+      hoverable: false,
+      cardStyle: {
+        border: "none",
+      },
     });
     // Always waiting for async `(dis)connectedCallback`
     await jest.runAllTimers();
@@ -33,13 +39,13 @@ describe("presentational-bricks.collapsible-card-item", () => {
     expect(spyOnRender).toBeCalled();
     element.dispatchEvent(
       new MouseEvent("click", {
-        bubbles: true
+        bubbles: true,
       })
     );
     element.disableClickHeaderToOpen = true;
     element.dispatchEvent(
       new MouseEvent("click", {
-        bubbles: true
+        bubbles: true,
       })
     );
     document.body.removeChild(element);

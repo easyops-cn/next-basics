@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import ReactDOM from "react-dom";
 import {
   BrickWrapper,
@@ -22,6 +22,7 @@ import { get, pick, forEach, set, find, isEqual } from "lodash";
  * header:header 自定义构件，需要同时把 customHeader 设置成 true
  * operate:操作区的构件
  * @history
+ * 1.179.0: 新增`hoverable`,`cardStyle`属性
  * @memo
  * @noInheritDoc
  */
@@ -43,6 +44,22 @@ export class CollapsibleCardItemElement extends UpdatingElement {
    */
   @property()
   cardDesc: string;
+
+  /**
+   * @required false
+   * @default true
+   * @description 是否展示hover效果
+   */
+  @property({ attribute: false })
+  hoverable?: boolean = true;
+
+  /**
+   * @required false
+   * @default -
+   * @description 卡片样式
+   */
+  @property({ attribute: false })
+  cardStyle?: CSSProperties;
 
   /**
    * @kind MenuIcon
@@ -257,6 +274,8 @@ export class CollapsibleCardItemElement extends UpdatingElement {
             customHeader={this.customHeader}
             cardTitle={mutableProps.cardTitle}
             cardDesc={mutableProps.cardDesc}
+            cardStyle={this.cardStyle}
+            hoverable={this.hoverable}
             icon={mutableProps.icon}
             isActive={this.isActive}
             iconStyle={this.iconStyle}
