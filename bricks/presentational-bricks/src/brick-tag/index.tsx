@@ -9,6 +9,7 @@ import {
 } from "@next-core/brick-kit";
 import { BrickTag, TagTypeProps, TagListType } from "./BrickTag";
 import { Card } from "antd";
+import { Color } from "../interfaces/brick-tag";
 import { get, map } from "lodash";
 
 /**
@@ -29,7 +30,7 @@ import { get, map } from "lodash";
  *   key: string;
  *   label: string;
  *   icon?: string | MenuIcon;
- *   color?: string;
+ *   color?: string | Color;
  *   disabled?: boolean;
  *   disabledTooltip?: string;
  * }
@@ -111,7 +112,7 @@ export class BrickTagElement extends UpdatingElement {
    * @description 标签的颜色配置，当 `componentType=Tag` 且 `closable!=true` 时才有效，除了提供内置八种主题色，也支持直接赋色值（如 `#f5f5f5`）使用
    */
   @property()
-  color: string;
+  color: string | Color;
 
   /**
    * @kind "Tag"/"CheckableTag"

@@ -8,6 +8,7 @@ import { isArray, differenceBy } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { MenuIcon } from "@next-core/brick-types";
+import { Color } from "../interfaces/brick-tag";
 
 export const circleIcon: MenuIcon = {
   lib: "fa",
@@ -25,7 +26,7 @@ export type TagListType = {
   label: string;
   icon?: any;
   checked?: boolean;
-  color?: string;
+  color?: string | Color;
   disabled?: boolean;
   disabledTooltip?: string;
 }[];
@@ -139,6 +140,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
           key={item.key}
           className={classNames({
             [style.grayTag]: specificColor === "gray" || item.disabled,
+            [style.grayInverseTag]: specificColor === "gray-inverse",
             [style.round]: props.shape === "round",
             [style.closableTag]: closable && TypeComponent === Tag,
             [style.tagCircleIcon]: showTagCircle,

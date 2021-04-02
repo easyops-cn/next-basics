@@ -3,8 +3,8 @@ import { Tag } from "antd";
 import { isNil, isEmpty } from "lodash";
 import classNames from "classnames";
 import { GeneralIcon, Link, LinkProps } from "@next-libs/basic-components";
-import { MappingValue, Color } from "./index";
-export { Color } from "./index";
+import { MappingValue } from "./index";
+import { Color } from "../interfaces/brick-tag";
 import cssStyle from "./style.module.css";
 import { MenuIcon } from "@next-core/brick-types";
 
@@ -67,7 +67,7 @@ export function BrickValueMapping(
   const showBg = props.showBg !== false;
   const map = useMemo(() => getMatch(mapping, value), [mapping, value]);
   const match = !!map;
-  const color = (match && Color[map.color]) || "";
+  const color = (match && (Color as any)[map.color]) || "";
   const text = (match && map.text) || value;
 
   const render = () => {
@@ -96,6 +96,7 @@ export function BrickValueMapping(
         color={color}
         className={classNames(cssStyle.customTag, cssStyle.colorTag, {
           [cssStyle.grayTag]: color === "gray",
+          [cssStyle.grayInverseTag]: color === "gray-inverse",
           [cssStyle.round]: shape === "round",
           [cssStyle.tagCircleIcon]: showTagCircle,
         })}

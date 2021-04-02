@@ -119,7 +119,7 @@ describe("BrickTag", () => {
       color: "red",
       tagList: [
         { key: "a", label: "a" },
-        { key: "b", label: "b" },
+        { key: "b", label: "b", color: "gray-inverse" },
         { key: "c", label: "c", color: "gray" },
         { key: "d", label: "d", disabled: true, disabledTooltip: "禁用标签" },
       ],
@@ -128,6 +128,8 @@ describe("BrickTag", () => {
     expect(wrapper.find("Tag")).toHaveLength(4);
     expect(wrapper.find("Tag").at(0).prop("color")).toBe("red");
     expect(wrapper.find("Tag").at(2).prop("color")).toBe("gray");
+    expect(wrapper.find("Tag").at(2).hasClass("grayTag")).toBe(true);
+    expect(wrapper.find("Tag").at(1).hasClass("grayInverseTag")).toBe(true);
     expect(wrapper.find("Tooltip")).toHaveLength(1);
   });
 

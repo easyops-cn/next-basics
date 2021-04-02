@@ -45,6 +45,11 @@
   background-color: var(--tag-gray-background) !important;
 }
 
+.grayInverseTag {
+  color: var(--tag-inverse-text-color);
+  background: var(--tag-gray-inverse-color) !important;
+}
+
 html[data-theme="dark"] {
   .grayTag {
     border: 1px solid #ffffff33 !important;

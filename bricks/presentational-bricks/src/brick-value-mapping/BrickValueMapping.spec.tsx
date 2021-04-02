@@ -1,8 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { BrickValueMapping, circleIcon } from "./BrickValueMapping";
-import { Color, MappingValue } from "./index";
+import { MappingValue } from "./index";
 import { GeneralIcon } from "@next-libs/basic-components";
+import { Color } from "../interfaces/brick-tag";
 
 jest.spyOn(console, "warn").mockImplementation(() => void 0);
 
