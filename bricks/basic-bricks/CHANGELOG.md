@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.112.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.2...@next-bricks/basic-bricks@1.112.3) (2021-04-02)
+
+
+### Bug Fixes
+
+* **AppBar:** update accountEntry appId ([37a0bb9](https://github.com/easyops-cn/next-basics/commit/37a0bb9653606a2dacf5e2dd3511db1db584c8f6))
+
+
+
+
+
 ## [1.112.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.1...@next-bricks/basic-bricks@1.112.2) (2021-04-01)
 
 
