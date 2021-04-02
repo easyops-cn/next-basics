@@ -10,14 +10,16 @@ describe("CollapsibleCardItem", () => {
         cardDesc="Easyops GIT"
         icon={{
           lib: "antd",
-          type: "gitlab"
+          type: "gitlab",
         }}
+        hoverable={false}
+        cardStyle={{ border: "none" }}
         isActive={true}
       />
     );
     expect(wrapper).toMatchSnapshot();
     wrapper.setProps({
-      isActive: false
+      isActive: false,
     });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();

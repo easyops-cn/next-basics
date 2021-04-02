@@ -1,6 +1,7 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
+import classNames from "classnames";
 
 interface CollapsibleCardItemProps {
   cardTitle: string;
@@ -13,13 +14,20 @@ interface CollapsibleCardItemProps {
   showSubscript?: boolean;
   subscriptIconConfig?: MenuIcon;
   hideOperate?: boolean;
+  hoverable?: boolean;
+  cardStyle?: CSSProperties;
 }
 
 export function CollapsibleCardItem(
   props: CollapsibleCardItemProps
 ): React.ReactElement {
   return (
-    <div className="brickCollapsibleCardContainer">
+    <div
+      className={classNames("brickCollapsibleCardContainer", {
+        ["hoverable"]: props.hoverable,
+      })}
+      style={props.cardStyle}
+    >
       <div
         className="headerContainer"
         style={props.isActive ? { borderBottom: "solid 1px #e8e8e8" } : {}}
