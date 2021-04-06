@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.158.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.4...@next-bricks/forms@1.158.0) (2021-04-06)
+
+
+### Features
+
+* **upload-files-v2:** add property `hideDragBtnWhenAchieveMax` ([baa8995](https://github.com/easyops-cn/next-basics/commit/baa89951caa40154d300d5496e582c3abac72797))
+
+
+
+
+
 ## [1.157.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.157.3...@next-bricks/forms@1.157.4) (2021-04-02)
 
 
