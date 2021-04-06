@@ -11,7 +11,6 @@ import Icon from "@ant-design/icons";
 import { isEmpty } from "lodash";
 import { BrickIcon } from "@next-core/brick-icons";
 import { SiteMap } from "../site-map/SiteMap";
-import { data as mockData } from "../site-map/mockData";
 
 interface MyDesktopProps {
   desktopCount: number;
@@ -128,10 +127,12 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
   }, [favoriteList, isLoading, firstRendered]);
 
   const renderSiteMap = useMemo(() => {
+    const categoryList = launchpadService.getSitemapList();
+
     return (
       <SiteMap
         ref={siteMapRef}
-        categoryList={mockData}
+        categoryList={categoryList}
         containerStyle={{
           height: siteMapHeight,
           overflow: "auto",

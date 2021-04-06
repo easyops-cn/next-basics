@@ -1,6 +1,14 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { SiteMap } from "./SiteMap";
+
+jest.mock("@next-libs/basic-components", () => {
+  return {
+    Link: function Link() {
+      return <div>Link</div>;
+    },
+  };
+});
 
 describe("SiteMap", () => {
   it("should work", () => {
@@ -8,7 +16,8 @@ describe("SiteMap", () => {
       categoryList: [
         {
           name: "资源管理",
-          items: [{ name: "cmdb模型管理", link: "/cmdb-mode" }],
+          id: "resource",
+          apps: [{ name: "cmdb模型管理", url: "/cmdb-mode", id: "cmdb-mode" }],
         },
       ],
     };
@@ -26,5 +35,21 @@ describe("SiteMap", () => {
     } as any);
 
     expect(stopPropagationFn).toHaveBeenCalled();
+  });
+
+  it("should work with onload callback", () => {
+    const categoryList = [
+      {
+        name: "资源管理",
+        id: "resource",
+        apps: [{ name: "cmdb模型管理", url: "/cmdb-mode", id: "cmdb-mode" }],
+      },
+    ];
+    const onLoadFn = jest.fn();
+    const wrapper = mount(
+      <SiteMap categoryList={categoryList} onLoad={onLoadFn} />
+    );
+
+    expect(onLoadFn).toHaveBeenCalled();
   });
 });

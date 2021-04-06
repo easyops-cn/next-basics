@@ -4,7 +4,14 @@ import { Link } from "@next-libs/basic-components";
 
 interface SiteCategory {
   name: string;
-  items: any[];
+  id: string;
+  order: string;
+  apps: {
+    id?: string;
+    sort?: string;
+    name?: string;
+    url?: string;
+  }[];
 }
 export interface SiteMapProps {
   categoryList: SiteCategory[];
@@ -36,9 +43,9 @@ export function LeacySiteMap(
           <div className={styles.groupWrapper} key={item.name}>
             <div>{item.name}</div>
             <ul className={styles.group}>
-              {item.items.map((row, index) => (
+              {item.apps?.map((row, index) => (
                 <li className={styles.item} key={index}>
-                  <Link to={row.link}>{row.name}</Link>
+                  <Link to={row.url}>{row.name}</Link>
                 </li>
               ))}
             </ul>

@@ -204,7 +204,9 @@ export class LaunchpadService {
     if (item.launchpadCollection.type === "microApp") {
       return this.microApps.find((app) => app.id === item.microAppId);
     } else {
-      return this.customList.find((custom) => custom.id === (item as any).customItemId);
+      return this.customList.find(
+        (custom) => custom.id === (item as any).customItemId
+      );
     }
   }
 
@@ -215,6 +217,21 @@ export class LaunchpadService {
     if (data) {
       this.pushVisitor(type as "custom" | "app", data);
     }
+  }
+
+  getSitemapList() {
+    const siteMapList = getRuntime().getLaunchpadSiteMap();
+    return siteMapList?.map((item) => ({
+      ...item,
+      apps: (item.apps || []).map((row) => {
+        const find = this.microApps.find((item) => item.id === row.id);
+        return {
+          ...row,
+          url: find?.homepage,
+          name: find?.name,
+        };
+      }),
+    }));
   }
 }
 
