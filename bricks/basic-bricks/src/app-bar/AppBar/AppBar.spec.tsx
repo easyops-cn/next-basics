@@ -75,12 +75,22 @@ describe("AppBar", () => {
     });
   });
 
-  it("should handle logout", () => {
+  it("should handle general logout", () => {
+    getFeatureFlags.mockReturnValueOnce({ "sso-enabled": false });
     const wrapper = shallow(<AppBar pageTitle="Hello" breadcrumb={null} />);
     (wrapper
       .find(Dropdown)
       .prop("overlay") as React.ReactElement).props.children[1].props.onClick();
     expect(spyOnHistoryReplace).toBeCalledWith("/auth/logout");
+  });
+
+  it("should handle sso logout", () => {
+    getFeatureFlags.mockReturnValue({ "sso-enabled": true });
+    const wrapper = shallow(<AppBar pageTitle="Hello" breadcrumb={null} />);
+    (wrapper
+      .find(Dropdown)
+      .prop("overlay") as React.ReactElement).props.children[1].props.onClick();
+    expect(spyOnHistoryReplace).toBeCalledWith("/sso-auth/logout");
   });
 
   it("should handle redirectToMe", async () => {
