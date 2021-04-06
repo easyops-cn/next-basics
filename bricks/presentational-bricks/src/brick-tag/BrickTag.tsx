@@ -9,6 +9,7 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { MenuIcon } from "@next-core/brick-types";
 import { Color } from "../interfaces/brick-tag";
+export { Color } from "../interfaces/brick-tag";
 
 export const circleIcon: MenuIcon = {
   lib: "fa",
