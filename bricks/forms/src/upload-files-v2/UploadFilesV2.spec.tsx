@@ -185,7 +185,7 @@ describe("UploadFilesV2", () => {
       },
       fileList: [],
     });
-    await act(async() => {
+    await act(async () => {
       await jest.runAllTimers();
     });
     wrapper.update();
@@ -228,7 +228,7 @@ describe("UploadFilesV2", () => {
         },
       ],
     });
-    await act(async() => {
+    await act(async () => {
       await jest.runAllTimers();
     });
     wrapper.update();
@@ -286,7 +286,7 @@ describe("UploadFilesV2", () => {
         },
       ],
     });
-    await act(async() => {
+    await act(async () => {
       await jest.runAllTimers();
     });
     wrapper.update();
@@ -301,5 +301,101 @@ describe("UploadFilesV2", () => {
     expect(
       wrapper.find(".ant-upload-select-text button").prop("disabled")
     ).toBe(undefined);
+  });
+
+  it("test draggable", async () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <UploadFilesV2
+        url={url}
+        method="put"
+        onChange={onChange}
+        hideDragBtnWhenAchieveMax
+        uploadDraggable
+        maxNumber={1}
+      />
+    );
+    await act(async () => {
+      wrapper.find(Upload).invoke("onChange")({
+        file: {
+          uid: "-img1",
+          size: 1024,
+          type: "image/png",
+          name: "image.png",
+          status: "done",
+          response: {
+            data: {
+              objectName: "image.png",
+            },
+          },
+          originFileObj: new File([], "image.png", { type: "image/png" }),
+        },
+        fileList: [
+          {
+            uid: "-img1",
+            size: 1024,
+            type: "image/png",
+            name: "image.png",
+            status: "done",
+            response: {
+              data: {
+                objectName: "image.png",
+              },
+            },
+            originFileObj: new File([], "image.png", { type: "image/png" }),
+          },
+        ],
+      });
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+    expect(
+      wrapper.find(".ant-upload-drag").hasClass("uploadContainerDisplayNone")
+    ).toBeTruthy();
+    wrapper.setProps({
+      hideDragBtnWhenAchieveMax: false,
+      value: [
+        {
+          url: "image2.png",
+        },
+      ],
+    });
+    await act(async () => {
+      wrapper.find(Upload).invoke("onChange")({
+        file: {
+          uid: "-img1",
+          size: 1024,
+          type: "image/png",
+          name: "image.png",
+          status: "done",
+          response: {
+            data: {
+              objectName: "image.png",
+            },
+          },
+          originFileObj: new File([], "image.png", { type: "image/png" }),
+        },
+        fileList: [
+          {
+            uid: "-img1",
+            size: 1024,
+            type: "image/png",
+            name: "image.png",
+            status: "done",
+            response: {
+              data: {
+                objectName: "image.png",
+              },
+            },
+            originFileObj: new File([], "image.png", { type: "image/png" }),
+          },
+        ],
+      });
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+    expect(
+      wrapper.find(".ant-upload-drag").hasClass("uploadContainerDisplayNone")
+    ).toBeFalsy();
   });
 });

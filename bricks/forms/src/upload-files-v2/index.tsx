@@ -54,6 +54,14 @@ export class UploadFilesV2Element extends FormItemElement {
   /**
    * @kind boolean
    * @required false
+   * @default true
+   * @description 达到最大上传数量时是否隐藏拖拽上传按钮，仅当`uploadDraggable`为`true`且设置`maxNumber`时有效
+   */
+  @property({ attribute: false }) hideDragBtnWhenAchieveMax = true;
+
+  /**
+   * @kind boolean
+   * @required false
    * @default false
    * @description 选择文件后是否直接上传。autoUpload为true时，文件会自动上传到url地址，每个value中存在response属性存储上传地址的返回信息。autoUpload为false时，文件不会自动上传，需要用户自行上传，每个value中存在file属性存储文件信息。
    */
@@ -251,6 +259,7 @@ export class UploadFilesV2Element extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            hideDragBtnWhenAchieveMax={this.hideDragBtnWhenAchieveMax}
           />
         </BrickWrapper>,
         this

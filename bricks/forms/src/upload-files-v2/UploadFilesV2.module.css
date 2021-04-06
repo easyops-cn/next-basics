@@ -95,11 +95,11 @@
   :global(.ant-upload-drag) {
     background: #f8f9fc !important;
     border-color: #b9c6de !important;
-    &:hover {
+    &:hover:not(:global(.ant-upload-disabled)) {
       background: #ebf3fd !important;
       border-color: #0071eb !important;
     }
-    &:global(.ant-upload-drag-hover) {
+    &:global(.ant-upload-drag-hover):not(:global(.ant-upload-disabled)) {
       background: #ebf3fd !important;
       border-color: #0071eb !important;
     }

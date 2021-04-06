@@ -30,6 +30,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   draggableUploadHint?: string;
   disabled?: boolean;
   uploadButtonName?: string;
+  hideDragBtnWhenAchieveMax?: boolean;
 }
 
 export interface UploadFileValueItem {
@@ -155,6 +156,14 @@ export function RealUploadFile(
 
   const handleChange = (data: any) => {
     const _file = data.file;
+    if (
+      props.maxNumber &&
+      props.maxNumber !== 1 &&
+      value?.length >= props.maxNumber &&
+      _file.status !== "removed" &&
+      _file.status !== "error"
+    )
+      return;
     const _fileList = data.fileList;
     if (some(_fileList, ["status", "uploading"])) {
       setDisabled(true);
@@ -221,6 +230,7 @@ export function RealUploadFile(
   const uploadProps = {
     className: classNames({
       [styles.uploadContainerDisplayNone]:
+        props.hideDragBtnWhenAchieveMax &&
         props.uploadDraggable &&
         props.maxNumber &&
         value?.length >= props.maxNumber,
@@ -233,6 +243,7 @@ export function RealUploadFile(
     accept: props.accept,
     listType: "text",
     fileList,
+    maxCount: props.maxNumber,
     beforeUpload: !props.autoUpload && handleBeforeUpload,
     onChange: handleChange,
     onRemove: handleRemove,
@@ -313,6 +324,7 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         draggableUploadHint={props.draggableUploadHint}
         hideUploadButton={props.hideUploadButton}
         uploadButtonName={props.uploadButtonName}
+        hideDragBtnWhenAchieveMax={props.hideDragBtnWhenAchieveMax}
       />
     </FormItemWrapper>
   );
