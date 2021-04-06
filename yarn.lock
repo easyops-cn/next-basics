@@ -2038,7 +2038,7 @@
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.10.1.tgz#ef5542c38958719ed2a223cb5742640d440de81b"
   integrity sha512-c+Oxzbq0nULjO3gwwgf718Ne35CQcSYf1ccv8GrJCL549YVW8Z7JWWHHk02qstAv6TeTHUxUu5XEOsICJqbpFw==
 
-"@next-core/brick-kit@^2.38.0", "@next-core/brick-kit@^2.40.0":
+"@next-core/brick-kit@^2.40.0":
   version "2.40.0"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.40.0.tgz#afdc4920288770e4e08c1e53f20b4c35b63bdf47"
   integrity sha512-L3fDMxhCeRWWXbEjytUt3p/dPVYwEuc0gUku9qlhOfRruHMWGk1tXrdlu+mF6lB6et+Kan4UslBGeytA+3cQuA==
@@ -2068,12 +2068,12 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.20.1", "@next-core/brick-types@^2.21.0":
-  version "2.20.1"
-  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.20.1.tgz#b3f69c1a87509da82f5f17c2b857b59aa06cadc1"
-  integrity sha512-CikergYVSYs56wAsLwgP/OSpEUs1bftBAi7pDtTmbc0P2RqnQJaHCoqGJy1WysbqgqJLYuqyAXeLAu4xI7IbCw==
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.21.0":
+  version "2.21.0"
+  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.21.0.tgz#cfd624e9c8ddde188cf8361b6fb5980712503903"
+  integrity sha512-d8TS8ccVnNXmVrEd2V12cyvwkLc3u6G74xjPJTazxCSIxWoIU9gI+3F++KpCFtUQqxHd+l7M5iDzHFmbJFlqdQ==
 
-"@next-core/brick-utils@^2.14.1", "@next-core/brick-utils@^2.14.2":
+"@next-core/brick-utils@^2.14.2":
   version "2.14.2"
   resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.14.2.tgz#802341c2d527e916402458329c9b12dfe0c7d6f3"
   integrity sha512-H+NZeghlXn1YmHcy9eFwiuUzVWjVO0zMbYiAo3u0pMkdNyoU2JoVe6PcTg0NKEKoCXv4wME0x59NT2gFNgcwWg==
@@ -2170,7 +2170,7 @@
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/-/easyops-analytics-0.1.8.tgz#c8cd83d184fa0cc244b3d46c3658af5e3ee194aa"
   integrity sha1-yM2D0YT6DMJEs9RsNlivXj7hlKo=
 
-"@next-core/editor-bricks-helper@^0.17.1", "@next-core/editor-bricks-helper@^0.17.3":
+"@next-core/editor-bricks-helper@^0.17.3":
   version "0.17.3"
   resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.17.3.tgz#0ffd0161090ea69194d35011f111fbe5c1820260"
   integrity sha512-T3a2nty6bIAVkFfC/hNgc9Dt3AOuGVskMgNON5aGEhoHtUtejTaeSsW0x1bKxVaC+/n5JoAya8L70PHQ8pgtxA==
