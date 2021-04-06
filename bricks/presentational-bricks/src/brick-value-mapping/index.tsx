@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { isNil, get, isEmpty } from "lodash";
+import { Color } from "../interfaces/brick-tag";
 import { LinkProps } from "@next-libs/basic-components";
 import {
   BrickWrapper,
@@ -11,25 +12,6 @@ import {
 } from "@next-core/brick-kit";
 import { BrickValueMapping } from "./BrickValueMapping";
 import { MenuIcon } from "@next-core/brick-types";
-
-export enum Color {
-  green = "green",
-  red = "red",
-  blue = "blue",
-  orange = "orange",
-  cyan = "cyan",
-  purple = "purple",
-  geekblue = "geekblue",
-  gray = "gray",
-  "green-inverse" = "var(--theme-green-color)",
-  "red-inverse" = "var(--theme-red-color)",
-  "blue-inverse" = "var(--theme-blue-color)",
-  "orange-inverse" = "var(--theme-orange-color)",
-  "cyan-inverse" = "var(--theme-cyan-color)",
-  "purple-inverse" = "var(--theme-purple-color)",
-  "geekblue-inverse" = "var(--theme-geekblue-color)",
-  "gray-inverse" = "var(--theme-gray-color)",
-}
 
 export interface MappingValue {
   text?: string;

@@ -43,6 +43,11 @@
     background-color: var(--tag-gray-background) !important;
   }
 
+  .grayInverseTag {
+    color: var(--tag-inverse-text-color);
+    background: var(--tag-gray-inverse-color) !important;
+  }
+
   .colorTag {
     font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
