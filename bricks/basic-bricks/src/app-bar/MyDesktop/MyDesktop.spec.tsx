@@ -100,6 +100,7 @@ jest.mock("../LaunchpadService", () => {
           },
         ];
       },
+      getSitemapList: () => [{ name: "资源管理", apps: [] }] as any,
     },
   };
 });

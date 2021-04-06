@@ -114,6 +114,22 @@ jest.mock("@next-core/brick-kit", () => {
         columns: 5,
         rows: 4,
       }),
+      getLaunchpadSiteMap: () => [
+        {
+          name: "资源管理",
+          id: "ResourceManagement",
+          apps: [{ id: "a", sort: "1" }],
+        },
+        { name: "资源可视化", id: "ResourceVisualization" },
+        {
+          name: "DevOps持续交付",
+          id: "DevOpsContinuousDelivery",
+          apps: [
+            { id: "c", sort: "1" },
+            { id: "d", sort: "2" },
+          ],
+        },
+      ],
     }),
   };
 });
@@ -231,5 +247,22 @@ describe("LaunchpadService", () => {
     expect(spyOnDeleteCollection).toHaveBeenCalledWith(listCollectionData[0], {
       interceptorParams: { ignoreLoadingBar: true },
     });
+
+    expect(service.getSitemapList()).toEqual([
+      {
+        name: "资源管理",
+        id: "ResourceManagement",
+        apps: [{ id: "a", sort: "1", name: "a", url: "/a" }],
+      },
+      { name: "资源可视化", id: "ResourceVisualization", apps: [] },
+      {
+        name: "DevOps持续交付",
+        id: "DevOpsContinuousDelivery",
+        apps: [
+          { id: "c", sort: "1", name: "c", url: "/c" },
+          { id: "d", sort: "2", name: "d", url: "/d" },
+        ],
+      },
+    ]);
   });
 });
