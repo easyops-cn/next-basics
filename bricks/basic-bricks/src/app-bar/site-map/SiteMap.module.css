@@ -34,8 +34,8 @@
     break-inside: avoid;
 
     .group {
-      padding: 0;
-      margin: 9px 0 58px;
+      margin: 0;
+      padding: 9px 0 58px;
     }
     .item {
       list-style-type: none;
