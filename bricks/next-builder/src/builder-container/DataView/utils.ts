@@ -7,31 +7,42 @@ export interface OptionType {
   label: string;
 }
 
+export enum ContextType {
+  RESOLVE = "resolve",
+  SELECTOR_RESOLVE = "selector-resolve",
+  VALUE = "value",
+}
+
 interface contextItemValueConf {
-  type: "value";
+  type: ContextType.VALUE;
   name?: string;
   value?: string;
   onChange?: string;
 }
 
-interface contextItemResolveConf {
-  type: "resolve";
+interface contextResolveBaseConf {
   name?: string;
-  useProvider: string;
   args?: string;
   transform?: string;
   if?: string;
   onChange?: string;
 }
 
+interface contextItemResolveConf extends contextResolveBaseConf {
+  type: ContextType.RESOLVE;
+  useProvider: string;
+}
+
+interface contextItemSelectorProviderResolveConf
+  extends contextResolveBaseConf {
+  type: ContextType.SELECTOR_RESOLVE;
+  provider: string;
+}
+
 export type ContextItemFormValue =
   | contextItemValueConf
-  | contextItemResolveConf;
-
-export const typeOptions = [
-  { label: "Value", value: "value" },
-  { label: "Provider", value: "resolve" },
-];
+  | contextItemResolveConf
+  | contextItemSelectorProviderResolveConf;
 
 const safeDumpField = (value: any, field: string): string | undefined => {
   let result;
@@ -91,7 +102,7 @@ export const safeLoadFields = (
 export function computeItemToSubmit(
   contextValue: ContextItemFormValue
 ): ContextConf {
-  const isValue = contextValue.type === "value";
+  const isValue = contextValue.type === ContextType.VALUE;
   if (isValue) {
     return {
       name: contextValue.name,
@@ -110,7 +121,14 @@ export function computeItemToSubmit(
     return {
       name: contextValue.name,
       resolve: {
-        useProvider: (contextValue as contextItemResolveConf).useProvider,
+        ...(contextValue.type === ContextType.SELECTOR_RESOLVE
+          ? {
+              provider: (contextValue as contextItemSelectorProviderResolveConf)
+                .provider,
+            }
+          : {
+              useProvider: (contextValue as contextItemResolveConf).useProvider,
+            }),
         if: computedFields.if,
         args: computedFields.args,
         transform: computedFields.transform,

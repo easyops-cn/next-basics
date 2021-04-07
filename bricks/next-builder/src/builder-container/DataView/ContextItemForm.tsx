@@ -1,13 +1,15 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { Input, Radio, Form, AutoComplete } from "antd";
 import {
-  typeOptions,
-  safeDumpFields,
   computeItemToSubmit,
   ContextItemFormValue,
   fieldCodeEditorConfigMap,
+  ContextType,
 } from "./utils";
-import { ContextConf } from "@next-core/brick-types";
+import {
+  ContextConf,
+  SelectorProviderResolveConf,
+} from "@next-core/brick-types";
 import { CodeEditorItem } from "@next-libs/editor-components";
 import { BrickOptionItem } from "../interfaces";
 import { FormInstance } from "antd/lib/form";
@@ -34,15 +36,35 @@ export function ContextItemForm({
     return list;
   }, [brickList]);
   const [providerOptions, setProviderOptions] = useState(originalProviderList);
-  const [itemIsValue, setItemIsValue] = useState<boolean>(true);
+  const [contextType, setContextType] = useState(ContextType.VALUE);
+
+  const typeOptions = useMemo(() => {
+    return [
+      { label: "Value", value: ContextType.VALUE },
+      { label: "Provider", value: ContextType.RESOLVE },
+      ...((data?.resolve as SelectorProviderResolveConf)?.provider
+        ? [
+            {
+              label: "Provider Selector",
+              value: ContextType.SELECTOR_RESOLVE,
+            },
+          ]
+        : []),
+    ];
+  }, [data]);
 
   useEffect(() => {
     const isValue = !data?.resolve;
-    setItemIsValue(isValue);
+    const type = isValue
+      ? ContextType.VALUE
+      : (data.resolve as SelectorProviderResolveConf).provider
+      ? ContextType.SELECTOR_RESOLVE
+      : ContextType.RESOLVE;
+    setContextType(type);
   }, [data]);
 
   const onTypeChange = (event: RadioChangeEvent) => {
-    setItemIsValue(event.target.value === "value");
+    setContextType(event.target.value);
   };
 
   const onSearch = (v: string) => {
@@ -102,17 +124,27 @@ export function ContextItemForm({
           ))}
         </Radio.Group>
       </Form.Item>
-      {itemIsValue ? (
+      {contextType === ContextType.VALUE ? (
         <Form.Item name="value">{getCodeEditorItem("value")}</Form.Item>
       ) : (
         <>
-          <Form.Item
-            label="useProvider"
-            name="useProvider"
-            rules={[{ required: true, message: "Please select a provider!" }]}
-          >
-            <AutoComplete options={providerOptions} onSearch={onSearch} />
-          </Form.Item>
+          {contextType === ContextType.SELECTOR_RESOLVE ? (
+            <Form.Item
+              name="provider"
+              label="Provider"
+              rules={[{ required: true, message: "Provider is required!" }]}
+            >
+              <Input />
+            </Form.Item>
+          ) : (
+            <Form.Item
+              label="useProvider"
+              name="useProvider"
+              rules={[{ required: true, message: "Please select a provider!" }]}
+            >
+              <AutoComplete options={providerOptions} onSearch={onSearch} />
+            </Form.Item>
+          )}
           <Form.Item label="Args" name="args">
             {getCodeEditorItem("args")}
           </Form.Item>
