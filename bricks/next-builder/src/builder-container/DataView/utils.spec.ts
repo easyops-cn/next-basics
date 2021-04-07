@@ -4,6 +4,7 @@ import {
   safeLoadFields,
   computeItemToSubmit,
   ContextItemFormValue,
+  ContextType,
 } from "./utils";
 
 describe("safeDumpFields", () => {
@@ -67,7 +68,7 @@ describe("computeItemToSubmit", () => {
     [
       "should work when type is value",
       {
-        type: "value",
+        type: ContextType.VALUE,
         value: "age: 18",
         name: "userInfo",
         onChange: 'target: "#id"\nproperties:\n  a: 1',
@@ -88,7 +89,7 @@ describe("computeItemToSubmit", () => {
     [
       "should work when type is resolve",
       {
-        type: "resolve",
+        type: ContextType.RESOLVE,
         useProvider: "provider-a",
         if: "<% QUERY.q %>",
         args: "- P-1",
@@ -100,6 +101,37 @@ describe("computeItemToSubmit", () => {
         name: "new",
         resolve: {
           useProvider: "provider-a",
+          if: "<% QUERY.q %>",
+          args: ["P-1"],
+          transform: {
+            value: "<% DATA %>",
+          },
+        },
+        onChange: [
+          {
+            target: "#id",
+            properties: {
+              a: 1,
+            },
+          },
+        ],
+      },
+    ],
+    [
+      "should work when type is resolve",
+      {
+        type: ContextType.SELECTOR_RESOLVE,
+        provider: "provider-b.\\get",
+        if: "<% QUERY.q %>",
+        args: "- P-1",
+        transform: "value: <% DATA %>\n",
+        name: "new",
+        onChange: '- target: "#id"\n  properties:\n    a: 1',
+      },
+      {
+        name: "new",
+        resolve: {
+          provider: "provider-b.\\get",
           if: "<% QUERY.q %>",
           args: ["P-1"],
           transform: {

@@ -70,5 +70,20 @@ describe("ContextItemForm", () => {
       },
     });
     expect(wrapper.find(Form.Item).length).toBe(4);
+    expect(wrapper.find(Radio).children().length).toBe(2);
+
+    wrapper.setProps({
+      data: {
+        name: "data-c",
+        type: "selector-resolve",
+        resolve: {
+          provider: "provider-a",
+          args: "- arg1\n",
+          if: "false\n",
+          transform: "value: <% DATA %>\n",
+        },
+      },
+    });
+    expect(wrapper.find(Radio).children().length).toBe(3);
   });
 });

@@ -8,7 +8,11 @@ import {
   useBuilderData,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
-import { ContextConf } from "@next-core/brick-types";
+import {
+  ContextConf,
+  SelectorProviderResolveConf,
+  UseProviderResolveConf,
+} from "@next-core/brick-types";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
 import styles from "./DataView.module.css";
 import { findIndex, uniqueId, escape } from "lodash";
@@ -18,7 +22,7 @@ import { ContextItem } from "./ContextItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { searchList } from "../utils/utils";
-import { safeDumpFields } from "./utils";
+import { safeDumpFields, ContextType } from "./utils";
 import { findQueryInNode } from "../utils/findQueryInNode";
 
 const symbolId = Symbol("uid");
@@ -85,7 +89,7 @@ export function DataView({
     if (isValue) {
       const formValue = {
         name: contextValue?.name,
-        type: "value",
+        type: ContextType.VALUE,
         ...safeDumpFields({
           value: contextValue?.value,
           onChange: contextValue?.onChange,
@@ -95,8 +99,17 @@ export function DataView({
     } else {
       const formValue = {
         name: contextValue?.name,
-        type: "resolve",
-        useProvider: contextValue.resolve.useProvider,
+        ...((contextValue.resolve as SelectorProviderResolveConf).provider
+          ? {
+              type: ContextType.SELECTOR_RESOLVE,
+              provider: (contextValue.resolve as SelectorProviderResolveConf)
+                .provider,
+            }
+          : {
+              type: ContextType.RESOLVE,
+              useProvider: (contextValue.resolve as UseProviderResolveConf)
+                .useProvider,
+            }),
         ...safeDumpFields({
           args: contextValue.resolve.args,
           if: contextValue.resolve.if,
