@@ -23,13 +23,21 @@ export function EventStreamTitle({
   onEventNodeClick,
 }: EventStreamTitleProps): React.ReactElement {
   const isUpstreamSource = eventNode.type === EventUpstreamType.UPSTREAM_SOURCE;
+
+  const handleClick = () => {
+    if (!isUpstreamSource) {
+      onEventNodeClick?.(eventNode);
+    }
+  };
+
   if (isUpstreamSource || eventNode.type === EventDownstreamType.ROOT) {
     return (
       <div
-        className={classNames(styles.title, {
+        className={classNames(styles.title, styles.clickable, {
           [styles.upstreamSource]: isUpstreamSource,
         })}
         style={styleConfig.title}
+        onClick={handleClick}
       >
         {(eventNode as EventDownstreamNodeOfRoot).node.alias}
       </div>
@@ -50,10 +58,6 @@ export function EventStreamTitle({
     default:
       eventCategory = "event";
   }
-
-  const handleClick = () => {
-    onEventNodeClick?.(eventNode);
-  };
 
   return (
     <div
