@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.45.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.44.0...@next-bricks/next-builder@1.45.0) (2021-04-07)
+
+
+### Features
+
+* **context:** Compatible legacy data with provider selector ([f378c34](https://github.com/easyops-cn/next-basics/commit/f378c344dd81a619d8db829bda6a0f70bb334463))
+* **event-stream-title:** handle click when type is root ([cba90ae](https://github.com/easyops-cn/next-basics/commit/cba90aecb39f463d1c616c65e83a08a3168cc15c))
+
+
+
+
+
 # [1.44.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.43.1...@next-bricks/next-builder@1.44.0) (2021-03-31)
 
 
