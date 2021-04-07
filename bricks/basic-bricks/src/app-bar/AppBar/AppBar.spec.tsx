@@ -104,7 +104,7 @@ describe("AppBar", () => {
     expect(spyOnHistoryPush).toBeCalledWith("/account-setting");
   });
 
-  it("should render when user is not logged in", () => {
+  it("should render when user is not logged in.", () => {
     jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({
       username: undefined,
     });
