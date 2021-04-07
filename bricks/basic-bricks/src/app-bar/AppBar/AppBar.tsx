@@ -28,9 +28,13 @@ export function AppBar({
   const { t } = useTranslation(NS_BASIC_BRICKS);
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
   const [accountEntryEnabled, setAccountEntry] = React.useState<boolean>(false);
-
   const hideLaunchpadButton = React.useMemo(
     () => getRuntime().getFeatureFlags()["hide-launchpad-button"],
+    []
+  );
+
+  const ssoEnabled = React.useMemo(
+    () => getRuntime().getFeatureFlags()["sso-enabled"],
     []
   );
 
@@ -86,6 +90,10 @@ export function AppBar({
     getHistory().replace("/auth/logout");
   };
 
+  const handleSSOLogout = (): void => {
+    getHistory().replace("/sso-auth/logout");
+  };
+
   const handleRedirectToMe = (): void => {
     getHistory().push("/account-setting");
   };
@@ -116,7 +124,11 @@ export function AppBar({
                       {t(K.ACCOUNT_MANAGEMENT)}
                     </Menu.Item>
                   )}
-                  <Menu.Item onClick={handleLogout}>{t(K.LOGOUT)}</Menu.Item>
+                  <Menu.Item
+                    onClick={ssoEnabled ? handleSSOLogout : handleLogout}
+                  >
+                    {t(K.LOGOUT)}
+                  </Menu.Item>
                 </Menu>
               }
               trigger={["click"]}
