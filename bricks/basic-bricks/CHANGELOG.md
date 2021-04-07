@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.114.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.113.2...@next-bricks/basic-bricks@1.114.0) (2021-04-07)
+
+
+### Features
+
+* **sso:** handle sso logout ([14724d6](https://github.com/easyops-cn/next-basics/commit/14724d66a35c81531677fe8ec37ea6090725a9a6))
+
+
+
+
+
 ## [1.113.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.113.1...@next-bricks/basic-bricks@1.113.2) (2021-04-06)
 
 
