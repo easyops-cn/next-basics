@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.179.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.1...@next-bricks/presentational-bricks@1.179.2) (2021-04-07)
+
+
+### Bug Fixes
+
+* **icon-select:** reset color when defaultColor changes ([f66ad8d](https://github.com/easyops-cn/next-basics/commit/f66ad8dc7c58e1d8a2d48ac4d1fe49938a3ce976))
+
+
+
+
+
 ## [1.179.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.0...@next-bricks/presentational-bricks@1.179.1) (2021-04-06)
 
 
