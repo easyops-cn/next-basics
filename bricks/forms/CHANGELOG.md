@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.158.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.158.1...@next-bricks/forms@1.158.2) (2021-04-08)
+
+
+### Bug Fixes
+
+* **forms:** cmdb-object-attr-value枚举值输入方式改变&resetFields不生效 ([3050f94](https://github.com/easyops-cn/next-basics/commit/3050f94b38f25a958291f14cbd1bf52c682de9a5))
+* **forms:** ObjectAttrStruct  regex bug fix ([04ca788](https://github.com/easyops-cn/next-basics/commit/04ca7880087136e2bfc27f0b3bf7d75a17345e64))
+
+
+
+
+
 ## [1.158.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.158.0...@next-bricks/forms@1.158.1) (2021-04-07)
 
 

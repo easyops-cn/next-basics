@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.115.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.114.2...@next-bricks/basic-bricks@1.115.0) (2021-04-08)
+
+
+### Bug Fixes
+
+* favorite desktop support responsive ([9b65dfc](https://github.com/easyops-cn/next-basics/commit/9b65dfc5fa9b4b06f7f816b7cc11c7e10c966324))
+* filter empty category and push visitor by sitemap ([1e6d0dd](https://github.com/easyops-cn/next-basics/commit/1e6d0ddc7a079c9aa92b8f6f93616d1ea59048b6))
+
+
+### Features
+
+* mydesk  rember mode ([d188acd](https://github.com/easyops-cn/next-basics/commit/d188acd263ba564ad11fda80fe054ad815978665))
+
+
+
+
+
 ## [1.114.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.114.1...@next-bricks/basic-bricks@1.114.2) (2021-04-08)
 
 
