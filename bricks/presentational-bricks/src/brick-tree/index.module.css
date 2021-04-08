@@ -30,4 +30,7 @@
   :global(.ant-tree-node-content-wrapper) {
     width: 100%;
   }
+  :global(.ant-tree-treenode-motion) {
+    width: 100%;
+  }
 }
