@@ -187,7 +187,11 @@ export function LegacyObjectAttrStructForm(
       title: "枚举值",
       dataIndex: "regex",
       key: "regex",
-      render: (text, record) => record.regex?.join(",") || "",
+      render: (text, record) =>
+        (Array.isArray(record.regex) &&
+          ["enums", "enum"].includes(record.type) &&
+          record.regex?.join(",")) ||
+        "",
     },
     {
       title: "操作",
