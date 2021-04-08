@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.179.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.2...@next-bricks/presentational-bricks@1.179.3) (2021-04-08)
+
+
+### Bug Fixes
+
+* **brickTee:** fix tree expand motion ([884b580](https://github.com/easyops-cn/next-basics/commit/884b580a6a4281030db3f9409c6bc580782ab952))
+
+
+
+
+
 ## [1.179.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.1...@next-bricks/presentational-bricks@1.179.2) (2021-04-07)
 
 
