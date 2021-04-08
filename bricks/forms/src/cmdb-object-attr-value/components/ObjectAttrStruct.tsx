@@ -356,10 +356,8 @@ export function LegacyObjectAttrStructForm(
                 <Select
                   mode="tags"
                   style={{ width: "100%" }}
-                  placeholder="输入枚举值，用逗号或空格分隔保存"
-                  tokenSeparators={[",", " "]}
-                  dropdownRender={() => <></>}
-                ></Select>
+                  placeholder="输入枚举值，以回车间隔"
+                />
               )}
             </Form.Item>
           )}

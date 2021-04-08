@@ -152,6 +152,31 @@ describe("ObjectAttrStruct", () => {
       struct_define: [],
     });
   });
+  it("test add new struct and enum or enums", async () => {
+    const props = {
+      value: defaultValue,
+      onChange: jest.fn(),
+    };
+    const wrapper = mount(<ObjectAttrStruct {...props} />);
+    wrapper.find(Button).at(0).invoke("onClick")();
+    expect(wrapper.find("Modal").at(0).props().visible).toBeTruthy();
+    wrapper.update();
+    wrapper.find(Input).at(0).invoke("onChange")("structId");
+    wrapper.find(Input).at(1).invoke("onChange")("structName");
+    wrapper.find(Select).at(0).invoke("onChange")("enum");
+    wrapper.find(Modal).at(0).invoke("onOk")(); // 点击弹窗确认按钮
+    expect(props.onChange).toBeCalledWith({
+      default: "",
+      struct_define: [
+        {
+          id: "structId",
+          name: "structName",
+          type: "enum",
+          regex: [],
+        },
+      ],
+    });
+  });
 
   it("test import struct", async () => {
     const props = {
