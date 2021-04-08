@@ -127,7 +127,9 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
   }, [favoriteList, isLoading, firstRendered]);
 
   const renderSiteMap = useMemo(() => {
-    const categoryList = launchpadService.getSitemapList();
+    const categoryList = launchpadService
+      .getSitemapList()
+      ?.filter((item) => item.apps?.length > 0);
 
     return (
       <SiteMap
