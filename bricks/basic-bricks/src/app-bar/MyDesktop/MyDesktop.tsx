@@ -82,7 +82,6 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
             <DesktopCell
               position={"left"}
               size="small"
-              responsive={false}
               key={index}
               item={item}
               showAddIcon={true}
