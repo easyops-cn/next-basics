@@ -118,16 +118,21 @@ jest.mock("@next-core/brick-kit", () => {
         {
           name: "资源管理",
           id: "ResourceManagement",
-          apps: [{ id: "a", sort: "1" }],
+          apps: [{ id: "a", sort: 1 }],
         },
         { name: "资源可视化", id: "ResourceVisualization" },
         {
           name: "DevOps持续交付",
           id: "DevOpsContinuousDelivery",
           apps: [
-            { id: "c", sort: "1" },
-            { id: "d", sort: "2" },
+            { id: "c", sort: 1 },
+            { id: "d", sort: 2 },
           ],
+        },
+        {
+          name: "敏捷管理",
+          id: "agile",
+          apps: [{ id: "f", sort: 1 }],
         },
       ],
     }),
@@ -252,16 +257,29 @@ describe("LaunchpadService", () => {
       {
         name: "资源管理",
         id: "ResourceManagement",
-        apps: [{ id: "a", sort: "1", name: "a", url: "/a" }],
+        apps: [
+          {
+            id: "a",
+            sort: 1,
+            name: "a",
+            homepage: "/a",
+            icons: { large: "a.svg" },
+          },
+        ],
       },
       { name: "资源可视化", id: "ResourceVisualization", apps: [] },
       {
         name: "DevOps持续交付",
         id: "DevOpsContinuousDelivery",
         apps: [
-          { id: "c", sort: "1", name: "c", url: "/c" },
-          { id: "d", sort: "2", name: "d", url: "/d" },
+          { id: "c", sort: 1, name: "c", homepage: "/c" },
+          { id: "d", sort: 2, name: "d", homepage: "/d" },
         ],
+      },
+      {
+        name: "敏捷管理",
+        id: "agile",
+        apps: [{ id: "f", sort: 1 }],
       },
     ]);
   });

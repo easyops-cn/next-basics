@@ -1,6 +1,8 @@
 import React, { forwardRef, useEffect, useMemo } from "react";
 import styles from "./SiteMap.module.css";
 import { Link } from "@next-libs/basic-components";
+import { MicroApp } from "@next-core/brick-types";
+import { launchpadService } from "../LaunchpadService";
 
 interface SiteCategory {
   name: string;
@@ -10,7 +12,7 @@ interface SiteCategory {
     id?: string;
     sort?: string;
     name?: string;
-    url?: string;
+    homepage?: string;
   }[];
 }
 export interface SiteMapProps {
@@ -31,6 +33,10 @@ export function LeacySiteMap(
     props.onLoad?.();
   }, []);
 
+  const handleClick = (app: MicroApp): void => {
+    launchpadService.pushVisitor("app", app);
+  };
+
   return (
     <div
       className={styles.scrollContainer}
@@ -45,7 +51,12 @@ export function LeacySiteMap(
             <ul className={styles.group}>
               {item.apps?.map((row, index) => (
                 <li className={styles.item} key={index}>
-                  <Link to={row.url}>{row.name}</Link>
+                  <Link
+                    to={row.homepage}
+                    onClick={() => handleClick(row as MicroApp)}
+                  >
+                    {row.name}
+                  </Link>
                 </li>
               ))}
             </ul>

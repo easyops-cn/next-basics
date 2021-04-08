@@ -1,11 +1,20 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import { SiteMap } from "./SiteMap";
+import { launchpadService } from "../LaunchpadService";
 
 jest.mock("@next-libs/basic-components", () => {
   return {
     Link: function Link() {
       return <div>Link</div>;
+    },
+  };
+});
+
+jest.mock("../LaunchpadService", () => {
+  return {
+    launchpadService: {
+      pushVisitor: jest.fn(),
     },
   };
 });
@@ -17,7 +26,9 @@ describe("SiteMap", () => {
         {
           name: "资源管理",
           id: "resource",
-          apps: [{ name: "cmdb模型管理", url: "/cmdb-mode", id: "cmdb-mode" }],
+          apps: [
+            { name: "cmdb模型管理", homepage: "/cmdb-mode", id: "cmdb-mode" },
+          ],
         },
       ],
     };
@@ -42,7 +53,9 @@ describe("SiteMap", () => {
       {
         name: "资源管理",
         id: "resource",
-        apps: [{ name: "cmdb模型管理", url: "/cmdb-mode", id: "cmdb-mode" }],
+        apps: [
+          { name: "cmdb模型管理", homepage: "/cmdb-mode", id: "cmdb-mode" },
+        ],
       },
     ];
     const onLoadFn = jest.fn();
@@ -51,5 +64,13 @@ describe("SiteMap", () => {
     );
 
     expect(onLoadFn).toHaveBeenCalled();
+
+    wrapper.find("Link").at(0).invoke("onClick")(null);
+
+    expect(launchpadService.pushVisitor).toHaveBeenCalledWith("app", {
+      id: "cmdb-mode",
+      name: "cmdb模型管理",
+      homepage: "/cmdb-mode",
+    });
   });
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
-import { MyDesktop, SiteMapDirection } from "./MyDesktop";
+import { MyDesktop } from "./MyDesktop";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
 import { FavoriteDesktopCell } from "../FavoriteDesktopCell/FavoriteDesktopCell";
 import { launchpadService } from "../LaunchpadService";

@@ -6,6 +6,7 @@ import {
 } from "@next-core/brick-types";
 import { LaunchpadApi, UserServiceModels } from "@next-sdk/user-service-sdk";
 import { getRuntime } from "@next-core/brick-kit";
+import { pick } from "lodash";
 
 export class LaunchpadService {
   readonly storageKey = "launchpad-recently-visited";
@@ -224,11 +225,10 @@ export class LaunchpadService {
     return siteMapList?.map((item) => ({
       ...item,
       apps: (item.apps || []).map((row) => {
-        const find = this.microApps.find((item) => item.id === row.id);
+        const find = this.microApps.find((item) => item.id === row.id) || {};
         return {
           ...row,
-          url: find?.homepage,
-          name: find?.name,
+          ...pick(find, ["name", "icons", "localeName", "homepage"]),
         };
       }),
     }));
