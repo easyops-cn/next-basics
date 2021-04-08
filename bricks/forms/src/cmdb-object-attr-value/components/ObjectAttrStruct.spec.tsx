@@ -3,9 +3,7 @@ import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Modal, Row, Radio, Button, Table, Input, Select } from "antd";
 import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
-import {
-  ObjectAttrStruct
-} from "./ObjectAttrStruct";
+import { ObjectAttrStruct } from "./ObjectAttrStruct";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
@@ -66,6 +64,35 @@ describe("ObjectAttrStruct", () => {
     wrapper.update();
     expect(wrapper.find(Row).at(1).children(0).text()).toBe("选择模型");
   });
+
+  it.each([
+    ["enum", "", ""],
+    ["enums", "", ""],
+    ["json", "", ""],
+    ["enum", ["enum1", "enum2"], "enum1,enum2"],
+  ])(
+    "should work with props has struct_define (%s %s)",
+    (type, regex, expected) => {
+      const wrapper = mount(
+        <ObjectAttrStruct
+          {...{
+            value: {
+              ...defaultValue,
+              struct_define: [
+                {
+                  id: "struId",
+                  name: "struName",
+                  type,
+                  regex,
+                },
+              ],
+            },
+          }}
+        />
+      );
+      expect(wrapper.find("tbody tr").childAt(3).text()).toBe(expected);
+    }
+  );
 
   it("test add new struct", async () => {
     const props = {
