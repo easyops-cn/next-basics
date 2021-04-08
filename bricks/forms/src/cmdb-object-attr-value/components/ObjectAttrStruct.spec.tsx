@@ -3,9 +3,7 @@ import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Modal, Row, Radio, Button, Table, Input, Select } from "antd";
 import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
-import {
-  ObjectAttrStruct
-} from "./ObjectAttrStruct";
+import { ObjectAttrStruct } from "./ObjectAttrStruct";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
@@ -123,6 +121,31 @@ describe("ObjectAttrStruct", () => {
     expect(props.onChange).toBeCalledWith({
       default: "",
       struct_define: [],
+    });
+  });
+  it("test add new struct and enum or enums", async () => {
+    const props = {
+      value: defaultValue,
+      onChange: jest.fn(),
+    };
+    const wrapper = mount(<ObjectAttrStruct {...props} />);
+    wrapper.find(Button).at(0).invoke("onClick")();
+    expect(wrapper.find("Modal").at(0).props().visible).toBeTruthy();
+    wrapper.update();
+    wrapper.find(Input).at(0).invoke("onChange")("structId");
+    wrapper.find(Input).at(1).invoke("onChange")("structName");
+    wrapper.find(Select).at(0).invoke("onChange")("enum");
+    wrapper.find(Modal).at(0).invoke("onOk")(); // 点击弹窗确认按钮
+    expect(props.onChange).toBeCalledWith({
+      default: "",
+      struct_define: [
+        {
+          id: "structId",
+          name: "structName",
+          type: "enum",
+          regex: [],
+        },
+      ],
     });
   });
 

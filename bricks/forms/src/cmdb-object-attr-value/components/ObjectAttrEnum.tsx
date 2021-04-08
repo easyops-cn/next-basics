@@ -51,11 +51,9 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
             mode="tags"
             style={{ width: "100%" }}
             value={value?.regex}
-            placeholder="输入枚举值，用逗号或空格分隔保存"
+            placeholder="输入枚举值，以回车间隔"
             onChange={(e) => handleValueChange({ ...value, regex: e })}
-            tokenSeparators={[",", " "]}
-            dropdownRender={() => <></>}
-          ></Select>
+          />
         </Row>
       </div>
       <div>

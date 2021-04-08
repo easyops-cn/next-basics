@@ -175,8 +175,8 @@ export function CmdbObjectAttrValueItem(
   const [value, setValue] = React.useState();
 
   React.useEffect(() => {
-    props.value?.type && setValueType(props.value?.type);
-    !isEmpty(props.value) && setValue(props.value);
+    setValueType(props.value?.type);
+    setValue(props.value);
   }, [props.value]);
 
   React.useEffect(() => {
@@ -281,10 +281,7 @@ export function CmdbObjectAttrValue(
   };
   return (
     <FormItemWrapper {...props}>
-      <RefCmdbObjectAttrValueItem
-        {...props}
-        onChange={handleChange}
-      ></RefCmdbObjectAttrValueItem>
+      <RefCmdbObjectAttrValueItem {...props} onChange={handleChange} />
     </FormItemWrapper>
   );
 }

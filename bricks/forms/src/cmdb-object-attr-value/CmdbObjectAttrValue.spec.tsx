@@ -58,6 +58,7 @@ describe("CmdbObjectAttrValue", () => {
     ["ip"],
     ["bool"],
     ["float"],
+    ["json"],
   ])("should change value type %s", (type: string) => {
     const props = {
       formElement: {
