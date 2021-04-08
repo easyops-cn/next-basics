@@ -27,8 +27,9 @@
   > :global(.ant-input-search) {
     margin-bottom: 10px;
   }
-  > :global(.ant-menu, ) {
+  > :global(.ant-menu) {
     background: transparent;
+
     :global(.ant-menu-item-group) {
       :global(.ant-menu-item-group-title) {
         padding: 8px;
@@ -36,9 +37,15 @@
       }
     }
 
+    :global(.ant-menu-sub.ant-menu-inline) {
+      background-color: #f7f7f7;
+      border-radius: 6px;
+    }
+
     :global(.ant-menu-item) {
       margin: 0;
       border-radius: 6px;
+
       &:after {
         content: none;
       }
@@ -53,7 +60,7 @@
     }
 
     :global(.ant-menu-item-selected) {
-      background-color: #ebf3fd;
+      background-color: #e0eeff;
     }
 
     :global(.ant-menu-submenu-title) {
