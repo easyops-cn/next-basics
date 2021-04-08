@@ -8,7 +8,7 @@ import { Desktop } from "../Desktop/Desktop";
 import { useLaunchpadSettingsContext } from "../LaunchpadSettingsContext";
 import { useDesktopDirContext } from "../DesktopDirContext";
 import styles from "./DesktopSlider.module.css";
-import { MyDesktop, SiteMapDirection } from "../MyDesktop/MyDesktop";
+import { MyDesktop } from "../MyDesktop/MyDesktop";
 import { launchpadService } from "../LaunchpadService";
 import { HomeFilled } from "@ant-design/icons";
 

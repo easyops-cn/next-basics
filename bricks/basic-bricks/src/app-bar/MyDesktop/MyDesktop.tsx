@@ -22,17 +22,14 @@ enum ModeType {
   Sitemap = "sitemap",
 }
 
-export enum SiteMapDirection {
-  Up,
-  Down,
-}
+let remberMode = ModeType.Sitemap;
 
 export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
   const [recentlyVisitedList] = useState(launchpadService.getAllVisitors());
   const [favoriteList, setFavoriteList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [firstRendered, setFirstRendered] = useState(true);
-  const [mode, setMode] = useState<ModeType>(ModeType.Sitemap);
+  const [mode, setMode] = useState<ModeType>(remberMode);
   const siteMapRef = createRef<HTMLDivElement>();
   const deskContainerRef = useRef<HTMLDivElement>();
   const [siteMapHeight, setSiteMapHeight] = useState<number>();
@@ -46,6 +43,7 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
 
   const handleMode = (e: React.MouseEvent, mode: ModeType): void => {
     e.stopPropagation();
+    remberMode = mode;
     setMode(mode);
   };
   useEffect(() => {
