@@ -28,28 +28,26 @@
   border-radius: 6px;
 }
 
-.responsive {
-  @media (max-height: 860px), (max-width: 1280px) {
-    .cellItem {
-      height: 124px;
-      min-width: 100px;
+@media (max-height: 860px), (max-width: 1280px) {
+  .cellItem {
+    height: 124px;
+    min-width: 100px;
 
-      &.small {
-        height: 100px;
-        min-width: 76px;
-      }
+    &.small {
+      height: 100px;
+      min-width: 76px;
     }
   }
+}
 
-  @media (max-height: 700px), (max-width: 1024px) {
-    .cellItem {
-      height: 118px;
-      min-width: 80px;
+@media (max-height: 700px), (max-width: 1024px) {
+  .cellItem {
+    height: 118px;
+    min-width: 80px;
 
-      &.small {
-        height: 89px;
-        min-width: 60px;
-      }
+    &.small {
+      height: 89px;
+      min-width: 60px;
     }
   }
 }

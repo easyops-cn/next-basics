@@ -83,13 +83,17 @@ describe("DesktopApp", () => {
     );
 
     wrapper.setProps({
+      showAddIcon: true,
+      isFavorite: true,
       app: {
         ...app,
         icons: {
           large: "http://a.com/b.jpg",
         },
+        iconBackground: "square",
       },
     });
     expect(wrapper.find("img").prop("src")).toBe("http://a.com/b.jpg");
+    expect(wrapper.find(".addIcon").hasClass("squareIcon")).toEqual(true);
   });
 });

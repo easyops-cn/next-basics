@@ -91,13 +91,18 @@
 .favoriteContainer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1.5rem 7%;
-  /*  min-height: 100px;*/
+  gap: 2.5rem 7%;
 }
 
 @media (max-height: 860px), (max-width: 1280px) {
   .favoriteContainer {
-    gap: 1rem 4%;
+    gap: 1.7rem 4%;
+  }
+}
+
+@media (max-height: 720px), (max-width: 1024px) {
+  .favoriteContainer {
+    gap: 1rem 3%;
   }
   .visited {
     padding-bottom: 18px;
@@ -105,14 +110,8 @@
   }
 }
 
-@media (max-height: 700px), (max-width: 1024px) {
-  .favoriteContainer {
-    gap: 1rem 3%;
-  }
-}
-
 @media (max-height: 640px), (max-width: 900px) {
   .favoriteContainer {
-    gap: 1rem 2%;
+    gap: 0.8rem 2%;
   }
 }
