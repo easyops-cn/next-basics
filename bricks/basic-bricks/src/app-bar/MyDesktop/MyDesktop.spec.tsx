@@ -145,7 +145,6 @@ describe("MyDesktop", () => {
         },
         type: "app",
       },
-      position: "left",
       showAddIcon: true,
     });
 

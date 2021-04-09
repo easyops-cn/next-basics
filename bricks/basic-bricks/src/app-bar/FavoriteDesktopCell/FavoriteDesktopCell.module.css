@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  transform-origin: 0 0;
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -134,11 +135,5 @@
 @media (max-height: 700px), (max-width: 1024px) {
   .cellWrapper {
     transform: scale(0.7);
-  }
-}
-
-@media (max-height: 640px), (max-width: 900px) {
-  .cellWrapper {
-    transform: scale(0.6);
   }
 }
