@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.5.1...@next-bricks/brick-visualization@1.5.2) (2021-04-09)
+
+
+### Bug Fixes
+
+* **icon-select:** set color when props.value changes ([2cfcb07](https://github.com/easyops-cn/next-basics/commit/2cfcb0729a25d9f1c3d34c605c8c233b6894d3e4))
+
+
+
+
+
 ## [1.5.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.5.0...@next-bricks/brick-visualization@1.5.1) (2021-04-07)
 
 
