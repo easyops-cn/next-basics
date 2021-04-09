@@ -19,7 +19,6 @@ interface DesktopCellProps {
   position?: "left" | "center" | "right";
   onSetAsFavorite?: () => void;
   isFavorite?: boolean;
-  responsive?: boolean;
   size?: string;
 }
 
@@ -84,7 +83,6 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
     <div
       className={classNames(styles.cellWrapper, {
         [styles.positionLeft]: props?.position === "left",
-        [styles.responsive]: props.responsive ?? true,
       })}
     >
       <div
@@ -100,7 +98,6 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
             onClick={handleAppClick}
             onAddClick={addItemToFavorite}
             size={props.size}
-            responsive={props.responsive}
           />
         ) : props.item.type === "custom" ? (
           <DesktopCustom
@@ -111,7 +108,6 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
             onClick={handleCustomClick}
             onAddClick={addItemToFavorite}
             size={props.size}
-            responsive={props.responsive}
           />
         ) : (
           <DesktopDir
