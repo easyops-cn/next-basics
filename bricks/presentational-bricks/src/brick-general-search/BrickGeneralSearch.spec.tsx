@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { BrickGeneralSearch } from "./BrickGeneralSearch";
 import { Input, Button } from "antd";
 
@@ -41,5 +41,25 @@ describe("BrickGeneralSearch", () => {
       />
     );
     expect(wrapper).toBeTruthy();
+  });
+  it("should work with debounceTime", () => {
+    const wrapper = mount(
+      <BrickGeneralSearch
+        onUpdate={onUpdate}
+        onChange={onChange}
+        query="1"
+        size="large"
+        shape="default"
+        placeholder="搜索"
+        debounceTime={200}
+      />
+    );
+    wrapper.setProps({
+      query: "123",
+    });
+    expect(wrapper.find("Input").prop("value")).toBe("1");
+    setTimeout(() => {
+      expect(wrapper.find("Input").prop("value")).toBe("123");
+    }, 300);
   });
 });
