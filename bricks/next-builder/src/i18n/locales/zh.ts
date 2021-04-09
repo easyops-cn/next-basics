@@ -24,6 +24,7 @@ const locale: Locale = {
   [K.NODE_ACTION_COPY]: "拷贝",
   [K.NODE_ACTION_CUT]: "剪切",
   [K.NODE_ACTION_PASTE]: "粘贴",
+  [K.NODE_ACTION_CONVERT_TO_TEMPLATE]: "转换为模板",
   [K.NODE_ACTION_APPEND_BRICK]: "添加子构件",
   [K.NODE_ACTION_DELETE]: "删除",
   [K.STORYBOARD_VIEW_TIPS_1_ROUTE]:

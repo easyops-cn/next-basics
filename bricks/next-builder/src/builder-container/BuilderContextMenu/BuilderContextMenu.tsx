@@ -41,6 +41,7 @@ export function BuilderContextMenu({
     setClipboard,
     setToolboxTab,
     setEventStreamNodeId,
+    onConvertToTemplate,
   } = useBuilderUIContext();
   const canPasteCallback = useCanPaste();
   const canPaste = React.useMemo(
@@ -103,6 +104,10 @@ export function BuilderContextMenu({
     onNodeCutPaste,
     setClipboard,
   ]);
+
+  const handleConvertToTemplate = React.useCallback(() => {
+    onConvertToTemplate(contextMenuStatus.node);
+  }, [contextMenuStatus.node, onConvertToTemplate]);
 
   const activeNodeIsBrick = React.useMemo(
     () => !!contextMenuStatus.node && isBrickNode(contextMenuStatus.node),
@@ -185,6 +190,13 @@ export function BuilderContextMenu({
           </Menu.Item>
           <Menu.Item key="paste" onClick={handlePasteNode} disabled={!canPaste}>
             {t(K.NODE_ACTION_PASTE)}
+          </Menu.Item>
+          <Menu.Item
+            key="convert-to-template"
+            onClick={handleConvertToTemplate}
+            disabled={!activeNodeIsBrick}
+          >
+            {t(K.NODE_ACTION_CONVERT_TO_TEMPLATE)}
           </Menu.Item>
           {activeNodeIsBrick && (
             <Menu.Item key="append-brick" onClick={handleAppendBrick}>

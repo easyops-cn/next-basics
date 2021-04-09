@@ -25,6 +25,7 @@ const locale: Locale = {
   [K.NODE_ACTION_CUT]: "Cut",
   [K.NODE_ACTION_PASTE]: "Paste",
   [K.NODE_ACTION_APPEND_BRICK]: "Append Brick",
+  [K.NODE_ACTION_CONVERT_TO_TEMPLATE]: "Convert to template",
   [K.NODE_ACTION_DELETE]: "Delete",
   [K.STORYBOARD_VIEW_TIPS_1_ROUTE]:
     "<i>Storyboard</i> view shows the brick tree of current route.",
