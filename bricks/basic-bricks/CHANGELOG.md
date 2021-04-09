@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.116.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.0...@next-bricks/basic-bricks@1.116.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* myDesktop optimization ([dd3f411](https://github.com/easyops-cn/next-basics/commit/dd3f411f7a9e44450a811b3b8f3d86a005c4f8f7))
+
+
+
+
+
 # [1.116.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.115.1...@next-bricks/basic-bricks@1.116.0) (2021-04-09)
 
 
