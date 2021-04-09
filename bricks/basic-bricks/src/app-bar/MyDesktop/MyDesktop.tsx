@@ -73,12 +73,11 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
 
   const renderRecentlyVisited = useMemo(() => {
     return (
-      <div className={classNames([styles.section, styles.visited])}>
+      <div className={styles.visited}>
         <div className={styles.title}>最近访问</div>
         <div className={styles.desktop}>
           {recentlyVisitedList?.map((item, index) => (
             <DesktopCell
-              position={"left"}
               size="small"
               key={index}
               item={item}
@@ -180,7 +179,12 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
           {mode === ModeType.Favorities && (
             <div className={styles.settingsContainer}>
               <Link to={"/launchpad-collection"}>
-                <SettingOutlined className={styles.settings} />
+                <Icon
+                  className={styles.settings}
+                  component={() => (
+                    <BrickIcon icon="launchpad-setting" category="app" />
+                  )}
+                />
                 管理收藏
               </Link>
             </div>
