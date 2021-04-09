@@ -3,6 +3,7 @@ import { getRuntime, getHistory } from "@next-core/brick-kit";
 import { ReactComponent as LaunchpadSvg } from "../../images/launchpad.svg";
 import styles from "./LaunchpadButton.module.css";
 import { LaunchpadPortal } from "../LaunchpadPortal/LaunchpadPortal";
+import hotkeys from "hotkeys-js";
 
 export function LaunchpadButton(): React.ReactElement {
   const [visible, setVisible] = React.useState(false);
@@ -27,6 +28,25 @@ export function LaunchpadButton(): React.ReactElement {
     });
     return unlisten;
   }, [handleLaunchpadWillClose]);
+
+  React.useEffect(() => {
+    hotkeys.filter = function () {
+      return true;
+    };
+
+    hotkeys("alt+l", (event) => {
+      event.preventDefault();
+      setVisible((preVisble) => {
+        const curVisble = !preVisble;
+        if (!curVisble) handleLaunchpadWillClose();
+        return curVisble;
+      });
+    });
+
+    return () => {
+      hotkeys.unbind("alt+l");
+    };
+  }, []);
 
   React.useEffect(() => {
     if (visible) {
