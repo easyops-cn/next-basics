@@ -1,3 +1,4 @@
+import { Storyboard } from "@next-core/brick-types";
 import {
   ScanBricksAndTemplates,
   ScanBricksAndTemplatesParams,
@@ -9,7 +10,7 @@ describe("ScanBricksAndTemplates", () => {
   >([
     [
       {
-        storyboard: {
+        storyboard: ({
           routes: [
             {
               path: "/x",
@@ -21,6 +22,10 @@ describe("ScanBricksAndTemplates", () => {
                     useResolves: [
                       {
                         useProvider: "easyops.custom_api@CustomApiA",
+                      },
+                      {
+                        useProvider:
+                          "providers-of-micro-app.installed-micro-app-api-get-installed-micro-app",
                       },
                     ],
                   },
@@ -50,7 +55,7 @@ describe("ScanBricksAndTemplates", () => {
               ],
             },
           ],
-        },
+        } as Partial<Storyboard>) as Storyboard,
       },
       {
         apis: [
@@ -59,13 +64,24 @@ describe("ScanBricksAndTemplates", () => {
             namespace: "easyops.custom_api",
           },
         ],
-        bricks: ["brick-a", "brick-b"],
+        bricks: [
+          "brick-a",
+          "providers-of-micro-app.installed-micro-app-api-get-installed-micro-app",
+          "brick-b",
+        ],
         templates: ["tpl-test"],
         processors: ["hardWork.input", "hardWork.output"],
         processorPackages: ["hard-work"],
+        contracts: [
+          {
+            contract:
+              "easyops.api.micro_app.installed_micro_app.GetInstalledMicroApp",
+            version: "*",
+          },
+        ],
       },
     ],
-  ])("ScanBricksAndTemplates(%j) should work", async (params, result) => {
+  ])("ScanBricksAndTemplates(...) should work", async (params, result) => {
     expect(await ScanBricksAndTemplates(params)).toEqual(result);
   });
 });
