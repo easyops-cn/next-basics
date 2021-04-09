@@ -1,9 +1,10 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState, useEffect, forwardRef, useCallback } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Button } from "antd";
 import style from "./index.module.css";
 import { Size, Shape } from "./index";
 import classNames from "classnames";
+import { debounce } from "lodash";
 
 interface TestGeneralSearchProps {
   onUpdate: (value: string) => void;
@@ -15,6 +16,7 @@ interface TestGeneralSearchProps {
   inputStyle?: any;
   buttonStyle?: any;
   disableAutofocus?: boolean;
+  debounceTime?: number;
 }
 
 const sizeClassMap = {
@@ -68,14 +70,25 @@ export const BrickGeneralSearch = forwardRef<Input, TestGeneralSearchProps>(
       props.onUpdate(query);
     };
 
+    const debounceValueEmit = useCallback(
+      props.debounceTime
+        ? debounce((value: string): void => {
+            props.onChange(value);
+          }, props.debounceTime)
+        : props.onChange,
+      [props.debounceTime]
+    );
+
     const handleOnChange = (e) => {
-      props.onChange(e.target.value);
+      debounceValueEmit(e.target.value);
       setQuery(e.target.value);
     };
 
     useEffect(() => {
-      props.onChange(props.query);
-      setQuery(props.query);
+      if (props.query !== query) {
+        debounceValueEmit(props.query);
+        setQuery(props.query);
+      }
     }, [props.query]);
 
     return (

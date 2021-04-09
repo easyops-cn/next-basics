@@ -23,7 +23,8 @@ export type Shape = "round" | "default";
  * @author lynette
  * @slots
  * @history
- * 1.68.0:新增 `qField` 属性
+ * 1.180.0:新增事件 `query.change.v2`,新增属性 `debounceTime`
+ * 1.68.0:新增属性 `qField`
  * @memo
  * @noInheritDoc
  */
@@ -163,6 +164,18 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   field = "query";
 
   /**
+   * @kind number
+   * @required false
+   * @default 0
+   * @description 默认延迟时间
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  debounceTime = 0;
+
+  /**
    * @detail Record<string,any>
    * @description 更新的数据，包括 defaultArgs 和输入框的组合，注意在事件中 q 的 field 为 query。点击搜索时触发
    */
@@ -176,6 +189,13 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    */
   @event({ type: "query.change", bubbles: true })
   queryChange: EventEmitter<string>;
+
+  /**
+   * @detail {q:string}
+   * @description 当搜索框的值变化时发出的事件，事件内容为{q: value}，其中 value 为输入的字符。可直接和 brick-table 的前端搜索方法 filterSourceData 搭配使用。
+   */
+  @event({ type: "query.change.v2", bubbles: true })
+  queryChangeV2: EventEmitter<{ q: string }>;
 
   inputRef: Input;
 
@@ -228,8 +248,8 @@ export class BrickGeneralSearchElement extends UpdatingElement {
 
   private _handleOnChange = (value: string): void => {
     this.queryChange.emit(value);
+    this.queryChangeV2.emit({ q: value });
     this.q = value;
-    this._render();
   };
 
   protected _render(): void {
@@ -245,6 +265,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             shape={this.shape}
             inputStyle={this.inputStyle}
             buttonStyle={this.buttonStyle}
+            debounceTime={this.debounceTime}
             disableAutofocus={this.disableAutofocus}
             ref={(ref) => {
               this.inputRef = ref;

@@ -767,28 +767,29 @@ export const BrickTableStory: Story = {
                   type: "bricks",
                   bricks: [
                     {
-                      brick: "presentational-bricks.brick-input",
-                      properties: {
-                        placeholder: "输入关键字搜索",
-                        trigger: "enter",
-                      },
+                      brick: "presentational-bricks.brick-general-search",
                       events: {
-                        "input.emit": [
+                        "query.change.v2": [
+                          {
+                            action: "console.log",
+                          },
                           {
                             target: "#front-search-table",
                             method: "filterSourceData",
                           },
-                          {
-                            action: "console.log",
-                          },
                         ],
+                      },
+                      properties: {
+                        debounceTime: 200,
+                        placeholder: "输入关键字搜索",
+                        shouldTrimQuery: true,
+                        shouldUpdateUrlParams: false,
                       },
                     },
                   ],
                 },
               },
             },
-
             {
               brick: "presentational-bricks.brick-table",
               properties: {
