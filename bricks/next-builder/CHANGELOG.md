@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.47.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.46.0...@next-bricks/next-builder@1.47.0) (2021-04-09)
+
+
+### Features
+
+* **builder-context-menu:** convert to template ([28ab870](https://github.com/easyops-cn/next-basics/commit/28ab87098563c4ac9700a079eb8757b4778721bc))
+
+
+
+
+
 # [1.46.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.45.0...@next-bricks/next-builder@1.46.0) (2021-04-09)
 
 
