@@ -28,6 +28,7 @@ let clipboard: BuilderClipboard;
 const setClipboard = jest.fn();
 const setToolboxTab = jest.fn();
 const setEventStreamNodeId = jest.fn();
+const onConvertToTemplate = jest.fn();
 
 (useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
@@ -36,6 +37,7 @@ const setEventStreamNodeId = jest.fn();
   setClipboard,
   setToolboxTab,
   setEventStreamNodeId,
+  onConvertToTemplate,
 }));
 
 (isBrickNode as jest.MockedFunction<typeof isBrickNode>).mockImplementation(
@@ -112,7 +114,7 @@ describe("BuilderContextMenu", () => {
     });
 
     const menuItems = wrapper.find(Menu.Item);
-    expect(menuItems.length).toBe(6);
+    expect(menuItems.length).toBe(7);
     menuItems.forEach((item) => {
       switch (item.key()) {
         case "events-view":
@@ -224,7 +226,7 @@ describe("BuilderContextMenu", () => {
     });
     const wrapper = shallow(<BuilderContextMenu />);
     const menuItems = wrapper.find(Menu.Item);
-    expect(menuItems.length).toBe(4);
+    expect(menuItems.length).toBe(5);
     menuItems.forEach((item) => {
       switch (item.key()) {
         case "events-view":
@@ -412,6 +414,29 @@ describe("BuilderContextMenu", () => {
         brick: "my-brick",
       },
       defaultSort: 1,
+    });
+  });
+
+  it("should invoke onConvertToTemplate", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValue({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
+    });
+    const wrapper = shallow(<BuilderContextMenu />);
+    wrapper
+      .find(Menu.Item)
+      .filterWhere((n) => n.key() === "convert-to-template")
+      .invoke("onClick")(null);
+    expect(onConvertToTemplate).toBeCalledWith({
+      $$uid: 1,
+      type: "brick",
+      id: "B-001",
+      brick: "my-brick",
     });
   });
 });

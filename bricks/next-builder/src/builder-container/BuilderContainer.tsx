@@ -62,6 +62,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onBuildAndPush?: () => void;
   onPreview?: () => void;
   onEventNodeClick?: (eventNode: EventStreamNode) => void;
+  onConvertToTemplate?: (node: BuilderRuntimeNode) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -96,6 +97,7 @@ export function LegacyBuilderContainer(
     onBuildAndPush,
     onPreview,
     onEventNodeClick,
+    onConvertToTemplate,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -236,6 +238,7 @@ export function LegacyBuilderContainer(
         onBuildAndPush,
         onPreview,
         onEventNodeClick,
+        onConvertToTemplate,
       }}
     >
       <div

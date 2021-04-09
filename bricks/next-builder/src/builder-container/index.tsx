@@ -191,6 +191,11 @@ export class BuilderContainerElement extends UpdatingElement {
   private _eventNodeClickEmitter: EventEmitter<EventStreamNode>;
 
   @event({
+    type: "node.convertToTemplate",
+  })
+  private _convertToTemplateEmitter: EventEmitter<BuilderRuntimeNode>;
+
+  @event({
     type: "clipboard.change",
   })
   private _eventClipboardChangeEmitter: EventEmitter<{
@@ -288,6 +293,10 @@ export class BuilderContainerElement extends UpdatingElement {
 
   private _handleEventNodeClick = (eventNode: EventStreamNode): void => {
     this._eventNodeClickEmitter.emit(eventNode);
+  };
+
+  private _handleConvertToTemplate = (node: BuilderRuntimeNode): void => {
+    this._convertToTemplateEmitter.emit(node);
   };
 
   private _handleClipboardChange = (clipboard: BuilderClipboard): void => {
@@ -425,6 +434,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onPreview={this._handlePreview}
                 onAskForAppendingBrick={this._handleAskForAppendingBrick}
                 onEventNodeClick={this._handleEventNodeClick}
+                onConvertToTemplate={this._handleConvertToTemplate}
               />
             </DndProvider>
           </BuilderProvider>
