@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.3...@next-bricks/presentational-bricks@1.180.0) (2021-04-09)
+
+
+### Features
+
+* **brick-general-search:** debounceTime & query.change.v2 ([6c585fa](https://github.com/easyops-cn/next-basics/commit/6c585fa30aaec05f7883375aa9937919f30e0737))
+
+
+
+
+
 ## [1.179.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.2...@next-bricks/presentational-bricks@1.179.3) (2021-04-08)
 
 

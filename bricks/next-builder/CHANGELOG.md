@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.46.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.45.0...@next-bricks/next-builder@1.46.0) (2021-04-09)
+
+
+### Features
+
+* get depending contracts by provider bricks ([2c6ceb0](https://github.com/easyops-cn/next-basics/commit/2c6ceb0093b50db2753fc3e2a751260530930c8c))
+
+
+
+
+
 # [1.45.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.44.0...@next-bricks/next-builder@1.45.0) (2021-04-07)
 
 

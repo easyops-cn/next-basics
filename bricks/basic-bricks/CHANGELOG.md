@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.116.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.115.1...@next-bricks/basic-bricks@1.116.0) (2021-04-09)
+
+
+### Features
+
+* launchpad support hot-key ([fc1d4cd](https://github.com/easyops-cn/next-basics/commit/fc1d4cd805e510725473de3ce5179dd97b831196))
+
+
+
+
+
 ## [1.115.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.115.0...@next-bricks/basic-bricks@1.115.1) (2021-04-09)
 
 
