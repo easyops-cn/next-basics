@@ -215,7 +215,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       if (length ? searchParent : true) {
         if (
           typeof node.title === "string" &&
-          node.title.includes(searchValue)
+          node.title?.toLocaleLowerCase()?.includes(searchValue)
         ) {
           isHit = true;
         }
@@ -236,7 +236,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    setSearchValue(value);
+    setSearchValue(value.toLocaleLowerCase());
     nodeMatchedRef.current = false;
 
     if (value) {
@@ -365,10 +365,14 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                 searchValue &&
                 (searchParent ? true : !children?.length)
               ) {
-                const index = _title.indexOf(searchValue);
+                const index = _title.toLocaleLowerCase().indexOf(searchValue);
 
                 if (index >= 0) {
                   const beforeStr = _title.substring(0, index);
+                  const matchStr = _title.substring(
+                    index,
+                    searchValueLength + index
+                  );
                   const afterStr = _title.substring(searchValueLength + index);
 
                   title = (
@@ -396,11 +400,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                       })()}
                     >
                       {beforeStr}
-                      <span
-                        style={{ color: "#0071eb", backgroundColor: "#ebf3fd" }}
-                      >
-                        {searchValue}
-                      </span>
+                      <span className={styles.matchText}>{matchStr}</span>
                       {afterStr}
                     </span>
                   );

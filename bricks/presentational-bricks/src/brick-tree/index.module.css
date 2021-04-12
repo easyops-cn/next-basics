@@ -4,6 +4,7 @@
   padding: 10px 10px 6px;
   background: "var(--antd-component-background)";
 }
+
 .treeWithSuffixWrapper {
   overflow: auto;
   flex-grow: 1;
@@ -14,6 +15,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+
     > span:first-child {
       display: inline-block;
       overflow: hidden;
@@ -30,7 +32,13 @@
   :global(.ant-tree-node-content-wrapper) {
     width: 100%;
   }
+
   :global(.ant-tree-treenode-motion) {
     width: 100%;
   }
+}
+
+.matchText {
+  color: #0071eb;
+  background-color: #ebf3fd;
 }
