@@ -221,11 +221,13 @@ export class LaunchpadService {
   }
 
   getSitemapList() {
+    const curMicroApps = getRuntime().getMicroApps({ includeInternal: true });
     const siteMapList = getRuntime().getLaunchpadSiteMap();
+
     return siteMapList?.map((item) => ({
       ...item,
       apps: (item.apps || []).map((row) => {
-        const find = this.microApps.find((item) => item.id === row.id) || {};
+        const find = curMicroApps.find((item) => item.id === row.id) || {};
         return {
           ...row,
           ...pick(find, ["name", "icons", "localeName", "homepage"]),
