@@ -172,6 +172,11 @@ export class BuilderContainerElement extends UpdatingElement {
   }>;
 
   @event({
+    type: "workbench.close",
+  })
+  private _workbenchCloseEmitter: EventEmitter;
+
+  @event({
     type: "toolbox.tab.switch",
   })
   private _toolboxTabSwitchEmitter: EventEmitter<{
@@ -297,6 +302,10 @@ export class BuilderContainerElement extends UpdatingElement {
 
   private _handleConvertToTemplate = (node: BuilderRuntimeNode): void => {
     this._convertToTemplateEmitter.emit(node);
+  };
+
+  private _handleWorkbenchClose = (): void => {
+    this._workbenchCloseEmitter.emit();
   };
 
   private _handleClipboardChange = (clipboard: BuilderClipboard): void => {
@@ -435,6 +444,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onAskForAppendingBrick={this._handleAskForAppendingBrick}
                 onEventNodeClick={this._handleEventNodeClick}
                 onConvertToTemplate={this._handleConvertToTemplate}
+                onWorkbenchClose={this._handleWorkbenchClose}
               />
             </DndProvider>
           </BuilderProvider>

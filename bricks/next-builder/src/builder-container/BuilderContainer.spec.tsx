@@ -185,25 +185,13 @@ describe("BuilderContainer", () => {
     expect(mockConsoleError).toBeCalled();
   });
 
-  it("should exit enter by click overlay", () => {
-    const onToggleFullscreen = jest.fn();
+  it("should invoke onWorkbenchClose when click overlay", () => {
+    const onWorkbenchClose = jest.fn();
     const wrapper = mount(
-      <BuilderContainer
-        initialFullscreen
-        onToggleFullscreen={onToggleFullscreen}
-      />
+      <BuilderContainer onWorkbenchClose={onWorkbenchClose} />
     );
-    expect(wrapper.find(".builderWrapper").hasClass("fullscreen")).toBe(true);
-    expect(onToggleFullscreen).toBeCalledWith(true);
     wrapper.find(".builderOverlay").invoke("onClick")(null);
-    wrapper.update();
-    expect(wrapper.find(".builderWrapper").hasClass("fullscreen")).toBe(false);
-    expect(onToggleFullscreen).toBeCalledWith(false);
-
-    // Should do nothing if click overlay in non-fullscreen mode.
-    wrapper.find(".builderOverlay").invoke("onClick")(null);
-    wrapper.update();
-    expect(onToggleFullscreen).toBeCalledTimes(2);
+    expect(onWorkbenchClose).toBeCalled();
   });
 
   it("should switch toolbox tab", () => {

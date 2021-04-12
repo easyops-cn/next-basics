@@ -9,6 +9,7 @@ import {
   FullscreenExitOutlined,
   FullscreenOutlined,
   SettingOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import {
   BuilderRouteNode,
@@ -35,6 +36,7 @@ export function BuilderToolbar(): React.ReactElement {
     dataType,
     fullscreen,
     setFullscreen,
+    onWorkbenchClose,
   } = useBuilderUIContext();
 
   const rootNode = useBuilderNode({ isRoot: true });
@@ -58,6 +60,10 @@ export function BuilderToolbar(): React.ReactElement {
   const handleToggleFullscreen = React.useCallback(() => {
     setFullscreen((prev) => !prev);
   }, [setFullscreen]);
+
+  const handleClose = () => {
+    onWorkbenchClose?.();
+  };
 
   return (
     <div className={styles.toolbarContainer}>
@@ -110,17 +116,29 @@ export function BuilderToolbar(): React.ReactElement {
           </a>
         </Tooltip>
         <SettingDropdown />
-        <Tooltip
-          title={t(fullscreen ? K.EXIT_FULLSCREEN : K.ENTER_FULLSCREEN)}
-          placement="bottomRight"
-        >
+        {!fullscreen && (
+          <Tooltip
+            title={t(fullscreen ? K.EXIT_FULLSCREEN : K.ENTER_FULLSCREEN)}
+            placement="bottomRight"
+          >
+            <a
+              className={shareStyles.tabLink}
+              role="button"
+              onClick={handleToggleFullscreen}
+              data-testid="toggle-fullscreen"
+            >
+              {fullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
+            </a>
+          </Tooltip>
+        )}
+        <Tooltip title={t(K.CLOSE)} placement="bottomRight">
           <a
             className={shareStyles.tabLink}
             role="button"
-            onClick={handleToggleFullscreen}
-            data-testid="toggle-fullscreen"
+            onClick={handleClose}
+            data-testid="workbench-close"
           >
-            {fullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
+            <CloseOutlined />
           </a>
         </Tooltip>
       </div>

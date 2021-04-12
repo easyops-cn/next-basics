@@ -39,7 +39,7 @@ describe("BuilderToolbar", () => {
       path: "/",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(4);
+    expect(wrapper.find(".tabLink").length).toBe(5);
     wrapper.find(".tabLink[data-testid='view-route']").simulate("click");
     expect(mockCurrentRouteClick).toBeCalledWith({
       id: "R-01",
@@ -66,7 +66,7 @@ describe("BuilderToolbar", () => {
       templateId: "tpl-test",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(4);
+    expect(wrapper.find(".tabLink").length).toBe(5);
     expect(
       wrapper.find(".tabLink").filter("[data-testid='view-template']").length
     ).toBe(1);
@@ -96,22 +96,15 @@ describe("BuilderToolbar", () => {
     expect(fullscreen).toBe(true);
   });
 
-  it("should exit fullscreen", () => {
-    let fullscreen = true;
-    const setFullscreen = jest.fn((update) => {
-      fullscreen = update(fullscreen);
-    });
+  it("should invoke onWorkbenchClose", () => {
+    const onWorkbenchClose = jest.fn();
     mockUseBuilderUIContext.mockImplementation(() => ({
-      fullscreen,
-      setFullscreen,
+      onWorkbenchClose,
     }));
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(FullscreenOutlined).length).toBe(0);
-    expect(wrapper.find(FullscreenExitOutlined).length).toBe(1);
-    wrapper.find(".tabLink[data-testid='toggle-fullscreen']").invoke("onClick")(
+    wrapper.find(".tabLink[data-testid='workbench-close']").invoke("onClick")(
       null
     );
-    expect(setFullscreen).toBeCalled();
-    expect(fullscreen).toBe(false);
+    expect(onWorkbenchClose).toBeCalled();
   });
 });

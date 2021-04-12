@@ -20,6 +20,7 @@ const locale: Locale = {
   [K.TIPS]: "Tips",
   [K.ENTER_FULLSCREEN]: "Enter fullscreen",
   [K.EXIT_FULLSCREEN]: "Exit fullscreen",
+  [K.CLOSE]: "Close",
   [K.NODE_ACTION_EVENTS_VIEW]: "Events View",
   [K.NODE_ACTION_COPY]: "Copy",
   [K.NODE_ACTION_CUT]: "Cut",
