@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.116.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.1...@next-bricks/basic-bricks@1.116.2) (2021-04-12)
+
+
+### Bug Fixes
+
+* get apps includes internal ([15dcb0e](https://github.com/easyops-cn/next-basics/commit/15dcb0ed0c90a65f7e21eef3a9da342d72f1ef60))
+
+
+
+
+
 ## [1.116.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.0...@next-bricks/basic-bricks@1.116.1) (2021-04-09)
 
 
