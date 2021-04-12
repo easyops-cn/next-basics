@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.47.0...@next-bricks/next-builder@1.48.0) (2021-04-12)
+
+
+### Features
+
+* **builder-container:** workbench.close ([10189c8](https://github.com/easyops-cn/next-basics/commit/10189c8eb3cf79bedd77e2c2624459ebb9748794))
+
+
+
+
+
 # [1.47.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.46.0...@next-bricks/next-builder@1.47.0) (2021-04-09)
 
 
