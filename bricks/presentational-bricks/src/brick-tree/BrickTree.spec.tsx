@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import { BrickTree, BrickTreeProps } from "./BrickTree";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { Checkbox, Empty, Tree } from "antd";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 
@@ -221,5 +221,41 @@ describe("BrickTree", () => {
     checkedNum = wrapper.find(".checkedNum");
     expect(checkedNum.text()).toEqual("已选 3 项");
     expect(onCheck).lastCalledWith(["00", "0100", "10"]);
+  });
+
+  it("caseSensitiveWhenSearching should work", () => {
+    const data = [
+      {
+        title: "a",
+        key: "a",
+        children: [
+          {
+            title: "b",
+            key: "b",
+          },
+          {
+            title: "c",
+            key: "c",
+            children: [
+              {
+                title: "abcABCabc",
+                key: "abcABCabc",
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    const wrapper = mount(<BrickTree dataSource={data} searchable />);
+
+    wrapper.find("[data-testid='search-input']").at(0).invoke("onChange")({
+      target: { value: "abc" },
+    } as any);
+    expect(wrapper.find(".matchText").at(0).text()).toEqual("abc");
+    wrapper.find("[data-testid='search-input']").at(0).invoke("onChange")({
+      target: { value: "cab" },
+    } as any);
+    expect(wrapper.find(".matchText").at(0).text()).toEqual("cAB");
   });
 });
