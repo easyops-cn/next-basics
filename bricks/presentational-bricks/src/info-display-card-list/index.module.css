@@ -13,12 +13,25 @@
   }
 }
 
+html[data-theme="dark"] .infoCard {
+  border-color: transparent;
+  background: url(../images/card-bg-top-left.svg) top left no-repeat,
+    url(../images/card-bg-top-right.svg) top right no-repeat,
+    url(../images/card-bg-bottom-right.svg) bottom right no-repeat,
+    url(../images/card-bg-bottom-left.svg) bottom left no-repeat,
+    var(--antd-card-background);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
 .infoCardWrapper {
   display: grid;
   padding: 10px;
   align-items: center;
   width: 100%;
-  color: #8c8c8c;
+  color: var(--text-color-secondary);
   box-sizing: border-box;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
 }
@@ -36,7 +49,7 @@
     h5 {
       margin: 0;
       margin-bottom: 8px;
-      color: #262626;
+      color: var(--text-color-title);
       font-size: 16px;
       font-weight: 500;
       padding: 0;
@@ -76,7 +89,7 @@
       grid-auto-rows: min-content;
 
       h5 {
-        color: #bfbfbf;
+        color: var(--text-color-disabled);
         font-size: 14px;
         font-weight: 400;
         margin: 0;
@@ -85,7 +98,7 @@
       }
 
       p {
-        color: #595959;
+        color: var(--text-color-default);
         font-size: 18px;
         font-weight: 400;
         text-align: left;
@@ -95,6 +108,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+
       div {
         max-width: 80%;
         white-space: nowrap;
