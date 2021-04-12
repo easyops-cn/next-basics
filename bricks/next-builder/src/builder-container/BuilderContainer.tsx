@@ -63,6 +63,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onPreview?: () => void;
   onEventNodeClick?: (eventNode: EventStreamNode) => void;
   onConvertToTemplate?: (node: BuilderRuntimeNode) => void;
+  onWorkbenchClose?: () => void;
 }
 
 export function LegacyBuilderContainer(
@@ -98,6 +99,7 @@ export function LegacyBuilderContainer(
     onPreview,
     onEventNodeClick,
     onConvertToTemplate,
+    onWorkbenchClose,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -207,12 +209,9 @@ export function LegacyBuilderContainer(
     onClipboardChange?.(clipboard);
   }, [clipboard, onClipboardChange]);
 
-  const handleClickOverlay = React.useCallback(() => {
-    if (!fullscreen) {
-      return;
-    }
-    setFullscreen(false);
-  }, [fullscreen]);
+  const handleClickOverlay = () => {
+    onWorkbenchClose?.();
+  };
 
   return (
     <BuilderUIContext.Provider
@@ -239,6 +238,7 @@ export function LegacyBuilderContainer(
         onPreview,
         onEventNodeClick,
         onConvertToTemplate,
+        onWorkbenchClose,
       }}
     >
       <div

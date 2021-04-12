@@ -35,6 +35,7 @@ export interface ContextOfBuilderUI {
   onPreview?: () => void;
   onEventNodeClick?: (eventNode: EventStreamNode) => void;
   onConvertToTemplate?: (node: BuilderRuntimeNode) => void;
+  onWorkbenchClose?: () => void;
 }
 
 export const BuilderUIContext = React.createContext<ContextOfBuilderUI>({});
