@@ -22,7 +22,13 @@ const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 const spyOnReloadMicroApps = jest.fn();
 const spyOnReloadSharedData = jest.fn();
 const brandFn = jest.fn().mockReturnValue({});
-jest.spyOn(kit, "getRuntime").mockReturnValue({
+
+const spyOnLogin = jest.spyOn(authSdk, "login");
+const spyOnEsbLogin = jest.spyOn(authSdk, "esbLogin");
+const spyOnError = jest.spyOn(Modal, "error");
+const spyOnKit = jest.spyOn(kit, "getRuntime");
+
+spyOnKit.mockReturnValue({
   reloadMicroApps: spyOnReloadMicroApps,
   reloadSharedData: spyOnReloadSharedData,
   getBrandSettings: brandFn,
@@ -36,9 +42,6 @@ jest.spyOn(kit, "getRuntime").mockReturnValue({
     wxRedirect: "http://example.com",
   }),
 } as any);
-
-const spyOnLogin = jest.spyOn(authSdk, "login");
-const spyOnError = jest.spyOn(Modal, "error");
 
 const i18nProps: WithTranslation = {
   t: ((key: string) => key) as any,
@@ -88,6 +91,43 @@ describe("GeneralLogin", () => {
       userInstanceId: "abc",
       org: 1,
     });
+    wrapper.find(Form).simulate("submit", new Event("submit"));
+  });
+
+  it("should esb login successfully", async (done) => {
+    const form = {
+      getFieldDecorator: () => (comp: React.Component) => comp,
+      validateFields: jest.fn().mockImplementation(async (fn) => {
+        await fn(null, {
+          username: "mock-user",
+          password: "mock-pswd",
+        });
+        expect(spyOnAuthenticate).toBeCalledWith({
+          org: 1,
+          username: "mock-user",
+          userInstanceId: "abc",
+        });
+        expect(spyOnReloadMicroApps).toBeCalled();
+        expect(spyOnReloadSharedData).toBeCalled();
+        expect(spyOnHistoryPush).toBeCalledWith(createLocation("/mock-from"));
+        done();
+      }),
+    };
+    const wrapper = shallow(
+      <LegacyGeneralLogin form={form as any} {...i18nProps} />
+    );
+    expect(wrapper).toBeTruthy();
+    spyOnEsbLogin.mockResolvedValueOnce({
+      loggedIn: true,
+      username: "mock-user",
+      userInstanceId: "abc",
+      org: 1,
+    });
+    spyOnKit.mockReturnValueOnce({
+      getFeatureFlags: () => ({
+        "esb-login": true,
+      }),
+    } as any);
     wrapper.find(Form).simulate("submit", new Event("submit"));
   });
 
