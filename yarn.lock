@@ -2389,12 +2389,7 @@
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-1.0.5.tgz#93859047ea43263a96c4a5b322230e6953cef5d9"
   integrity sha1-k4WQR+pDJjqWxKWzIiMOaVPO9dk=
 
-"@next-sdk/auth-sdk@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.0.1.tgz#dc217556d6eddee4c143b419a25d7b3972fb06e2"
-  integrity sha1-3CF1Vtbt3uTBQ7QZol17OXL7BuI=
-
-"@next-sdk/auth-sdk@^1.2.0":
+"@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.2.0.tgz#283bdf72676280bf73d20807f8784318eace5e99"
   integrity sha512-LwLFU5vkY81jQeYPYW6pyFpRoyE/YWrBgFf0+yj5Dh35sgN/2i/ptJ6grXJlD49DEQ+EtNaR6Xu8sFdOJNAYpQ==
@@ -2409,10 +2404,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/micro-app-sdk/-/micro-app-sdk-1.0.2.tgz#2043621e6628c94f40698f2998e1773a97268234"
   integrity sha1-IENiHmYoyU9AaY8pmOF3OpcmgjQ=
 
-"@next-sdk/monitor-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/monitor-sdk/-/monitor-sdk-1.1.0.tgz#5dd85089f424793d537ea86e119e7361f24dac9d"
-  integrity sha1-XdhQifQkeT1TfqhuEZ5zYfJNrJ0=
+"@next-sdk/monitor-sdk@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/@next-sdk/monitor-sdk/-/monitor-sdk-1.2.1.tgz#f58c3baafcbad011252d45c923f5206f20d779ec"
+  integrity sha512-4n68i0qpydO50GrWG0H6w+Ft8ow6QncG9pGTOihYEi8TiJyMRuZyQ06Q8ALKPmS2ZWeS75TqoDqUVfaft8iLEw==
 
 "@next-sdk/msgsender-sdk@^1.0.0":
   version "1.1.0"
@@ -9551,15 +9546,10 @@ lodash.upperfirst@^4.3.1:
   resolved "https://registry.npmjs.org/lodash.upperfirst/-/lodash.upperfirst-4.3.1.tgz#1365edf431480481ef0d1c68957a5ed99d49f7ce"
   integrity sha1-E2Xt9DFIBIHvDRxolXpe2Z1J984=
 
-lodash@^4.0.1, lodash@^4.16.5, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.4:
+lodash@^4.0.1, lodash@^4.16.5, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4:
   version "4.17.20"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha1-tEqbYpe8tpjxxRo1RaKzs2jVnFI=
-
-lodash@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 log-symbols@^4.0.0:
   version "4.0.0"
