@@ -20,7 +20,7 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
   "devDependencies": {
-    "@next-sdk/auth-sdk": "^1.0.0"
+    "@next-sdk/auth-sdk": "^1.2.0"
   },
   "sideEffects": true
 }
