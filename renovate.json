@@ -16,12 +16,10 @@
         "^@bricks/",
         "^@libs/",
         "^@micro-apps/",
-        "^@sdk/",
         "^@templates/",
         "^@next-bricks/",
         "^@next-libs/",
         "^@next-micro-apps/",
-        "^@next-sdk/",
         "^@next-legacy-templates/"
       ],
       "matchPackageNames": [
