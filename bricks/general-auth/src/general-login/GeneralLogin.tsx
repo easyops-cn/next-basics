@@ -11,7 +11,7 @@ import {
   httpErrorToString,
 } from "@next-core/brick-kit";
 import { loadScript } from "@next-core/brick-utils";
-import { login } from "@next-sdk/auth-sdk";
+import { login, esbLogin } from "@next-sdk/auth-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
@@ -50,6 +50,8 @@ export class LegacyGeneralLogin extends React.Component<
   handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     const { t, form, onLogin } = this.props;
+    const featureFlags = getRuntime().getFeatureFlags();
+    const esbLoginEnabled = featureFlags["esb-login"];
     form.validateFields(async (err, values) => {
       if (!err) {
         try {
@@ -61,7 +63,9 @@ export class LegacyGeneralLogin extends React.Component<
           if (sso) {
             params = { service: this.state.service };
           }
-          const result = await login(values, {
+
+          const loginMethod = esbLoginEnabled ? esbLogin : login;
+          const result = await loginMethod(values, {
             params,
             interceptorParams: {
               // show spinner above login button instead of in loading bar
