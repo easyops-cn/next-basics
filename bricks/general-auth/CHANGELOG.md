@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.4.12...@next-bricks/general-auth@1.5.0) (2021-04-15)
+
+
+### Features
+
+* 兼容esb定制化登录 ([c5a5f87](https://github.com/easyops-cn/next-basics/commit/c5a5f87b3cb936d5cb74481dcd7a695cf11576fb))
+
+
+
+
+
 ## [1.4.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.4.11...@next-bricks/general-auth@1.4.12) (2021-02-07)
 
 **Note:** Version bump only for package @next-bricks/general-auth
