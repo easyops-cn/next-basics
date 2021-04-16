@@ -2399,30 +2399,35 @@
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-1.0.3.tgz#1d8365321c06b7c51194f743f8c0f23789d0f926"
   integrity sha1-HYNlMhwGt8URlPdD+MDyN4nQ+SY=
 
+"@next-sdk/cmdb-sdk@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-2.1.1.tgz#8522f75b71ae3c5772b8631528fe4bcaff9f0e70"
+  integrity sha512-4F9psdHnmSUZg9BK0sSzgmoerhsMucsXdMGhRASaf+kGyh6foKMa2+Lp7lOpIjROUJbqBua1GkwPOtj6AexpsQ==
+
 "@next-sdk/micro-app-sdk@^1.0.0":
   version "1.0.2"
   resolved "https://registry.npmjs.org/@next-sdk/micro-app-sdk/-/micro-app-sdk-1.0.2.tgz#2043621e6628c94f40698f2998e1773a97268234"
   integrity sha1-IENiHmYoyU9AaY8pmOF3OpcmgjQ=
 
-"@next-sdk/monitor-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/monitor-sdk/-/monitor-sdk-1.1.0.tgz#5dd85089f424793d537ea86e119e7361f24dac9d"
-  integrity sha1-XdhQifQkeT1TfqhuEZ5zYfJNrJ0=
+"@next-sdk/monitor-sdk@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/@next-sdk/monitor-sdk/-/monitor-sdk-2.1.1.tgz#1644317b509490ad20def60eae8e86713dee4944"
+  integrity sha512-UZbYal6U54q/MuDS/e/nMRtJW6z8Z1HLyd+iU07i5J29sd3drEMlMP2dPTwwmR4uMG7q0hnTkAFocJ9UpaP/tA==
 
-"@next-sdk/msgsender-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/msgsender-sdk/-/msgsender-sdk-1.1.0.tgz#f2e0b1b55a3b2a9d70b2d9acefe2fffdba942646"
-  integrity sha1-8uCxtVo7Kp1wstms7+L//bqUJkY=
+"@next-sdk/msgsender-sdk@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/@next-sdk/msgsender-sdk/-/msgsender-sdk-2.1.1.tgz#df9205716c56fc531556bfa0e98e60cfe780ec32"
+  integrity sha512-ezfJkbVLkee70eiliTi8faTm9k0yMVyIGe3iKnfiMuc6/RfbqHYB1skEtmttc2uqpkvf6Vre5qN5jOBfjfTzUQ==
 
-"@next-sdk/next-builder-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-1.1.0.tgz#8e0cf09c6ccef7f38488c778fdd9b503137df3eb"
-  integrity sha1-jgzwnGzO9/OEiMd4/dm1AxN98+s=
+"@next-sdk/next-builder-sdk@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-2.1.1.tgz#26aa00e371494c0a05d961ed8c1c0b216df8cfd5"
+  integrity sha512-VNiBjeeju/fWbCVfm/5jN4JR+8zjtDPOTwjsrxPCziyHMoYfjbiDqgp5DqcIPXUzGRGP3JbrrD3sZprDpDcXSg==
 
-"@next-sdk/object-store-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-1.1.0.tgz#b5f59c1f908fa45c26a64f54c82ab01ed8432ffd"
-  integrity sha1-tfWcH5CPpFwmpk9UyCqwHthDL/0=
+"@next-sdk/object-store-sdk@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-2.1.1.tgz#7316151c335decd512e6a72715702aa841ba3989"
+  integrity sha512-kBo/55xqFUMTsTw2iF9qNRGWJOjJFuotCd8t2kylwk5Y5b4gUhQiCZYHOJl4jnwrN3ZiF1n2MqQgeRFH3w9Aqg==
 
 "@next-sdk/permission-sdk@^1.1.1":
   version "1.1.1"
@@ -2433,6 +2438,11 @@
   version "1.1.0"
   resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-1.1.0.tgz#4b409c6ff2ea116428659013d62baef893dcefd5"
   integrity sha1-S0Ccb/LqEWQoZZAT1iuu+JPc79U=
+
+"@next-sdk/user-service-sdk@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.1.1.tgz#44ef1a59bf2d5a50ab0d3a62860cb39379018c5c"
+  integrity sha512-eGbCuSwZmzbz5AJdDLCM36euD7iTEfcnLmPVTk3UrbV0HT8b5xQdYj4KD0Jl4kldy3PlSat3XhT/mDpMg0V9XQ==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
