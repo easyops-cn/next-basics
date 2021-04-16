@@ -2394,45 +2394,45 @@
   resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.2.0.tgz#283bdf72676280bf73d20807f8784318eace5e99"
   integrity sha512-LwLFU5vkY81jQeYPYW6pyFpRoyE/YWrBgFf0+yj5Dh35sgN/2i/ptJ6grXJlD49DEQ+EtNaR6Xu8sFdOJNAYpQ==
 
-"@next-sdk/cmdb-sdk@^1.0.0", "@next-sdk/cmdb-sdk@^1.0.1":
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-1.0.3.tgz#1d8365321c06b7c51194f743f8c0f23789d0f926"
-  integrity sha1-HYNlMhwGt8URlPdD+MDyN4nQ+SY=
+"@next-sdk/cmdb-sdk@^1.0.0", "@next-sdk/cmdb-sdk@^1.0.1", "@next-sdk/cmdb-sdk@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-1.0.15.tgz#4d60539d19eaa474dea935032f52581491c74347"
+  integrity sha512-CdnjHDSueRbzpDsSvAkDoISNHesuDgEogiDHpEPSRcOCz0l395i8bFI4PaJ7+jXSkiSvw5MGI1CF2LSAq9pTLw==
 
 "@next-sdk/micro-app-sdk@^1.0.0":
   version "1.0.2"
   resolved "https://registry.npmjs.org/@next-sdk/micro-app-sdk/-/micro-app-sdk-1.0.2.tgz#2043621e6628c94f40698f2998e1773a97268234"
   integrity sha1-IENiHmYoyU9AaY8pmOF3OpcmgjQ=
 
-"@next-sdk/monitor-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/monitor-sdk/-/monitor-sdk-1.1.0.tgz#5dd85089f424793d537ea86e119e7361f24dac9d"
-  integrity sha1-XdhQifQkeT1TfqhuEZ5zYfJNrJ0=
+"@next-sdk/monitor-sdk@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/@next-sdk/monitor-sdk/-/monitor-sdk-1.2.1.tgz#f58c3baafcbad011252d45c923f5206f20d779ec"
+  integrity sha512-4n68i0qpydO50GrWG0H6w+Ft8ow6QncG9pGTOihYEi8TiJyMRuZyQ06Q8ALKPmS2ZWeS75TqoDqUVfaft8iLEw==
 
-"@next-sdk/msgsender-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/msgsender-sdk/-/msgsender-sdk-1.1.0.tgz#f2e0b1b55a3b2a9d70b2d9acefe2fffdba942646"
-  integrity sha1-8uCxtVo7Kp1wstms7+L//bqUJkY=
+"@next-sdk/msgsender-sdk@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.npmjs.org/@next-sdk/msgsender-sdk/-/msgsender-sdk-1.1.5.tgz#eee6b4e0856f352b22487fd37dbc9ac74bfe2244"
+  integrity sha512-/S+g9IhOeiOxhZeALGwvd81KEL+AtowUBf+c3+PzuBhMTzJqwakH39e6bF+ApJ3l2Kdz6mdGFHU5LOFlPbRx3Q==
 
-"@next-sdk/next-builder-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-1.1.0.tgz#8e0cf09c6ccef7f38488c778fdd9b503137df3eb"
-  integrity sha1-jgzwnGzO9/OEiMd4/dm1AxN98+s=
+"@next-sdk/next-builder-sdk@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-1.1.3.tgz#4704ce9f013d8ab74a61e59e7254a235bf0cb365"
+  integrity sha512-SjvKKA5/CmuAqBbu6qyQYXiupzAAYyenZK5O5GKHbwT24718VxTnVYRNPRp18+5ttq8GNinFI+zwR7FyCan4eg==
 
-"@next-sdk/object-store-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-1.1.0.tgz#b5f59c1f908fa45c26a64f54c82ab01ed8432ffd"
-  integrity sha1-tfWcH5CPpFwmpk9UyCqwHthDL/0=
+"@next-sdk/object-store-sdk@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-1.2.1.tgz#596812ad66bd2efdea53125819afc74141b86835"
+  integrity sha512-AoPzvOKLig8FWiEI1nkXY2WWL0+v6cIF8lKNA+Q5oRtCCPUwTBXoVcVxWQcWzEfsGUYasluXUYtYSY2h2WL4yg==
 
 "@next-sdk/permission-sdk@^1.1.1":
   version "1.1.1"
   resolved "https://registry.npmjs.org/@next-sdk/permission-sdk/-/permission-sdk-1.1.1.tgz#3a75b4e26d50916908811d82efee7ee4992df557"
   integrity sha1-OnW04m1QkWkIgR2C7+5+5Jkt9Vc=
 
-"@next-sdk/user-service-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-1.1.0.tgz#4b409c6ff2ea116428659013d62baef893dcefd5"
-  integrity sha1-S0Ccb/LqEWQoZZAT1iuu+JPc79U=
+"@next-sdk/user-service-sdk@^1.0.0", "@next-sdk/user-service-sdk@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-1.2.1.tgz#3f1ee7f64186101ddd35bb2dba47445d4ce5c539"
+  integrity sha512-lKWupbL8gRtOLi0TDW6vKB5Geo+Q0D1x5v9y7N0GUgEXd4IpC+duIOcEj77IBas459o8dX8pKy3xMkr758zyDg==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
