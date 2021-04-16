@@ -3,7 +3,10 @@ import { Form } from "@ant-design/compatible";
 import { Col, Select } from "antd";
 import { omit } from "lodash";
 import { FormItemWrapper } from "@next-libs/forms";
-import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
+import {
+  CmdbObjectApi_getObjectRelationRelatedKey,
+  CmdbObjectApi_getObjectRef,
+} from "@next-sdk/cmdb-sdk";
 import { handleHttpError } from "@next-core/brick-kit";
 
 import {
@@ -18,6 +21,7 @@ export interface SelectProps {
     value: string;
     [key: string]: any;
   }>;
+
   placeholder?: string;
   disabled?: boolean;
   allowClear?: boolean;
@@ -75,7 +79,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
     try {
       if (value) {
         const pathOptions = (
-          await CmdbObjectApi.getObjectRelationRelatedKey({
+          await CmdbObjectApi_getObjectRelationRelatedKey({
             src_object_id: props.srcObjectId,
             dst_object_id: value,
             with_cycle: true,
@@ -122,7 +126,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
     (async () => {
       try {
         const res = (
-          await CmdbObjectApi.getObjectRef({ ref_object: "USER,USER_GROUP" })
+          await CmdbObjectApi_getObjectRef({ ref_object: "USER,USER_GROUP" })
         ).data.filter((item) => !relationSearch.includes(item.objectId));
         const objectOpt = res.map((item) => {
           return {
@@ -138,7 +142,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
         if (defaultValue.dstObjectId) {
           try {
             const pathOptions = (
-              await CmdbObjectApi.getObjectRelationRelatedKey({
+              await CmdbObjectApi_getObjectRelationRelatedKey({
                 src_object_id: props.srcObjectId,
                 dst_object_id: defaultValue.dstObjectId,
                 with_cycle: true,

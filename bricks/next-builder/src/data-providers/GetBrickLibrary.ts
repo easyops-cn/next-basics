@@ -1,6 +1,6 @@
 import { developHelper } from "@next-core/brick-kit";
 import { createProviderClass } from "@next-core/brick-utils";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 
 export interface BrickLibraryItem {
   type: "brick" | "template" | "customTemplate" | "provider";
@@ -26,11 +26,12 @@ export async function GetBrickLibrary({
     )
     .concat(
       (
-        await InstanceApi.postSearch("STORYBOARD_TEMPLATE", {
+        await InstanceApi_postSearch("STORYBOARD_TEMPLATE", {
           fields: {
             templateId: 1,
-            id: 1
+            id: 1,
           },
+
           page: 1,
           page_size: 3000,
           query: {
@@ -40,7 +41,7 @@ export async function GetBrickLibrary({
       ).list.map<BrickLibraryItem>((item) => ({
         type: "customTemplate",
         name: item.templateId,
-        id: item.id
+        id: item.id,
       }))
     )
     .concat(

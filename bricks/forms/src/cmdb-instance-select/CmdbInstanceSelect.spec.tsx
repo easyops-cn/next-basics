@@ -6,7 +6,7 @@ import {
   CmdbInstanceSelectItem,
 } from "./CmdbInstanceSelect";
 import * as kit from "@next-core/brick-kit";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { Select } from "antd";
 import i18n from "i18next";
 import { act } from "react-dom/test-utils";
@@ -16,7 +16,7 @@ jest.spyOn(i18n, "t").mockReturnValue("后台搜索");
 jest.mock("@next-sdk/cmdb-sdk");
 const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 
-const mockPostSearch = InstanceApi.postSearch as jest.Mock;
+const mockPostSearch = InstanceApi_postSearch as jest.Mock;
 
 afterEach(() => {
   mockPostSearch.mockClear();
@@ -34,6 +34,7 @@ describe("CmdbInstanceSelect", () => {
         onChange={jest.fn()}
       />
     );
+
     wrapper.find(Select).simulate("change", "host");
     wrapper.find(Select).simulate("focus");
     expect(wrapper.find(Select).prop("placeholder")).toEqual("后台搜索");
@@ -48,11 +49,13 @@ describe("CmdbInstanceSelect", () => {
           value: "abc",
           memo: "abc",
         },
+
         {
           label: "host2",
           value: "bcd",
           memo: "def",
         },
+
         {
           label: "host3",
           value: "efg",
@@ -79,6 +82,7 @@ describe("CmdbInstanceSelect", () => {
         memo: true,
         instanceId: true,
       },
+
       page_size: undefined,
       query: {
         $and: [
@@ -87,11 +91,13 @@ describe("CmdbInstanceSelect", () => {
               {
                 hostname: { $like: "%%" },
               },
+
               {
                 memo: { $like: "%%" },
               },
             ],
           },
+
           {
             instanceId: {
               $in: ["world"],
@@ -119,6 +125,7 @@ describe("CmdbInstanceSelect", () => {
         firstRender={true}
       />
     );
+
     await act(async () => {
       await (global as any).flushPromises();
     });
@@ -127,6 +134,7 @@ describe("CmdbInstanceSelect", () => {
     wrapper.setProps({
       value: "new world",
     });
+
     await act(async () => {
       await (global as any).flushPromises();
     });
@@ -163,12 +171,14 @@ describe("CmdbInstanceSelect", () => {
         instanceId: "abc",
         mem: "主机1",
       },
+
       {
         hostname: "host2",
         instanceId: "bcd",
         objectId: "HOST",
         mem: "主机2",
       },
+
       {
         hostname: "host3",
         instanceId: "efg",
@@ -176,6 +186,7 @@ describe("CmdbInstanceSelect", () => {
         mem: "主机3",
       },
     ];
+
     mockPostSearch.mockResolvedValueOnce({
       list,
     });
@@ -221,12 +232,14 @@ describe("CmdbInstanceSelect", () => {
         instanceId: "abc",
         mem: "主机1",
       },
+
       {
         hostname: "host2",
         instanceId: "bcd",
         objectId: "HOST",
         mem: "主机2",
       },
+
       {
         hostname: "host3",
         instanceId: "efg",
@@ -234,6 +247,7 @@ describe("CmdbInstanceSelect", () => {
         mem: "主机3",
       },
     ];
+
     mockPostSearch.mockResolvedValueOnce({
       list,
     });
@@ -269,11 +283,13 @@ describe("CmdbInstanceSelect", () => {
           instanceId: "59bda0461dd2b",
           name: "MICRO_APP-32",
         },
+
         {
           objectId: "_ISSUE",
           instanceId: "59bda0461df59",
           name: "DATA_QUALITY",
         },
+
         {
           objectId: "_ISSUE",
           instanceId: "59bda0461df61",
@@ -281,6 +297,7 @@ describe("CmdbInstanceSelect", () => {
         },
       ],
     });
+
     const wrapper = mount(
       <CmdbInstanceSelect
         firstRender={true}
@@ -294,11 +311,13 @@ describe("CmdbInstanceSelect", () => {
         }}
       />
     );
+
     expect(mockPostSearch.mock.calls[0][1]).toEqual({
       fields: {
         name: true,
         instanceId: true,
       },
+
       page_size: undefined,
       query: {
         $and: [
@@ -309,17 +328,20 @@ describe("CmdbInstanceSelect", () => {
               },
             ],
           },
+
           {
             instanceId: {
               $in: ["59bda0461df59"],
             },
           },
+
           {
             name: "DATA_QUALITY",
           },
         ],
       },
     });
+
     await (global as any).flushPromises();
     wrapper.update();
     expect(wrapper.find(Select).prop("children")).toHaveLength(3);
@@ -333,12 +355,14 @@ describe("CmdbInstanceSelect", () => {
           name: "MICRO_APP-32",
           title: "123",
         },
+
         {
           objectId: "_ISSUE",
           instanceId: "59bda0461df59",
           name: "DATA_QUALITY",
           title: "demo",
         },
+
         {
           objectId: "_ISSUE",
           instanceId: "59bda0461df61",
@@ -347,6 +371,7 @@ describe("CmdbInstanceSelect", () => {
         },
       ],
     });
+
     const wrapper = mount(
       <CmdbInstanceSelect
         firstRender={true}
@@ -358,12 +383,14 @@ describe("CmdbInstanceSelect", () => {
         fields={{ label: ["name", "title"], value: "instanceId" }}
       />
     );
+
     expect(mockPostSearch.mock.calls[0][1]).toEqual({
       fields: {
         name: true,
         title: true,
         instanceId: true,
       },
+
       page_size: undefined,
       query: {
         $and: [
@@ -372,11 +399,13 @@ describe("CmdbInstanceSelect", () => {
               {
                 name: { $like: "%%" },
               },
+
               {
                 title: { $like: "%%" },
               },
             ],
           },
+
           {
             instanceId: {
               $in: ["59bda0461df61"],
@@ -385,6 +414,7 @@ describe("CmdbInstanceSelect", () => {
         ],
       },
     });
+
     await (global as any).flushPromises();
     wrapper.update();
     expect(wrapper.find(Select).prop("children")).toHaveLength(3);
@@ -417,6 +447,7 @@ describe("CmdbInstanceSelect", () => {
             $eq: "vdbv",
           },
         },
+
         {
           _deployType: {
             $eq: "default",
@@ -432,6 +463,7 @@ describe("CmdbInstanceSelect", () => {
             $eq: "vdbv",
           },
         },
+
         {
           _deployType: {
             $eq: "default",

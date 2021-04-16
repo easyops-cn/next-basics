@@ -5,7 +5,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 import { debounce, get, compact, castArray, defaults, isEqual } from "lodash";
 import { handleHttpError } from "@next-core/brick-kit";
 import { ModeOption } from "antd/lib/select";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { getInstanceNameKey, parseTemplate } from "@next-libs/cmdb-utils";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import classNames from "classnames";
@@ -54,6 +54,7 @@ export function CmdbInstanceSelectItem(
       label: [getInstanceNameKey(props.objectId)],
       value: "instanceId",
     },
+
     minimumInputLength = 0,
     extraSearchKey = [],
     mode,
@@ -112,7 +113,7 @@ export function CmdbInstanceSelectItem(
         const fieldsQuery = Array.isArray(fields.label)
           ? fields.label.map((label) => ({ [label]: { $like: `%${q}%` } }))
           : [{ [fields.label]: { $like: `%${q}%` } }];
-        const data = await InstanceApi.postSearch(props.objectId, {
+        const data = await InstanceApi_postSearch(props.objectId, {
           query: {
             $and: [
               {
@@ -123,12 +124,15 @@ export function CmdbInstanceSelectItem(
                   })),
                 ],
               },
+
               ...extraQuery,
             ],
           },
+
           fields: computeFields(),
           page_size: pageSize,
         });
+
         list = data.list;
         setTotal(data.total);
         // 根据用户设置路径显示特定的 label 和 value
@@ -185,8 +189,10 @@ export function CmdbInstanceSelectItem(
               $in: castArray(props.value),
             },
           },
+
           ...userQuery,
         ],
+
         true
       );
     }
@@ -254,6 +260,7 @@ export function CmdbInstanceSelectItem(
                   {op.user_icon === "defaultIcon" && op.label?.slice(0, 2)}
                 </Avatar>
               )}
+
               {optionLabel}
             </Select.Option>
           );
@@ -265,6 +272,7 @@ export function CmdbInstanceSelectItem(
 export const RefCmdbInstanceSelectItem = React.forwardRef(
   CmdbInstanceSelectItem
 );
+
 export function CmdbInstanceSelect(
   props: CmdbInstanceSelectProps
 ): React.ReactElement {

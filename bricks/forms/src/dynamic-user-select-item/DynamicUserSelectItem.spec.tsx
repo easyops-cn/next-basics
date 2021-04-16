@@ -22,39 +22,35 @@ const props = {
   batchChange: batchChangeMock,
 };
 
-jest
-  .spyOn(CmdbObjectApi, "getObjectRef")
-  .mockResolvedValue({
-    data: [
-      {
-        name: "应用",
-        objectId: "APP",
-        relation_list: [],
-      },
-      {
-        name: "主机",
-        objectId: "HOST",
-        relation_list: [
-          {
-            right_object_id: "USER",
-            left_name: "左边",
-            left_id: "left",
-          },
-        ],
-      },
-    ],
-  } as any);
-jest
-  .spyOn(CmdbObjectApi, "getObjectRelationRelatedKey")
-  .mockResolvedValue({
-    data: [
-      {
-        reverseQueryKey: "111",
-        id: "111",
-        label: "1111",
-      },
-    ],
-  } as any);
+jest.spyOn(CmdbObjectApi, "getObjectRef").mockResolvedValue({
+  data: [
+    {
+      name: "应用",
+      objectId: "APP",
+      relation_list: [],
+    },
+    {
+      name: "主机",
+      objectId: "HOST",
+      relation_list: [
+        {
+          right_object_id: "USER",
+          left_name: "左边",
+          left_id: "left",
+        },
+      ],
+    },
+  ],
+} as any);
+jest.spyOn(CmdbObjectApi, "getObjectRelationRelatedKey").mockResolvedValue({
+  data: [
+    {
+      reverseQueryKey: "111",
+      id: "111",
+      label: "1111",
+    },
+  ],
+} as any);
 
 describe("DynamicUserSelectItem", () => {
   it("should work", async () => {

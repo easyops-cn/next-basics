@@ -5,7 +5,7 @@ import { Modal, Row, Radio, Button, Table, Input, Select, Tag } from "antd";
 import { isNil, isEmpty } from "lodash";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";
-import { CmdbObjectApi, CmdbModels } from "@next-sdk/cmdb-sdk";
+import { CmdbObjectApi_getObjectAll, CmdbModels } from "@next-sdk/cmdb-sdk";
 import { valueTypeList } from "../CmdbObjectAttrValue";
 
 const Option = Select.Option;
@@ -28,11 +28,13 @@ const objectAttrColumns = [
     dataIndex: "id",
     key: "id",
   },
+
   {
     title: "属性名称",
     dataIndex: "name",
     key: "name",
   },
+
   {
     title: "属性类型",
     dataIndex: ["value", "type"],
@@ -55,10 +57,12 @@ export function LegacyObjectAttrStructForm(
     default: "",
     struct_define: [],
   });
+
   const [addStructMode, setAddStructMode] = React.useState("new");
   const [addStructModalVisible, setAddStructModalVisible] = React.useState(
     false
   );
+
   const [
     importStructModalVisible,
     setImportStructModalVisible,
@@ -73,6 +77,7 @@ export function LegacyObjectAttrStructForm(
   const [selectedObjectAttrKeys, setSelectedObjectAttrKeys] = React.useState(
     []
   );
+
   const [loadingObject, setLoadingObject] = React.useState(false);
 
   const memoizeAttrList = React.useMemo(() => {
@@ -102,17 +107,19 @@ export function LegacyObjectAttrStructForm(
           确认要删除结构项<Tag color="red">{struct.name}</Tag>吗？
         </>
       ),
+
       onOk() {
         const structs = value.struct_define.filter(
           (item) => item.id !== struct.id
         );
+
         handleValueChange({ ...value, struct_define: structs });
       },
     });
   };
 
   const loadCmdbObjectList = async () => {
-    setCmdbObjectList((await CmdbObjectApi.getObjectAll({})).data);
+    setCmdbObjectList((await CmdbObjectApi_getObjectAll({})).data);
     setLoadingObject(false);
   };
 
@@ -129,6 +136,7 @@ export function LegacyObjectAttrStructForm(
           }}
         ></Button>
       )}
+
       <Button
         type="link"
         danger
@@ -146,11 +154,13 @@ export function LegacyObjectAttrStructForm(
       dataIndex: "id",
       key: "id",
     },
+
     {
       title: "结构项名称",
       dataIndex: "name",
       key: "name",
     },
+
     {
       title: "类型",
       dataIndex: "type",
@@ -158,6 +168,7 @@ export function LegacyObjectAttrStructForm(
       render: (text, record) =>
         valueTypeList.filter((type) => type.key === text)[0].text,
     },
+
     {
       title: "操作",
       key: "action",
@@ -171,11 +182,13 @@ export function LegacyObjectAttrStructForm(
       dataIndex: "id",
       key: "id",
     },
+
     {
       title: "结构项名称",
       dataIndex: "name",
       key: "name",
     },
+
     {
       title: "类型",
       dataIndex: "type",
@@ -183,6 +196,7 @@ export function LegacyObjectAttrStructForm(
       render: (text, record) =>
         valueTypeList.filter((type) => type.key === text)[0].text,
     },
+
     {
       title: "枚举值",
       dataIndex: "regex",
@@ -193,6 +207,7 @@ export function LegacyObjectAttrStructForm(
           record.regex?.join(",")) ||
         "",
     },
+
     {
       title: "操作",
       key: "action",
@@ -380,6 +395,7 @@ export function LegacyObjectAttrStructForm(
               };
             }),
           });
+
           setSelectedObjectId("");
           setImportStructModalVisible(false);
         }}

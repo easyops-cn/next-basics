@@ -4,7 +4,7 @@ import React, { forwardRef, useState, useEffect } from "react";
 import { Checkbox } from "antd";
 
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
-import { CustomSenderApi } from "@next-sdk/msgsender-sdk";
+import { CustomSenderApi_listSupportInform } from "@next-sdk/msgsender-sdk";
 
 import { InformMethod } from "../interfaces";
 
@@ -44,7 +44,7 @@ export function InformMethodsForm(
 
   useEffect(() => {
     const fetchInformMethodList = async (): Promise<void> => {
-      const informMethodList = await CustomSenderApi.listSupportInform();
+      const informMethodList = await CustomSenderApi_listSupportInform();
       setInformMethodList(informMethodList.data);
     };
     fetchInformMethodList();

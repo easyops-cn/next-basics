@@ -4,15 +4,22 @@ import {
   DesktopItemCustom,
   DesktopItemApp,
 } from "@next-core/brick-types";
-import { LaunchpadApi, UserServiceModels } from "@next-sdk/user-service-sdk";
+import {
+  LaunchpadApi_ListCollectionResponseItem,
+  LaunchpadApi_listCollection,
+  LaunchpadApi_CreateCollectionRequestBody,
+  LaunchpadApi_createCollection,
+  LaunchpadApi_deleteCollection,
+  UserServiceModels,
+} from "@next-sdk/user-service-sdk";
 import { getRuntime } from "@next-core/brick-kit";
 import { pick } from "lodash";
 
 export class LaunchpadService {
   readonly storageKey = "launchpad-recently-visited";
   private storage: JsonStorage;
-  private favoriteList: LaunchpadApi.ListCollectionResponseItem[] = [];
-  private filteredFavoriteList: LaunchpadApi.ListCollectionResponseItem[] = [];
+  private favoriteList: LaunchpadApi_ListCollectionResponseItem[] = [];
+  private filteredFavoriteList: LaunchpadApi_ListCollectionResponseItem[] = [];
   private microApps: MicroApp[] = [];
   private customList: DesktopItemCustom[] = [];
   private maxVisitorLength = 7;
@@ -34,6 +41,7 @@ export class LaunchpadService {
           item.status === "enabled" ||
           item.status === "developing"
       );
+
     this.setMicroApps(microApps);
   }
 
@@ -43,7 +51,7 @@ export class LaunchpadService {
 
   async fetchFavoriteList() {
     const result = (
-      await LaunchpadApi.listCollection({ page: 1, pageSize: 25 })
+      await LaunchpadApi_listCollection({ page: 1, pageSize: 25 })
     ).list;
     this.setFavorites(result);
     return result;
@@ -65,12 +73,13 @@ export class LaunchpadService {
     return type;
   }
 
-  setFavorites(list: LaunchpadApi.ListCollectionResponseItem[]): void {
+  setFavorites(list: LaunchpadApi_ListCollectionResponseItem[]): void {
     this.filteredFavoriteList = list.filter(
       (v) =>
         v.launchpadCollection.type === "microApp" ||
         (v.launchpadCollection as any).type === "customItem"
     );
+
     this.favoriteList = list;
   }
 
@@ -92,14 +101,14 @@ export class LaunchpadService {
     this.setAllVisitors(result);
   }
 
-  async setAsFavorite(params: LaunchpadApi.CreateCollectionRequestBody) {
-    await LaunchpadApi.createCollection(params, {
+  async setAsFavorite(params: LaunchpadApi_CreateCollectionRequestBody) {
+    await LaunchpadApi_createCollection(params, {
       interceptorParams: { ignoreLoadingBar: true },
     });
   }
 
   async deleteFavorite(id: string | number) {
-    await LaunchpadApi.deleteCollection(id, {
+    await LaunchpadApi_deleteCollection(id, {
       interceptorParams: { ignoreLoadingBar: true },
     });
   }
@@ -200,7 +209,7 @@ export class LaunchpadService {
   }
 
   getRealDesktopItem(
-    item: LaunchpadApi.ListCollectionResponseItem
+    item: LaunchpadApi_ListCollectionResponseItem
   ): MicroApp | DesktopItemCustom {
     if (item.launchpadCollection.type === "microApp") {
       return this.microApps.find((app) => app.id === item.microAppId);
@@ -211,7 +220,7 @@ export class LaunchpadService {
     }
   }
 
-  setFavoriteAsVisitor(item: LaunchpadApi.ListCollectionResponseItem) {
+  setFavoriteAsVisitor(item: LaunchpadApi_ListCollectionResponseItem) {
     const type = this.typeAdaptor(item.launchpadCollection.type);
     if (type === "link") return;
     const data = this.getRealDesktopItem(item);
