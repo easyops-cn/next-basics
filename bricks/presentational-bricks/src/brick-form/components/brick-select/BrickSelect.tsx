@@ -5,7 +5,7 @@ import { debounce, isEmpty } from "lodash";
 import { WrapperFormItem } from "../wrapper-form-item/WrapperFormItem";
 import { BrickOptionProps } from "../../interfaces";
 import { SelectProps } from "antd/lib/select";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { handleHttpError } from "@next-core/brick-kit";
 
 export interface SearchInCmdb {
@@ -18,7 +18,7 @@ export interface SearchInCmdb {
 export interface LegacyBrickSelectProps {
   configProps?: SelectProps;
   optionList: BrickOptionProps[];
-  onChange: Function;
+  onChange: (value: string[]) => void;
   value?: string | string[];
   searchInCmdb?: SearchInCmdb;
 }
@@ -28,7 +28,7 @@ export function LegacyBrickSelect({
   optionList = [],
   onChange,
   value,
-  searchInCmdb
+  searchInCmdb,
 }: LegacyBrickSelectProps): React.ReactElement {
   const backendSearch = !!searchInCmdb;
   const beforeFirstRender = useRef(true);
@@ -38,9 +38,10 @@ export function LegacyBrickSelect({
       optionList = (value as any).map((i: any) => ({
         id: i.instanceId,
         text: i[searchInCmdb.attrFieldToDisplay],
-        value: i.instanceId
+        value: i.instanceId,
       }));
-      value = optionList.map(i => i.id);
+
+      value = optionList.map((i) => i.id);
       onChange(value);
     }
   }
@@ -50,15 +51,17 @@ export function LegacyBrickSelect({
   const onSearch = async (query: string) => {
     const q = query.trim();
     try {
-      const resp = await InstanceApi.postSearch(searchInCmdb.objectId, {
+      const resp = await InstanceApi_postSearch(searchInCmdb.objectId, {
         query: { [searchInCmdb.attrFieldToSearch]: { $like: `%${q}%` } },
-        page_size: searchInCmdb.pageSize
+        page_size: searchInCmdb.pageSize,
       });
-      const results = resp.list.map(instance => ({
+
+      const results = resp.list.map((instance) => ({
         id: instance.instanceId,
         text: instance[searchInCmdb.attrFieldToDisplay],
-        value: instance.instanceId
+        value: instance.instanceId,
       }));
+
       setOptions(results);
     } catch (err) {
       handleHttpError(err);
@@ -89,7 +92,7 @@ export function LegacyBrickSelect({
       onSearch={debounceSearch}
       onChange={handleOnChange}
     >
-      {options.map(item => (
+      {options.map((item) => (
         <Select.Option key={item.id} value={item.value || item.id}>
           {item.text}
         </Select.Option>

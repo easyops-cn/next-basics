@@ -6,7 +6,7 @@ import { AvatarProps } from "antd/lib/avatar";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { getAuth, getHistory, getRuntime } from "@next-core/brick-kit";
 import { Link } from "@next-libs/basic-components";
-import { UserAdminApi } from "@next-sdk/user-service-sdk";
+import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
 import { AppBarBreadcrumb } from "../AppBarBreadcrumb/AppBarBreadcrumb";
@@ -66,7 +66,7 @@ export function AppBar({
     (async () => {
       // istanbul ignore else
       if (username) {
-        const userInfo = await UserAdminApi.getUserInfoV2(username);
+        const userInfo = await UserAdminApi_getUserInfoV2(username);
         setAvatarSrc(userInfo.user_icon);
       }
     })();
@@ -110,6 +110,7 @@ export function AppBar({
             />
           </>
         )}
+
         <AppBarBreadcrumb breadcrumb={breadcrumb} />
       </div>
       <div className={styles.actionsContainer}>
@@ -124,6 +125,7 @@ export function AppBar({
                       {t(K.ACCOUNT_MANAGEMENT)}
                     </Menu.Item>
                   )}
+
                   <Menu.Item
                     onClick={ssoEnabled ? handleSSOLogout : handleLogout}
                   >

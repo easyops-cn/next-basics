@@ -62,14 +62,14 @@ const listCollectionData = [
   },
 ];
 const spyOnListCollection = jest
-  .spyOn(sdk.LaunchpadApi, "listCollection")
+  .spyOn(sdk, "LaunchpadApi_listCollection")
   .mockReturnValue({
     list: listCollectionData,
   });
 
 spyOnListCollection.mock;
-const spyOnCreateCollection = jest.spyOn(sdk.LaunchpadApi, "createCollection");
-const spyOnDeleteCollection = jest.spyOn(sdk.LaunchpadApi, "deleteCollection");
+const spyOnCreateCollection = jest.spyOn(sdk, "LaunchpadApi_createCollection");
+const spyOnDeleteCollection = jest.spyOn(sdk, "LaunchpadApi_deleteCollection");
 
 jest.mock("@next-core/brick-kit", () => {
   return {

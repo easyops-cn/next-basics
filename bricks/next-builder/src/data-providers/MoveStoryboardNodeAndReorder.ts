@@ -1,8 +1,8 @@
 import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import { createProviderClass } from "@next-core/brick-utils";
 import { NodeInstance } from "@next-core/editor-bricks-helper";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
-import { StoryboardApi } from "@next-sdk/next-builder-sdk";
+import { InstanceApi_updateInstanceV2 } from "@next-sdk/cmdb-sdk";
+import { StoryboardApi_sortStoryboardNodes } from "@next-sdk/next-builder-sdk";
 
 const STORYBOARD_BRICK = "STORYBOARD_BRICK";
 
@@ -24,14 +24,16 @@ export async function MoveStoryboardNodeAndReorder({
   nodeIds,
   nodeUid,
 }: MoveStoryboardNodeAndReorderParams): Promise<MoveStoryboardNodeAndReorderResult> {
-  const stored = await InstanceApi.updateInstanceV2(
+  const stored = await InstanceApi_updateInstanceV2(
     STORYBOARD_BRICK,
     nodeInstanceId,
     nodeData
   );
-  await StoryboardApi.sortStoryboardNodes({
+
+  await StoryboardApi_sortStoryboardNodes({
     nodeIds,
   });
+
   return {
     nodeUid,
     nodeData: stored as BuilderRouteOrBrickNode,

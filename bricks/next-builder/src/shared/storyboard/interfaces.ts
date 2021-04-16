@@ -7,7 +7,7 @@ import {
   BuilderRouteNode,
   BuilderBrickNode,
 } from "@next-core/brick-types";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 
 export interface StoryboardAssemblyParamsBase {
   // The human-readable id of an app.
@@ -43,7 +43,7 @@ export interface StoryboardAssemblyResult {
 
 export interface PreStoryboardAssemblyResult {
   minimalBuildInfo: Pick<BuildInfo, "brickList" | "routeList" | "templateList">;
-  projectInfo?: InstanceApi.GetDetailResponseBody;
+  projectInfo?: InstanceApi_GetDetailResponseBody;
 }
 
 export interface BuildInfo {
@@ -93,6 +93,7 @@ export interface StoryboardToBuild {
     menus?: Record<string, unknown>[];
     i18n?: MetaI18n;
   };
+
   dependsAll?: boolean;
 }
 

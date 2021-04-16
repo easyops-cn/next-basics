@@ -1,11 +1,11 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import { LegacyBrickSelect } from "./BrickSelect";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { act } from "react-dom/test-utils";
 
 jest.mock("@next-sdk/cmdb-sdk");
-const mockInstanceApiPostSearch = InstanceApi.postSearch as jest.Mock;
+const mockInstanceApiPostSearch = InstanceApi_postSearch as jest.Mock;
 mockInstanceApiPostSearch.mockResolvedValue({ list: [] } as any);
 
 describe("BrickSelect", () => {
@@ -20,6 +20,7 @@ describe("BrickSelect", () => {
         onChange={onChange}
       />
     );
+
     expect(wrapper).toBeTruthy();
   });
 
@@ -34,6 +35,7 @@ describe("BrickSelect", () => {
         onChange={onChange}
       />
     );
+
     wrapper.simulate("change");
     expect(onChange).toHaveBeenCalled();
   });
@@ -55,9 +57,10 @@ describe("BrickSelect", () => {
         }}
       />
     );
+
     await act(async () => {
       await (global as any).flushPromises();
-    })
+    });
     expect(wrapper.find("option").length).toBe(0);
   });
 });

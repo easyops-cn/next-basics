@@ -4,8 +4,8 @@ import {
   NodeInstance,
   EventDetailOfNodeAddStored,
 } from "@next-core/editor-bricks-helper";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
-import { StoryboardApi } from "@next-sdk/next-builder-sdk";
+import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
+import { StoryboardApi_sortStoryboardNodes } from "@next-sdk/next-builder-sdk";
 
 const STORYBOARD_BRICK = "STORYBOARD_BRICK";
 
@@ -22,13 +22,14 @@ export async function AddStoryboardNodeAndReorder({
   nodeUid,
   nodeAlias,
 }: AddStoryboardNodeAndReorderParams): Promise<EventDetailOfNodeAddStored> {
-  const stored = await InstanceApi.createInstance(STORYBOARD_BRICK, nodeData);
+  const stored = await InstanceApi_createInstance(STORYBOARD_BRICK, nodeData);
   // `nodeIds` are sorted, and there is a placeholder of `null` which
   // represents the newly added node. Replace it with the stored id.
   const newNodeIds = nodeIds.map((id) => (id === null ? stored.id : id));
-  await StoryboardApi.sortStoryboardNodes({
+  await StoryboardApi_sortStoryboardNodes({
     nodeIds: newNodeIds,
   });
+
   return {
     nodeData: stored as BuilderRouteOrBrickNode,
     nodeUid,

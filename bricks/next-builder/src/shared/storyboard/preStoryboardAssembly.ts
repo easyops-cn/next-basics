@@ -1,6 +1,13 @@
 import { BuilderBrickNode, BuilderRouteNode } from "@next-core/brick-types";
 import { pipes } from "@next-core/brick-utils";
-import { InstanceApi, InstanceGraphApi } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceApi_postSearch,
+  InstanceApi_getDetail,
+  InstanceApi_PostSearchResponseBody,
+  InstanceApi_GetDetailResponseBody,
+  InstanceGraphApi_traverseGraphV2,
+  InstanceGraphApi_TraverseGraphV2ResponseBody,
+} from "@next-sdk/cmdb-sdk";
 import {
   PreStoryboardAssemblyParams,
   PreStoryboardAssemblyResult,
@@ -19,41 +26,46 @@ export async function preStoryboardAssembly({
   projectId,
   options,
 }: PreStoryboardAssemblyParams): Promise<PreStoryboardAssemblyResult> {
-  const routeListReq = InstanceApi.postSearch(MODEL_STORYBOARD_ROUTE, {
+  const routeListReq = InstanceApi_postSearch(MODEL_STORYBOARD_ROUTE, {
     fields: {
       "*": 1,
       parent: 1,
     },
+
     page: 1,
     page_size: 3000,
     query: {
       appId,
     },
+
     sort: {
       sort: 1,
     },
   });
 
-  const brickListReq = InstanceApi.postSearch(MODEL_STORYBOARD_BRICK, {
+  const brickListReq = InstanceApi_postSearch(MODEL_STORYBOARD_BRICK, {
     fields: {
       "*": 1,
       parent: 1,
     },
+
     page: 1,
     page_size: 3000,
     query: {
       appId,
     },
+
     sort: {
       sort: 1,
     },
   });
 
-  const templateGraphReq = InstanceGraphApi.traverseGraphV2({
+  const templateGraphReq = InstanceGraphApi_traverseGraphV2({
     object_id: MODEL_STORYBOARD_TEMPLATE,
     query: {
       "project.instanceId": projectId,
     },
+
     select_fields: ["*", "parent"],
     child: [
       {
@@ -64,6 +76,7 @@ export async function preStoryboardAssembly({
             select_fields: ["*", "parent"],
           },
         ],
+
         depth: -1,
         parentOut: "children",
         select_fields: ["*", "parent"],
@@ -79,7 +92,7 @@ export async function preStoryboardAssembly({
 
   if (!options?.minimal) {
     requests.push(
-      InstanceApi.getDetail(MODEL_PROJECT_MICRO_APP, projectId, {
+      InstanceApi_getDetail(MODEL_PROJECT_MICRO_APP, projectId, {
         fields: "*,menus.*,menus.items,menus.items.children,i18n.*",
       })
     );
@@ -91,10 +104,10 @@ export async function preStoryboardAssembly({
     templateGraphResponse,
     projectInfoResponse,
   ] = await Promise.all<
-    InstanceApi.PostSearchResponseBody,
-    InstanceApi.PostSearchResponseBody,
-    InstanceGraphApi.TraverseGraphV2ResponseBody,
-    InstanceApi.GetDetailResponseBody
+    InstanceApi_PostSearchResponseBody,
+    InstanceApi_PostSearchResponseBody,
+    InstanceGraphApi_TraverseGraphV2ResponseBody,
+    InstanceApi_GetDetailResponseBody
   >(requests as any);
 
   return {
@@ -116,6 +129,7 @@ export async function preStoryboardAssembly({
           proxy: pipes.yaml(template.proxy),
         })),
     },
+
     projectInfo: projectInfoResponse,
   };
 }

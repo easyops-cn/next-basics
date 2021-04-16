@@ -2,13 +2,13 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Modal, Row, Radio, Button, Table, Input, Select } from "antd";
-import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
+import { CmdbObjectApi_getObjectAll } from "@next-sdk/cmdb-sdk";
 import { ObjectAttrStruct } from "./ObjectAttrStruct";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
 const spyOnModalConfirm = jest.spyOn(Modal, "confirm");
-const mockLoadObject = CmdbObjectApi.getObjectAll as jest.Mock;
+const mockLoadObject = CmdbObjectApi_getObjectAll as jest.Mock;
 
 mockLoadObject.mockResolvedValue({
   data: [
@@ -24,6 +24,7 @@ mockLoadObject.mockResolvedValue({
         },
       ],
     },
+
     {
       objectId: "object2",
       attrList: [
@@ -50,6 +51,7 @@ describe("ObjectAttrStruct", () => {
       value: defaultValue,
       onChange: jest.fn(),
     };
+
     const wrapper = mount(<ObjectAttrStruct {...props} />);
     expect(wrapper.find(Radio.Group).at(0).props().value).toBe("new");
     expect(wrapper.find(Row).at(1).children(0).text()).toBe("添加结构项");
@@ -59,6 +61,7 @@ describe("ObjectAttrStruct", () => {
           value: "import",
         },
       });
+
       await (global as any).flushPromises();
     });
     wrapper.update();
@@ -90,6 +93,7 @@ describe("ObjectAttrStruct", () => {
           }}
         />
       );
+
       expect(wrapper.find("tbody tr").childAt(3).text()).toBe(expected);
     }
   );
@@ -99,6 +103,7 @@ describe("ObjectAttrStruct", () => {
       value: defaultValue,
       onChange: jest.fn(),
     };
+
     const wrapper = mount(<ObjectAttrStruct {...props} />);
     wrapper.find(Button).at(0).invoke("onClick")();
     expect(wrapper.find("Modal").at(0).props().visible).toBeTruthy();
@@ -119,6 +124,7 @@ describe("ObjectAttrStruct", () => {
         },
       ],
     });
+
     wrapper.update();
     expect(wrapper.find("Modal").at(0).props().visible).toBeFalsy();
     expect(wrapper.find(Table).at(0).props().dataSource.length).toBe(1);
@@ -141,6 +147,7 @@ describe("ObjectAttrStruct", () => {
         title: "提示",
       })
     );
+
     act(() => {
       spyOnModalConfirm.mock.calls[
         spyOnModalConfirm.mock.calls.length - 1
@@ -157,6 +164,7 @@ describe("ObjectAttrStruct", () => {
       value: defaultValue,
       onChange: jest.fn(),
     };
+
     const wrapper = mount(<ObjectAttrStruct {...props} />);
     wrapper.find(Button).at(0).invoke("onClick")();
     expect(wrapper.find("Modal").at(0).props().visible).toBeTruthy();
@@ -183,12 +191,14 @@ describe("ObjectAttrStruct", () => {
       value: defaultValue,
       onChange: jest.fn(),
     };
+
     const wrapper = mount(<ObjectAttrStruct {...props} />);
     wrapper.find(Radio.Group).at(0).invoke("onChange")({
       target: {
         value: "import",
       },
     });
+
     wrapper.update();
     wrapper.find(Button).at(0).invoke("onClick")();
     await (global as any).flushPromises();

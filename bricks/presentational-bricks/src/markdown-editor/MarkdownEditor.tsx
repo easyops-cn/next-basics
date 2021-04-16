@@ -4,7 +4,7 @@ import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import style from "./index.module.css";
 import { WrapperFormItem } from "../brick-form/components/wrapper-form-item/WrapperFormItem";
 import { MarkdownDisplay } from "../markdown-display/MarkdownDisplay";
-import { ObjectStoreApi } from "@next-sdk/object-store-sdk";
+import { ObjectStoreApi_putObject } from "@next-sdk/object-store-sdk";
 import { forEach } from "lodash";
 import { ImageInfo } from "./index";
 
@@ -65,14 +65,16 @@ export function MarkdownEditorItem(
         triggerChange(newValue);
         // 上传文件
         try {
-          const response = await ObjectStoreApi.putObject(props.bucketName, {
+          const response = await ObjectStoreApi_putObject(props.bucketName, {
             file: file,
           });
+
           const url = transformResponseToUrl(response.objectName);
           newValue = newValue.replace(
             placeholderText,
             `![${realFileName}](${url})`
           );
+
           setValue(newValue);
           triggerChange(newValue);
           onUploadImage({ name: realFileName, url });

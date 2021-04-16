@@ -1,4 +1,8 @@
-import { InstanceApi, InstanceGraphApi } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceApi_postSearch,
+  InstanceApi_getDetail,
+  InstanceGraphApi_traverseGraphV2,
+} from "@next-sdk/cmdb-sdk";
 import { symbolForNodeId, symbolForNodeInstanceId } from "./buildStoryboard";
 import {
   StoryboardAssemblyParams,
@@ -8,8 +12,8 @@ import { StoryboardAssembly } from "./StoryboardAssembly";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
-(InstanceApi.postSearch as jest.MockedFunction<
-  typeof InstanceApi.postSearch
+(InstanceApi_postSearch as jest.MockedFunction<
+  typeof InstanceApi_postSearch
 >).mockImplementation((modelId) => {
   switch (modelId) {
     case "STORYBOARD_ROUTE":
@@ -27,6 +31,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             _ts: 123,
             org: 1,
           },
+
           {
             id: "R-02",
             instanceId: "instance-r02",
@@ -35,6 +40,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             permissionsPreCheck:
               '["<% `cmdb:${QUERY.objectId}_instance_create` %>"]',
           },
+
           {
             id: "R-03",
             instanceId: "instance-r03",
@@ -42,6 +48,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             type: "bricks",
             parent: [{ id: "R-02" }],
           },
+
           {
             id: "R-04",
             instanceId: "instance-r04",
@@ -50,6 +57,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             parent: [{ id: "B-01" }],
             mountPoint: "m2",
           },
+
           {
             id: "R-05",
             instanceId: "instance-r05",
@@ -60,6 +68,7 @@ jest.mock("@next-sdk/cmdb-sdk");
           },
         ],
       });
+
     case "STORYBOARD_BRICK":
       return Promise.resolve({
         list: [
@@ -72,6 +81,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             if: "false",
             lifeCycle: undefined,
           },
+
           {
             id: "B-02",
             instanceId: "instance-b02",
@@ -79,6 +89,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             brick: "n",
             parent: [{ id: "R-01" }],
           },
+
           {
             id: "B-03",
             instanceId: "instance-b03",
@@ -86,6 +97,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             brick: "o",
             parent: [{ id: "R-03" }],
           },
+
           {
             id: "B-04",
             instanceId: "instance-b04",
@@ -94,6 +106,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             parent: [{ id: "B-01" }],
             mountPoint: "m1",
           },
+
           {
             id: "B-05",
             instanceId: "instance-b05",
@@ -102,6 +115,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             parent: [{ id: "B-01" }],
             mountPoint: "m1",
           },
+
           {
             // This brick's parent not found.
             id: "T-01",
@@ -110,6 +124,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             brick: "t1",
             parent: [{ id: "R-00" }],
           },
+
           {
             // This brick's grand-parent not found.
             id: "T-02",
@@ -123,8 +138,8 @@ jest.mock("@next-sdk/cmdb-sdk");
   }
 });
 
-(InstanceGraphApi.traverseGraphV2 as jest.MockedFunction<
-  typeof InstanceGraphApi.traverseGraphV2
+(InstanceGraphApi_traverseGraphV2 as jest.MockedFunction<
+  typeof InstanceGraphApi_traverseGraphV2
 >).mockImplementation(() =>
   Promise.resolve({
     topic_vertices: [
@@ -141,11 +156,13 @@ jest.mock("@next-sdk/cmdb-sdk");
               },
             },
           },
+
           null,
           2
         ),
       },
     ],
+
     vertices: [
       {
         instanceId: "b",
@@ -153,6 +170,7 @@ jest.mock("@next-sdk/cmdb-sdk");
         type: "brick",
         brick: "z",
       },
+
       {
         instanceId: "c",
         id: "T-B-02",
@@ -161,6 +179,7 @@ jest.mock("@next-sdk/cmdb-sdk");
         ref: "two",
         mountPoint: "m5",
       },
+
       {
         instanceId: "d",
         id: "T-B-03",
@@ -169,17 +188,20 @@ jest.mock("@next-sdk/cmdb-sdk");
         mountPoint: "m6",
       },
     ],
+
     edges: [
       {
         in: "b",
         out: "a",
         out_name: "children",
       },
+
       {
         in: "c",
         out: "b",
         out_name: "children",
       },
+
       {
         in: "d",
         out: "c",
@@ -189,8 +211,8 @@ jest.mock("@next-sdk/cmdb-sdk");
   })
 );
 
-const mockGetDetail = (InstanceApi.getDetail as jest.MockedFunction<
-  typeof InstanceApi.getDetail
+const mockGetDetail = (InstanceApi_getDetail as jest.MockedFunction<
+  typeof InstanceApi_getDetail
 >).mockImplementation(() =>
   Promise.resolve({
     projectId: "P-239",
@@ -201,6 +223,7 @@ const mockGetDetail = (InstanceApi.getDetail as jest.MockedFunction<
           {
             text: "Menu Item 1",
           },
+
           {
             text: "Menu Item 2",
             children: [
@@ -212,6 +235,7 @@ const mockGetDetail = (InstanceApi.getDetail as jest.MockedFunction<
           },
         ],
       },
+
       {
         menuId: "menu-b",
         dynamicItems: true,
@@ -220,18 +244,21 @@ const mockGetDetail = (InstanceApi.getDetail as jest.MockedFunction<
         },
       },
     ],
+
     i18n: [
       {
         name: "FILES",
         en: "Files",
         zh: "文件",
       },
+
       {
         name: "SETTINGS",
         en: "Settings",
         zh: "设置",
       },
     ],
+
     dependsAll: false,
   })
 );
@@ -257,6 +284,7 @@ describe("StoryboardAssembly", () => {
                       type: "bricks",
                       bricks: [{ brick: "p" }, { template: "q" }],
                     },
+
                     m2: {
                       type: "routes",
                       routes: [
@@ -265,6 +293,7 @@ describe("StoryboardAssembly", () => {
                           type: "bricks",
                           bricks: [],
                         },
+
                         {
                           path: "/a/e",
                           type: "bricks",
@@ -274,15 +303,18 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 },
+
                 { brick: "n" },
               ],
             },
+
             {
               path: "/b",
               type: "routes",
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
+
               routes: [
                 {
                   path: "/b/c",
@@ -292,6 +324,7 @@ describe("StoryboardAssembly", () => {
               ],
             },
           ],
+
           meta: {
             customTemplates: [
               {
@@ -304,6 +337,7 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 },
+
                 bricks: [
                   {
                     brick: "z",
@@ -328,6 +362,7 @@ describe("StoryboardAssembly", () => {
                 ],
               },
             ],
+
             menus: [
               {
                 menuId: "menu-a",
@@ -335,6 +370,7 @@ describe("StoryboardAssembly", () => {
                   {
                     text: "Menu Item 1",
                   },
+
                   {
                     text: "Menu Item 2",
                     children: [
@@ -350,6 +386,7 @@ describe("StoryboardAssembly", () => {
                   },
                 ],
               },
+
               {
                 menuId: "menu-b",
                 dynamicItems: true,
@@ -358,21 +395,25 @@ describe("StoryboardAssembly", () => {
                 },
               },
             ],
+
             i18n: {
               en: {
                 FILES: "Files",
                 SETTINGS: "Settings",
               },
+
               zh: {
                 FILES: "文件",
                 SETTINGS: "设置",
               },
             },
           },
+
           dependsAll: false,
         },
       },
     ],
+
     [
       {
         appId: "test-app",
@@ -403,6 +444,7 @@ describe("StoryboardAssembly", () => {
                           [symbolForNodeInstanceId]: "instance-b04",
                           brick: "p",
                         },
+
                         {
                           [symbolForNodeId]: "B-05",
                           [symbolForNodeInstanceId]: "instance-b05",
@@ -410,6 +452,7 @@ describe("StoryboardAssembly", () => {
                         },
                       ],
                     },
+
                     m2: {
                       type: "routes",
                       routes: [
@@ -419,6 +462,7 @@ describe("StoryboardAssembly", () => {
                           type: "bricks",
                           bricks: [],
                         },
+
                         {
                           [symbolForNodeId]: "R-05",
                           path: "/a/e",
@@ -429,6 +473,7 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 },
+
                 {
                   [symbolForNodeId]: "B-02",
                   [symbolForNodeInstanceId]: "instance-b02",
@@ -436,6 +481,7 @@ describe("StoryboardAssembly", () => {
                 },
               ],
             },
+
             {
               [symbolForNodeId]: "R-02",
               path: "/b",
@@ -443,6 +489,7 @@ describe("StoryboardAssembly", () => {
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
+
               routes: [
                 {
                   [symbolForNodeId]: "R-03",
@@ -459,6 +506,7 @@ describe("StoryboardAssembly", () => {
               ],
             },
           ],
+
           meta: {
             customTemplates: [
               {
@@ -472,6 +520,7 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 },
+
                 bricks: [
                   {
                     [symbolForNodeId]: "T-B-01",
@@ -506,6 +555,7 @@ describe("StoryboardAssembly", () => {
                 ],
               },
             ],
+
             menus: [
               {
                 menuId: "menu-a",
@@ -513,6 +563,7 @@ describe("StoryboardAssembly", () => {
                   {
                     text: "Menu Item 1",
                   },
+
                   {
                     text: "Menu Item 2",
                     children: [
@@ -528,6 +579,7 @@ describe("StoryboardAssembly", () => {
                   },
                 ],
               },
+
               {
                 menuId: "menu-b",
                 dynamicItems: true,
@@ -536,17 +588,20 @@ describe("StoryboardAssembly", () => {
                 },
               },
             ],
+
             i18n: {
               en: {
                 FILES: "Files",
                 SETTINGS: "Settings",
               },
+
               zh: {
                 FILES: "文件",
                 SETTINGS: "设置",
               },
             },
           },
+
           dependsAll: false,
         },
       } as any,

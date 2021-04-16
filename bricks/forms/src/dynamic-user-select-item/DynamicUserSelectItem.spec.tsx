@@ -2,7 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import { Select } from "antd";
 import { RowFormItem } from "./DynamicUserSelectItem";
-import { CmdbObjectApi } from "@next-sdk/cmdb-sdk";
+import * as cmdbSdk from "@next-sdk/cmdb-sdk";
 import { columns } from "./";
 import { act } from "react-dom/test-utils";
 
@@ -22,30 +22,28 @@ const props = {
   batchChange: batchChangeMock,
 };
 
+jest.spyOn(cmdbSdk, "CmdbObjectApi_getObjectRef").mockResolvedValue({
+  data: [
+    {
+      name: "应用",
+      objectId: "APP",
+      relation_list: [],
+    },
+    {
+      name: "主机",
+      objectId: "HOST",
+      relation_list: [
+        {
+          right_object_id: "USER",
+          left_name: "左边",
+          left_id: "left",
+        },
+      ],
+    },
+  ],
+} as any);
 jest
-  .spyOn(CmdbObjectApi, "getObjectRef")
-  .mockResolvedValue({
-    data: [
-      {
-        name: "应用",
-        objectId: "APP",
-        relation_list: [],
-      },
-      {
-        name: "主机",
-        objectId: "HOST",
-        relation_list: [
-          {
-            right_object_id: "USER",
-            left_name: "左边",
-            left_id: "left",
-          },
-        ],
-      },
-    ],
-  } as any);
-jest
-  .spyOn(CmdbObjectApi, "getObjectRelationRelatedKey")
+  .spyOn(cmdbSdk, "CmdbObjectApi_getObjectRelationRelatedKey")
   .mockResolvedValue({
     data: [
       {

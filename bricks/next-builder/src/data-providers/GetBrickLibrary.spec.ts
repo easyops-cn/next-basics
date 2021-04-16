@@ -1,5 +1,5 @@
 import { developHelper } from "@next-core/brick-kit";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import * as cmdbSdk from "@next-sdk/cmdb-sdk";
 import { GetBrickLibrary } from "./GetBrickLibrary";
 
 jest.mock("@next-core/brick-kit");
@@ -39,7 +39,7 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
   },
 ]);
 
-jest.spyOn(InstanceApi, "postSearch").mockResolvedValue({
+jest.spyOn(cmdbSdk, "InstanceApi_postSearch").mockResolvedValue({
   list: [
     {
       instanceId: "a",

@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 
 import { InformMethodsFormItem } from "./InformMethodsForm";
 
-import { CustomSenderApi } from "@next-sdk/msgsender-sdk";
+import * as msgsenderSdk from "@next-sdk/msgsender-sdk";
 
 import { InformMethod } from "../interfaces";
 
@@ -42,7 +42,7 @@ describe("InformMethodsForm", () => {
       },
     ];
     jest
-      .spyOn(CustomSenderApi, "listSupportInform")
+      .spyOn(msgsenderSdk, "CustomSenderApi_listSupportInform")
       .mockResolvedValue({ data: informMethodList });
   });
 

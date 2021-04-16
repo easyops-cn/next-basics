@@ -3,7 +3,7 @@ import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
 import { Dropdown, Avatar } from "antd";
 import * as brickKit from "@next-core/brick-kit";
-import { UserAdminApi } from "@next-sdk/user-service-sdk";
+import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { AppBar } from "./AppBar";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
@@ -14,7 +14,7 @@ jest.mock("../LaunchpadButton/LaunchpadButton");
 jest.mock("../AppBarBreadcrumb/AppBarBreadcrumb");
 jest.mock("../AppDocumentLink/AppDocumentLink");
 
-(UserAdminApi.getUserInfoV2 as jest.Mock).mockResolvedValue({
+(UserAdminApi_getUserInfoV2 as jest.Mock).mockResolvedValue({
   user_icon: "avatar.png",
 });
 
@@ -40,10 +40,12 @@ const getMicroApps = jest
       id: "cmdb-account-setting",
     },
   ]);
+
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: () => ({
     base_title: "DevOps 管理专家",
   }),
+
   getFeatureFlags,
   getMicroApps,
 } as any);
@@ -108,6 +110,7 @@ describe("AppBar", () => {
     jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({
       username: undefined,
     });
+
     const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
     expect(wrapper.find(Avatar).length).toBe(0);
     expect(wrapper.find(".appBar").childAt(1).find(Link).prop("to")).toBe(
@@ -124,12 +127,14 @@ describe("AppBar", () => {
             text: "First",
             to: "/first",
           },
+
           {
             text: "Second",
           },
         ]}
       />
     );
+
     await act(async () => {
       await (global as any).flushPromises();
     });

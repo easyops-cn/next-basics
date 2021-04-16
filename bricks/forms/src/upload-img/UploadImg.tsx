@@ -16,7 +16,7 @@ import {
 import update from "immutability-helper";
 import styles from "./UploadImg.module.css";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { ObjectStoreApi } from "@next-sdk/object-store-sdk";
+import { ObjectStoreApi_putObject } from "@next-sdk/object-store-sdk";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
@@ -35,6 +35,7 @@ interface UploadImgProps extends FormItemWrapperProps {
     url: string;
     name: string;
   }[];
+
   onChange?: any;
   onRemove?: (file: any) => void;
   value?: UploadImgValue;
@@ -155,6 +156,7 @@ export function RealUploadImg(
             ...newFile,
           },
         ]);
+
         handleValueChange({
           images: [
             {
@@ -169,6 +171,7 @@ export function RealUploadImg(
             [newFileList.length - 1]: { $set: newFile },
           })
         );
+
         handleValueChange({
           images: update(value?.images || [], {
             $push: [
@@ -214,6 +217,7 @@ export function RealUploadImg(
       handleValueChange({
         images: update(value.images, { $splice: [[index, 1]] }),
       });
+
       setImageList(fileList);
     } else if (file.status === "error") {
       setDisabled(false);
@@ -266,6 +270,7 @@ export function RealUploadImg(
           ) : (
             <ImageUpload />
           )}
+
           <div className="ant-upload-text" style={{ marginTop: "-8px" }}>
             上传图片
           </div>
@@ -330,6 +335,7 @@ export function RealUploadImg(
           status: "uploading",
           percent: 0,
         };
+
         const oldList = cloneDeep(imageList);
         handleFilesChange(fileInfo, [...oldList, fileInfo], false);
         const reader = new FileReader();
@@ -341,9 +347,10 @@ export function RealUploadImg(
         // 上传文件
         setDisabled(true);
         try {
-          const response = await ObjectStoreApi.putObject(props.bucketName, {
+          const response = await ObjectStoreApi_putObject(props.bucketName, {
             file: file,
           });
+
           fileInfo.status = "done";
           fileInfo.url = transformResponseToUrl(response.objectName);
           handleFilesChange(fileInfo, [...oldList, fileInfo], true);
@@ -426,6 +433,7 @@ export function RealUploadImg(
       strokeWidth: "1px",
       showInfo: false,
     },
+
     showUploadList: {
       // eslint-disable-next-line react/display-name
       removeIcon: (file: UploadFile): ReactNode =>
@@ -447,6 +455,7 @@ export function RealUploadImg(
           />
         ),
     },
+
     // eslint-disable-next-line react/display-name
     iconRender: (file: UploadFile): ReactNode =>
       file.status === "uploading" ? (
@@ -469,6 +478,7 @@ export function RealUploadImg(
       strokeWidth: "4px",
       showInfo: false,
     },
+
     showUploadList: {
       // eslint-disable-next-line react/display-name
       removeIcon: (file: UploadFile): ReactNode =>
@@ -490,6 +500,7 @@ export function RealUploadImg(
           />
         ),
     },
+
     // eslint-disable-next-line react/display-name
     itemRender: (originNode: ReactElement, file: UploadFile): ReactNode => {
       return cloneFileItemNode(originNode, file);
@@ -510,6 +521,7 @@ export function RealUploadImg(
         props.maxNumber &&
         imageList?.length >= props.maxNumber,
     }),
+
     method: "put",
     action,
     listType: props.listType,
@@ -541,6 +553,7 @@ export function RealUploadImg(
           autoSize={props.autoSize}
         />
       )}
+
       {props.uploadDraggable ? (
         <Upload.Dragger {...uploadProps}>{uploadNode()}</Upload.Dragger>
       ) : (
@@ -548,6 +561,7 @@ export function RealUploadImg(
           {uploadNode()}
         </Upload>
       )}
+
       <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
         <img alt="example" style={{ width: "100%" }} src={previewImage} />
       </Modal>

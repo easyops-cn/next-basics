@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import classNames from "classnames";
 import styles from "./FavoriteDesktopCell.module.css";
-import { LaunchpadApi } from "@next-sdk/user-service-sdk";
+import { LaunchpadApi_ListCollectionResponseItem } from "@next-sdk/user-service-sdk";
 import { launchpadService } from "../LaunchpadService";
 interface FavoriteDesktopCellProps {
-  item: LaunchpadApi.ListCollectionResponseItem;
-  onDelete?: (item: LaunchpadApi.ListCollectionResponseItem) => void;
+  item: LaunchpadApi_ListCollectionResponseItem;
+  onDelete?: (item: LaunchpadApi_ListCollectionResponseItem) => void;
 }
 
 export function FavoriteDesktopCell({

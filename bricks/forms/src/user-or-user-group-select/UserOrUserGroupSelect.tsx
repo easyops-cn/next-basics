@@ -8,7 +8,7 @@ import React, {
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, Button, Divider } from "antd";
 import styles from "./UserOrUserGroupSelect.module.css";
-import { InstanceApi } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import {
   zipObject,
   map,
@@ -77,6 +77,7 @@ export function LegacyUserSelectFormItem(
   const userGroupShowKey: string[] = getInstanceNameKeys(
     props.objectMap["USER_GROUP"]
   );
+
   const getLabel = (
     objectId: "USER" | "USER_GROUP",
     instanceData: any
@@ -109,10 +110,12 @@ export function LegacyUserSelectFormItem(
       filter(selectedValue, (item) => !item.key.startsWith(":")),
       "key"
     );
+
     const userGroupOfSelectedValue = map(
       filter(selectedValue, (item) => item.key.startsWith(":")),
       "key"
     );
+
     return (
       !isEqual([...userOfValues].sort(), [...userOfSelectedValue].sort()) ||
       !isEqual(
@@ -158,6 +161,7 @@ export function LegacyUserSelectFormItem(
         const user = compact(
           uniq([].concat(staticKeys.user).concat(props.value.selectedUser))
         );
+
         const userGroup = compact(
           uniq(
             []
@@ -165,6 +169,7 @@ export function LegacyUserSelectFormItem(
               .concat(props.value.selectedUserGroup)
           )
         );
+
         if (
           (staticKeys.user &&
             some(
@@ -185,12 +190,13 @@ export function LegacyUserSelectFormItem(
         const staticValueToSet = [];
         if (user.length && props.optionsMode !== "group") {
           selectedUser = (
-            await InstanceApi.postSearch("USER", {
+            await InstanceApi_postSearch("USER", {
               query: {
                 name: {
                   $in: user,
                 },
               },
+
               page: 1,
               page_size: user.length,
               fields: {
@@ -198,6 +204,7 @@ export function LegacyUserSelectFormItem(
                   userShowKey,
                   map(userShowKey, (v) => true)
                 ),
+
                 name: true,
               },
             })
@@ -205,13 +212,14 @@ export function LegacyUserSelectFormItem(
         }
         if (userGroup.length && props.optionsMode !== "user") {
           selectedUserGroup = (
-            await InstanceApi.postSearch("USER_GROUP", {
+            await InstanceApi_postSearch("USER_GROUP", {
               query: {
                 instanceId: {
                   // 默认带为":"+instanceId，这里查询的时候去掉前面的冒号
                   $in: map(userGroup, (v) => v.slice(1)),
                 },
               },
+
               page: 1,
               page_size: userGroup.length,
               fields: {
@@ -219,6 +227,7 @@ export function LegacyUserSelectFormItem(
                   userGroupShowKey,
                   map(userGroupShowKey, (v) => true)
                 ),
+
                 name: true,
               },
             })
@@ -233,6 +242,7 @@ export function LegacyUserSelectFormItem(
                 ? getStaticLabel(labelText)
                 : labelText,
             };
+
             if (props.staticList?.includes(v.name)) {
               staticValueToSet.push(result);
             }
@@ -246,16 +256,19 @@ export function LegacyUserSelectFormItem(
                 ? getStaticLabel(labelText)
                 : labelText,
             };
+
             if (props.staticList?.includes(":" + v.instanceId)) {
               staticValueToSet.push(result);
             }
             return result;
           }),
         ];
+
         labelValue = [
           ...staticValueToSet,
           ...filter(labelValue, (v) => !props.staticList?.includes(v.key)),
         ];
+
         setSelectedValue(labelValue);
         staticValue.current = staticValueToSet;
       }
@@ -271,7 +284,7 @@ export function LegacyUserSelectFormItem(
   ) => {
     const showKey = objectId === "USER" ? userShowKey : userGroupShowKey;
     return (
-      await InstanceApi.postSearch(objectId, {
+      await InstanceApi_postSearch(objectId, {
         page: 1,
         page_size: 20,
         fields: {
@@ -279,14 +292,17 @@ export function LegacyUserSelectFormItem(
             showKey,
             map(showKey, (v) => true)
           ),
+
           name: true,
         },
+
         query: props.query
           ? props.query
           : {
               $or: map(uniq([...showKey, "name"]), (v) => ({
                 [v]: { $like: `%${keyword}%` },
               })),
+
               ...(props.hideInvalidUser
                 ? {
                     state: "valid",
@@ -319,6 +335,7 @@ export function LegacyUserSelectFormItem(
       ...(props.optionsMode !== "group" ? [searchUser(value)] : []),
       ...(props.optionsMode !== "user" ? [searchUserGroup(value)] : []),
     ]);
+
     setFetching(false);
   };
 
@@ -335,6 +352,7 @@ export function LegacyUserSelectFormItem(
         }),
         "key"
       ),
+
       selectedUserGroup: map(
         filter(value, (v) => {
           return startsWith(v.key, ":");
@@ -342,6 +360,7 @@ export function LegacyUserSelectFormItem(
         "key"
       ),
     };
+
     triggerChange(resultValue);
     if (searchValue !== "") {
       searchUserOrUserGroupInstances("");
@@ -396,6 +415,7 @@ export function LegacyUserSelectFormItem(
       [...selectedValue, ...labelValue],
       "key"
     );
+
     setSelectedValue(resultSelectedValue);
     const resultValue = {
       selectedUser: map(
@@ -404,6 +424,7 @@ export function LegacyUserSelectFormItem(
         }),
         "key"
       ),
+
       selectedUserGroup: map(
         filter(resultSelectedValue, (v) => {
           return startsWith(v.key, ":");
@@ -411,13 +432,14 @@ export function LegacyUserSelectFormItem(
         "key"
       ),
     };
+
     triggerChange(resultValue);
   };
 
   const handleModalSelected = async (selectedKeys: string[]) => {
     if (selectedKeys?.length) {
       const instances = (
-        await InstanceApi.postSearch(modalObjectId, {
+        await InstanceApi_postSearch(modalObjectId, {
           query: { instanceId: { $in: selectedKeys } },
           fields: { "*": true },
           page_size: selectedKeys.length,
@@ -451,12 +473,13 @@ export function LegacyUserSelectFormItem(
       return;
     }
     const myUser = (
-      await InstanceApi.postSearch("USER", {
+      await InstanceApi_postSearch("USER", {
         query: {
           name: {
             $eq: myUserName,
           },
         },
+
         page: 1,
         page_size: 1,
         fields: {
@@ -464,6 +487,7 @@ export function LegacyUserSelectFormItem(
             userShowKey,
             map(userShowKey, (v) => true)
           ),
+
           name: true,
         },
       })
@@ -524,6 +548,7 @@ export function LegacyUserSelectFormItem(
             )}
           </Select.OptGroup>
         )}
+
         {props.optionsMode !== "user" && (
           <Select.OptGroup label="用户组（仅显示前20项，更多结果请搜索）">
             {userGroupList.length > 0 ? (
@@ -556,6 +581,7 @@ export function LegacyUserSelectFormItem(
             <GeneralIcon icon={{ lib: "easyops", icon: "quick-add-me" }} />
           </Button>
         )}
+
         {!props.hideAddMeQuickly &&
           props.optionsMode !== "group" &&
           !props.hideSelectByCMDB && <Divider type="vertical" />}

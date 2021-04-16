@@ -1,4 +1,8 @@
-import { InstanceApi, InstanceGraphApi } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceApi_postSearch,
+  InstanceApi_getDetail,
+  InstanceGraphApi_traverseGraphV2,
+} from "@next-sdk/cmdb-sdk";
 import { symbolForNodeId, symbolForNodeInstanceId } from "./buildStoryboard";
 import {
   StoryboardAssemblyParams,
@@ -8,8 +12,8 @@ import { minimalStoryboardAssembly } from "./minimalStoryboardAssembly";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
-(InstanceApi.postSearch as jest.MockedFunction<
-  typeof InstanceApi.postSearch
+(InstanceApi_postSearch as jest.MockedFunction<
+  typeof InstanceApi_postSearch
 >).mockImplementation((modelId) => {
   switch (modelId) {
     case "STORYBOARD_ROUTE":
@@ -27,6 +31,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             _ts: 123,
             org: 1,
           },
+
           {
             id: "R-02",
             instanceId: "instance-r02",
@@ -35,6 +40,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             permissionsPreCheck:
               '["<% `cmdb:${QUERY.objectId}_instance_create` %>"]',
           },
+
           {
             id: "R-03",
             instanceId: "instance-r03",
@@ -42,6 +48,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             type: "bricks",
             parent: [{ id: "R-02" }],
           },
+
           {
             id: "R-04",
             instanceId: "instance-r04",
@@ -50,6 +57,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             parent: [{ id: "B-01" }],
             mountPoint: "m2",
           },
+
           {
             id: "R-05",
             instanceId: "instance-r05",
@@ -60,6 +68,7 @@ jest.mock("@next-sdk/cmdb-sdk");
           },
         ],
       });
+
     case "STORYBOARD_BRICK":
       return Promise.resolve({
         list: [
@@ -72,6 +81,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             if: "false",
             lifeCycle: undefined,
           },
+
           {
             id: "B-02",
             instanceId: "instance-b02",
@@ -79,6 +89,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             brick: "n",
             parent: [{ id: "R-01" }],
           },
+
           {
             id: "B-03",
             instanceId: "instance-b03",
@@ -86,6 +97,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             brick: "o",
             parent: [{ id: "R-03" }],
           },
+
           {
             id: "B-04",
             instanceId: "instance-b04",
@@ -94,6 +106,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             parent: [{ id: "B-01" }],
             mountPoint: "m1",
           },
+
           {
             id: "B-05",
             instanceId: "instance-b05",
@@ -102,6 +115,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             parent: [{ id: "B-01" }],
             mountPoint: "m1",
           },
+
           {
             // This brick's parent not found.
             id: "T-01",
@@ -110,6 +124,7 @@ jest.mock("@next-sdk/cmdb-sdk");
             brick: "t1",
             parent: [{ id: "R-00" }],
           },
+
           {
             // This brick's grand-parent not found.
             id: "T-02",
@@ -123,8 +138,8 @@ jest.mock("@next-sdk/cmdb-sdk");
   }
 });
 
-const mockTraverseGraphV2 = (InstanceGraphApi.traverseGraphV2 as jest.MockedFunction<
-  typeof InstanceGraphApi.traverseGraphV2
+const mockTraverseGraphV2 = (InstanceGraphApi_traverseGraphV2 as jest.MockedFunction<
+  typeof InstanceGraphApi_traverseGraphV2
 >).mockImplementation(() =>
   Promise.resolve({
     topic_vertices: [
@@ -141,11 +156,13 @@ const mockTraverseGraphV2 = (InstanceGraphApi.traverseGraphV2 as jest.MockedFunc
               },
             },
           },
+
           null,
           2
         ),
       },
     ],
+
     vertices: [
       {
         instanceId: "b",
@@ -153,6 +170,7 @@ const mockTraverseGraphV2 = (InstanceGraphApi.traverseGraphV2 as jest.MockedFunc
         type: "brick",
         brick: "z",
       },
+
       {
         instanceId: "c",
         id: "T-B-02",
@@ -161,6 +179,7 @@ const mockTraverseGraphV2 = (InstanceGraphApi.traverseGraphV2 as jest.MockedFunc
         ref: "two",
         mountPoint: "m5",
       },
+
       {
         instanceId: "d",
         id: "T-B-03",
@@ -169,17 +188,20 @@ const mockTraverseGraphV2 = (InstanceGraphApi.traverseGraphV2 as jest.MockedFunc
         mountPoint: "m6",
       },
     ],
+
     edges: [
       {
         in: "b",
         out: "a",
         out_name: "children",
       },
+
       {
         in: "c",
         out: "b",
         out_name: "children",
       },
+
       {
         in: "d",
         out: "c",
@@ -189,8 +211,8 @@ const mockTraverseGraphV2 = (InstanceGraphApi.traverseGraphV2 as jest.MockedFunc
   })
 );
 
-const mockGetDetail = InstanceApi.getDetail as jest.MockedFunction<
-  typeof InstanceApi.getDetail
+const mockGetDetail = InstanceApi_getDetail as jest.MockedFunction<
+  typeof InstanceApi_getDetail
 >;
 
 describe("minimalStoryboardAssembly", () => {
@@ -223,6 +245,7 @@ describe("minimalStoryboardAssembly", () => {
                         [symbolForNodeInstanceId]: "instance-b04",
                         brick: "p",
                       },
+
                       {
                         [symbolForNodeId]: "B-05",
                         [symbolForNodeInstanceId]: "instance-b05",
@@ -230,6 +253,7 @@ describe("minimalStoryboardAssembly", () => {
                       },
                     ],
                   },
+
                   m2: {
                     type: "routes",
                     routes: [
@@ -239,6 +263,7 @@ describe("minimalStoryboardAssembly", () => {
                         type: "bricks",
                         bricks: [],
                       },
+
                       {
                         [symbolForNodeId]: "R-05",
                         path: "/a/e",
@@ -249,6 +274,7 @@ describe("minimalStoryboardAssembly", () => {
                   },
                 },
               },
+
               {
                 [symbolForNodeId]: "B-02",
                 [symbolForNodeInstanceId]: "instance-b02",
@@ -256,6 +282,7 @@ describe("minimalStoryboardAssembly", () => {
               },
             ],
           },
+
           {
             [symbolForNodeId]: "R-02",
             path: "/b",
@@ -263,6 +290,7 @@ describe("minimalStoryboardAssembly", () => {
             permissionsPreCheck: [
               "<% `cmdb:${QUERY.objectId}_instance_create` %>",
             ],
+
             routes: [
               {
                 [symbolForNodeId]: "R-03",
@@ -279,6 +307,7 @@ describe("minimalStoryboardAssembly", () => {
             ],
           },
         ],
+
         meta: {
           customTemplates: [
             {
@@ -292,6 +321,7 @@ describe("minimalStoryboardAssembly", () => {
                   },
                 },
               },
+
               bricks: [
                 {
                   [symbolForNodeId]: "T-B-01",
