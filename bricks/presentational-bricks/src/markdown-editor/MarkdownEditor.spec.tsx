@@ -7,11 +7,11 @@ import {
   MarkdownEditorItem,
   MarkdownEditorItemWrapper,
 } from "./MarkdownEditor";
-import { ObjectStoreApi } from "@next-sdk/object-store-sdk";
+import * as objectStoreSdk from "@next-sdk/object-store-sdk";
 import { act } from "react-dom/test-utils";
 
 jest.mock("@next-sdk/object-store-sdk");
-jest.spyOn(ObjectStoreApi, "putObject").mockResolvedValue({
+jest.spyOn(objectStoreSdk, "ObjectStoreApi_putObject").mockResolvedValue({
   objectName: "image.png",
 });
 
