@@ -88,6 +88,11 @@
       "matchPackagePatterns": ["^@next-core/"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "groupName": "sdk packages",
+      "matchPackagePatterns": ["^@next-sdk/", "^@sdk/"],
+      "automerge": false
     }
   ],
   "postUpdateOptions": ["yarnDedupeHighest"]
