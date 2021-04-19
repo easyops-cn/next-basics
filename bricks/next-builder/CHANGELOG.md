@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.48.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.48.0...@next-bricks/next-builder@1.48.1) (2021-04-19)
+
+
+### Bug Fixes
+
+* migrated usage of sdk ([d164702](https://github.com/easyops-cn/next-basics/commit/d164702c31ddaa1dd57dc81669f87431351c466b))
+
+
+
+
+
 # [1.48.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.47.0...@next-bricks/next-builder@1.48.0) (2021-04-12)
 
 

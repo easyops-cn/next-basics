@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.116.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.2...@next-bricks/basic-bricks@1.116.3) (2021-04-19)
+
+
+### Bug Fixes
+
+* migrated usage of sdk ([d164702](https://github.com/easyops-cn/next-basics/commit/d164702c31ddaa1dd57dc81669f87431351c466b))
+
+
+
+
+
 ## [1.116.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.1...@next-bricks/basic-bricks@1.116.2) (2021-04-12)
 
 

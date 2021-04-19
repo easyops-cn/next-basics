@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.180.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.2...@next-bricks/presentational-bricks@1.180.3) (2021-04-19)
+
+
+### Bug Fixes
+
+* migrated usage of sdk ([d164702](https://github.com/easyops-cn/next-basics/commit/d164702c31ddaa1dd57dc81669f87431351c466b))
+
+
+
+
+
 ## [1.180.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.1...@next-bricks/presentational-bricks@1.180.2) (2021-04-12)
 
 
