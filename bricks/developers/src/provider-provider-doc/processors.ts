@@ -28,6 +28,7 @@ export async function providerDoc(
   const snakeServiceId = changeCase.snakeCase(serviceId);
   const snakeModelId = changeCase.snakeCase(modelId);
   const camelApiId = changeCase.camelCase(apiId);
+  const fullApiId = `${changeCase.pascalCase(snakeModelId)}Api_${camelApiId}`;
   const moduleName = `"api/${snakeServiceId}/${snakeModelId}/${camelApiId}.d"`;
 
   const doc: ProjectReflection = await http.get(
@@ -41,7 +42,7 @@ export async function providerDoc(
     (item) => item.name === moduleName
   ) as ContainerReflection;
   const refVariable = refModule.children.find(
-    (item) => item.kindString === "Variable" && item.name === camelApiId
+    (item) => item.kindString === "Variable" && item.name === fullApiId
   ) as DeclarationReflection;
   const tags = getTags(
     get(refVariable, ["comment", "tags"], []) as Record<string, any>[]

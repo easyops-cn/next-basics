@@ -162,7 +162,7 @@ export default {
         },
         {
           id: 6141,
-          name: "clone",
+          name: "DesktopApi_clone",
           kind: 32,
           kindString: "Variable",
           flags: {
@@ -412,7 +412,7 @@ export default {
         },
         {
           id: 6152,
-          name: "getAppDependencies",
+          name: "DesktopApi_getAppDependencies",
           kind: 32,
           kindString: "Variable",
           flags: {
@@ -674,7 +674,7 @@ export default {
         },
         {
           id: 6164,
-          name: "getTaskStatus",
+          name: "DesktopApi_getTaskStatus",
           kind: 32,
           kindString: "Variable",
           flags: {
@@ -936,7 +936,7 @@ export default {
         },
         {
           id: 6175,
-          name: "installApp",
+          name: "DesktopApi_installApp",
           kind: 32,
           kindString: "Variable",
           flags: {
@@ -1146,7 +1146,7 @@ export default {
         },
         {
           id: 6185,
-          name: "runningTasks",
+          name: "DesktopApi_runningTasks",
           kind: 32,
           kindString: "Variable",
           flags: {
@@ -1370,7 +1370,7 @@ export default {
         },
         {
           id: 6195,
-          name: "uninstallApp",
+          name: "DesktopApi_uninstallApp",
           kind: 32,
           kindString: "Variable",
           flags: {
@@ -1486,7 +1486,7 @@ export default {
       children: [
         {
           id: 6202,
-          name: "importModels",
+          name: "OrgApi_importModels",
           kind: 32,
           kindString: "Variable",
           flags: {
@@ -1602,7 +1602,7 @@ export default {
       children: [
         {
           id: 6207,
-          name: "registerOrg",
+          name: "OrgApi_registerOrg",
           kind: 32,
           kindString: "Variable",
           flags: {
