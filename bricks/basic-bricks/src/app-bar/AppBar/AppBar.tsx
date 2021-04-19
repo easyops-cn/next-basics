@@ -7,12 +7,13 @@ import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { getAuth, getHistory, getRuntime } from "@next-core/brick-kit";
 import { Link } from "@next-libs/basic-components";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
+import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
 import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
 import { AppBarBreadcrumb } from "../AppBarBreadcrumb/AppBarBreadcrumb";
 import { AppDocumentLink } from "../AppDocumentLink/AppDocumentLink";
-
 import styles from "./AppBar.module.css";
+import { processLiscenseExpires } from "../License-notification/LicenseNotification";
 
 interface AppBarProps {
   pageTitle: string;
@@ -35,6 +36,11 @@ export function AppBar({
 
   const ssoEnabled = React.useMemo(
     () => getRuntime().getFeatureFlags()["sso-enabled"],
+    []
+  );
+
+  const licenseInfoEnabled = React.useMemo(
+    () => getRuntime().getFeatureFlags()["license-expires-detection"],
     []
   );
 
@@ -71,6 +77,19 @@ export function AppBar({
       }
     })();
   }, [username]);
+
+  React.useEffect(() => {
+    (async () => {
+      if (licenseInfoEnabled) {
+        try {
+          const { expires } = await CustomerApi_getExpiration();
+          processLiscenseExpires(expires);
+        } catch (error) {
+          // eslint-disable-next-line no-empty
+        }
+      }
+    })();
+  }, []);
 
   const avatarProps: AvatarProps = {
     size: "small",

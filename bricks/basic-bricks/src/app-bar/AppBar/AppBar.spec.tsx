@@ -4,12 +4,14 @@ import { shallow, mount } from "enzyme";
 import { Dropdown, Avatar } from "antd";
 import * as brickKit from "@next-core/brick-kit";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
+import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
 import { Link } from "@next-libs/basic-components";
 import { AppBar } from "./AppBar";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
 import { UserOutlined } from "@ant-design/icons";
 
 jest.mock("@next-sdk/user-service-sdk");
+jest.mock("@next-sdk/air-admin-service-sdk");
 jest.mock("../LaunchpadButton/LaunchpadButton");
 jest.mock("../AppBarBreadcrumb/AppBarBreadcrumb");
 jest.mock("../AppDocumentLink/AppDocumentLink");
@@ -153,5 +155,16 @@ describe("AppBar", () => {
     getFeatureFlags.mockReturnValueOnce({ "hide-launchpad-button": true });
     const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
     expect(wrapper.find(LaunchpadButton).length).toBe(0);
+  });
+
+  it("should detect license expires", async () => {
+    getFeatureFlags.mockImplementation(() => ({
+      "license-expires-detection": true,
+    }));
+    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    expect(CustomerApi_getExpiration).toHaveBeenCalled();
   });
 });
