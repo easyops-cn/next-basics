@@ -1,7 +1,11 @@
 import { DesktopData, MicroApp } from "@next-core/brick-types";
-import { launchpadService, LaunchpadService } from "./LaunchpadService";
-import { getRuntime } from "@next-core/brick-kit";
-import * as sdk from "@next-sdk/user-service-sdk";
+import { LaunchpadService } from "./LaunchpadService";
+import {
+  LaunchpadApi_listCollection,
+  LaunchpadApi_createCollection,
+  LaunchpadApi_deleteCollection,
+} from "@next-sdk/user-service-sdk";
+
 jest.mock("@next-sdk/user-service-sdk");
 
 const listCollectionData = [
@@ -61,15 +65,15 @@ const listCollectionData = [
     customItemId: "",
   },
 ];
-const spyOnListCollection = jest
-  .spyOn(sdk, "LaunchpadApi_listCollection")
-  .mockReturnValue({
+const spyOnListCollection = (LaunchpadApi_listCollection as jest.Mock).mockReturnValue(
+  {
     list: listCollectionData,
-  });
+  }
+);
 
 spyOnListCollection.mock;
-const spyOnCreateCollection = jest.spyOn(sdk, "LaunchpadApi_createCollection");
-const spyOnDeleteCollection = jest.spyOn(sdk, "LaunchpadApi_deleteCollection");
+const spyOnCreateCollection = LaunchpadApi_createCollection as jest.Mock;
+const spyOnDeleteCollection = LaunchpadApi_deleteCollection as jest.Mock;
 
 jest.mock("@next-core/brick-kit", () => {
   return {
