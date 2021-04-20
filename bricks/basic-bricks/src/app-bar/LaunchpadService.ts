@@ -10,7 +10,6 @@ import {
   LaunchpadApi_CreateCollectionRequestBody,
   LaunchpadApi_createCollection,
   LaunchpadApi_deleteCollection,
-  UserServiceModels,
 } from "@next-sdk/user-service-sdk";
 import { getRuntime } from "@next-core/brick-kit";
 import { pick } from "lodash";

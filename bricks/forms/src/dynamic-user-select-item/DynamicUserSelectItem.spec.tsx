@@ -2,7 +2,10 @@ import React from "react";
 import { mount } from "enzyme";
 import { Select } from "antd";
 import { RowFormItem } from "./DynamicUserSelectItem";
-import * as cmdbSdk from "@next-sdk/cmdb-sdk";
+import {
+  CmdbObjectApi_getObjectRef,
+  CmdbObjectApi_getObjectRelationRelatedKey,
+} from "@next-sdk/cmdb-sdk";
 import { columns } from "./";
 import { act } from "react-dom/test-utils";
 
@@ -22,7 +25,7 @@ const props = {
   batchChange: batchChangeMock,
 };
 
-jest.spyOn(cmdbSdk, "CmdbObjectApi_getObjectRef").mockResolvedValue({
+(CmdbObjectApi_getObjectRef as jest.Mock).mockResolvedValue({
   data: [
     {
       name: "应用",
@@ -42,17 +45,16 @@ jest.spyOn(cmdbSdk, "CmdbObjectApi_getObjectRef").mockResolvedValue({
     },
   ],
 } as any);
-jest
-  .spyOn(cmdbSdk, "CmdbObjectApi_getObjectRelationRelatedKey")
-  .mockResolvedValue({
-    data: [
-      {
-        reverseQueryKey: "111",
-        id: "111",
-        label: "1111",
-      },
-    ],
-  } as any);
+
+(CmdbObjectApi_getObjectRelationRelatedKey as jest.Mock).mockResolvedValue({
+  data: [
+    {
+      reverseQueryKey: "111",
+      id: "111",
+      label: "1111",
+    },
+  ],
+} as any);
 
 describe("DynamicUserSelectItem", () => {
   it("should work", async () => {

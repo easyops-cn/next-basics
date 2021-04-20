@@ -1,8 +1,7 @@
 import React from "react";
-import { render } from "@testing-library/react";
 import { shallow } from "enzyme";
 
-import * as cmdbSdk from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { FormItemWrapper } from "@next-libs/forms";
 
 import { CmdbInstanceSelectPanelWrapper } from "./CmdbInstanceSelectPanelWrapper";
@@ -27,7 +26,7 @@ describe("CmdbInstanceSelectPanel", () => {
   };
 
   it("should work", () => {
-    jest.spyOn(cmdbSdk, "InstanceApi_postSearch").mockResolvedValue({
+    (InstanceApi_postSearch as jest.Mock).mockResolvedValue({
       list: [
         {
           instanceId: "5c6d122b3c85f",
