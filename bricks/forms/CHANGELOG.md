@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.158.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.158.4...@next-bricks/forms@1.158.5) (2021-04-21)
+
+
+### Bug Fixes
+
+* cmdb属性构件,应该传出布尔值而不是字符串的true/false ([2759239](https://github.com/easyops-cn/next-basics/commit/2759239228f104fd4a2d1e98f0c71173ba3558e8))
+
+
+
+
+
 ## [1.158.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.158.3...@next-bricks/forms@1.158.4) (2021-04-19)
 
 
