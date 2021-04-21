@@ -14,7 +14,7 @@ describe("ObjectAttrBool", () => {
       onChange: jest.fn(),
     };
     const wrapper = mount(<ObjectAttrBool {...props} />);
-    expect(wrapper.find(Select).at(0).props().value).toBe("true");
+    expect(wrapper.find(Select).at(0).props().value).toBeTruthy();
   });
 
   it("should change default", () => {
@@ -26,7 +26,7 @@ describe("ObjectAttrBool", () => {
     wrapper.find(Select).at(0).invoke("onChange")("false", null);
     expect(props.onChange).toBeCalledWith({
       ...defaultValue,
-      default: "false",
+      default: false,
     });
   });
 });

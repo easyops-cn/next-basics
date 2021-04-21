@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Input, Row, Select } from "antd";
-import { isNil } from "lodash";
+import { isNil, toString } from "lodash";
 
 interface ObjectAttrBoolProps {
   value: any;
@@ -10,12 +10,12 @@ interface ObjectAttrBoolProps {
 }
 
 interface BoolValueType {
-  default: string;
+  default: boolean;
 }
 
 export function ObjectAttrBool(props: ObjectAttrBoolProps): React.ReactElement {
   const [value, setValue] = React.useState<BoolValueType>({
-    default: "",
+    default: undefined,
   });
 
   React.useEffect(() => {
@@ -34,9 +34,14 @@ export function ObjectAttrBool(props: ObjectAttrBoolProps): React.ReactElement {
         <Row>
           <Select
             allowClear
-            value={value?.default}
+            value={toString(value?.default)}
             style={{ width: "100%" }}
-            onChange={(e) => handleValueChange({ ...value, default: e })}
+            onChange={(e) =>
+              handleValueChange({
+                ...value,
+                default: e === "true" ? true : false,
+              })
+            }
           >
             <Select.Option key={0} value="true">
               true
