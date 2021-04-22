@@ -1,7 +1,9 @@
 import React from "react";
 import moment from "moment";
 import { JsonStorage } from "@next-libs/storage";
-import { notification, Button } from "antd";
+import { handleHttpError, getAuth } from "@next-core/brick-kit";
+import { CustomerApi_setOrgUpdating } from "@next-sdk/air-admin-service-sdk";
+import { notification, Button, message } from "antd";
 import styles from "./LicenseInfo.module.css";
 
 export const LICENSE_INFO = "license-info";
@@ -18,8 +20,17 @@ export function notificationFactory(expires: number) {
     notification.close(LICENSE_INFO);
   };
 
-  const handleDelay = () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const handleDelay = async () => {
+    const { org } = getAuth();
+    try {
+      await CustomerApi_setOrgUpdating({
+        orgId: org,
+      });
+      message.success("已申请延期");
+      notification.close(LICENSE_INFO);
+    } catch (err) {
+      handleHttpError(err);
+    }
   };
 
   const renderBtn = () => {
