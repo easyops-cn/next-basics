@@ -17,6 +17,15 @@ const locale: Locale = {
   [K.ICON]: "Icon",
   [K.CLEAR]: "Clear",
   [K.COPY_SUCCESS]: "Copy success",
+  [K.USERS]: "Users",
+  [K.USER_GROUPS]: "User groups",
+  [K.SWITCH]: "Switch to {{type}}",
+  [K.FILTER_FROM_CMDB]: "Filter {{type}} from CMDB",
+  [K.USERS_RESULT_LABEL]:
+    "Users (only display the top 20 items, please search for more results)",
+  [K.USER_GROUPS_RESULT_LABEL]:
+    "User groups (only display the top 20 items, please search for more results)",
+  [K.NO_DATA]: "No Data",
 };
 
 export default locale;
