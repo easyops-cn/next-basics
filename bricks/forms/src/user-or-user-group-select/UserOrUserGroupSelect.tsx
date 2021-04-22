@@ -31,6 +31,8 @@ import { getInstanceNameKeys } from "@next-libs/cmdb-utils";
 import { InstanceListModal } from "@next-libs/cmdb-instances";
 import { getAuth } from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
+import { useTranslation } from "react-i18next";
+import { NS_FORMS, K } from "../i18n/constants";
 
 export type UserOrUserGroupSelectValue = {
   selectedUser: string[];
@@ -77,6 +79,8 @@ export function LegacyUserSelectFormItem(
   const userGroupShowKey: string[] = getInstanceNameKeys(
     props.objectMap["USER_GROUP"]
   );
+
+  const { t } = useTranslation(NS_FORMS);
 
   const getLabel = (
     objectId: "USER" | "USER_GROUP",
@@ -456,10 +460,14 @@ export function LegacyUserSelectFormItem(
 
   const title = (
     <div>
-      从 CMDB 中筛选{modalObjectId === "USER" ? "用户" : "用户组"}{" "}
+      {t(K.FILTER_FROM_CMDB, {
+        type: modalObjectId === "USER" ? t(K.USERS) : t(K.USER_GROUPS),
+      })}{" "}
       {props.optionsMode === "all" && (
         <Button type="link" onClick={toggleObjectId}>
-          切换{modalObjectId === "USER" ? "用户组" : "用户"}{" "}
+          {t(K.SWITCH, {
+            type: modalObjectId === "USER" ? t(K.USER_GROUPS) : t(K.USERS),
+          })}{" "}
         </Button>
       )}
     </div>
@@ -532,7 +540,7 @@ export function LegacyUserSelectFormItem(
         loading={fetching}
       >
         {props.optionsMode !== "group" && (
-          <Select.OptGroup label="用户（仅显示前20项，更多结果请搜索）">
+          <Select.OptGroup label={t(K.USERS_RESULT_LABEL)}>
             {userList.length > 0 ? (
               userList.map((d) => (
                 <Select.Option value={d.name} key={d.name}>
@@ -543,14 +551,14 @@ export function LegacyUserSelectFormItem(
               ))
             ) : (
               <Select.Option value="empty-user" key="empty-user" disabled>
-                暂无数据
+                {t(K.NO_DATA)}
               </Select.Option>
             )}
           </Select.OptGroup>
         )}
 
         {props.optionsMode !== "user" && (
-          <Select.OptGroup label="用户组（仅显示前20项，更多结果请搜索）">
+          <Select.OptGroup label={t(K.USER_GROUPS_RESULT_LABEL)}>
             {userGroupList.length > 0 ? (
               userGroupList.map((d) => (
                 <Select.Option value={d.instanceId} key={d.instanceId}>
@@ -565,7 +573,7 @@ export function LegacyUserSelectFormItem(
                 key="empty-user-group"
                 disabled
               >
-                暂无数据
+                {t(K.NO_DATA)}
               </Select.Option>
             )}
           </Select.OptGroup>
