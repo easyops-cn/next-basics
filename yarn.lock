@@ -2380,12 +2380,7 @@
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.4.tgz#741ec93df98ed5b797f4cbfc2bd83233d2248851"
   integrity sha512-KdpVyzvyLWQdYJVgq9zxG1ceIZ1wNb0ZdMIyNTH1x4Bwiydo+N2T/0RVPhii05WiVvmYcMcDzr/HUiMRjrUzwA==
 
-"@next-sdk/auth-sdk@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.0.1.tgz#dc217556d6eddee4c143b419a25d7b3972fb06e2"
-  integrity sha1-3CF1Vtbt3uTBQ7QZol17OXL7BuI=
-
-"@next-sdk/auth-sdk@^1.2.0":
+"@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.2.0.tgz#283bdf72676280bf73d20807f8784318eace5e99"
   integrity sha512-LwLFU5vkY81jQeYPYW6pyFpRoyE/YWrBgFf0+yj5Dh35sgN/2i/ptJ6grXJlD49DEQ+EtNaR6Xu8sFdOJNAYpQ==
@@ -9729,10 +9724,10 @@ marked@^1.1.1, marked@^1.2.8:
   resolved "https://registry.npmjs.org/marked/-/marked-1.2.9.tgz#53786f8b05d4c01a2a5a76b7d1ec9943d29d72dc"
   integrity sha1-U3hviwXUwBoqWna30eyZQ9Kdctw=
 
-marked@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/marked/-/marked-2.0.1.tgz#5e7ed7009bfa5c95182e4eb696f85e948cefcee3"
-  integrity sha1-Xn7XAJv6XJUYLk62lvhelIzvzuM=
+marked@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/marked/-/marked-2.0.3.tgz#3551c4958c4da36897bda2a16812ef1399c8d6b0"
+  integrity sha512-5otztIIcJfPc2qGTN8cVtOJEjNJZ0jwa46INMagrYfk0EvqtRuEHLsEe0LrFS0/q+ZRKT0+kXK7P2T1AN5lWRA==
 
 material-colors@^1.2.1:
   version "1.2.6"
