@@ -37,3 +37,10 @@
   align-items: center;
   flex-wrap: nowrap;
 }
+
+.dropdownMenuItem {
+  color: var(--text-color-default);
+  &:hover {
+    background-color: var(--theme-blue-background);
+  }
+}

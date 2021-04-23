@@ -2033,7 +2033,7 @@
   resolved "https://registry.npmjs.org/@next-core/brick-http/-/brick-http-2.2.7.tgz#3a036b476a1ac6a8c4b0b19a0b19815e2716ecb9"
   integrity sha1-OgNrR2oaxqjEsLGaCxmBXicW7Lk=
 
-"@next-core/brick-icons@^2.14.0", "@next-core/brick-icons@^2.7.3":
+"@next-core/brick-icons@^2.14.0":
   version "2.14.0"
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.14.0.tgz#b2a8a8faa02ae40d6ff83f2e92f3f0fa854b4705"
   integrity sha512-o82UbDsr9uze5nvKeGJwrh57vEklEGgx7/x2NBP5PF/wMJKPfVgAqhk5P1po/0q1+Fah6EDBfyd3CK923ATy2Q==

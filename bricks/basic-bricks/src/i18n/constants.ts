@@ -11,6 +11,8 @@ export enum K {
   BRICK_ERROR = "BRICK_ERROR",
   LEGACY_TEMPLATE_ERROR = "LEGACY_TEMPLATE_ERROR",
   HELP = "HELP",
+  CHINESE = "CHINESE",
+  ENGLISH = "ENGLISH",
 }
 
 export type Locale = { [key in K]: string };
