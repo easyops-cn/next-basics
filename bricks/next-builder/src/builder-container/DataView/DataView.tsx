@@ -14,7 +14,6 @@ import {
   UseProviderResolveConf,
 } from "@next-core/brick-types";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
-import styles from "./DataView.module.css";
 import { findIndex, uniqueId, escape } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
@@ -24,6 +23,9 @@ import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { searchList } from "../utils/utils";
 import { safeDumpFields, ContextType } from "./utils";
 import { findQueryInNode } from "../utils/findQueryInNode";
+
+import styles from "./DataView.module.css";
+import sharedStyles from "../shared.module.css";
 
 const symbolId = Symbol("uid");
 
@@ -218,7 +220,9 @@ export function DataView({
         >
           {t(K.ADD_DATA)}
         </Button>
-        <div className={styles.varList}>
+        <div
+          className={`${styles.varList} ${sharedStyles.customScrollbarContainer}`}
+        >
           {filteredContextList?.length > 0 &&
             filteredContextList.map((data, index) => (
               <ContextItem

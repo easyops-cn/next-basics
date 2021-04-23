@@ -13,6 +13,7 @@ import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { findQueryInNode } from "../utils/findQueryInNode";
 
 import styles from "./StoryboardTreeView.module.css";
+import sharedStyles from "../shared.module.css";
 
 export function StoryboardTreeView(): React.ReactElement {
   const { nodes } = useBuilderData();
@@ -85,7 +86,9 @@ export function StoryboardTreeView(): React.ReactElement {
         placeholder={t(K.FIND_BRICKS_BY_CONFIGURATION)}
         onSearch={handleSearch}
       />
-      <div className={styles.treeView}>
+      <div
+        className={`${styles.treeView} ${sharedStyles.customScrollbarContainer}`}
+      >
         <div className={styles.treeWrapper}>
           {childNodes.length > 0 && (
             <StoryboardTreeNodeList

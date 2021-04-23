@@ -10,6 +10,7 @@ import { useBuilderUIContext } from "../BuilderUIContext";
 import classNames from "classnames";
 
 import styles from "./BrickLibrary.module.css";
+import sharedStyles from "../shared.module.css";
 
 interface BrickLibraryProps {
   hideToolboxPane?: boolean;
@@ -39,7 +40,9 @@ export function BrickLibrary({
         placeholder={t(K.SEARCH_BRICKS_IN_LIBRARY)}
         onSearch={handleSearch}
       />
-      <div className={styles.resultWrapper}>
+      <div
+        className={`${styles.resultWrapper} ${sharedStyles.customScrollbarContainer}`}
+      >
         <ul
           className={classNames(styles.groupList, {
             [styles.columnGroupList]: hideToolboxPane,
