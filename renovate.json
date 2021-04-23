@@ -20,7 +20,9 @@
         "^@next-bricks/",
         "^@next-libs/",
         "^@next-micro-apps/",
-        "^@next-legacy-templates/"
+        "^@next-legacy-templates/",
+        "^@sdk/",
+        "^@next-sdk/"
       ],
       "matchPackageNames": [
         "@ant-design/compatible",
@@ -88,11 +90,6 @@
       "matchPackagePatterns": ["^@next-core/"],
       "matchUpdateTypes": ["major"],
       "enabled": false
-    },
-    {
-      "groupName": "sdk packages",
-      "matchPackagePatterns": ["^@next-sdk/", "^@sdk/"],
-      "automerge": false
     }
   ],
   "postUpdateOptions": ["yarnDedupeHighest"]
