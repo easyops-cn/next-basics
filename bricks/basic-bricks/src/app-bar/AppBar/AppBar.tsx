@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Menu, Dropdown, Divider, Avatar } from "antd";
 import { AvatarProps } from "antd/lib/avatar";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { getAuth, getHistory, getRuntime } from "@next-core/brick-kit";
-import { Link } from "@next-libs/basic-components";
+import { Link, GeneralIcon } from "@next-libs/basic-components";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
 import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
@@ -43,6 +44,13 @@ export function AppBar({
     () => getRuntime().getFeatureFlags()["license-expires-detection"],
     []
   );
+
+  const switchLanguageEnabled = React.useMemo(
+    () => getRuntime().getFeatureFlags()["switch-language"],
+    []
+  );
+
+  const currentLang = i18next.language?.split("-")[0];
 
   React.useEffect(() => {
     const link = document.querySelector(
@@ -117,6 +125,16 @@ export function AppBar({
     getHistory().push("/account-setting");
   };
 
+  const handleSwitchLanguage = async (): Promise<void> => {
+    // istanbul ignore else
+    if (currentLang === "zh") {
+      await i18next.changeLanguage("en");
+    } else if (currentLang === "en") {
+      await i18next.changeLanguage("zh");
+    }
+    location.reload();
+  };
+
   return (
     <div className={styles.appBar} id="app-bar">
       <div className={styles.titleContainer}>
@@ -140,16 +158,48 @@ export function AppBar({
               overlay={
                 <Menu>
                   {accountEntryEnabled && (
-                    <Menu.Item onClick={handleRedirectToMe}>
+                    <Menu.Item
+                      onClick={handleRedirectToMe}
+                      className={styles.dropdownMenuItem}
+                    >
+                      <GeneralIcon
+                        icon={{
+                          lib: "easyops",
+                          category: "default",
+                          icon: "account",
+                        }}
+                      />
                       {t(K.ACCOUNT_MANAGEMENT)}
                     </Menu.Item>
                   )}
 
                   <Menu.Item
+                    className={styles.dropdownMenuItem}
                     onClick={ssoEnabled ? handleSSOLogout : handleLogout}
                   >
+                    <GeneralIcon
+                      icon={{
+                        lib: "easyops",
+                        category: "default",
+                        icon: "logout",
+                      }}
+                    />
                     {t(K.LOGOUT)}
                   </Menu.Item>
+                  {switchLanguageEnabled && (
+                    <>
+                      <Menu.Divider />
+                      <Menu.Item
+                        onClick={handleSwitchLanguage}
+                        className={styles.dropdownMenuItem}
+                      >
+                        <GeneralIcon
+                          icon={{ lib: "fa", icon: "language", prefix: "fas" }}
+                        />
+                        {currentLang === "zh" ? t(K.ENGLISH) : t(K.CHINESE)}
+                      </Menu.Item>
+                    </>
+                  )}
                 </Menu>
               }
               trigger={["click"]}

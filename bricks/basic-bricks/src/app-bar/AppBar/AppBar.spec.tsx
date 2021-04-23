@@ -9,12 +9,17 @@ import { Link } from "@next-libs/basic-components";
 import { AppBar } from "./AppBar";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
 import { UserOutlined } from "@ant-design/icons";
+import i18next from "i18next";
 
 jest.mock("@next-sdk/user-service-sdk");
 jest.mock("@next-sdk/air-admin-service-sdk");
 jest.mock("../LaunchpadButton/LaunchpadButton");
 jest.mock("../AppBarBreadcrumb/AppBarBreadcrumb");
 jest.mock("../AppDocumentLink/AppDocumentLink");
+jest.mock("i18next", () => ({
+  language: "zh-CN",
+  changeLanguage: jest.fn(),
+}));
 
 (UserAdminApi_getUserInfoV2 as jest.Mock).mockResolvedValue({
   user_icon: "avatar.png",
@@ -166,5 +171,19 @@ describe("AppBar", () => {
       await (global as any).flushPromises();
     });
     expect(CustomerApi_getExpiration).toHaveBeenCalled();
+  });
+
+  it("should handle language change", () => {
+    getFeatureFlags.mockImplementation(() => ({
+      "switch-language": true,
+    }));
+    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
+    const switchLanguageBtn = (wrapper
+      .find(Dropdown)
+      .prop("overlay") as React.ReactElement).props.children[2].props
+      .children[1];
+    switchLanguageBtn.props.onClick();
+    expect(i18next.language).toEqual("zh-CN");
+    expect(i18next.changeLanguage).toHaveBeenCalledWith("en");
   });
 });
