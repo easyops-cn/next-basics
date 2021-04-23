@@ -9,7 +9,7 @@ describe("ContextItemForm", () => {
     const onContextItemUpdate = jest.fn();
     const Component = (
       props: Omit<ContextItemFormProps, "settingItemForm">
-    ) => {
+    ): React.ReactElement => {
       const [settingItemForm] = Form.useForm();
       return <ContextItemForm {...props} settingItemForm={settingItemForm} />;
     };
@@ -62,14 +62,14 @@ describe("ContextItemForm", () => {
         value: "value",
       },
     } as RadioChangeEvent);
-    expect(wrapper.find(Form.Item).length).toBe(4);
+    expect(wrapper.find(Form.Item).length).toBe(5);
     wrapper.setProps({
       data: {
         name: "data-b",
         value: "<% QUERY.objectId %>",
       },
     });
-    expect(wrapper.find(Form.Item).length).toBe(4);
+    expect(wrapper.find(Form.Item).length).toBe(5);
     expect(wrapper.find(Radio).children().length).toBe(2);
 
     wrapper.setProps({

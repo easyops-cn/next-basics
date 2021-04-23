@@ -63,11 +63,11 @@ export function ContextItemForm({
     setContextType(type);
   }, [data]);
 
-  const onTypeChange = (event: RadioChangeEvent) => {
+  const onTypeChange = (event: RadioChangeEvent): void => {
     setContextType(event.target.value);
   };
 
-  const onSearch = (v: string) => {
+  const onSearch = (v: string): void => {
     const q = v.trim().toLowerCase();
     setProviderOptions(searchList(originalProviderList, q, "label"));
   };
@@ -81,7 +81,7 @@ export function ContextItemForm({
     onContextItemUpdate?.(computedValue);
   };
 
-  const getCodeEditorItem = (field: string) => {
+  const getCodeEditorItem = (field: string): React.ReactNode => {
     return (
       <CodeEditorItem
         tabSize={2}
@@ -151,11 +151,11 @@ export function ContextItemForm({
           <Form.Item label="Transform" name="transform">
             {getCodeEditorItem("transform")}
           </Form.Item>
-          <Form.Item label="If" name="if">
-            {getCodeEditorItem("if")}
-          </Form.Item>
         </>
       )}
+      <Form.Item label="If" name="if">
+        {getCodeEditorItem("if")}
+      </Form.Item>
       <Form.Item label="onChange" name="onChange">
         {getCodeEditorItem("onChange")}
       </Form.Item>

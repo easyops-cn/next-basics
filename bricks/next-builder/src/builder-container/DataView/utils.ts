@@ -17,6 +17,7 @@ interface contextItemValueConf {
   type: ContextType.VALUE;
   name?: string;
   value?: string;
+  if?: string;
   onChange?: string;
 }
 
@@ -108,6 +109,7 @@ export function computeItemToSubmit(
       name: contextValue.name,
       ...safeLoadFields({
         value: (contextValue as contextItemValueConf).value,
+        if: (contextValue as contextItemValueConf).if,
         onChange: (contextValue as contextItemResolveConf).onChange,
       }),
     };
