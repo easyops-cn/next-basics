@@ -13,6 +13,7 @@ import { filterBricksWithEvents } from "./filterBricksWithEvents";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 import styles from "./EventsView.module.css";
+import sharedStyles from "../shared.module.css";
 
 export function EventsView(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -62,7 +63,9 @@ export function EventsView(): React.ReactElement {
         placeholder={t(K.SEARCH_BRICKS_WITH_EVENTS)}
         onSearch={handleSearch}
       />
-      <div className={styles.eventsWrapper}>
+      <div
+        className={`${styles.eventsWrapper} ${sharedStyles.customScrollbarContainer}`}
+      >
         <ul className={styles.brickList}>
           {filteredBricks.map((brick) => (
             <li
