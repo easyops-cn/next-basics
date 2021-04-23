@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.117.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.117.0...@next-bricks/basic-bricks@1.117.1) (2021-04-23)
+
+
+### Bug Fixes
+
+* handle delay api ([71b94e6](https://github.com/easyops-cn/next-basics/commit/71b94e6eb1f69df2b82a36ae126674055a56e279))
+
+
+
+
+
 # [1.117.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.3...@next-bricks/basic-bricks@1.117.0) (2021-04-21)
 
 

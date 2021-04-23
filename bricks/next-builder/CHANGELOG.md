@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.49.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.48.2...@next-bricks/next-builder@1.49.0) (2021-04-23)
+
+
+### Bug Fixes
+
+* refine scrollbar style ([a2f79e8](https://github.com/easyops-cn/next-basics/commit/a2f79e838af70620f12b825b5ecbf5314336f17c))
+
+
+### Features
+
+* support conditional context ([00426b9](https://github.com/easyops-cn/next-basics/commit/00426b9c0cbffab42d952a9bc3afc86e841e1df6))
+
+
+
+
+
 ## [1.48.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.48.1...@next-bricks/next-builder@1.48.2) (2021-04-21)
 
 **Note:** Version bump only for package @next-bricks/next-builder
