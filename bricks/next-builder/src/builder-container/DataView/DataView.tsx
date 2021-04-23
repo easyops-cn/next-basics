@@ -10,6 +10,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import {
   ContextConf,
+  EntityResolveConf,
   SelectorProviderResolveConf,
   UseProviderResolveConf,
 } from "@next-core/brick-types";
@@ -34,7 +35,7 @@ export interface DataViewProps {
 }
 
 interface ContextConfWithSymbolId extends ContextConf {
-  [symbolId]: string;
+  [symbolId]?: string;
 }
 
 export function DataView({
@@ -83,7 +84,7 @@ export function DataView({
       });
     }
     manager.setHighlightNodes(nodesToHighlight);
-  }, [hoverContextName, nodes]);
+  }, [hoverContextName, manager, nodes]);
 
   const setData = (contextValue?: ContextConf, uid?: string): void => {
     const isValue = !contextValue?.resolve;
@@ -94,6 +95,7 @@ export function DataView({
         type: ContextType.VALUE,
         ...safeDumpFields({
           value: contextValue?.value,
+          if: contextValue?.if,
           onChange: contextValue?.onChange,
         }),
       };
@@ -113,7 +115,7 @@ export function DataView({
                 .useProvider,
             }),
         ...safeDumpFields({
-          args: contextValue.resolve.args,
+          args: (contextValue.resolve as EntityResolveConf).args,
           if: contextValue.resolve.if,
           transform: contextValue.resolve.transform,
           onChange: contextValue?.onChange,
@@ -127,11 +129,13 @@ export function DataView({
     settingUid.current = uid;
   };
 
-  const handleOk = () => {
+  const handleOk = (): void => {
     settingItemForm.submit();
   };
 
-  const handleContextItemUpdate = (contextItem: ContextConfWithSymbolId) => {
+  const handleContextItemUpdate = (
+    contextItem: ContextConfWithSymbolId
+  ): void => {
     const targetIndex = settingUid.current
       ? findIndex(contextWithUniqueSymbolId, [symbolId, settingUid.current])
       : contextWithUniqueSymbolId.length;
@@ -144,7 +148,7 @@ export function DataView({
     setVisible(false);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setVisible(false);
   };
 
