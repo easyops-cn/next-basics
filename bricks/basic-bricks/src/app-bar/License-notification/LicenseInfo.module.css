@@ -4,3 +4,12 @@
   border-radius: 4px;
   padding: 2px 4px;
 }
+
+.closeBtn {
+  color: var(--text-color-default);
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--text-color-default);
+  }
+}

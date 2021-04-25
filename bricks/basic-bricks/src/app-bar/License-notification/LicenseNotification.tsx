@@ -12,11 +12,19 @@ export const EXPIRING_DISMISSED = "licenseExpiringDismissed";
 
 const storage = new JsonStorage(localStorage);
 
+export function getUnionKey(key: string) {
+  const { org } = getAuth();
+  return `${key}:${org}`;
+}
+
 export function notificationFactory(expires: number) {
   const handleClose = () => {
-    storage.setItem(EXPIRING_DISMISSED, true);
+    storage.setItem(getUnionKey(EXPIRING_DISMISSED), true);
     // 7 天内不在提示
-    storage.setItem(EXPIRING_DISMISSED_UNTIL, moment().unix() + 7 * 86400);
+    storage.setItem(
+      getUnionKey(EXPIRING_DISMISSED_UNTIL),
+      moment().unix() + 7 * 86400
+    );
     notification.close(LICENSE_INFO);
   };
 
@@ -27,7 +35,7 @@ export function notificationFactory(expires: number) {
         orgId: org,
       });
       message.success("已申请延期");
-      notification.close(LICENSE_INFO);
+      handleClose();
     } catch (err) {
       handleHttpError(err);
     }
@@ -35,34 +43,35 @@ export function notificationFactory(expires: number) {
 
   const renderBtn = () => {
     return (
-      <>
-        <Button type="primary" onClick={handleDelay} style={{ marginRight: 8 }}>
-          申请延期
-        </Button>
-        <Button type="link" onClick={handleClose}>
-          {" "}
-          不再提示{" "}
-        </Button>
-      </>
+      <Button type="link" onClick={handleClose} className={styles.closeBtn}>
+        {" "}
+        不再提示{" "}
+      </Button>
     );
   };
 
   const renderContent = () => {
     return (
-      <div style={{ marginBottom: 10 }}>
-        你的 org 即将在{" "}
-        <span className={styles.highlight}>
-          {moment(expires).format("YYYY-MM-DD")}
-        </span>{" "}
-        过期，请联系 EasyOps 续期。{" "}
-      </div>
+      <>
+        <div style={{ marginTop: 15 }}>
+          你的 org 即将在{" "}
+          <span className={styles.highlight}>
+            {moment.unix(expires).format("YYYY-MM-DD")}
+          </span>{" "}
+          过期，请联系 EasyOps 续期。{" "}
+        </div>
+        <span>或点击</span>
+        <Button type="link" onClick={handleDelay}>
+          一键申请延期
+        </Button>
+      </>
     );
   };
 
   return notification.warning({
     key: LICENSE_INFO,
     message: "提示",
-    duration: 5,
+    duration: 0,
     description: renderContent(),
     btn: renderBtn(),
     style: {
@@ -77,17 +86,19 @@ export function processLiscenseExpires(expires: number): void {
     // 提前三十天提醒
     const notificationTime = expires - 30 * 86400;
     const now = moment().unix();
+    const expiringDismissed = getUnionKey(EXPIRING_DISMISSED);
+    const expiringDismissedUntil = getUnionKey(EXPIRING_DISMISSED_UNTIL);
 
     if (now > notificationTime) {
       if (
-        storage.getItem(EXPIRING_DISMISSED) &&
-        now > storage.getItem(EXPIRING_DISMISSED_UNTIL)
+        storage.getItem(expiringDismissed) &&
+        now > storage.getItem(expiringDismissedUntil)
       ) {
-        storage.removeItem(EXPIRING_DISMISSED);
-        storage.removeItem(EXPIRING_DISMISSED_UNTIL);
+        storage.removeItem(expiringDismissed);
+        storage.removeItem(expiringDismissedUntil);
       }
 
-      if (storage.getItem(EXPIRING_DISMISSED)) {
+      if (storage.getItem(expiringDismissed)) {
         return;
       }
       notificationFactory(expires);
