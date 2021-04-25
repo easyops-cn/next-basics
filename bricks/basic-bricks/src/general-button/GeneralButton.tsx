@@ -62,9 +62,7 @@ export function GeneralButton({
   const getButtonNode = () => (
     <Button
       className={classNames(styles.iconButton, {
-        [styles.generalButton]: !["circle", "round"].includes(buttonShape),
         [styles.fadedText]: fadedText && buttonType === "text",
-        [styles.noTextBtn]: !buttonName,
       })}
       shape={buttonShape}
       size={buttonSize}
@@ -73,14 +71,14 @@ export function GeneralButton({
       danger={buttonDanger}
       {...buttonProps}
       icon={
-        buttonIcon &&
-        typeof buttonIcon === "string" && <LegacyIcon type={buttonIcon} />
+        buttonIcon && typeof buttonIcon === "string" ? (
+          <LegacyIcon type={buttonIcon} />
+        ) : (
+          typeof buttonIcon === "object" && <GeneralIcon icon={buttonIcon} />
+        )
       }
       disabled={disabled}
     >
-      {buttonIcon && typeof buttonIcon === "object" && (
-        <GeneralIcon icon={buttonIcon} />
-      )}
       {buttonName}
     </Button>
   );
