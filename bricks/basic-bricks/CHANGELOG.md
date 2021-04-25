@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.119.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.118.0...@next-bricks/basic-bricks@1.119.0) (2021-04-25)
+
+
+### Bug Fixes
+
+* fix license info ([b182018](https://github.com/easyops-cn/next-basics/commit/b182018f52e5895a14de2f07bbeb4327e2758da2))
+
+
+### Features
+
+* fix time display ([6169b3a](https://github.com/easyops-cn/next-basics/commit/6169b3a744ab65123dad57c96ed393f641e5bba5))
+
+
+
+
+
 # [1.118.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.117.1...@next-bricks/basic-bricks@1.118.0) (2021-04-25)
 
 
