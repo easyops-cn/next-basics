@@ -52,7 +52,7 @@ export function notificationFactory(expires: number) {
       <div style={{ marginBottom: 10 }}>
         你的 org 即将在{" "}
         <span className={styles.highlight}>
-          {moment(expires).format("YYYY-MM-DD")}
+          {moment.unix(expires).format("YYYY-MM-DD")}
         </span>{" "}
         过期，请联系 EasyOps 续期。{" "}
       </div>
