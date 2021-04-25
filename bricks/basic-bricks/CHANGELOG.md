@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.118.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.117.1...@next-bricks/basic-bricks@1.118.0) (2021-04-25)
+
+
+### Features
+
+* **app-bar:** add switch lang btn ([6de1512](https://github.com/easyops-cn/next-basics/commit/6de151238ac1e85ca1767ba10f59e41f6a1e73c8))
+
+
+
+
+
 ## [1.117.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.117.0...@next-bricks/basic-bricks@1.117.1) (2021-04-23)
 
 
