@@ -42,16 +42,22 @@ describe("processLiscenseExpires", () => {
 
     processLiscenseExpires(1619618400);
     expect(spyonWarn).toHaveBeenCalled();
+
+    expect(document.querySelector(".highlight").textContent).toEqual(
+      "2021-04-28"
+    );
     await act(async () => {
       await (global as any).flushPromises();
     });
 
-    document.body.querySelector(".ant-btn-link").click();
+    document.body.querySelector(".closeBtn").click();
     expect(spyonClose).toHaveBeenCalled();
 
-    document.body.querySelector(".ant-btn-primary").click();
+    // 再次打开
+    processLiscenseExpires(1619618400);
+    document.body.querySelector(".ant-btn-link").click();
     expect(mockSetOrgUpdating.mock.calls[0][0]).toEqual({ orgId: 32322 });
-    document.body.querySelector(".ant-btn-primary").click();
+    document.body.querySelector(".ant-btn-link").click();
     await act(async () => {
       await (global as any).flushPromises();
     });
@@ -62,11 +68,11 @@ describe("processLiscenseExpires", () => {
     const mockStorageInstance = (JsonStorage as jest.Mock).mock.instances[0];
     (mockStorageInstance.getItem as jest.Mock).mockImplementation(
       (key: string) => {
-        if (key === EXPIRING_DISMISSED) {
+        if (key === `${EXPIRING_DISMISSED}:32322`) {
           return true;
         }
 
-        if (key === EXPIRING_DISMISSED_UNTIL) {
+        if (key === `${EXPIRING_DISMISSED_UNTIL}:32322`) {
           return 1617590400;
         }
       }

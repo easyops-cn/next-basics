@@ -88,7 +88,7 @@ export function AppBar({
 
   React.useEffect(() => {
     (async () => {
-      if (licenseInfoEnabled) {
+      if (licenseInfoEnabled && username) {
         try {
           const { expires } = await CustomerApi_getExpiration();
           processLiscenseExpires(expires);
@@ -97,7 +97,7 @@ export function AppBar({
         }
       }
     })();
-  }, []);
+  }, [username]);
 
   const avatarProps: AvatarProps = {
     size: "small",
