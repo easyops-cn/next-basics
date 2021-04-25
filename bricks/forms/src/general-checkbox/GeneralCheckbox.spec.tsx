@@ -1,8 +1,9 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import { GeneralCheckbox } from "./GeneralCheckbox";
 import { formatOptions } from "@next-libs/forms";
 import { Checkbox, Collapse } from "antd";
+import { CheckboxChangeEvent } from "antd/lib/checkbox";
 
 describe("GeneralCheckbox", () => {
   it("should work", async () => {
@@ -107,5 +108,34 @@ describe("GeneralCheckbox", () => {
     });
     wrapper.update();
     expect(wrapper.find(Checkbox.Group).at(0).prop("value")).toEqual(["apple"]);
+  });
+
+  it("should work as single checkbox", () => {
+    const text = "text";
+    const value = true;
+    const disabled = true;
+    const handleChange = jest.fn();
+    const wrapper = mount(
+      <GeneralCheckbox
+        text={text}
+        value={value}
+        disabled={disabled}
+        onChange={handleChange}
+      />
+    );
+
+    expect(wrapper.find(Checkbox.Group)).toHaveLength(0);
+
+    const checkboxNode = wrapper.find(Checkbox);
+
+    expect(checkboxNode).toHaveLength(1);
+    expect(checkboxNode.props()).toEqual(
+      expect.objectContaining({ children: text, checked: value, disabled })
+    );
+    const onChangeChecked = false;
+    checkboxNode.invoke("onChange")({
+      target: { checked: onChangeChecked },
+    } as CheckboxChangeEvent);
+    expect(handleChange).toBeCalledWith(onChangeChecked);
   });
 });
