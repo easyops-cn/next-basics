@@ -375,12 +375,8 @@ export class GeneralFormElement
   forceUpdate(): void {
     this._forceUpdate();
   }
-  /**
-   * @description 表单设置初始值
-   * @param value
-   */
-  @method()
-  setInitValue(value: any): void {
+
+  private _setInitValue(value: any): void {
     // 日期格式的字符串需要 moment 包裹一层
     const formatValues = Object.entries(value).reduce<Record<string, any>>(
       (acc, [key, value]) => {
@@ -411,6 +407,22 @@ export class GeneralFormElement
       }
     });
     this._forceUpdate();
+  }
+
+  /**
+   * @description 表单设置初始值
+   * @param value
+   * @param options
+   */
+  @method()
+  setInitValue(value: any, options?: { runInMicrotask?: boolean }): void {
+    if (options?.runInMicrotask) {
+      queueMicrotask(() => {
+        this._setInitValue(value);
+      });
+    } else {
+      this._setInitValue(value);
+    }
   }
 
   reset(): void {

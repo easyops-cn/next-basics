@@ -61,6 +61,15 @@ describe("forms.general-form", () => {
       time: expect.any(moment),
     });
 
+    element.setInitValue({ name: "rose" }, { runInMicrotask: true });
+    expect(setFieldsValue).not.toBeCalledWith({
+      name: "rose",
+    });
+    await jest.runAllTimers();
+    expect(setFieldsValue).toBeCalledWith({
+      name: "rose",
+    });
+
     element.reset();
     expect(resetFields).toBeCalled();
 
