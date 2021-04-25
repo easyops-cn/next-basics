@@ -21,6 +21,7 @@ declare type ButtonType = typeof ButtonTypes[number];
 interface LegacyGeneralButtonProps {
   buttonName: string;
   buttonType?: ButtonType;
+  buttonDanger?: boolean;
   buttonIcon?: string;
   buttonShape?: "circle" | "round";
   buttonSize?: "small" | "large";
@@ -39,6 +40,7 @@ interface LegacyGeneralButtonProps {
 export function GeneralButton({
   buttonName,
   buttonType,
+  buttonDanger,
   buttonIcon,
   buttonShape,
   buttonSize,
@@ -68,6 +70,7 @@ export function GeneralButton({
       size={buttonSize}
       onClick={onClick}
       type={buttonType}
+      danger={buttonDanger}
       {...buttonProps}
       icon={
         buttonIcon &&

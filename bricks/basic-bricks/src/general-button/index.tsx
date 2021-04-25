@@ -149,6 +149,16 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonType: ButtonType;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 设置危险按钮
+   * @group basic
+   */
+  @property({ type: Boolean })
+  buttonDanger: boolean;
+
+  /**
    * @kind "circle" | "round"
    * @required false
    * @default -
@@ -291,6 +301,7 @@ export class GeneralButtonElement extends UpdatingElement {
           <GeneralButton
             buttonName={this.buttonName}
             buttonType={this.buttonType}
+            buttonDanger={this.buttonDanger}
             buttonIcon={this.buttonIcon}
             buttonShape={this.buttonShape}
             buttonSize={this.buttonSize}
