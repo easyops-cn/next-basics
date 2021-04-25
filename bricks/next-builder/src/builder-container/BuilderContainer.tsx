@@ -18,6 +18,7 @@ import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 import {
   BrickOptionItem,
+  BuilderCanvasType,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderDataType,
@@ -46,6 +47,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   initialEventStreamNodeId?: string;
   initialClipboardType?: BuilderClipboardType;
   initialClipboardSource?: string;
+  initialCanvasType?: BuilderCanvasType;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
@@ -64,6 +66,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onEventNodeClick?: (eventNode: EventStreamNode) => void;
   onConvertToTemplate?: (node: BuilderRuntimeNode) => void;
   onWorkbenchClose?: () => void;
+  onSwitchCanvasType?: (canvasType: BuilderCanvasType) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -78,6 +81,7 @@ export function LegacyBuilderContainer(
     initialEventStreamNodeId,
     initialClipboardType,
     initialClipboardSource,
+    initialCanvasType,
     onNodeAdd,
     onNodeReorder,
     onNodeMove,
@@ -100,6 +104,7 @@ export function LegacyBuilderContainer(
     onEventNodeClick,
     onConvertToTemplate,
     onWorkbenchClose,
+    onSwitchCanvasType,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -121,10 +126,18 @@ export function LegacyBuilderContainer(
   const [clipboard, setClipboard] = React.useState<BuilderClipboard>(
     memoClipboard
   );
+  const memoCanvasType = React.useMemo(() => initialCanvasType, [
+    initialCanvasType,
+  ]);
+  const [canvasType, setCanvasType] = React.useState(memoCanvasType);
 
   const manager = useBuilderDataManager();
 
   React.useImperativeHandle(ref, () => manager);
+
+  React.useEffect(() => {
+    setCanvasType(memoCanvasType);
+  }, [memoCanvasType]);
 
   React.useEffect(() => {
     let type = BuilderDataType.UNKNOWN;
@@ -156,6 +169,24 @@ export function LegacyBuilderContainer(
     }
     setDataType(type);
   }, [dataSource, manager]);
+
+  React.useEffect(() => {
+    // If the canvas type is not specified, set to portal canvas if the
+    // canvas is not empty and has only portal bricks in first level,
+    // otherwise set to main canvas.
+    if (!initialCanvasType) {
+      const { rootId, nodes, edges } = manager.getData();
+      const rootChildNodes = edges
+        .filter((edge) => edge.parent === rootId)
+        .map((edge) => nodes.find((node) => node.$$uid === edge.child));
+      const newCanvasType =
+        rootChildNodes.length > 0 &&
+        !rootChildNodes.some((node) => !node.portal)
+          ? BuilderCanvasType.PORTAL
+          : BuilderCanvasType.MAIN;
+      setCanvasType(newCanvasType);
+    }
+  }, [initialCanvasType, manager]);
 
   React.useEffect(() => {
     manager.routeListInit(routeList);
@@ -209,7 +240,11 @@ export function LegacyBuilderContainer(
     onClipboardChange?.(clipboard);
   }, [clipboard, onClipboardChange]);
 
-  const handleClickOverlay = () => {
+  React.useEffect(() => {
+    onSwitchCanvasType?.(canvasType);
+  }, [canvasType, onSwitchCanvasType]);
+
+  const handleClickOverlay = (): void => {
     onWorkbenchClose?.();
   };
 
@@ -230,6 +265,8 @@ export function LegacyBuilderContainer(
         setEventStreamNodeId,
         clipboard,
         setClipboard,
+        canvasType,
+        setCanvasType,
         onRouteSelect,
         onTemplateSelect,
         onCurrentRouteClick,

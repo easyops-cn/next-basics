@@ -4,7 +4,7 @@ import { DropZone } from "@next-core/editor-bricks-helper";
 import { BuilderCanvas } from "./BuilderCanvas";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventStreamCanvas } from "../EventStreamCanvas/EventStreamCanvas";
-import { BuilderDataType } from "../interfaces";
+import { BuilderCanvasType, BuilderDataType } from "../interfaces";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
@@ -32,14 +32,17 @@ describe("BuilderCanvas", () => {
   let dataType: BuilderDataType;
   let fullscreen: boolean;
   let eventStreamNodeId: string;
+  let canvasType: BuilderCanvasType;
   beforeEach(() => {
     dataType = BuilderDataType.ROUTE_OF_BRICKS;
     fullscreen = false;
     eventStreamNodeId = null;
+    canvasType = BuilderCanvasType.MAIN;
     mockUseBuilderUIContext.mockImplementation(() => ({
       dataType,
       fullscreen,
       eventStreamNodeId,
+      canvasType,
     }));
   });
 
@@ -49,10 +52,11 @@ describe("BuilderCanvas", () => {
 
   it("should work", () => {
     const wrapper = mount(<BuilderCanvas />);
-    expect(wrapper.find(".builderCanvas").prop("className")).not.toContain(
-      "fullscreen"
-    );
+    expect(wrapper.find(".builderCanvas").hasClass("fullscreen")).toBe(false);
+    expect(wrapper.find(".builderCanvas").hasClass("hasTabs")).toBe(true);
     expect(wrapper.find(DropZone).prop("fullscreen")).toBe(false);
+    expect(wrapper.find(DropZone).prop("separateCanvas")).toBe(true);
+    expect(wrapper.find(DropZone).prop("isPortalCanvas")).toBe(false);
   });
 
   it("should return nothing if dataType is undefined", () => {
@@ -70,16 +74,24 @@ describe("BuilderCanvas", () => {
   it("should enter fullscreen", () => {
     fullscreen = true;
     const wrapper = mount(<BuilderCanvas />);
-    expect(wrapper.find(".builderCanvas").prop("className")).toContain(
-      "fullscreen"
-    );
+    expect(wrapper.find(".builderCanvas").hasClass("fullscreen")).toBe(true);
     expect(wrapper.find(DropZone).prop("fullscreen")).toBe(true);
+    expect(wrapper.find(DropZone).prop("mountPoint")).toBe("bricks");
   });
 
   it("should show event stream canvas", () => {
     eventStreamNodeId = "B-007";
     const wrapper = mount(<BuilderCanvas />);
+    expect(wrapper.hasClass("hasTabs")).toBe(false);
     expect(wrapper.find(EventStreamCanvas).prop("nodeId")).toBe("B-007");
     expect(wrapper.find(DropZone).length).toBe(0);
+  });
+
+  it("should work for route of routes", () => {
+    dataType = BuilderDataType.ROUTE_OF_ROUTES;
+    const wrapper = mount(<BuilderCanvas />);
+    expect(wrapper.find(DropZone).prop("mountPoint")).toBe("routes");
+    expect(wrapper.find(DropZone).prop("separateCanvas")).toBe(false);
+    expect(wrapper.find(DropZone).prop("isPortalCanvas")).toBe(false);
   });
 });

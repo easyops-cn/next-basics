@@ -2,7 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
 import { BuilderContainer } from "./BuilderContainer";
-import { BuilderDataType, ToolboxTab } from "./interfaces";
+import { BuilderCanvasType, BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 
 jest.mock("@next-core/editor-bricks-helper");
@@ -21,8 +21,12 @@ jest.mock("./BuilderCanvas/BuilderCanvas", () => {
   const { useBuilderUIContext } = require("./BuilderUIContext");
   return {
     BuilderCanvas() {
-      const { dataType } = useBuilderUIContext();
-      return <div>BuilderCanvas({dataType})</div>;
+      const { dataType, canvasType } = useBuilderUIContext();
+      return (
+        <div>
+          BuilderCanvas({dataType},{canvasType})
+        </div>
+      );
     },
   };
 });
@@ -48,6 +52,11 @@ const mockManager = {
   onNodeClick: jest.fn(() => mockRemoveListenersOfNodeClick),
   dataInit: jest.fn(),
   routeListInit: jest.fn(),
+  getData: jest.fn(() => ({
+    rootId: "root",
+    nodes: [],
+    edges: [],
+  })),
 };
 (useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
 
@@ -85,7 +94,7 @@ describe("BuilderContainer", () => {
     });
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
-      `BuilderCanvas(${BuilderDataType.ROUTE_OF_BRICKS})`
+      `BuilderCanvas(${BuilderDataType.ROUTE_OF_BRICKS},${BuilderCanvasType.MAIN})`
     );
     wrapper.unmount();
     expect(mockRemoveListenersOfNodeAdd).toBeCalled();
@@ -113,7 +122,7 @@ describe("BuilderContainer", () => {
     });
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
-      `BuilderCanvas(${BuilderDataType.ROUTE_OF_ROUTES})`
+      `BuilderCanvas(${BuilderDataType.ROUTE_OF_ROUTES},${BuilderCanvasType.MAIN})`
     );
   });
 
@@ -127,6 +136,7 @@ describe("BuilderContainer", () => {
             id: "B-001",
           },
         ]}
+        initialCanvasType={BuilderCanvasType.MAIN}
       />
     );
     expect(mockManager.dataInit).toBeCalledWith({
@@ -136,11 +146,26 @@ describe("BuilderContainer", () => {
     });
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
-      `BuilderCanvas(${BuilderDataType.ROUTE_OF_REDIRECT})`
+      `BuilderCanvas(${BuilderDataType.ROUTE_OF_REDIRECT},${BuilderCanvasType.MAIN})`
     );
   });
 
   it("should work for custom template", () => {
+    mockManager.getData.mockReturnValueOnce({
+      rootId: "root",
+      nodes: [
+        {
+          $$uid: 1,
+          portal: true,
+        },
+      ],
+      edges: [
+        {
+          parent: "root",
+          child: 1,
+        },
+      ],
+    });
     const wrapper = mount(
       <BuilderContainer
         dataSource={[
@@ -159,7 +184,7 @@ describe("BuilderContainer", () => {
     });
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
-      `BuilderCanvas(${BuilderDataType.CUSTOM_TEMPLATE})`
+      `BuilderCanvas(${BuilderDataType.CUSTOM_TEMPLATE},${BuilderCanvasType.PORTAL})`
     );
   });
 

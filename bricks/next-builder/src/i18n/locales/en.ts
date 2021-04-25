@@ -49,6 +49,8 @@ const locale: Locale = {
   [K.FIND_BRICKS_BY_CONFIGURATION]: "Find bricks by configuration",
   [K.SHOW_RELATED_NODES_BASED_ON_EVENTS_WHEN_HOVERING]:
     "Show related nodes based on events when hovering",
+  [K.CANVAS_TYPE_MAIN]: "Main",
+  [K.CANVAS_TYPE_PORTAL]: "Portal",
 };
 
 export default locale;

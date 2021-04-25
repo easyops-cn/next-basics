@@ -1,16 +1,26 @@
 .builderCanvas {
+  position: relative;
   flex: auto;
   min-height: 0;
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.85);
   margin: var(--page-card-gap) 0 0 var(--page-card-gap);
-  border-radius: var(--editor-brick-border-radius);
 }
 
 .fullscreen {
   margin: var(--page-card-gap);
 }
 
-.builderCanvas > :global(.ant-card) > :global(.ant-card-body) {
+.hasTabs {
+  margin-top: calc(var(--page-card-gap) + 10px);
+}
+
+.builderCanvasInner {
+  position: relative;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.85);
+  border-radius: var(--editor-brick-border-radius);
+  height: 100%;
+}
+
+.builderCanvasInner > :global(.ant-card) > :global(.ant-card-body) {
   padding: 0;
 }

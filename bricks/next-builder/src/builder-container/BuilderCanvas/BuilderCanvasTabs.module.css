@@ -1,0 +1,45 @@
+.builderCanvasTabsWrapper {
+  position: absolute;
+  top: -21px;
+  height: 21px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.builderCanvasTabs {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0 20px;
+  height: 100%;
+
+  > li {
+    border-width: 1px 1px 0;
+    border-style: solid;
+    border-color: var(--antd-border-color-base);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 12px;
+    min-width: 80px;
+    height: 100%;
+    color: var(--antd-text-color-secondary);
+
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
+
+    &.active {
+      color: var(--antd-text-color);
+      border-color: #fff;
+      background-color: #fff;
+    }
+
+    &:not(.active) {
+      cursor: pointer;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import {
   BuilderDataType,
   ToolboxTab,
   BrickOptionItem,
+  BuilderCanvasType,
 } from "./interfaces";
 import {
   BuilderRouteNode,
@@ -27,6 +28,8 @@ export interface ContextOfBuilderUI {
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
   clipboard?: BuilderClipboard;
   setClipboard?: React.Dispatch<React.SetStateAction<BuilderClipboard>>;
+  canvasType?: BuilderCanvasType;
+  setCanvasType?: React.Dispatch<React.SetStateAction<BuilderCanvasType>>;
   onRouteSelect?: (route: BuilderRouteNode) => void;
   onTemplateSelect?: (template: BuilderCustomTemplateNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;
