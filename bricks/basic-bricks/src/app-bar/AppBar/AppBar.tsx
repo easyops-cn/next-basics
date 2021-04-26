@@ -194,7 +194,11 @@ export function AppBar({
                         className={styles.dropdownMenuItem}
                       >
                         <GeneralIcon
-                          icon={{ lib: "fa", icon: "language", prefix: "fas" }}
+                          icon={{
+                            lib: "easyops",
+                            icon: "language",
+                            category: "default",
+                          }}
                         />
                         {currentLang === "zh" ? t(K.ENGLISH) : t(K.CHINESE)}
                       </Menu.Item>
