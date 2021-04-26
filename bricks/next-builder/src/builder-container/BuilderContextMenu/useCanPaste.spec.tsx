@@ -155,7 +155,7 @@ describe("useCanPaste", () => {
         id: "B-001",
         instanceId: "instance-a",
       },
-      false,
+      true,
     ],
     [
       { type: BuilderClipboardType.COPY, sourceId: "B-009" },
@@ -166,7 +166,7 @@ describe("useCanPaste", () => {
         id: "B-001",
         instanceId: "instance-a",
       },
-      false,
+      true,
     ],
   ])("should work", (clipboard, targetNode, canPaste) => {
     const wrapper = shallow(
