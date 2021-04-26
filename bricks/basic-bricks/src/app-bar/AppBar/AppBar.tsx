@@ -90,8 +90,9 @@ export function AppBar({
     (async () => {
       if (licenseInfoEnabled && username) {
         try {
-          const { expires } = await CustomerApi_getExpiration();
-          processLiscenseExpires(expires);
+          const { expires, updating } = await CustomerApi_getExpiration();
+          // org 为延期中的不提示
+          !updating && processLiscenseExpires(expires);
         } catch (error) {
           // eslint-disable-next-line no-empty
         }

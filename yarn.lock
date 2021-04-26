@@ -2378,10 +2378,10 @@
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-1.0.5.tgz#93859047ea43263a96c4a5b322230e6953cef5d9"
   integrity sha1-k4WQR+pDJjqWxKWzIiMOaVPO9dk=
 
-"@next-sdk/air-admin-service-sdk@^2.1.4":
-  version "2.1.4"
-  resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.4.tgz#741ec93df98ed5b797f4cbfc2bd83233d2248851"
-  integrity sha512-KdpVyzvyLWQdYJVgq9zxG1ceIZ1wNb0ZdMIyNTH1x4Bwiydo+N2T/0RVPhii05WiVvmYcMcDzr/HUiMRjrUzwA==
+"@next-sdk/air-admin-service-sdk@^2.1.7":
+  version "2.1.7"
+  resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.7.tgz#c7de2dd9b9c563bd72d375661a87ef8034717080"
+  integrity sha512-i4L0w8dkHlp2wfvNYobDQcncyoGxEk/hr5KfII09hqnwbHIlNQGFOwmjOGLQiP+o8nxcv8NTrQsQ09Ma04aNEg==
 
 "@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"
