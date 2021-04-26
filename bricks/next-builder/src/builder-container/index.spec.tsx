@@ -2,6 +2,7 @@ import { shallow } from "enzyme";
 import ReactDOM from "react-dom";
 import { BuilderContainer } from "./BuilderContainer";
 import {
+  BuilderCanvasType,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
@@ -228,6 +229,55 @@ describe("next-builder.builder-container", () => {
     expect(onEventNodeClick).toBeCalledWith(
       expect.objectContaining({
         detail,
+      })
+    );
+
+    document.body.removeChild(element);
+  });
+
+  it("should handle canvas type switch", () => {
+    const element = document.createElement(
+      "next-builder.builder-container"
+    ) as BuilderContainerElement;
+
+    document.body.appendChild(element);
+
+    const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onSwitchCanvasType = jest.fn();
+    element.addEventListener("canvas.type.switch", onSwitchCanvasType);
+    wrapper.find(BuilderContainer).invoke("onSwitchCanvasType")(
+      BuilderCanvasType.PORTAL
+    );
+    expect(onSwitchCanvasType).toBeCalledWith(
+      expect.objectContaining({
+        detail: {
+          canvasType: BuilderCanvasType.PORTAL,
+        },
+      })
+    );
+
+    document.body.removeChild(element);
+  });
+
+  it("should handle storyboard query update", () => {
+    const element = document.createElement(
+      "next-builder.builder-container"
+    ) as BuilderContainerElement;
+
+    document.body.appendChild(element);
+
+    const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onStoryboardQueryUpdate = jest.fn();
+    element.addEventListener(
+      "storyboard.query.update",
+      onStoryboardQueryUpdate
+    );
+    wrapper.find(BuilderContainer).invoke("onStoryboardQueryUpdate")("any");
+    expect(onStoryboardQueryUpdate).toBeCalledWith(
+      expect.objectContaining({
+        detail: {
+          storyboardQuery: "any",
+        },
       })
     );
 

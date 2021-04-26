@@ -22,7 +22,7 @@ const locale: Locale = {
   [K.EXIT_FULLSCREEN]: "退出全屏模式",
   [K.CLOSE]: "关闭",
   [K.NODE_ACTION_EVENTS_VIEW]: "事件视图",
-  [K.NODE_ACTION_COPY]: "拷贝",
+  [K.NODE_ACTION_COPY]: "复制",
   [K.NODE_ACTION_CUT]: "剪切",
   [K.NODE_ACTION_PASTE]: "粘贴",
   [K.NODE_ACTION_CONVERT_TO_TEMPLATE]: "转换为模板",
@@ -48,6 +48,8 @@ const locale: Locale = {
   [K.FIND_BRICKS_BY_CONFIGURATION]: "根据配置信息查找构件",
   [K.SHOW_RELATED_NODES_BASED_ON_EVENTS_WHEN_HOVERING]:
     "悬停时根据事件显示关联构件",
+  [K.CANVAS_TYPE_MAIN]: "主画板",
+  [K.CANVAS_TYPE_PORTAL]: "Portal 画板",
 };
 
 export default locale;

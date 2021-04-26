@@ -63,11 +63,12 @@ jobs:
     - run: yarn build
     - run: yarn test:ci
 
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./.coverage/lcov.info
+    # Coveralls currently out of service.
+    # - name: Coveralls
+    #   uses: coverallsapp/github-action@master
+    #   with:
+    #     github-token: ${{ secrets.GITHUB_TOKEN }}
+    #     path-to-lcov: ./.coverage/lcov.info
 
     - uses: easyops-cn/actions-next-publish-from-tags@master
       with:

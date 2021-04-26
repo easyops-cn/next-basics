@@ -35,7 +35,9 @@ export function useCanPaste(): CanPaste {
       if (!sourceNode) {
         // The source node is identified by url params,
         // so it maybe not found if the params and manually specified.
-        return false;
+        // However, if the source node is from another route or template,
+        // it will be not found either.
+        return true;
       }
       const traverse = (parentId: number): boolean => {
         if (parentId === targetNode.$$uid) {

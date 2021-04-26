@@ -33,6 +33,7 @@ import {
 import {
   BrickOptionItem,
   BuilderAppendBrickDetail,
+  BuilderCanvasType,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
@@ -88,6 +89,12 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property()
   clipboardSource: string;
+
+  @property()
+  canvasType: BuilderCanvasType;
+
+  @property()
+  storyboardQuery: string;
 
   @event({
     type: "node.add",
@@ -221,6 +228,20 @@ export class BuilderContainerElement extends UpdatingElement {
     type: "node.appendBrick.ask",
   })
   private _eventNodeAppendBrickAskEmitter: EventEmitter<BuilderAppendBrickDetail>;
+
+  @event({
+    type: "canvas.type.switch",
+  })
+  private _canvasTypeSwitchEmitter: EventEmitter<{
+    canvasType: BuilderCanvasType;
+  }>;
+
+  @event({
+    type: "storyboard.query.update",
+  })
+  private _storyboardQueryUpdateEmitter: EventEmitter<{
+    storyboardQuery: string;
+  }>;
 
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
     this._nodeAddEmitter.emit({
@@ -373,6 +394,24 @@ export class BuilderContainerElement extends UpdatingElement {
     this._eventNodeAppendBrickAskEmitter.emit(detail);
   };
 
+  private _handleSwitchCanvasType = (canvasType: BuilderCanvasType): void => {
+    if (canvasType !== this.canvasType) {
+      this.canvasType = canvasType;
+      this._canvasTypeSwitchEmitter.emit({
+        canvasType,
+      });
+    }
+  };
+
+  private _handleStoryboardQueryUpdate = (storyboardQuery: string): void => {
+    if (storyboardQuery !== this.storyboardQuery) {
+      this.storyboardQuery = storyboardQuery;
+      this._storyboardQueryUpdateEmitter.emit({
+        storyboardQuery,
+      });
+    }
+  };
+
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
@@ -423,6 +462,8 @@ export class BuilderContainerElement extends UpdatingElement {
                 initialEventStreamNodeId={this.eventStreamNodeId}
                 initialClipboardType={this.clipboardType}
                 initialClipboardSource={this.clipboardSource}
+                initialCanvasType={this.canvasType}
+                initialStoryboardQuery={this.storyboardQuery}
                 onNodeAdd={this._handleNodeAdd}
                 onNodeReorder={this._handleNodeReorder}
                 onNodeMove={this._handleNodeMove}
@@ -445,6 +486,8 @@ export class BuilderContainerElement extends UpdatingElement {
                 onEventNodeClick={this._handleEventNodeClick}
                 onConvertToTemplate={this._handleConvertToTemplate}
                 onWorkbenchClose={this._handleWorkbenchClose}
+                onSwitchCanvasType={this._handleSwitchCanvasType}
+                onStoryboardQueryUpdate={this._handleStoryboardQueryUpdate}
               />
             </DndProvider>
           </BuilderProvider>

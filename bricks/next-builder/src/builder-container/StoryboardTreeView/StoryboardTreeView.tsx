@@ -19,7 +19,12 @@ export function StoryboardTreeView(): React.ReactElement {
   const { nodes } = useBuilderData();
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const groups = useBuilderGroupedChildNodes({ isRoot: true });
-  const { dataType, setHighlightNodes } = useBuilderUIContext();
+  const {
+    dataType,
+    setHighlightNodes,
+    storyboardQuery,
+    setStoryboardQuery,
+  } = useBuilderUIContext();
   const mountPoint = "bricks";
   const childNodes = React.useMemo(
     () =>
@@ -30,10 +35,11 @@ export function StoryboardTreeView(): React.ReactElement {
         : [],
     [groups, dataType]
   );
-  const [q, setQ] = React.useState<string>();
+  const [q, setQ] = React.useState<string>(storyboardQuery);
 
   const handleSearch = (value: string): void => {
     setQ(value);
+    setStoryboardQuery(value);
   };
 
   useEffect(() => {
@@ -85,6 +91,7 @@ export function StoryboardTreeView(): React.ReactElement {
       <SearchComponent
         placeholder={t(K.FIND_BRICKS_BY_CONFIGURATION)}
         onSearch={handleSearch}
+        defaultValue={storyboardQuery}
       />
       <div
         className={`${styles.treeView} ${sharedStyles.customScrollbarContainer}`}
