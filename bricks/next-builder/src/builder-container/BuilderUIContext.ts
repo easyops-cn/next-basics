@@ -30,6 +30,8 @@ export interface ContextOfBuilderUI {
   setClipboard?: React.Dispatch<React.SetStateAction<BuilderClipboard>>;
   canvasType?: BuilderCanvasType;
   setCanvasType?: React.Dispatch<React.SetStateAction<BuilderCanvasType>>;
+  storyboardQuery?: string;
+  setStoryboardQuery?: React.Dispatch<React.SetStateAction<string>>;
   onRouteSelect?: (route: BuilderRouteNode) => void;
   onTemplateSelect?: (template: BuilderCustomTemplateNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;

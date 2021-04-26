@@ -93,6 +93,9 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   canvasType: BuilderCanvasType;
 
+  @property()
+  storyboardQuery: string;
+
   @event({
     type: "node.add",
   })
@@ -231,6 +234,13 @@ export class BuilderContainerElement extends UpdatingElement {
   })
   private _canvasTypeSwitchEmitter: EventEmitter<{
     canvasType: BuilderCanvasType;
+  }>;
+
+  @event({
+    type: "storyboard.query.update",
+  })
+  private _storyboardQueryUpdateEmitter: EventEmitter<{
+    storyboardQuery: string;
   }>;
 
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
@@ -393,6 +403,15 @@ export class BuilderContainerElement extends UpdatingElement {
     }
   };
 
+  private _handleStoryboardQueryUpdate = (storyboardQuery: string): void => {
+    if (storyboardQuery !== this.storyboardQuery) {
+      this.storyboardQuery = storyboardQuery;
+      this._storyboardQueryUpdateEmitter.emit({
+        storyboardQuery,
+      });
+    }
+  };
+
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
@@ -444,6 +463,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 initialClipboardType={this.clipboardType}
                 initialClipboardSource={this.clipboardSource}
                 initialCanvasType={this.canvasType}
+                initialStoryboardQuery={this.storyboardQuery}
                 onNodeAdd={this._handleNodeAdd}
                 onNodeReorder={this._handleNodeReorder}
                 onNodeMove={this._handleNodeMove}
@@ -467,6 +487,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onConvertToTemplate={this._handleConvertToTemplate}
                 onWorkbenchClose={this._handleWorkbenchClose}
                 onSwitchCanvasType={this._handleSwitchCanvasType}
+                onStoryboardQueryUpdate={this._handleStoryboardQueryUpdate}
               />
             </DndProvider>
           </BuilderProvider>

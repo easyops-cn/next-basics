@@ -55,9 +55,12 @@ describe("StoryboardTreeView", () => {
 
   it("should setHighlightNodes", () => {
     const mockSetHighlightNodes = jest.fn();
+    const mockSetStoryboardQuery = jest.fn();
     mockUseBuilderUIContext.mockReturnValue({
       dataType: BuilderDataType.CUSTOM_TEMPLATE,
       setHighlightNodes: mockSetHighlightNodes,
+      storyboardQuery: "any",
+      setStoryboardQuery: mockSetStoryboardQuery,
     });
     mockUseBuilderGroupedChildNodes.mockReturnValue([
       {
@@ -70,8 +73,10 @@ describe("StoryboardTreeView", () => {
       },
     ]);
     const wrapper = mount(<StoryboardTreeView />);
+    expect(wrapper.find(SearchComponent).prop("defaultValue")).toBe("any");
     wrapper.find(SearchComponent).invoke("onSearch")("my");
     expect(mockSetHighlightNodes).toBeCalled();
+    expect(mockSetStoryboardQuery).toBeCalledWith("my");
   });
 
   it("should work for custom template", () => {

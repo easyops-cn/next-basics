@@ -258,4 +258,29 @@ describe("next-builder.builder-container", () => {
 
     document.body.removeChild(element);
   });
+
+  it("should handle storyboard query update", () => {
+    const element = document.createElement(
+      "next-builder.builder-container"
+    ) as BuilderContainerElement;
+
+    document.body.appendChild(element);
+
+    const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onStoryboardQueryUpdate = jest.fn();
+    element.addEventListener(
+      "storyboard.query.update",
+      onStoryboardQueryUpdate
+    );
+    wrapper.find(BuilderContainer).invoke("onStoryboardQueryUpdate")("any");
+    expect(onStoryboardQueryUpdate).toBeCalledWith(
+      expect.objectContaining({
+        detail: {
+          storyboardQuery: "any",
+        },
+      })
+    );
+
+    document.body.removeChild(element);
+  });
 });

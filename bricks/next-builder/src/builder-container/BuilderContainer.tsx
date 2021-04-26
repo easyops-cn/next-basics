@@ -48,6 +48,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   initialClipboardType?: BuilderClipboardType;
   initialClipboardSource?: string;
   initialCanvasType?: BuilderCanvasType;
+  initialStoryboardQuery?: string;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
@@ -67,6 +68,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onConvertToTemplate?: (node: BuilderRuntimeNode) => void;
   onWorkbenchClose?: () => void;
   onSwitchCanvasType?: (canvasType: BuilderCanvasType) => void;
+  onStoryboardQueryUpdate?: (storyboardQuery: string) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -82,6 +84,7 @@ export function LegacyBuilderContainer(
     initialClipboardType,
     initialClipboardSource,
     initialCanvasType,
+    initialStoryboardQuery,
     onNodeAdd,
     onNodeReorder,
     onNodeMove,
@@ -105,20 +108,24 @@ export function LegacyBuilderContainer(
     onConvertToTemplate,
     onWorkbenchClose,
     onSwitchCanvasType,
+    onStoryboardQueryUpdate,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
   const [highlightNodes, setHighlightNodes] = React.useState(new Set<number>());
+
   const memoToolboxTab = React.useMemo(
     () => initialToolboxTab ?? defaultToolboxTab,
     [initialToolboxTab]
   );
   const [toolboxTab, setToolboxTab] = React.useState(memoToolboxTab);
+
   const [eventStreamNodeId, setEventStreamNodeId] = React.useState(
     initialEventStreamNodeId
   );
   const [dataType, setDataType] = React.useState<BuilderDataType>();
+
   const memoClipboard = React.useMemo(
     () => getBuilderClipboard(initialClipboardType, initialClipboardSource),
     [initialClipboardType, initialClipboardSource]
@@ -126,10 +133,18 @@ export function LegacyBuilderContainer(
   const [clipboard, setClipboard] = React.useState<BuilderClipboard>(
     memoClipboard
   );
+
   const memoCanvasType = React.useMemo(() => initialCanvasType, [
     initialCanvasType,
   ]);
   const [canvasType, setCanvasType] = React.useState(memoCanvasType);
+
+  const memoStoryboardQuery = React.useMemo(() => initialStoryboardQuery, [
+    initialStoryboardQuery,
+  ]);
+  const [storyboardQuery, setStoryboardQuery] = React.useState(
+    memoStoryboardQuery
+  );
 
   const manager = useBuilderDataManager();
 
@@ -244,6 +259,14 @@ export function LegacyBuilderContainer(
     onSwitchCanvasType?.(canvasType);
   }, [canvasType, onSwitchCanvasType]);
 
+  React.useEffect(() => {
+    setStoryboardQuery(memoStoryboardQuery);
+  }, [memoStoryboardQuery]);
+
+  React.useEffect(() => {
+    onStoryboardQueryUpdate?.(storyboardQuery);
+  }, [storyboardQuery, onStoryboardQueryUpdate]);
+
   const handleClickOverlay = (): void => {
     onWorkbenchClose?.();
   };
@@ -267,6 +290,8 @@ export function LegacyBuilderContainer(
         setClipboard,
         canvasType,
         setCanvasType,
+        storyboardQuery,
+        setStoryboardQuery,
         onRouteSelect,
         onTemplateSelect,
         onCurrentRouteClick,
