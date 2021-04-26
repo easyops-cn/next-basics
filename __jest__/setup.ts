@@ -35,3 +35,9 @@ if (!window.matchMedia) {
     })),
   });
 }
+
+if (!window.queueMicrotask) {
+  window.queueMicrotask = (fn) => {
+    Promise.resolve().then(fn);
+  };
+}

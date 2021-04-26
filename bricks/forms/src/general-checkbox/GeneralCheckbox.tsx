@@ -9,11 +9,13 @@ import { CaretRightOutlined } from "@ant-design/icons";
 
 export interface GeneralCheckboxProps extends FormItemWrapperProps {
   options?: CheckboxOptionType[];
-  value?: CheckboxValueType[];
+  value?: CheckboxValueType[] | CheckboxValueType;
   colSpan?: number;
-  onChange?: (value: CheckboxValueType[]) => void;
+  onChange?: (value: CheckboxValueType[] | CheckboxValueType) => void;
   optionGroups?: OptionGroup[];
   isGroup?: boolean;
+  text?: string;
+  disabled?: boolean;
 }
 
 export function GeneralCheckboxItem(
@@ -25,6 +27,8 @@ export function GeneralCheckboxItem(
     colSpan,
     optionGroups,
     isGroup,
+    text,
+    disabled,
     value,
     options,
     ...inputProps
@@ -163,10 +167,10 @@ export function GeneralCheckboxItem(
     }
   };
 
-  return (
+  return (isGroup && optionGroups) || options?.length > 0 ? (
     <Checkbox.Group
       className={styles.generalCheckBox}
-      value={value}
+      value={value as CheckboxValueType[]}
       onChange={onChange}
       style={{ width: "100%" }}
       data-testid="checkbox-form-item"
@@ -174,6 +178,16 @@ export function GeneralCheckboxItem(
     >
       {renderOptions()}
     </Checkbox.Group>
+  ) : (
+    <Checkbox
+      checked={value as boolean}
+      onChange={(e) => {
+        onChange?.(e.target.checked);
+      }}
+      disabled={disabled}
+    >
+      {text}
+    </Checkbox>
   );
 }
 

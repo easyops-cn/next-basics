@@ -1,23 +1,6 @@
-.generalButton {
-  :global(.anticon) {
-    float: left;
-    margin-top: 4px;
-  }
-}
-
 .fadedText {
   &:global(.ant-btn-text) {
     color: #8c8c8c;
-  }
-}
-
-.noTextBtn {
-  :global(.anticon) {
-    margin-top: 0;
-    line-height: 0;
-  }
-  &.generalButton:global(.ant-btn-sm) {
-    padding: 0 6px;
   }
 }
 

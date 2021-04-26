@@ -25,6 +25,7 @@ interface GeneralModalProps {
   titleIcon?: MenuIcon;
   fullscreen?: boolean;
   okDisabled?: boolean;
+  confirmLoading?: boolean;
 }
 
 export function GeneralModal(props: GeneralModalProps): React.ReactElement {
@@ -38,6 +39,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     titleIcon,
     fullscreen,
     okDisabled,
+    confirmLoading,
   } = props;
   const modalHeaderRef = useRef<HTMLDivElement>();
   const modalFooterRef = useRef<HTMLDivElement>();
@@ -96,6 +98,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
       </Button>
       <Button
         disabled={okDisabled ?? configProps?.okButtonProps?.disabled}
+        loading={confirmLoading}
         className="okBtn"
         type={configProps?.okType || "primary"}
       >

@@ -21,6 +21,7 @@ declare type ButtonType = typeof ButtonTypes[number];
 interface LegacyGeneralButtonProps {
   buttonName: string;
   buttonType?: ButtonType;
+  buttonDanger?: boolean;
   buttonIcon?: string;
   buttonShape?: "circle" | "round";
   buttonSize?: "small" | "large";
@@ -39,6 +40,7 @@ interface LegacyGeneralButtonProps {
 export function GeneralButton({
   buttonName,
   buttonType,
+  buttonDanger,
   buttonIcon,
   buttonShape,
   buttonSize,
@@ -60,24 +62,23 @@ export function GeneralButton({
   const getButtonNode = () => (
     <Button
       className={classNames(styles.iconButton, {
-        [styles.generalButton]: !["circle", "round"].includes(buttonShape),
         [styles.fadedText]: fadedText && buttonType === "text",
-        [styles.noTextBtn]: !buttonName,
       })}
       shape={buttonShape}
       size={buttonSize}
       onClick={onClick}
       type={buttonType}
+      danger={buttonDanger}
       {...buttonProps}
       icon={
-        buttonIcon &&
-        typeof buttonIcon === "string" && <LegacyIcon type={buttonIcon} />
+        buttonIcon && typeof buttonIcon === "string" ? (
+          <LegacyIcon type={buttonIcon} />
+        ) : (
+          typeof buttonIcon === "object" && <GeneralIcon icon={buttonIcon} />
+        )
       }
       disabled={disabled}
     >
-      {buttonIcon && typeof buttonIcon === "object" && (
-        <GeneralIcon icon={buttonIcon} />
-      )}
       {buttonName}
     </Button>
   );

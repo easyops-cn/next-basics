@@ -127,6 +127,16 @@ export class GeneralModalElement extends UpdatingElement {
   okDisabled: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 确定按钮 loading
+   * @group basic
+   */
+  @property({ type: Boolean })
+  confirmLoading: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default `"取消"`
@@ -172,6 +182,18 @@ export class GeneralModalElement extends UpdatingElement {
    */
   @property({ type: Boolean })
   fullscreen?: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 是否点击背景关闭模态框
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  maskClosable: boolean;
 
   /**
    * @kind object
@@ -231,7 +253,9 @@ export class GeneralModalElement extends UpdatingElement {
         nodeName === "button" ? clickNode : clickNode.closest("button");
 
       if (
-        (this.modalProps.maskClosable !== false &&
+        ((this.maskClosable !== undefined
+          ? this.maskClosable
+          : this.modalProps.maskClosable !== false) &&
           nodeName === "div" &&
           clickNode.className.includes("ant-modal-wrap")) ||
         (buttonNode && buttonNode.className.includes("ant-modal-close"))
@@ -312,6 +336,7 @@ export class GeneralModalElement extends UpdatingElement {
             titleIcon={this.titleIcon}
             fullscreen={this.fullscreen}
             okDisabled={this.okDisabled}
+            confirmLoading={this.confirmLoading}
           />
         </BrickWrapper>,
         this._mountPoint

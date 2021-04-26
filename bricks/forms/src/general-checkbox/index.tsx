@@ -74,7 +74,7 @@ export class GeneralCheckboxElement extends FormItemElement {
   options: CheckboxOptionType[];
 
   /**
-   * @kind string[]
+   * @kind any[] | boolean
    * @required -
    * @default -
    * @description 输入框当前选中始值
@@ -134,14 +134,35 @@ export class GeneralCheckboxElement extends FormItemElement {
     type: Number,
   })
   colSpan: number;
+
   /**
-   * @detail `any[]`
+   * @required false
+   * @default -
+   * @description 作为单个复选框使用时的选项文本
+   */
+  @property({
+    type: String,
+  })
+  text: string;
+
+  /**
+   * @required false
+   * @default false
+   * @description 作为单个复选框使用时的禁用状态
+   */
+  @property({
+    type: Boolean,
+  })
+  disabled: boolean;
+
+  /**
+   * @detail `any[] | boolean`
    * @description 复选框变化时触发，`event.detail` 为当前选中的值列表
    */
-
   @event({ type: "general.checkbox.change" }) changeEvent: EventEmitter<
     Record<string, any>
   >;
+
   private _handleChange = (value: CheckboxValueType[]): void => {
     this.value = value;
     Promise.resolve().then(() => {
@@ -180,6 +201,8 @@ export class GeneralCheckboxElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             optionGroups={this.formatOptionsGroup(this.optionGroups)}
             isGroup={this.isGroup}
+            text={this.text}
+            disabled={this.disabled}
           />
         </BrickWrapper>,
         this
