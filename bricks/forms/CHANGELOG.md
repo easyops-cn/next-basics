@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.161.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.160.0...@next-bricks/forms@1.161.0) (2021-04-26)
+
+
+### Features
+
+* **treeSelect:** treeSelect support defaultExpandedKeys ([d37d5f9](https://github.com/easyops-cn/next-basics/commit/d37d5f9f6eb83cfa0203b6da9117b32eef7a75e6))
+
+
+
+
+
 # [1.160.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.159.0...@next-bricks/forms@1.160.0) (2021-04-26)
 
 
