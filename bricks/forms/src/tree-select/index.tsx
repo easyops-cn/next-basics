@@ -204,6 +204,15 @@ export class TreeSelectElement extends FormItemElement {
   @property({ attribute: false }) treeNodeLabelProp: string;
 
   /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 默认展开项
+   * @group advanced
+   */
+  @property({ attribute: false }) defaultExpandedKeys: string[];
+
+  /**
    * @detail `{value: DefaultValueType, label: any, extra: any}`
    * @description 输入变化时被触发，`event.detail` 为当前值
    */
@@ -263,6 +272,7 @@ export class TreeSelectElement extends FormItemElement {
             treeNodeLabelProp={this.treeNodeLabelProp}
             value={this.value}
             onChange={this.onChange}
+            defaultExpandedKeys={this.defaultExpandedKeys}
           />
         </BrickWrapper>,
         this

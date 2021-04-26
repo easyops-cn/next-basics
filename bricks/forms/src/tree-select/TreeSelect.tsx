@@ -23,6 +23,7 @@ export interface TreeSelectProps extends FormItemWrapperProps {
   treeNodeFilterProp?: string;
   treeNodeLabelProp?: string;
   value?: DefaultValueType;
+  defaultExpandedKeys?: string[];
   onChange?: (value: DefaultValueType, label: any, extra: any) => void;
 }
 
@@ -43,6 +44,7 @@ export function TreeSelect(props: TreeSelectProps): React.ReactElement {
     treeNodeFilterProp,
     treeNodeLabelProp,
     value,
+    defaultExpandedKeys,
     onChange,
     ...formItemProps
   } = props;
@@ -65,6 +67,7 @@ export function TreeSelect(props: TreeSelectProps): React.ReactElement {
         treeNodeFilterProp={treeNodeFilterProp}
         treeNodeLabelProp={treeNodeLabelProp}
         value={value}
+        treeDefaultExpandedKeys={defaultExpandedKeys}
         onChange={onChange}
       />
     </FormItemWrapper>
