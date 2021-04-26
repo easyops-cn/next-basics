@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.120.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.119.0...@next-bricks/basic-bricks@1.120.0) (2021-04-26)
+
+
+### Bug Fixes
+
+* **general-button:** fix icon only style ([5eac3d9](https://github.com/easyops-cn/next-basics/commit/5eac3d9659cf78407ac071e695d10a1a18fb8f5e))
+
+
+### Features
+
+* **general-button:** add buttonDanger property ([a2b2a25](https://github.com/easyops-cn/next-basics/commit/a2b2a25ce283c1990c2dac5f54d3715af09caaf3))
+* **general-modal:** add confirmLoading and maskClosable property ([455829b](https://github.com/easyops-cn/next-basics/commit/455829b016c2dc2f91b8803f57b0ca7553ab0282))
+
+
+
+
+
 # [1.119.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.118.0...@next-bricks/basic-bricks@1.119.0) (2021-04-25)
 
 

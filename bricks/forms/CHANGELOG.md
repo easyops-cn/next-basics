@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.160.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.159.0...@next-bricks/forms@1.160.0) (2021-04-26)
+
+
+### Features
+
+* **general-checkbox:** add text and disabled property to support use as single checkbox ([599fd34](https://github.com/easyops-cn/next-basics/commit/599fd342f66407bc38c5a8c5f04573bbb8365933))
+* **general-form:** setInitValue add runInMicrotask option ([799458d](https://github.com/easyops-cn/next-basics/commit/799458d20a4dfa635552286bd57bb501c24f6d82))
+
+
+
+
+
 # [1.159.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.158.5...@next-bricks/forms@1.159.0) (2021-04-23)
 
 
