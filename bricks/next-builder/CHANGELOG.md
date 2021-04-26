@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.49.0...@next-bricks/next-builder@1.50.0) (2021-04-26)
+
+
+### Bug Fixes
+
+* allow paste bricks from another route ([046d55f](https://github.com/easyops-cn/next-basics/commit/046d55f26f5f40ef95ba0e9ce8aacf48bd3f1190))
+
+
+### Features
+
+* support memo of stoyrboard query ([54b53db](https://github.com/easyops-cn/next-basics/commit/54b53dbe89790a5360d4f01a7fe6275347fd632d))
+* support separate portal canvas ([18fdf68](https://github.com/easyops-cn/next-basics/commit/18fdf68ef02af6f91fe0fcf04cedf5ec3e40f313))
+
+
+
+
+
 # [1.49.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.48.2...@next-bricks/next-builder@1.49.0) (2021-04-23)
 
 
