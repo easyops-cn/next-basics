@@ -82,6 +82,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
           tooltip,
           disabledTooltip,
           tooltipPlacement,
+          testId,
           ...restProps
         } = button;
         const buttonComponent = (
@@ -97,6 +98,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
             type={buttonType}
             shape={buttonShape}
             size={buttonSize}
+            data-testid={testId}
             {...restProps}
           >
             {icon && typeof icon === "object" && <GeneralIcon icon={icon} />}
@@ -176,6 +178,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                 style={{ color: button.disabled ? "" : button.color }}
                 disabled={button.disabled}
                 data-button={button}
+                data-testid={button.testId}
               >
                 {tooltip}
               </Menu.Item>
@@ -210,6 +213,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                   [style.moreIconButton]: moreButtonShape === "icon",
                 }
               )}
+              data-testid="dropdown-trigger"
             >
               {moreBtnIcon && typeof moreBtnIcon === "object" && (
                 <GeneralIcon icon={moreBtnIcon} />
@@ -217,7 +221,11 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
               {!moreBtnIcon && <EllipsisOutlined />}
             </Button>
           ) : dropdownBtnType === "link" ? (
-            <Button type="link" className={style.dropdownBtnContainer}>
+            <Button
+              type="link"
+              className={style.dropdownBtnContainer}
+              data-testid="dropdown-trigger"
+            >
               {dropdownBtnText || "管理"}
             </Button>
           ) : (
@@ -231,6 +239,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                   <SettingOutlined />
                 )
               }
+              data-testid="dropdown-trigger"
             >
               {dropdownBtnIcon && typeof dropdownBtnIcon === "object" && (
                 <GeneralIcon icon={dropdownBtnIcon} />

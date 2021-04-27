@@ -86,11 +86,14 @@ export interface CustomButton {
    * tooltip 位置
    */
   tooltipPlacement?: TooltipPlacement;
-
   /**
    * 设置按钮载入状态
    */
   loading?: boolean;
+  /**
+   * 用于测试时定位的 ID
+   */
+  testId?: string;
 }
 export type DropdownPlacement =
   | "bottomRight"
