@@ -28,6 +28,9 @@ export const generalCustomButtonsStory: Story = {
       },
       brick: "basic-bricks.general-custom-buttons",
       properties: {
+        dataset: {
+          testid: "basic-usage-demo",
+        },
         alignment: "end",
         customButtons: [
           {
@@ -74,6 +77,9 @@ export const generalCustomButtonsStory: Story = {
       },
       brick: "basic-bricks.general-custom-buttons",
       properties: {
+        dataset: {
+          testid: "type-disabled-tooltip-event-demo",
+        },
         alignment: "start",
         customButtons: [
           {
@@ -134,6 +140,9 @@ export const generalCustomButtonsStory: Story = {
       },
       brick: "basic-bricks.general-custom-buttons",
       properties: {
+        dataset: {
+          testid: "default-dropdown-demo",
+        },
         alignment: "end",
         customButtons: [
           {
@@ -145,17 +154,20 @@ export const generalCustomButtonsStory: Story = {
               theme: "outlined",
             },
             eventName: "button-create",
+            testId: "create",
           },
           {
             text: "搜索",
             icon: "search",
             eventName: "button-search",
+            testId: "search",
           },
           {
             isDropdown: true,
             text: "权限管理",
             icon: "user",
             eventName: "button-permission",
+            testId: "permission",
           },
           {
             isDropdown: true,
@@ -166,6 +178,7 @@ export const generalCustomButtonsStory: Story = {
               theme: "outlined",
             },
             eventName: "button-setting",
+            testId: "setting",
           },
         ],
       },
@@ -192,6 +205,9 @@ export const generalCustomButtonsStory: Story = {
       },
       brick: "basic-bricks.general-custom-buttons",
       properties: {
+        dataset: {
+          testid: "customized-dropdown-demo",
+        },
         alignment: "end",
         dropdownPlacement: "topLeft",
         dropdownBtnIcon: {
@@ -271,6 +287,9 @@ export const generalCustomButtonsStory: Story = {
             {
               brick: "basic-bricks.general-custom-buttons",
               properties: {
+                dataset: {
+                  testid: "update-button-demo",
+                },
                 id: "testTarget",
                 alignment: "end",
                 customButtons: [
@@ -400,6 +419,9 @@ export const generalCustomButtonsStory: Story = {
                         },
                       },
                       properties: {
+                        dataset: {
+                          testid: "style-in-card-demo",
+                        },
                         alignment: "end",
                         customButtons: [
                           {
