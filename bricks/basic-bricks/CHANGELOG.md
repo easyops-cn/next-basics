@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.121.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.2...@next-bricks/basic-bricks@1.121.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* refine liscense info ([0c5e91f](https://github.com/easyops-cn/next-basics/commit/0c5e91fcb40163a697aea260dc14abf7e67a6859))
+
+
+### Features
+
+* **general-custom-buttons:** add test id support ([0340481](https://github.com/easyops-cn/next-basics/commit/0340481e260728aaf8cb08b73b90ee1d78c651d0))
+
+
+
+
+
 ## [1.120.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.1...@next-bricks/basic-bricks@1.120.2) (2021-04-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
