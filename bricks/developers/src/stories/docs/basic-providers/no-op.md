@@ -4,4 +4,4 @@
 
 | Version | Change                           |
 | ------- | -------------------------------- |
-| 1.3.0   | 新增构件 `basic-providers.no-op` |
+| 1.3.0   | 新增构件 `basic-providers.provider-no-op` |
