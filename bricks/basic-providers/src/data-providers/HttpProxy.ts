@@ -12,7 +12,7 @@ export interface HttpProxyParams {
 
 const prefix = "api/gateway";
 
-export function HttpProxy<T>(httpProxyparams: HttpProxyParams): Promise<T> {
+export function HttpProxy<T>(httpProxyParams: HttpProxyParams): Promise<T> {
   const {
     serviceName,
     api,
@@ -21,7 +21,7 @@ export function HttpProxy<T>(httpProxyparams: HttpProxyParams): Promise<T> {
     body,
     headers,
     ...requestInit
-  } = httpProxyparams;
+  } = httpProxyParams;
 
   const url = `${prefix}/${serviceName}/${api}`;
   return http.request<T>(http.getUrlWithParams(url, params), {
