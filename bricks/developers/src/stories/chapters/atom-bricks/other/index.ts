@@ -4,6 +4,7 @@ import { story as recentVisit } from "./recent-visit";
 import { story as excelExportUtils } from "./export-excel-data";
 import { story as HttpProxy } from "./http-proxy";
 import { story as RichEditor } from "./rich-editor";
+import { story as NoOp } from "./no-op";
 
 export const chapter: Chapter = {
   category: "other",
@@ -17,5 +18,6 @@ export const chapter: Chapter = {
     excelExportUtils,
     HttpProxy,
     RichEditor,
+    NoOp,
   ],
 };
