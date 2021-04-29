@@ -13,21 +13,21 @@ export function LibraryDropdown(): React.ReactElement {
   const [visible, setVisible] = useState(false);
   const isOpen = useRef(false);
 
-  const handleClick = () => {
+  const handleClick = React.useCallback(() => {
     isOpen.current = !visible;
     setVisible(!visible);
-  };
+  }, [visible]);
 
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     isOpen.current = false;
     setVisible(false);
-  };
+  }, []);
 
-  const onDraggingChange = (isDragging: boolean): void => {
+  const onDraggingChange = React.useCallback((isDragging: boolean): void => {
     if (isOpen.current) {
       setVisible(!isDragging);
     }
-  };
+  }, []);
 
   const content = (
     <Menu>
