@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-// Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React, { useEffect } from "react";
 import {
   BuildFilled,
@@ -17,7 +15,10 @@ export interface BrickItemProps {
   onDraggingChange?: (isDragging: boolean) => void;
 }
 
-export function BrickItem({ brick, onDraggingChange }: BrickItemProps): React.ReactElement {
+export function BrickItem({
+  brick,
+  onDraggingChange,
+}: BrickItemProps): React.ReactElement {
   let brickType: string;
   switch (brick.type) {
     case "provider":
@@ -35,15 +36,14 @@ export function BrickItem({ brick, onDraggingChange }: BrickItemProps): React.Re
     options: {
       dropEffect: "copy",
     },
-    collect: (monitor) => ({
+    collect: /* istanbul ignore next */ (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     onDraggingChange?.(isDragging);
-  },[isDragging])
-
+  }, [isDragging, onDraggingChange]);
 
   let icon: JSX.Element;
 
@@ -64,7 +64,9 @@ export function BrickItem({ brick, onDraggingChange }: BrickItemProps): React.Re
   return (
     <div className={`${styles.brickItem} ${styles[brick.type]}`} ref={dragRef}>
       <span className={styles.brickIcon}>{icon}</span>
-      <span className={styles.brickName} title={brick.shortName}>{brick.shortName}</span>
+      <span className={styles.brickName} title={brick.shortName}>
+        {brick.shortName}
+      </span>
     </div>
   );
 }
