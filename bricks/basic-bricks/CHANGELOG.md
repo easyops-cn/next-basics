@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.121.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.121.0...@next-bricks/basic-bricks@1.121.1) (2021-04-30)
+
+
+### Bug Fixes
+
+* **app-bar:** 切换语言文字修改 ([1c68f71](https://github.com/easyops-cn/next-basics/commit/1c68f71d4945efcdc9b8907bbd018a1249f62dfd))
+* **sub-menu:** 修复item项宽度大了1px ([fbdc195](https://github.com/easyops-cn/next-basics/commit/fbdc1957bd4b77e3d7d6049e61519ea24ed623e7))
+
+
+
+
+
 # [1.121.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.2...@next-bricks/basic-bricks@1.121.0) (2021-04-28)
 
 

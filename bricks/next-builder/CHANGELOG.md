@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.50.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.50.0...@next-bricks/next-builder@1.50.1) (2021-04-30)
+
+
+### Bug Fixes
+
+* refine visual builder and add tests ([9b7654c](https://github.com/easyops-cn/next-basics/commit/9b7654c85699c7628d97cab13ec9edeba256d280))
+
+
+
+
+
 # [1.50.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.49.0...@next-bricks/next-builder@1.50.0) (2021-04-26)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.341.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.6...@next-bricks/developers@1.341.0) (2021-04-30)
+
+
+### Features
+
+* add docs about provider-no-op ([379d426](https://github.com/easyops-cn/next-basics/commit/379d426d16aadc8b52c7804c947a718157a00c91))
+
+
+
+
+
 ## [1.340.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.5...@next-bricks/developers@1.340.6) (2021-04-19)
 
 
