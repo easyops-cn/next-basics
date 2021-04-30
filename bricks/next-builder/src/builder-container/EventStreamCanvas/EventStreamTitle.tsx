@@ -24,7 +24,7 @@ export function EventStreamTitle({
 }: EventStreamTitleProps): React.ReactElement {
   const isUpstreamSource = eventNode.type === EventUpstreamType.UPSTREAM_SOURCE;
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     if (!isUpstreamSource) {
       onEventNodeClick?.(eventNode);
     }

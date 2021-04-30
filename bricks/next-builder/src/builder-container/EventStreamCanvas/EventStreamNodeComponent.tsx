@@ -52,7 +52,7 @@ export function EventStreamNodeComponent({
   );
 }
 
-export function EventDownstreamNodeComponent({
+function EventDownstreamNodeComponent({
   eventNode,
   targetMap,
   targetRefMap,
@@ -98,7 +98,7 @@ export function EventDownstreamNodeComponent({
   );
 }
 
-export function EventUpstreamNodeComponent({
+function EventUpstreamNodeComponent({
   eventNode,
   targetMap,
   targetRefMap,
