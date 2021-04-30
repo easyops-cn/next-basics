@@ -106,7 +106,7 @@ export function EventStreamGraphComponent({
     };
   }, [resize]);
 
-  const handleRender = React.useCallback(() => {
+  React.useEffect(() => {
     visual.render(eventDownstreamTree, eventUpstreamTree, {
       targetMap,
       targetRefMap,
@@ -120,10 +120,6 @@ export function EventStreamGraphComponent({
     targetRefMap,
     visual,
   ]);
-
-  React.useEffect(() => {
-    handleRender();
-  }, [handleRender]);
 
   return <div ref={ref} style={{ width: "100%", overflow: "hidden" }}></div>;
 }

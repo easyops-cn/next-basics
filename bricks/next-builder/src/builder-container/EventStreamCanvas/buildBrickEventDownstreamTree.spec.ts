@@ -115,6 +115,7 @@ describe("buildBrickEventDownstreamTree", () => {
             },
           ],
           children: [],
+          height: 86,
         }),
         expect.objectContaining({
           type: "life-cycle",
@@ -127,6 +128,7 @@ describe("buildBrickEventDownstreamTree", () => {
             },
           ],
           children: [],
+          height: 86,
         }),
       ],
     });
@@ -152,6 +154,7 @@ describe("buildBrickEventDownstreamTree", () => {
             },
           ],
           children: [],
+          height: 110,
         }),
       ],
     });
