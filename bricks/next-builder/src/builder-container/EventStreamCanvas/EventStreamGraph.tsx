@@ -11,7 +11,7 @@ import {
 import { create, Selection } from "d3-selection";
 import { linkHorizontal } from "d3-shape";
 import { zoomIdentity } from "d3-zoom";
-import { drag } from "d3-drag";
+import { drag, D3DragEvent } from "d3-drag";
 import { uniqueId } from "lodash";
 import classNames from "classnames";
 import { styleConfig } from "./styleConfig";
@@ -26,9 +26,9 @@ import {
 } from "./interfaces";
 import { EventStreamNodeComponent } from "./EventStreamNodeComponent";
 import { computeEventDownstreamSourceX } from "./buildBrickEventDownstreamTree";
+import { computeEventUpstreamSourceX } from "./buildBrickEventUpstreamTree";
 
 import styles from "./EventStreamGraph.module.css";
-import { computeEventUpstreamSourceX } from "./buildBrickEventUpstreamTree";
 
 interface RenderOptions {
   targetMap?: Map<string, string>;
@@ -130,8 +130,8 @@ export class EventStreamGraph {
         .on("start", () => {
           this.canvas.classed(styles.grabbing, true);
         })
-        .on("drag", (event) => {
-          const { dx, dy } = event as any;
+        .on("drag", (event: D3DragEvent<HTMLDivElement, unknown, unknown>) => {
+          const { dx, dy } = event;
           this.transform(-dx, -dy);
         })
         .on("end", () => {
@@ -139,13 +139,12 @@ export class EventStreamGraph {
         })
     );
     this.canvas
-      .on("wheel", function (event: Event) {
+      .on("wheel", function (event: WheelEvent) {
         event.preventDefault();
       })
-      .on("wheel.zoom", (event: Event) => {
+      .on("wheel.zoom", (event: WheelEvent) => {
         event.stopPropagation();
-        // Todo(steve): fixing types (https://github.com/DefinitelyTyped/DefinitelyTyped/issues/38939#issuecomment-683879719)
-        const { deltaX, deltaY, ctrlKey } = event as any;
+        const { deltaX, deltaY, ctrlKey } = event;
         // macOS trackPad pinch event is emitted as a wheel.zoom and event.ctrlKey set to true
         if (ctrlKey) {
           return;
