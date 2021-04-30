@@ -201,7 +201,7 @@ export function AppBar({
                             category: "default",
                           }}
                         />
-                        {currentLang === "zh" ? t(K.ENGLISH) : t(K.CHINESE)}
+                        {currentLang === "zh" ? "English" : "中文"}
                       </Menu.Item>
                     </>
                   )}
