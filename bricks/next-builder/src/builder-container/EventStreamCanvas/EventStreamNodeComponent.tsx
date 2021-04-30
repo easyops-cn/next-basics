@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-// Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
 import classNames from "classnames";
 import {
@@ -52,7 +50,7 @@ export function EventStreamNodeComponent({
   );
 }
 
-function EventDownstreamNodeComponent({
+export function EventDownstreamNodeComponent({
   eventNode,
   targetMap,
   targetRefMap,
@@ -98,7 +96,7 @@ function EventDownstreamNodeComponent({
   );
 }
 
-function EventUpstreamNodeComponent({
+export function EventUpstreamNodeComponent({
   eventNode,
   targetMap,
   targetRefMap,
