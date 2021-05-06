@@ -5,28 +5,6 @@ import { MyDesktop } from "./MyDesktop";
 import { DesktopCell } from "../DesktopCell/DesktopCell";
 import { FavoriteDesktopCell } from "../FavoriteDesktopCell/FavoriteDesktopCell";
 import { launchpadService } from "../LaunchpadService";
-import { SiteMap } from "../site-map/SiteMap";
-
-const favoriteList = [
-  {
-    launchpadCollection: {
-      instanceId: "5b8ee4e5c352c",
-      type: "microApp",
-      name: "开发者中心",
-      icon: {
-        type: "",
-        theme: "",
-        icon: "developers",
-        lib: "easyops",
-        category: "app",
-        prefix: "",
-      },
-      link: "/developers",
-    },
-    microAppId: "developers",
-    customItemId: "",
-  },
-];
 
 jest.mock("@next-libs/basic-components", () => {
   return {
@@ -104,6 +82,7 @@ jest.mock("../LaunchpadService", () => {
     },
   };
 });
+
 describe("MyDesktop", () => {
   it("should work with favorite tab", async () => {
     (launchpadService.fetchFavoriteList as jest.Mock).mockReturnValueOnce([
@@ -160,6 +139,9 @@ describe("MyDesktop", () => {
     expect(wrapper.find(".header .title").text()).toEqual("系统地图");
 
     wrapper.find(DesktopCell).at(0).invoke("onSetAsFavorite")();
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     expect(launchpadService.fetchFavoriteList).toHaveBeenCalled();
   });
 

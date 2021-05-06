@@ -45,20 +45,20 @@ describe("CmdbInstanceSelect", () => {
     mockPostSearch.mockResolvedValueOnce({
       list: [
         {
-          label: "host1",
-          value: "abc",
+          hostname: "host1",
+          instanceId: "abc",
           memo: "abc",
         },
 
         {
-          label: "host2",
-          value: "bcd",
+          hostname: "host2",
+          instanceId: "bcd",
           memo: "def",
         },
 
         {
-          label: "host3",
-          value: "efg",
+          hostname: "host3",
+          instanceId: "efg",
           memo: "bbc",
         },
       ],
