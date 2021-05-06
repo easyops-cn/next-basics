@@ -8,6 +8,7 @@ import {
   EditorSelfLayout,
   EditorSlotContentLayout,
   useBuilderNode,
+  useBuilderNodeMountPoints,
 } from "@next-core/editor-bricks-helper";
 import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
@@ -17,15 +18,24 @@ interface MicroViewProperties {
   pageTitle?: string;
 }
 
+const majorSlots = new Set(["titleBar", "toolbar", "content"]);
+
 export function MicroViewEditor({
   nodeUid,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<MicroViewProperties>({ nodeUid });
+  const mountPoints = useBuilderNodeMountPoints({ nodeUid });
+
   const { pageTitle } = node.$$parsedProperties;
   const displayPageTitle = smartDisplayForEvaluableString(
     pageTitle,
     "",
     "<% … %>"
+  );
+
+  const hasTitleBar = mountPoints.includes("titleBar");
+  const minorSlots = mountPoints.filter(
+    (mountPoint) => !majorSlots.has(mountPoint)
   );
 
   return (
@@ -43,8 +53,28 @@ export function MicroViewEditor({
         flexDirection: "column",
       }}
     >
+      {minorSlots.length > 0 && (
+        <div className={styles.minorSlots}>
+          {minorSlots.map((slotName) => (
+            <SlotContainer
+              key={slotName}
+              nodeUid={nodeUid}
+              slotName={slotName}
+            />
+          ))}
+        </div>
+      )}
       <div className={styles.microViewHeader}>
-        {displayPageTitle ? (
+        {hasTitleBar ? (
+          <SlotContainer
+            nodeUid={nodeUid}
+            slotName="titleBar"
+            slotContainerStyle={{
+              flex: 1,
+            }}
+            slotContentLayout={EditorSlotContentLayout.INLINE}
+          />
+        ) : displayPageTitle ? (
           <div className={styles.pageTitle}>{displayPageTitle}</div>
         ) : (
           <div className={`${styles.pageTitle} ${styles.untitled}`}>
