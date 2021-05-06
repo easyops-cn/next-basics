@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.122.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.121.1...@next-bricks/basic-bricks@1.122.0) (2021-05-06)
+
+
+### Bug Fixes
+
+* **editor:** support minor slots ([ad9a5e6](https://github.com/easyops-cn/next-basics/commit/ad9a5e6089a2e2d4aaf3346164120363cb9bce8b))
+
+
+### Features
+
+* **general-modal:** add i18n ([4da44c1](https://github.com/easyops-cn/next-basics/commit/4da44c102bc46f9c3e7d78f10efb731cd64ecb96))
+
+
+
+
+
 ## [1.121.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.121.0...@next-bricks/basic-bricks@1.121.1) (2021-04-30)
 
 
