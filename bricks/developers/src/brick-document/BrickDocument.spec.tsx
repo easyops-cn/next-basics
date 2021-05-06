@@ -1,7 +1,8 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
-import { BrickDocument } from "./BrickDocument";
+import { mount } from "enzyme";
 import { Empty } from "antd";
+import { BrickDocument } from "./BrickDocument";
+
 const doc = {
   id: "presentational-bricks.calendar",
   author: "Alex",

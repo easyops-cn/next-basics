@@ -345,12 +345,12 @@ export function BrickDocument({
       interfaces.length > 0 && (
         <>
           <h1>Interface</h1>
-          {interfaces.map((v) => (
-            <>
+          {interfaces.map((v, index) => (
+            <React.Fragment key={index}>
               {v.kind === "type" && renderType(v as any)}
               {v.kind === "enum" && renderEnum(v)}
               {v.kind === "interface" && renderInterface(v)}
-            </>
+            </React.Fragment>
           ))}
         </>
       )
