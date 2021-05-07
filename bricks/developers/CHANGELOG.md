@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.341.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.0...@next-bricks/developers@1.341.1) (2021-05-07)
+
+
+### Bug Fixes
+
+* add missing unique keys ([63430ca](https://github.com/easyops-cn/next-basics/commit/63430ca489154c71d54918034ee934d5eb00f26e))
+
+
+
+
+
 # [1.341.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.6...@next-bricks/developers@1.341.0) (2021-04-30)
 
 

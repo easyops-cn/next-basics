@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.161.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.1...@next-bricks/forms@1.161.2) (2021-05-07)
+
+
+### Bug Fixes
+
+* **forms:** set boolean default value, cannot be cleared ([adcc9b9](https://github.com/easyops-cn/next-basics/commit/adcc9b91e0afbcf8fb2880b80a4d6a96296858b4))
+
+
+
+
+
 ## [1.161.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.0...@next-bricks/forms@1.161.1) (2021-04-26)
 
 **Note:** Version bump only for package @next-bricks/forms
