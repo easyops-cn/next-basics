@@ -16,6 +16,7 @@ interface ArrValueType {
 }
 
 export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState<Partial<ArrValueType>>({
     regex: "",
     default: [],
@@ -60,7 +61,7 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
         </Row>
       </div>
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           <Select
             value={value?.default}
@@ -70,7 +71,7 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
             onChange={(e) => handleValueChange({ ...value, default: e })}
             tokenSeparators={[",", " "]}
             dropdownRender={() => <></>}
-          ></Select>
+          />
         </Row>
       </div>
     </>
