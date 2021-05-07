@@ -16,6 +16,7 @@ interface IntValueType {
 }
 
 export function ObjectAttrInt(props: ObjectAttrIntProps): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState<Partial<IntValueType>>({
     regex: "",
     default: "",
@@ -45,7 +46,7 @@ export function ObjectAttrInt(props: ObjectAttrIntProps): React.ReactElement {
         </Row>
       </div>
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           <InputNumber
             value={value?.default}

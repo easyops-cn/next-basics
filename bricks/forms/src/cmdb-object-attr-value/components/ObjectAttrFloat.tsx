@@ -18,6 +18,7 @@ interface FloatValueType {
 export function ObjectAttrFloat(
   props: ObjectAttrFloatProps
 ): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState<Partial<FloatValueType>>({
     default: "",
   });
@@ -51,7 +52,7 @@ export function ObjectAttrFloat(
         </Row>
       </div> */}
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           <InputNumber
             value={value?.default}

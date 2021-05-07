@@ -23,6 +23,11 @@ const locale: Locale = {
   [K.USERS_RESULT_LABEL]: "用户（仅显示前20项，更多结果请搜索）",
   [K.USER_GROUPS_RESULT_LABEL]: "用户组（仅显示前20项，更多结果请搜索）",
   [K.NO_DATA]: "暂无数据",
+  [K.ATTRIBUTE_DEFAULT_VALUE]: "属性默认值：",
+  [K.CONFIRM]: "确认",
+  [K.CANCEL]: "取消",
+  [K.GLOBALLY_UNIQUE_IDENTIFIER]: "全局唯一标识符",
+  [K.ATTRIBUTE_NAME]: "属性名称",
 };
 
 export default locale;

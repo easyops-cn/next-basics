@@ -134,7 +134,7 @@ export function LegacyObjectAttrStructForm(
             setAddStructModalVisible(true);
             setCurValueType(record.type);
           }}
-        ></Button>
+        />
       )}
 
       <Button
@@ -144,7 +144,7 @@ export function LegacyObjectAttrStructForm(
         onClick={(e) => {
           handleDeleteStruct(record);
         }}
-      ></Button>
+      />
     </div>
   );
 

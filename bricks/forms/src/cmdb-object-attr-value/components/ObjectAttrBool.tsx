@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
-import { Input, Row, Select } from "antd";
+import { Row, Select } from "antd";
 import { isNil, toString } from "lodash";
 
 interface ObjectAttrBoolProps {
@@ -17,7 +17,7 @@ export function ObjectAttrBool(props: ObjectAttrBoolProps): React.ReactElement {
   const [value, setValue] = React.useState<BoolValueType>({
     default: undefined,
   });
-
+  const { t } = useTranslation(NS_FORMS);
   React.useEffect(() => {
     !isNil(props.value) && setValue(props.value);
   }, [props.value]);
@@ -30,7 +30,7 @@ export function ObjectAttrBool(props: ObjectAttrBoolProps): React.ReactElement {
   return (
     <>
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           <Select
             allowClear
@@ -39,7 +39,7 @@ export function ObjectAttrBool(props: ObjectAttrBoolProps): React.ReactElement {
             onChange={(e) =>
               handleValueChange({
                 ...value,
-                default: e === "true" ? true : false,
+                default: e === "true" ? true : e === "false" ? false : null,
               })
             }
           >
