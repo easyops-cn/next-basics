@@ -33,7 +33,6 @@ import {
 import {
   BrickOptionItem,
   BuilderAppendBrickDetail,
-  BuilderCanvasType,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
@@ -90,8 +89,10 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   clipboardSource: string;
 
-  @property()
-  canvasType: BuilderCanvasType;
+  @property({
+    type: Number,
+  })
+  canvasIndex: number;
 
   @property()
   storyboardQuery: string;
@@ -230,10 +231,10 @@ export class BuilderContainerElement extends UpdatingElement {
   private _eventNodeAppendBrickAskEmitter: EventEmitter<BuilderAppendBrickDetail>;
 
   @event({
-    type: "canvas.type.switch",
+    type: "canvas.index.switch",
   })
-  private _canvasTypeSwitchEmitter: EventEmitter<{
-    canvasType: BuilderCanvasType;
+  private _canvasIndexSwitchEmitter: EventEmitter<{
+    canvasIndex: number;
   }>;
 
   @event({
@@ -394,11 +395,11 @@ export class BuilderContainerElement extends UpdatingElement {
     this._eventNodeAppendBrickAskEmitter.emit(detail);
   };
 
-  private _handleSwitchCanvasType = (canvasType: BuilderCanvasType): void => {
-    if (canvasType !== this.canvasType) {
-      this.canvasType = canvasType;
-      this._canvasTypeSwitchEmitter.emit({
-        canvasType,
+  private _handleSwitchCanvasIndex = (canvasIndex: number): void => {
+    if (canvasIndex !== this.canvasIndex) {
+      this.canvasIndex = canvasIndex;
+      this._canvasIndexSwitchEmitter.emit({
+        canvasIndex,
       });
     }
   };
@@ -462,7 +463,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 initialEventStreamNodeId={this.eventStreamNodeId}
                 initialClipboardType={this.clipboardType}
                 initialClipboardSource={this.clipboardSource}
-                initialCanvasType={this.canvasType}
+                initialCanvasIndex={this.canvasIndex}
                 initialStoryboardQuery={this.storyboardQuery}
                 onNodeAdd={this._handleNodeAdd}
                 onNodeReorder={this._handleNodeReorder}
@@ -486,7 +487,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onEventNodeClick={this._handleEventNodeClick}
                 onConvertToTemplate={this._handleConvertToTemplate}
                 onWorkbenchClose={this._handleWorkbenchClose}
-                onSwitchCanvasType={this._handleSwitchCanvasType}
+                onSwitchCanvasIndex={this._handleSwitchCanvasIndex}
                 onStoryboardQueryUpdate={this._handleStoryboardQueryUpdate}
               />
             </DndProvider>
