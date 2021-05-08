@@ -83,11 +83,11 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                 name: "id",
                 label: "属性ID",
                 required: true,
-                pattern: "^[a-zA-Z][a-zA-Z_0-9]{0,31}$",
+                pattern: "^[A-Za-z_][A-Za-z0-9_]{0,31}$",
                 message: {
                   required: "属性ID为必填项",
                   pattern:
-                    "请输入1至32个字符，以字母开头，只能包含字母、数字和下划线",
+                    "请输入1至32个字符，仅支持字母、数字和下划线(不能以数字开头)",
                 },
                 placeholder: "请输入属性ID",
               },
