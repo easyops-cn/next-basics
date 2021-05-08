@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.161.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.2...@next-bricks/forms@1.161.3) (2021-05-08)
+
+
+### Bug Fixes
+
+* **forms:** attribute ID rule ([ccdeb09](https://github.com/easyops-cn/next-basics/commit/ccdeb092a4319e713d73a7d7881278f8921b4d90))
+
+
+
+
+
 ## [1.161.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.1...@next-bricks/forms@1.161.2) (2021-05-07)
 
 
