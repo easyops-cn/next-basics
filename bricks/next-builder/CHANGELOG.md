@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.51.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.50.1...@next-bricks/next-builder@1.51.0) (2021-05-08)
+
+
+### Features
+
+* support independent portal canvas ([b5778e3](https://github.com/easyops-cn/next-basics/commit/b5778e36a011e2e6d18391f2cbad9b820a024028))
+
+
+
+
+
 ## [1.50.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.50.0...@next-bricks/next-builder@1.50.1) (2021-04-30)
 
 
