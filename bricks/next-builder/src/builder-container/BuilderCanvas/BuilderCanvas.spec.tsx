@@ -4,11 +4,17 @@ import { DropZone } from "@next-core/editor-bricks-helper";
 import { BuilderCanvas } from "./BuilderCanvas";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventStreamCanvas } from "../EventStreamCanvas/EventStreamCanvas";
-import { BuilderCanvasType, BuilderDataType } from "../interfaces";
+import { BuilderDataType } from "../interfaces";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
 jest.mock("../EventStreamCanvas/EventStreamCanvas");
+
+jest.mock("./BuilderCanvasTabs", () => ({
+  BuilderCanvasTabs() {
+    return <div>BuilderCanvasTabs</div>;
+  },
+}));
 
 const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
@@ -32,17 +38,17 @@ describe("BuilderCanvas", () => {
   let dataType: BuilderDataType;
   let fullscreen: boolean;
   let eventStreamNodeId: string;
-  let canvasType: BuilderCanvasType;
+  let canvasIndex: number;
   beforeEach(() => {
     dataType = BuilderDataType.ROUTE_OF_BRICKS;
     fullscreen = false;
     eventStreamNodeId = null;
-    canvasType = BuilderCanvasType.MAIN;
+    canvasIndex = 0;
     mockUseBuilderUIContext.mockImplementation(() => ({
       dataType,
       fullscreen,
       eventStreamNodeId,
-      canvasType,
+      canvasIndex,
     }));
   });
 
@@ -55,8 +61,8 @@ describe("BuilderCanvas", () => {
     expect(wrapper.find(".builderCanvas").hasClass("fullscreen")).toBe(false);
     expect(wrapper.find(".builderCanvas").hasClass("hasTabs")).toBe(true);
     expect(wrapper.find(DropZone).prop("fullscreen")).toBe(false);
-    expect(wrapper.find(DropZone).prop("separateCanvas")).toBe(true);
-    expect(wrapper.find(DropZone).prop("isPortalCanvas")).toBe(false);
+    expect(wrapper.find(DropZone).prop("independentPortalCanvas")).toBe(true);
+    expect(wrapper.find(DropZone).prop("canvasIndex")).toBe(0);
   });
 
   it("should return nothing if dataType is undefined", () => {
@@ -91,7 +97,7 @@ describe("BuilderCanvas", () => {
     dataType = BuilderDataType.ROUTE_OF_ROUTES;
     const wrapper = mount(<BuilderCanvas />);
     expect(wrapper.find(DropZone).prop("mountPoint")).toBe("routes");
-    expect(wrapper.find(DropZone).prop("separateCanvas")).toBe(false);
-    expect(wrapper.find(DropZone).prop("isPortalCanvas")).toBe(false);
+    expect(wrapper.find(DropZone).prop("independentPortalCanvas")).toBe(false);
+    expect(wrapper.find(DropZone).prop("canvasIndex")).toBe(0);
   });
 });

@@ -2,7 +2,6 @@ import { shallow } from "enzyme";
 import ReactDOM from "react-dom";
 import { BuilderContainer } from "./BuilderContainer";
 import {
-  BuilderCanvasType,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
@@ -235,7 +234,7 @@ describe("next-builder.builder-container", () => {
     document.body.removeChild(element);
   });
 
-  it("should handle canvas type switch", () => {
+  it("should handle canvas index switch", () => {
     const element = document.createElement(
       "next-builder.builder-container"
     ) as BuilderContainerElement;
@@ -243,15 +242,13 @@ describe("next-builder.builder-container", () => {
     document.body.appendChild(element);
 
     const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
-    const onSwitchCanvasType = jest.fn();
-    element.addEventListener("canvas.type.switch", onSwitchCanvasType);
-    wrapper.find(BuilderContainer).invoke("onSwitchCanvasType")(
-      BuilderCanvasType.PORTAL
-    );
-    expect(onSwitchCanvasType).toBeCalledWith(
+    const onSwitchCanvasIndex = jest.fn();
+    element.addEventListener("canvas.index.switch", onSwitchCanvasIndex);
+    wrapper.find(BuilderContainer).invoke("onSwitchCanvasIndex")(1);
+    expect(onSwitchCanvasIndex).toBeCalledWith(
       expect.objectContaining({
         detail: {
-          canvasType: BuilderCanvasType.PORTAL,
+          canvasIndex: 1,
         },
       })
     );

@@ -8,10 +8,10 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventStreamCanvas } from "../EventStreamCanvas/EventStreamCanvas";
-import { BuilderCanvasType, BuilderDataType } from "../interfaces";
+import { BuilderDataType } from "../interfaces";
+import { BuilderCanvasTabs } from "./BuilderCanvasTabs";
 
 import styles from "./BuilderCanvas.module.css";
-import { BuilderCanvasTabs } from "./BuilderCanvasTabs";
 
 export function BuilderCanvas(): React.ReactElement {
   const {
@@ -19,12 +19,12 @@ export function BuilderCanvas(): React.ReactElement {
     processing,
     fullscreen,
     eventStreamNodeId,
-    canvasType,
+    canvasIndex,
   } = useBuilderUIContext();
   const [droppingStatus, setDroppingStatus] = React.useState<DroppingStatus>(
     {}
   );
-  const separateCanvas = React.useMemo(
+  const independentPortalCanvas = React.useMemo(
     () => dataType !== BuilderDataType.ROUTE_OF_ROUTES && !eventStreamNodeId,
     [dataType, eventStreamNodeId]
   );
@@ -41,10 +41,10 @@ export function BuilderCanvas(): React.ReactElement {
     <div
       className={classNames(styles.builderCanvas, {
         [styles.fullscreen]: fullscreen,
-        [styles.hasTabs]: separateCanvas,
+        [styles.hasTabs]: independentPortalCanvas,
       })}
     >
-      {separateCanvas && <BuilderCanvasTabs />}
+      {independentPortalCanvas && <BuilderCanvasTabs />}
       <div className={styles.builderCanvasInner}>
         {eventStreamNodeId ? (
           <EventStreamCanvas nodeId={eventStreamNodeId} />
@@ -55,10 +55,8 @@ export function BuilderCanvas(): React.ReactElement {
             >
               <DropZone
                 isRoot
-                separateCanvas={separateCanvas}
-                isPortalCanvas={
-                  separateCanvas && canvasType === BuilderCanvasType.PORTAL
-                }
+                independentPortalCanvas={independentPortalCanvas}
+                canvasIndex={canvasIndex}
                 fullscreen={fullscreen}
                 mountPoint={
                   dataType === BuilderDataType.ROUTE_OF_ROUTES

@@ -78,8 +78,3 @@ export interface BuilderAppendBrickDetail {
   node: BuilderRuntimeNode;
   defaultSort: number;
 }
-
-export enum BuilderCanvasType {
-  MAIN = "main",
-  PORTAL = "portal",
-}
