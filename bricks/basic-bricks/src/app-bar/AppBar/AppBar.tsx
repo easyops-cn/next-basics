@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Menu, Dropdown, Divider, Avatar } from "antd";
+import { Button, Menu, Dropdown, Divider, Avatar,Tooltip } from "antd";
 import { AvatarProps } from "antd/lib/avatar";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { getAuth, getHistory, getRuntime } from "@next-core/brick-kit";
@@ -194,14 +194,17 @@ export function AppBar({
                         onClick={handleSwitchLanguage}
                         className={styles.dropdownMenuItem}
                       >
-                        <GeneralIcon
-                          icon={{
-                            lib: "easyops",
-                            icon: "language",
-                            category: "default",
-                          }}
-                        />
-                        {currentLang === "zh" ? "English" : "中文"}
+                        <Tooltip title={t(K.COVERT_TO_LANGUAGE)} placement="left">
+                          <GeneralIcon
+                            icon={{
+                              lib: "easyops",
+                              icon: "language",
+                              category: "default",
+                            }}
+                          />
+                          {currentLang === "zh" ? "English" : "中文"}
+                        </Tooltip>
+
                       </Menu.Item>
                     </>
                   )}
