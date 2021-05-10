@@ -13,6 +13,7 @@ const locale: Locale = {
   [K.HELP]: "Help",
   [K.CANCEL]: "Cancel",
   [K.OK]: "OK",
+  [K.COVERT_TO_LANGUAGE]: "切换为中文",
 };
 
 export default locale;

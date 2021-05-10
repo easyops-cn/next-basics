@@ -13,6 +13,7 @@ export enum K {
   HELP = "HELP",
   CANCEL = "CANCEL",
   OK = "OK",
+  COVERT_TO_LANGUAGE = "COVERT_TO_LANGUAGE",
 }
 
 export type Locale = { [key in K]: string };

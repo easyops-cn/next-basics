@@ -1,7 +1,7 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
-import { Dropdown, Avatar } from "antd";
+import {Dropdown, Avatar} from "antd";
 import * as brickKit from "@next-core/brick-kit";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
@@ -195,5 +195,7 @@ describe("AppBar", () => {
     expect(i18next.language).toEqual("zh-CN");
     expect(i18next.changeLanguage).toHaveBeenCalledWith("en");
     expect(window.location.reload).toBeCalled();
+    expect(switchLanguageBtn.props.children.props.placement).toBe("left");
+    expect(switchLanguageBtn.props.children.props.title).toBe("COVERT_TO_LANGUAGE");
   });
 });
