@@ -39,7 +39,7 @@ export interface FormModalProps {
 }
 
 export function FormModal(props: FormModalProps): React.ReactElement {
-  const { form, items, dataSource, onOk, ...modalProps } = props;
+  const { form, items, dataSource, onOk, cancelButtonProps, ...modalProps } = props;
   const formBrick = useMemo((): UseSingleBrickConf => {
     const formBrick: UseSingleBrickConf = {
       ...defaultFormBrick,
@@ -83,7 +83,7 @@ export function FormModal(props: FormModalProps): React.ReactElement {
   };
 
   return (
-    <Modal onOk={handleOk} {...modalProps}>
+    <Modal onOk={handleOk} cancelButtonProps={{ type: "link", ...cancelButtonProps }} {...modalProps}>
       <SingleBrickAsComponent
         useBrick={formBrick}
         data={dataSource}
