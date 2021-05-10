@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.122.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.1...@next-bricks/basic-bricks@1.122.2) (2021-05-10)
+
+
+### Bug Fixes
+
+* **basic-bricks:** add switch-language btn tooltip ([df181b9](https://github.com/easyops-cn/next-basics/commit/df181b9902a27ce5a0ad452b17b51eacdf30c683))
+
+
+
+
+
 ## [1.122.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.0...@next-bricks/basic-bricks@1.122.1) (2021-05-07)
 
 
