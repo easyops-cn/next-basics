@@ -105,8 +105,13 @@
   }
 }
 
-.dropdownBtn{
-  &:hover{
-    background-color: #ECF6FD;
+.dropdownMenuItem {
+  &:hover {
+    background-color: #ecf6fd;
   }
+}
+
+.dropdownBtn {
+  margin: -5px -12px;
+  padding: 5px 12px;
 }
