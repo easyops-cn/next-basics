@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.122.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.2...@next-bricks/basic-bricks@1.122.3) (2021-05-11)
+
+
+### Bug Fixes
+
+* **general-custom-buttons:**  修复按钮组tooltip相关问题 ([52413ed](https://github.com/easyops-cn/next-basics/commit/52413ed2df6c6675cee8586ac86ad02e1ffe4930))
+* **general-custom-buttons:**  修复按钮组tooltip相关问题 ([dd51719](https://github.com/easyops-cn/next-basics/commit/dd51719f8da9dc7230f9ba1a0601b9f8f6ebece9))
+* **general-custom-buttons:** 下拉按钮hover颜色更改浅蓝色 ([906354e](https://github.com/easyops-cn/next-basics/commit/906354e2b37162caf5548caedfa4bbe74a299af8))
+
+
+
+
+
 ## [1.122.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.1...@next-bricks/basic-bricks@1.122.2) (2021-05-10)
 
 
