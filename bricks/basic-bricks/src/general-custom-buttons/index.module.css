@@ -7,18 +7,22 @@
   grid-gap: 8px;
   grid-auto-flow: column;
   align-items: center;
+
   .moreButton {
     padding: 0 8px;
   }
+
   .noShapeButton {
     border: 0;
     height: auto;
   }
+
   :global(.ant-btn) {
     :global(.anticon) {
       vertical-align: middle;
     }
   }
+
   .circleShapeButton {
     border-radius: 16px;
   }
@@ -27,6 +31,7 @@
 .disabledMenuItem > a {
   color: rgb(191, 191, 191);
 }
+
 .dropdownBtnIconContainer {
   :global(.anticon) {
     float: left;
@@ -53,18 +58,23 @@
       color: #bfbfbf;
       background: #f5f5f5;
     }
+
     &:global(.ant-btn) {
       font-size: 16px;
+
       :global(.anticon) {
         vertical-align: -0.125em;
       }
     }
+
     &:global(.ant-btn-sm) {
       font-size: 14px;
       width: 28px;
     }
+
     &:global(.ant-btn-lg) {
       font-size: 18px;
+
       :global(.anticon) {
         vertical-align: middle;
       }
@@ -87,18 +97,23 @@
     color: #bfbfbf;
     background: #f5f5f5;
   }
+
   &:global(.ant-btn) {
     font-size: 16px;
+
     :global(.anticon) {
       vertical-align: -0.125em;
     }
   }
+
   &:global(.ant-btn-sm) {
     font-size: 14px;
     width: 28px;
   }
+
   &:global(.ant-btn-lg) {
     font-size: 18px;
+
     :global(.anticon) {
       vertical-align: middle;
     }
@@ -114,4 +129,8 @@
 .dropdownBtn {
   margin: -5px -12px;
   padding: 5px 12px;
+
+  > a {
+    color: var(--antd-text-color);
+  }
 }
