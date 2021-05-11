@@ -166,7 +166,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                 }
                 placement={button.tooltipPlacement}
               >
-                <div className={style.dropdownBtnContainer}>{text}</div>
+                <div className={style.dropdownBtn}>{text}</div>
               </Tooltip>
             );
             return (
