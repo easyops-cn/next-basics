@@ -173,6 +173,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
               <Menu.Item
                 className={classNames({
                   [style.disabledMenuItem]: button.disabled,
+                  [style.dropdownBtn]: true,
                 })}
                 key={button.eventName}
                 style={{ color: button.disabled ? "" : button.color }}
