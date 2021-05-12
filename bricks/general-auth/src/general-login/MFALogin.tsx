@@ -41,15 +41,15 @@ export function MFALogin(props: MFALoginProps) {
 
   const handleSubmit = (): void => {
     const { username, secret, userInstanceId, org } = dataSource;
-    const fetch = (values: FormValues) => {
-      MfaApi_verifyTotpCode({
-        username,
-        userInstanceId,
-        org,
-        verifyCode: values.dynamic_code,
-      })
-        .then((res) => {
-          // istanbul ignore if
+    const fetch = async (values: FormValues) => {
+      try {
+        const result = await MfaApi_verifyTotpCode({
+          username,
+          userInstanceId,
+          org,
+          verifyCode: values.dynamic_code,
+        });
+        if (result.loggedIn) {
           if (misc.mfa_redirect) {
             window.location.href = misc.mfa_redirect as string;
           } else {
@@ -60,32 +60,30 @@ export function MFALogin(props: MFALoginProps) {
               userInstanceId,
             });
           }
-        })
-        .catch((err) => {
-          setLoginErrorMsg(t(K.DYNAMIC_CODE_VALIDATION_FAILED));
-        })
-        .finally(() => {
           setConfirmLoading(false);
-        });
+        }
+      } catch (error) {
+        setConfirmLoading(false);
+        setLoginErrorMsg(httpErrorToString(error));
+      }
     };
-    form.validateFields().then((values) => {
-      if (secret) {
-        setConfirmLoading(true);
-        MfaApi_updateUserTotpSecret({
-          username,
-          secret,
-        })
-          .then(() => {
-            fetch(values);
-          })
-          .catch((err) => {
-            setLoginErrorMsg(httpErrorToString(err));
-          })
-          .finally(() => {
-            setConfirmLoading(false);
+    form.validateFields().then(async (values) => {
+      setConfirmLoading(true);
+      try {
+        if (secret) {
+          const result = await MfaApi_updateUserTotpSecret({
+            username,
+            secret,
           });
-      } else {
-        fetch(values);
+          if (!result.error) {
+            fetch(values);
+          }
+        } else {
+          fetch(values);
+        }
+      } catch (error) {
+        setConfirmLoading(false);
+        setLoginErrorMsg(httpErrorToString(error));
       }
     });
   };

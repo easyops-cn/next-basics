@@ -16,7 +16,7 @@ const spyOnKit = jest.spyOn(kit, "getRuntime");
 const spyOnReloadMicroApps = jest.fn();
 const spyOnReloadSharedData = jest.fn();
 const brandFn = jest.fn().mockReturnValue({});
-
+const getMiscSettings = jest.fn().mockReturnValue({});
 spyOnKit.mockReturnValue({
   reloadMicroApps: spyOnReloadMicroApps,
   reloadSharedData: spyOnReloadSharedData,
@@ -25,7 +25,7 @@ spyOnKit.mockReturnValue({
     "forgot-password-enabled": true,
     "sign-up-for-free-enabled": true,
   }),
-  getMiscSettings: () => ({}),
+  getMiscSettings,
 } as any);
 
 describe("MFALogin", () => {
@@ -93,6 +93,64 @@ describe("MFALogin", () => {
         userInstanceId: "xxx",
         loginFrom: "xxx",
       })
+    );
+    wrapper.find(Form).props().form.setFieldsValue({ dynamic_code: "xxxxxx" });
+    wrapper
+      .find(Modal)
+      .props()
+      .onOk({} as any);
+  });
+
+  it("should work when set redirect", async () => {
+    getMiscSettings.mockReturnValue({
+      mfa_redirect: "http://example.com",
+    });
+    const wrapper = shallow(
+      <MFALogin
+        onCancel={onCancel}
+        dataSource={{
+          username: "xxx",
+          secret: "",
+          totpSecret: "",
+          userInstanceId: "xxx",
+          org: 1111,
+        }}
+        redirect={redirect}
+      />
+    );
+    spyOnVerifyTotpCode.mockImplementationOnce(() =>
+      Promise.resolve({
+        loggedIn: true,
+        username: "xxx",
+        org: 1111,
+        location: "",
+        userInstanceId: "xxx",
+        loginFrom: "xxx",
+      })
+    );
+    wrapper.find(Form).props().form.setFieldsValue({ dynamic_code: "xxxxxx" });
+    wrapper
+      .find(Modal)
+      .props()
+      .onOk({} as any);
+  });
+
+  it("should work when MfaApi_updateUserTotpSecret error", async () => {
+    const wrapper = shallow(
+      <MFALogin
+        onCancel={onCancel}
+        dataSource={{
+          username: "xxx",
+          secret: "xxx",
+          totpSecret: "xxx",
+          userInstanceId: "xxx",
+          org: 1111,
+        }}
+        redirect={redirect}
+      />
+    );
+    spyOnUpdateUserTotpSecret.mockImplementationOnce(() =>
+      Promise.reject({} as any)
     );
     wrapper.find(Form).props().form.setFieldsValue({ dynamic_code: "xxxxxx" });
     wrapper
