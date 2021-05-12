@@ -5,6 +5,7 @@ import { Form } from "@ant-design/compatible";
 import { Modal } from "antd";
 import * as kit from "@next-core/brick-kit";
 import * as authSdk from "@next-sdk/auth-sdk";
+import * as mfaSdk from "@next-sdk/api-gateway-sdk";
 import { LegacyGeneralLogin } from "./GeneralLogin";
 import { WithTranslation } from "react-i18next";
 
@@ -25,6 +26,7 @@ const brandFn = jest.fn().mockReturnValue({});
 
 const spyOnLogin = jest.spyOn(authSdk, "login");
 const spyOnEsbLogin = jest.spyOn(authSdk, "esbLogin");
+const spyOnMFALogin = jest.spyOn(mfaSdk, "MfaApi_generateRandomTotpSecret");
 const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 
@@ -126,6 +128,39 @@ describe("GeneralLogin", () => {
     spyOnKit.mockReturnValueOnce({
       getFeatureFlags: () => ({
         "esb-login": true,
+      }),
+    } as any);
+    wrapper.find(Form).simulate("submit", new Event("submit"));
+  });
+
+  it("should work when open mfa ", async (done) => {
+    const form = {
+      getFieldDecorator: () => (comp: React.Component) => comp,
+      validateFields: jest.fn().mockImplementation(async (fn) => {
+        await fn(null, {
+          username: "mock-user",
+          password: "mock-pswd",
+        });
+        done();
+      }),
+    };
+    const wrapper = shallow(
+      <LegacyGeneralLogin form={form as any} {...i18nProps} />
+    );
+    expect(wrapper).toBeTruthy();
+    spyOnLogin.mockResolvedValueOnce({
+      loggedIn: false,
+      username: "mock-user",
+      userInstanceId: "abc",
+      org: 1,
+    });
+    spyOnMFALogin.mockResolvedValueOnce({
+      totpSecret: "xxx",
+      secret: "xxx",
+    });
+    spyOnKit.mockReturnValueOnce({
+      getFeatureFlags: () => ({
+        factors: true,
       }),
     } as any);
     wrapper.find(Form).simulate("submit", new Event("submit"));

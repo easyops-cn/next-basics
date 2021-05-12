@@ -2427,6 +2427,11 @@
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.7.tgz#c7de2dd9b9c563bd72d375661a87ef8034717080"
   integrity sha512-i4L0w8dkHlp2wfvNYobDQcncyoGxEk/hr5KfII09hqnwbHIlNQGFOwmjOGLQiP+o8nxcv8NTrQsQ09Ma04aNEg==
 
+"@next-sdk/api-gateway-sdk@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.3.tgz#a99cb0e1116ad1a086eadf2f8af44d749c9a1fb4"
+  integrity sha512-iwuzy3f36tddUq+vY9QZFN7NHQR1dxAQX7IUQU1wA68KtDV1+sBRZKWtDicD4QIbJ/XjXYwfLBlRIWcLixgWFQ==
+
 "@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.2.0.tgz#283bdf72676280bf73d20807f8784318eace5e99"
@@ -3282,6 +3287,13 @@
   version "1.5.4"
   resolved "https://registry.npmjs.org/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha1-FZJUFOCtLNdlv+9YhC9+JqesyyQ=
+
+"@types/qrcode.react@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@types/qrcode.react/-/qrcode.react-1.0.1.tgz#0904e7a075a6274a5258f19567b4f64013c159d8"
+  integrity sha512-PcVCjpsiT2KFKfJibOgTQtkt0QQT/6GbQUp1Np/hMPhwUzMJ2DRUkR9j7tXN9Q8X06qukw+RbaJ8lJ22SBod+Q==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-avatar-editor@^10.3.5":
   version "10.3.5"
@@ -12071,7 +12083,7 @@ prop-types-exact@^1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -12164,6 +12176,20 @@ q@^1.1.2, q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qr.js@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.npmjs.org/qr.js/-/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+  integrity sha1-ys6GOG9ZoNuAUPqQ2baw6IoeNk8=
+
+qrcode.react@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/qrcode.react/-/qrcode.react-1.0.1.tgz#2834bb50e5e275ffe5af6906eff15391fe9e38a5"
+  integrity sha512-8d3Tackk8IRLXTo67Y+c1rpaiXjoz/Dd2HpcMdW//62/x8J1Nbho14Kh8x974t9prsLHN6XqVgcnRiBGFptQmg==
+  dependencies:
+    loose-envify "^1.4.0"
+    prop-types "^15.6.0"
+    qr.js "0.0.0"
 
 qs@6.7.0:
   version "6.7.0"
