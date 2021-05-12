@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/presentational-bricks",
-  "version": "1.180.6",
+  "version": "1.180.9",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/presentational-bricks",
   "license": "GPL-3.0",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@next-core/custom-antd-styles": "^1.8.4",
+    "@next-core/custom-antd-styles": "^1.8.5",
     "@next-libs/basic-components": "^2.0.0",
     "@next-libs/clipboard": "^2.0.0",
     "@next-libs/cmdb-utils": "^1.0.0",
@@ -40,7 +40,7 @@
     "@next-sdk/object-store-sdk": "^2.1.1",
     "@types/react-avatar-editor": "^10.3.5",
     "classnames": "^2.2.6",
-    "dompurify": "^2.2.7",
+    "dompurify": "^2.2.8",
     "html-to-react": "^1.4.5",
     "immutability-helper": "^3.1.1",
     "marked": "^2.0.3",

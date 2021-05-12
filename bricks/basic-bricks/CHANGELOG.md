@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.122.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.2...@next-bricks/basic-bricks@1.122.3) (2021-05-11)
+
+
+### Bug Fixes
+
+* **general-custom-buttons:**  修复按钮组tooltip相关问题 ([52413ed](https://github.com/easyops-cn/next-basics/commit/52413ed2df6c6675cee8586ac86ad02e1ffe4930))
+* **general-custom-buttons:**  修复按钮组tooltip相关问题 ([dd51719](https://github.com/easyops-cn/next-basics/commit/dd51719f8da9dc7230f9ba1a0601b9f8f6ebece9))
+* **general-custom-buttons:** 下拉按钮hover颜色更改浅蓝色 ([906354e](https://github.com/easyops-cn/next-basics/commit/906354e2b37162caf5548caedfa4bbe74a299af8))
+
+
+
+
+
+## [1.122.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.1...@next-bricks/basic-bricks@1.122.2) (2021-05-10)
+
+
+### Bug Fixes
+
+* **basic-bricks:** add switch-language btn tooltip ([df181b9](https://github.com/easyops-cn/next-basics/commit/df181b9902a27ce5a0ad452b17b51eacdf30c683))
+
+
+
+
+
+## [1.122.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.0...@next-bricks/basic-bricks@1.122.1) (2021-05-07)
+
+
+### Bug Fixes
+
+* add missing unique keys ([63430ca](https://github.com/easyops-cn/next-basics/commit/63430ca489154c71d54918034ee934d5eb00f26e))
+
+
+
+
+
+# [1.122.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.121.1...@next-bricks/basic-bricks@1.122.0) (2021-05-06)
+
+
+### Bug Fixes
+
+* **editor:** support minor slots ([ad9a5e6](https://github.com/easyops-cn/next-basics/commit/ad9a5e6089a2e2d4aaf3346164120363cb9bce8b))
+
+
+### Features
+
+* **general-modal:** add i18n ([4da44c1](https://github.com/easyops-cn/next-basics/commit/4da44c102bc46f9c3e7d78f10efb731cd64ecb96))
+
+
+
+
+
+## [1.121.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.121.0...@next-bricks/basic-bricks@1.121.1) (2021-04-30)
+
+
+### Bug Fixes
+
+* **app-bar:** 切换语言文字修改 ([1c68f71](https://github.com/easyops-cn/next-basics/commit/1c68f71d4945efcdc9b8907bbd018a1249f62dfd))
+* **sub-menu:** 修复item项宽度大了1px ([fbdc195](https://github.com/easyops-cn/next-basics/commit/fbdc1957bd4b77e3d7d6049e61519ea24ed623e7))
+
+
+
+
+
+# [1.121.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.2...@next-bricks/basic-bricks@1.121.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* refine liscense info ([0c5e91f](https://github.com/easyops-cn/next-basics/commit/0c5e91fcb40163a697aea260dc14abf7e67a6859))
+
+
+### Features
+
+* **general-custom-buttons:** add test id support ([0340481](https://github.com/easyops-cn/next-basics/commit/0340481e260728aaf8cb08b73b90ee1d78c651d0))
+
+
+
+
+
 ## [1.120.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.1...@next-bricks/basic-bricks@1.120.2) (2021-04-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

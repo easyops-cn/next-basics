@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-// Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
 import ReactDOM from "react-dom";
 import {
@@ -11,8 +9,8 @@ import {
 import { create, Selection } from "d3-selection";
 import { linkHorizontal } from "d3-shape";
 import { zoomIdentity } from "d3-zoom";
-import { drag } from "d3-drag";
-import { uniqueId } from "lodash";
+import { drag, D3DragEvent } from "d3-drag";
+import { clamp, uniqueId } from "lodash";
 import classNames from "classnames";
 import { styleConfig } from "./styleConfig";
 import {
@@ -26,13 +24,13 @@ import {
 } from "./interfaces";
 import { EventStreamNodeComponent } from "./EventStreamNodeComponent";
 import { computeEventDownstreamSourceX } from "./buildBrickEventDownstreamTree";
-
-import styles from "./EventStreamGraph.module.css";
 import { computeEventUpstreamSourceX } from "./buildBrickEventUpstreamTree";
 
+import styles from "./EventStreamGraph.module.css";
+
 interface RenderOptions {
-  targetMap?: Map<string, string>;
-  targetRefMap?: Map<string, string>;
+  targetMap: Map<string, string>;
+  targetRefMap: Map<string, string>;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -82,19 +80,17 @@ export class EventStreamGraph {
     undefined
   >;
 
-  private onEventNodeClick: (eventNode: EventStreamNode) => void;
+  private readonly onEventNodeClick: (eventNode: EventStreamNode) => void;
 
   private offsetX = 0;
   private offsetY = 0;
   private nodesContainerWidth: number;
   private nodesContainerHeight: number;
 
-  constructor({
-    onEventNodeClick,
-  }: {
-    onEventNodeClick: (eventNode: EventStreamNode) => void;
+  constructor(options?: {
+    onEventNodeClick?: (eventNode: EventStreamNode) => void;
   }) {
-    this.onEventNodeClick = onEventNodeClick;
+    this.onEventNodeClick = options?.onEventNodeClick;
     this.canvas = create("div").attr("class", styles.canvas);
     this.linksLayer = this.canvas
       .append("svg")
@@ -124,28 +120,27 @@ export class EventStreamGraph {
       .attr("class", styles.nodesContainer);
     this.nodes = this.nodesContainer.selectAll(`.${styles.nodeWrapper}`);
 
-    /* istanbul ignore next */
     this.canvas.call(
       drag<HTMLDivElement, any>()
         .on("start", () => {
           this.canvas.classed(styles.grabbing, true);
         })
-        .on("drag", (event) => {
-          const { dx, dy } = event as any;
+        .on("drag", (event: D3DragEvent<HTMLDivElement, unknown, unknown>) => {
+          const { dx, dy } = event;
           this.transform(-dx, -dy);
         })
         .on("end", () => {
           this.canvas.classed(styles.grabbing, false);
         })
     );
+
     this.canvas
-      .on("wheel", function (event: Event) {
+      .on("wheel", function (event: WheelEvent) {
         event.preventDefault();
       })
-      .on("wheel.zoom", (event: Event) => {
+      .on("wheel.zoom", (event: WheelEvent) => {
         event.stopPropagation();
-        // Todo(steve): fixing types (https://github.com/DefinitelyTyped/DefinitelyTyped/issues/38939#issuecomment-683879719)
-        const { deltaX, deltaY, ctrlKey } = event as any;
+        const { deltaX, deltaY, ctrlKey } = event;
         // macOS trackPad pinch event is emitted as a wheel.zoom and event.ctrlKey set to true
         if (ctrlKey) {
           return;
@@ -154,7 +149,6 @@ export class EventStreamGraph {
       });
   }
 
-  /* istanbul ignore next */
   private transform(dx: number, dy: number): void {
     const nodeWidth = styleConfig.node.width;
     const maxOffsetX = this.nodesContainerWidth - nodeWidth / 2;
@@ -163,21 +157,8 @@ export class EventStreamGraph {
     const minOffsetY = -this.canvas.node().offsetHeight + nodeWidth / 2;
     const resultX = this.offsetX + dx;
     const resultY = this.offsetY + dy;
-    if (resultX > maxOffsetX) {
-      this.offsetX = maxOffsetX;
-    } else if (resultX < minOffsetX) {
-      this.offsetX = minOffsetX;
-    } else {
-      this.offsetX = resultX;
-    }
-
-    if (resultY > maxOffsetY) {
-      this.offsetY = maxOffsetY;
-    } else if (resultY < minOffsetY) {
-      this.offsetY = minOffsetY;
-    } else {
-      this.offsetY = resultY;
-    }
+    this.offsetX = clamp(resultX, minOffsetX, maxOffsetX);
+    this.offsetY = clamp(resultY, minOffsetY, maxOffsetY);
     const transformToNodes = `translate(${-this.offsetX}px, ${-this
       .offsetY}px)`;
     const transform = zoomIdentity.translate(-this.offsetX, -this.offsetY);

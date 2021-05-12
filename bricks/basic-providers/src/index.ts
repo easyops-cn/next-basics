@@ -1,2 +1,2 @@
-import "./i18n";
-import "./HttpProxy";
+import "./data-providers/HttpProxy";
+import "./data-providers/NoOp";

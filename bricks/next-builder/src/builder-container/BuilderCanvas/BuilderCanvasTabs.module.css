@@ -25,8 +25,22 @@
     font-size: 12px;
     line-height: 12px;
     min-width: 80px;
+    max-width: 140px;
     height: 100%;
+    padding: 0 8px;
     color: var(--antd-text-color-secondary);
+
+    .tab {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+
+    :global(.anticon) {
+      color: rgba(0, 0, 0, 0.3);
+    }
 
     &:not(:first-child) {
       margin-left: 8px;
@@ -36,10 +50,26 @@
       color: var(--antd-text-color);
       border-color: #fff;
       background-color: #fff;
+
+      :global(.anticon) {
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+
+    &.hover {
+      border-color: var(--editor-brick-stroke-color-active);
     }
 
     &:not(.active) {
       cursor: pointer;
     }
+
+    &.isPortalCanvas {
+      min-width: 0;
+    }
   }
+}
+
+.portalAlias {
+  margin-left: 4px;
 }

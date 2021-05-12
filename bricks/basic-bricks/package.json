@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/basic-bricks",
-  "version": "1.120.2",
+  "version": "1.122.3",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/basic-bricks",
   "license": "GPL-3.0",
@@ -26,13 +26,13 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
   "devDependencies": {
-    "@next-core/custom-antd-styles": "^1.8.4",
+    "@next-core/custom-antd-styles": "^1.8.5",
     "@next-libs/basic-components": "^2.0.0",
     "@next-libs/storage": "^1.0.0",
     "@next-sdk/air-admin-service-sdk": "^2.1.7",
     "@next-sdk/user-service-sdk": "^2.1.1",
     "classnames": "^2.2.6",
-    "hotkeys-js": "^3.8.3",
+    "hotkeys-js": "^3.8.5",
     "immutability-helper": "^3.1.1"
   },
   "sideEffects": true

@@ -34,7 +34,7 @@ interface ObjectAttrStrProps {
 
 export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   props.value.mode = props.value.mode || "default";
-
+  const { t } = useTranslation(NS_FORMS);
   const [popoverVisible, setPopoverVisible] = React.useState(false);
 
   const [value, setValue] = React.useState<Partial<StrValueType>>({
@@ -119,7 +119,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
       </Row>
       <Row justify="end" type="flex">
         <Button data-testid="start-value-cancel" onClick={hidePopover}>
-          取消
+          {t(K.CANCEL)}
         </Button>
         <Button
           onClick={handleStartValueChange}
@@ -127,7 +127,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
           style={{ marginLeft: 15 }}
           data-testid="start-value-confirm"
         >
-          确认
+          {t(K.CONFIRM)}
         </Button>
       </Row>
     </>
@@ -160,7 +160,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     } else if (value.default_type === "function") {
       return (
         <Select value="guid()" style={{ width: "100%" }}>
-          <Option value="guid()">全局唯一标识符</Option>
+          <Option value="guid()">{t(K.GLOBALLY_UNIQUE_IDENTIFIER)}</Option>
         </Select>
       );
     } else if (value.default_type === "auto-increment-id") {
@@ -255,7 +255,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
           </Row>
         </div>
         <div>
-          属性默认值：
+          {t(K.ATTRIBUTE_DEFAULT_VALUE)}
           <Row gutter={15}>
             <Col span={value.default_type === "series-number" ? 6 : 12}>
               <Select

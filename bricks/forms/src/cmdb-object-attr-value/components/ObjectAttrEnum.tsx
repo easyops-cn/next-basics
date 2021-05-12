@@ -18,6 +18,7 @@ interface EnumValueType {
 }
 
 export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState<Partial<EnumValueType>>({
     regex: [],
     default: props.isMulti ? [] : "",
@@ -57,7 +58,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
         </Row>
       </div>
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           <Select
             style={{ width: "100%" }}

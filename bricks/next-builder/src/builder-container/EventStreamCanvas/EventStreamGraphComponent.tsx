@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-// Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
 import {
   BuilderRuntimeNode,
@@ -15,7 +13,7 @@ export interface EventDownstreamGraphComponentProps {
   node: BuilderRuntimeNode;
 }
 
-export function EventDownstreamGraphComponent({
+export function EventStreamGraphComponent({
   node,
 }: EventDownstreamGraphComponentProps): React.ReactElement {
   const {
@@ -65,6 +63,7 @@ export function EventDownstreamGraphComponent({
 
   const resize = React.useCallback(() => {
     const graphContainer = ref.current;
+    // istanbul ignore next
     if (!graphContainer) {
       return;
     }
@@ -79,8 +78,9 @@ export function EventDownstreamGraphComponent({
       const bottomSpacing =
         process.env.NODE_ENV === "test"
           ? 44 // For testing only
-          : document.querySelector("#root-layout").getBoundingClientRect()
-              .height - bottom;
+          : /* istanbul ignore next */ document
+              .querySelector("#root-layout")
+              .getBoundingClientRect().height - bottom;
       maxHeight = `${
         document.documentElement.clientHeight - top - bottomSpacing
       }px`;
@@ -91,10 +91,10 @@ export function EventDownstreamGraphComponent({
 
   React.useEffect(() => {
     const graphContainer = ref.current;
+    // istanbul ignore next
     if (!graphContainer) {
       return;
     }
-
     resize();
     graphContainer.appendChild(visual.getDOMNode());
   }, [visual, resize]);
@@ -106,7 +106,7 @@ export function EventDownstreamGraphComponent({
     };
   }, [resize]);
 
-  const handleRender = React.useCallback(() => {
+  React.useEffect(() => {
     visual.render(eventDownstreamTree, eventUpstreamTree, {
       targetMap,
       targetRefMap,
@@ -120,10 +120,6 @@ export function EventDownstreamGraphComponent({
     targetRefMap,
     visual,
   ]);
-
-  React.useEffect(() => {
-    handleRender();
-  }, [handleRender]);
 
   return <div ref={ref} style={{ width: "100%", overflow: "hidden" }}></div>;
 }

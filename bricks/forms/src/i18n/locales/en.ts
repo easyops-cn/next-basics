@@ -26,6 +26,11 @@ const locale: Locale = {
   [K.USER_GROUPS_RESULT_LABEL]:
     "User groups (only display the top 20 items, please search for more results)",
   [K.NO_DATA]: "No Data",
+  [K.ATTRIBUTE_DEFAULT_VALUE]: "Attribute default value:",
+  [K.CONFIRM]: "Confirm",
+  [K.CANCEL]: "Cancel",
+  [K.GLOBALLY_UNIQUE_IDENTIFIER]: "Globally unique identifier",
+  [K.ATTRIBUTE_NAME]: "Attribute name",
 };
 
 export default locale;

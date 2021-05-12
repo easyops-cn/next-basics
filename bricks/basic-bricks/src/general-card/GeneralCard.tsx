@@ -40,12 +40,11 @@ export function GeneralCard({
   const footerRef = useRef<HTMLDivElement>();
   const renderButtons = (
     operationButtons: OperationButton[]
-  ): React.ReactElement[] => {
-    const buttons: React.ReactElement[] = [];
-    operationButtons.forEach((button) => {
+  ): React.ReactElement[] =>
+    operationButtons.map((button, index) => {
       const icon = button.configProps?.icon;
-      const tempButton = (
-        <Tooltip title={button.tooltip}>
+      return (
+        <Tooltip title={button.tooltip} key={index}>
           <Button
             {...button.configProps}
             icon={icon && <LegacyIcon type={icon} />}
@@ -55,11 +54,7 @@ export function GeneralCard({
           </Button>
         </Tooltip>
       );
-      buttons.push(tempButton);
     });
-
-    return buttons;
-  };
 
   const title = cardTitle && (
     <>
