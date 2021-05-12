@@ -41,30 +41,25 @@ export function MFALogin(props: MFALoginProps) {
 
   const handleSubmit = (): void => {
     const { username, secret, userInstanceId, org } = dataSource;
-    const fetch = async (values: FormValues) => {
-      try {
-        const result = await MfaApi_verifyTotpCode({
-          username,
-          userInstanceId,
-          org,
-          verifyCode: values.dynamic_code,
-        });
-        if (result.loggedIn) {
-          if (misc.mfa_redirect) {
-            window.location.href = misc.mfa_redirect as string;
-          } else {
-            handleCancel();
-            redirect({
-              org,
-              username,
-              userInstanceId,
-            });
-          }
-          setConfirmLoading(false);
+    const httpVerifyTotpCode = async (values: FormValues) => {
+      const result = await MfaApi_verifyTotpCode({
+        username,
+        userInstanceId,
+        org,
+        verifyCode: values.dynamic_code,
+      });
+      if (result.loggedIn) {
+        if (misc.mfa_redirect) {
+          window.location.href = misc.mfa_redirect as string;
+        } else {
+          handleCancel();
+          redirect({
+            org,
+            username,
+            userInstanceId,
+          });
         }
-      } catch (error) {
         setConfirmLoading(false);
-        setLoginErrorMsg(httpErrorToString(error));
       }
     };
     form.validateFields().then(async (values) => {
@@ -76,10 +71,10 @@ export function MFALogin(props: MFALoginProps) {
             secret,
           });
           if (!result.error) {
-            fetch(values);
+            await httpVerifyTotpCode(values);
           }
         } else {
-          fetch(values);
+          await httpVerifyTotpCode(values);
         }
       } catch (error) {
         setConfirmLoading(false);
