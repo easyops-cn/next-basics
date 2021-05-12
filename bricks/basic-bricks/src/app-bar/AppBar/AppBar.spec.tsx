@@ -1,7 +1,7 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
-import { Dropdown, Avatar } from "antd";
+import {Dropdown, Avatar} from "antd";
 import * as brickKit from "@next-core/brick-kit";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
@@ -56,6 +56,11 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getFeatureFlags,
   getMicroApps,
 } as any);
+
+delete window.location;
+window.location = ({
+  reload: jest.fn(),
+} as unknown) as Location;
 
 describe("AppBar", () => {
   afterEach(() => {
@@ -173,17 +178,24 @@ describe("AppBar", () => {
     expect(CustomerApi_getExpiration).toHaveBeenCalled();
   });
 
-  it("should handle language change", () => {
+  it("should handle language change", async () => {
     getFeatureFlags.mockImplementation(() => ({
       "switch-language": true,
     }));
     const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
     const switchLanguageBtn = (wrapper
       .find(Dropdown)
       .prop("overlay") as React.ReactElement).props.children[2].props
       .children[1];
     switchLanguageBtn.props.onClick();
+    await (global as any).flushPromises();
     expect(i18next.language).toEqual("zh-CN");
     expect(i18next.changeLanguage).toHaveBeenCalledWith("en");
+    expect(window.location.reload).toBeCalled();
+    expect(switchLanguageBtn.props.children.props.placement).toBe("left");
+    expect(switchLanguageBtn.props.children.props.title).toBe("COVERT_TO_LANGUAGE");
   });
 });

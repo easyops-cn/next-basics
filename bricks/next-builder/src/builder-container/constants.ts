@@ -1,4 +1,4 @@
-import { BrickOptionItem, BuilderCanvasType, ToolboxTab } from "./interfaces";
+import { BrickOptionItem, ToolboxTab } from "./interfaces";
 
 export const brickSearchResultLimit = 24;
 

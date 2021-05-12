@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-// Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
 import classNames from "classnames";
 import {
@@ -24,7 +22,7 @@ export function EventStreamTitle({
 }: EventStreamTitleProps): React.ReactElement {
   const isUpstreamSource = eventNode.type === EventUpstreamType.UPSTREAM_SOURCE;
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     if (!isUpstreamSource) {
       onEventNodeClick?.(eventNode);
     }

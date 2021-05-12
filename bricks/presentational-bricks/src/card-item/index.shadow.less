@@ -188,7 +188,7 @@
 
     &.gray {
       background: linear-gradient(49deg, #F5F5F5 0%, #D9D9D9 100%);
-      color:#8c8c8c;
+      color: #8c8c8c;
     }
   }
 
@@ -341,6 +341,10 @@ a {
 }
 
 .disabledCard {
+  .cardItem&:hover {
+    border-color: var(--stroke-color-default);
+    cursor: not-allowed;
+  }
 
   .cardTitle,
   .cardSubtitle,

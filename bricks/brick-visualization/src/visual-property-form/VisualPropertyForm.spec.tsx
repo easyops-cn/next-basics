@@ -4,6 +4,7 @@ import { mount, shallow } from "enzyme";
 import { VisualPropertyForm } from "./VisualPropertyForm";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { act } from "react-dom/test-utils";
+// import { SketchPicker } from "react-color";
 
 jest.mock("@next-libs/editor-components", () => ({
   CodeEditorItem: function MockEditor() {
@@ -17,9 +18,9 @@ jest.mock("@next-libs/forms", () => ({
   },
 }));
 
-jest.mock("react-color", () => ({
-  SketchPicker: function MockColorEditor() {
-    return <div>color editor</div>;
+jest.mock("./components/ColorEditor/ColorEditorItem", () => ({
+  ColorEditorItem: function ColorEditorItem() {
+    return <div>ColorEditorItem</div>;
   },
 }));
 
@@ -217,9 +218,7 @@ describe("VisualPropertyForm", () => {
 
     const wrapper = shallow(<VisualPropertyForm {...props} />);
 
-    expect(wrapper.find("IconSelectFormItem").render().text()).toEqual(
-      expect.stringContaining("icon select editor")
-    );
+    expect(wrapper.find("IconSelectFormItem").length).toBe(1);
   });
 
   it("should render color", () => {
@@ -246,9 +245,6 @@ describe("VisualPropertyForm", () => {
 
     const wrapper = mount(<VisualPropertyForm {...props} />);
 
-    wrapper.debug();
-    wrapper.find(".colorCube").simulate("click");
-    wrapper.update();
-    expect(wrapper.find(".popover").text()).toEqual("color editor");
+    expect(wrapper.find("ColorEditorItem").length).toBe(1);
   });
 });

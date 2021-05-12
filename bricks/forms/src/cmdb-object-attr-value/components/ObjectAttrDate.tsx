@@ -16,6 +16,7 @@ interface DateValueType {
 }
 
 export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState<DateValueType>({
     default: "",
   });
@@ -42,7 +43,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
         </Row>
       </div>
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           {value?.default?.length ? (
             <DatePicker

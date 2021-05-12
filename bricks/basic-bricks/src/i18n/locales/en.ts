@@ -11,8 +11,9 @@ const locale: Locale = {
   [K.BRICK_ERROR]: "Oops! Brick went wrong.",
   [K.LEGACY_TEMPLATE_ERROR]: "Oops! Legacy template went wrong.",
   [K.HELP]: "Help",
-  [K.ENGLISH]: "English",
-  [K.CHINESE]: "Chinese",
+  [K.CANCEL]: "Cancel",
+  [K.OK]: "OK",
+  [K.COVERT_TO_LANGUAGE]: "切换为中文",
 };
 
 export default locale;

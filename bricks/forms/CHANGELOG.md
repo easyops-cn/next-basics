@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.161.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.3...@next-bricks/forms@1.161.4) (2021-05-10)
+
+
+### Bug Fixes
+
+* **forms,presentational-bricks:** 修改表单模态框中取消按钮样式 ([4c0efec](https://github.com/easyops-cn/next-basics/commit/4c0efece6a8dcaeea7f0e536c91937d5cd53737a))
+
+
+
+
+
+## [1.161.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.2...@next-bricks/forms@1.161.3) (2021-05-08)
+
+
+### Bug Fixes
+
+* **forms:** attribute ID rule ([ccdeb09](https://github.com/easyops-cn/next-basics/commit/ccdeb092a4319e713d73a7d7881278f8921b4d90))
+
+
+
+
+
+## [1.161.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.1...@next-bricks/forms@1.161.2) (2021-05-07)
+
+
+### Bug Fixes
+
+* **forms:** set boolean default value, cannot be cleared ([adcc9b9](https://github.com/easyops-cn/next-basics/commit/adcc9b91e0afbcf8fb2880b80a4d6a96296858b4))
+
+
+
+
+
 ## [1.161.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.0...@next-bricks/forms@1.161.1) (2021-04-26)
 
 **Note:** Version bump only for package @next-bricks/forms

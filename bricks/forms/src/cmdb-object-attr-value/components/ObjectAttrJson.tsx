@@ -15,6 +15,7 @@ interface JsonValueType {
 }
 
 export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState<Partial<JsonValueType>>({
     default: "",
     regex: "",
@@ -44,7 +45,7 @@ export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
         </Row>
       </div>
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           <Input
             value={value?.default}

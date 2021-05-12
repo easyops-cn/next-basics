@@ -17,6 +17,7 @@ interface DateTimeType {
 export function ObjectAttrDatetime(
   props: ObjectAttrDatetimeProps
 ): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState<DateTimeType>({
     default: "",
   });
@@ -47,7 +48,7 @@ export function ObjectAttrDatetime(
         </Row>
       </div>
       <div>
-        属性默认值：
+        {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           {value?.default?.length ? (
             <DatePicker

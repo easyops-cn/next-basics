@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-providers@1.2.4...@next-bricks/basic-providers@1.3.0) (2021-04-28)
+
+
+### Features
+
+* add a noop provider ([50004c0](https://github.com/easyops-cn/next-basics/commit/50004c000eb0f6dbfaa5f4a2c74d5145f5476d2b))
+
+
+
+
+
 ## [1.2.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-providers@1.2.3...@next-bricks/basic-providers@1.2.4) (2021-02-07)
 
 **Note:** Version bump only for package @next-bricks/basic-providers

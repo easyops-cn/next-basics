@@ -18,7 +18,6 @@ import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 import {
   BrickOptionItem,
-  BuilderCanvasType,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderDataType,
@@ -47,7 +46,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   initialEventStreamNodeId?: string;
   initialClipboardType?: BuilderClipboardType;
   initialClipboardSource?: string;
-  initialCanvasType?: BuilderCanvasType;
+  initialCanvasIndex?: number;
   initialStoryboardQuery?: string;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
@@ -67,7 +66,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onEventNodeClick?: (eventNode: EventStreamNode) => void;
   onConvertToTemplate?: (node: BuilderRuntimeNode) => void;
   onWorkbenchClose?: () => void;
-  onSwitchCanvasType?: (canvasType: BuilderCanvasType) => void;
+  onSwitchCanvasIndex?: (canvasIndex: number) => void;
   onStoryboardQueryUpdate?: (storyboardQuery: string) => void;
 }
 
@@ -83,7 +82,7 @@ export function LegacyBuilderContainer(
     initialEventStreamNodeId,
     initialClipboardType,
     initialClipboardSource,
-    initialCanvasType,
+    initialCanvasIndex,
     initialStoryboardQuery,
     onNodeAdd,
     onNodeReorder,
@@ -107,7 +106,7 @@ export function LegacyBuilderContainer(
     onEventNodeClick,
     onConvertToTemplate,
     onWorkbenchClose,
-    onSwitchCanvasType,
+    onSwitchCanvasIndex,
     onStoryboardQueryUpdate,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
@@ -134,10 +133,10 @@ export function LegacyBuilderContainer(
     memoClipboard
   );
 
-  const memoCanvasType = React.useMemo(() => initialCanvasType, [
-    initialCanvasType,
+  const memoCanvasIndex = React.useMemo(() => initialCanvasIndex, [
+    initialCanvasIndex,
   ]);
-  const [canvasType, setCanvasType] = React.useState(memoCanvasType);
+  const [canvasIndex, setCanvasIndex] = React.useState(memoCanvasIndex);
 
   const memoStoryboardQuery = React.useMemo(() => initialStoryboardQuery, [
     initialStoryboardQuery,
@@ -151,8 +150,8 @@ export function LegacyBuilderContainer(
   React.useImperativeHandle(ref, () => manager);
 
   React.useEffect(() => {
-    setCanvasType(memoCanvasType);
-  }, [memoCanvasType]);
+    setCanvasIndex(memoCanvasIndex);
+  }, [memoCanvasIndex]);
 
   React.useEffect(() => {
     let type = BuilderDataType.UNKNOWN;
@@ -186,22 +185,22 @@ export function LegacyBuilderContainer(
   }, [dataSource, manager]);
 
   React.useEffect(() => {
-    // If the canvas type is not specified, set to portal canvas if the
+    // If the canvas index is not specified, set to portal canvas if the
     // canvas is not empty and has only portal bricks in first level,
     // otherwise set to main canvas.
-    if (!initialCanvasType) {
+    if (initialCanvasIndex == null) {
       const { rootId, nodes, edges } = manager.getData();
       const rootChildNodes = edges
         .filter((edge) => edge.parent === rootId)
         .map((edge) => nodes.find((node) => node.$$uid === edge.child));
-      const newCanvasType =
+      const newCanvasIndex =
         rootChildNodes.length > 0 &&
         !rootChildNodes.some((node) => !node.portal)
-          ? BuilderCanvasType.PORTAL
-          : BuilderCanvasType.MAIN;
-      setCanvasType(newCanvasType);
+          ? 1
+          : 0;
+      setCanvasIndex(newCanvasIndex);
     }
-  }, [initialCanvasType, manager]);
+  }, [initialCanvasIndex, manager]);
 
   React.useEffect(() => {
     manager.routeListInit(routeList);
@@ -256,8 +255,8 @@ export function LegacyBuilderContainer(
   }, [clipboard, onClipboardChange]);
 
   React.useEffect(() => {
-    onSwitchCanvasType?.(canvasType);
-  }, [canvasType, onSwitchCanvasType]);
+    onSwitchCanvasIndex?.(canvasIndex);
+  }, [canvasIndex, onSwitchCanvasIndex]);
 
   React.useEffect(() => {
     setStoryboardQuery(memoStoryboardQuery);
@@ -288,8 +287,8 @@ export function LegacyBuilderContainer(
         setEventStreamNodeId,
         clipboard,
         setClipboard,
-        canvasType,
-        setCanvasType,
+        canvasIndex,
+        setCanvasIndex,
         storyboardQuery,
         setStoryboardQuery,
         onRouteSelect,

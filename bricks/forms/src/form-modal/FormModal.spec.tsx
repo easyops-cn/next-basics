@@ -39,7 +39,9 @@ const modalProps = {
   maskClosable: true,
   forceRender: true,
   okButtonProps: {},
-  cancelButtonProps: {},
+  cancelButtonProps: {
+    type: "link"
+  },
   destroyOnClose: true,
   onCancel: jest.fn(),
 } as const;

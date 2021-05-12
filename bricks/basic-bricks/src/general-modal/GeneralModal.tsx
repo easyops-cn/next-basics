@@ -4,6 +4,8 @@ import { Modal, Button } from "antd";
 import { ModalProps } from "antd/lib/modal";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
+import { NS_BASIC_BRICKS, K } from "../i18n/constants";
+import { useTranslation } from "react-i18next";
 
 const fullscreenTopOffset = 40;
 
@@ -46,6 +48,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
   const contentSlotRef = useRef<HTMLSlotElement>();
   const setBodyHeightHandlerRef = useRef<() => void>();
   const [bodyHeight, setBodyHeight] = useState<number>();
+  const { t } = useTranslation(NS_BASIC_BRICKS);
 
   useEffect(() => {
     if (fullscreen && visible && contentSlotRef.current) {
@@ -94,7 +97,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
   const defaultFooter = (
     <div>
       <Button type="link" className="cancelBtn">
-        {configProps?.cancelText || "取消"}
+        {configProps?.cancelText || t(K.CANCEL)}
       </Button>
       <Button
         disabled={okDisabled ?? configProps?.okButtonProps?.disabled}
@@ -102,7 +105,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         className="okBtn"
         type={configProps?.okType || "primary"}
       >
-        {configProps?.okText || "确定"}
+        {configProps?.okText || t(K.OK)}
       </Button>
     </div>
   );

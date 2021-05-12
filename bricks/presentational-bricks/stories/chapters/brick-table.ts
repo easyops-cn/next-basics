@@ -21,6 +21,7 @@ export const BrickTableStory: Story = {
     {
       description: {
         title: "基础用法",
+        message: "注意对表格数据进行筛选时，需将页码恢复为第一页。",
       },
       brick: "presentational-bricks.brick-table",
       properties: {
@@ -1056,6 +1057,8 @@ export const BrickTableStory: Story = {
     {
       description: {
         title: "跨页勾选",
+        message:
+          "实现跨页勾选需要在url更新时不触发页面重新渲染，并在页码和页数变化的事件中手动触发数据源更新。",
       },
       brick: "div",
       slots: {

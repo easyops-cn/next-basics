@@ -1,8 +1,6 @@
-/* istanbul ignore file */
-// Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import React from "react";
 import { useBuilderData } from "@next-core/editor-bricks-helper";
-import { EventDownstreamGraphComponent } from "./EventStreamGraphComponent";
+import { EventStreamGraphComponent } from "./EventStreamGraphComponent";
 
 export interface EventStreamCanvasProps {
   nodeId: string;
@@ -20,5 +18,5 @@ export function EventStreamCanvas({
   if (!node) {
     return null;
   }
-  return <EventDownstreamGraphComponent node={node} />;
+  return <EventStreamGraphComponent node={node} />;
 }
