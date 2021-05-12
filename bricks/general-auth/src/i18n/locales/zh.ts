@@ -14,6 +14,10 @@ const locale: Locale = {
   [K.REGISTER_ACCOUNT]: "注册账户",
   [K.PLEASE_INPUT_USERNAME_PASSWORD]: "请输入用户名，密码!",
   [K.WX_LOGIN_TITLE]: "微信二维码登录",
+  [K.DYNAMIC_CODE]: "动态码",
+  [K.PLEASE_ENTER_DYNAMIC_CODE]: "请输入动态码",
+  [K.PLEASE_COMPLETE_THE_SECURITY_VERIFICATION]: "请完成安全认证",
+  [K.DYNAMIC_CODE_VALIDATION_FAILED]: "验证动态码失败",
 };
 
 export default locale;

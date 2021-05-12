@@ -12,6 +12,7 @@ import {
 } from "@next-core/brick-kit";
 import { loadScript } from "@next-core/brick-utils";
 import { login, esbLogin } from "@next-sdk/auth-sdk";
+import { MfaApi_generateRandomTotpSecret } from "@next-sdk/api-gateway-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
@@ -21,13 +22,22 @@ import resetLegacyIframe from "../shared/resetLegacyIframe";
 import styles from "./GeneralLogin.module.css";
 import loginPng from "../images/login.png";
 import { Link } from "@next-libs/basic-components";
+import { MFALogin } from "./MFALogin";
 
 export interface LoginEvent {
   redirect: Location;
 }
 
-interface GeneralLoginProps extends WithTranslation, FormComponentProps {
+export interface GeneralLoginProps extends WithTranslation, FormComponentProps {
   onLogin?: (e: LoginEvent) => void;
+}
+
+export interface MFAInfoProps {
+  username: string;
+  secret: string;
+  totpSecret: string;
+  userInstanceId: string;
+  org: number;
 }
 
 interface GeneralLoginState {
@@ -41,6 +51,8 @@ interface GeneralLoginState {
     agentid: string;
     redirect_uri: string;
   };
+  MFALogin?: boolean;
+  mfaInfo?: MFAInfoProps;
 }
 
 export class LegacyGeneralLogin extends React.Component<
@@ -52,6 +64,7 @@ export class LegacyGeneralLogin extends React.Component<
     const { t, form, onLogin } = this.props;
     const featureFlags = getRuntime().getFeatureFlags();
     const esbLoginEnabled = featureFlags["esb-login"];
+    const MFALoginEnabled = featureFlags["factors"];
     form.validateFields(async (err, values) => {
       if (!err) {
         try {
@@ -73,6 +86,26 @@ export class LegacyGeneralLogin extends React.Component<
             },
           });
 
+          // mfa
+          if (!result.loggedIn && MFALoginEnabled) {
+            const mfaResult = await MfaApi_generateRandomTotpSecret({
+              username: result.username,
+            });
+            const params = {
+              MFALogin: true,
+              loggingIn: false,
+              mfaInfo: {
+                username: result.username,
+                userInstanceId: result.userInstanceId,
+                org: result.org,
+                totpSecret: mfaResult?.totpSecret,
+                secret: mfaResult?.secret,
+              },
+            };
+            this.setState(params);
+            return;
+          }
+
           if (!result.loggedIn) {
             this.setState({
               loggingIn: false,
@@ -88,29 +121,7 @@ export class LegacyGeneralLogin extends React.Component<
             return;
           }
 
-          const runtime = getRuntime();
-          runtime.reloadSharedData();
-          await runtime.reloadMicroApps();
-          resetLegacyIframe();
-
-          authenticate({
-            org: result.org,
-            username: result.username,
-            userInstanceId: result.userInstanceId,
-          });
-          const { state } = getHistory().location;
-          const from =
-            state && state.from
-              ? state.from
-              : {
-                  pathname: "/",
-                };
-          const redirect = createLocation(from);
-          if (onLogin) {
-            onLogin({ redirect });
-          } else {
-            getHistory().push(redirect);
-          }
+          this.redirect(result, onLogin);
         } catch (e) {
           this.setState({
             loggingIn: false,
@@ -118,6 +129,39 @@ export class LegacyGeneralLogin extends React.Component<
           });
         }
       }
+    });
+  };
+  redirect = async (
+    result: Record<string, any>,
+    onLogin?: GeneralLoginProps["onLogin"]
+  ): Promise<void> => {
+    const runtime = getRuntime();
+    runtime.reloadSharedData();
+    await runtime.reloadMicroApps();
+    resetLegacyIframe();
+
+    authenticate({
+      org: result.org,
+      username: result.username,
+      userInstanceId: result.userInstanceId,
+    });
+    const { state } = getHistory().location;
+    const from =
+      state && state.from
+        ? state.from
+        : {
+            pathname: "/",
+          };
+    const redirect = createLocation(from);
+    if (onLogin) {
+      onLogin({ redirect });
+    } else {
+      getHistory().push(redirect);
+    }
+  };
+  handleCancel = (): void => {
+    this.setState({
+      MFALogin: false,
     });
   };
 
@@ -348,6 +392,13 @@ export class LegacyGeneralLogin extends React.Component<
               <Card title={t(K.LOGIN_TITLE)} bordered={false}>
                 {renderLoginForm()}
               </Card>
+            )}
+            {this.state.MFALogin && (
+              <MFALogin
+                onCancel={this.handleCancel}
+                dataSource={this.state.mfaInfo}
+                redirect={this.redirect}
+              />
             )}
           </div>
         </div>

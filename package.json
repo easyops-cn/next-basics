@@ -23,8 +23,12 @@
     "extract": "dev-dependencies-extract"
   },
   "browserslist": {
-    "development": ["extends @next-core/browserslist-config-next/development"],
-    "production": ["extends @next-core/browserslist-config-next/production"]
+    "development": [
+      "extends @next-core/browserslist-config-next/development"
+    ],
+    "production": [
+      "extends @next-core/browserslist-config-next/production"
+    ]
   },
   "devDependencies": {
     "@ant-design/compatible": "^1.0.8",
@@ -81,11 +85,18 @@
     "react-i18next": "^11.8.13",
     "react-transition-group": "^4.4.1"
   },
-  "workspaces": ["bricks/*", "libs/*", "micro-apps/*", "templates/*"],
+  "workspaces": [
+    "bricks/*",
+    "libs/*",
+    "micro-apps/*",
+    "templates/*"
+  ],
   "resolutions": {
     "@types/react": "^16.14.5",
     "lodash": "^4.17.21",
     "@next-core/brick-types": "^2.23.1"
   },
-  "easyops": { "dev-dependencies": "1.7.7" }
+  "easyops": {
+    "dev-dependencies": "1.7.7"
+  }
 }
