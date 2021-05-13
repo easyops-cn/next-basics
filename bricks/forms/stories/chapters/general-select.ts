@@ -21,6 +21,9 @@ export const generalSelecttStory: Story = {
     {
       brick: "forms.general-select",
       properties: {
+        dataset: {
+          testid: "basic-usage-demo",
+        },
         name: "gender",
         label: "性别",
         value: "female",
@@ -53,6 +56,9 @@ export const generalSelecttStory: Story = {
     {
       brick: "forms.general-select",
       properties: {
+        dataset: {
+          testid: "multiple-demo",
+        },
         mode: "multiple",
         name: "city",
         label: "城市(多选)",
@@ -79,10 +85,18 @@ export const generalSelecttStory: Story = {
           width: 250,
         },
       },
+      events: {
+        "general.select.change": {
+          action: "console.log",
+        },
+      },
     },
     {
       brick: "forms.general-select",
       properties: {
+        dataset: {
+          testid: "suffix-demo",
+        },
         name: "version",
         label: "版本",
         value: "abc123",
@@ -145,6 +159,9 @@ export const generalSelecttStory: Story = {
     {
       brick: "forms.general-select",
       properties: {
+        dataset: {
+          testid: "group-by-demo",
+        },
         inputBoxStyle: {
           width: 250,
         },
@@ -200,6 +217,9 @@ export const generalSelecttStory: Story = {
     {
       brick: "forms.general-select",
       properties: {
+        dataset: {
+          testid: "tags-mode-demo",
+        },
         mode: "tags",
         name: "city",
         label: "tags模式(自定义分词分隔符)",
