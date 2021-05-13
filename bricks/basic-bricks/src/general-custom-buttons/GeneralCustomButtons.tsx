@@ -166,7 +166,13 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                 }
                 placement={button.tooltipPlacement}
               >
-                <div className={style.dropdownBtn}>{text}</div>
+                <div
+                  className={classNames(style.dropdownBtn, {
+                    [style.dropdownBtnNormal]: !button.disabled,
+                  })}
+                >
+                  {text}
+                </div>
               </Tooltip>
             );
             return (
