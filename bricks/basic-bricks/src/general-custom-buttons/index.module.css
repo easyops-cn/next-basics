@@ -129,8 +129,7 @@
 .dropdownBtn {
   margin: -5px -12px;
   padding: 5px 12px;
-
-  > a {
-    color: var(--antd-text-color);
-  }
+}
+.dropdownBtnNormal > a {
+  color: var(--antd-text-color);
 }
