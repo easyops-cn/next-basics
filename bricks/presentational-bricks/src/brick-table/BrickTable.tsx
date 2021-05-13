@@ -250,6 +250,8 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           cellStatus,
           titleUseBrick,
           headerBrick,
+          colSpanKey,
+          rowSpanKey,
           ...columnConf
         } = column;
         if (headerBrick?.useBrick || titleUseBrick) {
@@ -321,17 +323,20 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
             );
           };
         }
-        if (cellStatus) {
+        if (cellStatus || colSpanKey || rowSpanKey) {
           const innerRender = columnConf.render;
           columnConf.render = (value, item, index) => {
             return {
               children: innerRender ? innerRender(value, item, index) : value,
               props: {
+                colSpan: item[colSpanKey],
+                rowSpan: item[rowSpanKey],
                 style: cellStatus && getCellStyle(cellStatus, item, value),
               },
             };
           };
         }
+
         if (typeof columnConf.dataIndex === "string") {
           columnConf.dataIndex = toPath(columnConf.dataIndex);
         }
@@ -514,11 +519,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   );
 
   if (props.tableDraggable) {
-    table = (
-      <DndProvider backend={HTML5Backend}>
-        {table}
-      </DndProvider>
-    );
+    table = <DndProvider backend={HTML5Backend}>{table}</DndProvider>;
   }
 
   if (!props.showCard) {
