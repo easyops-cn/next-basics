@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.5.0...@next-bricks/general-auth@1.6.0) (2021-05-13)
+
+
+### Features
+
+* add mfa Refs:HAKKA_BANK-46 ([19afe07](https://github.com/easyops-cn/next-basics/commit/19afe07396a4f7dade2bb30071c3ec2199d4a7b5))
+* add mfa Refs:HAKKA_BANK-46 ([98a9eab](https://github.com/easyops-cn/next-basics/commit/98a9eab686ebfa7e27a9645757aa6c16e1080857))
+* add mfa Refs:HAKKA_BANK-46 ([9579e8a](https://github.com/easyops-cn/next-basics/commit/9579e8aec78f9040e68fe5ee53a2e48c97601161))
+
+
+
+
+
 # [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.4.12...@next-bricks/general-auth@1.5.0) (2021-04-15)
 
 
