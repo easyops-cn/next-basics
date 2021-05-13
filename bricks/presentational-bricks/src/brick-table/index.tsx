@@ -95,6 +95,14 @@ export interface CustomColumn extends ColumnProps<Record<string, any>> {
    * 单元格内元素的垂直对齐方式
    */
   verticalAlign?: "top" | "bottom";
+  /**
+   * 每条记录的控制列合并的值的 key
+   */
+  colSpanKey?: string;
+  /**
+   * 每条记录的控制行合并的值的 key
+   */
+  rowSpanKey?: string;
 }
 
 export interface CellStatusProps {
@@ -152,6 +160,8 @@ export interface CellStatusProps {
  * | titleUseBrick        | UseBrickConf          | -        | -       | 支持为某列的标题自定义展示构件，可通过 DATA.title 获取标题文本 |
  * | filters | {text:string,value:any}[] | - | - | 表头的筛选菜单项 |
  * | verticalAlign | `top` &#124; `bottom` | - | - | 单元格内元素的垂直对齐方式 |
+ * | colSpanKey | string | - | - | 每条记录的控制列合并的值的 key |
+ * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key |
  *
  * ### UseBrickConf
  *

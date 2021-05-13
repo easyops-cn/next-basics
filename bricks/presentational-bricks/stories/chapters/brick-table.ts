@@ -25,7 +25,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        id: "basic-demo",
+        dataset: { testid: "basic-demo" },
         rowKey: "id",
         page: "${query.page=1|number}",
         pageSize: "${query.pageSize=10|number}",
@@ -158,7 +158,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        id: "expandable-and-sortable-demo",
+        dataset: { testid: "expandable-and-sortable-demo" },
         shouldUpdateUrlParams: false,
         frontSearch: true,
         rowKey: "id",
@@ -307,7 +307,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        id: "customized-expand-icon-demo",
+        dataset: { testid: "customized-expand-icon-demo" },
         rowKey: "id",
         page: "${query.page=1|number}",
         pageSize: "${query.pageSize=10|number}",
@@ -428,7 +428,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        id: "cell-status-and-filter-demo",
+        dataset: { testid: "cell-status-and-filter-demo" },
         rowKey: "id",
         shouldUpdateUrlParams: false,
         frontSearch: true,
@@ -556,7 +556,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        id: "tree-data-demo",
+        dataset: { testid: "tree-data-demo" },
         rowKey: "id",
         configProps: {
           rowSelection: true,
@@ -695,7 +695,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        id: "draggable-sort-demo",
+        dataset: { testid: "draggable-sort-demo" },
         rowKey: "id",
         tableDraggable: true,
         showCard: false,
@@ -755,7 +755,7 @@ export const BrickTableStory: Story = {
       },
       brick: "basic-bricks.general-card",
       properties: {
-        id: "front-end-search-demo",
+        dataset: { testid: "front-end-search-demo" },
       },
       slots: {
         content: {
@@ -794,7 +794,7 @@ export const BrickTableStory: Story = {
             {
               brick: "presentational-bricks.brick-table",
               properties: {
-                id: "front-search-table",
+                dataset: { testid: "front-search-table" },
                 rowKey: "id",
                 frontSearch: true,
                 shouldUpdateUrlParams: false,
@@ -857,7 +857,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        id: "scroll-table",
+        dataset: { testid: "scroll-table" },
         rowKey: "id",
         columns: [
           {
@@ -1161,6 +1161,84 @@ export const BrickTableStory: Story = {
             },
           ],
           type: "bricks",
+        },
+      },
+    },
+    {
+      description: {
+        title: "行列合并",
+      },
+      brick: "presentational-bricks.brick-table",
+      properties: {
+        dataset: { testid: "row-col-span-table" },
+        rowKey: "id",
+        childrenColumnName: "packages",
+        defaultExpandAllRows: true,
+        columns: [
+          {
+            dataIndex: "ip",
+            title: "IP",
+            useBrick: {
+              brick: "span",
+              transform: {
+                textContent: "<% DATA.cellData || DATA.rowData.clusterName %>",
+              },
+            },
+            colSpanKey: "ipColSpan",
+            rowSpanKey: "ipRowSpan",
+          },
+          {
+            dataIndex: "packageName",
+            title: "包名称",
+            colSpanKey: "nameColSpan",
+          },
+          {
+            dataIndex: "installPath",
+            title: "部署路径",
+            colSpanKey: "pathColSpan",
+          },
+          {
+            dataIndex: "version",
+            title: "版本",
+            colSpanKey: "versionColSpan",
+          },
+        ],
+        dataSource: {
+          list: [
+            {
+              clusterName: "Lonnnnnnnnnnnnnnnnnnnnnnnnnng Cluster Name",
+              id: "1",
+              ipColSpan: 4,
+              nameColSpan: 0,
+              pathColSpan: 0,
+              versionColSpan: 0,
+              packages: [
+                {
+                  ip: "192.168.100.162",
+                  id: "1-1",
+                  installPath: "/usr/local/easyops/container",
+                  packageName: "container",
+                  version: "1.10.0",
+                },
+                {
+                  ip: "192.168.100.163",
+                  id: "1-2",
+                  installPath: "/usr/local/easyops/webshell",
+                  packageName: "webshell",
+                  version: "1.0.0",
+                  ipRowSpan: 2,
+                },
+                {
+                  ip: "192.168.100.163",
+                  id: "1-3",
+                  installPath: "/usr/local/easyops/nginx",
+                  packageName: "nginx",
+                  version: "3.6.0",
+                  ipRowSpan: 0,
+                },
+              ],
+            },
+          ],
         },
       },
     },
