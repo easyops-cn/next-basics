@@ -857,7 +857,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        dataset: { testid: "scroll-table" },
+        dataset: { testid: "scroll-demo" },
         rowKey: "id",
         columns: [
           {
@@ -1170,7 +1170,7 @@ export const BrickTableStory: Story = {
       },
       brick: "presentational-bricks.brick-table",
       properties: {
-        dataset: { testid: "row-col-span-table" },
+        dataset: { testid: "row-col-span-demo" },
         rowKey: "id",
         childrenColumnName: "packages",
         defaultExpandAllRows: true,
@@ -1239,6 +1239,91 @@ export const BrickTableStory: Story = {
               ],
             },
           ],
+        },
+      },
+    },
+    {
+      description: {
+        title:
+          "使用 flattenTreeDataListAndCalcRowSpan custom processor 平铺树形结构列表，并计算行合并",
+      },
+      brick: "presentational-bricks.brick-table",
+      properties: {
+        dataset: { testid: "processor-row-span-demo" },
+        rowKey: "id",
+        columns: [
+          {
+            dataIndex: "parentInChildKey1.value",
+            title: "depth 0 value",
+            rowSpanKey: "parentInChildKey1RowSpan",
+          },
+          {
+            dataIndex: "parentInChildKey2.value",
+            title: "depth 1 value",
+            rowSpanKey: "parentInChildKey2RowSpan",
+          },
+          {
+            dataIndex: "value",
+            title: "value",
+          },
+        ],
+        dataSource: {
+          list: `<% PROCESSORS.presentationalBricks.flattenTreeDataListAndCalcRowSpan(
+            [
+              {
+                id: "1",
+                value: "value 1",
+                childrenKey1: [
+                  {
+                    id: "1-1",
+                    value: "value 1-1",
+                    childrenKey2: [
+                      { id: "1-1-1", value: "value 1-1-1" },
+                      { id: "1-1-2", value: "value 1-1-2" },
+                    ],
+                  },
+                  {
+                    id: "1-2",
+                    value: "value 1-2",
+                    childrenKey2: [
+                      { id: "1-2-1", value: "value 1-2-1" },
+                      { id: "1-2-2", value: "value 1-2-2" },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: "2",
+                value: "value 2",
+                childrenKey1: [
+                  {
+                    id: "2-1",
+                    value: "value 2-1",
+                    childrenKey2: [
+                      { id: "2-1-1", value: "value 2-1-1" },
+                      { id: "2-1-2", value: "value 2-1-2" },
+                    ],
+                  },
+                  {
+                    id: "2-2",
+                    value: "value 2-2",
+                    childrenKey2: [
+                      { id: "2-2-1", value: "value 2-2-1" },
+                      { id: "2-2-2", value: "value 2-2-2" },
+                    ],
+                  },
+                ],
+              },
+            ],
+            {
+              flattenConfigs: [
+                { childrenKey: "childrenKey1", parentInChildKey: "parentInChildKey1" },
+                { childrenKey: "childrenKey2", parentInChildKey: "parentInChildKey2" },
+                { childrenKey: "childrenKey3", parentInChildKey: "parentInChildKey3" },
+              ],
+              omitChildrenInParent: true,
+            }
+          ) %>`,
         },
       },
     },

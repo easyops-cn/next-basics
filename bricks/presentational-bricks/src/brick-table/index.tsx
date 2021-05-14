@@ -161,7 +161,7 @@ export interface CellStatusProps {
  * | filters | {text:string,value:any}[] | - | - | 表头的筛选菜单项 |
  * | verticalAlign | `top` &#124; `bottom` | - | - | 单元格内元素的垂直对齐方式 |
  * | colSpanKey | string | - | - | 每条记录的控制列合并的值的 key |
- * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key |
+ * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key。如果希望将树形列表展平，并计算行合并的值，可以使用 flattenTreeDataListAndCalcRowSpan 自定义加工函数 |
  *
  * ### UseBrickConf
  *
@@ -295,6 +295,39 @@ export interface CellStatusProps {
  *   ]
  * }
  * ```
+ *
+ * ## flattenTreeDataListAndCalcRowSpan 自定义加工函数
+ *
+ * 将树形数据列表按照 `options.flattenConfigs` 进行展平，并生成相应的行合并数据
+ *
+ * ### Params
+ *
+ * | param        | type                                       | required | default | description                                                              |
+ * | ------------ | ------------------------------------------ | -------- | ------- | ------------------------------------------------------------------------ |
+ * | treeDataList | `Record<string, unknown>[]`                | ✔️       | -       | 树形数据列表                                                             |
+ * | options      | `FlattenTreeDataListAndCalcRowSpanOptions` | ✔️       | -       | 函数选项                                                                 |
+ * | depth        | `number`                                   | -        | `0`     | 当前展平的深度，用于确定 `options.flattenConfigs` 中的当前层级的展平配置 |
+ *
+ * ### Returns
+ *
+ * | type                        | description                                                                                                                                                |
+ * | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+ * | `Record<string, unknown>[]` | 展平后的列表，除了按照 `options.flattenConfigs` 进行展平外，还会生成相应层级以 `options.flattenConfigs[].parentInChildKey + "RowSpan"` 为 key 的行合并数据 |
+ *
+ * ### FlattenTreeDataListAndCalcRowSpanOptions
+ *
+ * | property             | type              | required | default | description                              |
+ * | -------------------- | ----------------- | -------- | ------- | ---------------------------------------- |
+ * | flattenConfigs       | `FlattenConfig[]` | ✔️       | -       | 展平配置列表，按照由父到子的顺序一一对应 |
+ * | omitChildrenInParent | `boolean`         | -        | -       | 展平后，是否省略父级里的子列表           |
+ *
+ * ### FlattenConfig
+ *
+ * | property         | type     | required | default | description              |
+ * | ---------------- | -------- | -------- | ------- | ------------------------ |
+ * | childrenKey      | `string` | ✔️       | -       | 对应层级子列表的 key     |
+ * | parentInChildKey | `string` | ✔️       | -       | 展平后，父级在子级的 key |
+ *
  *
  * @noInheritDoc
  */
