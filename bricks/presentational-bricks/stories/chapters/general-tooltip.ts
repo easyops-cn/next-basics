@@ -20,6 +20,11 @@ export const GeneralTooltipStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "使用说明",
+        message:
+          "鼠标移入则显示提示，移出消失，气泡浮层不承载复杂文本和操作；建议短文本提示信息不超过10个字，文字过长时请用气泡卡片",
+      },
       brick: "presentational-bricks.general-tooltip",
       properties: {
         icon: {
