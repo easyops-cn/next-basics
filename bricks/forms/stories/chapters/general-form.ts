@@ -212,187 +212,132 @@ export const story: Story = {
       },
     },
     {
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-modal",
-              slots: {
-                content: {
-                  type: "bricks",
-                  bricks: [
-                    {
-                      brick: "div",
-                      properties: {
-                        textContent: "这里可以写一些提示信息",
-                      },
-                    },
-                  ],
-                },
-              },
-              properties: {
-                id: "labelHelpModal",
-                okText: "确定",
-                modalTitle: "提示",
-              },
-            },
-            {
-              brick: "forms.general-form",
-              properties: {
-                name: "hello",
-                values: {
-                  username: "easyops",
-                  nickname: "lucy",
-                  change: "descriptionA",
-                },
-                valueTypes: {
-                  time: "moment|YYYY-MM-DD",
-                },
-              },
-              events: {
-                "validate.success": {
-                  action: "console.log",
-                  args: ["${EVENT.type}", "${EVENT.detail}"],
-                },
-                "validate.error": {
-                  action: "console.warn",
-                  args: ["${EVENT.type}", "${EVENT.detail}"],
-                },
-              },
-              slots: {
-                items: {
-                  type: "bricks",
-                  bricks: [
-                    {
-                      brick: "providers-of-cmdb.cmdb-object-api-get-object-all",
-                      bg: true,
-                    },
-                    {
-                      brick: "forms.general-input",
-                      properties: {
-                        name: "username",
-                        label: "用户名",
-                        required: true,
-                        pattern: "^[a-z][-a-z0-9]{0,63}$",
-                        message: {
-                          required: "用户名为必填项",
-                          pattern:
-                            "只能包含小写字母、数字和-，且要以字母开头，不能超过64个字符",
-                        },
-                        placeholder: "请输入用户名",
-                        labelBrick: {
-                          useBrick: {
-                            brick: "presentational-bricks.brick-link",
-                            properties: {
-                              icon: {
-                                lib: "antd",
-                                icon: "question-circle",
-                                theme: "filled",
-                                color: "#595959",
-                              },
-                            },
-                            events: {
-                              "link.click": {
-                                target: "#labelHelpModal",
-                                method: "open",
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                    {
-                      brick: "forms.general-radio",
-                      properties: {
-                        name: "change",
-                        label: "动态切换",
-                        options: ["descriptionA", "descriptionB"],
-                      },
-                      events: {
-                        "general.radio.change": [
-                          {
-                            target: "#descriptionA",
-                            method: "setNotRender",
-                            args: ["<% EVENT.detail !== 'descriptionA' %>"],
-                          },
-                          {
-                            target: "#descriptionB",
-                            method: "setNotRender",
-                            args: ["<% EVENT.detail !== 'descriptionB' %>"],
-                          },
-                        ],
-                      },
-                    },
-                    {
-                      brick: "forms.general-text-area",
-                      properties: {
-                        name: "descriptionA",
-                        id: "descriptionA",
-                        label: "描述A",
-                        value: "This is a long description",
-                        placeholder: "请填写描述",
-                        autoSize: { minRows: 3, maxRows: 8 },
-                        required: true,
-                        max: 10,
-                        message: {
-                          required: "请输入内容",
-                          max: "最长长度限制，10",
-                        },
-                      },
-                    },
-                    {
-                      brick: "forms.general-select",
-                      properties: {
-                        name: "descriptionB",
-                        id: "descriptionB",
-                        hidden: true,
-                        notRender: true,
-                        label: "描述B",
-                        placeholder: "请填写描述",
-                        required: true,
-                        options: [
-                          {
-                            label: "男",
-                            value: "male",
-                          },
-                          {
-                            label: "女",
-                            value: "female",
-                          },
-                        ],
-                        inputBoxStyle: {
-                          width: "100%",
-                        },
-                      },
-                    },
-                    {
-                      brick: "forms.general-buttons",
-                      properties: {
-                        showCancelButton: true,
-                        submitText: "提交",
-                        cancelText: "取消",
-                      },
-                      events: {
-                        "submit.button.click": {
-                          action: "console.log",
-                        },
-                        "cancel.button.click": {
-                          action: "console.log",
-                        },
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-          ],
-        },
-      },
       description: {
         title: "动态表单",
         message: "通过表单子项的notRender属性和setNotRender方法，实现动态表单",
+      },
+      brick: "forms.general-form",
+      events: {
+        "validate.error": {
+          action: "console.warn",
+          args: ["${EVENT.type}", "${EVENT.detail}"],
+        },
+        "validate.success": {
+          action: "console.log",
+          args: ["${EVENT.type}", "${EVENT.detail}"],
+        },
+      },
+      properties: {
+        name: "hello",
+        values: {
+          change: "descriptionA",
+          username: "easyops",
+        },
+      },
+      slots: {
+        items: {
+          bricks: [
+            {
+              brick: "forms.general-input",
+              properties: {
+                label: "用户名",
+                message: {
+                  pattern:
+                    "只能包含小写字母、数字和-，且要以字母开头，不能超过64个字符",
+                  required: "用户名为必填项",
+                },
+                name: "username",
+                pattern: "^[a-z][-a-z0-9]{0,63}$",
+                placeholder: "请输入用户名",
+                required: true,
+              },
+            },
+            {
+              brick: "forms.general-radio",
+              events: {
+                "general.radio.change": [
+                  {
+                    args: ["<% EVENT.detail !== 'descriptionA' %>"],
+                    method: "setNotRender",
+                    target: "#descriptionA",
+                  },
+                  {
+                    args: ["<% EVENT.detail !== 'descriptionB' %>"],
+                    method: "setNotRender",
+                    target: "#descriptionB",
+                  },
+                ],
+              },
+              properties: {
+                label: "动态切换",
+                name: "change",
+                options: ["descriptionA", "descriptionB"],
+              },
+            },
+            {
+              brick: "forms.general-text-area",
+              properties: {
+                autoSize: {
+                  maxRows: 8,
+                  minRows: 3,
+                },
+                id: "descriptionA",
+                label: "描述A",
+                max: 10,
+                message: {
+                  max: "最长长度限制，10",
+                  required: "请输入内容",
+                },
+                name: "descriptionA",
+                placeholder: "请填写描述",
+                required: true,
+                value: "This is a long description",
+              },
+            },
+            {
+              brick: "forms.general-select",
+              properties: {
+                hidden: true,
+                id: "descriptionB",
+                inputBoxStyle: {
+                  width: "100%",
+                },
+                label: "描述B",
+                name: "descriptionB",
+                notRender: true,
+                options: [
+                  {
+                    label: "男",
+                    value: "male",
+                  },
+                  {
+                    label: "女",
+                    value: "female",
+                  },
+                ],
+                placeholder: "请填写描述",
+                required: true,
+              },
+            },
+            {
+              brick: "forms.general-buttons",
+              events: {
+                "cancel.button.click": {
+                  action: "console.log",
+                },
+                "submit.button.click": {
+                  action: "console.log",
+                },
+              },
+              properties: {
+                cancelText: "取消",
+                showCancelButton: true,
+                submitText: "提交",
+              },
+            },
+          ],
+          type: "bricks",
+        },
       },
     },
   ],
