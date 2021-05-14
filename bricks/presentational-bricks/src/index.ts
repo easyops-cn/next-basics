@@ -67,3 +67,4 @@ import "./info-display-card-list";
 import "./brick-illustration";
 import "./dynamic-grid-container";
 import "./general-slider";
+import "./custom-processors/flattenTreeDataListAndCalcRowSpan";
