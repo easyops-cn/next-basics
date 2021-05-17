@@ -340,6 +340,136 @@ export const story: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "帮助提示",
+        message: "在表单中增加一些帮助、提示信息",
+      },
+      brick: "div",
+      slots: {
+        "": {
+          bricks: [
+            {
+              brick: "basic-bricks.general-modal",
+              properties: {
+                modalTitle: "提示",
+                okText: "确定",
+                id: "helpModal",
+              },
+              slots: {
+                content: {
+                  bricks: [
+                    {
+                      brick: "div",
+                      properties: {
+                        textContent: "模板相关说明",
+                      },
+                    },
+                  ],
+                  type: "bricks",
+                },
+              },
+            },
+            {
+              brick: "forms.general-form",
+              events: {
+                "validate.error": {
+                  action: "console.warn",
+                  args: ["${EVENT.type}", "${EVENT.detail}"],
+                },
+                "validate.success": {
+                  action: "console.log",
+                  args: ["${EVENT.type}", "${EVENT.detail}"],
+                },
+              },
+              properties: {
+                name: "hello",
+                values: {
+                  nickname: "lucy",
+                  username: "easyops",
+                },
+              },
+              slots: {
+                items: {
+                  bricks: [
+                    {
+                      brick: "forms.general-input",
+                      properties: {
+                        name: "username",
+                        label: "用户名",
+                        labelTooltip: "一些帮助信息",
+                        placeholder: "请输入用户名",
+                        required: true,
+                      },
+                    },
+                    {
+                      brick: "forms.general-text-area",
+                      properties: {
+                        autoSize: {
+                          maxRows: 8,
+                          minRows: 3,
+                        },
+                        helpBrick: {
+                          containerStyle: {
+                            marginLeft: "-5px",
+                          },
+                          placement: "right",
+                          useBrick: {
+                            brick: "basic-bricks.general-button",
+                            events: {
+                              "general.button.click": {
+                                method: "open",
+                                target: "#helpModal",
+                              },
+                            },
+                            properties: {
+                              buttonName: "模板说明",
+                              buttonType: "link",
+                            },
+                          },
+                        },
+                        label: "描述",
+                        max: 10,
+                        message: {
+                          max: "最长长度限制，10",
+                          required: "请输入内容",
+                        },
+                        name: "description",
+                        placeholder: "请填写描述",
+                        required: true,
+                      },
+                    },
+                    {
+                      brick: "forms.general-select",
+                      properties: {
+                        label: "昵称",
+                        name: "nickname",
+                        inputBoxStyle: {
+                          width: "100%",
+                        },
+                        options: ["jack", "lucy"],
+                        placeholder: "请输入密码",
+                        helpBrick: "这里是一些说明信息",
+                      },
+                    },
+                    {
+                      brick: "forms.general-buttons",
+                      properties: {
+                        cancelText: "取消",
+                        showCancelButton: true,
+                        submitText: "提交",
+                      },
+                    },
+                  ],
+                  type: "bricks",
+                },
+              },
+            },
+          ],
+          type: "bricks",
+        },
+      },
+    },
   ],
 };
 
