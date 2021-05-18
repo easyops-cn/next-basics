@@ -5,6 +5,7 @@ import {
   useBuilderDataManager,
   BuilderRuntimeNode,
   isBrickNode,
+  isRouteNode,
 } from "@next-core/editor-bricks-helper";
 import { useTranslation } from "react-i18next";
 import { useBuilderUIContext } from "../BuilderUIContext";
@@ -19,6 +20,7 @@ import { useCanPaste } from "./useCanPaste";
 import { K, NS_NEXT_BUILDER } from "../../i18n/constants";
 
 import styles from "./BuilderContextMenu.module.css";
+import { BuilderRouteNode } from "@next-core/brick-types";
 
 export interface BuilderContextMenuProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
@@ -42,6 +44,7 @@ export function BuilderContextMenu({
     setToolboxTab,
     setEventStreamNodeId,
     onConvertToTemplate,
+    onRouteSelect,
   } = useBuilderUIContext();
   const canPasteCallback = useCanPaste();
   const canPaste = React.useMemo(
@@ -114,6 +117,11 @@ export function BuilderContextMenu({
     [contextMenuStatus.node]
   );
 
+  const activeNodeIsRoute = React.useMemo(
+    () => !!contextMenuStatus.node && isRouteNode(contextMenuStatus.node),
+    [contextMenuStatus.node]
+  );
+
   const handleAppendBrick = React.useCallback(() => {
     onAskForAppendingBrick({
       node: contextMenuStatus.node,
@@ -125,6 +133,10 @@ export function BuilderContextMenu({
       ),
     });
   }, [contextMenuStatus.node, manager, onAskForAppendingBrick]);
+
+  const handleViewRoute = React.useCallback(() => {
+    onRouteSelect(contextMenuStatus.node as BuilderRouteNode);
+  }, [contextMenuStatus.node, onRouteSelect]);
 
   React.useEffect(() => {
     // Keep menu in viewport.
@@ -163,12 +175,15 @@ export function BuilderContextMenu({
         <Menu
           prefixCls="ant-dropdown-menu"
           style={{
-            // left: contextMenuStatus.x,
-            // top: contextMenuStatus.y,
             width: "fit-content",
             ...menuPosition,
           }}
         >
+          {activeNodeIsRoute && (
+            <Menu.Item key="view-route" onClick={handleViewRoute}>
+              {t(K.NODE_ACTION_VIEW_ROUTE)}
+            </Menu.Item>
+          )}
           {activeNodeIsBrick && (
             <Menu.Item key="events-view" onClick={handleShowEventsView}>
               {t(K.NODE_ACTION_EVENTS_VIEW)}
