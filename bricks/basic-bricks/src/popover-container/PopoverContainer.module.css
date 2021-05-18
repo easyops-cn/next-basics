@@ -1,11 +1,7 @@
 .displayBrickContainer {
-  position: relative;
-  display: inline-grid;
-  grid-auto-flow: column;
-  justify-content: left;
+  display: flex;
   align-items: center;
   .editIcon {
-    display: grid;
     visibility: hidden;
     padding: 0 10px;
   }
