@@ -114,7 +114,6 @@ export function GeneralSelect(props: GeneralInputProps): React.ReactElement {
     <FormItemWrapper {...props}>
       <Select
         className={(suffix || suffixBrick) && style.suffixBrickSelect}
-        optionFilterProp="children"
         {...searchProps}
         value={props.name && props.formElement ? undefined : props.value}
         size={props.size}
