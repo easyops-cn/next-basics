@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.122.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.4...@next-bricks/basic-bricks@1.122.5) (2021-05-18)
+
+
+### Bug Fixes
+
+* **popover-container:** fix vertically centered style ([8bf4e21](https://github.com/easyops-cn/next-basics/commit/8bf4e210771fdbedeb350819ef62fbd9074a4e00))
+
+
+
+
+
 ## [1.122.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.3...@next-bricks/basic-bricks@1.122.4) (2021-05-13)
 
 
