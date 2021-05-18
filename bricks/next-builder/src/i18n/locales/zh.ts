@@ -27,6 +27,7 @@ const locale: Locale = {
   [K.NODE_ACTION_PASTE]: "粘贴",
   [K.NODE_ACTION_CONVERT_TO_TEMPLATE]: "转换为模板",
   [K.NODE_ACTION_APPEND_BRICK]: "添加子构件",
+  [K.NODE_ACTION_APPEND_ROUTE]: "添加子路由",
   [K.NODE_ACTION_DELETE]: "删除",
   [K.NODE_ACTION_VIEW_ROUTE]: "查看路由",
   [K.STORYBOARD_VIEW_TIPS_1_ROUTE]:

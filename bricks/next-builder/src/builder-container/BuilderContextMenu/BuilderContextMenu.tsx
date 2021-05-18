@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import {
-  BuilderAppendBrickDetail,
+  BuilderAppendBrickOrRouteDetail,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
   BuilderPasteDetailOfCut,
@@ -26,7 +26,8 @@ export interface BuilderContextMenuProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
   onNodeCopyPaste?: (detail: BuilderPasteDetailOfCopy) => void;
   onNodeCutPaste?: (detail: BuilderPasteDetailOfCut) => void;
-  onAskForAppendingBrick?: (detail: BuilderAppendBrickDetail) => void;
+  onAskForAppendingBrick?: (detail: BuilderAppendBrickOrRouteDetail) => void;
+  onAskForAppendingRoute?: (detail: BuilderAppendBrickOrRouteDetail) => void;
 }
 
 export function BuilderContextMenu({
@@ -34,6 +35,7 @@ export function BuilderContextMenu({
   onNodeCopyPaste,
   onNodeCutPaste,
   onAskForAppendingBrick,
+  onAskForAppendingRoute,
 }: BuilderContextMenuProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const contextMenuStatus = useBuilderContextMenuStatus();
@@ -122,6 +124,11 @@ export function BuilderContextMenu({
     [contextMenuStatus.node]
   );
 
+  const canAppendRoute = React.useMemo(
+    () => !!contextMenuStatus.node && contextMenuStatus.node.type === "brick",
+    [contextMenuStatus.node]
+  );
+
   const handleAppendBrick = React.useCallback(() => {
     onAskForAppendingBrick({
       node: contextMenuStatus.node,
@@ -133,6 +140,12 @@ export function BuilderContextMenu({
       ),
     });
   }, [contextMenuStatus.node, manager, onAskForAppendingBrick]);
+
+  const handleAppendRoute = React.useCallback(() => {
+    onAskForAppendingRoute({
+      node: contextMenuStatus.node,
+    });
+  }, [contextMenuStatus.node, onAskForAppendingRoute]);
 
   const handleViewRoute = React.useCallback(() => {
     onRouteSelect(contextMenuStatus.node as BuilderRouteNode);
@@ -216,6 +229,11 @@ export function BuilderContextMenu({
           {activeNodeIsBrick && (
             <Menu.Item key="append-brick" onClick={handleAppendBrick}>
               {t(K.NODE_ACTION_APPEND_BRICK)}
+            </Menu.Item>
+          )}
+          {canAppendRoute && (
+            <Menu.Item key="append-route" onClick={handleAppendRoute}>
+              {t(K.NODE_ACTION_APPEND_ROUTE)}
             </Menu.Item>
           )}
           <Menu.Item key="delete" onClick={handleDeleteNode}>

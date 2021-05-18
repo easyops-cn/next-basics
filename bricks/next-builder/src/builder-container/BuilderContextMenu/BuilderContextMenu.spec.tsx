@@ -121,7 +121,7 @@ describe("BuilderContextMenu", () => {
     });
 
     const menuItems = wrapper.find(Menu.Item);
-    expect(menuItems.length).toBe(7);
+    expect(menuItems.length).toBe(8);
     menuItems.forEach((item) => {
       switch (item.key()) {
         case "events-view":
@@ -136,6 +136,7 @@ describe("BuilderContextMenu", () => {
           break;
         case "convert-to-template":
         case "append-brick":
+        case "append-route":
         case "delete":
           break;
         default:
@@ -454,6 +455,34 @@ describe("BuilderContextMenu", () => {
         brick: "my-brick",
       },
       defaultSort: 1,
+    });
+  });
+
+  it("should invoke onAskForAppendingRoute", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValue({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
+    });
+    const mockOnAskForAppendingRoute = jest.fn();
+    const wrapper = shallow(
+      <BuilderContextMenu onAskForAppendingRoute={mockOnAskForAppendingRoute} />
+    );
+    wrapper
+      .find(Menu.Item)
+      .filterWhere((n) => n.key() === "append-route")
+      .invoke("onClick")(null);
+    expect(mockOnAskForAppendingRoute).toBeCalledWith({
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
     });
   });
 

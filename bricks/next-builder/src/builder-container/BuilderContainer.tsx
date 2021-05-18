@@ -90,6 +90,7 @@ export function LegacyBuilderContainer(
     onNodeClick,
     onAskForDeletingNode,
     onAskForAppendingBrick,
+    onAskForAppendingRoute,
     onToggleFullscreen,
     onSwitchToolboxTab,
     onSelectEventStreamNode,
@@ -321,6 +322,7 @@ export function LegacyBuilderContainer(
         <BuilderContextMenu
           onAskForDeletingNode={onAskForDeletingNode}
           onAskForAppendingBrick={onAskForAppendingBrick}
+          onAskForAppendingRoute={onAskForAppendingRoute}
           onNodeCopyPaste={onNodeCopyPaste}
           onNodeCutPaste={onNodeCutPaste}
         />

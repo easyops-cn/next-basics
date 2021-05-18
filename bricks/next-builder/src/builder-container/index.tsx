@@ -32,7 +32,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import {
   BrickOptionItem,
-  BuilderAppendBrickDetail,
+  BuilderAppendBrickOrRouteDetail,
   BuilderClipboard,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
@@ -228,7 +228,12 @@ export class BuilderContainerElement extends UpdatingElement {
   @event({
     type: "node.appendBrick.ask",
   })
-  private _eventNodeAppendBrickAskEmitter: EventEmitter<BuilderAppendBrickDetail>;
+  private _eventNodeAppendBrickAskEmitter: EventEmitter<BuilderAppendBrickOrRouteDetail>;
+
+  @event({
+    type: "node.appendRoute.ask",
+  })
+  private _eventNodeAppendRouteAskEmitter: EventEmitter<BuilderAppendBrickOrRouteDetail>;
 
   @event({
     type: "canvas.index.switch",
@@ -390,9 +395,15 @@ export class BuilderContainerElement extends UpdatingElement {
   };
 
   private _handleAskForAppendingBrick = (
-    detail: BuilderAppendBrickDetail
+    detail: BuilderAppendBrickOrRouteDetail
   ): void => {
     this._eventNodeAppendBrickAskEmitter.emit(detail);
+  };
+
+  private _handleAskForAppendingRoute = (
+    detail: BuilderAppendBrickOrRouteDetail
+  ): void => {
+    this._eventNodeAppendRouteAskEmitter.emit(detail);
   };
 
   private _handleSwitchCanvasIndex = (canvasIndex: number): void => {
@@ -484,6 +495,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onBuildAndPush={this._handleBuildAndPush}
                 onPreview={this._handlePreview}
                 onAskForAppendingBrick={this._handleAskForAppendingBrick}
+                onAskForAppendingRoute={this._handleAskForAppendingRoute}
                 onEventNodeClick={this._handleEventNodeClick}
                 onConvertToTemplate={this._handleConvertToTemplate}
                 onWorkbenchClose={this._handleWorkbenchClose}
