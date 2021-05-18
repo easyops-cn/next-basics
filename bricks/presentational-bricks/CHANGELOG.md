@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.181.0...@next-bricks/presentational-bricks@1.182.0) (2021-05-18)
+
+
+### Features
+
+* add flattenTreeDataListAndCalcRowSpan custom processor ([063b915](https://github.com/easyops-cn/next-basics/commit/063b915da6031c2074500797b4a86278687c4979))
+
+
+
+
+
 # [1.181.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.9...@next-bricks/presentational-bricks@1.181.0) (2021-05-13)
 
 

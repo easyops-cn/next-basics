@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.162.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.5...@next-bricks/forms@1.162.0) (2021-05-18)
+
+
+### Bug Fixes
+
+* **general-select:** In Tag mode, candidates are repeatedly displayed Close BRICK_STORE-2090 ([0cb9752](https://github.com/easyops-cn/next-basics/commit/0cb97520d2afc874c52eea8afce76d7822b91991))
+
+
+### Features
+
+* **forms:** labeltooltip支持字符串类型 ([66c2361](https://github.com/easyops-cn/next-basics/commit/66c2361c14f4e86e495bdcbc257fc5b5983a2e7e))
+
+
+
+
+
 ## [1.161.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.161.4...@next-bricks/forms@1.161.5) (2021-05-13)
 
 **Note:** Version bump only for package @next-bricks/forms
