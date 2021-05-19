@@ -15,14 +15,13 @@ interface BrickUserProps {
   iconUrl?: string;
   hideAvatar?: boolean;
   hideUsername?: boolean;
-  showNickname?: boolean;
+  showNicknameOrUsername?: boolean;
 }
 
 export function BrickUser(props: BrickUserProps): React.ReactElement {
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
   const [userName, setUserName] = React.useState(props.userNameOrId);
   const [nickName, setNickName] = React.useState("");
-
   React.useEffect(() => {
     (async () => {
       let user: UserInfo;
@@ -36,7 +35,6 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
       }
       if (USERMAP.has(props.userNameOrId)) {
         user = USERMAP.get(props.userNameOrId);
-
         setUserName(user?.name);
         setNickName(user?.nickname);
       } else {
@@ -53,8 +51,15 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
   }, [props.userNameOrId, props.iconUrl]);
 
   if (!props.userNameOrId) return null;
+
+  const name = props.showNicknameOrUsername
+    ? nickName
+      ? nickName
+      : userName
+    : userName;
+
   return (
-    <Tooltip title={userName} placement="topLeft">
+    <Tooltip title={name} placement="topLeft">
       <span className={cssStyle.user}>
         {!props.hideAvatar && (
           <span>
@@ -76,8 +81,7 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
               [cssStyle.usernameAdjust]: !props.hideAvatar,
             })}
           >
-            {userName}
-            {props.showNickname ? (nickName ? `(${nickName})` : "") : ""}
+            {name}
           </span>
         )}
       </span>
