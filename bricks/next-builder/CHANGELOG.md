@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.51.0...@next-bricks/next-builder@1.52.0) (2021-05-19)
+
+
+### Features
+
+* support to append route ([97235bb](https://github.com/easyops-cn/next-basics/commit/97235bbca935a4820df2e787da4b77b208a09afa))
+* support to view route in context menu ([1b7b1db](https://github.com/easyops-cn/next-basics/commit/1b7b1db917606932cd51f64abac1c591f5920e73))
+
+
+
+
+
 # [1.51.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.50.1...@next-bricks/next-builder@1.51.0) (2021-05-08)
 
 
