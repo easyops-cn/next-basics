@@ -74,7 +74,7 @@ export interface BuilderPasteDetailOfCut {
   targetInstanceId: string;
 }
 
-export interface BuilderAppendBrickDetail {
+export interface BuilderAppendBrickOrRouteDetail {
   node: BuilderRuntimeNode;
-  defaultSort: number;
+  defaultSort?: number;
 }

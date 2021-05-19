@@ -5,6 +5,7 @@ import {
   useBuilderContextMenuStatus,
   useBuilderDataManager,
   isBrickNode,
+  isRouteNode,
 } from "@next-core/editor-bricks-helper";
 import { BuilderContextMenu } from "./BuilderContextMenu";
 import { useBuilderUIContext } from "../BuilderUIContext";
@@ -29,6 +30,7 @@ const setClipboard = jest.fn();
 const setToolboxTab = jest.fn();
 const setEventStreamNodeId = jest.fn();
 const onConvertToTemplate = jest.fn();
+const onRouteSelect = jest.fn();
 
 (useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
@@ -38,10 +40,15 @@ const onConvertToTemplate = jest.fn();
   setToolboxTab,
   setEventStreamNodeId,
   onConvertToTemplate,
+  onRouteSelect,
 }));
 
 (isBrickNode as jest.MockedFunction<typeof isBrickNode>).mockImplementation(
   (node) => node.type === "brick"
+);
+
+(isRouteNode as jest.MockedFunction<typeof isRouteNode>).mockImplementation(
+  (node) => node.type === "bricks"
 );
 
 const mockManager = {
@@ -114,7 +121,7 @@ describe("BuilderContextMenu", () => {
     });
 
     const menuItems = wrapper.find(Menu.Item);
-    expect(menuItems.length).toBe(7);
+    expect(menuItems.length).toBe(8);
     menuItems.forEach((item) => {
       switch (item.key()) {
         case "events-view":
@@ -127,6 +134,13 @@ describe("BuilderContextMenu", () => {
         case "paste":
           expect(item.prop("disabled")).toBe(true);
           break;
+        case "convert-to-template":
+        case "append-brick":
+        case "append-route":
+        case "delete":
+          break;
+        default:
+          throw new Error(`should not contain ${item.key()}`);
       }
     });
   });
@@ -226,17 +240,44 @@ describe("BuilderContextMenu", () => {
     });
     const wrapper = shallow(<BuilderContextMenu />);
     const menuItems = wrapper.find(Menu.Item);
-    expect(menuItems.length).toBe(5);
+    expect(menuItems.length).toBe(6);
     menuItems.forEach((item) => {
       switch (item.key()) {
-        case "events-view":
-          throw new Error("should not happen");
         case "copy":
         case "cut":
         case "paste":
           expect(item.prop("disabled")).toBe(true);
           break;
+        case "view-route":
+        case "convert-to-template":
+        case "delete":
+          break;
+        default:
+          throw new Error(`should not contain ${item.key()}`);
       }
+    });
+  });
+
+  it("should select the active route", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValue({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "bricks",
+        path: "/",
+        id: "B-001",
+      },
+    });
+    const wrapper = shallow(<BuilderContextMenu />);
+    wrapper
+      .find(Menu.Item)
+      .filterWhere((n) => n.key() === "view-route")
+      .invoke("onClick")(null);
+    expect(onRouteSelect).toBeCalledWith({
+      $$uid: 1,
+      type: "bricks",
+      path: "/",
+      id: "B-001",
     });
   });
 
@@ -414,6 +455,34 @@ describe("BuilderContextMenu", () => {
         brick: "my-brick",
       },
       defaultSort: 1,
+    });
+  });
+
+  it("should invoke onAskForAppendingRoute", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValue({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
+    });
+    const mockOnAskForAppendingRoute = jest.fn();
+    const wrapper = shallow(
+      <BuilderContextMenu onAskForAppendingRoute={mockOnAskForAppendingRoute} />
+    );
+    wrapper
+      .find(Menu.Item)
+      .filterWhere((n) => n.key() === "append-route")
+      .invoke("onClick")(null);
+    expect(mockOnAskForAppendingRoute).toBeCalledWith({
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+      },
     });
   });
 
