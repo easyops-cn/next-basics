@@ -2077,12 +2077,12 @@
   resolved "https://registry.npmjs.org/@next-core/brick-http/-/brick-http-2.2.7.tgz#3a036b476a1ac6a8c4b0b19a0b19815e2716ecb9"
   integrity sha1-OgNrR2oaxqjEsLGaCxmBXicW7Lk=
 
-"@next-core/brick-icons@^2.15.3", "@next-core/brick-icons@^2.17.0":
+"@next-core/brick-icons@^2.17.0":
   version "2.17.0"
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.17.0.tgz#7694eae168ce361c5c6aae1e78d15f5620e93ce9"
   integrity sha512-/s/Y2Bv+WZBMxdB/u+wy6+ANmTbtxNISoz/VqGyb+7II4fYaNFQimRwfYpufXFISNGpWOSW1SOGLB0J3uQacxw==
 
-"@next-core/brick-kit@^2.46.1", "@next-core/brick-kit@^2.47.1":
+"@next-core/brick-kit@^2.47.1":
   version "2.47.1"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.47.1.tgz#aae4c5ed3a527f386f0a0e5315cb3bcfec0cfd23"
   integrity sha512-5vJz8GYe7sNFyUWnXu828KOKfk4c28sU/kDt0giYuYphnu5Sw62PCv2C2DOCyTdS+rlu4EFF6X9mpy+8W/ny5w==
@@ -2117,7 +2117,7 @@
   resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.26.0.tgz#ed02de91a2658569f81e28fe635151e9099d1b59"
   integrity sha512-LLdezIogLD+fpx6laBkaJeFjgzSyvknGKL3ErB8CbLrvazA7HrRS+7++3UsSbT2IH/u1JSzTutav0TGgOs6iDQ==
 
-"@next-core/brick-utils@^2.15.2", "@next-core/brick-utils@^2.16.0":
+"@next-core/brick-utils@^2.16.0":
   version "2.16.0"
   resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.16.0.tgz#f2a314674c41b9defd9f0cfb4e0aacddd7a78876"
   integrity sha512-hoahq8p7/BU4ne6TT53P6XglRkFmsnb1M6ri8k7yKFfbl1vR4/v3LRy79HRyFLeYyVwmTgZhKkWlOopdWItZ2g==
@@ -2216,7 +2216,7 @@
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/-/easyops-analytics-0.1.8.tgz#c8cd83d184fa0cc244b3d46c3658af5e3ee194aa"
   integrity sha1-yM2D0YT6DMJEs9RsNlivXj7hlKo=
 
-"@next-core/editor-bricks-helper@^0.19.5", "@next-core/editor-bricks-helper@^0.19.7":
+"@next-core/editor-bricks-helper@^0.19.7":
   version "0.19.7"
   resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.19.7.tgz#3b4f58c3c7b6837f45c57b562190415b0f7a0a56"
   integrity sha512-xUBOC3HQ8BO1bWhsAngUJ8nYcS+u3xteSYugEZWHYyvlm3eUl5GLuU6lR0/zTb95G/biSp1gUy7orv1EaFqZ+w==
