@@ -2,7 +2,7 @@ install_path: /usr/local/easyops/bricks/basic-bricks-NB
 user: 'easyops:easyops'
 dependencies:
   - name: brick_next
-    version: ^2.22.3
+    version: ^2.24.2
     local_deploy: true
   - name: user_service
     version: ^1.13.4
