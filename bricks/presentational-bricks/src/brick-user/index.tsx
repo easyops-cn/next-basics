@@ -22,6 +22,7 @@ export class BrickUserElement extends UpdatingElement {
    * @kind string
    * @required true
    * @default -
+   * @deprecated
    * @description [已废弃]用户名 (废弃属性，请使用 `userNameOrId`)
    */
   @property()
@@ -85,10 +86,19 @@ export class BrickUserElement extends UpdatingElement {
    * @kind "boolean"
    * @required false
    * @default false
-   * @description 是否展示昵称,当用户不含昵称昵称时不展示
+   * @deprecated
+   * @description [已废弃,最新用法以showNicknameOrUsername为准]是否展示昵称,当用户不含昵称昵称时不展示
    */
   @property({ type: Boolean })
   showNickname: boolean;
+  /**
+   * @kind "boolean"
+   * @required false
+   * @default false
+   * @description 当有昵称时显示昵称，无昵称时显示用户名
+   */
+  @property({ type: Boolean })
+  showNicknameOrUsername: boolean;
 
   connectedCallback(): void {
     // istanbul ignore else
@@ -114,7 +124,9 @@ export class BrickUserElement extends UpdatingElement {
             iconUrl={this.iconUrl}
             hideAvatar={this.hideAvatar}
             hideUsername={this.hideUsername}
-            showNickname={this.showNickname}
+            showNicknameOrUsername={
+              this.showNicknameOrUsername ?? this.showNickname
+            }
           />
         </BrickWrapper>,
         this
