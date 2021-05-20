@@ -1,5 +1,5 @@
-import React from "react";
-import { omit } from "lodash";
+import React, { useState, useEffect } from "react";
+import { omit, debounce, map, uniq } from "lodash";
 import {
   BaseColumnsProps,
   BaseRowProps,
@@ -9,6 +9,7 @@ import {
 import { Form } from "@ant-design/compatible";
 import { Col, Input, Select, InputNumber, Cascader } from "antd";
 import { FormItemWrapper } from "@next-libs/forms";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import style from "./DynamicFormItem.module.css";
 import { FormItemColumnsProps } from ".";
 import {
@@ -24,6 +25,9 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
   const { row, form, columns, prefixId, rowIndex } = props;
 
   const { getFieldDecorator } = form;
+  // 后台搜索中
+  const [fetching, setFetching] = useState(false);
+  const [userList, setUserList] = useState([]);
 
   const handleChange = (value: any, column: FormItemColumnsProps) => {
     props.onChange?.(value, column.name);
@@ -47,8 +51,34 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
       return true;
     };
   };
+  const fetchInstanceList = async (objectId: "USER", keyword: string) => {
+    return (
+      await InstanceApi_postSearch(objectId, {
+        page: 1,
+        page_size: 20,
+        fields: {
+          name: true,
+        },
+        query: {
+          $or: map(uniq(["name"]), (v) => ({
+            [v]: { $like: `%${keyword}%` },
+          })),
+        },
+      })
+    ).list;
+  };
+  const searchUser = async (value: string) => {
+    setFetching(true);
+    const data = await fetchInstanceList("USER", value);
+    setUserList(data);
+    setFetching(false);
+  };
+  const handleSearchUser = (value: string) => {
+    searchUser(value);
+  };
   const renderComponent = (column: FormItemColumnsProps) => {
     const { inputProps = {}, selectProps = {}, cascaderProps = {} } = column;
+
     if (column.type === "select") {
       return (
         <Select
@@ -71,6 +101,32 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
               className={style.option}
             >
               {option.label}
+            </Select.Option>
+          ))}
+        </Select>
+      );
+    } else if (column.type === "userSelect") {
+      return (
+        <Select
+          dropdownClassName={style.select}
+          style={{ width: "100%" }}
+          onChange={(value) => handleChange(value, column)}
+          placeholder={selectProps.placeholder}
+          disabled={
+            selectProps.disabled || selectProps.disabledHandler?.(row, rowIndex)
+          }
+          onSearch={debounce((value) => {
+            handleSearchUser(value as string);
+          }, 500)}
+          loading={fetching}
+          mode={selectProps.mode}
+          optionFilterProp="children"
+          allowClear={selectProps.allowClear}
+          showSearch
+        >
+          {userList.map((d) => (
+            <Select.Option value={d.name} key={d.name} className={style.option}>
+              {d.name}
             </Select.Option>
           ))}
         </Select>
@@ -135,7 +191,6 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
       );
     }
   };
-
   return (
     <>
       {columns.map((item, index) => {

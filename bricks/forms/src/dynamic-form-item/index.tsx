@@ -60,7 +60,13 @@ export interface SelectProps {
   allowClear?: boolean;
 }
 export interface FormItemColumnsProps extends BaseColumnsProps {
-  type: "input" | "select" | "password" | "inputNumber" | "cascader";
+  type:
+    | "input"
+    | "select"
+    | "password"
+    | "inputNumber"
+    | "cascader"
+    | "userSelect";
   encrypt?: boolean;
   inputProps?: InputProps;
   selectProps?: SelectProps;
@@ -88,7 +94,7 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| label       | `string`                          | -        | -       | 配置该列的 label，在一列的头部显示                                                                                                |
 *| rules       | `any[]`                          | -        | -       | 配置该列的的校验规则，同 [antd 的 rules](https://3x.ant.design/components/form-cn/#%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99)，也可参见下表rules支持的类型          |
 *| placeholder | `string`                          | -        | -       | 配置该列 placeholder                                                                                                              |
-*| type        | `input`\| `inputNumber`\| `select`\| `password`\|`cascader` | -        | input       | 配置表单项所支持的类型 |
+*| type        | `input`\| `inputNumber`\| `select`\| `userSelect`\|`password`\|`cascader` | -        | input       | 配置表单项所支持的类型 |
 *| selectProps | `selectProps` | - | - | 当 type = select 时的配置项，详情可参见下表 `selectProps` 字段说明 |
 *| inputProps  | `inputProps` | - | -| 当 type 为 input,inputNumber 和 password 时的配置项，详情可参见下表 `inputProps` 字段说明 |
 *| disabled    | `boolean`                         | -        | -       | 该列表单项是否禁止                                                                                                                |
