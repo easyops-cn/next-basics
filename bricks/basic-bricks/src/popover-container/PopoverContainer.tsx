@@ -40,6 +40,7 @@ export function PopoverContainer(
   const customElementRef = useRef<HTMLDivElement>();
   const [visible, setVisible] = useState(props.visible);
   const trigger = props.trigger ?? "click";
+  const ref = React.createRef<HTMLDivElement>();
 
   useEffect(() => {
     setVisible(props.visible);
@@ -59,6 +60,7 @@ export function PopoverContainer(
           <BrickAsComponent
             data={props.popoverBrick.data ?? props.data}
             useBrick={props.popoverBrick.useBrick}
+            parentRefForUseBrickInPortal={ref}
           />
         </div>
       )}
@@ -148,6 +150,7 @@ export function PopoverContainer(
       className={classNames({
         [styles.displayBrickContainer]: props.triggerByIcon,
       })}
+      ref={ref}
     >
       {props.triggerByIcon && displayBrickNode}
       <Popover
