@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.182.0...@next-bricks/presentational-bricks@1.183.0) (2021-05-20)
+
+
+### Features
+
+* brick-user brick add showNicknameOrUsername property Closes BRICK_STORE-2076 ([88fed25](https://github.com/easyops-cn/next-basics/commit/88fed25028acb1cea3ef211bc3426d444a7bf490))
+
+
+
+
+
 # [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.181.0...@next-bricks/presentational-bricks@1.182.0) (2021-05-18)
 
 
