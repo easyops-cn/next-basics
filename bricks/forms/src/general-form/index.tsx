@@ -49,7 +49,7 @@ export const LAYOUT_ENUMS = ["horizontal", "vertical", "inline"];
 *| validator    | `Pick<ValidationRule, "validator" \| "message"> \| Pick<ValidationRule, "validator" \| "message">[]` | -️                                                                     | -       | 自定义校验方法，[ValidationRule](https://3x.ant.design/components/form-cn/#%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99) |
 *| labelTooltip | `LabelTooltipProps \| string`                                                                                  | -️                                                                     | -       | 表单项 label 支持 tooltip，具体如 demo 所示                                                                      |
 *| helpBrick    | `HelpBrickProps \| string`| -️           | -       | 在每个表单项的右侧或者下侧插入一些文案或者复杂的提示, 配置如 demo 所示 |
-*| labelBrick   | `LabelBrick`          | -     | -        | 表单项 label 支持 useBrick，具体如 demo 所示  |
+*| labelBrick   | `LabelBrick`          | -     | -        | 表单项 label 支持 useBrick。（不推荐使用，若要显示帮助提示信息，请使用helpBrick、labelTooltip)  |
 *| labelCol | `ColProps` | - | - | 标签列布局样式（仅当 `layout="horizontal"` 时有效） |
 *| wrapperCol | `ColProps` | - | - | 输入控件列布局样式（仅当 `layout="horizontal"` 时有效） |
 *| notRender | `Boolean` | - | - | 为true时不渲染该表单项，配合表单项的setNotRender方法使用，实现动态表单 |
