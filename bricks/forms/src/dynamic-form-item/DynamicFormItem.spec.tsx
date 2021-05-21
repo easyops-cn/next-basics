@@ -201,7 +201,6 @@ describe("DynamicFormItem", () => {
     };
 
     const wrapper = shallow(<RowFormItem {...props} />);
-
     expect(wrapper.find(Form.Item).at(0).children().type()).toEqual(Select);
     expect(wrapper.find(Form.Item).at(2).children().type()).toEqual(Input);
 
@@ -268,5 +267,77 @@ describe("DynamicFormItem", () => {
 
     const wrapper = shallow(<RowFormItem {...props} />);
     expect(wrapper.find(Input).prop("disabled")).toEqual(true);
+  });
+  it("Show user options", () => {
+    const props = {
+      prefixId: "dynamic[0]",
+      name: "dynamic",
+      label: "动态用户表单项",
+      row: {
+        user: "user",
+      },
+      columns: [
+        {
+          name: "user",
+          rules: [
+            {
+              required: true,
+              message: "请填写用户名称",
+            },
+          ],
+          type: "userSelect",
+        },
+        {
+          name: "address",
+          rules: [
+            {
+              message: "级联菜单不能为空",
+              required: true,
+            },
+          ],
+          cascaderProps: {
+            options: [
+              {
+                label: "zhejiang",
+                value: "zhejiang",
+                children: [
+                  {
+                    value: "hangzhou",
+                    label: "hangzhou",
+                    children: [
+                      {
+                        value: "xihu",
+                        label: "xihu",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                value: "guangdong",
+                label: "guangdong",
+                children: [
+                  {
+                    value: "guangzhou",
+                    label: "guangzhou",
+                  },
+                ],
+              },
+            ],
+            placeholder: "请选择级联菜单",
+            disabled: false,
+            expandTrigger: "hover",
+            allowClear: true,
+            showSearch: true,
+          },
+          type: "cascader",
+        },
+      ],
+      form: {
+        getFieldDecorator: () => (comp: React.Component) => comp,
+      } as any,
+    };
+    const wrapper = shallow(<RowFormItem {...props} />);
+    wrapper.find(Select).invoke("onSearch")("");
   });
 });
