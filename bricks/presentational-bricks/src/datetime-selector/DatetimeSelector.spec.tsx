@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { fireEvent, render } from "@testing-library/react";
 
 import { DatetimeSelector, ResolutionProps } from "./DatetimeSelector";
 
@@ -14,40 +13,42 @@ describe("DatetimeSelector", () => {
   });
 
   it("should work", () => {
-    let result = render(<DatetimeSelector from="now-1d" />);
-    let asFragment = result.asFragment;
-    expect(asFragment()).toBeTruthy();
+    let wrapper = shallow(<DatetimeSelector from="now-1d" />);
+    expect(wrapper.find("DatetimeRange").prop("initDateRange")).toEqual({
+      type: "dateRange",
+      value: "now-1d",
+    });
 
-    result = render(
+    wrapper = shallow(
       <DatetimeSelector from="1571673600076" to="1571846399076" />
     );
-    asFragment = result.asFragment;
-    expect(asFragment()).toBeTruthy();
+    expect(wrapper.find("DatetimeRange").prop("initDateRange")).toEqual({
+      type: "specifiedDate",
+      value: { from: 1571673600076, to: 1571846399076 },
+    });
 
-    result = render(<DatetimeSelector />);
-    asFragment = result.asFragment;
-    expect(asFragment()).toBeTruthy();
+    wrapper = shallow(<DatetimeSelector />);
+    expect(wrapper.find("DatetimeRange").prop("initDateRange")).toEqual(null);
   });
 
   it("should render custom time range", () => {
-    const { queryByText, getByRole } = render(
-      <DatetimeSelector
-        type="custom"
-        customTimeRange={[
-          {
-            range: "now-30d",
-            text: "近30天",
-          },
-          {
-            range: "now-1y",
-            text: "近1年",
-          },
-        ]}
-      />
+    const customTimeRange = [
+      {
+        range: "now-30d",
+        text: "近30天",
+      },
+      {
+        range: "now-1y",
+        text: "近1年",
+      },
+    ];
+    const wrapper = shallow(
+      <DatetimeSelector type="custom" customTimeRange={customTimeRange} />
     );
-    const deleteButton = getByRole("button");
-    fireEvent.click(deleteButton);
-    expect(queryByText("近1年")).toBeTruthy();
+    const DatetimeRange = wrapper.find("DatetimeRange");
+
+    expect(DatetimeRange.prop("type")).toEqual("custom");
+    expect(DatetimeRange.prop("customTimeRange")).toEqual(customTimeRange);
   });
 
   it("should return specified resolution", () => {
