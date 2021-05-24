@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Input, Row, InputNumber, Select } from "antd";
 import { isNil } from "lodash";
-
+import i18n from "i18next";
 const Option = Select.Option;
 
 interface ObjectAttrIntProps {
@@ -46,13 +46,15 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
   return (
     <>
       <div>
-        枚举值：
+        {i18n.t(`${NS_FORMS}:${K.ENUMERATION_VALUE}`)}
         <Row>
           <Select
             mode="tags"
             style={{ width: "100%" }}
             value={value?.regex}
-            placeholder="输入枚举值，以回车间隔"
+            placeholder={i18n.t(
+              `${NS_FORMS}:${K.PLEASE_INPUT_ENUMERATED_VALUE}`
+            )}
             onChange={(e) => handleValueChange({ ...value, regex: e })}
           />
         </Row>

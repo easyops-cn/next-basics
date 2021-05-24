@@ -4,6 +4,8 @@ import { BrickTree, BrickTreeProps } from "./BrickTree";
 import { mount, shallow } from "enzyme";
 import { Checkbox, Empty, Tree } from "antd";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
+import i18n from "i18next";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
 Element.prototype.scrollBy = jest.fn();
 
@@ -134,7 +136,9 @@ describe("BrickTree", () => {
     expect(checkAllCheckboxProps.checked).toBe(false);
     expect(checkAllCheckboxProps.indeterminate).toBe(true);
     let checkedNum = wrapper.find(".checkedNum");
-    expect(checkedNum.text()).toEqual("已选 4 项");
+    expect(checkedNum.text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 4 })
+    );
     expect(onCheck).lastCalledWith(
       checkedKeys.filter((key) => !key.startsWith("1"))
     );
@@ -148,7 +152,9 @@ describe("BrickTree", () => {
     expect(checkAllCheckboxProps.checked).toBe(true);
     expect(checkAllCheckboxProps.indeterminate).toBe(false);
     checkedNum = wrapper.find(".checkedNum");
-    expect(checkedNum.text()).toEqual("已选 6 项");
+    expect(checkedNum.text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 6 })
+    );
     expect(onCheck).lastCalledWith(checkedKeys);
 
     // 树全不勾选
@@ -160,7 +166,9 @@ describe("BrickTree", () => {
     expect(checkAllCheckboxProps.checked).toBe(false);
     expect(checkAllCheckboxProps.indeterminate).toBe(false);
     checkedNum = wrapper.find(".checkedNum");
-    expect(checkedNum.text()).toEqual("已选 0 项");
+    expect(checkedNum.text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 0 })
+    );
     expect(onCheck).lastCalledWith([]);
   });
 
@@ -195,7 +203,9 @@ describe("BrickTree", () => {
       target: { checked: true },
     } as CheckboxChangeEvent);
     let checkedNum = wrapper.find(".checkedNum");
-    expect(checkedNum.text()).toEqual("已选 2 项");
+    expect(checkedNum.text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 2 })
+    );
     expect(onCheck).lastCalledWith(["0100", "10"]);
 
     // 取消全选
@@ -203,7 +213,9 @@ describe("BrickTree", () => {
       target: { checked: false },
     } as CheckboxChangeEvent);
     checkedNum = wrapper.find(".checkedNum");
-    expect(checkedNum.text()).toEqual("已选 0 项");
+    expect(checkedNum.text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 0 })
+    );
     expect(onCheck).lastCalledWith([]);
 
     // 树部分选择
@@ -213,13 +225,17 @@ describe("BrickTree", () => {
       {}
     );
     checkedNum = wrapper.find(".checkedNum");
-    expect(checkedNum.text()).toEqual("已选 1 项");
+    expect(checkedNum.text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 1 })
+    );
     expect(onCheck).lastCalledWith(["10"]);
 
     // 树全选
     tree.invoke("onCheck")(checkedKeys, {});
     checkedNum = wrapper.find(".checkedNum");
-    expect(checkedNum.text()).toEqual("已选 3 项");
+    expect(checkedNum.text()).toEqual(
+      i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, { number: 3 })
+    );
     expect(onCheck).lastCalledWith(["00", "0100", "10"]);
   });
 

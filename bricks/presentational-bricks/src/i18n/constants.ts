@@ -24,6 +24,10 @@ export enum K {
   COPIED = "COPIED",
   CHOSEN_OPTIONS = "CHOSEN_OPTIONS",
   CLEAR = "CLEAR",
+  SELECT_ALL = "SELECT_ALL",
+  SELECTED = "SELECTED",
+  ITEMS = "ITEMS",
+  SELECTED_OPTIONS = "SELECTED_OPTIONS",
 }
 
 export type Locale = { [key in K]: string };

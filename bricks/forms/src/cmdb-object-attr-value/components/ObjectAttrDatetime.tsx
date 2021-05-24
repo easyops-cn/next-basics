@@ -4,7 +4,7 @@ import { NS_FORMS, K } from "../../i18n/constants";
 import { DatePicker, Row, Alert } from "antd";
 import { isNil } from "lodash";
 import moment from "moment";
-
+import i18n from "i18next";
 interface ObjectAttrDatetimeProps {
   value: any;
   onChange: (newValue?: any) => void;
@@ -34,7 +34,7 @@ export function ObjectAttrDatetime(
   return (
     <>
       <div>
-        格式：
+        {i18n.t(`${NS_FORMS}:${K.FORMAT}`)}
         <Row>
           <Alert
             message="yyyy-mm-dd hh:mm:ss"
@@ -53,7 +53,7 @@ export function ObjectAttrDatetime(
           {value?.default?.length ? (
             <DatePicker
               value={moment(value?.default)}
-              placeholder="date,点击选择"
+              placeholder={i18n.t(`${NS_FORMS}:${K.CLICK_TO_SELECT_DATE}`)}
               style={{ width: "100%" }}
               onChange={(date, dateString) =>
                 handleValueChange({ ...value, default: dateString })
@@ -62,7 +62,7 @@ export function ObjectAttrDatetime(
             />
           ) : (
             <DatePicker
-              placeholder="date,点击选择"
+              placeholder={i18n.t(`${NS_FORMS}:${K.CLICK_TO_SELECT_DATE}`)}
               style={{ width: "100%" }}
               onChange={(date, dateString) =>
                 handleValueChange({ ...value, default: dateString })

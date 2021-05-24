@@ -7,7 +7,8 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";
 import { CmdbObjectApi_getObjectAll, CmdbModels } from "@next-sdk/cmdb-sdk";
 import { valueTypeList } from "../CmdbObjectAttrValue";
-
+import i18n from "i18next";
+import { NS_FORMS, K } from "../../i18n/constants";
 const Option = Select.Option;
 
 interface StructDefine {
@@ -24,19 +25,19 @@ interface StructValueType {
 
 const objectAttrColumns = [
   {
-    title: "属性ID",
+    title: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_ID}`),
     dataIndex: "id",
     key: "id",
   },
 
   {
-    title: "属性名称",
+    title: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_NAME}`),
     dataIndex: "name",
     key: "name",
   },
 
   {
-    title: "属性类型",
+    title: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_TYPE}`),
     dataIndex: ["value", "type"],
     key: "type",
     render: (text, record) =>
@@ -150,19 +151,19 @@ export function LegacyObjectAttrStructForm(
 
   const structColumns = [
     {
-      title: "结构项ID",
+      title: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_ID}`),
       dataIndex: "id",
       key: "id",
     },
 
     {
-      title: "结构项名称",
+      title: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_NAME}`),
       dataIndex: "name",
       key: "name",
     },
 
     {
-      title: "类型",
+      title: i18n.t(`${NS_FORMS}:${K.TYPE}`),
       dataIndex: "type",
       key: "type",
       render: (text, record) =>
@@ -170,7 +171,7 @@ export function LegacyObjectAttrStructForm(
     },
 
     {
-      title: "操作",
+      title: i18n.t(`${NS_FORMS}:${K.HANDEL}`),
       key: "action",
       render: (text, record) => getOptionBtns(record),
     },
@@ -178,19 +179,19 @@ export function LegacyObjectAttrStructForm(
 
   const structWithEnumColumns = [
     {
-      title: "结构项ID",
+      title: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_ID}`),
       dataIndex: "id",
       key: "id",
     },
 
     {
-      title: "结构项名称",
+      title: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_NAME}`),
       dataIndex: "name",
       key: "name",
     },
 
     {
-      title: "类型",
+      title: i18n.t(`${NS_FORMS}:${K.TYPE}`),
       dataIndex: "type",
       key: "type",
       render: (text, record) =>
@@ -198,7 +199,7 @@ export function LegacyObjectAttrStructForm(
     },
 
     {
-      title: "枚举值",
+      title: i18n.t(`${NS_FORMS}:${K.ENUMERATION_VALUE}`),
       dataIndex: "regex",
       key: "regex",
       render: (text, record) =>
@@ -209,7 +210,7 @@ export function LegacyObjectAttrStructForm(
     },
 
     {
-      title: "操作",
+      title: i18n.t(`${NS_FORMS}:${K.HANDEL}`),
       key: "action",
       render: (text, record) => getOptionBtns(record),
     },
@@ -272,12 +273,14 @@ export function LegacyObjectAttrStructForm(
 
   return (
     <div>
-      结构体定义：
+      {i18n.t(`${NS_FORMS}:${K.STRUCTURE_BODY_DEFINATION}`)}
       <div>
         <Row>
           <Radio.Group value={addStructMode} onChange={handleModeChange}>
-            <Radio value="new">新建定义</Radio>
-            <Radio value="import">从已有模型中引入</Radio>
+            <Radio value="new">
+              {i18n.t(`${NS_FORMS}:${K.NEW_DEFINATION}`)}
+            </Radio>
+            <Radio value="import">{i18n.t(`${NS_FORMS}:${K.IFEM}`)}</Radio>
           </Radio.Group>
         </Row>
         <Row style={{ marginTop: 8 }}>
@@ -289,7 +292,7 @@ export function LegacyObjectAttrStructForm(
                 setAddStructModalVisible(true);
               }}
             >
-              添加结构项
+              {i18n.t(`${NS_FORMS}:${K.ADD_STRUCTURE_ITEM}`)}
             </Button>
           ) : (
             <Button
@@ -299,7 +302,7 @@ export function LegacyObjectAttrStructForm(
               }}
               loading={loadingObject}
             >
-              选择模型
+              {i18n.t(`${NS_FORMS}:${K.SELECT_MODEL}`)}
             </Button>
           )}
         </Row>
@@ -317,35 +320,51 @@ export function LegacyObjectAttrStructForm(
         />
       </div>
       <Modal
-        title={isEmpty(currentStruct) ? "添加结构项" : "编辑结构项"}
+        title={
+          isEmpty(currentStruct)
+            ? i18n.t(`${NS_FORMS}:${K.ADD_STRUCTURE_ITEM}`)
+            : i18n.t(`${NS_FORMS}:${K.EDIT_STRUCTURE_ITEM}`)
+        }
         visible={addStructModalVisible}
         onOk={handleAddStructConfirm}
         onCancel={() => setAddStructModalVisible(false)}
       >
-        <Form labelCol={{ span: 6 }} wrapperCol={{ span: 16 }}>
-          <Form.Item label="结构项ID">
+        <Form labelCol={{ span: 10 }} wrapperCol={{ span: 16 }}>
+          <Form.Item label={i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_ID}`)}>
             {getFieldDecorator("id", {
               initialValue: isEmpty(currentStruct) ? "" : currentStruct.id,
               rules: [
-                { required: true, message: "请输入结构项ID" },
+                {
+                  required: true,
+                  message: i18n.t(`${NS_FORMS}:${K.INPUT_STRUCTURE_ITEM_ID}`),
+                },
                 {
                   pattern: /^[a-zA-Z][a-zA-Z_0-9]{0,31}$/gi,
-                  message:
-                    "请输入1至32个字符，以字母开头，只能包含字母、数字和下划线",
+                  message: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_ID_LIMIT}`),
                 },
               ],
             })(<Input autoFocus />)}
           </Form.Item>
-          <Form.Item label="结构项名称">
+          <Form.Item label={i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_NAME}`)}>
             {getFieldDecorator("name", {
               initialValue: isEmpty(currentStruct) ? "" : currentStruct.name,
-              rules: [{ required: true, message: "请输入结构项名称" }],
+              rules: [
+                {
+                  required: true,
+                  message: i18n.t(`${NS_FORMS}:${K.INPUT_STRUCTURE_ITEM_NAME}`),
+                },
+              ],
             })(<Input />)}
           </Form.Item>
-          <Form.Item label="类型">
+          <Form.Item label={i18n.t(`${NS_FORMS}:${K.TYPE}`)}>
             {getFieldDecorator("type", {
               initialValue: isEmpty(currentStruct) ? "" : currentStruct.type,
-              rules: [{ required: true, message: "请输入类型" }],
+              rules: [
+                {
+                  required: true,
+                  message: i18n.t(`${NS_FORMS}:${K.ENTER_TYPE}`),
+                },
+              ],
             })(
               <Select
                 onChange={(value) => setCurValueType(value as string)}
@@ -364,14 +383,16 @@ export function LegacyObjectAttrStructForm(
             )}
           </Form.Item>
           {(curValueType === "enum" || curValueType === "enums") && (
-            <Form.Item label="枚举值">
+            <Form.Item label={i18n.t(`${NS_FORMS}:${K.ENUMERATION_VALUE}`)}>
               {getFieldDecorator("regex", {
                 initialValue: isEmpty(currentStruct) ? [] : currentStruct.regex,
               })(
                 <Select
                   mode="tags"
                   style={{ width: "100%" }}
-                  placeholder="输入枚举值，以回车间隔"
+                  placeholder={i18n.t(
+                    `${NS_FORMS}:${K.PLEASE_INPUT_ENUMERATED_VALUE}`
+                  )}
                 />
               )}
             </Form.Item>
@@ -379,7 +400,7 @@ export function LegacyObjectAttrStructForm(
         </Form>
       </Modal>
       <Modal
-        title="引用模型"
+        title={i18n.t(`${NS_FORMS}:${K.CITE_MODEL}`)}
         visible={importStructModalVisible}
         onOk={() => {
           handleValueChange({
@@ -407,7 +428,9 @@ export function LegacyObjectAttrStructForm(
       >
         <Select
           showSearch
-          placeholder="选择一个CMDB资源模型"
+          placeholder={i18n.t(
+            `${NS_FORMS}:${K.SELECT_ONE_CMDB_RESOURCE_MODEL}`
+          )}
           filterOption={(input, option) =>
             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
             0
@@ -426,7 +449,7 @@ export function LegacyObjectAttrStructForm(
         </Select>
         {selectedObjectId.length > 0 && (
           <div style={{ marginTop: 15 }}>
-            选择属性
+            {i18n.t(`${NS_FORMS}:${K.SELECT_ATTRIBUTE}`)}
             <Table
               columns={objectAttrColumns}
               dataSource={memoizeAttrList}

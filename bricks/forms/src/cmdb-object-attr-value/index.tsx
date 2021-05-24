@@ -10,7 +10,8 @@ import { CmdbObjectAttrValue, ValueType } from "./CmdbObjectAttrValue";
 import { FormItemElement } from "@next-libs/forms";
 import { ValidationRule } from "@ant-design/compatible/lib/form";
 import { isNil } from "lodash";
-
+import { NS_FORMS, K } from "../i18n/constants";
+import i18n from "i18next";
 /**
 * @id forms.cmdb-object-attr-value
 * @name forms.cmdb-object-attr-value
@@ -216,15 +217,17 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
 
   private _builtInvalidator: Pick<ValidationRule, "validator" | "message">[] = [
     {
-      message: "默认值与正则不符",
+      message: i18n.t(`${NS_FORMS}:${K.DEFAULT_DIFFERENT_REGULAR}`),
       validator: this.defaultValueNotMatchRegex,
     },
     {
-      message: "请输入流水号长度",
+      message: i18n.t(
+        `${NS_FORMS}:${K.PLEASE_ENTER_THE_LENGTH_OF_THE_SERIAL_NUMBER}`
+      ),
       validator: this.strSeriesNumberLengthRequired,
     },
     {
-      message: "小数点后最多可输入四位",
+      message: i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`),
       validator: this.floatMaxLengthNotMatch,
     },
   ];

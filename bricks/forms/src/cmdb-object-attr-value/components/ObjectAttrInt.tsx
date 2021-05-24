@@ -4,6 +4,7 @@ import { NS_FORMS, K } from "../../i18n/constants";
 import { Form } from "@ant-design/compatible";
 import { Input, Row, InputNumber } from "antd";
 import { isNil } from "lodash";
+import i18n from "i18next";
 
 interface ObjectAttrIntProps {
   value: any;
@@ -34,10 +35,10 @@ export function ObjectAttrInt(props: ObjectAttrIntProps): React.ReactElement {
   return (
     <>
       <div>
-        正则：
+        {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
         <Row>
           <Input
-            placeholder="可不填"
+            placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
             value={value?.regex}
             onChange={(e) =>
               handleValueChange({ ...value, regex: e.target.value })

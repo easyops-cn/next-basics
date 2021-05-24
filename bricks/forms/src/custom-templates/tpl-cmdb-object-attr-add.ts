@@ -1,4 +1,6 @@
 import { getRuntime } from "@next-core/brick-kit";
+import i18n from "i18next";
+import { NS_FORMS, K } from "../i18n/constants";
 
 getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
   proxy: {
@@ -81,15 +83,16 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                   testid: "cmdb-object-attr-add-id-input",
                 },
                 name: "id",
-                label: "属性ID",
+                label: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_ID}`),
                 required: true,
                 pattern: "^[A-Za-z_][A-Za-z0-9_]{0,31}$",
                 message: {
-                  required: "属性ID为必填项",
-                  pattern:
-                    "请输入1至32个字符，仅支持字母、数字和下划线(不能以数字开头)",
+                  required: i18n.t(`${NS_FORMS}:${K.MUST_NEED_ATTRIBUTE_ID}`),
+                  pattern: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_ID_LIMIT}`),
                 },
-                placeholder: "请输入属性ID",
+                placeholder: i18n.t(
+                  `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_ID}`
+                ),
               },
             },
             {
@@ -99,12 +102,14 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                   testid: "cmdb-object-attr-add-name-input",
                 },
                 name: "name",
-                label: "属性名称",
+                label: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_NAME}`),
                 required: true,
                 message: {
-                  required: "属性名称为必填项",
+                  required: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_NAME_LIMIT}`),
                 },
-                placeholder: "请输入属性名称",
+                placeholder: i18n.t(
+                  `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_NAME}`
+                ),
               },
             },
             {
@@ -115,12 +120,14 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                   testid: "cmdb-object-attr-add-value-type-select",
                 },
                 name: "attrValue",
-                label: "值类型",
+                label: i18n.t(`${NS_FORMS}:${K.VALUE_TYPE}`),
                 required: true,
                 message: {
-                  required: "请选择值类型",
+                  required: i18n.t(`${NS_FORMS}:${K.PLEASE_SELECT_VALUE_TYPE}`),
                 },
-                placeholder: "请选择值类型",
+                placeholder: i18n.t(
+                  `${NS_FORMS}:${K.PLEASE_SELECT_VALUE_TYPE}`
+                ),
               },
               events: {
                 "forms.cmdb-object-attr-value.change": [
@@ -145,15 +152,15 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                     properties: {
                       options: [
                         {
-                          label: "必填",
+                          label: i18n.t(`${NS_FORMS}:${K.REQUIRED}`),
                           value: "required",
                         },
                         {
-                          label: "只读",
+                          label: i18n.t(`${NS_FORMS}:${K.READONLY}`),
                           value: "readonly",
                         },
                         {
-                          label: "唯一",
+                          label: i18n.t(`${NS_FORMS}:${K.UNIQUE}`),
                           value: "unique",
                         },
                       ],
@@ -166,16 +173,16 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                     properties: {
                       options: [
                         {
-                          label: "必填",
+                          label: i18n.t(`${NS_FORMS}:${K.REQUIRED}`),
                           value: "required",
                         },
                         {
-                          label: "只读",
+                          label: i18n.t(`${NS_FORMS}:${K.READONLY}`),
                           value: "readonly",
                           disabled: true,
                         },
                         {
-                          label: "唯一",
+                          label: i18n.t(`${NS_FORMS}:${K.UNIQUE}`),
                           value: "unique",
                           disabled: true,
                         },
@@ -189,15 +196,15 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                     properties: {
                       options: [
                         {
-                          label: "必填",
+                          label: i18n.t(`${NS_FORMS}:${K.REQUIRED}`),
                           value: "required",
                         },
                         {
-                          label: "只读",
+                          label: i18n.t(`${NS_FORMS}:${K.READONLY}`),
                           value: "readonly",
                         },
                         {
-                          label: "唯一",
+                          label: i18n.t(`${NS_FORMS}:${K.UNIQUE}`),
                           value: "unique",
                           disabled: true,
                         },
@@ -214,8 +221,10 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                   testid: "cmdb-object-attr-add-tag-input",
                 },
                 name: "tag",
-                label: "属性分类",
-                placeholder: "请输入属性分类",
+                label: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_CATEGROY}`),
+                placeholder: i18n.t(
+                  `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_CATEGROY}`
+                ),
               },
             },
             {
@@ -226,18 +235,18 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                   testid: "cmdb-object-attr-add-limit-option",
                 },
                 name: "attrOptions",
-                label: "限制",
+                label: i18n.t(`${NS_FORMS}:${K.LIMIT}`),
                 options: [
                   {
-                    label: "必填",
+                    label: i18n.t(`${NS_FORMS}:${K.REQUIRED}`),
                     value: "required",
                   },
                   {
-                    label: "只读",
+                    label: i18n.t(`${NS_FORMS}:${K.READONLY}`),
                     value: "readonly",
                   },
                   {
-                    label: "唯一",
+                    label: i18n.t(`${NS_FORMS}:${K.UNIQUE}`),
                     value: "unique",
                   },
                 ],

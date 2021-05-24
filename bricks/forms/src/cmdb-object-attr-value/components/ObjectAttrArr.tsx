@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Input, Row, InputNumber, Select, Radio } from "antd";
 import { isNil } from "lodash";
-
+import i18n from "i18next";
 interface ObjectAttrArrProps {
   value: any;
   onChange: (newValue?: any) => void;
@@ -35,10 +35,10 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
   return (
     <>
       <div>
-        正则：
+        {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
         <Row>
           <Input
-            placeholder="可不填"
+            placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
             value={value?.regex}
             onChange={(e) =>
               handleValueChange({ ...value, regex: e.target.value })
@@ -47,7 +47,7 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
         </Row>
       </div>
       <div>
-        显示为：
+        {i18n.t(`${NS_FORMS}:${K.DISPLAY_AS}`)}
         <Row>
           <Radio.Group
             value={value?.mode}
@@ -55,8 +55,8 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
               handleValueChange({ ...value, mode: e.target.value })
             }
           >
-            <Radio value="default">默认</Radio>
-            <Radio value="tag">标签</Radio>
+            <Radio value="default">{i18n.t(`${NS_FORMS}:${K.DEFAULT}`)}</Radio>
+            <Radio value="tag">{i18n.t(`${NS_FORMS}:${K.TAG}`)}</Radio>
           </Radio.Group>
         </Row>
       </div>
@@ -67,7 +67,7 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
             value={value?.default}
             mode="tags"
             style={{ width: "100%" }}
-            placeholder="输入数组，用逗号或空格分隔保存"
+            placeholder={i18n.t(`${NS_FORMS}:${K.ARRAY_LIMIT}`)}
             onChange={(e) => handleValueChange({ ...value, default: e })}
             tokenSeparators={[",", " "]}
             dropdownRender={() => <></>}

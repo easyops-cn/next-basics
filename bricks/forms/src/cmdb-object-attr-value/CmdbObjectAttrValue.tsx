@@ -4,6 +4,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { Select, Input, Row, Col, Radio, Empty } from "antd";
 import { defaults, isEmpty } from "lodash";
+import i18n from "i18next";
 import {
   ObjectAttrStr,
   ObjectAttrInt,
@@ -102,7 +103,7 @@ export interface ValueOptions {
 export const valueTypeList = [
   {
     key: "str",
-    text: "字符型",
+    text: i18n.t(`${NS_FORMS}:${K.STRING_TYPE}`),
   },
   {
     key: "int",

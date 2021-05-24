@@ -23,7 +23,11 @@ const locale: Locale = {
   [K.COPY]: "复制",
   [K.COPIED]: "复制成功",
   [K.CHOSEN_OPTIONS]: "已选择 {{count}} 项",
+  [K.SELECTED_OPTIONS]: "已选 {{number}} 项",
   [K.CLEAR]: "清空",
+  [K.ITEMS]: "项",
+  [K.SELECT_ALL]: "全选",
+  [K.SELECTED]: "已选",
 };
 
 export default locale;

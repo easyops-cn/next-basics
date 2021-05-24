@@ -14,7 +14,7 @@ import {
 } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { isNil, isNumber } from "lodash";
-
+import i18n from "i18next";
 const Option = Select.Option;
 
 interface StrValueType {
@@ -105,10 +105,10 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
   const getPopoverContent = (): React.ReactNode => (
     <>
       <Row style={{ width: 200, marginBottom: 15 }} align="middle" type="flex">
-        <Col span={6}>起始值</Col>
+        <Col span={6}>{i18n.t(`${NS_FORMS}:${K.INITIAL}`)}</Col>
         <Col span={16}>
           <InputNumber
-            placeholder="默认为1"
+            placeholder={i18n.t(`${NS_FORMS}:${K.THE_DEFAULT_IS_ONE}`)}
             data-testid="start-value-input"
             style={{ width: "100%" }}
             value={startValue}
@@ -168,7 +168,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         <Row>
           <Col span={20}>
             <Input
-              placeholder="前缀标识符（可不填）"
+              placeholder={i18n.t(`${NS_FORMS}:${K.PREFIX_IDENTIFIER}`)}
               className="auto-increment-id-prefix"
               value={value.prefix}
               onChange={(e) => {
@@ -183,7 +183,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               visible={popoverVisible}
               onVisibleChange={handleVisibleChange}
             >
-              <Button type="link">高级</Button>
+              <Button type="link">{i18n.t(`${NS_FORMS}:${K.ADVANCED}`)}</Button>
             </Popover>
           </Col>
         </Row>
@@ -193,7 +193,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         <Row gutter={15}>
           <Col span={8}>
             <InputNumber
-              placeholder="流水号长度"
+              placeholder={i18n.t(`${NS_FORMS}:${K.NUMBER_LENGTH}`)}
               value={value.series_number_length}
               onChange={(e) => {
                 handleValueChange({ ...value, series_number_length: e });
@@ -205,7 +205,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
           </Col>
           <Col span={10}>
             <Input
-              placeholder="前缀标识符（可不填）"
+              placeholder={i18n.t(`${NS_FORMS}:${K.PREFIX_IDENTIFIER}`)}
               className="series-number-prefix"
               value={value.prefix}
               onChange={(e) => {
@@ -222,7 +222,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
               visible={popoverVisible}
               onVisibleChange={handleVisibleChange}
             >
-              <Button type="link">高级</Button>
+              <Button type="link">{i18n.t(`${NS_FORMS}:${K.ADVANCED}`)}</Button>
             </Popover>
           </Col>
         </Row>
@@ -234,21 +234,25 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
     <>
       <div>
         <div>
-          正则：
+          {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
           <Row>
             <Input
-              placeholder="可不填"
+              placeholder={i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`)}
               value={value.regex}
               onChange={handleRegexChange}
             />
           </Row>
         </div>
         <div>
-          显示为：
+          {i18n.t(`${NS_FORMS}:${K.DISPLAY_AS}`)}
           <Row>
             <Radio.Group value={value.mode} onChange={handleStrModeChange}>
-              <Radio value="default">默认</Radio>
-              <Radio value="multiple-lines">多行字符串</Radio>
+              <Radio value="default">
+                {i18n.t(`${NS_FORMS}:${K.DEFAULT}`)}
+              </Radio>
+              <Radio value="multiple-lines">
+                {i18n.t(`${NS_FORMS}:${K.MULTI_LINE_STR}`)}
+              </Radio>
               <Radio value="url">URL</Radio>
               <Radio value="markdown">Markdown</Radio>
             </Radio.Group>
