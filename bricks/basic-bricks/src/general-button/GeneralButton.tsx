@@ -78,6 +78,7 @@ export function GeneralButton({
         )
       }
       disabled={disabled}
+      data-testid="button"
     >
       {buttonName}
     </Button>

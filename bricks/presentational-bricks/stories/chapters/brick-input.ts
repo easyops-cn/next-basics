@@ -20,6 +20,9 @@ export const BrickInputStory: Story = {
   conf: {
     brick: "presentational-bricks.brick-input",
     properties: {
+      dataset: {
+        testid: "basic-usage-demo",
+      },
       placeholder: "输入关键字搜索",
       trigger: "change",
     },

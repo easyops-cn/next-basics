@@ -24,6 +24,9 @@ export const generalButtonStory: Story = {
       showCancelButton: true,
       submitText: "提交",
       cancelText: "取消",
+      dataset: {
+        testid: "basic-usage-demo",
+      },
     },
     events: {
       "submit.button.click": {

@@ -30,7 +30,6 @@ export const RealSwitch = (
   React.useEffect(() => {
     setValue(!!props.value);
   }, [props.value]);
-
   return (
     <Switch
       ref={ref}
@@ -38,6 +37,7 @@ export const RealSwitch = (
       size={props.size}
       onChange={handleChange}
       disabled={props.disabled}
+      data-testid="switch"
     />
   );
 };
