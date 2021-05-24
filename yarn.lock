@@ -2390,15 +2390,15 @@
   dependencies:
     cronstrue "^1.88.0"
 
-"@next-libs/datetime-components@^2.0.0":
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/@next-libs/datetime-components/-/datetime-components-2.0.3.tgz#6772eb646e5714ee73ebe95b1800258d279e18b2"
-  integrity sha1-Z3LrZG5XFO5z6+lbGAAljSeeGLI=
+"@next-libs/datetime-components@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/@next-libs/datetime-components/-/datetime-components-2.1.0.tgz#f91f11b2d2467bdc2b80b7bf11c02487e561faf7"
+  integrity sha512-rCbSNFB0FKVLWB/xG6FVgpeZUmv9OJr9JSS6dt3/pwRxt3EKdqOWkeGj4POaCK4+6G1gZkAOw1NFEk3Ft04S7A==
 
-"@next-libs/datetime@^1.0.0":
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-1.0.3.tgz#8923065f0850f4f18ac72b70d92126aaba601af4"
-  integrity sha1-iSMGXwhQ9PGKxytw2SEmqrpgGvQ=
+"@next-libs/datetime@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-1.1.0.tgz#b9275ae0257cdf39053881439c52d06fdb3e0a29"
+  integrity sha512-F98tx0rNK18v4g7GGITcPtmT6bEhnriQiFzvxkk4j+qEuKoXPNNCNfUe279CXuFIgQoFFsWR4J/aqIj3rzKRew==
 
 "@next-libs/editor-components@^1.0.0":
   version "1.0.1"
