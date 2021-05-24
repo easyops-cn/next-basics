@@ -4,6 +4,7 @@ import { NS_FORMS, K } from "../../i18n/constants";
 import { Input, Row, InputNumber, Alert } from "antd";
 import { isNil } from "lodash";
 import styles from "./index.module.css";
+import i18n from "i18next";
 
 interface ObjectAttrIPProps {
   value: any;
@@ -32,7 +33,7 @@ export function ObjectAttrIP(props: ObjectAttrIPProps): React.ReactElement {
   return (
     <>
       <div>
-        正则：
+        {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
         <Row>
           <Alert
             message="^^(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))$"

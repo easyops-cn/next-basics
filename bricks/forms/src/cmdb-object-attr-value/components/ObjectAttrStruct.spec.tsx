@@ -4,7 +4,8 @@ import { mount } from "enzyme";
 import { Modal, Row, Radio, Button, Table, Input, Select } from "antd";
 import { CmdbObjectApi_getObjectAll } from "@next-sdk/cmdb-sdk";
 import { ObjectAttrStruct } from "./ObjectAttrStruct";
-
+import { NS_FORMS, K } from "../../i18n/constants";
+import i18n from "i18next";
 jest.mock("@next-sdk/cmdb-sdk");
 
 const spyOnModalConfirm = jest.spyOn(Modal, "confirm");
@@ -54,7 +55,9 @@ describe("ObjectAttrStruct", () => {
 
     const wrapper = mount(<ObjectAttrStruct {...props} />);
     expect(wrapper.find(Radio.Group).at(0).props().value).toBe("new");
-    expect(wrapper.find(Row).at(1).children(0).text()).toBe("添加结构项");
+    expect(wrapper.find(Row).at(1).children(0).text()).toBe(
+      i18n.t(`${NS_FORMS}:${K.ADD_STRUCTURE_ITEM}`)
+    );
     await act(async () => {
       wrapper.find(Radio.Group).at(0).invoke("onChange")({
         target: {
@@ -65,7 +68,9 @@ describe("ObjectAttrStruct", () => {
       await (global as any).flushPromises();
     });
     wrapper.update();
-    expect(wrapper.find(Row).at(1).children(0).text()).toBe("选择模型");
+    expect(wrapper.find(Row).at(1).children(0).text()).toBe(
+      i18n.t(`${NS_FORMS}:${K.SELECT_MODEL}`)
+    );
   });
 
   it.each([
@@ -134,7 +139,9 @@ describe("ObjectAttrStruct", () => {
 
     await jest.runAllTimers();
     wrapper.update();
-    expect(wrapper.find("Modal").at(0).props().title).toBe("编辑结构项");
+    expect(wrapper.find("Modal").at(0).props().title).toBe(
+      i18n.t(`${NS_FORMS}:${K.EDIT_STRUCTURE_ITEM}`)
+    );
 
     wrapper.find(Modal).at(0).invoke("onCancel")(); // 点击弹窗确认按钮
 

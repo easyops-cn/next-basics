@@ -13,7 +13,8 @@ import {
   InputNumber,
 } from "antd";
 import { render, fireEvent } from "@testing-library/react";
-
+import i18n from "i18next";
+import { NS_FORMS, K } from "../../i18n/constants";
 const Option = Select.Option;
 
 const defaultValue = {
@@ -218,7 +219,7 @@ describe("ObjectAttrStr", () => {
       onChange: jest.fn(),
     };
     const { getByText, queryByTestId } = render(<ObjectAttrStr {...props} />);
-    const popoverBtn = getByText("高级");
+    const popoverBtn = getByText(i18n.t(`${NS_FORMS}:${K.ADVANCED}`));
     fireEvent.click(popoverBtn);
     fireEvent.change(queryByTestId("start-value-input"), {
       target: { value: 5 },
@@ -250,7 +251,7 @@ describe("ObjectAttrStr", () => {
       onChange: jest.fn(),
     };
     const { getByText, queryByTestId } = render(<ObjectAttrStr {...props} />);
-    const popoverBtn = getByText("高级");
+    const popoverBtn = getByText(i18n.t(`${NS_FORMS}:${K.ADVANCED}`));
     fireEvent.click(popoverBtn);
     fireEvent.change(queryByTestId("start-value-input"), {
       target: { value: null },
@@ -282,7 +283,7 @@ describe("ObjectAttrStr", () => {
       onChange: jest.fn(),
     };
     const { getByText, queryByTestId } = render(<ObjectAttrStr {...props} />);
-    const popoverBtn = getByText("高级");
+    const popoverBtn = getByText(i18n.t(`${NS_FORMS}:${K.ADVANCED}`));
     fireEvent.click(popoverBtn);
     fireEvent.change(queryByTestId("start-value-input"), {
       target: { value: 5 },

@@ -1,10 +1,11 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { I18nContext, useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { DatePicker, Row, Alert } from "antd";
 import { isNil } from "lodash";
 import moment from "moment";
 import styles from "./index.module.css";
+import i18n from "i18next";
 
 interface ObjectAttrDateProps {
   value: any;
@@ -33,7 +34,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
   return (
     <>
       <div>
-        格式：
+        {i18n.t(`${NS_FORMS}:${K.FORMAT}`)}
         <Row>
           <Alert
             message="yyyy-mm-dd"
@@ -48,7 +49,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
           {value?.default?.length ? (
             <DatePicker
               value={moment(value?.default)}
-              placeholder="date,点击选择"
+              placeholder={i18n.t(`${NS_FORMS}:${K.CLICK_TO_SELECT_DATE}`)}
               style={{ width: "100%" }}
               onChange={(date) =>
                 handleValueChange({
@@ -59,7 +60,7 @@ export function ObjectAttrDate(props: ObjectAttrDateProps): React.ReactElement {
             />
           ) : (
             <DatePicker
-              placeholder="date,点击选择"
+              placeholder={i18n.t(`${NS_FORMS}:${K.CLICK_TO_SELECT_DATE}`)}
               style={{ width: "100%" }}
               onChange={(date) =>
                 handleValueChange({

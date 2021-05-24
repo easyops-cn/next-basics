@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Input, Row, InputNumber, Alert } from "antd";
 import { isNil } from "lodash";
-
+import i18n from "i18next";
 interface ObjectAttrJsonProps {
   value: any;
   onChange: (newValue?: any) => void;
@@ -36,7 +36,7 @@ export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
         JSON Schema：
         <Row>
           <Input
-            placeholder="可不填"
+            placeholder={i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`)}
             value={value?.regex}
             onChange={(e) =>
               handleValueChange({ ...value, regex: e.target.value })

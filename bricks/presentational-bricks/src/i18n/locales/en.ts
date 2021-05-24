@@ -24,6 +24,10 @@ const locale: Locale = {
   [K.COPIED]: "Copied",
   [K.CHOSEN_OPTIONS]: "Chosen {{count}} options",
   [K.CLEAR]: "Clear",
+  [K.SELECTED]: "Selected",
+  [K.SELECT_ALL]: "Select all",
+  [K.ITEMS]: "options",
+  [K.SELECTED_OPTIONS]: "Selected {{number}} options",
 };
 
 export default locale;

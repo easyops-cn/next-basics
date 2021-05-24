@@ -5,7 +5,7 @@ import { Form } from "@ant-design/compatible";
 import { Input, Row, InputNumber, Alert } from "antd";
 import { isNil } from "lodash";
 import styles from "./index.module.css";
-
+import i18n from "i18next";
 interface ObjectAttrFloatProps {
   value: any;
   onChange: (newValue?: any) => void;
@@ -56,7 +56,7 @@ export function ObjectAttrFloat(
         <Row>
           <InputNumber
             value={value?.default}
-            placeholder="小数点后最多可输入四位"
+            placeholder={i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`)}
             style={{ width: "100%" }}
             step={0.0001}
             onChange={(e) => handleValueChange({ ...value, default: e })}

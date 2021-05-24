@@ -24,6 +24,8 @@ import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import styles from "./index.module.css";
 import classNames from "classnames";
+import i18n from "i18next";
+import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 
 export const compareFunMap: Record<string, any> = {
   $eq: eq,
@@ -333,14 +335,14 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
             onChange={onCheckAllChange}
             data-testid="check-all-checkbox"
           >
-            全选
+            {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECT_ALL}`)}
           </Checkbox>
           <span style={{ marginLeft: "auto" }} className="checkedNum">
-            已选{" "}
-            {props.checkedFilterConfig
-              ? filterCheckedKeys?.length
-              : (Array.isArray(checkedKeys) && checkedKeys?.length) || 0}{" "}
-            项
+            {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.SELECTED_OPTIONS}`, {
+              number: props.checkedFilterConfig
+                ? filterCheckedKeys?.length
+                : (Array.isArray(checkedKeys) && checkedKeys?.length) || 0,
+            })}
           </span>
         </div>
       )}
