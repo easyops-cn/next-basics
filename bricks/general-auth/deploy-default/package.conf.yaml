@@ -4,3 +4,8 @@ dependencies:
   - name: brick_next
     version: "^2.0.0"
     local_deploy: true
+  - name: api_gateway
+    version: '^1.34.10'
+    local_deploy: true
+  - name: user_service
+    version: '^1.16.0'

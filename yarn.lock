@@ -2432,10 +2432,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.7.tgz#c7de2dd9b9c563bd72d375661a87ef8034717080"
   integrity sha512-i4L0w8dkHlp2wfvNYobDQcncyoGxEk/hr5KfII09hqnwbHIlNQGFOwmjOGLQiP+o8nxcv8NTrQsQ09Ma04aNEg==
 
-"@next-sdk/api-gateway-sdk@2.0.3":
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.3.tgz#a99cb0e1116ad1a086eadf2f8af44d749c9a1fb4"
-  integrity sha512-iwuzy3f36tddUq+vY9QZFN7NHQR1dxAQX7IUQU1wA68KtDV1+sBRZKWtDicD4QIbJ/XjXYwfLBlRIWcLixgWFQ==
+"@next-sdk/api-gateway-sdk@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.nlark.com/@next-sdk/api-gateway-sdk/download/@next-sdk/api-gateway-sdk-2.0.4.tgz?cache=0&sync_timestamp=1621848328979&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40next-sdk%2Fapi-gateway-sdk%2Fdownload%2F%40next-sdk%2Fapi-gateway-sdk-2.0.4.tgz#c5339c0dbccadeda393a2a0905dffa171ab72c91"
+  integrity sha1-xTOcDbzK3to5OioJBd/6Fxq3LJE=
 
 "@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"
