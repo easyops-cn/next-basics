@@ -41,6 +41,9 @@ export const formModalStory: Story = {
               brick: "forms.form-modal",
               properties: {
                 id: "form-modal-1",
+                dataset: {
+                  testid: "basic-usage-demo",
+                },
                 modalTitle: "编辑信息",
                 dataSource: {
                   level: "high",

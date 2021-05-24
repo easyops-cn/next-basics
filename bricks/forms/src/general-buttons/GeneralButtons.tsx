@@ -23,7 +23,7 @@ export function GeneralButtons(props: GeneralButtonsProps): React.ReactElement {
     <FormItemWrapper
       {...props}
       className={classNames(styles.formButtons, {
-        [styles.isFormElement]: props.formElement?.layout === "horizontal"
+        [styles.isFormElement]: props.formElement?.layout === "horizontal",
       })}
     >
       <Tooltip title={props.submitTooltip}>
@@ -32,12 +32,17 @@ export function GeneralButtons(props: GeneralButtonsProps): React.ReactElement {
           type={props.submitType}
           onClick={props.onSubmitClick}
           style={{ marginRight: "8px" }}
+          data-testid="submit-button"
         >
           {props.submitText}
         </Button>
       </Tooltip>
       {props.showCancelButton && (
-        <Button type={props.cancelType} onClick={props.onCancelClick}>
+        <Button
+          type={props.cancelType}
+          onClick={props.onCancelClick}
+          data-testid="cancel-button"
+        >
           {props.cancelText}
         </Button>
       )}

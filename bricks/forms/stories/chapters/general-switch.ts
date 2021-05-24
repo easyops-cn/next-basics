@@ -41,6 +41,9 @@ export const generalSwitch: Story = {
                 name: "enabled",
                 label: "启用采集",
                 size: "default",
+                dataset: {
+                  testid: "basic-usage-demo",
+                },
               },
               events: {
                 "general.switch.change": {

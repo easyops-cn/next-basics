@@ -28,6 +28,9 @@ export const generalButtonStory: Story = {
           icon: "edit",
           prefix: "fas",
         },
+        dataset: {
+          testid: "basic-usage-demo",
+        },
       },
       events: {
         "general.button.click": [{ action: "console.log" }],

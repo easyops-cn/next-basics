@@ -37,6 +37,9 @@ export const generalTextareaStory: Story = {
                 required: "请输入内容",
                 max: "最长长度限制，10",
               },
+              dataset: {
+                testid: "basic-usage-demo",
+              },
             },
             events: {
               "general.textarea.blur": {
