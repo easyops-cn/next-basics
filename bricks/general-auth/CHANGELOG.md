@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.6.0...@next-bricks/general-auth@1.7.0) (2021-05-25)
+
+
+### Bug Fixes
+
+* remove useless dependency ([f4f98cb](https://github.com/easyops-cn/next-basics/commit/f4f98cbe4d692f809d381d99a1c0986175f8e601))
+
+
+### Features
+
+* **loginv2:** support login by easyops, ldap or custom provider ([1ae91be](https://github.com/easyops-cn/next-basics/commit/1ae91befccaf79a0a5fe7465c648afa93d213630))
+
+
+
+
+
 # [1.6.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.5.0...@next-bricks/general-auth@1.6.0) (2021-05-13)
 
 
