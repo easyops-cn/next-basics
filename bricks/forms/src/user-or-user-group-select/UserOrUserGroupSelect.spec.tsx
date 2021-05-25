@@ -7,15 +7,6 @@ import { Select } from "antd";
 
 const mockPostSearch = InstanceApi_postSearch as jest.Mock;
 jest.mock("@next-sdk/cmdb-sdk");
-mockPostSearch.mockResolvedValue({
-  list: [
-    {
-      instanceId: "instanceId",
-      name: "easyops",
-      nickname: "uwin",
-    },
-  ],
-});
 
 jest.mock("@next-libs/cmdb-instances", () => ({
   InstanceListModal: jest.fn(() => {
@@ -25,8 +16,17 @@ jest.mock("@next-libs/cmdb-instances", () => ({
 
 describe("UserOrUserGroupSelect", () => {
   it("should work", async () => {
+    mockPostSearch.mockResolvedValue({
+      list: [
+        {
+          instanceId: "instanceId",
+          name: "easyops",
+          nickname: "uwin",
+        },
+      ],
+    });
     const onChange = jest.fn();
-    let wrapper;
+    let wrapper: any;
     await act(async () => {
       wrapper = mount(
         <UserOrUserGroupSelect
@@ -80,5 +80,60 @@ describe("UserOrUserGroupSelect", () => {
     wrapper.find(Select).invoke("onChange")([]);
     await (global as any).flushPromises();
     expect(onChange).toBeCalledWith(null);
+  });
+  it("should work and query", async () => {
+    mockPostSearch.mockResolvedValue({
+      list: [
+        {
+          instanceId: "59eea4ad40bf8",
+          name: "easyops",
+          nickname: "uwin",
+        },
+        {
+          instanceId: "59eea4ad40bw2",
+          name: "test",
+          nickname: "xxx",
+        },
+      ],
+    });
+    const onChange = jest.fn();
+    let wrapper: any;
+    await act(async () => {
+      wrapper = mount(
+        <UserOrUserGroupSelect
+          onChange={onChange}
+          objectMap={{
+            USER: {
+              view: {
+                show_key: ["name", "nickname"],
+              },
+            },
+            USER_GROUP: {
+              view: {
+                show_key: ["name"],
+              },
+            },
+          }}
+          optionsMode="user"
+          query={{
+            instanceId: { $in: ["59eea4ad40bf8", "59eea4ad40bw2"] },
+          }}
+          staticList={["easyops"]}
+        />
+      );
+      await (global as any).flushPromises();
+    });
+    wrapper.find(Select).invoke("onChange")({
+      key: "test",
+      label: "test(xxx)",
+    });
+    expect(wrapper.find(Select).prop("value")).toEqual(["test", "test(xxx)"]);
+    await act(async () => {
+      wrapper.setProps({
+        optionsMode: "group",
+      });
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
   });
 });

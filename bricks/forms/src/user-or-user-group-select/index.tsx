@@ -139,7 +139,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
    * @kind `Record<string, any>`
    * @required false
    * @default -
-   * @description 是否隐藏搜索 icon，即不支持通过 cmdb 的 modal 选择器选择
+   * @description  用户和用户组`search`接口的`query`，此参数比较适用于，两者接口需要参数相同的情况下使用
    * @group advanced
    */
   @property({
@@ -156,6 +156,30 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
    */
   @property({ attribute: false })
   objectList: Partial<CmdbModels.ModelCmdbObject>[];
+
+  /**
+   * @kind `Record<string, any>`
+   * @required false
+   * @default -
+   * @description 针对`USER/instance/_search`接口的`query`，此参数比较适用于，可能只需要针对用户做筛选的情况
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  userQuery: Record<string, any>;
+
+  /**
+   * @kind `Record<string, any>`
+   * @required false
+   * @default -
+   * @description 针对`USER_GROUP/instance/_search`接口的`query`，此参数比较适用于，可能只需要针对用户组做筛选的情况
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  userGroupQuery: Record<string, any>;
 
   /**
    * @detail `string[]|{selectedUser: string[],selectedUserGroup: string[]}`
@@ -224,6 +248,8 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             staticList={this.staticList}
             mergeUseAndUserGroup={this.mergeUseAndUserGroup}
             query={this.query}
+            userQuery={this.userQuery}
+            userGroupQuery={this.userGroupQuery}
             hideInvalidUser={this.hideInvalidUser}
           />
         </BrickWrapper>,
