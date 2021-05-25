@@ -107,35 +107,35 @@ export const valueTypeList = [
   },
   {
     key: "int",
-    text: "整型",
+    text: i18n.t(`${NS_FORMS}:${K.INTEGER}`),
   },
   {
     key: "date",
-    text: "日期",
+    text: i18n.t(`${NS_FORMS}:${K.DATE}`),
   },
   {
     key: "datetime",
-    text: "时间",
+    text: i18n.t(`${NS_FORMS}:${K.TIME}`),
   },
   {
     key: "enum",
-    text: "枚举型(单选)",
+    text: i18n.t(`${NS_FORMS}:${K.ENUMERATION}`),
   },
   {
     key: "enums",
-    text: "多选枚举型",
+    text: i18n.t(`${NS_FORMS}:${K.ENUMS}`),
   },
   {
     key: "arr",
-    text: "数组",
+    text: i18n.t(`${NS_FORMS}:${K.ARRAY}`),
   },
   {
     key: "struct",
-    text: "结构体（只可添加一行信息）",
+    text: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ONE_LINE}`),
   },
   {
     key: "structs",
-    text: "结构体数组（可添加多行信息，原名'结构体'）",
+    text: i18n.t(`${NS_FORMS}:${K.STRUCTURE_MULTIPLE_LINES}`),
   },
   {
     key: "ip",
@@ -143,11 +143,11 @@ export const valueTypeList = [
   },
   {
     key: "bool",
-    text: "布尔型",
+    text: i18n.t(`${NS_FORMS}:${K.BOOLEAN}`),
   },
   {
     key: "float",
-    text: "浮点型",
+    text: i18n.t(`${NS_FORMS}:${K.FLOAT}`),
   },
   {
     key: "json",
@@ -168,6 +168,7 @@ export function CmdbObjectAttrValueItem(
   props: CmdbObjectAttrValueProps,
   ref: any
 ): React.ReactElement {
+  const { t } = useTranslation(NS_FORMS);
   const [valueType, setValueType] = React.useState();
   const [valueOptions, setValueOptions] = React.useState<ValueOptions[]>(
     valueTypeList
@@ -252,7 +253,7 @@ export function CmdbObjectAttrValueItem(
     <div ref={ref}>
       <Select
         style={defaults(inputBoxStyle, { width: "100%" })}
-        placeholder={placeholder || "请选择值类型"}
+        placeholder={placeholder || t(K.PLEASE_SELECT_VALUE_TYPE)}
         value={valueType}
         onChange={handleValueTypeChange}
         disabled={props.disabled}

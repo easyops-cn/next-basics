@@ -2356,10 +2356,17 @@
     react-dnd "^11.1.3"
     react-dnd-html5-backend "^11.1.3"
 
-"@next-libs/basic-components@^2.0.0", "@next-libs/basic-components@^2.0.3":
+"@next-libs/basic-components@^2.0.0":
   version "2.0.3"
   resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-2.0.3.tgz#62f5a2e8f872536950a6aec9dbd037200d20f3d0"
   integrity sha1-YvWi6PhyU2lQpq7J29A3IA0g89A=
+  dependencies:
+    "@next-core/brick-types" "^2.16.0"
+
+"@next-libs/basic-components@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-2.0.6.tgz#b5c4612854c87127a2d384797a1ccb2e76d79f30"
+  integrity sha512-0p2wUpEGtlq3RspFj4BHLtlAhtgrKjsjHIpjvPuiMZwzxZ5SVIJhByqGTsaujBgQ4LkOzjT/RA/hR/GUTQK2Ag==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 
@@ -2368,25 +2375,32 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-2.0.3.tgz#99d362073983ec144ce6a22492922777975c81e5"
   integrity sha1-mdNiBzmD7BRM5qIkkpInd5dcgeU=
 
-"@next-libs/cmdb-instances@^3.0.0":
-  version "3.0.3"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-3.0.3.tgz#41e978178d8be03c5d551fe48fc7d530d78361a6"
-  integrity sha1-Qel4F42L4DxdVR/kj8fVMNeDYaY=
+"@next-libs/cmdb-instances@^4.3.2":
+  version "4.3.2"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-4.3.2.tgz#09fb4283f869a4cbaf48d0e7dc2a0bd7f44bdfac"
+  integrity sha512-syvg+whLk3gR3LbVrIXxbaNjtAX5f8579C3oav4srQ26kllv47E1QIyJO3nFEqlCT1wSjjNEhpKXUXvLTQNd7A==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
-    "@next-libs/basic-components" "^2.0.3"
-    "@next-libs/cmdb-utils" "^1.0.3"
-    "@next-libs/storage" "^1.0.3"
-    "@next-sdk/cmdb-sdk" "^1.0.1"
-    "@next-sdk/permission-sdk" "^1.1.1"
+    "@next-libs/basic-components" "^2.0.6"
+    "@next-libs/cmdb-utils" "^2.1.0"
+    "@next-libs/storage" "^1.0.6"
+    "@next-sdk/cmdb-sdk" "^2.1.1"
+    "@next-sdk/permission-sdk" "^2.1.1"
     immutability-helper "^3.1.1"
 
-"@next-libs/cmdb-utils@^1.0.0", "@next-libs/cmdb-utils@^1.0.3":
+"@next-libs/cmdb-utils@^1.0.0":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-1.0.3.tgz#1f4057c2365470c399622e1be1883bbee0570522"
   integrity sha1-H0BXwjZUcMOZYi4b4Yg7vuBXBSI=
   dependencies:
     "@next-sdk/cmdb-sdk" "^1.0.1"
+
+"@next-libs/cmdb-utils@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-2.1.0.tgz#7430c574844b9b5a9365e5958c572bf10f2485a9"
+  integrity sha512-wZsheLABwRlrFWx9tM/o52DxEQ9t+9LPPJLGQv0PbpoyHpxDmelpJ8sslsdJc8QCuNM1+AOogrEidF9nqOgwrg==
+  dependencies:
+    "@next-sdk/cmdb-sdk" "^2.1.1"
 
 "@next-libs/crontab@^1.0.0":
   version "1.0.3"
@@ -2427,10 +2441,15 @@
   resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-2.3.2.tgz#be0004381c73706505b0cb1715b417daccba296a"
   integrity sha512-7bNrwpMhQ20hpMsWc86pjUYqaDoAplqFpCJ7ABeysiuu0wxsXfyAifT7J+YATs5QunZRB8UkaVR7KFxeFnWJew==
 
-"@next-libs/storage@^1.0.0", "@next-libs/storage@^1.0.3", "@next-libs/storage@^1.0.5":
+"@next-libs/storage@^1.0.0", "@next-libs/storage@^1.0.5":
   version "1.0.5"
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-1.0.5.tgz#93859047ea43263a96c4a5b322230e6953cef5d9"
   integrity sha1-k4WQR+pDJjqWxKWzIiMOaVPO9dk=
+
+"@next-libs/storage@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-1.0.6.tgz#d4fc8cf2c0b93c63383e96b6ab6ae42a5920646f"
+  integrity sha512-Z/F8DXab3QmPgRZAhRWIbgJev8tOFFyr7OFjerPqiTFROJqFa8QWzdu8tVJ0HsoF5FtsJy+BNnKb2V3tHH7BBg==
 
 "@next-sdk/air-admin-service-sdk@^2.1.7":
   version "2.1.7"
@@ -2482,10 +2501,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-2.1.1.tgz#7316151c335decd512e6a72715702aa841ba3989"
   integrity sha512-kBo/55xqFUMTsTw2iF9qNRGWJOjJFuotCd8t2kylwk5Y5b4gUhQiCZYHOJl4jnwrN3ZiF1n2MqQgeRFH3w9Aqg==
 
-"@next-sdk/permission-sdk@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@next-sdk/permission-sdk/-/permission-sdk-1.1.1.tgz#3a75b4e26d50916908811d82efee7ee4992df557"
-  integrity sha1-OnW04m1QkWkIgR2C7+5+5Jkt9Vc=
+"@next-sdk/permission-sdk@^2.1.1":
+  version "2.1.3"
+  resolved "https://registry.npmjs.org/@next-sdk/permission-sdk/-/permission-sdk-2.1.3.tgz#1f6f5c1e351488288f35e05263a4607bda05d51f"
+  integrity sha512-MAuqsgnwvtotTgLVjZ4jmztLRamF2PrIDbjvjdp5jQICW8P8xWeBJdGw3I8YdZg3XEleJBBw2+z6mQ/9IDBI0A==
 
 "@next-sdk/user-service-sdk@^2.1.1":
   version "2.1.1"

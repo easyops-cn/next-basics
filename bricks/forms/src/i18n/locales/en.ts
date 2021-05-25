@@ -66,7 +66,7 @@ const locale: Locale = {
   [K.IFEM]: "Introducing from existing models",
   [K.ADD_STRUCTURE_ITEM]: "Add structure item",
   [K.SELECT_MODEL]: "Select model",
-  [K.CITE_MODEL]: "Cite model",
+  [K.CITE_MODEL]: "Reference model",
   [K.EDIT_STRUCTURE_ITEM]: "Edit structure item",
   [K.INPUT_STRUCTURE_ITEM_NAME]: "Please enter structure item name",
   [K.INPUT_STRUCTURE_ITEM_ID]: "Please enter structure item ID",
@@ -77,7 +77,8 @@ const locale: Locale = {
   [K.SELECT_ONE_CMDB_RESOURCE_MODEL]: "Select one CMDB resource model",
   [K.ATTRIBUTE_TYPE]: "Attribute type",
   [K.TAG]: "Tag",
-  [K.ARRAY_LIMIT]: "Enter an array, separated by commas or Spaces",
+  [K.ARRAY_LIMIT]:
+    "You can enter multiple values, and enter space or carriage return to save",
   [K.THE_DEFAULT_IS_ONE]: "The default is one",
   [K.ADVANCED]: "Advance",
   [K.PREFIX_IDENTIFIER]: "Prefix Identifier (optional)",
@@ -88,6 +89,23 @@ const locale: Locale = {
     "Please enter the length of the serial number",
   [K.DEFAULT_DIFFERENT_REGULAR]:
     "Default values are inconsistent with regular values",
+  [K.FIXED_VALUE]: "Fixed value",
+  [K.BUILT_IN_FUNCTION]: "Built-in function",
+  [K.SELF_INCREASE_ID]: "Self-increase ID",
+  [K.SERIAL_NUMBER]: "Serial number",
+  [K.ENUMS]: "Multiple choice enumeration",
+  [K.INTEGER]: "Integer",
+  [K.DATE]: "Date",
+  [K.ENUMERATION]: "Single-choice enumeration",
+  [K.ARRAY]: "Array",
+  [K.FOREIGN_KEY_SINGLE_INSTANCE]: "Foreign key (single instance)",
+  [K.FOREIGN_KEY_MULTIPLE_INSTANCES]: "Foreign key (multiple instances)",
+  [K.STRUCTURE_ONE_LINE]: "Structure (can only add one line of information)",
+  [K.STRUCTURE_MULTIPLE_LINES]:
+    "Structure array (can add multiple lines of information, formerly known as 'structure')",
+  [K.BOOLEAN]: "Boolean",
+  [K.FLOAT]: "Float",
+  [K.TIME]: "Time",
 };
 
 export default locale;

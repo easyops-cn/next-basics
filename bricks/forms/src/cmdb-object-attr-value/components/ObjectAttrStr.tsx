@@ -267,10 +267,12 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
                 onChange={handleStrDefaultTypeChange}
                 style={{ width: "100%" }}
               >
-                <Option value="value">固定值</Option>
-                <Option value="function">内置函数</Option>
-                <Option value="auto-increment-id">自增ID</Option>
-                <Option value="series-number">流水号</Option>
+                <Option value="value">{t(K.FIXED_VALUE)}</Option>
+                <Option value="function">{t(K.BUILT_IN_FUNCTION)}</Option>
+                <Option value="auto-increment-id">
+                  {t(K.SELF_INCREASE_ID)}
+                </Option>
+                <Option value="series-number">{t(K.SERIAL_NUMBER)}</Option>
               </Select>
             </Col>
             <Col
