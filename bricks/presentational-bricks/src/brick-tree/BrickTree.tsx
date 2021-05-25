@@ -417,7 +417,15 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
               if (!isEmpty(suffixBrick?.useBrick)) {
                 return (
                   <div className={styles.suffixBrickWrapper}>
-                    <span>{title}</span>
+                    <span
+                      className={
+                        showSpecificationTitleStyle && allOrDefaultFlag
+                          ? styles.allOrDefault
+                          : null
+                      }
+                    >
+                      {title}
+                    </span>
                     <BrickAsComponent
                       useBrick={suffixBrick.useBrick}
                       data={node}
