@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.165.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.164.0...@next-bricks/forms@1.165.0) (2021-05-25)
+
+
+### Features
+
+* **form-modal:** add test id to modal content element ([af3c37a](https://github.com/easyops-cn/next-basics/commit/af3c37a2a85631e45d6ae44a9325dbc7c4cba7a8))
+
+
+
+
+
 # [1.164.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.163.0...@next-bricks/forms@1.164.0) (2021-05-25)
 
 

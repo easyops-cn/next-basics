@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.185.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.184.0...@next-bricks/presentational-bricks@1.185.0) (2021-05-25)
+
+
+### Bug Fixes
+
+* brick-tree问题调整 Closed TOOL-832 ([e9c920b](https://github.com/easyops-cn/next-basics/commit/e9c920b996a6d32c89aa420e2fd6a30ac3787309))
+
+
+### Features
+
+* 添加属性控制brick-tree的全部及默认的显示样式 Closed TOOL-832 ([05816df](https://github.com/easyops-cn/next-basics/commit/05816df47a54bfc98e696a71df6218108feb712c))
+
+
+
+
+
 # [1.184.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.183.0...@next-bricks/presentational-bricks@1.184.0) (2021-05-24)
 
 
