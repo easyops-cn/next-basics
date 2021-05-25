@@ -29,7 +29,7 @@
     "@next-core/custom-antd-styles": "^1.8.8",
     "@next-libs/basic-components": "^2.0.0",
     "@next-libs/clipboard": "^2.0.0",
-    "@next-libs/cmdb-instances": "^3.0.0",
+    "@next-libs/cmdb-instances": "^4.3.2",
     "@next-libs/crontab": "^1.0.0",
     "@next-libs/forms": "^2.3.2",
     "@next-sdk/cmdb-sdk": "^2.1.1",

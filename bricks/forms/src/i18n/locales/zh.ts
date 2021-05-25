@@ -82,6 +82,22 @@ const locale: Locale = {
   [K.STRING_TYPE]: "字符型",
   [K.PLEASE_ENTER_THE_LENGTH_OF_THE_SERIAL_NUMBER]: "请输入流水号长度",
   [K.DEFAULT_DIFFERENT_REGULAR]: "默认值与正则不符",
+  [K.FIXED_VALUE]: "固定值",
+  [K.BUILT_IN_FUNCTION]: "内置函数",
+  [K.SELF_INCREASE_ID]: "自增ID",
+  [K.SERIAL_NUMBER]: "流水号",
+  [K.ENUMS]: "多选枚举型",
+  [K.INTEGER]: "整型",
+  [K.DATE]: "日期",
+  [K.ENUMERATION]: "枚举型（单选）",
+  [K.ARRAY]: "数组",
+  [K.FOREIGN_KEY_SINGLE_INSTANCE]: "外键(单个实例)",
+  [K.FOREIGN_KEY_MULTIPLE_INSTANCES]: "外键(多个实例)",
+  [K.STRUCTURE_ONE_LINE]: "结构体（只可添加一行信息）",
+  [K.STRUCTURE_MULTIPLE_LINES]: "结构体数组（可添加多行信息，原名'结构体'）",
+  [K.BOOLEAN]: "布尔型",
+  [K.FLOAT]: "浮点型",
+  [K.TIME]: "时间",
 };
 
 export default locale;
