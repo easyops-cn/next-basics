@@ -40,7 +40,7 @@ const modalProps = {
   forceRender: true,
   okButtonProps: {},
   cancelButtonProps: {
-    type: "link"
+    type: "link",
   },
   destroyOnClose: true,
   onCancel: jest.fn(),
@@ -50,11 +50,13 @@ const mockOnOk = jest.fn();
 
 describe("FormModal", () => {
   it("should work", async () => {
+    const testId = "test-id";
     const wrapper = shallow(
       <FormModal
         form={form}
         items={items}
         dataSource={dataSource}
+        testId={testId}
         {...modalProps}
         onOk={mockOnOk}
       />
@@ -94,5 +96,10 @@ describe("FormModal", () => {
     expect(mockOnOk).not.toBeCalled();
     modal.invoke("onOk")({} as React.MouseEvent<HTMLElement, MouseEvent>);
     expect(mockOnOk).toBeCalled();
+    expect(
+      (modal.invoke("modalRender")(<div />) as React.ReactElement).props[
+        "data-testid"
+      ]
+    ).toBe(`${testId}-content`);
   });
 });

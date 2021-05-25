@@ -34,12 +34,21 @@ export interface FormModalProps {
   cancelButtonProps?: ButtonProps;
   destroyOnClose?: boolean;
   mask?: boolean;
+  testId?: string;
   onOk?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onCancel?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 export function FormModal(props: FormModalProps): React.ReactElement {
-  const { form, items, dataSource, onOk, cancelButtonProps, ...modalProps } = props;
+  const {
+    form,
+    items,
+    dataSource,
+    onOk,
+    cancelButtonProps,
+    testId,
+    ...modalProps
+  } = props;
   const formBrick = useMemo((): UseSingleBrickConf => {
     const formBrick: UseSingleBrickConf = {
       ...defaultFormBrick,
@@ -83,7 +92,16 @@ export function FormModal(props: FormModalProps): React.ReactElement {
   };
 
   return (
-    <Modal onOk={handleOk} cancelButtonProps={{ type: "link", ...cancelButtonProps }} {...modalProps}>
+    <Modal
+      onOk={handleOk}
+      cancelButtonProps={{ type: "link", ...cancelButtonProps }}
+      {...modalProps}
+      modalRender={(node) =>
+        React.cloneElement(node as React.ReactElement, {
+          ["data-testid"]: `${testId}-content`,
+        })
+      }
+    >
       <SingleBrickAsComponent
         useBrick={formBrick}
         data={dataSource}
