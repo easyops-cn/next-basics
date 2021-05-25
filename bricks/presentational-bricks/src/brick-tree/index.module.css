@@ -42,3 +42,11 @@
   color: #0071eb;
   background-color: #ebf3fd;
 }
+.titleSpace {
+  :global .ant-tree-treenode:nth-child(2) {
+    margin-bottom: 8px;
+  }
+}
+.allOrDefault {
+  font-weight: 600;
+}

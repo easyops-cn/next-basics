@@ -111,6 +111,14 @@ export class BrickTreeElement extends UpdatingElement {
   @property({ type: Boolean }) searchable: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否根据ui规范控制title中的样式,仅在树的title中含‘全部’和‘默认’时使用
+   */
+  @property({ type: Boolean }) showSpecificationTitleStyle: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -155,7 +163,7 @@ export class BrickTreeElement extends UpdatingElement {
     attribute: false,
   })
   checkedFilterConfig: checkedFilterProps;
-  
+
   /**
    * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
    * @required false
@@ -216,6 +224,7 @@ export class BrickTreeElement extends UpdatingElement {
             onCheck={this._handleCheck}
             checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}
+            showSpecificationTitleStyle={this.showSpecificationTitleStyle}
           />
         </BrickWrapper>,
         this
