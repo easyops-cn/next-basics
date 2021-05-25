@@ -280,6 +280,7 @@ export class FormModalElement extends UpdatingElement {
             items={this.items}
             itemBricks={this.itemBricks}
             dataSource={this.dataSource}
+            testId={this.dataset.testid}
             onOk={this._handleOk}
             onCancel={this._handleCancel}
           />
