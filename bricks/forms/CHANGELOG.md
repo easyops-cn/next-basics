@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.164.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.163.0...@next-bricks/forms@1.164.0) (2021-05-25)
+
+
+### Features
+
+* **forms:** add userGroupQuery and userQuery properties ([0ca4d66](https://github.com/easyops-cn/next-basics/commit/0ca4d6663d3e76c45ce837ed8c82d1763f9a4e9d))
+
+
+
+
+
 # [1.163.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.162.2...@next-bricks/forms@1.163.0) (2021-05-24)
 
 
