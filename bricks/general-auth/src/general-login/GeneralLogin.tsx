@@ -11,8 +11,12 @@ import {
   httpErrorToString,
 } from "@next-core/brick-kit";
 import { loadScript } from "@next-core/brick-utils";
-import { login, esbLogin } from "@next-sdk/auth-sdk";
+import { esbLogin } from "@next-sdk/auth-sdk";
 import { MfaApi_generateRandomTotpSecret } from "@next-sdk/api-gateway-sdk";
+import {
+  AuthApi_loginV2,
+  AuthApi_LoginV2RequestBody
+} from "@next-sdk/api-gateway-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
@@ -55,10 +59,22 @@ interface GeneralLoginState {
   mfaInfo?: MFAInfoProps;
 }
 
-export class LegacyGeneralLogin extends React.Component<
-  GeneralLoginProps,
-  GeneralLoginState
-> {
+export const getLoginByMethod = ():string => {
+  let loginBy;
+  const featureFlags = getRuntime().getFeatureFlags();
+  if (featureFlags["login-by-ldap"]) {
+    loginBy = "ldap";
+  } else if (featureFlags["login-by-custom"]) {
+    loginBy = "custom";
+  } else {
+    loginBy = "easyops";
+  }
+  return loginBy
+}
+
+
+export class LegacyGeneralLogin extends React.Component<GeneralLoginProps,
+  GeneralLoginState> {
   handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     const { t, form, onLogin } = this.props;
@@ -76,9 +92,10 @@ export class LegacyGeneralLogin extends React.Component<
           if (sso) {
             params = { service: this.state.service };
           }
-
-          const loginMethod = esbLoginEnabled ? esbLogin : login;
-          const result = await loginMethod(values, {
+          const loginMethod = esbLoginEnabled ? esbLogin : AuthApi_loginV2;
+          const req = values as unknown as AuthApi_LoginV2RequestBody;
+          req.loginBy = getLoginByMethod();
+          const result = await loginMethod(req, {
             params,
             interceptorParams: {
               // show spinner above login button instead of in loading bar
@@ -204,7 +221,7 @@ export class LegacyGeneralLogin extends React.Component<
         await loadScript(
           "//rescdn.qqmail.com/node/ww/wwopenmng/js/sso/wwLogin-1.0.0.js"
         );
-        window.WwLogin({
+        (window as any).WwLogin({
           id: "wxQRCode",
           ...this.state.wxQRCodeOptions,
         });

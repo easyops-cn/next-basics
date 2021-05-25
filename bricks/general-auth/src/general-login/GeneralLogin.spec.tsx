@@ -5,8 +5,8 @@ import { Form } from "@ant-design/compatible";
 import { Modal } from "antd";
 import * as kit from "@next-core/brick-kit";
 import * as authSdk from "@next-sdk/auth-sdk";
-import * as mfaSdk from "@next-sdk/api-gateway-sdk";
-import { LegacyGeneralLogin } from "./GeneralLogin";
+import * as apiGatewaySdk from "@next-sdk/api-gateway-sdk";
+import { getLoginByMethod, LegacyGeneralLogin } from "./GeneralLogin";
 import { WithTranslation } from "react-i18next";
 
 const spyOnHistoryPush = jest.fn();
@@ -24,9 +24,9 @@ const spyOnReloadMicroApps = jest.fn();
 const spyOnReloadSharedData = jest.fn();
 const brandFn = jest.fn().mockReturnValue({});
 
-const spyOnLogin = jest.spyOn(authSdk, "login");
+const spyOnLogin = jest.spyOn(apiGatewaySdk, "AuthApi_loginV2");
 const spyOnEsbLogin = jest.spyOn(authSdk, "esbLogin");
-const spyOnMFALogin = jest.spyOn(mfaSdk, "MfaApi_generateRandomTotpSecret");
+const spyOnMFALogin = jest.spyOn(apiGatewaySdk, "MfaApi_generateRandomTotpSecret");
 const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 
@@ -62,6 +62,8 @@ describe("GeneralLogin", () => {
     spyOnReloadSharedData.mockClear();
     spyOnError.mockClear();
     spyOnHandleHttpError.mockClear();
+    spyOnKit.mockClear();
+    spyOnEsbLogin.mockClear();
   });
 
   it("should login successfully", async (done) => {
@@ -252,3 +254,39 @@ describe("GeneralLogin", () => {
     wrapper.find(Form).simulate("submit", new Event("submit"));
   });
 });
+
+describe("getLoginByMethod", () => {
+  beforeEach(() => {
+      jest.clearAllMocks();
+  })
+
+  it("should get login by easyops", () => {
+    jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
+      getFeatureFlags: () => ({
+        "login-by-ldap": false,
+        "login-by-custom": false,
+      }),
+    } as any);
+    expect(getLoginByMethod()).toBe("easyops");
+  })
+
+  it("should get login by ldap", () => {
+    jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
+      getFeatureFlags: () => ({
+        "login-by-ldap": true,
+        "login-by-custom": false,
+      }),
+    } as any);
+    expect(getLoginByMethod()).toBe("ldap");
+  })
+
+  it("should get login by custom", () => {
+    jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
+      getFeatureFlags: () => ({
+        "login-by-ldap": false,
+        "login-by-custom": true,
+      }),
+    } as any);
+    expect(getLoginByMethod()).toBe("custom");
+  })
+})
