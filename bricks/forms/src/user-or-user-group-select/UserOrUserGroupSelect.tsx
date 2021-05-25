@@ -52,6 +52,8 @@ export interface UserSelectFormItemProps {
   mergeUseAndUserGroup?: boolean;
   query?: Record<string, any>;
   hideInvalidUser?: boolean;
+  userGroupQuery?: Record<string, any>;
+  userQuery?: Record<string, any>;
 }
 
 interface UserOrUserGroupSelectProps extends FormItemWrapperProps {
@@ -66,6 +68,8 @@ interface UserOrUserGroupSelectProps extends FormItemWrapperProps {
   mergeUseAndUserGroup?: boolean;
   query?: Record<string, any>;
   hideInvalidUser?: boolean;
+  userGroupQuery?: Record<string, any>;
+  userQuery?: Record<string, any>;
 }
 
 export function LegacyUserSelectFormItem(
@@ -287,6 +291,16 @@ export function LegacyUserSelectFormItem(
     keyword: string
   ) => {
     const showKey = objectId === "USER" ? userShowKey : userGroupShowKey;
+    const showKeyQuery = {
+      $or: map(uniq([...showKey, "name"]), (v) => ({
+        [v]: { $like: `%${keyword}%` },
+      })),
+      ...(props.hideInvalidUser
+        ? {
+            state: "valid",
+          }
+        : {}),
+    };
     return (
       await InstanceApi_postSearch(objectId, {
         page: 1,
@@ -299,20 +313,23 @@ export function LegacyUserSelectFormItem(
 
           name: true,
         },
-
-        query: props.query
-          ? props.query
-          : {
-              $or: map(uniq([...showKey, "name"]), (v) => ({
-                [v]: { $like: `%${keyword}%` },
-              })),
-
-              ...(props.hideInvalidUser
-                ? {
-                    state: "valid",
-                  }
-                : {}),
-            },
+        query:
+          props.userQuery && objectId === "USER"
+            ? {
+                ...props.userQuery,
+                ...showKeyQuery,
+              }
+            : props.userGroupQuery && objectId === "USER_GROUP"
+            ? {
+                ...props.userGroupQuery,
+                ...showKeyQuery,
+              }
+            : props.query || showKeyQuery
+            ? {
+                ...props.query,
+                ...showKeyQuery,
+              }
+            : showKeyQuery,
       })
     ).list;
   };
@@ -643,6 +660,8 @@ export function UserOrUserGroupSelect(
         mergeUseAndUserGroup={props.mergeUseAndUserGroup}
         query={props.query}
         hideInvalidUser={props.hideInvalidUser}
+        userQuery={props.userQuery}
+        userGroupQuery={props.userGroupQuery}
       />
     </FormItemWrapper>
   );
