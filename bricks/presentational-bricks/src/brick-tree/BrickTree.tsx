@@ -136,6 +136,7 @@ export interface BrickTreeProps {
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ): void;
   suffixBrick?: { useBrick: UseBrickConf };
+  showSpecificationTitleStyle?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -151,6 +152,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     checkAllEnabled,
     checkedFilterConfig: { field, value, operator } = {},
     suffixBrick,
+    showSpecificationTitleStyle,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -350,7 +352,8 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         className={classNames(
           isEmpty(suffixBrick?.useBrick)
             ? styles.treeWrapper
-            : styles.treeWithSuffixWrapper
+            : styles.treeWithSuffixWrapper,
+          showSpecificationTitleStyle ? styles.titleSpace : null
         )}
         ref={treeContainerRef}
       >
@@ -361,7 +364,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
             titleRender={(node) => {
               const { title: _title, children } = node;
               let title: React.ReactNode = _title;
-
+              //根据ui规范，全部或者默认的节点，字体加粗，间距加宽
+              const allOrDefaultFlag =
+                (title === "全部" || title === "默认") && !children;
               if (
                 typeof _title === "string" &&
                 searchValue &&
@@ -421,7 +426,11 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                 );
               }
 
-              return title;
+              return showSpecificationTitleStyle && allOrDefaultFlag ? (
+                <span className={styles.allOrDefault}>{title}</span>
+              ) : (
+                title
+              );
             }}
             selectedKeys={selectedKeys}
             checkedKeys={checkedKeys}

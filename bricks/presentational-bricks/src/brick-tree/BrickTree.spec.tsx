@@ -242,6 +242,14 @@ describe("BrickTree", () => {
   it("caseSensitiveWhenSearching should work", () => {
     const data = [
       {
+        title: "全部",
+        key: "all",
+      },
+      {
+        title: "默认",
+        key: "default",
+      },
+      {
         title: "a",
         key: "a",
         children: [
@@ -263,7 +271,13 @@ describe("BrickTree", () => {
       },
     ];
 
-    const wrapper = mount(<BrickTree dataSource={data} searchable />);
+    const wrapper = mount(
+      <BrickTree
+        dataSource={data}
+        searchable
+        showSpecificationTitleStyle={true}
+      />
+    );
 
     wrapper.find("[data-testid='search-input']").at(0).invoke("onChange")({
       target: { value: "abc" },
