@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.166.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.165.0...@next-bricks/forms@1.166.0) (2021-05-26)
+
+
+### Bug Fixes
+
+* **forms:** modify ObjectAttrStr Popover style ([fba5e56](https://github.com/easyops-cn/next-basics/commit/fba5e56fa8f941f60ee10284a498704f62259dd2))
+
+
+### Features
+
+* **forms:** add forms i18n ([5bc66d2](https://github.com/easyops-cn/next-basics/commit/5bc66d242ce3804979b6ad9c9d8a4bade066aca4))
+
+
+
+
+
 # [1.165.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.164.0...@next-bricks/forms@1.165.0) (2021-05-25)
 
 

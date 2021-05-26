@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.185.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.0...@next-bricks/presentational-bricks@1.185.1) (2021-05-26)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** update @next-libs/datetime dev ([1a88684](https://github.com/easyops-cn/next-basics/commit/1a88684fde8bfe5cc2c940cd3a0686bd6ae5e343))
+
+
+
+
+
 # [1.185.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.184.0...@next-bricks/presentational-bricks@1.185.0) (2021-05-25)
 
 
