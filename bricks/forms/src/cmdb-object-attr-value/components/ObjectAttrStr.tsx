@@ -104,7 +104,11 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
 
   const getPopoverContent = (): React.ReactNode => (
     <>
-      <Row style={{ width: 200, marginBottom: 15 }} align="middle" type="flex">
+      <Row
+        style={{ width: 280, marginBottom: 15 }}
+        align="middle"
+        justify="space-around"
+      >
         <Col span={6}>{i18n.t(`${NS_FORMS}:${K.INITIAL}`)}</Col>
         <Col span={16}>
           <InputNumber
@@ -117,7 +121,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
           />
         </Col>
       </Row>
-      <Row justify="end" type="flex">
+      <Row justify="end">
         <Button data-testid="start-value-cancel" onClick={hidePopover}>
           {t(K.CANCEL)}
         </Button>

@@ -83,7 +83,7 @@ const locale: Locale = {
   [K.ADVANCED]: "Advance",
   [K.PREFIX_IDENTIFIER]: "Prefix Identifier (optional)",
   [K.NUMBER_LENGTH]: "The length of the number",
-  [K.INITIAL]: "Initial value",
+  [K.INITIAL]: "Start value",
   [K.STRING_TYPE]: "String",
   [K.PLEASE_ENTER_THE_LENGTH_OF_THE_SERIAL_NUMBER]:
     "Please enter the length of the serial number",
