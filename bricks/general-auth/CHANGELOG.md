@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.7.0...@next-bricks/general-auth@1.8.0) (2021-05-27)
+
+
+### Features
+
+* 新增验证用户是否设置了双因子规则接口 ([a4bd102](https://github.com/easyops-cn/next-basics/commit/a4bd102d2555db7526a59de21828f0df5acb85dd))
+
+
+
+
+
 # [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.6.0...@next-bricks/general-auth@1.7.0) (2021-05-25)
 
 
