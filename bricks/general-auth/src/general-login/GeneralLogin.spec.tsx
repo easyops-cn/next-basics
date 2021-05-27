@@ -26,7 +26,11 @@ const brandFn = jest.fn().mockReturnValue({});
 
 const spyOnLogin = jest.spyOn(apiGatewaySdk, "AuthApi_loginV2");
 const spyOnEsbLogin = jest.spyOn(authSdk, "esbLogin");
-const spyOnMFALogin = jest.spyOn(apiGatewaySdk, "MfaApi_generateRandomTotpSecret");
+const spyOnMFALogin = jest.spyOn(
+  apiGatewaySdk,
+  "MfaApi_generateRandomTotpSecret"
+);
+const spyOnMFASetRule = jest.spyOn(apiGatewaySdk, "MfaApi_verifyUserIsSetRule");
 const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 
@@ -160,6 +164,9 @@ describe("GeneralLogin", () => {
       totpSecret: "xxx",
       secret: "xxx",
     });
+    spyOnMFASetRule.mockResolvedValueOnce({
+      isSet: true,
+    });
     spyOnKit.mockReturnValueOnce({
       getFeatureFlags: () => ({
         factors: true,
@@ -257,8 +264,8 @@ describe("GeneralLogin", () => {
 
 describe("getLoginByMethod", () => {
   beforeEach(() => {
-      jest.clearAllMocks();
-  })
+    jest.clearAllMocks();
+  });
 
   it("should get login by easyops", () => {
     jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
@@ -268,7 +275,7 @@ describe("getLoginByMethod", () => {
       }),
     } as any);
     expect(getLoginByMethod()).toBe("easyops");
-  })
+  });
 
   it("should get login by ldap", () => {
     jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
@@ -278,7 +285,7 @@ describe("getLoginByMethod", () => {
       }),
     } as any);
     expect(getLoginByMethod()).toBe("ldap");
-  })
+  });
 
   it("should get login by custom", () => {
     jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
@@ -288,5 +295,5 @@ describe("getLoginByMethod", () => {
       }),
     } as any);
     expect(getLoginByMethod()).toBe("custom");
-  })
-})
+  });
+});

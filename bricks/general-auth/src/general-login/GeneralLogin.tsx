@@ -15,7 +15,8 @@ import { esbLogin } from "@next-sdk/auth-sdk";
 import { MfaApi_generateRandomTotpSecret } from "@next-sdk/api-gateway-sdk";
 import {
   AuthApi_loginV2,
-  AuthApi_LoginV2RequestBody
+  AuthApi_LoginV2RequestBody,
+  MfaApi_verifyUserIsSetRule,
 } from "@next-sdk/api-gateway-sdk";
 import { createLocation, Location } from "history";
 import { withTranslation, WithTranslation } from "react-i18next";
@@ -59,7 +60,7 @@ interface GeneralLoginState {
   mfaInfo?: MFAInfoProps;
 }
 
-export const getLoginByMethod = ():string => {
+export const getLoginByMethod = (): string => {
   let loginBy;
   const featureFlags = getRuntime().getFeatureFlags();
   if (featureFlags["login-by-ldap"]) {
@@ -69,12 +70,13 @@ export const getLoginByMethod = ():string => {
   } else {
     loginBy = "easyops";
   }
-  return loginBy
-}
+  return loginBy;
+};
 
-
-export class LegacyGeneralLogin extends React.Component<GeneralLoginProps,
-  GeneralLoginState> {
+export class LegacyGeneralLogin extends React.Component<
+  GeneralLoginProps,
+  GeneralLoginState
+> {
   handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     const { t, form, onLogin } = this.props;
@@ -93,7 +95,7 @@ export class LegacyGeneralLogin extends React.Component<GeneralLoginProps,
             params = { service: this.state.service };
           }
           const loginMethod = esbLoginEnabled ? esbLogin : AuthApi_loginV2;
-          const req = values as unknown as AuthApi_LoginV2RequestBody;
+          const req = (values as unknown) as AuthApi_LoginV2RequestBody;
           req.loginBy = getLoginByMethod();
           const result = await loginMethod(req, {
             params,
@@ -102,27 +104,32 @@ export class LegacyGeneralLogin extends React.Component<GeneralLoginProps,
               ignoreLoadingBar: true,
             },
           });
-
           // mfa
-          if (!result.loggedIn && MFALoginEnabled) {
-            const mfaResult = await MfaApi_generateRandomTotpSecret({
+          if (MFALoginEnabled) {
+            // 验证用户是否设置了双因子规则
+            const { isSet } = await MfaApi_verifyUserIsSetRule({
               username: result.username,
+              org: result.org,
             });
-            const params = {
-              MFALogin: true,
-              loggingIn: false,
-              mfaInfo: {
+            if (!result.loggedIn && isSet) {
+              const mfaResult = await MfaApi_generateRandomTotpSecret({
                 username: result.username,
-                userInstanceId: result.userInstanceId,
-                org: result.org,
-                totpSecret: mfaResult?.totpSecret,
-                secret: mfaResult?.secret,
-              },
-            };
-            this.setState(params);
-            return;
+              });
+              const params = {
+                MFALogin: true,
+                loggingIn: false,
+                mfaInfo: {
+                  username: result.username,
+                  userInstanceId: result.userInstanceId,
+                  org: result.org,
+                  totpSecret: mfaResult?.totpSecret,
+                  secret: mfaResult?.secret,
+                },
+              };
+              this.setState(params);
+              return;
+            }
           }
-
           if (!result.loggedIn) {
             this.setState({
               loggingIn: false,
