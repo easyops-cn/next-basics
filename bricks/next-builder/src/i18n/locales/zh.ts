@@ -52,6 +52,21 @@ const locale: Locale = {
     "悬停时根据事件显示关联构件",
   [K.CANVAS_TYPE_MAIN]: "主画板",
   [K.CANVAS_TYPE_PORTAL]: "Portal 画板",
+  [K.RECOMMEND]: "推荐",
+  [K.ATOM]: "原子构件",
+  [K.LAYOUT]: "布局与容器",
+  [K.CARD]: "卡片列表",
+  [K.GENERAL_TABLES]: "表格相关",
+  [K.DESCRIPTION]: "详情描述",
+  [K.CHART]: "图表相关",
+  [K.VALUE_MAPPING]: "数值映射",
+  [K.DATA_VIEW]: "数据展示",
+  [K.FORM_INPUT]: "表单输入",
+  [K.NAVIGATION]: "导航菜单",
+  [K.FEEDBACK_AND_TOOLTIP]: "反馈提示",
+  [K.DATA_CONVERT]: "数据转换工具",
+  [K.TOPOLOGY]: "拓扑",
+  [K.OTHER]: "其他",
 };
 
 export default locale;

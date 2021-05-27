@@ -1,0 +1,9 @@
+.brickWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px 15px;
+  padding: 0 15px;
+  .itemWrapper {
+    min-width: 0;
+  }
+}

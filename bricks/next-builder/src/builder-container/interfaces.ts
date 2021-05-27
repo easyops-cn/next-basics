@@ -1,4 +1,4 @@
-import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
+import { BuilderRouteOrBrickNode, MenuIcon } from "@next-core/brick-types";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export interface BrickOptionItem {
@@ -6,6 +6,10 @@ export interface BrickOptionItem {
   name: string;
   scopeName?: string;
   shortName?: string;
+  category?: string;
+  title?: string;
+  description?: string;
+  icon?: MenuIcon;
 }
 
 export interface GroupedBricks {
@@ -77,4 +81,14 @@ export interface BuilderPasteDetailOfCut {
 export interface BuilderAppendBrickOrRouteDetail {
   node: BuilderRuntimeNode;
   defaultSort?: number;
+}
+
+export interface LibraryMenuItem {
+  key?: string;
+  type?: "group" | "default";
+  title?: string;
+  children?: {
+    key: string;
+    text: string;
+  }[];
 }

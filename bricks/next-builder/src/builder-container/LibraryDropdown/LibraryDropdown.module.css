@@ -1,16 +1,14 @@
 .libraryContainer {
   height: 400px;
-  width: 668px;
+  width: 830px;
   display: grid;
-  grid-template-rows: 62px 1fr;
+  grid-template-columns: 160px 1fr;
 }
-
-.headerContainer {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: space-between;
-  height: 42px;
-  align-items: center;
-  padding: 0 0 0 14px;
-  border-bottom: 1px solid var(--theme-gray-border-color);
+.wrapper {
+  position: relative;
+  .closeBtn {
+    position: absolute;
+    right: 0;
+    top: 8px;
+  }
 }
