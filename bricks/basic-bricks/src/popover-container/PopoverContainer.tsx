@@ -40,7 +40,7 @@ export function PopoverContainer(
   const customElementRef = useRef<HTMLDivElement>();
   const [visible, setVisible] = useState(props.visible);
   const trigger = props.trigger ?? "click";
-  const ref = React.createRef<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
     setVisible(props.visible);
