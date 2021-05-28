@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.123.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.10...@next-bricks/basic-bricks@1.123.0) (2021-05-28)
+
+
+### Features
+
+* multiple-columns-card editor ([3db4e68](https://github.com/easyops-cn/next-basics/commit/3db4e68956269e40f2d44f1d5b8e114a32321f6e))
+
+
+
+
+
 ## [1.122.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.9...@next-bricks/basic-bricks@1.122.10) (2021-05-28)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
