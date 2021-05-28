@@ -28,7 +28,7 @@ export class CrontabInputElement extends FormItemElement {
    * @description 定时器字段名
    */
   @property()
-  name: string;
+  declare name: string;
 
   /**
    * @kind string
@@ -36,7 +36,7 @@ export class CrontabInputElement extends FormItemElement {
    * @default -
    * @description 定时器字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind string
@@ -53,7 +53,7 @@ export class CrontabInputElement extends FormItemElement {
    * @default -
    * @description 是否必填项
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   connectedCallback(): void {
     // istanbul ignore else

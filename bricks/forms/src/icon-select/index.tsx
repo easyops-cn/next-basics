@@ -34,7 +34,7 @@ export class IconSelectElement extends FormItemElement {
    * @default -
    * @description 字段名
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -42,7 +42,7 @@ export class IconSelectElement extends FormItemElement {
    * @default -
    * @description 字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind MenuIcon
@@ -70,7 +70,7 @@ export class IconSelectElement extends FormItemElement {
    * @default -
    * @description 是否必填项
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @kind `Record<string,string>`
@@ -78,7 +78,7 @@ export class IconSelectElement extends FormItemElement {
    * @default -
    * @description 校验文本信息
    */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
    * @kind boolean

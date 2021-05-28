@@ -32,7 +32,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @default -
    * @description 字段名
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -40,7 +40,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @default -
    * @description 字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind string[]
@@ -66,7 +66,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @default -
    * @description 占位说明
    */
-  @property({ attribute: false }) placeholder: string;
+  @property({ attribute: false }) declare placeholder: string;
 
   /**
    * @kind boolean
@@ -74,7 +74,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @default -
    * @description 是否必填项
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @kind `Record<string,string>`
@@ -82,7 +82,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @default -
    * @description 校验文本信息
    */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
    * @kind `object`

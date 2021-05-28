@@ -91,7 +91,8 @@ export const LAYOUT_ENUMS = ["horizontal", "vertical", "inline"];
 */
 export class GeneralFormElement
   extends UpdatingElement
-  implements AbstractGeneralFormElement {
+  implements AbstractGeneralFormElement
+{
   readonly isFormElement = true;
 
   private _mountPoint: HTMLElement;
@@ -125,7 +126,7 @@ export class GeneralFormElement
    * @group basic
    */
   @property()
-  name: string;
+  declare name: string;
 
   /**
    * @kind `'horizontal'|'vertical'|'inline'`

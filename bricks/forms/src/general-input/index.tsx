@@ -33,7 +33,7 @@ export class GeneralInputElement extends FormItemElement {
    * @description 输入框字段名
    * @group basic
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -42,7 +42,7 @@ export class GeneralInputElement extends FormItemElement {
    * @description 输入框字段说明
    * @group basic
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
   /**
    * @kind string
    * @required false
@@ -50,7 +50,7 @@ export class GeneralInputElement extends FormItemElement {
    * @description 输入框占位说明
    * @group basic
    */
-  @property({ attribute: false }) placeholder: string;
+  @property({ attribute: false }) declare placeholder: string;
 
   /**
    * @kind boolean
@@ -59,7 +59,7 @@ export class GeneralInputElement extends FormItemElement {
    * @description 是否必填项
    * @group basic
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @kind string
@@ -110,7 +110,7 @@ export class GeneralInputElement extends FormItemElement {
    * @description 校验文本信息
    * @group basic
    */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
    * @kind number

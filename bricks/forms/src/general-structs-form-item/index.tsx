@@ -32,7 +32,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
    * @default -
    * @description 下拉框字段名
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -40,7 +40,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
    * @default -
    * @description 添加结构体作为表单项时在表单中的字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind string

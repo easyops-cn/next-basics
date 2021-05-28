@@ -27,7 +27,7 @@ export class GeneralSwitchElement extends FormItemElement {
    * @default -
    * @description 表单项字段名
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -35,7 +35,7 @@ export class GeneralSwitchElement extends FormItemElement {
    * @default -
    * @description 表单项字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind boolean

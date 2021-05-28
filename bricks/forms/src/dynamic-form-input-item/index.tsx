@@ -44,14 +44,14 @@ export class DynamicFormInputItemElement extends FormItemElement {
    * @default -
    * @description 表单项名称
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
   /**
    * @kind string
    * @required false
    * @default -
    * @description 表单项说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind `any[]`
