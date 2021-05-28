@@ -11,7 +11,9 @@ import { launchpadService } from "../LaunchpadService";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: jest.fn(() => ({
-    getFeatureFlags: jest.fn(() => ({})),
+    getFeatureFlags: jest.fn(() => ({
+      "enable-my-desktop": true,
+    })),
   })),
   getHistory: jest.fn(() => ({
     push: jest.fn(),
@@ -49,27 +51,13 @@ jest.spyOn(context, "useLaunchpadSettingsContext").mockReturnValue({
   columns: 2,
   rows: 2,
 });
-// const getFeatureFlags = jest
-//   .fn()
-//   .mockReturnValue({ "enable-my-desktop": true });
-// const mockGetRuntime = jest.spyOn(brickKit, "getRuntime").mockReturnValue({
-//   getFeatureFlags,
-// } as any);
 
-// jest.spyOn(brickKit, "getHistory").mockReturnValue({
-//   push: jest.fn,
-// } as any);
+jest.mock("./desktopCursor", () => ({
+  getRememberedDesktopCursor: () => 0,
+  setRememberedDesktopCursor: jest.fn(),
+}));
 
 describe("Shallow FavoriteDesktopCell", () => {
-  // Need the isolate modules cause `rememberedDesktopCursor`.
-  let IsolatedDesktopSlider: typeof DesktopSlider;
-  beforeEach(() => {
-    jest.isolateModules(() => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      IsolatedDesktopSlider = require("./DesktopSlider").DesktopSlider;
-    });
-  });
-
   it("should work if props.desktops is undefined", async () => {
     const apps: MicroApp[] = [
       {
@@ -104,7 +92,7 @@ describe("Shallow FavoriteDesktopCell", () => {
       },
     ];
     const wrapper = shallow(
-      <IsolatedDesktopSlider microApps={apps} arrowWidthPercent={9} />
+      <DesktopSlider microApps={apps} arrowWidthPercent={9} />
     );
     expect(wrapper.find(Desktop).length).toBe(2);
     expect(wrapper.find(MyDesktop)).toHaveLength(1);
@@ -299,7 +287,7 @@ describe("Shallow FavoriteDesktopCell", () => {
       },
     ];
     const wrapper = shallow(
-      <IsolatedDesktopSlider
+      <DesktopSlider
         microApps={apps}
         desktops={desktops}
         arrowWidthPercent={9}
@@ -354,15 +342,6 @@ describe("Shallow FavoriteDesktopCell", () => {
 });
 
 describe("Mount DesktopSlider", () => {
-  // Need the isolate modules cause `rememberedDesktopCursor`.
-  let IsolatedDesktopSlider: typeof DesktopSlider;
-  beforeEach(() => {
-    jest.isolateModules(() => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      IsolatedDesktopSlider = require("./DesktopSlider").DesktopSlider;
-    });
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -425,7 +404,7 @@ describe("Mount DesktopSlider", () => {
     } as any);
 
     const wrapper = mount(
-      <IsolatedDesktopSlider
+      <DesktopSlider
         microApps={apps}
         desktops={desktops}
         arrowWidthPercent={9}
@@ -449,7 +428,7 @@ describe("Mount DesktopSlider", () => {
     } as any);
 
     const wrapper = mount(
-      <IsolatedDesktopSlider
+      <DesktopSlider
         microApps={apps}
         desktops={desktops}
         arrowWidthPercent={9}
