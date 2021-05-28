@@ -118,52 +118,71 @@ export const libCategoryList: LibraryMenuItem[] = [
     children: [
       {
         key: LIB_ALL_CATEGORY,
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.RECOMMEND}`),
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_RECOMMENDED}`),
       },
     ],
   },
   {
     key: "atom",
-    title: i18next.t(`${NS_NEXT_BUILDER}:${K.ATOM}`),
+    title: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_ATOM}`),
     type: "group",
     children: [
-      { key: "layout", text: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT}`) },
-      { key: "card", text: i18next.t(`${NS_NEXT_BUILDER}:${K.CARD}`) },
+      {
+        key: "layout",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LAYOUT}`),
+      },
+      {
+        key: "card",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD}`),
+      },
       {
         key: "general-tables",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.GENERAL_TABLES}`),
+        text: i18next.t(
+          `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_GENERAL_TABLES}`
+        ),
       },
       {
         key: "description",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.DESCRIPTION}`),
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DESCRIPTION}`),
       },
-      { key: "chart", text: i18next.t(`${NS_NEXT_BUILDER}:${K.CHART}`) },
+      {
+        key: "chart",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CHART}`),
+      },
       {
         key: "value-mapping",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.VALUE_MAPPING}`),
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_VALUE_MAPPING}`),
       },
       {
         key: "data-view",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.DATA_VIEW}`),
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_VIEW}`),
       },
       {
         key: "form-input",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.FORM_INPUT}`),
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM_INPUT}`),
       },
       {
         key: "navigation",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.NAVIGATION}`),
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NAVIGATION}`),
       },
       {
         key: "feedback-and-tooltip",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.FEEDBACK_AND_TOOLTIP}`),
+        text: i18next.t(
+          `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FEEDBACK_AND_TOOLTIP}`
+        ),
       },
       {
         key: "data-convert",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.DATA_CONVERT}`),
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_CONVERT}`),
       },
-      { key: "topology", text: i18next.t(`${NS_NEXT_BUILDER}:${K.TOPOLOGY}`) },
-      { key: "other", text: i18next.t(`${NS_NEXT_BUILDER}:${K.OTHER}`) },
+      {
+        key: "topology",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_TOPOLOGY}`),
+      },
+      {
+        key: "other",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_OTHER}`),
+      },
     ],
   },
 ];

@@ -52,6 +52,9 @@ export const menuBarStory: Story = {
                 ],
               },
               collapsed: false,
+              dataset: {
+                testid: "basic-usage-demo-menu",
+              },
             },
           },
         ],

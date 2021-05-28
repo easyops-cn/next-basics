@@ -14,6 +14,7 @@ import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
+import { getRuntime } from "@next-core/brick-kit";
 import {
   useBuilderDataManager,
   useShowRelatedNodesBasedOnEvents,
@@ -54,14 +55,17 @@ export function BuilderToolbox({
   const [toolboxWidth, setToolboxWidth] = React.useState(
     storage.getItem(toolboxWidthKey) ?? defaultToolboxWidth
   );
-  const [
-    resizerStatus,
-    setResizerStatus,
-  ] = React.useState<ToolboxResizerStatus>(null);
+  const [resizerStatus, setResizerStatus] =
+    React.useState<ToolboxResizerStatus>(null);
   const [resized, setResized] = React.useState(false);
 
   const manager = useBuilderDataManager();
   const showRelatedEvents = useShowRelatedNodesBasedOnEvents();
+
+  const hideLibraryView = React.useMemo(
+    () => getRuntime().getFeatureFlags()["hide-toolbox-library-view"],
+    []
+  );
 
   useEffect(() => {
     const showFromStorage = storage.getItem(
@@ -83,19 +87,23 @@ export function BuilderToolbox({
         return <StoryboardTreeView />;
       },
     },
-    {
-      tab: ToolboxTab.LIBRARY,
-      icon() {
-        return <PlusOutlined />;
-      },
-      content() {
-        return <BrickLibrary />;
-      },
-      availableDataTypes: [
-        BuilderDataType.ROUTE_OF_BRICKS,
-        BuilderDataType.CUSTOM_TEMPLATE,
-      ],
-    },
+    ...(hideLibraryView
+      ? []
+      : [
+          {
+            tab: ToolboxTab.LIBRARY,
+            icon() {
+              return <PlusOutlined />;
+            },
+            content() {
+              return <BrickLibrary />;
+            },
+            availableDataTypes: [
+              BuilderDataType.ROUTE_OF_BRICKS,
+              BuilderDataType.CUSTOM_TEMPLATE,
+            ],
+          },
+        ]),
     {
       tab: ToolboxTab.EVENTS_VIEW,
       icon() {

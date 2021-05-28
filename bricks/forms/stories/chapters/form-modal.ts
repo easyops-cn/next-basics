@@ -9,8 +9,7 @@ export const formModalStory: Story = {
     zh: "表单模态框",
   },
   description: {
-    en:
-      "Form modal. If is used as form item, please use forms.general-form instead.",
+    en: "Form modal. If is used as form item, please use forms.general-form instead.",
     zh: "表单模态框。要作为表单项，请使用 forms.general-form。",
   },
   icon: {
@@ -29,6 +28,9 @@ export const formModalStory: Story = {
               properties: {
                 buttonName: "编辑",
                 buttonIcon: "edit",
+                dataset: {
+                  testid: "basic-usage-demo-button",
+                },
               },
               events: {
                 "general.button.click": {
@@ -42,7 +44,7 @@ export const formModalStory: Story = {
               properties: {
                 id: "form-modal-1",
                 dataset: {
-                  testid: "basic-usage-demo",
+                  testid: "basic-usage-demo-modal",
                 },
                 modalTitle: "编辑信息",
                 dataSource: {

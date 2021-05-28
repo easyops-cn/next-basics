@@ -3,536 +3,307 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.185.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.0...@next-bricks/presentational-bricks@1.185.1) (2021-05-26)
+## [1.185.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.2...@next-bricks/presentational-bricks@1.185.3) (2021-05-28)
 
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+## [1.185.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.1...@next-bricks/presentational-bricks@1.185.2) (2021-05-28)
+
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+## [1.185.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.0...@next-bricks/presentational-bricks@1.185.1) (2021-05-26)
 
 ### Bug Fixes
 
-* **presentational-bricks:** update @next-libs/datetime dev ([1a88684](https://github.com/easyops-cn/next-basics/commit/1a88684fde8bfe5cc2c940cd3a0686bd6ae5e343))
-
-
-
-
+- **presentational-bricks:** update @next-libs/datetime dev ([1a88684](https://github.com/easyops-cn/next-basics/commit/1a88684fde8bfe5cc2c940cd3a0686bd6ae5e343))
 
 # [1.185.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.184.0...@next-bricks/presentational-bricks@1.185.0) (2021-05-25)
 
-
 ### Bug Fixes
 
-* brick-tree问题调整 Closed TOOL-832 ([e9c920b](https://github.com/easyops-cn/next-basics/commit/e9c920b996a6d32c89aa420e2fd6a30ac3787309))
-
+- brick-tree 问题调整 Closed TOOL-832 ([e9c920b](https://github.com/easyops-cn/next-basics/commit/e9c920b996a6d32c89aa420e2fd6a30ac3787309))
 
 ### Features
 
-* 添加属性控制brick-tree的全部及默认的显示样式 Closed TOOL-832 ([05816df](https://github.com/easyops-cn/next-basics/commit/05816df47a54bfc98e696a71df6218108feb712c))
-
-
-
-
+- 添加属性控制 brick-tree 的全部及默认的显示样式 Closed TOOL-832 ([05816df](https://github.com/easyops-cn/next-basics/commit/05816df47a54bfc98e696a71df6218108feb712c))
 
 # [1.184.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.183.0...@next-bricks/presentational-bricks@1.184.0) (2021-05-24)
 
-
 ### Features
 
-* **forms:** add i18n ([bb2fa3f](https://github.com/easyops-cn/next-basics/commit/bb2fa3f994e38e409ebb09aa3ae03f7e541a0a1a))
-
-
-
-
+- **forms:** add i18n ([bb2fa3f](https://github.com/easyops-cn/next-basics/commit/bb2fa3f994e38e409ebb09aa3ae03f7e541a0a1a))
 
 # [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.182.0...@next-bricks/presentational-bricks@1.183.0) (2021-05-20)
 
-
 ### Features
 
-* brick-user brick add showNicknameOrUsername property Closes BRICK_STORE-2076 ([88fed25](https://github.com/easyops-cn/next-basics/commit/88fed25028acb1cea3ef211bc3426d444a7bf490))
-
-
-
-
+- brick-user brick add showNicknameOrUsername property Closes BRICK_STORE-2076 ([88fed25](https://github.com/easyops-cn/next-basics/commit/88fed25028acb1cea3ef211bc3426d444a7bf490))
 
 # [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.181.0...@next-bricks/presentational-bricks@1.182.0) (2021-05-18)
 
-
 ### Features
 
-* add flattenTreeDataListAndCalcRowSpan custom processor ([063b915](https://github.com/easyops-cn/next-basics/commit/063b915da6031c2074500797b4a86278687c4979))
-
-
-
-
+- add flattenTreeDataListAndCalcRowSpan custom processor ([063b915](https://github.com/easyops-cn/next-basics/commit/063b915da6031c2074500797b4a86278687c4979))
 
 # [1.181.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.9...@next-bricks/presentational-bricks@1.181.0) (2021-05-13)
 
-
 ### Features
 
-* **brick-table:** support col span and row span ([3e61f0a](https://github.com/easyops-cn/next-basics/commit/3e61f0afd4f37bab507f4e2eba4baacca5a49e90))
-
-
-
-
+- **brick-table:** support col span and row span ([3e61f0a](https://github.com/easyops-cn/next-basics/commit/3e61f0afd4f37bab507f4e2eba4baacca5a49e90))
 
 ## [1.180.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.8...@next-bricks/presentational-bricks@1.180.9) (2021-05-10)
 
-
 ### Bug Fixes
 
-* **forms,presentational-bricks:** 修改表单模态框中取消按钮样式 ([4c0efec](https://github.com/easyops-cn/next-basics/commit/4c0efece6a8dcaeea7f0e536c91937d5cd53737a))
-
-
-
-
+- **forms,presentational-bricks:** 修改表单模态框中取消按钮样式 ([4c0efec](https://github.com/easyops-cn/next-basics/commit/4c0efece6a8dcaeea7f0e536c91937d5cd53737a))
 
 ## [1.180.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.7...@next-bricks/presentational-bricks@1.180.8) (2021-05-07)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.180.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.6...@next-bricks/presentational-bricks@1.180.7) (2021-04-30)
-
 
 ### Bug Fixes
 
-* **card-item:** fix disabled style ([1100d42](https://github.com/easyops-cn/next-basics/commit/1100d42cad32d139549876516596e85b68b9ae25))
-
-
-
-
+- **card-item:** fix disabled style ([1100d42](https://github.com/easyops-cn/next-basics/commit/1100d42cad32d139549876516596e85b68b9ae25))
 
 ## [1.180.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.5...@next-bricks/presentational-bricks@1.180.6) (2021-04-26)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.180.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.4...@next-bricks/presentational-bricks@1.180.5) (2021-04-23)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
-
-
-
-
 
 ## [1.180.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.3...@next-bricks/presentational-bricks@1.180.4) (2021-04-21)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.180.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.2...@next-bricks/presentational-bricks@1.180.3) (2021-04-19)
-
 
 ### Bug Fixes
 
-* migrated usage of sdk ([d164702](https://github.com/easyops-cn/next-basics/commit/d164702c31ddaa1dd57dc81669f87431351c466b))
-
-
-
-
+- migrated usage of sdk ([d164702](https://github.com/easyops-cn/next-basics/commit/d164702c31ddaa1dd57dc81669f87431351c466b))
 
 ## [1.180.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.1...@next-bricks/presentational-bricks@1.180.2) (2021-04-12)
 
-
 ### Bug Fixes
 
-* **brick-tree:** 搜索大小写不敏感 ([b28b1ce](https://github.com/easyops-cn/next-basics/commit/b28b1ce8f82d25353d0ea26176440e47fa2944b2))
-
-
-
-
+- **brick-tree:** 搜索大小写不敏感 ([b28b1ce](https://github.com/easyops-cn/next-basics/commit/b28b1ce8f82d25353d0ea26176440e47fa2944b2))
 
 ## [1.180.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.180.0...@next-bricks/presentational-bricks@1.180.1) (2021-04-09)
 
-
 ### Bug Fixes
 
-* **icon-select:** set color when props.value changes ([2cfcb07](https://github.com/easyops-cn/next-basics/commit/2cfcb0729a25d9f1c3d34c605c8c233b6894d3e4))
-
-
-
-
+- **icon-select:** set color when props.value changes ([2cfcb07](https://github.com/easyops-cn/next-basics/commit/2cfcb0729a25d9f1c3d34c605c8c233b6894d3e4))
 
 # [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.3...@next-bricks/presentational-bricks@1.180.0) (2021-04-09)
 
-
 ### Features
 
-* **brick-general-search:** debounceTime & query.change.v2 ([6c585fa](https://github.com/easyops-cn/next-basics/commit/6c585fa30aaec05f7883375aa9937919f30e0737))
-
-
-
-
+- **brick-general-search:** debounceTime & query.change.v2 ([6c585fa](https://github.com/easyops-cn/next-basics/commit/6c585fa30aaec05f7883375aa9937919f30e0737))
 
 ## [1.179.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.2...@next-bricks/presentational-bricks@1.179.3) (2021-04-08)
 
-
 ### Bug Fixes
 
-* **brickTee:** fix tree expand motion ([884b580](https://github.com/easyops-cn/next-basics/commit/884b580a6a4281030db3f9409c6bc580782ab952))
-
-
-
-
+- **brickTee:** fix tree expand motion ([884b580](https://github.com/easyops-cn/next-basics/commit/884b580a6a4281030db3f9409c6bc580782ab952))
 
 ## [1.179.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.1...@next-bricks/presentational-bricks@1.179.2) (2021-04-07)
 
-
 ### Bug Fixes
 
-* **icon-select:** reset color when defaultColor changes ([f66ad8d](https://github.com/easyops-cn/next-basics/commit/f66ad8dc7c58e1d8a2d48ac4d1fe49938a3ce976))
-
-
-
-
+- **icon-select:** reset color when defaultColor changes ([f66ad8d](https://github.com/easyops-cn/next-basics/commit/f66ad8dc7c58e1d8a2d48ac4d1fe49938a3ce976))
 
 ## [1.179.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.179.0...@next-bricks/presentational-bricks@1.179.1) (2021-04-06)
 
-
 ### Bug Fixes
 
-* **tag:** style fix ([51654e7](https://github.com/easyops-cn/next-basics/commit/51654e7e05b00a9ebac25cffbd5789979cec967b))
-* **tag:** style fix ([832f80d](https://github.com/easyops-cn/next-basics/commit/832f80dabf6ca430c3b251d3ec90190a921143f4))
-
-
-
-
+- **tag:** style fix ([51654e7](https://github.com/easyops-cn/next-basics/commit/51654e7e05b00a9ebac25cffbd5789979cec967b))
+- **tag:** style fix ([832f80d](https://github.com/easyops-cn/next-basics/commit/832f80dabf6ca430c3b251d3ec90190a921143f4))
 
 # [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.3...@next-bricks/presentational-bricks@1.179.0) (2021-04-02)
 
-
 ### Features
 
-* collapsible-card-item新增`hoverable`,`cardStyle`property ([59c3813](https://github.com/easyops-cn/next-basics/commit/59c38138987a58aad2255b09b460d6685ec6b758))
-
-
-
-
+- collapsible-card-item 新增`hoverable`,`cardStyle`property ([59c3813](https://github.com/easyops-cn/next-basics/commit/59c38138987a58aad2255b09b460d6685ec6b758))
 
 ## [1.178.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.2...@next-bricks/presentational-bricks@1.178.3) (2021-04-01)
 
-
 ### Bug Fixes
 
-* **brick-table:** 修复黑暗模式表格斑马纹 ([0887128](https://github.com/easyops-cn/next-basics/commit/088712879072a7569326093e9de3f0429f0af9a1))
-
-
-
-
+- **brick-table:** 修复黑暗模式表格斑马纹 ([0887128](https://github.com/easyops-cn/next-basics/commit/088712879072a7569326093e9de3f0429f0af9a1))
 
 ## [1.178.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.1...@next-bricks/presentational-bricks@1.178.2) (2021-04-01)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.178.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.178.0...@next-bricks/presentational-bricks@1.178.1) (2021-03-31)
-
 
 ### Bug Fixes
 
-* **InfoDisplayCardList:** InfoDisplayCardList css bug fix ([4121a94](https://github.com/easyops-cn/next-basics/commit/4121a94c8d2279664dba883e6bfce14985b32d7d))
-
-
-
-
+- **InfoDisplayCardList:** InfoDisplayCardList css bug fix ([4121a94](https://github.com/easyops-cn/next-basics/commit/4121a94c8d2279664dba883e6bfce14985b32d7d))
 
 # [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.177.2...@next-bricks/presentational-bricks@1.178.0) (2021-03-31)
 
-
 ### Features
 
-* **BrickLink:** BrickLink support iconAlign ([7ccd528](https://github.com/easyops-cn/next-basics/commit/7ccd52878be998e10b7e67bd41fd2e5556db376b))
-
-
-
-
+- **BrickLink:** BrickLink support iconAlign ([7ccd528](https://github.com/easyops-cn/next-basics/commit/7ccd52878be998e10b7e67bd41fd2e5556db376b))
 
 ## [1.177.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.177.1...@next-bricks/presentational-bricks@1.177.2) (2021-03-29)
 
-
 ### Bug Fixes
 
-* **editors:** smart display for column titles of brick-table ([8cf302f](https://github.com/easyops-cn/next-basics/commit/8cf302f62640dad5b2a10d67dc6a18b2c1385a8b))
-
-
-
-
+- **editors:** smart display for column titles of brick-table ([8cf302f](https://github.com/easyops-cn/next-basics/commit/8cf302f62640dad5b2a10d67dc6a18b2c1385a8b))
 
 ## [1.177.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.177.0...@next-bricks/presentational-bricks@1.177.1) (2021-03-29)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 # [1.177.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.176.0...@next-bricks/presentational-bricks@1.177.0) (2021-03-29)
-
 
 ### Features
 
-* **brick-table:** 支持换页勾选 ([d8ece35](https://github.com/easyops-cn/next-basics/commit/d8ece35dfadfdaba4666d7edaf5dab84a2864cc3))
-* **brick-table:** 支持换页勾选 ([e659be3](https://github.com/easyops-cn/next-basics/commit/e659be3fa37039a6dcb003aab572944a3e71c8a1))
-* **icon-select:** defaultColor ([b855b09](https://github.com/easyops-cn/next-basics/commit/b855b092dc43b3248589cfd1b84c38d955f7e2fd))
-
-
-
-
+- **brick-table:** 支持换页勾选 ([d8ece35](https://github.com/easyops-cn/next-basics/commit/d8ece35dfadfdaba4666d7edaf5dab84a2864cc3))
+- **brick-table:** 支持换页勾选 ([e659be3](https://github.com/easyops-cn/next-basics/commit/e659be3fa37039a6dcb003aab572944a3e71c8a1))
+- **icon-select:** defaultColor ([b855b09](https://github.com/easyops-cn/next-basics/commit/b855b092dc43b3248589cfd1b84c38d955f7e2fd))
 
 # [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.175.1...@next-bricks/presentational-bricks@1.176.0) (2021-03-26)
 
-
 ### Features
 
-* **brick-tag:** cancelable ([5652acc](https://github.com/easyops-cn/next-basics/commit/5652acc8bfd2a12ea1b4020e5dc8f14e24cf0b7f))
-
-
-
-
+- **brick-tag:** cancelable ([5652acc](https://github.com/easyops-cn/next-basics/commit/5652acc8bfd2a12ea1b4020e5dc8f14e24cf0b7f))
 
 ## [1.175.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.175.0...@next-bricks/presentational-bricks@1.175.1) (2021-03-26)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 # [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.174.1...@next-bricks/presentational-bricks@1.175.0) (2021-03-23)
-
 
 ### Bug Fixes
 
-* **brick-tree:** 默认选中项改变时，全选状态对应改变 ([377a53f](https://github.com/easyops-cn/next-basics/commit/377a53f5ebccf4f395432b0197865fd7621896ea))
-
+- **brick-tree:** 默认选中项改变时，全选状态对应改变 ([377a53f](https://github.com/easyops-cn/next-basics/commit/377a53f5ebccf4f395432b0197865fd7621896ea))
 
 ### Features
 
-* **brick-tag:** 增加tag close event ([e1016ec](https://github.com/easyops-cn/next-basics/commit/e1016ec3907227a80304995e19ea120d04c38ed0))
-
-
-
-
+- **brick-tag:** 增加 tag close event ([e1016ec](https://github.com/easyops-cn/next-basics/commit/e1016ec3907227a80304995e19ea120d04c38ed0))
 
 ## [1.174.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.174.0...@next-bricks/presentational-bricks@1.174.1) (2021-03-22)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 # [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.173.1...@next-bricks/presentational-bricks@1.174.0) (2021-03-18)
-
 
 ### Bug Fixes
 
-* some optimization ([23daa17](https://github.com/easyops-cn/next-basics/commit/23daa17843af8f81ec4ed276aecd0b87224e6560))
-
+- some optimization ([23daa17](https://github.com/easyops-cn/next-basics/commit/23daa17843af8f81ec4ed276aecd0b87224e6560))
 
 ### Features
 
-* **InfoDisplayCardList:** InfoDisplayCardList support detailOfDescBrickConf ([417d1b5](https://github.com/easyops-cn/next-basics/commit/417d1b5fd78706c611a7728020bea07bfdc6f768))
-
-
-
-
+- **InfoDisplayCardList:** InfoDisplayCardList support detailOfDescBrickConf ([417d1b5](https://github.com/easyops-cn/next-basics/commit/417d1b5fd78706c611a7728020bea07bfdc6f768))
 
 ## [1.173.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.173.0...@next-bricks/presentational-bricks@1.173.1) (2021-03-17)
 
-
 ### Bug Fixes
 
-* **Card:** CardItem support imgSize ([5a8d65e](https://github.com/easyops-cn/next-basics/commit/5a8d65e4e1e9a815fe19501254453efa5c182f93))
-
-
-
-
+- **Card:** CardItem support imgSize ([5a8d65e](https://github.com/easyops-cn/next-basics/commit/5a8d65e4e1e9a815fe19501254453efa5c182f93))
 
 # [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.172.3...@next-bricks/presentational-bricks@1.173.0) (2021-03-16)
 
-
 ### Features
 
-* **brick-tree:** add property checkedFilterConfig ([ef9afa8](https://github.com/easyops-cn/next-basics/commit/ef9afa86ad5279b629f68bc39e20d065be0e6637))
-
-
-
-
+- **brick-tree:** add property checkedFilterConfig ([ef9afa8](https://github.com/easyops-cn/next-basics/commit/ef9afa86ad5279b629f68bc39e20d065be0e6637))
 
 ## [1.172.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.172.2...@next-bricks/presentational-bricks@1.172.3) (2021-03-16)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.172.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.172.1...@next-bricks/presentational-bricks@1.172.2) (2021-03-15)
-
 
 ### Bug Fixes
 
-* **brick-table:** use react-dnd dll ([9b331f6](https://github.com/easyops-cn/next-basics/commit/9b331f63e7a09a10cf8ad825e04bf2a4fedd2ce1))
-
-
-
-
+- **brick-table:** use react-dnd dll ([9b331f6](https://github.com/easyops-cn/next-basics/commit/9b331f63e7a09a10cf8ad825e04bf2a4fedd2ce1))
 
 ## [1.172.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.172.0...@next-bricks/presentational-bricks@1.172.1) (2021-03-15)
 
-
 ### Bug Fixes
 
-* **brick-tree:** tree with suffix style fix ([70dfa2b](https://github.com/easyops-cn/next-basics/commit/70dfa2b595ad536be7e8f06fe9d7a6e9422f9db2))
-
-
-
-
+- **brick-tree:** tree with suffix style fix ([70dfa2b](https://github.com/easyops-cn/next-basics/commit/70dfa2b595ad536be7e8f06fe9d7a6e9422f9db2))
 
 # [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.171.1...@next-bricks/presentational-bricks@1.172.0) (2021-03-15)
 
-
 ### Bug Fixes
 
-* **InfoDisplayCardList:** enable detail tooltip ([90976a7](https://github.com/easyops-cn/next-basics/commit/90976a7670dafe7958f1f221187e6c2e0bcdb2d1))
-
+- **InfoDisplayCardList:** enable detail tooltip ([90976a7](https://github.com/easyops-cn/next-basics/commit/90976a7670dafe7958f1f221187e6c2e0bcdb2d1))
 
 ### Features
 
-* **brick-tree:** brick-tree support suffix ([5d4fabb](https://github.com/easyops-cn/next-basics/commit/5d4fabb7abb1894be7cb7f8c63fddc90b2c2c623))
-
-
-
-
+- **brick-tree:** brick-tree support suffix ([5d4fabb](https://github.com/easyops-cn/next-basics/commit/5d4fabb7abb1894be7cb7f8c63fddc90b2c2c623))
 
 ## [1.171.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.171.0...@next-bricks/presentational-bricks@1.171.1) (2021-03-15)
 
-
 ### Bug Fixes
 
-* **forms:** TimeRangePicker render with no initValue ([503f253](https://github.com/easyops-cn/next-basics/commit/503f253fcdbb60d6c1925f5068ffbf9679f8b545))
-
-
-
-
+- **forms:** TimeRangePicker render with no initValue ([503f253](https://github.com/easyops-cn/next-basics/commit/503f253fcdbb60d6c1925f5068ffbf9679f8b545))
 
 # [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.170.0...@next-bricks/presentational-bricks@1.171.0) (2021-03-12)
 
-
 ### Bug Fixes
 
-* **card-item:** style & demo ([4595684](https://github.com/easyops-cn/next-basics/commit/4595684aeed98623f3c96a57794d593a296a556e))
-
+- **card-item:** style & demo ([4595684](https://github.com/easyops-cn/next-basics/commit/4595684aeed98623f3c96a57794d593a296a556e))
 
 ### Features
 
-* **card-item:** block-icon-align-left ([20a7335](https://github.com/easyops-cn/next-basics/commit/20a7335dd752a9bfac7277ea81c9210feebec375))
-* **card-item:** tagConfig and imgSrc ([c7e1526](https://github.com/easyops-cn/next-basics/commit/c7e1526ddfc25adcc7962849b6779b64a4aaa27b))
-* **general-tooltip:** 支持displayBrick和triggerByIcon ([1634168](https://github.com/easyops-cn/next-basics/commit/16341683b5357685d8fb364ebd062beea196edb1))
-
-
-
-
+- **card-item:** block-icon-align-left ([20a7335](https://github.com/easyops-cn/next-basics/commit/20a7335dd752a9bfac7277ea81c9210feebec375))
+- **card-item:** tagConfig and imgSrc ([c7e1526](https://github.com/easyops-cn/next-basics/commit/c7e1526ddfc25adcc7962849b6779b64a4aaa27b))
+- **general-tooltip:** 支持 displayBrick 和 triggerByIcon ([1634168](https://github.com/easyops-cn/next-basics/commit/16341683b5357685d8fb364ebd062beea196edb1))
 
 # [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.10...@next-bricks/presentational-bricks@1.170.0) (2021-03-10)
 
-
 ### Features
 
-* **InfoDisplayCard:** infoDisplayCard支持titleBrick ([58d76da](https://github.com/easyops-cn/next-basics/commit/58d76da0006b4addf95a41ff84058b567c03e4a8))
-
-
-
-
+- **InfoDisplayCard:** infoDisplayCard 支持 titleBrick ([58d76da](https://github.com/easyops-cn/next-basics/commit/58d76da0006b4addf95a41ff84058b567c03e4a8))
 
 ## [1.169.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.9...@next-bricks/presentational-bricks@1.169.10) (2021-03-10)
 
-
 ### Bug Fixes
 
-* **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
-
-
-
-
+- **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
 
 ## [1.169.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.8...@next-bricks/presentational-bricks@1.169.9) (2021-03-09)
 
-
 ### Bug Fixes
 
-* **brick-link:** 没有label时取消icon的margin ([bd3fab4](https://github.com/easyops-cn/next-basics/commit/bd3fab4cdfeaaeaeae126756a51c000215cb8924))
-* editor-bricks add smart display ([171026e](https://github.com/easyops-cn/next-basics/commit/171026e3689ec66d4193fb6339becb9bad76a3b5))
-
-
-
-
+- **brick-link:** 没有 label 时取消 icon 的 margin ([bd3fab4](https://github.com/easyops-cn/next-basics/commit/bd3fab4cdfeaaeaeae126756a51c000215cb8924))
+- editor-bricks add smart display ([171026e](https://github.com/easyops-cn/next-basics/commit/171026e3689ec66d4193fb6339becb9bad76a3b5))
 
 ## [1.169.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.7...@next-bricks/presentational-bricks@1.169.8) (2021-03-05)
 
-
 ### Bug Fixes
 
-* **brick-table:** sortOrder & pageSize & page ([572dcdf](https://github.com/easyops-cn/next-basics/commit/572dcdf14fcdca06cdb41fb7ace3b8f3a2fae86d))
-
-
-
-
+- **brick-table:** sortOrder & pageSize & page ([572dcdf](https://github.com/easyops-cn/next-basics/commit/572dcdf14fcdca06cdb41fb7ace3b8f3a2fae86d))
 
 ## [1.169.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.6...@next-bricks/presentational-bricks@1.169.7) (2021-03-03)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.169.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.5...@next-bricks/presentational-bricks@1.169.6) (2021-02-26)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.169.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.4...@next-bricks/presentational-bricks@1.169.5) (2021-02-23)
-
 
 ### Bug Fixes
 
-* **brick-link:** should show tooltip when hovering over a link with the target "_blank" ([2307589](https://github.com/easyops-cn/next-basics/commit/2307589b08d4b09d67de33ba0f0e1d787b920810))
-
-
-
-
+- **brick-link:** should show tooltip when hovering over a link with the target "\_blank" ([2307589](https://github.com/easyops-cn/next-basics/commit/2307589b08d4b09d67de33ba0f0e1d787b920810))
 
 ## [1.169.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.3...@next-bricks/presentational-bricks@1.169.4) (2021-02-19)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
 
-
-
-
-
 ## [1.169.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.2...@next-bricks/presentational-bricks@1.169.3) (2021-02-07)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
-
-
-
-
 
 ## [1.169.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.169.1...@next-bricks/presentational-bricks@1.169.2) (2021-02-06)
 
