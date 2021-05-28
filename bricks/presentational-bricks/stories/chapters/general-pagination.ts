@@ -24,6 +24,7 @@ export const GeneralPaginationStory: Story = {
         page: "${query.page=1|number}",
         pageSize: "${query.pageSize=10|number}",
         total: 100,
+        dataset: { testid: "basic-usage-pagination-demo" },
       },
     },
   ],

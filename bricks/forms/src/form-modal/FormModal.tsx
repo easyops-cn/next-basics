@@ -46,6 +46,7 @@ export function FormModal(props: FormModalProps): React.ReactElement {
     dataSource,
     onOk,
     cancelButtonProps,
+    okButtonProps,
     testId,
     ...modalProps
   } = props;
@@ -94,13 +95,25 @@ export function FormModal(props: FormModalProps): React.ReactElement {
   return (
     <Modal
       onOk={handleOk}
-      cancelButtonProps={{ type: "link", ...cancelButtonProps }}
-      {...modalProps}
+      cancelButtonProps={
+        {
+          type: "link",
+          ...cancelButtonProps,
+          "data-testid": "modal-button-cancel",
+        } as ButtonProps
+      }
+      okButtonProps={
+        {
+          ...okButtonProps,
+          "data-testid": "modal-button-ok",
+        } as ButtonProps
+      }
       modalRender={(node) =>
         React.cloneElement(node as React.ReactElement, {
-          ["data-testid"]: `${testId}-content`,
+          "data-testid": `${testId}-content`,
         })
       }
+      {...modalProps}
     >
       <SingleBrickAsComponent
         useBrick={formBrick}
