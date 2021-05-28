@@ -55,10 +55,8 @@ export function BuilderToolbox({
   const [toolboxWidth, setToolboxWidth] = React.useState(
     storage.getItem(toolboxWidthKey) ?? defaultToolboxWidth
   );
-  const [
-    resizerStatus,
-    setResizerStatus,
-  ] = React.useState<ToolboxResizerStatus>(null);
+  const [resizerStatus, setResizerStatus] =
+    React.useState<ToolboxResizerStatus>(null);
   const [resized, setResized] = React.useState(false);
 
   const manager = useBuilderDataManager();

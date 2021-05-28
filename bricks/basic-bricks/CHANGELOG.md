@@ -18,642 +18,362 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.122.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.8...@next-bricks/basic-bricks@1.122.9) (2021-05-28)
-
 
 ### Bug Fixes
 
-* **popover-container:** fix popover brick ref ([46dc9d8](https://github.com/easyops-cn/next-basics/commit/46dc9d88a9f49d9944d67ec8c6c913712f15fea4))
-
-
-
-
+- **popover-container:** fix popover brick ref ([46dc9d8](https://github.com/easyops-cn/next-basics/commit/46dc9d88a9f49d9944d67ec8c6c913712f15fea4))
 
 ## [1.122.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.7...@next-bricks/basic-bricks@1.122.8) (2021-05-24)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.122.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.6...@next-bricks/basic-bricks@1.122.7) (2021-05-20)
-
 
 ### Bug Fixes
 
-* fix target ref for use brick in portal ([9f02679](https://github.com/easyops-cn/next-basics/commit/9f02679ab2f32aeec964415d5019f322e1b32cd0))
-
-
-
-
+- fix target ref for use brick in portal ([9f02679](https://github.com/easyops-cn/next-basics/commit/9f02679ab2f32aeec964415d5019f322e1b32cd0))
 
 ## [1.122.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.5...@next-bricks/basic-bricks@1.122.6) (2021-05-20)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.122.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.4...@next-bricks/basic-bricks@1.122.5) (2021-05-18)
-
 
 ### Bug Fixes
 
-* **popover-container:** fix vertically centered style ([8bf4e21](https://github.com/easyops-cn/next-basics/commit/8bf4e210771fdbedeb350819ef62fbd9074a4e00))
-
-
-
-
+- **popover-container:** fix vertically centered style ([8bf4e21](https://github.com/easyops-cn/next-basics/commit/8bf4e210771fdbedeb350819ef62fbd9074a4e00))
 
 ## [1.122.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.3...@next-bricks/basic-bricks@1.122.4) (2021-05-13)
 
-
 ### Bug Fixes
 
-* **basic-bricks:** general-custom-buttons disabled style ([111e072](https://github.com/easyops-cn/next-basics/commit/111e0720662e5663e3acd5de03b44536bb8726c7))
-
-
-
-
+- **basic-bricks:** general-custom-buttons disabled style ([111e072](https://github.com/easyops-cn/next-basics/commit/111e0720662e5663e3acd5de03b44536bb8726c7))
 
 ## [1.122.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.2...@next-bricks/basic-bricks@1.122.3) (2021-05-11)
 
-
 ### Bug Fixes
 
-* **general-custom-buttons:**  修复按钮组tooltip相关问题 ([52413ed](https://github.com/easyops-cn/next-basics/commit/52413ed2df6c6675cee8586ac86ad02e1ffe4930))
-* **general-custom-buttons:**  修复按钮组tooltip相关问题 ([dd51719](https://github.com/easyops-cn/next-basics/commit/dd51719f8da9dc7230f9ba1a0601b9f8f6ebece9))
-* **general-custom-buttons:** 下拉按钮hover颜色更改浅蓝色 ([906354e](https://github.com/easyops-cn/next-basics/commit/906354e2b37162caf5548caedfa4bbe74a299af8))
-
-
-
-
+- **general-custom-buttons:** 修复按钮组 tooltip 相关问题 ([52413ed](https://github.com/easyops-cn/next-basics/commit/52413ed2df6c6675cee8586ac86ad02e1ffe4930))
+- **general-custom-buttons:** 修复按钮组 tooltip 相关问题 ([dd51719](https://github.com/easyops-cn/next-basics/commit/dd51719f8da9dc7230f9ba1a0601b9f8f6ebece9))
+- **general-custom-buttons:** 下拉按钮 hover 颜色更改浅蓝色 ([906354e](https://github.com/easyops-cn/next-basics/commit/906354e2b37162caf5548caedfa4bbe74a299af8))
 
 ## [1.122.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.1...@next-bricks/basic-bricks@1.122.2) (2021-05-10)
 
-
 ### Bug Fixes
 
-* **basic-bricks:** add switch-language btn tooltip ([df181b9](https://github.com/easyops-cn/next-basics/commit/df181b9902a27ce5a0ad452b17b51eacdf30c683))
-
-
-
-
+- **basic-bricks:** add switch-language btn tooltip ([df181b9](https://github.com/easyops-cn/next-basics/commit/df181b9902a27ce5a0ad452b17b51eacdf30c683))
 
 ## [1.122.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.0...@next-bricks/basic-bricks@1.122.1) (2021-05-07)
 
-
 ### Bug Fixes
 
-* add missing unique keys ([63430ca](https://github.com/easyops-cn/next-basics/commit/63430ca489154c71d54918034ee934d5eb00f26e))
-
-
-
-
+- add missing unique keys ([63430ca](https://github.com/easyops-cn/next-basics/commit/63430ca489154c71d54918034ee934d5eb00f26e))
 
 # [1.122.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.121.1...@next-bricks/basic-bricks@1.122.0) (2021-05-06)
 
-
 ### Bug Fixes
 
-* **editor:** support minor slots ([ad9a5e6](https://github.com/easyops-cn/next-basics/commit/ad9a5e6089a2e2d4aaf3346164120363cb9bce8b))
-
+- **editor:** support minor slots ([ad9a5e6](https://github.com/easyops-cn/next-basics/commit/ad9a5e6089a2e2d4aaf3346164120363cb9bce8b))
 
 ### Features
 
-* **general-modal:** add i18n ([4da44c1](https://github.com/easyops-cn/next-basics/commit/4da44c102bc46f9c3e7d78f10efb731cd64ecb96))
-
-
-
-
+- **general-modal:** add i18n ([4da44c1](https://github.com/easyops-cn/next-basics/commit/4da44c102bc46f9c3e7d78f10efb731cd64ecb96))
 
 ## [1.121.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.121.0...@next-bricks/basic-bricks@1.121.1) (2021-04-30)
 
-
 ### Bug Fixes
 
-* **app-bar:** 切换语言文字修改 ([1c68f71](https://github.com/easyops-cn/next-basics/commit/1c68f71d4945efcdc9b8907bbd018a1249f62dfd))
-* **sub-menu:** 修复item项宽度大了1px ([fbdc195](https://github.com/easyops-cn/next-basics/commit/fbdc1957bd4b77e3d7d6049e61519ea24ed623e7))
-
-
-
-
+- **app-bar:** 切换语言文字修改 ([1c68f71](https://github.com/easyops-cn/next-basics/commit/1c68f71d4945efcdc9b8907bbd018a1249f62dfd))
+- **sub-menu:** 修复 item 项宽度大了 1px ([fbdc195](https://github.com/easyops-cn/next-basics/commit/fbdc1957bd4b77e3d7d6049e61519ea24ed623e7))
 
 # [1.121.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.2...@next-bricks/basic-bricks@1.121.0) (2021-04-28)
 
-
 ### Bug Fixes
 
-* refine liscense info ([0c5e91f](https://github.com/easyops-cn/next-basics/commit/0c5e91fcb40163a697aea260dc14abf7e67a6859))
-
+- refine liscense info ([0c5e91f](https://github.com/easyops-cn/next-basics/commit/0c5e91fcb40163a697aea260dc14abf7e67a6859))
 
 ### Features
 
-* **general-custom-buttons:** add test id support ([0340481](https://github.com/easyops-cn/next-basics/commit/0340481e260728aaf8cb08b73b90ee1d78c651d0))
-
-
-
-
+- **general-custom-buttons:** add test id support ([0340481](https://github.com/easyops-cn/next-basics/commit/0340481e260728aaf8cb08b73b90ee1d78c651d0))
 
 ## [1.120.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.1...@next-bricks/basic-bricks@1.120.2) (2021-04-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.120.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.120.0...@next-bricks/basic-bricks@1.120.1) (2021-04-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 # [1.120.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.119.0...@next-bricks/basic-bricks@1.120.0) (2021-04-26)
-
 
 ### Bug Fixes
 
-* **general-button:** fix icon only style ([5eac3d9](https://github.com/easyops-cn/next-basics/commit/5eac3d9659cf78407ac071e695d10a1a18fb8f5e))
-
+- **general-button:** fix icon only style ([5eac3d9](https://github.com/easyops-cn/next-basics/commit/5eac3d9659cf78407ac071e695d10a1a18fb8f5e))
 
 ### Features
 
-* **general-button:** add buttonDanger property ([a2b2a25](https://github.com/easyops-cn/next-basics/commit/a2b2a25ce283c1990c2dac5f54d3715af09caaf3))
-* **general-modal:** add confirmLoading and maskClosable property ([455829b](https://github.com/easyops-cn/next-basics/commit/455829b016c2dc2f91b8803f57b0ca7553ab0282))
-
-
-
-
+- **general-button:** add buttonDanger property ([a2b2a25](https://github.com/easyops-cn/next-basics/commit/a2b2a25ce283c1990c2dac5f54d3715af09caaf3))
+- **general-modal:** add confirmLoading and maskClosable property ([455829b](https://github.com/easyops-cn/next-basics/commit/455829b016c2dc2f91b8803f57b0ca7553ab0282))
 
 # [1.119.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.118.0...@next-bricks/basic-bricks@1.119.0) (2021-04-25)
 
-
 ### Bug Fixes
 
-* fix license info ([b182018](https://github.com/easyops-cn/next-basics/commit/b182018f52e5895a14de2f07bbeb4327e2758da2))
-
+- fix license info ([b182018](https://github.com/easyops-cn/next-basics/commit/b182018f52e5895a14de2f07bbeb4327e2758da2))
 
 ### Features
 
-* fix time display ([6169b3a](https://github.com/easyops-cn/next-basics/commit/6169b3a744ab65123dad57c96ed393f641e5bba5))
-
-
-
-
+- fix time display ([6169b3a](https://github.com/easyops-cn/next-basics/commit/6169b3a744ab65123dad57c96ed393f641e5bba5))
 
 # [1.118.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.117.1...@next-bricks/basic-bricks@1.118.0) (2021-04-25)
 
-
 ### Features
 
-* **app-bar:** add switch lang btn ([6de1512](https://github.com/easyops-cn/next-basics/commit/6de151238ac1e85ca1767ba10f59e41f6a1e73c8))
-
-
-
-
+- **app-bar:** add switch lang btn ([6de1512](https://github.com/easyops-cn/next-basics/commit/6de151238ac1e85ca1767ba10f59e41f6a1e73c8))
 
 ## [1.117.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.117.0...@next-bricks/basic-bricks@1.117.1) (2021-04-23)
 
-
 ### Bug Fixes
 
-* handle delay api ([71b94e6](https://github.com/easyops-cn/next-basics/commit/71b94e6eb1f69df2b82a36ae126674055a56e279))
-
-
-
-
+- handle delay api ([71b94e6](https://github.com/easyops-cn/next-basics/commit/71b94e6eb1f69df2b82a36ae126674055a56e279))
 
 # [1.117.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.3...@next-bricks/basic-bricks@1.117.0) (2021-04-21)
 
-
 ### Features
 
-* support license info ([d99d6ba](https://github.com/easyops-cn/next-basics/commit/d99d6ba52e5745650d08b4cf0abb5826fbc515e8))
-
-
-
-
+- support license info ([d99d6ba](https://github.com/easyops-cn/next-basics/commit/d99d6ba52e5745650d08b4cf0abb5826fbc515e8))
 
 ## [1.116.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.2...@next-bricks/basic-bricks@1.116.3) (2021-04-19)
 
-
 ### Bug Fixes
 
-* migrated usage of sdk ([d164702](https://github.com/easyops-cn/next-basics/commit/d164702c31ddaa1dd57dc81669f87431351c466b))
-
-
-
-
+- migrated usage of sdk ([d164702](https://github.com/easyops-cn/next-basics/commit/d164702c31ddaa1dd57dc81669f87431351c466b))
 
 ## [1.116.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.1...@next-bricks/basic-bricks@1.116.2) (2021-04-12)
 
-
 ### Bug Fixes
 
-* get apps includes internal ([15dcb0e](https://github.com/easyops-cn/next-basics/commit/15dcb0ed0c90a65f7e21eef3a9da342d72f1ef60))
-
-
-
-
+- get apps includes internal ([15dcb0e](https://github.com/easyops-cn/next-basics/commit/15dcb0ed0c90a65f7e21eef3a9da342d72f1ef60))
 
 ## [1.116.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.116.0...@next-bricks/basic-bricks@1.116.1) (2021-04-09)
 
-
 ### Bug Fixes
 
-* myDesktop optimization ([dd3f411](https://github.com/easyops-cn/next-basics/commit/dd3f411f7a9e44450a811b3b8f3d86a005c4f8f7))
-
-
-
-
+- myDesktop optimization ([dd3f411](https://github.com/easyops-cn/next-basics/commit/dd3f411f7a9e44450a811b3b8f3d86a005c4f8f7))
 
 # [1.116.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.115.1...@next-bricks/basic-bricks@1.116.0) (2021-04-09)
 
-
 ### Features
 
-* launchpad support hot-key ([fc1d4cd](https://github.com/easyops-cn/next-basics/commit/fc1d4cd805e510725473de3ce5179dd97b831196))
-
-
-
-
+- launchpad support hot-key ([fc1d4cd](https://github.com/easyops-cn/next-basics/commit/fc1d4cd805e510725473de3ce5179dd97b831196))
 
 ## [1.115.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.115.0...@next-bricks/basic-bricks@1.115.1) (2021-04-09)
 
-
 ### Bug Fixes
 
-* style refine ([d91af4a](https://github.com/easyops-cn/next-basics/commit/d91af4ac4270f9a3c0eec923fb678fa57c928665))
-
-
-
-
+- style refine ([d91af4a](https://github.com/easyops-cn/next-basics/commit/d91af4ac4270f9a3c0eec923fb678fa57c928665))
 
 # [1.115.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.114.2...@next-bricks/basic-bricks@1.115.0) (2021-04-08)
 
-
 ### Bug Fixes
 
-* favorite desktop support responsive ([9b65dfc](https://github.com/easyops-cn/next-basics/commit/9b65dfc5fa9b4b06f7f816b7cc11c7e10c966324))
-* filter empty category and push visitor by sitemap ([1e6d0dd](https://github.com/easyops-cn/next-basics/commit/1e6d0ddc7a079c9aa92b8f6f93616d1ea59048b6))
-
+- favorite desktop support responsive ([9b65dfc](https://github.com/easyops-cn/next-basics/commit/9b65dfc5fa9b4b06f7f816b7cc11c7e10c966324))
+- filter empty category and push visitor by sitemap ([1e6d0dd](https://github.com/easyops-cn/next-basics/commit/1e6d0ddc7a079c9aa92b8f6f93616d1ea59048b6))
 
 ### Features
 
-* mydesk  rember mode ([d188acd](https://github.com/easyops-cn/next-basics/commit/d188acd263ba564ad11fda80fe054ad815978665))
-
-
-
-
+- mydesk rember mode ([d188acd](https://github.com/easyops-cn/next-basics/commit/d188acd263ba564ad11fda80fe054ad815978665))
 
 ## [1.114.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.114.1...@next-bricks/basic-bricks@1.114.2) (2021-04-08)
 
-
 ### Bug Fixes
 
-* **sub-menu:** fix style of sub-menu ([f6f0adf](https://github.com/easyops-cn/next-basics/commit/f6f0adf94bcb9bd7c4071795f4a1f943430aba98))
-
-
-
-
+- **sub-menu:** fix style of sub-menu ([f6f0adf](https://github.com/easyops-cn/next-basics/commit/f6f0adf94bcb9bd7c4071795f4a1f943430aba98))
 
 ## [1.114.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.114.0...@next-bricks/basic-bricks@1.114.1) (2021-04-07)
 
-
 ### Bug Fixes
 
-* fix style ([d36d8a4](https://github.com/easyops-cn/next-basics/commit/d36d8a4111d649004b751e16b2c27806afebddd8))
-
-
-
-
+- fix style ([d36d8a4](https://github.com/easyops-cn/next-basics/commit/d36d8a4111d649004b751e16b2c27806afebddd8))
 
 # [1.114.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.113.2...@next-bricks/basic-bricks@1.114.0) (2021-04-07)
 
-
 ### Features
 
-* **sso:** handle sso logout ([14724d6](https://github.com/easyops-cn/next-basics/commit/14724d66a35c81531677fe8ec37ea6090725a9a6))
-
-
-
-
+- **sso:** handle sso logout ([14724d6](https://github.com/easyops-cn/next-basics/commit/14724d66a35c81531677fe8ec37ea6090725a9a6))
 
 ## [1.113.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.113.1...@next-bricks/basic-bricks@1.113.2) (2021-04-06)
 
-
 ### Bug Fixes
 
-* sitemap refine ([5e24309](https://github.com/easyops-cn/next-basics/commit/5e24309ec94b9f4cfcd8db9351ecb9874ab1d9c9))
-
-
-
-
+- sitemap refine ([5e24309](https://github.com/easyops-cn/next-basics/commit/5e24309ec94b9f4cfcd8db9351ecb9874ab1d9c9))
 
 ## [1.113.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.113.0...@next-bricks/basic-bricks@1.113.1) (2021-04-02)
 
-
 ### Bug Fixes
 
-* **SubMenuFilter:** SubMenuFilter adaptive height ([c37eb1d](https://github.com/easyops-cn/next-basics/commit/c37eb1d67654cea651ed631588e0569063147357))
-
-
-
-
+- **SubMenuFilter:** SubMenuFilter adaptive height ([c37eb1d](https://github.com/easyops-cn/next-basics/commit/c37eb1d67654cea651ed631588e0569063147357))
 
 # [1.113.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.3...@next-bricks/basic-bricks@1.113.0) (2021-04-02)
 
-
 ### Features
 
-* **general-custom-buttons:** 支持设置更多按钮为link类型 ([5477ca4](https://github.com/easyops-cn/next-basics/commit/5477ca444c13b6885e788a6c7527d35e69c3b686))
-
-
-
-
+- **general-custom-buttons:** 支持设置更多按钮为 link 类型 ([5477ca4](https://github.com/easyops-cn/next-basics/commit/5477ca444c13b6885e788a6c7527d35e69c3b686))
 
 ## [1.112.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.2...@next-bricks/basic-bricks@1.112.3) (2021-04-02)
 
-
 ### Bug Fixes
 
-* **AppBar:** update accountEntry appId ([37a0bb9](https://github.com/easyops-cn/next-basics/commit/37a0bb9653606a2dacf5e2dd3511db1db584c8f6))
-
-
-
-
+- **AppBar:** update accountEntry appId ([37a0bb9](https://github.com/easyops-cn/next-basics/commit/37a0bb9653606a2dacf5e2dd3511db1db584c8f6))
 
 ## [1.112.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.1...@next-bricks/basic-bricks@1.112.2) (2021-04-01)
 
-
 ### Bug Fixes
 
-* desktop custom cell support responsive ([8b2e078](https://github.com/easyops-cn/next-basics/commit/8b2e07849600533a6d66bf7623e910e4c57e6a40))
-* refactor sitemap ([830a599](https://github.com/easyops-cn/next-basics/commit/830a5995718fb245e5c49b9158f8b061bea0d6b9))
-* refine icon ([a5486e5](https://github.com/easyops-cn/next-basics/commit/a5486e504330c58be76480b4c0cbc643f768fd66))
-
-
-
-
+- desktop custom cell support responsive ([8b2e078](https://github.com/easyops-cn/next-basics/commit/8b2e07849600533a6d66bf7623e910e4c57e6a40))
+- refactor sitemap ([830a599](https://github.com/easyops-cn/next-basics/commit/830a5995718fb245e5c49b9158f8b061bea0d6b9))
+- refine icon ([a5486e5](https://github.com/easyops-cn/next-basics/commit/a5486e504330c58be76480b4c0cbc643f768fd66))
 
 ## [1.112.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.112.0...@next-bricks/basic-bricks@1.112.1) (2021-03-31)
 
-
 ### Bug Fixes
 
-* modify style ([f4988b3](https://github.com/easyops-cn/next-basics/commit/f4988b3252a1f0103c28b589bda2ea4abddddebc))
-* refactor sitemap ([b1ff61f](https://github.com/easyops-cn/next-basics/commit/b1ff61f11aaecfab82f57ccab44c5cfc25c5521d))
-* refine icon ([5b83a60](https://github.com/easyops-cn/next-basics/commit/5b83a608b4a686dd9086fbe11ee42f4ed0e98ec9))
-* refine sitemap ([a0e97f3](https://github.com/easyops-cn/next-basics/commit/a0e97f335b1fd6c324ac3edc7385f9d509b70f8d))
-
-
-
-
+- modify style ([f4988b3](https://github.com/easyops-cn/next-basics/commit/f4988b3252a1f0103c28b589bda2ea4abddddebc))
+- refactor sitemap ([b1ff61f](https://github.com/easyops-cn/next-basics/commit/b1ff61f11aaecfab82f57ccab44c5cfc25c5521d))
+- refine icon ([5b83a60](https://github.com/easyops-cn/next-basics/commit/5b83a608b4a686dd9086fbe11ee42f4ed0e98ec9))
+- refine sitemap ([a0e97f3](https://github.com/easyops-cn/next-basics/commit/a0e97f335b1fd6c324ac3edc7385f9d509b70f8d))
 
 # [1.112.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.3...@next-bricks/basic-bricks@1.112.0) (2021-03-29)
 
-
 ### Features
 
-* add sitemap ([de97231](https://github.com/easyops-cn/next-basics/commit/de972314f7f953d5cba2e8772203abaedaf0b144))
-* suport desktopcell size and responsive ([1e4a4b4](https://github.com/easyops-cn/next-basics/commit/1e4a4b419abb9eb7a43693e682f963a8a2f74ec5))
-
-
-
-
+- add sitemap ([de97231](https://github.com/easyops-cn/next-basics/commit/de972314f7f953d5cba2e8772203abaedaf0b144))
+- suport desktopcell size and responsive ([1e4a4b4](https://github.com/easyops-cn/next-basics/commit/1e4a4b419abb9eb7a43693e682f963a8a2f74ec5))
 
 ## [1.111.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.2...@next-bricks/basic-bricks@1.111.3) (2021-03-26)
 
-
 ### Bug Fixes
 
-* modify favorite count ([98501c8](https://github.com/easyops-cn/next-basics/commit/98501c89822975288f0788416b8cf9335612f016))
-* search and enter app also push visitor ([8fa1ef5](https://github.com/easyops-cn/next-basics/commit/8fa1ef5e0290e4ebc7d5a081ebd577ae0383d69b))
-* 修复通过键盘上下左右操作无效的问题 ([b1b1225](https://github.com/easyops-cn/next-basics/commit/b1b12256e20c9b4859223285e2b88ec22c6fb5f7))
-* 移除每个图标项快速删除的动作，统一到管理页处理 ([d312216](https://github.com/easyops-cn/next-basics/commit/d312216146477c8c9d4cba29d70efa42f1e48ae3))
-
-
-
-
+- modify favorite count ([98501c8](https://github.com/easyops-cn/next-basics/commit/98501c89822975288f0788416b8cf9335612f016))
+- search and enter app also push visitor ([8fa1ef5](https://github.com/easyops-cn/next-basics/commit/8fa1ef5e0290e4ebc7d5a081ebd577ae0383d69b))
+- 修复通过键盘上下左右操作无效的问题 ([b1b1225](https://github.com/easyops-cn/next-basics/commit/b1b12256e20c9b4859223285e2b88ec22c6fb5f7))
+- 移除每个图标项快速删除的动作，统一到管理页处理 ([d312216](https://github.com/easyops-cn/next-basics/commit/d312216146477c8c9d4cba29d70efa42f1e48ae3))
 
 ## [1.111.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.1...@next-bricks/basic-bricks@1.111.2) (2021-03-24)
 
-
 ### Bug Fixes
 
-* 恢复记忆上次 launchpad 打开tab ([e5ee754](https://github.com/easyops-cn/next-basics/commit/e5ee7545ab8836187752fa4c1f39a75e2a112ea1))
-* 我的收藏增加为空提示 ([a0e68aa](https://github.com/easyops-cn/next-basics/commit/a0e68aab2cc789da5e3d0599da80d6ba2b831086))
-* 扩展最近访问和收藏个数 ([47c153a](https://github.com/easyops-cn/next-basics/commit/47c153a5ae0890294a5a211c1f63e9d04b43e205))
-
-
-
-
+- 恢复记忆上次 launchpad 打开 tab ([e5ee754](https://github.com/easyops-cn/next-basics/commit/e5ee7545ab8836187752fa4c1f39a75e2a112ea1))
+- 我的收藏增加为空提示 ([a0e68aa](https://github.com/easyops-cn/next-basics/commit/a0e68aab2cc789da5e3d0599da80d6ba2b831086))
+- 扩展最近访问和收藏个数 ([47c153a](https://github.com/easyops-cn/next-basics/commit/47c153a5ae0890294a5a211c1f63e9d04b43e205))
 
 ## [1.111.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.111.0...@next-bricks/basic-bricks@1.111.1) (2021-03-22)
 
-
 ### Bug Fixes
 
-* modify style ([7818527](https://github.com/easyops-cn/next-basics/commit/78185274fda46b8279ad49b3fe95505adf2b9ae8))
-
-
-
-
+- modify style ([7818527](https://github.com/easyops-cn/next-basics/commit/78185274fda46b8279ad49b3fe95505adf2b9ae8))
 
 # [1.111.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.110.0...@next-bricks/basic-bricks@1.111.0) (2021-03-19)
 
-
 ### Features
 
-* add general-modal editor ([f58956c](https://github.com/easyops-cn/next-basics/commit/f58956c5b869abe6b465cefe1d899c32ccd2eca6))
-
-
-
-
+- add general-modal editor ([f58956c](https://github.com/easyops-cn/next-basics/commit/f58956c5b869abe6b465cefe1d899c32ccd2eca6))
 
 # [1.110.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.4...@next-bricks/basic-bricks@1.110.0) (2021-03-19)
 
-
 ### Features
 
-* add general-drawer ui editor ([48c28c8](https://github.com/easyops-cn/next-basics/commit/48c28c8a76116e92b7a8e4609ef8e2fbc4af23e0))
-
-
-
-
+- add general-drawer ui editor ([48c28c8](https://github.com/easyops-cn/next-basics/commit/48c28c8a76116e92b7a8e4609ef8e2fbc4af23e0))
 
 ## [1.109.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.3...@next-bricks/basic-bricks@1.109.4) (2021-03-18)
 
-
 ### Bug Fixes
 
-* some optimization ([23daa17](https://github.com/easyops-cn/next-basics/commit/23daa17843af8f81ec4ed276aecd0b87224e6560))
-
-
-
-
+- some optimization ([23daa17](https://github.com/easyops-cn/next-basics/commit/23daa17843af8f81ec4ed276aecd0b87224e6560))
 
 ## [1.109.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.2...@next-bricks/basic-bricks@1.109.3) (2021-03-16)
 
-
 ### Bug Fixes
 
-* **editor-bricks:** fix micro-view--editor toolbar style ([9e417fb](https://github.com/easyops-cn/next-basics/commit/9e417fbfc627c961f8866969c2dec24c11de8742))
-
-
-
-
+- **editor-bricks:** fix micro-view--editor toolbar style ([9e417fb](https://github.com/easyops-cn/next-basics/commit/9e417fbfc627c961f8866969c2dec24c11de8742))
 
 ## [1.109.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.1...@next-bricks/basic-bricks@1.109.2) (2021-03-16)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.109.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.109.0...@next-bricks/basic-bricks@1.109.1) (2021-03-15)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 # [1.109.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.108.0...@next-bricks/basic-bricks@1.109.0) (2021-03-13)
-
 
 ### Features
 
-* **basic-bricks:** subMenuFilter 支持treeMode ([26230bb](https://github.com/easyops-cn/next-basics/commit/26230bb96f903402c2d615331cdd38e92faa7ec9))
-
-
-
-
+- **basic-bricks:** subMenuFilter 支持 treeMode ([26230bb](https://github.com/easyops-cn/next-basics/commit/26230bb96f903402c2d615331cdd38e92faa7ec9))
 
 # [1.108.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.107.1...@next-bricks/basic-bricks@1.108.0) (2021-03-12)
 
-
 ### Features
 
-* show children in any-brick--editor ([7f8d6da](https://github.com/easyops-cn/next-basics/commit/7f8d6da9267b7db2395e3df23829d10a71b7bd38))
-
-
-
-
+- show children in any-brick--editor ([7f8d6da](https://github.com/easyops-cn/next-basics/commit/7f8d6da9267b7db2395e3df23829d10a71b7bd38))
 
 ## [1.107.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.107.0...@next-bricks/basic-bricks@1.107.1) (2021-03-12)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 # [1.107.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.4...@next-bricks/basic-bricks@1.107.0) (2021-03-10)
-
 
 ### Bug Fixes
 
-* **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
-
+- **editor-bricks:** remove unused prop brick ([d226e19](https://github.com/easyops-cn/next-basics/commit/d226e19a1064e09a4a75855ca8ddf7b616fdd3e4))
 
 ### Features
 
-* **visual-builder:** support route nodes ([0a0c0b0](https://github.com/easyops-cn/next-basics/commit/0a0c0b0531a19a10f134594f56cbebabbda914d4))
-
-
-
-
+- **visual-builder:** support route nodes ([0a0c0b0](https://github.com/easyops-cn/next-basics/commit/0a0c0b0531a19a10f134594f56cbebabbda914d4))
 
 ## [1.106.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.3...@next-bricks/basic-bricks@1.106.4) (2021-03-09)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.106.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.2...@next-bricks/basic-bricks@1.106.3) (2021-03-05)
-
 
 ### Bug Fixes
 
-* refine brick editor display ([365c816](https://github.com/easyops-cn/next-basics/commit/365c816f80e56efecc4b350adee24d762f81acc4))
-
-
-
-
+- refine brick editor display ([365c816](https://github.com/easyops-cn/next-basics/commit/365c816f80e56efecc4b350adee24d762f81acc4))
 
 ## [1.106.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.1...@next-bricks/basic-bricks@1.106.2) (2021-03-03)
 
-
 ### Bug Fixes
 
-* **sub-menu-filter:** 修复没有设置defaultOpenKeys时搜索出错 ([b9c23df](https://github.com/easyops-cn/next-basics/commit/b9c23df5f61f201144d55610a5c5999a49f29282))
-
-
-
-
+- **sub-menu-filter:** 修复没有设置 defaultOpenKeys 时搜索出错 ([b9c23df](https://github.com/easyops-cn/next-basics/commit/b9c23df5f61f201144d55610a5c5999a49f29282))
 
 ## [1.106.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.106.0...@next-bricks/basic-bricks@1.106.1) (2021-02-26)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 # [1.106.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.105.0...@next-bricks/basic-bricks@1.106.0) (2021-02-23)
-
 
 ### Features
 
-* custom-button支持定义moreButton的类型 ([5776459](https://github.com/easyops-cn/next-basics/commit/5776459dc9e812a1e724a10dac65b87f8123b439))
-
-
-
-
+- custom-button 支持定义 moreButton 的类型 ([5776459](https://github.com/easyops-cn/next-basics/commit/5776459dc9e812a1e724a10dac65b87f8123b439))
 
 # [1.105.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.104.2...@next-bricks/basic-bricks@1.105.0) (2021-02-09)
 
-
 ### Features
 
-* **general-modal:** 增加模态框标题后插槽 ([18c9d1e](https://github.com/easyops-cn/next-basics/commit/18c9d1e8393b80c81748a1a33859d7e908c1bf71))
-
-
-
-
+- **general-modal:** 增加模态框标题后插槽 ([18c9d1e](https://github.com/easyops-cn/next-basics/commit/18c9d1e8393b80c81748a1a33859d7e908c1bf71))
 
 ## [1.104.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.104.1...@next-bricks/basic-bricks@1.104.2) (2021-02-07)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
 
-
-
-
-
 ## [1.104.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.104.0...@next-bricks/basic-bricks@1.104.1) (2021-02-07)
-
 
 ### Bug Fixes
 
-* fix default avatar icon ([f176060](https://github.com/easyops-cn/next-basics/commit/f17606038a97692cb39d90e7a07800b7b255bf29))
-* fix menu bar layout when there is no menu ([0eb3957](https://github.com/easyops-cn/next-basics/commit/0eb395714684445efb306e488f23f9944c6891a1))
-
-
-
-
+- fix default avatar icon ([f176060](https://github.com/easyops-cn/next-basics/commit/f17606038a97692cb39d90e7a07800b7b255bf29))
+- fix menu bar layout when there is no menu ([0eb3957](https://github.com/easyops-cn/next-basics/commit/0eb395714684445efb306e488f23f9944c6891a1))
 
 # [1.104.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.103.2...@next-bricks/basic-bricks@1.104.0) (2021-02-05)
 

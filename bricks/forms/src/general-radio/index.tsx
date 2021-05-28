@@ -41,7 +41,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @description 下拉框字段名
    * @group basic
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -50,7 +50,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @description 单选框字段说明
    * @group basic
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind string[]|number[]|LabeledValue[]
@@ -81,7 +81,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @description 是否必填项
    * @group basic
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @kind Record<string,string>
@@ -90,7 +90,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @description 校验文本信息
    * @group basic
    */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
    * @kind boolean

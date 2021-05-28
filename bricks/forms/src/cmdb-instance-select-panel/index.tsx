@@ -31,7 +31,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
    * @default -
    * @description 下拉框字段名
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -39,7 +39,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
    * @default -
    * @description 下拉框字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind string

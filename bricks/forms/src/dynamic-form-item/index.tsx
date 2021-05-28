@@ -117,7 +117,7 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| ----------- | --------------------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------- |
 *| placeholder | `string`                          | -        | -       | 配置该列 placeholder                                                                                                              |
 *| disabled    | `boolean`                         | -        | -       | 该列表单项是否禁止                                                                                                                |
-*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | 通过传入函数来控制每一行中每一列的表单子项是否 disbaled, `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一个表单项的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled 
+*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | 通过传入函数来控制每一行中每一列的表单子项是否 disbaled, `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一个表单项的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled
 *| max         | `number`                          | -        | -       | 设置 inputNumber 最大值    |
 *| min         | `number`                          | -        | -       | 设置 inputNumber 最小值    |
 *| step         | `number`                          | -        | -      | 设置 inputNumber 步长    |
@@ -129,7 +129,7 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| ----------- | --------------------------------------- | -------- | ------- | ---------------------------- |
 *| placeholder | `string`                                | -        | -       | 配置该列 placeholder         |
 *| disabled    | `boolean`                               | -        | -       | 该列表单项是否禁止           |
-*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | 通过传入函数来控制每一行中每一列的表单子项是否 disbaled, `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一个表单项的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled 
+*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | 通过传入函数来控制每一行中每一列的表单子项是否 disbaled, `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一个表单项的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled
 *| options     | `Array<{label: string, value: string}>` | ✔️       | -       | 下拉框候选项                 |
 *| mode        | `multiple \| tags`                      | -        | -       | 设置下拉框的模式为多选或标签 |
 *| allowClear  | `boolean`                               | -        | false   | 是否支持清除                 |
@@ -140,7 +140,7 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| ----------- | --------------------------------------- | -------- | ------- | ---------------------------- |
 *| placeholder | `string`                                | -        | -       | 配置该列 placeholder         |
 *| disabled    | `boolean`                               | -        | -       | 该列表单项是否禁止           |
-*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | 通过传入函数来控制每一行中每一列的表单子项是否 disbaled, `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一个表单项的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled 
+*| disabledHandler | `(row: any, index: number) => viod` | -  | -       | 通过传入函数来控制每一行中每一列的表单子项是否 disbaled, `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一个表单项的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled
 *| options     | `CascaderOptionType[]` | ✔️       | -       | 可选项数据源                 |
 *| fieldNames        | `{label: string, value: string, children: string}`                      | -        | -       | 自定义 options 中 label name children 的字段 |
 *| allowClear  | `boolean`                               | -        | true   | 是否支持清除                 |
@@ -156,7 +156,7 @@ export class DynamicFormItemElement extends FormItemElement {
    * @description 表单项字段名
    * @group basic
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -165,7 +165,7 @@ export class DynamicFormItemElement extends FormItemElement {
    * @description 表单项字段说明
    * @group basic
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind FormItemColumnsProps[]

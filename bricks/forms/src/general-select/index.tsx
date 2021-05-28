@@ -49,7 +49,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @description 选择框字段名
    * @group basic
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
   /**
    * @kind string
    * @required false
@@ -57,7 +57,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @description 选择框字段说明
    * @group basic
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind string[]|number[]|LabeledValue[]
@@ -89,7 +89,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @default -
    * @description 是否必填项
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @kind string
@@ -98,7 +98,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @description 选择框占位说明
    * @group basic
    */
-  @property({ attribute: false }) placeholder: string;
+  @property({ attribute: false }) declare placeholder: string;
 
   /**
    * @kind { useBrick: UseBrickConf }
@@ -131,7 +131,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @description 校验文本信息
    * @group basic
    */
-  @property({ attribute: false }) message: Record<string, string>;
+  @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
    * @kind object
@@ -354,9 +354,8 @@ export class GeneralSelectElement extends FormItemElement {
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
-      const options = (isEmpty(this.emptyOption)
-        ? []
-        : [this.emptyOption]
+      const options = (
+        isEmpty(this.emptyOption) ? [] : [this.emptyOption]
       ).concat(formatOptions(this.options, this.fields as any));
       ReactDOM.render(
         <BrickWrapper>

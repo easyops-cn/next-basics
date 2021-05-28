@@ -43,7 +43,7 @@ export class TimeRangePickerElement extends FormItemElement {
    * @default -
    * @description 字段名
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -51,7 +51,7 @@ export class TimeRangePickerElement extends FormItemElement {
    * @default -
    * @description 字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind `TimeRange`
@@ -68,7 +68,7 @@ export class TimeRangePickerElement extends FormItemElement {
    * @default -
    * @description 是否必填项
    */
-  @property({ type: Boolean }) required: boolean;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @kind `RangeType`

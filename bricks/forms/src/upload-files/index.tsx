@@ -57,7 +57,7 @@ export class UploadFilesElement extends UpdatingElement {
    * @description 发到后台的文件参数名
    */
   @property()
-  name: string;
+  declare name: string;
 
   /**
    * @kind { [key: string]: string; }

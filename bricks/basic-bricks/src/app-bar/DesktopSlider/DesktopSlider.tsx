@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { LeftOutlined, RightOutlined, HomeFilled } from "@ant-design/icons";
 import { chunk } from "lodash";
 import classNames from "classnames";
-import { MicroApp, DesktopData, DesktopItem } from "@next-core/brick-types";
+import { MicroApp, DesktopData } from "@next-core/brick-types";
 import { getHistory, getRuntime } from "@next-core/brick-kit";
 import { Desktop } from "../Desktop/Desktop";
 import { useLaunchpadSettingsContext } from "../LaunchpadSettingsContext";
@@ -10,7 +10,10 @@ import { useDesktopDirContext } from "../DesktopDirContext";
 import styles from "./DesktopSlider.module.css";
 import { MyDesktop } from "../MyDesktop/MyDesktop";
 import { launchpadService } from "../LaunchpadService";
-import { HomeFilled } from "@ant-design/icons";
+import {
+  getRememberedDesktopCursor,
+  setRememberedDesktopCursor,
+} from "./desktopCursor";
 
 interface DesktopSliderProps {
   microApps: MicroApp[];
@@ -19,13 +22,10 @@ interface DesktopSliderProps {
   arrowWidthPercent: number;
 }
 
-// Open launchpad with the previous visited desktop.
-let rememberedDesktopCursor = 0;
-
 export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   const enableMyDesktop = getRuntime().getFeatureFlags()["enable-my-desktop"];
   const [desktopCursor, setDesktopCursor] = React.useState(
-    rememberedDesktopCursor
+    getRememberedDesktopCursor()
   );
   const [appCursor, setAppCursor] = React.useState(-1);
   const { columns, rows } = useLaunchpadSettingsContext();
@@ -146,7 +146,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     if (lockRef.current) {
       return;
     }
-    rememberedDesktopCursor = index;
+    setRememberedDesktopCursor(index);
     setDesktopCursor(index);
     // 一次滑动一个屏幕，锁定期间内，不能继续滑动屏幕。
     lockRef.current = true;

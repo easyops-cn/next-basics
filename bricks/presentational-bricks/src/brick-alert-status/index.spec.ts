@@ -23,7 +23,7 @@ describe("presentational-bricks.brick-alert-status", () => {
     expect(spyOnRender).toBeCalled();
     element.status = 1;
     element.recoverType = "";
-    await new Promise(setImmediate);
+    await (global as any).flushPromises();
     document.body.removeChild(element);
     await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();

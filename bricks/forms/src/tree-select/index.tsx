@@ -65,7 +65,7 @@ export class TreeSelectElement extends FormItemElement {
    * @default -
    * @description 字段名
    */
-  @property({ attribute: false }) name: string;
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string
@@ -73,7 +73,7 @@ export class TreeSelectElement extends FormItemElement {
    * @default -
    * @description 字段说明
    */
-  @property({ attribute: false }) label: string;
+  @property({ attribute: false }) declare label: string;
 
   /**
    * @kind `DataNode[]`
@@ -113,7 +113,7 @@ export class TreeSelectElement extends FormItemElement {
    * @default -
    * @description 选择框默认文字
    */
-  @property() placeholder: string;
+  @property() declare placeholder: string;
 
   /**
    * @kind string
