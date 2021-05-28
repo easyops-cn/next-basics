@@ -17,7 +17,6 @@ export const GeneralImageStory: Story = {
     lib: "fa",
     icon: "image",
     prefix: "fas",
-    color: "#167be0",
   },
   conf: [
     {
