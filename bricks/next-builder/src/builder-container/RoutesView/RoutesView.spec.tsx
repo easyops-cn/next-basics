@@ -2,6 +2,7 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { RoutesView } from "./RoutesView";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { Tree } from "antd";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
@@ -62,16 +63,16 @@ describe("RoutesView", () => {
       },
     } as any);
     expect(onRouteSelect).toBeCalled();
-    await act(async ()=>{
-      wrapper.find("SearchComponent").invoke("onSearch")("detail");
+    await act(async () => {
+      wrapper.find(SearchComponent).invoke("onSearch")("detail");
       await (global as any).flushPromises();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".matchedStr").length).toBe(2);
-    await act(async ()=>{
-      wrapper.find("SearchComponent").invoke("onSearch")(" ");
+    await act(async () => {
+      wrapper.find(SearchComponent).invoke("onSearch")(" ");
       await (global as any).flushPromises();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".matchedStr").length).toBe(0);
   });

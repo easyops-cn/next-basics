@@ -5,17 +5,20 @@ import {
   DatabaseFilled,
   GoldenFilled,
 } from "@ant-design/icons";
+import { GeneralIcon } from "@next-libs/basic-components";
 import { useDrag } from "react-dnd";
 import { BuilderDataTransferType } from "@next-core/editor-bricks-helper";
 import { BrickOptionItem } from "../interfaces";
 import styles from "./BrickItem.module.css";
 
 export interface BrickItemProps {
+  theme?: "light" | "dark";
   brick: BrickOptionItem;
   onDraggingChange?: (isDragging: boolean) => void;
 }
 
 export function BrickItem({
+  theme,
   brick,
   onDraggingChange,
 }: BrickItemProps): React.ReactElement {
@@ -62,10 +65,17 @@ export function BrickItem({
   }
 
   return (
-    <div className={`${styles.brickItem} ${styles[brick.type]}`} ref={dragRef}>
-      <span className={styles.brickIcon}>{icon}</span>
+    <div
+      className={`${styles.brickItem} ${styles[brick.type]} ${
+        styles[theme ?? "dark"]
+      }`}
+      ref={dragRef}
+    >
+      <span className={styles.brickIcon}>
+        {brick.icon ? <GeneralIcon icon={brick.icon} /> : icon}
+      </span>
       <span className={styles.brickName} title={brick.shortName}>
-        {brick.shortName}
+        {brick.title || brick.shortName}
       </span>
     </div>
   );

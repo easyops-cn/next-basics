@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { DataView } from "./DataView";
 import { Button } from "antd";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import {
   useBuilderDataManager,
@@ -95,9 +96,9 @@ describe("DataView", () => {
     const onContextUpdate = jest.fn();
     const wrapper = shallow(<DataView onContextUpdate={onContextUpdate} />);
     expect(wrapper.find("ContextItem").length).toBe(2);
-    wrapper.find("SearchComponent").invoke("onSearch")("data-a");
+    wrapper.find(SearchComponent).invoke("onSearch")("data-a");
     expect(wrapper.find("ContextItem").length).toBe(1);
-    wrapper.find("SearchComponent").invoke("onSearch")("");
+    wrapper.find(SearchComponent).invoke("onSearch")("");
     expect(wrapper.find("ContextItem").length).toBe(2);
 
     wrapper

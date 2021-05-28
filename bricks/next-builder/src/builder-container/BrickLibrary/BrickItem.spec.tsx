@@ -8,6 +8,7 @@ import {
   GoldenFilled,
 } from "@ant-design/icons";
 import { BuilderDataTransferType } from "@next-core/editor-bricks-helper";
+import { GeneralIcon } from "@next-libs/basic-components";
 import { BrickItem } from "./BrickItem";
 
 jest.mock("react-dnd", () => ({
@@ -126,5 +127,28 @@ describe("BrickItem", () => {
         },
       })
     );
+  });
+
+  it("should render icon", () => {
+    const dragRef = jest.fn();
+    mockUseDrag.mockReturnValueOnce([{ isDragging: false }, dragRef]);
+    const wrapper = shallow(
+      <BrickItem
+        brick={{
+          category: "form-input",
+          icon: {
+            lib: "fa",
+            icon: "abacus",
+          },
+          type: "brick",
+          name: "my.awesome-brick",
+          shortName: "awesome-brick",
+        }}
+      />
+    );
+    expect(wrapper.find(GeneralIcon).prop("icon")).toEqual({
+      icon: "abacus",
+      lib: "fa",
+    });
   });
 });

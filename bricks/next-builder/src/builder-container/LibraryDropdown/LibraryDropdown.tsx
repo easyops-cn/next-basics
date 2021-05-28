@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
 import { Dropdown, Button, Menu, Tooltip } from "antd";
-import { BrickLibrary } from "../BrickLibrary/BrickLibrary";
+import { AdvancedBrickLibrary } from "../AdvancedBrickLibrary/AdvancedBrickLibrary";
+import { LibraryMenu } from "../LibraryMenu/LibraryMenu";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
+import { libCategoryList, LIB_ALL_CATEGORY } from "../constants";
 
 import styles from "./LibraryDropdown.module.css";
 import shareStyles from "../share.module.css";
@@ -11,6 +13,7 @@ import shareStyles from "../share.module.css";
 export function LibraryDropdown(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [visible, setVisible] = useState(false);
+  const libraryRef = useRef<any>();
   const isOpen = useRef(false);
 
   const handleClick = React.useCallback(() => {
@@ -29,18 +32,29 @@ export function LibraryDropdown(): React.ReactElement {
     }
   }, []);
 
+  const handleCategoryChange = (category: string) => {
+    libraryRef.current?.handleSearchWithGroup("", category);
+  };
+
   const content = (
-    <Menu>
-      <div>
-        <div className={styles.headerContainer}>
-          <span>{t(K.BRICK_LIBRARY)}</span>
-          <Button type="text" onClick={handleClose} data-testid="close-btn">
-            <CloseOutlined />
-          </Button>
-        </div>
+    <Menu style={{ padding: "2px 0" }}>
+      <div className={styles.wrapper}>
+        <Button
+          type="text"
+          onClick={handleClose}
+          data-testid="close-btn"
+          className={styles.closeBtn}
+        >
+          <CloseOutlined />
+        </Button>
         <div className={styles.libraryContainer}>
-          <BrickLibrary
-            hideToolboxPane={true}
+          <LibraryMenu
+            menuItems={libCategoryList}
+            onItemClick={handleCategoryChange}
+            defaultSelectedKeys={[LIB_ALL_CATEGORY]}
+          />
+          <AdvancedBrickLibrary
+            ref={libraryRef}
             onDraggingChange={onDraggingChange}
           />
         </div>

@@ -16,6 +16,7 @@ import {
   ContextConf,
   BuilderRouteNode,
   BuilderCustomTemplateNode,
+  Story,
 } from "@next-core/brick-types";
 import {
   EventDetailOfNodeAdd,
@@ -67,6 +68,9 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property({ attribute: false })
   brickList: BrickOptionItem[];
+
+  @property({ attribute: false })
+  storyList: Story[];
 
   @property({ attribute: false })
   routeList: BuilderRouteNode[];
@@ -468,6 +472,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 dataSource={this.dataSource}
                 routeList={this.routeList}
                 brickList={this.brickList}
+                storyList={this.storyList}
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}
                 initialToolboxTab={this.toolboxTab}

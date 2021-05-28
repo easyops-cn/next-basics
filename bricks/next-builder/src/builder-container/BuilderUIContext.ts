@@ -8,6 +8,7 @@ import {
 import {
   BuilderRouteNode,
   BuilderCustomTemplateNode,
+  Story,
 } from "@next-core/brick-types";
 import { EventStreamNode } from "./EventStreamCanvas/interfaces";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
@@ -16,6 +17,7 @@ export interface ContextOfBuilderUI {
   appId?: string;
   dataType?: BuilderDataType;
   brickList?: BrickOptionItem[];
+  storyList?: Story[];
   processing?: boolean;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;

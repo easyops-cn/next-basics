@@ -5,6 +5,7 @@ import {
   ContextConf,
   BuilderRouteNode,
   BuilderCustomTemplateNode,
+  Story,
 } from "@next-core/brick-types";
 import {
   AbstractBuilderDataManager,
@@ -40,6 +41,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   dataSource?: BuilderRouteOrBrickNode[];
   routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
+  storyList: Story[];
   processing?: boolean;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
@@ -76,6 +78,7 @@ export function LegacyBuilderContainer(
     dataSource,
     routeList,
     brickList,
+    storyList,
     processing,
     initialFullscreen,
     initialToolboxTab,
@@ -277,6 +280,7 @@ export function LegacyBuilderContainer(
         appId,
         dataType,
         brickList,
+        storyList,
         processing,
         fullscreen,
         setFullscreen,

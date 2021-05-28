@@ -53,6 +53,21 @@ const locale: Locale = {
     "Show related nodes based on events when hovering",
   [K.CANVAS_TYPE_MAIN]: "Main",
   [K.CANVAS_TYPE_PORTAL]: "Portal",
+  [K.RECOMMEND]: "Recommend",
+  [K.ATOM]: "Atmo",
+  [K.LAYOUT]: "Layout",
+  [K.CARD]: "Card",
+  [K.GENERAL_TABLES]: "General Table",
+  [K.DESCRIPTION]: "Description",
+  [K.CHART]: "Chart",
+  [K.VALUE_MAPPING]: "Value Mapping",
+  [K.DATA_VIEW]: "Data View",
+  [K.FORM_INPUT]: "Form Input",
+  [K.NAVIGATION]: "Navigation",
+  [K.FEEDBACK_AND_TOOLTIP]: "Feedback And Tooltips",
+  [K.DATA_CONVERT]: "Data Convert",
+  [K.TOPOLOGY]: "Topology",
+  [K.OTHER]: "Other",
 };
 
 export default locale;

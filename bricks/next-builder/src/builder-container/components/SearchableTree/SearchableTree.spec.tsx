@@ -2,6 +2,7 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { SearchableTree } from "./SearchableTree";
+import { SearchComponent } from "../../SearchComponent/SearchComponent";
 import { Tree } from "antd";
 import { BranchesOutlined } from "@ant-design/icons";
 
@@ -27,9 +28,9 @@ const list = [
         type: "bricks",
         alias: "detail-2",
         parent: [{ id: "R-02" }],
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
 
 describe("SearchableTree", () => {
@@ -58,16 +59,16 @@ describe("SearchableTree", () => {
       },
     } as any);
     expect(handleSelect).toBeCalled();
-    await act(async ()=>{
-      wrapper.find("SearchComponent").invoke("onSearch")("detail");
+    await act(async () => {
+      wrapper.find(SearchComponent).invoke("onSearch")("detail");
       await (global as any).flushPromises();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".matchedStr").length).toBe(2);
-    await act(async ()=>{
-      wrapper.find("SearchComponent").invoke("onSearch")(" ");
+    await act(async () => {
+      wrapper.find(SearchComponent).invoke("onSearch")(" ");
       await (global as any).flushPromises();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".matchedStr").length).toBe(0);
   });
