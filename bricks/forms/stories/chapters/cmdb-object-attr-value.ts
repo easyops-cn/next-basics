@@ -51,6 +51,9 @@ export const cmdbObjectAttrValueStory: Story = {
                 label: "请输入值类型",
                 name: "attr_value",
                 required: true,
+                dataset: {
+                  testid: "basic-usage-demo",
+                },
               },
               events: {
                 "forms.cmdb-object-attr-value.change": {

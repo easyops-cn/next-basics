@@ -76,6 +76,9 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
   const handleSearchUser = (value: string) => {
     searchUser(value);
   };
+  const handleFocus = () => {
+    handleSearchUser("");
+  };
   const renderComponent = (column: FormItemColumnsProps) => {
     const { inputProps = {}, selectProps = {}, cascaderProps = {} } = column;
 
@@ -118,6 +121,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
           onSearch={debounce((value) => {
             handleSearchUser(value as string);
           }, 500)}
+          onFocus={handleFocus}
           loading={fetching}
           mode={selectProps.mode}
           optionFilterProp="children"

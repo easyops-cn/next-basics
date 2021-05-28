@@ -27,6 +27,9 @@ export const iconSelectStory: Story = {
           theme: "outlined",
           color: "cyan",
         },
+        dataset: {
+          testid: "basic-usage-demo",
+        },
       },
       events: {
         "icon.change": {

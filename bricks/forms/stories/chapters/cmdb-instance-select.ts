@@ -24,6 +24,9 @@ export const cmdbInstanceSelectStory: Story = {
         name: "app",
         label: "选择应用",
         objectId: "APP",
+        dataset: {
+          testid: "basic-usage-demo",
+        },
       },
       events: {
         "forms.cmdb-instance-select.change": {
@@ -62,6 +65,17 @@ export const cmdbInstanceSelectStory: Story = {
         objectId: "HOST",
         mode: "multiple",
         value: ["5c6f6cf0d8079"],
+        dataset: {
+          testid: "basic-usage-checkbox-demo",
+        },
+      },
+      events: {
+        "forms.cmdb-instance-select.change": {
+          action: "console.log",
+        },
+        "forms.cmdb-instance-select.change.v2": {
+          action: "console.log",
+        },
       },
     },
     {

@@ -92,7 +92,15 @@ describe("FormModal", () => {
       callback?.();
     });
     const modal = wrapper.find(Modal);
-    expect(modal.props()).toEqual(expect.objectContaining(modalProps));
+    expect(modal.props()).toEqual(
+      expect.objectContaining({
+        ...modalProps,
+        cancelButtonProps: expect.objectContaining(
+          modalProps.cancelButtonProps
+        ),
+        okButtonProps: expect.objectContaining(modalProps.okButtonProps),
+      })
+    );
     expect(mockOnOk).not.toBeCalled();
     modal.invoke("onOk")({} as React.MouseEvent<HTMLElement, MouseEvent>);
     expect(mockOnOk).toBeCalled();

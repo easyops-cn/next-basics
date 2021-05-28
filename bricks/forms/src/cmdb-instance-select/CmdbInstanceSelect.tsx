@@ -93,8 +93,14 @@ export function CmdbInstanceSelectItem(
   };
 
   const handleChange = (newValue: any): void => {
+    let selected: any | any[];
+    if (mode === "multiple") {
+      const valueSet = new Set(newValue);
+      selected = options.filter((item) => valueSet.has(item.value));
+    } else {
+      selected = options.find((item) => item.value === newValue);
+    }
     setValue(newValue);
-    const selected = options.find((item) => item.value === newValue);
     props.onChange && props.onChange(newValue, selected);
   };
   //istanbul ignore else
