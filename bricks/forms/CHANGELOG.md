@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.166.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.166.0...@next-bricks/forms@1.166.1) (2021-05-28)
+
+
+### Bug Fixes
+
+* **cmdb-instance-select:** fix handleChange selected of multiple mode ([16e684f](https://github.com/easyops-cn/next-basics/commit/16e684fac3e9267707914ed2d1af9d0c36051e36))
+* **dynamic-form-item:** userSelect model focus get data Refs BRICK_STORE-1729 ([50e852c](https://github.com/easyops-cn/next-basics/commit/50e852cb771a45dd6dc8a9d5b1c38b7195322808))
+
+
+
+
+
 # [1.166.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.165.0...@next-bricks/forms@1.166.0) (2021-05-26)
 
 
