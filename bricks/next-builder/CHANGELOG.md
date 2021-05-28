@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.53.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.52.0...@next-bricks/next-builder@1.53.0) (2021-05-28)
+
+
+### Bug Fixes
+
+* some optimization ([90bb5b1](https://github.com/easyops-cn/next-basics/commit/90bb5b18dd0f901976d92c33aa1ad030c19d50f2))
+
+
+### Features
+
+* next-builder 添加构件入口优化 ([4ebc519](https://github.com/easyops-cn/next-basics/commit/4ebc5197d27344d070afba7c4b50e1eccc6d08cc))
+
+
+
+
+
 # [1.52.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.51.0...@next-bricks/next-builder@1.52.0) (2021-05-19)
 
 

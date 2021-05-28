@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.122.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.8...@next-bricks/basic-bricks@1.122.9) (2021-05-28)
+
+
+### Bug Fixes
+
+* **popover-container:** fix popover brick ref ([46dc9d8](https://github.com/easyops-cn/next-basics/commit/46dc9d88a9f49d9944d67ec8c6c913712f15fea4))
+
+
+
+
+
 ## [1.122.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.7...@next-bricks/basic-bricks@1.122.8) (2021-05-24)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
