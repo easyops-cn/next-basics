@@ -1,13 +1,24 @@
 import React from "react";
+import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
+import { getRuntime } from "@next-core/brick-kit";
 import { MicroApp, DesktopData } from "@next-core/brick-types";
 import { DesktopSlider } from "./DesktopSlider";
 import { Desktop } from "../Desktop/Desktop";
 import { MyDesktop } from "../MyDesktop/MyDesktop";
 import * as context from "../LaunchpadSettingsContext";
-import { act } from "react-dom/test-utils";
-import * as brickKit from "@next-core/brick-kit";
 import { launchpadService } from "../LaunchpadService";
+
+jest.mock("@next-core/brick-kit", () => ({
+  getRuntime: jest.fn(() => ({
+    getFeatureFlags: jest.fn(() => ({})),
+  })),
+  getHistory: jest.fn(() => ({
+    push: jest.fn(),
+  })),
+}));
+
+const mockGetRuntime = getRuntime as jest.Mock;
 
 jest.mock("../MyDesktop/MyDesktop");
 jest.mock("../DesktopDirContext", () => {
@@ -38,16 +49,16 @@ jest.spyOn(context, "useLaunchpadSettingsContext").mockReturnValue({
   columns: 2,
   rows: 2,
 });
-const getFeatureFlags = jest
-  .fn()
-  .mockReturnValue({ "enable-my-desktop": true });
-const mockGetRuntime = jest.spyOn(brickKit, "getRuntime").mockReturnValue({
-  getFeatureFlags,
-} as any);
+// const getFeatureFlags = jest
+//   .fn()
+//   .mockReturnValue({ "enable-my-desktop": true });
+// const mockGetRuntime = jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+//   getFeatureFlags,
+// } as any);
 
-jest.spyOn(brickKit, "getHistory").mockReturnValue({
-  push: jest.fn,
-} as any);
+// jest.spyOn(brickKit, "getHistory").mockReturnValue({
+//   push: jest.fn,
+// } as any);
 
 describe("Shallow FavoriteDesktopCell", () => {
   // Need the isolate modules cause `rememberedDesktopCursor`.

@@ -23,7 +23,7 @@ describe("presentational-bricks.general-transfer", () => {
     element.dataSource = [
       { key: "t1", title: "t1" },
       { key: "t2", title: "t2" },
-      { key: "t3", title: "t3" }
+      { key: "t3", title: "t3" },
     ];
     element.handleSelectedChange([], []);
     element.handleChange([]);
@@ -31,7 +31,7 @@ describe("presentational-bricks.general-transfer", () => {
     element.dataDescriptor = { key: "key", title: "title" };
     element.maxSelected = 1;
     element.notifyChange();
-    await new Promise(setImmediate);
+    await (global as any).flushPromises();
 
     element.realTimeNotification = false;
     element.handleSelectedChange([], []);
@@ -52,7 +52,7 @@ describe("presentational-bricks.general-transfer", () => {
     element.dataSource = [
       { key: "t1", title: "t1" },
       { key: "t2", title: "t2" },
-      { key: "t3", title: "t3" }
+      { key: "t3", title: "t3" },
     ];
     // element.maxSelected = 4;
     // Always waiting for async `(dis)connectedCallback`

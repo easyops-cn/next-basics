@@ -27,7 +27,7 @@ describe("presentational-bricks.brick-alert", () => {
 
     element.localStorageKey = "x";
     element.onClose();
-    await new Promise(setImmediate);
+    await (global as any).flushPromises();
 
     element.onClose();
     expect(element.style.display).toBe("none");

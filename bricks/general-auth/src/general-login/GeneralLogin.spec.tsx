@@ -70,7 +70,7 @@ describe("GeneralLogin", () => {
     spyOnEsbLogin.mockClear();
   });
 
-  it("should login successfully", async (done) => {
+  it("should login successfully", (done) => {
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
       validateFields: jest.fn().mockImplementation(async (fn) => {
@@ -102,7 +102,7 @@ describe("GeneralLogin", () => {
     wrapper.find(Form).simulate("submit", new Event("submit"));
   });
 
-  it("should esb login successfully", async (done) => {
+  it("should esb login successfully", (done) => {
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
       validateFields: jest.fn().mockImplementation(async (fn) => {
@@ -139,7 +139,7 @@ describe("GeneralLogin", () => {
     wrapper.find(Form).simulate("submit", new Event("submit"));
   });
 
-  it("should work when open mfa ", async (done) => {
+  it("should work when open mfa ", (done) => {
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
       validateFields: jest.fn().mockImplementation(async (fn) => {
@@ -175,7 +175,8 @@ describe("GeneralLogin", () => {
     wrapper.find(Form).simulate("submit", new Event("submit"));
   });
 
-  it("should login failed if give wrong password", async (done) => {
+  it("should login failed if give wrong password", async () => {
+    expect.assertions(4);
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
       validateFields: jest.fn().mockImplementation(async (fn) => {
@@ -186,20 +187,19 @@ describe("GeneralLogin", () => {
         expect(spyOnAuthenticate).not.toBeCalled();
         expect(spyOnReloadMicroApps).not.toBeCalled();
         expect(spyOnReloadSharedData).not.toBeCalled();
-        done();
       }),
     };
     const wrapper = shallow(
       <LegacyGeneralLogin form={form as any} {...i18nProps} />
     );
-    spyOnLogin.mockResolvedValueOnce({
-      loggedIn: false,
-    });
+    spyOnLogin.mockRejectedValue("用户名（邮箱）或密码错误");
     wrapper.find(Form).simulate("submit", new Event("submit"));
     await jest.runAllTimers();
     await (global as any).flushPromises();
     wrapper.update();
-    expect(wrapper.find(".loginFormError").text()).toBe("用户名或密码错误！");
+    expect(wrapper.find(".loginFormError").text()).toBe(
+      "用户名（邮箱）或密码错误"
+    );
   });
 
   it("should login failed if server error", (done) => {

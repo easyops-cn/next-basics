@@ -17,7 +17,7 @@ describe("presentational-bricks.brick-quick-entries", () => {
     Object.assign(element, {
       row: null,
       column: null,
-      links: null
+      links: null,
     });
 
     // Always waiting for async `(dis)connectedCallback`
@@ -27,7 +27,7 @@ describe("presentational-bricks.brick-quick-entries", () => {
     await jest.runAllTimers();
     expect(spyOnRender).toBeCalled();
     element.showCard = false;
-    await new Promise(setImmediate);
+    await (global as any).flushPromises();
     document.body.removeChild(element);
     await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();
