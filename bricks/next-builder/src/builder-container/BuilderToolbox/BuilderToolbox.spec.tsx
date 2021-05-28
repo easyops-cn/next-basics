@@ -5,6 +5,8 @@ import { JsonStorage } from "@next-libs/storage";
 import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { defaultToolboxTab } from "../constants";
+import { PlusOutlined } from "@ant-design/icons";
+import * as kit from "@next-core/brick-kit";
 import { BuilderDataType, ToolboxTab } from "../interfaces";
 import {
   useBuilderDataManager,
@@ -18,6 +20,13 @@ jest.mock("../StoryboardTreeView/StoryboardTreeView", () => ({
     return <div>StoryboardTreeView</div>;
   },
 }));
+const mockGetFeatureFlags = jest.fn().mockReturnValue({
+  "hide-toolbox-library-view": false,
+});
+jest.spyOn(kit, "getRuntime").mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+} as any);
+
 jest.mock("@next-core/editor-bricks-helper");
 
 const mockSetShowRelatedNodesBasedOnEvents = jest.fn();
@@ -90,6 +99,14 @@ describe("BuilderToolbox", () => {
     dataType = BuilderDataType.CUSTOM_TEMPLATE;
     const wrapper = shallow(<BuilderToolbox />);
     expect(wrapper.find(".tabLink").length).toBe(3);
+  });
+
+  it("should hide library view", () => {
+    mockGetFeatureFlags.mockReturnValueOnce({
+      "hide-toolbox-library-view": true,
+    });
+    const wrapper = shallow(<BuilderToolbox />);
+    expect(wrapper.find(PlusOutlined).length).toEqual(0);
   });
 
   it("should handle col-resize", () => {
