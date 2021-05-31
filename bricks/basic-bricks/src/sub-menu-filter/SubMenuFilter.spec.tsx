@@ -148,6 +148,7 @@ describe("SubMenuFilter", () => {
     ],
     onSearch: jest.fn(),
     onSelect: jest.fn(),
+    onSubMenuClick: jest.fn(),
   };
   let wrapper: ReactWrapper;
 
@@ -244,5 +245,51 @@ describe("SubMenuFilter", () => {
         },
       },
     ]);
+
+    //click subMeu
+    wrapper.find(Menu.SubMenu).at(0).invoke("onTitleClick")({
+      key: "standard",
+    } as any);
+    expect(props.onSubMenuClick).toHaveBeenLastCalledWith({
+      type: "subMenu",
+      title: "标准模板",
+      key: "standard",
+      icon: {
+        lib: "easyops",
+        category: "model",
+        icon: "app",
+      },
+      items: [
+        {
+          title: "C++",
+          key: "C++",
+          count: 5,
+          icon: {
+            lib: "easyops",
+            category: "model",
+            icon: "cpp",
+          },
+        },
+        {
+          title: "C",
+          key: "C",
+          count: 5,
+          icon: {
+            lib: "easyops",
+            category: "model",
+            icon: "c",
+          },
+        },
+        {
+          title: "b",
+          key: "b",
+          count: 5,
+          icon: {
+            lib: "fa",
+            icon: "cube",
+          },
+        },
+      ],
+    });
   });
 });
