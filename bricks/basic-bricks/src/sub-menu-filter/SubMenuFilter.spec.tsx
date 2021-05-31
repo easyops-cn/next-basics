@@ -19,6 +19,7 @@ describe("SubMenuFilter", () => {
     multiple: true,
     defaultOpenKeys: ["diy"],
     defaultSelectedKeys: ["C++"],
+    inlineIndent: 12,
     menuItems: [
       {
         type: "item",
@@ -170,6 +171,7 @@ describe("SubMenuFilter", () => {
     expect(wrapper.find(Menu.ItemGroup).length).toBe(2);
     expect(wrapper.find(Menu.SubMenu).length).toBe(2);
     expect(wrapper.find(Menu.Item).length).toBe(6);
+    expect(wrapper.find(Menu).prop("inlineIndent")).toBe(12);
 
     expect(
       wrapper

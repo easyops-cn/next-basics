@@ -70,17 +70,27 @@
 }
 
 .itemContainerInner {
-  padding: 8px;
-  margin-left: 4px;
+  padding: 8px 8px 8px 0;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .menuItemMainPart {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+:global(.ant-menu-item-group-list .ant-menu-submenu-title) .menuItemMainPart {
   width: calc(100% - 20px);
+}
+
+:global(.ant-menu-item-only-child) {
+  padding-right: 0 !important;
+}
+
+:global(.ant-menu-inline .ant-menu-item) {
+  width: 100%;
 }

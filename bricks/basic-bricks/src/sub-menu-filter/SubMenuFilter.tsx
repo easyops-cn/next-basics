@@ -48,6 +48,7 @@ export interface SubMenuFilterProps {
   onSelect: (menuItem: SubMenuFilterItem[]) => void;
   onSearch: (query: string) => void;
   multiple: boolean;
+  inlineIndent?: number;
 }
 
 export function SubMenuFilter({
@@ -61,6 +62,7 @@ export function SubMenuFilter({
   onSelect,
   onSearch,
   multiple,
+  inlineIndent,
 }: SubMenuFilterProps): React.ReactElement {
   const [menuItems, setMenuItems] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
@@ -256,6 +258,7 @@ export function SubMenuFilter({
         onSelect={handleSelect}
         onDeselect={handleDeselect}
         onOpenChange={handleOpenChange}
+        inlineIndent={inlineIndent}
       >
         {menuItems && menuItems.map((item) => renderMenuItem(item))}
       </Menu>
