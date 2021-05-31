@@ -159,6 +159,18 @@ export class SubMenuFilterElement extends UpdatingElement {
   })
   multiple: boolean;
 
+  /**
+   * @kind number
+   * @required false
+   * @default 24
+   * @description 菜单缩进宽度
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  inlineIndent = 24;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -203,6 +215,7 @@ export class SubMenuFilterElement extends UpdatingElement {
             placeholder={this.placeholder}
             suffixBrick={this.suffixBrick}
             menuItems={this.menuItems}
+            inlineIndent={this.inlineIndent}
             defaultOpenKeys={this.defaultOpenKeys}
             defaultSelectedKeys={this.defaultSelectedKeys}
           />
