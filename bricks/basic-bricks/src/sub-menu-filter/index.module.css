@@ -76,4 +76,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+}
+
+.menuItemMainPart {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - 20px);
 }
