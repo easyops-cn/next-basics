@@ -102,7 +102,7 @@ export function SubMenuFilter({
     return (
       <Menu.Item key={String(item.key)} title={item.title}>
         <div className={style.itemContainerInner}>
-          <div>
+          <div className={style.menuItemMainPart}>
             {renderIcon(item)}
             <span className={style.menuItemText}>{item.title}</span>
           </div>
@@ -112,16 +112,20 @@ export function SubMenuFilter({
     );
   };
 
+  const renderGroupTitle = (item: SubMenuFilterGroup) => (
+    <div className={style.menuItemMainPart}>{item.title}</div>
+  );
+
   /* eslint-disable @typescript-eslint/no-use-before-define */
   const renderGroupMenu = (item: SubMenuFilterGroup): React.ReactNode => {
     return (
-      <Menu.ItemGroup key={item.key} title={item.title}>
+      <Menu.ItemGroup key={item.key} title={renderGroupTitle(item)}>
         {item.items.map((innerItem) => renderMenuItem(innerItem))}
       </Menu.ItemGroup>
     );
   };
   const renderMenuTitle = (item: SubMenuFilterGroup) => (
-    <div>
+    <div className={style.menuItemMainPart}>
       {renderIcon(item)}
       {item.title}
     </div>
