@@ -1,0 +1,42 @@
+.customContainer {
+  display: flex;
+  grid-gap: 8px;
+  justify-content: flex-end;
+}
+
+.baseButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--editor-brick-base-height);
+  border-radius: var(--editor-brick-border-radius);
+  color: #595959;
+  padding: 0px 20px;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 75px;
+
+  &.primary {
+    color: #fff;
+    background: #167be0;
+    border-color: #167be0;
+  }
+
+  &.danger {
+    color: #fff;
+    background: #f0493c;
+    border-color: #f0493c;
+  }
+
+  &.link {
+    color: var(--antd-link-color);
+  }
+}
+
+.link {
+  &.baseButton {
+    border: none;
+  }
+}

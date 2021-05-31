@@ -7,3 +7,4 @@ import "./grid-layout/grid-layout.editor";
 import "./general-drawer/general-drawer.editor";
 import "./general-modal/general-modal.editor";
 import "./multiple-columns-card/multiple-columns-card.editor";
+import "./general-custom-buttons/general-custom-buttons.editor";

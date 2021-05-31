@@ -15,5 +15,6 @@ module.exports = sizeLimit({
   },
   editors: {
     "*": "10 KB",
+    "basic-bricks": "30 KB",
   },
 });
