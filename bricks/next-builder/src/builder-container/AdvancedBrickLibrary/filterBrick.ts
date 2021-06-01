@@ -5,7 +5,11 @@ import {
 } from "../constants";
 import i18next from "i18next";
 import { BrickOptionItem } from "../interfaces";
-import { Story, I18nString } from "@next-core/brick-types";
+import {
+  Story,
+  I18nString,
+  BuilderRouteOrBrickNode,
+} from "@next-core/brick-types";
 import { isNil, uniqBy } from "lodash";
 
 const lang = i18next.language
@@ -19,6 +23,7 @@ export function filterBricks({
   storyList,
   limit = brickSearchResultLimit,
   appId,
+  rootNode,
 }: {
   q: string;
   category?: string;
@@ -26,8 +31,16 @@ export function filterBricks({
   storyList: Story[];
   limit?: number;
   appId: string;
+  rootNode?: BuilderRouteOrBrickNode;
 }) {
-  const formatBirckList = processBricks(brickList, storyList, appId, category);
+  const formatBirckList = processBricks(
+    rootNode?.type === "custom-template"
+      ? brickList.filter((item) => item.name !== rootNode.templateId)
+      : brickList,
+    storyList,
+    appId,
+    category
+  );
 
   const keywords = (q ?? "").toLowerCase().match(/\S+/g);
   if (!keywords) {

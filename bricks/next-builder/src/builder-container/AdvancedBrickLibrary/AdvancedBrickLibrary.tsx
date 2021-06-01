@@ -10,6 +10,7 @@ import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { Empty } from "antd";
 import { isEmpty, compact } from "lodash";
 import { chartStory } from "../constants";
@@ -28,6 +29,7 @@ export function LegacyAdvancedBrickLibrary(
   const [q, setQ] = useState<string>();
   const [category, setCategory] = useState<string>();
   const searchRef = useRef<any>();
+  const rootNode = useBuilderNode({ isRoot: true });
 
   const handleSearch = (value: string): void => {
     setQ(value);
@@ -50,6 +52,7 @@ export function LegacyAdvancedBrickLibrary(
       brickList,
       storyList: mergedStroyList,
       appId,
+      rootNode,
     });
   }, [appId, brickList, q, category, storyList]);
 

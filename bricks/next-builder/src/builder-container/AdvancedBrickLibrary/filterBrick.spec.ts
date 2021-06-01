@@ -212,6 +212,10 @@ describe("processor", () => {
           type: "brick",
           name: "forms.general-form",
         },
+        {
+          type: "customTemplate",
+          name: "tpl-create-form",
+        },
       ];
 
       const storyList = [
@@ -289,6 +293,11 @@ describe("processor", () => {
           shortName: "general-form",
           type: "brick",
         },
+        {
+          type: "customTemplate",
+          shortName: "tpl-create-form",
+          name: "tpl-create-form",
+        },
       ]);
 
       const result2 = filterBricks({
@@ -348,6 +357,56 @@ describe("processor", () => {
           name: "basic-bricks.general-card",
           shortName: "general-card",
           title: "卡片",
+          type: "brick",
+        },
+      ]);
+
+      const result5 = filterBricks({
+        q: "",
+        brickList,
+        storyList,
+        appId: "my-app",
+        rootNode: {
+          type: "custom-template",
+          templateId: "tpl-create-form",
+        },
+      });
+
+      expect(result5).toEqual([
+        {
+          type: "brick",
+          name: "basic-bricks.micro-view",
+          shortName: "micro-view",
+        },
+        {
+          type: "brick",
+          name: "basic-bricks.general-button",
+          shortName: "general-button",
+        },
+        {
+          category: "card",
+          description: undefined,
+          icon: {
+            icon: "chevron-down",
+            lib: "fa",
+          },
+          title: "卡片",
+          type: "brick",
+          name: "basic-bricks.general-card",
+          shortName: "general-card",
+        },
+        {
+          category: "form-input",
+          description: "普通输入框",
+          icon: { icon: "pencil-alt", lib: "fa" },
+          name: "forms.general-input",
+          shortName: "general-input",
+          title: "普通输入框",
+          type: "brick",
+        },
+        {
+          name: "forms.general-form",
+          shortName: "general-form",
           type: "brick",
         },
       ]);
