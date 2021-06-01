@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.185.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.3...@next-bricks/presentational-bricks@1.185.4) (2021-06-01)
+
+
+### Bug Fixes
+
+* **brick-table:** change scrollConfigs default value to { x: true } ([8e01e5e](https://github.com/easyops-cn/next-basics/commit/8e01e5e62a5f936d48fcba4ccfed5a90282e37c8))
+* **brick-tree:** 修复搜索时节点不展开 ([2dd48c2](https://github.com/easyops-cn/next-basics/commit/2dd48c2700be50d3ca2d6d8c00e30c6b5d04fb44))
+
+
+
+
+
 ## [1.185.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.2...@next-bricks/presentational-bricks@1.185.3) (2021-05-28)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

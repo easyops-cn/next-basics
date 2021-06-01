@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.124.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.123.0...@next-bricks/basic-bricks@1.124.0) (2021-06-01)
+
+
+### Bug Fixes
+
+* **sub-menu-filter:** 过长文字省略用...显示 ([8c76e35](https://github.com/easyops-cn/next-basics/commit/8c76e35a59f273691b03b5c0165c75d25ed7fdcd))
+
+
+### Features
+
+* **sub-menu-filter:** 增加transparentBackground样式 ([5df22ba](https://github.com/easyops-cn/next-basics/commit/5df22bad981602dec5df48045eed109a2b5938cb))
+* add custom button editor ([763ddee](https://github.com/easyops-cn/next-basics/commit/763ddee7216ad41182dfd37b1fd6e1897602b1a9))
+* **sub-menu-filter:** add event subMenu.click ([e245392](https://github.com/easyops-cn/next-basics/commit/e245392a791341ccadfa638059d2058be266a1ea))
+* **sub-menu-filter:** 样式修改&新增属性inlineIndent ([0edfa8c](https://github.com/easyops-cn/next-basics/commit/0edfa8cc3274627a3d932d43aabfd8fef5d30efe))
+
+
+
+
+
 # [1.123.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.122.10...@next-bricks/basic-bricks@1.123.0) (2021-05-28)
 
 

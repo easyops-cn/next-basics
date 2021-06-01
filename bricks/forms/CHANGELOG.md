@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.167.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.166.1...@next-bricks/forms@1.167.0) (2021-06-01)
+
+
+### Bug Fixes
+
+* fix types after upgraded ts to 4.3 ([3210c63](https://github.com/easyops-cn/next-basics/commit/3210c6345d316b60abcc953d620637ba2e3d1c94))
+
+
+### Features
+
+* **forms:** add i18n ([a1a68a3](https://github.com/easyops-cn/next-basics/commit/a1a68a3227372b575c0daad974c55aa7d987660b))
+
+
+
+
+
 ## [1.166.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.166.0...@next-bricks/forms@1.166.1) (2021-05-28)
 
 ### Bug Fixes
