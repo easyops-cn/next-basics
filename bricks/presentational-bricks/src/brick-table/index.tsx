@@ -806,14 +806,14 @@ export class BrickTableElement extends UpdatingElement {
    *   scrollToFirstRowOnChange?: boolean;
    * }
    * @required false
-   * @default -
+   * @default { x: true }
    * @description 表格是否可滚动，也可以指定滚动区域的宽、高，配置项。详见 https://ant.design/components/table-cn/#scroll
    * @group advanced
    */
   @property({
     attribute: false,
   })
-  scrollConfigs: TableProps<unknown>["scroll"];
+  scrollConfigs: TableProps<unknown>["scroll"] = { x: true };
 
   /**
    * @kind string
