@@ -238,9 +238,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+    const value = event.target.value?.toLocaleLowerCase();
 
-    setSearchValue(value.toLocaleLowerCase());
+    setSearchValue(value);
     nodeMatchedRef.current = false;
 
     if (value) {
