@@ -111,22 +111,23 @@
       /* subMenu-title hover样式 */
       &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
         color: inherit;
-        background-color: #f5f5f5;
+        background-color: #ebebeb;
       }
 
       /* subMenu展开时subMenu-title样式 */
       &:global(.ant-menu-submenu-open .ant-menu-submenu-title) {
         font-weight: 500;
-      }
-
-      /* subMenu子项被选中时subMenu-title样式 */
-      &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
         color: #116ac3;
         background-color: #ebf3fd;
 
         .menuItemMainPart > i {
           color: #116ac3;
         }
+      }
+
+      /* subMenu子项被选中时subMenu-title样式 */
+      &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
+        background-color: inherit;
       }
 
       /* subMenu-title 普通样式 */
@@ -161,7 +162,7 @@
       }
 
       &:global(:not(.ant-menu-item-selected):hover) {
-        background-color: #f5f5f5;
+        background-color: #ebebeb;
       }
     }
   }
