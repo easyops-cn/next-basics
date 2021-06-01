@@ -21,6 +21,7 @@ export const BrickLinkStory: Story = {
     {
       brick: "presentational-bricks.brick-link",
       properties: {
+        dataset: { testid: "basic-usage-demo" },
         label: "aaa",
         url: "/resources/123",
         target: "_blank",

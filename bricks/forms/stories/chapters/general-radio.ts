@@ -21,6 +21,7 @@ export const GeneralRadioStory: Story = {
     {
       brick: "forms.general-radio",
       properties: {
+        dataset: { testid: "basic-usage-demo" },
         name: "city",
         label: "城市",
         value: "Shanghai",

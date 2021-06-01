@@ -21,6 +21,7 @@ export const generalInputStory: Story = {
     {
       brick: "forms.general-input",
       properties: {
+        dataset: { testid: "basic-usage-demo" },
         name: "username",
         type: "email",
         label: "邮箱",

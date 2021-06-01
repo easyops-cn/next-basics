@@ -41,6 +41,7 @@ export const autoCompleteStory: Story = {
           {
             brick: "forms.general-auto-complete",
             properties: {
+              dataset: { testid: "basic-usage-demo" },
               name: "category",
               label: "二级分类",
               labelTooltip: "auto complete",

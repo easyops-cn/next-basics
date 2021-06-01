@@ -162,6 +162,7 @@ export function PopoverContainer(
         onVisibleChange={onVisibleChange}
       >
         <div
+          data-testid="trigger-container"
           className={classNames(styles.cursorPointer, {
             [styles.displayBrickContainer]: !props.triggerByIcon,
           })}
