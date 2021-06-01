@@ -27,6 +27,7 @@ export const GeneralTooltipStory: Story = {
       },
       brick: "presentational-bricks.general-tooltip",
       properties: {
+        dataset: { testid: "basic-usage-demo" },
         icon: {
           lib: "fa",
           icon: "info-circle",
@@ -92,6 +93,7 @@ export const GeneralTooltipStory: Story = {
         text: "文案信息",
         type: "tooltip",
         triggerByIcon: false,
+        dataset: { testid: "basic-usage-demo2" },
       },
     },
   ],

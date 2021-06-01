@@ -29,6 +29,7 @@ export const BrickTableStory: Story = {
         rowKey: "id",
         page: "${query.page=1|number}",
         pageSize: "${query.pageSize=10|number}",
+        shouldUpdateUrlParams: false,
         rowDisabledConfig: {
           field: "name",
           value: "John Brown",
@@ -1131,6 +1132,7 @@ export const BrickTableStory: Story = {
               brick: "presentational-bricks.brick-table",
               properties: {
                 id: "t1",
+                dataset: { testid: "basic-page-demo" },
                 showSelectInfo: true,
                 page: "${query.page=1|number}",
                 pageSize: "${query.page_size=10|number}",

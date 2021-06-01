@@ -69,7 +69,11 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     tipsElem = content;
   }
   const iconNode = (
-    <span className={style.iconContainer} style={iconContainerStyle}>
+    <span
+      className={style.iconContainer}
+      style={iconContainerStyle}
+      data-testid="trigger-container"
+    >
       {<GeneralIcon icon={icon} />}
     </span>
   );

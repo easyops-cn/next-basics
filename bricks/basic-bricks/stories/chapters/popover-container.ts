@@ -130,6 +130,7 @@ export const popoverContainerStory: Story = {
             useBrick: {
               brick: "basic-bricks.popover-container",
               properties: {
+                dataset: { testid: "basic-usage-click-demo" },
                 showPopoverBg: false,
                 id: "user-quick-edit",
                 displayBrick: {
@@ -204,6 +205,7 @@ export const popoverContainerStory: Story = {
             useBrick: {
               brick: "basic-bricks.popover-container",
               properties: {
+                dataset: { testid: "basic-usage-hover-demo" },
                 showIcon: "always",
                 popoverContentStyle: {
                   width: 200,
