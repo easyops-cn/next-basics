@@ -2,7 +2,8 @@ import React from "react";
 import { Button, Modal } from "antd";
 import { ButtonType } from "antd/lib/button";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-
+import i18n from "i18next";
+import { NS_FORMS, K } from "../i18n/constants";
 interface GeneralModalProps extends FormItemWrapperProps {
   visible: boolean;
   modalTitle: string;
@@ -18,13 +19,15 @@ interface GeneralModalProps extends FormItemWrapperProps {
 export function GeneralModal(props: GeneralModalProps): React.ReactElement {
   const footer = (
     <>
-      <Button className="cancelBtn" type="link" >{props.cancelText || "取消"}</Button>
+      <Button className="cancelBtn" type="link">
+        {props.cancelText || i18n.t(`${NS_FORMS}:${K.CANCEL}`)}
+      </Button>
       <Button
         disabled={props.okDisabled}
         className="okBtn"
         type={props.okType || "primary"}
       >
-        {props.okText || "确定"}
+        {props.okText || i18n.t(`${NS_FORMS}:${K.CONFIRM}`)}
       </Button>
     </>
   );
