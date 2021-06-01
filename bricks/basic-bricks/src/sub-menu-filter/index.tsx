@@ -175,6 +175,17 @@ export class SubMenuFilterElement extends UpdatingElement {
   })
   inlineIndent = 24;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否采用透明背景样式
+   */
+  @property({
+    attribute: false,
+  })
+  transparentBackground = false;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -231,6 +242,7 @@ export class SubMenuFilterElement extends UpdatingElement {
             suffixBrick={this.suffixBrick}
             menuItems={this.menuItems}
             inlineIndent={this.inlineIndent}
+            transparentBackground={this.transparentBackground}
             defaultOpenKeys={this.defaultOpenKeys}
             defaultSelectedKeys={this.defaultSelectedKeys}
           />
