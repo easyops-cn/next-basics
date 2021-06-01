@@ -48,7 +48,6 @@ export interface SubMenuFilterProps {
   unsearchable: boolean;
   onSelect: (menuItem: SubMenuFilterItem[]) => void;
   onSearch: (query: string) => void;
-  onSubMenuClick: (menuItem: SubMenuFilterGroup) => void;
   multiple: boolean;
   inlineIndent?: number;
   transparentBackground?: boolean;
@@ -64,7 +63,6 @@ export function SubMenuFilter({
   unsearchable,
   onSelect,
   onSearch,
-  onSubMenuClick,
   multiple,
   inlineIndent,
   transparentBackground,
@@ -139,11 +137,7 @@ export function SubMenuFilter({
   );
   const renderSubMenu = (item: SubMenuFilterGroup): React.ReactNode => {
     return (
-      <Menu.SubMenu
-        key={item.key}
-        title={renderMenuTitle(item)}
-        onTitleClick={handleSubMenuClick}
-      >
+      <Menu.SubMenu key={item.key} title={renderMenuTitle(item)}>
         {item.items.map((innerItem) => renderMenuItem(innerItem))}
       </Menu.SubMenu>
     );
@@ -243,10 +237,6 @@ export function SubMenuFilter({
     const newSelectedKeys = [...selectedKeys.filter((k) => k !== key)];
     setSelectedKeys(newSelectedKeys);
     onSelect && onSelect(getSelectedMenuItemByKeys(newSelectedKeys));
-  };
-
-  const handleSubMenuClick = ({ key }: any) => {
-    onSubMenuClick && onSubMenuClick(getMenuItemByKey(rowMenuItem, key) as any);
   };
 
   return (

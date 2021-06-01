@@ -7,11 +7,7 @@ import {
   EventEmitter,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import {
-  SubMenuFilter,
-  SubMenuFilterGroup,
-  SubMenuFilterItem,
-} from "./SubMenuFilter";
+import { SubMenuFilter, SubMenuFilterItem } from "./SubMenuFilter";
 import { UseBrickConf } from "@next-core/brick-types";
 
 /**
@@ -200,7 +196,7 @@ export class SubMenuFilterElement extends UpdatingElement {
   }
   /**
    * @detail SubMenuFilterItem[]
-   * @description 点击type为item的菜单项时触发
+   * @description -
    */
   @event({ type: "menu.select" }) menuSelect: EventEmitter<SubMenuFilterItem[]>;
   /**
@@ -216,16 +212,6 @@ export class SubMenuFilterElement extends UpdatingElement {
     this.menuSearch.emit(q);
   };
 
-  /**
-   * @detail SubMenuFilterGroup
-   * @description 点击type为subMenu的菜单项时触发
-   */
-  @event({ type: "subMenu.click" })
-  subMenuClick: EventEmitter<SubMenuFilterGroup>;
-  handleSubMenuClick = (menuItem: SubMenuFilterGroup) => {
-    this.subMenuClick.emit(menuItem);
-  };
-
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -235,7 +221,6 @@ export class SubMenuFilterElement extends UpdatingElement {
             multiple={this.multiple}
             onSelect={this.handleSelect}
             onSearch={this.handleSearch}
-            onSubMenuClick={this.handleSubMenuClick}
             selectable={this.selectable}
             unsearchable={this.unsearchable}
             placeholder={this.placeholder}
