@@ -12,6 +12,7 @@ import { uniq, cloneDeep } from "lodash";
 import style from "./index.module.css";
 import { SelectParam } from "antd/lib/menu";
 import { BrickAsComponent } from "@next-core/brick-kit";
+import classNames from "classnames";
 
 export interface SubMenuFilterSimpleItem {
   title: string;
@@ -50,6 +51,7 @@ export interface SubMenuFilterProps {
   onSubMenuClick: (menuItem: SubMenuFilterGroup) => void;
   multiple: boolean;
   inlineIndent?: number;
+  transparentBackground?: boolean;
 }
 
 export function SubMenuFilter({
@@ -65,6 +67,7 @@ export function SubMenuFilter({
   onSubMenuClick,
   multiple,
   inlineIndent,
+  transparentBackground,
 }: SubMenuFilterProps): React.ReactElement {
   const [menuItems, setMenuItems] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
@@ -247,7 +250,11 @@ export function SubMenuFilter({
   };
 
   return (
-    <div className={style.subMenuContainer}>
+    <div
+      className={classNames(style.subMenuContainer, {
+        [style.transparentBackground]: transparentBackground,
+      })}
+    >
       {!unsearchable && (
         <Input.Search
           placeholder={placeholder}

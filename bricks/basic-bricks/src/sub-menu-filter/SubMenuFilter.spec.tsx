@@ -157,7 +157,9 @@ describe("SubMenuFilter", () => {
   });
 
   it("should work", () => {
+    expect(wrapper.find(".transparentBackground").length).toBe(0);
     wrapper.setProps({
+      transparentBackground: true,
       suffixBrick: {
         useBrick: {
           brick: "div",
@@ -169,6 +171,7 @@ describe("SubMenuFilter", () => {
     });
     wrapper.update();
 
+    expect(wrapper.find(".transparentBackground").length).toBe(1);
     expect(wrapper.find(Menu.ItemGroup).length).toBe(2);
     expect(wrapper.find(Menu.SubMenu).length).toBe(2);
     expect(wrapper.find(Menu.Item).length).toBe(6);
