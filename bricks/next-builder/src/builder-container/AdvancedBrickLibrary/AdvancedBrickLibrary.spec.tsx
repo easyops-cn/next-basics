@@ -8,6 +8,7 @@ import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { act } from "react-dom/test-utils";
 
 jest.mock("../BuilderUIContext");
+jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BrickLibrary/BrickItem");
 
 jest.mock("../constants", () => ({
