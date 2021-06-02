@@ -182,6 +182,17 @@ export class SubMenuFilterElement extends UpdatingElement {
   })
   transparentBackground = false;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 手风琴模式
+   */
+  @property({
+    attribute: false,
+  })
+  accordion = false;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -228,6 +239,7 @@ export class SubMenuFilterElement extends UpdatingElement {
             menuItems={this.menuItems}
             inlineIndent={this.inlineIndent}
             transparentBackground={this.transparentBackground}
+            accordion={this.accordion}
             defaultOpenKeys={this.defaultOpenKeys}
             defaultSelectedKeys={this.defaultSelectedKeys}
           />
