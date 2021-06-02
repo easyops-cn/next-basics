@@ -33,3 +33,4 @@ import "./general-hotkeys";
 import "./general-timer";
 import "./export-json-file";
 import "./brick-error";
+import "./easy-view";

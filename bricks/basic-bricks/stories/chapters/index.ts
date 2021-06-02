@@ -1,5 +1,6 @@
 import { advanceListContainerStory } from "./advance-list-container";
 import { advancedListContainerStory } from "./advanced-list-container";
+import { easyViewStory } from "./easy-view";
 import { exportJsonFileStory } from "./export-json-file";
 import { foldBrickStory } from "./fold-brick";
 import { foldBrickV2Story } from "./fold-brick-v2";
@@ -32,6 +33,7 @@ import { transformAgentStory } from "./transform-agent";
 export const Chapters = [
   advanceListContainerStory,
   advancedListContainerStory,
+  easyViewStory,
   exportJsonFileStory,
   foldBrickStory,
   foldBrickV2Story,
