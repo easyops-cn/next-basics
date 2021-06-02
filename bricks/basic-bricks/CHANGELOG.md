@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.125.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.124.0...@next-bricks/basic-bricks@1.125.0) (2021-06-02)
+
+
+### Features
+
+* **sub-menu-filter:** 增加属性accordion ([ef59fe4](https://github.com/easyops-cn/next-basics/commit/ef59fe41be1694437fd3331a2b25d54589c94b33))
+
+
+
+
+
 # [1.124.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.123.0...@next-bricks/basic-bricks@1.124.0) (2021-06-01)
 
 
