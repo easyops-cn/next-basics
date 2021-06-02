@@ -175,6 +175,7 @@ describe("SubMenuFilter", () => {
     expect(wrapper.find(Menu.SubMenu).length).toBe(2);
     expect(wrapper.find(Menu.Item).length).toBe(6);
     expect(wrapper.find(Menu).prop("inlineIndent")).toBe(12);
+    expect(wrapper.find(Menu).prop("openKeys")).toEqual(["diy"]);
 
     expect(
       wrapper

@@ -239,6 +239,7 @@ export function SubMenuFilter({
   };
 
   const handleOpenChange = (keys: string[]) => {
+    // istanbul ignore else
     if (!accordion) {
       setOpenKeys(keys);
     } else {
