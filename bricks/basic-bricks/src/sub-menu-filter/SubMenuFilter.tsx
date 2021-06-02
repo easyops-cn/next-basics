@@ -38,6 +38,19 @@ function isSubMenu(item: SubMenuFilterItem): item is SubMenuFilterGroup {
   return item.type === "subMenu";
 }
 
+function getSubMenuKeys(items: SubMenuFilterItem[]): string[] {
+  let subMenuKeys: string[] = [];
+  items.map((item) => {
+    item.type === "subMenu" && subMenuKeys.push(item.key);
+    if ((item as SubMenuFilterGroup)?.items) {
+      subMenuKeys = subMenuKeys.concat(
+        getSubMenuKeys((item as SubMenuFilterGroup).items)
+      );
+    }
+  });
+  return subMenuKeys;
+}
+
 export interface SubMenuFilterProps {
   defaultSelectedKeys: string[];
   defaultOpenKeys: string[];
@@ -51,6 +64,7 @@ export interface SubMenuFilterProps {
   multiple: boolean;
   inlineIndent?: number;
   transparentBackground?: boolean;
+  accordion?: boolean;
 }
 
 export function SubMenuFilter({
@@ -66,13 +80,16 @@ export function SubMenuFilter({
   multiple,
   inlineIndent,
   transparentBackground,
+  accordion,
 }: SubMenuFilterProps): React.ReactElement {
   const [menuItems, setMenuItems] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [openKeys, setOpenKeys] = useState([]);
+  const [subMenuKeys, setSubMenuKeys] = useState([]);
 
   useEffect(() => {
     setMenuItems(cloneDeep(rowMenuItem));
+    setSubMenuKeys(getSubMenuKeys(rowMenuItem));
   }, [rowMenuItem]);
 
   useEffect(() => {
@@ -221,8 +238,18 @@ export function SubMenuFilter({
     }
   };
 
-  const handleOpenChange = (openKeys: string[]) => {
-    setOpenKeys(openKeys);
+  const handleOpenChange = (keys: string[]) => {
+    // istanbul ignore else
+    if (!accordion) {
+      setOpenKeys(keys);
+    } else {
+      const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+      if (subMenuKeys.indexOf(latestOpenKey) === -1) {
+        setOpenKeys(keys);
+      } else {
+        setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+      }
+    }
   };
   const handleSelect = ({ key }: SelectParam) => {
     const newSelectedKeys = multiple

@@ -117,17 +117,20 @@
       /* subMenu展开时subMenu-title样式 */
       &:global(.ant-menu-submenu-open .ant-menu-submenu-title) {
         font-weight: 500;
-        color: #116ac3;
-        background-color: #ebf3fd;
-
-        .menuItemMainPart > i {
-          color: #116ac3;
-        }
       }
 
       /* subMenu子项被选中时subMenu-title样式 */
       &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
         background-color: inherit;
+        color: #116ac3;
+
+        .menuItemMainPart > i {
+          color: #116ac3;
+        }
+
+        :global(.ant-menu-submenu-arrow) {
+          color: #116ac3;
+        }
       }
 
       /* subMenu-title 普通样式 */
