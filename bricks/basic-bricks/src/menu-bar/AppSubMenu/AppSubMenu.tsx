@@ -16,7 +16,7 @@ export function AppSubMenu({ subMenu }: AppSubMenuProps): React.ReactElement {
   }, []);
 
   return (
-    <div className={styles.appSubMenu}>
+    <div className={styles.appSubMenu} data-testid="sub-menu-bar">
       <div className={styles.appSubMenuTitle}>{subMenu.title}</div>
       <Sidebar menuItems={subMenu.menuItems} inlineIndent={20} theme="light" />
     </div>

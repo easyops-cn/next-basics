@@ -25,6 +25,7 @@ export function MenuBar(props: MenuBarProps): React.ReactElement {
         className={classNames(styles.menuBar, {
           [styles.developing]: app?.status === "developing",
         })}
+        data-testid="main-menu-bar"
       >
         <LogoBar />
         <AppMenu {...props} />
