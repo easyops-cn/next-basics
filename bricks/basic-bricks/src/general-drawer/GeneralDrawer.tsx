@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Drawer } from "antd";
+import { Drawer, Spin } from "antd";
 
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
 
@@ -13,6 +13,7 @@ interface GeneralDrawerProps {
   bodyStyle?: Record<string, any>;
   drawerStyle?: Record<string, any>;
   hasFooter?: boolean;
+  loading?: boolean;
 }
 
 export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
@@ -31,7 +32,6 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       </div>
     </div>
   );
-
   const [maxContentHeight, setMaxContentHeight] = React.useState<number>();
 
   React.useEffect(() => {
@@ -60,9 +60,11 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       bodyStyle={props.bodyStyle}
       drawerStyle={props.drawerStyle}
     >
-      <div className="content" style={{ maxHeight: maxContentHeight }}>
-        <slot id="content" name="content"></slot>
-      </div>
+      <Spin spinning={props.loading} tip="Loading...">
+        <div className="content" style={{ maxHeight: maxContentHeight }}>
+          <slot id="content" name="content"></slot>
+        </div>
+      </Spin>
       {props.hasFooter && (
         <div className="footer">
           <div className="footer-inner">

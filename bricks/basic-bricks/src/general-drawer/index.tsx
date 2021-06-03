@@ -51,6 +51,15 @@ export class GeneralDrawerElement extends UpdatingElement {
    */
   @property()
   customTitle: string;
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否显示loading效果
+   * @group basic
+   */
+  @property({ type: Boolean })
+  loading: boolean;
 
   /**
    * @kind number
@@ -197,6 +206,7 @@ export class GeneralDrawerElement extends UpdatingElement {
             bodyStyle={this.bodyStyle}
             drawerStyle={this.drawerStyle}
             hasFooter={this.hasFooter}
+            loading={this.loading}
           />
         </BrickWrapper>,
         this._mountPoint
