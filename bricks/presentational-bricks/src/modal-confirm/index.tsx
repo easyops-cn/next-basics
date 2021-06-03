@@ -17,6 +17,7 @@ import { pick } from "lodash";
  * @name presentational-bricks.modal-confirm
  * @docKind brick
  * @description 用于提示和二次确认的场景
+ * @editor shared-editors.general-confirm--editor
  * @author jo
  * @slots
  * @history
