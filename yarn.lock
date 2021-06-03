@@ -2080,12 +2080,12 @@
   resolved "https://registry.npmjs.org/@next-core/brick-http/-/brick-http-2.2.8.tgz#2628081b214f0f16f7fa446d335ed3cdd47b21f7"
   integrity sha512-1Zf9qX/qJ06Jc/ZK1UFWpqpgLHB+L+yUHeSFTqRptYf9efnF7QKPadHA0SXdbgti4aY2J/NnJFqPB6IyiAL/3w==
 
-"@next-core/brick-icons@^2.17.2", "@next-core/brick-icons@^2.17.3":
+"@next-core/brick-icons@^2.17.3":
   version "2.17.3"
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.17.3.tgz#a72453e12c2a94a0edef8747f19bda37d68dd0a5"
   integrity sha512-zHjF0S+rIUJc4ejoxxflt4Ljam8uk9vu+rzewjEsJ5XGOCa/5nEcWQo3coIQ7p1PRJqt5DaVZOsys0Vaklwl9Q==
 
-"@next-core/brick-kit@^2.49.1", "@next-core/brick-kit@^2.49.2":
+"@next-core/brick-kit@^2.49.2":
   version "2.49.2"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.49.2.tgz#90c071bea6624c29fc7a2a79a44cd58e1b645053"
   integrity sha512-CfGgw+64XiSo07dbSykYj1EXLwni2CCPYPIKw5zLjjGgHqcVKH7tVhD9IQcZZrq1QT7ZxtCCmg2vFvHR6kRyQw==
@@ -2115,12 +2115,12 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.26.2", "@next-core/brick-types@^2.27.0":
-  version "2.26.2"
-  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.26.2.tgz#73c84356226b00c9b23b49f9b0755903ebbfed38"
-  integrity sha512-nPjUn7xC0CFRHio9RoSi49BspINEFhZ6hE74MUI7nxGIvUtcvEOZ9Y38P20uFymC9IVhXm8RNIf/wPrqh6XZ7g==
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.27.0":
+  version "2.27.0"
+  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.27.0.tgz#636fdeb78940ce39c36875b26ac4bb5de9cd509e"
+  integrity sha512-zV8yfRcE/89HwcfJvHfXlkIHIwHBBv7Y+sxdhVyW08NT2eave/HulCY0yRuRMQ/ibtuOCqyv7IQS90Wql5hfZg==
 
-"@next-core/brick-utils@^2.16.2", "@next-core/brick-utils@^2.16.3":
+"@next-core/brick-utils@^2.16.3":
   version "2.16.3"
   resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.16.3.tgz#66584ff8f1b80c4841ecbac852bb7def699ad2fb"
   integrity sha512-yTSifrloB3WJGREO9WRToSGbDhG/WK2R4UEUYy7J+hgkMxsaOAYkT349TAV5KtZbH3VOE8y3S9Dp+IOsfK95bQ==
@@ -2218,15 +2218,6 @@
   version "0.1.9"
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/-/easyops-analytics-0.1.9.tgz#aeb400211a7e34357dd9ea08e4e27cbd61c90c06"
   integrity sha512-uEbkuGrLqP5RNDVDh6Zg87gxa+Ubx8KL9qE1Brq2ixuw7VcUtHvObUh75c75gWUlO8ArQzuc5+5L68Upiaz97A==
-
-"@next-core/editor-bricks-helper@^0.19.11":
-  version "0.19.11"
-  resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.19.11.tgz#e4b5646951fbceb4e3772e6b2abd613bac4d1531"
-  integrity sha512-A2MXfcw2GAtYAFpLqOaD8rS92uaMkxZDBTwbx6uow5rEspLX0OiVZxlwZsSU+4JbixcnCMmFPlwTYKIOUhUpDw==
-  dependencies:
-    "@next-core/brick-types" "^2.26.2"
-    "@ungap/event-target" "^0.2.2"
-    classnames "^2.3.1"
 
 "@next-core/editor-bricks-helper@^0.20.0":
   version "0.20.0"
