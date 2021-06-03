@@ -98,6 +98,11 @@ const locale: Locale = {
   [K.BOOLEAN]: "布尔型",
   [K.FLOAT]: "浮点型",
   [K.TIME]: "时间",
+  [K.TITLE_ADD_STRUCTURE_ITEM]: "添加结构项",
+  [K.TITLE_EDIT_STRUCTURE_ITEM]: "编辑结构项",
+  [K.NOTICE]: "提示",
+  [K.DELETE_STRUCTURE_ITEM_PREFIX]: "确认要删除结构项",
+  [K.DELETE_STRUCTURE_ITEM_POSTFIX]: "吗?",
 };
 
 export default locale;
