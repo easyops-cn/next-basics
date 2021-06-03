@@ -60,14 +60,11 @@ export function LegacyObjectAttrStructForm(
   });
 
   const [addStructMode, setAddStructMode] = React.useState("new");
-  const [addStructModalVisible, setAddStructModalVisible] = React.useState(
-    false
-  );
+  const [addStructModalVisible, setAddStructModalVisible] =
+    React.useState(false);
 
-  const [
-    importStructModalVisible,
-    setImportStructModalVisible,
-  ] = React.useState(false);
+  const [importStructModalVisible, setImportStructModalVisible] =
+    React.useState(false);
   const [currentStruct, setCurrentStruct] = React.useState<StructDefine>({});
   const [cmdbObjectList, setCmdbObjectList] = React.useState<
     Partial<CmdbModels.ModelCmdbObject>[]
@@ -102,10 +99,12 @@ export function LegacyObjectAttrStructForm(
 
   const handleDeleteStruct = (struct: StructDefine) => {
     Modal.confirm({
-      title: "提示",
+      title: i18n.t(`${NS_FORMS}:${K.NOTICE}`),
       content: (
         <>
-          确认要删除结构项<Tag color="red">{struct.name}</Tag>吗？
+          {i18n.t(`${NS_FORMS}:${K.DELETE_STRUCTURE_ITEM_PREFIX}`)}
+          <Tag color="red">{struct.name}</Tag>
+          {i18n.t(`${NS_FORMS}:${K.DELETE_STRUCTURE_ITEM_POSTFIX}`)}
         </>
       ),
 
@@ -322,8 +321,8 @@ export function LegacyObjectAttrStructForm(
       <Modal
         title={
           isEmpty(currentStruct)
-            ? i18n.t(`${NS_FORMS}:${K.ADD_STRUCTURE_ITEM}`)
-            : i18n.t(`${NS_FORMS}:${K.EDIT_STRUCTURE_ITEM}`)
+            ? i18n.t(`${NS_FORMS}:${K.TITLE_ADD_STRUCTURE_ITEM}`)
+            : i18n.t(`${NS_FORMS}:${K.TITLE_EDIT_STRUCTURE_ITEM}`)
         }
         visible={addStructModalVisible}
         onOk={handleAddStructConfirm}

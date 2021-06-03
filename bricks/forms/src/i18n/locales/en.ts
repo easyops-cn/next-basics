@@ -46,7 +46,7 @@ const locale: Locale = {
   [K.UNIQUE]: "Unique",
   [K.PLEASE_INPUT_ATTRIBUTE_NAME]: "Please input attribute name",
   [K.LIMIT]: "Limit",
-  [K.REGULAR]: "Regular:",
+  [K.REGULAR]: "Regular expression:",
   [K.FORMAT]: "Format:",
   [K.CLICK_TO_SELECT_DATE]: "date,click to select",
   [K.ENUMERATION_VALUE]: "Enumeration value",
@@ -62,11 +62,11 @@ const locale: Locale = {
   [K.TYPE]: "Type",
   [K.HANDEL]: "Handel",
   [K.STRUCTURE_BODY_DEFINATION]: "Structure body definition",
-  [K.NEW_DEFINATION]: "New buit definition",
+  [K.NEW_DEFINATION]: "New definition",
   [K.IFEM]: "Introducing from existing models",
   [K.ADD_STRUCTURE_ITEM]: "Add structure item",
   [K.SELECT_MODEL]: "Select model",
-  [K.CITE_MODEL]: "Reference model",
+  [K.CITE_MODEL]: "Reference Model",
   [K.EDIT_STRUCTURE_ITEM]: "Edit structure item",
   [K.INPUT_STRUCTURE_ITEM_NAME]: "Please enter structure item name",
   [K.INPUT_STRUCTURE_ITEM_ID]: "Please enter structure item ID",
@@ -106,6 +106,12 @@ const locale: Locale = {
   [K.BOOLEAN]: "Boolean",
   [K.FLOAT]: "Float",
   [K.TIME]: "Time",
+  [K.TITLE_EDIT_STRUCTURE_ITEM]: "Edit Structure Item",
+  [K.TITLE_ADD_STRUCTURE_ITEM]: "Add Structure Item",
+  [K.NOTICE]: "Notice",
+  [K.DELETE_STRUCTURE_ITEM_PREFIX]:
+    "Are you sure you want to delete the structure item",
+  [K.DELETE_STRUCTURE_ITEM_POSTFIX]: "?",
 };
 
 export default locale;

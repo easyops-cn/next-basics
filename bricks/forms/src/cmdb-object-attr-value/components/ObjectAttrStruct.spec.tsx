@@ -140,7 +140,7 @@ describe("ObjectAttrStruct", () => {
     await jest.runAllTimers();
     wrapper.update();
     expect(wrapper.find("Modal").at(0).props().title).toBe(
-      i18n.t(`${NS_FORMS}:${K.EDIT_STRUCTURE_ITEM}`)
+      i18n.t(`${NS_FORMS}:${K.TITLE_EDIT_STRUCTURE_ITEM}`)
     );
 
     wrapper.find(Modal).at(0).invoke("onCancel")(); // 点击弹窗确认按钮
@@ -151,7 +151,7 @@ describe("ObjectAttrStruct", () => {
     optionBtnDiv.childAt(1).invoke("onClick")();
     expect(spyOnModalConfirm).toBeCalledWith(
       expect.objectContaining({
-        title: "提示",
+        title: i18n.t(`${NS_FORMS}:${K.NOTICE}`),
       })
     );
 
