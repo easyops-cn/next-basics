@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.126.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.125.0...@next-bricks/basic-bricks@1.126.0) (2021-06-03)
+
+
+### Features
+
+* general-drawer add loading props ([04b2d42](https://github.com/easyops-cn/next-basics/commit/04b2d42997e3aacf2110eec4d3c2a285a2553626))
+
+
+
+
+
 # [1.125.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.124.0...@next-bricks/basic-bricks@1.125.0) (2021-06-02)
 
 
