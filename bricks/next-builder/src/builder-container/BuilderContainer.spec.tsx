@@ -52,6 +52,7 @@ const mockManager = {
   onNodeClick: jest.fn(() => mockRemoveListenersOfNodeClick),
   dataInit: jest.fn(),
   routeListInit: jest.fn(),
+  storyListInit: jest.fn(),
   getData: jest.fn(() => ({
     rootId: "root",
     nodes: [],
@@ -87,6 +88,7 @@ describe("BuilderContainer", () => {
     expect(mockManager.onNodeMove).toBeCalled();
     expect(mockManager.onNodeReorder).toBeCalled();
     expect(mockManager.onNodeClick).toBeCalled();
+    expect(mockManager.storyListInit).toBeCalled();
     expect(mockManager.dataInit).toBeCalledWith({
       type: "bricks",
       path: "/home",
