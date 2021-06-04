@@ -1,0 +1,18 @@
+.chartContainer {
+  display: grid;
+  width: 400px;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100px 100px;
+
+  .layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chartIcon {
+    font-size: 80px;
+    color: var(--editor-brick-skeleton-bg);
+  }
+}
