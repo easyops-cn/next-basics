@@ -133,21 +133,21 @@ export function LegacyBuilderContainer(
     () => getBuilderClipboard(initialClipboardType, initialClipboardSource),
     [initialClipboardType, initialClipboardSource]
   );
-  const [clipboard, setClipboard] = React.useState<BuilderClipboard>(
-    memoClipboard
-  );
+  const [clipboard, setClipboard] =
+    React.useState<BuilderClipboard>(memoClipboard);
 
-  const memoCanvasIndex = React.useMemo(() => initialCanvasIndex, [
-    initialCanvasIndex,
-  ]);
+  const memoCanvasIndex = React.useMemo(
+    () => initialCanvasIndex,
+    [initialCanvasIndex]
+  );
   const [canvasIndex, setCanvasIndex] = React.useState(memoCanvasIndex);
 
-  const memoStoryboardQuery = React.useMemo(() => initialStoryboardQuery, [
-    initialStoryboardQuery,
-  ]);
-  const [storyboardQuery, setStoryboardQuery] = React.useState(
-    memoStoryboardQuery
+  const memoStoryboardQuery = React.useMemo(
+    () => initialStoryboardQuery,
+    [initialStoryboardQuery]
   );
+  const [storyboardQuery, setStoryboardQuery] =
+    React.useState(memoStoryboardQuery);
 
   const manager = useBuilderDataManager();
 
@@ -209,6 +209,10 @@ export function LegacyBuilderContainer(
   React.useEffect(() => {
     manager.routeListInit(routeList);
   }, [routeList, manager]);
+
+  React.useEffect(() => {
+    manager.storyListInit(storyList);
+  }, [storyList, manager]);
 
   React.useEffect(() => {
     const removeListenersOfNodeAdd = manager.onNodeAdd(onNodeAdd);
