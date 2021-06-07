@@ -1,5 +1,6 @@
 import React from "react";
 import { pick } from "lodash";
+import classnames from "classnames";
 import {
   EditorBrickType,
   EditorComponentProps,
@@ -8,6 +9,7 @@ import {
   EditorSelfLayout,
   SlotContainer,
   useBuilderNode,
+  useOutlineEnabled,
 } from "@next-core/editor-bricks-helper";
 import styles from "./easy-view.editor.module.css";
 
@@ -24,6 +26,7 @@ export function EasyViewEditor({
   nodeUid,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<EasyViewProperties>({ nodeUid });
+  const outlineEnabled = useOutlineEnabled(node.instanceId);
   const {
     gridAreas,
     gridTemplateAreas,
@@ -57,7 +60,9 @@ export function EasyViewEditor({
       }}
     >
       <div
-        className={styles.wrapper}
+        className={classnames(styles.wrapper, {
+          [styles.outlineEnabled]: outlineEnabled,
+        })}
         style={{
           gridTemplateAreas: gridTemplateAreas
             ?.map((row) => `"${row.join(" ")}"`)

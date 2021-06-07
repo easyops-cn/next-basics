@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import classNames from "classnames";
 import {
@@ -18,6 +18,7 @@ import {
   isRouteNode,
   useHoverNodeUid,
   useBuilderContextMenuStatus,
+  useOutlineEnabled,
 } from "@next-core/editor-bricks-helper";
 import { StoryboardTreeMountPoint } from "../StoryboardTreeMountPoint/StoryboardTreeMountPoint";
 import { treeViewPaddingUnit } from "../constants";
@@ -56,15 +57,17 @@ export function StoryboardTreeNode({
   const manager = useBuilderDataManager();
   const canDrop = useCanDrop();
   const contextMenuStatus = useBuilderContextMenuStatus();
+  const outlineApplicable = node.brick === "basic-bricks.easy-view";
+  const outlineEnabled = useOutlineEnabled(node.instanceId, !outlineApplicable);
 
-  const handleClick = React.useCallback(() => {
+  const handleClick = useCallback(() => {
     manager.nodeClick(node);
   }, [manager, node]);
 
-  const hover = useMemo(() => hoverNodeUid === nodeUid, [
-    hoverNodeUid,
-    nodeUid,
-  ]);
+  const hover = useMemo(
+    () => hoverNodeUid === nodeUid,
+    [hoverNodeUid, nodeUid]
+  );
 
   const [{ isDragging }, dragRef, draggingPreviewRef] = useDrag({
     item: {
@@ -116,7 +119,7 @@ export function StoryboardTreeNode({
     },
   });
 
-  const handleContextMenu = React.useCallback(
+  const handleContextMenu = useCallback(
     (event: React.MouseEvent) => {
       event.preventDefault();
       manager.contextMenuChange({
@@ -143,18 +146,27 @@ export function StoryboardTreeNode({
     icon = <BranchesOutlined />;
   }
 
-  const handleMouseEnter = (): void => {
+  const handleMouseEnter = useCallback((): void => {
     const prevUid = manager.getHoverNodeUid();
     if (prevUid !== node.$$uid) {
       manager.setHoverNodeUid(node.$$uid);
     }
-  };
-  const handleMouseLeave = (): void => {
+  }, [manager, node]);
+
+  const handleMouseLeave = useCallback((): void => {
     const prevUid = manager.getHoverNodeUid();
     if (prevUid === node.$$uid) {
       manager.setHoverNodeUid(undefined);
     }
-  };
+  }, [manager, node]);
+
+  const handleOutlineToggle = useCallback(
+    (event: React.MouseEvent) => {
+      event.stopPropagation();
+      manager.toggleOutline(node.instanceId);
+    },
+    [manager, node]
+  );
 
   return (
     <li
@@ -189,6 +201,16 @@ export function StoryboardTreeNode({
         <div className={styles.nodeName} title={node.alias}>
           {node.alias}
         </div>
+        {outlineApplicable && (
+          <div
+            className={classNames(styles.outlineToggle, {
+              [styles.outlineEnabled]: outlineEnabled,
+            })}
+            onClick={handleOutlineToggle}
+          >
+            grid
+          </div>
+        )}
       </div>
       {mountPoints.length > 0 && (
         <ul className={styles.mountPointList}>
