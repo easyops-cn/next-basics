@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.6...@next-bricks/presentational-bricks@1.186.0) (2021-06-07)
+
+
+### Features
+
+* **card-item:** 透传shape属性 ([21bbecf](https://github.com/easyops-cn/next-basics/commit/21bbecfa6836795a22e8b67d683c38ccf43fcca0))
+* add brick ui editor ([bbd8bbc](https://github.com/easyops-cn/next-basics/commit/bbd8bbcbef3693a90dac539d264dbff34d52b788))
+* general-confirm edtitor ([eed8fad](https://github.com/easyops-cn/next-basics/commit/eed8fad76cfe09b4555413260df18339f39e5237))
+
+
+
+
+
 ## [1.185.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.5...@next-bricks/presentational-bricks@1.185.6) (2021-06-03)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

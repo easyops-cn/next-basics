@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.54.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.53.2...@next-bricks/next-builder@1.54.0) (2021-06-07)
+
+
+### Features
+
+* add storyList datasource ([fa6c306](https://github.com/easyops-cn/next-basics/commit/fa6c3069b4cf7a5b72b487397950226095971f77))
+
+
+
+
+
 ## [1.53.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.53.1...@next-bricks/next-builder@1.53.2) (2021-06-03)
 
 
