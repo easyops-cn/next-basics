@@ -42,6 +42,7 @@ interface CardItemProps {
   imgSrc?: string;
   showImg?: boolean;
   imgSize?: number;
+  shape?: "circle" | "square" | "round-square";
 }
 
 export function CardItem(props: CardItemProps): React.ReactElement {
@@ -59,6 +60,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     alwaysShowDescription,
     descriptionDataType,
     reverseBgColor,
+    shape,
   } = props;
   const hasBottomSlot =
     cardLayoutType === CardLayoutType.ICON_AS_BACKGROUND
@@ -142,6 +144,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         size={size}
         reverseBgColor={reverseBgColor}
         showEmptyIcon={true}
+        shape={shape}
       />
     </span>
   );

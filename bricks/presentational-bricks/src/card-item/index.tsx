@@ -317,7 +317,7 @@ export class CardItemElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default - true
+   * @default true
    * @description 卡片项是否显示外边框
    */
   @property({
@@ -359,7 +359,7 @@ export class CardItemElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default - true
+   * @default true
    * @description 卡片项是否hover浮起
    */
   @property({
@@ -370,7 +370,7 @@ export class CardItemElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default - false
+   * @default false
    * @description 禁用卡片，禁用的卡片不可点击跳转。操作区配置了 slot 的卡片，请按需配置子构件的属性，例如将按钮设置成 disabled 等。
    */
   @property({
@@ -381,7 +381,7 @@ export class CardItemElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default - false
+   * @default false
    * @description 反转背景色，背景色为icon传入的颜色，icon为白色。
    */
   @property({
@@ -417,6 +417,14 @@ export class CardItemElement extends UpdatingElement {
     type: Number,
   })
   imgSize: number;
+
+  /**
+   * @kind  "circle" | "square" | "round-square"
+   * @default  "circle"
+   * @required false
+   * @description 设置icon背景形状，仅在设置`bg`为true时有效
+   */
+  @property({ attribute: false }) shape: "circle" | "square" | "round-square";
 
   constructor() {
     super();
@@ -590,6 +598,7 @@ export class CardItemElement extends UpdatingElement {
             imgSrc={mutableProps.imgSrc}
             showImg={this.showImg}
             imgSize={this.imgSize}
+            shape={this.shape}
           />
         </BrickWrapper>,
         this._mountPoint,
