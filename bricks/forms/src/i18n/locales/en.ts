@@ -112,6 +112,12 @@ const locale: Locale = {
   [K.DELETE_STRUCTURE_ITEM_PREFIX]:
     "Are you sure you want to delete the structure item",
   [K.DELETE_STRUCTURE_ITEM_POSTFIX]: "?",
+  [K.WEEK]: "Week",
+  [K.HOUR]: "Hour",
+  [K.SECOND]: "Second",
+  [K.MILLSECOND]: "Millsecond",
+  [K.DAY]: "Day",
+  [K.MINUTE]: "Minute",
 };
 
 export default locale;

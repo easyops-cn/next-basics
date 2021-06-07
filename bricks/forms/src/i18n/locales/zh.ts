@@ -103,6 +103,12 @@ const locale: Locale = {
   [K.NOTICE]: "提示",
   [K.DELETE_STRUCTURE_ITEM_PREFIX]: "确认要删除结构项",
   [K.DELETE_STRUCTURE_ITEM_POSTFIX]: "吗?",
+  [K.DAY]: "天",
+  [K.WEEK]: "周",
+  [K.HOUR]: "小时",
+  [K.SECOND]: "秒",
+  [K.MINUTE]: "分",
+  [K.MILLSECOND]: "毫秒",
 };
 
 export default locale;
