@@ -20,7 +20,7 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
   },
   {
     type: "brick",
-    name: "basic-bricks.grid-layout",
+    name: "basic-bricks.easy-view",
   },
   {
     type: "brick",
