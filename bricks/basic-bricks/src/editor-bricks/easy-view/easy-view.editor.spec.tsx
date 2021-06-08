@@ -4,6 +4,7 @@ import * as helper from "@next-core/editor-bricks-helper";
 import { EasyViewEditor } from "./easy-view.editor";
 
 const mockUseBuilderNode = jest.spyOn(helper, "useBuilderNode");
+const mockUseOutlineEnabled = jest.spyOn(helper, "useOutlineEnabled");
 
 describe("EasyViewEditor", () => {
   it("should work with gridAreas", () => {
@@ -23,8 +24,10 @@ describe("EasyViewEditor", () => {
         containerStyle: { height: "100%", gap: "10px" },
       },
     });
+    mockUseOutlineEnabled.mockReturnValueOnce(false);
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
+    expect(container.hasClass("outlineEnabled")).toBe(false);
     expect(container.prop("style")).toEqual({
       gridTemplateAreas: undefined,
       gridTemplateColumns: "repeat(12, 1fr)",
@@ -79,8 +82,10 @@ describe("EasyViewEditor", () => {
         },
       },
     });
+    mockUseOutlineEnabled.mockReturnValueOnce(true);
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
+    expect(container.hasClass("outlineEnabled")).toBe(true);
     expect(container.prop("style")).toEqual({
       gridTemplateAreas: '"a a a" "c . d"',
       gridTemplateColumns: "4fr 2fr 6fr",
@@ -123,6 +128,7 @@ describe("EasyViewEditor", () => {
       alias: "my-brick",
       $$parsedProperties: {},
     });
+    mockUseOutlineEnabled.mockReturnValueOnce(false);
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
     expect(container.prop("style")).toEqual({});

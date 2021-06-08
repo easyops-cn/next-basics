@@ -33,6 +33,30 @@
   flex-shrink: 0;
 }
 
+.outlineToggle {
+  flex-shrink: 0;
+  margin-left: 3px;
+  height: 13px;
+  line-height: 13px;
+  padding: 0 6px;
+  font-size: 8.5px;
+  background-color: rgba(93, 176, 215, 0.15);
+  border: 1px solid rgba(93, 176, 215, 0.5);
+  color: rgb(232, 234, 237);
+  border-radius: 10px;
+  font-family: menlo, monospace;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgb(93, 176, 215);
+  }
+}
+
+.outlineEnabled {
+  color: rgb(32, 33, 36);
+  background-color: rgb(93, 176, 215);
+}
+
 .provider > .nodeNameWrapper > .icon {
   color: var(--theme-orange-color);
 }
