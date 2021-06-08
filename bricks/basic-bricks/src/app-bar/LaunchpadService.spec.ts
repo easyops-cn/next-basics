@@ -22,8 +22,7 @@ const listCollectionData = [
         category: "app",
         prefix: "",
       },
-      link:
-        "https://lanhuapp.com/web/#/item/project/detailDetach?pid=d79ded47-8f66-4ce2-8b29-a154da5ef01d&project_id=d79ded47-8f66-4ce2-8b29-a154da5ef01d&image_id=4564f2e0-b8bb-4174-a8dc-477e296f5558",
+      link: "https://lanhuapp.com/web/#/item/project/detailDetach?pid=d79ded47-8f66-4ce2-8b29-a154da5ef01d&project_id=d79ded47-8f66-4ce2-8b29-a154da5ef01d&image_id=4564f2e0-b8bb-4174-a8dc-477e296f5558",
     },
     microAppId: "a",
     customItemId: "",
@@ -65,11 +64,11 @@ const listCollectionData = [
     customItemId: "",
   },
 ];
-const spyOnListCollection = (LaunchpadApi_listCollection as jest.Mock).mockReturnValue(
-  {
-    list: listCollectionData,
-  }
-);
+const spyOnListCollection = (
+  LaunchpadApi_listCollection as jest.Mock
+).mockReturnValue({
+  list: listCollectionData,
+});
 
 spyOnListCollection.mock;
 const spyOnCreateCollection = LaunchpadApi_createCollection as jest.Mock;
@@ -140,6 +139,7 @@ jest.mock("@next-core/brick-kit", () => {
         },
       ],
     }),
+    getAuth: jest.fn().mockReturnValue({ org: "8888" }),
   };
 });
 jest.mock("@next-sdk/user-service-sdk");
