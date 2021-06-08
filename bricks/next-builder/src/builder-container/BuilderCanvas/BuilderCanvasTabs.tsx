@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { MessageFilled } from "@ant-design/icons";
 import classNames from "classnames";
@@ -6,6 +6,7 @@ import {
   useBuilderData,
   useBuilderGroupedChildNodes,
   useCanvasList,
+  useHighlightNodes,
   useHoverNodeUid,
 } from "@next-core/editor-bricks-helper";
 import { useBuilderUIContext } from "../BuilderUIContext";
@@ -25,8 +26,9 @@ export function BuilderCanvasTabs(): React.ReactElement {
   );
   const canvasList = useCanvasList(rootChildNodes);
   const hoverNodeUid = useHoverNodeUid();
+  const highlightedNodes = useHighlightNodes();
 
-  const nodeUidToCanvasIndexMap: Map<number, number> = React.useMemo(() => {
+  const nodeUidToCanvasIndexMap: Map<number, number> = useMemo(() => {
     const map = new Map<number, number>();
     canvasList.forEach((nodes, index) => {
       const walk = (ids: number[]): void => {
@@ -56,8 +58,13 @@ export function BuilderCanvasTabs(): React.ReactElement {
             [styles.isPortalCanvas]: index > 0,
             [styles.hover]:
               hoverNodeUid &&
-              nodeUidToCanvasIndexMap.get(hoverNodeUid) === index &&
-              canvasIndex !== index,
+              canvasIndex !== index &&
+              nodeUidToCanvasIndexMap.get(hoverNodeUid) === index,
+            [styles.highlighted]:
+              canvasIndex !== index &&
+              Array.from(highlightedNodes).some(
+                (uid) => nodeUidToCanvasIndexMap.get(uid) === index
+              ),
           })}
           onClick={canvasIndex === index ? null : () => setCanvasIndex(index)}
           title={index === 0 ? null : t(K.CANVAS_TYPE_PORTAL)}
@@ -75,6 +82,7 @@ export function BuilderCanvasTabs(): React.ReactElement {
     [
       canvasIndex,
       canvasList,
+      highlightedNodes,
       hoverNodeUid,
       nodeUidToCanvasIndexMap,
       setCanvasIndex,

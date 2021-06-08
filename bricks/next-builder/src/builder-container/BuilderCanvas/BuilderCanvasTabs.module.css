@@ -58,6 +58,7 @@
 
     &.hover {
       border-color: var(--editor-brick-stroke-color-active);
+      box-shadow: 0 0 2px var(--editor-brick-stroke-color-active);
     }
 
     &:not(.active) {
@@ -66,6 +67,11 @@
 
     &.isPortalCanvas {
       min-width: 0;
+    }
+
+    &.highlighted {
+      border-color: var(--theme-orange-color);
+      box-shadow: 0 0 2px var(--theme-orange-color);
     }
   }
 }

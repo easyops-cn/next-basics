@@ -24,7 +24,7 @@ jest.mock("../BuilderUIContext");
 jest.spyOn(helper, "useBuilderData").mockReturnValue({
   rootId: 0,
   nodes: [],
-  edges: ([
+  edges: [
     {
       parent: 1,
       child: 5,
@@ -45,12 +45,12 @@ jest.spyOn(helper, "useBuilderData").mockReturnValue({
       parent: 4,
       child: 9,
     },
-  ] as Partial<helper.BuilderRuntimeEdge>[]) as helper.BuilderRuntimeEdge[],
+  ] as Partial<helper.BuilderRuntimeEdge>[] as helper.BuilderRuntimeEdge[],
 });
 
 jest.spyOn(helper, "useBuilderGroupedChildNodes").mockReturnValue([
   {
-    childNodes: ([
+    childNodes: [
       {
         $$uid: 1,
         alias: "B-001",
@@ -69,7 +69,7 @@ jest.spyOn(helper, "useBuilderGroupedChildNodes").mockReturnValue([
         portal: true,
         alias: "B-004",
       },
-    ] as Partial<helper.BuilderRuntimeNode>[]) as helper.BuilderRuntimeNode[],
+    ] as Partial<helper.BuilderRuntimeNode>[] as helper.BuilderRuntimeNode[],
     mountPoint: "bricks",
   },
 ]);
@@ -82,7 +82,14 @@ const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
 >;
 
+const highlightedNodes = new Set<number>();
+jest.spyOn(helper, "useHighlightNodes").mockReturnValue(highlightedNodes);
+
 describe("BuilderCanvasTabs", () => {
+  beforeEach(() => {
+    highlightedNodes.clear();
+  });
+
   it("should work when canvas index is null", () => {
     mockUseBuilderUIContext.mockReturnValueOnce({
       canvasIndex: null,
@@ -114,6 +121,7 @@ describe("BuilderCanvasTabs", () => {
     expect(wrapper.find(".active").hasClass("isPortalCanvas")).toBe(true);
     expect(wrapper.find(".active").text()).toBe("B-002");
     expect(wrapper.find(".hover").length).toBe(0);
+    expect(wrapper.find(".highlighted").length).toBe(0);
   });
 
   it("should show hover canvas by root child node", () => {
@@ -159,5 +167,14 @@ describe("BuilderCanvasTabs", () => {
     mockUseHoverNodeUid.mockReturnValueOnce(8);
     const wrapper = shallow(<BuilderCanvasTabs />);
     expect(wrapper.find("li").at(1).hasClass("hover")).toBe(true);
+  });
+
+  it("should show highlighted canvas by root child node", () => {
+    mockUseBuilderUIContext.mockReturnValueOnce({
+      canvasIndex: 1,
+    });
+    highlightedNodes.add(1);
+    const wrapper = shallow(<BuilderCanvasTabs />);
+    expect(wrapper.find("li").at(0).hasClass("highlighted")).toBe(true);
   });
 });
