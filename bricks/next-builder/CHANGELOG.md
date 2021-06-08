@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.54.0...@next-bricks/next-builder@1.55.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* prefer easy-view over grid-layout ([1a5f902](https://github.com/easyops-cn/next-basics/commit/1a5f902459a995cb811d15504b36ece65f5cf216))
+
+
+### Features
+
+* support to toggle outline ([a69b42a](https://github.com/easyops-cn/next-basics/commit/a69b42a049f3c14609baa0f515487cf0ea97cc11))
+
+
+
+
+
 # [1.54.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.53.2...@next-bricks/next-builder@1.54.0) (2021-06-07)
 
 

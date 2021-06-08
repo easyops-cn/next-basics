@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.128.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.127.0...@next-bricks/basic-bricks@1.128.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **editors:** refone easy-view editor style ([6976099](https://github.com/easyops-cn/next-basics/commit/697609946bcf6286a7975922ffd86cff435dc594))
+* **general-custom-buttons--editor:** support evaluate placeholder customButtons ([746963d](https://github.com/easyops-cn/next-basics/commit/746963d8b12c69f77f92c192f40ee213f2819a0e))
+
+
+### Features
+
+* support to toggle outline ([a69b42a](https://github.com/easyops-cn/next-basics/commit/a69b42a049f3c14609baa0f515487cf0ea97cc11))
+
+
+
+
+
 # [1.127.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.126.0...@next-bricks/basic-bricks@1.127.0) (2021-06-03)
 
 
