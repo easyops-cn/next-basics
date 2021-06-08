@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.55.0...@next-bricks/next-builder@1.55.1) (2021-06-08)
+
+
+### Bug Fixes
+
+* highlight in canvas tabs ([7f05908](https://github.com/easyops-cn/next-basics/commit/7f05908fa72697164cc29217681cc7f813185b96))
+
+
+
+
+
 # [1.55.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.54.0...@next-bricks/next-builder@1.55.0) (2021-06-08)
 
 
