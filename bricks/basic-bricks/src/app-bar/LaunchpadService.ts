@@ -11,11 +11,11 @@ import {
   LaunchpadApi_createCollection,
   LaunchpadApi_deleteCollection,
 } from "@next-sdk/user-service-sdk";
-import { getRuntime } from "@next-core/brick-kit";
+import { getRuntime, getAuth } from "@next-core/brick-kit";
 import { pick } from "lodash";
 
 export class LaunchpadService {
-  readonly storageKey = "launchpad-recently-visited";
+  readonly storageKey = `launchpad-recently-visited:${getAuth().org}`;
   private storage: JsonStorage;
   private favoriteList: LaunchpadApi_ListCollectionResponseItem[] = [];
   private filteredFavoriteList: LaunchpadApi_ListCollectionResponseItem[] = [];
