@@ -27,7 +27,7 @@ interface CustomButtonProps {
 }
 
 interface GeneralCustomButtonsProperties {
-  customButtons?: CustomButtonProps[];
+  customButtons?: CustomButtonProps[] | string;
   isMoreButton: true;
 }
 
@@ -75,17 +75,19 @@ export function GeneralCustomButtonsEditor({
   const node = useBuilderNode<GeneralCustomButtonsProperties>({ nodeUid });
 
   const { customButtons, isMoreButton } = node.$$parsedProperties;
-  const hasDropdown = customButtons?.some((item) => item.isDropdown);
+  const hasDropdown =
+    Array.isArray(customButtons) &&
+    customButtons.some((item) => item.isDropdown);
 
   return (
     <EditorContainer nodeUid={nodeUid}>
       <div className={styles.customContainer}>
         {isEmpty(customButtons) ? (
           <BaseButton>{node.alias}</BaseButton>
-        ) : (
+        ) : Array.isArray(customButtons) ? (
           customButtons
-            ?.filter((item) => !item.isDropdown)
-            ?.map((item, index) => (
+            .filter((item) => !item.isDropdown)
+            .map((item, index) => (
               <BaseButton key={index} type={item.buttonType}>
                 {item.icon && (
                   <GeneralIcon
@@ -100,6 +102,8 @@ export function GeneralCustomButtonsEditor({
                 {item.text}
               </BaseButton>
             ))
+        ) : (
+          <BaseButton>{"<% … %>"}</BaseButton>
         )}
         {hasDropdown && <DropdownBtn isMoreButton={isMoreButton} />}
       </div>

@@ -143,4 +143,19 @@ describe("GeneralCustomButtonsEditor", () => {
     const dropDownWrapper = wrapper.find(DropdownBtn).shallow();
     expect(dropDownWrapper.find(EllipsisOutlined).length).toEqual(1);
   });
+
+  it("should work when customButtons is evaluate placeholder", () => {
+    mockUseBuilderNode.mockReturnValueOnce({
+      type: "brick",
+      id: "B-001",
+      brick: "general-custom-buttons",
+      alias: "custom-button",
+      $$parsedProperties: {
+        customButtons: "<% [{}] %>",
+      },
+    });
+
+    const wrapper = shallow(<GeneralCustomButtonsEditor nodeUid={1} />);
+    expect(wrapper.find(BaseButton).prop("children")).toEqual("<% … %>");
+  });
 });
