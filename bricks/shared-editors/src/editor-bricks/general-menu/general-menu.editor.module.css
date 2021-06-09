@@ -1,0 +1,44 @@
+.menuContainer {
+  border: 1px solid var(--editor-brick-stroke-color);
+  min-height: 600px;
+  padding: 20px 30px;
+  max-width: 270px;
+  .title {
+    height: 15px;
+    width: 80px;
+    background: var(--editor-brick-skeleton-bg-light);
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--editor-brick-skeleton-bg-light);
+    }
+
+    .text {
+      flex: 1;
+      height: 15px;
+      border-radius: 5px;
+      background: var(--editor-brick-skeleton-bg-light);
+    }
+  }
+
+  .search {
+    height: var(--editor-brick-base-height);
+    border-radius: var(--editor-brick-border-radius);
+    border: 1px solid var(--editor-brick-stroke-color);
+    padding: 4px 12px;
+    margin-bottom: 15px;
+    text-align: right;
+    .searchIcon {
+      color: var(--editor-brick-stroke-color);
+    }
+  }
+}

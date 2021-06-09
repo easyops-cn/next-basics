@@ -13,6 +13,8 @@ import { UseBrickConf } from "@next-core/brick-types";
 /**
  * @id basic-bricks.sub-menu-filter
  * @name basic-bricks.sub-menu-filter
+ * @editor shared-editors.general-menu--editor
+ * @editorProps {"showSearch": true}
  * @docKind brick
  * @description 搜索能力二级菜单
  * @author Alex

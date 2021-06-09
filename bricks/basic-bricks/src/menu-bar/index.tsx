@@ -12,6 +12,7 @@ import { MenuBar } from "./MenuBar/MenuBar";
 * @id basic-bricks.menu-bar
 * @name basic-bricks.menu-bar
 * @docKind brick
+* @editor shared-editors.general-menu--editor
 * @description 点击后注意左侧菜单即为效果图，点击浏览器返回
 * @author steve
 * @slots
