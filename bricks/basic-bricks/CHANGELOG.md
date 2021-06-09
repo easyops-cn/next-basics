@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.129.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.128.1...@next-bricks/basic-bricks@1.129.0) (2021-06-09)
+
+
+### Features
+
+* **general-timer:** timer suppert stop and reStart ([8cfac8a](https://github.com/easyops-cn/next-basics/commit/8cfac8aa69a2832003bf9311400f8e570fd70ae7))
+* add brick edtior ([1365227](https://github.com/easyops-cn/next-basics/commit/1365227ae508833eee530539662093952d8f07c2))
+
+
+
+
+
 ## [1.128.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.128.0...@next-bricks/basic-bricks@1.128.1) (2021-06-08)
 
 
