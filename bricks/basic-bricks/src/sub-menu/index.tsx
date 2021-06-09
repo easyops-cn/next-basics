@@ -7,6 +7,7 @@ import { SidebarMenu } from "@next-core/brick-types";
 /**
  * @id basic-bricks.sub-menu
  * @name basic-bricks.sub-menu
+ * @editor shared-editors.general-menu--editor
  * @docKind brick
  * @description 二级菜单
  * @author lynette
