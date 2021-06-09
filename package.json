@@ -95,9 +95,10 @@
   "resolutions": {
     "@types/react": "^16.14.8",
     "lodash": "^4.17.21",
-    "@next-core/brick-types": "^2.29.0"
+    "@next-core/brick-types": "^2.29.0",
+    "@testing-library/dom": "^7.31.2"
   },
   "easyops": {
-    "dev-dependencies": "1.8.25"
+    "dev-dependencies": "1.8.26"
   }
 }
