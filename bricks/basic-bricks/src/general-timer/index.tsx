@@ -61,7 +61,7 @@ export class GeneralTimerElement extends UpdatingElement {
 
   /**
 *
-* @description 重置timer
+* @description 重启timer
 */
   @method() reStartTimer(): void {
     this.stopTimer();
