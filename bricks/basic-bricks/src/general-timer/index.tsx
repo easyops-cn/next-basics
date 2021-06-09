@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { property, BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
+import { property, BrickWrapper, UpdatingElement, method } from "@next-core/brick-kit";
 /**
  * @id basic-bricks.general-timer
  * @name basic-bricks.general-timer
@@ -48,6 +48,25 @@ export class GeneralTimerElement extends UpdatingElement {
 
   private defaultEventName = "general-timer.timing-event";
   private defaultInterval = 60000;
+
+  /**
+ *
+ * @description 停止timer
+ */
+  @method() stopTimer(): void {
+    if (this._intervalId) {
+      clearInterval(this._intervalId);
+    }
+  }
+
+  /**
+*
+* @description 重置timer
+*/
+  @method() reStartTimer(): void {
+    this.stopTimer();
+    this.startTimeout();
+  }
 
   connectedCallback(): void {
     // Don't override user's style settings.
