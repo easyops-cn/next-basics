@@ -27,6 +27,16 @@ const locale: Locale = {
   [K.BUSINESS]: "Business Bricks",
   [K.ALL]: "All",
   [K.DEPRECATED]: "Deprecated",
+  [K.DEBUGGER]: "Debugger",
+  [K.LABEL_FOR_PARAMETERS]: "Parameters:",
+  [K.PLACEHOLDER_FOR_PARAMETERS]: "Please fill in parameters as array in YAML.",
+  [K.ERROR_TITLE_FOR_PARAMETERS]: "Invalid Parameters",
+  [K.ERROR_CONTENT_FOR_PARAMETERS]: "Parameters must be an array!",
+  [K.MAKE_A_REQUEST]: "Make a request",
+  [K.LABEL_FOR_LOADING]: "Loading...",
+  [K.LABEL_FOR_RESPONSE]: "Response:",
+  [K.LABEL_FOR_RESPONSE_OK]: "Response OK:",
+  [K.LABEL_FOR_RESPONSE_ERROR]: "Response Error:",
 };
 
 export default locale;

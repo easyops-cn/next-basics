@@ -28,6 +28,16 @@ const locale: Locale = {
   [K.BUSINESS]: "业务构件",
   [K.ALL]: "全部",
   [K.DEPRECATED]: "废弃",
+  [K.DEBUGGER]: "调试器",
+  [K.LABEL_FOR_PARAMETERS]: "参数:",
+  [K.PLACEHOLDER_FOR_PARAMETERS]: "请以 YAML 格式填入一个数组作为请求参数。",
+  [K.ERROR_TITLE_FOR_PARAMETERS]: "参数错误",
+  [K.ERROR_CONTENT_FOR_PARAMETERS]: "参数必须是一个数组！",
+  [K.MAKE_A_REQUEST]: "执行请求",
+  [K.LABEL_FOR_LOADING]: "加载中...",
+  [K.LABEL_FOR_RESPONSE]: "响应:",
+  [K.LABEL_FOR_RESPONSE_OK]: "响应成功:",
+  [K.LABEL_FOR_RESPONSE_ERROR]: "响应错误:",
 };
 
 export default locale;
