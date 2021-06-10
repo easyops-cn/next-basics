@@ -5,7 +5,6 @@ exports[`GeneralPagination should work 1`] = `
   className=""
   current={1}
   onChange={[MockFunction]}
-  onShowSizeChange={[MockFunction]}
   pageSize={20}
   pageSizeOptions={
     Array [
