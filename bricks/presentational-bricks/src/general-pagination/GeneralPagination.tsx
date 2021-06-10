@@ -13,7 +13,6 @@ interface GeneralPaginationProps {
   pageSize: number;
   total: number;
   handleOnChange: (page: number, size: number) => void;
-  onShowSizeChange: (current: number, size: number) => void;
 }
 
 export function GeneralPagination(
@@ -40,7 +39,6 @@ export function GeneralPagination(
     showSizeChanger: true,
     pageSizeOptions: ["10", "20", "50"],
     onChange: props.handleOnChange,
-    onShowSizeChange: props.onShowSizeChange
   };
 
   const configProps = { ...defaultPagination, ...(props.configProps || {}) };
@@ -49,7 +47,7 @@ export function GeneralPagination(
     <Pagination
       {...configProps}
       className={classNames({
-        [style.onlyShowTotal]: props.onlyShowTotal
+        [style.onlyShowTotal]: props.onlyShowTotal,
       })}
     />
   );

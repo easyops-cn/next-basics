@@ -4,30 +4,32 @@ import { createHistory, getHistory } from "@next-core/brick-kit";
 
 createHistory();
 
-const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {});
+const spyOnRender = jest
+  .spyOn(ReactDOM, "render")
+  .mockImplementation(() => null);
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
-  .mockImplementation((() => {}) as any);
+  .mockImplementation((() => null) as any);
 
-const mockEventListener = jest.fn(e => {});
+const mockEventListener = jest.fn((e) => null);
 afterEach(() => {
   spyOnRender.mockClear();
 });
 
 const props = {
-  page: 1,
+  page: 3,
   pageSize: 10,
   total: 50,
   configProps: {
-    showSizeChanger: true
+    showSizeChanger: true,
   },
   fields: {
-    total: "total"
+    total: "total",
   },
   dataSource: {
     list: [],
-    total: 500
-  }
+    total: 500,
+  },
 };
 
 describe("presentational-bricks.general-pagination", () => {
@@ -61,6 +63,7 @@ describe("presentational-bricks.general-pagination", () => {
     const history = getHistory();
     const urlSearchParams = new URLSearchParams(history.location.search);
     expect(urlSearchParams.get("page")).toBe("2");
+    expect(urlSearchParams.get("pageSize")).toBe("10");
     document.body.removeChild(element);
   });
 
@@ -74,11 +77,11 @@ describe("presentational-bricks.general-pagination", () => {
     await jest.runAllTimers();
     spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
       "props"
-    ].children.props.onShowSizeChange(1, 50);
+    ].children.props.handleOnChange(3, 15);
     const history = getHistory();
     const urlSearchParams = new URLSearchParams(history.location.search);
     expect(urlSearchParams.get("page")).toBe("1");
-    expect(urlSearchParams.get("pageSize")).toBe("50");
+    expect(urlSearchParams.get("pageSize")).toBe("15");
     document.body.removeChild(element);
   });
 });

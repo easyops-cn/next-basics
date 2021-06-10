@@ -50,23 +50,24 @@ export class GeneralPaginationElement extends UpdatingElement {
     ReactDOM.unmountComponentAtNode(this);
   }
 
-  private _handleOnChange = (page: number, size: number) => {
-    this.pageUpdate.emit({ page });
+  private _handleOnChange = (page: number, pageSize: number) => {
+    // istanbul ignore else
+    if (pageSize !== this.pageSize) {
+      this.page = 1;
+      this.pageSize = pageSize;
+      this.filterUpdate.emit({
+        pageSize,
+        page: 1,
+      });
+    } else if (page !== this.page) {
+      this.page = page;
+      this.pageSize = pageSize;
+      this.pageUpdate.emit({ page });
+    }
     const history = getHistory();
     const urlSearchParams = new URLSearchParams(history.location.search);
-    urlSearchParams.set("page", page as any);
-    history.push(`?${urlSearchParams}`);
-  };
-
-  private _onShowSizeChange = (current: number, size: number): void => {
-    this.filterUpdate.emit({
-      pageSize: size,
-      page: 1,
-    });
-    const history = getHistory();
-    const urlSearchParams = new URLSearchParams(history.location.search);
-    urlSearchParams.set("page", 1 as any);
-    urlSearchParams.set("pageSize", size as any);
+    urlSearchParams.set("page", this.page as any);
+    urlSearchParams.set("pageSize", this.pageSize as any);
     history.push(`?${urlSearchParams}`);
   };
 
@@ -75,6 +76,7 @@ export class GeneralPaginationElement extends UpdatingElement {
       const mutableProps = {
         total: this.total,
       };
+      // istanbul ignore next
       if (this.dataSource) {
         const { total } = this.fields;
         if (total) {
@@ -89,7 +91,6 @@ export class GeneralPaginationElement extends UpdatingElement {
             pageSize={this.pageSize}
             total={mutableProps.total}
             handleOnChange={this._handleOnChange}
-            onShowSizeChange={this._onShowSizeChange}
             onlyShowTotal={this.onlyShowTotal}
           />
         </BrickWrapper>,
