@@ -49,6 +49,7 @@ interface UploadImgProps extends FormItemWrapperProps {
   draggableUploadHint?: string;
   hideUploadButton?: boolean;
   useFullUrlPath?: boolean;
+  getPreview?: boolean;
 }
 
 interface ImageItem {
@@ -160,6 +161,7 @@ export function RealUploadImg(
         handleValueChange({
           images: [
             {
+              ...(props.getPreview ? { preview: newFile.preview } : {}),
               url: newFile.url,
               name: newFile.name,
             },
@@ -176,6 +178,7 @@ export function RealUploadImg(
           images: update(value?.images || [], {
             $push: [
               {
+                ...(props.getPreview ? { preview: newFile.preview } : {}),
                 url: newFile.url,
                 name: newFile.name,
               },
@@ -589,6 +592,7 @@ export function UploadImg(props: UploadImgProps): React.ReactElement {
         autoSize={props.autoSize}
         hideUploadButton={props.hideUploadButton}
         useFullUrlPath={props.useFullUrlPath}
+        getPreview={props.getPreview}
       />
     </FormItemWrapper>
   );

@@ -175,6 +175,16 @@ export class UploadImgElement extends FormItemElement {
   useFullUrlPath: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 配置图片上传事件(change，remove等)是否返回Data URL，常用于预览，形如：data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJAQ...。注意，图片较大时，这个数据可能会很大。
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  getPreview: boolean;
+
+  /**
    * @required false
    * @default -
    * @description 是否可拖拽
@@ -256,6 +266,7 @@ export class UploadImgElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             useFullUrlPath={this.useFullUrlPath}
+            getPreview={this.getPreview}
           />
         </BrickWrapper>,
         this
