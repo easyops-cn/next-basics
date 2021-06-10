@@ -13,18 +13,22 @@ export interface RoutesViewProps {
   handleRouteSelect?: (route: BuilderRouteNode) => void;
 }
 
-const setParent = (node: BuilderRouteNode,filteredMap: Map<string, BuilderRouteNode>,idToRoute:Map<string, BuilderRouteNode>): void => {
-  if(node.parent?.length){
+const setParent = (
+  node: BuilderRouteNode,
+  filteredMap: Map<string, BuilderRouteNode>,
+  idToRoute: Map<string, BuilderRouteNode>
+): void => {
+  if (node.parent?.length) {
     const parentId = node.parent[0].id;
     const parent = idToRoute.get(parentId);
-    if(parent){
-      if(!filteredMap.get(parentId)){
-        filteredMap.set(parentId,parent)
+    if (parent) {
+      if (!filteredMap.get(parentId)) {
+        filteredMap.set(parentId, parent);
       }
-      setParent(parent,filteredMap,idToRoute);
+      setParent(parent, filteredMap, idToRoute);
     }
   }
-}
+};
 
 export function RoutesView({
   handleRouteSelect,
@@ -40,30 +44,33 @@ export function RoutesView({
       routeList.map((node) => [node.id, node])
     );
     const filteredMap = new Map();
-    routeList.forEach(v=>{
-      const matched = v.alias?.toLowerCase().includes(q.trim().toLowerCase() ?? "");
-      if(matched){
-        filteredMap.set(v.id,idToRoute.get(v.id));
-        setParent(v,filteredMap,idToRoute);
+    routeList.forEach((v) => {
+      const trimQ = q.trim().toLowerCase() ?? "";
+      const matched =
+        v.alias?.toLowerCase().includes(trimQ) ||
+        v.path?.replace("${APP.homepage}", "")?.toLowerCase()?.includes(trimQ);
+      if (matched) {
+        filteredMap.set(v.id, idToRoute.get(v.id));
+        setParent(v, filteredMap, idToRoute);
       }
     });
     const result = generateRouteTree({
       data: [...filteredMap.values()],
     });
     return result;
-  }, [routeList,q]);
+  }, [routeList, q]);
 
   const handleSelect = (selectedProps: any) => {
     onRouteSelect?.(selectedProps);
     handleRouteSelect?.(selectedProps);
-  }
+  };
 
   const handleQChange = (q: string) => {
-    setQ(q)
-  }
+    setQ(q);
+  };
 
   return (
-    <SearchableTree 
+    <SearchableTree
       list={routeTreeData}
       defaultSelectedKeys={rootNode ? [rootNode.id] : []}
       icon={<BranchesOutlined />}
@@ -73,5 +80,5 @@ export function RoutesView({
       onQChange={handleQChange}
       customClassName={styles.customTree}
     />
-  )
+  );
 }

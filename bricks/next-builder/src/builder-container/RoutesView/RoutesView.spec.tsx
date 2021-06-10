@@ -69,6 +69,16 @@ describe("RoutesView", () => {
     });
     wrapper.update();
     expect(wrapper.find(".matchedStr").length).toBe(2);
+    expect(wrapper.find(".ant-tree-list .ant-tree-treenode").length).toBe(2);
+
+    await act(async () => {
+      wrapper.find(SearchComponent).invoke("onSearch")("/c");
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+    expect(wrapper.find(".matchedStr").length).toBe(0);
+    expect(wrapper.find(".ant-tree-list .ant-tree-treenode").length).toBe(2);
+
     await act(async () => {
       wrapper.find(SearchComponent).invoke("onSearch")(" ");
       await (global as any).flushPromises();
