@@ -18,6 +18,7 @@ export type Shape = "round" | "default";
 /**
  * @id presentational-bricks.brick-general-search
  * @name presentational-bricks.brick-general-search
+ * @editor shared-editors.general-search--editor
  * @docKind brick
  * @description 搜索框，满足大部分的搜索需求
  * @author lynette

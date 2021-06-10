@@ -7,6 +7,7 @@ import { get } from "lodash";
 /**
  * @id presentational-bricks.markdown-display
  * @name presentational-bricks.markdown-display
+ * @editor shared-editors.general-code--editor
  * @docKind brick
  * @description Markdown展示
  * @author lynette
