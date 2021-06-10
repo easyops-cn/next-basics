@@ -1297,12 +1297,12 @@ export class BrickTableElement extends UpdatingElement {
     sorter: Partial<SorterResult<Record<string, any>>>
   ): Record<string, any>[] {
     const tempDataSource: Record<string, any>[] = dataSource || [];
-    const columnKey = sorter.columnKey;
+    const { columnKey, order } = sorter;
     let direction: 1 | -1;
 
-    if (sorter.order === "descend") {
+    if (order === "descend") {
       direction = -1;
-    } else if (sorter.order === "ascend") {
+    } else if (order === "ascend") {
       direction = 1;
     }
 
@@ -1330,6 +1330,13 @@ export class BrickTableElement extends UpdatingElement {
         }
 
         return -direction;
+      });
+      tempDataSource.forEach((item) => {
+        const children = item[this.childrenColumnName];
+
+        if (children) {
+          this.handleFrontendSorter(children, sorter);
+        }
       });
     }
 
