@@ -10,12 +10,12 @@ import {
 import styles from "./general-code.editor.module.css";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface ModalConfirmProperties {}
+interface GeneralCodeProperties {}
 
 export function GeneralCodeEditor({
   nodeUid,
 }: EditorComponentProps): React.ReactElement {
-  const node = useBuilderNode<ModalConfirmProperties>({ nodeUid });
+  const node = useBuilderNode<GeneralCodeProperties>({ nodeUid });
 
   return (
     <EditorContainer nodeUid={nodeUid}>
