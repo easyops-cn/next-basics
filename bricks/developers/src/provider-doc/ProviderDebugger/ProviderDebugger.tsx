@@ -70,6 +70,7 @@ export function ProviderDebugger({
                 highlightActiveLine: false,
                 highlightGutterLine: false,
               }}
+              placeholder={t(K.PLACEHOLDER_FOR_PARAMETERS)}
               onChange={handleRawParametersChange}
               style={{
                 borderRadius: "var(--card-inner-border-radius)",

@@ -17,6 +17,7 @@ const locale: Locale = {
   [K.RETURNS]: "Returns",
   [K.TYPE_REFERENCES]: "Type References",
   [K.NAME]: "Name",
+  [K.PARAMETER_INDEX]: "Parameter index",
   [K.TYPE]: "Type",
   [K.REQUIRED]: "Required",
   [K.DESCRIPTION]: "Description",
@@ -29,7 +30,8 @@ const locale: Locale = {
   [K.DEPRECATED]: "Deprecated",
   [K.DEBUGGER]: "Debugger",
   [K.LABEL_FOR_PARAMETERS]: "Parameters:",
-  [K.PLACEHOLDER_FOR_PARAMETERS]: "Please fill in parameters as array in YAML.",
+  [K.PLACEHOLDER_FOR_PARAMETERS]:
+    "Please fill in parameter list as array in YAML.",
   [K.ERROR_TITLE_FOR_PARAMETERS]: "Invalid Parameters",
   [K.ERROR_CONTENT_FOR_PARAMETERS]: "Parameters must be an array!",
   [K.MAKE_A_REQUEST]: "Make a request",

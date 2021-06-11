@@ -10,10 +10,10 @@ function getServices(): ServiceData[] {
   const brickPackages = developHelper.getBrickPackages();
   const prefix = "bricks/providers-of-";
   return brickPackages
-    .filter(pkg => pkg.filePath.startsWith(prefix))
-    .map(pkg => ({
+    .filter((pkg) => pkg.filePath.startsWith(prefix) && pkg.bricks?.length > 0)
+    .map((pkg) => ({
       id: pkg.filePath.substr(prefix.length).split("/")[0],
-      bricks: pkg.bricks
+      bricks: pkg.bricks,
     }));
 }
 
@@ -23,16 +23,16 @@ export async function redirectTo(): Promise<string> {
 }
 
 export async function providersSubMenu(): Promise<SidebarMenu> {
-  const menuItems: SidebarMenuItem[] = getServices().map(service => ({
+  const menuItems: SidebarMenuItem[] = getServices().map((service) => ({
     text: service.id,
-    to: `/developers/providers/${service.id}`
+    to: `/developers/providers/${service.id}`,
   }));
   return {
     title: "服务列表",
-    menuItems
+    menuItems,
   };
 }
 
 export async function serviceData(serviceId: string): Promise<ServiceData> {
-  return getServices().find(item => item.id === serviceId);
+  return getServices().find((item) => item.id === serviceId);
 }
