@@ -45,6 +45,7 @@ import { getHistory } from "@next-core/brick-kit";
 import { BrickEventsMap, UseBrickConf } from "@next-core/brick-types";
 import { SortOrder } from "antd/lib/table/interface";
 import { ColumnProps } from "antd/lib/table";
+import { DataIndex } from "rc-table/lib/interface";
 import { MenuIcon } from "@next-core/brick-types";
 import { BrickWrapperConfig } from "../interfaces";
 export interface RowDisabledProps {
@@ -988,19 +989,47 @@ export class BrickTableElement extends UpdatingElement {
   handleFrontendFilterSource(
     data: Record<string, any>[],
     q: string,
-    columns: CustomColumn[]
+    columns: CustomColumn[],
+    filterKeys?: DataIndex[]
   ): Record<string, any>[] {
-    const filterKeys =
-      this.frontSearchFilterKeys || columns.map((column) => column.dataIndex);
-    const dataSource = data.filter((item) => {
-      const valid = filterKeys.map((key) => {
+    const dataSource: Record<string, any>[] = [];
+
+    if (!filterKeys) {
+      filterKeys =
+        this.frontSearchFilterKeys || columns.map((column) => column.dataIndex);
+    }
+
+    data.forEach((item) => {
+      const children = item[this.childrenColumnName];
+
+      if (children) {
+        const filteredChildren = this.handleFrontendFilterSource(
+          children,
+          q,
+          columns,
+          filterKeys
+        );
+
+        if (filteredChildren.length > 0) {
+          dataSource.push({
+            ...item,
+            [this.childrenColumnName]: filteredChildren,
+          });
+          return;
+        }
+      }
+
+      const valid = filterKeys.some((key) => {
         const value = get(item, key);
         if (isNil(value)) {
           return false;
         }
         return JSON.stringify(value).toLowerCase().includes(q);
       });
-      return valid.includes(true);
+
+      if (valid) {
+        dataSource.push(item);
+      }
     });
     return dataSource;
   }
@@ -1268,12 +1297,12 @@ export class BrickTableElement extends UpdatingElement {
     sorter: Partial<SorterResult<Record<string, any>>>
   ): Record<string, any>[] {
     const tempDataSource: Record<string, any>[] = dataSource || [];
-    const columnKey = sorter.columnKey;
+    const { columnKey, order } = sorter;
     let direction: 1 | -1;
 
-    if (sorter.order === "descend") {
+    if (order === "descend") {
       direction = -1;
-    } else if (sorter.order === "ascend") {
+    } else if (order === "ascend") {
       direction = 1;
     }
 
@@ -1301,6 +1330,13 @@ export class BrickTableElement extends UpdatingElement {
         }
 
         return -direction;
+      });
+      tempDataSource.forEach((item) => {
+        const children = item[this.childrenColumnName];
+
+        if (children) {
+          this.handleFrontendSorter(children, sorter);
+        }
       });
     }
 
