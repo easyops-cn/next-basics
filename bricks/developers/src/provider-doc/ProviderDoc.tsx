@@ -8,6 +8,7 @@ import { GeneralType } from "./GeneralType/GeneralType";
 import { GeneralReference } from "./GeneralReference/GeneralReference";
 import { NS_DEVELOPERS, K } from "../i18n/constants";
 import styles from "./ProviderDoc.module.css";
+import { ProviderDebugger } from "./ProviderDebugger/ProviderDebugger";
 
 interface ProviderDocProps {
   docData: ProcessedProviderDoc;
@@ -16,12 +17,18 @@ interface ProviderDocProps {
 
 const gap = 32;
 
-export function ProviderDoc(props: ProviderDocProps): React.ReactElement {
+export function ProviderDoc({
+  docData,
+  showCard,
+}: ProviderDocProps): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
 
-  if (!props.docData) {
+  if (!docData) {
     return null;
   }
+
+  const providerName = `providers-of-${docData.serviceId}.${docData.brickName}`;
+
   const columns: ColumnProps<any>[] = [
     {
       title: t(K.NAME),
@@ -52,17 +59,18 @@ export function ProviderDoc(props: ProviderDocProps): React.ReactElement {
 
   const content = (
     <>
-      <p>{props.docData.comment}</p>
-      {props.docData.endpoint && (
+      <p>{docData.comment}</p>
+      <ProviderDebugger providerName={providerName} />
+      {docData.endpoint && (
         <>
           <h2 style={{ marginTop: gap }}>{t(K.REQUEST)}</h2>
-          <p>{props.docData.endpoint}</p>
+          <p>{docData.endpoint}</p>
         </>
       )}
       <h2 style={{ marginTop: gap }}>{t(K.PARAMETERS)}</h2>
-      {props.docData.parameters.length > 0 ? (
+      {docData.parameters.length > 0 ? (
         <Table
-          dataSource={props.docData.parameters}
+          dataSource={docData.parameters}
           rowKey="name"
           columns={columns}
           pagination={false}
@@ -72,15 +80,12 @@ export function ProviderDoc(props: ProviderDocProps): React.ReactElement {
       )}
       <h2 style={{ marginTop: gap }}>{t(K.RETURNS)}</h2>
       <code>
-        <GeneralType type={props.docData.returns} />
+        <GeneralType type={docData.returns} />
       </code>
       <h2 style={{ marginTop: gap }}>{t(K.TYPE_REFERENCES)}</h2>
-      {props.docData.usedReferenceIds.length > 0 ? (
-        props.docData.usedReferenceIds.map((id) => (
-          <GeneralReference
-            key={id}
-            reference={props.docData.references.get(id)}
-          />
+      {docData.usedReferenceIds.length > 0 ? (
+        docData.usedReferenceIds.map((id) => (
+          <GeneralReference key={id} reference={docData.references.get(id)} />
         ))
       ) : (
         <p>{t(K.NONE)}</p>
@@ -88,11 +93,8 @@ export function ProviderDoc(props: ProviderDocProps): React.ReactElement {
     </>
   );
 
-  return props.showCard ? (
-    <Card
-      title={`providers-of-${props.docData.serviceId}.${props.docData.brickName}`}
-      bordered={false}
-    >
+  return showCard ? (
+    <Card title={providerName} bordered={false}>
       {content}
     </Card>
   ) : (
