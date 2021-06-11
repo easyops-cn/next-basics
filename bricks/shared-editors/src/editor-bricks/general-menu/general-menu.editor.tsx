@@ -11,13 +11,13 @@ import { SearchOutlined } from "@ant-design/icons";
 import styles from "./general-menu.editor.module.css";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface ModalConfirmProperties {}
+interface GeneralMenuProperties {}
 
 export function GeneralMenuEditor({
   nodeUid,
   editorProps,
 }: EditorComponentProps): React.ReactElement {
-  const node = useBuilderNode<ModalConfirmProperties>({ nodeUid });
+  const node = useBuilderNode<GeneralMenuProperties>({ nodeUid });
 
   return (
     <EditorContainer nodeUid={nodeUid}>
