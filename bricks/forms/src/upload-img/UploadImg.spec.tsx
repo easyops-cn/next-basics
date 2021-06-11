@@ -1,5 +1,5 @@
 import React from "react";
-import {  mount } from "enzyme";
+import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { Upload, Modal, message, Input } from "antd";
 import { RcFile } from "antd/lib/upload/interface";
@@ -18,8 +18,7 @@ const fileList = [
     type: "image/png",
     name: "image",
     status: "done",
-    url:
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
   },
 ];
 
@@ -53,8 +52,7 @@ describe("UploadImg", () => {
         type: "application/json",
         name: "json",
         status: "done",
-        url:
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
       },
       fileList: [...fileList],
     });
@@ -173,8 +171,7 @@ describe("UploadImg", () => {
       type: "image/png",
       name: "image",
       status: "done",
-      url:
-        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     });
     expect(wrapper.find(Modal).prop("visible")).toBe(true);
     wrapper.find(Modal).invoke("onCancel")({});
@@ -275,7 +272,7 @@ describe("UploadImg", () => {
     });
     await act(async () => {
       await jest.runAllTimers();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
   });
@@ -324,7 +321,7 @@ describe("UploadImg", () => {
     });
     await act(async () => {
       await jest.runAllTimers();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(2);
   });
@@ -389,7 +386,7 @@ describe("UploadImg", () => {
     });
     await act(async () => {
       await jest.runAllTimers();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(2);
     expect(wrapper.find(Input.TextArea).length).toBe(0);
@@ -449,7 +446,7 @@ describe("UploadImg", () => {
     });
     await act(async () => {
       await jest.runAllTimers();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(1);
     expect(wrapper.find(".upload-file-main-info").length).toBe(1);
@@ -474,10 +471,174 @@ describe("UploadImg", () => {
     });
     await act(async () => {
       await jest.runAllTimers();
-    })
+    });
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
     expect(wrapper.find(".upload-file-main-info").length).toBe(0);
     expect(wrapper.find(".upload-file-error-info").length).toBe(0);
+  });
+
+  it("test getPreview", async () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <UploadImg
+        listType="picture-card"
+        onChange={onChange}
+        bucketName="agile"
+        maxNumber={1}
+        getPreview={true}
+      />
+    );
+    await act(async () => {
+      wrapper.find(Upload).invoke("onChange")({
+        file: {
+          uid: "-img1",
+          size: 1024,
+          type: "image/png",
+          name: "image.png",
+          status: "done",
+          response: {
+            data: {
+              objectName: "image.png",
+            },
+          },
+          originFileObj: new File([], "image.png", { type: "image/png" }),
+        },
+        fileList: [
+          {
+            uid: "-img1",
+            size: 1024,
+            type: "image/png",
+            name: "image.png",
+            status: "done",
+            response: {
+              data: {
+                objectName: "image.png",
+              },
+            },
+            originFileObj: new File([], "image.png", { type: "image/png" }),
+          },
+        ],
+      });
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+    expect(onChange).toBeCalledWith({
+      images: [
+        {
+          name: "image.png",
+          preview: "data:image/png;base64,",
+          url: "api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/agile/object/image.png",
+        },
+      ],
+    });
+
+    const wrapper2 = mount(
+      <UploadImg
+        listType="picture-card"
+        onChange={onChange}
+        bucketName="agile"
+        maxNumber={2}
+        getPreview={true}
+      />
+    );
+    await act(async () => {
+      wrapper2.find(Upload).invoke("onChange")({
+        file: {
+          uid: "-img1",
+          size: 1024,
+          type: "image/png",
+          name: "image.png",
+          status: "done",
+          response: {
+            data: {
+              objectName: "image.png",
+            },
+          },
+          originFileObj: new File([], "image.png", { type: "image/png" }),
+        },
+        fileList: [
+          {
+            uid: "-img1",
+            size: 1024,
+            type: "image/png",
+            name: "image.png",
+            status: "done",
+            response: {
+              data: {
+                objectName: "image.png",
+              },
+            },
+            originFileObj: new File([], "image.png", { type: "image/png" }),
+          },
+        ],
+      });
+      await (global as any).flushPromises();
+    });
+    wrapper2.update();
+    expect(onChange).toBeCalledWith({
+      images: [
+        {
+          name: "image.png",
+          preview: "data:image/png;base64,",
+          url: "api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/agile/object/image.png",
+        },
+      ],
+    });
+
+    // wrapper.setProps({
+    //   maxNumber: 2,
+    //   value: {
+    //     images: [
+    //       {
+    //         url: "image2.png",
+    //       },
+    //       {
+    //         url: "image2.png",
+    //       },
+    //     ],
+    //   },
+    //   getPreview: false
+    // });
+    // await act(async () => {
+    //   wrapper.find(Upload).invoke("onChange")({
+    //     file: {
+    //       uid: "-img1",
+    //       size: 1024,
+    //       type: "image/png",
+    //       name: "image.png",
+    //       status: "done",
+    //       response: {
+    //         data: {
+    //           objectName: "image.png",
+    //         },
+    //       },
+    //       originFileObj: new File([], "image.png", { type: "image/png" }),
+    //     },
+    //     fileList: [
+    //       {
+    //         uid: "-img1",
+    //         size: 1024,
+    //         type: "image/png",
+    //         name: "image.png",
+    //         status: "done",
+    //         response: {
+    //           data: {
+    //             objectName: "image.png",
+    //           },
+    //         },
+    //         originFileObj: new File([], "image.png", { type: "image/png" }),
+    //       },
+    //     ],
+    //   });
+    //   await (global as any).flushPromises();
+    //   await jest.runAllTimers();
+    // })
+    // wrapper.update();
+    // expect(onChange).toBeCalledWith({images: [{
+    //   "name": "image.png",
+    //   "preview": "data:image/png;base64,",
+    //   "url": "api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/agile/object/image.png",
+    // }]});
   });
 });
