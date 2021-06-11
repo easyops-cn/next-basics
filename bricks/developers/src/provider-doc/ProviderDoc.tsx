@@ -31,10 +31,13 @@ export function ProviderDoc({
 
   const columns: ColumnProps<any>[] = [
     {
-      title: t(K.NAME),
-      dataIndex: "name",
+      title: t(K.PARAMETER_INDEX),
+      key: "index",
       className: styles.code,
       width: "20%",
+      render(value, record, index) {
+        return index;
+      },
     },
     {
       title: t(K.TYPE),
@@ -53,7 +56,7 @@ export function ProviderDoc({
     },
     {
       title: t(K.DESCRIPTION),
-      dataIndex: ["comment", "shortText"],
+      dataIndex: "name",
     },
   ];
 
