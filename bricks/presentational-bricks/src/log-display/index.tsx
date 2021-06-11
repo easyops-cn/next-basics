@@ -6,6 +6,7 @@ import { LogDisplay } from "./LogDisplay";
 /**
  * @id presentational-bricks.log-display
  * @name presentational-bricks.log-display
+ * @editor shared-editors.general-code--editor
  * @docKind brick
  * @description 显示日志相关信息
  * @author jo

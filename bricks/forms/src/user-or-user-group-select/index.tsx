@@ -17,6 +17,7 @@ import { FormItemElement } from "@next-libs/forms";
 /**
  * @id forms.user-or-user-group-select
  * @name forms.user-or-user-group-select
+ * @editor forms.general-select
  * @docKind brick
  * @description 支持配置选择用户／用户组，下拉框／弹框选择等
  * @author lynette

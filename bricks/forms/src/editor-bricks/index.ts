@@ -13,3 +13,5 @@ import "./general-date-picker/general-date-picker.editor";
 import "./general-time-picker/general-time-picker.editor";
 import "./upload-img/upload-img.editor";
 import "./general-buttons/general-buttons.editor";
+import "./time-range-picker/time-range-picker.editor";
+import "./input-with-unit/input-with-unit.editor";

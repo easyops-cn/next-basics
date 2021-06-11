@@ -18,6 +18,7 @@ export interface ImageInfo {
 /**
  * @id presentational-bricks.markdown-editor
  * @name presentational-bricks.markdown-editor
+ * @editor shared-editors.general-code--editor
  * @docKind brick
  * @description Markdown编辑构件
  * @author lynette

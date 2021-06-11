@@ -16,6 +16,7 @@ import { FormModal } from "./FormModal";
 /**
  * @id forms.form-modal
  * @name forms.form-modal
+ * @editor basic-bricks.general-modal--editor
  * @docKind brick
  * @description 表单模态框。要作为表单项，请使用 forms.general-form。
  * @author
