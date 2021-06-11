@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.3.0...@next-bricks/shared-editors@1.4.0) (2021-06-11)
+
+
+### Features
+
+* add general card editor ([f0a6e15](https://github.com/easyops-cn/next-basics/commit/f0a6e15138ae33434631fe1ec17db1afb16553f7))
+
+
+
+
+
 # [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.2.0...@next-bricks/shared-editors@1.3.0) (2021-06-11)
 
 

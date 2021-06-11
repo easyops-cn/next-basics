@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.342.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.3...@next-bricks/developers@1.342.0) (2021-06-11)
+
+
+### Features
+
+* support provider debugger ([1330e37](https://github.com/easyops-cn/next-basics/commit/1330e378d5f1278a1018632a0fb8ef59d2d0bcb4))
+
+
+
+
+
 ## [1.341.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.2...@next-bricks/developers@1.341.3) (2021-06-10)
 
 **Note:** Version bump only for package @next-bricks/developers
