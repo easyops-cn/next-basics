@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.186.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.186.0...@next-bricks/presentational-bricks@1.186.1) (2021-06-11)
+
+
+### Bug Fixes
+
+* **general-pagination:** 修复改变pagesize后两个事件同时触发 ([28692f3](https://github.com/easyops-cn/next-basics/commit/28692f3942c57439ee7047265c513da7513959b5))
+
+
+
+
+
 # [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.185.6...@next-bricks/presentational-bricks@1.186.0) (2021-06-07)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.56.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.55.1...@next-bricks/next-builder@1.56.0) (2021-06-11)
+
+
+### Features
+
+* **builder-container:** 支持搜索路由的path ([b651707](https://github.com/easyops-cn/next-basics/commit/b651707ffd2fbb636e27bac33ef0b5bae6ac6348))
+
+
+
+
+
 ## [1.55.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.55.0...@next-bricks/next-builder@1.55.1) (2021-06-08)
 
 
