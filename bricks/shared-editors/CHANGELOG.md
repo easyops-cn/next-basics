@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.2.0...@next-bricks/shared-editors@1.3.0) (2021-06-11)
+
+
+### Features
+
+* add brick editor ([c084a74](https://github.com/easyops-cn/next-basics/commit/c084a746ecb5822675f0113282b84caa64a9455d))
+
+
+
+
+
 # [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.1.0...@next-bricks/shared-editors@1.2.0) (2021-06-09)
 
 

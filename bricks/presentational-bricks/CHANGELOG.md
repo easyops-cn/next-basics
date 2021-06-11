@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.186.1...@next-bricks/presentational-bricks@1.187.0) (2021-06-11)
+
+
+### Features
+
+* add brick editor ([c084a74](https://github.com/easyops-cn/next-basics/commit/c084a746ecb5822675f0113282b84caa64a9455d))
+* **brick-table:** front end filter support tree data ([35dc794](https://github.com/easyops-cn/next-basics/commit/35dc79424eccda0ab6aa700e69cfd520638cdf6f))
+* **brick-table:** front end sort support tree data ([ba2a4ba](https://github.com/easyops-cn/next-basics/commit/ba2a4ba3f12882de19c92c916805ef7dbebacd08))
+
+
+
+
+
 ## [1.186.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.186.0...@next-bricks/presentational-bricks@1.186.1) (2021-06-11)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.169.0...@next-bricks/forms@1.170.0) (2021-06-11)
+
+
+### Bug Fixes
+
+* **upload-images:** 上传图片构件支持返回data url, update unit test ([ecfe794](https://github.com/easyops-cn/next-basics/commit/ecfe794f9336c8dddbfa9adc8d85b00b68a22db7))
+
+
+### Features
+
+* add brick editor ([c084a74](https://github.com/easyops-cn/next-basics/commit/c084a746ecb5822675f0113282b84caa64a9455d))
+* **upload-images:** 上传图片构件支持返回data url ([d678c06](https://github.com/easyops-cn/next-basics/commit/d678c06de4241ec4206daeb7a063fe1126270c42))
+
+
+
+
+
 # [1.169.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.168.0...@next-bricks/forms@1.169.0) (2021-06-07)
 
 
