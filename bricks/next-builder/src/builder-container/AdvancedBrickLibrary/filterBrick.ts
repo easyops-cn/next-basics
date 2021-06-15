@@ -33,7 +33,7 @@ export function filterBricks({
   appId: string;
   rootNode?: BuilderRouteOrBrickNode;
 }) {
-  const formatBirckList = processBricks(
+  const formatBrickList = processBricks(
     rootNode?.type === "custom-template"
       ? brickList.filter((item) => item.name !== rootNode.templateId)
       : brickList,
@@ -44,11 +44,11 @@ export function filterBricks({
 
   const keywords = (q ?? "").toLowerCase().match(/\S+/g);
   if (!keywords) {
-    return formatBirckList.slice(0, limit);
+    return formatBrickList.slice(0, limit);
   }
 
   const bricks: BrickOptionItem[] = [];
-  for (const brick of formatBirckList) {
+  for (const brick of formatBrickList) {
     if (
       keywords.every(
         (keyword) =>
@@ -105,7 +105,10 @@ export function processBricks(
 }
 
 export function getShortName(brick: BrickOptionItem, appId: string): string {
-  if (brick.type === "customTemplate" && !brick.name.includes(".")) {
+  if (
+    ["customTemplate", "snippet"].includes(brick.type) &&
+    !brick.name.includes(".")
+  ) {
     return brick.name;
   } else {
     const [, ...rest] = brick.name.split(".");

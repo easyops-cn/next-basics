@@ -45,6 +45,15 @@ describe("processor", () => {
       const result = getShortName(brick, "my-app");
       expect(result).toEqual("tpl-my-template");
     });
+
+    it("should return snippet type", () => {
+      const brick = {
+        type: "snippet",
+        name: "snippet-test",
+      } as BrickOptionItem;
+      const result = getShortName(brick, "my-app");
+      expect(result).toEqual("snippet-test");
+    });
   });
 
   describe("process bricks", () => {

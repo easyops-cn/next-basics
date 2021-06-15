@@ -16,6 +16,7 @@ import {
   ContextConf,
   BuilderRouteNode,
   BuilderCustomTemplateNode,
+  BuilderSnippetNode,
   Story,
 } from "@next-core/brick-types";
 import {
@@ -68,6 +69,9 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property({ attribute: false })
   brickList: BrickOptionItem[];
+
+  @property({ attribute: false })
+  snippetList: BuilderSnippetNode[];
 
   @property({ attribute: false })
   storyList: Story[];
@@ -157,6 +161,11 @@ export class BuilderContainerElement extends UpdatingElement {
   private _templateSelectEmitter: EventEmitter<BuilderCustomTemplateNode>;
 
   @event({
+    type: "snippet.select",
+  })
+  private _snippetSelectEmitter: EventEmitter<BuilderSnippetNode>;
+
+  @event({
     type: "current.route.click",
   })
   private _currentRouteClickEmitter: EventEmitter<BuilderRouteNode>;
@@ -165,6 +174,11 @@ export class BuilderContainerElement extends UpdatingElement {
     type: "current.template.click",
   })
   private _currentTemplateClickEmitter: EventEmitter<BuilderCustomTemplateNode>;
+
+  @event({
+    type: "current.snippet.click",
+  })
+  private _currentSnippetClickEmitter: EventEmitter<BuilderSnippetNode>;
 
   @event({
     type: "project.buildAndPush",
@@ -380,6 +394,10 @@ export class BuilderContainerElement extends UpdatingElement {
     this._templateSelectEmitter.emit(template);
   };
 
+  private _handleSnippetSelect = (snippet: BuilderSnippetNode): void => {
+    this._snippetSelectEmitter.emit(snippet);
+  };
+
   private _handleCurrentRouteClick = (route: BuilderRouteNode): void => {
     this._currentRouteClickEmitter.emit(route);
   };
@@ -388,6 +406,10 @@ export class BuilderContainerElement extends UpdatingElement {
     template: BuilderCustomTemplateNode
   ): void => {
     this._currentTemplateClickEmitter.emit(template);
+  };
+
+  private _handleCurrentSnippetClick = (template: BuilderSnippetNode): void => {
+    this._currentSnippetClickEmitter.emit(template);
   };
 
   private _handleBuildAndPush = (): void => {
@@ -472,6 +494,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 dataSource={this.dataSource}
                 routeList={this.routeList}
                 brickList={this.brickList}
+                snippetList={this.snippetList}
                 storyList={this.storyList}
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}
@@ -495,8 +518,10 @@ export class BuilderContainerElement extends UpdatingElement {
                 onContextUpdate={this._handleContextUpdate}
                 onRouteSelect={this._handleRouteSelect}
                 onTemplateSelect={this._handleTemplateSelect}
+                onSnippetSelect={this._handleSnippetSelect}
                 onCurrentRouteClick={this._handleCurrentRouteClick}
                 onCurrentTemplateClick={this._handleCurrentTemplateClick}
+                onCurrentSnippetClick={this._handleCurrentSnippetClick}
                 onBuildAndPush={this._handleBuildAndPush}
                 onPreview={this._handlePreview}
                 onAskForAppendingBrick={this._handleAskForAppendingBrick}

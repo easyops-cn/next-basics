@@ -48,6 +48,7 @@ export enum BuilderDataType {
   ROUTE_OF_ROUTES = "route-of-routes",
   ROUTE_OF_REDIRECT = "route-of-redirect",
   CUSTOM_TEMPLATE = "custom-template",
+  SNIPPET = "snippet",
   UNKNOWN = "unknown",
 }
 

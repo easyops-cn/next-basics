@@ -15,11 +15,12 @@ const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
 >;
 
 const [
+  mockCurrentSnippetClick,
   mockCurrentTemplateClick,
   mockCurrentRouteClick,
   mockBuildAndPush,
   mockPreview,
-] = [jest.fn(), jest.fn(), jest.fn(), jest.fn()];
+] = [jest.fn(), jest.fn(), jest.fn(), jest.fn(), jest.fn()];
 
 describe("BuilderToolbar", () => {
   beforeEach(() => {
@@ -55,6 +56,7 @@ describe("BuilderToolbar", () => {
   it("should work with custom template", async () => {
     mockUseBuilderUIContext.mockReturnValue({
       onCurrentTemplateClick: mockCurrentTemplateClick,
+      onCurrentSnippetClick: mockCurrentSnippetClick,
       onCurrentRouteClick: mockCurrentRouteClick,
       onBuildAndPush: mockBuildAndPush,
       onPreview: mockPreview,
@@ -75,6 +77,32 @@ describe("BuilderToolbar", () => {
       .filter("[data-testid='view-template']")
       .simulate("click");
     expect(mockCurrentTemplateClick).toBeCalled();
+  });
+
+  it("should work with snippet", async () => {
+    mockUseBuilderUIContext.mockReturnValue({
+      onCurrentTemplateClick: mockCurrentTemplateClick,
+      onCurrentSnippetClick: mockCurrentSnippetClick,
+      onCurrentRouteClick: mockCurrentRouteClick,
+      onBuildAndPush: mockBuildAndPush,
+      onPreview: mockPreview,
+      dataType: BuilderDataType.SNIPPET,
+    });
+    mockUseBuilderNode.mockReturnValue({
+      id: "S-01",
+      type: "snippet",
+      snippetId: "snippet-test",
+    });
+    const wrapper = shallow(<BuilderToolbar />);
+    expect(wrapper.find(".tabLink").length).toBe(5);
+    expect(
+      wrapper.find(".tabLink").filter("[data-testid='view-snippet']").length
+    ).toBe(1);
+    wrapper
+      .find(".tabLink")
+      .filter("[data-testid='view-snippet']")
+      .simulate("click");
+    expect(mockCurrentSnippetClick).toBeCalled();
   });
 
   it("should enter fullscreen", () => {

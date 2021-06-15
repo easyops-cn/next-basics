@@ -5,6 +5,7 @@ import {
   ContextConf,
   BuilderRouteNode,
   BuilderCustomTemplateNode,
+  BuilderSnippetNode,
   Story,
 } from "@next-core/brick-types";
 import {
@@ -41,6 +42,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   dataSource?: BuilderRouteOrBrickNode[];
   routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
+  snippetList?: BuilderSnippetNode[];
   storyList: Story[];
   processing?: boolean;
   initialFullscreen?: boolean;
@@ -61,8 +63,10 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onContextUpdate?: (context: ContextConf[]) => void;
   onRouteSelect?: (route: BuilderRouteNode) => void;
   onTemplateSelect?: (template: BuilderCustomTemplateNode) => void;
+  onSnippetSelect?: (snippet: BuilderSnippetNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;
   onCurrentTemplateClick?: (template: BuilderCustomTemplateNode) => void;
+  onCurrentSnippetClick?: (snippet: BuilderSnippetNode) => void;
   onBuildAndPush?: () => void;
   onPreview?: () => void;
   onEventNodeClick?: (eventNode: EventStreamNode) => void;
@@ -78,6 +82,7 @@ export function LegacyBuilderContainer(
     dataSource,
     routeList,
     brickList,
+    snippetList,
     storyList,
     processing,
     initialFullscreen,
@@ -103,8 +108,10 @@ export function LegacyBuilderContainer(
     onContextUpdate,
     onRouteSelect,
     onTemplateSelect,
+    onSnippetSelect,
     onCurrentRouteClick,
     onCurrentTemplateClick,
+    onCurrentSnippetClick,
     onBuildAndPush,
     onPreview,
     onEventNodeClick,
@@ -174,6 +181,9 @@ export function LegacyBuilderContainer(
           break;
         case "custom-template":
           type = BuilderDataType.CUSTOM_TEMPLATE;
+          break;
+        case "snippet":
+          type = BuilderDataType.SNIPPET;
           break;
         // Rest types are currently not supported,
         // such as `"brick"`.
@@ -284,6 +294,7 @@ export function LegacyBuilderContainer(
         appId,
         dataType,
         brickList,
+        snippetList,
         storyList,
         processing,
         fullscreen,
@@ -302,8 +313,10 @@ export function LegacyBuilderContainer(
         setStoryboardQuery,
         onRouteSelect,
         onTemplateSelect,
+        onSnippetSelect,
         onCurrentRouteClick,
         onCurrentTemplateClick,
+        onCurrentSnippetClick,
         onBuildAndPush,
         onPreview,
         onEventNodeClick,
