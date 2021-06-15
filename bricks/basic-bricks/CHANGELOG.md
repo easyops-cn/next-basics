@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.129.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.129.1...@next-bricks/basic-bricks@1.129.2) (2021-06-15)
+
+
+### Bug Fixes
+
+* **easy-view--editor:** set min-height to 100% ([d892a3e](https://github.com/easyops-cn/next-basics/commit/d892a3ec4f3ff8885ea66a333c0dde3aaa8e6584))
+
+
+
+
+
 ## [1.129.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.129.0...@next-bricks/basic-bricks@1.129.1) (2021-06-09)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
