@@ -1,4 +1,8 @@
-.wrapper,
+.wrapper {
+  min-height: 100%;
+}
+
+.wrapper.empty,
 .areaContainer {
   min-height: var(--editor-brick-base-height);
 }
