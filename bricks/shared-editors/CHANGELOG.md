@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.4.1...@next-bricks/shared-editors@1.4.2) (2021-06-15)
+
+
+### Bug Fixes
+
+* remove unused code ([e7df2df](https://github.com/easyops-cn/next-basics/commit/e7df2dfc0416d752ae861e4cff095baaaf242c1d))
+
+
+
+
+
 ## [1.4.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.4.0...@next-bricks/shared-editors@1.4.1) (2021-06-15)
 
 **Note:** Version bump only for package @next-bricks/shared-editors
