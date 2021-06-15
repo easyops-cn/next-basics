@@ -62,6 +62,7 @@ export function EasyViewEditor({
       <div
         className={classnames(styles.wrapper, {
           [styles.outlineEnabled]: outlineEnabled,
+          [styles.empty]: areas.length === 0,
         })}
         style={{
           gridTemplateAreas: gridTemplateAreas

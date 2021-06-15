@@ -28,6 +28,7 @@ describe("EasyViewEditor", () => {
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
     expect(container.hasClass("outlineEnabled")).toBe(false);
+    expect(container.hasClass("empty")).toBe(false);
     expect(container.prop("style")).toEqual({
       gridTemplateAreas: undefined,
       gridTemplateColumns: "repeat(12, 1fr)",
@@ -86,6 +87,7 @@ describe("EasyViewEditor", () => {
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
     expect(container.hasClass("outlineEnabled")).toBe(true);
+    expect(container.hasClass("empty")).toBe(false);
     expect(container.prop("style")).toEqual({
       gridTemplateAreas: '"a a a" "c . d"',
       gridTemplateColumns: "4fr 2fr 6fr",
@@ -131,6 +133,7 @@ describe("EasyViewEditor", () => {
     mockUseOutlineEnabled.mockReturnValueOnce(false);
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
+    expect(container.hasClass("empty")).toBe(true);
     expect(container.prop("style")).toEqual({});
     expect(container.children().length).toBe(0);
   });
