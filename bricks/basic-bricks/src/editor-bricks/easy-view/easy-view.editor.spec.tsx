@@ -1,10 +1,14 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import * as helper from "@next-core/editor-bricks-helper";
 import { EasyViewEditor } from "./easy-view.editor";
 
 const mockUseBuilderNode = jest.spyOn(helper, "useBuilderNode");
 const mockUseOutlineEnabled = jest.spyOn(helper, "useOutlineEnabled");
+const mockUseBuilderGroupedChildNodes = jest.spyOn(
+  helper,
+  "useBuilderGroupedChildNodes"
+);
 
 describe("EasyViewEditor", () => {
   it("should work with gridAreas", () => {
@@ -25,6 +29,22 @@ describe("EasyViewEditor", () => {
       },
     });
     mockUseOutlineEnabled.mockReturnValueOnce(false);
+    mockUseBuilderGroupedChildNodes.mockReturnValueOnce([
+      {
+        mountPoint: "a",
+        childNodes: [],
+      },
+      {
+        mountPoint: "c",
+        childNodes: [
+          {
+            id: "B-001",
+            type: "brick",
+            brick: "my-brick",
+          },
+        ],
+      },
+    ]);
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
     expect(container.hasClass("outlineEnabled")).toBe(false);
@@ -36,30 +56,29 @@ describe("EasyViewEditor", () => {
       gap: "10px",
     });
     expect(container.children().length).toBe(3);
-    expect(
+
+    const findSlotContainerByName = (slotName: string): ShallowWrapper =>
       container
-        .findWhere((child) => child.prop("slotName") === "a")
-        .parent()
-        .prop("style")
-    ).toEqual({
+        .findWhere((child) => child.prop("slotName") === slotName)
+        .parent();
+
+    const slotA = findSlotContainerByName("a");
+    expect(slotA.prop("style")).toEqual({
       gridArea: "1 / 1 / 2 / 13",
     });
-    expect(
-      container
-        .findWhere((child) => child.prop("slotName") === "c")
-        .parent()
-        .prop("style")
-    ).toEqual({
+    expect(slotA.hasClass("empty")).toBe(true);
+
+    const slotC = findSlotContainerByName("c");
+    expect(slotC.prop("style")).toEqual({
       gridArea: "2 / 1 / 3 / 5",
     });
-    expect(
-      container
-        .findWhere((child) => child.prop("slotName") === "d")
-        .parent()
-        .prop("style")
-    ).toEqual({
+    expect(slotC.hasClass("empty")).toBe(false);
+
+    const slotD = findSlotContainerByName("d");
+    expect(slotD.prop("style")).toEqual({
       gridArea: "2 / 5 / 3 / 13",
     });
+    expect(slotD.hasClass("empty")).toBe(true);
   });
 
   it("should work with gridTemplateAreas", () => {
@@ -84,6 +103,7 @@ describe("EasyViewEditor", () => {
       },
     });
     mockUseOutlineEnabled.mockReturnValueOnce(true);
+    mockUseBuilderGroupedChildNodes.mockReturnValueOnce([]);
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
     expect(container.hasClass("outlineEnabled")).toBe(true);
@@ -95,29 +115,20 @@ describe("EasyViewEditor", () => {
       gridGap: "10px",
     });
     expect(container.children().length).toBe(3);
-    expect(
+
+    const findSlotContainerStyleByName = (slotName: string): ShallowWrapper =>
       container
-        .findWhere((child) => child.prop("slotName") === "a")
+        .findWhere((child) => child.prop("slotName") === slotName)
         .parent()
-        .prop("style")
-    ).toEqual({
+        .prop("style");
+    expect(findSlotContainerStyleByName("a")).toEqual({
       gridArea: "a",
       justifySelf: "center",
     });
-    expect(
-      container
-        .findWhere((child) => child.prop("slotName") === "c")
-        .parent()
-        .prop("style")
-    ).toEqual({
+    expect(findSlotContainerStyleByName("c")).toEqual({
       gridArea: "c",
     });
-    expect(
-      container
-        .findWhere((child) => child.prop("slotName") === "d")
-        .parent()
-        .prop("style")
-    ).toEqual({
+    expect(findSlotContainerStyleByName("d")).toEqual({
       gridArea: "d",
     });
   });
@@ -131,6 +142,7 @@ describe("EasyViewEditor", () => {
       $$parsedProperties: {},
     });
     mockUseOutlineEnabled.mockReturnValueOnce(false);
+    mockUseBuilderGroupedChildNodes.mockReturnValueOnce([]);
     const wrapper = shallow(<EasyViewEditor nodeUid={1} />);
     const container = wrapper.find(".wrapper");
     expect(container.hasClass("empty")).toBe(true);

@@ -8,6 +8,7 @@ import {
   EditorElementFactory,
   EditorSelfLayout,
   SlotContainer,
+  useBuilderGroupedChildNodes,
   useBuilderNode,
   useOutlineEnabled,
 } from "@next-core/editor-bricks-helper";
@@ -35,6 +36,7 @@ export function EasyViewEditor({
     containerStyle,
     styleByAreas,
   } = node.$$parsedProperties;
+  const childNodesByMountPoint = useBuilderGroupedChildNodes({ nodeUid });
 
   const areas = gridAreas
     ? Object.keys(gridAreas)
@@ -79,12 +81,20 @@ export function EasyViewEditor({
       >
         {areas.map((area) => (
           <div
-            className={styles.areaContainer}
+            className={classnames(styles.areaContainer, {
+              [styles.empty]: !(
+                childNodesByMountPoint.find(
+                  (group) => group.mountPoint === area
+                )?.childNodes.length > 0
+              ),
+            })}
             key={area}
             style={{
               gridArea: gridAreas ? gridAreas[area].join(" / ") : area,
               ...styleByAreas?.[area],
             }}
+            // This is used in css as `content: attr(data-area-id)`.
+            data-area-id={area}
           >
             <SlotContainer
               nodeUid={nodeUid}
