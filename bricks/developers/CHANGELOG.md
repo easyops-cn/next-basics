@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.342.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.0...@next-bricks/developers@1.342.1) (2021-06-15)
+
+
+### Bug Fixes
+
+* refine provider debugger ([00ef0e4](https://github.com/easyops-cn/next-basics/commit/00ef0e4bbc3c0725df875677a478fda753b694cf))
+
+
+
+
+
 # [1.342.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.3...@next-bricks/developers@1.342.0) (2021-06-11)
 
 
