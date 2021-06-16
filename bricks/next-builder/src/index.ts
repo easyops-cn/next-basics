@@ -15,3 +15,4 @@ import "./data-providers/GetBrickLibrary";
 import "./data-providers/StoryboardAssembly";
 import "./data-providers/ScanI18nInStoryboard";
 import "./data-providers/FindReferencesOfTemplate";
+import "./data-providers/ApplyStoryboardSnippet";
