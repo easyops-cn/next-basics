@@ -23,12 +23,15 @@ export async function AddStoryboardNodeAndReorder({
   nodeAlias,
 }: AddStoryboardNodeAndReorderParams): Promise<EventDetailOfNodeAddStored> {
   const stored = await InstanceApi_createInstance(STORYBOARD_BRICK, nodeData);
-  // `nodeIds` are sorted, and there is a placeholder of `null` which
-  // represents the newly added node. Replace it with the stored id.
-  const newNodeIds = nodeIds.map((id) => (id === null ? stored.id : id));
-  await StoryboardApi_sortStoryboardNodes({
-    nodeIds: newNodeIds,
-  });
+
+  if (nodeIds.length > 0) {
+    // `nodeIds` are sorted, and there is a placeholder of `null` which
+    // represents the newly added node. Replace it with the stored id.
+    const newNodeIds = nodeIds.map((id) => (id === null ? stored.id : id));
+    await StoryboardApi_sortStoryboardNodes({
+      nodeIds: newNodeIds,
+    });
+  }
 
   return {
     nodeData: stored as BuilderRouteOrBrickNode,

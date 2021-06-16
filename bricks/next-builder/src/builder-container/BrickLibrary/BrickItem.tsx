@@ -4,6 +4,7 @@ import {
   CopyFilled,
   DatabaseFilled,
   GoldenFilled,
+  NumberOutlined,
 } from "@ant-design/icons";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { useDrag } from "react-dnd";
@@ -30,12 +31,20 @@ export function BrickItem({
     // `customTemplate` will be treated as `brick`.
   }
 
+  const transferItem =
+    brick.type === "snippet"
+      ? {
+          type: BuilderDataTransferType.SNIPPET_TO_APPLY,
+          bricks: brick.bricks,
+        }
+      : {
+          type: BuilderDataTransferType.NODE_TO_ADD,
+          brickType,
+          brick: brick.name,
+        };
+
   const [{ isDragging }, dragRef] = useDrag({
-    item: {
-      type: BuilderDataTransferType.NODE_TO_ADD,
-      brickType,
-      brick: brick.name,
-    },
+    item: transferItem,
     options: {
       dropEffect: "copy",
     },
@@ -50,18 +59,25 @@ export function BrickItem({
 
   let icon: JSX.Element;
 
-  switch (brick.type) {
-    case "provider":
-      icon = <DatabaseFilled />;
-      break;
-    case "template":
-      icon = <GoldenFilled />;
-      break;
-    case "customTemplate":
-      icon = <CopyFilled />;
-      break;
-    default:
-      icon = <BuildFilled />;
+  if (brick.icon) {
+    icon = <GeneralIcon icon={brick.icon} />;
+  } else {
+    switch (brick.type) {
+      case "provider":
+        icon = <DatabaseFilled />;
+        break;
+      case "template":
+        icon = <GoldenFilled />;
+        break;
+      case "customTemplate":
+        icon = <CopyFilled />;
+        break;
+      case "snippet":
+        icon = <NumberOutlined />;
+        break;
+      default:
+        icon = <BuildFilled />;
+    }
   }
 
   return (
@@ -71,10 +87,8 @@ export function BrickItem({
       }`}
       ref={dragRef}
     >
-      <span className={styles.brickIcon}>
-        {brick.icon ? <GeneralIcon icon={brick.icon} /> : icon}
-      </span>
-      <span className={styles.brickName} title={brick.shortName}>
+      <span className={styles.brickIcon}>{icon}</span>
+      <span className={styles.brickName} title={brick.title || brick.shortName}>
         {brick.title || brick.shortName}
       </span>
     </div>

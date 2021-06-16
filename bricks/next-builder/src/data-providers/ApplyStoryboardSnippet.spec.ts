@@ -1,120 +1,114 @@
-import {
-  ApplyStoryBoardSnippet,
-  NodeInstanceWithChildren,
-} from "./ApplyStoryboardSnippet";
 import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
+import { StoryboardApi_sortStoryboardNodes } from "@next-sdk/next-builder-sdk";
+import { EventDetailOfSnippetApply } from "@next-core/editor-bricks-helper";
+import { ApplyStoryBoardSnippet } from "./ApplyStoryboardSnippet";
+
 jest.mock("@next-sdk/cmdb-sdk");
+jest.mock("@next-sdk/next-builder-sdk");
 
 const mockCreateInstance = (
   InstanceApi_createInstance as jest.MockedFunction<
     typeof InstanceApi_createInstance
   >
-)
-  .mockResolvedValueOnce({
-    brick: "basic-bricks.general-card",
-    mountPoint: "content",
-    type: "brick",
-    instanceId: "cbacba",
+).mockImplementation((objectId, data) =>
+  Promise.resolve({
+    ...data,
+    instanceId: `instance:${data.brick}`,
+    id: `id:${data.brick}`,
   })
-  .mockResolvedValueOnce({
-    brick: "forms.general-form",
-    mountPoint: "content",
-    type: "brick",
-    instanceId: "fbcfbc",
-  })
-  .mockResolvedValueOnce({
-    brick: "forms.general-input",
-    mountPoint: "items",
-    type: "brick",
-    instanceId: "6bc6bc",
-  })
-  .mockResolvedValueOnce({
-    brick: "chart-v2.bar-chart",
-    mountPoint: "content",
-    type: "brick",
-    instanceId: "cabcab",
-  });
+);
+
+const mockSortStoryboardNodes =
+  StoryboardApi_sortStoryboardNodes as jest.MockedFunction<
+    typeof StoryboardApi_sortStoryboardNodes
+  >;
+
 describe("ApplyStoryboardSnippet", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should work", async () => {
-    const nodeList: NodeInstanceWithChildren[] = [
-      {
-        appId: "my-app",
-        parent: "abc",
-        brick: "basic-bricks.general-card",
-        type: "brick",
-        mountPoint: "content",
-        children: [
-          {
-            brick: "forms.general-form",
-            mountPoint: "content",
-            type: "brick",
-            children: [
-              {
-                brick: "forms.general-input",
-                mountPoint: "items",
-                type: "brick",
+    const params = {
+      nodeDetails: [
+        {
+          nodeUid: 200,
+          parentUid: 100,
+          nodeAlias: "easy-view",
+          nodeData: {
+            parent: "instance-a",
+            brick: "basic-bricks.easy-view",
+          },
+          children: [
+            {
+              nodeUid: 201,
+              parentUid: 200,
+              nodeAlias: "general-button",
+              nodeData: {
+                brick: "basic-bricks.general-button",
               },
-            ],
-          },
-          {
-            brick: "chart-v2.bar-chart",
-            mountPoint: "content",
-            type: "brick",
-            children: [],
-          },
-        ],
-      },
-    ];
+            },
+          ],
+        },
+      ],
+      nodeIds: ["root", null],
+    } as Partial<EventDetailOfSnippetApply> as EventDetailOfSnippetApply;
 
-    const result = await ApplyStoryBoardSnippet({ nodeList });
+    const result = await ApplyStoryBoardSnippet(params);
 
-    expect(mockCreateInstance.mock.calls[0][1]).toEqual({
-      appId: "my-app",
-      brick: "basic-bricks.general-card",
-      mountPoint: "content",
-      parent: "abc",
-      type: "brick",
-    });
-    expect(
-      mockCreateInstance.mock.calls[mockCreateInstance.mock.calls.length - 1][1]
-    ).toEqual({
-      brick: "chart-v2.bar-chart",
-      mountPoint: "content",
-      parent: "cbacba",
-      type: "brick",
+    expect(mockCreateInstance).toHaveBeenNthCalledWith(1, "STORYBOARD_BRICK", {
+      parent: "instance-a",
+      brick: "basic-bricks.easy-view",
     });
 
-    expect(result).toEqual([
-      {
-        brick: "basic-bricks.general-card",
-        children: [
-          {
-            brick: "forms.general-form",
-            children: [
-              {
-                brick: "forms.general-input",
-                children: [],
-                instanceId: "6bc6bc",
-                mountPoint: "items",
-                type: "brick",
-              },
-            ],
-            instanceId: "fbcfbc",
-            mountPoint: "content",
-            type: "brick",
+    expect(mockCreateInstance).toHaveBeenNthCalledWith(2, "STORYBOARD_BRICK", {
+      parent: "instance:basic-bricks.easy-view",
+      brick: "basic-bricks.general-button",
+    });
+
+    expect(mockSortStoryboardNodes).toBeCalledWith({
+      nodeIds: ["root", "id:basic-bricks.easy-view"],
+    });
+
+    expect(result).toEqual({
+      flattenNodeDetails: [
+        {
+          nodeUid: 200,
+          nodeAlias: "easy-view",
+          nodeData: {
+            parent: "instance-a",
+            brick: "basic-bricks.easy-view",
+            instanceId: "instance:basic-bricks.easy-view",
+            id: "id:basic-bricks.easy-view",
           },
-          {
-            brick: "chart-v2.bar-chart",
-            children: [],
-            instanceId: "cabcab",
-            mountPoint: "content",
-            type: "brick",
+        },
+        {
+          nodeUid: 201,
+          nodeAlias: "general-button",
+          nodeData: {
+            parent: "instance:basic-bricks.easy-view",
+            brick: "basic-bricks.general-button",
+            instanceId: "instance:basic-bricks.general-button",
+            id: "id:basic-bricks.general-button",
           },
-        ],
-        instanceId: "cbacba",
-        mountPoint: "content",
-        type: "brick",
-      },
-    ]);
+        },
+      ],
+    });
+  });
+
+  it("should ignore sort", async () => {
+    const params = {
+      nodeDetails: [],
+      nodeIds: [],
+    } as Partial<EventDetailOfSnippetApply> as EventDetailOfSnippetApply;
+
+    const result = await ApplyStoryBoardSnippet(params);
+
+    expect(mockCreateInstance).not.toBeCalled();
+    expect(mockSortStoryboardNodes).not.toBeCalled();
+
+    expect(result).toEqual({
+      flattenNodeDetails: [],
+    });
   });
 });

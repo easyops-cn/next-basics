@@ -5,6 +5,13 @@ import { BuilderContainer } from "./BuilderContainer";
 import { BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 
+jest.mock("@next-core/brick-kit", () => ({
+  getRuntime: () => ({
+    getFeatureFlags: () => ({
+      "next-builder-installed-bricks": true,
+    }),
+  }),
+}));
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
   BuilderToolbox() {
@@ -44,12 +51,14 @@ const mockRemoveListenersOfNodeAdd = jest.fn();
 const mockRemoveListenersOfNodeMove = jest.fn();
 const mockRemoveListenersOfNodeReorder = jest.fn();
 const mockRemoveListenersOfNodeClick = jest.fn();
+const mockRemoveListenersOfSnippetApply = jest.fn();
 
 const mockManager = {
   onNodeAdd: jest.fn(() => mockRemoveListenersOfNodeAdd),
   onNodeMove: jest.fn(() => mockRemoveListenersOfNodeMove),
   onNodeReorder: jest.fn(() => mockRemoveListenersOfNodeReorder),
   onNodeClick: jest.fn(() => mockRemoveListenersOfNodeClick),
+  onSnippetApply: jest.fn(() => mockRemoveListenersOfSnippetApply),
   dataInit: jest.fn(),
   routeListInit: jest.fn(),
   storyListInit: jest.fn(),
@@ -211,7 +220,7 @@ describe("BuilderContainer", () => {
         dataSource={[
           {
             type: "snippet",
-            templateId: "snippet-test",
+            snippetId: "snippet-test",
             id: "S-001",
           },
         ]}
@@ -219,7 +228,7 @@ describe("BuilderContainer", () => {
     );
     expect(mockManager.dataInit).toBeCalledWith({
       type: "snippet",
-      templateId: "snippet-test",
+      snippetId: "snippet-test",
       id: "S-001",
     });
     expect(mockConsoleError).not.toBeCalled();

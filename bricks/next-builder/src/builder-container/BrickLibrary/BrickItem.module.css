@@ -54,6 +54,10 @@
   color: var(--theme-green-color);
 }
 
+.snippet .brickIcon {
+  color: var(--theme-purple-color);
+}
+
 .light {
   &.brickItem:hover {
     background-color: #4e93ef;

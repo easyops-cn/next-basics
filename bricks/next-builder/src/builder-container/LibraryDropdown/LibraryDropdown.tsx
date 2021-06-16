@@ -1,64 +1,45 @@
 import React, { useState, useRef } from "react";
-import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
-import { Dropdown, Button, Menu, Tooltip } from "antd";
-import { AdvancedBrickLibrary } from "../AdvancedBrickLibrary/AdvancedBrickLibrary";
-import { LibraryMenu } from "../LibraryMenu/LibraryMenu";
 import { useTranslation } from "react-i18next";
+import { Dropdown, Button, Menu, Tooltip } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
-import { libCategoryList, LIB_ALL_CATEGORY } from "../constants";
+import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
-import styles from "./LibraryDropdown.module.css";
 import shareStyles from "../share.module.css";
 
 export function LibraryDropdown(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [visible, setVisible] = useState(false);
-  const libraryRef = useRef<any>();
   const isOpen = useRef(false);
 
-  const handleClick = React.useCallback(() => {
-    isOpen.current = !visible;
-    setVisible(!visible);
-  }, [visible]);
+  const { enabledInstalledBricks, stateOfInstalledBricks } =
+    useBuilderUIContext();
+
+  const handleVisibleChange = React.useCallback((value: boolean) => {
+    isOpen.current = value;
+    setVisible(value);
+  }, []);
 
   const handleClose = React.useCallback(() => {
-    isOpen.current = false;
     setVisible(false);
   }, []);
 
-  const onDraggingChange = React.useCallback((isDragging: boolean): void => {
-    if (isOpen.current) {
-      setVisible(!isDragging);
-    }
-  }, []);
-
-  const handleCategoryChange = (category: string) => {
-    libraryRef.current?.handleSearchWithGroup("", category);
-  };
+  const handleDraggingChange = React.useCallback(
+    (isDragging: boolean): void => {
+      if (isOpen.current) {
+        setVisible(!isDragging);
+      }
+    },
+    []
+  );
 
   const content = (
     <Menu style={{ padding: "2px 0" }}>
-      <div className={styles.wrapper}>
-        <Button
-          type="text"
-          onClick={handleClose}
-          data-testid="close-btn"
-          className={styles.closeBtn}
-        >
-          <CloseOutlined />
-        </Button>
-        <div className={styles.libraryContainer}>
-          <LibraryMenu
-            menuItems={libCategoryList}
-            onItemClick={handleCategoryChange}
-            defaultSelectedKeys={[LIB_ALL_CATEGORY]}
-          />
-          <AdvancedBrickLibrary
-            ref={libraryRef}
-            onDraggingChange={onDraggingChange}
-          />
-        </div>
-      </div>
+      <LibraryDropdownMenu
+        onCloseClick={handleClose}
+        onDraggingChange={handleDraggingChange}
+      />
     </Menu>
   );
 
@@ -69,6 +50,7 @@ export function LibraryDropdown(): React.ReactElement {
       trigger={["click"]}
       placement="bottomLeft"
       visible={visible}
+      onVisibleChange={handleVisibleChange}
     >
       <Tooltip
         title={t(K.BRICK_LIBRARY)}
@@ -79,11 +61,13 @@ export function LibraryDropdown(): React.ReactElement {
         }}
       >
         <Button
-          onClick={handleClick}
           type="primary"
           size="small"
           style={{ marginRight: "10px" }}
-          data-testid="trigger-btn"
+          loading={
+            enabledInstalledBricks &&
+            stateOfInstalledBricks.status === "loading"
+          }
         >
           <PlusOutlined />
         </Button>

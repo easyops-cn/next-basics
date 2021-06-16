@@ -4,6 +4,7 @@ import {
   BuilderDataType,
   ToolboxTab,
   BrickOptionItem,
+  StateOfInstalledBricks,
 } from "./interfaces";
 import {
   BuilderRouteNode,
@@ -21,6 +22,11 @@ export interface ContextOfBuilderUI {
   snippetList?: BuilderSnippetNode[];
   storyList?: Story[];
   processing?: boolean;
+  enabledInstalledBricks?: boolean;
+  stateOfInstalledBricks?: StateOfInstalledBricks;
+  setStateOfInstalledBricks?: React.Dispatch<
+    React.SetStateAction<StateOfInstalledBricks>
+  >;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;
   highlightNodes?: Set<number>;

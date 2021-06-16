@@ -31,6 +31,10 @@ import {
   AbstractBuilderDataManager,
   isRouteNode,
   isBrickNode,
+  EventDetailOfSnippetApply,
+  SnippetNodeDetail,
+  SnippetNodeInstance,
+  EventDetailOfSnippetApplyStored,
 } from "@next-core/editor-bricks-helper";
 import {
   BrickOptionItem,
@@ -39,6 +43,8 @@ import {
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
   BuilderPasteDetailOfCut,
+  InstalledBrick,
+  LazyDataStatus,
   ToolboxTab,
 } from "./interfaces";
 import { BuilderContainer } from "./BuilderContainer";
@@ -46,10 +52,20 @@ import { defaultToolboxTab } from "./constants";
 import { getBuilderClipboard } from "./getBuilderClipboard";
 import { EventStreamNode } from "./EventStreamCanvas/interfaces";
 
+type WithAppId<T> = T & {
+  appId: string;
+};
+
 interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
-  nodeData: NodeInstance & {
-    appId: string;
-  };
+  nodeData: WithAppId<NodeInstance>;
+}
+
+interface FulfilledEventDetailOfSnippetApply extends EventDetailOfSnippetApply {
+  nodeDetails: FulfilledSnippetNodeDetail[];
+}
+
+interface FulfilledSnippetNodeDetail extends SnippetNodeDetail {
+  nodeData: WithAppId<SnippetNodeInstance>;
 }
 
 /**
@@ -105,10 +121,28 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   storyboardQuery: string;
 
+  @property()
+  statusOfLoadingInstalledBricks: LazyDataStatus;
+
+  @property({
+    attribute: false,
+  })
+  errorOfLoadingInstalledBricks: unknown;
+
+  @property({
+    attribute: false,
+  })
+  installedBricks: InstalledBrick[];
+
   @event({
     type: "node.add",
   })
   private _nodeAddEmitter: EventEmitter<FulfilledEventDetailOfBrickAdd>;
+
+  @event({
+    type: "snippet.apply",
+  })
+  private _snippetApply: EventEmitter<FulfilledEventDetailOfSnippetApply>;
 
   @event({
     type: "node.reorder",
@@ -274,6 +308,25 @@ export class BuilderContainerElement extends UpdatingElement {
         appId: this.appId,
         ...event.detail.nodeData,
       },
+    });
+  };
+
+  private _handleSnippetApply = (
+    event: CustomEvent<EventDetailOfSnippetApply>
+  ): void => {
+    const fillAppId = (
+      nodeDetail: SnippetNodeDetail
+    ): FulfilledSnippetNodeDetail => ({
+      ...nodeDetail,
+      nodeData: {
+        ...nodeDetail.nodeData,
+        appId: this.appId,
+      },
+      children: nodeDetail.children.map(fillAppId),
+    });
+    this._snippetApply.emit({
+      ...event.detail,
+      nodeDetails: event.detail.nodeDetails.map(fillAppId),
     });
   };
 
@@ -450,16 +503,25 @@ export class BuilderContainerElement extends UpdatingElement {
     }
   };
 
+  // istanbul ignore next
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._managerRef.current.nodeAddStored(detail);
   }
 
+  // istanbul ignore next
+  @method()
+  snippetApplyStored(detail: EventDetailOfSnippetApplyStored): void {
+    this._managerRef.current.snippetApplyStored(detail);
+  }
+
+  // istanbul ignore next
   @method()
   contextUpdated(detail: EventDetailOfContextUpdated): void {
     this._managerRef.current.contextUpdated(detail);
   }
 
+  // istanbul ignore next
   @method()
   nodeDeleteConfirmed(node: BuilderRuntimeNode): void {
     this._managerRef.current.nodeDelete(node);
@@ -504,7 +566,15 @@ export class BuilderContainerElement extends UpdatingElement {
                 initialClipboardSource={this.clipboardSource}
                 initialCanvasIndex={this.canvasIndex}
                 initialStoryboardQuery={this.storyboardQuery}
+                statusOfLoadingInstalledBricks={
+                  this.statusOfLoadingInstalledBricks
+                }
+                errorOfLoadingInstalledBricks={
+                  this.errorOfLoadingInstalledBricks
+                }
+                installedBricks={this.installedBricks}
                 onNodeAdd={this._handleNodeAdd}
+                onSnippetApply={this._handleSnippetApply}
                 onNodeReorder={this._handleNodeReorder}
                 onNodeMove={this._handleNodeMove}
                 onNodeClick={this._handleNodeClick}
