@@ -14,6 +14,7 @@ import {
 import {
   BuilderRouteNode,
   BuilderCustomTemplateNode,
+  BuilderSnippetNode,
 } from "@next-core/brick-types";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import styles from "./BuilderToolbar.module.css";
@@ -31,6 +32,7 @@ export function BuilderToolbar(): React.ReactElement {
   const {
     onCurrentRouteClick,
     onCurrentTemplateClick,
+    onCurrentSnippetClick,
     onBuildAndPush,
     onPreview,
     dataType,
@@ -47,6 +49,10 @@ export function BuilderToolbar(): React.ReactElement {
 
   const handleTemplateClick = () => {
     onCurrentTemplateClick?.(rootNode as BuilderCustomTemplateNode);
+  };
+
+  const handleSnippetClick = () => {
+    onCurrentSnippetClick?.(rootNode as BuilderSnippetNode);
   };
 
   const handlePreview = () => {
@@ -68,7 +74,18 @@ export function BuilderToolbar(): React.ReactElement {
   return (
     <div className={styles.toolbarContainer}>
       <div className={styles.toolbarLeft}>
-        {dataType === BuilderDataType.CUSTOM_TEMPLATE ? (
+        {dataType === BuilderDataType.SNIPPET ? (
+          <Tooltip title={t(K.VIEW_SNIPPET)} placement="bottomLeft">
+            <a
+              className={shareStyles.tabLink}
+              role="button"
+              onClick={handleSnippetClick}
+              data-testid="view-snippet"
+            >
+              <BlockOutlined />
+            </a>
+          </Tooltip>
+        ) : dataType === BuilderDataType.CUSTOM_TEMPLATE ? (
           <Tooltip title={t(K.VIEW_TEMPLATE)} placement="bottomLeft">
             <a
               className={shareStyles.tabLink}

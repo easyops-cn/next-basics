@@ -27,7 +27,8 @@ jest.mock("../StoryboardTreeNodeList/StoryboardTreeNodeList", () => ({
   },
 }));
 
-const mockUseBuilderGroupedChildNodes = useBuilderGroupedChildNodes as jest.Mock;
+const mockUseBuilderGroupedChildNodes =
+  useBuilderGroupedChildNodes as jest.Mock;
 const mockUseBuilderUIContext = useBuilderUIContext as jest.Mock;
 
 describe("StoryboardTreeView", () => {
@@ -82,6 +83,28 @@ describe("StoryboardTreeView", () => {
   it("should work for custom template", () => {
     mockUseBuilderUIContext.mockReturnValueOnce({
       dataType: BuilderDataType.CUSTOM_TEMPLATE,
+    });
+    mockUseBuilderGroupedChildNodes.mockReturnValueOnce([
+      {
+        mountPoint: "bricks",
+        childNodes: [
+          {
+            $$uid: 1,
+          },
+        ],
+      },
+    ]);
+    const wrapper = shallow(<StoryboardTreeView />);
+    expect(wrapper.find("StoryboardTreeNodeList").prop("childNodes")).toEqual([
+      {
+        $$uid: 1,
+      },
+    ]);
+  });
+
+  it("should work for snippet", () => {
+    mockUseBuilderUIContext.mockReturnValueOnce({
+      dataType: BuilderDataType.SNIPPET,
     });
     mockUseBuilderGroupedChildNodes.mockReturnValueOnce([
       {

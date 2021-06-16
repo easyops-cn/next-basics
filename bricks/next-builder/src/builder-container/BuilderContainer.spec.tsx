@@ -190,6 +190,44 @@ describe("BuilderContainer", () => {
     );
   });
 
+  it("should work for snippet", () => {
+    mockManager.getData.mockReturnValueOnce({
+      rootId: "root",
+      nodes: [
+        {
+          $$uid: 1,
+          portal: true,
+        },
+      ],
+      edges: [
+        {
+          parent: "root",
+          child: 1,
+        },
+      ],
+    });
+    const wrapper = mount(
+      <BuilderContainer
+        dataSource={[
+          {
+            type: "snippet",
+            templateId: "snippet-test",
+            id: "S-001",
+          },
+        ]}
+      />
+    );
+    expect(mockManager.dataInit).toBeCalledWith({
+      type: "snippet",
+      templateId: "snippet-test",
+      id: "S-001",
+    });
+    expect(mockConsoleError).not.toBeCalled();
+    expect(wrapper.find(BuilderCanvas).text()).toBe(
+      `BuilderCanvas(${BuilderDataType.SNIPPET},1)`
+    );
+  });
+
   it("should warn if data source is unknown", () => {
     mount(
       <BuilderContainer

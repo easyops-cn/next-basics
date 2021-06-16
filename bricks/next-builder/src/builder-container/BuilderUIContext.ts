@@ -8,6 +8,7 @@ import {
 import {
   BuilderRouteNode,
   BuilderCustomTemplateNode,
+  BuilderSnippetNode,
   Story,
 } from "@next-core/brick-types";
 import { EventStreamNode } from "./EventStreamCanvas/interfaces";
@@ -17,6 +18,7 @@ export interface ContextOfBuilderUI {
   appId?: string;
   dataType?: BuilderDataType;
   brickList?: BrickOptionItem[];
+  snippetList?: BuilderSnippetNode[];
   storyList?: Story[];
   processing?: boolean;
   fullscreen?: boolean;
@@ -35,8 +37,10 @@ export interface ContextOfBuilderUI {
   setStoryboardQuery?: React.Dispatch<React.SetStateAction<string>>;
   onRouteSelect?: (route: BuilderRouteNode) => void;
   onTemplateSelect?: (template: BuilderCustomTemplateNode) => void;
+  onSnippetSelect?: (snippet: BuilderSnippetNode) => void;
   onCurrentRouteClick?: (route: BuilderRouteNode) => void;
   onCurrentTemplateClick?: (template: BuilderCustomTemplateNode) => void;
+  onCurrentSnippetClick?: (snippet: BuilderSnippetNode) => void;
   onBuildAndPush?: () => void;
   onPreview?: () => void;
   onEventNodeClick?: (eventNode: EventStreamNode) => void;

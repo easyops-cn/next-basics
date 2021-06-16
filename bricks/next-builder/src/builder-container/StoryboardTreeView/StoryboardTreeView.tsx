@@ -19,17 +19,14 @@ export function StoryboardTreeView(): React.ReactElement {
   const { nodes } = useBuilderData();
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const groups = useBuilderGroupedChildNodes({ isRoot: true });
-  const {
-    dataType,
-    setHighlightNodes,
-    storyboardQuery,
-    setStoryboardQuery,
-  } = useBuilderUIContext();
+  const { dataType, setHighlightNodes, storyboardQuery, setStoryboardQuery } =
+    useBuilderUIContext();
   const mountPoint = "bricks";
   const childNodes = React.useMemo(
     () =>
       dataType === BuilderDataType.ROUTE_OF_BRICKS ||
-      dataType === BuilderDataType.CUSTOM_TEMPLATE
+      dataType === BuilderDataType.CUSTOM_TEMPLATE ||
+      dataType === BuilderDataType.SNIPPET
         ? groups.find((group) => group.mountPoint === mountPoint)?.childNodes ??
           []
         : [],
