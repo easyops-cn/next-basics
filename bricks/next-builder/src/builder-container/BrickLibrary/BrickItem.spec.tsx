@@ -145,11 +145,13 @@ describe("BrickItem", () => {
               brick: "easy-view",
             },
           ],
+          thumbnail: "test.svg",
         }}
       />
     );
     expect(wrapper.find(".brickItem").hasClass("snippet")).toBe(true);
-    expect(wrapper.find(NumberOutlined).length).toBe(1);
+    expect(wrapper.find(".brickIcon img").prop("src")).toBe("test.svg");
+    expect(wrapper.find(NumberOutlined).length).toBe(0);
     expect(wrapper.find(".brickName").text()).toBe("My Snippet");
     expect(mockUseDrag).toBeCalledWith(
       expect.objectContaining({
@@ -163,6 +165,29 @@ describe("BrickItem", () => {
         },
       })
     );
+  });
+
+  it("should display a snippet without thumbnail", () => {
+    const dragRef = jest.fn();
+    mockUseDrag.mockReturnValueOnce([{ isDragging: false }, dragRef]);
+    const wrapper = shallow(
+      <BrickItem
+        brick={{
+          type: "snippet",
+          name: "my.snippet",
+          shortName: "snippet",
+          title: "My Snippet",
+          bricks: [
+            {
+              brick: "easy-view",
+            },
+          ],
+        }}
+      />
+    );
+    expect(wrapper.find(".brickItem").hasClass("snippet")).toBe(true);
+    expect(wrapper.find(NumberOutlined).length).toBe(1);
+    expect(wrapper.find(".brickIcon img").length).toBe(0);
   });
 
   it("should render icon", () => {
