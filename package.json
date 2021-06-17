@@ -41,7 +41,7 @@
     "@next-core/brick-kit": "^2.51.3",
     "@next-core/brick-types": "^2.32.2",
     "@next-core/brick-utils": "^2.17.6",
-    "@next-core/dev-dependencies": "^1.8.35",
+    "@next-core/dev-dependencies": "^1.8.36",
     "@next-core/easyops-analytics": "^0.1.9",
     "@next-core/editor-bricks-helper": "^0.25.2",
     "@next-core/fontawesome-library": "^1.1.16",
@@ -99,6 +99,6 @@
     "@testing-library/dom": "^7.31.2"
   },
   "easyops": {
-    "dev-dependencies": "1.8.35"
+    "dev-dependencies": "1.8.36"
   }
 }
