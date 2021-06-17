@@ -73,7 +73,11 @@ export function BrickItem({
         icon = <CopyFilled />;
         break;
       case "snippet":
-        icon = <NumberOutlined />;
+        icon = brick.thumbnail ? (
+          <img src={brick.thumbnail} />
+        ) : (
+          <NumberOutlined />
+        );
         break;
       default:
         icon = <BuildFilled />;

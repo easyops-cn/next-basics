@@ -70,3 +70,8 @@
     color: #fff;
   }
 }
+
+.brickIcon > img {
+  width: 16px;
+  height: 16px;
+}
