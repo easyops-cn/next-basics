@@ -4,15 +4,15 @@ import React, {
   useState,
   useImperativeHandle,
 } from "react";
+import { useTranslation } from "react-i18next";
+import { Empty } from "antd";
+import { isEmpty } from "lodash";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { filterBricks } from "./filterBrick";
 import { BrickItem } from "../BrickLibrary/BrickItem";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
-import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
-import { Empty } from "antd";
-import { isEmpty } from "lodash";
 import styles from "./AdvancedBrickLibrary.module.css";
 
 interface AdvancedBrickLibraryProps {
@@ -24,13 +24,7 @@ export function LegacyAdvancedBrickLibrary(
   ref: React.Ref<any>
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const {
-    appId,
-    brickList,
-    storyList,
-    enabledInstalledBricks,
-    stateOfInstalledBricks,
-  } = useBuilderUIContext();
+  const { appId, brickList, storyList } = useBuilderUIContext();
   const [q, setQ] = useState<string>();
   const [category, setCategory] = useState<string>();
   const searchRef = useRef<any>();
@@ -55,23 +49,10 @@ export function LegacyAdvancedBrickLibrary(
       category,
       brickList,
       storyList,
-      installedBricks:
-        enabledInstalledBricks && stateOfInstalledBricks.status === "ok"
-          ? stateOfInstalledBricks.data
-          : [],
       appId,
       rootNode,
     });
-  }, [
-    storyList,
-    q,
-    category,
-    brickList,
-    enabledInstalledBricks,
-    stateOfInstalledBricks,
-    appId,
-    rootNode,
-  ]);
+  }, [storyList, q, category, brickList, appId, rootNode]);
 
   return (
     <div>

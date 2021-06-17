@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import { getRuntime } from "@next-core/brick-kit";
 import {
   BuilderRouteOrBrickNode,
   ContextConf,
@@ -25,9 +24,6 @@ import {
   BuilderClipboard,
   BuilderClipboardType,
   BuilderDataType,
-  InstalledBrick,
-  LazyDataStatus,
-  StateOfInstalledBricks,
   ToolboxTab,
 } from "./interfaces";
 import {
@@ -50,9 +46,6 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   snippetList?: BuilderSnippetNode[];
   storyList?: Story[];
   processing?: boolean;
-  statusOfLoadingInstalledBricks?: LazyDataStatus;
-  errorOfLoadingInstalledBricks?: unknown;
-  installedBricks?: InstalledBrick[];
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
   initialEventStreamNodeId?: string;
@@ -94,9 +87,6 @@ export function LegacyBuilderContainer(
     snippetList,
     storyList,
     processing,
-    statusOfLoadingInstalledBricks,
-    errorOfLoadingInstalledBricks,
-    installedBricks,
     initialFullscreen,
     initialToolboxTab,
     initialEventStreamNodeId,
@@ -168,22 +158,6 @@ export function LegacyBuilderContainer(
   );
   const [storyboardQuery, setStoryboardQuery] =
     React.useState(memoStoryboardQuery);
-
-  const memoStateOfInstalledBricks = React.useMemo<StateOfInstalledBricks>(
-    () => ({
-      status: statusOfLoadingInstalledBricks,
-      error: errorOfLoadingInstalledBricks,
-      data: installedBricks,
-    }),
-    [
-      errorOfLoadingInstalledBricks,
-      installedBricks,
-      statusOfLoadingInstalledBricks,
-    ]
-  );
-  const [stateOfInstalledBricks, setStateOfInstalledBricks] = React.useState(
-    memoStateOfInstalledBricks
-  );
 
   const manager = useBuilderDataManager();
 
@@ -322,10 +296,6 @@ export function LegacyBuilderContainer(
     onStoryboardQueryUpdate?.(storyboardQuery);
   }, [storyboardQuery, onStoryboardQueryUpdate]);
 
-  React.useEffect(() => {
-    setStateOfInstalledBricks(memoStateOfInstalledBricks);
-  }, [memoStateOfInstalledBricks]);
-
   const handleClickOverlay = (): void => {
     onWorkbenchClose?.();
   };
@@ -339,10 +309,6 @@ export function LegacyBuilderContainer(
         snippetList,
         storyList,
         processing,
-        enabledInstalledBricks:
-          getRuntime().getFeatureFlags()["next-builder-installed-bricks"],
-        stateOfInstalledBricks,
-        setStateOfInstalledBricks,
         fullscreen,
         setFullscreen,
         toolboxTab,

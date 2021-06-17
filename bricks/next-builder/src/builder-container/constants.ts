@@ -1,5 +1,4 @@
 import { BrickOptionItem, ToolboxTab, LibraryMenuItem } from "./interfaces";
-import { Story } from "@next-core/brick-types";
 import i18next from "i18next";
 import { K, NS_NEXT_BUILDER } from "../i18n/constants";
 

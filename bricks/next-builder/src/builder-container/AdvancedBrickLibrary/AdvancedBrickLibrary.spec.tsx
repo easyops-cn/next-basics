@@ -7,27 +7,12 @@ import { useBuilderUIContext } from "../BuilderUIContext";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { act } from "react-dom/test-utils";
 
-jest.mock("../BuilderUIContext");
 jest.mock("@next-core/editor-bricks-helper");
+jest.mock("../BuilderUIContext");
 jest.mock("../BrickLibrary/BrickItem");
 
 jest.mock("../constants", () => ({
   brickSearchResultLimit: 20,
-  chartStory: [
-    {
-      category: "chart",
-      storyId: "general-charts.statistic-card",
-      type: "brick",
-      text: {
-        en: "statistic card",
-        zh: "统计卡片",
-      },
-      icon: {
-        lib: "fa",
-        icon: "dolly",
-      },
-    },
-  ],
   frequentlyUsedBricks: [
     {
       type: "brick",
@@ -66,11 +51,6 @@ describe("AdvancedBrickLibrary", () => {
           name: "forms.general-select",
         },
       ],
-      enabledInstalledBricks: true,
-      stateOfInstalledBricks: {
-        status: "ok",
-        data: [],
-      },
     });
     const wrapper = mount(<AdvancedBrickLibrary />);
     expect(wrapper.find(".itemWrapper").length).toBe(6);

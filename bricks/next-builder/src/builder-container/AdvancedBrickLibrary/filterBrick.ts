@@ -1,23 +1,18 @@
-import { isNil, pick, uniqBy } from "lodash";
+import { isNil, uniqBy } from "lodash";
 import { i18nText } from "@next-core/brick-kit";
-import {
-  Story,
-  BuilderRouteOrBrickNode,
-  BuilderSnippetNode,
-} from "@next-core/brick-types";
+import { Story, BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import {
   brickSearchResultLimit,
   LIB_ALL_CATEGORY,
   frequentlyUsedBricks,
 } from "../constants";
-import { BrickOptionItem, InstalledBrick } from "../interfaces";
+import { BrickOptionItem } from "../interfaces";
 
 export function filterBricks({
   q,
   category = LIB_ALL_CATEGORY,
   brickList,
   storyList,
-  installedBricks,
   limit = brickSearchResultLimit,
   appId,
   rootNode,
@@ -26,7 +21,6 @@ export function filterBricks({
   category?: string;
   brickList: BrickOptionItem[];
   storyList: Story[];
-  installedBricks: InstalledBrick[];
   limit?: number;
   appId: string;
   rootNode?: BuilderRouteOrBrickNode;
@@ -36,7 +30,6 @@ export function filterBricks({
       ? brickList.filter((item) => item.name !== rootNode.templateId)
       : brickList,
     storyList,
-    installedBricks,
     appId,
     category
   );
@@ -67,32 +60,13 @@ export function filterBricks({
 export function processBricks(
   brickList: BrickOptionItem[],
   storyList: Story[],
-  installedBricks: InstalledBrick[],
   appId: string,
   category: string = LIB_ALL_CATEGORY
 ): BrickOptionItem[] {
-  const sortedBricks = (
+  const sortedBricks =
     category === LIB_ALL_CATEGORY
       ? insertBricks(brickList, frequentlyUsedBricks)
-      : brickList
-  ).concat(
-    (
-      installedBricks.filter(
-        // istanbul ignore next: Will change soon.
-        (brick) => brick.type === "snippet"
-      ) as BuilderSnippetNode[]
-    ).map(
-      // istanbul ignore next: Will change soon.
-      (snippet) =>
-        ({
-          type: "snippet",
-          name: snippet.id,
-          title: i18nText(snippet.text),
-          description: i18nText(snippet.description),
-          ...pick(snippet, ["category", "thumbnail", "bricks"]),
-        } as BrickOptionItem)
-    )
-  );
+      : brickList;
 
   return sortedBricks
     .map((item) => {

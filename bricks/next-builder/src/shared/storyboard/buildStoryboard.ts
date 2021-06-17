@@ -91,21 +91,31 @@ const fieldsToKeepInMenuItem = [
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
 
+type WeakMapOfNodeToConf = WeakMap<
+  BuilderRouteOrBrickNode,
+  RouteConf | BrickConf
+>;
+
+interface BuildContext {
+  nodeToConf: WeakMapOfNodeToConf;
+  keepIds?: boolean;
+}
+
 export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
   const keepIds = data.options?.keepIds;
 
-  const fullList: BuilderRouteOrBrickNode[] = (data.routeList as BuilderRouteOrBrickNode[]).concat(
-    data.brickList
-  );
+  const fullList: BuilderRouteOrBrickNode[] = (
+    data.routeList as BuilderRouteOrBrickNode[]
+  ).concat(data.brickList);
 
   // A map from id to node.
   const idToNode = new Map<string, BuilderRouteOrBrickNode>(
     fullList.map((node) => [node.id, node])
   );
-  const nodeToConf = new WeakMap<
-    BuilderRouteOrBrickNode,
-    RouteConf | BrickConf
-  >();
+  const ctx: BuildContext = {
+    nodeToConf: new WeakMap(),
+    keepIds,
+  };
   const nodeToParentCount = new WeakMap<BuilderRouteOrBrickNode, number>();
 
   // Ignore nodes with unknown ancients,
@@ -149,8 +159,8 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
     if (node.parent?.length) {
       const parentId = node.parent[0].id;
       const parentNode = idToNode.get(parentId);
-      if (parentNode && nodeToConf.has(parentNode)) {
-        mount(parentNode, node);
+      if (parentNode && ctx.nodeToConf.has(parentNode)) {
+        mount(ctx, parentNode, node);
       } else {
         // eslint-disable-next-line no-console
         console.error("Parent error", node.parent[0], node);
@@ -158,7 +168,7 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
     } else {
       // Only route nodes at first level.
       if ((node as BuilderRouteNode).path) {
-        routes.push(routeNodeToRouteConf(node as BuilderRouteNode));
+        routes.push(routeNodeToRouteConf(ctx, node as BuilderRouteNode));
       }
     }
   }
@@ -166,7 +176,7 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
   const customTemplates = data.templateList?.map((template) => ({
     name: template.templateId,
     proxy: template.proxy,
-    bricks: getBricksOfTemplate(template.children),
+    bricks: buildBricks(template.children, ctx) as BrickConfInTemplate[],
     ...(keepIds
       ? {
           [symbolForNodeId]: template.id,
@@ -192,172 +202,193 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
     } as Record<string, Record<string, string>>
   );
 
-  function routeNodeToRouteConf(node: BuilderRouteNode): RouteConf {
-    const conf = (normalize(
-      node,
-      fieldsToRemoveInRoute,
-      jsonFieldsInRoute,
-      yamlFieldsInRoute,
-      keepIds
-    ) as unknown) as RouteConf;
-
-    // Ensure routes and bricks array according to node type.
-    if (conf.type === "routes") {
-      conf.routes = [];
-    } else if (conf.type === "bricks") {
-      conf.bricks = [];
-    }
-
-    nodeToConf.set(node, conf);
-    return conf;
-  }
-
-  function brickNodeToBrickConf(node: BuilderBrickNode): BrickConf {
-    const conf = normalize(
-      node,
-      fieldsToRemoveInBrick,
-      jsonFieldsInBrick,
-      yamlFieldsInBrick,
-      keepIds,
-      // Also keep instance ids for bricks.
-      keepIds
-    ) as BrickConf;
-
-    if (node.type === "template") {
-      conf.template = conf.brick;
-      delete conf.brick;
-    }
-
-    nodeToConf.set(node, conf);
-    return conf;
-  }
-
-  function mount(
-    parent: BuilderRouteOrBrickNode,
-    child: BuilderRouteOrBrickNode
-  ): void {
-    switch (parent.type) {
-      case "routes":
-        mountRouteInRoute(parent, child as BuilderRouteNode);
-        return;
-      case "bricks":
-        mountBrickInRoute(parent, child as BuilderBrickNode);
-        return;
-      case "brick":
-        if ((child as BuilderRouteNode).path) {
-          mountRouteInBrick(parent, child as BuilderRouteNode);
-          return;
-        } else if ((child as BuilderBrickNode).brick) {
-          mountBrickInBrick(parent, child as BuilderBrickNode);
-          return;
-        }
-    }
-    // eslint-disable-next-line no-console
-    console.error("Mount type error", parent, child);
-  }
-
-  function mountRouteInRoute(
-    parent: BuilderRouteNode,
-    child: BuilderRouteNode
-  ): void {
-    if (!child.path) {
-      // eslint-disable-next-line no-console
-      console.error("Mount type error", parent, child);
-      return;
-    }
-    const parentConf = nodeToConf.get(parent) as RouteConfOfRoutes;
-    parentConf.routes.push(routeNodeToRouteConf(child));
-  }
-
-  function mountBrickInRoute(
-    parent: BuilderRouteNode,
-    child: BuilderBrickNode
-  ): void {
-    if (!child.brick) {
-      // eslint-disable-next-line no-console
-      console.error("Mount type error", parent, child);
-      return;
-    }
-    const parentConf = nodeToConf.get(parent) as RouteConfOfBricks;
-    parentConf.bricks.push(brickNodeToBrickConf(child));
-  }
-
-  function mountRouteInBrick(
-    parent: BuilderBrickNode,
-    child: BuilderRouteNode
-  ): void {
-    const parentConf = nodeToConf.get(parent) as BrickConf;
-    if (!parentConf.slots) {
-      parentConf.slots = {};
-    }
-    if (!parentConf.slots[child.mountPoint]) {
-      parentConf.slots[child.mountPoint] = {
-        type: "routes",
-        routes: [],
-      };
-    }
-    if (parentConf.slots[child.mountPoint].type !== "routes") {
-      // eslint-disable-next-line no-console
-      console.error("Slot type error", parent, child);
-      return;
-    }
-    (parentConf.slots[child.mountPoint] as SlotConfOfRoutes).routes.push(
-      routeNodeToRouteConf(child)
-    );
-  }
-
-  function mountBrickInBrick(
-    parent: BuilderBrickNode,
-    child: BuilderBrickNode
-  ): void {
-    const parentConf = nodeToConf.get(parent) as BrickConf;
-    if (!parentConf.slots) {
-      parentConf.slots = {};
-    }
-    if (!parentConf.slots[child.mountPoint]) {
-      parentConf.slots[child.mountPoint] = {
-        type: "bricks",
-        bricks: [],
-      };
-    }
-    if (parentConf.slots[child.mountPoint].type !== "bricks") {
-      // eslint-disable-next-line no-console
-      console.error("Slot type error", parent, child);
-      return;
-    }
-    (parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.push(
-      brickNodeToBrickConf(child)
-    );
-  }
-
-  function getBricksOfTemplate(
-    nodes: BuilderBrickNode[]
-  ): BrickConfInTemplate[] {
-    if (!nodes) {
-      return [];
-    }
-    return nodes.map((node) => {
-      const nodeConf = brickNodeToBrickConf(node);
-      nodeToConf.set(node, nodeConf);
-      normalizeBrickInTemplate(node);
-      return nodeConf as BrickConfInTemplate;
-    });
-  }
-
-  function normalizeBrickInTemplate(node: BuilderBrickNode): void {
-    if (node.children) {
-      (node.children as BuilderBrickNode[]).forEach((child) => {
-        mountBrickInBrick(node, child);
-        normalizeBrickInTemplate(child);
-      });
-    }
-  }
-
   return {
     routes,
     meta: { customTemplates, menus, i18n },
     dependsAll: data.dependsAll,
   };
+}
+
+/**
+ * This is used for building custom-templates and snippets.
+ */
+export function buildBricks(
+  nodes: BuilderBrickNode[],
+  ctx: BuildContext = {
+    nodeToConf: new WeakMap(),
+  }
+): BrickConf[] {
+  if (!nodes) {
+    return [];
+  }
+
+  return nodes.map((node) => {
+    const nodeConf = brickNodeToBrickConf(ctx, node);
+    ctx.nodeToConf.set(node, nodeConf);
+    normalizeBrickInSnippet(ctx, node);
+    return nodeConf;
+  });
+}
+
+function routeNodeToRouteConf(
+  ctx: BuildContext,
+  node: BuilderRouteNode
+): RouteConf {
+  const conf = normalize(
+    node,
+    fieldsToRemoveInRoute,
+    jsonFieldsInRoute,
+    yamlFieldsInRoute,
+    ctx.keepIds
+  ) as unknown as RouteConf;
+
+  // Ensure routes and bricks array according to node type.
+  if (conf.type === "routes") {
+    conf.routes = [];
+  } else if (conf.type === "bricks") {
+    conf.bricks = [];
+  }
+
+  ctx.nodeToConf.set(node, conf);
+  return conf;
+}
+
+function brickNodeToBrickConf(
+  ctx: BuildContext,
+  node: BuilderBrickNode
+): BrickConf {
+  const conf = normalize(
+    node,
+    fieldsToRemoveInBrick,
+    jsonFieldsInBrick,
+    yamlFieldsInBrick,
+    ctx.keepIds,
+    // Also keep instance ids for bricks.
+    ctx.keepIds
+  ) as BrickConf;
+
+  if (node.type === "template") {
+    conf.template = conf.brick;
+    delete conf.brick;
+  }
+
+  ctx.nodeToConf.set(node, conf);
+  return conf;
+}
+
+function mount(
+  ctx: BuildContext,
+  parent: BuilderRouteOrBrickNode,
+  child: BuilderRouteOrBrickNode
+): void {
+  switch (parent.type) {
+    case "routes":
+      mountRouteInRoute(ctx, parent, child as BuilderRouteNode);
+      return;
+    case "bricks":
+      mountBrickInRoute(ctx, parent, child as BuilderBrickNode);
+      return;
+    case "brick":
+      if ((child as BuilderRouteNode).path) {
+        mountRouteInBrick(ctx, parent, child as BuilderRouteNode);
+        return;
+      } else if ((child as BuilderBrickNode).brick) {
+        mountBrickInBrick(ctx, parent, child as BuilderBrickNode);
+        return;
+      }
+  }
+  // eslint-disable-next-line no-console
+  console.error("Mount type error", parent, child);
+}
+
+function mountRouteInRoute(
+  ctx: BuildContext,
+  parent: BuilderRouteNode,
+  child: BuilderRouteNode
+): void {
+  if (!child.path) {
+    // eslint-disable-next-line no-console
+    console.error("Mount type error", parent, child);
+    return;
+  }
+  const parentConf = ctx.nodeToConf.get(parent) as RouteConfOfRoutes;
+  parentConf.routes.push(routeNodeToRouteConf(ctx, child));
+}
+
+function mountBrickInRoute(
+  ctx: BuildContext,
+  parent: BuilderRouteNode,
+  child: BuilderBrickNode
+): void {
+  if (!child.brick) {
+    // eslint-disable-next-line no-console
+    console.error("Mount type error", parent, child);
+    return;
+  }
+  const parentConf = ctx.nodeToConf.get(parent) as RouteConfOfBricks;
+  parentConf.bricks.push(brickNodeToBrickConf(ctx, child));
+}
+
+function mountRouteInBrick(
+  ctx: BuildContext,
+  parent: BuilderBrickNode,
+  child: BuilderRouteNode
+): void {
+  const parentConf = ctx.nodeToConf.get(parent) as BrickConf;
+  if (!parentConf.slots) {
+    parentConf.slots = {};
+  }
+  if (!parentConf.slots[child.mountPoint]) {
+    parentConf.slots[child.mountPoint] = {
+      type: "routes",
+      routes: [],
+    };
+  }
+  if (parentConf.slots[child.mountPoint].type !== "routes") {
+    // eslint-disable-next-line no-console
+    console.error("Slot type error", parent, child);
+    return;
+  }
+  (parentConf.slots[child.mountPoint] as SlotConfOfRoutes).routes.push(
+    routeNodeToRouteConf(ctx, child)
+  );
+}
+
+function mountBrickInBrick(
+  ctx: BuildContext,
+  parent: BuilderBrickNode,
+  child: BuilderBrickNode
+): void {
+  const parentConf = ctx.nodeToConf.get(parent) as BrickConf;
+  if (!parentConf.slots) {
+    parentConf.slots = {};
+  }
+  if (!parentConf.slots[child.mountPoint]) {
+    parentConf.slots[child.mountPoint] = {
+      type: "bricks",
+      bricks: [],
+    };
+  }
+  if (parentConf.slots[child.mountPoint].type !== "bricks") {
+    // eslint-disable-next-line no-console
+    console.error("Slot type error", parent, child);
+    return;
+  }
+  (parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.push(
+    brickNodeToBrickConf(ctx, child)
+  );
+}
+
+function normalizeBrickInSnippet(
+  ctx: BuildContext,
+  node: BuilderBrickNode
+): void {
+  if (node.children) {
+    (node.children as BuilderBrickNode[]).forEach((child) => {
+      mountBrickInBrick(ctx, node, child);
+      normalizeBrickInSnippet(ctx, child);
+    });
+  }
 }
 
 function normalize(

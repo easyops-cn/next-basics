@@ -1,4 +1,4 @@
-import { mount, shallow } from "enzyme";
+import { shallow } from "enzyme";
 import ReactDOM from "react-dom";
 import { EventDetailOfSnippetApply } from "@next-core/editor-bricks-helper";
 import { BuilderContainer } from "./BuilderContainer";
