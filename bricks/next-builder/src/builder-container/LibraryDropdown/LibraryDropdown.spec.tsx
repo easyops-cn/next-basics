@@ -1,6 +1,6 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
-import { Button, Dropdown, Tooltip } from "antd";
+import { mount } from "enzyme";
+import { Dropdown, Tooltip } from "antd";
 import { LibraryDropdown } from "./LibraryDropdown";
 import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
 
@@ -10,20 +10,9 @@ jest.mock("./LibraryDropdownMenu", () => ({
   },
 }));
 
-jest.mock("../BuilderUIContext", () => ({
-  useBuilderUIContext: () => ({
-    enabledInstalledBricks: true,
-    stateOfInstalledBricks: {
-      status: "loading",
-    },
-  }),
-}));
-
 describe("LibraryDropdown", () => {
   it("should work", async () => {
     const wrapper = mount(<LibraryDropdown />);
-
-    expect(wrapper.find(Button).prop("loading")).toBe(true);
 
     expect(wrapper.find(Dropdown).prop("visible")).toBe(false);
     expect(wrapper.find(Tooltip).prop("overlayStyle")).toEqual({

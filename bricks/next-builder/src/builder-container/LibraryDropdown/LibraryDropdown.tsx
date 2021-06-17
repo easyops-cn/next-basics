@@ -4,7 +4,6 @@ import { Dropdown, Button, Menu, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
-import { useBuilderUIContext } from "../BuilderUIContext";
 
 import shareStyles from "../share.module.css";
 
@@ -12,9 +11,6 @@ export function LibraryDropdown(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [visible, setVisible] = useState(false);
   const isOpen = useRef(false);
-
-  const { enabledInstalledBricks, stateOfInstalledBricks } =
-    useBuilderUIContext();
 
   const handleVisibleChange = React.useCallback((value: boolean) => {
     isOpen.current = value;
@@ -60,15 +56,7 @@ export function LibraryDropdown(): React.ReactElement {
           display: visible ? "none" : undefined,
         }}
       >
-        <Button
-          type="primary"
-          size="small"
-          style={{ marginRight: "10px" }}
-          loading={
-            enabledInstalledBricks &&
-            stateOfInstalledBricks.status === "loading"
-          }
-        >
+        <Button type="primary" size="small" style={{ marginRight: "10px" }}>
           <PlusOutlined />
         </Button>
       </Tooltip>

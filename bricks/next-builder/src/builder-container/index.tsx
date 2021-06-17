@@ -43,8 +43,6 @@ import {
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
   BuilderPasteDetailOfCut,
-  InstalledBrick,
-  LazyDataStatus,
   ToolboxTab,
 } from "./interfaces";
 import { BuilderContainer } from "./BuilderContainer";
@@ -120,19 +118,6 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property()
   storyboardQuery: string;
-
-  @property()
-  statusOfLoadingInstalledBricks: LazyDataStatus;
-
-  @property({
-    attribute: false,
-  })
-  errorOfLoadingInstalledBricks: unknown;
-
-  @property({
-    attribute: false,
-  })
-  installedBricks: InstalledBrick[];
 
   @event({
     type: "node.add",
@@ -566,13 +551,6 @@ export class BuilderContainerElement extends UpdatingElement {
                 initialClipboardSource={this.clipboardSource}
                 initialCanvasIndex={this.canvasIndex}
                 initialStoryboardQuery={this.storyboardQuery}
-                statusOfLoadingInstalledBricks={
-                  this.statusOfLoadingInstalledBricks
-                }
-                errorOfLoadingInstalledBricks={
-                  this.errorOfLoadingInstalledBricks
-                }
-                installedBricks={this.installedBricks}
                 onNodeAdd={this._handleNodeAdd}
                 onSnippetApply={this._handleSnippetApply}
                 onNodeReorder={this._handleNodeReorder}

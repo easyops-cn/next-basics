@@ -5,13 +5,6 @@ import { BuilderContainer } from "./BuilderContainer";
 import { BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 
-jest.mock("@next-core/brick-kit", () => ({
-  getRuntime: () => ({
-    getFeatureFlags: () => ({
-      "next-builder-installed-bricks": true,
-    }),
-  }),
-}));
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
   BuilderToolbox() {
