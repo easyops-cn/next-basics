@@ -102,11 +102,12 @@ describe("processor", () => {
             zh: "卡片",
           },
         },
-      ] as Story[];
+      ] as Partial<Story>[] as Story[];
 
       const result = processBricks(
         brickList,
         storyList,
+        [],
         "my-app",
         "form-input"
       );
@@ -169,9 +170,9 @@ describe("processor", () => {
             zh: "卡片",
           },
         },
-      ] as Story[];
+      ] as Partial<Story>[] as Story[];
 
-      const result = processBricks(brickList, storyList, "my-app");
+      const result = processBricks(brickList, storyList, [], "my-app");
       expect(result).toEqual([
         {
           name: "basic-bricks.micro-view",
@@ -256,13 +257,14 @@ describe("processor", () => {
             zh: "卡片",
           },
         },
-      ] as Story[];
+      ] as Partial<Story>[] as Story[];
 
       const result = filterBricks({
         q: "",
         category: "all",
         brickList,
         storyList,
+        installedBricks: [],
         appId: "my-app",
       });
       expect(result).toEqual([
@@ -314,6 +316,7 @@ describe("processor", () => {
         category: "form-input",
         brickList,
         storyList,
+        installedBricks: [],
         appId: "my-app",
       });
       expect(result2).toEqual([
@@ -332,6 +335,7 @@ describe("processor", () => {
         q: "general-input",
         brickList,
         storyList,
+        installedBricks: [],
         appId: "my-app",
       });
       expect(result3).toEqual([
@@ -350,6 +354,7 @@ describe("processor", () => {
         q: "general",
         brickList,
         storyList,
+        installedBricks: [],
         appId: "my-app",
         limit: 2,
       });
@@ -374,10 +379,12 @@ describe("processor", () => {
         q: "",
         brickList,
         storyList,
+        installedBricks: [],
         appId: "my-app",
         rootNode: {
           type: "custom-template",
           templateId: "tpl-create-form",
+          id: "B-001",
         },
       });
 

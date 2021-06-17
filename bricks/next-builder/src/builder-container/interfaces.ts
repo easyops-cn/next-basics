@@ -1,8 +1,13 @@
-import { BuilderRouteOrBrickNode, MenuIcon } from "@next-core/brick-types";
+import {
+  BrickConf,
+  BuilderRouteOrBrickNode,
+  I18nString,
+  MenuIcon,
+} from "@next-core/brick-types";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export interface BrickOptionItem {
-  type: "brick" | "template" | "customTemplate" | "provider";
+  type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
   name: string;
   scopeName?: string;
   shortName?: string;
@@ -10,6 +15,8 @@ export interface BrickOptionItem {
   title?: string;
   description?: string;
   icon?: MenuIcon;
+  thumbnail?: string;
+  bricks?: BrickConf[];
 }
 
 export interface GroupedBricks {
@@ -93,3 +100,25 @@ export interface LibraryMenuItem {
     text: string;
   }[];
 }
+
+export interface InstalledBrick {
+  id: string;
+  type: InstalledBrickType;
+  text?: I18nString;
+  category?: string;
+  subCategory?: string;
+  icon?: MenuIcon;
+  thumbnail?: string;
+}
+
+export type InstalledBrickType = "atom-brick" | "snippet" | "custom-template";
+
+export type LazyDataStatus = "ok" | "loading" | "failed";
+
+export interface StateOfLazyData<T = unknown> {
+  status?: LazyDataStatus;
+  error?: unknown;
+  data?: T;
+}
+
+export type StateOfInstalledBricks = StateOfLazyData<InstalledBrick[]>;

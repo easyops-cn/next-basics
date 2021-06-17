@@ -66,6 +66,11 @@ describe("AdvancedBrickLibrary", () => {
           name: "forms.general-select",
         },
       ],
+      enabledInstalledBricks: true,
+      stateOfInstalledBricks: {
+        status: "ok",
+        data: [],
+      },
     });
     const wrapper = mount(<AdvancedBrickLibrary />);
     expect(wrapper.find(".itemWrapper").length).toBe(6);

@@ -1,49 +1,51 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
+import { Button, Dropdown, Tooltip } from "antd";
 import { LibraryDropdown } from "./LibraryDropdown";
-import { LibraryMenu } from "../LibraryMenu/LibraryMenu";
-import { Button } from "antd";
+import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
 
-jest.mock("../AdvancedBrickLibrary/AdvancedBrickLibrary", () => ({
-  AdvancedBrickLibrary() {
-    return <div>BrickLibrary</div>;
+jest.mock("./LibraryDropdownMenu", () => ({
+  LibraryDropdownMenu() {
+    return <div>LibraryDropdownMenu</div>;
   },
 }));
 
+jest.mock("../BuilderUIContext", () => ({
+  useBuilderUIContext: () => ({
+    enabledInstalledBricks: true,
+    stateOfInstalledBricks: {
+      status: "loading",
+    },
+  }),
+}));
+
 describe("LibraryDropdown", () => {
-  it("should work for bricks", async () => {
+  it("should work", async () => {
     const wrapper = mount(<LibraryDropdown />);
 
-    wrapper
-      .find(Button)
-      .filter("[data-testid='trigger-btn']")
-      .simulate("click");
-    expect(wrapper.find("AdvancedBrickLibrary").length).toBe(1);
+    expect(wrapper.find(Button).prop("loading")).toBe(true);
 
-    // isOpen to be false
-    wrapper
-      .find(Button)
-      .filter("[data-testid='trigger-btn']")
-      .simulate("click");
-    expect(wrapper.find("Dropdown").prop("visible")).toBe(false);
-    wrapper.find("AdvancedBrickLibrary").invoke("onDraggingChange")(false);
-    expect(wrapper.find("Dropdown").prop("visible")).toBe(false);
+    expect(wrapper.find(Dropdown).prop("visible")).toBe(false);
+    expect(wrapper.find(Tooltip).prop("overlayStyle")).toEqual({
+      display: undefined,
+    });
 
-    // isOpen to be true
-    wrapper
-      .find(Button)
-      .filter("[data-testid='trigger-btn']")
-      .simulate("click");
-    wrapper.find("AdvancedBrickLibrary").invoke("onDraggingChange")(true);
-    expect(wrapper.find("Dropdown").prop("visible")).toBe(false);
+    wrapper.find(Dropdown).invoke("onVisibleChange")(true);
+    expect(wrapper.find(Dropdown).prop("visible")).toBe(true);
+    expect(wrapper.find(Tooltip).prop("overlayStyle")).toEqual({
+      display: "none",
+    });
 
-    wrapper.find("AdvancedBrickLibrary").invoke("onDraggingChange")(false);
-    expect(wrapper.find("Dropdown").prop("visible")).toBe(true);
+    wrapper.find(LibraryDropdownMenu).invoke("onDraggingChange")(true);
+    expect(wrapper.find(Dropdown).prop("visible")).toBe(false);
+    wrapper.find(Dropdown).invoke("onVisibleChange")(false);
 
-    wrapper.find(Button).filter("[data-testid='close-btn']").simulate("click");
-    expect(wrapper.find("Dropdown").prop("visible")).toBe(false);
+    wrapper.find(LibraryDropdownMenu).invoke("onDraggingChange")(false);
+    expect(wrapper.find(Dropdown).prop("visible")).toBe(false);
 
-    wrapper.find(LibraryMenu).invoke("onItemClick")("all");
-    expect(wrapper.find(".ant-menu-item").length).toEqual(14);
+    wrapper.find(Dropdown).invoke("onVisibleChange")(true);
+    expect(wrapper.find(Dropdown).prop("visible")).toBe(true);
+    wrapper.find(LibraryDropdownMenu).invoke("onCloseClick")(null);
+    expect(wrapper.find(Dropdown).prop("visible")).toBe(false);
   });
 });

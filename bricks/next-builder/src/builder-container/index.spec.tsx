@@ -1,5 +1,6 @@
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import ReactDOM from "react-dom";
+import { EventDetailOfSnippetApply } from "@next-core/editor-bricks-helper";
 import { BuilderContainer } from "./BuilderContainer";
 import {
   BuilderClipboard,
@@ -13,6 +14,8 @@ import {
 } from "./EventStreamCanvas/interfaces";
 import { BuilderContainerElement } from "./";
 import "./";
+
+jest.mock("./BuilderContainer");
 
 const spyOnRender = jest
   .spyOn(ReactDOM, "render")
@@ -274,6 +277,94 @@ describe("next-builder.builder-container", () => {
       expect.objectContaining({
         detail: {
           storyboardQuery: "any",
+        },
+      })
+    );
+
+    document.body.removeChild(element);
+  });
+
+  it("should handle snippet apply", () => {
+    const element = document.createElement(
+      "next-builder.builder-container"
+    ) as BuilderContainerElement;
+    element.appId = "test-app";
+    document.body.appendChild(element);
+
+    const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onSnippetApply = jest.fn();
+    element.addEventListener("snippet.apply", onSnippetApply);
+    const event = new CustomEvent<EventDetailOfSnippetApply>(
+      "internal.snippet.apply",
+      {
+        detail: {
+          parentUid: 1,
+          nodeUids: [2, 3],
+          nodeIds: ["a", null],
+          nodeDetails: [
+            {
+              parentUid: 1,
+              nodeUid: 3,
+              nodeAlias: "test-brick",
+              nodeData: {
+                type: "brick",
+                parent: "a",
+                brick: "my.test-brick",
+                mountPoint: "any",
+              },
+              children: [
+                {
+                  parentUid: 3,
+                  nodeUid: 4,
+                  nodeAlias: "another-brick",
+                  nodeData: {
+                    type: "brick",
+                    brick: "my.another-brick",
+                    mountPoint: "another",
+                  },
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      }
+    );
+    wrapper.find(BuilderContainer).invoke("onSnippetApply")(event);
+    expect(onSnippetApply).toBeCalledWith(
+      expect.objectContaining({
+        detail: {
+          parentUid: 1,
+          nodeUids: [2, 3],
+          nodeIds: ["a", null],
+          nodeDetails: [
+            {
+              parentUid: 1,
+              nodeUid: 3,
+              nodeAlias: "test-brick",
+              nodeData: {
+                appId: "test-app",
+                type: "brick",
+                parent: "a",
+                brick: "my.test-brick",
+                mountPoint: "any",
+              },
+              children: [
+                {
+                  parentUid: 3,
+                  nodeUid: 4,
+                  nodeAlias: "another-brick",
+                  nodeData: {
+                    appId: "test-app",
+                    type: "brick",
+                    brick: "my.another-brick",
+                    mountPoint: "another",
+                  },
+                  children: [],
+                },
+              ],
+            },
+          ],
         },
       })
     );

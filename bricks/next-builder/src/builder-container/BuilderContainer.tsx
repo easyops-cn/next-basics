@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { getRuntime } from "@next-core/brick-kit";
 import {
   BuilderRouteOrBrickNode,
   ContextConf,
@@ -14,6 +15,7 @@ import {
   EventDetailOfNodeAdd,
   EventDetailOfNodeMove,
   EventDetailOfNodeReorder,
+  EventDetailOfSnippetApply,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
@@ -23,6 +25,9 @@ import {
   BuilderClipboard,
   BuilderClipboardType,
   BuilderDataType,
+  InstalledBrick,
+  LazyDataStatus,
+  StateOfInstalledBricks,
   ToolboxTab,
 } from "./interfaces";
 import {
@@ -43,8 +48,11 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
   snippetList?: BuilderSnippetNode[];
-  storyList: Story[];
+  storyList?: Story[];
   processing?: boolean;
+  statusOfLoadingInstalledBricks?: LazyDataStatus;
+  errorOfLoadingInstalledBricks?: unknown;
+  installedBricks?: InstalledBrick[];
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
   initialEventStreamNodeId?: string;
@@ -53,6 +61,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   initialCanvasIndex?: number;
   initialStoryboardQuery?: string;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
+  onSnippetApply?: (event: CustomEvent<EventDetailOfSnippetApply>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
   onNodeMove?: (event: CustomEvent<EventDetailOfNodeMove>) => void;
   onNodeClick?: (event: CustomEvent<BuilderRuntimeNode>) => void;
@@ -85,6 +94,9 @@ export function LegacyBuilderContainer(
     snippetList,
     storyList,
     processing,
+    statusOfLoadingInstalledBricks,
+    errorOfLoadingInstalledBricks,
+    installedBricks,
     initialFullscreen,
     initialToolboxTab,
     initialEventStreamNodeId,
@@ -93,6 +105,7 @@ export function LegacyBuilderContainer(
     initialCanvasIndex,
     initialStoryboardQuery,
     onNodeAdd,
+    onSnippetApply,
     onNodeReorder,
     onNodeMove,
     onNodeClick,
@@ -155,6 +168,22 @@ export function LegacyBuilderContainer(
   );
   const [storyboardQuery, setStoryboardQuery] =
     React.useState(memoStoryboardQuery);
+
+  const memoStateOfInstalledBricks = React.useMemo<StateOfInstalledBricks>(
+    () => ({
+      status: statusOfLoadingInstalledBricks,
+      error: errorOfLoadingInstalledBricks,
+      data: installedBricks,
+    }),
+    [
+      errorOfLoadingInstalledBricks,
+      installedBricks,
+      statusOfLoadingInstalledBricks,
+    ]
+  );
+  const [stateOfInstalledBricks, setStateOfInstalledBricks] = React.useState(
+    memoStateOfInstalledBricks
+  );
 
   const manager = useBuilderDataManager();
 
@@ -225,17 +254,26 @@ export function LegacyBuilderContainer(
   }, [storyList, manager]);
 
   React.useEffect(() => {
-    const removeListenersOfNodeAdd = manager.onNodeAdd(onNodeAdd);
-    const removeListenersOfNodeMove = manager.onNodeMove(onNodeMove);
-    const removeListenersOfNodeReorder = manager.onNodeReorder(onNodeReorder);
-    const removeListenersOfNodeClick = manager.onNodeClick(onNodeClick);
+    const removeListeners = [
+      manager.onNodeAdd(onNodeAdd),
+      manager.onSnippetApply(onSnippetApply),
+      manager.onNodeMove(onNodeMove),
+      manager.onNodeReorder(onNodeReorder),
+      manager.onNodeClick(onNodeClick),
+    ];
     return () => {
-      removeListenersOfNodeAdd();
-      removeListenersOfNodeMove();
-      removeListenersOfNodeReorder();
-      removeListenersOfNodeClick();
+      for (const fn of removeListeners) {
+        fn();
+      }
     };
-  }, [manager, onNodeAdd, onNodeClick, onNodeMove, onNodeReorder]);
+  }, [
+    manager,
+    onNodeAdd,
+    onNodeClick,
+    onNodeMove,
+    onNodeReorder,
+    onSnippetApply,
+  ]);
 
   React.useEffect(() => {
     setFullscreen(initialFullscreen);
@@ -284,6 +322,10 @@ export function LegacyBuilderContainer(
     onStoryboardQueryUpdate?.(storyboardQuery);
   }, [storyboardQuery, onStoryboardQueryUpdate]);
 
+  React.useEffect(() => {
+    setStateOfInstalledBricks(memoStateOfInstalledBricks);
+  }, [memoStateOfInstalledBricks]);
+
   const handleClickOverlay = (): void => {
     onWorkbenchClose?.();
   };
@@ -297,6 +339,10 @@ export function LegacyBuilderContainer(
         snippetList,
         storyList,
         processing,
+        enabledInstalledBricks:
+          getRuntime().getFeatureFlags()["next-builder-installed-bricks"],
+        stateOfInstalledBricks,
+        setStateOfInstalledBricks,
         fullscreen,
         setFullscreen,
         toolboxTab,

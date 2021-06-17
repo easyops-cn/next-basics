@@ -25,7 +25,13 @@ export function LegacyAdvancedBrickLibrary(
   ref: React.Ref<any>
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const { appId, brickList, storyList } = useBuilderUIContext();
+  const {
+    appId,
+    brickList,
+    storyList,
+    enabledInstalledBricks,
+    stateOfInstalledBricks,
+  } = useBuilderUIContext();
   const [q, setQ] = useState<string>();
   const [category, setCategory] = useState<string>();
   const searchRef = useRef<any>();
@@ -51,10 +57,23 @@ export function LegacyAdvancedBrickLibrary(
       category,
       brickList,
       storyList: mergedStroyList,
+      installedBricks:
+        enabledInstalledBricks && stateOfInstalledBricks.status === "ok"
+          ? stateOfInstalledBricks.data
+          : [],
       appId,
       rootNode,
     });
-  }, [appId, brickList, q, category, storyList]);
+  }, [
+    storyList,
+    q,
+    category,
+    brickList,
+    enabledInstalledBricks,
+    stateOfInstalledBricks,
+    appId,
+    rootNode,
+  ]);
 
   return (
     <div>

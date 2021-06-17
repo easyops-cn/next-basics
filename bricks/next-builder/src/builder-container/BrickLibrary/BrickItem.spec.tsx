@@ -6,6 +6,7 @@ import {
   CopyFilled,
   DatabaseFilled,
   GoldenFilled,
+  NumberOutlined,
 } from "@ant-design/icons";
 import { BuilderDataTransferType } from "@next-core/editor-bricks-helper";
 import { GeneralIcon } from "@next-libs/basic-components";
@@ -124,6 +125,41 @@ describe("BrickItem", () => {
           type: BuilderDataTransferType.NODE_TO_ADD,
           brickType: undefined,
           brick: "my.awesome-custom-template",
+        },
+      })
+    );
+  });
+
+  it("should display a snippet", () => {
+    const dragRef = jest.fn();
+    mockUseDrag.mockReturnValueOnce([{ isDragging: false }, dragRef]);
+    const wrapper = shallow(
+      <BrickItem
+        brick={{
+          type: "snippet",
+          name: "my.snippet",
+          shortName: "snippet",
+          title: "My Snippet",
+          bricks: [
+            {
+              brick: "easy-view",
+            },
+          ],
+        }}
+      />
+    );
+    expect(wrapper.find(".brickItem").hasClass("snippet")).toBe(true);
+    expect(wrapper.find(NumberOutlined).length).toBe(1);
+    expect(wrapper.find(".brickName").text()).toBe("My Snippet");
+    expect(mockUseDrag).toBeCalledWith(
+      expect.objectContaining({
+        item: {
+          type: BuilderDataTransferType.SNIPPET_TO_APPLY,
+          bricks: [
+            {
+              brick: "easy-view",
+            },
+          ],
         },
       })
     );
