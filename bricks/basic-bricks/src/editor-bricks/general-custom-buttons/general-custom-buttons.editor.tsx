@@ -29,6 +29,7 @@ interface CustomButtonProps {
 interface GeneralCustomButtonsProperties {
   customButtons?: CustomButtonProps[] | string;
   isMoreButton: true;
+  alignment: "start" | "center" | "end" | "stretch";
 }
 
 interface BaseButtonProps {
@@ -74,14 +75,21 @@ export function GeneralCustomButtonsEditor({
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<GeneralCustomButtonsProperties>({ nodeUid });
 
-  const { customButtons, isMoreButton } = node.$$parsedProperties;
+  const {
+    customButtons,
+    isMoreButton,
+    alignment = "center",
+  } = node.$$parsedProperties;
   const hasDropdown =
     Array.isArray(customButtons) &&
     customButtons.some((item) => item.isDropdown);
 
   return (
     <EditorContainer nodeUid={nodeUid}>
-      <div className={styles.customContainer}>
+      <div
+        className={styles.customContainer}
+        style={{ justifyContent: alignment }}
+      >
         {isEmpty(customButtons) ? (
           <BaseButton>{node.alias}</BaseButton>
         ) : Array.isArray(customButtons) ? (

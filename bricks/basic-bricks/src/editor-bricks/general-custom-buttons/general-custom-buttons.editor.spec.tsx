@@ -37,6 +37,7 @@ describe("GeneralCustomButtonsEditor", () => {
       brick: "general-custom-buttons",
       alias: "custom-button",
       $$parsedProperties: {
+        alignment: "end",
         isMoreButton: false,
         customButtons: [
           {
@@ -66,6 +67,9 @@ describe("GeneralCustomButtonsEditor", () => {
     expect(wrapper.find(BaseButton).at(0).render().text()).toEqual(
       expect.stringContaining("新建")
     );
+    expect(wrapper.find(".customContainer").prop("style")).toEqual({
+      justifyContent: "end",
+    });
   });
 
   it("should render dropdown button", () => {
