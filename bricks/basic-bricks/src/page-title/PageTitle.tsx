@@ -1,5 +1,5 @@
 import React from "react";
-import { getRuntime } from "@next-core/brick-kit";
+import { useApplyPageTitle } from "@next-core/brick-kit";
 
 interface PageTitleProps {
   pageTitle: string;
@@ -10,10 +10,7 @@ export function PageTitle({
   pageTitle,
   dashboardMode,
 }: PageTitleProps): React.ReactElement {
-  React.useEffect(() => {
-    const { appBar } = getRuntime();
-    appBar.setPageTitle(pageTitle);
-  }, [pageTitle]);
+  useApplyPageTitle(pageTitle);
 
   return (
     <>

@@ -1,15 +1,15 @@
+import { cloneDeep } from "lodash";
+import i18next from "i18next";
+import { i18nText } from "@next-core/brick-kit";
 import {
   Story,
   Chapter,
-  I18nString,
   CategoryGroup,
   StoryDoc,
   MenuIcon,
 } from "@next-core/brick-types";
-import { cloneDeep } from "lodash";
 import { atomBook } from "../stories/chapters/atom-bricks";
 import { businessBook } from "../stories/chapters/business-bricks";
-import i18next from "i18next";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
 
 export interface BrickRecord {
@@ -52,10 +52,11 @@ export function searchByCategory(
   }
 }
 
-export const getStoryTitle = (story: Story, lang: keyof I18nString) => {
-  return story?.deprecated
-    ? `（${i18next.t(K.DEPRECATED, { ns: NS_DEVELOPERS })}）${story.text[lang]}`
-    : story.text[lang];
+export const getStoryTitle = (story: Story): string => {
+  const text = i18nText(story.text);
+  return story.deprecated
+    ? `（${i18next.t(K.DEPRECATED, { ns: NS_DEVELOPERS })}）${text}`
+    : text;
 };
 
 export const getAllStoryListV2 = (
@@ -95,9 +96,6 @@ export const getAllStoryListV2 = (
     externalBook.push(...menu.items);
   });
   books = [...atomBook, ...businessBook, ...externalBook];
-  const lang = i18next.language
-    ? (i18next.language.split("-")[0] as keyof I18nString)
-    : "zh";
   stories.forEach((story) => {
     const finder = books.find((book) => book.category === story.category);
     if (finder) {
@@ -125,9 +123,9 @@ export const getAllStoryListV2 = (
         return;
       }
       const description = story.description
-        ? story.description[lang] || DEFAULT_DESCRIPTION
+        ? i18nText(story.description) || DEFAULT_DESCRIPTION
         : DEFAULT_DESCRIPTION;
-      const title = story.text[lang];
+      const title = i18nText(story.text);
       const category = chapter.category;
       const author = story.author || "";
       if (
@@ -141,10 +139,10 @@ export const getAllStoryListV2 = (
         const item: BrickRecord = {
           id: story.storyId,
           type: story.type,
-          title: getStoryTitle(story, lang),
+          title: getStoryTitle(story),
           subTitle: story.author,
           description: description,
-          tags: tags.map((item) => item[lang]),
+          tags: tags.map(i18nText),
           icon: story.icon,
           category: category,
         };

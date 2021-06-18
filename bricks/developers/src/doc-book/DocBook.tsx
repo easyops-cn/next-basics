@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { getRuntime } from "@next-core/brick-kit";
+import { useApplyPageTitle } from "@next-core/brick-kit";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
 import releaseMd from "../docs/RELEASE.md";
 import { BrickDoc } from "../components/BrickDoc/BrickDoc";
@@ -30,9 +30,7 @@ export function DocBook({ docId }: DockBookProps): React.ReactElement {
       break;
   }
 
-  React.useEffect(() => {
-    getRuntime().appBar.setPageTitle(title);
-  }, [title]);
+  useApplyPageTitle(title);
 
   if (!doc) {
     throw new Error("Oops, doc not found");

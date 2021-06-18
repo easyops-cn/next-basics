@@ -1,21 +1,18 @@
 import i18next from "i18next";
+import { cloneDeep } from "lodash";
+import { i18nText } from "@next-core/brick-kit";
 import {
-  MenuIcon,
   SidebarMenuItem,
   SidebarMenuGroup,
   SidebarMenu,
-} from "@next-core/brick-types";
-import { atomBook } from "../stories/chapters/atom-bricks";
-import { businessBook } from "../stories/chapters/business-bricks";
-import {
   Story,
   Chapter,
-  I18nString,
   CategoryGroup,
   StoryDoc,
 } from "@next-core/brick-types";
+import { atomBook } from "../stories/chapters/atom-bricks";
+import { businessBook } from "../stories/chapters/business-bricks";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
-import { cloneDeep } from "lodash";
 import {
   BrickRecord,
   DEFAULT_DESCRIPTION,
@@ -106,16 +103,11 @@ export const listBrickStory = (
   } else {
     books = [...atomBook, ...businessBook];
   }
-  const lang = i18next.language
-    ? (i18next.language.split("-")[0] as keyof I18nString)
-    : "zh";
   books.forEach((chapter) => {
     chapter.stories.forEach((story) => {
-      const description = story.description
-        ? story.description[lang] || DEFAULT_DESCRIPTION
-        : DEFAULT_DESCRIPTION;
-      const title = story.text[lang];
-      const category = chapter.title[lang];
+      const description = i18nText(story.description) || DEFAULT_DESCRIPTION;
+      const title = i18nText(story.text);
+      const category = i18nText(chapter.title);
       const author = story.author || "";
       if (
         searchByQ(q, [description, title, author, story.storyId]) &&
@@ -131,7 +123,7 @@ export const listBrickStory = (
           title: title,
           subTitle: story.author,
           description: description,
-          tags: tags.map((item) => item[lang]),
+          tags: tags.map(i18nText),
           icon: story.icon,
           category: category,
         };
@@ -157,20 +149,11 @@ export const categoryList = (storyType: string): Promise<string[]> => {
   } else if (storyType === "business") {
     books = businessBook;
   }
-
-  const lang = i18next.language
-    ? (i18next.language.split("-")[0] as keyof I18nString)
-    : "zh";
-  const categoryList = books.map((book: Chapter) => {
-    return book.title[lang];
-  });
+  const categoryList = books.map((book: Chapter) => i18nText(book.title));
   return Promise.resolve(categoryList);
 };
 
 export const categoryMenu = (): Promise<SidebarMenu> => {
-  const lang = i18next.language
-    ? (i18next.language.split("-")[0] as keyof I18nString)
-    : "zh";
   const menuItems: SidebarMenuItem[] = [
     {
       text: i18next.t(`${NS_DEVELOPERS}:${K.ALL}`),
@@ -192,9 +175,10 @@ export const categoryMenu = (): Promise<SidebarMenu> => {
   let i = 1;
   [atomBook, businessBook].forEach((books) => {
     books.forEach((book: Chapter) => {
+      const title = i18nText(book.title);
       (menuItems[i] as SidebarMenuGroup).items.push({
-        text: book.title[lang],
-        to: `/developers/brick-book?category=${book.title[lang]}`,
+        text: title,
+        to: `/developers/brick-book?category=${title}`,
         exact: true,
         activeMatchSearch: true,
       });
@@ -211,9 +195,6 @@ export const categoryMenuV2 = (
   categoryGroups: CategoryGroup[]
 ): Promise<SidebarMenu> => {
   const groups = cloneDeep(categoryGroups);
-  const lang = i18next.language
-    ? (i18next.language.split("-")[0] as keyof I18nString)
-    : "zh";
   const menuItems: SidebarMenuItem[] = [
     {
       text: i18next.t(`${NS_DEVELOPERS}:${K.ALL}`),
@@ -225,14 +206,14 @@ export const categoryMenuV2 = (
   let i = 1;
   groups.forEach((menu) => {
     menuItems.push({
-      title: menu.title[lang],
+      title: i18nText(menu.title),
       type: "group",
       items: [],
     });
 
     menu.items.forEach((book: Chapter) => {
       (menuItems[i] as SidebarMenuGroup).items.push({
-        text: book.title[lang],
+        text: i18nText(book.title),
         to: `/developers/brick-book?category=${book.category}`,
         exact: true,
         activeMatchSearch: true,

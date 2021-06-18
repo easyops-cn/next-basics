@@ -1,14 +1,9 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
-import * as kit from "@next-core/brick-kit";
+import { useApplyPageTitle } from "@next-core/brick-kit";
 import { PageTitle } from "./PageTitle";
 
-const spyOnSetPageTitle = jest.fn();
-jest.spyOn(kit, "getRuntime").mockReturnValue({
-  appBar: {
-    setPageTitle: spyOnSetPageTitle,
-  },
-} as any);
+jest.mock("@next-core/brick-kit");
 
 describe("PageTitle", () => {
   afterEach(() => {
@@ -17,12 +12,12 @@ describe("PageTitle", () => {
 
   it("should update page title", () => {
     const wrapper = mount(<PageTitle pageTitle="hello" />);
-    expect(spyOnSetPageTitle).toBeCalledWith("hello");
+    expect(useApplyPageTitle).toBeCalledWith("hello");
 
     wrapper.setProps({
       pageTitle: "world",
     });
-    expect(spyOnSetPageTitle).toBeCalledWith("world");
+    expect(useApplyPageTitle).toBeCalledWith("world");
   });
 
   it("should toggle dashboard mode", () => {
