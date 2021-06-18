@@ -1,0 +1,13 @@
+.tagContainer {
+  display: flex;
+  gap: 5px;
+
+  .tag {
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+    padding: 0 9px;
+    border-radius: 12px;
+    background-color: var(--editor-brick-skeleton-bg-light);
+  }
+}

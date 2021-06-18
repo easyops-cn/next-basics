@@ -15,6 +15,7 @@ import { get, map } from "lodash";
 /**
  * @id presentational-bricks.brick-tag
  * @name presentational-bricks.brick-tag
+ * @editor shared-editors.general-tag--editor
  * @docKind brick
  * @description 进行标记和分类的小标签，同时支持基本标签和可选中标签
  * @author lynette
