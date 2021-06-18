@@ -1,25 +1,24 @@
 import React from "react";
-import i18next from "i18next";
 import {
   AppstoreOutlined,
   CodeOutlined,
   FileSearchOutlined,
 } from "@ant-design/icons";
 import { Radio } from "antd";
+import { RadioChangeEvent } from "antd/lib/radio";
 import { useTranslation } from "react-i18next";
-import { getRuntime } from "@next-core/brick-kit";
-import { I18nString, Story, StoryDoc, BrickConf } from "@next-core/brick-types";
+import { getRuntime, i18nText } from "@next-core/brick-kit";
+import { Story, StoryDoc, BrickConf } from "@next-core/brick-types";
+import { Link } from "@next-libs/basic-components";
+import { JsonStorage } from "@next-libs/storage";
 import { BrickDoc } from "../../components/BrickDoc/BrickDoc";
 import { findStoryById } from "../../providers-of-brick-story/processor";
 import { getStoryTitle } from "../../share/processor";
 import { K, NS_DEVELOPERS } from "../../i18n/constants";
+import { BrickDemo } from "../BrickDemo/BrickDemo";
+import { BrickDocument } from "../../brick-document/BrickDocument";
 
 import cssStyle from "./style.module.css";
-import { BrickDemo } from "../BrickDemo/BrickDemo";
-import { Link, GeneralIcon } from "@next-libs/basic-components";
-import { JsonStorage } from "@next-libs/storage";
-import { RadioChangeEvent } from "antd/lib/radio";
-import { BrickDocument } from "../../brick-document/BrickDocument";
 
 export interface BrickBookProps {
   storyId: string;
@@ -50,30 +49,27 @@ export function BrickBook({
   const developerStorage = storage.getItem(NS_DEVELOPERS) ?? {};
 
   const { t } = useTranslation(NS_DEVELOPERS);
-  const lang = i18next.language
-    ? (i18next.language.split("-")[0] as keyof I18nString)
-    : "zh";
 
   const [mode, setMode] = React.useState(developerStorage.mode ?? "json");
   React.useEffect(() => {
     if (story && !notToSetPageTitle) {
-      getRuntime().appBar.setPageTitle(story.text[lang]);
+      getRuntime().applyPageTitle(i18nText(story.text));
     }
-  }, [story, lang]);
+  }, [notToSetPageTitle, story]);
 
   if (confList.length === 0) {
     return null;
   }
 
-  const onChange = (e: RadioChangeEvent) => {
+  const onChange = (e: RadioChangeEvent): void => {
     const value = e.target.value;
     developerStorage.mode = value;
     setMode(value);
     storage.setItem(NS_DEVELOPERS, developerStorage);
   };
 
-  const title = getStoryTitle(story, lang);
-  const description = story.description ? story.description[lang] : "";
+  const title = getStoryTitle(story);
+  const description = i18nText(story.description) || "";
 
   return (
     <>
