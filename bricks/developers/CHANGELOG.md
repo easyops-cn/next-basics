@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.342.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.1...@next-bricks/developers@1.342.2) (2021-06-21)
+
+
+### Bug Fixes
+
+* refine page title and i18n usage ([28627d8](https://github.com/easyops-cn/next-basics/commit/28627d86a6d100a413ea1b945e19b3debe40e8e2))
+
+
+
+
+
 ## [1.342.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.0...@next-bricks/developers@1.342.1) (2021-06-15)
 
 

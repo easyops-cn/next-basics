@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.130.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.129.2...@next-bricks/basic-bricks@1.130.0) (2021-06-21)
+
+
+### Bug Fixes
+
+* custom button editor style ([261c01a](https://github.com/easyops-cn/next-basics/commit/261c01a62fe93e8cece1fd08ac186cfb00426a35))
+* refine page title and i18n usage ([28627d8](https://github.com/easyops-cn/next-basics/commit/28627d86a6d100a413ea1b945e19b3debe40e8e2))
+* **easy-view:** use border-box in shadow css ([e42efca](https://github.com/easyops-cn/next-basics/commit/e42efcab8d736768422dea57175d5166666299d2))
+* **easy-view--editor:** show area id in background ([96b4821](https://github.com/easyops-cn/next-basics/commit/96b48212532284d37c7e6ebce604051235068362))
+
+
+### Features
+
+* add snippets of easy-view and general-button ([95a6ad4](https://github.com/easyops-cn/next-basics/commit/95a6ad45589e5cda946fca45434277828c80e546))
+
+
+
+
+
 ## [1.129.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.129.1...@next-bricks/basic-bricks@1.129.2) (2021-06-15)
 
 

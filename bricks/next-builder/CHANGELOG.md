@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.57.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.56.0...@next-bricks/next-builder@1.57.0) (2021-06-21)
+
+
+### Bug Fixes
+
+* revert using installed bricks ([a3a7462](https://github.com/easyops-cn/next-basics/commit/a3a7462570778bdfff53b0009774d275a0f5b018))
+* show thumbnails for snippets ([c86494c](https://github.com/easyops-cn/next-basics/commit/c86494ced3dc4ea9894c6f047819e13535552140))
+
+
+### Features
+
+* add custom provider ([e1f4974](https://github.com/easyops-cn/next-basics/commit/e1f49749c9af3085d1b4531ee1b9fe5c900db848))
+* support to apply snippets ([c44b6b9](https://github.com/easyops-cn/next-basics/commit/c44b6b9de31a99eb248068512dfd8e45c580b01c))
+* support tp load hosted snippets ([fa3064c](https://github.com/easyops-cn/next-basics/commit/fa3064c27018cdb9dd3f5d1920ec231c3a39f96b))
+* **snippet:** builder-container support snippet ([6c03cdb](https://github.com/easyops-cn/next-basics/commit/6c03cdb5247b3713d3736a5af8ec2cf90a792836))
+
+
+
+
+
 # [1.56.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.55.1...@next-bricks/next-builder@1.56.0) (2021-06-11)
 
 
