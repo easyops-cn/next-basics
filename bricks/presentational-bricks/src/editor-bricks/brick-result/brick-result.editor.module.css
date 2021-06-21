@@ -1,0 +1,19 @@
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--card-content-gap);
+  gap: 5px;
+
+  .icon {
+    font-size: 100px;
+    color: var(--editor-brick-stroke-color);
+  }
+
+  .content {
+    height: 20px;
+    width: 220px;
+    background-color: var(--editor-brick-skeleton-bg-light);
+  }
+}

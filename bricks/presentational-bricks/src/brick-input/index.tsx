@@ -13,6 +13,7 @@ import { BrickInput } from "./BrickInput";
 /**
  * @id presentational-bricks.brick-input
  * @name presentational-bricks.brick-input
+ * @editor forms.general-input--editor
  * @docKind brick
  * @description 输入框，只发起事件不更新url，注意与brick-general-search的区别
  * @author momo

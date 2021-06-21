@@ -26,6 +26,7 @@ export interface MappingValue {
 /**
  * @id presentational-bricks.brick-value-mapping
  * @name presentational-bricks.brick-value-mapping
+ * @editor shared-editors.general-tag--editor
  * @docKind brick
  * @description 适用于将基本类型的数值转换成有意义的文本进行展示
  * @author ice

@@ -15,3 +15,4 @@ import "./upload-img/upload-img.editor";
 import "./general-buttons/general-buttons.editor";
 import "./time-range-picker/time-range-picker.editor";
 import "./input-with-unit/input-with-unit.editor";
+import "./general-form-item/general-form-item.editor";

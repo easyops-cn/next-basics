@@ -1,0 +1,24 @@
+.descriptionContainer {
+  padding: 20px;
+  border: 1px solid var(--editor-brick-stroke-color);
+  border-radius: var(--editor-brick-border-radius);
+
+  .title {
+    height: 20px;
+    background-color: var(--editor-brick-skeleton-bg);
+    margin-bottom: 20px;
+    width: 60px;
+  }
+
+  .content {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+    height: 100px;
+    grid-template-rows: 1fr 1fr;
+    .item {
+      height: 20px;
+      background-color: var(--editor-brick-skeleton-bg-light);
+    }
+  }
+}
