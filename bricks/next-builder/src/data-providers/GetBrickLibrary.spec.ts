@@ -1,5 +1,4 @@
-import { developHelper, i18nText } from "@next-core/brick-kit";
-import { pipes } from "@next-core/brick-utils";
+import { developHelper, getRuntime, i18nText } from "@next-core/brick-kit";
 import {
   InstanceApi_postSearchV3,
   InstanceGraphApi_traverseGraphV2,
@@ -7,12 +6,6 @@ import {
 
 jest.mock("@next-core/brick-kit");
 jest.mock("@next-sdk/cmdb-sdk");
-jest.mock("@next-core/brick-utils", () => ({
-  pipes: {
-    graphTree: jest.fn(),
-  },
-  createProviderClass: jest.fn(),
-}));
 
 jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
 
@@ -52,96 +45,140 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
 
 (i18nText as jest.Mock).mockImplementation((data) => data?.zh);
 
-(InstanceApi_postSearchV3 as jest.Mock)
-  .mockResolvedValueOnce({
-    list: [
-      {
-        instanceId: "a",
-        templateId: "tpl-a",
-        id: "P-01",
+// Given a graph:
+//      x        y
+//      ↓        ↓
+//     x-1      y-1
+//      ↓
+//    ↙   ↘
+// x-1-1 x-1-2
+(InstanceGraphApi_traverseGraphV2 as jest.Mock).mockResolvedValue({
+  topic_vertices: [
+    {
+      instanceId: "x",
+      snippetId: "hosted-snippet-x",
+      text: {
+        zh: "片段 X",
+        en: "Snippet X",
       },
-      {
-        instanceId: "b",
-        templateId: "tpl-b",
-        id: "P-02",
-      },
-    ],
-  })
-  .mockResolvedValueOnce({
-    list: [
-      {
-        id: "installed-snippet-a",
-        text: {
-          zh: "片段 A",
-          en: "Snippet A",
-        },
-        category: "layout",
-        thumbnail: "url-1",
-        bricks: [],
-      },
-      {
-        id: "installed-snippet-b",
-        category: "layout",
-        thumbnail: "url-2",
-        bricks: [],
-      },
-    ],
-  });
-
-(InstanceGraphApi_traverseGraphV2 as jest.Mock).mockResolvedValue({});
-
-(pipes.graphTree as jest.Mock).mockReturnValue([
-  {
-    instanceId: "x",
-    snippetId: "hosted-snippet-x",
-    text: {
-      zh: "片段 X",
-      en: "Snippet X",
+      category: "hosted",
+      thumbnail: "url-x",
     },
-    category: "hosted",
-    thumbnail: "url-x",
-    children: [
-      {
-        type: "brick",
-        brick: "easy-view",
-        properties: '{"gap":10}',
-        children: [
-          {
-            type: "brick",
-            brick: "general-button",
-            mountPoint: "a",
-            events: '{"click":{"action":"console.log"}}',
-          },
-          {
-            type: "provider",
-            brick: "test-provider",
-            mountPoint: "b",
-            bg: true,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    instanceId: "y",
-    snippetId: "hosted-snippet-y",
-    category: "hosted",
-    thumbnail: "url-y",
-    children: [
-      {
-        type: "brick",
-        brick: "easy-view",
-        properties: '{"gridTemplateAreas":[["left","right"]]}',
-      },
-    ],
-  },
-]);
+    {
+      instanceId: "y",
+      snippetId: "hosted-snippet-y",
+      category: "hosted",
+      thumbnail: "url-y",
+    },
+  ],
+  vertices: [
+    {
+      instanceId: "x-1",
+      type: "brick",
+      brick: "easy-view",
+      properties: '{"gap":10}',
+    },
+    {
+      instanceId: "x-1-1",
+      type: "brick",
+      brick: "general-button",
+      mountPoint: "a",
+      events: '{"click":{"action":"console.log"}}',
+    },
+    {
+      instanceId: "x-1-2",
+      type: "provider",
+      brick: "test-provider",
+      mountPoint: "b",
+      bg: true,
+    },
+    {
+      instanceId: "y-1",
+      type: "brick",
+      brick: "easy-view",
+      properties: '{"gridTemplateAreas":[["left","right"]]}',
+    },
+  ],
+  edges: [
+    {
+      in: "x-1",
+      out: "x",
+      out_name: "children",
+    },
+    {
+      in: "x-1-1",
+      out: "x-1",
+      out_name: "children",
+    },
+    {
+      in: "x-1-2",
+      out: "x-1",
+      out_name: "children",
+    },
+    {
+      in: "y-1",
+      out: "y",
+      out_name: "children",
+    },
+  ],
+});
+
+const mockGetFeatureFlags = jest.fn();
+(getRuntime as jest.Mock).mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+});
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { GetBrickLibrary } = require("./GetBrickLibrary");
 
 describe("GetBrickLibrary", () => {
+  beforeEach(() => {
+    (InstanceApi_postSearchV3 as jest.Mock)
+      .mockResolvedValueOnce({
+        list: [
+          {
+            instanceId: "a",
+            templateId: "tpl-a",
+            id: "P-01",
+          },
+          {
+            instanceId: "b",
+            templateId: "tpl-b",
+            id: "P-02",
+          },
+        ],
+      })
+      .mockResolvedValueOnce({
+        list: [
+          {
+            id: "installed-snippet-a",
+            text: {
+              zh: "片段 A",
+              en: "Snippet A",
+            },
+            category: "layout",
+            thumbnail: "url-1",
+            bricks: [],
+          },
+          {
+            id: "installed-snippet-b",
+            category: "layout",
+            thumbnail: "url-2",
+            bricks: [],
+          },
+        ],
+      });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should work", async () => {
+    mockGetFeatureFlags.mockReturnValueOnce({
+      "next-builder-installed-snippets": true,
+      "next-builder-hosted-snippets": true,
+    });
     expect(await GetBrickLibrary({ projectId: "test-project" }))
       .toMatchInlineSnapshot(`
       Array [
@@ -270,5 +307,16 @@ describe("GetBrickLibrary", () => {
         },
       ]
     `);
+  });
+
+  it("should ignore snippets", async () => {
+    mockGetFeatureFlags.mockReturnValueOnce({});
+    expect(
+      (await GetBrickLibrary({ projectId: "test-project" })).some(
+        (brick) => brick.type === "snippet"
+      )
+    ).toBe(false);
+    expect(InstanceApi_postSearchV3).toBeCalledTimes(1);
+    expect(InstanceGraphApi_traverseGraphV2).not.toBeCalled();
   });
 });
