@@ -43,7 +43,9 @@ export function GeneralFormEditor({
           nodeUid={nodeUid}
           slotName="items"
           dropZoneBodyStyle={
-            layout !== LayoutType.Inline ? { gridTemplateColumns: "1fr" } : {}
+            layout !== LayoutType.Inline
+              ? { gridTemplateColumns: "minmax(0, 1fr)" }
+              : {}
           }
         />
       </div>
