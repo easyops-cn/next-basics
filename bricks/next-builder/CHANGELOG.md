@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.58.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.57.0...@next-bricks/next-builder@1.58.0) (2021-06-21)
+
+
+### Features
+
+* fetch snippets by flags ([b407514](https://github.com/easyops-cn/next-basics/commit/b407514a3b59f16c619471fb548225895e82bc0e))
+
+
+
+
+
 # [1.57.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.56.0...@next-bricks/next-builder@1.57.0) (2021-06-21)
 
 
