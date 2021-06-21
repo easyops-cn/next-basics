@@ -3,3 +3,4 @@ import "./brick-table/brick-table.editor";
 import "./statistic-card/statistic-card.editor";
 import "./brick-link/brick-link.editor";
 import "./brick-descriptions/brick-descriptions.editor";
+import "./brick-result/brick-result.editor";
