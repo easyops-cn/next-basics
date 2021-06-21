@@ -1,4 +1,4 @@
-import { developHelper, i18nText } from "@next-core/brick-kit";
+import { developHelper, getRuntime, i18nText } from "@next-core/brick-kit";
 import { BrickConf } from "@next-core/brick-types";
 import { createProviderClass, pipes } from "@next-core/brick-utils";
 import {
@@ -24,6 +24,10 @@ export interface GetBrickLibraryParams {
 export async function GetBrickLibrary({
   projectId,
 }: GetBrickLibraryParams): Promise<BrickLibraryItem[]> {
+  const flags = getRuntime().getFeatureFlags();
+  const installedSnippetsEnabled = flags["next-builder-installed-snippets"];
+  const hostedSnippetsEnabled = flags["next-builder-hosted-snippets"];
+
   const [customTemplates, installedSnippets, hostedSnippets] =
     await Promise.all([
       InstanceApi_postSearchV3("STORYBOARD_TEMPLATE", {
@@ -33,31 +37,39 @@ export async function GetBrickLibrary({
           "project.instanceId": projectId,
         },
       }),
-      InstanceApi_postSearchV3("INSTALLED_BRICK_SNIPPET@EASYOPS", {
-        fields: ["id", "text", "category", "thumbnail", "bricks"],
-        page_size: 3000,
-      }),
-      InstanceGraphApi_traverseGraphV2({
-        child: [
-          {
+      installedSnippetsEnabled
+        ? InstanceApi_postSearchV3("INSTALLED_BRICK_SNIPPET@EASYOPS", {
+            fields: ["id", "text", "category", "thumbnail", "bricks"],
+            page_size: 3000,
+          })
+        : { list: [] },
+      hostedSnippetsEnabled
+        ? InstanceGraphApi_traverseGraphV2({
             child: [
               {
+                child: [
+                  {
+                    depth: -1,
+                    parentOut: "children",
+                    select_fields: ["*"],
+                  },
+                ],
                 depth: -1,
                 parentOut: "children",
                 select_fields: ["*"],
               },
             ],
-            depth: -1,
-            parentOut: "children",
+            object_id: "STORYBOARD_SNIPPET",
+            query: {
+              "project.instanceId": projectId,
+            },
             select_fields: ["*"],
+          })
+        : {
+            topic_vertices: [],
+            vertices: [],
+            edges: [],
           },
-        ],
-        object_id: "STORYBOARD_SNIPPET",
-        query: {
-          "project.instanceId": projectId,
-        },
-        select_fields: ["*"],
-      }),
     ]);
   return developHelper
     .getBrickPackages()
