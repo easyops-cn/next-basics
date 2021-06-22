@@ -288,7 +288,7 @@ export class CardItemElement extends UpdatingElement {
   iconOpacity: number;
 
   /**
-   * @kind {text: string;color:Color;triangle?:boolean;field: string;value?: any;isNotEqual?: boolean;hideOperate?: boolean;}
+   * @kind {text: string; color?: Color; triangle?: boolean; field?: string; value?: any; isNotEqual?: boolean; hideOperate?: boolean;}
    * @required false
    * @default -
    * @description 右上角 tag 标签
@@ -298,7 +298,7 @@ export class CardItemElement extends UpdatingElement {
   })
   tagConfig: {
     text: string;
-    field: string;
+    field?: string;
     value?: any;
     isNotEqual?: boolean; //增加下逻辑
     hideOperate?: boolean;
@@ -559,6 +559,11 @@ export class CardItemElement extends UpdatingElement {
           }
           mutableProps.hideOperate =
             mutableProps.showTag && this.tagConfig.hideOperate;
+        }
+      } else {
+        if (this.tagConfig) {
+          mutableProps.showTag = true;
+          mutableProps.hideOperate = this.tagConfig.hideOperate;
         }
       }
       ReactDOM.render(
