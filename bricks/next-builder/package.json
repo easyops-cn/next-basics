@@ -1,7 +1,7 @@
 {
   "name": "@next-bricks/next-builder",
   "version": "1.58.0",
-  "description": "> TODO: description",
+  "description": "Bricks for next-builder",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/next-builder",
   "license": "GPL-3.0",
   "files": [
