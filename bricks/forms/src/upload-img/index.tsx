@@ -111,6 +111,18 @@ export class UploadImgElement extends FormItemElement {
   maxNumber: number;
 
   /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 图片上传大小限制(MB), 最大上传大小为: 10MB
+   * @group advanced
+   */
+  @property({
+    type: Number,
+  })
+  limitSize: number;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -256,6 +268,7 @@ export class UploadImgElement extends FormItemElement {
             onRemove={this._handleRemove}
             bucketName={this.bucketName}
             maxNumber={this.maxNumber}
+            limitSize={this.limitSize}
             showTextarea={this.showTextarea}
             uploadDraggable={this.uploadDraggable || this.draggable}
             helpBrick={this.helpBrick}

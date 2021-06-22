@@ -2,9 +2,10 @@ import React, { ReactNode } from "react";
 import { CloudUploadOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import { UploadChangeParam } from "antd/lib/upload";
-import { UploadFile } from "antd/lib/upload/interface";
+import { UploadFile, RcFile } from "antd/lib/upload/interface";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
+import { FileUtils } from "../utils";
 import styles from "./UploadFiles.module.css";
 
 export interface UploadFilesTextProps {
@@ -19,6 +20,7 @@ export interface UploadFilesProps {
   data?: { [key: string]: string };
   multiple?: boolean;
   autoUpload?: boolean;
+  limitSize?: number;
   text?: UploadFilesTextProps;
   accept?: string;
   onChange: (data: {
@@ -40,7 +42,7 @@ export function UploadFiles(props: UploadFilesProps): React.ReactElement {
     name,
     data,
     multiple,
-    autoUpload,
+    limitSize,
     text,
     accept,
     onSuccess,
@@ -53,8 +55,14 @@ export function UploadFiles(props: UploadFilesProps): React.ReactElement {
     icon: "upload",
   };
 
-  const handleBeforeUpload = (): boolean => {
-    return false;
+  const handleBeforeUpload = (file: RcFile): Promise<RcFile> => {
+    return new Promise((resolve, reject) => {
+      if (FileUtils.sizeCompare(file, limitSize ?? 100)) {
+        onError?.(`上传文件体积大于限定体积`);
+        reject(file);
+      }
+      resolve(file);
+    });
   };
 
   const handleOnChange = (info: UploadChangeParam): void => {
@@ -146,11 +154,7 @@ export function UploadFiles(props: UploadFilesProps): React.ReactElement {
           accept={accept}
           fileList={fileList}
           multiple={!!multiple}
-          {...(autoUpload
-            ? {}
-            : {
-                beforeUpload: handleBeforeUpload,
-              })}
+          beforeUpload={handleBeforeUpload}
           onChange={handleOnChange}
           {...restProps}
         >

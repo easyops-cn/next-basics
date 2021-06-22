@@ -16,8 +16,7 @@ const fileList = [
     type: "image/png",
     name: "image",
     status: "done",
-    url:
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
   },
 ];
 
@@ -301,6 +300,63 @@ describe("UploadFilesV2", () => {
     expect(
       wrapper.find(".ant-upload-select-text button").prop("disabled")
     ).toBe(undefined);
+  });
+
+  it("test limitSize", async () => {
+    const wrapper = mount(<UploadFilesV2 url={url} method="put" />);
+    wrapper.setProps({
+      limitSize: 1,
+    });
+
+    const notAllowResult = wrapper.find(Upload).invoke("beforeUpload")(
+      {
+        uid: "-img1",
+        size: 1024 * 1024 * 10,
+        type: "image/png",
+        name: "image.png",
+        lastModifiedDate: new Date(),
+        webkitRelativePath: "",
+        lastModified: 1234,
+      },
+      [
+        {
+          uid: "-img1",
+          size: 1024 * 1024 * 10,
+          type: "image/png",
+          name: "image.png",
+        },
+      ]
+    );
+    await expect(notAllowResult).rejects.toMatchObject({
+      size: 1024 * 1024 * 10,
+    });
+
+    wrapper.setProps({
+      limitSize: 2,
+    });
+
+    const allowResult = wrapper.find(Upload).invoke("beforeUpload")(
+      {
+        uid: "-img1",
+        size: 1024 * 1024,
+        type: "image/png",
+        name: "image.png",
+        lastModifiedDate: new Date(),
+        webkitRelativePath: "",
+        lastModified: 1234,
+      },
+      [
+        {
+          uid: "-img1",
+          size: 1024 * 1024,
+          type: "image/png",
+          name: "image.png",
+        },
+      ]
+    );
+    await expect(allowResult).resolves.toMatchObject({
+      size: 1024 * 1024,
+    });
   });
 
   it("test draggable", async () => {

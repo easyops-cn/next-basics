@@ -133,6 +133,18 @@ export class UploadFilesV2Element extends FormItemElement {
   maxNumber: number;
 
   /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 文件上传大小限制(MB), 最大上传大小为: 100MB
+   * @group advanced
+   */
+  @property({
+    type: Number,
+  })
+  limitSize: number;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -245,6 +257,7 @@ export class UploadFilesV2Element extends FormItemElement {
             uploadButtonName={this.uploadButtonName}
             value={this.value}
             maxNumber={this.maxNumber}
+            limitSize={this.limitSize}
             uploadDraggable={this.uploadDraggable}
             hideUploadButton={this.hideUploadButton}
             draggableUploadText={this.draggableUploadText}
