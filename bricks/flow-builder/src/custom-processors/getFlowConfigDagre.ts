@@ -1,5 +1,5 @@
 import { getRuntime } from "@next-core/brick-kit";
-import { isEmpty } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
 import { Edge, FlowConfig } from "./interfaces";
 
 export function getFlowConfigDagre(flowConfigList: FlowConfig[]): any {
@@ -11,8 +11,10 @@ export function getFlowConfigDagre(flowConfigList: FlowConfig[]): any {
     children: [],
   };
   const edges: Edge[] = [];
-  const configIds: string[] = flowConfigList.map((config) => config.id);
-  flowConfigList.forEach((config) => {
+  const cloneFlowConfigList = cloneDeep(flowConfigList);
+  const configIds: string[] = cloneFlowConfigList.map((config) => config.id);
+
+  cloneFlowConfigList.forEach((config) => {
     config.flowType = config.action.type;
     config.type = "node";
     if (isEmpty(config.parents)) {
@@ -37,7 +39,7 @@ export function getFlowConfigDagre(flowConfigList: FlowConfig[]): any {
     }
   });
   return {
-    nodes: [root, ...flowConfigList],
+    nodes: [root, ...cloneFlowConfigList],
     edges: edges,
   };
 }
