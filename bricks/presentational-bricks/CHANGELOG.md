@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.188.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.187.0...@next-bricks/presentational-bricks@1.188.0) (2021-06-22)
+
+
+### Features
+
+* add brick editor ([fdbaa52](https://github.com/easyops-cn/next-basics/commit/fdbaa52c253252c032f400ff861b2384bc2d7262))
+* add brick editor ([b71a739](https://github.com/easyops-cn/next-basics/commit/b71a7396ac1a6dbac56a4a858535d772bce74e59))
+
+
+
+
+
 # [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.186.1...@next-bricks/presentational-bricks@1.187.0) (2021-06-11)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.170.0...@next-bricks/forms@1.171.0) (2021-06-22)
+
+
+### Bug Fixes
+
+* fix style ([4dc53e4](https://github.com/easyops-cn/next-basics/commit/4dc53e439c16362c4b562a53f7191e6f34fcefdb))
+
+
+### Features
+
+* add brick editor ([fdbaa52](https://github.com/easyops-cn/next-basics/commit/fdbaa52c253252c032f400ff861b2384bc2d7262))
+
+
+
+
+
 # [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.169.0...@next-bricks/forms@1.170.0) (2021-06-11)
 
 
