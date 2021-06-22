@@ -29,10 +29,10 @@ export class MultipleColumnsCardElement extends UpdatingElement {
   gridColumns: string;
 
   /**
-   * @kind string
+   * @kind boolean
    * @required false
-   * @default 是否显示卡片边框
-   * @description -
+   * @default `true`
+   * @description 是否显示卡片边框
    */
   @property({
     attribute: false,
