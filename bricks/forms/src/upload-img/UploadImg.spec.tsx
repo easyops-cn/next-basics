@@ -56,7 +56,7 @@ describe("UploadImg", () => {
       },
       fileList: [...fileList],
     });
-    wrapper.find(Upload).invoke("beforeUpload")(
+    const notAllowResult = wrapper.find(Upload).invoke("beforeUpload")(
       {
         uid: "123",
         size: 1234,
@@ -65,7 +65,9 @@ describe("UploadImg", () => {
       } as RcFile,
       [...fileList]
     );
-    expect(message.error).toHaveBeenCalled();
+    await expect(notAllowResult).rejects.toMatchObject({
+      size: 1234,
+    });
     wrapper.find(Upload).invoke("onChange")({
       file: {
         uid: "123",
