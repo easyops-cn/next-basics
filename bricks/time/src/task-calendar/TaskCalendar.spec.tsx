@@ -140,7 +140,7 @@ describe("TaskCalendar", () => {
         displayDate={"2021-05-30"}
       />
     );
-    wrapper.find("PickerPanel").invoke("onSelect")(moment("2021-05-01"));
+    wrapper.find("Calendar").invoke("onSelect")(moment("2021-05-01"));
     expect(wrapper.find(".taskItem")).toHaveLength(3);
     expect(wrapper.find(".importantItem")).toHaveLength(1);
     expect(onSelect).lastCalledWith({
@@ -171,7 +171,7 @@ describe("TaskCalendar", () => {
       },
     });
 
-    wrapper.find("PickerPanel").invoke("onPanelChange")(
+    wrapper.find("Calendar").invoke("onPanelChange")(
       moment("2021-04-01"),
       "date"
     );

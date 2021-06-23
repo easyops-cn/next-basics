@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { PickerPanel } from "rc-picker";
-import zhCN from "rc-picker/lib/locale/zh_CN";
+import { Calendar } from "antd";
 import solarLunar from "solarlunar";
 import moment, { Moment } from "moment";
-import momentGenerateConfig from "rc-picker/lib/generate/moment";
 import classNames from "classnames";
 import styles from "./TaskCalendar.module.css";
 import { min, isNil, get } from "lodash";
@@ -15,11 +13,8 @@ import {
   TaskSettings,
 } from "../interfaces";
 
-const prefixCls = "devops-calendar";
-
 export interface TaskCalendarProps {
   value?: string;
-  displayDate?: string;
   defaultSelectedDate?: string;
   briefData?: BriefData[];
   taskData?: TaskData[];
@@ -40,7 +35,6 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
     onDateSelect,
     onPickerPanelChange,
     value,
-    displayDate,
     defaultSelectedDate,
   } = props;
   const [selectedData, setSelectedData] = useState<{
@@ -73,8 +67,8 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
   }, [importantData]);
 
   const pickerValue = useMemo(() => {
-    return moment(displayDate || value);
-  }, [displayDate, value]);
+    return moment(value);
+  }, [value]);
 
   useEffect(() => {
     const now = moment(defaultSelectedDate || value);
@@ -91,7 +85,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
   }, [briefDataMap, defaultSelectedDate, importantDataMap, taskDataMap, value]);
 
   const dateRender = useCallback(
-    (date: Moment, today: Moment) => {
+    (date: Moment) => {
       const solar2lunarData = solarLunar.solar2lunar(
         date.year(),
         date.month() + 1,
@@ -119,7 +113,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
         <div
           className={classNames(styles.dateContainer, {
             [styles.importantDay]: !!importanceColor,
-            [styles.today]: date.isSame(value || today, "date"),
+            [styles.today]: date.isSame(pickerValue, "date"),
           })}
           style={{
             borderColor: date.isSame(selectedData?.date, "date")
@@ -152,69 +146,66 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
       importantDataMap,
       taskSettings,
       importanceSettings,
-      value,
       selectedData,
+      pickerValue,
     ]
   );
 
-  const renderExtraFooter = useCallback(
-    (mode: string) => {
-      return (
-        <div className={styles.dateFooter}>
-          <div className={styles.dateInfo}>
-            <div className={styles.dateText}>
-              {selectedData?.date?.format("YYYY[年]MM[月]DD[日]")}
-            </div>
-            <div>
-              {selectedData?.data?.importance?.map((issues) => (
-                <span
-                  className={styles.importantItem}
-                  key={issues}
-                  style={{
-                    backgroundColor: importanceSettings?.colorMap?.[issues],
-                  }}
-                >
-                  {issues}
-                </span>
-              ))}
+  const extraFooterNode = useMemo(() => {
+    return (
+      <div className={styles.calendarFooter}>
+        <div className={styles.dateInfo}>
+          <div className={styles.dateText}>
+            {selectedData?.date?.format("YYYY[年]MM[月]DD[日]")}
+          </div>
+          <div>
+            {selectedData?.data?.importance?.map((issues) => (
+              <span
+                className={styles.importantItem}
+                key={issues}
+                style={{
+                  backgroundColor: importanceSettings?.colorMap?.[issues],
+                }}
+              >
+                {issues}
+              </span>
+            ))}
+          </div>
+        </div>
+        {selectedData?.data?.task?.length > 0 && (
+          <div className={styles.taskInfo}>
+            <div className={styles.taskTitle}>{taskSettings?.taskTitle}</div>
+            <div className={styles.taskList}>
+              {selectedData.data.task?.map((task: any, index: number) => {
+                const taskTime = get(task, taskSettings?.fields?.time);
+                return (
+                  <div className={styles.taskItem} key={index}>
+                    <div
+                      className={styles.taskItemColor}
+                      style={{
+                        backgroundColor:
+                          taskSettings?.colorMap?.[
+                            get(task, taskSettings?.fields?.priority)
+                          ],
+                      }}
+                    ></div>
+                    {taskTime && (
+                      <div className={styles.taskItemTime}>
+                        {moment(taskTime).format("YYYY-MM-DD HH:mm")}
+                      </div>
+                    )}
+                    <div className={styles.taskItemText}>
+                      {get(task, taskSettings?.fields?.summary)}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-          {selectedData?.data?.task?.length > 0 && (
-            <div className={styles.taskInfo}>
-              <div className={styles.taskTitle}>{taskSettings?.taskTitle}</div>
-              <div className={styles.taskList}>
-                {selectedData.data.task?.map((task: any, index: number) => {
-                  const taskTime = get(task, taskSettings?.fields?.time);
-                  return (
-                    <div className={styles.taskItem} key={index}>
-                      <div
-                        className={styles.taskItemColor}
-                        style={{
-                          backgroundColor:
-                            taskSettings?.colorMap?.[
-                              get(task, taskSettings?.fields?.priority)
-                            ],
-                        }}
-                      ></div>
-                      {taskTime && (
-                        <div className={styles.taskItemTime}>
-                          {moment(taskTime).format("YYYY-MM-DD HH:mm")}
-                        </div>
-                      )}
-                      <div className={styles.taskItemText}>
-                        {get(task, taskSettings?.fields?.summary)}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
-      );
-    },
-    [importanceSettings, selectedData, taskSettings]
-  );
+        )}
+      </div>
+    );
+  }, [importanceSettings, selectedData, taskSettings]);
 
   const onSelect = useCallback(
     (date: Moment) => {
@@ -245,22 +236,15 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
   );
 
   return (
-    <PickerPanel
-      prefixCls={prefixCls}
-      locale={zhCN}
-      picker={"date"}
-      generateConfig={momentGenerateConfig}
-      prevIcon={<span className={styles.prevIcon} />}
-      nextIcon={<span className={styles.nextIcon} />}
-      superPrevIcon={<span className={styles.superPrevIcon} />}
-      superNextIcon={<span className={styles.superNextIcon} />}
-      dateRender={dateRender}
-      renderExtraFooter={renderExtraFooter}
-      onSelect={onSelect}
-      onPanelChange={onPanelChange}
-      className={styles.taskCalendar}
-      style={{ width: "100%" }}
-      value={pickerValue}
-    />
+    <div className={styles.taskCalendar}>
+      <Calendar
+        dateFullCellRender={dateRender}
+        onSelect={onSelect}
+        onPanelChange={onPanelChange}
+        style={{ width: "100%" }}
+        defaultValue={pickerValue}
+      />
+      {extraFooterNode}
+    </div>
   );
 }

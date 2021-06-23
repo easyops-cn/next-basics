@@ -40,17 +40,6 @@ export class TaskCalendarElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description 日历展示的日期
-   */
-  @property({
-    attribute: false,
-  })
-  displayDate: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 默认选中的日期
    */
   @property({
@@ -166,7 +155,6 @@ export class TaskCalendarElement extends UpdatingElement {
             onDateSelect={this._handleSelect}
             onPickerPanelChange={this._handlePanelChange}
             value={this.value}
-            displayDate={this.displayDate}
             defaultSelectedDate={this.defaultSelectedDate}
           />
         </BrickWrapper>,

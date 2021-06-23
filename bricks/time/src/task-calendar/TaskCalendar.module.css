@@ -1,138 +1,50 @@
-@value picker-arrow-size 7px;
-@value picker-hover-color #1890ff;
-@value picker-default-text-color #000000d9;
-@value picker-disabled-text-color #00000040;
-
 .taskCalendar {
   border: 1px solid #666;
+  padding: 0 15px;
   background: #fff;
   display: inline-block;
   vertical-align: top;
 
   :global {
-    /* ===================== Shared Panel ===================== */
-    .devops-calendar-decade-panel,
-    .devops-calendar-year-panel,
-    .devops-calendar-month-panel,
-    .devops-calendar-week-panel,
-    .devops-calendar-date-panel,
-    .devops-calendar-time-panel {
-      display: flex;
-      flex-direction: column;
-
-      .devops-calendar-cell-in-view {
-        color: picker-default-text-color;
+    .ant-picker-panel {
+      /* Content */
+      .ant-picker-body {
+        padding: 8px 0px;
       }
 
-      table {
-        text-align: center;
-        border-collapse: collapse;
-      }
-    }
+      .ant-picker-content {
+        width: 100%;
 
-    /* Header */
-    .devops-calendar-header {
-      display: flex;
-      padding: 0 8px;
-      color: picker-default-text-color;
-      border-bottom: 1px solid #f0f0f0;
-      text-align: center;
-
-      button {
-        padding: 0;
-        color: picker-disabled-text-color;
-        line-height: 40px;
-        background: transparent;
-        border: 0;
-        cursor: pointer;
-        transition: color 0.3s;
-      }
-
-      > button {
-        min-width: 1.6em;
-        font-size: 14px;
-
-        &:hover {
-          color: picker-default-text-color;
+        th,
+        td {
+          position: relative;
+          min-width: 24px;
+          font-weight: 400;
         }
-      }
 
-      .devops-calendar-header-view {
-        flex: auto;
-        font-weight: 500;
-        line-height: 40px;
-
-        button {
-          color: inherit;
-          font-weight: inherit;
-
-          &:not(:first-child) {
-            margin-left: 8px;
-          }
-
-          &:hover {
-            color: picker-hover-color;
-          }
-        }
-      }
-    }
-
-    /* Content */
-    .devops-calendar-body {
-      padding: 8px 12px;
-    }
-
-    .devops-calendar-content {
-      width: 100%;
-
-      th,
-      td {
-        position: relative;
-        min-width: 24px;
-        font-weight: 400;
-      }
-
-      thead th {
-        height: 30px;
-        color: picker-default-text-color;
-      }
-
-      tbody td {
-        padding: 3px;
-        color: picker-disabled-text-color;
-      }
-    }
-
-    /* ================== Decade & Year & Month Panel ================== */
-    .devops-calendar-decade-panel,
-    .devops-calendar-year-panel,
-    .devops-calendar-month-panel {
-      .devops-calendar-cell {
-        padding: 0;
-
-        .devops-calendar-cell-inner {
+        thead th {
+          padding-right: 0;
+          text-align: center;
           height: 30px;
-          line-height: 30px;
-          cursor: pointer;
-
-          &:hover {
-            color: picker-hover-color;
-          }
+          color: #000000d9;
         }
-      }
 
-      .devops-calendar-cell-in-view .devops-calendar-cell-inner {
+        tbody td {
+          padding: 3px;
+        }
       }
     }
   }
 
   /* ================== Date Panel ================== */
-  :global(.devops-calendar-date-panel
-      .devops-calendar-content
-      .devops-calendar-cell) {
-    &:not(:global(.devops-calendar-cell-in-view)) {
+  :global(.ant-picker-date-panel .ant-picker-content .ant-picker-cell) {
+    &:not(:global(.ant-picker-cell-in-view)) {
       /* visibility: hidden; */
       pointer-events: none;
+
+      .dateNumber {
+        color: #00000040 !important;
+      }
     }
 
     &:hover {
@@ -189,6 +101,10 @@
         justify-content: space-evenly;
         align-items: center;
 
+        .dateNumber {
+          color: #000000d9;
+        }
+
         .dateText {
           font-size: 12px;
           color: #666;
@@ -196,117 +112,67 @@
       }
     }
   }
+}
 
-  /* Footer */
-  :global(.devops-calendar-footer) {
-    .dateFooter {
-      padding: 10px 15px;
+/* Footer */
+.calendarFooter {
+  padding: 5px 0px 15px 0;
 
-      .dateInfo {
-        height: 30px;
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
+  .dateInfo {
+    height: 30px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .importantItem {
+      color: #fff;
+      margin-right: 8px;
+      padding: 3px 4px;
+      border-radius: 10%;
+    }
+  }
+
+  .taskInfo {
+    .taskTitle {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .taskList {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .taskItem {
+        position: relative;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        height: 26px;
+        line-height: 22px;
 
-        .importantItem {
-          color: #fff;
-          margin-right: 8px;
-          padding: 3px 4px;
-          border-radius: 10%;
-        }
-      }
-
-      .taskInfo {
-        .taskTitle {
-          text-align: center;
-          padding: 10px 0;
+        .taskItemColor {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 5px;
+          height: 100%;
         }
 
-        .taskList {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
+        .taskItemTime {
+          background: #eee;
+          padding: 0 4px;
+          margin-left: 8px;
+        }
 
-          .taskItem {
-            position: relative;
-            display: flex;
-            align-items: center;
-            height: 26px;
-            line-height: 22px;
-
-            .taskItemColor {
-              position: absolute;
-              left: 0;
-              top: 0;
-              width: 5px;
-              height: 100%;
-            }
-
-            .taskItemTime {
-              background: #eee;
-              padding: 0 4px;
-              margin-left: 8px;
-            }
-
-            .taskItemText {
-              margin-left: 8px;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-            }
-          }
+        .taskItemText {
+          margin-left: 8px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
-  }
-
-  /* Arrow button */
-  .prevIcon,
-  .nextIcon,
-  .superPrevIcon,
-  .superNextIcon {
-    position: relative;
-    display: inline-block;
-    width: picker-arrow-size;
-    height: picker-arrow-size;
-
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: inline-block;
-      width: picker-arrow-size;
-      height: picker-arrow-size;
-      border: 0 solid currentColor;
-      border-width: 1.5px 0 0 1.5px;
-      content: "";
-    }
-  }
-
-  .superPrevIcon,
-  .superNextIcon {
-    &::after {
-      position: absolute;
-      top: calc(picker-arrow-size / 2);
-      left: calc(picker-arrow-size / 2);
-      display: inline-block;
-      width: picker-arrow-size;
-      height: picker-arrow-size;
-      border: 0 solid currentColor;
-      border-width: 1.5px 0 0 1.5px;
-      content: "";
-    }
-  }
-
-  .prevIcon,
-  .superPrevIcon {
-    transform: rotate(-45deg);
-  }
-
-  .nextIcon,
-  .superNextIcon {
-    transform: rotate(135deg);
   }
 }
