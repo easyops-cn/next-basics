@@ -327,9 +327,9 @@ describe("UploadFilesV2", () => {
         },
       ]
     );
-    await expect(notAllowResult).rejects.toMatchObject({
-      size: 1024 * 1024 * 10,
-    });
+    await expect(notAllowResult).rejects.toStrictEqual(
+      new Error("上传文件体积大于限定体积")
+    );
 
     wrapper.setProps({
       limitSize: 2,

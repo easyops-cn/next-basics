@@ -59,7 +59,7 @@ export function UploadFiles(props: UploadFilesProps): React.ReactElement {
     return new Promise((resolve, reject) => {
       if (FileUtils.sizeCompare(file, limitSize ?? 100)) {
         onError?.(`上传文件体积大于限定体积`);
-        reject(file);
+        reject(new Error("上传文件体积大于限定体积"));
       }
       resolve(file);
     });

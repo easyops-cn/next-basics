@@ -383,11 +383,11 @@ export function RealUploadImg(
     return new Promise((resolve, reject) => {
       if (!file.type?.startsWith("image/")) {
         message.error("仅支持上传图片文件");
-        reject(file);
+        reject(new Error("仅支持上传图片文件"));
       }
       if (FileUtils.sizeCompare(file, props.limitSize ?? 10)) {
         message.error(`上传文件体积大于限定体积`);
-        reject(file);
+        reject(new Error("上传文件体积大于限定体积"));
       }
       resolve(file);
     });

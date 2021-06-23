@@ -102,7 +102,7 @@ export function RealUploadFile(
     return new Promise((resolve, reject) => {
       if (FileUtils.sizeCompare(file, props.limitSize ?? 100)) {
         props.onError?.(`上传文件体积大于限定体积`);
-        reject(file);
+        reject(new Error(`上传文件体积大于限定体积`));
       }
       resolve(file);
     });
