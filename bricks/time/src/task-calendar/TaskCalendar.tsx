@@ -241,7 +241,6 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
         dateFullCellRender={dateRender}
         onSelect={onSelect}
         onPanelChange={onPanelChange}
-        style={{ width: "100%" }}
         defaultValue={pickerValue}
       />
       {extraFooterNode}

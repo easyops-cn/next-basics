@@ -36,7 +36,10 @@ export const TaskCalendarStory: Story = {
         ],
       },
       properties: {
-        displayDate: "2021-06-20",
+        style: {
+          width: "500px",
+        },
+        value: "2021-06-20",
         briefData: [
           {
             date: "2021-06-13",
