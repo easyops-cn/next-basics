@@ -56,7 +56,7 @@ describe("UploadImg", () => {
       },
       fileList: [...fileList],
     });
-    wrapper.find(Upload).invoke("beforeUpload")(
+    const notImageResult = wrapper.find(Upload).invoke("beforeUpload")(
       {
         uid: "123",
         size: 1234,
@@ -65,7 +65,39 @@ describe("UploadImg", () => {
       } as RcFile,
       [...fileList]
     );
-    expect(message.error).toHaveBeenCalled();
+    await expect(notImageResult).rejects.toStrictEqual(
+      new Error("仅支持上传图片文件")
+    );
+
+    wrapper.setProps({
+      limitSize: 2,
+    });
+    const overLimitResult = wrapper.find(Upload).invoke("beforeUpload")(
+      {
+        uid: "123",
+        size: 1024 * 1024 * 3,
+        type: "image/png",
+        name: "png",
+      } as RcFile,
+      [...fileList]
+    );
+    await expect(overLimitResult).rejects.toStrictEqual(
+      new Error("上传文件体积大于限定体积")
+    );
+
+    const allowResult = wrapper.find(Upload).invoke("beforeUpload")(
+      {
+        uid: "123",
+        size: 1024 * 1024,
+        type: "image/png",
+        name: "png",
+      } as RcFile,
+      [...fileList]
+    );
+    await expect(allowResult).resolves.toMatchObject({
+      size: 1024 * 1024,
+    });
+
     wrapper.find(Upload).invoke("onChange")({
       file: {
         uid: "123",

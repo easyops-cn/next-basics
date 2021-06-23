@@ -23,6 +23,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import { ReactComponent as ImageUpload } from "./image-upload.svg";
+import { FileUtils } from "../utils";
 
 export interface UploadImgValue {
   text?: string;
@@ -43,6 +44,7 @@ interface UploadImgProps extends FormItemWrapperProps {
   autoSize?: boolean | { minRows: number; maxRows: number };
   bucketName: string;
   maxNumber?: number;
+  limitSize?: number;
   showTextarea?: boolean;
   uploadDraggable?: boolean;
   draggableUploadText?: string;
@@ -377,12 +379,18 @@ export function RealUploadImg(
     props.onRemove?.(e);
   };
 
-  const handleBeforeUpload = (file: RcFile): boolean => {
-    if (!file.type?.startsWith("image/")) {
-      message.error("仅支持上传图片文件");
-      return false;
-    }
-    return true;
+  const handleBeforeUpload = (file: RcFile): Promise<RcFile> => {
+    return new Promise((resolve, reject) => {
+      if (!file.type?.startsWith("image/")) {
+        message.error("仅支持上传图片文件");
+        reject(new Error("仅支持上传图片文件"));
+      }
+      if (FileUtils.sizeCompare(file, props.limitSize ?? 10)) {
+        message.error(`上传文件体积大于限定体积`);
+        reject(new Error("上传文件体积大于限定体积"));
+      }
+      resolve(file);
+    });
   };
 
   const fileInfoNode = (file: UploadFile): ReactNode => (
@@ -584,6 +592,7 @@ export function UploadImg(props: UploadImgProps): React.ReactElement {
         onRemove={props.onRemove}
         bucketName={props.bucketName}
         maxNumber={props.maxNumber}
+        limitSize={props.limitSize}
         showTextarea={props.showTextarea}
         uploadDraggable={props.uploadDraggable}
         draggableUploadText={props.draggableUploadText}

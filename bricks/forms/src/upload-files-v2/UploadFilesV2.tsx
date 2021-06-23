@@ -10,7 +10,8 @@ import classNames from "classnames";
 import styles from "./UploadFilesV2.module.css";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
-import { UploadFile } from "antd/lib/upload/interface";
+import { UploadFile, RcFile } from "antd/lib/upload/interface";
+import { FileUtils } from "../utils";
 
 interface UploadFilesV2Props extends FormItemWrapperProps {
   onChange?: any;
@@ -24,6 +25,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   accept?: string;
   data?: { [key: string]: string };
   maxNumber?: number;
+  limitSize?: number;
   hideUploadButton?: boolean;
   uploadDraggable?: boolean;
   draggableUploadText?: string;
@@ -96,8 +98,14 @@ export function RealUploadFile(
     props.onChange?.(v);
   };
 
-  const handleBeforeUpload = (): boolean => {
-    return false;
+  const handleBeforeUpload = (file: RcFile): Promise<RcFile> => {
+    return new Promise((resolve, reject) => {
+      if (FileUtils.sizeCompare(file, props.limitSize ?? 100)) {
+        props.onError?.(`上传文件体积大于限定体积`);
+        reject(new Error(`上传文件体积大于限定体积`));
+      }
+      resolve(file);
+    });
   };
 
   const handleFilesChange = async (
@@ -244,7 +252,7 @@ export function RealUploadFile(
     listType: "text",
     fileList,
     maxCount: props.maxNumber,
-    beforeUpload: !props.autoUpload && handleBeforeUpload,
+    beforeUpload: handleBeforeUpload,
     onChange: handleChange,
     onRemove: handleRemove,
     supportServerRender: true,
@@ -319,6 +327,7 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         accept={props.accept}
         data={props.data}
         maxNumber={props.maxNumber}
+        limitSize={props.limitSize}
         uploadDraggable={props.uploadDraggable}
         draggableUploadText={props.draggableUploadText}
         draggableUploadHint={props.draggableUploadHint}

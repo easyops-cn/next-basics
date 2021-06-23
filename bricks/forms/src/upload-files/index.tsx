@@ -12,6 +12,7 @@ import {
 import { http } from "@next-core/brick-http";
 
 import { UploadFiles, UploadFilesTextProps } from "./UploadFiles";
+import { FileUtils } from "../utils";
 
 /**
 * @id forms.upload-files
@@ -85,6 +86,18 @@ export class UploadFilesElement extends UpdatingElement {
    */
   @property({ type: Boolean })
   autoUpload: boolean;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 文件上传大小限制(MB), 最大上传大小为: 100MB
+   * @group advanced
+   */
+  @property({
+    type: Number,
+  })
+  limitSize: number;
 
   /**
    * @kind UploadFileTextProps
@@ -163,6 +176,11 @@ export class UploadFilesElement extends UpdatingElement {
           formData.append(key, value)
         );
 
+      if (FileUtils.sizeCompare(this._files, this.limitSize ?? 100)) {
+        this._handleOnError("上传文件体积大于限定体积");
+        return;
+      }
+
       try {
         let response;
         if (this.method === "put") {
@@ -216,6 +234,7 @@ export class UploadFilesElement extends UpdatingElement {
             name={this.name}
             data={this.data}
             multiple={this.multiple}
+            limitSize={this.limitSize}
             autoUpload={this.autoUpload}
             text={this.text}
             accept={this.accept}
