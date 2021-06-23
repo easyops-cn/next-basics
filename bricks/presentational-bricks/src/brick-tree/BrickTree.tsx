@@ -352,12 +352,10 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
         </div>
       )}
       <div
-        className={classNames(
-          isEmpty(suffixBrick?.useBrick)
-            ? styles.treeWrapper
-            : styles.treeWithSuffixWrapper,
-          showSpecificationTitleStyle ? styles.titleSpace : null
-        )}
+        className={classNames(styles.treeWrapper, {
+          [styles.withSuffix]: !isEmpty(suffixBrick?.useBrick),
+          [styles.titleSpace]: showSpecificationTitleStyle,
+        })}
         ref={treeContainerRef}
       >
         {treeData?.length ? (

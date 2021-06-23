@@ -1,40 +1,37 @@
 .treeWrapper {
   overflow: auto;
   flex-grow: 1;
-  padding: 10px 10px 6px;
-  background: "var(--antd-component-background)";
-}
+  background: var(--antd-component-background);
 
-.treeWithSuffixWrapper {
-  overflow: auto;
-  flex-grow: 1;
-  padding: 10px 10px 6px;
-  background: "var(--antd-component-background)";
+  &.withSuffix {
+    .suffixBrickWrapper {
+      display: flex;
+      justify-content: space-between;
 
-  .suffixBrickWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-    > span:first-child {
-      display: inline-block;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 70px;
-      white-space: nowrap;
+      > span:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
-  }
 
-  :global(.ant-tree-treenode) {
-    width: 100%;
-  }
+    :global(.ant-tree-list-holder-inner) {
+      align-items: normal;
+    }
 
-  :global(.ant-tree-node-content-wrapper) {
-    width: 100%;
-  }
+    :global(.ant-tree-node-content-wrapper) {
+      display: flex;
+    }
 
-  :global(.ant-tree-treenode-motion) {
-    width: 100%;
+    :global(.ant-tree-iconEle) {
+      flex-shrink: 0;
+    }
+
+    :global(.ant-tree-node-content-wrapper),
+    :global(.ant-tree-title) {
+      flex-grow: 1;
+      min-width: 0;
+    }
   }
 }
 
