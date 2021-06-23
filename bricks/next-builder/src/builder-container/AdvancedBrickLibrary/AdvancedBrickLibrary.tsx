@@ -65,7 +65,10 @@ export function LegacyAdvancedBrickLibrary(
       {!isEmpty(filteredBricks) ? (
         <div className={styles.brickWrapper}>
           {filteredBricks.map((item) => (
-            <li key={item.name} className={styles.itemWrapper}>
+            <li
+              key={`${item.type}:${item.name}`}
+              className={styles.itemWrapper}
+            >
               <BrickItem
                 brick={item}
                 onDraggingChange={onDraggingChange}
