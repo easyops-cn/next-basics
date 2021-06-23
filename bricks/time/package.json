@@ -27,8 +27,7 @@
     "postpack:tar": "node scripts/rename-tar-package.js"
   },
   "devDependencies": {
-    "solarlunar": "^2.0.7",
-    "rc-picker": "^2.5.1"
+    "solarlunar": "^2.0.7"
   },
   "sideEffects": true
 }

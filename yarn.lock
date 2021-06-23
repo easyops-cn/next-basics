@@ -12592,19 +12592,6 @@ rc-pagination@~3.1.2:
     "@babel/runtime" "^7.10.1"
     classnames "^2.2.1"
 
-rc-picker@^2.5.1:
-  version "2.5.12"
-  resolved "https://registry.npmjs.org/rc-picker/-/rc-picker-2.5.12.tgz#f5743276d2b29ec56a03b72b659332c06e4bb983"
-  integrity sha512-rUqEtpNZdPTnnCMvWWioFFcJiq110Bq7fKAS37NY4Rrd3DoXZUwyfjeCrvCWgLLO9XeYDnDr88+rhhplY7HBNA==
-  dependencies:
-    "@babel/runtime" "^7.10.1"
-    classnames "^2.2.1"
-    date-fns "^2.15.0"
-    moment "^2.24.0"
-    rc-trigger "^5.0.4"
-    rc-util "^5.4.0"
-    shallowequal "^1.1.0"
-
 rc-picker@~2.5.1:
   version "2.5.2"
   resolved "https://registry.npmjs.org/rc-picker/-/rc-picker-2.5.2.tgz#36d91b8cdddbf8b2474af29c2853b77502a7fb01"
