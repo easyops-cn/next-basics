@@ -99,6 +99,24 @@ describe("TimeRangePicker", () => {
     rangePicker.invoke("onOpenChange")(false);
     expect(fn).toBeCalled();
   });
+
+  it("date range should work when default value is null", () => {
+    let mountValue;
+    const fn = jest.fn((...args) => (mountValue = args));
+    const wrapper = mount(
+      <TimeRangePicker
+        rangeType="dateTime"
+        format="YYYY-MM-DD HH:mm:ss"
+        onChange={fn}
+        value={null}
+      />
+    );
+    expect(wrapper.find(DatePicker.RangePicker)).toHaveLength(1);
+    expect(mountValue).toBe({
+      startTime: moment().format("YYYY-MM-DD ") + " 00:00:00",
+      endTime: moment().format("YYYY-MM-DD ") + " 23:59:59",
+    });
+  });
 });
 
 describe("RefTimeRangePicker", () => {
