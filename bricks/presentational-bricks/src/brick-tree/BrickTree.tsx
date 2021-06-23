@@ -137,6 +137,7 @@ export interface BrickTreeProps {
   ): void;
   suffixBrick?: { useBrick: UseBrickConf };
   showSpecificationTitleStyle?: boolean;
+  defaultExpandAll?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -153,14 +154,16 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     checkedFilterConfig: { field, value, operator } = {},
     suffixBrick,
     showSpecificationTitleStyle,
+    defaultExpandAll,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>();
   const [filterCheckedKeys, setFilterCheckedKeys] = useState<React.Key[]>();
-  const [checkedKeys, setCheckedKeys] = useState<
-    React.Key[] | { checked: React.Key[]; halfChecked: React.Key[] }
-  >();
+  const [checkedKeys, setCheckedKeys] =
+    useState<
+      React.Key[] | { checked: React.Key[]; halfChecked: React.Key[] }
+    >();
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>();
   const [searchValue, setSearchValue] = useState<string>();
   const treeContainerRef = useRef<HTMLDivElement>();
@@ -443,6 +446,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
             selectedKeys={selectedKeys}
             checkedKeys={checkedKeys}
             {...(expandedKeys ? { expandedKeys: expandedKeys } : {})}
+            defaultExpandAll={defaultExpandAll}
             onSelect={onSelect}
             onCheck={onCheck}
             onExpand={onExpand}

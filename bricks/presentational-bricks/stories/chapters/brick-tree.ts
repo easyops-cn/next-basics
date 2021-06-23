@@ -15,8 +15,7 @@ export const BrickTreeStory: Story = {
   },
   description: {
     en: "tree list",
-    zh:
-      "常用于展示应用业务树、模型树等，可以完整展现其中层级关系，并具有展开收起选择等交互功能",
+    zh: "常用于展示应用业务树、模型树等，可以完整展现其中层级关系，并具有展开收起选择等交互功能",
   },
   conf: [
     {
@@ -147,7 +146,7 @@ export const BrickTreeStory: Story = {
         checkedKeys: ["00"],
         expandedKeys: ["0"],
         suffixBrick: {
-          ussBrick: {
+          useBrick: {
             brick: "span",
             properties: {
               style: {
@@ -167,9 +166,7 @@ export const BrickTreeStory: Story = {
         },
       },
       description: {
-        title: "基础用法",
-        message:
-          "checkedKeys和configProps.checkable实现多选，expandedKeys可以设置默认展开项，configProps.showIcon设置是否显示图标（图标需要在dataSource中维护）",
+        title: "树节点最右边使用构件",
       },
     },
     {

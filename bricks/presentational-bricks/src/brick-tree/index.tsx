@@ -175,6 +175,15 @@ export class BrickTreeElement extends UpdatingElement {
   })
   suffixBrick: { useBrick: UseBrickConf };
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 默认展开所有树节点
+   * @group advanced
+   */
+  @property({ type: Boolean }) defaultExpandAll: boolean;
+
   connectedCallback(): void {
     this.style.display = "flex";
     this.style.flexDirection = "column";
@@ -225,6 +234,7 @@ export class BrickTreeElement extends UpdatingElement {
             checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}
             showSpecificationTitleStyle={this.showSpecificationTitleStyle}
+            defaultExpandAll={this.defaultExpandAll}
           />
         </BrickWrapper>,
         this
