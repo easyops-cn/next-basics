@@ -77,7 +77,9 @@ export function RealTimeRangePicker(
 
   React.useEffect(() => {
     if (!props.value && props.onChange) {
-      props.onChange(INIT_TIME_RANGE);
+      rangeType === "time"
+        ? props.onChange(INIT_TIME_RANGE)
+        : props.onChange(initRange);
     }
   }, []);
 
