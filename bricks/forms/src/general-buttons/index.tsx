@@ -60,6 +60,17 @@ export class GeneralButtonsElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default `false`
+   * @description 按钮加载动画
+   */
+  @property({
+    type: Boolean,
+  })
+  loading: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
    * @description 禁用提交按钮
    */
   @property({
@@ -174,6 +185,7 @@ export class GeneralButtonsElement extends FormItemElement {
             submitText={this.submitText}
             submitType={this.submitType}
             submitDisabled={this.submitDisabled}
+            loading={this.loading}
             submitTooltip={this.submitTooltip}
             cancelText={this.cancelText}
             cancelType={this.cancelType}
