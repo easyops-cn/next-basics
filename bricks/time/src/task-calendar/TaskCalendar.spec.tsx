@@ -3,13 +3,13 @@ import { mount } from "enzyme";
 import moment from "moment";
 import { TaskCalendar } from "./TaskCalendar";
 
-const briefData = [
+const briefList = [
   { date: "2021-05-01", text: "休" },
   { date: "2021-05-13", text: "休" },
   { date: "2021-05-14", text: "休" },
 ];
 
-const taskData = [
+const taskList = [
   {
     date: "2021-05-01",
     task: [
@@ -50,7 +50,7 @@ const taskData = [
   },
 ];
 
-const importantData = [
+const importantList = [
   {
     date: "2021-05-01",
     issues: ["发版"],
@@ -93,9 +93,9 @@ describe("TaskCalendar", () => {
   it("should work", () => {
     const wrapper = mount(
       <TaskCalendar
-        taskData={taskData}
-        briefData={briefData}
-        importantData={importantData}
+        taskList={taskList}
+        briefList={briefList}
+        importantList={importantList}
         taskSettings={taskSettings}
         importanceSettings={importanceSettings}
         value={"2021-05-10"}
@@ -130,14 +130,14 @@ describe("TaskCalendar", () => {
     const onPanelChange = jest.fn();
     const wrapper = mount(
       <TaskCalendar
-        taskData={taskData}
-        briefData={briefData}
-        importantData={importantData}
+        taskList={taskList}
+        briefList={briefList}
+        importantList={importantList}
         taskSettings={taskSettings}
         importanceSettings={importanceSettings}
         onDateSelect={onSelect}
         onPickerPanelChange={onPanelChange}
-        displayDate={"2021-05-30"}
+        value={"2021-05-10"}
       />
     );
     wrapper.find("Calendar").invoke("onSelect")(moment("2021-05-01"));
