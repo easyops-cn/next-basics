@@ -34,3 +34,4 @@ import "./general-timer";
 import "./export-json-file";
 import "./brick-error";
 import "./easy-view";
+import "./header-bar";

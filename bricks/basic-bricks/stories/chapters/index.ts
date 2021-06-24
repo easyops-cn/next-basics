@@ -29,6 +29,7 @@ import { scriptBrickStory } from "./script-brick";
 import { subMenuStory } from "./sub-menu";
 import { subMenuFilterStory } from "./sub-menu-filter";
 import { transformAgentStory } from "./transform-agent";
+import { headerBarStory } from "./header-bar";
 
 export const Chapters = [
   advanceListContainerStory,
@@ -62,4 +63,5 @@ export const Chapters = [
   subMenuStory,
   subMenuFilterStory,
   transformAgentStory,
+  headerBarStory,
 ];
