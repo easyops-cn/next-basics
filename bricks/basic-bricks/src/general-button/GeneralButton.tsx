@@ -30,6 +30,7 @@ interface LegacyGeneralButtonProps {
   buttonHref?: string;
   onClick: () => void;
   disabled?: boolean;
+  loading?: boolean;
   disabledTooltip?: string;
   tooltip?: string;
   tooltipConfig?: TooltipConfig;
@@ -49,6 +50,7 @@ export function GeneralButton({
   buttonHref,
   onClick,
   disabled,
+  loading,
   disabledTooltip,
   tooltip,
   target,
@@ -78,6 +80,7 @@ export function GeneralButton({
         )
       }
       disabled={disabled}
+      loading={loading}
       data-testid="button"
     >
       {buttonName}

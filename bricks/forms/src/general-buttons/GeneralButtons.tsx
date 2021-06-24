@@ -11,6 +11,7 @@ interface GeneralButtonsProps extends FormItemWrapperProps {
   submitType?: ButtonType;
   submitDisabled?: boolean;
   submitTooltip?: string;
+  loading?: boolean;
   cancelText?: string;
   cancelType?: ButtonType;
   onSubmitClick?: (event: React.MouseEvent) => void;
@@ -33,6 +34,7 @@ export function GeneralButtons(props: GeneralButtonsProps): React.ReactElement {
           onClick={props.onSubmitClick}
           style={{ marginRight: "8px" }}
           data-testid="submit-button"
+          loading={props.loading}
         >
           {props.submitText}
         </Button>

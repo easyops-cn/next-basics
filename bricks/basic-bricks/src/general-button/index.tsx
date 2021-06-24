@@ -139,6 +139,17 @@ export class GeneralButtonElement extends UpdatingElement {
   disabled: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 按钮加载动画
+   */
+  @property({
+    type: Boolean,
+  })
+  loading: boolean;
+
+  /**
    * @kind ButtonType
    * @required false
    * @default -
@@ -310,6 +321,7 @@ export class GeneralButtonElement extends UpdatingElement {
             buttonHref={this.buttonHref}
             onClick={this._handleClick}
             disabled={this.disabled}
+            loading={this.loading}
             disabledTooltip={this.disabledTooltip}
             tooltip={this.tooltip}
             target={this.target}
