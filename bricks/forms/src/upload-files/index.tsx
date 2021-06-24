@@ -90,8 +90,8 @@ export class UploadFilesElement extends UpdatingElement {
   /**
    * @kind number
    * @required false
-   * @default -
-   * @description 文件上传大小限制(MB), 最大上传大小为: 100MB
+   * @default 100
+   * @description 文件上传大小限制(MB)
    * @group advanced
    */
   @property({
