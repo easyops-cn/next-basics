@@ -13829,6 +13829,11 @@ socks@^2.3.3:
     ip "^1.1.5"
     smart-buffer "^4.1.0"
 
+solarlunar@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.npmjs.org/solarlunar/-/solarlunar-2.0.7.tgz#b323e156028fa5ffcb44d28b64ef7a2e390ccff9"
+  integrity sha512-2SfuCCgAAxFU5MTMYuKGbRgRLcPTJQf3azMEw/GmBpHXA7N2eAQJStSqktZJjnq4qRCboBPnqEB866+PCregag==
+
 sort-keys@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/sort-keys/-/sort-keys-2.0.0.tgz#658535584861ec97d730d6cf41822e1f56684128"
