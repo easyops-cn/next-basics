@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.189.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.188.1...@next-bricks/presentational-bricks@1.189.0) (2021-06-24)
+
+
+### Bug Fixes
+
+* **brick-tree:** fix suffixBrick style ([4203dd4](https://github.com/easyops-cn/next-basics/commit/4203dd474600ad58b2bedec3907330635f1ad46f))
+
+
+### Features
+
+* **brick-tree:** add defaultExpandAll property ([b522cba](https://github.com/easyops-cn/next-basics/commit/b522cba1f2b45f23e5fa1215142b228c46c11488))
+* **card-item:** tagConfig support no dataSource ([fb6908c](https://github.com/easyops-cn/next-basics/commit/fb6908c35f88fff87872dddc30598ac6ac1bbcf5))
+
+
+
+
+
 ## [1.188.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.188.0...@next-bricks/presentational-bricks@1.188.1) (2021-06-22)
 
 

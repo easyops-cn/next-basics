@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.131.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.130.0...@next-bricks/basic-bricks@1.131.0) (2021-06-24)
+
+
+### Features
+
+* button add loading state ([591734f](https://github.com/easyops-cn/next-basics/commit/591734f002068fcec3c5e4c49ab066f784daff4c))
+
+
+
+
+
 # [1.130.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.129.2...@next-bricks/basic-bricks@1.130.0) (2021-06-21)
 
 

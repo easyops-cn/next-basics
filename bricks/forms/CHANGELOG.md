@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.171.0...@next-bricks/forms@1.172.0) (2021-06-24)
+
+
+### Bug Fixes
+
+* fix autoUpload fail in upload component ([712cf53](https://github.com/easyops-cn/next-basics/commit/712cf53c343131ccb681a1ef4fd6b81fc7932cf4))
+* fix upload-image unit test ([05e310b](https://github.com/easyops-cn/next-basics/commit/05e310b2700d7b60d20ed0ac11941f610a474f6b))
+* time-range-picker unit test fix ([b78e505](https://github.com/easyops-cn/next-basics/commit/b78e505025f132d9896b08b16342efb1048bda32))
+* time-range-picker unit test fix ([63018d1](https://github.com/easyops-cn/next-basics/commit/63018d107d777c9c27bdbbd7272acc57153f304f))
+* when time-range-picker value is null, component get invalid date ([917334e](https://github.com/easyops-cn/next-basics/commit/917334e16d19e108423a40d8b8afada4612d0691))
+
+
+### Features
+
+* add unit test for UploadFiles ([2fd360c](https://github.com/easyops-cn/next-basics/commit/2fd360cfcec5c5b3b7052e6528b5a75e1a56e59f))
+* button add loading state ([591734f](https://github.com/easyops-cn/next-basics/commit/591734f002068fcec3c5e4c49ab066f784daff4c))
+* upload add file size limit ([750271b](https://github.com/easyops-cn/next-basics/commit/750271bf8a9a9aaafc5cb29992bef2dfb8b93f41))
+
+
+
+
+
 # [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.170.0...@next-bricks/forms@1.171.0) (2021-06-22)
 
 
