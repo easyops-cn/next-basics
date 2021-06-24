@@ -13,6 +13,7 @@ import {
   TaskData,
   ImportanceSettings,
   TaskSettings,
+  DateDetail,
 } from "../interfaces";
 import { TaskCalendar } from "./TaskCalendar";
 
@@ -56,7 +57,7 @@ export class TaskCalendarElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  briefData: BriefData[];
+  briefList: BriefData[];
 
   /**
    * @kind TaskData[]
@@ -67,7 +68,7 @@ export class TaskCalendarElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  taskData: TaskData[];
+  taskList: TaskData[];
 
   /**
    * @kind ImportantData[]
@@ -78,7 +79,7 @@ export class TaskCalendarElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  importantData: ImportantData[];
+  importantList: ImportantData[];
 
   /**
    * @kind TaskSettings
@@ -103,15 +104,12 @@ export class TaskCalendarElement extends UpdatingElement {
   importanceSettings: ImportanceSettings;
 
   /**
-   * @detail { date: string; data?: Record<string, any>}
+   * @detail DateDetail
    * @description 点击选择日期事件 date为选择的日期，data为该日期上的数据
    */
   @event({ type: "calendar.onSelect" })
-  calendarOnSelect: EventEmitter<{ date: string; data?: Record<string, any> }>;
-  private _handleSelect = (detail: {
-    date: string;
-    data?: Record<string, any>;
-  }): void => {
+  calendarOnSelect: EventEmitter<DateDetail>;
+  private _handleSelect = (detail: DateDetail): void => {
     this.calendarOnSelect.emit(detail);
   };
 
@@ -147,9 +145,9 @@ export class TaskCalendarElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <TaskCalendar
-            briefData={this.briefData}
-            taskData={this.taskData}
-            importantData={this.importantData}
+            briefData={this.briefList}
+            taskData={this.taskList}
+            importantData={this.importantList}
             taskSettings={this.taskSettings}
             importanceSettings={this.importanceSettings}
             onDateSelect={this._handleSelect}

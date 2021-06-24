@@ -4,13 +4,14 @@ import solarLunar from "solarlunar";
 import moment, { Moment } from "moment";
 import classNames from "classnames";
 import styles from "./TaskCalendar.module.css";
-import { min, isNil, get } from "lodash";
+import { min, isNil, isEmpty, get } from "lodash";
 import {
   BriefData,
   TaskData,
   ImportantData,
   ImportanceSettings,
   TaskSettings,
+  DateDetail,
 } from "../interfaces";
 
 export interface TaskCalendarProps {
@@ -21,7 +22,7 @@ export interface TaskCalendarProps {
   importantData?: ImportantData[];
   taskSettings?: TaskSettings;
   importanceSettings?: ImportanceSettings;
-  onDateSelect?: (detail: { date: string; data: Record<string, any> }) => void;
+  onDateSelect?: (detail: DateDetail) => void;
   onPickerPanelChange?: (detail: { mode: string; date: string }) => void;
 }
 
@@ -38,16 +39,16 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
     defaultSelectedDate,
   } = props;
   const [selectedData, setSelectedData] = useState<{
-    date?: Moment;
-    data?: { brief: any; task: any; importance: any };
-  }>({});
+    date: Moment;
+    data: DateDetail["data"];
+  }>({} as any);
 
   const briefDataMap = useMemo(() => {
     return briefData?.reduce((pre, cur) => {
       const curMoment = moment(cur.date).format("YYYY-MM-DD");
       pre[curMoment] = cur.text;
       return pre;
-    }, {} as Record<string, string>);
+    }, {} as Record<BriefData["date"], BriefData["text"]>);
   }, [briefData]);
 
   const taskDataMap = useMemo(() => {
@@ -55,7 +56,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
       const curMoment = moment(cur.date).format("YYYY-MM-DD");
       pre[curMoment] = cur.task;
       return pre;
-    }, {} as Record<string, any[]>);
+    }, {} as Record<TaskData["date"], TaskData["task"]>);
   }, [taskData]);
 
   const importantDataMap = useMemo(() => {
@@ -63,7 +64,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
       const curMoment = moment(cur.date).format("YYYY-MM-DD");
       pre[curMoment] = cur.issues;
       return pre;
-    }, {} as Record<string, any[]>);
+    }, {} as Record<ImportantData["date"], ImportantData["issues"]>);
   }, [importantData]);
 
   const pickerValue = useMemo(() => {
@@ -116,7 +117,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
             [styles.today]: date.isSame(pickerValue, "date"),
           })}
           style={{
-            borderColor: date.isSame(selectedData?.date, "date")
+            borderColor: date.isSame(selectedData.date, "date")
               ? "#666"
               : importanceColor,
             backgroundColor: importanceColor,
@@ -135,7 +136,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
           )}
           <div className={styles.dateMain}>
             <div className={styles.dateNumber}>{date.date()}</div>
-            <div className={styles.dateText}>{solar2lunarData?.dayCn}</div>
+            <div className={styles.dateText}>{solar2lunarData.dayCn}</div>
           </div>
         </div>
       );
@@ -152,40 +153,45 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
   );
 
   const extraFooterNode = useMemo(() => {
+    if (isEmpty(selectedData)) return;
+    const {
+      date,
+      data: { importance, task },
+    } = selectedData;
     return (
       <div className={styles.calendarFooter}>
         <div className={styles.dateInfo}>
-          <div className={styles.dateText}>
-            {selectedData?.date?.format("YYYY[年]MM[月]DD[日]")}
-          </div>
-          <div>
-            {selectedData?.data?.importance?.map((issues) => (
-              <span
-                className={styles.importantItem}
-                key={issues}
-                style={{
-                  backgroundColor: importanceSettings?.colorMap?.[issues],
-                }}
-              >
-                {issues}
-              </span>
-            ))}
-          </div>
+          <div className={styles.dateText}>{date.format("LL")}</div>
+          {importance?.length > 0 && !isEmpty(importanceSettings) && (
+            <div>
+              {importance?.map((issues) => (
+                <span
+                  className={styles.importantItem}
+                  key={issues}
+                  style={{
+                    backgroundColor: importanceSettings.colorMap?.[issues],
+                  }}
+                >
+                  {issues}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-        {selectedData?.data?.task?.length > 0 && (
+        {task?.length > 0 && !isEmpty(taskSettings) && (
           <div className={styles.taskInfo}>
-            <div className={styles.taskTitle}>{taskSettings?.taskTitle}</div>
+            <div className={styles.taskTitle}>{taskSettings.taskTitle}</div>
             <div className={styles.taskList}>
-              {selectedData.data.task?.map((task: any, index: number) => {
-                const taskTime = get(task, taskSettings?.fields?.time);
+              {task?.map((task: any, index: number) => {
+                const taskTime = get(task, taskSettings.fields?.time);
                 return (
                   <div className={styles.taskItem} key={index}>
                     <div
                       className={styles.taskItemColor}
                       style={{
                         backgroundColor:
-                          taskSettings?.colorMap?.[
-                            get(task, taskSettings?.fields?.priority)
+                          taskSettings.colorMap?.[
+                            get(task, taskSettings.fields?.priority)
                           ],
                       }}
                     ></div>
@@ -195,7 +201,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
                       </div>
                     )}
                     <div className={styles.taskItemText}>
-                      {get(task, taskSettings?.fields?.summary)}
+                      {get(task, taskSettings.fields?.summary)}
                     </div>
                   </div>
                 );
@@ -219,7 +225,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
         importance: curImportantData,
       };
       setSelectedData({ date, data: curData });
-      onDateSelect?.({
+      onDateSelect({
         date: formatDate,
         data: curData,
       });
@@ -230,7 +236,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
   const onPanelChange = useCallback(
     (date: Moment, mode: string) => {
       const formatDate = date.format("YYYY-MM-DD");
-      onPickerPanelChange?.({ mode, date: formatDate });
+      onPickerPanelChange({ mode, date: formatDate });
     },
     [onPickerPanelChange]
   );

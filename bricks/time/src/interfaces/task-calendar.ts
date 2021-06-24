@@ -42,3 +42,12 @@ export interface TaskSettings {
    */
   colorMap: Record<string, string>;
 }
+
+export interface DateDetail {
+  date: string;
+  data: {
+    brief: BriefData["text"];
+    task: TaskData["task"];
+    importance: ImportantData["issues"];
+  };
+}
