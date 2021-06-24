@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.133.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.132.0...@next-bricks/basic-bricks@1.133.0) (2021-06-24)
+
+
+### Features
+
+* **basic-bricks:** add brick  header-bar ([5692795](https://github.com/easyops-cn/next-basics/commit/5692795e240270cd556934551167d0704d871a13))
+
+
+
+
+
 # [1.132.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.131.0...@next-bricks/basic-bricks@1.132.0) (2021-06-24)
 
 
