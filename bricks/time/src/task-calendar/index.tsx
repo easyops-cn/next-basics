@@ -104,6 +104,28 @@ export class TaskCalendarElement extends UpdatingElement {
   importanceSettings: ImportanceSettings;
 
   /**
+   * @kind string | number
+   * @required false
+   * @default 50px
+   * @description 日历单元格高度
+   */
+  @property({
+    attribute: false,
+  })
+  dateCellHeight: React.CSSProperties["height"];
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description footer样式
+   */
+  @property({
+    attribute: false,
+  })
+  footerStyle: React.CSSProperties;
+
+  /**
    * @detail DateDetail
    * @description 点击选择日期事件 date为选择的日期，data为该日期上的数据
    */
@@ -154,6 +176,8 @@ export class TaskCalendarElement extends UpdatingElement {
             onPickerPanelChange={this._handlePanelChange}
             value={this.value}
             defaultSelectedDate={this.defaultSelectedDate}
+            footerStyle={this.footerStyle}
+            dateCellHeight={this.dateCellHeight}
           />
         </BrickWrapper>,
         this

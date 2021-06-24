@@ -22,6 +22,8 @@ export interface TaskCalendarProps {
   importantList?: ImportantData[];
   taskSettings?: TaskSettings;
   importanceSettings?: ImportanceSettings;
+  footerStyle?: React.CSSProperties;
+  dateCellHeight?: React.CSSProperties["height"];
   onDateSelect?: (detail: DateDetail) => void;
   onPickerPanelChange?: (detail: { mode: string; date: string }) => void;
 }
@@ -37,6 +39,8 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
     onPickerPanelChange,
     value,
     defaultSelectedDate,
+    footerStyle,
+    dateCellHeight,
   } = props;
   const [selectedData, setSelectedData] = useState<{
     date: Moment;
@@ -121,6 +125,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
               ? "#666"
               : importanceColor,
             backgroundColor: importanceColor,
+            height: dateCellHeight,
           }}
         >
           {curBriefData && (
@@ -149,6 +154,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
       importanceSettings,
       selectedData,
       pickerValue,
+      dateCellHeight,
     ]
   );
 
@@ -159,7 +165,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
       data: { importance, task },
     } = selectedData;
     return (
-      <div className={styles.calendarFooter}>
+      <div className={styles.calendarFooter} style={footerStyle}>
         <div className={styles.dateInfo}>
           <div className={styles.dateText}>{date.format("LL")}</div>
           {importance?.length > 0 && !isEmpty(importanceSettings) && (
@@ -211,7 +217,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
         )}
       </div>
     );
-  }, [importanceSettings, selectedData, taskSettings]);
+  }, [importanceSettings, selectedData, taskSettings, footerStyle]);
 
   const onSelect = useCallback(
     (date: Moment) => {

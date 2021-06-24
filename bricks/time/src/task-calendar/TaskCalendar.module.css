@@ -1,5 +1,4 @@
 .taskCalendar {
-  border: 1px solid #666;
   padding: 0 15px;
   background: #fff;
   display: inline-block;
@@ -7,8 +6,12 @@
 
   :global {
     /* Header */
-    .ant-picker-calendar-header .ant-picker-calendar-mode-switch {
-      display: none;
+    .ant-picker-calendar-header {
+      padding: 12px 0 0 0;
+
+      .ant-picker-calendar-mode-switch {
+        display: none;
+      }
     }
 
     /* Content */

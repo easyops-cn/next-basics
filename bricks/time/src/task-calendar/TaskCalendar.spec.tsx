@@ -100,6 +100,7 @@ describe("TaskCalendar", () => {
         importanceSettings={importanceSettings}
         value={"2021-05-10"}
         defaultSelectedDate={"2021-05-02"}
+        dateCellHeight={40}
       />
     );
     expect(wrapper.find(".today .dateNumber").text()).toEqual("10");
@@ -123,6 +124,10 @@ describe("TaskCalendar", () => {
     expect(
       wrapper.find(".importantDay").at(1).prop("style").backgroundColor
     ).toEqual("green");
+
+    expect(wrapper.find(".dateContainer").at(0).prop("style").height).toEqual(
+      40
+    );
   });
 
   it("events should work", () => {
