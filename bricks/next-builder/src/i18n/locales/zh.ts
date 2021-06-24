@@ -14,6 +14,8 @@ const locale: Locale = {
   [K.ADD_DATA]: "添加数据",
   [K.SETTINGS]: "设置",
   [K.BRICK_LIBRARY]: "构件库",
+  [K.LAYOUT_LIBRARY]: "布局",
+  [K.WIDGET_LIBRARY]: "挂件",
   [K.VIEW_ROUTE]: "查看路由",
   [K.VIEW_TEMPLATE]: "查看模板",
   [K.VIEW_SNIPPET]: "查看片段",

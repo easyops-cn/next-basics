@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import { Dropdown, Tooltip } from "antd";
+import { Dropdown, Tooltip, Button } from "antd";
 import { LibraryDropdown } from "./LibraryDropdown";
 import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
 
@@ -12,18 +12,14 @@ jest.mock("./LibraryDropdownMenu", () => ({
 
 describe("LibraryDropdown", () => {
   it("should work", async () => {
-    const wrapper = mount(<LibraryDropdown />);
-
-    expect(wrapper.find(Dropdown).prop("visible")).toBe(false);
-    expect(wrapper.find(Tooltip).prop("overlayStyle")).toEqual({
-      display: undefined,
-    });
+    const wrapper = mount(
+      <LibraryDropdown>
+        <Button type="link">add library</Button>
+      </LibraryDropdown>
+    );
 
     wrapper.find(Dropdown).invoke("onVisibleChange")(true);
     expect(wrapper.find(Dropdown).prop("visible")).toBe(true);
-    expect(wrapper.find(Tooltip).prop("overlayStyle")).toEqual({
-      display: "none",
-    });
 
     wrapper.find(LibraryDropdownMenu).invoke("onDraggingChange")(true);
     expect(wrapper.find(Dropdown).prop("visible")).toBe(false);

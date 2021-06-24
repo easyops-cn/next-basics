@@ -6,6 +6,7 @@ import { BrickItem } from "../BrickLibrary/BrickItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { act } from "react-dom/test-utils";
+import { LayerType } from "../interfaces";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");

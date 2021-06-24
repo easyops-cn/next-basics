@@ -16,7 +16,7 @@ export function LibraryMenu({
   defaultSelectedKeys,
   onItemClick,
 }: LibraryMenuProps): React.ReactElement {
-  const renderMenuItem = (item: LibraryMenuItem) => {
+  const renderMenuItem = (item: LibraryMenuItem): React.ReactNode => {
     const list = item.children.map((row) => (
       <Menu.Item key={row.key}>{row.text}</Menu.Item>
     ));
@@ -30,7 +30,7 @@ export function LibraryMenu({
     );
   };
 
-  const handleClick = (data: any) => {
+  const handleClick = (data: any): void => {
     onItemClick?.(data.key);
   };
 

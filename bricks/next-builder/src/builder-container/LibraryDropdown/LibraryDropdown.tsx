@@ -1,21 +1,33 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Dropdown, Button, Menu, Tooltip } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Dropdown, Menu } from "antd";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
+import { LayerType } from "../interfaces";
 
 import shareStyles from "../share.module.css";
+export interface LibraryDropdownProps {
+  type?: LayerType;
+  onVisbleChange?: (visible: boolean) => void;
+}
 
-export function LibraryDropdown(): React.ReactElement {
+export function LibraryDropdown({
+  type,
+  onVisbleChange,
+  children,
+}: React.PropsWithChildren<LibraryDropdownProps>): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [visible, setVisible] = useState(false);
   const isOpen = useRef(false);
 
-  const handleVisibleChange = React.useCallback((value: boolean) => {
-    isOpen.current = value;
-    setVisible(value);
-  }, []);
+  const handleVisibleChange = React.useCallback(
+    (value: boolean) => {
+      isOpen.current = value;
+      setVisible(value);
+      onVisbleChange?.(value);
+    },
+    [onVisbleChange]
+  );
 
   const handleClose = React.useCallback(() => {
     setVisible(false);
@@ -35,6 +47,7 @@ export function LibraryDropdown(): React.ReactElement {
       <LibraryDropdownMenu
         onCloseClick={handleClose}
         onDraggingChange={handleDraggingChange}
+        type={type}
       />
     </Menu>
   );
@@ -48,18 +61,7 @@ export function LibraryDropdown(): React.ReactElement {
       visible={visible}
       onVisibleChange={handleVisibleChange}
     >
-      <Tooltip
-        title={t(K.BRICK_LIBRARY)}
-        placement="bottomRight"
-        overlayStyle={{
-          // Hide tooltip when dropdown is open.
-          display: visible ? "none" : undefined,
-        }}
-      >
-        <Button type="primary" size="small" style={{ marginRight: "10px" }}>
-          <PlusOutlined />
-        </Button>
-      </Tooltip>
+      {children}
     </Dropdown>
   );
 }

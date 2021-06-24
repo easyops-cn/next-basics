@@ -6,17 +6,20 @@ import { CloseOutlined } from "@ant-design/icons";
 import { AdvancedBrickLibrary } from "../AdvancedBrickLibrary/AdvancedBrickLibrary";
 import { LibraryMenu } from "../LibraryMenu/LibraryMenu";
 import { libCategoryList, LIB_ALL_CATEGORY } from "../constants";
+import { LayerType } from "../interfaces";
 
 import styles from "./LibraryDropdownMenu.module.css";
 
 export interface LibraryDropdownMenuProps {
   onCloseClick?: React.MouseEventHandler;
   onDraggingChange?: (isDragging: boolean) => void;
+  type?: LayerType;
 }
 
 export function LibraryDropdownMenu({
   onCloseClick,
   onDraggingChange,
+  type,
 }: LibraryDropdownMenuProps): React.ReactElement {
   const libraryRef = useRef<any>();
   const handleCategoryChange = (category: string): void => {
@@ -37,6 +40,7 @@ export function LibraryDropdownMenu({
         <AdvancedBrickLibrary
           ref={libraryRef}
           onDraggingChange={onDraggingChange}
+          type={type}
         />
       </div>
     </div>

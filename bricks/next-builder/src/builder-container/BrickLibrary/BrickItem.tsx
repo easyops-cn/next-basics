@@ -9,19 +9,21 @@ import {
 import { GeneralIcon } from "@next-libs/basic-components";
 import { useDrag } from "react-dnd";
 import { BuilderDataTransferType } from "@next-core/editor-bricks-helper";
-import { BrickOptionItem } from "../interfaces";
+import { BrickOptionItem, LayerType } from "../interfaces";
 import styles from "./BrickItem.module.css";
 
 export interface BrickItemProps {
   theme?: "light" | "dark";
   brick: BrickOptionItem;
   onDraggingChange?: (isDragging: boolean) => void;
+  layerType?: LayerType;
 }
 
 export function BrickItem({
   theme,
   brick,
   onDraggingChange,
+  layerType,
 }: BrickItemProps): React.ReactElement {
   let brickType: string;
   switch (brick.type) {
@@ -87,8 +89,8 @@ export function BrickItem({
   return (
     <div
       className={`${styles.brickItem} ${styles[brick.type]} ${
-        styles[theme ?? "dark"]
-      }`}
+        styles[layerType]
+      } ${styles[theme ?? "dark"]}`}
       ref={dragRef}
     >
       <span className={styles.brickIcon}>{icon}</span>

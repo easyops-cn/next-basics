@@ -1,8 +1,15 @@
-import { BrickOptionItem, ToolboxTab, LibraryMenuItem } from "./interfaces";
+import {
+  BrickOptionItem,
+  ToolboxTab,
+  LibraryMenuItem,
+  LayerType,
+} from "./interfaces";
 import i18next from "i18next";
 import { K, NS_NEXT_BUILDER } from "../i18n/constants";
 
 export const brickSearchResultLimit = 24;
+
+export const widgetSearchResultLimit = 12;
 
 export const frequentlyUsedBricks: BrickOptionItem[] = [
   {
@@ -102,6 +109,10 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
     name: "presentational-bricks.general-image",
   },
 ];
+
+export const frequentlyUsedLayout: BrickOptionItem[] = [];
+
+export const frequentlyUsedWidget: BrickOptionItem[] = [];
 
 export const treeViewPaddingUnit = 14;
 

@@ -5,8 +5,10 @@ import {
   brickSearchResultLimit,
   LIB_ALL_CATEGORY,
   frequentlyUsedBricks,
+  frequentlyUsedLayout,
+  frequentlyUsedWidget,
 } from "../constants";
-import { BrickOptionItem } from "../interfaces";
+import { BrickOptionItem, LayerType } from "../interfaces";
 
 export function filterBricks({
   q,
@@ -16,6 +18,7 @@ export function filterBricks({
   limit = brickSearchResultLimit,
   appId,
   rootNode,
+  layerType,
 }: {
   q: string;
   category?: string;
@@ -24,6 +27,7 @@ export function filterBricks({
   limit?: number;
   appId: string;
   rootNode?: BuilderRouteOrBrickNode;
+  layerType: LayerType;
 }): BrickOptionItem[] {
   const formatBrickList = processBricks(
     rootNode?.type === "custom-template"
@@ -31,7 +35,8 @@ export function filterBricks({
       : brickList,
     storyList,
     appId,
-    category
+    category,
+    layerType
   );
 
   const keywords = (q ?? "").toLowerCase().match(/\S+/g);
@@ -61,14 +66,30 @@ export function processBricks(
   brickList: BrickOptionItem[],
   storyList: Story[],
   appId: string,
-  category: string = LIB_ALL_CATEGORY
+  category: string = LIB_ALL_CATEGORY,
+  layerType: LayerType
 ): BrickOptionItem[] {
+  const frequentlyUsed =
+    layerType === LayerType.LAYOUT
+      ? frequentlyUsedLayout
+      : layerType === LayerType.WIDGET
+      ? frequentlyUsedWidget
+      : frequentlyUsedBricks;
+
   const sortedBricks =
     category === LIB_ALL_CATEGORY
-      ? insertBricks(brickList, frequentlyUsedBricks)
+      ? insertBricks(brickList, frequentlyUsed)
       : brickList;
 
   return sortedBricks
+    .filter((item) => {
+      if (!item.layerType) {
+        //  default brick type if no value
+        return layerType === LayerType.BRICK;
+      }
+
+      return item.layerType === layerType;
+    })
     .map((item) => {
       const brick = {
         ...item,

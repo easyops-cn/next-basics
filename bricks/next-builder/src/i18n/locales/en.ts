@@ -19,6 +19,8 @@ const locale: Locale = {
   [K.BUILD_AND_PUSH_TOOLTIP]: "Build & Push (Ctrl+B)",
   [K.PREVIEW]: "Preview",
   [K.BRICK_LIBRARY]: "Brick Library",
+  [K.LAYOUT_LIBRARY]: "Layout",
+  [K.WIDGET_LIBRARY]: "Widget",
   [K.TIPS]: "Tips",
   [K.ENTER_FULLSCREEN]: "Enter fullscreen",
   [K.EXIT_FULLSCREEN]: "Exit fullscreen",

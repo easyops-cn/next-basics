@@ -1,5 +1,5 @@
-import React from "react";
-import { Tooltip } from "antd";
+import React, { useMemo, useState } from "react";
+import { Tooltip, Button, Divider } from "antd";
 import { useTranslation } from "react-i18next";
 import {
   BranchesOutlined,
@@ -8,8 +8,10 @@ import {
   BlockOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
-  SettingOutlined,
+  PlusOutlined,
   CloseOutlined,
+  LayoutOutlined,
+  GoldOutlined,
 } from "@ant-design/icons";
 import {
   BuilderRouteNode,
@@ -22,12 +24,25 @@ import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
 import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
 import { SettingDropdown } from "../SettingDropdown/SettingDropdown";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import { BuilderDataType } from "../interfaces";
+import { BuilderDataType, LayerType } from "../interfaces";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import shareStyles from "../share.module.css";
+import { getRuntime } from "@next-core/brick-kit";
 
 export function BuilderToolbar(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
+  const enableLayerView = React.useMemo(
+    () => getRuntime().getFeatureFlags()["next-builder-layer-view"],
+    []
+  );
+
+  const [libsDropdownVisible, setLibsDropdownVisible] = useState<
+    { [key in typeof LayerType[keyof typeof LayerType]]: boolean }
+  >({
+    [LayerType.LAYOUT]: false,
+    [LayerType.WIDGET]: false,
+    [LayerType.BRICK]: false,
+  });
 
   const {
     onCurrentRouteClick,
@@ -43,23 +58,23 @@ export function BuilderToolbar(): React.ReactElement {
 
   const rootNode = useBuilderNode({ isRoot: true });
 
-  const handleRouteClick = () => {
+  const handleRouteClick = (): void => {
     onCurrentRouteClick?.(rootNode as BuilderRouteNode);
   };
 
-  const handleTemplateClick = () => {
+  const handleTemplateClick = (): void => {
     onCurrentTemplateClick?.(rootNode as BuilderCustomTemplateNode);
   };
 
-  const handleSnippetClick = () => {
+  const handleSnippetClick = (): void => {
     onCurrentSnippetClick?.(rootNode as BuilderSnippetNode);
   };
 
-  const handlePreview = () => {
+  const handlePreview = (): void => {
     onPreview?.();
   };
 
-  const handleBuildAndPush = () => {
+  const handleBuildAndPush = (): void => {
     onBuildAndPush?.();
   };
 
@@ -67,9 +82,14 @@ export function BuilderToolbar(): React.ReactElement {
     setFullscreen((prev) => !prev);
   }, [setFullscreen]);
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     onWorkbenchClose?.();
   };
+
+  const divider = useMemo(
+    () => <Divider type="vertical" style={{ height: 25 }} />,
+    []
+  );
 
   return (
     <div className={styles.toolbarContainer}>
@@ -111,7 +131,97 @@ export function BuilderToolbar(): React.ReactElement {
         <RootNodeSelect />
       </div>
       <div className={styles.toolbarRight}>
-        <LibraryDropdown />
+        {enableLayerView && (
+          <>
+            <LibraryDropdown
+              type={LayerType.LAYOUT}
+              onVisbleChange={(visible) =>
+                setLibsDropdownVisible({
+                  ...libsDropdownVisible,
+                  [LayerType.LAYOUT]: visible,
+                })
+              }
+            >
+              <Tooltip
+                title={t(K.LAYOUT_LIBRARY)}
+                placement="bottomRight"
+                overlayStyle={{
+                  // Hide tooltip when dropdown is open.
+                  display: libsDropdownVisible[LayerType.LAYOUT]
+                    ? "none"
+                    : undefined,
+                }}
+              >
+                <Button
+                  type="link"
+                  size="small"
+                  className={shareStyles.tabLink}
+                  style={{ marginRight: "10px" }}
+                >
+                  <LayoutOutlined />
+                </Button>
+              </Tooltip>
+            </LibraryDropdown>
+
+            <LibraryDropdown
+              type={LayerType.WIDGET}
+              onVisbleChange={(visible) =>
+                setLibsDropdownVisible({
+                  ...libsDropdownVisible,
+                  [LayerType.WIDGET]: visible,
+                })
+              }
+            >
+              <Tooltip
+                title={t(K.WIDGET_LIBRARY)}
+                placement="bottomRight"
+                overlayStyle={{
+                  display: libsDropdownVisible[LayerType.WIDGET]
+                    ? "none"
+                    : undefined,
+                }}
+              >
+                <Button
+                  type="link"
+                  size="small"
+                  className={shareStyles.tabLink}
+                  style={{ marginRight: "10px" }}
+                >
+                  <GoldOutlined />
+                </Button>
+              </Tooltip>
+            </LibraryDropdown>
+          </>
+        )}
+        <LibraryDropdown
+          type={LayerType.BRICK}
+          onVisbleChange={(visible) =>
+            setLibsDropdownVisible({
+              ...libsDropdownVisible,
+              [LayerType.BRICK]: visible,
+            })
+          }
+        >
+          <Tooltip
+            title={t(K.BRICK_LIBRARY)}
+            placement="bottomRight"
+            overlayStyle={{
+              display: libsDropdownVisible[LayerType.BRICK]
+                ? "none"
+                : undefined,
+            }}
+          >
+            <Button
+              type="link"
+              size="small"
+              style={{ marginRight: "10px" }}
+              className={shareStyles.tabLink}
+            >
+              <PlusOutlined />
+            </Button>
+          </Tooltip>
+        </LibraryDropdown>
+        {divider}
         <Tooltip title={t(K.BUILD_AND_PUSH_TOOLTIP)} placement="bottomRight">
           <a
             className={shareStyles.tabLink}
@@ -132,6 +242,7 @@ export function BuilderToolbar(): React.ReactElement {
             <CaretRightOutlined />
           </a>
         </Tooltip>
+        {divider}
         <SettingDropdown />
         {!fullscreen && (
           <Tooltip

@@ -7,7 +7,7 @@ import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export interface BrickOptionItem {
   type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
-  name: string;
+  name?: string;
   scopeName?: string;
   shortName?: string;
   category?: string;
@@ -16,6 +16,7 @@ export interface BrickOptionItem {
   icon?: MenuIcon;
   thumbnail?: string;
   bricks?: BrickConf[];
+  layerType?: LayerType;
 }
 
 export interface GroupedBricks {
@@ -108,4 +109,10 @@ export interface StateOfLazyData<T = unknown> {
   status?: LazyDataStatus;
   error?: unknown;
   data?: T;
+}
+
+export enum LayerType {
+  LAYOUT = "layout",
+  WIDGET = "widget",
+  BRICK = "brick",
 }
