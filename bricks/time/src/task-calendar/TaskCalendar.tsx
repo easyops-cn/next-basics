@@ -17,9 +17,9 @@ import {
 export interface TaskCalendarProps {
   value?: string;
   defaultSelectedDate?: string;
-  briefData?: BriefData[];
-  taskData?: TaskData[];
-  importantData?: ImportantData[];
+  briefList?: BriefData[];
+  taskList?: TaskData[];
+  importantList?: ImportantData[];
   taskSettings?: TaskSettings;
   importanceSettings?: ImportanceSettings;
   onDateSelect?: (detail: DateDetail) => void;
@@ -28,9 +28,9 @@ export interface TaskCalendarProps {
 
 export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
   const {
-    briefData,
-    taskData,
-    importantData,
+    briefList,
+    taskList,
+    importantList,
     importanceSettings,
     taskSettings,
     onDateSelect,
@@ -44,28 +44,28 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
   }>({} as any);
 
   const briefDataMap = useMemo(() => {
-    return briefData?.reduce((pre, cur) => {
+    return briefList?.reduce((pre, cur) => {
       const curMoment = moment(cur.date).format("YYYY-MM-DD");
       pre[curMoment] = cur.text;
       return pre;
     }, {} as Record<BriefData["date"], BriefData["text"]>);
-  }, [briefData]);
+  }, [briefList]);
 
   const taskDataMap = useMemo(() => {
-    return taskData?.reduce((pre, cur) => {
+    return taskList?.reduce((pre, cur) => {
       const curMoment = moment(cur.date).format("YYYY-MM-DD");
       pre[curMoment] = cur.task;
       return pre;
     }, {} as Record<TaskData["date"], TaskData["task"]>);
-  }, [taskData]);
+  }, [taskList]);
 
   const importantDataMap = useMemo(() => {
-    return importantData?.reduce((pre, cur) => {
+    return importantList?.reduce((pre, cur) => {
       const curMoment = moment(cur.date).format("YYYY-MM-DD");
       pre[curMoment] = cur.issues;
       return pre;
     }, {} as Record<ImportantData["date"], ImportantData["issues"]>);
-  }, [importantData]);
+  }, [importantList]);
 
   const pickerValue = useMemo(() => {
     return moment(value);

@@ -40,7 +40,7 @@ export const TaskCalendarStory: Story = {
           width: "500px",
         },
         value: "2021-06-20",
-        briefData: [
+        briefList: [
           {
             date: "2021-06-13",
             text: "休",
@@ -76,7 +76,7 @@ export const TaskCalendarStory: Story = {
             人行窗口: "var(--theme-geekblue-color)",
           },
         },
-        taskData: [
+        taskList: [
           {
             date: "2021-06-20",
             task: [
@@ -116,7 +116,7 @@ export const TaskCalendarStory: Story = {
             task: [],
           },
         ],
-        importantData: [
+        importantList: [
           {
             date: "2021-06-01",
             issues: ["发版"],

@@ -145,9 +145,9 @@ export class TaskCalendarElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <TaskCalendar
-            briefData={this.briefList}
-            taskData={this.taskList}
-            importantData={this.importantList}
+            briefList={this.briefList}
+            taskList={this.taskList}
+            importantList={this.importantList}
             taskSettings={this.taskSettings}
             importanceSettings={this.importanceSettings}
             onDateSelect={this._handleSelect}
