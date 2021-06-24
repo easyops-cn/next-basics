@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.132.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.131.0...@next-bricks/basic-bricks@1.132.0) (2021-06-24)
+
+
+### Features
+
+* **snippet:** add several snippets of page layout ([7b97c6b](https://github.com/easyops-cn/next-basics/commit/7b97c6b0ff4f80aefe6ada60f58a9bdab45a7346))
+
+
+
+
+
 # [1.131.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.130.0...@next-bricks/basic-bricks@1.131.0) (2021-06-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.1...@next-bricks/next-builder@1.58.2) (2021-06-24)
+
+
+### Bug Fixes
+
+* **builder:** no longer need to pass nodeAlias ([17fdb2f](https://github.com/easyops-cn/next-basics/commit/17fdb2f1c23bcb9fdea19492083cf82174b5c7ca))
+
+
+
+
+
 ## [1.58.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.0...@next-bricks/next-builder@1.58.1) (2021-06-22)
 
 **Note:** Version bump only for package @next-bricks/next-builder
