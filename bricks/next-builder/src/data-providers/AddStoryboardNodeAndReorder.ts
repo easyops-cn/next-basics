@@ -13,14 +13,12 @@ export interface AddStoryboardNodeAndReorderParams {
   nodeData: NodeInstance;
   nodeIds: string[];
   nodeUid: number;
-  nodeAlias: string;
 }
 
 export async function AddStoryboardNodeAndReorder({
   nodeData,
   nodeIds,
   nodeUid,
-  nodeAlias,
 }: AddStoryboardNodeAndReorderParams): Promise<EventDetailOfNodeAddStored> {
   const stored = await InstanceApi_createInstance(STORYBOARD_BRICK, nodeData);
 
@@ -36,7 +34,6 @@ export async function AddStoryboardNodeAndReorder({
   return {
     nodeData: stored as BuilderRouteOrBrickNode,
     nodeUid,
-    nodeAlias,
   };
 }
 

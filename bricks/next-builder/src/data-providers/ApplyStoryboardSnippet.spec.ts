@@ -34,7 +34,6 @@ describe("ApplyStoryboardSnippet", () => {
         {
           nodeUid: 200,
           parentUid: 100,
-          nodeAlias: "easy-view",
           nodeData: {
             parent: "instance-a",
             brick: "basic-bricks.easy-view",
@@ -43,7 +42,6 @@ describe("ApplyStoryboardSnippet", () => {
             {
               nodeUid: 201,
               parentUid: 200,
-              nodeAlias: "general-button",
               nodeData: {
                 brick: "basic-bricks.general-button",
               },
@@ -74,7 +72,6 @@ describe("ApplyStoryboardSnippet", () => {
       flattenNodeDetails: [
         {
           nodeUid: 200,
-          nodeAlias: "easy-view",
           nodeData: {
             parent: "instance-a",
             brick: "basic-bricks.easy-view",
@@ -84,7 +81,6 @@ describe("ApplyStoryboardSnippet", () => {
         },
         {
           nodeUid: 201,
-          nodeAlias: "general-button",
           nodeData: {
             parent: "instance:basic-bricks.easy-view",
             brick: "basic-bricks.general-button",

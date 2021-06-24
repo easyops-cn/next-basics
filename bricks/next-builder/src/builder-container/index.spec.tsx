@@ -305,7 +305,6 @@ describe("next-builder.builder-container", () => {
             {
               parentUid: 1,
               nodeUid: 3,
-              nodeAlias: "test-brick",
               nodeData: {
                 type: "brick",
                 parent: "a",
@@ -316,7 +315,6 @@ describe("next-builder.builder-container", () => {
                 {
                   parentUid: 3,
                   nodeUid: 4,
-                  nodeAlias: "another-brick",
                   nodeData: {
                     type: "brick",
                     brick: "my.another-brick",
@@ -341,7 +339,6 @@ describe("next-builder.builder-container", () => {
             {
               parentUid: 1,
               nodeUid: 3,
-              nodeAlias: "test-brick",
               nodeData: {
                 appId: "test-app",
                 type: "brick",
@@ -353,7 +350,6 @@ describe("next-builder.builder-container", () => {
                 {
                   parentUid: 3,
                   nodeUid: 4,
-                  nodeAlias: "another-brick",
                   nodeData: {
                     appId: "test-app",
                     type: "brick",
