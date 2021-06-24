@@ -40,7 +40,6 @@ describe("AddStoryboardNodeAndReorder", () => {
       } as Partial<NodeInstance> as NodeInstance,
       nodeIds: ["B-001", null, "B-002"],
       nodeUid: 1,
-      nodeAlias: "A",
     };
 
     const result: EventDetailOfNodeAddStored = {
@@ -49,7 +48,6 @@ describe("AddStoryboardNodeAndReorder", () => {
         brick: "brick-a",
       } as Partial<BuilderRouteOrBrickNode> as BuilderRouteOrBrickNode,
       nodeUid: 1,
-      nodeAlias: "A",
     };
 
     expect(await AddStoryboardNodeAndReorder(params)).toEqual(result);
@@ -69,7 +67,6 @@ describe("AddStoryboardNodeAndReorder", () => {
       } as Partial<NodeInstance> as NodeInstance,
       nodeIds: [],
       nodeUid: 1,
-      nodeAlias: "A",
     };
 
     const result: EventDetailOfNodeAddStored = {
@@ -78,7 +75,6 @@ describe("AddStoryboardNodeAndReorder", () => {
         brick: "brick-a",
       } as Partial<BuilderRouteOrBrickNode> as BuilderRouteOrBrickNode,
       nodeUid: 1,
-      nodeAlias: "A",
     };
 
     expect(await AddStoryboardNodeAndReorder(params)).toEqual(result);

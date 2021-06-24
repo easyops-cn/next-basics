@@ -33,7 +33,6 @@ async function createNode(
 
   flattenNodeDetails.push({
     nodeUid: nodeDetail.nodeUid,
-    nodeAlias: nodeDetail.nodeAlias,
     nodeData: instanceData,
   });
 
