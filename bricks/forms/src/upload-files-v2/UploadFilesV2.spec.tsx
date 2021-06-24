@@ -302,60 +302,62 @@ describe("UploadFilesV2", () => {
     ).toBe(undefined);
   });
 
-  it("test limitSize", async () => {
-    const wrapper = mount(<UploadFilesV2 url={url} method="put" />);
-    wrapper.setProps({
-      limitSize: 1,
-    });
+  describe("test limitSize", () => {
+    const wrapper = mount(<UploadFilesV2 url={url} method="put" autoUpload />);
+    it("while autoUpload is true", async () => {
+      wrapper.setProps({
+        limitSize: 1,
+      });
 
-    const notAllowResult = wrapper.find(Upload).invoke("beforeUpload")(
-      {
-        uid: "-img1",
-        size: 1024 * 1024 * 10,
-        type: "image/png",
-        name: "image.png",
-        lastModifiedDate: new Date(),
-        webkitRelativePath: "",
-        lastModified: 1234,
-      },
-      [
+      const notAllowResult = wrapper.find(Upload).invoke("beforeUpload")(
         {
-          uid: "-img1",
           size: 1024 * 1024 * 10,
-          type: "image/png",
-          name: "image.png",
         },
-      ]
-    );
-    await expect(notAllowResult).rejects.toStrictEqual(
-      new Error("上传文件体积大于限定体积")
-    );
+        [
+          {
+            size: 1024 * 1024 * 10,
+          },
+        ]
+      );
+      await expect(notAllowResult).rejects.toStrictEqual(
+        new Error("上传文件体积大于限定体积")
+      );
 
-    wrapper.setProps({
-      limitSize: 2,
+      wrapper.setProps({
+        limitSize: 2,
+      });
+
+      const allowResult = wrapper.find(Upload).invoke("beforeUpload")(
+        {
+          size: 1024 * 1024,
+        },
+        [
+          {
+            size: 1024 * 1024,
+          },
+        ]
+      );
+      await expect(allowResult).resolves.toMatchObject({
+        size: 1024 * 1024,
+      });
     });
 
-    const allowResult = wrapper.find(Upload).invoke("beforeUpload")(
-      {
-        uid: "-img1",
-        size: 1024 * 1024,
-        type: "image/png",
-        name: "image.png",
-        lastModifiedDate: new Date(),
-        webkitRelativePath: "",
-        lastModified: 1234,
-      },
-      [
+    it("while autoUpload is false", () => {
+      wrapper.setProps({
+        autoUpload: false,
+      });
+      wrapper.update();
+      const autoUploadResult = wrapper.find(Upload).invoke("beforeUpload")(
         {
-          uid: "-img1",
           size: 1024 * 1024,
-          type: "image/png",
-          name: "image.png",
         },
-      ]
-    );
-    await expect(allowResult).resolves.toMatchObject({
-      size: 1024 * 1024,
+        [
+          {
+            size: 1024 * 1024,
+          },
+        ]
+      );
+      expect(autoUploadResult).toBeFalsy();
     });
   });
 

@@ -98,14 +98,22 @@ export function RealUploadFile(
     props.onChange?.(v);
   };
 
-  const handleBeforeUpload = (file: RcFile): Promise<RcFile> => {
-    return new Promise((resolve, reject) => {
-      if (FileUtils.sizeCompare(file, props.limitSize ?? 100)) {
-        props.onError?.(`上传文件体积大于限定体积`);
+  const handleBeforeUpload = (file: RcFile): Promise<RcFile> | boolean => {
+    if (FileUtils.sizeCompare(file, props.limitSize ?? 100)) {
+      // 如果上传文件大小大于限定大小
+      props.onError?.(`上传文件体积大于限定体积`);
+      return new Promise((_resolve, reject) => {
+        // 返回reject阻止文件添加
         reject(new Error(`上传文件体积大于限定体积`));
-      }
-      resolve(file);
-    });
+      });
+    }
+    if (props.autoUpload) {
+      // 进行自动上传
+      return new Promise((resolve) => resolve(file));
+    } else {
+      // 返回false阻止默认上传行为
+      return false;
+    }
   };
 
   const handleFilesChange = async (

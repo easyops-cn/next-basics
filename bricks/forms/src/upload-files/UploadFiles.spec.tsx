@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import { Upload } from "antd";
 import { render } from "@testing-library/react";
 
-import { UploadFiles } from "./UploadFiles";
+import { UploadFiles, UploadFilesProps } from "./UploadFiles";
 
 const file = {
   uid: "123",
@@ -45,13 +45,14 @@ describe("UploadFiles", () => {
     const onChange = jest.fn();
     const onSuccess = jest.fn();
     const onError = jest.fn();
-    const getWrapper = () =>
+    const getWrapper = (props?: Partial<UploadFilesProps>) =>
       mount(
         <UploadFiles
           url={url}
           onChange={onChange}
           onSuccess={onSuccess}
           onError={onError}
+          {...props}
         />
       );
 
@@ -117,14 +118,29 @@ describe("UploadFiles", () => {
     });
 
     describe("file size test", () => {
-      it("normalsize", async () => {
-        const wrapper = getWrapper();
-        const successResult = wrapper.find(Upload).invoke("beforeUpload")(
-          file,
-          [file]
-        );
-        await expect(successResult).resolves.toMatchObject({
-          size: 1234,
+      describe("normalsize", () => {
+        it("while autoUpload is true", async () => {
+          const wrapper = getWrapper({
+            autoUpload: true,
+          });
+          const successResult = wrapper.find(Upload).invoke("beforeUpload")(
+            file,
+            [file]
+          );
+          await expect(successResult).resolves.toMatchObject({
+            size: 1234,
+          });
+        });
+
+        it("while autoUpload is false", async () => {
+          const wrapper = getWrapper({
+            autoUpload: false,
+          });
+          const successResult = wrapper.find(Upload).invoke("beforeUpload")(
+            file,
+            [file]
+          );
+          expect(successResult).toBeFalsy();
         });
       });
 
