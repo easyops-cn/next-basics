@@ -28,6 +28,7 @@ import { BuilderDataType, LayerType } from "../interfaces";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import shareStyles from "../share.module.css";
 import { getRuntime } from "@next-core/brick-kit";
+import { brickMenus, layoutMenus, widgetMenus } from "../constants";
 
 export function BuilderToolbar(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -134,6 +135,7 @@ export function BuilderToolbar(): React.ReactElement {
         {enableLayerView && (
           <>
             <LibraryDropdown
+              menuItems={layoutMenus}
               type={LayerType.LAYOUT}
               onVisbleChange={(visible) =>
                 setLibsDropdownVisible({
@@ -164,6 +166,7 @@ export function BuilderToolbar(): React.ReactElement {
             </LibraryDropdown>
 
             <LibraryDropdown
+              menuItems={widgetMenus}
               type={LayerType.WIDGET}
               onVisbleChange={(visible) =>
                 setLibsDropdownVisible({
@@ -194,6 +197,7 @@ export function BuilderToolbar(): React.ReactElement {
           </>
         )}
         <LibraryDropdown
+          menuItems={brickMenus}
           type={LayerType.BRICK}
           onVisbleChange={(visible) =>
             setLibsDropdownVisible({

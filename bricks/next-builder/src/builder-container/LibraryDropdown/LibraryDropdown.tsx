@@ -3,18 +3,20 @@ import { useTranslation } from "react-i18next";
 import { Dropdown, Menu } from "antd";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
-import { LayerType } from "../interfaces";
+import { LayerType, LibraryMenuItem } from "../interfaces";
 
 import shareStyles from "../share.module.css";
 export interface LibraryDropdownProps {
   type?: LayerType;
   onVisbleChange?: (visible: boolean) => void;
+  menuItems?: LibraryMenuItem[];
 }
 
 export function LibraryDropdown({
   type,
   onVisbleChange,
   children,
+  menuItems,
 }: React.PropsWithChildren<LibraryDropdownProps>): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [visible, setVisible] = useState(false);
@@ -45,6 +47,7 @@ export function LibraryDropdown({
   const content = (
     <Menu style={{ padding: "2px 0" }}>
       <LibraryDropdownMenu
+        menuItems={menuItems}
         onCloseClick={handleClose}
         onDraggingChange={handleDraggingChange}
         type={type}

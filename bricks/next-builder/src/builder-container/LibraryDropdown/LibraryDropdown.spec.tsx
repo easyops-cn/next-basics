@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import { Dropdown, Tooltip, Button } from "antd";
+import { Dropdown, Button } from "antd";
 import { LibraryDropdown } from "./LibraryDropdown";
 import { LibraryDropdownMenu } from "./LibraryDropdownMenu";
 
