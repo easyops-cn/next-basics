@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@0.1.0...@next-bricks/time@0.2.0) (2021-06-25)
+
+
+### Features
+
+* **task-calendar:** support modify footer & cell style ([c240924](https://github.com/easyops-cn/next-basics/commit/c24092440eaff4266b54396748d99986418f248a))
+
+
+
+
+
 # 0.1.0 (2021-06-24)
 
 
