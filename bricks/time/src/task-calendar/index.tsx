@@ -21,7 +21,7 @@ import { TaskCalendar } from "./TaskCalendar";
  * @id time.task-calendar
  * @author nlicroshan
  * @history
- * 1.x.0: 新增构件 `time.task-calendar`
+ * 1.0.0: 新增构件 `time.task-calendar`
  * @docKind brick
  * @noInheritDoc
  */
