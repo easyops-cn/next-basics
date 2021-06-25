@@ -113,8 +113,8 @@ export class UploadImgElement extends FormItemElement {
   /**
    * @kind number
    * @required false
-   * @default -
-   * @description 图片上传大小限制(MB), 最大上传大小为: 10MB
+   * @default 10
+   * @description 图片上传大小限制(MB)
    * @group advanced
    */
   @property({
