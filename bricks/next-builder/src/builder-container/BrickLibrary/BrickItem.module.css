@@ -4,6 +4,18 @@
   display: flex;
   align-items: center;
   cursor: grab;
+
+  &.layout,
+  &.widget {
+    gap: 6px;
+    height: 75px;
+    .brickIcon {
+      width: 60px;
+      height: 55px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
 }
 
 .brickItem:hover {
@@ -72,6 +84,6 @@
 }
 
 .brickIcon > img {
-  width: 16px;
-  height: 16px;
+  width: 48px;
+  height: 48px;
 }

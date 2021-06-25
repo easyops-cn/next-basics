@@ -14,17 +14,21 @@ import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import styles from "./AdvancedBrickLibrary.module.css";
+import { brickSearchResultLimit, widgetSearchResultLimit } from "../constants";
+import { LayerType } from "../interfaces";
 
 interface AdvancedBrickLibraryProps {
   onDraggingChange?: (isDragging: boolean) => void;
+  type?: LayerType;
 }
 
 export function LegacyAdvancedBrickLibrary(
-  { onDraggingChange }: AdvancedBrickLibraryProps,
+  { onDraggingChange, type = LayerType.BRICK }: AdvancedBrickLibraryProps,
   ref: React.Ref<any>
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const { appId, brickList, storyList } = useBuilderUIContext();
+
   const [q, setQ] = useState<string>();
   const [category, setCategory] = useState<string>();
   const searchRef = useRef<any>();
@@ -51,8 +55,13 @@ export function LegacyAdvancedBrickLibrary(
       storyList,
       appId,
       rootNode,
+      layerType: type,
+      limit:
+        type === LayerType.BRICK
+          ? brickSearchResultLimit
+          : widgetSearchResultLimit,
     });
-  }, [storyList, q, category, brickList, appId, rootNode]);
+  }, [storyList, q, category, brickList, appId, rootNode, type]);
 
   return (
     <div>
@@ -65,8 +74,12 @@ export function LegacyAdvancedBrickLibrary(
       {!isEmpty(filteredBricks) ? (
         <div className={styles.brickWrapper}>
           {filteredBricks.map((item) => (
-            <li key={item.name} className={styles.itemWrapper}>
+            <li
+              key={`${item.type}:${item.name}`}
+              className={styles.itemWrapper}
+            >
               <BrickItem
+                layerType={type}
                 brick={item}
                 onDraggingChange={onDraggingChange}
                 theme="light"

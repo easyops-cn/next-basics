@@ -1,14 +1,24 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
 import * as helper from "@next-core/editor-bricks-helper";
 import { BuilderToolbar } from "./BuilderToolbar";
+import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { BuilderDataType } from "../interfaces";
+import { getRuntime } from "@next-core/brick-kit";
 
 const mockUseBuilderNode = jest.spyOn(helper, "useBuilderNode");
 
 jest.mock("../BuilderUIContext");
+jest.mock("@next-core/brick-kit");
+
+(getRuntime as jest.Mock).mockReturnValue({
+  getFeatureFlags: jest
+    .fn()
+    .mockReturnValue({ "next-builder-layer-view": false }),
+});
 
 const mockUseBuilderUIContext = useBuilderUIContext as jest.MockedFunction<
   typeof useBuilderUIContext
@@ -40,7 +50,7 @@ describe("BuilderToolbar", () => {
       path: "/",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(5);
+    expect(wrapper.find(".tabLink").length).toBe(6);
     wrapper.find(".tabLink[data-testid='view-route']").simulate("click");
     expect(mockCurrentRouteClick).toBeCalledWith({
       id: "R-01",
@@ -68,7 +78,7 @@ describe("BuilderToolbar", () => {
       templateId: "tpl-test",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(5);
+    expect(wrapper.find(".tabLink").length).toBe(6);
     expect(
       wrapper.find(".tabLink").filter("[data-testid='view-template']").length
     ).toBe(1);
@@ -94,7 +104,7 @@ describe("BuilderToolbar", () => {
       snippetId: "snippet-test",
     });
     const wrapper = shallow(<BuilderToolbar />);
-    expect(wrapper.find(".tabLink").length).toBe(5);
+    expect(wrapper.find(".tabLink").length).toBe(6);
     expect(
       wrapper.find(".tabLink").filter("[data-testid='view-snippet']").length
     ).toBe(1);
@@ -134,5 +144,23 @@ describe("BuilderToolbar", () => {
       null
     );
     expect(onWorkbenchClose).toBeCalled();
+  });
+
+  it("should show layer viewer ", () => {
+    (getRuntime as jest.Mock).mockReturnValueOnce({
+      getFeatureFlags: jest
+        .fn()
+        .mockReturnValue({ "next-builder-layer-view": true }),
+    });
+
+    const wrapper = shallow(<BuilderToolbar />);
+    expect(wrapper.find(LibraryDropdown).length).toEqual(3);
+    wrapper.find(LibraryDropdown).at(0).invoke("onVisbleChange")(true);
+    wrapper.find(LibraryDropdown).at(1).invoke("onVisbleChange")(true);
+    wrapper.find(LibraryDropdown).at(2).invoke("onVisbleChange")(true);
+    const tooltipWrapper = wrapper.find(LibraryDropdown).at(0).shallow();
+    expect(tooltipWrapper.find(Tooltip).at(0).prop("overlayStyle")).toEqual({
+      display: "none",
+    });
   });
 });

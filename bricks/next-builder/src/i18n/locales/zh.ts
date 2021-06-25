@@ -14,6 +14,8 @@ const locale: Locale = {
   [K.ADD_DATA]: "添加数据",
   [K.SETTINGS]: "设置",
   [K.BRICK_LIBRARY]: "构件库",
+  [K.LAYOUT_LIBRARY]: "布局",
+  [K.WIDGET_LIBRARY]: "挂件",
   [K.VIEW_ROUTE]: "查看路由",
   [K.VIEW_TEMPLATE]: "查看模板",
   [K.VIEW_SNIPPET]: "查看片段",
@@ -69,6 +71,9 @@ const locale: Locale = {
   [K.BRICK_CATEGORY_DATA_CONVERT]: "数据转换工具",
   [K.BRICK_CATEGORY_TOPOLOGY]: "拓扑",
   [K.BRICK_CATEGORY_OTHER]: "其他",
+  [K.LAYOUT_GRID]: "网格布局",
+  [K.LAYOUT_PAGE]: "页面布局",
+  [K.LAYOUT_WITH_SIDEBAR]: "左侧菜单栏布局",
 };
 
 export default locale;

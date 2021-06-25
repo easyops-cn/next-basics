@@ -19,6 +19,8 @@ const locale: Locale = {
   [K.BUILD_AND_PUSH_TOOLTIP]: "Build & Push (Ctrl+B)",
   [K.PREVIEW]: "Preview",
   [K.BRICK_LIBRARY]: "Brick Library",
+  [K.LAYOUT_LIBRARY]: "Layout",
+  [K.WIDGET_LIBRARY]: "Widget",
   [K.TIPS]: "Tips",
   [K.ENTER_FULLSCREEN]: "Enter fullscreen",
   [K.EXIT_FULLSCREEN]: "Exit fullscreen",
@@ -70,6 +72,9 @@ const locale: Locale = {
   [K.BRICK_CATEGORY_DATA_CONVERT]: "Data Convert",
   [K.BRICK_CATEGORY_TOPOLOGY]: "Topology",
   [K.BRICK_CATEGORY_OTHER]: "Other",
+  [K.LAYOUT_PAGE]: "page layout",
+  [K.LAYOUT_GRID]: "grid",
+  [K.LAYOUT_WITH_SIDEBAR]: "layout with sidebar",
 };
 
 export default locale;

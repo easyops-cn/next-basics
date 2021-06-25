@@ -31,7 +31,7 @@ export async function GetBrickLibrary({
   const [customTemplates, installedSnippets, hostedSnippets] =
     await Promise.all([
       InstanceApi_postSearchV3("STORYBOARD_TEMPLATE", {
-        fields: ["templateId", "id"],
+        fields: ["templateId", "id", "layerType"],
         page_size: 3000,
         query: {
           "project.instanceId": projectId,
@@ -39,7 +39,14 @@ export async function GetBrickLibrary({
       }),
       installedSnippetsEnabled
         ? InstanceApi_postSearchV3("INSTALLED_BRICK_SNIPPET@EASYOPS", {
-            fields: ["id", "text", "category", "thumbnail", "bricks"],
+            fields: [
+              "id",
+              "text",
+              "category",
+              "thumbnail",
+              "bricks",
+              "layerType",
+            ],
             page_size: 3000,
           })
         : { list: [] },
@@ -86,6 +93,7 @@ export async function GetBrickLibrary({
         type: "customTemplate",
         name: item.templateId,
         id: item.id,
+        layerType: item.layerType,
       })),
       installedSnippets.list.map<BrickLibraryItem>((item) => ({
         type: "snippet",
@@ -93,6 +101,7 @@ export async function GetBrickLibrary({
         category: item.category,
         thumbnail: item.thumbnail,
         bricks: item.bricks,
+        layerType: item.layerType,
       })),
       pipes
         .graphTree(hostedSnippets as pipes.GraphData, {
@@ -108,6 +117,7 @@ export async function GetBrickLibrary({
           category: item.category,
           thumbnail: item.thumbnail,
           bricks: buildBricks(item.children),
+          layerType: item.layerType,
         })),
       developHelper.getTemplatePackages().flatMap<BrickLibraryItem>((pkg) =>
         pkg.templates.map((name) => ({

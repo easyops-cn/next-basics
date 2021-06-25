@@ -1,8 +1,15 @@
-import { BrickOptionItem, ToolboxTab, LibraryMenuItem } from "./interfaces";
+import {
+  BrickOptionItem,
+  ToolboxTab,
+  LibraryMenuItem,
+  LayerType,
+} from "./interfaces";
 import i18next from "i18next";
 import { K, NS_NEXT_BUILDER } from "../i18n/constants";
 
 export const brickSearchResultLimit = 24;
+
+export const widgetSearchResultLimit = 12;
 
 export const frequentlyUsedBricks: BrickOptionItem[] = [
   {
@@ -103,6 +110,10 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
   },
 ];
 
+export const frequentlyUsedLayout: BrickOptionItem[] = [];
+
+export const frequentlyUsedWidget: BrickOptionItem[] = [];
+
 export const treeViewPaddingUnit = 14;
 
 export const defaultToolboxTab = ToolboxTab.TREE_VIEW;
@@ -111,7 +122,7 @@ export const localStorageKeyForShowRelatedNodesBasedOnEvents =
   "next-builder-show-related-bricks-based-on-events";
 
 export const LIB_ALL_CATEGORY = "all";
-export const libCategoryList: LibraryMenuItem[] = [
+export const brickMenus: LibraryMenuItem[] = [
   {
     key: LIB_ALL_CATEGORY,
     children: [
@@ -124,6 +135,112 @@ export const libCategoryList: LibraryMenuItem[] = [
   {
     key: "atom",
     title: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_ATOM}`),
+    type: "group",
+    children: [
+      {
+        key: "layout",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LAYOUT}`),
+      },
+      {
+        key: "card",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD}`),
+      },
+      {
+        key: "general-tables",
+        text: i18next.t(
+          `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_GENERAL_TABLES}`
+        ),
+      },
+      {
+        key: "description",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DESCRIPTION}`),
+      },
+      {
+        key: "chart",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CHART}`),
+      },
+      {
+        key: "value-mapping",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_VALUE_MAPPING}`),
+      },
+      {
+        key: "data-view",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_VIEW}`),
+      },
+      {
+        key: "form-input",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM_INPUT}`),
+      },
+      {
+        key: "navigation",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NAVIGATION}`),
+      },
+      {
+        key: "feedback-and-tooltip",
+        text: i18next.t(
+          `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FEEDBACK_AND_TOOLTIP}`
+        ),
+      },
+      {
+        key: "data-convert",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_CONVERT}`),
+      },
+      {
+        key: "topology",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_TOPOLOGY}`),
+      },
+      {
+        key: "other",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_OTHER}`),
+      },
+    ],
+  },
+];
+
+export const layoutMenus: LibraryMenuItem[] = [
+  {
+    key: LIB_ALL_CATEGORY,
+    children: [
+      {
+        key: LIB_ALL_CATEGORY,
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_RECOMMENDED}`),
+      },
+    ],
+  },
+  {
+    key: "layout",
+    title: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT_LIBRARY}`),
+    type: "group",
+    children: [
+      {
+        key: "page",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT_PAGE}`),
+      },
+      {
+        key: "grid",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT_GRID}`),
+      },
+      {
+        key: "sidebar",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT_WITH_SIDEBAR}`),
+      },
+    ],
+  },
+];
+
+export const widgetMenus: LibraryMenuItem[] = [
+  {
+    key: LIB_ALL_CATEGORY,
+    children: [
+      {
+        key: LIB_ALL_CATEGORY,
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_RECOMMENDED}`),
+      },
+    ],
+  },
+  {
+    key: "widget",
+    title: i18next.t(`${NS_NEXT_BUILDER}:${K.WIDGET_LIBRARY}`),
     type: "group",
     children: [
       {
