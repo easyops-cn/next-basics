@@ -7,13 +7,19 @@
 
   &.layout,
   &.widget {
-    gap: 6px;
-    height: 75px;
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+    padding: 8px 0;
     .brickIcon {
       width: 60px;
       height: 55px;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
+    }
+    .brickName {
+      width: 100%;
+      text-align: center;
     }
   }
 }
