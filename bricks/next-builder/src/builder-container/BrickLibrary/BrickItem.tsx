@@ -78,7 +78,7 @@ export function BrickItem({
         icon = brick.thumbnail ? (
           <img src={brick.thumbnail} />
         ) : (
-          <NumberOutlined />
+          <NumberOutlined style={{ fontSize: 42 }} />
         );
         break;
       default:

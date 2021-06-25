@@ -5,7 +5,7 @@ import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { AdvancedBrickLibrary } from "../AdvancedBrickLibrary/AdvancedBrickLibrary";
 import { LibraryMenu } from "../LibraryMenu/LibraryMenu";
-import { libCategoryList, LIB_ALL_CATEGORY } from "../constants";
+import { LIB_ALL_CATEGORY } from "../constants";
 import { LayerType, LibraryMenuItem } from "../interfaces";
 
 import styles from "./LibraryDropdownMenu.module.css";

@@ -39,6 +39,7 @@ export function LibraryDropdown({
     (isDragging: boolean): void => {
       if (isOpen.current) {
         setVisible(!isDragging);
+        isOpen.current = !isDragging;
       }
     },
     []

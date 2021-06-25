@@ -72,7 +72,14 @@ export function LegacyAdvancedBrickLibrary(
         onSearch={handleSearch}
       />
       {!isEmpty(filteredBricks) ? (
-        <div className={styles.brickWrapper}>
+        <div
+          className={styles.brickWrapper}
+          style={{
+            gridTemplateColumns: `repeat(${
+              type !== LayerType.BRICK ? 4 : 3
+            }, 1fr)`,
+          }}
+        >
           {filteredBricks.map((item) => (
             <li
               key={`${item.type}:${item.name}`}
