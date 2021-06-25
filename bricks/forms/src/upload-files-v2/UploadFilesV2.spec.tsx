@@ -94,6 +94,32 @@ describe("UploadFilesV2", () => {
       ],
     });
     expect(wrapper.find(Upload).prop("disabled")).toBe(true);
+
+    expect(wrapper.find("Button").text()).toBe("Upload");
+    expect(wrapper.find("GeneralIcon").at(0).prop("icon")).toEqual({
+      lib: "antd",
+      icon: "upload",
+      theme: "outlined",
+    });
+    wrapper.setProps({
+      uploadButtonProps: {
+        buttonName: "Upload Now",
+        buttonIcon: {
+          lib: "antd",
+          icon: "cloud-upload",
+          theme: "outlined",
+        },
+        buttonType: "link",
+      },
+    });
+    wrapper.update();
+    expect(wrapper.find("Button").text()).toBe("Upload Now");
+    expect(wrapper.find("Button").prop("type")).toBe("link");
+    expect(wrapper.find("GeneralIcon").at(0).prop("icon")).toEqual({
+      lib: "antd",
+      icon: "cloud-upload",
+      theme: "outlined",
+    });
   });
 
   it("test remove", async () => {

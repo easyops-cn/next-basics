@@ -8,6 +8,7 @@ import {
 } from "@next-core/brick-kit";
 import { UploadFilesV2, UploadFileValueItem } from "./UploadFilesV2";
 import { FormItemElement } from "@next-libs/forms";
+import { UploadButtonProps } from "../interfaces";
 
 /**
  * @id forms.upload-files-v2
@@ -187,10 +188,22 @@ export class UploadFilesV2Element extends FormItemElement {
    * @kind string
    * @required false
    * @default Upload
-   * @description 上传按钮文字
+   * @deprecated
+   * @description [已废弃]上传按钮文字，请使用uploadButtonProps.buttonName
    */
   @property({ attribute: false })
   uploadButtonName: string;
+
+  /**
+   * @kind UploadButtonProps
+   * @required false
+   * @default -
+   * @description 上传按钮设置
+   */
+  @property({
+    attribute: false,
+  })
+  uploadButtonProps: UploadButtonProps;
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -273,6 +286,7 @@ export class UploadFilesV2Element extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             hideDragBtnWhenAchieveMax={this.hideDragBtnWhenAchieveMax}
+            uploadButtonProps={this.uploadButtonProps}
           />
         </BrickWrapper>,
         this
