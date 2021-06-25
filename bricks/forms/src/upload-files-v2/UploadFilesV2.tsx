@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from "react";
 import { uniqueId, forEach, map, findIndex, some, isEqual } from "lodash";
 import update from "immutability-helper";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 import { Upload, Button } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { UploadFile, RcFile } from "antd/lib/upload/interface";
 import { FileUtils } from "../utils";
+import { UploadButtonProps } from "../interfaces";
 
 interface UploadFilesV2Props extends FormItemWrapperProps {
   onChange?: any;
@@ -33,6 +34,7 @@ interface UploadFilesV2Props extends FormItemWrapperProps {
   disabled?: boolean;
   uploadButtonName?: string;
   hideDragBtnWhenAchieveMax?: boolean;
+  uploadButtonProps?: UploadButtonProps;
 }
 
 export interface UploadFileValueItem {
@@ -74,6 +76,8 @@ export function RealUploadFile(
   props: UploadFilesV2Props,
   ref: any
 ): React.ReactElement {
+  const { uploadButtonProps } = props;
+
   const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState([]);
   const [fileList, setFileList] = useState([]);
@@ -233,8 +237,18 @@ export function RealUploadFile(
           (props.maxNumber && value?.length >= props.maxNumber) ||
           props.disabled
         }
+        type={uploadButtonProps?.buttonType}
       >
-        <UploadOutlined /> {props.uploadButtonName ?? "Upload"}
+        <GeneralIcon
+          icon={
+            uploadButtonProps?.buttonIcon ?? {
+              lib: "antd",
+              icon: "upload",
+              theme: "outlined",
+            }
+          }
+        />
+        {uploadButtonProps?.buttonName ?? props.uploadButtonName ?? "Upload"}
       </Button>
     );
   };
@@ -342,6 +356,7 @@ export function UploadFilesV2(props: UploadFilesV2Props): React.ReactElement {
         hideUploadButton={props.hideUploadButton}
         uploadButtonName={props.uploadButtonName}
         hideDragBtnWhenAchieveMax={props.hideDragBtnWhenAchieveMax}
+        uploadButtonProps={props.uploadButtonProps}
       />
     </FormItemWrapper>
   );
