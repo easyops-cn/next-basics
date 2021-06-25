@@ -1,16 +1,18 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { shallow, mount } from "enzyme";
 import * as kit from "@next-core/brick-kit";
 import { MarkdownDisplay } from "./MarkdownDisplay";
+import { Image } from "antd";
 
 // Mock `window.location`
 delete window.location;
-window.location = ({
+window.location = {
   origin: "http://localhost",
   pathname: "/next/a",
   search: "?b",
   hash: "#c:d",
-} as unknown) as Location;
+} as unknown as Location;
 
 jest.spyOn(kit, "getHistory").mockReturnValue({
   createHref: () => "/next/a?b#c",
@@ -58,5 +60,21 @@ describe("MarkdownDisplay", () => {
   ])("should resolve link url when given '%s'", (value, result) => {
     const wrapper = shallow(<MarkdownDisplay value={value} />);
     expect(wrapper.find("div").html()).toContain(result);
+  });
+
+  it("image should be change to antd image component", async () => {
+    jest.useFakeTimers();
+    const element = document.createElement("div");
+    document.getElementById = jest.fn(() => element);
+    const wrapper = mount(
+      <MarkdownDisplay value="![img](http://www.baidu.com)" />
+    );
+
+    expect(wrapper.html().indexOf("img") >= 0).toBeTruthy();
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(element.innerHTML.indexOf("ant-image") >= 0).toBeTruthy();
+    jest.useRealTimers();
   });
 });
