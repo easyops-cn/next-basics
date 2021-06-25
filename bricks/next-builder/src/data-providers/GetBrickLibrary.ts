@@ -82,10 +82,11 @@ export async function GetBrickLibrary({
     .getBrickPackages()
     .flatMap<BrickLibraryItem>((pkg) =>
       pkg.filePath.startsWith("bricks/providers-of-")
-        ? pkg.bricks.map((name) => ({ type: "provider", name }))
+        ? pkg.bricks.map((name) => ({ type: "provider", name, id: name }))
         : pkg.bricks.map((name) => ({
             type: pkg.providers?.includes(name) ? "provider" : "brick",
             name,
+            id: name,
           }))
     )
     .concat(
@@ -101,6 +102,7 @@ export async function GetBrickLibrary({
         category: item.category,
         thumbnail: item.thumbnail,
         bricks: item.bricks,
+        id: item.id,
         layerType: item.layerType,
       })),
       pipes
@@ -117,12 +119,14 @@ export async function GetBrickLibrary({
           category: item.category,
           thumbnail: item.thumbnail,
           bricks: buildBricks(item.children),
+          id: item.id,
           layerType: item.layerType,
         })),
       developHelper.getTemplatePackages().flatMap<BrickLibraryItem>((pkg) =>
         pkg.templates.map((name) => ({
           type: "template",
           name,
+          id: name,
         }))
       )
     );

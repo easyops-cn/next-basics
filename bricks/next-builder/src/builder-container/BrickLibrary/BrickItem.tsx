@@ -6,6 +6,7 @@ import {
   GoldenFilled,
   NumberOutlined,
 } from "@ant-design/icons";
+import classNames from "classnames";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { useDrag } from "react-dnd";
 import { BuilderDataTransferType } from "@next-core/editor-bricks-helper";
@@ -72,13 +73,23 @@ export function BrickItem({
         icon = <GoldenFilled />;
         break;
       case "customTemplate":
-        icon = <CopyFilled />;
+        icon = (
+          <CopyFilled
+            className={classNames({
+              [styles.thumbnailType]: layerType !== LayerType.BRICK,
+            })}
+          />
+        );
         break;
       case "snippet":
         icon = brick.thumbnail ? (
           <img src={brick.thumbnail} />
         ) : (
-          <NumberOutlined style={{ fontSize: 42 }} />
+          <NumberOutlined
+            className={classNames({
+              [styles.thumbnailType]: layerType !== LayerType.BRICK,
+            })}
+          />
         );
         break;
       default:
