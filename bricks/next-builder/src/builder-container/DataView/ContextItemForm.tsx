@@ -151,6 +151,9 @@ export function ContextItemForm({
           <Form.Item label="Transform" name="transform">
             {getCodeEditorItem("transform")}
           </Form.Item>
+          <Form.Item label="onReject" name="onReject">
+            {getCodeEditorItem("onReject")}
+          </Form.Item>
         </>
       )}
       <Form.Item label="If" name="if">

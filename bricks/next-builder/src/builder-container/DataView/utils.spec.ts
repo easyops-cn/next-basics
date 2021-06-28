@@ -87,7 +87,7 @@ describe("computeItemToSubmit", () => {
       },
     ],
     [
-      "should work when type is resolve",
+      "should work when type is resolve of use-provider",
       {
         type: ContextType.RESOLVE,
         useProvider: "provider-a",
@@ -96,6 +96,7 @@ describe("computeItemToSubmit", () => {
         transform: "value: <% DATA %>\n",
         name: "new",
         onChange: '- target: "#id"\n  properties:\n    a: 1',
+        onReject: "transform:\n  value: <% DATA.message %>",
       },
       {
         name: "new",
@@ -105,6 +106,11 @@ describe("computeItemToSubmit", () => {
           args: ["P-1"],
           transform: {
             value: "<% DATA %>",
+          },
+          onReject: {
+            transform: {
+              value: "<% DATA.message %>",
+            },
           },
         },
         onChange: [
@@ -118,7 +124,7 @@ describe("computeItemToSubmit", () => {
       },
     ],
     [
-      "should work when type is resolve",
+      "should work when type is resolve of selector-provider",
       {
         type: ContextType.SELECTOR_RESOLVE,
         provider: "provider-b.\\get",
@@ -148,10 +154,7 @@ describe("computeItemToSubmit", () => {
         ],
       },
     ],
-  ])(
-    "computeItemToSubmit(%j) should work",
-    async (condition, params, result) => {
-      expect(computeItemToSubmit(params)).toEqual(result);
-    }
-  );
+  ])("%s", async (condition, params, result) => {
+    expect(computeItemToSubmit(params)).toEqual(result);
+  });
 });

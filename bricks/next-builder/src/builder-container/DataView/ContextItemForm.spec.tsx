@@ -24,6 +24,11 @@ describe("ContextItemForm", () => {
             transform: {
               value: "<% DATA %>",
             },
+            onReject: {
+              transform: {
+                value: "<% DATA.message %>",
+              },
+            },
           },
         }}
         brickList={[
@@ -43,7 +48,7 @@ describe("ContextItemForm", () => {
         onContextItemUpdate={onContextItemUpdate}
       />
     );
-    expect(wrapper.find(Form.Item).length).toBe(7);
+    expect(wrapper.find(Form.Item).length).toBe(8);
     wrapper.find(Form).invoke("onFinish")({
       name: "data-a",
       type: "resolve",
@@ -52,6 +57,7 @@ describe("ContextItemForm", () => {
         args: "- arg1\n",
         if: "false\n",
         transform: "value: <% DATA %>\n",
+        onReject: "transform:\n  value: <% DATA.message %>",
       },
     });
 

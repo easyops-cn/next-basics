@@ -118,6 +118,7 @@ export function DataView({
           args: (contextValue.resolve as EntityResolveConf).args,
           if: contextValue.resolve.if,
           transform: contextValue.resolve.transform,
+          onReject: contextValue.resolve.onReject,
           onChange: contextValue?.onChange,
         }),
       };
