@@ -3,10 +3,18 @@ import { mount } from "enzyme";
 import { ContextItemForm, ContextItemFormProps } from "./ContextItemForm";
 import { AutoComplete, Form, Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
+import { useBuilderUIContext } from "../BuilderUIContext";
+
+jest.mock("../BuilderUIContext");
+
+const mockUseBuilderUIContext = useBuilderUIContext as jest.Mock;
 
 describe("ContextItemForm", () => {
   it("should work", async () => {
     const onContextItemUpdate = jest.fn();
+    mockUseBuilderUIContext.mockReturnValue({
+      providerList: undefined,
+    });
     const Component = (
       props: Omit<ContextItemFormProps, "settingItemForm">
     ): React.ReactElement => {
@@ -31,24 +39,17 @@ describe("ContextItemForm", () => {
             },
           },
         }}
-        brickList={[
-          {
-            type: "brick",
-            name: "brick-a",
-          },
-          {
-            type: "provider",
-            name: "provider-a",
-          },
-          {
-            type: "provider",
-            name: "provider-b",
-          },
-        ]}
         onContextItemUpdate={onContextItemUpdate}
       />
     );
     expect(wrapper.find(Form.Item).length).toBe(8);
+
+    mockUseBuilderUIContext.mockReturnValue({
+      providerList: ["provider-a", "provider-b"],
+    });
+    // Trigger component updating.
+    wrapper.setProps({});
+
     wrapper.find(Form).invoke("onFinish")({
       name: "data-a",
       type: "resolve",
@@ -62,6 +63,7 @@ describe("ContextItemForm", () => {
     });
 
     expect(onContextItemUpdate).toBeCalled();
+
     wrapper.find(AutoComplete).invoke("onSearch")("provider-a");
     wrapper.find(Radio.Group).invoke("onChange")({
       target: {

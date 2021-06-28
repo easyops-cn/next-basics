@@ -11,30 +11,30 @@ import {
   SelectorProviderResolveConf,
 } from "@next-core/brick-types";
 import { CodeEditorItem } from "@next-libs/editor-components";
-import { BrickOptionItem } from "../interfaces";
 import { FormInstance } from "antd/lib/form";
 import { RadioChangeEvent } from "antd/lib/radio";
-import { searchList } from "../utils/utils";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
 export interface ContextItemFormProps {
   data: ContextConf;
-  brickList?: BrickOptionItem[];
   onContextItemUpdate?: (contextItem: ContextConf) => void;
   settingItemForm: FormInstance;
 }
 
 export function ContextItemForm({
   data,
-  brickList,
   onContextItemUpdate,
   settingItemForm,
 }: ContextItemFormProps): React.ReactElement {
-  const originalProviderList = useMemo(() => {
-    const list = brickList
-      .filter((v) => v.type === "provider")
-      .map((v) => ({ label: v.name, value: v.name }));
-    return list;
-  }, [brickList]);
+  const { providerList } = useBuilderUIContext();
+  const originalProviderList = useMemo(
+    () =>
+      (providerList ?? []).map((provider) => ({
+        label: provider,
+        value: provider,
+      })),
+    [providerList]
+  );
   const [providerOptions, setProviderOptions] = useState(originalProviderList);
   const [contextType, setContextType] = useState(ContextType.VALUE);
 
@@ -69,7 +69,9 @@ export function ContextItemForm({
 
   const onSearch = (v: string): void => {
     const q = v.trim().toLowerCase();
-    setProviderOptions(searchList(originalProviderList, q, "label"));
+    setProviderOptions(
+      originalProviderList.filter((opt) => opt.label.includes(q))
+    );
   };
 
   useEffect(() => {

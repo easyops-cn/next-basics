@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { Modal } from "antd";
 import { ContextConf } from "@next-core/brick-types";
-import { BrickOptionItem } from "../interfaces";
 import { FormInstance } from "antd/lib/form";
 import { ContextItemForm } from "./ContextItemForm";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,6 @@ import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 interface ContextItemFormProps {
   data: ContextConf;
-  brickList?: BrickOptionItem[];
   onContextItemUpdate?: (contextItem: ContextConf) => void;
   settingItemForm: FormInstance;
   visible?: boolean;
@@ -19,7 +17,6 @@ interface ContextItemFormProps {
 
 export function ContextItemFormModal({
   data,
-  brickList,
   onContextItemUpdate,
   settingItemForm,
   visible,
@@ -40,7 +37,6 @@ export function ContextItemFormModal({
     >
       <ContextItemForm
         data={data}
-        brickList={brickList}
         onContextItemUpdate={onContextItemUpdate}
         settingItemForm={settingItemForm}
       />
