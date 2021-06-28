@@ -19,7 +19,6 @@ import { findIndex, uniqueId, escape } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { ContextItem } from "./ContextItem";
-import { useBuilderUIContext } from "../BuilderUIContext";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { searchList } from "../utils/utils";
 import { safeDumpFields, ContextType } from "./utils";
@@ -43,7 +42,6 @@ export function DataView({
 }: DataViewProps): React.ReactElement {
   const { nodes } = useBuilderData();
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const { brickList } = useBuilderUIContext();
   const rootNode = useBuilderNode({ isRoot: true });
   const contextWithUniqueSymbolId: ContextConfWithSymbolId[] = useMemo(() => {
     const originContext = ((rootNode?.context as ContextConf[]) ?? []).map(
@@ -245,7 +243,6 @@ export function DataView({
       </div>
       <ContextItemFormModal
         data={settingItem}
-        brickList={brickList}
         onContextItemUpdate={handleContextItemUpdate}
         settingItemForm={settingItemForm}
         visible={visible}

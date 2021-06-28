@@ -43,6 +43,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   dataSource?: BuilderRouteOrBrickNode[];
   routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
+  providerList?: string[];
   snippetList?: BuilderSnippetNode[];
   storyList?: Story[];
   processing?: boolean;
@@ -84,6 +85,7 @@ export function LegacyBuilderContainer(
     dataSource,
     routeList,
     brickList,
+    providerList,
     snippetList,
     storyList,
     processing,
@@ -220,7 +222,7 @@ export function LegacyBuilderContainer(
   }, [initialCanvasIndex, manager]);
 
   React.useEffect(() => {
-    manager.routeListInit(routeList);
+    manager.routeListInit(routeList ?? []);
   }, [routeList, manager]);
 
   React.useEffect(() => {
@@ -306,6 +308,7 @@ export function LegacyBuilderContainer(
         appId,
         dataType,
         brickList,
+        providerList,
         snippetList,
         storyList,
         processing,

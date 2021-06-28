@@ -8,12 +8,10 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { DataView } from "./DataView";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
-import { useBuilderUIContext } from "../BuilderUIContext";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { ContextItem } from "./ContextItem";
 
 jest.mock("@next-core/editor-bricks-helper");
-jest.mock("../BuilderUIContext");
 jest.mock("./ContextItem", () => ({
   ContextItem() {
     return <div>ContextItem</div>;
@@ -79,22 +77,6 @@ const mockManager = {
 
 describe("DataView", () => {
   it("should work", () => {
-    (useBuilderUIContext as jest.Mock).mockReturnValue({
-      brickList: [
-        {
-          type: "brick",
-          name: "brick-a",
-        },
-        {
-          type: "provider",
-          name: "provider-a",
-        },
-        {
-          type: "provider",
-          name: "provider-b",
-        },
-      ],
-    });
     const onContextUpdate = jest.fn();
     const wrapper = shallow(<DataView onContextUpdate={onContextUpdate} />);
     expect(wrapper.find(ContextItem).length).toBe(2);
@@ -136,18 +118,6 @@ describe("DataView", () => {
   });
 
   it("should handleDropItem work", () => {
-    (useBuilderUIContext as jest.Mock).mockReturnValue({
-      brickList: [
-        {
-          type: "provider",
-          name: "provider-a",
-        },
-        {
-          type: "provider",
-          name: "provider-b",
-        },
-      ],
-    });
     const onContextUpdate = jest.fn();
     const wrapper = shallow(<DataView onContextUpdate={onContextUpdate} />);
     wrapper.find(ContextItem).at(0).invoke("handleDropItem")(1, 0);

@@ -18,6 +18,7 @@ export interface ContextOfBuilderUI {
   appId?: string;
   dataType?: BuilderDataType;
   brickList?: BrickOptionItem[];
+  providerList?: string[];
   snippetList?: BuilderSnippetNode[];
   storyList?: Story[];
   processing?: boolean;

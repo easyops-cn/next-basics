@@ -19,7 +19,7 @@ describe("ContextItemFormModal", () => {
     const handleCancel = jest.fn();
     const settingItemForm = {
       resetFields: jest.fn(),
-    };
+    } as any;
     const wrapper = shallow(
       <ContextItemFormModal
         data={{
@@ -33,20 +33,6 @@ describe("ContextItemFormModal", () => {
             },
           },
         }}
-        brickList={[
-          {
-            type: "brick",
-            name: "brick-a",
-          },
-          {
-            type: "provider",
-            name: "provider-a",
-          },
-          {
-            type: "provider",
-            name: "provider-b",
-          },
-        ]}
         onContextItemUpdate={onContextItemUpdate}
         settingItemForm={settingItemForm}
         visible={true}
