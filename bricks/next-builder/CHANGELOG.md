@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.59.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.2...@next-bricks/next-builder@1.59.0) (2021-06-28)
+
+
+### Bug Fixes
+
+* fix duplication of name ([2723653](https://github.com/easyops-cn/next-basics/commit/272365397a953444b004544752108e98a75d711a))
+* refactor LibraryDropdown ([aac2730](https://github.com/easyops-cn/next-basics/commit/aac27302f07ef1b613b9f75a2de167a684c9fef7))
+* refine ([2ca0767](https://github.com/easyops-cn/next-basics/commit/2ca07679905823d3543d981449831be8b89f3041))
+* support to set onReject for context ([abe30af](https://github.com/easyops-cn/next-basics/commit/abe30afe193f96ab3ca9fdf04a2f60d2fc690db3))
+
+
+### Features
+
+* **builder:** use independent providers ([3290538](https://github.com/easyops-cn/next-basics/commit/3290538af9f35490a284100c0484629aa08bce70))
+
+
+
+
+
 ## [1.58.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.1...@next-bricks/next-builder@1.58.2) (2021-06-24)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.172.0...@next-bricks/forms@1.173.0) (2021-06-28)
+
+
+### Bug Fixes
+
+* upload component doc update ([80b5998](https://github.com/easyops-cn/next-basics/commit/80b59981cf2cc44963328fd53a3699a833eb86a4))
+
+
+### Features
+
+* **forms:** 支持设置上传按钮属性 ([1627191](https://github.com/easyops-cn/next-basics/commit/1627191c7237b250db07952f96cd635b5d6ffb89))
+
+
+
+
+
 # [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.171.0...@next-bricks/forms@1.172.0) (2021-06-24)
 
 
