@@ -1,17 +1,19 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import { DataView } from "./DataView";
 import { Button } from "antd";
-import { SearchComponent } from "../SearchComponent/SearchComponent";
-import { useBuilderUIContext } from "../BuilderUIContext";
 import {
   useBuilderDataManager,
   useBuilderNode,
   useBuilderData,
 } from "@next-core/editor-bricks-helper";
+import { DataView } from "./DataView";
+import { SearchComponent } from "../SearchComponent/SearchComponent";
+import { useBuilderUIContext } from "../BuilderUIContext";
+import { ContextItemFormModal } from "./ContextItemFormModal";
+import { ContextItem } from "./ContextItem";
 
-jest.mock("../BuilderUIContext");
 jest.mock("@next-core/editor-bricks-helper");
+jest.mock("../BuilderUIContext");
 jest.mock("./ContextItem", () => ({
   ContextItem() {
     return <div>ContextItem</div>;
@@ -95,18 +97,18 @@ describe("DataView", () => {
     });
     const onContextUpdate = jest.fn();
     const wrapper = shallow(<DataView onContextUpdate={onContextUpdate} />);
-    expect(wrapper.find("ContextItem").length).toBe(2);
+    expect(wrapper.find(ContextItem).length).toBe(2);
     wrapper.find(SearchComponent).invoke("onSearch")("data-a");
-    expect(wrapper.find("ContextItem").length).toBe(1);
+    expect(wrapper.find(ContextItem).length).toBe(1);
     wrapper.find(SearchComponent).invoke("onSearch")("");
-    expect(wrapper.find("ContextItem").length).toBe(2);
+    expect(wrapper.find(ContextItem).length).toBe(2);
 
     wrapper
       .find(Button)
       .filter("[data-testid='add-data-btn']")
       .simulate("click");
-    expect(wrapper.find("ContextItemFormModal").prop("visible")).toBe(true);
-    wrapper.find("ContextItemFormModal").invoke("onContextItemUpdate")({
+    expect(wrapper.find(ContextItemFormModal).prop("visible")).toBe(true);
+    wrapper.find(ContextItemFormModal).invoke("onContextItemUpdate")({
       name: "data-c",
       value: {
         id: 2,
@@ -114,20 +116,20 @@ describe("DataView", () => {
     });
     expect(onContextUpdate).toBeCalled();
 
-    wrapper.find("ContextItem").at(1).invoke("handleItemClick")();
-    expect(wrapper.find("ContextItemFormModal").prop("visible")).toBe(true);
-    wrapper.find("ContextItemFormModal").invoke("onOk")();
-    wrapper.find("ContextItemFormModal").invoke("onContextItemUpdate")({
+    wrapper.find(ContextItem).at(1).invoke("handleItemClick")();
+    expect(wrapper.find(ContextItemFormModal).prop("visible")).toBe(true);
+    wrapper.find(ContextItemFormModal).invoke("onOk")();
+    wrapper.find(ContextItemFormModal).invoke("onContextItemUpdate")({
       name: "data-b",
       value: {
         id: 3,
       },
     });
     expect(onContextUpdate).toBeCalled();
-    expect(wrapper.find("ContextItemFormModal").prop("visible")).toBe(false);
-    wrapper.find("ContextItemFormModal").invoke("onCancel")();
+    expect(wrapper.find(ContextItemFormModal).prop("visible")).toBe(false);
+    wrapper.find(ContextItemFormModal).invoke("onCancel")();
     const mockStopPropagation = jest.fn();
-    wrapper.find("ContextItem").at(0).invoke("handleItemDelete")({
+    wrapper.find(ContextItem).at(0).invoke("handleItemDelete")({
       stopPropagation: mockStopPropagation,
     } as any);
     expect(mockStopPropagation).toBeCalled();
@@ -148,19 +150,19 @@ describe("DataView", () => {
     });
     const onContextUpdate = jest.fn();
     const wrapper = shallow(<DataView onContextUpdate={onContextUpdate} />);
-    wrapper.find("ContextItem").at(0).invoke("handleDropItem")(1, 0);
+    wrapper.find(ContextItem).at(0).invoke("handleDropItem")(1, 0);
     expect(onContextUpdate).toBeCalledWith([
       expect.objectContaining({ name: "data-b" }),
       expect.objectContaining({ name: "data-a" }),
     ]);
     onContextUpdate.mockClear();
-    wrapper.find("ContextItem").at(0).invoke("handleDropItem")(1, 1);
+    wrapper.find(ContextItem).at(0).invoke("handleDropItem")(1, 1);
     expect(onContextUpdate).not.toBeCalled();
   });
 
   it("should set highlight nodes", () => {
     const wrapper = mount(<DataView />);
-    wrapper.find("ContextItem").at(0).invoke("handleItemHover")("data-a");
+    wrapper.find(ContextItem).at(0).invoke("handleItemHover")("data-a");
     expect(mockSetHighlightNodes).toBeCalledWith(new Set([1, 3]));
   });
 });

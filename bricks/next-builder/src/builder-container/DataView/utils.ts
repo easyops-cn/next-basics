@@ -32,6 +32,7 @@ interface contextResolveBaseConf {
 interface contextItemResolveConf extends contextResolveBaseConf {
   type: ContextType.RESOLVE;
   useProvider: string;
+  onReject?: string;
 }
 
 interface contextItemSelectorProviderResolveConf
@@ -109,8 +110,8 @@ export function computeItemToSubmit(
       name: contextValue.name,
       ...safeLoadFields({
         value: (contextValue as contextItemValueConf).value,
-        if: (contextValue as contextItemValueConf).if,
-        onChange: (contextValue as contextItemResolveConf).onChange,
+        if: contextValue.if,
+        onChange: contextValue.onChange,
       }),
     };
   } else {
@@ -119,6 +120,7 @@ export function computeItemToSubmit(
       args: (contextValue as contextItemResolveConf).args,
       transform: (contextValue as contextItemResolveConf).transform,
       onChange: (contextValue as contextItemResolveConf).onChange,
+      onReject: (contextValue as contextItemResolveConf).onReject,
     });
     return {
       name: contextValue.name,
@@ -134,6 +136,7 @@ export function computeItemToSubmit(
         if: computedFields.if,
         args: computedFields.args,
         transform: computedFields.transform,
+        onReject: computedFields.onReject,
       },
       onChange: computedFields.onChange,
     };
@@ -155,5 +158,8 @@ export const fieldCodeEditorConfigMap: Record<string, { schemaRef: string }> = {
   },
   onChange: {
     schemaRef: "#/definitions/ContextConf/properties/onChange",
+  },
+  onReject: {
+    schemaRef: "#/definitions/UseProviderResolveConf/properties/onReject",
   },
 };
