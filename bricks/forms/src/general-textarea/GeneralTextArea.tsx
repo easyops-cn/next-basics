@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Input } from "antd";
-import TextArea from "antd/lib/input/TextArea";
+import { TextAreaRef } from "antd/lib/input/TextArea";
 import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 
@@ -16,6 +16,7 @@ interface GeneralTextAreaProps extends FormItemWrapperProps {
   placeholder?: string;
   value?: string;
   autoSize?: boolean | AutoSizeType;
+  readOnly?: boolean;
   disabled?: boolean;
   inputBoxStyle?: React.CSSProperties;
   onChange?: (value: string) => void;
@@ -26,20 +27,29 @@ interface GeneralTextAreaProps extends FormItemWrapperProps {
 export function GeneralTextArea(
   props: GeneralTextAreaProps
 ): React.ReactElement {
-  const ref = useRef<TextArea>(null);
+  const {
+    inputBoxStyle,
+    autoSize,
+    readOnly,
+    disabled,
+    value,
+    placeholder,
+    onChange,
+    onHandleBlur,
+    onHandleBlurV2,
+  } = props;
+  const ref = useRef<TextAreaRef>(null);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const value = e.target.value;
-    props.onChange?.(value);
+    onChange?.(value);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>): void => {
     // istanbul ignore else
     if (ref.current?.resizableTextArea) {
-      const {
-        selectionStart,
-        selectionEnd,
-      } = ref.current.resizableTextArea.textArea;
-      props.onHandleBlurV2({
+      const { selectionStart, selectionEnd } =
+        ref.current.resizableTextArea.textArea;
+      onHandleBlurV2?.({
         startPos: selectionStart,
         endPos: selectionEnd,
         startStr: e.target.value.substring(0, selectionStart),
@@ -47,18 +57,19 @@ export function GeneralTextArea(
         wholeStr: e.target.value,
       });
     }
-    props.onHandleBlur?.(e.target.value);
+    onHandleBlur?.(e.target.value);
   };
 
   return (
     <FormItemWrapper {...props}>
       <Input.TextArea
         ref={ref}
-        style={props.inputBoxStyle}
-        autoSize={props.autoSize}
-        disabled={props.disabled}
-        value={props.name && props.formElement ? undefined : props.value}
-        placeholder={props.placeholder}
+        style={inputBoxStyle}
+        autoSize={autoSize}
+        readOnly={readOnly}
+        disabled={disabled}
+        value={value}
+        placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}
       />

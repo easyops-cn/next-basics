@@ -298,6 +298,7 @@ export class GeneralInputElement extends FormItemElement {
             addonAfter={this.addonAfter}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            trim={this.trim}
           />
         </BrickWrapper>,
         this
