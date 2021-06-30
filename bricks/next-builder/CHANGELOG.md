@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.0...@next-bricks/next-builder@1.59.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **builder:** remove entry of brick library in left sidebar ([d8eeb2f](https://github.com/easyops-cn/next-basics/commit/d8eeb2fd4a9f5015be138b4081d3bce2300917f3))
+* refine brick library ([9b75376](https://github.com/easyops-cn/next-basics/commit/9b753764baa20d05b8b960f619237cda72319856))
+
+
+
+
+
 # [1.59.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.2...@next-bricks/next-builder@1.59.0) (2021-06-28)
 
 

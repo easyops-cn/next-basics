@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.0.1...@next-bricks/time@1.1.0) (2021-06-30)
+
+
+### Features
+
+* **time:** 任务详情支持点击跳转 ([7ef6e7a](https://github.com/easyops-cn/next-basics/commit/7ef6e7a46a6e4807cda160694de86ea055a38056))
+
+
+
+
+
 ## [1.0.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@0.2.0...@next-bricks/time@1.0.1) (2021-06-25)
 
 **Note:** Version bump only for package @next-bricks/time
