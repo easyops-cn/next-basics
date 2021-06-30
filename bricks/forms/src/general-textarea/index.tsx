@@ -59,6 +59,16 @@ export class GeneralTextAreaElement extends FormItemElement {
   /**
    * @kind boolean
    * @required false
+   * @default -
+   * @description 是否只读
+   * @group basic
+   */
+  @property()
+  readOnly: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
    * @default false
    * @description 是否禁用
    */
@@ -179,6 +189,7 @@ export class GeneralTextAreaElement extends FormItemElement {
             labelTooltip={this.labelTooltip}
             placeholder={this.placeholder}
             required={this.required}
+            readOnly={this.readOnly}
             disabled={this.disabled}
             value={this.value}
             autoSize={this.autoSize}
