@@ -1,4 +1,4 @@
-import { isNil, uniqBy } from "lodash";
+import { isNil, cloneDeep } from "lodash";
 import { i18nText } from "@next-core/brick-kit";
 import { Story, BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import {
@@ -131,10 +131,19 @@ export function getShortName(brick: BrickOptionItem, appId: string): string {
 
 export function insertBricks(
   bricks: BrickOptionItem[],
-  frequentlyUsedBricks: BrickOptionItem[]
+  frequentlyUsed: BrickOptionItem[]
 ): BrickOptionItem[] {
-  return uniqBy(
-    frequentlyUsedBricks.concat(bricks),
-    (item) => `${item.type}:${item.name}`
-  );
+  const brickList = cloneDeep(bricks);
+  for (const item of [...frequentlyUsed].reverse()) {
+    const index = brickList.findIndex((brick) => {
+      return brick.id === item.id && brick.type === item.type;
+    });
+
+    if (index !== -1) {
+      const [remove] = brickList.splice(index, 1);
+      brickList.unshift(remove);
+    }
+  }
+
+  return brickList;
 }

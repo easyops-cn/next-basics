@@ -17,15 +17,15 @@ jest.mock("../constants", () => ({
   frequentlyUsedBricks: [
     {
       type: "brick",
-      name: "basic-bricks.general-card",
+      id: "basic-bricks.general-card",
     },
     {
       type: "brick",
-      name: "forms.general-form",
+      id: "forms.general-form",
     },
     {
       type: "brick",
-      name: "forms.general-input",
+      id: "forms.general-input",
     },
   ],
 }));
@@ -42,19 +42,38 @@ describe("AdvancedBrickLibrary", () => {
         {
           type: "brick",
           name: "basic-bricks.micro-view",
+          id: "basic-bricks.micro-view",
         },
         {
           type: "brick",
           name: "forms.general-timer",
+          id: "forms.general-timer",
         },
         {
           type: "brick",
           name: "forms.general-select",
+          id: "forms.general-select",
+        },
+        {
+          type: "brick",
+          name: "basic-bricks.general-card",
+          id: "basic-bricks.general-card",
+        },
+        {
+          type: "brick",
+          name: "forms.general-form",
+          id: "forms.general-form",
+        },
+        {
+          type: "brick",
+          name: "forms.general-input",
+          id: "forms.general-input",
         },
       ],
     });
     const wrapper = mount(<AdvancedBrickLibrary />);
     expect(wrapper.find(".itemWrapper").length).toBe(6);
+
     expect(
       wrapper.find(".itemWrapper").at(0).find(BrickItem).at(0).prop("brick")
         .shortName
