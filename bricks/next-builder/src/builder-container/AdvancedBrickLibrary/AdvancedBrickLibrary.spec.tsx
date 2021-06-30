@@ -1,16 +1,15 @@
 import React, { createRef } from "react";
+import { act } from "react-dom/test-utils";
 import { mount, shallow } from "enzyme";
 import { Empty } from "antd";
 import { AdvancedBrickLibrary } from "./AdvancedBrickLibrary";
-import { BrickItem } from "../BrickLibrary/BrickItem";
+import { BrickItem } from "./BrickItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
-import { act } from "react-dom/test-utils";
-import { LayerType } from "../interfaces";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
-jest.mock("../BrickLibrary/BrickItem");
+jest.mock("./BrickItem");
 
 jest.mock("../constants", () => ({
   brickSearchResultLimit: 20,

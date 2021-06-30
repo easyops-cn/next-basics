@@ -6,7 +6,6 @@ import { BuilderToolbox } from "./BuilderToolbox";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { defaultToolboxTab } from "../constants";
 import { PlusOutlined } from "@ant-design/icons";
-import * as kit from "@next-core/brick-kit";
 import { BuilderDataType, ToolboxTab } from "../interfaces";
 import {
   useBuilderDataManager,
@@ -20,12 +19,6 @@ jest.mock("../StoryboardTreeView/StoryboardTreeView", () => ({
     return <div>StoryboardTreeView</div>;
   },
 }));
-const mockGetFeatureFlags = jest.fn().mockReturnValue({
-  "hide-toolbox-library-view": false,
-});
-jest.spyOn(kit, "getRuntime").mockReturnValue({
-  getFeatureFlags: mockGetFeatureFlags,
-} as any);
 
 jest.mock("@next-core/editor-bricks-helper");
 
@@ -69,19 +62,10 @@ describe("BuilderToolbox", () => {
     expect(wrapper.find("BrickLibrary").length).toBe(0);
   });
 
-  it("should switch to library", () => {
-    expect(toolboxTab).toBe(defaultToolboxTab);
-    const wrapper = shallow(<BuilderToolbox />);
-    wrapper.find(".tabLink").at(1).invoke("onClick")(null);
-    expect(toolboxTab).toBe(ToolboxTab.LIBRARY);
-    const wrapper2 = shallow(<BuilderToolbox />);
-    expect(wrapper2.find("BrickLibrary").length).toBe(1);
-  });
-
   it("should switch to events view", () => {
     expect(toolboxTab).toBe(defaultToolboxTab);
     const wrapper = shallow(<BuilderToolbox />);
-    wrapper.find(".tabLink").at(2).invoke("onClick")(null);
+    wrapper.find(".tabLink").at(1).invoke("onClick")(null);
     expect(toolboxTab).toBe(ToolboxTab.EVENTS_VIEW);
     const wrapper2 = shallow(<BuilderToolbox />);
     expect(wrapper2.find("EventsView").length).toBe(1);
@@ -89,24 +73,16 @@ describe("BuilderToolbox", () => {
 
   it("should switch to data view", () => {
     const wrapper = shallow(<BuilderToolbox />);
-    wrapper.find(".tabLink").at(3).invoke("onClick")(null);
+    wrapper.find(".tabLink").at(2).invoke("onClick")(null);
     expect(toolboxTab).toBe(ToolboxTab.DATA_VIEW);
     const wrapper2 = shallow(<BuilderToolbox />);
     expect(wrapper2.find("DataView").length).toBe(1);
   });
 
-  it("should display 3 tabLink", () => {
+  it("should display 2 tabLink", () => {
     dataType = BuilderDataType.CUSTOM_TEMPLATE;
     const wrapper = shallow(<BuilderToolbox />);
-    expect(wrapper.find(".tabLink").length).toBe(3);
-  });
-
-  it("should hide library view", () => {
-    mockGetFeatureFlags.mockReturnValueOnce({
-      "hide-toolbox-library-view": true,
-    });
-    const wrapper = shallow(<BuilderToolbox />);
-    expect(wrapper.find(PlusOutlined).length).toEqual(0);
+    expect(wrapper.find(".tabLink").length).toBe(2);
   });
 
   it("should handle col-resize", () => {

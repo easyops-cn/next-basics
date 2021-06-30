@@ -1,24 +1,18 @@
 import React, { useEffect } from "react";
-import {
-  PartitionOutlined,
-  DatabaseOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import { PartitionOutlined, DatabaseOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ContextConf } from "@next-core/brick-types";
+import {
+  useBuilderDataManager,
+  useShowRelatedNodesBasedOnEvents,
+} from "@next-core/editor-bricks-helper";
 import { JsonStorage } from "@next-libs/storage";
-import { BrickLibrary } from "../BrickLibrary/BrickLibrary";
 import { BuilderDataType, ToolboxTab } from "../interfaces";
 import { StoryboardTreeView } from "../StoryboardTreeView/StoryboardTreeView";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { EventsView } from "../EventsView/EventsView";
 import { DataView } from "../DataView/DataView";
-import { getRuntime } from "@next-core/brick-kit";
-import {
-  useBuilderDataManager,
-  useShowRelatedNodesBasedOnEvents,
-} from "@next-core/editor-bricks-helper";
 import { localStorageKeyForShowRelatedNodesBasedOnEvents } from "../constants";
 
 import styles from "./BuilderToolbox.module.css";
@@ -62,11 +56,6 @@ export function BuilderToolbox({
   const manager = useBuilderDataManager();
   const showRelatedEvents = useShowRelatedNodesBasedOnEvents();
 
-  const hideLibraryView = React.useMemo(
-    () => getRuntime().getFeatureFlags()["hide-toolbox-library-view"],
-    []
-  );
-
   useEffect(() => {
     const showFromStorage = storage.getItem(
       localStorageKeyForShowRelatedNodesBasedOnEvents
@@ -87,23 +76,6 @@ export function BuilderToolbox({
         return <StoryboardTreeView />;
       },
     },
-    ...(hideLibraryView
-      ? []
-      : [
-          {
-            tab: ToolboxTab.LIBRARY,
-            icon() {
-              return <PlusOutlined />;
-            },
-            content() {
-              return <BrickLibrary />;
-            },
-            availableDataTypes: [
-              BuilderDataType.ROUTE_OF_BRICKS,
-              BuilderDataType.CUSTOM_TEMPLATE,
-            ],
-          },
-        ]),
     {
       tab: ToolboxTab.EVENTS_VIEW,
       icon() {

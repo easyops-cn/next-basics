@@ -14,14 +14,12 @@ import { BrickOptionItem, LayerType } from "../interfaces";
 import styles from "./BrickItem.module.css";
 
 export interface BrickItemProps {
-  theme?: "light" | "dark";
   brick: BrickOptionItem;
   onDraggingChange?: (isDragging: boolean) => void;
   layerType?: LayerType;
 }
 
 export function BrickItem({
-  theme,
   brick,
   onDraggingChange,
   layerType,
@@ -100,8 +98,8 @@ export function BrickItem({
   return (
     <div
       className={`${styles.brickItem} ${styles[brick.type]} ${
-        styles[layerType]
-      } ${styles[theme ?? "dark"]}`}
+        styles[`layer-${layerType}`]
+      }`}
       ref={dragRef}
     >
       <span className={styles.brickIcon}>{icon}</span>
