@@ -42,13 +42,8 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   ref
 ): React.ReactElement {
   const { t } = useTranslation(NS_FORMS);
-  const {
-    formElement,
-    value,
-    inputBoxStyle,
-    copyButton,
-    ...inputProps
-  } = props;
+  const { formElement, value, inputBoxStyle, copyButton, ...inputProps } =
+    props;
 
   const handleCopy = (text: string, success: boolean) => {
     if (success) {
@@ -80,8 +75,10 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
 
 export function GeneralInput(props: GeneralInputProps): React.ReactElement {
   const { onChange, onBlur } = props;
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    onChange?.(e.target.value);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement> | string
+  ): void => {
+    onChange?.(typeof e === "string" ? e : e.target.value);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
