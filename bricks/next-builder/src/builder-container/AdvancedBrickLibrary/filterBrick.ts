@@ -1,5 +1,5 @@
 import { isNil } from "lodash";
-import { i18nText } from "@next-core/brick-kit";
+import { getRuntime, i18nText } from "@next-core/brick-kit";
 import { Story, BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import {
   brickSearchResultLimit,
@@ -81,6 +81,9 @@ export function processBricks(
       ? insertBricks(brickList, frequentlyUsed)
       : brickList;
 
+  const installedBricksEnabled =
+    getRuntime().getFeatureFlags()["next-builder-installed-bricks"];
+
   return sortedBricks
     .filter((item) => {
       if (!item.layerType) {
@@ -94,7 +97,9 @@ export function processBricks(
       const brick = {
         ...item,
       };
-      const find = storyList?.find((story) => story.storyId === item.id);
+      const find =
+        !installedBricksEnabled &&
+        storyList?.find((story) => story.storyId === item.id);
       if (find) {
         return {
           ...brick,
@@ -118,7 +123,7 @@ export function processBricks(
 
 export function insertBricks(
   bricks: BrickOptionItem[],
-  frequentlyUsed: BrickOptionItem[]
+  frequentlyUsed: Pick<BrickOptionItem, "type" | "id">[]
 ): BrickOptionItem[] {
   const brickList = bricks.slice();
   for (const item of [...frequentlyUsed].reverse()) {

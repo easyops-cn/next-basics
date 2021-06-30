@@ -100,12 +100,11 @@ export function BrickItem({
       className={`${styles.brickItem} ${styles[brick.type]} ${
         styles[`layer-${layerType}`]
       }`}
+      title={brick.description || brick.title}
       ref={dragRef}
     >
       <span className={styles.brickIcon}>{icon}</span>
-      <span className={styles.brickName} title={brick.title || brick.id}>
-        {brick.title || brick.id}
-      </span>
+      <span className={styles.brickName}>{brick.title}</span>
     </div>
   );
 }

@@ -1,6 +1,18 @@
-import { filterBricks, processBricks, insertBricks } from "./filterBrick";
+import { getRuntime, i18nText } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
+import { filterBricks, processBricks, insertBricks } from "./filterBrick";
 import { BrickOptionItem, LayerType } from "../interfaces";
+
+jest.mock("@next-core/brick-kit");
+
+const mockGetFeatureFlags = jest.fn().mockReturnValue({
+  "next-builder-installed-bricks": true,
+});
+(getRuntime as jest.Mock).mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+});
+
+(i18nText as jest.Mock).mockImplementation((data) => data?.zh);
 
 jest.mock("../constants.ts", () => ({
   brickSearchResultLimit: 24,
@@ -24,6 +36,7 @@ jest.mock("../constants.ts", () => ({
 describe("processor", () => {
   describe("process bricks", () => {
     it("should merge story data", () => {
+      mockGetFeatureFlags.mockReturnValueOnce({});
       const brickList = [
         {
           type: "brick",
@@ -125,40 +138,9 @@ describe("processor", () => {
         },
       ] as BrickOptionItem[];
 
-      const storyList = [
-        {
-          category: "form-input",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
-          storyId: "forms.general-input",
-          text: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-          description: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-        },
-        {
-          category: "card",
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
-          storyId: "basic-bricks.general-card",
-          text: {
-            en: "general-card",
-            zh: "卡片",
-          },
-        },
-      ] as Partial<Story>[] as Story[];
-
       const result = processBricks(
         brickList,
-        storyList,
+        undefined,
         "my-app",
         undefined,
         LayerType.BRICK
@@ -171,28 +153,16 @@ describe("processor", () => {
           type: "brick",
         },
         {
-          category: "card",
-          description: undefined,
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
           id: "basic-bricks.general-card",
-          layerType: "brick",
-          title: "卡片",
+          title: "general-card",
           type: "brick",
+          layerType: "brick",
         },
         {
-          category: "form-input",
-          description: "普通输入框",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
           id: "forms.general-input",
-          layerType: "brick",
-          title: "普通输入框",
+          title: "general-input",
           type: "brick",
+          layerType: "brick",
         },
         {
           id: "chart-v2.pie-chart",
@@ -218,6 +188,7 @@ describe("processor", () => {
           title: "general-input",
           id: "forms.general-input",
           layerType: LayerType.BRICK,
+          category: "form-input",
         },
         {
           type: "brick",
@@ -239,42 +210,11 @@ describe("processor", () => {
         },
       ];
 
-      const storyList = [
-        {
-          category: "form-input",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
-          storyId: "forms.general-input",
-          text: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-          description: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-        },
-        {
-          category: "card",
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
-          storyId: "basic-bricks.general-card",
-          text: {
-            en: "general-card",
-            zh: "卡片",
-          },
-        },
-      ] as Partial<Story>[] as Story[];
-
       const result = filterBricks({
         q: "",
         category: "all",
         brickList,
-        storyList,
+        storyList: undefined,
         appId: "my-app",
         layerType: LayerType.BRICK,
       });
@@ -286,28 +226,17 @@ describe("processor", () => {
           type: "brick",
         },
         {
-          category: "card",
-          description: undefined,
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
           id: "basic-bricks.general-card",
           layerType: "brick",
-          title: "卡片",
+          title: "general-card",
           type: "brick",
         },
         {
-          category: "form-input",
-          description: "普通输入框",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
           id: "forms.general-input",
           layerType: "brick",
-          title: "普通输入框",
+          title: "general-input",
           type: "brick",
+          category: "form-input",
         },
         {
           id: "forms.general-form",
@@ -327,86 +256,65 @@ describe("processor", () => {
         q: undefined,
         category: "form-input",
         brickList,
-        storyList,
+        storyList: undefined,
         appId: "my-app",
         layerType: LayerType.BRICK,
       });
       expect(result2).toEqual([
         {
-          category: "form-input",
-          description: "普通输入框",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
           id: "forms.general-input",
           layerType: "brick",
-          title: "普通输入框",
+          title: "general-input",
           type: "brick",
+          category: "form-input",
         },
       ]);
 
       const result3 = filterBricks({
         q: "general-input",
         brickList,
-        storyList,
+        storyList: undefined,
         appId: "my-app",
         layerType: LayerType.BRICK,
       });
       expect(result3).toEqual([
         {
-          category: "form-input",
-          description: "普通输入框",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
           id: "forms.general-input",
           layerType: "brick",
-          title: "普通输入框",
+          title: "general-input",
           type: "brick",
+          category: "form-input",
         },
       ]);
 
       const result4 = filterBricks({
         q: "general",
         brickList,
-        storyList,
+        storyList: undefined,
         appId: "my-app",
         limit: 2,
         layerType: LayerType.BRICK,
       });
       expect(result4).toEqual([
         {
-          category: "card",
-          description: undefined,
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
           id: "basic-bricks.general-card",
           layerType: "brick",
-          title: "卡片",
+          title: "general-card",
           type: "brick",
         },
         {
-          category: "form-input",
-          description: "普通输入框",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
           id: "forms.general-input",
           layerType: "brick",
-          title: "普通输入框",
+          title: "general-input",
           type: "brick",
+          category: "form-input",
         },
       ]);
 
       const result5 = filterBricks({
         q: "",
         brickList,
-        storyList,
+        storyList: undefined,
         appId: "my-app",
         rootNode: {
           type: "custom-template",
@@ -424,22 +332,17 @@ describe("processor", () => {
           type: "brick",
         },
         {
-          category: "card",
-          description: undefined,
-          icon: { icon: "chevron-down", lib: "fa" },
           id: "basic-bricks.general-card",
           layerType: "brick",
-          title: "卡片",
+          title: "general-card",
           type: "brick",
         },
         {
-          category: "form-input",
-          description: "普通输入框",
-          icon: { icon: "pencil-alt", lib: "fa" },
           id: "forms.general-input",
           layerType: "brick",
-          title: "普通输入框",
+          title: "general-input",
           type: "brick",
+          category: "form-input",
         },
         {
           id: "forms.general-form",
@@ -454,80 +357,56 @@ describe("processor", () => {
       const brickList: BrickOptionItem[] = [
         {
           type: "brick",
+          id: "forms.general-input",
           title: "general-input",
           layerType: LayerType.BRICK,
         },
         {
           type: "brick",
+          id: "basic-bricks.general-card",
           title: "general-card",
           layerType: LayerType.BRICK,
         },
         {
           type: "brick",
+          id: "forms.general-form",
           title: "general-form",
           layerType: LayerType.BRICK,
         },
         {
           type: "customTemplate",
+          id: "tpl-create-form",
           title: "tpl-create-form",
           layerType: LayerType.BRICK,
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[classic]",
           title: "easy-view[classic]",
           layerType: LayerType.LAYOUT,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[basic]",
           title: "easy-view[basic]",
           layerType: LayerType.LAYOUT,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[right-aligned-menu]",
           title: "easy-view[right-aligned-menu]",
           layerType: LayerType.LAYOUT,
           category: "layout",
         },
       ];
 
-      const storyList = [
-        {
-          category: "form-input",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
-          storyId: "forms.general-input",
-          text: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-          description: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-        },
-        {
-          category: "card",
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
-          storyId: "basic-bricks.general-card",
-          text: {
-            en: "general-card",
-            zh: "卡片",
-          },
-        },
-      ] as Partial<Story>[] as Story[];
-
       const result = filterBricks({
         q: "",
         category: "layout",
         brickList,
-        storyList,
+        storyList: undefined,
         appId: "my-app",
         layerType: LayerType.LAYOUT,
       });
@@ -535,18 +414,21 @@ describe("processor", () => {
       expect(result).toEqual([
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[classic]",
           title: "easy-view[classic]",
           layerType: LayerType.LAYOUT,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[basic]",
           title: "easy-view[basic]",
           layerType: LayerType.LAYOUT,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[right-aligned-menu]",
           title: "easy-view[right-aligned-menu]",
           layerType: LayerType.LAYOUT,
           category: "layout",
@@ -558,80 +440,56 @@ describe("processor", () => {
       const brickList: BrickOptionItem[] = [
         {
           type: "brick",
+          id: "forms.general-input",
           title: "general-input",
           layerType: LayerType.BRICK,
         },
         {
           type: "brick",
+          id: "basic-bricks.general-card",
           title: "general-card",
           layerType: LayerType.BRICK,
         },
         {
           type: "brick",
+          id: "forms.general-form",
           title: "general-form",
           layerType: LayerType.BRICK,
         },
         {
           type: "customTemplate",
+          id: "tpl-create-form",
           title: "tpl-create-form",
           layerType: LayerType.BRICK,
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[classic]",
           title: "easy-view[classic]",
           layerType: LayerType.WIDGET,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[basic]",
           title: "easy-view[basic]",
           layerType: LayerType.WIDGET,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[right-aligned-menu]",
           title: "easy-view[right-aligned-menu]",
           layerType: LayerType.WIDGET,
           category: "layout",
         },
       ];
 
-      const storyList = [
-        {
-          category: "form-input",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
-          storyId: "forms.general-input",
-          text: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-          description: {
-            en: "general input",
-            zh: "普通输入框",
-          },
-        },
-        {
-          category: "card",
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
-          storyId: "basic-bricks.general-card",
-          text: {
-            en: "general-card",
-            zh: "卡片",
-          },
-        },
-      ] as Partial<Story>[] as Story[];
-
       const result = filterBricks({
         q: "",
         category: "layout",
         brickList,
-        storyList,
+        storyList: undefined,
         appId: "my-app",
         layerType: LayerType.WIDGET,
       });
@@ -639,18 +497,21 @@ describe("processor", () => {
       expect(result).toEqual([
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[classic]",
           title: "easy-view[classic]",
           layerType: LayerType.WIDGET,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[basic]",
           title: "easy-view[basic]",
           layerType: LayerType.WIDGET,
           category: "layout",
         },
         {
           type: "snippet",
+          id: "basic-bricks.easy-view[right-aligned-menu]",
           title: "easy-view[right-aligned-menu]",
           layerType: LayerType.WIDGET,
           category: "layout",
@@ -709,7 +570,7 @@ describe("processor", () => {
         },
       ];
 
-      const frequentlyUsedBricks: BrickOptionItem[] = [
+      const frequentlyUsedBricks: Pick<BrickOptionItem, "type" | "id">[] = [
         { type: "customTemplate", id: "tpl-my-template" },
         {
           type: "brick",

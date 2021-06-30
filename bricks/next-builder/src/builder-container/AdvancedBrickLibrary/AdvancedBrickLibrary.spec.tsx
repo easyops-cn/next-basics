@@ -2,14 +2,23 @@ import React, { createRef } from "react";
 import { act } from "react-dom/test-utils";
 import { mount, shallow } from "enzyme";
 import { Empty } from "antd";
+import { getRuntime } from "@next-core/brick-kit";
 import { AdvancedBrickLibrary } from "./AdvancedBrickLibrary";
 import { BrickItem } from "./BrickItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 
+jest.mock("@next-core/brick-kit");
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
 jest.mock("./BrickItem");
+
+const mockGetFeatureFlags = jest.fn().mockReturnValue({
+  "next-builder-installed-bricks": true,
+});
+(getRuntime as jest.Mock).mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+});
 
 jest.mock("../constants", () => ({
   brickSearchResultLimit: 20,
@@ -112,54 +121,19 @@ describe("AdvancedBrickLibrary", () => {
           type: "brick",
           id: "basic-bricks.general-card",
           title: "general-card",
+          category: "card",
         },
         {
           type: "brick",
           id: "forms.general-form",
           title: "general-form",
+          category: "form-input",
         },
         {
           type: "brick",
           id: "forms.general-input",
           title: "general-input",
-        },
-      ],
-      storyList: [
-        {
-          category: "card",
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
-          storyId: "basic-bricks.general-card",
-          text: {
-            en: "general-card",
-            zh: "卡片",
-          },
-        },
-        {
           category: "form-input",
-          icon: {
-            icon: "draw-polygon",
-            lib: "fa",
-          },
-          storyId: "forms.general-form",
-          text: {
-            en: "general form",
-            zh: "普通表单",
-          },
-        },
-        {
-          category: "form-input",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
-          storyId: "forms.general-input",
-          text: {
-            en: "general input",
-            zh: "普通输入框",
-          },
         },
       ],
     });

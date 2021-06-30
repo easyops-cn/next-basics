@@ -31,25 +31,25 @@ jest.mock("../BuilderUIContext");
       type: "customTemplate",
       id: "tpl-table",
       title: "tpl-table",
-      customTemplateRawId: "T-01",
+      nodeId: "T-01",
     },
     {
       type: "customTemplate",
       id: "tpl-detail-a",
       title: "tpl-detail-a",
-      customTemplateRawId: "T-02",
+      nodeId: "T-02",
     },
     {
       type: "customTemplate",
       id: "tpl-detail-b",
       title: "tpl-detail-b",
-      customTemplateRawId: "T-03",
+      nodeId: "T-03",
     },
     {
       type: "customTemplate",
       id: "tpl-form",
       title: "tpl-form",
-      customTemplateRawId: "T-04",
+      nodeId: "T-04",
     },
   ],
 });
@@ -67,7 +67,7 @@ describe("TemplateList", () => {
       type: "customTemplate",
       id: "tpl-form",
       title: "tpl-form",
-      customTemplateRawId: "T-04",
+      nodeId: "T-04",
     });
     expect(handleTemplateClick).toBeCalledWith({
       type: "custom-template",

@@ -47,7 +47,7 @@ export function TemplateList({
   const handleSelect = (selectedProps: BrickOptionItem): void => {
     const node: BuilderCustomTemplateNode = {
       type: "custom-template",
-      id: selectedProps.customTemplateRawId,
+      id: selectedProps.nodeId,
       templateId: selectedProps.id,
     };
     onTemplateSelect?.(node);

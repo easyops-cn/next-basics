@@ -8,7 +8,7 @@ export const widgetSearchResultLimit = 12;
 
 // 调整成通过 type和id 来指定常用的构件，布局，挂件的显示顺序，这里还有 name 字段是为了兼容左上角的添加构件的使用场景，
 // 开关固化后可删除 name 字段
-export const frequentlyUsedBricks: BrickOptionItem[] = [
+export const frequentlyUsedBricks: Pick<BrickOptionItem, "type" | "id">[] = [
   {
     type: "brick",
     id: "basic-bricks.micro-view",
@@ -107,13 +107,13 @@ export const frequentlyUsedBricks: BrickOptionItem[] = [
   },
 ];
 
-export const frequentlyUsedLayout: BrickOptionItem[] = [
+export const frequentlyUsedLayout: Pick<BrickOptionItem, "type" | "id">[] = [
   { type: "snippet", id: "basic-bricks.easy-view[classic]" },
   { type: "snippet", id: "basic-bricks.easy-view[basic]" },
   { type: "snippet", id: "basic-bricks.easy-view[right-aligned-menu]" },
 ];
 
-export const frequentlyUsedWidget: BrickOptionItem[] = [];
+export const frequentlyUsedWidget: Pick<BrickOptionItem, "type" | "id">[] = [];
 
 export const treeViewPaddingUnit = 14;
 

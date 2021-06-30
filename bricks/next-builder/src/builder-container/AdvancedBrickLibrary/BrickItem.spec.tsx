@@ -33,11 +33,13 @@ describe("BrickItem", () => {
           type: "brick",
           id: "my.awesome-brick",
           title: "awesome-brick",
+          description: "My awesome brick",
         }}
         onDraggingChange={mockOnDraggingChange}
       />
     );
     expect(wrapper.find(".brickItem").hasClass("brick")).toBe(true);
+    expect(wrapper.find(".brickItem").prop("title")).toBe("My awesome brick");
     expect(wrapper.find(BuildFilled).length).toBe(1);
     expect(wrapper.find(".brickName").text()).toBe("awesome-brick");
     expect(mockUseDrag).toBeCalledWith(
@@ -65,6 +67,7 @@ describe("BrickItem", () => {
       />
     );
     expect(wrapper.find(".brickItem").hasClass("provider")).toBe(true);
+    expect(wrapper.find(".brickItem").prop("title")).toBe("awesome-provider");
     expect(wrapper.find(DatabaseFilled).length).toBe(1);
     expect(wrapper.find(".brickName").text()).toBe("awesome-provider");
     expect(mockUseDrag).toBeCalledWith(
