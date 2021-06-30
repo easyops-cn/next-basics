@@ -9,7 +9,7 @@ import { Empty } from "antd";
 import { isEmpty } from "lodash";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { filterBricks } from "./filterBrick";
-import { BrickItem } from "../BrickLibrary/BrickItem";
+import { BrickItem } from "./BrickItem";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { useBuilderUIContext } from "../BuilderUIContext";
@@ -89,7 +89,6 @@ export function LegacyAdvancedBrickLibrary(
                 layerType={type}
                 brick={item}
                 onDraggingChange={onDraggingChange}
-                theme="light"
               />
             </li>
           ))}

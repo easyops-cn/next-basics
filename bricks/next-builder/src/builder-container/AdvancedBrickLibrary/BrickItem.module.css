@@ -5,8 +5,8 @@
   align-items: center;
   cursor: grab;
 
-  &.layout,
-  &.widget {
+  &.layer-layout,
+  &.layer-widget {
     flex-direction: column;
     gap: 8px;
     height: auto;
@@ -24,10 +24,6 @@
   }
 }
 
-.brickItem:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-}
-
 .brickName {
   flex: auto;
   padding: 0 10px;
@@ -38,8 +34,12 @@
   overflow: hidden;
 }
 
-.brickItem:hover .brickName {
-  color: #4e93ef;
+.brickItem:hover {
+  background-color: #4e93ef;
+
+  .brickName {
+    color: #fff;
+  }
 }
 
 .brickIcon {
@@ -57,7 +57,7 @@
 }
 
 .brick:hover .brickIcon {
-  color: #0071eb;
+  color: #fff;
 }
 
 .provider .brickIcon {
@@ -74,19 +74,6 @@
 
 .snippet .brickIcon {
   color: var(--theme-purple-color);
-}
-
-.light {
-  &.brickItem:hover {
-    background-color: #4e93ef;
-    .brickName {
-      color: #fff;
-    }
-  }
-
-  &.brick:hover .brickIcon {
-    color: #fff;
-  }
 }
 
 .brickIcon > img {
