@@ -81,10 +81,7 @@ export function LegacyAdvancedBrickLibrary(
           }}
         >
           {filteredBricks.map((item) => (
-            <li
-              key={`${item.type}:${item.name}`}
-              className={styles.itemWrapper}
-            >
+            <li key={`${item.type}:${item.id}`} className={styles.itemWrapper}>
               <BrickItem
                 layerType={type}
                 brick={item}

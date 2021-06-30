@@ -41,7 +41,7 @@ export function BrickItem({
       : {
           type: BuilderDataTransferType.NODE_TO_ADD,
           brickType,
-          brick: brick.name,
+          brick: brick.id,
         };
 
   const [{ isDragging }, dragRef] = useDrag({
@@ -103,8 +103,8 @@ export function BrickItem({
       ref={dragRef}
     >
       <span className={styles.brickIcon}>{icon}</span>
-      <span className={styles.brickName} title={brick.title || brick.shortName}>
-        {brick.title || brick.shortName}
+      <span className={styles.brickName} title={brick.title || brick.id}>
+        {brick.title || brick.id}
       </span>
     </div>
   );

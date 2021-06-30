@@ -9,11 +9,13 @@ import { buildBricks } from "../shared/storyboard/buildStoryboard";
 
 export interface BrickLibraryItem {
   type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
-  name: string;
+  id: string;
+  title: string;
   isHostedSnippets?: boolean;
   bricks?: BrickConf[];
   category?: string;
   thumbnail?: string;
+  customTemplateRawId?: string;
 }
 
 export interface GetBrickLibraryParams {
@@ -82,27 +84,32 @@ export async function GetBrickLibrary({
     .getBrickPackages()
     .flatMap<BrickLibraryItem>((pkg) =>
       pkg.filePath.startsWith("bricks/providers-of-")
-        ? pkg.bricks.map((name) => ({ type: "provider", name, id: name }))
+        ? pkg.bricks.map((name) => ({
+            type: "provider",
+            id: name,
+            title: getBrickLastName(name),
+          }))
         : pkg.bricks.map((name) => ({
             type: pkg.providers?.includes(name) ? "provider" : "brick",
-            name,
             id: name,
+            title: getBrickLastName(name),
           }))
     )
     .concat(
       customTemplates.list.map<BrickLibraryItem>((item) => ({
         type: "customTemplate",
-        name: item.templateId,
-        id: item.id,
+        id: item.templateId,
+        title: item.templateId,
+        customTemplateRawId: item.id,
         layerType: item.layerType,
       })),
       installedSnippets.list.map<BrickLibraryItem>((item) => ({
         type: "snippet",
-        name: i18nText(item.text) || item.id,
+        id: item.id,
+        title: i18nText(item.text) || item.id,
         category: item.category,
         thumbnail: item.thumbnail,
         bricks: item.bricks,
-        id: item.id,
         layerType: item.layerType,
       })),
       pipes
@@ -114,22 +121,26 @@ export async function GetBrickLibrary({
         })
         .map<BrickLibraryItem>((item) => ({
           type: "snippet",
-          name: i18nText(item.text) || item.snippetId,
+          id: item.id,
+          title: i18nText(item.text) || item.snippetId,
           isHostedSnippets: true,
           category: item.category,
           thumbnail: item.thumbnail,
           bricks: buildBricks(item.children),
-          id: item.id,
           layerType: item.layerType,
         })),
       developHelper.getTemplatePackages().flatMap<BrickLibraryItem>((pkg) =>
         pkg.templates.map((name) => ({
           type: "template",
-          name,
           id: name,
+          title: getBrickLastName(name),
         }))
       )
     );
+}
+
+function getBrickLastName(brickName: string): string {
+  return brickName.split(".").pop();
 }
 
 customElements.define(

@@ -1,4 +1,4 @@
-import { isNil, cloneDeep } from "lodash";
+import { isNil } from "lodash";
 import { i18nText } from "@next-core/brick-kit";
 import { Story, BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import {
@@ -31,7 +31,7 @@ export function filterBricks({
 }): BrickOptionItem[] {
   const formatBrickList = processBricks(
     rootNode?.type === "custom-template"
-      ? brickList.filter((item) => item.name !== rootNode.templateId)
+      ? brickList.filter((item) => item.id !== rootNode.templateId)
       : brickList,
     storyList,
     appId,
@@ -49,7 +49,7 @@ export function filterBricks({
     if (
       keywords.every(
         (keyword) =>
-          brick.name.toLowerCase().includes(keyword) ||
+          brick.id.toLowerCase().includes(keyword) ||
           brick.title?.toLowerCase()?.includes(keyword)
       )
     ) {
@@ -93,9 +93,8 @@ export function processBricks(
     .map((item) => {
       const brick = {
         ...item,
-        shortName: getShortName(item, appId),
       };
-      const find = storyList?.find((story) => story.storyId === item.name);
+      const find = storyList?.find((story) => story.storyId === item.id);
       if (find) {
         return {
           ...brick,
@@ -117,23 +116,11 @@ export function processBricks(
     });
 }
 
-export function getShortName(brick: BrickOptionItem, appId: string): string {
-  if (
-    ["customTemplate", "snippet"].includes(brick.type) &&
-    !brick.name.includes(".")
-  ) {
-    return brick.name;
-  } else {
-    const [, ...rest] = brick.name.split(".");
-    return rest.join(".");
-  }
-}
-
 export function insertBricks(
   bricks: BrickOptionItem[],
   frequentlyUsed: BrickOptionItem[]
 ): BrickOptionItem[] {
-  const brickList = cloneDeep(bricks);
+  const brickList = bricks.slice();
   for (const item of [...frequentlyUsed].reverse()) {
     const index = brickList.findIndex((brick) => {
       return brick.id === item.id && brick.type === item.type;

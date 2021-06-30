@@ -7,7 +7,7 @@ import { SearchableTree } from "../components/SearchableTree/SearchableTree";
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useBuilderNode: jest.fn().mockReturnValue({
     id: "T-02",
-    name: "tpl-detail-a",
+    title: "tpl-detail-a",
     type: "customTemplate",
   }),
 }));
@@ -23,29 +23,33 @@ jest.mock("../BuilderUIContext");
 (useBuilderUIContext as jest.Mock).mockReturnValue({
   brickList: [
     {
-      id: "B-01",
-      name: "pkg.brick-01",
       type: "brick",
+      id: "pkg.brick-01",
+      title: "brick-01",
     },
     {
-      id: "T-01",
-      name: "tpl-table",
       type: "customTemplate",
+      id: "tpl-table",
+      title: "tpl-table",
+      customTemplateRawId: "T-01",
     },
     {
-      id: "T-02",
-      name: "tpl-detail-a",
       type: "customTemplate",
+      id: "tpl-detail-a",
+      title: "tpl-detail-a",
+      customTemplateRawId: "T-02",
     },
     {
-      id: "T-03",
-      name: "tpl-detail-b",
       type: "customTemplate",
+      id: "tpl-detail-b",
+      title: "tpl-detail-b",
+      customTemplateRawId: "T-03",
     },
     {
-      id: "T-04",
-      name: "tpl-form",
       type: "customTemplate",
+      id: "tpl-form",
+      title: "tpl-form",
+      customTemplateRawId: "T-04",
     },
   ],
 });
@@ -60,10 +64,15 @@ describe("TemplateList", () => {
     wrapper.find(SearchableTree).invoke("onQChange")("detail");
     expect(wrapper.find(SearchableTree).prop("list").length).toBe(2);
     wrapper.find(SearchableTree).invoke("onSelect")({
-      id: "T-04",
-      name: "tpl-form",
       type: "customTemplate",
+      id: "tpl-form",
+      title: "tpl-form",
+      customTemplateRawId: "T-04",
     });
-    expect(handleTemplateClick).toBeCalled();
+    expect(handleTemplateClick).toBeCalledWith({
+      type: "custom-template",
+      id: "T-04",
+      templateId: "tpl-form",
+    });
   });
 });

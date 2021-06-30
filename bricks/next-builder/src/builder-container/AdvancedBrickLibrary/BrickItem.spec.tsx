@@ -31,8 +31,8 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "brick",
-          name: "my.awesome-brick",
-          shortName: "awesome-brick",
+          id: "my.awesome-brick",
+          title: "awesome-brick",
         }}
         onDraggingChange={mockOnDraggingChange}
       />
@@ -59,8 +59,8 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "provider",
-          name: "my.awesome-provider",
-          shortName: "awesome-provider",
+          id: "my.awesome-provider",
+          title: "awesome-provider",
         }}
       />
     );
@@ -85,8 +85,8 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "template",
-          name: "my.awesome-template",
-          shortName: "awesome-template",
+          id: "my.awesome-template",
+          title: "awesome-template",
         }}
       />
     );
@@ -111,8 +111,8 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "customTemplate",
-          name: "my.awesome-custom-template",
-          shortName: "awesome-custom-template",
+          id: "my.awesome-custom-template",
+          title: "awesome-custom-template",
         }}
       />
     );
@@ -137,8 +137,7 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "snippet",
-          name: "my.snippet",
-          shortName: "snippet",
+          id: "my.snippet",
           title: "My Snippet",
           bricks: [
             {
@@ -174,8 +173,7 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "snippet",
-          name: "my.snippet",
-          shortName: "snippet",
+          id: "my.snippet",
           title: "My Snippet",
           bricks: [
             {
@@ -202,8 +200,8 @@ describe("BrickItem", () => {
             icon: "abacus",
           },
           type: "brick",
-          name: "my.awesome-brick",
-          shortName: "awesome-brick",
+          id: "my.awesome-brick",
+          title: "awesome-brick",
         }}
       />
     );

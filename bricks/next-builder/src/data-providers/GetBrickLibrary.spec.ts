@@ -184,44 +184,44 @@ describe("GetBrickLibrary", () => {
       Array [
         Object {
           "id": "basic-bricks.micro-view",
-          "name": "basic-bricks.micro-view",
+          "title": "micro-view",
           "type": "brick",
         },
         Object {
           "id": "basic-bricks.general-button",
-          "name": "basic-bricks.general-button",
+          "title": "general-button",
           "type": "brick",
         },
         Object {
           "id": "next-builder.builder-container",
-          "name": "next-builder.builder-container",
+          "title": "builder-container",
           "type": "brick",
         },
         Object {
           "id": "next-builder.provider-get-all-providers",
-          "name": "next-builder.provider-get-all-providers",
+          "title": "provider-get-all-providers",
           "type": "provider",
         },
         Object {
           "id": "providers-of-cmdb.get-instance-list",
-          "name": "providers-of-cmdb.get-instance-list",
+          "title": "get-instance-list",
           "type": "provider",
         },
         Object {
           "id": "providers-of-cmdb.get-instance-detail",
-          "name": "providers-of-cmdb.get-instance-detail",
+          "title": "get-instance-detail",
           "type": "provider",
         },
         Object {
           "id": "P-01",
           "layerType": undefined,
-          "name": "tpl-a",
+          "title": "tpl-a",
           "type": "customTemplate",
         },
         Object {
           "id": "P-02",
           "layerType": undefined,
-          "name": "tpl-b",
+          "title": "tpl-b",
           "type": "customTemplate",
         },
         Object {
@@ -229,8 +229,8 @@ describe("GetBrickLibrary", () => {
           "category": "layout",
           "id": "installed-snippet-a",
           "layerType": undefined,
-          "name": "片段 A",
           "thumbnail": "url-1",
+          "title": "片段 A",
           "type": "snippet",
         },
         Object {
@@ -238,8 +238,8 @@ describe("GetBrickLibrary", () => {
           "category": "layout",
           "id": "installed-snippet-b",
           "layerType": undefined,
-          "name": "installed-snippet-b",
           "thumbnail": "url-2",
+          "title": "installed-snippet-b",
           "type": "snippet",
         },
         Object {
@@ -279,8 +279,8 @@ describe("GetBrickLibrary", () => {
           "id": undefined,
           "isHostedSnippets": true,
           "layerType": undefined,
-          "name": "片段 X",
           "thumbnail": "url-x",
+          "title": "片段 X",
           "type": "snippet",
         },
         Object {
@@ -301,28 +301,28 @@ describe("GetBrickLibrary", () => {
           "id": undefined,
           "isHostedSnippets": true,
           "layerType": undefined,
-          "name": "hosted-snippet-y",
           "thumbnail": "url-y",
+          "title": "hosted-snippet-y",
           "type": "snippet",
         },
         Object {
           "id": "test-a.template-a1",
-          "name": "test-a.template-a1",
+          "title": "template-a1",
           "type": "template",
         },
         Object {
           "id": "test-a.template-a2",
-          "name": "test-a.template-a2",
+          "title": "template-a2",
           "type": "template",
         },
         Object {
           "id": "test-b.template-b1",
-          "name": "test-b.template-b1",
+          "title": "template-b1",
           "type": "template",
         },
         Object {
           "id": "test-b.template-b2",
-          "name": "test-b.template-b2",
+          "title": "template-b2",
           "type": "template",
         },
       ]
