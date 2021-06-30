@@ -52,9 +52,10 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
 //      ↓
 //    ↙   ↘
 // x-1-1 x-1-2
-(InstanceGraphApi_traverseGraphV2 as jest.Mock).mockResolvedValue({
+(InstanceGraphApi_traverseGraphV2 as jest.Mock).mockImplementation(() => ({
   topic_vertices: [
     {
+      id: "S-01",
       instanceId: "x",
       snippetId: "hosted-snippet-x",
       text: {
@@ -65,6 +66,7 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
       thumbnail: "url-x",
     },
     {
+      id: "S-02",
       instanceId: "y",
       snippetId: "hosted-snippet-y",
       category: "hosted",
@@ -121,7 +123,68 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
       out_name: "children",
     },
   ],
-});
+}));
+
+(InstanceApi_postSearchV3 as jest.Mock).mockImplementation(
+  (objectId: string) => {
+    switch (objectId) {
+      case "STORYBOARD_TEMPLATE":
+        return {
+          list: [
+            {
+              instanceId: "a",
+              templateId: "tpl-a",
+              id: "P-01",
+            },
+            {
+              instanceId: "b",
+              templateId: "tpl-b",
+              id: "P-02",
+            },
+          ],
+        };
+      case "INSTALLED_BRICK_ATOM@EASYOPS":
+        return {
+          list: [
+            {
+              id: "basic-bricks.general-button",
+              text: {
+                zh: "普通按钮",
+                en: "General Button",
+              },
+              category: "button",
+              description: {
+                zh: "一个普通的按钮",
+                en: "A general button",
+              },
+              icon: { lib: "antd", type: "box" },
+            },
+          ],
+        };
+      case "INSTALLED_BRICK_SNIPPET@EASYOPS":
+        return {
+          list: [
+            {
+              id: "installed-snippet-a",
+              text: {
+                zh: "片段 A",
+                en: "Snippet A",
+              },
+              category: "layout",
+              thumbnail: "url-1",
+              bricks: [],
+            },
+            {
+              id: "installed-snippet-b",
+              category: "layout",
+              thumbnail: "url-2",
+              bricks: [],
+            },
+          ],
+        };
+    }
+  }
+);
 
 const mockGetFeatureFlags = jest.fn();
 (getRuntime as jest.Mock).mockReturnValue({
@@ -132,7 +195,7 @@ const mockGetFeatureFlags = jest.fn();
 const { GetBrickLibrary } = require("./GetBrickLibrary");
 
 describe("GetBrickLibrary", () => {
-  beforeEach(() => {
+  /* beforeEach(() => {
     (InstanceApi_postSearchV3 as jest.Mock)
       .mockResolvedValueOnce({
         list: [
@@ -168,7 +231,7 @@ describe("GetBrickLibrary", () => {
           },
         ],
       });
-  });
+  }); */
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -176,70 +239,79 @@ describe("GetBrickLibrary", () => {
 
   it("should work", async () => {
     mockGetFeatureFlags.mockReturnValueOnce({
-      "next-builder-installed-snippets": true,
-      "next-builder-hosted-snippets": true,
+      "next-builder-installed-bricks": true,
     });
     expect(await GetBrickLibrary({ projectId: "test-project" }))
       .toMatchInlineSnapshot(`
       Array [
         Object {
           "id": "basic-bricks.micro-view",
-          "name": "basic-bricks.micro-view",
+          "title": "micro-view",
           "type": "brick",
         },
         Object {
+          "category": "button",
+          "description": "一个普通的按钮",
+          "icon": Object {
+            "lib": "antd",
+            "type": "box",
+          },
           "id": "basic-bricks.general-button",
-          "name": "basic-bricks.general-button",
+          "title": "普通按钮",
           "type": "brick",
         },
         Object {
           "id": "next-builder.builder-container",
-          "name": "next-builder.builder-container",
+          "title": "builder-container",
           "type": "brick",
         },
         Object {
           "id": "next-builder.provider-get-all-providers",
-          "name": "next-builder.provider-get-all-providers",
+          "title": "provider-get-all-providers",
           "type": "provider",
         },
         Object {
           "id": "providers-of-cmdb.get-instance-list",
-          "name": "providers-of-cmdb.get-instance-list",
+          "title": "get-instance-list",
           "type": "provider",
         },
         Object {
           "id": "providers-of-cmdb.get-instance-detail",
-          "name": "providers-of-cmdb.get-instance-detail",
+          "title": "get-instance-detail",
           "type": "provider",
         },
         Object {
-          "id": "P-01",
+          "id": "tpl-a",
           "layerType": undefined,
-          "name": "tpl-a",
+          "nodeId": "P-01",
+          "title": "tpl-a",
           "type": "customTemplate",
         },
         Object {
-          "id": "P-02",
+          "id": "tpl-b",
           "layerType": undefined,
-          "name": "tpl-b",
+          "nodeId": "P-02",
+          "title": "tpl-b",
           "type": "customTemplate",
         },
         Object {
           "bricks": Array [],
           "category": "layout",
+          "description": undefined,
           "id": "installed-snippet-a",
           "layerType": undefined,
-          "name": "片段 A",
           "thumbnail": "url-1",
+          "title": "片段 A",
           "type": "snippet",
         },
         Object {
           "bricks": Array [],
           "category": "layout",
+          "description": undefined,
           "id": "installed-snippet-b",
           "layerType": undefined,
-          "name": "installed-snippet-b",
           "thumbnail": "url-2",
+          "title": "installed-snippet-b",
           "type": "snippet",
         },
         Object {
@@ -276,11 +348,13 @@ describe("GetBrickLibrary", () => {
             },
           ],
           "category": "hosted",
-          "id": undefined,
-          "isHostedSnippets": true,
+          "description": undefined,
+          "id": "hosted-snippet-x",
+          "isHostedSnippet": true,
           "layerType": undefined,
-          "name": "片段 X",
+          "nodeId": "S-01",
           "thumbnail": "url-x",
+          "title": "片段 X",
           "type": "snippet",
         },
         Object {
@@ -298,31 +372,196 @@ describe("GetBrickLibrary", () => {
             },
           ],
           "category": "hosted",
-          "id": undefined,
-          "isHostedSnippets": true,
+          "description": undefined,
+          "id": "hosted-snippet-y",
+          "isHostedSnippet": true,
           "layerType": undefined,
-          "name": "hosted-snippet-y",
+          "nodeId": "S-02",
           "thumbnail": "url-y",
+          "title": "hosted-snippet-y",
           "type": "snippet",
         },
         Object {
           "id": "test-a.template-a1",
-          "name": "test-a.template-a1",
+          "title": "template-a1",
           "type": "template",
         },
         Object {
           "id": "test-a.template-a2",
-          "name": "test-a.template-a2",
+          "title": "template-a2",
           "type": "template",
         },
         Object {
           "id": "test-b.template-b1",
-          "name": "test-b.template-b1",
+          "title": "template-b1",
           "type": "template",
         },
         Object {
           "id": "test-b.template-b2",
-          "name": "test-b.template-b2",
+          "title": "template-b2",
+          "type": "template",
+        },
+      ]
+    `);
+  });
+
+  it("should work when enable snippets only", async () => {
+    mockGetFeatureFlags.mockReturnValueOnce({
+      "next-builder-installed-snippets": true,
+      "next-builder-hosted-snippets": true,
+    });
+    expect(await GetBrickLibrary({ projectId: "test-project" }))
+      .toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "id": "basic-bricks.micro-view",
+          "title": "micro-view",
+          "type": "brick",
+        },
+        Object {
+          "id": "basic-bricks.general-button",
+          "title": "general-button",
+          "type": "brick",
+        },
+        Object {
+          "id": "next-builder.builder-container",
+          "title": "builder-container",
+          "type": "brick",
+        },
+        Object {
+          "id": "next-builder.provider-get-all-providers",
+          "title": "provider-get-all-providers",
+          "type": "provider",
+        },
+        Object {
+          "id": "providers-of-cmdb.get-instance-list",
+          "title": "get-instance-list",
+          "type": "provider",
+        },
+        Object {
+          "id": "providers-of-cmdb.get-instance-detail",
+          "title": "get-instance-detail",
+          "type": "provider",
+        },
+        Object {
+          "id": "tpl-a",
+          "layerType": undefined,
+          "nodeId": "P-01",
+          "title": "tpl-a",
+          "type": "customTemplate",
+        },
+        Object {
+          "id": "tpl-b",
+          "layerType": undefined,
+          "nodeId": "P-02",
+          "title": "tpl-b",
+          "type": "customTemplate",
+        },
+        Object {
+          "bricks": Array [],
+          "category": "layout",
+          "description": undefined,
+          "id": "installed-snippet-a",
+          "layerType": undefined,
+          "thumbnail": "url-1",
+          "title": "片段 A",
+          "type": "snippet",
+        },
+        Object {
+          "bricks": Array [],
+          "category": "layout",
+          "description": undefined,
+          "id": "installed-snippet-b",
+          "layerType": undefined,
+          "thumbnail": "url-2",
+          "title": "installed-snippet-b",
+          "type": "snippet",
+        },
+        Object {
+          "bricks": Array [
+            Object {
+              "brick": "easy-view",
+              "properties": Object {
+                "gap": 10,
+              },
+              "slots": Object {
+                "a": Object {
+                  "bricks": Array [
+                    Object {
+                      "brick": "general-button",
+                      "events": Object {
+                        "click": Object {
+                          "action": "console.log",
+                        },
+                      },
+                    },
+                  ],
+                  "type": "bricks",
+                },
+                "b": Object {
+                  "bricks": Array [
+                    Object {
+                      "bg": true,
+                      "brick": "test-provider",
+                    },
+                  ],
+                  "type": "bricks",
+                },
+              },
+            },
+          ],
+          "category": "hosted",
+          "description": undefined,
+          "id": "hosted-snippet-x",
+          "isHostedSnippet": true,
+          "layerType": undefined,
+          "nodeId": "S-01",
+          "thumbnail": "url-x",
+          "title": "片段 X",
+          "type": "snippet",
+        },
+        Object {
+          "bricks": Array [
+            Object {
+              "brick": "easy-view",
+              "properties": Object {
+                "gridTemplateAreas": Array [
+                  Array [
+                    "left",
+                    "right",
+                  ],
+                ],
+              },
+            },
+          ],
+          "category": "hosted",
+          "description": undefined,
+          "id": "hosted-snippet-y",
+          "isHostedSnippet": true,
+          "layerType": undefined,
+          "nodeId": "S-02",
+          "thumbnail": "url-y",
+          "title": "hosted-snippet-y",
+          "type": "snippet",
+        },
+        Object {
+          "id": "test-a.template-a1",
+          "title": "template-a1",
+          "type": "template",
+        },
+        Object {
+          "id": "test-a.template-a2",
+          "title": "template-a2",
+          "type": "template",
+        },
+        Object {
+          "id": "test-b.template-b1",
+          "title": "template-b1",
+          "type": "template",
+        },
+        Object {
+          "id": "test-b.template-b2",
+          "title": "template-b2",
           "type": "template",
         },
       ]

@@ -1,16 +1,14 @@
-import React, { useEffect, useState, CSSProperties } from "react";
-import { SearchComponent } from "../../SearchComponent/SearchComponent";
-import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
-import { useTranslation } from "react-i18next";
+import React, { useEffect, useState } from "react";
 import { Tree } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { get } from "lodash";
 import classNames from "classnames";
+import { SearchComponent } from "../../SearchComponent/SearchComponent";
 
 import styles from "./SearchableTree.module.css";
 
-interface SearchableTreeProps{
-  list: Record<string,any>[];
+interface SearchableTreeProps {
+  list: Record<string, any>[];
   defaultSelectedKeys: string[];
   icon?: React.ReactNode;
   field?: string;
@@ -21,16 +19,15 @@ interface SearchableTreeProps{
 }
 
 export function SearchableTree({
-  list, 
+  list,
   defaultSelectedKeys,
   icon,
   field = "title",
   searchPlaceholder,
   onSelect,
   onQChange,
-  customClassName
-}:SearchableTreeProps): React.ReactElement{
-  const { t } = useTranslation(NS_NEXT_BUILDER);
+  customClassName,
+}: SearchableTreeProps): React.ReactElement {
   const [q, setQ] = useState<string>("");
   const [selectedKeys, setSelectedKeys] = useState(defaultSelectedKeys);
 
@@ -38,9 +35,9 @@ export function SearchableTree({
     setQ(value);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     onQChange?.(q);
-  },[q]);
+  }, [q]);
 
   const handleClick = (selectedKeys: React.Key[], value: any): void => {
     const selectedProps = value.node.props;
@@ -49,8 +46,8 @@ export function SearchableTree({
     onSelect?.(selectedProps);
   };
 
-  const titleRender = (nodeData: Record<string,any>): React.ReactElement => {
-    const titleText = get(nodeData,field) as string;
+  const titleRender = (nodeData: Record<string, any>): React.ReactElement => {
+    const titleText = get(nodeData, field) as string;
     let title = <span>{titleText}</span>;
     if (q) {
       const trimQ = q.trim();
@@ -74,29 +71,28 @@ export function SearchableTree({
     }
     return <span title={nodeData.path}>{title}</span>;
   };
-  
+
   return (
-    <div
-      className={classNames(styles.container,customClassName)}
-    >
-      <SearchComponent placeholder={searchPlaceholder} onSearch={handleSearch} />
-      {
-        list?.length > 0 &&(
-          <div className={styles.treeWrapper}>
-            <Tree
-              showIcon
-              defaultExpandAll={true}
-              treeData={list}
-              selectedKeys={selectedKeys}
-              switcherIcon={<DownOutlined />}
-              onSelect={handleClick}
-              titleRender={titleRender}
-              icon={icon}
-              blockNode={true}
-            ></Tree>
-          </div>
-        )
-      } 
+    <div className={classNames(styles.container, customClassName)}>
+      <SearchComponent
+        placeholder={searchPlaceholder}
+        onSearch={handleSearch}
+      />
+      {list?.length > 0 && (
+        <div className={styles.treeWrapper}>
+          <Tree
+            showIcon
+            defaultExpandAll={true}
+            treeData={list as any}
+            selectedKeys={selectedKeys}
+            switcherIcon={<DownOutlined />}
+            onSelect={handleClick}
+            titleRender={titleRender}
+            icon={icon}
+            blockNode={true}
+          ></Tree>
+        </div>
+      )}
     </div>
-  )
+  );
 }

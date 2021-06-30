@@ -31,13 +31,15 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "brick",
-          name: "my.awesome-brick",
-          shortName: "awesome-brick",
+          id: "my.awesome-brick",
+          title: "awesome-brick",
+          description: "My awesome brick",
         }}
         onDraggingChange={mockOnDraggingChange}
       />
     );
     expect(wrapper.find(".brickItem").hasClass("brick")).toBe(true);
+    expect(wrapper.find(".brickItem").prop("title")).toBe("My awesome brick");
     expect(wrapper.find(BuildFilled).length).toBe(1);
     expect(wrapper.find(".brickName").text()).toBe("awesome-brick");
     expect(mockUseDrag).toBeCalledWith(
@@ -59,12 +61,13 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "provider",
-          name: "my.awesome-provider",
-          shortName: "awesome-provider",
+          id: "my.awesome-provider",
+          title: "awesome-provider",
         }}
       />
     );
     expect(wrapper.find(".brickItem").hasClass("provider")).toBe(true);
+    expect(wrapper.find(".brickItem").prop("title")).toBe("awesome-provider");
     expect(wrapper.find(DatabaseFilled).length).toBe(1);
     expect(wrapper.find(".brickName").text()).toBe("awesome-provider");
     expect(mockUseDrag).toBeCalledWith(
@@ -85,8 +88,8 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "template",
-          name: "my.awesome-template",
-          shortName: "awesome-template",
+          id: "my.awesome-template",
+          title: "awesome-template",
         }}
       />
     );
@@ -111,8 +114,8 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "customTemplate",
-          name: "my.awesome-custom-template",
-          shortName: "awesome-custom-template",
+          id: "my.awesome-custom-template",
+          title: "awesome-custom-template",
         }}
       />
     );
@@ -137,8 +140,7 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "snippet",
-          name: "my.snippet",
-          shortName: "snippet",
+          id: "my.snippet",
           title: "My Snippet",
           bricks: [
             {
@@ -174,8 +176,7 @@ describe("BrickItem", () => {
       <BrickItem
         brick={{
           type: "snippet",
-          name: "my.snippet",
-          shortName: "snippet",
+          id: "my.snippet",
           title: "My Snippet",
           bricks: [
             {
@@ -202,8 +203,8 @@ describe("BrickItem", () => {
             icon: "abacus",
           },
           type: "brick",
-          name: "my.awesome-brick",
-          shortName: "awesome-brick",
+          id: "my.awesome-brick",
+          title: "awesome-brick",
         }}
       />
     );

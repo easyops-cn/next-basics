@@ -7,17 +7,16 @@ import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export interface BrickOptionItem {
   type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
-  id?: string;
-  name?: string;
-  scopeName?: string;
-  shortName?: string;
+  id: string;
+  title: string;
   category?: string;
-  title?: string;
   description?: string;
   icon?: MenuIcon;
   thumbnail?: string;
   bricks?: BrickConf[];
   layerType?: LayerType;
+  nodeId?: string;
+  isHostedSnippet?: boolean;
 }
 
 export interface GroupedBricks {

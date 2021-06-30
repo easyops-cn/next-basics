@@ -88,9 +88,6 @@ export class BuilderContainerElement extends UpdatingElement {
   providerList: string[];
 
   @property({ attribute: false })
-  snippetList: BuilderSnippetNode[];
-
-  @property({ attribute: false })
   storyList: Story[];
 
   @property({ attribute: false })
@@ -545,7 +542,6 @@ export class BuilderContainerElement extends UpdatingElement {
                 routeList={this.routeList}
                 brickList={this.brickList}
                 providerList={this.providerList}
-                snippetList={this.snippetList}
                 storyList={this.storyList}
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}

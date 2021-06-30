@@ -2,14 +2,23 @@ import React, { createRef } from "react";
 import { act } from "react-dom/test-utils";
 import { mount, shallow } from "enzyme";
 import { Empty } from "antd";
+import { getRuntime } from "@next-core/brick-kit";
 import { AdvancedBrickLibrary } from "./AdvancedBrickLibrary";
 import { BrickItem } from "./BrickItem";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 
+jest.mock("@next-core/brick-kit");
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../BuilderUIContext");
 jest.mock("./BrickItem");
+
+const mockGetFeatureFlags = jest.fn().mockReturnValue({
+  "next-builder-installed-bricks": true,
+});
+(getRuntime as jest.Mock).mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+});
 
 jest.mock("../constants", () => ({
   brickSearchResultLimit: 20,
@@ -40,32 +49,32 @@ describe("AdvancedBrickLibrary", () => {
       brickList: [
         {
           type: "brick",
-          name: "basic-bricks.micro-view",
+          title: "micro-view",
           id: "basic-bricks.micro-view",
         },
         {
           type: "brick",
-          name: "forms.general-timer",
+          title: "general-timer",
           id: "forms.general-timer",
         },
         {
           type: "brick",
-          name: "forms.general-select",
+          title: "general-select",
           id: "forms.general-select",
         },
         {
           type: "brick",
-          name: "basic-bricks.general-card",
+          title: "general-card",
           id: "basic-bricks.general-card",
         },
         {
           type: "brick",
-          name: "forms.general-form",
+          title: "general-form",
           id: "forms.general-form",
         },
         {
           type: "brick",
-          name: "forms.general-input",
+          title: "general-input",
           id: "forms.general-input",
         },
       ],
@@ -74,25 +83,22 @@ describe("AdvancedBrickLibrary", () => {
     expect(wrapper.find(".itemWrapper").length).toBe(6);
 
     expect(
-      wrapper.find(".itemWrapper").at(0).find(BrickItem).at(0).prop("brick")
-        .shortName
-    ).toBe("general-card");
+      wrapper.find(".itemWrapper").at(0).find(BrickItem).at(0).prop("brick").id
+    ).toBe("basic-bricks.general-card");
     expect(
-      wrapper.find(".itemWrapper").at(1).find(BrickItem).at(0).prop("brick")
-        .shortName
-    ).toBe("general-form");
+      wrapper.find(".itemWrapper").at(1).find(BrickItem).at(0).prop("brick").id
+    ).toBe("forms.general-form");
     expect(
-      wrapper.find(".itemWrapper").at(2).find(BrickItem).at(0).prop("brick")
-        .shortName
-    ).toBe("general-input");
+      wrapper.find(".itemWrapper").at(2).find(BrickItem).at(0).prop("brick").id
+    ).toBe("forms.general-input");
 
     wrapper.find(SearchComponent).invoke("onSearch")("form");
     expect(wrapper.find(BrickItem).length).toBe(4);
-    expect(wrapper.find(BrickItem).at(0).prop("brick").shortName).toBe(
-      "general-form"
+    expect(wrapper.find(BrickItem).at(0).prop("brick").id).toBe(
+      "forms.general-form"
     );
-    expect(wrapper.find(BrickItem).at(1).prop("brick").shortName).toBe(
-      "general-input"
+    expect(wrapper.find(BrickItem).at(1).prop("brick").id).toBe(
+      "forms.general-input"
     );
   });
 
@@ -113,53 +119,21 @@ describe("AdvancedBrickLibrary", () => {
       brickList: [
         {
           type: "brick",
-          name: "basic-bricks.general-card",
-        },
-        {
-          type: "brick",
-          name: "forms.general-form",
-        },
-        {
-          type: "brick",
-          name: "forms.general-input",
-        },
-      ],
-      storyList: [
-        {
+          id: "basic-bricks.general-card",
+          title: "general-card",
           category: "card",
-          icon: {
-            icon: "chevron-down",
-            lib: "fa",
-          },
-          storyId: "basic-bricks.general-card",
-          text: {
-            en: "general-card",
-            zh: "卡片",
-          },
         },
         {
+          type: "brick",
+          id: "forms.general-form",
+          title: "general-form",
           category: "form-input",
-          icon: {
-            icon: "draw-polygon",
-            lib: "fa",
-          },
-          storyId: "forms.general-form",
-          text: {
-            en: "general form",
-            zh: "普通表单",
-          },
         },
         {
+          type: "brick",
+          id: "forms.general-input",
+          title: "general-input",
           category: "form-input",
-          icon: {
-            icon: "pencil-alt",
-            lib: "fa",
-          },
-          storyId: "forms.general-input",
-          text: {
-            en: "general input",
-            zh: "普通输入框",
-          },
         },
       ],
     });
@@ -170,12 +144,10 @@ describe("AdvancedBrickLibrary", () => {
     });
     wrapper.update();
     expect(
-      wrapper.find(".itemWrapper").at(0).find(BrickItem).at(0).prop("brick")
-        .shortName
-    ).toBe("general-form");
+      wrapper.find(".itemWrapper").at(0).find(BrickItem).at(0).prop("brick").id
+    ).toBe("forms.general-form");
     expect(
-      wrapper.find(".itemWrapper").at(1).find(BrickItem).at(0).prop("brick")
-        .shortName
-    ).toBe("general-input");
+      wrapper.find(".itemWrapper").at(1).find(BrickItem).at(0).prop("brick").id
+    ).toBe("forms.general-input");
   });
 });
