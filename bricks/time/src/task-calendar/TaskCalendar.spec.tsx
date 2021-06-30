@@ -3,6 +3,8 @@ import { mount } from "enzyme";
 import moment from "moment";
 import { TaskCalendar } from "./TaskCalendar";
 
+const spyOnWindowOpen = jest.spyOn(window, "open").mockImplementation(null);
+
 const briefList = [
   { date: "2021-05-01", text: "休" },
   { date: "2021-05-13", text: "休" },
@@ -24,12 +26,14 @@ const taskList = [
         OPT_SUMMARY: "ESB系统月度巡检",
         OPT_NOTIFICATION_TM: "2021-05-01 10:00:00",
         OPT_PRIORITY_ID: "3",
+        url: "http://192.168.100.162?id=002",
       },
       {
         OPT_CHANGE_NUMBER: "003",
         OPT_SUMMARY: "新同城数据中心EBUS部署",
         OPT_NOTIFICATION_TM: "2021-05-01 10:00:00",
         OPT_PRIORITY_ID: "2",
+        url: "http://192.168.100.162?id=003",
       },
     ],
   },
@@ -163,18 +167,28 @@ describe("TaskCalendar", () => {
             OPT_SUMMARY: "ESB系统月度巡检",
             OPT_NOTIFICATION_TM: "2021-05-01 10:00:00",
             OPT_PRIORITY_ID: "3",
+            url: "http://192.168.100.162?id=002",
           },
           {
             OPT_CHANGE_NUMBER: "003",
             OPT_SUMMARY: "新同城数据中心EBUS部署",
             OPT_NOTIFICATION_TM: "2021-05-01 10:00:00",
             OPT_PRIORITY_ID: "2",
+            url: "http://192.168.100.162?id=003",
           },
         ],
         importance: ["发版"],
         brief: "休",
       },
     });
+    expect(wrapper.find(".taskLinkItem")).toHaveLength(2);
+    wrapper.find(".taskItem").at(0).invoke("onClick")(null);
+    expect(spyOnWindowOpen).toHaveBeenCalledTimes(0);
+    wrapper.find(".taskItem").at(1).invoke("onClick")(null);
+    expect(spyOnWindowOpen).lastCalledWith(
+      "http://192.168.100.162?id=002",
+      "_blank"
+    );
 
     wrapper.find("Calendar").invoke("onPanelChange")(
       moment("2021-04-01"),

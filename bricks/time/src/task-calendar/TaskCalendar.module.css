@@ -161,6 +161,10 @@
         height: 26px;
         line-height: 22px;
 
+        &.taskLinkItem {
+          cursor: pointer;
+        }
+
         .taskItemColor {
           position: absolute;
           left: 0;

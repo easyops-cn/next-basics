@@ -190,8 +190,17 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
             <div className={styles.taskList}>
               {task?.map((task: any, index: number) => {
                 const taskTime = get(task, taskSettings.fields?.time);
+                const { url } = task;
                 return (
-                  <div className={styles.taskItem} key={index}>
+                  <div
+                    className={classNames(styles.taskItem, {
+                      [styles.taskLinkItem]: url,
+                    })}
+                    key={index}
+                    onClick={(e) => {
+                      url && window.open(url, "_blank");
+                    }}
+                  >
                     <div
                       className={styles.taskItemColor}
                       style={{

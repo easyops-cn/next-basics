@@ -85,12 +85,14 @@ export const TaskCalendarStory: Story = {
                 OPT_SUMMARY: "XBUS系统月度巡检",
                 OPT_NOTIFICATION_TM: "2021-05-01 09:00:00",
                 OPT_PRIORITY_ID: "3",
+                url: "/test?id=001",
               },
               {
                 OPT_CHANGE_NUMBER: "002",
                 OPT_SUMMARY: "ESB系统月度巡检",
                 OPT_NOTIFICATION_TM: "2021-05-01 10:00:00",
                 OPT_PRIORITY_ID: "3",
+                url: "/test?id=002",
               },
               {
                 OPT_CHANGE_NUMBER: "003",
