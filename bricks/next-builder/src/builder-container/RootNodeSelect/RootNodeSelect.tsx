@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { DownOutlined } from "@ant-design/icons";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { Dropdown, Button, Menu } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { i18nText } from "@next-core/brick-kit";
+import { I18nData } from "@next-core/brick-types";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { RoutesView } from "../RoutesView/RoutesView";
 import { TemplateList } from "../TemplateList/TemplateList";
 import { useBuilderUIContext } from "../BuilderUIContext";
-
-import styles from "./RootNodeSelect.module.css";
 import { BuilderDataType } from "../interfaces";
 import { SnippetList } from "../SnippetList/SnippetList";
-import { find } from "lodash";
+
+import styles from "./RootNodeSelect.module.css";
 
 export function RootNodeSelect(): React.ReactElement {
-  const { dataType, snippetList } = useBuilderUIContext();
+  const { dataType } = useBuilderUIContext();
   const [visible, setVisible] = useState(false);
   const rootNode = useBuilderNode({ isRoot: true });
 
@@ -20,11 +21,11 @@ export function RootNodeSelect(): React.ReactElement {
     return null;
   }
 
-  const onVisibleChange = (v: boolean) => {
+  const onVisibleChange = (v: boolean): void => {
     setVisible(v);
   };
 
-  const triggerVisible = () => {
+  const triggerVisible = (): void => {
     setVisible(!visible);
   };
 
@@ -50,9 +51,6 @@ export function RootNodeSelect(): React.ReactElement {
     </Menu>
   );
 
-  const findSnippetTitle = (snippetId: string) =>
-    find(snippetList, (i) => i.snippetId === snippetId)?.name;
-
   return (
     <Dropdown
       overlay={
@@ -76,8 +74,7 @@ export function RootNodeSelect(): React.ReactElement {
           {dataType === BuilderDataType.CUSTOM_TEMPLATE
             ? rootNode.templateId
             : dataType === BuilderDataType.SNIPPET
-            ? findSnippetTitle(rootNode.snippetId as string) ||
-              rootNode.snippetId
+            ? i18nText(rootNode.text as I18nData) || rootNode.snippetId
             : rootNode.alias}
         </span>{" "}
         <DownOutlined className={styles.downIcon} />

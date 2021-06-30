@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from "react";
-import { BuilderSnippetNode } from "@next-core/brick-types";
-import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { useTranslation } from "react-i18next";
 import { BlockOutlined } from "@ant-design/icons";
+import { BuilderSnippetNode } from "@next-core/brick-types";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { SearchableTree } from "../components/SearchableTree/SearchableTree";
 import { searchList } from "../utils/utils";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { BrickOptionItem } from "../interfaces";
 
 import styles from "./SnippetList.module.css";
 
@@ -18,32 +19,39 @@ export function SnippetList({
   handleSnippetSelect,
 }: SnippetListProps): React.ReactElement {
   const rootNode = useBuilderNode({ isRoot: true });
-  const { snippetList, onSnippetSelect } = useBuilderUIContext();
+  const { brickList, onSnippetSelect } = useBuilderUIContext();
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [q, setQ] = useState<string>("");
 
-  const handleQChange = (q: string) => {
+  const handleQChange = (q: string): void => {
     setQ(q);
   };
 
   const formattedSnippetList = useMemo(() => {
-    if (!snippetList) {
+    if (!brickList) {
       return [];
     }
-    return snippetList.map((v) => ({
-      ...v,
-      key: v.id,
-    }));
-  }, [snippetList]);
+    return brickList
+      .filter((v) => v.type === "snippet" && v.isHostedSnippet)
+      .map((v) => ({
+        ...v,
+        key: v.nodeId,
+      }));
+  }, [brickList]);
 
   const treeData = useMemo(
-    () => searchList(formattedSnippetList, q, "name"),
+    () => searchList(formattedSnippetList, q, "title"),
     [formattedSnippetList, q]
   );
 
-  const handleSelect = (selectedProps: any) => {
-    onSnippetSelect?.(selectedProps);
-    handleSnippetSelect?.(selectedProps);
+  const handleSelect = (selectedProps: BrickOptionItem): void => {
+    const node: BuilderSnippetNode = {
+      type: "snippet",
+      id: selectedProps.nodeId,
+      snippetId: selectedProps.id,
+    };
+    onSnippetSelect?.(node);
+    handleSnippetSelect?.(node);
   };
 
   return (
@@ -51,7 +59,6 @@ export function SnippetList({
       list={treeData}
       defaultSelectedKeys={rootNode ? [rootNode.id] : []}
       icon={<BlockOutlined />}
-      field="name"
       searchPlaceholder={t(K.SEARCH_SNIPPET)}
       onSelect={handleSelect}
       onQChange={handleQChange}

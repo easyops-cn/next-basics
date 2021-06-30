@@ -11,7 +11,7 @@ export interface BrickLibraryItem {
   type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
   id: string;
   title: string;
-  isHostedSnippets?: boolean;
+  isHostedSnippet?: boolean;
   bricks?: BrickConf[];
   category?: string;
   description?: string;
@@ -157,7 +157,7 @@ export async function GetBrickLibrary({
           type: "snippet",
           id: item.snippetId,
           title: i18nText(item.text) || item.snippetId,
-          isHostedSnippets: true,
+          isHostedSnippet: true,
           category: item.category,
           description: i18nText(item.description),
           thumbnail: item.thumbnail,

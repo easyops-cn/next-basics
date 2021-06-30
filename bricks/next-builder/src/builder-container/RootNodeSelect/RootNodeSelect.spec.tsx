@@ -38,7 +38,6 @@ describe("RootNodeSelect", () => {
     expect(wrapper.find(".alias").text()).toBe("my-brick");
     expect(wrapper.find("RoutesView").length).toBe(0);
     wrapper.find(".rootNodeWrapper").at(0).simulate("click");
-    wrapper.find("RoutesView").invoke("handleRouteSelect")();
     expect(wrapper.find("RoutesView").length).toBe(1);
   });
 
@@ -58,12 +57,6 @@ describe("RootNodeSelect", () => {
   it("should work for snippets", () => {
     (useBuilderUIContext as jest.Mock).mockReturnValue({
       dataType: BuilderDataType.SNIPPET,
-      snippetList: [
-        {
-          snippetId: "snippet-test",
-          name: "中文snippet名称",
-        },
-      ],
     });
     mockUseBuilderNode.mockReturnValue({
       type: "snippet",

@@ -44,7 +44,6 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
   providerList?: string[];
-  snippetList?: BuilderSnippetNode[];
   storyList?: Story[];
   processing?: boolean;
   initialFullscreen?: boolean;
@@ -86,7 +85,6 @@ export function LegacyBuilderContainer(
     routeList,
     brickList,
     providerList,
-    snippetList,
     storyList,
     processing,
     initialFullscreen,
@@ -309,7 +307,6 @@ export function LegacyBuilderContainer(
         dataType,
         brickList,
         providerList,
-        snippetList,
         storyList,
         processing,
         fullscreen,

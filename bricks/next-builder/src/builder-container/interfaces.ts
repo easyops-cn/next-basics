@@ -16,6 +16,7 @@ export interface BrickOptionItem {
   bricks?: BrickConf[];
   layerType?: LayerType;
   nodeId?: string;
+  isHostedSnippet?: boolean;
 }
 
 export interface GroupedBricks {

@@ -35,7 +35,7 @@ export function TemplateList({
       .filter((v) => v.type === "customTemplate")
       .map((v) => ({
         ...v,
-        key: v.id,
+        key: v.nodeId,
       }));
   }, [brickList]);
 
