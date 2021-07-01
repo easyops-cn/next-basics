@@ -7,7 +7,6 @@ import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { SearchableTree } from "../components/SearchableTree/SearchableTree";
 import { searchList } from "../utils/utils";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import { BrickOptionItem } from "../interfaces";
 
 import styles from "./SnippetList.module.css";
 
@@ -19,7 +18,7 @@ export function SnippetList({
   handleSnippetSelect,
 }: SnippetListProps): React.ReactElement {
   const rootNode = useBuilderNode({ isRoot: true });
-  const { brickList, onSnippetSelect } = useBuilderUIContext();
+  const { snippetList, onSnippetSelect } = useBuilderUIContext();
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [q, setQ] = useState<string>("");
 
@@ -28,28 +27,21 @@ export function SnippetList({
   };
 
   const formattedSnippetList = useMemo(() => {
-    if (!brickList) {
+    if (!snippetList) {
       return [];
     }
-    return brickList
-      .filter((v) => v.type === "snippet" && v.isHostedSnippet)
-      .map((v) => ({
-        ...v,
-        key: v.nodeId,
-      }));
-  }, [brickList]);
+    return snippetList.map((v) => ({
+      ...v,
+      key: v.id,
+    }));
+  }, [snippetList]);
 
   const treeData = useMemo(
     () => searchList(formattedSnippetList, q, "title"),
     [formattedSnippetList, q]
   );
 
-  const handleSelect = (selectedProps: BrickOptionItem): void => {
-    const node: BuilderSnippetNode = {
-      type: "snippet",
-      id: selectedProps.nodeId,
-      snippetId: selectedProps.id,
-    };
+  const handleSelect = (node: BuilderSnippetNode): void => {
     onSnippetSelect?.(node);
     handleSnippetSelect?.(node);
   };

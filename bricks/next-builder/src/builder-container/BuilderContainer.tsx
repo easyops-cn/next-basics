@@ -15,6 +15,7 @@ import {
   EventDetailOfNodeMove,
   EventDetailOfNodeReorder,
   EventDetailOfSnippetApply,
+  SharedEditorConf,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
@@ -41,10 +42,13 @@ import styles from "./BuilderContainer.module.css";
 export interface BuilderContainerProps extends BuilderContextMenuProps {
   appId?: string;
   dataSource?: BuilderRouteOrBrickNode[];
-  routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
+  editorList?: SharedEditorConf[];
   providerList?: string[];
   storyList?: Story[];
+  routeList?: BuilderRouteNode[];
+  templateList?: BuilderCustomTemplateNode[];
+  snippetList?: BuilderSnippetNode[];
   processing?: boolean;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
@@ -82,10 +86,13 @@ export function LegacyBuilderContainer(
   {
     appId,
     dataSource,
-    routeList,
     brickList,
+    editorList,
     providerList,
     storyList,
+    routeList,
+    templateList,
+    snippetList,
     processing,
     initialFullscreen,
     initialToolboxTab,
@@ -220,8 +227,8 @@ export function LegacyBuilderContainer(
   }, [initialCanvasIndex, manager]);
 
   React.useEffect(() => {
-    manager.routeListInit(routeList ?? []);
-  }, [routeList, manager]);
+    manager.sharedEditorListInit(editorList);
+  }, [editorList, manager]);
 
   React.useEffect(() => {
     manager.storyListInit(storyList);
@@ -308,6 +315,9 @@ export function LegacyBuilderContainer(
         brickList,
         providerList,
         storyList,
+        routeList,
+        templateList,
+        snippetList,
         processing,
         fullscreen,
         setFullscreen,

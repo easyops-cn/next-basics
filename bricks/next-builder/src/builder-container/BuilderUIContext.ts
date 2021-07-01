@@ -20,6 +20,9 @@ export interface ContextOfBuilderUI {
   brickList?: BrickOptionItem[];
   providerList?: string[];
   storyList?: Story[];
+  routeList?: BuilderRouteNode[];
+  templateList?: BuilderCustomTemplateNode[];
+  snippetList?: BuilderSnippetNode[];
   processing?: boolean;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;

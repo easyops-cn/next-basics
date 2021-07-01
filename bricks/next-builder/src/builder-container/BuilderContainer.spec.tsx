@@ -53,7 +53,7 @@ const mockManager = {
   onNodeClick: jest.fn(() => mockRemoveListenersOfNodeClick),
   onSnippetApply: jest.fn(() => mockRemoveListenersOfSnippetApply),
   dataInit: jest.fn(),
-  routeListInit: jest.fn(),
+  sharedEditorListInit: jest.fn(),
   storyListInit: jest.fn(),
   getData: jest.fn(() => ({
     rootId: "root",

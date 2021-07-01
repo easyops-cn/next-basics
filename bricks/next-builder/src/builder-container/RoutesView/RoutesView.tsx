@@ -1,13 +1,14 @@
 import React, { useState, useMemo } from "react";
 import { BranchesOutlined } from "@ant-design/icons";
-import styles from "./RoutesView.module.css";
-import { BuilderRouteNode } from "@next-core/brick-types";
-import { generateRouteTree } from "../../utils/generateRouteTree";
-import { useBuilderNode, useRouteList } from "@next-core/editor-bricks-helper";
-import { useBuilderUIContext } from "../BuilderUIContext";
 import { useTranslation } from "react-i18next";
+import { BuilderRouteNode } from "@next-core/brick-types";
+import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import { generateRouteTree } from "../../utils/generateRouteTree";
+import { useBuilderUIContext } from "../BuilderUIContext";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { SearchableTree } from "../components/SearchableTree/SearchableTree";
+
+import styles from "./RoutesView.module.css";
 
 export interface RoutesViewProps {
   handleRouteSelect?: (route: BuilderRouteNode) => void;
@@ -34,9 +35,8 @@ export function RoutesView({
   handleRouteSelect,
 }: RoutesViewProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const routeList = useRouteList();
   const rootNode = useBuilderNode({ isRoot: true });
-  const { onRouteSelect } = useBuilderUIContext();
+  const { routeList, onRouteSelect } = useBuilderUIContext();
   const [q, setQ] = useState<string>("");
 
   const routeTreeData = useMemo(() => {
@@ -60,12 +60,12 @@ export function RoutesView({
     return result;
   }, [routeList, q]);
 
-  const handleSelect = (selectedProps: any) => {
+  const handleSelect = (selectedProps: BuilderRouteNode): void => {
     onRouteSelect?.(selectedProps);
     handleRouteSelect?.(selectedProps);
   };
 
-  const handleQChange = (q: string) => {
+  const handleQChange = (q: string): void => {
     setQ(q);
   };
 

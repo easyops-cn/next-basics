@@ -20,42 +20,38 @@ jest.mock("../components/SearchableTree/SearchableTree", () => ({
 
 jest.mock("../BuilderUIContext");
 
-(useBuilderUIContext as jest.Mock).mockReturnValue({
-  brickList: [
-    {
-      type: "brick",
-      id: "pkg.brick-01",
-      title: "brick-01",
-    },
-    {
-      type: "customTemplate",
-      id: "tpl-table",
-      title: "tpl-table",
-      nodeId: "T-01",
-    },
-    {
-      type: "customTemplate",
-      id: "tpl-detail-a",
-      title: "tpl-detail-a",
-      nodeId: "T-02",
-    },
-    {
-      type: "customTemplate",
-      id: "tpl-detail-b",
-      title: "tpl-detail-b",
-      nodeId: "T-03",
-    },
-    {
-      type: "customTemplate",
-      id: "tpl-form",
-      title: "tpl-form",
-      nodeId: "T-04",
-    },
-  ],
-});
-
 describe("TemplateList", () => {
   it("should work", async () => {
+    const templateList = [
+      {
+        type: "customTemplate",
+        templateId: "tpl-table",
+        title: "tpl-table",
+        id: "T-01",
+      },
+      {
+        type: "customTemplate",
+        templateId: "tpl-detail-a",
+        title: "tpl-detail-a",
+        id: "T-02",
+      },
+      {
+        type: "customTemplate",
+        templateId: "tpl-detail-b",
+        title: "tpl-detail-b",
+        id: "T-03",
+      },
+      {
+        type: "customTemplate",
+        templateId: "tpl-form",
+        title: "tpl-form",
+        id: "T-04",
+      },
+    ];
+
+    (useBuilderUIContext as jest.Mock).mockReturnValue({
+      templateList,
+    });
     const handleTemplateClick = jest.fn();
     const wrapper = mount(
       <TemplateList handleTemplateSelect={handleTemplateClick} />
@@ -63,16 +59,15 @@ describe("TemplateList", () => {
     expect(wrapper.find(SearchableTree).prop("list").length).toBe(4);
     wrapper.find(SearchableTree).invoke("onQChange")("detail");
     expect(wrapper.find(SearchableTree).prop("list").length).toBe(2);
-    wrapper.find(SearchableTree).invoke("onSelect")({
-      type: "customTemplate",
-      id: "tpl-form",
-      title: "tpl-form",
-      nodeId: "T-04",
+    wrapper.find(SearchableTree).invoke("onSelect")(templateList[0]);
+    expect(handleTemplateClick).toBeCalledWith(templateList[0]);
+  });
+
+  it("should work for empty template", async () => {
+    (useBuilderUIContext as jest.Mock).mockReturnValue({
+      someKey: "someValue",
     });
-    expect(handleTemplateClick).toBeCalledWith({
-      type: "custom-template",
-      id: "T-04",
-      templateId: "tpl-form",
-    });
+    const wrapper = mount(<TemplateList />);
+    expect(wrapper.find(SearchableTree).prop("list").length).toBe(0);
   });
 });
