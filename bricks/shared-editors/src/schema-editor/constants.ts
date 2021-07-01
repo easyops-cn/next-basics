@@ -1,4 +1,6 @@
-export const titleList: Array<{ title: string; width?: number | string }> = [
+import { EditorTitleProps } from "./interfaces";
+
+export const titleList: EditorTitleProps[] = [
   { title: "Name" },
   { title: "Required", width: "150px" },
   { title: "Type" },

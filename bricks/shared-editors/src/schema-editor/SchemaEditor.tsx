@@ -2,9 +2,11 @@ import React, { forwardRef, useMemo, useState } from "react";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { Button } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import { get } from "lodash";
 import { SchemaItem } from "./components/schema-item/SchemaItem";
 import { AddPropertyModal } from "./components/add-property-modal/AddPropertyModal";
 import { titleList } from "./constants";
+import { getGridTemplateColumns, calcItemPosition } from "./processor";
 import styles from "./SchemaEditor.module.css";
 
 export type SchemaType = "string" | "number" | "boolean" | "object" | "array";
@@ -14,6 +16,7 @@ export interface SchemaItemProperty {
   required?: boolean;
   type: SchemaType;
   description?: string;
+  fields?: SchemaItemProperty[];
 }
 
 export interface SchemaEditorProps extends FormItemWrapperProps {
@@ -31,8 +34,7 @@ export const SchemaEditorWrapper = forwardRef<
   );
 
   const gridTemplateColumns = useMemo(
-    () =>
-      titleList.reduce((str, item) => (str += (item.width ?? "1fr") + " "), ""),
+    () => getGridTemplateColumns(titleList),
     []
   );
 
@@ -40,19 +42,43 @@ export const SchemaEditorWrapper = forwardRef<
     setVisible(true);
   };
 
-  const handleAdd = (data: SchemaItemProperty): void => {
-    setPropertyList((list) => [...list, data]);
+  const handleAdd = (data: SchemaItemProperty, traceId?: string): void => {
+    if (!traceId) {
+      const list = [...propertyList, data];
+      setPropertyList(list);
+      props.onChange?.(list);
+    } else {
+      const path = calcItemPosition(traceId.split("-"));
+
+      const find: SchemaItemProperty = get(propertyList, path);
+      find.fields = find.fields || [];
+      find.fields.push(data);
+      setPropertyList(propertyList);
+      props.onChange?.(propertyList);
+    }
   };
 
-  const handleEdit = (data: SchemaItemProperty, index: number): void => {
-    setPropertyList((list) => {
-      list[index] = data;
-      return [...list];
-    });
+  const handleEdit = (data: SchemaItemProperty, traceId: string): void => {
+    const path = calcItemPosition(traceId.split("-"));
+    const find = get(propertyList, path);
+    Object.assign(find, data);
+    setPropertyList(propertyList);
+    props.onChange?.(propertyList);
   };
 
-  const handleRemove = (index: number): void => {
-    setPropertyList((list) => list.filter((_, i) => i !== index));
+  const handleRemove = (traceId: string): void => {
+    const path = calcItemPosition(traceId.split("-"));
+
+    if (path.length === 1) {
+      const list = propertyList.filter((_, i) => i !== Number(path[0]));
+      setPropertyList(list);
+      props?.onChange(list);
+    } else {
+      const parents = get(propertyList, path.slice(0, -1));
+      parents.splice(Number(path.pop()), 1);
+      setPropertyList(propertyList);
+      props?.onChange(propertyList);
+    }
   };
 
   return (
@@ -69,12 +95,15 @@ export const SchemaEditorWrapper = forwardRef<
               className={styles.schemaItem}
               style={{ gridTemplateColumns: gridTemplateColumns }}
               key={index}
+              trackId={String(index)}
               name={item.name}
               required={item.required}
               description={item.description}
               type={item.type}
-              onEdit={(data) => handleEdit(data, index)}
-              onRemove={() => handleRemove(index)}
+              fields={item.fields}
+              onEdit={handleEdit}
+              onRemove={handleRemove}
+              onCreate={handleAdd}
             />
           ))}
         </div>
@@ -88,7 +117,7 @@ export const SchemaEditorWrapper = forwardRef<
       <AddPropertyModal
         visible={visible}
         onClose={() => setVisible(false)}
-        onSubmit={handleAdd}
+        onSubmit={(data) => handleAdd(data)}
       />
     </>
   );

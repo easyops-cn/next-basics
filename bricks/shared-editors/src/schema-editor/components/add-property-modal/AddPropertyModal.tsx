@@ -4,10 +4,16 @@ import { schemaTypeList } from "../../constants";
 import { SchemaItemProperty } from "../../SchemaEditor";
 
 export interface AddPropertyModalProps {
+  trackId?: string;
   visible: boolean;
   onClose: () => void;
-  onSubmit?: (value: SchemaItemProperty) => void;
+  onSubmit?: (
+    value: SchemaItemProperty,
+    trackId: string,
+    isEdit?: boolean
+  ) => void;
   initValue?: unknown;
+  isEdit?: boolean;
 }
 
 export function AddPropertyModal({
@@ -15,6 +21,8 @@ export function AddPropertyModal({
   onClose,
   onSubmit,
   initValue,
+  trackId,
+  isEdit,
 }: AddPropertyModalProps): React.ReactElement {
   const [form] = Form.useForm();
 
@@ -32,7 +40,7 @@ export function AddPropertyModal({
   };
 
   const handleFinish = (values: SchemaItemProperty): void => {
-    onSubmit?.(values);
+    onSubmit?.(values, trackId, isEdit);
     handleClose();
   };
 
