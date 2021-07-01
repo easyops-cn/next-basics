@@ -195,44 +195,6 @@ const mockGetFeatureFlags = jest.fn();
 const { GetBrickLibrary } = require("./GetBrickLibrary");
 
 describe("GetBrickLibrary", () => {
-  /* beforeEach(() => {
-    (InstanceApi_postSearchV3 as jest.Mock)
-      .mockResolvedValueOnce({
-        list: [
-          {
-            instanceId: "a",
-            templateId: "tpl-a",
-            id: "P-01",
-          },
-          {
-            instanceId: "b",
-            templateId: "tpl-b",
-            id: "P-02",
-          },
-        ],
-      })
-      .mockResolvedValueOnce({
-        list: [
-          {
-            id: "installed-snippet-a",
-            text: {
-              zh: "片段 A",
-              en: "Snippet A",
-            },
-            category: "layout",
-            thumbnail: "url-1",
-            bricks: [],
-          },
-          {
-            id: "installed-snippet-b",
-            category: "layout",
-            thumbnail: "url-2",
-            bricks: [],
-          },
-        ],
-      });
-  }); */
-
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -252,6 +214,8 @@ describe("GetBrickLibrary", () => {
         Object {
           "category": "button",
           "description": "一个普通的按钮",
+          "editor": undefined,
+          "editorProps": undefined,
           "icon": Object {
             "lib": "antd",
             "type": "box",

@@ -35,6 +35,7 @@ import {
   SnippetNodeDetail,
   SnippetNodeInstance,
   EventDetailOfSnippetApplyStored,
+  SharedEditorConf,
 } from "@next-core/editor-bricks-helper";
 import {
   BrickOptionItem,
@@ -83,6 +84,9 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property({ attribute: false })
   brickList: BrickOptionItem[];
+
+  @property({ attribute: false })
+  editorList: SharedEditorConf[];
 
   @property({ attribute: false })
   providerList: string[];
@@ -541,6 +545,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 dataSource={this.dataSource}
                 routeList={this.routeList}
                 brickList={this.brickList}
+                editorList={this.editorList}
                 providerList={this.providerList}
                 storyList={this.storyList}
                 processing={this.processing}

@@ -17,6 +17,8 @@ export interface BrickLibraryItem {
   description?: string;
   icon?: MenuIcon;
   thumbnail?: string;
+  editor?: string;
+  editorProps?: Record<string, unknown>;
   nodeId?: string;
 }
 
@@ -44,7 +46,15 @@ export async function GetBrickLibrary({
       }),
       installedBricksEnabled
         ? InstanceApi_postSearchV3("INSTALLED_BRICK_ATOM@EASYOPS", {
-            fields: ["id", "text", "category", "description", "icon"],
+            fields: [
+              "id",
+              "text",
+              "category",
+              "description",
+              "icon",
+              "editor",
+              "editorProps",
+            ],
             page_size: 3000,
           })
         : { list: [] },
@@ -121,6 +131,8 @@ export async function GetBrickLibrary({
                     category: installedBrick.category,
                     description: i18nText(installedBrick.description),
                     icon: installedBrick.icon,
+                    editor: installedBrick.editor,
+                    editorProps: installedBrick.editorProps,
                   }
                 : {
                     title: getBrickLastName(name),
