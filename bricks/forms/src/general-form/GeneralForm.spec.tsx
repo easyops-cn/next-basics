@@ -1,11 +1,19 @@
 import React from "react";
 import { shallow } from "enzyme";
+import { Form } from "@ant-design/compatible";
+import moment from "moment";
 import { GeneralForm, LegacyGeneralForm } from "./GeneralForm";
 
+jest.spyOn(Form, "createFormField");
+
 describe("GeneralForm", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should work", () => {
     const formElement = {} as any;
-    const wrapper = shallow(
+    shallow(
       <GeneralForm
         formElement={formElement}
         layout="inline"
@@ -13,16 +21,27 @@ describe("GeneralForm", () => {
           username: "hello",
           date: "2019-10-01",
           time: "09:14:30",
-          password: "world"
+          emptyDateTime: null,
+          password: "world",
         }}
         valueTypes={{
           date: "moment",
           time: "moment|HH:mm:ss",
-          password: ""
+          emptyDateTime: "moment",
+          password: "",
         }}
       />
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(Form.createFormField).toBeCalledTimes(5);
+    expect(Form.createFormField).toHaveBeenNthCalledWith(1, { value: "hello" });
+    expect(Form.createFormField).toHaveBeenNthCalledWith(2, {
+      value: moment("2019-10-01", undefined),
+    });
+    expect(Form.createFormField).toHaveBeenNthCalledWith(3, {
+      value: moment("09:14:30", "HH:mm:ss"),
+    });
+    expect(Form.createFormField).toHaveBeenNthCalledWith(4, { value: null });
+    expect(Form.createFormField).toHaveBeenNthCalledWith(5, { value: "world" });
   });
 });
 
@@ -36,7 +55,7 @@ describe("LegacyGeneralForm", () => {
         form={formUtils}
         layout="inline"
         values={{
-          username: "hello"
+          username: "hello",
         }}
       />
     );
