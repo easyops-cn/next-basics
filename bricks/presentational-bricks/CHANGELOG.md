@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.189.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.189.0...@next-bricks/presentational-bricks@1.189.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* **brick-timeline:** change white-space style to pre, to preserve spaces and line breaks ([0fa3eb7](https://github.com/easyops-cn/next-basics/commit/0fa3eb71f2843f94ae77afd3ae16009a31a9e7b9))
+
+
+
+
+
 # [1.189.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.188.1...@next-bricks/presentational-bricks@1.189.0) (2021-06-24)
 
 

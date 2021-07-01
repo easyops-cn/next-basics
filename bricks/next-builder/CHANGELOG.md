@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.1...@next-bricks/next-builder@1.59.2) (2021-07-01)
+
+
+### Bug Fixes
+
+* **builder:** refine snippet select ([2639a36](https://github.com/easyops-cn/next-basics/commit/2639a36f45432406b837f734fad825a2a91513c8))
+
+
+
+
+
 ## [1.59.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.0...@next-bricks/next-builder@1.59.1) (2021-06-30)
 
 

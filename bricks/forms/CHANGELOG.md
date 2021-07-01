@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.173.0...@next-bricks/forms@1.174.0) (2021-07-01)
+
+
+### Bug Fixes
+
+* **form:** do not create moment for nil values ([6901927](https://github.com/easyops-cn/next-basics/commit/69019279475dc4467ca532eff783a4549cea49b9))
+
+
+### Features
+
+* **general-input:** add trim property ([9d27801](https://github.com/easyops-cn/next-basics/commit/9d27801aecd8f743023ec13ea33a652897bb4c5e))
+* **general-textarea:** add readOnly property ([e172654](https://github.com/easyops-cn/next-basics/commit/e172654e8e56e36070582e235aaf45c8dd9278ad))
+
+
+
+
+
 # [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.172.0...@next-bricks/forms@1.173.0) (2021-06-28)
 
 
