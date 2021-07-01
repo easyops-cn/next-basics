@@ -58,17 +58,20 @@ export const GeneralFormGen = (name?: string): ConnectedForm => {
       return props.values
         ? Object.entries(props.values).reduce<Record<string, any>>(
             (acc, [key, value]) => {
-              const valueType = props.valueTypes && props.valueTypes[key];
-              if (typeof valueType === "string") {
-                // The value of date-picker must be a moment object.
-                const matches = valueType.match(/^moment(?:\|(.+))?$/);
-                if (matches) {
-                  value = moment(value, matches[1]);
+              let newValue = value;
+              if (value) {
+                const valueType = props.valueTypes?.[key];
+                if (typeof valueType === "string") {
+                  // The value of date-picker must be a moment object.
+                  const matches = valueType.match(/^moment(?:\|(.+))?$/);
+                  if (matches) {
+                    newValue = moment(value, matches[1]);
+                  }
                 }
               }
 
               acc[key] = Form.createFormField({
-                value,
+                value: newValue,
               });
               return acc;
             },
