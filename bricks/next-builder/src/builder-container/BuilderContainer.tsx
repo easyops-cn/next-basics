@@ -42,11 +42,13 @@ import styles from "./BuilderContainer.module.css";
 export interface BuilderContainerProps extends BuilderContextMenuProps {
   appId?: string;
   dataSource?: BuilderRouteOrBrickNode[];
-  routeList?: BuilderRouteNode[];
   brickList?: BrickOptionItem[];
   editorList?: SharedEditorConf[];
   providerList?: string[];
   storyList?: Story[];
+  routeList?: BuilderRouteNode[];
+  templateList?: BuilderCustomTemplateNode[];
+  snippetList?: BuilderSnippetNode[];
   processing?: boolean;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
@@ -84,11 +86,13 @@ export function LegacyBuilderContainer(
   {
     appId,
     dataSource,
-    routeList,
     brickList,
     editorList,
     providerList,
     storyList,
+    routeList,
+    templateList,
+    snippetList,
     processing,
     initialFullscreen,
     initialToolboxTab,
@@ -227,10 +231,6 @@ export function LegacyBuilderContainer(
   }, [editorList, manager]);
 
   React.useEffect(() => {
-    manager.routeListInit(routeList);
-  }, [routeList, manager]);
-
-  React.useEffect(() => {
     manager.storyListInit(storyList);
   }, [storyList, manager]);
 
@@ -315,6 +315,9 @@ export function LegacyBuilderContainer(
         brickList,
         providerList,
         storyList,
+        routeList,
+        templateList,
+        snippetList,
         processing,
         fullscreen,
         setFullscreen,

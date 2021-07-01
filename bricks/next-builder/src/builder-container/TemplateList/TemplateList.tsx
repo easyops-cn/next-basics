@@ -1,13 +1,12 @@
 import React, { useMemo, useState } from "react";
-import { BuilderCustomTemplateNode } from "@next-core/brick-types";
 import { useTranslation } from "react-i18next";
 import { BlockOutlined } from "@ant-design/icons";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import { BuilderCustomTemplateNode } from "@next-core/brick-types";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { SearchableTree } from "../components/SearchableTree/SearchableTree";
 import { searchList } from "../utils/utils";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import { BrickOptionItem } from "../interfaces";
 
 import styles from "./TemplateList.module.css";
 
@@ -19,7 +18,7 @@ export function TemplateList({
   handleTemplateSelect,
 }: TemplateListProps): React.ReactElement {
   const rootNode = useBuilderNode({ isRoot: true });
-  const { brickList, onTemplateSelect } = useBuilderUIContext();
+  const { templateList, onTemplateSelect } = useBuilderUIContext();
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const [q, setQ] = useState<string>("");
 
@@ -27,29 +26,22 @@ export function TemplateList({
     setQ(q);
   };
 
-  const templateList = useMemo(() => {
-    if (!brickList) {
+  const formattedTemplateList = useMemo(() => {
+    if (!templateList) {
       return [];
     }
-    return brickList
-      .filter((v) => v.type === "customTemplate")
-      .map((v) => ({
-        ...v,
-        key: v.nodeId,
-      }));
-  }, [brickList]);
+    return templateList.map((v) => ({
+      ...v,
+      key: v.id,
+    }));
+  }, [templateList]);
 
   const treeData = useMemo(
-    () => searchList(templateList, q, "title"),
-    [templateList, q]
+    () => searchList(formattedTemplateList, q, "title"),
+    [formattedTemplateList, q]
   );
 
-  const handleSelect = (selectedProps: BrickOptionItem): void => {
-    const node: BuilderCustomTemplateNode = {
-      type: "custom-template",
-      id: selectedProps.nodeId,
-      templateId: selectedProps.id,
-    };
+  const handleSelect = (node: BuilderCustomTemplateNode): void => {
     onTemplateSelect?.(node);
     handleTemplateSelect?.(node);
   };
