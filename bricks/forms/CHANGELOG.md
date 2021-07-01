@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.174.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.174.0...@next-bricks/forms@1.174.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* **forms:** forms.user-or-user-group-select change userGroup, pageSize select no show ([21038c9](https://github.com/easyops-cn/next-basics/commit/21038c9855cadd6dd6ab38f37b311cad83a7c155))
+
+
+
+
+
 # [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.173.0...@next-bricks/forms@1.174.0) (2021-07-01)
 
 
