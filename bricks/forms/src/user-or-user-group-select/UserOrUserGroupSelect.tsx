@@ -625,6 +625,7 @@ export function LegacyUserSelectFormItem(
         title={title}
         onSelected={handleModalSelected}
         onCancel={closeModal}
+        showSizeChanger={true}
         {...(modalObjectId === "USER" && props.hideInvalidUser
           ? {
               presetConfigs: {
