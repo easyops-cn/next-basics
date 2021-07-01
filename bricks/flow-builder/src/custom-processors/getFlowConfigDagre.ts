@@ -8,7 +8,6 @@ export function getFlowConfigDagre(flowConfigList: FlowConfig[]): any {
     type: "node",
     flowType: "__EasyopsFlowConfigStart__",
     action: null,
-    children: [],
   };
   const edges: Edge[] = [];
   const cloneFlowConfigList = cloneDeep(flowConfigList);
@@ -23,9 +22,6 @@ export function getFlowConfigDagre(flowConfigList: FlowConfig[]): any {
         target: config.id,
         type: "link",
       });
-      config.parents = Array.isArray(config.parents)
-        ? config.parents.concat(root.id)
-        : [root.id];
     } else {
       config.parents.forEach((parent) => {
         if (configIds.includes(parent)) {

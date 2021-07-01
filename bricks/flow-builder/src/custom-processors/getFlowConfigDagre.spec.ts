@@ -13,7 +13,6 @@ const root: FlowConfig = {
   type: "node",
   flowType: "__EasyopsFlowConfigStart__",
   action: null,
-  children: [],
 };
 
 const flowConfig = [
@@ -65,11 +64,9 @@ describe("getFlowConfigDagre", () => {
           },
           flowType: "function",
           type: "node",
-          parents: ["__EasyopsFlowConfigRoot__"],
         },
         {
           id: "b",
-          parents: ["__EasyopsFlowConfigRoot__"],
           action: {
             type: "function",
           },
