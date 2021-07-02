@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.189.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.189.1...@next-bricks/presentational-bricks@1.189.2) (2021-07-02)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** brick-rate add value property ([7cbc46b](https://github.com/easyops-cn/next-basics/commit/7cbc46bea19e00ae3f7d089ec36327760db38d80))
+
+
+
+
+
 ## [1.189.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.189.0...@next-bricks/presentational-bricks@1.189.1) (2021-07-01)
 
 
