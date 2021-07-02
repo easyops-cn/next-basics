@@ -105,7 +105,7 @@ describe("AdvancedBrickLibrary", () => {
   it("should show empty if no data", () => {
     (useBuilderUIContext as jest.Mock).mockReturnValue({
       appId: "my-app",
-      brickList: [],
+      brickList: undefined,
     });
     const wrapper = shallow(<AdvancedBrickLibrary />);
     wrapper.find(SearchComponent).invoke("onSearch")("chart");

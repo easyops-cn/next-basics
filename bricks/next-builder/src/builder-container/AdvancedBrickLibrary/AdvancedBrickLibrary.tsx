@@ -51,7 +51,7 @@ export function LegacyAdvancedBrickLibrary(
     return filterBricks({
       q,
       category,
-      brickList,
+      brickList: brickList ?? [],
       storyList,
       appId,
       rootNode,
