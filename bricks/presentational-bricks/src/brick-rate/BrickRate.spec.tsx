@@ -1,6 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { BrickRate } from "./BrickRate";
+import { MenuIcon } from "@next-core/brick-types";
 describe("BrickRate", () => {
   it("should work", () => {
     const wrapper = mount(<BrickRate />);
@@ -37,5 +38,38 @@ describe("BrickRate", () => {
     wrapper.find(BrickRate).invoke("onChange")(3 as any);
     await (global as any).flushPromises();
     expect(handleChange).toHaveBeenCalledWith(3);
+  });
+  it("should work width rateIcon", async () => {
+    const configProps = {
+      count: 5,
+      disabled: false,
+      value: 1,
+      allowHalf: true,
+      rateStyle: {
+        fontSize: "16px",
+        color: "red",
+      },
+      rateIcon: {
+        icon: "heart",
+        lib: "antd",
+      },
+    };
+    const wrapper = mount(
+      <BrickRate
+        count={configProps.count}
+        disabled={configProps.disabled}
+        style={configProps.rateStyle}
+        allowHalf={configProps.allowHalf}
+        rateIcon={configProps.rateIcon as MenuIcon}
+      />
+    );
+
+    const saveButtonIcon = wrapper.find("GeneralIcon").at(0);
+    expect(saveButtonIcon.prop("icon")).toEqual(
+      expect.objectContaining({
+        icon: "heart",
+        lib: "antd",
+      })
+    );
   });
 });

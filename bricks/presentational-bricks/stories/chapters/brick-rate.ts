@@ -23,7 +23,7 @@ export const BrickRateStory: Story = {
       brick: "presentational-bricks.brick-rate",
       properties: {
         count: 5,
-        defaultValue: 3.5,
+        value: 3.5,
         allowHalf: true,
         disabled: false,
         rateStyle: {
@@ -39,7 +39,7 @@ export const BrickRateStory: Story = {
       brick: "presentational-bricks.brick-rate",
       properties: {
         count: 5,
-        defaultValue: 3.5,
+        value: 3.5,
         allowHalf: true,
         disabled: true,
         type: "A",
@@ -56,7 +56,7 @@ export const BrickRateStory: Story = {
       brick: "presentational-bricks.brick-rate",
       properties: {
         count: 3,
-        defaultValue: 3,
+        value: 3,
         allowHalf: true,
         disabled: true,
         rateIcon: {
