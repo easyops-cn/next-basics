@@ -1,3 +1,4 @@
+import { RequestCustomOptions } from "@next-core/brick-http";
 import { developHelper, getRuntime, i18nText } from "@next-core/brick-kit";
 import { BrickConf, MenuIcon } from "@next-core/brick-types";
 import { createProviderClass, pipes } from "@next-core/brick-utils";
@@ -27,9 +28,10 @@ export interface GetBrickLibraryParams {
   projectId: string;
 }
 
-export async function GetBrickLibrary({
-  projectId,
-}: GetBrickLibraryParams): Promise<BrickLibraryItem[]> {
+export async function GetBrickLibrary(
+  { projectId }: GetBrickLibraryParams,
+  options?: RequestCustomOptions
+): Promise<BrickLibraryItem[]> {
   const flags = getRuntime().getFeatureFlags();
   const installedBricksEnabled = flags["next-builder-installed-bricks"];
   const installedSnippetsEnabled = flags["next-builder-installed-snippets"];
@@ -37,63 +39,78 @@ export async function GetBrickLibrary({
 
   const [customTemplates, installedBricks, installedSnippets, hostedSnippets] =
     await Promise.all([
-      InstanceApi_postSearchV3("STORYBOARD_TEMPLATE", {
-        fields: ["templateId", "id", "layerType"],
-        page_size: 3000,
-        query: {
-          "project.instanceId": projectId,
+      InstanceApi_postSearchV3(
+        "STORYBOARD_TEMPLATE",
+        {
+          fields: ["templateId", "id", "layerType"],
+          page_size: 3000,
+          query: {
+            "project.instanceId": projectId,
+          },
         },
-      }),
+        options
+      ),
       installedBricksEnabled
-        ? InstanceApi_postSearchV3("INSTALLED_BRICK_ATOM@EASYOPS", {
-            fields: [
-              "id",
-              "text",
-              "category",
-              "description",
-              "icon",
-              "editor",
-              "editorProps",
-            ],
-            page_size: 3000,
-          })
+        ? InstanceApi_postSearchV3(
+            "INSTALLED_BRICK_ATOM@EASYOPS",
+            {
+              fields: [
+                "id",
+                "text",
+                "category",
+                "description",
+                "icon",
+                "editor",
+                "editorProps",
+              ],
+              page_size: 3000,
+            },
+            options
+          )
         : { list: [] },
       installedBricksEnabled || installedSnippetsEnabled
-        ? InstanceApi_postSearchV3("INSTALLED_BRICK_SNIPPET@EASYOPS", {
-            fields: [
-              "id",
-              "text",
-              "category",
-              "description",
-              "thumbnail",
-              "bricks",
-              "layerType",
-            ],
-            page_size: 3000,
-          })
+        ? InstanceApi_postSearchV3(
+            "INSTALLED_BRICK_SNIPPET@EASYOPS",
+            {
+              fields: [
+                "id",
+                "text",
+                "category",
+                "description",
+                "thumbnail",
+                "bricks",
+                "layerType",
+              ],
+              page_size: 3000,
+            },
+            options
+          )
         : { list: [] },
       installedBricksEnabled || hostedSnippetsEnabled
-        ? InstanceGraphApi_traverseGraphV2({
-            child: [
-              {
-                child: [
-                  {
-                    depth: -1,
-                    parentOut: "children",
-                    select_fields: ["*"],
-                  },
-                ],
-                depth: -1,
-                parentOut: "children",
-                select_fields: ["*"],
+        ? InstanceGraphApi_traverseGraphV2(
+            {
+              child: [
+                {
+                  child: [
+                    {
+                      depth: -1,
+                      parentOut: "children",
+                      select_fields: ["*"],
+                    },
+                  ],
+                  depth: -1,
+                  parentOut: "children",
+                  select_fields: ["*"],
+                },
+              ],
+              object_id: "STORYBOARD_SNIPPET",
+              query: {
+                "project.instanceId": projectId,
               },
-            ],
-            object_id: "STORYBOARD_SNIPPET",
-            query: {
-              "project.instanceId": projectId,
+              select_fields: ["*"],
             },
-            select_fields: ["*"],
-          })
+            options
+          )
         : {
             topic_vertices: [],
             vertices: [],
