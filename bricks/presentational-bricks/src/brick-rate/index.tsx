@@ -15,6 +15,7 @@ import { BrickRate } from "./BrickRate";
  * @history
  * 1.130.0: 新增构件 `presentational-bricks.brick-rate`
  * 1.130.1: 构件功能优化
+ * 1.189.2: 可通过value属性，渲染构件值
  * @docKind brick
  * @noInheritDoc
  */
@@ -30,10 +31,18 @@ export class BrickRateElement extends UpdatingElement {
   /**
    * @kind number
    * @required false
-   * @default -
+   * @default 0
    * @description 默认等级
    */
-  @property({ attribute: false }) defaultValue: number;
+  @property({ attribute: false }) defaultValue = 0;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 当前等级值
+   */
+  @property({ attribute: false }) value: number;
 
   /**
    * @kind boolean
@@ -56,7 +65,7 @@ export class BrickRateElement extends UpdatingElement {
    * @kind `any[]`
    * @required false
    * @default  -
-   * @description 等级颜色分类，每一级别对应的颜色，只在`disabled:true`的情况下显示
+   * @description 等级颜色分类，每一级别对应的颜色
    */
   @property({ attribute: false }) colors: any[];
 
@@ -117,6 +126,7 @@ export class BrickRateElement extends UpdatingElement {
             rateStyle={this.rateStyle}
             rateIcon={this.rateIcon}
             colors={this.colors}
+            value={this.value}
           />
         </BrickWrapper>,
         this
