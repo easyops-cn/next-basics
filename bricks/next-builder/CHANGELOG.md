@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.3...@next-bricks/next-builder@1.59.4) (2021-07-02)
+
+
+### Bug Fixes
+
+* **get-brick-library:** support http options ([759d00c](https://github.com/easyops-cn/next-basics/commit/759d00c9d7c59bf3a6561dc8ca741032e5645fd4))
+
+
+
+
+
 ## [1.59.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.2...@next-bricks/next-builder@1.59.3) (2021-07-01)
 
 
