@@ -1,7 +1,19 @@
-import React, { useEffect } from "react";
-import { Modal, Form, Input, Checkbox, Select } from "antd";
-import { schemaTypeList } from "../../constants";
-import { SchemaItemProperty } from "../../SchemaEditor";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { NS_SHARED_EDITORS, K } from "../../../i18n/constants";
+import {
+  Modal,
+  Form,
+  Input,
+  Checkbox,
+  Select,
+  AutoComplete,
+  Row,
+  Col,
+} from "antd";
+import { innerTypeList } from "../../constants";
+import { SchemaItemProperty, AddedSchemaFormItem } from "../../interfaces";
+import { processItemInitValue, processItemData } from "../../processor";
 
 export interface AddPropertyModalProps {
   trackId?: string;
@@ -12,7 +24,7 @@ export interface AddPropertyModalProps {
     trackId: string,
     isEdit?: boolean
   ) => void;
-  initValue?: unknown;
+  initValue?: SchemaItemProperty;
   isEdit?: boolean;
 }
 
@@ -24,10 +36,17 @@ export function AddPropertyModal({
   trackId,
   isEdit,
 }: AddPropertyModalProps): React.ReactElement {
+  const { t } = useTranslation(NS_SHARED_EDITORS);
   const [form] = Form.useForm();
+  const [nameRequired, setNameRequired] = useState<boolean>(true);
 
   useEffect(() => {
-    form.setFieldsValue(initValue);
+    form.setFieldsValue(processItemInitValue(initValue));
+    if (initValue?.ref) {
+      setNameRequired(false);
+    } else {
+      setNameRequired(true);
+    }
   }, [form, initValue]);
 
   const handleOk = (): void => {
@@ -39,8 +58,8 @@ export function AddPropertyModal({
     onClose?.();
   };
 
-  const handleFinish = (values: SchemaItemProperty): void => {
-    onSubmit?.(values, trackId, isEdit);
+  const handleFinish = (values: AddedSchemaFormItem): void => {
+    onSubmit?.(processItemData(values), trackId, isEdit);
     handleClose();
   };
 
@@ -57,21 +76,61 @@ export function AddPropertyModal({
         onFinish={handleFinish}
         layout="vertical"
       >
-        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+        <Form.Item
+          name="name"
+          label="Name"
+          rules={[{ required: nameRequired }]}
+        >
           <Input />
         </Form.Item>
+
         <Form.Item name="required" label="Required" valuePropName="checked">
           <Checkbox />
         </Form.Item>
-        <Form.Item name="type" label="Type" rules={[{ required: true }]}>
-          <Select>
-            {schemaTypeList.map((type) => (
-              <Select.Option key={type} value={type}>
-                {type}
-              </Select.Option>
-            ))}
-          </Select>
+
+        <Form.Item label="Type">
+          <Row gutter={8}>
+            <Col span={12}>
+              <Form.Item name="origin" initialValue="normal">
+                <Select>
+                  <Select.Option key="normal" value="normal">
+                    {t(K.SCHEMA_ITEM_NORMAL)}
+                  </Select.Option>
+                  <Select.Option key="reference" value="reference">
+                    {t(K.SCHEMA_ITEM_REF)}
+                  </Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                noStyle
+                shouldUpdate={(prevValues, currentValues) =>
+                  prevValues.origin !== currentValues.origin
+                }
+              >
+                {({ getFieldValue }) =>
+                  getFieldValue("origin") === "normal" ? (
+                    <Form.Item name="type" rules={[{ required: true }]}>
+                      <AutoComplete>
+                        {innerTypeList.map((type) => (
+                          <AutoComplete.Option key={type} value={type}>
+                            {type}
+                          </AutoComplete.Option>
+                        ))}
+                      </AutoComplete>
+                    </Form.Item>
+                  ) : (
+                    <Form.Item name="ref" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  )
+                }
+              </Form.Item>
+            </Col>
+          </Row>
         </Form.Item>
+
         <Form.Item name="description" label="description">
           <Input.TextArea />
         </Form.Item>

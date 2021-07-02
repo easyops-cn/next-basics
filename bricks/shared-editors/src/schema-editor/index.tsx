@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
-import { SchemaEditor, SchemaItemProperty } from "./SchemaEditor";
+import { SchemaEditor } from "./SchemaEditor";
+import { SchemaRootNodeProperty } from "./interfaces";
 
 /**
  * @id shared-editors.schema-editor
@@ -23,7 +24,7 @@ export class SchemaEditorElement extends FormItemElement {
   @property({
     attribute: false,
   })
-  value: SchemaItemProperty[];
+  value: SchemaRootNodeProperty;
 
   connectedCallback(): void {
     // Don't override user's style settings.

@@ -1,27 +1,23 @@
-import React, { forwardRef, useMemo, useState } from "react";
+/* istanbul ignore file */
+//  Ignore tests temporarily, watting for production confirmation
+import React, { forwardRef, useEffect, useMemo, useState } from "react";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { Button } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
-import { get } from "lodash";
+import { get, set } from "lodash";
 import { SchemaItem } from "./components/schema-item/SchemaItem";
 import { AddPropertyModal } from "./components/add-property-modal/AddPropertyModal";
 import { titleList } from "./constants";
-import { getGridTemplateColumns, calcItemPosition } from "./processor";
+import { SchemaItemProperty, SchemaRootNodeProperty } from "./interfaces";
+import {
+  getGridTemplateColumns,
+  calcItemPosition,
+  isTypeChange,
+  processFormInitvalue,
+  processFormData,
+} from "./processor";
 import styles from "./SchemaEditor.module.css";
-
-export type SchemaType = "string" | "number" | "boolean" | "object" | "array";
-
-export interface SchemaItemProperty {
-  name: string;
-  required?: boolean;
-  type: SchemaType;
-  description?: string;
-  fields?: SchemaItemProperty[];
-}
-
 export interface SchemaEditorProps extends FormItemWrapperProps {
-  value: SchemaItemProperty[];
-  onChange?: (data: SchemaItemProperty[]) => void;
+  value: SchemaRootNodeProperty;
+  onChange?: (data: SchemaRootNodeProperty) => void;
 }
 
 export const SchemaEditorWrapper = forwardRef<
@@ -29,56 +25,68 @@ export const SchemaEditorWrapper = forwardRef<
   SchemaEditorProps
 >(function LegacySchemaEditor(props, ref): React.ReactElement {
   const [visible, setVisible] = useState(false);
-  const [propertyList, setPropertyList] = useState<SchemaItemProperty[]>(
-    props.value
+  const [property, setProperty] = useState<SchemaItemProperty>(
+    processFormInitvalue({ name: props.name, ...props.value })
   );
+
+  useEffect(() => {
+    setProperty(processFormInitvalue({ name: props.name, ...props.value }));
+  }, [props.name, props.value]);
 
   const gridTemplateColumns = useMemo(
     () => getGridTemplateColumns(titleList),
     []
   );
 
-  const handleClick = (): void => {
-    setVisible(true);
-  };
-
   const handleAdd = (data: SchemaItemProperty, traceId?: string): void => {
-    if (!traceId) {
-      const list = [...propertyList, data];
-      setPropertyList(list);
-      props.onChange?.(list);
-    } else {
-      const path = calcItemPosition(traceId.split("-"));
+    const mutableProps = { ...property };
 
-      const find: SchemaItemProperty = get(propertyList, path);
+    if (traceId === "root") {
+      mutableProps.fields = mutableProps.fields || [];
+      mutableProps.fields.push(data);
+    } else {
+      const path = calcItemPosition(traceId);
+
+      const find: SchemaItemProperty = get(mutableProps, path);
       find.fields = find.fields || [];
       find.fields.push(data);
-      setPropertyList(propertyList);
-      props.onChange?.(propertyList);
     }
+
+    setProperty(mutableProps);
+    props.onChange?.(processFormData(mutableProps));
   };
 
   const handleEdit = (data: SchemaItemProperty, traceId: string): void => {
-    const path = calcItemPosition(traceId.split("-"));
-    const find = get(propertyList, path);
-    Object.assign(find, data);
-    setPropertyList(propertyList);
-    props.onChange?.(propertyList);
+    let mutableProps = { ...property };
+
+    if (traceId === "root") {
+      mutableProps = {
+        ...mutableProps,
+        ...data,
+        fields: isTypeChange(data, mutableProps) ? [] : mutableProps.fields,
+      };
+    } else {
+      const path = calcItemPosition(traceId);
+      const find = get(mutableProps, path);
+      set(mutableProps, path, {
+        ...data,
+        ...(isTypeChange(data, find) ? {} : { fields: find.fields }),
+      });
+    }
+
+    setProperty(mutableProps);
+    props.onChange?.(processFormData(mutableProps));
   };
 
   const handleRemove = (traceId: string): void => {
-    const path = calcItemPosition(traceId.split("-"));
+    const mutableProps = { ...property };
 
-    if (path.length === 1) {
-      const list = propertyList.filter((_, i) => i !== Number(path[0]));
-      setPropertyList(list);
-      props?.onChange(list);
-    } else {
-      const parents = get(propertyList, path.slice(0, -1));
-      parents.splice(Number(path.pop()), 1);
-      setPropertyList(propertyList);
-      props?.onChange(propertyList);
-    }
+    const path = calcItemPosition(traceId);
+
+    const parents = get(mutableProps, path.slice(0, -1));
+    parents.splice(Number(path.pop()), 1);
+    setProperty(mutableProps);
+    props?.onChange(processFormData(mutableProps));
   };
 
   return (
@@ -90,28 +98,16 @@ export const SchemaEditorWrapper = forwardRef<
           ))}
         </div>
         <div className={styles.content}>
-          {propertyList?.map((item, index) => (
-            <SchemaItem
-              className={styles.schemaItem}
-              style={{ gridTemplateColumns: gridTemplateColumns }}
-              key={index}
-              trackId={String(index)}
-              name={item.name}
-              required={item.required}
-              description={item.description}
-              type={item.type}
-              fields={item.fields}
-              onEdit={handleEdit}
-              onRemove={handleRemove}
-              onCreate={handleAdd}
-            />
-          ))}
-        </div>
-        <div>
-          <Button className={styles.iconBtn} type="link" onClick={handleClick}>
-            <PlusCircleOutlined />
-            Property
-          </Button>
+          <SchemaItem
+            className={styles.schemaItem}
+            style={{ gridTemplateColumns: gridTemplateColumns }}
+            itemData={property}
+            trackId="root"
+            hideDeleteBtn={true}
+            onEdit={handleEdit}
+            onRemove={handleRemove}
+            onCreate={handleAdd}
+          />
         </div>
       </div>
       <AddPropertyModal

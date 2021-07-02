@@ -5,13 +5,15 @@ export const titleList: EditorTitleProps[] = [
   { title: "Required", width: "150px" },
   { title: "Type" },
   { title: "Description" },
-  { title: "Setting" },
+  { title: "Setting", width: "100px" },
 ];
 
-export const schemaTypeList = [
+export const innerTypeList = [
   "string",
   "number",
   "boolean",
+  "bool",
+  "int",
+  "int64",
   "object",
-  "array",
 ];

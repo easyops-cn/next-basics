@@ -5,6 +5,7 @@
 
   .title {
     display: grid;
+    gap: 10px;
     height: 40px;
     border-bottom: 1px solid #e8e8e8;
   }
@@ -15,6 +16,7 @@
 
   .schemaItem {
     display: grid;
+    gap: 10px;
   }
 }
 
