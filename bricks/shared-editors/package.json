@@ -25,8 +25,5 @@
     "pack:tar": "npm pack",
     "postpack:tar": "node scripts/rename-tar-package.js"
   },
-  "sideEffects": true,
-  "devDependencies": {
-    "@next-libs/forms": "^2.2.2"
-  }
+  "sideEffects": true
 }

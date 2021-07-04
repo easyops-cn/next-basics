@@ -63,4 +63,4 @@ export class SchemaEditorElement extends FormItemElement {
   }
 }
 
-customElements.define("shared-editors.schema-editor", SchemaEditorElement);
+customElements.define("flow-builder.schema-editor", SchemaEditorElement);

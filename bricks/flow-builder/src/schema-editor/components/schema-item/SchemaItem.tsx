@@ -12,7 +12,7 @@ import editorStyles from "../../SchemaEditor.module.css";
 import { getGridTemplateColumns } from "../../processor";
 import { titleList } from "../../constants";
 import styles from "./SchemaItem.module.css";
-import { K, NS_SHARED_EDITORS } from "../../../i18n/constants";
+import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
 
 export interface SchemaItemProps {
@@ -36,7 +36,7 @@ export function SchemaItem({
   trackId,
   hideDeleteBtn,
 }: SchemaItemProps): React.ReactElement {
-  const { t } = useTranslation(NS_SHARED_EDITORS);
+  const { t } = useTranslation(NS_FLOW_BUILDER);
   const [visible, setVisible] = useState(false);
   const [inintValue, setInitValue] = useState({} as SchemaItemProperty);
   const [isEdit, setEdit] = useState(false);

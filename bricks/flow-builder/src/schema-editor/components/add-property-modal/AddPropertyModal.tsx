@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { NS_SHARED_EDITORS, K } from "../../../i18n/constants";
+import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import {
   Modal,
   Form,
@@ -36,7 +36,7 @@ export function AddPropertyModal({
   trackId,
   isEdit,
 }: AddPropertyModalProps): React.ReactElement {
-  const { t } = useTranslation(NS_SHARED_EDITORS);
+  const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
   const [nameRequired, setNameRequired] = useState<boolean>(true);
 

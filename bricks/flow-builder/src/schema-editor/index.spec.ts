@@ -10,7 +10,7 @@ const unmountComponentAtNode = jest
 
 describe("shared-editors.schema-editor", () => {
   it("should create a custom element", () => {
-    const element = document.createElement("shared-editors.schema-editor");
+    const element = document.createElement("flow-builder.schema-editor");
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
     expect(spyOnRender).toBeCalled();
