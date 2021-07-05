@@ -184,6 +184,15 @@ export class BrickTreeElement extends UpdatingElement {
    */
   @property({ type: Boolean }) defaultExpandAll: boolean;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 是否可取消选择
+   * @group advanced
+   */
+  @property({ attribute: false }) deselectable = true;
+
   connectedCallback(): void {
     this.style.display = "flex";
     this.style.flexDirection = "column";
@@ -235,6 +244,7 @@ export class BrickTreeElement extends UpdatingElement {
             suffixBrick={this.suffixBrick}
             showSpecificationTitleStyle={this.showSpecificationTitleStyle}
             defaultExpandAll={this.defaultExpandAll}
+            deselectable={this.deselectable}
           />
         </BrickWrapper>,
         this

@@ -138,6 +138,7 @@ export interface BrickTreeProps {
   suffixBrick?: { useBrick: UseBrickConf };
   showSpecificationTitleStyle?: boolean;
   defaultExpandAll?: boolean;
+  deselectable?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -155,15 +156,15 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     suffixBrick,
     showSpecificationTitleStyle,
     defaultExpandAll,
+    deselectable,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>();
   const [filterCheckedKeys, setFilterCheckedKeys] = useState<React.Key[]>();
-  const [checkedKeys, setCheckedKeys] =
-    useState<
-      React.Key[] | { checked: React.Key[]; halfChecked: React.Key[] }
-    >();
+  const [checkedKeys, setCheckedKeys] = useState<
+    React.Key[] | { checked: React.Key[]; halfChecked: React.Key[] }
+  >();
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>();
   const [searchValue, setSearchValue] = useState<string>();
   const treeContainerRef = useRef<HTMLDivElement>();
@@ -280,6 +281,10 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       nativeEvent: MouseEvent;
     }
   ) => {
+    if (!deselectable && selectedKeys.length === 0) {
+      return;
+    }
+
     setSelectedKeys(selectedKeys);
     props.onSelect?.(selectedKeys, info);
   };
