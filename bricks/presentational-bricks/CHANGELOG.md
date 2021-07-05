@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.191.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.190.0...@next-bricks/presentational-bricks@1.191.0) (2021-07-05)
+
+
+### Features
+
+* **brick-tree:** add deselectable property ([c86d23d](https://github.com/easyops-cn/next-basics/commit/c86d23d4d81e546e4da261f15acd1e6146f19546))
+
+
+
+
+
 # [1.190.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.189.2...@next-bricks/presentational-bricks@1.190.0) (2021-07-05)
 
 
