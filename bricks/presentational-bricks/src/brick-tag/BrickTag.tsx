@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Tag, Tooltip } from "antd";
+import { Tag, Tooltip, TooltipProps } from "antd";
 import { TagProps } from "antd/lib/tag";
 import { CheckableTagProps } from "antd/lib/tag/CheckableTag";
 import classNames from "classnames";
@@ -51,6 +51,7 @@ export interface BrickTagProps extends TagProps {
   closable?: boolean;
   disabledTooltip?: string;
   cancelable?: boolean;
+  tooltipProps?: TooltipProps;
 }
 
 export function BrickTag(props: BrickTagProps): React.ReactElement {
@@ -63,6 +64,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     color,
     closable,
     cancelable,
+    tooltipProps,
   } = props;
 
   const [checkedTag, setCheckedTag] = useState([]);
@@ -192,6 +194,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
         <Tooltip
           key={key}
           title={disabled ? disabledTooltip || props.disabledTooltip : tooltip}
+          {...tooltipProps}
         >
           {tagNode}
         </Tooltip>
