@@ -61,7 +61,6 @@ export const SchemaEditorWrapper = forwardRef<
 
     if (traceId === "root") {
       mutableProps = {
-        ...mutableProps,
         ...data,
         fields: isTypeChange(data, mutableProps) ? [] : mutableProps.fields,
       };
