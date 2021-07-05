@@ -288,4 +288,19 @@ describe("BrickTree", () => {
     } as any);
     expect(wrapper.find(".matchText").at(0).text()).toEqual("cAB");
   });
+
+  it("should support deselectable", () => {
+    const onSelect = jest.fn();
+    const wrapper = shallow<BrickTreeProps>(
+      <BrickTree dataSource={dataSource} onSelect={onSelect} />
+    );
+
+    wrapper.find(Tree).invoke("onSelect")([], {} as any);
+    expect(onSelect).not.toBeCalled();
+
+    wrapper.setProps({ deselectable: true });
+
+    wrapper.find(Tree).invoke("onSelect")([], {} as any);
+    expect(onSelect).toBeCalled();
+  });
 });
