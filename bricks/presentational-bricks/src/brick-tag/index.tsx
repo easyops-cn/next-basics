@@ -8,7 +8,7 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 import { BrickTag, TagTypeProps, TagListType } from "./BrickTag";
-import { Card } from "antd";
+import { Card, TooltipProps } from "antd";
 import { Color } from "../interfaces/brick-tag";
 import { get, map } from "lodash";
 
@@ -194,6 +194,18 @@ export class BrickTagElement extends UpdatingElement {
   disabledTooltip: string;
 
   /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 标签的 tooltip 相关配置项, [具体查阅](https://ant.design/components/tooltip-cn/#API)
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  tooltipProps: TooltipProps;
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -318,6 +330,7 @@ export class BrickTagElement extends UpdatingElement {
         closable={this.closable}
         disabledTooltip={this.disabledTooltip}
         cancelable={this.cancelable}
+        tooltipProps={this.tooltipProps}
       />
     );
   }
