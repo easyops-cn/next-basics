@@ -78,6 +78,8 @@ export function processFormInitvalue(
 ): SchemaItemProperty {
   if (data.required) {
     const result: SchemaItemProperty = omit(data, ["fields", "required"]);
+    result.required =
+      data.required.includes(data.name) || data.required.includes(data.ref);
     result.fields = [];
 
     processFields(data.fields, data.required, result.fields);

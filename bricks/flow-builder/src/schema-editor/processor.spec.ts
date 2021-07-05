@@ -122,7 +122,7 @@ describe("processor tst", () => {
       const initValue = {
         name: "request",
         type: "object",
-        required: ["labels", "instanceId", "TrackData.instanceId"],
+        required: ["labels", "instanceId", "TrackData.instanceId", "request"],
         fields: [
           {
             name: "needNotify",
@@ -174,6 +174,7 @@ describe("processor tst", () => {
         ],
         name: "request",
         type: "object",
+        required: true,
       });
     });
 
@@ -234,6 +235,16 @@ describe("processor tst", () => {
           },
         ],
       });
+    });
+
+    it("should process value when rootnode is ref type", () => {
+      const initValue = {
+        ref: "request",
+        required: ["request"],
+      };
+
+      const result = processFormInitvalue(initValue);
+      expect(result).toEqual({ ref: "request", required: true, fields: [] });
     });
   });
 
