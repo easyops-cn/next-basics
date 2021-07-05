@@ -30,6 +30,7 @@ import { get, map } from "lodash";
  * export interface TagListType {
  *   key: string;
  *   label: string;
+ *   tooltip?: string;
  *   icon?: string | MenuIcon;
  *   color?: string | Color;
  *   disabled?: boolean;

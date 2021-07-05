@@ -25,7 +25,8 @@ export enum TagTypeProps {
 export type TagListType = {
   key: string;
   label: string;
-  icon?: any;
+  tooltip?: string;
+  icon?: string | MenuIcon;
   checked?: boolean;
   color?: string | Color;
   disabled?: boolean;
@@ -114,8 +115,17 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
 
   const renderTag = (TypeComponent: any, tagList: TagListType) =>
     tagList.map((item) => {
+      const {
+        key,
+        label,
+        tooltip,
+        icon,
+        color: itemColor,
+        disabled,
+        disabledTooltip,
+      } = item;
       let restProps: any = {};
-      const hover = hoverTag === item.key;
+      const hover = hoverTag === key;
       if (TypeComponent === Tag) {
         restProps = {
           style: {
@@ -124,7 +134,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
           },
         };
       } else {
-        const checked = checkedTag.includes(item.key);
+        const checked = checkedTag.includes(key);
         restProps = {
           style: {
             ...props.tagStyle,
@@ -135,24 +145,24 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
           onChange: (c) => onChange(item, c),
         };
       }
-      const specificColor = item.color || color;
+      const specificColor = itemColor || color;
       const tagNode = (
         <TypeComponent
-          key={item.key}
+          key={key}
           className={classNames({
-            [style.grayTag]: specificColor === "gray" || item.disabled,
+            [style.grayTag]: specificColor === "gray" || disabled,
             [style.grayInverseTag]: specificColor === "gray-inverse",
             [style.round]: props.shape === "round",
             [style.closableTag]: closable && TypeComponent === Tag,
             [style.tagCircleIcon]: showTagCircle,
             [style.colorTag]:
               specificColor && !closable && TypeComponent === Tag,
-            [style.disabledTag]: item.disabled,
+            [style.disabledTag]: disabled,
           })}
           icon={
             !showTagCircle &&
-            item.icon &&
-            typeof item.icon === "string" && <LegacyIcon type={item.icon} />
+            icon &&
+            typeof icon === "string" && <LegacyIcon type={icon} />
           }
           closable={closable}
           {...(closable ? { onClose: () => onClose(item) } : {})}
@@ -162,9 +172,9 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
           onMouseEnter={(e) => onMouseEnter(item, e)}
           onMouseLeave={(e) => onMouseLeave(item, e)}
         >
-          {!showTagCircle && item.icon && typeof item.icon === "object" && (
+          {!showTagCircle && icon && typeof icon === "object" && (
             <GeneralIcon
-              icon={item.icon}
+              icon={icon}
               style={{ marginRight: "7px", marginLeft: 0 }}
             />
           )}
@@ -174,14 +184,14 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
               style={{ marginRight: "7px", marginLeft: 0 }}
             />
           )}
-          {item.label}
+          {label}
         </TypeComponent>
       );
-      return (props.disabledTooltip || item.disabledTooltip) &&
-        item.disabled ? (
+      return tooltip ||
+        (disabled && (props.disabledTooltip || disabledTooltip)) ? (
         <Tooltip
-          key={item.key}
-          title={item.disabledTooltip || props.disabledTooltip}
+          key={key}
+          title={disabled ? disabledTooltip || props.disabledTooltip : tooltip}
         >
           {tagNode}
         </Tooltip>
