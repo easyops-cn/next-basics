@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import { BrickTag, TagTypeProps, circleIcon } from "./BrickTag";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
+import { Tooltip } from "antd";
 
 describe("BrickTag", () => {
   it("should work when componentType is CheckableTag", () => {
@@ -183,5 +184,17 @@ describe("BrickTag", () => {
     handleOnChange.mockClear();
     wrapper.find("CheckableTag").at(0).invoke("onChange")(false);
     expect(handleOnChange).not.toBeCalled();
+  });
+
+  it("should support tooltip", () => {
+    const tooltip = "tip content";
+    const props = {
+      tagList: [{ key: "a", label: "a", tooltip }],
+    };
+    const wrapper = mount(<BrickTag {...props} />);
+
+    const tooltipNode = wrapper.find(Tooltip);
+    expect(tooltipNode).toHaveLength(1);
+    expect(tooltipNode.prop("title")).toBe(tooltip);
   });
 });
