@@ -1,0 +1,41 @@
+.editor {
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 16px;
+
+  .title {
+    display: grid;
+    gap: 10px;
+    height: 40px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .content {
+    margin: 15px 0;
+  }
+
+  .schemaItem {
+    display: grid;
+    gap: 10px;
+  }
+}
+
+.iconBtn {
+  padding: 4px 0px;
+  &,
+  &:focus {
+    color: var(--antd-text-color);
+  }
+
+  &:hover {
+    color: var(--bg-color-button-link-hover);
+  }
+}
+
+.deleteBtn {
+  color: var(--bg-color-button-danger);
+
+  &:hover {
+    color: var(--bg-color-button-danger-pressed);
+  }
+}
