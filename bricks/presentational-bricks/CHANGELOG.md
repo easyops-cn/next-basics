@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.190.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.189.2...@next-bricks/presentational-bricks@1.190.0) (2021-07-05)
+
+
+### Features
+
+* **brick-tag:** add support for tooltip ([669de76](https://github.com/easyops-cn/next-basics/commit/669de76096bd4948df9519fe2fdab90c4e0594a5))
+
+
+
+
+
 ## [1.189.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.189.1...@next-bricks/presentational-bricks@1.189.2) (2021-07-02)
 
 
