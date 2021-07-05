@@ -17,7 +17,7 @@ describe("processor tst", () => {
         { title: "c" },
       ]);
 
-      expect(result).toEqual("50px 100px 1fr ");
+      expect(result).toEqual("50px 100px 1fr");
     });
   });
 

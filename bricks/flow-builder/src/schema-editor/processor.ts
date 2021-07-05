@@ -7,10 +7,7 @@ import {
 } from "./interfaces";
 
 export function getGridTemplateColumns(titleList: EditorTitleProps[]): string {
-  return titleList.reduce(
-    (str, item) => (str += (item.width ?? "1fr") + " "),
-    ""
-  );
+  return titleList.map((item) => item.width ?? "1fr").join(" ");
 }
 
 export function calcItemPosition(traceId: string): string[] {

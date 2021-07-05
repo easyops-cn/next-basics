@@ -111,7 +111,11 @@ export function AddPropertyModal({
               >
                 {({ getFieldValue }) =>
                   getFieldValue("origin") === "normal" ? (
-                    <Form.Item name="type" rules={[{ required: true }]}>
+                    <Form.Item
+                      name="type"
+                      rules={[{ required: true }]}
+                      messageVariables={{ label: "type" }}
+                    >
                       <AutoComplete>
                         {innerTypeList.map((type) => (
                           <AutoComplete.Option key={type} value={type}>
@@ -121,7 +125,11 @@ export function AddPropertyModal({
                       </AutoComplete>
                     </Form.Item>
                   ) : (
-                    <Form.Item name="ref" rules={[{ required: true }]}>
+                    <Form.Item
+                      name="ref"
+                      rules={[{ required: true }]}
+                      messageVariables={{ label: "ref" }}
+                    >
                       <Input />
                     </Form.Item>
                   )

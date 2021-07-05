@@ -1,3 +1,7 @@
+.type {
+  cursor: default;
+}
+
 .refTag,
 .typeTag {
   line-height: 22px;
@@ -17,4 +21,10 @@
     color: var(--tag-cyan-color);
     background: var(--tag-cyan-background);
   }
+}
+
+.description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

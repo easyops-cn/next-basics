@@ -38,7 +38,7 @@ export function SchemaItem({
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [visible, setVisible] = useState(false);
-  const [inintValue, setInitValue] = useState({} as SchemaItemProperty);
+  const [initValue, setInitValue] = useState({} as SchemaItemProperty);
   const [isEdit, setEdit] = useState(false);
 
   const handleSubmit = (
@@ -86,7 +86,7 @@ export function SchemaItem({
         <div>
           <Checkbox checked={itemData.required} disabled />
         </div>
-        <div>
+        <div className={styles.type}>
           <Tooltip
             title={
               itemData.type ? t(K.SCHEMA_ITEM_NORMAL) : t(K.SCHEMA_ITEM_REF)
@@ -102,7 +102,9 @@ export function SchemaItem({
             </Tag>
           </Tooltip>
         </div>
-        <div>{itemData.description}</div>
+        <div className={styles.description} title={itemData.description}>
+          {itemData.description}
+        </div>
         <div>
           <Button
             type="link"
@@ -153,7 +155,7 @@ export function SchemaItem({
         trackId={trackId}
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}
-        initValue={inintValue}
+        initValue={initValue}
       />
     </>
   );
