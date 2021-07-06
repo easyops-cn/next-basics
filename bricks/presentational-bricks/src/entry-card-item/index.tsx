@@ -39,6 +39,15 @@ export class EntryCardItemElement extends UpdatingElement {
   cardTitle: string;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 卡片 description
+   */
+  @property()
+  description: string;
+
+  /**
    * @kind { cardTitle?: string; icon?:string;iconColor?:string; }
    * @required true
    * @default -
@@ -101,6 +110,15 @@ export class EntryCardItemElement extends UpdatingElement {
   urlTemplate: string;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description hover文字效果，`true`为蓝字高亮，`false`为黑字加粗
+   */
+  @property({ attribute: false })
+  hoverHighLight = true;
+
+  /**
    * @required false
    * @default true
    * @description 是否用 Card 包裹
@@ -109,6 +127,17 @@ export class EntryCardItemElement extends UpdatingElement {
     attribute: false,
   })
   showCard = true;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description card样式
+   */
+  @property({
+    attribute: false,
+  })
+  cardStyle: React.CSSProperties;
 
   connectedCallback(): void {
     // istanbul ignore else
@@ -147,6 +176,9 @@ export class EntryCardItemElement extends UpdatingElement {
             target={mutableProps.target}
             url={this.url || mutableProps.url}
             showCard={this.showCard}
+            description={this.description}
+            cardStyle={this.cardStyle}
+            hoverHighLight={this.hoverHighLight}
           />
         </BrickWrapper>,
         this

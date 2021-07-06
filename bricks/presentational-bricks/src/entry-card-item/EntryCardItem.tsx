@@ -22,9 +22,13 @@ interface EntryCardItemProps {
   iconColor?: Color;
   target?: string;
   showCard?: boolean;
+  description?: string;
+  cardStyle?: React.CSSProperties;
+  hoverHighLight?: boolean;
 }
 
 export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
+  const { cardStyle, description, hoverHighLight } = props;
   // 卡片图标
   const cardIcon = (
     <div className={styles.cardIcon}>
@@ -46,7 +50,14 @@ export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
   const contentNode = (
     <div className={styles.cardContent}>
       {avatarIcon(56)}
-      <div className={styles.cardTitle}>{props.cardTitle}</div>
+      <div
+        className={classNames(styles.textContainer, {
+          [styles.hoverHighLight]: hoverHighLight,
+        })}
+      >
+        <div className={styles.cardTitle}>{props.cardTitle}</div>
+        {description && <div className={styles.description}>{description}</div>}
+      </div>
     </div>
   );
 
@@ -55,7 +66,7 @@ export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
       hoverable
       className={styles.cardItem}
       bodyStyle={{ padding: 0 }}
-      style={{ width: 126 }}
+      style={{ width: 126, ...cardStyle }}
     >
       {contentNode}
     </Card>

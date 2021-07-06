@@ -3,6 +3,7 @@
     border: 0;
     border-radius: 8px;
   }
+
   &:global(.ant-card):not(:hover) {
     box-shadow: none;
   }
@@ -12,17 +13,13 @@
   display: grid;
   justify-items: center;
   padding: 14px 0 12px 0;
-  &:hover {
-    .cardTitle {
-      color: var(--text-color-link);
-    }
-  }
 }
 
 .cardAvatar {
   display: grid;
   font-size: 32px;
   margin-bottom: 10px;
+
   .cardIcon {
     display: grid;
     font-size: 32px;
@@ -31,36 +28,65 @@
   }
 }
 
-.cardTitle {
+.textContainer {
+  padding: 0 24px;
+  width: 100%;
   text-align: center;
   color: var(--text-color-default);
-  text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
-  width: 98px;
+
+  &:hover {
+    &.hoverHighLight {
+      color: var(--text-color-link);
+    }
+
+    &:not(.hoverHighLight) {
+      color: #08132d;
+    }
+  }
+
+  .cardTitle {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
 }
 
 .purple {
   background: #964dff;
 }
+
 .red {
   background: #f15b3e;
 }
+
 .softOrange {
   background: #fcb94c;
 }
+
 .cyan {
   background: #2bacc3;
 }
+
 .blue {
   background: #4d8fff;
 }
+
 .darkPurple {
   background: #a75da9;
 }
+
 .lightCyan {
   background: #00acc3;
 }
+
 .brightOrange {
   background: #efa83b;
 }
