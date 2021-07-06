@@ -69,6 +69,22 @@ export class GeneralInputNumberElement extends FormItemElement {
   @property({ type: Boolean }) declare required: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否只读
+   */
+  @property({ type: Boolean }) declare readOnly: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否禁用
+   */
+  @property({ type: Boolean }) declare disabled: boolean;
+
+  /**
    * @kind `Record<string,string>`
    * @required false
    * @default -
@@ -178,6 +194,8 @@ export class GeneralInputNumberElement extends FormItemElement {
             labelTooltip={this.labelTooltip}
             placeholder={this.placeholder}
             required={this.required}
+            readOnly={this.readOnly}
+            disabled={this.disabled}
             value={this.value}
             min={this.min}
             max={this.max}
