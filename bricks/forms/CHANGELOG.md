@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.174.1...@next-bricks/forms@1.175.0) (2021-07-06)
+
+
+### Features
+
+* **general-input-number:** add readOnly and disabled properties ([3cc85ce](https://github.com/easyops-cn/next-basics/commit/3cc85ce92534309a9093d1ebd98faf2429236a1c))
+
+
+
+
+
 ## [1.174.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.174.0...@next-bricks/forms@1.174.1) (2021-07-01)
 
 
