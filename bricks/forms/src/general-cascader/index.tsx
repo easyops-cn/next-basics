@@ -214,18 +214,6 @@ export class GeneralCascaderElement extends FormItemElement {
   @property({ attribute: false })
   limit = 50;
 
-  connectedCallback(): void {
-    // Don't override user's style settings.
-    // istanbul ignore else
-    if (!this.style.display) {
-      this.style.display = "block";
-    }
-    this._render();
-  }
-
-  disconnectedCallback(): void {
-    ReactDOM.unmountComponentAtNode(this);
-  }
   /**
    * @detail {value: string[], selectedOptions: CascaderOptionType[]}
    * @description 级联选择项输入变化时触发，value 为选择的值，selectedOptions 为选择的值所对应的 options
@@ -250,6 +238,7 @@ export class GeneralCascaderElement extends FormItemElement {
       ReactDOM.render(
         <BrickWrapper>
           <GeneralCascader
+            notRender={this.notRender}
             formElement={this.getFormElement()}
             label={this.label}
             labelTooltip={this.labelTooltip}
