@@ -68,5 +68,13 @@ describe("GeneralCascader", () => {
     expect(wrapper.find(".ant-cascader-menu-item-keyword").text()).toEqual(
       "Jiangsu"
     );
+    wrapper.setProps({
+      name: "cascader",
+      formElement: {
+        formUtils: {
+          getFieldDecorator: () => (comp: React.Component) => comp,
+        },
+      },
+    });
   });
 });
