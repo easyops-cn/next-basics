@@ -47,7 +47,7 @@ export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
       <div>
         {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
-          <Input
+          <Input.TextArea
             value={value?.default}
             style={{ width: "100%" }}
             onChange={(e) =>
