@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.175.0...@next-bricks/forms@1.176.0) (2021-07-07)
+
+
+### Features
+
+* 实例列表、详情、关系展示等页面兼容json格式 closed INSTANCE-1789 ([5c9eaf2](https://github.com/easyops-cn/next-basics/commit/5c9eaf284e0547483176798c730bdd092ad013fb))
+
+
+
+
+
 # [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.174.1...@next-bricks/forms@1.175.0) (2021-07-06)
 
 

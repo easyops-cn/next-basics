@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.193.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.192.0...@next-bricks/presentational-bricks@1.193.0) (2021-07-07)
+
+
+### Features
+
+* **entry-card-item:** add some style property ([77a9013](https://github.com/easyops-cn/next-basics/commit/77a901312e565bbc6b8481d7349a5ae291171d3a))
+
+
+
+
+
 # [1.192.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.191.0...@next-bricks/presentational-bricks@1.192.0) (2021-07-05)
 
 
