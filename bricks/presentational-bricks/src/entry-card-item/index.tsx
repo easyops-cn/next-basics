@@ -74,7 +74,7 @@ export class EntryCardItemElement extends UpdatingElement {
   icon: MenuIcon;
 
   /**
-   * @kind 'purple'/'red'/'softOrange'/'cyan'/'blue'/'darkPurple'/'lightCyan'/'brightOrange'
+   * @kind 'purple'/'red'/'softOrange'/'cyan'/'blue'/'darkPurple'/'lightCyan'/'brightOrange'/'white'
    * @required false
    * @default -
    * @description icon 颜色
