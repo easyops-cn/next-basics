@@ -28,6 +28,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-libs/forms": "^2.2.2"
+    "@next-libs/forms": "^2.2.2",
+    "immutability-helper": "^3.1.1"
   }
 }

@@ -10,10 +10,15 @@ export const titleList: EditorTitleProps[] = [
 
 export const innerTypeList = [
   "string",
-  "number",
-  "boolean",
   "bool",
   "int",
   "int64",
+  "float",
+  "map",
   "object",
+  "file",
 ];
+
+export const compareMethodList = ["gte", "lte", "gt", "lt"];
+
+export const numberTypeList = ["int", "int64", "float"];

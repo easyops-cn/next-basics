@@ -1,10 +1,15 @@
-import { omit } from "lodash";
+import { isNil, omit } from "lodash";
+import {
+  processValidatorInitValue,
+  formatValidatorData,
+} from "./filedValidatorItemProcessor";
 import {
   EditorTitleProps,
   SchemaItemProperty,
   AddedSchemaFormItem,
   SchemaRootNodeProperty,
-} from "./interfaces";
+} from "../interfaces";
+import { numberTypeList } from "../constants";
 
 export function getGridTemplateColumns(titleList: EditorTitleProps[]): string {
   return titleList.map((item) => item.width ?? "1fr").join(" ");
@@ -43,18 +48,25 @@ export function processItemInitValue(
   return {
     ...data,
     origin: data.ref ? "reference" : "normal",
+    ...([...numberTypeList, "string"].includes(data.type)
+      ? { validate: processValidatorInitValue(data.validate) }
+      : {}),
   };
 }
 
 export function processItemData(
   data = {} as AddedSchemaFormItem
 ): SchemaItemProperty {
-  return omit(data, "origin");
+  return {
+    ...omit(data, "origin", "validate"),
+    ...(data.validate ? { validate: formatValidatorData(data.validate) } : {}),
+  };
 }
 
 export function processFields(
   list: SchemaItemProperty[],
   requiredList: string[],
+  defaultData: Record<string, unknown>,
   result: SchemaItemProperty[]
 ): void {
   list?.forEach((item) => {
@@ -63,12 +75,15 @@ export function processFields(
       ...(requiredList.includes(item.name) || requiredList.includes(item.ref)
         ? { required: true }
         : {}),
+      ...(!isNil(defaultData[item.name])
+        ? { default: defaultData[item.name] }
+        : {}),
     } as SchemaItemProperty;
 
     result.push(property);
     if (item.fields) {
       property.fields = [];
-      processFields(item.fields, requiredList, property.fields);
+      processFields(item.fields, requiredList, defaultData, property.fields);
     }
   });
 }
@@ -76,22 +91,29 @@ export function processFields(
 export function processFormInitvalue(
   data: SchemaRootNodeProperty
 ): SchemaItemProperty {
-  if (data.required) {
-    const result: SchemaItemProperty = omit(data, ["fields", "required"]);
-    result.required =
-      data.required.includes(data.name) || data.required.includes(data.ref);
-    result.fields = [];
 
-    processFields(data.fields, data.required, result.fields);
-    return result;
+  const result: SchemaItemProperty = omit(data, [
+    "fields",
+    "required",
+    "default",
+  ]);
+
+  const requiredList = data.required || [];
+  const defaultData = data.default || {};
+  result.fields = [];
+  if (requiredList.includes(data.name) || requiredList.includes(data.ref)) {
+    result.required = true;
   }
 
-  return data as any as SchemaItemProperty;
+  processFields(data.fields, requiredList, defaultData, result.fields);
+
+  return result;
 }
 
 export function collectFields(
   list: SchemaItemProperty[],
   requiredList: string[],
+  defaultData: Record<string, unknown>,
   result: SchemaItemProperty[]
 ): void {
   list?.forEach((item) => {
@@ -99,15 +121,19 @@ export function collectFields(
       requiredList.push(item.name || item.ref);
     }
 
+    if (!isNil(item.default)) {
+      defaultData[item.name] = item.default;
+    }
+
     const property = {
-      ...omit(item, ["fields", "required"]),
+      ...omit(item, ["fields", "required", "default"]),
     } as SchemaItemProperty;
 
     result.push(property);
 
     if (item.fields) {
       property.fields = [];
-      collectFields(item.fields, requiredList, property.fields);
+      collectFields(item.fields, requiredList, defaultData, property.fields);
     }
   });
 }
@@ -117,16 +143,22 @@ export function processFormData(
 ): SchemaRootNodeProperty {
   const result: SchemaItemProperty = omit(data, "fields");
   const requiredList: string[] = [];
+  const defaultData: Record<string, unknown> = {};
   result.fields = [];
 
   if (data.required) {
     requiredList.push(data.name);
   }
 
-  collectFields(data.fields, requiredList, result.fields);
+  if (!isNil(data.default)) {
+    defaultData[data.name] = data.default;
+  }
+
+  collectFields(data.fields, requiredList, defaultData, result.fields);
 
   return {
     ...result,
     required: requiredList,
+    default: defaultData,
   };
 }

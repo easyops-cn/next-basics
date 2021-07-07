@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import {
   Modal,
   Form,
   Input,
-  Checkbox,
   Select,
   AutoComplete,
+  Radio,
+  Switch,
   Row,
   Col,
+  InputNumber,
 } from "antd";
-import { innerTypeList } from "../../constants";
+import { innerTypeList, numberTypeList } from "../../constants";
 import { SchemaItemProperty, AddedSchemaFormItem } from "../../interfaces";
 import { processItemInitValue, processItemData } from "../../processor";
+import { FieldValidatorItem } from "../field-validator-item/FieldValidatorItem";
 
 export interface AddPropertyModalProps {
   trackId?: string;
@@ -63,12 +66,100 @@ export function AddPropertyModal({
     handleClose();
   };
 
+  const typeFormItem = useMemo(
+    () => (
+      <Form.Item label="Type">
+        <Row gutter={8}>
+          <Col span={12}>
+            <Form.Item name="origin" initialValue="normal">
+              <Select>
+                <Select.Option key="normal" value="normal">
+                  {t(K.SCHEMA_ITEM_NORMAL)}
+                </Select.Option>
+                <Select.Option key="reference" value="reference">
+                  {t(K.SCHEMA_ITEM_REF)}
+                </Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              noStyle
+              shouldUpdate={(prevValues, currentValues) =>
+                prevValues.origin !== currentValues.origin
+              }
+            >
+              {({ getFieldValue }) =>
+                getFieldValue("origin") === "normal" ? (
+                  <Form.Item
+                    name="type"
+                    rules={[{ required: true }]}
+                    messageVariables={{ label: "type" }}
+                  >
+                    <AutoComplete>
+                      {innerTypeList.map((type) => (
+                        <AutoComplete.Option key={type} value={type}>
+                          {type}
+                        </AutoComplete.Option>
+                      ))}
+                    </AutoComplete>
+                  </Form.Item>
+                ) : (
+                  <Form.Item
+                    name="ref"
+                    rules={[{ required: true }]}
+                    messageVariables={{ label: "ref" }}
+                  >
+                    <Input />
+                  </Form.Item>
+                )
+              }
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form.Item>
+    ),
+    []
+  );
+
+  const defaultFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.type !== currentValues.type
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("type") === "bool" ? (
+            <Form.Item name="default" label="Default">
+              <Radio.Group>
+                <Radio value={true}>true</Radio>
+                <Radio value={false}>false</Radio>
+              </Radio.Group>
+            </Form.Item>
+          ) : numberTypeList.includes(getFieldValue("type")) ? (
+            <Form.Item name="default" label="Default">
+              <InputNumber />
+            </Form.Item>
+          ) : getFieldValue("type") === "string" ? (
+            <Form.Item name="default" label="Default">
+              <Input />
+            </Form.Item>
+          ) : null
+        }
+      </Form.Item>
+    ),
+    []
+  );
+
   return (
     <Modal
       title="property modal"
       visible={visible}
       onOk={handleOk}
       onCancel={handleClose}
+      width={600}
     >
       <Form
         name="properties-form"
@@ -84,59 +175,52 @@ export function AddPropertyModal({
           <Input />
         </Form.Item>
 
+        {typeFormItem}
+
         <Form.Item name="required" label="Required" valuePropName="checked">
-          <Checkbox />
+          <Switch />
         </Form.Item>
 
-        <Form.Item label="Type">
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item name="origin" initialValue="normal">
-                <Select>
-                  <Select.Option key="normal" value="normal">
-                    {t(K.SCHEMA_ITEM_NORMAL)}
-                  </Select.Option>
-                  <Select.Option key="reference" value="reference">
-                    {t(K.SCHEMA_ITEM_REF)}
-                  </Select.Option>
-                </Select>
+        {defaultFormItem}
+
+        <Form.Item
+          noStyle
+          shouldUpdate={(prevValues, currentValues) =>
+            prevValues.type !== currentValues.type
+          }
+        >
+          {({ getFieldValue }) =>
+            [...numberTypeList, "string"].includes(getFieldValue("type")) && (
+              <Form.Item name="enum" label="Enum">
+                <Select
+                  mode="tags"
+                  style={{ width: "100%" }}
+                  placeholder={t(K.ENUM_INPUT_PLANCEHOLDER)}
+                ></Select>
               </Form.Item>
-            </Col>
-            <Col span={12}>
+            )
+          }
+        </Form.Item>
+
+        <Form.Item
+          noStyle
+          shouldUpdate={(prevValues, currentValues) =>
+            prevValues.type !== currentValues.type
+          }
+        >
+          {({ getFieldValue }) =>
+            [...numberTypeList, "string"].includes(getFieldValue("type")) && (
               <Form.Item
-                noStyle
-                shouldUpdate={(prevValues, currentValues) =>
-                  prevValues.origin !== currentValues.origin
-                }
+                name="validate"
+                label="Validate"
+                getValueProps={(v) => ({
+                  value: { ...v, type: getFieldValue("type") },
+                })}
               >
-                {({ getFieldValue }) =>
-                  getFieldValue("origin") === "normal" ? (
-                    <Form.Item
-                      name="type"
-                      rules={[{ required: true }]}
-                      messageVariables={{ label: "type" }}
-                    >
-                      <AutoComplete>
-                        {innerTypeList.map((type) => (
-                          <AutoComplete.Option key={type} value={type}>
-                            {type}
-                          </AutoComplete.Option>
-                        ))}
-                      </AutoComplete>
-                    </Form.Item>
-                  ) : (
-                    <Form.Item
-                      name="ref"
-                      rules={[{ required: true }]}
-                      messageVariables={{ label: "ref" }}
-                    >
-                      <Input />
-                    </Form.Item>
-                  )
-                }
+                <FieldValidatorItem />
               </Form.Item>
-            </Col>
-          </Row>
+            )
+          }
         </Form.Item>
 
         <Form.Item name="description" label="description">
