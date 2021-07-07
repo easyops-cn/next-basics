@@ -13,7 +13,8 @@ export type Color =
   | "blue"
   | "darkPurple"
   | "lightCyan"
-  | "brightOrange";
+  | "brightOrange"
+  | "white";
 
 interface EntryCardItemProps {
   cardTitle?: string;
