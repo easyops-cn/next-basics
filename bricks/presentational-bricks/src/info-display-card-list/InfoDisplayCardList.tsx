@@ -3,9 +3,10 @@ import { List, Empty, Card, Tooltip } from "antd";
 import { CardDetail, CardItem } from "./index";
 import styles from "./index.module.css";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { BrickAsComponent } from "@next-core/brick-kit";
+import { BrickAsComponent, getHistory } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { isEmpty } from "lodash";
+import { parseTemplate } from "@next-libs/cmdb-utils";
 
 interface InfoDisplayCardListProps {
   dataSource: CardItem[];
@@ -16,6 +17,9 @@ interface InfoDisplayCardListProps {
   detailOfDescBrickConf?: { useBrick: UseBrickConf };
   titleFontSize?: number | string;
   detailDescFontSize?: number | string;
+  url?: string;
+  urlTemplate?: string;
+  target?: string;
 }
 
 export function InfoDisplayCardList({
@@ -27,6 +31,9 @@ export function InfoDisplayCardList({
   detailOfDescBrickConf,
   titleFontSize,
   detailDescFontSize,
+  url,
+  urlTemplate,
+  target,
 }: InfoDisplayCardListProps): React.ReactElement {
   const isEmptyDetailOfDescBrickConf = isEmpty(detailOfDescBrickConf?.useBrick);
   const isEmptyIconBrickConf = isEmpty(iconBrickConf?.useBrick);
@@ -56,9 +63,24 @@ export function InfoDisplayCardList({
       )}
     </div>
   );
+  const handleCardClick = (item: CardItem) => {
+    const resultUrl = url || (urlTemplate && parseTemplate(urlTemplate, item));
+    if (resultUrl) {
+      const history = getHistory();
+      if (target && target !== "_self") {
+        window.open(resultUrl, target);
+      } else {
+        history.push(resultUrl);
+      }
+    }
+  };
 
   const getCardItem = (item: CardItem): React.ReactNode => (
-    <Card className={styles.infoCard} hoverable={true}>
+    <Card
+      className={styles.infoCard}
+      hoverable={true}
+      onClick={(e) => handleCardClick(item)}
+    >
       <div className={styles.infoCardWrapper}>
         <div className={styles.infoCardMain}>
           {isEmptyIconBrickConf && showIcon && (
@@ -115,10 +137,17 @@ export function InfoDisplayCardList({
             {item.detail?.map(getCardItemDetail)}
           </div>
           {!isEmpty(optionConf?.useBrick) && (
-            <BrickAsComponent
-              useBrick={optionConf.useBrick}
-              data={item}
-            ></BrickAsComponent>
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              style={{ padding: "15px 5px" }}
+            >
+              <BrickAsComponent
+                useBrick={optionConf.useBrick}
+                data={item}
+              ></BrickAsComponent>
+            </div>
           )}
         </div>
       </div>

@@ -3,7 +3,13 @@ import { shallow, mount } from "enzyme";
 import { InfoDisplayCardList } from "./InfoDisplayCardList";
 import { infoList } from "./__mocks__/infoList";
 import { Empty } from "antd";
-import { BrickAsComponent } from "@next-core/brick-kit";
+import * as brickKit from "@next-core/brick-kit";
+
+const spyOnWindowOpen = (window.open = jest.fn());
+const spyOnHistoryPush = jest.fn();
+jest.spyOn(brickKit, "getHistory").mockReturnValue({
+  push: spyOnHistoryPush,
+} as any);
 
 describe("InfoDisplayCardList", () => {
   it("should work", () => {
@@ -53,5 +59,51 @@ describe("InfoDisplayCardList", () => {
       />
     );
     expect(wrapper.find("BrickAsComponent").length).toBe(1);
+  });
+
+  it("should click CardItem to open new page", () => {
+    const wrapper = mount(
+      <InfoDisplayCardList
+        dataSource={infoList}
+        detailOfDescBrickConf={{ useBrick: { brick: "div" } }}
+        urlTemplate="/management/list/detail?id=#{id}"
+        target="_blank"
+      />
+    );
+    wrapper.find(".infoCard").at(0).simulate("click");
+
+    expect(spyOnWindowOpen).toHaveBeenCalledWith(
+      "/management/list/detail?id=0",
+      "_blank"
+    );
+  });
+
+  it("should click CardItem to change history", () => {
+    const wrapper = mount(
+      <InfoDisplayCardList
+        dataSource={infoList}
+        detailOfDescBrickConf={{ useBrick: { brick: "div" } }}
+        urlTemplate="/management/list/detail?id=#{id}"
+      />
+    );
+    wrapper.find(".infoCard").at(0).simulate("click");
+
+    expect(spyOnHistoryPush).toHaveBeenCalledWith(
+      "/management/list/detail?id=0"
+    );
+  });
+
+  it("should not response to  click CardItem", () => {
+    const wrapper = mount(
+      <InfoDisplayCardList
+        dataSource={infoList}
+        detailOfDescBrickConf={{ useBrick: { brick: "div" } }}
+        urlTemplate="/management/list/detail?id=#{id}"
+        optionConf={{ useBrick: { brick: "div" } }}
+      />
+    );
+    spyOnHistoryPush.mockClear();
+    wrapper.find(".infoCardRightSection").at(0).childAt(1).simulate("click");
+    expect(spyOnHistoryPush).not.toBeCalled();
   });
 });
