@@ -16,6 +16,7 @@ import { BrickRate } from "./BrickRate";
  * 1.130.0: 新增构件 `presentational-bricks.brick-rate`
  * 1.130.1: 构件功能优化
  * 1.189.2: 可通过value属性，渲染构件值
+ * 1.196.0: 增加`tooltips`属性
  * @docKind brick
  * @noInheritDoc
  */
@@ -96,6 +97,17 @@ export class BrickRateElement extends UpdatingElement {
   })
   rateIcon: any;
 
+  /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 自定义每项的提示信息
+   */
+  @property({
+    attribute: false,
+  })
+  tooltips: string[];
+
   @event({ type: "rate.change" }) changEvent: EventEmitter<Record<number, any>>;
   private _handleChange = (value: any): void => {
     this.changEvent.emit(value);
@@ -127,6 +139,7 @@ export class BrickRateElement extends UpdatingElement {
             rateIcon={this.rateIcon}
             colors={this.colors}
             value={this.value}
+            tooltips={this.tooltips}
           />
         </BrickWrapper>,
         this

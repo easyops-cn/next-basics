@@ -71,6 +71,23 @@ export const BrickRateStory: Story = {
           "等级图标每一级可以对应不同颜色，优先级高于rateStyle设置的color属性",
       },
     },
+    {
+      brick: "presentational-bricks.brick-rate",
+      properties: {
+        count: 3,
+        value: 3,
+        allowHalf: true,
+        rateIcon: {
+          lib: "antd",
+          icon: "heart",
+        },
+        colors: ["#FFCF64", "#FFA235", "#ED493C"],
+        tooltips: ["第一级", "第二级", "第三级"],
+      },
+      description: {
+        title: "每级可定义提示信息",
+      },
+    },
   ],
   previewColumns: 2,
 };
