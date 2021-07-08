@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.1.3...@next-bricks/flow-builder@1.2.0) (2021-07-08)
+
+
+### Features
+
+* support default, validate, ennum ([72dcfb0](https://github.com/easyops-cn/next-basics/commit/72dcfb01b7be4f980ca000c83d6c45496469bed5))
+
+
+
+
+
 ## [1.1.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.1.2...@next-bricks/flow-builder@1.1.3) (2021-07-05)
 
 

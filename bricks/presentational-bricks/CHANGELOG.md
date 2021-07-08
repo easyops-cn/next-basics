@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.194.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.193.0...@next-bricks/presentational-bricks@1.194.0) (2021-07-08)
+
+
+### Features
+
+* **entry-card-item:** iconColor支持白色 ([df2ff33](https://github.com/easyops-cn/next-basics/commit/df2ff3311c82eddc33ba66158f630323e231f201))
+
+
+
+
+
 # [1.193.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.192.0...@next-bricks/presentational-bricks@1.193.0) (2021-07-07)
 
 

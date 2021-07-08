@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.176.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.176.0...@next-bricks/forms@1.176.1) (2021-07-08)
+
+
+### Bug Fixes
+
+* **forms:** 修复notRender失效 ([b9f3965](https://github.com/easyops-cn/next-basics/commit/b9f3965c4359878fccb577878b6ac7f35b81e019))
+
+
+
+
+
 # [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.175.0...@next-bricks/forms@1.176.0) (2021-07-07)
 
 
