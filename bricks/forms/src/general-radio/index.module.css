@@ -1,13 +1,19 @@
-.iconRadio {
+.iconRadio,
+.disabledIconRadio {
   position: relative;
   display: inline-block;
   width: 104px;
   height: 104px;
   margin-right: 12px;
   text-align: center;
+  cursor: pointer;
 }
 
-.iconRadio .content {
+.disabledIconRadio {
+  cursor: not-allowed;
+}
+
+.content {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -26,7 +32,8 @@
   border: 1px solid #65b2ff;
 }
 
-.iconRadio > input[type="radio"]::before {
+.iconRadio > input[type="radio"]::before,
+.disabledIconRadio > input[type="radio"]::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -35,10 +42,10 @@
   border: 1px solid #d9d9d9;
   top: 0;
   left: 0;
-  cursor: pointer;
 }
 
-.iconRadio > input[type="radio"] {
+.iconRadio > input[type="radio"],
+.disabledIconRadio > input[type="radio"] {
   width: 0;
   height: 0;
 }

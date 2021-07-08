@@ -53,13 +53,14 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
           {options.map((item: any) => (
             <label
               htmlFor={item.value}
-              className={styles.iconRadio}
+              className={disabled ? styles.disabledIconRadio : styles.iconRadio}
               key={item.value}
             >
               <input
                 type="radio"
                 value={item.value}
                 name={props.name}
+                disabled={disabled}
                 id={item.value}
                 onChange={handleChange}
                 checked={props.value === item.value}
