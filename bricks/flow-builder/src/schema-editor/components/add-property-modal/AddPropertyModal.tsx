@@ -119,7 +119,7 @@ export function AddPropertyModal({
         </Row>
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const defaultFormItem = useMemo(
@@ -127,11 +127,13 @@ export function AddPropertyModal({
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.type !== currentValues.type
+          prevValues.type !== currentValues.type ||
+          prevValues.origin !== currentValues.origin
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("type") === "bool" ? (
+          getFieldValue("origin") === "normal" &&
+          (getFieldValue("type") === "bool" ? (
             <Form.Item name="default" label="Default">
               <Radio.Group>
                 <Radio value={true}>true</Radio>
@@ -146,7 +148,61 @@ export function AddPropertyModal({
             <Form.Item name="default" label="Default">
               <Input />
             </Form.Item>
-          ) : null
+          ) : null)
+        }
+      </Form.Item>
+    ),
+    []
+  );
+
+  const enumFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.type !== currentValues.type ||
+          prevValues.origin !== currentValues.origin
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("origin") === "normal" &&
+          [...numberTypeList, "string"].includes(getFieldValue("type")) && (
+            <Form.Item name="enum" label="Enum">
+              <Select
+                mode="tags"
+                style={{ width: "100%" }}
+                placeholder={t(K.ENUM_INPUT_PLANCEHOLDER)}
+              ></Select>
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [t]
+  );
+
+  const validatorFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.type !== currentValues.type ||
+          prevValues.origin !== currentValues.origin
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("origin") === "normal" &&
+          [...numberTypeList, "string"].includes(getFieldValue("type")) && (
+            <Form.Item
+              name="validate"
+              label="Validate"
+              getValueProps={(v) => ({
+                value: { ...v, type: getFieldValue("type") },
+              })}
+            >
+              <FieldValidatorItem />
+            </Form.Item>
+          )
         }
       </Form.Item>
     ),
@@ -183,45 +239,9 @@ export function AddPropertyModal({
 
         {defaultFormItem}
 
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues.type !== currentValues.type
-          }
-        >
-          {({ getFieldValue }) =>
-            [...numberTypeList, "string"].includes(getFieldValue("type")) && (
-              <Form.Item name="enum" label="Enum">
-                <Select
-                  mode="tags"
-                  style={{ width: "100%" }}
-                  placeholder={t(K.ENUM_INPUT_PLANCEHOLDER)}
-                ></Select>
-              </Form.Item>
-            )
-          }
-        </Form.Item>
+        {enumFormItem}
 
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues.type !== currentValues.type
-          }
-        >
-          {({ getFieldValue }) =>
-            [...numberTypeList, "string"].includes(getFieldValue("type")) && (
-              <Form.Item
-                name="validate"
-                label="Validate"
-                getValueProps={(v) => ({
-                  value: { ...v, type: getFieldValue("type") },
-                })}
-              >
-                <FieldValidatorItem />
-              </Form.Item>
-            )
-          }
-        </Form.Item>
+        {validatorFormItem}
 
         <Form.Item name="description" label="description">
           <Input.TextArea />
