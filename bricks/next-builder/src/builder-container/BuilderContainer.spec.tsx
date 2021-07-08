@@ -80,6 +80,13 @@ describe("BuilderContainer", () => {
             id: "B-001",
           },
         ]}
+        templateSources={[
+          {
+            type: "custom-template",
+            templateId: "tpl-basic-view",
+            id: "T-001",
+          },
+        ]}
       />
     );
     expect(ref.current).toBe(mockManager);
@@ -91,11 +98,23 @@ describe("BuilderContainer", () => {
     expect(mockManager.onNodeReorder).toBeCalled();
     expect(mockManager.onNodeClick).toBeCalled();
     expect(mockManager.storyListInit).toBeCalled();
-    expect(mockManager.dataInit).toBeCalledWith({
-      type: "bricks",
-      path: "/home",
-      id: "B-001",
-    });
+    expect(mockManager.dataInit).toBeCalledWith(
+      {
+        type: "bricks",
+        path: "/home",
+        id: "B-001",
+      },
+      new Map([
+        [
+          "tpl-basic-view",
+          {
+            type: "custom-template",
+            templateId: "tpl-basic-view",
+            id: "T-001",
+          },
+        ],
+      ])
+    );
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
       `BuilderCanvas(${BuilderDataType.ROUTE_OF_BRICKS},0)`
@@ -119,11 +138,14 @@ describe("BuilderContainer", () => {
         ]}
       />
     );
-    expect(mockManager.dataInit).toBeCalledWith({
-      type: "routes",
-      path: "/",
-      id: "B-001",
-    });
+    expect(mockManager.dataInit).toBeCalledWith(
+      {
+        type: "routes",
+        path: "/",
+        id: "B-001",
+      },
+      undefined
+    );
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
       `BuilderCanvas(${BuilderDataType.ROUTE_OF_ROUTES},0)`
@@ -143,11 +165,14 @@ describe("BuilderContainer", () => {
         initialCanvasIndex={0}
       />
     );
-    expect(mockManager.dataInit).toBeCalledWith({
-      type: "redirect",
-      path: "/",
-      id: "B-001",
-    });
+    expect(mockManager.dataInit).toBeCalledWith(
+      {
+        type: "redirect",
+        path: "/",
+        id: "B-001",
+      },
+      undefined
+    );
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
       `BuilderCanvas(${BuilderDataType.ROUTE_OF_REDIRECT},0)`
@@ -181,11 +206,14 @@ describe("BuilderContainer", () => {
         ]}
       />
     );
-    expect(mockManager.dataInit).toBeCalledWith({
-      type: "custom-template",
-      templateId: "tpl-test",
-      id: "B-001",
-    });
+    expect(mockManager.dataInit).toBeCalledWith(
+      {
+        type: "custom-template",
+        templateId: "tpl-test",
+        id: "B-001",
+      },
+      undefined
+    );
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
       `BuilderCanvas(${BuilderDataType.CUSTOM_TEMPLATE},1)`
@@ -219,11 +247,14 @@ describe("BuilderContainer", () => {
         ]}
       />
     );
-    expect(mockManager.dataInit).toBeCalledWith({
-      type: "snippet",
-      snippetId: "snippet-test",
-      id: "S-001",
-    });
+    expect(mockManager.dataInit).toBeCalledWith(
+      {
+        type: "snippet",
+        snippetId: "snippet-test",
+        id: "S-001",
+      },
+      undefined
+    );
     expect(mockConsoleError).not.toBeCalled();
     expect(wrapper.find(BuilderCanvas).text()).toBe(
       `BuilderCanvas(${BuilderDataType.SNIPPET},1)`

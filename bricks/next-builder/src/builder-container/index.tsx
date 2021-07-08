@@ -79,30 +79,48 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   appId: string;
 
+  // This is the main data of the storyboard tree.
   @property({ attribute: false })
   dataSource: BuilderRouteOrBrickNode[];
 
+  // This is the library which contains all bricks, templates and snippets.
   @property({ attribute: false })
   brickList: BrickOptionItem[];
 
+  // This is a list which contains all shared editors.
   @property({ attribute: false })
   editorList: SharedEditorConf[];
 
+  // This is a list which contains all provider bricks.
   @property({ attribute: false })
   providerList: string[];
 
+  // This will be deprecated soon.
   @property({ attribute: false })
   storyList: Story[];
 
+  // This list is only for dropdown menu of routes in route view.
+  // And it maybe lazy-loaded.
   @property({ attribute: false })
   routeList: BuilderRouteNode[];
 
+  // This list is only for dropdown menu of templates in template view.
+  // And it maybe lazy-loaded.
   @property({ attribute: false })
   templateList: BuilderCustomTemplateNode[];
 
+  // This list is only for dropdown menu of snippets in snippet view.
+  // And it maybe lazy-loaded.
   @property({ attribute: false })
   snippetList: BuilderSnippetNode[];
 
+  // This a list which contains all custom templates with their brick tree.
+  // It is used for expanding templates in canvas.
+  @property({ attribute: false })
+  templateSources: BuilderCustomTemplateNode[];
+
+  // When a process of data-storing is taking, turn on this flag to
+  // disable interactions such as dropping new nodes on canvas.
   @property({ type: Boolean })
   processing: boolean;
 
@@ -555,6 +573,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 routeList={this.routeList}
                 templateList={this.templateList}
                 snippetList={this.snippetList}
+                templateSources={this.templateSources}
                 storyList={this.storyList}
                 processing={this.processing}
                 initialFullscreen={this.fullscreen}

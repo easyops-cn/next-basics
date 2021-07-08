@@ -18,7 +18,10 @@ import sharedStyles from "../shared.module.css";
 export function StoryboardTreeView(): React.ReactElement {
   const { nodes } = useBuilderData();
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const groups = useBuilderGroupedChildNodes({ isRoot: true });
+  const groups = useBuilderGroupedChildNodes({
+    isRoot: true,
+    doNotExpandTemplates: true,
+  });
   const { dataType, setHighlightNodes, storyboardQuery, setStoryboardQuery } =
     useBuilderUIContext();
   const mountPoint = "bricks";

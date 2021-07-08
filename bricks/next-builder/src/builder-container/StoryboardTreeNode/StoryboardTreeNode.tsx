@@ -49,10 +49,14 @@ export function StoryboardTreeNode({
   const node = useBuilderNode({ nodeUid });
   const { highlightNodes } = useBuilderUIContext();
   const hoverNodeUid = useHoverNodeUid();
-  const mountPoints = useBuilderNodeMountPoints({ nodeUid });
+  const mountPoints = useBuilderNodeMountPoints({
+    nodeUid,
+    doNotExpandTemplates: true,
+  });
   const parentNode = useBuilderParentNode(nodeUid);
   const siblingGroups = useBuilderGroupedChildNodes({
     nodeUid: parentNode.$$uid,
+    doNotExpandTemplates: true,
   });
   const manager = useBuilderDataManager();
   const canDrop = useCanDrop();

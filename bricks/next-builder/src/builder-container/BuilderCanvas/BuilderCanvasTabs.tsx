@@ -20,6 +20,7 @@ export function BuilderCanvasTabs(): React.ReactElement {
   const { edges } = useBuilderData();
   const groupedRootChildNodes = useBuilderGroupedChildNodes({
     isRoot: true,
+    doNotExpandTemplates: true,
   });
   const rootChildNodes = groupedRootChildNodes.flatMap(
     (group) => group.childNodes
@@ -46,7 +47,7 @@ export function BuilderCanvasTabs(): React.ReactElement {
     return map;
   }, [canvasList, edges]);
 
-  const tabs = React.useMemo(
+  const tabs = useMemo(
     () =>
       // The first canvas should always be the main canvas.
       // And the last canvas should always be an empty portal canvas.
