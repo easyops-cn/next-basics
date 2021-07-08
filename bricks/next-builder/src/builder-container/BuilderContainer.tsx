@@ -49,6 +49,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   routeList?: BuilderRouteNode[];
   templateList?: BuilderCustomTemplateNode[];
   snippetList?: BuilderSnippetNode[];
+  templateSources?: BuilderCustomTemplateNode[];
   processing?: boolean;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
@@ -93,6 +94,7 @@ export function LegacyBuilderContainer(
     routeList,
     templateList,
     snippetList,
+    templateSources,
     processing,
     initialFullscreen,
     initialToolboxTab,
@@ -200,13 +202,18 @@ export function LegacyBuilderContainer(
       }
     }
     if (type !== BuilderDataType.UNKNOWN) {
-      manager.dataInit(dataSource[0]);
+      manager.dataInit(
+        dataSource[0],
+        templateSources
+          ? new Map(templateSources.map((tpl) => [tpl.templateId, tpl]))
+          : undefined
+      );
     } else {
       // eslint-disable-next-line no-console
       console.error("Unexpected dataSource", dataSource);
     }
     setDataType(type);
-  }, [dataSource, manager]);
+  }, [dataSource, manager, templateSources]);
 
   React.useEffect(() => {
     // If the canvas index is not specified, set to portal canvas if the

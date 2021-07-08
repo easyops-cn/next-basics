@@ -36,7 +36,10 @@ export function StoryboardTreeMountPoint({
 }: StoryboardTreeMountPointProps): React.ReactElement {
   const manager = useBuilderDataManager();
   const parentNode = useBuilderNode({ nodeUid });
-  const siblingGroups = useBuilderGroupedChildNodes({ nodeUid });
+  const siblingGroups = useBuilderGroupedChildNodes({
+    nodeUid,
+    doNotExpandTemplates: true,
+  });
   const childNodes = React.useMemo(
     () =>
       siblingGroups.find((group) => group.mountPoint === mountPoint)
