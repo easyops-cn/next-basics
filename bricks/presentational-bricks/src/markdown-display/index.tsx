@@ -47,6 +47,14 @@ export class MarkdownDisplayElement extends UpdatingElement {
     value?: string;
   };
 
+  /**
+   * @kind booelan
+   * @required false
+   * @default true
+   * @description markdown 图片是否支持预览
+   */
+  @property({ attribute: false }) imagePreview: boolean;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -71,7 +79,10 @@ export class MarkdownDisplayElement extends UpdatingElement {
       }
       ReactDOM.render(
         <BrickWrapper>
-          <MarkdownDisplay value={mutableProps.value} />
+          <MarkdownDisplay
+            value={mutableProps.value}
+            imagePreview={this.imagePreview}
+          />
         </BrickWrapper>,
         this
       );
