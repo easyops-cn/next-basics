@@ -11,7 +11,7 @@ import {
   formatOptions,
   GeneralOption,
 } from "@next-libs/forms";
-import { GeneralRadio } from "./GeneralRadio";
+import { GeneralRadio, RadioType } from "./GeneralRadio";
 import { RadioGroupButtonStyle } from "antd/lib/radio";
 
 /**
@@ -22,6 +22,8 @@ import { RadioGroupButtonStyle } from "antd/lib/radio";
  * @author jo
  * @slots
  * @history
+ * 1.0.0: 新增构件 `forms.general-radio`
+ * 1.1.0: 构件 type 属性，添加`icon`类型，option 入参为`{icon?:MenuIcon,label: string,value:any}`
  * @memo
  * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
  * ```typescript
@@ -103,7 +105,7 @@ export class GeneralRadioElement extends FormItemElement {
   disabled: boolean;
 
   /**
-   * @kind `default | button`
+   * @kind RadioType
    * @required false
    * @default `default`
    * @description 	单选框样式类型
@@ -112,7 +114,7 @@ export class GeneralRadioElement extends FormItemElement {
   @property({
     attribute: false,
   })
-  type: "button" | "default" = "default";
+  type: RadioType = "default";
 
   /**
    * @kind "large" | "middle" | "small"

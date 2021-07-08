@@ -81,4 +81,35 @@ describe("GeneralRadio", () => {
     wrapper.update();
     expect(wrapper.find(Radio.Group).prop("value")).toBe("better");
   });
+  it("should type=icon", () => {
+    const wrapper = mount(
+      <GeneralRadio
+        options={[
+          {
+            icon: {
+              icon: "area-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "area-chart",
+            label: "area-chart",
+          },
+          {
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "bar-chart",
+            label: "bar-chart",
+          },
+        ]}
+        type="icon"
+        name="icon"
+        label="icon选择"
+        value="bar-chart"
+      />
+    );
+    expect(wrapper.find('input[id="bar-chart"]').prop("checked")).toBe(true);
+  });
 });
