@@ -39,6 +39,33 @@ export class InfoDisplayCardListElement extends UpdatingElement {
   dataSource: CardItem[];
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 卡片跳转 url，支持模版变量
+   */
+  @property()
+  urlTemplate: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 卡片跳转 url， url 优先于 urlTemplate 执行
+   */
+  @property()
+  url: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 卡片跳转 target，例如可以设置成 _blank
+   */
+  @property()
+  target: string;
+
+  /**
    * @kind boolean
    * @required false
    * @default true
@@ -142,6 +169,9 @@ export class InfoDisplayCardListElement extends UpdatingElement {
             detailOfDescBrickConf={this.detailOfDescBrickConf}
             titleFontSize={this.titleFontSize}
             detailDescFontSize={this.detailDescFontSize}
+            url={this.url}
+            urlTemplate={this.urlTemplate}
+            target={this.target}
           />
         </BrickWrapper>,
         this
