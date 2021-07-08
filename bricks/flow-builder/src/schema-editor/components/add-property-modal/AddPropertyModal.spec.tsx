@@ -1,6 +1,6 @@
 import React from "react";
-import { Form, Modal } from "antd";
-import { mount, shallow } from "enzyme";
+import { Form, Modal, Select } from "antd";
+import { mount, shallow, ReactWrapper } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { AddPropertyModal } from "./AddPropertyModal";
 
@@ -75,6 +75,20 @@ describe("AddPropertyModal", () => {
 
     expect(
       document.querySelectorAll("span[title='SCHEMA_ITEM_REF']").length
+    ).toEqual(1);
+
+    expect(
+      wrapper.find(".ant-form-item-required[title='Name']").length
+    ).toEqual(0);
+    wrapper.find(Select).at(0).invoke("onChange")("normal", null);
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    expect(
+      wrapper.find(".ant-form-item-required[title='Name']").length
     ).toEqual(1);
   });
 });

@@ -72,7 +72,7 @@ export function AddPropertyModal({
         <Row gutter={8}>
           <Col span={12}>
             <Form.Item name="origin" initialValue="normal">
-              <Select>
+              <Select onChange={(value) => setNameRequired(value === "normal")}>
                 <Select.Option key="normal" value="normal">
                   {t(K.SCHEMA_ITEM_NORMAL)}
                 </Select.Option>
