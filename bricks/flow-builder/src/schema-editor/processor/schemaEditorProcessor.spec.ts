@@ -6,7 +6,8 @@ import {
   processItemData,
   processFormInitvalue,
   processFormData,
-} from "./processor";
+} from "./schemaEditorProcessor";
+import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
 
 describe("processor tst", () => {
   describe("getGridTemplateColumns", () => {
@@ -93,6 +94,14 @@ describe("processor tst", () => {
 
       const result3 = processItemInitValue();
       expect(result3).toEqual({ origin: "normal" });
+
+      const result4 = processItemInitValue({ name: "name", type: "string" });
+      expect(result4).toEqual({
+        name: "name",
+        origin: "normal",
+        type: "string",
+        validate: {},
+      });
     });
   });
 
@@ -114,6 +123,23 @@ describe("processor tst", () => {
 
       const result3 = processItemData();
       expect(result3).toEqual({});
+
+      const result4 = processItemData({
+        name: "a",
+        type: "string",
+        origin: "normal",
+        validate: {
+          type: "string",
+          pattern: "\\w+",
+        } as ProcessValidateField,
+      });
+      expect(result4).toEqual({
+        name: "a",
+        type: "string",
+        validate: {
+          pattern: "\\w+",
+        },
+      });
     });
   });
 
@@ -129,7 +155,12 @@ describe("processor tst", () => {
             type: "bool",
             description: "是否需要通知",
           },
-          { name: "labels", type: "DeployLabel", description: "标签" },
+          {
+            name: "labels",
+            type: "DeployLabel",
+            description: "标签",
+            default: undefined,
+          },
           {
             name: "strategyList",
             type: "object",
@@ -237,14 +268,67 @@ describe("processor tst", () => {
       });
     });
 
-    it("should process value when rootnode is ref type", () => {
+    it("should process value with default", () => {
       const initValue = {
-        ref: "request",
-        required: ["request"],
+        default: {
+          needNotify: true,
+        },
+        name: "request",
+        type: "object",
+        fields: [
+          {
+            name: "needNotify",
+            type: "bool",
+            description: "是否需要通知",
+          },
+          { name: "labels", type: "DeployLabel", description: "标签" },
+          {
+            name: "strategyList",
+            type: "object",
+            fields: [
+              {
+                name: "packageId",
+                type: "package_id",
+                description: "packageId",
+              },
+            ],
+            description: "策略列表",
+          },
+          {
+            ref: "TrackData.instanceId",
+          },
+        ],
       };
 
       const result = processFormInitvalue(initValue);
-      expect(result).toEqual({ ref: "request", required: true, fields: [] });
+      expect(result).toEqual({
+        name: "request",
+        type: "object",
+        fields: [
+          {
+            name: "needNotify",
+            type: "bool",
+            description: "是否需要通知",
+            default: true,
+          },
+          { name: "labels", type: "DeployLabel", description: "标签" },
+          {
+            name: "strategyList",
+            type: "object",
+            fields: [
+              {
+                name: "packageId",
+                type: "package_id",
+                description: "packageId",
+              },
+            ],
+            description: "策略列表",
+          },
+          {
+            ref: "TrackData.instanceId",
+          },
+        ],
+      });
     });
   });
 
@@ -280,6 +364,7 @@ describe("processor tst", () => {
       const result = processFormData(formData);
 
       expect(result).toEqual({
+        default: {},
         fields: [
           { description: "是否需要通知", name: "needNotify", type: "bool" },
           { description: "标签", name: "labels", type: "DeployLabel" },
@@ -309,10 +394,85 @@ describe("processor tst", () => {
       const result = processFormData(formData);
 
       expect(result).toEqual({
+        default: {},
         name: "request",
         type: "object",
         required: ["request"],
         fields: [],
+      });
+    });
+
+    it("should process form data with default", () => {
+      const formData = {
+        fields: [
+          {
+            description: "是否需要通知",
+            name: "needNotify",
+            type: "bool",
+            default: true,
+          },
+          {
+            description: "标签",
+            name: "labels",
+            required: true,
+            type: "DeployLabel",
+          },
+          {
+            description: "策略列表",
+            fields: [
+              {
+                description: "packageId",
+                name: "packageId",
+                type: "package_id",
+              },
+            ],
+            name: "strategyList",
+            type: "object",
+          },
+          { ref: "TrackData.instanceId", required: true },
+        ],
+        name: "request",
+        type: "object",
+      };
+
+      const result = processFormData(formData);
+
+      expect(result).toEqual({
+        default: { needNotify: true },
+        fields: [
+          { description: "是否需要通知", name: "needNotify", type: "bool" },
+          { description: "标签", name: "labels", type: "DeployLabel" },
+          {
+            description: "策略列表",
+            fields: [
+              {
+                description: "packageId",
+                name: "packageId",
+                type: "package_id",
+              },
+            ],
+            name: "strategyList",
+            type: "object",
+          },
+          { ref: "TrackData.instanceId" },
+        ],
+        name: "request",
+        required: ["labels", "TrackData.instanceId"],
+        type: "object",
+      });
+
+      const result2 = processFormData({
+        name: "name",
+        type: "string",
+        required: true,
+        default: "lucy",
+      });
+      expect(result2).toEqual({
+        default: { name: "lucy" },
+        fields: [],
+        name: "name",
+        required: ["name"],
+        type: "string",
       });
     });
   });
