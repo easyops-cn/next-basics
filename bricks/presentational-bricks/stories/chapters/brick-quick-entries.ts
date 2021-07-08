@@ -405,6 +405,32 @@ export const BrickQuickEntriesStory: Story = {
         ],
       },
     },
+    {
+      description: {
+        title: "data 传递给子构件数据",
+        message:
+          "列如 agent-status 需要value 属性，可以通过 data + transform 传递",
+      },
+      brick: "presentational-bricks.brick-quick-entries",
+      properties: {
+        row: 1,
+        column: 1,
+        data: {
+          value: "正常",
+        },
+        useBrick: [
+          {
+            brick: "presentational-bricks.agent-status",
+            // properties: {  使用 data 传递
+            //   value: '正常'
+            // }
+            transform: {
+              value: "@{value}",
+            },
+          },
+        ],
+      },
+    },
   ],
   previewColumns: 1,
 };
