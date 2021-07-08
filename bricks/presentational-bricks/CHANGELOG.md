@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.196.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.195.0...@next-bricks/presentational-bricks@1.196.0) (2021-07-08)
+
+
+### Features
+
+* **markdown:** eidtor and preview add imagePreview to support image preview ([c5f7d08](https://github.com/easyops-cn/next-basics/commit/c5f7d08e6719dfd63088434410f24647d257708b))
+* **presentational-bricks:** brick-rate add tooltips property ([e8ee2b3](https://github.com/easyops-cn/next-basics/commit/e8ee2b39860c7d74ab3397b92260d0296f2c96e9))
+* support markdowm-display image preview ([437fed2](https://github.com/easyops-cn/next-basics/commit/437fed2687c23e4b56505a283f8057071db32afd))
+
+
+
+
+
 # [1.195.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.194.0...@next-bricks/presentational-bricks@1.195.0) (2021-07-08)
 
 
