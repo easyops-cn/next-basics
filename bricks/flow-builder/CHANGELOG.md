@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.2.0...@next-bricks/flow-builder@1.3.0) (2021-07-08)
+
+
+### Bug Fixes
+
+* 切换表单项是否必填 ([93eeb0a](https://github.com/easyops-cn/next-basics/commit/93eeb0a790217ebd031c0dc1e96e8e7dbfd7885e))
+
+
+### Features
+
+* add processor ([e43a011](https://github.com/easyops-cn/next-basics/commit/e43a011158d0ebadcf267fa7905c148ff9e35795))
+
+
+
+
+
 # [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.1.3...@next-bricks/flow-builder@1.2.0) (2021-07-08)
 
 

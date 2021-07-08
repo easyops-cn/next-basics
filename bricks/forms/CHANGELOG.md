@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.177.0...@next-bricks/forms@1.178.0) (2021-07-08)
+
+
+### Bug Fixes
+
+* **forms.general-radio:** type 类型为icon 的单选框添加禁用样式 ([c618cf1](https://github.com/easyops-cn/next-basics/commit/c618cf1b486689685d8993a01be6a00ecda66898))
+
+
+### Features
+
+* **fgeneral-checkbox:** 新增type 类型为icon 的复选框样式 ([e1359d4](https://github.com/easyops-cn/next-basics/commit/e1359d4a754af94d2effa98ceff62145e21e402c))
+
+
+
+
+
 # [1.177.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.176.1...@next-bricks/forms@1.177.0) (2021-07-08)
 
 
