@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Checkbox, Row, Col, Collapse } from "antd";
 import { isNil, uniq } from "lodash";
 import { CheckboxValueType, CheckboxOptionType } from "antd/lib/checkbox/Group";
@@ -6,9 +6,12 @@ import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { OptionGroup } from "./index";
 import styles from "./GeneralCheckbox.module.css";
 import { CaretRightOutlined } from "@ant-design/icons";
+import { GeneralIcon } from "@next-libs/basic-components";
+import { MenuIcon } from "@next-core/brick-types";
 
+export type CheckboxType = "default" | "icon";
 export interface GeneralCheckboxProps extends FormItemWrapperProps {
-  options?: CheckboxOptionType[];
+  options?: CheckboxOptionType | IconCheckboxItem[];
   value?: CheckboxValueType[] | CheckboxValueType;
   colSpan?: number;
   onChange?: (value: CheckboxValueType[] | CheckboxValueType) => void;
@@ -16,8 +19,76 @@ export interface GeneralCheckboxProps extends FormItemWrapperProps {
   isGroup?: boolean;
   text?: string;
   disabled?: boolean;
+  type?: CheckboxType;
 }
-
+export interface IconCheckboxItem {
+  icon?: MenuIcon;
+  value: any;
+  label?: any;
+  disabled?: boolean;
+}
+export interface IconCheckboxProps {
+  options: IconCheckboxItem[];
+  name: string;
+  value?: any[];
+  disabled?: boolean;
+  onChange?: (checkList: any[]) => void;
+}
+export function IconCheckbox(props: IconCheckboxProps) {
+  const { options, name, value = [], disabled = false, onChange } = props;
+  /**
+   * 选中事件
+   * @param value
+   * @param checked
+   */
+  const checkItem = (val: any, checked: boolean) => {
+    let newCheckedList: any[] = [...value];
+    newCheckedList = checked
+      ? [...newCheckedList, val]
+      : newCheckedList.filter((v) => v !== val);
+    onChange && onChange(newCheckedList);
+  };
+  return (
+    <>
+      {options.map((item: any) => (
+        <label
+          htmlFor={item.value}
+          key={item.value}
+          className={
+            disabled || item?.disabled
+              ? styles.disabledIconCheckbox
+              : styles.iconCheckbox
+          }
+        >
+          <div className={styles.inputBox}>
+            <input
+              type="checkbox"
+              value={item.value}
+              name={name}
+              id={item.value}
+              checked={value.includes(item.value)}
+              disabled={disabled || item?.disabled}
+              onChange={() =>
+                checkItem(item.value, !value.includes(item.value))
+              }
+            />
+          </div>
+          <div className={styles.content}>
+            {item.icon && (
+              <GeneralIcon
+                style={{
+                  fontSize: "32px",
+                }}
+                icon={item.icon}
+              ></GeneralIcon>
+            )}
+            <div className={styles.text}>{item.label || item.value}</div>
+          </div>
+        </label>
+      ))}
+    </>
+  );
+}
 export function GeneralCheckboxItem(
   props: GeneralCheckboxProps
 ): React.ReactElement {
@@ -31,8 +102,10 @@ export function GeneralCheckboxItem(
     disabled,
     value,
     options,
+    type,
     ...inputProps
   } = props;
+
   const isGridType = !isNil(colSpan);
   const groupMap = useMemo(() => {
     if (optionGroups && isGroup) {
@@ -166,7 +239,17 @@ export function GeneralCheckboxItem(
       return getCheckboxGroup(options, isGridType);
     }
   };
-
+  if (type === "icon") {
+    return (
+      <IconCheckbox
+        options={options}
+        name={props.name}
+        value={value}
+        disabled={disabled}
+        onChange={onChange}
+      />
+    );
+  }
   return (isGroup && optionGroups) || options?.length > 0 ? (
     <Checkbox.Group
       className={styles.generalCheckBox}

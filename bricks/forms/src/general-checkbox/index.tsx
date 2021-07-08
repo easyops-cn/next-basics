@@ -7,7 +7,11 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 import { formatOptions, FormItemElement } from "@next-libs/forms";
-import { GeneralCheckbox } from "./GeneralCheckbox";
+import {
+  GeneralCheckbox,
+  CheckboxType,
+  IconCheckboxItem,
+} from "./GeneralCheckbox";
 import { CheckboxValueType, CheckboxOptionType } from "antd/lib/checkbox/Group";
 
 export interface OptionGroup {
@@ -22,7 +26,7 @@ export interface OptionGroup {
   /**
    * 分组下的选项
    */
-  options: CheckboxOptionType[];
+  options: (CheckboxOptionType | IconCheckboxItem)[];
 }
 
 /**
@@ -34,6 +38,7 @@ export interface OptionGroup {
 * @slots
 * @history
 * 1.145.0:新增属性 `isGroup``optionGroups`，支持选项分组
+* 1.146.0:新增属性 `type`，支持复选框选项`default``icon`样式
 * @memo
 
 * > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
@@ -46,6 +51,17 @@ export interface OptionGroup {
 *```
 */
 export class GeneralCheckboxElement extends FormItemElement {
+  /**
+   * @kind CheckboxType
+   * @required false
+   * @default `default`
+   * @description 	多选框样式类型
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  type: CheckboxType = "default";
   /**
    * @kind string
    * @required true
@@ -71,7 +87,7 @@ export class GeneralCheckboxElement extends FormItemElement {
   @property({
     attribute: false,
   })
-  options: CheckboxOptionType[];
+  options: (CheckboxOptionType | IconCheckboxItem)[];
 
   /**
    * @kind any[] | boolean
@@ -203,6 +219,7 @@ export class GeneralCheckboxElement extends FormItemElement {
             isGroup={this.isGroup}
             text={this.text}
             disabled={this.disabled}
+            type={this.type}
           />
         </BrickWrapper>,
         this
