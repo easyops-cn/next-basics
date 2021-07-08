@@ -15,6 +15,7 @@ interface MarkdownEditorProps extends FormItemWrapperProps {
   onUploadImage?: (value: ImageInfo) => void;
   previewContainerStyle?: React.CSSProperties;
   supportUploadImg?: boolean;
+  imagePreview?: boolean;
   bucketName?: string;
 }
 
@@ -27,6 +28,7 @@ export function MarkdownEditorItem(
     onChange,
     previewContainerStyle,
     supportUploadImg,
+    imagePreview,
     bucketName,
     onUploadImage,
   } = props;
@@ -101,7 +103,7 @@ export function MarkdownEditorItem(
           className={style.markdownPreviewContainer}
           style={previewContainerStyle}
         >
-          <MarkdownDisplay value={value} />
+          <MarkdownDisplay value={value} imagePreview={imagePreview} />
         </div>
       </Tabs.TabPane>
     </Tabs>
@@ -120,6 +122,7 @@ export function MarkdownEditor(props: MarkdownEditorProps): React.ReactElement {
         configProps={props.configProps}
         previewContainerStyle={props.previewContainerStyle}
         supportUploadImg={props.supportUploadImg}
+        imagePreview={props.imagePreview}
         bucketName={props.bucketName}
       />
     </FormItemWrapper>

@@ -105,6 +105,14 @@ export class MarkdownEditorElement extends FormItemElement {
     value?: string;
   };
 
+  /**
+   * @kind booelan
+   * @required false
+   * @default true
+   * @description markdown 图片是否支持预览
+   */
+  @property({ attribute: false }) imagePreview: boolean;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -148,6 +156,7 @@ export class MarkdownEditorElement extends FormItemElement {
             message={this.message}
             validator={this.validator}
             notRender={this.notRender}
+            imagePreview={this.imagePreview}
             required={this.required}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
