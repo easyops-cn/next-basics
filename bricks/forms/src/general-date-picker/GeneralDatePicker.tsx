@@ -24,25 +24,14 @@ interface FieldSetAndRanges {
 }
 
 const getFieldSetAndRanges = (
-  expression: string | number,
-  type?: string
+  expression: string | number
 ): FieldSetAndRanges => {
   const fieldSet = new Set<number>();
   const ranges: [number, number][] = [];
 
   `${expression}`.split(",").forEach((part) => {
     if (part.includes("-")) {
-      let range = part.split("-").map((v) => Number(v)) as [number, number];
-      const [min, max] = range;
-      if (type === "weekday" && min > max) {
-        range = [max, min];
-        ranges.push([max, 7]);
-        ranges.push([1, min]);
-        return;
-      }
-      if (type !== "weekday" && min > max) {
-        range = [max, min];
-      }
+      const range = part.split("-").map((v) => Number(v)) as [number, number];
       ranges.push(range);
     } else if (part.trim() !== "" && !Number.isNaN(Number(part))) {
       fieldSet.add(Number(part));
@@ -98,7 +87,7 @@ export function GeneralDatePicker(
       const yearFieldSetAndRanges = getFieldSetAndRanges(year);
       const monthFieldSetAndRanges = getFieldSetAndRanges(month);
       const dateFieldSetAndRanges = getFieldSetAndRanges(date);
-      const weekFieldSetAndRanges = getFieldSetAndRanges(weekday, "weekday");
+      const weekFieldSetAndRanges = getFieldSetAndRanges(weekday);
       return {
         fields: {
           hour: hourFieldSetAndRanges,
