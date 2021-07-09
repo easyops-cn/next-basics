@@ -1,6 +1,13 @@
 import { getRuntime } from "@next-core/brick-kit";
 import { CategoryNode } from "./interfaces";
 
+/**
+ *
+ * 将命名空间按.号分割、分层，并返回树形结构数据
+ * @export
+ * @param {{ id: string }[]} namespaces
+ * @return {*}  {CategoryNode[]}
+ */
 export function getNameSpaceCategory(
   namespaces: { id: string }[]
 ): CategoryNode[] {

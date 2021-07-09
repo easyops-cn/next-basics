@@ -14,7 +14,30 @@ interface NamespaceVertice {
   id: string;
   instanceId: string;
 }
-
+/**
+ *
+ * 将cmdb返回的namespace图数据，按.号分割、分层，处理成新的图数据
+ * 例如
+ *     - a.b1
+ *       - contract1
+ *       - contract2
+ *     - a.b2
+ *       - contract3
+ *  =>
+ *     - a
+ *       - b1
+ *         - contract1
+ *         - contract2
+ *       - b2
+ *         - contract3
+ * @export
+ * @param {{
+ *   topic_vertices: NamespaceVertice[];
+ *   vertices: any[];
+ *   edges: GraphEdge[];
+ * }} graphData
+ * @return {*}  {*}
+ */
 export function getNameSpaceTree(graphData: {
   topic_vertices: NamespaceVertice[];
   vertices: any[];
