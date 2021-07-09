@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.0...@next-bricks/next-builder@1.60.1) (2021-07-09)
+
+
+### Bug Fixes
+
+* remove unused DroppingStatusContext ([f70a16c](https://github.com/easyops-cn/next-basics/commit/f70a16c3ff262a5473969bca0f3a89301b1f0b40))
+
+
+
+
+
 # [1.60.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.5...@next-bricks/next-builder@1.60.0) (2021-07-08)
 
 
