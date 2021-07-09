@@ -17,6 +17,7 @@ import { innerTypeList, numberTypeList } from "../../constants";
 import { SchemaItemProperty, AddedSchemaFormItem } from "../../interfaces";
 import { processItemInitValue, processItemData } from "../../processor";
 import { FieldValidatorItem } from "../field-validator-item/FieldValidatorItem";
+import { TypeItem } from "../../components/type-item/TypeItem";
 
 export interface AddPropertyModalProps {
   trackId?: string;
@@ -96,13 +97,7 @@ export function AddPropertyModal({
                     rules={[{ required: true }]}
                     messageVariables={{ label: "type" }}
                   >
-                    <AutoComplete>
-                      {innerTypeList.map((type) => (
-                        <AutoComplete.Option key={type} value={type}>
-                          {type}
-                        </AutoComplete.Option>
-                      ))}
-                    </AutoComplete>
+                    <TypeItem />
                   </Form.Item>
                 ) : (
                   <Form.Item

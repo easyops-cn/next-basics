@@ -6,7 +6,7 @@ import {
   processItemData,
   processFormInitvalue,
   processFormData,
-} from "./schemaEditorProcessor";
+} from "./schemaEditor";
 import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
 
 describe("processor tst", () => {

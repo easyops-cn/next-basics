@@ -2,7 +2,7 @@ import { isNil, omit } from "lodash";
 import {
   processValidatorInitValue,
   formatValidatorData,
-} from "./filedValidatorItemProcessor";
+} from "./filedValidatorItem";
 import {
   EditorTitleProps,
   SchemaItemProperty,
@@ -91,7 +91,6 @@ export function processFields(
 export function processFormInitvalue(
   data: SchemaRootNodeProperty
 ): SchemaItemProperty {
-
   const result: SchemaItemProperty = omit(data, [
     "fields",
     "required",

@@ -1,7 +1,7 @@
 import {
   processValidatorInitValue,
   formatValidatorData,
-} from "./filedValidatorItemProcessor";
+} from "./filedValidatorItem";
 
 describe("processor", () => {
   describe("processValidatorInitValue", () => {

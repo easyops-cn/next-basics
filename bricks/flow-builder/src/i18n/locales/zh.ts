@@ -8,6 +8,9 @@ const locale: Locale = {
   [K.ENUM_INPUT_PLANCEHOLDER]: "填写相应的枚举值",
   [K.COMPARE_METHOD_PLANCEHOLDER]: "比较器",
   [K.COMPARE_VALUE_PLANCEHOLDER]: "请先选择比较器再填写相应的数值",
+  [K.ARRAY]: "数组",
+  [K.SIMPLE_TYPE]: "简单属性",
+  [K.MODEL_TYPE]: "模型",
 };
 
 export default locale;
