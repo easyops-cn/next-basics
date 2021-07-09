@@ -9,6 +9,7 @@ import {
   processTypeItemInitValue,
   processTypeItemData,
 } from "../../processor";
+import { modelRefCache } from "../../constants";
 import { ModelFieldItem } from "../../interfaces";
 
 export interface ContractModel {
@@ -57,6 +58,8 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
       ...typeValue,
       value,
     };
+    const find = modelList.find((item) => item.name === value);
+    find && modelRefCache.set(value, find.namespaceId);
     setTypeValue(newValue);
     props.onChange(processTypeItemData(newValue));
   };

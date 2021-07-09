@@ -4,6 +4,7 @@ import { debounce, isEmpty } from "lodash";
 import { useContractModels } from "../../hooks/useContractModels";
 import { ModelFieldItem } from "../../interfaces";
 import { processRefItemData, processRefItemInitValue } from "../../processor";
+import { modelRefCache } from "../../constants";
 
 export interface ProcessRefItemValue {
   name?: string;
@@ -69,6 +70,9 @@ export function RefItem(props: RefItemProps): React.ReactElement {
     };
 
     setRefValue(newValue);
+    const find = modelList.find((item) => item.name === newValue.name);
+    find &&
+      modelRefCache.set(`${newValue.name}.${newValue.field}`, find.namespaceId);
     props.onChange(processRefItemData(newValue));
   };
 

@@ -9,7 +9,7 @@ import {
   AddedSchemaFormItem,
   SchemaRootNodeProperty,
 } from "../interfaces";
-import { numberTypeList } from "../constants";
+import { numberTypeList, modelRefCache } from "../constants";
 
 export function getGridTemplateColumns(titleList: EditorTitleProps[]): string {
   return titleList.map((item) => item.width ?? "1fr").join(" ");
@@ -111,8 +111,15 @@ export function processFormInitvalue(
 
 export function collectFields(
   list: SchemaItemProperty[],
-  requiredList: string[],
-  defaultData: Record<string, unknown>,
+  {
+    requiredList,
+    defaultData,
+    importSet,
+  }: {
+    requiredList: string[];
+    defaultData: Record<string, unknown>;
+    importSet: Set<string>;
+  },
   result: SchemaItemProperty[]
 ): void {
   list?.forEach((item) => {
@@ -124,6 +131,11 @@ export function collectFields(
       defaultData[item.name] = item.default;
     }
 
+    const modelRef = modelRefCache.get(item.type || item.ref);
+    if (modelRef) {
+      importSet.add(modelRef);
+    }
+
     const property = {
       ...omit(item, ["fields", "required", "default"]),
     } as SchemaItemProperty;
@@ -132,7 +144,11 @@ export function collectFields(
 
     if (item.fields) {
       property.fields = [];
-      collectFields(item.fields, requiredList, defaultData, property.fields);
+      collectFields(
+        item.fields,
+        { requiredList, defaultData, importSet },
+        property.fields
+      );
     }
   });
 }
@@ -143,6 +159,7 @@ export function processFormData(
   const result: SchemaItemProperty = omit(data, "fields");
   const requiredList: string[] = [];
   const defaultData: Record<string, unknown> = {};
+  const importSet = new Set<string>();
   result.fields = [];
 
   if (data.required) {
@@ -153,11 +170,16 @@ export function processFormData(
     defaultData[data.name] = data.default;
   }
 
-  collectFields(data.fields, requiredList, defaultData, result.fields);
+  collectFields(
+    data.fields,
+    { requiredList, defaultData, importSet },
+    result.fields
+  );
 
   return {
     ...result,
     required: requiredList,
     default: defaultData,
+    import: Array.from(importSet),
   };
 }
