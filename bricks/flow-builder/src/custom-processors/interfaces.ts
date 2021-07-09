@@ -15,3 +15,10 @@ export interface Edge {
   type: string;
   [key: string]: any;
 }
+
+export interface CategoryNode {
+  key: string;
+  title: string;
+  category: "category" | "item";
+  children?: CategoryNode[];
+}
