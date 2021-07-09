@@ -65,7 +65,7 @@ export function StoryboardTreeMountPoint({
       item.nodeUid === nodeUid && item.mountPoint !== mountPoint,
     collect: (monitor) => ({
       mountPointMoveDirection:
-        monitor.isOver({ shallow: true }) &&
+        monitor.isOver() &&
         monitor.canDrop() &&
         getMountPointMoveDirection({
           draggingMountPoint: monitor.getItem().mountPoint,
