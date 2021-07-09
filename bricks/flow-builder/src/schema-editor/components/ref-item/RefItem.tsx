@@ -47,6 +47,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
     props.onChange(processRefItemData(newValue));
 
     const find = modelList.find((item) => item.name === value);
+    // istanbul ignore else
     if (find) {
       setFieldList(find.fields);
     }

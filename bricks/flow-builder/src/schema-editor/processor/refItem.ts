@@ -9,7 +9,7 @@ export function processRefItemInitValue(value = ""): ProcessRefItemValue {
   };
 }
 
-export function processRefItemData(value: ProcessRefItemValue): string {
+export function processRefItemData(value: ProcessRefItemValue = {}): string {
   return `${value.name}.${value.field}`;
 }
 

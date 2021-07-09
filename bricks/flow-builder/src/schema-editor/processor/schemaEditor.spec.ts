@@ -8,6 +8,7 @@ import {
   processFormData,
 } from "./schemaEditor";
 import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
+import * as constantsModuel from "../constants";
 
 describe("processor tst", () => {
   describe("getGridTemplateColumns", () => {
@@ -333,6 +334,10 @@ describe("processor tst", () => {
   });
 
   describe("processFormData", () => {
+    beforeEach(() => {
+      jest.resetModules();
+    });
+
     it("should process form data", () => {
       const formData = {
         fields: [
@@ -364,6 +369,7 @@ describe("processor tst", () => {
       const result = processFormData(formData);
 
       expect(result).toEqual({
+        import: [],
         default: {},
         fields: [
           { description: "是否需要通知", name: "needNotify", type: "bool" },
@@ -394,6 +400,7 @@ describe("processor tst", () => {
       const result = processFormData(formData);
 
       expect(result).toEqual({
+        import: [],
         default: {},
         name: "request",
         type: "object",
@@ -403,6 +410,87 @@ describe("processor tst", () => {
     });
 
     it("should process form data with default", () => {
+      const formData = {
+        import: [],
+        fields: [
+          {
+            description: "是否需要通知",
+            name: "needNotify",
+            type: "bool",
+            default: true,
+          },
+          {
+            description: "标签",
+            name: "labels",
+            required: true,
+            type: "DeployLabel",
+          },
+          {
+            description: "策略列表",
+            fields: [
+              {
+                description: "packageId",
+                name: "packageId",
+                type: "package_id",
+              },
+            ],
+            name: "strategyList",
+            type: "object",
+          },
+          { ref: "TrackData.instanceId", required: true },
+        ],
+        name: "request",
+        type: "object",
+      };
+
+      const result = processFormData(formData);
+
+      expect(result).toEqual({
+        default: { needNotify: true },
+        import: [],
+        fields: [
+          { description: "是否需要通知", name: "needNotify", type: "bool" },
+          { description: "标签", name: "labels", type: "DeployLabel" },
+          {
+            description: "策略列表",
+            fields: [
+              {
+                description: "packageId",
+                name: "packageId",
+                type: "package_id",
+              },
+            ],
+            name: "strategyList",
+            type: "object",
+          },
+          { ref: "TrackData.instanceId" },
+        ],
+        name: "request",
+        required: ["labels", "TrackData.instanceId"],
+        type: "object",
+      });
+
+      const result2 = processFormData({
+        name: "name",
+        type: "string",
+        required: true,
+        default: "lucy",
+      });
+      expect(result2).toEqual({
+        default: { name: "lucy" },
+        import: [],
+        fields: [],
+        name: "name",
+        required: ["name"],
+        type: "string",
+      });
+    });
+
+    it("should process form data with import data", () => {
+      constantsModuel.modelRefCache = new Map([
+        ["DeployLabel", "api.easyops.DeployLabel"],
+      ]);
+
       const formData = {
         fields: [
           {
@@ -439,6 +527,7 @@ describe("processor tst", () => {
 
       expect(result).toEqual({
         default: { needNotify: true },
+        import: ["api.easyops.DeployLabel"],
         fields: [
           { description: "是否需要通知", name: "needNotify", type: "bool" },
           { description: "标签", name: "labels", type: "DeployLabel" },
@@ -459,20 +548,6 @@ describe("processor tst", () => {
         name: "request",
         required: ["labels", "TrackData.instanceId"],
         type: "object",
-      });
-
-      const result2 = processFormData({
-        name: "name",
-        type: "string",
-        required: true,
-        default: "lucy",
-      });
-      expect(result2).toEqual({
-        default: { name: "lucy" },
-        fields: [],
-        name: "name",
-        required: ["name"],
-        type: "string",
       });
     });
   });

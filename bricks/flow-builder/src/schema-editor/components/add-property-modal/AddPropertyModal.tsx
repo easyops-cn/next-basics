@@ -122,56 +122,6 @@ export function AddPropertyModal({
     []
   );
 
-  // const typeFormItem = useMemo(
-  //   () => (
-  //     <Form.Item label="Type">
-  //       <Row gutter={8}>
-  //         <Col span={8}>
-  //           <Form.Item name="origin" initialValue="normal">
-  //             <Select onChange={(value) => setNameRequired(value === "normal")}>
-  //               <Select.Option key="normal" value="normal">
-  //                 {t(K.SCHEMA_ITEM_NORMAL)}
-  //               </Select.Option>
-  //               <Select.Option key="reference" value="reference">
-  //                 {t(K.SCHEMA_ITEM_REF)}
-  //               </Select.Option>
-  //             </Select>
-  //           </Form.Item>
-  //         </Col>
-  //         <Col span={16}>
-  //           <Form.Item
-  //             noStyle
-  //             shouldUpdate={(prevValues, currentValues) =>
-  //               prevValues.origin !== currentValues.origin
-  //             }
-  //           >
-  //             {({ getFieldValue }) =>
-  //               getFieldValue("origin") === "normal" ? (
-  //                 <Form.Item
-  //                   name="type"
-  //                   rules={[{ required: true }]}
-  //                   messageVariables={{ label: "type" }}
-  //                 >
-  //                   <TypeItem />
-  //                 </Form.Item>
-  //               ) : (
-  //                 <Form.Item
-  //                   name="ref"
-  //                   rules={[{ validator: checkRequired }]}
-  //                   messageVariables={{ label: "ref" }}
-  //                 >
-  //                   <RefItem />
-  //                 </Form.Item>
-  //               )
-  //             }
-  //           </Form.Item>
-  //         </Col>
-  //       </Row>
-  //     </Form.Item>
-  //   ),
-  //   [t]
-  // );
-
   const defaultFormItem = useMemo(
     () => (
       <Form.Item
