@@ -11,6 +11,7 @@ export enum K {
   ARRAY = "ARRAY",
   SIMPLE_TYPE = "SIMPLE_TYPE",
   MODEL_TYPE = "FROM_MODEL",
+  REF_VALIDATE_REQUIRED_MSG = "REF_VALIDATE_REQUIRED_MSG",
 }
 
 export type Locale = { [key in K]: string };

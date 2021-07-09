@@ -11,6 +11,7 @@ const locale: Locale = {
   [K.ARRAY]: "数组",
   [K.SIMPLE_TYPE]: "简单属性",
   [K.MODEL_TYPE]: "模型",
+  [K.REF_VALIDATE_REQUIRED_MSG]: "请选择引用的字段",
 };
 
 export default locale;

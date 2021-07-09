@@ -12,6 +12,7 @@ const locale: Locale = {
   [K.ARRAY]: "array",
   [K.SIMPLE_TYPE]: "Simple Type",
   [K.MODEL_TYPE]: "Model Type",
+  [K.REF_VALIDATE_REQUIRED_MSG]: "Pealse select field of Ref",
 };
 
 export default locale;

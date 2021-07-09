@@ -37,3 +37,9 @@ export interface SchemaRootNodeProperty {
 export interface AddedSchemaFormItem extends SchemaItemProperty {
   origin: "normal" | "reference";
 }
+
+export interface ModelFieldItem {
+  name: string;
+  type?: string;
+  description?: string;
+}

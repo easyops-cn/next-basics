@@ -9,10 +9,12 @@ import {
   processTypeItemInitValue,
   processTypeItemData,
 } from "../../processor";
+import { ModelFieldItem } from "../../interfaces";
 
 export interface ContractModel {
   name: string;
   namespaceId: string;
+  fields: ModelFieldItem[];
   [key: string]: unknown;
 }
 export interface mixGroupContract {
@@ -82,7 +84,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
   };
 
   return (
-    <div style={{ display: "flex", gap: 5 }}>
+    <div style={{ display: "flex", gap: 8 }}>
       <Select
         value={typeValue.value}
         style={{ flex: 1, minWidth: 0 }}
