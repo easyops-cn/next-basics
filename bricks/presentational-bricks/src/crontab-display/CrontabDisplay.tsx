@@ -7,20 +7,19 @@ export interface CrontabDisplayProps {
 
 export function CrontabDisplay(props: CrontabDisplayProps): React.ReactElement {
   const { value } = props;
-
-  const [minute, hour, date, month, dow] = value.split(" ");
+  const [minute, hour, date, month, dow] = value?.split(" ") || " ";
 
   const crontabObj = {
     minute,
     hour,
     date,
     month,
-    dow
+    dow,
   };
 
-  return (
+  return value ? (
     <div>
       {value}（{crontab.format(crontabObj)}）
     </div>
-  );
+  ) : null;
 }
