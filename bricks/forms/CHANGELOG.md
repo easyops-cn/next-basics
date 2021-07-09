@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.178.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.0...@next-bricks/forms@1.178.1) (2021-07-09)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
 # [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.177.0...@next-bricks/forms@1.178.0) (2021-07-08)
 
 
