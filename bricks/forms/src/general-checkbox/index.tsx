@@ -7,12 +7,10 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 import { formatOptions, FormItemElement } from "@next-libs/forms";
-import {
-  GeneralCheckbox,
-  CheckboxType,
-  IconCheckboxItem,
-} from "./GeneralCheckbox";
+import { GeneralCheckbox, IconCheckboxItem } from "./GeneralCheckbox";
 import { CheckboxValueType, CheckboxOptionType } from "antd/lib/checkbox/Group";
+
+export type CheckboxType = "default" | "icon";
 
 export interface OptionGroup {
   /**
@@ -55,7 +53,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @kind CheckboxType
    * @required false
    * @default `default`
-   * @description 	多选框样式类型
+   * @description 	多选框样式类型(不支持分组复选框）
    * @group advanced
    */
   @property({

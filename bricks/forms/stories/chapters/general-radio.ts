@@ -304,6 +304,53 @@ export const GeneralRadioStory: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "使用icon类型样式案例",
+      },
+      brick: "forms.general-radio",
+      events: {
+        "general.radio.change": {
+          action: "console.log",
+          args: ["${EVENT.detail}"],
+        },
+      },
+      properties: {
+        label: "图标",
+        name: "icon",
+        options: [
+          {
+            icon: {
+              lib: "antd",
+              icon: "area-chart",
+              theme: "outlined",
+            },
+            label: "area-chart",
+            value: "area-chart",
+          },
+          {
+            icon: {
+              lib: "antd",
+              icon: "bar-chart",
+              theme: "outlined",
+            },
+            label: "bar-chart",
+            value: "bar-chart",
+          },
+          {
+            icon: {
+              lib: "antd",
+              icon: "pie-chart",
+              theme: "outlined",
+            },
+            label: "pie-chart",
+            value: "pie-chart",
+          },
+        ],
+        type: "icon",
+        value: "area-chart",
+      },
+    },
   ],
   previewColumns: 2,
 };

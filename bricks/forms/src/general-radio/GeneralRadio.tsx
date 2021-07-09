@@ -8,8 +8,8 @@ import {
 } from "@next-libs/forms";
 import { GeneralIcon } from "@next-libs/basic-components";
 import styles from "./index.module.css";
+import { RadioType } from ".";
 
-export type RadioType = "button" | "default" | "icon";
 export interface GeneralRadioProps extends FormItemWrapperProps {
   type?: RadioType;
   options: GeneralOption[];
