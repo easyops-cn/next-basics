@@ -111,5 +111,38 @@ export const datePickerStory: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "设置禁选日期",
+        message:
+          "该demo表示禁选周四、2010-2020年每月10-15号，每周三 12-18点期间的0-29分钟。",
+      },
+      brick: "forms.general-date-picker",
+      events: {
+        "general.date.change": {
+          action: "console.log",
+          args: ["date", "${EVENT.detail}"],
+        },
+      },
+      properties: {
+        disabledDate: [
+          {
+            weekday: 4,
+          },
+          {
+            date: "10-15",
+            year: "2010-2020",
+          },
+          {
+            weekday: 3,
+            hour: "12-18",
+            minute: "0-29",
+          },
+        ],
+        showTime: true,
+        format: "YYYY-MM-DD HH:mm:ss",
+        value: "2019-10-01 00:00:00",
+      },
+    },
   ],
 };
