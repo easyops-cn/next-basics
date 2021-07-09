@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.1...@next-bricks/next-builder@1.60.2) (2021-07-09)
+
+
+### Bug Fixes
+
+* fix dragging mount point over inner mount points ([d3a4efc](https://github.com/easyops-cn/next-basics/commit/d3a4efcf13ea73b7e2760e28a0db807e1d8264bc))
+
+
+
+
+
 ## [1.60.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.0...@next-bricks/next-builder@1.60.1) (2021-07-09)
 
 
