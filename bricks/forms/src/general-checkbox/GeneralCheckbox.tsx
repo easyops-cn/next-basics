@@ -3,13 +3,12 @@ import { Checkbox, Row, Col, Collapse } from "antd";
 import { isNil, uniq } from "lodash";
 import { CheckboxValueType, CheckboxOptionType } from "antd/lib/checkbox/Group";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
-import { OptionGroup } from "./index";
+import { CheckboxType, OptionGroup } from "./index";
 import styles from "./GeneralCheckbox.module.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 
-export type CheckboxType = "default" | "icon";
 export interface GeneralCheckboxProps extends FormItemWrapperProps {
   options?: CheckboxOptionType | IconCheckboxItem[];
   value?: CheckboxValueType[] | CheckboxValueType;

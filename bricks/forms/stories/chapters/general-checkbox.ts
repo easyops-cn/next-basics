@@ -122,5 +122,53 @@ export const GeneralCheckboxStory: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "使用icon类型样式案例",
+      },
+      brick: "forms.general-checkbox",
+      properties: {
+        name: "icon",
+        label: "图标",
+        type: "icon",
+        options: [
+          {
+            icon: {
+              lib: "antd",
+              icon: "area-chart",
+              theme: "outlined",
+            },
+            label: "area-chart",
+            value: "area-chart",
+          },
+          {
+            icon: {
+              lib: "antd",
+              icon: "bar-chart",
+              theme: "outlined",
+            },
+            label: "bar-chart",
+            value: "bar-chart",
+          },
+          {
+            icon: {
+              lib: "antd",
+              icon: "pie-chart",
+              theme: "outlined",
+            },
+            disabled: true,
+            label: "pie-chart",
+            value: "pie-chart",
+          },
+        ],
+        value: ["area-chart", "pie-chart"],
+      },
+      events: {
+        "general.checkbox.change": {
+          action: "console.log",
+          args: ["图标", "${EVENT.detail}"],
+        },
+      },
+    },
   ],
 };
