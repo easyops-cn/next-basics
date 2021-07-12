@@ -22,3 +22,5 @@ export const innerTypeList = [
 export const compareMethodList = ["gte", "lte", "gt", "lt"];
 
 export const numberTypeList = ["int", "int64", "float"];
+
+export const modelRefCache = new Map<string, string>();

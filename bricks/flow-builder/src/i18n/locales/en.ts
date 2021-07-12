@@ -9,6 +9,10 @@ const locale: Locale = {
   [K.COMPARE_METHOD_PLANCEHOLDER]: "Compare method",
   [K.COMPARE_VALUE_PLANCEHOLDER]:
     "Please select compare method before input number",
+  [K.ARRAY]: "array",
+  [K.SIMPLE_TYPE]: "Simple Type",
+  [K.MODEL_TYPE]: "Model Type",
+  [K.REF_VALIDATE_REQUIRED_MSG]: "Pealse select field of Ref",
 };
 
 export default locale;
