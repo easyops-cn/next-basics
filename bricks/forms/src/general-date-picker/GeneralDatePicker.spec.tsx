@@ -74,4 +74,107 @@ describe("GeneralDatePicker", () => {
       "2020-20周"
     );
   });
+
+  describe("test disabled", () => {
+    const datePicker = mount(
+      <GeneralDatePicker
+        value="2019-10-01 00:00:00"
+        format="YYYY-MM-DD HH:mm:ss "
+        showTime={true}
+        picker="date"
+        disabledDate={{}}
+      />
+    );
+    let wrapper = mount(datePicker.find("PickerTrigger").prop("popupElement"));
+
+    it("while not set disabledDate", () => {
+      expect(
+        wrapper.find(".ant-picker-cell-in-view.ant-picker-cell-disabled")
+      ).toHaveLength(0);
+      expect(wrapper.find(".ant-picker-time-panel-cell-disabled")).toHaveLength(
+        0
+      );
+    });
+
+    it("while disabledDate is object", () => {
+      datePicker.setProps({
+        disabledDate: {
+          weekday: 4,
+        },
+      });
+      datePicker.update();
+      wrapper = mount(datePicker.find("PickerTrigger").prop("popupElement"));
+      expect(
+        wrapper.find(".ant-picker-cell-in-view.ant-picker-cell-disabled")
+      ).toHaveLength(5);
+      expect(wrapper.find(".ant-picker-time-panel-cell-disabled")).toHaveLength(
+        0
+      );
+    });
+
+    it("while disabledDate is array", () => {
+      datePicker.setProps({
+        disabledDate: [
+          {
+            weekday: 4,
+            month: "1-12",
+          },
+          {
+            date: "1-2,3",
+          },
+          {
+            date: "1-5,4-7,3-10,10",
+            year: "1970",
+          },
+        ],
+      });
+      datePicker.update();
+      wrapper = mount(datePicker.find("PickerTrigger").prop("popupElement"));
+      expect(
+        wrapper.find(".ant-picker-cell-in-view.ant-picker-cell-disabled")
+      ).toHaveLength(7);
+      expect(wrapper.find(".ant-picker-time-panel-cell-disabled")).toHaveLength(
+        0
+      );
+    });
+
+    it("while disabledDate set time", () => {
+      datePicker.setProps({
+        disabledDate: [
+          {
+            date: 1,
+            second: "10-14,15-19",
+          },
+          {
+            date: 1,
+            hour: "10",
+            minute: "10-15,13",
+            second: "22-23,20-25",
+          },
+          {
+            date: 2,
+            second: "0-59",
+          },
+        ],
+        value: "2019-10-01 10:11:00",
+      });
+      datePicker.update();
+      wrapper = mount(datePicker.find("PickerTrigger").prop("popupElement"));
+      const hourColumn = wrapper.find(".ant-picker-time-panel-column").at(0);
+      const minuteColumn = wrapper.find(".ant-picker-time-panel-column").at(1);
+      const secondColumn = wrapper.find(".ant-picker-time-panel-column").at(2);
+      expect(
+        wrapper.find(".ant-picker-cell-in-view.ant-picker-cell-disabled")
+      ).toHaveLength(0);
+      expect(
+        hourColumn.find(".ant-picker-time-panel-cell-disabled")
+      ).toHaveLength(0);
+      expect(
+        minuteColumn.find(".ant-picker-time-panel-cell-disabled")
+      ).toHaveLength(0);
+      expect(
+        secondColumn.find(".ant-picker-time-panel-cell-disabled")
+      ).toHaveLength(16);
+    });
+  });
 });
