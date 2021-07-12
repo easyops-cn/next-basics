@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.178.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.1...@next-bricks/forms@1.178.2) (2021-07-12)
+
+
+### Bug Fixes
+
+* **forms:** 修复CmdbInstanceSelect后台搜索后数据异常问题 ([5e5e863](https://github.com/easyops-cn/next-basics/commit/5e5e863e83037f292f0dc4e3bb09de69037b8641))
+
+
+
+
+
 ## [1.178.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.0...@next-bricks/forms@1.178.1) (2021-07-09)
 
 **Note:** Version bump only for package @next-bricks/forms
