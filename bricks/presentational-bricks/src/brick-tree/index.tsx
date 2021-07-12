@@ -47,7 +47,7 @@ export class BrickTreeElement extends UpdatingElement {
   >;
 
   /**
-   * @detail string[]
+   * @detail {selectedKeys: string[]; info: {event: string; selected: boolean; node: EventDataNode[]; nativeEvent: MouseEvent;}}
    * @description 选择事件，输出`selectedKeys`及`当前选中节点信息`
    */
   @event({ type: "tree.selectV2", cancelable: true })
