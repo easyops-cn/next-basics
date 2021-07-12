@@ -81,6 +81,7 @@ export function BuilderContextMenu({
     setClipboard({
       type: BuilderClipboardType.COPY,
       sourceId: contextMenuStatus.node.id,
+      nodeType: contextMenuStatus.node.type,
     });
   }, [contextMenuStatus.node, setClipboard]);
 
@@ -88,6 +89,7 @@ export function BuilderContextMenu({
     setClipboard({
       type: BuilderClipboardType.CUT,
       sourceInstanceId: contextMenuStatus.node.instanceId,
+      nodeType: contextMenuStatus.node.type,
     });
   }, [contextMenuStatus.node, setClipboard]);
 

@@ -64,11 +64,13 @@ export type BuilderClipboard = BuilderClipboardOfCopy | BuilderClipboardOfCut;
 export interface BuilderClipboardOfCopy {
   type: BuilderClipboardType.COPY;
   sourceId: string;
+  nodeType: string;
 }
 
 export interface BuilderClipboardOfCut {
   type: BuilderClipboardType.CUT;
   sourceInstanceId: string;
+  nodeType: string;
 }
 
 export enum BuilderClipboardType {

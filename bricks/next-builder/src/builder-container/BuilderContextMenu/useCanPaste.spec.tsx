@@ -146,12 +146,20 @@ describe("useCanPaste", () => {
       false,
     ],
     [
-      { type: BuilderClipboardType.CUT, sourceInstanceId: "instance-a" },
+      {
+        type: BuilderClipboardType.CUT,
+        sourceInstanceId: "instance-a",
+        nodeType: "brick",
+      },
       null,
       false,
     ],
     [
-      { type: BuilderClipboardType.CUT, sourceInstanceId: "instance-x" },
+      {
+        type: BuilderClipboardType.CUT,
+        sourceInstanceId: "instance-x",
+        nodeType: "brick",
+      },
       {
         $$uid: 1,
         type: "brick",
@@ -162,7 +170,7 @@ describe("useCanPaste", () => {
       true,
     ],
     [
-      { type: BuilderClipboardType.COPY, sourceId: "B-009" },
+      { type: BuilderClipboardType.COPY, sourceId: "B-009", nodeType: "brick" },
       {
         $$uid: 1,
         type: "brick",
@@ -205,10 +213,35 @@ describe("useCanPaste", () => {
         clipboard={{
           type: BuilderClipboardType.COPY,
           sourceId: mockData.nodes.find((n) => n.$$uid === sourceUid).id,
+          nodeType: "brick",
         }}
         targetNode={mockData.nodes.find((n) => n.$$uid === targetUid)}
       />
     );
     expect(wrapper.text()).toBe(String(canDrop));
   });
+
+  it.each<[number, string, boolean]>([
+    [100, "brick", false],
+    [101, "brick", true],
+    [100, "bricks", true],
+    [101, "bricks", false],
+    [100, undefined, true],
+    [101, undefined, true],
+  ])(
+    "should work when sourceNode is not found",
+    (targetUid, nodeType, canDrop) => {
+      const wrapper = shallow(
+        <TestComponent
+          clipboard={{
+            type: BuilderClipboardType.COPY,
+            sourceId: "not-existed",
+            nodeType,
+          }}
+          targetNode={mockData.nodes.find((n) => n.$$uid === targetUid)}
+        />
+      );
+      expect(wrapper.text()).toBe(String(canDrop));
+    }
+  );
 });

@@ -378,6 +378,7 @@ describe("BuilderContextMenu", () => {
     expect(setClipboard).toBeCalledWith({
       type: BuilderClipboardType.COPY,
       sourceId: "B-001",
+      nodeType: "brick",
     });
   });
 
@@ -400,6 +401,7 @@ describe("BuilderContextMenu", () => {
     expect(setClipboard).toBeCalledWith({
       type: BuilderClipboardType.CUT,
       sourceInstanceId: "instance-a",
+      nodeType: "brick",
     });
   });
 
@@ -407,6 +409,7 @@ describe("BuilderContextMenu", () => {
     clipboard = {
       type: BuilderClipboardType.COPY,
       sourceId: "B-007",
+      nodeType: "brick",
     };
     mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
@@ -437,6 +440,7 @@ describe("BuilderContextMenu", () => {
     clipboard = {
       type: BuilderClipboardType.CUT,
       sourceInstanceId: "instance-b",
+      nodeType: "brick",
     };
     mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
