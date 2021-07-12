@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.61.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.2...@next-bricks/next-builder@1.61.0) (2021-07-12)
+
+
+### Features
+
+* support context-menu of root node ([d5450ce](https://github.com/easyops-cn/next-basics/commit/d5450cef450af2c522a7b0c8deda288c90df71bc))
+
+
+
+
+
 ## [1.60.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.1...@next-bricks/next-builder@1.60.2) (2021-07-09)
 
 
