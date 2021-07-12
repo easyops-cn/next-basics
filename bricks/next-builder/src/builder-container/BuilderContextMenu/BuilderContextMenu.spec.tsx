@@ -4,6 +4,7 @@ import { Menu } from "antd";
 import {
   useBuilderContextMenuStatus,
   useBuilderDataManager,
+  useBuilderData,
   isBrickNode,
   isRouteNode,
 } from "@next-core/editor-bricks-helper";
@@ -21,9 +22,10 @@ jest.mock("./useCanPaste", () => ({
   useCanPaste: () => (clipboard: BuilderClipboard) => !!clipboard,
 }));
 
-const mockUseBuilderContextMenuStatus = useBuilderContextMenuStatus as jest.MockedFunction<
-  typeof useBuilderContextMenuStatus
->;
+const mockUseBuilderContextMenuStatus =
+  useBuilderContextMenuStatus as jest.MockedFunction<
+    typeof useBuilderContextMenuStatus
+  >;
 
 let clipboard: BuilderClipboard;
 const setClipboard = jest.fn();
@@ -32,9 +34,9 @@ const setEventStreamNodeId = jest.fn();
 const onConvertToTemplate = jest.fn();
 const onRouteSelect = jest.fn();
 
-(useBuilderUIContext as jest.MockedFunction<
-  typeof useBuilderUIContext
->).mockImplementation(() => ({
+(
+  useBuilderUIContext as jest.MockedFunction<typeof useBuilderUIContext>
+).mockImplementation(() => ({
   clipboard,
   setClipboard,
   setToolboxTab,
@@ -67,6 +69,10 @@ const mockManager = {
   })),
 };
 (useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
+
+(useBuilderData as jest.Mock).mockReturnValue({
+  rootId: 1000,
+});
 
 jest
   .spyOn(document.documentElement, "clientWidth", "get")
@@ -228,7 +234,33 @@ describe("BuilderContextMenu", () => {
     });
   });
 
-  it("should show menu for routes", () => {
+  it("should show menu for root of route", () => {
+    mockUseBuilderContextMenuStatus.mockReturnValue({
+      active: true,
+      node: {
+        $$uid: 1000,
+        type: "bricks",
+        path: "/",
+        id: "B-001",
+      },
+    });
+    const wrapper = shallow(<BuilderContextMenu />);
+    const menuItems = wrapper.find(Menu.Item);
+    expect(menuItems.length).toBe(3);
+    menuItems.forEach((item) => {
+      switch (item.key()) {
+        case "copy":
+        case "cut":
+        case "paste":
+          expect(item.prop("disabled")).toBe(true);
+          break;
+        default:
+          throw new Error(`should not contain ${item.key()}`);
+      }
+    });
+  });
+
+  it("should show menu for non-root of route", () => {
     mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
       node: {
@@ -245,6 +277,8 @@ describe("BuilderContextMenu", () => {
       switch (item.key()) {
         case "copy":
         case "cut":
+          expect(item.prop("disabled")).toBe(false);
+          break;
         case "paste":
           expect(item.prop("disabled")).toBe(true);
           break;
