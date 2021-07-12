@@ -129,6 +129,7 @@ describe("CmdbInstanceSelect", () => {
     await act(async () => {
       await (global as any).flushPromises();
     });
+    wrapper.update();
     expect(wrapper.find(Select).prop("value")).toEqual("world");
 
     wrapper.setProps({
@@ -418,6 +419,67 @@ describe("CmdbInstanceSelect", () => {
     await (global as any).flushPromises();
     wrapper.update();
     expect(wrapper.find(Select).prop("children")).toHaveLength(3);
+  });
+
+  it("test onChange", async () => {
+    const onChange = jest.fn();
+    const list = [
+      {
+        hostname: "host1",
+        objectId: "HOST",
+        value: "abc",
+        mem: "主机1",
+      },
+
+      {
+        hostname: "host2",
+        value: "bcd",
+        objectId: "HOST",
+        mem: "主机2",
+      },
+
+      {
+        hostname: "host3",
+        value: "efg",
+        objectId: "HOST",
+        mem: "主机3",
+      },
+    ];
+
+    mockPostSearch.mockResolvedValueOnce({
+      list,
+    });
+
+    const wrapper = mount(
+      <CmdbInstanceSelect
+        objectId="HOST"
+        name="ack"
+        label="host"
+        placeholder="选择主机"
+        value="world"
+        firstRender={false}
+        onChange={onChange}
+        mode="multiple"
+        fields={{ label: ["mem"], value: "value" }}
+      />
+    );
+
+    await (global as any).flushPromises();
+    wrapper.update();
+    wrapper.find(Select).invoke("onChange")(["abc"], null);
+    await (global as any).flushPromises();
+    expect(onChange).lastCalledWith(
+      ["abc"],
+      [
+        {
+          hostname: "host1",
+          mem: "主机1",
+          objectId: "HOST",
+          value: "abc",
+          label: ["主机1"],
+        },
+      ]
+    );
   });
 
   describe("formatUserQuery processor test", () => {

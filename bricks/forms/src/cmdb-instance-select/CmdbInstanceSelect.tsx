@@ -2,7 +2,15 @@ import React from "react";
 import { Select, Spin, Avatar } from "antd";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
-import { debounce, get, compact, castArray, defaults, isEqual } from "lodash";
+import {
+  debounce,
+  get,
+  compact,
+  castArray,
+  defaults,
+  isEqual,
+  difference,
+} from "lodash";
 import { handleHttpError } from "@next-core/brick-kit";
 import { ModeOption } from "antd/lib/select";
 import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
@@ -71,6 +79,9 @@ export function CmdbInstanceSelectItem(
 
   const [value, setValue] = React.useState();
   const [options, setOptions] = React.useState<ComplexOption[]>([]);
+  const [selectedOptions, setSelectedOptions] = React.useState<ComplexOption[]>(
+    []
+  );
   const [total, setTotal] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const computeFields = () => {
@@ -97,10 +108,20 @@ export function CmdbInstanceSelectItem(
     if (mode === "multiple") {
       const valueSet = new Set(newValue);
       selected = options.filter((item) => valueSet.has(item.value));
+      const oldValueSet = new Set(
+        difference(
+          newValue,
+          selected.map((item) => item.value)
+        )
+      );
+      selected = selected.concat(
+        selectedOptions.filter((item) => oldValueSet.has(item.value))
+      );
     } else {
       selected = options.find((item) => item.value === newValue);
     }
     setValue(newValue);
+    setSelectedOptions(selected);
     props.onChange && props.onChange(newValue, selected);
   };
   //istanbul ignore else
@@ -108,7 +129,7 @@ export function CmdbInstanceSelectItem(
     q: string,
     extraQuery: any,
     forceSearch = false
-  ): Promise<void> => {
+  ): Promise<ComplexOption[]> => {
     if (forceSearch || q.length >= minimumInputLength) {
       try {
         let list = [];
@@ -142,20 +163,20 @@ export function CmdbInstanceSelectItem(
         list = data.list;
         setTotal(data.total);
         // 根据用户设置路径显示特定的 label 和 value
-        setOptions(
-          list.map((item) => ({
-            ...item,
-            label: Array.isArray(fields.label)
-              ? fields.label.map((label) => get(item, label))
-              : get(item, fields.label),
-            value: get(item, fields.value),
-            ...(props.objectId === "USER"
-              ? {
-                  user_icon: get(item, "user_icon", "defaultIcon"),
-                }
-              : {}),
-          }))
-        );
+        const option = list.map((item) => ({
+          ...item,
+          label: Array.isArray(fields.label)
+            ? fields.label.map((label) => get(item, label))
+            : get(item, fields.label),
+          value: get(item, fields.value),
+          ...(props.objectId === "USER"
+            ? {
+                user_icon: get(item, "user_icon", "defaultIcon"),
+              }
+            : {}),
+        }));
+        setOptions(option);
+        return option;
       } catch (e) {
         handleHttpError(e);
       } finally {
@@ -186,23 +207,26 @@ export function CmdbInstanceSelectItem(
   React.useEffect(() => {
     // 初始化时通过用户的 value 得出首次 label 的值
     // 由于value的不确定性，可能存在首次查询的值不唯一，初始化时也添加instanceQuery
-    if (!isEqual(props.value, value) && props.value !== undefined) {
-      handleSearch(
-        "",
-        [
-          {
-            [fields.value || "instanceId"]: {
-              $in: castArray(props.value),
+    (async () => {
+      if (!isEqual(props.value, value) && props.value !== undefined) {
+        const option = await handleSearch(
+          "",
+          [
+            {
+              [fields.value || "instanceId"]: {
+                $in: castArray(props.value),
+              },
             },
-          },
 
-          ...userQuery,
-        ],
+            ...userQuery,
+          ],
 
-        true
-      );
-    }
-    setValue(props.value);
+          true
+        );
+        setSelectedOptions(option);
+      }
+      setValue(props.value);
+    })();
   }, [props.value]);
 
   React.useEffect(() => {
