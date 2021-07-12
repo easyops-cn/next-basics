@@ -6,7 +6,9 @@ import {
   BuilderRuntimeNode,
   isBrickNode,
   isRouteNode,
+  useBuilderData,
 } from "@next-core/editor-bricks-helper";
+import { BuilderRouteNode } from "@next-core/brick-types";
 import { useTranslation } from "react-i18next";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import {
@@ -20,7 +22,6 @@ import { useCanPaste } from "./useCanPaste";
 import { K, NS_NEXT_BUILDER } from "../../i18n/constants";
 
 import styles from "./BuilderContextMenu.module.css";
-import { BuilderRouteNode } from "@next-core/brick-types";
 
 export interface BuilderContextMenuProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
@@ -40,6 +41,7 @@ export function BuilderContextMenu({
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const contextMenuStatus = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
+  const { rootId } = useBuilderData();
   const {
     clipboard,
     setClipboard,
@@ -124,8 +126,21 @@ export function BuilderContextMenu({
     [contextMenuStatus.node]
   );
 
+  const activeNodeIsRoot = React.useMemo(
+    () => !!contextMenuStatus.node && contextMenuStatus.node.$$uid === rootId,
+    [contextMenuStatus.node, rootId]
+  );
+
+  const canCopyOrCut = React.useMemo(
+    () => !activeNodeIsRoot && (activeNodeIsBrick || activeNodeIsRoute),
+    [activeNodeIsBrick, activeNodeIsRoot, activeNodeIsRoute]
+  );
+
   const canAppendRoute = React.useMemo(
-    () => !!contextMenuStatus.node && contextMenuStatus.node.type === "brick",
+    () =>
+      !!contextMenuStatus.node &&
+      (contextMenuStatus.node.type === "brick" ||
+        contextMenuStatus.node.type === "routes"),
     [contextMenuStatus.node]
   );
 
@@ -192,7 +207,7 @@ export function BuilderContextMenu({
             ...menuPosition,
           }}
         >
-          {activeNodeIsRoute && (
+          {activeNodeIsRoute && !activeNodeIsRoot && (
             <Menu.Item key="view-route" onClick={handleViewRoute}>
               {t(K.NODE_ACTION_VIEW_ROUTE)}
             </Menu.Item>
@@ -205,27 +220,25 @@ export function BuilderContextMenu({
           <Menu.Item
             key="copy"
             onClick={handleCopyNode}
-            disabled={!activeNodeIsBrick}
+            disabled={!canCopyOrCut}
           >
             {t(K.NODE_ACTION_COPY)}
           </Menu.Item>
-          <Menu.Item
-            key="cut"
-            onClick={handleCutNode}
-            disabled={!activeNodeIsBrick}
-          >
+          <Menu.Item key="cut" onClick={handleCutNode} disabled={!canCopyOrCut}>
             {t(K.NODE_ACTION_CUT)}
           </Menu.Item>
           <Menu.Item key="paste" onClick={handlePasteNode} disabled={!canPaste}>
             {t(K.NODE_ACTION_PASTE)}
           </Menu.Item>
-          <Menu.Item
-            key="convert-to-template"
-            onClick={handleConvertToTemplate}
-            disabled={!activeNodeIsBrick}
-          >
-            {t(K.NODE_ACTION_CONVERT_TO_TEMPLATE)}
-          </Menu.Item>
+          {!activeNodeIsRoot && (
+            <Menu.Item
+              key="convert-to-template"
+              onClick={handleConvertToTemplate}
+              disabled={!activeNodeIsBrick}
+            >
+              {t(K.NODE_ACTION_CONVERT_TO_TEMPLATE)}
+            </Menu.Item>
+          )}
           {activeNodeIsBrick && (
             <Menu.Item key="append-brick" onClick={handleAppendBrick}>
               {t(K.NODE_ACTION_APPEND_BRICK)}
@@ -236,9 +249,11 @@ export function BuilderContextMenu({
               {t(K.NODE_ACTION_APPEND_ROUTE)}
             </Menu.Item>
           )}
-          <Menu.Item key="delete" onClick={handleDeleteNode}>
-            {t(K.NODE_ACTION_DELETE)}
-          </Menu.Item>
+          {!activeNodeIsRoot && (
+            <Menu.Item key="delete" onClick={handleDeleteNode}>
+              {t(K.NODE_ACTION_DELETE)}
+            </Menu.Item>
+          )}
         </Menu>
       )}
     </div>

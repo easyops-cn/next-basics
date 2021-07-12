@@ -1,5 +1,6 @@
 import {
   BuilderRuntimeNode,
+  isRouteNode,
   useBuilderData,
 } from "@next-core/editor-bricks-helper";
 import { useCallback } from "react";
@@ -15,7 +16,8 @@ export type CanPaste = (
  * inside specific node.
  *
  * This is useful for checking available paste zone and preventing
- * pasting a node into its self or descendants.
+ * pasting a node into its self or descendants, or pasting a wrong
+ * type of node.
  */
 export function useCanPaste(): CanPaste {
   const { nodes, edges } = useBuilderData();
@@ -34,10 +36,17 @@ export function useCanPaste(): CanPaste {
       }
       if (!sourceNode) {
         // The source node is identified by url params,
-        // so it maybe not found if the params and manually specified.
+        // so it maybe not found if the params are manually specified.
         // However, if the source node is from another route or template,
         // it will be not found either.
         return true;
+      }
+      if (
+        isRouteNode(sourceNode)
+          ? targetNode.type !== "routes"
+          : targetNode.type === "routes" || targetNode.type === "redirect"
+      ) {
+        return false;
       }
       const traverse = (parentId: number): boolean => {
         if (parentId === targetNode.$$uid) {

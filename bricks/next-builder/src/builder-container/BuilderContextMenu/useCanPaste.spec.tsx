@@ -2,15 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { useCanPaste } from "./useCanPaste";
 import { BuilderClipboard, BuilderClipboardType } from "../interfaces";
-import {
-  BuilderCanvasData,
-  BuilderRuntimeNode,
-  useBuilderData,
-} from "@next-core/editor-bricks-helper";
-
-jest.mock("@next-core/editor-bricks-helper", () => ({
-  useBuilderData: jest.fn(),
-}));
+import * as editorBricksHelper from "@next-core/editor-bricks-helper";
 
 // Given a tree:
 //       1
@@ -20,7 +12,7 @@ jest.mock("@next-core/editor-bricks-helper", () => ({
 //   4   5
 //  ↙ ↘
 // 6   7
-const mockData: BuilderCanvasData = {
+const mockData: editorBricksHelper.BuilderCanvasData = {
   rootId: 1,
   nodes: [
     {
@@ -72,6 +64,20 @@ const mockData: BuilderCanvasData = {
       id: "B-007",
       instanceId: "instance-g",
     },
+    {
+      $$uid: 100,
+      type: "routes",
+      path: "/",
+      id: "R-100",
+      instanceId: "instance-z",
+    },
+    {
+      $$uid: 101,
+      type: "bricks",
+      path: "/",
+      id: "R-101",
+      instanceId: "instance-y",
+    },
   ],
   edges: [
     {
@@ -113,23 +119,21 @@ const mockData: BuilderCanvasData = {
   ],
 };
 
-(useBuilderData as jest.MockedFunction<typeof useBuilderData>).mockReturnValue(
-  mockData
-);
+jest.spyOn(editorBricksHelper, "useBuilderData").mockReturnValue(mockData);
 
 function TestComponent({
   clipboard,
   targetNode,
 }: {
   clipboard: BuilderClipboard;
-  targetNode: BuilderRuntimeNode;
+  targetNode: editorBricksHelper.BuilderRuntimeNode;
 }): React.ReactElement {
   const canPaste = useCanPaste();
   return <div>{String(canPaste(clipboard, targetNode))}</div>;
 }
 
 describe("useCanPaste", () => {
-  it.each<[BuilderClipboard, BuilderRuntimeNode, boolean]>([
+  it.each<[BuilderClipboard, editorBricksHelper.BuilderRuntimeNode, boolean]>([
     [
       null,
       {
@@ -190,6 +194,11 @@ describe("useCanPaste", () => {
     [2, 7, false],
     [2, 1, true],
     [2, 3, true],
+    [2, 100, false],
+    [2, 101, true],
+    [100, 2, false],
+    [100, 101, false],
+    [101, 100, true],
   ])("should work", (sourceUid, targetUid, canDrop) => {
     const wrapper = shallow(
       <TestComponent
