@@ -369,7 +369,6 @@ describe("processor tst", () => {
       const result = processFormData(formData);
 
       expect(result).toEqual({
-        import: [],
         default: {},
         fields: [
           { description: "是否需要通知", name: "needNotify", type: "bool" },
@@ -400,7 +399,6 @@ describe("processor tst", () => {
       const result = processFormData(formData);
 
       expect(result).toEqual({
-        import: [],
         default: {},
         name: "request",
         type: "object",
@@ -411,7 +409,6 @@ describe("processor tst", () => {
 
     it("should process form data with default", () => {
       const formData = {
-        import: [],
         fields: [
           {
             description: "是否需要通知",
@@ -447,7 +444,6 @@ describe("processor tst", () => {
 
       expect(result).toEqual({
         default: { needNotify: true },
-        import: [],
         fields: [
           { description: "是否需要通知", name: "needNotify", type: "bool" },
           { description: "标签", name: "labels", type: "DeployLabel" },
@@ -478,7 +474,6 @@ describe("processor tst", () => {
       });
       expect(result2).toEqual({
         default: { name: "lucy" },
-        import: [],
         fields: [],
         name: "name",
         required: ["name"],

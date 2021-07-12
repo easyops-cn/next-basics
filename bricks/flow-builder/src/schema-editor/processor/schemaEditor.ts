@@ -156,7 +156,7 @@ export function collectFields(
 export function processFormData(
   data: SchemaItemProperty
 ): SchemaRootNodeProperty {
-  const result: SchemaItemProperty = omit(data, "fields");
+  const result: SchemaItemProperty = omit(data, ["fields", "import"]);
   const requiredList: string[] = [];
   const defaultData: Record<string, unknown> = {};
   const importSet = new Set<string>();
@@ -180,6 +180,6 @@ export function processFormData(
     ...result,
     required: requiredList,
     default: defaultData,
-    import: Array.from(importSet),
+    ...(importSet.size !== 0 ? { import: Array.from(importSet) } : {}),
   };
 }

@@ -82,6 +82,8 @@ export function RefItem(props: RefItemProps): React.ReactElement {
       <Select
         style={{ flex: 1 }}
         value={refValue.name}
+        showSearch
+        filterOption={false}
         onChange={handleModelChange}
         onSearch={debounceSearch}
       >

@@ -1,19 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
-import {
-  Modal,
-  Form,
-  Input,
-  Select,
-  AutoComplete,
-  Radio,
-  Switch,
-  Row,
-  Col,
-  InputNumber,
-} from "antd";
-import { innerTypeList, numberTypeList } from "../../constants";
+import { Modal, Form, Input, Select, Radio, Switch, InputNumber } from "antd";
+import { numberTypeList } from "../../constants";
 import { SchemaItemProperty, AddedSchemaFormItem } from "../../interfaces";
 import {
   processItemInitValue,
