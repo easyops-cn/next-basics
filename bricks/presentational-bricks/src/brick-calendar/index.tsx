@@ -12,6 +12,7 @@ import { Calendar } from "antd";
 import moment from "moment";
 import { CalendarMode } from "antd/lib/calendar/generateCalendar";
 import { UseBrickConf } from "@next-core/brick-types";
+import { groupBy } from "lodash";
 
 /** panelEvent */
 export interface PanelEvent {
@@ -61,7 +62,7 @@ export class BrickCalendarElement extends UpdatingElement {
    * @description 初始模式.
    */
   @property({ attribute: false })
-  mode: CalendarMode;
+  mode: CalendarMode = "month";
 
   /**
    * @category property
@@ -95,6 +96,29 @@ export class BrickCalendarElement extends UpdatingElement {
   @property({ attribute: false })
   monthCell: { useBrick: UseBrickConf };
 
+  private _dateData: Record<string, any> = {};
+  private _monthData: Record<string, any> = {};
+  /**
+   * @kind any[]
+   * @required false
+   * @default -
+   * @description 数据源
+   */
+  @property({
+    __unstable_doNotDecorate: true,
+  })
+  set data(value: any[]) {
+    const formatData = value.map((item) => ({
+      ...item,
+      _formatTime: {
+        date: moment(item.time).format("YYYY-MM-DD"),
+        month: moment(item.time).format("YYYY-MM"),
+      },
+    }));
+    this._dateData = groupBy(formatData, "_formatTime.date");
+    this._monthData = groupBy(formatData, "_formatTime.month");
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -108,15 +132,40 @@ export class BrickCalendarElement extends UpdatingElement {
     ReactDOM.unmountComponentAtNode(this);
   }
 
+  getDataByMode(date: moment.Moment, mode: CalendarMode): any[] {
+    let data: Record<string, any> = {};
+    let formatDate: string;
+    switch (mode) {
+      case "month":
+        data = this._dateData;
+        formatDate = date.format("YYYY-MM-DD");
+        break;
+      case "year":
+        data = this._monthData;
+        formatDate = date.format("YYYY-MM");
+        break;
+    }
+    return data[formatDate];
+  }
+
   /**
    * @detail [moment](https://momentjs.com)
    * @description 点击选择日期事件
    */
   @event({ type: "presentational.calendar.onSelect" })
   onSelect: EventEmitter<moment.Moment>;
+  /**
+   * @detail { date: [moment](https://momentjs.com); data: any }
+   * @description 点击选择日期事件-v2
+   */
+  @event({ type: "presentational.calendar.onSelect-v2" })
+  onSelectV2: EventEmitter<{ date: moment.Moment; data: any }>;
+
   handleSelect = (date?: moment.Moment) => {
+    const curData = this.getDataByMode(date, this.mode);
     this.value = date;
     this.onSelect.emit(date);
+    this.onSelectV2.emit({ date, data: curData });
   };
 
   /**
@@ -125,9 +174,18 @@ export class BrickCalendarElement extends UpdatingElement {
    */
   @event({ type: "presentational.calendar.onChange" })
   onChange: EventEmitter<moment.Moment>;
+  /**
+   * @detail { date: [moment](https://momentjs.com); data: any }
+   * @description 日期变化事件
+   */
+  @event({ type: "presentational.calendar.onChange-v2" })
+  onChangeV2: EventEmitter<{ date: moment.Moment; data: any }>;
+
   handleChange = (date?: moment.Moment) => {
+    const curData = this.getDataByMode(date, this.mode);
     this.value = date;
     this.onChange.emit(date);
+    this.onChangeV2.emit({ date, data: curData });
   };
 
   /**
@@ -141,29 +199,35 @@ export class BrickCalendarElement extends UpdatingElement {
     this.onPanelChange.emit({ date: date, mode: mode } as PanelEvent);
   };
 
-  getCustomComp = (cell: { useBrick: UseBrickConf }) => {
-    return function CustomComp(date: moment.Moment) {
+  getCustomComp = (cell: { useBrick: UseBrickConf }, mode: CalendarMode) => {
+    const CustomComp = (date: moment.Moment) => {
+      const curData = this.getDataByMode(date, mode);
       if (cell.useBrick) {
         return (
           <BrickAsComponent
             useBrick={cell.useBrick as any}
             data={{
               date,
+              data: curData,
             }}
           />
         );
       }
-
       return null;
     };
+    return CustomComp;
   };
 
   dateCellRender = (date: moment.Moment) => {
-    return this.dateCell ? this.getCustomComp(this.dateCell)(date) : null;
+    return this.dateCell
+      ? this.getCustomComp(this.dateCell, "month")(date)
+      : null;
   };
 
   monthCellRender = (date: moment.Moment) => {
-    return this.monthCell ? this.getCustomComp(this.monthCell)(date) : null;
+    return this.monthCell
+      ? this.getCustomComp(this.monthCell, "year")(date)
+      : null;
   };
 
   // antd design defaultValue实现逻辑有问题，故不加入defaultValue , so,  value 就等于defaultValue
@@ -174,7 +238,7 @@ export class BrickCalendarElement extends UpdatingElement {
         <BrickWrapper>
           <Calendar
             value={this.value}
-            mode={this.mode || "month"}
+            mode={this.mode}
             fullscreen={!!this.fullscreen}
             dateCellRender={this.dateCellRender}
             monthCellRender={this.monthCellRender}
