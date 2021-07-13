@@ -25,21 +25,44 @@ describe("presentational-bricks.brick-calendar", () => {
     Object.assign(element, {
       value: moment("2017-01-25"),
       fullscreen: true,
-      mode: "year",
+      mode: "month",
+      data: [
+        { time: "2017-01-01", data: 1 },
+        { time: "2017-01-01", data: 2 },
+        { time: "2017-01-02", data: 3 },
+        { time: "2017-01-03", data: 4 },
+        { time: "2017-01-04", data: 5 },
+      ],
     });
     const mockEventListener = jest.fn((e) => null);
+    const mockEventListenerV2 = jest.fn((e) => null);
     element.addEventListener(
       "presentational.calendar.onSelect",
       mockEventListener
     );
+    element.addEventListener(
+      "presentational.calendar.onSelect-v2",
+      mockEventListenerV2
+    );
     document.body.appendChild(element);
     await jest.runAllTimers();
-    const date = moment("2020-05-25");
+    const date = moment("2017-01-01");
     spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
       "props"
     ].children.props.onSelect(date);
     expect(mockEventListener).toHaveBeenCalledWith(
       expect.objectContaining({ detail: date })
+    );
+    expect(mockEventListenerV2).toHaveBeenCalledWith(
+      expect.objectContaining({
+        detail: {
+          date,
+          data: [
+            { time: "2017-01-01", data: 1 },
+            { time: "2017-01-01", data: 2 },
+          ].map((v) => expect.objectContaining(v)),
+        },
+      })
     );
   });
 
@@ -47,6 +70,13 @@ describe("presentational-bricks.brick-calendar", () => {
     const element = document.createElement("presentational-bricks.calendar");
     Object.assign(element, {
       value: moment("2017-01-25"),
+      data: [
+        { time: "2017-01-01", data: 1 },
+        { time: "2017-01-01", data: 2 },
+        { time: "2017-01-02", data: 3 },
+        { time: "2017-01-03", data: 4 },
+        { time: "2017-01-04", data: 5 },
+      ],
       dateCell: {
         useBrick: {
           brick: "div",
@@ -107,20 +137,46 @@ describe("presentational-bricks.brick-calendar", () => {
       value: moment("2017-01-25"),
       fullscreen: true,
       mode: "year",
+      data: [
+        { time: "2017-01-01", data: 1 },
+        { time: "2017-01-01", data: 2 },
+        { time: "2017-01-02", data: 3 },
+        { time: "2017-01-03", data: 4 },
+        { time: "2017-01-04", data: 5 },
+      ],
     });
     const mockEventListener = jest.fn((e) => null);
+    const mockEventListenerV2 = jest.fn((e) => null);
     element.addEventListener(
       "presentational.calendar.onChange",
       mockEventListener
     );
+    element.addEventListener(
+      "presentational.calendar.onChange-v2",
+      mockEventListenerV2
+    );
     document.body.appendChild(element);
     await jest.runAllTimers();
-    const date = moment("2020-05-25");
+    const date = moment("2017-01-25");
     spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
       "props"
     ].children.props.onChange(date);
     expect(mockEventListener).toHaveBeenCalledWith(
       expect.objectContaining({ detail: date })
+    );
+    expect(mockEventListenerV2).toHaveBeenCalledWith(
+      expect.objectContaining({
+        detail: {
+          date,
+          data: [
+            { time: "2017-01-01", data: 1 },
+            { time: "2017-01-01", data: 2 },
+            { time: "2017-01-02", data: 3 },
+            { time: "2017-01-03", data: 4 },
+            { time: "2017-01-04", data: 5 },
+          ].map((v) => expect.objectContaining(v)),
+        },
+      })
     );
   });
 });
