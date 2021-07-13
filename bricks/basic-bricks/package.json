@@ -15,7 +15,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
     "start:editors": "cross-env NODE_ENV='development' webpack --config webpack.editors.js --watch",
-    "start:both": "concurrently -k -n main,editors \"npm run start\" \"npm run start:editors\"",
+    "start:snippets": "cross-env NODE_ENV='development' rollup --config rollup.snippets.js --watch",
+    "start:all": "concurrently -k -n main,editors,snippets \"npm run start\" \"npm run start:editors\" \"npm run start:snippets\"",
     "build": "cross-env NODE_ENV='production' npm run build:webpack && npm run build:stories && npm run build:snippets",
     "build:webpack": "npm run build:webpack:main && npm run build:webpack:editors",
     "build:webpack:main": "webpack --config webpack.config.js",

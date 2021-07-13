@@ -9,6 +9,7 @@ import easyView2x3Svg from "./thumbnails/easy-view.2x3.svg";
 const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[basic]",
+    layerType: "layout",
     category: "layout",
     text: {
       zh: "基本页面布局",
@@ -32,6 +33,7 @@ const snippets: SnippetDefinition[] = [
   },
   {
     id: "basic-bricks.easy-view[classic]",
+    layerType: "layout",
     category: "layout",
     text: {
       zh: "经典页面布局",
@@ -60,6 +62,7 @@ const snippets: SnippetDefinition[] = [
   },
   {
     id: "basic-bricks.easy-view[right-aligned-menu]",
+    layerType: "layout",
     category: "layout",
     text: {
       zh: "右侧菜单页面布局",
@@ -88,6 +91,7 @@ const snippets: SnippetDefinition[] = [
   },
   {
     id: "basic-bricks.easy-view[1x2]",
+    layerType: "layout",
     category: "layout",
     text: {
       zh: "1x2 网格布局",
@@ -108,6 +112,7 @@ const snippets: SnippetDefinition[] = [
   },
   {
     id: "basic-bricks.easy-view[2x3]",
+    layerType: "layout",
     category: "layout",
     text: {
       zh: "2x3 网格布局",
