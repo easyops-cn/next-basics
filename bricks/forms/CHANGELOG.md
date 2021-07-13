@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.179.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.179.0...@next-bricks/forms@1.179.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* **forms:** 修复CmdbInstanceSelect value数量大于默认30条时数据拉取不全问题 ([bbbf037](https://github.com/easyops-cn/next-basics/commit/bbbf037a0290de8b59da7c9673bd9c355c80f272))
+
+
+
+
+
 # [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.2...@next-bricks/forms@1.179.0) (2021-07-13)
 
 
