@@ -139,6 +139,9 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   clipboardSource: string;
 
+  @property()
+  clipboardNodeType: string;
+
   @property({
     type: Number,
   })
@@ -423,7 +426,11 @@ export class BuilderContainerElement extends UpdatingElement {
     if (
       !isEqual(
         clipboard,
-        getBuilderClipboard(this.clipboardType, this.clipboardSource)
+        getBuilderClipboard(
+          this.clipboardType,
+          this.clipboardSource,
+          this.clipboardNodeType
+        )
       )
     ) {
       this.clipboardType = clipboard?.type;
@@ -432,6 +439,7 @@ export class BuilderContainerElement extends UpdatingElement {
         (clipboard.type === BuilderClipboardType.CUT
           ? clipboard.sourceInstanceId
           : clipboard.sourceId);
+      this.clipboardNodeType = clipboard?.nodeType;
       this._eventClipboardChangeEmitter.emit({ clipboard });
     }
   };
@@ -581,6 +589,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 initialEventStreamNodeId={this.eventStreamNodeId}
                 initialClipboardType={this.clipboardType}
                 initialClipboardSource={this.clipboardSource}
+                initialClipboardNodeType={this.clipboardNodeType}
                 initialCanvasIndex={this.canvasIndex}
                 initialStoryboardQuery={this.storyboardQuery}
                 onNodeAdd={this._handleNodeAdd}

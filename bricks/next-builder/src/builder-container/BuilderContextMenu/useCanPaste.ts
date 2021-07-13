@@ -34,19 +34,20 @@ export function useCanPaste(): CanPaste {
       } else {
         sourceNode = nodes.find((n) => n.id === clipboard.sourceId);
       }
+      if (
+        (sourceNode || clipboard.nodeType) &&
+        (isRouteNode(sourceNode || ({ type: clipboard.nodeType } as any))
+          ? targetNode.type !== "routes"
+          : targetNode.type === "routes" || targetNode.type === "redirect")
+      ) {
+        return false;
+      }
       if (!sourceNode) {
         // The source node is identified by url params,
         // so it maybe not found if the params are manually specified.
         // However, if the source node is from another route or template,
         // it will be not found either.
         return true;
-      }
-      if (
-        isRouteNode(sourceNode)
-          ? targetNode.type !== "routes"
-          : targetNode.type === "routes" || targetNode.type === "redirect"
-      ) {
-        return false;
       }
       const traverse = (parentId: number): boolean => {
         if (parentId === targetNode.$$uid) {

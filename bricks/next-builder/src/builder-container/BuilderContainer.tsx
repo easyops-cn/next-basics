@@ -56,6 +56,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   initialEventStreamNodeId?: string;
   initialClipboardType?: BuilderClipboardType;
   initialClipboardSource?: string;
+  initialClipboardNodeType?: string;
   initialCanvasIndex?: number;
   initialStoryboardQuery?: string;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
@@ -101,6 +102,7 @@ export function LegacyBuilderContainer(
     initialEventStreamNodeId,
     initialClipboardType,
     initialClipboardSource,
+    initialClipboardNodeType,
     initialCanvasIndex,
     initialStoryboardQuery,
     onNodeAdd,
@@ -149,8 +151,13 @@ export function LegacyBuilderContainer(
   const [dataType, setDataType] = React.useState<BuilderDataType>();
 
   const memoClipboard = React.useMemo(
-    () => getBuilderClipboard(initialClipboardType, initialClipboardSource),
-    [initialClipboardType, initialClipboardSource]
+    () =>
+      getBuilderClipboard(
+        initialClipboardType,
+        initialClipboardSource,
+        initialClipboardNodeType
+      ),
+    [initialClipboardType, initialClipboardSource, initialClipboardNodeType]
   );
   const [clipboard, setClipboard] =
     React.useState<BuilderClipboard>(memoClipboard);
