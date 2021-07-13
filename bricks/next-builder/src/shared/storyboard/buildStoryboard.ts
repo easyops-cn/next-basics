@@ -377,6 +377,9 @@ function mountBrickInBrick(
   (parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.push(
     brickNodeToBrickConf(ctx, child)
   );
+  if ((parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.length) {
+    setUseChild(parent, parentConf);
+  }
 }
 
 function normalizeBrickInSnippet(
@@ -475,4 +478,49 @@ function safeYamlParse(value: string): unknown {
     // eslint-disable-next-line no-console
     console.error("Failed to parse yaml string", value);
   }
+}
+
+function setUseChild(parent: BuilderBrickNode, parentConf: BrickConf) {
+  const reg = /"useChildren": "\[(?<slotName>.*?)\]/g;
+  let result = reg.exec(parent.properties);
+  while (result) {
+    const matchUseChild = parentConf.slots[result.groups.slotName];
+    if (matchUseChild) {
+      const replaceItem = findUseChild(parentConf, result.groups.slotName);
+      if (replaceItem) {
+        const needMoveKey = ["transform", "transformForm", "if", "slots"];
+        const needChangeItem = (matchUseChild as SlotConfOfBricks).bricks[0];
+        const newItem: Record<string, any> = {};
+        Object.keys(needChangeItem.properties).forEach((key) => {
+          if (needMoveKey.includes(key)) {
+            newItem[key] = needChangeItem.properties[key];
+            delete needChangeItem.properties[key];
+          }
+        });
+        replaceItem.useBrick = Object.assign({}, newItem, needChangeItem);
+        delete replaceItem["useChildren"];
+      }
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(`${result.groups.slotName} could not found`);
+    }
+    result = reg.exec(parent.properties);
+  }
+}
+
+function findUseChild(obj: BrickConf, name: string): Record<string, any> {
+  let item: Record<string, any>;
+  for (const [k, v] of Object.entries(obj)) {
+    if (
+      Object.prototype.toString.call(v) === "[object Array]" ||
+      Object.prototype.toString.call(v) === "[object Object]"
+    ) {
+      item = findUseChild(v, name);
+      if (item) break;
+    }
+    if (k === "useChildren" && v === `[${name}]`) {
+      item = obj;
+    }
+  }
+  return item;
 }
