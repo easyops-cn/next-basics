@@ -110,13 +110,13 @@ export class BrickCalendarElement extends UpdatingElement {
   set data(value: any[]) {
     const formatData = value.map((item) => ({
       ...item,
-      _formatTime: {
-        date: moment(item.time).format("YYYY-MM-DD"),
-        month: moment(item.time).format("YYYY-MM"),
+      _formatDate: {
+        date: moment(item.date).format("YYYY-MM-DD"),
+        month: moment(item.date).format("YYYY-MM"),
       },
     }));
-    this._dateData = groupBy(formatData, "_formatTime.date");
-    this._monthData = groupBy(formatData, "_formatTime.month");
+    this._dateData = groupBy(formatData, "_formatDate.date");
+    this._monthData = groupBy(formatData, "_formatDate.month");
   }
 
   connectedCallback(): void {
