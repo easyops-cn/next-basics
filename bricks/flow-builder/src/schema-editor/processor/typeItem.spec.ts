@@ -61,6 +61,7 @@ describe("typeItem processor", () => {
             { label: "float", value: "float" },
             { label: "map", value: "map" },
             { label: "object", value: "object" },
+            { label: "value", value: "value" },
             { label: "file", value: "file" },
           ],
         },
