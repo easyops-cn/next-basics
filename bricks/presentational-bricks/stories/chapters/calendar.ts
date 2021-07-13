@@ -129,19 +129,19 @@ export const CalendarStory: Story = {
         },
         data: [
           {
-            time: "2021-07-02",
+            date: "2021-07-02",
             data: "1",
           },
           {
-            time: "2021-07-02",
+            date: "2021-07-02",
             data: "2",
           },
           {
-            time: "2021-07-09",
+            date: "2021-07-09",
             data: "3",
           },
           {
-            time: "2021-07-16",
+            date: "2021-07-16",
             data: "4",
           },
         ],

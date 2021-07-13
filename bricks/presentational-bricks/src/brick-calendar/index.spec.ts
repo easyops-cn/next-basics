@@ -27,11 +27,11 @@ describe("presentational-bricks.brick-calendar", () => {
       fullscreen: true,
       mode: "month",
       data: [
-        { time: "2017-01-01", data: 1 },
-        { time: "2017-01-01", data: 2 },
-        { time: "2017-01-02", data: 3 },
-        { time: "2017-01-03", data: 4 },
-        { time: "2017-01-04", data: 5 },
+        { date: "2017-01-01", data: 1 },
+        { date: "2017-01-01", data: 2 },
+        { date: "2017-01-02", data: 3 },
+        { date: "2017-01-03", data: 4 },
+        { date: "2017-01-04", data: 5 },
       ],
     });
     const mockEventListener = jest.fn((e) => null);
@@ -58,8 +58,8 @@ describe("presentational-bricks.brick-calendar", () => {
         detail: {
           date,
           data: [
-            { time: "2017-01-01", data: 1 },
-            { time: "2017-01-01", data: 2 },
+            { date: "2017-01-01", data: 1 },
+            { date: "2017-01-01", data: 2 },
           ].map((v) => expect.objectContaining(v)),
         },
       })
@@ -71,11 +71,11 @@ describe("presentational-bricks.brick-calendar", () => {
     Object.assign(element, {
       value: moment("2017-01-25"),
       data: [
-        { time: "2017-01-01", data: 1 },
-        { time: "2017-01-01", data: 2 },
-        { time: "2017-01-02", data: 3 },
-        { time: "2017-01-03", data: 4 },
-        { time: "2017-01-04", data: 5 },
+        { date: "2017-01-01", data: 1 },
+        { date: "2017-01-01", data: 2 },
+        { date: "2017-01-02", data: 3 },
+        { date: "2017-01-03", data: 4 },
+        { date: "2017-01-04", data: 5 },
       ],
       dateCell: {
         useBrick: {
@@ -138,11 +138,11 @@ describe("presentational-bricks.brick-calendar", () => {
       fullscreen: true,
       mode: "year",
       data: [
-        { time: "2017-01-01", data: 1 },
-        { time: "2017-01-01", data: 2 },
-        { time: "2017-01-02", data: 3 },
-        { time: "2017-01-03", data: 4 },
-        { time: "2017-01-04", data: 5 },
+        { date: "2017-01-01", data: 1 },
+        { date: "2017-01-01", data: 2 },
+        { date: "2017-01-02", data: 3 },
+        { date: "2017-01-03", data: 4 },
+        { date: "2017-01-04", data: 5 },
       ],
     });
     const mockEventListener = jest.fn((e) => null);
@@ -169,11 +169,11 @@ describe("presentational-bricks.brick-calendar", () => {
         detail: {
           date,
           data: [
-            { time: "2017-01-01", data: 1 },
-            { time: "2017-01-01", data: 2 },
-            { time: "2017-01-02", data: 3 },
-            { time: "2017-01-03", data: 4 },
-            { time: "2017-01-04", data: 5 },
+            { date: "2017-01-01", data: 1 },
+            { date: "2017-01-01", data: 2 },
+            { date: "2017-01-02", data: 3 },
+            { date: "2017-01-03", data: 4 },
+            { date: "2017-01-04", data: 5 },
           ].map((v) => expect.objectContaining(v)),
         },
       })
