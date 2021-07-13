@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.197.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.196.3...@next-bricks/presentational-bricks@1.197.0) (2021-07-13)
+
+
+### Features
+
+* **brick-calendar:**  支持输入data ([11e68c0](https://github.com/easyops-cn/next-basics/commit/11e68c0d569e2a9dec3ab71d2f6e0e2f29c53733))
+
+
+
+
+
 ## [1.196.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.196.2...@next-bricks/presentational-bricks@1.196.3) (2021-07-13)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

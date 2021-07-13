@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.133.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.133.0...@next-bricks/basic-bricks@1.133.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* add an editor brick of page-title ([0d25e74](https://github.com/easyops-cn/next-basics/commit/0d25e748201f20bd0979d02f6f29fce2374fc384))
+* **snippets:** add layer type ([283b52f](https://github.com/easyops-cn/next-basics/commit/283b52fc217308a0e5bbff64bb777305759b1aa3))
+* support building snippets in dev mode ([94fb620](https://github.com/easyops-cn/next-basics/commit/94fb62089e1dc1cba9d67e24d536be7b9b40f147))
+
+
+
+
+
 # [1.133.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.132.0...@next-bricks/basic-bricks@1.133.0) (2021-06-24)
 
 
