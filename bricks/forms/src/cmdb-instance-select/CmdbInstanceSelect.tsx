@@ -128,7 +128,8 @@ export function CmdbInstanceSelectItem(
   const handleSearch = async (
     q: string,
     extraQuery: any,
-    forceSearch = false
+    forceSearch = false,
+    pageSizeQuery?: number
   ): Promise<ComplexOption[]> => {
     if (forceSearch || q.length >= minimumInputLength) {
       try {
@@ -157,7 +158,7 @@ export function CmdbInstanceSelectItem(
           },
 
           fields: computeFields(),
-          page_size: pageSize,
+          page_size: pageSizeQuery || pageSize,
         });
 
         list = data.list;
@@ -220,8 +221,8 @@ export function CmdbInstanceSelectItem(
 
             ...userQuery,
           ],
-
-          true
+          true,
+          props.value?.length >= pageSize ? props.value.length : pageSize
         );
         setSelectedOptions(option);
       }
