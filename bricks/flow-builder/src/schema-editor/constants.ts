@@ -16,6 +16,7 @@ export const innerTypeList = [
   "float",
   "map",
   "object",
+  "value",
   "file",
 ];
 
