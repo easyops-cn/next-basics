@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.197.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.197.0...@next-bricks/presentational-bricks@1.197.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* **brick-calendar:**  字段修改 ([f2ed2ad](https://github.com/easyops-cn/next-basics/commit/f2ed2ad9c271ab6ebf6bae85069ef09ebd92f766))
+
+
+
+
+
 # [1.197.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.196.3...@next-bricks/presentational-bricks@1.197.0) (2021-07-13)
 
 
