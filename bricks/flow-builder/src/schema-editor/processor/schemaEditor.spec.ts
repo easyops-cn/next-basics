@@ -6,6 +6,7 @@ import {
   processItemData,
   processFormInitvalue,
   processFormData,
+  extractModelRef,
 } from "./schemaEditor";
 import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
 import * as constantsModuel from "../constants";
@@ -482,7 +483,7 @@ describe("processor tst", () => {
     });
 
     it("should process form data with import data", () => {
-      constantsModuel.modelRefCache = new Map([
+      (constantsModuel.modelRefCache as Map<string, string>) = new Map([
         ["DeployLabel", "api.easyops.DeployLabel"],
       ]);
 
@@ -544,6 +545,59 @@ describe("processor tst", () => {
         required: ["labels", "TrackData.instanceId"],
         type: "object",
       });
+    });
+  });
+
+  describe("extractModelRef", () => {
+    beforeEach(() => {
+      jest.resetModules();
+    });
+
+    it("should return empty map", () => {
+      (constantsModuel.modelRefCache as Map<string, string>) = new Map();
+
+      extractModelRef(
+        {
+          name: "name",
+          required: true,
+          type: "PluginData",
+        },
+        []
+      );
+
+      expect(constantsModuel.modelRefCache).toEqual(new Map());
+    });
+
+    it("should return namespace data", () => {
+      (constantsModuel.modelRefCache as Map<string, string>) = new Map();
+
+      extractModelRef(
+        {
+          name: "params",
+          required: true,
+          type: "PluginData[]",
+        },
+        ["api.easyops.PluginData", "api.easyops.FlowData"]
+      );
+
+      expect(constantsModuel.modelRefCache).toEqual(
+        new Map([["PluginData", "api.easyops.PluginData"]])
+      );
+
+      extractModelRef(
+        {
+          name: "flow",
+          ref: "FlowData",
+        },
+        ["api.easyops.FlowData"]
+      );
+
+      expect(constantsModuel.modelRefCache).toEqual(
+        new Map([
+          ["PluginData", "api.easyops.PluginData"],
+          ["FlowData", "api.easyops.FlowData"],
+        ])
+      );
     });
   });
 });

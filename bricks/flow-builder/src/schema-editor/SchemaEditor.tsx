@@ -33,6 +33,11 @@ export const SchemaEditorWrapper = forwardRef<
     setProperty(processFormInitvalue({ name: props.name, ...props.value }));
   }, [props.name, props.value]);
 
+  useEffect(() => {
+    // trigger to update formdata on first rendered
+    props.onChange(processFormData(property));
+  }, []);
+
   const gridTemplateColumns = useMemo(
     () => getGridTemplateColumns(titleList),
     []

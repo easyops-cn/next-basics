@@ -65,8 +65,15 @@ export function processItemData(
 
 export function processFields(
   list: SchemaItemProperty[],
-  requiredList: string[],
-  defaultData: Record<string, unknown>,
+  {
+    requiredList,
+    defaultData,
+    importList,
+  }: {
+    requiredList: string[];
+    defaultData: Record<string, unknown>;
+    importList: string[];
+  },
   result: SchemaItemProperty[]
 ): void {
   list?.forEach((item) => {
@@ -81,9 +88,15 @@ export function processFields(
     } as SchemaItemProperty;
 
     result.push(property);
+
+    extractModelRef(item, importList);
     if (item.fields) {
       property.fields = [];
-      processFields(item.fields, requiredList, defaultData, property.fields);
+      processFields(
+        item.fields,
+        { requiredList, defaultData, importList },
+        property.fields
+      );
     }
   });
 }
@@ -104,7 +117,11 @@ export function processFormInitvalue(
     result.required = true;
   }
 
-  processFields(data.fields, requiredList, defaultData, result.fields);
+  processFields(
+    data.fields,
+    { requiredList, defaultData, importList: data.import },
+    result.fields
+  );
 
   return result;
 }
@@ -182,4 +199,26 @@ export function processFormData(
     default: defaultData,
     ...(importSet.size !== 0 ? { import: Array.from(importSet) } : {}),
   };
+}
+
+export function extractModelRef(
+  item: SchemaItemProperty,
+  importList: string[] = []
+): void {
+  const importMap: Map<string, string> = importList.reduce((map, item) => {
+    map.set(item.split(".")?.pop(), item);
+    return map;
+  }, new Map());
+
+  if (item.name && item.type) {
+    const modelName = item.type.replace(/\[\]$/, "");
+    importMap.has(modelName) &&
+      modelRefCache.set(modelName, importMap.get(modelName));
+  }
+
+  if (item.ref) {
+    const modelName = item.ref.split(".")[0];
+    importMap.has(modelName) &&
+      modelRefCache.set(modelName, importMap.get(modelName));
+  }
 }
