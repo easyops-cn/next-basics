@@ -87,5 +87,65 @@ export const CalendarStory: Story = {
         },
       },
     },
+    {
+      brick: "presentational-bricks.calendar",
+      events: {
+        "presentational.calendar.onChange-v2": {
+          action: "console.log",
+          args: ["${EVENT.detail}"],
+        },
+        "presentational.calendar.onSelect-v2": {
+          action: "console.log",
+          args: ["${EVENT.detail}"],
+        },
+      },
+      properties: {
+        value: "<% moment('2021-07-25') %>",
+        monthCell: {
+          useBrick: {
+            brick: "presentational-bricks.brick-tag",
+            properties: {
+              showCard: false,
+            },
+            transform: {
+              color: "orange",
+              showTagCircle: true,
+              tagList: "<% DATA.data?.map(v=>v.data) %>",
+            },
+          },
+        },
+        dateCell: {
+          useBrick: {
+            brick: "presentational-bricks.brick-tag",
+            properties: {
+              showCard: false,
+            },
+            transform: {
+              color: "orange",
+              showTagCircle: true,
+              tagList: "<% DATA.data?.map(v=>v.data) %>",
+            },
+          },
+        },
+        data: [
+          {
+            time: "2021-07-02",
+            data: "1",
+          },
+          {
+            time: "2021-07-02",
+            data: "2",
+          },
+          {
+            time: "2021-07-09",
+            data: "3",
+          },
+          {
+            time: "2021-07-16",
+            data: "4",
+          },
+        ],
+      },
+    },
   ],
 };
