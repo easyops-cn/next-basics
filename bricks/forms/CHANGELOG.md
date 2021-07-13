@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.2...@next-bricks/forms@1.179.0) (2021-07-13)
+
+
+### Features
+
+* **forms:** 时间选择器可设置禁选日期 ([39552d1](https://github.com/easyops-cn/next-basics/commit/39552d1830dcc32345ea9952ef7b91f41d12fd2c))
+* **forms:** 时间选择器可设置禁选日期 ([e26f97d](https://github.com/easyops-cn/next-basics/commit/e26f97de5fabb80fada4c8be22c932fcf1dc3cb2))
+
+
+
+
+
 ## [1.178.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.1...@next-bricks/forms@1.178.2) (2021-07-12)
 
 
