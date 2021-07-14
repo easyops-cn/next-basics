@@ -1,5 +1,6 @@
 import React from "react";
 import { DatabaseFilled, GoldenFilled, MessageFilled } from "@ant-design/icons";
+import classNames from "classnames";
 import {
   EditorComponentProps,
   EditorContainer,
@@ -40,9 +41,14 @@ export function AnyBrickEditor({
   return (
     <EditorContainer nodeUid={nodeUid}>
       <div
-        className={`${styles.wrapper} ${styles[displayType]} ${
-          mountPoints.length > 0 ? styles.hasChildren : styles.noChildren
-        }`}
+        className={classNames(
+          styles.wrapper,
+          styles[displayType],
+          mountPoints.length > 0 ? styles.hasChildren : styles.noChildren,
+          {
+            [styles.isExpandableTemplate]: node.$$isExpandableTemplate,
+          }
+        )}
       >
         {mountPoints.length > 0 ? (
           mountPoints.map((mountPoint) => (

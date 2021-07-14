@@ -94,6 +94,26 @@ describe("AnyBrickEditor", () => {
     mockUseBuilderNodeMountPoints.mockReturnValueOnce(["toolbar", "content"]);
     const wrapper = shallow(<AnyBrickEditor nodeUid={1} />);
     expect(wrapper.find(".wrapper").hasClass("hasChildren")).toBe(true);
+    expect(wrapper.find(".wrapper").hasClass("isExpandableTemplate")).toBe(
+      false
+    );
     expect(wrapper.find(SlotContainer).length).toBe(2);
+  });
+
+  it("should work for expandable template", () => {
+    mockUseBuilderNode.mockReturnValueOnce({
+      type: "brick",
+      id: "B-001",
+      brick: "any-brick",
+      alias: "my-brick",
+      $$parsedProperties: {},
+      $$isExpandableTemplate: true,
+    });
+    mockUseBuilderNodeMountPoints.mockReturnValueOnce(["any"]);
+    const wrapper = shallow(<AnyBrickEditor nodeUid={1} />);
+    expect(wrapper.find(".wrapper").hasClass("hasChildren")).toBe(true);
+    expect(wrapper.find(".wrapper").hasClass("isExpandableTemplate")).toBe(
+      true
+    );
   });
 });

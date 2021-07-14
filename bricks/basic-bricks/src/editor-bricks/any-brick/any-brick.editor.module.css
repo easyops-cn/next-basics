@@ -4,6 +4,9 @@
 
 .hasChildren {
   min-height: var(--editor-brick-base-height);
+}
+
+.hasChildren:not(.isExpandableTemplate) {
   border: 1px solid var(--editor-brick-stroke-color);
   padding: var(--editor-brick-gap);
 }
