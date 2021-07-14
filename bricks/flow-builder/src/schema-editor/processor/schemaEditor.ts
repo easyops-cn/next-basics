@@ -3,6 +3,7 @@ import {
   processValidatorInitValue,
   formatValidatorData,
 } from "./filedValidatorItem";
+import { extractType } from "./typeItem";
 import {
   EditorTitleProps,
   SchemaItemProperty,
@@ -155,7 +156,7 @@ export function collectFields(
       defaultData[item.name] = item.default;
     }
 
-    const modelRef = modelRefCache.get(item.type || item.ref);
+    const modelRef = modelRefCache.get(extractType(item.type) || item.ref);
     if (modelRef) {
       importSet.add(modelRef);
     }

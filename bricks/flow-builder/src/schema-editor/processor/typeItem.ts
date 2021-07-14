@@ -11,7 +11,7 @@ import { K, NS_FLOW_BUILDER } from "../../i18n/constants";
 export function processTypeItemInitValue(value = ""): ProcessTypeValue {
   if (/.*\[\]$/.test(value)) {
     return {
-      value: value.replace(/\[\]$/, ""),
+      value: extractType(value),
       isArray: true,
     };
   }
@@ -23,6 +23,10 @@ export function processTypeItemInitValue(value = ""): ProcessTypeValue {
 
 export function processTypeItemData(data: ProcessTypeValue): string {
   return data.isArray ? `${data.value}[]` : data.value;
+}
+
+export function extractType(type = ""): string {
+  return type.replace(/\[\]$/, "");
 }
 
 export function processFilterModes(
