@@ -7,6 +7,7 @@ import {
   processFormInitvalue,
   processFormData,
   extractModelRef,
+  getRefRequiredFields,
 } from "./schemaEditor";
 import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
 import * as constantsModuel from "../constants";
@@ -332,6 +333,49 @@ describe("processor tst", () => {
         ],
       });
     });
+
+    it("should process value with ref required field", () => {
+      const initValue = {
+        name: "request",
+        type: "object",
+        required: ["labels", "TrackData.instanceId", "TrackData.name"],
+        fields: [
+          {
+            name: "needNotify",
+            type: "bool",
+            description: "是否需要通知",
+          },
+          {
+            name: "labels",
+            type: "DeployLabel",
+            description: "标签",
+          },
+          {
+            ref: "TrackData.*",
+          },
+        ],
+      };
+
+      const result = processFormInitvalue(initValue);
+
+      expect(result).toEqual({
+        fields: [
+          { description: "是否需要通知", name: "needNotify", type: "bool" },
+          {
+            description: "标签",
+            name: "labels",
+            required: true,
+            type: "DeployLabel",
+          },
+          {
+            ref: "TrackData.*",
+            refRequired: ["TrackData.instanceId", "TrackData.name"],
+          },
+        ],
+        name: "request",
+        type: "object",
+      });
+    });
   });
 
   describe("processFormData", () => {
@@ -482,6 +526,39 @@ describe("processor tst", () => {
       });
     });
 
+    it("should process form data with ref required fields", () => {
+      const formData = {
+        fields: [
+          { description: "是否需要通知", name: "needNotify", type: "bool" },
+          {
+            description: "标签",
+            name: "labels",
+            required: true,
+            type: "DeployLabel",
+          },
+          {
+            ref: "TrackData.*",
+            refRequired: ["TrackData.instanceId", "TrackData.name"],
+          },
+        ],
+        name: "request",
+        type: "object",
+      };
+
+      const result = processFormData(formData);
+      expect(result).toEqual({
+        default: {},
+        fields: [
+          { description: "是否需要通知", name: "needNotify", type: "bool" },
+          { description: "标签", name: "labels", type: "DeployLabel" },
+          { ref: "TrackData.*" },
+        ],
+        name: "request",
+        required: ["labels", "TrackData.instanceId", "TrackData.name"],
+        type: "object",
+      });
+    });
+
     it("should process form data with import data", () => {
       (constantsModuel.modelRefCache as Map<string, string>) = new Map([
         ["DeployLabel", "api.easyops.DeployLabel"],
@@ -587,7 +664,7 @@ describe("processor tst", () => {
       extractModelRef(
         {
           name: "flow",
-          ref: "FlowData",
+          ref: "FlowData.id",
         },
         ["api.easyops.FlowData"]
       );
@@ -595,9 +672,17 @@ describe("processor tst", () => {
       expect(constantsModuel.modelRefCache).toEqual(
         new Map([
           ["PluginData", "api.easyops.PluginData"],
-          ["FlowData", "api.easyops.FlowData"],
+          ["FlowData.id", "api.easyops.FlowData"],
         ])
       );
+    });
+  });
+
+  describe("getRefRequiredFields", () => {
+    it("should return empty if no ref", () => {
+      const result = getRefRequiredFields(undefined, undefined);
+
+      expect(result).toEqual(undefined);
     });
   });
 });

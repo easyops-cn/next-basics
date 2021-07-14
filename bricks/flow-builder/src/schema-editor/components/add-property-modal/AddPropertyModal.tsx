@@ -12,6 +12,7 @@ import {
 import { FieldValidatorItem } from "../field-validator-item/FieldValidatorItem";
 import { TypeItem } from "../../components/type-item/TypeItem";
 import { RefItem } from "../../components/ref-item/RefItem";
+import { RefRequiredItem } from "../ref-required-item/RefRequiredItem";
 
 export interface AddPropertyModalProps {
   trackId?: string;
@@ -36,15 +37,9 @@ export function AddPropertyModal({
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
-  const [nameRequired, setNameRequired] = useState<boolean>(true);
 
   useEffect(() => {
     form.setFieldsValue(processItemInitValue(initValue));
-    if (initValue?.ref) {
-      setNameRequired(false);
-    } else {
-      setNameRequired(true);
-    }
   }, [form, initValue]);
 
   const handleOk = (): void => {
@@ -61,10 +56,30 @@ export function AddPropertyModal({
     handleClose();
   };
 
+  const nameFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.origin !== currentValues.origin
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("origin") === "normal" && (
+            <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    []
+  );
+
   const categoryFormItem = useMemo(
     () => (
       <Form.Item name="origin" initialValue="normal" label="Category">
-        <Select onChange={(value) => setNameRequired(value === "normal")}>
+        <Select>
           <Select.Option key="normal" value="normal">
             {t(K.SCHEMA_ITEM_NORMAL)}
           </Select.Option>
@@ -198,6 +213,33 @@ export function AddPropertyModal({
     []
   );
 
+  const requiredFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.type !== currentValues.type ||
+          prevValues.origin !== currentValues.origin ||
+          prevValues.ref !== currentValues.ref
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("origin") === "reference" &&
+          getFieldValue("ref")?.includes(".*") ? (
+            <Form.Item name="refRequired" label="Required">
+              <RefRequiredItem model={getFieldValue("ref").split(".")[0]} />
+            </Form.Item>
+          ) : (
+            <Form.Item name="required" label="Required" valuePropName="checked">
+              <Switch />
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    []
+  );
+
   return (
     <Modal
       title="property modal"
@@ -212,20 +254,11 @@ export function AddPropertyModal({
         onFinish={handleFinish}
         layout="vertical"
       >
-        <Form.Item
-          name="name"
-          label="Name"
-          rules={[{ required: nameRequired }]}
-        >
-          <Input />
-        </Form.Item>
-
+        {nameFormItem}
         {categoryFormItem}
         {typeFormItem}
 
-        <Form.Item name="required" label="Required" valuePropName="checked">
-          <Switch />
-        </Form.Item>
+        {requiredFormItem}
 
         {defaultFormItem}
 

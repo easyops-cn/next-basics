@@ -3,6 +3,7 @@ import {
   processValidatorInitValue,
   formatValidatorData,
 } from "./filedValidatorItem";
+import { extractType } from "./typeItem";
 import {
   EditorTitleProps,
   SchemaItemProperty,
@@ -85,6 +86,9 @@ export function processFields(
       ...(!isNil(defaultData[item.name])
         ? { default: defaultData[item.name] }
         : {}),
+      ...(item.ref && item.ref.endsWith(".*")
+        ? { refRequired: getRefRequiredFields(item.ref, requiredList) }
+        : {}),
     } as SchemaItemProperty;
 
     result.push(property);
@@ -144,17 +148,21 @@ export function collectFields(
       requiredList.push(item.name || item.ref);
     }
 
+    if (item.refRequired) {
+      requiredList.push(...item.refRequired);
+    }
+
     if (!isNil(item.default)) {
       defaultData[item.name] = item.default;
     }
 
-    const modelRef = modelRefCache.get(item.type || item.ref);
+    const modelRef = modelRefCache.get(extractType(item.type) || item.ref);
     if (modelRef) {
       importSet.add(modelRef);
     }
 
     const property = {
-      ...omit(item, ["fields", "required", "default"]),
+      ...omit(item, ["fields", "required", "refRequired", "default"]),
     } as SchemaItemProperty;
 
     result.push(property);
@@ -219,6 +227,15 @@ export function extractModelRef(
   if (item.ref) {
     const modelName = item.ref.split(".")[0];
     importMap.has(modelName) &&
-      modelRefCache.set(modelName, importMap.get(modelName));
+      modelRefCache.set(item.ref, importMap.get(modelName));
   }
+}
+
+export function getRefRequiredFields(
+  ref = "",
+  requiredList: string[]
+): string[] {
+  const model = ref.split(".")[0];
+
+  return requiredList?.filter((item) => item.includes(model));
 }

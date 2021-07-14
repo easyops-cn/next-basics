@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Modal, Select } from "antd";
-import { mount, shallow, ReactWrapper } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { AddPropertyModal } from "./AddPropertyModal";
 
@@ -19,9 +19,6 @@ describe("AddPropertyModal", () => {
       },
     };
     const wrapper = shallow(<AddPropertyModal {...props} />);
-    expect(wrapper.find(Form.Item).at(0).prop("rules")).toEqual([
-      { required: true },
-    ]);
     wrapper.find(Modal).invoke("onOk")(null);
     wrapper.find(Modal).invoke("onCancel")(null);
     expect(props.onClose).toHaveBeenCalled();
