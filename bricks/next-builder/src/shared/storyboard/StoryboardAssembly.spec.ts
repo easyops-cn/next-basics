@@ -12,9 +12,9 @@ import { StoryboardAssembly } from "./StoryboardAssembly";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
-(InstanceApi_postSearch as jest.MockedFunction<
-  typeof InstanceApi_postSearch
->).mockImplementation((modelId) => {
+(
+  InstanceApi_postSearch as jest.MockedFunction<typeof InstanceApi_postSearch>
+).mockImplementation((modelId) => {
   switch (modelId) {
     case "STORYBOARD_ROUTE":
       return Promise.resolve({
@@ -138,9 +138,11 @@ jest.mock("@next-sdk/cmdb-sdk");
   }
 });
 
-(InstanceGraphApi_traverseGraphV2 as jest.MockedFunction<
-  typeof InstanceGraphApi_traverseGraphV2
->).mockImplementation(() =>
+(
+  InstanceGraphApi_traverseGraphV2 as jest.MockedFunction<
+    typeof InstanceGraphApi_traverseGraphV2
+  >
+).mockImplementation(() =>
   Promise.resolve({
     topic_vertices: [
       {
@@ -160,6 +162,12 @@ jest.mock("@next-sdk/cmdb-sdk");
           null,
           2
         ),
+      },
+      {
+        id: "B-T-02",
+        instanceId: "r",
+        templateId: "tpl-02",
+        proxy: "",
       },
     ],
 
@@ -211,9 +219,9 @@ jest.mock("@next-sdk/cmdb-sdk");
   })
 );
 
-const mockGetDetail = (InstanceApi_getDetail as jest.MockedFunction<
-  typeof InstanceApi_getDetail
->).mockImplementation(() =>
+const mockGetDetail = (
+  InstanceApi_getDetail as jest.MockedFunction<typeof InstanceApi_getDetail>
+).mockImplementation(() =>
   Promise.resolve({
     projectId: "P-239",
     menus: [
@@ -360,6 +368,11 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 ],
+              },
+              {
+                name: "tpl-02",
+                proxy: undefined,
+                bricks: [],
               },
             ],
 
@@ -553,6 +566,12 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 ],
+              },
+              {
+                [symbolForNodeId]: "B-T-02",
+                name: "tpl-02",
+                proxy: undefined,
+                bricks: [],
               },
             ],
 
