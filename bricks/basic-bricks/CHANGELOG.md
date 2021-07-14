@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.133.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.133.1...@next-bricks/basic-bricks@1.133.2) (2021-07-14)
+
+
+### Bug Fixes
+
+* **any-brick--editor:** show no outline for expandable templates ([55a517c](https://github.com/easyops-cn/next-basics/commit/55a517c7f8712a8001dd72a25b97005833db6962))
+
+
+
+
+
 ## [1.133.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.133.0...@next-bricks/basic-bricks@1.133.1) (2021-07-13)
 
 
