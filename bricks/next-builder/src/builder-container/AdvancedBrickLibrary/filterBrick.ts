@@ -47,10 +47,10 @@ export function filterBricks({
   const bricks: BrickOptionItem[] = [];
   for (const brick of formatBrickList) {
     if (
-      keywords.every(
-        (keyword) =>
-          brick.id.toLowerCase().includes(keyword) ||
-          brick.title?.toLowerCase()?.includes(keyword)
+      keywords.every((keyword) =>
+        (brick.$searchTextPool || [brick.id.toLowerCase()]).some((text) =>
+          text.includes(keyword)
+        )
       )
     ) {
       bricks.push(brick);
@@ -84,41 +84,40 @@ export function processBricks(
   const installedBricksEnabled =
     getRuntime().getFeatureFlags()["next-builder-installed-bricks"];
 
-  return sortedBricks
-    .filter((item) => {
-      if (!item.layerType) {
-        //  default brick type if no value
-        return layerType === LayerType.BRICK;
-      }
-
-      return item.layerType === layerType;
-    })
-    .map((item) => {
-      const brick = {
-        ...item,
-      };
-      const find =
-        !installedBricksEnabled &&
-        storyList?.find((story) => story.storyId === item.id);
-      if (find) {
-        return {
-          ...brick,
-          category: find.category,
-          title: i18nText(find.text),
-          description: i18nText(find.description),
-          icon: find.icon,
+  return (
+    sortedBricks
+      // Defaults to brick layer.
+      .filter((item) => layerType === (item.layerType ?? LayerType.BRICK))
+      .map((item) => {
+        const brick = {
+          ...item,
         };
-      }
+        const find =
+          !installedBricksEnabled &&
+          storyList?.find((story) => story.storyId === item.id);
+        if (find) {
+          return {
+            ...brick,
+            category: find.category,
+            title: i18nText(find.text),
+            description: i18nText(find.description),
+            icon: find.icon,
+            $searchTextPool: (brick.$searchTextPool || []).concat(
+              find.text ? Object.values(find.text).filter(Boolean) : []
+            ),
+          };
+        }
 
-      return brick;
-    })
-    .filter((item) => {
-      if (isNil(category) || category === LIB_ALL_CATEGORY) {
-        return true;
-      }
+        return brick;
+      })
+      .filter((item) => {
+        if (isNil(category) || category === LIB_ALL_CATEGORY) {
+          return true;
+        }
 
-      return item.category === category;
-    });
+        return item.category === category;
+      })
+  );
 }
 
 export function insertBricks(

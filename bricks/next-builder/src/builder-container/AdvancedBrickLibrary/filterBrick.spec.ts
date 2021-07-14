@@ -82,10 +82,6 @@ describe("processor", () => {
             lib: "fa",
           },
           storyId: "basic-bricks.general-card",
-          text: {
-            en: "general-card",
-            zh: "卡片",
-          },
         },
       ] as Partial<Story>[] as Story[];
 
@@ -106,6 +102,7 @@ describe("processor", () => {
           layerType: "brick",
           title: "普通输入框",
           type: "brick",
+          $searchTextPool: ["general input", "普通输入框"],
         },
       ]);
     });
