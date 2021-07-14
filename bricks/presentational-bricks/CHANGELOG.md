@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.197.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.197.1...@next-bricks/presentational-bricks@1.197.2) (2021-07-14)
+
+
+### Bug Fixes
+
+* **brick-table:** 行选择配置禁用时添加isEqual操作符来判断数组和对象是否相等 ([f771d5c](https://github.com/easyops-cn/next-basics/commit/f771d5cec10d1ddbd45ce1ea14b6bb5a580938a0))
+
+
+
+
+
 ## [1.197.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.197.0...@next-bricks/presentational-bricks@1.197.1) (2021-07-13)
 
 
