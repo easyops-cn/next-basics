@@ -19,6 +19,7 @@ export interface ValidateField {
 export interface SchemaItemProperty
   extends Omit<SchemaRootNodeProperty, "required" | "default"> {
   required?: boolean;
+  refRequired?: string[];
   default?: string | number;
   validate?: ValidateField;
   enum?: string[] | number[];
