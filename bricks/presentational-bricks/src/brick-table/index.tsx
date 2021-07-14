@@ -51,7 +51,7 @@ import { BrickWrapperConfig } from "../interfaces";
 export interface RowDisabledProps {
   field: string;
   value: any;
-  operator: "$eq" | "$ne" | "$lt" | "$lte" | "$gt" | "$gte";
+  operator: "$eq" | "$ne" | "$lt" | "$lte" | "$gt" | "$gte" | "$isEqual";
 }
 
 export interface CustomColumnComponent {
@@ -550,7 +550,7 @@ export class BrickTableElement extends UpdatingElement {
    * @kind RowDisabledProps
    * @required false
    * @default -
-   * @description 配置每一行是否禁用，其中 `filed` 表示数据源中的字段路径， `value` 表示与其字段比较的值， `operator` 表示两者比较的方法，结果为 `true` 时会禁用当前行, 需要注意的是该配置需要在 `rowSelection: true` 的前提下使用，并且设置 `rowKey` 属性赋予每行唯一的 key，防止顺序变化时造成的错误勾选（如上 demo 所示）
+   * @description 配置每一行是否禁用，其中 `field` 表示数据源中的字段路径， `value` 表示与其字段比较的值， `operator` 表示两者比较的方法，结果为 `true` 时会禁用当前行, 需要注意的是该配置需要在 `rowSelection: true` 的前提下使用，并且设置 `rowKey` 属性赋予每行唯一的 key，防止顺序变化时造成的错误勾选（如上 demo 所示）
    */
   @property({
     attribute: false,

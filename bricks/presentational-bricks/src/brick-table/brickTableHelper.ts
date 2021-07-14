@@ -1,4 +1,4 @@
-import { eq, lt, lte, gt, gte, get, forEach } from "lodash";
+import { eq, lt, lte, gt, gte, get, isEqual, forEach } from "lodash";
 import { transformColor } from "@next-libs/basic-components";
 import { CellStatusProps } from "./index";
 export const compareFunMap: Record<string, any> = {
@@ -8,6 +8,7 @@ export const compareFunMap: Record<string, any> = {
   $gt: gt,
   $gte: gte,
   $ne: (value1: any, value2: any): boolean => !eq(value1, value2),
+  $isEqual: isEqual,
 };
 
 export function getCellStyle(
