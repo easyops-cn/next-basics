@@ -21,6 +21,7 @@ export interface BrickLibraryItem {
   editor?: string;
   editorProps?: Record<string, unknown>;
   nodeId?: string;
+  $searchTextPool?: string[];
 }
 
 export interface GetBrickLibraryParams {
@@ -132,6 +133,7 @@ export async function GetBrickLibrary(
             type: "provider",
             id: name,
             title: getBrickLastName(name),
+            $searchTextPool: [name.toLowerCase()],
           }))
         : pkg.bricks.map((name) => {
             const type = pkg.providers?.includes(name) ? "provider" : "brick";
@@ -150,9 +152,18 @@ export async function GetBrickLibrary(
                     icon: installedBrick.icon,
                     editor: installedBrick.editor,
                     editorProps: installedBrick.editorProps,
+                    $searchTextPool: (installedBrick.text
+                      ? (Object.values(installedBrick.text) as string[]).filter(
+                          Boolean
+                        )
+                      : []
+                    )
+                      .concat(name)
+                      .map((text) => text.toLocaleLowerCase()),
                   }
                 : {
                     title: getBrickLastName(name),
+                    $searchTextPool: [name.toLowerCase()],
                   }),
             };
           })
@@ -164,6 +175,7 @@ export async function GetBrickLibrary(
         title: item.templateId,
         nodeId: item.id,
         layerType: item.layerType,
+        $searchTextPool: [item.templateId.toLowerCase()],
       })),
       installedSnippets.list.map<BrickLibraryItem>((item) => ({
         type: "snippet",
@@ -174,6 +186,12 @@ export async function GetBrickLibrary(
         thumbnail: item.thumbnail,
         bricks: item.bricks,
         layerType: item.layerType,
+        $searchTextPool: (item.text
+          ? (Object.values(item.text) as string[]).filter(Boolean)
+          : []
+        )
+          .concat(item.id)
+          .map((text) => text.toLocaleLowerCase()),
       })),
       pipes
         .graphTree(hostedSnippets as pipes.GraphData, {
@@ -193,12 +211,19 @@ export async function GetBrickLibrary(
           bricks: buildBricks(item.children),
           layerType: item.layerType,
           nodeId: item.id,
+          $searchTextPool: (item.text
+            ? (Object.values(item.text) as string[]).filter(Boolean)
+            : []
+          )
+            .concat(item.snippetId)
+            .map((text) => text.toLocaleLowerCase()),
         })),
       developHelper.getTemplatePackages().flatMap<BrickLibraryItem>((pkg) =>
         pkg.templates.map((name) => ({
           type: "template",
           id: name,
           title: getBrickLastName(name),
+          $searchTextPool: [name.toLowerCase()],
         }))
       )
     );

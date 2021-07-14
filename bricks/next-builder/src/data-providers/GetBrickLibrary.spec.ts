@@ -12,7 +12,11 @@ jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
 jest.spyOn(developHelper, "getBrickPackages").mockReturnValue([
   {
     filePath: "bricks/basic-bricks/dist/index.js",
-    bricks: ["basic-bricks.micro-view", "basic-bricks.general-button"],
+    bricks: [
+      "basic-bricks.micro-view",
+      "basic-bricks.general-button",
+      "basic-bricks.any-brick",
+    ],
   },
   {
     filePath: "bricks/next-builder/dist/index.js",
@@ -159,6 +163,11 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
               },
               icon: { lib: "antd", type: "box" },
             },
+            {
+              id: "basic-bricks.any-brick",
+              category: "any",
+              icon: { lib: "antd", type: "any" },
+            },
           ],
         };
       case "INSTALLED_BRICK_SNIPPET@EASYOPS":
@@ -207,11 +216,19 @@ describe("GetBrickLibrary", () => {
       .toMatchInlineSnapshot(`
       Array [
         Object {
+          "$searchTextPool": Array [
+            "basic-bricks.micro-view",
+          ],
           "id": "basic-bricks.micro-view",
           "title": "micro-view",
           "type": "brick",
         },
         Object {
+          "$searchTextPool": Array [
+            "普通按钮",
+            "general button",
+            "basic-bricks.general-button",
+          ],
           "category": "button",
           "description": "一个普通的按钮",
           "editor": undefined,
@@ -225,26 +242,57 @@ describe("GetBrickLibrary", () => {
           "type": "brick",
         },
         Object {
+          "$searchTextPool": Array [
+            "basic-bricks.any-brick",
+          ],
+          "category": "any",
+          "description": undefined,
+          "editor": undefined,
+          "editorProps": undefined,
+          "icon": Object {
+            "lib": "antd",
+            "type": "any",
+          },
+          "id": "basic-bricks.any-brick",
+          "title": undefined,
+          "type": "brick",
+        },
+        Object {
+          "$searchTextPool": Array [
+            "next-builder.builder-container",
+          ],
           "id": "next-builder.builder-container",
           "title": "builder-container",
           "type": "brick",
         },
         Object {
+          "$searchTextPool": Array [
+            "next-builder.provider-get-all-providers",
+          ],
           "id": "next-builder.provider-get-all-providers",
           "title": "provider-get-all-providers",
           "type": "provider",
         },
         Object {
+          "$searchTextPool": Array [
+            "providers-of-cmdb.get-instance-list",
+          ],
           "id": "providers-of-cmdb.get-instance-list",
           "title": "get-instance-list",
           "type": "provider",
         },
         Object {
+          "$searchTextPool": Array [
+            "providers-of-cmdb.get-instance-detail",
+          ],
           "id": "providers-of-cmdb.get-instance-detail",
           "title": "get-instance-detail",
           "type": "provider",
         },
         Object {
+          "$searchTextPool": Array [
+            "tpl-a",
+          ],
           "id": "tpl-a",
           "layerType": undefined,
           "nodeId": "P-01",
@@ -252,6 +300,9 @@ describe("GetBrickLibrary", () => {
           "type": "customTemplate",
         },
         Object {
+          "$searchTextPool": Array [
+            "tpl-b",
+          ],
           "id": "tpl-b",
           "layerType": undefined,
           "nodeId": "P-02",
@@ -259,6 +310,11 @@ describe("GetBrickLibrary", () => {
           "type": "customTemplate",
         },
         Object {
+          "$searchTextPool": Array [
+            "片段 a",
+            "snippet a",
+            "installed-snippet-a",
+          ],
           "bricks": Array [],
           "category": "layout",
           "description": undefined,
@@ -269,6 +325,9 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "installed-snippet-b",
+          ],
           "bricks": Array [],
           "category": "layout",
           "description": undefined,
@@ -279,6 +338,11 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "片段 x",
+            "snippet x",
+            "hosted-snippet-x",
+          ],
           "bricks": Array [
             Object {
               "brick": "easy-view",
@@ -322,6 +386,9 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "hosted-snippet-y",
+          ],
           "bricks": Array [
             Object {
               "brick": "easy-view",
@@ -346,21 +413,33 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-a.template-a1",
+          ],
           "id": "test-a.template-a1",
           "title": "template-a1",
           "type": "template",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-a.template-a2",
+          ],
           "id": "test-a.template-a2",
           "title": "template-a2",
           "type": "template",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-b.template-b1",
+          ],
           "id": "test-b.template-b1",
           "title": "template-b1",
           "type": "template",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-b.template-b2",
+          ],
           "id": "test-b.template-b2",
           "title": "template-b2",
           "type": "template",
@@ -378,36 +457,65 @@ describe("GetBrickLibrary", () => {
       .toMatchInlineSnapshot(`
       Array [
         Object {
+          "$searchTextPool": Array [
+            "basic-bricks.micro-view",
+          ],
           "id": "basic-bricks.micro-view",
           "title": "micro-view",
           "type": "brick",
         },
         Object {
+          "$searchTextPool": Array [
+            "basic-bricks.general-button",
+          ],
           "id": "basic-bricks.general-button",
           "title": "general-button",
           "type": "brick",
         },
         Object {
+          "$searchTextPool": Array [
+            "basic-bricks.any-brick",
+          ],
+          "id": "basic-bricks.any-brick",
+          "title": "any-brick",
+          "type": "brick",
+        },
+        Object {
+          "$searchTextPool": Array [
+            "next-builder.builder-container",
+          ],
           "id": "next-builder.builder-container",
           "title": "builder-container",
           "type": "brick",
         },
         Object {
+          "$searchTextPool": Array [
+            "next-builder.provider-get-all-providers",
+          ],
           "id": "next-builder.provider-get-all-providers",
           "title": "provider-get-all-providers",
           "type": "provider",
         },
         Object {
+          "$searchTextPool": Array [
+            "providers-of-cmdb.get-instance-list",
+          ],
           "id": "providers-of-cmdb.get-instance-list",
           "title": "get-instance-list",
           "type": "provider",
         },
         Object {
+          "$searchTextPool": Array [
+            "providers-of-cmdb.get-instance-detail",
+          ],
           "id": "providers-of-cmdb.get-instance-detail",
           "title": "get-instance-detail",
           "type": "provider",
         },
         Object {
+          "$searchTextPool": Array [
+            "tpl-a",
+          ],
           "id": "tpl-a",
           "layerType": undefined,
           "nodeId": "P-01",
@@ -415,6 +523,9 @@ describe("GetBrickLibrary", () => {
           "type": "customTemplate",
         },
         Object {
+          "$searchTextPool": Array [
+            "tpl-b",
+          ],
           "id": "tpl-b",
           "layerType": undefined,
           "nodeId": "P-02",
@@ -422,6 +533,11 @@ describe("GetBrickLibrary", () => {
           "type": "customTemplate",
         },
         Object {
+          "$searchTextPool": Array [
+            "片段 a",
+            "snippet a",
+            "installed-snippet-a",
+          ],
           "bricks": Array [],
           "category": "layout",
           "description": undefined,
@@ -432,6 +548,9 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "installed-snippet-b",
+          ],
           "bricks": Array [],
           "category": "layout",
           "description": undefined,
@@ -442,6 +561,11 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "片段 x",
+            "snippet x",
+            "hosted-snippet-x",
+          ],
           "bricks": Array [
             Object {
               "brick": "easy-view",
@@ -485,6 +609,9 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "hosted-snippet-y",
+          ],
           "bricks": Array [
             Object {
               "brick": "easy-view",
@@ -509,21 +636,33 @@ describe("GetBrickLibrary", () => {
           "type": "snippet",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-a.template-a1",
+          ],
           "id": "test-a.template-a1",
           "title": "template-a1",
           "type": "template",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-a.template-a2",
+          ],
           "id": "test-a.template-a2",
           "title": "template-a2",
           "type": "template",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-b.template-b1",
+          ],
           "id": "test-b.template-b1",
           "title": "template-b1",
           "type": "template",
         },
         Object {
+          "$searchTextPool": Array [
+            "test-b.template-b2",
+          ],
           "id": "test-b.template-b2",
           "title": "template-b2",
           "type": "template",

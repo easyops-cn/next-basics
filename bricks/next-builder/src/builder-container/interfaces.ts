@@ -17,6 +17,7 @@ export interface BrickOptionItem {
   layerType?: LayerType;
   nodeId?: string;
   isHostedSnippet?: boolean;
+  $searchTextPool?: string[];
 }
 
 export interface GroupedBricks {
