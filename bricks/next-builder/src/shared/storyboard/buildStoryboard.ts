@@ -30,7 +30,15 @@ const jsonFieldsInRoute = [
 // Fields stored as yaml string will be parsed when build & push.
 const yamlFieldsInRoute = ["permissionsPreCheck"];
 
-const jsonFieldsInBrick = ["properties", "events", "lifeCycle", "params", "if"];
+const jsonFieldsInBrick = [
+  "properties",
+  "events",
+  "lifeCycle",
+  "params",
+  "if",
+  "transform",
+  "transformFrom",
+];
 
 // Fields stored as yaml string will be parsed when build & push.
 const yamlFieldsInBrick = ["permissionsPreCheck"];
@@ -481,23 +489,14 @@ function safeYamlParse(value: string): unknown {
 }
 
 function setUseChild(parent: BuilderBrickNode, parentConf: BrickConf) {
-  const reg = /"useChildren": "\[(?<slotName>.*?)\]/g;
+  const reg = /"useChildren": "(?<slotName>\[.*?\])/g;
   let result = reg.exec(parent.properties);
   while (result) {
     const matchUseChild = parentConf.slots[result.groups.slotName];
     if (matchUseChild) {
       const replaceItem = findUseChild(parentConf, result.groups.slotName);
       if (replaceItem) {
-        const needMoveKey = ["transform", "transformForm", "if", "slots"];
-        const needChangeItem = (matchUseChild as SlotConfOfBricks).bricks[0];
-        const newItem: Record<string, any> = {};
-        Object.keys(needChangeItem.properties).forEach((key) => {
-          if (needMoveKey.includes(key)) {
-            newItem[key] = needChangeItem.properties[key];
-            delete needChangeItem.properties[key];
-          }
-        });
-        replaceItem.useBrick = Object.assign({}, newItem, needChangeItem);
+        replaceItem.useBrick = (matchUseChild as SlotConfOfBricks).bricks[0];
         delete replaceItem["useChildren"];
       }
     } else {
@@ -518,7 +517,7 @@ function findUseChild(obj: BrickConf, name: string): Record<string, any> {
       item = findUseChild(v, name);
       if (item) break;
     }
-    if (k === "useChildren" && v === `[${name}]`) {
+    if (k === "useChildren" && v === `${name}`) {
       item = obj;
     }
   }
