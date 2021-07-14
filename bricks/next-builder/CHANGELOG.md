@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.1...@next-bricks/next-builder@1.61.2) (2021-07-14)
+
+
+### Bug Fixes
+
+* **brick-library:** support searching multiple fields ([bb945f5](https://github.com/easyops-cn/next-basics/commit/bb945f559fe711cd46fc979e86f109c71b3c4e3d))
+
+
+
+
+
 ## [1.61.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.0...@next-bricks/next-builder@1.61.1) (2021-07-13)
 
 
