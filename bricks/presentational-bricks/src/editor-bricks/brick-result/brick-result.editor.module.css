@@ -2,18 +2,23 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   padding: var(--card-content-gap);
-  gap: 5px;
+  gap: 20px;
 
   .icon {
+    height: 130px;
     font-size: 100px;
     color: var(--editor-brick-stroke-color);
   }
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .content {
-    height: 20px;
-    width: 220px;
-    background-color: var(--editor-brick-skeleton-bg-light);
+    .content {
+      height: 20px;
+      width: 220px;
+      background-color: var(--editor-brick-skeleton-bg-light);
+    }
   }
 }
