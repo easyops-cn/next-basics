@@ -24,7 +24,7 @@
     "@next-libs/basic-components": "^2.0.0",
     "@next-libs/editor-components": "^1.0.0",
     "@next-libs/forms": "^2.2.2",
-    "@types/react-color": "^3.0.4",
+    "@types/react-color": "^3.0.5",
     "react-color": "^2.19.3"
   },
   "peerDependencies": {
