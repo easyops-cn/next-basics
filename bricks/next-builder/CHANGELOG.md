@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.2...@next-bricks/next-builder@1.61.3) (2021-07-15)
+
+
+### Bug Fixes
+
+* **build-storyboard:** parse template proxy as json instead of yaml ([49d9c31](https://github.com/easyops-cn/next-basics/commit/49d9c31463f6527127cfdbb3083f6aa5ff990466))
+
+
+
+
+
 ## [1.61.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.1...@next-bricks/next-builder@1.61.2) (2021-07-14)
 
 
