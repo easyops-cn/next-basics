@@ -568,9 +568,200 @@ describe("buildStoryboard", () => {
         dependsAll: false,
       } as any,
     ],
+    [
+      "useChildren normal",
+      {
+        routeList: [
+          {
+            id: "R-01",
+            path: "/a",
+            type: "bricks",
+            parent: [], // Empty parent also works.
+            providers: '["p1"]',
+            segues: null,
+            // Fields should be removed.
+            _ts: 123,
+            org: 1,
+          },
+        ],
+        brickList: [
+          {
+            brick: "presentational-bricks.brick-table",
+            id: "B-45235",
+            instanceId: "5c4de59f26f55",
+            mountPoint: "content",
+            portal: false,
+            parent: [{ id: "R-01" }],
+            properties: '{\n  "useChildren": "[state]"} ',
+            type: "brick",
+          },
+          {
+            brick: "presentational-bricks.brick-value-mapping",
+            id: "B-02",
+            instanceId: "instance-b02",
+            mountPoint: "[state]",
+            type: "brick",
+            parent: [{ id: "B-45235" }],
+            properties: '{\n  "fields": "state"}',
+            if: "false",
+            lifeCycle: undefined,
+          },
+        ],
+        templateList: [],
+        menus: [],
+        i18n: [],
+        dependsAll: false,
+        options: {
+          keepIds: true,
+        },
+      },
+      {
+        dependsAll: false,
+        meta: {
+          customTemplates: [],
+          i18n: {
+            en: {},
+            zh: {},
+          },
+          menus: [],
+        },
+        routes: [
+          {
+            bricks: [
+              {
+                brick: "presentational-bricks.brick-table",
+                portal: false,
+                properties: {
+                  useBrick: {
+                    brick: "presentational-bricks.brick-value-mapping",
+                    if: false,
+                    lifeCycle: undefined,
+                    properties: {
+                      fields: "state",
+                    },
+                    [symbolForNodeId]: "B-02",
+                    [symbolForNodeInstanceId]: "instance-b02",
+                  },
+                },
+                slots: {
+                  "[state]": {
+                    bricks: [
+                      {
+                        brick: "presentational-bricks.brick-value-mapping",
+                        if: false,
+                        lifeCycle: undefined,
+                        properties: {
+                          fields: "state",
+                        },
+                      },
+                    ],
+                    type: "bricks",
+                  },
+                },
+              },
+            ],
+            path: "/a",
+            providers: ["p1"],
+            segues: undefined,
+            type: "bricks",
+          },
+        ],
+      },
+    ],
+    [
+      "useChildren not found children",
+      {
+        routeList: [
+          {
+            id: "R-01",
+            path: "/a",
+            type: "bricks",
+            parent: [], // Empty parent also works.
+            providers: '["p1"]',
+            segues: null,
+            // Fields should be removed.
+            _ts: 123,
+            org: 1,
+          },
+        ],
+        brickList: [
+          {
+            brick: "presentational-bricks.brick-table",
+            id: "B-45235",
+            instanceId: "5c4de59f26f55",
+            mountPoint: "content",
+            portal: false,
+            parent: [{ id: "R-01" }],
+            properties: '{\n  "useChildren": "state"} ',
+            type: "brick",
+          },
+          {
+            brick: "presentational-bricks.brick-value-mapping",
+            id: "B-02",
+            instanceId: "instance-b02",
+            mountPoint: "[state]",
+            type: "brick",
+            parent: [{ id: "B-45235" }],
+            properties: '{\n  "fields": "state"}',
+            if: "false",
+            lifeCycle: undefined,
+          },
+        ],
+        templateList: [],
+        menus: [],
+        i18n: [],
+        dependsAll: false,
+        options: {
+          keepIds: true,
+        },
+      },
+      {
+        dependsAll: false,
+        meta: {
+          customTemplates: [],
+          i18n: {
+            en: {},
+            zh: {},
+          },
+          menus: [],
+        },
+        routes: [
+          {
+            bricks: [
+              {
+                brick: "presentational-bricks.brick-table",
+                portal: false,
+                properties: {
+                  useChildren: "state",
+                },
+                slots: {
+                  "[state]": {
+                    bricks: [
+                      {
+                        brick: "presentational-bricks.brick-value-mapping",
+                        if: false,
+                        lifeCycle: undefined,
+                        properties: {
+                          fields: "state",
+                        },
+                      },
+                    ],
+                    type: "bricks",
+                  },
+                },
+              },
+            ],
+            path: "/a",
+            providers: ["p1"],
+            segues: undefined,
+            type: "bricks",
+          },
+        ],
+      },
+    ],
   ])("buildStoryboard should work %s", (condition, input, output) => {
     const cloneOfInput = clone(input);
-    expect(buildStoryboard(input)).toEqual(output);
+    expect(buildStoryboard(input)).toMatchObject(output);
     // `input` should never be mutated.
     expect(input).toEqual(cloneOfInput);
     expect(consoleError).not.toBeCalled();
