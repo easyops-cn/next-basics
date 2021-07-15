@@ -7,7 +7,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[with-sub-menu]",
     layerType: "layout",
-    category: "layout",
+    category: "menu",
     text: {
       zh: "带二级菜单布局",
       en: "Layout with sub menu",
@@ -36,7 +36,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[without-sub-menu]",
     layerType: "layout",
-    category: "layout",
+    category: "menu",
     text: {
       zh: "不带二级菜单布局",
       en: "Layout without sub menu",

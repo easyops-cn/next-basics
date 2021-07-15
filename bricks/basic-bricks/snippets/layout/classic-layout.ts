@@ -22,7 +22,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-one-col]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "单列经典布局",
       en: "One-col classic layout",
@@ -45,7 +45,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-two-col]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "两列经典布局",
       en: "Two-col classic layout",
@@ -69,7 +69,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-three-col]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "三列经典布局",
       en: "Three-col classic layout",
@@ -93,7 +93,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-four-col]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "四列经典布局",
       en: "Four-col classic layout",
@@ -117,7 +117,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-2x3]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "2*3网格布局",
       en: "2*3 grid layout",
@@ -145,7 +145,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-top-bottom-1x3]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "上下均分，底部平分为3 网格布局",
       en: "2*3 grid layout",
@@ -173,7 +173,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-header-content]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "标题-内容网格布局",
       en: "Header-content grid layout",
@@ -197,7 +197,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-header-content-footer]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "标题-内容-页脚网格布局",
       en: "Header-content-footer layout",
@@ -221,7 +221,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-header-content-left1-right2]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "标题-内容-1:2 网格布局",
       en: "Header-Content-1:2 grid layout",
@@ -249,7 +249,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-header-content-left2-right1]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "标题-内容-2:1 网格布局",
       en: "Header-content-2:1 grid layout",
@@ -277,7 +277,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-left1-right2]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "1:2 网格布局",
       en: "1:2 grid layout",
@@ -301,7 +301,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-left2-right1]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "2:1 网格布局",
       en: "2:1 grid layout",
@@ -325,7 +325,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-left1-right3]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "1:3 网格布局",
       en: "1:3 grid layout",
@@ -349,7 +349,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-left3-right1]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "3:1 网格布局",
       en: "3:1 grid layout",
@@ -373,7 +373,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-left1-right2-header-content]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "1:2-标题-内容 网格布局",
       en: "1:2-header-content grid layout",
@@ -401,7 +401,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[classic-left2-right1-header-content]",
     layerType: "layout",
-    category: "layout",
+    category: "classic",
     text: {
       zh: "2:1-标题-内容 网格布局",
       en: "2:1-header-content grid layout",

@@ -11,7 +11,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[banner-1:2]",
     layerType: "layout",
-    category: "layout",
+    category: "banner",
     text: {
       zh: "1:2 通栏布局",
       en: "1:2 banner layout",
@@ -30,7 +30,7 @@ const snippets: SnippetDefinition[] = [
             ["banner", "banner"],
             ["contentLeft", "contentRight"],
           ],
-          gridTemplateRows: ["1fr", "1fr"],
+          gridTemplateRows: ["auto", "1fr"],
           gridTemplateColumns: ["1fr", "2fr"],
         },
       },
@@ -39,7 +39,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[banner-1:3]",
     layerType: "layout",
-    category: "layout",
+    category: "banner",
     text: {
       zh: "1:3 通栏布局",
       en: "1:3 banner layout",
@@ -58,7 +58,7 @@ const snippets: SnippetDefinition[] = [
             ["banner", "banner"],
             ["contentLeft", "contentRight"],
           ],
-          gridTemplateRows: ["1fr", "1fr"],
+          gridTemplateRows: ["auto", "1fr"],
           gridTemplateColumns: ["1fr", "3fr"],
         },
       },
@@ -67,7 +67,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[banner-2:1]",
     layerType: "layout",
-    category: "layout",
+    category: "banner",
     text: {
       zh: "2:1 通栏布局",
       en: "2:1 banner layout",
@@ -86,7 +86,7 @@ const snippets: SnippetDefinition[] = [
             ["banner", "banner"],
             ["contentLeft", "contentRight"],
           ],
-          gridTemplateRows: ["1fr", "1fr"],
+          gridTemplateRows: ["auto", "1fr"],
           gridTemplateColumns: ["2fr", "1fr"],
         },
       },
@@ -95,7 +95,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[banner-3:1]",
     layerType: "layout",
-    category: "layout",
+    category: "banner",
     text: {
       zh: "3:1 通栏布局",
       en: "3:1 banner layout",
@@ -114,7 +114,7 @@ const snippets: SnippetDefinition[] = [
             ["banner", "banner"],
             ["contentLeft", "contentRight"],
           ],
-          gridTemplateRows: ["1fr", "1fr"],
+          gridTemplateRows: ["auto", "1fr"],
           gridTemplateColumns: ["3fr", "1fr"],
         },
       },
@@ -123,7 +123,7 @@ const snippets: SnippetDefinition[] = [
   {
     id: "basic-bricks.easy-view[banner-one-col]",
     layerType: "layout",
-    category: "layout",
+    category: "banner",
     text: {
       zh: "单列通栏布局",
       en: "One-column banner layout",
@@ -139,7 +139,7 @@ const snippets: SnippetDefinition[] = [
             gap: "var(--card-content-gap)",
           },
           gridTemplateAreas: [["banner"], ["content"]],
-          gridTemplateRows: ["1fr", "1fr"],
+          gridTemplateRows: ["auto", "1fr"],
         },
       },
     ],
