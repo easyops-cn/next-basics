@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.3...@next-bricks/next-builder@1.61.4) (2021-07-15)
+
+
+### Bug Fixes
+
+* refine category ([c43f6cd](https://github.com/easyops-cn/next-basics/commit/c43f6cd56c28e22d1e30f63725839b717e2ef44a))
+
+
+
+
+
 ## [1.61.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.2...@next-bricks/next-builder@1.61.3) (2021-07-15)
 
 

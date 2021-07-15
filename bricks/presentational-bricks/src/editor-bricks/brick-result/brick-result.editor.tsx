@@ -5,6 +5,7 @@ import {
   EditorElementFactory,
   EditorSelfLayout,
   useBuilderNode,
+  SlotContainer,
 } from "@next-core/editor-bricks-helper";
 import { PictureFilled } from "@ant-design/icons";
 import styles from "./brick-result.editor.module.css";
@@ -22,10 +23,13 @@ export function BrickResultEditor({
   return (
     <EditorContainer nodeUid={nodeUid}>
       <div className={styles.resultContainer}>
-        <div className={styles.icon}>
-          <PictureFilled />
+        <div className={styles.contentWrapper}>
+          <div className={styles.icon}>
+            <PictureFilled />
+          </div>
+          <div className={styles.content}></div>
         </div>
-        <div className={styles.content}></div>
+        <SlotContainer nodeUid={nodeUid} slotName="content"></SlotContainer>
       </div>
     </EditorContainer>
   );

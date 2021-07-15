@@ -72,9 +72,9 @@ const locale: Locale = {
   [K.BRICK_CATEGORY_DATA_CONVERT]: "Data Convert",
   [K.BRICK_CATEGORY_TOPOLOGY]: "Topology",
   [K.BRICK_CATEGORY_OTHER]: "Other",
-  [K.LAYOUT_PAGE]: "page layout",
-  [K.LAYOUT_GRID]: "grid",
-  [K.LAYOUT_WITH_SIDEBAR]: "layout with sidebar",
+  [K.LAYOUT_CLASSIC]: "Calssic Layout",
+  [K.LAYOUT_BANNER]: "Banner Layout",
+  [K.LAYOUT_MENU]: "With Menu Layout",
 };
 
 export default locale;
