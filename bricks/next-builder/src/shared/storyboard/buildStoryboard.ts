@@ -1,6 +1,7 @@
 import {
   RouteConf,
   BrickConf,
+  SlotsConf,
   RouteConfOfRoutes,
   RouteConfOfBricks,
   SlotConfOfRoutes,
@@ -386,7 +387,7 @@ function mountBrickInBrick(
     brickNodeToBrickConf(ctx, child)
   );
   if ((parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.length) {
-    setUseChild(parent, parentConf);
+    setUseChild(parentConf.properties, parentConf.slots);
   }
 }
 
@@ -488,38 +489,26 @@ function safeYamlParse(value: string): unknown {
   }
 }
 
-function setUseChild(parent: BuilderBrickNode, parentConf: BrickConf) {
-  const reg = /"useChildren": "(?<slotName>\[.*?\])/g;
-  let result = reg.exec(parent.properties);
-  while (result) {
-    const matchUseChild = parentConf.slots[result.groups.slotName];
-    if (matchUseChild) {
-      const replaceItem = findUseChild(parentConf, result.groups.slotName);
-      if (replaceItem) {
-        replaceItem.useBrick = (matchUseChild as SlotConfOfBricks).bricks[0];
-        delete replaceItem["useChildren"];
-      }
-    } else {
-      // eslint-disable-next-line no-console
-      console.warn(`${result.groups.slotName} could not found`);
-    }
-    result = reg.exec(parent.properties);
-  }
-}
+function setUseChild(parentConf: BrickConf, slots: SlotsConf) {
+  if (!parentConf || !slots) return;
 
-function findUseChild(obj: BrickConf, name: string): Record<string, any> {
-  let item: Record<string, any>;
-  for (const [k, v] of Object.entries(obj)) {
-    if (
-      Object.prototype.toString.call(v) === "[object Array]" ||
-      Object.prototype.toString.call(v) === "[object Object]"
-    ) {
-      item = findUseChild(v, name);
-      if (item) break;
+  const dfs = (conf: Record<string, any>) => {
+    for (const [k, v] of Object.entries(conf)) {
+      if (
+        Object.prototype.toString.call(v) === "[object Array]" ||
+        Object.prototype.toString.call(v) === "[object Object]"
+      ) {
+        dfs(v);
+      }
+      if (k === "useChildren" && /\[.*?\]/.test(String(v))) {
+        const matchUseChild = slots[v as string];
+        if (matchUseChild) {
+          conf.useBrick = (matchUseChild as SlotConfOfBricks).bricks[0];
+          delete conf.useChildren;
+        }
+      }
     }
-    if (k === "useChildren" && v === `${name}`) {
-      item = obj;
-    }
-  }
-  return item;
+  };
+
+  dfs(parentConf);
 }
