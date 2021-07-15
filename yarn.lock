@@ -3364,10 +3364,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-avatar-editor@^10.3.5":
-  version "10.3.5"
-  resolved "https://registry.npmjs.org/@types/react-avatar-editor/-/react-avatar-editor-10.3.5.tgz#0747bf98ca67006a8dae0af2eb95acfc4ca7f212"
-  integrity sha1-B0e/mMpnAGqNrgry65Ws/Eyn8hI=
+"@types/react-avatar-editor@^10.3.6":
+  version "10.3.6"
+  resolved "https://registry.npmjs.org/@types/react-avatar-editor/-/react-avatar-editor-10.3.6.tgz#f902a91b336eac7e3d141ec931eeae9a082e8125"
+  integrity sha512-2r9+WYriqXIyjOTxy/DSiCUhr2TBiYD4Gzbyych1WUEwdPboNj0JRz9B5868TwiGgKD61jdWYyKy/OutHs7L6A==
   dependencies:
     "@types/react" "*"
 
