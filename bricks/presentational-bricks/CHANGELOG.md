@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.197.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.197.2...@next-bricks/presentational-bricks@1.197.3) (2021-07-15)
+
+
+### Bug Fixes
+
+* brick-result editor add content slot ([425a117](https://github.com/easyops-cn/next-basics/commit/425a117f816675e50f87774211051dbcfdf75167))
+
+
+
+
+
 ## [1.197.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.197.1...@next-bricks/presentational-bricks@1.197.2) (2021-07-14)
 
 
