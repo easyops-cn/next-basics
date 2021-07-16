@@ -390,7 +390,7 @@ function mountBrickInBrick(
   (parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.push(
     brickNodeToBrickConf(ctx, child)
   );
-  setUseChild(parentConf?.properties, parentConf?.slots);
+  setUseChild(parentConf.properties, parentConf.slots);
 }
 
 function normalizeBrickInSnippet(
