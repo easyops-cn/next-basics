@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.4...@next-bricks/next-builder@1.61.5) (2021-07-16)
+
+**Note:** Version bump only for package @next-bricks/next-builder
+
+
+
+
+
 ## [1.61.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.3...@next-bricks/next-builder@1.61.4) (2021-07-15)
 
 
