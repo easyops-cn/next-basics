@@ -1,4 +1,27 @@
 import { isNil, isRegExp } from "lodash";
+import { isObject } from "@next-core/brick-utils";
+
+export function deepFilter<T>(data: Array<T>, q: string): Array<T> {
+  if (!q) {
+    return data.slice();
+  }
+  return data.filter((item) => deepMatch(item, q?.trim().toLowerCase() ?? ""));
+}
+
+function deepMatch(data: unknown, lowerQ: string): boolean {
+  if (typeof data === "string") {
+    return data.toLowerCase().includes(lowerQ);
+  }
+  if (Array.isArray(data)) {
+    return data.some((item) => deepMatch(item, lowerQ));
+  }
+  if (isObject(data)) {
+    return Object.entries(data)
+      .flat()
+      .some((item) => deepMatch(item, lowerQ));
+  }
+  return false;
+}
 
 export function searchList<T>(
   list: Array<T>,

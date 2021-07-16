@@ -12,6 +12,7 @@ interface ContextItemProps {
   index: number;
   data: ContextConf;
   canDrag: boolean;
+  highlighted?: boolean;
   handleDropItem: (dragIndex: number, hoverIndex: number) => void;
   handleItemClick: () => void;
   handleItemDelete: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -22,6 +23,7 @@ export function ContextItem({
   index,
   data,
   canDrag,
+  highlighted,
   handleDropItem,
   handleItemClick,
   handleItemDelete,
@@ -69,6 +71,7 @@ export function ContextItem({
       ref={ref}
       className={classNames(styles.varItem, {
         [dropClassName]: isOver,
+        [styles.highlighted]: highlighted,
       })}
       onClick={handleItemClick}
       key={data.name}
