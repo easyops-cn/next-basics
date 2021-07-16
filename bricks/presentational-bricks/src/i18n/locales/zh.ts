@@ -28,6 +28,8 @@ const locale: Locale = {
   [K.ITEMS]: "项",
   [K.SELECT_ALL]: "全选",
   [K.SELECTED]: "已选",
+  [K.FULL_TEXT_SEARCH]: "全文搜索",
+  [K.IP_SEARCH]: "IP搜索 ",
 };
 
 export default locale;
