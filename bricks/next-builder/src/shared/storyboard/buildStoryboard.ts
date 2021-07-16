@@ -2,6 +2,7 @@ import {
   RouteConf,
   BrickConf,
   SlotsConf,
+  SlotConf,
   RouteConfOfRoutes,
   RouteConfOfBricks,
   SlotConfOfRoutes,
@@ -11,8 +12,10 @@ import {
   BuilderBrickNode,
   BuilderRouteOrBrickNode,
 } from "@next-core/brick-types";
-import { sortBy } from "lodash";
+import { isObject } from "@next-core/brick-utils";
+import { isEmpty, sortBy } from "lodash";
 import yaml from "js-yaml";
+import { UseSingleBrickConf } from "@next-core/brick-types";
 import {
   BuildInfo,
   MenuItemNode,
@@ -99,6 +102,7 @@ const fieldsToKeepInMenuItem = [
 
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
+export const symbolForNodeUseChildren = Symbol.for("useChildren");
 
 type WeakMapOfNodeToConf = WeakMap<
   BuilderRouteOrBrickNode,
@@ -386,9 +390,7 @@ function mountBrickInBrick(
   (parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.push(
     brickNodeToBrickConf(ctx, child)
   );
-  if ((parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.length) {
-    setUseChild(parentConf.properties, parentConf.slots);
-  }
+  setUseChild(parentConf?.properties, parentConf?.slots);
 }
 
 function normalizeBrickInSnippet(
@@ -489,23 +491,66 @@ function safeYamlParse(value: string): unknown {
   }
 }
 
-function setUseChild(parentConf: BrickConf, slots: SlotsConf) {
+function getUseBrickBody(item: UseSingleBrickConf): UseSingleBrickConf {
+  const {
+    brick,
+    properties,
+    events,
+    lifeCycle,
+    transformFrom,
+    transform,
+    slots,
+  } = item;
+  return {
+    brick,
+    properties,
+    events,
+    lifeCycle,
+    transformFrom,
+    transform,
+    slots,
+    ["if"]: item?.if,
+  };
+}
+
+function setUseChild(parentConf: Record<string, unknown>, slots: SlotsConf) {
   if (!parentConf || !slots) return;
 
-  const dfs = (conf: Record<string, any>) => {
+  const dfs = (conf: Record<string | symbol, any>) => {
     for (const [k, v] of Object.entries(conf)) {
-      if (
-        Object.prototype.toString.call(v) === "[object Array]" ||
-        Object.prototype.toString.call(v) === "[object Object]"
-      ) {
+      if (Array.isArray(v) || isObject(v)) {
         dfs(v);
       }
-      if (k === "useChildren" && /\[.*?\]/.test(String(v))) {
-        const matchUseChild = slots[v as string];
-        if (matchUseChild) {
-          conf.useBrick = (matchUseChild as SlotConfOfBricks).bricks[0];
+      if (k === "useChildren" && typeof v === "string" && /^\[\w+\]$/.test(v)) {
+        const matchUseChild: SlotConf = slots[v as string];
+        if (matchUseChild?.type === "bricks") {
+          Object.assign(conf, {
+            [symbolForNodeUseChildren]: conf.useChildren,
+          });
+          // conf.useBrick = getUseBrickBody(matchUseChild.bricks[0] as UseSingleBrickConf);
+          conf.useBrick = matchUseChild.bricks[0];
+          delete slots[v];
           delete conf.useChildren;
         }
+      }
+      if (!isEmpty(slots)) {
+        Object.getOwnPropertySymbols(conf).forEach((symbol) => {
+          if (symbol === symbolForNodeUseChildren) {
+            const slotName: string = conf[symbol as any];
+            const matchUseChild: SlotConf = slots[slotName];
+            if (matchUseChild?.type === "bricks") {
+              const targetBrick = Array.isArray(conf.useBrick)
+                ? conf.useBrick
+                : [conf.useBrick];
+              conf.useBrick = [
+                ...targetBrick,
+                // ...matchUseChild.bricks.map(item => getUseBrickBody((item as UseSingleBrickConf)))
+                ...matchUseChild.bricks,
+              ];
+              delete slots[slotName];
+            }
+          }
+        });
       }
     }
   };

@@ -3,6 +3,7 @@ import {
   buildStoryboard,
   symbolForNodeId,
   symbolForNodeInstanceId,
+  symbolForNodeUseChildren,
 } from "./buildStoryboard";
 
 const consoleError = jest
@@ -569,7 +570,100 @@ describe("buildStoryboard", () => {
       } as any,
     ],
     [
-      "useChildren normal",
+      "useChildren single",
+      {
+        routeList: [
+          {
+            id: "R-01",
+            path: "/a",
+            type: "bricks",
+            parent: [], // Empty parent also works.
+            providers: '["p1"]',
+            segues: null,
+            // Fields should be removed.
+            _ts: 123,
+            org: 1,
+          },
+        ],
+        brickList: [
+          {
+            brick: "presentational-bricks.brick-table",
+            id: "B-45235",
+            instanceId: "5c4de59f26f55",
+            mountPoint: "content",
+            portal: false,
+            parent: [{ id: "R-01" }],
+            properties: '{\n  "useChildren": "[state]"} ',
+            type: "brick",
+            slots: {},
+            [symbolForNodeId]: "B-45235",
+            [symbolForNodeInstanceId]: "5c4de59f26f55",
+          },
+          {
+            brick: "presentational-bricks.brick-value-mapping",
+            id: "B-02",
+            instanceId: "instance-b02",
+            mountPoint: "[state]",
+            type: "brick",
+            parent: [{ id: "B-45235" }],
+            properties: '{\n  "fields": "state"}',
+            if: "false",
+            lifeCycle: undefined,
+          },
+        ],
+        templateList: [],
+        menus: [],
+        i18n: [],
+        dependsAll: false,
+        options: {
+          keepIds: true,
+        },
+      },
+      {
+        dependsAll: false,
+        meta: {
+          customTemplates: [],
+          i18n: {
+            en: {},
+            zh: {},
+          },
+          menus: [],
+        },
+        routes: [
+          {
+            [symbolForNodeId]: "R-01",
+            path: "/a",
+            providers: ["p1"],
+            type: "bricks",
+            segues: undefined,
+            bricks: [
+              {
+                brick: "presentational-bricks.brick-table",
+                portal: false,
+                properties: {
+                  useBrick: {
+                    brick: "presentational-bricks.brick-value-mapping",
+                    if: false,
+                    lifeCycle: undefined,
+                    properties: {
+                      fields: "state",
+                    },
+                    [symbolForNodeId]: "B-02",
+                    [symbolForNodeInstanceId]: "instance-b02",
+                  },
+                  [symbolForNodeUseChildren]: "[state]",
+                },
+                slots: {},
+                [symbolForNodeId]: "B-45235",
+                [symbolForNodeInstanceId]: "5c4de59f26f55",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    [
+      "useChildren is array",
       {
         routeList: [
           {
@@ -606,6 +700,28 @@ describe("buildStoryboard", () => {
             if: "false",
             lifeCycle: undefined,
           },
+          {
+            brick: "presentational-bricks.icon-select",
+            id: "B-03",
+            instanceId: "instance-b03",
+            mountPoint: "[state]",
+            type: "brick",
+            parent: [{ id: "B-45235" }],
+            properties: '{\n  "fields": "select"}',
+            if: "false",
+            lifeCycle: undefined,
+          },
+          {
+            brick: "presentational-bricks.more-select",
+            id: "B-04",
+            instanceId: "instance-b04",
+            mountPoint: "[state]",
+            type: "brick",
+            parent: [{ id: "B-45235" }],
+            properties: '{\n  "fields": "more"}',
+            if: "false",
+            lifeCycle: undefined,
+          },
         ],
         templateList: [],
         menus: [],
@@ -632,38 +748,50 @@ describe("buildStoryboard", () => {
                 brick: "presentational-bricks.brick-table",
                 portal: false,
                 properties: {
-                  useBrick: {
-                    brick: "presentational-bricks.brick-value-mapping",
-                    if: false,
-                    lifeCycle: undefined,
-                    properties: {
-                      fields: "state",
-                    },
-                    [symbolForNodeId]: "B-02",
-                    [symbolForNodeInstanceId]: "instance-b02",
-                  },
-                },
-                slots: {
-                  "[state]": {
-                    bricks: [
-                      {
-                        brick: "presentational-bricks.brick-value-mapping",
-                        if: false,
-                        lifeCycle: undefined,
-                        properties: {
-                          fields: "state",
-                        },
+                  useBrick: [
+                    {
+                      brick: "presentational-bricks.brick-value-mapping",
+                      if: false,
+                      lifeCycle: undefined,
+                      properties: {
+                        fields: "state",
                       },
-                    ],
-                    type: "bricks",
-                  },
+                      [symbolForNodeId]: "B-02",
+                      [symbolForNodeInstanceId]: "instance-b02",
+                    },
+                    {
+                      brick: "presentational-bricks.icon-select",
+                      if: false,
+                      lifeCycle: undefined,
+                      properties: {
+                        fields: "select",
+                      },
+                      [symbolForNodeId]: "B-03",
+                      [symbolForNodeInstanceId]: "instance-b03",
+                    },
+                    {
+                      brick: "presentational-bricks.more-select",
+                      if: false,
+                      lifeCycle: undefined,
+                      properties: {
+                        fields: "more",
+                      },
+                      [symbolForNodeId]: "B-04",
+                      [symbolForNodeInstanceId]: "instance-b04",
+                    },
+                  ],
+                  [symbolForNodeUseChildren]: "[state]",
                 },
+                slots: {},
+                [symbolForNodeId]: "B-45235",
+                [symbolForNodeInstanceId]: "5c4de59f26f55",
               },
             ],
             path: "/a",
             providers: ["p1"],
             segues: undefined,
             type: "bricks",
+            [symbolForNodeId]: "R-01",
           },
         ],
       },
@@ -729,6 +857,8 @@ describe("buildStoryboard", () => {
           {
             bricks: [
               {
+                [symbolForNodeId]: "B-45235",
+                [symbolForNodeInstanceId]: "5c4de59f26f55",
                 brick: "presentational-bricks.brick-table",
                 portal: false,
                 properties: {
@@ -744,6 +874,8 @@ describe("buildStoryboard", () => {
                         properties: {
                           fields: "state",
                         },
+                        [symbolForNodeId]: "B-02",
+                        [symbolForNodeInstanceId]: "instance-b02",
                       },
                     ],
                     type: "bricks",
@@ -755,13 +887,14 @@ describe("buildStoryboard", () => {
             providers: ["p1"],
             segues: undefined,
             type: "bricks",
+            [symbolForNodeId]: "R-01",
           },
         ],
       },
     ],
   ])("buildStoryboard should work %s", (condition, input, output) => {
     const cloneOfInput = clone(input);
-    expect(buildStoryboard(input)).toMatchObject(output);
+    expect(buildStoryboard(input)).toEqual(output);
     // `input` should never be mutated.
     expect(input).toEqual(cloneOfInput);
     expect(consoleError).not.toBeCalled();
