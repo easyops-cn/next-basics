@@ -491,28 +491,6 @@ function safeYamlParse(value: string): unknown {
   }
 }
 
-function getUseBrickBody(item: UseSingleBrickConf): UseSingleBrickConf {
-  const {
-    brick,
-    properties,
-    events,
-    lifeCycle,
-    transformFrom,
-    transform,
-    slots,
-  } = item;
-  return {
-    brick,
-    properties,
-    events,
-    lifeCycle,
-    transformFrom,
-    transform,
-    slots,
-    ["if"]: item?.if,
-  };
-}
-
 function setUseChild(parentConf: Record<string, unknown>, slots: SlotsConf) {
   if (!parentConf || !slots) return;
 
@@ -527,7 +505,6 @@ function setUseChild(parentConf: Record<string, unknown>, slots: SlotsConf) {
           Object.assign(conf, {
             [symbolForNodeUseChildren]: conf.useChildren,
           });
-          // conf.useBrick = getUseBrickBody(matchUseChild.bricks[0] as UseSingleBrickConf);
           conf.useBrick = matchUseChild.bricks[0];
           delete slots[v];
           delete conf.useChildren;
@@ -542,11 +519,7 @@ function setUseChild(parentConf: Record<string, unknown>, slots: SlotsConf) {
               const targetBrick = Array.isArray(conf.useBrick)
                 ? conf.useBrick
                 : [conf.useBrick];
-              conf.useBrick = [
-                ...targetBrick,
-                // ...matchUseChild.bricks.map(item => getUseBrickBody((item as UseSingleBrickConf)))
-                ...matchUseChild.bricks,
-              ];
+              conf.useBrick = [...targetBrick, ...matchUseChild.bricks];
               delete slots[slotName];
             }
           }
