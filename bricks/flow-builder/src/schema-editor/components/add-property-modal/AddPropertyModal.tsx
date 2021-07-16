@@ -117,13 +117,13 @@ export function AddPropertyModal({
               rules={[{ validator: checkRequired }]}
               messageVariables={{ label: "ref" }}
             >
-              <RefItem />
+              <RefItem onChange={() => form.resetFields(["refRequired"])} />
             </Form.Item>
           )
         }
       </Form.Item>
     ),
-    []
+    [form]
   );
 
   const defaultFormItem = useMemo(

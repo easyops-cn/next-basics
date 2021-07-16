@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Modal, Select } from "antd";
+import { Form, Modal, Select, Radio, InputNumber } from "antd";
 import { mount, shallow } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { AddPropertyModal } from "./AddPropertyModal";
@@ -77,6 +77,7 @@ describe("AddPropertyModal", () => {
     expect(
       wrapper.find(".ant-form-item-required[title='Name']").length
     ).toEqual(0);
+
     wrapper.find(Select).at(0).invoke("onChange")("normal", null);
 
     await act(async () => {
@@ -87,5 +88,35 @@ describe("AddPropertyModal", () => {
     expect(
       wrapper.find(".ant-form-item-required[title='Name']").length
     ).toEqual(1);
+
+    wrapper.setProps({
+      initValue: {
+        type: "bool",
+        name: "enabled",
+        description: "是否开启",
+      },
+    });
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    expect(wrapper.find(Radio).length).toEqual(2);
+
+    wrapper.setProps({
+      initValue: {
+        type: "int",
+        name: "conut",
+        description: "数量",
+      },
+    });
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    expect(wrapper.find(InputNumber).length).toEqual(1);
   });
 });

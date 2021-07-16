@@ -14,16 +14,22 @@ export function useContractModels(): [
     (async () => {
       try {
         const list = (
-          await InstanceApi_postSearch("FLOW_BUILDER_MODEL_CONTRACT@EASYOPS", {
-            page: 1,
-            page_size: 20,
-            query: {
-              $or: [
-                { name: { $like: `%${q}%` } },
-                { namespaceId: { $like: `%${q}%` } },
-              ],
+          await InstanceApi_postSearch(
+            "FLOW_BUILDER_MODEL_CONTRACT@EASYOPS",
+            {
+              page: 1,
+              page_size: 20,
+              query: {
+                $or: [
+                  { name: { $like: `%${q}%` } },
+                  { namespaceId: { $like: `%${q}%` } },
+                ],
+              },
             },
-          })
+            {
+              interceptorParams: { ignoreLoadingBar: true },
+            }
+          )
         ).list;
         setModelList(list as ContractModel[]);
       } catch (err) {
