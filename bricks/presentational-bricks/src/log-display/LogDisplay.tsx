@@ -33,10 +33,11 @@ export interface LogDisplayProps {
   value: string;
   loadingIcon?: boolean;
   hasBackspace?: boolean;
+  containerStyle?: React.CSSProperties;
 }
 
 export function LogDisplay(props: LogDisplayProps): React.ReactElement {
-  const { loadingIcon = true, hasBackspace } = props;
+  const { loadingIcon = true, hasBackspace, containerStyle } = props;
   const value = useMemo(
     () => (hasBackspace ? handleBackspace(props.value) : props.value),
     [props.value, hasBackspace]
@@ -52,7 +53,7 @@ export function LogDisplay(props: LogDisplayProps): React.ReactElement {
   );
 
   return (
-    <pre className={style.terminal}>
+    <pre className={style.terminal} style={containerStyle}>
       <div dangerouslySetInnerHTML={{ __html: escape(value) }}></div>
       {loadingIcon && ellipsis}
     </pre>
