@@ -45,6 +45,14 @@ export class LogDisplayElement extends UpdatingElement {
    */
   @property({ type: Boolean }) hasBackspace: boolean;
 
+  /**
+   * @kind React.CSSProperties
+   * @required false
+   * @default -
+   * @description 容器的样式
+   */
+  @property({ attribute: false })
+  containerStyle: React.CSSProperties;
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -63,6 +71,7 @@ export class LogDisplayElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <LogDisplay
+            containerStyle={this.containerStyle}
             value={this.value}
             loadingIcon={this.loadingIcon}
             hasBackspace={this.hasBackspace}
