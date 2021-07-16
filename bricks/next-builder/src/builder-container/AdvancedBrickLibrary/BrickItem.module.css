@@ -81,6 +81,11 @@
   height: 48px;
 }
 
+.layer-brick .brickIcon > img {
+  width: auto;
+  height: 100%;
+}
+
 .thumbnailType {
   font-size: 42px;
 }

@@ -98,7 +98,7 @@ export function BrickItem({
   return (
     <div
       className={`${styles.brickItem} ${styles[brick.type]} ${
-        styles[`layer-${layerType}`]
+        styles[`layer-${layerType ?? LayerType.BRICK}`]
       }`}
       title={brick.description || brick.title}
       ref={dragRef}
