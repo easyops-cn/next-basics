@@ -1,6 +1,8 @@
 import {
   RouteConf,
   BrickConf,
+  SlotsConf,
+  SlotConf,
   RouteConfOfRoutes,
   RouteConfOfBricks,
   SlotConfOfRoutes,
@@ -10,8 +12,10 @@ import {
   BuilderBrickNode,
   BuilderRouteOrBrickNode,
 } from "@next-core/brick-types";
-import { sortBy } from "lodash";
+import { isObject } from "@next-core/brick-utils";
+import { isEmpty, sortBy } from "lodash";
 import yaml from "js-yaml";
+import { UseSingleBrickConf } from "@next-core/brick-types";
 import {
   BuildInfo,
   MenuItemNode,
@@ -30,7 +34,15 @@ const jsonFieldsInRoute = [
 // Fields stored as yaml string will be parsed when build & push.
 const yamlFieldsInRoute = ["permissionsPreCheck"];
 
-const jsonFieldsInBrick = ["properties", "events", "lifeCycle", "params", "if"];
+const jsonFieldsInBrick = [
+  "properties",
+  "events",
+  "lifeCycle",
+  "params",
+  "if",
+  "transform",
+  "transformFrom",
+];
 
 // Fields stored as yaml string will be parsed when build & push.
 const yamlFieldsInBrick = ["permissionsPreCheck"];
@@ -90,6 +102,7 @@ const fieldsToKeepInMenuItem = [
 
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
+export const symbolForNodeUseChildren = Symbol.for("useChildren");
 
 type WeakMapOfNodeToConf = WeakMap<
   BuilderRouteOrBrickNode,
@@ -377,6 +390,7 @@ function mountBrickInBrick(
   (parentConf.slots[child.mountPoint] as SlotConfOfBricks).bricks.push(
     brickNodeToBrickConf(ctx, child)
   );
+  setUseChild(parentConf.properties, parentConf.slots);
 }
 
 function normalizeBrickInSnippet(
@@ -475,4 +489,44 @@ function safeYamlParse(value: string): unknown {
     // eslint-disable-next-line no-console
     console.error("Failed to parse yaml string", value);
   }
+}
+
+function setUseChild(parentConf: Record<string, unknown>, slots: SlotsConf) {
+  if (!parentConf || !slots) return;
+
+  const dfs = (conf: Record<string | symbol, any>) => {
+    for (const [k, v] of Object.entries(conf)) {
+      if (Array.isArray(v) || isObject(v)) {
+        dfs(v);
+      }
+      if (k === "useChildren" && typeof v === "string" && /^\[\w+\]$/.test(v)) {
+        const matchUseChild: SlotConf = slots[v as string];
+        if (matchUseChild?.type === "bricks") {
+          Object.assign(conf, {
+            [symbolForNodeUseChildren]: conf.useChildren,
+          });
+          conf.useBrick = matchUseChild.bricks[0];
+          delete slots[v];
+          delete conf.useChildren;
+        }
+      }
+      if (!isEmpty(slots)) {
+        Object.getOwnPropertySymbols(conf).forEach((symbol) => {
+          if (symbol === symbolForNodeUseChildren) {
+            const slotName: string = conf[symbol as any];
+            const matchUseChild: SlotConf = slots[slotName];
+            if (matchUseChild?.type === "bricks") {
+              const targetBrick = Array.isArray(conf.useBrick)
+                ? conf.useBrick
+                : [conf.useBrick];
+              conf.useBrick = [...targetBrick, ...matchUseChild.bricks];
+              delete slots[slotName];
+            }
+          }
+        });
+      }
+    }
+  };
+
+  dfs(parentConf);
 }
