@@ -13,15 +13,21 @@ export function useCurModel(
     (async () => {
       try {
         const data = (
-          await InstanceApi_postSearch("FLOW_BUILDER_MODEL_CONTRACT@EASYOPS", {
-            page: 1,
-            page_size: 1,
-            query: {
-              name: {
-                $eq: name,
+          await InstanceApi_postSearch(
+            "FLOW_BUILDER_MODEL_CONTRACT@EASYOPS",
+            {
+              page: 1,
+              page_size: 1,
+              query: {
+                name: {
+                  $eq: name,
+                },
               },
             },
-          })
+            {
+              interceptorParams: { ignoreLoadingBar: true },
+            }
+          )
         ).list?.[0];
         setModeData(data as ContractModel);
       } catch (err) {
