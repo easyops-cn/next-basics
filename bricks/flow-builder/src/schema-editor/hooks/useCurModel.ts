@@ -3,6 +3,32 @@ import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { ContractModel } from "../components/type-item/TypeItem";
 import { handleHttpError } from "@next-core/brick-kit";
 
+export async function fecthModelData(
+  modelName: string
+): Promise<ContractModel> {
+  try {
+    return (
+      await InstanceApi_postSearch(
+        "FLOW_BUILDER_MODEL_CONTRACT@EASYOPS",
+        {
+          page: 1,
+          page_size: 1,
+          query: {
+            name: {
+              $eq: modelName,
+            },
+          },
+        },
+        {
+          interceptorParams: { ignoreLoadingBar: true },
+        }
+      )
+    ).list?.[0] as ContractModel;
+  } catch (err) {
+    handleHttpError(err);
+  }
+}
+
 export function useCurModel(
   modelName: string
 ): [{ name: string; modelData: ContractModel }, (prevState: string) => void] {
@@ -11,28 +37,8 @@ export function useCurModel(
 
   useEffect(() => {
     (async () => {
-      try {
-        const data = (
-          await InstanceApi_postSearch(
-            "FLOW_BUILDER_MODEL_CONTRACT@EASYOPS",
-            {
-              page: 1,
-              page_size: 1,
-              query: {
-                name: {
-                  $eq: name,
-                },
-              },
-            },
-            {
-              interceptorParams: { ignoreLoadingBar: true },
-            }
-          )
-        ).list?.[0];
-        setModeData(data as ContractModel);
-      } catch (err) {
-        handleHttpError(err);
-      }
+      const data = await fecthModelData(name);
+      setModeData(data);
     })();
   }, [name]);
 

@@ -8,7 +8,7 @@ import { isEmpty } from "lodash";
 import i18next from "i18next";
 import { K, NS_FLOW_BUILDER } from "../../i18n/constants";
 
-export function processTypeItemInitValue(value = ""): ProcessTypeValue {
+export function processTypeItemInitValue(value: string): ProcessTypeValue {
   if (/.*\[\]$/.test(value)) {
     return {
       value: extractType(value),

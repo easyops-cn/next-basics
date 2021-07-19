@@ -1,7 +1,10 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { Select } from "antd";
 import { debounce, isEmpty } from "lodash";
+import { useTranslation } from "react-i18next";
+import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { useContractModels } from "../../hooks/useContractModels";
+import { fecthModelData } from "../../hooks/useCurModel";
 import { ModelFieldItem } from "../../interfaces";
 import { processRefItemData, processRefItemInitValue } from "../../processor";
 import { modelRefCache } from "../../constants";
@@ -17,6 +20,7 @@ export interface RefItemProps {
 }
 
 export function RefItem(props: RefItemProps): React.ReactElement {
+  const { t } = useTranslation(NS_FLOW_BUILDER);
   const [{ modelList }, setQ] = useContractModels();
   const [fieldList, setFieldList] = useState<ModelFieldItem[]>([]);
   const [refValue, setRefValue] = useState<ProcessRefItemValue>(
@@ -26,9 +30,14 @@ export function RefItem(props: RefItemProps): React.ReactElement {
   useEffect(() => {
     const value = processRefItemInitValue(props.value);
     setRefValue(value);
-    const find = modelList.find((item) => item.name === value.name);
-    find && setFieldList(find.fields);
-  }, [modelList, props.value]);
+  }, [props.value]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fecthModelData(refValue.name);
+      setFieldList(data?.fields);
+    })();
+  }, [refValue.name]);
 
   const processFieldList = useCallback((fieldList: ModelFieldItem[]) => {
     if (!isEmpty(fieldList)) {
@@ -73,7 +82,10 @@ export function RefItem(props: RefItemProps): React.ReactElement {
     setRefValue(newValue);
     const find = modelList.find((item) => item.name === newValue.name);
     find &&
-      modelRefCache.set(`${newValue.name}.${newValue.field}`, find.namespaceId);
+      modelRefCache.set(
+        `${newValue.name}.${newValue.field}`,
+        `${find.namespaceId}.${find.name}`
+      );
     props.onChange(processRefItemData(newValue));
   };
 
@@ -84,6 +96,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         value={refValue.name}
         showSearch
         filterOption={false}
+        placeholder={t(K.MODEL_SEARCH_PLANCEHOLDER)}
         onChange={handleModelChange}
         onSearch={debounceSearch}
       >

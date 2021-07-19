@@ -12,6 +12,7 @@ const locale: Locale = {
   [K.SIMPLE_TYPE]: "简单属性",
   [K.MODEL_TYPE]: "模型",
   [K.REF_VALIDATE_REQUIRED_MSG]: "请选择引用的字段",
+  [K.MODEL_SEARCH_PLANCEHOLDER]: "按关键字搜索",
 };
 
 export default locale;

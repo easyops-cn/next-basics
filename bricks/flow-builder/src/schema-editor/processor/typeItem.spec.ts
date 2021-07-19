@@ -17,7 +17,7 @@ describe("typeItem processor", () => {
 
       const result3 = processTypeItemInitValue();
 
-      expect(result3).toEqual({ value: "", isArray: false });
+      expect(result3).toEqual({ value: undefined, isArray: false });
     });
   });
 
