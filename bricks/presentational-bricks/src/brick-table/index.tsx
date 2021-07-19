@@ -992,6 +992,10 @@ export class BrickTableElement extends UpdatingElement {
     columns: CustomColumn[],
     filterKeys?: DataIndex[]
   ): Record<string, any>[] {
+    if (!q) {
+      return data;
+    }
+
     const dataSource: Record<string, any>[] = [];
 
     if (!filterKeys) {
