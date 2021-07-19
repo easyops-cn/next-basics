@@ -41,11 +41,10 @@ const jsonFieldsInBrick = [
   "params",
   "if",
   "transform",
-  "transformFrom",
 ];
 
 // Fields stored as yaml string will be parsed when build & push.
-const yamlFieldsInBrick = ["permissionsPreCheck"];
+const yamlFieldsInBrick = ["permissionsPreCheck", "transformFrom"];
 
 // Fields started with `_` will be removed by default.
 const fieldsToRemoveInRoute = [
