@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.5.0...@next-bricks/flow-builder@1.5.1) (2021-07-19)
+
+
+### Bug Fixes
+
+* refine form item ([f8d88ab](https://github.com/easyops-cn/next-basics/commit/f8d88ab9a76877882636c6fe76573e6918dd942c))
+
+
+
+
+
 # [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.4.2...@next-bricks/flow-builder@1.5.0) (2021-07-15)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.134.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.134.0...@next-bricks/basic-bricks@1.134.1) (2021-07-19)
+
+
+### Bug Fixes
+
+* **basic-components:** 折叠时，刷新页面菜单悬浮 ([bd99f3d](https://github.com/easyops-cn/next-basics/commit/bd99f3d59f5e59669dea55e5dc42ad859190599b))
+
+
+
+
+
 # [1.134.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.133.2...@next-bricks/basic-bricks@1.134.0) (2021-07-15)
 
 
