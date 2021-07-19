@@ -1302,6 +1302,11 @@ export class BrickTableElement extends UpdatingElement {
   ): Record<string, any>[] {
     const tempDataSource: Record<string, any>[] = dataSource || [];
     const { columnKey, order } = sorter;
+
+    if (!columnKey || !order) {
+      return dataSource;
+    }
+
     let direction: 1 | -1;
 
     if (order === "descend") {
