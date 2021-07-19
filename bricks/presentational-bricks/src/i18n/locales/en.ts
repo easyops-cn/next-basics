@@ -28,6 +28,8 @@ const locale: Locale = {
   [K.SELECT_ALL]: "Select all",
   [K.ITEMS]: "options",
   [K.SELECTED_OPTIONS]: "Selected {{number}} options",
+  [K.FULL_TEXT_SEARCH]: "Fulltext Search",
+  [K.IP_SEARCH]: "IP Search ",
 };
 
 export default locale;

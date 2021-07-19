@@ -177,6 +177,37 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   debounceTime = 0;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否支持ip搜索
+   */
+  @property({ type: Boolean })
+  searchTypeEnabled: boolean;
+
+  /**
+   * @kind "defalut"|"radio"
+   * @required "defalut"
+   * @default true
+   * @description 按类型搜索框样式
+   */
+  @property({
+    attribute: false,
+  })
+  searchBoxStyleType: "defalut" | "round" = "defalut";
+
+  /**
+   * @kind "all"|"ip"
+   * @required false
+   * @default 'all'
+   * @description 搜索类型
+   */
+  @property({
+    attribute: false,
+  })
+  searchType: "all" | "ip" = "all";
+
+  /**
    * @detail Record<string,any>
    * @description 更新的数据，包括 defaultArgs 和输入框的组合，注意在事件中 q 的 field 为 query。点击搜索时触发
    */
@@ -197,6 +228,13 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    */
   @event({ type: "query.change.v2", bubbles: true })
   queryChangeV2: EventEmitter<{ q: string }>;
+
+  /**
+   * @detail string
+   * @description 搜索类型变化时触发
+   */
+  @event({ type: "search.type.change", bubbles: true })
+  searchTypeChange: EventEmitter<string>;
 
   inputRef: Input;
 
@@ -252,7 +290,9 @@ export class BrickGeneralSearchElement extends UpdatingElement {
     this.queryChangeV2.emit({ q: value });
     this.q = value;
   };
-
+  private _handleSearchTypeChange = (value: string): void => {
+    this.searchTypeChange.emit(value);
+  };
   protected _render(): void {
     if (this.isConnected) {
       ReactDOM.render(
@@ -271,6 +311,10 @@ export class BrickGeneralSearchElement extends UpdatingElement {
             ref={(ref) => {
               this.inputRef = ref;
             }}
+            searchTypeEnabled={this.searchTypeEnabled}
+            searchType={this.searchType}
+            onSearchTypeChange={this._handleSearchTypeChange}
+            searchBoxStyleType={this.searchBoxStyleType}
           />
         </BrickWrapper>,
         this

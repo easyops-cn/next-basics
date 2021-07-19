@@ -5,11 +5,17 @@ import { BrickGeneralSearchElement } from "./";
 
 createHistory();
 
-const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {});
+const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {
+  return;
+});
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
-  .mockImplementation((() => {}) as any);
-const mockEventListener = jest.fn(e => {});
+  .mockImplementation((() => {
+    return;
+  }) as any);
+const mockEventListener = jest.fn((e) => {
+  return;
+});
 
 afterEach(() => {
   spyOnRender.mockClear();
@@ -32,25 +38,29 @@ describe("presentational-bricks.brick-general-search", () => {
         {
           name: "page",
           value: 1,
-          field: "[0].page"
-        }
+          field: "[0].page",
+        },
       ],
       q: "1",
       shouldUpdateUrlParams: false,
       shouldTrimQuery: true,
       inputStyle: {
-        broder: "1px solid #ccc"
+        broder: "1px solid #ccc",
       },
       buttonStyle: {
-        padding: "5px"
-      }
+        padding: "5px",
+      },
     });
+    element.focus();
     document.body.removeChild(element);
     await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();
   });
 
-  const cases: [boolean, string][] = [[true, "123"], [false, " 123 "]];
+  const cases: [boolean, string][] = [
+    [true, "123"],
+    [false, " 123 "],
+  ];
   it.each(cases)(
     "when shouldTrimQuery is (%s) should q to be %s",
     async (shouldTrimQuery, expected) => {
@@ -63,14 +73,14 @@ describe("presentational-bricks.brick-general-search", () => {
           {
             name: "page",
             value: 1,
-            field: "[0].page"
-          }
+            field: "[0].page",
+          },
         ],
         q: "1",
         size: "large",
         placeholder: "输入关键字搜索",
         shape: "round",
-        shouldTrimQuery
+        shouldTrimQuery,
       });
       element.addEventListener("filter.update", mockEventListener);
       document.body.appendChild(element);
@@ -95,11 +105,11 @@ describe("presentational-bricks.brick-general-search", () => {
       shouldUpdateUrlParams: true,
       shouldTrimQuery: true,
       inputStyle: {
-        broder: "1px solid #ccc"
+        broder: "1px solid #ccc",
       },
       buttonStyle: {
-        padding: "5px"
-      }
+        padding: "5px",
+      },
     });
     element.addEventListener("query.change", mockEventListener);
     document.body.appendChild(element);
