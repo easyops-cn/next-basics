@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.62.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.6...@next-bricks/next-builder@1.62.0) (2021-07-19)
+
+
+### Features
+
+* useChildren support trasformFrom ([#563](https://github.com/easyops-cn/next-basics/issues/563)) ([bf667af](https://github.com/easyops-cn/next-basics/commit/bf667afed7d945b6c67231a3fab5ecb82dea2a86))
+
+
+
+
+
 ## [1.61.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.5...@next-bricks/next-builder@1.61.6) (2021-07-19)
 
 

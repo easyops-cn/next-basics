@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.198.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.198.0...@next-bricks/presentational-bricks@1.198.1) (2021-07-19)
+
+
+### Bug Fixes
+
+* 搜索框支持ip搜索 closed FULLSEARCH-82 ([2cd403e](https://github.com/easyops-cn/next-basics/commit/2cd403e00d22383b0c95398658bf72825c903686))
+
+
+
+
+
 # [1.198.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.197.3...@next-bricks/presentational-bricks@1.198.0) (2021-07-16)
 
 
