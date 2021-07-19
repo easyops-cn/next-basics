@@ -13,6 +13,7 @@ const locale: Locale = {
   [K.SIMPLE_TYPE]: "Simple Type",
   [K.MODEL_TYPE]: "Model Type",
   [K.REF_VALIDATE_REQUIRED_MSG]: "Pealse select field of Ref",
+  [K.MODEL_SEARCH_PLANCEHOLDER]: "Search with keyword",
 };
 
 export default locale;

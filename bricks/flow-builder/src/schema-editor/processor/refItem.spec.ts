@@ -15,7 +15,7 @@ describe("refItem processor", () => {
 
       const result2 = processRefItemInitValue();
       expect(result2).toEqual({
-        name: "",
+        name: undefined,
         field: undefined,
       });
     });

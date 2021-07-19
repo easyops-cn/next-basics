@@ -59,7 +59,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
       value,
     };
     const find = modelList.find((item) => item.name === value);
-    find && modelRefCache.set(value, find.namespaceId);
+    find && modelRefCache.set(value, `${find.namespaceId}.${find.name}`);
     setTypeValue(newValue);
     props.onChange(processTypeItemData(newValue));
   };
@@ -95,6 +95,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
         filterOption={false}
         onChange={handleChange}
         onSearch={debounceSearch}
+        placeholder={t(K.MODEL_SEARCH_PLANCEHOLDER)}
       >
         {mixGroupList.map((item) => (
           <Select.OptGroup key={item.group} label={item.group}>

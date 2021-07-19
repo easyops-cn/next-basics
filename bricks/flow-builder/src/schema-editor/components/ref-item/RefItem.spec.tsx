@@ -3,8 +3,10 @@ import { mount } from "enzyme";
 import { Select } from "antd";
 import { RefItem } from "./RefItem";
 import { useContractModels } from "../../hooks/useContractModels";
+import { fecthModelData } from "../../hooks/useCurModel";
 
 jest.mock("../../hooks/useContractModels");
+jest.mock("../../hooks/useCurModel");
 
 jest.mock("../../constants", () => ({
   innerTypeList: [
@@ -36,6 +38,18 @@ describe("RefItem", () => {
       },
       mockSetQFn,
     ]);
+
+    (fecthModelData as jest.Mock).mockReturnValue({
+      q: "yy",
+      modelList: [
+        { name: "Host", namespaceId: "api.easyops.host" },
+        {
+          name: "DeployType",
+          namespaceId: "api.easyops.DeployType",
+          fields: [{ name: "name", type: "string" }],
+        },
+      ],
+    });
 
     const props = {
       value: "DeployType",
