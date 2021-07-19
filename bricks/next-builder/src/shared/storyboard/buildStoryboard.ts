@@ -12,62 +12,14 @@ import {
   BuilderBrickNode,
   BuilderRouteOrBrickNode,
 } from "@next-core/brick-types";
-import { isObject } from "@next-core/brick-utils";
+import { isObject, normalizeBuilderNode } from "@next-core/brick-utils";
 import { isEmpty, sortBy } from "lodash";
-import yaml from "js-yaml";
-import { UseSingleBrickConf } from "@next-core/brick-types";
 import {
   BuildInfo,
   MenuItemNode,
   MenuNode,
   StoryboardToBuild,
 } from "./interfaces";
-
-const jsonFieldsInRoute = [
-  "menu",
-  "providers",
-  "segues",
-  "defineResolves",
-  "redirect",
-];
-
-// Fields stored as yaml string will be parsed when build & push.
-const yamlFieldsInRoute = ["permissionsPreCheck"];
-
-const jsonFieldsInBrick = [
-  "properties",
-  "events",
-  "lifeCycle",
-  "params",
-  "if",
-  "transform",
-];
-
-// Fields stored as yaml string will be parsed when build & push.
-const yamlFieldsInBrick = ["permissionsPreCheck", "transformFrom"];
-
-// Fields started with `_` will be removed by default.
-const fieldsToRemoveInRoute = [
-  "appId",
-  "children",
-  "creator",
-  "ctime",
-  "id",
-  "instanceId",
-  "graphInfo",
-  "modifier",
-  "mountPoint",
-  "mtime",
-  "org",
-  "parent",
-  "sort",
-
-  "deleteAuthorizers",
-  "readAuthorizers",
-  "updateAuthorizers",
-];
-
-const fieldsToRemoveInBrick = fieldsToRemoveInRoute.concat("type");
 
 const fieldsToKeepInMenu = [
   "menuId",
@@ -246,13 +198,7 @@ function routeNodeToRouteConf(
   ctx: BuildContext,
   node: BuilderRouteNode
 ): RouteConf {
-  const conf = normalize(
-    node,
-    fieldsToRemoveInRoute,
-    jsonFieldsInRoute,
-    yamlFieldsInRoute,
-    ctx.keepIds
-  ) as unknown as RouteConf;
+  const conf = normalize(node, ctx.keepIds) as unknown as RouteConf;
 
   // Ensure routes and bricks array according to node type.
   if (conf.type === "routes") {
@@ -271,9 +217,6 @@ function brickNodeToBrickConf(
 ): BrickConf {
   const conf = normalize(
     node,
-    fieldsToRemoveInBrick,
-    jsonFieldsInBrick,
-    yamlFieldsInBrick,
     ctx.keepIds,
     // Also keep instance ids for bricks.
     ctx.keepIds
@@ -406,27 +349,10 @@ function normalizeBrickInSnippet(
 
 function normalize(
   node: BuilderRouteOrBrickNode,
-  fieldsToRemove: string[],
-  jsonFields: string[],
-  yamlFields: string[],
   keepIds?: boolean,
   keepInstanceIds?: boolean
 ): Record<string, unknown> {
-  const conf = Object.fromEntries(
-    Object.entries(node)
-      // Remove unused fields from CMDB.
-      // Consider fields started with `_` as unused.
-      .filter(([key]) => key[0] !== "_" && !fieldsToRemove.includes(key))
-      // Parse json fields.
-      .map(([key, value]) => [
-        key,
-        jsonFields.includes(key)
-          ? safeJsonParse(value as string)
-          : yamlFields.includes(key)
-          ? safeYamlParse(value as string)
-          : value,
-      ])
-  );
+  const conf = normalizeBuilderNode(node);
   if (keepIds) {
     Object.assign(conf, {
       [symbolForNodeId]: node.id,
@@ -437,7 +363,7 @@ function normalize(
       [symbolForNodeInstanceId]: node.instanceId,
     });
   }
-  return conf;
+  return conf as Record<string, unknown>;
 }
 
 function keep(
@@ -462,38 +388,13 @@ function keepItems(
   });
 }
 
-function safeJsonParse(value: string): unknown {
-  if (!value) {
-    return;
-  }
-  try {
-    return JSON.parse(value);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("JSON.parse() failed", value);
-  }
-}
-
-function safeYamlParse(value: string): unknown {
-  if (!value) {
-    return;
-  }
-  try {
-    const result = yaml.safeLoad(value, {
-      schema: yaml.JSON_SCHEMA,
-      json: true,
-    });
-    return result;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Failed to parse yaml string", value);
-  }
-}
-
-function setUseChild(parentConf: Record<string, unknown>, slots: SlotsConf) {
+function setUseChild(
+  parentConf: Record<string, unknown>,
+  slots: SlotsConf
+): void {
   if (!parentConf || !slots) return;
 
-  const dfs = (conf: Record<string | symbol, any>) => {
+  const dfs = (conf: Record<string | symbol, any>): void => {
     for (const [k, v] of Object.entries(conf)) {
       if (Array.isArray(v) || isObject(v)) {
         dfs(v);

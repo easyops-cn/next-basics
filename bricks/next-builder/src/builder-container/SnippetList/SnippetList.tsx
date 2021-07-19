@@ -5,7 +5,7 @@ import { BuilderSnippetNode } from "@next-core/brick-types";
 import { useBuilderNode } from "@next-core/editor-bricks-helper";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { SearchableTree } from "../components/SearchableTree/SearchableTree";
-import { searchList } from "../utils/utils";
+import { searchList } from "../utils";
 import { useBuilderUIContext } from "../BuilderUIContext";
 
 import styles from "./SnippetList.module.css";

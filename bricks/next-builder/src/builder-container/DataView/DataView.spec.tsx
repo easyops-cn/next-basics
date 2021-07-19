@@ -21,7 +21,7 @@ jest.mock("./ContextItem", () => ({
 (useBuilderNode as jest.Mock).mockReturnValue({
   context: [
     {
-      name: "data-a",
+      name: "dataA",
       resolve: {
         useProvider: "provider-a",
         args: ["args1"],
@@ -32,10 +32,14 @@ jest.mock("./ContextItem", () => ({
       },
     },
     {
-      name: "data-b",
+      name: "dataB",
       value: {
         id: 1,
       },
+    },
+    {
+      name: "dataC",
+      value: "<% CTX.dataA %>",
     },
   ],
 });
@@ -45,24 +49,30 @@ jest.mock("./ContextItem", () => ({
     {
       brick: "brick-a",
       $$uid: 1,
-      properties: {
-        data: "<% CTX.data-a %>",
+      $$normalized: {
+        properties: {
+          data: "<% CTX.dataA %>",
+        },
       },
     },
     {
       brick: "brick-b",
       $$uid: 2,
-      properties: {
-        data: "<% CTX.data-b %>",
+      $$normalized: {
+        properties: {
+          data: "<% CTX.dataB %>",
+        },
       },
     },
     {
       brick: "brick-c",
       $$uid: 3,
-      events: {
-        click: {
-          action: "console.log",
-          args: ["<% CTX.data-a %>"],
+      $$normalized: {
+        events: {
+          click: {
+            action: "console.log",
+            args: ["<% CTX.dataA %>"],
+          },
         },
       },
     },
@@ -79,11 +89,11 @@ describe("DataView", () => {
   it("should work", () => {
     const onContextUpdate = jest.fn();
     const wrapper = shallow(<DataView onContextUpdate={onContextUpdate} />);
+    expect(wrapper.find(ContextItem).length).toBe(3);
+    wrapper.find(SearchComponent).invoke("onSearch")("dataA");
     expect(wrapper.find(ContextItem).length).toBe(2);
-    wrapper.find(SearchComponent).invoke("onSearch")("data-a");
-    expect(wrapper.find(ContextItem).length).toBe(1);
     wrapper.find(SearchComponent).invoke("onSearch")("");
-    expect(wrapper.find(ContextItem).length).toBe(2);
+    expect(wrapper.find(ContextItem).length).toBe(3);
 
     wrapper
       .find(Button)
@@ -102,7 +112,7 @@ describe("DataView", () => {
     expect(wrapper.find(ContextItemFormModal).prop("visible")).toBe(true);
     wrapper.find(ContextItemFormModal).invoke("onOk")();
     wrapper.find(ContextItemFormModal).invoke("onContextItemUpdate")({
-      name: "data-b",
+      name: "dataB",
       value: {
         id: 3,
       },
@@ -122,8 +132,9 @@ describe("DataView", () => {
     const wrapper = shallow(<DataView onContextUpdate={onContextUpdate} />);
     wrapper.find(ContextItem).at(0).invoke("handleDropItem")(1, 0);
     expect(onContextUpdate).toBeCalledWith([
-      expect.objectContaining({ name: "data-b" }),
-      expect.objectContaining({ name: "data-a" }),
+      expect.objectContaining({ name: "dataB" }),
+      expect.objectContaining({ name: "dataA" }),
+      expect.objectContaining({ name: "dataC" }),
     ]);
     onContextUpdate.mockClear();
     wrapper.find(ContextItem).at(0).invoke("handleDropItem")(1, 1);
@@ -132,7 +143,17 @@ describe("DataView", () => {
 
   it("should set highlight nodes", () => {
     const wrapper = mount(<DataView />);
-    wrapper.find(ContextItem).at(0).invoke("handleItemHover")("data-a");
+    expect(
+      wrapper.find(ContextItem).filterWhere((node) => node.prop("highlighted"))
+        .length
+    ).toBe(0);
+    wrapper.find(ContextItem).at(0).invoke("handleItemHover")("dataA");
     expect(mockSetHighlightNodes).toBeCalledWith(new Set([1, 3]));
+    expect(
+      wrapper
+        .find(ContextItem)
+        .filterWhere((node) => node.prop("highlighted"))
+        .prop("data").name
+    ).toBe("dataC");
   });
 });

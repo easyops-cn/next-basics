@@ -10,7 +10,7 @@ import { useBuilderUIContext } from "../BuilderUIContext";
 import { BuilderDataType } from "../interfaces";
 import { K, NS_NEXT_BUILDER } from "../../i18n/constants";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
-import { findQueryInNode } from "../utils/findQueryInNode";
+import { deepMatch } from "../utils";
 
 import styles from "./StoryboardTreeView.module.css";
 import sharedStyles from "../shared.module.css";
@@ -44,16 +44,16 @@ export function StoryboardTreeView(): React.ReactElement {
 
   useEffect(() => {
     const nodesToHighlight = new Set<number>();
-    const trimQ = q?.trim().toLowerCase();
-    if (trimQ) {
+    const trimmedQ = q?.trim().toLowerCase();
+    if (trimmedQ) {
       nodes?.forEach((node) => {
-        if (findQueryInNode(node, trimQ)) {
+        if (deepMatch(node.$$normalized, trimmedQ)) {
           nodesToHighlight.add(node.$$uid);
         }
       });
     }
     setHighlightNodes(nodesToHighlight);
-  }, [q, nodes]);
+  }, [q, nodes, setHighlightNodes]);
 
   return (
     <ToolboxPane
