@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.199.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.198.1...@next-bricks/presentational-bricks@1.199.0) (2021-07-20)
+
+
+### Bug Fixes
+
+* **brick-table:** skip front-end filter when there is no q ([710d395](https://github.com/easyops-cn/next-basics/commit/710d395c1b269a2a1a00aceb7560df6279fc3239))
+* **brick-table:** skip front-end sort when there is no columnKey or order ([c4fbee7](https://github.com/easyops-cn/next-basics/commit/c4fbee710c8a2f09ad5775c20c4709c49b02b997))
+
+
+### Features
+
+* **brick-tag:** checked update events support event.preventDefault ([987f3bf](https://github.com/easyops-cn/next-basics/commit/987f3bfe60cd883b0efd8a9f4d98ff16ce678636))
+
+
+
+
+
 ## [1.198.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.198.0...@next-bricks/presentational-bricks@1.198.1) (2021-07-19)
 
 
