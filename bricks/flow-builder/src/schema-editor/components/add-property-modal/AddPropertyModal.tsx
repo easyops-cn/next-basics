@@ -171,7 +171,15 @@ export function AddPropertyModal({
         {({ getFieldValue }) =>
           getFieldValue("origin") === "normal" &&
           [...numberTypeList, "string"].includes(getFieldValue("type")) && (
-            <Form.Item name="enum" label="Enum">
+            <Form.Item
+              name="enum"
+              label="Enum"
+              getValueFromEvent={(value: string[]) =>
+                numberTypeList.includes(getFieldValue("type"))
+                  ? value?.map((i) => Number(i))
+                  : value
+              }
+            >
               <Select
                 mode="tags"
                 style={{ width: "100%" }}
@@ -240,6 +248,30 @@ export function AddPropertyModal({
     []
   );
 
+  const descriptionFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.origin !== currentValues.origin
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("origin") === "normal" && (
+            <Form.Item
+              name="description"
+              label="description"
+              rules={[{ required: true }]}
+            >
+              <Input.TextArea />
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    []
+  );
+
   return (
     <Modal
       title="property modal"
@@ -265,10 +297,7 @@ export function AddPropertyModal({
         {enumFormItem}
 
         {validatorFormItem}
-
-        <Form.Item name="description" label="description">
-          <Input.TextArea />
-        </Form.Item>
+        {descriptionFormItem}
       </Form>
     </Modal>
   );

@@ -57,6 +57,18 @@ describe("AddPropertyModal", () => {
       document.querySelectorAll("span[title='SCHEMA_ITEM_NORMAL']").length
     ).toEqual(1);
 
+    wrapper
+      .find("Select[placeholder='ENUM_INPUT_PLANCEHOLDER']")
+      .invoke("onChange")(["a", "b", "c"]);
+
+    await wrapper.find(Form).prop("form").validateFields();
+
+    expect(wrapper.find(Form).prop("form").getFieldValue("enum")).toEqual([
+      "a",
+      "b",
+      "c",
+    ]);
+
     wrapper.setProps({
       initValue: {
         ref: "IP",
@@ -118,5 +130,28 @@ describe("AddPropertyModal", () => {
     wrapper.update();
 
     expect(wrapper.find(InputNumber).length).toEqual(1);
+
+    wrapper.setProps({
+      initValue: {
+        type: "int",
+        name: "age",
+        description: "年龄",
+      },
+    });
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    wrapper
+      .find("Select[placeholder='ENUM_INPUT_PLANCEHOLDER']")
+      .invoke("onChange")(["10", "20", "30"]);
+
+    await wrapper.find(Form).prop("form").validateFields();
+
+    expect(wrapper.find(Form).prop("form").getFieldValue("enum")).toEqual([
+      10, 20, 30,
+    ]);
   });
 });
