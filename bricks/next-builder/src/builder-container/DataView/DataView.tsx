@@ -15,14 +15,14 @@ import {
   UseProviderResolveConf,
 } from "@next-core/brick-types";
 import { ToolboxPane } from "../ToolboxPane/ToolboxPane";
-import { findIndex, uniqueId, escape } from "lodash";
+import { findIndex, uniqueId } from "lodash";
 import { ContextItemFormModal } from "./ContextItemFormModal";
 import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { ContextItem } from "./ContextItem";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
-import { searchList } from "../utils/utils";
+import { deepFilter } from "../utils";
 import { safeDumpFields, ContextType } from "./utils";
-import { findQueryInNode } from "../utils/findQueryInNode";
+import { scanContextsInAny } from "./scanContextsInStoryboard";
 
 import styles from "./DataView.module.css";
 import sharedStyles from "../shared.module.css";
@@ -60,29 +60,45 @@ export function DataView({
   const settingUid = useRef<string | undefined>();
   const [hoverContextName, setHoverContextName] = useState<string>();
   const manager = useBuilderDataManager();
+  const [highlightedContexts, setHighlightedContexts] = useState(
+    new Set<string>()
+  );
 
   const handleSearch = (value: string): void => {
     setQ(value);
   };
 
   const filteredContextList: ContextConfWithSymbolId[] = useMemo(
-    () => searchList(contextWithUniqueSymbolId, q),
+    () => deepFilter(contextWithUniqueSymbolId, q),
     [contextWithUniqueSymbolId, q]
   );
 
   useEffect(() => {
     const nodesToHighlight = new Set<number>();
     if (hoverContextName) {
-      const escapeContextName = escape(hoverContextName);
-      const reg = new RegExp(`CTX\\.${escapeContextName}(?!\\w)`);
-      nodes?.forEach((node) => {
-        if (findQueryInNode(node, reg)) {
+      nodes.forEach((node) => {
+        if (scanContextsInAny(node.$$normalized).includes(hoverContextName)) {
           nodesToHighlight.add(node.$$uid);
         }
       });
     }
     manager.setHighlightNodes(nodesToHighlight);
   }, [hoverContextName, manager, nodes]);
+
+  useEffect(() => {
+    const highlights = new Set<string>();
+    if (hoverContextName) {
+      contextWithUniqueSymbolId.forEach((ctx) => {
+        if (
+          ctx.name !== hoverContextName &&
+          scanContextsInAny(ctx).includes(hoverContextName)
+        ) {
+          highlights.add(ctx[symbolId]);
+        }
+      });
+    }
+    setHighlightedContexts(highlights);
+  }, [hoverContextName, contextWithUniqueSymbolId]);
 
   const setData = (contextValue?: ContextConf, uid?: string): void => {
     const isValue = !contextValue?.resolve;
@@ -237,6 +253,7 @@ export function DataView({
                 index={index}
                 canDrag={!q}
                 key={data[symbolId]}
+                highlighted={highlightedContexts.has(data[symbolId])}
               />
             ))}
         </div>

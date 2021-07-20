@@ -660,7 +660,7 @@ describe("buildStoryboard", () => {
             ],
           },
         ],
-      },
+      } as any,
     ],
     [
       "useChildren is array",
@@ -794,7 +794,7 @@ describe("buildStoryboard", () => {
             [symbolForNodeId]: "R-01",
           },
         ],
-      },
+      } as any,
     ],
     [
       "useChildren not found children",
@@ -890,7 +890,7 @@ describe("buildStoryboard", () => {
             [symbolForNodeId]: "R-01",
           },
         ],
-      },
+      } as any,
     ],
   ])("buildStoryboard should work %s", (condition, input, output) => {
     const cloneOfInput = clone(input);
