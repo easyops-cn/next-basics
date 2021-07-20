@@ -992,6 +992,10 @@ export class BrickTableElement extends UpdatingElement {
     columns: CustomColumn[],
     filterKeys?: DataIndex[]
   ): Record<string, any>[] {
+    if (!q) {
+      return data;
+    }
+
     const dataSource: Record<string, any>[] = [];
 
     if (!filterKeys) {
@@ -1298,6 +1302,11 @@ export class BrickTableElement extends UpdatingElement {
   ): Record<string, any>[] {
     const tempDataSource: Record<string, any>[] = dataSource || [];
     const { columnKey, order } = sorter;
+
+    if (!columnKey || !order) {
+      return dataSource;
+    }
+
     let direction: 1 | -1;
 
     if (order === "descend") {
