@@ -27,10 +27,11 @@ export interface BrickLibraryItem {
 export interface GetBrickLibraryParams {
   // Project instanceId.
   projectId: string;
+  ignoreSnippets?: boolean;
 }
 
 export async function GetBrickLibrary(
-  { projectId }: GetBrickLibraryParams,
+  { projectId, ignoreSnippets }: GetBrickLibraryParams,
   options?: RequestCustomOptions
 ): Promise<BrickLibraryItem[]> {
   const flags = getRuntime().getFeatureFlags();
@@ -69,7 +70,7 @@ export async function GetBrickLibrary(
             options
           )
         : { list: [] },
-      installedBricksEnabled || installedSnippetsEnabled
+      !ignoreSnippets && (installedBricksEnabled || installedSnippetsEnabled)
         ? InstanceApi_postSearchV3(
             "INSTALLED_BRICK_SNIPPET@EASYOPS",
             {
@@ -87,7 +88,7 @@ export async function GetBrickLibrary(
             options
           )
         : { list: [] },
-      installedBricksEnabled || hostedSnippetsEnabled
+      !ignoreSnippets && (installedBricksEnabled || hostedSnippetsEnabled)
         ? InstanceGraphApi_traverseGraphV2(
             {
               child: [

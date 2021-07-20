@@ -671,7 +671,7 @@ describe("GetBrickLibrary", () => {
     `);
   });
 
-  it("should ignore snippets", async () => {
+  it("should ignore snippets if relevant feature flags are not enabled", async () => {
     mockGetFeatureFlags.mockReturnValueOnce({});
     expect(
       (await GetBrickLibrary({ projectId: "test-project" })).some(
@@ -679,6 +679,31 @@ describe("GetBrickLibrary", () => {
       )
     ).toBe(false);
     expect(InstanceApi_postSearchV3).toBeCalledTimes(1);
+    expect((InstanceApi_postSearchV3 as jest.Mock).mock.calls[0][0]).toBe(
+      "STORYBOARD_TEMPLATE"
+    );
+    expect(InstanceGraphApi_traverseGraphV2).not.toBeCalled();
+  });
+
+  it("should ignore snippets if relevant feature flags are enabled but `ignoreSnippets` is `true`", async () => {
+    mockGetFeatureFlags.mockReturnValueOnce({
+      "next-builder-installed-bricks": true,
+    });
+    expect(
+      (
+        await GetBrickLibrary({
+          projectId: "test-project",
+          ignoreSnippets: true,
+        })
+      ).some((brick) => brick.type === "snippet")
+    ).toBe(false);
+    expect(InstanceApi_postSearchV3).toBeCalledTimes(2);
+    expect((InstanceApi_postSearchV3 as jest.Mock).mock.calls[0][0]).toBe(
+      "STORYBOARD_TEMPLATE"
+    );
+    expect((InstanceApi_postSearchV3 as jest.Mock).mock.calls[1][0]).toBe(
+      "INSTALLED_BRICK_ATOM@EASYOPS"
+    );
     expect(InstanceGraphApi_traverseGraphV2).not.toBeCalled();
   });
 });
