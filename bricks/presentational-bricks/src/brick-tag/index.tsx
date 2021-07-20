@@ -44,15 +44,15 @@ export class BrickTagElement extends UpdatingElement {
    * @detail string[]
    * @description 选中的 tag 的 key
    */
-  @event({ type: "checked.update" }) checkedUpdate: EventEmitter<string[]>;
+  @event({ type: "checked.update", cancelable: true })
+  checkedUpdate: EventEmitter<string[]>;
 
   /**
    * @detail {label: string;key:string}[]
    * @description 选中的 tag
    */
-  @event({ type: "checked.update.v2" }) checkedUpdateV2: EventEmitter<
-    { label: string; key: string }[]
-  >;
+  @event({ type: "checked.update.v2", cancelable: true })
+  checkedUpdateV2: EventEmitter<{ label: string; key: string }[]>;
 
   /**
    * @detail { current: Record<string, any>; tagList: Record<string, any>[] }
@@ -377,9 +377,12 @@ export class BrickTagElement extends UpdatingElement {
 
   private _handleOnChange = (items: TagListType): void => {
     const checkedKeys = map(items, "key");
-    this.default = checkedKeys;
-    this.checkedUpdate.emit(checkedKeys);
-    this.checkedUpdateV2.emit(items);
+    const defaultAction = this.checkedUpdate.emit(checkedKeys);
+    const defaultActionV2 = this.checkedUpdateV2.emit(items);
+
+    if (defaultAction && defaultActionV2) {
+      this.default = checkedKeys;
+    }
   };
 }
 
