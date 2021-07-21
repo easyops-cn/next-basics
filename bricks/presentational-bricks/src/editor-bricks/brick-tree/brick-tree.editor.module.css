@@ -1,0 +1,12 @@
+.treeContainer {
+  min-height: 695px;
+  padding: 20px 30px;
+  border: 1px solid var(--editor-brick-stroke-color);
+  border-radius: var(--editor-brick-border-radius);
+  .item {
+    height: 15px;
+    width: 80px;
+    margin-bottom: 10px;
+    background: var(--editor-brick-skeleton-bg-light);
+  }
+}
