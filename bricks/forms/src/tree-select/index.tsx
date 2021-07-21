@@ -160,6 +160,15 @@ export class TreeSelectElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default `false`
+   * @description `checkable` 状态下节点选择完全受控（父子节点选中状态不再关联），会使得 `labelInValue` 强制为 `true`
+   * @group advanced
+   */
+  @property({ type: Boolean }) treeCheckStrictly: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
    * @description 单选：`false`，多选：`true`（当设置 `treeCheckable` 时自动变为 `true`）
    * @group advanced
    */
@@ -258,6 +267,7 @@ export class TreeSelectElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             treeData={this.treeData}
             treeCheckable={this.treeCheckable}
+            treeCheckStrictly={this.treeCheckStrictly}
             allowClear={this.allowClear}
             disabled={this.disabled}
             inputBoxStyle={this.inputBoxStyle}
