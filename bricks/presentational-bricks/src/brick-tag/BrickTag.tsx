@@ -161,11 +161,6 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
               specificColor && !closable && TypeComponent === Tag,
             [style.disabledTag]: disabled,
           })}
-          icon={
-            !showTagCircle &&
-            icon &&
-            typeof icon === "string" && <LegacyIcon type={icon} />
-          }
           closable={closable}
           {...(closable ? { onClose: () => onClose(item) } : {})}
           color={!closable && specificColor}
@@ -174,12 +169,21 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
           onMouseEnter={(e) => onMouseEnter(item, e)}
           onMouseLeave={(e) => onMouseLeave(item, e)}
         >
-          {!showTagCircle && icon && typeof icon === "object" && (
-            <GeneralIcon
-              icon={icon}
-              style={{ marginRight: "7px", marginLeft: 0 }}
-            />
-          )}
+          {!showTagCircle &&
+            icon &&
+            (typeof icon === "string" ? (
+              <LegacyIcon
+                type={icon}
+                style={{ marginRight: "7px", marginLeft: 0 }}
+              />
+            ) : (
+              typeof icon === "object" && (
+                <GeneralIcon
+                  icon={icon}
+                  style={{ marginRight: "7px", marginLeft: 0 }}
+                />
+              )
+            ))}
           {showTagCircle && (
             <GeneralIcon
               icon={circleIcon}
