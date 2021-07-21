@@ -36,8 +36,6 @@ export async function GetBrickLibrary(
 ): Promise<BrickLibraryItem[]> {
   const flags = getRuntime().getFeatureFlags();
   const installedBricksEnabled = flags["next-builder-installed-bricks"];
-  const installedSnippetsEnabled = flags["next-builder-installed-snippets"];
-  const hostedSnippetsEnabled = flags["next-builder-hosted-snippets"];
 
   const [customTemplates, installedBricks, installedSnippets, hostedSnippets] =
     await Promise.all([
@@ -70,7 +68,7 @@ export async function GetBrickLibrary(
             options
           )
         : { list: [] },
-      !ignoreSnippets && (installedBricksEnabled || installedSnippetsEnabled)
+      !ignoreSnippets && installedBricksEnabled
         ? InstanceApi_postSearchV3(
             "INSTALLED_BRICK_SNIPPET@EASYOPS",
             {
@@ -88,7 +86,7 @@ export async function GetBrickLibrary(
             options
           )
         : { list: [] },
-      !ignoreSnippets && (installedBricksEnabled || hostedSnippetsEnabled)
+      !ignoreSnippets && installedBricksEnabled
         ? InstanceGraphApi_traverseGraphV2(
             {
               child: [
