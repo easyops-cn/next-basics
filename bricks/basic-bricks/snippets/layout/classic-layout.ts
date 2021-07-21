@@ -17,6 +17,7 @@ import classicLeft1Right3Svg from "../thumbnails/classic-layout/grid-classic-lef
 import classicLeft3Right1Svg from "../thumbnails/classic-layout/grid-classic-left3-right1.svg";
 import classicLeft1Right2HeaderContentSvg from "../thumbnails/classic-layout/grid-classic-left1-right2-header-content.svg";
 import classicLeft2Right1HeaderContentSvg from "../thumbnails/classic-layout/grid-classic-left2-right1-header-content.svg";
+import classicTitlebarToolbarContentSvg from "../thumbnails/classic-layout/grid-classic-titlebar-toolbar-content.svg";
 
 const snippets: SnippetDefinition[] = [
   {
@@ -422,6 +423,40 @@ const snippets: SnippetDefinition[] = [
           },
           gridTemplateRows: ["auto", "1fr"],
           gridTemplateColumns: ["2fr", "1fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-titlebar-toolbar-content]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "标题栏-工具栏-内容 网格布局",
+      en: "Titlebar-toolbar-content grid layout",
+    },
+    thumbnail: classicTitlebarToolbarContentSvg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["titleBar", "toolBar"],
+            ["content", "content"],
+          ],
+          containerStyle: {
+            padding: "var(--page-padding)",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "var(--card-content-gap)",
+          },
+          gridTemplateRows: ["auto", "1fr"],
+          gridTemplateColumns: ["1fr", "1fr"],
+          styleByAreas: {
+            toolBar: {
+              display: "flex",
+              justifyContent: "flex-end",
+            },
+          },
         },
       },
     ],
