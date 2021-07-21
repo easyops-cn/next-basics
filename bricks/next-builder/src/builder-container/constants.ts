@@ -106,9 +106,20 @@ export const frequentlyUsedBricks: Pick<BrickOptionItem, "type" | "id">[] = [
 ];
 
 export const frequentlyUsedLayout: Pick<BrickOptionItem, "type" | "id">[] = [
-  { type: "snippet", id: "basic-bricks.easy-view[classic]" },
-  { type: "snippet", id: "basic-bricks.easy-view[basic]" },
-  { type: "snippet", id: "basic-bricks.easy-view[right-aligned-menu]" },
+  {
+    type: "snippet",
+    id: "basic-bricks.easy-view[classic-titlebar-toolbar-content]",
+  },
+  {
+    type: "snippet",
+    id: "basic-bricks.easy-view[classic-header-content-left1-right2]",
+  },
+  { type: "snippet", id: "basic-bricks.easy-view[with-sub-menu]" },
+  { type: "snippet", id: "basic-bricks.easy-view[classic-two-col]" },
+  {
+    type: "snippet",
+    id: "basic-bricks.easy-view[classic-header-content-footer]",
+  },
 ];
 
 export const frequentlyUsedWidget: Pick<BrickOptionItem, "type" | "id">[] = [];
