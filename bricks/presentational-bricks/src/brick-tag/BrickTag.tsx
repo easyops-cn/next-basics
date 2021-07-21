@@ -43,6 +43,7 @@ export interface BrickTagProps extends TagProps {
   tagHoverStyle?: any;
   handleOnChange?: (items: TagListType) => void;
   handleOnClose?: (current, tagList: TagListType) => void;
+  handleOnClick?: (tag: { label: string; key: string }) => void;
   multipleCheck?: boolean;
   label?: string;
   defaultCheckedTag?: string | string[];
@@ -107,6 +108,10 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     props?.handleOnClose(item, newClosedTag);
   };
 
+  const onClick = (item) => {
+    props?.handleOnClick(item);
+  };
+
   const onMouseEnter = (item, e) => {
     setHoverTag(item.key);
   };
@@ -168,6 +173,9 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
           {...restProps}
           onMouseEnter={(e) => onMouseEnter(item, e)}
           onMouseLeave={(e) => onMouseLeave(item, e)}
+          onClick={() => {
+            onClick(item);
+          }}
         >
           {!showTagCircle &&
             icon &&

@@ -64,6 +64,15 @@ export class BrickTagElement extends UpdatingElement {
   }>;
 
   /**
+   * @detail {label: string;key:string}
+   * @description 当前点击的tag
+   */
+  @event({ type: "tag.click" }) tagClick: EventEmitter<{
+    label: string;
+    key: string;
+  }>;
+
+  /**
    * @kind TagListType[] 或者 string[]
    * @required false
    * @default -
@@ -320,6 +329,7 @@ export class BrickTagElement extends UpdatingElement {
         tagStyle={this.tagStyle}
         handleOnChange={this._handleOnChange}
         handleOnClose={this._handleOnClose}
+        handleOnClick={this._handleOnClick}
         tagCheckedStyle={this.tagCheckedStyle}
         tagHoverStyle={this.tagHoverStyle}
         multipleCheck={this.multipleCheck}
@@ -383,6 +393,10 @@ export class BrickTagElement extends UpdatingElement {
     if (defaultAction && defaultActionV2) {
       this.default = checkedKeys;
     }
+  };
+
+  private _handleOnClick = (tag: { label: string; key: string }): void => {
+    this.tagClick.emit(tag);
   };
 }
 
