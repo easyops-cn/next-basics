@@ -84,7 +84,6 @@ describe("BrickTag", () => {
       icon: "ad",
       prefix: "fas",
     };
-    const searchIcon = <LegacyIcon type="search" />;
     const props = {
       componentType: TagTypeProps.Tag,
       tagList: [
@@ -93,7 +92,9 @@ describe("BrickTag", () => {
       ],
     };
     const wrapper = shallow(<BrickTag {...props} />);
-    expect(wrapper.find("Tag").at(0).prop("icon")).toEqual(searchIcon);
+    expect(wrapper.find("Tag").at(0).find(LegacyIcon).prop("type")).toEqual(
+      "search"
+    );
     expect(wrapper.find("Tag").at(1).find(GeneralIcon).prop("icon")).toEqual(
       adIcon
     );
