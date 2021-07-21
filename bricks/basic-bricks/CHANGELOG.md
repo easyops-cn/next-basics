@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.135.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.134.1...@next-bricks/basic-bricks@1.135.0) (2021-07-21)
+
+
+### Features
+
+* **easy-view:** add a snippet to easy-view ([ba8ff05](https://github.com/easyops-cn/next-basics/commit/ba8ff05ec9940642b9a807a4b3169de6691d2f13)), closes [Refs#NEXT_BUILDER-876](https://github.com/Refs/issues/NEXT_BUILDER-876)
+
+
+
+
+
 ## [1.134.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.134.0...@next-bricks/basic-bricks@1.134.1) (2021-07-19)
 
 
