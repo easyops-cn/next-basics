@@ -10,6 +10,7 @@ import {
 export interface TreeSelectProps extends FormItemWrapperProps {
   treeData?: DataNode[];
   treeCheckable?: boolean;
+  treeCheckStrictly?: boolean;
   allowClear?: boolean;
   disabled?: boolean;
   inputBoxStyle?: React.CSSProperties;
@@ -31,6 +32,7 @@ export function TreeSelect(props: TreeSelectProps): React.ReactElement {
   const {
     treeData,
     treeCheckable,
+    treeCheckStrictly,
     allowClear,
     disabled,
     inputBoxStyle,
@@ -55,6 +57,7 @@ export function TreeSelect(props: TreeSelectProps): React.ReactElement {
         style={inputBoxStyle}
         treeData={treeData}
         treeCheckable={treeCheckable}
+        treeCheckStrictly={treeCheckStrictly}
         allowClear={allowClear}
         disabled={disabled}
         dropdownMatchSelectWidth={dropdownMatchSelectWidth}
