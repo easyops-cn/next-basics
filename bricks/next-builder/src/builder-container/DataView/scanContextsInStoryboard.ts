@@ -48,6 +48,12 @@ function collectContexts(
             if (node.object.type === "Identifier" && node.object.name === CTX) {
               if (!node.computed && node.property.type === "Identifier") {
                 readContexts.add(node.property.name);
+              } else if (
+                node.computed &&
+                (node.property as any).type === "Literal" &&
+                typeof (node.property as any).value === "string"
+              ) {
+                readContexts.add((node.property as any).value);
               }
             }
             PrecookVisitor.MemberExpression(node, state, callback);
