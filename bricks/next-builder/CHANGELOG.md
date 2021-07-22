@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.62.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.2...@next-bricks/next-builder@1.62.3) (2021-07-22)
+
+
+### Bug Fixes
+
+* drop deprecated flags for snippets ([fbed878](https://github.com/easyops-cn/next-basics/commit/fbed8781eab95fb65d62ca80af963c50a274533f))
+
+
+
+
+
 ## [1.62.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.1...@next-bricks/next-builder@1.62.2) (2021-07-21)
 
 

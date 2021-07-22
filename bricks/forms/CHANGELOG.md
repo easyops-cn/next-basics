@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.179.1...@next-bricks/forms@1.180.0) (2021-07-22)
+
+
+### Features
+
+* **tree-select:** add treeCheckStrictly property ([b060f22](https://github.com/easyops-cn/next-basics/commit/b060f2230442493e7e8a8483659918583611b3d9))
+
+
+
+
+
 ## [1.179.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.179.0...@next-bricks/forms@1.179.1) (2021-07-13)
 
 
