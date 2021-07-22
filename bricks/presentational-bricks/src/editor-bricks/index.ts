@@ -5,3 +5,4 @@ import "./brick-link/brick-link.editor";
 import "./brick-descriptions/brick-descriptions.editor";
 import "./brick-result/brick-result.editor";
 import "./brick-alert/brick-alert.editor";
+import "./brick-tree/brick-tree.editor";
