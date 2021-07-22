@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.136.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.135.0...@next-bricks/basic-bricks@1.136.0) (2021-07-22)
+
+
+### Features
+
+* add list-container editor ([ba0d86f](https://github.com/easyops-cn/next-basics/commit/ba0d86f78858f2ced2081047f186a60b0b4afa16))
+
+
+
+
+
 # [1.135.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.134.1...@next-bricks/basic-bricks@1.135.0) (2021-07-21)
 
 

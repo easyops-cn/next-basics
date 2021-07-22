@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.180.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.180.0...@next-bricks/forms@1.180.1) (2021-07-22)
+
+
+### Bug Fixes
+
+* **forms:** clearAll不生效 ([b93d1b4](https://github.com/easyops-cn/next-basics/commit/b93d1b47711b86ab8108bd0c5d05db42d3eb7872))
+
+
+
+
+
 # [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.179.1...@next-bricks/forms@1.180.0) (2021-07-22)
 
 

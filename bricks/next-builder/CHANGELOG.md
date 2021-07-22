@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.62.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.3...@next-bricks/next-builder@1.62.4) (2021-07-22)
+
+
+### Bug Fixes
+
+* fix when installed bricks has no text ([7752708](https://github.com/easyops-cn/next-basics/commit/77527089ebd85b234864284da0b07551f7e14879))
+* frequently layout snippets ([a3d4023](https://github.com/easyops-cn/next-basics/commit/a3d4023f51b65b6d3b8633252b17289066e0aa92))
+* scan computed ctx access ([ac7ccd9](https://github.com/easyops-cn/next-basics/commit/ac7ccd9cf8e7422bf2ac4918c56a5a163fdd80e8))
+
+
+
+
+
 ## [1.62.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.2...@next-bricks/next-builder@1.62.3) (2021-07-22)
 
 
