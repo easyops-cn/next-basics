@@ -80,6 +80,8 @@ export const columns = [
  * @memo
  */
 export class DynamicUserSelectItemElement extends FormItemElement {
+  private manualEditedValue: any[];
+
   @property({
     attribute: false,
   })
@@ -101,19 +103,8 @@ export class DynamicUserSelectItemElement extends FormItemElement {
   srcObjectId: string;
 
   clearAll = () => {
-    const curValue = this.getFormElement().formUtils.getFieldValue(this.name);
-    let resetKeys: string[] = [];
-    if (Array.isArray(curValue)) {
-      for (let i = 0; i < curValue.length; i++) {
-        resetKeys = resetKeys.concat([
-          `${this.name}[${i}].dstObjectId`,
-          `${this.name}[${i}].path`,
-          `${this.name}[${i}].receiverFields`,
-        ]);
-      }
-      this.getFormElement().formUtils.resetFields([this.name]);
-      this._render();
-    }
+    this.manualEditedValue = [];
+    this._render();
   };
   private _handleAdd = () => {
     this.dispatchEvent(new CustomEvent("item.add"));
@@ -174,6 +165,7 @@ export class DynamicUserSelectItemElement extends FormItemElement {
             onChange={this._handleChange}
             disabledAddButton={this.disabledAddButton}
             disabledDeleteButton={this.disabledDeleteButton}
+            manualEditedValue={this.manualEditedValue}
           />
         </BrickWrapper>,
         this
