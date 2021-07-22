@@ -198,4 +198,47 @@ describe("BrickTag", () => {
     expect(tooltipNode).toHaveLength(1);
     expect(tooltipNode.prop("title")).toBe(tooltip);
   });
+
+  it("should work when general tag is clicked", () => {
+    const handleOnClick = jest.fn();
+    const generalProps = {
+      handleOnClick,
+      tagList: [
+        { key: "a", label: "a" },
+        { key: "b", label: "b" },
+      ],
+    };
+    const wrapper = mount(<BrickTag {...generalProps} />);
+    expect(wrapper.find("Tag").length).toEqual(2);
+    wrapper.find("Tag").at(0).simulate("click");
+    expect(handleOnClick).toHaveBeenCalled();
+  });
+
+  it("should work when closable tag is clicked", () => {
+    const handleOnClick = jest.fn();
+    const handleOnClose = jest.fn();
+    const closableProps = {
+      handleOnClick,
+      handleOnClose,
+      closable: true,
+      tagList: [
+        { key: "a", label: "a" },
+        { key: "b", label: "b" },
+      ],
+    };
+    const wrapper = mount(<BrickTag {...closableProps} />);
+    expect(wrapper.find("Tag").length).toEqual(2);
+    expect(
+      wrapper.find("Tag").at(0).find("span.anticon-close.ant-tag-close-icon")
+        .length
+    ).toEqual(1);
+    wrapper.find("Tag").at(0).simulate("click");
+    expect(handleOnClick).toHaveBeenCalled();
+    wrapper
+      .find("Tag")
+      .at(0)
+      .find("span.anticon-close.ant-tag-close-icon")
+      .simulate("click");
+    expect(handleOnClose).toHaveBeenCalled();
+  });
 });

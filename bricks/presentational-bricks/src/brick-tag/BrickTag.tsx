@@ -31,18 +31,19 @@ export type TagListType = {
   color?: string | Color;
   disabled?: boolean;
   disabledTooltip?: string;
-}[];
+};
 
 export interface BrickTagProps extends TagProps {
   componentType?: TagTypeProps;
   configProps?: TagProps | CheckableTagProps;
-  tagList: TagListType;
+  tagList: TagListType[];
   textEllipsis?: boolean;
   tagStyle?: any;
   tagCheckedStyle?: any;
   tagHoverStyle?: any;
-  handleOnChange?: (items: TagListType) => void;
-  handleOnClose?: (current, tagList: TagListType) => void;
+  handleOnChange?: (items: TagListType[]) => void;
+  handleOnClose?: (current, tagList: TagListType[]) => void;
+  handleOnClick?: (tag: TagListType) => void;
   multipleCheck?: boolean;
   label?: string;
   defaultCheckedTag?: string | string[];
@@ -107,6 +108,10 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     props?.handleOnClose(item, newClosedTag);
   };
 
+  const onClick = (item) => {
+    props?.handleOnClick(item);
+  };
+
   const onMouseEnter = (item, e) => {
     setHoverTag(item.key);
   };
@@ -115,7 +120,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     setHoverTag(null);
   };
 
-  const renderTag = (TypeComponent: any, tagList: TagListType) =>
+  const renderTag = (TypeComponent: any, tagList: TagListType[]) =>
     tagList.map((item) => {
       const {
         key,
@@ -133,6 +138,9 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
           style: {
             ...props.tagStyle,
             ...(hover ? props.tagHoverStyle : {}),
+          },
+          onClick: () => {
+            onClick(item);
           },
         };
       } else {

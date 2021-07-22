@@ -64,6 +64,12 @@ export class BrickTagElement extends UpdatingElement {
   }>;
 
   /**
+   * @detail TagListType
+   * @description 当前点击的tag
+   */
+  @event({ type: "tag.click" }) tagClick: EventEmitter<TagListType>;
+
+  /**
    * @kind TagListType[] 或者 string[]
    * @required false
    * @default -
@@ -72,7 +78,7 @@ export class BrickTagElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  tagList: TagListType;
+  tagList: TagListType[];
 
   /**
    * @kind boolean
@@ -320,6 +326,7 @@ export class BrickTagElement extends UpdatingElement {
         tagStyle={this.tagStyle}
         handleOnChange={this._handleOnChange}
         handleOnClose={this._handleOnClose}
+        handleOnClick={this._handleOnClick}
         tagCheckedStyle={this.tagCheckedStyle}
         tagHoverStyle={this.tagHoverStyle}
         multipleCheck={this.multipleCheck}
@@ -371,11 +378,11 @@ export class BrickTagElement extends UpdatingElement {
     }
   }
 
-  private _handleOnClose = (current, tagList: TagListType): void => {
+  private _handleOnClose = (current, tagList: TagListType[]): void => {
     this.tagClose.emit({ current, tagList });
   };
 
-  private _handleOnChange = (items: TagListType): void => {
+  private _handleOnChange = (items: TagListType[]): void => {
     const checkedKeys = map(items, "key");
     const defaultAction = this.checkedUpdate.emit(checkedKeys);
     const defaultActionV2 = this.checkedUpdateV2.emit(items);
@@ -383,6 +390,10 @@ export class BrickTagElement extends UpdatingElement {
     if (defaultAction && defaultActionV2) {
       this.default = checkedKeys;
     }
+  };
+
+  private _handleOnClick = (tag: { label: string; key: string }): void => {
+    this.tagClick.emit(tag);
   };
 }
 
