@@ -30,6 +30,7 @@ const fieldsToKeepInMenu = [
   "link",
   "items",
   "type",
+  "injectMenuGroupId",
   "dynamicItems",
   "itemsResolve",
 ];
@@ -49,6 +50,7 @@ const fieldsToKeepInMenuItem = [
   "children",
   "defaultExpanded",
   "if",
+  "groupId",
 ];
 
 export const symbolForNodeId = Symbol.for("nodeId");
