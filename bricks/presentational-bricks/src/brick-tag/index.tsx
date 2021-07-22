@@ -64,13 +64,10 @@ export class BrickTagElement extends UpdatingElement {
   }>;
 
   /**
-   * @detail {label: string;key:string}
+   * @detail TagListType
    * @description 当前点击的tag
    */
-  @event({ type: "tag.click" }) tagClick: EventEmitter<{
-    label: string;
-    key: string;
-  }>;
+  @event({ type: "tag.click" }) tagClick: EventEmitter<TagListType>;
 
   /**
    * @kind TagListType[] 或者 string[]
@@ -81,7 +78,7 @@ export class BrickTagElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  tagList: TagListType;
+  tagList: TagListType[];
 
   /**
    * @kind boolean
@@ -381,11 +378,11 @@ export class BrickTagElement extends UpdatingElement {
     }
   }
 
-  private _handleOnClose = (current, tagList: TagListType): void => {
+  private _handleOnClose = (current, tagList: TagListType[]): void => {
     this.tagClose.emit({ current, tagList });
   };
 
-  private _handleOnChange = (items: TagListType): void => {
+  private _handleOnChange = (items: TagListType[]): void => {
     const checkedKeys = map(items, "key");
     const defaultAction = this.checkedUpdate.emit(checkedKeys);
     const defaultActionV2 = this.checkedUpdateV2.emit(items);
