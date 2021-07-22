@@ -23,9 +23,9 @@ describe("scanContextsInStoryboard", () => {
                   good1: "<% CTX.good1 %>",
                   good1Repeat: "<% CTX.good1 %>",
                   good2: "<% CTX.good2() %>",
+                  goodX: "<% CTX['good-x'] %>",
                   notRelevant: "<% some.any %>",
                   bad: "CTX.bad1()",
-                  bad2: "<% CTX['bad2'] %>",
                   bad3: "<% CTX[bad3] %>",
                 },
               },
@@ -77,6 +77,7 @@ describe("scanContextsInStoryboard", () => {
       },
     } as any;
     expect(scanContextsInStoryboard(storyboard).sort()).toEqual([
+      "good-x",
       "good1",
       "good2",
       "good3",
