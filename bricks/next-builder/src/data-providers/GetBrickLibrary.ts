@@ -145,7 +145,8 @@ export async function GetBrickLibrary(
               id: name,
               ...(installedBrick
                 ? {
-                    title: i18nText(installedBrick.text),
+                    title:
+                      i18nText(installedBrick.text) || getBrickLastName(name),
                     category: installedBrick.category,
                     description: i18nText(installedBrick.description),
                     icon: installedBrick.icon,

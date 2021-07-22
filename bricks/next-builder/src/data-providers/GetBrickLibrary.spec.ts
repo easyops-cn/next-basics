@@ -165,8 +165,6 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
             },
             {
               id: "basic-bricks.any-brick",
-              category: "any",
-              icon: { lib: "antd", type: "any" },
             },
           ],
         };
@@ -245,16 +243,13 @@ describe("GetBrickLibrary", () => {
           "$searchTextPool": Array [
             "basic-bricks.any-brick",
           ],
-          "category": "any",
+          "category": undefined,
           "description": undefined,
           "editor": undefined,
           "editorProps": undefined,
-          "icon": Object {
-            "lib": "antd",
-            "type": "any",
-          },
+          "icon": undefined,
           "id": "basic-bricks.any-brick",
-          "title": undefined,
+          "title": "any-brick",
           "type": "brick",
         },
         Object {
