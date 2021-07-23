@@ -49,6 +49,7 @@ export interface InputProps {
 
 export interface SelectProps {
   mode?: "multiple" | "tags";
+  maxTagCount?: number | "responsive";
   options?: Array<{
     label: string;
     value: string;
@@ -132,6 +133,7 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 *| disabledHandler | `(row: any, index: number) => viod` | -  | -       | 通过传入函数来控制每一行中每一列的表单子项是否 disbaled, `row` 为当前行的每一列表单项的值， index 为行的序号，可根据以上数据自定义每一个表单项的 disabled 逻辑, 返回 `boolean` 类型来决定是否 disabled
 *| options     | `Array<{label: string, value: string}>` | ✔️       | -       | 下拉框候选项                 |
 *| mode        | `multiple \| tags`                      | -        | -       | 设置下拉框的模式为多选或标签 |
+*| maxTagCount        | number\| "responsive"                      | -        | -       | 最多显示多少个 tag |
 *| allowClear  | `boolean`                               | -        | false   | 是否支持清除                 |
 
 *### CascaderProps

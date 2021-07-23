@@ -95,6 +95,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
           mode={selectProps.mode}
           optionFilterProp="children"
           allowClear={selectProps.allowClear}
+          maxTagCount={selectProps.maxTagCount}
           showSearch
         >
           {selectProps.options?.map((option) => (
