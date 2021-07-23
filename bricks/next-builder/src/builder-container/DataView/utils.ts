@@ -13,20 +13,21 @@ export enum ContextType {
   VALUE = "value",
 }
 
-interface contextItemValueConf {
-  type: ContextType.VALUE;
+interface contextItemBaseConf {
   name?: string;
   value?: string;
   if?: string;
   onChange?: string;
 }
 
-interface contextResolveBaseConf {
-  name?: string;
+interface contextItemValueConf extends contextItemBaseConf {
+  type: ContextType.VALUE;
+}
+
+interface contextResolveBaseConf extends contextItemBaseConf {
+  resolveIf?: string;
   args?: string;
   transform?: string;
-  if?: string;
-  onChange?: string;
 }
 
 interface contextItemResolveConf extends contextResolveBaseConf {
@@ -116,7 +117,9 @@ export function computeItemToSubmit(
     };
   } else {
     const computedFields = safeLoadFields({
+      value: (contextValue as contextItemResolveConf).value,
       if: (contextValue as contextItemResolveConf).if,
+      resolveIf: (contextValue as contextItemResolveConf).resolveIf,
       args: (contextValue as contextItemResolveConf).args,
       transform: (contextValue as contextItemResolveConf).transform,
       onChange: (contextValue as contextItemResolveConf).onChange,
@@ -133,11 +136,13 @@ export function computeItemToSubmit(
           : {
               useProvider: (contextValue as contextItemResolveConf).useProvider,
             }),
-        if: computedFields.if,
+        if: computedFields.resolveIf,
         args: computedFields.args,
         transform: computedFields.transform,
         onReject: computedFields.onReject,
       },
+      value: computedFields.value,
+      if: computedFields.if,
       onChange: computedFields.onChange,
     };
   }

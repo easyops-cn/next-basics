@@ -127,7 +127,9 @@ export function ContextItemForm({
         </Radio.Group>
       </Form.Item>
       {contextType === ContextType.VALUE ? (
-        <Form.Item name="value">{getCodeEditorItem("value")}</Form.Item>
+        <Form.Item label="Value" name="value">
+          {getCodeEditorItem("value")}
+        </Form.Item>
       ) : (
         <>
           {contextType === ContextType.SELECTOR_RESOLVE ? (
@@ -155,6 +157,16 @@ export function ContextItemForm({
           </Form.Item>
           <Form.Item label="onReject" name="onReject">
             {getCodeEditorItem("onReject")}
+          </Form.Item>
+          <Form.Item label="If of resolve" name="resolveIf">
+            {getCodeEditorItem("if")}
+          </Form.Item>
+          <Form.Item
+            label="Fallback value"
+            name="value"
+            tooltip="The value of context will fallback to this value when the if of resolve is false."
+          >
+            {getCodeEditorItem("value")}
           </Form.Item>
         </>
       )}
