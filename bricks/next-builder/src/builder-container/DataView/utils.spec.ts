@@ -91,7 +91,9 @@ describe("computeItemToSubmit", () => {
       {
         type: ContextType.RESOLVE,
         useProvider: "provider-a",
+        value: "[]",
         if: "<% QUERY.q %>",
+        resolveIf: "<% QUERY.page > 0 %>",
         args: "- P-1",
         transform: "value: <% DATA %>\n",
         name: "new",
@@ -99,10 +101,12 @@ describe("computeItemToSubmit", () => {
         onReject: "transform:\n  value: <% DATA.message %>",
       },
       {
+        value: [],
+        if: "<% QUERY.q %>",
         name: "new",
         resolve: {
           useProvider: "provider-a",
-          if: "<% QUERY.q %>",
+          if: "<% QUERY.page > 0 %>",
           args: ["P-1"],
           transform: {
             value: "<% DATA %>",
@@ -129,16 +133,19 @@ describe("computeItemToSubmit", () => {
         type: ContextType.SELECTOR_RESOLVE,
         provider: "provider-b.\\get",
         if: "<% QUERY.q %>",
+        resolveIf: "<% QUERY.page > 0 %>",
         args: "- P-1",
         transform: "value: <% DATA %>\n",
         name: "new",
         onChange: '- target: "#id"\n  properties:\n    a: 1',
       },
       {
+        value: undefined,
+        if: "<% QUERY.q %>",
         name: "new",
         resolve: {
           provider: "provider-b.\\get",
-          if: "<% QUERY.q %>",
+          if: "<% QUERY.page > 0 %>",
           args: ["P-1"],
           transform: {
             value: "<% DATA %>",

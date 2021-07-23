@@ -130,7 +130,9 @@ export function DataView({
             }),
         ...safeDumpFields({
           args: (contextValue.resolve as EntityResolveConf).args,
-          if: contextValue.resolve.if,
+          value: contextValue.value,
+          if: contextValue.if,
+          resolveIf: contextValue.resolve.if,
           transform: contextValue.resolve.transform,
           onReject: contextValue.resolve.onReject,
           onChange: contextValue?.onChange,

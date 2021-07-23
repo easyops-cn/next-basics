@@ -42,7 +42,7 @@ describe("ContextItemForm", () => {
         onContextItemUpdate={onContextItemUpdate}
       />
     );
-    expect(wrapper.find(Form.Item).length).toBe(8);
+    expect(wrapper.find(Form.Item).length).toBe(10);
 
     mockUseBuilderUIContext.mockReturnValue({
       providerList: ["provider-a", "provider-b"],
