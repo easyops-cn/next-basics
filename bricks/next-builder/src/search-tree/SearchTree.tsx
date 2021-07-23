@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { cloneDeep } from "lodash";
-import { useTranslation } from "react-i18next";
-import { NS_NEXT_BUILDER, K } from "../i18n/constants";
+import { Tree } from "antd";
 import mockJSON from "./data.json";
+import { GeneralInput } from "../../../forms/src/general-input/GeneralInput";
+import { isObject } from "@next-core/brick-utils";
 
 interface builTreeOptions {
+  parentPath?: string;
   isSlots?: boolean;
+  filterData?: string;
 }
 
 export interface PlainObject extends Object {
@@ -28,6 +31,8 @@ const supportKey = [
   "main",
 ];
 
+const objPropKeys = ["properties", "transform", "events"];
+
 let isParentRouteLock = false;
 
 function clone(obj: PlainObject, isDeep?: boolean) {
@@ -38,7 +43,7 @@ function clone(obj: PlainObject, isDeep?: boolean) {
   for (const [k, v] of Object.entries(obj)) {
     if (
       ["string", "boolean", "number"].includes(typeof v) ||
-      ["properties", "transform", "events"].includes(k)
+      objPropKeys.includes(k)
     ) {
       newObj[k] = v;
     }
@@ -58,17 +63,28 @@ function getTitle(item: PlainObject, defaultKey?: string): string {
   );
 }
 
-function traversalArray(treeData: Array<PlainObject>) {
+function getPath(parentPath = "", childPath: string) {
+  return parentPath ? `${parentPath}/${childPath}` : childPath;
+}
+
+function traversalArray(
+  treeData: Array<PlainObject>,
+  options: builTreeOptions
+) {
   const tree: Array<any> = [];
 
   for (let i = 0; i < treeData.length; i++) {
     const title = getTitle(treeData[i]);
+    const path = getPath(options.parentPath, String(i));
     const child: PlainObject = {
       title,
-      key: i,
+      key: path,
       ...clone(treeData[i]),
     };
-    const subTree = traversalData(treeData[i]);
+    const subTree = traversalData(treeData[i], {
+      ...options,
+      parentPath: path,
+    });
     if (subTree.length > 0) {
       child.children = subTree;
     }
@@ -90,13 +106,16 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
         isParentRouteLock = true;
         isParentRoutes = true;
       }
+      const path = getPath(options.parentPath ?? "", key);
       const child: PlainObject = {
         title: key,
-        key: key,
+        key: path,
         ...clone(treeData[key]),
       };
       const subTree = traversalData(treeData[key], {
+        ...options,
         isSlots,
+        parentPath: path,
       });
       if (subTree.length > 0) child.children = subTree;
       if (ingoreKey.includes(key) || (key === "routes" && !isParentRoutes)) {
@@ -117,7 +136,7 @@ function traversalData(
   const tree = [];
   if (Array.isArray(treeData)) {
     // 数组类型
-    const children = traversalArray(treeData);
+    const children = traversalArray(treeData, options);
     children.length > 0 && tree.push(...children);
   }
   if (Object.prototype.toString.call(treeData) === "[object Object]") {
@@ -128,15 +147,98 @@ function traversalData(
   return tree;
 }
 
-function buildTree() {
+function buildTree(
+  treeData: PlainObject | Array<PlainObject>,
+  filterData?: string
+) {
   isParentRouteLock = false;
-  return traversalData(mockJSON);
+  return traversalData(treeData, {
+    filterData,
+  });
+}
+
+function filter(tree: PlainObject | Array<PlainObject>, text: string) {
+  const filterItem = (item: PlainObject | string, text: string) => {
+    if (typeof item === "object") {
+      for (const [k, v] of Object.entries(item)) {
+        if (k !== "children") {
+          if (isObject(v)) {
+            if (filterItem(v, text)) {
+              v.hightlight = true;
+              return true;
+            }
+          } else if (Array.isArray(v)) {
+            for (let i = 0; i < v.length; i++) {
+              if (typeof v[i] === "object") {
+                if (filterItem(v[i], text)) {
+                  v[i].hightlight = true;
+                  return true;
+                }
+              } else if (typeof v[i] === "string" && v[i].indexOf(text) >= 0) {
+                v[i].hightlight = true;
+                return true;
+              }
+            }
+          } else if (typeof v === "string" && v.indexOf(text) >= 0) {
+            item.hightlight = true;
+            return true;
+          }
+        }
+      }
+      return false;
+    } else {
+      return typeof item === "string" && item.indexOf(text) >= 0;
+    }
+  };
+  const getNodes = (result: Array<PlainObject>, node: PlainObject) => {
+    if (filterItem(node, text)) {
+      text !== "" && (node.highlight = true);
+      result.push(node);
+      return result;
+    }
+    if (Array.isArray(node.children)) {
+      const subNode = node.children.reduce(getNodes, []);
+      if (subNode.length) result.push({ ...node, children: subNode });
+    }
+    return result;
+  };
+
+  return tree.reduce(getNodes, []);
 }
 
 export function SearchTree(): React.ReactElement {
-  const { t } = useTranslation(NS_NEXT_BUILDER);
+  const [value, setValue] = useState("");
+  const baseTree = buildTree(mockJSON);
+  const [tree, setTree] = useState(baseTree);
 
-  buildTree();
+  const handleFilterChange = (value: string) => {
+    setValue(value);
+    setTree(value.trim() ? filter(baseTree, value.trim()) : baseTree);
+    // console.time('buildTree');
+    // console.log("filter", filter(baseTree, value))
+    // console.timeEnd('buildTree');
+  };
 
-  return <div>{t(K.NEXT_BUILDER)} works!</div>;
+  const titleRender = (nodeData: PlainObject) => {
+    if (nodeData.highlight) {
+      return <span style={{ background: "yellow" }}>{nodeData.title}</span>;
+    }
+    return nodeData.title;
+  };
+
+  const onSelect = (selectedKeys: React.Key[], info: any) => {
+    // console.log('selected', selectedKeys, info);
+  };
+
+  return (
+    <div>
+      <GeneralInput value={value} onChange={handleFilterChange} />
+      <Tree
+        defaultExpandAll
+        treeData={tree}
+        onSelect={onSelect}
+        titleRender={titleRender}
+      />
+    </div>
+  );
 }
