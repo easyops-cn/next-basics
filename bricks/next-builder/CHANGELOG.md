@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.62.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.4...@next-bricks/next-builder@1.62.5) (2021-07-23)
+
+
+### Bug Fixes
+
+* **build-storboard:** add menu group injecting related fields ([b485bbb](https://github.com/easyops-cn/next-basics/commit/b485bbb63f73d5bbafb48dcaf3fd95745468e25c))
+
+
+
+
+
 ## [1.62.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.3...@next-bricks/next-builder@1.62.4) (2021-07-22)
 
 

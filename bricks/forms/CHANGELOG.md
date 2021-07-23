@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.181.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.180.1...@next-bricks/forms@1.181.0) (2021-07-23)
+
+
+### Features
+
+* support maxTagCount ([0c7c851](https://github.com/easyops-cn/next-basics/commit/0c7c851eb8cfd8bd646de9259478cfe0a7ace558))
+
+
+
+
+
 ## [1.180.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.180.0...@next-bricks/forms@1.180.1) (2021-07-22)
 
 
