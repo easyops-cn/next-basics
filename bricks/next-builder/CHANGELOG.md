@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.63.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.5...@next-bricks/next-builder@1.63.0) (2021-07-23)
+
+
+### Features
+
+* **DataView:** resolve type context add value field ([0ae3f8a](https://github.com/easyops-cn/next-basics/commit/0ae3f8ae83ee43351c23c87ec1dcdc92e7655eeb))
+
+
+
+
+
 ## [1.62.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.4...@next-bricks/next-builder@1.62.5) (2021-07-23)
 
 
