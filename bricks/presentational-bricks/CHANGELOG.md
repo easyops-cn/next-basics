@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.201.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.200.0...@next-bricks/presentational-bricks@1.201.0) (2021-07-23)
+
+
+### Features
+
+* **brick-tag:** add tag.click event ([c4a2d54](https://github.com/easyops-cn/next-basics/commit/c4a2d54232ed0ffb4167dec37f2a4b0947eedfe4)), closes [Refs#BRICK_STORE-2187](https://github.com/Refs/issues/BRICK_STORE-2187)
+* **brick-tag:** add tag.click event ([6610747](https://github.com/easyops-cn/next-basics/commit/66107478ed630399b4ce6d199601828cdf77d081)), closes [Refs#BRICK_STORE-2187](https://github.com/Refs/issues/BRICK_STORE-2187)
+
+
+
+
+
 # [1.200.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.199.1...@next-bricks/presentational-bricks@1.200.0) (2021-07-22)
 
 
