@@ -5,6 +5,13 @@ import mockJSON from "./data.json";
 import { GeneralInput } from "../../../forms/src/general-input/GeneralInput";
 import { isObject } from "@next-core/brick-utils";
 
+interface SearchTreeProps {
+  allowKeySearch?: boolean;
+}
+
+interface filterOption {
+  allowKeySearch?: boolean;
+}
 interface builTreeOptions {
   parentPath?: string;
   isSlots?: boolean;
@@ -14,6 +21,9 @@ interface builTreeOptions {
 export interface PlainObject extends Object {
   [key: string]: any;
 }
+
+const HIGHTLIGHT = "$$hightlight";
+const NODE_INFO = "$$info";
 
 const ingoreKey = ["bricks", "slots"];
 
@@ -31,7 +41,7 @@ const supportKey = [
   "main",
 ];
 
-const objPropKeys = ["properties", "transform", "events"];
+const objPropKeys = ["properties", "transform", "events", "context"];
 
 let isParentRouteLock = false;
 
@@ -79,7 +89,7 @@ function traversalArray(
     const child: PlainObject = {
       title,
       key: path,
-      ...clone(treeData[i]),
+      [NODE_INFO]: clone(treeData[i]),
     };
     const subTree = traversalData(treeData[i], {
       ...options,
@@ -110,7 +120,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
       const child: PlainObject = {
         title: key,
         key: path,
-        ...clone(treeData[key]),
+        [NODE_INFO]: clone(treeData[key]),
       };
       const subTree = traversalData(treeData[key], {
         ...options,
@@ -157,48 +167,67 @@ function buildTree(
   });
 }
 
-function filter(tree: PlainObject | Array<PlainObject>, text: string) {
-  const filterItem = (item: PlainObject | string, text: string) => {
+function filter(
+  tree: PlainObject | Array<PlainObject>,
+  text: string,
+  options: filterOption
+) {
+  const filterNode = (item: PlainObject | string, text: string): boolean => {
     if (typeof item === "object") {
       for (const [k, v] of Object.entries(item)) {
-        if (k !== "children") {
-          if (isObject(v)) {
-            if (filterItem(v, text)) {
-              v.hightlight = true;
+        if (!["children", "key", HIGHTLIGHT].includes(k)) {
+          // if (isObject(v)) {
+          if (options?.allowKeySearch && k.indexOf(text) >= 0) {
+            item[HIGHTLIGHT] = true;
+            return true;
+          }
+          if (Object.prototype.toString.call(v) === "[object Object]") {
+            if (filterNode(v, text)) {
+              item[HIGHTLIGHT] = true;
               return true;
             }
           } else if (Array.isArray(v)) {
             for (let i = 0; i < v.length; i++) {
               if (typeof v[i] === "object") {
-                if (filterItem(v[i], text)) {
-                  v[i].hightlight = true;
+                if (filterNode(v[i], text)) {
+                  item[HIGHTLIGHT] = true;
                   return true;
                 }
               } else if (typeof v[i] === "string" && v[i].indexOf(text) >= 0) {
-                v[i].hightlight = true;
+                item[HIGHTLIGHT] = true;
                 return true;
               }
             }
           } else if (typeof v === "string" && v.indexOf(text) >= 0) {
-            item.hightlight = true;
             return true;
           }
         }
       }
-      return false;
     } else {
       return typeof item === "string" && item.indexOf(text) >= 0;
     }
   };
+
+  const nodeMatch = (node: PlainObject, text: string): boolean => {
+    return filterNode(node, text);
+  };
+
+  const childMatch = (children: PlainObject): Array<PlainObject> => {
+    /* eslint-disable @typescript-eslint/no-use-before-define */
+    return children.reduce(getNodes, []);
+  };
+
   const getNodes = (result: Array<PlainObject>, node: PlainObject) => {
-    if (filterItem(node, text)) {
-      text !== "" && (node.highlight = true);
+    const isNodeMatch = nodeMatch(node, text);
+    const children = childMatch(node?.children ?? []);
+
+    if (children.length) {
+      result.push({
+        ...node,
+        children,
+      });
+    } else if (isNodeMatch && !children.length) {
       result.push(node);
-      return result;
-    }
-    if (Array.isArray(node.children)) {
-      const subNode = node.children.reduce(getNodes, []);
-      if (subNode.length) result.push({ ...node, children: subNode });
     }
     return result;
   };
@@ -206,21 +235,32 @@ function filter(tree: PlainObject | Array<PlainObject>, text: string) {
   return tree.reduce(getNodes, []);
 }
 
-export function SearchTree(): React.ReactElement {
+export function SearchTree(props: SearchTreeProps): React.ReactElement {
+  const { allowKeySearch = true } = props;
   const [value, setValue] = useState("");
   const baseTree = buildTree(mockJSON);
   const [tree, setTree] = useState(baseTree);
 
   const handleFilterChange = (value: string) => {
     setValue(value);
-    setTree(value.trim() ? filter(baseTree, value.trim()) : baseTree);
-    // console.time('buildTree');
-    // console.log("filter", filter(baseTree, value))
-    // console.timeEnd('buildTree');
+    if (value.trim()) {
+      setTree(
+        filter(cloneDeep(baseTree), value.trim(), {
+          allowKeySearch,
+        })
+      );
+      // console.time('buildTree');
+      // console.log("filter", filter(baseTree, value.trim(), {
+      //   allowKeySearch,
+      // }));
+      // console.timeEnd('buildTree');
+    } else {
+      setTree(baseTree);
+    }
   };
 
   const titleRender = (nodeData: PlainObject) => {
-    if (nodeData.highlight) {
+    if (nodeData[HIGHTLIGHT]) {
       return <span style={{ background: "yellow" }}>{nodeData.title}</span>;
     }
     return nodeData.title;
@@ -230,6 +270,14 @@ export function SearchTree(): React.ReactElement {
     // console.log('selected', selectedKeys, info);
   };
 
+  const onMouseEnter = (selectedKeys: any) => {
+    // console.log('enter', selectedKeys);
+  };
+
+  const onMouseLeave = (selectedKeys: any) => {
+    // console.log('leave', selectedKeys);
+  };
+
   return (
     <div>
       <GeneralInput value={value} onChange={handleFilterChange} />
@@ -237,6 +285,8 @@ export function SearchTree(): React.ReactElement {
         defaultExpandAll
         treeData={tree}
         onSelect={onSelect}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         titleRender={titleRender}
       />
     </div>
