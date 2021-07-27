@@ -26,6 +26,18 @@ export class SchemaEditorElement extends FormItemElement {
   })
   value: SchemaRootNodeProperty;
 
+  /**
+   * @kind boolean
+   * @required -️
+   * @default false
+   * @description 是否只读
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  readonly: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -55,6 +67,7 @@ export class SchemaEditorElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            readonly={this.readonly}
           />
         </BrickWrapper>,
         this

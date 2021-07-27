@@ -24,10 +24,12 @@ export interface SchemaItemProps {
   onCreate?: (data: SchemaItemProperty, trackId: string) => void;
   itemData: SchemaItemProperty;
   hideDeleteBtn?: boolean;
+  readonly?: boolean;
 }
 
 export function SchemaItem({
   style,
+  readonly,
   className,
   itemData,
   onCreate,
@@ -105,29 +107,32 @@ export function SchemaItem({
         <div className={styles.description} title={itemData.description}>
           {itemData.description}
         </div>
-        <div>
-          <Button
-            type="link"
-            className={editorStyles.iconBtn}
-            style={{ marginRight: 8 }}
-            onClick={openEditModal}
-          >
-            <SettingOutlined />
-          </Button>
-          {!hideDeleteBtn && (
+        {!readonly && (
+          <div>
             <Button
               type="link"
-              className={editorStyles.deleteBtn}
-              onClick={() => handleRemove(trackId)}
+              className={editorStyles.iconBtn}
+              style={{ marginRight: 8 }}
+              onClick={openEditModal}
             >
-              <DeleteOutlined />
+              <SettingOutlined />
             </Button>
-          )}
-        </div>
+            {!hideDeleteBtn && (
+              <Button
+                type="link"
+                className={editorStyles.deleteBtn}
+                onClick={() => handleRemove(trackId)}
+              >
+                <DeleteOutlined />
+              </Button>
+            )}
+          </div>
+        )}
       </div>
       {itemData.fields?.map((item, index) => (
         <SchemaItem
           className={editorStyles.schemaItem}
+          readonly={readonly}
           style={{ gridTemplateColumns: getGridTemplateColumns(titleList) }}
           key={index}
           trackId={`${trackId}-${index}`}
@@ -137,7 +142,7 @@ export function SchemaItem({
           onCreate={onCreate}
         />
       ))}
-      {itemData.type?.includes("object") && (
+      {!readonly && itemData.type?.includes("object") && (
         <div style={{ paddingLeft: 20 + offsetPadding }}>
           <Button
             className={editorStyles.iconBtn}

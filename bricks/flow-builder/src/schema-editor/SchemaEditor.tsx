@@ -17,6 +17,7 @@ import {
 import styles from "./SchemaEditor.module.css";
 export interface SchemaEditorProps extends FormItemWrapperProps {
   value: SchemaRootNodeProperty;
+  readonly?: boolean;
   onChange?: (data: SchemaRootNodeProperty) => void;
 }
 
@@ -35,7 +36,7 @@ export const SchemaEditorWrapper = forwardRef<
 
   useEffect(() => {
     // trigger to update formdata on first rendered
-    props.onChange(processFormData(property));
+    props.onChange?.(processFormData(property));
   }, []);
 
   const gridTemplateColumns = useMemo(
@@ -90,14 +91,22 @@ export const SchemaEditorWrapper = forwardRef<
     const parents = get(mutableProps, path.slice(0, -1));
     parents.splice(Number(path.pop()), 1);
     setProperty(mutableProps);
-    props?.onChange(processFormData(mutableProps));
+    props.onChange?.(processFormData(mutableProps));
   };
+
+  const processedTitleList = useMemo(
+    () =>
+      props.readonly
+        ? titleList.filter((item) => item.title !== "Setting")
+        : titleList,
+    [props.readonly]
+  );
 
   return (
     <>
       <div className={styles.editor} ref={ref}>
         <div className={styles.title} style={{ gridTemplateColumns }}>
-          {titleList.map((item, index) => (
+          {processedTitleList.map((item, index) => (
             <span key={index}>{item.title}</span>
           ))}
         </div>
@@ -106,6 +115,7 @@ export const SchemaEditorWrapper = forwardRef<
             className={styles.schemaItem}
             style={{ gridTemplateColumns: gridTemplateColumns }}
             itemData={property}
+            readonly={props.readonly}
             trackId="root"
             hideDeleteBtn={true}
             onEdit={handleEdit}
