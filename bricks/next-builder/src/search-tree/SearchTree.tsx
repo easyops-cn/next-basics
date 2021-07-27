@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { cloneDeep } from "lodash";
+import { cloneDeep, throttle, isEmpty } from "lodash";
 import { Tree } from "antd";
-import mockJSON from "./data.json";
+import { NodeMouseEventParams } from "rc-tree/lib/contextTypes";
+// import mockJSON from "./data.json";
+import { mockData } from "./mockData";
 import { GeneralInput } from "../../../forms/src/general-input/GeneralInput";
 import { isObject } from "@next-core/brick-utils";
+import { StoryboardAssemblyResult } from "../shared/storyboard/interfaces";
+import {
+  symbolForNodeId,
+  symbolForNodeInstanceId,
+} from "../shared/storyboard/buildStoryboard";
 
 interface SearchTreeProps {
+  appId: string;
+  projectId: string;
+  tableData: StoryboardAssemblyResult;
   allowKeySearch?: boolean;
+  titleClick?: (node: any) => void;
+  titleFocus?: (node: any) => void;
+  titleBlur?: (node: any) => void;
 }
 
 interface filterOption {
@@ -14,8 +27,8 @@ interface filterOption {
 }
 interface builTreeOptions {
   parentPath?: string;
+  parentId?: string;
   isSlots?: boolean;
-  filterData?: string;
 }
 
 export interface PlainObject extends Object {
@@ -45,10 +58,7 @@ const objPropKeys = ["properties", "transform", "events", "context"];
 
 let isParentRouteLock = false;
 
-function clone(obj: PlainObject, isDeep?: boolean) {
-  if (isDeep) {
-    return cloneDeep(obj);
-  }
+function clone(obj: PlainObject) {
   const newObj: PlainObject = Object.create(null);
   for (const [k, v] of Object.entries(obj)) {
     if (
@@ -58,6 +68,9 @@ function clone(obj: PlainObject, isDeep?: boolean) {
       newObj[k] = v;
     }
   }
+  Object.getOwnPropertySymbols(obj).forEach((symbol) => {
+    newObj[symbol as any] = obj[symbol as any];
+  });
   return newObj;
 }
 
@@ -69,6 +82,7 @@ function getTitle(item: PlainObject, defaultKey?: string): string {
     item?.path ||
     item?.name ||
     item?.type ||
+    item?.title ||
     defaultKey
   );
 }
@@ -82,18 +96,25 @@ function traversalArray(
   options: builTreeOptions
 ) {
   const tree: Array<any> = [];
-
   for (let i = 0; i < treeData.length; i++) {
     const title = getTitle(treeData[i]);
-    const path = getPath(options.parentPath, String(i));
+    const path = getPath(options?.parentPath ?? "", String(i));
+    let parentId = options.parentId;
+    if (!parentId && treeData[i][symbolForNodeId as any]) {
+      parentId = treeData[i][symbolForNodeId as any];
+    }
     const child: PlainObject = {
       title,
       key: path,
-      [NODE_INFO]: clone(treeData[i]),
+      [NODE_INFO]: clone({
+        ...treeData[i],
+        realParentId: parentId,
+      }),
     };
     const subTree = traversalData(treeData[i], {
       ...options,
       parentPath: path,
+      parentId,
     });
     if (subTree.length > 0) {
       child.children = subTree;
@@ -111,21 +132,29 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
   for (const key in treeData) {
     if (supportKey.includes(key) || options?.isSlots) {
       let isParentRoutes = false;
+      let parentId = options?.parentId ?? "";
       if (key === "slots") isSlots = true;
       if (key === "routes" && !isParentRouteLock) {
         isParentRouteLock = true;
         isParentRoutes = true;
       }
-      const path = getPath(options.parentPath ?? "", key);
+      if (!parentId && treeData[key][symbolForNodeId]) {
+        parentId = treeData[key][symbolForNodeId];
+      }
+      const path = getPath(options?.parentPath ?? "", key);
       const child: PlainObject = {
         title: key,
         key: path,
-        [NODE_INFO]: clone(treeData[key]),
+        [NODE_INFO]: clone({
+          ...treeData[key],
+          realParentId: parentId,
+        }),
       };
       const subTree = traversalData(treeData[key], {
         ...options,
         isSlots,
         parentPath: path,
+        parentId,
       });
       if (subTree.length > 0) child.children = subTree;
       if (ingoreKey.includes(key) || (key === "routes" && !isParentRoutes)) {
@@ -157,14 +186,9 @@ function traversalData(
   return tree;
 }
 
-function buildTree(
-  treeData: PlainObject | Array<PlainObject>,
-  filterData?: string
-) {
+function buildTree(treeData: PlainObject | Array<PlainObject>) {
   isParentRouteLock = false;
-  return traversalData(treeData, {
-    filterData,
-  });
+  return traversalData(treeData);
 }
 
 function filter(
@@ -173,15 +197,14 @@ function filter(
   options: filterOption
 ) {
   const filterNode = (item: PlainObject | string, text: string): boolean => {
-    if (typeof item === "object") {
+    if (isObject(item) && item) {
       for (const [k, v] of Object.entries(item)) {
         if (!["children", "key", HIGHTLIGHT].includes(k)) {
-          // if (isObject(v)) {
           if (options?.allowKeySearch && k.indexOf(text) >= 0) {
             item[HIGHTLIGHT] = true;
             return true;
           }
-          if (Object.prototype.toString.call(v) === "[object Object]") {
+          if (v && Object.prototype.toString.call(v) === "[object Object]") {
             if (filterNode(v, text)) {
               item[HIGHTLIGHT] = true;
               return true;
@@ -199,6 +222,7 @@ function filter(
               }
             }
           } else if (typeof v === "string" && v.indexOf(text) >= 0) {
+            item[HIGHTLIGHT] = true;
             return true;
           }
         }
@@ -236,47 +260,71 @@ function filter(
 }
 
 export function SearchTree(props: SearchTreeProps): React.ReactElement {
-  const { allowKeySearch = true } = props;
+  const {
+    tableData,
+    appId,
+    projectId,
+    allowKeySearch = true,
+    titleClick,
+    titleFocus,
+    titleBlur,
+  } = props;
   const [value, setValue] = useState("");
-  const baseTree = buildTree(mockJSON);
+  const baseTree = buildTree(tableData?.storyboard || mockData);
   const [tree, setTree] = useState(baseTree);
 
-  const handleFilterChange = (value: string) => {
-    setValue(value);
-    if (value.trim()) {
-      setTree(
-        filter(cloneDeep(baseTree), value.trim(), {
-          allowKeySearch,
-        })
-      );
-      // console.time('buildTree');
-      // console.log("filter", filter(baseTree, value.trim(), {
-      //   allowKeySearch,
-      // }));
-      // console.timeEnd('buildTree');
+  const setFilterTree = throttle((filterValue) => {
+    // console.time('filterTree');
+    if (filterValue !== "") {
+      const result = filter(cloneDeep(baseTree), filterValue, {
+        allowKeySearch,
+      });
+      setTree(result);
     } else {
       setTree(baseTree);
     }
+    // console.timeEnd('filterTree');
+  }, 1000);
+
+  const handleFilterChange = (value: string) => {
+    setValue(value);
+    setFilterTree(value.trim());
   };
 
   const titleRender = (nodeData: PlainObject) => {
-    if (nodeData[HIGHTLIGHT]) {
-      return <span style={{ background: "yellow" }}>{nodeData.title}</span>;
+    const style = {
+      background: nodeData[HIGHTLIGHT] ? "yellow" : null,
+    };
+    if (!isEmpty(nodeData?.[NODE_INFO])) {
+      let url = "";
+      if (nodeData[NODE_INFO].name) {
+        // template
+        url = `/next/next-builder/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO]?.realParentId}/visualize-builder?fullscreen=1`;
+      } else if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
+        // brick
+        url = `/next/next-builder/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO]?.realParentId}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
+      } else {
+        // page
+        url = `/next/next-builder/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO]?.realParentId}&fullscreen=1&canvasIndex=0`;
+      }
+      nodeData[NODE_INFO].url = url;
+      return (
+        <a style={style} href={url}>
+          {getTitle(nodeData[NODE_INFO])}
+        </a>
+      );
     }
-    return nodeData.title;
+    return <span style={style}>{nodeData.title}</span>;
   };
 
-  const onSelect = (selectedKeys: React.Key[], info: any) => {
-    // console.log('selected', selectedKeys, info);
-  };
+  const onSelect = (_selectedKeys: React.Key[], item: any) =>
+    titleClick?.(item?.node?.[NODE_INFO]);
 
-  const onMouseEnter = (selectedKeys: any) => {
-    // console.log('enter', selectedKeys);
-  };
+  const onMouseEnter = (info: NodeMouseEventParams) =>
+    titleFocus?.((info.node as any)?.[NODE_INFO]);
 
-  const onMouseLeave = (selectedKeys: any) => {
-    // console.log('leave', selectedKeys);
-  };
+  const onMouseLeave = (info: NodeMouseEventParams) =>
+    titleBlur?.((info.node as any)?.[NODE_INFO]);
 
   return (
     <div>
@@ -285,6 +333,8 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
         defaultExpandAll
         treeData={tree}
         onSelect={onSelect}
+        virtual
+        height={500}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         titleRender={titleRender}
