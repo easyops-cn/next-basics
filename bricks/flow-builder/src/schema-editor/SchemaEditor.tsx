@@ -13,6 +13,7 @@ import {
   isTypeChange,
   processFormInitvalue,
   processFormData,
+  filterTitleList,
 } from "./processor";
 import styles from "./SchemaEditor.module.css";
 export interface SchemaEditorProps extends FormItemWrapperProps {
@@ -39,9 +40,14 @@ export const SchemaEditorWrapper = forwardRef<
     props.onChange?.(processFormData(property));
   }, []);
 
+  const processedTitleList = useMemo(
+    () => filterTitleList(titleList, props.readonly),
+    [props.readonly]
+  );
+
   const gridTemplateColumns = useMemo(
-    () => getGridTemplateColumns(titleList),
-    []
+    () => getGridTemplateColumns(processedTitleList),
+    [processedTitleList]
   );
 
   const handleAdd = (data: SchemaItemProperty, traceId?: string): void => {
@@ -93,14 +99,6 @@ export const SchemaEditorWrapper = forwardRef<
     setProperty(mutableProps);
     props.onChange?.(processFormData(mutableProps));
   };
-
-  const processedTitleList = useMemo(
-    () =>
-      props.readonly
-        ? titleList.filter((item) => item.title !== "Setting")
-        : titleList,
-    [props.readonly]
-  );
 
   return (
     <>

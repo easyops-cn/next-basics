@@ -9,7 +9,7 @@ import classNames from "classnames";
 import { SchemaItemProperty } from "../../interfaces";
 import { AddPropertyModal } from "../add-property-modal/AddPropertyModal";
 import editorStyles from "../../SchemaEditor.module.css";
-import { getGridTemplateColumns } from "../../processor";
+import { getGridTemplateColumns, filterTitleList } from "../../processor";
 import { titleList } from "../../constants";
 import styles from "./SchemaItem.module.css";
 import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
@@ -133,7 +133,11 @@ export function SchemaItem({
         <SchemaItem
           className={editorStyles.schemaItem}
           readonly={readonly}
-          style={{ gridTemplateColumns: getGridTemplateColumns(titleList) }}
+          style={{
+            gridTemplateColumns: getGridTemplateColumns(
+              filterTitleList(titleList, readonly)
+            ),
+          }}
           key={index}
           trackId={`${trackId}-${index}`}
           itemData={item}

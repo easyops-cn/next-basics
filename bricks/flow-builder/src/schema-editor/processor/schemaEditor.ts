@@ -12,6 +12,15 @@ import {
 } from "../interfaces";
 import { numberTypeList, modelRefCache } from "../constants";
 
+export function filterTitleList(
+  titleList: EditorTitleProps[],
+  readonly: boolean
+): EditorTitleProps[] {
+  return readonly
+    ? titleList.filter((item) => item.title !== "Setting")
+    : titleList;
+}
+
 export function getGridTemplateColumns(titleList: EditorTitleProps[]): string {
   return titleList.map((item) => item.width ?? "1fr").join(" ");
 }

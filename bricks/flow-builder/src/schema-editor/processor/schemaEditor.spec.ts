@@ -8,11 +8,45 @@ import {
   processFormData,
   extractModelRef,
   getRefRequiredFields,
+  filterTitleList,
 } from "./schemaEditor";
 import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
 import * as constantsModuel from "../constants";
 
 describe("processor tst", () => {
+  describe("filterTitleList", () => {
+    it("should return correct title list", () => {
+      expect(
+        filterTitleList(
+          [
+            { width: "50px", title: "a" },
+            { width: "100px", title: "b" },
+            { title: "Setting" },
+          ],
+          false
+        )
+      ).toEqual([
+        { width: "50px", title: "a" },
+        { width: "100px", title: "b" },
+        { title: "Setting" },
+      ]);
+
+      expect(
+        filterTitleList(
+          [
+            { width: "50px", title: "a" },
+            { width: "100px", title: "b" },
+            { title: "Setting" },
+          ],
+          true
+        )
+      ).toEqual([
+        { width: "50px", title: "a" },
+        { width: "100px", title: "b" },
+      ]);
+    });
+  });
+
   describe("getGridTemplateColumns", () => {
     it("should return correct value", () => {
       const result = getGridTemplateColumns([
