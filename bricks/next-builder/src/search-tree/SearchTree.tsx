@@ -11,6 +11,7 @@ import {
 } from "../shared/storyboard/buildStoryboard";
 
 interface SearchTreeProps {
+  homepage: string;
   appId: string;
   projectId: string;
   tableData: StoryboardAssemblyResult;
@@ -260,6 +261,7 @@ function filter(
 export function SearchTree(props: SearchTreeProps): React.ReactElement {
   const {
     tableData,
+    homepage,
     appId,
     projectId,
     allowKeySearch = true,
@@ -297,13 +299,13 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
       let url = "";
       if (nodeData[NODE_INFO].name) {
         // template
-        url = `/next/next-builder/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO]?.realParentId}/visualize-builder?fullscreen=1`;
+        url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO]?.realParentId}/visualize-builder?fullscreen=1`;
       } else if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
         // brick
-        url = `/next/next-builder/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO]?.realParentId}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
+        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO]?.realParentId}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
       } else {
         // page
-        url = `/next/next-builder/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO]?.realParentId}&fullscreen=1&canvasIndex=0`;
+        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO]?.realParentId}&fullscreen=1&canvasIndex=0`;
       }
       nodeData[NODE_INFO].url = url;
       return (

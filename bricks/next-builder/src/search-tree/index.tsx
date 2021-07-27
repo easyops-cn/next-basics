@@ -32,7 +32,16 @@ export class SearchTreeElement extends UpdatingElement {
    * @kind string
    * @required true
    * @default -
-   * @description 指定的应用 Id
+   * @description 指定的应用 homepage
+   */
+  @property()
+  homepage: string;
+
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 指定的应用 appId
    */
   @property()
   appId: string;
@@ -41,7 +50,7 @@ export class SearchTreeElement extends UpdatingElement {
    * @kind string
    * @required true
    * @default -
-   * @description 指定的应用 Id
+   * @description 指定的应用 projectId
    */
   @property()
   projectId: string;
@@ -91,6 +100,7 @@ export class SearchTreeElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <SearchTree
+            homepage={this.homepage}
             appId={this.appId}
             projectId={this.projectId}
             tableData={this.dataSource}
