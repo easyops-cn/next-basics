@@ -1,6 +1,0 @@
-// 关于打包的操作
-1. 打开url
-https://admin.easyops.local/app/5aa08fec51fee/pipeline/2ddd8ce833e8b2039a35b1fc4640c128/execute
-
-输入NA版本号, NB版本号, 如果模型有修改, 需要加 -R
-例子: next-builder-NA:1.76.0 next-builder-R:1.76.0 next-builder-NB:1.61.5

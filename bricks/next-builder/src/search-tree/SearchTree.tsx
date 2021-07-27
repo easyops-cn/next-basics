@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { cloneDeep, throttle, isEmpty } from "lodash";
 import { Tree } from "antd";
 import { NodeMouseEventParams } from "rc-tree/lib/contextTypes";
-// import mockJSON from "./data.json";
-// import { mockData } from "./mockData";
 import { GeneralInput } from "../../../forms/src/general-input/GeneralInput";
 import { isObject } from "@next-core/brick-utils";
 import { StoryboardAssemblyResult } from "../shared/storyboard/interfaces";
