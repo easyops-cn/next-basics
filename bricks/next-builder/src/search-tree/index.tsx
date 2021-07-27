@@ -1,7 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  UpdatingElement,
+  property,
+  event,
+  EventEmitter,
+} from "@next-core/brick-kit";
 import { SearchTree } from "./SearchTree";
+import { StoryboardAssemblyResult } from "../shared/storyboard/interfaces";
 
 /**
  * @id next-builder.search-tree
@@ -21,6 +28,59 @@ export class SearchTreeElement extends UpdatingElement {
     this._render();
   }
 
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 指定的应用 Id
+   */
+  @property()
+  appId: string;
+
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 指定的应用 Id
+   */
+  @property()
+  projectId: string;
+
+  /**
+   * @default -
+   * @required true
+   * @description 搜索树数据
+   */
+  @property()
+  dataSource: StoryboardAssemblyResult;
+
+  /**
+   * @detail unknow
+   * @description 点击节点数据
+   */
+  @event({ type: "node.click" }) clickEvent: EventEmitter;
+  private _handleTitleClick = (node: any): void => {
+    this.clickEvent.emit(node);
+  };
+
+  /**
+   * @detail unknow
+   * @description 点击节点数据
+   */
+  @event({ type: "node.focus" }) focusEvent: EventEmitter;
+  private _handleTitleFocus = (node: any): void => {
+    this.focusEvent.emit(node);
+  };
+
+  /**
+   * @detail unknow
+   * @description 点击节点数据
+   */
+  @event({ type: "node.blur" }) blurEvent: EventEmitter;
+  private _handleTitleBlur = (node: any): void => {
+    this.blurEvent.emit(node);
+  };
+
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
   }
@@ -30,7 +90,14 @@ export class SearchTreeElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <SearchTree />
+          <SearchTree
+            appId={this.appId}
+            projectId={this.projectId}
+            tableData={this.dataSource}
+            titleClick={this._handleTitleClick}
+            titleFocus={this._handleTitleFocus}
+            titleBlur={this._handleTitleBlur}
+          />
         </BrickWrapper>,
         this
       );
