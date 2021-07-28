@@ -8,7 +8,7 @@ module.exports = sizeLimit({
     "brick-visualization": "430 KB",
     developers: "205 KB",
     forms: "225 KB",
-    "next-builder": "340 KB",
+    "next-builder": "360 KB",
   },
   templates: {
     "*": "5 KB",
