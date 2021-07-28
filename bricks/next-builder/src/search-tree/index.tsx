@@ -64,6 +64,15 @@ export class SearchTreeElement extends UpdatingElement {
   dataSource: StoryboardAssemblyResult;
 
   /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 树高度
+   */
+  @property()
+  height: number;
+
+  /**
    * @detail unknow
    * @description 点击节点数据
    */
@@ -103,7 +112,8 @@ export class SearchTreeElement extends UpdatingElement {
             homepage={this.homepage}
             appId={this.appId}
             projectId={this.projectId}
-            tableData={this.dataSource}
+            treeData={this.dataSource}
+            height={this.height}
             titleClick={this._handleTitleClick}
             titleFocus={this._handleTitleFocus}
             titleBlur={this._handleTitleBlur}
