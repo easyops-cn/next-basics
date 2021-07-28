@@ -78,7 +78,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
       nodeData[NODE_INFO].url = url;
       return (
         <a style={style} href={url}>
-          {getTitle(nodeData[NODE_INFO])}
+          {getTitle(nodeData[NODE_INFO]) || nodeData.title}
         </a>
       );
     }
@@ -107,7 +107,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
           showIcon={true}
           treeData={tree}
           virtual={true}
-          height={height}
+          height={Number(height)}
           titleRender={titleRender}
           onSelect={onSelect}
           onMouseEnter={onMouseEnter}
