@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.64.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.63.0...@next-bricks/next-builder@1.64.0) (2021-07-29)
+
+
+### Bug Fixes
+
+* slient errors when scanning contexts ([835d194](https://github.com/easyops-cn/next-basics/commit/835d1949766757560f94797303792ce38d9ba755))
+
+
+### Features
+
+* **search-tree:** add height desc ([5afb195](https://github.com/easyops-cn/next-basics/commit/5afb1955e73e8fece281e786567f542def70f929))
+* **search-tree:** add search-tree unit test ([e3a051d](https://github.com/easyops-cn/next-basics/commit/e3a051d587285164182e3844155ea2ef3be4b4c8))
+* **search-tree:** build base tree ([1b1e73a](https://github.com/easyops-cn/next-basics/commit/1b1e73a647af4cdbf8115910c0935786b83e2a3a))
+* **search-tree:** delete mock file ([5998e5c](https://github.com/easyops-cn/next-basics/commit/5998e5cf24ead823ec6a08de9338a1c184b2e805))
+* **search-tree:** homepage use for props ([0e2a950](https://github.com/easyops-cn/next-basics/commit/0e2a95096aa6bcd51d622f80089a837e0d337b91))
+* **search-tree:** support allowKeySearch ([46d463c](https://github.com/easyops-cn/next-basics/commit/46d463cbaa0a7db3f761754b83eff3cfea05dc61))
+* **search-tree:** support href ([076dadd](https://github.com/easyops-cn/next-basics/commit/076dadda2c45d3687bbfa867ff84b549f2b45f8c))
+* **search-tree:** support href to jump ([fbb5909](https://github.com/easyops-cn/next-basics/commit/fbb590950023d129fae9a8512ed708038eadb642))
+* **search-tree:** support search ([e307ad6](https://github.com/easyops-cn/next-basics/commit/e307ad6f3685bc0e59c0ea9de0223d8012b0c450))
+* **search-tree:** support searchConifg for search-tree ([250a632](https://github.com/easyops-cn/next-basics/commit/250a6323dcd822b5096e6ea08ec86d1e550c594a))
+* **search-tree:** unit test update ([988f16c](https://github.com/easyops-cn/next-basics/commit/988f16cab46c99ee4c07864ebcb39cfb9ac12ead))
+* **search-tree:** update utils ([9d86962](https://github.com/easyops-cn/next-basics/commit/9d86962bf0611cd20f66200caeeb6150bf8b18c5))
+
+
+
+
+
 # [1.63.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.5...@next-bricks/next-builder@1.63.0) (2021-07-23)
 
 
