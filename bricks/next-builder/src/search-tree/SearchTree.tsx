@@ -74,7 +74,6 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
   const [tree, setTree] = useState(baseTree);
 
   const setFilterTree = throttle((filterValue) => {
-    // console.time('filterTree');
     if (filterValue !== "") {
       const result = filter(cloneDeep(baseTree), filterValue, {
         allowKeySearch,
@@ -83,7 +82,6 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     } else {
       setTree(baseTree);
     }
-    // console.timeEnd('filterTree');
   }, 1000);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
