@@ -480,15 +480,70 @@ describe("fitler should work", () => {
         },
       ],
     ],
-    ["name", []],
   ])("%s should return %p", (value, result) => {
-    expect(filter(treeData, value, {})).toEqual(result);
+    expect(filter(treeData, value)).toEqual(result);
   });
 
-  it("allowKeySearch should work", () => {
+  it("filter deep", () => {
+    const deepData = {
+      routes: [
+        {
+          bricks: [
+            {
+              brick: "general-button",
+              events: {
+                "general.button.click": [
+                  {
+                    args: [
+                      {
+                        instanceId: "${projectId}",
+                      },
+                    ],
+                    callback: {
+                      error: [
+                        {
+                          action: "handleHttpError",
+                        },
+                      ],
+                      success: [
+                        {
+                          action: "message.success",
+                          args: ["Export Success"],
+                        },
+                      ],
+                    },
+                    method: "executeWithArgs",
+                    useProvider:
+                      "providers-of-next-builder.permission-api-export-permissions",
+                  },
+                ],
+              },
+              properties: {
+                test: 1,
+              },
+              [symbolForNodeInstanceId]: "123123",
+              [symbolForNodeId]: "B-02",
+              path: "${APP.homepage}/test-1",
+            },
+          ],
+          [symbolForNodeId]: "B-01",
+          type: "bricks",
+        },
+      ],
+    };
+    const deepTree = buildTree(deepData);
+    expect(filter(deepTree, "handleHttpError").length).toBe(1);
+    expect(filter(deepTree, "Export Success").length).toBe(1);
+  });
+});
+
+describe("searchConfig should work", () => {
+  const treeData = buildTree(mockData);
+
+  it("supportKey should work", () => {
     expect(
       filter(treeData, "name", {
-        allowKeySearch: true,
+        supportKey: true,
       })
     ).toEqual([
       {
@@ -568,18 +623,41 @@ describe("fitler should work", () => {
         title: "meta",
       },
     ]);
+    expect(
+      filter(treeData, "name", {
+        supportKey: false,
+      })
+    ).toEqual([]);
+  });
+
+  it("supportKey should work", () => {
+    expect(
+      filter(treeData, "general-", {
+        supportFuzzy: true,
+      }).length
+    ).toBe(1);
+    expect(
+      filter(treeData, "general-", {
+        supportFuzzy: false,
+      }).length
+    ).toBe(0);
+  });
+
+  it("supportKey should work", () => {
+    expect(
+      filter(treeData, "GENERAL-BUTTON", {
+        supportIngoreCase: true,
+      }).length
+    ).toBe(1);
+    expect(
+      filter(treeData, "GENERAL-BUTTON", {
+        supportIngoreCase: false,
+      }).length
+    ).toBe(0);
   });
 });
 
 describe("clone should work", () => {
-  const mockObj = {
-    a: "123",
-    b: {
-      c: "234",
-      d: "345",
-    },
-  };
-
   it.each([
     [
       "normal",

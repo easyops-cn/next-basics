@@ -60,7 +60,7 @@ export class SearchTreeElement extends UpdatingElement {
    * @required true
    * @description 搜索树数据
    */
-  @property()
+  @property({ attribute: false })
   dataSource: StoryboardAssemblyResult;
 
   /**
@@ -69,7 +69,7 @@ export class SearchTreeElement extends UpdatingElement {
    * @default -
    * @description 树高度, 设置高度可以控制Tree开启虚拟渲染模式, 不会因为storyBoard同时展开全部节点, DOM过多导致的页面卡顿
    */
-  @property()
+  @property({ type: Number })
   height: number;
 
   /**
@@ -80,6 +80,39 @@ export class SearchTreeElement extends UpdatingElement {
   private _handleTitleClick = (node: any): void => {
     this.clickEvent.emit(node);
   };
+
+  /**
+   * @default true
+   * @required false
+   * @description 支持 key 搜索
+   */
+  @property({
+    type: Boolean,
+    attribute: false,
+  })
+  supportKey = true;
+
+  /**
+   * @default true
+   * @required false
+   * @description 支持 忽略大小写 搜索
+   */
+  @property({
+    type: Boolean,
+    attribute: false,
+  })
+  supportIngoreCase = true;
+
+  /**
+   * @default true
+   * @required false
+   * @description 支持 模糊 搜索
+   */
+  @property({
+    type: Boolean,
+    attribute: false,
+  })
+  supportFuzzy = true;
 
   /**
    * @detail unknow
@@ -114,6 +147,11 @@ export class SearchTreeElement extends UpdatingElement {
             projectId={this.projectId}
             treeData={this.dataSource}
             height={this.height}
+            searchConfig={{
+              supportKey: this.supportKey,
+              supportIngoreCase: this.supportIngoreCase,
+              supportFuzzy: this.supportFuzzy,
+            }}
             titleClick={this._handleTitleClick}
             titleFocus={this._handleTitleFocus}
             titleBlur={this._handleTitleBlur}

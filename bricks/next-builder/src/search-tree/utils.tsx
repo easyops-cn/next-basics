@@ -97,13 +97,19 @@ let isParentRouteLock = false;
 export interface PlainObject extends Object {
   [key: string]: any;
 }
-interface filterOption {
-  allowKeySearch?: boolean;
-}
 interface builTreeOptions {
   parentPath?: string;
   parentId?: string;
   isSlots?: boolean;
+}
+
+export interface SearchConfig {
+  /** 根据key值搜索 */
+  supportKey?: boolean;
+  /** 支持模糊搜索 */
+  supportFuzzy?: boolean;
+  /** 支持忽略大小写搜索 */
+  supportIngoreCase?: boolean;
 }
 
 function getType(item: PlainObject): keyof typeof iconTypeConstants {
@@ -140,7 +146,7 @@ function getTypeIcon(type: keyof typeof iconTypeConstants) {
 export function clone(obj: PlainObject) {
   const newObj: PlainObject = Object.create(null);
   for (const [k, v] of Object.entries(obj)) {
-    if (!ingoreKey.includes(k)) {
+    if (![...ingoreKey, "routes"].includes(k)) {
       newObj[k] = v;
     }
   }
@@ -152,13 +158,14 @@ export function clone(obj: PlainObject) {
 
 export function getTitle(item: PlainObject, defaultKey?: string): string {
   return (
-    item?.menuId ||
-    item?.brick ||
-    item?.alias ||
-    item?.path ||
-    item?.name ||
-    item?.type ||
-    item?.title ||
+    (item &&
+      (item.menuId ||
+        item.brick ||
+        item.alias ||
+        item.path ||
+        item.name ||
+        item.type ||
+        item.title)) ||
     defaultKey
   );
 }
@@ -206,7 +213,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
   const tree: Array<PlainObject> = [];
   let isSlots = false;
 
-  for (const key in treeData) {
+  for (const key of Object.keys(treeData)) {
     if (supportKey.includes(key) || options?.isSlots) {
       let isParentRoutes = false;
       let parentId = options?.parentId ?? "";
@@ -272,13 +279,30 @@ export function buildTree(treeData: PlainObject | Array<PlainObject>) {
 export function filter(
   tree: PlainObject | Array<PlainObject>,
   text: string,
-  options: filterOption
+  config: SearchConfig = {
+    supportKey: true,
+    supportFuzzy: true,
+    supportIngoreCase: true,
+  }
 ) {
+  const isEqual = (v: string): boolean => {
+    let a = v;
+    let b = text;
+    if (config.supportIngoreCase) {
+      a = v.toLocaleLowerCase();
+      b = text.toLocaleLowerCase();
+    }
+    if (config.supportFuzzy) {
+      return a.includes(b);
+    } else {
+      return a === b;
+    }
+  };
   const filterNode = (item: PlainObject | string, text: string): boolean => {
     if (isObject(item) && item) {
       for (const [k, v] of Object.entries(item)) {
         if (!["children", "key", "icon", HIGHTLIGHT].includes(k)) {
-          if (options?.allowKeySearch && k.indexOf(text) >= 0) {
+          if (config.supportKey && isEqual(k)) {
             item[HIGHTLIGHT] = true;
             return true;
           }
@@ -294,19 +318,19 @@ export function filter(
                   item[HIGHTLIGHT] = true;
                   return true;
                 }
-              } else if (typeof v[i] === "string" && v[i].indexOf(text) >= 0) {
+              } else if (typeof v[i] === "string" && isEqual(v[i])) {
                 item[HIGHTLIGHT] = true;
                 return true;
               }
             }
-          } else if (typeof v === "string" && v.indexOf(text) >= 0) {
+          } else if (typeof v === "string" && isEqual(v)) {
             item[HIGHTLIGHT] = true;
             return true;
           }
         }
       }
     } else {
-      return typeof item === "string" && item.indexOf(text) >= 0;
+      return typeof item === "string" && isEqual(item);
     }
   };
 

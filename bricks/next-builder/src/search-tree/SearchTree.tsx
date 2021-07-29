@@ -10,6 +10,7 @@ import {
   NODE_INFO,
   getTitle,
   PlainObject,
+  SearchConfig,
 } from "./utils";
 import { symbolForNodeInstanceId } from "../shared/storyboard/buildStoryboard";
 
@@ -18,8 +19,8 @@ export interface SearchTreeProps {
   appId: string;
   projectId: string;
   treeData: StoryboardAssemblyResult;
-  allowKeySearch?: boolean;
   height?: number;
+  searchConfig: SearchConfig;
   titleClick?: (node: any) => void;
   titleFocus?: (node: any) => void;
   titleBlur?: (node: any) => void;
@@ -63,21 +64,19 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     homepage,
     appId,
     projectId,
-    allowKeySearch = true,
     height,
+    searchConfig,
     titleClick,
     titleFocus,
     titleBlur,
   } = props;
   const [value, setValue] = useState("");
-  const baseTree = buildTree(treeData?.storyboard ?? []);
+  const baseTree = buildTree(treeData?.storyboard);
   const [tree, setTree] = useState(baseTree);
 
   const setFilterTree = throttle((filterValue) => {
     if (filterValue !== "") {
-      const result = filter(cloneDeep(baseTree), filterValue, {
-        allowKeySearch,
-      });
+      const result = filter(cloneDeep(baseTree), filterValue, searchConfig);
       setTree(result);
     } else {
       setTree(baseTree);
