@@ -67,7 +67,7 @@ export class SearchTreeElement extends UpdatingElement {
    * @kind number
    * @required false
    * @default -
-   * @description 树高度
+   * @description 树高度, 设置高度可以控制Tree开启虚拟渲染模式, 不会因为storyBoard同时展开全部节点, DOM过多导致的页面卡顿
    */
   @property()
   height: number;

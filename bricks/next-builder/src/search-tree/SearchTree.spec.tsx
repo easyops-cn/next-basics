@@ -2,8 +2,8 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Tree, Input } from "antd";
-import { NODE_INFO } from "./utils";
-import { SearchTree, SearchTreeProps } from "./SearchTree";
+import { NODE_INFO, HIGHTLIGHT } from "./utils";
+import { SearchTree, titleRender, SearchTreeProps } from "./SearchTree";
 import {
   symbolForNodeId,
   symbolForNodeInstanceId,
@@ -261,5 +261,90 @@ describe("SearchTree", () => {
       expect(wrapper.html().indexOf("general-button")).toBe(-1);
       expect(wrapper.html().indexOf("general-select")).toBe(-1);
     });
+  });
+});
+
+describe("titleRender", () => {
+  it.each([
+    [
+      "template",
+      Object.assign({}, baseProps, {
+        nodeData: {
+          [NODE_INFO]: {
+            name: "tpl-test-1",
+            realParentId: "B-01",
+          },
+        },
+      }),
+      /* eslint-disable react/jsx-key */
+      <a
+        style={{ background: null }}
+        href="/next-builder/project/abc/app/next-builder/template/B-01/visualize-builder?fullscreen=1"
+      >
+        tpl-test-1
+      </a>,
+    ],
+    [
+      "brick",
+      Object.assign({}, baseProps, {
+        nodeData: {
+          [NODE_INFO]: {
+            brick: "general-button",
+            realParentId: "B-01",
+            [symbolForNodeInstanceId]: "B-02",
+          },
+        },
+      }),
+      /* eslint-disable react/jsx-key */
+      <a
+        style={{ background: null }}
+        href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0#brick,B-02"
+      >
+        general-button
+      </a>,
+    ],
+    [
+      "page",
+      Object.assign({}, baseProps, {
+        nodeData: {
+          [NODE_INFO]: {
+            alias: "pagetest",
+            realParentId: "B-01",
+          },
+        },
+      }),
+      /* eslint-disable react/jsx-key */
+      <a
+        style={{ background: null }}
+        href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0"
+      >
+        pagetest
+      </a>,
+    ],
+    [
+      "normal",
+      Object.assign({}, baseProps, {
+        nodeData: {
+          title: "title-test",
+          [NODE_INFO]: {},
+        },
+      }),
+      /* eslint-disable react/jsx-key */
+      <span style={{ background: null }}>title-test</span>,
+    ],
+    [
+      "hight",
+      Object.assign({}, baseProps, {
+        nodeData: {
+          title: "hightlighttest",
+          [HIGHTLIGHT]: true,
+          [NODE_INFO]: {},
+        },
+      }),
+      /* eslint-disable react/jsx-key */
+      <span style={{ background: "yellow" }}>hightlighttest</span>,
+    ],
+  ])("%s", (_condition, params, result) => {
+    expect(titleRender(params)).toEqual(result);
   });
 });

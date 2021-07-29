@@ -25,6 +25,38 @@ export interface SearchTreeProps {
   titleBlur?: (node: any) => void;
 }
 
+export const titleRender = (props: {
+  homepage: string;
+  appId: string;
+  projectId: string;
+  nodeData: PlainObject;
+}) => {
+  const { homepage, appId, projectId, nodeData } = props;
+  const style = {
+    background: nodeData[HIGHTLIGHT] ? "yellow" : null,
+  };
+  if (nodeData[NODE_INFO]?.realParentId) {
+    let url = "";
+    if (nodeData[NODE_INFO].name) {
+      // template
+      url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO].realParentId}/visualize-builder?fullscreen=1`;
+    } else if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
+      // brick
+      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO].realParentId}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
+    } else {
+      // page
+      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO].realParentId}&fullscreen=1&canvasIndex=0`;
+    }
+    nodeData[NODE_INFO].url = url;
+    return (
+      <a style={style} href={url}>
+        {getTitle(nodeData[NODE_INFO]) || nodeData.title}
+      </a>
+    );
+  }
+  return <span style={style}>{nodeData.title}</span>;
+};
+
 export function SearchTree(props: SearchTreeProps): React.ReactElement {
   const {
     treeData,
@@ -59,40 +91,22 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     setFilterTree(event.target.value.trim());
   };
 
-  const titleRender = (nodeData: PlainObject) => {
-    const style = {
-      background: nodeData[HIGHTLIGHT] ? "yellow" : null,
-    };
-    if (nodeData?.[NODE_INFO]?.realParentId) {
-      let url = "";
-      if (nodeData[NODE_INFO].name) {
-        // template
-        url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO].realParentId}/visualize-builder?fullscreen=1`;
-      } else if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
-        // brick
-        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO].realParentId}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
-      } else {
-        // page
-        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO].realParentId}&fullscreen=1&canvasIndex=0`;
-      }
-      nodeData[NODE_INFO].url = url;
-      return (
-        <a style={style} href={url}>
-          {getTitle(nodeData[NODE_INFO])}
-        </a>
-      );
-    }
-    return <span style={style}>{nodeData.title}</span>;
-  };
+  const renderTitle = (nodeData: PlainObject) =>
+    titleRender({
+      homepage,
+      appId,
+      projectId,
+      nodeData,
+    });
 
   const onSelect = (_selectedKeys: React.Key[], item: any) =>
-    titleClick?.(item?.node?.[NODE_INFO]);
+    titleClick?.(item.node[NODE_INFO]);
 
   const onMouseEnter = (info: NodeMouseEventParams) =>
-    titleFocus?.((info?.node as any)?.[NODE_INFO]);
+    titleFocus?.((info.node as any)[NODE_INFO]);
 
   const onMouseLeave = (info: NodeMouseEventParams) =>
-    titleBlur?.((info?.node as any)?.[NODE_INFO]);
+    titleBlur?.((info.node as any)[NODE_INFO]);
 
   return (
     <div>
@@ -107,8 +121,8 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
           showIcon={true}
           treeData={tree}
           virtual={true}
-          height={height}
-          titleRender={titleRender}
+          height={Number(height)}
+          titleRender={renderTitle}
           onSelect={onSelect}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}

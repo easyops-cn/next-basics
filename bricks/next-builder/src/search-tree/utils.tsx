@@ -92,14 +92,11 @@ const supportKey = [
   "main",
 ];
 
-const objPropKeys = ["properties", "transform", "events", "context"];
-
 let isParentRouteLock = false;
 
 export interface PlainObject extends Object {
   [key: string]: any;
 }
-
 interface filterOption {
   allowKeySearch?: boolean;
 }
@@ -140,13 +137,10 @@ function getTypeIcon(type: keyof typeof iconTypeConstants) {
   }
 }
 
-function clone(obj: PlainObject) {
+export function clone(obj: PlainObject) {
   const newObj: PlainObject = Object.create(null);
   for (const [k, v] of Object.entries(obj)) {
-    if (
-      ["string", "boolean", "number"].includes(typeof v) ||
-      objPropKeys.includes(k)
-    ) {
+    if (!ingoreKey.includes(k)) {
       newObj[k] = v;
     }
   }
@@ -230,7 +224,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
         key: path,
         icon: getTypeIcon(getType(treeData[key])),
         [NODE_INFO]: clone({
-          ...treeData[key],
+          // ...treeData[key],
           realParentId: parentId,
         }),
       };
