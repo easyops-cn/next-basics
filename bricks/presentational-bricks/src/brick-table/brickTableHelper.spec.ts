@@ -1,10 +1,11 @@
 import {
+  compareFunMap,
   getCellStyle,
   getKeysOfData,
   getRowsOfData,
   stripEmptyExpandableChildrenByName,
 } from "./brickTableHelper";
-import { cloneDeep } from "lodash";
+import { cloneDeep, isEqual } from "lodash";
 
 describe("getCellStyle processor", () => {
   it("should match correct color affect current columns", () => {
@@ -303,5 +304,38 @@ describe("stripEmptyExpandableChildrenByName", () => {
   it("should empty array when input data is undefined", () => {
     const result = stripEmptyExpandableChildrenByName("wrongName", undefined);
     expect(result).toEqual([]);
+  });
+
+  it("should work with compareFunMap", () => {
+    expect(compareFunMap["$eq"]("some value", "some value")).toBeTruthy();
+    expect(compareFunMap["$eq"]("some value", "some value diff")).toBeFalsy();
+    expect(compareFunMap["$ne"]("some value", "some value")).toBeFalsy();
+    expect(compareFunMap["$ne"]("some value", "some value diff")).toBeTruthy();
+    expect(compareFunMap["$isEqual"]("some value", "some value")).toBeTruthy();
+    expect(
+      compareFunMap["$isEqual"]("some value", "some value diff")
+    ).toBeFalsy();
+    expect(compareFunMap["$notEqual"]("some value", "some value")).toBeFalsy();
+    expect(
+      compareFunMap["$notEqual"]("some value", "some value diff")
+    ).toBeTruthy();
+    expect(compareFunMap["$gt"](10, 1)).toBeTruthy();
+    expect(compareFunMap["$gt"](10, 20)).toBeFalsy();
+    expect(compareFunMap["$lt"](1, 10)).toBeTruthy();
+    expect(compareFunMap["$lt"](20, 10)).toBeFalsy();
+    expect(compareFunMap["$gte"](10, 10)).toBeTruthy();
+    expect(compareFunMap["$gte"](10, 1)).toBeTruthy();
+    expect(compareFunMap["$gte"](10, 20)).toBeFalsy();
+    expect(compareFunMap["$lte"](1, 10)).toBeTruthy();
+    expect(compareFunMap["$lte"](10, 10)).toBeTruthy();
+    expect(compareFunMap["$lte"](20, 10)).toBeFalsy();
+    expect(compareFunMap["$in"]([1, 2, 3], 1)).toBeTruthy();
+    expect(compareFunMap["$in"]([1, 2, 3], "4")).toBeFalsy();
+    expect(compareFunMap["$nin"]([1, 2, 3], 1)).toBeFalsy();
+    expect(compareFunMap["$nin"]([1, 2, 3], "4")).toBeTruthy();
+    expect(compareFunMap["$exists"](true, undefined)).toBeFalsy();
+    expect(compareFunMap["$exists"](true, null)).toBeTruthy();
+    expect(compareFunMap["$exists"](false, undefined)).toBeTruthy();
+    expect(compareFunMap["$exists"](false, null)).toBeFalsy();
   });
 });

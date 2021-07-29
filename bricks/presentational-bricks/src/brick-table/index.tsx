@@ -51,7 +51,18 @@ import { BrickWrapperConfig } from "../interfaces";
 export interface RowDisabledProps {
   field: string;
   value: any;
-  operator: "$eq" | "$ne" | "$lt" | "$lte" | "$gt" | "$gte" | "$isEqual";
+  operator:
+    | "$eq"
+    | "$ne"
+    | "$lt"
+    | "$lte"
+    | "$gt"
+    | "$gte"
+    | "$isEqual"
+    | "$notEqual"
+    | "$in"
+    | "$nin"
+    | "$exists";
 }
 
 export interface CustomColumnComponent {
