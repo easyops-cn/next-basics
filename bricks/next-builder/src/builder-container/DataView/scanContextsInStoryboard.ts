@@ -42,24 +42,35 @@ function collectContexts(
 ): void {
   if (typeof data === "string") {
     if (data.includes(CTX) && isEvaluable(data)) {
-      preevaluate(data, {
-        visitors: {
-          MemberExpression: (node: MemberExpression, state, callback) => {
-            if (node.object.type === "Identifier" && node.object.name === CTX) {
-              if (!node.computed && node.property.type === "Identifier") {
-                readContexts.add(node.property.name);
-              } else if (
-                node.computed &&
-                (node.property as any).type === "Literal" &&
-                typeof (node.property as any).value === "string"
+      try {
+        preevaluate(data, {
+          visitors: {
+            MemberExpression: (node: MemberExpression, state, callback) => {
+              if (
+                node.object.type === "Identifier" &&
+                node.object.name === CTX
               ) {
-                readContexts.add((node.property as any).value);
+                if (!node.computed && node.property.type === "Identifier") {
+                  readContexts.add(node.property.name);
+                } else if (
+                  node.computed &&
+                  (node.property as any).type === "Literal" &&
+                  typeof (node.property as any).value === "string"
+                ) {
+                  readContexts.add((node.property as any).value);
+                }
               }
-            }
-            PrecookVisitor.MemberExpression(node, state, callback);
+              PrecookVisitor.MemberExpression(node, state, callback);
+            },
           },
-        },
-      });
+        });
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(
+          "Parse evaluation string failed when scanning contexts:",
+          error
+        );
+      }
     }
   } else if (isObject(data)) {
     // Avoid call stack overflow.

@@ -4,7 +4,15 @@ import {
   scanContextsInAny,
 } from "./scanContextsInStoryboard";
 
+const consoleError = jest
+  .spyOn(console, "error")
+  .mockImplementation(() => void 0);
+
 describe("scanContextsInStoryboard", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should work", () => {
     const selfRef: Record<string, any> = {
       quality: "good",
@@ -27,6 +35,7 @@ describe("scanContextsInStoryboard", () => {
                   notRelevant: "<% some.any %>",
                   bad: "CTX.bad1()",
                   bad3: "<% CTX[bad3] %>",
+                  bad4: "<% CTX.bad4( %>",
                 },
               },
             ],
@@ -87,6 +96,7 @@ describe("scanContextsInStoryboard", () => {
       "good7",
       "good8",
     ]);
+    expect(consoleError).toBeCalledTimes(1);
   });
 });
 
