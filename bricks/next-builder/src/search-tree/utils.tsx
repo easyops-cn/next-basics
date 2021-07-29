@@ -306,14 +306,9 @@ export function filter(
             item[HIGHTLIGHT] = true;
             return true;
           }
-          if (v && isObject(v)) {
-            if (filterNode(v, text)) {
-              item[HIGHTLIGHT] = true;
-              return true;
-            }
-          } else if (Array.isArray(v)) {
+          if (Array.isArray(v)) {
             for (let i = 0; i < v.length; i++) {
-              if (typeof v[i] === "object") {
+              if (isObject(v[i])) {
                 if (filterNode(v[i], text)) {
                   item[HIGHTLIGHT] = true;
                   return true;
@@ -322,6 +317,11 @@ export function filter(
                 item[HIGHTLIGHT] = true;
                 return true;
               }
+            }
+          } else if (isObject(v)) {
+            if (filterNode(v, text)) {
+              item[HIGHTLIGHT] = true;
+              return true;
             }
           } else if (typeof v === "string" && isEqual(v)) {
             item[HIGHTLIGHT] = true;

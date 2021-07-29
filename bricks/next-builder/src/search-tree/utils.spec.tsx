@@ -491,33 +491,31 @@ describe("fitler should work", () => {
           bricks: [
             {
               brick: "general-button",
-              events: {
-                "general.button.click": [
-                  {
-                    args: [
+              events: [
+                {
+                  args: [
+                    {
+                      instanceId: "${projectId}",
+                    },
+                  ],
+                  callback: {
+                    error: [
                       {
-                        instanceId: "${projectId}",
+                        action: "handleHttpError",
                       },
                     ],
-                    callback: {
-                      error: [
-                        {
-                          action: "handleHttpError",
-                        },
-                      ],
-                      success: [
-                        {
-                          action: "message.success",
-                          args: ["Export Success"],
-                        },
-                      ],
-                    },
-                    method: "executeWithArgs",
-                    useProvider:
-                      "providers-of-next-builder.permission-api-export-permissions",
+                    success: [
+                      {
+                        action: "message.success",
+                        args: ["Export Success"],
+                      },
+                    ],
                   },
-                ],
-              },
+                  method: "executeWithArgs",
+                  useProvider:
+                    "providers-of-next-builder.permission-api-export-permissions",
+                },
+              ],
               properties: {
                 test: 1,
               },
