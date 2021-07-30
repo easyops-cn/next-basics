@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.65.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.64.0...@next-bricks/next-builder@1.65.0) (2021-07-30)
+
+
+### Features
+
+* **search-tree:** change the key to symbol key ([626aeab](https://github.com/easyops-cn/next-basics/commit/626aeab440ccf2230bf410c98811a9a05ce4a9d6))
+* **search-tree:** set slots unlink ([017d4c6](https://github.com/easyops-cn/next-basics/commit/017d4c6b130f39bac4174d529e9130f078f89e30))
+* **search-tree:** unit test update ([1b35ee0](https://github.com/easyops-cn/next-basics/commit/1b35ee021cff9d3435c4217af6b29618b86cd046))
+
+
+
+
+
 # [1.64.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.63.0...@next-bricks/next-builder@1.64.0) (2021-07-29)
 
 
