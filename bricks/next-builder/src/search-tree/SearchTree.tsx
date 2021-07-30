@@ -6,7 +6,8 @@ import { StoryboardAssemblyResult } from "../shared/storyboard/interfaces";
 import {
   filter,
   buildTree,
-  HIGHTLIGHT,
+  symbolForHightlight,
+  symbolForRealParentId,
   NODE_INFO,
   getTitle,
   PlainObject,
@@ -34,21 +35,21 @@ export const titleRender = (props: {
 }) => {
   const { homepage, appId, projectId, nodeData } = props;
   const style = {
-    background: nodeData[HIGHTLIGHT] ? "yellow" : null,
+    background: nodeData[symbolForHightlight as any] ? "yellow" : null,
   };
-  if (nodeData[NODE_INFO]?.realParentId) {
+  if (nodeData[NODE_INFO]?.[symbolForRealParentId]) {
     let url = "";
     if (nodeData[NODE_INFO].name) {
       // template
-      url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO].realParentId}/visualize-builder?fullscreen=1`;
+      url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO][symbolForRealParentId]}/visualize-builder?fullscreen=1`;
     } else if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
       // brick
-      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO].realParentId}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
+      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
     } else {
       // page
-      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO].realParentId}&fullscreen=1&canvasIndex=0`;
+      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0`;
     }
-    nodeData[NODE_INFO].url = url;
+    nodeData.url = url;
     return (
       <a style={style} href={url}>
         {getTitle(nodeData[NODE_INFO]) || nodeData.title}
@@ -97,13 +98,22 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     });
 
   const onSelect = (_selectedKeys: React.Key[], item: any) =>
-    titleClick?.(item.node[NODE_INFO]);
+    titleClick?.({
+      info: item.node[NODE_INFO],
+      url: item.node.url,
+    });
 
   const onMouseEnter = (info: NodeMouseEventParams) =>
-    titleFocus?.((info.node as any)[NODE_INFO]);
+    titleFocus?.({
+      info: (info.node as PlainObject)[NODE_INFO],
+      url: (info.node as PlainObject).url,
+    });
 
   const onMouseLeave = (info: NodeMouseEventParams) =>
-    titleBlur?.((info.node as any)[NODE_INFO]);
+    titleBlur?.({
+      info: (info.node as PlainObject)[NODE_INFO],
+      url: (info.node as PlainObject).url,
+    });
 
   return (
     <div>

@@ -2,7 +2,7 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Tree, Input } from "antd";
-import { NODE_INFO, HIGHTLIGHT } from "./utils";
+import { NODE_INFO, symbolForHightlight, symbolForRealParentId } from "./utils";
 import { SearchTree, titleRender, SearchTreeProps } from "./SearchTree";
 import {
   symbolForNodeId,
@@ -161,7 +161,7 @@ describe("SearchTree", () => {
         event: null,
         node: {
           [NODE_INFO]: {
-            relParentId: "id-1",
+            [symbolForRealParentId]: "id-1",
           },
         },
       });
@@ -169,29 +169,40 @@ describe("SearchTree", () => {
         event: null,
         node: {
           [NODE_INFO]: {
-            relParentId: "id-1",
+            [symbolForRealParentId]: "id-1",
           },
         },
       });
       expect(mockClick).toBeCalledTimes(1);
       expect(clickResult).toMatchObject({
-        realParentId: "",
+        info: {
+          [symbolForRealParentId]: "",
+        },
+        url: undefined,
       });
 
       expect(mockMouseEnter).toBeCalledTimes(1);
       expect(enterResult).toMatchObject({
-        relParentId: "id-1",
+        info: {
+          [symbolForRealParentId]: "id-1",
+        },
+        url: undefined,
       });
       expect(mockMouseLeave).toBeCalledTimes(1);
       expect(leaveResult).toMatchObject({
-        relParentId: "id-1",
+        info: {
+          [symbolForRealParentId]: "id-1",
+        },
+        url: undefined,
       });
 
       wrapper.find(".ant-tree-title").at(1).simulate("click");
       expect(mockClick).toBeCalledTimes(2);
       expect(clickResult).toMatchObject({
-        type: "bricks",
-        realParentId: "B-01",
+        info: {
+          type: "bricks",
+          [symbolForRealParentId]: "B-01",
+        },
         url: "/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0",
       });
     });
@@ -272,7 +283,7 @@ describe("titleRender", () => {
         nodeData: {
           [NODE_INFO]: {
             name: "tpl-test-1",
-            realParentId: "B-01",
+            [symbolForRealParentId]: "B-01",
           },
         },
       }),
@@ -290,7 +301,7 @@ describe("titleRender", () => {
         nodeData: {
           [NODE_INFO]: {
             brick: "general-button",
-            realParentId: "B-01",
+            [symbolForRealParentId]: "B-01",
             [symbolForNodeInstanceId]: "B-02",
           },
         },
@@ -309,7 +320,7 @@ describe("titleRender", () => {
         nodeData: {
           [NODE_INFO]: {
             alias: "pagetest",
-            realParentId: "B-01",
+            [symbolForRealParentId]: "B-01",
           },
         },
       }),
@@ -337,7 +348,7 @@ describe("titleRender", () => {
       Object.assign({}, baseProps, {
         nodeData: {
           title: "hightlighttest",
-          [HIGHTLIGHT]: true,
+          [symbolForHightlight]: true,
           [NODE_INFO]: {},
         },
       }),
