@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.202.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.201.1...@next-bricks/presentational-bricks@1.202.0) (2021-07-30)
+
+
+### Features
+
+* **table:** brick-table 的rowDisabledConfig支持更多的operator ([8e9e41d](https://github.com/easyops-cn/next-basics/commit/8e9e41d639eb801d482adae59e00da8f0bc6e127))
+
+
+
+
+
 ## [1.201.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.201.0...@next-bricks/presentational-bricks@1.201.1) (2021-07-29)
 
 
