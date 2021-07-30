@@ -1,14 +1,32 @@
-import { eq, lt, lte, gt, gte, get, isEqual, forEach } from "lodash";
+import {
+  eq,
+  lt,
+  lte,
+  gt,
+  gte,
+  get,
+  isEqual,
+  forEach,
+  includes,
+  isEmpty,
+  isUndefined,
+} from "lodash";
 import { transformColor } from "@next-libs/basic-components";
 import { CellStatusProps } from "./index";
 export const compareFunMap: Record<string, any> = {
-  $eq: eq,
+  $eq: isEqual,
   $lt: lt,
   $lte: lte,
   $gt: gt,
   $gte: gte,
-  $ne: (value1: any, value2: any): boolean => !eq(value1, value2),
+  $ne: (value: any, fieldValue: any): boolean => !isEqual(value, fieldValue),
   $isEqual: isEqual,
+  $notEqual: (value: any, fieldValue: any): boolean =>
+    !isEqual(value, fieldValue),
+  $in: includes,
+  $nin: (value: any, fieldValue: any): boolean => !includes(value, fieldValue),
+  $exists: (value: any, fieldValue: any): boolean =>
+    value ? !isUndefined(fieldValue) : isUndefined(fieldValue),
 };
 
 export function getCellStyle(
