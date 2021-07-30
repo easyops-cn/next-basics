@@ -21,6 +21,20 @@ const mockData = {
           properties: {
             test: 1,
           },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "general-button",
+                  [symbolForNodeInstanceId]: "slots-brick",
+                  [symbolForNodeId]: "s-01-01",
+                },
+              ],
+              type: "bricks",
+              [symbolForNodeInstanceId]: "slot-content",
+              [symbolForNodeId]: "s-01",
+            },
+          },
           [symbolForNodeInstanceId]: "123123",
           [symbolForNodeId]: "B-02",
           path: "${APP.homepage}/test-1",
@@ -64,9 +78,9 @@ describe("buildTree should work", () => {
           children: [
             {
               $$info: {
-                [symbolForRealParentId]: "B-01",
                 type: "bricks",
                 [symbolForNodeId]: "B-01",
+                [symbolForRealParentId]: "B-01",
               },
               children: [
                 {
@@ -74,10 +88,55 @@ describe("buildTree should work", () => {
                     brick: "general-button",
                     path: "${APP.homepage}/test-1",
                     properties: { test: 1 },
-                    [symbolForRealParentId]: "B-01",
                     [symbolForNodeInstanceId]: "123123",
                     [symbolForNodeId]: "B-02",
+                    [symbolForRealParentId]: "B-01",
                   },
+                  children: [
+                    {
+                      $$info: { [symbolForRealParentId]: "B-01" },
+                      children: [
+                        {
+                          $$info: {
+                            brick: "general-button",
+                            [symbolForNodeInstanceId]: "slots-brick",
+                            [symbolForNodeId]: "s-01-01",
+                            [symbolForRealParentId]: "B-01",
+                          },
+                          icon: (
+                            <GeneralIcon
+                              icon={{
+                                color: "cyan",
+                                icon: "codepen",
+                                lib: "antd",
+                                theme: "outlined",
+                              }}
+                              style={{
+                                fontSize: 12,
+                                margin: "0 2px",
+                              }}
+                            />
+                          ),
+                          key: "routes/0/bricks/0/slots/content/bricks/0",
+                          title: "general-button",
+                        },
+                      ],
+                      icon: (
+                        <GeneralIcon
+                          icon={{
+                            category: "app",
+                            color: "cyan",
+                            icon: "container",
+                            lib: "easyops",
+                          }}
+                          style={{ fontSize: 12, margin: "0 2px" }}
+                        />
+                      ),
+                      key: "routes/0/bricks/0/slots/content",
+                      title: "content",
+                      unlink: true,
+                    },
+                  ],
                   icon: (
                     <GeneralIcon
                       icon={{
@@ -97,9 +156,9 @@ describe("buildTree should work", () => {
                     brick: "general-select",
                     path: "${APP.homepage}/test-2",
                     properties: { test: 2 },
-                    [symbolForRealParentId]: "B-01",
                     [symbolForNodeInstanceId]: "234",
                     [symbolForNodeId]: "B-04",
+                    [symbolForRealParentId]: "B-01",
                   },
                   icon: (
                     <GeneralIcon
@@ -153,8 +212,8 @@ describe("buildTree should work", () => {
                 {
                   $$info: {
                     name: "tpl-test-1",
-                    [symbolForRealParentId]: "t-01",
                     [symbolForNodeId]: "t-01",
+                    [symbolForRealParentId]: "t-01",
                   },
                   icon: (
                     <span
@@ -172,8 +231,8 @@ describe("buildTree should work", () => {
                 {
                   $$info: {
                     name: "tpl-test-2",
-                    [symbolForRealParentId]: "t-02",
                     [symbolForNodeId]: "t-02",
+                    [symbolForRealParentId]: "t-02",
                   },
                   icon: (
                     <span
@@ -275,21 +334,66 @@ describe("fitler should work", () => {
           children: [
             {
               $$info: {
-                [symbolForRealParentId]: "B-01",
                 type: "bricks",
                 [symbolForNodeId]: "B-01",
+                [symbolForRealParentId]: "B-01",
               },
               children: [
                 {
-                  [symbolForHightlight]: true,
                   $$info: {
                     brick: "general-button",
                     path: "${APP.homepage}/test-1",
                     properties: { test: 1 },
-                    [symbolForRealParentId]: "B-01",
                     [symbolForNodeInstanceId]: "123123",
                     [symbolForNodeId]: "B-02",
+                    [symbolForRealParentId]: "B-01",
                   },
+                  children: [
+                    {
+                      $$info: { [symbolForRealParentId]: "B-01" },
+                      children: [
+                        {
+                          $$info: {
+                            brick: "general-button",
+                            [symbolForNodeInstanceId]: "slots-brick",
+                            [symbolForNodeId]: "s-01-01",
+                            [symbolForRealParentId]: "B-01",
+                          },
+                          icon: (
+                            <GeneralIcon
+                              icon={{
+                                color: "cyan",
+                                icon: "codepen",
+                                lib: "antd",
+                                theme: "outlined",
+                              }}
+                              style={{
+                                fontSize: 12,
+                                margin: "0 2px",
+                              }}
+                            />
+                          ),
+                          key: "routes/0/bricks/0/slots/content/bricks/0",
+                          title: "general-button",
+                          [symbolForHightlight]: true,
+                        },
+                      ],
+                      icon: (
+                        <GeneralIcon
+                          icon={{
+                            category: "app",
+                            color: "cyan",
+                            icon: "container",
+                            lib: "easyops",
+                          }}
+                          style={{ fontSize: 12, margin: "0 2px" }}
+                        />
+                      ),
+                      key: "routes/0/bricks/0/slots/content",
+                      title: "content",
+                      unlink: true,
+                    },
+                  ],
                   icon: (
                     <GeneralIcon
                       icon={{
@@ -303,16 +407,16 @@ describe("fitler should work", () => {
                   ),
                   key: "routes/0/bricks/0",
                   title: "general-button",
+                  [symbolForHightlight]: true,
                 },
                 {
-                  [symbolForHightlight]: true,
                   $$info: {
                     brick: "general-select",
                     path: "${APP.homepage}/test-2",
                     properties: { test: 2 },
-                    [symbolForRealParentId]: "B-01",
                     [symbolForNodeInstanceId]: "234",
                     [symbolForNodeId]: "B-04",
+                    [symbolForRealParentId]: "B-01",
                   },
                   icon: (
                     <GeneralIcon
@@ -327,6 +431,7 @@ describe("fitler should work", () => {
                   ),
                   key: "routes/0/bricks/1",
                   title: "general-select",
+                  [symbolForHightlight]: true,
                 },
               ],
               icon: (
@@ -367,21 +472,66 @@ describe("fitler should work", () => {
           children: [
             {
               $$info: {
-                [symbolForRealParentId]: "B-01",
                 type: "bricks",
                 [symbolForNodeId]: "B-01",
+                [symbolForRealParentId]: "B-01",
               },
               children: [
                 {
-                  [symbolForHightlight]: true,
                   $$info: {
                     brick: "general-button",
                     path: "${APP.homepage}/test-1",
                     properties: { test: 1 },
-                    [symbolForRealParentId]: "B-01",
                     [symbolForNodeInstanceId]: "123123",
                     [symbolForNodeId]: "B-02",
+                    [symbolForRealParentId]: "B-01",
                   },
+                  children: [
+                    {
+                      $$info: { [symbolForRealParentId]: "B-01" },
+                      children: [
+                        {
+                          $$info: {
+                            brick: "general-button",
+                            [symbolForNodeInstanceId]: "slots-brick",
+                            [symbolForNodeId]: "s-01-01",
+                            [symbolForRealParentId]: "B-01",
+                          },
+                          icon: (
+                            <GeneralIcon
+                              icon={{
+                                color: "cyan",
+                                icon: "codepen",
+                                lib: "antd",
+                                theme: "outlined",
+                              }}
+                              style={{
+                                fontSize: 12,
+                                margin: "0 2px",
+                              }}
+                            />
+                          ),
+                          key: "routes/0/bricks/0/slots/content/bricks/0",
+                          title: "general-button",
+                          [symbolForHightlight]: true,
+                        },
+                      ],
+                      icon: (
+                        <GeneralIcon
+                          icon={{
+                            category: "app",
+                            color: "cyan",
+                            icon: "container",
+                            lib: "easyops",
+                          }}
+                          style={{ fontSize: 12, margin: "0 2px" }}
+                        />
+                      ),
+                      key: "routes/0/bricks/0/slots/content",
+                      title: "content",
+                      unlink: true,
+                    },
+                  ],
                   icon: (
                     <GeneralIcon
                       icon={{
@@ -395,6 +545,7 @@ describe("fitler should work", () => {
                   ),
                   key: "routes/0/bricks/0",
                   title: "general-button",
+                  [symbolForHightlight]: true,
                 },
               ],
               icon: (
@@ -437,11 +588,10 @@ describe("fitler should work", () => {
               $$info: { [symbolForRealParentId]: "" },
               children: [
                 {
-                  [symbolForHightlight]: true,
                   $$info: {
                     name: "tpl-test-1",
-                    [symbolForRealParentId]: "t-01",
                     [symbolForNodeId]: "t-01",
+                    [symbolForRealParentId]: "t-01",
                   },
                   icon: (
                     <span
@@ -455,6 +605,7 @@ describe("fitler should work", () => {
                   ),
                   key: "meta/customTemplates/0",
                   title: "tpl-test-1",
+                  [symbolForHightlight]: true,
                 },
               ],
               icon: (

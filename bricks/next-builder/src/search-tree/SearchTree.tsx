@@ -36,8 +36,9 @@ export const titleRender = (props: {
   const { homepage, appId, projectId, nodeData } = props;
   const style = {
     background: nodeData[symbolForHightlight as any] ? "yellow" : null,
+    color: nodeData.unlink ? "#aaa" : null,
   };
-  if (nodeData[NODE_INFO]?.[symbolForRealParentId]) {
+  if (nodeData[NODE_INFO]?.[symbolForRealParentId] && !nodeData.unlink) {
     let url = "";
     if (nodeData[NODE_INFO].name) {
       // template

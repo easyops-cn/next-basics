@@ -196,6 +196,7 @@ function traversalArray(
         [symbolForRealParentId]: parentId,
       }),
     };
+    if (options?.isSlots) child.unlink = true;
     const subTree = traversalData(treeData[i], {
       ...options,
       parentPath: path,
@@ -236,6 +237,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
           [symbolForRealParentId]: parentId,
         }),
       };
+      if (options?.isSlots) child.unlink = true;
       const subTree = traversalData(treeData[key], {
         ...options,
         isSlots,
