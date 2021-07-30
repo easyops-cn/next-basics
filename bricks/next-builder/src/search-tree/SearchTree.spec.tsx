@@ -2,7 +2,7 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Tree, Input } from "antd";
-import { NODE_INFO, HIGHTLIGHT } from "./utils";
+import { NODE_INFO, symbolForHightlight, symbolForRealParentId } from "./utils";
 import { SearchTree, titleRender, SearchTreeProps } from "./SearchTree";
 import {
   symbolForNodeId,
@@ -161,7 +161,7 @@ describe("SearchTree", () => {
         event: null,
         node: {
           [NODE_INFO]: {
-            relParentId: "id-1",
+            [symbolForRealParentId]: "id-1",
           },
         },
       });
@@ -169,29 +169,40 @@ describe("SearchTree", () => {
         event: null,
         node: {
           [NODE_INFO]: {
-            relParentId: "id-1",
+            [symbolForRealParentId]: "id-1",
           },
         },
       });
       expect(mockClick).toBeCalledTimes(1);
       expect(clickResult).toMatchObject({
-        realParentId: "",
+        info: {
+          [symbolForRealParentId]: "",
+        },
+        url: undefined,
       });
 
       expect(mockMouseEnter).toBeCalledTimes(1);
       expect(enterResult).toMatchObject({
-        relParentId: "id-1",
+        info: {
+          [symbolForRealParentId]: "id-1",
+        },
+        url: undefined,
       });
       expect(mockMouseLeave).toBeCalledTimes(1);
       expect(leaveResult).toMatchObject({
-        relParentId: "id-1",
+        info: {
+          [symbolForRealParentId]: "id-1",
+        },
+        url: undefined,
       });
 
       wrapper.find(".ant-tree-title").at(1).simulate("click");
       expect(mockClick).toBeCalledTimes(2);
       expect(clickResult).toMatchObject({
-        type: "bricks",
-        realParentId: "B-01",
+        info: {
+          type: "bricks",
+          [symbolForRealParentId]: "B-01",
+        },
         url: "/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0",
       });
     });
@@ -218,6 +229,7 @@ describe("SearchTree", () => {
         wrapper.find(".ant-tree-title").at(3).props().children.props.style
       ).toEqual({
         background: "yellow",
+        color: null,
       });
       expect(wrapper.html().indexOf("general-select")).toBeTruthy();
 
@@ -272,13 +284,13 @@ describe("titleRender", () => {
         nodeData: {
           [NODE_INFO]: {
             name: "tpl-test-1",
-            realParentId: "B-01",
+            [symbolForRealParentId]: "B-01",
           },
         },
       }),
       /* eslint-disable react/jsx-key */
       <a
-        style={{ background: null }}
+        style={{ background: null, color: null }}
         href="/next-builder/project/abc/app/next-builder/template/B-01/visualize-builder?fullscreen=1"
       >
         tpl-test-1
@@ -290,14 +302,14 @@ describe("titleRender", () => {
         nodeData: {
           [NODE_INFO]: {
             brick: "general-button",
-            realParentId: "B-01",
+            [symbolForRealParentId]: "B-01",
             [symbolForNodeInstanceId]: "B-02",
           },
         },
       }),
       /* eslint-disable react/jsx-key */
       <a
-        style={{ background: null }}
+        style={{ background: null, color: null }}
         href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0#brick,B-02"
       >
         general-button
@@ -309,13 +321,13 @@ describe("titleRender", () => {
         nodeData: {
           [NODE_INFO]: {
             alias: "pagetest",
-            realParentId: "B-01",
+            [symbolForRealParentId]: "B-01",
           },
         },
       }),
       /* eslint-disable react/jsx-key */
       <a
-        style={{ background: null }}
+        style={{ background: null, color: null }}
         href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0"
       >
         pagetest
@@ -330,19 +342,19 @@ describe("titleRender", () => {
         },
       }),
       /* eslint-disable react/jsx-key */
-      <span style={{ background: null }}>title-test</span>,
+      <span style={{ background: null, color: null }}>title-test</span>,
     ],
     [
       "hight",
       Object.assign({}, baseProps, {
         nodeData: {
           title: "hightlighttest",
-          [HIGHTLIGHT]: true,
+          [symbolForHightlight]: true,
           [NODE_INFO]: {},
         },
       }),
       /* eslint-disable react/jsx-key */
-      <span style={{ background: "yellow" }}>hightlighttest</span>,
+      <span style={{ background: "yellow", color: null }}>hightlighttest</span>,
     ],
   ])("%s", (_condition, params, result) => {
     expect(titleRender(params)).toEqual(result);

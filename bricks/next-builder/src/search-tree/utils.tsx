@@ -4,7 +4,8 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import { symbolForNodeId } from "../shared/storyboard/buildStoryboard";
 
-export const HIGHTLIGHT = "$$hightlight";
+export const symbolForHightlight = Symbol.for("hightlight");
+export const symbolForRealParentId = Symbol.for("realParentId");
 export const NODE_INFO = "$$info";
 
 const iconTypeConstants = {
@@ -192,9 +193,10 @@ function traversalArray(
       icon: getTypeIcon(getType(treeData[i])),
       [NODE_INFO]: clone({
         ...treeData[i],
-        realParentId: parentId,
+        [symbolForRealParentId]: parentId,
       }),
     };
+    if (options?.isSlots) child.unlink = true;
     const subTree = traversalData(treeData[i], {
       ...options,
       parentPath: path,
@@ -232,9 +234,10 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
         icon: getTypeIcon(getType(treeData[key])),
         [NODE_INFO]: clone({
           // ...treeData[key],
-          realParentId: parentId,
+          [symbolForRealParentId]: parentId,
         }),
       };
+      if (options?.isSlots) child.unlink = true;
       const subTree = traversalData(treeData[key], {
         ...options,
         isSlots,
@@ -301,30 +304,30 @@ export function filter(
   const filterNode = (item: PlainObject | string, text: string): boolean => {
     if (isObject(item) && item) {
       for (const [k, v] of Object.entries(item)) {
-        if (!["children", "key", "icon", HIGHTLIGHT].includes(k)) {
+        if (!["children", "key", "icon", symbolForHightlight].includes(k)) {
           if (config.supportKey && isEqual(k)) {
-            item[HIGHTLIGHT] = true;
+            item[symbolForHightlight as any] = true;
             return true;
           }
           if (Array.isArray(v)) {
             for (let i = 0; i < v.length; i++) {
               if (isObject(v[i])) {
                 if (filterNode(v[i], text)) {
-                  item[HIGHTLIGHT] = true;
+                  item[symbolForHightlight as any] = true;
                   return true;
                 }
               } else if (typeof v[i] === "string" && isEqual(v[i])) {
-                item[HIGHTLIGHT] = true;
+                item[symbolForHightlight as any] = true;
                 return true;
               }
             }
           } else if (isObject(v)) {
             if (filterNode(v, text)) {
-              item[HIGHTLIGHT] = true;
+              item[symbolForHightlight as any] = true;
               return true;
             }
           } else if (typeof v === "string" && isEqual(v)) {
-            item[HIGHTLIGHT] = true;
+            item[symbolForHightlight as any] = true;
             return true;
           }
         }
