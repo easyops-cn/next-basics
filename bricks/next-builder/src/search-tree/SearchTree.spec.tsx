@@ -229,6 +229,7 @@ describe("SearchTree", () => {
         wrapper.find(".ant-tree-title").at(3).props().children.props.style
       ).toEqual({
         background: "yellow",
+        color: null,
       });
       expect(wrapper.html().indexOf("general-select")).toBeTruthy();
 
@@ -289,7 +290,7 @@ describe("titleRender", () => {
       }),
       /* eslint-disable react/jsx-key */
       <a
-        style={{ background: null }}
+        style={{ background: null, color: null }}
         href="/next-builder/project/abc/app/next-builder/template/B-01/visualize-builder?fullscreen=1"
       >
         tpl-test-1
@@ -308,7 +309,7 @@ describe("titleRender", () => {
       }),
       /* eslint-disable react/jsx-key */
       <a
-        style={{ background: null }}
+        style={{ background: null, color: null }}
         href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0#brick,B-02"
       >
         general-button
@@ -326,7 +327,7 @@ describe("titleRender", () => {
       }),
       /* eslint-disable react/jsx-key */
       <a
-        style={{ background: null }}
+        style={{ background: null, color: null }}
         href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0"
       >
         pagetest
@@ -341,7 +342,7 @@ describe("titleRender", () => {
         },
       }),
       /* eslint-disable react/jsx-key */
-      <span style={{ background: null }}>title-test</span>,
+      <span style={{ background: null, color: null }}>title-test</span>,
     ],
     [
       "hight",
@@ -353,7 +354,7 @@ describe("titleRender", () => {
         },
       }),
       /* eslint-disable react/jsx-key */
-      <span style={{ background: "yellow" }}>hightlighttest</span>,
+      <span style={{ background: "yellow", color: null }}>hightlighttest</span>,
     ],
   ])("%s", (_condition, params, result) => {
     expect(titleRender(params)).toEqual(result);
