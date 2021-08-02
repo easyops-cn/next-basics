@@ -5,19 +5,33 @@ import classicOneColSvg from "../thumbnails/classic-layout/grid-classic-one-col.
 import classicTwoColSvg from "../thumbnails/classic-layout/grid-classic-two-col.svg";
 import classicThreeColSvg from "../thumbnails/classic-layout/grid-classic-three-col.svg";
 import classicFourColSvg from "../thumbnails/classic-layout/grid-classic-four-col.svg";
+
 import classic2x3Svg from "../thumbnails/classic-layout/grid-classic-2x3.svg";
-import classicTopBottom1x3Svg from "../thumbnails/classic-layout/grid-classic-top-bottom-1x3.svg";
-import classicHeaderContentSvg from "../thumbnails/classic-layout/grid-classic-header-content.svg";
-import classicHeaderContentFooterSvg from "../thumbnails/classic-layout/grid-classic-header-content-footer.svg";
-import classicHeaderContentLeft1Right2Svg from "../thumbnails/classic-layout/grid-classic-header-content-left1-right2.svg";
-import classicHeaderContentLeft2Right1Svg from "../thumbnails/classic-layout/grid-classic-header-content-left2-right1.svg";
+import classic2x3SecondSvg from "../thumbnails/classic-layout/grid-classic-2x3-2.svg";
+
+import classicTopBottomSvg from "../thumbnails/classic-layout/grid-classic-top-bottom.svg";
+import classicTopCenterBottomSvg from "../thumbnails/classic-layout/grid-classic-top-center-bottom.svg";
+import classicTopBottomLeft1Right2Svg from "../thumbnails/classic-layout/grid-classic-top-bottom-left1-right2.svg";
+import classicTopBottomLeft2Right1Svg from "../thumbnails/classic-layout/grid-classic-top-bottom-left2-right1.svg";
+import classicTopBottomLeft1Right3Svg from "../thumbnails/classic-layout/grid-classic-top-bottom-left1-right3.svg";
+import classicTopBottomLeft3Right1Svg from "../thumbnails/classic-layout/grid-classic-top-bottom-left3-right1.svg";
+
 import classicLeft1Right2Svg from "../thumbnails/classic-layout/grid-classic-left1-right2.svg";
+import classicLeft1Right2SecondSvg from "../thumbnails/classic-layout/grid-classic-left1-right2-2.svg";
 import classicLeft2Right1Svg from "../thumbnails/classic-layout/grid-classic-left2-right1.svg";
+import classicLeft2Right1SecondSvg from "../thumbnails/classic-layout/grid-classic-left2-right1-2.svg";
 import classicLeft1Right3Svg from "../thumbnails/classic-layout/grid-classic-left1-right3.svg";
+import classicLeft1Right3SecondSvg from "../thumbnails/classic-layout/grid-classic-left1-right3-2.svg";
+import classicLeft1Right3ThirdSvg from "../thumbnails/classic-layout/grid-classic-left1-right3-3.svg";
 import classicLeft3Right1Svg from "../thumbnails/classic-layout/grid-classic-left3-right1.svg";
-import classicLeft1Right2HeaderContentSvg from "../thumbnails/classic-layout/grid-classic-left1-right2-header-content.svg";
-import classicLeft2Right1HeaderContentSvg from "../thumbnails/classic-layout/grid-classic-left2-right1-header-content.svg";
+import classicLeft3Right1SecondSvg from "../thumbnails/classic-layout/grid-classic-left3-right1-2.svg";
+import classicLeft3Right1ThirdSvg from "../thumbnails/classic-layout/grid-classic-left3-right1-3.svg";
+
 import classicTitlebarToolbarContentSvg from "../thumbnails/classic-layout/grid-classic-titlebar-toolbar-content.svg";
+
+import classicWithCatelog1Svg from "../thumbnails/classic-layout/grid-classic-with-catelog-1.svg";
+import classicWithCatelog2Svg from "../thumbnails/classic-layout/grid-classic-with-catelog-2.svg";
+import classicWithCatelog3Svg from "../thumbnails/classic-layout/grid-classic-with-catelog-3.svg";
 
 const snippets: SnippetDefinition[] = [
   {
@@ -35,9 +49,8 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["one"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
           },
         },
       },
@@ -58,9 +71,9 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["one", "two"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateColumns: ["1fr", "1fr"],
         },
@@ -82,9 +95,9 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["one", "two", "three"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateColumns: ["1fr", "1fr", "1fr"],
         },
@@ -106,9 +119,9 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["one", "two", "three", "four"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateColumns: ["1fr", "1fr", "1fr", "1fr"],
         },
@@ -133,9 +146,9 @@ const snippets: SnippetDefinition[] = [
             ["bottomLeft", "bottomCenter", "bottomRight"],
           ],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateColumns: ["1fr", "1fr", "1fr"],
           gridTemplateRows: ["1fr", "1fr"],
@@ -144,14 +157,14 @@ const snippets: SnippetDefinition[] = [
     ],
   },
   {
-    id: "basic-bricks.easy-view[classic-top-bottom-1x3]",
+    id: "basic-bricks.easy-view[classic-2x3-2]",
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "上下均分，底部平分为3 网格布局",
-      en: "2*3 grid layout",
+      zh: "2*3-2 网格布局",
+      en: "2*3-2 grid layout",
     },
-    thumbnail: classicTopBottom1x3Svg,
+    thumbnail: classic2x3SecondSvg,
     bricks: [
       {
         brick: "basic-bricks.easy-view",
@@ -161,9 +174,9 @@ const snippets: SnippetDefinition[] = [
             ["bottomLeft", "bottomCenter", "bottomRight"],
           ],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateColumns: ["1fr", "1fr", "1fr"],
           gridTemplateRows: ["1fr", "1fr"],
@@ -172,105 +185,161 @@ const snippets: SnippetDefinition[] = [
     ],
   },
   {
-    id: "basic-bricks.easy-view[classic-header-content]",
+    id: "basic-bricks.easy-view[classic-top-bottom]",
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "标题-内容网格布局",
-      en: "Header-content grid layout",
+      zh: "上下网格布局",
+      en: "Top-bottom grid layout",
     },
-    thumbnail: classicHeaderContentSvg,
+    thumbnail: classicTopBottomSvg,
     bricks: [
       {
         brick: "basic-bricks.easy-view",
         properties: {
-          gridTemplateAreas: [["header"], ["content"]],
+          gridTemplateAreas: [["top"], ["bottom"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
-          gridTemplateRows: ["auto", "1fr"],
+          gridTemplateRows: ["162px", "1fr"],
         },
       },
     ],
   },
   {
-    id: "basic-bricks.easy-view[classic-header-content-footer]",
+    id: "basic-bricks.easy-view[classic-top-center-bottom]",
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "标题-内容-页脚网格布局",
-      en: "Header-content-footer layout",
+      zh: "上中下网格布局",
+      en: "Top-center-bottom grid layout",
     },
-    thumbnail: classicHeaderContentFooterSvg,
+    thumbnail: classicTopCenterBottomSvg,
     bricks: [
       {
         brick: "basic-bricks.easy-view",
         properties: {
-          gridTemplateAreas: [["header"], ["content"], ["footer"]],
+          gridTemplateAreas: [["top"], ["center"], ["bottom"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
-          gridTemplateRows: ["auto", "1fr", "auto"],
+          gridTemplateRows: ["162px", "1fr", "1fr"],
         },
       },
     ],
   },
   {
-    id: "basic-bricks.easy-view[classic-header-content-left1-right2]",
+    id: "basic-bricks.easy-view[classic-top-bottom-1:2]",
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "标题-内容-1:2 网格布局",
-      en: "Header-Content-1:2 grid layout",
+      zh: "上下-下1:2网格布局",
+      en: "Top-bottom-1:2 grid layout",
     },
-    thumbnail: classicHeaderContentLeft1Right2Svg,
+    thumbnail: classicTopBottomLeft1Right2Svg,
     bricks: [
       {
         brick: "basic-bricks.easy-view",
         properties: {
           gridTemplateAreas: [
-            ["header", "header"],
-            ["contentLeft", "contentRight"],
+            ["top", "top"],
+            ["bottomLeft", "bottomRight"],
           ],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
-          gridTemplateRows: ["auto", "1fr"],
+          gridTemplateRows: ["162px", "1fr"],
           gridTemplateColumns: ["1fr", "2fr"],
         },
       },
     ],
   },
   {
-    id: "basic-bricks.easy-view[classic-header-content-left2-right1]",
+    id: "basic-bricks.easy-view[classic-top-bottom-2:1]",
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "标题-内容-2:1 网格布局",
-      en: "Header-content-2:1 grid layout",
+      zh: "上下-下2:1 网格布局",
+      en: "Top-bottom-2:1 grid layout",
     },
-    thumbnail: classicHeaderContentLeft2Right1Svg,
+    thumbnail: classicTopBottomLeft2Right1Svg,
     bricks: [
       {
         brick: "basic-bricks.easy-view",
         properties: {
           gridTemplateAreas: [
-            ["header", "header"],
-            ["contentLeft", "contentRight"],
+            ["top", "top"],
+            ["bottomLeft", "bottomRight"],
           ],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
-          gridTemplateRows: ["auto", "1fr"],
+          gridTemplateRows: ["162px", "1fr"],
           gridTemplateColumns: ["2fr", "1fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-top-bottom-1:3]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "上下-下1:3 网格布局",
+      en: "Top-bottom-1:3 grid layout",
+    },
+    thumbnail: classicTopBottomLeft1Right3Svg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["top", "top"],
+            ["bottomLeft", "bottomRight"],
+          ],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateRows: ["162px", "1fr"],
+          gridTemplateColumns: ["1fr", "3fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-top-bottom-3:1]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "上下-下3:1 网格布局",
+      en: "Top-bottom-3:1 grid layout",
+    },
+    thumbnail: classicTopBottomLeft3Right1Svg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["top", "top"],
+            ["bottomLeft", "bottomRight"],
+          ],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateRows: ["162px", "1fr"],
+          gridTemplateColumns: ["3fr", "1fr"],
         },
       },
     ],
@@ -290,10 +359,38 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["left", "right"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
+          gridTemplateColumns: ["1fr", "2fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-left1-right2-2]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "1:2-2 网格布局",
+      en: "1:2-2 grid layout",
+    },
+    thumbnail: classicLeft1Right2SecondSvg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["left", "rightHeader"],
+            ["left", "rightContent"],
+          ],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateRows: ["162px", "1fr"],
           gridTemplateColumns: ["1fr", "2fr"],
         },
       },
@@ -314,10 +411,38 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["left", "right"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateColumns: ["2fr", "1fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-left2-right1-2]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "2:1-2 网格布局",
+      en: "2:1-2 grid layout",
+    },
+    thumbnail: classicLeft2Right1SecondSvg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["leftHeader", "right"],
+            ["leftContent", "right"],
+          ],
+          containerStyle: {
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
             gap: "var(--card-content-gap)",
           },
+          gridTemplateRows: ["162px", "1fr"],
           gridTemplateColumns: ["2fr", "1fr"],
         },
       },
@@ -338,11 +463,68 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["left", "right"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateColumns: ["1fr", "3fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-left1-right3-2]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "1:3-2 网格布局",
+      en: "1:3-2 grid layout",
+    },
+    thumbnail: classicLeft1Right3SecondSvg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["left", "rightTop"],
+            ["left", "rightBottom"],
+          ],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateColumns: ["1fr", "3fr"],
+          gridTemplateRows: ["162px", "1fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-left1-right3-3]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "1:3-3 网格布局",
+      en: "1:3-3 grid layout",
+    },
+    thumbnail: classicLeft1Right3ThirdSvg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["left", "rightTop"],
+            ["left", "rightCenter"],
+            ["left", "rightBottom"],
+          ],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateColumns: ["1fr", "3fr"],
+          gridTemplateRows: ["162px", "1fr", "1fr"],
         },
       },
     ],
@@ -362,9 +544,9 @@ const snippets: SnippetDefinition[] = [
         properties: {
           gridTemplateAreas: [["left", "right"]],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateColumns: ["3fr", "1fr"],
         },
@@ -372,57 +554,58 @@ const snippets: SnippetDefinition[] = [
     ],
   },
   {
-    id: "basic-bricks.easy-view[classic-left1-right2-header-content]",
+    id: "basic-bricks.easy-view[classic-left3-right1-2]",
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "1:2-标题-内容 网格布局",
-      en: "1:2-header-content grid layout",
+      zh: "3:1-2 网格布局",
+      en: "3:1-2 grid layout",
     },
-    thumbnail: classicLeft1Right2HeaderContentSvg,
+    thumbnail: classicLeft3Right1SecondSvg,
     bricks: [
       {
         brick: "basic-bricks.easy-view",
         properties: {
           gridTemplateAreas: [
-            ["left", "rightHeader"],
-            ["left", "rightContent"],
+            ["leftTop", "right"],
+            ["leftBottom", "right"],
           ],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
-          gridTemplateRows: ["auto", "1fr"],
-          gridTemplateColumns: ["1fr", "2fr"],
+          gridTemplateColumns: ["3fr", "1fr"],
+          gridTemplateRows: ["162px", "1fr"],
         },
       },
     ],
   },
   {
-    id: "basic-bricks.easy-view[classic-left2-right1-header-content]",
+    id: "basic-bricks.easy-view[classic-left3-right1-3]",
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "2:1-标题-内容 网格布局",
-      en: "2:1-header-content grid layout",
+      zh: "3:1-3 网格布局",
+      en: "3:1-3 grid layout",
     },
-    thumbnail: classicLeft2Right1HeaderContentSvg,
+    thumbnail: classicLeft3Right1ThirdSvg,
     bricks: [
       {
         brick: "basic-bricks.easy-view",
         properties: {
           gridTemplateAreas: [
-            ["leftHeader", "right"],
-            ["leftContent", "right"],
+            ["leftTop", "right"],
+            ["leftCenter", "right"],
+            ["leftBottom", "right"],
           ],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
-          gridTemplateRows: ["auto", "1fr"],
-          gridTemplateColumns: ["2fr", "1fr"],
+          gridTemplateColumns: ["3fr", "1fr"],
+          gridTemplateRows: ["162px", "1fr", "1fr"],
         },
       },
     ],
@@ -445,9 +628,9 @@ const snippets: SnippetDefinition[] = [
             ["content", "content"],
           ],
           containerStyle: {
-            padding: "var(--page-padding)",
+            padding: "16px",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "var(--card-content-gap)",
+            gap: "16px",
           },
           gridTemplateRows: ["auto", "1fr"],
           gridTemplateColumns: ["1fr", "1fr"],
@@ -457,6 +640,87 @@ const snippets: SnippetDefinition[] = [
               justifyContent: "flex-end",
             },
           },
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-with-catelog-1]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "带目录网格布局1",
+      en: "With-catelog grid layout 1",
+    },
+    thumbnail: classicWithCatelog1Svg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [["catelog", "content"]],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateColumns: ["220px", "1fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-with-catelog-2]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "带目录网格布局2",
+      en: "With-catelog grid layout 2",
+    },
+    thumbnail: classicWithCatelog2Svg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["catelog", "contentTop"],
+            ["catelog", "contentBottom"],
+          ],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateRows: ["162px", "1fr"],
+          gridTemplateColumns: ["220px", "1fr"],
+        },
+      },
+    ],
+  },
+  {
+    id: "basic-bricks.easy-view[classic-with-catelog-3]",
+    layerType: "layout",
+    category: "classic",
+    text: {
+      zh: "带目录网格布局3",
+      en: "With-catelog grid layout 3",
+    },
+    thumbnail: classicWithCatelog3Svg,
+    bricks: [
+      {
+        brick: "basic-bricks.easy-view",
+        properties: {
+          gridTemplateAreas: [
+            ["catelog", "contentTop"],
+            ["catelog", "contentCenter"],
+            ["catelog", "contentBottom"],
+          ],
+          containerStyle: {
+            padding: "16px",
+            minHeight: "calc(100vh - var(--app-bar-height))",
+            gap: "16px",
+          },
+          gridTemplateRows: ["162px", "1fr", "1fr"],
+          gridTemplateColumns: ["220px", "1fr"],
         },
       },
     ],
