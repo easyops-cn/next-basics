@@ -2,5 +2,5 @@ install_path: /usr/local/easyops/bricks/presentational-bricks-NB
 user: 'easyops:easyops'
 dependencies:
   - name: brick_next
-    version: ^2.19.5
+    version: ^2.29.0
     local_deploy: true

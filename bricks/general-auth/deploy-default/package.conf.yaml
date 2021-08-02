@@ -1,9 +1,9 @@
 install_path: /usr/local/easyops/bricks/general-auth-NB
-user: easyops:easyops
+user: 'easyops:easyops'
 dependencies:
   - name: brick_next
-    version: "^2.0.0"
+    version: ^2.29.0
     local_deploy: true
   - name: api_gateway
-    version: '^1.34.10'
+    version: ^1.34.10
     local_deploy: true
