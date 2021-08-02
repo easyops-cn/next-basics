@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.0...@next-bricks/next-builder@1.65.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* **search-tree:** fix while deep route and the parentId is errr ([608290e](https://github.com/easyops-cn/next-basics/commit/608290e1a9b5894c76746c56d27396d13f01832e))
+
+
+
+
+
 # [1.65.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.64.0...@next-bricks/next-builder@1.65.0) (2021-07-30)
 
 
