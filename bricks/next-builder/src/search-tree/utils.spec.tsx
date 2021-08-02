@@ -315,6 +315,125 @@ describe("buildTree should work", () => {
         },
       ],
     ],
+    [
+      {
+        routes: [
+          {
+            alias: "Project Menu",
+            routes: [
+              {
+                bricks: [
+                  {
+                    brick: "general-view",
+                    properties: {
+                      test: 1,
+                    },
+                    [symbolForNodeInstanceId]: "instance-01",
+                    [symbolForNodeId]: "B-02",
+                    path: "${APP.homepage}/test-1",
+                  },
+                ],
+                type: "bricks",
+                alias: "/images",
+                path: "${APP.homepage}/project/:projectId/app/:appId/images",
+                [symbolForNodeId]: "router-child-1",
+              },
+            ],
+            type: "routes",
+            [symbolForNodeId]: "router-1",
+          },
+        ],
+      },
+      [
+        {
+          $$info: { [symbolForRealParentId]: "" },
+          children: [
+            {
+              $$info: {
+                alias: "Project Menu",
+                type: "routes",
+                [symbolForNodeId]: "router-1",
+                [symbolForRealParentId]: "router-1",
+              },
+              children: [
+                {
+                  $$info: {
+                    alias: "/images",
+                    path: "${APP.homepage}/project/:projectId/app/:appId/images",
+                    type: "bricks",
+                    [symbolForNodeId]: "router-child-1",
+                    [symbolForRealParentId]: "router-child-1",
+                  },
+                  children: [
+                    {
+                      $$info: {
+                        brick: "general-view",
+                        path: "${APP.homepage}/test-1",
+                        properties: { test: 1 },
+                        [symbolForNodeInstanceId]: "instance-01",
+                        [symbolForNodeId]: "B-02",
+                        [symbolForRealParentId]: "router-child-1",
+                      },
+                      icon: (
+                        <GeneralIcon
+                          icon={{
+                            color: "cyan",
+                            icon: "codepen",
+                            lib: "antd",
+                            theme: "outlined",
+                          }}
+                          style={{ fontSize: 12, margin: "0 2px" }}
+                        />
+                      ),
+                      key: "routes/0/routes/0/bricks/0",
+                      title: "general-view",
+                    },
+                  ],
+                  icon: (
+                    <GeneralIcon
+                      icon={{
+                        category: "app",
+                        color: "cyan",
+                        icon: "container",
+                        lib: "easyops",
+                      }}
+                      style={{ fontSize: 12, margin: "0 2px" }}
+                    />
+                  ),
+                  key: "routes/0/routes/0",
+                  title: "/images",
+                },
+              ],
+              icon: (
+                <GeneralIcon
+                  icon={{
+                    category: "app",
+                    color: "cyan",
+                    icon: "flow",
+                    lib: "easyops",
+                  }}
+                  style={{ fontSize: 12, margin: "0 2px" }}
+                />
+              ),
+              key: "routes/0",
+              title: "Project Menu",
+            },
+          ],
+          icon: (
+            <span
+              style={{
+                display: "inline-block",
+                height: 12,
+                margin: "0 2px",
+                width: 12,
+              }}
+            />
+          ),
+          key: "routes",
+          title: "routes",
+        },
+      ],
+    ],
     [{}, []],
   ])("%s should return %p", (value, result) => {
     expect(buildTree(value)).toEqual(result);

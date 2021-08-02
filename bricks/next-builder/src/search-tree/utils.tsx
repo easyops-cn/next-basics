@@ -2,7 +2,10 @@ import React from "react";
 import { isObject } from "@next-core/brick-utils";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
-import { symbolForNodeId } from "../shared/storyboard/buildStoryboard";
+import {
+  symbolForNodeId,
+  symbolForNodeInstanceId,
+} from "../shared/storyboard/buildStoryboard";
 
 export const symbolForHightlight = Symbol.for("hightlight");
 export const symbolForRealParentId = Symbol.for("realParentId");
@@ -183,8 +186,11 @@ function traversalArray(
   for (let i = 0; i < treeData.length; i++) {
     const title = getTitle(treeData[i]);
     const path = getPath(options?.parentPath ?? "", String(i));
-    let parentId = options.parentId;
-    if (!parentId && treeData[i][symbolForNodeId as any]) {
+    let parentId = options.parentId ?? "";
+    if (
+      (!parentId && treeData[i][symbolForNodeId as any]) ||
+      (parentId && !treeData[i][symbolForNodeInstanceId as any])
+    ) {
       parentId = treeData[i][symbolForNodeId as any];
     }
     const child: PlainObject = {
