@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.342.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.3...@next-bricks/developers@1.342.4) (2021-08-02)
+
+
+### Bug Fixes
+
+* make some bricks lazy load ([cf284f7](https://github.com/easyops-cn/next-basics/commit/cf284f76947de38c83f85d5782b1b3556c182c84))
+
+
+
+
+
 ## [1.342.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.2...@next-bricks/developers@1.342.3) (2021-08-02)
 
 **Note:** Version bump only for package @next-bricks/developers

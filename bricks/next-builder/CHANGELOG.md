@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.1...@next-bricks/next-builder@1.65.2) (2021-08-02)
+
+
+### Bug Fixes
+
+* make some bricks lazy load ([03bb210](https://github.com/easyops-cn/next-basics/commit/03bb21033f3d1aaa2a19bff239839dd44b05204a))
+
+
+
+
+
 ## [1.65.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.0...@next-bricks/next-builder@1.65.1) (2021-08-02)
 
 

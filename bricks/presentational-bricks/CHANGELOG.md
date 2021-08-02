@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.202.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.202.1...@next-bricks/presentational-bricks@1.202.2) (2021-08-02)
+
+
+### Bug Fixes
+
+* make some bricks lazy load ([9af92e6](https://github.com/easyops-cn/next-basics/commit/9af92e6e995ac594b326f63b9b5cde0ae5b331fb))
+
+
+
+
+
 ## [1.202.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.202.0...@next-bricks/presentational-bricks@1.202.1) (2021-08-02)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
