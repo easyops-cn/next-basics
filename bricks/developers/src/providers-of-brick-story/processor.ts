@@ -21,7 +21,7 @@ import {
   getAllStoryListV2,
 } from "../share/processor";
 
-const ALL_BOOKS = [].concat(atomBook, businessBook).map((book) => ({
+export const ALL_BOOKS = [].concat(atomBook, businessBook).map((book) => ({
   ...book,
   stories: book.stories.map((story: Story) => ({
     ...story,
