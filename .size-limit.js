@@ -3,9 +3,9 @@ const { sizeLimit } = require("@next-core/build-config-factory");
 module.exports = sizeLimit({
   bricks: {
     "*": "50 KB",
-    "basic-bricks": "125 KB",
+    "basic-bricks": "110 KB",
     "presentational-bricks": "90 KB",
-    "brick-visualization": "430 KB",
+    "brick-visualization": "365 KB",
     forms: "85 KB",
   },
   lazyBricks: {
