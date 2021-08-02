@@ -5,10 +5,8 @@ const spyOnAddResourceBundle = (i18next.addResourceBundle = jest.fn());
 const spyOnDefine = jest.spyOn(window.customElements, "define");
 
 jest.spyOn(kit, "getRuntime").mockReturnValue({
-  registerCustomTemplate: jest.fn(),
+  registerCustomTemplate: jest.fn()
 } as any);
-
-jest.mock("./lazy-bricks", () => void 0);
 
 // Use `require` instead of `import` to avoid hoisting.
 require("./index");
