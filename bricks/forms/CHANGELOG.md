@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.181.2...@next-bricks/forms@1.182.0) (2021-08-03)
+
+
+### Features
+
+* add i18n refs FLOW-443 ([e556dfe](https://github.com/easyops-cn/next-basics/commit/e556dfea4b6bdfbf7c91b3ad1260ea265a0ae0dd))
+
+
+
+
+
 ## [1.181.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.181.1...@next-bricks/forms@1.181.2) (2021-08-02)
 
 
