@@ -118,6 +118,10 @@ const locale: Locale = {
   [K.MILLSECOND]: "Millsecond",
   [K.DAY]: "Day",
   [K.MINUTE]: "Minute",
+  [K.CLICK_AND_DRAP_FIEL]: "Click or drag the file to this area",
+  [K.VOLUME_TOO_BIG]:
+    "The volume of the uploaded file exceeds the limit. Procedure",
+  [K.ADD]: "Add",
 };
 
 export default locale;

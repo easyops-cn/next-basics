@@ -12,7 +12,8 @@ import { Col, Row, Button } from "antd";
 import style from "./DynamicCommonItem.module.css";
 import classNames from "classnames";
 import { encrypt, decrypt } from "../utils";
-
+import { NS_FORMS, K } from "../i18n/constants";
+import i18n from "i18next";
 export type RowProps = Record<string, any>;
 
 export interface BuiltInValidatorRule extends ValidationRule {
@@ -59,11 +60,8 @@ export function CommonItem(
   props: PropsWithChildren<CommonItemProps>,
   ref: any
 ): React.ReactElement {
-  const {
-    getFieldValue,
-    setFieldsValue,
-    validateFields,
-  } = props.formElement.formUtils;
+  const { getFieldValue, setFieldsValue, validateFields } =
+    props.formElement.formUtils;
   const [, forceUpdate] = useState();
   const defaultRow = props.columns.reduce((obj: any, column) => {
     obj[column.name] = column.defaultValue;
@@ -100,7 +98,7 @@ export function CommonItem(
   });
 
   const handleAdd = () => {
-    setTrackRows(trackRows => [...trackRows, uniqueId()]);
+    setTrackRows((trackRows) => [...trackRows, uniqueId()]);
     setRows([...rows, defaultRow]);
 
     // important! notify form to detect changes
@@ -120,7 +118,7 @@ export function CommonItem(
     });
 
     setRows(filter);
-    setTrackRows(trackRows => trackRows.filter((_, i) => index !== i));
+    setTrackRows((trackRows) => trackRows.filter((_, i) => index !== i));
     props.onRemove?.(data);
     encrypted.current = filter;
     props.onChange?.(encrypted.current);
@@ -187,9 +185,11 @@ export function CommonItem(
     const editedValue = props.manualEditedValue;
     if (editedValue) {
       setRows(editedValue);
-      setTrackRows(Array(editedValue.length)
-        .fill(0)
-        .map(() => uniqueId()))
+      setTrackRows(
+        Array(editedValue.length)
+          .fill(0)
+          .map(() => uniqueId())
+      );
       setFieldsValue({
         [props.name]: editedValue,
       });
@@ -285,7 +285,7 @@ export function CommonItem(
               disabled={props.disabledAddButton}
             >
               <PlusOutlined />
-              添加
+              {i18n.t(`${NS_FORMS}:${K.ADD}`)}
             </Button>
           )}
         </Col>
