@@ -109,6 +109,9 @@ const locale: Locale = {
   [K.SECOND]: "秒",
   [K.MINUTE]: "分",
   [K.MILLSECOND]: "毫秒",
+  [K.CLICK_AND_DRAP_FIEL]: "请点击或拖拽文件到此区域",
+  [K.VOLUME_TOO_BIG]: "上传文件体积大于限定体积",
+  [K.ADD]: "添加",
 };
 
 export default locale;

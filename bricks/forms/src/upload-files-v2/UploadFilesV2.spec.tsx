@@ -3,7 +3,8 @@ import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Upload } from "antd";
 import { UploadFilesV2 } from "./UploadFilesV2";
-
+import { NS_FORMS, K } from "../i18n/constants";
+import i18n from "i18next";
 jest.mock("@next-core/brick-http");
 
 HTMLCanvasElement.prototype.getContext = jest.fn();
@@ -346,7 +347,7 @@ describe("UploadFilesV2", () => {
         ]
       );
       await expect(notAllowResult).rejects.toStrictEqual(
-        new Error("上传文件体积大于限定体积")
+        new Error(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`))
       );
 
       wrapper.setProps({

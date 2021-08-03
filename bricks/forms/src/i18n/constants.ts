@@ -107,6 +107,9 @@ export enum K {
   MINUTE = "MINUTE",
   SECOND = "SECOND",
   MILLSECOND = "MILLSECOND",
+  CLICK_AND_DRAP_FIEL = "CLICK_AND_DRAP_FIEL",
+  VOLUME_TOO_BIG = "VOLUME_TOO_BIG",
+  ADD = "ADD",
 }
 
 export type Locale = { [key in K]: string };

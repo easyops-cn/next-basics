@@ -13,6 +13,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 import { UploadFile, RcFile } from "antd/lib/upload/interface";
 import { FileUtils } from "../utils";
 import { UploadButtonProps } from "../interfaces";
+import i18n from "i18next";
 
 interface UploadFilesV2Props extends FormItemWrapperProps {
   onChange?: any;
@@ -105,10 +106,10 @@ export function RealUploadFile(
   const handleBeforeUpload = (file: RcFile): Promise<RcFile> | boolean => {
     if (FileUtils.sizeCompare(file, props.limitSize ?? 100)) {
       // 如果上传文件大小大于限定大小
-      props.onError?.(`上传文件体积大于限定体积`);
+      props.onError?.(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`));
       return new Promise((_resolve, reject) => {
         // 返回reject阻止文件添加
-        reject(new Error(`上传文件体积大于限定体积`));
+        reject(new Error(i18n.t(`${NS_FORMS}:${K.VOLUME_TOO_BIG}`)));
       });
     }
     if (props.autoUpload) {
@@ -223,7 +224,8 @@ export function RealUploadFile(
             <GeneralIcon icon={buttonIcon} />
           </p>
           <p className="ant-upload-text">
-            {props.draggableUploadText ?? "请点击或拖拽文件到此区域"}
+            {props.draggableUploadText ??
+              i18n.t(`${NS_FORMS}:${K.CLICK_AND_DRAP_FIEL}`)}
           </p>
           <p className="ant-upload-hint">
             {props.draggableUploadHint ?? t(K.DRAGGABLE_UPLOAD_HINT)}
