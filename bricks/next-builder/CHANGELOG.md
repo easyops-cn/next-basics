@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.3...@next-bricks/next-builder@1.65.4) (2021-08-04)
+
+
+### Reverts
+
+* Revert "Revert "Steve/split bricks"" ([aee7ace](https://github.com/easyops-cn/next-basics/commit/aee7ace7e3adc513149a7b964acbda11941f39f3))
+
+
+
+
+
 ## [1.65.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.2...@next-bricks/next-builder@1.65.3) (2021-08-03)
 
 **Note:** Version bump only for package @next-bricks/next-builder
