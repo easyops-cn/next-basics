@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.203.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.202.4...@next-bricks/presentational-bricks@1.203.0) (2021-08-04)
+
+
+### Features
+
+* add i18n refs FLOW-443 ([a9044f6](https://github.com/easyops-cn/next-basics/commit/a9044f6b4440ab980685cce22d4500fdc76247df))
+
+
+
+
+
 ## [1.202.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.202.3...@next-bricks/presentational-bricks@1.202.4) (2021-08-04)
 
 
