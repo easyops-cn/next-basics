@@ -8,7 +8,7 @@ exports[`BrickHumanizeTime should work 1`] = `
 
 exports[`BrickHumanizeTime should work, isCostTime 1`] = `
 <span>
-  18 天 2 小时
+  18 libs-datetime:DARS 2 libs-datetime:HOURS
 </span>
 `;
 
