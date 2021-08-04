@@ -2,12 +2,12 @@
 
 exports[`CostTime should work 1`] = `
 <span>
-  0.1 秒
+  0.1 libs-datetime:SECONDS
 </span>
 `;
 
 exports[`CostTime should work when cost is undefined 1`] = `
 <span>
-  3 秒
+  3 libs-datetime:SECONDS
 </span>
 `;

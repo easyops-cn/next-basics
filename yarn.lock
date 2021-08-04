@@ -2432,10 +2432,10 @@
   resolved "https://registry.npmjs.org/@next-libs/datetime-components/-/datetime-components-2.1.0.tgz#f91f11b2d2467bdc2b80b7bf11c02487e561faf7"
   integrity sha512-rCbSNFB0FKVLWB/xG6FVgpeZUmv9OJr9JSS6dt3/pwRxt3EKdqOWkeGj4POaCK4+6G1gZkAOw1NFEk3Ft04S7A==
 
-"@next-libs/datetime@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-1.1.1.tgz#2c5634e80629ab8d2d637d100b205e17b560330b"
-  integrity sha512-rxlmHFOskiAGAgcroJhkYr7UvLrvOvVx7osgtaQ5aEVE7sNnHgo6dN5b5z2sDMboOtLNdfkXHsBk0UIqX0uKbg==
+"@next-libs/datetime@^1.1.2":
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-1.2.0.tgz#f77eddc5dc127dffa1356120664535f95c96a445"
+  integrity sha512-enaWKPFxFJa8d+SaN40UEH9Qrc0TZtLun9aPXioVRbaZLZIOLKwbpEwlSLNf2QO0F4tzeAcru3W9APMNTuNqBg==
 
 "@next-libs/editor-components@^1.0.0":
   version "1.0.4"
