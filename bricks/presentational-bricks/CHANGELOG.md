@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.203.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.203.0...@next-bricks/presentational-bricks@1.203.1) (2021-08-05)
+
+
+### Bug Fixes
+
+* **brick-link:** 禁用时icon也要置灰 ([bae7c51](https://github.com/easyops-cn/next-basics/commit/bae7c51a929db175252300fa599b732a84232fc8))
+
+
+
+
+
 # [1.203.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.202.4...@next-bricks/presentational-bricks@1.203.0) (2021-08-04)
 
 
