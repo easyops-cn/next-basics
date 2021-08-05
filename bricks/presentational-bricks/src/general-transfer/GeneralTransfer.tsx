@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Transfer } from "antd";
+import { Modal, Transfer } from "antd";
 import { TransferItem, TransferLocale } from "antd/lib/transfer";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import cssStyle from "./style.module.css";
@@ -35,7 +35,15 @@ export function GeneralTransfer(
     direction: string,
     moveKeys: string[]
   ): void => {
-    props.onChange(targetKeys);
+    if (!props.maxSelected || targetKeys.length <= props.maxSelected) {
+      props.onChange(targetKeys);
+    } else {
+      Modal.warning({
+        title: "提示",
+        content: `所选数量超过最大限制（${props.maxSelected}），请重新选择`,
+        okText: "知道了",
+      });
+    }
   };
 
   const onSelectChange = (
@@ -61,7 +69,7 @@ export function GeneralTransfer(
       <Transfer
         lazy={false}
         dataSource={props.dataSource}
-        render={item => item.title}
+        render={(item) => item.title}
         targetKeys={props.targetKeys}
         onChange={onChange}
         onSelectChange={onSelectChange}
