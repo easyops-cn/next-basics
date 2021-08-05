@@ -41,13 +41,14 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
   const icon = props.icon ? (
     <GeneralIcon
       icon={props.icon}
-      style={
-        label
+      style={{
+        ...(props.disabled && { color: "#bfbfbf" }),
+        ...(label
           ? iconAlign === "left"
             ? { marginRight: 6 }
             : { marginLeft: 6 }
-          : {}
-      }
+          : {}),
+      }}
     />
   ) : null;
 
