@@ -36,11 +36,21 @@ describe("BrickLink", () => {
 
   it("should work when disabled", () => {
     const wrapper = shallow<BrickLinkProps>(
-      <BrickLink label="aaa" disabled={true} />
+      <BrickLink
+        label="aaa"
+        disabled={true}
+        icon={{
+          lib: "antd",
+          theme: "outlined",
+          type: "file-search",
+          color: "red",
+        }}
+      />
     );
 
+    expect(wrapper.find("GeneralIcon").prop("style").color).toBe("#bfbfbf");
     expect(wrapper.find("Link").length).toBe(0);
-    expect(wrapper.find("span").text()).toBe("aaa");
+    expect(wrapper.find("span").text()).toBe("<GeneralIcon />aaa");
   });
 
   it("should work when type is text", () => {
