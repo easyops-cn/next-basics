@@ -122,6 +122,8 @@ const locale: Locale = {
   [K.VOLUME_TOO_BIG]:
     "The volume of the uploaded file exceeds the limit. Procedure",
   [K.ADD]: "Add",
+  [K.MONTH]: "month",
+  [K.CORRECT_CRONT_MSG]: "Please enter the correct time format",
 };
 
 export default locale;

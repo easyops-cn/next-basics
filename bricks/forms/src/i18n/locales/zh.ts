@@ -112,6 +112,8 @@ const locale: Locale = {
   [K.CLICK_AND_DRAP_FIEL]: "请点击或拖拽文件到此区域",
   [K.VOLUME_TOO_BIG]: "上传文件体积大于限定体积",
   [K.ADD]: "添加",
+  [K.MONTH]: "月",
+  [K.CORRECT_CRONT_MSG]: "请填写正确的时间格式",
 };
 
 export default locale;
