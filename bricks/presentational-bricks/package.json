@@ -32,7 +32,7 @@
     "@next-libs/basic-components": "^2.1.0",
     "@next-libs/clipboard": "^2.0.0",
     "@next-libs/cmdb-utils": "^1.0.0",
-    "@next-libs/crontab": "^1.0.0",
+    "@next-libs/crontab": "^1.0.7",
     "@next-libs/datetime": "^1.1.2",
     "@next-libs/datetime-components": "^2.1.0",
     "@next-libs/forms": "^2.2.2",

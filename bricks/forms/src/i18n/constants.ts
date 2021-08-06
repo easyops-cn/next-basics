@@ -110,6 +110,8 @@ export enum K {
   CLICK_AND_DRAP_FIEL = "CLICK_AND_DRAP_FIEL",
   VOLUME_TOO_BIG = "VOLUME_TOO_BIG",
   ADD = "ADD",
+  MONTH = "MONTH",
+  CORRECT_CRONT_MSG = "CORRECT_CRONT_MSG",
 }
 
 export type Locale = { [key in K]: string };

@@ -3,6 +3,19 @@ import { mount, shallow } from "enzyme";
 import { ValidationRule } from "@ant-design/compatible/lib/form";
 import { FormItemWrapper } from "@next-libs/forms";
 
+jest.mock("i18next", () => ({
+  addResourceBundle: jest.fn(),
+  language: "zh-CN",
+  t: jest.fn().mockImplementation((title) => {
+    switch (title) {
+      case "forms:CORRECT_CRONT_MSG":
+        return "请填写正确的时间格式";
+      default:
+        return "unknown";
+    }
+  }),
+}));
+
 import { CrontabInput, CrontabInputWrapper } from "./CrontabInput";
 
 describe("CrontabInput", () => {
@@ -11,17 +24,21 @@ describe("CrontabInput", () => {
 
     const wrapper = shallow(<CrontabInput />);
 
-    (wrapper.find(FormItemWrapper).prop("validator") as Pick<
-      ValidationRule,
-      "validator" | "message"
-    >[])[0].validator([], "6 * * * *", validatorFn);
+    (
+      wrapper.find(FormItemWrapper).prop("validator") as Pick<
+        ValidationRule,
+        "validator" | "message"
+      >[]
+    )[0].validator([], "6 * * * *", validatorFn);
 
     expect(validatorFn).toHaveBeenCalled();
 
-    (wrapper.find(FormItemWrapper).prop("validator") as Pick<
-      ValidationRule,
-      "validator" | "message"
-    >[])[0].validator([], "d * * * *", validatorFn);
+    (
+      wrapper.find(FormItemWrapper).prop("validator") as Pick<
+        ValidationRule,
+        "validator" | "message"
+      >[]
+    )[0].validator([], "d * * * *", validatorFn);
 
     expect(validatorFn).toHaveBeenCalledWith("请填写正确的时间格式");
   });

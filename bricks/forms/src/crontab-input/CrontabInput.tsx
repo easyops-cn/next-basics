@@ -9,6 +9,8 @@ import {
   AbstractGeneralFormElement,
 } from "@next-libs/forms";
 import style from "./index.module.css";
+import { NS_FORMS, K } from "../i18n/constants";
+import i18n from "i18next";
 
 export type CrontabType = "minute" | "hour" | "date" | "month" | "dow";
 
@@ -63,27 +65,27 @@ function CrontabInputItem(
   return (
     <div className={style.crontabContainer} ref={ref}>
       <div>
-        <label>分钟</label>
+        <label>{i18n.t(`${NS_FORMS}:${K.MINUTE}`, "分钟")} </label>
         <Input name="minute" onChange={handleChange} value={minute} />
       </div>
 
       <div>
-        <label>小时</label>
+        <label>{i18n.t(`${NS_FORMS}:${K.HOUR}`, "小时")}</label>
         <Input name="hour" onChange={handleChange} value={hour} />
       </div>
 
       <div>
-        <label>天</label>
+        <label>{i18n.t(`${NS_FORMS}:${K.DAY}`, "天")}</label>
         <Input name="date" onChange={handleChange} value={date} />
       </div>
 
       <div>
-        <label>月</label>
+        <label>{i18n.t(`${NS_FORMS}:${K.MONTH}`, "月")}</label>
         <Input name="month" onChange={handleChange} value={month} />
       </div>
 
       <div>
-        <label>星期</label>
+        <label>{i18n.t(`${NS_FORMS}:${K.WEEK}`, "星期")}</label>
         <Input name="dow" onChange={handleChange} value={dow} />
       </div>
       <div className={style.formatText}>{humanizeCrontab}</div>
@@ -104,7 +106,9 @@ export function CrontabInput(props: CrontabInputProps): React.ReactElement {
     if (validateCrontab(parseCrontab(value))) {
       callback();
     } else {
-      callback("请填写正确的时间格式");
+      callback(
+        i18n.t(`${NS_FORMS}:${K.CORRECT_CRONT_MSG}`, "请填写正确的时间格式")
+      );
     }
     // only used for trigger children component re-render to update validate states
     setForceUpdate({});

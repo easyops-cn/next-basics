@@ -2420,10 +2420,10 @@
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.1.1"
 
-"@next-libs/crontab@^1.0.0":
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-1.0.3.tgz#6365850a86667cdd11343abfa0b27b9639edfd80"
-  integrity sha1-Y2WFCoZmfN0RNDq/oLJ7ljnt/YA=
+"@next-libs/crontab@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-1.0.7.tgz#cf63d87a52bacd9b9d47f9dc9cd3be83d7343a2b"
+  integrity sha512-F4aSTX3jc63d+JAdtoIBbGRdY803uRub1lnU+zWvu/L8TTjwCT4ioSBmaf+xNueZl9LNZ21SEwRcxDfTIJ+zYg==
   dependencies:
     cronstrue "^1.88.0"
 
