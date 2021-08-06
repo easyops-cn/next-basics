@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.203.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.203.1...@next-bricks/presentational-bricks@1.203.2) (2021-08-06)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** "maxSelected" has some problems ([b4feb88](https://github.com/easyops-cn/next-basics/commit/b4feb8809c04d739d970cda4ef17dee2c9f112d0))
+
+
+
+
+
 ## [1.203.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.203.0...@next-bricks/presentational-bricks@1.203.1) (2021-08-05)
 
 
