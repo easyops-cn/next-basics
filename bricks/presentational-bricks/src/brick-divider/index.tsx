@@ -12,6 +12,7 @@ import { BrickDivider } from "./BrickDivider";
  * @slots
  * @history
  * 1.60.0:新属性 `dividerTitle` 和 `orientation`
+ * 1.204.0: 新属性 `plain` 和 `type`增加`radiation`
  * @memo
  * @noInheritDoc
  */
@@ -26,12 +27,12 @@ export class BrickDividerElement extends UpdatingElement {
   dividerTitle: string;
 
   /**
-   * @kind "horizontal" \| "vertical"
+   * @kind "horizontal" | "vertical" | "radiation"
    * @required false
    * @default horizontal
-   * @description 水平还是垂直类型
+   * @description 水平|垂直|放射类型,注意`radiation`是个特殊的类型，该样式是特定的
    */
-  @property() type: "horizontal" | "vertical";
+  @property() type: "horizontal" | "vertical" | "radiation";
 
   /**
    * @kind boolean
@@ -61,6 +62,24 @@ export class BrickDividerElement extends UpdatingElement {
   @property()
   orientation: "center" | "left" | "right";
 
+  /**
+   * @kind `boolean`
+   * @required false
+   * @default  false
+   * @description 文字是否显示为普通正文样式
+   */
+  @property()
+  plain: boolean;
+
+  /**
+   * @kind `number[]`
+   * @required  false
+   * @default   false
+   * @description  当用于数值显示的情况，eg: 如果要展示"1/3"，那么传入就是[1,3], 该字段只适配于 type 为 `radiation`
+   */
+  @property({ attribute: false })
+  proportion: number[];
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -83,6 +102,8 @@ export class BrickDividerElement extends UpdatingElement {
             dividerStyle={this.dividerStyle}
             orientation={this.orientation || "center"}
             dividerTitle={this.dividerTitle}
+            plain={this.plain}
+            proportion={this.proportion}
           />
         </BrickWrapper>,
         this

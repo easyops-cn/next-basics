@@ -70,6 +70,19 @@ export const BrickDividerStory: Story = {
         orientation: "left",
       },
     },
+    {
+      brick: "presentational-bricks.brick-divider",
+      properties: {
+        dividerTitle: "标题",
+        type: "radiation",
+        proportion: [1, 3],
+      },
+      description: {
+        title: "type为 `radiation`类型",
+        message:
+          "符合一些特定的场景下使用，该样式目前不支持`orientation`、`dividerStyle`、`plain`这些样式，`proportion`适合数值显示场景下使用",
+      },
+    },
   ],
   previewColumns: 2,
 };
