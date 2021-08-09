@@ -10,7 +10,7 @@ describe("CrontabDisplay", () => {
     });
     wrapper.update();
     expect(wrapper.find("div").text()).toBe(
-      "5 1 3 * *（在 01:05 AM, 每月的 3 号）"
+      "5 1 3 * *（在上午 01:05, 限每月 3 号）"
     );
   });
 });
