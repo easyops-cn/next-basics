@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BrickDivider should work 1`] = `
-<Divider
-  dashed={false}
-  style={Object {}}
-  type="horizontal"
-/>
-`;
