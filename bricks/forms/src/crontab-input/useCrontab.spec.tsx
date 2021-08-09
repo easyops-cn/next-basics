@@ -22,25 +22,25 @@ describe("useCrontab custom hook test", () => {
   it("should work with change value", () => {
     const wrapper = mount(<HookWrapper value="5 2 * * *" />);
 
-    expect(wrapper.text()).toEqual("在 02:05 AM");
+    expect(wrapper.text()).toEqual("在上午 02:05");
 
     const onChange = wrapper.find(".crontab-container").invoke("onChange");
     onChange("minute", "1");
 
-    expect(wrapper.text()).toEqual("在 02:01 AM");
+    expect(wrapper.text()).toEqual("在上午 02:01");
 
     onChange("hour", "3");
-    expect(wrapper.text()).toEqual("在 03:01 AM");
+    expect(wrapper.text()).toEqual("在上午 03:01");
 
     onChange("date", "6");
-    expect(wrapper.text()).toEqual("在 03:01 AM, 每月的 6 号");
+    expect(wrapper.text()).toEqual("在上午 03:01, 限每月 6 号");
 
     onChange("month", "6");
-    expect(wrapper.text()).toEqual("在 03:01 AM, 每月的 6 号, 仅在 六月");
+    expect(wrapper.text()).toEqual("在上午 03:01, 限每月 6 号, 仅于六月份");
 
     onChange("dow", "0");
     expect(wrapper.text()).toEqual(
-      "在 03:01 AM, 每月的 6 号, 和 星期日, 仅在 六月"
+      "在上午 03:01, 限每月 6 号, 并且为星期日, 仅于六月份"
     );
 
     expect(() => onChange("unknown", "9")).toThrow("Unknown Crontab Type");
@@ -53,7 +53,7 @@ describe("validateCrontab", () => {
     hour: "*",
     date: "6",
     month: "*",
-    dow: "*"
+    dow: "*",
   };
 
   const reulst = validateCrontab(obj);
@@ -65,7 +65,7 @@ describe("validateCrontab", () => {
     hour: "*",
     date: "6",
     month: "*",
-    dow: "*"
+    dow: "*",
   });
 
   expect(reulst2).toEqual(false);
@@ -75,7 +75,7 @@ describe("validateCrontab", () => {
     hour: "25",
     date: "6",
     month: "*",
-    dow: "*"
+    dow: "*",
   });
 
   expect(reulst3).toEqual(false);
@@ -85,7 +85,7 @@ describe("validateCrontab", () => {
     hour: "23",
     date: "6",
     month: "*",
-    dow: "7"
+    dow: "7",
   });
 
   expect(reulst4).toEqual(false);

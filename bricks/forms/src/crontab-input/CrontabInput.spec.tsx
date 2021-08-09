@@ -46,7 +46,7 @@ describe("CrontabInput", () => {
   it("should work", () => {
     const wrapper = mount(<CrontabInput value="6 * * * *" />);
 
-    expect(wrapper.find(".formatText").text()).toEqual("在每小时的 6 分");
+    expect(wrapper.find(".formatText").text()).toEqual("在每小时的第 6 分钟");
 
     wrapper.find("Input").at(0).invoke("onChange")({
       target: {
