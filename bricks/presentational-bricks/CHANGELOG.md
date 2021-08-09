@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.204.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.203.3...@next-bricks/presentational-bricks@1.204.0) (2021-08-09)
+
+
+### Features
+
+* **presentational-bricks:** add radiation and plain properties ([f6dad35](https://github.com/easyops-cn/next-basics/commit/f6dad35d42c12334f17ff68ca9af7f90eebcd4f3))
+
+
+
+
+
 ## [1.203.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.203.2...@next-bricks/presentational-bricks@1.203.3) (2021-08-06)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
