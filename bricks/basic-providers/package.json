@@ -10,7 +10,9 @@
     "version.ini"
   ],
   "scripts": {
+    "prestart": "node scripts/pre-build.js",
     "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
+    "prebuild": "node scripts/pre-build.js",
     "build": "cross-env NODE_ENV='production' webpack --config webpack.config.js",
     "postbuild": "node scripts/post-build.js",
     "test": "cross-env NODE_ENV='test' jest",

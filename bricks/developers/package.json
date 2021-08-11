@@ -13,6 +13,7 @@
     "url": "git@github.com:easyops-cn/next-basics.git"
   },
   "scripts": {
+    "prestart": "node scripts/pre-build.js",
     "start": "cross-env NODE_ENV='development' webpack --config webpack.config.js --watch",
     "prebuild": "node scripts/pre-build.js",
     "build": "cross-env NODE_ENV='production' webpack --config webpack.config.js",
