@@ -7,15 +7,16 @@ import {
   processFieldValue,
   getFieldChildrenMap,
   serializeFieldValue,
+  getFinalFieldsValue,
 } from "./processor";
 import { EditableCell } from "./components/editable-cell/EditableCell";
 import styles from "./FieldsMappingEditor.module.css";
 import { useTranslation } from "react-i18next";
-import { FieldItem } from "./interfaces";
+import { FieldItem, SimplifiedFieldItem } from "./interfaces";
 import { NS_FLOW_BUILDER, K } from "../i18n/constants";
 export interface FieldsMappingEditorProps {
   dataSource: FieldItem[];
-  onChange?: (value: FieldItem[]) => void;
+  onChange?: (value: SimplifiedFieldItem[]) => void;
   loading?: boolean;
 }
 
@@ -74,7 +75,7 @@ export function FieldsMappingEditor(
 
           setDataSource(mutableDataSource);
           setEditingKey("");
-          onChange?.(mutableDataSource);
+          onChange?.(getFinalFieldsValue(mutableDataSource));
           // eslint-disable-next-line no-empty
         } catch (error) {}
       };

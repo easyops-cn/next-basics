@@ -1,6 +1,10 @@
-import { safeDump, JSON_SCHEMA } from "js-yaml";
-import { get, isNil, omit } from "lodash";
-import { FlatFieldChildrenMap, FieldItem } from "./interfaces";
+import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
+import { get, isNil, omit, values } from "lodash";
+import {
+  FlatFieldChildrenMap,
+  FieldItem,
+  SimplifiedFieldItem,
+} from "./interfaces";
 
 export function calcFieldPath(key: string): string[] {
   const arr = key.split("-");
@@ -12,6 +16,17 @@ export function calcFieldPath(key: string): string[] {
   });
 
   return path.slice(0, -1);
+}
+
+export function yaml(value: string): unknown {
+  let result;
+  try {
+    result = safeLoad(value, { schema: JSON_SCHEMA, json: true });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+  }
+  return result;
 }
 
 export function yamlStringify(value: unknown, indent = 2): string {
@@ -98,4 +113,33 @@ export function serializeFieldValue(value: unknown): string | unknown {
     default:
       throw new Error("Unsupported Field Type");
   }
+}
+
+export function getFinalFieldsValue(
+  fieldList: FieldItem[]
+): SimplifiedFieldItem[] {
+  const list = [] as SimplifiedFieldItem[];
+
+  const processValue = (
+    fieldList: FieldItem[],
+    list: SimplifiedFieldItem[]
+  ): void => {
+    fieldList.forEach((item) => {
+      const curField = {
+        name: item.name,
+        type: item.type,
+        value: isNil(item.value) ? undefined : yaml(item.value as string),
+      } as SimplifiedFieldItem;
+      list.push(curField);
+
+      if (item.fields) {
+        curField.feilds = [];
+        processValue(item.fields, curField.feilds);
+      }
+    });
+  };
+
+  processValue(fieldList, list);
+
+  return list;
 }

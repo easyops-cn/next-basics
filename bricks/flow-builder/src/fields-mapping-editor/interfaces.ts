@@ -8,4 +8,11 @@ export interface FieldItem {
   fields?: FieldItem[];
 }
 
+export interface SimplifiedFieldItem {
+  name: string;
+  type: string;
+  value?: unknown;
+  feilds?: SimplifiedFieldItem[];
+}
+
 export type FlatFieldChildrenMap = Record<string, FieldItem[]>;
