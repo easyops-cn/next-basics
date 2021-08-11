@@ -2447,6 +2447,17 @@
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.1.1"
 
+"@next-libs/code-editor-components@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-2.0.1.tgz#1ca1dd45cb9dc1a6b3d43f0040c1d9b5863a9c85"
+  integrity sha512-RiTmGNddlSNiCp0kmWuNo9KgytYHFJRgvtwUglqCV1pcLA9Y+KMnmrMf+oH22QLURAJ1qmJ+nFVm1xpwW8XFqQ==
+  dependencies:
+    "@next-libs/clipboard" "^2.2.1"
+    "@next-libs/forms" "^2.4.4"
+    ajv "^6.12.6"
+    classnames "^2.3.1"
+    file-saver "^2.0.5"
+
 "@next-libs/crontab@^2.0.2":
   version "2.0.2"
   resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-2.0.2.tgz#9295c942ec53d50ad73dd1785b25073bdef5ae24"
@@ -2476,10 +2487,10 @@
     prismjs "^1.23.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/forms@^2.2.2", "@next-libs/forms@^2.4.2":
-  version "2.4.2"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-2.4.2.tgz#b1e18f649c17dbfb47e911d57a27f52886349725"
-  integrity sha512-821qis4hvhrEj45ddCDwTxUvPVsd12GjIQ/V5fM/elOl7yJ8nHym4wWgEVTEtzouCKzOm7ixP33bdrnHSi1Pdg==
+"@next-libs/forms@^2.2.2", "@next-libs/forms@^2.4.2", "@next-libs/forms@^2.4.4":
+  version "2.4.4"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-2.4.4.tgz#95ce552872ec35e1aeaf492d0278e8b1cbb997a2"
+  integrity sha512-JZGfdBnF78UKdwsl1eNmDun3R/if0Aw/jxkLWMVM/E4A8+eSy9t19Ra82U5YLwFWoITl04LNgmIs2fMrPYMomw==
 
 "@next-libs/storage@^1.0.0", "@next-libs/storage@^1.0.5", "@next-libs/storage@^1.0.6":
   version "1.0.6"

@@ -1,0 +1,10 @@
+.editableRow:hover .editableCellWrapper {
+  padding: 4px 11px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+.editableCellWrapper {
+  padding: 5px 12px;
+  cursor: pointer;
+  min-height: 22px;
+}

@@ -14,6 +14,10 @@ const locale: Locale = {
   [K.MODEL_TYPE]: "Model Type",
   [K.REF_VALIDATE_REQUIRED_MSG]: "Pealse select field of Ref",
   [K.MODEL_SEARCH_PLANCEHOLDER]: "Search with keyword",
+  [K.FIELDS_MAPPING_REQUIRED_MSG]: "{{name}} is required",
+  [K.EDIT]: "Edit",
+  [K.CANCEL]: "Cancel",
+  [K.SAVE]: "Save",
 };
 
 export default locale;
