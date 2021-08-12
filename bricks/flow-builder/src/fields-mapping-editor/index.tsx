@@ -28,7 +28,7 @@ export class FieldsMappingEditorElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  dataSource: FieldItem[];
+  dataSource: FieldItem[] = [];
 
   /**
    * @kind boolean

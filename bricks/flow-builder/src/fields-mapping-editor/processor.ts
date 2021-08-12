@@ -143,3 +143,22 @@ export function getFinalFieldsValue(
 
   return list;
 }
+
+export function removeExtraFields(fieldsList: FieldItem[]): FieldItem[] {
+  const list = [] as FieldItem[];
+  const processFields = (fields: FieldItem[], arr: FieldItem[]): void => {
+    fields.forEach((item) => {
+      const curValue = { ...omit(item, "fields") } as FieldItem;
+      arr.push(curValue);
+      // 当该字段没有值的时候才展示其下面的 fields，有值的话代表对该字段整体赋值不需要再展示其下的 fields
+      if (item.fields && isNil(item.value)) {
+        curValue.fields = [];
+        processFields(item.fields, curValue.fields);
+      }
+    });
+  };
+
+  processFields(fieldsList, list);
+
+  return list;
+}

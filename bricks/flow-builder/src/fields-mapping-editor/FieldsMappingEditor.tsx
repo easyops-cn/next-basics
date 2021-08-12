@@ -9,6 +9,7 @@ import {
   serializeFieldValue,
   getFinalFieldsValue,
   yaml,
+  removeExtraFields,
 } from "./processor";
 import { EditableCell } from "./components/editable-cell/EditableCell";
 import styles from "./FieldsMappingEditor.module.css";
@@ -153,7 +154,7 @@ export function FieldsMappingEditor(
     <Form form={form} component={false}>
       <Table
         columns={columns}
-        dataSource={dataSource}
+        dataSource={removeExtraFields(dataSource)}
         expandable={{ childrenColumnName: "fields" }}
         pagination={false}
         loading={loading}
