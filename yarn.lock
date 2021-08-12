@@ -2420,6 +2420,11 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-2.2.1.tgz#d96d7e2a3c6f07c2c2e3140a6def9b6fbc5dc109"
   integrity sha512-ffAzaFkJrGtHmbovprUlALAZ6ARw9xvWBsSrRTyCWcFLtbVLEOjvye1fWMaHxz1Xwi49CPs5ZMJYMVGuXPJ9jQ==
 
+"@next-libs/clipboard@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.1.tgz#70ff6730d03aaec2263a74e9900b6673a6ac7dc4"
+  integrity sha512-3kHWGgdPHdGMR/QaSrP9HGALtxVl587Pwfe1v3VT2NEavpi5b/Jno0jg2xN/BIrL1mG/fWp88VsU+roc0578Jw==
+
 "@next-libs/cmdb-instances@^4.3.2":
   version "4.3.2"
   resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-4.3.2.tgz#09fb4283f869a4cbaf48d0e7dc2a0bd7f44bdfac"
@@ -2446,6 +2451,17 @@
   integrity sha512-wZsheLABwRlrFWx9tM/o52DxEQ9t+9LPPJLGQv0PbpoyHpxDmelpJ8sslsdJc8QCuNM1+AOogrEidF9nqOgwrg==
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.1.1"
+
+"@next-libs/code-display-components@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/@next-libs/code-display-components/-/code-display-components-2.0.1.tgz#5d0f32460e81e71c4163736d99e779d9a585afa2"
+  integrity sha512-tzjI2PGUP3bBvaa0FqDAdgtUQIXoGxPy3/U0sm3MCCYGaZ1i3FdvMUkPwwIKqAMv9rl/8OU0nkNuWI3bMxiF4g==
+  dependencies:
+    "@next-libs/clipboard" "^3.0.1"
+    classnames "^2.3.1"
+    file-saver "^2.0.5"
+    prismjs "^1.23.0"
+    resize-observer-polyfill "^1.5.1"
 
 "@next-libs/code-editor-components@^2.0.0":
   version "2.0.1"

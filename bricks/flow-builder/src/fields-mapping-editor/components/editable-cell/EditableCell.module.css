@@ -8,3 +8,15 @@
   cursor: pointer;
   min-height: 22px;
 }
+.popoverContainer {
+  :global(.ant-popover-inner) {
+    min-width: 350px;
+  }
+}
+
+.cellWrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+}

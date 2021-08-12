@@ -1,10 +1,11 @@
 import React from "react";
 import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
-import { FieldsMappingEditor } from "./FieldsMappingEditor";
 import { Table } from "antd";
+import { FieldsMappingEditor } from "./FieldsMappingEditor";
+
 jest.mock("@next-libs/code-editor-components", () => ({
-  CodeEditorItemWrapper: function CodeEditorItemWrapper() {
+  CodeEditorItem: function CodeEditorItemWrapper() {
     return <div>editor item</div>;
   },
 }));

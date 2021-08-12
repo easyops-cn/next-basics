@@ -7,15 +7,17 @@ import {
   processFieldValue,
   getFieldChildrenMap,
   serializeFieldValue,
+  getFinalFieldsValue,
+  yaml,
 } from "./processor";
 import { EditableCell } from "./components/editable-cell/EditableCell";
 import styles from "./FieldsMappingEditor.module.css";
 import { useTranslation } from "react-i18next";
-import { FieldItem } from "./interfaces";
+import { FieldItem, SimplifiedFieldItem } from "./interfaces";
 import { NS_FLOW_BUILDER, K } from "../i18n/constants";
 export interface FieldsMappingEditorProps {
   dataSource: FieldItem[];
-  onChange?: (value: FieldItem[]) => void;
+  onChange?: (value: SimplifiedFieldItem[]) => void;
   loading?: boolean;
 }
 
@@ -61,7 +63,7 @@ export function FieldsMappingEditor(
 
       const handleSave = async (record: FieldItem): Promise<void> => {
         try {
-          const value = (await form.validateFields())?.value;
+          const value = yaml((await form.validateFields())?.value);
           const mutableDataSource = [...dataSource];
           const path = calcFieldPath(record.key);
           const newValue = processFieldValue(
@@ -74,7 +76,7 @@ export function FieldsMappingEditor(
 
           setDataSource(mutableDataSource);
           setEditingKey("");
-          onChange?.(mutableDataSource);
+          onChange?.(getFinalFieldsValue(mutableDataSource));
           // eslint-disable-next-line no-empty
         } catch (error) {}
       };
@@ -123,7 +125,6 @@ export function FieldsMappingEditor(
       dataIndex: "value",
       width: 300,
       editable: true,
-      ellipsis: true,
     },
     {
       title: "operation",

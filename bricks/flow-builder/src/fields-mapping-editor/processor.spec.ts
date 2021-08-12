@@ -2,9 +2,18 @@ import {
   processFieldValue,
   getFieldChildrenMap,
   serializeFieldValue,
+  getFinalFieldsValue,
+  yaml,
 } from "./processor";
 
 describe("processor", () => {
+  it.each([
+    ["123", 123],
+    ["true", true],
+  ])("yaml should return %s", (value, result) => {
+    expect(yaml(value)).toEqual(result);
+  });
+
   describe("getFieldChildrenMap", () => {
     it("should work", () => {
       const fieldList = [
@@ -402,6 +411,134 @@ describe("processor", () => {
       [null, ""],
     ])("should return %s", (value, result) => {
       expect(serializeFieldValue(value)).toEqual(result);
+    });
+  });
+
+  describe("getFinalFieldsValue", () => {
+    it("should work", () => {
+      const fieldsList = [
+        {
+          name: "objectId",
+          type: "string",
+          description: "objectId",
+          key: "0",
+          value: "HOST",
+        },
+        {
+          name: "query",
+          type: "map",
+          description: "query",
+          key: "1",
+          value: {
+            fields: { "*": true },
+          },
+        },
+        {
+          name: "only_my_instance",
+          type: "bool",
+          description: "我的实例",
+          key: "2",
+          value: true,
+        },
+        {
+          name: "metrics_filter",
+          type: "object",
+          key: "3",
+          fields: [
+            {
+              name: "time_range",
+              type: "object",
+              key: "3-0",
+              fields: [
+                {
+                  name: "start_time",
+                  type: "int",
+                  description: "start_time",
+                  key: "3-0-0",
+                  value: 2567812535,
+                },
+                {
+                  name: "end_time",
+                  type: "int",
+                  description: "end_time",
+                  key: "3-0-1",
+                  value: 5643872635,
+                },
+              ],
+              description: "时间范围",
+            },
+            {
+              name: "tags_filter",
+              type: "map",
+              description: "tags_filter",
+              key: "3-1",
+            },
+            {
+              name: "limitations",
+              type: "object",
+              key: "3-2",
+              fields: [
+                { name: "metric", type: "string", key: "3-2-0" },
+                {
+                  name: "sort",
+                  type: "object",
+                  key: "3-2-1",
+                  fields: [
+                    {
+                      name: "key",
+                      type: "string",
+                      key: "3-2-1-0",
+                      value: "name",
+                    },
+                    { name: "order", type: "int", key: "3-2-1-1", value: 3 },
+                  ],
+                },
+              ],
+            },
+          ],
+          description: "指标过滤",
+        },
+      ];
+
+      expect(getFinalFieldsValue(fieldsList)).toEqual([
+        { name: "objectId", value: "HOST", type: "string" },
+        { name: "query", value: { fields: { "*": true } }, type: "map" },
+        { name: "only_my_instance", value: true, type: "bool" },
+        {
+          fields: [
+            {
+              fields: [
+                { name: "start_time", value: 2567812535, type: "int" },
+                { name: "end_time", value: 5643872635, type: "int" },
+              ],
+              name: "time_range",
+              type: "object",
+              value: undefined,
+            },
+            { name: "tags_filter", value: undefined, type: "map" },
+            {
+              fields: [
+                { name: "metric", value: undefined, type: "string" },
+                {
+                  fields: [
+                    { name: "key", value: "name", type: "string" },
+                    { name: "order", value: 3, type: "int" },
+                  ],
+                  name: "sort",
+                  type: "object",
+                  value: undefined,
+                },
+              ],
+              name: "limitations",
+              type: "object",
+              value: undefined,
+            },
+          ],
+          name: "metrics_filter",
+          type: "object",
+          value: undefined,
+        },
+      ]);
     });
   });
 });
