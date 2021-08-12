@@ -12,7 +12,7 @@ export interface SimplifiedFieldItem {
   name: string;
   type: string;
   value?: unknown;
-  feilds?: SimplifiedFieldItem[];
+  fields?: SimplifiedFieldItem[];
 }
 
 export type FlatFieldChildrenMap = Record<string, FieldItem[]>;

@@ -3,9 +3,17 @@ import {
   getFieldChildrenMap,
   serializeFieldValue,
   getFinalFieldsValue,
+  yaml,
 } from "./processor";
 
 describe("processor", () => {
+  it.each([
+    ["123", 123],
+    ["true", true],
+  ])("yaml should return %s", (value, result) => {
+    expect(yaml(value)).toEqual(result);
+  });
+
   describe("getFieldChildrenMap", () => {
     it("should work", () => {
       const fieldList = [
@@ -421,14 +429,16 @@ describe("processor", () => {
           type: "map",
           description: "query",
           key: "1",
-          value: 'fields:\n  "*": true',
+          value: {
+            fields: { "*": true },
+          },
         },
         {
           name: "only_my_instance",
           type: "bool",
           description: "我的实例",
           key: "2",
-          value: "true",
+          value: true,
         },
         {
           name: "metrics_filter",
@@ -445,7 +455,7 @@ describe("processor", () => {
                   type: "int",
                   description: "start_time",
                   key: "3-0-0",
-                  value: "2567812535",
+                  value: 2567812535,
                 },
                 {
                   name: "end_time",
@@ -495,9 +505,9 @@ describe("processor", () => {
         { name: "query", value: { fields: { "*": true } }, type: "map" },
         { name: "only_my_instance", value: true, type: "bool" },
         {
-          feilds: [
+          fields: [
             {
-              feilds: [
+              fields: [
                 { name: "start_time", value: 2567812535, type: "int" },
                 { name: "end_time", value: 5643872635, type: "int" },
               ],
@@ -507,10 +517,10 @@ describe("processor", () => {
             },
             { name: "tags_filter", value: undefined, type: "map" },
             {
-              feilds: [
+              fields: [
                 { name: "metric", value: undefined, type: "string" },
                 {
-                  feilds: [
+                  fields: [
                     { name: "key", value: "name", type: "string" },
                     { name: "order", value: 3, type: "int" },
                   ],

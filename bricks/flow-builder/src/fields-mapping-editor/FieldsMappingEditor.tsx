@@ -8,6 +8,7 @@ import {
   getFieldChildrenMap,
   serializeFieldValue,
   getFinalFieldsValue,
+  yaml,
 } from "./processor";
 import { EditableCell } from "./components/editable-cell/EditableCell";
 import styles from "./FieldsMappingEditor.module.css";
@@ -62,7 +63,7 @@ export function FieldsMappingEditor(
 
       const handleSave = async (record: FieldItem): Promise<void> => {
         try {
-          const value = (await form.validateFields())?.value;
+          const value = yaml((await form.validateFields())?.value);
           const mutableDataSource = [...dataSource];
           const path = calcFieldPath(record.key);
           const newValue = processFieldValue(
@@ -124,7 +125,6 @@ export function FieldsMappingEditor(
       dataIndex: "value",
       width: 300,
       editable: true,
-      ellipsis: true,
     },
     {
       title: "operation",

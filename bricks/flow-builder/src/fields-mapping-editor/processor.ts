@@ -1,5 +1,5 @@
 import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
-import { get, isNil, omit, values } from "lodash";
+import { get, isNil, omit } from "lodash";
 import {
   FlatFieldChildrenMap,
   FieldItem,
@@ -67,7 +67,7 @@ export function getFieldChildrenMap(
 
 export function processFieldValue(
   item: FieldItem,
-  value: string,
+  value: unknown,
   fieldList: FieldItem[],
   fieldChildrenMap: FlatFieldChildrenMap
 ): FieldItem {
@@ -128,13 +128,13 @@ export function getFinalFieldsValue(
       const curField = {
         name: item.name,
         type: item.type,
-        value: isNil(item.value) ? undefined : yaml(item.value as string),
+        value: item.value,
       } as SimplifiedFieldItem;
       list.push(curField);
 
       if (item.fields) {
-        curField.feilds = [];
-        processValue(item.fields, curField.feilds);
+        curField.fields = [];
+        processValue(item.fields, curField.fields);
       }
     });
   };
