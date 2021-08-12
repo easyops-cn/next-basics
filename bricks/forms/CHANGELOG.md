@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.4...@next-bricks/forms@1.183.0) (2021-08-12)
+
+
+### Features
+
+* support debounce search ([e8eee6a](https://github.com/easyops-cn/next-basics/commit/e8eee6abbd40206c4a552747129ea5ddc1f9a3e8))
+
+
+
+
+
 ## [1.182.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.3...@next-bricks/forms@1.182.4) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/forms
