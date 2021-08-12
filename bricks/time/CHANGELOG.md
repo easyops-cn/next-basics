@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.1.1...@next-bricks/time@1.2.0) (2021-08-12)
+
+
+### Features
+
+* **task-calendar:** 任务日历是否显示农历文字 ([f1aad35](https://github.com/easyops-cn/next-basics/commit/f1aad35105ad2ae0eaf93b17c562275ed3c01836))
+
+
+
+
+
 ## [1.1.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.1.0...@next-bricks/time@1.1.1) (2021-08-02)
 
 **Note:** Version bump only for package @next-bricks/time

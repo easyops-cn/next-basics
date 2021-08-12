@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.138.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.137.0...@next-bricks/basic-bricks@1.138.0) (2021-08-12)
+
+
+### Features
+
+* **basic-bricks:** add anchor brick ([253f1ec](https://github.com/easyops-cn/next-basics/commit/253f1ec7e411d2dbed58ff2487cd16dfdadf2a08))
+
+
+
+
+
 # [1.137.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.136.1...@next-bricks/basic-bricks@1.137.0) (2021-08-02)
 
 
