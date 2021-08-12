@@ -105,6 +105,7 @@ describe("TaskCalendar", () => {
         value={"2021-05-10"}
         defaultSelectedDate={"2021-05-02"}
         dateCellHeight={40}
+        showLunarInfo={true}
       />
     );
     expect(wrapper.find(".today .dateNumber").text()).toEqual("10");
