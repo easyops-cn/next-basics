@@ -24,6 +24,7 @@ export interface TaskCalendarProps {
   importanceSettings?: ImportanceSettings;
   footerStyle?: React.CSSProperties;
   dateCellHeight?: React.CSSProperties["height"];
+  showLunarInfo?: boolean;
   onDateSelect?: (detail: DateDetail) => void;
   onPickerPanelChange?: (detail: { mode: string; date: string }) => void;
 }
@@ -41,6 +42,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
     defaultSelectedDate,
     footerStyle,
     dateCellHeight,
+    showLunarInfo,
   } = props;
   const [selectedData, setSelectedData] = useState<{
     date: Moment;
@@ -91,11 +93,14 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
 
   const dateRender = useCallback(
     (date: Moment) => {
-      const solar2lunarData = solarLunar.solar2lunar(
-        date.year(),
-        date.month() + 1,
-        date.date()
-      );
+      let solar2lunarData;
+      if (showLunarInfo) {
+        solar2lunarData = solarLunar.solar2lunar(
+          date.year(),
+          date.month() + 1,
+          date.date()
+        );
+      }
       const formatDate = date.format("YYYY-MM-DD");
       const curBriefData = briefDataMap?.[formatDate];
       const curTaskData = taskDataMap?.[formatDate];
@@ -141,7 +146,9 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
           )}
           <div className={styles.dateMain}>
             <div className={styles.dateNumber}>{date.date()}</div>
-            <div className={styles.dateText}>{solar2lunarData.dayCn}</div>
+            {showLunarInfo && (
+              <div className={styles.dateText}>{solar2lunarData.dayCn}</div>
+            )}
           </div>
         </div>
       );
@@ -155,6 +162,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
       selectedData,
       pickerValue,
       dateCellHeight,
+      showLunarInfo,
     ]
   );
 

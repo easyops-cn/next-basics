@@ -126,6 +126,17 @@ export class TaskCalendarElement extends UpdatingElement {
   footerStyle: React.CSSProperties;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否在显示农历文字
+   */
+  @property({
+    attribute: false,
+  })
+  showLunarInfo = true;
+
+  /**
    * @detail DateDetail
    * @description 点击选择日期事件 date为选择的日期，data为该日期上的数据
    */
@@ -178,6 +189,7 @@ export class TaskCalendarElement extends UpdatingElement {
             defaultSelectedDate={this.defaultSelectedDate}
             footerStyle={this.footerStyle}
             dateCellHeight={this.dateCellHeight}
+            showLunarInfo={this.showLunarInfo}
           />
         </BrickWrapper>,
         this
