@@ -74,3 +74,9 @@ html[data-theme="dark"] {
 :global(td.alignBottom) {
   vertical-align: bottom;
 }
+.ellipsisInfoCell {
+  max-width: 240px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

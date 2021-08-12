@@ -715,6 +715,15 @@ export class BrickTableElement extends UpdatingElement {
   })
   defaultSelectAll: boolean;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
+   * @description 是否显示省略信息
+   */
+  @property({ type: Boolean })
+  ellipsisInfo: boolean;
+
   private _disabledChildrenKeys: React.Key[] = [];
 
   /**
@@ -1509,6 +1518,7 @@ export class BrickTableElement extends UpdatingElement {
             expandIcon={this.expandIcon}
             scroll={this.scrollConfigs}
             optimizedColumns={this.optimizedColumns}
+            ellipsisInfo={this.ellipsisInfo}
           />
         </BrickWrapper>,
         this

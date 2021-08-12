@@ -447,9 +447,13 @@ describe("BrickTable", () => {
         tableDraggable={true}
         onDrag={onDrag}
         dataSource={dataSource}
+        ellipsisInfo={true}
       />
     );
     expect(wrapper.find("DndProvider").length).toBe(1);
     expect(wrapper.find(".draggableRow").length).toBe(3);
+    expect(wrapper.find(Table).prop("columns")[0].className).toBe(
+      "ellipsisInfoCell"
+    );
   });
 });

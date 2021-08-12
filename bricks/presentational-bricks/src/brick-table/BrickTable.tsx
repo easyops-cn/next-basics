@@ -61,6 +61,7 @@ export interface BrickTableProps {
   zebraPattern?: boolean;
   scroll?: TableProps<unknown>["scroll"];
   optimizedColumns?: Array<string | number>;
+  ellipsisInfo?: boolean;
 }
 
 const DraggableBodyRow = ({
@@ -205,6 +206,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     scroll,
     optimizedColumns,
     onDelete, // 用于 brick form 中，will be deprecated
+    ellipsisInfo,
   } = props;
 
   const initData = useMemo(() => {
@@ -279,9 +281,8 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           let itemBrickDataMap: ItemBrickDataMap;
 
           if (useBrick) {
-            itemBrickDataMap = useBrickItemBrickDataMapRef.current.get(
-              useBrick
-            );
+            itemBrickDataMap =
+              useBrickItemBrickDataMapRef.current.get(useBrick);
 
             if (!itemBrickDataMap) {
               itemBrickDataMap = new Map();
@@ -350,6 +351,9 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
             ? (columnConf.className += " alignBottom")
             : (columnConf.className = "alignBottom");
         }
+        if (ellipsisInfo) {
+          columnConf.className = styles.ellipsisInfoCell;
+        }
         return columnConf;
       });
 
@@ -381,6 +385,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     rowKey,
     deleteEnabled,
     onDelete,
+    ellipsisInfo,
   ]);
 
   const expandedRowRender = (record: Record<string, any>, index: number) => {
