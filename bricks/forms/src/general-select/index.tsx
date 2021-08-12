@@ -7,7 +7,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { GeneralSelect, GeneralInputProps } from "./GeneralSelect";
+import { GeneralSelect, GeneralSelectProps } from "./GeneralSelect";
 import {
   formatOptions,
   GeneralOption,
@@ -182,14 +182,14 @@ export class GeneralSelectElement extends FormItemElement {
   showSearch = true;
 
   /**
-   * @kind "small" | "default" | "large"
+   * @kind "small" | "middle" | "large"
    * @required false
-   * @default "default"
+   * @default "middle"
    * @description 选择框大小
    * @group advanced
    */
   @property()
-  size: "small" | "default" | "large";
+  size: "small" | "middle" | "large";
 
   /**
    * @kind LabeledValue
@@ -269,7 +269,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @group advanced
    */
   @property()
-  popoverPositionType: GeneralInputProps["popoverPositionType"];
+  popoverPositionType: GeneralSelectProps["popoverPositionType"];
 
   /**
    * @kind UseBrickConf
@@ -297,6 +297,15 @@ export class GeneralSelectElement extends FormItemElement {
   suffixBrickStyle: React.CSSProperties = {};
 
   /**
+   * @kind number
+   * @default 300
+   * @description 设置防抖动搜索的时间间隔。
+   * @group advanced
+   */
+  @property({ type: Number })
+  debounceSearchDelay: number;
+
+  /**
    * @detail `any`
    * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值
    */
@@ -322,9 +331,16 @@ export class GeneralSelectElement extends FormItemElement {
   @event({ type: "general.select.blur" }) blurEvent: EventEmitter;
   /**
    * @detail `any`
-   * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值
+   * @description 搜索时被触发，`event.detail` 为当前选择项的值
    */
   @event({ type: "general.select.search" }) searchEvent: EventEmitter<string>;
+
+  /**
+   * @detail `string`
+   * @description 搜索时被触发，带防抖动。
+   */
+  @event({ type: "general.select.debounceSearch" })
+  private _debounceSearchEvent: EventEmitter<string>;
 
   private _handleChange = (value: any): void => {
     this.value = value;
@@ -349,6 +365,9 @@ export class GeneralSelectElement extends FormItemElement {
   };
   private _handleSearch = (value: string): void => {
     this.searchEvent.emit(value);
+  };
+  private _handleDebounceSearch = (value: string): void => {
+    this._debounceSearchEvent.emit(value);
   };
 
   protected _render(): void {
@@ -387,6 +406,8 @@ export class GeneralSelectElement extends FormItemElement {
             onFocus={this._handleFocus}
             onBlur={this._handleBlur}
             onSearch={this._handleSearch}
+            onDebounceSearch={this._handleDebounceSearch}
+            debounceSearchDelay={this.debounceSearchDelay}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             size={this.size}

@@ -2,16 +2,15 @@ import React from "react";
 import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { Select } from "antd";
-import { ModeOption } from "antd/lib/select";
 import {
   FormItemWrapper,
   FormItemWrapperProps,
   GeneralComplexOption,
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
-import { groupBy } from "lodash";
+import { debounce, groupBy } from "lodash";
 
-export interface GeneralInputProps extends FormItemWrapperProps {
+export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
   groupBy?: string;
   mode?: string;
@@ -31,12 +30,14 @@ export interface GeneralInputProps extends FormItemWrapperProps {
   suffixBrick?: UseBrickConf;
   suffixBrickStyle?: React.CSSProperties;
   onSearch?: (value: string) => void;
-  size?: "small" | "default" | "large";
+  onDebounceSearch?: (value: string) => void;
+  debounceSearchDelay?: number;
+  size?: "small" | "middle" | "large";
   tokenSeparators?: string[];
-  popoverPositionType: "default" | "parent";
+  popoverPositionType?: "default" | "parent";
 }
 
-export function GeneralSelect(props: GeneralInputProps): React.ReactElement {
+export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   const {
     suffix,
     suffixStyle,
@@ -59,8 +60,16 @@ export function GeneralSelect(props: GeneralInputProps): React.ReactElement {
     props.onChangeV2?.(props.options.find((item) => item.value === newValue));
   };
 
+  const handleDebounceSearch = React.useMemo(() => {
+    return (
+      props.onDebounceSearch &&
+      debounce(props.onDebounceSearch, props.debounceSearchDelay ?? 300)
+    );
+  }, [props.onDebounceSearch, props.debounceSearchDelay]);
+
   const handleSearch = (value: string): void => {
     props.onSearch?.(value);
+    handleDebounceSearch?.(value);
   };
 
   const searchProps = props.showSearch
@@ -77,8 +86,8 @@ export function GeneralSelect(props: GeneralInputProps): React.ReactElement {
   const getOptions = (options: GeneralComplexOption[]) => {
     return options.map((op) => (
       <Select.Option
-        key={op.value}
-        value={op.value}
+        key={op.value as string}
+        value={op.value as string}
         label={op.label}
         className={style.itemOption}
       >
@@ -118,7 +127,7 @@ export function GeneralSelect(props: GeneralInputProps): React.ReactElement {
         value={props.name && props.formElement ? undefined : props.value}
         size={props.size}
         disabled={props.disabled}
-        mode={props.mode as ModeOption}
+        mode={props.mode as "multiple" | "tags"}
         placeholder={props.placeholder}
         onChange={handleChange}
         dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}

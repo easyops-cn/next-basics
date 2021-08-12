@@ -35,10 +35,12 @@ describe("GeneralSelect", () => {
     const wrapper = shallow(
       <GeneralSelect
         name="gender"
-        options={[
-          { label: "1.0.0", value: "abc", status: "success" },
-          { label: "2.0.0", value: "bcd", status: "failed" },
-        ]}
+        options={
+          [
+            { label: "1.0.0", value: "abc", status: "success" },
+            { label: "2.0.0", value: "bcd", status: "failed" },
+          ] as any[]
+        }
         label="hello"
         placeholder="who"
         value="world"
@@ -77,7 +79,33 @@ describe("GeneralSelect", () => {
     });
   });
 
-  it("should trigger event", () => {
+  it("should trigger change event", () => {
+    const handleDebounceSearch = jest.fn();
+
+    const wrapper = shallow(
+      <GeneralSelect
+        name="gender"
+        options={[
+          { label: "other", value: "other" },
+          { label: "one", value: "one" },
+        ]}
+        label="hello"
+        placeholder="who"
+        value="world"
+        onDebounceSearch={handleDebounceSearch}
+      />
+    );
+
+    wrapper.find(Select).invoke("onSearch")("q");
+    wrapper.find(Select).invoke("onSearch")("qu");
+
+    expect(handleDebounceSearch).not.toBeCalled();
+    jest.advanceTimersByTime(300);
+    expect(handleDebounceSearch).toBeCalledTimes(1);
+    expect(handleDebounceSearch).toHaveBeenCalledWith("qu");
+  });
+
+  it("should trigger debounceSearch event", () => {
     const handleSearch = jest.fn();
 
     const wrapper = shallow(
@@ -120,11 +148,13 @@ describe("GeneralSelect", () => {
     const wrapper = shallow(
       <GeneralSelect
         name="city"
-        options={[
-          { label: "中国", value: "China", location: "亚洲" },
-          { label: "日本", value: "Japan", location: "亚洲" },
-          { label: "美国", value: "USA", location: "北美洲" },
-        ]}
+        options={
+          [
+            { label: "中国", value: "China", location: "亚洲" },
+            { label: "日本", value: "Japan", location: "亚洲" },
+            { label: "美国", value: "USA", location: "北美洲" },
+          ] as any[]
+        }
         label="城市"
         value="China"
         groupBy="location"
