@@ -4,6 +4,7 @@ import {
   serializeFieldValue,
   getFinalFieldsValue,
   yaml,
+  removeExtraFields,
 } from "./processor";
 
 describe("processor", () => {
@@ -537,6 +538,130 @@ describe("processor", () => {
           name: "metrics_filter",
           type: "object",
           value: undefined,
+        },
+      ]);
+    });
+  });
+
+  describe("removeExtraFields", () => {
+    it("removeExtraFields", () => {
+      const fieldList = [
+        {
+          name: "only_my_instance",
+          type: "bool",
+          description: "我的实例",
+          key: "2",
+          value: true,
+        },
+        {
+          name: "metrics_filter",
+          type: "object",
+          key: "3",
+          fields: [
+            {
+              name: "time_range",
+              type: "object",
+              key: "3-0",
+              fields: [
+                {
+                  name: "start_time",
+                  type: "int",
+                  description: "start_time",
+                  key: "3-0-0",
+                },
+                {
+                  name: "end_time",
+                  type: "int",
+                  description: "end_time",
+                  key: "3-0-1",
+                },
+              ],
+              description: "时间范围",
+              value: "<% timeRange %>",
+            },
+            {
+              name: "tags_filter",
+              type: "map",
+              description: "tags_filter",
+              key: "3-1",
+            },
+            {
+              name: "limitations",
+              type: "object",
+              key: "3-2",
+              fields: [
+                { name: "metric", type: "string", key: "3-2-0" },
+                {
+                  name: "sort",
+                  type: "object",
+                  key: "3-2-1",
+                  fields: [
+                    {
+                      name: "key",
+                      type: "string",
+                      key: "3-2-1-0",
+                      value: "name",
+                    },
+                    { name: "order", type: "int", key: "3-2-1-1", value: 3 },
+                  ],
+                },
+              ],
+            },
+          ],
+          description: "指标过滤",
+        },
+      ];
+
+      expect(removeExtraFields(fieldList)).toEqual([
+        {
+          description: "我的实例",
+          key: "2",
+          name: "only_my_instance",
+          type: "bool",
+          value: true,
+        },
+        {
+          description: "指标过滤",
+          fields: [
+            {
+              description: "时间范围",
+              key: "3-0",
+              name: "time_range",
+              type: "object",
+              value: "<% timeRange %>",
+            },
+            {
+              description: "tags_filter",
+              key: "3-1",
+              name: "tags_filter",
+              type: "map",
+            },
+            {
+              fields: [
+                { key: "3-2-0", name: "metric", type: "string" },
+                {
+                  fields: [
+                    {
+                      key: "3-2-1-0",
+                      name: "key",
+                      type: "string",
+                      value: "name",
+                    },
+                    { key: "3-2-1-1", name: "order", type: "int", value: 3 },
+                  ],
+                  key: "3-2-1",
+                  name: "sort",
+                  type: "object",
+                },
+              ],
+              key: "3-2",
+              name: "limitations",
+              type: "object",
+            },
+          ],
+          key: "3",
+          name: "metrics_filter",
+          type: "object",
         },
       ]);
     });
