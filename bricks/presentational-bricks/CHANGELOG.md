@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.204.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.204.1...@next-bricks/presentational-bricks@1.204.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* 支持隐藏/显示省略信息 closed INSTANCE-1838 ([00e3a24](https://github.com/easyops-cn/next-basics/commit/00e3a2474c58523838dae9005457a9210f688e35))
+
+
+
+
+
 ## [1.204.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.204.0...@next-bricks/presentational-bricks@1.204.1) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

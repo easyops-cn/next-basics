@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.138.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.138.0...@next-bricks/basic-bricks@1.138.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* **basic-bricks:** add anchor doc and click events inoperative ([0546f51](https://github.com/easyops-cn/next-basics/commit/0546f51c92712f6d38be1fa8f005fe8186d64322))
+
+
+
+
+
 # [1.138.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.137.0...@next-bricks/basic-bricks@1.138.0) (2021-08-12)
 
 
