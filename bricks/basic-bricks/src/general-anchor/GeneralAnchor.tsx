@@ -1,14 +1,18 @@
 import React from "react";
 import { Anchor, AnchorProps } from "antd";
 import { AnchorListType } from "./index";
+import { UseBrickConf } from "@next-core/brick-types";
+import { BrickAsComponent } from "@next-core/brick-kit";
+import styles from "./GeneralAnchor.module.css";
+import classnames from "classnames";
 interface GeneralAnchorProps {
   configProps?: AnchorProps;
   anchorList: AnchorListType[];
   type?: "default" | "radio";
-  hasExtraSlot?: boolean;
+  extraBrick?: { useBrick: UseBrickConf };
 }
 export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
-  const { anchorList, configProps, type, hasExtraSlot } = props;
+  const { anchorList, configProps, type, extraBrick } = props;
   const { Link } = Anchor;
   const renderAnchorList = (
     anchorList: AnchorListType[],
@@ -24,22 +28,30 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
       );
     });
   };
-  return type === "default" ? (
-    <Anchor offsetTop={56} {...configProps}>
-      {renderAnchorList(anchorList, type)}
-    </Anchor>
-  ) : (
-    <Anchor offsetTop={56} {...configProps} className="anchorWrapper">
-      <div className="anchorContainer">
-        <div className="anchorLinkContainer">
-          {renderAnchorList(anchorList, type)}
-        </div>
-        {hasExtraSlot && (
-          <div className="extraContainer">
-            <slot name="extra" id="extraSlot" />
+  return (
+    <Anchor
+      offsetTop={56}
+      {...configProps}
+      className={classnames([
+        {
+          [styles.anchorWrapper]: type !== "default",
+        },
+      ])}
+    >
+      {type === "default" ? (
+        renderAnchorList(anchorList, type)
+      ) : (
+        <div className={styles.anchorContainer}>
+          <div className={styles.anchorLinkContainer}>
+            {renderAnchorList(anchorList, type)}
           </div>
-        )}
-      </div>
+          {extraBrick?.useBrick && (
+            <div className={styles.extraContainer}>
+              <BrickAsComponent useBrick={extraBrick.useBrick} />
+            </div>
+          )}
+        </div>
+      )}
     </Anchor>
   );
 }

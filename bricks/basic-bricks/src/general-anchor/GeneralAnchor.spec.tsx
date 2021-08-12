@@ -57,8 +57,18 @@ describe("GeneralAnchor", () => {
     expect(wrapper.find(Link).length).toBe(3);
   });
   it("should work and hasExtraSlot ", () => {
+    const extraBrick = {
+      useBrick: [
+        {
+          brick: "span",
+          properties: {
+            textContent: "测试",
+          },
+        },
+      ],
+    };
     const wrapper = shallow(
-      <GeneralAnchor anchorList={linkList} hasExtraSlot={true} />
+      <GeneralAnchor anchorList={linkList} extraBrick={extraBrick} />
     );
     expect(wrapper.find(".extraContainer").length).toBe(1);
     wrapper.setProps({

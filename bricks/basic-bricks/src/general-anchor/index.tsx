@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { GeneralAnchor } from "./GeneralAnchor";
 import { AnchorLinkProps, AnchorProps } from "antd";
-import style from "./index.shadow.less";
-import { ModalProps } from "antd/lib/modal";
+import { UseBrickConf } from "@next-core/brick-types";
 export interface AnchorListType extends AnchorLinkProps {
-  // 子目录，其他参数请参考 https://ant.design/components/anchor-cn/#Link-Props
+  /* 其他参数请参考 https://ant.design/components/anchor-cn/#Link-Props */
+  title: string;
+  href: string;
+  target?: string;
   children?: AnchorListType[];
 }
 
@@ -52,27 +54,15 @@ export class GeneralAnchorElement extends UpdatingElement {
   })
   type: "default" | "radio";
   /**
-   * @kind boolean
+   * @kind `{ useBrick: UseBrickConf }`
    * @required false
-   * @default false
-   * @description 是否右上角有操作区 slot
+   * @default  -
+   * @description 右上角有操作区
    * @group basic
    */
-  @property({
-    type: Boolean,
-  })
-  hasExtraSlot: boolean;
-  private _mountPoint: HTMLElement;
+  @property({ attribute: false })
+  extraBrick: { useBrick: UseBrickConf };
 
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    const styleElement = document.createElement("style");
-    styleElement.textContent = style;
-    shadowRoot.appendChild(styleElement);
-    this._mountPoint = document.createElement("div");
-    shadowRoot.appendChild(this._mountPoint);
-  }
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -95,10 +85,10 @@ export class GeneralAnchorElement extends UpdatingElement {
             anchorList={this.anchorList}
             configProps={this.configProps}
             type={this.type || "default"}
-            hasExtraSlot={this.hasExtraSlot}
+            extraBrick={this.extraBrick}
           />
         </BrickWrapper>,
-        this._mountPoint
+        this
       );
     }
   }

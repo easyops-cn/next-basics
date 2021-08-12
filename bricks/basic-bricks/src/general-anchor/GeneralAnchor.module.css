@@ -1,42 +1,36 @@
-// --- 官方样式 ---
-@import "~antd/lib/anchor/style/index.less";
-@import "~antd/lib/style/index.less";
-
-
 .anchorWrapper {
   width: 100%;
-  background: rgb(255 255 255 / 50%);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(3px);
   padding: 5px 0;
- .anchorContainer {
-   width: 100%;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   min-height: 45px;
- }
-  .ant-anchor-ink {
+  .anchorContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 45px;
+  }
+  :global(.ant-anchor-ink) {
     display: none;
   }
   .anchorLinkContainer {
     display: flex;
-    background: #F5F5F5;
+    background: #f5f5f5;
     border-radius: 15px;
     padding: 2px;
-    .ant-anchor-link {
+    :global(.ant-anchor-link) {
       padding: 0;
     }
-   .ant-anchor-link-title{
+    :global(.ant-anchor-link-title) {
       padding: 8px 16px;
       border-radius: 15px;
-      color: #6E6E6E;
+      color: #6e6e6e;
     }
-    .ant-anchor-link-active > .ant-anchor-link-title {
+    :global(.ant-anchor-link-active > .ant-anchor-link-title) {
       color: #262626;
       background: #fff;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.09);
     }
-
-
   }
   .extraContainer {
     display: grid;
@@ -46,5 +40,3 @@
     align-items: center;
   }
 }
-
-

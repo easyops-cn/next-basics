@@ -30,6 +30,7 @@ import { subMenuStory } from "./sub-menu";
 import { subMenuFilterStory } from "./sub-menu-filter";
 import { transformAgentStory } from "./transform-agent";
 import { headerBarStory } from "./header-bar";
+import { generalAnchorStory } from "./general-anchor";
 
 export const Chapters = [
   advanceListContainerStory,
@@ -64,4 +65,5 @@ export const Chapters = [
   subMenuFilterStory,
   transformAgentStory,
   headerBarStory,
+  generalAnchorStory,
 ];
