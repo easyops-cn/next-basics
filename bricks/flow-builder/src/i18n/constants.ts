@@ -17,6 +17,7 @@ export enum K {
   EDIT = "EDIT",
   SAVE = "SAVE",
   CANCEL = "CANCEL",
+  EDITOR_PLACEHOLDER = "EDITOR_PLACEHOLDER",
 }
 
 export type Locale = { [key in K]: string };

@@ -31,6 +31,9 @@ export function FieldsMappingEditor(
   const [dataSource, setDataSource] = useState(props.dataSource);
   const fieldChildrenMap = useRef(getFieldChildrenMap(props.dataSource));
   const [editingKey, setEditingKey] = useState("");
+  const [expandedRowKeys, setExpandedRowKeys] = useState(
+    props.dataSource.map((item) => item.key)
+  );
 
   const isEditing = useCallback(
     (record: FieldItem) => record.key === editingKey,
@@ -39,6 +42,7 @@ export function FieldsMappingEditor(
 
   useEffect(() => {
     setDataSource(props.dataSource);
+    setExpandedRowKeys(props.dataSource.map((item) => item.key));
     fieldChildrenMap.current = getFieldChildrenMap(props.dataSource);
   }, [props.dataSource]);
 
@@ -53,17 +57,23 @@ export function FieldsMappingEditor(
     (_: string, record: FieldItem) => {
       const editable = isEditing(record);
 
-      const handleEdit = (record: FieldItem): void => {
+      const handleEdit = (record: FieldItem, e: React.MouseEvent): void => {
+        e.stopPropagation();
         form.setFieldsValue({ value: serializeFieldValue(record.value) });
         setEditingKey(record.key);
       };
 
-      const handleCancel = (): void => {
+      const handleCancel = (e: React.MouseEvent): void => {
+        e.stopPropagation();
         setEditingKey("");
       };
 
-      const handleSave = async (record: FieldItem): Promise<void> => {
+      const handleSave = async (
+        record: FieldItem,
+        e: React.MouseEvent
+      ): Promise<void> => {
         try {
+          e.stopPropagation();
           const value = yaml((await form.validateFields())?.value);
           const mutableDataSource = [...dataSource];
           const path = calcFieldPath(record.key);
@@ -87,7 +97,7 @@ export function FieldsMappingEditor(
           <Typography.Link
             test-id="save-btn"
             style={{ marginRight: 8 }}
-            onClick={() => handleSave(record)}
+            onClick={(e) => handleSave(record, e)}
           >
             {t(K.SAVE)}
           </Typography.Link>
@@ -99,7 +109,7 @@ export function FieldsMappingEditor(
         <Typography.Link
           test-id="edit-btn"
           disabled={editingKey !== ""}
-          onClick={() => handleEdit(record)}
+          onClick={(e) => handleEdit(record, e)}
         >
           {" "}
           {t(K.EDIT)}{" "}
@@ -150,12 +160,36 @@ export function FieldsMappingEditor(
     };
   });
 
+  const handleExpand = (expanded: boolean, record: FieldItem): void => {
+    if (expanded) {
+      setExpandedRowKeys((rowKeys) => [...rowKeys, record.key]);
+    } else {
+      setExpandedRowKeys((rowKeys) =>
+        rowKeys.filter((key) => key !== record.key)
+      );
+    }
+  };
+
+  const handleRowClick = (item: FieldItem): void => {
+    // istanbul ignore else
+    if (editingKey === "" && item.fields) {
+      if (expandedRowKeys.includes(item.key)) {
+        handleExpand(false, item);
+      } else {
+        handleExpand(true, item);
+      }
+    }
+  };
+
   return (
     <Form form={form} component={false}>
       <Table
         columns={columns}
         dataSource={removeExtraFields(dataSource)}
+        expandedRowKeys={expandedRowKeys}
+        onExpand={handleExpand}
         expandable={{ childrenColumnName: "fields" }}
+        onRow={(record) => ({ onClick: () => handleRowClick(record) })}
         pagination={false}
         loading={loading}
         components={{

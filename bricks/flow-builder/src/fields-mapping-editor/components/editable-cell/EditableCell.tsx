@@ -50,7 +50,7 @@ export function EditableCell({
         );
       } else {
         return (
-          <div className={styles.cellWrapper}>
+          <div className={styles.cellWrapper} title={record.value as string}>
             {typeof record.value === "boolean"
               ? String(record.value)
               : record.value}
@@ -65,7 +65,11 @@ export function EditableCell({
   return (
     <td {...restProps}>
       {editing ? (
-        <CodeEditorFormItem name={dataIndex} mode="yaml" />
+        <CodeEditorFormItem
+          name={dataIndex}
+          mode="yaml"
+          placeholder={t(K.EDITOR_PLACEHOLDER)}
+        />
       ) : (
         childrenNode
       )}
