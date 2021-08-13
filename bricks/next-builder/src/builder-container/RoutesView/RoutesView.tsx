@@ -39,6 +39,18 @@ export function RoutesView({
   const { routeList, onRouteSelect } = useBuilderUIContext();
   const [q, setQ] = useState<string>("");
 
+  const fullRouteTree = useMemo(
+    () =>
+      generateRouteTree({
+        data: routeList,
+      }),
+    [routeList]
+  );
+
+  const filteredRouteTree = useMemo(() => {
+    return fullRouteTree;
+  }, [fullRouteTree]);
+
   const routeTreeData = useMemo(() => {
     const idToRoute = new Map<string, BuilderRouteNode>(
       routeList.map((node) => [node.id, node])
