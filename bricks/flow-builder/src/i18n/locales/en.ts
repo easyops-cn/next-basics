@@ -18,6 +18,8 @@ const locale: Locale = {
   [K.EDIT]: "Edit",
   [K.CANCEL]: "Cancel",
   [K.SAVE]: "Save",
+  [K.EDITOR_PLACEHOLDER]:
+    "The Cel expression is wrapped with `<% %>`, e.g., <% xxx %>",
 };
 
 export default locale;

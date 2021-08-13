@@ -17,6 +17,7 @@ const locale: Locale = {
   [K.EDIT]: "编辑",
   [K.CANCEL]: "取消",
   [K.SAVE]: "保存",
+  [K.EDITOR_PLACEHOLDER]: "Cel 表达式使用 `<% %>` 包裹, e.g.,<% xxx %>",
 };
 
 export default locale;
