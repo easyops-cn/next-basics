@@ -7,29 +7,13 @@ import { generateRouteTree } from "../../utils/generateRouteTree";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 import { SearchableTree } from "../components/SearchableTree/SearchableTree";
+import { RouteTreeNode } from "../../interface";
 
 import styles from "./RoutesView.module.css";
 
 export interface RoutesViewProps {
   handleRouteSelect?: (route: BuilderRouteNode) => void;
 }
-
-const setParent = (
-  node: BuilderRouteNode,
-  filteredMap: Map<string, BuilderRouteNode>,
-  idToRoute: Map<string, BuilderRouteNode>
-): void => {
-  if (node.parent?.length) {
-    const parentId = node.parent[0].id;
-    const parent = idToRoute.get(parentId);
-    if (parent) {
-      if (!filteredMap.get(parentId)) {
-        filteredMap.set(parentId, parent);
-      }
-      setParent(parent, filteredMap, idToRoute);
-    }
-  }
-};
 
 export function RoutesView({
   handleRouteSelect,
@@ -39,26 +23,18 @@ export function RoutesView({
   const { routeList, onRouteSelect } = useBuilderUIContext();
   const [q, setQ] = useState<string>("");
 
-  const routeTreeData = useMemo(() => {
-    const idToRoute = new Map<string, BuilderRouteNode>(
-      routeList.map((node) => [node.id, node])
-    );
-    const filteredMap = new Map();
-    routeList.forEach((v) => {
-      const trimQ = q.trim().toLowerCase() ?? "";
-      const matched =
-        v.alias?.toLowerCase().includes(trimQ) ||
-        v.path?.replace("${APP.homepage}", "")?.toLowerCase()?.includes(trimQ);
-      if (matched) {
-        filteredMap.set(v.id, idToRoute.get(v.id));
-        setParent(v, filteredMap, idToRoute);
-      }
-    });
-    const result = generateRouteTree({
-      data: [...filteredMap.values()],
-    });
-    return result;
-  }, [routeList, q]);
+  const fullRouteTree = useMemo(
+    () =>
+      generateRouteTree({
+        data: routeList,
+      }),
+    [routeList]
+  );
+
+  const filteredRouteTree = useMemo(
+    () => filterNodesFactory(q.trim().toLowerCase())(fullRouteTree),
+    [fullRouteTree, q]
+  );
 
   const handleSelect = (selectedProps: BuilderRouteNode): void => {
     onRouteSelect?.(selectedProps);
@@ -71,7 +47,7 @@ export function RoutesView({
 
   return (
     <SearchableTree
-      list={routeTreeData}
+      list={filteredRouteTree}
       defaultSelectedKeys={rootNode ? [rootNode.id] : []}
       icon={<BranchesOutlined />}
       field="alias"
@@ -81,4 +57,35 @@ export function RoutesView({
       customClassName={styles.customTree}
     />
   );
+}
+
+function filterNodesFactory(
+  normalizedQuery: string
+): (nodes: RouteTreeNode[]) => RouteTreeNode[] {
+  const matchNode = (node: RouteTreeNode): boolean => {
+    return (
+      !normalizedQuery ||
+      node.alias?.toLowerCase().includes(normalizedQuery) ||
+      node.path
+        ?.replace("${APP.homepage}", "")
+        .toLowerCase()
+        .includes(normalizedQuery)
+    );
+  };
+
+  const filterNodes = (nodes: RouteTreeNode[]): RouteTreeNode[] =>
+    nodes
+      ?.map((node) => {
+        const matchedChildren = filterNodes(node.children);
+        const matched = matchedChildren.length > 0 || matchNode(node);
+        return (
+          matched && {
+            ...node,
+            children: matchedChildren,
+          }
+        );
+      })
+      .filter(Boolean) ?? [];
+
+  return filterNodes;
 }
