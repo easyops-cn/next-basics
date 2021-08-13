@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.6.3...@next-bricks/flow-builder@1.6.4) (2021-08-13)
+
+
+### Bug Fixes
+
+* process onchange data ([b3e4137](https://github.com/easyops-cn/next-basics/commit/b3e4137b595c36f5d94eb637e74cb2df6d7c08fc))
+* refine fieldsMaping brick ([654c33c](https://github.com/easyops-cn/next-basics/commit/654c33c675953d57c9a30d958a1b23a2843a14f3))
+* refine fieldsMapping table ([f96b491](https://github.com/easyops-cn/next-basics/commit/f96b491d7c9609c8ba1de8e0dbc2351261626522))
+* remove extra fields ([e676d8b](https://github.com/easyops-cn/next-basics/commit/e676d8b643bcf1b2b38a9e4b8237b3da7af2b706))
+
+
+
+
+
 ## [1.6.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.6.2...@next-bricks/flow-builder@1.6.3) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/flow-builder

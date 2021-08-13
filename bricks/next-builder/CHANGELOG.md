@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.5...@next-bricks/next-builder@1.65.6) (2021-08-13)
+
+
+### Bug Fixes
+
+* **builder-container:** fix routes sort ([c6286fc](https://github.com/easyops-cn/next-basics/commit/c6286fcc5dc0ac83974f296b2d1b1f3237695f80))
+
+
+
+
+
 ## [1.65.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.4...@next-bricks/next-builder@1.65.5) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/next-builder
