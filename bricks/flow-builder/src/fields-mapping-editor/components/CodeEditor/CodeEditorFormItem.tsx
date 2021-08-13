@@ -40,7 +40,6 @@ export function CodeEditorFormItem(
       ]}
     >
       <CodeEditorItem
-        mode="yaml"
         tabSize={2}
         minLines={5}
         maxLines={12}

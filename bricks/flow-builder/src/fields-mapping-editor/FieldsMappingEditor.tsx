@@ -74,7 +74,8 @@ export function FieldsMappingEditor(
       ): Promise<void> => {
         try {
           e.stopPropagation();
-          const value = yaml((await form.validateFields())?.value);
+          const v = (await form.validateFields())?.value;
+          const value = record.type === "string" ? v : yaml(v);
           const mutableDataSource = [...dataSource];
           const path = calcFieldPath(record.key);
           const newValue = processFieldValue(
