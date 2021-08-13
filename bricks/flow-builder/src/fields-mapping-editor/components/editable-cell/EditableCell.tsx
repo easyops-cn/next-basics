@@ -67,7 +67,7 @@ export function EditableCell({
       {editing ? (
         <CodeEditorFormItem
           name={dataIndex}
-          mode="yaml"
+          mode={simpleTypes.includes(record.type) ? "text" : "yaml"}
           placeholder={t(K.EDITOR_PLACEHOLDER)}
         />
       ) : (
