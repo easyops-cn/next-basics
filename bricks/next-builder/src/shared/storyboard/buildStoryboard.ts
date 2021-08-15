@@ -12,46 +12,13 @@ import {
   BuilderBrickNode,
   BuilderRouteOrBrickNode,
 } from "@next-core/brick-types";
-import { isObject, normalizeBuilderNode } from "@next-core/brick-utils";
-import { isEmpty, sortBy } from "lodash";
 import {
-  BuildInfo,
-  MenuItemNode,
-  MenuNode,
-  StoryboardToBuild,
-} from "./interfaces";
-
-const fieldsToKeepInMenu = [
-  "menuId",
-  "title",
-  "icon",
-  "titleDataSource",
-  "defaultCollapsed",
-  "link",
-  "items",
-  "type",
-  "injectMenuGroupId",
-  "dynamicItems",
-  "itemsResolve",
-];
-
-const fieldsToKeepInMenuItem = [
-  "text",
-  "to",
-  "target",
-  "icon",
-  "exact",
-  "key",
-  "activeIncludes",
-  "activeExcludes",
-  "activeMatchSearch",
-  "type",
-  "sort",
-  "children",
-  "defaultExpanded",
-  "if",
-  "groupId",
-];
+  isObject,
+  normalizeBuilderNode,
+  normalizeMenu,
+} from "@next-core/brick-utils";
+import { isEmpty, sortBy } from "lodash";
+import { BuildInfo, StoryboardToBuild } from "./interfaces";
 
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
@@ -150,11 +117,7 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
       : undefined),
   }));
 
-  const menus = data.menus?.map((node) => {
-    const menuConf = keep(node, fieldsToKeepInMenu);
-    menuConf.items = keepItems(node.items, fieldsToKeepInMenuItem);
-    return menuConf;
-  });
+  const menus = data.menus?.map(normalizeMenu);
 
   const i18n = data.i18n?.reduce(
     (acc, node) => {
@@ -366,28 +329,6 @@ function normalize(
     });
   }
   return conf as Record<string, unknown>;
-}
-
-function keep(
-  node: MenuNode | MenuItemNode,
-  fieldsToKeep: string[]
-): Record<string, unknown> {
-  return Object.fromEntries(
-    Object.entries(node)
-      // Keep certain fields from CMDB.
-      .filter((item) => fieldsToKeep.includes(item[0]))
-  );
-}
-
-function keepItems(
-  nodes: MenuItemNode[],
-  fieldsToKeep: string[]
-): Record<string, unknown>[] {
-  return nodes?.map((node) => {
-    const menuItemConf = keep(node, fieldsToKeep);
-    menuItemConf.children = keepItems(node.children, fieldsToKeep);
-    return menuItemConf;
-  });
 }
 
 function setUseChild(
