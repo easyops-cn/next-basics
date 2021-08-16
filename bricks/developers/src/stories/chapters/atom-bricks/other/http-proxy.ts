@@ -11,7 +11,7 @@ export const story: Story = {
   },
   description: {
     en: "Send http request through api gateway proxy",
-    zh: "通过api_gateway转发http请求",
+    zh: "转发http请求",
   },
   icon: {
     lib: "antd",
@@ -126,6 +126,37 @@ export const story: Story = {
                         headers: {
                           "Cache-Control": "cache",
                         },
+                      },
+                    ],
+                    callback: {
+                      success: {
+                        action: "message.success",
+                        args: ["success"],
+                      },
+                      error: {
+                        action: "console.log",
+                        args: ["<% EVENT.detail %>"],
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              brick: "basic-bricks.general-button",
+              properties: {
+                buttonName: "点击发送直接配置origin的post请求",
+              },
+              events: {
+                "general.button.click": [
+                  {
+                    target: "basic-providers\\.provider-http-proxy",
+                    method: "resolve",
+                    args: [
+                      {
+                        origin: "http://192.168.100.162",
+                        api: "api/auth/login",
+                        method: "get",
                       },
                     ],
                     callback: {

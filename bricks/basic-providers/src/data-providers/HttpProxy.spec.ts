@@ -43,6 +43,14 @@ describe("HttpProxy", () => {
       },
       {},
     ],
+    [
+      {
+        origin: "http://localhost:8080",
+        api: "api/v1/user",
+        method: "get",
+      },
+      {},
+    ],
   ])("HttpProxy(%j) should work", async (params, result) => {
     expect(await HttpProxy(params)).toEqual(result);
   });
