@@ -7,7 +7,7 @@ import {
   EventEmitter,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { GeneralSlider, GeneralSliderProps } from "./GeneralSlider";
+import { GeneralSlider, GeneralSliderProps, UiType } from "./GeneralSlider";
 
 /**
  * @id presentational-bricks.general-slider
@@ -142,6 +142,16 @@ export class GeneralSliderElement extends UpdatingElement {
     attribute: false,
   })
   included = true;
+  /**
+   * @kind UiType
+   * @required -️
+   * @default default
+   * @description Ui样式，可选择 `dashboard` 样式，默认`default`
+   */
+  @property({
+    attribute: false,
+  })
+  uiType: UiType = "default";
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -196,6 +206,7 @@ export class GeneralSliderElement extends UpdatingElement {
             onAfterChange={this._handleAfterChange}
             onlyShowMode={this.onlyShowMode}
             size={this.size}
+            uiType={this.uiType}
           />
         </BrickWrapper>,
         this
