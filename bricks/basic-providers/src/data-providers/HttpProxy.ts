@@ -2,12 +2,13 @@ import { createProviderClass } from "@next-core/brick-utils";
 import { http } from "@next-core/brick-http";
 
 export interface HttpProxyParams {
-  serviceName: string;
+  serviceName?: string;
   api: string;
   method: string;
   params?: Record<string, any>;
   body?: BodyInit;
   headers?: HeadersInit;
+  origin?: string;
 }
 
 const prefix = "api/gateway";
@@ -20,10 +21,13 @@ export function HttpProxy<T>(httpProxyParams: HttpProxyParams): Promise<T> {
     params,
     body,
     headers,
+    origin,
     ...requestInit
   } = httpProxyParams;
 
-  const url = `${prefix}/${serviceName}/${api}`;
+  const url = serviceName
+    ? `${prefix}/${serviceName}/${api}`
+    : `${origin}/${api}`;
   return http.request<T>(http.getUrlWithParams(url, params), {
     ...requestInit,
     method,
