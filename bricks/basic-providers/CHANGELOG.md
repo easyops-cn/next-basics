@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-providers@1.3.2...@next-bricks/basic-providers@1.4.0) (2021-08-16)
+
+
+### Features
+
+* **basic-providers:** http-proxy支持不通过api_gateway转发的请求 ([e10571c](https://github.com/easyops-cn/next-basics/commit/e10571cdb3cb05c78245a8192d6e51ee8d72dae6))
+
+
+
+
+
 ## [1.3.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-providers@1.3.1...@next-bricks/basic-providers@1.3.2) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/basic-providers

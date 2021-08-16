@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.6.4...@next-bricks/flow-builder@1.6.5) (2021-08-16)
+
+
+### Bug Fixes
+
+* fix yaml covert logic ([e2cde72](https://github.com/easyops-cn/next-basics/commit/e2cde7269fe560055c4309fa98ebba13916b2a3c))
+
+
+
+
+
 ## [1.6.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.6.3...@next-bricks/flow-builder@1.6.4) (2021-08-13)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.205.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.204.2...@next-bricks/presentational-bricks@1.205.0) (2021-08-16)
+
+
+### Features
+
+* **fgeneral-slider:** 新增dashboard 样式 ([ebe54cd](https://github.com/easyops-cn/next-basics/commit/ebe54cd9d42e23c5e5ac14339f0979308da0c7f3))
+
+
+
+
+
 ## [1.204.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.204.1...@next-bricks/presentational-bricks@1.204.2) (2021-08-12)
 
 
