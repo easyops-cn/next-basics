@@ -128,7 +128,8 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     this.changeEvent.emit(value);
   };
 
-  hasValue = (value: any) => !isNil(value) && value.default !== "";
+  hasValue = (value: any) =>
+    !isNil(value) && value.default !== "" && !isNil(value.default);
 
   hasValueWithRegex = (value: any) =>
     this.hasValue(value) && !isNil(value.regex);

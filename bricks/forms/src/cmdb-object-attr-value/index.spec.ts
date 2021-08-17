@@ -61,6 +61,11 @@ describe("forms.cmdb-object-attr-value", () => {
   it.each([
     ["int", { type: "int", regex: "8", default: 8 }],
     ["str", { type: "str", default_type: "value", regex: "dd", default: "dd" }],
+    [
+      "str",
+      { type: "str", default_type: "value", regex: "abc", default: null },
+    ],
+    ["str", { type: "str", default_type: "value", regex: "abc", default: "" }],
     ["float", { type: "float", regex: "8", default: 8 }],
     ["arr", { type: "arr", regex: "1", default: [1] }],
     ["ip", { type: "ip", default: "192.168.100.162" }],
