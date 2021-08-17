@@ -13,6 +13,7 @@ import {
 } from "@next-libs/forms";
 import { GeneralRadio } from "./GeneralRadio";
 import { RadioGroupButtonStyle } from "antd/lib/radio";
+import { UiType } from "../interfaces";
 
 export type RadioType = "button" | "default" | "icon";
 
@@ -141,7 +142,16 @@ export class GeneralRadioElement extends FormItemElement {
     attribute: false,
   })
   buttonStyle: RadioGroupButtonStyle = "solid";
-
+  /**
+   * @kind UiType
+   * @required -️
+   * @default default
+   * @description Ui样式，可选择 `dashboard` 样式，默认`default`
+   */
+  @property({
+    attribute: false,
+  })
+  uiType: UiType = "default";
   /**
    * @detail `string | number`
    * @description 单选框变化时被触发，`event.detail` 为选项值
@@ -182,6 +192,7 @@ export class GeneralRadioElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             buttonStyle={this.buttonStyle}
+            uiType={this.uiType}
           />
         </BrickWrapper>,
         this

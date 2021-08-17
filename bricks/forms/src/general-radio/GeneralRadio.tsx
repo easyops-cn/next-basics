@@ -9,7 +9,7 @@ import {
 import { GeneralIcon } from "@next-libs/basic-components";
 import styles from "./index.module.css";
 import { RadioType } from ".";
-
+import { UiType } from "../interfaces";
 export interface GeneralRadioProps extends FormItemWrapperProps {
   type?: RadioType;
   options: GeneralOption[];
@@ -18,10 +18,11 @@ export interface GeneralRadioProps extends FormItemWrapperProps {
   onChange?: (value: any) => void;
   buttonStyle?: RadioGroupButtonStyle;
   size?: "large" | "middle" | "small";
+  uiType?: UiType;
 }
 
 export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
-  const { options, disabled } = props;
+  const { options, disabled, uiType } = props;
 
   const handleChange = (
     e: RadioChangeEvent | React.ChangeEvent<HTMLInputElement>
@@ -48,50 +49,54 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
   };
   return (
     <FormItemWrapper {...props}>
-      {props.type === "icon" ? (
-        <>
-          {options.map((item: any) => (
-            <label
-              htmlFor={item.value}
-              className={disabled ? styles.disabledIconRadio : styles.iconRadio}
-              key={item.value}
-            >
-              <input
-                type="radio"
-                value={item.value}
-                name={props.name}
-                disabled={disabled}
-                id={item.value}
-                onChange={handleChange}
-                checked={props.value === item.value}
-              />
-              <div className={styles.content}>
-                {item.icon && (
-                  <GeneralIcon
-                    style={{
-                      fontSize: "32px",
-                    }}
-                    icon={item.icon}
-                  ></GeneralIcon>
-                )}
-                <div className={styles.text}>{item.label}</div>
-              </div>
-            </label>
-          ))}
-        </>
-      ) : (
-        <Radio.Group
-          value={props.name && props.formElement ? undefined : props.value}
-          onChange={handleChange}
-          disabled={disabled}
-          buttonStyle={props.buttonStyle}
-          size={props.size}
-        >
-          {props.type === "button"
-            ? renderRadio(Radio.Button, options)
-            : renderRadio(Radio, options)}
-        </Radio.Group>
-      )}
+      <div className={uiType === "dashboard" ? styles.dashboardRadio : ""}>
+        {props.type === "icon" ? (
+          <>
+            {options.map((item: any) => (
+              <label
+                htmlFor={item.value}
+                className={
+                  disabled ? styles.disabledIconRadio : styles.iconRadio
+                }
+                key={item.value}
+              >
+                <input
+                  type="radio"
+                  value={item.value}
+                  name={props.name}
+                  disabled={disabled}
+                  id={item.value}
+                  onChange={handleChange}
+                  checked={props.value === item.value}
+                />
+                <div className={styles.content}>
+                  {item.icon && (
+                    <GeneralIcon
+                      style={{
+                        fontSize: "32px",
+                      }}
+                      icon={item.icon}
+                    ></GeneralIcon>
+                  )}
+                  <div className={styles.text}>{item.label}</div>
+                </div>
+              </label>
+            ))}
+          </>
+        ) : (
+          <Radio.Group
+            value={props.name && props.formElement ? undefined : props.value}
+            onChange={handleChange}
+            disabled={disabled}
+            buttonStyle={props.buttonStyle}
+            size={props.size}
+          >
+            {props.type === "button"
+              ? renderRadio(Radio.Button, options)
+              : renderRadio(Radio, options)}
+          </Radio.Group>
+        )}
+      </div>
     </FormItemWrapper>
   );
 }
