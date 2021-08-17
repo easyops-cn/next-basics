@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.183.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.183.0...@next-bricks/forms@1.183.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **forms:** 国际化文案 && 浮点类型属性输入为空无法保存 ([c28ecf9](https://github.com/easyops-cn/next-basics/commit/c28ecf9435bdc568e277e95151729599214b644a))
+
+
+
+
+
 # [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.4...@next-bricks/forms@1.183.0) (2021-08-12)
 
 
