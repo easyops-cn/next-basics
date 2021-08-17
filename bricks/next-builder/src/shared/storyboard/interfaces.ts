@@ -3,11 +3,11 @@ import {
   CustomTemplateProxy,
   CustomTemplate,
   MetaI18n,
-  ResolveConf,
   BuilderRouteNode,
   BuilderBrickNode,
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
+import { MenuNode } from "@next-core/brick-utils";
 
 export interface StoryboardAssemblyParamsBase {
   // The human-readable id of an app.
@@ -72,18 +72,6 @@ export interface TemplateNode {
   id?: string;
   children?: BuilderBrickNode[];
   proxy?: CustomTemplateProxy;
-}
-
-export interface MenuNode {
-  menuId: string;
-  items?: MenuItemNode[];
-  dynamicItems?: boolean;
-  itemsResolve?: ResolveConf;
-}
-
-export interface MenuItemNode {
-  text: string;
-  children?: MenuItemNode[];
 }
 
 export interface StoryboardToBuild {
