@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.184.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.183.1...@next-bricks/forms@1.184.0) (2021-08-17)
+
+
+### Features
+
+* **fgeneral-slider:** 新增dashboard 样式 ([97320f4](https://github.com/easyops-cn/next-basics/commit/97320f414a28fb1fc8ec7b9c8a74dbdf90c3964d))
+
+
+
+
+
 ## [1.183.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.183.0...@next-bricks/forms@1.183.1) (2021-08-17)
 
 
