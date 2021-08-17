@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.343.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.343.0...@next-bricks/developers@1.343.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* make provider doc compatible with legacy sdk ([b65610e](https://github.com/easyops-cn/next-basics/commit/b65610eadfc7f16725cb60c2d636e2b409a3e065))
+
+
+
+
+
 # [1.343.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.7...@next-bricks/developers@1.343.0) (2021-08-16)
 
 
