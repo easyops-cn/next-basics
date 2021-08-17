@@ -79,7 +79,10 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
         ...value,
         default_type,
         default: "",
-        start_value: 1,
+        start_value: startValue,
+        ...(default_type === "series-number"
+          ? { series_number_length: value.series_number_length || 1 }
+          : {}),
       });
     } else {
       handleValueChange({ ...value, default_type, default: "" });

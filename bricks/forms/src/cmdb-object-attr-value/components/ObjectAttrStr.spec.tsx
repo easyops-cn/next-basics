@@ -138,6 +138,11 @@ describe("ObjectAttrStr", () => {
       onChange: jest.fn(),
     };
     const wrapper = shallow(<ObjectAttrStr {...props} />);
+    wrapper.find(Select).at(0).invoke("onChange")("normal", null);
+    expect(props.onChange).toBeCalledWith({
+      ...defaultValue,
+      default_type: "normal",
+    });
     wrapper.find(Select).at(0).invoke("onChange")("function", null);
     expect(props.onChange).toBeCalledWith({
       ...defaultValue,
@@ -153,11 +158,7 @@ describe("ObjectAttrStr", () => {
     expect(props.onChange).toBeCalledWith({
       ...defaultValue,
       default_type: "series-number",
-    });
-    wrapper.find(Select).at(0).invoke("onChange")("normal", null);
-    expect(props.onChange).toBeCalledWith({
-      ...defaultValue,
-      default_type: "normal",
+      series_number_length: 1,
     });
   });
 
@@ -188,6 +189,7 @@ describe("ObjectAttrStr", () => {
       ...defaultValue,
       prefix: "pre",
       default_type: "series-number",
+      series_number_length: 1,
     });
   });
 
