@@ -42,7 +42,10 @@ export async function providerDoc(
     (item) => item.name === moduleName
   ) as ContainerReflection;
   const refVariable = refModule.children.find(
-    (item) => item.kindString === "Variable" && item.name === fullApiId
+    (item) =>
+      item.kindString === "Variable" &&
+      // For legacy sdk, the apiId equals to the camelApiId.
+      (item.name === fullApiId || item.name === camelApiId)
   ) as DeclarationReflection;
   const tags = getTags(
     get(refVariable, ["comment", "tags"], []) as Record<string, any>[]
@@ -50,8 +53,9 @@ export async function providerDoc(
   const comment =
     tags["description"] || get(refVariable, ["comment", "shortText"]);
   const endpoint = tags["endpoint"];
-  const signature = ((refVariable.type as ReflectionType)
-    .declaration as DeclarationReflection).signatures[0] as SignatureReflection;
+  const signature = (
+    (refVariable.type as ReflectionType).declaration as DeclarationReflection
+  ).signatures[0] as SignatureReflection;
   const parameters = signature.parameters.slice(0, -1);
   const returns = (signature.type as ReferenceType).typeArguments[0];
   const usedReferenceIds = new Set<number>();
