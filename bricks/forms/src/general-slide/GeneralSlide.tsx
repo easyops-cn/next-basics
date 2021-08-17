@@ -5,7 +5,7 @@ import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import style from "./GeneralSlide.module.css";
 import { omit } from "lodash";
 import classNames from "classnames";
-
+export type UiType = "default" | "dashboard";
 export interface GeneralSlideProps extends FormItemWrapperProps {
   value: any;
   disabled?: boolean;
@@ -20,6 +20,7 @@ export interface GeneralSlideProps extends FormItemWrapperProps {
   onAfterChange?: (value: any) => void;
   onlyShowMode?: boolean;
   size?: string;
+  uiType?: UiType;
 }
 
 export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
@@ -35,27 +36,30 @@ export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
     included,
     onlyShowMode,
     size,
+    uiType,
   } = props;
 
   return (
     <FormItemWrapper {...omit(props, ["min", "max"])}>
-      <Slider
-        className={classNames({
-          [style.onlyShowMode]: onlyShowMode,
-          [style.bigMode]: size === "large",
-        })}
-        value={props.name && props.formElement ? undefined : value}
-        disabled={disabled || onlyShowMode}
-        dots={dots}
-        max={max}
-        min={min}
-        range={range}
-        marks={marks}
-        step={step}
-        included={included}
-        onChange={props.onChange}
-        onAfterChange={props.onAfterChange}
-      />
+      <div className={uiType === "dashboard" ? style.dashboardSlider : ""}>
+        <Slider
+          className={classNames({
+            [style.onlyShowMode]: onlyShowMode,
+            [style.bigMode]: size === "large",
+          })}
+          value={props.name && props.formElement ? undefined : value}
+          disabled={disabled || onlyShowMode}
+          dots={dots}
+          max={max}
+          min={min}
+          range={range}
+          marks={marks}
+          step={step}
+          included={included}
+          onChange={props.onChange}
+          onAfterChange={props.onAfterChange}
+        />
+      </div>
     </FormItemWrapper>
   );
 }

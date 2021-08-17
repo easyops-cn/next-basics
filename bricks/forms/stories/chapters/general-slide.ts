@@ -254,6 +254,23 @@ export const generalSlideStory: Story = {
         },
       },
     },
+    {
+      brick: "forms.general-slide",
+      description: {
+        title: "dashboard 样式",
+        message: "",
+      },
+      properties: {
+        value: [20, 60],
+        range: true,
+        uiType: "dashboard",
+      },
+      events: {
+        "slider.change": {
+          action: "console.log",
+        },
+      },
+    },
   ],
   previewColumns: 2,
 };
