@@ -58,7 +58,6 @@ import { StatisticCardStory } from "./statistic-card";
 import { TemplateBreadcrumbStory } from "./template-breadcrumb";
 import { BrickIllustrationStory } from "./brick-illustration";
 import { DynamicGridContainerStory } from "./dynamic-grid-container";
-import { GeneralSliderElementStory } from "./general-slider";
 export const Chapters = [
   AgentStatusStory,
   BasicProgressStory,
@@ -120,5 +119,4 @@ export const Chapters = [
   TemplateBreadcrumbStory,
   BrickIllustrationStory,
   DynamicGridContainerStory,
-  GeneralSliderElementStory,
 ];
