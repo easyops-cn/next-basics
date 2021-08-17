@@ -50,6 +50,7 @@ const locale: Locale = {
   [K.FORMAT]: "Format:",
   [K.CLICK_TO_SELECT_DATE]: "date,click to select",
   [K.ENUMERATION_VALUE]: "Enumeration value",
+  [K.ENUM_REGEX_JSON]: "Enumeration value/Regular expression/JSON Schema",
   [K.PLEASE_INPUT_ENUMERATED_VALUE]:
     "Enter the enumerated values, separated by carriage returns",
   [K.FLOAT_LIMIT]: "Up to four digits can be entered after the decimal point",

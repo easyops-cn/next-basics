@@ -241,7 +241,7 @@ export function ObjectAttrStr(props: ObjectAttrStrProps): React.ReactElement {
           {i18n.t(`${NS_FORMS}:${K.REGULAR}`)}
           <Row>
             <Input
-              placeholder={i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`)}
+              placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
               value={value.regex}
               onChange={handleRegexChange}
             />

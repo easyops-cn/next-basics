@@ -59,7 +59,9 @@ export function ObjectAttrFloat(
             placeholder={i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`)}
             style={{ width: "100%" }}
             step={0.0001}
-            onChange={(e) => handleValueChange({ ...value, default: e })}
+            onChange={(e) => {
+              handleValueChange({ ...value, default: e ?? "" });
+            }}
           />
         </Row>
       </div>
