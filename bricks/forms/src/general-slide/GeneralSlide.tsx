@@ -5,7 +5,8 @@ import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import style from "./GeneralSlide.module.css";
 import { omit } from "lodash";
 import classNames from "classnames";
-export type UiType = "default" | "dashboard";
+import { UiType } from "../interfaces";
+
 export interface GeneralSlideProps extends FormItemWrapperProps {
   value: any;
   disabled?: boolean;

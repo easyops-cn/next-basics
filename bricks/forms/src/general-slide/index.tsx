@@ -6,8 +6,9 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { GeneralSlide, GeneralSlideProps, UiType } from "./GeneralSlide";
+import { GeneralSlide, GeneralSlideProps } from "./GeneralSlide";
 import { FormItemElement } from "@next-libs/forms";
+import { UiType } from "../interfaces";
 
 /**
  * @id forms.general-slide

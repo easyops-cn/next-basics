@@ -3,3 +3,5 @@ export enum FormAlignment {
   Right = "right",
   Center = "center",
 }
+
+export type UiType = "default" | "dashboard";

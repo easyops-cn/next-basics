@@ -32,9 +32,10 @@ describe("GeneralRadio", () => {
       .simulate("change", { target: { value: "Shanghai" } });
     expect(wrapper).toBeTruthy();
 
-    wrapper.setProps({ type: "button" });
+    wrapper.setProps({ type: "button", uiType: "dashboard" });
     wrapper.update();
     expect(wrapper).toBeTruthy();
+    expect(wrapper.find(".dashboardRadio").length).toBe(1);
   });
 
   it("should execute change method", async () => {
