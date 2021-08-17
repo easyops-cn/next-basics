@@ -60,7 +60,7 @@ export function ObjectAttrFloat(
             style={{ width: "100%" }}
             step={0.0001}
             onChange={(e) => {
-              handleValueChange({ ...value, default: e ?? "" });
+              handleValueChange({ ...value, default: e });
             }}
           />
         </Row>

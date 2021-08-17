@@ -23,15 +23,10 @@ describe("ObjectAttrFloat", () => {
       onChange: jest.fn(),
     };
     const wrapper = shallow(<ObjectAttrFloat {...props} />);
-    wrapper.find("Row").at(0).children(0).invoke("onChange")(0);
+    wrapper.find("Row").at(0).children(0).invoke("onChange")(5);
     expect(props.onChange).toBeCalledWith({
       ...defaultValue,
-      default: 0,
-    });
-    wrapper.find("Row").at(0).children(0).invoke("onChange")(null);
-    expect(props.onChange).toBeCalledWith({
-      ...defaultValue,
-      default: "",
+      default: 5,
     });
   });
 });
