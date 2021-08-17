@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.185.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.184.0...@next-bricks/forms@1.185.0) (2021-08-17)
+
+
+### Features
+
+* **fgeneral-radio:** 新增dashboard 样式 ([7b102ee](https://github.com/easyops-cn/next-basics/commit/7b102ee8abe2d9702bc9f412ee1a00537d4ffd3c))
+
+
+
+
+
 # [1.184.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.183.1...@next-bricks/forms@1.184.0) (2021-08-17)
 
 
