@@ -36,7 +36,7 @@ export function ObjectAttrJson(props: ObjectAttrJsonProps): React.ReactElement {
         JSON Schema：
         <Row>
           <Input
-            placeholder={i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`)}
+            placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
             value={value?.regex}
             onChange={(e) =>
               handleValueChange({ ...value, regex: e.target.value })

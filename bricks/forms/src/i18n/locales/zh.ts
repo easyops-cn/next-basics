@@ -48,6 +48,7 @@ const locale: Locale = {
   [K.FORMAT]: "格式:",
   [K.CLICK_TO_SELECT_DATE]: "date,点击选择",
   [K.ENUMERATION_VALUE]: "枚举值:",
+  [K.ENUM_REGEX_JSON]: "枚举值/正则/JSON Schema",
   [K.PLEASE_INPUT_ENUMERATED_VALUE]: "输入枚举值，以回车间隔",
   [K.FLOAT_LIMIT]: "小数点后最多可输入四位",
   [K.THIS_IS_NOT_MANDATORY]: "可不填",
