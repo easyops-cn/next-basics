@@ -6,7 +6,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { GeneralSlide, GeneralSlideProps } from "./GeneralSlide";
+import { GeneralSlide, GeneralSlideProps, UiType } from "./GeneralSlide";
 import { FormItemElement } from "@next-libs/forms";
 
 /**
@@ -172,7 +172,16 @@ export class GeneralSlideElement extends FormItemElement {
     attribute: false,
   })
   size: string;
-
+  /**
+   * @kind UiType
+   * @required -️
+   * @default default
+   * @description Ui样式，可选择 `dashboard` 样式，默认`default`
+   */
+  @property({
+    attribute: false,
+  })
+  uiType: UiType = "default";
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -240,6 +249,7 @@ export class GeneralSlideElement extends FormItemElement {
             onAfterChange={this._handleAfterChange}
             onlyShowMode={this.onlyShowMode}
             size={this.size}
+            uiType={this.uiType}
           />
         </BrickWrapper>,
         this

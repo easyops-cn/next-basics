@@ -13,5 +13,7 @@ describe("GeneralSlide", () => {
     const wrapper = shallow(<GeneralSlide {...props} />);
     wrapper.find(Slider).invoke("onChange")(3);
     expect(changeMock).toHaveBeenCalledWith(3);
+    wrapper.setProps({ uiType: "dashboard" });
+    expect(wrapper.find(".dashboardSlider").length).toBe(1);
   });
 });

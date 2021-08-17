@@ -28,3 +28,46 @@
     height: 14px;
   }
 }
+.dashboardSlider {
+  :global(.ant-slider),
+  :global(.ant-slider-rail),
+  :global(.ant-slider-step),
+  :global(.ant-slider-track) {
+    height: 16px;
+  }
+
+  :global(.ant-slider-track) {
+    background-color: #0060ff;
+    opacity: 0.2;
+  }
+
+  :global(.ant-slider-handle) {
+    width: 32px;
+    height: 32px;
+    margin-top: -8px;
+    background: #0060ff;
+    border: 8px solid #ffffff;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 9px;
+      border: 1px solid #ffffff;
+      top: 50%;
+      left: 50%;
+      transform: translate(-3px, -50%);
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 9px;
+      border: 1px solid #ffffff;
+      top: 50%;
+      left: 50%;
+      transform: translate(1px, -50%);
+    }
+  }
+}
