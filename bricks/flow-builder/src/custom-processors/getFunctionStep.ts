@@ -14,6 +14,7 @@ interface RefData {
 interface StepItem {
   id: string;
   name: string;
+  type: string;
   parent?: string[];
   input?: FieldItem[];
   output?: FieldItem[];
@@ -69,7 +70,7 @@ function _calcDepth(
   });
 }
 
-function calcDepth(item: StepItem, stepList: StepItem[]): number {
+export function calcDepth(item: StepItem, stepList: StepItem[]): number {
   const obj = {
     curDepth: 0,
     depthArr: [],
@@ -93,7 +94,7 @@ function processFunctionStep(stepList: StepItem[]): Array<StepItem[]> {
   return list;
 }
 
-export function getFunctionStep(
+function getFunctionStep(
   data: StepParams,
   options: FlowOption = {}
 ): GraphFunctionStep {
@@ -147,7 +148,8 @@ export function getFunctionStep(
       stepNodes.push({
         type: "step",
         id: functionId,
-        name: step.name,
+        name: step.id,
+        stepType: step.type,
       });
 
       if (step.input) {
@@ -155,10 +157,11 @@ export function getFunctionStep(
           name: "input",
           id: inputGroupId,
           type: "group",
+          stepType: step.type,
         });
 
         for (const input of step.input) {
-          const inputId = `${step.id}.${step.name}.${input.name}`;
+          const inputId = `${step.id}.${step.name}.input.${input.name}`;
           inputNodes.push({
             id: inputId,
             type: "input",
@@ -185,10 +188,11 @@ export function getFunctionStep(
           name: "output",
           id: outputGroupId,
           type: "group",
+          stepType: step.type,
         });
 
         for (const output of step.output) {
-          const outputId = `${step.id}.${step.name}.${output.name}`;
+          const outputId = `${step.id}.${step.name}.output.${output.name}`;
           outputNodes.push({
             id: outputId,
             type: "output",
@@ -232,8 +236,8 @@ export function getFunctionStep(
           (item) => item.id === relation.target.stepId
         );
         fieldLinksEdges.push({
-          source: `${relation.source.stepId}.${sourceStepData.name}.${relation.source.name}`,
-          target: `${relation.target.stepId}.${targetStepData.name}.${relation.target.name}`,
+          source: `${relation.source.stepId}.${sourceStepData.name}.${relation.source.type}.${relation.source.name}`,
+          target: `${relation.target.stepId}.${targetStepData.name}.${relation.target.type}.${relation.target.name}`,
           type: "link",
         });
       }

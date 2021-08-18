@@ -1,4 +1,8 @@
-import { getFunctionStep, StepParams } from "./getFunctionStep";
+import {
+  getFunctionStep,
+  StepParams,
+  processFunctionStep,
+} from "./getFunctionStep";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: () => ({
@@ -110,37 +114,37 @@ describe("getFunctionStep", () => {
         },
         {
           source: "1.createInstance.input.group",
-          target: "1.createInstance.name",
+          target: "1.createInstance.input.name",
           type: "input",
         },
         {
           source: "2.getDetail.input.group",
-          target: "2.getDetail.instanceId",
+          target: "2.getDetail.input.instanceId",
           type: "input",
         },
         {
           source: "2.getDetail.input.group",
-          target: "2.getDetail.fields",
+          target: "2.getDetail.input.fields",
           type: "input",
         },
         {
           source: "3.deleteInstance.input.group",
-          target: "3.deleteInstance.instanceId",
+          target: "3.deleteInstance.input.instanceId",
           type: "input",
         },
         {
           source: "1.createInstance.output.group",
-          target: "1.createInstance.instanceData",
+          target: "1.createInstance.output.instanceData",
           type: "output",
         },
         {
           source: "2.getDetail.output.group",
-          target: "2.getDetail.data",
+          target: "2.getDetail.output.data",
           type: "output",
         },
         {
           source: "3.deleteInstance.output.group",
-          target: "3.deleteInstance.result",
+          target: "3.deleteInstance.output.result",
           type: "output",
         },
         {
@@ -154,13 +158,13 @@ describe("getFunctionStep", () => {
           type: "step-link",
         },
         {
-          source: "1.createInstance.instanceData",
-          target: "2.getDetail.instanceId",
+          source: "1.createInstance.output.instanceData",
+          target: "2.getDetail.input.instanceId",
           type: "link",
         },
         {
-          source: "1.createInstance.instanceData",
-          target: "3.deleteInstance.instanceId",
+          source: "1.createInstance.output.instanceData",
+          target: "3.deleteInstance.output.instanceId",
           type: "link",
         },
       ],
@@ -168,53 +172,93 @@ describe("getFunctionStep", () => {
         { id: "root", type: "flow" },
         { id: "stage-0", type: "stage" },
         { id: "stage-1", type: "stage" },
-        { id: "1.createInstance", name: "createInstance", type: "step" },
-        { id: "2.getDetail", name: "getDetail", type: "step" },
-        { id: "3.deleteInstance", name: "deleteInstance", type: "step" },
-        { id: "1.createInstance.input.group", name: "input", type: "group" },
-        { id: "1.createInstance.output.group", name: "output", type: "group" },
-        { id: "2.getDetail.input.group", name: "input", type: "group" },
-        { id: "2.getDetail.output.group", name: "output", type: "group" },
-        { id: "3.deleteInstance.input.group", name: "input", type: "group" },
-        { id: "3.deleteInstance.output.group", name: "output", type: "group" },
         {
-          id: "1.createInstance.name",
+          id: "1.createInstance",
+          name: "1",
+          stepType: undefined,
+          type: "step",
+        },
+        { id: "2.getDetail", name: "2", stepType: undefined, type: "step" },
+        {
+          id: "3.deleteInstance",
+          name: "3",
+          stepType: undefined,
+          type: "step",
+        },
+        {
+          id: "1.createInstance.input.group",
+          name: "input",
+          stepType: undefined,
+          type: "group",
+        },
+        {
+          id: "1.createInstance.output.group",
+          name: "output",
+          stepType: undefined,
+          type: "group",
+        },
+        {
+          id: "2.getDetail.input.group",
+          name: "input",
+          stepType: undefined,
+          type: "group",
+        },
+        {
+          id: "2.getDetail.output.group",
+          name: "output",
+          stepType: undefined,
+          type: "group",
+        },
+        {
+          id: "3.deleteInstance.input.group",
+          name: "input",
+          stepType: undefined,
+          type: "group",
+        },
+        {
+          id: "3.deleteInstance.output.group",
+          name: "output",
+          stepType: undefined,
+          type: "group",
+        },
+        {
+          id: "1.createInstance.input.name",
           name: "name",
           type: "input",
           valueType: "string",
         },
         {
-          id: "2.getDetail.instanceId",
+          id: "2.getDetail.input.instanceId",
           name: "instanceId",
           type: "input",
           valueType: "string",
         },
         {
-          id: "2.getDetail.fields",
+          id: "2.getDetail.input.fields",
           name: "fields",
           type: "input",
           valueType: "string",
         },
         {
-          id: "3.deleteInstance.instanceId",
+          id: "3.deleteInstance.input.instanceId",
           name: "instanceId",
           type: "input",
           valueType: "string",
         },
         {
-          id: "1.createInstance.instanceData",
+          id: "1.createInstance.output.instanceData",
           name: "instanceData",
           type: "output",
           valueType: "object",
         },
         {
-          id: "2.getDetail.data",
+          id: "2.getDetail.output.data",
           name: "data",
           type: "output",
           valueType: "string",
         },
         {
-          id: "3.deleteInstance.result",
+          id: "3.deleteInstance.output.result",
           name: "result",
           type: "output",
           valueType: "object",
@@ -239,7 +283,12 @@ describe("getFunctionStep", () => {
       nodes: [
         { id: "root", type: "flow" },
         { id: "stage-0", type: "stage" },
-        { id: "1.createInstance", name: "createInstance", type: "step" },
+        {
+          id: "1.createInstance",
+          name: "1",
+          stepType: undefined,
+          type: "step",
+        },
       ],
       root: "root",
     });
