@@ -41,8 +41,8 @@ export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
   } = props;
 
   return (
-    <FormItemWrapper {...omit(props, ["min", "max"])}>
-      <div className={uiType === "dashboard" ? style.dashboardSlider : ""}>
+    <div className={uiType === "dashboard" ? style.dashboardSlider : ""}>
+      <FormItemWrapper {...omit(props, ["min", "max"])}>
         <Slider
           className={classNames({
             [style.onlyShowMode]: onlyShowMode,
@@ -60,7 +60,7 @@ export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
           onChange={props.onChange}
           onAfterChange={props.onAfterChange}
         />
-      </div>
-    </FormItemWrapper>
+      </FormItemWrapper>
+    </div>
   );
 }

@@ -48,8 +48,8 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
     });
   };
   return (
-    <FormItemWrapper {...props}>
-      <div className={uiType === "dashboard" ? styles.dashboardRadio : ""}>
+    <div className={uiType === "dashboard" ? styles.dashboardRadio : ""}>
+      <FormItemWrapper {...props}>
         {props.type === "icon" ? (
           <>
             {options.map((item: any) => (
@@ -96,7 +96,7 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
               : renderRadio(Radio, options)}
           </Radio.Group>
         )}
-      </div>
-    </FormItemWrapper>
+      </FormItemWrapper>
+    </div>
   );
 }
