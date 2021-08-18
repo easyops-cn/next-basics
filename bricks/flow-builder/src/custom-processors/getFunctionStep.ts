@@ -1,4 +1,5 @@
 import { getRuntime } from "@next-core/brick-kit";
+import { range } from "lodash";
 
 interface FieldItem {
   name: string;
@@ -14,6 +15,7 @@ interface RefData {
 interface StepItem {
   id: string;
   name: string;
+  type: string;
   parent?: string[];
   input?: FieldItem[];
   output?: FieldItem[];
@@ -53,48 +55,60 @@ interface FlowOption {
   type?: string;
 }
 
-function _calcDepth(
-  parents: string[],
-  stepList: StepItem[],
-  obj: { curDepth: number; depthArr: number[] }
-): void {
-  if (!parents) {
-    obj.depthArr.push(obj.curDepth);
-    obj.curDepth = 0;
-  }
-  parents?.forEach((parentId) => {
-    obj.curDepth += 1;
-    const find = stepList.find((item) => item.id === parentId);
-    find && _calcDepth(find.parent, stepList, obj);
-  });
+function getStepUniqueId(step: StepItem): string {
+  return `${step.id}.${step.name}`;
 }
 
-function calcDepth(item: StepItem, stepList: StepItem[]): number {
-  const obj = {
-    curDepth: 0,
-    depthArr: [],
-  } as { curDepth: number; depthArr: number[] };
-  _calcDepth(item.parent, stepList, obj);
-
-  return Math.max(...obj.depthArr);
-}
-
-function processFunctionStep(stepList: StepItem[]): Array<StepItem[]> {
-  const list = [] as Array<StepItem[]>;
-  stepList.forEach((step) => {
-    const depth = calcDepth(step, stepList);
-    if (!list[depth]) {
-      list[depth] = [step];
-    } else {
-      list[depth].push(step);
+function getStageNodesAndEdges(
+  functionLinksEdges: GraphEdge[],
+  firstStepUniqueId: string,
+  rootId: string
+): [stageNodes: CollectNode[], stageEdges: GraphEdge[]] {
+  const stepLevelMap = new Map<string, number>();
+  let maxLevel = 0;
+  const walk = (id: string, level: number): void => {
+    if (level > (stepLevelMap.get(id) ?? -1)) {
+      // Take every step's max level.
+      stepLevelMap.set(id, level);
     }
-  });
+    if (level > maxLevel) {
+      maxLevel = level;
+    }
+    for (const edge of functionLinksEdges) {
+      if (edge.source === id) {
+        walk(edge.target, level + 1);
+      }
+    }
+  };
+  walk(firstStepUniqueId, 0);
 
-  return list;
+  const stageNodes: CollectNode[] = range(0, maxLevel + 1).map(
+    (level) =>
+      ({
+        type: "stage",
+        id: `stage-${level}`,
+      } as CollectNode)
+  );
+
+  const stageEdges: GraphEdge[] = stageNodes.map((node) => ({
+    source: rootId,
+    target: node.id,
+    type: "layer",
+  }));
+
+  for (const [id, level] of stepLevelMap.entries()) {
+    stageEdges.push({
+      source: `stage-${level}`,
+      target: id,
+      type: "stage",
+    });
+  }
+
+  return [stageNodes, stageEdges];
 }
 
 export function getFunctionStep(
-  data: StepParams,
+  { stepList, fieldRelations }: StepParams,
   options: FlowOption = {}
 ): GraphFunctionStep {
   const rootId = "root";
@@ -102,44 +116,46 @@ export function getFunctionStep(
     id: rootId,
     type: "flow",
   };
-  const stageNodes: CollectNode[] = [];
+  let stageNodes: CollectNode[] = [];
   const stepNodes: CollectNode[] = [];
   const containerGroupNodes: CollectNode[] = [];
   const inputNodes: CollectNode[] = [];
   const outputNodes: CollectNode[] = [];
 
-  const stageEdges: GraphEdge[] = [];
+  let stageEdges: GraphEdge[] = [];
   const stepEdges: GraphEdge[] = [];
   const inputEdges: GraphEdge[] = [];
   const outputEdges: GraphEdge[] = [];
   const fieldLinksEdges: GraphEdge[] = [];
   const functionLinksEdges: GraphEdge[] = [];
 
-  if (data.stepList) {
-    const processedSteps = processFunctionStep(data.stepList);
-    processedSteps.forEach((steps, index) => {
-      const stageId = `stage-${index}`;
-      stageNodes.push({
-        type: "stage",
-        id: stageId,
-      });
+  if (stepList) {
+    let firstStepUniqueId: string;
+    for (const step of stepList) {
+      const stepUniqueId = getStepUniqueId(step);
+      if (step.parent?.length) {
+        for (const parentId of step.parent) {
+          const parentStep = stepList.find((item) => item.id === parentId);
+          if (parentStep) {
+            functionLinksEdges.push({
+              source: getStepUniqueId(parentStep),
+              target: stepUniqueId,
+              type: "step-link",
+            });
+          }
+        }
+      } else {
+        firstStepUniqueId = stepUniqueId;
+      }
+    }
 
-      stageEdges.push({
-        source: rootId,
-        target: stageId,
-        type: "layer",
-      });
+    [stageNodes, stageEdges] = getStageNodesAndEdges(
+      functionLinksEdges,
+      firstStepUniqueId,
+      rootId
+    );
 
-      steps.forEach((step) => {
-        stageEdges.push({
-          source: stageId,
-          target: `${step.id}.${step.name}`,
-          type: "stage",
-        });
-      });
-    });
-
-    for (const step of data.stepList) {
+    for (const step of stepList) {
       const functionId = `${step.id}.${step.name}`;
       const inputGroupId = `${step.id}.${step.name}.input.group`;
       const outputGroupId = `${step.id}.${step.name}.output.group`;
@@ -147,7 +163,8 @@ export function getFunctionStep(
       stepNodes.push({
         type: "step",
         id: functionId,
-        name: step.name,
+        name: step.id,
+        stepType: step.type,
       });
 
       if (step.input) {
@@ -155,10 +172,11 @@ export function getFunctionStep(
           name: "input",
           id: inputGroupId,
           type: "group",
+          stepType: step.type,
         });
 
         for (const input of step.input) {
-          const inputId = `${step.id}.${step.name}.${input.name}`;
+          const inputId = `${step.id}.${step.name}.input.${input.name}`;
           inputNodes.push({
             id: inputId,
             type: "input",
@@ -185,10 +203,11 @@ export function getFunctionStep(
           name: "output",
           id: outputGroupId,
           type: "group",
+          stepType: step.type,
         });
 
         for (const output of step.output) {
-          const outputId = `${step.id}.${step.name}.${output.name}`;
+          const outputId = `${step.id}.${step.name}.output.${output.name}`;
           outputNodes.push({
             id: outputId,
             type: "output",
@@ -209,31 +228,19 @@ export function getFunctionStep(
           type: "group",
         });
       }
-
-      if (step.parent) {
-        step.parent.forEach((parentId) => {
-          const find = data.stepList.find((item) => item.id === parentId);
-          find &&
-            functionLinksEdges.push({
-              source: `${find.id}.${find.name}`,
-              target: functionId,
-              type: "step-link",
-            });
-        });
-      }
     }
 
-    if (data.fieldRelations) {
-      for (const relation of data.fieldRelations) {
-        const sourceStepData = data.stepList.find(
+    if (fieldRelations) {
+      for (const relation of fieldRelations) {
+        const sourceStepData = stepList.find(
           (item) => item.id === relation.source.stepId
         );
-        const targetStepData = data.stepList.find(
+        const targetStepData = stepList.find(
           (item) => item.id === relation.target.stepId
         );
         fieldLinksEdges.push({
-          source: `${relation.source.stepId}.${sourceStepData.name}.${relation.source.name}`,
-          target: `${relation.target.stepId}.${targetStepData.name}.${relation.target.name}`,
+          source: `${relation.source.stepId}.${sourceStepData.name}.${relation.source.type}.${relation.source.name}`,
+          target: `${relation.target.stepId}.${targetStepData.name}.${relation.target.type}.${relation.target.name}`,
           type: "link",
         });
       }
