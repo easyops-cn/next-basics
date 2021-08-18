@@ -102,14 +102,14 @@ export function getFunctionStep(
     id: rootId,
     type: "flow",
   };
+  const stageNodes: CollectNode[] = [];
   const stepNodes: CollectNode[] = [];
-  const functionNodes: CollectNode[] = [];
   const containerGroupNodes: CollectNode[] = [];
   const inputNodes: CollectNode[] = [];
   const outputNodes: CollectNode[] = [];
 
+  const stageEdges: GraphEdge[] = [];
   const stepEdges: GraphEdge[] = [];
-  const functionEdges: GraphEdge[] = [];
   const inputEdges: GraphEdge[] = [];
   const outputEdges: GraphEdge[] = [];
   const fieldLinksEdges: GraphEdge[] = [];
@@ -118,23 +118,23 @@ export function getFunctionStep(
   if (data.stepList) {
     const processedSteps = processFunctionStep(data.stepList);
     processedSteps.forEach((steps, index) => {
-      const stepId = `step-${index}`;
-      stepNodes.push({
-        type: "step",
-        id: stepId,
+      const stageId = `stage-${index}`;
+      stageNodes.push({
+        type: "stage",
+        id: stageId,
       });
 
-      stepEdges.push({
+      stageEdges.push({
         source: rootId,
-        target: stepId,
+        target: stageId,
         type: "layer",
       });
 
       steps.forEach((step) => {
-        stepEdges.push({
-          source: stepId,
+        stageEdges.push({
+          source: stageId,
           target: `${step.id}.${step.name}`,
-          type: "step",
+          type: "stage",
         });
       });
     });
@@ -144,8 +144,8 @@ export function getFunctionStep(
       const inputGroupId = `${step.id}.${step.name}.input.group`;
       const outputGroupId = `${step.id}.${step.name}.output.group`;
 
-      functionNodes.push({
-        type: "function",
+      stepNodes.push({
+        type: "step",
         id: functionId,
         name: step.name,
       });
@@ -173,7 +173,7 @@ export function getFunctionStep(
           });
         }
 
-        functionEdges.push({
+        stepEdges.push({
           source: functionId,
           target: inputGroupId,
           type: "group",
@@ -203,7 +203,7 @@ export function getFunctionStep(
           });
         }
 
-        functionEdges.push({
+        stepEdges.push({
           source: functionId,
           target: outputGroupId,
           type: "group",
@@ -217,7 +217,7 @@ export function getFunctionStep(
             functionLinksEdges.push({
               source: `${find.id}.${find.name}`,
               target: functionId,
-              type: "function-link",
+              type: "step-link",
             });
         });
       }
@@ -240,8 +240,8 @@ export function getFunctionStep(
     }
   }
 
-  const edges = stepEdges.concat(
-    functionEdges,
+  const edges = stageEdges.concat(
+    stepEdges,
     inputEdges,
     outputEdges,
     functionLinksEdges,
@@ -261,8 +261,8 @@ export function getFunctionStep(
   return {
     root: rootId,
     nodes: [rootNode].concat(
+      stageNodes,
       stepNodes,
-      functionNodes,
       containerGroupNodes,
       inputNodes,
       outputNodes
