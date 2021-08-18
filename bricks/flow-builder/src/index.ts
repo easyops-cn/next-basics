@@ -6,3 +6,4 @@ import "./custom-processors/getNameSpaceCategory";
 // !Lazy: import "./fields-mapping-editor";
 import "./custom-processors/formatFeildsMap";
 import "./lazy-bricks";
+import "./data-providers/CreateFunctionContract";
