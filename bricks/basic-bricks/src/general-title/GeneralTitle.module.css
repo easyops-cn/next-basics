@@ -1,0 +1,26 @@
+.titleWrapper {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.titleWrapper .titleContent {
+  margin-right: 5px;
+  color: #262626;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.descriptionWrapper {
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+}
+
+.descriptionWrapper .descriptionContent {
+  color: #8c8c8c;
+  margin-left: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
