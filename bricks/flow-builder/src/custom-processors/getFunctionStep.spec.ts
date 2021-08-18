@@ -1,8 +1,4 @@
-import {
-  getFunctionStep,
-  StepParams,
-  processFunctionStep,
-} from "./getFunctionStep";
+import { getFunctionStep, StepParams } from "./getFunctionStep";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: () => ({
@@ -78,8 +74,8 @@ describe("getFunctionStep", () => {
     expect(getFunctionStep(data)).toEqual({
       edges: [
         { source: "root", target: "stage-0", type: "layer" },
-        { source: "stage-0", target: "1.createInstance", type: "stage" },
         { source: "root", target: "stage-1", type: "layer" },
+        { source: "stage-0", target: "1.createInstance", type: "stage" },
         { source: "stage-1", target: "2.getDetail", type: "stage" },
         { source: "stage-1", target: "3.deleteInstance", type: "stage" },
         {
