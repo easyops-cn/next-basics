@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.6.5...@next-bricks/flow-builder@1.7.0) (2021-08-19)
+
+
+### Bug Fixes
+
+* add step descendants ([0bf7e30](https://github.com/easyops-cn/next-basics/commit/0bf7e30057020e133a65e6df8ab25d7651ebeaf3))
+* refine flow graph node ids ([4d18c24](https://github.com/easyops-cn/next-basics/commit/4d18c245e60058a0de17a81d9762e3d5d6f04603))
+* refine graph ([e128f67](https://github.com/easyops-cn/next-basics/commit/e128f67a977fd3d0bdda13ee723d92eef356d42c))
+* refine name ([1dcf673](https://github.com/easyops-cn/next-basics/commit/1dcf6735b04ed6e765bc994ab83f1e6d72bf9c35))
+* refine step walking ([f6e2e12](https://github.com/easyops-cn/next-basics/commit/f6e2e1295891ef231c172421a5eb3b8a6a0f6ec8))
+* typo ([ad6595c](https://github.com/easyops-cn/next-basics/commit/ad6595c90d76c2a3a4f4d295e952a98ecb49950a))
+
+
+### Features
+
+* add graph processor ([9239261](https://github.com/easyops-cn/next-basics/commit/923926107ffc81656645d21ed29b3b6e3e48ef4a))
+* provider-create-function-contract ([e8735b9](https://github.com/easyops-cn/next-basics/commit/e8735b9fe85b18f34957586577789bb560daf159))
+
+
+
+
+
 ## [1.6.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.6.4...@next-bricks/flow-builder@1.6.5) (2021-08-16)
 
 
