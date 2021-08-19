@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Calendar } from "antd";
+// import { Calendar } from "antd";
+import { Calendar } from "./Calendar";
 import solarLunar from "solarlunar";
 import moment, { Moment } from "moment";
 import classNames from "classnames";
@@ -13,6 +14,7 @@ import {
   TaskSettings,
   DateDetail,
 } from "../interfaces";
+import { ModeType } from "./utils";
 
 export interface TaskCalendarProps {
   value?: string;
@@ -25,6 +27,7 @@ export interface TaskCalendarProps {
   footerStyle?: React.CSSProperties;
   dateCellHeight?: React.CSSProperties["height"];
   showLunarInfo?: boolean;
+  mode?: ModeType;
   onDateSelect?: (detail: DateDetail) => void;
   onPickerPanelChange?: (detail: { mode: string; date: string }) => void;
 }
@@ -43,6 +46,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
     footerStyle,
     dateCellHeight,
     showLunarInfo,
+    mode,
   } = props;
   const [selectedData, setSelectedData] = useState<{
     date: Moment;
@@ -271,6 +275,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
         onSelect={onSelect}
         onPanelChange={onPanelChange}
         defaultValue={pickerValue}
+        panelMode={mode}
       />
       {extraFooterNode}
     </div>
