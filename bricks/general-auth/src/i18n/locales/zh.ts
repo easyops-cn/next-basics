@@ -18,6 +18,9 @@ const locale: Locale = {
   [K.PLEASE_ENTER_DYNAMIC_CODE]: "请输入动态码",
   [K.PLEASE_COMPLETE_THE_SECURITY_VERIFICATION]: "请完成安全认证",
   [K.DYNAMIC_CODE_VALIDATION_FAILED]: "验证动态码失败",
+  [K.LDAP_ACCOUNT]: "ldap账号",
+  [K.LDAP_LOGIN_TITLE]: "ldap登录",
+  [K.CUSTOM_LOGIN_TITLE]: "自定义登录",
 };
 
 export default locale;

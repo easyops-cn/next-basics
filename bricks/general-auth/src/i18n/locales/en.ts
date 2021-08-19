@@ -19,6 +19,9 @@ const locale: Locale = {
   [K.PLEASE_COMPLETE_THE_SECURITY_VERIFICATION]:
     "Please complete the security verification",
   [K.DYNAMIC_CODE_VALIDATION_FAILED]: "Dynamic code validation failed",
+  [K.LDAP_ACCOUNT]: "Ldap Account",
+  [K.LDAP_LOGIN_TITLE]: "Ldap Login",
+  [K.CUSTOM_LOGIN_TITLE]: "Custom Login",
 };
 
 export default locale;
