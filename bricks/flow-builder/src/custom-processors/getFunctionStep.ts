@@ -55,13 +55,9 @@ interface FlowOption {
   type?: string;
 }
 
-function getStepUniqueId(step: StepItem): string {
-  return `${step.id}.${step.name}`;
-}
-
 function getStageNodesAndEdges(
   functionLinksEdges: GraphEdge[],
-  firstStepUniqueId: string,
+  firstStepId: string,
   rootId: string
 ): [
   stageNodes: CollectNode[],
@@ -99,13 +95,13 @@ function getStageNodesAndEdges(
       }
     }
   };
-  walk(firstStepUniqueId, 0, new Set());
+  walk(firstStepId, 0, new Set());
 
   const stageNodes: CollectNode[] = range(0, maxLevel + 1).map(
     (level) =>
       ({
         type: "stage",
-        id: `stage-${level}`,
+        id: `stage.${level}`,
       } as CollectNode)
   );
 
@@ -117,7 +113,7 @@ function getStageNodesAndEdges(
 
   for (const [id, level] of stepLevelMap.entries()) {
     stageEdges.push({
-      source: `stage-${level}`,
+      source: `stage.${level}`,
       target: id,
       type: "stage",
     });
@@ -151,42 +147,42 @@ export function getFunctionStep(
   let stepDescendantsMap: Map<string, Set<string>>;
 
   if (stepList) {
-    let firstStepUniqueId: string;
+    let firstStepId: string;
     for (const step of stepList) {
-      const stepUniqueId = getStepUniqueId(step);
+      const stepId = step.id;
       if (step.parent?.length) {
         for (const parentId of step.parent) {
           const parentStep = stepList.find((item) => item.id === parentId);
           if (parentStep) {
             functionLinksEdges.push({
-              source: getStepUniqueId(parentStep),
-              target: stepUniqueId,
+              source: parentStep.id,
+              target: stepId,
               type: "step-link",
             });
           }
         }
       } else {
-        firstStepUniqueId = stepUniqueId;
+        firstStepId = stepId;
       }
     }
 
     [stageNodes, stageEdges, stepDescendantsMap] = getStageNodesAndEdges(
       functionLinksEdges,
-      firstStepUniqueId,
+      firstStepId,
       rootId
     );
 
     for (const step of stepList) {
-      const functionId = getStepUniqueId(step);
-      const inputGroupId = `${step.id}.${step.name}.input.group`;
-      const outputGroupId = `${step.id}.${step.name}.output.group`;
+      const functionId = step.id;
+      const inputGroupId = `${step.id}.group.input`;
+      const outputGroupId = `${step.id}.group.output`;
 
       stepNodes.push({
         type: "step",
         id: functionId,
         name: step.id,
         stepType: step.type,
-        descendants: Array.from(stepDescendantsMap.get(getStepUniqueId(step))),
+        descendants: Array.from(stepDescendantsMap.get(step.id)),
       });
 
       if (step.input) {
@@ -198,12 +194,15 @@ export function getFunctionStep(
         });
 
         for (const input of step.input) {
-          const inputId = `${step.id}.${step.name}.input.${input.name}`;
+          const inputId = `${step.id}.input.${input.name}`;
           inputNodes.push({
             id: inputId,
             type: "input",
             name: input.name,
             valueType: input.type,
+            stepData: {
+              id: step.id,
+            },
           });
 
           inputEdges.push({
@@ -229,12 +228,15 @@ export function getFunctionStep(
         });
 
         for (const output of step.output) {
-          const outputId = `${step.id}.${step.name}.output.${output.name}`;
+          const outputId = `${step.id}.output.${output.name}`;
           outputNodes.push({
             id: outputId,
             type: "output",
             name: output.name,
             valueType: output.type,
+            stepData: {
+              id: step.id,
+            },
           });
 
           outputEdges.push({
@@ -254,15 +256,9 @@ export function getFunctionStep(
 
     if (fieldRelations) {
       for (const relation of fieldRelations) {
-        const sourceStepData = stepList.find(
-          (item) => item.id === relation.source.stepId
-        );
-        const targetStepData = stepList.find(
-          (item) => item.id === relation.target.stepId
-        );
         fieldLinksEdges.push({
-          source: `${relation.source.stepId}.${sourceStepData.name}.${relation.source.type}.${relation.source.name}`,
-          target: `${relation.target.stepId}.${targetStepData.name}.${relation.target.type}.${relation.target.name}`,
+          source: `${relation.source.stepId}.${relation.source.type}.${relation.source.name}`,
+          target: `${relation.target.stepId}.${relation.target.type}.${relation.target.name}`,
           type: "link",
         });
       }
