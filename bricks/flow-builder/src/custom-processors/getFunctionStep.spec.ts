@@ -291,6 +291,78 @@ describe("getFunctionStep", () => {
       ],
       root: "root",
     });
+    expect(
+      getFunctionStep({
+        stepList: [
+          {
+            id: "request",
+            name: "request",
+            type: "request",
+          },
+          {
+            id: "create",
+            name: "createInstance",
+            type: "function",
+            parent: ["request"],
+          },
+
+          {
+            id: "response",
+            name: "response",
+            type: "response",
+            parent: ["create"],
+          },
+        ],
+        fieldRelations: [],
+      })
+    ).toEqual({
+      edges: [
+        { source: "root", target: "stage.0", type: "layer" },
+        { source: "root", target: "stage.1", type: "layer" },
+        { source: "root", target: "stage.2", type: "layer" },
+        { source: "stage.0", target: "request", type: "stage" },
+        { source: "stage.1", target: "create", type: "stage" },
+        { source: "stage.2", target: "response", type: "stage" },
+        { source: "request", target: "request.empty.group", type: "group" },
+        { source: "response", target: "response.empty.group", type: "group" },
+        { source: "request", target: "create", type: "step-link" },
+        { source: "create", target: "response", type: "step-link" },
+      ],
+      nodes: [
+        { id: "root", type: "flow" },
+        { id: "stage.0", type: "stage" },
+        { id: "stage.1", type: "stage" },
+        { id: "stage.2", type: "stage" },
+        {
+          descendants: ["create", "response"],
+          id: "request",
+          name: "request",
+          stepType: "request",
+          type: "step",
+        },
+        {
+          descendants: ["response"],
+          id: "create",
+          name: "create",
+          stepType: "function",
+          type: "step",
+        },
+        {
+          descendants: [],
+          id: "response",
+          name: "response",
+          stepType: "response",
+          type: "step",
+        },
+        { id: "request.empty.group", stepType: "request", type: "empty.group" },
+        {
+          id: "response.empty.group",
+          stepType: "response",
+          type: "empty.group",
+        },
+      ],
+      root: "root",
+    });
     expect(getFunctionStep({} as StepParams)).toEqual({
       edges: [],
       nodes: [{ id: "root", type: "flow" }],
