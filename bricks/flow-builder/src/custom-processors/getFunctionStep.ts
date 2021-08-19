@@ -63,10 +63,19 @@ function getStageNodesAndEdges(
   functionLinksEdges: GraphEdge[],
   firstStepUniqueId: string,
   rootId: string
-): [stageNodes: CollectNode[], stageEdges: GraphEdge[]] {
+): [
+  stageNodes: CollectNode[],
+  stageEdges: GraphEdge[],
+  stepDescendantsMap: Map<string, Set<string>>
+] {
   const stepLevelMap = new Map<string, number>();
   let maxLevel = 0;
-  const walk = (id: string, level: number): void => {
+  const stepDescendantsMap = new Map<string, Set<string>>();
+  const walk = (
+    id: string,
+    level: number,
+    descendantsCarry?: Set<Set<string>>
+  ): void => {
     if (level > (stepLevelMap.get(id) ?? -1)) {
       // Take every step's max level.
       stepLevelMap.set(id, level);
@@ -74,13 +83,23 @@ function getStageNodesAndEdges(
     if (level > maxLevel) {
       maxLevel = level;
     }
+    let selfDesc = stepDescendantsMap.get(id);
+    if (!selfDesc) {
+      selfDesc = new Set();
+      stepDescendantsMap.set(id, selfDesc);
+    }
+    const newDescendantsCarry = new Set(descendantsCarry);
+    newDescendantsCarry.add(selfDesc);
     for (const edge of functionLinksEdges) {
       if (edge.source === id) {
-        walk(edge.target, level + 1);
+        for (const desc of newDescendantsCarry) {
+          desc.add(edge.target);
+        }
+        walk(edge.target, level + 1, newDescendantsCarry);
       }
     }
   };
-  walk(firstStepUniqueId, 0);
+  walk(firstStepUniqueId, 0, new Set());
 
   const stageNodes: CollectNode[] = range(0, maxLevel + 1).map(
     (level) =>
@@ -104,7 +123,7 @@ function getStageNodesAndEdges(
     });
   }
 
-  return [stageNodes, stageEdges];
+  return [stageNodes, stageEdges, stepDescendantsMap];
 }
 
 export function getFunctionStep(
@@ -129,6 +148,8 @@ export function getFunctionStep(
   const fieldLinksEdges: GraphEdge[] = [];
   const functionLinksEdges: GraphEdge[] = [];
 
+  let stepDescendantsMap: Map<string, Set<string>>;
+
   if (stepList) {
     let firstStepUniqueId: string;
     for (const step of stepList) {
@@ -149,14 +170,14 @@ export function getFunctionStep(
       }
     }
 
-    [stageNodes, stageEdges] = getStageNodesAndEdges(
+    [stageNodes, stageEdges, stepDescendantsMap] = getStageNodesAndEdges(
       functionLinksEdges,
       firstStepUniqueId,
       rootId
     );
 
     for (const step of stepList) {
-      const functionId = `${step.id}.${step.name}`;
+      const functionId = getStepUniqueId(step);
       const inputGroupId = `${step.id}.${step.name}.input.group`;
       const outputGroupId = `${step.id}.${step.name}.output.group`;
 
@@ -165,6 +186,7 @@ export function getFunctionStep(
         id: functionId,
         name: step.id,
         stepType: step.type,
+        descendants: Array.from(stepDescendantsMap.get(getStepUniqueId(step))),
       });
 
       if (step.input) {
