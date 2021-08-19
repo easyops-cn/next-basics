@@ -277,7 +277,7 @@ export function getFunctionStep(
     if (options.type === "function") {
       return item.type !== "link";
     } else if (options.type === "params") {
-      return item.type !== "function-link";
+      return item.type !== "step-link";
     }
 
     return true;
