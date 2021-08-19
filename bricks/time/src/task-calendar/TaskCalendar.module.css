@@ -1,55 +1,10 @@
 .taskCalendar {
   padding: 0 15px;
   background: #fff;
-  display: inline-block;
-  vertical-align: top;
-
-  :global {
-    /* Header */
-    .ant-picker-calendar-header {
-      padding: 12px 0 0 0;
-
-      .ant-picker-calendar-mode-switch {
-        display: none;
-      }
-    }
-
-    /* Content */
-    .ant-picker-panel {
-      .ant-picker-body {
-        padding: 8px 0px;
-      }
-
-      .ant-picker-content {
-        width: 100%;
-
-        th,
-        td {
-          position: relative;
-          min-width: 24px;
-          font-weight: 400;
-        }
-
-        thead th {
-          padding-right: 0;
-          text-align: center;
-          height: 30px;
-          color: #000000d9;
-        }
-
-        tbody td {
-          padding: 3px;
-        }
-      }
-    }
-  }
 
   /* ================== Date Panel ================== */
   :global(.ant-picker-date-panel .ant-picker-content .ant-picker-cell) {
     &:not(:global(.ant-picker-cell-in-view)) {
-      /* visibility: hidden; */
-      pointer-events: none;
-
       .dateNumber,
       .dateText {
         color: #00000040 !important;
@@ -57,8 +12,6 @@
     }
 
     &:hover {
-      cursor: pointer;
-
       .dateContainer {
         border-color: #666;
       }

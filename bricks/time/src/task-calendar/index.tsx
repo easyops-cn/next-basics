@@ -16,6 +16,7 @@ import {
   DateDetail,
 } from "../interfaces";
 import { TaskCalendar } from "./TaskCalendar";
+import { ModeType } from "./utils";
 
 /**
  * @id time.task-calendar
@@ -137,6 +138,17 @@ export class TaskCalendarElement extends UpdatingElement {
   showLunarInfo = true;
 
   /**
+   * @kind ModeType
+   * @required false
+   * @default month
+   * @description 视图模式
+   */
+  @property({
+    attribute: false,
+  })
+  mode: ModeType;
+
+  /**
    * @detail DateDetail
    * @description 点击选择日期事件 date为选择的日期，data为该日期上的数据
    */
@@ -190,6 +202,7 @@ export class TaskCalendarElement extends UpdatingElement {
             footerStyle={this.footerStyle}
             dateCellHeight={this.dateCellHeight}
             showLunarInfo={this.showLunarInfo}
+            mode={this.mode}
           />
         </BrickWrapper>,
         this

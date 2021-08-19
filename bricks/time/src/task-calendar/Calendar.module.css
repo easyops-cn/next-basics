@@ -1,0 +1,65 @@
+.calendar {
+  background: #fff;
+  display: inline-block;
+  vertical-align: top;
+
+  .rightControl {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .arrow {
+      cursor: pointer;
+      padding: 0 5px;
+    }
+  }
+
+  :global {
+    /* Header */
+    .ant-picker-calendar-header {
+      padding: 12px 0 0 0;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Content */
+    .ant-picker-panel {
+      .ant-picker-body {
+        padding: 8px 0px;
+      }
+
+      .ant-picker-content {
+        width: 100%;
+
+        th,
+        td {
+          position: relative;
+          min-width: 24px;
+          font-weight: 400;
+        }
+
+        thead th {
+          padding-right: 0;
+          text-align: center;
+          height: 30px;
+          color: #000000d9;
+        }
+
+        tbody td {
+          padding: 3px;
+        }
+      }
+    }
+  }
+
+  /* ================== Date Panel ================== */
+  :global(.ant-picker-date-panel .ant-picker-content .ant-picker-cell) {
+    &:not(:global(.ant-picker-cell-in-view)) {
+      /* pointer-events: none */
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
