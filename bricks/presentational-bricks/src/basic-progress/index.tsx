@@ -72,6 +72,15 @@ export class BasicProgressElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
+   * @description 展示内容的颜色
+   */
+  @property({ attribute: false })
+  textColor: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
    * @description 描述值
    */
   @property({ attribute: false })
@@ -131,6 +140,7 @@ export class BasicProgressElement extends UpdatingElement {
             colorMap={this.colorMap}
             text={this.text}
             fontSize={this.fontSize}
+            textColor={this.textColor}
           />
         </BrickWrapper>,
         this
