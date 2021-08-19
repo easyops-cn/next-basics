@@ -155,7 +155,7 @@ export const story: Story = {
                     args: [
                       {
                         origin: "http://192.168.100.162",
-                        api: "api/auth/login",
+                        api: "next/api/auth/login",
                         method: "get",
                       },
                     ],

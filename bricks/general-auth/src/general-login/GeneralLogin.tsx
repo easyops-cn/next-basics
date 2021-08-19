@@ -58,6 +58,7 @@ interface GeneralLoginState {
   };
   MFALogin?: boolean;
   mfaInfo?: MFAInfoProps;
+  currentLoginMethod?: string;
 }
 
 export const getLoginByMethod = (): string => {
@@ -95,8 +96,8 @@ export class LegacyGeneralLogin extends React.Component<
             params = { service: this.state.service };
           }
           const loginMethod = esbLoginEnabled ? esbLogin : AuthApi_loginV2;
-          const req = (values as unknown) as AuthApi_LoginV2RequestBody;
-          req.loginBy = getLoginByMethod();
+          const req = values as unknown as AuthApi_LoginV2RequestBody;
+          req.loginBy = this.state.currentLoginMethod;
           const result = await loginMethod(req, {
             params,
             interceptorParams: {
@@ -188,20 +189,27 @@ export class LegacyGeneralLogin extends React.Component<
       MFALogin: false,
     });
   };
-
+  loginMethods: any;
+  loginMethodsMap = {
+    easyops: this.props.t(K.LOGIN_TITLE),
+    ldap: this.props.t(K.LDAP_LOGIN_TITLE),
+    custom: this.props.t(K.CUSTOM_LOGIN_TITLE),
+  };
   constructor(props: GeneralLoginProps) {
     super(props);
     const history = getHistory();
     const params = new URLSearchParams(history.location.search);
     const service = params.get("service");
+    const featureFlags = getRuntime().getFeatureFlags();
+    const misc = getRuntime().getMiscSettings();
+    this.loginMethods = misc.enabled_login_types ?? ["easyops"];
     this.state = {
       loggingIn: false,
       service,
       imageHeight: window.innerHeight,
       loginErrorMsg: "",
+      currentLoginMethod: this.loginMethods?.[0] ?? "easyops",
     };
-    const featureFlags = getRuntime().getFeatureFlags();
-    const misc = getRuntime().getMiscSettings();
     const enabledQRCode = featureFlags["wx-QR-code"];
     if (enabledQRCode) {
       const { wxAppid, wxAgentid, wxRedirect } = misc;
@@ -305,7 +313,11 @@ export class LegacyGeneralLogin extends React.Component<
             })(
               <Input
                 prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
-                placeholder={t(K.USERNAME)}
+                placeholder={
+                  this.state.currentLoginMethod === "ldap"
+                    ? t(K.LDAP_ACCOUNT)
+                    : t(K.USERNAME)
+                }
               />
             )}
           </Form.Item>
@@ -373,7 +385,9 @@ export class LegacyGeneralLogin extends React.Component<
         </Form>
       );
     };
-
+    const changeLoginMethod = (event: string) => {
+      this.setState({ currentLoginMethod: event });
+    };
     return (
       <>
         <div className={styles.loginWrapper}>
@@ -412,9 +426,27 @@ export class LegacyGeneralLogin extends React.Component<
                   </Card>
                 </Tabs.TabPane>
               </Tabs>
-            ) : (
-              <Card title={t(K.LOGIN_TITLE)} bordered={false}>
+            ) : this.loginMethods.length === 1 ? (
+              <Card
+                title={
+                  (this.loginMethodsMap as any)[this.state.currentLoginMethod]
+                }
+                bordered={false}
+              >
                 {renderLoginForm()}
+              </Card>
+            ) : (
+              <Card>
+                <Tabs onChange={changeLoginMethod}>
+                  {this.loginMethods.map((item: string) => (
+                    <Tabs.TabPane
+                      tab={(this.loginMethodsMap as any)[item]}
+                      key={item}
+                    >
+                      {renderLoginForm()}
+                    </Tabs.TabPane>
+                  ))}
+                </Tabs>
               </Card>
             )}
             {this.state.MFALogin && (
@@ -431,9 +463,8 @@ export class LegacyGeneralLogin extends React.Component<
   }
 }
 
-export const InnerGeneralLogin = withTranslation(NS_GENERAL_AUTH)(
-  LegacyGeneralLogin
-);
+export const InnerGeneralLogin =
+  withTranslation(NS_GENERAL_AUTH)(LegacyGeneralLogin);
 
 export const GeneralLogin = Form.create<GetProps<typeof InnerGeneralLogin>>({
   name: "general_login",

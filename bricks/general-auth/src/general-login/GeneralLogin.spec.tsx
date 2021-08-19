@@ -6,7 +6,7 @@ import { Modal } from "antd";
 import * as kit from "@next-core/brick-kit";
 import * as authSdk from "@next-sdk/auth-sdk";
 import * as apiGatewaySdk from "@next-sdk/api-gateway-sdk";
-import { getLoginByMethod, LegacyGeneralLogin } from "./GeneralLogin";
+import { LegacyGeneralLogin, getLoginByMethod } from "./GeneralLogin";
 import { WithTranslation } from "react-i18next";
 
 const spyOnHistoryPush = jest.fn();
@@ -99,9 +99,8 @@ describe("GeneralLogin", () => {
       userInstanceId: "abc",
       org: 1,
     });
-    wrapper.find(Form).simulate("submit", new Event("submit"));
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
-
   it("should esb login successfully", (done) => {
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
