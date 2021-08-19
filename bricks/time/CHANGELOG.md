@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.2.0...@next-bricks/time@1.3.0) (2021-08-19)
+
+
+### Features
+
+* **time:** 任务日历增加周视图 ([c333618](https://github.com/easyops-cn/next-basics/commit/c333618ee0d4517edeeb28c2fb3340143aa95890))
+
+
+
+
+
 # [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.1.1...@next-bricks/time@1.2.0) (2021-08-12)
 
 
