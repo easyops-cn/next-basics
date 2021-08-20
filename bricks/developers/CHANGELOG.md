@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.344.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.343.1...@next-bricks/developers@1.344.0) (2021-08-20)
+
+
+### Features
+
+* **auto:** next支持一种或多种登录方式 ([ef5ae53](https://github.com/easyops-cn/next-basics/commit/ef5ae53c8224c20351860dda5f5ec18729f71ce4))
+
+
+
+
+
 ## [1.343.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.343.0...@next-bricks/developers@1.343.1) (2021-08-17)
 
 

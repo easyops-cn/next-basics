@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.7.0...@next-bricks/flow-builder@1.8.0) (2021-08-20)
+
+
+### Features
+
+* add calcFlowInfo processor ([459e391](https://github.com/easyops-cn/next-basics/commit/459e391a4220e53e47ba2beb5afb767c8c1278c6))
+
+
+
+
+
 # [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.6.5...@next-bricks/flow-builder@1.7.0) (2021-08-19)
 
 
