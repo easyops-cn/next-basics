@@ -18,7 +18,6 @@ describe("BasicProgress", () => {
     const wrapper = mount(
       <BasicProgress
         value={value}
-        yat
         colorMap={colorMap}
         type={type}
         description={description}
