@@ -195,19 +195,50 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     }
   };
 
-  strSeriesNumberLengthRequired = (
+  strSeriesNumberAndAutoIncrementIDValidator = (
     rule: any,
     value: any,
     callback: (params?: any) => void
   ): void => {
     try {
-      if (
-        !isNil(value) &&
-        value.type === "str" &&
-        value.default_type === "series-number"
-      ) {
-        if (!value.series_number_length && this.required) {
-          throw new Error(rule.message);
+      if (!isNil(value) && value.type === "str") {
+        // 流水号校验
+        if (value.default_type === "series-number") {
+          if (!value.series_number_length) {
+            throw new Error(
+              i18n.t(
+                `${NS_FORMS}:${K.PLEASE_ENTER_THE_LENGTH_OF_THE_SERIAL_NUMBER}`
+              )
+            );
+          }
+          if (
+            value.start_value?.toString().length > value.series_number_length
+          ) {
+            throw new Error(
+              i18n.t(`${NS_FORMS}:${K.PLEASE_ENTER_A_LEGAL_STARTING_VALUE}`)
+            );
+          }
+          if (
+            value.prefix !== "" &&
+            !isNil(value.prefix) &&
+            !/^[-\w]{0,11}$/u.test(value.prefix)
+          ) {
+            throw new Error(
+              i18n.t(`${NS_FORMS}:${K.PLEASE_ENTER_A_LEGAL_PREFIX}`)
+            );
+          }
+        }
+        // 自增id校验
+        if (value.default_type === "auto-increment-id") {
+          if (
+            value.prefix !== "" &&
+            !isNil(value.prefix) &&
+            !/^[-\w]{0,11}$/u.test(value.prefix)
+          ) {
+            throw new Error(
+              i18n.t(`${NS_FORMS}:${K.PLEASE_ENTER_A_LEGAL_PREFIX}`)
+            );
+          }
         }
       }
       callback();
@@ -222,10 +253,7 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
       validator: this.defaultValueNotMatchRegex,
     },
     {
-      message: i18n.t(
-        `${NS_FORMS}:${K.PLEASE_ENTER_THE_LENGTH_OF_THE_SERIAL_NUMBER}`
-      ),
-      validator: this.strSeriesNumberLengthRequired,
+      validator: this.strSeriesNumberAndAutoIncrementIDValidator,
     },
     {
       message: i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`),

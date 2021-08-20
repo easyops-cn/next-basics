@@ -76,6 +76,9 @@ const locale: Locale = {
   [K.TAG]: "标签",
   [K.ARRAY_LIMIT]: "输入数组，用逗号或空格分隔保存",
   [K.INITIAL]: "起始值",
+  [K.PLEASE_ENTER_A_LEGAL_PREFIX]:
+    "前缀标识符请输入小于等于11个字符（支持字母、数字、下划线和短横线）",
+  [K.PLEASE_ENTER_A_LEGAL_STARTING_VALUE]: "起始值已超出限定的长度",
   [K.NUMBER_LENGTH]: "流水号长度",
   [K.PREFIX_IDENTIFIER]: "前缀标识符 (可不填)",
   [K.ADVANCED]: "高级",
