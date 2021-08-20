@@ -10,9 +10,10 @@ describe("BasicProgress", () => {
     const colorMap = [
       {
         progress: 60,
-        color: "red"
-      }
+        color: "red",
+      },
     ];
+    const textColor = "green";
     const type = "circle";
     const wrapper = mount(
       <BasicProgress
@@ -20,6 +21,7 @@ describe("BasicProgress", () => {
         colorMap={colorMap}
         type={type}
         description={description}
+        textColor={textColor}
       />
     );
     expect(wrapper.find(`.${style.showDescription}`).text()).toBe(description);

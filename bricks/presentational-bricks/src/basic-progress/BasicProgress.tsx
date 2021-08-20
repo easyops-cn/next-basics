@@ -12,6 +12,7 @@ interface BasicProgressProps {
   type: "line" | "circle" | "dashboard";
   text: string;
   fontSize: string;
+  textColor?: string;
 }
 
 export enum Color {
@@ -22,7 +23,7 @@ export enum Color {
   cyan = "cyan",
   purple = "purple",
   geekblue = "geekblue",
-  gray = "gray"
+  gray = "gray",
 }
 
 export function BasicProgress(props: BasicProgressProps): React.ReactElement {
@@ -30,7 +31,7 @@ export function BasicProgress(props: BasicProgressProps): React.ReactElement {
 
   useEffect(() => {
     if (props.colorMap) {
-      const curObj = props.colorMap.find(item => {
+      const curObj = props.colorMap.find((item) => {
         return +item.progress >= +props.value;
       });
       const color = Object.values(Color).includes(curObj?.color)
@@ -40,11 +41,11 @@ export function BasicProgress(props: BasicProgressProps): React.ReactElement {
     }
   }, [props.colorMap]);
 
-  const format = percent => {
+  const format = (percent) => {
     return (
       <div className={style.showContainer} style={{ fontSize: props.fontSize }}>
         <span
-          style={{ color: `var(--theme-${color}-color)` }}
+          style={{ color: props.textColor ?? `var(--theme-${color}-color)` }}
           className={style.showValue}
         >
           {props.text}
