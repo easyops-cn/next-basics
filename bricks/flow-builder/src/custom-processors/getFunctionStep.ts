@@ -1,9 +1,10 @@
 import { getRuntime } from "@next-core/brick-kit";
-import { range } from "lodash";
+import { isEmpty, range } from "lodash";
 
 interface FieldItem {
   name: string;
   type: string;
+  mappingType?: string;
 }
 
 interface RefData {
@@ -200,8 +201,10 @@ export function getFunctionStep(
             type: "input",
             name: input.name,
             valueType: input.type,
+            mappingType: input.mappingType,
             stepData: {
               id: step.id,
+              type: step.type,
             },
           });
 
@@ -234,8 +237,10 @@ export function getFunctionStep(
             type: "output",
             name: output.name,
             valueType: output.type,
+            mappingType: output.mappingType,
             stepData: {
               id: step.id,
+              type: step.type,
             },
           });
 
@@ -249,6 +254,25 @@ export function getFunctionStep(
         stepEdges.push({
           source: functionId,
           target: outputGroupId,
+          type: "group",
+        });
+      }
+
+      //特殊处理空的 request 和 resopne
+      if (
+        (step.id === "request" && isEmpty(step.output)) ||
+        (step.id === "response" && isEmpty(step.input))
+      ) {
+        const emptyGroupId = `${step.id}.empty.group`;
+        containerGroupNodes.push({
+          id: emptyGroupId,
+          type: "empty.group",
+          stepType: step.type,
+        });
+
+        stepEdges.push({
+          source: step.id,
+          target: emptyGroupId,
           type: "group",
         });
       }
