@@ -2133,10 +2133,10 @@
     "@ungap/event-target" "^0.2.3"
     minimatch "^3.0.4"
 
-"@next-core/brick-scripts@^2.6.2":
-  version "2.6.2"
-  resolved "https://registry.npmjs.org/@next-core/brick-scripts/-/brick-scripts-2.6.2.tgz#58a7508eeda07353ec4c5464e871831051985185"
-  integrity sha512-e/fNFPtqM4glCfQPZy7/iYjWouIjj1ywEJKwDTXIQ29XXn2IsSJ3OUsRxrZOMJbHu6rdXF8nrgJVwbaTUeKD9Q==
+"@next-core/brick-scripts@^2.6.3":
+  version "2.6.3"
+  resolved "https://registry.npmjs.org/@next-core/brick-scripts/-/brick-scripts-2.6.3.tgz#0ab20a08f61d1d1de3662503ccbec51f8f8f07fc"
+  integrity sha512-0gJTyUSjSaCXZfdCtaxBACmmfDnAonR2kRQuI0DgYaIgShh/z4DVtWgN8vRFyE+565nOw8xRxzLfv77ul6UXtA==
   dependencies:
     "@next-core/repo-config" "^0.2.1"
     chalk "^4.1.1"
@@ -2211,17 +2211,17 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.8.9.tgz#7590c0a79cc7d92cc59684e90fa9110d0a85331b"
   integrity sha512-GW+aMVB82ca64saVekCIANfa0SfqrnN6Gj4ujBopAuP01a5U+3ufnnDiz7u31OuXkJY0BqCOdYhWtmUjJYK+UQ==
 
-"@next-core/dev-dependencies@^1.10.19":
-  version "1.10.19"
-  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.10.19.tgz#e094e107c93e5b426f694cf29a3f2d2e36f23257"
-  integrity sha512-HtAopdWjHGtaYXUmveNRxHpNs+8U2KZZV9n3Vgkyg0qq8FA84HkdFzYSMKERNGVqOHcZpssbUAJpmgqdgFNe2A==
+"@next-core/dev-dependencies@^1.10.20":
+  version "1.10.20"
+  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.10.20.tgz#35848d2a5764265329dacd32015233868f03cf66"
+  integrity sha512-URK02tbfXzrEB4V75Y8MMx1CVy4yQ7nOMhrddRw7t2UIVwRvekfKY55/QeVEK6ESuaZjSdnHlG7/pw5p/DZGdQ==
   dependencies:
     "@babel/core" "^7.15.0"
     "@next-core/babel-preset-next" "^0.9.1"
     "@next-core/babel-preset-prismjs" "^1.0.7"
     "@next-core/brick-container" "^2.31.2"
     "@next-core/brick-dll" "^2.20.2"
-    "@next-core/brick-scripts" "^2.6.2"
+    "@next-core/brick-scripts" "^2.6.3"
     "@next-core/browserslist-config-next" "^0.1.3"
     "@next-core/build-config-factory" "^2.15.8"
     "@next-core/build-next-libs" "^0.2.1"
@@ -10333,7 +10333,6 @@ minipass-fetch@^1.3.0, minipass-fetch@^1.3.2:
   resolved "https://registry.npmjs.org/minipass-fetch/-/minipass-fetch-1.3.3.tgz#34c7cea038c817a8658461bf35174551dce17a0a"
   integrity sha512-akCrLDWfbdAWkMLBxJEeWTdNsjML+dt5YgOI4gJ53vuO0vrmYQkUPxa6j6V65s9CcePIr2SSWqjT2EcrNseryQ==
   dependencies:
-    encoding "^0.1.12"
     minipass "^3.1.0"
     minipass-sized "^1.0.3"
     minizlib "^2.0.0"
