@@ -183,6 +183,26 @@ export class GeneralSlideElement extends FormItemElement {
     attribute: false,
   })
   uiType: UiType = "default";
+  /**
+   * @kind boolean
+   * @required -️
+   * @default -
+   * @description 值为 true 时，Tooltip 将会始终显示；否则始终不显示，哪怕在拖拽及移入时
+   */
+  @property({
+    attribute: false,
+  })
+  tooltipVisible: boolean;
+  /**
+   * @kind value =>string
+   * @required -️
+   * @default -
+   * @description 格式化函数，Slider 会把当前值传给 tipFormatter，并在 Tooltip 中显示 tipFormatter 的返回值，若为 null，则隐藏 Tooltip
+   */
+  @property({
+    attribute: false,
+  })
+  tipFormatter: (value?: number) => string;
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -250,6 +270,8 @@ export class GeneralSlideElement extends FormItemElement {
             onAfterChange={this._handleAfterChange}
             onlyShowMode={this.onlyShowMode}
             size={this.size}
+            tooltipVisible={this.tooltipVisible}
+            tipFormatter={this.tipFormatter}
             uiType={this.uiType}
           />
         </BrickWrapper>,

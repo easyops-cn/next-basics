@@ -6,7 +6,6 @@ import style from "./GeneralSlide.module.css";
 import { omit } from "lodash";
 import classNames from "classnames";
 import { UiType } from "../interfaces";
-
 export interface GeneralSlideProps extends FormItemWrapperProps {
   value: any;
   disabled?: boolean;
@@ -21,7 +20,9 @@ export interface GeneralSlideProps extends FormItemWrapperProps {
   onAfterChange?: (value: any) => void;
   onlyShowMode?: boolean;
   size?: string;
+  tooltipVisible?: boolean;
   uiType?: UiType;
+  tipFormatter?: (value?: number) => React.ReactNode;
 }
 
 export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
@@ -38,6 +39,8 @@ export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
     onlyShowMode,
     size,
     uiType,
+    tooltipVisible,
+    tipFormatter,
   } = props;
 
   return (
@@ -59,6 +62,8 @@ export function GeneralSlide(props: GeneralSlideProps): React.ReactElement {
           included={included}
           onChange={props.onChange}
           onAfterChange={props.onAfterChange}
+          tipFormatter={tipFormatter}
+          tooltipVisible={tooltipVisible}
         />
       </FormItemWrapper>
     </div>
