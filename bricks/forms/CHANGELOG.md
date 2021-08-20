@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.185.1...@next-bricks/forms@1.186.0) (2021-08-20)
+
+
+### Features
+
+* **fgeneral-slide:** 新增tip格式化 ([d560c62](https://github.com/easyops-cn/next-basics/commit/d560c62b5f7fba55f773abbf36464a2d649d3954))
+
+
+
+
+
 ## [1.185.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.185.0...@next-bricks/forms@1.185.1) (2021-08-18)
 
 

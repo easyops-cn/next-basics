@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.207.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.206.1...@next-bricks/presentational-bricks@1.207.0) (2021-08-20)
+
+
+### Features
+
+* add the textColor property to basic-progress ([f2d621e](https://github.com/easyops-cn/next-basics/commit/f2d621e50b71d7ffa027999c547853677851ab99)), closes [Refs#NEXT_BUILDER-936](https://github.com/Refs/issues/NEXT_BUILDER-936)
+* add the textColor property to basic-progress ([afdb15b](https://github.com/easyops-cn/next-basics/commit/afdb15bd3effb5985235a0f1b09fda7bdc5b3958)), closes [Refs#NEXT_BUILDER-936](https://github.com/Refs/issues/NEXT_BUILDER-936)
+
+
+
+
+
 ## [1.206.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.206.0...@next-bricks/presentational-bricks@1.206.1) (2021-08-20)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
