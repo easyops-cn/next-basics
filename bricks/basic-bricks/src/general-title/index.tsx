@@ -38,6 +38,41 @@ export class GeneralTitleElement extends UpdatingElement {
     attribute: false,
   })
   description: string;
+  /**
+   * @kind `string`
+   * @required
+   * @default
+   * @description 副标题
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  subTitle: string;
+
+  /**
+   * @kind `string`
+   * @required false
+   * @default
+   * @description 链接,点击标题时跳转
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  url: string;
+
+  /**
+   * @kind `string`
+   * @required false
+   * @default
+   * @description  title跳转 target，例如可以设置成 _blank
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  target: string;
 
   /**
    * @kind `{useBrick: UseBrickConf }`
@@ -76,7 +111,7 @@ export class GeneralTitleElement extends UpdatingElement {
   dataSource: Record<string, any>;
 
   /**
-   * @kind ` {mainTitle?: string;description?: string;}`
+   * @kind ` {mainTitle?: string; subTitle?: string; description?: string;}`
    * @required false
    * @default
    * @description 字段映射, 跟 dataSource 一起使用来获得运行时 mainTitle、 description
@@ -88,14 +123,20 @@ export class GeneralTitleElement extends UpdatingElement {
   fields: {
     mainTitle?: string;
     description?: string;
+    subTitle?: string;
   };
 
   // istanbul ignore next
   private initData(mutableProps: {
     mainTitle: string;
     description: string;
+    subTitle: string;
   }): void {
-    const pickFields = pick(this.fields, ["mainTitle", "description"]);
+    const pickFields = pick(this.fields, [
+      "mainTitle",
+      "description",
+      "subTitle",
+    ]);
     forEach(pickFields, (fieldKey, field: string) => {
       set(mutableProps, field, get(this.dataSource, fieldKey));
     });
@@ -119,6 +160,7 @@ export class GeneralTitleElement extends UpdatingElement {
       const data = {
         mainTitle: this.mainTitle,
         description: this.description,
+        subTitle: this.subTitle,
       };
       if (this.fields && this.dataSource) {
         this.initData(data);
@@ -127,6 +169,9 @@ export class GeneralTitleElement extends UpdatingElement {
         <BrickWrapper>
           <GeneralTitle
             mainTitle={data.mainTitle}
+            subTitle={data.subTitle}
+            url={this.url}
+            target={this.target}
             description={data.description}
             dataSource={this.dataSource}
             titleSuffixBrick={this.titleSuffixBrick}

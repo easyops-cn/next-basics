@@ -15,6 +15,9 @@ describe("GeneralTitle", () => {
       />
     );
     expect(wrapper.find(".titleWrapper").length).toBe(1);
+    expect(wrapper.find(".titleContent").text()).toEqual(
+      "主机-192.168.100.162"
+    );
     expect(wrapper.find("BrickAsComponent").length).toBe(1);
     wrapper.setProps({
       description:
@@ -36,5 +39,30 @@ describe("GeneralTitle", () => {
     expect(wrapper.find("BrickAsComponent").at(0).prop("data")).toEqual({
       title: "测试",
     });
+  });
+  it("should work and url", () => {
+    const wrapper = shallow(
+      <GeneralTitle
+        mainTitle="主机-192.168.100.162"
+        titleSuffixBrick={{
+          useBrick: {
+            brick: "span",
+          },
+        }}
+        url="/next/resource-monitor/summary"
+      />
+    );
+    expect(wrapper.find("Link").length).toBe(1);
+    wrapper.setProps({
+      target: "_blank",
+      subTitle: "副标题",
+    });
+    wrapper.update();
+    expect(wrapper.find(".subTitleWrapper").length).toEqual(1);
+    expect(wrapper.find(".subTitleContent").text()).toEqual("副标题");
+    expect(wrapper.find("Link").at(0).prop("target")).toBe("_blank");
+    expect(wrapper.find("Link").at(0).prop("to")).toBe(
+      "/next/resource-monitor/summary"
+    );
   });
 });

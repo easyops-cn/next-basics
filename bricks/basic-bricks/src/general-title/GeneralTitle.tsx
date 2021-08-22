@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./GeneralTitle.module.css";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
+import { Link } from "@next-libs/basic-components";
 interface GeneralTitleProps {
   mainTitle: string;
+  subTitle?: string;
   description?: string;
+  url?: string;
+  target?: string;
   titleSuffixBrick?: { useBrick: UseBrickConf };
   descPrefixBrick?: { useBrick: UseBrickConf };
   dataSource?: Record<string, any>;
@@ -16,19 +20,32 @@ export function GeneralTitle(props: GeneralTitleProps): React.ReactElement {
     titleSuffixBrick,
     descPrefixBrick,
     dataSource,
+    subTitle,
+    url,
+    target,
   } = props;
-
   return (
     <div>
       {mainTitle && (
         <div className={styles.titleWrapper}>
-          <div className={styles.titleContent}>{mainTitle}</div>
+          {url ? (
+            <Link to={url} target={target} className={styles.titleContent}>
+              {mainTitle}
+            </Link>
+          ) : (
+            <div className={styles.titleContent}>{mainTitle}</div>
+          )}
           {titleSuffixBrick?.useBrick && (
             <BrickAsComponent
               useBrick={titleSuffixBrick.useBrick}
               data={dataSource}
             />
           )}
+        </div>
+      )}
+      {subTitle && (
+        <div className={styles.subTitleWrapper}>
+          <div className={styles.subTitleContent}>{subTitle}</div>
         </div>
       )}
       {description && (
@@ -39,7 +56,12 @@ export function GeneralTitle(props: GeneralTitleProps): React.ReactElement {
               data={dataSource}
             />
           )}
-          <div className={styles.descriptionContent}>{description}</div>
+          <div
+            className={styles.descriptionContent}
+            style={{ marginLeft: descPrefixBrick?.useBrick ? "5px" : "" }}
+          >
+            {description}
+          </div>
         </div>
       )}
     </div>
