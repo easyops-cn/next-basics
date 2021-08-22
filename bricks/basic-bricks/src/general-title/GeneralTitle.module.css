@@ -5,8 +5,15 @@
   align-items: center;
 }
 .titleWrapper .titleContent {
-  margin-right: 5px;
+  margin: 0 5px 2px 0;
   color: #262626;
+  cursor: pointer;
+}
+.titleWrapper .titleContent:hover {
+  color: #0071eb;
+}
+.titleWrapper .titleContent,
+.subTitleWrapper .subTitleContent {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -18,8 +25,8 @@
 }
 
 .descriptionWrapper .descriptionContent {
+  margin-top: 2px;
   color: #8c8c8c;
-  margin-left: 5px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
