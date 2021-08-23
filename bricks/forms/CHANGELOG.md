@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.188.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.187.1...@next-bricks/forms@1.188.0) (2021-08-23)
+
+
+### Features
+
+* radio support tooltip ([d4e901c](https://github.com/easyops-cn/next-basics/commit/d4e901c8ac5cb4815d77e4bae8880dffbc22aa21))
+
+
+
+
+
 ## [1.187.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.187.0...@next-bricks/forms@1.187.1) (2021-08-23)
 
 
