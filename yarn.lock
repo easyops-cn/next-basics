@@ -2518,10 +2518,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.7.tgz#c7de2dd9b9c563bd72d375661a87ef8034717080"
   integrity sha512-i4L0w8dkHlp2wfvNYobDQcncyoGxEk/hr5KfII09hqnwbHIlNQGFOwmjOGLQiP+o8nxcv8NTrQsQ09Ma04aNEg==
 
-"@next-sdk/api-gateway-sdk@2.0.5":
-  version "2.0.5"
-  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.5.tgz#403141fa6c0db704149336b1c4c943a93de11211"
-  integrity sha512-J3gC83IIx12ObMMoDWnCkxijEVzFV91ermVQOU0muNszaIagVteBbeDpsSSa6eg03+9dixpaXbdIrK/qJLC9KA==
+"@next-sdk/api-gateway-sdk@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.8.tgz#5bd4c8b0ab78d8f1541d5d2075528ca313df33e6"
+  integrity sha512-DijEjx6HaWW1Y+X2zIwXA1nszq5z8ALTUEDFdUWMpCsP2JXAlSHLLLR8UmDBQ54WLnfKOl839UdrmtYftf6Y7Q==
 
 "@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"

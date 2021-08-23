@@ -22,6 +22,13 @@ const locale: Locale = {
   [K.LDAP_ACCOUNT]: "Ldap Account",
   [K.LDAP_LOGIN_TITLE]: "Ldap Login",
   [K.CUSTOM_LOGIN_TITLE]: "Custom Login",
+  [K.CLICK_TO_GET_SECURITY_CODE]: "Click to get security code",
+  [K.SECURITY_CODE]: "Security code",
+  [K.PLEASE_INPUT_USERNAME_PHRASE]: "Please input username and security code",
+  [K.PLEASE_INPUT_USERNAME_PASSWORD_PHRASE]:
+    "Please input username、password、security code",
+  [K.PLEASE_INPUT_PHRASE]: "Please input security code",
+  [K.PLEASE_INPUT_PASSWORD_PHRASE]: "Please input password and security code",
 };
 
 export default locale;

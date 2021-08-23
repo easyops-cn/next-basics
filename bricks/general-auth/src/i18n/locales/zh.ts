@@ -21,6 +21,12 @@ const locale: Locale = {
   [K.LDAP_ACCOUNT]: "ldap账号",
   [K.LDAP_LOGIN_TITLE]: "ldap登录",
   [K.CUSTOM_LOGIN_TITLE]: "自定义登录",
+  [K.CLICK_TO_GET_SECURITY_CODE]: "点击获取验证码",
+  [K.SECURITY_CODE]: "验证码",
+  [K.PLEASE_INPUT_PASSWORD_PHRASE]: "请输入密码、验证码",
+  [K.PLEASE_INPUT_PHRASE]: "请输入验证码",
+  [K.PLEASE_INPUT_USERNAME_PASSWORD_PHRASE]: "请输入用户名、密码、验证码",
+  [K.PLEASE_INPUT_USERNAME_PHRASE]: "请输入用户名、验证码",
 };
 
 export default locale;
