@@ -85,6 +85,10 @@ const locale: Locale = {
   [K.PREFIX_IDENTIFIER]: "Prefix Identifier (optional)",
   [K.NUMBER_LENGTH]: "The length of the number",
   [K.INITIAL]: "Start value",
+  [K.PLEASE_ENTER_A_LEGAL_PREFIX]:
+    "Prefix identifier please enter 11 characters or less (letters, numbers, underscores and dashes are supported)",
+  [K.PLEASE_ENTER_A_LEGAL_STARTING_VALUE]:
+    "The starting value has exceeded the length limit",
   [K.STRING_TYPE]: "String",
   [K.PLEASE_ENTER_THE_LENGTH_OF_THE_SERIAL_NUMBER]:
     "Please enter the length of the serial number",

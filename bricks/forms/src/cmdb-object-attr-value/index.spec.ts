@@ -24,21 +24,6 @@ describe("forms.cmdb-object-attr-value", () => {
     element.handleChange({});
     expect(fn).toBeCalled();
 
-    const rcb = jest.fn();
-    element.strSeriesNumberLengthRequired(
-      "",
-      { type: "str", default_type: "series-number", series_number_length: "2" },
-      rcb
-    );
-    expect(rcb.mock.calls[0].length).toBe(0);
-
-    element.strSeriesNumberLengthRequired(
-      "",
-      { type: "str", default_type: "series-number" },
-      rcb
-    );
-    expect(rcb.mock.calls[1].length).toBe(0);
-
     const fcb = jest.fn();
     element.floatMaxLengthNotMatch(
       "",
@@ -108,4 +93,80 @@ describe("forms.cmdb-object-attr-value", () => {
       document.body.removeChild(element);
     }
   );
+
+  it.each([
+    [
+      "Legal series-number",
+      {
+        type: "str",
+        default_type: "series-number",
+        series_number_length: 1,
+        start_value: 1,
+      },
+      0,
+    ],
+    [
+      "Illegal series_number_length",
+      {
+        type: "str",
+        default_type: "series-number",
+        series_number_length: 0,
+        start_value: 1,
+      },
+      1,
+    ],
+    [
+      "Illegal start_value",
+      {
+        type: "str",
+        default_type: "series-number",
+        series_number_length: 2,
+        start_value: 123,
+      },
+      1,
+    ],
+    [
+      "Illegal prefix",
+      {
+        type: "str",
+        default_type: "series-number",
+        series_number_length: 1,
+        start_value: 1,
+        prefix: "  #",
+      },
+      1,
+    ],
+    [
+      "Legal auto-increment-id",
+      {
+        type: "str",
+        default_type: "auto-increment-id",
+        start_value: 1,
+        prefix: "123",
+      },
+      0,
+    ],
+    [
+      "Illegal prefix",
+      {
+        type: "str",
+        default_type: "auto-increment-id",
+        start_value: 1,
+        prefix: "a 9",
+      },
+      1,
+    ],
+  ])("test %s", async (type: string, defaultValue: any, result: number) => {
+    const element = document.createElement(
+      "forms.cmdb-object-attr-value"
+    ) as any;
+
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    const cb = jest.fn();
+
+    element.strSeriesNumberAndAutoIncrementIDValidator("", defaultValue, cb);
+    expect(cb.mock.calls[0].length).toBe(result);
+    document.body.removeChild(element);
+  });
 });
