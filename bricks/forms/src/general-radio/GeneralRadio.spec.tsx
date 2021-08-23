@@ -82,7 +82,8 @@ describe("GeneralRadio", () => {
     wrapper.update();
     expect(wrapper.find(Radio.Group).prop("value")).toBe("better");
   });
-  it("should type=icon", () => {
+  it("should type=icon", async () => {
+    const handleChange = jest.fn();
     const wrapper = mount(
       <GeneralRadio
         options={[
@@ -109,8 +110,14 @@ describe("GeneralRadio", () => {
         name="icon"
         label="icon选择"
         value="bar-chart"
+        onChange={handleChange}
       />
     );
     expect(wrapper.find('input[id="bar-chart"]').prop("checked")).toBe(true);
+    wrapper.find('input[id="area-chart"]').invoke("onChange")({
+      target: { value: "area-chart" },
+    } as any);
+    await (global as any).flushPromises();
+    expect(handleChange).toHaveBeenCalled();
   });
 });
