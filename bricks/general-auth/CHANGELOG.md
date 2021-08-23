@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.9.0...@next-bricks/general-auth@1.10.0) (2021-08-23)
+
+
+### Features
+
+* add security_code_login_next_test refs EASY_CONF-25 ([afa0cb6](https://github.com/easyops-cn/next-basics/commit/afa0cb669842a92edf0d503a3f0f4167c8fad42f))
+
+
+
+
+
 # [1.9.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.8.5...@next-bricks/general-auth@1.9.0) (2021-08-20)
 
 

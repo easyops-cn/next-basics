@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.186.0...@next-bricks/forms@1.187.0) (2021-08-23)
+
+
+### Features
+
+* **forms:** 流水号/自增id属性增加校验 ([396e919](https://github.com/easyops-cn/next-basics/commit/396e919fb3a96b5cc7c2ddb41c1ce2af95ab3ffe))
+
+
+
+
+
 # [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.185.1...@next-bricks/forms@1.186.0) (2021-08-20)
 
 

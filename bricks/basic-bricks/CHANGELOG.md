@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.140.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.139.0...@next-bricks/basic-bricks@1.140.0) (2021-08-23)
+
+
+### Features
+
+* add security_code_login_next_test refs EASY_CONF-25 ([afa0cb6](https://github.com/easyops-cn/next-basics/commit/afa0cb669842a92edf0d503a3f0f4167c8fad42f))
+* **basic-bricks:** add subTitle properties and doc ([cdc6c2f](https://github.com/easyops-cn/next-basics/commit/cdc6c2f3681ddeae16591963621cae9f4a36a5c1))
+
+
+
+
+
 # [1.139.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.138.1...@next-bricks/basic-bricks@1.139.0) (2021-08-19)
 
 
