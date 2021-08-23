@@ -35,6 +35,7 @@ export type RadioType = "button" | "default" | "icon";
  *  icon?: MenuIcon; // 仅在`buttonStyle` 为 `solid` 时有效，此时 `label` 会无效。
  *  value: string | number;
  *  disabled: boolean;
+ *  tooltip?: string
  *}
  *```
  */

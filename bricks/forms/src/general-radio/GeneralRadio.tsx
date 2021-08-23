@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Radio } from "antd";
+import { Radio, Tooltip } from "antd";
 import { RadioChangeEvent, RadioGroupButtonStyle } from "antd/lib/radio";
 import {
   FormItemWrapper,
@@ -60,17 +60,19 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
             onChange={handleChange}
             checked={value === item.value}
           />
-          <div className={styles.content}>
-            {item.icon && (
-              <GeneralIcon
-                style={{
-                  fontSize: "32px",
-                }}
-                icon={item.icon}
-              ></GeneralIcon>
-            )}
-            <div className={styles.text}>{item.label}</div>
-          </div>
+          <Tooltip title={item.tooltip}>
+            <div className={styles.content}>
+              {item.icon && (
+                <GeneralIcon
+                  style={{
+                    fontSize: "32px",
+                  }}
+                  icon={item.icon}
+                ></GeneralIcon>
+              )}
+              <div className={styles.text}>{item.label}</div>
+            </div>
+          </Tooltip>
         </label>
       ))}
     </>
@@ -91,13 +93,15 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
   ): React.ReactNode => {
     return options.map((item: any) => {
       return (
-        <Component value={item.value} key={item.value} disabled={item.disabled}>
-          {Component === Radio.Button && item.icon ? (
-            <GeneralIcon icon={item.icon}></GeneralIcon>
-          ) : (
-            item.label
-          )}
-        </Component>
+        <Tooltip key={item.value} title={item.tooltip}>
+          <Component value={item.value} disabled={item.disabled}>
+            {Component === Radio.Button && item.icon ? (
+              <GeneralIcon icon={item.icon}></GeneralIcon>
+            ) : (
+              item.label
+            )}
+          </Component>
+        </Tooltip>
       );
     });
   };
