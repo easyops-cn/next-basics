@@ -18,6 +18,9 @@
   white-space: nowrap;
   overflow: hidden;
 }
+.subTitleWrapper {
+  margin-bottom: 5px;
+}
 .descriptionWrapper {
   display: flex;
   font-size: 12px;
