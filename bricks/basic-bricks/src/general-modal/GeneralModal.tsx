@@ -57,12 +57,10 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
           const modalContent = contentSlotRef.current.closest(
             ".ant-modal-content"
           ) as HTMLDivElement;
-          modalHeaderRef.current = modalContent.querySelector(
-            ".ant-modal-header"
-          );
-          modalFooterRef.current = modalContent.querySelector(
-            ".ant-modal-footer"
-          );
+          modalHeaderRef.current =
+            modalContent.querySelector(".ant-modal-header");
+          modalFooterRef.current =
+            modalContent.querySelector(".ant-modal-footer");
         }
         setBodyHeightHandlerRef.current = () => {
           setTimeout(() => {
@@ -114,6 +112,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     footer = (
       <div className="footer-container">
         <slot name="footer"></slot>
+        <div></div>
         {configProps && configProps.footer !== null && defaultFooter}
       </div>
     );
