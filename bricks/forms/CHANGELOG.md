@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.187.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.187.0...@next-bricks/forms@1.187.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* **general-radio:** 修复type:icon时在表单中会失效 ([15ae951](https://github.com/easyops-cn/next-basics/commit/15ae9510f9548179f1a4c45a4acbdb54038382f6))
+
+
+
+
+
 # [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.186.0...@next-bricks/forms@1.187.0) (2021-08-23)
 
 
