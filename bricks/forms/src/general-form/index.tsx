@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {
   WrappedFormUtils,
   FormLayout,
+  ValidateFieldsOptions,
 } from "@ant-design/compatible/lib/form/Form";
 import { ColProps } from "antd/lib/col";
 import {
@@ -479,6 +480,21 @@ export class GeneralFormElement
    */
   @method() validate(): void {
     this.lowLevelValidate();
+  }
+  /**
+   * @description 	校验用户修改过的指定表单项
+   */
+  @method() validateTouchedField(
+    field: string,
+    options?: ValidateFieldsOptions
+  ): void {
+    queueMicrotask(() => {
+      if (this.formUtils.isFieldTouched(field)) {
+        this.formUtils.validateFields([field], options, () => {
+          this._forceUpdate();
+        });
+      }
+    });
   }
   /**
    * @description 表单验证成功时触发
