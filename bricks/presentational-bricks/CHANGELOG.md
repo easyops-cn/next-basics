@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.208.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.207.0...@next-bricks/presentational-bricks@1.208.0) (2021-08-24)
+
+
+### Features
+
+* **brick-table:** rowDisabledConfig property support array ([19f90d0](https://github.com/easyops-cn/next-basics/commit/19f90d0717466f3471f2aa869b7467c54aef76bf))
+
+
+
+
+
 # [1.207.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.206.1...@next-bricks/presentational-bricks@1.207.0) (2021-08-20)
 
 
