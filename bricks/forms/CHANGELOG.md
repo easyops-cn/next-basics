@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.189.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.188.0...@next-bricks/forms@1.189.0) (2021-08-24)
+
+
+### Features
+
+* **general-form:** add validateTouchedField method ([c48abcb](https://github.com/easyops-cn/next-basics/commit/c48abcb9ad6f2ced914ef0e0747ed915a00e63c6))
+
+
+
+
+
 # [1.188.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.187.1...@next-bricks/forms@1.188.0) (2021-08-23)
 
 
