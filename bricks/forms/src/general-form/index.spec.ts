@@ -19,12 +19,14 @@ describe("forms.general-form", () => {
     const validateFields = jest.fn();
     const resetFields = jest.fn();
     const setFieldsValue = jest.fn();
+    const isFieldTouched = jest.fn();
     const dispatchEvent = jest.spyOn(element, "dispatchEvent");
     element.staticValues = { id: "fake", a: { a1: 111 } };
     element.formUtils = {
       validateFields,
       resetFields,
       setFieldsValue,
+      isFieldTouched,
     } as any;
     expect(element.layout).toBe("horizontal");
     element.layout = "unknown" as any;
@@ -96,6 +98,28 @@ describe("forms.general-form", () => {
     await expect(element.stepOut()).rejects.toEqual(undefined);
     event = dispatchEvent.mock.calls[4][0] as CustomEvent;
     expect(event.detail).toEqual({ error: "oops" });
+
+    // validateTouchedField
+    const fieldName = "fieldName";
+    const validateOptions = { force: true };
+    validateFields.mockClear();
+    isFieldTouched.mockReturnValueOnce(false);
+    element.validateTouchedField(fieldName, validateOptions);
+    expect(isFieldTouched).not.toBeCalled();
+    expect(validateFields).not.toBeCalled();
+    jest.runOnlyPendingTimers();
+    expect(isFieldTouched).toBeCalledWith(fieldName);
+    expect(validateFields).not.toBeCalled();
+
+    isFieldTouched.mockReturnValueOnce(true);
+    element.validateTouchedField(fieldName, validateOptions);
+    jest.runOnlyPendingTimers();
+    expect(isFieldTouched).toBeCalledWith(fieldName);
+    expect(validateFields).toBeCalledWith(
+      [fieldName],
+      validateOptions,
+      expect.anything()
+    );
 
     // Always waiting for async `(dis)connectedCallback`
     await jest.runAllTimers();
