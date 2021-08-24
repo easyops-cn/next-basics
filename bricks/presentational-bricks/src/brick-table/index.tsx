@@ -558,7 +558,7 @@ export class BrickTableElement extends UpdatingElement {
   order: string | number;
 
   /**
-   * @kind RowDisabledProps
+   * @kind RowDisabledProps | RowDisabledProps[]
    * @required false
    * @default -
    * @description 配置每一行是否禁用，其中 `field` 表示数据源中的字段路径， `value` 表示与其字段比较的值， `operator` 表示两者比较的方法，结果为 `true` 时会禁用当前行, 需要注意的是该配置需要在 `rowSelection: true` 的前提下使用，并且设置 `rowKey` 属性赋予每行唯一的 key，防止顺序变化时造成的错误勾选（如上 demo 所示）
@@ -566,7 +566,7 @@ export class BrickTableElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  rowDisabledConfig: RowDisabledProps;
+  rowDisabledConfig: RowDisabledProps | RowDisabledProps[];
 
   // start -- 行展开相关属性
   /**
@@ -1577,6 +1577,14 @@ export class BrickTableElement extends UpdatingElement {
         ...this.configProps.pagination,
       };
       if (this.configProps.rowSelection) {
+        let rowDisabledConfig: RowDisabledProps[];
+
+        if (this.rowDisabledConfig) {
+          rowDisabledConfig = Array.isArray(this.rowDisabledConfig)
+            ? this.rowDisabledConfig
+            : [this.rowDisabledConfig];
+        }
+
         // 当 rowSelection 为 true 或者有相关配置的时候的默认行选择配置
         const defaultRowSelection: TableRowSelection<any> = {
           ...(rowKey
@@ -1607,13 +1615,15 @@ export class BrickTableElement extends UpdatingElement {
                 disabled: true,
               };
             }
-            if (!this.rowDisabledConfig) return {};
+            if (!rowDisabledConfig) return {};
 
-            const { field, value, operator } = this.rowDisabledConfig;
-
-            const fun = compareFunMap[operator];
             return {
-              disabled: fun?.(value, get(record, field)),
+              disabled: rowDisabledConfig.some((config) => {
+                const { field, value, operator } = config;
+                const fun = compareFunMap[operator];
+
+                return fun?.(value, get(record, field));
+              }),
             };
           },
         };
