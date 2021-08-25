@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.190.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.189.0...@next-bricks/forms@1.190.0) (2021-08-25)
+
+
+### Features
+
+* CmdbInstanceSelect支持permission ([2b0b8c7](https://github.com/easyops-cn/next-basics/commit/2b0b8c78f525cbe16a8d17891e8485fcef580859))
+
+
+
+
+
 # [1.189.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.188.0...@next-bricks/forms@1.189.0) (2021-08-24)
 
 
