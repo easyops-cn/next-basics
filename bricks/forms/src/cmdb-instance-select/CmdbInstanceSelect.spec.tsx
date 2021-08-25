@@ -73,6 +73,7 @@ describe("CmdbInstanceSelect", () => {
         value="world"
         firstRender={true}
         extraSearchKey={["memo"]}
+        permission={["read"]}
       />
     );
 
@@ -82,7 +83,7 @@ describe("CmdbInstanceSelect", () => {
         memo: true,
         instanceId: true,
       },
-
+      permission: ["read"],
       page_size: undefined,
       query: {
         $and: [

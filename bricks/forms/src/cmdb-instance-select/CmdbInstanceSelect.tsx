@@ -38,6 +38,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   showSearchTip?: boolean;
   labelTemplate?: string;
   disabled?: boolean;
+  permission?: Array<"read" | "update" | "operate">;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -70,6 +71,7 @@ export function CmdbInstanceSelectItem(
     allowClear,
     pageSize,
     showSearchTip,
+    permission,
   } = props;
   const userQuery = formatUserQuery(props.instanceQuery);
   //istanbul ignore else
@@ -156,7 +158,7 @@ export function CmdbInstanceSelectItem(
               ...extraQuery,
             ],
           },
-
+          ...(permission ? { permission } : {}),
           fields: computeFields(),
           page_size: pageSizeQuery || pageSize,
         });
@@ -276,10 +278,10 @@ export function CmdbInstanceSelectItem(
           ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
           : {})}
       >
-        {options.map((op) => {
+        {options.map((op, index) => {
           const optionLabel = getLabelOptions(op);
           return (
-            <Select.Option key={op.value} value={op.value} label={optionLabel}>
+            <Select.Option key={index} value={op.value} label={optionLabel}>
               {op.user_icon && (
                 <Avatar
                   src={op.user_icon}
