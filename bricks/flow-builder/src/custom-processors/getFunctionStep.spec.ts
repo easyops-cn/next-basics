@@ -1,4 +1,8 @@
-import { getFunctionStep, StepParams } from "./getFunctionStep";
+import {
+  getFunctionStep,
+  StepParams,
+  getParamsDebugInfo,
+} from "./getFunctionStep";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: () => ({
@@ -390,5 +394,39 @@ describe("getFunctionStep", () => {
       ],
       root: "root",
     });
+  });
+});
+
+describe("getParamsDebugInfo", () => {
+  it("should work", () => {
+    const flowInfo = [
+      { stepId: "request", input: { uri: { name: "hello" } } },
+      { stepId: "getDetail", input: { instanceId: "bbfd" } },
+      { stepId: "response", output: { body: { data: { result: "good" } } } },
+    ];
+
+    expect(
+      getParamsDebugInfo(flowInfo, {
+        stepId: "request",
+        field: { name: "name", type: "string", mappingType: "uri" },
+        fieldCategory: "output",
+      })
+    ).toEqual("hello");
+
+    expect(
+      getParamsDebugInfo(flowInfo, {
+        stepId: "getDetail",
+        field: { name: "instanceId", type: "string" },
+        fieldCategory: "input",
+      })
+    ).toEqual("bbfd");
+
+    expect(
+      getParamsDebugInfo(flowInfo, {
+        stepId: "response",
+        field: { name: "result", type: "string" },
+        fieldCategory: "output",
+      })
+    ).toEqual("good");
   });
 });

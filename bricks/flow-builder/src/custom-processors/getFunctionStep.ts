@@ -1,5 +1,5 @@
 import { getRuntime } from "@next-core/brick-kit";
-import { isEmpty, range } from "lodash";
+import { isEmpty, range, get } from "lodash";
 
 interface FieldItem {
   name: string;
@@ -52,8 +52,15 @@ interface GraphFunctionStep {
   edges: GraphEdge[];
 }
 
+interface DebugData {
+  stepId?: string;
+  input?: Record<string, unknown>;
+  output?: Record<string, unknown>;
+}
+
 interface FlowOption {
   type?: string;
+  debugInfo?: DebugData[];
 }
 
 function getStageNodesAndEdges(
@@ -123,6 +130,27 @@ function getStageNodesAndEdges(
   return [stageNodes, stageEdges, stepDescendantsMap];
 }
 
+export function getParamsDebugInfo(
+  debugInfo: DebugData[],
+  {
+    stepId,
+    field,
+    fieldCategory,
+  }: { stepId: string; field: FieldItem; fieldCategory: "input" | "output" }
+): unknown {
+  const stepInfo = debugInfo?.find((item) => item.stepId === stepId);
+
+  if (stepInfo) {
+    if (stepId === "request") {
+      return get(stepInfo, ["input", field.mappingType, field.name]);
+    } else if (stepId === "response") {
+      return get(stepInfo, `output.body.data.${field.name}`);
+    } else {
+      return get(stepInfo, [fieldCategory, field.name]);
+    }
+  }
+}
+
 export function getFunctionStep(
   { stepList, fieldRelations }: StepParams,
   options: FlowOption = {}
@@ -184,6 +212,9 @@ export function getFunctionStep(
         name: step.id,
         stepType: step.type,
         descendants: Array.from(stepDescendantsMap.get(step.id)),
+        debugInfo: options.debugInfo?.find(
+          (item) => item.stepId === functionId
+        ),
       });
 
       if (step.input) {
@@ -202,6 +233,11 @@ export function getFunctionStep(
             name: input.name,
             valueType: input.type,
             mappingType: input.mappingType,
+            paramsDebugValue: getParamsDebugInfo(options.debugInfo, {
+              stepId: step.id,
+              field: input,
+              fieldCategory: "input",
+            }),
             stepData: {
               id: step.id,
               type: step.type,
@@ -238,6 +274,11 @@ export function getFunctionStep(
             name: output.name,
             valueType: output.type,
             mappingType: output.mappingType,
+            paramsDebugValue: getParamsDebugInfo(options.debugInfo, {
+              stepId: step.id,
+              field: output,
+              fieldCategory: "output",
+            }),
             stepData: {
               id: step.id,
               type: step.type,
