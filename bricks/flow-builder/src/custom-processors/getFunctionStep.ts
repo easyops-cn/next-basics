@@ -211,7 +211,7 @@ export function getFunctionStep(
         id: functionId,
         name: step.id,
         stepType: step.type,
-        descendants: Array.from(stepDescendantsMap.get(step.id)),
+        descendants: Array.from(stepDescendantsMap.get(step.id) || []),
         debugInfo: options.debugInfo?.find(
           (item) => item.stepId === functionId
         ),
