@@ -890,6 +890,16 @@ export class BrickTableElement extends UpdatingElement {
   })
   draggable: boolean;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 当所有子节点选中时，自动选中父节点
+   * @group advanced
+   */
+  @property({ type: Boolean })
+  autoSelectParentWhenAllChildrenSelected: boolean;
+
   // 对外获取内部 _dataSource 的值
   // istanbul ignore next
   get processedDataSource() {
@@ -944,6 +954,7 @@ export class BrickTableElement extends UpdatingElement {
   selectedRowKeys: React.Key[] = [];
 
   private _selected = false;
+  private _selectedRow: Record<string, unknown>;
   private _selectedRows: Record<string, any>[] = [];
   private _allChildren: Record<string, any>[] = [];
   private _isInSelect = false;
@@ -1058,21 +1069,82 @@ export class BrickTableElement extends UpdatingElement {
     return dataSource;
   }
 
+  private _findParentByChildKeyValue = (
+    value: string,
+    rowKey: string,
+    list: Record<string, unknown>[],
+    parent?: Record<string, unknown>
+  ): Record<string, unknown> => {
+    let matchedParent: Record<string, unknown>;
+
+    list.some((item) => {
+      if (item[rowKey] === value) {
+        matchedParent = parent;
+      } else {
+        const children = item[this.childrenColumnName] as Record<
+          string,
+          unknown
+        >[];
+
+        if (children) {
+          matchedParent = this._findParentByChildKeyValue(
+            value,
+            rowKey,
+            children,
+            item
+          );
+        }
+      }
+
+      return matchedParent ? true : false;
+    });
+
+    return matchedParent;
+  };
+
   // istanbul ignore next
   private _handleRowSelectChange = (
-    selectedRowKeys: any,
+    selectedRowKeys: string[],
     selectedRows: any[]
   ): void => {
     const rowKey =
       this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
     this._selectedRows = selectedRows;
     if (this._selected) {
-      this._selectedRows = uniqBy(
-        [...selectedRows, ...this._allChildren],
+      const _selectedRows = [...selectedRows, ...this._allChildren];
+      if (this.autoSelectParentWhenAllChildrenSelected) {
+        const selectedRowKeySet = new Set(selectedRowKeys);
+        const parent = this._findParentByChildKeyValue(
+          this._selectedRow[rowKey] as string,
+          rowKey,
+          this._dataSource
+        );
+
+        if (
+          parent &&
+          (parent[this.childrenColumnName] as Record<string, unknown>[]).every(
+            (item) => selectedRowKeySet.has(item[rowKey] as string)
+          )
+        ) {
+          _selectedRows.push(parent);
+        }
+      }
+      this._selectedRows = uniqBy(_selectedRows, rowKey);
+    } else {
+      let parent: Record<string, unknown>;
+
+      if (this.autoSelectParentWhenAllChildrenSelected) {
+        parent = this._findParentByChildKeyValue(
+          this._selectedRow[rowKey] as string,
+          rowKey,
+          this._dataSource
+        );
+      }
+      this._selectedRows = pullAllBy(
+        selectedRows,
+        this._allChildren.concat(parent),
         rowKey
       );
-    } else {
-      this._selectedRows = pullAllBy(selectedRows, this._allChildren, rowKey);
     }
     this.selectedRowKeys = map(this._selectedRows, rowKey);
 
@@ -1123,6 +1195,7 @@ export class BrickTableElement extends UpdatingElement {
     selectedRows: Record<string, any>[]
   ): void => {
     this._selected = checked;
+    this._selectedRow = row;
     this._isInSelect = true;
     const rowKey =
       this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
@@ -1131,15 +1204,17 @@ export class BrickTableElement extends UpdatingElement {
       : [];
 
     this._allChildren = allChildren;
-    if (checked) {
-      this._disabledChildrenKeys = uniq([
-        ...this._disabledChildrenKeys,
-        ...map(allChildren, rowKey),
-      ]);
-    } else {
-      this._disabledChildrenKeys = pullAll(this._disabledChildrenKeys, [
-        ...map(allChildren, rowKey),
-      ]);
+    if (!this.autoSelectParentWhenAllChildrenSelected) {
+      if (checked) {
+        this._disabledChildrenKeys = uniq([
+          ...this._disabledChildrenKeys,
+          ...map(allChildren, rowKey),
+        ]);
+      } else {
+        this._disabledChildrenKeys = pullAll(this._disabledChildrenKeys, [
+          ...map(allChildren, rowKey),
+        ]);
+      }
     }
     if (this.storeCheckedByUrl && !!rowKey) {
       this._updateUrlChecked([row[rowKey]], checked);
@@ -1173,15 +1248,17 @@ export class BrickTableElement extends UpdatingElement {
       );
       this._allChildren = allChildren;
 
-      if (selected) {
-        this._disabledChildrenKeys = uniq(
-          this._disabledChildrenKeys.concat(toChangedChildrenKeys)
-        );
-      } else {
-        // disabled children in changeRows should be removed
-        this._disabledChildrenKeys = this._disabledChildrenKeys.filter(
-          (v) => !toChangedChildrenKeys.includes(v)
-        );
+      if (!this.autoSelectParentWhenAllChildrenSelected) {
+        if (selected) {
+          this._disabledChildrenKeys = uniq(
+            this._disabledChildrenKeys.concat(toChangedChildrenKeys)
+          );
+        } else {
+          // disabled children in changeRows should be removed
+          this._disabledChildrenKeys = this._disabledChildrenKeys.filter(
+            (v) => !toChangedChildrenKeys.includes(v)
+          );
+        }
       }
     }
     if (this.storeCheckedByUrl && !!rowKey) {

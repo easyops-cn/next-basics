@@ -285,4 +285,51 @@ describe("brick-table", () => {
     ]);
     document.body.removeChild(element);
   });
+
+  it("should work with autoSelectParentWhenAllChildrenSelected property", async () => {
+    const item0_0 = {
+      id: "0_0",
+    };
+    const item0_1 = {
+      id: "0_1",
+    };
+    const item0 = {
+      id: "0",
+      children: [item0_0, item0_1],
+    };
+    const list = [item0];
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+    element.dataSource = { list };
+    element.rowKey = "id";
+    element.configProps = { rowSelection: true };
+    document.body.appendChild(element);
+    element.addEventListener("select.update", mockEventListener);
+    await jest.runAllTimers();
+
+    const { onSelect, onChange } =
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
+        .children.props.configProps.rowSelection;
+    const childIds = item0.children.map((child) => child.id);
+    onSelect(item0_1, true, item0.children);
+    onChange(childIds, item0.children);
+    expect(mockEventListener).toBeCalledWith(
+      expect.objectContaining({
+        type: "select.update",
+        detail: expect.arrayContaining(item0.children),
+      })
+    );
+
+    element.autoSelectParentWhenAllChildrenSelected = true;
+    await jest.runAllTimers();
+    onSelect(item0_1, true, item0.children);
+    onChange(childIds, item0.children);
+    expect(mockEventListener).toBeCalledWith(
+      expect.objectContaining({
+        type: "select.update",
+        detail: expect.arrayContaining([...item0.children, item0]),
+      })
+    );
+  });
 });
