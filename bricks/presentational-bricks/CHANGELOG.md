@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.209.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.208.0...@next-bricks/presentational-bricks@1.209.0) (2021-08-26)
+
+
+### Features
+
+* **brick-table:** add autoSelectParentWhenAllChildrenSelected property ([92aae3d](https://github.com/easyops-cn/next-basics/commit/92aae3d5db6489a302cdd9c8b7b4a605dadd165f))
+
+
+
+
+
 # [1.208.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.207.0...@next-bricks/presentational-bricks@1.208.0) (2021-08-24)
 
 
