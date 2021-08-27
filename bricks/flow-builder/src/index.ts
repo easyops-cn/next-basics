@@ -9,3 +9,4 @@ import "./lazy-bricks";
 import "./data-providers/CreateFunctionContract";
 import "./custom-processors/getFunctionStep";
 import "./custom-processors/calcFlowInfo";
+import "./custom-processors/processFieldInitValue";
