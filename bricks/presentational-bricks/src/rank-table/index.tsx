@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {
   BrickWrapper,
   getHistory,
+  method,
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
@@ -182,6 +183,37 @@ export class RankTableElement extends UpdatingElement {
   })
   scrollConfigs: TableProps<unknown>["scroll"] = { x: true };
 
+  /**
+   * @kind Header
+   * @required false
+   * @default -
+   * @description 表格头部左边内容显示区域,如果设置了`header`，会覆盖设置其`title`参数
+   */
+  @property({
+    attribute: false,
+    __unstable_doNotDecorate: true,
+  })
+  set headerTitle(
+    title:
+      | string
+      | {
+          useBrick?: UseBrickConf;
+        }
+  ) {
+    this.header = { ...this.header, title: title };
+  }
+
+  /**
+   * @kind (string|number)[]
+   * @required false
+   * @default -
+   * @description 隐藏相应列（输入对应的 dataIndex 或者 key 即可）
+   */
+  @property({
+    attribute: false,
+  })
+  hiddenColumns: Array<string | number>;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -218,6 +250,18 @@ export class RankTableElement extends UpdatingElement {
     }
   };
 
+  getModifyColumns(): CustomColumn[] {
+    let columns = this._columns;
+    if (this._columns && this.hiddenColumns) {
+      columns = this._columns.filter((column) => {
+        return !this.hiddenColumns.includes(
+          (column.dataIndex as string) ?? column.key
+        );
+      });
+    }
+    return columns;
+  }
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -227,7 +271,7 @@ export class RankTableElement extends UpdatingElement {
           <RankTable
             header={this.header}
             dataSource={this._dataSource}
-            columns={this._columns}
+            columns={this.getModifyColumns()}
             configProps={this.configProps}
             showCard={this.showCard}
             rowKey={this.rowKey}
