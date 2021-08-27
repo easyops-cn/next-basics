@@ -133,7 +133,7 @@ export class LegacyGeneralLogin extends React.Component<
             const { isSet } = await MfaApi_verifyUserIsSetRule({
               username: result.username,
               org: result.org,
-              loginBy: getLoginByMethod(),
+              loginBy: this.state.currentLoginMethod,
             });
             if (!result.loggedIn && isSet) {
               const mfaResult = await MfaApi_generateRandomTotpSecret({
