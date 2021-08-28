@@ -12,6 +12,7 @@ jest.mock("@next-libs/code-editor-components", () => ({
 
 describe("FieldsMappingEditor", () => {
   it("should work", async () => {
+    const editorRef = React.createRef<any>();
     const props = {
       dataSource: [
         { name: "objectId", type: "string", description: "objectId", key: "0" },
@@ -51,31 +52,19 @@ describe("FieldsMappingEditor", () => {
           description: "指标过滤",
         },
       ],
+      onRowEdit: jest.fn(),
     };
-    const wrapper = mount(<FieldsMappingEditor {...props} />);
+    const wrapper = mount(<FieldsMappingEditor {...props} ref={editorRef} />);
+
     act(() => {
       wrapper.find('[test-id="edit-btn"]').at(0).simulate("click");
     });
     wrapper.update();
-    expect(wrapper.find("CodeEditorItemWrapper").length).toEqual(1);
-    wrapper.find("CodeEditorItemWrapper").invoke("onChange")("APP");
-    act(() => {
-      wrapper.find('[test-id="save-btn"]').at(0).simulate("click");
-    });
-
-    act(() => {
-      wrapper.find('[test-id="cancel-btn"]').at(0).simulate("click");
-    });
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
-    wrapper.update();
-    expect(wrapper.find(Table).prop("dataSource")[0]).toEqual({
+    expect(props.onRowEdit).toHaveBeenCalledWith({
       description: "objectId",
       key: "0",
       name: "objectId",
       type: "string",
-      value: "APP",
     });
 
     expect(wrapper.find(Table).prop("expandedRowKeys")).toEqual([
@@ -144,5 +133,25 @@ describe("FieldsMappingEditor", () => {
       "2",
       "3",
     ]);
+
+    await act(async () => {
+      editorRef.current.setRowData({
+        name: "objectId",
+        type: "string",
+        description: "objectId",
+        key: "0",
+        value: "HOST",
+      });
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find(Table).prop("dataSource")[0]).toEqual({
+      description: "objectId",
+      key: "0",
+      name: "objectId",
+      type: "string",
+      value: "HOST",
+    });
   });
 });

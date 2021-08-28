@@ -1,15 +1,23 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
-import { Table, Tooltip, Typography, Tag } from "antd";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
+import classNames from "classnames";
+import { Table, Tooltip, Typography, Tag, Button } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import { Form } from "antd";
 import { set } from "lodash";
 import {
   calcFieldPath,
   processFieldValue,
   getFieldChildrenMap,
-  serializeFieldValue,
   getFinalFieldsValue,
-  yaml,
   removeExtraFields,
+  getTagType,
 } from "./processor";
 import { EditableCell } from "./components/editable-cell/EditableCell";
 import styles from "./FieldsMappingEditor.module.css";
@@ -19,26 +27,46 @@ import { NS_FLOW_BUILDER, K } from "../i18n/constants";
 export interface FieldsMappingEditorProps {
   dataSource: FieldItem[];
   onChange?: (value: SimplifiedFieldItem[]) => void;
+  onRowEdit?: (rowData: FieldItem) => void;
   loading?: boolean;
 }
 
-export function FieldsMappingEditor(
-  props: FieldsMappingEditorProps
+export interface EdiotrRef {
+  setRowData: (rowData: FieldItem) => void;
+}
+
+export function LegacyFieldsMappingEditor(
+  props: FieldsMappingEditorProps,
+  ref: React.Ref<EdiotrRef>
 ): React.ReactElement {
-  const { onChange, loading } = props;
+  const { onChange, loading, onRowEdit } = props;
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
   const [dataSource, setDataSource] = useState(props.dataSource);
   const fieldChildrenMap = useRef(getFieldChildrenMap(props.dataSource));
-  const [editingKey, setEditingKey] = useState("");
   const [expandedRowKeys, setExpandedRowKeys] = useState(
     props.dataSource.map((item) => item.key)
   );
 
-  const isEditing = useCallback(
-    (record: FieldItem) => record.key === editingKey,
-    [editingKey]
-  );
+  const setRowData = (rowData: FieldItem): void => {
+    const mutableDataSource = [...dataSource];
+    const path = calcFieldPath(rowData.key);
+    const newValue = processFieldValue(
+      rowData,
+      rowData.value,
+      dataSource,
+      fieldChildrenMap.current
+    );
+
+    set(mutableDataSource, path, newValue);
+
+    setDataSource(mutableDataSource);
+    onChange?.(getFinalFieldsValue(mutableDataSource));
+  };
+
+  useImperativeHandle(ref, () => ({
+    setRowData,
+  }));
 
   useEffect(() => {
     setDataSource(props.dataSource);
@@ -48,118 +76,82 @@ export function FieldsMappingEditor(
 
   const renderNameItem = useCallback(
     (text: string, record: FieldItem): React.ReactElement => {
-      return <Tooltip title={record.description}>{text}</Tooltip>;
+      return (
+        <>
+          <Tooltip title={record.description}>
+            <div className={styles.fieldName}>{text}</div>
+          </Tooltip>
+          <Tag
+            className={classNames(
+              styles.typeTag,
+              styles[getTagType(record.type)]
+            )}
+            style={{ marginLeft: 8 }}
+          >
+            {record.type}
+          </Tag>
+        </>
+      );
     },
     []
   );
 
   const renderOprationItem = useCallback(
     (_: string, record: FieldItem) => {
-      const editable = isEditing(record);
-
       const handleEdit = (record: FieldItem, e: React.MouseEvent): void => {
         e.stopPropagation();
-        form.setFieldsValue({ value: serializeFieldValue(record.value) });
-        setEditingKey(record.key);
+        onRowEdit?.(record);
       };
 
-      const handleCancel = (e: React.MouseEvent): void => {
-        e.stopPropagation();
-        setEditingKey("");
-      };
-
-      const handleSave = async (
-        record: FieldItem,
-        e: React.MouseEvent
-      ): Promise<void> => {
-        try {
-          e.stopPropagation();
-          const v = (await form.validateFields())?.value;
-          const value = record.type === "string" ? v : yaml(v);
-          const mutableDataSource = [...dataSource];
-          const path = calcFieldPath(record.key);
-          const newValue = processFieldValue(
-            record,
-            value,
-            dataSource,
-            fieldChildrenMap.current
-          );
-          set(mutableDataSource, path, newValue);
-
-          setDataSource(mutableDataSource);
-          setEditingKey("");
-          onChange?.(getFinalFieldsValue(mutableDataSource));
-          // eslint-disable-next-line no-empty
-        } catch (error) {}
-      };
-
-      return editable ? (
-        <span>
-          <Typography.Link
-            test-id="save-btn"
-            style={{ marginRight: 8 }}
-            onClick={(e) => handleSave(record, e)}
-          >
-            {t(K.SAVE)}
-          </Typography.Link>
-          <Typography.Link test-id="cancel-btn" onClick={handleCancel}>
-            {t(K.CANCEL)}
-          </Typography.Link>
-        </span>
-      ) : (
-        <Typography.Link
+      return (
+        <Button
+          type="link"
           test-id="edit-btn"
-          disabled={editingKey !== ""}
           onClick={(e) => handleEdit(record, e)}
         >
-          {" "}
-          {t(K.EDIT)}{" "}
-        </Typography.Link>
+          <EditOutlined />
+        </Button>
       );
     },
-    [dataSource, editingKey, form, isEditing, onChange, t]
+    [onRowEdit]
   );
 
-  const rendertypeItem = useCallback((text: string) => {
-    return <Tag className={styles.typeTag}>{text}</Tag>;
-  }, []);
+  const renderSourceItem = useCallback(
+    (text: string) => {
+      return {
+        cel: t(K.CEL),
+        const: t(K.CONST),
+        fieldsMapping: t(K.FIELDS_MAPPING),
+      }[text];
+    },
+    [t]
+  );
 
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
       render: renderNameItem,
-      ellipsis: true,
     },
-    { title: "Type", dataIndex: "type", width: 100, render: rendertypeItem },
+    {
+      title: "Source",
+      dataIndex: "source",
+      width: 100,
+      render: renderSourceItem,
+    },
     {
       title: "value",
       dataIndex: "value",
       width: 300,
-      editable: true,
+      ellipsis: true,
     },
     {
       title: "operation",
       dataIndex: "operation",
       render: renderOprationItem,
-      width: 150,
+      width: 100,
     },
-  ].map((col) => {
-    if (!col.editable) {
-      return col;
-    }
-
-    return {
-      ...col,
-      onCell: (record: FieldItem) => ({
-        record,
-        editable: col.editable,
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: isEditing(record),
-      }),
-    };
-  });
+  ];
 
   const handleExpand = (expanded: boolean, record: FieldItem): void => {
     if (expanded) {
@@ -173,7 +165,7 @@ export function FieldsMappingEditor(
 
   const handleRowClick = (item: FieldItem): void => {
     // istanbul ignore else
-    if (editingKey === "" && item.fields) {
+    if (item.fields) {
       if (expandedRowKeys.includes(item.key)) {
         handleExpand(false, item);
       } else {
@@ -202,3 +194,5 @@ export function FieldsMappingEditor(
     </Form>
   );
 }
+
+export const FieldsMappingEditor = forwardRef(LegacyFieldsMappingEditor);

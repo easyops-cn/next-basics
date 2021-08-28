@@ -2,8 +2,33 @@
   line-height: 22px;
   padding: 0 9px;
   border-radius: 12px;
-  &:global(.ant-tag) {
-    color: var(--tag-blue-color);
-    background: var(--tag-blue-background);
+
+  &.numberType {
+    color: var(--theme-blue-color);
+    background: var(--theme-blue-background);
   }
+
+  &.boolType {
+    color: var(--theme-orange-color);
+    background: var(--theme-orange-background);
+  }
+
+  &.stringType {
+    color: var(--theme-cyan-color);
+    background: var(--theme-cyan-background);
+  }
+
+  &.otherType {
+    color: var(--theme-purple-color);
+    background: var(--theme-purple-background);
+  }
+}
+
+.fieldName {
+  display: inline-block;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }

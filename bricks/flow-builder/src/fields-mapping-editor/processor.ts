@@ -6,6 +6,21 @@ import {
   SimplifiedFieldItem,
 } from "./interfaces";
 
+export function getTagType(type: string): string {
+  switch (type) {
+    case "int":
+    case "int64":
+    case "float":
+      return "numberType";
+    case "bool":
+      return "boolType";
+    case "string":
+      return "stringType";
+    default:
+      return "otherType";
+  }
+}
+
 export function calcFieldPath(key: string): string[] {
   const arr = key.split("-");
   const path: string[] = [];
@@ -78,6 +93,7 @@ export function processFieldValue(
     if (!isNil(value) && value !== "") {
       return {
         ...omit(find, "fields"),
+        source: item.source,
         value,
       };
     } else {
@@ -91,6 +107,7 @@ export function processFieldValue(
 
   return {
     ...find,
+    source: item.source,
     value,
   };
 }
@@ -129,6 +146,7 @@ export function getFinalFieldsValue(
         name: item.name,
         type: item.type,
         value: item.value,
+        source: item.source,
       } as SimplifiedFieldItem;
       list.push(curField);
 

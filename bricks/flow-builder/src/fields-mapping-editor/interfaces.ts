@@ -2,6 +2,7 @@ export interface FieldItem {
   name: string;
   key?: string;
   type: string;
+  source?: string;
   description?: string;
   required?: boolean;
   value?: unknown;
@@ -12,6 +13,7 @@ export interface SimplifiedFieldItem {
   name: string;
   type: string;
   value?: unknown;
+  source?: string;
   fields?: SimplifiedFieldItem[];
 }
 

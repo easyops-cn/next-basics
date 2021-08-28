@@ -18,6 +18,9 @@ export enum K {
   SAVE = "SAVE",
   CANCEL = "CANCEL",
   EDITOR_PLACEHOLDER = "EDITOR_PLACEHOLDER",
+  CONST = "CONST",
+  FIELDS_MAPPING = "FIELDS_MAPPING",
+  CEL = "CEL",
 }
 
 export type Locale = { [key in K]: string };

@@ -203,13 +203,48 @@ describe("processValue", () => {
       },
     ];
 
-    expect(processValue(fieldValueList)).toEqual({
-      "data.tooltipConfig.placement": "top",
-      "data.loading": false,
-      "data.tooltipConfig.arrowPointAtCenter": false,
-      icon: { icon: "api", lib: "antd", theme: "fill" },
-      id: "bbca",
-      name: "test",
-    });
+    expect(processValue(fieldValueList)).toEqual(
+      new Map([
+        ["name", { name: "name", value: "test" }],
+        ["label", { name: "label" }],
+        ["id", { name: "id", value: "bbca" }],
+        [
+          "icon",
+          { name: "icon", value: { lib: "antd", icon: "api", theme: "fill" } },
+        ],
+        [
+          "data",
+          {
+            name: "data",
+            fields: [
+              { name: "loading", value: false },
+              {
+                name: "tooltipConfig",
+                fields: [
+                  { name: "arrowPointAtCenter", value: false },
+                  { name: "placement", value: "top" },
+                ],
+              },
+            ],
+          },
+        ],
+        ["data.loading", { name: "loading", value: false }],
+        [
+          "data.tooltipConfig",
+          {
+            name: "tooltipConfig",
+            fields: [
+              { name: "arrowPointAtCenter", value: false },
+              { name: "placement", value: "top" },
+            ],
+          },
+        ],
+        [
+          "data.tooltipConfig.arrowPointAtCenter",
+          { name: "arrowPointAtCenter", value: false },
+        ],
+        ["data.tooltipConfig.placement", { name: "placement", value: "top" }],
+      ])
+    );
   });
 });
