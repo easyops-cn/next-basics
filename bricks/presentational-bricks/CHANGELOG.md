@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.210.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.209.0...@next-bricks/presentational-bricks@1.210.0) (2021-08-28)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** unique key ([1174ecd](https://github.com/easyops-cn/next-basics/commit/1174ecdc0a7e356eabadeb60f352373e5327cb6f))
+
+
+### Features
+
+* rankTable支持hidden columns ([a34dbdf](https://github.com/easyops-cn/next-basics/commit/a34dbdfdbc17ed819fc337096a34d46e923e76e1))
+
+
+
+
+
 # [1.209.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.208.0...@next-bricks/presentational-bricks@1.209.0) (2021-08-26)
 
 
