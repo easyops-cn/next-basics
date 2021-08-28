@@ -22,9 +22,15 @@ export function DynamicGridContainer(
     ? [props.data]
     : [];
   const renderBrick = (): React.ReactNode => {
-    return useBricks.map((item, index) => (
-      <BrickAsComponent key={index} data={propsData[index]} useBrick={item} />
-    ));
+    return useBricks.map((item, index) => {
+      return (
+        <BrickAsComponent
+          key={propsData[index]?.index || index}
+          data={propsData[index]}
+          useBrick={item}
+        />
+      );
+    });
   };
   useEffect(() => {
     if (props.onRendered && props.useBrick) {

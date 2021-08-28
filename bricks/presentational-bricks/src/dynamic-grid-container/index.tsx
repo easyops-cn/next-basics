@@ -32,7 +32,7 @@ export class DynamicGridContainerElement extends UpdatingElement {
    * @kind any[]
    * @required false
    * @default -
-   * @description 传递给子构件的数据，应与 `useBrick` 一一对应
+   * @description 传递给子构件的数据，应与 `useBrick` 一一对应,data数据中建议传入index作为唯一标识（eg: [{index: chart-01},{index:chart-02}]）
    */
   @property({ attribute: false })
   data: any[];
