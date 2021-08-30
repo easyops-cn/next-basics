@@ -131,9 +131,14 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
     } as Record<string, Record<string, string>>
   );
 
+  const functions = data.functions?.map((fn) => ({
+    name: fn.name,
+    source: fn.source,
+  }));
+
   return {
     routes,
-    meta: { customTemplates, menus, i18n },
+    meta: { customTemplates, menus, i18n, functions },
     dependsAll: data.dependsAll,
   };
 }

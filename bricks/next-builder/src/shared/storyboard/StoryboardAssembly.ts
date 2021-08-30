@@ -42,6 +42,7 @@ export async function StoryboardAssembly({
       ...minimalBuildInfo,
       menus: projectInfo.menus,
       i18n: projectInfo.i18n,
+      functions: projectInfo.functions,
       dependsAll: projectInfo.dependsAll,
       options: {
         keepIds: options?.keepIds,

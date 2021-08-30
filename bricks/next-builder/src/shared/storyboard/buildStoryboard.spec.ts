@@ -207,6 +207,18 @@ describe("buildStoryboard", () => {
             zh: "设置",
           },
         ],
+        functions: [
+          {
+            name: "sayHello",
+            source: "function sayHello() {}",
+            description: "Say hello",
+          },
+          {
+            name: "sayExclamation",
+            source: "function sayExclamation() {}",
+            description: "Say exclamation",
+          },
+        ],
         dependsAll: false,
       },
       // Output
@@ -336,6 +348,16 @@ describe("buildStoryboard", () => {
               SETTINGS: "设置",
             },
           },
+          functions: [
+            {
+              name: "sayHello",
+              source: "function sayHello() {}",
+            },
+            {
+              name: "sayExclamation",
+              source: "function sayExclamation() {}",
+            },
+          ],
         },
         dependsAll: false,
       },
