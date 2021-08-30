@@ -54,6 +54,13 @@ export interface BuildInfo {
   i18n?: I18nNode[];
   dependsAll?: boolean;
   options?: BuildOptions;
+  functions?: FunctionNode[];
+}
+
+export interface FunctionNode {
+  name: string;
+  source: string;
+  description?: string;
 }
 
 export interface BuildOptions {
@@ -80,6 +87,7 @@ export interface StoryboardToBuild {
     customTemplates?: CustomTemplate[];
     menus?: Record<string, unknown>[];
     i18n?: MetaI18n;
+    functions?: Pick<FunctionNode, "name" | "source">[];
   };
 
   dependsAll?: boolean;
