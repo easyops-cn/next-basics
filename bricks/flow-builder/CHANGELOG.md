@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.10.0...@next-bricks/flow-builder@1.10.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* refactor field mapping table ([0936104](https://github.com/easyops-cn/next-basics/commit/0936104287222e3edaef426f193e3b3af4f7e69e))
+
+
+
+
+
 # [1.10.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.9.1...@next-bricks/flow-builder@1.10.0) (2021-08-28)
 
 
