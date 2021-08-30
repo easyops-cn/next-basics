@@ -9,4 +9,10 @@ describe("CopyableText", () => {
     wrapper.setProps({ hiddenText: true });
     expect(wrapper.find("div.ant-typography").text()).toBe("");
   });
+  it("should work", () => {
+    const wrapper = mount(
+      <CopyableText text={"this is a text"} type="input" />
+    );
+    expect(wrapper.find("button")).toHaveLength(1);
+  });
 });

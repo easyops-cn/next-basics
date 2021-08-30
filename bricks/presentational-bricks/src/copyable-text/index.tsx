@@ -36,11 +36,18 @@ export class CopyableTextElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
-   * @description 是否隐藏需要复制的文本
+   * @description 是否隐藏需要复制的文本，`input`样式下该设置无效
    */
   @property({ type: Boolean })
   hiddenText: boolean;
-
+  /**
+   * @kind string
+   * @default custom
+   * @required false
+   * @description 构件样式，支持普通(`custom`)和输入框(`input`)样式（见示例）
+   */
+  @property({ attribute: false })
+  type: string;
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -63,6 +70,7 @@ export class CopyableTextElement extends UpdatingElement {
             text={this.text}
             tooltips={this.tooltips}
             hiddenText={this.hiddenText}
+            type={this.type}
           />
         </BrickWrapper>,
         this
