@@ -20,6 +20,9 @@ const locale: Locale = {
   [K.SAVE]: "Save",
   [K.EDITOR_PLACEHOLDER]:
     "The Cel expression is wrapped with `<% %>`, e.g., <% xxx %>",
+  [K.CONST]: "Const",
+  [K.FIELDS_MAPPING]: "Fields Mapping",
+  [K.CEL]: "Cel",
 };
 
 export default locale;

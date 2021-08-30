@@ -3,13 +3,14 @@ import { isNil } from "lodash";
 import { FieldItem } from "../fields-mapping-editor/interfaces";
 
 interface FieldMapItem
-  extends Pick<FieldItem, "name" | "type" | "description"> {
+  extends Pick<FieldItem, "name" | "type" | "description" | "source"> {
   fields?: FieldMapItem[];
 }
 
 interface FieldMapValue {
   name: string;
   value?: any;
+  source?: string;
   fields?: FieldMapValue[];
 }
 
@@ -17,7 +18,7 @@ type ProcessedFieldMapValue = Record<string, any>;
 
 function traverseFields(
   fieldList: FieldMapItem[],
-  processedFieldValues: ProcessedFieldMapValue,
+  fieldValuesMap: Map<string, ProcessedFieldMapValue>,
   arr: FieldItem[],
   preIndex?: string,
   preName?: string
@@ -29,46 +30,40 @@ function traverseFields(
       name: item.name,
       key: curIndex,
       type: item.type,
+      source: fieldValuesMap.get(curName)?.source,
       description: item.description,
-      value: processedFieldValues[curName],
+      value: fieldValuesMap.get(curName)?.value,
     } as FieldItem;
     arr.push(v);
 
     if (item.fields && item.type === "object") {
       v.fields = [];
-      traverseFields(
-        item.fields,
-        processedFieldValues,
-        v.fields,
-        curIndex,
-        curName
-      );
+      traverseFields(item.fields, fieldValuesMap, v.fields, curIndex, curName);
     }
   });
 }
 
 export function processValue(
   fieldValueList: FieldMapValue[]
-): ProcessedFieldMapValue {
-  const obj: ProcessedFieldMapValue = {};
+): Map<string, ProcessedFieldMapValue> {
+  const fieldMap: Map<string, ProcessedFieldMapValue> = new Map();
 
   const processValueItem = (
     list: FieldMapValue[],
-    valueMap: ProcessedFieldMapValue,
+    valueMap: Map<string, ProcessedFieldMapValue>,
     prefixName?: string
   ): void => {
     list?.forEach((item) => {
       const name = isNil(prefixName) ? item.name : `${prefixName}.${item.name}`;
-      if (!isNil(item.value)) {
-        obj[name] = item.value;
-      } else if (item.fields) {
+      fieldMap.set(name, item);
+      if (item.fields) {
         processValueItem(item.fields, valueMap, name);
       }
     });
   };
 
-  processValueItem(fieldValueList, obj);
-  return obj;
+  processValueItem(fieldValueList, fieldMap);
+  return fieldMap;
 }
 
 export function formatFeildsMap(
@@ -76,8 +71,8 @@ export function formatFeildsMap(
   fieldValueList: FieldMapValue[]
 ): FieldItem[] {
   const list = [] as FieldItem[];
-  const processedFieldValues = processValue(fieldValueList);
-  traverseFields(fieldList, processedFieldValues, list);
+  const fieldValuesMap = processValue(fieldValueList);
+  traverseFields(fieldList, fieldValuesMap, list);
   return list;
 }
 

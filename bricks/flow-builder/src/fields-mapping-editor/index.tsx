@@ -6,8 +6,9 @@ import {
   property,
   event,
   EventEmitter,
+  method,
 } from "@next-core/brick-kit";
-import { FieldsMappingEditor } from "./FieldsMappingEditor";
+import { FieldsMappingEditor, EdiotrRef } from "./FieldsMappingEditor";
 import { FieldItem } from "./interfaces";
 
 /**
@@ -19,6 +20,7 @@ import { FieldItem } from "./interfaces";
  * @noInheritDoc
  */
 export class FieldsMappingEditorElement extends UpdatingElement {
+  private _editorRefs = React.createRef<EdiotrRef>();
   /**
    * @kind FieldItem[]
    * @required false
@@ -50,6 +52,20 @@ export class FieldsMappingEditorElement extends UpdatingElement {
     this.valueChange.emit(values);
   };
 
+  /**
+   * @description 编辑行数据时触发
+   */
+  @event({ type: "row.edit" }) rowEditChange: EventEmitter<FieldItem>;
+
+  private handleRowEdit = (value: FieldItem): void => {
+    this.rowEditChange.emit(value);
+  };
+
+  @method()
+  setRowData(value: FieldItem): void {
+    this._editorRefs.current?.setRowData(value);
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -69,8 +85,10 @@ export class FieldsMappingEditorElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <FieldsMappingEditor
+            ref={this._editorRefs}
             dataSource={this.dataSource}
             onChange={this.handleChange}
+            onRowEdit={this.handleRowEdit}
             loading={this.loadding}
           />
         </BrickWrapper>,

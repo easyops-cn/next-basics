@@ -5,6 +5,7 @@ import {
   getFinalFieldsValue,
   yaml,
   removeExtraFields,
+  getTagType,
 } from "./processor";
 
 describe("processor", () => {
@@ -664,6 +665,17 @@ describe("processor", () => {
           type: "object",
         },
       ]);
+    });
+  });
+
+  describe("getTagType", () => {
+    it.each([
+      ["int", "numberType"],
+      ["bool", "boolType"],
+      ["string", "stringType"],
+      ["object", "otherType"],
+    ])("should reutrn %s", (type, result) => {
+      expect(getTagType(type)).toEqual(result);
     });
   });
 });
