@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.211.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.210.0...@next-bricks/presentational-bricks@1.211.0) (2021-08-31)
+
+
+### Features
+
+* **copy:** 可复制文本构件增加input样式 ([8250ab6](https://github.com/easyops-cn/next-basics/commit/8250ab689374cb0a5593adb6a81fbae2d44c723c))
+
+
+
+
+
 # [1.210.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.209.0...@next-bricks/presentational-bricks@1.210.0) (2021-08-28)
 
 

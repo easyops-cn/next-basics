@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.66.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.7...@next-bricks/next-builder@1.66.0) (2021-08-31)
+
+
+### Features
+
+* build functions ([aff1d75](https://github.com/easyops-cn/next-basics/commit/aff1d75e83237e21fa450133b9e65c4e5dd92635))
+* ScanFunctionsInStoryboard ([b6004f7](https://github.com/easyops-cn/next-basics/commit/b6004f743c74bd3ff8efa87d205052fdcbc710fb))
+
+
+
+
+
 ## [1.65.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.6...@next-bricks/next-builder@1.65.7) (2021-08-17)
 
 **Note:** Version bump only for package @next-bricks/next-builder
