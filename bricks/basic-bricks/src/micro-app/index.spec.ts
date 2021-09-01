@@ -1,6 +1,12 @@
 import ReactDOM from "react-dom";
 import "./";
 import { MicroViewElement } from "./";
+import * as brickKit from "@next-core/brick-kit";
+
+const brandFn = jest.fn().mockReturnValue({});
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getBrandSettings: brandFn,
+} as any);
 
 const spyOnRender = jest.spyOn(ReactDOM, "render");
 const unmountComponentAtNode = jest.spyOn(ReactDOM, "unmountComponentAtNode");

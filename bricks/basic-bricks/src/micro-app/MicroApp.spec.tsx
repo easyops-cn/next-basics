@@ -2,6 +2,14 @@ import React from "react";
 import { shallow } from "enzyme";
 import { MicroApp } from "./MicroApp";
 import { BtnExitDashboardMode } from "./BtnExitDashboardMode";
+import { ReactComponent as Logo } from "../images/logo-3.1.svg";
+import { getRuntime } from "@next-core/brick-kit";
+
+jest.mock("@next-core/brick-kit");
+const brandFn = jest.fn().mockReturnValue({});
+(getRuntime as jest.Mock).mockReturnValue({
+  getBrandSettings: brandFn,
+});
 
 describe("MicroApp", () => {
   it("should work with default", () => {
@@ -26,6 +34,11 @@ describe("MicroApp", () => {
     expect(wrapper.find(BtnExitDashboardMode).length).toBe(0);
     wrapper.setProps({ dashboardMode: true });
     expect(wrapper.find(BtnExitDashboardMode).length).toBe(1);
+    expect(wrapper.find(Logo).length).toBe(1);
+    brandFn.mockReturnValue({ dashboard_mode_logo_url: "/a/b/c" });
+    wrapper.setProps({});
+    expect(wrapper.find(Logo).length).toBe(0);
+    expect(wrapper.find("img").length).toBe(1);
   });
 
   it("should work with banner", () => {
