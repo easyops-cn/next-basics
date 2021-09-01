@@ -241,7 +241,7 @@ describe("GeneralLogin", () => {
   });
 
   it("brand setting should work", (done) => {
-    brandFn.mockReturnValue({ menu_bar_logo_url: "/x/y/z" });
+    brandFn.mockReturnValue({ auth_logo_url: "/x/y/z" });
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
       validateFields: jest.fn().mockImplementation(async (fn) => {
