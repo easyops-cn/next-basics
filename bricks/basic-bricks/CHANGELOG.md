@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.141.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.140.1...@next-bricks/basic-bricks@1.141.0) (2021-09-01)
+
+
+### Features
+
+* **basic-bricks:** dashboardMode支持更换logo ([c453a52](https://github.com/easyops-cn/next-basics/commit/c453a52741bf1c5809a2b0eda4d4a5faa77f2fd8))
+
+
+
+
+
 ## [1.140.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.140.0...@next-bricks/basic-bricks@1.140.1) (2021-08-23)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
