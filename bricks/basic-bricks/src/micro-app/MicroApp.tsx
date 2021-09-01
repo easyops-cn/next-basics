@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { PageTitle } from "../page-title/PageTitle";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { BtnExitDashboardMode } from "./BtnExitDashboardMode";
+import { getRuntime } from "@next-core/brick-kit";
 
 interface MicroAppProps {
   bannerPageTitle?: string;
@@ -13,6 +14,7 @@ interface MicroAppProps {
 }
 
 export function MicroApp(props: MicroAppProps): React.ReactElement {
+  const { dashboard_mode_logo_url } = getRuntime().getBrandSettings();
   return (
     <>
       <div className="banner-container" style={props.bannerStyle}>
@@ -48,7 +50,11 @@ export function MicroApp(props: MicroAppProps): React.ReactElement {
           {props.dashboardMode && (
             <>
               <div className="logo-in-dashboard-mode">
-                <Logo />
+                {dashboard_mode_logo_url ? (
+                  <img src={dashboard_mode_logo_url} style={{ height: 32 }} />
+                ) : (
+                  <Logo />
+                )}
               </div>
               <BtnExitDashboardMode />
             </>
