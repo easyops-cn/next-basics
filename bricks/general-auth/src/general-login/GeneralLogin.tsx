@@ -631,9 +631,9 @@ export class LegacyGeneralLogin extends React.Component<
           <div className={styles.loginHeader}>
             <div className={styles.logoBar}>
               <Link to="/">
-                {brand.menu_bar_logo_url ? (
+                {brand.auth_logo_url ? (
                   <img
-                    src={brand.menu_bar_logo_url}
+                    src={brand.auth_logo_url}
                     style={{ height: 32, verticalAlign: "middle" }}
                   />
                 ) : (
