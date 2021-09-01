@@ -74,7 +74,7 @@ export class GeneralInputNumberElement extends FormItemElement {
    * @default -
    * @description 是否只读
    */
-  @property({ type: Boolean }) declare readOnly: boolean;
+  @property({ type: Boolean }) readOnly: boolean;
 
   /**
    * @kind boolean
