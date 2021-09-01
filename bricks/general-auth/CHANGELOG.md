@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.10.1...@next-bricks/general-auth@1.10.2) (2021-09-01)
+
+
+### Bug Fixes
+
+* **general-auth:** 修复登录页logo获取字段错误 ([b0a2b09](https://github.com/easyops-cn/next-basics/commit/b0a2b09f10de713d1dcf10719ab1465f17967ea3))
+
+
+
+
+
 ## [1.10.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.10.0...@next-bricks/general-auth@1.10.1) (2021-08-27)
 
 

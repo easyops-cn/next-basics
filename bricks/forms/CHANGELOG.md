@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.190.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.1...@next-bricks/forms@1.190.2) (2021-09-01)
+
+
+### Bug Fixes
+
+* support formStyle ([8851c2c](https://github.com/easyops-cn/next-basics/commit/8851c2c32fccffb46d442ae29673fa82968b901a))
+
+
+
+
+
 ## [1.190.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.0...@next-bricks/forms@1.190.1) (2021-09-01)
 
 
