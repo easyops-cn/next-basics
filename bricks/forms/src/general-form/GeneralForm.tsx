@@ -23,12 +23,17 @@ interface LegacyGeneralFormProps extends FormComponentProps {
   valueTypes?: Record<string, string>;
   maxWidthLimited?: boolean;
   alignment?: FormAlignment;
+  formStyle?: React.CSSProperties;
 }
 
-export function LegacyGeneralForm(
-  props: LegacyGeneralFormProps
-): React.ReactElement {
-  const { form, formElement, layout, maxWidthLimited, alignment } = props;
+export function LegacyGeneralForm({
+  form,
+  formElement,
+  layout,
+  maxWidthLimited,
+  alignment,
+  formStyle,
+}: LegacyGeneralFormProps): React.ReactElement {
   formElement.formUtils = form;
 
   return (
@@ -38,7 +43,10 @@ export function LegacyGeneralForm(
     >
       <Form
         layout={layout}
-        style={maxWidthLimited ? { maxWidth: 1332 } : undefined}
+        style={{
+          ...(maxWidthLimited ? { maxWidth: 1332 } : undefined),
+          ...formStyle,
+        }}
       >
         <slot id="itemsSlot" name="items" />
       </Form>

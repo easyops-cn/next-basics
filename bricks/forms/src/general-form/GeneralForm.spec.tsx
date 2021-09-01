@@ -30,6 +30,9 @@ describe("GeneralForm", () => {
           emptyDateTime: "moment",
           password: "",
         }}
+        formStyle={{
+          width: "100%",
+        }}
       />
     );
     expect(Form.createFormField).toBeCalledTimes(5);

@@ -5,7 +5,6 @@ import {
   FormLayout,
   ValidateFieldsOptions,
 } from "@ant-design/compatible/lib/form/Form";
-import { ColProps } from "antd/lib/col";
 import {
   BrickWrapper,
   UpdatingElement,
@@ -245,6 +244,7 @@ export class GeneralFormElement
    */
   @property({ type: Boolean })
   maxWidthLimited: boolean;
+
   /**
    * @description 表单达到最大宽度后的对齐方式
    * @default `FormAlignment.Center`
@@ -252,6 +252,13 @@ export class GeneralFormElement
    */
   @property({ attribute: false })
   alignment: FormAlignment = FormAlignment.Center;
+
+  /**
+   * @description 表单样式
+   * @group advanced
+   */
+  @property({ attribute: false })
+  formStyle: React.CSSProperties;
 
   constructor() {
     super();
@@ -303,6 +310,7 @@ export class GeneralFormElement
             valueTypes={this.valueTypes}
             maxWidthLimited={this.maxWidthLimited}
             alignment={this.alignment}
+            formStyle={this.formStyle}
           />
         </BrickWrapper>,
         this._mountPoint
