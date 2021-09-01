@@ -63,7 +63,7 @@ export class GeneralTextAreaElement extends FormItemElement {
    * @description 是否只读
    * @group basic
    */
-  @property()
+  @property({ type: Boolean })
   readOnly: boolean;
 
   /**
