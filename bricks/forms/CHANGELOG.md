@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.190.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.0...@next-bricks/forms@1.190.1) (2021-09-01)
+
+
+### Bug Fixes
+
+* fix property type of readOnly ([ddc703b](https://github.com/easyops-cn/next-basics/commit/ddc703bf5cf23a35fa51b7bda44454306316d1c7))
+
+
+
+
+
 # [1.190.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.189.0...@next-bricks/forms@1.190.0) (2021-08-25)
 
 
