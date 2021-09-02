@@ -308,7 +308,7 @@ describe("brick-table", () => {
     element.addEventListener("select.update", mockEventListener);
     await jest.runAllTimers();
 
-    const { onSelect, onChange } =
+    const { onSelect, onSelectAll, onChange } =
       spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
         .children.props.configProps.rowSelection;
     const childIds = item0.children.map((child) => child.id);
@@ -329,6 +329,16 @@ describe("brick-table", () => {
       expect.objectContaining({
         type: "select.update",
         detail: expect.arrayContaining([...item0.children, item0]),
+      })
+    );
+
+    // onSelectAll
+    onSelectAll(true, [item0]);
+    onChange([item0.id], [item0]);
+    expect(mockEventListener).toBeCalledWith(
+      expect.objectContaining({
+        type: "select.update",
+        detail: expect.arrayContaining([item0]),
       })
     );
   });
