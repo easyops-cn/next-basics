@@ -1112,7 +1112,7 @@ export class BrickTableElement extends UpdatingElement {
     this._selectedRows = selectedRows;
     if (this._selected) {
       const _selectedRows = [...selectedRows, ...this._allChildren];
-      if (this.autoSelectParentWhenAllChildrenSelected) {
+      if (this.autoSelectParentWhenAllChildrenSelected && this._selectedRow) {
         const selectedRowKeySet = new Set(selectedRowKeys);
         const parent = this._findParentByChildKeyValue(
           this._selectedRow[rowKey] as string,
@@ -1133,7 +1133,7 @@ export class BrickTableElement extends UpdatingElement {
     } else {
       let parent: Record<string, unknown>;
 
-      if (this.autoSelectParentWhenAllChildrenSelected) {
+      if (this.autoSelectParentWhenAllChildrenSelected && this._selectedRow) {
         parent = this._findParentByChildKeyValue(
           this._selectedRow[rowKey] as string,
           rowKey,
@@ -1146,6 +1146,7 @@ export class BrickTableElement extends UpdatingElement {
         rowKey
       );
     }
+    this._selectedRow = undefined;
     this.selectedRowKeys = map(this._selectedRows, rowKey);
 
     let detail = null;
