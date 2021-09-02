@@ -25,20 +25,24 @@ export function getProcessedCelValue(raw: string): string {
   return raw.replace(/^\s*<%~?\s|\s%>\s*$/g, "");
 }
 
+export function isInvalidValue(value: unknown): boolean {
+  return isNil(value) || value === "";
+}
+
 export function processFieldInitValue(fieldData: Field): ProcessedField {
   const { source, value } = fieldData;
-  if (isNil(source) && isNil(value)) {
+  if (isInvalidValue(source) && isInvalidValue(value)) {
     return {
       ...fieldData,
       source: "const",
     };
   }
 
-  if (!isNil(source) && isNil(value)) {
+  if (!isInvalidValue(source) && isInvalidValue(value)) {
     return fieldData;
   }
 
-  if (isNil(source) && !isNil(value)) {
+  if (isInvalidValue(source) && !isInvalidValue(value)) {
     switch (typeof value) {
       case "number":
       case "boolean":
@@ -73,7 +77,7 @@ export function processFieldInitValue(fieldData: Field): ProcessedField {
     }
   }
 
-  if (!isNil(source) && !isNil(value)) {
+  if (!isInvalidValue(source) && !isInvalidValue(value)) {
     if (source === "const") {
       return {
         ...fieldData,

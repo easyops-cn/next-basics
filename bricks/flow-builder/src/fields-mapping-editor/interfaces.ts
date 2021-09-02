@@ -7,6 +7,7 @@ export interface FieldItem {
   required?: boolean;
   value?: unknown;
   fields?: FieldItem[];
+  disabledEdit?: boolean;
 }
 
 export interface SimplifiedFieldItem {
