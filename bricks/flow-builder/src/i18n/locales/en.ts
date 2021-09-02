@@ -9,6 +9,8 @@ const locale: Locale = {
   [K.COMPARE_METHOD_PLANCEHOLDER]: "Compare method",
   [K.COMPARE_VALUE_PLANCEHOLDER]:
     "Please select compare method before input number",
+  [K.FIELDS_MAPPING_EDIT_TOOLTIP]:
+    "Can't edit sub-attributes under the `object[]` type",
   [K.ARRAY]: "array",
   [K.SIMPLE_TYPE]: "Simple Type",
   [K.MODEL_TYPE]: "Model Type",

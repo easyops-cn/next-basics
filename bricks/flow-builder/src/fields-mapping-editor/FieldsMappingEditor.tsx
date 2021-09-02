@@ -104,13 +104,18 @@ export function LegacyFieldsMappingEditor(
       };
 
       return (
-        <Button
-          type="link"
-          test-id="edit-btn"
-          onClick={(e) => handleEdit(record, e)}
+        <Tooltip
+          title={record.disabledEdit && t(K.FIELDS_MAPPING_EDIT_TOOLTIP)}
         >
-          <EditOutlined />
-        </Button>
+          <Button
+            disabled={record.disabledEdit}
+            type="link"
+            test-id="edit-btn"
+            onClick={(e) => handleEdit(record, e)}
+          >
+            <EditOutlined />
+          </Button>
+        </Tooltip>
       );
     },
     [onRowEdit]
