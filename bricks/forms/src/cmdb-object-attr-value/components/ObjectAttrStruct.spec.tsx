@@ -3,7 +3,7 @@ import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Modal, Row, Radio, Button, Table, Input, Select } from "antd";
 import { CmdbObjectApi_getObjectAll } from "@next-sdk/cmdb-sdk";
-import { ObjectAttrStruct } from "./ObjectAttrStruct";
+import { IPRegex, ObjectAttrStruct } from "./ObjectAttrStruct";
 import { NS_FORMS, K } from "../../i18n/constants";
 import i18n from "i18next";
 jest.mock("@next-sdk/cmdb-sdk");
@@ -76,7 +76,12 @@ describe("ObjectAttrStruct", () => {
   it.each([
     ["enum", "", ""],
     ["enums", "", ""],
-    ["json", "", ""],
+    ["str", "/a/", "/a/"],
+    ["int", "/9/", "/9/"],
+    ["arr", "/ab/", "/ab/"],
+    ["str", null, ""],
+    ["ip", "", IPRegex],
+    ["json", `{"type":"string"}`, `{"type":"string"}`],
     ["enum", ["enum1", "enum2"], "enum1,enum2"],
   ])(
     "should work with props has struct_define (%s %s)",
@@ -98,7 +103,7 @@ describe("ObjectAttrStruct", () => {
           }}
         />
       );
-
+      wrapper.find(".struct-option-btn-group").childAt(0).simulate("click");
       expect(wrapper.find("tbody tr").childAt(3).text()).toBe(expected);
     }
   );
