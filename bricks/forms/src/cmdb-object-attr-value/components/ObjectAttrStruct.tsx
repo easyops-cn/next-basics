@@ -11,6 +11,8 @@ import i18n from "i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 const Option = Select.Option;
 
+const currentLang = i18n.language?.split("-")[0];
+
 interface StructDefine {
   id: string;
   name: string;
@@ -44,6 +46,11 @@ const objectAttrColumns = [
       valueTypeList.filter((type) => type.key === text)[0].text,
   },
 ];
+
+// eslint-disable-next-line no-useless-escape
+export const IPRegex =
+  "^^(d|[1-9]d|1dd|2([0-4]d|5[0-5])).(d|[1-9]d|1dd|2([0-4]d|5[0-5])).(d|[1-9]d|1dd|2([0-4]d|5[0-5])).(d|[1-9]d|1dd|2([0-4]d|5[0-5]))$";
+const regexType = ["str", "int", "arr", "json", "ip", "enum", "enums"];
 
 export interface LegacyObjectAttrStructProps extends FormComponentProps {
   value: any;
@@ -124,15 +131,15 @@ export function LegacyObjectAttrStructForm(
   };
 
   const getOptionBtns = (record: any): React.ReactNode => (
-    <div className="struct-option-btn-group">
+    <div className="struct-option-btn-group" style={{ display: "flex" }}>
       {addStructMode === "new" && (
         <Button
           type="link"
           icon={<EditOutlined />}
           onClick={(e) => {
             setCurrentStruct(record);
-            setAddStructModalVisible(true);
             setCurValueType(record.type);
+            setAddStructModalVisible(true);
           }}
         />
       )}
@@ -198,14 +205,20 @@ export function LegacyObjectAttrStructForm(
     },
 
     {
-      title: i18n.t(`${NS_FORMS}:${K.ENUMERATION_VALUE}`),
+      title: i18n.t(`${NS_FORMS}:${K.ENUM_REGEX_JSON}`),
       dataIndex: "regex",
       key: "regex",
-      render: (text, record) =>
-        (Array.isArray(record.regex) &&
-          ["enums", "enum"].includes(record.type) &&
-          record.regex?.join(",")) ||
-        "",
+      render: (text, record) => {
+        if (
+          Array.isArray(record.regex) &&
+          ["enums", "enum"].includes(record.type)
+        ) {
+          return record.regex.join(",") || "";
+        } else if (record.type === "ip") {
+          return IPRegex;
+        }
+        return record.regex || "";
+      },
     },
 
     {
@@ -244,6 +257,7 @@ export function LegacyObjectAttrStructForm(
       }
       handleValueChange({ ...value, struct_define: [...struct, data] });
       setAddStructModalVisible(false);
+      setCurValueType("");
       props.form.resetFields();
     });
   };
@@ -309,7 +323,7 @@ export function LegacyObjectAttrStructForm(
       <div style={{ marginTop: 15 }}>
         <Table
           columns={
-            !isNil(value?.struct_define.find((item) => item.type === "enum"))
+            value?.struct_define?.some((item) => regexType.includes(item.type))
               ? structWithEnumColumns
               : structColumns
           }
@@ -326,9 +340,16 @@ export function LegacyObjectAttrStructForm(
         }
         visible={addStructModalVisible}
         onOk={handleAddStructConfirm}
-        onCancel={() => setAddStructModalVisible(false)}
+        onCancel={() => {
+          setCurValueType("");
+          props.form.resetFields();
+          setAddStructModalVisible(false);
+        }}
       >
-        <Form labelCol={{ span: 10 }} wrapperCol={{ span: 16 }}>
+        <Form
+          labelCol={{ span: currentLang === "zh" ? 6 : 10 }}
+          wrapperCol={{ span: 16 }}
+        >
           <Form.Item label={i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_ID}`)}>
             {getFieldDecorator("id", {
               initialValue: isEmpty(currentStruct) ? "" : currentStruct.id,
@@ -384,7 +405,10 @@ export function LegacyObjectAttrStructForm(
           {(curValueType === "enum" || curValueType === "enums") && (
             <Form.Item label={i18n.t(`${NS_FORMS}:${K.ENUMERATION_VALUE}`)}>
               {getFieldDecorator("regex", {
-                initialValue: isEmpty(currentStruct) ? [] : currentStruct.regex,
+                initialValue:
+                  isEmpty(currentStruct) || isNil(currentStruct.regex)
+                    ? []
+                    : currentStruct.regex,
               })(
                 <Select
                   mode="tags"
@@ -394,6 +418,37 @@ export function LegacyObjectAttrStructForm(
                   )}
                 />
               )}
+            </Form.Item>
+          )}
+          {(curValueType === "str" ||
+            curValueType === "int" ||
+            curValueType === "arr" ||
+            curValueType === "json") && (
+            <Form.Item
+              label={
+                curValueType === "json"
+                  ? "JSON Schema："
+                  : i18n.t(`${NS_FORMS}:${K.REGULAR}`)
+              }
+            >
+              {getFieldDecorator("regex", {
+                initialValue: isEmpty(currentStruct) ? "" : currentStruct.regex,
+              })(
+                <Input
+                  placeholder={i18n.t(`${NS_FORMS}:${K.THIS_IS_NOT_MANDATORY}`)}
+                />
+              )}
+            </Form.Item>
+          )}
+          {curValueType === "ip" && (
+            <Form.Item label={i18n.t(`${NS_FORMS}:${K.REGULAR}`)}>
+              <Input.TextArea
+                value={IPRegex}
+                style={{ wordBreak: "break-all" }}
+                disabled={true}
+                autoSize={{ minRows: 4 }}
+                resize={false}
+              />
             </Form.Item>
           )}
         </Form>
