@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.211.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.211.0...@next-bricks/presentational-bricks@1.211.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **brick-table:** fix select all when autoSelectParentWhenAllChildrenSelected is true ([9aa6fef](https://github.com/easyops-cn/next-basics/commit/9aa6fef6918b00a9f70650b66f4c42a6557279c6))
+
+
+
+
+
 # [1.211.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.210.0...@next-bricks/presentational-bricks@1.211.0) (2021-08-31)
 
 
