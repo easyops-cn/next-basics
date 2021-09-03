@@ -60,6 +60,7 @@ export interface BuildInfo {
 export interface FunctionNode {
   name: string;
   source: string;
+  typescript?: boolean;
   description?: string;
 }
 

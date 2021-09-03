@@ -217,6 +217,7 @@ describe("buildStoryboard", () => {
             name: "sayExclamation",
             source: "function sayExclamation() {}",
             description: "Say exclamation",
+            typescript: true,
           },
         ],
         dependsAll: false,
@@ -356,6 +357,7 @@ describe("buildStoryboard", () => {
             {
               name: "sayExclamation",
               source: "function sayExclamation() {}",
+              typescript: true,
             },
           ],
         },
