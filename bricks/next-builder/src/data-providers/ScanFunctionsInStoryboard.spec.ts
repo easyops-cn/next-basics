@@ -69,6 +69,16 @@ describe("ScanFunctionsInStoryboard", () => {
                 description: "<% FN.badOne() %>",
               },
               {
+                name: "sayTypeScript",
+                source: `
+                  interface A {}
+                  function sayTypeScript(name: A){
+                    return FN.sayStrong('TypeScript, ' + name);
+                  }
+                `,
+                typescript: true,
+              },
+              {
                 name: "sayError",
                 source: `
                   function sayError() {
@@ -90,6 +100,7 @@ describe("ScanFunctionsInStoryboard", () => {
         "goodFour",
         "goodFive",
         "sayExclamation",
+        "sayStrong",
       ],
       2,
     ],

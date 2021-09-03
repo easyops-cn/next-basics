@@ -1,5 +1,5 @@
 import { MemberExpression } from "@babel/types";
-import { Storyboard } from "@next-core/brick-types";
+import { Storyboard, StoryboardFunction } from "@next-core/brick-types";
 import {
   createProviderClass,
   isEvaluable,
@@ -26,7 +26,7 @@ export function ScanFunctionsInStoryboard({
   );
   if (Array.isArray(storyboard.meta?.functions)) {
     for (const fn of storyboard.meta.functions) {
-      collectFunctionsInFunctionSource(fn.source, collection);
+      collectFunctionsInFunctionSource(fn, collection);
     }
   }
   return Array.from(collection);
@@ -75,7 +75,7 @@ function collectFunctions(
 }
 
 function collectFunctionsInFunctionSource(
-  source: string,
+  { source, typescript }: StoryboardFunction,
   collection: Set<string>
 ): void {
   try {
@@ -86,6 +86,7 @@ function collectFunctionsInFunctionSource(
           PrecookFunctionVisitor.MemberExpression(node, state, callback);
         },
       },
+      typescript,
     });
   } catch (error) {
     // eslint-disable-next-line no-console
