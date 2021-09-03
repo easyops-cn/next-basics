@@ -134,6 +134,7 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
   const functions = data.functions?.map((fn) => ({
     name: fn.name,
     source: fn.source,
+    typescript: fn.typescript,
   }));
 
   return {

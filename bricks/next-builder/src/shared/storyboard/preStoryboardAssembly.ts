@@ -94,7 +94,7 @@ export async function preStoryboardAssembly({
     requests.push(
       InstanceApi_getDetail(MODEL_PROJECT_MICRO_APP, projectId, {
         fields:
-          "*,menus.*,menus.items,menus.items.children,i18n.*,functions.name,functions.source",
+          "*,menus.*,menus.items,menus.items.children,i18n.*,functions.name,functions.source,functions.typescript",
       })
     );
   }
