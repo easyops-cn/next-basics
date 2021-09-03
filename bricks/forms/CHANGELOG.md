@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.191.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.2...@next-bricks/forms@1.191.0) (2021-09-03)
+
+
+### Features
+
+* **forms:** 添加属性结构体内的结构项支持正则校验 ([41617f6](https://github.com/easyops-cn/next-basics/commit/41617f69dda588c91054fa772f708a31025145bb))
+
+
+
+
+
 ## [1.190.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.1...@next-bricks/forms@1.190.2) (2021-09-01)
 
 
