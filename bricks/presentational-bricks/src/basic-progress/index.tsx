@@ -36,6 +36,18 @@ export interface ColorObj {
  *   purple = "purple",
  *   geekblue = "geekblue",
  *   gray = "gray",
+ *   slategray = "slategray",
+ *   doderblue = "doderblue",
+ *   royalblue = "royalblue",
+ *   lightorange = "lightorange",
+ *   goldenrod = "goldenrod",
+ *   jewelryblue = "jewelryblue",
+ *   orangered = "orangered",
+ *   springgreen = "springgreen",
+ *   mediumpurple = "mediumpurple",
+ *   skyblue = "skyblue",
+ *   yellowgreen = "yellowgreen",
+ *   lightpurple = "lightpurple",
  * }
  * ```
  * @noInheritDoc
