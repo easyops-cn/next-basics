@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.66.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.66.2...@next-bricks/next-builder@1.66.3) (2021-09-03)
+
+
+### Bug Fixes
+
+* scan functions which use typescript ([0418709](https://github.com/easyops-cn/next-basics/commit/0418709012c4976a950c44d9ed92be7e8a143ac1))
+
+
+
+
+
 ## [1.66.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.66.1...@next-bricks/next-builder@1.66.2) (2021-09-03)
 
 
