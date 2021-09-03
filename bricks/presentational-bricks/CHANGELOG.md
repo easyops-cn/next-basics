@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.211.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.211.1...@next-bricks/presentational-bricks@1.211.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **brick-table:** prefer page and page size in dataSource ([7b0ff4e](https://github.com/easyops-cn/next-basics/commit/7b0ff4e33bd546dae52141eaf581e6d33346105b))
+
+
+
+
+
 ## [1.211.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.211.0...@next-bricks/presentational-bricks@1.211.1) (2021-09-02)
 
 
