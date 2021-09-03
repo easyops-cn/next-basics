@@ -442,10 +442,9 @@ export class BrickTableElement extends UpdatingElement {
       stripEmptyExpandableChildrenByName(columnName, this._dataSource);
     }
     this._total = get(value, this._fields.total);
-    this.page = this.page ?? (get(value, "page") || 1);
+    this.page = get(value, "page") ?? this.page ?? 1;
     this.pageSize =
-      this.pageSize ??
-      (get(value, "page_size") || get(value, "pageSize") || 10);
+      get(value, "page_size") ?? get(value, "pageSize") ?? this.pageSize ?? 10;
     this._render();
   }
 
