@@ -20,3 +20,6 @@ import "./search-tree";
 import "./lazy-bricks";
 import "./data-providers/ScanFunctionsInStoryboard";
 import "./data-providers/BuildProjectOfTemplates";
+import "./events-editor";
+import "./event-config-form";
+import "./custom-processors/getProcessedEvents";
