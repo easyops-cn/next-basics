@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.67.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.67.0...@next-bricks/next-builder@1.67.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* **search-tree:** fix error url in template children ([eed174e](https://github.com/easyops-cn/next-basics/commit/eed174e01a42358b0254d4c8f8df97bfef524ddc))
+* **search-tree:** update template path judge type ([ea44b45](https://github.com/easyops-cn/next-basics/commit/ea44b45d542299f091390d8b447b7e6ae48cfc2e))
+* **search-tree:** update unit test ([9137b72](https://github.com/easyops-cn/next-basics/commit/9137b727610d24e79c13078809a6d43d59f22809))
+
+
+
+
+
 # [1.67.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.66.3...@next-bricks/next-builder@1.67.0) (2021-09-07)
 
 
