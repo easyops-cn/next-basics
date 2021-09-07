@@ -6,7 +6,7 @@ import {
   ExecuteCustomBrickEventHandler,
   SetPropsCustomBrickEventHandler,
 } from "@next-core/brick-types";
-import { HandlerType } from "./components/handler-item/HandlerItem";
+import { HandlerType } from "./interfaces";
 
 export function isBuiltinHandler(
   handler: BrickEventHandler
@@ -32,7 +32,11 @@ export function isSetPropsCustomHandler(
   return !!(handler as SetPropsCustomBrickEventHandler).properties;
 }
 
-export function getHanderType(handler: BrickEventHandler): HandleType {
+export function isFlowAPiProvider(provider: string): boolean {
+  return provider?.includes("@");
+}
+
+export function getHanderType(handler: BrickEventHandler): HandlerType {
   if (isBuiltinHandler(handler)) {
     return HandlerType.BuiltinAction;
   } else if (isUseProviderHandler(handler)) {

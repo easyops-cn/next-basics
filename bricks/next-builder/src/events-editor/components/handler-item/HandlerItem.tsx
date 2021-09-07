@@ -1,6 +1,4 @@
 import React, { useContext, createRef, useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
 import {
   BrickEventHandler,
   UseProviderEventHandler,
@@ -12,20 +10,15 @@ import {
 } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { getProcessedEvents } from "../../../custom-processors/getProcessedEvents";
-import { getHandlerName, getHanderType } from "../../processor";
+import {
+  getHandlerName,
+  getHanderType,
+} from "../../../shared/visual-events/processEventHandler";
 import { EditorContext } from "../../EventsEditor";
+import { HandlerType } from "../../../shared/visual-events/interfaces";
 import sharedStyle from "../../EventsEditor.module.css";
 import styles from "./HandlerItem.module.css";
 import { isNil } from "lodash";
-
-export enum HandlerType {
-  BuiltinAction = "builtinAction",
-  UseProvider = "useProvider",
-  ExectuteMethod = "exectuteMethod",
-  SetPorps = "setPorps",
-  Unkown = "unkown",
-}
-
 export interface HandlerItemProps {
   type?: HandlerType;
   handler: BrickEventHandler;
@@ -38,6 +31,7 @@ const handlerIconMap = {
   [HandlerType.SetPorps]: "equals",
   [HandlerType.Unkown]: "question",
 };
+
 const callbackEvents = [
   { type: "success" },
   { type: "error" },
@@ -45,7 +39,6 @@ const callbackEvents = [
 ];
 
 export function HandlerItem(props: HandlerItemProps): React.ReactElement {
-  const { t } = useTranslation(NS_NEXT_BUILDER);
   const { type, handler } = props;
   const context = useContext(EditorContext);
   const lastEventNameRef = createRef<HTMLDivElement>();

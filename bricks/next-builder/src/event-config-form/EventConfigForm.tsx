@@ -6,8 +6,9 @@ import { CodeEditorItem } from "@next-libs/editor-components";
 import { Form, Radio, AutoComplete, Tooltip } from "antd";
 import { FileSearchOutlined } from "@ant-design/icons";
 import { ColProps } from "antd/lib/col";
-import { buildtinActions } from "./constants";
+import { buildtinActions } from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
+import { HandlerType } from "../shared/visual-events/interfaces";
 
 export interface EventConfigForm {
   labelCol?: ColProps;
@@ -33,20 +34,42 @@ export function LegacyEventConfigForm(
     [form]
   );
 
-  const handleTypeItem = useMemo(
+  const getCodeEditorItem = (options = {}): React.ReactNode => {
+    return (
+      <CodeEditorItem
+        tabSize={2}
+        minLines={6}
+        maxLines="Infinity"
+        printMargin={false}
+        showLineNumbers={true}
+        theme="tomorrow"
+        enableLiveAutocompletion={true}
+        mode="brick_next_yaml"
+        {...options}
+      ></CodeEditorItem>
+    );
+  };
+
+  const handlerTypeItem = useMemo(
     () => (
       <Form.Item
-        name="handleType"
+        name="handlerType"
         label={t(K.HANDLE_TYPE_LABEL)}
         rules={[{ required: true }]}
       >
         <Radio.Group>
-          <Radio value="builtinAction">
+          <Radio value={HandlerType.BuiltinAction}>
             {t(K.EVENTS_HANDLER_BUILTIN_ACTION)}
           </Radio>
-          <Radio value="useProvider">{t(K.EVENTS_HANDLER_USE_PROVIDER)}</Radio>
-          <Radio value="setProp">{t(K.EVENTS_HANDLER_SET_PROP)}</Radio>
-          <Radio value="useMethod">{t(K.EVENTS_HANDLER_USE_METHOD)}</Radio>
+          <Radio value={HandlerType.UseProvider}>
+            {t(K.EVENTS_HANDLER_USE_PROVIDER)}
+          </Radio>
+          <Radio value={HandlerType.SetPorps}>
+            {t(K.EVENTS_HANDLER_SET_PROP)}
+          </Radio>
+          <Radio value={HandlerType.ExectuteMethod}>
+            {t(K.EVENTS_HANDLER_USE_METHOD)}
+          </Radio>
         </Radio.Group>
       </Form.Item>
     ),
@@ -56,14 +79,11 @@ export function LegacyEventConfigForm(
   const ifItem = useMemo(
     () => (
       <Form.Item name="if" label={t(K.IF_LABEL)}>
-        <CodeEditorItem
-          mode="text"
-          theme="tomorrow"
-          minLines={3}
-          tabSize={2}
-          maxLines="Infinity"
-          showLineNumbers={false}
-        />
+        {getCodeEditorItem({
+          showLineNumbers: false,
+          minLines: 3,
+          schemaRef: "#/definitions/UseProviderResolveConf/properties/if",
+        })}
       </Form.Item>
     ),
     [t]
@@ -74,11 +94,11 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handleType !== currentValues.handleType
+          prevValues.handlerType !== currentValues.handlerType
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handleType") === "builtinAction" && (
+          getFieldValue("handlerType") === HandlerType.BuiltinAction && (
             <Form.Item
               name="action"
               label={t(K.SELECT_ACTION_LABEL)}
@@ -105,11 +125,11 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handleType !== currentValues.handleType
+          prevValues.handlerType !== currentValues.handlerType
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handleType") === "useProvider" && (
+          getFieldValue("handlerType") === HandlerType.UseProvider && (
             <Form.Item
               name="providerType"
               label={t(K.PROVIDER_TYPLE_LABEL)}
@@ -134,12 +154,12 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handleType !== currentValues.handleType ||
+          prevValues.handlerType !== currentValues.handlerType ||
           prevValues.providerType !== currentValues.providerType
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handleType") === "useProvider" &&
+          getFieldValue("handlerType") === HandlerType.UseProvider &&
           getFieldValue("providerType") === "provider" && (
             <Form.Item label="Provider" required>
               <Form.Item
@@ -172,12 +192,12 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handleType !== currentValues.handleType ||
+          prevValues.handlerType !== currentValues.handlerType ||
           prevValues.providerType !== currentValues.providerType
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handleType") === "useProvider" &&
+          getFieldValue("handlerType") === HandlerType.UseProvider &&
           getFieldValue("providerType") === "flow" && (
             <Form.Item label="Flow" required>
               <Form.Item
@@ -202,22 +222,44 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
-  const brickIdItem = useMemo(
+  const callbackItem = useMemo(
     () => (
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handleType !== currentValues.handleType
+          prevValues.handlerType !== currentValues.handlerType
         }
       >
         {({ getFieldValue }) =>
-          ["setProp", "useMethod"].includes(getFieldValue("handleType")) && (
+          getFieldValue("handlerType") === HandlerType.UseProvider && (
+            <Form.Item name="callback" label={t(K.CALLBACK_LABEL)}>
+              {getCodeEditorItem()}
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [t]
+  );
+
+  const brickItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType
+        }
+      >
+        {({ getFieldValue }) =>
+          [HandlerType.SetPorps, HandlerType.ExectuteMethod].includes(
+            getFieldValue("handlerType")
+          ) && (
             <Form.Item
-              name="id"
-              label={t(K.BRICK_ID_LABEL)}
+              name="brickSelector"
+              label={t(K.BRICK_SELECTOR_LABEL)}
               rules={[{ required: true }]}
             >
               <AutoComplete></AutoComplete>
@@ -234,11 +276,11 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handleType !== currentValues.handleType
+          prevValues.handlerType !== currentValues.handlerType
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handleType") === "useMethod" && (
+          getFieldValue("handlerType") === HandlerType.ExectuteMethod && (
             <Form.Item
               name="method"
               label={t(K.USE_METHOD_LABEL)}
@@ -256,17 +298,49 @@ export function LegacyEventConfigForm(
   const argsItem = useMemo(
     () => (
       <Form.Item
-        name="args"
-        label={t(K.ARGS_LABEL)}
-        rules={[{ required: true }]}
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType
+        }
       >
-        <CodeEditorItem
-          mode="brick_next_yaml"
-          theme="tomorrow"
-          minLines={6}
-          tabSize={2}
-          maxLines="Infinity"
-        />
+        {({ getFieldValue }) =>
+          [
+            HandlerType.UseProvider,
+            HandlerType.BuiltinAction,
+            HandlerType.ExectuteMethod,
+          ].includes(getFieldValue("handlerType")) && (
+            <Form.Item
+              name="args"
+              label={t(K.ARGS_LABEL)}
+              rules={[{ required: true }]}
+            >
+              {getCodeEditorItem({
+                schemaRef:
+                  "#/definitions/UseProviderResolveConf/properties/args",
+              })}
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [t]
+  );
+
+  const propertiesItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.SetPorps && (
+            <Form.Item name="properties" label={t(K.PROPERTIES_LABEL)}>
+              {getCodeEditorItem()}
+            </Form.Item>
+          )
+        }
       </Form.Item>
     ),
     [t]
@@ -279,17 +353,18 @@ export function LegacyEventConfigForm(
       labelCol={labelCol}
       wrapperCol={wrapperCol}
       onValuesChange={onValuesChange}
-      initialValues={{ handleType: "builtinAction" }}
     >
-      {handleTypeItem}
+      {handlerTypeItem}
       {ifItem}
       {actionItem}
       {providerTypeItem}
       {providerItem}
       {flowApiItem}
-      {brickIdItem}
+      {brickItem}
       {brickMethodItem}
       {argsItem}
+      {propertiesItem}
+      {callbackItem}
     </Form>
   );
 }

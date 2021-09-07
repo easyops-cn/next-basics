@@ -23,3 +23,4 @@ import "./data-providers/BuildProjectOfTemplates";
 import "./events-editor";
 import "./event-config-form";
 import "./custom-processors/getProcessedEvents";
+import "./custom-processors/covertToEventFormValue";

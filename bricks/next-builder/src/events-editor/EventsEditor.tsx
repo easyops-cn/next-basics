@@ -4,7 +4,7 @@ import { BrickEventHandler } from "@next-core/brick-types";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HandlerItem } from "./components/handler-item/HandlerItem";
-import { getHanderType } from "./processor";
+import { getHanderType } from "../shared/visual-events/processEventHandler";
 import styles from "./EventsEditor.module.css";
 
 export interface EventConfig {
