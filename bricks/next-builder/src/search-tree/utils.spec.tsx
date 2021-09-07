@@ -266,7 +266,7 @@ describe("buildTree should work", () => {
                   }}
                 />
               ),
-              isTpl: false,
+              isTpl: true,
               key: "meta/customTemplates",
               title: "customTemplates",
             },
@@ -605,7 +605,7 @@ describe("buildTree should work", () => {
                   }}
                 />
               ),
-              isTpl: false,
+              isTpl: true,
               key: "meta/customTemplates",
               title: "customTemplates",
             },
@@ -941,7 +941,7 @@ describe("fitler should work", () => {
                   }}
                 />
               ),
-              isTpl: false,
+              isTpl: true,
               key: "meta/customTemplates",
               title: "customTemplates",
             },
@@ -1087,7 +1087,7 @@ describe("searchConfig should work", () => {
                 }}
               />
             ),
-            isTpl: false,
+            isTpl: true,
             key: "meta/customTemplates",
             title: "customTemplates",
           },

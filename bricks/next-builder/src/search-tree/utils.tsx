@@ -187,9 +187,6 @@ function traversalArray(
   for (let i = 0; i < treeData.length; i++) {
     const title = getTitle(treeData[i]);
     const path = getPath(options?.parentPath ?? "", String(i));
-    const isTemplate: boolean =
-      options?.isTemplate ||
-      Object.prototype.hasOwnProperty.call(treeData[i], "name");
     let parentId = options.parentId ?? "";
     if (
       (!parentId && treeData[i][symbolForNodeId as any]) ||
@@ -201,7 +198,7 @@ function traversalArray(
       title,
       key: path,
       icon: getTypeIcon(getType(treeData[i])),
-      isTpl: isTemplate,
+      isTpl: options?.isTemplate,
       [NODE_INFO]: clone({
         ...treeData[i],
         [symbolForRealParentId]: parentId,
@@ -225,14 +222,12 @@ function traversalArray(
 function traversalObject(treeData: PlainObject, options: builTreeOptions) {
   const tree: Array<PlainObject> = [];
   let isSlots = false;
-  const isTemplate: boolean =
-    options?.isTemplate ||
-    Object.prototype.hasOwnProperty.call(treeData, "name");
 
   for (const key of Object.keys(treeData)) {
     if (supportKey.includes(key) || options?.isSlots) {
       let isParentRoutes = false;
       let parentId = options?.parentId ?? "";
+      let isTemplate = options?.isTemplate ?? false;
       if (key === "slots") isSlots = true;
       if (key === "routes" && !isParentRouteLock) {
         isParentRouteLock = true;
@@ -242,6 +237,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
         parentId = treeData[key][symbolForNodeId];
       }
       const path = getPath(options?.parentPath ?? "", key);
+      if (path === "meta/customTemplates") isTemplate = true;
       const child: PlainObject = {
         title: key,
         key: path,
