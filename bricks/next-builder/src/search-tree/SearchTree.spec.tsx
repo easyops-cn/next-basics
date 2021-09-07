@@ -286,6 +286,7 @@ describe("titleRender", () => {
             name: "tpl-test-1",
             [symbolForRealParentId]: "B-01",
           },
+          isTpl: true,
         },
       }),
       /* eslint-disable react/jsx-key */
@@ -297,7 +298,7 @@ describe("titleRender", () => {
       </a>,
     ],
     [
-      "brick",
+      "template-brick",
       Object.assign({}, baseProps, {
         nodeData: {
           [NODE_INFO]: {
@@ -305,12 +306,13 @@ describe("titleRender", () => {
             [symbolForRealParentId]: "B-01",
             [symbolForNodeInstanceId]: "B-02",
           },
+          isTpl: true,
         },
       }),
       /* eslint-disable react/jsx-key */
       <a
         style={{ background: null, color: null }}
-        href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0#brick,B-02"
+        href="/next-builder/project/abc/app/next-builder/template/B-01/visualize-builder?fullscreen=1&canvasIndex=0#brick,B-02"
       >
         general-button
       </a>,
@@ -331,6 +333,25 @@ describe("titleRender", () => {
         href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0"
       >
         pagetest
+      </a>,
+    ],
+    [
+      "page-brick",
+      Object.assign({}, baseProps, {
+        nodeData: {
+          [NODE_INFO]: {
+            brick: "general-button",
+            [symbolForRealParentId]: "B-01",
+            [symbolForNodeInstanceId]: "B-02",
+          },
+        },
+      }),
+      /* eslint-disable react/jsx-key */
+      <a
+        style={{ background: null, color: null }}
+        href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0#brick,B-02"
+      >
+        general-button
       </a>,
     ],
     [

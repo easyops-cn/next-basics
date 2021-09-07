@@ -117,6 +117,7 @@ describe("buildTree should work", () => {
                               }}
                             />
                           ),
+                          isTpl: false,
                           key: "routes/0/bricks/0/slots/content/bricks/0",
                           title: "general-button",
                         },
@@ -132,6 +133,7 @@ describe("buildTree should work", () => {
                           style={{ fontSize: 12, margin: "0 2px" }}
                         />
                       ),
+                      isTpl: false,
                       key: "routes/0/bricks/0/slots/content",
                       title: "content",
                       unlink: true,
@@ -148,6 +150,7 @@ describe("buildTree should work", () => {
                       style={{ fontSize: 12, margin: "0 2px" }}
                     />
                   ),
+                  isTpl: false,
                   key: "routes/0/bricks/0",
                   title: "general-button",
                 },
@@ -171,6 +174,7 @@ describe("buildTree should work", () => {
                       style={{ fontSize: 12, margin: "0 2px" }}
                     />
                   ),
+                  isTpl: false,
                   key: "routes/0/bricks/1",
                   title: "general-select",
                 },
@@ -186,6 +190,7 @@ describe("buildTree should work", () => {
                   style={{ fontSize: 12, margin: "0 2px" }}
                 />
               ),
+              isTpl: false,
               key: "routes/0",
               title: "bricks",
             },
@@ -200,6 +205,7 @@ describe("buildTree should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "routes",
           title: "routes",
         },
@@ -225,6 +231,7 @@ describe("buildTree should work", () => {
                       }}
                     />
                   ),
+                  isTpl: true,
                   key: "meta/customTemplates/0",
                   title: "tpl-test-1",
                 },
@@ -244,6 +251,7 @@ describe("buildTree should work", () => {
                       }}
                     />
                   ),
+                  isTpl: true,
                   key: "meta/customTemplates/1",
                   title: "tpl-test-2",
                 },
@@ -258,6 +266,7 @@ describe("buildTree should work", () => {
                   }}
                 />
               ),
+              isTpl: true,
               key: "meta/customTemplates",
               title: "customTemplates",
             },
@@ -272,6 +281,7 @@ describe("buildTree should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "meta",
           title: "meta",
         },
@@ -295,6 +305,7 @@ describe("buildTree should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "routes",
           title: "routes",
         },
@@ -310,6 +321,7 @@ describe("buildTree should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "meta",
           title: "meta",
         },
@@ -343,6 +355,39 @@ describe("buildTree should work", () => {
             [symbolForNodeId]: "router-1",
           },
         ],
+        meta: {
+          customTemplates: [
+            {
+              name: "tpl-test-1",
+              [symbolForNodeId]: "t-01",
+              bricks: [
+                {
+                  brick: "general-button",
+                  properties: {
+                    test: 1,
+                  },
+                  slots: {
+                    content: {
+                      bricks: [
+                        {
+                          brick: "general-button",
+                          [symbolForNodeInstanceId]: "slots-brick",
+                          [symbolForNodeId]: "s-01-01",
+                        },
+                      ],
+                      type: "bricks",
+                      [symbolForNodeInstanceId]: "slot-content",
+                      [symbolForNodeId]: "s-01",
+                    },
+                  },
+                  [symbolForNodeInstanceId]: "123123",
+                  [symbolForNodeId]: "B-02",
+                  path: "${APP.homepage}/test-1",
+                },
+              ],
+            },
+          ],
+        },
       },
       [
         {
@@ -385,6 +430,7 @@ describe("buildTree should work", () => {
                           style={{ fontSize: 12, margin: "0 2px" }}
                         />
                       ),
+                      isTpl: false,
                       key: "routes/0/routes/0/bricks/0",
                       title: "general-view",
                     },
@@ -400,6 +446,7 @@ describe("buildTree should work", () => {
                       style={{ fontSize: 12, margin: "0 2px" }}
                     />
                   ),
+                  isTpl: false,
                   key: "routes/0/routes/0",
                   title: "/images",
                 },
@@ -415,6 +462,7 @@ describe("buildTree should work", () => {
                   style={{ fontSize: 12, margin: "0 2px" }}
                 />
               ),
+              isTpl: false,
               key: "routes/0",
               title: "Project Menu",
             },
@@ -429,8 +477,152 @@ describe("buildTree should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "routes",
           title: "routes",
+        },
+        {
+          $$info: {
+            [symbolForRealParentId]: "",
+          },
+          children: [
+            {
+              $$info: {
+                [symbolForRealParentId]: "",
+              },
+              children: [
+                {
+                  $$info: {
+                    name: "tpl-test-1",
+                    [symbolForNodeId]: "t-01",
+                    [symbolForRealParentId]: "t-01",
+                  },
+                  children: [
+                    {
+                      $$info: {
+                        brick: "general-button",
+                        path: "${APP.homepage}/test-1",
+                        properties: {
+                          test: 1,
+                        },
+                        [symbolForNodeInstanceId]: "123123",
+                        [symbolForNodeId]: "B-02",
+                        [symbolForRealParentId]: "t-01",
+                      },
+                      children: [
+                        {
+                          $$info: {
+                            [symbolForRealParentId]: "t-01",
+                          },
+                          children: [
+                            {
+                              $$info: {
+                                brick: "general-button",
+                                [symbolForNodeInstanceId]: "slots-brick",
+                                [symbolForNodeId]: "s-01-01",
+                                [symbolForRealParentId]: "t-01",
+                              },
+                              icon: (
+                                <GeneralIcon
+                                  icon={{
+                                    color: "cyan",
+                                    icon: "codepen",
+                                    lib: "antd",
+                                    theme: "outlined",
+                                  }}
+                                  style={{
+                                    fontSize: 12,
+                                    margin: "0 2px",
+                                  }}
+                                />
+                              ),
+                              isTpl: true,
+                              key: "meta/customTemplates/0/bricks/0/slots/content/bricks/0",
+                              title: "general-button",
+                            },
+                          ],
+                          icon: (
+                            <GeneralIcon
+                              icon={{
+                                category: "app",
+                                color: "cyan",
+                                icon: "container",
+                                lib: "easyops",
+                              }}
+                              style={{
+                                fontSize: 12,
+                                margin: "0 2px",
+                              }}
+                            />
+                          ),
+                          isTpl: true,
+                          key: "meta/customTemplates/0/bricks/0/slots/content",
+                          title: "content",
+                          unlink: true,
+                        },
+                      ],
+                      icon: (
+                        <GeneralIcon
+                          icon={{
+                            color: "cyan",
+                            icon: "codepen",
+                            lib: "antd",
+                            theme: "outlined",
+                          }}
+                          style={{
+                            fontSize: 12,
+                            margin: "0 2px",
+                          }}
+                        />
+                      ),
+                      isTpl: true,
+                      key: "meta/customTemplates/0/bricks/0",
+                      title: "general-button",
+                    },
+                  ],
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        height: 12,
+                        margin: "0 2px",
+                        width: 12,
+                      }}
+                    />
+                  ),
+                  isTpl: true,
+                  key: "meta/customTemplates/0",
+                  title: "tpl-test-1",
+                },
+              ],
+              icon: (
+                <span
+                  style={{
+                    display: "inline-block",
+                    height: 12,
+                    margin: "0 2px",
+                    width: 12,
+                  }}
+                />
+              ),
+              isTpl: true,
+              key: "meta/customTemplates",
+              title: "customTemplates",
+            },
+          ],
+          icon: (
+            <span
+              style={{
+                display: "inline-block",
+                height: 12,
+                margin: "0 2px",
+                width: 12,
+              }}
+            />
+          ),
+          isTpl: false,
+          key: "meta",
+          title: "meta",
         },
       ],
     ],
@@ -492,6 +684,7 @@ describe("fitler should work", () => {
                               }}
                             />
                           ),
+                          isTpl: false,
                           key: "routes/0/bricks/0/slots/content/bricks/0",
                           title: "general-button",
                           [symbolForHightlight]: true,
@@ -508,6 +701,7 @@ describe("fitler should work", () => {
                           style={{ fontSize: 12, margin: "0 2px" }}
                         />
                       ),
+                      isTpl: false,
                       key: "routes/0/bricks/0/slots/content",
                       title: "content",
                       unlink: true,
@@ -524,6 +718,7 @@ describe("fitler should work", () => {
                       style={{ fontSize: 12, margin: "0 2px" }}
                     />
                   ),
+                  isTpl: false,
                   key: "routes/0/bricks/0",
                   title: "general-button",
                   [symbolForHightlight]: true,
@@ -548,6 +743,7 @@ describe("fitler should work", () => {
                       style={{ fontSize: 12, margin: "0 2px" }}
                     />
                   ),
+                  isTpl: false,
                   key: "routes/0/bricks/1",
                   title: "general-select",
                   [symbolForHightlight]: true,
@@ -564,6 +760,7 @@ describe("fitler should work", () => {
                   style={{ fontSize: 12, margin: "0 2px" }}
                 />
               ),
+              isTpl: false,
               key: "routes/0",
               title: "bricks",
             },
@@ -578,6 +775,7 @@ describe("fitler should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "routes",
           title: "routes",
         },
@@ -630,6 +828,7 @@ describe("fitler should work", () => {
                               }}
                             />
                           ),
+                          isTpl: false,
                           key: "routes/0/bricks/0/slots/content/bricks/0",
                           title: "general-button",
                           [symbolForHightlight]: true,
@@ -646,6 +845,7 @@ describe("fitler should work", () => {
                           style={{ fontSize: 12, margin: "0 2px" }}
                         />
                       ),
+                      isTpl: false,
                       key: "routes/0/bricks/0/slots/content",
                       title: "content",
                       unlink: true,
@@ -662,6 +862,7 @@ describe("fitler should work", () => {
                       style={{ fontSize: 12, margin: "0 2px" }}
                     />
                   ),
+                  isTpl: false,
                   key: "routes/0/bricks/0",
                   title: "general-button",
                   [symbolForHightlight]: true,
@@ -678,6 +879,7 @@ describe("fitler should work", () => {
                   style={{ fontSize: 12, margin: "0 2px" }}
                 />
               ),
+              isTpl: false,
               key: "routes/0",
               title: "bricks",
             },
@@ -692,6 +894,7 @@ describe("fitler should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "routes",
           title: "routes",
         },
@@ -722,6 +925,7 @@ describe("fitler should work", () => {
                       }}
                     />
                   ),
+                  isTpl: true,
                   key: "meta/customTemplates/0",
                   title: "tpl-test-1",
                   [symbolForHightlight]: true,
@@ -737,6 +941,7 @@ describe("fitler should work", () => {
                   }}
                 />
               ),
+              isTpl: true,
               key: "meta/customTemplates",
               title: "customTemplates",
             },
@@ -751,6 +956,7 @@ describe("fitler should work", () => {
               }}
             />
           ),
+          isTpl: false,
           key: "meta",
           title: "meta",
         },
@@ -844,6 +1050,7 @@ describe("searchConfig should work", () => {
                     }}
                   />
                 ),
+                isTpl: true,
                 key: "meta/customTemplates/0",
                 title: "tpl-test-1",
               },
@@ -865,6 +1072,7 @@ describe("searchConfig should work", () => {
                     }}
                   />
                 ),
+                isTpl: true,
                 key: "meta/customTemplates/1",
                 title: "tpl-test-2",
               },
@@ -879,6 +1087,7 @@ describe("searchConfig should work", () => {
                 }}
               />
             ),
+            isTpl: true,
             key: "meta/customTemplates",
             title: "customTemplates",
           },
@@ -893,6 +1102,7 @@ describe("searchConfig should work", () => {
             }}
           />
         ),
+        isTpl: false,
         key: "meta",
         title: "meta",
       },
