@@ -105,6 +105,7 @@ interface builTreeOptions {
   parentPath?: string;
   parentId?: string;
   isSlots?: boolean;
+  isTemplate?: boolean;
 }
 
 export interface SearchConfig {
@@ -186,6 +187,7 @@ function traversalArray(
   for (let i = 0; i < treeData.length; i++) {
     const title = getTitle(treeData[i]);
     const path = getPath(options?.parentPath ?? "", String(i));
+    const isTemplate: boolean = options?.isTemplate || treeData[i]["name"];
     let parentId = options.parentId ?? "";
     if (
       (!parentId && treeData[i][symbolForNodeId as any]) ||
@@ -197,6 +199,7 @@ function traversalArray(
       title,
       key: path,
       icon: getTypeIcon(getType(treeData[i])),
+      isTpl: isTemplate,
       [NODE_INFO]: clone({
         ...treeData[i],
         [symbolForRealParentId]: parentId,
@@ -220,6 +223,7 @@ function traversalArray(
 function traversalObject(treeData: PlainObject, options: builTreeOptions) {
   const tree: Array<PlainObject> = [];
   let isSlots = false;
+  const isTemplate: boolean = options?.isTemplate || treeData["name"];
 
   for (const key of Object.keys(treeData)) {
     if (supportKey.includes(key) || options?.isSlots) {
@@ -238,6 +242,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
         title: key,
         key: path,
         icon: getTypeIcon(getType(treeData[key])),
+        isTpl: isTemplate,
         [NODE_INFO]: clone({
           // ...treeData[key],
           [symbolForRealParentId]: parentId,
@@ -249,6 +254,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
         isSlots,
         parentPath: path,
         parentId,
+        isTemplate,
       });
       if (subTree.length > 0) child.children = subTree;
       if (ingoreKey.includes(key) || (key === "routes" && !isParentRoutes)) {

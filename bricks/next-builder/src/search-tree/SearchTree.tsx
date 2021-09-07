@@ -40,15 +40,22 @@ export const titleRender = (props: {
   };
   if (nodeData[NODE_INFO]?.[symbolForRealParentId] && !nodeData.unlink) {
     let url = "";
-    if (nodeData[NODE_INFO].name) {
+    if (nodeData.isTpl) {
       // template
-      url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO][symbolForRealParentId]}/visualize-builder?fullscreen=1`;
-    } else if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
-      // brick
-      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
+      if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
+        // brick
+        url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO][symbolForRealParentId]}/visualize-builder?fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
+      } else {
+        url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO][symbolForRealParentId]}/visualize-builder?fullscreen=1`;
+      }
     } else {
       // page
-      url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0`;
+      if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
+        // brick
+        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
+      } else {
+        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0`;
+      }
     }
     nodeData.url = url;
     return (
