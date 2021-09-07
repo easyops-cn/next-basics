@@ -187,7 +187,9 @@ function traversalArray(
   for (let i = 0; i < treeData.length; i++) {
     const title = getTitle(treeData[i]);
     const path = getPath(options?.parentPath ?? "", String(i));
-    const isTemplate: boolean = options?.isTemplate || treeData[i]["name"];
+    const isTemplate: boolean =
+      options?.isTemplate ||
+      Object.prototype.hasOwnProperty.call(treeData[i], "name");
     let parentId = options.parentId ?? "";
     if (
       (!parentId && treeData[i][symbolForNodeId as any]) ||
@@ -223,7 +225,9 @@ function traversalArray(
 function traversalObject(treeData: PlainObject, options: builTreeOptions) {
   const tree: Array<PlainObject> = [];
   let isSlots = false;
-  const isTemplate: boolean = options?.isTemplate || treeData["name"];
+  const isTemplate: boolean =
+    options?.isTemplate ||
+    Object.prototype.hasOwnProperty.call(treeData, "name");
 
   for (const key of Object.keys(treeData)) {
     if (supportKey.includes(key) || options?.isSlots) {
