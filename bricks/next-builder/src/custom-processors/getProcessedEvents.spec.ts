@@ -27,6 +27,10 @@ describe("getProcessedEvents", () => {
         { useProvider: "cmdb-provider", args: ["bbc"] },
         { target: "#id2", method: "setArgs" },
       ],
+      "general.select.click": {
+        action: "message.success",
+        args: ["successs"],
+      },
     } as BrickEventsMap;
     expect(getProcessedEvents(eventsInfo, eventMap)).toEqual([
       {
@@ -49,6 +53,15 @@ describe("getProcessedEvents", () => {
         ],
       },
       { name: "general.select.search", events: [] },
+      {
+        name: "general.select.click",
+        events: [
+          {
+            action: "message.success",
+            args: ["successs"],
+          },
+        ],
+      },
     ]);
 
     expect(getProcessedEvents()).toEqual([]);

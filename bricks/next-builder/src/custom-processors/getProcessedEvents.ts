@@ -1,4 +1,5 @@
 import { getRuntime } from "@next-core/brick-kit";
+import { castArray } from "lodash";
 import { BrickEventsMap, BrickEventHandler } from "@next-core/brick-types";
 
 interface EventsInfo {
@@ -8,7 +9,7 @@ interface EventsInfo {
 
 interface ProcessEvent {
   name?: string;
-  events?: BrickEventHandler | BrickEventHandler[];
+  events?: BrickEventHandler[];
 }
 
 export function getProcessedEvents(
@@ -17,15 +18,18 @@ export function getProcessedEvents(
 ): ProcessEvent[] {
   const processedEvents = [] as ProcessEvent[];
 
-  for (const [name, events] of Object.entries(eventsMap)) {
-    processedEvents.push({ name, events: [].concat(events) });
-  }
-
-  eventsInfo?.forEach((event) => {
-    if (!processedEvents.some((item) => item?.name === event.type)) {
-      processedEvents.push({ name: event.type, events: [] });
-    }
+  eventsInfo?.forEach((info) => {
+    processedEvents.push({ name: info.type, events: [] });
   });
+
+  for (const [name, events] of Object.entries(eventsMap)) {
+    const find = processedEvents.find((item) => item.name === name);
+    if (find) {
+      find.events.push(...castArray(events));
+    } else {
+      processedEvents.push({ name, events: castArray(events) });
+    }
+  }
 
   return processedEvents;
 }

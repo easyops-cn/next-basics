@@ -19,32 +19,34 @@
   }
 }
 
-.builtinAction {
-  .icon {
-    color: #41c6cc;
-  }
+.callback {
+  padding: 5px 17px;
 }
 
-.useProvider {
-  .icon {
-    color: #f8a235;
-  }
+.ifTag {
+  padding: 0px 5px;
+  font-size: 12px;
+  border-radius: 3px;
+  color: #fff;
+  background: #c1c1c1;
 }
 
-.exectuteMethod {
-  .icon {
-    color: #45a643;
-  }
+.builtinAction > .handleContainer > .icon {
+  color: #41c6cc;
 }
 
-.setPorps {
-  .icon {
-    color: #9760e4;
-  }
+.useProvider > .handleContainer > .icon {
+  color: #f8a235;
 }
 
-.unkown {
-  .icon {
-    color: #f0493c;
-  }
+.exectuteMethod > .handleContainer > .icon {
+  color: #45a643;
+}
+
+.setPorps > .handleContainer > .icon {
+  color: #9760e4;
+}
+
+.unkown > .handleContainer > .icon {
+  color: #f0493c;
 }

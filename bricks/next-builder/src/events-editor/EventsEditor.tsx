@@ -73,25 +73,17 @@ export function EventsEditor(props: EventsEditorProps): React.ReactElement {
             </div>
 
             <div className={styles.eventhandler}>
-              {item.events.map((e, index) => (
+              {item.events.map((row, rowIndex) => (
                 <HandlerItem
-                  key={index}
-                  type={getHanderType(e)}
-                  handler={e}
+                  key={rowIndex}
+                  type={getHanderType(row)}
+                  handler={row}
                 ></HandlerItem>
               ))}
             </div>
           </div>
         ))}
       </div>
-
-      {/* <EventItem
-        type="title"
-        enableEdit
-        title="tpl-create-function-content"
-        icon={{ icon: "cube", lib: "fa", prefix: "fas", color: "#fff" }}
-        events={props.events}
-      ></EventItem> */}
     </EditorContext.Provider>
   );
 }
