@@ -11,7 +11,12 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
+.dropdownLabelBox {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 150px;
+}
 .dropdownArrow {
   flex-shrink: 0;
   margin-left: 12px;
