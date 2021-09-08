@@ -1,3 +1,5 @@
+// istanbul ignore file
+// Ignore tests temporarily
 import React, { createRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BrickEventHandler } from "@next-core/brick-types";

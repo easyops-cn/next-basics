@@ -12,7 +12,7 @@ import {
   isFlowAPiProvider,
 } from "../shared//visual-events/processEventHandler";
 import { HandlerType } from "../shared//visual-events/interfaces";
-import { omit } from "lodash";
+import { identity, omit, pickBy } from "lodash";
 
 export function covertToEventFormValue(handler: BrickEventHandler): any {
   const handlerType = getHanderType(handler);
@@ -21,10 +21,15 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
     return {
       handlerType,
       action: (handler as BuiltinBrickEventHandler).action,
-      ...safeDumpFields({
-        if: handler.if,
-        args: (handler as BuiltinBrickEventHandler).args,
-      }),
+      ...safeDumpFields(
+        pickBy(
+          {
+            if: handler.if,
+            args: (handler as BuiltinBrickEventHandler).args,
+          },
+          identity
+        )
+      ),
     };
   } else if (handlerType === HandlerType.UseProvider) {
     const providerType = isFlowAPiProvider(
@@ -40,12 +45,17 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
       providerType,
       pollEnabled: poll?.enabled,
       ...(providerType === "flow" ? { flow: provider } : { provider }),
-      ...safeDumpFields({
-        if: handler.if,
-        args: (handler as UseProviderEventHandler).args,
-        callback: (handler as UseProviderEventHandler).callback,
-        ...(poll ? { poll: omit(poll, "enabled") } : {}),
-      }),
+      ...safeDumpFields(
+        pickBy(
+          {
+            if: handler.if,
+            args: (handler as UseProviderEventHandler).args,
+            callback: (handler as UseProviderEventHandler).callback,
+            poll: poll ? omit(poll, "enabled") : undefined,
+          },
+          identity
+        )
+      ),
     };
   } else if (handlerType === HandlerType.SetPorps) {
     const selectorType = "targetRef" in handler ? "targetRef" : "target";
@@ -53,10 +63,15 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
       handlerType,
       selectorType,
       brickSelector: (handler as SetPropsCustomBrickEventHandler)[selectorType],
-      ...safeDumpFields({
-        if: handler.if,
-        properties: (handler as SetPropsCustomBrickEventHandler).properties,
-      }),
+      ...safeDumpFields(
+        pickBy(
+          {
+            if: handler.if,
+            properties: (handler as SetPropsCustomBrickEventHandler).properties,
+          },
+          identity
+        )
+      ),
     };
   } else if (handlerType === HandlerType.ExectuteMethod) {
     const selectorType = "targetRef" in handler ? "targetRef" : "target";
@@ -65,10 +80,15 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
       selectorType,
       brickSelector: (handler as ExecuteCustomBrickEventHandler)[selectorType],
       method: (handler as ExecuteCustomBrickEventHandler).method,
-      ...safeDumpFields({
-        if: handler.if,
-        args: (handler as ExecuteCustomBrickEventHandler).args,
-      }),
+      ...safeDumpFields(
+        pickBy(
+          {
+            if: handler.if,
+            args: (handler as ExecuteCustomBrickEventHandler).args,
+          },
+          identity
+        )
+      ),
     };
   } else {
     return {};
