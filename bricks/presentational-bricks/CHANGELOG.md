@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.212.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.211.3...@next-bricks/presentational-bricks@1.212.0) (2021-09-08)
+
+
+### Features
+
+* 下拉菜单支持多选、支持新的下拉按钮显示样式 Closed SERVICE_OBSERVE-380 ([cd82c16](https://github.com/easyops-cn/next-basics/commit/cd82c166ea461eb4eaecbf145d4dd3e7b07ebf29))
+
+
+
+
+
 ## [1.211.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.211.2...@next-bricks/presentational-bricks@1.211.3) (2021-09-07)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
