@@ -32,6 +32,13 @@ export class DropdownSelectElement extends UpdatingElement {
   selectChange: EventEmitter<{ value: any; item: any }>;
 
   /**
+   * @detail {value: any}
+   * @description 多选选项选中事件
+   */
+  @event({ type: "multiple.select.change", cancelable: true })
+  multipleSelectChange: EventEmitter<{ value: any }>;
+
+  /**
    * @required false
    * @default -
    * @description 选项列表，不能与 dataSource + label + optionTitle + optionContent + valuePath 同时使用
@@ -94,6 +101,59 @@ export class DropdownSelectElement extends UpdatingElement {
    */
   @property() valuePath?: string;
 
+  /**
+   * @kind string[]
+   * @required false
+   * @default []
+   * @description 多选的选中项
+   */
+
+  @property({ attribute: false }) selectedKeys?: string[] = [];
+  /**
+   * @kind string[]
+   * @required false
+   * @default []
+   * @description 多选的默认选中项
+   */
+  @property({ attribute: false }) defaultSelectedKeys?: string[] = [];
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否支持多选，支持多选时，单选的value属性失效
+   */
+  @property({ type: Boolean }) multipleSelect?: boolean;
+
+  /**
+   * @kind MenuIcon
+   * @required false
+   * @default -
+   * @description 按钮 icon，支持[icon 图标库](developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  buttonIcon: any;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 多选时，当前label仅支持显示从构件外部传入,multipleLabel属性仅在dropdownButtonType为multiple时生效
+   */
+  @property() multipleLabel?: string;
+
+  /**
+   * @kind "default" | "shape"
+   * @required false
+   * @default "default"
+   * @description 设置下拉选择器按钮样式
+   */
+  @property()
+  dropdownButtonType: "default" | "shape";
+
   connectedCallback(): void {
     this.style.display = "inline-block";
     this._render();
@@ -102,10 +162,15 @@ export class DropdownSelectElement extends UpdatingElement {
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
   }
-
+  // istanbul ignore next
   private _handleChange = (value: any, item: any) => {
     this.value = value;
     this.selectChange.emit({ value, item });
+  };
+  // istanbul ignore next
+  private _multipleSelectChange = (value: any) => {
+    this.selectedKeys = value;
+    this.multipleSelectChange.emit({ value });
   };
 
   protected _render(): void {
@@ -124,6 +189,13 @@ export class DropdownSelectElement extends UpdatingElement {
             optionContent={this.optionContent}
             valuePath={this.valuePath}
             onChange={this._handleChange}
+            selectedKeys={this.selectedKeys}
+            defaultSelectedKeys={this.defaultSelectedKeys}
+            multipleSelect={this.multipleSelect}
+            onSelect={this._multipleSelectChange}
+            buttonIcon={this.buttonIcon}
+            multipleLabel={this.multipleLabel}
+            dropdownButtonType={this.dropdownButtonType}
           />
         </BrickWrapper>,
         this

@@ -43,9 +43,8 @@ describe("DropdownSelect", () => {
     fireEvent.click(dropdownTrigger);
     dropdownTriggerIcon = dropdownTrigger.querySelector(".anticon");
     expect(dropdownTriggerIcon).toHaveClass("anticon-caret-up");
-    const dropdownMenu = container.ownerDocument.querySelector(
-      ".ant-dropdown-menu"
-    );
+    const dropdownMenu =
+      container.ownerDocument.querySelector(".ant-dropdown-menu");
     const item = props.dataSource[0];
     const optionEl = dropdownMenu.children[0];
     expect(optionEl.querySelector(".optionTitle")).toHaveTextContent(
@@ -88,9 +87,8 @@ describe("DropdownSelect", () => {
       dropdownTrigger.querySelector(".dropdownLabel").childNodes[0].textContent
     ).toEqual(option.label);
     fireEvent.click(dropdownTrigger);
-    const dropdownMenu = container.ownerDocument.querySelector(
-      ".ant-dropdown-menu"
-    );
+    const dropdownMenu =
+      container.ownerDocument.querySelector(".ant-dropdown-menu");
     const optionEl = dropdownMenu.children[0];
     expect(optionEl.querySelector(".optionTitle")).toHaveTextContent(
       option.label
@@ -100,5 +98,38 @@ describe("DropdownSelect", () => {
     );
     fireEvent.click(optionEl);
     expect(mockOnChange).toBeCalledWith(option.value, option);
+  });
+
+  it("should work with multiple", () => {
+    const options = [
+      {
+        label: "label1",
+        content: "content1",
+        value: "value1",
+      },
+      {
+        label: "label2",
+        content: "content2",
+        value: "value2",
+      },
+    ];
+    const option = options[0];
+    const value = option.value;
+    const mockOnChange = jest.fn();
+    const { getByTestId, container, rerender } = render(
+      <DropdownSelect
+        options={options}
+        multipleLabel={"666"}
+        multipleSelect={true}
+        dropdownButtonType={"shape"}
+        value={value}
+        onChange={mockOnChange}
+      />
+    );
+    const dropdownTrigger = getByTestId("dropdown-trigger-multiple");
+    expect(
+      dropdownTrigger.querySelector(".dropdownLabelBox").childNodes[0]
+        .textContent
+    ).toEqual("666");
   });
 });
