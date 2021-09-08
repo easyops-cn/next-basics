@@ -36,6 +36,7 @@ const callbackEvents = [
   { type: "success" },
   { type: "error" },
   { type: "finally" },
+  { type: "progress" },
 ];
 
 export function HandlerItem(props: HandlerItemProps): React.ReactElement {
@@ -72,7 +73,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
         <div className={styles.handler}>{getHandlerName(handler)}</div>
         {!isNil(handler.if) && <span className={styles.ifTag}>if</span>}
       </div>
-      {(handler as UseProviderEventHandler).callback && (
+      {type === HandlerType.UseProvider && (
         <div
           className={classNames(sharedStyle.eventWrapper, styles.callback)}
           ref={contentWrapperRef}

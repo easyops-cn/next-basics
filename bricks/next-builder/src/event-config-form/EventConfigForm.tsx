@@ -1,14 +1,29 @@
-import React, { forwardRef, useMemo, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  useMemo,
+  useImperativeHandle,
+  useCallback,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import { CodeEditorItem } from "@next-libs/editor-components";
-import { Form, Radio, AutoComplete, Tooltip } from "antd";
+import {
+  Form,
+  Radio,
+  AutoComplete,
+  Tooltip,
+  Input,
+  Select,
+  Switch,
+} from "antd";
 import { FileSearchOutlined } from "@ant-design/icons";
 import { ColProps } from "antd/lib/col";
+import { RadioChangeEvent } from "antd/lib/radio";
 import { buildtinActions } from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
 import { HandlerType } from "../shared/visual-events/interfaces";
+import { isNil } from "lodash";
 
 export interface EventConfigForm {
   labelCol?: ColProps;
@@ -50,6 +65,19 @@ export function LegacyEventConfigForm(
     );
   };
 
+  const HandleTypeChange = useCallback(
+    (e: RadioChangeEvent): void => {
+      const type = e.target.value;
+      if (
+        type === HandlerType.UseProvider &&
+        isNil(form.getFieldValue("providerType"))
+      ) {
+        form.setFieldsValue({ providerType: "provider" });
+      }
+    },
+    [form]
+  );
+
   const handlerTypeItem = useMemo(
     () => (
       <Form.Item
@@ -57,7 +85,7 @@ export function LegacyEventConfigForm(
         label={t(K.HANDLE_TYPE_LABEL)}
         rules={[{ required: true }]}
       >
-        <Radio.Group>
+        <Radio.Group onChange={HandleTypeChange}>
           <Radio value={HandlerType.BuiltinAction}>
             {t(K.EVENTS_HANDLER_BUILTIN_ACTION)}
           </Radio>
@@ -73,7 +101,7 @@ export function LegacyEventConfigForm(
         </Radio.Group>
       </Form.Item>
     ),
-    [t]
+    [t, HandleTypeChange]
   );
 
   const ifItem = useMemo(
@@ -225,6 +253,53 @@ export function LegacyEventConfigForm(
     [t]
   );
 
+  const pollEnabledItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.UseProvider && (
+            <Form.Item
+              label={t(K.POLLING_LABEL)}
+              name="pollEnabled"
+              valuePropName="checked"
+            >
+              <Switch></Switch>
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [t]
+  );
+
+  const pollItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.pollingEnabled !== currentValues.handlerType
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("pollEnabled") && (
+            <Form.Item name="poll" wrapperCol={{ offset: labelCol.span }}>
+              {getCodeEditorItem({
+                placeholder: t(K.POLLING_ITEM_PLACEHOLDER),
+              })}
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [labelCol, t]
+  );
+
   const callbackItem = useMemo(
     () => (
       <Form.Item
@@ -257,12 +332,24 @@ export function LegacyEventConfigForm(
           [HandlerType.SetPorps, HandlerType.ExectuteMethod].includes(
             getFieldValue("handlerType")
           ) && (
-            <Form.Item
-              name="brickSelector"
-              label={t(K.BRICK_SELECTOR_LABEL)}
-              rules={[{ required: true }]}
-            >
-              <AutoComplete></AutoComplete>
+            <Form.Item label={t(K.BRICK_SELECTOR_LABEL)} required>
+              <Input.Group compact>
+                <Form.Item name="selectorType" noStyle initialValue="target">
+                  <Select style={{ width: "105px" }}>
+                    <Select.Option value="target">target</Select.Option>
+                    <Select.Option value="targetRef">targetRef</Select.Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="brickSelector"
+                  noStyle
+                  rules={[{ required: true }]}
+                >
+                  <AutoComplete
+                    style={{ width: "calc(100% - 105px)" }}
+                  ></AutoComplete>
+                </Form.Item>
+              </Input.Group>
             </Form.Item>
           )
         }
@@ -364,6 +451,8 @@ export function LegacyEventConfigForm(
       {brickMethodItem}
       {argsItem}
       {propertiesItem}
+      {pollEnabledItem}
+      {pollItem}
       {callbackItem}
     </Form>
   );

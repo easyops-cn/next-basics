@@ -12,6 +12,7 @@ import {
   isFlowAPiProvider,
 } from "../shared//visual-events/processEventHandler";
 import { HandlerType } from "../shared//visual-events/interfaces";
+import { omit } from "lodash";
 
 export function covertToEventFormValue(handler: BrickEventHandler): any {
   const handlerType = getHanderType(handler);
@@ -31,34 +32,38 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
     )
       ? "flow"
       : "provider";
+
+    const poll = (handler as UseProviderEventHandler).poll;
     const provider = (handler as UseProviderEventHandler).useProvider;
     return {
       handlerType,
       providerType,
+      pollEnabled: poll?.enabled,
       ...(providerType === "flow" ? { flow: provider } : { provider }),
       ...safeDumpFields({
         if: handler.if,
         args: (handler as UseProviderEventHandler).args,
         callback: (handler as UseProviderEventHandler).callback,
+        ...(poll ? { poll: omit(poll, "enabled") } : {}),
       }),
     };
   } else if (handlerType === HandlerType.SetPorps) {
+    const selectorType = "targetRef" in handler ? "targetRef" : "target";
     return {
       handlerType,
-      brickSelector:
-        (handler as SetPropsCustomBrickEventHandler).target ||
-        (handler as SetPropsCustomBrickEventHandler).targetRef,
+      selectorType,
+      brickSelector: (handler as SetPropsCustomBrickEventHandler)[selectorType],
       ...safeDumpFields({
         if: handler.if,
         properties: (handler as SetPropsCustomBrickEventHandler).properties,
       }),
     };
   } else if (handlerType === HandlerType.ExectuteMethod) {
+    const selectorType = "targetRef" in handler ? "targetRef" : "target";
     return {
       handlerType,
-      brickSelector:
-        (handler as ExecuteCustomBrickEventHandler).target ||
-        (handler as ExecuteCustomBrickEventHandler).targetRef,
+      selectorType,
+      brickSelector: (handler as ExecuteCustomBrickEventHandler)[selectorType],
       method: (handler as ExecuteCustomBrickEventHandler).method,
       ...safeDumpFields({
         if: handler.if,

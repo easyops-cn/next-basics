@@ -89,6 +89,8 @@ const locale: Locale = {
   [K.PROPERTIES_LABEL]: "Properties",
   [K.BUILTIN_PROVIDER]: "Builtin Provider",
   [K.IF_LABEL]: "If",
+  [K.POLLING_LABEL]: "Polling",
+  [K.POLLING_ITEM_PLACEHOLDER]: "Please input polling parameters",
   [K.FLOW_API]: "Flow Api",
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]:
     "Link to provider documents of developers",

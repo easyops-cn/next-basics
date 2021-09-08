@@ -86,6 +86,8 @@ const locale: Locale = {
   [K.ARGS_LABEL]: "参数",
   [K.HANDLE_TYPE_LABEL]: "处理类型",
   [K.CALLBACK_LABEL]: "回调",
+  [K.POLLING_LABEL]: "轮询",
+  [K.POLLING_ITEM_PLACEHOLDER]: "请填写轮询相关参数",
   [K.BUILTIN_PROVIDER]: "内置Provider",
   [K.IF_LABEL]: "条件IF",
   [K.FLOW_API]: "Flow编排",
