@@ -81,5 +81,98 @@ export const BrickDescriptionsStory: Story = {
         },
       },
     },
+    {
+      brick: "presentational-bricks.brick-descriptions",
+      description: {
+        title: "设置需要隐藏的列表项",
+      },
+      properties: {
+        itemList: [
+          {
+            text: "Lynette1",
+            label: "UserName1",
+            group: "a",
+          },
+          {
+            text: "18",
+            label: "Age1",
+            group: "a",
+          },
+          {
+            label: "Tags1",
+            group: "a",
+            useBrick: {
+              brick: "presentational-bricks.brick-tag",
+              transform: {
+                tagList: "@{tags}",
+              },
+              properties: {
+                configProps: {
+                  color: "orange",
+                },
+                showCard: false,
+              },
+            },
+          },
+          {
+            text: "Lynette2",
+            label: "UserName2",
+            group: "b",
+          },
+          {
+            text: "19",
+            label: "Age2",
+            group: "b",
+          },
+          {
+            label: "Tags2",
+            group: "b",
+            useBrick: {
+              brick: "presentational-bricks.brick-tag",
+              transform: {
+                tagList: "@{tags}",
+              },
+              properties: {
+                configProps: {
+                  color: "orange",
+                },
+                showCard: false,
+              },
+            },
+          },
+          {
+            text: "Lynette3",
+            label: "UserName3",
+            group: "c",
+          },
+          {
+            text: "20",
+            label: "Age3",
+            group: "c",
+          },
+          {
+            label: "Tags3",
+            group: "c",
+            useBrick: {
+              brick: "presentational-bricks.brick-tag",
+              transform: {
+                tagList: "@{tags}",
+              },
+              properties: {
+                configProps: {
+                  color: "orange",
+                },
+                showCard: false,
+              },
+            },
+          },
+        ],
+        descriptionTitle: "User Info",
+        dataSource: {
+          tags: ["user"],
+        },
+        hideGroups: ["b"],
+      },
+    },
   ],
 };
