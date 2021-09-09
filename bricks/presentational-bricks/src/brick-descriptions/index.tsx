@@ -17,6 +17,10 @@ export interface BrickDescriptionsItemProps
   text: string;
   id?: string;
   /**
+   * 所属分组
+   */
+  group?: string;
+  /**
    * 该 item 的 text 取自 dataSource 的哪个字段
    */
   field?: string;
@@ -149,6 +153,18 @@ export class BrickDescriptionsElement extends UpdatingElement {
   configProps: DescriptionsProps;
 
   /**
+   * @kind string[] | string
+   * @required false
+   * @default -
+   * @description 设置需要隐藏的描述列表项。请先在 itemList 中定义列表项所属 group
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  hideGroups: string[] | string;
+
+  /**
    * @kind Record<string, any>
    * @required false
    * @default -
@@ -200,6 +216,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
         size={this.size}
         bordered={this.bordered}
         layout={this.layout}
+        hideGroups={this.hideGroups}
       />
     );
   }

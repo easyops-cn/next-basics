@@ -1,8 +1,6 @@
 import React from "react";
 import { Descriptions, Card } from "antd";
-import {
-  DescriptionsProps,
-} from "antd/lib/descriptions";
+import { DescriptionsProps } from "antd/lib/descriptions";
 import { isPlainObject } from "lodash";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import styles from "./BrickDescriptions.module.css";
@@ -17,12 +15,15 @@ export interface BrickDescriptionsProps {
   size?: "default" | "middle" | "small";
   bordered?: boolean;
   layout?: "horizontal" | "vertical";
+  hideGroups?: string[] | string;
 }
 
 export function BrickDescriptions(
   props: BrickDescriptionsProps
 ): React.ReactElement {
-  const { configProps, itemList } = props;
+  const { configProps, itemList, hideGroups } = props;
+
+  const hideGroupsSet = new Set(hideGroups);
   // istanbul ignore next
   const renderLegacyComponent = (
     item: BrickDescriptionsItemProps
@@ -82,24 +83,26 @@ export function BrickDescriptions(
       className={styles.descriptionWrapper}
       {...configProps}
     >
-      {itemList?.map((item, idx) => {
-        const { text, component, useBrick, ...itemProps } = item;
-        return (
-          <Descriptions.Item
-            key={item.id || idx}
-            {...itemProps}
-            className={styles.descriptionItem}
-          >
-            {useBrick
-              ? renderBrick(item)
-              : component
-              ? renderLegacyComponent(item)
-              : isPlainObject(text)
-              ? JSON.stringify(text)
-              : text}
-          </Descriptions.Item>
-        );
-      })}
+      {itemList
+        ?.filter((item) => !hideGroupsSet.has(item.group))
+        .map((item, idx) => {
+          const { text, component, useBrick, ...itemProps } = item;
+          return (
+            <Descriptions.Item
+              key={item.id || idx}
+              {...itemProps}
+              className={styles.descriptionItem}
+            >
+              {useBrick
+                ? renderBrick(item)
+                : component
+                ? renderLegacyComponent(item)
+                : isPlainObject(text)
+                ? JSON.stringify(text)
+                : text}
+            </Descriptions.Item>
+          );
+        })}
     </Descriptions>
   );
 }
