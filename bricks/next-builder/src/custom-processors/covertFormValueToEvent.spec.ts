@@ -52,7 +52,7 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.ExectuteMethod,
+        handlerType: HandlerType.ExecuteMethod,
         selectorType: "target",
         brickSelector: "#create-form",
         method: "setInitValue",
@@ -66,7 +66,7 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.ExectuteMethod,
+        handlerType: HandlerType.ExecuteMethod,
         selectorType: "targetRef",
         brickSelector: "create-form-ref",
         method: "setInitValue",
@@ -80,7 +80,7 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.SetPorps,
+        handlerType: HandlerType.SetProps,
         selectorType: "target",
         brickSelector: "#create-form",
         properties: "a: 3",
@@ -92,7 +92,7 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.SetPorps,
+        handlerType: HandlerType.SetProps,
         selectorType: "targetRef",
         brickSelector: "create-form-ref",
         properties: "a: 3",

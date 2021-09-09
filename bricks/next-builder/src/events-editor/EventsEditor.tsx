@@ -12,7 +12,7 @@ import { BrickEventHandler } from "@next-core/brick-types";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HandlerItem } from "./components/handler-item/HandlerItem";
-import { getHanderType } from "../shared/visual-events/processEventHandler";
+import { getHandlerType } from "../shared/visual-events/processEventHandler";
 import styles from "./EventsEditor.module.css";
 import { get, set } from "lodash";
 
@@ -152,7 +152,7 @@ export function LegacyEventsEditor(
               {item.events.map((row, rowIndex) => (
                 <HandlerItem
                   key={rowIndex}
-                  type={getHanderType(row)}
+                  type={getHandlerType(row)}
                   handler={row}
                   uniqKey={`${index}-events-${rowIndex}`}
                 ></HandlerItem>

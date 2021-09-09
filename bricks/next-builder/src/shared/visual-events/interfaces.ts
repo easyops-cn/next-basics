@@ -3,9 +3,9 @@ import { BrickEventHandler } from "@next-core/brick-types";
 export enum HandlerType {
   BuiltinAction = "builtinAction",
   UseProvider = "useProvider",
-  ExectuteMethod = "exectuteMethod",
-  SetPorps = "setPorps",
-  Unkown = "unkown",
+  ExecuteMethod = "executeMethod",
+  SetProps = "setProps",
+  Unknown = "unknown",
 }
 
 export interface EventsInfo {

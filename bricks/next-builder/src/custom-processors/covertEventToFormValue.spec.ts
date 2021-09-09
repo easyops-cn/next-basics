@@ -58,7 +58,7 @@ describe("covertToEventFormValue", () => {
     [
       { target: "#create-form", properties: { value: { a: 4 } } },
       {
-        handlerType: "setPorps",
+        handlerType: "setProps",
         properties: "value:\n  a: 4\n",
         brickSelector: "#create-form",
         selectorType: "target",
@@ -67,7 +67,7 @@ describe("covertToEventFormValue", () => {
     [
       { targetRef: "create-form-ref", properties: { value: { a: 4 } } },
       {
-        handlerType: "setPorps",
+        handlerType: "setProps",
         properties: "value:\n  a: 4\n",
         brickSelector: "create-form-ref",
         selectorType: "targetRef",
@@ -78,7 +78,7 @@ describe("covertToEventFormValue", () => {
       {
         args: "- a: 3\n",
         brickSelector: "#create-form",
-        handlerType: "exectuteMethod",
+        handlerType: "executeMethod",
         method: "setInitValue",
         selectorType: "target",
       },
@@ -92,7 +92,7 @@ describe("covertToEventFormValue", () => {
       {
         args: "- a: 3\n",
         brickSelector: "create-form-ref",
-        handlerType: "exectuteMethod",
+        handlerType: "executeMethod",
         method: "setInitValue",
         selectorType: "targetRef",
       },

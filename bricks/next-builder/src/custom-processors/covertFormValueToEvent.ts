@@ -45,7 +45,7 @@ export function covertFormValueToEvent(
       useProvider,
       ...loadFields,
     } as UseProviderEventHandler;
-  } else if (formValue.handlerType === HandlerType.ExectuteMethod) {
+  } else if (formValue.handlerType === HandlerType.ExecuteMethod) {
     return {
       ...(formValue.selectorType === "target"
         ? { target: formValue.brickSelector }
@@ -56,7 +56,7 @@ export function covertFormValueToEvent(
         args: formValue.args,
       }),
     } as ExecuteCustomBrickEventHandler;
-  } else if (formValue.handlerType === HandlerType.SetPorps) {
+  } else if (formValue.handlerType === HandlerType.SetProps) {
     return {
       ...(formValue.selectorType === "target"
         ? { target: formValue.brickSelector }

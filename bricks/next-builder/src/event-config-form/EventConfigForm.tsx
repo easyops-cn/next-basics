@@ -22,7 +22,7 @@ import {
 import { FileSearchOutlined } from "@ant-design/icons";
 import { ColProps } from "antd/lib/col";
 import { RadioChangeEvent } from "antd/lib/radio";
-import { buildtinActions } from "../shared/visual-events/constants";
+import { builtinActions } from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
 import { HandlerType } from "../shared/visual-events/interfaces";
 import { isNil } from "lodash";
@@ -94,10 +94,10 @@ export function LegacyEventConfigForm(
           <Radio value={HandlerType.UseProvider}>
             {t(K.EVENTS_HANDLER_USE_PROVIDER)}
           </Radio>
-          <Radio value={HandlerType.SetPorps}>
+          <Radio value={HandlerType.SetProps}>
             {t(K.EVENTS_HANDLER_SET_PROP)}
           </Radio>
-          <Radio value={HandlerType.ExectuteMethod}>
+          <Radio value={HandlerType.ExecuteMethod}>
             {t(K.EVENTS_HANDLER_USE_METHOD)}
           </Radio>
         </Radio.Group>
@@ -135,7 +135,7 @@ export function LegacyEventConfigForm(
               rules={[{ required: true }]}
             >
               <AutoComplete
-                options={buildtinActions?.map((action) => ({ value: action }))}
+                options={builtinActions?.map((action) => ({ value: action }))}
                 filterOption={(inputValue, option) =>
                   option?.value
                     .toUpperCase()
@@ -331,7 +331,7 @@ export function LegacyEventConfigForm(
         }
       >
         {({ getFieldValue }) =>
-          [HandlerType.SetPorps, HandlerType.ExectuteMethod].includes(
+          [HandlerType.SetProps, HandlerType.ExecuteMethod].includes(
             getFieldValue("handlerType")
           ) && (
             <Form.Item label={t(K.BRICK_SELECTOR_LABEL)} required>
@@ -369,7 +369,7 @@ export function LegacyEventConfigForm(
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handlerType") === HandlerType.ExectuteMethod && (
+          getFieldValue("handlerType") === HandlerType.ExecuteMethod && (
             <Form.Item
               name="method"
               label={t(K.USE_METHOD_LABEL)}
@@ -396,7 +396,7 @@ export function LegacyEventConfigForm(
           [
             HandlerType.UseProvider,
             HandlerType.BuiltinAction,
-            HandlerType.ExectuteMethod,
+            HandlerType.ExecuteMethod,
           ].includes(getFieldValue("handlerType")) && (
             <Form.Item name="args" label={t(K.ARGS_LABEL)}>
               {getCodeEditorItem({
@@ -420,7 +420,7 @@ export function LegacyEventConfigForm(
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handlerType") === HandlerType.SetPorps && (
+          getFieldValue("handlerType") === HandlerType.SetProps && (
             <Form.Item name="properties" label={t(K.PROPERTIES_LABEL)}>
               {getCodeEditorItem()}
             </Form.Item>

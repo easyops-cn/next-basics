@@ -1,5 +1,5 @@
 import {
-  getHanderType,
+  getHandlerType,
   getHandlerName,
   isFlowAPiProvider,
 } from "./processEventHandler";
@@ -16,7 +16,7 @@ describe("procesoor", () => {
     });
   });
 
-  describe("getHanderType", () => {
+  describe("getHandlerType", () => {
     it.each([
       [{ action: "console.log", args: ["test"] }, HandlerType.BuiltinAction],
       [
@@ -25,7 +25,7 @@ describe("procesoor", () => {
       ],
       [
         { target: "#create-form", properties: { value: { a: 4 } } },
-        HandlerType.SetPorps,
+        HandlerType.SetProps,
       ],
       [
         {
@@ -33,11 +33,11 @@ describe("procesoor", () => {
           method: "setInitValue",
           args: [{ value: { a: 4 } }],
         },
-        HandlerType.ExectuteMethod,
+        HandlerType.ExecuteMethod,
       ],
-      [{}, HandlerType.Unkown],
+      [{}, HandlerType.Unknown],
     ])("%j should return %j", (data, result) => {
-      expect(getHanderType(data as BrickEventHandler)).toEqual(result);
+      expect(getHandlerType(data as BrickEventHandler)).toEqual(result);
     });
   });
 
@@ -76,7 +76,7 @@ describe("procesoor", () => {
         },
         "create-form-ref.setInitValue",
       ],
-      [{ a: "test" }, "unkown"],
+      [{ a: "test" }, "unknown"],
     ])("case %# should work", (data, result) => {
       expect(getHandlerName(data as BrickEventHandler)).toEqual(result);
     });

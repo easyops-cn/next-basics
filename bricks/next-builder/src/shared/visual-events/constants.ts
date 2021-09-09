@@ -1,4 +1,4 @@
-export const buildtinActions: string[] = [
+export const builtinActions: string[] = [
   "history.push",
   "history.replace",
   "history.goBack",

@@ -14,7 +14,7 @@ import classNames from "classnames";
 import { processEvents } from "../../../shared/visual-events/getProcessedEvents";
 import {
   getHandlerName,
-  getHanderType,
+  getHandlerType,
 } from "../../../shared/visual-events/processEventHandler";
 import { EditorContext } from "../../EventsEditor";
 import { HandlerType } from "../../../shared/visual-events/interfaces";
@@ -30,9 +30,9 @@ export interface HandlerItemProps {
 const handlerIconMap = {
   [HandlerType.BuiltinAction]: "code",
   [HandlerType.UseProvider]: "database",
-  [HandlerType.ExectuteMethod]: "star",
-  [HandlerType.SetPorps]: "equals",
-  [HandlerType.Unkown]: "question",
+  [HandlerType.ExecuteMethod]: "star",
+  [HandlerType.SetProps]: "equals",
+  [HandlerType.Unknown]: "question",
 };
 
 const callbackEvents = [
@@ -114,7 +114,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
                 {item.events.map((row, rowIndex) => (
                   <HandlerItem
                     key={rowIndex}
-                    type={getHanderType(row)}
+                    type={getHandlerType(row)}
                     handler={row}
                     uniqKey={`${uniqKey}-callback-${item.name}-${rowIndex}`}
                   ></HandlerItem>

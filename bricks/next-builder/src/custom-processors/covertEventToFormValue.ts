@@ -8,7 +8,7 @@ import {
 } from "@next-core/brick-types";
 import { safeDumpFields } from "../builder-container/DataView/utils";
 import {
-  getHanderType,
+  getHandlerType,
   isFlowAPiProvider,
 } from "../shared/visual-events/processEventHandler";
 import {
@@ -20,7 +20,7 @@ import { isNil, omitBy, omit } from "lodash";
 export function covertEventToFormValue(
   handler: BrickEventHandler
 ): EventFormField {
-  const handlerType = getHanderType(handler);
+  const handlerType = getHandlerType(handler);
 
   if (handlerType === HandlerType.BuiltinAction) {
     return {
@@ -62,7 +62,7 @@ export function covertEventToFormValue(
         )
       ),
     };
-  } else if (handlerType === HandlerType.SetPorps) {
+  } else if (handlerType === HandlerType.SetProps) {
     const selectorType = "targetRef" in handler ? "targetRef" : "target";
     return {
       handlerType,
@@ -80,7 +80,7 @@ export function covertEventToFormValue(
         )
       ),
     };
-  } else if (handlerType === HandlerType.ExectuteMethod) {
+  } else if (handlerType === HandlerType.ExecuteMethod) {
     const selectorType = "targetRef" in handler ? "targetRef" : "target";
     return {
       handlerType,

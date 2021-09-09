@@ -39,14 +39,14 @@
   color: #f8a235;
 }
 
-.exectuteMethod > .handleContainer > .icon {
+.executeMethod > .handleContainer > .icon {
   color: #45a643;
 }
 
-.setPorps > .handleContainer > .icon {
+.setProps > .handleContainer > .icon {
   color: #9760e4;
 }
 
-.unkown > .handleContainer > .icon {
+.unknown > .handleContainer > .icon {
   color: #f0493c;
 }

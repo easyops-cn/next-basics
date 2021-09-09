@@ -36,39 +36,39 @@ export function isFlowAPiProvider(provider: string): boolean {
   return provider?.includes("@");
 }
 
-export function getHanderType(handler: BrickEventHandler): HandlerType {
+export function getHandlerType(handler: BrickEventHandler): HandlerType {
   if (isBuiltinHandler(handler)) {
     return HandlerType.BuiltinAction;
   } else if (isUseProviderHandler(handler)) {
     return HandlerType.UseProvider;
   } else if (isExecuteCustomHandler(handler)) {
-    return HandlerType.ExectuteMethod;
+    return HandlerType.ExecuteMethod;
   } else if (isSetPropsCustomHandler(handler)) {
-    return HandlerType.SetPorps;
+    return HandlerType.SetProps;
   } else {
-    return HandlerType.Unkown;
+    return HandlerType.Unknown;
   }
 }
 
 export function getHandlerName(handler: BrickEventHandler): string {
-  switch (getHanderType(handler)) {
+  switch (getHandlerType(handler)) {
     case HandlerType.BuiltinAction:
       return (handler as BuiltinBrickEventHandler).action;
     case HandlerType.UseProvider:
       return `${(handler as UseProviderEventHandler).useProvider}.${
         (handler as UseProviderEventHandler).method ?? "resolve"
       }`;
-    case HandlerType.ExectuteMethod:
+    case HandlerType.ExecuteMethod:
       return `${
         (handler as ExecuteCustomBrickEventHandler).target ||
         (handler as ExecuteCustomBrickEventHandler).targetRef
       }.${(handler as ExecuteCustomBrickEventHandler).method}`;
-    case HandlerType.SetPorps:
+    case HandlerType.SetProps:
       return `${
         (handler as SetPropsCustomBrickEventHandler).target ||
         (handler as SetPropsCustomBrickEventHandler).targetRef
       }.setProperties`;
     default:
-      return HandlerType.Unkown;
+      return HandlerType.Unknown;
   }
 }
