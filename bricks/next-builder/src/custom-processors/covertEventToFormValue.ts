@@ -15,7 +15,7 @@ import {
   HandlerType,
   EventFormField,
 } from "../shared/visual-events/interfaces";
-import { identity, omit, pickBy } from "lodash";
+import { isNil, omitBy, omit } from "lodash";
 
 export function covertEventToFormValue(
   handler: BrickEventHandler
@@ -27,12 +27,12 @@ export function covertEventToFormValue(
       handlerType,
       action: (handler as BuiltinBrickEventHandler).action,
       ...safeDumpFields(
-        pickBy(
+        omitBy(
           {
             if: handler.if,
             args: (handler as BuiltinBrickEventHandler).args,
           },
-          identity
+          isNil
         )
       ),
     };
@@ -51,14 +51,14 @@ export function covertEventToFormValue(
       pollEnabled: poll?.enabled,
       ...(providerType === "flow" ? { flow: provider } : { provider }),
       ...safeDumpFields(
-        pickBy(
+        omitBy(
           {
             if: handler.if,
             args: (handler as UseProviderEventHandler).args,
             callback: (handler as UseProviderEventHandler).callback,
             poll: poll ? omit(poll, "enabled") : undefined,
           },
-          identity
+          isNil
         )
       ),
     };
@@ -71,12 +71,12 @@ export function covertEventToFormValue(
         selectorType
       ] as string,
       ...safeDumpFields(
-        pickBy(
+        omitBy(
           {
             if: handler.if,
             properties: (handler as SetPropsCustomBrickEventHandler).properties,
           },
-          identity
+          isNil
         )
       ),
     };
@@ -90,12 +90,12 @@ export function covertEventToFormValue(
       ] as string,
       method: (handler as ExecuteCustomBrickEventHandler).method,
       ...safeDumpFields(
-        pickBy(
+        omitBy(
           {
             if: handler.if,
             args: (handler as ExecuteCustomBrickEventHandler).args,
           },
-          identity
+          isNil
         )
       ),
     };

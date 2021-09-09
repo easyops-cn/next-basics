@@ -398,11 +398,7 @@ export function LegacyEventConfigForm(
             HandlerType.BuiltinAction,
             HandlerType.ExectuteMethod,
           ].includes(getFieldValue("handlerType")) && (
-            <Form.Item
-              name="args"
-              label={t(K.ARGS_LABEL)}
-              rules={[{ required: true }]}
-            >
+            <Form.Item name="args" label={t(K.ARGS_LABEL)}>
               {getCodeEditorItem({
                 schemaRef:
                   "#/definitions/UseProviderResolveConf/properties/args",

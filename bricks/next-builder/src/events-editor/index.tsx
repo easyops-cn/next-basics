@@ -7,8 +7,9 @@ import {
   property,
   event,
   EventEmitter,
+  method,
 } from "@next-core/brick-kit";
-import { EventsEditor, EventConfig } from "./EventsEditor";
+import { EventsEditor, EventConfig, EditorRef } from "./EventsEditor";
 
 /**
  * @id next-builder.events-editor
@@ -19,6 +20,7 @@ import { EventsEditor, EventConfig } from "./EventsEditor";
  * @noInheritDoc
  */
 export class EventsEditorElement extends UpdatingElement {
+  private _editorRef = React.createRef<EditorRef>();
   /**
    * @kind string
    * @required false
@@ -52,6 +54,27 @@ export class EventsEditorElement extends UpdatingElement {
     this.eventEdit.emit({ handler, key });
   };
 
+  /**
+   * @description 添加事件处理器
+   */
+  @method()
+  addEventHandler(handler: BrickEventHandler, key: string): void {
+    this._editorRef.current?.addEventHandler(handler, key);
+  }
+
+  /**
+   * @description 编辑事件处理器
+   */
+  @method()
+  editEventHandler(handler: BrickEventHandler, key: string): void {
+    this._editorRef.current?.editEventHandler(handler, key);
+  }
+
+  @method()
+  removeEventHandler(key: string): void {
+    this._editorRef.current?.removeEventHandler(key);
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -71,6 +94,7 @@ export class EventsEditorElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <EventsEditor
+            ref={this._editorRef}
             eventList={this.eventList}
             onCreate={this._handleCreate}
             onEdit={this._handleEdit}
