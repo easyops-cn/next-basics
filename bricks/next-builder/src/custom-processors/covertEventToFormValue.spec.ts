@@ -1,4 +1,4 @@
-import { covertToEventFormValue } from "./covertToEventFormValue";
+import { covertEventToFormValue } from "./covertEventToFormValue";
 import { BrickEventHandler } from "@next-core/brick-types";
 
 jest.mock("@next-core/brick-kit", () => ({
@@ -99,7 +99,7 @@ describe("covertToEventFormValue", () => {
     ],
     [{}, {}],
   ])("case %# should work", (handler, result) => {
-    expect(covertToEventFormValue(handler as BrickEventHandler)).toEqual(
+    expect(covertEventToFormValue(handler as BrickEventHandler)).toEqual(
       result
     );
   });

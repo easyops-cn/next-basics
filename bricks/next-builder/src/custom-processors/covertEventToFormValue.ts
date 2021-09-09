@@ -10,11 +10,16 @@ import { safeDumpFields } from "../builder-container/DataView/utils";
 import {
   getHanderType,
   isFlowAPiProvider,
-} from "../shared//visual-events/processEventHandler";
-import { HandlerType } from "../shared//visual-events/interfaces";
+} from "../shared/visual-events/processEventHandler";
+import {
+  HandlerType,
+  EventFormField,
+} from "../shared/visual-events/interfaces";
 import { identity, omit, pickBy } from "lodash";
 
-export function covertToEventFormValue(handler: BrickEventHandler): any {
+export function covertEventToFormValue(
+  handler: BrickEventHandler
+): EventFormField {
   const handlerType = getHanderType(handler);
 
   if (handlerType === HandlerType.BuiltinAction) {
@@ -62,7 +67,9 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
     return {
       handlerType,
       selectorType,
-      brickSelector: (handler as SetPropsCustomBrickEventHandler)[selectorType],
+      brickSelector: (handler as SetPropsCustomBrickEventHandler)[
+        selectorType
+      ] as string,
       ...safeDumpFields(
         pickBy(
           {
@@ -78,7 +85,9 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
     return {
       handlerType,
       selectorType,
-      brickSelector: (handler as ExecuteCustomBrickEventHandler)[selectorType],
+      brickSelector: (handler as ExecuteCustomBrickEventHandler)[
+        selectorType
+      ] as string,
       method: (handler as ExecuteCustomBrickEventHandler).method,
       ...safeDumpFields(
         pickBy(
@@ -91,11 +100,11 @@ export function covertToEventFormValue(handler: BrickEventHandler): any {
       ),
     };
   } else {
-    return {};
+    return {} as EventFormField;
   }
 }
 
 getRuntime().registerCustomProcessor(
-  "nextBuilder.covertToEventFormValue",
-  covertToEventFormValue
+  "nextBuilder.covertEventToFormValue",
+  covertEventToFormValue
 );

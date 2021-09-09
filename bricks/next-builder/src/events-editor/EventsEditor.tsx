@@ -17,8 +17,8 @@ export interface EventConfig {
 export interface EventsEditorProps {
   brickName?: string;
   eventList: EventConfig[];
-  onCreate?: (eventName: string) => void;
-  onEdit?: (handler: BrickEventHandler) => void;
+  onCreate?: (key: string) => void;
+  onEdit?: (handler: BrickEventHandler, key: string) => void;
 }
 
 export const EditorContext = React.createContext<{
@@ -70,7 +70,7 @@ export function EventsEditor(props: EventsEditorProps): React.ReactElement {
               <FontAwesomeIcon
                 className={styles.plusIcon}
                 icon="plus-square"
-                onClick={() => onCreate(item.name)}
+                onClick={() => onCreate(String(index))}
               />
             </div>
 
@@ -80,6 +80,7 @@ export function EventsEditor(props: EventsEditorProps): React.ReactElement {
                   key={rowIndex}
                   type={getHanderType(row)}
                   handler={row}
+                  uniqKey={`${index}-events-${rowIndex}`}
                 ></HandlerItem>
               ))}
             </div>

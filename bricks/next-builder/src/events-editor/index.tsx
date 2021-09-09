@@ -39,14 +39,17 @@ export class EventsEditorElement extends UpdatingElement {
   })
   eventList: EventConfig[];
 
-  @event({ type: "event.create" }) eventCreate: EventEmitter<string>;
-  private _handleCreate = (event: string): void => {
-    this.eventCreate.emit(event);
+  @event({ type: "event.create" }) eventCreate: EventEmitter<{ key: string }>;
+  private _handleCreate = (key: string): void => {
+    this.eventCreate.emit({ key });
   };
 
-  @event({ type: "event.edit" }) eventEdit: EventEmitter<BrickEventHandler>;
-  private _handleEdit = (event: BrickEventHandler): void => {
-    this.eventEdit.emit(event);
+  @event({ type: "event.edit" }) eventEdit: EventEmitter<{
+    key: string;
+    handler: BrickEventHandler;
+  }>;
+  private _handleEdit = (handler: BrickEventHandler, key: string): void => {
+    this.eventEdit.emit({ handler, key });
   };
 
   connectedCallback(): void {

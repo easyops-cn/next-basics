@@ -11,7 +11,7 @@ import {
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { getProcessedEvents } from "../../../shared/visual-events/getProcessedEvents";
+import { processEvents } from "../../../shared/visual-events/getProcessedEvents";
 import {
   getHandlerName,
   getHanderType,
@@ -24,6 +24,7 @@ import { isNil } from "lodash";
 export interface HandlerItemProps {
   type?: HandlerType;
   handler: BrickEventHandler;
+  uniqKey?: string;
 }
 
 const handlerIconMap = {
@@ -42,7 +43,7 @@ const callbackEvents = [
 ];
 
 export function HandlerItem(props: HandlerItemProps): React.ReactElement {
-  const { type, handler } = props;
+  const { type, handler, uniqKey } = props;
   const context = useContext(EditorContext);
   const lastEventNameRef = createRef<HTMLDivElement>();
   const contentWrapperRef = createRef<HTMLDivElement>();
@@ -59,7 +60,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
   }, [contentWrapperRef, lastEventNameRef]);
 
   const handlerClick = (handler: BrickEventHandler): void => {
-    context?.onEdit(handler);
+    context?.onEdit(handler, uniqKey);
   };
 
   return (
@@ -84,7 +85,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
             className={sharedStyle.strikeLine}
             style={{ height: lineHeight }}
           ></div>
-          {getProcessedEvents(
+          {processEvents(
             callbackEvents,
             (handler as UseProviderEventHandler).callback as BrickEventsMap
           )?.map((item, index, arr) => (
@@ -103,7 +104,9 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
                 <FontAwesomeIcon
                   className={sharedStyle.plusIcon}
                   icon="plus-square"
-                  onClick={() => context?.onCreate(`callback.${item.name}`)}
+                  onClick={() =>
+                    context?.onCreate(`${uniqKey}-callback-${item.name}`)
+                  }
                 />
               </div>
 
@@ -113,6 +116,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
                     key={rowIndex}
                     type={getHanderType(row)}
                     handler={row}
+                    uniqKey={`${uniqKey}-callback-${item.name}-${rowIndex}`}
                   ></HandlerItem>
                 ))}
               </div>

@@ -17,3 +17,20 @@ export interface ProcessEvent {
   name?: string;
   events?: BrickEventHandler[];
 }
+
+export interface EventFormField {
+  handlerType: HandlerType;
+  if?: string;
+  action?: string;
+  providerType?: "provider" | "flow";
+  provider?: string;
+  flow?: string;
+  pollEnabled?: boolean;
+  poll?: string;
+  callback?: string;
+  selectorType?: "target" | "targetRef";
+  brickSelector?: string;
+  method?: string;
+  args?: string;
+  properties?: string;
+}
