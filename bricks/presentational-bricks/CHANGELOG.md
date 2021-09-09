@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.213.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.212.0...@next-bricks/presentational-bricks@1.213.0) (2021-09-09)
+
+
+### Features
+
+* **brick-descriptions:**  描述列表支持设置隐藏项 ([352e269](https://github.com/easyops-cn/next-basics/commit/352e2695d31a1bc5eed7843deb882e0f9482f852))
+
+
+
+
+
 # [1.212.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.211.3...@next-bricks/presentational-bricks@1.212.0) (2021-09-08)
 
 
