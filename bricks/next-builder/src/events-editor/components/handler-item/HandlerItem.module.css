@@ -1,0 +1,52 @@
+.handleContainer {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  background: #f8f8f8;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  &:hover {
+    background: #ececec;
+  }
+
+  .handler {
+    color: #6d6d6d;
+    line-height: 17px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+.callback {
+  padding: 5px 17px;
+}
+
+.ifTag {
+  padding: 0px 5px;
+  font-size: 12px;
+  border-radius: 3px;
+  color: #fff;
+  background: #c1c1c1;
+}
+
+.builtinAction > .handleContainer > .icon {
+  color: #41c6cc;
+}
+
+.useProvider > .handleContainer > .icon {
+  color: #f8a235;
+}
+
+.executeMethod > .handleContainer > .icon {
+  color: #45a643;
+}
+
+.setProps > .handleContainer > .icon {
+  color: #9760e4;
+}
+
+.unknown > .handleContainer > .icon {
+  color: #f0493c;
+}

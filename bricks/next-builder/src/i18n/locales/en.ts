@@ -75,6 +75,26 @@ const locale: Locale = {
   [K.LAYOUT_CLASSIC]: "Calssic Layout",
   [K.LAYOUT_BANNER]: "Banner Layout",
   [K.LAYOUT_MENU]: "With Menu Layout",
+  [K.EVENTS_HANDLER_BUILTIN_ACTION]: "Builtin Action",
+  [K.EVENTS_HANDLER_USE_PROVIDER]: "Use Provider",
+  [K.EVENTS_HANDLER_SET_PROP]: "Set Brick Properties",
+  [K.EVENTS_HANDLER_USE_METHOD]: "Use Brick Method",
+  [K.SELECT_ACTION_LABEL]: "Select Action",
+  [K.PROVIDER_TYPLE_LABEL]: "Provider Type",
+  [K.BRICK_SELECTOR_LABEL]: "Brick",
+  [K.USE_METHOD_LABEL]: "Use Method",
+  [K.ARGS_LABEL]: "Args",
+  [K.HANDLE_TYPE_LABEL]: "Handler",
+  [K.CALLBACK_LABEL]: "Callback",
+  [K.PROPERTIES_LABEL]: "Properties",
+  [K.BUILTIN_PROVIDER]: "Builtin Provider",
+  [K.IF_LABEL]: "If",
+  [K.POLLING_LABEL]: "Polling",
+  [K.POLLING_ITEM_PLACEHOLDER]: "Please input polling parameters",
+  [K.FLOW_API]: "Flow Api",
+  [K.LINK_TO_DEVELOPER_PROVIDER_DOC]:
+    "Link to provider documents of developers",
+  [K.LINK_TO_FLOWER_BUILDER]: "Link to flow builder app",
 };
 
 export default locale;
