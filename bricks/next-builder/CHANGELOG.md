@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.68.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.67.1...@next-bricks/next-builder@1.68.0) (2021-09-10)
+
+
+### Bug Fixes
+
+* refine events editor and add processor ([84b6cec](https://github.com/easyops-cn/next-basics/commit/84b6cec0599cde4059383fc29becaa6e091b744d))
+* support plling config ([2dee6fc](https://github.com/easyops-cn/next-basics/commit/2dee6fcbe053f3b7a9fadedb4bd5f3403c630b55))
+* test ([c618cdd](https://github.com/easyops-cn/next-basics/commit/c618cdd9db1d6c4e496e933a0e1d7662090353e9))
+* typo ([c441b28](https://github.com/easyops-cn/next-basics/commit/c441b2809e2ccefff44f59722329e4a23332601c))
+* 事件配置可视化展示 ([26c0bf9](https://github.com/easyops-cn/next-basics/commit/26c0bf97f4df3690740ed71290b6a36fbe7f10c2))
+
+
+### Features
+
+* add event editor ([afbafc5](https://github.com/easyops-cn/next-basics/commit/afbafc505e775ae2f2fdb1fd0c68acc3a8a10766))
+* event editor support create edit and remove ([fb37918](https://github.com/easyops-cn/next-basics/commit/fb37918b5753f6b0eda8d7264808794ec3907d4c))
+* refine events editor and add processor ([e2b3cca](https://github.com/easyops-cn/next-basics/commit/e2b3cca5a6b169b1d96107261e06f18fc325b2dc))
+
+
+
+
+
 ## [1.67.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.67.0...@next-bricks/next-builder@1.67.1) (2021-09-07)
 
 
