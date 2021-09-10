@@ -28,7 +28,7 @@
     .description {
       color: #595959;
       margin-bottom: 4px;
-      white-space: pre;
+      white-space: pre-wrap;
     }
 
     .dateTime {
