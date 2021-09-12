@@ -1,5 +1,5 @@
 import { BrickEventsMap } from "@next-core/brick-types";
-import { processEvents } from "./getProcessedEvents";
+import { processEvents, processHandlers } from "./getProcessedEvents";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: () => ({
@@ -65,5 +65,73 @@ describe("getProcessedEvents", () => {
     ]);
 
     expect(processEvents()).toEqual([]);
+  });
+
+  it("processHandlers", () => {
+    expect(processHandlers({ action: "console.log", args: ["a"] })).toEqual([
+      { action: "console.log", args: ["a"] },
+    ]);
+
+    expect(
+      processHandlers({
+        useProvider: "api.cmdb.provider",
+        args: ["a"],
+        callback: {
+          finally: {
+            useProvider: "api.cmdb.provider.v2",
+            args: ["abc"],
+            callback: {
+              progress: {
+                action: "console.log",
+              },
+            },
+          },
+          success: {
+            useProvider: "namespace@getDetail:1.0.0",
+            args: ["abc"],
+            callback: {
+              error: {
+                action: "console.log",
+                args: ["a"],
+              },
+            },
+          },
+        },
+      })
+    ).toEqual([
+      {
+        args: ["a"],
+        callback: {
+          finally: [
+            {
+              useProvider: "api.cmdb.provider.v2",
+              args: ["abc"],
+              callback: {
+                progress: [
+                  {
+                    action: "console.log",
+                  },
+                ],
+              },
+            },
+          ],
+          success: [
+            {
+              useProvider: "namespace@getDetail:1.0.0",
+              args: ["abc"],
+              callback: {
+                error: [
+                  {
+                    action: "console.log",
+                    args: ["a"],
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        useProvider: "api.cmdb.provider",
+      },
+    ]);
   });
 });

@@ -24,6 +24,7 @@ export interface EventConfig {
 export interface EventsEditorProps {
   brickName?: string;
   eventList: EventConfig[];
+  updatedViewKey?: string;
   onCreate?: (key: string) => void;
   onEdit?: (handler: BrickEventHandler, key: string) => void;
   onRemove?: (handler: BrickEventHandler, key: string) => void;
@@ -48,7 +49,7 @@ export function LegacyEventsEditor(
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
 
-  const { brickName, onCreate, onEdit, onChange } = props;
+  const { brickName, updatedViewKey, onCreate, onEdit, onChange } = props;
   const [lineHeight, setLineHight] = useState(0);
   const [eventList, setEventList] = useState(props.eventList);
 
@@ -67,7 +68,7 @@ export function LegacyEventsEditor(
           15
         : 0;
     setLineHight(height);
-  }, [contentWrapperRef, lastEventNameRef]);
+  }, [contentWrapperRef, lastEventNameRef, updatedViewKey]);
 
   const addEventHandler = (handler: BrickEventHandler, key: string): void => {
     const pathArr = key.split("-");

@@ -6,6 +6,7 @@
   background: #519ac0;
   border-radius: 4px;
   padding: 8px 10px;
+  margin-bottom: 10px;
 }
 
 .eventName {
@@ -36,7 +37,7 @@
 }
 
 .eventWrapper {
-  padding: 20px 17px;
+  padding: 10px 17px;
   position: relative;
 
   .strikeLine {
