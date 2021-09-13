@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.214.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.213.1...@next-bricks/presentational-bricks@1.214.0) (2021-09-13)
+
+
+### Features
+
+* **copyable-text:** add text.clcik ([dd22aac](https://github.com/easyops-cn/next-basics/commit/dd22aacfae30ec88d2050518accc349742f61486))
+
+
+
+
+
 ## [1.213.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.213.0...@next-bricks/presentational-bricks@1.213.1) (2021-09-10)
 
 
