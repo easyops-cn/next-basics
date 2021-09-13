@@ -82,6 +82,7 @@ describe("GeneralLogin", () => {
           org: 1,
           username: "mock-user",
           userInstanceId: "abc",
+          accessRule: "cmdb",
         });
         expect(spyOnReloadMicroApps).toBeCalled();
         expect(spyOnReloadSharedData).toBeCalled();
@@ -98,6 +99,7 @@ describe("GeneralLogin", () => {
       username: "mock-user",
       userInstanceId: "abc",
       org: 1,
+      accessRule: "cmdb",
     });
     wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
