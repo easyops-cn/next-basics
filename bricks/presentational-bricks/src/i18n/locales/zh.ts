@@ -22,6 +22,8 @@ const locale: Locale = {
   [K.CROP_TITLE]: "修改头像",
   [K.COPY]: "复制",
   [K.COPIED]: "复制成功",
+  [K.COPY_FAILED]: "复制失败",
+  [K.NO_TEXT_TO_COPY]: "没有可复制的文本",
   [K.CHOSEN_OPTIONS]: "已选择 {{count}} 项",
   [K.SELECTED_OPTIONS]: "已选 {{number}} 项",
   [K.CLEAR]: "清空",

@@ -2,6 +2,8 @@ import { handleHttpError, UpdatingElement, method } from "@next-core/brick-kit";
 import { message as m } from "antd";
 import { MessageApi } from "antd/lib/message";
 import { copyToClipboard } from "@next-libs/clipboard";
+import i18next from "i18next";
+import { K, NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
 
 /**
  * @id presentational-bricks.brick-utils
@@ -24,7 +26,7 @@ export class BrickUtilsElement extends UpdatingElement {
     handleHttpError(event.detail);
   }
 
-  message(method: keyof MessageApi, text: string) {
+  message(method: keyof MessageApi, text: string): void {
     // eslint-disable-next-line no-console
     console.warn(
       "Deprecated, please use action `message.success/error/info/warn` provided by next-core instead"
@@ -40,9 +42,9 @@ export class BrickUtilsElement extends UpdatingElement {
   copy(text: string): void {
     const success = copyToClipboard(text);
     if (success) {
-      m.success("复制成功");
+      m.success(i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COPIED}`));
     } else {
-      m.error("复制失败");
+      m.error(i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COPY_FAILED}`));
     }
   }
 
@@ -60,7 +62,7 @@ export class BrickUtilsElement extends UpdatingElement {
     if (text) {
       this.copy(text);
     } else {
-      m.warn("没有可复制的文本");
+      m.warn(i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.NO_TEXT_TO_COPY}`));
     }
   }
 
