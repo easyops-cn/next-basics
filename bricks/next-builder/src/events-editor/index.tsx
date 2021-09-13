@@ -30,6 +30,9 @@ export class EventsEditorElement extends UpdatingElement {
   @property()
   brickName: string;
 
+  @property()
+  updatedViewKey: string;
+
   /**
    * @kind BrickEventsMap
    * @required false
@@ -52,6 +55,15 @@ export class EventsEditorElement extends UpdatingElement {
   }>;
   private _handleEdit = (handler: BrickEventHandler, key: string): void => {
     this.eventEdit.emit({ handler, key });
+  };
+
+  /**
+   *
+   * @description 事件变化时，传出当前完整的事件配置项
+   */
+  @event({ type: "event.change" }) eventChange: EventEmitter<EventConfig[]>;
+  private _handlerChange = (eventList: EventConfig[]): void => {
+    this.eventChange.emit(eventList);
   };
 
   /**
@@ -95,9 +107,11 @@ export class EventsEditorElement extends UpdatingElement {
         <BrickWrapper>
           <EventsEditor
             ref={this._editorRef}
+            updatedViewKey={this.updatedViewKey}
             eventList={this.eventList}
             onCreate={this._handleCreate}
             onEdit={this._handleEdit}
+            onChange={this._handlerChange}
             brickName={this.brickName}
           />
         </BrickWrapper>,

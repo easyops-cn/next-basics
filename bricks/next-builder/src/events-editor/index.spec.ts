@@ -51,6 +51,14 @@ describe("next-builder.events-editor", () => {
       "event.edit"
     );
 
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.onChange();
+
+    expect((sypOnDispatchEvent.mock.calls[2][0] as CustomEvent).type).toEqual(
+      "event.change"
+    );
+
     expect(spyOnRender).toBeCalled();
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
