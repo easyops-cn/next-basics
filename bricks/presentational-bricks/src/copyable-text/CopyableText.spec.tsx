@@ -4,10 +4,13 @@ import { CopyableText } from "./CopyableText";
 
 describe("CopyableText", () => {
   it("should work", () => {
-    const wrapper = mount(<CopyableText text={"text to be copied"} />);
-    expect(wrapper.find("div.ant-typography").text()).toBe("text to be copied");
+    const wrapper = mount(
+      <CopyableText text={"text to be copied"} textClick={jest.fn()} />
+    );
+    expect(wrapper.find(".text").text()).toBe("text to be copied");
     wrapper.setProps({ hiddenText: true });
-    expect(wrapper.find("div.ant-typography").text()).toBe("");
+    expect(wrapper.find(".text").text()).toBe("");
+    wrapper.find(".text").simulate("click");
   });
   it("should work", () => {
     const wrapper = mount(

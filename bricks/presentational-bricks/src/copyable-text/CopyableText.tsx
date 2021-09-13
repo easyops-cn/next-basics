@@ -9,9 +9,11 @@ interface CopyableTextProps {
   tooltips?: string;
   hiddenText?: boolean;
   type?: string;
+  dataSource?: Record<string, any>;
+  textClick?: (detail: any) => void;
 }
 export function CopyableText(props: CopyableTextProps): React.ReactElement {
-  const { text, tooltips, hiddenText, type } = props;
+  const { text, tooltips, hiddenText, type, dataSource } = props;
   const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   return (
     <div>
@@ -20,7 +22,12 @@ export function CopyableText(props: CopyableTextProps): React.ReactElement {
           copyable={{ tooltips: [tooltips ?? t(K.COPY), t(K.COPIED)], text }}
           className={style.nextTypography}
         >
-          {hiddenText ? "" : text}
+          <span
+            className={style.text}
+            onClick={() => props?.textClick(dataSource)}
+          >
+            {hiddenText ? "" : text}
+          </span>
         </Typography.Paragraph>
       )}
       {type === "input" && (
