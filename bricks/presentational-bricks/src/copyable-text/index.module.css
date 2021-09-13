@@ -3,4 +3,7 @@
     overflow-wrap: anywhere;
     margin-bottom: 0;
   }
+  > .text {
+    cursor: pointer;
+  }
 }

@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  UpdatingElement,
+  property,
+  event,
+  EventEmitter,
+} from "@next-core/brick-kit";
 import { CopyableText } from "./CopyableText";
 
 /**
@@ -48,6 +54,23 @@ export class CopyableTextElement extends UpdatingElement {
    */
   @property({ attribute: false })
   type: string;
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 数据源
+   */
+  @property({ attribute: false })
+  dataSource: Record<string, any>;
+  /**
+   * @detail any
+   * @description 文本点击时触发的事件
+   */
+  @event({ type: "text.click" })
+  itemClick: EventEmitter<any>;
+  private _handleTextClick = (data: any): void => {
+    this.itemClick.emit(data);
+  };
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -71,6 +94,8 @@ export class CopyableTextElement extends UpdatingElement {
             tooltips={this.tooltips}
             hiddenText={this.hiddenText}
             type={this.type}
+            dataSource={this.dataSource}
+            textClick={this._handleTextClick}
           />
         </BrickWrapper>,
         this
