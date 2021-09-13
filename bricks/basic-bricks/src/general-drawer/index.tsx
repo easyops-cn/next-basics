@@ -11,6 +11,7 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralDrawer } from "./GeneralDrawer";
 import style from "./index.shadow.less";
+import { DrawerProps } from "antd/lib/drawer";
 export interface OpenCloseOption {
   noEvent?: boolean;
 }
@@ -100,6 +101,15 @@ export class GeneralDrawerElement extends UpdatingElement {
    */
   @property({ type: Boolean })
   hasFooter: boolean;
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否展示遮罩
+   * @group basic
+   */
+  @property({ attribute: false })
+  mask = true;
 
   /**
    * @kind Record<string, any>
@@ -124,6 +134,27 @@ export class GeneralDrawerElement extends UpdatingElement {
     attribute: false,
   })
   drawerStyle: Record<string, any>;
+
+  /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description 用于设置 Drawer 头部的样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  headerStyle: Record<string, any>;
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 完全透传给 antd 的 Drawer 属性，详见：[https://ant.design/components/drawer-cn/#API](https://ant.design/components/drawer-cn/#API)
+   * @group advanced
+   */
+  @property({ attribute: false })
+  configProps: DrawerProps;
 
   constructor() {
     super();
@@ -207,6 +238,9 @@ export class GeneralDrawerElement extends UpdatingElement {
             drawerStyle={this.drawerStyle}
             hasFooter={this.hasFooter}
             loading={this.loading}
+            headerStyle={this.headerStyle}
+            mask={this.mask}
+            configProps={this.configProps}
           />
         </BrickWrapper>,
         this._mountPoint

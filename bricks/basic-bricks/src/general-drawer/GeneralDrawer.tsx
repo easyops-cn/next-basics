@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Drawer, Spin } from "antd";
 
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
+import { DrawerProps } from "antd/lib/drawer";
 
 interface GeneralDrawerProps {
   visible: boolean;
@@ -14,6 +15,9 @@ interface GeneralDrawerProps {
   drawerStyle?: Record<string, any>;
   hasFooter?: boolean;
   loading?: boolean;
+  mask?: boolean;
+  headerStyle?: Record<string, any>;
+  configProps?: DrawerProps;
 }
 
 export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
@@ -52,6 +56,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
 
   return (
     <Drawer
+      {...props.configProps}
       title={title}
       width={props.width}
       visible={props.visible}
@@ -59,6 +64,8 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       closable={props.closable}
       bodyStyle={props.bodyStyle}
       drawerStyle={props.drawerStyle}
+      mask={props.mask}
+      headerStyle={props.headerStyle}
     >
       <Spin spinning={props.loading} tip="Loading...">
         <div className="content" style={{ maxHeight: maxContentHeight }}>
