@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.68.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.68.0...@next-bricks/next-builder@1.68.1) (2021-09-13)
+
+
+### Bug Fixes
+
+* refine processor ([ea75ede](https://github.com/easyops-cn/next-basics/commit/ea75ede00cb1c2aeb81b0094a1a7c5624e4604f8))
+
+
+
+
+
 # [1.68.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.67.1...@next-bricks/next-builder@1.68.0) (2021-09-10)
 
 
