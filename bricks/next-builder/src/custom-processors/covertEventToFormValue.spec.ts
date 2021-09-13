@@ -25,6 +25,7 @@ describe("covertToEventFormValue", () => {
         pollEnabled: undefined,
         handlerType: "useProvider",
         providerType: "provider",
+        useProviderMethod: "resolve",
       },
     ],
     [
@@ -35,6 +36,7 @@ describe("covertToEventFormValue", () => {
         pollEnabled: undefined,
         providerType: "flow",
         args: "- abc\n",
+        useProviderMethod: "resolve",
       },
     ],
     [
@@ -50,6 +52,7 @@ describe("covertToEventFormValue", () => {
         handlerType: "useProvider",
         providerType: "provider",
         provider: "api.cmdb.provider",
+        useProviderMethod: "resolve",
         pollEnabled: true,
         args: "- abc\n",
         poll: 'expectPollEnd: <% (result) => result.status === "done" %>\n',

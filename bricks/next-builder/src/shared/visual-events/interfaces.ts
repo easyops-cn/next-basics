@@ -33,4 +33,5 @@ export interface EventFormField {
   method?: string;
   args?: string;
   properties?: string;
+  useProviderMethod?: "resolve" | "saveAs";
 }

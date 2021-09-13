@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickEventHandler } from "@next-core/brick-types";
+import {
+  BrickEventHandler,
+  MenuIcon,
+  UseBrickConf,
+} from "@next-core/brick-types";
 import {
   BrickWrapper,
   UpdatingElement,
@@ -25,10 +29,21 @@ export class EventsEditorElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description 构件名称
+   * @description 标题
    */
   @property()
-  brickName: string;
+  customTitle: string;
+
+  /**
+   * @kind MenuIcon
+   * @required false
+   * @default -
+   * @description 标题前缀图标
+   */
+  @property({
+    attribute: false,
+  })
+  titleIcon: MenuIcon;
 
   @property()
   updatedViewKey: string;
@@ -43,6 +58,13 @@ export class EventsEditorElement extends UpdatingElement {
     attribute: false,
   })
   eventList: EventConfig[];
+
+  @property({
+    attribute: false,
+  })
+  suffixTitle: {
+    useBrick: UseBrickConf;
+  };
 
   @event({ type: "event.create" }) eventCreate: EventEmitter<{ key: string }>;
   private _handleCreate = (key: string): void => {
@@ -109,10 +131,12 @@ export class EventsEditorElement extends UpdatingElement {
             ref={this._editorRef}
             updatedViewKey={this.updatedViewKey}
             eventList={this.eventList}
+            titleIcon={this.titleIcon}
             onCreate={this._handleCreate}
             onEdit={this._handleEdit}
             onChange={this._handlerChange}
-            brickName={this.brickName}
+            suffixTitle={this.suffixTitle}
+            customTitle={this.customTitle}
           />
         </BrickWrapper>,
         this

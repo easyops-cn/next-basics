@@ -25,6 +25,7 @@ describe("covertFormValueToEvent", () => {
         handlerType: HandlerType.UseProvider,
         provider: "api.cmdb.provider",
         providerType: "provider",
+        useProviderMethod: "resolve",
         args: "- abc\n",
       },
       {
@@ -35,7 +36,22 @@ describe("covertFormValueToEvent", () => {
     [
       {
         handlerType: HandlerType.UseProvider,
+        provider: "api.cmdb.provider",
+        providerType: "provider",
+        useProviderMethod: "saveAs",
+        args: "- abc\n",
+      },
+      {
+        useProvider: "api.cmdb.provider",
+        method: "saveAs",
+        args: ["abc"],
+      },
+    ],
+    [
+      {
+        handlerType: HandlerType.UseProvider,
         flow: "namespace@getDetail:1.0.0",
+        useProviderMethod: "resolve",
         providerType: "flow",
         args: "- abc\n",
         poll: 'expectPollEnd: <% (result) => result.status === "done" %>\n',

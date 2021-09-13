@@ -1,4 +1,11 @@
+.titleWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
 .brickName {
+  flex: 1;
   color: #f5f5f5;
   line-height: 20px;
   font-weight: 600;
@@ -18,7 +25,7 @@
   font-weight: 600;
   font-size: 14px;
   padding: 6px 25px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 
   &::before {
     content: "";
@@ -48,7 +55,7 @@
   }
 }
 
-.eventhandler {
+.eventHandler {
   margin-left: 40px;
 }
 

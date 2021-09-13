@@ -8,7 +8,13 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { BrickEventHandler } from "@next-core/brick-types";
+import { BrickAsComponent } from "@next-core/brick-kit";
+import { GeneralIcon } from "@next-libs/basic-components";
+import {
+  BrickEventHandler,
+  UseBrickConf,
+  MenuIcon,
+} from "@next-core/brick-types";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HandlerItem } from "./components/handler-item/HandlerItem";
@@ -22,13 +28,17 @@ export interface EventConfig {
 }
 
 export interface EventsEditorProps {
-  brickName?: string;
+  customTitle?: string;
+  titleIcon?: MenuIcon;
   eventList: EventConfig[];
   updatedViewKey?: string;
   onCreate?: (key: string) => void;
   onEdit?: (handler: BrickEventHandler, key: string) => void;
   onRemove?: (handler: BrickEventHandler, key: string) => void;
   onChange?: (eventList: EventConfig[]) => void;
+  suffixTitle?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export interface EditorRef {
@@ -49,7 +59,15 @@ export function LegacyEventsEditor(
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
 
-  const { brickName, updatedViewKey, onCreate, onEdit, onChange } = props;
+  const {
+    customTitle,
+    updatedViewKey,
+    onCreate,
+    onEdit,
+    onChange,
+    titleIcon,
+    suffixTitle,
+  } = props;
   const [lineHeight, setLineHight] = useState(0);
   const [eventList, setEventList] = useState(props.eventList);
 
@@ -120,9 +138,15 @@ export function LegacyEventsEditor(
 
   return (
     <EditorContext.Provider value={{ onCreate, onEdit }}>
-      <div className={styles.brickName}>
-        <FontAwesomeIcon icon="cube" style={{ marginRight: 12 }} />
-        {brickName}
+      <div className={styles.titleWrapper}>
+        <div className={styles.brickName}>
+          <GeneralIcon
+            icon={titleIcon}
+            style={{ marginRight: 12 }}
+          ></GeneralIcon>
+          {customTitle}
+        </div>
+        {suffixTitle && <BrickAsComponent useBrick={suffixTitle.useBrick} />}
       </div>
 
       <div className={styles.eventWrapper} ref={contentWrapperRef}>
@@ -149,7 +173,7 @@ export function LegacyEventsEditor(
               />
             </div>
 
-            <div className={styles.eventhandler}>
+            <div className={styles.eventHandler}>
               {item.events.map((row, rowIndex) => (
                 <HandlerItem
                   key={rowIndex}
