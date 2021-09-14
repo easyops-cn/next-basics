@@ -4,7 +4,7 @@ module.exports = sizeLimit({
   bricks: {
     "*": "50 KB",
     "basic-bricks": "115 KB",
-    "presentational-bricks": "95 KB",
+    "presentational-bricks": "100 KB",
     "brick-visualization": "365 KB",
     forms: "85 KB",
   },
