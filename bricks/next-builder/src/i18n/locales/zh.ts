@@ -79,6 +79,9 @@ const locale: Locale = {
   [K.EVENTS_HANDLER_USE_PROVIDER]: "调用Provider",
   [K.EVENTS_HANDLER_SET_PROP]: "设置构件属性",
   [K.EVENTS_HANDLER_USE_METHOD]: "与构件交互",
+  [K.NO_EVENTS_TO_ADD]: "无事件可添加",
+  [K.DO_NOT_SUPPORT_VISUAL_CONFIG]:
+    "当前事件处理器不支持配置，请切换到 yaml 模式修改",
   [K.SELECT_ACTION_LABEL]: "选择动作",
   [K.PROVIDER_TYPE_LABEL]: "Provider 类型",
   [K.BRICK_SELECTOR_LABEL]: "构件",

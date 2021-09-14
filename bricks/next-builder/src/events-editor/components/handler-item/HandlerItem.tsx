@@ -11,12 +11,15 @@ import {
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
+import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
+import { useTranslation } from "react-i18next";
 import { processEvents } from "../../../shared/visual-events/getProcessedEvents";
 import {
   getHandlerName,
   getHandlerType,
 } from "../../../shared/visual-events/processEventHandler";
 import { EditorContext } from "../../EventsEditor";
+import { Tooltip } from "antd";
 import { HandlerType } from "../../../shared/visual-events/interfaces";
 import sharedStyle from "../../EventsEditor.module.css";
 import styles from "./HandlerItem.module.css";
@@ -43,6 +46,7 @@ const callbackEvents = [
 ];
 
 export function HandlerItem(props: HandlerItemProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const { type, handler, uniqKey } = props;
   const context = useContext(EditorContext);
   const lastEventNameRef = createRef<HTMLDivElement>();
@@ -60,7 +64,9 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
   }, [contentWrapperRef, lastEventNameRef]);
 
   const handlerClick = (handler: BrickEventHandler): void => {
-    context?.onEdit(handler, uniqKey);
+    if (getHandlerType(handler) !== HandlerType.Unknown) {
+      context?.onEdit(handler, uniqKey);
+    }
   };
 
   return (
@@ -73,10 +79,19 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
           icon={handlerIconMap[type] as FontAwesomeIconProps["icon"]}
           className={styles.icon}
         />
-        <div className={styles.handler}>{getHandlerName(handler)}</div>
+        <div className={styles.handler}>
+          <Tooltip
+            title={
+              getHandlerType(handler) === HandlerType.Unknown &&
+              t(K.DO_NOT_SUPPORT_VISUAL_CONFIG)
+            }
+          >
+            {getHandlerName(handler)}
+          </Tooltip>
+        </div>
         {!isNil(handler.if) && <span className={styles.ifTag}>if</span>}
       </div>
-      {type === HandlerType.UseProvider && (
+      {(handler as UseProviderEventHandler).callback && (
         <div
           className={classNames(sharedStyle.eventWrapper, styles.callback)}
           ref={contentWrapperRef}
@@ -105,7 +120,10 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
                   className={sharedStyle.plusIcon}
                   icon="plus-square"
                   onClick={() =>
-                    context?.onCreate(`${uniqKey}-callback-${item.name}`)
+                    context?.onCreate(
+                      `${uniqKey}-callback-${item.name}`,
+                      `callback.${item.name}`
+                    )
                   }
                 />
               </div>

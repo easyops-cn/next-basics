@@ -13,7 +13,12 @@ import {
   EventEmitter,
   method,
 } from "@next-core/brick-kit";
-import { EventsEditor, EventConfig, EditorRef } from "./EventsEditor";
+import {
+  EventsEditor,
+  EventConfig,
+  EditorRef,
+  EventsDoc,
+} from "./EventsEditor";
 
 /**
  * @id next-builder.events-editor
@@ -49,6 +54,17 @@ export class EventsEditorElement extends UpdatingElement {
   updatedViewKey: string;
 
   /**
+   * @kind EventsDoc[]
+   * @required false
+   * @default -
+   * @description 文档中事件的信息
+   */
+  @property({
+    attribute: false,
+  })
+  eventDocInfo: EventsDoc[];
+
+  /**
    * @kind BrickEventsMap
    * @required false
    * @default -
@@ -59,6 +75,12 @@ export class EventsEditorElement extends UpdatingElement {
   })
   eventList: EventConfig[];
 
+  /**
+   * @kind {useBrick: UseBrickConf}
+   * @required false
+   * @default -
+   * @description title末尾自定构件配置
+   */
   @property({
     attribute: false,
   })
@@ -130,6 +152,7 @@ export class EventsEditorElement extends UpdatingElement {
           <EventsEditor
             ref={this._editorRef}
             updatedViewKey={this.updatedViewKey}
+            eventDocInfo={this.eventDocInfo}
             eventList={this.eventList}
             titleIcon={this.titleIcon}
             onCreate={this._handleCreate}

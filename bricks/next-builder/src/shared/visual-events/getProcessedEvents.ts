@@ -38,10 +38,6 @@ export function processEvents(
 ): ProcessEvent[] {
   const processedEvents = [] as ProcessEvent[];
 
-  eventsInfo?.forEach((info) => {
-    processedEvents.push({ name: info.type, events: [] });
-  });
-
   for (const [name, events] of Object.entries(eventsMap)) {
     const find = processedEvents.find((item) => item.name === name);
     if (find) {
