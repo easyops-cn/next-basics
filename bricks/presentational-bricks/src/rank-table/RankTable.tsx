@@ -23,6 +23,7 @@ interface RankTableProps {
   showCard?: boolean;
   rowKey?: string;
   scroll?: TableProps<unknown>["scroll"];
+  size?: "default" | "small";
 }
 
 type ItemBrickDataMap = Map<unknown, BrickData>;
@@ -66,6 +67,15 @@ export function RankTable(props: RankTableProps): React.ReactElement {
           [styles.medalBronze]: trend === 2,
           [styles.normalAwards]: trend !== 0 && trend !== 1 && trend !== 2,
         })}
+        style={
+          props.size === "small"
+            ? {
+                height: "24px",
+                width: "24px",
+                fontSize: "12px",
+              }
+            : {}
+        }
       >
         {trend + 1}
       </span>
@@ -132,7 +142,8 @@ export function RankTable(props: RankTableProps): React.ReactElement {
             useBrick,
             component,
             itemBrickDataMap,
-            Awards
+            Awards,
+            props.size
           );
         } else if (valueSuffix) {
           // eslint-disable-next-line react/display-name
@@ -188,7 +199,10 @@ export function RankTable(props: RankTableProps): React.ReactElement {
     if (!header || !header?.title) return null;
 
     return (
-      <div className={styles.header}>
+      <div
+        className={styles.header}
+        style={props.size === "small" ? { padding: "0px 0 10px 10px" } : {}}
+      >
         <span className={styles.leftCell}>
           {TrendBar}
           {(header.title as UseBrick)?.useBrick ? (
