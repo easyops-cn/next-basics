@@ -1,0 +1,22 @@
+:global(.ant-btn) {
+}
+
+.DropdownButtonWrapper {
+  :global(.ant-btn) {
+    padding: 4px 10px;
+  }
+  :global(.ant-btn-icon-only) {
+    width: auto;
+    min-width: 32px;
+    padding: 0 10px;
+  }
+  :global(.ant-btn-icon-only > *) {
+    font-size: 14px;
+  }
+  .LeftButtonLabel {
+    margin-left: 5px;
+  }
+  .RightButtonLabel {
+    margin-right: 5px;
+  }
+}

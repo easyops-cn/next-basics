@@ -69,4 +69,5 @@ import "./dynamic-grid-container";
 import "./general-slider";
 import "./custom-processors/flattenTreeDataListAndCalcRowSpan";
 import "./rank-table";
+import "./dropdown-button";
 import "./lazy-bricks";
