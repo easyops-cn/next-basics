@@ -238,6 +238,16 @@ export class RankTableElement extends UpdatingElement {
   })
   showCard = true;
 
+  /**
+   * @kind "default"|"small"
+   * @required false
+   * @default default
+   * @description 根据容器的不同调整样式
+   */
+  @property({ attribute: false })
+  size: "default" | "small" = "default";
+
+  // istanbul ignore next
   private _initConfigProps = () => {
     // 初始化列排序
     if (this._columns) {
@@ -276,6 +286,7 @@ export class RankTableElement extends UpdatingElement {
             showCard={this.showCard}
             rowKey={this.rowKey}
             scroll={this.scrollConfigs}
+            size={this.size}
           />
         </BrickWrapper>,
         this

@@ -342,4 +342,25 @@ describe("TrendTable", () => {
       rowData: props.dataSource[0],
     });
   });
+  it("should work size", () => {
+    const wrapper = mount(
+      <RankTable
+        header={{
+          title: "Top10",
+          extra: "foo",
+        }}
+        size={"small"}
+        {...props}
+      />
+    );
+
+    expect(wrapper.find("span.awards").at(0).prop("style")).toStrictEqual({
+      fontSize: "12px",
+      height: "24px",
+      width: "24px",
+    });
+    expect(wrapper.find("div.header").at(0).prop("style")).toStrictEqual({
+      padding: "0px 0 10px 10px",
+    });
+  });
 });

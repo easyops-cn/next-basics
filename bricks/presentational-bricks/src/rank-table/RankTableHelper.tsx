@@ -16,7 +16,8 @@ export const getCustomComp = (
   useBrick: UseBrickConf,
   component?: CustomColumnComponent,
   itemBrickDataMap?: ItemBrickDataMap,
-  awardsComponent?: any
+  awardsComponent?: any,
+  size?: "default" | "small"
 ) => {
   return function CustomComp(
     value: any,
@@ -37,10 +38,10 @@ export const getCustomComp = (
 
       if (awardsComponent) {
         return (
-          <>
+          <div style={size === "small" ? { display: "flex" } : {}}>
             {awardsComponent(index)}
             <BrickAsComponent useBrick={useBrick} data={brickData} />
-          </>
+          </div>
         );
       }
       return <BrickAsComponent useBrick={useBrick} data={brickData} />;
