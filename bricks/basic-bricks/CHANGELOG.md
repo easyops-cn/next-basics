@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.142.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.141.0...@next-bricks/basic-bricks@1.142.0) (2021-09-14)
+
+
+### Features
+
+* **basic-bricks:** drawer add mask、headerStyle、configProps properties ([53e046f](https://github.com/easyops-cn/next-basics/commit/53e046fb9c38b7739e3a1c8d737684876310a7dc))
+
+
+
+
+
 # [1.141.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.140.1...@next-bricks/basic-bricks@1.141.0) (2021-09-01)
 
 
