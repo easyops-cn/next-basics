@@ -30,6 +30,9 @@ import { isNil } from "lodash";
 export interface EventConfigForm {
   labelCol?: ColProps;
   wrapperCol?: ColProps;
+  providerList?: string[];
+  flowApiList?: string[];
+  useInCustomTemplate?: boolean;
   onValuesChange?: FormProps["onValuesChange"];
 }
 
@@ -38,7 +41,14 @@ export function LegacyEventConfigForm(
   ref: React.Ref<Partial<FormInstance>>
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const { labelCol, wrapperCol, onValuesChange } = props;
+  const {
+    labelCol,
+    wrapperCol,
+    onValuesChange,
+    providerList,
+    flowApiList,
+    useInCustomTemplate,
+  } = props;
   const [form] = Form.useForm();
 
   useImperativeHandle(
@@ -110,7 +120,6 @@ export function LegacyEventConfigForm(
     () => (
       <Form.Item name="if" label={t(K.IF_LABEL)}>
         {getCodeEditorItem({
-          showLineNumbers: false,
           minLines: 3,
           schemaRef: "#/definitions/UseProviderResolveConf/properties/if",
         })}
@@ -162,7 +171,7 @@ export function LegacyEventConfigForm(
           getFieldValue("handlerType") === HandlerType.UseProvider && (
             <Form.Item
               name="providerType"
-              label={t(K.PROVIDER_TYPLE_LABEL)}
+              label={t(K.PROVIDER_TYPE_LABEL)}
               rules={[{ required: true }]}
             >
               <Radio.Group>
@@ -202,7 +211,16 @@ export function LegacyEventConfigForm(
                   margin: "0 6px 0 0",
                 }}
               >
-                <AutoComplete></AutoComplete>
+                <AutoComplete
+                  options={providerList?.map((provider) => ({
+                    value: provider,
+                  }))}
+                  filterOption={(inputValue, option) =>
+                    option?.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                ></AutoComplete>
               </Form.Item>
               <Tooltip title={t(K.LINK_TO_DEVELOPER_PROVIDER_DOC)}>
                 <Link target="_blank" to="/developers/providers">
@@ -214,7 +232,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [t]
+    [providerList, t]
   );
 
   const flowApiItem = useMemo(
@@ -240,13 +258,47 @@ export function LegacyEventConfigForm(
                   margin: "0 6px 0 0",
                 }}
               >
-                <AutoComplete></AutoComplete>
+                <AutoComplete
+                  options={flowApiList?.map((api) => ({ value: api }))}
+                  filterOption={(inputValue, option) =>
+                    option?.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                ></AutoComplete>
               </Form.Item>
               <Tooltip title={t(K.LINK_TO_FLOWER_BUILDER)}>
                 <Link target="_blank" to="/flow-builder">
                   <FileSearchOutlined />
                 </Link>
               </Tooltip>
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [flowApiList, t]
+  );
+
+  const useProviderMethod = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.UseProvider && (
+            <Form.Item
+              label={t(K.METHOD)}
+              name="useProviderMethod"
+              initialValue="resolve"
+            >
+              <Radio.Group>
+                <Radio value="resolve">resolve</Radio>
+                <Radio value="saveAs">saveAs</Radio>
+              </Radio.Group>
             </Form.Item>
           )
         }
@@ -311,7 +363,9 @@ export function LegacyEventConfigForm(
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handlerType") === HandlerType.UseProvider && (
+          [HandlerType.UseProvider, HandlerType.ExecuteMethod].includes(
+            getFieldValue("handlerType")
+          ) && (
             <Form.Item name="callback" label={t(K.CALLBACK_LABEL)}>
               {getCodeEditorItem()}
             </Form.Item>
@@ -336,10 +390,16 @@ export function LegacyEventConfigForm(
           ) && (
             <Form.Item label={t(K.BRICK_SELECTOR_LABEL)} required>
               <Input.Group compact>
-                <Form.Item name="selectorType" noStyle initialValue="target">
+                <Form.Item
+                  name="selectorType"
+                  noStyle
+                  initialValue={useInCustomTemplate ? "targetRef" : "target"}
+                >
                   <Select style={{ width: "105px" }}>
+                    {useInCustomTemplate && (
+                      <Select.Option value="targetRef">targetRef</Select.Option>
+                    )}
                     <Select.Option value="target">target</Select.Option>
-                    <Select.Option value="targetRef">targetRef</Select.Option>
                   </Select>
                 </Form.Item>
                 <Form.Item
@@ -357,7 +417,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [t]
+    [useInCustomTemplate, t]
   );
 
   const brickMethodItem = useMemo(
@@ -445,6 +505,7 @@ export function LegacyEventConfigForm(
       {providerTypeItem}
       {providerItem}
       {flowApiItem}
+      {useProviderMethod}
       {brickItem}
       {brickMethodItem}
       {argsItem}

@@ -43,6 +43,9 @@ export function covertFormValueToEvent(
 
     return {
       useProvider,
+      ...(formValue.useProviderMethod === "resolve"
+        ? {}
+        : { method: formValue.useProviderMethod }),
       ...loadFields,
     } as UseProviderEventHandler;
   } else if (formValue.handlerType === HandlerType.ExecuteMethod) {
@@ -54,6 +57,7 @@ export function covertFormValueToEvent(
       ...safeLoadFields({
         if: formValue.if,
         args: formValue.args,
+        callback: formValue.callback,
       }),
     } as ExecuteCustomBrickEventHandler;
   } else if (formValue.handlerType === HandlerType.SetProps) {

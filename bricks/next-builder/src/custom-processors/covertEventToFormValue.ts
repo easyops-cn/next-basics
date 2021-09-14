@@ -48,6 +48,8 @@ export function covertEventToFormValue(
     return {
       handlerType,
       providerType,
+      useProviderMethod:
+        (handler as UseProviderEventHandler).method || "resolve",
       pollEnabled: poll?.enabled,
       ...(providerType === "flow" ? { flow: provider } : { provider }),
       ...safeDumpFields(
@@ -94,6 +96,7 @@ export function covertEventToFormValue(
           {
             if: handler.if,
             args: (handler as ExecuteCustomBrickEventHandler).args,
+            callback: (handler as ExecuteCustomBrickEventHandler).callback,
           },
           isNil
         )

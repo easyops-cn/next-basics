@@ -57,6 +57,33 @@ export class EventConfigFormElement extends UpdatingElement {
   wrapperCol: ColProps;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description provider 列表
+   */
+  @property({
+    attribute: false,
+  })
+  providerList: string[] = [];
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description flow api 列表
+   */
+  @property({
+    attribute: false,
+  })
+  flowApiList: string[] = [];
+
+  @property({
+    type: Boolean,
+  })
+  useInCustomTemplate: boolean;
+
+  /**
    * @description 表单验证成功时触发
    */
   @event({ type: "validate.success" }) successEvent: EventEmitter<
@@ -133,6 +160,9 @@ export class EventConfigFormElement extends UpdatingElement {
             ref={this._formUtils}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            providerList={this.providerList}
+            flowApiList={this.flowApiList}
+            useInCustomTemplate={this.useInCustomTemplate}
             onValuesChange={this._handleValuesChange}
           />
         </BrickWrapper>,
