@@ -28,7 +28,7 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
     bgBorderRadius = "50%",
     itemClick,
   } = props;
-  if ("imgSrc" in icon) {
+  if (icon && "imgSrc" in icon) {
     return (
       <img
         src={icon.imgSrc}
@@ -40,7 +40,7 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
     );
   }
   return (
-    props.icon && (
+    icon && (
       <div
         style={{ fontSize: size, lineHeight: size, width: "min-content" }}
         onClick={itemClick}
