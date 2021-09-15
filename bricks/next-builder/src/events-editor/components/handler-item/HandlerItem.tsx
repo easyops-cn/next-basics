@@ -1,6 +1,12 @@
 // istanbul ignore file
 // Ignore tests temporarily
-import React, { useContext, createRef, useState, useEffect } from "react";
+import React, {
+  useContext,
+  createRef,
+  useState,
+  useEffect,
+  useMemo,
+} from "react";
 import {
   BrickEventHandler,
   UseProviderEventHandler,
@@ -20,7 +26,10 @@ import {
 } from "../../../shared/visual-events/processEventHandler";
 import { EditorContext } from "../../EventsEditor";
 import { Tooltip } from "antd";
-import { HandlerType } from "../../../shared/visual-events/interfaces";
+import {
+  HandlerType,
+  LifeCycle,
+} from "../../../shared/visual-events/interfaces";
 import sharedStyle from "../../EventsEditor.module.css";
 import styles from "./HandlerItem.module.css";
 import { isNil } from "lodash";
@@ -28,6 +37,7 @@ export interface HandlerItemProps {
   type?: HandlerType;
   handler: BrickEventHandler;
   uniqKey?: string;
+  name?: string;
 }
 
 const handlerIconMap = {
@@ -47,7 +57,7 @@ const callbackEvents = [
 
 export function HandlerItem(props: HandlerItemProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
-  const { type, handler, uniqKey } = props;
+  const { type, handler, uniqKey, name } = props;
   const context = useContext(EditorContext);
   const lastEventNameRef = createRef<HTMLDivElement>();
   const contentWrapperRef = createRef<HTMLDivElement>();
@@ -65,9 +75,17 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
 
   const handlerClick = (handler: BrickEventHandler): void => {
     if (getHandlerType(handler) !== HandlerType.Unknown) {
-      context?.onEdit(handler, uniqKey);
+      context?.onEdit(handler, uniqKey, name);
     }
   };
+
+  const showCallback = useMemo(() => {
+    return (
+      name !== LifeCycle.UseResolves &&
+      (type === HandlerType.UseProvider ||
+        (handler as UseProviderEventHandler).callback)
+    );
+  }, [handler, name, type]);
 
   return (
     <div className={styles[type]}>
@@ -91,7 +109,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
         </div>
         {!isNil(handler.if) && <span className={styles.ifTag}>if</span>}
       </div>
-      {(handler as UseProviderEventHandler).callback && (
+      {showCallback && (
         <div
           className={classNames(sharedStyle.eventWrapper, styles.callback)}
           ref={contentWrapperRef}
@@ -132,6 +150,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
                 {item.events.map((row, rowIndex) => (
                   <HandlerItem
                     key={rowIndex}
+                    name={`callback.${item.name}`}
                     type={getHandlerType(row)}
                     handler={row}
                     uniqKey={`${uniqKey}-callback-${item.name}-${rowIndex}`}

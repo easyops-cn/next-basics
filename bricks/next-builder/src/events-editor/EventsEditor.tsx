@@ -40,7 +40,7 @@ export interface EventsEditorProps {
   eventDocInfo?: EventsDoc[];
   updatedViewKey?: string;
   onCreate?: (key: string, eventName?: string) => void;
-  onEdit?: (handler: BrickEventHandler, key: string) => void;
+  onEdit?: (handler: BrickEventHandler, key: string, eventName: string) => void;
   onRemove?: (handler: BrickEventHandler, key: string) => void;
   onChange?: (eventList: EventConfig[]) => void;
   suffixTitle?: {
@@ -138,6 +138,13 @@ export function LegacyEventsEditor(
     onChange?.(mutableEvents);
   };
 
+  const handleTopLevelRemove = (index: number): void => {
+    const mutableEvents = [...eventList];
+    mutableEvents.splice(index, 1);
+    setEventList(mutableEvents);
+    onChange?.(mutableEvents);
+  };
+
   useImperativeHandle(ref, () => ({
     addEventHandler,
     editEventHandler,
@@ -204,12 +211,19 @@ export function LegacyEventsEditor(
                 icon="plus-square"
                 onClick={() => onCreate(`${index}-events`, item.name)}
               />
+
+              <FontAwesomeIcon
+                className={styles.removeIcon}
+                icon="minus-square"
+                onClick={() => handleTopLevelRemove(index)}
+              />
             </div>
 
             <div className={styles.eventHandler}>
               {item.events.map((row, rowIndex) => (
                 <HandlerItem
                   key={rowIndex}
+                  name={item.name}
                   type={getHandlerType(row)}
                   handler={row}
                   uniqKey={`${index}-events-${rowIndex}`}

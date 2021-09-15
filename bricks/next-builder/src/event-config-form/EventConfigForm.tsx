@@ -24,7 +24,7 @@ import { ColProps } from "antd/lib/col";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { builtinActions } from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
-import { HandlerType } from "../shared/visual-events/interfaces";
+import { HandlerType, LifeCycle } from "../shared/visual-events/interfaces";
 import { isNil } from "lodash";
 
 export interface EventConfigForm {
@@ -33,6 +33,8 @@ export interface EventConfigForm {
   providerList?: string[];
   flowApiList?: string[];
   useInCustomTemplate?: boolean;
+  type: "event" | "lifeCycle";
+  lifeCycle?: LifeCycle;
   onValuesChange?: FormProps["onValuesChange"];
 }
 
@@ -47,6 +49,8 @@ export function LegacyEventConfigForm(
     onValuesChange,
     providerList,
     flowApiList,
+    type,
+    lifeCycle,
     useInCustomTemplate,
   } = props;
   const [form] = Form.useForm();
@@ -93,6 +97,7 @@ export function LegacyEventConfigForm(
   const handlerTypeItem = useMemo(
     () => (
       <Form.Item
+        hidden={lifeCycle === LifeCycle.UseResolves}
         name="handlerType"
         label={t(K.HANDLE_TYPE_LABEL)}
         rules={[{ required: true }]}
@@ -113,7 +118,7 @@ export function LegacyEventConfigForm(
         </Radio.Group>
       </Form.Item>
     ),
-    [t, HandleTypeChange]
+    [t, HandleTypeChange, lifeCycle]
   );
 
   const ifItem = useMemo(
@@ -491,14 +496,45 @@ export function LegacyEventConfigForm(
     [t]
   );
 
-  return (
-    <Form
-      name="eventConfigForm"
-      form={form}
-      labelCol={labelCol}
-      wrapperCol={wrapperCol}
-      onValuesChange={onValuesChange}
-    >
+  const useResolvesItem = useMemo(
+    () => (
+      <>
+        {handlerTypeItem}
+        {ifItem}
+        {providerTypeItem}
+        {providerItem}
+        {flowApiItem}
+        {argsItem}
+        <Form.Item noStyle>
+          <Form.Item name="transform" label={t(K.TRANSFORM_LABEL)}>
+            {getCodeEditorItem()}
+          </Form.Item>
+          <Form.Item
+            name="transformFrom"
+            label={t(K.TRANSFORM_FROM_LABEL)}
+            tooltip={t(K.TRANSFORM_FROM_TOOLTIP)}
+          >
+            {getCodeEditorItem({ minLines: 3, mode: "text" })}
+          </Form.Item>
+          <Form.Item name="onReject" label={t(K.REJECT_LABEL)}>
+            {getCodeEditorItem()}
+          </Form.Item>
+        </Form.Item>
+      </>
+    ),
+    [
+      argsItem,
+      flowApiItem,
+      handlerTypeItem,
+      ifItem,
+      providerItem,
+      providerTypeItem,
+      t,
+    ]
+  );
+
+  const allEventTypeItem = (
+    <>
       {handlerTypeItem}
       {ifItem}
       {actionItem}
@@ -513,6 +549,29 @@ export function LegacyEventConfigForm(
       {pollEnabledItem}
       {pollItem}
       {callbackItem}
+    </>
+  );
+
+  const getFormItem = (
+    type: string,
+    lifeCycle?: string
+  ): React.ReactElement => {
+    if (type === "lifeCycle" && lifeCycle === LifeCycle.UseResolves) {
+      return useResolvesItem;
+    } else {
+      return allEventTypeItem;
+    }
+  };
+
+  return (
+    <Form
+      name="eventConfigForm"
+      form={form}
+      labelCol={labelCol}
+      wrapperCol={wrapperCol}
+      onValuesChange={onValuesChange}
+    >
+      {getFormItem(type, lifeCycle)}
     </Form>
   );
 }

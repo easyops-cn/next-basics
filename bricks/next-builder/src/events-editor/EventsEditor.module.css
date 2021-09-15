@@ -59,13 +59,24 @@
   margin-left: 40px;
 }
 
-.plusIcon {
+.plusIcon,
+.removeIcon {
   margin-left: 12px;
-  color: #749dd7;
   font-size: 16px;
   cursor: pointer;
+}
+
+.plusIcon {
+  color: #749dd7;
   &:hover {
     color: #2196f3;
+  }
+}
+
+.removeIcon {
+  color: #f57268;
+  &:hover {
+    color: #f0493c;
   }
 }
 

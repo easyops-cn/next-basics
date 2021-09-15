@@ -25,3 +25,5 @@ import "./events-editor";
 import "./custom-processors/getProcessedEvents";
 import "./custom-processors/covertEventToFormValue";
 import "./custom-processors/covertFormValueToEvent";
+import "./custom-processors/covertUseResolvesToFormValue";
+import "./custom-processors/covertFormValueToUseResolves";

@@ -88,17 +88,25 @@ export class EventsEditorElement extends UpdatingElement {
     useBrick: UseBrickConf;
   };
 
-  @event({ type: "event.create" }) eventCreate: EventEmitter<{ key: string }>;
-  private _handleCreate = (key: string): void => {
-    this.eventCreate.emit({ key });
+  @event({ type: "event.create" }) eventCreate: EventEmitter<{
+    key: string;
+    name: string;
+  }>;
+  private _handleCreate = (key: string, eventName: string): void => {
+    this.eventCreate.emit({ key, name: eventName });
   };
 
   @event({ type: "event.edit" }) eventEdit: EventEmitter<{
     key: string;
+    name: string;
     handler: BrickEventHandler;
   }>;
-  private _handleEdit = (handler: BrickEventHandler, key: string): void => {
-    this.eventEdit.emit({ handler, key });
+  private _handleEdit = (
+    handler: BrickEventHandler,
+    key: string,
+    eventName: string
+  ): void => {
+    this.eventEdit.emit({ handler, key, name: eventName });
   };
 
   /**

@@ -78,6 +78,12 @@ export class EventConfigFormElement extends UpdatingElement {
   })
   flowApiList: string[] = [];
 
+  @property()
+  type: "event" | "lifeCycle";
+
+  @property()
+  lifeCycle: string;
+
   @property({
     type: Boolean,
   })
@@ -162,6 +168,8 @@ export class EventConfigFormElement extends UpdatingElement {
             wrapperCol={this.wrapperCol}
             providerList={this.providerList}
             flowApiList={this.flowApiList}
+            type={this.type}
+            lifeCycle={this.lifeCycle}
             useInCustomTemplate={this.useInCustomTemplate}
             onValuesChange={this._handleValuesChange}
           />
