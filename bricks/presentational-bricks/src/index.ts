@@ -71,3 +71,4 @@ import "./custom-processors/flattenTreeDataListAndCalcRowSpan";
 import "./rank-table";
 import "./dropdown-button";
 import "./lazy-bricks";
+import "./basic-icon";

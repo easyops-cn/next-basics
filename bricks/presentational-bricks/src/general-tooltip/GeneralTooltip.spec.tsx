@@ -1,11 +1,14 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { GeneralTooltip } from "./GeneralTooltip";
-import * as basicComponents from "@next-libs/basic-components";
 import { Tooltip, Popover } from "antd";
 
-jest.spyOn(basicComponents, "GeneralIcon").mockImplementation(() => {
-  return <div>general icon</div>;
+jest.mock("@next-libs/basic-components", () => {
+  return {
+    GeneralIcon: function GeneralIcon() {
+      return <div>general icon</div>;
+    },
+  };
 });
 
 const displayBrick = {

@@ -60,6 +60,7 @@ import { BrickIllustrationStory } from "./brick-illustration";
 import { DynamicGridContainerStory } from "./dynamic-grid-container";
 import { RankTableStory } from "./rank-table";
 import { DropdownButtonStory } from "./dropdown-button";
+import { BasicIconStory } from "./basic-icon";
 export const Chapters = [
   AgentStatusStory,
   BasicProgressStory,
@@ -123,4 +124,5 @@ export const Chapters = [
   DynamicGridContainerStory,
   RankTableStory,
   DropdownButtonStory,
+  BasicIconStory,
 ];
