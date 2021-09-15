@@ -3,9 +3,11 @@ import { mount } from "enzyme";
 import { BasicIcon } from "./BasicIcon";
 import cssStyle from "./BasicIcon.module.css";
 import { MenuIcon } from "@next-core/brick-types";
-
+import { GeneralIcon } from "@next-libs/basic-components";
 describe("BasicIcon", () => {
   it("should work", () => {
+    const wrapper = mount(<BasicIcon />);
+    expect(wrapper.find(GeneralIcon)).toHaveLength(0);
     const icon: MenuIcon = {
       lib: "fa",
       icon: "angle-left",
@@ -14,9 +16,12 @@ describe("BasicIcon", () => {
     };
     const renderBg = true;
     const itemClick = jest.fn();
-    const wrapper = mount(
-      <BasicIcon icon={icon} renderBg={renderBg} itemClick={itemClick} />
-    );
+    wrapper.setProps({
+      icon: icon,
+      renderBg: renderBg,
+      itemClick: itemClick,
+    });
+    wrapper.update();
     expect(wrapper.find(`.${cssStyle.iconWrapper}`)).toHaveLength(1);
     wrapper.setProps({ renderBg: false });
     wrapper.update();

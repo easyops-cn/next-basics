@@ -9,7 +9,7 @@ export type ImgIcon = {
 };
 
 export interface BasicIconProps {
-  icon: MenuIcon | ImgIcon;
+  icon?: MenuIcon | ImgIcon;
   size?: string;
   renderBg?: boolean;
   bg?: string;
@@ -28,8 +28,9 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
     bgBorderRadius = "50%",
     itemClick,
   } = props;
-  if (icon && "imgSrc" in icon) {
-    return (
+
+  return icon ? (
+    icon.imgSrc ? (
       <img
         src={icon.imgSrc}
         height={size}
@@ -37,10 +38,7 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
         style={icon.imgStyle}
         onClick={itemClick}
       />
-    );
-  }
-  return (
-    icon && (
+    ) : (
       <div
         style={{ fontSize: size, lineHeight: size, width: "min-content" }}
         onClick={itemClick}
@@ -62,5 +60,7 @@ export function BasicIcon(props: BasicIconProps): React.ReactElement {
         )}
       </div>
     )
+  ) : (
+    <></>
   );
 }
