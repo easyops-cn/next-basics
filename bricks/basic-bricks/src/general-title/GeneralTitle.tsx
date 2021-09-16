@@ -12,6 +12,7 @@ interface GeneralTitleProps {
   titleSuffixBrick?: { useBrick: UseBrickConf };
   descPrefixBrick?: { useBrick: UseBrickConf };
   dataSource?: Record<string, any>;
+  descSuffixBrick?: { useBrick: UseBrickConf };
 }
 export function GeneralTitle(props: GeneralTitleProps): React.ReactElement {
   const {
@@ -23,13 +24,14 @@ export function GeneralTitle(props: GeneralTitleProps): React.ReactElement {
     subTitle,
     url,
     target,
+    descSuffixBrick,
   } = props;
   return (
     <div>
       {mainTitle && (
         <div className={styles.titleWrapper}>
           {url ? (
-            <Link to={url} target={target} className={styles.titleContent}>
+            <Link to={url} target={target} className={styles.titleContentUrl}>
               {mainTitle}
             </Link>
           ) : (
@@ -58,10 +60,19 @@ export function GeneralTitle(props: GeneralTitleProps): React.ReactElement {
           )}
           <div
             className={styles.descriptionContent}
-            style={{ marginLeft: descPrefixBrick?.useBrick ? "5px" : "" }}
+            style={{
+              marginLeft: descPrefixBrick?.useBrick ? "5px" : "",
+              marginRight: descSuffixBrick?.useBrick ? "5px" : "",
+            }}
           >
             {description}
           </div>
+          {descSuffixBrick?.useBrick && (
+            <BrickAsComponent
+              useBrick={descSuffixBrick.useBrick}
+              data={dataSource}
+            />
+          )}
         </div>
       )}
     </div>
