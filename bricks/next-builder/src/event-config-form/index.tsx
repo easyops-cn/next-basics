@@ -8,6 +8,7 @@ import {
   method,
   EventEmitter,
 } from "@next-core/brick-kit";
+import { LifeCycle } from "../shared/visual-events/interfaces";
 import { EventConfigForm } from "./EventConfigForm";
 import { ColProps } from "antd/lib/col";
 import { FormInstance } from "antd/lib/form";
@@ -82,7 +83,7 @@ export class EventConfigFormElement extends UpdatingElement {
   type: "event" | "lifeCycle";
 
   @property()
-  lifeCycle: string;
+  lifeCycle: LifeCycle;
 
   @property({
     type: Boolean,

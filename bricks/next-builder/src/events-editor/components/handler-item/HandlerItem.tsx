@@ -26,6 +26,7 @@ import {
 } from "../../../shared/visual-events/processEventHandler";
 import { EditorContext } from "../../EventsEditor";
 import { Tooltip } from "antd";
+import { AddEventBtn } from "../add-event-btn/AddEventBtn";
 import {
   HandlerType,
   LifeCycle,
@@ -59,19 +60,19 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const { type, handler, uniqKey, name } = props;
   const context = useContext(EditorContext);
-  const lastEventNameRef = createRef<HTMLDivElement>();
+  const actionBtnRef = createRef<HTMLDivElement>();
   const contentWrapperRef = createRef<HTMLDivElement>();
   const [lineHeight, setLineHight] = useState(0);
 
   useEffect(() => {
     const height =
-      lastEventNameRef.current && contentWrapperRef.current
-        ? lastEventNameRef.current.getBoundingClientRect()?.top -
+      actionBtnRef.current && contentWrapperRef.current
+        ? actionBtnRef.current.getBoundingClientRect()?.top -
           contentWrapperRef.current.getBoundingClientRect()?.top +
           15
         : 0;
     setLineHight(height);
-  }, [contentWrapperRef, lastEventNameRef]);
+  }, [contentWrapperRef, actionBtnRef]);
 
   const handlerClick = (handler: BrickEventHandler): void => {
     if (getHandlerType(handler) !== HandlerType.Unknown) {
@@ -87,10 +88,84 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
     );
   }, [handler, name, type]);
 
+  const handlerCallback = (
+    <>
+      <div
+        className={classNames(sharedStyle.eventWrapper, styles.callback)}
+        ref={contentWrapperRef}
+      >
+        <div
+          className={sharedStyle.strikeLine}
+          style={{ height: lineHeight }}
+        ></div>
+        {processEvents(
+          [],
+          (handler as UseProviderEventHandler).callback as BrickEventsMap
+        )?.map((item) => (
+          <div key={item.name}>
+            <div className={sharedStyle.eventName}>
+              <FontAwesomeIcon
+                icon="bolt"
+                style={{ marginRight: 12 }}
+                className={sharedStyle.eventIcon}
+              />
+              {`callback.${item.name}`}
+
+              <FontAwesomeIcon
+                className={sharedStyle.plusIcon}
+                icon="plus-square"
+                onClick={() =>
+                  context?.onCreate(
+                    `${uniqKey}-callback-${item.name}`,
+                    `callback.${item.name}`
+                  )
+                }
+              />
+
+              <FontAwesomeIcon
+                className={sharedStyle.removeIcon}
+                icon="minus-square"
+                onClick={() =>
+                  context.removeCallback?.(`${uniqKey}-callback-${item.name}`)
+                }
+              />
+            </div>
+
+            <div className={sharedStyle.eventHandler}>
+              {item.events.map((row, rowIndex) => (
+                <HandlerItem
+                  key={rowIndex}
+                  name={`callback.${item.name}`}
+                  type={getHandlerType(row)}
+                  handler={row}
+                  uniqKey={`${uniqKey}-callback-${item.name}-${rowIndex}`}
+                ></HandlerItem>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={sharedStyle.actionArea} ref={actionBtnRef}>
+        <AddEventBtn
+          eventDocInfo={callbackEvents}
+          eventList={processEvents(
+            [],
+            (handler as UseProviderEventHandler).callback as BrickEventsMap
+          )}
+          onClick={(name) =>
+            context.addCallback?.(`${uniqKey}-callback-${name}`)
+          }
+        />
+      </div>
+    </>
+  );
+
   return (
     <div className={styles[type]}>
       <div
-        className={styles.handleContainer}
+        className={classNames(styles.handleContainer, {
+          [styles.unknown]: type === HandlerType.Unknown,
+        })}
         onClick={() => handlerClick(handler)}
       >
         <FontAwesomeIcon
@@ -109,58 +184,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
         </div>
         {!isNil(handler.if) && <span className={styles.ifTag}>if</span>}
       </div>
-      {showCallback && (
-        <div
-          className={classNames(sharedStyle.eventWrapper, styles.callback)}
-          ref={contentWrapperRef}
-        >
-          <div
-            className={sharedStyle.strikeLine}
-            style={{ height: lineHeight }}
-          ></div>
-          {processEvents(
-            callbackEvents,
-            (handler as UseProviderEventHandler).callback as BrickEventsMap
-          )?.map((item, index, arr) => (
-            <div key={item.name}>
-              <div
-                className={sharedStyle.eventName}
-                {...(index === arr.length - 1 ? { ref: lastEventNameRef } : {})}
-              >
-                <FontAwesomeIcon
-                  icon="bolt"
-                  style={{ marginRight: 12 }}
-                  className={sharedStyle.eventIcon}
-                />
-                {`callback.${item.name}`}
-
-                <FontAwesomeIcon
-                  className={sharedStyle.plusIcon}
-                  icon="plus-square"
-                  onClick={() =>
-                    context?.onCreate(
-                      `${uniqKey}-callback-${item.name}`,
-                      `callback.${item.name}`
-                    )
-                  }
-                />
-              </div>
-
-              <div className={sharedStyle.eventHandler}>
-                {item.events.map((row, rowIndex) => (
-                  <HandlerItem
-                    key={rowIndex}
-                    name={`callback.${item.name}`}
-                    type={getHandlerType(row)}
-                    handler={row}
-                    uniqKey={`${uniqKey}-callback-${item.name}-${rowIndex}`}
-                  ></HandlerItem>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {showCallback && handlerCallback}
     </div>
   );
 }

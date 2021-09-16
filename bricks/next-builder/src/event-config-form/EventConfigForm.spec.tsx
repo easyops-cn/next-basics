@@ -5,7 +5,10 @@ import { EventConfigForm } from "./EventConfigForm";
 
 describe("EventConfigForm", () => {
   it("should work", () => {
-    const wrapper = shallow(<EventConfigForm />);
+    const props = {
+      onValuesChange: jest.fn(),
+    };
+    const wrapper = shallow(<EventConfigForm {...props} />);
     expect(wrapper.find(Form.Item).at(0).find(Radio).length).toEqual(4);
   });
 });
