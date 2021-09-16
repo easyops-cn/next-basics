@@ -80,6 +80,9 @@ const locale: Locale = {
   [K.EVENTS_HANDLER_USE_PROVIDER]: "Use Provider",
   [K.EVENTS_HANDLER_SET_PROP]: "Set Brick Properties",
   [K.EVENTS_HANDLER_USE_METHOD]: "Use Brick Method",
+  [K.NO_EVENTS_TO_ADD]: "No Events To Add",
+  [K.DO_NOT_SUPPORT_VISUAL_CONFIG]:
+    "The current event handler uses the legacy configuration, which is not currently supported, please switch to yaml mode to modify",
   [K.SELECT_ACTION_LABEL]: "Select Action",
   [K.PROVIDER_TYPE_LABEL]: "Provider Type",
   [K.BRICK_SELECTOR_LABEL]: "Brick",
@@ -91,6 +94,11 @@ const locale: Locale = {
   [K.BUILTIN_PROVIDER]: "Builtin Provider",
   [K.IF_LABEL]: "If",
   [K.POLLING_LABEL]: "Polling",
+  [K.TRANSFORM_LABEL]: "Transform",
+  [K.TRANSFORM_FROM_LABEL]: "TransformFrom",
+  [K.REJECT_LABEL]: "OnReject",
+  [K.TRANSFORM_FROM_TOOLTIP]:
+    "Use the specified field of the returned data as the data source.",
   [K.POLLING_ITEM_PLACEHOLDER]: "Please input polling parameters",
   [K.FLOW_API]: "Flow Api",
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]:

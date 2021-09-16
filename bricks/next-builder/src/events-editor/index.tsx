@@ -13,7 +13,12 @@ import {
   EventEmitter,
   method,
 } from "@next-core/brick-kit";
-import { EventsEditor, EventConfig, EditorRef } from "./EventsEditor";
+import {
+  EventsEditor,
+  EventConfig,
+  EditorRef,
+  EventsDoc,
+} from "./EventsEditor";
 
 /**
  * @id next-builder.events-editor
@@ -49,6 +54,17 @@ export class EventsEditorElement extends UpdatingElement {
   updatedViewKey: string;
 
   /**
+   * @kind EventsDoc[]
+   * @required false
+   * @default -
+   * @description 文档中事件的信息
+   */
+  @property({
+    attribute: false,
+  })
+  eventDocInfo: EventsDoc[];
+
+  /**
    * @kind BrickEventsMap
    * @required false
    * @default -
@@ -59,6 +75,12 @@ export class EventsEditorElement extends UpdatingElement {
   })
   eventList: EventConfig[];
 
+  /**
+   * @kind {useBrick: UseBrickConf}
+   * @required false
+   * @default -
+   * @description title末尾自定构件配置
+   */
   @property({
     attribute: false,
   })
@@ -66,17 +88,25 @@ export class EventsEditorElement extends UpdatingElement {
     useBrick: UseBrickConf;
   };
 
-  @event({ type: "event.create" }) eventCreate: EventEmitter<{ key: string }>;
-  private _handleCreate = (key: string): void => {
-    this.eventCreate.emit({ key });
+  @event({ type: "event.create" }) eventCreate: EventEmitter<{
+    key: string;
+    name: string;
+  }>;
+  private _handleCreate = (key: string, eventName: string): void => {
+    this.eventCreate.emit({ key, name: eventName });
   };
 
   @event({ type: "event.edit" }) eventEdit: EventEmitter<{
     key: string;
+    name: string;
     handler: BrickEventHandler;
   }>;
-  private _handleEdit = (handler: BrickEventHandler, key: string): void => {
-    this.eventEdit.emit({ handler, key });
+  private _handleEdit = (
+    handler: BrickEventHandler,
+    key: string,
+    eventName: string
+  ): void => {
+    this.eventEdit.emit({ handler, key, name: eventName });
   };
 
   /**
@@ -130,6 +160,7 @@ export class EventsEditorElement extends UpdatingElement {
           <EventsEditor
             ref={this._editorRef}
             updatedViewKey={this.updatedViewKey}
+            eventDocInfo={this.eventDocInfo}
             eventList={this.eventList}
             titleIcon={this.titleIcon}
             onCreate={this._handleCreate}

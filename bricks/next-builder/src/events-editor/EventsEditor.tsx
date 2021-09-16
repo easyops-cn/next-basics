@@ -21,19 +21,26 @@ import { HandlerItem } from "./components/handler-item/HandlerItem";
 import { getHandlerType } from "../shared/visual-events/processEventHandler";
 import styles from "./EventsEditor.module.css";
 import { get, set } from "lodash";
+import { Button, Dropdown, Menu, Tooltip } from "antd";
 
 export interface EventConfig {
   name?: string;
   events?: BrickEventHandler[];
 }
 
+export interface EventsDoc {
+  type: string;
+  description?: string;
+}
+
 export interface EventsEditorProps {
   customTitle?: string;
   titleIcon?: MenuIcon;
   eventList: EventConfig[];
+  eventDocInfo?: EventsDoc[];
   updatedViewKey?: string;
-  onCreate?: (key: string) => void;
-  onEdit?: (handler: BrickEventHandler, key: string) => void;
+  onCreate?: (key: string, eventName?: string) => void;
+  onEdit?: (handler: BrickEventHandler, key: string, eventName: string) => void;
   onRemove?: (handler: BrickEventHandler, key: string) => void;
   onChange?: (eventList: EventConfig[]) => void;
   suffixTitle?: {
@@ -67,11 +74,12 @@ export function LegacyEventsEditor(
     onChange,
     titleIcon,
     suffixTitle,
+    eventDocInfo,
   } = props;
   const [lineHeight, setLineHight] = useState(0);
   const [eventList, setEventList] = useState(props.eventList);
 
-  const lastEventNameRef = createRef<HTMLDivElement>();
+  const actionBtnRef = createRef<HTMLDivElement>();
   const contentWrapperRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -80,13 +88,13 @@ export function LegacyEventsEditor(
 
   useEffect(() => {
     const height =
-      lastEventNameRef.current && contentWrapperRef.current
-        ? lastEventNameRef.current.getBoundingClientRect()?.top -
+      actionBtnRef.current && contentWrapperRef.current
+        ? actionBtnRef.current.getBoundingClientRect()?.top -
           contentWrapperRef.current.getBoundingClientRect()?.top +
           15
         : 0;
     setLineHight(height);
-  }, [contentWrapperRef, lastEventNameRef, updatedViewKey]);
+  }, [contentWrapperRef, actionBtnRef, updatedViewKey]);
 
   const addEventHandler = (handler: BrickEventHandler, key: string): void => {
     const pathArr = key.split("-");
@@ -130,11 +138,48 @@ export function LegacyEventsEditor(
     onChange?.(mutableEvents);
   };
 
+  const handleTopLevelRemove = (index: number): void => {
+    const mutableEvents = [...eventList];
+    mutableEvents.splice(index, 1);
+    setEventList(mutableEvents);
+    onChange?.(mutableEvents);
+  };
+
   useImperativeHandle(ref, () => ({
     addEventHandler,
     editEventHandler,
     removeEventHandler,
   }));
+
+  const handlerBtnClick = (key: string): void => {
+    setEventList([...eventList, { name: key, events: [] }]);
+  };
+
+  const getAddBtn = (): React.ReactElement => {
+    const btnDropdownList =
+      eventDocInfo?.filter(
+        (item) => !eventList?.some((row) => row.name === item.type)
+      ) ?? [];
+    const hasMenu = btnDropdownList.length > 0;
+
+    const btnMenu = (
+      <Menu onClick={(e) => handlerBtnClick?.(e.key as string)}>
+        {btnDropdownList.map((item) => (
+          <Menu.Item key={item.type}>{item.type}</Menu.Item>
+        ))}
+      </Menu>
+    );
+
+    return (
+      <Dropdown overlay={btnMenu} trigger={["click"]} disabled={!hasMenu}>
+        <Tooltip title={!hasMenu && t(K.NO_EVENTS_TO_ADD)}>
+          <Button type="link" disabled={!hasMenu}>
+            <FontAwesomeIcon className={styles.addIcon} icon="plus" />
+          </Button>
+        </Tooltip>
+      </Dropdown>
+    );
+  };
 
   return (
     <EditorContext.Provider value={{ onCreate, onEdit }}>
@@ -153,12 +198,7 @@ export function LegacyEventsEditor(
         <div className={styles.strikeLine} style={{ height: lineHeight }}></div>
         {eventList?.map((item, index) => (
           <div key={item.name}>
-            <div
-              className={styles.eventName}
-              {...(index === eventList.length - 1
-                ? { ref: lastEventNameRef }
-                : {})}
-            >
+            <div className={styles.eventName}>
               <FontAwesomeIcon
                 icon="bolt"
                 style={{ marginRight: 12 }}
@@ -169,7 +209,13 @@ export function LegacyEventsEditor(
               <FontAwesomeIcon
                 className={styles.plusIcon}
                 icon="plus-square"
-                onClick={() => onCreate(`${index}-events`)}
+                onClick={() => onCreate(`${index}-events`, item.name)}
+              />
+
+              <FontAwesomeIcon
+                className={styles.removeIcon}
+                icon="minus-square"
+                onClick={() => handleTopLevelRemove(index)}
               />
             </div>
 
@@ -177,6 +223,7 @@ export function LegacyEventsEditor(
               {item.events.map((row, rowIndex) => (
                 <HandlerItem
                   key={rowIndex}
+                  name={item.name}
                   type={getHandlerType(row)}
                   handler={row}
                   uniqKey={`${index}-events-${rowIndex}`}
@@ -185,6 +232,10 @@ export function LegacyEventsEditor(
             </div>
           </div>
         ))}
+      </div>
+
+      <div className={styles.actionArea} ref={actionBtnRef}>
+        {getAddBtn()}
       </div>
     </EditorContext.Provider>
   );

@@ -34,4 +34,18 @@ export interface EventFormField {
   args?: string;
   properties?: string;
   useProviderMethod?: "resolve" | "saveAs";
+  transform?: string;
+  transformFrom?: string;
+  onReject?: string;
+}
+
+export enum LifeCycle {
+  UseResolves = "useResolves",
+  OnBeforePageLoad = "onBeforePageLoad",
+  OnPageLoad = "onPageLoad",
+  OnAnchorLoad = "onAnchorLoad",
+  OnAnchorUnload = "onAnchorUnload",
+  OnMessage = "onMessage",
+  OnBeforePageLeave = "onBeforePageLeave",
+  OnPageLeave = "onPageLeave",
 }

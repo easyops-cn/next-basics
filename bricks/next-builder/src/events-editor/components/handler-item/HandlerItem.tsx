@@ -1,6 +1,12 @@
 // istanbul ignore file
 // Ignore tests temporarily
-import React, { useContext, createRef, useState, useEffect } from "react";
+import React, {
+  useContext,
+  createRef,
+  useState,
+  useEffect,
+  useMemo,
+} from "react";
 import {
   BrickEventHandler,
   UseProviderEventHandler,
@@ -11,13 +17,19 @@ import {
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
+import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
+import { useTranslation } from "react-i18next";
 import { processEvents } from "../../../shared/visual-events/getProcessedEvents";
 import {
   getHandlerName,
   getHandlerType,
 } from "../../../shared/visual-events/processEventHandler";
 import { EditorContext } from "../../EventsEditor";
-import { HandlerType } from "../../../shared/visual-events/interfaces";
+import { Tooltip } from "antd";
+import {
+  HandlerType,
+  LifeCycle,
+} from "../../../shared/visual-events/interfaces";
 import sharedStyle from "../../EventsEditor.module.css";
 import styles from "./HandlerItem.module.css";
 import { isNil } from "lodash";
@@ -25,6 +37,7 @@ export interface HandlerItemProps {
   type?: HandlerType;
   handler: BrickEventHandler;
   uniqKey?: string;
+  name?: string;
 }
 
 const handlerIconMap = {
@@ -43,7 +56,8 @@ const callbackEvents = [
 ];
 
 export function HandlerItem(props: HandlerItemProps): React.ReactElement {
-  const { type, handler, uniqKey } = props;
+  const { t } = useTranslation(NS_NEXT_BUILDER);
+  const { type, handler, uniqKey, name } = props;
   const context = useContext(EditorContext);
   const lastEventNameRef = createRef<HTMLDivElement>();
   const contentWrapperRef = createRef<HTMLDivElement>();
@@ -60,8 +74,18 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
   }, [contentWrapperRef, lastEventNameRef]);
 
   const handlerClick = (handler: BrickEventHandler): void => {
-    context?.onEdit(handler, uniqKey);
+    if (getHandlerType(handler) !== HandlerType.Unknown) {
+      context?.onEdit(handler, uniqKey, name);
+    }
   };
+
+  const showCallback = useMemo(() => {
+    return (
+      name !== LifeCycle.UseResolves &&
+      (type === HandlerType.UseProvider ||
+        (handler as UseProviderEventHandler).callback)
+    );
+  }, [handler, name, type]);
 
   return (
     <div className={styles[type]}>
@@ -73,10 +97,19 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
           icon={handlerIconMap[type] as FontAwesomeIconProps["icon"]}
           className={styles.icon}
         />
-        <div className={styles.handler}>{getHandlerName(handler)}</div>
+        <div className={styles.handler}>
+          <Tooltip
+            title={
+              getHandlerType(handler) === HandlerType.Unknown &&
+              t(K.DO_NOT_SUPPORT_VISUAL_CONFIG)
+            }
+          >
+            {getHandlerName(handler)}
+          </Tooltip>
+        </div>
         {!isNil(handler.if) && <span className={styles.ifTag}>if</span>}
       </div>
-      {type === HandlerType.UseProvider && (
+      {showCallback && (
         <div
           className={classNames(sharedStyle.eventWrapper, styles.callback)}
           ref={contentWrapperRef}
@@ -105,7 +138,10 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
                   className={sharedStyle.plusIcon}
                   icon="plus-square"
                   onClick={() =>
-                    context?.onCreate(`${uniqKey}-callback-${item.name}`)
+                    context?.onCreate(
+                      `${uniqKey}-callback-${item.name}`,
+                      `callback.${item.name}`
+                    )
                   }
                 />
               </div>
@@ -114,6 +150,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
                 {item.events.map((row, rowIndex) => (
                   <HandlerItem
                     key={rowIndex}
+                    name={`callback.${item.name}`}
                     type={getHandlerType(row)}
                     handler={row}
                     uniqKey={`${uniqKey}-callback-${item.name}-${rowIndex}`}
