@@ -99,6 +99,18 @@ export class GeneralTitleElement extends UpdatingElement {
   titleSuffixBrick: { useBrick: UseBrickConf };
 
   /**
+   * @kind `{useBrick: UseBrickConf }`
+   * @required false
+   * @default
+   * @description 可以在描述后面添加后缀
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  descSuffixBrick: { useBrick: UseBrickConf };
+
+  /**
    * @kind ` Record<string, any>`
    * @required false
    * @default
@@ -176,6 +188,7 @@ export class GeneralTitleElement extends UpdatingElement {
             dataSource={this.dataSource}
             titleSuffixBrick={this.titleSuffixBrick}
             descPrefixBrick={this.descPrefixBrick}
+            descSuffixBrick={this.descSuffixBrick}
           />
         </BrickWrapper>,
         this
