@@ -25,7 +25,7 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import { builtinActions } from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
 import { HandlerType, LifeCycle } from "../shared/visual-events/interfaces";
-import { isNil } from "lodash";
+import { isNil, debounce } from "lodash";
 
 export interface EventConfigForm {
   labelCol?: ColProps;
@@ -63,6 +63,11 @@ export function LegacyEventConfigForm(
       validateFields: form.validateFields,
     }),
     [form]
+  );
+
+  const debounceHandleChange = useMemo(
+    () => debounce(onValuesChange, 600),
+    [onValuesChange]
   );
 
   const getCodeEditorItem = (options = {}): React.ReactNode => {
@@ -411,6 +416,7 @@ export function LegacyEventConfigForm(
                   name="brickSelector"
                   noStyle
                   rules={[{ required: true }]}
+                  messageVariables={{ label: "brickSelector" }}
                 >
                   <AutoComplete
                     style={{ width: "calc(100% - 105px)" }}
@@ -569,7 +575,7 @@ export function LegacyEventConfigForm(
       form={form}
       labelCol={labelCol}
       wrapperCol={wrapperCol}
-      onValuesChange={onValuesChange}
+      onValuesChange={debounceHandleChange}
     >
       {getFormItem(type, lifeCycle)}
     </Form>

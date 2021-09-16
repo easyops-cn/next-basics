@@ -18,6 +18,16 @@ export interface ProcessEvent {
   events?: BrickEventHandler[];
 }
 
+export interface EventConfig {
+  name?: string;
+  events?: BrickEventHandler[];
+}
+
+export interface EventsDoc {
+  type: string;
+  description?: string;
+}
+
 export interface EventFormField {
   handlerType: HandlerType;
   if?: string;

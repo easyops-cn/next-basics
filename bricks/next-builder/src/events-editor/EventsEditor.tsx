@@ -19,19 +19,11 @@ import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HandlerItem } from "./components/handler-item/HandlerItem";
 import { getHandlerType } from "../shared/visual-events/processEventHandler";
+import { EventConfig, EventsDoc } from "../shared/visual-events/interfaces";
 import styles from "./EventsEditor.module.css";
 import { get, set } from "lodash";
-import { Button, Dropdown, Menu, Tooltip } from "antd";
-
-export interface EventConfig {
-  name?: string;
-  events?: BrickEventHandler[];
-}
-
-export interface EventsDoc {
-  type: string;
-  description?: string;
-}
+import { LoadingOutlined } from "@ant-design/icons";
+import { AddEventBtn } from "./components/add-event-btn/AddEventBtn";
 
 export interface EventsEditorProps {
   customTitle?: string;
@@ -39,6 +31,7 @@ export interface EventsEditorProps {
   eventList: EventConfig[];
   eventDocInfo?: EventsDoc[];
   updatedViewKey?: string;
+  loading?: boolean;
   onCreate?: (key: string, eventName?: string) => void;
   onEdit?: (handler: BrickEventHandler, key: string, eventName: string) => void;
   onRemove?: (handler: BrickEventHandler, key: string) => void;
@@ -58,6 +51,8 @@ export const EditorContext = React.createContext<{
   onCreate?: EventsEditorProps["onCreate"];
   onEdit?: EventsEditorProps["onEdit"];
   onRemove?: EventsEditorProps["onRemove"];
+  addCallback?: (key: string) => void;
+  removeCallback?: (key: string) => void;
 }>({});
 
 export function LegacyEventsEditor(
@@ -75,6 +70,7 @@ export function LegacyEventsEditor(
     titleIcon,
     suffixTitle,
     eventDocInfo,
+    loading,
   } = props;
   const [lineHeight, setLineHight] = useState(0);
   const [eventList, setEventList] = useState(props.eventList);
@@ -145,6 +141,29 @@ export function LegacyEventsEditor(
     onChange?.(mutableEvents);
   };
 
+  const addCallback = (key: string): void => {
+    const pathArr = key.split("-");
+    const mutableEvents = [...eventList];
+
+    set(mutableEvents, pathArr, []);
+
+    setEventList(mutableEvents);
+    onChange?.(mutableEvents);
+  };
+
+  const removeCallback = (key: string): void => {
+    const pathArr = key.split("-");
+    const mutableEvents = [...eventList];
+    const callback = get(mutableEvents, pathArr.slice(0, -1));
+    if (callback) {
+      const name = pathArr.pop();
+      delete callback[name];
+    }
+
+    setEventList(mutableEvents);
+    onChange?.(mutableEvents);
+  };
+
   useImperativeHandle(ref, () => ({
     addEventHandler,
     editEventHandler,
@@ -155,34 +174,14 @@ export function LegacyEventsEditor(
     setEventList([...eventList, { name: key, events: [] }]);
   };
 
-  const getAddBtn = (): React.ReactElement => {
-    const btnDropdownList =
-      eventDocInfo?.filter(
-        (item) => !eventList?.some((row) => row.name === item.type)
-      ) ?? [];
-    const hasMenu = btnDropdownList.length > 0;
-
-    const btnMenu = (
-      <Menu onClick={(e) => handlerBtnClick?.(e.key as string)}>
-        {btnDropdownList.map((item) => (
-          <Menu.Item key={item.type}>{item.type}</Menu.Item>
-        ))}
-      </Menu>
-    );
-
-    return (
-      <Dropdown overlay={btnMenu} trigger={["click"]} disabled={!hasMenu}>
-        <Tooltip title={!hasMenu && t(K.NO_EVENTS_TO_ADD)}>
-          <Button type="link" disabled={!hasMenu}>
-            <FontAwesomeIcon className={styles.addIcon} icon="plus" />
-          </Button>
-        </Tooltip>
-      </Dropdown>
-    );
+  const getEventDesc = (name: string): string => {
+    return eventDocInfo?.find((item) => item.type === name)?.description;
   };
 
   return (
-    <EditorContext.Provider value={{ onCreate, onEdit }}>
+    <EditorContext.Provider
+      value={{ onCreate, onEdit, addCallback, removeCallback }}
+    >
       <div className={styles.titleWrapper}>
         <div className={styles.brickName}>
           <GeneralIcon
@@ -190,6 +189,8 @@ export function LegacyEventsEditor(
             style={{ marginRight: 12 }}
           ></GeneralIcon>
           {customTitle}
+
+          {loading && <LoadingOutlined style={{ marginLeft: 12 }} />}
         </div>
         {suffixTitle && <BrickAsComponent useBrick={suffixTitle.useBrick} />}
       </div>
@@ -204,8 +205,7 @@ export function LegacyEventsEditor(
                 style={{ marginRight: 12 }}
                 className={styles.eventIcon}
               />
-              {item.name}
-
+              <span title={getEventDesc(item.name)}>{item.name}</span>
               <FontAwesomeIcon
                 className={styles.plusIcon}
                 icon="plus-square"
@@ -235,7 +235,11 @@ export function LegacyEventsEditor(
       </div>
 
       <div className={styles.actionArea} ref={actionBtnRef}>
-        {getAddBtn()}
+        <AddEventBtn
+          eventList={eventList}
+          eventDocInfo={eventDocInfo}
+          onClick={handlerBtnClick}
+        />
       </div>
     </EditorContext.Provider>
   );

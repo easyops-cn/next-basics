@@ -5,6 +5,7 @@ import {
   MenuIcon,
   UseBrickConf,
 } from "@next-core/brick-types";
+import { EventConfig, EventsDoc } from "../shared/visual-events/interfaces";
 import {
   BrickWrapper,
   UpdatingElement,
@@ -13,12 +14,7 @@ import {
   EventEmitter,
   method,
 } from "@next-core/brick-kit";
-import {
-  EventsEditor,
-  EventConfig,
-  EditorRef,
-  EventsDoc,
-} from "./EventsEditor";
+import { EventsEditor, EditorRef } from "./EventsEditor";
 
 /**
  * @id next-builder.events-editor
@@ -87,6 +83,17 @@ export class EventsEditorElement extends UpdatingElement {
   suffixTitle: {
     useBrick: UseBrickConf;
   };
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否显示加载图标
+   */
+  @property({
+    type: Boolean,
+  })
+  loading: boolean;
 
   @event({ type: "event.create" }) eventCreate: EventEmitter<{
     key: string;
@@ -168,6 +175,7 @@ export class EventsEditorElement extends UpdatingElement {
             onChange={this._handlerChange}
             suffixTitle={this.suffixTitle}
             customTitle={this.customTitle}
+            loading={this.loading}
           />
         </BrickWrapper>,
         this

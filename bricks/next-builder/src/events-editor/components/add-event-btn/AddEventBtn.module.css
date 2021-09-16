@@ -1,0 +1,6 @@
+.menuItem {
+  display: flex;
+  align-items: center;
+  color: rgba(137, 137, 137, 0.8);
+  font-size: 14px;
+}
