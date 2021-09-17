@@ -346,15 +346,16 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
 `),
           },
           {
-            path: "dist/stores.json",
+            path: "dist/stories.json",
             content: `[
   {
     "storyId": "test.template-t",
+    "type": "custom-template",
     "author": "abc",
     "doc": {
       "id": "test.template-t",
       "name": "test.template-t",
-      "dockind": "template",
+      "dockind": "custom-template",
       "author": "abc",
       "slots": null,
       "history": null
@@ -362,11 +363,12 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-u",
+    "type": "custom-template",
     "author": "abc",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
-      "dockind": "template",
+      "dockind": "custom-template",
       "author": "abc",
       "slots": [
         {
@@ -409,11 +411,12 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-v",
+    "type": "custom-template",
     "author": "abc",
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
-      "dockind": "template",
+      "dockind": "custom-template",
       "author": "abc",
       "history": null
     }
@@ -515,15 +518,16 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             ),
           },
           {
-            path: "dist/stores.json",
+            path: "dist/stories.json",
             content: `[
   {
     "storyId": "test.template-t",
+    "type": "custom-template",
     "author": "abc",
     "doc": {
       "id": "test.template-t",
       "name": "test.template-t",
-      "dockind": "template",
+      "dockind": "custom-template",
       "author": "abc",
       "slots": null,
       "history": null
@@ -531,11 +535,12 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-u",
+    "type": "custom-template",
     "author": "abc",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
-      "dockind": "template",
+      "dockind": "custom-template",
       "author": "abc",
       "slots": [
         {
@@ -578,11 +583,12 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-v",
+    "type": "custom-template",
     "author": "abc",
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
-      "dockind": "template",
+      "dockind": "custom-template",
       "author": "abc",
       "history": null
     }

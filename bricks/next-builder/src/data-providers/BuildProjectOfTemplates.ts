@@ -163,28 +163,9 @@ export async function BuildProjectOfTemplates({
       }),
     }));
 
-  const createStores = (
+  const createStories = (
     templateItem: pipes.GraphVertex
   ): Record<string, unknown> => {
-    // const getChildren = (child: Array<pipes.GraphVertex>, arr: Array<string> = []) => {
-    //   child.forEach(item => {
-    //     if (item.children) {
-    //       arr = arr.concat(getChildren(item.children));
-    //     }
-    //     arr.push(item.brick);
-    //   })
-    //   return arr;
-    // }
-    // const getInterface = (child: Array<string>): Array<Record<string, unknown>> => {
-    //   const result: Array<Record<string, unknown>> = [];
-    //   child.forEach(id => {
-    //     const template = templateTreeList.find(item => item.templateId === id);
-    //     if (template) {
-    //       result.push(safeJSONParse(template.proxy));
-    //     }
-    //   })
-    //   return result;
-    // }
     const getDocContent = (obj: Record<string, any>, type: DocType) => {
       if (!isObject(obj) || isEmpty(obj)) return;
       const getDefaultValue = (v: any) => {
@@ -220,18 +201,18 @@ export async function BuildProjectOfTemplates({
         }
       });
     };
-    const stores: Record<string, any> = {
+    const stories: Record<string, any> = {
       // 基础信息存放
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
       category: templateItem.category,
-      type: templateItem.type,
+      type: "custom-template",
       author: templateItem.creator,
       text: templateItem.text,
       description: templateItem.description,
       doc: {
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,
-        dockind: "template",
+        dockind: "custom-template",
         author: templateItem.creator,
         slots: null,
         history: null,
@@ -242,24 +223,19 @@ export async function BuildProjectOfTemplates({
       const { properties, events, methods, slots } = safeJSONParse(
         templateItem.proxy
       );
-      stores.doc = Object.assign(stores.doc, {
+      stories.doc = Object.assign(stories.doc, {
         properties: getDocContent(properties, DocType.properties),
         events: getDocContent(events, DocType.events),
         methods: getDocContent(methods, DocType.methods),
         slots: getDocContent(slots, DocType.slots),
       });
     }
-    // if (templateItem.children) {
-    //   // 如果template存在子template, 需要将子模板类型取出来, 并存放于interface中
-    //   const children = getChildren(templateItem.children);
-    //   stores.doc.interface = getInterface(children);
-    // }
 
-    return stores;
+    return stories;
   };
 
-  const stores = templateTreeList.map((templateItem) =>
-    createStores(templateItem)
+  const stories = templateTreeList.map((templateItem) =>
+    createStories(templateItem)
   );
 
   const indexJsContent = getBrickPackageIndexJs(templates);
@@ -280,8 +256,8 @@ export async function BuildProjectOfTemplates({
       content: indexJsContent,
     },
     {
-      path: "dist/stores.json",
-      content: JSON.stringify(stores, null, 2),
+      path: "dist/stories.json",
+      content: JSON.stringify(stories, null, 2),
     },
   ];
 
