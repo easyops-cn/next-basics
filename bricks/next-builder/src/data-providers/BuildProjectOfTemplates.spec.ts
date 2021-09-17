@@ -10,11 +10,6 @@ jest.mock("@next-sdk/cmdb-sdk");
 const consoleError = jest
   .spyOn(console, "error")
   .mockImplementation(() => void 0);
-jest.mock("./utils/simpleHash", () => {
-  return {
-    simpleHash: () => "abcdefg",
-  };
-});
 
 // And given a graph of templates:
 //      t        u
@@ -250,7 +245,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.abcdefg.js",
+            path: "dist/index.dbea6502.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -514,7 +509,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
 }`,
           },
           {
-            path: "dist/index.abcdefg.js",
+            path: "dist/index.1e1641d4.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
