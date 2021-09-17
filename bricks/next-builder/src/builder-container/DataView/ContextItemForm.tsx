@@ -26,7 +26,8 @@ export function ContextItemForm({
   onContextItemUpdate,
   settingItemForm,
 }: ContextItemFormProps): React.ReactElement {
-  const { providerList } = useBuilderUIContext();
+  const { providerList, highlightTokens, onClickHighlightToken } =
+    useBuilderUIContext();
   const originalProviderList = useMemo(
     () =>
       (providerList ?? []).map((provider) => ({
@@ -95,6 +96,8 @@ export function ContextItemForm({
         enableLiveAutocompletion={true}
         mode="brick_next_yaml"
         schemaRef={fieldCodeEditorConfigMap[field].schemaRef}
+        highlightTokens={highlightTokens}
+        onClickHighlightToken={onClickHighlightToken}
       ></CodeEditorItem>
     );
   };

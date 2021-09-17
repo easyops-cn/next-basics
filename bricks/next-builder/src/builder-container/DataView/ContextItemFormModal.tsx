@@ -5,6 +5,7 @@ import { FormInstance } from "antd/lib/form";
 import { ContextItemForm } from "./ContextItemForm";
 import { useTranslation } from "react-i18next";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
+import { useBuilderUIContext } from "../BuilderUIContext";
 
 interface ContextItemFormProps {
   data: ContextConf;
@@ -25,6 +26,7 @@ export function ContextItemFormModal({
 }: ContextItemFormProps): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
   const isCreate = useMemo(() => !data, [data]);
+  const { containerForContextModal } = useBuilderUIContext();
 
   return (
     <Modal
@@ -34,6 +36,7 @@ export function ContextItemFormModal({
       onOk={onOk}
       onCancel={onCancel}
       destroyOnClose
+      getContainer={containerForContextModal}
     >
       <ContextItemForm
         data={data}

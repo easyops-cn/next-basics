@@ -8,10 +8,11 @@ import {
   method,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { LifeCycle } from "../shared/visual-events/interfaces";
-import { EventConfigForm } from "./EventConfigForm";
 import { ColProps } from "antd/lib/col";
 import { FormInstance } from "antd/lib/form";
+import { HighlightTokenSettings } from "@next-libs/code-editor-components";
+import { LifeCycle } from "../shared/visual-events/interfaces";
+import { EventConfigForm } from "./EventConfigForm";
 
 /**
  * @id next-builder.event-config-form
@@ -91,6 +92,14 @@ export class EventConfigFormElement extends UpdatingElement {
   useInCustomTemplate: boolean;
 
   /**
+   * @description 高亮标记设置。
+   */
+  @property({
+    attribute: false,
+  })
+  highlightTokens: HighlightTokenSettings[];
+
+  /**
    * @description 表单验证成功时触发
    */
   @event({ type: "validate.success" }) successEvent: EventEmitter<
@@ -144,6 +153,23 @@ export class EventConfigFormElement extends UpdatingElement {
     this._formUtils.current.resetFields(names);
   }
 
+  /**
+   * @description 当高亮标记被点击时触发。该事件会冒泡。
+   * @detail `{ type: string; value: string; }`
+   */
+  @event({ type: "highlightToken.click", bubbles: true })
+  private _highlightTokenClickEvent: EventEmitter<{
+    type: string;
+    value: string;
+  }>;
+
+  private _handleHighlightTokenClick = (token: {
+    type: string;
+    value: string;
+  }): void => {
+    this._highlightTokenClickEvent.emit(token);
+  };
+
   private _handleValuesChange = (
     changedValues: unknown,
     allValues: unknown
@@ -172,7 +198,9 @@ export class EventConfigFormElement extends UpdatingElement {
             type={this.type}
             lifeCycle={this.lifeCycle}
             useInCustomTemplate={this.useInCustomTemplate}
+            highlightTokens={this.highlightTokens}
             onValuesChange={this._handleValuesChange}
+            onClickHighlightToken={this._handleHighlightTokenClick}
           />
         </BrickWrapper>,
         this

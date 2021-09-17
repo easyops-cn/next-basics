@@ -1,18 +1,19 @@
 import React from "react";
 import {
-  BuilderClipboard,
-  BuilderDataType,
-  ToolboxTab,
-  BrickOptionItem,
-} from "./interfaces";
-import {
   BuilderRouteNode,
   BuilderCustomTemplateNode,
   BuilderSnippetNode,
   Story,
 } from "@next-core/brick-types";
-import { EventStreamNode } from "./EventStreamCanvas/interfaces";
 import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
+import { HighlightTokenSettings } from "@next-libs/code-editor-components";
+import { EventStreamNode } from "./EventStreamCanvas/interfaces";
+import {
+  BuilderClipboard,
+  BuilderDataType,
+  ToolboxTab,
+  BrickOptionItem,
+} from "./interfaces";
 
 export interface ContextOfBuilderUI {
   appId?: string;
@@ -24,6 +25,7 @@ export interface ContextOfBuilderUI {
   templateList?: BuilderCustomTemplateNode[];
   snippetList?: BuilderSnippetNode[];
   processing?: boolean;
+  containerForContextModal?: string;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;
   highlightNodes?: Set<number>;
@@ -49,6 +51,8 @@ export interface ContextOfBuilderUI {
   onEventNodeClick?: (eventNode: EventStreamNode) => void;
   onConvertToTemplate?: (node: BuilderRuntimeNode) => void;
   onWorkbenchClose?: () => void;
+  highlightTokens?: HighlightTokenSettings[];
+  onClickHighlightToken?: (token: { type: string; value: string }) => void;
 }
 
 export const BuilderUIContext = React.createContext<ContextOfBuilderUI>({});

@@ -37,6 +37,7 @@ import {
   EventDetailOfSnippetApplyStored,
   SharedEditorConf,
 } from "@next-core/editor-bricks-helper";
+import { HighlightTokenSettings } from "@next-libs/code-editor-components";
 import {
   BrickOptionItem,
   BuilderAppendBrickOrRouteDetail,
@@ -149,6 +150,20 @@ export class BuilderContainerElement extends UpdatingElement {
 
   @property()
   storyboardQuery: string;
+
+  /**
+   * @description 高亮标记设置。
+   */
+  @property({
+    attribute: false,
+  })
+  highlightTokens: HighlightTokenSettings[];
+
+  /**
+   * @description 用于容纳 Context 模态框的容器的 CSS Selector。
+   */
+  @property()
+  containerForContextModal: string;
 
   @event({
     type: "node.add",
@@ -315,6 +330,16 @@ export class BuilderContainerElement extends UpdatingElement {
   })
   private _storyboardQueryUpdateEmitter: EventEmitter<{
     storyboardQuery: string;
+  }>;
+
+  /**
+   * @description 当高亮标记被点击时触发。该事件会冒泡。
+   * @detail `{ type: string; value: string; }`
+   */
+  @event({ type: "highlightToken.click", bubbles: true })
+  private _highlightTokenClickEvent: EventEmitter<{
+    type: string;
+    value: string;
   }>;
 
   private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
@@ -524,6 +549,13 @@ export class BuilderContainerElement extends UpdatingElement {
     }
   };
 
+  private _handleHighlightTokenClick = (token: {
+    type: string;
+    value: string;
+  }): void => {
+    this._highlightTokenClickEvent.emit(token);
+  };
+
   // istanbul ignore next
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
@@ -584,6 +616,8 @@ export class BuilderContainerElement extends UpdatingElement {
                 templateSources={this.templateSources}
                 storyList={this.storyList}
                 processing={this.processing}
+                highlightTokens={this.highlightTokens}
+                containerForContextModal={this.containerForContextModal}
                 initialFullscreen={this.fullscreen}
                 initialToolboxTab={this.toolboxTab}
                 initialEventStreamNodeId={this.eventStreamNodeId}
@@ -620,6 +654,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onWorkbenchClose={this._handleWorkbenchClose}
                 onSwitchCanvasIndex={this._handleSwitchCanvasIndex}
                 onStoryboardQueryUpdate={this._handleStoryboardQueryUpdate}
+                onClickHighlightToken={this._handleHighlightTokenClick}
               />
             </DndProvider>
           </BuilderProvider>
