@@ -16,12 +16,14 @@ import { uniq } from "lodash";
 import { buildBricks } from "../shared/storyboard/buildStoryboard";
 import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
+import { isObject } from "@next-core/brick-utils";
+import { isEmpty } from "lodash";
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
 
 export function safeJSONParse(str: string): Record<string, unknown> {
-  let result: Record<string, unknown>;
+  let result: Record<string, unknown> = {};
   try {
     result = JSON.parse(str);
   } catch {
@@ -184,7 +186,7 @@ export async function BuildProjectOfTemplates({
     //   return result;
     // }
     const getDocContent = (obj: Record<string, any>, type: DocType) => {
-      if (!obj) return;
+      if (!isObject(obj) || isEmpty(obj)) return;
       const getDefaultValue = (v: any) => {
         return v ? v : "-";
       };
@@ -215,8 +217,6 @@ export async function BuildProjectOfTemplates({
               name: key,
               description: getDefaultValue(value.description),
             };
-          default:
-            return {};
         }
       });
     };

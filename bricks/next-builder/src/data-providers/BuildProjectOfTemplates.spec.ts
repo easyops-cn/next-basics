@@ -3,9 +3,13 @@ import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
   BuildProjectOfTemplatesParams,
+  safeJSONParse,
 } from "./BuildProjectOfTemplates";
 
 jest.mock("@next-sdk/cmdb-sdk");
+const consoleError = jest
+  .spyOn(console, "error")
+  .mockImplementation(() => void 0);
 jest.mock("./utils/simpleHash", () => {
   return {
     simpleHash: () => "abcdefg",
@@ -55,6 +59,10 @@ jest.mock("./utils/simpleHash", () => {
                     "type": "string",
                     "default": "hello",
                     "required": "false"
+                  },
+                  "b": {
+                    "ref": "b-ref",
+                    "refProperty": "b-property"
                   }
                 },
                 "events": {
@@ -80,6 +88,18 @@ jest.mock("./utils/simpleHash", () => {
                     "description": "slots介绍"
                   }
                 }
+              }`,
+            },
+            {
+              appId: "test",
+              id: "T-03",
+              instanceId: "v",
+              templateId: "template-v",
+              creator: "abc",
+              proxy: `{
+                "properties": null,
+                "events": {},
+                "methods": 1
               }`,
             },
           ],
@@ -224,7 +244,8 @@ describe("BuildProjectOfTemplates", () => {
             content: `{
   "bricks": [
     "app-1.template-t",
-    "app-1.template-u"
+    "app-1.template-u",
+    "app-1.template-v"
   ]
 }`,
           },
@@ -275,6 +296,10 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
         "type": "string",
         "default": "hello",
         "required": "false"
+      },
+      "b": {
+        "ref": "b-ref",
+        "refProperty": "b-property"
       }
     },
     "events": {
@@ -314,6 +339,14 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
       }
     }
   ]
+}),
+Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
+  "proxy": {
+    "properties": null,
+    "events": {},
+    "methods": 1
+  },
+  "bricks": []
 })
 `),
           },
@@ -354,6 +387,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
           "required": "false",
           "default": "hello",
           "description": "properties介绍"
+        },
+        {
+          "name": "b",
+          "type": "-",
+          "required": "-",
+          "default": "-",
+          "description": "-"
         }
       ],
       "events": [
@@ -370,6 +410,17 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
           "description": "methods介绍"
         }
       ]
+    }
+  },
+  {
+    "storyId": "test.template-v",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-v",
+      "name": "test.template-v",
+      "dockind": "template",
+      "author": "abc",
+      "history": null
     }
   }
 ]`,
@@ -457,7 +508,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
             content: `{
   "bricks": [
     "app-2.template-t",
-    "app-2.template-u"
+    "app-2.template-u",
+    "app-2.template-v"
   ]
 }`,
           },
@@ -504,6 +556,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
           "required": "false",
           "default": "hello",
           "description": "properties介绍"
+        },
+        {
+          "name": "b",
+          "type": "-",
+          "required": "-",
+          "default": "-",
+          "description": "-"
         }
       ],
       "events": [
@@ -521,6 +580,17 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
         }
       ]
     }
+  },
+  {
+    "storyId": "test.template-v",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-v",
+      "name": "test.template-v",
+      "dockind": "template",
+      "author": "abc",
+      "history": null
+    }
   }
 ]`,
           },
@@ -532,5 +602,22 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
   ])("BuildProjectOfTemplates(%j) should work", async (params, result) => {
     const buildResult = await BuildProjectOfTemplates(params);
     expect(buildResult).toEqual(result);
+  });
+
+  it("safe JSON parse, test", () => {
+    const rightJSON = `{
+      "name": "abc",
+      "age": 18
+    }`;
+    const errorJSON = `{
+      "name": "abc",
+      "age": 18,
+    }`;
+    expect(safeJSONParse(rightJSON)).toEqual({
+      name: "abc",
+      age: 18,
+    });
+    safeJSONParse(errorJSON);
+    expect(consoleError).toBeCalledTimes(1);
   });
 });
