@@ -62,6 +62,7 @@ export interface BrickTableProps {
   scroll?: TableProps<unknown>["scroll"];
   optimizedColumns?: Array<string | number>;
   ellipsisInfo?: boolean;
+  thTransparent?: boolean;
 }
 
 const DraggableBodyRow = ({
@@ -491,6 +492,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
       className={classNames(styles.brickTable, {
         [styles.expandIconCellHidden]: !expandIconAsCell,
         [styles.customDropTable]: props.tableDraggable,
+        [styles.tableThTransparent]: props.thTransparent,
       })}
       dataSource={data}
       {...(props.tableDraggable

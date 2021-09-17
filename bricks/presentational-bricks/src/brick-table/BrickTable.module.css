@@ -6,6 +6,15 @@ html[data-theme="dark"] {
   .brickTableOddRow {
     background-color: #ffffff0a;
   }
+  .tableThTransparent {
+    :global(thead.ant-table-thead) {
+      tr {
+        th {
+          background: rgba(32, 45, 75, 0.5);
+        }
+      }
+    }
+  }
 }
 
 .customDropTable {
@@ -74,9 +83,20 @@ html[data-theme="dark"] {
 :global(td.alignBottom) {
   vertical-align: bottom;
 }
+
 .ellipsisInfoCell {
   max-width: 240px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.tableThTransparent {
+  :global(thead.ant-table-thead) {
+    tr {
+      th {
+        background: rgba(242, 245, 249, 0.5);
+      }
+    }
+  }
 }

@@ -899,6 +899,15 @@ export class BrickTableElement extends UpdatingElement {
   @property({ type: Boolean })
   autoSelectParentWhenAllChildrenSelected: boolean;
 
+  /**
+   * @kind boolean
+   * @required -
+   * @default -
+   * @description 表格表头是否透明
+   */
+  @property({ attribute: false })
+  thTransparent: boolean;
+
   // 对外获取内部 _dataSource 的值
   // istanbul ignore next
   get processedDataSource() {
@@ -1596,6 +1605,7 @@ export class BrickTableElement extends UpdatingElement {
             scroll={this.scrollConfigs}
             optimizedColumns={this.optimizedColumns}
             ellipsisInfo={this.ellipsisInfo}
+            thTransparent={this.thTransparent}
           />
         </BrickWrapper>,
         this
