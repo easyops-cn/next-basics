@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.69.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.69.0...@next-bricks/next-builder@1.69.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* add transformMapArray ([98a78f9](https://github.com/easyops-cn/next-basics/commit/98a78f904c6b42129fbb3bc0b2f17051444ef0bc))
+* refine callback show ([4a0d3d1](https://github.com/easyops-cn/next-basics/commit/4a0d3d19dbc0c2e80b7a2fd0ca4dc5ae1ea0d896))
+
+
+
+
+
 # [1.69.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.68.1...@next-bricks/next-builder@1.69.0) (2021-09-17)
 
 
