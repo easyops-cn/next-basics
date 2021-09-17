@@ -3,9 +3,13 @@ import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
   BuildProjectOfTemplatesParams,
+  safeJSONParse,
 } from "./BuildProjectOfTemplates";
 
 jest.mock("@next-sdk/cmdb-sdk");
+const consoleError = jest
+  .spyOn(console, "error")
+  .mockImplementation(() => void 0);
 
 // And given a graph of templates:
 //      t        u
@@ -28,16 +32,70 @@ jest.mock("@next-sdk/cmdb-sdk");
       ? {
           topic_vertices: [
             {
+              appId: "test",
               id: "T-01",
               instanceId: "t",
               templateId: "template-t",
+              creator: "abc",
               proxy: null,
             },
             {
+              appId: "test",
               id: "T-02",
               instanceId: "u",
               templateId: "template-u",
-              proxy: '{"properties":{"a":{"ref":"b","refProperty":"c"}}}',
+              creator: "abc",
+              proxy: `{
+                "properties": {
+                  "a": {
+                    "ref":"b",
+                    "refProperty":"c",
+                    "description": "properties介绍",
+                    "type": "string",
+                    "default": "hello",
+                    "required": "false"
+                  },
+                  "b": {
+                    "ref": "b-ref",
+                    "refProperty": "b-property"
+                  }
+                },
+                "events": {
+                  "a.click": {
+                    "ref": "d",
+                    "refEvent": "general.a.click",
+                    "detail": "{data:Record<string,any>[]}",
+                    "description": "events介绍"
+                  }
+                },
+                "methods": {
+                  "sayHello": {
+                    "ref": "e",
+                    "refMethod": "a.say",
+                    "params": "{ id: string | number, name: string }",
+                    "description": "methods介绍"
+                  }
+                },
+                "slots": {
+                  "toolbar": {
+                    "ref": "f",
+                    "refSlot": "f-toobar",
+                    "description": "slots介绍"
+                  }
+                }
+              }`,
+            },
+            {
+              appId: "test",
+              id: "T-03",
+              instanceId: "v",
+              templateId: "template-v",
+              creator: "abc",
+              proxy: `{
+                "properties": null,
+                "events": {},
+                "methods": 1
+              }`,
             },
           ],
           vertices: [
@@ -181,12 +239,13 @@ describe("BuildProjectOfTemplates", () => {
             content: `{
   "bricks": [
     "app-1.template-t",
-    "app-1.template-u"
+    "app-1.template-u",
+    "app-1.template-v"
   ]
 }`,
           },
           {
-            path: "dist/index.15dec533.js",
+            path: "dist/index.dbea6502.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -227,7 +286,38 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
     "properties": {
       "a": {
         "ref": "b",
-        "refProperty": "c"
+        "refProperty": "c",
+        "description": "properties介绍",
+        "type": "string",
+        "default": "hello",
+        "required": "false"
+      },
+      "b": {
+        "ref": "b-ref",
+        "refProperty": "b-property"
+      }
+    },
+    "events": {
+      "a.click": {
+        "ref": "d",
+        "refEvent": "general.a.click",
+        "detail": "{data:Record<string,any>[]}",
+        "description": "events介绍"
+      }
+    },
+    "methods": {
+      "sayHello": {
+        "ref": "e",
+        "refMethod": "a.say",
+        "params": "{ id: string | number, name: string }",
+        "description": "methods介绍"
+      }
+    },
+    "slots": {
+      "toolbar": {
+        "ref": "f",
+        "refSlot": "f-toobar",
+        "description": "slots介绍"
       }
     }
   },
@@ -244,8 +334,94 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
       }
     }
   ]
+}),
+Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
+  "proxy": {
+    "properties": null,
+    "events": {},
+    "methods": 1
+  },
+  "bricks": []
 })
 `),
+          },
+          {
+            path: "dist/stories.json",
+            content: `[
+  {
+    "storyId": "test.template-t",
+    "type": "custom-template",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-t",
+      "name": "test.template-t",
+      "dockind": "custom-template",
+      "author": "abc",
+      "slots": null,
+      "history": null
+    }
+  },
+  {
+    "storyId": "test.template-u",
+    "type": "custom-template",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-u",
+      "name": "test.template-u",
+      "dockind": "custom-template",
+      "author": "abc",
+      "slots": [
+        {
+          "name": "toolbar",
+          "description": "slots介绍"
+        }
+      ],
+      "history": null,
+      "properties": [
+        {
+          "name": "a",
+          "type": "string",
+          "required": "false",
+          "default": "hello",
+          "description": "properties介绍"
+        },
+        {
+          "name": "b",
+          "type": "-",
+          "required": "-",
+          "default": "-",
+          "description": "-"
+        }
+      ],
+      "events": [
+        {
+          "type": "a.click",
+          "detail": "{data:Record<string,any>[]}",
+          "description": "events介绍"
+        }
+      ],
+      "methods": [
+        {
+          "name": "sayHello",
+          "params": "{ id: string | number, name: string }",
+          "description": "methods介绍"
+        }
+      ]
+    }
+  },
+  {
+    "storyId": "test.template-v",
+    "type": "custom-template",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-v",
+      "name": "test.template-v",
+      "dockind": "custom-template",
+      "author": "abc",
+      "history": null
+    }
+  }
+]`,
           },
           {
             path: "dist/snippets.json",
@@ -330,15 +506,94 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
             content: `{
   "bricks": [
     "app-2.template-t",
-    "app-2.template-u"
+    "app-2.template-u",
+    "app-2.template-v"
   ]
 }`,
           },
           {
-            path: "dist/index.267f6256.js",
+            path: "dist/index.1e1641d4.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
+          },
+          {
+            path: "dist/stories.json",
+            content: `[
+  {
+    "storyId": "test.template-t",
+    "type": "custom-template",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-t",
+      "name": "test.template-t",
+      "dockind": "custom-template",
+      "author": "abc",
+      "slots": null,
+      "history": null
+    }
+  },
+  {
+    "storyId": "test.template-u",
+    "type": "custom-template",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-u",
+      "name": "test.template-u",
+      "dockind": "custom-template",
+      "author": "abc",
+      "slots": [
+        {
+          "name": "toolbar",
+          "description": "slots介绍"
+        }
+      ],
+      "history": null,
+      "properties": [
+        {
+          "name": "a",
+          "type": "string",
+          "required": "false",
+          "default": "hello",
+          "description": "properties介绍"
+        },
+        {
+          "name": "b",
+          "type": "-",
+          "required": "-",
+          "default": "-",
+          "description": "-"
+        }
+      ],
+      "events": [
+        {
+          "type": "a.click",
+          "detail": "{data:Record<string,any>[]}",
+          "description": "events介绍"
+        }
+      ],
+      "methods": [
+        {
+          "name": "sayHello",
+          "params": "{ id: string | number, name: string }",
+          "description": "methods介绍"
+        }
+      ]
+    }
+  },
+  {
+    "storyId": "test.template-v",
+    "type": "custom-template",
+    "author": "abc",
+    "doc": {
+      "id": "test.template-v",
+      "name": "test.template-v",
+      "dockind": "custom-template",
+      "author": "abc",
+      "history": null
+    }
+  }
+]`,
           },
         ],
         dependBricks: ["easy-view", "general-button", "test-provider"],
@@ -346,6 +601,24 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
       },
     ],
   ])("BuildProjectOfTemplates(%j) should work", async (params, result) => {
-    expect(await BuildProjectOfTemplates(params)).toEqual(result);
+    const buildResult = await BuildProjectOfTemplates(params);
+    expect(buildResult).toEqual(result);
+  });
+
+  it("safe JSON parse, test", () => {
+    const rightJSON = `{
+      "name": "abc",
+      "age": 18
+    }`;
+    const errorJSON = `{
+      "name": "abc",
+      "age": 18,
+    }`;
+    expect(safeJSONParse(rightJSON)).toEqual({
+      name: "abc",
+      age: 18,
+    });
+    safeJSONParse(errorJSON);
+    expect(consoleError).toBeCalledTimes(1);
   });
 });
