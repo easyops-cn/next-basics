@@ -6,7 +6,7 @@ import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { act } from "react-dom/test-utils";
 // import { SketchPicker } from "react-color";
 
-jest.mock("@next-libs/editor-components", () => ({
+jest.mock("@next-libs/code-editor-components", () => ({
   CodeEditorItem: function MockEditor() {
     return <div>code editor</div>;
   },

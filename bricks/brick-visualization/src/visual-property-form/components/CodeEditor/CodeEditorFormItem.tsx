@@ -6,7 +6,7 @@ import {
   CodeEditorProps,
   CodeEditorItem,
   Error,
-} from "@next-libs/editor-components";
+} from "@next-libs/code-editor-components";
 
 interface CodeEditorItemProps extends CodeEditorProps, FormItemWrapperProps {}
 

@@ -10,7 +10,7 @@ import {
   ContextConf,
   SelectorProviderResolveConf,
 } from "@next-core/brick-types";
-import { CodeEditorItem } from "@next-libs/editor-components";
+import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { FormInstance } from "antd/lib/form";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useBuilderUIContext } from "../BuilderUIContext";

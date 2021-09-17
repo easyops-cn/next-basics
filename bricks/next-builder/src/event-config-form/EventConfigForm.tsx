@@ -9,7 +9,7 @@ import React, {
 import { useTranslation } from "react-i18next";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
-import { CodeEditorItem } from "@next-libs/editor-components";
+import { CodeEditorItem } from "@next-libs/code-editor-components";
 import {
   Form,
   Radio,

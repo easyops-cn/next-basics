@@ -9,7 +9,7 @@ const unmountComponentAtNode = jest
   .mockImplementation(() => null);
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-jest.mock("@next-libs/editor-components", () => {});
+jest.mock("@next-libs/code-editor-components", () => {});
 
 describe("brick-visualization.visual-property-form", () => {
   it("should create a custom element visual-property-form", async () => {
