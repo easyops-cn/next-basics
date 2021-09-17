@@ -369,13 +369,17 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handlerType !== currentValues.handlerType
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.action !== currentValues.action
         }
       >
         {({ getFieldValue }) =>
-          [HandlerType.UseProvider, HandlerType.ExecuteMethod].includes(
+          ([HandlerType.UseProvider, HandlerType.ExecuteMethod].includes(
             getFieldValue("handlerType")
-          ) && (
+          ) ||
+            ["message.subscribe", "message.unsubscribe"].includes(
+              getFieldValue("action")
+            )) && (
             <Form.Item name="callback" label={t(K.CALLBACK_LABEL)}>
               {getCodeEditorItem()}
             </Form.Item>
@@ -521,6 +525,18 @@ export function LegacyEventConfigForm(
             tooltip={t(K.TRANSFORM_FROM_TOOLTIP)}
           >
             {getCodeEditorItem({ minLines: 3, mode: "text" })}
+          </Form.Item>
+          <Form.Item
+            name="transformMapArray"
+            label={t(K.TRANSFORM_MAP_ARRAY)}
+            tooltip={t(K.TRANSFORM_MAP_ARRAY_TOOLTIP)}
+            initialValue="auto"
+          >
+            <Radio.Group>
+              <Radio value="auto"> auto </Radio>
+              <Radio value={true}> true </Radio>
+              <Radio value={false}> false </Radio>
+            </Radio.Group>
           </Form.Item>
           <Form.Item name="onReject" label={t(K.REJECT_LABEL)}>
             {getCodeEditorItem()}

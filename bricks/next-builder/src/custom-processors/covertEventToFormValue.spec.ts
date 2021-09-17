@@ -29,6 +29,21 @@ describe("covertToEventFormValue", () => {
       },
     ],
     [
+      {
+        action: "message.subscribe",
+        args: ["abc"],
+        callback: {
+          success: [{ action: "console.log" }],
+        },
+      },
+      {
+        action: "message.subscribe",
+        args: "- abc\n",
+        callback: "success:\n  - action: console.log\n",
+        handlerType: "builtinAction",
+      },
+    ],
+    [
       { useProvider: "mynamespace@getDetail:1.0.0", args: ["abc"] },
       {
         flow: "mynamespace@getDetail:1.0.0",

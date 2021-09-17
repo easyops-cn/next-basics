@@ -31,6 +31,7 @@ export function covertEventToFormValue(
           {
             if: handler.if,
             args: (handler as BuiltinBrickEventHandler).args,
+            callback: (handler as BuiltinBrickEventHandler).callback,
           },
           isNil
         )

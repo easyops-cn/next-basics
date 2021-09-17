@@ -11,6 +11,9 @@ export function covertFormValueToUseResolves(
 
   return {
     useProvider,
+    ...(formValue.transformMapArray === "auto"
+      ? {}
+      : { transformMapArray: formValue.transformMapArray }),
     ...safeLoadFields({
       if: formValue.if,
       args: formValue.args,

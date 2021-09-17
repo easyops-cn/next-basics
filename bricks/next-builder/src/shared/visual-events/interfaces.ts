@@ -46,6 +46,7 @@ export interface EventFormField {
   useProviderMethod?: "resolve" | "saveAs";
   transform?: string;
   transformFrom?: string;
+  transformMapArray?: "auto" | boolean;
   onReject?: string;
 }
 

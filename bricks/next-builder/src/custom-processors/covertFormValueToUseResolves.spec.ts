@@ -23,15 +23,46 @@ describe("covertFormValueToUseResolves", () => {
     ],
     [
       {
+        providerType: "provider",
+        provider: "api.cmdb.provider",
+        args: "- abc",
+        transform: "datasource: '@{}'",
+        transformMapArray: "auto",
+      },
+      {
+        args: ["abc"],
+        transform: { datasource: "@{}" },
+        useProvider: "api.cmdb.provider",
+      },
+    ],
+    [
+      {
         providerType: "flow",
         flow: "namespace@getDetail:1.0.0",
         args: "- abc",
         transform: "datasource: '@{}'",
+        transformMapArray: true,
       },
       {
         args: ["abc"],
         transform: { datasource: "@{}" },
         useProvider: "namespace@getDetail:1.0.0",
+        transformMapArray: true,
+      },
+    ],
+    [
+      {
+        providerType: "flow",
+        flow: "namespace@getDetail:1.0.0",
+        args: "- abc",
+        transform: "datasource: '@{}'",
+        transformMapArray: false,
+      },
+      {
+        args: ["abc"],
+        transform: { datasource: "@{}" },
+        useProvider: "namespace@getDetail:1.0.0",
+        transformMapArray: false,
       },
     ],
   ])("should work", (formValue, result) => {
