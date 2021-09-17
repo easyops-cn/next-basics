@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.217.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.216.1...@next-bricks/presentational-bricks@1.217.0) (2021-09-17)
+
+
+### Features
+
+* **general-carousel:** general-carousel support  customTimeInterval ([f4227f3](https://github.com/easyops-cn/next-basics/commit/f4227f38f5fc61f8391b61295a187db24dd93d02))
+
+
+
+
+
 ## [1.216.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.216.0...@next-bricks/presentational-bricks@1.216.1) (2021-09-17)
 
 
