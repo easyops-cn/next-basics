@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.216.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.215.0...@next-bricks/presentational-bricks@1.216.0) (2021-09-17)
+
+
+### Features
+
+* **table:** brick-table support thTransparent ([986f666](https://github.com/easyops-cn/next-basics/commit/986f66653e48197da6b2ebf5d0a1ec8715441274))
+
+
+
+
+
 # [1.215.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.214.1...@next-bricks/presentational-bricks@1.215.0) (2021-09-17)
 
 
