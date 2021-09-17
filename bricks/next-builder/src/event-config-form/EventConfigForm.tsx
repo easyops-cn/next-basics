@@ -369,13 +369,17 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handlerType !== currentValues.handlerType
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.action !== currentValues.action
         }
       >
         {({ getFieldValue }) =>
-          [HandlerType.UseProvider, HandlerType.ExecuteMethod].includes(
+          ([HandlerType.UseProvider, HandlerType.ExecuteMethod].includes(
             getFieldValue("handlerType")
-          ) && (
+          ) ||
+            ["message.subscribe", "message.unsubscribe"].includes(
+              getFieldValue("action")
+            )) && (
             <Form.Item name="callback" label={t(K.CALLBACK_LABEL)}>
               {getCodeEditorItem()}
             </Form.Item>

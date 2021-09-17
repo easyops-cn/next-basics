@@ -22,6 +22,21 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
+        action: "message.subscribe",
+        args: "- abc\n",
+        callback: "success:\n  - action: console.log\n",
+        handlerType: "builtinAction",
+      },
+      {
+        action: "message.subscribe",
+        args: ["abc"],
+        callback: {
+          success: [{ action: "console.log" }],
+        },
+      },
+    ],
+    [
+      {
         handlerType: HandlerType.UseProvider,
         provider: "api.cmdb.provider",
         providerType: "provider",

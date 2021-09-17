@@ -22,6 +22,7 @@ export function covertFormValueToEvent(
       ...safeLoadFields({
         if: formValue.if,
         args: formValue.args,
+        callback: formValue.callback,
       }),
     } as BuiltinBrickEventHandler;
   } else if (formValue.handlerType === HandlerType.UseProvider) {
