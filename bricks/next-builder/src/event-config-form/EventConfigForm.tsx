@@ -9,7 +9,10 @@ import React, {
 import { useTranslation } from "react-i18next";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
-import { CodeEditorItem } from "@next-libs/editor-components";
+import {
+  CodeEditorItem,
+  HighlightTokenSettings,
+} from "@next-libs/code-editor-components";
 import {
   Form,
   Radio,
@@ -35,7 +38,9 @@ export interface EventConfigForm {
   useInCustomTemplate?: boolean;
   type: "event" | "lifeCycle";
   lifeCycle?: LifeCycle;
+  highlightTokens?: HighlightTokenSettings[];
   onValuesChange?: FormProps["onValuesChange"];
+  onClickHighlightToken?: (token: { type: string; value: string }) => void;
 }
 
 export function LegacyEventConfigForm(
@@ -52,6 +57,8 @@ export function LegacyEventConfigForm(
     type,
     lifeCycle,
     useInCustomTemplate,
+    highlightTokens,
+    onClickHighlightToken,
   } = props;
   const [form] = Form.useForm();
 
@@ -81,6 +88,8 @@ export function LegacyEventConfigForm(
         theme="tomorrow"
         enableLiveAutocompletion={true}
         mode="brick_next_yaml"
+        highlightTokens={highlightTokens}
+        onClickHighlightToken={onClickHighlightToken}
         {...options}
       ></CodeEditorItem>
     );

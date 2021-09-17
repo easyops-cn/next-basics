@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import { Form } from "antd";
 import { CodeEditorFormItem } from "./CodeEditorFormItem";
 
-jest.mock("@next-libs/editor-components", () => ({
+jest.mock("@next-libs/code-editor-components", () => ({
   CodeEditorItem: function MockEditor() {
     return <div>code editor</div>;
   },

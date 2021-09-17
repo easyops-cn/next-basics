@@ -18,6 +18,7 @@ import {
   SharedEditorConf,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
+import { HighlightTokenSettings } from "@next-libs/code-editor-components";
 import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
 import {
@@ -51,6 +52,8 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   snippetList?: BuilderSnippetNode[];
   templateSources?: BuilderCustomTemplateNode[];
   processing?: boolean;
+  highlightTokens?: HighlightTokenSettings[];
+  containerForContextModal?: string;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
   initialEventStreamNodeId?: string;
@@ -82,6 +85,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onWorkbenchClose?: () => void;
   onSwitchCanvasIndex?: (canvasIndex: number) => void;
   onStoryboardQueryUpdate?: (storyboardQuery: string) => void;
+  onClickHighlightToken?: (token: { type: string; value: string }) => void;
 }
 
 export function LegacyBuilderContainer(
@@ -97,6 +101,8 @@ export function LegacyBuilderContainer(
     snippetList,
     templateSources,
     processing,
+    highlightTokens,
+    containerForContextModal,
     initialFullscreen,
     initialToolboxTab,
     initialEventStreamNodeId,
@@ -133,6 +139,7 @@ export function LegacyBuilderContainer(
     onWorkbenchClose,
     onSwitchCanvasIndex,
     onStoryboardQueryUpdate,
+    onClickHighlightToken,
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
@@ -333,6 +340,7 @@ export function LegacyBuilderContainer(
         templateList,
         snippetList,
         processing,
+        containerForContextModal,
         fullscreen,
         setFullscreen,
         toolboxTab,
@@ -358,6 +366,8 @@ export function LegacyBuilderContainer(
         onEventNodeClick,
         onConvertToTemplate,
         onWorkbenchClose,
+        highlightTokens,
+        onClickHighlightToken,
       }}
     >
       <div

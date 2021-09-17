@@ -9,7 +9,7 @@ import {
 } from "./processor";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-jest.mock("@next-libs/editor-components", () => {});
+jest.mock("@next-libs/code-editor-components", () => {});
 
 describe("processor test", () => {
   describe("isAdvanceMode", () => {

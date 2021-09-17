@@ -1,10 +1,16 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { ContextItemFormModal } from "./ContextItemFormModal";
 import { Modal } from "antd";
-
 import i18next from "i18next";
+import { ContextItemFormModal } from "./ContextItemFormModal";
 import { K } from "../../i18n/constants";
+import { useBuilderUIContext } from "../BuilderUIContext";
+
+jest.mock("../BuilderUIContext");
+
+(useBuilderUIContext as jest.Mock).mockReturnValue({
+  containerForContextModal: "#test-container",
+});
 
 jest.mock("./ContextItemForm", () => ({
   ContextItemForm: function MockContextItemForm() {
@@ -43,6 +49,7 @@ describe("ContextItemFormModal", () => {
     expect(wrapper.find(Modal).prop("title")).toBe(
       `${i18next.t(K.SETTINGS)} - data-a`
     );
+    expect(wrapper.find(Modal).prop("getContainer")).toBe("#test-container");
 
     wrapper.setProps({
       data: undefined,

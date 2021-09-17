@@ -1,14 +1,13 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Type } from "typedoc/dist/lib/serialization/schema";
-import * as basicComponents from "@next-libs/basic-components";
 import { GeneralType } from "./GeneralType";
 
-jest
-  .spyOn(basicComponents as any, "HashLink")
-  .mockImplementation((props: React.PropsWithChildren<any>) => {
+jest.mock("@next-libs/basic-components", () => ({
+  HashLink(props: React.PropsWithChildren<any>) {
     return <a href={props.to}>{props.children}</a>;
-  });
+  },
+}));
 
 describe("GeneralType", () => {
   it.each<[string, Type, string]>([
