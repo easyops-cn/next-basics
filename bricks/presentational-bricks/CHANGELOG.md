@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.215.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.214.1...@next-bricks/presentational-bricks@1.215.0) (2021-09-17)
+
+
+### Bug Fixes
+
+* fix the bug of basic-icon ([52d48fd](https://github.com/easyops-cn/next-basics/commit/52d48fda21a58311cf0e85968298341cf8a24ebb)), closes [Refs#NEXT_BUILDER-945](https://github.com/Refs/issues/NEXT_BUILDER-945)
+* fix typeerror of basic-icon ([fd493c2](https://github.com/easyops-cn/next-basics/commit/fd493c214fb544a09252ed9e9ac78c1d650e91fc)), closes [Refs#NEXT_BUILDER-945](https://github.com/Refs/issues/NEXT_BUILDER-945)
+* 添加属性支持rank-table在小容器时样式调整 Closed SERVICE_OBSERVE-381 ([6623f1c](https://github.com/easyops-cn/next-basics/commit/6623f1c28da26ada56c4fb59d63e5ad77acff979))
+
+
+### Features
+
+* add basic-icon to presentational-bricks ([383cdfb](https://github.com/easyops-cn/next-basics/commit/383cdfbdae1b40a4653c14d319675ab938fee2fd)), closes [Refs#NEXT_BUILDER-945](https://github.com/Refs/issues/NEXT_BUILDER-945)
+* **presentational-bricks:** add dropdown-button brick ([3f0772d](https://github.com/easyops-cn/next-basics/commit/3f0772d378088f47e6a156c5c33b02ee8e93477e))
+
+
+
+
+
 ## [1.214.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.214.0...@next-bricks/presentational-bricks@1.214.1) (2021-09-14)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.191.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.0...@next-bricks/forms@1.191.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* **forms:** 模型属性id编辑时取消对长度的验证 ([3d289c8](https://github.com/easyops-cn/next-basics/commit/3d289c865fa13270080a8d2a18862ed56863d6ab))
+
+
+
+
+
 # [1.191.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.2...@next-bricks/forms@1.191.0) (2021-09-03)
 
 

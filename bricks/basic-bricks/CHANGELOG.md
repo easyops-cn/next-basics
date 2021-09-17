@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.143.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.142.0...@next-bricks/basic-bricks@1.143.0) (2021-09-17)
+
+
+### Features
+
+* **basic-bricks:** add descSuffixBrick property ([5c22197](https://github.com/easyops-cn/next-basics/commit/5c22197d9783ea3e73d079ba31fdac2f31275456))
+
+
+
+
+
 # [1.142.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.141.0...@next-bricks/basic-bricks@1.142.0) (2021-09-14)
 
 

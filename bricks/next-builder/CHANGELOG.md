@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.68.1...@next-bricks/next-builder@1.69.0) (2021-09-17)
+
+
+### Bug Fixes
+
+* refine event config ([a0835f4](https://github.com/easyops-cn/next-basics/commit/a0835f4cd10e8b685cfba96599367552674b1e94))
+* refine lifecycle event ([95b9a5d](https://github.com/easyops-cn/next-basics/commit/95b9a5d3c2052fb8bc07ac0f93b7a218f2b032be))
+
+
+### Features
+
+* lifecycle editor ([569faa9](https://github.com/easyops-cn/next-basics/commit/569faa92681f285b012f425e84bc893fc4eec23f))
+
+
+
+
+
 ## [1.68.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.68.0...@next-bricks/next-builder@1.68.1) (2021-09-13)
 
 
