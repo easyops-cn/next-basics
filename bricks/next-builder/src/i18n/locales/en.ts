@@ -96,6 +96,9 @@ const locale: Locale = {
   [K.POLLING_LABEL]: "Polling",
   [K.TRANSFORM_LABEL]: "Transform",
   [K.TRANSFORM_FROM_LABEL]: "TransformFrom",
+  [K.TRANSFORM_MAP_ARRAY]: "transformMapArray",
+  [K.TRANSFORM_MAP_ARRAY_TOOLTIP]:
+    "Set Array mapping processing mode in transform, usually no additional settings, just use the default value",
   [K.REJECT_LABEL]: "OnReject",
   [K.TRANSFORM_FROM_TOOLTIP]:
     "Use the specified field of the returned data as the data source.",

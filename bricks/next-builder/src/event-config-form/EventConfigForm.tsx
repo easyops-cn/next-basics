@@ -522,6 +522,18 @@ export function LegacyEventConfigForm(
           >
             {getCodeEditorItem({ minLines: 3, mode: "text" })}
           </Form.Item>
+          <Form.Item
+            name="transformMapArray"
+            label={t(K.TRANSFORM_MAP_ARRAY)}
+            tooltip={t(K.TRANSFORM_MAP_ARRAY_TOOLTIP)}
+            initialValue="auto"
+          >
+            <Radio.Group>
+              <Radio value="auto"> auto </Radio>
+              <Radio value={true}> true </Radio>
+              <Radio value={false}> false </Radio>
+            </Radio.Group>
+          </Form.Item>
           <Form.Item name="onReject" label={t(K.REJECT_LABEL)}>
             {getCodeEditorItem()}
           </Form.Item>

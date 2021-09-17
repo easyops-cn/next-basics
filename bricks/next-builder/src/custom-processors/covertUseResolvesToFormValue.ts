@@ -23,6 +23,7 @@ export function covertUseResolvesToFormValue(
   return {
     handlerType: HandlerType.UseProvider,
     providerType,
+    transformMapArray: resolveData.transformMapArray ?? "auto",
     ...(providerType === "flow" ? { flow: provider } : { provider }),
     ...safeDumpFields(
       omitBy(

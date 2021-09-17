@@ -96,6 +96,9 @@ const locale: Locale = {
   [K.IF_LABEL]: "条件IF",
   [K.TRANSFORM_LABEL]: "数据转换",
   [K.TRANSFORM_FROM_LABEL]: "指定字段",
+  [K.TRANSFORM_MAP_ARRAY]: "数据转换映射",
+  [K.TRANSFORM_MAP_ARRAY_TOOLTIP]:
+    "设置在数据转换中对数组的映射处理模式，通常不要额外设置，使用默认值即可",
   [K.REJECT_LABEL]: "异常处理",
   [K.TRANSFORM_FROM_TOOLTIP]: "使用返回数据的指定字段作为数据源",
   [K.FLOW_API]: "Flow编排",
