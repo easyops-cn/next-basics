@@ -20,12 +20,30 @@ import { simpleHash } from "./utils/simpleHash";
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
 
+export function safeJSONParse(str: string): Record<string, unknown> {
+  let result: Record<string, unknown>;
+  try {
+    result = JSON.parse(str);
+  } catch {
+    // eslint-disable-next-line no-console
+    console.error(`JSON parse error: ${str}`);
+  }
+  return result;
+}
+
 export interface BuildProjectOfTemplatesParams {
   // The human-readable id of an app.
   appId: string;
 
   // The instanceId of a project.
   projectId: string;
+}
+
+export enum DocType {
+  properties,
+  events,
+  methods,
+  slots,
 }
 
 export interface BuildInfoForProjectOfTemplates {
@@ -143,6 +161,107 @@ export async function BuildProjectOfTemplates({
       }),
     }));
 
+  const createStores = (
+    templateItem: pipes.GraphVertex
+  ): Record<string, unknown> => {
+    // const getChildren = (child: Array<pipes.GraphVertex>, arr: Array<string> = []) => {
+    //   child.forEach(item => {
+    //     if (item.children) {
+    //       arr = arr.concat(getChildren(item.children));
+    //     }
+    //     arr.push(item.brick);
+    //   })
+    //   return arr;
+    // }
+    // const getInterface = (child: Array<string>): Array<Record<string, unknown>> => {
+    //   const result: Array<Record<string, unknown>> = [];
+    //   child.forEach(id => {
+    //     const template = templateTreeList.find(item => item.templateId === id);
+    //     if (template) {
+    //       result.push(safeJSONParse(template.proxy));
+    //     }
+    //   })
+    //   return result;
+    // }
+    const getDocContent = (obj: Record<string, any>, type: DocType) => {
+      if (!obj) return;
+      const getDefaultValue = (v: any) => {
+        return v ? v : "-";
+      };
+      return Object.entries(obj).map(([key, value]) => {
+        switch (type) {
+          case DocType.properties:
+            return {
+              name: key,
+              type: getDefaultValue(value.type),
+              required: getDefaultValue(value.required),
+              default: getDefaultValue(value.default),
+              description: getDefaultValue(value.description),
+            };
+          case DocType.events:
+            return {
+              type: key,
+              detail: getDefaultValue(value.detail),
+              description: getDefaultValue(value.description),
+            };
+          case DocType.methods:
+            return {
+              name: key,
+              params: getDefaultValue(value.params),
+              description: getDefaultValue(value.description),
+            };
+          case DocType.slots:
+            return {
+              name: key,
+              description: getDefaultValue(value.description),
+            };
+          default:
+            return {};
+        }
+      });
+    };
+    const stores: Record<string, any> = {
+      // 基础信息存放
+      storyId: `${templateItem.appId}.${templateItem.templateId}`,
+      category: templateItem.category,
+      type: templateItem.type,
+      author: templateItem.creator,
+      text: templateItem.text,
+      description: templateItem.description,
+      doc: {
+        id: `${templateItem.appId}.${templateItem.templateId}`,
+        name: `${templateItem.appId}.${templateItem.templateId}`,
+        dockind: "template",
+        author: templateItem.creator,
+        slots: null,
+        history: null,
+      },
+    };
+    if (templateItem.proxy) {
+      // 如果有代理属性
+      const { properties, events, methods, slots } = safeJSONParse(
+        templateItem.proxy
+      );
+      stores.doc = Object.assign(stores.doc, {
+        properties: getDocContent(properties, DocType.properties),
+        events: getDocContent(events, DocType.events),
+        methods: getDocContent(methods, DocType.methods),
+        slots: getDocContent(slots, DocType.slots),
+      });
+    }
+    // if (templateItem.children) {
+    //   // 如果template存在子template, 需要将子模板类型取出来, 并存放于interface中
+    //   const children = getChildren(templateItem.children);
+    //   stores.doc.interface = getInterface(children);
+    // }
+
+    return stores;
+  };
+
+  const stores = templateTreeList.map((templateItem) =>
+    createStores(templateItem)
+  );
+
   const indexJsContent = getBrickPackageIndexJs(templates);
 
   const files = [
@@ -159,6 +278,10 @@ export async function BuildProjectOfTemplates({
     {
       path: `dist/index.${simpleHash(indexJsContent)}.js`,
       content: indexJsContent,
+    },
+    {
+      path: "dist/stores.json",
+      content: JSON.stringify(stores, null, 2),
     },
   ];
 
