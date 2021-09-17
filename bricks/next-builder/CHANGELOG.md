@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.69.1...@next-bricks/next-builder@1.70.0) (2021-09-17)
+
+
+### Bug Fixes
+
+* update @next-libs/* ([5815dd1](https://github.com/easyops-cn/next-basics/commit/5815dd1f6cbd4f38569e8c88d828fd51ce092d6f))
+
+
+### Features
+
+* custom template doc support delete unuse code ([13b5a9c](https://github.com/easyops-cn/next-basics/commit/13b5a9c5c53dcd07951ef80ca9d2d2b154bfd4f9))
+* custom template doc support update unit test ([fe14594](https://github.com/easyops-cn/next-basics/commit/fe14594c17ad5a89612cacdeab560848a19d3d44))
+* custom template doc support update unit test ([d99d5fc](https://github.com/easyops-cn/next-basics/commit/d99d5fc85fc16540f6981b925702a0cba9195aaf))
+* custom template support doc ([7da8256](https://github.com/easyops-cn/next-basics/commit/7da8256127aafb3cf3cd886a845a58cb90011e6c))
+* support highlight tokens in code editors ([f13262f](https://github.com/easyops-cn/next-basics/commit/f13262f11c0ef1af3d1308f26f2e565a86b177d8))
+
+
+
+
+
 ## [1.69.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.69.0...@next-bricks/next-builder@1.69.1) (2021-09-17)
 
 
