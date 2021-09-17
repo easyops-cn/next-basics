@@ -179,6 +179,18 @@ export class GeneralCarouselElement extends UpdatingElement {
   infinite = true;
 
   /**
+   * @kind number
+   * @required false
+   * @default 1000
+   * @description 自定义轮播项的停留时间
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  autoplaySpeed = 1000;
+
+  /**
    * @kind any[]
    * @required false
    * @default -
@@ -267,6 +279,7 @@ export class GeneralCarouselElement extends UpdatingElement {
             noDataDesc={this.noDataDesc}
             arrows={this.arrows}
             dotsTheme={this.dotsTheme}
+            autoplaySpeed={this.autoplaySpeed}
           />
         </BrickWrapper>,
         this

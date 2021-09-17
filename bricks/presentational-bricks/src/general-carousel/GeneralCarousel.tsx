@@ -26,6 +26,7 @@ export interface GeneralCarouselProps {
   dotsTheme?: "light" | "dark";
   useBrick: UseBrickConf;
   dataSource: any[];
+  autoplaySpeed?: number;
 }
 
 export function renderCustomComp(
@@ -80,9 +81,11 @@ export function GeneralCarousel({
   dotsTheme,
   useBrick,
   dataSource,
+  autoplaySpeed,
 }: GeneralCarouselProps): React.ReactElement {
   const comps = Array.isArray(components) ? components : compact([components]);
   const data = Array.isArray(dataSource) ? dataSource : compact([dataSource]);
+
   const carousel = (
     <Carousel
       className={classNames({
@@ -92,6 +95,7 @@ export function GeneralCarousel({
       autoplay={autoplay}
       dots={dots}
       speed={speed}
+      autoplaySpeed={autoplaySpeed}
       slidesToShow={slidesToShow}
       slidesToScroll={slidesToScroll}
       pauseOnDotsHover={pauseOnDotsHover}
