@@ -8,6 +8,9 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
       isProtected: {
         asVariable: true,
       },
+      isEdit: {
+        asVariable: true,
+      },
       values: {
         ref: "addCmdbObjectAttrForm",
         refProperty: "values",
@@ -85,7 +88,8 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                 name: "id",
                 label: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_ID}`),
                 required: true,
-                pattern: "^[A-Za-z_][A-Za-z0-9_]{0,31}$",
+                pattern:
+                  "<% TPL.isEdit ? '^[A-Za-z_][A-Za-z0-9_]*$' : '^[A-Za-z_][A-Za-z0-9_]{0,31}$' %>",
                 message: {
                   required: i18n.t(`${NS_FORMS}:${K.MUST_NEED_ATTRIBUTE_ID}`),
                   pattern: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_ID_LIMIT}`),
@@ -132,22 +136,19 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               events: {
                 "forms.cmdb-object-attr-value.change": [
                   {
-                    if:
-                      "<% EVENT.detail.type === 'str' && ( EVENT.detail.default_type === 'series-number' || EVENT.detail.default_type === 'auto-increment-id') %>",
+                    if: "<% EVENT.detail.type === 'str' && ( EVENT.detail.default_type === 'series-number' || EVENT.detail.default_type === 'auto-increment-id') %>",
                     targetRef: "addCmdbObjectAttrForm",
                     method: "setInitValue",
                     args: [{ attrOptions: ["required", "readonly", "unique"] }],
                   },
                   {
-                    if:
-                      "<% !TPL.isProtected && EVENT.detail.default_type !== 'series-number' &&  EVENT.detail.default_type !== 'auto-increment-id' %>",
+                    if: "<% !TPL.isProtected && EVENT.detail.default_type !== 'series-number' &&  EVENT.detail.default_type !== 'auto-increment-id' %>",
                     targetRef: "addCmdbObjectAttrForm",
                     method: "resetFields",
                     args: ["attrOptions"],
                   },
                   {
-                    if:
-                      "<% !TPL.isProtected && EVENT.detail.type !== 'struct' && EVENT.detail.type !== 'structs' && EVENT.detail.type !== 'enums' && EVENT.detail.type !== 'arr' %>",
+                    if: "<% !TPL.isProtected && EVENT.detail.type !== 'struct' && EVENT.detail.type !== 'structs' && EVENT.detail.type !== 'enums' && EVENT.detail.type !== 'arr' %>",
                     targetRef: "attrOptions",
                     properties: {
                       options: [
@@ -167,8 +168,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                     },
                   },
                   {
-                    if:
-                      "<% !TPL.isProtected && (EVENT.detail.type === 'struct' || EVENT.detail.type === 'structs') %>",
+                    if: "<% !TPL.isProtected && (EVENT.detail.type === 'struct' || EVENT.detail.type === 'structs') %>",
                     targetRef: "attrOptions",
                     properties: {
                       options: [
@@ -190,8 +190,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                     },
                   },
                   {
-                    if:
-                      "<% !TPL.isProtected && (EVENT.detail.type === 'enums' || EVENT.detail.type === 'arr') %>",
+                    if: "<% !TPL.isProtected && (EVENT.detail.type === 'enums' || EVENT.detail.type === 'arr') %>",
                     targetRef: "attrOptions",
                     properties: {
                       options: [
