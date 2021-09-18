@@ -17,6 +17,11 @@
 }
 
 .eventName {
+  &:hover {
+    .iconWrapper {
+      display: block;
+    }
+  }
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -59,24 +64,27 @@
   margin-left: 40px;
 }
 
-.plusIcon,
-.removeIcon {
-  margin-left: 12px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.plusIcon {
-  color: #749dd7;
-  &:hover {
-    color: #2196f3;
+.iconWrapper {
+  display: none;
+  .plusIcon,
+  .removeIcon {
+    margin-left: 12px;
+    font-size: 16px;
+    cursor: pointer;
   }
-}
 
-.removeIcon {
-  color: #f57268;
-  &:hover {
-    color: #f0493c;
+  .plusIcon {
+    color: #749dd7;
+    &:hover {
+      color: #2196f3;
+    }
+  }
+
+  .removeIcon {
+    color: #f57268;
+    &:hover {
+      color: #f0493c;
+    }
   }
 }
 

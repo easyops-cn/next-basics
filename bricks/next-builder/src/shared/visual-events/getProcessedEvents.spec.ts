@@ -1,5 +1,5 @@
 import { BrickEventsMap } from "@next-core/brick-types";
-import { processEvents, processHandlers } from "./getProcessedEvents";
+import { getProcessedEvents, processHandlers } from "./getProcessedEvents";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: () => ({
@@ -9,12 +9,6 @@ jest.mock("@next-core/brick-kit", () => ({
 
 describe("getProcessedEvents", () => {
   it("should work", () => {
-    const eventsInfo = [
-      { type: "general.select.blur", description: "失去焦点触发" },
-      { type: "general.select.change", description: "下拉选中变化时被触" },
-      { type: "general.select.search", description: "搜索时被触发" },
-    ];
-
     const eventMap = {
       "general.select.blur": {
         target: "#id",
@@ -32,7 +26,7 @@ describe("getProcessedEvents", () => {
         args: ["success"],
       },
     } as BrickEventsMap;
-    expect(processEvents(eventsInfo, eventMap)).toEqual([
+    expect(getProcessedEvents(eventMap)).toEqual([
       {
         name: "general.select.blur",
         events: [
@@ -52,7 +46,6 @@ describe("getProcessedEvents", () => {
           { target: "#id2", method: "setArgs" },
         ],
       },
-      { name: "general.select.search", events: [] },
       {
         name: "general.select.click",
         events: [
@@ -64,7 +57,7 @@ describe("getProcessedEvents", () => {
       },
     ]);
 
-    expect(processEvents()).toEqual([]);
+    expect(getProcessedEvents()).toEqual([]);
   });
 
   it("processHandlers", () => {
