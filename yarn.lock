@@ -2409,10 +2409,10 @@
     react-dnd "^11.1.3"
     react-dnd-html5-backend "^11.1.3"
 
-"@next-libs/basic-components@^3.1.3":
-  version "3.1.3"
-  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.1.3.tgz#2842f8a3142aace747dbd334443210d81a8267f7"
-  integrity sha512-jVS0qQQz3m+WKkPw1ZbT5RzwXwGxxDlJuvv8h4T+i3z+sKg/0vDFkOITXfBXjjqObERKYdpnlGiN2L6YWq0+IQ==
+"@next-libs/basic-components@^3.1.3", "@next-libs/basic-components@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.0.tgz#a2213299dccff1f7b1a410cf40716b03ba873836"
+  integrity sha512-0fZQBP7Euh4kCuDciKxvnPglra0ARwhaWrNGjb4yXOl1u+q/amXOIJcvTFgVnrmnMaIzPb1ZfhRq3ScaP8RGEg==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 

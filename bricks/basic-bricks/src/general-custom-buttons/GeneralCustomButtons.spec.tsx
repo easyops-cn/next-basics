@@ -52,6 +52,9 @@ describe("topology view admin buttons", () => {
       />
     );
     const editButton = wrapper.find(Button).at(0);
+    expect(
+      (editButton.prop("icon") as React.ReactElement).props["data-icon"]
+    ).toBe("edit");
     editButton.simulate("click");
     expect(mockSave).toBeCalledWith("edit", buttons[1]);
   });
