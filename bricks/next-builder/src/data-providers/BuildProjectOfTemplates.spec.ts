@@ -351,6 +351,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   {
     "storyId": "test.template-t",
     "type": "custom-template",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-t",
@@ -364,6 +365,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   {
     "storyId": "test.template-u",
     "type": "custom-template",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-u",
@@ -412,6 +414,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   {
     "storyId": "test.template-v",
     "type": "custom-template",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-v",
@@ -523,6 +526,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   {
     "storyId": "test.template-t",
     "type": "custom-template",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-t",
@@ -536,6 +540,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   {
     "storyId": "test.template-u",
     "type": "custom-template",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-u",
@@ -584,6 +589,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   {
     "storyId": "test.template-v",
     "type": "custom-template",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-v",
