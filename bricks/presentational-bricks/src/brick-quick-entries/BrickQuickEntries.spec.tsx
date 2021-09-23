@@ -68,6 +68,7 @@ describe("BrickQuickEntries", () => {
         column={3}
         useBricks={useBricks}
         data={["a", "b"]}
+        titleList={["tttt"]}
       />
     );
     expect(wrapper.find(BrickAsComponent).length).toBe(2);

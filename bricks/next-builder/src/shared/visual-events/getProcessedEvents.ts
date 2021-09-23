@@ -1,4 +1,4 @@
-import { EventsInfo, ProcessEvent } from "./interfaces";
+import { ProcessEvent } from "./interfaces";
 import {
   BrickEventsMap,
   BrickEventHandler,
@@ -32,23 +32,12 @@ export function processHandlers(
   return processedList;
 }
 
-export function processEvents(
-  eventsInfo: EventsInfo[] = [],
+export function getProcessedEvents(
   eventsMap: BrickEventsMap = {}
 ): ProcessEvent[] {
   const processedEvents = [] as ProcessEvent[];
-
-  eventsInfo?.forEach((info) => {
-    processedEvents.push({ name: info.type, events: [] });
-  });
-
   for (const [name, events] of Object.entries(eventsMap)) {
-    const find = processedEvents.find((item) => item.name === name);
-    if (find) {
-      find.events.push(...processHandlers(events));
-    } else {
-      processedEvents.push({ name, events: processHandlers(events) });
-    }
+    processedEvents.push({ name, events: processHandlers(events) });
   }
 
   return processedEvents;
