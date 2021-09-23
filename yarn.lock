@@ -2416,13 +2416,6 @@
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 
-"@next-libs/basic-components@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.1.tgz#73d0fb03b10a69344a29618b99ddfa59461b0426"
-  integrity sha512-6AZWc1lF8/zuyhmQg1aoyRKSYlMjUyyQUchUx0AXpJg/Pa2Mp9nE1wqLp35C4ZQB87hV8IB+MFMfByLcIwgv3A==
-  dependencies:
-    "@next-core/brick-types" "^2.16.0"
-
 "@next-libs/basic-components@^3.2.2":
   version "3.2.2"
   resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.2.tgz#d34bb700a6ee20433a4512c6795773226181511a"
