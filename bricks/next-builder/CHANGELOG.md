@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.71.0...@next-bricks/next-builder@1.72.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* refie event view ([d676efb](https://github.com/easyops-cn/next-basics/commit/d676efb64b3da2dff0f8d63424b58c3f9b5ecd8f))
+
+
+### Features
+
+* update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
+
+
+
+
+
 # [1.71.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.70.1...@next-bricks/next-builder@1.71.0) (2021-09-22)
 
 

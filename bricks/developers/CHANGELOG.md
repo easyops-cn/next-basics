@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.345.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.344.1...@next-bricks/developers@1.345.0) (2021-09-23)
+
+
+### Features
+
+* update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
+
+
+
+
+
 ## [1.344.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.344.0...@next-bricks/developers@1.344.1) (2021-09-17)
 
 
