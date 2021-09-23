@@ -23,9 +23,9 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-libs/basic-components": "^3.2.1",
+    "@next-libs/basic-components": "^3.2.2",
     "@next-libs/code-editor-components": "^4.0.3",
-    "@next-libs/forms": "^3.2.1",
+    "@next-libs/forms": "^3.2.4",
     "@types/react-color": "^3.0.5",
     "react-color": "^2.19.3"
   },
