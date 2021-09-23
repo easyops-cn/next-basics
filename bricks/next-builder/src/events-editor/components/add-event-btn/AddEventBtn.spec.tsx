@@ -87,4 +87,25 @@ describe("AddEventBtn", () => {
 
     expect(props.onClick).toHaveBeenCalled();
   });
+
+  it("should render empty if no document data", async () => {
+    const wrapper = mount(
+      <AddEventBtn
+        eventList={[
+          {
+            name: "tabs.click",
+            events: [{ action: "console.log" }],
+          },
+        ]}
+      />
+    );
+
+    await act(async () => {
+      wrapper.find(".ant-btn-link").invoke("onClick")(null);
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find(Menu.Item).length).toEqual(0);
+  });
 });

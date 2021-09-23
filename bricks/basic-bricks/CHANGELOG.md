@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.145.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.144.0...@next-bricks/basic-bricks@1.145.0) (2021-09-23)
+
+
+### Features
+
+* update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
+
+
+
+
+
+# [1.144.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.143.1...@next-bricks/basic-bricks@1.144.0) (2021-09-23)
+
+
+### Features
+
+* **general-custom-buttons:** add data-icon attribute ([aeca349](https://github.com/easyops-cn/next-basics/commit/aeca349f3dc035f06905baf9d0f026ddc030f0a9))
+
+
+
+
+
 ## [1.143.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.143.0...@next-bricks/basic-bricks@1.143.1) (2021-09-17)
 
 

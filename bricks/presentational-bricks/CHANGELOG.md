@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.218.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.217.1...@next-bricks/presentational-bricks@1.218.0) (2021-09-23)
+
+
+### Features
+
+* update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
+
+
+
+
+
+## [1.217.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.217.0...@next-bricks/presentational-bricks@1.217.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* 快捷入口构件支持每项的标题设置 Closed SERVICE_OBSERVE-407 ([cbfe251](https://github.com/easyops-cn/next-basics/commit/cbfe251ed6fbdd39efb2a8b753220d3db8c3c9a2))
+
+
+
+
+
 # [1.217.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.216.1...@next-bricks/presentational-bricks@1.217.0) (2021-09-17)
 
 

@@ -206,6 +206,7 @@ export async function BuildProjectOfTemplates({
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
       category: templateItem.category,
       type: "custom-template",
+      layerType: "widget",
       author: templateItem.creator,
       text: templateItem.text,
       description: templateItem.description,

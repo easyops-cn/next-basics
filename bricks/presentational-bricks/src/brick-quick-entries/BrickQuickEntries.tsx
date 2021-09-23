@@ -16,6 +16,7 @@ export interface BrickQuickEntriesProps {
   data?: any[];
   containerStyle?: React.CSSProperties;
   mode?: "multiCardGeneral" | "multiCardNoLine" | "default";
+  titleList?: string[];
 }
 
 export function BrickQuickEntries(
@@ -67,9 +68,19 @@ export function BrickQuickEntries(
 
     for (let i = 0; i < props.row; ++i) {
       for (let j = 0; j < props.column; ++j) {
-        const elem = isEmpty(props.useBricks)
+        let elem = isEmpty(props.useBricks)
           ? renderLink(i, j)
           : renderBrick(i, j);
+        if (props.titleList) {
+          elem = (
+            <div>
+              <div style={{ padding: "5px 10px", fontWeight: 600 }}>
+                {props.titleList[i * props.column + j]}
+              </div>
+              {elem}
+            </div>
+          );
+        }
         elements.push(elem);
         if (j !== props.column - 1) {
           elements.push(

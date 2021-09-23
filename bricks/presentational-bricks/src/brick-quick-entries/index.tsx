@@ -103,6 +103,15 @@ export class BrickQuickEntriesElement extends UpdatingElement {
   data: any[];
 
   /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 为每个入口配置标题
+   */
+  @property({ attribute: false })
+  titleList: string[];
+
+  /**
    * @kind boolean
    * @required false
    * @default true
@@ -168,6 +177,7 @@ export class BrickQuickEntriesElement extends UpdatingElement {
           data={this.data}
           containerStyle={this.containerStyle}
           mode={this.mode}
+          titleList={this.titleList}
         />
       );
 
