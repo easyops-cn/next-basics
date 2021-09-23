@@ -57,7 +57,7 @@ export function BrickBook({
     }
   }, [notToSetPageTitle, story]);
 
-  if (confList.length === 0) {
+  if (!story) {
     return null;
   }
 
