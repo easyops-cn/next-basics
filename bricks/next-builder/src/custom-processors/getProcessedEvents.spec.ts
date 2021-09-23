@@ -1,4 +1,4 @@
-import { getProcessedEvents } from "./getProcessedEvents";
+import { getProcessedEvents } from "../shared/visual-events/getProcessedEvents";
 import { BrickEventsMap } from "@next-core/brick-types";
 
 jest.mock("@next-core/brick-kit", () => ({

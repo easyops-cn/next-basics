@@ -56,3 +56,5 @@ export const builtinActions: string[] = [
   "menu.clearMenuTitleCache",
   "menu.clearMenuCache",
 ];
+
+export const hasCallbackActions = ["message.subscribe", "message.unsubscribe"];
