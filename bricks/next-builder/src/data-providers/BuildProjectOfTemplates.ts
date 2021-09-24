@@ -205,15 +205,16 @@ export async function BuildProjectOfTemplates({
       // 基础信息存放
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
       category: templateItem.category,
-      type: "custom-template",
+      type: "brick",
       layerType: "widget",
       author: templateItem.creator,
       text: templateItem.text,
       description: templateItem.description,
+      isCustomTemplate: true,
       doc: {
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,
-        dockind: "custom-template",
+        dockind: "brick",
         author: templateItem.creator,
         slots: null,
         history: null,
