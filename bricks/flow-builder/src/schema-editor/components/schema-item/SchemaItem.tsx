@@ -25,6 +25,7 @@ export interface SchemaItemProps {
   itemData: SchemaItemProperty;
   hideDeleteBtn?: boolean;
   readonly?: boolean;
+  hiddenRootNode?: boolean;
 }
 
 export function SchemaItem({
@@ -37,6 +38,7 @@ export function SchemaItem({
   onRemove,
   trackId,
   hideDeleteBtn,
+  hiddenRootNode,
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [visible, setVisible] = useState(false);
@@ -81,7 +83,11 @@ export function SchemaItem({
 
   return (
     <>
-      <div style={style} className={className}>
+      <div
+        style={style}
+        className={className}
+        hidden={trackId === "root" && hiddenRootNode}
+      >
         <div style={{ paddingLeft: offsetPadding }}>
           {itemData.name || "--"}
         </div>
@@ -154,7 +160,7 @@ export function SchemaItem({
             onClick={openCreateModal}
           >
             <PlusCircleOutlined />
-            Property
+            {t(K.FIELD_PARAMS)}
           </Button>
         </div>
       )}
