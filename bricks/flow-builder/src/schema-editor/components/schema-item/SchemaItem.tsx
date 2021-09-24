@@ -26,6 +26,7 @@ export interface SchemaItemProps {
   hideDeleteBtn?: boolean;
   readonly?: boolean;
   hiddenRootNode?: boolean;
+  disabledModelType?: boolean;
 }
 
 export function SchemaItem({
@@ -39,6 +40,7 @@ export function SchemaItem({
   trackId,
   hideDeleteBtn,
   hiddenRootNode,
+  disabledModelType,
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [visible, setVisible] = useState(false);
@@ -147,6 +149,7 @@ export function SchemaItem({
           key={index}
           trackId={`${trackId}-${index}`}
           itemData={item}
+          disabledModelType={disabledModelType}
           onEdit={handleChildEdit}
           onRemove={handleChildRemove}
           onCreate={onCreate}
@@ -171,6 +174,7 @@ export function SchemaItem({
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}
         initValue={initValue}
+        disabledModelType={disabledModelType}
       />
     </>
   );

@@ -25,6 +25,7 @@ export interface AddPropertyModalProps {
   ) => void;
   initValue?: SchemaItemProperty;
   isEdit?: boolean;
+  disabledModelType?: boolean;
 }
 
 export function AddPropertyModal({
@@ -34,6 +35,7 @@ export function AddPropertyModal({
   initValue,
   trackId,
   isEdit,
+  disabledModelType,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -77,12 +79,13 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const categoryFormItem = useMemo(
     () => (
       <Form.Item
+        hidden={disabledModelType}
         name="origin"
         initialValue="normal"
         label={t(K.CATEGORY_LABEL)}
@@ -97,7 +100,7 @@ export function AddPropertyModal({
         </Select>
       </Form.Item>
     ),
-    [t]
+    [disabledModelType, t]
   );
 
   const typeFormItem = useMemo(
@@ -116,7 +119,7 @@ export function AddPropertyModal({
               rules={[{ required: true }]}
               messageVariables={{ label: "type" }}
             >
-              <TypeItem />
+              <TypeItem disabledModelType={disabledModelType} />
             </Form.Item>
           ) : (
             <Form.Item
@@ -131,7 +134,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [form]
+    [disabledModelType, form, t]
   );
 
   const defaultFormItem = useMemo(
@@ -164,7 +167,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const enumFormItem = useMemo(
@@ -226,7 +229,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const requiredFormItem = useMemo(
@@ -257,7 +260,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const descriptionFormItem = useMemo(
@@ -281,7 +284,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   return (

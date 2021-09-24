@@ -98,7 +98,7 @@ describe("AddPropertyModal", () => {
     wrapper.update();
 
     expect(
-      wrapper.find(".ant-form-item-required[title='Name']").length
+      wrapper.find(".ant-form-item-required[title='NAME_LABEL']").length
     ).toEqual(1);
 
     wrapper.setProps({
