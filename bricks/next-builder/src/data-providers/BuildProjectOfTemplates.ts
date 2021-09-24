@@ -210,6 +210,7 @@ export async function BuildProjectOfTemplates({
       author: templateItem.creator,
       text: templateItem.text,
       description: templateItem.description,
+      isCustomTemplate: true,
       doc: {
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,

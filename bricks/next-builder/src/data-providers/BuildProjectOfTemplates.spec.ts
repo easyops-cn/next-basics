@@ -353,6 +353,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "type": "brick",
     "layerType": "widget",
     "author": "abc",
+    "isCustomTemplate": true,
     "doc": {
       "id": "test.template-t",
       "name": "test.template-t",
@@ -367,6 +368,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "type": "brick",
     "layerType": "widget",
     "author": "abc",
+    "isCustomTemplate": true,
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -416,6 +418,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "type": "brick",
     "layerType": "widget",
     "author": "abc",
+    "isCustomTemplate": true,
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
@@ -528,6 +531,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "type": "brick",
     "layerType": "widget",
     "author": "abc",
+    "isCustomTemplate": true,
     "doc": {
       "id": "test.template-t",
       "name": "test.template-t",
@@ -542,6 +546,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "type": "brick",
     "layerType": "widget",
     "author": "abc",
+    "isCustomTemplate": true,
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -591,6 +596,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "type": "brick",
     "layerType": "widget",
     "author": "abc",
+    "isCustomTemplate": true,
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
