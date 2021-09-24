@@ -96,7 +96,12 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
         <Tooltip key={item.value} title={item.tooltip}>
           <Component value={item.value} disabled={item.disabled}>
             {Component === Radio.Button && item.icon ? (
-              <GeneralIcon icon={item.icon}></GeneralIcon>
+              <>
+                <GeneralIcon icon={item.icon}></GeneralIcon>
+                {item.label && (
+                  <span style={{ paddingLeft: "5px" }}>{item.label}</span>
+                )}
+              </>
             ) : (
               item.label
             )}

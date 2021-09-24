@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.193.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.192.0...@next-bricks/forms@1.193.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* 普通单选框支持label和icon Closed SERVICE_OBSERVE-538 ([abaea5b](https://github.com/easyops-cn/next-basics/commit/abaea5ba5b856a3c523cdd6143d6dcbfdb931535))
+
+
+### Features
+
+* support widget doc and update denpencies ([d2b9375](https://github.com/easyops-cn/next-basics/commit/d2b937572004f3098af632bc7e1bc3d684e1be2e))
+
+
+
+
+
+# [1.192.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.3...@next-bricks/forms@1.192.0) (2021-09-23)
+
+
+### Features
+
+* update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
+
+
+
+
+
+## [1.191.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.2...@next-bricks/forms@1.191.3) (2021-09-18)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+
+
+
+
 ## [1.191.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.1...@next-bricks/forms@1.191.2) (2021-09-17)
 
 
