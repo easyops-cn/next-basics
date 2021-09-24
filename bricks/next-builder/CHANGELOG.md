@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.73.0...@next-bricks/next-builder@1.74.0) (2021-09-24)
+
+
+### Features
+
+* add isCustomTemplate field for doc ([5bd831c](https://github.com/easyops-cn/next-basics/commit/5bd831cc10a4ea80a113233e92d43a1c7872dd52))
+* update widget doc type ([e3d44c1](https://github.com/easyops-cn/next-basics/commit/e3d44c1dfaa12a76ca3d890c1d777a8f4387fab8))
+
+
+
+
+
 # [1.73.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.72.0...@next-bricks/next-builder@1.73.0) (2021-09-23)
 
 
