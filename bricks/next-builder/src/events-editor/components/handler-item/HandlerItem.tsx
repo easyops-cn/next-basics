@@ -11,6 +11,7 @@ import {
   BrickEventHandler,
   UseProviderEventHandler,
   BrickEventsMap,
+  BuiltinBrickEventHandler,
 } from "@next-core/brick-types";
 import {
   FontAwesomeIcon,
@@ -19,7 +20,6 @@ import {
 import classNames from "classnames";
 import { NS_NEXT_BUILDER, K } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
-import { processEvents } from "../../../shared/visual-events/getProcessedEvents";
 import {
   getHandlerName,
   getHandlerType,
@@ -31,9 +31,12 @@ import {
   HandlerType,
   LifeCycle,
 } from "../../../shared/visual-events/interfaces";
+import { hasCallbackActions } from "../../../shared/visual-events/constants";
 import sharedStyle from "../../EventsEditor.module.css";
 import styles from "./HandlerItem.module.css";
 import { isNil } from "lodash";
+import { getProcessedEvents } from "../../../shared/visual-events/getProcessedEvents";
+
 export interface HandlerItemProps {
   type?: HandlerType;
   handler: BrickEventHandler;
@@ -84,7 +87,10 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
     return (
       name !== LifeCycle.UseResolves &&
       (type === HandlerType.UseProvider ||
-        (handler as UseProviderEventHandler).callback)
+        (handler as UseProviderEventHandler).callback ||
+        hasCallbackActions.includes(
+          (handler as BuiltinBrickEventHandler).action
+        ))
     );
   }, [handler, name, type]);
 
@@ -98,8 +104,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
           className={sharedStyle.strikeLine}
           style={{ height: lineHeight }}
         ></div>
-        {processEvents(
-          [],
+        {getProcessedEvents(
           (handler as UseProviderEventHandler).callback as BrickEventsMap
         )?.map((item) => (
           <div key={item.name}>
@@ -111,24 +116,26 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
               />
               {`callback.${item.name}`}
 
-              <FontAwesomeIcon
-                className={sharedStyle.plusIcon}
-                icon="plus-square"
-                onClick={() =>
-                  context?.onCreate(
-                    `${uniqKey}-callback-${item.name}`,
-                    `callback.${item.name}`
-                  )
-                }
-              />
+              <div className={sharedStyle.iconWrapper}>
+                <FontAwesomeIcon
+                  className={sharedStyle.plusIcon}
+                  icon="plus-square"
+                  onClick={() =>
+                    context?.onCreate(
+                      `${uniqKey}-callback-${item.name}`,
+                      `callback.${item.name}`
+                    )
+                  }
+                />
 
-              <FontAwesomeIcon
-                className={sharedStyle.removeIcon}
-                icon="minus-square"
-                onClick={() =>
-                  context.removeCallback?.(`${uniqKey}-callback-${item.name}`)
-                }
-              />
+                <FontAwesomeIcon
+                  className={sharedStyle.removeIcon}
+                  icon="minus-square"
+                  onClick={() =>
+                    context.removeCallback?.(`${uniqKey}-callback-${item.name}`)
+                  }
+                />
+              </div>
             </div>
 
             <div className={sharedStyle.eventHandler}>
@@ -148,8 +155,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
       <div className={sharedStyle.actionArea} ref={actionBtnRef}>
         <AddEventBtn
           eventDocInfo={callbackEvents}
-          eventList={processEvents(
-            [],
+          eventList={getProcessedEvents(
             (handler as UseProviderEventHandler).callback as BrickEventsMap
           )}
           onClick={(name) =>

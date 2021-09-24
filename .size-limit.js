@@ -14,7 +14,7 @@ module.exports = sizeLimit({
     "presentational-bricks": "270 KB",
     "flow-builder": "380 KB",
     developers: "190 KB",
-    forms: "600 KB",
+    forms: "605 KB",
   },
   templates: {
     "*": "5 KB",

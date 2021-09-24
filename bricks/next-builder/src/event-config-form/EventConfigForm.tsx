@@ -25,7 +25,10 @@ import {
 import { FileSearchOutlined } from "@ant-design/icons";
 import { ColProps } from "antd/lib/col";
 import { RadioChangeEvent } from "antd/lib/radio";
-import { builtinActions } from "../shared/visual-events/constants";
+import {
+  builtinActions,
+  hasCallbackActions,
+} from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
 import { HandlerType, LifeCycle } from "../shared/visual-events/interfaces";
 import { isNil, debounce } from "lodash";
@@ -377,6 +380,8 @@ export function LegacyEventConfigForm(
     () => (
       <Form.Item
         noStyle
+        // only hidden but Still Collect field value
+        hidden={true}
         shouldUpdate={(prevValues, currentValues) =>
           prevValues.handlerType !== currentValues.handlerType ||
           prevValues.action !== currentValues.action
@@ -386,9 +391,7 @@ export function LegacyEventConfigForm(
           ([HandlerType.UseProvider, HandlerType.ExecuteMethod].includes(
             getFieldValue("handlerType")
           ) ||
-            ["message.subscribe", "message.unsubscribe"].includes(
-              getFieldValue("action")
-            )) && (
+            hasCallbackActions.includes(getFieldValue("action"))) && (
             <Form.Item name="callback" label={t(K.CALLBACK_LABEL)}>
               {getCodeEditorItem()}
             </Form.Item>
