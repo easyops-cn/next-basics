@@ -350,12 +350,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             content: `[
   {
     "storyId": "test.template-t",
-    "type": "custom-template",
+    "type": "brick",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-t",
       "name": "test.template-t",
-      "dockind": "custom-template",
+      "dockind": "brick",
       "author": "abc",
       "slots": null,
       "history": null
@@ -363,12 +364,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-u",
-    "type": "custom-template",
+    "type": "brick",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
-      "dockind": "custom-template",
+      "dockind": "brick",
       "author": "abc",
       "slots": [
         {
@@ -411,12 +413,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-v",
-    "type": "custom-template",
+    "type": "brick",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
-      "dockind": "custom-template",
+      "dockind": "brick",
       "author": "abc",
       "history": null
     }
@@ -522,12 +525,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             content: `[
   {
     "storyId": "test.template-t",
-    "type": "custom-template",
+    "type": "brick",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-t",
       "name": "test.template-t",
-      "dockind": "custom-template",
+      "dockind": "brick",
       "author": "abc",
       "slots": null,
       "history": null
@@ -535,12 +539,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-u",
-    "type": "custom-template",
+    "type": "brick",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
-      "dockind": "custom-template",
+      "dockind": "brick",
       "author": "abc",
       "slots": [
         {
@@ -583,12 +588,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   },
   {
     "storyId": "test.template-v",
-    "type": "custom-template",
+    "type": "brick",
+    "layerType": "widget",
     "author": "abc",
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
-      "dockind": "custom-template",
+      "dockind": "brick",
       "author": "abc",
       "history": null
     }
