@@ -2416,10 +2416,10 @@
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 
-"@next-libs/basic-components@^3.2.2":
-  version "3.2.2"
-  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.2.tgz#d34bb700a6ee20433a4512c6795773226181511a"
-  integrity sha512-oI+c8z4bnzwBUhCeI0PUmZwQw0bKcnMUS6kae5EY7Syq1M6u1WDhw4qCkHX+bB6V/I6tMy0E9AsuB+SSF0Id/g==
+"@next-libs/basic-components@^3.2.3":
+  version "3.2.3"
+  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.3.tgz#ab193f06501823b03c717744065e7003fb7d5e8c"
+  integrity sha512-i/bQWgESuPrj0fk3BkovzSceSOGCevc5aU0OoP3lKK8NVpQ9Q8aI/lap+aDhz3koMNRzcnBY0QIDLVftjJOOSQ==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 
