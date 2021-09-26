@@ -165,6 +165,8 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
             },
             {
               id: "basic-bricks.any-brick",
+              layerType: "widget",
+              thumbnail: "base64.png",
             },
           ],
         };
@@ -236,6 +238,8 @@ describe("GetBrickLibrary", () => {
             "type": "box",
           },
           "id": "basic-bricks.general-button",
+          "layerType": "brick",
+          "thumbnail": undefined,
           "title": "普通按钮",
           "type": "brick",
         },
@@ -249,6 +253,8 @@ describe("GetBrickLibrary", () => {
           "editorProps": undefined,
           "icon": undefined,
           "id": "basic-bricks.any-brick",
+          "layerType": "widget",
+          "thumbnail": "base64.png",
           "title": "any-brick",
           "type": "brick",
         },

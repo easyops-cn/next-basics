@@ -5,280 +5,151 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.346.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.345.0...@next-bricks/developers@1.346.0) (2021-09-23)
 
-
 ### Features
 
-* support widget doc and update denpencies ([d2b9375](https://github.com/easyops-cn/next-basics/commit/d2b937572004f3098af632bc7e1bc3d684e1be2e))
-
-
-
-
+- support widget doc and update denpencies ([d2b9375](https://github.com/easyops-cn/next-basics/commit/d2b937572004f3098af632bc7e1bc3d684e1be2e))
 
 # [1.345.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.344.1...@next-bricks/developers@1.345.0) (2021-09-23)
 
-
 ### Features
 
-* update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
-
-
-
-
+- update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
 
 ## [1.344.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.344.0...@next-bricks/developers@1.344.1) (2021-09-17)
 
-
 ### Bug Fixes
 
-* update @next-libs/* ([5815dd1](https://github.com/easyops-cn/next-basics/commit/5815dd1f6cbd4f38569e8c88d828fd51ce092d6f))
-
-
-
-
+- update @next-libs/\* ([5815dd1](https://github.com/easyops-cn/next-basics/commit/5815dd1f6cbd4f38569e8c88d828fd51ce092d6f))
 
 # [1.344.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.343.1...@next-bricks/developers@1.344.0) (2021-08-20)
 
-
 ### Features
 
-* **auto:** next支持一种或多种登录方式 ([ef5ae53](https://github.com/easyops-cn/next-basics/commit/ef5ae53c8224c20351860dda5f5ec18729f71ce4))
-
-
-
-
+- **auto:** next 支持一种或多种登录方式 ([ef5ae53](https://github.com/easyops-cn/next-basics/commit/ef5ae53c8224c20351860dda5f5ec18729f71ce4))
 
 ## [1.343.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.343.0...@next-bricks/developers@1.343.1) (2021-08-17)
 
-
 ### Bug Fixes
 
-* make provider doc compatible with legacy sdk ([b65610e](https://github.com/easyops-cn/next-basics/commit/b65610eadfc7f16725cb60c2d636e2b409a3e065))
-
-
-
-
+- make provider doc compatible with legacy sdk ([b65610e](https://github.com/easyops-cn/next-basics/commit/b65610eadfc7f16725cb60c2d636e2b409a3e065))
 
 # [1.343.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.7...@next-bricks/developers@1.343.0) (2021-08-16)
 
-
 ### Features
 
-* **basic-providers:** http-proxy支持不通过api_gateway转发的请求 ([e10571c](https://github.com/easyops-cn/next-basics/commit/e10571cdb3cb05c78245a8192d6e51ee8d72dae6))
-
-
-
-
+- **basic-providers:** http-proxy 支持不通过 api_gateway 转发的请求 ([e10571c](https://github.com/easyops-cn/next-basics/commit/e10571cdb3cb05c78245a8192d6e51ee8d72dae6))
 
 ## [1.342.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.6...@next-bricks/developers@1.342.7) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.342.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.5...@next-bricks/developers@1.342.6) (2021-08-04)
-
 
 ### Reverts
 
-* Revert "Revert "Steve/split bricks"" ([aee7ace](https://github.com/easyops-cn/next-basics/commit/aee7ace7e3adc513149a7b964acbda11941f39f3))
-
-
-
-
+- Revert "Revert "Steve/split bricks"" ([aee7ace](https://github.com/easyops-cn/next-basics/commit/aee7ace7e3adc513149a7b964acbda11941f39f3))
 
 ## [1.342.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.4...@next-bricks/developers@1.342.5) (2021-08-03)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.342.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.3...@next-bricks/developers@1.342.4) (2021-08-02)
-
 
 ### Bug Fixes
 
-* make some bricks lazy load ([cf284f7](https://github.com/easyops-cn/next-basics/commit/cf284f76947de38c83f85d5782b1b3556c182c84))
-
-
-
-
+- make some bricks lazy load ([cf284f7](https://github.com/easyops-cn/next-basics/commit/cf284f76947de38c83f85d5782b1b3556c182c84))
 
 ## [1.342.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.2...@next-bricks/developers@1.342.3) (2021-08-02)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.342.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.1...@next-bricks/developers@1.342.2) (2021-06-21)
-
 
 ### Bug Fixes
 
-* refine page title and i18n usage ([28627d8](https://github.com/easyops-cn/next-basics/commit/28627d86a6d100a413ea1b945e19b3debe40e8e2))
-
-
-
-
+- refine page title and i18n usage ([28627d8](https://github.com/easyops-cn/next-basics/commit/28627d86a6d100a413ea1b945e19b3debe40e8e2))
 
 ## [1.342.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.342.0...@next-bricks/developers@1.342.1) (2021-06-15)
 
-
 ### Bug Fixes
 
-* refine provider debugger ([00ef0e4](https://github.com/easyops-cn/next-basics/commit/00ef0e4bbc3c0725df875677a478fda753b694cf))
-
-
-
-
+- refine provider debugger ([00ef0e4](https://github.com/easyops-cn/next-basics/commit/00ef0e4bbc3c0725df875677a478fda753b694cf))
 
 # [1.342.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.3...@next-bricks/developers@1.342.0) (2021-06-11)
 
-
 ### Features
 
-* support provider debugger ([1330e37](https://github.com/easyops-cn/next-basics/commit/1330e378d5f1278a1018632a0fb8ef59d2d0bcb4))
-
-
-
-
+- support provider debugger ([1330e37](https://github.com/easyops-cn/next-basics/commit/1330e378d5f1278a1018632a0fb8ef59d2d0bcb4))
 
 ## [1.341.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.2...@next-bricks/developers@1.341.3) (2021-06-10)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.341.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.1...@next-bricks/developers@1.341.2) (2021-06-03)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.341.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.341.0...@next-bricks/developers@1.341.1) (2021-05-07)
-
 
 ### Bug Fixes
 
-* add missing unique keys ([63430ca](https://github.com/easyops-cn/next-basics/commit/63430ca489154c71d54918034ee934d5eb00f26e))
-
-
-
-
+- add missing unique keys ([63430ca](https://github.com/easyops-cn/next-basics/commit/63430ca489154c71d54918034ee934d5eb00f26e))
 
 # [1.341.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.6...@next-bricks/developers@1.341.0) (2021-04-30)
 
-
 ### Features
 
-* add docs about provider-no-op ([379d426](https://github.com/easyops-cn/next-basics/commit/379d426d16aadc8b52c7804c947a718157a00c91))
-
-
-
-
+- add docs about provider-no-op ([379d426](https://github.com/easyops-cn/next-basics/commit/379d426d16aadc8b52c7804c947a718157a00c91))
 
 ## [1.340.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.5...@next-bricks/developers@1.340.6) (2021-04-19)
 
-
 ### Bug Fixes
 
-* **provider-doc:** fix provider doc after migrated sdk usage ([4334fa3](https://github.com/easyops-cn/next-basics/commit/4334fa337d5b25f60f4fe4f47887e9642ab0af91))
-
-
-
-
+- **provider-doc:** fix provider doc after migrated sdk usage ([4334fa3](https://github.com/easyops-cn/next-basics/commit/4334fa337d5b25f60f4fe4f47887e9642ab0af91))
 
 ## [1.340.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.4...@next-bricks/developers@1.340.5) (2021-04-08)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.340.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.3...@next-bricks/developers@1.340.4) (2021-04-02)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.340.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.2...@next-bricks/developers@1.340.3) (2021-03-29)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.340.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.1...@next-bricks/developers@1.340.2) (2021-03-29)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.340.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.340.0...@next-bricks/developers@1.340.1) (2021-03-16)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 # [1.340.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.339.3...@next-bricks/developers@1.340.0) (2021-03-12)
-
 
 ### Bug Fixes
 
-* **card-item:** style & demo ([4595684](https://github.com/easyops-cn/next-basics/commit/4595684aeed98623f3c96a57794d593a296a556e))
-
+- **card-item:** style & demo ([4595684](https://github.com/easyops-cn/next-basics/commit/4595684aeed98623f3c96a57794d593a296a556e))
 
 ### Features
 
-* **card-item:** block-icon-align-left ([20a7335](https://github.com/easyops-cn/next-basics/commit/20a7335dd752a9bfac7277ea81c9210feebec375))
-
-
-
-
+- **card-item:** block-icon-align-left ([20a7335](https://github.com/easyops-cn/next-basics/commit/20a7335dd752a9bfac7277ea81c9210feebec375))
 
 ## [1.339.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.339.2...@next-bricks/developers@1.339.3) (2021-02-26)
 
-
 ### Bug Fixes
 
-* fix doc ([b486040](https://github.com/easyops-cn/next-basics/commit/b486040d10ed1a0404922b8a9d333aa1572e28a2))
-
-
-
-
+- fix doc ([b486040](https://github.com/easyops-cn/next-basics/commit/b486040d10ed1a0404922b8a9d333aa1572e28a2))
 
 ## [1.339.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.339.1...@next-bricks/developers@1.339.2) (2021-02-09)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.339.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.339.0...@next-bricks/developers@1.339.1) (2021-02-07)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 # [1.339.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.338.5...@next-bricks/developers@1.339.0) (2021-02-05)
 
