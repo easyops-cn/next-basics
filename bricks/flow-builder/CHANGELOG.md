@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.12.0...@next-bricks/flow-builder@1.13.0) (2021-09-26)
+
+
+### Features
+
+* support disabled mode type ([67bcb37](https://github.com/easyops-cn/next-basics/commit/67bcb37b1e5d50c3f9eb2d4617f28f5586fab981))
+* support hiden root node ([fab89ed](https://github.com/easyops-cn/next-basics/commit/fab89eda63831f358834b1f02e4f2fe378acd7a4))
+
+
+
+
+
 # [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.11.2...@next-bricks/flow-builder@1.12.0) (2021-09-23)
 
 
