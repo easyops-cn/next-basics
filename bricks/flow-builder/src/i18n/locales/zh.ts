@@ -22,6 +22,17 @@ const locale: Locale = {
   [K.CONST]: "常量",
   [K.FIELDS_MAPPING]: "字段映射",
   [K.CEL]: "Cel",
+  [K.NAME_LABEL]: "名称",
+  [K.REQUIRED_LABEL]: "必填",
+  [K.TYPE_LABEL]: "类型",
+  [K.DESCRIPTION_LABEL]: "描述",
+  [K.SETTING_LABEL]: "设置",
+  [K.CATEGORY_LABEL]: "分类",
+  [K.DEFAULT_LABEL]: "默认值",
+  [K.REFERENCE_LABEL]: "引用(Ref)",
+  [K.ENUM_LABEL]: "枚举值",
+  [K.VALIDATOR_LABEL]: "校验器(validator)",
+  [K.FIELD_PARAMS]: "参数",
 };
 
 export default locale;

@@ -25,6 +25,7 @@ export interface AddPropertyModalProps {
   ) => void;
   initValue?: SchemaItemProperty;
   isEdit?: boolean;
+  disabledModelType?: boolean;
 }
 
 export function AddPropertyModal({
@@ -34,6 +35,7 @@ export function AddPropertyModal({
   initValue,
   trackId,
   isEdit,
+  disabledModelType,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -66,19 +68,28 @@ export function AddPropertyModal({
       >
         {({ getFieldValue }) =>
           getFieldValue("origin") === "normal" && (
-            <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Form.Item
+              name="name"
+              label={t(K.NAME_LABEL)}
+              rules={[{ required: true }]}
+            >
               <Input />
             </Form.Item>
           )
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const categoryFormItem = useMemo(
     () => (
-      <Form.Item name="origin" initialValue="normal" label="Category">
+      <Form.Item
+        hidden={disabledModelType}
+        name="origin"
+        initialValue="normal"
+        label={t(K.CATEGORY_LABEL)}
+      >
         <Select>
           <Select.Option key="normal" value="normal">
             {t(K.SCHEMA_ITEM_NORMAL)}
@@ -89,7 +100,7 @@ export function AddPropertyModal({
         </Select>
       </Form.Item>
     ),
-    [t]
+    [disabledModelType, t]
   );
 
   const typeFormItem = useMemo(
@@ -104,16 +115,16 @@ export function AddPropertyModal({
           getFieldValue("origin") === "normal" ? (
             <Form.Item
               name="type"
-              label="Type"
+              label={t(K.TYPE_LABEL)}
               rules={[{ required: true }]}
               messageVariables={{ label: "type" }}
             >
-              <TypeItem />
+              <TypeItem disabledModelType={disabledModelType} />
             </Form.Item>
           ) : (
             <Form.Item
               name="ref"
-              label="Ref"
+              label={t(K.REFERENCE_LABEL)}
               rules={[{ validator: checkRequired }]}
               messageVariables={{ label: "ref" }}
             >
@@ -123,7 +134,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [form]
+    [disabledModelType, form, t]
   );
 
   const defaultFormItem = useMemo(
@@ -138,25 +149,25 @@ export function AddPropertyModal({
         {({ getFieldValue }) =>
           getFieldValue("origin") === "normal" &&
           (getFieldValue("type") === "bool" ? (
-            <Form.Item name="default" label="Default">
+            <Form.Item name="default" label={t(K.DEFAULT_LABEL)}>
               <Radio.Group>
                 <Radio value={true}>true</Radio>
                 <Radio value={false}>false</Radio>
               </Radio.Group>
             </Form.Item>
           ) : numberTypeList.includes(getFieldValue("type")) ? (
-            <Form.Item name="default" label="Default">
+            <Form.Item name="default" label={t(K.DEFAULT_LABEL)}>
               <InputNumber />
             </Form.Item>
           ) : getFieldValue("type") === "string" ? (
-            <Form.Item name="default" label="Default">
+            <Form.Item name="default" label={t(K.DEFAULT_LABEL)}>
               <Input />
             </Form.Item>
           ) : null)
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const enumFormItem = useMemo(
@@ -173,7 +184,7 @@ export function AddPropertyModal({
           [...numberTypeList, "string"].includes(getFieldValue("type")) && (
             <Form.Item
               name="enum"
-              label="Enum"
+              label={t(K.ENUM_LABEL)}
               getValueFromEvent={(value: string[]) =>
                 numberTypeList.includes(getFieldValue("type"))
                   ? value?.map((i) => Number(i))
@@ -207,7 +218,7 @@ export function AddPropertyModal({
           [...numberTypeList, "string"].includes(getFieldValue("type")) && (
             <Form.Item
               name="validate"
-              label="Validate"
+              label={t(K.VALIDATOR_LABEL)}
               getValueProps={(v) => ({
                 value: { ...v, type: getFieldValue("type") },
               })}
@@ -218,7 +229,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const requiredFormItem = useMemo(
@@ -234,18 +245,22 @@ export function AddPropertyModal({
         {({ getFieldValue }) =>
           getFieldValue("origin") === "reference" &&
           getFieldValue("ref")?.includes(".*") ? (
-            <Form.Item name="refRequired" label="Required">
+            <Form.Item name="refRequired" label={t(K.REQUIRED_LABEL)}>
               <RefRequiredItem model={getFieldValue("ref").split(".")[0]} />
             </Form.Item>
           ) : (
-            <Form.Item name="required" label="Required" valuePropName="checked">
+            <Form.Item
+              name="required"
+              label={t(K.REQUIRED_LABEL)}
+              valuePropName="checked"
+            >
               <Switch />
             </Form.Item>
           )
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   const descriptionFormItem = useMemo(
@@ -260,7 +275,7 @@ export function AddPropertyModal({
           getFieldValue("origin") === "normal" && (
             <Form.Item
               name="description"
-              label="description"
+              label={t(K.DESCRIPTION_LABEL)}
               rules={[{ required: true }]}
             >
               <Input.TextArea />
@@ -269,7 +284,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    []
+    [t]
   );
 
   return (

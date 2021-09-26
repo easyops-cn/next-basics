@@ -20,12 +20,15 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   value: SchemaRootNodeProperty;
   readonly?: boolean;
   onChange?: (data: SchemaRootNodeProperty) => void;
+  hiddenRootNode?: boolean;
+  disabledModelType: boolean;
 }
 
 export const SchemaEditorWrapper = forwardRef<
   HTMLDivElement,
   SchemaEditorProps
 >(function LegacySchemaEditor(props, ref): React.ReactElement {
+  const { hiddenRootNode, disabledModelType } = props;
   const [visible, setVisible] = useState(false);
   const [property, setProperty] = useState<SchemaItemProperty>(
     processFormInitvalue({ name: props.name, ...props.value })
@@ -116,6 +119,8 @@ export const SchemaEditorWrapper = forwardRef<
             readonly={props.readonly}
             trackId="root"
             hideDeleteBtn={true}
+            hiddenRootNode={hiddenRootNode}
+            disabledModelType={disabledModelType}
             onEdit={handleEdit}
             onRemove={handleRemove}
             onCreate={handleAdd}
@@ -123,6 +128,7 @@ export const SchemaEditorWrapper = forwardRef<
         </div>
       </div>
       <AddPropertyModal
+        disabledModelType={disabledModelType}
         visible={visible}
         onClose={() => setVisible(false)}
         onSubmit={(data) => handleAdd(data)}
