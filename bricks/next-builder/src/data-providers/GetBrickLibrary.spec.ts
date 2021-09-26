@@ -162,7 +162,6 @@ jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
                 en: "A general button",
               },
               icon: { lib: "antd", type: "box" },
-              layerType: "brick",
             },
             {
               id: "basic-bricks.any-brick",
