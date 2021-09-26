@@ -4,7 +4,7 @@ import { omit, isEmpty } from "lodash";
 import { getHistory, BrickAsComponent } from "@next-core/brick-kit";
 import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { LinkProps } from "./index";
+import { LinkProps, TitleConfig } from "./index";
 
 import style from "./brick-quick-entries.module.css";
 
@@ -16,7 +16,9 @@ export interface BrickQuickEntriesProps {
   data?: any[];
   containerStyle?: React.CSSProperties;
   mode?: "multiCardGeneral" | "multiCardNoLine" | "default";
-  titleList?: string[];
+  titleList?: TitleConfig[];
+  titleIconClick?: (r: any) => void;
+  divider?: boolean;
 }
 
 export function BrickQuickEntries(
@@ -74,8 +76,37 @@ export function BrickQuickEntries(
         if (props.titleList) {
           elem = (
             <div>
-              <div style={{ padding: "5px 10px", fontWeight: 600 }}>
-                {props.titleList[i * props.column + j]}
+              <div
+                style={{
+                  padding: "5px 15px",
+                  fontWeight: 600,
+                  display: "flex",
+                }}
+              >
+                <span style={{ flex: "1" }}>
+                  {props.titleList[i * props.column + j]?.title}
+                </span>
+                <div
+                  onClick={() => {
+                    // istanbul ignore next
+                    props.titleIconClick(props.titleList[i * props.column + j]);
+                  }}
+                  style={{
+                    position: "relative",
+                    width: "20px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <GeneralIcon
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%,-50%)",
+                    }}
+                    icon={props.titleList[i * props.column + j]?.icon}
+                  ></GeneralIcon>
+                </div>
               </div>
               {elem}
             </div>
@@ -85,6 +116,7 @@ export function BrickQuickEntries(
         if (j !== props.column - 1) {
           elements.push(
             <div
+              style={{ opacity: props.divider ? 1 : 0 }}
               key={key++}
               className={
                 props.mode === "multiCardGeneral"
@@ -101,6 +133,7 @@ export function BrickQuickEntries(
         for (let j = 0; j < props.column; ++j) {
           elements.push(
             <div
+              style={{ opacity: props.divider ? 1 : 0 }}
               key={key++}
               className={
                 props.mode === "multiCardGeneral" ||
