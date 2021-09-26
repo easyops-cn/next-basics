@@ -68,6 +68,19 @@ describe("BrickQuickEntries", () => {
         column={3}
         useBricks={useBricks}
         data={["a", "b"]}
+        titleList={[
+          {
+            title: "666",
+            icon: {
+              lib: "easyops",
+              category: "default",
+              icon: "language",
+            },
+            value: "777",
+          },
+        ]}
+        divider={true}
+        mode={"multiCardNoLine"}
       />
     );
     expect(wrapper.find(BrickAsComponent).length).toBe(2);

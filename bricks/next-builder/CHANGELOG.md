@@ -3,644 +3,411 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.70.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.69.1...@next-bricks/next-builder@1.70.0) (2021-09-17)
-
-
-### Bug Fixes
-
-* update @next-libs/* ([5815dd1](https://github.com/easyops-cn/next-basics/commit/5815dd1f6cbd4f38569e8c88d828fd51ce092d6f))
-
+# [1.74.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.73.0...@next-bricks/next-builder@1.74.0) (2021-09-24)
 
 ### Features
 
-* custom template doc support delete unuse code ([13b5a9c](https://github.com/easyops-cn/next-basics/commit/13b5a9c5c53dcd07951ef80ca9d2d2b154bfd4f9))
-* custom template doc support update unit test ([fe14594](https://github.com/easyops-cn/next-basics/commit/fe14594c17ad5a89612cacdeab560848a19d3d44))
-* custom template doc support update unit test ([d99d5fc](https://github.com/easyops-cn/next-basics/commit/d99d5fc85fc16540f6981b925702a0cba9195aaf))
-* custom template support doc ([7da8256](https://github.com/easyops-cn/next-basics/commit/7da8256127aafb3cf3cd886a845a58cb90011e6c))
-* support highlight tokens in code editors ([f13262f](https://github.com/easyops-cn/next-basics/commit/f13262f11c0ef1af3d1308f26f2e565a86b177d8))
+- add isCustomTemplate field for doc ([5bd831c](https://github.com/easyops-cn/next-basics/commit/5bd831cc10a4ea80a113233e92d43a1c7872dd52))
+- update widget doc type ([e3d44c1](https://github.com/easyops-cn/next-basics/commit/e3d44c1dfaa12a76ca3d890c1d777a8f4387fab8))
 
+# [1.73.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.72.0...@next-bricks/next-builder@1.73.0) (2021-09-23)
 
+### Features
 
+- support widget doc and update denpencies ([d2b9375](https://github.com/easyops-cn/next-basics/commit/d2b937572004f3098af632bc7e1bc3d684e1be2e))
 
+# [1.72.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.71.0...@next-bricks/next-builder@1.72.0) (2021-09-23)
+
+### Bug Fixes
+
+- refie event view ([d676efb](https://github.com/easyops-cn/next-basics/commit/d676efb64b3da2dff0f8d63424b58c3f9b5ecd8f))
+
+### Features
+
+- update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
+
+# [1.71.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.70.1...@next-bricks/next-builder@1.71.0) (2021-09-22)
+
+### Features
+
+- add layerType for widget doc file ([c0495cc](https://github.com/easyops-cn/next-basics/commit/c0495cc70faaa50af44f812101130ff16ae43d6a))
+
+## [1.70.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.70.0...@next-bricks/next-builder@1.70.1) (2021-09-18)
+
+**Note:** Version bump only for package @next-bricks/next-builder
+
+# [1.70.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.69.1...@next-bricks/next-builder@1.70.0) (2021-09-17)
+
+### Bug Fixes
+
+- update @next-libs/\* ([5815dd1](https://github.com/easyops-cn/next-basics/commit/5815dd1f6cbd4f38569e8c88d828fd51ce092d6f))
+
+### Features
+
+- custom template doc support delete unuse code ([13b5a9c](https://github.com/easyops-cn/next-basics/commit/13b5a9c5c53dcd07951ef80ca9d2d2b154bfd4f9))
+- custom template doc support update unit test ([fe14594](https://github.com/easyops-cn/next-basics/commit/fe14594c17ad5a89612cacdeab560848a19d3d44))
+- custom template doc support update unit test ([d99d5fc](https://github.com/easyops-cn/next-basics/commit/d99d5fc85fc16540f6981b925702a0cba9195aaf))
+- custom template support doc ([7da8256](https://github.com/easyops-cn/next-basics/commit/7da8256127aafb3cf3cd886a845a58cb90011e6c))
+- support highlight tokens in code editors ([f13262f](https://github.com/easyops-cn/next-basics/commit/f13262f11c0ef1af3d1308f26f2e565a86b177d8))
 
 ## [1.69.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.69.0...@next-bricks/next-builder@1.69.1) (2021-09-17)
 
-
 ### Bug Fixes
 
-* add transformMapArray ([98a78f9](https://github.com/easyops-cn/next-basics/commit/98a78f904c6b42129fbb3bc0b2f17051444ef0bc))
-* refine callback show ([4a0d3d1](https://github.com/easyops-cn/next-basics/commit/4a0d3d19dbc0c2e80b7a2fd0ca4dc5ae1ea0d896))
-
-
-
-
+- add transformMapArray ([98a78f9](https://github.com/easyops-cn/next-basics/commit/98a78f904c6b42129fbb3bc0b2f17051444ef0bc))
+- refine callback show ([4a0d3d1](https://github.com/easyops-cn/next-basics/commit/4a0d3d19dbc0c2e80b7a2fd0ca4dc5ae1ea0d896))
 
 # [1.69.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.68.1...@next-bricks/next-builder@1.69.0) (2021-09-17)
 
-
 ### Bug Fixes
 
-* refine event config ([a0835f4](https://github.com/easyops-cn/next-basics/commit/a0835f4cd10e8b685cfba96599367552674b1e94))
-* refine lifecycle event ([95b9a5d](https://github.com/easyops-cn/next-basics/commit/95b9a5d3c2052fb8bc07ac0f93b7a218f2b032be))
-
+- refine event config ([a0835f4](https://github.com/easyops-cn/next-basics/commit/a0835f4cd10e8b685cfba96599367552674b1e94))
+- refine lifecycle event ([95b9a5d](https://github.com/easyops-cn/next-basics/commit/95b9a5d3c2052fb8bc07ac0f93b7a218f2b032be))
 
 ### Features
 
-* lifecycle editor ([569faa9](https://github.com/easyops-cn/next-basics/commit/569faa92681f285b012f425e84bc893fc4eec23f))
-
-
-
-
+- lifecycle editor ([569faa9](https://github.com/easyops-cn/next-basics/commit/569faa92681f285b012f425e84bc893fc4eec23f))
 
 ## [1.68.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.68.0...@next-bricks/next-builder@1.68.1) (2021-09-13)
 
-
 ### Bug Fixes
 
-* refine processor ([ea75ede](https://github.com/easyops-cn/next-basics/commit/ea75ede00cb1c2aeb81b0094a1a7c5624e4604f8))
-
-
-
-
+- refine processor ([ea75ede](https://github.com/easyops-cn/next-basics/commit/ea75ede00cb1c2aeb81b0094a1a7c5624e4604f8))
 
 # [1.68.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.67.1...@next-bricks/next-builder@1.68.0) (2021-09-10)
 
-
 ### Bug Fixes
 
-* refine events editor and add processor ([84b6cec](https://github.com/easyops-cn/next-basics/commit/84b6cec0599cde4059383fc29becaa6e091b744d))
-* support plling config ([2dee6fc](https://github.com/easyops-cn/next-basics/commit/2dee6fcbe053f3b7a9fadedb4bd5f3403c630b55))
-* test ([c618cdd](https://github.com/easyops-cn/next-basics/commit/c618cdd9db1d6c4e496e933a0e1d7662090353e9))
-* typo ([c441b28](https://github.com/easyops-cn/next-basics/commit/c441b2809e2ccefff44f59722329e4a23332601c))
-* 事件配置可视化展示 ([26c0bf9](https://github.com/easyops-cn/next-basics/commit/26c0bf97f4df3690740ed71290b6a36fbe7f10c2))
-
+- refine events editor and add processor ([84b6cec](https://github.com/easyops-cn/next-basics/commit/84b6cec0599cde4059383fc29becaa6e091b744d))
+- support plling config ([2dee6fc](https://github.com/easyops-cn/next-basics/commit/2dee6fcbe053f3b7a9fadedb4bd5f3403c630b55))
+- test ([c618cdd](https://github.com/easyops-cn/next-basics/commit/c618cdd9db1d6c4e496e933a0e1d7662090353e9))
+- typo ([c441b28](https://github.com/easyops-cn/next-basics/commit/c441b2809e2ccefff44f59722329e4a23332601c))
+- 事件配置可视化展示 ([26c0bf9](https://github.com/easyops-cn/next-basics/commit/26c0bf97f4df3690740ed71290b6a36fbe7f10c2))
 
 ### Features
 
-* add event editor ([afbafc5](https://github.com/easyops-cn/next-basics/commit/afbafc505e775ae2f2fdb1fd0c68acc3a8a10766))
-* event editor support create edit and remove ([fb37918](https://github.com/easyops-cn/next-basics/commit/fb37918b5753f6b0eda8d7264808794ec3907d4c))
-* refine events editor and add processor ([e2b3cca](https://github.com/easyops-cn/next-basics/commit/e2b3cca5a6b169b1d96107261e06f18fc325b2dc))
-
-
-
-
+- add event editor ([afbafc5](https://github.com/easyops-cn/next-basics/commit/afbafc505e775ae2f2fdb1fd0c68acc3a8a10766))
+- event editor support create edit and remove ([fb37918](https://github.com/easyops-cn/next-basics/commit/fb37918b5753f6b0eda8d7264808794ec3907d4c))
+- refine events editor and add processor ([e2b3cca](https://github.com/easyops-cn/next-basics/commit/e2b3cca5a6b169b1d96107261e06f18fc325b2dc))
 
 ## [1.67.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.67.0...@next-bricks/next-builder@1.67.1) (2021-09-07)
 
-
 ### Bug Fixes
 
-* **search-tree:** fix error url in template children ([eed174e](https://github.com/easyops-cn/next-basics/commit/eed174e01a42358b0254d4c8f8df97bfef524ddc))
-* **search-tree:** update template path judge type ([ea44b45](https://github.com/easyops-cn/next-basics/commit/ea44b45d542299f091390d8b447b7e6ae48cfc2e))
-* **search-tree:** update unit test ([9137b72](https://github.com/easyops-cn/next-basics/commit/9137b727610d24e79c13078809a6d43d59f22809))
-
-
-
-
+- **search-tree:** fix error url in template children ([eed174e](https://github.com/easyops-cn/next-basics/commit/eed174e01a42358b0254d4c8f8df97bfef524ddc))
+- **search-tree:** update template path judge type ([ea44b45](https://github.com/easyops-cn/next-basics/commit/ea44b45d542299f091390d8b447b7e6ae48cfc2e))
+- **search-tree:** update unit test ([9137b72](https://github.com/easyops-cn/next-basics/commit/9137b727610d24e79c13078809a6d43d59f22809))
 
 # [1.67.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.66.3...@next-bricks/next-builder@1.67.0) (2021-09-07)
 
-
 ### Features
 
-* build project of templates ([4360e34](https://github.com/easyops-cn/next-basics/commit/4360e34113dad7784eb7b9da44eb632257697714))
-
-
-
-
+- build project of templates ([4360e34](https://github.com/easyops-cn/next-basics/commit/4360e34113dad7784eb7b9da44eb632257697714))
 
 ## [1.66.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.66.2...@next-bricks/next-builder@1.66.3) (2021-09-03)
 
-
 ### Bug Fixes
 
-* scan functions which use typescript ([0418709](https://github.com/easyops-cn/next-basics/commit/0418709012c4976a950c44d9ed92be7e8a143ac1))
-
-
-
-
+- scan functions which use typescript ([0418709](https://github.com/easyops-cn/next-basics/commit/0418709012c4976a950c44d9ed92be7e8a143ac1))
 
 ## [1.66.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.66.1...@next-bricks/next-builder@1.66.2) (2021-09-03)
 
-
 ### Bug Fixes
 
-* support building functions which use typescript ([063ee7a](https://github.com/easyops-cn/next-basics/commit/063ee7a06915bb0844a22b4f3cc81b972681d0b2))
-
-
-
-
+- support building functions which use typescript ([063ee7a](https://github.com/easyops-cn/next-basics/commit/063ee7a06915bb0844a22b4f3cc81b972681d0b2))
 
 ## [1.66.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.66.0...@next-bricks/next-builder@1.66.1) (2021-09-01)
 
-
 ### Bug Fixes
 
-* require new brick_next which supports functions ([d97ed10](https://github.com/easyops-cn/next-basics/commit/d97ed10e6c630562298fa3584c360fec4fa8c162))
-
-
-
-
+- require new brick_next which supports functions ([d97ed10](https://github.com/easyops-cn/next-basics/commit/d97ed10e6c630562298fa3584c360fec4fa8c162))
 
 # [1.66.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.7...@next-bricks/next-builder@1.66.0) (2021-08-31)
 
-
 ### Features
 
-* build functions ([aff1d75](https://github.com/easyops-cn/next-basics/commit/aff1d75e83237e21fa450133b9e65c4e5dd92635))
-* ScanFunctionsInStoryboard ([b6004f7](https://github.com/easyops-cn/next-basics/commit/b6004f743c74bd3ff8efa87d205052fdcbc710fb))
-
-
-
-
+- build functions ([aff1d75](https://github.com/easyops-cn/next-basics/commit/aff1d75e83237e21fa450133b9e65c4e5dd92635))
+- ScanFunctionsInStoryboard ([b6004f7](https://github.com/easyops-cn/next-basics/commit/b6004f743c74bd3ff8efa87d205052fdcbc710fb))
 
 ## [1.65.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.6...@next-bricks/next-builder@1.65.7) (2021-08-17)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.65.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.5...@next-bricks/next-builder@1.65.6) (2021-08-13)
-
 
 ### Bug Fixes
 
-* **builder-container:** fix routes sort ([c6286fc](https://github.com/easyops-cn/next-basics/commit/c6286fcc5dc0ac83974f296b2d1b1f3237695f80))
-
-
-
-
+- **builder-container:** fix routes sort ([c6286fc](https://github.com/easyops-cn/next-basics/commit/c6286fcc5dc0ac83974f296b2d1b1f3237695f80))
 
 ## [1.65.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.4...@next-bricks/next-builder@1.65.5) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.65.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.3...@next-bricks/next-builder@1.65.4) (2021-08-04)
-
 
 ### Reverts
 
-* Revert "Revert "Steve/split bricks"" ([aee7ace](https://github.com/easyops-cn/next-basics/commit/aee7ace7e3adc513149a7b964acbda11941f39f3))
-
-
-
-
+- Revert "Revert "Steve/split bricks"" ([aee7ace](https://github.com/easyops-cn/next-basics/commit/aee7ace7e3adc513149a7b964acbda11941f39f3))
 
 ## [1.65.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.2...@next-bricks/next-builder@1.65.3) (2021-08-03)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.65.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.1...@next-bricks/next-builder@1.65.2) (2021-08-02)
-
 
 ### Bug Fixes
 
-* make some bricks lazy load ([03bb210](https://github.com/easyops-cn/next-basics/commit/03bb21033f3d1aaa2a19bff239839dd44b05204a))
-
-
-
-
+- make some bricks lazy load ([03bb210](https://github.com/easyops-cn/next-basics/commit/03bb21033f3d1aaa2a19bff239839dd44b05204a))
 
 ## [1.65.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.65.0...@next-bricks/next-builder@1.65.1) (2021-08-02)
 
-
 ### Bug Fixes
 
-* **search-tree:** fix while deep route and the parentId is errr ([608290e](https://github.com/easyops-cn/next-basics/commit/608290e1a9b5894c76746c56d27396d13f01832e))
-
-
-
-
+- **search-tree:** fix while deep route and the parentId is errr ([608290e](https://github.com/easyops-cn/next-basics/commit/608290e1a9b5894c76746c56d27396d13f01832e))
 
 # [1.65.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.64.0...@next-bricks/next-builder@1.65.0) (2021-07-30)
 
-
 ### Features
 
-* **search-tree:** change the key to symbol key ([626aeab](https://github.com/easyops-cn/next-basics/commit/626aeab440ccf2230bf410c98811a9a05ce4a9d6))
-* **search-tree:** set slots unlink ([017d4c6](https://github.com/easyops-cn/next-basics/commit/017d4c6b130f39bac4174d529e9130f078f89e30))
-* **search-tree:** unit test update ([1b35ee0](https://github.com/easyops-cn/next-basics/commit/1b35ee021cff9d3435c4217af6b29618b86cd046))
-
-
-
-
+- **search-tree:** change the key to symbol key ([626aeab](https://github.com/easyops-cn/next-basics/commit/626aeab440ccf2230bf410c98811a9a05ce4a9d6))
+- **search-tree:** set slots unlink ([017d4c6](https://github.com/easyops-cn/next-basics/commit/017d4c6b130f39bac4174d529e9130f078f89e30))
+- **search-tree:** unit test update ([1b35ee0](https://github.com/easyops-cn/next-basics/commit/1b35ee021cff9d3435c4217af6b29618b86cd046))
 
 # [1.64.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.63.0...@next-bricks/next-builder@1.64.0) (2021-07-29)
 
-
 ### Bug Fixes
 
-* slient errors when scanning contexts ([835d194](https://github.com/easyops-cn/next-basics/commit/835d1949766757560f94797303792ce38d9ba755))
-
+- slient errors when scanning contexts ([835d194](https://github.com/easyops-cn/next-basics/commit/835d1949766757560f94797303792ce38d9ba755))
 
 ### Features
 
-* **search-tree:** add height desc ([5afb195](https://github.com/easyops-cn/next-basics/commit/5afb1955e73e8fece281e786567f542def70f929))
-* **search-tree:** add search-tree unit test ([e3a051d](https://github.com/easyops-cn/next-basics/commit/e3a051d587285164182e3844155ea2ef3be4b4c8))
-* **search-tree:** build base tree ([1b1e73a](https://github.com/easyops-cn/next-basics/commit/1b1e73a647af4cdbf8115910c0935786b83e2a3a))
-* **search-tree:** delete mock file ([5998e5c](https://github.com/easyops-cn/next-basics/commit/5998e5cf24ead823ec6a08de9338a1c184b2e805))
-* **search-tree:** homepage use for props ([0e2a950](https://github.com/easyops-cn/next-basics/commit/0e2a95096aa6bcd51d622f80089a837e0d337b91))
-* **search-tree:** support allowKeySearch ([46d463c](https://github.com/easyops-cn/next-basics/commit/46d463cbaa0a7db3f761754b83eff3cfea05dc61))
-* **search-tree:** support href ([076dadd](https://github.com/easyops-cn/next-basics/commit/076dadda2c45d3687bbfa867ff84b549f2b45f8c))
-* **search-tree:** support href to jump ([fbb5909](https://github.com/easyops-cn/next-basics/commit/fbb590950023d129fae9a8512ed708038eadb642))
-* **search-tree:** support search ([e307ad6](https://github.com/easyops-cn/next-basics/commit/e307ad6f3685bc0e59c0ea9de0223d8012b0c450))
-* **search-tree:** support searchConifg for search-tree ([250a632](https://github.com/easyops-cn/next-basics/commit/250a6323dcd822b5096e6ea08ec86d1e550c594a))
-* **search-tree:** unit test update ([988f16c](https://github.com/easyops-cn/next-basics/commit/988f16cab46c99ee4c07864ebcb39cfb9ac12ead))
-* **search-tree:** update utils ([9d86962](https://github.com/easyops-cn/next-basics/commit/9d86962bf0611cd20f66200caeeb6150bf8b18c5))
-
-
-
-
+- **search-tree:** add height desc ([5afb195](https://github.com/easyops-cn/next-basics/commit/5afb1955e73e8fece281e786567f542def70f929))
+- **search-tree:** add search-tree unit test ([e3a051d](https://github.com/easyops-cn/next-basics/commit/e3a051d587285164182e3844155ea2ef3be4b4c8))
+- **search-tree:** build base tree ([1b1e73a](https://github.com/easyops-cn/next-basics/commit/1b1e73a647af4cdbf8115910c0935786b83e2a3a))
+- **search-tree:** delete mock file ([5998e5c](https://github.com/easyops-cn/next-basics/commit/5998e5cf24ead823ec6a08de9338a1c184b2e805))
+- **search-tree:** homepage use for props ([0e2a950](https://github.com/easyops-cn/next-basics/commit/0e2a95096aa6bcd51d622f80089a837e0d337b91))
+- **search-tree:** support allowKeySearch ([46d463c](https://github.com/easyops-cn/next-basics/commit/46d463cbaa0a7db3f761754b83eff3cfea05dc61))
+- **search-tree:** support href ([076dadd](https://github.com/easyops-cn/next-basics/commit/076dadda2c45d3687bbfa867ff84b549f2b45f8c))
+- **search-tree:** support href to jump ([fbb5909](https://github.com/easyops-cn/next-basics/commit/fbb590950023d129fae9a8512ed708038eadb642))
+- **search-tree:** support search ([e307ad6](https://github.com/easyops-cn/next-basics/commit/e307ad6f3685bc0e59c0ea9de0223d8012b0c450))
+- **search-tree:** support searchConifg for search-tree ([250a632](https://github.com/easyops-cn/next-basics/commit/250a6323dcd822b5096e6ea08ec86d1e550c594a))
+- **search-tree:** unit test update ([988f16c](https://github.com/easyops-cn/next-basics/commit/988f16cab46c99ee4c07864ebcb39cfb9ac12ead))
+- **search-tree:** update utils ([9d86962](https://github.com/easyops-cn/next-basics/commit/9d86962bf0611cd20f66200caeeb6150bf8b18c5))
 
 # [1.63.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.5...@next-bricks/next-builder@1.63.0) (2021-07-23)
 
-
 ### Features
 
-* **DataView:** resolve type context add value field ([0ae3f8a](https://github.com/easyops-cn/next-basics/commit/0ae3f8ae83ee43351c23c87ec1dcdc92e7655eeb))
-
-
-
-
+- **DataView:** resolve type context add value field ([0ae3f8a](https://github.com/easyops-cn/next-basics/commit/0ae3f8ae83ee43351c23c87ec1dcdc92e7655eeb))
 
 ## [1.62.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.4...@next-bricks/next-builder@1.62.5) (2021-07-23)
 
-
 ### Bug Fixes
 
-* **build-storboard:** add menu group injecting related fields ([b485bbb](https://github.com/easyops-cn/next-basics/commit/b485bbb63f73d5bbafb48dcaf3fd95745468e25c))
-
-
-
-
+- **build-storboard:** add menu group injecting related fields ([b485bbb](https://github.com/easyops-cn/next-basics/commit/b485bbb63f73d5bbafb48dcaf3fd95745468e25c))
 
 ## [1.62.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.3...@next-bricks/next-builder@1.62.4) (2021-07-22)
 
-
 ### Bug Fixes
 
-* fix when installed bricks has no text ([7752708](https://github.com/easyops-cn/next-basics/commit/77527089ebd85b234864284da0b07551f7e14879))
-* frequently layout snippets ([a3d4023](https://github.com/easyops-cn/next-basics/commit/a3d4023f51b65b6d3b8633252b17289066e0aa92))
-* scan computed ctx access ([ac7ccd9](https://github.com/easyops-cn/next-basics/commit/ac7ccd9cf8e7422bf2ac4918c56a5a163fdd80e8))
-
-
-
-
+- fix when installed bricks has no text ([7752708](https://github.com/easyops-cn/next-basics/commit/77527089ebd85b234864284da0b07551f7e14879))
+- frequently layout snippets ([a3d4023](https://github.com/easyops-cn/next-basics/commit/a3d4023f51b65b6d3b8633252b17289066e0aa92))
+- scan computed ctx access ([ac7ccd9](https://github.com/easyops-cn/next-basics/commit/ac7ccd9cf8e7422bf2ac4918c56a5a163fdd80e8))
 
 ## [1.62.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.2...@next-bricks/next-builder@1.62.3) (2021-07-22)
 
-
 ### Bug Fixes
 
-* drop deprecated flags for snippets ([fbed878](https://github.com/easyops-cn/next-basics/commit/fbed8781eab95fb65d62ca80af963c50a274533f))
-
-
-
-
+- drop deprecated flags for snippets ([fbed878](https://github.com/easyops-cn/next-basics/commit/fbed8781eab95fb65d62ca80af963c50a274533f))
 
 ## [1.62.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.1...@next-bricks/next-builder@1.62.2) (2021-07-21)
 
-
 ### Bug Fixes
 
-* **get-brick-library:** support ignore snippets ([f685f76](https://github.com/easyops-cn/next-basics/commit/f685f769e524802a156f9a9750469b80de082a31))
-
-
-
-
+- **get-brick-library:** support ignore snippets ([f685f76](https://github.com/easyops-cn/next-basics/commit/f685f769e524802a156f9a9750469b80de082a31))
 
 ## [1.62.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.62.0...@next-bricks/next-builder@1.62.1) (2021-07-20)
 
-
 ### Bug Fixes
 
-* refine contexts scan ([4fe7bfc](https://github.com/easyops-cn/next-basics/commit/4fe7bfc3058d17707ab872f80aa7d3fe463a46bb))
-
-
-
-
+- refine contexts scan ([4fe7bfc](https://github.com/easyops-cn/next-basics/commit/4fe7bfc3058d17707ab872f80aa7d3fe463a46bb))
 
 # [1.62.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.6...@next-bricks/next-builder@1.62.0) (2021-07-19)
 
-
 ### Features
 
-* useChildren support trasformFrom ([#563](https://github.com/easyops-cn/next-basics/issues/563)) ([bf667af](https://github.com/easyops-cn/next-basics/commit/bf667afed7d945b6c67231a3fab5ecb82dea2a86))
-
-
-
-
+- useChildren support trasformFrom ([#563](https://github.com/easyops-cn/next-basics/issues/563)) ([bf667af](https://github.com/easyops-cn/next-basics/commit/bf667afed7d945b6c67231a3fab5ecb82dea2a86))
 
 ## [1.61.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.5...@next-bricks/next-builder@1.61.6) (2021-07-19)
 
-
 ### Bug Fixes
 
-* fix style ([9667d9e](https://github.com/easyops-cn/next-basics/commit/9667d9e06173e5f2d67e2aac0bff62aa09293cf6))
-
-
-
-
+- fix style ([9667d9e](https://github.com/easyops-cn/next-basics/commit/9667d9e06173e5f2d67e2aac0bff62aa09293cf6))
 
 ## [1.61.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.4...@next-bricks/next-builder@1.61.5) (2021-07-16)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 ## [1.61.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.3...@next-bricks/next-builder@1.61.4) (2021-07-15)
-
 
 ### Bug Fixes
 
-* refine category ([c43f6cd](https://github.com/easyops-cn/next-basics/commit/c43f6cd56c28e22d1e30f63725839b717e2ef44a))
-
-
-
-
+- refine category ([c43f6cd](https://github.com/easyops-cn/next-basics/commit/c43f6cd56c28e22d1e30f63725839b717e2ef44a))
 
 ## [1.61.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.2...@next-bricks/next-builder@1.61.3) (2021-07-15)
 
-
 ### Bug Fixes
 
-* **build-storyboard:** parse template proxy as json instead of yaml ([49d9c31](https://github.com/easyops-cn/next-basics/commit/49d9c31463f6527127cfdbb3083f6aa5ff990466))
-
-
-
-
+- **build-storyboard:** parse template proxy as json instead of yaml ([49d9c31](https://github.com/easyops-cn/next-basics/commit/49d9c31463f6527127cfdbb3083f6aa5ff990466))
 
 ## [1.61.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.1...@next-bricks/next-builder@1.61.2) (2021-07-14)
 
-
 ### Bug Fixes
 
-* **brick-library:** support searching multiple fields ([bb945f5](https://github.com/easyops-cn/next-basics/commit/bb945f559fe711cd46fc979e86f109c71b3c4e3d))
-
-
-
-
+- **brick-library:** support searching multiple fields ([bb945f5](https://github.com/easyops-cn/next-basics/commit/bb945f559fe711cd46fc979e86f109c71b3c4e3d))
 
 ## [1.61.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.61.0...@next-bricks/next-builder@1.61.1) (2021-07-13)
 
-
 ### Bug Fixes
 
-* refine clipboard check ([01368fe](https://github.com/easyops-cn/next-basics/commit/01368fe26082b0a558f8b7b479ad2d74d2dc4a37))
-
-
-
-
+- refine clipboard check ([01368fe](https://github.com/easyops-cn/next-basics/commit/01368fe26082b0a558f8b7b479ad2d74d2dc4a37))
 
 # [1.61.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.2...@next-bricks/next-builder@1.61.0) (2021-07-12)
 
-
 ### Features
 
-* support context-menu of root node ([d5450ce](https://github.com/easyops-cn/next-basics/commit/d5450cef450af2c522a7b0c8deda288c90df71bc))
-
-
-
-
+- support context-menu of root node ([d5450ce](https://github.com/easyops-cn/next-basics/commit/d5450cef450af2c522a7b0c8deda288c90df71bc))
 
 ## [1.60.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.1...@next-bricks/next-builder@1.60.2) (2021-07-09)
 
-
 ### Bug Fixes
 
-* fix dragging mount point over inner mount points ([d3a4efc](https://github.com/easyops-cn/next-basics/commit/d3a4efcf13ea73b7e2760e28a0db807e1d8264bc))
-
-
-
-
+- fix dragging mount point over inner mount points ([d3a4efc](https://github.com/easyops-cn/next-basics/commit/d3a4efcf13ea73b7e2760e28a0db807e1d8264bc))
 
 ## [1.60.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.60.0...@next-bricks/next-builder@1.60.1) (2021-07-09)
 
-
 ### Bug Fixes
 
-* remove unused DroppingStatusContext ([f70a16c](https://github.com/easyops-cn/next-basics/commit/f70a16c3ff262a5473969bca0f3a89301b1f0b40))
-
-
-
-
+- remove unused DroppingStatusContext ([f70a16c](https://github.com/easyops-cn/next-basics/commit/f70a16c3ff262a5473969bca0f3a89301b1f0b40))
 
 # [1.60.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.5...@next-bricks/next-builder@1.60.0) (2021-07-08)
 
-
 ### Features
 
-* **builder:** support to expand templates ([06e54db](https://github.com/easyops-cn/next-basics/commit/06e54dbae4783466abe768ad7b4bb39bd769f8a0))
-
-
-
-
+- **builder:** support to expand templates ([06e54db](https://github.com/easyops-cn/next-basics/commit/06e54dbae4783466abe768ad7b4bb39bd769f8a0))
 
 ## [1.59.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.4...@next-bricks/next-builder@1.59.5) (2021-07-05)
 
-
 ### Bug Fixes
 
-* style fix ([c269c8b](https://github.com/easyops-cn/next-basics/commit/c269c8b590feb074f5582092d72dbe3c7d234793))
-
-
-
-
+- style fix ([c269c8b](https://github.com/easyops-cn/next-basics/commit/c269c8b590feb074f5582092d72dbe3c7d234793))
 
 ## [1.59.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.3...@next-bricks/next-builder@1.59.4) (2021-07-02)
 
-
 ### Bug Fixes
 
-* **get-brick-library:** support http options ([759d00c](https://github.com/easyops-cn/next-basics/commit/759d00c9d7c59bf3a6561dc8ca741032e5645fd4))
-
-
-
-
+- **get-brick-library:** support http options ([759d00c](https://github.com/easyops-cn/next-basics/commit/759d00c9d7c59bf3a6561dc8ca741032e5645fd4))
 
 ## [1.59.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.2...@next-bricks/next-builder@1.59.3) (2021-07-01)
 
-
 ### Bug Fixes
 
-* load editors from installed bricks ([a21a886](https://github.com/easyops-cn/next-basics/commit/a21a8869e871f4d3e0a3b0af479b7697a2777f2e))
-* refine snippet/template selector ([f8056d3](https://github.com/easyops-cn/next-basics/commit/f8056d334af8b38cf38bbc77348fa1e41cd2ab8d))
-
-
-
-
+- load editors from installed bricks ([a21a886](https://github.com/easyops-cn/next-basics/commit/a21a8869e871f4d3e0a3b0af479b7697a2777f2e))
+- refine snippet/template selector ([f8056d3](https://github.com/easyops-cn/next-basics/commit/f8056d334af8b38cf38bbc77348fa1e41cd2ab8d))
 
 ## [1.59.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.1...@next-bricks/next-builder@1.59.2) (2021-07-01)
 
-
 ### Bug Fixes
 
-* **builder:** refine snippet select ([2639a36](https://github.com/easyops-cn/next-basics/commit/2639a36f45432406b837f734fad825a2a91513c8))
-
-
-
-
+- **builder:** refine snippet select ([2639a36](https://github.com/easyops-cn/next-basics/commit/2639a36f45432406b837f734fad825a2a91513c8))
 
 ## [1.59.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.59.0...@next-bricks/next-builder@1.59.1) (2021-06-30)
 
-
 ### Bug Fixes
 
-* **builder:** remove entry of brick library in left sidebar ([d8eeb2f](https://github.com/easyops-cn/next-basics/commit/d8eeb2fd4a9f5015be138b4081d3bce2300917f3))
-* refine brick library ([9b75376](https://github.com/easyops-cn/next-basics/commit/9b753764baa20d05b8b960f619237cda72319856))
-
-
-
-
+- **builder:** remove entry of brick library in left sidebar ([d8eeb2f](https://github.com/easyops-cn/next-basics/commit/d8eeb2fd4a9f5015be138b4081d3bce2300917f3))
+- refine brick library ([9b75376](https://github.com/easyops-cn/next-basics/commit/9b753764baa20d05b8b960f619237cda72319856))
 
 # [1.59.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.2...@next-bricks/next-builder@1.59.0) (2021-06-28)
 
-
 ### Bug Fixes
 
-* fix duplication of name ([2723653](https://github.com/easyops-cn/next-basics/commit/272365397a953444b004544752108e98a75d711a))
-* refactor LibraryDropdown ([aac2730](https://github.com/easyops-cn/next-basics/commit/aac27302f07ef1b613b9f75a2de167a684c9fef7))
-* refine ([2ca0767](https://github.com/easyops-cn/next-basics/commit/2ca07679905823d3543d981449831be8b89f3041))
-* support to set onReject for context ([abe30af](https://github.com/easyops-cn/next-basics/commit/abe30afe193f96ab3ca9fdf04a2f60d2fc690db3))
-
+- fix duplication of name ([2723653](https://github.com/easyops-cn/next-basics/commit/272365397a953444b004544752108e98a75d711a))
+- refactor LibraryDropdown ([aac2730](https://github.com/easyops-cn/next-basics/commit/aac27302f07ef1b613b9f75a2de167a684c9fef7))
+- refine ([2ca0767](https://github.com/easyops-cn/next-basics/commit/2ca07679905823d3543d981449831be8b89f3041))
+- support to set onReject for context ([abe30af](https://github.com/easyops-cn/next-basics/commit/abe30afe193f96ab3ca9fdf04a2f60d2fc690db3))
 
 ### Features
 
-* **builder:** use independent providers ([3290538](https://github.com/easyops-cn/next-basics/commit/3290538af9f35490a284100c0484629aa08bce70))
-
-
-
-
+- **builder:** use independent providers ([3290538](https://github.com/easyops-cn/next-basics/commit/3290538af9f35490a284100c0484629aa08bce70))
 
 ## [1.58.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.1...@next-bricks/next-builder@1.58.2) (2021-06-24)
 
-
 ### Bug Fixes
 
-* **builder:** no longer need to pass nodeAlias ([17fdb2f](https://github.com/easyops-cn/next-basics/commit/17fdb2f1c23bcb9fdea19492083cf82174b5c7ca))
-
-
-
-
+- **builder:** no longer need to pass nodeAlias ([17fdb2f](https://github.com/easyops-cn/next-basics/commit/17fdb2f1c23bcb9fdea19492083cf82174b5c7ca))
 
 ## [1.58.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.58.0...@next-bricks/next-builder@1.58.1) (2021-06-22)
 
 **Note:** Version bump only for package @next-bricks/next-builder
 
-
-
-
-
 # [1.58.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.57.0...@next-bricks/next-builder@1.58.0) (2021-06-21)
-
 
 ### Features
 
-* fetch snippets by flags ([b407514](https://github.com/easyops-cn/next-basics/commit/b407514a3b59f16c619471fb548225895e82bc0e))
-
-
-
-
+- fetch snippets by flags ([b407514](https://github.com/easyops-cn/next-basics/commit/b407514a3b59f16c619471fb548225895e82bc0e))
 
 # [1.57.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.56.0...@next-bricks/next-builder@1.57.0) (2021-06-21)
 
-
 ### Bug Fixes
 
-* revert using installed bricks ([a3a7462](https://github.com/easyops-cn/next-basics/commit/a3a7462570778bdfff53b0009774d275a0f5b018))
-* show thumbnails for snippets ([c86494c](https://github.com/easyops-cn/next-basics/commit/c86494ced3dc4ea9894c6f047819e13535552140))
-
+- revert using installed bricks ([a3a7462](https://github.com/easyops-cn/next-basics/commit/a3a7462570778bdfff53b0009774d275a0f5b018))
+- show thumbnails for snippets ([c86494c](https://github.com/easyops-cn/next-basics/commit/c86494ced3dc4ea9894c6f047819e13535552140))
 
 ### Features
 
-* add custom provider ([e1f4974](https://github.com/easyops-cn/next-basics/commit/e1f49749c9af3085d1b4531ee1b9fe5c900db848))
-* support to apply snippets ([c44b6b9](https://github.com/easyops-cn/next-basics/commit/c44b6b9de31a99eb248068512dfd8e45c580b01c))
-* support tp load hosted snippets ([fa3064c](https://github.com/easyops-cn/next-basics/commit/fa3064c27018cdb9dd3f5d1920ec231c3a39f96b))
-* **snippet:** builder-container support snippet ([6c03cdb](https://github.com/easyops-cn/next-basics/commit/6c03cdb5247b3713d3736a5af8ec2cf90a792836))
-
-
-
-
+- add custom provider ([e1f4974](https://github.com/easyops-cn/next-basics/commit/e1f49749c9af3085d1b4531ee1b9fe5c900db848))
+- support to apply snippets ([c44b6b9](https://github.com/easyops-cn/next-basics/commit/c44b6b9de31a99eb248068512dfd8e45c580b01c))
+- support tp load hosted snippets ([fa3064c](https://github.com/easyops-cn/next-basics/commit/fa3064c27018cdb9dd3f5d1920ec231c3a39f96b))
+- **snippet:** builder-container support snippet ([6c03cdb](https://github.com/easyops-cn/next-basics/commit/6c03cdb5247b3713d3736a5af8ec2cf90a792836))
 
 # [1.56.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.55.1...@next-bricks/next-builder@1.56.0) (2021-06-11)
 
-
 ### Features
 
-* **builder-container:** 支持搜索路由的path ([b651707](https://github.com/easyops-cn/next-basics/commit/b651707ffd2fbb636e27bac33ef0b5bae6ac6348))
-
-
-
-
+- **builder-container:** 支持搜索路由的 path ([b651707](https://github.com/easyops-cn/next-basics/commit/b651707ffd2fbb636e27bac33ef0b5bae6ac6348))
 
 ## [1.55.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.55.0...@next-bricks/next-builder@1.55.1) (2021-06-08)
 
-
 ### Bug Fixes
 
-* highlight in canvas tabs ([7f05908](https://github.com/easyops-cn/next-basics/commit/7f05908fa72697164cc29217681cc7f813185b96))
-
-
-
-
+- highlight in canvas tabs ([7f05908](https://github.com/easyops-cn/next-basics/commit/7f05908fa72697164cc29217681cc7f813185b96))
 
 # [1.55.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.54.0...@next-bricks/next-builder@1.55.0) (2021-06-08)
 
-
 ### Bug Fixes
 
-* prefer easy-view over grid-layout ([1a5f902](https://github.com/easyops-cn/next-basics/commit/1a5f902459a995cb811d15504b36ece65f5cf216))
-
+- prefer easy-view over grid-layout ([1a5f902](https://github.com/easyops-cn/next-basics/commit/1a5f902459a995cb811d15504b36ece65f5cf216))
 
 ### Features
 
-* support to toggle outline ([a69b42a](https://github.com/easyops-cn/next-basics/commit/a69b42a049f3c14609baa0f515487cf0ea97cc11))
-
-
-
-
+- support to toggle outline ([a69b42a](https://github.com/easyops-cn/next-basics/commit/a69b42a049f3c14609baa0f515487cf0ea97cc11))
 
 # [1.54.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.53.2...@next-bricks/next-builder@1.54.0) (2021-06-07)
 
-
 ### Features
 
-* add storyList datasource ([fa6c306](https://github.com/easyops-cn/next-basics/commit/fa6c3069b4cf7a5b72b487397950226095971f77))
-
-
-
-
+- add storyList datasource ([fa6c306](https://github.com/easyops-cn/next-basics/commit/fa6c3069b4cf7a5b72b487397950226095971f77))
 
 ## [1.53.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.53.1...@next-bricks/next-builder@1.53.2) (2021-06-03)
 
-
 ### Bug Fixes
 
-* 在模板视图中添加构件时去除掉自身 ([9c61f17](https://github.com/easyops-cn/next-basics/commit/9c61f170a70bba192267c1657b59dc9a83c975ce))
-
-
-
-
+- 在模板视图中添加构件时去除掉自身 ([9c61f17](https://github.com/easyops-cn/next-basics/commit/9c61f170a70bba192267c1657b59dc9a83c975ce))
 
 ## [1.53.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.53.0...@next-bricks/next-builder@1.53.1) (2021-06-01)
 
 **Note:** Version bump only for package @next-bricks/next-builder
-
-
-
-
 
 # [1.53.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.52.0...@next-bricks/next-builder@1.53.0) (2021-05-28)
 

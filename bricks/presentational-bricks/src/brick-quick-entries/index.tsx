@@ -1,7 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Card } from "antd";
-import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  UpdatingElement,
+  property,
+  event,
+  EventEmitter,
+} from "@next-core/brick-kit";
 import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
 import { BrickQuickEntries } from "./BrickQuickEntries";
 
@@ -10,7 +16,11 @@ export interface LinkProps {
   target: string;
   text: string;
 }
-
+export interface TitleConfig {
+  icon?: MenuIcon;
+  title?: string;
+  value?: string;
+}
 /**
  * @id presentational-bricks.brick-quick-entries
  * @name presentational-bricks.brick-quick-entries
@@ -103,6 +113,15 @@ export class BrickQuickEntriesElement extends UpdatingElement {
   data: any[];
 
   /**
+   * @kind TitleConfig[]
+   * @required false
+   * @default -
+   * @description 为每个入口配置标题
+   */
+  @property({ attribute: false })
+  titleList: TitleConfig[];
+
+  /**
    * @kind boolean
    * @required false
    * @default true
@@ -113,6 +132,17 @@ export class BrickQuickEntriesElement extends UpdatingElement {
     attribute: false,
   })
   showCard = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否显示分隔线
+   */
+  @property({
+    type: Boolean,
+  })
+  divider: boolean;
 
   /**
    * @required false
@@ -144,6 +174,17 @@ export class BrickQuickEntriesElement extends UpdatingElement {
   @property({ attribute: false, __deprecated_and_for_compatibility_only: true })
   useBricks: UseBrickConf;
 
+  /**
+   * @detail any
+   * @description 节点弹窗内容项点击事件
+   */
+  @event({ type: "title.icon.click", cancelable: true })
+  titleIconClick: EventEmitter<any>;
+
+  // istanbul ignore next
+  private _titleIconClick = (value: any) => {
+    this.titleIconClick.emit(value);
+  };
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -168,6 +209,9 @@ export class BrickQuickEntriesElement extends UpdatingElement {
           data={this.data}
           containerStyle={this.containerStyle}
           mode={this.mode}
+          titleList={this.titleList}
+          titleIconClick={this._titleIconClick}
+          divider={this.divider}
         />
       );
 

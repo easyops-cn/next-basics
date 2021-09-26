@@ -206,17 +206,19 @@ export function LegacyEventsEditor(
                 className={styles.eventIcon}
               />
               <span title={getEventDesc(item.name)}>{item.name}</span>
-              <FontAwesomeIcon
-                className={styles.plusIcon}
-                icon="plus-square"
-                onClick={() => onCreate(`${index}-events`, item.name)}
-              />
+              <div className={styles.iconWrapper}>
+                <FontAwesomeIcon
+                  className={styles.plusIcon}
+                  icon="plus-square"
+                  onClick={() => onCreate(`${index}-events`, item.name)}
+                />
 
-              <FontAwesomeIcon
-                className={styles.removeIcon}
-                icon="minus-square"
-                onClick={() => handleTopLevelRemove(index)}
-              />
+                <FontAwesomeIcon
+                  className={styles.removeIcon}
+                  icon="minus-square"
+                  onClick={() => handleTopLevelRemove(index)}
+                />
+              </div>
             </div>
 
             <div className={styles.eventHandler}>

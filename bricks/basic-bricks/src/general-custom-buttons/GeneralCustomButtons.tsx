@@ -89,7 +89,10 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
           <Button
             className={style.iconButton}
             icon={
-              icon && typeof icon === "string" && <LegacyIcon type={icon} />
+              icon &&
+              typeof icon === "string" && (
+                <LegacyIcon type={icon} data-icon={icon} />
+              )
             }
             onClick={() => {
               handleClick(eventName, button);
@@ -139,7 +142,11 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
               <span className={style.dropdownBtnIconContainer}>
                 {button.icon &&
                   (typeof button.icon === "string" ? (
-                    <LegacyIcon type={button.icon} className={style.menuIcon} />
+                    <LegacyIcon
+                      type={button.icon}
+                      className={style.menuIcon}
+                      data-icon={button.icon}
+                    />
                   ) : (
                     <GeneralIcon icon={button.icon} />
                   ))}

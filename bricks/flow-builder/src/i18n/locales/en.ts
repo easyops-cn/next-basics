@@ -25,6 +25,17 @@ const locale: Locale = {
   [K.CONST]: "Const",
   [K.FIELDS_MAPPING]: "Fields Mapping",
   [K.CEL]: "Cel",
+  [K.NAME_LABEL]: "Name",
+  [K.REQUIRED_LABEL]: "Required",
+  [K.TYPE_LABEL]: "Type",
+  [K.DESCRIPTION_LABEL]: "Description",
+  [K.SETTING_LABEL]: "Setting",
+  [K.CATEGORY_LABEL]: "Category",
+  [K.DEFAULT_LABEL]: "Default",
+  [K.REFERENCE_LABEL]: "Ref",
+  [K.ENUM_LABEL]: "Enum",
+  [K.VALIDATOR_LABEL]: "Validator",
+  [K.FIELD_PARAMS]: "Params",
 };
 
 export default locale;

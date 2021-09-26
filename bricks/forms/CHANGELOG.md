@@ -3,528 +3,322 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.191.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.1...@next-bricks/forms@1.191.2) (2021-09-17)
-
+# [1.193.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.192.0...@next-bricks/forms@1.193.0) (2021-09-23)
 
 ### Bug Fixes
 
-* update @next-libs/* ([5815dd1](https://github.com/easyops-cn/next-basics/commit/5815dd1f6cbd4f38569e8c88d828fd51ce092d6f))
+- 普通单选框支持 label 和 icon Closed SERVICE_OBSERVE-538 ([abaea5b](https://github.com/easyops-cn/next-basics/commit/abaea5ba5b856a3c523cdd6143d6dcbfdb931535))
 
+### Features
 
+- support widget doc and update denpencies ([d2b9375](https://github.com/easyops-cn/next-basics/commit/d2b937572004f3098af632bc7e1bc3d684e1be2e))
 
+# [1.192.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.3...@next-bricks/forms@1.192.0) (2021-09-23)
 
+### Features
+
+- update dependencies with @next-libs/basic-compomnents ([06c0be6](https://github.com/easyops-cn/next-basics/commit/06c0be620089d08ffc948393ca3ebad57eca022a))
+
+## [1.191.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.2...@next-bricks/forms@1.191.3) (2021-09-18)
+
+**Note:** Version bump only for package @next-bricks/forms
+
+## [1.191.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.1...@next-bricks/forms@1.191.2) (2021-09-17)
+
+### Bug Fixes
+
+- update @next-libs/\* ([5815dd1](https://github.com/easyops-cn/next-basics/commit/5815dd1f6cbd4f38569e8c88d828fd51ce092d6f))
 
 ## [1.191.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.191.0...@next-bricks/forms@1.191.1) (2021-09-17)
 
-
 ### Bug Fixes
 
-* **forms:** 模型属性id编辑时取消对长度的验证 ([3d289c8](https://github.com/easyops-cn/next-basics/commit/3d289c865fa13270080a8d2a18862ed56863d6ab))
-
-
-
-
+- **forms:** 模型属性 id 编辑时取消对长度的验证 ([3d289c8](https://github.com/easyops-cn/next-basics/commit/3d289c865fa13270080a8d2a18862ed56863d6ab))
 
 # [1.191.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.2...@next-bricks/forms@1.191.0) (2021-09-03)
 
-
 ### Features
 
-* **forms:** 添加属性结构体内的结构项支持正则校验 ([41617f6](https://github.com/easyops-cn/next-basics/commit/41617f69dda588c91054fa772f708a31025145bb))
-
-
-
-
+- **forms:** 添加属性结构体内的结构项支持正则校验 ([41617f6](https://github.com/easyops-cn/next-basics/commit/41617f69dda588c91054fa772f708a31025145bb))
 
 ## [1.190.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.1...@next-bricks/forms@1.190.2) (2021-09-01)
 
-
 ### Bug Fixes
 
-* support formStyle ([8851c2c](https://github.com/easyops-cn/next-basics/commit/8851c2c32fccffb46d442ae29673fa82968b901a))
-
-
-
-
+- support formStyle ([8851c2c](https://github.com/easyops-cn/next-basics/commit/8851c2c32fccffb46d442ae29673fa82968b901a))
 
 ## [1.190.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.190.0...@next-bricks/forms@1.190.1) (2021-09-01)
 
-
 ### Bug Fixes
 
-* fix property type of readOnly ([ddc703b](https://github.com/easyops-cn/next-basics/commit/ddc703bf5cf23a35fa51b7bda44454306316d1c7))
-
-
-
-
+- fix property type of readOnly ([ddc703b](https://github.com/easyops-cn/next-basics/commit/ddc703bf5cf23a35fa51b7bda44454306316d1c7))
 
 # [1.190.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.189.0...@next-bricks/forms@1.190.0) (2021-08-25)
 
-
 ### Features
 
-* CmdbInstanceSelect支持permission ([2b0b8c7](https://github.com/easyops-cn/next-basics/commit/2b0b8c78f525cbe16a8d17891e8485fcef580859))
-
-
-
-
+- CmdbInstanceSelect 支持 permission ([2b0b8c7](https://github.com/easyops-cn/next-basics/commit/2b0b8c78f525cbe16a8d17891e8485fcef580859))
 
 # [1.189.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.188.0...@next-bricks/forms@1.189.0) (2021-08-24)
 
-
 ### Features
 
-* **general-form:** add validateTouchedField method ([c48abcb](https://github.com/easyops-cn/next-basics/commit/c48abcb9ad6f2ced914ef0e0747ed915a00e63c6))
-
-
-
-
+- **general-form:** add validateTouchedField method ([c48abcb](https://github.com/easyops-cn/next-basics/commit/c48abcb9ad6f2ced914ef0e0747ed915a00e63c6))
 
 # [1.188.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.187.1...@next-bricks/forms@1.188.0) (2021-08-23)
 
-
 ### Features
 
-* radio support tooltip ([d4e901c](https://github.com/easyops-cn/next-basics/commit/d4e901c8ac5cb4815d77e4bae8880dffbc22aa21))
-
-
-
-
+- radio support tooltip ([d4e901c](https://github.com/easyops-cn/next-basics/commit/d4e901c8ac5cb4815d77e4bae8880dffbc22aa21))
 
 ## [1.187.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.187.0...@next-bricks/forms@1.187.1) (2021-08-23)
 
-
 ### Bug Fixes
 
-* **general-radio:** 修复type:icon时在表单中会失效 ([15ae951](https://github.com/easyops-cn/next-basics/commit/15ae9510f9548179f1a4c45a4acbdb54038382f6))
-
-
-
-
+- **general-radio:** 修复 type:icon 时在表单中会失效 ([15ae951](https://github.com/easyops-cn/next-basics/commit/15ae9510f9548179f1a4c45a4acbdb54038382f6))
 
 # [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.186.0...@next-bricks/forms@1.187.0) (2021-08-23)
 
-
 ### Features
 
-* **forms:** 流水号/自增id属性增加校验 ([396e919](https://github.com/easyops-cn/next-basics/commit/396e919fb3a96b5cc7c2ddb41c1ce2af95ab3ffe))
-
-
-
-
+- **forms:** 流水号/自增 id 属性增加校验 ([396e919](https://github.com/easyops-cn/next-basics/commit/396e919fb3a96b5cc7c2ddb41c1ce2af95ab3ffe))
 
 # [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.185.1...@next-bricks/forms@1.186.0) (2021-08-20)
 
-
 ### Features
 
-* **fgeneral-slide:** 新增tip格式化 ([d560c62](https://github.com/easyops-cn/next-basics/commit/d560c62b5f7fba55f773abbf36464a2d649d3954))
-
-
-
-
+- **fgeneral-slide:** 新增 tip 格式化 ([d560c62](https://github.com/easyops-cn/next-basics/commit/d560c62b5f7fba55f773abbf36464a2d649d3954))
 
 ## [1.185.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.185.0...@next-bricks/forms@1.185.1) (2021-08-18)
 
-
 ### Bug Fixes
 
-* **forms:** 修复cmdb添加属性构件无默认值default为null时也会触发正则校验 ([5f1fb7a](https://github.com/easyops-cn/next-basics/commit/5f1fb7a9e5f0f63fb4d389b074a145cc9edf781e))
-* **forms:** 修复cmdb添加属性构件无默认值default为null时也会触发正则校验 ([f376996](https://github.com/easyops-cn/next-basics/commit/f376996fb0d49110ec7cec48de7f01aea03ce5fa))
-* 修复 dashboard 影响有些radop/slide 不能触发的问题 ([8192463](https://github.com/easyops-cn/next-basics/commit/81924635d3ff927ad7b2b3850f716d7cf2055f81))
-
-
-
-
+- **forms:** 修复 cmdb 添加属性构件无默认值 default 为 null 时也会触发正则校验 ([5f1fb7a](https://github.com/easyops-cn/next-basics/commit/5f1fb7a9e5f0f63fb4d389b074a145cc9edf781e))
+- **forms:** 修复 cmdb 添加属性构件无默认值 default 为 null 时也会触发正则校验 ([f376996](https://github.com/easyops-cn/next-basics/commit/f376996fb0d49110ec7cec48de7f01aea03ce5fa))
+- 修复 dashboard 影响有些 radop/slide 不能触发的问题 ([8192463](https://github.com/easyops-cn/next-basics/commit/81924635d3ff927ad7b2b3850f716d7cf2055f81))
 
 # [1.185.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.184.0...@next-bricks/forms@1.185.0) (2021-08-17)
 
-
 ### Features
 
-* **fgeneral-radio:** 新增dashboard 样式 ([7b102ee](https://github.com/easyops-cn/next-basics/commit/7b102ee8abe2d9702bc9f412ee1a00537d4ffd3c))
-
-
-
-
+- **fgeneral-radio:** 新增 dashboard 样式 ([7b102ee](https://github.com/easyops-cn/next-basics/commit/7b102ee8abe2d9702bc9f412ee1a00537d4ffd3c))
 
 # [1.184.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.183.1...@next-bricks/forms@1.184.0) (2021-08-17)
 
-
 ### Features
 
-* **fgeneral-slider:** 新增dashboard 样式 ([97320f4](https://github.com/easyops-cn/next-basics/commit/97320f414a28fb1fc8ec7b9c8a74dbdf90c3964d))
-
-
-
-
+- **fgeneral-slider:** 新增 dashboard 样式 ([97320f4](https://github.com/easyops-cn/next-basics/commit/97320f414a28fb1fc8ec7b9c8a74dbdf90c3964d))
 
 ## [1.183.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.183.0...@next-bricks/forms@1.183.1) (2021-08-17)
 
-
 ### Bug Fixes
 
-* **forms:** 国际化文案 && 浮点类型属性输入为空无法保存 ([c28ecf9](https://github.com/easyops-cn/next-basics/commit/c28ecf9435bdc568e277e95151729599214b644a))
-
-
-
-
+- **forms:** 国际化文案 && 浮点类型属性输入为空无法保存 ([c28ecf9](https://github.com/easyops-cn/next-basics/commit/c28ecf9435bdc568e277e95151729599214b644a))
 
 # [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.4...@next-bricks/forms@1.183.0) (2021-08-12)
 
-
 ### Features
 
-* support debounce search ([e8eee6a](https://github.com/easyops-cn/next-basics/commit/e8eee6abbd40206c4a552747129ea5ddc1f9a3e8))
-
-
-
-
+- support debounce search ([e8eee6a](https://github.com/easyops-cn/next-basics/commit/e8eee6abbd40206c4a552747129ea5ddc1f9a3e8))
 
 ## [1.182.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.3...@next-bricks/forms@1.182.4) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/forms
 
-
-
-
-
 ## [1.182.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.2...@next-bricks/forms@1.182.3) (2021-08-09)
 
 **Note:** Version bump only for package @next-bricks/forms
-
-
-
-
 
 ## [1.182.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.1...@next-bricks/forms@1.182.2) (2021-08-06)
 
 **Note:** Version bump only for package @next-bricks/forms
 
-
-
-
-
 ## [1.182.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.182.0...@next-bricks/forms@1.182.1) (2021-08-04)
-
 
 ### Reverts
 
-* Revert "Revert "Steve/split bricks"" ([aee7ace](https://github.com/easyops-cn/next-basics/commit/aee7ace7e3adc513149a7b964acbda11941f39f3))
-
-
-
-
+- Revert "Revert "Steve/split bricks"" ([aee7ace](https://github.com/easyops-cn/next-basics/commit/aee7ace7e3adc513149a7b964acbda11941f39f3))
 
 # [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.181.2...@next-bricks/forms@1.182.0) (2021-08-03)
 
-
 ### Features
 
-* add i18n refs FLOW-443 ([e556dfe](https://github.com/easyops-cn/next-basics/commit/e556dfea4b6bdfbf7c91b3ad1260ea265a0ae0dd))
-
-
-
-
+- add i18n refs FLOW-443 ([e556dfe](https://github.com/easyops-cn/next-basics/commit/e556dfea4b6bdfbf7c91b3ad1260ea265a0ae0dd))
 
 ## [1.181.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.181.1...@next-bricks/forms@1.181.2) (2021-08-02)
 
-
 ### Bug Fixes
 
-* make some bricks lazy load ([454d4a1](https://github.com/easyops-cn/next-basics/commit/454d4a1669cf159b9399a33d5b22963165797db4))
-
-
-
-
+- make some bricks lazy load ([454d4a1](https://github.com/easyops-cn/next-basics/commit/454d4a1669cf159b9399a33d5b22963165797db4))
 
 ## [1.181.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.181.0...@next-bricks/forms@1.181.1) (2021-08-02)
 
 **Note:** Version bump only for package @next-bricks/forms
 
-
-
-
-
 # [1.181.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.180.1...@next-bricks/forms@1.181.0) (2021-07-23)
-
 
 ### Features
 
-* support maxTagCount ([0c7c851](https://github.com/easyops-cn/next-basics/commit/0c7c851eb8cfd8bd646de9259478cfe0a7ace558))
-
-
-
-
+- support maxTagCount ([0c7c851](https://github.com/easyops-cn/next-basics/commit/0c7c851eb8cfd8bd646de9259478cfe0a7ace558))
 
 ## [1.180.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.180.0...@next-bricks/forms@1.180.1) (2021-07-22)
 
-
 ### Bug Fixes
 
-* **forms:** clearAll不生效 ([b93d1b4](https://github.com/easyops-cn/next-basics/commit/b93d1b47711b86ab8108bd0c5d05db42d3eb7872))
-
-
-
-
+- **forms:** clearAll 不生效 ([b93d1b4](https://github.com/easyops-cn/next-basics/commit/b93d1b47711b86ab8108bd0c5d05db42d3eb7872))
 
 # [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.179.1...@next-bricks/forms@1.180.0) (2021-07-22)
 
-
 ### Features
 
-* **tree-select:** add treeCheckStrictly property ([b060f22](https://github.com/easyops-cn/next-basics/commit/b060f2230442493e7e8a8483659918583611b3d9))
-
-
-
-
+- **tree-select:** add treeCheckStrictly property ([b060f22](https://github.com/easyops-cn/next-basics/commit/b060f2230442493e7e8a8483659918583611b3d9))
 
 ## [1.179.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.179.0...@next-bricks/forms@1.179.1) (2021-07-13)
 
-
 ### Bug Fixes
 
-* **forms:** 修复CmdbInstanceSelect value数量大于默认30条时数据拉取不全问题 ([bbbf037](https://github.com/easyops-cn/next-basics/commit/bbbf037a0290de8b59da7c9673bd9c355c80f272))
-
-
-
-
+- **forms:** 修复 CmdbInstanceSelect value 数量大于默认 30 条时数据拉取不全问题 ([bbbf037](https://github.com/easyops-cn/next-basics/commit/bbbf037a0290de8b59da7c9673bd9c355c80f272))
 
 # [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.2...@next-bricks/forms@1.179.0) (2021-07-13)
 
-
 ### Features
 
-* **forms:** 时间选择器可设置禁选日期 ([39552d1](https://github.com/easyops-cn/next-basics/commit/39552d1830dcc32345ea9952ef7b91f41d12fd2c))
-* **forms:** 时间选择器可设置禁选日期 ([e26f97d](https://github.com/easyops-cn/next-basics/commit/e26f97de5fabb80fada4c8be22c932fcf1dc3cb2))
-
-
-
-
+- **forms:** 时间选择器可设置禁选日期 ([39552d1](https://github.com/easyops-cn/next-basics/commit/39552d1830dcc32345ea9952ef7b91f41d12fd2c))
+- **forms:** 时间选择器可设置禁选日期 ([e26f97d](https://github.com/easyops-cn/next-basics/commit/e26f97de5fabb80fada4c8be22c932fcf1dc3cb2))
 
 ## [1.178.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.1...@next-bricks/forms@1.178.2) (2021-07-12)
 
-
 ### Bug Fixes
 
-* **forms:** 修复CmdbInstanceSelect后台搜索后数据异常问题 ([5e5e863](https://github.com/easyops-cn/next-basics/commit/5e5e863e83037f292f0dc4e3bb09de69037b8641))
-
-
-
-
+- **forms:** 修复 CmdbInstanceSelect 后台搜索后数据异常问题 ([5e5e863](https://github.com/easyops-cn/next-basics/commit/5e5e863e83037f292f0dc4e3bb09de69037b8641))
 
 ## [1.178.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.178.0...@next-bricks/forms@1.178.1) (2021-07-09)
 
 **Note:** Version bump only for package @next-bricks/forms
 
-
-
-
-
 # [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.177.0...@next-bricks/forms@1.178.0) (2021-07-08)
-
 
 ### Bug Fixes
 
-* **forms.general-radio:** type 类型为icon 的单选框添加禁用样式 ([c618cf1](https://github.com/easyops-cn/next-basics/commit/c618cf1b486689685d8993a01be6a00ecda66898))
-
+- **forms.general-radio:** type 类型为 icon 的单选框添加禁用样式 ([c618cf1](https://github.com/easyops-cn/next-basics/commit/c618cf1b486689685d8993a01be6a00ecda66898))
 
 ### Features
 
-* **fgeneral-checkbox:** 新增type 类型为icon 的复选框样式 ([e1359d4](https://github.com/easyops-cn/next-basics/commit/e1359d4a754af94d2effa98ceff62145e21e402c))
-
-
-
-
+- **fgeneral-checkbox:** 新增 type 类型为 icon 的复选框样式 ([e1359d4](https://github.com/easyops-cn/next-basics/commit/e1359d4a754af94d2effa98ceff62145e21e402c))
 
 # [1.177.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.176.1...@next-bricks/forms@1.177.0) (2021-07-08)
 
-
 ### Features
 
-* **forms.general-radio:** 新增type 类型为icon 的单选框样式 ([7ab4c87](https://github.com/easyops-cn/next-basics/commit/7ab4c87017edcabcbb2cd0e2e0eb68722def936b))
-
-
-
-
+- **forms.general-radio:** 新增 type 类型为 icon 的单选框样式 ([7ab4c87](https://github.com/easyops-cn/next-basics/commit/7ab4c87017edcabcbb2cd0e2e0eb68722def936b))
 
 ## [1.176.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.176.0...@next-bricks/forms@1.176.1) (2021-07-08)
 
-
 ### Bug Fixes
 
-* **forms:** 修复notRender失效 ([b9f3965](https://github.com/easyops-cn/next-basics/commit/b9f3965c4359878fccb577878b6ac7f35b81e019))
-
-
-
-
+- **forms:** 修复 notRender 失效 ([b9f3965](https://github.com/easyops-cn/next-basics/commit/b9f3965c4359878fccb577878b6ac7f35b81e019))
 
 # [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.175.0...@next-bricks/forms@1.176.0) (2021-07-07)
 
-
 ### Features
 
-* 实例列表、详情、关系展示等页面兼容json格式 closed INSTANCE-1789 ([5c9eaf2](https://github.com/easyops-cn/next-basics/commit/5c9eaf284e0547483176798c730bdd092ad013fb))
-
-
-
-
+- 实例列表、详情、关系展示等页面兼容 json 格式 closed INSTANCE-1789 ([5c9eaf2](https://github.com/easyops-cn/next-basics/commit/5c9eaf284e0547483176798c730bdd092ad013fb))
 
 # [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.174.1...@next-bricks/forms@1.175.0) (2021-07-06)
 
-
 ### Features
 
-* **general-input-number:** add readOnly and disabled properties ([3cc85ce](https://github.com/easyops-cn/next-basics/commit/3cc85ce92534309a9093d1ebd98faf2429236a1c))
-
-
-
-
+- **general-input-number:** add readOnly and disabled properties ([3cc85ce](https://github.com/easyops-cn/next-basics/commit/3cc85ce92534309a9093d1ebd98faf2429236a1c))
 
 ## [1.174.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.174.0...@next-bricks/forms@1.174.1) (2021-07-01)
 
-
 ### Bug Fixes
 
-* **forms:** forms.user-or-user-group-select change userGroup, pageSize select no show ([21038c9](https://github.com/easyops-cn/next-basics/commit/21038c9855cadd6dd6ab38f37b311cad83a7c155))
-
-
-
-
+- **forms:** forms.user-or-user-group-select change userGroup, pageSize select no show ([21038c9](https://github.com/easyops-cn/next-basics/commit/21038c9855cadd6dd6ab38f37b311cad83a7c155))
 
 # [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.173.0...@next-bricks/forms@1.174.0) (2021-07-01)
 
-
 ### Bug Fixes
 
-* **form:** do not create moment for nil values ([6901927](https://github.com/easyops-cn/next-basics/commit/69019279475dc4467ca532eff783a4549cea49b9))
-
+- **form:** do not create moment for nil values ([6901927](https://github.com/easyops-cn/next-basics/commit/69019279475dc4467ca532eff783a4549cea49b9))
 
 ### Features
 
-* **general-input:** add trim property ([9d27801](https://github.com/easyops-cn/next-basics/commit/9d27801aecd8f743023ec13ea33a652897bb4c5e))
-* **general-textarea:** add readOnly property ([e172654](https://github.com/easyops-cn/next-basics/commit/e172654e8e56e36070582e235aaf45c8dd9278ad))
-
-
-
-
+- **general-input:** add trim property ([9d27801](https://github.com/easyops-cn/next-basics/commit/9d27801aecd8f743023ec13ea33a652897bb4c5e))
+- **general-textarea:** add readOnly property ([e172654](https://github.com/easyops-cn/next-basics/commit/e172654e8e56e36070582e235aaf45c8dd9278ad))
 
 # [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.172.0...@next-bricks/forms@1.173.0) (2021-06-28)
 
-
 ### Bug Fixes
 
-* upload component doc update ([80b5998](https://github.com/easyops-cn/next-basics/commit/80b59981cf2cc44963328fd53a3699a833eb86a4))
-
+- upload component doc update ([80b5998](https://github.com/easyops-cn/next-basics/commit/80b59981cf2cc44963328fd53a3699a833eb86a4))
 
 ### Features
 
-* **forms:** 支持设置上传按钮属性 ([1627191](https://github.com/easyops-cn/next-basics/commit/1627191c7237b250db07952f96cd635b5d6ffb89))
-
-
-
-
+- **forms:** 支持设置上传按钮属性 ([1627191](https://github.com/easyops-cn/next-basics/commit/1627191c7237b250db07952f96cd635b5d6ffb89))
 
 # [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.171.0...@next-bricks/forms@1.172.0) (2021-06-24)
 
-
 ### Bug Fixes
 
-* fix autoUpload fail in upload component ([712cf53](https://github.com/easyops-cn/next-basics/commit/712cf53c343131ccb681a1ef4fd6b81fc7932cf4))
-* fix upload-image unit test ([05e310b](https://github.com/easyops-cn/next-basics/commit/05e310b2700d7b60d20ed0ac11941f610a474f6b))
-* time-range-picker unit test fix ([b78e505](https://github.com/easyops-cn/next-basics/commit/b78e505025f132d9896b08b16342efb1048bda32))
-* time-range-picker unit test fix ([63018d1](https://github.com/easyops-cn/next-basics/commit/63018d107d777c9c27bdbbd7272acc57153f304f))
-* when time-range-picker value is null, component get invalid date ([917334e](https://github.com/easyops-cn/next-basics/commit/917334e16d19e108423a40d8b8afada4612d0691))
-
+- fix autoUpload fail in upload component ([712cf53](https://github.com/easyops-cn/next-basics/commit/712cf53c343131ccb681a1ef4fd6b81fc7932cf4))
+- fix upload-image unit test ([05e310b](https://github.com/easyops-cn/next-basics/commit/05e310b2700d7b60d20ed0ac11941f610a474f6b))
+- time-range-picker unit test fix ([b78e505](https://github.com/easyops-cn/next-basics/commit/b78e505025f132d9896b08b16342efb1048bda32))
+- time-range-picker unit test fix ([63018d1](https://github.com/easyops-cn/next-basics/commit/63018d107d777c9c27bdbbd7272acc57153f304f))
+- when time-range-picker value is null, component get invalid date ([917334e](https://github.com/easyops-cn/next-basics/commit/917334e16d19e108423a40d8b8afada4612d0691))
 
 ### Features
 
-* add unit test for UploadFiles ([2fd360c](https://github.com/easyops-cn/next-basics/commit/2fd360cfcec5c5b3b7052e6528b5a75e1a56e59f))
-* button add loading state ([591734f](https://github.com/easyops-cn/next-basics/commit/591734f002068fcec3c5e4c49ab066f784daff4c))
-* upload add file size limit ([750271b](https://github.com/easyops-cn/next-basics/commit/750271bf8a9a9aaafc5cb29992bef2dfb8b93f41))
-
-
-
-
+- add unit test for UploadFiles ([2fd360c](https://github.com/easyops-cn/next-basics/commit/2fd360cfcec5c5b3b7052e6528b5a75e1a56e59f))
+- button add loading state ([591734f](https://github.com/easyops-cn/next-basics/commit/591734f002068fcec3c5e4c49ab066f784daff4c))
+- upload add file size limit ([750271b](https://github.com/easyops-cn/next-basics/commit/750271bf8a9a9aaafc5cb29992bef2dfb8b93f41))
 
 # [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.170.0...@next-bricks/forms@1.171.0) (2021-06-22)
 
-
 ### Bug Fixes
 
-* fix style ([4dc53e4](https://github.com/easyops-cn/next-basics/commit/4dc53e439c16362c4b562a53f7191e6f34fcefdb))
-
+- fix style ([4dc53e4](https://github.com/easyops-cn/next-basics/commit/4dc53e439c16362c4b562a53f7191e6f34fcefdb))
 
 ### Features
 
-* add brick editor ([fdbaa52](https://github.com/easyops-cn/next-basics/commit/fdbaa52c253252c032f400ff861b2384bc2d7262))
-
-
-
-
+- add brick editor ([fdbaa52](https://github.com/easyops-cn/next-basics/commit/fdbaa52c253252c032f400ff861b2384bc2d7262))
 
 # [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.169.0...@next-bricks/forms@1.170.0) (2021-06-11)
 
-
 ### Bug Fixes
 
-* **upload-images:** 上传图片构件支持返回data url, update unit test ([ecfe794](https://github.com/easyops-cn/next-basics/commit/ecfe794f9336c8dddbfa9adc8d85b00b68a22db7))
-
+- **upload-images:** 上传图片构件支持返回 data url, update unit test ([ecfe794](https://github.com/easyops-cn/next-basics/commit/ecfe794f9336c8dddbfa9adc8d85b00b68a22db7))
 
 ### Features
 
-* add brick editor ([c084a74](https://github.com/easyops-cn/next-basics/commit/c084a746ecb5822675f0113282b84caa64a9455d))
-* **upload-images:** 上传图片构件支持返回data url ([d678c06](https://github.com/easyops-cn/next-basics/commit/d678c06de4241ec4206daeb7a063fe1126270c42))
-
-
-
-
+- add brick editor ([c084a74](https://github.com/easyops-cn/next-basics/commit/c084a746ecb5822675f0113282b84caa64a9455d))
+- **upload-images:** 上传图片构件支持返回 data url ([d678c06](https://github.com/easyops-cn/next-basics/commit/d678c06de4241ec4206daeb7a063fe1126270c42))
 
 # [1.169.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.168.0...@next-bricks/forms@1.169.0) (2021-06-07)
 
-
 ### Features
 
-* **forms:** add i18n ([ecf70a6](https://github.com/easyops-cn/next-basics/commit/ecf70a676d3d5465b21b8d9014aecc65ae6d784b))
-
-
-
-
+- **forms:** add i18n ([ecf70a6](https://github.com/easyops-cn/next-basics/commit/ecf70a676d3d5465b21b8d9014aecc65ae6d784b))
 
 # [1.168.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.167.1...@next-bricks/forms@1.168.0) (2021-06-03)
 
-
 ### Features
 
-* **forms:** add i18n ([39f127e](https://github.com/easyops-cn/next-basics/commit/39f127eba3fe64be1a4ae6322460b11195c6a5c4))
-
-
-
-
+- **forms:** add i18n ([39f127e](https://github.com/easyops-cn/next-basics/commit/39f127eba3fe64be1a4ae6322460b11195c6a5c4))
 
 ## [1.167.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.167.0...@next-bricks/forms@1.167.1) (2021-06-02)
 
 **Note:** Version bump only for package @next-bricks/forms
 
-
-
-
-
 # [1.167.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.166.1...@next-bricks/forms@1.167.0) (2021-06-01)
-
 
 ### Bug Fixes
 
-* fix types after upgraded ts to 4.3 ([3210c63](https://github.com/easyops-cn/next-basics/commit/3210c6345d316b60abcc953d620637ba2e3d1c94))
-
+- fix types after upgraded ts to 4.3 ([3210c63](https://github.com/easyops-cn/next-basics/commit/3210c6345d316b60abcc953d620637ba2e3d1c94))
 
 ### Features
 
-* **forms:** add i18n ([a1a68a3](https://github.com/easyops-cn/next-basics/commit/a1a68a3227372b575c0daad974c55aa7d987660b))
-
-
-
-
+- **forms:** add i18n ([a1a68a3](https://github.com/easyops-cn/next-basics/commit/a1a68a3227372b575c0daad974c55aa7d987660b))
 
 ## [1.166.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.166.0...@next-bricks/forms@1.166.1) (2021-05-28)
 

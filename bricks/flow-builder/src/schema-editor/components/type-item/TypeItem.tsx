@@ -34,10 +34,12 @@ export interface ProcessTypeValue {
 export interface TypeItemProps {
   value?: string;
   onChange?: (value: string) => void;
+  disabledModelType?: boolean;
 }
 
 export function TypeItem(props: TypeItemProps): React.ReactElement {
-  const [{ q, modelList }, setQ] = useContractModels();
+  const { disabledModelType } = props;
+  const [{ q, modelList }, setQ] = useContractModels({ disabledModelType });
   const [typeValue, setTypeValue] = useState<ProcessTypeValue>(
     processTypeItemInitValue(props.value)
   );

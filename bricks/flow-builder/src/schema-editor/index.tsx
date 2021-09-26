@@ -38,6 +38,30 @@ export class SchemaEditorElement extends FormItemElement {
   })
   readonly: boolean;
 
+  /**
+   * @kind boolean
+   * @required -️
+   * @default false
+   * @description 是否隐藏根节点字段信息
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  hiddenRootNode: boolean;
+
+  /**
+   * @kind boolean
+   * @required -️
+   * @default false
+   * @description 是否禁用模型的类型引用
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  disabledModelType: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -68,6 +92,8 @@ export class SchemaEditorElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             readonly={this.readonly}
+            hiddenRootNode={this.hiddenRootNode}
+            disabledModelType={this.disabledModelType}
           />
         </BrickWrapper>,
         this
