@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.347.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.346.0...@next-bricks/developers@1.347.0) (2021-09-26)
+
+
+### Features
+
+* update dependencies and yarn.lock ([410d132](https://github.com/easyops-cn/next-basics/commit/410d1329081c33cc5a571cf937f0b50eb56129b4))
+
+
+
+
+
 # [1.346.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.345.0...@next-bricks/developers@1.346.0) (2021-09-23)
 
 ### Features

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.75.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.74.0...@next-bricks/next-builder@1.75.0) (2021-09-26)
+
+
+### Features
+
+* add layerType in request body ([ddc1d80](https://github.com/easyops-cn/next-basics/commit/ddc1d80efa03cf336adedf270e95aeda99056261))
+* update dependencies and yarn.lock ([410d132](https://github.com/easyops-cn/next-basics/commit/410d1329081c33cc5a571cf937f0b50eb56129b4))
+* update unit test ([641ee10](https://github.com/easyops-cn/next-basics/commit/641ee1036a85a8b4af29070776f326515cc2c65b))
+
+
+
+
+
 # [1.74.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.73.0...@next-bricks/next-builder@1.74.0) (2021-09-24)
 
 ### Features

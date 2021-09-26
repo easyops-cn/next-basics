@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.7.0...@next-bricks/brick-visualization@1.8.0) (2021-09-26)
+
+
+### Features
+
+* update dependencies and yarn.lock ([410d132](https://github.com/easyops-cn/next-basics/commit/410d1329081c33cc5a571cf937f0b50eb56129b4))
+
+
+
+
+
 # [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.6.0...@next-bricks/brick-visualization@1.7.0) (2021-09-23)
 
 ### Features

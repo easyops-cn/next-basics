@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.220.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.219.1...@next-bricks/presentational-bricks@1.220.0) (2021-09-26)
+
+
+### Features
+
+* update dependencies and yarn.lock ([410d132](https://github.com/easyops-cn/next-basics/commit/410d1329081c33cc5a571cf937f0b50eb56129b4))
+
+
+
+
+
 ## [1.219.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.219.0...@next-bricks/presentational-bricks@1.219.1) (2021-09-26)
 
 ### Bug Fixes
