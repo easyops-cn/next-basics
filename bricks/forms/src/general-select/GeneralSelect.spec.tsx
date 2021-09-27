@@ -43,7 +43,7 @@ describe("GeneralSelect", () => {
         }
         label="hello"
         placeholder="who"
-        value="world"
+        value="abc"
         suffix={{
           useBrick: {
             brick: "presentational-bricks.brick-value-mapping",
@@ -77,6 +77,11 @@ describe("GeneralSelect", () => {
       status: "failed",
       value: "bcd",
     });
+    wrapper.setProps({
+      hiddenCheckedValueSuffix: true,
+    });
+    wrapper.update();
+    expect(wrapper.find("BrickAsComponent").length).toEqual(1);
   });
 
   it("should trigger change event", () => {

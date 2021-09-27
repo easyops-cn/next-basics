@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { Select } from "antd";
@@ -26,6 +26,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   suffix?: {
     useBrick: UseBrickConf;
   };
+  hiddenCheckedValueSuffix?: boolean;
   suffixStyle?: React.CSSProperties;
   suffixBrick?: UseBrickConf;
   suffixBrickStyle?: React.CSSProperties;
@@ -44,8 +45,9 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     suffixBrick,
     suffixBrickStyle,
     tokenSeparators,
+    hiddenCheckedValueSuffix,
   } = props;
-
+  const [checkedValue, setCheckedValue] = useState(props.value);
   React.useEffect(() => {
     if (suffixBrick) {
       // eslint-disable-next-line no-console
@@ -58,6 +60,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   const handleChange = (newValue: any): void => {
     props.onChange?.(newValue);
     props.onChangeV2?.(props.options.find((item) => item.value === newValue));
+    setCheckedValue(newValue);
   };
 
   const handleDebounceSearch = React.useMemo(() => {
@@ -82,7 +85,8 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     : {
         showSearch: false,
       };
-
+  const showSuffix = (op: GeneralComplexOption) =>
+    hiddenCheckedValueSuffix ? op.value !== checkedValue : true;
   const getOptions = (options: GeneralComplexOption[]) => {
     return options.map((op) => (
       <Select.Option
@@ -94,7 +98,8 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         <div className={style.option}>
           <span className={style.label}>{op.label}</span>
           {suffix
-            ? suffix.useBrick && (
+            ? suffix.useBrick &&
+              showSuffix(op) && (
                 <div className={style.suffixContainer} style={suffixStyle}>
                   <BrickAsComponent useBrick={suffix.useBrick} data={op} />
                 </div>
