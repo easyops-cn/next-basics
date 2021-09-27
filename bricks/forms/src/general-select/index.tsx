@@ -172,6 +172,18 @@ export class GeneralSelectElement extends FormItemElement {
   /**
    * @kind boolean
    * @required false
+   * @default false
+   * @description 是否隐藏当前选中的label项的suffix构件逻辑(`false`默认显示)
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  hiddenCheckedValueSuffix = false;
+
+  /**
+   * @kind boolean
+   * @required false
    * @default true
    * @description 支持搜索
    * @group advanced
@@ -390,6 +402,7 @@ export class GeneralSelectElement extends FormItemElement {
             placeholder={this.placeholder}
             value={this.value}
             required={this.required}
+            hiddenCheckedValueSuffix={this.hiddenCheckedValueSuffix}
             showSearch={this.showSearch}
             disabled={this.disabled}
             message={this.message}
