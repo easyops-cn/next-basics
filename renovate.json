@@ -39,6 +39,7 @@
         "@next-core/editor-bricks-helper",
         "@next-core/fontawesome-library",
         "@next-core/illustrations",
+        "@next-core/pipes",
         "@size-limit/file",
         "@types/classnames",
         "@types/d3",
