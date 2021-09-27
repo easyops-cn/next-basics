@@ -241,6 +241,7 @@ export function LegacyEventsEditor(
           eventList={eventList}
           eventDocInfo={eventDocInfo}
           onClick={handlerBtnClick}
+          enableCustomEvent={true}
         />
       </div>
     </EditorContext.Provider>

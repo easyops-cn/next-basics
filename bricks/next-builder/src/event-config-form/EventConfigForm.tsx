@@ -76,7 +76,7 @@ export function LegacyEventConfigForm(
   );
 
   const debounceHandleChange = useMemo(
-    () => debounce(onValuesChange, 500),
+    () => debounce(onValuesChange, 600),
     [onValuesChange]
   );
 
