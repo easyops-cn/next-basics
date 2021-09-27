@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.195.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.194.0...@next-bricks/forms@1.195.0) (2021-09-27)
+
+
+### Features
+
+* **general-select:** add showCheckedValueSuffix ([966b9cf](https://github.com/easyops-cn/next-basics/commit/966b9cf26c6730c30931c4d5b1e2d47b7e3dac40))
+
+
+
+
+
 # [1.194.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.193.0...@next-bricks/forms@1.194.0) (2021-09-26)
 
 
