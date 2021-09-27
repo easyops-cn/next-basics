@@ -102,6 +102,7 @@ const locale: Locale = {
   [K.REJECT_LABEL]: "异常处理",
   [K.TRANSFORM_FROM_TOOLTIP]: "使用返回数据的指定字段作为数据源",
   [K.FLOW_API]: "Flow编排",
+  [K.VISUAL_EVENT_ADD_CUSTOM_EVENT_PLACEHOLDER]: "按 Enter 键完成输入",
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]: "前往开发者中心查看",
   [K.LINK_TO_FLOWER_BUILDER]: "前往 FLow 查看编排",
 };
