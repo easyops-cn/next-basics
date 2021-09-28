@@ -43,4 +43,9 @@
   &:hover {
     background-color: var(--theme-blue-background);
   }
+
+  .dropdownBtn {
+    margin: -5px -12px;
+    padding: 5px 12px;
+  }
 }
