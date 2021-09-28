@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.221.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.220.1...@next-bricks/presentational-bricks@1.221.0) (2021-09-28)
+
+
+### Features
+
+* **BrickUser:** add iconMargin prop and change the default margin right from 3px to 8px ([2085a04](https://github.com/easyops-cn/next-basics/commit/2085a04b25d6a7789cd7010bf9ba6dea1f96b282))
+
+
+
+
+
 ## [1.220.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.220.0...@next-bricks/presentational-bricks@1.220.1) (2021-09-26)
 
 

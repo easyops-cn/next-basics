@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.76.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.75.0...@next-bricks/next-builder@1.76.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* refine editor ([b83d972](https://github.com/easyops-cn/next-basics/commit/b83d972c9ae478a4c97dea38b6a269f907eaae1f))
+
+
+### Features
+
+* event-editor support write custom events ([fb573c4](https://github.com/easyops-cn/next-basics/commit/fb573c41b04d3b20d1f3b812eb5fd703bba87348))
+
+
+
+
+
 # [1.75.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.74.0...@next-bricks/next-builder@1.75.0) (2021-09-26)
 
 
