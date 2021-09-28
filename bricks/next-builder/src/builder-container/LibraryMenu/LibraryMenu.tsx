@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "antd";
 import styles from "./LibraryMenu.module.css";
-import sharedStyles from "../shared.module.css";
+import sharedStyles from "../../shared/scrollbar.module.css";
 import { LibraryMenuItem } from "../interfaces";
 import classNames from "classnames";
 
