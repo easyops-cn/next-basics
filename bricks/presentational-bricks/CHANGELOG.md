@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.221.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.221.0...@next-bricks/presentational-bricks@1.221.1) (2021-09-28)
+
+
+### Bug Fixes
+
+* 统分割线bug Closed SERVICE_OBSERVE-538 ([f3cda1f](https://github.com/easyops-cn/next-basics/commit/f3cda1f9a86a2774714bbe7b130639f512fff03c))
+
+
+
+
+
 # [1.221.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.220.1...@next-bricks/presentational-bricks@1.221.0) (2021-09-28)
 
 
