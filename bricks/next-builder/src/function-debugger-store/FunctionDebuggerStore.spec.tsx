@@ -93,7 +93,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onDebugInputChange).toBeCalledWith({
         functionName: "myFunc",
         raw: "[\n  \n]",
-        value: [],
         ok: true,
       });
 
@@ -108,13 +107,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: "[]",
-            value: [],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -150,13 +147,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: "[]",
-            value: [],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -183,7 +178,6 @@ describe("FunctionDebuggerStore", () => {
         functionName: "myFunc",
         ok: true,
         raw: '["treasure"]',
-        value: ["treasure"],
         error: undefined,
         userInput: true,
       });
@@ -201,7 +195,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onDebugOutputChange).toBeCalledWith({
         ok: true,
         raw: '"my"',
-        value: "my",
         error: undefined,
       });
       expectRestHandlersNotBeCalled(restHandlers, "run");
@@ -233,7 +226,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestInputChange).toBeCalledTimes(1);
       expect(onTestInputChange).toBeCalledWith({
         raw: '[\n  "treasure"\n]',
-        value: ["treasure"],
         ok: true,
         error: undefined,
       });
@@ -241,14 +233,12 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestExpectChange).toBeCalledWith({
         ok: true,
         raw: '"my"',
-        value: "my",
         error: undefined,
       });
       expect(onTestReceivedChange).toBeCalledTimes(1);
       expect(onTestReceivedChange).toBeCalledWith({
         ok: true,
         raw: '"my"',
-        value: "my",
         error: undefined,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -285,13 +275,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: "[]",
-            value: [],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -305,13 +293,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -348,13 +334,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: "[]",
-            value: [],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -368,13 +352,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -407,13 +389,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: "[]",
-            value: [],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -427,13 +407,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: false,
@@ -441,7 +419,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testUpdatable: true,
@@ -451,7 +428,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestReceivedChange).toBeCalledWith({
         ok: true,
         raw: '"my treasure"',
-        value: "my treasure",
         error: undefined,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -483,13 +459,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: "[]",
-            value: [],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -503,13 +477,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testMatched: true,
@@ -517,7 +489,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testUpdatable: false,
@@ -527,14 +498,12 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestInputChange).toBeCalledWith({
         ok: true,
         raw: '[\n  "treasure"\n]',
-        value: ["treasure"],
         error: undefined,
       });
       expect(onTestExpectChange).toBeCalledTimes(1);
       expect(onTestExpectChange).toBeCalledWith({
         ok: true,
         raw: '"my treasure"',
-        value: "my treasure",
         error: undefined,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -567,14 +536,12 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: false,
             raw: "[,]",
-            value: undefined,
             error: "SyntaxError: Unexpected token , in JSON at position 1",
             userInput: true,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -588,13 +555,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testMatched: true,
@@ -602,7 +567,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testUpdatable: false,
@@ -612,7 +576,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestInputChange).toBeCalledWith({
         ok: false,
         raw: "[,]",
-        value: undefined,
         error: "SyntaxError: Unexpected token , in JSON at position 1",
         userInput: true,
       });
@@ -639,14 +602,12 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: false,
             raw: "[,]",
-            value: undefined,
             error: "SyntaxError: Unexpected token , in JSON at position 1",
             userInput: true,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: false,
@@ -654,7 +615,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: false,
             raw: undefined,
-            value: undefined,
             error: "SyntaxError: Unexpected token , in JSON at position 1",
           },
           testUpdatable: false,
@@ -665,13 +625,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testMatched: true,
@@ -679,7 +637,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testUpdatable: false,
@@ -689,7 +646,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestReceivedChange).toBeCalledWith({
         ok: false,
         raw: undefined,
-        value: undefined,
         error: "SyntaxError: Unexpected token , in JSON at position 1",
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -718,14 +674,12 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '["pleasure"]',
-            value: ["pleasure"],
             error: undefined,
             userInput: true,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: null,
@@ -739,13 +693,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testMatched: true,
@@ -753,7 +705,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testUpdatable: false,
@@ -763,7 +714,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestInputChange).toBeCalledWith({
         ok: true,
         raw: '["pleasure"]',
-        value: ["pleasure"],
         error: undefined,
         userInput: true,
       });
@@ -795,14 +745,12 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '["pleasure"]',
-            value: ["pleasure"],
             error: undefined,
             userInput: true,
           },
           testExpect: {
             ok: true,
             raw: '"my"',
-            value: "my",
             error: undefined,
           },
           testMatched: false,
@@ -810,7 +758,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: true,
             raw: '"my pleasure"',
-            value: "my pleasure",
             error: undefined,
           },
           testUpdatable: true,
@@ -821,13 +768,11 @@ describe("FunctionDebuggerStore", () => {
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
-            value: ["treasure"],
             error: undefined,
           },
           testExpect: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testMatched: true,
@@ -835,7 +780,6 @@ describe("FunctionDebuggerStore", () => {
           testReceived: {
             ok: true,
             raw: '"my treasure"',
-            value: "my treasure",
             error: undefined,
           },
           testUpdatable: false,
@@ -845,7 +789,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestReceivedChange).toBeCalledWith({
         ok: true,
         raw: '"my pleasure"',
-        value: "my pleasure",
         error: undefined,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -931,7 +874,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onDebugInputChange).toBeCalledWith({
         functionName: "hisFunc",
         raw: "[\n  \n]",
-        value: [],
         ok: true,
       });
       expect(onTestsChange).toBeCalledTimes(1);
@@ -994,7 +936,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onDebugInputChange).toBeCalledWith({
         functionName: "hisFunc",
         raw: "[\n  \n]",
-        value: [],
         ok: true,
         userInput: false,
       });
@@ -1035,7 +976,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onDebugOutputChange).toBeCalledWith({
         ok: false,
         raw: undefined,
-        value: undefined,
         error: "oops",
       });
       expectRestHandlersNotBeCalled(restHandlers, "run which throws");
@@ -1060,7 +1000,6 @@ describe("FunctionDebuggerStore", () => {
       expect(onDebugOutputChange).toBeCalledWith({
         ok: true,
         raw: "undefined",
-        value: undefined,
         error: undefined,
       });
       expectRestHandlersNotBeCalled(restHandlers, "run which returns");
@@ -1100,13 +1039,11 @@ describe("FunctionDebuggerStore", () => {
           testExpect: {
             ok: true,
             raw: "undefined",
-            value: undefined,
             error: undefined,
           },
           testInput: {
             ok: true,
             raw: '["0"]',
-            value: ["0"],
             error: undefined,
           },
           testMatched: null,
@@ -1120,13 +1057,11 @@ describe("FunctionDebuggerStore", () => {
           testExpect: {
             ok: true,
             raw: "undefined",
-            value: undefined,
             error: undefined,
           },
           testInput: {
             ok: true,
             raw: "[-1]",
-            value: [-1],
             error: undefined,
           },
           testMatched: null,

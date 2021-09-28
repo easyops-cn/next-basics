@@ -35,7 +35,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
     } else {
       error = input.error;
     }
-    return { ok, raw, value, error };
+    return { ok, raw, error };
   }
   return {
     registerStoryboardFunctions,

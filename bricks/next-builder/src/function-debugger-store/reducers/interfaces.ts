@@ -4,16 +4,12 @@ export type FunctionDebugger = Omit<
   StoryboardFunctionRegistry,
   "storyboardFunctions"
 > & {
-  run(
-    fn: string,
-    input: SerializableValue<unknown[]>
-  ): DebuggerStateDebugOutput;
+  run(fn: string, input: SerializableValue): DebuggerStateDebugOutput;
 };
 
-export interface SerializableValue<T = unknown> {
+export interface SerializableValue {
   raw: string;
   ok: boolean;
-  value?: T;
   error?: string;
 }
 
@@ -121,7 +117,7 @@ export interface DebuggerStateActiveTab {
   index?: number;
 }
 
-export interface DebuggerStateDebugInput extends SerializableValue<unknown[]> {
+export interface DebuggerStateDebugInput extends SerializableValue {
   functionName: string;
   userInput?: boolean;
 }
@@ -137,7 +133,7 @@ export interface DebuggerStateTestCase extends FunctionTestCase {
   testUpdatable: boolean;
 }
 
-export interface DebuggerStateTestInput extends SerializableValue<unknown[]> {
+export interface DebuggerStateTestInput extends SerializableValue {
   userInput?: boolean;
 }
 

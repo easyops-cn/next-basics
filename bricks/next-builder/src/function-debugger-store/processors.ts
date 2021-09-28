@@ -1,20 +1,16 @@
 import { SerializableValue } from "./reducers/interfaces";
 
-export function processSerializableValue<T = unknown>(
-  input: string
-): SerializableValue<T> {
-  let value: T;
+export function processSerializableValue(input: string): SerializableValue {
   let ok = false;
   let error: string;
   try {
-    value = generalizedJsonParse<T>(input);
+    generalizedJsonParse(input);
     ok = true;
   } catch (e) {
     error = String(e);
   }
   return {
     raw: input,
-    value,
     ok,
     error,
   };

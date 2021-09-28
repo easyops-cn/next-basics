@@ -16,7 +16,6 @@ export const debugInput: Reducer<DebuggerStateDebugInput, DebuggerAction> = (
         : {
             functionName: action.originalFunction.name,
             raw: "[\n  \n]",
-            value: [],
             ok: true,
           };
     case "updateDebugInput": {
