@@ -48,6 +48,7 @@ export interface FunctionDataToSave {
 }
 
 export interface FunctionDebuggerStoreProps {
+  runTestsAutomaticallyTimeout?: number;
   onActiveTabChange?: (activeTab: DebuggerStateActiveTab) => void;
   onOriginalFunctionChange?: (
     originalFunction: DebuggerStateOriginalFunction
@@ -66,6 +67,7 @@ export interface FunctionDebuggerStoreProps {
 
 function LegacyFunctionDebuggerStore(
   {
+    runTestsAutomaticallyTimeout,
     onActiveTabChange,
     onOriginalFunctionChange,
     onFunctionModified,
@@ -156,13 +158,15 @@ function LegacyFunctionDebuggerStore(
   ]);
 
   const runAllTests = useCallback(() => {
-    const outputs = tests.map((test) =>
-      functionDebugger.run(originalFunction.name, test.testInput)
-    );
-    dispatch({
-      type: "allTestsReturn",
-      outputs,
-    });
+    if (tests) {
+      const outputs = tests.map((test) =>
+        functionDebugger.run(originalFunction.name, test.testInput)
+      );
+      dispatch({
+        type: "allTestsReturn",
+        outputs,
+      });
+    }
   }, [functionDebugger, originalFunction, tests]);
 
   const saveDebugAsTest = useCallback(() => {
@@ -260,6 +264,19 @@ function LegacyFunctionDebuggerStore(
       );
     }
   }, [functionDebugger, originalFunction, modifiedFunction]);
+
+  useEffect(
+    () => {
+      // Each time `initFunction` is dispatched, which changes
+      // `originalFunction`, run all tests automatically.
+      // (give a second of break)
+      setTimeout(() => {
+        runAllTests();
+      }, runTestsAutomaticallyTimeout ?? 1000);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [originalFunction]
+  );
 
   const functionModified = !!modifiedFunction?.modified;
   useEffect(() => {

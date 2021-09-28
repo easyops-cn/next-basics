@@ -124,6 +124,10 @@ describe("FunctionDebuggerStore", () => {
       expectRestHandlersNotBeCalled(restHandlers, "initFunction");
     }
 
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
     // "switchTab"
     {
       jest.clearAllMocks();
@@ -154,9 +158,13 @@ describe("FunctionDebuggerStore", () => {
             raw: '"my"',
             error: undefined,
           },
-          testMatched: null,
+          testMatched: true,
           testModified: false,
-          testReceived: null,
+          testReceived: {
+            ok: true,
+            raw: '"my"',
+            error: undefined,
+          },
           testUpdatable: false,
         },
       ]);
@@ -896,6 +904,10 @@ describe("FunctionDebuggerStore", () => {
       }
     }
 
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
     // `initFunction` (repeat "hisFunc" with new source)
     {
       jest.clearAllMocks();
@@ -944,6 +956,10 @@ describe("FunctionDebuggerStore", () => {
 
       expectRestHandlersNotBeCalled(restHandlers, "initFunction 3rd");
     }
+
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
 
     // Switch to debug first.
     act(() => {
@@ -1073,7 +1089,7 @@ describe("FunctionDebuggerStore", () => {
     }
 
     act(() => {
-      storeRef.current.runAllTests();
+      jest.advanceTimersByTime(1000);
     });
     expect(storeRef.current.getFunctionDataToSave()).toEqual({
       error: "There are 2 tests failed!",

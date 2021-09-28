@@ -5,6 +5,7 @@ import {
   event,
   EventEmitter,
   method,
+  property,
   UpdatingElement,
 } from "@next-core/brick-kit";
 import {
@@ -32,6 +33,9 @@ import {
  * @noInheritDoc
  */
 export class FunctionDebuggerStoreElement extends UpdatingElement {
+  @property({ type: Number })
+  runTestsAutomaticallyTimeout: number;
+
   @method()
   updateSource(source: string): void {
     this._storeRef.current.dispatch({
@@ -221,6 +225,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
         <BrickWrapper>
           <FunctionDebuggerStore
             ref={this._storeRef}
+            runTestsAutomaticallyTimeout={this.runTestsAutomaticallyTimeout}
             onActiveTabChange={this._handleActiveTabChange}
             onOriginalFunctionChange={
               this._handleOriginalFunctionChangeEmitterbChange
