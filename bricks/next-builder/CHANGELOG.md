@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.77.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.76.0...@next-bricks/next-builder@1.77.0) (2021-09-28)
+
+
+### Features
+
+* debug storyboard functions ([842f0d3](https://github.com/easyops-cn/next-basics/commit/842f0d39819e0722df85c9686fcd3673a52f64e9))
+
+
+
+
+
 # [1.76.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.75.0...@next-bricks/next-builder@1.76.0) (2021-09-28)
 
 
