@@ -140,9 +140,9 @@ export class BrickQuickEntriesElement extends UpdatingElement {
    * @description 是否显示分隔线
    */
   @property({
-    type: Boolean,
+    attribute: false,
   })
-  divider: boolean;
+  divider = true;
 
   /**
    * @required false
