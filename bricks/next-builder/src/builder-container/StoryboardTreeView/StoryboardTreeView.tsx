@@ -13,7 +13,7 @@ import { SearchComponent } from "../SearchComponent/SearchComponent";
 import { deepMatch } from "../utils";
 
 import styles from "./StoryboardTreeView.module.css";
-import sharedStyles from "../shared.module.css";
+import sharedStyles from "../../shared/scrollbar.module.css";
 
 export function StoryboardTreeView(): React.ReactElement {
   const { nodes } = useBuilderData();

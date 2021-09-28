@@ -13,7 +13,7 @@ import { filterBricksWithEvents } from "./filterBricksWithEvents";
 import { NS_NEXT_BUILDER, K } from "../../i18n/constants";
 
 import styles from "./EventsView.module.css";
-import sharedStyles from "../shared.module.css";
+import sharedStyles from "../../shared/scrollbar.module.css";
 
 export function EventsView(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
