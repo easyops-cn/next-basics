@@ -28,6 +28,7 @@ interface GeneralModalProps {
   fullscreen?: boolean;
   okDisabled?: boolean;
   confirmLoading?: boolean;
+  onAfterClose?: () => void;
 }
 
 export function GeneralModal(props: GeneralModalProps): React.ReactElement {
@@ -42,6 +43,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     fullscreen,
     okDisabled,
     confirmLoading,
+    onAfterClose,
   } = props;
   const modalHeaderRef = useRef<HTMLDivElement>();
   const modalFooterRef = useRef<HTMLDivElement>();
@@ -147,6 +149,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
       bodyStyle={fullscreen ? { height: bodyHeight } : undefined}
       wrapClassName={classnames({ fullscreen })}
       {...configProps}
+      afterClose={onAfterClose}
       cancelButtonProps={{ type: "link", ...configProps?.cancelButtonProps }}
       visible={visible}
     >

@@ -243,6 +243,10 @@ export class GeneralModalElement extends UpdatingElement {
     this._render();
   }
 
+  handleAfterClose = (): void => {
+    this.afterCloseModel.emit();
+  };
+
   // istanbul ignore next
   listenOnClose() {
     this.addEventListener("click", (e) => {
@@ -337,6 +341,7 @@ export class GeneralModalElement extends UpdatingElement {
             fullscreen={this.fullscreen}
             okDisabled={this.okDisabled}
             confirmLoading={this.confirmLoading}
+            onAfterClose={this.handleAfterClose}
           />
         </BrickWrapper>,
         this._mountPoint
@@ -381,6 +386,12 @@ export class GeneralModalElement extends UpdatingElement {
    * @description 关闭 modal 时发出该事件
    */
   @event({ type: "modal.close" }) closeModal: EventEmitter<Record<string, any>>;
+
+  /**
+   * @detail -
+   * @description 当 modal 完全关闭后发出该事件
+   */
+  @event({ type: "model.after.close" }) afterCloseModel: EventEmitter;
 
   /**
    * @detail `dataSource`
