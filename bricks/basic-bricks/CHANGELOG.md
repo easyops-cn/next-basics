@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.148.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.147.1...@next-bricks/basic-bricks@1.148.0) (2021-09-29)
+
+
+### Features
+
+* general modal support after close event ([5501ca5](https://github.com/easyops-cn/next-basics/commit/5501ca5e45d0cf561e1236ec910e48826eca1f56))
+
+
+
+
+
 ## [1.147.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.147.0...@next-bricks/basic-bricks@1.147.1) (2021-09-28)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
