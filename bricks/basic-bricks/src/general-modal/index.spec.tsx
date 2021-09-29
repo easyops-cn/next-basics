@@ -39,17 +39,24 @@ describe("basic-bricks.general-modal", () => {
     expect(element.isVisible).toBe(false);
     expect(sypOnDispatchEvent).not.toBeCalled();
     element.open();
-    expect(sypOnDispatchEvent).toBeCalledWith(
+    expect(sypOnDispatchEvent.mock.calls[0][0]).toEqual(
       expect.objectContaining({
         type: "modal.open",
         detail: element.dataSource,
       })
     );
     element.close();
-    expect(sypOnDispatchEvent).toBeCalledWith(
+    expect(sypOnDispatchEvent.mock.calls[1][0]).toEqual(
       expect.objectContaining({
         type: "modal.close",
         detail: element.dataSource,
+      })
+    );
+
+    element.handleAfterClose();
+    expect(sypOnDispatchEvent.mock.calls[2][0]).toEqual(
+      expect.objectContaining({
+        type: "model.after.close",
       })
     );
 
