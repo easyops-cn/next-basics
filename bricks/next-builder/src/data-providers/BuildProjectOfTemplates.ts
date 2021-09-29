@@ -10,7 +10,11 @@ import {
   scanBricksInStoryboard,
   scanProcessorsInStoryboard,
 } from "@next-core/brick-utils";
-import { InstanceGraphApi_traverseGraphV2 } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceGraphApi_traverseGraphV2,
+  InstanceApi_postSearch,
+} from "@next-sdk/cmdb-sdk";
+import { ObjectStoreApi_putObject } from "@next-sdk/object-store-sdk";
 import { paramCase } from "change-case";
 import { uniq } from "lodash";
 import { buildBricks } from "../shared/storyboard/buildStoryboard";
@@ -18,6 +22,8 @@ import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
 import { isObject } from "@next-core/brick-utils";
 import { isEmpty } from "lodash";
+import { imgUrlToFile } from "./utils/imgUrlToFile";
+// import { message } from 'antd';
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
@@ -109,11 +115,24 @@ export async function BuildProjectOfTemplates({
     select_fields: ["*"],
   });
 
+  const imagesReq = InstanceApi_postSearch("MICRO_APP_RESOURCE_IMAGE", {
+    fields: {
+      form: true,
+      name: true,
+      url: true,
+    },
+    page_size: 3000,
+    query: {
+      "project.instanceId": projectId,
+      name: {
+        $like: "%%",
+      },
+    },
+  });
+
   // Make parallel requests.
-  const [templatesResponse, snippetsResponse] = await Promise.all([
-    templatesGraphReq,
-    snippetsGraphReq,
-  ]);
+  const [templatesResponse, snippetsResponse, imagesResponse] =
+    await Promise.all([templatesGraphReq, snippetsGraphReq, imagesReq]);
 
   const templateTreeList = pipes.graphTree(
     templatesResponse as pipes.GraphData,
@@ -240,7 +259,43 @@ export async function BuildProjectOfTemplates({
     createStories(templateItem)
   );
 
-  const indexJsContent = getBrickPackageIndexJs(templates);
+  let indexJsContent = getBrickPackageIndexJs(templates);
+
+  if (imagesResponse.list.length) {
+    const imagesTransformList: Array<Promise<File>> = [];
+
+    imagesResponse.list.forEach((file) =>
+      imagesTransformList.push(imgUrlToFile(file.url, file.name))
+    );
+
+    const imagesFileList = await Promise.all(imagesTransformList);
+
+    const uploadFileList: Array<Promise<any>> = [];
+
+    imagesFileList.forEach((file) => {
+      const [name, suffix] = file.name.split(".");
+      const reg = new RegExp(
+        /*eslint-disable no-useless-escape*/
+        `\/next\/api\/gateway\/object_store\.object_store\.GetObject\/[\\w|.|\\/|-]+${name}[\\w]+.${suffix}`,
+        "g"
+      );
+      indexJsContent = indexJsContent.replace(reg, `xxx/${file.name}`);
+      uploadFileList.push(
+        ObjectStoreApi_putObject(projectId, {
+          objectName: file.name,
+          file,
+        })
+      );
+    });
+
+    // try {
+    //   const uploadResponse = await Promise.all(uploadFileList);
+    //   console.log('上传成功');
+    // } catch {
+    //   // 上传失败
+    //   message.error("上传失败")
+    // }
+  }
 
   const files = [
     {
@@ -270,6 +325,13 @@ export async function BuildProjectOfTemplates({
     });
   }
 
+  // if (imagesFileList.length) {
+  //   imagesFileList.forEach((file) => files.push({
+  //     path: `dist/assets/${file.name}`,
+  //     content: file,
+  //   }))
+  // }
+
   const storyboard = {
     meta: {
       customTemplates: templates,
@@ -294,3 +356,18 @@ customElements.define(
   "next-builder.provider-build-project-of-templates",
   createProviderClass(BuildProjectOfTemplates)
 );
+
+// var str = '[{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/birthday_yellow1632810302868180195.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/thinking1632810308992778245.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/birthday_blue1632814315046955753.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/birthday_orange1632814329504090958.png"}]'
+
+// var fileList = ['viewpoint.png', 'blue-bg.png', 'birthday_yellow.png', 'birthday_blue.png', 'birthday_orange.png', 'thinking.png']
+
+// function change(str) {
+//   fileList.forEach(file => {
+//       const [name, suffix] = file.split('.');
+//       const reg = new RegExp(`\/next\/api\/gateway\/object_store\.object_store\.GetObject\/[\\w|.|\\/|-]+${name}[\\d]+.${suffix}`);
+//       str = str.replace(reg, file);
+//   })
+//   return str;
+// }
+
+// change(str)
