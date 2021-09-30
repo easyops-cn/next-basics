@@ -16,6 +16,7 @@ import {
   DebuggerStateActiveTab,
   DebuggerStateDebugInput,
   DebuggerStateDebugOutput,
+  DebuggerStateFunctionCoverageWhichMaybeFailed,
   DebuggerStateOriginalFunction,
   DebuggerStateTestCase,
   DebuggerStateTestExpect,
@@ -63,6 +64,9 @@ export interface FunctionDebuggerStoreProps {
   onTestMatchedChange?: (matched: boolean | null) => void;
   onTestUpdatableChange?: (updatable: boolean) => void;
   onSomethingModified?: (modified: boolean) => void;
+  onCoverageChange?: (
+    coverage: DebuggerStateFunctionCoverageWhichMaybeFailed
+  ) => void;
 }
 
 function LegacyFunctionDebuggerStore(
@@ -80,6 +84,7 @@ function LegacyFunctionDebuggerStore(
     onTestMatchedChange,
     onTestUpdatableChange,
     onSomethingModified,
+    onCoverageChange,
   }: FunctionDebuggerStoreProps,
   ref: Ref<DebuggerStore>
 ): React.ReactElement {
@@ -94,6 +99,7 @@ function LegacyFunctionDebuggerStore(
       debugInput,
       debugOutput,
       tests,
+      coverage,
     },
     dispatch,
   ] = useReducer(rootReducer, {});
@@ -118,14 +124,23 @@ function LegacyFunctionDebuggerStore(
     [activeTab, emptyTest, tests]
   );
 
+  const autoTestsTimeoutRef = useRef<number>();
+
   const initFunction = useCallback(
     (data: Omit<DebuggerActionInitFunction, "type">) => {
+      if (autoTestsTimeoutRef.current) {
+        clearTimeout(autoTestsTimeoutRef.current);
+      }
+      const originalFunction = data.functions.find(
+        (fn) => fn.name === data.functionName
+      );
       dispatch({
         ...data,
         type: "initFunction",
-        originalFunction:
-          data.functions.find((fn) => fn.name === data.functionName) ||
-          data.initialFunction,
+        functions: originalFunction
+          ? data.functions
+          : data.functions.concat(data.initialFunction),
+        originalFunction: originalFunction || data.initialFunction,
       });
     },
     []
@@ -159,12 +174,17 @@ function LegacyFunctionDebuggerStore(
 
   const runAllTests = useCallback(() => {
     if (tests) {
+      functionDebugger.resetCoverage(originalFunction.name);
       const outputs = tests.map((test) =>
         functionDebugger.run(originalFunction.name, test.testInput)
       );
       dispatch({
         type: "allTestsReturn",
         outputs,
+      });
+      dispatch({
+        type: "updateCoverage",
+        coverage: functionDebugger.getCoverage(originalFunction.name),
       });
     }
   }, [functionDebugger, originalFunction, tests]);
@@ -267,12 +287,16 @@ function LegacyFunctionDebuggerStore(
 
   useEffect(
     () => {
-      // Each time `initFunction` is dispatched, which changes
-      // `originalFunction`, run all tests automatically.
-      // (give a second of break)
-      setTimeout(() => {
-        runAllTests();
-      }, runTestsAutomaticallyTimeout ?? 1000);
+      if (initialized.current) {
+        // Each time `initFunction` is dispatched, which changes
+        // `originalFunction`, run all tests automatically.
+        // (give a second of break)
+        if (runTestsAutomaticallyTimeout > 0) {
+          autoTestsTimeoutRef.current = setTimeout(() => {
+            runAllTests();
+          }, runTestsAutomaticallyTimeout) as unknown as number;
+        }
+      }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [originalFunction]
@@ -354,6 +378,12 @@ function LegacyFunctionDebuggerStore(
       onSomethingModified?.(somethingModified);
     }
   }, [somethingModified, onSomethingModified]);
+
+  useEffect(() => {
+    if (initialized.current) {
+      onCoverageChange?.(coverage);
+    }
+  }, [coverage, onCoverageChange]);
 
   useEffect(() => {
     initialized.current = true;

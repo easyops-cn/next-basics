@@ -18,6 +18,7 @@ import {
   DebuggerStateActiveTab,
   DebuggerStateDebugInput,
   DebuggerStateDebugOutput,
+  DebuggerStateFunctionCoverageWhichMaybeFailed,
   DebuggerStateOriginalFunction,
   DebuggerStateTestCase,
   DebuggerStateTestExpect,
@@ -33,6 +34,10 @@ import {
  * @noInheritDoc
  */
 export class FunctionDebuggerStoreElement extends UpdatingElement {
+  /**
+   * @kind number
+   * @description Run tests automatically in milliseconds.
+   */
   @property({ type: Number })
   runTestsAutomaticallyTimeout: number;
 
@@ -143,6 +148,9 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   @event({ type: "something.modified" })
   private _somethingModifiedEmitter: EventEmitter<boolean>;
 
+  @event({ type: "coverage.change" })
+  private _coverageChangeEmitter: EventEmitter<DebuggerStateFunctionCoverageWhichMaybeFailed>;
+
   private _handleActiveTabChange = (
     activeTab: DebuggerStateActiveTab
   ): void => {
@@ -203,6 +211,10 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
     this._somethingModifiedEmitter.emit(modified);
   };
 
+  private _handleCoverageChange = (coverage: any): void => {
+    this._coverageChangeEmitter.emit(coverage);
+  };
+
   private _storeRef = createRef<DebuggerStore>();
 
   connectedCallback(): void {
@@ -240,6 +252,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
             onTestMatchedChange={this._handleTestMatchedChange}
             onTestUpdatableChange={this._handleTestUpdatableChange}
             onSomethingModified={this._handleSomethingModified}
+            onCoverageChange={this._handleCoverageChange}
           />
         </BrickWrapper>,
         this

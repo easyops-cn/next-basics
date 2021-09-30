@@ -7,6 +7,7 @@ import { activeTab } from "./activeTab";
 import { debugInput } from "./debugInput";
 import { debugOutput } from "./debugOutput";
 import { tests } from "./tests";
+import { coverage } from "./coverage";
 
 type ReducersMapObject<S, A> = {
   [K in keyof S]: Reducer<S[K], A>;
@@ -32,4 +33,5 @@ export const rootReducer = combineReducers<DebuggerState, DebuggerAction>({
   debugInput,
   debugOutput,
   tests,
+  coverage,
 });
