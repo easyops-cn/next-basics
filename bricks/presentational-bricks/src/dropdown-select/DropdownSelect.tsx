@@ -25,6 +25,8 @@ interface DropdownSelectProps {
   buttonIcon?: any;
   multipleLabel?: string;
   dropdownButtonType?: "default" | "shape";
+  disabled?: boolean;
+  heightFix?: boolean;
 }
 
 export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
@@ -83,7 +85,11 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
   }, [selectedItem, props.label, optionTitle]);
   const menu = useMemo(
     () => (
-      <Menu>
+      <Menu
+        style={
+          props.heightFix ? { maxHeight: "300px", overflow: "scroll" } : {}
+        }
+      >
         {options
           ? options.map((option) => (
               <Menu.Item
@@ -173,11 +179,11 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     props.selectedKeys,
     props.defaultSelectedKeys,
   ]);
-
   return (
     <Dropdown
       overlay={props.multipleSelect ? multiSelectMenu : menu}
       trigger={["click"]}
+      disabled={props.disabled}
       visible={visible}
       onVisibleChange={(visible) => {
         setVisible(visible);
@@ -188,7 +194,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
           className={styles.dropdownTrigger}
           style={{
             fontSize: "14px",
-            backgroundColor: "#F5F5F5",
+            backgroundColor: props.disabled ? "#E5E5E5" : "#F5F5F5",
             borderRadius: "4px",
             padding: "3px 10px",
           }}

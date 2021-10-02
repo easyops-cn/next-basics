@@ -124,6 +124,13 @@ describe("DropdownSelect", () => {
         dropdownButtonType={"shape"}
         value={value}
         onChange={mockOnChange}
+        disabled={true}
+        heightFix={true}
+        buttonIcon={{
+          lib: "antd",
+          icon: "alert",
+          theme: "twoTone",
+        }}
       />
     );
     const dropdownTrigger = getByTestId("dropdown-trigger-multiple");
