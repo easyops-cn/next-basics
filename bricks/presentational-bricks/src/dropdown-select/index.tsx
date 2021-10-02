@@ -126,6 +126,22 @@ export class DropdownSelectElement extends UpdatingElement {
   @property({ type: Boolean }) multipleSelect?: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否禁用
+   */
+  @property({ type: Boolean }) disabled?: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 单选时，下拉内容区高度是否固定
+   */
+  @property({ type: Boolean }) heightFix?: boolean;
+
+  /**
    * @kind MenuIcon
    * @required false
    * @default -
@@ -196,6 +212,8 @@ export class DropdownSelectElement extends UpdatingElement {
             buttonIcon={this.buttonIcon}
             multipleLabel={this.multipleLabel}
             dropdownButtonType={this.dropdownButtonType}
+            disabled={this.disabled}
+            heightFix={this.heightFix}
           />
         </BrickWrapper>,
         this
