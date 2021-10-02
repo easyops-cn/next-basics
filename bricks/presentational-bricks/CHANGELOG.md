@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.221.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.221.1...@next-bricks/presentational-bricks@1.221.2) (2021-10-02)
+
+
+### Bug Fixes
+
+* 下拉菜单添加禁用属性,内容高度控制属性 Closed SERVICE_OBSERVE-407 ([4fae6a0](https://github.com/easyops-cn/next-basics/commit/4fae6a06e2b138f0d428870be75b65c89c2e30db))
+
+
+
+
+
 ## [1.221.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.221.0...@next-bricks/presentational-bricks@1.221.1) (2021-09-28)
 
 
