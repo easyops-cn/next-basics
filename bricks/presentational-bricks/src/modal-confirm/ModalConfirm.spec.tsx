@@ -76,25 +76,25 @@ describe("ModalConfirm", () => {
     wrapper.setProps({ visible: false });
     wrapper.setProps({ visible: true });
 
-    // const modalProps =
-    //   spyOnModalConfirm.mock.calls[spyOnModalConfirm.mock.calls.length - 1][0];
-    // expect(modalProps.okButtonProps.disabled).toBe(true);
+    const modalProps =
+      spyOnModalConfirm.mock.calls[spyOnModalConfirm.mock.calls.length - 1][0];
+    expect(modalProps.okButtonProps.disabled).toBe(true);
 
-    // const contentWrapper = mount(modalProps.content as React.ReactElement);
-    // const inputNode = contentWrapper.find(Input);
-    // inputNode.invoke("onChange")({ target: { value: "foo" } });
-    // expect(mockUpdate).toBeCalledWith(
-    //   expect.objectContaining({
-    //     okButtonProps: expect.objectContaining({ disabled: false }),
-    //   })
-    // );
-    // mockUpdate.mockClear();
-    // inputNode.invoke("onChange")({ target: { value: "fo" } });
-    // expect(mockUpdate).toBeCalledWith(
-    //   expect.objectContaining({
-    //     okButtonProps: expect.objectContaining({ disabled: true }),
-    //   })
-    // );
+    const contentWrapper = mount(modalProps.content as React.ReactElement);
+    const inputNode = contentWrapper.find(Input);
+    inputNode.invoke("onChange")({ target: { value: "foo" } });
+    expect(mockUpdate).toBeCalledWith(
+      expect.objectContaining({
+        okButtonProps: expect.objectContaining({ disabled: false }),
+      })
+    );
+    mockUpdate.mockClear();
+    inputNode.invoke("onChange")({ target: { value: "fo" } });
+    expect(mockUpdate).toBeCalledWith(
+      expect.objectContaining({
+        okButtonProps: expect.objectContaining({ disabled: true }),
+      })
+    );
   });
   it("contentBrick should work", () => {
     const contentBrick = {

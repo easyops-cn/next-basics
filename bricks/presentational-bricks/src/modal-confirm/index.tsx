@@ -276,6 +276,7 @@ export class ModalConfirmElement extends UpdatingElement {
       "dataSource",
       "okButtonProps",
       "cancelButtonProps",
+      "contentBrick",
     ]);
 
     const okButtonProps = props.okButtonProps;
