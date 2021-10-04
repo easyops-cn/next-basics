@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.222.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.0...@next-bricks/presentational-bricks@1.222.1) (2021-10-04)
+
+
+### Bug Fixes
+
+* **modal-confirm:** fix contentBrick bug ([9c63cb1](https://github.com/easyops-cn/next-basics/commit/9c63cb17061e53d712a7f68fc94ff73c3070d33c))
+
+
+
+
+
 # [1.222.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.221.2...@next-bricks/presentational-bricks@1.222.0) (2021-10-03)
 
 
