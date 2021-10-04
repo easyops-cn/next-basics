@@ -100,12 +100,13 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
     ),
     [inputValue, expect]
   );
-  const brickContent = useMemo(
-    () => (
-      <BrickAsComponent useBrick={contentBrick?.useBrick} data={dataSource} />
-    ),
-    [contentBrick, dataSource]
-  );
+  const brickContent = useMemo(() => {
+    return (
+      contentBrick?.useBrick && (
+        <BrickAsComponent useBrick={contentBrick?.useBrick} data={dataSource} />
+      )
+    );
+  }, [contentBrick, dataSource]);
   const okText = isDelete ? t(K.DELETE) : _okText;
   const [modal, setModal] = useState(null);
 
@@ -137,7 +138,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
       setModal(
         Modal[type]({
           title: title,
-          content: brickContent || modalContent,
+          content: contentBrick?.useBrick ? brickContent : modalContent,
           okText: okText,
           cancelText: cancelText,
           onOk: onOk,
