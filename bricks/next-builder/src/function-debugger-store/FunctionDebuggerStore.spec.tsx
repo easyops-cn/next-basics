@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 import { mount } from "enzyme";
-import { DebuggerStore, FunctionDebuggerStore } from "./FunctionDebuggerStore";
 import { act } from "react-dom/test-utils";
+import { DebuggerStore, FunctionDebuggerStore } from "./FunctionDebuggerStore";
 
 describe("FunctionDebuggerStore", () => {
   it("should work", () => {
@@ -19,9 +19,14 @@ describe("FunctionDebuggerStore", () => {
       onTestMatchedChange: jest.fn(),
       onTestUpdatableChange: jest.fn(),
       onSomethingModified: jest.fn(),
+      onCoverageChange: jest.fn(),
     };
     const wrapper = mount(
-      <FunctionDebuggerStore ref={storeRef} {...handlers} />
+      <FunctionDebuggerStore
+        ref={storeRef}
+        {...handlers}
+        runTestsAutomaticallyTimeout={1000}
+      />
     );
     const expectRestHandlersNotBeCalled = (
       restHandlers: Partial<typeof handlers>,
@@ -124,6 +129,45 @@ describe("FunctionDebuggerStore", () => {
       expectRestHandlersNotBeCalled(restHandlers, "initFunction");
     }
 
+    {
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      expect(handlers.onCoverageChange).toBeCalledTimes(1);
+      expect(handlers.onCoverageChange).toBeCalledWith({
+        branches: {
+          covered: 0,
+          total: 0,
+          uncovered: [],
+        },
+        functions: {
+          covered: 1,
+          total: 1,
+          uncovered: [],
+        },
+        lines: {
+          counts: new Map([
+            [
+              1,
+              {
+                count: 1,
+                startColumn: 21,
+                endColumn: 32,
+                isWholeLine: false,
+              },
+            ],
+          ]),
+          covered: 1,
+          total: 1,
+        },
+        statements: {
+          covered: 1,
+          total: 1,
+          uncovered: [],
+        },
+      });
+    }
+
     // "switchTab"
     {
       jest.clearAllMocks();
@@ -154,9 +198,13 @@ describe("FunctionDebuggerStore", () => {
             raw: '"my"',
             error: undefined,
           },
-          testMatched: null,
+          testMatched: true,
           testModified: false,
-          testReceived: null,
+          testReceived: {
+            ok: true,
+            raw: '"my"',
+            error: undefined,
+          },
           testUpdatable: false,
         },
       ]);
@@ -263,6 +311,7 @@ describe("FunctionDebuggerStore", () => {
         onDebugOutputChange,
         onTestReceivedChange,
         onTestMatchedChange,
+        onCoverageChange,
         ...restHandlers
       } = handlers;
       expect(onFunctionModified).toBeCalledTimes(1);
@@ -312,6 +361,8 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestReceivedChange).toBeCalledWith(null);
       expect(onTestMatchedChange).toBeCalledTimes(1);
       expect(onTestMatchedChange).toBeCalledWith(null);
+      expect(onCoverageChange).toBeCalledTimes(1);
+      expect(onCoverageChange).toBeCalledWith(undefined);
       expectRestHandlersNotBeCalled(restHandlers, "updateTypescript");
     }
 
@@ -510,7 +561,7 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestMatchedChange).toBeCalledWith(true);
       expect(onTestUpdatableChange).toBeCalledTimes(1);
       expect(onTestUpdatableChange).toBeCalledWith(false);
-      expectRestHandlersNotBeCalled(restHandlers, "run");
+      expectRestHandlersNotBeCalled(restHandlers, "saveTest");
     }
 
     // Switch tab to the first test case.
@@ -579,7 +630,10 @@ describe("FunctionDebuggerStore", () => {
         error: "SyntaxError: Unexpected token , in JSON at position 1",
         userInput: true,
       });
-      expectRestHandlersNotBeCalled(restHandlers, "run");
+      expectRestHandlersNotBeCalled(
+        restHandlers,
+        "updateTestInput in invalid JSON"
+      );
     }
 
     // "run" against invalid input
@@ -735,6 +789,7 @@ describe("FunctionDebuggerStore", () => {
         onTestReceivedChange,
         onTestMatchedChange,
         onTestUpdatableChange,
+        onCoverageChange,
         ...restHandlers
       } = handlers;
       expect(onTestsChange).toBeCalledTimes(1);
@@ -795,7 +850,40 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestMatchedChange).toBeCalledWith(false);
       expect(onTestUpdatableChange).toBeCalledTimes(1);
       expect(onTestUpdatableChange).toBeCalledWith(true);
-      expectRestHandlersNotBeCalled(restHandlers, "run");
+      expect(onCoverageChange).toBeCalledTimes(1);
+      expect(onCoverageChange).toBeCalledWith({
+        branches: {
+          covered: 0,
+          total: 0,
+          uncovered: [],
+        },
+        functions: {
+          covered: 1,
+          total: 1,
+          uncovered: [],
+        },
+        lines: {
+          counts: new Map([
+            [
+              1,
+              {
+                count: 2,
+                startColumn: 42,
+                endColumn: 62,
+                isWholeLine: false,
+              },
+            ],
+          ]),
+          covered: 1,
+          total: 1,
+        },
+        statements: {
+          covered: 1,
+          total: 1,
+          uncovered: [],
+        },
+      });
+      expectRestHandlersNotBeCalled(restHandlers, "runAllTests");
     }
 
     expect(storeRef.current.getFunctionDataToSave()).toEqual({
@@ -856,6 +944,7 @@ describe("FunctionDebuggerStore", () => {
         onTestReceivedChange,
         onTestMatchedChange,
         onSomethingModified,
+        onCoverageChange,
         ...restHandlers
       } = handlers;
 
@@ -882,6 +971,8 @@ describe("FunctionDebuggerStore", () => {
       expect(onFunctionModified).toBeCalledWith(false);
       expect(onSomethingModified).toBeCalledTimes(1);
       expect(onSomethingModified).toBeCalledWith(false);
+      expect(onCoverageChange).toBeCalledTimes(1);
+      expect(onCoverageChange).toBeCalledWith(undefined);
 
       expectRestHandlersNotBeCalled(restHandlers, "initFunction 2nd");
 
@@ -895,6 +986,10 @@ describe("FunctionDebuggerStore", () => {
         expect(handler).toBeCalledWith(null);
       }
     }
+
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
 
     // `initFunction` (repeat "hisFunc" with new source)
     {
@@ -918,6 +1013,7 @@ describe("FunctionDebuggerStore", () => {
         onOriginalFunctionChange,
         onDebugInputChange,
         onTestsChange,
+        onCoverageChange,
         ...restHandlers
       } = handlers;
 
@@ -941,9 +1037,15 @@ describe("FunctionDebuggerStore", () => {
       });
       expect(onTestsChange).toBeCalledTimes(1);
       expect(onTestsChange).toBeCalledWith([]);
+      expect(onCoverageChange).toBeCalledTimes(1);
+      expect(onCoverageChange).toBeCalledWith(undefined);
 
       expectRestHandlersNotBeCalled(restHandlers, "initFunction 3rd");
     }
+
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
 
     // Switch to debug first.
     act(() => {
@@ -1073,10 +1175,209 @@ describe("FunctionDebuggerStore", () => {
     }
 
     act(() => {
-      storeRef.current.runAllTests();
+      jest.advanceTimersByTime(1000);
     });
     expect(storeRef.current.getFunctionDataToSave()).toEqual({
       error: "There are 2 tests failed!",
+    });
+
+    wrapper.unmount();
+  });
+
+  it("should collect failed coverage", () => {
+    const storeRef = createRef<DebuggerStore>();
+    const onCoverageChange = jest.fn();
+    const wrapper = mount(
+      <FunctionDebuggerStore
+        ref={storeRef}
+        onCoverageChange={onCoverageChange}
+      />
+    );
+    act(() => {
+      storeRef.current.initFunction({
+        functionName: "myFunc",
+        functions: [
+          {
+            name: "myFunc",
+            source: `
+              function myFunc() {
+                =>
+              }
+            `,
+            tests: [
+              {
+                input: "[]",
+                output: "undefined",
+              },
+            ],
+          },
+        ],
+        initialFunction: null,
+      });
+    });
+    act(() => {
+      storeRef.current.runAllTests();
+    });
+    expect(onCoverageChange).toBeCalledTimes(1);
+    expect(onCoverageChange).toBeCalledWith({
+      status: "failed",
+      error: "SyntaxError: Unexpected token (3:16)",
+    });
+    wrapper.unmount();
+  });
+
+  it("should collect coverage", () => {
+    const storeRef = createRef<DebuggerStore>();
+    const onCoverageChange = jest.fn();
+    const wrapper = mount(
+      <FunctionDebuggerStore
+        ref={storeRef}
+        onCoverageChange={onCoverageChange}
+      />
+    );
+    act(() => {
+      storeRef.current.initFunction({
+        functionName: "myFunc",
+        functions: [
+          {
+            name: "myFunc",
+            source: `
+              function myFunc(type) {
+                let a, b;
+                const z = 'Z';
+                switch (type) {
+                  case "ArrowFunctionExpression":
+                    a = () => 1;
+                    b = () => 2;
+                    a();
+                    break;
+                  case "AssignmentPattern":
+                    [a = 2, b = 3] = [4];
+                    break;
+                  case "ConditionalExpression":
+                    a = true ? 1 : 0;
+                    b = false ? 0 : 1;
+                    break;
+                  case "IfStatement":
+                    if (true) {
+                      a = 1;
+                    }
+                    if (false) {
+                      b = 1;
+                    }
+                    break;
+                  case "LogicalExpression":
+                    a = true && 1;
+                    b = true || 2;
+                    break;
+                  case "TryStatement":
+                    try {
+                      ;
+                    } catch (e) {
+                      a = 2;
+                    }
+                    try {
+                      throw 'oops';
+                    } catch (e) {
+                      b = 3;
+                    }
+                    break;
+                  case "NotExisted":
+                    return;
+                }
+              }
+            `,
+            typescript: false,
+            tests: [
+              {
+                input: '["ArrowFunctionExpression"]',
+                output: "undefined",
+              },
+              {
+                input: '["AssignmentPattern"]',
+                output: "undefined",
+              },
+              {
+                input: '["ConditionalExpression"]',
+                output: "undefined",
+              },
+              {
+                input: '["IfStatement"]',
+                output: "undefined",
+              },
+              {
+                input: '["LogicalExpression"]',
+                output: "undefined",
+              },
+              {
+                input: '["TryStatement"]',
+                output: "undefined",
+              },
+            ],
+          },
+        ],
+        initialFunction: null,
+      });
+    });
+    act(() => {
+      storeRef.current.runAllTests();
+    });
+    expect(onCoverageChange).toBeCalledTimes(1);
+    expect(onCoverageChange).toHaveBeenNthCalledWith(1, {
+      statements: expect.objectContaining({
+        covered: 24,
+        total: 28,
+      }),
+      branches: expect.objectContaining({
+        covered: 13,
+        total: 21,
+      }),
+      functions: expect.objectContaining({
+        covered: 2,
+        total: 3,
+      }),
+      lines: expect.objectContaining({
+        covered: 23,
+        total: 26,
+      }),
+    });
+
+    act(() => {
+      storeRef.current.dispatch({
+        type: "switchTab",
+        tab: "test:2",
+      });
+    });
+    act(() => {
+      storeRef.current.updateTestInput('["NotExisted"]');
+    });
+    act(() => {
+      storeRef.current.run();
+    });
+    act(() => {
+      storeRef.current.saveTest();
+    });
+    act(() => {
+      storeRef.current.runAllTests();
+    });
+    expect(onCoverageChange).toBeCalledTimes(2);
+    expect(onCoverageChange).toHaveBeenNthCalledWith(2, {
+      statements: expect.objectContaining({
+        covered: 22,
+        total: 28,
+      }),
+      branches: expect.objectContaining({
+        covered: 11,
+        total: 21,
+      }),
+      functions: expect.objectContaining({
+        covered: 2,
+        total: 3,
+      }),
+      lines: expect.objectContaining({
+        covered: 21,
+        total: 26,
+      }),
     });
 
     wrapper.unmount();

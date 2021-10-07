@@ -1,4 +1,5 @@
 import { StoryboardFunctionRegistry } from "@next-core/brick-kit";
+import { EstreeNode } from "@next-core/brick-utils";
 
 export type FunctionDebugger = Omit<
   StoryboardFunctionRegistry,
@@ -19,6 +20,24 @@ export interface FunctionTestCase {
   output: string;
 }
 
+export interface FunctionCoverage {
+  status?: "ok";
+  statements: Map<EstreeNode, number>;
+  branches: Map<EstreeNode, Map<FunctionCoverageBranchName, number> | number>;
+  functions: Map<EstreeNode, number>;
+}
+
+export type FunctionCoverageBranchName = "if" | "else";
+
+export type FunctionCoverageWhichMaybeFailed =
+  | FunctionCoverage
+  | FunctionCoverageFailed;
+
+export interface FunctionCoverageFailed {
+  status: "failed";
+  error: string;
+}
+
 // Actions:
 
 export type DebuggerAction =
@@ -32,7 +51,8 @@ export type DebuggerAction =
   | DebuggerActionUpdateTestInput
   | DebuggerActionTestReturn
   | DebuggerActionUpdateTestOutput
-  | DebuggerActionAllTestsReturn;
+  | DebuggerActionAllTestsReturn
+  | DebuggerActionUpdateCoverage;
 
 export interface DebuggerActionInitFunction {
   type: "initFunction";
@@ -95,6 +115,11 @@ export interface DebuggerActionAllTestsReturn {
   outputs: DebuggerStateDebugOutput[];
 }
 
+export interface DebuggerActionUpdateCoverage {
+  type: "updateCoverage";
+  coverage: FunctionCoverageWhichMaybeFailed;
+}
+
 // States:
 
 export interface DebuggerStateOriginalFunction {
@@ -139,6 +164,42 @@ export interface DebuggerStateTestInput extends SerializableValue {
 
 export interface DebuggerStateTestExpect extends SerializableValue {}
 
+export type DebuggerStateFunctionCoverageWhichMaybeFailed =
+  | DebuggerStateFunctionCoverage
+  | FunctionCoverageFailed;
+
+export interface DebuggerStateFunctionCoverage {
+  status?: "ok";
+  statements: CoverageStatistics & {
+    uncovered: CoverageLocation[];
+  };
+  branches: CoverageStatistics & {
+    uncovered: CoverageLocationWithBranch[];
+  };
+  functions: CoverageStatistics & {
+    uncovered: CoverageLocation[];
+  };
+  lines: CoverageStatistics & {
+    counts: Map<number, { startColumn: number; count: number }>;
+  };
+}
+
+export interface CoverageStatistics {
+  total: number;
+  covered: number;
+}
+
+export interface CoverageLocation {
+  startLineNumber: number;
+  startColumn: number;
+  endLineNumber: number;
+  endColumn: number;
+}
+
+export interface CoverageLocationWithBranch extends CoverageLocation {
+  branch?: FunctionCoverageBranchName;
+}
+
 export interface DebuggerState {
   activeTab?: DebuggerStateActiveTab;
   originalFunction?: DebuggerStateOriginalFunction;
@@ -147,4 +208,5 @@ export interface DebuggerState {
   debugInput?: DebuggerStateDebugInput;
   debugOutput?: DebuggerStateDebugOutput;
   tests?: DebuggerStateTestCase[];
+  coverage?: DebuggerStateFunctionCoverageWhichMaybeFailed;
 }
