@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.78.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.77.0...@next-bricks/next-builder@1.78.0) (2021-10-07)
+
+
+### Bug Fixes
+
+* **function:** run tests automatically after init ([473a40e](https://github.com/easyops-cn/next-basics/commit/473a40ed26a384253afe345ca1a4ed6297ef1814))
+
+
+### Features
+
+* **function:** collect coverage ([a6de5cc](https://github.com/easyops-cn/next-basics/commit/a6de5cc361b82f1b6544833838e75485b0be6c3f))
+
+
+
+
+
 # [1.77.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.76.0...@next-bricks/next-builder@1.77.0) (2021-09-28)
 
 
