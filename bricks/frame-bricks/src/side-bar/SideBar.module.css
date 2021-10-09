@@ -1,0 +1,14 @@
+.sideBarContainer {
+  position: fixed;
+  top: var(--nav-bar-height);
+  bottom: 0;
+  z-index: 100;
+  width: var(--side-bar-collapsed-width);
+  background: var(--tag-green-background);
+  transition: width .var(--side-bar-collapse-transition-duration)
+    var(--side-bar-collapse-transition-timing-function);
+
+  &:hover {
+    width: var(--side-bar-width);
+  }
+}
