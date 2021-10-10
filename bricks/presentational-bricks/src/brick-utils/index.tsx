@@ -1,4 +1,9 @@
-import { handleHttpError, UpdatingElement, method } from "@next-core/brick-kit";
+import {
+  handleHttpError,
+  UpdatingElement,
+  method,
+  property,
+} from "@next-core/brick-kit";
 import { message as m } from "antd";
 import { MessageApi } from "antd/lib/message";
 import { copyToClipboard } from "@next-libs/clipboard";
@@ -33,7 +38,12 @@ export class BrickUtilsElement extends UpdatingElement {
     );
     m[method](text as any);
   }
-
+  /**
+   * @default
+   * @required false
+   * @description 复制成功/失败时的提示，默认为“复制成功/失败”
+   */
+  @property({ attribute: false }) messages: { success: string; error: string };
   /**
    * @params string
    * @description 复制到系统粘贴
@@ -42,9 +52,15 @@ export class BrickUtilsElement extends UpdatingElement {
   copy(text: string): void {
     const success = copyToClipboard(text);
     if (success) {
-      m.success(i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COPIED}`));
+      m.success(
+        this.messages?.success ??
+          i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COPIED}`)
+      );
     } else {
-      m.error(i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COPY_FAILED}`));
+      m.error(
+        this.messages?.error ??
+          i18next.t(`${NS_PRESENTATIONAL_BRICKS}:${K.COPY_FAILED}`)
+      );
     }
   }
 
