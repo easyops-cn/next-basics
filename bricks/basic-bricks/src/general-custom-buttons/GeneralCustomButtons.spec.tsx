@@ -90,6 +90,45 @@ describe("topology view admin buttons", () => {
     expect(mockSave).toBeCalledWith("save", buttons[0]);
   });
 
+  it("danger should work", () => {
+    const mockClick = jest.fn();
+    const buttons: CustomButton[] = [
+      {
+        danger: true,
+        text: "a-button",
+        icon: "save",
+        eventName: "save",
+      },
+      {
+        isDropdown: true,
+        danger: true,
+        text: "b-button",
+        icon: "close",
+        eventName: "close",
+      },
+      {
+        isDropdown: true,
+        disabled: true,
+        danger: true,
+        text: "c-button",
+        icon: "clear",
+        eventName: "clear",
+      },
+    ];
+    const wrapper = shallow(
+      <GeneralCustomButtons buttons={buttons} handleClick={mockClick} />
+    );
+    const saveButton = wrapper.find(Button).at(0);
+    const menuItems = (
+      wrapper.find(Dropdown).prop("overlay") as React.ReactElement
+    ).props.children;
+    const closeButton = menuItems[0];
+    const clearButton = menuItems[1];
+    expect(saveButton.prop("danger")).toEqual(true);
+    expect(closeButton.props["danger"]).toEqual(true);
+    expect(clearButton.props["danger"]).toEqual(undefined);
+  });
+
   it("dropdownBtnIcon should work", () => {
     const mockSave = jest.fn();
     const buttons: Partial<CustomButton>[] = [

@@ -23,6 +23,7 @@ declare const ButtonTypes: [
   "icon"
 ];
 declare type ButtonType = typeof ButtonTypes[number];
+
 interface AdminButtonProps {
   buttons: CustomButton[];
   handleClick: (eventName: string, button: CustomButton) => void;
@@ -36,6 +37,16 @@ interface AdminButtonProps {
   dropdownPlacement?: DropdownPlacement;
   dropdownBtnType?: "default" | "link";
 }
+
+const AvailableButtonTypeSet = new Set([
+  "primary",
+  "ghost",
+  "dashed",
+  "link",
+  "text",
+  "default",
+  "danger",
+]);
 
 export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
   constructor(props: AdminButtonProps) {
@@ -80,8 +91,10 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
           eventName,
           text,
           tooltip,
+          disabled,
           disabledTooltip,
           tooltipPlacement,
+          danger,
           testId,
           ...restProps
         } = button;
@@ -97,10 +110,14 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
             onClick={() => {
               handleClick(eventName, button);
             }}
-            style={{ color: color }}
-            type={buttonType}
+            style={{ color: disabled ? "" : color }}
+            type={
+              AvailableButtonTypeSet.has(buttonType) ? buttonType : undefined
+            }
             shape={buttonShape}
             size={buttonSize}
+            disabled={disabled}
+            danger={danger}
             data-testid={testId}
             {...restProps}
           >
@@ -120,7 +137,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
 
         return (
           <Tooltip
-            title={restProps.disabled ? disabledTooltip : tooltip}
+            title={disabled ? disabledTooltip : tooltip}
             placement={tooltipPlacement}
             key={eventName}
           >
@@ -134,67 +151,83 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
       const menu = (
         <Menu onClick={this.handleMenuClick}>
           {dropdownButtons.map((button, idx) => {
-            if (button.isDivider) {
+            const {
+              isDivider,
+              icon,
+              text,
+              buttonUrl,
+              buttonHref,
+              urlTarget,
+              disabled,
+              disabledTooltip,
+              tooltip,
+              tooltipPlacement,
+              eventName,
+              color,
+              danger,
+              testId,
+            } = button;
+
+            if (isDivider) {
               return <Menu.Divider key={idx} />;
             }
 
             const wrapIcon = (
               <span className={style.dropdownBtnIconContainer}>
-                {button.icon &&
-                  (typeof button.icon === "string" ? (
+                {icon &&
+                  (typeof icon === "string" ? (
                     <LegacyIcon
-                      type={button.icon}
+                      type={icon}
                       className={style.menuIcon}
-                      data-icon={button.icon}
+                      data-icon={icon}
                     />
                   ) : (
-                    <GeneralIcon icon={button.icon} />
+                    <GeneralIcon icon={icon} />
                   ))}
-                {button.text}
+                {text}
               </span>
             );
-            const text =
-              button.buttonUrl || button.buttonHref ? (
+            const textNode =
+              buttonUrl || buttonHref ? (
                 <Link
-                  href={button.buttonHref}
-                  to={button.buttonUrl}
-                  target={button.urlTarget}
-                  disabled={button.disabled}
+                  href={buttonHref}
+                  to={buttonUrl}
+                  target={urlTarget}
+                  disabled={disabled}
                 >
                   {wrapIcon}
                 </Link>
               ) : (
                 wrapIcon
               );
-            const tooltip = (
+            const tooltipNode = (
               <Tooltip
-                title={
-                  button.disabled ? button.disabledTooltip : button.tooltip
-                }
-                placement={button.tooltipPlacement}
+                title={disabled ? disabledTooltip : tooltip}
+                placement={tooltipPlacement}
               >
                 <div
                   className={classNames(style.dropdownBtn, {
-                    [style.dropdownBtnNormal]: !button.disabled,
+                    [style.dropdownBtnNormal]: !disabled,
                   })}
                 >
-                  {text}
+                  {textNode}
                 </div>
               </Tooltip>
             );
             return (
               <Menu.Item
                 className={classNames({
-                  [style.disabledMenuItem]: button.disabled,
-                  [style.dropdownMenuItem]: !button.disabled,
+                  [style.disabledMenuItem]: disabled,
+                  [style.dropdownMenuItem]: !disabled,
                 })}
-                key={button.eventName}
-                style={{ color: button.disabled ? "" : button.color }}
-                disabled={button.disabled}
+                key={eventName}
+                style={{ color: disabled ? "" : color }}
+                disabled={disabled}
+                danger={disabled ? undefined : danger}
                 data-button={button}
-                data-testid={button.testId}
+                data-testid={testId}
               >
-                {tooltip}
+                {tooltipNode}
               </Menu.Item>
             );
           })}

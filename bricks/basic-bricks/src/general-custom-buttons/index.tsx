@@ -17,7 +17,7 @@ export interface CustomButton {
   /**
    * 是否收纳成下拉框
    */
-  isDropdown: boolean;
+  isDropdown?: boolean;
   /**
    * 菜单项分割线，只用在弹出菜单内
    */
@@ -94,6 +94,10 @@ export interface CustomButton {
    * 用于测试时定位的 ID
    */
   testId?: string;
+  /**
+   * 是否显示为危险样式
+   */
+  danger?: boolean;
 }
 export type DropdownPlacement =
   | "bottomRight"
