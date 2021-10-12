@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.149.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.148.0...@next-bricks/basic-bricks@1.149.0) (2021-10-12)
+
+
+### Features
+
+* **basic-bricks:** general-custom-buttons CustomButton add danger property ([2af505e](https://github.com/easyops-cn/next-basics/commit/2af505ee9a50f6f587817e384a58d49949dd3a0c))
+
+
+
+
+
 # [1.148.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.147.1...@next-bricks/basic-bricks@1.148.0) (2021-09-29)
 
 
