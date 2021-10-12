@@ -51,7 +51,7 @@ export function BasicProgress(props: BasicProgressProps): React.ReactElement {
         : "";
       setColor(color);
     }
-  }, [props.colorMap]);
+  }, [props.colorMap, props.value]);
 
   const format = (percent) => {
     return (
@@ -75,7 +75,7 @@ export function BasicProgress(props: BasicProgressProps): React.ReactElement {
         percent={props.value}
         format={format}
         {...props.configProps}
-      ></Progress>
+      />
     </div>
   );
 }
