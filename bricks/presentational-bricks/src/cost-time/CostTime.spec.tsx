@@ -14,4 +14,14 @@ describe("CostTime", () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+  it("should work when cost is undefined", () => {
+    const wrapper = shallow(
+      <CostTime cost={12} unitStyle={{ fontSize: "14px" }} />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  it("should work when cost is undefined", () => {
+    const wrapper = shallow(<CostTime />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
