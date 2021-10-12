@@ -2433,7 +2433,7 @@
     react-dnd "^11.1.3"
     react-dnd-html5-backend "^11.1.3"
 
-"@next-libs/basic-components@^3.1.3", "@next-libs/basic-components@^3.2.3":
+"@next-libs/basic-components@^3.2.3":
   version "3.2.3"
   resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.3.tgz#ab193f06501823b03c717744065e7003fb7d5e8c"
   integrity sha512-i/bQWgESuPrj0fk3BkovzSceSOGCevc5aU0OoP3lKK8NVpQ9Q8aI/lap+aDhz3koMNRzcnBY0QIDLVftjJOOSQ==
@@ -2445,18 +2445,18 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.2.tgz#0062beedab56666f22a2f7a6f811635179730e64"
   integrity sha512-NTal//gM/X/pE6NFUDOxlsspUaPS20k8JyOejwf1CtJRochoRjlo+nkkkQCp8sNmVGqt4N4bRk0nW8APmeBAnA==
 
-"@next-libs/cmdb-instances@^6.4.4":
-  version "6.4.5"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.4.5.tgz#ae871ce2dec9a1e78f4aae4080a6cae1fcfc1643"
-  integrity sha512-KIQzzvxJDIKSaT6ohqapbWxeLj81yoSfM51WmeUroTgL6MawF5w2VE9FB4Y4+RGm0k/8wJ+eiAh4vuoNNI8frA==
+"@next-libs/cmdb-instances@^6.6.4":
+  version "6.6.4"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.6.4.tgz#bf1ee5e565eef0c63f5169c6fe6a9c3892fd4d6c"
+  integrity sha512-vWT5r0/VAvVM9oTnLZo3BELAMFD4Munu+qpGd0HKES/o1Qzw/Q+EW+xaco29IFKKfTYcmTke1f8UPINRdJCUpQ==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
-    "@next-libs/basic-components" "^3.1.3"
+    "@next-libs/basic-components" "^3.2.3"
     "@next-libs/cmdb-utils" "^3.0.2"
-    "@next-libs/code-editor-components" "^4.0.3"
-    "@next-libs/forms" "^3.2.1"
+    "@next-libs/code-editor-components" "^4.0.8"
+    "@next-libs/forms" "^3.2.5"
     "@next-libs/storage" "^2.0.2"
-    "@next-sdk/cmdb-sdk" "^2.1.1"
+    "@next-sdk/cmdb-sdk" "^2.1.13"
     "@next-sdk/permission-sdk" "^2.1.1"
     "@types/file-saver" "^2.0.3"
     classnames "^2.3.1"
@@ -2483,14 +2483,14 @@
     prismjs "^1.23.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/code-editor-components@^4.0.3":
-  version "4.0.3"
-  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.0.3.tgz#f52f259d696ee8039079f71730a061c688a1c066"
-  integrity sha512-8txMCN8rDa82rSGCNnU+ON1lEdnaSvE6tQ+2tZWlDhuYWcYo1FDQjvl8B6YfnNpUw9ZvCWHxRAETEFYyk2PuGA==
+"@next-libs/code-editor-components@^4.0.8":
+  version "4.0.8"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.0.8.tgz#88b928b137b54497bb7d6f5f70b995eecde326e6"
+  integrity sha512-F5TRTQ/gA4a95D0AdQFuvLGA+IeMePNz6Gw/wtk2gW4eEYkxJIZa2DrIR6vXtTCM9+BooxEdh7QovAuP6Q9xag==
   dependencies:
-    "@next-libs/basic-components" "^3.1.3"
+    "@next-libs/basic-components" "^3.2.3"
     "@next-libs/clipboard" "^3.0.2"
-    "@next-libs/forms" "^3.2.1"
+    "@next-libs/forms" "^3.2.5"
     ajv "^6.12.6"
     classnames "^2.3.1"
     file-saver "^2.0.5"
@@ -2512,10 +2512,10 @@
   resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-2.0.2.tgz#e7635ca102ea6a0e9859ca07a7815807896b69ea"
   integrity sha512-poJSo2iWVDa5rTTFUygBHFi1qtTPPz2FR16XZgyIyq3NfQ2wNNJvoh/USmm9wfGQm375zM5O2B2WkpgLxW63EQ==
 
-"@next-libs/forms@^3.2.1", "@next-libs/forms@^3.2.4":
-  version "3.2.4"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.4.tgz#1745faef82a112fb3d12fd8d700ab750dcfe5d2d"
-  integrity sha512-KtdifiXBh6W8KKamBBQvFRCWg6QrYGmhoLHOfBt2g9ub11ywt6riv0ggDti/urJYkmI0DgBQBpLODTJTGHCh2Q==
+"@next-libs/forms@^3.2.5":
+  version "3.2.5"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.5.tgz#4cfa1d5473b30b7acf24df0171413e1a7d2951c3"
+  integrity sha512-NXbmehLYytPWGHsPRxBug6Ox4eh6r+P8VSQXMwTCvBxRCXRstAmXtOv/6EUksOZShcQariugS5SKtf4oJYVHdQ==
 
 "@next-libs/storage@^2.0.2":
   version "2.0.2"
@@ -2537,10 +2537,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.2.0.tgz#283bdf72676280bf73d20807f8784318eace5e99"
   integrity sha512-LwLFU5vkY81jQeYPYW6pyFpRoyE/YWrBgFf0+yj5Dh35sgN/2i/ptJ6grXJlD49DEQ+EtNaR6Xu8sFdOJNAYpQ==
 
-"@next-sdk/cmdb-sdk@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-2.1.1.tgz#8522f75b71ae3c5772b8631528fe4bcaff9f0e70"
-  integrity sha512-4F9psdHnmSUZg9BK0sSzgmoerhsMucsXdMGhRASaf+kGyh6foKMa2+Lp7lOpIjROUJbqBua1GkwPOtj6AexpsQ==
+"@next-sdk/cmdb-sdk@^2.1.1", "@next-sdk/cmdb-sdk@^2.1.13":
+  version "2.1.13"
+  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-2.1.13.tgz#5add6d5e0e79ac4298c0516bdcb73a42558d7e54"
+  integrity sha512-Z6DbCGFEeTJZ0s3wTeXXsn+kd3Adkhz3dzNm7SQD7Us7RdI8SeDrxfmdTk7NVkiQ0B0m+CkLbL51I2aZA1uWtQ==
 
 "@next-sdk/micro-app-sdk@^2.1.1":
   version "2.1.1"
