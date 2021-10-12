@@ -1,7 +1,7 @@
 import { Story } from "@next-core/brick-types";
 
 export const RankTableStory: Story = {
-  storyId: "presentational-bricks.trend-table",
+  storyId: "presentational-bricks.rank-table",
   category: "general-tables",
   type: "brick",
   author: "Alex",
