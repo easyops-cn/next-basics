@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.223.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.3...@next-bricks/presentational-bricks@1.223.0) (2021-10-12)
+
+
+### Features
+
+* rankTable支持sort ([ad4cb1a](https://github.com/easyops-cn/next-basics/commit/ad4cb1aa284927945a01d8729a07c2c1f57bc034))
+
+
+
+
+
 ## [1.222.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.2...@next-bricks/presentational-bricks@1.222.3) (2021-10-12)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
