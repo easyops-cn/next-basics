@@ -18,7 +18,6 @@
         "^@micro-apps/",
         "^@templates/",
         "^@next-bricks/",
-        "^@next-libs/",
         "^@next-micro-apps/",
         "^@next-legacy-templates/",
         "^@sdk/",
@@ -92,6 +91,11 @@
       "matchPackagePatterns": ["^@next-core/"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "groupName": "next-libs packages",
+      "matchPackagePatterns": ["^@next-libs/"],
+      "automerge": false
     }
   ],
   "postUpdateOptions": ["yarnDedupeHighest"]
