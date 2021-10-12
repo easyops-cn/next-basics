@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.222.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.1...@next-bricks/presentational-bricks@1.222.2) (2021-10-12)
+
+
+### Bug Fixes
+
+* **brick-utils:** 复制成功/失败文案可配置 ([380ac2f](https://github.com/easyops-cn/next-basics/commit/380ac2f4a3ba83ef057b11575b332a59f62d5be8))
+* 耗时构件支持单位样式调整 Closed EVENT-357 ([35c7155](https://github.com/easyops-cn/next-basics/commit/35c715578803bc41dee4e6a156c09905b5596273))
+
+
+
+
+
 ## [1.222.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.0...@next-bricks/presentational-bricks@1.222.1) (2021-10-04)
 
 
