@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
-import { Menu } from "antd";
+import { Input, Menu } from "antd";
 import { AddEventBtn } from "./AddEventBtn";
 import { EventConfig } from "../../../shared/visual-events/interfaces";
 
@@ -107,5 +107,37 @@ describe("AddEventBtn", () => {
     wrapper.update();
 
     expect(wrapper.find(Menu.Item).length).toEqual(0);
+  });
+
+  it("should render custom events input", async () => {
+    const mockClickFn = jest.fn();
+    const wrapper = mount(
+      <AddEventBtn
+        eventList={[
+          {
+            name: "tabs.click",
+            events: [{ action: "console.log" }],
+          },
+        ]}
+        eventDocInfo={[{ type: "tabs.click" }]}
+        enableCustomEvent={true}
+        onClick={mockClickFn}
+      />
+    );
+
+    await act(async () => {
+      wrapper.find(".ant-btn-link").invoke("onClick")(null);
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find(Input).length).toEqual(1);
+    wrapper.find(Input).invoke("onChange")({
+      target: { value: "tabs.select" },
+    } as any);
+
+    wrapper.find(Input).invoke("onPressEnter")(null);
+
+    expect(mockClickFn).toHaveBeenCalledWith("tabs.select");
   });
 });

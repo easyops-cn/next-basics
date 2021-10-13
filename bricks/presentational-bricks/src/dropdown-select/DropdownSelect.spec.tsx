@@ -2,6 +2,7 @@ import React from "react";
 import { render, fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { DropdownSelect } from "./DropdownSelect";
+import { shallow } from "enzyme";
 
 const props = {
   dataSource: [
@@ -32,7 +33,16 @@ describe("DropdownSelect", () => {
       _value = value;
     });
     const { getByTestId, container, rerender } = render(
-      <DropdownSelect {...props} value={_value} onChange={mockOnChange} />
+      <DropdownSelect
+        {...props}
+        value={_value}
+        onChange={mockOnChange}
+        tipBrick={{
+          useBrick: {
+            brick: "span",
+          },
+        }}
+      />
     );
     const dropdownTrigger = getByTestId("dropdown-trigger");
     let dropdownTriggerIcon = dropdownTrigger.querySelector(".anticon");
@@ -124,6 +134,18 @@ describe("DropdownSelect", () => {
         dropdownButtonType={"shape"}
         value={value}
         onChange={mockOnChange}
+        disabled={true}
+        heightFix={true}
+        buttonIcon={{
+          lib: "antd",
+          icon: "alert",
+          theme: "twoTone",
+        }}
+        tipBrick={{
+          useBrick: {
+            brick: "span",
+          },
+        }}
       />
     );
     const dropdownTrigger = getByTestId("dropdown-trigger-multiple");

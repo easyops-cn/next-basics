@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Input } from "antd";
 import { mount } from "enzyme";
 import { ModalConfirm, ModalConfirmProps } from "./ModalConfirm";
+import { BrickAsComponent } from "@next-core/brick-kit";
 
 const mockUpdate = jest.fn();
 const spyOnModalConfirm = jest.spyOn(Modal, "confirm");
@@ -94,5 +95,21 @@ describe("ModalConfirm", () => {
         okButtonProps: expect.objectContaining({ disabled: true }),
       })
     );
+  });
+  it("contentBrick should work", () => {
+    const contentBrick = {
+      useBrick: {
+        brick: "div",
+        properties: {
+          textContent: "brick",
+        },
+      },
+    };
+    const props: any = {
+      type: "success",
+      contentBrick,
+    };
+    const wrapper = mount<ModalConfirmProps>(<ModalConfirm {...props} />);
+    expect(wrapper).toBeTruthy();
   });
 });

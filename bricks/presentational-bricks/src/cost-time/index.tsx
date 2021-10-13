@@ -39,6 +39,7 @@ export class CostTimeElement extends UpdatingElement {
             cost={this.cost}
             startTime={this.startTime}
             endTime={this.endTime}
+            unitStyle={this.unitStyle}
           />
         </BrickWrapper>,
         this
@@ -93,6 +94,17 @@ export class CostTimeElement extends UpdatingElement {
     attribute: false,
   })
   endTime: string | number;
+
+  /**
+   * @kind React.CSSProperties
+   * @required false
+   * @default -
+   * @description 单位样式
+   */
+  @property({
+    attribute: false,
+  })
+  unitStyle: React.CSSProperties;
 
   /**
    * @kind any

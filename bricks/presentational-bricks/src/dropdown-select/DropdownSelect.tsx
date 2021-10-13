@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, Popover } from "antd";
 import { parseTemplate } from "@next-libs/cmdb-utils";
+import { UseBrickConf } from "@next-core/brick-types";
 import { get } from "lodash";
 import styles from "./DropdownSelect.module.css";
 import { Option } from "../interfaces";
 import { GeneralIcon } from "@next-libs/basic-components";
-
+import { BrickAsComponent } from "@next-core/brick-kit";
 interface DropdownSelectProps {
   dataSource?: any[];
   value?: any;
@@ -25,6 +26,9 @@ interface DropdownSelectProps {
   buttonIcon?: any;
   multipleLabel?: string;
   dropdownButtonType?: "default" | "shape";
+  disabled?: boolean;
+  heightFix?: boolean;
+  tipBrick?: { useBrick: UseBrickConf };
 }
 
 export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
@@ -83,7 +87,11 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
   }, [selectedItem, props.label, optionTitle]);
   const menu = useMemo(
     () => (
-      <Menu>
+      <Menu
+        style={
+          props.heightFix ? { maxHeight: "300px", overflow: "scroll" } : {}
+        }
+      >
         {options
           ? options.map((option) => (
               <Menu.Item
@@ -173,11 +181,11 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     props.selectedKeys,
     props.defaultSelectedKeys,
   ]);
-
   return (
     <Dropdown
       overlay={props.multipleSelect ? multiSelectMenu : menu}
       trigger={["click"]}
+      disabled={props.disabled}
       visible={visible}
       onVisibleChange={(visible) => {
         setVisible(visible);
@@ -188,7 +196,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
           className={styles.dropdownTrigger}
           style={{
             fontSize: "14px",
-            backgroundColor: "#F5F5F5",
+            backgroundColor: props.disabled ? "#E5E5E5" : "#F5F5F5",
             borderRadius: "4px",
             padding: "3px 10px",
           }}
@@ -201,7 +209,45 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
             />
           )}
           <div style={{ height: "50px" }}>
-            <div className={styles.placeholder}>{placeholder}</div>
+            <div className={styles.placeholder}>
+              <span>{placeholder}</span>
+              <span
+                onClick={(e) => {
+                  // istanbul ignore next
+                  e.stopPropagation();
+                }}
+              >
+                {props.tipBrick?.useBrick && (
+                  <Popover
+                    content={
+                      <div style={{ width: "300px" }}>
+                        <BrickAsComponent
+                          useBrick={props.tipBrick?.useBrick}
+                        ></BrickAsComponent>
+                      </div>
+                    }
+                  >
+                    <span
+                      style={{
+                        margin: "0 10px",
+                        display: "inline-block",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <GeneralIcon
+                        style={{ marginRight: "7px" }}
+                        icon={{
+                          lib: "antd",
+                          icon: "question - circle",
+                          theme: "filled",
+                          color: "rgb(140, 140, 140)",
+                        }}
+                      />
+                    </span>
+                  </Popover>
+                )}
+              </span>
+            </div>
             <div className={styles.dropdownLabelBox}>
               {props.multipleSelect ? props.multipleLabel : label}
             </div>

@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.149.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.0...@next-bricks/basic-bricks@1.149.1) (2021-10-13)
+
+
+### Bug Fixes
+
+* **general-custom-buttons:** fix style of icon buttonType ([8b9b11e](https://github.com/easyops-cn/next-basics/commit/8b9b11ecb34054b2f32ba4c69eccf759cc4bf84f))
+
+
+
+
+
+# [1.149.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.148.0...@next-bricks/basic-bricks@1.149.0) (2021-10-12)
+
+
+### Features
+
+* **basic-bricks:** general-custom-buttons CustomButton add danger property ([2af505e](https://github.com/easyops-cn/next-basics/commit/2af505ee9a50f6f587817e384a58d49949dd3a0c))
+
+
+
+
+
+# [1.148.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.147.1...@next-bricks/basic-bricks@1.148.0) (2021-09-29)
+
+
+### Features
+
+* general modal support after close event ([5501ca5](https://github.com/easyops-cn/next-basics/commit/5501ca5e45d0cf561e1236ec910e48826eca1f56))
+
+
+
+
+
+## [1.147.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.147.0...@next-bricks/basic-bricks@1.147.1) (2021-09-28)
+
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+
+
+
+
 # [1.147.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.146.0...@next-bricks/basic-bricks@1.147.0) (2021-09-26)
 
 

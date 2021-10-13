@@ -11,3 +11,24 @@ exports[`CostTime should work when cost is undefined 1`] = `
   3 libs-datetime:SECONDS
 </span>
 `;
+
+exports[`CostTime should work when cost is undefined 2`] = `
+<span>
+  <span>
+    <span>
+      0.012 
+    </span>
+    <span
+      style={
+        Object {
+          "fontSize": "14px",
+        }
+      }
+    >
+      libs-datetime:SECONDS
+    </span>
+  </span>
+</span>
+`;
+
+exports[`CostTime should work when cost is undefined 3`] = `<span />`;

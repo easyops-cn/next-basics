@@ -2,15 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {
   BrickWrapper,
+  event,
+  EventEmitter,
   getHistory,
   method,
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
 import { RankTable } from "./RankTable";
-import { ColumnProps, TableProps } from "antd/lib/table";
-import { cloneDeep, find, get, isEmpty, isNil, map } from "lodash";
+import { ColumnProps, TablePaginationConfig, TableProps } from "antd/lib/table";
+import { cloneDeep, find, forEach, get, isEmpty, isNil, map } from "lodash";
 import { UseBrickConf } from "@next-core/brick-types";
+import { SorterResult } from "antd/lib/table/interface";
 
 export interface CustomColumn extends ColumnProps<Record<string, any>> {
   /**
@@ -60,7 +63,7 @@ export interface Header {
  * @id presentational-bricks.trend-table
  * @author alexchen
  * @history
- * 1.x.0: 新增构件 `presentational-bricks.trend-table`
+ * 1.x.0: 新增构件 `presentational-bricks.rank-table`
  * @docKind brick
  * @noInheritDoc
  * @memo
@@ -247,6 +250,67 @@ export class RankTableElement extends UpdatingElement {
   @property({ attribute: false })
   size: "default" | "small" = "default";
 
+  /**
+   * @detail {sort:string;order:string|number}
+   * @description 排序变化，detail 中的 sort 为对应排序列的 key/dataIndex，order 为升序/降序
+   */
+  @event({ type: "sort.update", cancelable: true }) sortUpdate: EventEmitter<{
+    sort: string;
+    order: string | number;
+  }>;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否支持排序。默认开启，当对应列的sorter设置成true时则可排序。sortable为false时则排序都不生效。
+   */
+  @property({
+    attribute: false,
+  })
+  sortable = true;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 被排序列的 dataIndex。通常来自于 url 参数，可以设置成 ${QUERY.sort}。
+   */
+  @property()
+  sort: string;
+
+  /**
+   * @kind string | number
+   * @required false
+   * @default -
+   * @description 升序/降序，可以设置成 ${QUERY.order}。
+   */
+  @property({
+    attribute: false,
+  })
+  order: string | number;
+
+  private _handleOnChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, string[]>,
+    sorter: SorterResult<Record<string, any>>
+  ): void => {
+    // 排序
+    if (sorter.columnKey !== this.sort || sorter.order !== this.order) {
+      if (sorter.columnKey && sorter.order) {
+        this.sort = sorter.columnKey as string;
+        this.order = sorter.order;
+      } else {
+        this.sort = null;
+        this.order = null;
+      }
+      this.sortUpdate.emit({
+        sort: this.sort,
+        order: this.order,
+      });
+    }
+  };
+
   // istanbul ignore next
   private _initConfigProps = () => {
     // 初始化列排序
@@ -287,6 +351,7 @@ export class RankTableElement extends UpdatingElement {
             rowKey={this.rowKey}
             scroll={this.scrollConfigs}
             size={this.size}
+            onChange={this._handleOnChange}
           />
         </BrickWrapper>,
         this

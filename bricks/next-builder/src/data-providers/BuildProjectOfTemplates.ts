@@ -2,6 +2,7 @@ import {
   BrickConfInTemplate,
   CustomTemplate,
   SnippetDefinition,
+  Story,
   Storyboard,
 } from "@next-core/brick-types";
 import {
@@ -182,9 +183,7 @@ export async function BuildProjectOfTemplates({
       }),
     }));
 
-  const createStories = (
-    templateItem: pipes.GraphVertex
-  ): Record<string, unknown> => {
+  const createStories = (templateItem: pipes.GraphVertex): Story => {
     const getDocContent = (obj: Record<string, any>, type: DocType) => {
       if (!isObject(obj) || isEmpty(obj)) return;
       const getDefaultValue = (v: any) => {
@@ -220,7 +219,25 @@ export async function BuildProjectOfTemplates({
         }
       });
     };
-    const stories: Record<string, any> = {
+    const addChildrenAppId = (data: pipes.GraphVertex) => {
+      if (!data) return;
+      if (Array.isArray(data.children)) {
+        data.children.forEach((child: pipes.GraphVertex) =>
+          addChildrenAppId(child)
+        );
+      }
+      if (
+        typeof data.brick === "string" &&
+        data.brick.includes("-") &&
+        !data.brick.includes(".") &&
+        internalTemplateNames &&
+        internalTemplateNames.has(data.brick)
+      ) {
+        data.brick = `${data.appId}.${data.brick}`;
+      }
+    };
+    addChildrenAppId(templateItem);
+    const stories = {
       // 基础信息存放
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
       category: templateItem.category,
@@ -234,11 +251,14 @@ export async function BuildProjectOfTemplates({
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,
         dockind: "brick",
+        properties: null,
         author: templateItem.creator,
         slots: null,
         history: null,
       },
-    };
+      conf: [],
+      originData: templateItem,
+    } as Story;
     if (templateItem.proxy) {
       // 如果有代理属性
       const { properties, events, methods, slots } = safeJSONParse(

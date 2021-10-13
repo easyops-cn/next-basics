@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/brick-visualization",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/brick-visualization",
   "license": "GPL-3.0",
@@ -24,8 +24,8 @@
   "sideEffects": true,
   "devDependencies": {
     "@next-libs/basic-components": "^3.2.3",
-    "@next-libs/code-editor-components": "^4.0.3",
-    "@next-libs/forms": "^3.2.4",
+    "@next-libs/code-editor-components": "^4.0.8",
+    "@next-libs/forms": "^3.2.5",
     "@types/react-color": "^3.0.5",
     "react-color": "^2.19.3"
   },

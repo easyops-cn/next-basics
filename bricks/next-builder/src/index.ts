@@ -27,3 +27,7 @@ import "./custom-processors/covertEventToFormValue";
 import "./custom-processors/covertFormValueToEvent";
 import "./custom-processors/covertUseResolvesToFormValue";
 import "./custom-processors/covertFormValueToUseResolves";
+import "./function-debugger-sidebar";
+import "./function-debugger-toolbar";
+import "./function-debugger-store";
+import "./function-debugger-statusbar";

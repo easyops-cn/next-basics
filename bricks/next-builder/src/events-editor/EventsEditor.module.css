@@ -17,6 +17,7 @@
 }
 
 .eventName {
+  cursor: default;
   &:hover {
     .iconWrapper {
       display: block;

@@ -24,6 +24,7 @@ interface RankTableProps {
   rowKey?: string;
   scroll?: TableProps<unknown>["scroll"];
   size?: "default" | "small";
+  onChange: any;
 }
 
 type ItemBrickDataMap = Map<unknown, BrickData>;
@@ -172,10 +173,10 @@ export function RankTable(props: RankTableProps): React.ReactElement {
         if (!columnConf.render) {
           // eslint-disable-next-line react/display-name
           columnConf.render = (text: string, record, trend) => (
-            <>
+            <div style={{ display: "flex", alignItems: "center" }}>
               {Awards(trend)}
-              {text}
-            </>
+              <span style={{ flex: 1 }}>{text}</span>
+            </div>
           );
         }
 
@@ -238,6 +239,7 @@ export function RankTable(props: RankTableProps): React.ReactElement {
         scroll={scroll}
         {...configProps}
         pagination={false}
+        onChange={props.onChange}
       />
     );
   };

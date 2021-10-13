@@ -1,0 +1,96 @@
+.sidebarContainer {
+  padding: 4px 0;
+  background-color: #1e1e1e;
+  color: var(--text-color-default);
+  white-space: nowrap;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebarGroups,
+.sidebarItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebarGroupIcon,
+.icon,
+.modified {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebarGroupLabel {
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebarGroupText {
+  flex: 1;
+  font-size: 12px;
+  color: var(--text-color-disabled);
+}
+
+.sidebarGroupIcon {
+  width: 22px;
+  height: 22px;
+  color: var(--antd-text-color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--bg-color-button-primary-hover);
+    color: #fff;
+  }
+}
+
+.sidebarItems > li {
+  padding: 4px 8px;
+  cursor: pointer;
+  display: flex;
+}
+
+.sidebarItems > li:hover,
+.active {
+  color: var(--antd-primary-color);
+}
+
+.active {
+  background-color: var(--antd-background-color-base);
+}
+
+.icon {
+  width: 28px;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--antd-text-color);
+}
+
+.matched {
+  color: var(--tag-green-color);
+}
+
+.notMatched {
+  color: var(--tag-red-color);
+}
+
+.text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modified {
+  width: 20px;
+
+  &::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--text-color-disabled);
+  }
+}

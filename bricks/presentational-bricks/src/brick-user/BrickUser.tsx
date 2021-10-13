@@ -16,12 +16,14 @@ interface BrickUserProps {
   hideAvatar?: boolean;
   hideUsername?: boolean;
   showNicknameOrUsername?: boolean;
+  iconMargin?: string | number;
 }
 
 export function BrickUser(props: BrickUserProps): React.ReactElement {
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
   const [userName, setUserName] = React.useState(props.userNameOrId);
   const [nickName, setNickName] = React.useState("");
+
   React.useEffect(() => {
     (async () => {
       let user: UserInfo;
@@ -69,6 +71,7 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
               size={props.size}
               style={{
                 backgroundColor: avatarSrc ? undefined : "rgb(0, 113, 235)",
+                margin: props.iconMargin,
               }}
             >
               {userName?.slice(0, 2)}

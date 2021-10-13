@@ -100,6 +100,15 @@ export class BrickUserElement extends UpdatingElement {
   @property({ type: Boolean })
   showNicknameOrUsername: boolean;
 
+  /**
+   * @kind "number" | "string"
+   * @required false
+   * @default 0
+   * @description icon间距
+   */
+  @property({ attribute: false })
+  iconMargin: number | string;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -127,6 +136,7 @@ export class BrickUserElement extends UpdatingElement {
             showNicknameOrUsername={
               this.showNicknameOrUsername ?? this.showNickname
             }
+            iconMargin={this.iconMargin}
           />
         </BrickWrapper>,
         this

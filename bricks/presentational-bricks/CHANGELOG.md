@@ -3,6 +3,103 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.223.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.223.0...@next-bricks/presentational-bricks@1.223.1) (2021-10-13)
+
+
+### Bug Fixes
+
+* **basic-bricks:** BasicProgress color render problem ([2437db9](https://github.com/easyops-cn/next-basics/commit/2437db943e35547db7555ea04ff327a9115a43ac))
+
+
+
+
+
+# [1.223.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.3...@next-bricks/presentational-bricks@1.223.0) (2021-10-12)
+
+
+### Features
+
+* rankTable支持sort ([ad4cb1a](https://github.com/easyops-cn/next-basics/commit/ad4cb1aa284927945a01d8729a07c2c1f57bc034))
+
+
+
+
+
+## [1.222.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.2...@next-bricks/presentational-bricks@1.222.3) (2021-10-12)
+
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+
+
+
+
+## [1.222.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.1...@next-bricks/presentational-bricks@1.222.2) (2021-10-12)
+
+
+### Bug Fixes
+
+* **brick-utils:** 复制成功/失败文案可配置 ([380ac2f](https://github.com/easyops-cn/next-basics/commit/380ac2f4a3ba83ef057b11575b332a59f62d5be8))
+* 耗时构件支持单位样式调整 Closed EVENT-357 ([35c7155](https://github.com/easyops-cn/next-basics/commit/35c715578803bc41dee4e6a156c09905b5596273))
+
+
+
+
+
+## [1.222.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.0...@next-bricks/presentational-bricks@1.222.1) (2021-10-04)
+
+
+### Bug Fixes
+
+* **modal-confirm:** fix contentBrick bug ([9c63cb1](https://github.com/easyops-cn/next-basics/commit/9c63cb17061e53d712a7f68fc94ff73c3070d33c))
+
+
+
+
+
+# [1.222.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.221.2...@next-bricks/presentational-bricks@1.222.0) (2021-10-03)
+
+
+### Features
+
+* **modal-confirm:** add contentBrick ([a4939b8](https://github.com/easyops-cn/next-basics/commit/a4939b831d402891cdde441669cd0313904a92e7))
+
+
+
+
+
+## [1.221.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.221.1...@next-bricks/presentational-bricks@1.221.2) (2021-10-02)
+
+
+### Bug Fixes
+
+* 下拉菜单添加禁用属性,内容高度控制属性 Closed SERVICE_OBSERVE-407 ([4fae6a0](https://github.com/easyops-cn/next-basics/commit/4fae6a06e2b138f0d428870be75b65c89c2e30db))
+
+
+
+
+
+## [1.221.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.221.0...@next-bricks/presentational-bricks@1.221.1) (2021-09-28)
+
+
+### Bug Fixes
+
+* 统分割线bug Closed SERVICE_OBSERVE-538 ([f3cda1f](https://github.com/easyops-cn/next-basics/commit/f3cda1f9a86a2774714bbe7b130639f512fff03c))
+
+
+
+
+
+# [1.221.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.220.1...@next-bricks/presentational-bricks@1.221.0) (2021-09-28)
+
+
+### Features
+
+* **BrickUser:** add iconMargin prop and change the default margin right from 3px to 8px ([2085a04](https://github.com/easyops-cn/next-basics/commit/2085a04b25d6a7789cd7010bf9ba6dea1f96b282))
+
+
+
+
+
 ## [1.220.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.220.0...@next-bricks/presentational-bricks@1.220.1) (2021-09-26)
 
 

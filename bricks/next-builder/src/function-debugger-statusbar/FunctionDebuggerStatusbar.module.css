@@ -1,0 +1,39 @@
+.debuggerStatusbar {
+  display: grid;
+  color: var(--antd-text-color);
+  background-color: #1e1e1e;
+  padding: 4px 0;
+}
+
+.coverage {
+  padding: 0 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.coverageIcon {
+  margin-right: 0.5em;
+}
+
+.coverageFailed,
+.coverageLow {
+  color: var(--tag-red-color);
+}
+
+.coverageMedium {
+  color: var(--tag-orange-color);
+}
+
+.coverageHigh {
+  color: var(--tag-yellow-color);
+}
+
+.coverageFull {
+  color: var(--tag-green-color);
+}
+
+.subCoverage {
+  margin-left: 1em;
+  color: var(--text-color-disabled);
+}

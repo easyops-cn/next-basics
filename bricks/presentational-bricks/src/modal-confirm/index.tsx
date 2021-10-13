@@ -11,6 +11,7 @@ import {
 import { ModalConfirm, ModalConfirmProps } from "./ModalConfirm";
 import { ButtonProps, ButtonType } from "antd/lib/button";
 import { pick } from "lodash";
+import { UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id presentational-bricks.modal-confirm
@@ -175,6 +176,17 @@ export class ModalConfirmElement extends UpdatingElement {
   @property({ attribute: false }) cancelButtonProps?: ButtonProps;
 
   /**
+   * @kind  {useBrick: UseBrickConf}
+   * @required false
+   * @default false
+   * @description  panelBrick
+   */
+  @property({
+    attribute: false,
+  })
+  contentBrick: { useBrick: UseBrickConf };
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -264,6 +276,7 @@ export class ModalConfirmElement extends UpdatingElement {
       "dataSource",
       "okButtonProps",
       "cancelButtonProps",
+      "contentBrick",
     ]);
 
     const okButtonProps = props.okButtonProps;
@@ -317,6 +330,7 @@ export class ModalConfirmElement extends UpdatingElement {
             dataSource={this.dataSource}
             title={this.modalTitle || this.title}
             content={this.content}
+            contentBrick={this.contentBrick}
             extraContent={this.extraContent}
             okText={this.okText}
             okType={this.okType}

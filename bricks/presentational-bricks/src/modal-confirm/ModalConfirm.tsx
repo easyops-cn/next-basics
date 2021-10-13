@@ -6,9 +6,10 @@ import { Parser } from "html-to-react";
 import { defaults, merge } from "lodash";
 import DOMPurify from "dompurify";
 import { parseTemplate } from "@next-libs/cmdb-utils";
-
+import { UseBrickConf } from "@next-core/brick-types";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import styles from "./ModalConfirm.module.css";
+import { BrickAsComponent } from "@next-core/brick-kit";
 
 export interface ModalConfirmProps {
   visible: boolean;
@@ -28,6 +29,7 @@ export interface ModalConfirmProps {
   closeWhenOk?: boolean;
   confirmLoading?: boolean;
   expect?: string;
+  contentBrick?: { useBrick: UseBrickConf };
 }
 
 const parseHTMLTemplate = (template: string, context: Record<string, any>) => {
@@ -45,6 +47,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
     dataSource,
     title: _title,
     content: _content,
+    contentBrick,
     expect: _expect,
     extraContent: _extraContent,
     okText: _okText,
@@ -58,10 +61,10 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
   const title = useMemo(() => {
     return _title ? parseTemplate(_title, dataSource) : _title;
   }, [_title, dataSource]);
-  const content = useMemo(() => parseHTMLTemplate(_content, dataSource), [
-    _content,
-    dataSource,
-  ]);
+  const content = useMemo(
+    () => parseHTMLTemplate(_content, dataSource),
+    [_content, dataSource]
+  );
 
   const [inputValue, setInputValue] = useState("");
   const [okDisabled, setOkDisabled] = useState(false);
@@ -97,7 +100,13 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
     ),
     [inputValue, expect]
   );
-
+  const brickContent = useMemo(() => {
+    return (
+      contentBrick?.useBrick && (
+        <BrickAsComponent useBrick={contentBrick?.useBrick} data={dataSource} />
+      )
+    );
+  }, [contentBrick, dataSource]);
   const okText = isDelete ? t(K.DELETE) : _okText;
   const [modal, setModal] = useState(null);
 
@@ -129,7 +138,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
       setModal(
         Modal[type]({
           title: title,
-          content: modalContent,
+          content: contentBrick?.useBrick ? brickContent : modalContent,
           okText: okText,
           cancelText: cancelText,
           onOk: onOk,
@@ -172,10 +181,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
           },
           { disabled: okDisabled }
         ),
-        cancelButtonProps: merge(
-          { type: "link" },
-          okButtonProps,
-        ),
+        cancelButtonProps: merge({ type: "link" }, okButtonProps),
       });
     }
   }, [props.confirmLoading, cancelButtonProps, okDisabled]);

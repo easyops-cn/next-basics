@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.79.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.78.1...@next-bricks/next-builder@1.79.0) (2021-10-13)
+
+
+### Features
+
+* add origin data when widget create the stories, to support widget to expand ([17189dd](https://github.com/easyops-cn/next-basics/commit/17189ddb871d74cfd5813931f9bba6af6c78c27a))
+* buildProjectOfTemplates add appId for originData children ([640f60f](https://github.com/easyops-cn/next-basics/commit/640f60fad286de709861b8b59e69c8a1c669cfe1))
+* buildProjectOfTemplates addChilrenAppId function fix ([20800b4](https://github.com/easyops-cn/next-basics/commit/20800b416f4a9614ce99e4624ab801d0d966bc2a))
+
+
+
+
+
+## [1.78.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.78.0...@next-bricks/next-builder@1.78.1) (2021-10-12)
+
+**Note:** Version bump only for package @next-bricks/next-builder
+
+
+
+
+
+# [1.78.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.77.0...@next-bricks/next-builder@1.78.0) (2021-10-07)
+
+
+### Bug Fixes
+
+* **function:** run tests automatically after init ([473a40e](https://github.com/easyops-cn/next-basics/commit/473a40ed26a384253afe345ca1a4ed6297ef1814))
+
+
+### Features
+
+* **function:** collect coverage ([a6de5cc](https://github.com/easyops-cn/next-basics/commit/a6de5cc361b82f1b6544833838e75485b0be6c3f))
+
+
+
+
+
+# [1.77.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.76.0...@next-bricks/next-builder@1.77.0) (2021-09-28)
+
+
+### Features
+
+* debug storyboard functions ([842f0d3](https://github.com/easyops-cn/next-basics/commit/842f0d39819e0722df85c9686fcd3673a52f64e9))
+
+
+
+
+
+# [1.76.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.75.0...@next-bricks/next-builder@1.76.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* refine editor ([b83d972](https://github.com/easyops-cn/next-basics/commit/b83d972c9ae478a4c97dea38b6a269f907eaae1f))
+
+
+### Features
+
+* event-editor support write custom events ([fb573c4](https://github.com/easyops-cn/next-basics/commit/fb573c41b04d3b20d1f3b812eb5fd703bba87348))
+
+
+
+
+
 # [1.75.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.74.0...@next-bricks/next-builder@1.75.0) (2021-09-26)
 
 

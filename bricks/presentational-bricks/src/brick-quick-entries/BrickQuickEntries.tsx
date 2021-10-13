@@ -133,7 +133,7 @@ export function BrickQuickEntries(
         for (let j = 0; j < props.column; ++j) {
           elements.push(
             <div
-              style={{ opacity: props.divider ? 0 : 1 }}
+              style={{ opacity: props.divider ? 1 : 0 }}
               key={key++}
               className={
                 props.mode === "multiCardGeneral" ||

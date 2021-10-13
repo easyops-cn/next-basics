@@ -25,7 +25,7 @@ import { safeDumpFields, ContextType } from "./utils";
 import { scanContextsInAny } from "./scanContextsInStoryboard";
 
 import styles from "./DataView.module.css";
-import sharedStyles from "../shared.module.css";
+import sharedStyles from "../../shared/scrollbar.module.css";
 
 const symbolId = Symbol("uid");
 
