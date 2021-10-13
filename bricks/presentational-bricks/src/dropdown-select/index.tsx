@@ -7,7 +7,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-
+import { UseBrickConf } from "@next-core/brick-types";
 import { DropdownSelect } from "./DropdownSelect";
 import { Option } from "../interfaces";
 
@@ -126,6 +126,17 @@ export class DropdownSelectElement extends UpdatingElement {
   @property({ type: Boolean }) multipleSelect?: boolean;
 
   /**
+   * @kind { userBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 提示构件
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  tipBrick: { useBrick: UseBrickConf };
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -214,6 +225,7 @@ export class DropdownSelectElement extends UpdatingElement {
             dropdownButtonType={this.dropdownButtonType}
             disabled={this.disabled}
             heightFix={this.heightFix}
+            tipBrick={this.tipBrick}
           />
         </BrickWrapper>,
         this
