@@ -53,7 +53,7 @@ export interface CustomButton {
   /**
    * 样式类型
    */
-  buttonType?: ButtonType;
+  buttonType?: ButtonType | "icon";
   /**
    * 形状类型
    */
