@@ -120,6 +120,7 @@ const consoleError = jest
               bg: true,
             },
             {
+              appId: 'test-app',
               instanceId: "u-1",
               type: "brick",
               brick: "template-t",
@@ -383,7 +384,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
               "type": "brick",
               "brick": "general-button",
               "mountPoint": "a",
-              "events\": "{\\\"click\\\":{\\\"action\\\":\\\"console.log\\\"}}"
+              "events": "{\\\"click\\\":{\\\"action\\\":\\\"console.log\\\"}}"
             },
             {
               "instanceId": "t-1-2",
@@ -456,9 +457,10 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                }\\n              }",
       "children": [
         {
+          "appId": "test-app",
           "instanceId": "u-1",
           "type": "brick",
-          "brick": "template-t",
+          "brick": "test-app.template-t",
           "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]]}"
         }
       ]
@@ -694,9 +696,10 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "proxy": "{\\n                \\\"properties\\\": {\\n                  \\\"a\\\": {\\n                    \\\"ref\\\":\\\"b\\\",\\n                    \\\"refProperty\\\":\\\"c\\\",\\n                    \\\"description\\\": \\\"properties介绍\\\",\\n                    \\\"type\\\": \\\"string\\\",\\n                    \\\"default\\\": \\\"hello\\\",\\n                    \\\"required\\\": \\\"false\\\"\\n                  },\\n                  \\\"b\\\": {\\n                    \\\"ref\\\": \\\"b-ref\\\",\\n                    \\\"refProperty\\\": \\\"b-property\\\"\\n                  }\\n                },\\n                \\\"events\\\": {\\n                  \\\"a.click\\\": {\\n                    \\\"ref\\\": \\\"d\\\",\\n                    \\\"refEvent\\\": \\\"general.a.click\\\",\\n                    \\\"detail\\\": \\\"{data:Record<string,any>[]}\\\",\\n                    \\\"description\\\": \\\"events介绍\\\"\\n                  }\\n                },\\n                \\\"methods\\\": {\\n                  \\\"sayHello\\\": {\\n                    \\\"ref\\\": \\\"e\\\",\\n                    \\\"refMethod\\\": \\\"a.say\\\",\\n                    \\\"params\\\": \\\"{ id: string | number, name: string }\\\",\\n                    \\\"description\\\": \\\"methods介绍\\\"\\n                  }\\n                },\\n                \\\"slots\\\": {\\n                  \\\"toolbar\\\": {\\n                    \\\"ref\\\": \\\"f\\\",\\n                    \\\"refSlot\\\": \\\"f-toobar\\\",\\n                    \\\"description\\\": \\\"slots介绍\\\"\\n                  }\\n                }\\n              }",
       "children": [
         {
+          "appId": "test-app",
           "instanceId": "u-1",
           "type": "brick",
-          "brick": "template-t",
+          "brick": "test-app.template-t",
           "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]]}"
         }
       ]

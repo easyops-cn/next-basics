@@ -202,6 +202,21 @@ export async function BuildProjectOfTemplates({
         }
       });
     };
+    const addChildrenAppId = (data: pipes.GraphVertex) => {
+      if (data.children?.length) {
+        data.children.forEach((child: pipes.GraphVertex) => addChildrenAppId(child));
+      }
+      if (
+        typeof data.brick === "string" &&
+        data.brick.includes("-") &&
+        !data.brick.includes(".") &&
+        internalTemplateNames &&
+        internalTemplateNames.has(data.brick)
+      ) {
+        data.brick = `${data.appId}.${data.brick}`;
+      }
+    }
+    addChildrenAppId(templateItem);
     const stories = {
       // 基础信息存放
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
