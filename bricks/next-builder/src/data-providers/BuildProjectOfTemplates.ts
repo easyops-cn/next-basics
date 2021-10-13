@@ -164,9 +164,7 @@ export async function BuildProjectOfTemplates({
       }),
     }));
 
-  const createStories = (
-    templateItem: pipes.GraphVertex
-  ): Story => {
+  const createStories = (templateItem: pipes.GraphVertex): Story => {
     const getDocContent = (obj: Record<string, any>, type: DocType) => {
       if (!isObject(obj) || isEmpty(obj)) return;
       const getDefaultValue = (v: any) => {
@@ -203,8 +201,11 @@ export async function BuildProjectOfTemplates({
       });
     };
     const addChildrenAppId = (data: pipes.GraphVertex) => {
-      if (data.children?.length) {
-        data.children.forEach((child: pipes.GraphVertex) => addChildrenAppId(child));
+      if (!data) return;
+      if (Array.isArray(data.children)) {
+        data.children.forEach((child: pipes.GraphVertex) =>
+          addChildrenAppId(child)
+        );
       }
       if (
         typeof data.brick === "string" &&
@@ -215,7 +216,7 @@ export async function BuildProjectOfTemplates({
       ) {
         data.brick = `${data.appId}.${data.brick}`;
       }
-    }
+    };
     addChildrenAppId(templateItem);
     const stories = {
       // 基础信息存放
