@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.224.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.223.1...@next-bricks/presentational-bricks@1.224.0) (2021-10-13)
+
+
+### Bug Fixes
+
+* 下拉菜单项支持提示 Closed EVENT-357 ([07e5605](https://github.com/easyops-cn/next-basics/commit/07e56052180196d8c525aeb4b621f70a8667a1f4))
+
+
+### Features
+
+* **copyable-text:** 添加 type=text兼容文本超出容器的展示 ([527386e](https://github.com/easyops-cn/next-basics/commit/527386ef6d73a769ea9f7f320809f72655e67a37))
+
+
+
+
+
 ## [1.223.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.223.0...@next-bricks/presentational-bricks@1.223.1) (2021-10-13)
 
 
