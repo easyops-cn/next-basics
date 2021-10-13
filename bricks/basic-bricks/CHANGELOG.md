@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.149.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.0...@next-bricks/basic-bricks@1.149.1) (2021-10-13)
+
+
+### Bug Fixes
+
+* **general-custom-buttons:** fix style of icon buttonType ([8b9b11e](https://github.com/easyops-cn/next-basics/commit/8b9b11ecb34054b2f32ba4c69eccf759cc4bf84f))
+
+
+
+
+
 # [1.149.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.148.0...@next-bricks/basic-bricks@1.149.0) (2021-10-12)
 
 
