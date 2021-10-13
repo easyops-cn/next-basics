@@ -50,10 +50,10 @@ export class CopyableTextElement extends UpdatingElement {
    * @kind string
    * @default custom
    * @required false
-   * @description 构件样式，支持普通(`custom`)和输入框(`input`)样式（见示例）
+   * @description 构件样式，支持普通(`custom`)和输入框(`input`)和 中间省略(`text`) 样式（见示例）
    */
   @property({ attribute: false })
-  type: string;
+  type: "custom" | "input" | "text" = "custom";
   /**
    * @kind object
    * @required false
