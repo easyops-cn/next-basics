@@ -100,7 +100,9 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
         } = button;
         const buttonComponent = (
           <Button
-            className={style.iconButton}
+            className={classNames({
+              [style.iconButton]: buttonType === "icon",
+            })}
             icon={
               icon &&
               typeof icon === "string" && (
