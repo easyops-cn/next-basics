@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.223.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.223.0...@next-bricks/presentational-bricks@1.223.1) (2021-10-13)
+
+
+### Bug Fixes
+
+* **basic-bricks:** BasicProgress color render problem ([2437db9](https://github.com/easyops-cn/next-basics/commit/2437db943e35547db7555ea04ff327a9115a43ac))
+
+
+
+
+
 # [1.223.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.222.3...@next-bricks/presentational-bricks@1.223.0) (2021-10-12)
 
 
