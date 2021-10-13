@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.79.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.78.1...@next-bricks/next-builder@1.79.0) (2021-10-13)
+
+
+### Features
+
+* add origin data when widget create the stories, to support widget to expand ([17189dd](https://github.com/easyops-cn/next-basics/commit/17189ddb871d74cfd5813931f9bba6af6c78c27a))
+* buildProjectOfTemplates add appId for originData children ([640f60f](https://github.com/easyops-cn/next-basics/commit/640f60fad286de709861b8b59e69c8a1c669cfe1))
+* buildProjectOfTemplates addChilrenAppId function fix ([20800b4](https://github.com/easyops-cn/next-basics/commit/20800b416f4a9614ce99e4624ab801d0d966bc2a))
+
+
+
+
+
 ## [1.78.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.78.0...@next-bricks/next-builder@1.78.1) (2021-10-12)
 
 **Note:** Version bump only for package @next-bricks/next-builder
