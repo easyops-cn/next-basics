@@ -136,9 +136,6 @@ export async function BuildProjectOfTemplates({
     page_size: 3000,
     query: {
       "project.instanceId": projectId,
-      name: {
-        $like: "%%",
-      },
     },
   });
 
