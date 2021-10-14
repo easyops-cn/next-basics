@@ -15,7 +15,6 @@ import {
   InstanceGraphApi_traverseGraphV2,
   InstanceApi_postSearch,
 } from "@next-sdk/cmdb-sdk";
-import { ObjectStoreApi_putObject } from "@next-sdk/object-store-sdk";
 import { paramCase } from "change-case";
 import { uniq } from "lodash";
 import { buildBricks } from "../shared/storyboard/buildStoryboard";
@@ -23,11 +22,10 @@ import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
 import { isObject } from "@next-core/brick-utils";
 import { isEmpty } from "lodash";
-import { imgUrlToFile } from "./utils/imgUrlToFile";
-// import { message } from 'antd';
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
+const IMAGE_SAVE_FILE_PATH = "dist/assets";
 
 export function safeJSONParse(str: string): Record<string, unknown> {
   let result: Record<string, unknown> = {};
@@ -55,8 +53,16 @@ export enum DocType {
   slots,
 }
 
+interface imagesFile {
+  imagesDir: string;
+  imagesPath: Array<{
+    imageOssPath: string;
+    fileName: string
+  }>;
+}
 export interface BuildInfoForProjectOfTemplates {
   files: BrickPackageFile[];
+  images?: imagesFile;
   dependBricks: string[];
   dependProcessorPackages: string[];
 }
@@ -64,6 +70,11 @@ export interface BuildInfoForProjectOfTemplates {
 export interface BrickPackageFile {
   path: string;
   content: string;
+}
+
+const getSuffix = (fileName: string): string => {
+  if (typeof fileName !== "string") return;
+  return fileName.substring(fileName.lastIndexOf(".") + 1)
 }
 
 export async function BuildProjectOfTemplates({
@@ -281,40 +292,26 @@ export async function BuildProjectOfTemplates({
 
   let indexJsContent = getBrickPackageIndexJs(templates);
 
+  const images: imagesFile = {
+    imagesDir: IMAGE_SAVE_FILE_PATH,
+    imagesPath: [],
+  }
+
   if (imagesResponse.list.length) {
-    const imagesTransformList: Array<Promise<File>> = [];
-
-    imagesResponse.list.forEach((file) =>
-      imagesTransformList.push(imgUrlToFile(file.url, file.name))
-    );
-
-    const imagesFileList = await Promise.all(imagesTransformList);
-
-    const uploadFileList: Array<Promise<any>> = [];
-
-    imagesFileList.forEach((file) => {
-      const [name, suffix] = file.name.split(".");
-      const reg = new RegExp(
-        /*eslint-disable no-useless-escape*/
-        `\/next\/api\/gateway\/object_store\.object_store\.GetObject\/[\\w|.|\\/|-]+${name}[\\w]+.${suffix}`,
-        "g"
-      );
-      indexJsContent = indexJsContent.replace(reg, `xxx/${file.name}`);
-      uploadFileList.push(
-        ObjectStoreApi_putObject(projectId, {
-          objectName: file.name,
-          file,
-        })
-      );
+    imagesResponse.list.forEach((file) => {
+      images.imagesPath.push({
+        imageOssPath: file.url,
+        fileName: `${simpleHash(file.url)}.${getSuffix(file.name)}`,
+      })
     });
 
-    // try {
-    //   const uploadResponse = await Promise.all(uploadFileList);
-    //   console.log('上传成功');
-    // } catch {
-    //   // 上传失败
-    //   message.error("上传失败")
-    // }
+    images.imagesPath.forEach((imageItem) => {
+      const reg = new RegExp(
+        imageItem.imageOssPath,
+        'g'
+      )
+      indexJsContent = indexJsContent.replace(reg, `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${imageItem.fileName}`);
+    })
   }
 
   const files = [
@@ -345,13 +342,6 @@ export async function BuildProjectOfTemplates({
     });
   }
 
-  // if (imagesFileList.length) {
-  //   imagesFileList.forEach((file) => files.push({
-  //     path: `dist/assets/${file.name}`,
-  //     content: file,
-  //   }))
-  // }
-
   const storyboard = {
     meta: {
       customTemplates: templates,
@@ -367,6 +357,7 @@ export async function BuildProjectOfTemplates({
 
   return {
     files,
+    images,
     dependBricks,
     dependProcessorPackages,
   };
@@ -376,18 +367,3 @@ customElements.define(
   "next-builder.provider-build-project-of-templates",
   createProviderClass(BuildProjectOfTemplates)
 );
-
-// var str = '[{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/birthday_yellow1632810302868180195.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/thinking1632810308992778245.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/birthday_blue1632814315046955753.png"},{"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/birthday_orange1632814329504090958.png"}]'
-
-// var fileList = ['viewpoint.png', 'blue-bg.png', 'birthday_yellow.png', 'birthday_blue.png', 'birthday_orange.png', 'thinking.png']
-
-// function change(str) {
-//   fileList.forEach(file => {
-//       const [name, suffix] = file.split('.');
-//       const reg = new RegExp(`\/next\/api\/gateway\/object_store\.object_store\.GetObject\/[\\w|.|\\/|-]+${name}[\\d]+.${suffix}`);
-//       str = str.replace(reg, file);
-//   })
-//   return str;
-// }
-
-// change(str)
