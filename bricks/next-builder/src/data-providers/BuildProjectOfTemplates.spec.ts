@@ -4,6 +4,7 @@ import {
   BuildProjectOfTemplates,
   BuildProjectOfTemplatesParams,
   safeJSONParse,
+  getSuffix,
 } from "./BuildProjectOfTemplates";
 
 jest.mock("@next-sdk/cmdb-sdk");
@@ -796,4 +797,28 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     safeJSONParse(errorJSON);
     expect(consoleError).toBeCalledTimes(1);
   });
+
+  it.each<[string, string | undefined]>(
+    [
+      [
+        'abc.png',
+        'png',
+      ],
+      [
+        'abc.20211014.jpeg',
+        'jpeg',
+      ],
+      [
+        'abc',
+        'abc'
+      ],
+      [
+        undefined,
+        undefined
+      ]
+    ]
+  )("getSuffix should work", (data, result) => {
+    const suffix = getSuffix(data);
+    expect(suffix).toEqual(result);
+  })
 });

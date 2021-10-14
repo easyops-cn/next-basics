@@ -38,6 +38,11 @@ export function safeJSONParse(str: string): Record<string, unknown> {
   return result;
 }
 
+export const getSuffix = (fileName: string): string => {
+  if (typeof fileName !== "string") return;
+  return fileName.substring(fileName.lastIndexOf(".") + 1)
+}
+
 export interface BuildProjectOfTemplatesParams {
   // The human-readable id of an app.
   appId: string;
@@ -70,11 +75,6 @@ export interface BuildInfoForProjectOfTemplates {
 export interface BrickPackageFile {
   path: string;
   content: string;
-}
-
-const getSuffix = (fileName: string): string => {
-  if (typeof fileName !== "string") return;
-  return fileName.substring(fileName.lastIndexOf(".") + 1)
 }
 
 export async function BuildProjectOfTemplates({
