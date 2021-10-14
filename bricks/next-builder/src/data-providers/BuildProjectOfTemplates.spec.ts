@@ -1,9 +1,10 @@
-import { InstanceGraphApi_traverseGraphV2 } from "@next-sdk/cmdb-sdk";
+import { InstanceGraphApi_traverseGraphV2, InstanceApi_getDetail } from "@next-sdk/cmdb-sdk";
 import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
   BuildProjectOfTemplatesParams,
   safeJSONParse,
+  getSuffix,
 } from "./BuildProjectOfTemplates";
 
 jest.mock("@next-sdk/cmdb-sdk");
@@ -45,6 +46,7 @@ const consoleError = jest
               instanceId: "u",
               templateId: "template-u",
               creator: "abc",
+              thumbnail: "data:image/jpeg;base64, xxx",
               proxy: `{
                 "properties": {
                   "a": {
@@ -124,7 +126,7 @@ const consoleError = jest
               instanceId: "u-1",
               type: "brick",
               brick: "template-t",
-              properties: '{"gridTemplateAreas":[["left","right"]]}',
+              properties: '{"gridTemplateAreas":[["left","right"]],"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"}',
             },
           ],
           edges: [
@@ -226,6 +228,19 @@ const consoleError = jest
       : {}
 );
 
+(InstanceApi_getDetail as jest.Mock).mockImplementation(() => ({
+  imgs: [
+    {
+      "name": "viewpoint.png",
+      "url": "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"
+    },
+    {
+      "name": "blue-bg.png",
+      "url": "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png"
+    },
+  ]
+}))
+
 describe("BuildProjectOfTemplates", () => {
   it.each<[BuildProjectOfTemplatesParams, BuildInfoForProjectOfTemplates]>([
     [
@@ -246,7 +261,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.dbea6502.js",
+            path: "dist/index.dec40b57.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -331,7 +346,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
             "left",
             "right"
           ]
-        ]
+        ],
+        "url": "bricks/app-1/dist/assets/6659b229.png"
       }
     }
   ]
@@ -404,6 +420,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
+    "thumbnail": "data:image/jpeg;base64, xxx",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -461,7 +478,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "instanceId": "u-1",
           "type": "brick",
           "brick": "test-app.template-t",
-          "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]]}"
+          "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]],\\\"url\\\":\\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\\"}"
         }
       ]
     }
@@ -560,6 +577,19 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         ],
         dependBricks: ["easy-view", "general-button", "test-provider"],
         dependProcessorPackages: ["my-pkg"],
+        images:  {
+          imagesDir: "dist/assets",
+          imagesPath:  [
+              {
+              fileName: "6659b229.png",
+              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
+            },
+              {
+              fileName: "6c079b14.png",
+              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
+            },
+          ],
+        },
       },
     ],
     [
@@ -580,7 +610,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
 }`,
           },
           {
-            path: "dist/index.1e1641d4.js",
+            path: "dist/index.1f72542c.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -643,6 +673,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
+    "thumbnail": "data:image/jpeg;base64, xxx",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -700,7 +731,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "instanceId": "u-1",
           "type": "brick",
           "brick": "test-app.template-t",
-          "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]]}"
+          "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]],\\\"url\\\":\\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\\"}"
         }
       ]
     }
@@ -733,6 +764,19 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         ],
         dependBricks: ["easy-view", "general-button", "test-provider"],
         dependProcessorPackages: ["my-pkg"],
+        images:  {
+          imagesDir: "dist/assets",
+          imagesPath:  [
+              {
+              fileName: "6659b229.png",
+              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
+            },
+              {
+              fileName: "6c079b14.png",
+              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
+            },
+          ],
+        },
       },
     ],
   ])("BuildProjectOfTemplates(%j) should work", async (params, result) => {
@@ -756,4 +800,28 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     safeJSONParse(errorJSON);
     expect(consoleError).toBeCalledTimes(1);
   });
+
+  it.each<[string, string | undefined]>(
+    [
+      [
+        'abc.png',
+        'png',
+      ],
+      [
+        'abc.20211014.jpeg',
+        'jpeg',
+      ],
+      [
+        'abc',
+        'abc'
+      ],
+      [
+        undefined,
+        undefined
+      ]
+    ]
+  )("getSuffix should work", (data, result) => {
+    const suffix = getSuffix(data);
+    expect(suffix).toEqual(result);
+  })
 });

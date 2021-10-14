@@ -11,7 +11,10 @@ import {
   scanBricksInStoryboard,
   scanProcessorsInStoryboard,
 } from "@next-core/brick-utils";
-import { InstanceGraphApi_traverseGraphV2 } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceGraphApi_traverseGraphV2,
+  InstanceApi_getDetail,
+} from "@next-sdk/cmdb-sdk";
 import { paramCase } from "change-case";
 import { uniq } from "lodash";
 import { buildBricks } from "../shared/storyboard/buildStoryboard";
@@ -22,6 +25,7 @@ import { isEmpty } from "lodash";
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
+const IMAGE_SAVE_FILE_PATH = "dist/assets";
 
 export function safeJSONParse(str: string): Record<string, unknown> {
   let result: Record<string, unknown> = {};
@@ -33,6 +37,11 @@ export function safeJSONParse(str: string): Record<string, unknown> {
   }
   return result;
 }
+
+export const getSuffix = (fileName: string): string => {
+  if (typeof fileName !== "string") return;
+  return fileName.substring(fileName.lastIndexOf(".") + 1);
+};
 
 export interface BuildProjectOfTemplatesParams {
   // The human-readable id of an app.
@@ -49,8 +58,16 @@ export enum DocType {
   slots,
 }
 
+interface imagesFile {
+  imagesDir: string;
+  imagesPath: Array<{
+    imageOssPath: string;
+    fileName: string;
+  }>;
+}
 export interface BuildInfoForProjectOfTemplates {
   files: BrickPackageFile[];
+  images?: imagesFile;
   dependBricks: string[];
   dependProcessorPackages: string[];
 }
@@ -110,11 +127,13 @@ export async function BuildProjectOfTemplates({
     select_fields: ["*"],
   });
 
+  const imagesReq = InstanceApi_getDetail("PROJECT_MICRO_APP", projectId, {
+    fields: "imgs.url,imgs.name",
+  });
+
   // Make parallel requests.
-  const [templatesResponse, snippetsResponse] = await Promise.all([
-    templatesGraphReq,
-    snippetsGraphReq,
-  ]);
+  const [templatesResponse, snippetsResponse, imagesResponse] =
+    await Promise.all([templatesGraphReq, snippetsGraphReq, imagesReq]);
 
   const templateTreeList = pipes.graphTree(
     templatesResponse as pipes.GraphData,
@@ -218,6 +237,7 @@ export async function BuildProjectOfTemplates({
       }
     };
     addChildrenAppId(templateItem);
+    const { thumbnail, ...restTemplateData } = templateItem;
     const stories = {
       // 基础信息存放
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
@@ -228,6 +248,7 @@ export async function BuildProjectOfTemplates({
       text: templateItem.text,
       description: templateItem.description,
       isCustomTemplate: true,
+      thumbnail,
       doc: {
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,
@@ -238,7 +259,7 @@ export async function BuildProjectOfTemplates({
         history: null,
       },
       conf: [],
-      originData: templateItem,
+      originData: restTemplateData,
     } as Story;
     if (templateItem.proxy) {
       // 如果有代理属性
@@ -260,7 +281,29 @@ export async function BuildProjectOfTemplates({
     createStories(templateItem)
   );
 
-  const indexJsContent = getBrickPackageIndexJs(templates);
+  let indexJsContent = getBrickPackageIndexJs(templates);
+
+  const images: imagesFile = {
+    imagesDir: IMAGE_SAVE_FILE_PATH,
+    imagesPath: [],
+  };
+
+  if (Array.isArray(imagesResponse.imgs)) {
+    imagesResponse.imgs.forEach((file) => {
+      images.imagesPath.push({
+        imageOssPath: file.url,
+        fileName: `${simpleHash(file.url)}.${getSuffix(file.name)}`,
+      });
+    });
+
+    images.imagesPath.forEach((imageItem) => {
+      const reg = new RegExp(imageItem.imageOssPath, "g");
+      indexJsContent = indexJsContent.replace(
+        reg,
+        `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${imageItem.fileName}`
+      );
+    });
+  }
 
   const files = [
     {
@@ -305,6 +348,7 @@ export async function BuildProjectOfTemplates({
 
   return {
     files,
+    images,
     dependBricks,
     dependProcessorPackages,
   };
