@@ -40,8 +40,8 @@ export function safeJSONParse(str: string): Record<string, unknown> {
 
 export const getSuffix = (fileName: string): string => {
   if (typeof fileName !== "string") return;
-  return fileName.substring(fileName.lastIndexOf(".") + 1)
-}
+  return fileName.substring(fileName.lastIndexOf(".") + 1);
+};
 
 export interface BuildProjectOfTemplatesParams {
   // The human-readable id of an app.
@@ -62,7 +62,7 @@ interface imagesFile {
   imagesDir: string;
   imagesPath: Array<{
     imageOssPath: string;
-    fileName: string
+    fileName: string;
   }>;
 }
 export interface BuildInfoForProjectOfTemplates {
@@ -128,8 +128,8 @@ export async function BuildProjectOfTemplates({
   });
 
   const imagesReq = InstanceApi_getDetail("PROJECT_MICRO_APP", projectId, {
-    fields: "imgs.url,imgs.name"
-  })
+    fields: "imgs.url,imgs.name",
+  });
 
   // Make parallel requests.
   const [templatesResponse, snippetsResponse, imagesResponse] =
@@ -219,27 +219,25 @@ export async function BuildProjectOfTemplates({
         }
       });
     };
-    const getOriginData = (data: pipes.GraphVertex) => {
+    const addChildrenAppId = (data: pipes.GraphVertex) => {
       if (!data) return;
-      const cloneData = {
-        ...data,
-      }
       if (Array.isArray(data.children)) {
-        cloneData.children = data.children.map((child: pipes.GraphVertex) => getOriginData(child));
+        data.children.forEach((child: pipes.GraphVertex) =>
+          addChildrenAppId(child)
+        );
       }
       if (
-        typeof cloneData.brick === "string" &&
-        cloneData.brick.includes("-") &&
-        !cloneData.brick.includes(".") &&
+        typeof data.brick === "string" &&
+        data.brick.includes("-") &&
+        !data.brick.includes(".") &&
         internalTemplateNames &&
-        internalTemplateNames.has(cloneData.brick)
+        internalTemplateNames.has(data.brick)
       ) {
-        cloneData.brick = `${cloneData.appId}.${cloneData.brick}`;
+        data.brick = `${data.appId}.${data.brick}`;
       }
-      // 删掉无必要的thumbnail
-      delete cloneData.thumbnail;
-      return cloneData;
     };
+    addChildrenAppId(templateItem);
+    const { thumbnail, ...restTemplateData } = templateItem;
     const stories = {
       // 基础信息存放
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
@@ -250,7 +248,7 @@ export async function BuildProjectOfTemplates({
       text: templateItem.text,
       description: templateItem.description,
       isCustomTemplate: true,
-      thumbnail: templateItem.thumbnail,
+      thumbnail,
       doc: {
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,
@@ -261,7 +259,7 @@ export async function BuildProjectOfTemplates({
         history: null,
       },
       conf: [],
-      originData: getOriginData(templateItem),
+      originData: restTemplateData,
     } as Story;
     if (templateItem.proxy) {
       // 如果有代理属性
@@ -288,23 +286,23 @@ export async function BuildProjectOfTemplates({
   const images: imagesFile = {
     imagesDir: IMAGE_SAVE_FILE_PATH,
     imagesPath: [],
-  }
+  };
 
   if (Array.isArray(imagesResponse.imgs)) {
     imagesResponse.imgs.forEach((file) => {
       images.imagesPath.push({
         imageOssPath: file.url,
         fileName: `${simpleHash(file.url)}.${getSuffix(file.name)}`,
-      })
+      });
     });
 
     images.imagesPath.forEach((imageItem) => {
-      const reg = new RegExp(
-        imageItem.imageOssPath,
-        'g'
-      )
-      indexJsContent = indexJsContent.replace(reg, `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${imageItem.fileName}`);
-    })
+      const reg = new RegExp(imageItem.imageOssPath, "g");
+      indexJsContent = indexJsContent.replace(
+        reg,
+        `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${imageItem.fileName}`
+      );
+    });
   }
 
   const files = [
