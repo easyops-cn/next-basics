@@ -11,6 +11,7 @@ import {
 import { BuilderDataTransferType } from "@next-core/editor-bricks-helper";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { BrickItem } from "./BrickItem";
+import { LayerType } from "../interfaces";
 
 jest.mock("react-dnd", () => ({
   useDrag: jest.fn(),
@@ -212,5 +213,41 @@ describe("BrickItem", () => {
       icon: "abacus",
       lib: "fa",
     });
+  });
+
+  it("should show thumbnail while layerType was widget", () => {
+    const dragRef = jest.fn();
+    mockUseDrag.mockReturnValueOnce([{ isDragging: false }, dragRef]);
+    const wrapper = shallow(
+      <BrickItem
+        brick={{
+          type: "brick",
+          id: "widget-project.my-widget",
+          title: "my-widget",
+          thumbnail: "xxx.png",
+        }}
+        layerType={LayerType.WIDGET}
+      />
+    );
+
+    expect(wrapper.find(".brickIcon img").prop("src")).toBe("xxx.png");
+  });
+
+  it("should show BuildFilled while layType was widget and thumbnail was null", () => {
+    const dragRef = jest.fn();
+    mockUseDrag.mockReturnValueOnce([{ isDragging: false }, dragRef]);
+    const wrapper = shallow(
+      <BrickItem
+        brick={{
+          type: "brick",
+          id: "widget-project.my-widget",
+          title: "my-widget",
+          thumbnail: null,
+        }}
+        layerType={LayerType.WIDGET}
+      />
+    );
+
+    expect(wrapper.find(BuildFilled).length).toBe(1);
   });
 });
