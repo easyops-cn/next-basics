@@ -13,7 +13,7 @@ import {
 } from "@next-core/brick-utils";
 import {
   InstanceGraphApi_traverseGraphV2,
-  InstanceApi_postSearch,
+  InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import { paramCase } from "change-case";
 import { uniq } from "lodash";
@@ -127,17 +127,9 @@ export async function BuildProjectOfTemplates({
     select_fields: ["*"],
   });
 
-  const imagesReq = InstanceApi_postSearch("MICRO_APP_RESOURCE_IMAGE", {
-    fields: {
-      form: true,
-      name: true,
-      url: true,
-    },
-    page_size: 3000,
-    query: {
-      "project.instanceId": projectId,
-    },
-  });
+  const imagesReq = InstanceApi_getDetail("PROJECT_MICRO_APP", projectId, {
+    fields: "imgs.url,imgs.name"
+  })
 
   // Make parallel requests.
   const [templatesResponse, snippetsResponse, imagesResponse] =
@@ -227,24 +219,27 @@ export async function BuildProjectOfTemplates({
         }
       });
     };
-    const addChildrenAppId = (data: pipes.GraphVertex) => {
+    const getOriginData = (data: pipes.GraphVertex) => {
       if (!data) return;
+      const cloneData = {
+        ...data,
+      }
       if (Array.isArray(data.children)) {
-        data.children.forEach((child: pipes.GraphVertex) =>
-          addChildrenAppId(child)
-        );
+        cloneData.children = data.children.map((child: pipes.GraphVertex) => getOriginData(child));
       }
       if (
-        typeof data.brick === "string" &&
-        data.brick.includes("-") &&
-        !data.brick.includes(".") &&
+        typeof cloneData.brick === "string" &&
+        cloneData.brick.includes("-") &&
+        !cloneData.brick.includes(".") &&
         internalTemplateNames &&
-        internalTemplateNames.has(data.brick)
+        internalTemplateNames.has(cloneData.brick)
       ) {
-        data.brick = `${data.appId}.${data.brick}`;
+        cloneData.brick = `${cloneData.appId}.${cloneData.brick}`;
       }
+      // 删掉无必要的thumbnail
+      delete cloneData.thumbnail;
+      return cloneData;
     };
-    addChildrenAppId(templateItem);
     const stories = {
       // 基础信息存放
       storyId: `${templateItem.appId}.${templateItem.templateId}`,
@@ -255,6 +250,7 @@ export async function BuildProjectOfTemplates({
       text: templateItem.text,
       description: templateItem.description,
       isCustomTemplate: true,
+      thumbnail: templateItem.thumbnail,
       doc: {
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,
@@ -265,7 +261,7 @@ export async function BuildProjectOfTemplates({
         history: null,
       },
       conf: [],
-      originData: templateItem,
+      originData: getOriginData(templateItem),
     } as Story;
     if (templateItem.proxy) {
       // 如果有代理属性
@@ -294,8 +290,8 @@ export async function BuildProjectOfTemplates({
     imagesPath: [],
   }
 
-  if (imagesResponse.list.length) {
-    imagesResponse.list.forEach((file) => {
+  if (Array.isArray(imagesResponse.imgs)) {
+    imagesResponse.imgs.forEach((file) => {
       images.imagesPath.push({
         imageOssPath: file.url,
         fileName: `${simpleHash(file.url)}.${getSuffix(file.name)}`,

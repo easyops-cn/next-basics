@@ -1,4 +1,4 @@
-import { InstanceGraphApi_traverseGraphV2, InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
+import { InstanceGraphApi_traverseGraphV2, InstanceApi_getDetail } from "@next-sdk/cmdb-sdk";
 import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
@@ -46,6 +46,7 @@ const consoleError = jest
               instanceId: "u",
               templateId: "template-u",
               creator: "abc",
+              thumbnail: "data:image/jpeg;base64, xxx",
               proxy: `{
                 "properties": {
                   "a": {
@@ -227,8 +228,8 @@ const consoleError = jest
       : {}
 );
 
-(InstanceApi_postSearch as jest.Mock).mockImplementation(() => ({
-  list: [
+(InstanceApi_getDetail as jest.Mock).mockImplementation(() => ({
+  imgs: [
     {
       "name": "viewpoint.png",
       "url": "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"
@@ -419,6 +420,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
+    "thumbnail": "data:image/jpeg;base64, xxx",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -671,6 +673,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
+    "thumbnail": "data:image/jpeg;base64, xxx",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
