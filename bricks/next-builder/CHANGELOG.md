@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.80.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.79.0...@next-bricks/next-builder@1.80.0) (2021-10-14)
+
+
+### Features
+
+* BuildProjectOfTemplate add Image Support ([f65941d](https://github.com/easyops-cn/next-basics/commit/f65941db1da9d4e8742bb71b94980c1cd3f5150a))
+* buildProjectOfTemplates support images ([83789f9](https://github.com/easyops-cn/next-basics/commit/83789f9f11ecd260f38c517b5afdd536ccc14068))
+* getSuffix add unit test ([fd6af57](https://github.com/easyops-cn/next-basics/commit/fd6af57b1a654a6a77d0065cdafd369c392333f7))
+* support widget thumbnail show ([fc50bfc](https://github.com/easyops-cn/next-basics/commit/fc50bfc4ab57ce8d0b79117771b2cc26a125822a))
+* support widget thumbnail show ([58cc021](https://github.com/easyops-cn/next-basics/commit/58cc021ed8ad2c677c4a298e22c7a5c0e5dfb2c9))
+* update requset image api and add thumbnail ([0dd74c2](https://github.com/easyops-cn/next-basics/commit/0dd74c2921e6ea2aa38075f2b5632c54029ebb8f))
+
+
+
+
+
 # [1.79.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.78.1...@next-bricks/next-builder@1.79.0) (2021-10-13)
 
 
