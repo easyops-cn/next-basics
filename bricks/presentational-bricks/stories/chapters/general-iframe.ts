@@ -21,10 +21,23 @@ export const GeneralIframeStory: Story = {
     {
       brick: "presentational-bricks.general-iframe",
       properties: {
-        src: "https://www.baidu.com",
+        src: "http://192.168.100.162/next",
       },
       events: {
         "general-iframe.loaded": {
+          action: "console.log",
+        },
+      },
+    },
+    {
+      brick: "presentational-bricks.general-iframe",
+      properties: {
+        messageOrigin: "http://192.168.100.163",
+        enableMessageSubscribe: true,
+        src: "http://192.168.100.163/next",
+      },
+      events: {
+        "iframe.message": {
           action: "console.log",
         },
       },

@@ -33,6 +33,13 @@ export class GeneralIframeElement extends UpdatingElement {
   generalIframeLoaded: EventEmitter<any>;
 
   /**
+   * @detail any
+   * @description iframe 接收到消息触发事件
+   */
+  @event({ type: "iframe.message" })
+  iframeMessage: EventEmitter<unknown>;
+
+  /**
    * @kind string
    * @required true
    * @default -
@@ -52,7 +59,37 @@ export class GeneralIframeElement extends UpdatingElement {
   })
   iframeStyle = {};
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否开启消息监听，开启后会收到消息会触发 iframe.message 事件
+   */
+  @property({
+    type: Boolean,
+  })
+  enableMessageSubscribe: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 只对特定源接收信息，防止收到无相关的消息，不配置的话默认取的是 iframe.src 作为值
+   */
+  @property()
+  messageOrigin: string;
+
   private iframe: HTMLIFrameElement;
+
+  private onMessage = (event: MessageEvent): void => {
+    // istanbul ignore else
+    if (
+      (this.messageOrigin && this.messageOrigin === event.origin) ||
+      (!this.messageOrigin && event.origin === new URL(this.iframe.src).origin)
+    ) {
+      this.iframeMessage.emit(event.data);
+    }
+  };
 
   connectedCallback(): void {
     // istanbul ignore else
@@ -60,6 +97,14 @@ export class GeneralIframeElement extends UpdatingElement {
       this.style.display = "block";
     }
     this._render();
+
+    if (this.enableMessageSubscribe) {
+      window.addEventListener("message", this.onMessage);
+    }
+  }
+
+  disconnectedCallback(): void {
+    window.removeEventListener("message", this.onMessage);
   }
 
   protected _render(): void {
