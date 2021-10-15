@@ -138,8 +138,8 @@ export async function BuildProjectOfTemplates({
   const getThumbnailList = () => {
     return []
       .concat(
-        templatesResponse.topic_vertices.map((item) => item.thumbnail),
-        snippetsResponse.topic_vertices.map((item) => item.thumbnail)
+        templatesResponse.topic_vertices?.map((item) => item.thumbnail),
+        snippetsResponse.topic_vertices?.map((item) => item.thumbnail)
       )
       .filter((item) => item)
       .map((thumbnailUrl: string) => ({
@@ -194,7 +194,7 @@ export async function BuildProjectOfTemplates({
       layerType: item.layerType,
       text: item.text,
       description: item.description,
-      thumbnail: getTransformFilePath(
+      thumbnail: item.thumbnail && getTransformFilePath(
         thumbnailList.find(
           (thumbnailItem) => thumbnailItem.imageOssPath === item.thumbnail
         ).fileName

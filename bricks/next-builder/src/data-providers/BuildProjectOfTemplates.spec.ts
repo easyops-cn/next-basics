@@ -46,7 +46,7 @@ const consoleError = jest
               instanceId: "u",
               templateId: "template-u",
               creator: "abc",
-              thumbnail: "data:image/jpeg;base64, xxx",
+              thumbnail: "www.xxx.com/url/abc.png",
               proxy: `{
                 "properties": {
                   "a": {
@@ -93,6 +93,7 @@ const consoleError = jest
               instanceId: "v",
               templateId: "template-v",
               creator: "abc",
+              thumbnail: null,
               proxy: `{
                 "properties": null,
                 "events": {},
@@ -164,14 +165,14 @@ const consoleError = jest
                 en: "Snippet X",
               },
               category: "hosted",
-              thumbnail: "url-x",
+              thumbnail: "www.xxx.com/url/abc.jpeg",
             },
             {
               id: "S-02",
               instanceId: "y",
               snippetId: "hosted-snippet-y",
               category: "hosted",
-              thumbnail: "url-y",
+              thumbnail: null,
             },
           ],
           vertices: [
@@ -420,7 +421,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
-    "thumbnail": "data:image/jpeg;base64, xxx",
+    "thumbnail": "bricks/app-1/dist/assets/15858a13.png",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -489,6 +490,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
+    "thumbnail": null,
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
@@ -519,7 +521,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         "zh": "片段 X",
         "en": "Snippet X"
       },
-      "thumbnail": "url-x",
+      "thumbnail": "bricks/app-1/dist/assets/10ea16c7.jpeg",
       "bricks": [
         {
           "brick": "easy-view",
@@ -556,7 +558,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     {
       "id": "app-1.hosted-snippet-y",
       "category": "hosted",
-      "thumbnail": "url-y",
+      "thumbnail": null,
       "bricks": [
         {
           "brick": "easy-view",
@@ -580,11 +582,19 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         images:  {
           imagesDir: "dist/assets",
           imagesPath:  [
-              {
+            {
+              fileName: "15858a13.png",
+              imageOssPath: "www.xxx.com/url/abc.png",
+            },
+            {
+              fileName: "10ea16c7.jpeg",
+              imageOssPath: "www.xxx.com/url/abc.jpeg",
+            },
+            {
               fileName: "6659b229.png",
               imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
             },
-              {
+            {
               fileName: "6c079b14.png",
               imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
             },
@@ -673,7 +683,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
-    "thumbnail": "data:image/jpeg;base64, xxx",
+    "thumbnail": "bricks/app-2/dist/assets/15858a13.png",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -742,6 +752,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
+    "thumbnail": null,
     "doc": {
       "id": "test.template-v",
       "name": "test.template-v",
@@ -767,11 +778,15 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         images:  {
           imagesDir: "dist/assets",
           imagesPath:  [
-              {
+            {
+              fileName: "15858a13.png",
+              imageOssPath: "www.xxx.com/url/abc.png",
+            },
+            {
               fileName: "6659b229.png",
               imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
             },
-              {
+            {
               fileName: "6c079b14.png",
               imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
             },
