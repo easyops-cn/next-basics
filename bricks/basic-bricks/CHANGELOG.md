@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.149.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.2...@next-bricks/basic-bricks@1.149.3) (2021-10-15)
+
+
+### Bug Fixes
+
+* **drawer:** 抽屉添加悬浮样式 ([7a1b3f3](https://github.com/easyops-cn/next-basics/commit/7a1b3f3e06352063691a2e7b421ece928def5b00))
+
+
+
+
+
 ## [1.149.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.1...@next-bricks/basic-bricks@1.149.2) (2021-10-15)
 
 
