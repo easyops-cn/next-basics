@@ -12,8 +12,7 @@ export const generalCustomButtonsStory: Story = {
   },
   description: {
     en: "General button",
-    zh:
-      "可配置收纳起来的更多按钮，可配置不同事件，常用于页面右上角、卡片右上角等操作位。",
+    zh: "可配置收纳起来的更多按钮，可配置不同事件，常用于页面右上角、卡片右上角等操作位。",
   },
   icon: {
     lib: "fa",
@@ -443,6 +442,16 @@ export const generalCustomButtonsStory: Story = {
                             tooltipPlacement: "left",
                           },
                           {
+                            buttonShape: "circle",
+                            buttonType: "icon",
+                            eventName: "action.danger1",
+                            icon: "close",
+                            isDropdown: false,
+                            tooltip: "Danger Action 1",
+                            tooltipPlacement: "left",
+                            danger: true,
+                          },
+                          {
                             buttonHref:
                               "/developers/brick-book/brick/basic-bricks.general-custom-buttons",
                             eventName: "instance.topology.delete",
@@ -461,6 +470,13 @@ export const generalCustomButtonsStory: Story = {
                             text: "Delete",
                             tooltip: "删除",
                             tooltipPlacement: "right",
+                          },
+                          {
+                            eventName: "action.danger2",
+                            icon: "close",
+                            isDropdown: true,
+                            text: "Danger Action 2",
+                            danger: true,
                           },
                         ],
                         isMoreButton: true,
