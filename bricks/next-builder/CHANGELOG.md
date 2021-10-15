@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.81.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.80.0...@next-bricks/next-builder@1.81.0) (2021-10-15)
+
+
+### Features
+
+* buildProjectOfTempaltes update unit test ([b1a014c](https://github.com/easyops-cn/next-basics/commit/b1a014c97a66a769eb287892d4e1dc55452e4adf))
+* widget and snippet thumbnail form base64 to img url ([e4cabf7](https://github.com/easyops-cn/next-basics/commit/e4cabf711a577bdf0cfda07cf4765bca626b6a05))
+
+
+
+
+
 # [1.80.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.79.0...@next-bricks/next-builder@1.80.0) (2021-10-14)
 
 
