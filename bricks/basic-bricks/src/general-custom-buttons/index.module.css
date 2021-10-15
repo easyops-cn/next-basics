@@ -76,6 +76,11 @@
         vertical-align: middle;
       }
     }
+
+    &:global(.ant-btn-dangerous):hover {
+      color: var(--theme-red-color);
+      background: var(--theme-red-background);
+    }
   }
 }
 
