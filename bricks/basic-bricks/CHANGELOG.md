@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.149.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.1...@next-bricks/basic-bricks@1.149.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* **general-custom-buttons:** icon buttonType support danger sty ([0612e23](https://github.com/easyops-cn/next-basics/commit/0612e235ee182f7e9e8165d9184add5d1dc8d24f))
+
+
+
+
+
 ## [1.149.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.0...@next-bricks/basic-bricks@1.149.1) (2021-10-13)
 
 
