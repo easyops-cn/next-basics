@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.225.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.224.0...@next-bricks/presentational-bricks@1.225.0) (2021-10-15)
+
+
+### Bug Fixes
+
+* 排行table支持显示表头 Closed EVENT-357 ([180ba14](https://github.com/easyops-cn/next-basics/commit/180ba147973ebc18b0f848a6a25c7d1084379eda))
+
+
+### Features
+
+* support iframe.message event ([e20a23a](https://github.com/easyops-cn/next-basics/commit/e20a23a68d45a4f57cc6b09cfef1d143013dad22))
+
+
+
+
+
 # [1.224.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.223.1...@next-bricks/presentational-bricks@1.224.0) (2021-10-13)
 
 
