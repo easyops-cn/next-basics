@@ -345,6 +345,7 @@ describe("TrendTable", () => {
   it("should work size", () => {
     const wrapper = mount(
       <RankTable
+        showHeader={false}
         header={{
           title: "Top10",
           extra: "foo",

@@ -25,6 +25,7 @@ interface RankTableProps {
   scroll?: TableProps<unknown>["scroll"];
   size?: "default" | "small";
   onChange: any;
+  showHeader?: boolean;
 }
 
 type ItemBrickDataMap = Map<unknown, BrickData>;
@@ -35,7 +36,8 @@ type BrickData = {
 };
 
 export function RankTable(props: RankTableProps): React.ReactElement {
-  const { dataSource, columns, configProps, rowKey, scroll } = props;
+  const { dataSource, columns, configProps, rowKey, scroll, showHeader } =
+    props;
   const columnTitleBrickDataMapRef = useRef<
     Map<CustomColumn, { title: unknown }>
   >(new Map());
@@ -229,6 +231,7 @@ export function RankTable(props: RankTableProps): React.ReactElement {
   const table = () => {
     return (
       <Table
+        showHeader={showHeader}
         className={classNames(styles.brickTable)}
         dataSource={data}
         columns={customColumns}
