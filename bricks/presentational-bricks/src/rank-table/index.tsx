@@ -242,6 +242,17 @@ export class RankTableElement extends UpdatingElement {
   showCard = true;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否展示表头
+   */
+  @property({
+    attribute: false,
+  })
+  showHeader = true;
+
+  /**
    * @kind "default"|"small"
    * @required false
    * @default default
@@ -352,6 +363,7 @@ export class RankTableElement extends UpdatingElement {
             scroll={this.scrollConfigs}
             size={this.size}
             onChange={this._handleOnChange}
+            showHeader={this.showHeader}
           />
         </BrickWrapper>,
         this
