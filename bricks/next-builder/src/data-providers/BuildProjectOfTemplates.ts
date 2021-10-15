@@ -135,6 +135,25 @@ export async function BuildProjectOfTemplates({
   const [templatesResponse, snippetsResponse, imagesResponse] =
     await Promise.all([templatesGraphReq, snippetsGraphReq, imagesReq]);
 
+  const getThumbnailList = () => {
+    return []
+      .concat(
+        templatesResponse.topic_vertices?.map((item) => item.thumbnail),
+        snippetsResponse.topic_vertices?.map((item) => item.thumbnail)
+      )
+      .filter((item) => item)
+      .map((thumbnailUrl: string) => ({
+        imageOssPath: thumbnailUrl,
+        fileName: `${simpleHash(thumbnailUrl)}.${getSuffix(thumbnailUrl)}`,
+      }));
+  };
+
+  const getTransformFilePath = (fileName: string): string => {
+    return `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${fileName}`;
+  };
+
+  const thumbnailList = getThumbnailList();
+
   const templateTreeList = pipes.graphTree(
     templatesResponse as pipes.GraphData,
     {
@@ -175,7 +194,11 @@ export async function BuildProjectOfTemplates({
       layerType: item.layerType,
       text: item.text,
       description: item.description,
-      thumbnail: item.thumbnail,
+      thumbnail: item.thumbnail && getTransformFilePath(
+        thumbnailList.find(
+          (thumbnailItem) => thumbnailItem.imageOssPath === item.thumbnail
+        ).fileName
+      ),
       bricks: buildBricks(item.children, {
         nodeToConf: new WeakMap(),
         appId,
@@ -248,7 +271,13 @@ export async function BuildProjectOfTemplates({
       text: templateItem.text,
       description: templateItem.description,
       isCustomTemplate: true,
-      thumbnail,
+      thumbnail:
+        thumbnail &&
+        getTransformFilePath(
+          thumbnailList.find(
+            (thumbnailItem) => thumbnailItem.imageOssPath === thumbnail
+          ).fileName
+        ),
       doc: {
         id: `${templateItem.appId}.${templateItem.templateId}`,
         name: `${templateItem.appId}.${templateItem.templateId}`,
@@ -285,7 +314,7 @@ export async function BuildProjectOfTemplates({
 
   const images: imagesFile = {
     imagesDir: IMAGE_SAVE_FILE_PATH,
-    imagesPath: [],
+    imagesPath: thumbnailList,
   };
 
   if (Array.isArray(imagesResponse.imgs)) {
@@ -300,7 +329,7 @@ export async function BuildProjectOfTemplates({
       const reg = new RegExp(imageItem.imageOssPath, "g");
       indexJsContent = indexJsContent.replace(
         reg,
-        `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${imageItem.fileName}`
+        getTransformFilePath(imageItem.fileName)
       );
     });
   }
