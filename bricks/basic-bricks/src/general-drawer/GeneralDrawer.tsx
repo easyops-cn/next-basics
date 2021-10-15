@@ -4,7 +4,6 @@ import { Drawer, Spin } from "antd";
 
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
 import { DrawerProps } from "antd/lib/drawer";
-
 interface GeneralDrawerProps {
   visible: boolean;
   title?: string;
@@ -18,6 +17,7 @@ interface GeneralDrawerProps {
   mask?: boolean;
   headerStyle?: Record<string, any>;
   configProps?: DrawerProps;
+  isFloat?: boolean;
 }
 
 export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
@@ -66,6 +66,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       drawerStyle={props.drawerStyle}
       mask={props.mask}
       headerStyle={props.headerStyle}
+      className={props.isFloat ? "floatDrawer" : ""}
     >
       <Spin spinning={props.loading} tip="Loading...">
         <div className="content" style={{ maxHeight: maxContentHeight }}>

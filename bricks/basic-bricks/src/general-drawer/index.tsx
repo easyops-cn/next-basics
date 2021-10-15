@@ -155,6 +155,13 @@ export class GeneralDrawerElement extends UpdatingElement {
    */
   @property({ attribute: false })
   configProps: DrawerProps;
+  /**
+   * @default false
+   * @required false
+   * @description 是否浮层样式，如果设为true,则抽屉边缘会有外边距，圆角和阴影
+   */
+  @property({ type: Boolean })
+  isFloat: boolean;
 
   constructor() {
     super();
@@ -241,6 +248,7 @@ export class GeneralDrawerElement extends UpdatingElement {
             headerStyle={this.headerStyle}
             mask={this.mask}
             configProps={this.configProps}
+            isFloat={this.isFloat}
           />
         </BrickWrapper>,
         this._mountPoint
