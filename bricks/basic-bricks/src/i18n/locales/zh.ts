@@ -14,6 +14,7 @@ const locale: Locale = {
   [K.CANCEL]: "取消",
   [K.OK]: "确定",
   [K.COVERT_TO_LANGUAGE]: "Convert to English",
+  [K.SEARCH_BY_NAME_KEYWORD]: "通过名称/关键字搜索",
 };
 
 export default locale;

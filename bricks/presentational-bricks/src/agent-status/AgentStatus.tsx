@@ -36,6 +36,26 @@ export function AgentStatus(props: AgentStatusProps): React.ReactElement {
       text: t(K.AGENT_STATUS_UNDER_MAINTENANCE),
       color: Color.orange,
     },
+    [AgentStatusType.NORMAL_EN]: {
+      text: "Normal",
+      color: Color.green,
+    },
+    [AgentStatusType.ABNORMAL_EN]: {
+      text: "Abnormal",
+      color: Color.red,
+    },
+    [AgentStatusType.NOT_INSTALLED_EN]: {
+      text: "No Installed",
+      color: Color.gray,
+    },
+    [AgentStatusType.UNDER_MAINTENANCE_EN]: {
+      text: "Under Maintenance",
+      color: Color.orange,
+    },
+    [AgentStatusType.UNINSTALLED_EN]: {
+      text: "Uninstalled",
+      color: Color.gray,
+    },
   };
 
   return (
