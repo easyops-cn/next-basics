@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.150.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.4...@next-bricks/basic-bricks@1.150.0) (2021-10-17)
+
+
+### Features
+
+* 国际化 refs LAUNCHPAD-75 ([5d344fe](https://github.com/easyops-cn/next-basics/commit/5d344fe31e33dc7e0b4a106c3abdd28a19461607))
+
+
+
+
+
 ## [1.149.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.3...@next-bricks/basic-bricks@1.149.4) (2021-10-16)
 
 
