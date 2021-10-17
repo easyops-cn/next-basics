@@ -3,7 +3,8 @@ import classNames from "classnames";
 import { Input } from "antd";
 import styles from "./SearchBar.module.css";
 import { SearchOutlined } from "@ant-design/icons";
-
+import i18next from "i18next";
+import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
 export interface SearchBarProps {
   onChange: (value: string) => void;
 }
@@ -73,7 +74,9 @@ export function SearchBar(props: SearchBarProps): React.ReactElement {
     >
       <div className={styles.inputContainer} onClick={handleClick}>
         <Input
-          placeholder="通过名称/关键字搜索"
+          placeholder={i18next.t(
+            `${NS_BASIC_BRICKS}:${K.SEARCH_BY_NAME_KEYWORD}`
+          )}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onFocus={handleFocus}

@@ -10,6 +10,11 @@ export enum AgentStatusType {
   NOT_INSTALLED = "未安装",
   UNINSTALLED = "已卸载",
   UNDER_MAINTENANCE = "维护中",
+  NORMAL_EN = "Normal",
+  ABNORMAL_EN = "Abnormal",
+  NOT_INSTALLED_EN = "No Installed",
+  UNINSTALLED_EN = "Uninstalled",
+  UNDER_MAINTENANCE_EN = "Under Maintenance",
 }
 
 /**
