@@ -10,6 +10,7 @@ import {
   getRuntime,
   httpErrorToString,
 } from "@next-core/brick-kit";
+import { JsonStorage } from "@next-libs/storage";
 import { loadScript } from "@next-core/brick-utils";
 import { esbLogin } from "@next-sdk/auth-sdk";
 import { MfaApi_generateRandomTotpSecret } from "@next-sdk/api-gateway-sdk";
@@ -64,24 +65,13 @@ interface GeneralLoginState {
   yzm_value?: any;
   security_codeEnabled?: any;
 }
-
-export const getLoginByMethod = (): string => {
-  let loginBy;
-  const featureFlags = getRuntime().getFeatureFlags();
-  if (featureFlags["login-by-ldap"]) {
-    loginBy = "ldap";
-  } else if (featureFlags["login-by-custom"]) {
-    loginBy = "custom";
-  } else {
-    loginBy = "easyops";
-  }
-  return loginBy;
-};
+export const lastLoginMethod = "LAST_LOGIN_METHOD";
 
 export class LegacyGeneralLogin extends React.Component<
   GeneralLoginProps,
   GeneralLoginState
 > {
+  storage = new JsonStorage(localStorage);
   handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     const { t, form, onLogin } = this.props;
@@ -120,6 +110,7 @@ export class LegacyGeneralLogin extends React.Component<
           const loginMethod = esbLoginEnabled ? esbLogin : AuthApi_loginV2;
           const req = values as unknown as AuthApi_LoginV2RequestBody;
           req.loginBy = this.state.currentLoginMethod;
+          this.storage.setItem(lastLoginMethod, this.state.currentLoginMethod);
           const result = await loginMethod(req, {
             params,
             interceptorParams: {
@@ -180,7 +171,6 @@ export class LegacyGeneralLogin extends React.Component<
             const resetyzm_reader = new FileReader();
             resetyzm_reader.readAsText(resetyzm);
             resetyzm_reader.onload = (e) => {
-              //console.log(e.target.result);
               this.setState({ yzm: e.target.result });
             };
           }
@@ -249,7 +239,10 @@ export class LegacyGeneralLogin extends React.Component<
       service,
       imageHeight: window.innerHeight,
       loginErrorMsg: "",
-      currentLoginMethod: this.loginMethods?.[0] ?? "easyops",
+      currentLoginMethod:
+        this.storage.getItem(lastLoginMethod) ??
+        this.loginMethods?.[0] ??
+        "easyops",
       yzm: "",
       yzm_value: "",
       security_codeEnabled: getRuntime().getFeatureFlags()["security-code"],
@@ -320,7 +313,6 @@ export class LegacyGeneralLogin extends React.Component<
       isFieldTouched,
       setFieldsValue,
     } = form;
-
     const runtime = getRuntime();
     const enabledFeatures = runtime.getFeatureFlags();
     const brand = runtime.getBrandSettings();
@@ -675,15 +667,20 @@ export class LegacyGeneralLogin extends React.Component<
               </Card>
             ) : (
               <Card>
-                <Tabs onChange={changeLoginMethod}>
-                  {this.loginMethods.map((item: string) => (
-                    <Tabs.TabPane
-                      tab={(this.loginMethodsMap as any)[item]}
-                      key={item}
-                    >
-                      {renderLoginForm()}
-                    </Tabs.TabPane>
-                  ))}
+                <Tabs
+                  onChange={changeLoginMethod}
+                  activeKey={this.state.currentLoginMethod}
+                >
+                  {this.loginMethods.map((item: string) => {
+                    return (
+                      <Tabs.TabPane
+                        tab={(this.loginMethodsMap as any)[item]}
+                        key={item}
+                      >
+                        {renderLoginForm()}
+                      </Tabs.TabPane>
+                    );
+                  })}
                 </Tabs>
               </Card>
             )}

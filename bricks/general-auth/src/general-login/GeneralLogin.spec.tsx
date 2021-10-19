@@ -1,13 +1,14 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { createLocation } from "history";
 import { Form } from "@ant-design/compatible";
-import { Modal } from "antd";
+import { Card, Modal, Tabs } from "antd";
 import * as kit from "@next-core/brick-kit";
 import * as authSdk from "@next-sdk/auth-sdk";
 import * as apiGatewaySdk from "@next-sdk/api-gateway-sdk";
-import { LegacyGeneralLogin, getLoginByMethod } from "./GeneralLogin";
+import { LegacyGeneralLogin, lastLoginMethod } from "./GeneralLogin";
 import { WithTranslation } from "react-i18next";
+import { JsonStorage } from "@next-libs/storage";
 
 const spyOnHistoryPush = jest.fn();
 jest.spyOn(kit, "getHistory").mockReturnValue({
@@ -18,6 +19,8 @@ jest.spyOn(kit, "getHistory").mockReturnValue({
   },
   push: spyOnHistoryPush,
 } as any);
+jest.mock("@next-libs/storage");
+
 const spyOnAuthenticate = jest.spyOn(kit, "authenticate");
 const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 const spyOnReloadMicroApps = jest.fn();
@@ -30,10 +33,10 @@ const spyOnMFALogin = jest.spyOn(
   apiGatewaySdk,
   "MfaApi_generateRandomTotpSecret"
 );
+jest.mock("@next-libs/storage");
 const spyOnMFASetRule = jest.spyOn(apiGatewaySdk, "MfaApi_verifyUserIsSetRule");
 const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
-
 spyOnKit.mockReturnValue({
   reloadMicroApps: spyOnReloadMicroApps,
   reloadSharedData: spyOnReloadSharedData,
@@ -46,6 +49,7 @@ spyOnKit.mockReturnValue({
     wxAppid: "abc",
     wxAgentid: "abc",
     wxRedirect: "http://example.com",
+    enabled_login_types: ["easyops", "ldap"],
   }),
 } as any);
 
@@ -57,6 +61,19 @@ const i18nProps: WithTranslation = {
   tReady: null,
 };
 
+const storage = {
+  LAST_LOGIN_METHOD: "ldap",
+} as any;
+(JsonStorage as jest.Mock).mockImplementation(() => {
+  return {
+    getItem: (key: string): string => {
+      return storage[key];
+    },
+    setItem: (key: string, value: string): void => {
+      storage[key] = value;
+    },
+  };
+});
 describe("GeneralLogin", () => {
   afterEach(() => {
     spyOnLogin.mockReset();
@@ -94,6 +111,8 @@ describe("GeneralLogin", () => {
       <LegacyGeneralLogin form={form as any} {...i18nProps} />
     );
     expect(wrapper).toBeTruthy();
+    expect(wrapper.find(Card).find(Tabs).prop("activeKey")).toEqual("ldap");
+    wrapper.find(Tabs).prop("onChange")("easyops");
     spyOnLogin.mockResolvedValueOnce({
       loggedIn: true,
       username: "mock-user",
@@ -101,7 +120,9 @@ describe("GeneralLogin", () => {
       org: 1,
       accessRule: "cmdb",
     });
-    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
+    wrapper.find(Form).at(1).simulate("submit", new Event("submit"));
+    expect(spyOnLogin).toHaveBeenCalled();
+    expect(storage["LAST_LOGIN_METHOD"]).toEqual("easyops");
   });
   it("should esb login successfully", (done) => {
     const form = {
@@ -137,7 +158,7 @@ describe("GeneralLogin", () => {
         "esb-login": true,
       }),
     } as any);
-    wrapper.find(Form).simulate("submit", new Event("submit"));
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
 
   it("should work when open mfa ", (done) => {
@@ -173,7 +194,7 @@ describe("GeneralLogin", () => {
         factors: true,
       }),
     } as any);
-    wrapper.find(Form).simulate("submit", new Event("submit"));
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
 
   it("should login failed if give wrong password", async () => {
@@ -194,11 +215,11 @@ describe("GeneralLogin", () => {
       <LegacyGeneralLogin form={form as any} {...i18nProps} />
     );
     spyOnLogin.mockRejectedValue("用户名（邮箱）或密码错误");
-    wrapper.find(Form).simulate("submit", new Event("submit"));
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
     await jest.runAllTimers();
     await (global as any).flushPromises();
     wrapper.update();
-    expect(wrapper.find(".loginFormError").text()).toBe(
+    expect(wrapper.find(".loginFormError").at(0).text()).toBe(
       "用户名（邮箱）或密码错误"
     );
   });
@@ -221,7 +242,7 @@ describe("GeneralLogin", () => {
       <LegacyGeneralLogin form={form as any} {...i18nProps} />
     );
     spyOnLogin.mockRejectedValueOnce(new TypeError("oops"));
-    wrapper.find(Form).simulate("submit", new Event("submit"));
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
 
   it("should not login if form is invalid", (done) => {
@@ -239,7 +260,7 @@ describe("GeneralLogin", () => {
     const wrapper = shallow(
       <LegacyGeneralLogin form={form as any} {...i18nProps} />
     );
-    wrapper.find(Form).simulate("submit", new Event("submit"));
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
 
   it("brand setting should work", (done) => {
@@ -259,42 +280,6 @@ describe("GeneralLogin", () => {
       <LegacyGeneralLogin form={form as any} {...i18nProps} />
     );
     expect(wrapper.find("img").first().prop("src")).toBe("/x/y/z");
-    wrapper.find(Form).simulate("submit", new Event("submit"));
-  });
-});
-
-describe("getLoginByMethod", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("should get login by easyops", () => {
-    jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
-      getFeatureFlags: () => ({
-        "login-by-ldap": false,
-        "login-by-custom": false,
-      }),
-    } as any);
-    expect(getLoginByMethod()).toBe("easyops");
-  });
-
-  it("should get login by ldap", () => {
-    jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
-      getFeatureFlags: () => ({
-        "login-by-ldap": true,
-        "login-by-custom": false,
-      }),
-    } as any);
-    expect(getLoginByMethod()).toBe("ldap");
-  });
-
-  it("should get login by custom", () => {
-    jest.spyOn(kit, "getRuntime").mockReturnValueOnce({
-      getFeatureFlags: () => ({
-        "login-by-ldap": false,
-        "login-by-custom": true,
-      }),
-    } as any);
-    expect(getLoginByMethod()).toBe("custom");
+    wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
 });
