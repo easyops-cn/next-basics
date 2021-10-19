@@ -45,7 +45,7 @@ export function AgentStatus(props: AgentStatusProps): React.ReactElement {
       color: Color.red,
     },
     [AgentStatusType.NOT_INSTALLED_EN]: {
-      text: "No Installed",
+      text: "Not Installed",
       color: Color.gray,
     },
     [AgentStatusType.UNDER_MAINTENANCE_EN]: {
