@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.226.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.226.0...@next-bricks/presentational-bricks@1.226.1) (2021-10-19)
+
+
+### Bug Fixes
+
+* 国际化 refs LAUNCHPAD-75 ([02297a0](https://github.com/easyops-cn/next-basics/commit/02297a00dd68c11be6f30b69b54f4f0e8a44774b))
+
+
+
+
+
 # [1.226.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.225.0...@next-bricks/presentational-bricks@1.226.0) (2021-10-17)
 
 
