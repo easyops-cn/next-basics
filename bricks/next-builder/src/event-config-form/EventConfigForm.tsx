@@ -30,8 +30,13 @@ import {
   hasCallbackActions,
 } from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
-import { HandlerType, LifeCycle } from "../shared/visual-events/interfaces";
+import {
+  HandlerType,
+  LifeCycle,
+  BuiltinAction,
+} from "../shared/visual-events/interfaces";
 import { isNil, debounce } from "lodash";
+import { getActionOptions } from "../shared/visual-events/getActionOptions";
 
 export interface EventConfigForm {
   labelCol?: ColProps;
@@ -80,23 +85,26 @@ export function LegacyEventConfigForm(
     [onValuesChange]
   );
 
-  const getCodeEditorItem = (options = {}): React.ReactNode => {
-    return (
-      <CodeEditorItem
-        tabSize={2}
-        minLines={6}
-        maxLines="Infinity"
-        printMargin={false}
-        showLineNumbers={true}
-        theme="tomorrow"
-        enableLiveAutocompletion={true}
-        mode="brick_next_yaml"
-        highlightTokens={highlightTokens}
-        onClickHighlightToken={onClickHighlightToken}
-        {...options}
-      ></CodeEditorItem>
-    );
-  };
+  const getCodeEditorItem = useCallback(
+    (options = {}): React.ReactNode => {
+      return (
+        <CodeEditorItem
+          tabSize={2}
+          minLines={6}
+          maxLines="Infinity"
+          printMargin={false}
+          showLineNumbers={true}
+          theme="tomorrow"
+          enableLiveAutocompletion={true}
+          mode="brick_next_yaml"
+          highlightTokens={highlightTokens}
+          onClickHighlightToken={onClickHighlightToken}
+          {...options}
+        ></CodeEditorItem>
+      );
+    },
+    [highlightTokens, onClickHighlightToken]
+  );
 
   const HandleTypeChange = useCallback(
     (e: RadioChangeEvent): void => {
@@ -147,7 +155,7 @@ export function LegacyEventConfigForm(
         })}
       </Form.Item>
     ),
-    [t]
+    [t, getCodeEditorItem]
   );
 
   const actionItem = useMemo(
@@ -166,11 +174,14 @@ export function LegacyEventConfigForm(
               rules={[{ required: true }]}
             >
               <AutoComplete
-                options={builtinActions?.map((action) => ({ value: action }))}
+                options={getActionOptions(builtinActions)}
                 filterOption={(inputValue, option) =>
-                  option?.value
-                    .toUpperCase()
-                    .indexOf(inputValue.toUpperCase()) !== -1
+                  option?.options?.some(
+                    (item: BuiltinAction) =>
+                      item.value
+                        .toUpperCase()
+                        .indexOf(inputValue.toUpperCase()) !== -1
+                  )
                 }
               ></AutoComplete>
             </Form.Item>
@@ -363,6 +374,7 @@ export function LegacyEventConfigForm(
         }
       >
         {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.UseProvider &&
           getFieldValue("pollEnabled") && (
             <Form.Item name="poll" wrapperCol={{ offset: labelCol.span }}>
               {getCodeEditorItem({
@@ -373,7 +385,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [labelCol, t]
+    [getCodeEditorItem, labelCol, t]
   );
 
   const callbackItem = useMemo(
@@ -399,7 +411,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [t]
+    [t, getCodeEditorItem]
   );
 
   const brickItem = useMemo(
@@ -495,7 +507,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [t]
+    [t, getCodeEditorItem]
   );
 
   const propertiesItem = useMemo(
@@ -515,7 +527,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [t]
+    [t, getCodeEditorItem]
   );
 
   const useResolvesItem = useMemo(
@@ -563,6 +575,7 @@ export function LegacyEventConfigForm(
       ifItem,
       providerItem,
       providerTypeItem,
+      getCodeEditorItem,
       t,
     ]
   );

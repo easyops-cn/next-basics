@@ -8,6 +8,16 @@ export enum HandlerType {
   Unknown = "unknown",
 }
 
+export interface BuiltinAction {
+  label: string;
+  value: string;
+}
+
+export interface ActionOPtions {
+  label: string;
+  options: BuiltinAction[];
+}
+
 export interface EventsInfo {
   type: string;
   description?: string;

@@ -93,7 +93,7 @@ const locale: Locale = {
   [K.POLLING_LABEL]: "轮询",
   [K.POLLING_ITEM_PLACEHOLDER]: "请填写轮询相关参数",
   [K.BUILTIN_PROVIDER]: "内置Provider",
-  [K.IF_LABEL]: "条件IF",
+  [K.IF_LABEL]: "触发条件IF",
   [K.TRANSFORM_LABEL]: "数据转换",
   [K.TRANSFORM_FROM_LABEL]: "指定字段",
   [K.TRANSFORM_MAP_ARRAY]: "数据转换映射",
