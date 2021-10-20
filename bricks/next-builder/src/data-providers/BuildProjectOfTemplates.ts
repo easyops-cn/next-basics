@@ -1,27 +1,28 @@
+import { isEmpty, uniq } from "lodash";
 import {
   BrickConfInTemplate,
   CustomTemplate,
   SnippetDefinition,
   Story,
   Storyboard,
+  StoryboardFunction,
 } from "@next-core/brick-types";
 import {
   createProviderClass,
   pipes,
   scanBricksInStoryboard,
   scanProcessorsInStoryboard,
+  isObject,
 } from "@next-core/brick-utils";
 import {
   InstanceGraphApi_traverseGraphV2,
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import { paramCase } from "change-case";
-import { uniq } from "lodash";
 import { buildBricks } from "../shared/storyboard/buildStoryboard";
 import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
-import { isObject } from "@next-core/brick-utils";
-import { isEmpty } from "lodash";
+import { replaceWidgetFunctions } from "./utils/replaceWidgetFunctions";
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
@@ -127,13 +128,22 @@ export async function BuildProjectOfTemplates({
     select_fields: ["*"],
   });
 
-  const imagesReq = InstanceApi_getDetail("PROJECT_MICRO_APP", projectId, {
-    fields: "imgs.url,imgs.name",
-  });
+  const imagesAndFunctionsReq = InstanceApi_getDetail(
+    "PROJECT_MICRO_APP",
+    projectId,
+    {
+      fields:
+        "imgs.url,imgs.name,functions.name,functions.source,functions.typescript",
+    }
+  );
 
   // Make parallel requests.
-  const [templatesResponse, snippetsResponse, imagesResponse] =
-    await Promise.all([templatesGraphReq, snippetsGraphReq, imagesReq]);
+  const [templatesResponse, snippetsResponse, imagesAndFunctionsResponse] =
+    await Promise.all([
+      templatesGraphReq,
+      snippetsGraphReq,
+      imagesAndFunctionsReq,
+    ]);
 
   const getThumbnailList = () => {
     return []
@@ -172,11 +182,14 @@ export async function BuildProjectOfTemplates({
     (item) => ({
       name: `${appId}.${item.templateId}`,
       proxy: item.proxy ? JSON.parse(item.proxy) : undefined,
-      bricks: buildBricks(item.children, {
-        nodeToConf: new WeakMap(),
-        appId,
-        internalTemplateNames,
-      }) as BrickConfInTemplate[],
+      bricks: replaceWidgetFunctions(
+        buildBricks(item.children, {
+          nodeToConf: new WeakMap(),
+          appId,
+          internalTemplateNames,
+        }) as BrickConfInTemplate[],
+        appId
+      ),
     })
   );
 
@@ -194,11 +207,13 @@ export async function BuildProjectOfTemplates({
       layerType: item.layerType,
       text: item.text,
       description: item.description,
-      thumbnail: item.thumbnail && getTransformFilePath(
-        thumbnailList.find(
-          (thumbnailItem) => thumbnailItem.imageOssPath === item.thumbnail
-        ).fileName
-      ),
+      thumbnail:
+        item.thumbnail &&
+        getTransformFilePath(
+          thumbnailList.find(
+            (thumbnailItem) => thumbnailItem.imageOssPath === item.thumbnail
+          ).fileName
+        ),
       bricks: buildBricks(item.children, {
         nodeToConf: new WeakMap(),
         appId,
@@ -310,15 +325,17 @@ export async function BuildProjectOfTemplates({
     createStories(templateItem)
   );
 
-  let indexJsContent = getBrickPackageIndexJs(templates);
+  const functions =
+    imagesAndFunctionsResponse.functions as StoryboardFunction[];
+  let indexJsContent = getBrickPackageIndexJs({ appId, templates, functions });
 
   const images: imagesFile = {
     imagesDir: IMAGE_SAVE_FILE_PATH,
     imagesPath: thumbnailList,
   };
 
-  if (Array.isArray(imagesResponse.imgs)) {
-    imagesResponse.imgs.forEach((file) => {
+  if (Array.isArray(imagesAndFunctionsResponse.imgs)) {
+    imagesAndFunctionsResponse.imgs.forEach((file) => {
       images.imagesPath.push({
         imageOssPath: file.url,
         fileName: `${simpleHash(file.url)}.${getSuffix(file.name)}`,

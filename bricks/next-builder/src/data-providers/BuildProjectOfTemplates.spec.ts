@@ -1,4 +1,7 @@
-import { InstanceGraphApi_traverseGraphV2, InstanceApi_getDetail } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceGraphApi_traverseGraphV2,
+  InstanceApi_getDetail,
+} from "@next-sdk/cmdb-sdk";
 import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
@@ -106,7 +109,7 @@ const consoleError = jest
               instanceId: "t-1",
               type: "brick",
               brick: "easy-view",
-              properties: `{"gap":"<% PROCESSORS.myPkg.myFunc() %>"}`,
+              properties: `{"gap":"<% PROCESSORS.myPkg.myFunc(FN.abc()) %>"}`,
             },
             {
               instanceId: "t-1-1",
@@ -123,11 +126,12 @@ const consoleError = jest
               bg: true,
             },
             {
-              appId: 'test-app',
+              appId: "test-app",
               instanceId: "u-1",
               type: "brick",
               brick: "template-t",
-              properties: '{"gridTemplateAreas":[["left","right"]],"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"}',
+              properties:
+                '{"gridTemplateAreas":[["left","right"]],"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"}',
             },
           ],
           edges: [
@@ -232,15 +236,27 @@ const consoleError = jest
 (InstanceApi_getDetail as jest.Mock).mockImplementation(() => ({
   imgs: [
     {
-      "name": "viewpoint.png",
-      "url": "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"
+      name: "viewpoint.png",
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
     },
     {
-      "name": "blue-bg.png",
-      "url": "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png"
+      name: "blue-bg.png",
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
     },
-  ]
-}))
+  ],
+  functions: [
+    {
+      name: "abc",
+      source: "function abc() {}",
+      tests: [],
+    },
+    {
+      name: "xyz",
+      source: "function xyz() {}",
+      typescript: true,
+    },
+  ],
+}));
 
 describe("BuildProjectOfTemplates", () => {
   it.each<[BuildProjectOfTemplatesParams, BuildInfoForProjectOfTemplates]>([
@@ -262,14 +278,14 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.dec40b57.js",
+            path: "dist/index.3fa8024d.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
     {
       "brick": "easy-view",
       "properties": {
-        "gap": "<% PROCESSORS.myPkg.myFunc() %>"
+        "gap": "<% PROCESSORS.myPkg.myFunc(__WIDGET_FN__[\\"app-1\\"].abc()) %>"
       },
       "slots": {
         "a": {
@@ -360,8 +376,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "methods": 1
   },
   "bricks": []
-})
-`),
+})`),
           },
           {
             path: "dist/stories.json",
@@ -394,14 +409,14 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "instanceId": "t-1",
           "type": "brick",
           "brick": "easy-view",
-          "properties": "{\\\"gap\\\":\\\"<% PROCESSORS.myPkg.myFunc() %>\\\"}",
+          "properties": "{\\"gap\\":\\"<% PROCESSORS.myPkg.myFunc(FN.abc()) %>\\"}",
           "children": [
             {
               "instanceId": "t-1-1",
               "type": "brick",
               "brick": "general-button",
               "mountPoint": "a",
-              "events": "{\\\"click\\\":{\\\"action\\\":\\\"console.log\\\"}}"
+              "events": "{\\"click\\":{\\"action\\":\\"console.log\\"}}"
             },
             {
               "instanceId": "t-1-2",
@@ -479,7 +494,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "instanceId": "u-1",
           "type": "brick",
           "brick": "test-app.template-t",
-          "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]],\\\"url\\\":\\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\\"}"
+          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\"}"
         }
       ]
     }
@@ -579,9 +594,9 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         ],
         dependBricks: ["easy-view", "general-button", "test-provider"],
         dependProcessorPackages: ["my-pkg"],
-        images:  {
+        images: {
           imagesDir: "dist/assets",
-          imagesPath:  [
+          imagesPath: [
             {
               fileName: "15858a13.png",
               imageOssPath: "www.xxx.com/url/abc.png",
@@ -592,11 +607,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             },
             {
               fileName: "6659b229.png",
-              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
+              imageOssPath:
+                "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
             },
             {
               fileName: "6c079b14.png",
-              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
+              imageOssPath:
+                "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
             },
           ],
         },
@@ -620,7 +637,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
 }`,
           },
           {
-            path: "dist/index.1f72542c.js",
+            path: "dist/index.a1cb151f.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -656,14 +673,14 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "instanceId": "t-1",
           "type": "brick",
           "brick": "easy-view",
-          "properties": "{\\\"gap\\\":\\\"<% PROCESSORS.myPkg.myFunc() %>\\\"}",
+          "properties": "{\\"gap\\":\\"<% PROCESSORS.myPkg.myFunc(FN.abc()) %>\\"}",
           "children": [
             {
               "instanceId": "t-1-1",
               "type": "brick",
               "brick": "general-button",
               "mountPoint": "a",
-              "events": "{\\\"click\\\":{\\\"action\\\":\\\"console.log\\\"}}"
+              "events": "{\\"click\\":{\\"action\\":\\"console.log\\"}}"
             },
             {
               "instanceId": "t-1-2",
@@ -734,14 +751,14 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "u",
       "templateId": "template-u",
       "creator": "abc",
-      "proxy": "{\\n                \\\"properties\\\": {\\n                  \\\"a\\\": {\\n                    \\\"ref\\\":\\\"b\\\",\\n                    \\\"refProperty\\\":\\\"c\\\",\\n                    \\\"description\\\": \\\"properties介绍\\\",\\n                    \\\"type\\\": \\\"string\\\",\\n                    \\\"default\\\": \\\"hello\\\",\\n                    \\\"required\\\": \\\"false\\\"\\n                  },\\n                  \\\"b\\\": {\\n                    \\\"ref\\\": \\\"b-ref\\\",\\n                    \\\"refProperty\\\": \\\"b-property\\\"\\n                  }\\n                },\\n                \\\"events\\\": {\\n                  \\\"a.click\\\": {\\n                    \\\"ref\\\": \\\"d\\\",\\n                    \\\"refEvent\\\": \\\"general.a.click\\\",\\n                    \\\"detail\\\": \\\"{data:Record<string,any>[]}\\\",\\n                    \\\"description\\\": \\\"events介绍\\\"\\n                  }\\n                },\\n                \\\"methods\\\": {\\n                  \\\"sayHello\\\": {\\n                    \\\"ref\\\": \\\"e\\\",\\n                    \\\"refMethod\\\": \\\"a.say\\\",\\n                    \\\"params\\\": \\\"{ id: string | number, name: string }\\\",\\n                    \\\"description\\\": \\\"methods介绍\\\"\\n                  }\\n                },\\n                \\\"slots\\\": {\\n                  \\\"toolbar\\\": {\\n                    \\\"ref\\\": \\\"f\\\",\\n                    \\\"refSlot\\\": \\\"f-toobar\\\",\\n                    \\\"description\\\": \\\"slots介绍\\\"\\n                  }\\n                }\\n              }",
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                }\\n              }",
       "children": [
         {
           "appId": "test-app",
           "instanceId": "u-1",
           "type": "brick",
           "brick": "test-app.template-t",
-          "properties": "{\\\"gridTemplateAreas\\\":[[\\\"left\\\",\\\"right\\\"]],\\\"url\\\":\\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\\"}"
+          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\"}"
         }
       ]
     }
@@ -775,20 +792,22 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         ],
         dependBricks: ["easy-view", "general-button", "test-provider"],
         dependProcessorPackages: ["my-pkg"],
-        images:  {
+        images: {
           imagesDir: "dist/assets",
-          imagesPath:  [
+          imagesPath: [
             {
               fileName: "15858a13.png",
               imageOssPath: "www.xxx.com/url/abc.png",
             },
             {
               fileName: "6659b229.png",
-              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
+              imageOssPath:
+                "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
             },
             {
               fileName: "6c079b14.png",
-              imageOssPath: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
+              imageOssPath:
+                "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
             },
           ],
         },
@@ -816,27 +835,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     expect(consoleError).toBeCalledTimes(1);
   });
 
-  it.each<[string, string | undefined]>(
-    [
-      [
-        'abc.png',
-        'png',
-      ],
-      [
-        'abc.20211014.jpeg',
-        'jpeg',
-      ],
-      [
-        'abc',
-        'abc'
-      ],
-      [
-        undefined,
-        undefined
-      ]
-    ]
-  )("getSuffix should work", (data, result) => {
+  it.each<[string, string | undefined]>([
+    ["abc.png", "png"],
+    ["abc.20211014.jpeg", "jpeg"],
+    ["abc", "abc"],
+    [undefined, undefined],
+  ])("getSuffix should work", (data, result) => {
     const suffix = getSuffix(data);
     expect(suffix).toEqual(result);
-  })
+  });
 });

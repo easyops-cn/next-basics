@@ -5,8 +5,6 @@ import {
   isEvaluable,
   isObject,
   precookFunction,
-  PrecookFunctionVisitor,
-  PrecookVisitor,
   preevaluate,
 } from "@next-core/brick-utils";
 
@@ -42,9 +40,8 @@ function collectFunctions(
       try {
         preevaluate(data, {
           visitors: {
-            MemberExpression: (node: MemberExpression, state, callback) => {
+            MemberExpression(node: MemberExpression) {
               addToFunctionCollection(node, collection);
-              PrecookVisitor.MemberExpression(node, state, callback);
             },
           },
         });
@@ -81,9 +78,8 @@ function collectFunctionsInFunctionSource(
   try {
     precookFunction(source, {
       visitors: {
-        MemberExpression: (node: MemberExpression, state, callback) => {
+        MemberExpression(node: MemberExpression) {
           addToFunctionCollection(node, collection);
-          PrecookFunctionVisitor.MemberExpression(node, state, callback);
         },
       },
       typescript,
