@@ -7,6 +7,7 @@ import {
 import { Button, Table, Modal } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { set } from "antd";
+import { isObject, isFunction } from "lodash";
 export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   name: string;
   modalVisible: boolean;
@@ -23,6 +24,7 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   addBtnDisabled: boolean;
   createModalTitle?: string;
   editModalTitle?: string;
+  structItemShowRenderFN?: () => any;
 }
 
 export function GeneralStructsFormItem(
@@ -45,6 +47,7 @@ export function GeneralStructsFormItem(
     addBtnDisabled,
     createModalTitle,
     editModalTitle,
+    structItemShowRenderFN,
   } = props;
   const footer = (
     <>
@@ -60,6 +63,10 @@ export function GeneralStructsFormItem(
       title: fieldsMap[key],
       key: key,
       dataIndex: key,
+      render: (text: any) =>
+        isFunction(structItemShowRenderFN)
+          ? structItemShowRenderFN(text)
+          : text,
     };
   });
   const operationCol = {

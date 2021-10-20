@@ -189,6 +189,17 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   })
   addBtnDisabled: boolean;
 
+  /**
+   * @kind ()=>any
+   * @required false
+   * @default -
+   * @description 自定义结构体表格渲染函数
+   */
+  @property({
+    attribute: false,
+  })
+  structItemShowRenderFN: () => any;
+
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -207,12 +218,14 @@ export class GeneralStructsFormItemElement extends FormItemElement {
         // 如果编辑，给表单赋值
         this._childComponent[0].formUtils.resetFields();
         this._childComponent[0].setInitValue(this.value[this._editIndex]);
+        this.innerFormInitEvent.emit(this.value[this._editIndex]);
       } else {
         // 如果新建
         if (this.structDefaultValues) {
           this._childComponent[0] &&
             this._childComponent[0].setInitValue &&
             this._childComponent[0].setInitValue(this.structDefaultValues);
+          this.innerFormInitEvent.emit(this.structDefaultValues);
         }
       }
     });
@@ -307,6 +320,14 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     Record<string, any>
   >;
 
+  /**
+   * @detail `Record<string, any>`
+   * @description 设置内部form表单
+   */
+  @event({ type: "struct.inner.form.init" }) innerFormInitEvent: EventEmitter<
+    Record<string, any>
+  >;
+
   _handleChange(): void {
     this.changeEvent.emit(this.value);
   }
@@ -373,6 +394,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             addBtnDisabled={this.addBtnDisabled}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            structItemShowRenderFN={this.structItemShowRenderFN}
           />
         </BrickWrapper>,
         this._mountPoint
