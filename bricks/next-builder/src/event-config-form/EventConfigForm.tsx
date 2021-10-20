@@ -34,6 +34,7 @@ import {
   HandlerType,
   LifeCycle,
   BuiltinAction,
+  CustomBrickEventType,
 } from "../shared/visual-events/interfaces";
 import { isNil, debounce } from "lodash";
 import { getActionOptions } from "../shared/visual-events/getActionOptions";
@@ -134,11 +135,8 @@ export function LegacyEventConfigForm(
           <Radio value={HandlerType.UseProvider}>
             {t(K.EVENTS_HANDLER_USE_PROVIDER)}
           </Radio>
-          <Radio value={HandlerType.SetProps}>
-            {t(K.EVENTS_HANDLER_SET_PROP)}
-          </Radio>
-          <Radio value={HandlerType.ExecuteMethod}>
-            {t(K.EVENTS_HANDLER_USE_METHOD)}
+          <Radio value={HandlerType.CustomBrick}>
+            {t(K.EVENTS_CUSTOM_BRICK_INTERACTION)}
           </Radio>
         </Radio.Group>
       </Form.Item>
@@ -396,13 +394,15 @@ export function LegacyEventConfigForm(
         hidden={true}
         shouldUpdate={(prevValues, currentValues) =>
           prevValues.handlerType !== currentValues.handlerType ||
-          prevValues.action !== currentValues.action
+          prevValues.action !== currentValues.action ||
+          prevValues.brickEventType !== currentValues.brickEventType
         }
       >
         {({ getFieldValue }) =>
-          ([HandlerType.UseProvider, HandlerType.ExecuteMethod].includes(
-            getFieldValue("handlerType")
-          ) ||
+          (getFieldValue("handlerType") === HandlerType.UseProvider ||
+            (getFieldValue("handlerType") === HandlerType.CustomBrick &&
+              getFieldValue("brickEventType") ===
+                CustomBrickEventType.ExecuteMethod) ||
             hasCallbackActions.includes(getFieldValue("action"))) && (
             <Form.Item name="callback" label={t(K.CALLBACK_LABEL)}>
               {getCodeEditorItem()}
@@ -414,6 +414,37 @@ export function LegacyEventConfigForm(
     [t, getCodeEditorItem]
   );
 
+  const brickInteractionItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.CustomBrick && (
+            <Form.Item
+              initialValue={CustomBrickEventType.SetProps}
+              name="brickEventType"
+              label={t(K.BRICK_EVENT_LABEL)}
+            >
+              <Radio.Group>
+                <Radio.Button value={CustomBrickEventType.SetProps}>
+                  {t(K.CUSTOM_EVENTS_SET_PROP)}
+                </Radio.Button>
+                <Radio.Button value={CustomBrickEventType.ExecuteMethod}>
+                  {t(K.CUSTOM_EVENTS_USE_METHOD)}
+                </Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [t]
+  );
+
   const brickItem = useMemo(
     () => (
       <Form.Item
@@ -423,9 +454,7 @@ export function LegacyEventConfigForm(
         }
       >
         {({ getFieldValue }) =>
-          [HandlerType.SetProps, HandlerType.ExecuteMethod].includes(
-            getFieldValue("handlerType")
-          ) && (
+          getFieldValue("handlerType") === HandlerType.CustomBrick && (
             <Form.Item label={t(K.BRICK_SELECTOR_LABEL)} required>
               <Input.Group compact>
                 <Form.Item
@@ -464,11 +493,14 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handlerType !== currentValues.handlerType
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.brickEventType !== currentValues.brickEventType
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handlerType") === HandlerType.ExecuteMethod && (
+          getFieldValue("handlerType") === HandlerType.CustomBrick &&
+          getFieldValue("brickEventType") ===
+            CustomBrickEventType.ExecuteMethod && (
             <Form.Item
               name="method"
               label={t(K.USE_METHOD_LABEL)}
@@ -488,15 +520,17 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handlerType !== currentValues.handlerType
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.brickEventType !== currentValues.brickEventType
         }
       >
         {({ getFieldValue }) =>
-          [
-            HandlerType.UseProvider,
-            HandlerType.BuiltinAction,
-            HandlerType.ExecuteMethod,
-          ].includes(getFieldValue("handlerType")) && (
+          ([HandlerType.UseProvider, HandlerType.BuiltinAction].includes(
+            getFieldValue("handlerType")
+          ) ||
+            (getFieldValue("handlerType") === HandlerType.CustomBrick &&
+              getFieldValue("brickEventType") ===
+                CustomBrickEventType.ExecuteMethod)) && (
             <Form.Item name="args" label={t(K.ARGS_LABEL)}>
               {getCodeEditorItem({
                 schemaRef:
@@ -515,11 +549,13 @@ export function LegacyEventConfigForm(
       <Form.Item
         noStyle
         shouldUpdate={(prevValues, currentValues) =>
-          prevValues.handlerType !== currentValues.handlerType
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.brickEventType !== currentValues.brickEventType
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("handlerType") === HandlerType.SetProps && (
+          getFieldValue("handlerType") === HandlerType.CustomBrick &&
+          getFieldValue("brickEventType") === CustomBrickEventType.SetProps && (
             <Form.Item name="properties" label={t(K.PROPERTIES_LABEL)}>
               {getCodeEditorItem()}
             </Form.Item>
@@ -583,9 +619,10 @@ export function LegacyEventConfigForm(
   const allEventTypeItem = (
     <>
       {handlerTypeItem}
+      {providerTypeItem}
+      {brickInteractionItem}
       {ifItem}
       {actionItem}
-      {providerTypeItem}
       {providerItem}
       {flowApiItem}
       {useProviderMethod}

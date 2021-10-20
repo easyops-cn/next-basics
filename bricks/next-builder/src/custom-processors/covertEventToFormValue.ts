@@ -14,6 +14,7 @@ import {
 import {
   HandlerType,
   EventFormField,
+  CustomBrickEventType,
 } from "../shared/visual-events/interfaces";
 import { isNil, omitBy, omit } from "lodash";
 
@@ -65,10 +66,11 @@ export function covertEventToFormValue(
         )
       ),
     };
-  } else if (handlerType === HandlerType.SetProps) {
+  } else if (handlerType === CustomBrickEventType.SetProps) {
     const selectorType = "targetRef" in handler ? "targetRef" : "target";
     return {
-      handlerType,
+      handlerType: HandlerType.CustomBrick,
+      brickEventType: CustomBrickEventType.SetProps,
       selectorType,
       brickSelector: (handler as SetPropsCustomBrickEventHandler)[
         selectorType
@@ -83,10 +85,11 @@ export function covertEventToFormValue(
         )
       ),
     };
-  } else if (handlerType === HandlerType.ExecuteMethod) {
+  } else if (handlerType === CustomBrickEventType.ExecuteMethod) {
     const selectorType = "targetRef" in handler ? "targetRef" : "target";
     return {
-      handlerType,
+      handlerType: HandlerType.CustomBrick,
+      brickEventType: CustomBrickEventType.ExecuteMethod,
       selectorType,
       brickSelector: (handler as ExecuteCustomBrickEventHandler)[
         selectorType

@@ -3,9 +3,13 @@ import { BrickEventHandler } from "@next-core/brick-types";
 export enum HandlerType {
   BuiltinAction = "builtinAction",
   UseProvider = "useProvider",
+  CustomBrick = "customBrick",
+  Unknown = "unknown",
+}
+
+export enum CustomBrickEventType {
   ExecuteMethod = "executeMethod",
   SetProps = "setProps",
-  Unknown = "unknown",
 }
 
 export interface BuiltinAction {
@@ -13,7 +17,7 @@ export interface BuiltinAction {
   value: string;
 }
 
-export interface ActionOPtions {
+export interface ActionOptions {
   label: string;
   options: BuiltinAction[];
 }
@@ -42,6 +46,7 @@ export interface EventFormField {
   handlerType: HandlerType;
   if?: string;
   action?: string;
+  brickEventType?: CustomBrickEventType;
   providerType?: "provider" | "flow";
   provider?: string;
   flow?: string;

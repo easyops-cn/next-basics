@@ -1,4 +1,5 @@
 import {
+  CustomBrickEventType,
   EventFormField,
   HandlerType,
 } from "../shared/visual-events/interfaces";
@@ -83,7 +84,8 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.ExecuteMethod,
+        handlerType: HandlerType.CustomBrick,
+        brickEventType: CustomBrickEventType.ExecuteMethod,
         selectorType: "target",
         brickSelector: "#create-form",
         method: "setInitValue",
@@ -97,7 +99,8 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.ExecuteMethod,
+        handlerType: HandlerType.CustomBrick,
+        brickEventType: CustomBrickEventType.ExecuteMethod,
         selectorType: "targetRef",
         brickSelector: "create-form-ref",
         method: "setInitValue",
@@ -111,7 +114,8 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.SetProps,
+        handlerType: HandlerType.CustomBrick,
+        brickEventType: CustomBrickEventType.SetProps,
         selectorType: "target",
         brickSelector: "#create-form",
         properties: "a: 3",
@@ -123,7 +127,8 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
-        handlerType: HandlerType.SetProps,
+        handlerType: HandlerType.CustomBrick,
+        brickEventType: CustomBrickEventType.SetProps,
         selectorType: "targetRef",
         brickSelector: "create-form-ref",
         properties: "a: 3",
