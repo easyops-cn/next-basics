@@ -1,11 +1,6 @@
 import { MemberExpression } from "@babel/types";
 import { Storyboard } from "@next-core/brick-types";
-import {
-  isObject,
-  isEvaluable,
-  preevaluate,
-  PrecookVisitor,
-} from "@next-core/brick-utils";
+import { isObject, isEvaluable, preevaluate } from "@next-core/brick-utils";
 
 const CTX = "CTX";
 
@@ -45,7 +40,7 @@ function collectContexts(
       try {
         preevaluate(data, {
           visitors: {
-            MemberExpression: (node: MemberExpression, state, callback) => {
+            MemberExpression(node: MemberExpression) {
               if (
                 node.object.type === "Identifier" &&
                 node.object.name === CTX
@@ -60,7 +55,6 @@ function collectContexts(
                   readContexts.add((node.property as any).value);
                 }
               }
-              PrecookVisitor.MemberExpression(node, state, callback);
             },
           },
         });
