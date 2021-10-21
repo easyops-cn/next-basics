@@ -89,6 +89,11 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   }
 
   @method()
+  addTest(): void {
+    this._storeRef.current.addTest();
+  }
+
+  @method()
   saveTest(): void {
     this._storeRef.current.saveTest();
   }

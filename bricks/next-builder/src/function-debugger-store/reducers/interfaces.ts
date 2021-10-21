@@ -47,6 +47,7 @@ export type DebuggerAction =
   | DebuggerActionSwitchTab
   | DebuggerActionDebugUserInput
   | DebuggerActionDebugReturn
+  | DebuggerActionSaveDebugAsTest
   | DebuggerActionAddTest
   | DebuggerActionUpdateTestInput
   | DebuggerActionTestReturn
@@ -87,10 +88,16 @@ export interface DebuggerActionDebugReturn {
   output: DebuggerStateDebugOutput;
 }
 
-export interface DebuggerActionAddTest {
-  type: "addTest";
+export interface DebuggerActionSaveDebugAsTest {
+  type: "saveDebugAsTest";
   debugInput: DebuggerStateDebugInput;
   debugOutput: DebuggerStateDebugOutput;
+  nextIndex: number;
+}
+
+export interface DebuggerActionAddTest {
+  type: "addTest";
+  nextIndex: number;
 }
 
 export interface DebuggerActionUpdateTestInput {

@@ -31,6 +31,7 @@ export interface DebuggerStore {
   initFunction: (data: Omit<DebuggerActionInitFunction, "type">) => void;
   run: () => void;
   saveDebugAsTest: () => void;
+  addTest: () => void;
   updateTestInput: (input: string) => void;
   saveTest: () => void;
   runAllTests: () => void;
@@ -193,16 +194,21 @@ function LegacyFunctionDebuggerStore(
     if (debugOutput.ok) {
       const nextIndex = tests.length;
       dispatch({
-        type: "addTest",
+        type: "saveDebugAsTest",
         debugInput: formatSerializableValue(debugInput),
         debugOutput,
-      });
-      dispatch({
-        type: "switchTab",
-        tab: `test:${nextIndex}`,
+        nextIndex,
       });
     }
   }, [debugInput, debugOutput, tests?.length]);
+
+  const addTest = useCallback(() => {
+    const nextIndex = tests.length;
+    dispatch({
+      type: "addTest",
+      nextIndex,
+    });
+  }, [tests?.length]);
 
   const updateTestInput = useCallback(
     (input: string) => {
@@ -254,6 +260,7 @@ function LegacyFunctionDebuggerStore(
       initFunction,
       run,
       saveDebugAsTest,
+      addTest,
       updateTestInput,
       saveTest,
       runAllTests,
@@ -264,6 +271,7 @@ function LegacyFunctionDebuggerStore(
       initFunction,
       run,
       saveDebugAsTest,
+      addTest,
       updateTestInput,
       saveTest,
       runAllTests,

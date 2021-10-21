@@ -34,7 +34,11 @@ describe("FunctionDebuggerStore", () => {
     ): void => {
       let index = 0;
       for (const handler of Object.values(restHandlers)) {
-        // console.log(desc, index, (handler as jest.Mock).mock.calls[0]);
+        const calls = (handler as jest.Mock).mock.calls;
+        if (calls.length > 0) {
+          // eslint-disable-next-line no-console
+          console.error(desc, index, calls[0]);
+        }
         expect(handler).toBeCalledTimes(0);
         index += 1;
       }
@@ -1180,6 +1184,66 @@ describe("FunctionDebuggerStore", () => {
     expect(storeRef.current.getFunctionDataToSave()).toEqual({
       error: "There are 2 tests failed!",
     });
+
+    // `addTest`
+    {
+      jest.clearAllMocks();
+      act(() => {
+        storeRef.current.addTest();
+      });
+      const {
+        onActiveTabChange,
+        onTestsChange,
+        onTestInputChange,
+        onTestExpectChange,
+        onSomethingModified,
+        ...restHandlers
+      } = handlers;
+      expect(onActiveTabChange).toBeCalledTimes(1);
+      expect(onActiveTabChange).toBeCalledWith({
+        value: "test:2",
+        group: "test",
+        index: 2,
+      });
+      expect(onTestsChange).toBeCalledTimes(1);
+      expect(onTestsChange).toBeCalledWith([
+        expect.anything(),
+        expect.anything(),
+        {
+          input: "[\n  \n]",
+          output: "undefined",
+          testInput: {
+            ok: true,
+            raw: "[\n  \n]",
+            error: undefined,
+          },
+          testExpect: {
+            ok: true,
+            raw: "undefined",
+            error: undefined,
+          },
+          testReceived: null,
+          testMatched: null,
+          testModified: true,
+          testUpdatable: false,
+        },
+      ]);
+      expect(onTestInputChange).toBeCalledTimes(1);
+      expect(onTestInputChange).toBeCalledWith({
+        ok: true,
+        raw: "[\n  \n]",
+        error: undefined,
+      });
+      expect(onTestExpectChange).toBeCalledTimes(1);
+      expect(onTestExpectChange).toBeCalledWith({
+        ok: true,
+        raw: "undefined",
+        error: undefined,
+      });
+      expect(onSomethingModified).toBeCalledTimes(1);
+      expect(onSomethingModified).toBeCalledWith(true);
+      expectRestHandlersNotBeCalled(restHandlers, "add test");
+    }
 
     wrapper.unmount();
   });

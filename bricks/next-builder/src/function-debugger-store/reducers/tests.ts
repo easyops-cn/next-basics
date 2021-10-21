@@ -24,7 +24,7 @@ export const tests: Reducer<DebuggerStateTestCase[], DebuggerAction> = (
         testMatched: null,
         testUpdatable: false,
       }));
-    case "addTest":
+    case "saveDebugAsTest":
       return [
         ...state,
         {
@@ -42,6 +42,23 @@ export const tests: Reducer<DebuggerStateTestCase[], DebuggerAction> = (
           testUpdatable: false,
         },
       ];
+    case "addTest": {
+      const input = "[\n  \n]";
+      const output = "undefined";
+      return [
+        ...state,
+        {
+          input,
+          output,
+          testInput: processSerializableValue(input),
+          testExpect: processSerializableValue(output),
+          testReceived: null,
+          testMatched: null,
+          testModified: true,
+          testUpdatable: false,
+        },
+      ];
+    }
     case "switchTab":
       return state.map((item) => {
         return item.testInput.userInput
