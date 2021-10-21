@@ -59,6 +59,8 @@ export const tests: Reducer<DebuggerStateTestCase[], DebuggerAction> = (
         },
       ];
     }
+    case "deleteTest":
+      return state.filter((item, index) => index !== action.activeTestIndex);
     case "switchTab":
       return state.map((item) => {
         return item.testInput.userInput

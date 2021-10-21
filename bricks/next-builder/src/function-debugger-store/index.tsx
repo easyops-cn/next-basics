@@ -94,6 +94,11 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   }
 
   @method()
+  deleteTest(): void {
+    this._storeRef.current.deleteTest();
+  }
+
+  @method()
   saveTest(): void {
     this._storeRef.current.saveTest();
   }

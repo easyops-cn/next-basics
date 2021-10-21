@@ -33,11 +33,11 @@ describe("FunctionDebuggerStore", () => {
       desc?: string
     ): void => {
       let index = 0;
-      for (const handler of Object.values(restHandlers)) {
+      for (const [name, handler] of Object.entries(restHandlers)) {
         const calls = (handler as jest.Mock).mock.calls;
         if (calls.length > 0) {
           // eslint-disable-next-line no-console
-          console.error(desc, index, calls[0]);
+          console.error(desc, name, index, calls[0]);
         }
         expect(handler).toBeCalledTimes(0);
         index += 1;
@@ -1185,6 +1185,52 @@ describe("FunctionDebuggerStore", () => {
       error: "There are 2 tests failed!",
     });
 
+    // Switch to first test first.
+    act(() => {
+      storeRef.current.dispatch({
+        type: "switchTab",
+        tab: "test:0",
+      });
+    });
+
+    // `deleteTest`
+    {
+      jest.clearAllMocks();
+      act(() => {
+        storeRef.current.deleteTest();
+      });
+      const {
+        onActiveTabChange,
+        onTestsChange,
+        onTestInputChange,
+        onTestExpectChange,
+        onTestReceivedChange,
+        onTestMatchedChange,
+        onSomethingModified,
+        ...restHandlers
+      } = handlers;
+      expect(onActiveTabChange).toBeCalledTimes(1);
+      expect(onActiveTabChange).toBeCalledWith({
+        value: "function",
+        group: "function",
+      });
+      expect(onTestsChange).toBeCalledTimes(1);
+      expect(onTestsChange).toBeCalledWith([
+        expect.objectContaining({ input: "[-1]" }),
+      ]);
+      expect(onTestInputChange).toBeCalledTimes(1);
+      expect(onTestInputChange).toBeCalledWith(null);
+      expect(onTestExpectChange).toBeCalledTimes(1);
+      expect(onTestExpectChange).toBeCalledWith(null);
+      expect(onTestReceivedChange).toBeCalledTimes(1);
+      expect(onTestReceivedChange).toBeCalledWith(null);
+      expect(onTestMatchedChange).toBeCalledTimes(1);
+      expect(onTestMatchedChange).toBeCalledWith(null);
+      expect(onSomethingModified).toBeCalledTimes(1);
+      expect(onSomethingModified).toBeCalledWith(true);
+      expectRestHandlersNotBeCalled(restHandlers, "delete test");
+    }
+
     // `addTest`
     {
       jest.clearAllMocks();
@@ -1196,18 +1242,16 @@ describe("FunctionDebuggerStore", () => {
         onTestsChange,
         onTestInputChange,
         onTestExpectChange,
-        onSomethingModified,
         ...restHandlers
       } = handlers;
       expect(onActiveTabChange).toBeCalledTimes(1);
       expect(onActiveTabChange).toBeCalledWith({
-        value: "test:2",
+        value: "test:1",
         group: "test",
-        index: 2,
+        index: 1,
       });
       expect(onTestsChange).toBeCalledTimes(1);
       expect(onTestsChange).toBeCalledWith([
-        expect.anything(),
         expect.anything(),
         {
           input: "[\n  \n]",
@@ -1240,8 +1284,6 @@ describe("FunctionDebuggerStore", () => {
         raw: "undefined",
         error: undefined,
       });
-      expect(onSomethingModified).toBeCalledTimes(1);
-      expect(onSomethingModified).toBeCalledWith(true);
       expectRestHandlersNotBeCalled(restHandlers, "add test");
     }
 

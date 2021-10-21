@@ -8,6 +8,7 @@ import React, {
   useMemo,
   useReducer,
   useRef,
+  useState,
 } from "react";
 import { rootReducer } from "./reducers";
 import {
@@ -32,6 +33,7 @@ export interface DebuggerStore {
   run: () => void;
   saveDebugAsTest: () => void;
   addTest: () => void;
+  deleteTest: () => void;
   updateTestInput: (input: string) => void;
   saveTest: () => void;
   runAllTests: () => void;
@@ -192,23 +194,32 @@ function LegacyFunctionDebuggerStore(
 
   const saveDebugAsTest = useCallback(() => {
     if (debugOutput.ok) {
-      const nextIndex = tests.length;
+      const nextTestIndex = tests.length;
       dispatch({
         type: "saveDebugAsTest",
         debugInput: formatSerializableValue(debugInput),
         debugOutput,
-        nextIndex,
+        nextTestIndex,
       });
     }
   }, [debugInput, debugOutput, tests?.length]);
 
   const addTest = useCallback(() => {
-    const nextIndex = tests.length;
+    const nextTestIndex = tests.length;
     dispatch({
       type: "addTest",
-      nextIndex,
+      nextTestIndex,
     });
   }, [tests?.length]);
+
+  const [testsDeleted, setTestsDeleted] = useState(false);
+  const deleteTest = useCallback(() => {
+    dispatch({
+      type: "deleteTest",
+      activeTestIndex: activeTab.index,
+    });
+    setTestsDeleted(true);
+  }, [activeTab?.index]);
 
   const updateTestInput = useCallback(
     (input: string) => {
@@ -261,6 +272,7 @@ function LegacyFunctionDebuggerStore(
       run,
       saveDebugAsTest,
       addTest,
+      deleteTest,
       updateTestInput,
       saveTest,
       runAllTests,
@@ -272,6 +284,7 @@ function LegacyFunctionDebuggerStore(
       run,
       saveDebugAsTest,
       addTest,
+      deleteTest,
       updateTestInput,
       saveTest,
       runAllTests,
@@ -378,8 +391,11 @@ function LegacyFunctionDebuggerStore(
   }, [activeTest.testUpdatable, onTestUpdatableChange]);
 
   const somethingModified = useMemo(
-    () => functionModified || !!tests?.some((test) => test.testModified),
-    [functionModified, tests]
+    () =>
+      functionModified ||
+      testsDeleted ||
+      !!tests?.some((test) => test.testModified),
+    [functionModified, tests, testsDeleted]
   );
   useEffect(() => {
     if (initialized.current) {
