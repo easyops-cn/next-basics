@@ -19,6 +19,7 @@ describe("FunctionDebuggerStore", () => {
       onTestMatchedChange: jest.fn(),
       onTestUpdatableChange: jest.fn(),
       onSomethingModified: jest.fn(),
+      onTestStatsChange: jest.fn(),
       onCoverageChange: jest.fn(),
     };
     const wrapper = mount(
@@ -266,6 +267,7 @@ describe("FunctionDebuggerStore", () => {
         onTestReceivedChange,
         onTestMatchedChange,
         onSomethingModified,
+        onTestStatsChange,
         ...restHandlers
       } = handlers;
       expect(onActiveTabChange).toBeCalledTimes(1);
@@ -297,6 +299,11 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestMatchedChange).toBeCalledWith(true);
       expect(onSomethingModified).toBeCalledTimes(1);
       expect(onSomethingModified).toBeCalledWith(true);
+      expect(onTestStatsChange).toBeCalledTimes(1);
+      expect(onTestStatsChange).toBeCalledWith({
+        total: 2,
+        failed: 0,
+      });
       expectRestHandlersNotBeCalled(restHandlers, "saveDebugAsTest");
     }
 
@@ -315,6 +322,7 @@ describe("FunctionDebuggerStore", () => {
         onDebugOutputChange,
         onTestReceivedChange,
         onTestMatchedChange,
+        onTestStatsChange,
         onCoverageChange,
         ...restHandlers
       } = handlers;
@@ -365,6 +373,8 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestReceivedChange).toBeCalledWith(null);
       expect(onTestMatchedChange).toBeCalledTimes(1);
       expect(onTestMatchedChange).toBeCalledWith(null);
+      expect(onTestStatsChange).toBeCalledTimes(1);
+      expect(onTestStatsChange).toBeCalledWith(undefined);
       expect(onCoverageChange).toBeCalledTimes(1);
       expect(onCoverageChange).toBeCalledWith(undefined);
       expectRestHandlersNotBeCalled(restHandlers, "updateTypescript");
@@ -793,6 +803,7 @@ describe("FunctionDebuggerStore", () => {
         onTestReceivedChange,
         onTestMatchedChange,
         onTestUpdatableChange,
+        onTestStatsChange,
         onCoverageChange,
         ...restHandlers
       } = handlers;
@@ -854,6 +865,11 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestMatchedChange).toBeCalledWith(false);
       expect(onTestUpdatableChange).toBeCalledTimes(1);
       expect(onTestUpdatableChange).toBeCalledWith(true);
+      expect(onTestStatsChange).toBeCalledTimes(1);
+      expect(onTestStatsChange).toBeCalledWith({
+        total: 2,
+        failed: 1,
+      });
       expect(onCoverageChange).toBeCalledTimes(1);
       expect(onCoverageChange).toBeCalledWith({
         branches: {
@@ -948,6 +964,7 @@ describe("FunctionDebuggerStore", () => {
         onTestReceivedChange,
         onTestMatchedChange,
         onSomethingModified,
+        onTestStatsChange,
         onCoverageChange,
         ...restHandlers
       } = handlers;
@@ -975,6 +992,8 @@ describe("FunctionDebuggerStore", () => {
       expect(onFunctionModified).toBeCalledWith(false);
       expect(onSomethingModified).toBeCalledTimes(1);
       expect(onSomethingModified).toBeCalledWith(false);
+      expect(onTestStatsChange).toBeCalledTimes(1);
+      expect(onTestStatsChange).toBeCalledWith(undefined);
       expect(onCoverageChange).toBeCalledTimes(1);
       expect(onCoverageChange).toBeCalledWith(undefined);
 
@@ -1017,6 +1036,7 @@ describe("FunctionDebuggerStore", () => {
         onOriginalFunctionChange,
         onDebugInputChange,
         onTestsChange,
+        onTestStatsChange,
         onCoverageChange,
         ...restHandlers
       } = handlers;
@@ -1041,6 +1061,8 @@ describe("FunctionDebuggerStore", () => {
       });
       expect(onTestsChange).toBeCalledTimes(1);
       expect(onTestsChange).toBeCalledWith([]);
+      expect(onTestStatsChange).toBeCalledTimes(1);
+      expect(onTestStatsChange).toBeCalledWith(undefined);
       expect(onCoverageChange).toBeCalledTimes(1);
       expect(onCoverageChange).toBeCalledWith(undefined);
 
@@ -1207,6 +1229,8 @@ describe("FunctionDebuggerStore", () => {
         onTestReceivedChange,
         onTestMatchedChange,
         onSomethingModified,
+        onTestStatsChange,
+        onCoverageChange,
         ...restHandlers
       } = handlers;
       expect(onActiveTabChange).toBeCalledTimes(1);
@@ -1228,6 +1252,10 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestMatchedChange).toBeCalledWith(null);
       expect(onSomethingModified).toBeCalledTimes(1);
       expect(onSomethingModified).toBeCalledWith(true);
+      expect(onTestStatsChange).toBeCalledTimes(1);
+      expect(onTestStatsChange).toBeCalledWith(undefined);
+      expect(onCoverageChange).toBeCalledTimes(1);
+      expect(onCoverageChange).toBeCalledWith(undefined);
       expectRestHandlersNotBeCalled(restHandlers, "delete test");
     }
 

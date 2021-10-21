@@ -2,7 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { FunctionDebuggerStatusbar } from "./FunctionDebuggerStatusbar";
-import { DebuggerStateFunctionCoverageWhichMaybeFailed } from "../function-debugger-store/reducers/interfaces";
+import {
+  DebuggerStateFunctionCoverageWhichMaybeFailed,
+  TestStats,
+} from "../function-debugger-store/reducers/interfaces";
 
 /**
  * @id next-builder.function-debugger-statusbar
@@ -15,6 +18,9 @@ import { DebuggerStateFunctionCoverageWhichMaybeFailed } from "../function-debug
 export class FunctionDebuggerStatusbarElement extends UpdatingElement {
   @property({ attribute: false })
   coverage: DebuggerStateFunctionCoverageWhichMaybeFailed;
+
+  @property({ attribute: false })
+  testStats: TestStats;
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -34,7 +40,10 @@ export class FunctionDebuggerStatusbarElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <FunctionDebuggerStatusbar coverage={this.coverage} />
+          <FunctionDebuggerStatusbar
+            coverage={this.coverage}
+            testStats={this.testStats}
+          />
         </BrickWrapper>,
         this
       );

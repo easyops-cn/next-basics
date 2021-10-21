@@ -70,30 +70,48 @@ describe("FunctionDebuggerStatusbar", () => {
     );
   });
 
-  it("should work for 95% coverage", () => {
+  it("should work for 95% coverage with nil test stats", () => {
     const wrapper = shallow(
-      <FunctionDebuggerStatusbar coverage={getCoverage(15)} />
+      <FunctionDebuggerStatusbar
+        coverage={getCoverage(15)}
+        testStats={{
+          total: undefined,
+          failed: undefined,
+        }}
+      />
     );
     expect(wrapper.find(".coverageHigh").childAt(1).text()).toBe(
       "Coverage: 95%"
     );
   });
 
-  it("should work for 85% coverage", () => {
+  it("should work for 85% coverage with no failed tests", () => {
     const wrapper = shallow(
-      <FunctionDebuggerStatusbar coverage={getCoverage(13)} />
+      <FunctionDebuggerStatusbar
+        coverage={getCoverage(13)}
+        testStats={{
+          total: 3,
+          failed: 0,
+        }}
+      />
     );
     expect(wrapper.find(".coverageMedium").childAt(1).text()).toBe(
       "Coverage: 85%"
     );
   });
 
-  it("should work for 55% coverage", () => {
+  it("should work for 55% coverage with failed tests", () => {
     const wrapper = shallow(
-      <FunctionDebuggerStatusbar coverage={getCoverage(7)} />
+      <FunctionDebuggerStatusbar
+        coverage={getCoverage(7)}
+        testStats={{
+          total: 3,
+          failed: 2,
+        }}
+      />
     );
-    expect(wrapper.find(".coverageLow").childAt(1).text()).toBe(
-      "Coverage: 55%"
+    expect(wrapper.find(".hasFailedTests").childAt(1).text()).toBe(
+      "2/3 tests failed!"
     );
   });
 

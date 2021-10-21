@@ -213,6 +213,11 @@ export interface CoverageLocationWithBranch extends CoverageLocation {
   branch?: FunctionCoverageBranchName;
 }
 
+export interface TestStats {
+  total: number;
+  failed: number;
+}
+
 export interface DebuggerState {
   activeTab?: DebuggerStateActiveTab;
   originalFunction?: DebuggerStateOriginalFunction;

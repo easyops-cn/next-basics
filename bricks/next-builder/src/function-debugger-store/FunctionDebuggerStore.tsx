@@ -23,6 +23,7 @@ import {
   DebuggerStateTestExpect,
   DebuggerStateTestInput,
   FunctionTestCase,
+  TestStats,
 } from "./reducers/interfaces";
 import { FunctionDebuggerFactory } from "./FunctionDebuggerFactory";
 import { formatSerializableValue } from "./processors";
@@ -67,6 +68,7 @@ export interface FunctionDebuggerStoreProps {
   onTestMatchedChange?: (matched: boolean | null) => void;
   onTestUpdatableChange?: (updatable: boolean) => void;
   onSomethingModified?: (modified: boolean) => void;
+  onTestStatsChange?: (stats: TestStats) => void;
   onCoverageChange?: (
     coverage: DebuggerStateFunctionCoverageWhichMaybeFailed
   ) => void;
@@ -87,6 +89,7 @@ function LegacyFunctionDebuggerStore(
     onTestMatchedChange,
     onTestUpdatableChange,
     onSomethingModified,
+    onTestStatsChange,
     onCoverageChange,
   }: FunctionDebuggerStoreProps,
   ref: Ref<DebuggerStore>
@@ -241,14 +244,24 @@ function LegacyFunctionDebuggerStore(
     }
   }, [activeTab?.index, activeTest]);
 
+  const testStats = useMemo(
+    () =>
+      tests &&
+      coverage && {
+        // When coverage is nil, it indicates that tests is expired.
+        total: tests.length,
+        failed: tests.filter((test) => !test.testMatched).length,
+      },
+    [coverage, tests]
+  );
+
   const getFunctionDataToSave = useCallback(() => {
-    // Call runAllTest first.
-    const failedTestsCount = tests.filter((test) => !test.testMatched).length;
-    if (failedTestsCount > 0) {
+    // Should call runAllTest before.
+    if (testStats.failed > 0) {
       return {
         error:
-          failedTestsCount > 1
-            ? `There are ${failedTestsCount} tests failed!`
+          testStats.failed > 1
+            ? `There are ${testStats.failed} tests failed!`
             : "There is a test failed!",
       };
     }
@@ -262,7 +275,7 @@ function LegacyFunctionDebuggerStore(
         tests: tests.map(({ input, output }) => ({ input, output })),
       },
     };
-  }, [modifiedFunction, originalFunction, tests]);
+  }, [modifiedFunction, originalFunction, tests, testStats]);
 
   useImperativeHandle(
     ref,
@@ -402,6 +415,16 @@ function LegacyFunctionDebuggerStore(
       onSomethingModified?.(somethingModified);
     }
   }, [somethingModified, onSomethingModified]);
+
+  useEffect(
+    () => {
+      if (initialized.current) {
+        onTestStatsChange?.(testStats);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [onTestStatsChange, testStats?.total, testStats?.failed]
+  );
 
   useEffect(() => {
     if (initialized.current) {
