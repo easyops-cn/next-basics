@@ -129,12 +129,12 @@ export function FunctionDebuggerSidebar({
         {groups.map((group) => (
           <li key={group.label}>
             <div className={styles.sidebarGroupLabel}>
-              <span className={styles.sidebarGroupText}>{group.label}</span>
+              <span className={styles.groupText}>{group.label}</span>
               {group.value === "tests" && (
                 <div className={styles.groupIconContainer}>
                   {group.items.length > 0 && (
                     <span
-                      className={styles.sidebarGroupIcon}
+                      className={styles.groupIcon}
                       title="Run All Tests"
                       onClick={onRunAllTests}
                     >
@@ -142,7 +142,7 @@ export function FunctionDebuggerSidebar({
                     </span>
                   )}
                   <span
-                    className={styles.sidebarGroupIcon}
+                    className={styles.groupIcon}
                     title="Run All Tests"
                     onClick={onAddTest}
                   >
