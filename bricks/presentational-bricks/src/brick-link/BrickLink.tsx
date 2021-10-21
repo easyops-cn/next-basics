@@ -18,6 +18,7 @@ export interface BrickLinkProps extends Pick<LinkProps, "replace" | "target"> {
   icon?: MenuIcon;
   type?: "link" | "text";
   iconAlign?: "left" | "right";
+  hideExternalIcon?: boolean;
 }
 
 export function BrickLink(props: BrickLinkProps): React.ReactElement {
@@ -89,7 +90,7 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
       );
     }
 
-    if (props.target === "_blank") {
+    if (props.target === "_blank" && !props.hideExternalIcon) {
       link = (
         <span>
           {link}
