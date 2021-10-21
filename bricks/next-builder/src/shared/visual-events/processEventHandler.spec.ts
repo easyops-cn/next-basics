@@ -3,7 +3,7 @@ import {
   getHandlerName,
   isFlowAPiProvider,
 } from "./processEventHandler";
-import { HandlerType } from "./interfaces";
+import { CustomBrickEventType, HandlerType } from "./interfaces";
 import { BrickEventHandler } from "@next-core/brick-types";
 
 describe("procesoor", () => {
@@ -25,7 +25,7 @@ describe("procesoor", () => {
       ],
       [
         { target: "#create-form", properties: { value: { a: 4 } } },
-        HandlerType.SetProps,
+        CustomBrickEventType.SetProps,
       ],
       [
         {
@@ -33,7 +33,7 @@ describe("procesoor", () => {
           method: "setInitValue",
           args: [{ value: { a: 4 } }],
         },
-        HandlerType.ExecuteMethod,
+        CustomBrickEventType.ExecuteMethod,
       ],
       [{}, HandlerType.Unknown],
     ])("%j should return %j", (data, result) => {

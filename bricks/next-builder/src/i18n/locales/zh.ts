@@ -77,8 +77,9 @@ const locale: Locale = {
   [K.METHOD]: "方法",
   [K.EVENTS_HANDLER_BUILTIN_ACTION]: "内置动作",
   [K.EVENTS_HANDLER_USE_PROVIDER]: "调用Provider",
-  [K.EVENTS_HANDLER_SET_PROP]: "设置构件属性",
-  [K.EVENTS_HANDLER_USE_METHOD]: "与构件交互",
+  [K.CUSTOM_EVENTS_SET_PROP]: "设置构件属性",
+  [K.CUSTOM_EVENTS_USE_METHOD]: "调用构件方法",
+  [K.EVENTS_CUSTOM_BRICK_INTERACTION]: "构件交互",
   [K.NO_EVENTS_TO_ADD]: "无事件可添加",
   [K.DO_NOT_SUPPORT_VISUAL_CONFIG]:
     "当前事件处理器使用了老的配置方式暂不支持，请切换到 yaml 模式修改",
@@ -88,12 +89,13 @@ const locale: Locale = {
   [K.PROPERTIES_LABEL]: "属性",
   [K.USE_METHOD_LABEL]: "交互方法",
   [K.ARGS_LABEL]: "参数",
-  [K.HANDLE_TYPE_LABEL]: "处理类型",
+  [K.HANDLE_TYPE_LABEL]: "事件类型",
   [K.CALLBACK_LABEL]: "回调",
   [K.POLLING_LABEL]: "轮询",
+  [K.BRICK_EVENT_LABEL]: "处理事项",
   [K.POLLING_ITEM_PLACEHOLDER]: "请填写轮询相关参数",
   [K.BUILTIN_PROVIDER]: "内置Provider",
-  [K.IF_LABEL]: "条件IF",
+  [K.IF_LABEL]: "触发条件IF",
   [K.TRANSFORM_LABEL]: "数据转换",
   [K.TRANSFORM_FROM_LABEL]: "指定字段",
   [K.TRANSFORM_MAP_ARRAY]: "数据转换映射",
@@ -105,6 +107,7 @@ const locale: Locale = {
   [K.VISUAL_EVENT_ADD_CUSTOM_EVENT_PLACEHOLDER]: "按 Enter 键完成输入",
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]: "前往开发者中心查看",
   [K.LINK_TO_FLOWER_BUILDER]: "前往 FLow 查看编排",
+  [K.LINK_TO_NEXT_DOCS]: "前往文档中心查看",
 };
 
 export default locale;

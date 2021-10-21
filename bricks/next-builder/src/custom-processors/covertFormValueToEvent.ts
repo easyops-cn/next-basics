@@ -9,6 +9,7 @@ import {
 import { set } from "lodash";
 import { safeLoadFields } from "../builder-container/DataView/utils";
 import {
+  CustomBrickEventType,
   EventFormField,
   HandlerType,
 } from "../shared/visual-events/interfaces";
@@ -49,7 +50,10 @@ export function covertFormValueToEvent(
         : { method: formValue.useProviderMethod }),
       ...loadFields,
     } as UseProviderEventHandler;
-  } else if (formValue.handlerType === HandlerType.ExecuteMethod) {
+  } else if (
+    formValue.handlerType === HandlerType.CustomBrick &&
+    formValue.brickEventType === CustomBrickEventType.ExecuteMethod
+  ) {
     return {
       ...(formValue.selectorType === "target"
         ? { target: formValue.brickSelector }
@@ -61,7 +65,10 @@ export function covertFormValueToEvent(
         callback: formValue.callback,
       }),
     } as ExecuteCustomBrickEventHandler;
-  } else if (formValue.handlerType === HandlerType.SetProps) {
+  } else if (
+    formValue.handlerType === HandlerType.CustomBrick &&
+    formValue.brickEventType === CustomBrickEventType.SetProps
+  ) {
     return {
       ...(formValue.selectorType === "target"
         ? { target: formValue.brickSelector }

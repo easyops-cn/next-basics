@@ -9,6 +9,6 @@ describe("EventConfigForm", () => {
       onValuesChange: jest.fn(),
     };
     const wrapper = shallow(<EventConfigForm {...props} />);
-    expect(wrapper.find(Form.Item).at(0).find(Radio).length).toEqual(4);
+    expect(wrapper.find(Form.Item).at(0).find(Radio).length).toEqual(3);
   });
 });

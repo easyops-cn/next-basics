@@ -28,6 +28,7 @@ import { EditorContext } from "../../EventsEditor";
 import { Tooltip } from "antd";
 import { AddEventBtn } from "../add-event-btn/AddEventBtn";
 import {
+  CustomBrickEventType,
   HandlerType,
   LifeCycle,
 } from "../../../shared/visual-events/interfaces";
@@ -38,7 +39,7 @@ import { isNil } from "lodash";
 import { getProcessedEvents } from "../../../shared/visual-events/getProcessedEvents";
 
 export interface HandlerItemProps {
-  type?: HandlerType;
+  type?: Exclude<HandlerType, HandlerType.CustomBrick> & CustomBrickEventType;
   handler: BrickEventHandler;
   uniqKey?: string;
   name?: string;
@@ -47,8 +48,8 @@ export interface HandlerItemProps {
 const handlerIconMap = {
   [HandlerType.BuiltinAction]: "code",
   [HandlerType.UseProvider]: "database",
-  [HandlerType.ExecuteMethod]: "star",
-  [HandlerType.SetProps]: "equals",
+  [CustomBrickEventType.ExecuteMethod]: "star",
+  [CustomBrickEventType.SetProps]: "equals",
   [HandlerType.Unknown]: "question",
 };
 

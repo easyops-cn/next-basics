@@ -6,7 +6,7 @@ import {
   ExecuteCustomBrickEventHandler,
   SetPropsCustomBrickEventHandler,
 } from "@next-core/brick-types";
-import { HandlerType } from "./interfaces";
+import { CustomBrickEventType, HandlerType } from "./interfaces";
 
 export function isBuiltinHandler(
   handler: BrickEventHandler
@@ -36,15 +36,17 @@ export function isFlowAPiProvider(provider: string): boolean {
   return provider?.includes("@");
 }
 
-export function getHandlerType(handler: BrickEventHandler): HandlerType {
+export function getHandlerType(
+  handler: BrickEventHandler
+): Exclude<HandlerType, HandlerType.CustomBrick> | CustomBrickEventType {
   if (isBuiltinHandler(handler)) {
     return HandlerType.BuiltinAction;
   } else if (isUseProviderHandler(handler)) {
     return HandlerType.UseProvider;
   } else if (isExecuteCustomHandler(handler)) {
-    return HandlerType.ExecuteMethod;
+    return CustomBrickEventType.ExecuteMethod;
   } else if (isSetPropsCustomHandler(handler)) {
-    return HandlerType.SetProps;
+    return CustomBrickEventType.SetProps;
   } else {
     return HandlerType.Unknown;
   }
@@ -58,12 +60,12 @@ export function getHandlerName(handler: BrickEventHandler): string {
       return `${(handler as UseProviderEventHandler).useProvider}.${
         (handler as UseProviderEventHandler).method ?? "resolve"
       }`;
-    case HandlerType.ExecuteMethod:
+    case CustomBrickEventType.ExecuteMethod:
       return `${
         (handler as ExecuteCustomBrickEventHandler).target ||
         (handler as ExecuteCustomBrickEventHandler).targetRef
       }.${(handler as ExecuteCustomBrickEventHandler).method}`;
-    case HandlerType.SetProps:
+    case CustomBrickEventType.SetProps:
       return `${
         (handler as SetPropsCustomBrickEventHandler).target ||
         (handler as SetPropsCustomBrickEventHandler).targetRef
