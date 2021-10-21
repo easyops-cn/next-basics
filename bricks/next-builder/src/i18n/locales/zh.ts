@@ -107,6 +107,7 @@ const locale: Locale = {
   [K.VISUAL_EVENT_ADD_CUSTOM_EVENT_PLACEHOLDER]: "按 Enter 键完成输入",
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]: "前往开发者中心查看",
   [K.LINK_TO_FLOWER_BUILDER]: "前往 FLow 查看编排",
+  [K.LINK_TO_NEXT_DOCS]: "前往文档中心查看",
 };
 
 export default locale;

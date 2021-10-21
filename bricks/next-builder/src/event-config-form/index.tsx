@@ -92,6 +92,15 @@ export class EventConfigFormElement extends UpdatingElement {
   useInCustomTemplate: boolean;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 跳转到文档中心地址
+   */
+  @property()
+  docUrl: string;
+
+  /**
    * @description 高亮标记设置。
    */
   @property({
@@ -196,6 +205,7 @@ export class EventConfigFormElement extends UpdatingElement {
             providerList={this.providerList}
             flowApiList={this.flowApiList}
             type={this.type}
+            docUrl={this.docUrl}
             lifeCycle={this.lifeCycle}
             useInCustomTemplate={this.useInCustomTemplate}
             highlightTokens={this.highlightTokens}

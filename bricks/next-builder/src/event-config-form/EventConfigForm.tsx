@@ -46,6 +46,7 @@ export interface EventConfigForm {
   flowApiList?: string[];
   useInCustomTemplate?: boolean;
   type: "event" | "lifeCycle";
+  docUrl?: string;
   lifeCycle?: LifeCycle;
   highlightTokens?: HighlightTokenSettings[];
   onValuesChange?: FormProps["onValuesChange"];
@@ -64,6 +65,7 @@ export function LegacyEventConfigForm(
     providerList,
     flowApiList,
     type,
+    docUrl,
     lifeCycle,
     useInCustomTemplate,
     highlightTokens,
@@ -84,6 +86,15 @@ export function LegacyEventConfigForm(
   const debounceHandleChange = useMemo(
     () => debounce(onValuesChange, 600),
     [onValuesChange]
+  );
+
+  const inlineFormItemStyle = useMemo(
+    () => ({
+      display: "inline-block",
+      width: "calc(100% - 20px)",
+      margin: "0 6px 0 0",
+    }),
+    []
   );
 
   const getCodeEditorItem = useCallback(
@@ -166,28 +177,38 @@ export function LegacyEventConfigForm(
       >
         {({ getFieldValue }) =>
           getFieldValue("handlerType") === HandlerType.BuiltinAction && (
-            <Form.Item
-              name="action"
-              label={t(K.SELECT_ACTION_LABEL)}
-              rules={[{ required: true }]}
-            >
-              <AutoComplete
-                options={getActionOptions(builtinActions)}
-                filterOption={(inputValue, option) =>
-                  option?.options?.some(
-                    (item: BuiltinAction) =>
-                      item.value
-                        .toUpperCase()
-                        .indexOf(inputValue.toUpperCase()) !== -1
-                  )
-                }
-              ></AutoComplete>
+            <Form.Item label={t(K.SELECT_ACTION_LABEL)} required>
+              <Form.Item
+                name="action"
+                messageVariables={{ label: "action" }}
+                rules={[{ required: true }]}
+                style={docUrl && inlineFormItemStyle}
+              >
+                <AutoComplete
+                  options={getActionOptions(builtinActions)}
+                  filterOption={(inputValue, option) =>
+                    option?.options?.some(
+                      (item: BuiltinAction) =>
+                        item.value
+                          .toUpperCase()
+                          .indexOf(inputValue.toUpperCase()) !== -1
+                    )
+                  }
+                ></AutoComplete>
+              </Form.Item>
+              {docUrl && (
+                <Tooltip title={t(K.LINK_TO_NEXT_DOCS)}>
+                  <Link target="_blank" href={docUrl}>
+                    <FileSearchOutlined />
+                  </Link>
+                </Tooltip>
+              )}
             </Form.Item>
           )
         }
       </Form.Item>
     ),
-    [t]
+    [t, inlineFormItemStyle, docUrl]
   );
 
   const providerTypeItem = useMemo(
@@ -236,11 +257,7 @@ export function LegacyEventConfigForm(
                 name="provider"
                 rules={[{ required: true }]}
                 messageVariables={{ label: "provider" }}
-                style={{
-                  display: "inline-block",
-                  width: "calc(100% - 20px)",
-                  margin: "0 6px 0 0",
-                }}
+                style={inlineFormItemStyle}
               >
                 <AutoComplete
                   options={providerList?.map((provider) => ({
@@ -263,7 +280,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [providerList, t]
+    [providerList, t, inlineFormItemStyle]
   );
 
   const flowApiItem = useMemo(
@@ -283,11 +300,7 @@ export function LegacyEventConfigForm(
                 name="flow"
                 rules={[{ required: true }]}
                 messageVariables={{ label: "flow" }}
-                style={{
-                  display: "inline-block",
-                  width: "calc(100% - 20px)",
-                  margin: "0 6px 0 0",
-                }}
+                style={inlineFormItemStyle}
               >
                 <AutoComplete
                   options={flowApiList?.map((api) => ({ value: api }))}
@@ -308,7 +321,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [flowApiList, t]
+    [flowApiList, t, inlineFormItemStyle]
   );
 
   const useProviderMethod = useMemo(
