@@ -9,16 +9,19 @@ import {
 import {
   DebuggerStateFunctionCoverageWhichMaybeFailed,
   FunctionCoverageFailed,
+  TestStats,
 } from "../function-debugger-store/reducers/interfaces";
 
 import styles from "./FunctionDebuggerStatusbar.module.css";
 
 export interface FunctionDebuggerStatusbarProps {
   coverage?: DebuggerStateFunctionCoverageWhichMaybeFailed;
+  testStats?: TestStats;
 }
 
 export function FunctionDebuggerStatusbar({
   coverage,
+  testStats,
 }: FunctionDebuggerStatusbarProps): React.ReactElement {
   const coverageIsOk = coverage && coverage.status !== "failed";
   const coverageRate = useMemo(() => {
@@ -44,6 +47,15 @@ export function FunctionDebuggerStatusbar({
               <QuestionOutlined />
             </span>
             <span>Coverage: expired</span>
+          </span>
+        ) : testStats?.failed > 0 ? (
+          <span className={styles.hasFailedTests}>
+            <span className={styles.coverageIcon}>
+              <WarningOutlined />
+            </span>
+            <span>
+              {testStats.failed}/{testStats.total} tests failed!
+            </span>
           </span>
         ) : coverageIsOk ? (
           <>

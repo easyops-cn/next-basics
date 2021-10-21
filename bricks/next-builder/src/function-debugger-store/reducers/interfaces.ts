@@ -47,7 +47,9 @@ export type DebuggerAction =
   | DebuggerActionSwitchTab
   | DebuggerActionDebugUserInput
   | DebuggerActionDebugReturn
+  | DebuggerActionSaveDebugAsTest
   | DebuggerActionAddTest
+  | DebuggerActionDeleteTest
   | DebuggerActionUpdateTestInput
   | DebuggerActionTestReturn
   | DebuggerActionUpdateTestOutput
@@ -87,10 +89,21 @@ export interface DebuggerActionDebugReturn {
   output: DebuggerStateDebugOutput;
 }
 
-export interface DebuggerActionAddTest {
-  type: "addTest";
+export interface DebuggerActionSaveDebugAsTest {
+  type: "saveDebugAsTest";
   debugInput: DebuggerStateDebugInput;
   debugOutput: DebuggerStateDebugOutput;
+  nextTestIndex: number;
+}
+
+export interface DebuggerActionAddTest {
+  type: "addTest";
+  nextTestIndex: number;
+}
+
+export interface DebuggerActionDeleteTest {
+  type: "deleteTest";
+  activeTestIndex: number;
 }
 
 export interface DebuggerActionUpdateTestInput {
@@ -198,6 +211,11 @@ export interface CoverageLocation {
 
 export interface CoverageLocationWithBranch extends CoverageLocation {
   branch?: FunctionCoverageBranchName;
+}
+
+export interface TestStats {
+  total: number;
+  failed: number;
 }
 
 export interface DebuggerState {

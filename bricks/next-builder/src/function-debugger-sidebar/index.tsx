@@ -37,12 +37,19 @@ export class FunctionsSidebarElement extends UpdatingElement {
   @event({ type: "tests.run" })
   private _runAllTestsEmitter: EventEmitter<void>;
 
+  @event({ type: "tests.add" })
+  private _addTestEmitter: EventEmitter<void>;
+
   private _handleActiveTabSwitch = (tab: string): void => {
     this._activeTabSwitchEmitter.emit(tab);
   };
 
   private _handleRunAllTests = (): void => {
     this._runAllTestsEmitter.emit();
+  };
+
+  private _handleAddTest = (): void => {
+    this._addTestEmitter.emit();
   };
 
   connectedCallback(): void {
@@ -70,6 +77,7 @@ export class FunctionsSidebarElement extends UpdatingElement {
             tests={this.tests}
             onActiveTabSwitch={this._handleActiveTabSwitch}
             onRunAllTests={this._handleRunAllTests}
+            onAddTest={this._handleAddTest}
           />
         </BrickWrapper>,
         this

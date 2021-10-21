@@ -12,6 +12,8 @@ export const coverage: Reducer<
     case "initFunction":
     case "updateSource":
     case "updateTypescript":
+    case "addTest":
+    case "deleteTest":
       return;
     case "updateCoverage": {
       if (action.coverage.status === "failed") {

@@ -19,6 +19,18 @@ export const activeTab: Reducer<DebuggerStateActiveTab, DebuggerAction> = (
         index: index && Number(index),
       };
     }
+    case "saveDebugAsTest":
+    case "addTest":
+      return {
+        value: `test:${action.nextTestIndex}`,
+        group: "test",
+        index: action.nextTestIndex,
+      };
+    case "deleteTest":
+      return {
+        value: "function",
+        group: "function",
+      };
     default:
       return state;
   }

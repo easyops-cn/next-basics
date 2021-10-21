@@ -10,7 +10,7 @@ describe("FunctionDebuggerSidebar", () => {
     expect(wrapper.find(".sidebarItems li").length).toBe(2);
     wrapper.find(".sidebarItems li").at(1).simulate("click");
     expect(wrapper.find(".active .text").text()).toBe("Debug");
-    expect(wrapper.find(".sidebarGroupIcon").length).toBe(0);
+    expect(wrapper.find(".groupIcon").length).toBe(1);
     // Click on the active item.
     wrapper.find(".sidebarItems .active").simulate("click");
     expect(wrapper.find(".active .text").text()).toBe("Debug");

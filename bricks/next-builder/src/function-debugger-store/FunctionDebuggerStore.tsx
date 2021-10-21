@@ -8,6 +8,7 @@ import React, {
   useMemo,
   useReducer,
   useRef,
+  useState,
 } from "react";
 import { rootReducer } from "./reducers";
 import {
@@ -22,6 +23,7 @@ import {
   DebuggerStateTestExpect,
   DebuggerStateTestInput,
   FunctionTestCase,
+  TestStats,
 } from "./reducers/interfaces";
 import { FunctionDebuggerFactory } from "./FunctionDebuggerFactory";
 import { formatSerializableValue } from "./processors";
@@ -31,6 +33,8 @@ export interface DebuggerStore {
   initFunction: (data: Omit<DebuggerActionInitFunction, "type">) => void;
   run: () => void;
   saveDebugAsTest: () => void;
+  addTest: () => void;
+  deleteTest: () => void;
   updateTestInput: (input: string) => void;
   saveTest: () => void;
   runAllTests: () => void;
@@ -64,6 +68,7 @@ export interface FunctionDebuggerStoreProps {
   onTestMatchedChange?: (matched: boolean | null) => void;
   onTestUpdatableChange?: (updatable: boolean) => void;
   onSomethingModified?: (modified: boolean) => void;
+  onTestStatsChange?: (stats: TestStats) => void;
   onCoverageChange?: (
     coverage: DebuggerStateFunctionCoverageWhichMaybeFailed
   ) => void;
@@ -84,6 +89,7 @@ function LegacyFunctionDebuggerStore(
     onTestMatchedChange,
     onTestUpdatableChange,
     onSomethingModified,
+    onTestStatsChange,
     onCoverageChange,
   }: FunctionDebuggerStoreProps,
   ref: Ref<DebuggerStore>
@@ -191,18 +197,32 @@ function LegacyFunctionDebuggerStore(
 
   const saveDebugAsTest = useCallback(() => {
     if (debugOutput.ok) {
-      const nextIndex = tests.length;
+      const nextTestIndex = tests.length;
       dispatch({
-        type: "addTest",
+        type: "saveDebugAsTest",
         debugInput: formatSerializableValue(debugInput),
         debugOutput,
-      });
-      dispatch({
-        type: "switchTab",
-        tab: `test:${nextIndex}`,
+        nextTestIndex,
       });
     }
   }, [debugInput, debugOutput, tests?.length]);
+
+  const addTest = useCallback(() => {
+    const nextTestIndex = tests.length;
+    dispatch({
+      type: "addTest",
+      nextTestIndex,
+    });
+  }, [tests?.length]);
+
+  const [testsDeleted, setTestsDeleted] = useState(false);
+  const deleteTest = useCallback(() => {
+    dispatch({
+      type: "deleteTest",
+      activeTestIndex: activeTab.index,
+    });
+    setTestsDeleted(true);
+  }, [activeTab?.index]);
 
   const updateTestInput = useCallback(
     (input: string) => {
@@ -224,14 +244,24 @@ function LegacyFunctionDebuggerStore(
     }
   }, [activeTab?.index, activeTest]);
 
+  const testStats = useMemo(
+    () =>
+      tests &&
+      coverage && {
+        // When coverage is nil, it indicates that tests is expired.
+        total: tests.length,
+        failed: tests.filter((test) => !test.testMatched).length,
+      },
+    [coverage, tests]
+  );
+
   const getFunctionDataToSave = useCallback(() => {
-    // Call runAllTest first.
-    const failedTestsCount = tests.filter((test) => !test.testMatched).length;
-    if (failedTestsCount > 0) {
+    // Should call runAllTest before.
+    if (testStats.failed > 0) {
       return {
         error:
-          failedTestsCount > 1
-            ? `There are ${failedTestsCount} tests failed!`
+          testStats.failed > 1
+            ? `There are ${testStats.failed} tests failed!`
             : "There is a test failed!",
       };
     }
@@ -245,7 +275,7 @@ function LegacyFunctionDebuggerStore(
         tests: tests.map(({ input, output }) => ({ input, output })),
       },
     };
-  }, [modifiedFunction, originalFunction, tests]);
+  }, [modifiedFunction, originalFunction, tests, testStats]);
 
   useImperativeHandle(
     ref,
@@ -254,6 +284,8 @@ function LegacyFunctionDebuggerStore(
       initFunction,
       run,
       saveDebugAsTest,
+      addTest,
+      deleteTest,
       updateTestInput,
       saveTest,
       runAllTests,
@@ -264,6 +296,8 @@ function LegacyFunctionDebuggerStore(
       initFunction,
       run,
       saveDebugAsTest,
+      addTest,
+      deleteTest,
       updateTestInput,
       saveTest,
       runAllTests,
@@ -370,14 +404,27 @@ function LegacyFunctionDebuggerStore(
   }, [activeTest.testUpdatable, onTestUpdatableChange]);
 
   const somethingModified = useMemo(
-    () => functionModified || !!tests?.some((test) => test.testModified),
-    [functionModified, tests]
+    () =>
+      functionModified ||
+      testsDeleted ||
+      !!tests?.some((test) => test.testModified),
+    [functionModified, tests, testsDeleted]
   );
   useEffect(() => {
     if (initialized.current) {
       onSomethingModified?.(somethingModified);
     }
   }, [somethingModified, onSomethingModified]);
+
+  useEffect(
+    () => {
+      if (initialized.current) {
+        onTestStatsChange?.(testStats);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [onTestStatsChange, testStats?.total, testStats?.failed]
+  );
 
   useEffect(() => {
     if (initialized.current) {

@@ -12,6 +12,7 @@ import {
   CloseOutlined,
   CodeOutlined,
   PlayCircleOutlined,
+  PlusCircleOutlined,
   QuestionOutlined,
 } from "@ant-design/icons";
 import { DebuggerStateTestCase } from "../function-debugger-store/reducers/interfaces";
@@ -26,6 +27,7 @@ export interface FunctionDebuggerSidebarProps {
   tests?: DebuggerStateTestCase[];
   onActiveTabSwitch?: (tab: string) => void;
   onRunAllTests?: () => void;
+  onAddTest?: () => void;
 }
 
 export interface SidebarGroup {
@@ -49,6 +51,7 @@ export function FunctionDebuggerSidebar({
   tests,
   onActiveTabSwitch,
   onRunAllTests,
+  onAddTest,
 }: FunctionDebuggerSidebarProps): React.ReactElement {
   const [currentTab, setCurrentTab] = useState<string>(activeTab ?? "function");
 
@@ -126,15 +129,26 @@ export function FunctionDebuggerSidebar({
         {groups.map((group) => (
           <li key={group.label}>
             <div className={styles.sidebarGroupLabel}>
-              <span className={styles.sidebarGroupText}>{group.label}</span>
-              {group.value === "tests" && group.items.length > 0 && (
-                <span
-                  className={styles.sidebarGroupIcon}
-                  title="Run All Tests"
-                  onClick={onRunAllTests}
-                >
-                  <PlayCircleOutlined />
-                </span>
+              <span className={styles.groupText}>{group.label}</span>
+              {group.value === "tests" && (
+                <div className={styles.groupIconContainer}>
+                  {group.items.length > 0 && (
+                    <span
+                      className={styles.groupIcon}
+                      title="Run All Tests"
+                      onClick={onRunAllTests}
+                    >
+                      <PlayCircleOutlined />
+                    </span>
+                  )}
+                  <span
+                    className={styles.groupIcon}
+                    title="Add Test"
+                    onClick={onAddTest}
+                  >
+                    <PlusCircleOutlined />
+                  </span>
+                </div>
               )}
             </div>
             <ul className={styles.sidebarItems}>

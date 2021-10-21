@@ -23,6 +23,7 @@ import {
   DebuggerStateTestCase,
   DebuggerStateTestExpect,
   DebuggerStateTestInput,
+  TestStats,
 } from "./reducers/interfaces";
 
 /**
@@ -89,6 +90,16 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   }
 
   @method()
+  addTest(): void {
+    this._storeRef.current.addTest();
+  }
+
+  @method()
+  deleteTest(): void {
+    this._storeRef.current.deleteTest();
+  }
+
+  @method()
   saveTest(): void {
     this._storeRef.current.saveTest();
   }
@@ -147,6 +158,9 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
 
   @event({ type: "something.modified" })
   private _somethingModifiedEmitter: EventEmitter<boolean>;
+
+  @event({ type: "testStats.change" })
+  private _testStatsChangeEmitter: EventEmitter<TestStats>;
 
   @event({ type: "coverage.change" })
   private _coverageChangeEmitter: EventEmitter<DebuggerStateFunctionCoverageWhichMaybeFailed>;
@@ -211,8 +225,14 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
     this._somethingModifiedEmitter.emit(modified);
   };
 
-  private _handleCoverageChange = (coverage: any): void => {
+  private _handleCoverageChange = (
+    coverage: DebuggerStateFunctionCoverageWhichMaybeFailed
+  ): void => {
     this._coverageChangeEmitter.emit(coverage);
+  };
+
+  private _handleTestStatsChange = (stats: TestStats): void => {
+    this._testStatsChangeEmitter.emit(stats);
   };
 
   private _storeRef = createRef<DebuggerStore>();
@@ -252,6 +272,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
             onTestMatchedChange={this._handleTestMatchedChange}
             onTestUpdatableChange={this._handleTestUpdatableChange}
             onSomethingModified={this._handleSomethingModified}
+            onTestStatsChange={this._handleTestStatsChange}
             onCoverageChange={this._handleCoverageChange}
           />
         </BrickWrapper>,

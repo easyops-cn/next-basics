@@ -4,6 +4,7 @@ import classNames from "classnames";
 import {
   CheckOutlined,
   CloseOutlined,
+  DeleteOutlined,
   PlayCircleOutlined,
   PlusCircleOutlined,
   QuestionOutlined,
@@ -36,6 +37,10 @@ export function FunctionDebuggerToolbar({
       onButtonClick?.({ action: "save" });
     }
   }, [onButtonClick, saveDisabled]);
+
+  const handleDeleteClick = useCallback(() => {
+    onButtonClick?.({ action: "delete" });
+  }, [onButtonClick]);
 
   return (
     <div
@@ -86,6 +91,16 @@ export function FunctionDebuggerToolbar({
               )}
             </div>
           </Tooltip>
+          {refinedType === "test-input" && (
+            <Tooltip title="Delete">
+              <div
+                className={styles.debuggerButton}
+                onClick={handleDeleteClick}
+              >
+                <DeleteOutlined />
+              </div>
+            </Tooltip>
+          )}
         </div>
       ) : (
         refinedType === "test-output" && (
