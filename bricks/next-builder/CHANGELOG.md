@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.83.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.82.0...@next-bricks/next-builder@1.83.0) (2021-10-21)
+
+
+### Features
+
+* **function:** support adding test manually ([be53905](https://github.com/easyops-cn/next-basics/commit/be5390547e701af58b011850c170c14def317cf9))
+* **function:** support deleting tests ([a52d1be](https://github.com/easyops-cn/next-basics/commit/a52d1be24fff39915e9c33d029148bdb7e23d42e))
+* **function:** support showing test stats ([2a28d8e](https://github.com/easyops-cn/next-basics/commit/2a28d8e29d956ff089cf2ce5cd47a81d82b54c02))
+
+
+
+
+
 # [1.82.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.81.0...@next-bricks/next-builder@1.82.0) (2021-10-20)
 
 
