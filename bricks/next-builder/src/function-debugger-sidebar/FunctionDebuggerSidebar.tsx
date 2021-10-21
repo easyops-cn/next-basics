@@ -143,7 +143,7 @@ export function FunctionDebuggerSidebar({
                   )}
                   <span
                     className={styles.groupIcon}
-                    title="Run All Tests"
+                    title="Add Test"
                     onClick={onAddTest}
                   >
                     <PlusCircleOutlined />
