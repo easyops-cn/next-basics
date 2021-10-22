@@ -99,6 +99,16 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
+   * @description 是否隐藏target为_blank时label的补充icon
+   */
+  @property({
+    type: Boolean,
+  })
+  hideExternalIcon: boolean;
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
    * @description url 为空时不跳转，但是会发出`link.click`点击事件
    */
   @property({
@@ -242,6 +252,7 @@ export class BrickLinkElement extends UpdatingElement {
             icon={this.icon}
             type={this.type}
             iconAlign={this.iconAlign}
+            hideExternalIcon={this.hideExternalIcon}
           />
         </BrickWrapper>,
         this

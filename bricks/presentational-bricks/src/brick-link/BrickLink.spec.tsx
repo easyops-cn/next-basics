@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { BrickLink, BrickLinkProps } from "./BrickLink";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 jest.spyOn(console, "warn").mockImplementation(() => void 0);
 
@@ -72,6 +73,7 @@ describe("BrickLink", () => {
           theme: "outlined",
           type: "file-search",
         }}
+        target="_blank"
       />
     );
     expect(wrapper.find("Link").childAt(1).props().icon).toEqual({
@@ -79,5 +81,10 @@ describe("BrickLink", () => {
       theme: "outlined",
       type: "file-search",
     });
+    expect(wrapper.find(GeneralIcon).length).toBe(2);
+    wrapper.setProps({
+      hideExternalIcon: true,
+    });
+    expect(wrapper.find(GeneralIcon).length).toBe(1);
   });
 });
