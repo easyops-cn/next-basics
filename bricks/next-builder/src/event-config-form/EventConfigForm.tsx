@@ -28,6 +28,7 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import {
   builtinActions,
   hasCallbackActions,
+  recommendActionIds,
 } from "../shared/visual-events/constants";
 import { Link } from "@next-libs/basic-components";
 import {
@@ -185,7 +186,7 @@ export function LegacyEventConfigForm(
                 style={docUrl && inlineFormItemStyle}
               >
                 <AutoComplete
-                  options={getActionOptions(builtinActions)}
+                  options={getActionOptions(builtinActions, recommendActionIds)}
                   filterOption={(inputValue, option) =>
                     option?.options?.some(
                       (item: BuiltinAction) =>

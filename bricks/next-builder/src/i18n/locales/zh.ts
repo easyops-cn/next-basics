@@ -108,6 +108,7 @@ const locale: Locale = {
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]: "前往开发者中心查看",
   [K.LINK_TO_FLOWER_BUILDER]: "前往 FLow 查看编排",
   [K.LINK_TO_NEXT_DOCS]: "前往文档中心查看",
+  [K.RECOMMENDED_ACTIONS]: "推荐动作",
 };
 
 export default locale;

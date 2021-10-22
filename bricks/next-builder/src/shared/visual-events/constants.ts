@@ -1,9 +1,14 @@
-import { HandlerType, CustomBrickEventType } from "./interfaces";
 export const recommendActionIds = [
   "history.push",
   "segue.push",
+  "history.pushQuery",
   "history.reload",
   "history.goBack",
+  "message.success",
+  "handleHttpError",
+  "context.replace",
+  "context.assign",
+  "console.log",
 ];
 
 export const pageSwitchActionIds = [
@@ -65,6 +70,14 @@ export const builtinActions = [
     value: "history.unblock",
   },
   {
+    label: "页面快捷跳转(segue.push)",
+    value: "segue.push",
+  },
+  {
+    label: "页面快捷跳转，并替换最新浏览记录(segue.replace)",
+    value: "segue.replace",
+  },
+  {
     label: "成功提示(message.success)",
     value: "message.success",
   },
@@ -119,14 +132,6 @@ export const builtinActions = [
   {
     label: "输出提示信息(console.info)",
     value: "console.info",
-  },
-  {
-    label: "页面快捷跳转(segue.push)",
-    value: "segue.push",
-  },
-  {
-    label: "页面快捷跳转，并替换最新浏览记录(segue.replace)",
-    value: "segue.replace",
   },
   {
     label: "写入本地 localStorage 缓存数据(localStorage.setItem)",

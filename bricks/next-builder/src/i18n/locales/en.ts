@@ -112,6 +112,7 @@ const locale: Locale = {
     "Link to provider documents of developers",
   [K.LINK_TO_FLOWER_BUILDER]: "Link to flow builder app",
   [K.LINK_TO_NEXT_DOCS]: "Link to next document",
+  [K.RECOMMENDED_ACTIONS]: "Recommended actions",
 };
 
 export default locale;

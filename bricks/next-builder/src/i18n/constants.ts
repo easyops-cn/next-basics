@@ -99,6 +99,7 @@ export enum K {
   LAYOUT_CLASSIC = "LAYOUT_CLASSIC",
   LAYOUT_BANNER = "LAYOUT_BANNER",
   LAYOUT_MENU = "LAYOUT_MENU",
+  RECOMMENDED_ACTIONS = "RECOMMENDED_ACTIONS",
 }
 
 export type Locale = { [key in K]: string };
