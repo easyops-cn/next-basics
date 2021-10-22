@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.227.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.226.1...@next-bricks/presentational-bricks@1.227.0) (2021-10-22)
+
+
+### Features
+
+* link支持target属性为_blank时去掉icon后缀 Closed SERVICE_OBSERVE-646 ([974ab17](https://github.com/easyops-cn/next-basics/commit/974ab177e18d1f8c323baaf4d7e1eda33fd5a4ea))
+
+
+
+
+
 ## [1.226.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.226.0...@next-bricks/presentational-bricks@1.226.1) (2021-10-19)
 
 
