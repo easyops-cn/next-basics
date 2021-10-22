@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.197.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.196.0...@next-bricks/forms@1.197.0) (2021-10-22)
+
+
+### Features
+
+* **forms:** add showMentions property ([d09e845](https://github.com/easyops-cn/next-basics/commit/d09e84513f09bbf5da43563fc27489d610053e47))
+
+
+
+
+
 # [1.196.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.195.2...@next-bricks/forms@1.196.0) (2021-10-20)
 
 
