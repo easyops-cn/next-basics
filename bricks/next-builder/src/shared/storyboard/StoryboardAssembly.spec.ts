@@ -1,5 +1,4 @@
 import {
-  InstanceApi_postSearch,
   InstanceApi_getDetail,
   InstanceGraphApi_traverseGraphV2,
 } from "@next-sdk/cmdb-sdk";
@@ -13,210 +12,210 @@ import { StoryboardAssembly } from "./StoryboardAssembly";
 jest.mock("@next-sdk/cmdb-sdk");
 
 (
-  InstanceApi_postSearch as jest.MockedFunction<typeof InstanceApi_postSearch>
-).mockImplementation((modelId) => {
-  switch (modelId) {
-    case "STORYBOARD_ROUTE":
-      return Promise.resolve({
-        list: [
-          {
-            id: "R-01",
-            instanceId: "instance-r01",
-            path: "/a",
-            type: "bricks",
-            parent: [], // Empty parent also works.
-            providers: '["p1"]',
-            segues: null,
-            // Fields should be removed.
-            _ts: 123,
-            org: 1,
-          },
-
-          {
-            id: "R-02",
-            instanceId: "instance-r02",
-            path: "/b",
-            type: "routes",
-            permissionsPreCheck:
-              '["<% `cmdb:${QUERY.objectId}_instance_create` %>"]',
-          },
-
-          {
-            id: "R-03",
-            instanceId: "instance-r03",
-            path: "/b/c",
-            type: "bricks",
-            parent: [{ id: "R-02" }],
-          },
-
-          {
-            id: "R-04",
-            instanceId: "instance-r04",
-            path: "/a/d",
-            type: "bricks",
-            parent: [{ id: "B-01" }],
-            mountPoint: "m2",
-          },
-
-          {
-            id: "R-05",
-            instanceId: "instance-r05",
-            path: "/a/e",
-            type: "bricks",
-            parent: [{ id: "B-01" }],
-            mountPoint: "m2",
-          },
-        ],
-      });
-
-    case "STORYBOARD_BRICK":
-      return Promise.resolve({
-        list: [
-          {
-            id: "B-01",
-            instanceId: "instance-b01",
-            type: "brick",
-            brick: "m",
-            parent: [{ id: "R-01" }],
-            if: "false",
-            lifeCycle: undefined,
-          },
-
-          {
-            id: "B-02",
-            instanceId: "instance-b02",
-            type: "brick",
-            brick: "n",
-            parent: [{ id: "R-01" }],
-          },
-
-          {
-            id: "B-03",
-            instanceId: "instance-b03",
-            type: "brick",
-            brick: "o",
-            parent: [{ id: "R-03" }],
-          },
-
-          {
-            id: "B-04",
-            instanceId: "instance-b04",
-            type: "brick",
-            brick: "p",
-            parent: [{ id: "B-01" }],
-            mountPoint: "m1",
-          },
-
-          {
-            id: "B-05",
-            instanceId: "instance-b05",
-            type: "template",
-            brick: "q",
-            parent: [{ id: "B-01" }],
-            mountPoint: "m1",
-          },
-
-          {
-            // This brick's parent not found.
-            id: "T-01",
-            instanceId: "instance-x01",
-            type: "brick",
-            brick: "t1",
-            parent: [{ id: "R-00" }],
-          },
-
-          {
-            // This brick's grand-parent not found.
-            id: "T-02",
-            instanceId: "instance-x02",
-            type: "brick",
-            brick: "t2",
-            parent: [{ id: "T-01" }],
-          },
-        ],
-      });
-  }
-});
-
-(
   InstanceGraphApi_traverseGraphV2 as jest.MockedFunction<
     typeof InstanceGraphApi_traverseGraphV2
   >
-).mockImplementation(() =>
-  Promise.resolve({
-    topic_vertices: [
-      {
-        id: "B-T-01",
-        instanceId: "a",
-        templateId: "tpl-01",
-        proxy: JSON.stringify(
-          {
-            properties: {
-              one: {
-                ref: "ref-01",
-                refProperty: "two",
-              },
+).mockImplementation((params) =>
+  Promise.resolve(
+    params.object_id === "STORYBOARD_TEMPLATE"
+      ? {
+          topic_vertices: [
+            {
+              id: "B-T-01",
+              instanceId: "a",
+              templateId: "tpl-01",
+              proxy: JSON.stringify(
+                {
+                  properties: {
+                    one: {
+                      ref: "ref-01",
+                      refProperty: "two",
+                    },
+                  },
+                },
+
+                null,
+                2
+              ),
             },
-          },
+            {
+              id: "B-T-02",
+              instanceId: "r",
+              templateId: "tpl-02",
+              proxy: "",
+            },
+          ],
 
-          null,
-          2
-        ),
-      },
-      {
-        id: "B-T-02",
-        instanceId: "r",
-        templateId: "tpl-02",
-        proxy: "",
-      },
-    ],
+          vertices: [
+            {
+              instanceId: "b",
+              id: "T-B-01",
+              type: "brick",
+              brick: "z",
+            },
 
-    vertices: [
-      {
-        instanceId: "b",
-        id: "T-B-01",
-        type: "brick",
-        brick: "z",
-      },
+            {
+              instanceId: "c",
+              id: "T-B-02",
+              type: "brick",
+              brick: "y",
+              ref: "two",
+              mountPoint: "m5",
+            },
 
-      {
-        instanceId: "c",
-        id: "T-B-02",
-        type: "brick",
-        brick: "y",
-        ref: "two",
-        mountPoint: "m5",
-      },
+            {
+              instanceId: "d",
+              id: "T-B-03",
+              type: "brick",
+              brick: "x",
+              mountPoint: "m6",
+            },
+          ],
 
-      {
-        instanceId: "d",
-        id: "T-B-03",
-        type: "brick",
-        brick: "x",
-        mountPoint: "m6",
-      },
-    ],
+          edges: [
+            {
+              in: "b",
+              out: "a",
+              out_name: "children",
+            },
 
-    edges: [
-      {
-        in: "b",
-        out: "a",
-        out_name: "children",
-      },
+            {
+              in: "c",
+              out: "b",
+              out_name: "children",
+            },
 
-      {
-        in: "c",
-        out: "b",
-        out_name: "children",
-      },
-
-      {
-        in: "d",
-        out: "c",
-        out_name: "children",
-      },
-    ],
-  })
+            {
+              in: "d",
+              out: "c",
+              out_name: "children",
+            },
+          ],
+        }
+      : {
+          topic_vertices: [
+            {
+              id: "R-02",
+              instanceId: "instance-r02",
+              path: "/b",
+              type: "routes",
+              permissionsPreCheck:
+                '["<% `cmdb:${QUERY.objectId}_instance_create` %>"]',
+              sort: 1,
+            },
+            {
+              id: "R-01",
+              instanceId: "instance-r01",
+              path: "/a",
+              type: "bricks",
+              providers: '["p1"]',
+              segues: null,
+              // Fields should be removed.
+              _ts: 123,
+              org: 1,
+            },
+          ],
+          vertices: [
+            {
+              id: "R-05",
+              instanceId: "instance-r05",
+              path: "/a/e",
+              type: "bricks",
+              mountPoint: "m2",
+              sort: 1,
+            },
+            {
+              id: "R-03",
+              instanceId: "instance-r03",
+              path: "/b/c",
+              type: "bricks",
+            },
+            {
+              id: "R-04",
+              instanceId: "instance-r04",
+              path: "/a/d",
+              type: "bricks",
+              mountPoint: "m2",
+            },
+            {
+              id: "B-01",
+              instanceId: "instance-b01",
+              type: "brick",
+              brick: "m",
+              if: "false",
+              lifeCycle: undefined,
+            },
+            {
+              id: "B-02",
+              instanceId: "instance-b02",
+              type: "brick",
+              brick: "n",
+            },
+            {
+              id: "B-03",
+              instanceId: "instance-b03",
+              type: "brick",
+              brick: "o",
+            },
+            {
+              id: "B-04",
+              instanceId: "instance-b04",
+              type: "brick",
+              brick: "p",
+              mountPoint: "m1",
+            },
+            {
+              id: "B-05",
+              instanceId: "instance-b05",
+              type: "template",
+              brick: "q",
+              mountPoint: "m1",
+            },
+          ],
+          edges: [
+            {
+              in: "instance-r03",
+              out: "instance-r02",
+              out_name: "children",
+            },
+            {
+              in: "instance-r04",
+              out: "instance-b01",
+              out_name: "children",
+            },
+            {
+              in: "instance-r05",
+              out: "instance-b01",
+              out_name: "children",
+            },
+            {
+              in: "instance-b01",
+              out: "instance-r01",
+              out_name: "children",
+            },
+            {
+              in: "instance-b02",
+              out: "instance-r01",
+              out_name: "children",
+            },
+            {
+              in: "instance-b03",
+              out: "instance-r03",
+              out_name: "children",
+            },
+            {
+              in: "instance-b04",
+              out: "instance-b01",
+              out_name: "children",
+            },
+            {
+              in: "instance-b05",
+              out: "instance-b01",
+              out_name: "children",
+            },
+          ],
+        }
+  )
 );
 
 const mockGetDetail = (

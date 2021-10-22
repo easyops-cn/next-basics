@@ -1,4 +1,4 @@
-import { buildStoryboard } from "./buildStoryboard";
+import { buildStoryboardV2 } from "./buildStoryboardV2";
 import { StoryboardAssemblyParams, StoryboardToBuild } from "./interfaces";
 import { preStoryboardAssembly } from "./preStoryboardAssembly";
 
@@ -10,7 +10,7 @@ export async function minimalStoryboardAssembly({
   projectId,
   options,
 }: StoryboardAssemblyParams): Promise<StoryboardToBuild> {
-  return buildStoryboard({
+  return buildStoryboardV2({
     ...(
       await preStoryboardAssembly({
         appId,

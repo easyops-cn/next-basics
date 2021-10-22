@@ -1,20 +1,19 @@
-import { BuilderBrickNode, BuilderRouteNode } from "@next-core/brick-types";
+import { BuilderRouteNode } from "@next-core/brick-types";
 import { pipes } from "@next-core/brick-utils";
 import {
-  InstanceApi_postSearch,
   InstanceApi_getDetail,
-  InstanceApi_PostSearchResponseBody,
   InstanceApi_GetDetailResponseBody,
   InstanceGraphApi_traverseGraphV2,
+  InstanceGraphApi_TraverseGraphV2RequestBody,
   InstanceGraphApi_TraverseGraphV2ResponseBody,
 } from "@next-sdk/cmdb-sdk";
+import { sortBy } from "lodash";
 import {
   PreStoryboardAssemblyParams,
   PreStoryboardAssemblyResult,
 } from "./interfaces";
 
 const MODEL_STORYBOARD_ROUTE = "STORYBOARD_ROUTE";
-const MODEL_STORYBOARD_BRICK = "STORYBOARD_BRICK";
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_PROJECT_MICRO_APP = "PROJECT_MICRO_APP";
 
@@ -22,73 +21,51 @@ const MODEL_PROJECT_MICRO_APP = "PROJECT_MICRO_APP";
  * Do pre-requests before storyboard assembly.
  */
 export async function preStoryboardAssembly({
-  appId,
   projectId,
   options,
 }: PreStoryboardAssemblyParams): Promise<PreStoryboardAssemblyResult> {
-  const routeListReq = InstanceApi_postSearch(MODEL_STORYBOARD_ROUTE, {
-    fields: {
-      "*": 1,
-      parent: 1,
-    },
-
-    page: 1,
-    page_size: 3000,
-    query: {
-      appId,
-    },
-
-    sort: {
-      sort: 1,
-    },
-  });
-
-  const brickListReq = InstanceApi_postSearch(MODEL_STORYBOARD_BRICK, {
-    fields: {
-      "*": 1,
-      parent: 1,
-    },
-
-    page: 1,
-    page_size: 3000,
-    query: {
-      appId,
-    },
-
-    sort: {
-      sort: 1,
-    },
-  });
-
-  const templateGraphReq = InstanceGraphApi_traverseGraphV2({
-    object_id: MODEL_STORYBOARD_TEMPLATE,
+  const baseGraphParams: Omit<
+    InstanceGraphApi_TraverseGraphV2RequestBody,
+    "object_id"
+  > = {
     query: {
       "project.instanceId": projectId,
     },
-
-    select_fields: ["*", "parent"],
+    select_fields: ["*"],
     child: [
       {
         child: [
           {
             depth: -1,
             parentOut: "children",
-            select_fields: ["*", "parent"],
+            select_fields: ["*"],
           },
         ],
-
         depth: -1,
         parentOut: "children",
-        select_fields: ["*", "parent"],
+        select_fields: ["*"],
       },
     ],
+  };
+
+  const routeGraphReq = InstanceGraphApi_traverseGraphV2({
+    ...baseGraphParams,
+    object_id: MODEL_STORYBOARD_ROUTE,
+    query: {
+      ...baseGraphParams.query,
+      // Find first-level routes as topic vertices.
+      parent: {
+        $exists: false,
+      },
+    },
   });
 
-  const requests = [
-    routeListReq,
-    brickListReq,
-    templateGraphReq,
-  ] as Promise<unknown>[];
+  const templateGraphReq = InstanceGraphApi_traverseGraphV2({
+    ...baseGraphParams,
+    object_id: MODEL_STORYBOARD_TEMPLATE,
+  });
+
+  const requests = [routeGraphReq, templateGraphReq] as Promise<unknown>[];
 
   if (!options?.minimal) {
     requests.push(
@@ -99,22 +76,24 @@ export async function preStoryboardAssembly({
     );
   }
 
-  const [
-    routeListResponse,
-    brickListResponse,
-    templateGraphResponse,
-    projectInfoResponse,
-  ] = await Promise.all<
-    InstanceApi_PostSearchResponseBody,
-    InstanceApi_PostSearchResponseBody,
-    InstanceGraphApi_TraverseGraphV2ResponseBody,
-    InstanceApi_GetDetailResponseBody
-  >(requests as any);
+  const [routeGraphResponse, templateGraphResponse, projectInfoResponse] =
+    await Promise.all<
+      InstanceGraphApi_TraverseGraphV2ResponseBody,
+      InstanceGraphApi_TraverseGraphV2ResponseBody,
+      InstanceApi_GetDetailResponseBody
+    >(requests as any);
 
   return {
     minimalBuildInfo: {
-      routeList: routeListResponse.list as BuilderRouteNode[],
-      brickList: brickListResponse.list as BuilderBrickNode[],
+      routeList: sortBy(
+        pipes.graphTree(routeGraphResponse as pipes.GraphData, {
+          sort: {
+            key: "sort",
+            order: 1,
+          },
+        }) as BuilderRouteNode[],
+        (item) => item.sort ?? -Infinity
+      ),
       // Warn: `pipes.graphTree()` will mutate the input.
       templateList: pipes
         .graphTree(templateGraphResponse as pipes.GraphData, {

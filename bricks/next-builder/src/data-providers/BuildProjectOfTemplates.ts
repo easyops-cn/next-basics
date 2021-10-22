@@ -19,7 +19,7 @@ import {
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import { paramCase } from "change-case";
-import { buildBricks } from "../shared/storyboard/buildStoryboard";
+import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
 import { replaceWidgetFunctions } from "./utils/replaceWidgetFunctions";
@@ -184,7 +184,6 @@ export async function BuildProjectOfTemplates({
       proxy: item.proxy ? JSON.parse(item.proxy) : undefined,
       bricks: replaceWidgetFunctions(
         buildBricks(item.children, {
-          nodeToConf: new WeakMap(),
           appId,
           internalTemplateNames,
         }) as BrickConfInTemplate[],
@@ -215,7 +214,6 @@ export async function BuildProjectOfTemplates({
           ).fileName
         ),
       bricks: buildBricks(item.children, {
-        nodeToConf: new WeakMap(),
         appId,
         internalTemplateNames,
       }),
@@ -303,7 +301,7 @@ export async function BuildProjectOfTemplates({
         history: null,
       },
       conf: [],
-      originData: restTemplateData,
+      originData: restTemplateData as any,
     } as Story;
     if (templateItem.proxy) {
       // 如果有代理属性

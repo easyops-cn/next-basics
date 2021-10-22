@@ -42,7 +42,7 @@ export interface StoryboardAssemblyResult {
 }
 
 export interface PreStoryboardAssemblyResult {
-  minimalBuildInfo: Pick<BuildInfo, "brickList" | "routeList" | "templateList">;
+  minimalBuildInfo: Pick<BuildInfo, "routeList" | "templateList">;
   projectInfo?: InstanceApi_GetDetailResponseBody;
 }
 
@@ -56,6 +56,8 @@ export interface BuildInfo {
   options?: BuildOptions;
   functions?: FunctionNode[];
 }
+
+export type BuildInfoV2 = Omit<BuildInfo, "brickList">;
 
 export interface FunctionNode {
   name: string;
@@ -88,7 +90,7 @@ export interface StoryboardToBuild {
     customTemplates?: CustomTemplate[];
     menus?: Record<string, unknown>[];
     i18n?: MetaI18n;
-    functions?: Pick<FunctionNode, "name" | "source">[];
+    functions?: Pick<FunctionNode, "name" | "source" | "typescript">[];
   };
 
   dependsAll?: boolean;

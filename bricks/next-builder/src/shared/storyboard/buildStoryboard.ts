@@ -32,10 +32,11 @@ type WeakMapOfNodeToConf = WeakMap<
 interface BuildContext {
   nodeToConf: WeakMapOfNodeToConf;
   keepIds?: boolean;
-  appId?: string;
-  internalTemplateNames?: Set<string>;
 }
 
+/**
+ * @deprecated use `buildStoryboardV2` instead.
+ */
 export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
   const keepIds = data.options?.keepIds;
 
@@ -146,10 +147,7 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
   };
 }
 
-/**
- * This is used for building custom-templates and snippets.
- */
-export function buildBricks(
+function buildBricks(
   nodes: BuilderBrickNode[],
   ctx: BuildContext = {
     nodeToConf: new WeakMap(),
@@ -194,20 +192,6 @@ function brickNodeToBrickConf(
     // Also keep instance ids for bricks.
     ctx.keepIds
   ) as BrickConf;
-
-  // Prefix with appId for internal custom templates.
-  if (
-    ctx.internalTemplateNames &&
-    node.type !== "template" &&
-    typeof conf.brick === "string" &&
-    conf.brick.includes("-") &&
-    !conf.brick.includes(".") &&
-    ctx.internalTemplateNames.has(conf.brick)
-  ) {
-    // Todo(steve): replace `useBrick` which use internal custom templates.
-    // Only consider this after `useBrick` supports using custom templates.
-    conf.brick = `${ctx.appId}.${conf.brick}`;
-  }
 
   if (node.type === "template") {
     conf.template = conf.brick;
