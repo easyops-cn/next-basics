@@ -262,3 +262,11 @@
 .uploadContainerDisplayNone {
   display: none;
 }
+
+.avatar {
+  margin-right: 10px;
+  &.defaultIcon {
+    background-color: #167be0;
+    vertical-align: middle;
+  }
+}

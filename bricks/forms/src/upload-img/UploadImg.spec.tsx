@@ -1,13 +1,17 @@
 import React from "react";
 import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
-import { Upload, Modal, message, Input } from "antd";
+import { Upload, Modal, message, Input, Mentions } from "antd";
 import { RcFile } from "antd/lib/upload/interface";
 import { http } from "@next-core/brick-http";
 import { UploadImg } from "./UploadImg";
-
+import * as kit from "@next-core/brick-kit";
 jest.mock("@next-core/brick-http");
 
+const map = new Map([["irelia", { name: "irelia", user_icon: "/irelia.ico" }]]);
+jest.spyOn(kit, "getRuntime").mockReturnValue({
+  getAllUserMapAsync: jest.fn().mockResolvedValue(map),
+} as any);
 HTMLCanvasElement.prototype.getContext = jest.fn();
 window.URL.createObjectURL = jest.fn();
 
@@ -617,5 +621,30 @@ describe("UploadImg", () => {
         },
       ],
     });
+  });
+  it("should work when showMentions is  true", async () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <UploadImg
+        listType="picture-card"
+        onChange={onChange}
+        bucketName="monitor"
+        showMentions={true}
+        hideUploadButton={true}
+      />
+    );
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+    expect(wrapper.find(Mentions).length).toBe(1);
+    wrapper.find(Mentions).invoke("onChange")("123");
+    wrapper.update();
+    expect(onChange).toHaveBeenCalled();
+    wrapper.setProps({
+      showMentions: false,
+    });
+    expect(wrapper.find(Mentions).length).toBe(0);
   });
 });

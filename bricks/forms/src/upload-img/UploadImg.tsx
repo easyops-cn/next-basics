@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useState } from "react";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
-import { Upload, Modal, message, Input, Button } from "antd";
+import { Upload, Modal, message, Input, Button, Mentions, Avatar } from "antd";
 import { UploadFile, RcFile } from "antd/lib/upload/interface";
 import {
   cloneDeep,
@@ -21,7 +21,8 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { MenuIcon } from "@next-core/brick-types";
+import { MenuIcon, UserInfo } from "@next-core/brick-types";
+import { getRuntime } from "@next-core/brick-kit";
 import { ReactComponent as ImageUpload } from "./image-upload.svg";
 import { FileUtils } from "../utils";
 
@@ -52,6 +53,7 @@ interface UploadImgProps extends FormItemWrapperProps {
   hideUploadButton?: boolean;
   useFullUrlPath?: boolean;
   getPreview?: boolean;
+  showMentions?: boolean;
 }
 
 interface ImageItem {
@@ -113,6 +115,7 @@ export function RealUploadImg(
   const [previewImage, setPreviewImage] = useState("");
   const [previewVisible, setPreviewVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [allUser, serAllUser] = useState<UserInfo[]>();
 
   const buttonIcon: MenuIcon = {
     lib: "easyops",
@@ -127,6 +130,16 @@ export function RealUploadImg(
       setImageList(transformToImageList(props.value));
     }
   }, [props.value]);
+
+  React.useEffect(() => {
+    const getAllUser = async () => {
+      const userMap = await getRuntime().getAllUserMapAsync();
+      serAllUser([...userMap.values()]);
+    };
+    if (props.showMentions) {
+      getAllUser();
+    }
+  }, [props.showMentions]);
 
   const transformResponseToUrl = (objectName: string) => {
     const url = `api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/${props.bucketName}/object/${objectName}`;
@@ -374,6 +387,11 @@ export function RealUploadImg(
       text: e.target.value,
     });
   };
+  const handleMentionsChange = (value: string): void => {
+    handleValueChange({
+      text: value,
+    });
+  };
 
   const handleRemove = (e: any): void => {
     props.onRemove?.(e);
@@ -564,6 +582,33 @@ export function RealUploadImg(
           autoSize={props.autoSize}
         />
       )}
+      {props.showMentions && !props.showTextarea && (
+        <Mentions
+          rows={2}
+          onChange={handleMentionsChange}
+          value={value?.text || ""}
+          autoSize={props.autoSize}
+          className={styles.textContainer}
+          onPaste={(e) => filesPasted(e)}
+          placeholder={props.placeholder}
+        >
+          {allUser &&
+            allUser.map((item) => (
+              <Mentions.Option value={item.name} key={item.name}>
+                <Avatar
+                  src={item.user_icon}
+                  size={24}
+                  className={classNames(styles.avatar, {
+                    [styles.defaultIcon]: !item.user_icon,
+                  })}
+                >
+                  {!item.user_icon && item.name?.slice(0, 2)}
+                </Avatar>
+                {item.name}
+              </Mentions.Option>
+            ))}
+        </Mentions>
+      )}
 
       {props.uploadDraggable ? (
         <Upload.Dragger {...uploadProps}>{uploadNode()}</Upload.Dragger>
@@ -602,6 +647,7 @@ export function UploadImg(props: UploadImgProps): React.ReactElement {
         hideUploadButton={props.hideUploadButton}
         useFullUrlPath={props.useFullUrlPath}
         getPreview={props.getPreview}
+        showMentions={props.showMentions}
       />
     </FormItemWrapper>
   );
