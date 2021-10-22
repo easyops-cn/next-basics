@@ -209,6 +209,17 @@ export class UploadImgElement extends FormItemElement {
   })
   draggable: boolean;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否显示 Mentions,  当`showTextarea`为`true`时不生效
+   */
+  @property({
+    type: Boolean,
+  })
+  showMentions: boolean;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -280,6 +291,7 @@ export class UploadImgElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             useFullUrlPath={this.useFullUrlPath}
             getPreview={this.getPreview}
+            showMentions={this.showMentions}
           />
         </BrickWrapper>,
         this
