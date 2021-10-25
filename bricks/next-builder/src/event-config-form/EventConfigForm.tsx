@@ -40,13 +40,15 @@ import {
 import { isNil, debounce } from "lodash";
 import { getActionOptions } from "../shared/visual-events/getActionOptions";
 
-export interface EventConfigForm {
+export interface EventConfigFormProps {
   labelCol?: ColProps;
   wrapperCol?: ColProps;
   providerList?: string[];
   flowApiList?: string[];
   useInCustomTemplate?: boolean;
   type: "event" | "lifeCycle";
+  pathList?: string[];
+  segueList?: { label: string; value: string }[];
   docUrl?: string;
   lifeCycle?: LifeCycle;
   highlightTokens?: HighlightTokenSettings[];
@@ -55,7 +57,7 @@ export interface EventConfigForm {
 }
 
 export function LegacyEventConfigForm(
-  props: EventConfigForm,
+  props: EventConfigFormProps,
   ref: React.Ref<Partial<FormInstance>>
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -68,6 +70,8 @@ export function LegacyEventConfigForm(
     type,
     docUrl,
     lifeCycle,
+    pathList,
+    segueList,
     useInCustomTemplate,
     highlightTokens,
     onClickHighlightToken,
@@ -210,6 +214,89 @@ export function LegacyEventConfigForm(
       </Form.Item>
     ),
     [t, inlineFormItemStyle, docUrl]
+  );
+
+  const segueIdItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.action !== currentValues.action
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.BuiltinAction &&
+          getFieldValue("action") === "segue.push" && (
+            <Form.Item
+              name="segueId"
+              label={t(K.SEGUE_ID_ITEM_LABEL)}
+              rules={[{ required: true }]}
+            >
+              <AutoComplete
+                options={segueList?.map((item) => ({
+                  value: item.value,
+                  label: (
+                    <div style={{ display: "flex", gap: 8 }} title={item.label}>
+                      <span>{item.value}</span>
+                      <span
+                        title={item.label}
+                        style={{
+                          fontSize: 12,
+                          color: "rgba(137, 137, 137, 0.8)",
+                        }}
+                      >
+                        [to: {item.label}]
+                      </span>
+                    </div>
+                  ),
+                }))}
+                filterOption={(inputValue, option) =>
+                  option?.value
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [t, segueList]
+  );
+
+  const historyPathItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.handlerType !== currentValues.handlerType ||
+          prevValues.action !== currentValues.action
+        }
+      >
+        {({ getFieldValue }) =>
+          getFieldValue("handlerType") === HandlerType.BuiltinAction &&
+          getFieldValue("action") === "history.push" && (
+            <Form.Item
+              name="path"
+              label={t(K.HISTORY_PATH_ITEM_LABEL)}
+              tooltip={t(K.HISTORY_PATH_ITEM_TOOLTIP)}
+              rules={[{ required: true }]}
+            >
+              <AutoComplete
+                options={pathList?.map((path) => ({ value: path }))}
+                filterOption={(inputValue, option) =>
+                  option?.value
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    [pathList, t]
   );
 
   const providerTypeItem = useMemo(
@@ -637,6 +724,8 @@ export function LegacyEventConfigForm(
       {brickInteractionItem}
       {ifItem}
       {actionItem}
+      {segueIdItem}
+      {historyPathItem}
       {providerItem}
       {flowApiItem}
       {useProviderMethod}

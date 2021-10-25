@@ -23,6 +23,53 @@ describe("covertFormValueToEvent", () => {
     ],
     [
       {
+        action: "history.push",
+        handlerType: HandlerType.BuiltinAction,
+        path: "${APP.homepage}/test",
+        args: "- notify: true",
+      },
+      {
+        action: "history.push",
+        args: ["${APP.homepage}/test", { notify: true }],
+      },
+    ],
+    [
+      {
+        action: "history.push",
+        handlerType: HandlerType.BuiltinAction,
+        path: "${APP.homepage}/test",
+        args: "",
+      },
+      {
+        action: "history.push",
+        args: ["${APP.homepage}/test"],
+      },
+    ],
+    [
+      {
+        action: "segue.push",
+        handlerType: HandlerType.BuiltinAction,
+        segueId: "go-to-detail",
+        args: "- id: abc",
+      },
+      {
+        action: "segue.push",
+        args: ["go-to-detail", { id: "abc" }],
+      },
+    ],
+    [
+      {
+        action: "segue.push",
+        handlerType: HandlerType.BuiltinAction,
+        segueId: "go-to-list",
+      },
+      {
+        action: "segue.push",
+        args: ["go-to-list"],
+      },
+    ],
+    [
+      {
         action: "message.subscribe",
         args: "- abc\n",
         callback: "success:\n  - action: console.log\n",
