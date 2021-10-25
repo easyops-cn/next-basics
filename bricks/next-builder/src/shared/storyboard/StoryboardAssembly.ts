@@ -1,4 +1,4 @@
-import { buildStoryboard } from "./buildStoryboard";
+import { buildStoryboardV2 } from "./buildStoryboardV2";
 import { StoryboardAssemblyResult } from "./interfaces";
 import { preStoryboardAssembly } from "./preStoryboardAssembly";
 
@@ -38,7 +38,7 @@ export async function StoryboardAssembly({
 
   return {
     projectId: projectInfo.projectId,
-    storyboard: buildStoryboard({
+    storyboard: buildStoryboardV2({
       ...minimalBuildInfo,
       menus: projectInfo.menus,
       i18n: projectInfo.i18n,

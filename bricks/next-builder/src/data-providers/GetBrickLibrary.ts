@@ -6,7 +6,7 @@ import {
   InstanceApi_postSearchV3,
   InstanceGraphApi_traverseGraphV2,
 } from "@next-sdk/cmdb-sdk";
-import { buildBricks } from "../shared/storyboard/buildStoryboard";
+import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 
 export interface BrickLibraryItem {
   type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
