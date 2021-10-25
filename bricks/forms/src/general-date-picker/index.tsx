@@ -129,6 +129,13 @@ export class GeneralDatePickerElement extends FormItemElement {
    */
   @property({ attribute: false })
   disabledDate: DisabledDateType;
+  /**
+   * @default
+   * @required false
+   * @description 是否禁用
+   */
+  @property({ type: Boolean })
+  disabled: boolean;
 
   /**
  * @description 	日期变化时触发
@@ -179,6 +186,7 @@ export class GeneralDatePickerElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             picker={this.picker}
             disabledDate={this.disabledDate}
+            disabled={this.disabled}
           />
         </BrickWrapper>,
         this

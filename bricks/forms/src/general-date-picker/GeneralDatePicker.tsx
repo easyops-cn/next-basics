@@ -16,6 +16,7 @@ interface GeneralDatePickerProps extends FormItemWrapperProps {
   format?: string;
   picker?: "date" | "week";
   disabledDate?: DisabledDateType;
+  disabled?: boolean;
 }
 
 interface FieldSetAndRanges {
@@ -73,7 +74,7 @@ const getFieldsFromFieldSetAndRanges = (
 export function GeneralDatePicker(
   props: GeneralDatePickerProps
 ): React.ReactElement {
-  const { disabledDate } = props;
+  const { disabledDate, disabled } = props;
 
   const crontab = useMemo(() => {
     if (!disabledDate) {
@@ -215,6 +216,7 @@ export function GeneralDatePicker(
           picker={props.picker}
           disabledDate={disabledDate && handleDisabledDate}
           disabledTime={disabledDate && handleDisabledTime}
+          disabled={disabled}
         />
       ) : (
         <DatePicker
@@ -231,6 +233,7 @@ export function GeneralDatePicker(
           picker={props.picker}
           disabledDate={disabledDate && handleDisabledDate}
           disabledTime={disabledDate && handleDisabledTime}
+          disabled={disabled}
         />
       )}
     </FormItemWrapper>
