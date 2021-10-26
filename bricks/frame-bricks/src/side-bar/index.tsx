@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
-import { SideBar } from "./SideBar";
+import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
+import { ExpandedState, SideBar } from "./SideBar";
+import { SidebarSubMenu } from "@next-core/brick-types";
 
 /**
  * @id frame-bricks.side-bar
@@ -12,6 +13,28 @@ import { SideBar } from "./SideBar";
  * @noInheritDoc
  */
 export class SideBarElement extends UpdatingElement {
+  /**
+   * @kind SidebarSubMenu
+   * @required false
+   * @default -
+   * @description 菜单项
+   */
+  @property({
+    attribute: false,
+  })
+  menu: SidebarSubMenu;
+
+  /**
+   * @kind ExpandedState
+   * @required false
+   * @default -
+   * @description 展开状态，默认折叠收起
+   */
+  @property({
+    attribute: false,
+  })
+  expandedState: ExpandedState = ExpandedState.Collapsed;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -30,7 +53,7 @@ export class SideBarElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <SideBar />
+          <SideBar menu={this.menu} expandedState={this.expandedState} />
         </BrickWrapper>,
         this
       );
