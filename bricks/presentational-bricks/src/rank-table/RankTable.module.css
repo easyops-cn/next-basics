@@ -13,6 +13,25 @@
   border-width: 4px;
   border-style: solid;
   z-index: 1;
+  span {
+    font-size: 11px;
+  }
+}
+
+.topThree {
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.small {
+  height: 24px;
+  width: 24px;
+  font-size: 12px;
+  border-width: 2px;
+  line-height: 20px;
+  span {
+    font-size: 6px;
+  }
 }
 
 .medalGold {

@@ -3,7 +3,7 @@ import { mount, shallow } from "enzyme";
 import { RankTable } from "./RankTable";
 import { CustomColumn } from ".";
 
-describe("TrendTable", () => {
+describe("RankTable", () => {
   const props: any = {
     columns: [
       {
@@ -355,11 +355,9 @@ describe("TrendTable", () => {
       />
     );
 
-    expect(wrapper.find("span.awards").at(0).prop("style")).toStrictEqual({
-      fontSize: "12px",
-      height: "24px",
-      width: "24px",
-    });
+    expect(
+      wrapper.find("span.awards").at(0).prop("className").includes("small")
+    ).toBe(true);
     expect(wrapper.find("div.header").at(0).prop("style")).toStrictEqual({
       padding: "0px 0 10px 10px",
     });

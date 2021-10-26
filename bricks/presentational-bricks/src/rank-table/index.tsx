@@ -60,7 +60,7 @@ export interface Header {
       };
 }
 /**
- * @id presentational-bricks.trend-table
+ * @id presentational-bricks.rank-table
  * @author alexchen
  * @history
  * 1.x.0: 新增构件 `presentational-bricks.rank-table`
