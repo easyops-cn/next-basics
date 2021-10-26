@@ -1,21 +1,18 @@
 import { FunctionCoverageCollector } from "@next-core/brick-kit";
 import { EstreeNode } from "@next-core/brick-utils";
-import {
-  FunctionCoverage,
-  FunctionCoverageBranchName,
-} from "./reducers/interfaces";
+import { RawCoverageOk, CoverageBranchName } from "./interfaces";
 
 export function CoverageFactory(): {
   createCollector(fn: string): FunctionCoverageCollector;
   resetCoverageByFunction(fn: string): void;
-  coverageByFunction: Map<string, FunctionCoverage>;
+  coverageByFunction: Map<string, RawCoverageOk>;
 } {
-  const coverageByFunction = new Map<string, FunctionCoverage>();
+  const coverageByFunction = new Map<string, RawCoverageOk>();
   function createCollector(fn: string): FunctionCoverageCollector {
     // These are maps of AST node to invocation count.
-    const statements: FunctionCoverage["statements"] = new Map();
-    const branches: FunctionCoverage["branches"] = new Map();
-    const functions: FunctionCoverage["functions"] = new Map();
+    const statements: RawCoverageOk["statements"] = new Map();
+    const branches: RawCoverageOk["branches"] = new Map();
+    const functions: RawCoverageOk["functions"] = new Map();
 
     // First, collect relevant nodes through the AST during function parse.
     function beforeVisit(node: EstreeNode): void {
@@ -109,7 +106,7 @@ export function CoverageFactory(): {
 
     function beforeBranch(
       node: EstreeNode,
-      branchName: FunctionCoverageBranchName
+      branchName: CoverageBranchName
     ): void {
       // Only special branches with a branch name will be here.
       const branch = branches.get(node);

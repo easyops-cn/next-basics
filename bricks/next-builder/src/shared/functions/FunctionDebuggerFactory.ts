@@ -1,17 +1,19 @@
-import { StoryboardFunctionRegistryFactory } from "@next-core/brick-kit";
-import { CoverageFactory } from "./CoverageFactory";
-import { generalizedJsonParse } from "./processors";
 import {
-  FunctionDebugger,
-  DebuggerStateDebugOutput,
-  DebuggerStateDebugInput,
-  FunctionCoverageWhichMaybeFailed,
-} from "./reducers/interfaces";
+  StoryboardFunctionRegistryFactory,
+  StoryboardFunctionRegistry,
+} from "@next-core/brick-kit";
+import { RawCoverage, SerializableValue } from "./interfaces";
+import { CoverageFactory } from "./CoverageFactory";
+import { generalizedJsonParse } from "./processSerializableValue";
 
-export interface FunctionDebuggerWithCoverage extends FunctionDebugger {
-  getCoverage(fn: string): FunctionCoverageWhichMaybeFailed;
+export type FunctionDebuggerWithCoverage = Omit<
+  StoryboardFunctionRegistry,
+  "storyboardFunctions"
+> & {
+  run(fn: string, input: SerializableValue): SerializableValue;
+  getCoverage(fn: string): RawCoverage;
   resetCoverage(fn: string): void;
-}
+};
 
 export function FunctionDebuggerFactory(): FunctionDebuggerWithCoverage {
   const { createCollector, resetCoverageByFunction, coverageByFunction } =
@@ -25,17 +27,13 @@ export function FunctionDebuggerFactory(): FunctionDebuggerWithCoverage {
       createCollector,
     },
   });
-  function run(
-    fn: string,
-    input: DebuggerStateDebugInput
-  ): DebuggerStateDebugOutput {
-    let value: unknown;
+  function run(fn: string, input: SerializableValue): SerializableValue {
     let error: string;
     let ok = false;
     let raw: string;
     if (input.ok) {
       try {
-        value = storyboardFunctions[fn](
+        const value = storyboardFunctions[fn](
           // Re-parse input to avoid mutating after tests run.
           ...generalizedJsonParse<unknown[]>(input.raw)
         );

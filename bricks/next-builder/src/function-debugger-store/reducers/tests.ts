@@ -2,7 +2,7 @@ import { Reducer } from "react";
 import {
   processSerializableValue,
   formatSerializableValue,
-} from "../processors";
+} from "../../shared/functions/processSerializableValue";
 import {
   DebuggerAction,
   DebuggerStateTestCase,

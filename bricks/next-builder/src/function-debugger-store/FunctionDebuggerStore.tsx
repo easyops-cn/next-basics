@@ -17,16 +17,15 @@ import {
   DebuggerStateActiveTab,
   DebuggerStateDebugInput,
   DebuggerStateDebugOutput,
-  DebuggerStateFunctionCoverageWhichMaybeFailed,
   DebuggerStateOriginalFunction,
   DebuggerStateTestCase,
   DebuggerStateTestExpect,
   DebuggerStateTestInput,
   FunctionTestCase,
-  TestStats,
 } from "./reducers/interfaces";
-import { FunctionDebuggerFactory } from "./FunctionDebuggerFactory";
-import { formatSerializableValue } from "./processors";
+import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
+import { FunctionDebuggerFactory } from "../shared/functions/FunctionDebuggerFactory";
+import { formatSerializableValue } from "../shared/functions/processSerializableValue";
 
 export interface DebuggerStore {
   dispatch: Dispatch<DebuggerAction>;
@@ -69,9 +68,7 @@ export interface FunctionDebuggerStoreProps {
   onTestUpdatableChange?: (updatable: boolean) => void;
   onSomethingModified?: (modified: boolean) => void;
   onTestStatsChange?: (stats: TestStats) => void;
-  onCoverageChange?: (
-    coverage: DebuggerStateFunctionCoverageWhichMaybeFailed
-  ) => void;
+  onCoverageChange?: (coverage: ProcessedCoverage) => void;
 }
 
 function LegacyFunctionDebuggerStore(
