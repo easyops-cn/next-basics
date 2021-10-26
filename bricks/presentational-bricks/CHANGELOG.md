@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.227.0...@next-bricks/presentational-bricks@1.227.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* 服务地图样式调整构件 Closed MONITOR-2306 ([24ba3c7](https://github.com/easyops-cn/next-basics/commit/24ba3c79d07ea31df54b012a469fce6b4f6c15e9))
+
+
+
+
+
 # [1.227.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.226.1...@next-bricks/presentational-bricks@1.227.0) (2021-10-22)
 
 
