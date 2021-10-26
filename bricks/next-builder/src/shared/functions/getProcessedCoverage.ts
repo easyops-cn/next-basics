@@ -1,6 +1,8 @@
 import { RawCoverage, ProcessedCoverage } from "./interfaces";
 
-export function getCoverageDetail(rawCoverage: RawCoverage): ProcessedCoverage {
+export function getProcessedCoverage(
+  rawCoverage: RawCoverage
+): ProcessedCoverage {
   if (rawCoverage.status === "failed") {
     return rawCoverage;
   }

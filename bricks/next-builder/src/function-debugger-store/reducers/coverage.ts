@@ -1,6 +1,6 @@
 import { Reducer } from "react";
 import { DebuggerAction } from "./interfaces";
-import { getCoverageDetail } from "../../shared/functions/getCoverageDetail";
+import { getProcessedCoverage } from "../../shared/functions/getProcessedCoverage";
 import { ProcessedCoverage } from "../../shared/functions/interfaces";
 
 export const coverage: Reducer<ProcessedCoverage, DebuggerAction> = (
@@ -15,7 +15,7 @@ export const coverage: Reducer<ProcessedCoverage, DebuggerAction> = (
     case "deleteTest":
       return;
     case "updateCoverage":
-      return getCoverageDetail(action.coverage);
+      return getProcessedCoverage(action.coverage);
     default:
       return state;
   }

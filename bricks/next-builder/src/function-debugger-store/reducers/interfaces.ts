@@ -1,14 +1,10 @@
 import {
+  FunctionTestCase,
   ProcessedCoverage,
   RawCoverage,
   SerializableValue,
+  StoryboardFunctionWithTests,
 } from "../../shared/functions/interfaces";
-
-export interface FunctionTestCase {
-  name?: string;
-  input: string;
-  output: string;
-}
 
 // Actions:
 
@@ -107,12 +103,9 @@ export interface DebuggerActionUpdateCoverage {
 
 // States:
 
-export interface DebuggerStateOriginalFunction {
+export interface DebuggerStateOriginalFunction
+  extends StoryboardFunctionWithTests {
   instanceId?: string;
-  name: string;
-  source: string;
-  typescript?: boolean;
-  tests?: FunctionTestCase[];
 }
 
 export interface DebuggerStateModifiedFunction {

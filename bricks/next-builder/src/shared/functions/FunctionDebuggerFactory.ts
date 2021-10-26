@@ -6,7 +6,7 @@ import { RawCoverage, SerializableValue } from "./interfaces";
 import { CoverageFactory } from "./CoverageFactory";
 import { generalizedJsonParse } from "./processSerializableValue";
 
-export type FunctionDebuggerWithCoverage = Omit<
+export type FunctionDebugger = Omit<
   StoryboardFunctionRegistry,
   "storyboardFunctions"
 > & {
@@ -15,7 +15,7 @@ export type FunctionDebuggerWithCoverage = Omit<
   resetCoverage(fn: string): void;
 };
 
-export function FunctionDebuggerFactory(): FunctionDebuggerWithCoverage {
+export function FunctionDebuggerFactory(): FunctionDebugger {
   const { createCollector, resetCoverageByFunction, coverageByFunction } =
     CoverageFactory();
   const {

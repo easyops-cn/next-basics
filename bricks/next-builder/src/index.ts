@@ -31,3 +31,4 @@ import "./function-debugger-sidebar";
 import "./function-debugger-toolbar";
 import "./function-debugger-store";
 import "./function-debugger-statusbar";
+import "./data-providers/RunStoryboardFunctionTests";

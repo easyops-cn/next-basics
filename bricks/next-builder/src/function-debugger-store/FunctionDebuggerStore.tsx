@@ -21,9 +21,12 @@ import {
   DebuggerStateTestCase,
   DebuggerStateTestExpect,
   DebuggerStateTestInput,
-  FunctionTestCase,
 } from "./reducers/interfaces";
-import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
+import {
+  FunctionTestCase,
+  ProcessedCoverage,
+  TestStats,
+} from "../shared/functions/interfaces";
 import { FunctionDebuggerFactory } from "../shared/functions/FunctionDebuggerFactory";
 import { formatSerializableValue } from "../shared/functions/processSerializableValue";
 

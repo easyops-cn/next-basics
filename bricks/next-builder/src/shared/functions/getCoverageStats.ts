@@ -1,17 +1,14 @@
-import { ProcessedCoverageOk, CoverageStatistics } from "./interfaces";
+import { CoverageCounts, CoverageStats, CoverageStatType } from "./interfaces";
 
-export type CoverageStatType =
-  | "statements"
-  | "branches"
-  | "functions"
-  | "lines";
-export type CoverageStats = Record<CoverageStatType, CoverageStatistics>;
-
-export function getCoverageStats(coverage: ProcessedCoverageOk): CoverageStats {
+export function getCoverageStats(coverage: CoverageCounts): CoverageStats {
+  const types: CoverageStatType[] = [
+    "statements",
+    "branches",
+    "functions",
+    "lines",
+  ];
   return Object.fromEntries(
-    (["statements", "branches", "functions", "lines"] as const).map<
-      [CoverageStatType, CoverageStatistics]
-    >((type) => {
+    types.map((type) => {
       const { covered, total } = coverage[type];
       return [
         type,
@@ -21,7 +18,7 @@ export function getCoverageStats(coverage: ProcessedCoverageOk): CoverageStats {
   ) as CoverageStats;
 }
 
-export function getTotalCoverage(coverage: ProcessedCoverageOk): number {
+export function getTotalCoverage(coverage: CoverageCounts): number {
   const relevant = [coverage.statements, coverage.branches, coverage.functions];
   const covered = relevant.reduce((acc, item) => acc + item.covered, 0);
   const total = relevant.reduce((acc, item) => acc + item.total, 0);
