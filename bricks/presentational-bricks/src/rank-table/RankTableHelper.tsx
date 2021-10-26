@@ -38,9 +38,11 @@ export const getCustomComp = (
 
       if (awardsComponent) {
         return (
-          <div style={size === "small" ? { display: "flex" } : {}}>
+          <div style={{ display: "flex" }}>
             {awardsComponent(index)}
-            <BrickAsComponent useBrick={useBrick} data={brickData} />
+            <div style={{ margin: "auto 0" }}>
+              <BrickAsComponent useBrick={useBrick} data={brickData} />
+            </div>
           </div>
         );
       }

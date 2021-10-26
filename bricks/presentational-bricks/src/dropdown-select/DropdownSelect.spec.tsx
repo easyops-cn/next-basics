@@ -72,7 +72,33 @@ describe("DropdownSelect", () => {
       dropdownTrigger.querySelector(".dropdownLabel").childNodes[0].textContent
     ).toEqual(`@@${item.label}@@`);
   });
-
+  it("should work with dataSource", () => {
+    let _value;
+    const mockOnChange = jest.fn((value, item) => {
+      _value = value;
+    });
+    const { getByTestId, container, rerender } = render(
+      <DropdownSelect
+        {...props}
+        value={_value}
+        onChange={mockOnChange}
+        tipBrick={{
+          useBrick: {
+            brick: "span",
+          },
+        }}
+        minSelectedItemLength={1}
+        selectedKeys={[]}
+        multipleLabel={"666"}
+        multipleSelect={true}
+        dropdownButtonType={"shape"}
+      />
+    );
+    const dropdownTrigger = getByTestId("dropdown-trigger-multiple");
+    expect(
+      dropdownTrigger.querySelector(".dropdownLabelBox").textContent
+    ).toEqual("666");
+  });
   it("should work with options", () => {
     const options = [
       {
@@ -153,5 +179,50 @@ describe("DropdownSelect", () => {
       dropdownTrigger.querySelector(".dropdownLabelBox").childNodes[0]
         .textContent
     ).toEqual("666");
+  });
+  it("should work with multiple", () => {
+    const options = [
+      {
+        label: "label1",
+        content: "content1",
+        value: "value1",
+      },
+      {
+        label: "label2",
+        content: "content2",
+        value: "value2",
+      },
+    ];
+    const option = options[0];
+    const value = option.value;
+    const mockOnChange = jest.fn();
+    const { getByTestId, container, rerender } = render(
+      <DropdownSelect
+        options={options}
+        multipleLabel={"666"}
+        multipleSelect={false}
+        dropdownButtonType={"shape"}
+        value={value}
+        onChange={mockOnChange}
+        disabled={false}
+        heightFix={false}
+        selectedKeys={[]}
+        buttonIcon={{
+          lib: "antd",
+          icon: "alert",
+          theme: "twoTone",
+        }}
+        tipBrick={{
+          useBrick: {
+            brick: "span",
+          },
+        }}
+      />
+    );
+    const dropdownTrigger = getByTestId("dropdown-trigger-multiple");
+    expect(
+      dropdownTrigger.querySelector(".dropdownLabelBox").childNodes[0]
+        .textContent
+    ).toEqual("label1");
   });
 });

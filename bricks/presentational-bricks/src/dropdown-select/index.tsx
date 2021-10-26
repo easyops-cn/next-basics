@@ -126,6 +126,14 @@ export class DropdownSelectElement extends UpdatingElement {
   @property({ type: Boolean }) multipleSelect?: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 最小选择数量（多选）
+   */
+  @property({ type: Number }) minSelectedItemLength?: number;
+
+  /**
    * @kind { userBrick: UseBrickConf }
    * @required false
    * @default -
@@ -226,6 +234,7 @@ export class DropdownSelectElement extends UpdatingElement {
             disabled={this.disabled}
             heightFix={this.heightFix}
             tipBrick={this.tipBrick}
+            minSelectedItemLength={this.minSelectedItemLength}
           />
         </BrickWrapper>,
         this

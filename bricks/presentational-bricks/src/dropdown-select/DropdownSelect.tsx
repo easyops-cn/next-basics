@@ -8,6 +8,7 @@ import styles from "./DropdownSelect.module.css";
 import { Option } from "../interfaces";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { BrickAsComponent } from "@next-core/brick-kit";
+import classnames from "classnames";
 interface DropdownSelectProps {
   dataSource?: any[];
   value?: any;
@@ -29,6 +30,7 @@ interface DropdownSelectProps {
   disabled?: boolean;
   heightFix?: boolean;
   tipBrick?: { useBrick: UseBrickConf };
+  minSelectedItemLength?: number;
 }
 
 export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
@@ -51,6 +53,9 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
   if (!valuePath) {
     valuePath = "item";
   }
+  const [selectedKeys, setSelectedKeys] = React.useState<any[]>(
+    props.selectedKeys
+  );
   const selectedItem = useMemo(
     () =>
       options
@@ -91,6 +96,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
         style={
           props.heightFix ? { maxHeight: "300px", overflow: "scroll" } : {}
         }
+        className={props.dropdownButtonType === "shape" && styles.menuBox}
       >
         {options
           ? options.map((option) => (
@@ -114,14 +120,32 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
                   onClick={(e) => onClick(item)}
                   key={String(get(context, valuePath))}
                 >
-                  <h4 className={styles.optionTitle}>
-                    {parseTemplate(optionTitle, context)}
-                  </h4>
-                  {optionContent && (
-                    <p className={styles.optionContent}>
-                      {parseTemplate(optionContent, context)}
-                    </p>
-                  )}
+                  <div style={{ display: "flex" }}>
+                    <div style={{ flex: 1 }}>
+                      <h4 className={styles.optionTitle}>
+                        {parseTemplate(optionTitle, context)}
+                      </h4>
+                      {optionContent && (
+                        <p className={styles.optionContent}>
+                          {parseTemplate(optionContent, context)}
+                        </p>
+                      )}
+                    </div>
+                    {props.dropdownButtonType === "shape" &&
+                      item === selectedItem && (
+                        <div style={{ width: "20px", margin: "auto 0" }}>
+                          <GeneralIcon
+                            style={{ marginRight: "7px" }}
+                            icon={{
+                              lib: "antd",
+                              icon: "check",
+                              theme: "outlined",
+                              color: "#167be0",
+                            }}
+                          />
+                        </div>
+                      )}
+                  </div>
                 </Menu.Item>
               );
             })}
@@ -137,14 +161,21 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
         defaultSelectedKeys={props.selectedKeys}
         selectable
         multiple={true}
-        onSelect={(e) => {
+        onSelect={
           // istanbul ignore next
-          props.onSelect(e.selectedKeys);
-        }}
-        onDeselect={(e) => {
+          (e) => {
+            setSelectedKeys(e.selectedKeys);
+            props.onSelect(e.selectedKeys);
+          }
+        }
+        onDeselect={
           // istanbul ignore next
-          props.onSelect(e.selectedKeys);
-        }}
+          (e) => {
+            setSelectedKeys(e.selectedKeys);
+            props.onSelect(e.selectedKeys);
+          }
+        }
+        className={props.dropdownButtonType === "shape" && styles.menuBox}
       >
         {options
           ? options.map((option) => (
@@ -158,15 +189,51 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
           : dataSource.map((item, index) => {
               const context = { item };
               return (
-                <Menu.Item key={String(get(context, valuePath))}>
-                  <h4 className={styles.optionTitle}>
-                    {parseTemplate(optionTitle, context)}
-                  </h4>
-                  {optionContent && (
-                    <p className={styles.optionContent}>
-                      {parseTemplate(optionContent, context)}
-                    </p>
-                  )}
+                <Menu.Item
+                  disabled={
+                    selectedKeys?.length <= props.minSelectedItemLength &&
+                    selectedKeys?.includes(
+                      item[
+                        valuePath && valuePath?.split(".")?.[1]
+                          ? valuePath?.split(".")?.[1]
+                          : "value"
+                      ]
+                    )
+                  }
+                  key={String(get(context, valuePath))}
+                >
+                  <div style={{ display: "flex" }}>
+                    <div style={{ flex: 1 }}>
+                      <h4 className={styles.optionTitle}>
+                        {parseTemplate(optionTitle, context)}
+                      </h4>
+                      {optionContent && (
+                        <p className={styles.optionContent}>
+                          {parseTemplate(optionContent, context)}
+                        </p>
+                      )}
+                    </div>
+                    {props.dropdownButtonType === "shape" &&
+                      selectedKeys.includes(
+                        item[
+                          valuePath && valuePath?.split(".")?.[1]
+                            ? valuePath?.split(".")?.[1]
+                            : "value"
+                        ]
+                      ) && (
+                        <div style={{ width: "20px", margin: "auto 0" }}>
+                          <GeneralIcon
+                            style={{ marginRight: "7px" }}
+                            icon={{
+                              lib: "antd",
+                              icon: "check",
+                              theme: "outlined",
+                              color: "#167be0",
+                            }}
+                          />
+                        </div>
+                      )}
+                  </div>
                 </Menu.Item>
               );
             })}
@@ -193,12 +260,12 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     >
       {props.dropdownButtonType === "shape" ? (
         <div
-          className={styles.dropdownTrigger}
+          className={classnames(
+            styles.dropdownTrigger,
+            styles.dropdownTriggerShape
+          )}
           style={{
-            fontSize: "14px",
-            backgroundColor: props.disabled ? "#E5E5E5" : "#F5F5F5",
-            borderRadius: "4px",
-            padding: "3px 10px",
+            backgroundColor: props.disabled ? "#E5E5E5" : "#FFFFFF",
           }}
           data-testid="dropdown-trigger-multiple"
         >
