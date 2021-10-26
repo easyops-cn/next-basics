@@ -12,6 +12,7 @@ import classNames from "classnames";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrick } from "./index";
 
+const getRankNumber = (rank: number) => ["st", "nd", "rd"][rank] || rank;
 interface RankTableProps {
   header?: {
     title: string | UseBrick;
@@ -69,18 +70,12 @@ export function RankTable(props: RankTableProps): React.ReactElement {
           [styles.medalSilver]: trend === 1,
           [styles.medalBronze]: trend === 2,
           [styles.normalAwards]: trend !== 0 && trend !== 1 && trend !== 2,
+          [styles.small]: props?.size === "small",
+          [styles.topThree]: [0, 1, 2].includes(trend),
         })}
-        style={
-          props.size === "small"
-            ? {
-                height: "24px",
-                width: "24px",
-                fontSize: "12px",
-              }
-            : {}
-        }
       >
         {trend + 1}
+        {[0, 1, 2].includes(trend) && <span>{getRankNumber(trend)}</span>}
       </span>
       &nbsp;&nbsp;
     </>
