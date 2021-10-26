@@ -92,10 +92,6 @@
     &::after {
       display: none;
     }
-
-    .simpleMenuItemText {
-      font-family: PingFangSC-Regular, PingFang SC;
-    }
   }
 
   .subMenuWrapper {
@@ -114,7 +110,7 @@
 
     :global(.ant-menu-submenu-title) {
       .subMenuTitleText {
-        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
       }
 
       :global(.ant-menu-submenu-arrow) {
@@ -131,7 +127,6 @@
   .groupWrapper {
     .groupText {
       font-size: 12px;
-      font-family: PingFangSC-Regular, PingFang SC;
       color: #a9a9a9;
     }
   }
