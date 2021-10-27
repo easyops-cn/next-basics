@@ -56,5 +56,3 @@ customElements.define(
   "next-builder.provider-get-stories-json-with-cache",
   createProviderClass(getStoriesJSON)
 );
-
-export default StoriesCache;
