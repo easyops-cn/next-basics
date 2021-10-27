@@ -4,6 +4,7 @@ import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
 import { BuilderContainer } from "./BuilderContainer";
 import { BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
+import * as brickKit from "@next-core/brick-kit";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
@@ -40,6 +41,12 @@ const mockConsoleError = jest
   .spyOn(console, "error")
   .mockImplementation(() => void 0);
 
+const getFeatureFlags = jest.fn().mockReturnValue({});
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getFeatureFlags,
+} as any);
+
+const mockRemoveListenersOfNodeAddBefore = jest.fn();
 const mockRemoveListenersOfNodeAdd = jest.fn();
 const mockRemoveListenersOfNodeMove = jest.fn();
 const mockRemoveListenersOfNodeReorder = jest.fn();
@@ -47,6 +54,7 @@ const mockRemoveListenersOfNodeClick = jest.fn();
 const mockRemoveListenersOfSnippetApply = jest.fn();
 
 const mockManager = {
+  onNodeAddBefore: jest.fn(() => mockRemoveListenersOfNodeAddBefore),
   onNodeAdd: jest.fn(() => mockRemoveListenersOfNodeAdd),
   onNodeMove: jest.fn(() => mockRemoveListenersOfNodeMove),
   onNodeReorder: jest.fn(() => mockRemoveListenersOfNodeReorder),
@@ -93,6 +101,7 @@ describe("BuilderContainer", () => {
     expect(wrapper.find(".builderContainer").prop("className")).not.toContain(
       "fullscreen"
     );
+    expect(mockManager.onNodeAddBefore).toBeCalled();
     expect(mockManager.onNodeAdd).toBeCalled();
     expect(mockManager.onNodeMove).toBeCalled();
     expect(mockManager.onNodeReorder).toBeCalled();
@@ -120,6 +129,7 @@ describe("BuilderContainer", () => {
       `BuilderCanvas(${BuilderDataType.ROUTE_OF_BRICKS},0)`
     );
     wrapper.unmount();
+    expect(mockRemoveListenersOfNodeAdd).toBeCalled();
     expect(mockRemoveListenersOfNodeAdd).toBeCalled();
     expect(mockRemoveListenersOfNodeMove).toBeCalled();
     expect(mockRemoveListenersOfNodeReorder).toBeCalled();

@@ -24,6 +24,25 @@ describe("providers-of-brick-story", () => {
     ).toBe("fake-story-of-business");
   });
 
+  it("findStoryByid if remote doc was null", () => {
+    const story = findStoryById("fake-story-of-correct", "brick", [
+      // @ts-ignore
+      { storyId: "fake-story-of-correct", type: "brick", doc: null },
+    ]);
+    expect(story.storyId).toBe("fake-story-of-correct");
+    expect(story.conf).toEqual({
+      brick: "fake-brick-of-correct",
+      properties: {
+        for: "good",
+      },
+      events: {
+        ok: {
+          action: "console.log",
+        },
+      },
+    });
+  });
+
   describe("listBrickStory", () => {
     it("atom", () => {
       return listBrickStory("atom").then((data) => expect(data.total).toBe(4));

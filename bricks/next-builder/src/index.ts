@@ -20,6 +20,7 @@ import "./search-tree";
 import "./lazy-bricks";
 import "./data-providers/ScanFunctionsInStoryboard";
 import "./data-providers/BuildProjectOfTemplates";
+import "./data-providers/getStoriesJson";
 import "./events-editor";
 // !Lazy: import "./event-config-form";
 import "./custom-processors/getProcessedEvents";
