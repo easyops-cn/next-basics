@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.85.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.84.1...@next-bricks/next-builder@1.85.0) (2021-10-27)
+
+
+### Bug Fixes
+
+* add recommended actions ([31e6d42](https://github.com/easyops-cn/next-basics/commit/31e6d42644c5fafd03bb597ddfa670ea051f69c5))
+
+
+### Features
+
+* custom history.push and segue.push action ([b5d89fd](https://github.com/easyops-cn/next-basics/commit/b5d89fd2119398ca1ed76a83da9aeed68d42d516))
+
+
+
+
+
 ## [1.84.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.84.0...@next-bricks/next-builder@1.84.1) (2021-10-25)
 
 **Note:** Version bump only for package @next-bricks/next-builder
