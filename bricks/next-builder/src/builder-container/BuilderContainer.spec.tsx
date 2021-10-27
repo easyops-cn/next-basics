@@ -46,7 +46,6 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getFeatureFlags,
 } as any);
 
-const mockRemoveListenersOfNodeAddBefore = jest.fn();
 const mockRemoveListenersOfNodeAdd = jest.fn();
 const mockRemoveListenersOfNodeMove = jest.fn();
 const mockRemoveListenersOfNodeReorder = jest.fn();
@@ -54,7 +53,6 @@ const mockRemoveListenersOfNodeClick = jest.fn();
 const mockRemoveListenersOfSnippetApply = jest.fn();
 
 const mockManager = {
-  onNodeAddBefore: jest.fn(() => mockRemoveListenersOfNodeAddBefore),
   onNodeAdd: jest.fn(() => mockRemoveListenersOfNodeAdd),
   onNodeMove: jest.fn(() => mockRemoveListenersOfNodeMove),
   onNodeReorder: jest.fn(() => mockRemoveListenersOfNodeReorder),
@@ -101,7 +99,6 @@ describe("BuilderContainer", () => {
     expect(wrapper.find(".builderContainer").prop("className")).not.toContain(
       "fullscreen"
     );
-    expect(mockManager.onNodeAddBefore).toBeCalled();
     expect(mockManager.onNodeAdd).toBeCalled();
     expect(mockManager.onNodeMove).toBeCalled();
     expect(mockManager.onNodeReorder).toBeCalled();

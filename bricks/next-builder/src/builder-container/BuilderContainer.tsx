@@ -38,7 +38,7 @@ import { getBuilderClipboard } from "./getBuilderClipboard";
 import { defaultToolboxTab } from "./constants";
 import { EventStreamNode } from "./EventStreamCanvas/interfaces";
 import { getRuntime } from "@next-core/brick-kit";
-import StoriesCache from "../data-providers/getStoriesJson";
+import { StoriesCache } from "../data-providers/utils/StoriesCache";
 
 import styles from "./BuilderContainer.module.css";
 
