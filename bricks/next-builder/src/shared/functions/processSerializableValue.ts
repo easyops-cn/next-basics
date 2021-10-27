@@ -1,4 +1,4 @@
-import { SerializableValue } from "./reducers/interfaces";
+import { SerializableValue } from "./interfaces";
 
 export function processSerializableValue(input: string): SerializableValue {
   let ok = false;

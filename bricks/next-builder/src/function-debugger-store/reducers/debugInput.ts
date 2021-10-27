@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { processSerializableValue } from "../processors";
+import { processSerializableValue } from "../../shared/functions/processSerializableValue";
 import { DebuggerAction, DebuggerStateDebugInput } from "./interfaces";
 
 export const debugInput: Reducer<DebuggerStateDebugInput, DebuggerAction> = (

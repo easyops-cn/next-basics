@@ -7,15 +7,19 @@ import {
   WarningOutlined,
 } from "@ant-design/icons";
 import {
-  DebuggerStateFunctionCoverageWhichMaybeFailed,
-  FunctionCoverageFailed,
+  ProcessedCoverage,
+  RawCoverageFailed,
   TestStats,
-} from "../function-debugger-store/reducers/interfaces";
+} from "../shared/functions/interfaces";
+import {
+  getTotalCoverage,
+  getCoverageStats,
+} from "../shared/functions/getCoverageStats";
 
 import styles from "./FunctionDebuggerStatusbar.module.css";
 
 export interface FunctionDebuggerStatusbarProps {
-  coverage?: DebuggerStateFunctionCoverageWhichMaybeFailed;
+  coverage?: ProcessedCoverage;
   testStats?: TestStats;
 }
 
@@ -24,19 +28,14 @@ export function FunctionDebuggerStatusbar({
   testStats,
 }: FunctionDebuggerStatusbarProps): React.ReactElement {
   const coverageIsOk = coverage && coverage.status !== "failed";
-  const coverageRate = useMemo(() => {
-    if (!coverageIsOk) {
-      return null;
-    }
-    const relevant = [
-      coverage.statements,
-      coverage.branches,
-      coverage.functions,
-    ];
-    const covered = relevant.reduce((acc, item) => acc + item.covered, 0);
-    const total = relevant.reduce((acc, item) => acc + item.total, 0);
-    return getPercentage(covered, total);
-  }, [coverageIsOk, coverage]);
+  const totalCoverage = useMemo(
+    () => (coverageIsOk ? getTotalCoverage(coverage) : null),
+    [coverageIsOk, coverage]
+  );
+  const coverageStats = useMemo(
+    () => (coverageIsOk ? getCoverageStats(coverage) : null),
+    [coverageIsOk, coverage]
+  );
 
   return (
     <div className={styles.debuggerStatusbar} data-override-theme="dark">
@@ -61,32 +60,29 @@ export function FunctionDebuggerStatusbar({
           <>
             <span
               className={
-                coverageRate < 60
+                totalCoverage < 60
                   ? styles.coverageLow
-                  : coverageRate < 90
+                  : totalCoverage < 90
                   ? styles.coverageMedium
-                  : coverageRate < 100
+                  : totalCoverage < 100
                   ? styles.coverageHigh
                   : styles.coverageFull
               }
             >
               <span className={styles.coverageIcon}>
-                {coverageRate < 100 ? <WarningOutlined /> : <CheckOutlined />}
+                {totalCoverage < 100 ? <WarningOutlined /> : <CheckOutlined />}
               </span>
-              <span>Coverage: {coverageRate}%</span>
+              <span>Coverage: {totalCoverage}%</span>
             </span>
-            {(["statements", "branches", "functions", "lines"] as const).map(
-              (type) => {
-                const { covered, total } = coverage[type];
-                return (
-                  <span key={type} className={styles.subCoverage}>
-                    <span>{upperFirst(type)}: </span>
-                    <span>
-                      {getPercentage(covered, total)}% ({covered}/{total})
-                    </span>
+            {Object.entries(coverageStats).map(
+              ([type, { covered, total, percentage }]) => (
+                <span key={type} className={styles.subCoverage}>
+                  <span>{upperFirst(type)}: </span>
+                  <span>
+                    {percentage}% ({covered}/{total})
                   </span>
-                );
-              }
+                </span>
+              )
             )}
           </>
         ) : (
@@ -94,14 +90,10 @@ export function FunctionDebuggerStatusbar({
             <span className={styles.coverageIcon}>
               <CloseOutlined />
             </span>
-            <span>{(coverage as FunctionCoverageFailed).error}</span>
+            <span>{(coverage as RawCoverageFailed).error}</span>
           </span>
         )}
       </div>
     </div>
   );
-}
-
-function getPercentage(covered: number, total: number): number {
-  return total === 0 ? 100 : +((covered * 100) / total).toFixed(2);
 }

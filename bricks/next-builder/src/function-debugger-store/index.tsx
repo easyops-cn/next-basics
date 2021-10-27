@@ -18,13 +18,12 @@ import {
   DebuggerStateActiveTab,
   DebuggerStateDebugInput,
   DebuggerStateDebugOutput,
-  DebuggerStateFunctionCoverageWhichMaybeFailed,
   DebuggerStateOriginalFunction,
   DebuggerStateTestCase,
   DebuggerStateTestExpect,
   DebuggerStateTestInput,
-  TestStats,
 } from "./reducers/interfaces";
+import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
 
 /**
  * @id next-builder.function-debugger-store
@@ -163,7 +162,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   private _testStatsChangeEmitter: EventEmitter<TestStats>;
 
   @event({ type: "coverage.change" })
-  private _coverageChangeEmitter: EventEmitter<DebuggerStateFunctionCoverageWhichMaybeFailed>;
+  private _coverageChangeEmitter: EventEmitter<ProcessedCoverage>;
 
   private _handleActiveTabChange = (
     activeTab: DebuggerStateActiveTab
@@ -225,9 +224,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
     this._somethingModifiedEmitter.emit(modified);
   };
 
-  private _handleCoverageChange = (
-    coverage: DebuggerStateFunctionCoverageWhichMaybeFailed
-  ): void => {
+  private _handleCoverageChange = (coverage: ProcessedCoverage): void => {
     this._coverageChangeEmitter.emit(coverage);
   };
 

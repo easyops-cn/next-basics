@@ -1,42 +1,10 @@
-import { StoryboardFunctionRegistry } from "@next-core/brick-kit";
-import { EstreeNode } from "@next-core/brick-utils";
-
-export type FunctionDebugger = Omit<
-  StoryboardFunctionRegistry,
-  "storyboardFunctions"
-> & {
-  run(fn: string, input: SerializableValue): DebuggerStateDebugOutput;
-};
-
-export interface SerializableValue {
-  raw: string;
-  ok: boolean;
-  error?: string;
-}
-
-export interface FunctionTestCase {
-  name?: string;
-  input: string;
-  output: string;
-}
-
-export interface FunctionCoverage {
-  status?: "ok";
-  statements: Map<EstreeNode, number>;
-  branches: Map<EstreeNode, Map<FunctionCoverageBranchName, number> | number>;
-  functions: Map<EstreeNode, number>;
-}
-
-export type FunctionCoverageBranchName = "if" | "else";
-
-export type FunctionCoverageWhichMaybeFailed =
-  | FunctionCoverage
-  | FunctionCoverageFailed;
-
-export interface FunctionCoverageFailed {
-  status: "failed";
-  error: string;
-}
+import {
+  FunctionTestCase,
+  ProcessedCoverage,
+  RawCoverage,
+  SerializableValue,
+  StoryboardFunctionWithTests,
+} from "../../shared/functions/interfaces";
 
 // Actions:
 
@@ -130,17 +98,14 @@ export interface DebuggerActionAllTestsReturn {
 
 export interface DebuggerActionUpdateCoverage {
   type: "updateCoverage";
-  coverage: FunctionCoverageWhichMaybeFailed;
+  coverage: RawCoverage;
 }
 
 // States:
 
-export interface DebuggerStateOriginalFunction {
+export interface DebuggerStateOriginalFunction
+  extends StoryboardFunctionWithTests {
   instanceId?: string;
-  name: string;
-  source: string;
-  typescript?: boolean;
-  tests?: FunctionTestCase[];
 }
 
 export interface DebuggerStateModifiedFunction {
@@ -177,47 +142,6 @@ export interface DebuggerStateTestInput extends SerializableValue {
 
 export interface DebuggerStateTestExpect extends SerializableValue {}
 
-export type DebuggerStateFunctionCoverageWhichMaybeFailed =
-  | DebuggerStateFunctionCoverage
-  | FunctionCoverageFailed;
-
-export interface DebuggerStateFunctionCoverage {
-  status?: "ok";
-  statements: CoverageStatistics & {
-    uncovered: CoverageLocation[];
-  };
-  branches: CoverageStatistics & {
-    uncovered: CoverageLocationWithBranch[];
-  };
-  functions: CoverageStatistics & {
-    uncovered: CoverageLocation[];
-  };
-  lines: CoverageStatistics & {
-    counts: Map<number, { startColumn: number; count: number }>;
-  };
-}
-
-export interface CoverageStatistics {
-  total: number;
-  covered: number;
-}
-
-export interface CoverageLocation {
-  startLineNumber: number;
-  startColumn: number;
-  endLineNumber: number;
-  endColumn: number;
-}
-
-export interface CoverageLocationWithBranch extends CoverageLocation {
-  branch?: FunctionCoverageBranchName;
-}
-
-export interface TestStats {
-  total: number;
-  failed: number;
-}
-
 export interface DebuggerState {
   activeTab?: DebuggerStateActiveTab;
   originalFunction?: DebuggerStateOriginalFunction;
@@ -226,5 +150,5 @@ export interface DebuggerState {
   debugInput?: DebuggerStateDebugInput;
   debugOutput?: DebuggerStateDebugOutput;
   tests?: DebuggerStateTestCase[];
-  coverage?: DebuggerStateFunctionCoverageWhichMaybeFailed;
+  coverage?: ProcessedCoverage;
 }

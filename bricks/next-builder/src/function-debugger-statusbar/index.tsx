@@ -2,10 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { FunctionDebuggerStatusbar } from "./FunctionDebuggerStatusbar";
-import {
-  DebuggerStateFunctionCoverageWhichMaybeFailed,
-  TestStats,
-} from "../function-debugger-store/reducers/interfaces";
+import { ProcessedCoverage, TestStats } from "../shared/functions/interfaces";
 
 /**
  * @id next-builder.function-debugger-statusbar
@@ -17,7 +14,7 @@ import {
  */
 export class FunctionDebuggerStatusbarElement extends UpdatingElement {
   @property({ attribute: false })
-  coverage: DebuggerStateFunctionCoverageWhichMaybeFailed;
+  coverage: ProcessedCoverage;
 
   @property({ attribute: false })
   testStats: TestStats;

@@ -1,13 +1,10 @@
 import { Reducer } from "react";
+import { FunctionTestCase } from "../../shared/functions/interfaces";
 import {
   processSerializableValue,
   formatSerializableValue,
-} from "../processors";
-import {
-  DebuggerAction,
-  DebuggerStateTestCase,
-  FunctionTestCase,
-} from "./interfaces";
+} from "../../shared/functions/processSerializableValue";
+import { DebuggerAction, DebuggerStateTestCase } from "./interfaces";
 
 export const tests: Reducer<DebuggerStateTestCase[], DebuggerAction> = (
   state,
