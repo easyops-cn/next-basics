@@ -24,6 +24,32 @@ export function covertEventToFormValue(
   const handlerType = getHandlerType(handler);
 
   if (handlerType === HandlerType.BuiltinAction) {
+    //特殊处理 history.push / segueId.push
+    if (
+      ["segue.push", "history.push"].includes(
+        (handler as BuiltinBrickEventHandler).action
+      )
+    ) {
+      const args = (handler as BuiltinBrickEventHandler).args ?? [];
+      return {
+        handlerType,
+        action: (handler as BuiltinBrickEventHandler).action,
+        [(handler as BuiltinBrickEventHandler).action === "segue.push"
+          ? "segueId"
+          : "path"]: args[0] as string,
+        ...safeDumpFields(
+          omitBy(
+            {
+              if: handler.if,
+              args: args.length > 1 ? args.slice(1) : undefined,
+              callback: (handler as BuiltinBrickEventHandler).callback,
+            },
+            isNil
+          )
+        ),
+      };
+    }
+
     return {
       handlerType,
       action: (handler as BuiltinBrickEventHandler).action,

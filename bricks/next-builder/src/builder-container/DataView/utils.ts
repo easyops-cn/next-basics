@@ -74,7 +74,7 @@ export const safeDumpFields = (
   return result;
 };
 
-const safeLoadField = (value: string, field: string): any => {
+export const safeLoadField = (value: string, field: string): any => {
   let result;
   try {
     result = safeLoad(value, {

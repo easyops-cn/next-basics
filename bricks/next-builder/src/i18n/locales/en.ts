@@ -98,6 +98,10 @@ const locale: Locale = {
   [K.TRANSFORM_LABEL]: "Transform",
   [K.TRANSFORM_FROM_LABEL]: "TransformFrom",
   [K.BRICK_EVENT_LABEL]: "Event Type",
+  [K.SEGUE_ID_ITEM_LABEL]: "Segue ID",
+  [K.HISTORY_PATH_ITEM_LABEL]: "Path",
+  [K.HISTORY_PATH_ITEM_TOOLTIP]:
+    "The url of the new page that needs to be link",
   [K.TRANSFORM_MAP_ARRAY]: "transformMapArray",
   [K.TRANSFORM_MAP_ARRAY_TOOLTIP]:
     "Set Array mapping processing mode in transform, usually no additional settings, just use the default value",
@@ -112,6 +116,7 @@ const locale: Locale = {
     "Link to provider documents of developers",
   [K.LINK_TO_FLOWER_BUILDER]: "Link to flow builder app",
   [K.LINK_TO_NEXT_DOCS]: "Link to next document",
+  [K.RECOMMENDED_ACTIONS]: "Recommended actions",
 };
 
 export default locale;

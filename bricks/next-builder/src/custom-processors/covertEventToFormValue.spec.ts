@@ -18,6 +18,34 @@ describe("covertToEventFormValue", () => {
       },
     ],
     [
+      {
+        action: "history.push",
+        args: ["${APP.homepage}/test", { notify: false }],
+      },
+      {
+        action: "history.push",
+        handlerType: "builtinAction",
+        path: "${APP.homepage}/test",
+        args: "- notify: false\n",
+      },
+    ],
+    [
+      { action: "history.push" },
+      {
+        action: "history.push",
+        handlerType: "builtinAction",
+      },
+    ],
+    [
+      { action: "segue.push", args: ["go-to-detail", { id: "abc" }] },
+      {
+        action: "segue.push",
+        handlerType: "builtinAction",
+        segueId: "go-to-detail",
+        args: "- id: abc\n",
+      },
+    ],
+    [
       { useProvider: "api.cmdb.provider", args: ["abc"] },
       {
         provider: "api.cmdb.provider",

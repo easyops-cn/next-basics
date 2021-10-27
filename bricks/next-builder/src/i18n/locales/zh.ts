@@ -98,6 +98,9 @@ const locale: Locale = {
   [K.IF_LABEL]: "触发条件IF",
   [K.TRANSFORM_LABEL]: "数据转换",
   [K.TRANSFORM_FROM_LABEL]: "指定字段",
+  [K.SEGUE_ID_ITEM_LABEL]: "跳转关系ID",
+  [K.HISTORY_PATH_ITEM_LABEL]: "路由",
+  [K.HISTORY_PATH_ITEM_TOOLTIP]: "需要跳转的新页面地址",
   [K.TRANSFORM_MAP_ARRAY]: "数据转换映射",
   [K.TRANSFORM_MAP_ARRAY_TOOLTIP]:
     "设置在数据转换中对数组的映射处理模式，通常不要额外设置，使用默认值即可",
@@ -108,6 +111,7 @@ const locale: Locale = {
   [K.LINK_TO_DEVELOPER_PROVIDER_DOC]: "前往开发者中心查看",
   [K.LINK_TO_FLOWER_BUILDER]: "前往 FLow 查看编排",
   [K.LINK_TO_NEXT_DOCS]: "前往文档中心查看",
+  [K.RECOMMENDED_ACTIONS]: "推荐动作",
 };
 
 export default locale;

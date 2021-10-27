@@ -12,7 +12,7 @@ import { ColProps } from "antd/lib/col";
 import { FormInstance } from "antd/lib/form";
 import { HighlightTokenSettings } from "@next-libs/code-editor-components";
 import { LifeCycle } from "../shared/visual-events/interfaces";
-import { EventConfigForm } from "./EventConfigForm";
+import { EventConfigForm, EventConfigFormProps } from "./EventConfigForm";
 
 /**
  * @id next-builder.event-config-form
@@ -107,6 +107,28 @@ export class EventConfigFormElement extends UpdatingElement {
     attribute: false,
   })
   highlightTokens: HighlightTokenSettings[];
+
+  /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 路径列表
+   */
+  @property({
+    attribute: false,
+  })
+  pathList: string[];
+
+  /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description segue Id列表
+   */
+  @property({
+    attribute: false,
+  })
+  segueList: EventConfigFormProps["segueList"];
 
   /**
    * @description 表单验证成功时触发
@@ -209,6 +231,8 @@ export class EventConfigFormElement extends UpdatingElement {
             lifeCycle={this.lifeCycle}
             useInCustomTemplate={this.useInCustomTemplate}
             highlightTokens={this.highlightTokens}
+            pathList={this.pathList}
+            segueList={this.segueList}
             onValuesChange={this._handleValuesChange}
             onClickHighlightToken={this._handleHighlightTokenClick}
           />

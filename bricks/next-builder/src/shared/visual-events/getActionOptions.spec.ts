@@ -37,11 +37,25 @@ describe("processor", () => {
       },
     ];
 
-    expect(getActionOptions(actions)).toEqual([
+    const recommendedIds = ["segue.replace", "history.push"];
+
+    expect(getActionOptions(actions, recommendedIds)).toEqual([
+      {
+        label: "next-builder:RECOMMENDED_ACTIONS",
+        options: [
+          {
+            label: "页面跳转(history.push)",
+            value: "history.push",
+          },
+          {
+            label: "页面快捷跳转，并替换最新浏览记录(segue.replace)",
+            value: "segue.replace",
+          },
+        ],
+      },
       {
         label: "history",
         options: [
-          { label: "页面跳转(history.push)", value: "history.push" },
           { label: "返回上一个页面(history.goBack)", value: "history.goBack" },
         ],
       },
@@ -50,15 +64,6 @@ describe("processor", () => {
         options: [
           { label: "信息提示(message.info)", value: "message.info" },
           { label: "告警提示(message.warn)", value: "message.warn" },
-        ],
-      },
-      {
-        label: "segue",
-        options: [
-          {
-            label: "页面快捷跳转，并替换最新浏览记录(segue.replace)",
-            value: "segue.replace",
-          },
         ],
       },
       {

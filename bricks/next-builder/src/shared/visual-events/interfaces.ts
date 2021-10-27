@@ -46,6 +46,8 @@ export interface EventFormField {
   handlerType: HandlerType;
   if?: string;
   action?: string;
+  segueId?: string;
+  path?: string;
   brickEventType?: CustomBrickEventType;
   providerType?: "provider" | "flow";
   provider?: string;

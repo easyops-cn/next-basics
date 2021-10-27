@@ -6,8 +6,11 @@ import {
   ExecuteCustomBrickEventHandler,
   SetPropsCustomBrickEventHandler,
 } from "@next-core/brick-types";
-import { set } from "lodash";
-import { safeLoadFields } from "../builder-container/DataView/utils";
+import { castArray, isNil, set } from "lodash";
+import {
+  safeLoadFields,
+  safeLoadField,
+} from "../builder-container/DataView/utils";
 import {
   CustomBrickEventType,
   EventFormField,
@@ -18,6 +21,27 @@ export function covertFormValueToEvent(
   formValue: EventFormField
 ): BrickEventHandler {
   if (formValue.handlerType === HandlerType.BuiltinAction) {
+    //特殊处理 history.push / segueId.push
+    if (["segue.push", "history.push"].includes(formValue.action)) {
+      const restArgs =
+        formValue.args !== undefined
+          ? safeLoadField(formValue.args, "args")
+          : [];
+      return {
+        action: formValue.action as string,
+        ...safeLoadFields({
+          if: formValue.if,
+          callback: formValue.callback,
+        }),
+        args: [
+          formValue.action === "segue.push"
+            ? formValue.segueId
+            : formValue.path,
+          ...(isNil(restArgs) ? [] : castArray(restArgs)),
+        ],
+      } as BuiltinBrickEventHandler;
+    }
+
     return {
       action: formValue.action,
       ...safeLoadFields({
