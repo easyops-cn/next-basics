@@ -1,14 +1,14 @@
 const mockGetStoriesJSONRequset = jest.fn((args = {}) => {
   if (Array.isArray(args.storyIds) && args.storyIds.length > 0) {
     const list = args.storyIds.map((item: string) => ({
-      examples: [
+      conf: [
         {
           properties: "test-props",
         },
       ],
       ...(item === "brick-a"
         ? {
-            id: "brick-a",
+            storyId: "brick-a",
           }
         : {
             storyId: "brick-b",
@@ -21,13 +21,13 @@ const mockGetStoriesJSONRequset = jest.fn((args = {}) => {
     return {
       list: [
         {
-          id: "brick-a",
-          examples: null,
+          storyId: "brick-a",
+          conf: null,
           text: "a",
         },
         {
           storyId: "brick-b",
-          examples: null,
+          conf: null,
           text: "b",
         },
       ],
@@ -52,18 +52,18 @@ describe("StoriesCache", () => {
   it("install and getStoryList should work", async () => {
     expect(mockGetStoriesJSONRequset).toBeCalledTimes(0);
     await instance.install({
-      fields: ["id", "text"],
+      fields: ["storyId", "text"],
     });
     expect(mockGetStoriesJSONRequset).toBeCalledTimes(1);
     expect(instance.getStoryList()).toEqual([
       {
-        id: "brick-a",
-        examples: null,
+        storyId: "brick-a",
+        conf: null,
         text: "a",
       },
       {
         storyId: "brick-b",
-        examples: null,
+        conf: null,
         text: "b",
       },
     ]);
@@ -71,15 +71,15 @@ describe("StoriesCache", () => {
     await instance.install(
       {
         list: ["brick-a"],
-        fields: ["id", "examples"],
+        fields: ["storyId", "conf"],
       },
       true
     );
     expect(mockGetStoriesJSONRequset).toBeCalledTimes(2);
     expect(instance.getStoryList()).toEqual([
       {
-        id: "brick-a",
-        examples: [
+        storyId: "brick-a",
+        conf: [
           {
             properties: "test-props",
           },
@@ -88,7 +88,7 @@ describe("StoriesCache", () => {
       },
       {
         storyId: "brick-b",
-        examples: null,
+        conf: null,
         text: "b",
       },
     ]);
@@ -98,7 +98,7 @@ describe("StoriesCache", () => {
     await instance.install(
       {
         list: ["brick-a"],
-        fields: ["id", "examples"],
+        fields: ["storyId", "conf"],
       },
       true
     );
@@ -107,20 +107,20 @@ describe("StoriesCache", () => {
     await instance.install(
       {
         list: ["brick-a", "brick-b"],
-        fields: ["id", "examples"],
+        fields: ["storyId", "conf"],
       },
       true
     );
     expect(mockGetStoriesJSONRequset).toBeCalledTimes(3);
     expect(mockGetStoriesJSONRequset.mock.calls).toEqual([
-      [{ fields: ["id", "text"], storyIds: [] }],
-      [{ fields: ["id", "examples"], storyIds: ["brick-a"] }],
-      [{ fields: ["id", "examples"], storyIds: ["brick-b"] }],
+      [{ fields: ["storyId", "text"], storyIds: [] }],
+      [{ fields: ["storyId", "conf"], storyIds: ["brick-a"] }],
+      [{ fields: ["storyId", "conf"], storyIds: ["brick-b"] }],
     ]);
     expect(instance.getStoryList()).toEqual([
       {
-        id: "brick-a",
-        examples: [
+        storyId: "brick-a",
+        conf: [
           {
             properties: "test-props",
           },
@@ -129,7 +129,7 @@ describe("StoriesCache", () => {
       },
       {
         storyId: "brick-b",
-        examples: [
+        conf: [
           {
             properties: "test-props",
           },
@@ -143,7 +143,7 @@ describe("StoriesCache", () => {
     await instance.install(
       {
         list: ["brick-a", "brick-b"],
-        fields: ["id", "examples"],
+        fields: ["storyId", "conf"],
       },
       true
     );
@@ -166,21 +166,21 @@ describe("StoriesCache", () => {
   it("init should work", () => {
     const initData: any = [
       {
-        id: "brick-c",
-        examples: null,
+        storyId: "brick-c",
+        conf: null,
         text: "a",
       },
       {
         storyId: "brick-d",
-        examples: null,
+        conf: null,
         text: "a",
       },
     ];
     instance.init(initData);
     const result = [
       {
-        id: "brick-a",
-        examples: [
+        storyId: "brick-a",
+        conf: [
           {
             properties: "test-props",
           },
@@ -189,7 +189,7 @@ describe("StoriesCache", () => {
       },
       {
         storyId: "brick-b",
-        examples: [
+        conf: [
           {
             properties: "test-props",
           },

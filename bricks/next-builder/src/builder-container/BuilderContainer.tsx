@@ -283,7 +283,7 @@ export function LegacyBuilderContainer(
 
   React.useEffect(() => {
     const removeListeners = [
-      manager.onNodeAddBefore(installExpandInfo),
+      manager.onNodeAdd(installExpandInfo),
       manager.onNodeAdd(onNodeAdd),
       manager.onSnippetApply(onSnippetApply),
       manager.onNodeMove(onNodeMove),
