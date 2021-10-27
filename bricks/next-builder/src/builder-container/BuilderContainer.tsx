@@ -42,6 +42,32 @@ import { StoriesCache } from "../data-providers/utils/StoriesCache";
 
 import styles from "./BuilderContainer.module.css";
 
+export const InstallExpandInfo = async (
+  e?: CustomEvent<EventDetailOfNodeAdd>
+) => {
+  const manager = useBuilderDataManager();
+  const store = StoriesCache.getInstance();
+  if (
+    getRuntime().getFeatureFlags()["next-builder-stories-json-lazy-loading"]
+  ) {
+    const id = e.detail.nodeData.brick;
+    if (!store.hasInstalled(id)) {
+      const res = await store.install(
+        {
+          list: [id],
+          fields: ["id", "doc", "examples", "originData"],
+        },
+        true
+      );
+      if (res && res.find((item) => item.originData !== null)) {
+        // it mean the new node was widget, and we got the originData
+        // so we should update the manager data
+        manager.storyListInit(store.getStoryList());
+        manager.updateBrick(e.detail);
+      }
+    }
+  }
+};
 export interface BuilderContainerProps extends BuilderContextMenuProps {
   appId?: string;
   dataSource?: BuilderRouteOrBrickNode[];
@@ -145,11 +171,8 @@ export function LegacyBuilderContainer(
   }: BuilderContainerProps,
   ref: React.Ref<AbstractBuilderDataManager>
 ): React.ReactElement {
-  const storiesCacheInstance = StoriesCache.getInstance();
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
   const [highlightNodes, setHighlightNodes] = React.useState(new Set<number>());
-  const storiesJSONLazyLoadingFlag =
-    getRuntime().getFeatureFlags()["next-builder-stories-json-lazy-loading"];
 
   const memoToolboxTab = React.useMemo(
     () => initialToolboxTab ?? defaultToolboxTab,
@@ -189,27 +212,6 @@ export function LegacyBuilderContainer(
 
   const manager = useBuilderDataManager();
 
-  const installExpandInfo = async (e?: CustomEvent<EventDetailOfNodeAdd>) => {
-    if (storiesJSONLazyLoadingFlag) {
-      const id = e.detail.nodeData.brick;
-      if (!storiesCacheInstance.hasInstalled(id)) {
-        const res = await storiesCacheInstance.install(
-          {
-            list: [id],
-            fields: ["id", "doc", "examples", "originData"],
-          },
-          true
-        );
-        if (res && res.find((item) => item.originData !== null)) {
-          // it mean the new node was widget, and we got the originData
-          // so we should update the manager data
-          manager.storyListInit(storiesCacheInstance.getStoryList());
-          manager.updateBrick(e.detail);
-        }
-      }
-    }
-  };
-
   React.useImperativeHandle(ref, () => manager);
 
   React.useEffect(() => {
@@ -217,7 +219,7 @@ export function LegacyBuilderContainer(
   }, [memoCanvasIndex]);
 
   React.useEffect(() => {
-    manager.storyListInit(storiesCacheInstance.getStoryList());
+    manager.storyListInit(storyList);
   }, [storyList, manager]);
 
   React.useEffect(() => {
@@ -283,7 +285,7 @@ export function LegacyBuilderContainer(
 
   React.useEffect(() => {
     const removeListeners = [
-      manager.onNodeAdd(installExpandInfo),
+      manager.onNodeAdd(InstallExpandInfo),
       manager.onNodeAdd(onNodeAdd),
       manager.onSnippetApply(onSnippetApply),
       manager.onNodeMove(onNodeMove),
