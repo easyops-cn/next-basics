@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.86.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.85.0...@next-bricks/next-builder@1.86.0) (2021-10-27)
+
+
+### Features
+
+* run tests and report coverage for storyboard functions ([a2d431d](https://github.com/easyops-cn/next-basics/commit/a2d431d9ac511a1472401e32685fe4d19410f5e0))
+
+
+
+
+
 # [1.85.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.84.1...@next-bricks/next-builder@1.85.0) (2021-10-27)
 
 
