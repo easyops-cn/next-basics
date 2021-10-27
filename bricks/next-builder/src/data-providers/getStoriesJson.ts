@@ -57,4 +57,3 @@ customElements.define(
   createProviderClass(getStoriesJSON)
 );
 
-export default StoriesCache;
