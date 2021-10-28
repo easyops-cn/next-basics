@@ -69,6 +69,7 @@ const mockRemoveListenersOfNodeMove = jest.fn();
 const mockRemoveListenersOfNodeReorder = jest.fn();
 const mockRemoveListenersOfNodeClick = jest.fn();
 const mockRemoveListenersOfSnippetApply = jest.fn();
+const mockUpdateBrick = jest.fn();
 
 const mockManager = {
   onNodeAdd: jest.fn(() => mockRemoveListenersOfNodeAdd),
@@ -79,7 +80,7 @@ const mockManager = {
   dataInit: jest.fn(),
   sharedEditorListInit: jest.fn(),
   storyListInit: jest.fn(),
-  updateBrick: jest.fn(),
+  updateBrick: mockUpdateBrick,
   getData: jest.fn(() => ({
     rootId: "root",
     nodes: [],
@@ -335,13 +336,16 @@ describe("InstallExpandInfo should work", () => {
     getFeatureFlags.mockImplementation(() => ({
       "next-builder-stories-json-lazy-loading": false,
     }));
-    InstallExpandInfo({
-      detail: {
-        nodeData: {
-          brick: "0",
+    InstallExpandInfo(
+      {
+        detail: {
+          nodeData: {
+            brick: "0",
+          },
         },
-      },
-    } as CustomEvent<EventDetailOfNodeAdd>);
+      } as CustomEvent<EventDetailOfNodeAdd>,
+      mockManager
+    );
     expect(mockInstall).toBeCalledTimes(0);
   });
 
@@ -349,13 +353,16 @@ describe("InstallExpandInfo should work", () => {
     getFeatureFlags.mockImplementation(() => ({
       "next-builder-stories-json-lazy-loading": true,
     }));
-    InstallExpandInfo({
-      detail: {
-        nodeData: {
-          brick: "0",
+    InstallExpandInfo(
+      {
+        detail: {
+          nodeData: {
+            brick: "0",
+          },
         },
-      },
-    } as CustomEvent<EventDetailOfNodeAdd>);
+      } as CustomEvent<EventDetailOfNodeAdd>,
+      mockManager
+    );
     expect(mockInstall).toBeCalledTimes(0);
     expect(mockGetStoryList).toBeCalledTimes(0);
   });
@@ -364,50 +371,70 @@ describe("InstallExpandInfo should work", () => {
     getFeatureFlags.mockImplementation(() => ({
       "next-builder-stories-json-lazy-loading": true,
     }));
-    it("brick unInstalled but response was undefiend", () => {
+    let updateBrick: any;
+    mockUpdateBrick.mockImplementation((args) => {
+      updateBrick = args;
+    });
+    it("brick unInstalled but response was undefiend", async () => {
       mockInstall.mockImplementation(() => []);
-      InstallExpandInfo({
-        detail: {
-          nodeData: {
-            brick: "1",
+      await InstallExpandInfo(
+        {
+          detail: {
+            nodeData: {
+              brick: "1",
+            },
           },
-        },
-      } as CustomEvent<EventDetailOfNodeAdd>);
+        } as CustomEvent<EventDetailOfNodeAdd>,
+        mockManager
+      );
       expect(mockInstall).toBeCalledTimes(1);
+      expect(updateBrick).toBeUndefined();
     });
 
-    it("had response but don't had originData", () => {
+    it("had response but don't had originData", async () => {
       mockInstall.mockImplementation(() => [
         {
           storyId: 1,
           originData: null,
         },
       ]);
-      InstallExpandInfo({
-        detail: {
-          nodeData: {
-            brick: "1",
+      await InstallExpandInfo(
+        {
+          detail: {
+            nodeData: {
+              brick: "1",
+            },
           },
-        },
-      } as CustomEvent<EventDetailOfNodeAdd>);
+        } as CustomEvent<EventDetailOfNodeAdd>,
+        mockManager
+      );
       expect(mockInstall).toBeCalledTimes(2);
+      expect(updateBrick).toBeUndefined();
     });
 
-    it("had response and had originData", () => {
+    it("had response and had originData", async () => {
       mockInstall.mockImplementation(() => [
         {
           storyId: 1,
           originData: [{ id: 2 }],
         },
       ]);
-      InstallExpandInfo({
-        detail: {
-          nodeData: {
-            brick: "1",
+      await InstallExpandInfo(
+        {
+          detail: {
+            nodeData: {
+              brick: "1",
+            },
           },
-        },
-      } as CustomEvent<EventDetailOfNodeAdd>);
+        } as CustomEvent<EventDetailOfNodeAdd>,
+        mockManager
+      );
       expect(mockInstall).toBeCalledTimes(3);
+      expect(updateBrick).toEqual({
+        nodeData: {
+          brick: "1",
+        },
+      });
     });
   });
 });

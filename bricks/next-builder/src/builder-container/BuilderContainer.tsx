@@ -43,9 +43,9 @@ import { StoriesCache } from "../data-providers/utils/StoriesCache";
 import styles from "./BuilderContainer.module.css";
 
 export const InstallExpandInfo = async (
-  e?: CustomEvent<EventDetailOfNodeAdd>
+  e: CustomEvent<EventDetailOfNodeAdd>,
+  manager: any
 ) => {
-  const manager = useBuilderDataManager();
   const store = StoriesCache.getInstance();
   if (
     getRuntime().getFeatureFlags()["next-builder-stories-json-lazy-loading"]
@@ -285,7 +285,7 @@ export function LegacyBuilderContainer(
 
   React.useEffect(() => {
     const removeListeners = [
-      manager.onNodeAdd(InstallExpandInfo),
+      manager.onNodeAdd((e) => InstallExpandInfo(e, manager)),
       manager.onNodeAdd(onNodeAdd),
       manager.onSnippetApply(onSnippetApply),
       manager.onNodeMove(onNodeMove),

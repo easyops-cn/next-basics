@@ -2154,10 +2154,10 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.43.0":
-  version "2.43.0"
-  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.43.0.tgz#5990167fa198938969c58e5ce8d01a902220eb76"
-  integrity sha512-1peOArtkP8Wa5JeWZjG01rbWXe8O+j7O6CabHDh3RqR+VBpREzrYTQa1pSM2bkh1Dc3tH2h52WBlzhV4vIv1yw==
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.43.0", "@next-core/brick-types@^2.44.0":
+  version "2.44.0"
+  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.44.0.tgz#e60237bc2227c9b858e7351c4c6ce3c984db735c"
+  integrity sha512-OGIWmbtxoRkg5kGQDPN57RyLvLiUvpn/XKM73akyaCl+dxDiKShqVgDMZv1gHzskuachftcEjMQvy6uF4+MR5A==
 
 "@next-core/brick-utils@^2.28.11":
   version "2.28.11"
@@ -2283,6 +2283,15 @@
   integrity sha512-Sn6xyqBlrcHH5C7xnYzWvDEVHrYQTEnuV5t1yZqp4gbhXRFHtWcWfVeNIq9PPZvxy1migUPLFSm86mu/mIFsGg==
   dependencies:
     "@next-core/brick-types" "^2.43.0"
+    "@ungap/event-target" "^0.2.3"
+    classnames "^2.3.1"
+
+"@next-core/editor-bricks-helper@^0.32.0":
+  version "0.32.0"
+  resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.32.0.tgz#c84a7b57fd2c3d77a6e137e1fa83535de3fd42cc"
+  integrity sha512-CoxkIF1BPQzFHCuv6dW7c1m3PdY0XqJHHWP6/5HWkPrOsEq4xH1372FK977kYhV+Zm452BdnlLabW4bN/7iXbw==
+  dependencies:
+    "@next-core/brick-types" "^2.44.0"
     "@ungap/event-target" "^0.2.3"
     classnames "^2.3.1"
 
