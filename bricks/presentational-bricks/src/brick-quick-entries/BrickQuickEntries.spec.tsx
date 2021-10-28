@@ -6,6 +6,7 @@ import { BrickAsComponent, getHistory } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { BrickQuickEntries } from "./BrickQuickEntries";
 import { LinkProps } from "./index";
+import { Tooltip } from "antd";
 
 jest.mock("@next-core/brick-kit");
 const mockGetHistory = getHistory as jest.Mock;
@@ -78,11 +79,22 @@ describe("BrickQuickEntries", () => {
             },
             value: "777",
           },
+          {
+            title: "666",
+            icon: {
+              lib: "easyops",
+              category: "default",
+              icon: "clock",
+            },
+            value: "clock",
+            tooltip: "时间机器",
+          },
         ]}
         divider={true}
         mode={"multiCardNoLine"}
       />
     );
     expect(wrapper.find(BrickAsComponent).length).toBe(2);
+    expect(wrapper.find(Tooltip).prop("title")).toEqual("时间机器");
   });
 });

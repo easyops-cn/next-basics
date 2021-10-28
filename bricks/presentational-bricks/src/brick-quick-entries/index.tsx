@@ -20,6 +20,7 @@ export interface TitleConfig {
   icon?: MenuIcon;
   title?: string;
   value?: string;
+  tooltip?: string;
 }
 /**
  * @id presentational-bricks.brick-quick-entries

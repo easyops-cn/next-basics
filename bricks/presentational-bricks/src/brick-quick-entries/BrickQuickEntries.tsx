@@ -4,6 +4,7 @@ import { omit, isEmpty } from "lodash";
 import { getHistory, BrickAsComponent } from "@next-core/brick-kit";
 import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
+import { Tooltip } from "antd";
 import { LinkProps, TitleConfig } from "./index";
 
 import style from "./brick-quick-entries.module.css";
@@ -97,15 +98,33 @@ export function BrickQuickEntries(
                     cursor: "pointer",
                   }}
                 >
-                  <GeneralIcon
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%,-50%)",
-                    }}
-                    icon={props.titleList[i * props.column + j]?.icon}
-                  ></GeneralIcon>
+                  {props.titleList[i * props.column + j]?.tooltip ? (
+                    <Tooltip
+                      title={props.titleList[i * props.column + j]?.tooltip}
+                    >
+                      <div>
+                        <GeneralIcon
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%,-50%)",
+                          }}
+                          icon={props.titleList[i * props.column + j]?.icon}
+                        ></GeneralIcon>
+                      </div>
+                    </Tooltip>
+                  ) : (
+                    <GeneralIcon
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%,-50%)",
+                      }}
+                      icon={props.titleList[i * props.column + j]?.icon}
+                    ></GeneralIcon>
+                  )}
                 </div>
               </div>
               {elem}
