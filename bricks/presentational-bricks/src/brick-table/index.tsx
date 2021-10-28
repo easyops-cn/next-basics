@@ -991,6 +991,8 @@ export class BrickTableElement extends UpdatingElement {
         urlSearchParams.delete(this.qField);
         history.push(`?${urlSearchParams}`, { notify: !this.frontSearch });
       }
+      this.page = 1;
+      history.pushQuery({ page: 1 }, { notify: false });
     }
     this.frontSearchQuery = q;
   }
