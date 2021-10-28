@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.87.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.86.0...@next-bricks/next-builder@1.87.0) (2021-10-28)
+
+
+### Features
+
+* **next-builder-NB:** update the package.conf.yaml ([4c577e9](https://github.com/easyops-cn/next-basics/commit/4c577e949f59a572231a98129df0ceab2499568d))
+* stories json add local cache ([841f8ae](https://github.com/easyops-cn/next-basics/commit/841f8ae329f80891fd831e055410f1f0dab8d1b0))
+* update unit test ([73fd179](https://github.com/easyops-cn/next-basics/commit/73fd179f2fd06935060d8aea20ad6f3e50735699))
+* update unit test ([9f2a509](https://github.com/easyops-cn/next-basics/commit/9f2a509c8d7fc4b38ab2d0bd77b5329e82188c18))
+* update unit test ([5107c69](https://github.com/easyops-cn/next-basics/commit/5107c6971089580062b7991339f12d9516b707fb))
+* update unit test ([267a7c2](https://github.com/easyops-cn/next-basics/commit/267a7c243c6601e897396e1ec752a8501946beb6))
+
+
+
+
+
 # [1.86.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.85.0...@next-bricks/next-builder@1.86.0) (2021-10-27)
 
 

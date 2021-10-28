@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.348.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.347.0...@next-bricks/developers@1.348.0) (2021-10-28)
+
+
+### Features
+
+* stories json add local cache ([841f8ae](https://github.com/easyops-cn/next-basics/commit/841f8ae329f80891fd831e055410f1f0dab8d1b0))
+
+
+
+
+
 # [1.347.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.346.0...@next-bricks/developers@1.347.0) (2021-09-26)
 
 
