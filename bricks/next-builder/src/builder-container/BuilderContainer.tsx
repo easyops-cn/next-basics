@@ -37,9 +37,37 @@ import { BuilderToolbar } from "./BuilderToolbar/BuilderToolbar";
 import { getBuilderClipboard } from "./getBuilderClipboard";
 import { defaultToolboxTab } from "./constants";
 import { EventStreamNode } from "./EventStreamCanvas/interfaces";
+import { getRuntime } from "@next-core/brick-kit";
+import { StoriesCache } from "../data-providers/utils/StoriesCache";
 
 import styles from "./BuilderContainer.module.css";
 
+export const InstallExpandInfo = async (
+  e: CustomEvent<EventDetailOfNodeAdd>,
+  manager: any
+) => {
+  const store = StoriesCache.getInstance();
+  if (
+    getRuntime().getFeatureFlags()["next-builder-stories-json-lazy-loading"]
+  ) {
+    const id = e.detail.nodeData.brick;
+    if (!store.hasInstalled(id)) {
+      const res = await store.install(
+        {
+          list: [id],
+          fields: ["id", "doc", "examples", "originData"],
+        },
+        true
+      );
+      if (res && res.find((item) => item.originData !== null)) {
+        // it mean the new node was widget, and we got the originData
+        // so we should update the manager data
+        manager.storyListInit(store.getStoryList());
+        manager.updateBrick(e.detail);
+      }
+    }
+  }
+};
 export interface BuilderContainerProps extends BuilderContextMenuProps {
   appId?: string;
   dataSource?: BuilderRouteOrBrickNode[];
@@ -191,6 +219,10 @@ export function LegacyBuilderContainer(
   }, [memoCanvasIndex]);
 
   React.useEffect(() => {
+    manager.storyListInit(storyList);
+  }, [storyList, manager]);
+
+  React.useEffect(() => {
     let type = BuilderDataType.UNKNOWN;
     let rootNode: BuilderRouteOrBrickNode;
     if (dataSource?.length === 1) {
@@ -252,11 +284,8 @@ export function LegacyBuilderContainer(
   }, [editorList, manager]);
 
   React.useEffect(() => {
-    manager.storyListInit(storyList);
-  }, [storyList, manager]);
-
-  React.useEffect(() => {
     const removeListeners = [
+      manager.onNodeAdd((e) => InstallExpandInfo(e, manager)),
       manager.onNodeAdd(onNodeAdd),
       manager.onSnippetApply(onSnippetApply),
       manager.onNodeMove(onNodeMove),

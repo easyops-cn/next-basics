@@ -2154,10 +2154,10 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.43.0":
-  version "2.43.0"
-  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.43.0.tgz#5990167fa198938969c58e5ce8d01a902220eb76"
-  integrity sha512-1peOArtkP8Wa5JeWZjG01rbWXe8O+j7O6CabHDh3RqR+VBpREzrYTQa1pSM2bkh1Dc3tH2h52WBlzhV4vIv1yw==
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.43.0", "@next-core/brick-types@^2.44.0":
+  version "2.44.0"
+  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.44.0.tgz#e60237bc2227c9b858e7351c4c6ce3c984db735c"
+  integrity sha512-OGIWmbtxoRkg5kGQDPN57RyLvLiUvpn/XKM73akyaCl+dxDiKShqVgDMZv1gHzskuachftcEjMQvy6uF4+MR5A==
 
 "@next-core/brick-utils@^2.28.11":
   version "2.28.11"
@@ -2283,6 +2283,15 @@
   integrity sha512-Sn6xyqBlrcHH5C7xnYzWvDEVHrYQTEnuV5t1yZqp4gbhXRFHtWcWfVeNIq9PPZvxy1migUPLFSm86mu/mIFsGg==
   dependencies:
     "@next-core/brick-types" "^2.43.0"
+    "@ungap/event-target" "^0.2.3"
+    classnames "^2.3.1"
+
+"@next-core/editor-bricks-helper@^0.32.0":
+  version "0.32.0"
+  resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.32.0.tgz#c84a7b57fd2c3d77a6e137e1fa83535de3fd42cc"
+  integrity sha512-CoxkIF1BPQzFHCuv6dW7c1m3PdY0XqJHHWP6/5HWkPrOsEq4xH1372FK977kYhV+Zm452BdnlLabW4bN/7iXbw==
+  dependencies:
+    "@next-core/brick-types" "^2.44.0"
     "@ungap/event-target" "^0.2.3"
     classnames "^2.3.1"
 
@@ -2558,10 +2567,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/msgsender-sdk/-/msgsender-sdk-2.1.1.tgz#df9205716c56fc531556bfa0e98e60cfe780ec32"
   integrity sha512-ezfJkbVLkee70eiliTi8faTm9k0yMVyIGe3iKnfiMuc6/RfbqHYB1skEtmttc2uqpkvf6Vre5qN5jOBfjfTzUQ==
 
-"@next-sdk/next-builder-sdk@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-2.1.1.tgz#26aa00e371494c0a05d961ed8c1c0b216df8cfd5"
-  integrity sha512-VNiBjeeju/fWbCVfm/5jN4JR+8zjtDPOTwjsrxPCziyHMoYfjbiDqgp5DqcIPXUzGRGP3JbrrD3sZprDpDcXSg==
+"@next-sdk/next-builder-sdk@^2.1.7":
+  version "2.1.7"
+  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-2.1.7.tgz#a2d7805b8e31751714c869e0680e5ba79dd85805"
+  integrity sha512-mbQEeLGc27lkpTRMZ/IlmCUVwP0FwCwMrM/duBBKgSndFgw+Uc31HaMxT468ZaUhbCAyb4kP/hVorjKaiU89+Q==
 
 "@next-sdk/object-store-sdk@^2.1.1":
   version "2.1.1"

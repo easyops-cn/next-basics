@@ -1,9 +1,14 @@
 import React from "react";
 import { mount } from "enzyme";
-import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
+import {
+  EventDetailOfNodeAdd,
+  useBuilderDataManager,
+} from "@next-core/editor-bricks-helper";
 import { BuilderContainer } from "./BuilderContainer";
 import { BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
+import * as brickKit from "@next-core/brick-kit";
+import { InstallExpandInfo } from "./BuilderContainer";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("./BuilderToolbox/BuilderToolbox", () => ({
@@ -40,11 +45,31 @@ const mockConsoleError = jest
   .spyOn(console, "error")
   .mockImplementation(() => void 0);
 
+const getFeatureFlags = jest.fn().mockReturnValue({});
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getFeatureFlags,
+} as any);
+
+const mockInstall = jest.fn();
+const mockGetStoryList = jest.fn();
+jest.mock("../data-providers/utils/StoriesCache", () => ({
+  StoriesCache: {
+    getInstance: () => ({
+      hasInstalled: (isInstall: boolean) => {
+        return !+isInstall;
+      },
+      install: mockInstall,
+      getStoryList: mockGetStoryList,
+    }),
+  },
+}));
+
 const mockRemoveListenersOfNodeAdd = jest.fn();
 const mockRemoveListenersOfNodeMove = jest.fn();
 const mockRemoveListenersOfNodeReorder = jest.fn();
 const mockRemoveListenersOfNodeClick = jest.fn();
 const mockRemoveListenersOfSnippetApply = jest.fn();
+const mockUpdateBrick = jest.fn();
 
 const mockManager = {
   onNodeAdd: jest.fn(() => mockRemoveListenersOfNodeAdd),
@@ -55,6 +80,7 @@ const mockManager = {
   dataInit: jest.fn(),
   sharedEditorListInit: jest.fn(),
   storyListInit: jest.fn(),
+  updateBrick: mockUpdateBrick,
   getData: jest.fn(() => ({
     rootId: "root",
     nodes: [],
@@ -120,6 +146,7 @@ describe("BuilderContainer", () => {
       `BuilderCanvas(${BuilderDataType.ROUTE_OF_BRICKS},0)`
     );
     wrapper.unmount();
+    expect(mockRemoveListenersOfNodeAdd).toBeCalled();
     expect(mockRemoveListenersOfNodeAdd).toBeCalled();
     expect(mockRemoveListenersOfNodeMove).toBeCalled();
     expect(mockRemoveListenersOfNodeReorder).toBeCalled();
@@ -301,5 +328,113 @@ describe("BuilderContainer", () => {
       />
     );
     expect(onSwitchToolboxTab).toBeCalledWith(ToolboxTab.EVENTS_VIEW);
+  });
+});
+
+describe("InstallExpandInfo should work", () => {
+  it("feature flag return false", () => {
+    getFeatureFlags.mockImplementation(() => ({
+      "next-builder-stories-json-lazy-loading": false,
+    }));
+    InstallExpandInfo(
+      {
+        detail: {
+          nodeData: {
+            brick: "0",
+          },
+        },
+      } as CustomEvent<EventDetailOfNodeAdd>,
+      mockManager
+    );
+    expect(mockInstall).toBeCalledTimes(0);
+  });
+
+  it("feature flag return true and brick had installed", () => {
+    getFeatureFlags.mockImplementation(() => ({
+      "next-builder-stories-json-lazy-loading": true,
+    }));
+    InstallExpandInfo(
+      {
+        detail: {
+          nodeData: {
+            brick: "0",
+          },
+        },
+      } as CustomEvent<EventDetailOfNodeAdd>,
+      mockManager
+    );
+    expect(mockInstall).toBeCalledTimes(0);
+    expect(mockGetStoryList).toBeCalledTimes(0);
+  });
+
+  describe("feature flag return true", () => {
+    getFeatureFlags.mockImplementation(() => ({
+      "next-builder-stories-json-lazy-loading": true,
+    }));
+    let updateBrick: any;
+    mockUpdateBrick.mockImplementation((args) => {
+      updateBrick = args;
+    });
+    it("brick unInstalled but response was undefiend", async () => {
+      mockInstall.mockImplementation(() => []);
+      await InstallExpandInfo(
+        {
+          detail: {
+            nodeData: {
+              brick: "1",
+            },
+          },
+        } as CustomEvent<EventDetailOfNodeAdd>,
+        mockManager
+      );
+      expect(mockInstall).toBeCalledTimes(1);
+      expect(updateBrick).toBeUndefined();
+    });
+
+    it("had response but don't had originData", async () => {
+      mockInstall.mockImplementation(() => [
+        {
+          storyId: 1,
+          originData: null,
+        },
+      ]);
+      await InstallExpandInfo(
+        {
+          detail: {
+            nodeData: {
+              brick: "1",
+            },
+          },
+        } as CustomEvent<EventDetailOfNodeAdd>,
+        mockManager
+      );
+      expect(mockInstall).toBeCalledTimes(2);
+      expect(updateBrick).toBeUndefined();
+    });
+
+    it("had response and had originData", async () => {
+      mockInstall.mockImplementation(() => [
+        {
+          storyId: 1,
+          originData: [{ id: 2 }],
+        },
+      ]);
+      await InstallExpandInfo(
+        {
+          detail: {
+            nodeData: {
+              brick: "1",
+            },
+          },
+        } as CustomEvent<EventDetailOfNodeAdd>,
+        mockManager
+      );
+      expect(mockInstall).toBeCalledTimes(3);
+      expect(updateBrick).toEqual({
+        nodeData: {
+          brick: "1",
+        },
+      });
+    });
   });
 });

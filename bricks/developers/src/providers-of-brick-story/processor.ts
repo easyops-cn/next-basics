@@ -38,7 +38,10 @@ export function findStoryById(
     (acc, chapter) => acc.concat(chapter.stories),
     []
   )
-    .filter((story) => !stories.find((s) => s.storyId === story.storyId))
+    .filter(
+      (story) =>
+        !stories.find((s) => s.storyId === story.storyId && s.doc !== null)
+    )
     .concat(stories)
     .find((story) => story.storyId === id && story.type === storyType);
   return story;
