@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.151.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.150.0...@next-bricks/basic-bricks@1.151.0) (2021-10-29)
+
+
+### Features
+
+* **basic-bricks:** popover-container support zIndex ([3bf8b48](https://github.com/easyops-cn/next-basics/commit/3bf8b48cafe337f51f4b917e79abc5b332706c64))
+
+
+
+
+
 # [1.150.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.149.4...@next-bricks/basic-bricks@1.150.0) (2021-10-17)
 
 
