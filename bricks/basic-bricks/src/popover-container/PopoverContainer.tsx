@@ -32,6 +32,7 @@ interface PopoverContainerProps {
   highlighted?: boolean;
   faded?: boolean;
   transferGraphAttrs?: boolean;
+  zIndex?: number;
 }
 
 export function PopoverContainer(
@@ -160,6 +161,7 @@ export function PopoverContainer(
         trigger={trigger}
         overlayClassName={props.showPopoverBg ? "" : styles.customOverlay}
         onVisibleChange={onVisibleChange}
+        zIndex={props.zIndex ?? 1030}
       >
         <div
           data-testid="trigger-container"
