@@ -116,6 +116,18 @@ export class PopoverContainerElement extends UpdatingElement {
   showIcon: "always" | "never" | "hover" = "hover";
 
   /**
+   * @kind number
+   * @required false
+   * @default 1030
+   * @description popover的z轴顺序
+   *
+   */
+  @property({
+    attribute: false,
+  })
+  zIndex: number;
+
+  /**
    * @required false
    * @default -
    * @description 触发方式
@@ -258,6 +270,7 @@ export class PopoverContainerElement extends UpdatingElement {
             related={this.related}
             faded={this.faded}
             transferGraphAttrs={this.transferGraphAttrs}
+            zIndex={this.zIndex}
           />
         </BrickWrapper>,
         this
