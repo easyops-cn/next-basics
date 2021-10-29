@@ -428,7 +428,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           ]
         }
       ]
-    }
+    },
+    "useWidget": []
   },
   {
     "storyId": "test.template-u",
@@ -497,7 +498,10 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\"}"
         }
       ]
-    }
+    },
+    "useWidget": [
+      "test-app.template-t"
+    ]
   },
   {
     "storyId": "test.template-v",
@@ -521,7 +525,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "templateId": "template-v",
       "creator": "abc",
       "proxy": "{\\n                \\"properties\\": null,\\n                \\"events\\": {},\\n                \\"methods\\": 1\\n              }"
-    }
+    },
+    "useWidget": []
   }
 ]`,
           },
@@ -692,7 +697,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           ]
         }
       ]
-    }
+    },
+    "useWidget": []
   },
   {
     "storyId": "test.template-u",
@@ -761,7 +767,10 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\"}"
         }
       ]
-    }
+    },
+    "useWidget": [
+      "test-app.template-t"
+    ]
   },
   {
     "storyId": "test.template-v",
@@ -785,7 +794,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "templateId": "template-v",
       "creator": "abc",
       "proxy": "{\\n                \\"properties\\": null,\\n                \\"events\\": {},\\n                \\"methods\\": 1\\n              }"
-    }
+    },
+    "useWidget": []
   }
 ]`,
           },

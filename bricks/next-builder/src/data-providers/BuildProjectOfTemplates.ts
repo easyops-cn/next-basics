@@ -255,11 +255,12 @@ export async function BuildProjectOfTemplates({
         }
       });
     };
-    const addChildrenAppId = (data: pipes.GraphVertex) => {
+    const useWidget: Array<string> = [];
+    const walkChilren = (data: pipes.GraphVertex, isParent = true) => {
       if (!data) return;
       if (Array.isArray(data.children)) {
         data.children.forEach((child: pipes.GraphVertex) =>
-          addChildrenAppId(child)
+          walkChilren(child, false)
         );
       }
       if (
@@ -270,9 +271,10 @@ export async function BuildProjectOfTemplates({
         internalTemplateNames.has(data.brick)
       ) {
         data.brick = `${data.appId}.${data.brick}`;
+        if (!isParent) useWidget.push(data.brick);
       }
     };
-    addChildrenAppId(templateItem);
+    walkChilren(templateItem);
     const { thumbnail, ...restTemplateData } = templateItem;
     const stories = {
       // 基础信息存放
@@ -302,6 +304,7 @@ export async function BuildProjectOfTemplates({
       },
       conf: [],
       originData: restTemplateData as any,
+      useWidget,
     } as Story;
     if (templateItem.proxy) {
       // 如果有代理属性
