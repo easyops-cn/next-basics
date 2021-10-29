@@ -984,6 +984,7 @@ export class BrickTableElement extends UpdatingElement {
     if (this.shouldUpdateUrlParams) {
       const history = getHistory();
       const urlSearchParams = new URLSearchParams(history.location.search);
+      urlSearchParams.set("page", "1");
       if (q) {
         urlSearchParams.set(this.qField, q);
         history.push(`?${urlSearchParams}`, { notify: !this.frontSearch });
@@ -992,7 +993,6 @@ export class BrickTableElement extends UpdatingElement {
         history.push(`?${urlSearchParams}`, { notify: !this.frontSearch });
       }
       this.page = 1;
-      history.pushQuery({ page: 1 }, { notify: false });
     }
     this.frontSearchQuery = q;
   }
