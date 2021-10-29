@@ -24,11 +24,14 @@ const mockGetStoriesJSONRequset = jest.fn((args = {}) => {
           storyId: "brick-a",
           conf: null,
           text: "a",
+          type: "brick",
         },
         {
           storyId: "brick-b",
           conf: null,
           text: "b",
+          useWidget: ["brick-b-1", "brick-b-2"],
+          type: "atom-brick",
         },
       ],
     };
@@ -60,11 +63,14 @@ describe("StoriesCache", () => {
         storyId: "brick-a",
         conf: null,
         text: "a",
+        type: "brick",
       },
       {
         storyId: "brick-b",
         conf: null,
         text: "b",
+        useWidget: ["brick-b-1", "brick-b-2"],
+        type: "brick",
       },
     ]);
     expect([...instance.cache.installed]).toEqual([]);
@@ -85,11 +91,14 @@ describe("StoriesCache", () => {
           },
         ],
         text: "a",
+        type: "brick",
       },
       {
         storyId: "brick-b",
         conf: null,
         text: "b",
+        useWidget: ["brick-b-1", "brick-b-2"],
+        type: "brick",
       },
     ]);
     expect([...instance.cache.installed]).toEqual(["brick-a"]);
@@ -115,7 +124,12 @@ describe("StoriesCache", () => {
     expect(mockGetStoriesJSONRequset.mock.calls).toEqual([
       [{ fields: ["storyId", "text"], storyIds: [] }],
       [{ fields: ["storyId", "conf"], storyIds: ["brick-a"] }],
-      [{ fields: ["storyId", "conf"], storyIds: ["brick-b"] }],
+      [
+        {
+          fields: ["storyId", "conf"],
+          storyIds: ["brick-b", "brick-b-1", "brick-b-2"],
+        },
+      ],
     ]);
     expect(instance.getStoryList()).toEqual([
       {
@@ -126,6 +140,7 @@ describe("StoriesCache", () => {
           },
         ],
         text: "a",
+        type: "brick",
       },
       {
         storyId: "brick-b",
@@ -135,6 +150,8 @@ describe("StoriesCache", () => {
           },
         ],
         text: "b",
+        type: "brick",
+        useWidget: ["brick-b-1", "brick-b-2"],
       },
     ]);
     expect([...instance.cache.installed]).toEqual(["brick-a", "brick-b"]);
@@ -186,6 +203,7 @@ describe("StoriesCache", () => {
           },
         ],
         text: "a",
+        type: "brick",
       },
       {
         storyId: "brick-b",
@@ -195,6 +213,8 @@ describe("StoriesCache", () => {
           },
         ],
         text: "b",
+        type: "brick",
+        useWidget: ["brick-b-1", "brick-b-2"],
       },
     ].concat(initData);
     expect(instance.getStoryList()).toEqual(result);

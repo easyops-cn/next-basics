@@ -32,6 +32,7 @@ export async function getStoriesJSON(info?: installInfo) {
         "subCategory",
         "description",
         "text",
+        "useWidget",
         "layerType",
         "type",
       ],
