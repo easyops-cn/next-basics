@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.1...@next-bricks/presentational-bricks@1.228.2) (2021-10-29)
+
+
+### Bug Fixes
+
+* 前端搜索优化 PERMISSION-190 ([23e6a82](https://github.com/easyops-cn/next-basics/commit/23e6a82cdb4eeedcd457479217db2d7f431b9500))
+* 前端搜索优化第一次提交不合理再次提交 PERMISSION-190 ([b7e19f3](https://github.com/easyops-cn/next-basics/commit/b7e19f318478f7157853ee06a798d4dae9b9645f))
+
+
+
+
+
 ## [1.228.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.0...@next-bricks/presentational-bricks@1.228.1) (2021-10-28)
 
 
