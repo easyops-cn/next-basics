@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.152.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.151.0...@next-bricks/basic-bricks@1.152.0) (2021-10-30)
+
+
+### Features
+
+* **LogoBar:** logo支持不设置link ([dea170c](https://github.com/easyops-cn/next-basics/commit/dea170c3487b255daf4bfb6c40b3c89c0e6d285f))
+
+
+
+
+
 # [1.151.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.150.0...@next-bricks/basic-bricks@1.151.0) (2021-10-29)
 
 
