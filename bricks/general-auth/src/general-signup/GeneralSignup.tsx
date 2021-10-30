@@ -31,7 +31,7 @@ import { debounce, omit, assign } from "lodash";
 import {
   CustomerApi_sendApplicationVerificationCode
 } from "@next-sdk/air-admin-service-sdk";
-import{OrgApi_SaaSOrgRegister,OrgApi_SaaSOrgRegisterRequestBody}from"@next-sdk/api-gateway-sdk";
+import{OrgApi_saaSOrgRegister,OrgApi_SaaSOrgRegisterRequestBody}from"@next-sdk/api-gateway-sdk";
 import { validateMap } from "./validateProvider";
 import resetLegacyIframe from "../shared/resetLegacyIframe";
 import { createLocation, Location } from "history";
@@ -178,7 +178,7 @@ export function GeneralSignup(): React.ReactElement {
     try {
       let result:Record<string,any>;
         if(isCommonSignup){
-          result=await OrgApi_SaaSOrgRegister(assign(omit(values,["terms","password2"]),{message_id:messageId}) as OrgApi_SaaSOrgRegisterRequestBody);
+          result=await OrgApi_saaSOrgRegister(assign(omit(values,["terms","password2"]),{message_id:messageId}) as OrgApi_SaaSOrgRegisterRequestBody);
         }
         else{
           result=await UserAdminApi_invitedUserRegister(assign(omit(values,["terms","password2"]),hideInvite?{invitation_code:getInviteCode()}:{}) as UserAdminApi_InvitedUserRegisterRequestBody);
