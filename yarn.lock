@@ -2532,10 +2532,10 @@
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-2.0.2.tgz#59bc984ba098bf817670dfcf87f7302be8f62a4c"
   integrity sha512-6sz9tIyonGDWIynO2DnmEZhOpGFVpnfLNP9hSjgWI3LRE3O826zdOxUnHx1QiWL8h8CIWHcElb/ULy5R64/oOA==
 
-"@next-sdk/air-admin-service-sdk@^2.1.7":
-  version "2.1.7"
-  resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.7.tgz#c7de2dd9b9c563bd72d375661a87ef8034717080"
-  integrity sha512-i4L0w8dkHlp2wfvNYobDQcncyoGxEk/hr5KfII09hqnwbHIlNQGFOwmjOGLQiP+o8nxcv8NTrQsQ09Ma04aNEg==
+"@next-sdk/air-admin-service-sdk@^2.1.12":
+  version "2.1.12"
+  resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.12.tgz#575d54d42c334adbadc72027f25b59f99461892d"
+  integrity sha512-APb0+ZqCNNi28xn8pdbM0scPt4bICov7P0FPyGSj89FsBbSqAakzRetVVhP8BmrrzOGmYxFvpSSBLFlF0FLk8w==
 
 "@next-sdk/api-gateway-sdk@2.0.10":
   version "2.0.10"
@@ -2586,6 +2586,11 @@
   version "2.1.1"
   resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.1.1.tgz#44ef1a59bf2d5a50ab0d3a62860cb39379018c5c"
   integrity sha512-eGbCuSwZmzbz5AJdDLCM36euD7iTEfcnLmPVTk3UrbV0HT8b5xQdYj4KD0Jl4kldy3PlSat3XhT/mDpMg0V9XQ==
+
+"@next-sdk/user-service-sdk@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.1.4.tgz#d63b3c3cb13120c78f0c5704eb81a226544fdf79"
+  integrity sha512-jYZcGkVaJfhOVzM5gzFqMGnxDHO9WTaq1IVf8MajDe6ok3akwt2jm6jt2zPhhAJj15c15qMDCCeaWEpr5XRFaA==
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
@@ -2976,7 +2981,7 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@testing-library/dom@^7.28.1", "@testing-library/dom@^7.31.2":
+"@testing-library/dom@^7.28.1":
   version "7.31.2"
   resolved "https://registry.npmjs.org/@testing-library/dom/-/dom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
   integrity sha512-3UqjCpey6HiTZT92vODYLPxTBWlM8ZOOjr3LX5F37/VRipW2M1kX6I/Cm4VXzteZqfGfagg8yXywpcOgQBlNsQ==

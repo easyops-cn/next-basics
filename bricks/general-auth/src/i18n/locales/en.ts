@@ -29,6 +29,28 @@ const locale: Locale = {
     "Please input username、password、security code",
   [K.PLEASE_INPUT_PHRASE]: "Please input security code",
   [K.PLEASE_INPUT_PASSWORD_PHRASE]: "Please input password and security code",
+  [K.REGISTER]:"Sign up",
+  [K.ALREADY_HAVE_AN_ACCOUNT]: "Do you already have an account?",
+  [K.LOGIN_IMMEDIATELY]:"Login immediately",
+  [K.AGREE_TERMS]:"To continue you need to agree to ",
+  [K.UWINTECH_TERMS]:"UWinTech Web Service Terms",
+  [K.AGREE_TERMS_TIPS]:
+    "You must agree to the Terms of Service to register your account.",
+  [K.JOIN_THE_ORGANIZATION]: "Join the organization",
+  [K.REGISTER_COMMONLY]: "Register commonly",
+  [K.REGISTER_AND_JOIN]: "Register and join",
+  [K.USERNAME_TIPS]:"Please enter a {{minLength}} to {{maxLength}} digit username, starting with a letter or a number, and can only contain letters, numbers, underscores, dots",
+  [K.PLEASE_ENTER_VALID_EMAIL]: "Please enter valid email",
+  [K.GET_VERIFY_CODE]: "Get verification code",
+  [K.PLEASE_FILL_IN_VALID_PHONE_NUMBER]:"Please fill in a valid phone number",
+  [K.PLEASE_FILL_IN_INVITE_CODE]: "Please fill in a valid invitation code",
+  [K.TWO_PASSWORDS_ARE_INCONSISTENT]: "Two passwords are inconsistent",
+  [K.EMAIL]:"Email",
+  [K.PASSWORD_CONFIRM]:"Confirm password",
+  [K.PHONE]:"Phone",
+  [K.VERIFY_CODE]:"Verification code",
+  [K.INVITE_CODE]:"Invitation code",
+  [K.GET_VERIFY_CODE_TIPS]:"resend verification code {{count}} s"
 };
 
 export default locale;

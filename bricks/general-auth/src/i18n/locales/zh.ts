@@ -27,6 +27,27 @@ const locale: Locale = {
   [K.PLEASE_INPUT_PHRASE]: "请输入验证码",
   [K.PLEASE_INPUT_USERNAME_PASSWORD_PHRASE]: "请输入用户名、密码、验证码",
   [K.PLEASE_INPUT_USERNAME_PHRASE]: "请输入用户名、验证码",
+  [K.REGISTER]:"注册",
+  [K.ALREADY_HAVE_AN_ACCOUNT]:"已有帐户?",
+  [K.LOGIN_IMMEDIATELY]:"立即登录",
+  [K.AGREE_TERMS]:"注册帐号的同时，我同意",
+  [K.UWINTECH_TERMS]:"《优维科技网络服务条款》",
+  [K.AGREE_TERMS_TIPS]:"你必须同意网站服务条款才能注册账号",
+  [K.JOIN_THE_ORGANIZATION]:"加入企业",
+  [K.REGISTER_COMMONLY]:"普通注册",
+  [K.REGISTER_AND_JOIN]:"注册并加入",
+  [K.USERNAME_TIPS]:"{{minLength}}至{{maxLength}}个字符，以字母、数字开头，只能包含字母、数字、下划线、中划线、点",
+  [K.PLEASE_ENTER_VALID_EMAIL]: "请填写有效的邮箱",
+  [K.GET_VERIFY_CODE]: "获取验证码",
+  [K.PLEASE_FILL_IN_VALID_PHONE_NUMBER]: "请输入有效的手机号码",
+  [K.PLEASE_FILL_IN_INVITE_CODE]: "请输入有效的邀请码",
+  [K.TWO_PASSWORDS_ARE_INCONSISTENT]: "两次输入的密码不一致",
+  [K.EMAIL]:"邮箱",
+  [K.PASSWORD_CONFIRM]:"再次输入密码",
+  [K.PHONE]:"手机号码",
+  [K.VERIFY_CODE]:"验证码",
+  [K.INVITE_CODE]:"邀请码",
+  [K.GET_VERIFY_CODE_TIPS]:"重新发送{{count}}s"
 };
 
 export default locale;
