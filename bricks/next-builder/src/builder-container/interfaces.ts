@@ -62,16 +62,20 @@ export enum BuilderDataType {
 
 export type BuilderClipboard = BuilderClipboardOfCopy | BuilderClipboardOfCut;
 
-export interface BuilderClipboardOfCopy {
+export interface BuilderClipboardOfCopy extends BuilderClipboardBase {
   type: BuilderClipboardType.COPY;
   sourceId: string;
-  nodeType: string;
 }
 
-export interface BuilderClipboardOfCut {
+export interface BuilderClipboardOfCut extends BuilderClipboardBase {
   type: BuilderClipboardType.CUT;
   sourceInstanceId: string;
+}
+
+export interface BuilderClipboardBase {
+  type: BuilderClipboardType;
   nodeType: string;
+  nodeAlias?: string;
 }
 
 export enum BuilderClipboardType {

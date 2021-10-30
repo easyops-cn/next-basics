@@ -28,17 +28,18 @@ const mockUseBuilderContextMenuStatus =
   >;
 
 let clipboard: BuilderClipboard;
-const setClipboard = jest.fn();
+const legacySetClipboard = jest.fn();
 const setToolboxTab = jest.fn();
 const setEventStreamNodeId = jest.fn();
 const onConvertToTemplate = jest.fn();
 const onRouteSelect = jest.fn();
-
+let migrateClipboard = false;
 (
   useBuilderUIContext as jest.MockedFunction<typeof useBuilderUIContext>
 ).mockImplementation(() => ({
   clipboard,
-  setClipboard,
+  migrateClipboard,
+  legacySetClipboard,
   setToolboxTab,
   setEventStreamNodeId,
   onConvertToTemplate,
@@ -85,6 +86,7 @@ describe("BuilderContextMenu", () => {
   const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect;
   beforeEach(() => {
     clipboard = null;
+    migrateClipboard = false;
     Element.prototype.getBoundingClientRect = jest.fn(() => ({
       width: 100,
       height: 400,
@@ -370,12 +372,18 @@ describe("BuilderContextMenu", () => {
         brick: "my-brick",
       },
     });
-    const wrapper = shallow(<BuilderContextMenu />);
+    const onNodeCopy = jest.fn();
+    const wrapper = shallow(<BuilderContextMenu onNodeCopy={onNodeCopy} />);
     wrapper
       .find(Menu.Item)
       .filterWhere((n) => n.key() === "copy")
       .invoke("onClick")(null);
-    expect(setClipboard).toBeCalledWith({
+    expect(legacySetClipboard).toBeCalledWith({
+      type: BuilderClipboardType.COPY,
+      sourceId: "B-001",
+      nodeType: "brick",
+    });
+    expect(onNodeCopy).toBeCalledWith({
       type: BuilderClipboardType.COPY,
       sourceId: "B-001",
       nodeType: "brick",
@@ -393,12 +401,18 @@ describe("BuilderContextMenu", () => {
         instanceId: "instance-a",
       },
     });
-    const wrapper = shallow(<BuilderContextMenu />);
+    const onNodeCut = jest.fn();
+    const wrapper = shallow(<BuilderContextMenu onNodeCut={onNodeCut} />);
     wrapper
       .find(Menu.Item)
       .filterWhere((n) => n.key() === "cut")
       .invoke("onClick")(null);
-    expect(setClipboard).toBeCalledWith({
+    expect(legacySetClipboard).toBeCalledWith({
+      type: BuilderClipboardType.CUT,
+      sourceInstanceId: "instance-a",
+      nodeType: "brick",
+    });
+    expect(onNodeCut).toBeCalledWith({
       type: BuilderClipboardType.CUT,
       sourceInstanceId: "instance-a",
       nodeType: "brick",
@@ -410,6 +424,7 @@ describe("BuilderContextMenu", () => {
       type: BuilderClipboardType.COPY,
       sourceId: "B-007",
       nodeType: "brick",
+      nodeAlias: "my-brick",
     };
     mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
@@ -429,7 +444,7 @@ describe("BuilderContextMenu", () => {
       .find(Menu.Item)
       .filterWhere((n) => n.key() === "paste")
       .invoke("onClick")(null);
-    expect(setClipboard).toBeCalledWith(null);
+    expect(legacySetClipboard).toBeCalledWith(null);
     expect(onNodeCopyPaste).toBeCalledWith({
       sourceId: "B-007",
       targetId: "B-001",
@@ -460,11 +475,40 @@ describe("BuilderContextMenu", () => {
       .find(Menu.Item)
       .filterWhere((n) => n.key() === "paste")
       .invoke("onClick")(null);
-    expect(setClipboard).toBeCalledWith(null);
+    expect(legacySetClipboard).toBeCalledWith(null);
     expect(onNodeCutPaste).toBeCalledWith({
       sourceInstanceId: "instance-b",
       targetInstanceId: "instance-a",
     });
+  });
+
+  it("should clear clipboard", () => {
+    migrateClipboard = true;
+    clipboard = {
+      type: BuilderClipboardType.COPY,
+      sourceId: "B-007",
+      nodeType: "brick",
+    };
+    mockUseBuilderContextMenuStatus.mockReturnValue({
+      active: true,
+      node: {
+        $$uid: 1,
+        type: "brick",
+        id: "B-001",
+        brick: "my-brick",
+        instanceId: "instance-a",
+      },
+    });
+    const onClipboardClear = jest.fn();
+    const wrapper = shallow(
+      <BuilderContextMenu onClipboardClear={onClipboardClear} />
+    );
+    wrapper
+      .find(Menu.Item)
+      .filterWhere((n) => n.key() === "clear-clipboard")
+      .invoke("onClick")(null);
+    expect(legacySetClipboard).not.toBeCalled();
+    expect(onClipboardClear).toBeCalled();
   });
 
   it("should invoke onAskForAppendingBrick", () => {

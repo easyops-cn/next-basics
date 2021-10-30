@@ -106,6 +106,7 @@ describe("next-builder.builder-container", () => {
     const clipboardOfCopy: BuilderClipboard = {
       type: BuilderClipboardType.COPY,
       sourceId: "B-001",
+      nodeType: "brick",
     };
     wrapper.find(BuilderContainer).invoke("onClipboardChange")(clipboardOfCopy);
     expect(onClipboardChange).toBeCalledWith(
@@ -117,6 +118,7 @@ describe("next-builder.builder-container", () => {
     const clipboardOfCut: BuilderClipboard = {
       type: BuilderClipboardType.CUT,
       sourceInstanceId: "instance-a",
+      nodeType: "brick",
     };
     wrapper.find(BuilderContainer).invoke("onClipboardChange")(clipboardOfCut);
     expect(onClipboardChange).toBeCalledWith(
@@ -143,8 +145,22 @@ describe("next-builder.builder-container", () => {
     document.body.appendChild(element);
 
     const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onNodeCopy = jest.fn();
+    element.addEventListener("node.copy", onNodeCopy);
     const onNodeCopyPaste = jest.fn();
     element.addEventListener("node.copy.paste", onNodeCopyPaste);
+
+    const clipboard: BuilderClipboard = {
+      type: BuilderClipboardType.COPY,
+      sourceId: "B-001",
+      nodeType: "brick",
+    };
+    wrapper.find(BuilderContainer).invoke("onNodeCopy")(clipboard);
+    expect(onNodeCopy).toBeCalledWith(
+      expect.objectContaining({
+        detail: clipboard,
+      })
+    );
 
     const detail: BuilderPasteDetailOfCopy = {
       sourceId: "B-001",
@@ -168,8 +184,22 @@ describe("next-builder.builder-container", () => {
     document.body.appendChild(element);
 
     const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onNodeCut = jest.fn();
+    element.addEventListener("node.cut", onNodeCut);
     const onNodeCutPaste = jest.fn();
     element.addEventListener("node.cut.paste", onNodeCutPaste);
+
+    const clipboard: BuilderClipboard = {
+      type: BuilderClipboardType.CUT,
+      sourceInstanceId: "instance-a",
+      nodeType: "brick",
+    };
+    wrapper.find(BuilderContainer).invoke("onNodeCut")(clipboard);
+    expect(onNodeCut).toBeCalledWith(
+      expect.objectContaining({
+        detail: clipboard,
+      })
+    );
 
     const detail: BuilderPasteDetailOfCut = {
       sourceInstanceId: "instance-a",
@@ -181,6 +211,23 @@ describe("next-builder.builder-container", () => {
         detail,
       })
     );
+
+    document.body.removeChild(element);
+  });
+
+  it("should handle clear clipboard", () => {
+    const element = document.createElement(
+      "next-builder.builder-container"
+    ) as BuilderContainerElement;
+
+    document.body.appendChild(element);
+
+    const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onClipboardClear = jest.fn();
+    element.addEventListener("clipboard.clear", onClipboardClear);
+
+    wrapper.find(BuilderContainer).invoke("onClipboardClear")();
+    expect(onClipboardClear).toBeCalled();
 
     document.body.removeChild(element);
   });

@@ -1,5 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
+import * as brickKit from "@next-core/brick-kit";
 import {
   EventDetailOfNodeAdd,
   useBuilderDataManager,
@@ -7,7 +8,6 @@ import {
 import { BuilderContainer } from "./BuilderContainer";
 import { BuilderDataType, ToolboxTab } from "./interfaces";
 import { BuilderCanvas } from "./BuilderCanvas/BuilderCanvas";
-import * as brickKit from "@next-core/brick-kit";
 import { InstallExpandInfo } from "./BuilderContainer";
 
 jest.mock("@next-core/editor-bricks-helper");
@@ -86,7 +86,7 @@ const mockManager = {
     nodes: [],
     edges: [],
   })),
-};
+} as any;
 (useBuilderDataManager as jest.Mock).mockReturnValue(mockManager);
 
 describe("BuilderContainer", () => {
@@ -99,6 +99,7 @@ describe("BuilderContainer", () => {
     const wrapper = mount(
       <BuilderContainer
         ref={ref}
+        migrateClipboard
         dataSource={[
           {
             type: "bricks",
