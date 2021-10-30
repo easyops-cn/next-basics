@@ -15,11 +15,23 @@ import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import styles from "./GeneralSignup.module.css";
 import { Terms } from "./Terms";
-import { UserAdminApi_getPasswordConfig,UserAdminApi_invitedUserRegister,UserAdminApi_InvitedUserRegisterRequestBody  } from "@next-sdk/user-service-sdk";
-import { getHistory, getRuntime,httpErrorToString,authenticate} from "@next-core/brick-kit";
+import {
+  UserAdminApi_getPasswordConfig,
+  UserAdminApi_invitedUserRegister,
+  UserAdminApi_InvitedUserRegisterRequestBody,
+} from "@next-sdk/user-service-sdk";
+import {
+  getHistory,
+  getRuntime,
+  httpErrorToString,
+  authenticate,
+} from "@next-core/brick-kit";
 import loginPng from "../images/login.png";
-import { debounce, omit,assign } from "lodash";
-import { CustomerApi_sendApplicationVerificationCode,CustomerApi_SignupRequestBody,CustomerApi_signup } from "@next-sdk/air-admin-service-sdk";
+import { debounce, omit, assign } from "lodash";
+import {
+  CustomerApi_sendApplicationVerificationCode
+} from "@next-sdk/air-admin-service-sdk";
+import{OrgApi_SaaSOrgRegister,OrgApi_SaaSOrgRegisterRequestBody}from"@next-sdk/api-gateway-sdk";
 import { validateMap } from "./validateProvider";
 import resetLegacyIframe from "../shared/resetLegacyIframe";
 import { createLocation, Location } from "history";
@@ -54,13 +66,14 @@ export function GeneralSignup(): React.ReactElement {
     if (enabledFeatures["enable-backend-password-config"]) {
       (async () => {
         passwordLevel = "backend";
-        passwordConfigMap[passwordLevel] = await UserAdminApi_getPasswordConfig();
+        passwordConfigMap[passwordLevel] =
+          await UserAdminApi_getPasswordConfig();
       })();
     }
   }, []);
 
-  const MIN_USERNAME_LENGTH = 3;//特性开关
-  const MAX_USERNAME_LENGTH = 32;//特性开关
+  const MIN_USERNAME_LENGTH = 3; //特性开关
+  const MAX_USERNAME_LENGTH = 32; //特性开关
   const usernamePattern = new RegExp(
     `^[A-Za-z0-9][A-Za-z0-9|_\\-\\.]{${MIN_USERNAME_LENGTH - 1},${
       MAX_USERNAME_LENGTH - 1
@@ -134,28 +147,11 @@ export function GeneralSignup(): React.ReactElement {
     const result = await CustomerApi_sendApplicationVerificationCode({
       phone_number: form.getFieldValue("phone"),
     });
-    result.message_id && setMessageId(messageId);
-  };
-
-  const onFinish = async (values: any) => {
-/*       try {
-        if(isCommonSignup){
-          await CustomerApi_signup(assign(omit(values,["terms","password2"]),{message_id:messageId}) as CustomerApi_SignupRequestBody);
-        }
-        else{
-          await UserAdminApi_invitedUserRegister(assign(omit(values,["terms","password2"]),hideInvite?{invitation_code:getInviteCode()}:{}) as UserAdminApi_InvitedUserRegisterRequestBody);
-        }
-        message.success("注册成功");
-      } catch (error) {
-        Modal.error({
-          title:"注册失败",
-          content: httpErrorToString(error)
-        })
-      } */
+    result.message_id && setMessageId(result.message_id);
   };
 
   const redirect = async (
-    result: Record<string, any>,
+    result: Record<string, any>
   ): Promise<void> => {
     runtime.reloadSharedData();
     await runtime.reloadMicroApps();
@@ -176,6 +172,28 @@ export function GeneralSignup(): React.ReactElement {
     const redirect = createLocation(from);
     getHistory().push(redirect);
   };
+
+
+  const onFinish = async (values: any) => {
+    try {
+      let result:Record<string,any>;
+        if(isCommonSignup){
+          result=await OrgApi_SaaSOrgRegister(assign(omit(values,["terms","password2"]),{message_id:messageId}) as OrgApi_SaaSOrgRegisterRequestBody);
+        }
+        else{
+          result=await UserAdminApi_invitedUserRegister(assign(omit(values,["terms","password2"]),hideInvite?{invitation_code:getInviteCode()}:{}) as UserAdminApi_InvitedUserRegisterRequestBody);
+        }
+        redirect(result);
+        message.success("注册成功");
+      } catch (error) {
+        Modal.error({
+          title:"注册失败",
+          content: httpErrorToString(error)
+        })
+      }
+  };
+
+
   return (
     <>
       <div className={styles.signupWrapper}>
@@ -438,7 +456,7 @@ export function GeneralSignup(): React.ReactElement {
               <Form.Item>
                 <div style={{ textAlign: "center" }}>
                   {t(K.ALREADY_HAVE_AN_ACCOUNT)}
-                  <a onClick={() => {}}>{t(K.LOGIN_IMMEDIATELY)}</a>
+                  <a onClick={() => {getHistory().push(createLocation({pathname:"/login"}))}}>{t(K.LOGIN_IMMEDIATELY)}</a>
                 </div>
               </Form.Item>
             </Form>
