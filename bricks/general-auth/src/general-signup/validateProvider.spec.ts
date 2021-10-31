@@ -57,17 +57,6 @@ describe("validate test", () => {
       expect(callbackFn).toHaveBeenCalledWith("已存在该用户名");
     });
 
-    it("validate invalid name", async () => {
-      (CustomerApi_validateUser as jest.Mock).mockResolvedValueOnce({
-        validateInfo: "invalid_user",
-      });
-      const callbackFn = jest.fn();
-      await airNameValidValidator("ccd", callbackFn, jest.fn);
-      expect(callbackFn).toHaveBeenCalledWith(
-        "请输入不超过32位的用户名，且以字母开头，仅支持大、小写字母、数字和短横线"
-      );
-    });
-
     it("validate api error", async () => {
       (CustomerApi_validateUser as jest.Mock).mockRejectedValueOnce({
         error: "server error",
@@ -108,15 +97,6 @@ describe("validate test", () => {
       const callbackFn = jest.fn();
       await airEmailValidValidator("ccd", callbackFn, jest.fn);
       expect(callbackFn).toHaveBeenCalledWith("该邮箱已经被注册");
-    });
-
-    it("validate invalid_email", async () => {
-      (CustomerApi_validateEmail as jest.Mock).mockResolvedValueOnce({
-        validateInfo: "invalid_email",
-      });
-      const callbackFn = jest.fn();
-      await airEmailValidValidator("ccd", callbackFn, jest.fn);
-      expect(callbackFn).toHaveBeenCalledWith("请输入正确的邮箱格式");
     });
 
     it("validate api error", async () => {

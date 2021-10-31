@@ -15,11 +15,7 @@ import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import styles from "./GeneralSignup.module.css";
 import { Terms } from "./Terms";
-import {
-  UserAdminApi_getPasswordConfig,
-  UserAdminApi_invitedUserRegister,
-  UserAdminApi_InvitedUserRegisterRequestBody,
-} from "@next-sdk/user-service-sdk";
+import { UserAdminApi_getPasswordConfig } from "@next-sdk/user-service-sdk";
 import {
   getHistory,
   getRuntime,
@@ -28,10 +24,13 @@ import {
 } from "@next-core/brick-kit";
 import loginPng from "../images/login.png";
 import { debounce, omit, assign } from "lodash";
+import { CustomerApi_sendApplicationVerificationCode } from "@next-sdk/air-admin-service-sdk";
 import {
-  CustomerApi_sendApplicationVerificationCode
-} from "@next-sdk/air-admin-service-sdk";
-import{OrgApi_saaSOrgRegister,OrgApi_SaaSOrgRegisterRequestBody}from"@next-sdk/api-gateway-sdk";
+  OrgApi_saaSOrgRegister,
+  OrgApi_SaaSOrgRegisterRequestBody,
+  AuthApi_register,
+  AuthApi_RegisterRequestBody,
+} from "@next-sdk/api-gateway-sdk";
 import { validateMap } from "./validateProvider";
 import resetLegacyIframe from "../shared/resetLegacyIframe";
 import { createLocation, Location } from "history";
@@ -150,9 +149,7 @@ export function GeneralSignup(): React.ReactElement {
     result.message_id && setMessageId(result.message_id);
   };
 
-  const redirect = async (
-    result: Record<string, any>
-  ): Promise<void> => {
+  const redirect = async (result: Record<string, any>): Promise<void> => {
     runtime.reloadSharedData();
     await runtime.reloadMicroApps();
     resetLegacyIframe();
@@ -173,26 +170,36 @@ export function GeneralSignup(): React.ReactElement {
     getHistory().push(redirect);
   };
 
-
   const onFinish = async (values: any) => {
     try {
-      let result:Record<string,any>;
-        if(isCommonSignup){
-          result=await OrgApi_saaSOrgRegister(assign(omit(values,["terms","password2"]),{message_id:messageId}) as OrgApi_SaaSOrgRegisterRequestBody);
-        }
-        else{
-          result=await UserAdminApi_invitedUserRegister(assign(omit(values,["terms","password2"]),hideInvite?{invitation_code:getInviteCode()}:{}) as UserAdminApi_InvitedUserRegisterRequestBody);
-        }
-        redirect(result);
-        message.success("注册成功");
-      } catch (error) {
-        Modal.error({
-          title:"注册失败",
-          content: httpErrorToString(error)
-        })
+      let result: Record<string, any>;
+      if (isCommonSignup) {
+        result = await OrgApi_saaSOrgRegister(
+          assign(omit(values, ["terms", "password2"]), {
+            message_id: messageId,
+          }) as OrgApi_SaaSOrgRegisterRequestBody
+        );
+      } else {
+        result = await AuthApi_register(
+          assign(
+            omit(values, ["terms", "password2", "username", "invitation_code"]),
+            hideInvite
+              ? { invite: getInviteCode(), name: values["username"] }
+              : { name: values["username"] }
+          ) as AuthApi_RegisterRequestBody
+        );
       }
+      if (result.loggedIn) {
+        redirect(result);
+      }
+      message.success(t(K.REGISTER_SUCCESS));
+    } catch (error) {
+      Modal.error({
+        title: t(K.REGISTER_FAILED),
+        content: httpErrorToString(error),
+      });
+    }
   };
-
 
   return (
     <>
@@ -223,6 +230,7 @@ export function GeneralSignup(): React.ReactElement {
                     setIsCommonSignup(false);
                   }}
                   style={{ alignSelf: "flex-end" }}
+                  id="JumpToJoinFormLink"
                 >
                   {t(K.JOIN_THE_ORGANIZATION)} <RightOutlined />
                 </a>
@@ -231,6 +239,7 @@ export function GeneralSignup(): React.ReactElement {
                   onClick={() => {
                     setIsCommonSignup(true);
                   }}
+                  id="JumpToCommonFormLink"
                 >
                   <LeftOutlined /> {t(K.REGISTER_COMMONLY)}
                 </a>
@@ -367,6 +376,7 @@ export function GeneralSignup(): React.ReactElement {
                             disabled={verifyBtnDisabled}
                             type="text"
                             onClick={handleVerifyBtnClick}
+                            id="verifyBtn"
                           >
                             {content}
                           </Button>
@@ -435,6 +445,7 @@ export function GeneralSignup(): React.ReactElement {
                     onClick={() => {
                       showTerms();
                     }}
+                    id="TermsLink"
                   >
                     {t(K.UWINTECH_TERMS)}
                   </a>
@@ -449,6 +460,7 @@ export function GeneralSignup(): React.ReactElement {
                     height: 34,
                     /* bottom: this.state.security_codeEnabled ? "-45px" : "0", */
                   }}
+                  id="submitBtn"
                 >
                   {t(K.REGISTER)}
                 </Button>
@@ -456,18 +468,25 @@ export function GeneralSignup(): React.ReactElement {
               <Form.Item>
                 <div style={{ textAlign: "center" }}>
                   {t(K.ALREADY_HAVE_AN_ACCOUNT)}
-                  <a onClick={() => {getHistory().push(createLocation({pathname:"/login"}))}}>{t(K.LOGIN_IMMEDIATELY)}</a>
+                  <a
+                    id="LogInLink"
+                    onClick={() => {
+                      getHistory().push(createLocation({ pathname: "/login" }));
+                    }}
+                  >
+                    {t(K.LOGIN_IMMEDIATELY)}
+                  </a>
                 </div>
               </Form.Item>
             </Form>
           </Card>
           <Modal
             visible={isTermsVisible}
-            title="服务条款"
+            title={t(K.UWINTECH_TERMS)}
             width={598}
             okType="default"
-            cancelText="我不同意"
-            okText="我已阅读并同意"
+            cancelText={t(K.DISAGREE)}
+            okText={t(K.AGREE)}
             closable={false}
             onCancel={() => {
               disagreeTerms();

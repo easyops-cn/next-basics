@@ -2537,7 +2537,7 @@
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.12.tgz#575d54d42c334adbadc72027f25b59f99461892d"
   integrity sha512-APb0+ZqCNNi28xn8pdbM0scPt4bICov7P0FPyGSj89FsBbSqAakzRetVVhP8BmrrzOGmYxFvpSSBLFlF0FLk8w==
 
-"@next-sdk/api-gateway-sdk@2.0.15":
+"@next-sdk/api-gateway-sdk@^2.0.15":
   version "2.0.15"
   resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.15.tgz#349647103846e17942e8ded9ea38d8f1284eb425"
   integrity sha512-enbk22YadePzXEeH3/hV6/VzKz07EextICrmm1XnL+PBMsxK3x66Q12YKkwXBO17f4dSoaBkKiYy64sca/cmRg==
@@ -2586,6 +2586,11 @@
   version "2.1.1"
   resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.1.1.tgz#44ef1a59bf2d5a50ab0d3a62860cb39379018c5c"
   integrity sha512-eGbCuSwZmzbz5AJdDLCM36euD7iTEfcnLmPVTk3UrbV0HT8b5xQdYj4KD0Jl4kldy3PlSat3XhT/mDpMg0V9XQ==
+
+"@next-sdk/user-service-sdk@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.npmjs.org/@next-sdk/user-service-sdk/-/user-service-sdk-2.1.4.tgz#d63b3c3cb13120c78f0c5704eb81a226544fdf79"
+  integrity sha512-jYZcGkVaJfhOVzM5gzFqMGnxDHO9WTaq1IVf8MajDe6ok3akwt2jm6jt2zPhhAJj15c15qMDCCeaWEpr5XRFaA==
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
