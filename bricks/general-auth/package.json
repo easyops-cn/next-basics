@@ -22,7 +22,8 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
   "devDependencies": {
-    "@next-sdk/api-gateway-sdk": "2.0.10",
+    "@next-sdk/api-gateway-sdk": "^2.0.15",
+    "@next-sdk/user-service-sdk": "^2.1.4",
     "@next-sdk/auth-sdk": "^1.2.0",
     "@types/qrcode.react": "^1.0.2",
     "qrcode.react": "^1.0.1"

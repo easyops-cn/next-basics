@@ -608,7 +608,7 @@ export class LegacyGeneralLogin extends React.Component<
                 </a>
               )}
               {get(enabledFeatures, "sign-up-for-free-enabled") && (
-                <a href="/login/signup">{t(K.REGISTER_ACCOUNT)}</a>
+                <a href="/signup">{t(K.REGISTER_ACCOUNT)}</a>
               )}
             </div>
           </Form.Item>
