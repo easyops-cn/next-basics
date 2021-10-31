@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.153.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.152.0...@next-bricks/basic-bricks@1.153.0) (2021-10-31)
+
+
+### Features
+
+* **general-signup:** first commit ([5eac8d7](https://github.com/easyops-cn/next-basics/commit/5eac8d7606e753bd84074af73ec7ef7aad3e1234)), closes [Refs#EASYOPSAIR-12](https://github.com/Refs/issues/EASYOPSAIR-12)
+
+
+
+
+
 # [1.152.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.151.0...@next-bricks/basic-bricks@1.152.0) (2021-10-30)
 
 

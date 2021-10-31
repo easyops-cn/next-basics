@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/general-auth",
-  "version": "1.11.1",
+  "version": "1.12.0",
   "description": "A brick package for general auth",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/general-auth",
   "license": "GPL-3.0",
@@ -23,8 +23,8 @@
   },
   "devDependencies": {
     "@next-sdk/api-gateway-sdk": "^2.0.15",
-    "@next-sdk/user-service-sdk": "^2.1.4",
     "@next-sdk/auth-sdk": "^1.2.0",
+    "@next-sdk/user-service-sdk": "^2.1.4",
     "@types/qrcode.react": "^1.0.2",
     "qrcode.react": "^1.0.1"
   },

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.11.1...@next-bricks/general-auth@1.12.0) (2021-10-31)
+
+
+### Features
+
+* 2 ([fc56bfb](https://github.com/easyops-cn/next-basics/commit/fc56bfb730ec149e8d1792fcb2d71cddbbad50d4)), closes [Refs#EASYOPSAIR-12](https://github.com/Refs/issues/EASYOPSAIR-12)
+* 3 ([fc90072](https://github.com/easyops-cn/next-basics/commit/fc900723f58062aa5e97a3cd915833bd378df797)), closes [Refs#EASYOPSAIR-12](https://github.com/Refs/issues/EASYOPSAIR-12)
+* **general-signup:** first commit ([5eac8d7](https://github.com/easyops-cn/next-basics/commit/5eac8d7606e753bd84074af73ec7ef7aad3e1234)), closes [Refs#EASYOPSAIR-12](https://github.com/Refs/issues/EASYOPSAIR-12)
+* make up unit test ([a4c72c4](https://github.com/easyops-cn/next-basics/commit/a4c72c4f0558b01228ae5af009b0b17a46a0747c)), closes [Refs#EASYOPSAIR-12](https://github.com/Refs/issues/EASYOPSAIR-12)
+
+
+
+
+
 ## [1.11.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.11.0...@next-bricks/general-auth@1.11.1) (2021-10-19)
 
 
