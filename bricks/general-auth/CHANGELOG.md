@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.0...@next-bricks/general-auth@1.12.1) (2021-11-01)
+
+
+### Bug Fixes
+
+* fix the bugs of terms and api ([b278cf8](https://github.com/easyops-cn/next-basics/commit/b278cf85664334b28cd35fa345fb22c3a720ec42)), closes [Refs#EASYOPSAIR-12](https://github.com/Refs/issues/EASYOPSAIR-12)
+
+
+
+
+
 # [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.11.1...@next-bricks/general-auth@1.12.0) (2021-10-31)
 
 
