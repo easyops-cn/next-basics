@@ -42,6 +42,8 @@ import {
   BrickOptionItem,
   BuilderAppendBrickOrRouteDetail,
   BuilderClipboard,
+  BuilderClipboardOfCopy,
+  BuilderClipboardOfCut,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
   BuilderPasteDetailOfCut,
@@ -134,12 +136,21 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   eventStreamNodeId: string;
 
+  @property({ type: Boolean })
+  migrateClipboard: boolean;
+
+  @property({ attribute: false })
+  clipboardData: BuilderClipboard;
+
+  /** @deprecated */
   @property()
   clipboardType: BuilderClipboardType;
 
+  /** @deprecated */
   @property()
   clipboardSource: string;
 
+  /** @deprecated */
   @property()
   clipboardNodeType: string;
 
@@ -291,12 +302,23 @@ export class BuilderContainerElement extends UpdatingElement {
   })
   private _convertToTemplateEmitter: EventEmitter<BuilderRuntimeNode>;
 
+  /** @deprecated */
   @event({
     type: "clipboard.change",
   })
   private _eventClipboardChangeEmitter: EventEmitter<{
     clipboard: BuilderClipboard;
   }>;
+
+  @event({
+    type: "node.copy",
+  })
+  private _eventNodeCopyEmitter: EventEmitter<BuilderClipboardOfCopy>;
+
+  @event({
+    type: "node.cut",
+  })
+  private _eventNodeCutEmitter: EventEmitter<BuilderClipboardOfCut>;
 
   @event({
     type: "node.copy.paste",
@@ -307,6 +329,11 @@ export class BuilderContainerElement extends UpdatingElement {
     type: "node.cut.paste",
   })
   private _eventNodeCutPasteEmitter: EventEmitter<BuilderPasteDetailOfCut>;
+
+  @event({
+    type: "clipboard.clear",
+  })
+  private _eventClipboardClearEmitter: EventEmitter<void>;
 
   @event({
     type: "node.appendBrick.ask",
@@ -447,6 +474,7 @@ export class BuilderContainerElement extends UpdatingElement {
     this._workbenchCloseEmitter.emit();
   };
 
+  /** @deprecated */
   private _handleClipboardChange = (clipboard: BuilderClipboard): void => {
     if (
       !isEqual(
@@ -467,6 +495,18 @@ export class BuilderContainerElement extends UpdatingElement {
       this.clipboardNodeType = clipboard?.nodeType;
       this._eventClipboardChangeEmitter.emit({ clipboard });
     }
+  };
+
+  private _handleClipboardClear = (): void => {
+    this._eventClipboardClearEmitter.emit();
+  };
+
+  private _handleNodeCopy = (detail: BuilderClipboardOfCopy): void => {
+    this._eventNodeCopyEmitter.emit(detail);
+  };
+
+  private _handleNodeCut = (detail: BuilderClipboardOfCut): void => {
+    this._eventNodeCutEmitter.emit(detail);
   };
 
   private _handleNodeCopyPaste = (detail: BuilderPasteDetailOfCopy): void => {
@@ -618,6 +658,8 @@ export class BuilderContainerElement extends UpdatingElement {
                 processing={this.processing}
                 highlightTokens={this.highlightTokens}
                 containerForContextModal={this.containerForContextModal}
+                migrateClipboard={this.migrateClipboard}
+                clipboardData={this.clipboardData}
                 initialFullscreen={this.fullscreen}
                 initialToolboxTab={this.toolboxTab}
                 initialEventStreamNodeId={this.eventStreamNodeId}
@@ -636,8 +678,11 @@ export class BuilderContainerElement extends UpdatingElement {
                 onSwitchToolboxTab={this._handleSwitchToolboxTab}
                 onSelectEventStreamNode={this._handleSelectEventsViewNode}
                 onClipboardChange={this._handleClipboardChange}
+                onNodeCopy={this._handleNodeCopy}
+                onNodeCut={this._handleNodeCut}
                 onNodeCopyPaste={this._handleNodeCopyPaste}
                 onNodeCutPaste={this._handleNodeCutPaste}
+                onClipboardClear={this._handleClipboardClear}
                 onContextUpdate={this._handleContextUpdate}
                 onRouteSelect={this._handleRouteSelect}
                 onTemplateSelect={this._handleTemplateSelect}

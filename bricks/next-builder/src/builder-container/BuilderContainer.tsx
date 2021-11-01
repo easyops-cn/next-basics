@@ -1,5 +1,7 @@
 import React from "react";
 import classNames from "classnames";
+import { noop } from "lodash";
+import { getRuntime } from "@next-core/brick-kit";
 import {
   BuilderRouteOrBrickNode,
   ContextConf,
@@ -37,19 +39,18 @@ import { BuilderToolbar } from "./BuilderToolbar/BuilderToolbar";
 import { getBuilderClipboard } from "./getBuilderClipboard";
 import { defaultToolboxTab } from "./constants";
 import { EventStreamNode } from "./EventStreamCanvas/interfaces";
-import { getRuntime } from "@next-core/brick-kit";
 import { StoriesCache } from "../data-providers/utils/StoriesCache";
 
 import styles from "./BuilderContainer.module.css";
 
 export const InstallExpandInfo = async (
   e: CustomEvent<EventDetailOfNodeAdd>,
-  manager: any
-) => {
-  const store = StoriesCache.getInstance();
+  manager: ReturnType<typeof useBuilderDataManager>
+): Promise<void> => {
   if (
     getRuntime().getFeatureFlags()["next-builder-stories-json-lazy-loading"]
   ) {
+    const store = StoriesCache.getInstance();
     const id = e.detail.nodeData.brick;
     if (!store.hasInstalled(id)) {
       const res = await store.install(
@@ -68,6 +69,7 @@ export const InstallExpandInfo = async (
     }
   }
 };
+
 export interface BuilderContainerProps extends BuilderContextMenuProps {
   appId?: string;
   dataSource?: BuilderRouteOrBrickNode[];
@@ -82,11 +84,16 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   processing?: boolean;
   highlightTokens?: HighlightTokenSettings[];
   containerForContextModal?: string;
+  migrateClipboard?: boolean;
+  clipboardData?: BuilderClipboard;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
   initialEventStreamNodeId?: string;
+  /** @deprecated */
   initialClipboardType?: BuilderClipboardType;
+  /** @deprecated */
   initialClipboardSource?: string;
+  /** @deprecated */
   initialClipboardNodeType?: string;
   initialCanvasIndex?: number;
   initialStoryboardQuery?: string;
@@ -98,6 +105,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onToggleFullscreen?: (fullscreen?: boolean) => void;
   onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
   onSelectEventStreamNode?: (nodeId?: string) => void;
+  /** @deprecated */
   onClipboardChange?: (clipboard: BuilderClipboard) => void;
   onContextUpdate?: (context: ContextConf[]) => void;
   onRouteSelect?: (route: BuilderRouteNode) => void;
@@ -131,6 +139,8 @@ export function LegacyBuilderContainer(
     processing,
     highlightTokens,
     containerForContextModal,
+    migrateClipboard,
+    clipboardData,
     initialFullscreen,
     initialToolboxTab,
     initialEventStreamNodeId,
@@ -151,8 +161,11 @@ export function LegacyBuilderContainer(
     onSwitchToolboxTab,
     onSelectEventStreamNode,
     onClipboardChange,
+    onNodeCopy,
+    onNodeCut,
     onNodeCopyPaste,
     onNodeCutPaste,
+    onClipboardClear,
     onContextUpdate,
     onRouteSelect,
     onTemplateSelect,
@@ -185,7 +198,7 @@ export function LegacyBuilderContainer(
   );
   const [dataType, setDataType] = React.useState<BuilderDataType>();
 
-  const memoClipboard = React.useMemo(
+  const memoLegacyClipboard = React.useMemo(
     () =>
       getBuilderClipboard(
         initialClipboardType,
@@ -194,8 +207,8 @@ export function LegacyBuilderContainer(
       ),
     [initialClipboardType, initialClipboardSource, initialClipboardNodeType]
   );
-  const [clipboard, setClipboard] =
-    React.useState<BuilderClipboard>(memoClipboard);
+  const [legacyClipboard, legacySetClipboard] =
+    React.useState<BuilderClipboard>(memoLegacyClipboard);
 
   const memoCanvasIndex = React.useMemo(
     () => initialCanvasIndex,
@@ -334,12 +347,14 @@ export function LegacyBuilderContainer(
   }, [eventStreamNodeId, onSelectEventStreamNode]);
 
   React.useEffect(() => {
-    setClipboard(memoClipboard);
-  }, [memoClipboard]);
+    legacySetClipboard(memoLegacyClipboard);
+  }, [memoLegacyClipboard]);
 
   React.useEffect(() => {
-    onClipboardChange?.(clipboard);
-  }, [clipboard, onClipboardChange]);
+    if (!migrateClipboard) {
+      onClipboardChange?.(legacyClipboard);
+    }
+  }, [legacyClipboard, migrateClipboard, onClipboardChange]);
 
   React.useEffect(() => {
     onSwitchCanvasIndex?.(canvasIndex);
@@ -370,6 +385,7 @@ export function LegacyBuilderContainer(
         snippetList,
         processing,
         containerForContextModal,
+        migrateClipboard,
         fullscreen,
         setFullscreen,
         toolboxTab,
@@ -378,8 +394,8 @@ export function LegacyBuilderContainer(
         setHighlightNodes,
         eventStreamNodeId,
         setEventStreamNodeId,
-        clipboard,
-        setClipboard,
+        clipboard: migrateClipboard ? clipboardData : legacyClipboard,
+        legacySetClipboard: migrateClipboard ? noop : legacySetClipboard,
         canvasIndex,
         setCanvasIndex,
         storyboardQuery,
@@ -419,8 +435,11 @@ export function LegacyBuilderContainer(
           onAskForDeletingNode={onAskForDeletingNode}
           onAskForAppendingBrick={onAskForAppendingBrick}
           onAskForAppendingRoute={onAskForAppendingRoute}
+          onNodeCopy={onNodeCopy}
+          onNodeCut={onNodeCut}
           onNodeCopyPaste={onNodeCopyPaste}
           onNodeCutPaste={onNodeCutPaste}
+          onClipboardClear={onClipboardClear}
         />
       </div>
     </BuilderUIContext.Provider>

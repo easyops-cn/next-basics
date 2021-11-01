@@ -6,3 +6,17 @@
   right: 0;
   z-index: 110;
 }
+
+.pasteNameWrapper {
+  color: var(--text-color-disabled);
+  margin-left: 0.5em;
+}
+
+.pasteName {
+  display: inline-block;
+  vertical-align: bottom;
+  max-width: 8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -29,6 +29,7 @@ const locale: Locale = {
   [K.NODE_ACTION_COPY]: "Copy",
   [K.NODE_ACTION_CUT]: "Cut",
   [K.NODE_ACTION_PASTE]: "Paste",
+  [K.NODE_ACTION_CLEAR_CLIPBOARD]: "Clear clipboard",
   [K.NODE_ACTION_APPEND_BRICK]: "Append brick",
   [K.NODE_ACTION_APPEND_ROUTE]: "Append route",
   [K.NODE_ACTION_CONVERT_TO_TEMPLATE]: "Convert to template",

@@ -26,6 +26,7 @@ export interface ContextOfBuilderUI {
   snippetList?: BuilderSnippetNode[];
   processing?: boolean;
   containerForContextModal?: string;
+  migrateClipboard?: boolean;
   fullscreen?: boolean;
   setFullscreen?: React.Dispatch<React.SetStateAction<boolean>>;
   highlightNodes?: Set<number>;
@@ -35,7 +36,7 @@ export interface ContextOfBuilderUI {
   eventStreamNodeId?: string;
   setEventStreamNodeId?: React.Dispatch<React.SetStateAction<string>>;
   clipboard?: BuilderClipboard;
-  setClipboard?: React.Dispatch<React.SetStateAction<BuilderClipboard>>;
+  legacySetClipboard?: React.Dispatch<React.SetStateAction<BuilderClipboard>>;
   canvasIndex?: number;
   setCanvasIndex?: React.Dispatch<React.SetStateAction<number>>;
   storyboardQuery?: string;

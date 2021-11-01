@@ -13,6 +13,9 @@ import { useTranslation } from "react-i18next";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import {
   BuilderAppendBrickOrRouteDetail,
+  BuilderClipboard,
+  BuilderClipboardOfCopy,
+  BuilderClipboardOfCut,
   BuilderClipboardType,
   BuilderPasteDetailOfCopy,
   BuilderPasteDetailOfCut,
@@ -25,16 +28,22 @@ import styles from "./BuilderContextMenu.module.css";
 
 export interface BuilderContextMenuProps {
   onAskForDeletingNode?: (node: BuilderRuntimeNode) => void;
+  onNodeCopy?: (detail: BuilderClipboardOfCopy) => void;
+  onNodeCut?: (detail: BuilderClipboardOfCut) => void;
   onNodeCopyPaste?: (detail: BuilderPasteDetailOfCopy) => void;
   onNodeCutPaste?: (detail: BuilderPasteDetailOfCut) => void;
+  onClipboardClear?: () => void;
   onAskForAppendingBrick?: (detail: BuilderAppendBrickOrRouteDetail) => void;
   onAskForAppendingRoute?: (detail: BuilderAppendBrickOrRouteDetail) => void;
 }
 
 export function BuilderContextMenu({
   onAskForDeletingNode,
+  onNodeCopy,
+  onNodeCut,
   onNodeCopyPaste,
   onNodeCutPaste,
+  onClipboardClear,
   onAskForAppendingBrick,
   onAskForAppendingRoute,
 }: BuilderContextMenuProps): React.ReactElement {
@@ -44,7 +53,8 @@ export function BuilderContextMenu({
   const { rootId } = useBuilderData();
   const {
     clipboard,
-    setClipboard,
+    migrateClipboard,
+    legacySetClipboard,
     setToolboxTab,
     setEventStreamNodeId,
     onConvertToTemplate,
@@ -78,20 +88,26 @@ export function BuilderContextMenu({
   }, [contextMenuStatus.node, setEventStreamNodeId, setToolboxTab]);
 
   const handleCopyNode = React.useCallback(() => {
-    setClipboard({
+    const data: BuilderClipboard = {
       type: BuilderClipboardType.COPY,
       sourceId: contextMenuStatus.node.id,
       nodeType: contextMenuStatus.node.type,
-    });
-  }, [contextMenuStatus.node, setClipboard]);
+      nodeAlias: contextMenuStatus.node.alias,
+    };
+    onNodeCopy(data);
+    legacySetClipboard(data);
+  }, [contextMenuStatus.node, onNodeCopy, legacySetClipboard]);
 
   const handleCutNode = React.useCallback(() => {
-    setClipboard({
+    const data: BuilderClipboard = {
       type: BuilderClipboardType.CUT,
       sourceInstanceId: contextMenuStatus.node.instanceId,
       nodeType: contextMenuStatus.node.type,
-    });
-  }, [contextMenuStatus.node, setClipboard]);
+      nodeAlias: contextMenuStatus.node.alias,
+    };
+    onNodeCut(data);
+    legacySetClipboard(data);
+  }, [contextMenuStatus.node, onNodeCut, legacySetClipboard]);
 
   const handlePasteNode = React.useCallback(() => {
     if (clipboard.type === BuilderClipboardType.CUT) {
@@ -105,14 +121,18 @@ export function BuilderContextMenu({
         targetId: contextMenuStatus.node.id,
       });
     }
-    setClipboard(null);
+    legacySetClipboard(null);
   }, [
     clipboard,
     contextMenuStatus.node,
     onNodeCopyPaste,
     onNodeCutPaste,
-    setClipboard,
+    legacySetClipboard,
   ]);
+
+  const handleClearClipboard = React.useCallback(() => {
+    onClipboardClear();
+  }, [onClipboardClear]);
 
   const handleConvertToTemplate = React.useCallback(() => {
     onConvertToTemplate(contextMenuStatus.node);
@@ -231,7 +251,22 @@ export function BuilderContextMenu({
           </Menu.Item>
           <Menu.Item key="paste" onClick={handlePasteNode} disabled={!canPaste}>
             {t(K.NODE_ACTION_PASTE)}
+            {clipboard?.nodeAlias ? (
+              <span className={styles.pasteNameWrapper}>
+                (<span className={styles.pasteName}>{clipboard.nodeAlias}</span>
+                )
+              </span>
+            ) : null}
           </Menu.Item>
+          {migrateClipboard && (
+            <Menu.Item
+              key="clear-clipboard"
+              onClick={handleClearClipboard}
+              disabled={!clipboard}
+            >
+              {t(K.NODE_ACTION_CLEAR_CLIPBOARD)}
+            </Menu.Item>
+          )}
           {!activeNodeIsRoot && (
             <Menu.Item
               key="convert-to-template"

@@ -29,6 +29,7 @@ const locale: Locale = {
   [K.NODE_ACTION_COPY]: "复制",
   [K.NODE_ACTION_CUT]: "剪切",
   [K.NODE_ACTION_PASTE]: "粘贴",
+  [K.NODE_ACTION_CLEAR_CLIPBOARD]: "清除剪贴板",
   [K.NODE_ACTION_CONVERT_TO_TEMPLATE]: "转换为模板",
   [K.NODE_ACTION_APPEND_BRICK]: "添加子构件",
   [K.NODE_ACTION_APPEND_ROUTE]: "添加子路由",
