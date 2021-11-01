@@ -32,3 +32,6 @@
     padding: 0;
   }
 }
+.displayBrickContainerFaded {
+  opacity: 0.3;
+}
