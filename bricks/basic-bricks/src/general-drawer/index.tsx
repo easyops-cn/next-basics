@@ -162,6 +162,7 @@ export class GeneralDrawerElement extends UpdatingElement {
    */
   @property({ type: Boolean })
   isFloat: boolean;
+  hasOuterSwitch: boolean;
 
   constructor() {
     super();
@@ -200,7 +201,7 @@ export class GeneralDrawerElement extends UpdatingElement {
         }
       }
 
-      if (!this.closable) {
+      if (!this.closable && !this.hasOuterSwitch) {
         return;
       }
 
@@ -211,13 +212,27 @@ export class GeneralDrawerElement extends UpdatingElement {
         ) {
           break;
         }
+        const left = window.innerWidth - (this.width + (this.isFloat ? 30 : 0));
         if (
-          dom.nodeName &&
-          dom.nodeName.toLowerCase() === "button" &&
-          dom.className.includes("ant-drawer-close")
+          (dom.nodeName &&
+            dom.nodeName.toLowerCase() === "button" &&
+            dom.className.includes("ant-drawer-close")) ||
+          (this.hasOuterSwitch &&
+            dom.className.includes("ant-drawer-content-wrapper") &&
+            e.clientX < left)
         ) {
           e.stopPropagation();
           this.close();
+          break;
+        }
+        if (
+          this.hasOuterSwitch &&
+          dom.nodeName &&
+          dom.className.includes("ant-drawer-content-wrapper") &&
+          !dom.parentElement.className.includes("ant-drawer-open")
+        ) {
+          e.stopPropagation();
+          this.open();
           break;
         }
       }
@@ -249,6 +264,7 @@ export class GeneralDrawerElement extends UpdatingElement {
             mask={this.mask}
             configProps={this.configProps}
             isFloat={this.isFloat}
+            hasOuterSwitch={this.hasOuterSwitch}
           />
         </BrickWrapper>,
         this._mountPoint

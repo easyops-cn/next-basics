@@ -18,6 +18,7 @@ interface GeneralDrawerProps {
   headerStyle?: Record<string, any>;
   configProps?: DrawerProps;
   isFloat?: boolean;
+  hasOuterSwitch?: boolean;
 }
 
 export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
@@ -53,6 +54,18 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       setMaxContentHeight(height);
     }
   }, [props.hasFooter]);
+  const classNameList = [];
+  if (props.isFloat) {
+    classNameList.push("floatDrawer");
+  }
+  if (
+    props.hasOuterSwitch &&
+    (!props.configProps ||
+      !props.configProps.placement ||
+      props.configProps.placement === "right")
+  ) {
+    classNameList.push("switch");
+  }
 
   return (
     <Drawer
@@ -66,7 +79,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       drawerStyle={props.drawerStyle}
       mask={props.mask}
       headerStyle={props.headerStyle}
-      className={props.isFloat ? "floatDrawer" : ""}
+      className={classNameList.join(" ")}
     >
       <Spin spinning={props.loading} tip="Loading...">
         <div className="content" style={{ maxHeight: maxContentHeight }}>
