@@ -227,6 +227,30 @@ export class PopoverContainerElement extends UpdatingElement {
   })
   transferGraphAttrs: boolean;
 
+  /**
+   * @detail any
+   * @description 鼠标移动到元素上发出的事件，事件详情为用户设置的 data
+   */
+  @event({ type: "item.mouse.enter", cancelable: true })
+  itemMouseEnter: EventEmitter<any>;
+
+  /**
+   * @detail any
+   * @description 鼠标离开元素发出的事件，事件详情为用户设置的 data
+   */
+  @event({ type: "item.mouse.leave", cancelable: true })
+  itemMouseLeave: EventEmitter<any>;
+
+  /* istanbul ignore next */
+  private _itemMouseEnter = () => {
+    this.itemMouseEnter.emit(this.data);
+  };
+
+  /* istanbul ignore next */
+  private _itemMouseLeave = () => {
+    this.itemMouseLeave.emit(this.data);
+  };
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -271,6 +295,8 @@ export class PopoverContainerElement extends UpdatingElement {
             faded={this.faded}
             transferGraphAttrs={this.transferGraphAttrs}
             zIndex={this.zIndex}
+            itemMouseEnter={this._itemMouseEnter}
+            itemMouseLeave={this._itemMouseLeave}
           />
         </BrickWrapper>,
         this

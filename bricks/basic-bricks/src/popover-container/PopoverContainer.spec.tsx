@@ -10,56 +10,56 @@ const props = {
     useBrick: {
       brick: "div",
       properties: {
-        id: "story-point-display"
+        id: "story-point-display",
       },
       transform: {
-        textContent: "@{storyPoint}"
-      }
-    }
+        textContent: "@{storyPoint}",
+      },
+    },
   },
   popoverContentStyle: {
-    width: "60px"
+    width: "60px",
   },
   popoverBrick: {
     useBrick: {
       brick: "forms.general-select",
       properties: {
         inputBoxStyle: {
-          width: 60
+          width: 60,
         },
         allowClear: false,
         options: [
           {
             label: "0.5",
-            value: "0.5"
+            value: "0.5",
           },
           {
             label: "1",
-            value: "1"
+            value: "1",
           },
           {
             label: "1.5",
-            value: "1.5"
+            value: "1.5",
           },
           {
             label: "2",
-            value: "2"
+            value: "2",
           },
           {
             label: "2.5",
-            value: "2.5"
+            value: "2.5",
           },
           {
             label: "3",
-            value: "3"
-          }
-        ]
+            value: "3",
+          },
+        ],
       },
       transform: {
-        value: "@{storyPoint}"
-      }
-    }
-  }
+        value: "@{storyPoint}",
+      },
+    },
+  },
 };
 
 describe("PopoverContainer", () => {
@@ -82,14 +82,32 @@ describe("PopoverContainer", () => {
     wrapper.setProps({
       visible: true,
       popoverContentStyle: {
-        width: 50
+        width: 50,
       },
-      showPopoverBg: true
+      showPopoverBg: true,
     });
     wrapper.update();
     expect(wrapper.find("BrickAsComponent").length).toBe(2);
+    wrapper.setProps({
+      transferGraphAttrs: true,
+      faded: true,
+      displayBrick: {
+        useBrick: [
+          {
+            brick: "div",
+            properties: {
+              textContent: "text",
+            },
+          },
+        ],
+      },
+    });
+    expect(wrapper.find(".displayBrickContainerFaded").length).toBe(1);
+    wrapper.setProps({
+      displayBrick: null,
+    });
+    expect(wrapper.find("BrickAsComponent").length).toBe(1);
   });
-
   it("test showIcon and triggerByIcon", () => {
     const onVisibleChange = jest.fn();
     const wrapper = mount(
@@ -105,7 +123,7 @@ describe("PopoverContainer", () => {
     );
     expect(wrapper.find(".editIconVisible").length).toBe(1);
     wrapper.setProps({
-      trigger: "click"
+      trigger: "click",
     });
     wrapper.update();
     expect(wrapper.find("BrickAsComponent").length).toBe(1);

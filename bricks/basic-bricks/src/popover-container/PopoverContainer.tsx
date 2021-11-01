@@ -33,6 +33,8 @@ interface PopoverContainerProps {
   faded?: boolean;
   transferGraphAttrs?: boolean;
   zIndex?: number;
+  itemMouseEnter?: () => void;
+  itemMouseLeave?: () => void;
 }
 
 export function PopoverContainer(
@@ -150,8 +152,12 @@ export function PopoverContainer(
     <div
       className={classNames({
         [styles.displayBrickContainer]: props.triggerByIcon,
+        [styles.displayBrickContainerFaded]:
+          props.transferGraphAttrs && props.faded,
       })}
       ref={ref}
+      onMouseEnter={props.itemMouseEnter}
+      onMouseLeave={props.itemMouseLeave}
     >
       {props.triggerByIcon && displayBrickNode}
       <Popover
