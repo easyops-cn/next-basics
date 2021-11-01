@@ -603,7 +603,10 @@ export class LegacyGeneralLogin extends React.Component<
             </Spin>
             <div className={styles.loginAppendix}>
               {enabledFeatures["sign-up-for-free-enabled"] && (
-                <a href="/next/auth/signup" style={{ display: "block" }}>
+                <a
+                  href={getRuntime().getBasePath() + "auth/signup"}
+                  style={{ display: "block" }}
+                >
                   {t(K.REGISTER_ACCOUNT)}
                 </a>
               )}

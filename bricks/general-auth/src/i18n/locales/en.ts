@@ -56,6 +56,7 @@ const locale: Locale = {
   [K.DISAGREE]: "Disagree",
   [K.REGISTER_SUCCESS]: "Register successfully",
   [K.REGISTER_FAILED]: "Register failed",
+  [K.PLEASE_CONFIRM_PASSWORD]: "Please input password again",
 };
 
 export default locale;
