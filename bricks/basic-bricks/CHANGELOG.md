@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.154.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.154.0...@next-bricks/basic-bricks@1.154.1) (2021-11-01)
+
+
+### Bug Fixes
+
+* **drawer:** drawer 外侧开关按钮 ([ed971ef](https://github.com/easyops-cn/next-basics/commit/ed971effa2d1b4e2cce69ce6bb5549e8b8b2082b))
+
+
+
+
+
 # [1.154.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.153.0...@next-bricks/basic-bricks@1.154.0) (2021-11-01)
 
 
