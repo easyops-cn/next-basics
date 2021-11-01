@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.2...@next-bricks/general-auth@1.12.3) (2021-11-01)
+
+
+### Bug Fixes
+
+* change validate display text ([27759ce](https://github.com/easyops-cn/next-basics/commit/27759ced5dcd39543dce2ce16bf0f6e5392f947c))
+
+
+
+
+
 ## [1.12.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.1...@next-bricks/general-auth@1.12.2) (2021-11-01)
 
 
