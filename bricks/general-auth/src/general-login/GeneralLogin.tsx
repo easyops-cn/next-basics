@@ -602,13 +602,18 @@ export class LegacyGeneralLogin extends React.Component<
               </Button>
             </Spin>
             <div className={styles.loginAppendix}>
-              {get(enabledFeatures, "forgot-password-enabled") && (
-                <a href="/login/forgot-password" style={{ float: "right" }}>
-                  {t(K.FORGET_PASSWORD)}{" "}
+              {enabledFeatures["sign-up-for-free-enabled"] && (
+                <a href="/next/auth/signup" style={{ display: "block" }}>
+                  {t(K.REGISTER_ACCOUNT)}
                 </a>
               )}
-              {get(enabledFeatures, "sign-up-for-free-enabled") && (
-                <a href="/signup">{t(K.REGISTER_ACCOUNT)}</a>
+              {enabledFeatures["forgot-password-enabled"] && (
+                <a
+                  href="/login/forgot-password"
+                  style={{ display: "block", flexGrow: 1, textAlign: "end" }}
+                >
+                  {t(K.FORGET_PASSWORD)}
+                </a>
               )}
             </div>
           </Form.Item>

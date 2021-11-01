@@ -134,6 +134,8 @@
 .loginAppendix {
   margin-top: 12px;
   min-height: 32px;
+  display: flex;
+  justify-content: center;
 
   a {
     color: #afafaf;

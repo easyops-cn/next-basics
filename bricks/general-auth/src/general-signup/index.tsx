@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
+import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { GeneralSignup } from "./GeneralSignup";
 
 /**
@@ -12,6 +12,14 @@ import { GeneralSignup } from "./GeneralSignup";
  * @noInheritDoc
  */
 export class GeneralSignupElement extends UpdatingElement {
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 立即登录跳转的url
+   */
+  @property()
+  loginUrl: string;
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -30,7 +38,7 @@ export class GeneralSignupElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <GeneralSignup />
+          <GeneralSignup loginUrl={this.loginUrl} />
         </BrickWrapper>,
         this
       );
