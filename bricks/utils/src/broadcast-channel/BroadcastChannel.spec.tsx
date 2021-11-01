@@ -4,9 +4,6 @@ import { SimpleFunction } from "@next-core/brick-types";
 import { BroadcastChannelComponent } from "./BroadcastChannel";
 
 const channels = new Map<string, Set<any>>();
-const from = {
-  origin: location.origin,
-};
 window.BroadcastChannel = class BroadcastChannel {
   messageListeners = new Set<SimpleFunction>();
   constructor(private channelName: string) {
@@ -30,10 +27,7 @@ window.BroadcastChannel = class BroadcastChannel {
     for (const channel of channels.get(this.channelName) ?? []) {
       if (channel !== this) {
         for (const fn of channel.messageListeners) {
-          fn({
-            origin: from.origin,
-            data,
-          });
+          fn({ data });
         }
       }
     }
@@ -98,12 +92,6 @@ describe("BroadcastChannelComponent", () => {
 
     refA.current.postMessage({
       hello: "better world",
-    });
-    expect(onMessageB).toBeCalledTimes(2);
-
-    from.origin = "fake-origin";
-    refA.current.postMessage({
-      hello: "fake world",
     });
     expect(onMessageB).toBeCalledTimes(2);
 

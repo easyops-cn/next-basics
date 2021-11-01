@@ -14,19 +14,29 @@ import { GeneralClipboard } from "./GeneralClipboard";
  * @id utils.general-clipboard
  * @author Steve
  * @history
- * 1.x.0: 新增构件 `utils.general-clipboard`
+ * 1.0.0: 新增构件 `utils.general-clipboard`
  * @docKind brick
  * @noInheritDoc
  */
 export class GeneralClipboardElement extends UpdatingElement {
+  /**
+   * @description 设置使用本地存储记录剪贴板数据的 key。未设置时将不启用本地存储。
+   */
   @property()
   storageKey: string;
 
+  /**
+   * @description 设置剪贴板数据。
+   */
   @method()
   setClipboardImmediately(clipboard: unknown): void {
     this._clipboardRef.current.setClipboardImmediately(clipboard);
   }
 
+  /**
+   * @detail `{ clipboard: unknown; }`
+   * @description 当剪贴板数据变化时（使用 `_.isEqual` 判断）触发。
+   */
   @event({ type: "clipboard.change" })
   private _clipboardChangeEmitter: EventEmitter<{ clipboard: unknown }>;
 

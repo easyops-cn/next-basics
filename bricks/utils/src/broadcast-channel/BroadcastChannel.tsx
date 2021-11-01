@@ -34,9 +34,7 @@ export function LegacyBroadcastChannel(
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent): void => {
-      if (event.origin === location.origin) {
-        onMessage(event.data);
-      }
+      onMessage(event.data);
     };
     const currentChannel = channelRef.current;
     currentChannel?.addEventListener("message", handleMessage);

@@ -14,17 +14,28 @@ import { BroadcastChannelComponent } from "./BroadcastChannel";
  * @id utils.broadcast-channel
  * @author Steve
  * @history
- * 1.x.0: 新增构件 `utils.broadcast-channel`
+ * 1.0.0: 新增构件 `utils.broadcast-channel`
  * @docKind brick
  * @noInheritDoc
  */
 export class BroadcastChannelElement extends UpdatingElement {
+  /**
+   * @description 广播频道名称，详见 [BroadcastChannel](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API)。
+   * @required true
+   */
   @property()
   channelName: string;
 
+  /**
+   * @detail `unknown`
+   * @description 广播频道消息事件。
+   */
   @event({ type: "channel.message" })
   private _messageEmitter: EventEmitter<unknown>;
 
+  /**
+   * @description 发送一条消息。
+   */
   @method()
   postMessage(data: unknown): void {
     this._messagePortRef.current?.postMessage(data);
