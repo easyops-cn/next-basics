@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.88.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.87.0...@next-bricks/next-builder@1.88.0) (2021-11-01)
+
+
+### Features
+
+* migrate clipboard ([d04fcde](https://github.com/easyops-cn/next-basics/commit/d04fcde73cf5e601f4910715be090738a1359eaa))
+
+
+
+
+
 # [1.87.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.86.0...@next-bricks/next-builder@1.87.0) (2021-10-28)
 
 
