@@ -254,8 +254,16 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
             )}
             <Form name="signupForm" form={form} onFinish={onFinish}>
               <Form.Item
+                validateFirst={true}
                 name="username"
                 rules={[
+                  {
+                    required: true,
+                    message: t(K.USERNAME_TIPS, {
+                      minLength: 3,
+                      maxLength: 32,
+                    }),
+                  },
                   {
                     pattern: usernamePattern,
                     message: t(K.USERNAME_TIPS, {
@@ -285,7 +293,9 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
 
               <Form.Item
                 name="email"
+                validateFirst={true}
                 rules={[
+                  { required: true, message: t(K.PLEASE_ENTER_VALID_EMAIL) },
                   { type: "email", message: t(K.PLEASE_ENTER_VALID_EMAIL) },
                   {
                     validator: (
@@ -308,8 +318,10 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                 />
               </Form.Item>
               <Form.Item
+                validateFirst={true}
                 name="password"
                 rules={[
+                  { required: true, message: t(K.PLEASE_INPUT_PASSWORD) },
                   {
                     pattern: passwordConfigMap[passwordLevel].regex,
                     message: passwordConfigMap[passwordLevel].description,
@@ -323,8 +335,10 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                 />
               </Form.Item>
               <Form.Item
+                dependencies={["password"]}
                 name="password2"
                 rules={[
+                  { required: true, message: t(K.PLEASE_CONFIRM_PASSWORD) },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
                       if (!value || getFieldValue("password") === value) {
@@ -347,7 +361,12 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                 (isCommonSignup ? (
                   <>
                     <Form.Item
+                      validateFirst={true}
                       rules={[
+                        {
+                          required: true,
+                          message: t(K.PLEASE_FILL_IN_VALID_PHONE_NUMBER),
+                        },
                         {
                           validator: (_, value) => {
                             if (
@@ -406,8 +425,13 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                   </>
                 ) : (
                   <Form.Item
+                    validateFirst={true}
                     name="invite"
                     rules={[
+                      {
+                        required: true,
+                        message: t([K.PLEASE_FILL_IN_INVITE_CODE]),
+                      },
                       {
                         pattern: iniviteCodePattern,
                         message: t([K.PLEASE_FILL_IN_INVITE_CODE]),

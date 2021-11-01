@@ -51,6 +51,7 @@ spyOnKit.mockReturnValue({
     wxRedirect: "http://example.com",
     enabled_login_types: ["easyops", "ldap"],
   }),
+  getBasePath: () => "/",
 } as any);
 
 const i18nProps: WithTranslation = {

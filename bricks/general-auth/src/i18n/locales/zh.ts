@@ -53,6 +53,7 @@ const locale: Locale = {
   [K.DISAGREE]: "不同意",
   [K.REGISTER_SUCCESS]: "注册成功",
   [K.REGISTER_FAILED]: "注册失败",
+  [K.PLEASE_CONFIRM_PASSWORD]: "请确认密码",
 };
 
 export default locale;
