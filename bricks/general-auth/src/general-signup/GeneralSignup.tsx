@@ -338,7 +338,7 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                 dependencies={["password"]}
                 name="password2"
                 rules={[
-                  { required: true, message: t(K.PLEASE_CONFIRM_PASSWORD) },
+                  { required: true, message: t(K.PLEASE_INPUT_PASSWORD) },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
                       if (!value || getFieldValue("password") === value) {
