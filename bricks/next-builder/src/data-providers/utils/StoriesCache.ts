@@ -1,7 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { BuildApi_getStoriesJsonV2 } from "@next-sdk/next-builder-sdk";
 import _ from "lodash";
-import { forEach } from "lodash";
 
 interface installInfo {
   list?: string[];

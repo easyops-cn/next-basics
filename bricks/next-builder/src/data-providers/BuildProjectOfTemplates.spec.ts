@@ -8,6 +8,7 @@ import {
   BuildProjectOfTemplatesParams,
   safeJSONParse,
   getSuffix,
+  getDeepDependencies,
 } from "./BuildProjectOfTemplates";
 
 jest.mock("@next-sdk/cmdb-sdk");
@@ -853,5 +854,44 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   ])("getSuffix should work", (data, result) => {
     const suffix = getSuffix(data);
     expect(suffix).toEqual(result);
+  });
+
+  it("getDeepDependencies should work", () => {
+    const dep = [
+      {
+        id: "A",
+        useWidget: ["widgetA", "widgetB"],
+      },
+      {
+        id: "B",
+        useWidget: ["widgetF"],
+      },
+      {
+        id: "C",
+        useWidget: [],
+      },
+    ];
+    const depMap = new Map([
+      ["A", ["widgetA", "widgetB"]],
+      ["widgetA", []],
+      ["widgetB", ["widgetC", "widgetD"]],
+      ["widgetC", ["widgetD", "widgetE"]],
+      ["widgetF", ["widgetG"]],
+    ]);
+
+    dep.forEach((item) => {
+      item.useWidget = item.useWidget.concat(
+        getDeepDependencies(item.useWidget, depMap)
+      );
+    });
+
+    expect(dep).toEqual([
+      {
+        id: "A",
+        useWidget: ["widgetA", "widgetB", "widgetC", "widgetD", "widgetE"],
+      },
+      { id: "B", useWidget: ["widgetF", "widgetG"] },
+      { id: "C", useWidget: [] },
+    ]);
   });
 });

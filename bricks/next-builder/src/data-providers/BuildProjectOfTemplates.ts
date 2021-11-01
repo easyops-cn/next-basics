@@ -1,4 +1,4 @@
-import { isEmpty, uniq } from "lodash";
+import { isEmpty, uniq, forEach } from "lodash";
 import {
   BrickConfInTemplate,
   CustomTemplate,
@@ -42,6 +42,22 @@ export function safeJSONParse(str: string): Record<string, unknown> {
 export const getSuffix = (fileName: string): string => {
   if (typeof fileName !== "string") return;
   return fileName.substring(fileName.lastIndexOf(".") + 1);
+};
+
+export const getDeepDependencies = (
+  list: string[],
+  depMap: Map<string, string[]>,
+  arr: string[] = []
+): string[] => {
+  if (Array.isArray(list)) {
+    list.forEach((id) => {
+      const dep = depMap.get(id);
+      if (dep) {
+        arr = getDeepDependencies(dep, depMap, arr.concat(dep));
+      }
+    });
+  }
+  return [...new Set(arr)];
 };
 
 export interface BuildProjectOfTemplatesParams {
@@ -219,6 +235,7 @@ export async function BuildProjectOfTemplates({
       }),
     }));
 
+  const depMap = new Map<string, string[]>();
   const createStories = (templateItem: pipes.GraphVertex): Story => {
     const getDocContent = (obj: Record<string, any>, type: DocType) => {
       if (!isObject(obj) || isEmpty(obj)) return;
@@ -271,14 +288,17 @@ export async function BuildProjectOfTemplates({
         internalTemplateNames.has(data.brick)
       ) {
         data.brick = `${data.appId}.${data.brick}`;
-        if (!isParent) useWidget.push(data.brick);
+        if (!isParent) {
+          useWidget.push(data.brick);
+        }
       }
     };
     walkChilren(templateItem);
     const { thumbnail, ...restTemplateData } = templateItem;
+    const storyId = `${templateItem.appId}.${templateItem.templateId}`;
     const stories = {
       // 基础信息存放
-      storyId: `${templateItem.appId}.${templateItem.templateId}`,
+      storyId: storyId,
       category: templateItem.category,
       type: "brick",
       layerType: "widget",
@@ -294,8 +314,8 @@ export async function BuildProjectOfTemplates({
           ).fileName
         ),
       doc: {
-        id: `${templateItem.appId}.${templateItem.templateId}`,
-        name: `${templateItem.appId}.${templateItem.templateId}`,
+        id: storyId,
+        name: storyId,
         dockind: "brick",
         properties: null,
         author: templateItem.creator,
@@ -319,12 +339,22 @@ export async function BuildProjectOfTemplates({
       });
     }
 
+    depMap.set(storyId, useWidget);
+
     return stories;
   };
 
   const stories = templateTreeList.map((templateItem) =>
     createStories(templateItem)
   );
+
+  stories.forEach((storyItem) => {
+    if (Array.isArray(storyItem.useWidget)) {
+      storyItem.useWidget = storyItem.useWidget.concat(
+        getDeepDependencies(storyItem.useWidget, depMap)
+      );
+    }
+  });
 
   const functions =
     imagesAndFunctionsResponse.functions as StoryboardFunction[];
