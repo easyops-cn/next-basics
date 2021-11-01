@@ -88,7 +88,7 @@ describe("GeneralSignup", () => {
       email: "123@qq.com",
       password: "123456",
       password2: "123456",
-      invitation_code: "123456789",
+      invite: "123456789",
       terms: true,
     });
     await (global as any).flushPromises();
@@ -181,14 +181,31 @@ describe("GeneralSignup", () => {
     expect(wrapper.find("img").first().prop("src")).toBe("/x/y/z");
   });
 
-  it("should sign up commonly with an invitation code", () => {
+  it("should sign up commonly with an invitation code", async () => {
+    spyOnJoinRegister.mockResolvedValue({
+      loggedIn: true,
+      accessRule: "",
+      username: "test",
+      org: 12345,
+    });
     jest.spyOn(kit, "getHistory").mockReturnValue({
       location: {
         search: "code=123456789",
       },
+      createHref: jest.fn(),
+      push: jest.fn(),
     } as any);
-    const wrapper = shallow(<GeneralSignup />);
-    expect(wrapper.find("a")).toHaveLength(2);
-    expect(wrapper.find(".title").first().text()).toBe("REGISTER_AND_JOIN");
+    const wrapper = mount(<GeneralSignup />);
+    expect(wrapper.find(Input)).toHaveLength(4);
+    wrapper.find(Form).at(0).invoke("onFinish")({
+      username: "test",
+      email: "123@qq.com",
+      password: "123456",
+      password2: "123456",
+      invite: "123456789",
+      terms: true,
+    });
+    await (global as any).flushPromises();
+    wrapper.update();
   });
 });

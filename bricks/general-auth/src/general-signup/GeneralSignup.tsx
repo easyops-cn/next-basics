@@ -33,15 +33,18 @@ import {
 } from "@next-sdk/api-gateway-sdk";
 import { validateMap } from "./validateProvider";
 import resetLegacyIframe from "../shared/resetLegacyIframe";
-import { createLocation, Location } from "history";
+import { createLocation } from "history";
 
 const duration = 60;
 function getInviteCode(): string {
   const params = getHistory().location.search;
   return new URLSearchParams(params).get("code");
 }
+export interface GeneralSignupProps {
+  loginUrl?: string;
+}
 
-export function GeneralSignup(): React.ReactElement {
+export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
   const [form] = Form.useForm();
   const runtime = getRuntime();
   const brand = runtime.getBrandSettings();
@@ -173,7 +176,7 @@ export function GeneralSignup(): React.ReactElement {
   const onFinish = async (values: any) => {
     try {
       let result: Record<string, any>;
-      if (isCommonSignup) {
+      if (isCommonSignup && !hideInvite) {
         result = await OrgApi_saaSOrgRegister(
           assign(omit(values, ["terms", "password2"]), {
             message_id: messageId,
@@ -182,7 +185,7 @@ export function GeneralSignup(): React.ReactElement {
       } else {
         result = await AuthApi_register(
           assign(
-            omit(values, ["terms", "password2", "username", "invitation_code"]),
+            omit(values, ["terms", "password2", "username"]),
             hideInvite
               ? { invite: getInviteCode(), name: values["username"] }
               : { name: values["username"] }
@@ -403,7 +406,7 @@ export function GeneralSignup(): React.ReactElement {
                   </>
                 ) : (
                   <Form.Item
-                    name="invitation_code"
+                    name="invite"
                     rules={[
                       {
                         pattern: iniviteCodePattern,
@@ -458,7 +461,6 @@ export function GeneralSignup(): React.ReactElement {
                   style={{
                     width: "100%",
                     height: 34,
-                    /* bottom: this.state.security_codeEnabled ? "-45px" : "0", */
                   }}
                   id="submitBtn"
                 >
@@ -471,7 +473,11 @@ export function GeneralSignup(): React.ReactElement {
                   <a
                     id="LogInLink"
                     onClick={() => {
-                      getHistory().push(createLocation({ pathname: "/login" }));
+                      getHistory().push(
+                        createLocation({
+                          pathname: props.loginUrl ?? "/auth/login",
+                        })
+                      );
                     }}
                   >
                     {t(K.LOGIN_IMMEDIATELY)}
