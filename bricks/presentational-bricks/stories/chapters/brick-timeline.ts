@@ -115,7 +115,6 @@ export const BrickTimelineStory: Story = {
             link: "#mno",
           },
         ],
-        timeType: "millisecond",
         statusMap: {
           warn: "red",
           running: "blue",
