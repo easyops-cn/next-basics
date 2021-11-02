@@ -63,7 +63,7 @@ describe("validate test", () => {
       });
       const callbackFn = jest.fn();
       await airNameValidValidator("ccd", callbackFn, jest.fn);
-      expect(callbackFn).toHaveBeenCalledWith({ error: "server error" });
+      expect(callbackFn).toHaveBeenCalledWith(" ");
     });
   });
 
@@ -105,7 +105,7 @@ describe("validate test", () => {
       });
       const callbackFn = jest.fn();
       await airEmailValidValidator("ccd", callbackFn, jest.fn);
-      expect(callbackFn).toHaveBeenCalledWith({ error: "server error" });
+      expect(callbackFn).toHaveBeenCalledWith(" ");
     });
   });
 });

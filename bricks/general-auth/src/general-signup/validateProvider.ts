@@ -21,7 +21,7 @@ export function debounceValidate(validateFn: (...args: any[]) => void) {
       timer = null;
     }
     timer = setTimeout(async () => {
-      await validateFn( value, callback, forceUpdate);
+      await validateFn(value, callback, forceUpdate);
     }, 500);
   };
 }
@@ -47,7 +47,9 @@ export async function airEmailValidValidator(
         callback("该邮箱已经被注册");
       }
     } catch (error) {
-      callback(error);
+      callback(" ");
+      // eslint-disable-next-line no-console
+      console.error("Validation error:", error);
     }
   }
   forceUpdate({});
@@ -74,7 +76,9 @@ export async function airNameValidValidator(
         callback("已存在该用户名");
       }
     } catch (error) {
-      callback(error);
+      callback(" ");
+      // eslint-disable-next-line no-console
+      console.error("Validation error:", error);
     }
   }
 
