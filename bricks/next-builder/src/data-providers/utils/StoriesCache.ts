@@ -44,10 +44,20 @@ export class StoriesCache {
     info?: installInfo,
     isCache?: boolean
   ): Promise<Story[] | void> {
-    let needInstallList: string[] = [];
+    const needInstallList: Set<string> = new Set();
     if (Array.isArray(info?.list) && info.list.length > 0) {
-      needInstallList = info.list.filter((item) => !this.hasInstalled(item));
-      if (needInstallList.length === 0) return;
+      info.list.forEach((item) => {
+        !this.hasInstalled(item) && needInstallList.add(item);
+      });
+      [...needInstallList.values()].forEach((item) => {
+        const { useWidget } = this.cache.storyList.get(item);
+        if (useWidget && useWidget.length) {
+          useWidget.forEach((widgetId: string) => {
+            needInstallList.add(widgetId);
+          });
+        }
+      });
+      if ([...needInstallList.values()].length === 0) return;
     }
     if (
       info &&
@@ -63,7 +73,7 @@ export class StoriesCache {
     const response = await BuildApi_getStoriesJsonV2(
       info
         ? {
-            storyIds: needInstallList,
+            storyIds: [...needInstallList.values()],
             fields: info.fields,
           }
         : undefined
