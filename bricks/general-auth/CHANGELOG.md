@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.3...@next-bricks/general-auth@1.12.4) (2021-11-02)
+
+
+### Bug Fixes
+
+* **general-signup:** catch validation error ([e60c78c](https://github.com/easyops-cn/next-basics/commit/e60c78cd437ddc09ead518e342ab9ebc0cafaef3))
+
+
+
+
+
 ## [1.12.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.2...@next-bricks/general-auth@1.12.3) (2021-11-01)
 
 
