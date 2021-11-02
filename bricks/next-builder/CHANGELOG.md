@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.89.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.88.0...@next-bricks/next-builder@1.89.0) (2021-11-02)
+
+
+### Features
+
+* **BuildProjectOfTemplates:** stoiresjson support useWidget ([421affc](https://github.com/easyops-cn/next-basics/commit/421affc8099abd62da66c8bac3f45f3cf8d4b06d))
+* **BuildProjectOfTemplates:** support useWidget while widget build ([87b5b96](https://github.com/easyops-cn/next-basics/commit/87b5b9608f10b46dcfd7bb51d69e3549536fa05b))
+* **BuildProjectOfTemplates:** support widget to get deep dependencies widget ([de2dd61](https://github.com/easyops-cn/next-basics/commit/de2dd610f735699a770a0b86904f26dee08a8b22))
+
+
+
+
+
 # [1.88.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.87.0...@next-bricks/next-builder@1.88.0) (2021-11-01)
 
 
