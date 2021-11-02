@@ -36,7 +36,7 @@ export class StoriesCache {
 
   init(list: Story[]) {
     list.forEach((item) => {
-      this.cache.storyList.set(item.id || item.storyId, item);
+      this.cache.storyList.set(item.storyId, item);
     });
   }
 
@@ -50,7 +50,7 @@ export class StoriesCache {
         !this.hasInstalled(item) && needInstallList.add(item);
       });
       [...needInstallList.values()].forEach((item) => {
-        const { useWidget } = this.cache.storyList.get(item);
+        const { useWidget } = this.cache.storyList.get(item) || {};
         if (useWidget && useWidget.length) {
           useWidget.forEach((widgetId: string) => {
             needInstallList.add(widgetId);
@@ -81,7 +81,10 @@ export class StoriesCache {
     return response.list.map((item) => {
       const id = item.id || item.storyId;
       isCache && this.setCache(id);
-      let storyItem = this.cache.storyList.get(id);
+      let storyItem = this.cache.storyList.get(id) as Story & {
+        id: string;
+        examples: string;
+      };
       storyItem = _.mergeWith({}, storyItem, item, (o, s) =>
         _.isNull(s) ? o : s
       );
@@ -90,12 +93,15 @@ export class StoriesCache {
         ...storyItem,
         storyId: storyItem.id || storyItem.storyId,
         conf: storyItem.examples || storyItem.conf,
-        type: storyItem.type === "atom-brick" ? "brick" : storyItem.type,
+        type:
+          (storyItem.type as string) === "atom-brick"
+            ? "brick"
+            : storyItem.type,
       };
       delete newItem.id;
       delete newItem.examples;
 
-      this.cache.storyList.set(id, newItem);
+      this.cache.storyList.set(id, newItem as Story);
       return newItem;
     }) as Story[];
   }
