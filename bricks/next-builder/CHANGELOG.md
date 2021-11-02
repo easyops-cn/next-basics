@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.89.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.89.0...@next-bricks/next-builder@1.89.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* **StoriesCache:** install fix while cache don't have the brick and get useWidget get error ([ce8afde](https://github.com/easyops-cn/next-basics/commit/ce8afdea188232ff98c5fbf2f952d0e690927725))
+
+
+
+
+
 # [1.89.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.88.0...@next-bricks/next-builder@1.89.0) (2021-11-02)
 
 

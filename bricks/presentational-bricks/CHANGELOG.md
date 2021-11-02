@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.2...@next-bricks/presentational-bricks@1.228.3) (2021-11-02)
+
+
+### Bug Fixes
+
+* fix timeline show wrong mouth ([a0b9294](https://github.com/easyops-cn/next-basics/commit/a0b92941284acbf73ab118ac536ee05b10ca524a))
+
+
+
+
+
 ## [1.228.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.1...@next-bricks/presentational-bricks@1.228.2) (2021-10-29)
 
 
