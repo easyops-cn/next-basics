@@ -172,6 +172,15 @@ describe("StoriesCache", () => {
       fields: ["*"],
     });
     expect(mockGetStoriesJSONRequset).toBeCalledTimes(3);
+
+    await instance.install(
+      {
+        list: ["brick-null"],
+        fields: ["storyId", "conf"],
+      },
+      true
+    );
+    expect(mockGetStoriesJSONRequset).toBeCalledTimes(4);
   });
 
   it("hasInstalled should work", () => {
