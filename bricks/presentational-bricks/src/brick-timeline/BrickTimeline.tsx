@@ -91,7 +91,7 @@ export function BrickTimeline(props: BrickTimelineProps): React.ReactElement {
   const getComponent = (): React.ReactElement => {
     if (props.type === "extension") {
       // 根据月份分组
-      const timelineGroup = groupByMoth(props.itemList);
+      const timelineGroup = groupByMoth(props.itemList, props.timeType);
       return (
         <>
           {timelineGroup.map((item) => (

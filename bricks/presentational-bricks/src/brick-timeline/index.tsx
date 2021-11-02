@@ -109,7 +109,7 @@ export class BrickTimelineElement extends UpdatingElement {
    * @kind second | default
    * @required false
    * @default default
-   * @description 时间轴时间的具体配置，值为`default`时可以是格式化的字符串 `date` 对象或者毫秒级的时间戳等
+   * @description 时间轴时间的具体配置，值为`default`时可以是格式化的字符串 `date` 对象或者毫秒级的时间戳等，除了时间是秒为单位的，其他单位都可不用设置该属性
    */
   @property({
     attribute: false,
