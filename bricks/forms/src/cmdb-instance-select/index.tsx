@@ -238,6 +238,13 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    */
   @property({ attribute: false })
   permission?: Array<"read" | "update" | "operate">;
+  /**
+   * @default false
+   * @required false
+   * @description 下拉框中是否启用tooltip显示label全称,label过长时可使用
+   */
+  @property({ type: Boolean })
+  showTooltip?: boolean;
 
   updateObjectIdManual(objectId: string) {
     this.objectId = objectId;
@@ -299,6 +306,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             labelTemplate={this.labelTemplate}
             disabled={this.disabled}
             permission={this.permission}
+            showTooltip={this.showTooltip}
           />
         </BrickWrapper>,
         this
