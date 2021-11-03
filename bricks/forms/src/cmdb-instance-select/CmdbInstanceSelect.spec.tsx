@@ -213,7 +213,7 @@ describe("CmdbInstanceSelect", () => {
         .find(Select)
         .first()
         .prop("children")
-        .map((child) => child.props.children[1])
+        .map((child) => child.props.children.props.children[1])
     ).toEqual(list.map((item) => item.hostname));
 
     const childElement = document.createElement("div");
@@ -274,7 +274,7 @@ describe("CmdbInstanceSelect", () => {
         .find(Select)
         .first()
         .prop("children")
-        .map((child) => child.props.children[1])
+        .map((child) => child.props.children.props.children[1])
     ).toEqual(list.map((item) => item.mem));
   });
   it("should work if user set instanceQuery ", async () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, Spin, Avatar } from "antd";
+import { Select, Spin, Avatar, Tooltip } from "antd";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import {
@@ -39,6 +39,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   labelTemplate?: string;
   disabled?: boolean;
   permission?: Array<"read" | "update" | "operate">;
+  showTooltip?: boolean;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -282,19 +283,37 @@ export function CmdbInstanceSelectItem(
           const optionLabel = getLabelOptions(op);
           return (
             <Select.Option key={index} value={op.value} label={optionLabel}>
-              {op.user_icon && (
-                <Avatar
-                  src={op.user_icon}
-                  size={24}
-                  className={classNames(style.avatar, {
-                    [style.defaultIcon]: op.user_icon === "defaultIcon",
-                  })}
-                >
-                  {op.user_icon === "defaultIcon" && op.label?.slice(0, 2)}
-                </Avatar>
+              {props.showTooltip ? (
+                <Tooltip title={optionLabel}>
+                  {op.user_icon && (
+                    <Avatar
+                      src={op.user_icon}
+                      size={24}
+                      className={classNames(style.avatar, {
+                        [style.defaultIcon]: op.user_icon === "defaultIcon",
+                      })}
+                    >
+                      {op.user_icon === "defaultIcon" && op.label?.slice(0, 2)}
+                    </Avatar>
+                  )}
+                  {optionLabel}
+                </Tooltip>
+              ) : (
+                <>
+                  {op.user_icon && (
+                    <Avatar
+                      src={op.user_icon}
+                      size={24}
+                      className={classNames(style.avatar, {
+                        [style.defaultIcon]: op.user_icon === "defaultIcon",
+                      })}
+                    >
+                      {op.user_icon === "defaultIcon" && op.label?.slice(0, 2)}
+                    </Avatar>
+                  )}
+                  {optionLabel}
+                </>
               )}
-
-              {optionLabel}
             </Select.Option>
           );
         })}
