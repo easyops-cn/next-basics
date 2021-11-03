@@ -224,8 +224,8 @@ export function BuilderContextMenu({
       {contextMenuStatus.active && (
         <Menu
           prefixCls="ant-dropdown-menu"
+          className={styles.dropdownMenu}
           style={{
-            width: "fit-content",
             ...menuPosition,
           }}
         >
