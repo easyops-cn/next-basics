@@ -7,6 +7,11 @@
   z-index: 110;
 }
 
+.dropdownMenu {
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
 .pasteNameWrapper {
   color: var(--text-color-disabled);
   margin-left: 0.5em;
