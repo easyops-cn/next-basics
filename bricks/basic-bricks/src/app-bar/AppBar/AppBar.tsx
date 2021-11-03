@@ -50,6 +50,11 @@ export function AppBar({
     []
   );
 
+  const hideLogoutEnabled = React.useMemo(
+    () => getRuntime().getFeatureFlags()["next-hide-logout"],
+    []
+  );
+
   const currentLang = i18next.language?.split("-")[0];
 
   React.useEffect(() => {
@@ -173,20 +178,22 @@ export function AppBar({
                       {t(K.ACCOUNT_MANAGEMENT)}
                     </Menu.Item>
                   )}
-
-                  <Menu.Item
-                    className={styles.dropdownMenuItem}
-                    onClick={ssoEnabled ? handleSSOLogout : handleLogout}
-                  >
-                    <GeneralIcon
-                      icon={{
-                        lib: "easyops",
-                        category: "default",
-                        icon: "logout",
-                      }}
-                    />
-                    {t(K.LOGOUT)}
-                  </Menu.Item>
+                  {!hideLogoutEnabled && (
+                    <Menu.Item
+                      className={styles.dropdownMenuItem}
+                      onClick={ssoEnabled ? handleSSOLogout : handleLogout}
+                      data-testid="menu-item-logout"
+                    >
+                      <GeneralIcon
+                        icon={{
+                          lib: "easyops",
+                          category: "default",
+                          icon: "logout",
+                        }}
+                      />
+                      {t(K.LOGOUT)}
+                    </Menu.Item>
+                  )}
                   {switchLanguageEnabled && (
                     <>
                       <Menu.Divider />
