@@ -17,7 +17,7 @@ export function LogoBar(): React.ReactElement {
   return (
     <div className={styles.logoBar}>
       {brand.menu_bar_logo_no_link === "true" ? (
-        logo
+        <span className={styles.logoLink}>{logo}</span>
       ) : (
         <Link to="/" className={styles.logoLink}>
           {logo}

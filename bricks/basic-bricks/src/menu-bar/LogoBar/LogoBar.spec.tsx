@@ -18,6 +18,7 @@ describe("LogoBar", () => {
     brandFn.mockReturnValueOnce({ menu_bar_logo_url: "/a/b/c" });
     wrapper.setProps({});
     expect(wrapper.find(Logo).length).toBe(0);
+    expect(wrapper.find("span").length).toBe(0);
     expect(wrapper.find(Link).length).toBe(1);
     expect(wrapper.find("img").length).toBe(1);
   });
@@ -32,6 +33,7 @@ describe("LogoBar", () => {
     wrapper.setProps({});
     expect(wrapper.find(Logo).length).toBe(0);
     expect(wrapper.find(Link).length).toBe(0);
+    expect(wrapper.find("span").length).toBe(1);
     expect(wrapper.find("img").length).toBe(1);
   });
 });
