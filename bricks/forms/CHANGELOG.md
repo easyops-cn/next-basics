@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.197.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.197.2...@next-bricks/forms@1.197.3) (2021-11-03)
+
+
+### Bug Fixes
+
+* **forms:** add tooltip to cmdb-instance-select ([5ebcee2](https://github.com/easyops-cn/next-basics/commit/5ebcee26b2ccf15c2d861cbd8b115cd2be3a93dd))
+
+
+
+
+
 ## [1.197.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.197.1...@next-bricks/forms@1.197.2) (2021-11-02)
 
 **Note:** Version bump only for package @next-bricks/forms

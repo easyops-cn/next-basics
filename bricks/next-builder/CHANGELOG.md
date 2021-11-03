@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.89.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.89.1...@next-bricks/next-builder@1.89.2) (2021-11-03)
+
+
+### Bug Fixes
+
+* add vendor prefixes ([ac86bcb](https://github.com/easyops-cn/next-basics/commit/ac86bcb9af79ae03b584c7ea7e207a6829efc5d2))
+
+
+
+
+
 ## [1.89.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.89.0...@next-bricks/next-builder@1.89.1) (2021-11-02)
 
 
