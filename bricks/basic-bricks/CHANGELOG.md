@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.155.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.154.1...@next-bricks/basic-bricks@1.155.0) (2021-11-03)
+
+
+### Bug Fixes
+
+* **MenuBar:** 修复logo越界问题 ([8aa8a7e](https://github.com/easyops-cn/next-basics/commit/8aa8a7ec7612d2d4ca5e4ec815c3b426927680f9))
+
+
+### Features
+
+* 可隐藏的登出按钮 ([a581561](https://github.com/easyops-cn/next-basics/commit/a5815610b635f483d385e1137d9ab9e158474f66))
+
+
+
+
+
 ## [1.154.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.154.0...@next-bricks/basic-bricks@1.154.1) (2021-11-01)
 
 
