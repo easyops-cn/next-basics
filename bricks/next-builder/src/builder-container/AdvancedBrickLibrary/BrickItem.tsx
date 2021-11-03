@@ -63,7 +63,17 @@ export function BrickItem({
   if (brick.icon) {
     icon = <GeneralIcon icon={brick.icon} />;
   } else if (layerType === "widget") {
-    icon = brick.thumbnail ? <img src={brick.thumbnail} /> : <BuildFilled />;
+    icon = brick.thumbnail ? (
+      <img
+        style={{
+          width: "auto",
+          height: "100%",
+        }}
+        src={brick.thumbnail}
+      />
+    ) : (
+      <BuildFilled />
+    );
   } else {
     switch (brick.type) {
       case "provider":
