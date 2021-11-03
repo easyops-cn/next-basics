@@ -100,7 +100,11 @@ const consoleError = jest
                 },
                 "interface": {
                   "cProps": {
-                    "a": "string",
+                    "a": {
+                      "type": "string",
+                      "description": "this is a",
+                      "required": "false"
+                    },
                     "b": "boolean",
                     "c": "Record<string, any>",
                     "d": "Array<cProps-childProps>"
@@ -132,27 +136,33 @@ const consoleError = jest
                 "methods": 1
               }`,
             },
-            // {
-            //   appId: "test",
-            //   id: "T-04",
-            //   instanceId: "w",
-            //   templateId: "template-w",
-            //   creator: "abc",
-            //   proxy: `{
-            //     "properties": {
-            //       "FProps": {
-            //         "ref": "f-ref",
-            //         "refProperty": "f",
-            //         "type": "fProps"
-            //       }
-            //     },
-            //     "interface": {
-            //       "fProps": {
-            //         "a": "string"
-            //       }
-            //     }
-            //   }`,
-            // }
+            {
+              appId: "test",
+              id: "T-04",
+              instanceId: "w",
+              templateId: "template-w",
+              creator: "abc",
+              proxy: `{
+                "properties": {
+                  "FProps": {
+                    "ref": "f-ref",
+                    "refProperty": "f",
+                    "type": "fProps"
+                  }
+                },
+                "interface": {
+                  "fProps": {
+                    "a": "string"
+                  }
+                },
+                "examples": {
+                  "brick": "test.template-w",
+                  "properties": {
+                    "a": "test"
+                  }
+                }
+              }`,
+            },
           ],
           vertices: [
             {
@@ -335,12 +345,13 @@ describe("BuildProjectOfTemplates", () => {
   "bricks": [
     "app-1.template-t",
     "app-1.template-u",
-    "app-1.template-v"
+    "app-1.template-v",
+    "app-1.template-w"
   ]
 }`,
           },
           {
-            path: "dist/index.13673dd3.js",
+            path: "dist/index.1ac2dc8c.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -426,7 +437,11 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
     },
     "interface": {
       "cProps": {
-        "a": "string",
+        "a": {
+          "type": "string",
+          "description": "this is a",
+          "required": "false"
+        },
         "b": "boolean",
         "c": "Record<string, any>",
         "d": "Array<cProps-childProps>"
@@ -591,9 +606,9 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "typeParameter": null,
           "children": [
             {
-              "description": "",
+              "description": "this is a",
               "name": "a",
-              "required": "",
+              "required": "false",
               "type": "string"
             },
             {
@@ -645,7 +660,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "u",
       "templateId": "template-u",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": \\"string\\",\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
       "children": [
         {
           "appId": "test-app",
@@ -682,6 +697,61 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "templateId": "template-v",
       "creator": "abc",
       "proxy": "{\\n                \\"properties\\": null,\\n                \\"events\\": {},\\n                \\"methods\\": 1\\n              }"
+    },
+    "useWidget": []
+  },
+  {
+    "storyId": "test.template-w",
+    "type": "brick",
+    "layerType": "widget",
+    "author": "abc",
+    "isCustomTemplate": true,
+    "doc": {
+      "id": "test.template-w",
+      "name": "test.template-w",
+      "dockind": "brick",
+      "properties": [
+        {
+          "name": "FProps",
+          "type": "fProps",
+          "required": "-",
+          "default": "-",
+          "description": "-"
+        }
+      ],
+      "author": "abc",
+      "history": null,
+      "interface": [
+        {
+          "kind": "interface",
+          "name": "fProps",
+          "typeParameter": null,
+          "children": [
+            {
+              "description": "",
+              "name": "a",
+              "required": "",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    "conf": [
+      {
+        "brick": "test.template-w",
+        "properties": {
+          "a": "test"
+        }
+      }
+    ],
+    "originData": {
+      "appId": "test",
+      "id": "T-04",
+      "instanceId": "w",
+      "templateId": "template-w",
+      "creator": "abc",
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
     },
     "useWidget": []
   }
@@ -794,12 +864,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   "bricks": [
     "app-2.template-t",
     "app-2.template-u",
-    "app-2.template-v"
+    "app-2.template-v",
+    "app-2.template-w"
   ]
 }`,
           },
           {
-            path: "dist/index.7a60864b.js",
+            path: "dist/index.1a229581.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -927,9 +998,9 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "typeParameter": null,
           "children": [
             {
-              "description": "",
+              "description": "this is a",
               "name": "a",
-              "required": "",
+              "required": "false",
               "type": "string"
             },
             {
@@ -981,7 +1052,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "u",
       "templateId": "template-u",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": \\"string\\",\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
       "children": [
         {
           "appId": "test-app",
@@ -1018,6 +1089,61 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "templateId": "template-v",
       "creator": "abc",
       "proxy": "{\\n                \\"properties\\": null,\\n                \\"events\\": {},\\n                \\"methods\\": 1\\n              }"
+    },
+    "useWidget": []
+  },
+  {
+    "storyId": "test.template-w",
+    "type": "brick",
+    "layerType": "widget",
+    "author": "abc",
+    "isCustomTemplate": true,
+    "doc": {
+      "id": "test.template-w",
+      "name": "test.template-w",
+      "dockind": "brick",
+      "properties": [
+        {
+          "name": "FProps",
+          "type": "fProps",
+          "required": "-",
+          "default": "-",
+          "description": "-"
+        }
+      ],
+      "author": "abc",
+      "history": null,
+      "interface": [
+        {
+          "kind": "interface",
+          "name": "fProps",
+          "typeParameter": null,
+          "children": [
+            {
+              "description": "",
+              "name": "a",
+              "required": "",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    "conf": [
+      {
+        "brick": "test.template-w",
+        "properties": {
+          "a": "test"
+        }
+      }
+    ],
+    "originData": {
+      "appId": "test",
+      "id": "T-04",
+      "instanceId": "w",
+      "templateId": "template-w",
+      "creator": "abc",
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
     },
     "useWidget": []
   }
