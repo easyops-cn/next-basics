@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.197.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.197.3...@next-bricks/forms@1.197.4) (2021-11-04)
+
+
+### Bug Fixes
+
+* 告警事件中心CMDB通用实例列表模态框v2弹窗的取消按钮应使用文字按钮样式 EVENT-275 ([dedce5a](https://github.com/easyops-cn/next-basics/commit/dedce5a094971c4f283f0c67572bd8a6a8a0ee1c))
+
+
+
+
+
 ## [1.197.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.197.2...@next-bricks/forms@1.197.3) (2021-11-03)
 
 
