@@ -59,7 +59,7 @@ const consoleError = jest
                     "description": "properties介绍",
                     "type": "string",
                     "default": "hello",
-                    "required": "false"
+                    "required": false
                   },
                   "b": {
                     "ref": "b-ref",
@@ -98,7 +98,7 @@ const consoleError = jest
                     "description": "slots介绍"
                   }
                 },
-                "interface": {
+                "interfaces": {
                   "cProps": {
                     "a": {
                       "type": "string",
@@ -150,7 +150,7 @@ const consoleError = jest
                     "type": "fProps"
                   }
                 },
-                "interface": {
+                "interfaces": {
                   "fProps": {
                     "a": "string"
                   }
@@ -351,7 +351,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.1ac2dc8c.js",
+            path: "dist/index.1a7ccc81.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -396,7 +396,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
         "description": "properties介绍",
         "type": "string",
         "default": "hello",
-        "required": "false"
+        "required": false
       },
       "b": {
         "ref": "b-ref",
@@ -435,7 +435,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
         "description": "slots介绍"
       }
     },
-    "interface": {
+    "interfaces": {
       "cProps": {
         "a": {
           "type": "string",
@@ -551,7 +551,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         {
           "name": "a",
           "type": "string",
-          "required": "false",
+          "required": "-",
           "default": "hello",
           "description": "properties介绍"
         },
@@ -614,19 +614,19 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             {
               "description": "",
               "name": "b",
-              "required": "",
+              "required": false,
               "type": "boolean"
             },
             {
               "description": "",
               "name": "c",
-              "required": "",
+              "required": false,
               "type": "Record<string, any>"
             },
             {
               "description": "",
               "name": "d",
-              "required": "",
+              "required": false,
               "type": "Array<cProps-childProps>"
             }
           ]
@@ -639,7 +639,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             {
               "description": "",
               "name": "e",
-              "required": "",
+              "required": false,
               "type": "any"
             }
           ]
@@ -660,7 +660,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "u",
       "templateId": "template-u",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": false\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
       "children": [
         {
           "appId": "test-app",
@@ -730,7 +730,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             {
               "description": "",
               "name": "a",
-              "required": "",
+              "required": false,
               "type": "string"
             }
           ]
@@ -751,7 +751,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "w",
       "templateId": "template-w",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
     },
     "useWidget": []
   }
@@ -870,7 +870,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
 }`,
           },
           {
-            path: "dist/index.1a229581.js",
+            path: "dist/index.1e74c228.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -943,7 +943,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         {
           "name": "a",
           "type": "string",
-          "required": "false",
+          "required": "-",
           "default": "hello",
           "description": "properties介绍"
         },
@@ -1006,19 +1006,19 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             {
               "description": "",
               "name": "b",
-              "required": "",
+              "required": false,
               "type": "boolean"
             },
             {
               "description": "",
               "name": "c",
-              "required": "",
+              "required": false,
               "type": "Record<string, any>"
             },
             {
               "description": "",
               "name": "d",
-              "required": "",
+              "required": false,
               "type": "Array<cProps-childProps>"
             }
           ]
@@ -1031,7 +1031,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             {
               "description": "",
               "name": "e",
-              "required": "",
+              "required": false,
               "type": "any"
             }
           ]
@@ -1052,7 +1052,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "u",
       "templateId": "template-u",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": \\"false\\"\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": false\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
       "children": [
         {
           "appId": "test-app",
@@ -1122,7 +1122,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
             {
               "description": "",
               "name": "a",
-              "required": "",
+              "required": false,
               "type": "string"
             }
           ]
@@ -1143,7 +1143,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "w",
       "templateId": "template-w",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interface\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
     },
     "useWidget": []
   }
