@@ -284,7 +284,7 @@ export async function BuildProjectOfTemplates({
             return {
               description: "",
               name: k,
-              required: "",
+              required: false,
               type: v,
             };
           }
@@ -358,7 +358,7 @@ export async function BuildProjectOfTemplates({
         events,
         methods,
         slots,
-        interface: IInterface,
+        interfaces,
         examples: conf,
       } = safeJSONParse(templateItem.proxy);
       stories.doc = Object.assign(stories.doc, {
@@ -366,7 +366,7 @@ export async function BuildProjectOfTemplates({
         events: getDocContent(events, DocType.events),
         methods: getDocContent(methods, DocType.methods),
         slots: getDocContent(slots, DocType.slots),
-        interface: getInterface(IInterface as Record<string, PlainObject>),
+        interface: getInterface(interfaces as Record<string, PlainObject>),
       });
       if (Array.isArray(conf)) {
         stories.conf = conf;
