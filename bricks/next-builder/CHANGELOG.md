@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.90.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.89.2...@next-bricks/next-builder@1.90.0) (2021-11-04)
+
+
+### Features
+
+* **buildProjectOfTemplate:** support examples and interface ([e78456f](https://github.com/easyops-cn/next-basics/commit/e78456f422138ab84862f74bc6ffb8e4d2e0c9f0))
+* **buildProjectOfTemplate:** update fields ([1f94e70](https://github.com/easyops-cn/next-basics/commit/1f94e703c598e5aa61f72d285f757c3bdf6ef96b))
+* **buildProjectOfTemplate:** update unit test ([5183d28](https://github.com/easyops-cn/next-basics/commit/5183d28522c81989c6a940da048a4b85233db8cf))
+* **buildProjectOfTemplate:** update unit test ([ce4c90c](https://github.com/easyops-cn/next-basics/commit/ce4c90cead8c385db079a02a94003eb4c77f1b24))
+* **buildProjectOfTemplate:** widget img style change ([8a1b8d8](https://github.com/easyops-cn/next-basics/commit/8a1b8d8afafb547147b66e9e321883828b18bea4))
+
+
+
+
+
 ## [1.89.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.89.1...@next-bricks/next-builder@1.89.2) (2021-11-03)
 
 
