@@ -1,4 +1,4 @@
-import { isEmpty, uniq, forEach } from "lodash";
+import { isEmpty, uniq } from "lodash";
 import {
   BrickConfInTemplate,
   CustomTemplate,
@@ -23,6 +23,7 @@ import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
 import { replaceWidgetFunctions } from "./utils/replaceWidgetFunctions";
+import { PlainObject } from "../search-tree/utils";
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
@@ -237,7 +238,7 @@ export async function BuildProjectOfTemplates({
 
   const depMap = new Map<string, string[]>();
   const createStories = (templateItem: pipes.GraphVertex): Story => {
-    const getDocContent = (obj: Record<string, any>, type: DocType) => {
+    const getDocContent = (obj: PlainObject, type: DocType) => {
       if (!isObject(obj) || isEmpty(obj)) return;
       const getDefaultValue = (v: any) => {
         return v ? v : "-";
@@ -271,6 +272,30 @@ export async function BuildProjectOfTemplates({
             };
         }
       });
+    };
+    const getInterface = (interfaceObj: Record<string, PlainObject>) => {
+      if (!interfaceObj) return;
+      return Object.entries(interfaceObj).map(([name, interfaceBody]) => ({
+        kind: "interface",
+        name: name,
+        typeParameter: null,
+        children: Object.entries(interfaceBody).map(([k, v]) => {
+          if (typeof v === "string") {
+            return {
+              description: "",
+              name: k,
+              required: false,
+              type: v,
+            };
+          }
+          return {
+            description: v?.description,
+            name: k,
+            required: v?.required,
+            type: v?.type,
+          };
+        }),
+      }));
     };
     const useWidget: Array<string> = [];
     const walkChilren = (data: pipes.GraphVertex, isParent = true) => {
@@ -328,15 +353,26 @@ export async function BuildProjectOfTemplates({
     } as Story;
     if (templateItem.proxy) {
       // 如果有代理属性
-      const { properties, events, methods, slots } = safeJSONParse(
-        templateItem.proxy
-      );
+      const {
+        properties,
+        events,
+        methods,
+        slots,
+        interfaces,
+        examples: conf,
+      } = safeJSONParse(templateItem.proxy);
       stories.doc = Object.assign(stories.doc, {
         properties: getDocContent(properties, DocType.properties),
         events: getDocContent(events, DocType.events),
         methods: getDocContent(methods, DocType.methods),
         slots: getDocContent(slots, DocType.slots),
+        interface: getInterface(interfaces as Record<string, PlainObject>),
       });
+      if (Array.isArray(conf)) {
+        stories.conf = conf;
+      } else if (isObject(conf)) {
+        stories.conf = [conf];
+      }
     }
 
     depMap.set(storyId, useWidget);
