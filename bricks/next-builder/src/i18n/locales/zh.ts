@@ -113,6 +113,10 @@ const locale: Locale = {
   [K.LINK_TO_FLOWER_BUILDER]: "前往 FLow 查看编排",
   [K.LINK_TO_NEXT_DOCS]: "前往文档中心查看",
   [K.RECOMMENDED_ACTIONS]: "推荐动作",
+  [K.BRICK_CATEGORY_LIST]: "列表",
+  [K.BRICK_CATEGORY_CARD_LIST]: "卡片列表",
+  [K.BRICK_CATEGORY_ENTRY]: "功能入口",
+  [K.BRICK_CATEGORY_NUMBER]: "统计数值",
 };
 
 export default locale;

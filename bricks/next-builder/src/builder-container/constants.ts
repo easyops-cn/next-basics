@@ -254,60 +254,20 @@ export const widgetMenus: LibraryMenuItem[] = [
     type: "group",
     children: [
       {
-        key: "layout",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LAYOUT}`),
+        key: "list",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LIST}`),
       },
       {
-        key: "card",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD}`),
+        key: "card-list",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_LIST}`),
       },
       {
-        key: "general-tables",
-        text: i18next.t(
-          `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_GENERAL_TABLES}`
-        ),
+        key: "entry",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_ENTRY}`),
       },
       {
-        key: "description",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DESCRIPTION}`),
-      },
-      {
-        key: "chart",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CHART}`),
-      },
-      {
-        key: "value-mapping",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_VALUE_MAPPING}`),
-      },
-      {
-        key: "data-view",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_VIEW}`),
-      },
-      {
-        key: "form-input",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM_INPUT}`),
-      },
-      {
-        key: "navigation",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NAVIGATION}`),
-      },
-      {
-        key: "feedback-and-tooltip",
-        text: i18next.t(
-          `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FEEDBACK_AND_TOOLTIP}`
-        ),
-      },
-      {
-        key: "data-convert",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_CONVERT}`),
-      },
-      {
-        key: "topology",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_TOPOLOGY}`),
-      },
-      {
-        key: "other",
-        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_OTHER}`),
+        key: "num",
+        text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NUMBER}`),
       },
     ],
   },
