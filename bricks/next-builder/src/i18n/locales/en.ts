@@ -118,6 +118,10 @@ const locale: Locale = {
   [K.LINK_TO_FLOWER_BUILDER]: "Link to flow builder app",
   [K.LINK_TO_NEXT_DOCS]: "Link to next document",
   [K.RECOMMENDED_ACTIONS]: "Recommended actions",
+  [K.BRICK_CATEGORY_LIST]: "List",
+  [K.BRICK_CATEGORY_CARD_LIST]: "Card List",
+  [K.BRICK_CATEGORY_ENTRY]: "Entry Card",
+  [K.BRICK_CATEGORY_NUMBER]: "Statistics Number",
 };
 
 export default locale;
