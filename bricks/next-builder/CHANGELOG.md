@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.91.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.90.0...@next-bricks/next-builder@1.91.0) (2021-11-05)
+
+
+### Features
+
+* 修改widget一级分类菜单 ([0e3fd76](https://github.com/easyops-cn/next-basics/commit/0e3fd76a48faf329c6a99116de52d1dbc30adeca))
+
+
+
+
+
 # [1.90.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.89.2...@next-bricks/next-builder@1.90.0) (2021-11-04)
 
 
