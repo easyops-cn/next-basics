@@ -5,10 +5,12 @@ import {
   property,
   event,
   EventEmitter,
+  method,
 } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
 import { GeneralCascader, GeneralCascaderProps } from "./GeneralCascader";
 import { CascaderOptionType } from "antd/lib/cascader";
+import { ProcessedOptionData } from "../interfaces";
 
 /**
  * @id forms.general-cascader
@@ -27,11 +29,14 @@ import { CascaderOptionType } from "antd/lib/cascader";
  *  label?: string;
  *  disabled?: boolean;
  *  children?: Array<CascaderOptionType>;
+ *  isLeaf?: boolean;  // 配合动态拉取数据使用，当配置 isLeaf = false，会触发动态数据拉取事件
  *  [key: string]: any;
  *}
  *```
  */
+
 export class GeneralCascaderElement extends FormItemElement {
+  private _cascaderRef = React.createRef<any>();
   /**
    * @kind string
    * @required true
@@ -205,7 +210,7 @@ export class GeneralCascaderElement extends FormItemElement {
   cascaderStyle: React.CSSProperties;
 
   /**
-   * @kind numberr
+   * @kind number
    * @required false
    * @default 50
    * @description  搜索结果展示数量
@@ -224,7 +229,7 @@ export class GeneralCascaderElement extends FormItemElement {
   private _handleChange = (
     value: string[],
     selectedOptions: CascaderOptionType[]
-  ) => {
+  ): void => {
     this.value = value;
     this._render();
     Promise.resolve().then(() => {
@@ -232,12 +237,42 @@ export class GeneralCascaderElement extends FormItemElement {
     });
   };
 
+  /**
+   * @detail ProcessedOptionData
+   * @description 当某一个 option 有设置 isLeaf = false 时(对于某个 option 需要动态拉取数据时，需要设置该属性，[isLeaf 详情信息](https://ant.design/components/cascader-cn/#components-cascader-demo-lazy))，选择当前项会触发该事件, layerIndex 表示选择当前项所处在的层级，curOption 表示当前层级选择项的详情信息，selectedOptions 会列出所有层级路径下所选过的 option 信息。
+   */
+  @event({ type: "cascader.loading.data" })
+  loadingEvent: EventEmitter<ProcessedOptionData>;
+  private _handleLoading = (selectedOptions: CascaderOptionType[]): void => {
+    this.loadingEvent.emit({
+      layerIndex: selectedOptions.length - 1,
+      selectedOptions,
+      curOption: selectedOptions[selectedOptions.length - 1],
+    });
+  };
+
+  /**
+   *
+   * @params [{curOptionData: ProcessedOptionData, childrenOptions: CascaderOptionType[]}]
+   * @description 跟 `cascader.loading.data` 搭配使用，当获取下一层级的数据后，通过该方法更新数据，第一个参数就是 `cascader.loading.data` 事件传出的数据
+   */
+  @method() setChildrenOption(
+    selectedOptions: CascaderOptionType[],
+    childrenOptions: CascaderOptionType[]
+  ): void {
+    this._cascaderRef.current?.setChildrenOption(
+      selectedOptions,
+      childrenOptions
+    );
+  }
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
           <GeneralCascader
+            ref={this._cascaderRef}
             notRender={this.notRender}
             formElement={this.getFormElement()}
             label={this.label}
@@ -264,6 +299,7 @@ export class GeneralCascaderElement extends FormItemElement {
             onChange={this._handleChange}
             size={this.size}
             limit={this.limit}
+            onLoadingData={this._handleLoading}
           />
         </BrickWrapper>,
         this
