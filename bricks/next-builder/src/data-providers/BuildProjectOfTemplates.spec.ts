@@ -1245,5 +1245,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       { id: "B", useWidget: ["widgetF", "widgetG"] },
       { id: "C", useWidget: [] },
     ]);
+
+    // @ts-ignore
+    expect(getDeepDependencies({}, new Map())).toEqual([]);
   });
 });

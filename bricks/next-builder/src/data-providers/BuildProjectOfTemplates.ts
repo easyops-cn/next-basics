@@ -416,7 +416,6 @@ export async function BuildProjectOfTemplates({
   }
 
   const replaceImageUrl = (str: string): string => {
-    if (images.imagesPath.length === 0) return str;
     let newStr = str;
     images.imagesPath.forEach((imageItem) => {
       const reg = new RegExp(imageItem.imageOssPath, "g");
