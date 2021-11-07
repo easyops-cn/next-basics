@@ -158,7 +158,8 @@ const consoleError = jest
                 "examples": {
                   "brick": "test.template-w",
                   "properties": {
-                    "a": "test"
+                    "a": "test",
+                    "background": "url('bricks/app-1/dist/assets/6659b229.png')"
                   }
                 }
               }`,
@@ -191,7 +192,7 @@ const consoleError = jest
               type: "brick",
               brick: "template-t",
               properties:
-                '{"gridTemplateAreas":[["left","right"]],"url":"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png"}',
+                '{"gridTemplateAreas":[["left","right"]],"url":"bricks/app-1/dist/assets/6659b229.png"}',
             },
             // {
             //   instanceId: "w-1",
@@ -351,7 +352,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.1a7ccc81.js",
+            path: "dist/index.f3846492.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -667,7 +668,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "instanceId": "u-1",
           "type": "brick",
           "brick": "test-app.template-t",
-          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\"}"
+          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"bricks/app-1/dist/assets/6659b229.png\\"}"
         }
       ]
     },
@@ -741,7 +742,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       {
         "brick": "test.template-w",
         "properties": {
-          "a": "test"
+          "a": "test",
+          "background": "url('bricks/app-1/dist/assets/6659b229.png')"
         }
       }
     ],
@@ -751,7 +753,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "w",
       "templateId": "template-w",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\",\\n                    \\"background\\": \\"url('bricks/app-1/dist/assets/6659b229.png')\\"\\n                  }\\n                }\\n              }"
     },
     "useWidget": []
   }
@@ -870,7 +872,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
 }`,
           },
           {
-            path: "dist/index.1e74c228.js",
+            path: "dist/index.fdaef410.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -1059,7 +1061,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           "instanceId": "u-1",
           "type": "brick",
           "brick": "test-app.template-t",
-          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png\\"}"
+          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"bricks/app-1/dist/assets/6659b229.png\\"}"
         }
       ]
     },
@@ -1133,7 +1135,8 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       {
         "brick": "test.template-w",
         "properties": {
-          "a": "test"
+          "a": "test",
+          "background": "url('bricks/app-1/dist/assets/6659b229.png')"
         }
       }
     ],
@@ -1143,7 +1146,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       "instanceId": "w",
       "templateId": "template-w",
       "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\"\\n                  }\\n                }\\n              }"
+      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\",\\n                    \\"background\\": \\"url('bricks/app-1/dist/assets/6659b229.png')\\"\\n                  }\\n                }\\n              }"
     },
     "useWidget": []
   }

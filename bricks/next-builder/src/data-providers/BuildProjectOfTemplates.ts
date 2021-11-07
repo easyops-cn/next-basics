@@ -394,7 +394,12 @@ export async function BuildProjectOfTemplates({
 
   const functions =
     imagesAndFunctionsResponse.functions as StoryboardFunction[];
-  let indexJsContent = getBrickPackageIndexJs({ appId, templates, functions });
+  const indexJsContent = getBrickPackageIndexJs({
+    appId,
+    templates,
+    functions,
+  });
+  const storiesJSONContent = JSON.stringify(stories, null, 2);
 
   const images: imagesFile = {
     imagesDir: IMAGE_SAVE_FILE_PATH,
@@ -408,15 +413,17 @@ export async function BuildProjectOfTemplates({
         fileName: `${simpleHash(file.url)}.${getSuffix(file.name)}`,
       });
     });
+  }
 
+  const replaceImageUrl = (str: string): string => {
+    if (images.imagesPath.length === 0) return str;
+    let newStr = str;
     images.imagesPath.forEach((imageItem) => {
       const reg = new RegExp(imageItem.imageOssPath, "g");
-      indexJsContent = indexJsContent.replace(
-        reg,
-        getTransformFilePath(imageItem.fileName)
-      );
+      newStr = newStr.replace(reg, getTransformFilePath(imageItem.fileName));
     });
-  }
+    return newStr;
+  };
 
   const files = [
     {
@@ -431,11 +438,11 @@ export async function BuildProjectOfTemplates({
     },
     {
       path: `dist/index.${simpleHash(indexJsContent)}.js`,
-      content: indexJsContent,
+      content: replaceImageUrl(indexJsContent),
     },
     {
       path: "dist/stories.json",
-      content: JSON.stringify(stories, null, 2),
+      content: replaceImageUrl(storiesJSONContent),
     },
   ];
 
