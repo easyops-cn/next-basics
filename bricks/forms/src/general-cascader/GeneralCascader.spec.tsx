@@ -77,4 +77,140 @@ describe("GeneralCascader", () => {
       },
     });
   });
+
+  it("custom display value", () => {
+    const props = {
+      fieldNames: { label: "label", value: "value", children: "children" },
+      options: [
+        {
+          value: "zhejiang",
+          label: "Zhejiang",
+          isLeaf: false,
+        },
+        {
+          value: "jiangsu",
+          label: "Jiangsu",
+          isLeaf: false,
+        },
+      ],
+      value: ["zhejiang", "hanzhou"],
+    };
+    const wrapper = mount(<GeneralCascader {...props} />);
+    expect(wrapper.find(".ant-cascader-picker-label").text()).toEqual(
+      "Zhejiang / hanzhou"
+    );
+  });
+
+  it("custom display value with formElement wrapper", async () => {
+    const props = {
+      fieldNames: { label: "label", value: "value", children: "children" },
+      options: [
+        {
+          value: "zhejiang",
+          label: "Zhejiang",
+          isLeaf: false,
+        },
+        {
+          value: "jiangsu",
+          label: "Jiangsu",
+          isLeaf: false,
+        },
+      ],
+    };
+    const wrapper = mount(<GeneralCascader {...props} />);
+
+    wrapper.setProps({
+      name: "city",
+      formElement: {
+        formUtils: {
+          getFieldDecorator: () => (comp: React.Component) => comp,
+          getFieldValue: jest.fn().mockReturnValue(["jiangsu", "nanjing"]),
+        },
+      },
+    });
+
+    const result = wrapper.find(Cascader).invoke("displayRender")(
+      ["jiangshu"],
+      [
+        {
+          value: "jiangsu",
+          label: "Jiangsu",
+          isLeaf: false,
+        },
+      ]
+    );
+
+    expect(result).toEqual("Jiangsu / nanjing");
+  });
+
+  it("should dynamic loading data", () => {
+    const mockLoadingFn = jest.fn();
+    const ref: React.Ref<any> = React.createRef();
+    const props = {
+      fieldNames: { label: "label", value: "value", children: "children" },
+      options: [
+        {
+          value: "zhejiang",
+          label: "Zhejiang",
+          isLeaf: false,
+        },
+        {
+          value: "jiangsu",
+          label: "Jiangsu",
+          isLeaf: false,
+        },
+      ],
+      value: ["zhejiang", "hanzhou"],
+    };
+    const wrapper = mount(
+      <GeneralCascader {...props} onLoadingData={mockLoadingFn} ref={ref} />
+    );
+
+    wrapper.find(Cascader).invoke("loadData")([
+      {
+        value: "zhejiang",
+        label: "Zhejiang",
+        isLeaf: false,
+      },
+    ]);
+
+    expect(mockLoadingFn).toHaveBeenCalledWith([
+      {
+        value: "zhejiang",
+        label: "Zhejiang",
+        isLeaf: false,
+        loading: true,
+      },
+    ]);
+
+    ref.current.setChildrenOption(
+      {
+        selectedOptions: [
+          {
+            value: "zhejiang",
+            label: "Zhejiang",
+            isLeaf: false,
+          },
+        ],
+      },
+      [
+        { name: "nanjing", label: "Nanjing" },
+        { name: "ningbo", value: "Ningbo" },
+      ]
+    );
+    wrapper.update();
+    expect(wrapper.find(Cascader).prop("options")).toEqual([
+      {
+        children: [
+          { label: "Nanjing", name: "nanjing" },
+          { name: "ningbo", value: "Ningbo" },
+        ],
+        isLeaf: false,
+        label: "Zhejiang",
+        loading: false,
+        value: "zhejiang",
+      },
+      { isLeaf: false, label: "Jiangsu", value: "jiangsu" },
+    ]);
+  });
 });
