@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.155.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.155.1...@next-bricks/basic-bricks@1.155.2) (2021-11-08)
+
+
+### Bug Fixes
+
+* fix favicon selector ([b9005df](https://github.com/easyops-cn/next-basics/commit/b9005df7f64f42679955731a043bb6c7a7b63517))
+
+
+
+
+
 ## [1.155.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.155.0...@next-bricks/basic-bricks@1.155.1) (2021-11-08)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

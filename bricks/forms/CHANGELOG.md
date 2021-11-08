@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.198.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.197.6...@next-bricks/forms@1.198.0) (2021-11-08)
+
+
+### Features
+
+* cascder support dynamic loading data ([d72e0da](https://github.com/easyops-cn/next-basics/commit/d72e0da3eb2d9f42db3296fbac6249efa1478de3))
+
+
+
+
+
 ## [1.197.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.197.5...@next-bricks/forms@1.197.6) (2021-11-08)
 
 **Note:** Version bump only for package @next-bricks/forms

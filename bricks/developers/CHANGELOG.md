@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.349.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.348.0...@next-bricks/developers@1.349.0) (2021-11-08)
+
+
+### Features
+
+* **BrickPreview:** support checkoutTplContext ([f3d9fdb](https://github.com/easyops-cn/next-basics/commit/f3d9fdb3f55e0afc9f543198f189511c8a226e0d))
+
+
+
+
+
 # [1.348.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.347.0...@next-bricks/developers@1.348.0) (2021-10-28)
 
 
