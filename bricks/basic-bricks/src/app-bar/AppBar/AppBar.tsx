@@ -58,13 +58,13 @@ export function AppBar({
   const currentLang = i18next.language?.split("-")[0];
 
   React.useEffect(() => {
-    const link = document.querySelector(
-      "link[rel='shortcut icon']"
-    ) as HTMLLinkElement;
-    const favicon = getRuntime().getBrandSettings().favicon;
+    const { favicon } = getRuntime().getBrandSettings();
     // istanbul ignore else
     if (favicon) {
-      link.href = favicon;
+      const link = document.querySelector(
+        "link[rel~='icon']"
+      ) as HTMLLinkElement;
+      link && (link.href = favicon);
     }
     const isEnable = getRuntime()
       .getMicroApps()
