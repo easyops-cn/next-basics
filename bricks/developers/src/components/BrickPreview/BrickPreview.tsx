@@ -87,6 +87,7 @@ function LegacyBrickPreview(
 
       const { main, failed, portal } = mountRoutesResult;
 
+      developHelper.checkoutTplContext(fakeLocationContext.getTplContext());
       developHelper.mountTree(
         main,
         (containerRef as React.RefObject<HTMLElement>).current as any
@@ -105,6 +106,7 @@ function LegacyBrickPreview(
         fakeLocationContext.handlePageLoad();
         fakeLocationContext.resolver.scheduleRefreshing();
       }
+      developHelper.checkoutTplContext(null);
     };
     process();
   }, [conf]);
