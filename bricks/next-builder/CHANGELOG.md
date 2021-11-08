@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.92.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.91.0...@next-bricks/next-builder@1.92.0) (2021-11-08)
+
+
+### Features
+
+* **BuilderProjectOfTemplate:** replace StroiesJSON URL ([d07abf7](https://github.com/easyops-cn/next-basics/commit/d07abf70e5694d9d6542a74e06b45d6a61b76ab6))
+* **BuilderProjectOfTemplate:** update unit test ([ee2a256](https://github.com/easyops-cn/next-basics/commit/ee2a2568b0fae84d0c0d8c30d2111dd1393f212c))
+
+
+
+
+
 # [1.91.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.90.0...@next-bricks/next-builder@1.91.0) (2021-11-05)
 
 

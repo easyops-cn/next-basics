@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.3...@next-bricks/presentational-bricks@1.228.4) (2021-11-08)
+
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+
+
+
+
 ## [1.228.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.2...@next-bricks/presentational-bricks@1.228.3) (2021-11-02)
 
 
