@@ -136,13 +136,13 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               events: {
                 "forms.cmdb-object-attr-value.change": [
                   {
-                    if: "<% EVENT.detail.type === 'str' && ( EVENT.detail.default_type === 'series-number' || EVENT.detail.default_type === 'auto-increment-id') %>",
+                    if: "<% !TPL.isEdit && EVENT.detail.type === 'str' && EVENT.detail.default_type !== CTX['inner-attr-add-tpl-attr-value']?.default_type && ( EVENT.detail.default_type === 'series-number' || EVENT.detail.default_type === 'auto-increment-id') %>",
                     targetRef: "addCmdbObjectAttrForm",
                     method: "setInitValue",
                     args: [{ attrOptions: ["required", "readonly", "unique"] }],
                   },
                   {
-                    if: "<% !TPL.isProtected && EVENT.detail.default_type !== 'series-number' &&  EVENT.detail.default_type !== 'auto-increment-id' %>",
+                    if: "<% !TPL.isEdit && !TPL.isProtected && EVENT.detail.default_type !== 'series-number' &&  EVENT.detail.default_type !== 'auto-increment-id' %>",
                     targetRef: "addCmdbObjectAttrForm",
                     method: "resetFields",
                     args: ["attrOptions"],
@@ -209,6 +209,10 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                         },
                       ],
                     },
+                  },
+                  {
+                    action: "context.replace",
+                    args: ["inner-attr-add-tpl-attr-value", "${EVENT.detail}"],
                   },
                 ],
               },
