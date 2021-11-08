@@ -23,6 +23,9 @@ jest.spyOn(kit.developHelper, "getFakeKernel").mockImplementation(
       ...overrides,
     } as any)
 );
+jest
+  .spyOn(kit.developHelper, "checkoutTplContext")
+  .mockImplementation(() => void 0);
 
 describe("BrickPreview", () => {
   it("should render the correct key", async () => {
