@@ -64,6 +64,17 @@ const mockData = {
         [symbolForNodeId]: "t-02",
       },
     ],
+    functions: [
+      {
+        name: "getFunctionsByCondition",
+        source: "function testA() {console.log(a)}",
+        typescript: true,
+      },
+      {
+        name: "getFunctionsByCondition",
+        source: "function testB() {console.log(b)}",
+      },
+    ],
   },
   dependsAll: false,
 };
@@ -269,6 +280,67 @@ describe("buildTree should work", () => {
               isTpl: true,
               key: "meta/customTemplates",
               title: "customTemplates",
+            },
+            {
+              $$info: {
+                [symbolForRealParentId]: "",
+              },
+              children: [
+                {
+                  $$info: {
+                    name: "getFunctionsByCondition",
+                    source: "function testA() {console.log(a)}",
+                    typescript: true,
+                    [symbolForRealParentId]: "",
+                  },
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        height: 12,
+                        margin: "0 2px",
+                        width: 12,
+                      }}
+                    />
+                  ),
+                  isTpl: false,
+                  key: "meta/functions/0",
+                  title: "getFunctionsByCondition",
+                },
+                {
+                  $$info: {
+                    name: "getFunctionsByCondition",
+                    source: "function testB() {console.log(b)}",
+                    [symbolForRealParentId]: "",
+                  },
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        height: 12,
+                        margin: "0 2px",
+                        width: 12,
+                      }}
+                    />
+                  ),
+                  isTpl: false,
+                  key: "meta/functions/1",
+                  title: "getFunctionsByCondition",
+                },
+              ],
+              icon: (
+                <span
+                  style={{
+                    display: "inline-block",
+                    height: 12,
+                    margin: "0 2px",
+                    width: 12,
+                  }}
+                />
+              ),
+              isTpl: false,
+              key: "meta/functions",
+              title: "functions",
             },
           ],
           icon: (
@@ -962,6 +1034,133 @@ describe("fitler should work", () => {
         },
       ],
     ],
+    [
+      "testA",
+      [
+        {
+          $$info: { [symbolForRealParentId]: "" },
+          children: [
+            {
+              $$info: { [symbolForRealParentId]: "" },
+              children: [
+                {
+                  $$info: {
+                    name: "getFunctionsByCondition",
+                    source: "function testA() {console.log(a)}",
+                    typescript: true,
+                    [symbolForRealParentId]: "",
+                    [symbolForHightlight]: true,
+                  },
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        height: 12,
+                        margin: "0 2px",
+                        width: 12,
+                      }}
+                    />
+                  ),
+                  isTpl: false,
+                  key: "meta/functions/0",
+                  title: "getFunctionsByCondition",
+                  [symbolForHightlight]: true,
+                },
+              ],
+              icon: (
+                <span
+                  style={{
+                    display: "inline-block",
+                    height: 12,
+                    margin: "0 2px",
+                    width: 12,
+                  }}
+                />
+              ),
+              isTpl: false,
+              key: "meta/functions",
+              title: "functions",
+            },
+          ],
+          icon: (
+            <span
+              style={{
+                display: "inline-block",
+                height: 12,
+                margin: "0 2px",
+                width: 12,
+              }}
+            />
+          ),
+          isTpl: false,
+          key: "meta",
+          title: "meta",
+        },
+      ],
+    ],
+    [
+      "console.log(b)",
+      [
+        {
+          $$info: { [symbolForRealParentId]: "" },
+          children: [
+            {
+              $$info: { [symbolForRealParentId]: "" },
+              children: [
+                {
+                  $$info: {
+                    name: "getFunctionsByCondition",
+                    source: "function testB() {console.log(b)}",
+                    [symbolForRealParentId]: "",
+                    [symbolForHightlight]: true,
+                  },
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        height: 12,
+                        margin: "0 2px",
+                        width: 12,
+                      }}
+                    />
+                  ),
+                  isTpl: false,
+                  key: "meta/functions/1",
+                  title: "getFunctionsByCondition",
+                  [symbolForHightlight]: true,
+                },
+              ],
+              icon: (
+                <span
+                  style={{
+                    display: "inline-block",
+                    height: 12,
+                    margin: "0 2px",
+                    width: 12,
+                  }}
+                />
+              ),
+              isTpl: false,
+              key: "meta/functions",
+              title: "functions",
+            },
+          ],
+          icon: (
+            <span
+              style={{
+                display: "inline-block",
+                height: 12,
+                margin: "0 2px",
+                width: 12,
+              }}
+            />
+          ),
+          isTpl: false,
+          key: "meta",
+          title: "meta",
+        },
+      ],
+    ],
   ])("%s should return %p", (value, result) => {
     expect(filter(treeData, value)).toEqual(result);
   });
@@ -1090,6 +1289,71 @@ describe("searchConfig should work", () => {
             isTpl: true,
             key: "meta/customTemplates",
             title: "customTemplates",
+          },
+          {
+            $$info: {
+              [symbolForRealParentId]: "",
+            },
+            children: [
+              {
+                $$info: {
+                  name: "getFunctionsByCondition",
+                  source: "function testA() {console.log(a)}",
+                  typescript: true,
+                  [symbolForRealParentId]: "",
+                  [symbolForHightlight]: true,
+                },
+                icon: (
+                  <span
+                    style={{
+                      display: "inline-block",
+                      height: 12,
+                      margin: "0 2px",
+                      width: 12,
+                    }}
+                  />
+                ),
+                isTpl: false,
+                key: "meta/functions/0",
+                title: "getFunctionsByCondition",
+                [symbolForHightlight]: true,
+              },
+              {
+                $$info: {
+                  name: "getFunctionsByCondition",
+                  source: "function testB() {console.log(b)}",
+                  [symbolForRealParentId]: "",
+                  [symbolForHightlight]: true,
+                },
+                icon: (
+                  <span
+                    style={{
+                      display: "inline-block",
+                      height: 12,
+                      margin: "0 2px",
+                      width: 12,
+                    }}
+                  />
+                ),
+                isTpl: false,
+                key: "meta/functions/1",
+                title: "getFunctionsByCondition",
+                [symbolForHightlight]: true,
+              },
+            ],
+            icon: (
+              <span
+                style={{
+                  display: "inline-block",
+                  height: 12,
+                  margin: "0 2px",
+                  width: 12,
+                }}
+              />
+            ),
+            isTpl: false,
+            key: "meta/functions",
+            title: "functions",
           },
         ],
         icon: (

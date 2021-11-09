@@ -78,6 +78,12 @@ const iconTypeConstants = {
     lib: "fa",
     prefix: "fas",
   },
+  functions: {
+    color: "cyan",
+    icon: "function",
+    lib: "antd",
+    theme: "outlined",
+  },
 };
 
 const ingoreKey = ["bricks", "slots"];
@@ -94,6 +100,7 @@ const supportKey = [
   "zh",
   "en",
   "main",
+  "functions",
 ];
 
 let isParentRouteLock = false;
