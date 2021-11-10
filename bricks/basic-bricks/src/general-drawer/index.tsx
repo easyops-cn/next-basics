@@ -12,8 +12,15 @@ import {
 import { GeneralDrawer } from "./GeneralDrawer";
 import style from "./index.shadow.less";
 import { DrawerProps } from "antd/lib/drawer";
+import { path } from "d3-path";
 export interface OpenCloseOption {
   noEvent?: boolean;
+}
+export interface ICustomSwitchConfig {
+  openText?: string;
+  openIcon?: any;
+  closeText?: string;
+  closeIcon?: any;
 }
 /**
  * @id basic-bricks.general-drawer
@@ -163,6 +170,8 @@ export class GeneralDrawerElement extends UpdatingElement {
   @property({ type: Boolean })
   isFloat: boolean;
   hasOuterSwitch: boolean;
+  useBigOuterSwitch: boolean;
+  customSwitchConfig: ICustomSwitchConfig;
 
   constructor() {
     super();
@@ -212,14 +221,11 @@ export class GeneralDrawerElement extends UpdatingElement {
         ) {
           break;
         }
-        const left = window.innerWidth - (this.width + (this.isFloat ? 30 : 0));
         if (
-          (dom.nodeName &&
-            dom.nodeName.toLowerCase() === "button" &&
-            dom.className.includes("ant-drawer-close")) ||
-          (this.hasOuterSwitch &&
-            dom.className.includes("ant-drawer-content-wrapper") &&
-            e.clientX < left)
+          !this.hasOuterSwitch &&
+          dom.nodeName &&
+          dom.nodeName.toLowerCase() === "button" &&
+          dom.className.includes("ant-drawer-close")
         ) {
           e.stopPropagation();
           this.close();
@@ -228,11 +234,19 @@ export class GeneralDrawerElement extends UpdatingElement {
         if (
           this.hasOuterSwitch &&
           dom.nodeName &&
-          dom.className.includes("ant-drawer-content-wrapper") &&
-          !dom.parentElement.className.includes("ant-drawer-open")
+          typeof dom.className === "string" &&
+          dom.className.includes("outerBtn")
         ) {
           e.stopPropagation();
-          this.open();
+          if (
+            dom.parentElement.parentElement.parentElement.parentElement.parentElement.className.includes(
+              "ant-drawer-open"
+            )
+          ) {
+            this.close();
+          } else {
+            this.open();
+          }
           break;
         }
       }
@@ -265,6 +279,8 @@ export class GeneralDrawerElement extends UpdatingElement {
             configProps={this.configProps}
             isFloat={this.isFloat}
             hasOuterSwitch={this.hasOuterSwitch}
+            useBigOuterSwitch={this.useBigOuterSwitch}
+            customSwitchConfig={this.customSwitchConfig}
           />
         </BrickWrapper>,
         this._mountPoint
