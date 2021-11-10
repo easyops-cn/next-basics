@@ -1,9 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Drawer, Spin } from "antd";
-
+import { Icon as LegacyIcon } from "@ant-design/compatible";
+import { GeneralIcon } from "@next-libs/basic-components";
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
 import { DrawerProps } from "antd/lib/drawer";
+import { ICustomSwitchConfig } from "./index";
 interface GeneralDrawerProps {
   visible: boolean;
   title?: string;
@@ -19,6 +21,8 @@ interface GeneralDrawerProps {
   configProps?: DrawerProps;
   isFloat?: boolean;
   hasOuterSwitch?: boolean;
+  useBigOuterSwitch?: boolean;
+  customSwitchConfig?: ICustomSwitchConfig;
 }
 
 export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
@@ -66,34 +70,63 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
   ) {
     classNameList.push("switch");
   }
-
   return (
-    <Drawer
-      {...props.configProps}
-      title={title}
-      width={props.width}
-      visible={props.visible}
-      getContainer={props.getContainer}
-      closable={props.closable}
-      bodyStyle={props.bodyStyle}
-      drawerStyle={props.drawerStyle}
-      mask={props.mask}
-      headerStyle={props.headerStyle}
-      className={classNameList.join(" ")}
-      forceRender={!!props.hasOuterSwitch}
-    >
-      <Spin spinning={props.loading} tip="Loading...">
-        <div className="content" style={{ maxHeight: maxContentHeight }}>
-          <slot id="content" name="content"></slot>
-        </div>
-      </Spin>
-      {props.hasFooter && (
-        <div className="footer">
-          <div className="footer-inner">
-            <slot id="footer" name="footer"></slot>
+    <>
+      <Drawer
+        {...props.configProps}
+        title={title}
+        width={props.width}
+        visible={props.visible}
+        getContainer={props.getContainer}
+        closable={props.closable}
+        bodyStyle={props.bodyStyle}
+        drawerStyle={props.drawerStyle}
+        mask={props.mask}
+        headerStyle={props.headerStyle}
+        forceRender={!!props.hasOuterSwitch}
+        className={classNameList.join(" ")}
+      >
+        {props.hasOuterSwitch && (
+          <div
+            className={
+              props.useBigOuterSwitch
+                ? "outerBtn bigOuterBtn"
+                : "outerBtn defaultOuterBtn"
+            }
+          >
+            <GeneralIcon
+              icon={
+                props.visible
+                  ? props.useBigOuterSwitch
+                    ? props.customSwitchConfig?.openIcon
+                    : { lib: "antd", icon: "right", theme: "outlined" }
+                  : props.useBigOuterSwitch
+                  ? props.customSwitchConfig?.closeIcon
+                  : { lib: "antd", icon: "left", theme: "outlined" }
+              }
+            ></GeneralIcon>
+            {props.useBigOuterSwitch && (
+              <div>
+                {props.visible
+                  ? props.customSwitchConfig?.openText
+                  : props.customSwitchConfig?.closeText}
+              </div>
+            )}
           </div>
-        </div>
-      )}
-    </Drawer>
+        )}
+        <Spin spinning={props.loading} tip="Loading...">
+          <div className="content" style={{ maxHeight: maxContentHeight }}>
+            <slot id="content" name="content"></slot>
+          </div>
+        </Spin>
+        {props.hasFooter && (
+          <div className="footer">
+            <div className="footer-inner">
+              <slot id="footer" name="footer"></slot>
+            </div>
+          </div>
+        )}
+      </Drawer>
+    </>
   );
 }
