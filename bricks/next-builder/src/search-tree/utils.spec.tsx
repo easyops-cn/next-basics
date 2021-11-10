@@ -708,273 +708,552 @@ describe("fitler should work", () => {
   const treeData = buildTree(mockData);
 
   it.each([
-    ["null test", []],
+    [
+      "null test",
+      {
+        tree: [],
+        matchKey: [],
+      },
+    ],
     [
       "general",
-      [
-        {
-          $$info: { [symbolForRealParentId]: "" },
-          children: [
-            {
-              $$info: {
-                type: "bricks",
-                [symbolForNodeId]: "B-01",
-                [symbolForRealParentId]: "B-01",
-              },
-              children: [
-                {
-                  $$info: {
-                    brick: "general-button",
-                    path: "${APP.homepage}/test-1",
-                    properties: { test: 1 },
-                    [symbolForNodeInstanceId]: "123123",
-                    [symbolForNodeId]: "B-02",
-                    [symbolForRealParentId]: "B-01",
-                  },
-                  children: [
-                    {
-                      $$info: { [symbolForRealParentId]: "B-01" },
-                      children: [
-                        {
-                          $$info: {
-                            brick: "general-button",
-                            [symbolForNodeInstanceId]: "slots-brick",
-                            [symbolForNodeId]: "s-01-01",
-                            [symbolForRealParentId]: "B-01",
-                          },
-                          icon: (
-                            <GeneralIcon
-                              icon={{
-                                color: "cyan",
-                                icon: "codepen",
-                                lib: "antd",
-                                theme: "outlined",
-                              }}
-                              style={{
-                                fontSize: 12,
-                                margin: "0 2px",
-                              }}
-                            />
-                          ),
-                          isTpl: false,
-                          key: "routes/0/bricks/0/slots/content/bricks/0",
-                          title: "general-button",
-                          [symbolForHightlight]: true,
-                        },
-                      ],
-                      icon: (
-                        <GeneralIcon
-                          icon={{
-                            category: "app",
-                            color: "cyan",
-                            icon: "container",
-                            lib: "easyops",
-                          }}
-                          style={{ fontSize: 12, margin: "0 2px" }}
-                        />
-                      ),
-                      isTpl: false,
-                      key: "routes/0/bricks/0/slots/content",
-                      title: "content",
-                      unlink: true,
+      {
+        tree: [
+          {
+            $$info: { [symbolForRealParentId]: "" },
+            children: [
+              {
+                $$info: {
+                  type: "bricks",
+                  [symbolForNodeId]: "B-01",
+                  [symbolForRealParentId]: "B-01",
+                },
+                children: [
+                  {
+                    $$info: {
+                      brick: "general-button",
+                      path: "${APP.homepage}/test-1",
+                      properties: { test: 1 },
+                      [symbolForNodeInstanceId]: "123123",
+                      [symbolForNodeId]: "B-02",
+                      [symbolForRealParentId]: "B-01",
                     },
-                  ],
-                  icon: (
-                    <GeneralIcon
-                      icon={{
-                        color: "cyan",
-                        icon: "codepen",
-                        lib: "antd",
-                        theme: "outlined",
-                      }}
-                      style={{ fontSize: 12, margin: "0 2px" }}
-                    />
-                  ),
-                  isTpl: false,
-                  key: "routes/0/bricks/0",
-                  title: "general-button",
-                  [symbolForHightlight]: true,
-                },
-                {
-                  $$info: {
-                    brick: "general-select",
-                    path: "${APP.homepage}/test-2",
-                    properties: { test: 2 },
-                    [symbolForNodeInstanceId]: "234",
-                    [symbolForNodeId]: "B-04",
-                    [symbolForRealParentId]: "B-01",
+                    children: [
+                      {
+                        $$info: { [symbolForRealParentId]: "B-01" },
+                        children: [
+                          {
+                            $$info: {
+                              brick: "general-button",
+                              [symbolForNodeInstanceId]: "slots-brick",
+                              [symbolForNodeId]: "s-01-01",
+                              [symbolForRealParentId]: "B-01",
+                            },
+                            icon: (
+                              <GeneralIcon
+                                icon={{
+                                  color: "cyan",
+                                  icon: "codepen",
+                                  lib: "antd",
+                                  theme: "outlined",
+                                }}
+                                style={{
+                                  fontSize: 12,
+                                  margin: "0 2px",
+                                }}
+                              />
+                            ),
+                            isTpl: false,
+                            key: "routes/0/bricks/0/slots/content/bricks/0",
+                            title: "general-button",
+                            [symbolForHightlight]: true,
+                          },
+                        ],
+                        icon: (
+                          <GeneralIcon
+                            icon={{
+                              category: "app",
+                              color: "cyan",
+                              icon: "container",
+                              lib: "easyops",
+                            }}
+                            style={{ fontSize: 12, margin: "0 2px" }}
+                          />
+                        ),
+                        isTpl: false,
+                        key: "routes/0/bricks/0/slots/content",
+                        title: "content",
+                        unlink: true,
+                      },
+                    ],
+                    icon: (
+                      <GeneralIcon
+                        icon={{
+                          color: "cyan",
+                          icon: "codepen",
+                          lib: "antd",
+                          theme: "outlined",
+                        }}
+                        style={{ fontSize: 12, margin: "0 2px" }}
+                      />
+                    ),
+                    isTpl: false,
+                    key: "routes/0/bricks/0",
+                    title: "general-button",
+                    [symbolForHightlight]: true,
                   },
-                  icon: (
-                    <GeneralIcon
-                      icon={{
-                        color: "cyan",
-                        icon: "codepen",
-                        lib: "antd",
-                        theme: "outlined",
-                      }}
-                      style={{ fontSize: 12, margin: "0 2px" }}
-                    />
-                  ),
-                  isTpl: false,
-                  key: "routes/0/bricks/1",
-                  title: "general-select",
-                  [symbolForHightlight]: true,
-                },
-              ],
-              icon: (
-                <GeneralIcon
-                  icon={{
-                    category: "app",
-                    color: "cyan",
-                    icon: "container",
-                    lib: "easyops",
-                  }}
-                  style={{ fontSize: 12, margin: "0 2px" }}
-                />
-              ),
-              isTpl: false,
-              key: "routes/0",
-              title: "bricks",
-            },
-          ],
-          icon: (
-            <span
-              style={{
-                display: "inline-block",
-                height: 12,
-                margin: "0 2px",
-                width: 12,
-              }}
-            />
-          ),
-          isTpl: false,
-          key: "routes",
-          title: "routes",
-        },
-      ],
+                  {
+                    $$info: {
+                      brick: "general-select",
+                      path: "${APP.homepage}/test-2",
+                      properties: { test: 2 },
+                      [symbolForNodeInstanceId]: "234",
+                      [symbolForNodeId]: "B-04",
+                      [symbolForRealParentId]: "B-01",
+                    },
+                    icon: (
+                      <GeneralIcon
+                        icon={{
+                          color: "cyan",
+                          icon: "codepen",
+                          lib: "antd",
+                          theme: "outlined",
+                        }}
+                        style={{ fontSize: 12, margin: "0 2px" }}
+                      />
+                    ),
+                    isTpl: false,
+                    key: "routes/0/bricks/1",
+                    title: "general-select",
+                    [symbolForHightlight]: true,
+                  },
+                ],
+                icon: (
+                  <GeneralIcon
+                    icon={{
+                      category: "app",
+                      color: "cyan",
+                      icon: "container",
+                      lib: "easyops",
+                    }}
+                    style={{ fontSize: 12, margin: "0 2px" }}
+                  />
+                ),
+                isTpl: false,
+                key: "routes/0",
+                title: "bricks",
+              },
+            ],
+            icon: (
+              <span
+                style={{
+                  display: "inline-block",
+                  height: 12,
+                  margin: "0 2px",
+                  width: 12,
+                }}
+              />
+            ),
+            isTpl: false,
+            key: "routes",
+            title: "routes",
+          },
+        ],
+        matchKey: [
+          "routes/0/bricks/0",
+          "routes/0/bricks/0/slots/content/bricks/0",
+          "routes/0/bricks/1",
+        ],
+      },
     ],
     [
       "general-button",
-      [
-        {
-          $$info: { [symbolForRealParentId]: "" },
-          children: [
-            {
-              $$info: {
-                type: "bricks",
-                [symbolForNodeId]: "B-01",
-                [symbolForRealParentId]: "B-01",
-              },
-              children: [
-                {
-                  $$info: {
-                    brick: "general-button",
-                    path: "${APP.homepage}/test-1",
-                    properties: { test: 1 },
-                    [symbolForNodeInstanceId]: "123123",
-                    [symbolForNodeId]: "B-02",
-                    [symbolForRealParentId]: "B-01",
-                  },
-                  children: [
-                    {
-                      $$info: { [symbolForRealParentId]: "B-01" },
-                      children: [
-                        {
-                          $$info: {
-                            brick: "general-button",
-                            [symbolForNodeInstanceId]: "slots-brick",
-                            [symbolForNodeId]: "s-01-01",
-                            [symbolForRealParentId]: "B-01",
-                          },
-                          icon: (
-                            <GeneralIcon
-                              icon={{
-                                color: "cyan",
-                                icon: "codepen",
-                                lib: "antd",
-                                theme: "outlined",
-                              }}
-                              style={{
-                                fontSize: 12,
-                                margin: "0 2px",
-                              }}
-                            />
-                          ),
-                          isTpl: false,
-                          key: "routes/0/bricks/0/slots/content/bricks/0",
-                          title: "general-button",
-                          [symbolForHightlight]: true,
-                        },
-                      ],
-                      icon: (
-                        <GeneralIcon
-                          icon={{
-                            category: "app",
-                            color: "cyan",
-                            icon: "container",
-                            lib: "easyops",
-                          }}
-                          style={{ fontSize: 12, margin: "0 2px" }}
-                        />
-                      ),
-                      isTpl: false,
-                      key: "routes/0/bricks/0/slots/content",
-                      title: "content",
-                      unlink: true,
-                    },
-                  ],
-                  icon: (
-                    <GeneralIcon
-                      icon={{
-                        color: "cyan",
-                        icon: "codepen",
-                        lib: "antd",
-                        theme: "outlined",
-                      }}
-                      style={{ fontSize: 12, margin: "0 2px" }}
-                    />
-                  ),
-                  isTpl: false,
-                  key: "routes/0/bricks/0",
-                  title: "general-button",
-                  [symbolForHightlight]: true,
+      {
+        tree: [
+          {
+            $$info: { [symbolForRealParentId]: "" },
+            children: [
+              {
+                $$info: {
+                  type: "bricks",
+                  [symbolForNodeId]: "B-01",
+                  [symbolForRealParentId]: "B-01",
                 },
-              ],
-              icon: (
-                <GeneralIcon
-                  icon={{
-                    category: "app",
-                    color: "cyan",
-                    icon: "container",
-                    lib: "easyops",
-                  }}
-                  style={{ fontSize: 12, margin: "0 2px" }}
-                />
-              ),
-              isTpl: false,
-              key: "routes/0",
-              title: "bricks",
-            },
-          ],
-          icon: (
-            <span
-              style={{
-                display: "inline-block",
-                height: 12,
-                margin: "0 2px",
-                width: 12,
-              }}
-            />
-          ),
-          isTpl: false,
-          key: "routes",
-          title: "routes",
-        },
-      ],
+                children: [
+                  {
+                    $$info: {
+                      brick: "general-button",
+                      path: "${APP.homepage}/test-1",
+                      properties: { test: 1 },
+                      [symbolForNodeInstanceId]: "123123",
+                      [symbolForNodeId]: "B-02",
+                      [symbolForRealParentId]: "B-01",
+                    },
+                    children: [
+                      {
+                        $$info: { [symbolForRealParentId]: "B-01" },
+                        children: [
+                          {
+                            $$info: {
+                              brick: "general-button",
+                              [symbolForNodeInstanceId]: "slots-brick",
+                              [symbolForNodeId]: "s-01-01",
+                              [symbolForRealParentId]: "B-01",
+                            },
+                            icon: (
+                              <GeneralIcon
+                                icon={{
+                                  color: "cyan",
+                                  icon: "codepen",
+                                  lib: "antd",
+                                  theme: "outlined",
+                                }}
+                                style={{
+                                  fontSize: 12,
+                                  margin: "0 2px",
+                                }}
+                              />
+                            ),
+                            isTpl: false,
+                            key: "routes/0/bricks/0/slots/content/bricks/0",
+                            title: "general-button",
+                            [symbolForHightlight]: true,
+                          },
+                        ],
+                        icon: (
+                          <GeneralIcon
+                            icon={{
+                              category: "app",
+                              color: "cyan",
+                              icon: "container",
+                              lib: "easyops",
+                            }}
+                            style={{ fontSize: 12, margin: "0 2px" }}
+                          />
+                        ),
+                        isTpl: false,
+                        key: "routes/0/bricks/0/slots/content",
+                        title: "content",
+                        unlink: true,
+                      },
+                    ],
+                    icon: (
+                      <GeneralIcon
+                        icon={{
+                          color: "cyan",
+                          icon: "codepen",
+                          lib: "antd",
+                          theme: "outlined",
+                        }}
+                        style={{ fontSize: 12, margin: "0 2px" }}
+                      />
+                    ),
+                    isTpl: false,
+                    key: "routes/0/bricks/0",
+                    title: "general-button",
+                    [symbolForHightlight]: true,
+                  },
+                ],
+                icon: (
+                  <GeneralIcon
+                    icon={{
+                      category: "app",
+                      color: "cyan",
+                      icon: "container",
+                      lib: "easyops",
+                    }}
+                    style={{ fontSize: 12, margin: "0 2px" }}
+                  />
+                ),
+                isTpl: false,
+                key: "routes/0",
+                title: "bricks",
+              },
+            ],
+            icon: (
+              <span
+                style={{
+                  display: "inline-block",
+                  height: 12,
+                  margin: "0 2px",
+                  width: 12,
+                }}
+              />
+            ),
+            isTpl: false,
+            key: "routes",
+            title: "routes",
+          },
+        ],
+        matchKey: [
+          "routes/0/bricks/0",
+          "routes/0/bricks/0/slots/content/bricks/0",
+        ],
+      },
     ],
     [
       "tpl-test-1",
-      [
+      {
+        tree: [
+          {
+            $$info: { [symbolForRealParentId]: "" },
+            children: [
+              {
+                $$info: { [symbolForRealParentId]: "" },
+                children: [
+                  {
+                    $$info: {
+                      name: "tpl-test-1",
+                      [symbolForNodeId]: "t-01",
+                      [symbolForRealParentId]: "t-01",
+                    },
+                    icon: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          height: 12,
+                          margin: "0 2px",
+                          width: 12,
+                        }}
+                      />
+                    ),
+                    isTpl: true,
+                    key: "meta/customTemplates/0",
+                    title: "tpl-test-1",
+                    [symbolForHightlight]: true,
+                  },
+                ],
+                icon: (
+                  <span
+                    style={{
+                      display: "inline-block",
+                      height: 12,
+                      margin: "0 2px",
+                      width: 12,
+                    }}
+                  />
+                ),
+                isTpl: true,
+                key: "meta/customTemplates",
+                title: "customTemplates",
+              },
+            ],
+            icon: (
+              <span
+                style={{
+                  display: "inline-block",
+                  height: 12,
+                  margin: "0 2px",
+                  width: 12,
+                }}
+              />
+            ),
+            isTpl: false,
+            key: "meta",
+            title: "meta",
+          },
+        ],
+        matchKey: ["meta/customTemplates/0"],
+      },
+    ],
+    [
+      "testA",
+      {
+        tree: [
+          {
+            $$info: { [symbolForRealParentId]: "" },
+            children: [
+              {
+                $$info: { [symbolForRealParentId]: "" },
+                children: [
+                  {
+                    $$info: {
+                      name: "getFunctionsByCondition",
+                      source: "function testA() {console.log(a)}",
+                      typescript: true,
+                      [symbolForRealParentId]: "",
+                      [symbolForHightlight]: true,
+                    },
+                    icon: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          height: 12,
+                          margin: "0 2px",
+                          width: 12,
+                        }}
+                      />
+                    ),
+                    isTpl: false,
+                    key: "meta/functions/0",
+                    title: "getFunctionsByCondition",
+                    [symbolForHightlight]: true,
+                  },
+                ],
+                icon: (
+                  <span
+                    style={{
+                      display: "inline-block",
+                      height: 12,
+                      margin: "0 2px",
+                      width: 12,
+                    }}
+                  />
+                ),
+                isTpl: false,
+                key: "meta/functions",
+                title: "functions",
+              },
+            ],
+            icon: (
+              <span
+                style={{
+                  display: "inline-block",
+                  height: 12,
+                  margin: "0 2px",
+                  width: 12,
+                }}
+              />
+            ),
+            isTpl: false,
+            key: "meta",
+            title: "meta",
+          },
+        ],
+        matchKey: ["meta/functions/0"],
+      },
+    ],
+    [
+      "console.log(b)",
+      {
+        tree: [
+          {
+            $$info: { [symbolForRealParentId]: "" },
+            children: [
+              {
+                $$info: { [symbolForRealParentId]: "" },
+                children: [
+                  {
+                    $$info: {
+                      name: "getFunctionsByCondition",
+                      source: "function testB() {console.log(b)}",
+                      [symbolForRealParentId]: "",
+                      [symbolForHightlight]: true,
+                    },
+                    icon: (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          height: 12,
+                          margin: "0 2px",
+                          width: 12,
+                        }}
+                      />
+                    ),
+                    isTpl: false,
+                    key: "meta/functions/1",
+                    title: "getFunctionsByCondition",
+                    [symbolForHightlight]: true,
+                  },
+                ],
+                icon: (
+                  <span
+                    style={{
+                      display: "inline-block",
+                      height: 12,
+                      margin: "0 2px",
+                      width: 12,
+                    }}
+                  />
+                ),
+                isTpl: false,
+                key: "meta/functions",
+                title: "functions",
+              },
+            ],
+            icon: (
+              <span
+                style={{
+                  display: "inline-block",
+                  height: 12,
+                  margin: "0 2px",
+                  width: 12,
+                }}
+              />
+            ),
+            isTpl: false,
+            key: "meta",
+            title: "meta",
+          },
+        ],
+        matchKey: ["meta/functions/1"],
+      },
+    ],
+  ])("%s should return %p", (value, result) => {
+    expect(filter(treeData, value)).toEqual(result);
+  });
+
+  it("filter deep", () => {
+    const deepData = {
+      routes: [
+        {
+          bricks: [
+            {
+              brick: "general-button",
+              events: [
+                {
+                  args: [
+                    {
+                      instanceId: "${projectId}",
+                    },
+                  ],
+                  callback: {
+                    error: [
+                      {
+                        action: "handleHttpError",
+                      },
+                    ],
+                    success: [
+                      {
+                        action: "message.success",
+                        args: ["Export Success"],
+                      },
+                    ],
+                  },
+                  method: "executeWithArgs",
+                  useProvider:
+                    "providers-of-next-builder.permission-api-export-permissions",
+                },
+              ],
+              properties: {
+                test: 1,
+              },
+              [symbolForNodeInstanceId]: "123123",
+              [symbolForNodeId]: "B-02",
+              path: "${APP.homepage}/test-1",
+            },
+          ],
+          [symbolForNodeId]: "B-01",
+          type: "bricks",
+        },
+      ],
+    };
+    const deepTree = buildTree(deepData);
+    expect(filter(deepTree, "handleHttpError").tree.length).toBe(1);
+    expect(filter(deepTree, "Export Success").tree.length).toBe(1);
+  });
+});
+
+describe("searchConfig should work", () => {
+  const treeData = buildTree(mockData);
+
+  it("supportKey should work", () => {
+    expect(
+      filter(treeData, "name", {
+        supportKey: true,
+      })
+    ).toEqual({
+      tree: [
         {
           $$info: { [symbolForRealParentId]: "" },
           children: [
@@ -982,10 +1261,12 @@ describe("fitler should work", () => {
               $$info: { [symbolForRealParentId]: "" },
               children: [
                 {
+                  [symbolForHightlight]: true,
                   $$info: {
+                    [symbolForHightlight]: true,
                     name: "tpl-test-1",
-                    [symbolForNodeId]: "t-01",
                     [symbolForRealParentId]: "t-01",
+                    [symbolForNodeId]: "t-01",
                   },
                   icon: (
                     <span
@@ -1000,7 +1281,28 @@ describe("fitler should work", () => {
                   isTpl: true,
                   key: "meta/customTemplates/0",
                   title: "tpl-test-1",
+                },
+                {
                   [symbolForHightlight]: true,
+                  $$info: {
+                    [symbolForHightlight]: true,
+                    name: "tpl-test-2",
+                    [symbolForRealParentId]: "t-02",
+                    [symbolForNodeId]: "t-02",
+                  },
+                  icon: (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        height: 12,
+                        margin: "0 2px",
+                        width: 12,
+                      }}
+                    />
+                  ),
+                  isTpl: true,
+                  key: "meta/customTemplates/1",
+                  title: "tpl-test-2",
                 },
               ],
               icon: (
@@ -1017,31 +1319,10 @@ describe("fitler should work", () => {
               key: "meta/customTemplates",
               title: "customTemplates",
             },
-          ],
-          icon: (
-            <span
-              style={{
-                display: "inline-block",
-                height: 12,
-                margin: "0 2px",
-                width: 12,
-              }}
-            />
-          ),
-          isTpl: false,
-          key: "meta",
-          title: "meta",
-        },
-      ],
-    ],
-    [
-      "testA",
-      [
-        {
-          $$info: { [symbolForRealParentId]: "" },
-          children: [
             {
-              $$info: { [symbolForRealParentId]: "" },
+              $$info: {
+                [symbolForRealParentId]: "",
+              },
               children: [
                 {
                   $$info: {
@@ -1066,47 +1347,6 @@ describe("fitler should work", () => {
                   title: "getFunctionsByCondition",
                   [symbolForHightlight]: true,
                 },
-              ],
-              icon: (
-                <span
-                  style={{
-                    display: "inline-block",
-                    height: 12,
-                    margin: "0 2px",
-                    width: 12,
-                  }}
-                />
-              ),
-              isTpl: false,
-              key: "meta/functions",
-              title: "functions",
-            },
-          ],
-          icon: (
-            <span
-              style={{
-                display: "inline-block",
-                height: 12,
-                margin: "0 2px",
-                width: 12,
-              }}
-            />
-          ),
-          isTpl: false,
-          key: "meta",
-          title: "meta",
-        },
-      ],
-    ],
-    [
-      "console.log(b)",
-      [
-        {
-          $$info: { [symbolForRealParentId]: "" },
-          children: [
-            {
-              $$info: { [symbolForRealParentId]: "" },
-              children: [
                 {
                   $$info: {
                     name: "getFunctionsByCondition",
@@ -1160,221 +1400,17 @@ describe("fitler should work", () => {
           title: "meta",
         },
       ],
-    ],
-  ])("%s should return %p", (value, result) => {
-    expect(filter(treeData, value)).toEqual(result);
-  });
-
-  it("filter deep", () => {
-    const deepData = {
-      routes: [
-        {
-          bricks: [
-            {
-              brick: "general-button",
-              events: [
-                {
-                  args: [
-                    {
-                      instanceId: "${projectId}",
-                    },
-                  ],
-                  callback: {
-                    error: [
-                      {
-                        action: "handleHttpError",
-                      },
-                    ],
-                    success: [
-                      {
-                        action: "message.success",
-                        args: ["Export Success"],
-                      },
-                    ],
-                  },
-                  method: "executeWithArgs",
-                  useProvider:
-                    "providers-of-next-builder.permission-api-export-permissions",
-                },
-              ],
-              properties: {
-                test: 1,
-              },
-              [symbolForNodeInstanceId]: "123123",
-              [symbolForNodeId]: "B-02",
-              path: "${APP.homepage}/test-1",
-            },
-          ],
-          [symbolForNodeId]: "B-01",
-          type: "bricks",
-        },
+      matchKey: [
+        "meta/customTemplates/0",
+        "meta/customTemplates/1",
+        "meta/functions/0",
+        "meta/functions/1",
       ],
-    };
-    const deepTree = buildTree(deepData);
-    expect(filter(deepTree, "handleHttpError").length).toBe(1);
-    expect(filter(deepTree, "Export Success").length).toBe(1);
-  });
-});
-
-describe("searchConfig should work", () => {
-  const treeData = buildTree(mockData);
-
-  it("supportKey should work", () => {
-    expect(
-      filter(treeData, "name", {
-        supportKey: true,
-      })
-    ).toEqual([
-      {
-        $$info: { [symbolForRealParentId]: "" },
-        children: [
-          {
-            $$info: { [symbolForRealParentId]: "" },
-            children: [
-              {
-                [symbolForHightlight]: true,
-                $$info: {
-                  [symbolForHightlight]: true,
-                  name: "tpl-test-1",
-                  [symbolForRealParentId]: "t-01",
-                  [symbolForNodeId]: "t-01",
-                },
-                icon: (
-                  <span
-                    style={{
-                      display: "inline-block",
-                      height: 12,
-                      margin: "0 2px",
-                      width: 12,
-                    }}
-                  />
-                ),
-                isTpl: true,
-                key: "meta/customTemplates/0",
-                title: "tpl-test-1",
-              },
-              {
-                [symbolForHightlight]: true,
-                $$info: {
-                  [symbolForHightlight]: true,
-                  name: "tpl-test-2",
-                  [symbolForRealParentId]: "t-02",
-                  [symbolForNodeId]: "t-02",
-                },
-                icon: (
-                  <span
-                    style={{
-                      display: "inline-block",
-                      height: 12,
-                      margin: "0 2px",
-                      width: 12,
-                    }}
-                  />
-                ),
-                isTpl: true,
-                key: "meta/customTemplates/1",
-                title: "tpl-test-2",
-              },
-            ],
-            icon: (
-              <span
-                style={{
-                  display: "inline-block",
-                  height: 12,
-                  margin: "0 2px",
-                  width: 12,
-                }}
-              />
-            ),
-            isTpl: true,
-            key: "meta/customTemplates",
-            title: "customTemplates",
-          },
-          {
-            $$info: {
-              [symbolForRealParentId]: "",
-            },
-            children: [
-              {
-                $$info: {
-                  name: "getFunctionsByCondition",
-                  source: "function testA() {console.log(a)}",
-                  typescript: true,
-                  [symbolForRealParentId]: "",
-                  [symbolForHightlight]: true,
-                },
-                icon: (
-                  <span
-                    style={{
-                      display: "inline-block",
-                      height: 12,
-                      margin: "0 2px",
-                      width: 12,
-                    }}
-                  />
-                ),
-                isTpl: false,
-                key: "meta/functions/0",
-                title: "getFunctionsByCondition",
-                [symbolForHightlight]: true,
-              },
-              {
-                $$info: {
-                  name: "getFunctionsByCondition",
-                  source: "function testB() {console.log(b)}",
-                  [symbolForRealParentId]: "",
-                  [symbolForHightlight]: true,
-                },
-                icon: (
-                  <span
-                    style={{
-                      display: "inline-block",
-                      height: 12,
-                      margin: "0 2px",
-                      width: 12,
-                    }}
-                  />
-                ),
-                isTpl: false,
-                key: "meta/functions/1",
-                title: "getFunctionsByCondition",
-                [symbolForHightlight]: true,
-              },
-            ],
-            icon: (
-              <span
-                style={{
-                  display: "inline-block",
-                  height: 12,
-                  margin: "0 2px",
-                  width: 12,
-                }}
-              />
-            ),
-            isTpl: false,
-            key: "meta/functions",
-            title: "functions",
-          },
-        ],
-        icon: (
-          <span
-            style={{
-              display: "inline-block",
-              height: 12,
-              margin: "0 2px",
-              width: 12,
-            }}
-          />
-        ),
-        isTpl: false,
-        key: "meta",
-        title: "meta",
-      },
-    ]);
+    });
     expect(
       filter(treeData, "name", {
         supportKey: false,
-      })
+      }).tree
     ).toEqual([]);
   });
 
@@ -1382,12 +1418,12 @@ describe("searchConfig should work", () => {
     expect(
       filter(treeData, "general-", {
         supportFuzzy: true,
-      }).length
+      }).tree.length
     ).toBe(1);
     expect(
       filter(treeData, "general-", {
         supportFuzzy: false,
-      }).length
+      }).tree.length
     ).toBe(0);
   });
 
@@ -1395,12 +1431,12 @@ describe("searchConfig should work", () => {
     expect(
       filter(treeData, "GENERAL-BUTTON", {
         supportIngoreCase: true,
-      }).length
+      }).tree.length
     ).toBe(1);
     expect(
       filter(treeData, "GENERAL-BUTTON", {
         supportIngoreCase: false,
-      }).length
+      }).tree.length
     ).toBe(0);
   });
 });

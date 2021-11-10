@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { cloneDeep, throttle } from "lodash";
 import { Tree, Input } from "antd";
 import { NodeMouseEventParams } from "rc-tree/lib/contextTypes";
@@ -14,6 +14,8 @@ import {
   SearchConfig,
 } from "./utils";
 import { symbolForNodeInstanceId } from "../shared/storyboard/buildStoryboard";
+import { Key } from "antd/lib/table/interface";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 export interface SearchTreeProps {
   homepage: string;
@@ -25,6 +27,12 @@ export interface SearchTreeProps {
   titleClick?: (node: any) => void;
   titleFocus?: (node: any) => void;
   titleBlur?: (node: any) => void;
+}
+
+enum searchType {
+  key,
+  fuzzy,
+  ingoreCase,
 }
 
 export const titleRender = (props: {
@@ -74,7 +82,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     appId,
     projectId,
     height,
-    searchConfig,
+    searchConfig = {},
     titleClick,
     titleFocus,
     titleBlur,
@@ -82,12 +90,36 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
   const [value, setValue] = useState("");
   const baseTree = buildTree(treeData?.storyboard);
   const [tree, setTree] = useState(baseTree);
+  const [expandedKeys, setExpandedKeys] = useState<Key[]>([]);
+  const [supportKey, setSupportKey] = useState<boolean>(
+    searchConfig.supportKey ?? true
+  );
+  const [supportIngoreCase, setSupportIngoreCase] = useState<boolean>(
+    searchConfig.supportIngoreCase ?? true
+  );
+  const [supportFuzzy, setSupportFuzzy] = useState<boolean>(
+    searchConfig.supportFuzzy ?? true
+  );
 
-  const setFilterTree = throttle((filterValue) => {
+  const setFilterTree = throttle((filterValue, searchConfig = {}) => {
     if (filterValue !== "") {
-      const result = filter(cloneDeep(baseTree), filterValue, searchConfig);
-      setTree(result);
+      const { tree, matchKey } = filter(
+        cloneDeep(baseTree),
+        filterValue,
+        Object.assign(
+          {},
+          {
+            supportFuzzy,
+            supportIngoreCase,
+            supportKey,
+          },
+          searchConfig
+        )
+      );
+      setExpandedKeys(matchKey);
+      setTree(tree);
     } else {
+      setExpandedKeys([]);
       setTree(baseTree);
     }
   }, 1000);
@@ -123,16 +155,98 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
       url: (info.node as PlainObject).url,
     });
 
+  const handleClickIcon = (type: searchType) => {
+    switch (type) {
+      case searchType.fuzzy:
+        setSupportFuzzy(!supportFuzzy);
+        setFilterTree(value, {
+          supportFuzzy: !supportFuzzy,
+        });
+        break;
+      case searchType.key:
+        setSupportKey(!supportKey);
+        setFilterTree(value, {
+          supportKey: !supportKey,
+        });
+        break;
+      case searchType.ingoreCase:
+        setSupportIngoreCase(!supportIngoreCase);
+        setFilterTree(value, {
+          supportIngoreCase: !supportIngoreCase,
+        });
+        break;
+    }
+  };
+
+  const renderInputSuffixIcon = () => {
+    return (
+      <>
+        <span title="区分大小写">
+          <GeneralIcon
+            icon={{
+              color: supportIngoreCase ? "orange" : "#8c8c8c",
+              icon: "ignore-case",
+              category: "default",
+              lib: "easyops",
+            }}
+            size={20}
+            style={{
+              marginRight: 5,
+            }}
+            onClick={() => handleClickIcon(searchType.ingoreCase)}
+          />
+        </span>
+        <span title="全字匹配">
+          <GeneralIcon
+            icon={{
+              color: !supportFuzzy ? "orange" : "#8c8c8c",
+              category: "default",
+              icon: "full-word",
+              lib: "easyops",
+            }}
+            size={20}
+            style={{
+              marginRight: 5,
+            }}
+            onClick={() => handleClickIcon(searchType.fuzzy)}
+          />
+        </span>
+        <span title="支持Key查询">
+          <GeneralIcon
+            icon={{
+              color: supportKey ? "orange" : "#8c8c8c",
+              category: "default",
+              icon: "key",
+              lib: "easyops",
+            }}
+            size={20}
+            style={{
+              marginRight: 5,
+            }}
+            onClick={() => handleClickIcon(searchType.key)}
+          />
+        </span>
+      </>
+    );
+  };
+
+  useEffect(() => {
+    setTree(buildTree(treeData?.storyboard));
+  }, [treeData]);
+
   return (
     <div>
       <Input
         placeholder="输入关键字搜索StoryBoard"
         value={value}
         onChange={handleFilterChange}
+        suffix={renderInputSuffixIcon()}
       />
       {tree.length ? (
         <Tree
-          defaultExpandAll={true}
+          key={`table-${value}-${supportFuzzy}-${supportIngoreCase}-${supportKey}`}
+          onExpand={setExpandedKeys}
+          expandedKeys={expandedKeys}
           showIcon={true}
           treeData={tree}
           virtual={true}
@@ -142,7 +256,18 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         />
-      ) : null}
+      ) : (
+        <div
+          style={{
+            color: "#8c8c8c",
+            textAlign: "center",
+            margin: 20,
+          }}
+        >
+          {" "}
+          = = Search Empty = =
+        </div>
+      )}
     </div>
   );
 }

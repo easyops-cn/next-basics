@@ -62,6 +62,8 @@ describe("SearchTree", () => {
               },
             ],
             [symbolForNodeId]: "B-01",
+            path: "${APP.homepage}",
+            alias: "page1",
             type: "bricks",
           },
         ],
@@ -88,47 +90,18 @@ describe("SearchTree", () => {
       const wrapper = getWrapper(newProps);
       expect(wrapper.find(Tree).length).toBe(1);
 
-      expect(wrapper.find(".ant-tree-title").at(0).props().children.type).toBe(
-        "span"
-      );
-      expect(
-        wrapper.find(".ant-tree-title").at(0).props().children.props.children
-      ).toBe("routes");
-
-      expect(wrapper.find(".ant-tree-title").at(1).props().children.type).toBe(
-        "a"
-      );
-      expect(
-        wrapper.find(".ant-tree-title").at(1).props().children.props.children
-      ).toBe("bricks");
-      expect(
-        wrapper.find(".ant-tree-title").at(1).props().children.props.href
-      ).toBe(
-        "/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0"
+      expect(wrapper.find(".ant-tree-title").at(0).html()).toBe(
+        '<span class="ant-tree-title"><span>routes</span></span>'
       );
 
-      expect(wrapper.find(".ant-tree-title").at(2).props().children.type).toBe(
-        "a"
-      );
-      expect(
-        wrapper.find(".ant-tree-title").at(2).props().children.props.children
-      ).toBe("general-button");
-      expect(
-        wrapper.find(".ant-tree-title").at(2).props().children.props.href
-      ).toBe(
-        "/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0#brick,I-01"
+      wrapper.find(".ant-tree-switcher").at(0).simulate("click");
+
+      expect(wrapper.find(".ant-tree-title").at(1).html()).toBe(
+        '<span class="ant-tree-title"><a href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&amp;fullscreen=1&amp;canvasIndex=0">page1</a></span>'
       );
 
-      expect(wrapper.find(".ant-tree-title").last().props().children.type).toBe(
-        "a"
-      );
-      expect(
-        wrapper.find(".ant-tree-title").last().props().children.props.children
-      ).toBe("tpl-test-2");
-      expect(
-        wrapper.find(".ant-tree-title").last().props().children.props.href
-      ).toBe(
-        "/next-builder/project/abc/app/next-builder/template/t-02/visualize-builder?fullscreen=1"
+      expect(wrapper.find(".ant-tree-title").at(2).html()).toBe(
+        '<span class="ant-tree-title"><span>meta</span></span>'
       );
     });
 
@@ -196,7 +169,11 @@ describe("SearchTree", () => {
         url: undefined,
       });
 
+      wrapper.find(".ant-tree-switcher").at(0).simulate("click");
+      wrapper.find(".ant-tree-switcher").at(1).simulate("click");
+
       wrapper.find(".ant-tree-title").at(1).simulate("click");
+
       expect(mockClick).toBeCalledTimes(2);
       expect(clickResult).toMatchObject({
         info: {
@@ -272,6 +249,61 @@ describe("SearchTree", () => {
       expect(wrapper.find(Input).prop("value")).toBe("this is a null test");
       expect(wrapper.html().indexOf("general-button")).toBe(-1);
       expect(wrapper.html().indexOf("general-select")).toBe(-1);
+    });
+
+    it("filter icon click and filter will change", () => {
+      const newProps = Object.assign({}, baseProps, {
+        treeData: storyboard,
+      });
+      const wrapper = getWrapper(newProps);
+
+      // ingore case
+      act(() => {
+        wrapper.find(Input).invoke("onChange")({
+          target: {
+            value: "GENERAL",
+          },
+        });
+      });
+      expect(wrapper.html().includes("general-button")).toBeTruthy();
+
+      act(() => {
+        wrapper.find("GeneralIcon").at(0).props().onClick();
+        jest.runAllTimers();
+      });
+      expect(wrapper.html().includes("general-button")).toBeFalsy();
+
+      // fuzzy
+      act(() => {
+        wrapper.find(Input).invoke("onChange")({
+          target: {
+            value: "general",
+          },
+        });
+      });
+      expect(wrapper.html().includes("general-button")).toBeTruthy();
+
+      act(() => {
+        wrapper.find("GeneralIcon").at(1).props().onClick();
+        jest.runAllTimers();
+      });
+      expect(wrapper.html().includes("general-button")).toBeFalsy();
+
+      // key
+      act(() => {
+        wrapper.find(Input).invoke("onChange")({
+          target: {
+            value: "name",
+          },
+        });
+      });
+      expect(wrapper.html().includes("tpl-test-1")).toBeTruthy();
+
+      act(() => {
+        wrapper.find("GeneralIcon").at(2).props().onClick();
+        jest.runAllTimers();
+      });
+      expect(wrapper.html().includes("tpl-test-1")).toBeFalsy();
     });
   });
 });
