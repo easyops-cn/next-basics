@@ -185,7 +185,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
           <GeneralIcon
             icon={{
               color: supportIngoreCase ? "orange" : "#8c8c8c",
-              icon: "ignore-case",
+              icon: "ingore-case",
               category: "default",
               lib: "easyops",
             }}
