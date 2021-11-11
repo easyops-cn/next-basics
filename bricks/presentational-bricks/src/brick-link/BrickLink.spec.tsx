@@ -51,7 +51,7 @@ describe("BrickLink", () => {
 
     expect(wrapper.find("GeneralIcon").prop("style").color).toBe("#bfbfbf");
     expect(wrapper.find("Link").length).toBe(0);
-    expect(wrapper.find("span").text()).toBe("<GeneralIcon />aaa");
+    expect(wrapper.find("span").at(0).text()).toBe("<GeneralIcon />aaa");
   });
 
   it("should work when type is text", () => {
@@ -74,6 +74,8 @@ describe("BrickLink", () => {
           type: "file-search",
         }}
         target="_blank"
+        underLine={true}
+        labelColor={"red"}
       />
     );
     expect(wrapper.find("Link").childAt(1).props().icon).toEqual({
@@ -86,5 +88,10 @@ describe("BrickLink", () => {
       hideExternalIcon: true,
     });
     expect(wrapper.find(GeneralIcon).length).toBe(1);
+    expect(wrapper.find(".underLine").length).toBe(1);
+    expect(wrapper.find(".underLine").prop("style")).toStrictEqual({
+      borderBottomColor: "red",
+      color: "red",
+    });
   });
 });

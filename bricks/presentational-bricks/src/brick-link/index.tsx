@@ -41,10 +41,28 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
+   * @description label颜色
+   */
+  @property()
+  labelColor: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
    * @description 链接的 URL
    */
   @property()
   url: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 鼠标进入label时显示下划线
+   */
+  @property({ type: Boolean })
+  underLine: boolean;
 
   /**
    * @kind string
@@ -253,6 +271,8 @@ export class BrickLinkElement extends UpdatingElement {
             type={this.type}
             iconAlign={this.iconAlign}
             hideExternalIcon={this.hideExternalIcon}
+            underLine={this.underLine}
+            labelColor={this.labelColor}
           />
         </BrickWrapper>,
         this

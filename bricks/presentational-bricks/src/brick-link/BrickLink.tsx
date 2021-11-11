@@ -19,6 +19,8 @@ export interface BrickLinkProps extends Pick<LinkProps, "replace" | "target"> {
   type?: "link" | "text";
   iconAlign?: "left" | "right";
   hideExternalIcon?: boolean;
+  underLine?: boolean;
+  labelColor?: string;
 }
 
 export function BrickLink(props: BrickLinkProps): React.ReactElement {
@@ -54,15 +56,26 @@ export function BrickLink(props: BrickLinkProps): React.ReactElement {
   ) : null;
 
   let link;
+  const labelEle = (
+    <span
+      className={props.underLine ? cssStyle.underLine : null}
+      style={{
+        borderBottomColor: props.labelColor,
+        ...(props.labelColor ? { color: props.labelColor } : {}),
+      }}
+    >
+      {label}
+    </span>
+  );
   const linkContent =
     iconAlign === "left" ? (
       <>
         {icon}
-        {label}
+        {labelEle}
       </>
     ) : (
       <>
-        {label}
+        {labelEle}
         {icon}
       </>
     );
