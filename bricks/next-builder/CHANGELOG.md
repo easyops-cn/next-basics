@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.93.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.92.0...@next-bricks/next-builder@1.93.0) (2021-11-11)
+
+
+### Features
+
+* **searchTree:** 新增搜索过滤图标，搜索自动打开路径树 ([c941fa6](https://github.com/easyops-cn/next-basics/commit/c941fa657719b2df5bc8ae3354c13c9034c4cde0))
+* **searchTree:** 替换图标 ([bbd3e18](https://github.com/easyops-cn/next-basics/commit/bbd3e18738536e5df7c8aafd253f9a9cfd38a2b3))
+
+
+
+
+
 # [1.92.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.91.0...@next-bricks/next-builder@1.92.0) (2021-11-08)
 
 
