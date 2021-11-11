@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.4...@next-bricks/presentational-bricks@1.228.5) (2021-11-11)
+
+
+### Bug Fixes
+
+* brick-link支持label颜色设置和下划线 closed MONITOR-2419 ([d7a3936](https://github.com/easyops-cn/next-basics/commit/d7a3936f5b94a112449dee74b0ee5a0cdc32eb46))
+
+
+
+
+
 ## [1.228.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.228.3...@next-bricks/presentational-bricks@1.228.4) (2021-11-08)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
