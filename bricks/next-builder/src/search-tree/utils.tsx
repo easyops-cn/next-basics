@@ -6,6 +6,7 @@ import {
   symbolForNodeId,
   symbolForNodeInstanceId,
 } from "../shared/storyboard/buildStoryboard";
+import { Key } from "antd/lib/table/interface";
 
 export const symbolForHightlight = Symbol.for("hightlight");
 export const symbolForRealParentId = Symbol.for("realParentId");
@@ -78,6 +79,12 @@ const iconTypeConstants = {
     lib: "fa",
     prefix: "fas",
   },
+  functions: {
+    color: "cyan",
+    icon: "function",
+    lib: "antd",
+    theme: "outlined",
+  },
 };
 
 const ingoreKey = ["bricks", "slots"];
@@ -94,6 +101,7 @@ const supportKey = [
   "zh",
   "en",
   "main",
+  "functions",
 ];
 
 let isParentRouteLock = false;
@@ -300,6 +308,8 @@ export function filter(
     supportIngoreCase: true,
   }
 ) {
+  const matchKey: Key[] = [];
+
   const isEqual = (v: string): boolean => {
     let a = v;
     let b = text;
@@ -313,33 +323,40 @@ export function filter(
       return a === b;
     }
   };
+
+  const setMatchItem = (item: PlainObject) => {
+    item[symbolForHightlight as any] = true;
+    // <% I18N(\"EDIT\", \"Edit\") %>
+    item.key && matchKey.push(item.key);
+  };
+
   const filterNode = (item: PlainObject | string, text: string): boolean => {
     if (isObject(item) && item) {
       for (const [k, v] of Object.entries(item)) {
         if (!["children", "key", "icon", symbolForHightlight].includes(k)) {
           if (config.supportKey && isEqual(k)) {
-            item[symbolForHightlight as any] = true;
+            setMatchItem(item);
             return true;
           }
           if (Array.isArray(v)) {
             for (let i = 0; i < v.length; i++) {
               if (isObject(v[i])) {
                 if (filterNode(v[i], text)) {
-                  item[symbolForHightlight as any] = true;
+                  setMatchItem(item);
                   return true;
                 }
               } else if (typeof v[i] === "string" && isEqual(v[i])) {
-                item[symbolForHightlight as any] = true;
+                setMatchItem(item);
                 return true;
               }
             }
           } else if (isObject(v)) {
             if (filterNode(v, text)) {
-              item[symbolForHightlight as any] = true;
+              setMatchItem(item);
               return true;
             }
           } else if (typeof v === "string" && isEqual(v)) {
-            item[symbolForHightlight as any] = true;
+            setMatchItem(item);
             return true;
           }
         }
@@ -373,5 +390,8 @@ export function filter(
     return result;
   };
 
-  return tree.reduce(getNodes, []);
+  return {
+    tree: tree.reduce(getNodes, []),
+    matchKey: matchKey,
+  };
 }
