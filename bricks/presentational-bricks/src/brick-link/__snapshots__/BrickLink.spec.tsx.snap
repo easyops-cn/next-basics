@@ -35,7 +35,16 @@ exports[`BrickLink should work 1`] = `
         }
       }
     />
-    aaa
+    <span
+      className={null}
+      style={
+        Object {
+          "borderBottomColor": undefined,
+        }
+      }
+    >
+      aaa
+    </span>
   </a>
 </Tooltip>
 `;
@@ -75,7 +84,16 @@ exports[`BrickLink should work 2`] = `
         }
       }
     />
-    aaa
+    <span
+      className={null}
+      style={
+        Object {
+          "borderBottomColor": undefined,
+        }
+      }
+    >
+      aaa
+    </span>
   </Link>
 </Tooltip>
 `;
@@ -87,7 +105,16 @@ exports[`BrickLink target="_blank" should have external-link icon 1`] = `
     target="_blank"
     to="/url"
   >
-    aaa
+    <span
+      className={null}
+      style={
+        Object {
+          "borderBottomColor": undefined,
+        }
+      }
+    >
+      aaa
+    </span>
   </Link>
   <span
     className="externalIcon"

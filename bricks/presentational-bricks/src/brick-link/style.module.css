@@ -36,3 +36,6 @@ presentational-bricks\.brick-link {
     text-decoration: underline;
   }
 }
+.underLine:hover {
+  border-bottom: 1px solid #0071eb;
+}
