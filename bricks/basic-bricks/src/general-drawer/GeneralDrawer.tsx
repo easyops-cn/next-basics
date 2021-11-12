@@ -80,6 +80,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       mask={props.mask}
       headerStyle={props.headerStyle}
       className={classNameList.join(" ")}
+      forceRender={!!props.hasOuterSwitch}
     >
       <Spin spinning={props.loading} tip="Loading...">
         <div className="content" style={{ maxHeight: maxContentHeight }}>
