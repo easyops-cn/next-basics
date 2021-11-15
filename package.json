@@ -38,15 +38,15 @@
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@next-core/babel-runtime-helpers": "^1.0.15",
     "@next-core/brick-http": "^2.3.3",
-    "@next-core/brick-icons": "^2.22.24",
-    "@next-core/brick-kit": "^2.82.1",
-    "@next-core/brick-types": "^2.47.0",
-    "@next-core/brick-utils": "^2.29.0",
+    "@next-core/brick-icons": "^2.22.28",
+    "@next-core/brick-kit": "^2.84.2",
+    "@next-core/brick-types": "^2.48.0",
+    "@next-core/brick-utils": "^2.30.0",
     "@next-core/dev-dependencies": "^1.12.23",
-    "@next-core/easyops-analytics": "^0.4.0",
-    "@next-core/editor-bricks-helper": "^0.32.12",
+    "@next-core/easyops-analytics": "^0.7.0",
+    "@next-core/editor-bricks-helper": "^0.32.17",
     "@next-core/fontawesome-library": "^1.1.21",
-    "@next-core/illustrations": "^0.4.2",
+    "@next-core/illustrations": "^0.4.4",
     "@next-core/pipes": "^1.0.1",
     "@size-limit/file": "^6.0.1",
     "@types/d3": "^6.7.5",
@@ -97,11 +97,11 @@
   "resolutions": {
     "@types/react": "^16.14.16",
     "lodash": "^4.17.21",
-    "@next-core/brick-types": "^2.47.0",
+    "@next-core/brick-types": "^2.48.0",
     "@testing-library/dom": "^7.31.2",
     "ua-parser-js": "0.7.19"
   },
   "easyops": {
-    "dev-dependencies": "1.12.13"
+    "dev-dependencies": "1.12.23"
   }
 }
