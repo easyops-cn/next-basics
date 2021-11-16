@@ -2571,6 +2571,11 @@
   resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-2.1.1.tgz#7316151c335decd512e6a72715702aa841ba3989"
   integrity sha512-kBo/55xqFUMTsTw2iF9qNRGWJOjJFuotCd8t2kylwk5Y5b4gUhQiCZYHOJl4jnwrN3ZiF1n2MqQgeRFH3w9Aqg==
 
+"@next-sdk/object-store-sdk@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/@next-sdk/object-store-sdk/-/object-store-sdk-2.1.2.tgz#93cdcb8c6296c6724684719a260f5b1b0e277ca0"
+  integrity sha512-H+x59GyXBRP8SjEun5Tw658N21kz3DPc2atBd4njL2P7wj2EeMvvoDzfqwFBbGQtF4GjytiL5K2LS1Det1WeQA==
+
 "@next-sdk/permission-sdk@^2.1.1":
   version "2.1.3"
   resolved "https://registry.npmjs.org/@next-sdk/permission-sdk/-/permission-sdk-2.1.3.tgz#1f6f5c1e351488288f35e05263a4607bda05d51f"
