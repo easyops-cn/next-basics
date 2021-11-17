@@ -43,12 +43,27 @@ jest.mock("@next-sdk/next-builder-sdk");
     {
       documentId: 1,
     },
+    {
+      documentId: 2,
+    },
   ],
 }));
-(DocumentApi_getDocumentsDetails as jest.Mock).mockImplementation(() => ({
-  content:
-    "### 标题一 \n [testB.png](www.xxx.com/path/testA120211116173345.png) \n [testB.jpeg](www.xxx.com/path/testB2120211116173350.jpeg)",
-}));
+(DocumentApi_getDocumentsDetails as jest.Mock).mockImplementation(
+  (id: number) => {
+    switch (id) {
+      case 1:
+        return {
+          content:
+            "### 标题一 \n [testA.png](www.xxx.com/path/testA120211116173345.png) \n [testB.jpeg](www.xxx.com/path/testB2120211116173350.jpeg)",
+        };
+      case 2:
+        return {
+          content:
+            "### 标题一 \n [testC.png](www.xxx.com/path/testC2120211116173400.png)",
+        };
+    }
+  }
+);
 
 (InstanceApi_deleteInstanceBatch as jest.Mock).mockImplementation(() => ({}));
 (ObjectStoreApi_removeObjects as jest.Mock).mockImplementation(() => ({}));
@@ -178,6 +193,65 @@ describe("delete unuse images function should work", () => {
     );
     expect(ObjectStoreApi_removeObjects).toBeCalledWith("next-builder", {
       objectNames: ["testF2120211116173420.jpeg", "testG2120211116173420.jpeg"],
+    });
+    expect(result).toEqual({
+      result: true,
+      message: "delete images success",
+      needReload: true,
+    });
+  });
+
+  it("should work to delete", async () => {
+    (InstanceApi_postSearch as jest.Mock).mockImplementationOnce(() => ({
+      list: [
+        {
+          url: "www.xxx.com/path/testA120211116173345.png",
+          instanceId: "a",
+        },
+        {
+          url: "www.xxx.com/path/testB2120211116173350.jpeg",
+          instanceId: "b",
+        },
+        {
+          url: "www.xxx.com/path/testC2120211116173400.jpeg",
+          instanceId: "c",
+        },
+        {
+          url: "www.xxx.com/path/testD2120211116173410.jpg",
+          instanceId: "d",
+        },
+        {
+          url: "www.xxx.com/path/testE2120211116173415.jpeg",
+          instanceId: "e",
+        },
+        {
+          url: "www.xxx.com/path/testF2120211116173420.jpeg",
+          instanceId: "f",
+        },
+        {
+          url: "www.xxx.com/path/testG2120211116173420.jpeg",
+          instanceId: "g",
+        },
+      ],
+    }));
+    const result = await DeleteUnUseImages({
+      appId,
+      projectId,
+      storyboard: {} as Storyboard,
+      bucketName,
+    });
+    expect(InstanceApi_deleteInstanceBatch).toBeCalledWith(
+      "MICRO_APP_RESOURCE_IMAGE",
+      { instanceIds: "c;d;e;f;g" }
+    );
+    expect(ObjectStoreApi_removeObjects).toBeCalledWith("next-builder", {
+      objectNames: [
+        "testC2120211116173400.jpeg",
+        "testD2120211116173410.jpg",
+        "testE2120211116173415.jpeg",
+        "testF2120211116173420.jpeg",
+        "testG2120211116173420.jpeg",
+      ],
     });
     expect(result).toEqual({
       result: true,
