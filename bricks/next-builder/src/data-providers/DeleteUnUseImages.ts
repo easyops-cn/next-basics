@@ -35,7 +35,11 @@ export async function DeleteUnUseImages({
   projectId,
   storyboard,
   bucketName,
-}: BuildProjectOfTemplatesParams) {
+}: BuildProjectOfTemplatesParams): Promise<{
+  result: boolean;
+  message: string;
+  needReload?: boolean;
+}> {
   // 获取所有图片
   const allImageReq = InstanceApi_postSearch("MICRO_APP_RESOURCE_IMAGE", {
     fields: { from: true, name: true, url: true },
@@ -60,8 +64,9 @@ export async function DeleteUnUseImages({
     (item) => item.content
   );
 
-  const createRegRule = () => new RegExp([...allImagesMap.keys()].join("|"));
-  const compareString = (str: string) => {
+  const createRegRule = (): RegExp =>
+    new RegExp([...allImagesMap.keys()].join("|"));
+  const compareString = (str: string): void => {
     const match = str.match(createRegRule());
     if (match) {
       allImagesMap.delete(match[0]);
@@ -69,7 +74,7 @@ export async function DeleteUnUseImages({
   };
 
   // 遍历
-  const walk = (tree: PlainObject) => {
+  const walk = (tree: PlainObject): void => {
     if (!tree) return;
     Object.values(tree).forEach((child) => {
       if (Array.isArray(child)) {
@@ -88,9 +93,9 @@ export async function DeleteUnUseImages({
     });
   };
 
-  const findImageInDocContent = () => {
+  const findImageInDocContent = (): void => {
     const allDocContent = allDocContentList.join("\n");
-    const hadMap = () => [...allImagesMap.values()].length > 0;
+    const hadMap = (): boolean => [...allImagesMap.values()].length > 0;
     if (hadMap()) {
       let imageRule = createRegRule();
       let match;

@@ -34,7 +34,7 @@ jest.mock("@next-sdk/next-builder-sdk");
     },
     {
       url: "www.xxx.com/path/testE2120211116173415.jpeg",
-      instanceId: "f",
+      instanceId: "e",
     },
   ],
 }));
