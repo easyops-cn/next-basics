@@ -1,7 +1,7 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Form } from "@ant-design/compatible";
-import { Card, Input, Button, Spin, Tabs, Tooltip } from "antd";
+import { Card, Input, Button, Spin, Tabs, Tooltip, Row } from "antd";
 import { get, debounce } from "lodash";
 import { FormComponentProps } from "@ant-design/compatible/lib/form/Form";
 import {
@@ -559,32 +559,34 @@ export class LegacyGeneralLogin extends React.Component<
                   },
                 ],
               })(
-                <Input
-                  //prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
-                  prefix={
-                    <FontAwesomeIcon
-                      icon="shield-alt"
-                      style={{ color: "rgba(0,0,0,.25)" }}
-                    />
-                  }
-                  style={{
-                    width: "145px",
-                    height: "42px",
-                    verticalAlign: "middle",
-                  }}
-                  placeholder={t(K.SECURITY_CODE)}
-                />
+                <Row>
+                  <Input
+                    //prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                    prefix={
+                      <FontAwesomeIcon
+                        icon="shield-alt"
+                        style={{ color: "rgba(0,0,0,.25)" }}
+                      />
+                    }
+                    style={{
+                      width: "50%",
+                      height: "42px",
+                      verticalAlign: "middle",
+                    }}
+                    placeholder={t(K.SECURITY_CODE)}
+                  />
+                  <img
+                    src={this.state.yzm}
+                    style={{
+                      width: "50%",
+                      height: "42px",
+                      verticalAlign: "middle",
+                    }}
+                    alt=""
+                    onClick={this.handleGetSecurityCodeAgain}
+                  />
+                </Row>
               )}
-              <img
-                src={this.state.yzm}
-                style={{
-                  width: "115px",
-                  height: "42px",
-                  verticalAlign: "middle",
-                }}
-                alt=""
-                onClick={this.handleGetSecurityCodeAgain}
-              />
             </Form.Item>
           )}
           <Form.Item>
