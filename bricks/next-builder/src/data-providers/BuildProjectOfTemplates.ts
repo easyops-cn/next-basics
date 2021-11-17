@@ -1,6 +1,7 @@
 import { isEmpty, uniq } from "lodash";
 import {
   BrickConfInTemplate,
+  BuilderCustomTemplateNode,
   CustomTemplate,
   SnippetDefinition,
   Story,
@@ -40,10 +41,10 @@ export function safeJSONParse(str: string): Record<string, unknown> {
   return result;
 }
 
-export const getSuffix = (fileName: string): string => {
-  if (typeof fileName !== "string") return;
-  return fileName.substring(fileName.lastIndexOf(".") + 1);
-};
+export function getBaseName(filePath: string): string {
+  if (typeof filePath !== "string") return;
+  return filePath.substring(filePath.lastIndexOf("/") + 1);
+}
 
 export const getDeepDependencies = (
   list: string[],
@@ -61,6 +62,13 @@ export const getDeepDependencies = (
   return [...new Set(arr)];
 };
 
+function getCleanProxy(proxy: string): unknown {
+  if (proxy) {
+    const { examples, interfaces, ...rest } = safeJSONParse(proxy);
+    return rest;
+  }
+}
+
 export interface BuildProjectOfTemplatesParams {
   // The human-readable id of an app.
   appId: string;
@@ -76,7 +84,7 @@ export enum DocType {
   slots,
 }
 
-interface imagesFile {
+interface ImageFiles {
   imagesDir: string;
   imagesPath: Array<{
     imageOssPath: string;
@@ -85,7 +93,7 @@ interface imagesFile {
 }
 export interface BuildInfoForProjectOfTemplates {
   files: BrickPackageFile[];
-  images?: imagesFile;
+  images?: ImageFiles;
   dependBricks: string[];
   dependProcessorPackages: string[];
 }
@@ -162,7 +170,7 @@ export async function BuildProjectOfTemplates({
       imagesAndFunctionsReq,
     ]);
 
-  const getThumbnailList = () => {
+  const getThumbnailList = (): ImageFiles["imagesPath"] => {
     return []
       .concat(
         templatesResponse.topic_vertices?.map((item) => item.thumbnail),
@@ -171,12 +179,14 @@ export async function BuildProjectOfTemplates({
       .filter((item) => item)
       .map((thumbnailUrl: string) => ({
         imageOssPath: thumbnailUrl,
-        fileName: `${simpleHash(thumbnailUrl)}.${getSuffix(thumbnailUrl)}`,
+        fileName: getBaseName(thumbnailUrl),
       }));
   };
 
   const getTransformFilePath = (fileName: string): string => {
-    return `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${fileName}`;
+    return `${
+      window.PUBLIC_ROOT ?? ""
+    }bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${fileName}`;
   };
 
   const thumbnailList = getThumbnailList();
@@ -198,7 +208,7 @@ export async function BuildProjectOfTemplates({
   const templates: CustomTemplate[] = templateTreeList.map<CustomTemplate>(
     (item) => ({
       name: `${appId}.${item.templateId}`,
-      proxy: item.proxy ? JSON.parse(item.proxy) : undefined,
+      proxy: getCleanProxy(item.proxy),
       bricks: replaceWidgetFunctions(
         buildBricks(item.children, {
           appId,
@@ -238,9 +248,9 @@ export async function BuildProjectOfTemplates({
 
   const depMap = new Map<string, string[]>();
   const createStories = (templateItem: pipes.GraphVertex): Story => {
-    const getDocContent = (obj: PlainObject, type: DocType) => {
+    const getDocContent = (obj: PlainObject, type: DocType): unknown => {
       if (!isObject(obj) || isEmpty(obj)) return;
-      const getDefaultValue = (v: any) => {
+      const getDefaultValue = (v: unknown): unknown => {
         return v ? v : "-";
       };
       return Object.entries(obj).map(([key, value]) => {
@@ -273,7 +283,9 @@ export async function BuildProjectOfTemplates({
         }
       });
     };
-    const getInterface = (interfaceObj: Record<string, PlainObject>) => {
+    const getInterface = (
+      interfaceObj: Record<string, PlainObject>
+    ): unknown => {
       if (!interfaceObj) return;
       return Object.entries(interfaceObj).map(([name, interfaceBody]) => ({
         kind: "interface",
@@ -298,11 +310,11 @@ export async function BuildProjectOfTemplates({
       }));
     };
     const useWidget: Array<string> = [];
-    const walkChilren = (data: pipes.GraphVertex, isParent = true) => {
+    const walkChildren = (data: pipes.GraphVertex, isParent = true): void => {
       if (!data) return;
       if (Array.isArray(data.children)) {
         data.children.forEach((child: pipes.GraphVertex) =>
-          walkChilren(child, false)
+          walkChildren(child, false)
         );
       }
       if (
@@ -312,15 +324,15 @@ export async function BuildProjectOfTemplates({
         internalTemplateNames &&
         internalTemplateNames.has(data.brick)
       ) {
-        data.brick = `${data.appId}.${data.brick}`;
+        data.brick = `${appId}.${data.brick}`;
         if (!isParent) {
           useWidget.push(data.brick);
         }
       }
     };
-    walkChilren(templateItem);
+    walkChildren(templateItem);
     const { thumbnail, ...restTemplateData } = templateItem;
-    const storyId = `${templateItem.appId}.${templateItem.templateId}`;
+    const storyId = `${appId}.${templateItem.templateId}`;
     const stories = {
       // 基础信息存放
       storyId: storyId,
@@ -348,7 +360,7 @@ export async function BuildProjectOfTemplates({
         history: null,
       },
       conf: [],
-      originData: restTemplateData as any,
+      originData: restTemplateData as BuilderCustomTemplateNode,
       useWidget,
     } as Story;
     if (templateItem.proxy) {
@@ -360,7 +372,7 @@ export async function BuildProjectOfTemplates({
         slots,
         interfaces,
         examples: conf,
-      } = safeJSONParse(templateItem.proxy);
+      } = JSON.parse(templateItem.proxy);
       stories.doc = Object.assign(stories.doc, {
         properties: getDocContent(properties, DocType.properties),
         events: getDocContent(events, DocType.events),
@@ -373,6 +385,8 @@ export async function BuildProjectOfTemplates({
       } else if (isObject(conf)) {
         stories.conf = [conf];
       }
+      // Allow examples to use `<% IMG.get(...) %>`
+      stories.conf = replaceWidgetFunctions(stories.conf, appId);
     }
 
     depMap.set(storyId, useWidget);
@@ -401,7 +415,7 @@ export async function BuildProjectOfTemplates({
   });
   const storiesJSONContent = JSON.stringify(stories, null, 2);
 
-  const images: imagesFile = {
+  const images: ImageFiles = {
     imagesDir: IMAGE_SAVE_FILE_PATH,
     imagesPath: thumbnailList,
   };
@@ -410,11 +424,12 @@ export async function BuildProjectOfTemplates({
     imagesAndFunctionsResponse.imgs.forEach((file) => {
       images.imagesPath.push({
         imageOssPath: file.url,
-        fileName: `${simpleHash(file.url)}.${getSuffix(file.name)}`,
+        fileName: getBaseName(file.url),
       });
     });
   }
 
+  /** deprecated */
   const replaceImageUrl = (str: string): string => {
     let newStr = str;
     images.imagesPath.forEach((imageItem) => {

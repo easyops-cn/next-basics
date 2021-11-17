@@ -50,3 +50,8 @@ declare module "*.worker.ts" {
 
   export default WebpackWorker;
 }
+
+interface Window {
+  /** The public root, E.g. "hello-world/-/" */
+  PUBLIC_ROOT?: string;
+}
