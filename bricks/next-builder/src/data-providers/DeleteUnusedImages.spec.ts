@@ -174,7 +174,7 @@ describe("delete unuse images function should work", () => {
     });
     expect(InstanceApi_deleteInstanceBatch).toBeCalledWith(
       "MICRO_APP_RESOURCE_IMAGE",
-      { instanceIds: "f-delete,g-delete" }
+      { instanceIds: "f-delete;g-delete" }
     );
     expect(ObjectStoreApi_removeObjects).toBeCalledWith("next-builder", {
       objectNames: ["testF2120211116173420.jpeg", "testG2120211116173420.jpeg"],

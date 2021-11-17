@@ -17,12 +17,19 @@ jest.mock("@next-sdk/object-store-sdk");
 
 // Mock `window.location`
 delete window.location;
-window.location = ({
+window.location = {
   origin: "http://localhost",
   pathname: "/next/a",
   search: "?b",
   hash: "#c",
-} as unknown) as Location;
+} as unknown as Location;
+
+URL.createObjectURL = jest.fn();
+
+let onLoadFn: () => void;
+Image.prototype.addEventListener = jest.fn(async (type, fn) => {
+  if (type === "load") onLoadFn = fn;
+});
 
 jest.spyOn(kit, "getHistory").mockReturnValue({
   createHref: () => "/next/a?b#c",
@@ -92,6 +99,7 @@ describe("MarkdownEditor", () => {
           selectionEnd: 2,
         },
       });
+      onLoadFn();
     });
     expect(handleUploadImage).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledWith("12{{ image.png }}3");
