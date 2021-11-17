@@ -11,7 +11,7 @@ import { Storyboard } from "@next-core/brick-types";
 import { createProviderClass, isObject } from "@next-core/brick-utils";
 import { PlainObject } from "../search-tree/utils";
 
-export interface BuildProjectOfTemplatesParams {
+export interface DeleteUnUseImagesProps {
   // The human-readable id of an app.
   appId: string;
 
@@ -35,7 +35,7 @@ export async function DeleteUnUseImages({
   projectId,
   storyboard,
   bucketName,
-}: BuildProjectOfTemplatesParams): Promise<{
+}: DeleteUnUseImagesProps): Promise<{
   result: boolean;
   message: string;
   needReload?: boolean;
