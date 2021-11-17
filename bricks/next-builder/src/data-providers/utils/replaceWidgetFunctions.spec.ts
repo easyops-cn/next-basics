@@ -18,6 +18,7 @@ describe("replaceWidgetFunctions", () => {
           e: ["good", "FN.bad()"],
           f: ["FN.bad()", "<% FN. %>"],
           g: '<% CTX.haveFun("FN") %>',
+          h: '<% IMG.get("my.png") %>',
         },
       },
       {
@@ -33,6 +34,7 @@ describe("replaceWidgetFunctions", () => {
           e: ["good", "FN.bad()"],
           f: ["FN.bad()", "<% FN. %>"],
           g: '<% CTX.haveFun("FN") %>',
+          h: '<% __WIDGET_IMG__("test-app").get("my.png") %>',
         },
       },
     ],

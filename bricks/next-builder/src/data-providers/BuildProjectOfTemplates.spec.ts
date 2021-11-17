@@ -7,7 +7,7 @@ import {
   BuildProjectOfTemplates,
   BuildProjectOfTemplatesParams,
   safeJSONParse,
-  getSuffix,
+  getBaseName,
   getDeepDependencies,
 } from "./BuildProjectOfTemplates";
 
@@ -543,7 +543,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
-    "thumbnail": "bricks/app-1/dist/assets/15858a13.png",
+    "thumbnail": "bricks/app-1/dist/assets/abc.png",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -770,7 +770,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
         "zh": "片段 X",
         "en": "Snippet X"
       },
-      "thumbnail": "bricks/app-1/dist/assets/10ea16c7.jpeg",
+      "thumbnail": "bricks/app-1/dist/assets/abc.jpeg",
       "bricks": [
         {
           "brick": "easy-view",
@@ -832,20 +832,20 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           imagesDir: "dist/assets",
           imagesPath: [
             {
-              fileName: "15858a13.png",
+              fileName: "abc.png",
               imageOssPath: "www.xxx.com/url/abc.png",
             },
             {
-              fileName: "10ea16c7.jpeg",
+              fileName: "abc.jpeg",
               imageOssPath: "www.xxx.com/url/abc.jpeg",
             },
             {
-              fileName: "6659b229.png",
+              fileName: "viewpoint1632809932499594914.png",
               imageOssPath:
                 "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
             },
             {
-              fileName: "6c079b14.png",
+              fileName: "blue-bg1632809958790451533.png",
               imageOssPath:
                 "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
             },
@@ -936,7 +936,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "layerType": "widget",
     "author": "abc",
     "isCustomTemplate": true,
-    "thumbnail": "bricks/app-2/dist/assets/15858a13.png",
+    "thumbnail": "bricks/app-2/dist/assets/abc.png",
     "doc": {
       "id": "test.template-u",
       "name": "test.template-u",
@@ -1159,16 +1159,16 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           imagesDir: "dist/assets",
           imagesPath: [
             {
-              fileName: "15858a13.png",
+              fileName: "abc.png",
               imageOssPath: "www.xxx.com/url/abc.png",
             },
             {
-              fileName: "6659b229.png",
+              fileName: "viewpoint1632809932499594914.png",
               imageOssPath:
                 "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
             },
             {
-              fileName: "6c079b14.png",
+              fileName: "blue-bg1632809958790451533.png",
               imageOssPath:
                 "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
             },
@@ -1199,12 +1199,12 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
   });
 
   it.each<[string, string | undefined]>([
-    ["abc.png", "png"],
-    ["abc.20211014.jpeg", "jpeg"],
+    ["/x/y/abc.png", "abc.png"],
+    ["abc.jpeg", "abc.jpeg"],
     ["abc", "abc"],
     [undefined, undefined],
-  ])("getSuffix should work", (data, result) => {
-    const suffix = getSuffix(data);
+  ])("getBaseName should work", (data, result) => {
+    const suffix = getBaseName(data);
     expect(suffix).toEqual(result);
   });
 

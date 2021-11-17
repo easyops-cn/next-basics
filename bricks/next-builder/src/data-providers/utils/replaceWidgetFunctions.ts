@@ -1,3 +1,4 @@
+import { Identifier } from "@babel/types";
 import {
   isEvaluable,
   isObject,
@@ -5,14 +6,18 @@ import {
   PreevaluateResult,
 } from "@next-core/brick-utils";
 
-const FN = "FN";
-const __WIDGET_FN__ = "__WIDGET_FN__";
-
 export function replaceWidgetFunctions<T>(data: T, appId: string): T {
+  const stringifyAppId = JSON.stringify(appId);
+  const patterns = new Map<string, string>([
+    ["FN", `__WIDGET_FN__[${stringifyAppId}]`],
+    ["IMG", `__WIDGET_IMG__(${stringifyAppId})`],
+  ]);
+  const keywords = [...patterns.keys()];
+
   function replace<T>(value: T): T {
     if (typeof value === "string") {
-      if (value.includes(FN) && isEvaluable(value)) {
-        const replacements: number[] = [];
+      if (keywords.some((k) => value.includes(k)) && isEvaluable(value)) {
+        const replacements: Identifier[] = [];
         let result: PreevaluateResult;
         try {
           result = preevaluate(value, {
@@ -22,10 +27,10 @@ export function replaceWidgetFunctions<T>(data: T, appId: string): T {
                   if (
                     !node.computed &&
                     node.object.type === "Identifier" &&
-                    node.object.name === FN &&
+                    patterns.has(node.object.name) &&
                     node.property.type === "Identifier"
                   ) {
-                    replacements.push(node.object.start, node.object.end);
+                    replacements.push(node.object);
                   }
                 }
               },
@@ -42,15 +47,13 @@ export function replaceWidgetFunctions<T>(data: T, appId: string): T {
           const { prefix, source, suffix } = result;
           const chunks: string[] = [];
           let prevStart = 0;
-          for (let i = 0; i < replacements.length; i += 2) {
-            const start = replacements[i];
-            chunks.push(source.substring(prevStart, start));
-            prevStart = replacements[i + 1];
+          for (let i = 0; i < replacements.length; i++) {
+            const { name, start, end } = replacements[i];
+            chunks.push(source.substring(prevStart, start), patterns.get(name));
+            prevStart = end;
           }
           chunks.push(source.substring(prevStart));
-          return `${prefix}${chunks.join(
-            `${__WIDGET_FN__}[${JSON.stringify(appId)}]`
-          )}${suffix}` as T & string;
+          return `${prefix}${chunks.join("")}${suffix}` as T & string;
         }
       }
       return value;
