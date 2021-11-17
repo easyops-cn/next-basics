@@ -62,6 +62,13 @@ export const getDeepDependencies = (
   return [...new Set(arr)];
 };
 
+function getCleanProxy(proxy: string): unknown {
+  if (proxy) {
+    const { examples, interfaces, ...rest } = safeJSONParse(proxy);
+    return rest;
+  }
+}
+
 export interface BuildProjectOfTemplatesParams {
   // The human-readable id of an app.
   appId: string;
@@ -201,7 +208,7 @@ export async function BuildProjectOfTemplates({
   const templates: CustomTemplate[] = templateTreeList.map<CustomTemplate>(
     (item) => ({
       name: `${appId}.${item.templateId}`,
-      proxy: item.proxy ? JSON.parse(item.proxy) : undefined,
+      proxy: getCleanProxy(item.proxy),
       bricks: replaceWidgetFunctions(
         buildBricks(item.children, {
           appId,
@@ -317,7 +324,7 @@ export async function BuildProjectOfTemplates({
         internalTemplateNames &&
         internalTemplateNames.has(data.brick)
       ) {
-        data.brick = `${data.appId}.${data.brick}`;
+        data.brick = `${appId}.${data.brick}`;
         if (!isParent) {
           useWidget.push(data.brick);
         }
@@ -325,7 +332,7 @@ export async function BuildProjectOfTemplates({
     };
     walkChildren(templateItem);
     const { thumbnail, ...restTemplateData } = templateItem;
-    const storyId = `${templateItem.appId}.${templateItem.templateId}`;
+    const storyId = `${appId}.${templateItem.templateId}`;
     const stories = {
       // 基础信息存放
       storyId: storyId,
@@ -365,7 +372,7 @@ export async function BuildProjectOfTemplates({
         slots,
         interfaces,
         examples: conf,
-      } = safeJSONParse(templateItem.proxy);
+      } = JSON.parse(templateItem.proxy);
       stories.doc = Object.assign(stories.doc, {
         properties: getDocContent(properties, DocType.properties),
         events: getDocContent(events, DocType.events),
@@ -378,6 +385,8 @@ export async function BuildProjectOfTemplates({
       } else if (isObject(conf)) {
         stories.conf = [conf];
       }
+      // Allow examples to use `<% IMG.get(...) %>`
+      stories.conf = replaceWidgetFunctions(stories.conf, appId);
     }
 
     depMap.set(storyId, useWidget);

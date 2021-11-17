@@ -37,7 +37,6 @@ const consoleError = jest
       ? {
           topic_vertices: [
             {
-              appId: "test",
               id: "T-01",
               instanceId: "t",
               templateId: "template-t",
@@ -45,7 +44,6 @@ const consoleError = jest
               proxy: null,
             },
             {
-              appId: "test",
               id: "T-02",
               instanceId: "u",
               templateId: "template-u",
@@ -94,7 +92,7 @@ const consoleError = jest
                 "slots": {
                   "toolbar": {
                     "ref": "f",
-                    "refSlot": "f-toobar",
+                    "refSlot": "f-toolbar",
                     "description": "slots介绍"
                   }
                 },
@@ -115,7 +113,10 @@ const consoleError = jest
                 },
                 "examples": [
                   {
-                    "brick": "test.template-u",
+                    "brick": "${graphParams.query["project.instanceId"].replace(
+                      "project",
+                      "app"
+                    )}.template-u",
                     "properties": {
                       "a": "test"
                     }
@@ -124,7 +125,6 @@ const consoleError = jest
               }`,
             },
             {
-              appId: "test",
               id: "T-03",
               instanceId: "v",
               templateId: "template-v",
@@ -137,7 +137,6 @@ const consoleError = jest
               }`,
             },
             {
-              appId: "test",
               id: "T-04",
               instanceId: "w",
               templateId: "template-w",
@@ -156,10 +155,16 @@ const consoleError = jest
                   }
                 },
                 "examples": {
-                  "brick": "test.template-w",
+                  "brick": "${graphParams.query["project.instanceId"].replace(
+                    "project",
+                    "app"
+                  )}.template-w",
                   "properties": {
                     "a": "test",
-                    "background": "url('bricks/app-1/dist/assets/6659b229.png')"
+                    "background": "url('bricks/${graphParams.query[
+                      "project.instanceId"
+                    ].replace("project", "app")}/dist/assets/6659b229.png')",
+                    "src": "<% IMG.get('my.png') %>"
                   }
                 }
               }`,
@@ -187,20 +192,12 @@ const consoleError = jest
               bg: true,
             },
             {
-              appId: "test-app",
               instanceId: "u-1",
               type: "brick",
               brick: "template-t",
               properties:
-                '{"gridTemplateAreas":[["left","right"]],"url":"bricks/app-1/dist/assets/6659b229.png"}',
+                '{"gridTemplateAreas":[["left","right"]],"url":"<% IMG.get(\'6659b229.png\') %>"}',
             },
-            // {
-            //   instanceId: "w-1",
-            //   appId: "test-app",
-            //   type: "brick",
-            //   brick: "template-w",
-            //   properties: {}
-            // }
           ],
           edges: [
             {
@@ -223,11 +220,6 @@ const consoleError = jest
               out: "u",
               out_name: "children",
             },
-            // {
-            //   in: "w-1",
-            //   out: "u",
-            //   out_name: "children"
-            // }
           ],
         }
       : graphParams.query["project.instanceId"] === "project-1"
@@ -352,7 +344,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.f3846492.js",
+            path: "dist/index.1fa326bf.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -432,33 +424,10 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
     "slots": {
       "toolbar": {
         "ref": "f",
-        "refSlot": "f-toobar",
+        "refSlot": "f-toolbar",
         "description": "slots介绍"
       }
-    },
-    "interfaces": {
-      "cProps": {
-        "a": {
-          "type": "string",
-          "description": "this is a",
-          "required": "false"
-        },
-        "b": "boolean",
-        "c": "Record<string, any>",
-        "d": "Array<cProps-childProps>"
-      },
-      "cProps-childProps": {
-        "e": "any"
-      }
-    },
-    "examples": [
-      {
-        "brick": "test.template-u",
-        "properties": {
-          "a": "test"
-        }
-      }
-    ]
+    }
   },
   "bricks": [
     {
@@ -470,7 +439,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
             "right"
           ]
         ],
-        "url": "bricks/app-1/dist/assets/6659b229.png"
+        "url": "<% __WIDGET_IMG__(\\"app-1\\").get('6659b229.png') %>"
       }
     }
   ]
@@ -486,278 +455,276 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
           },
           {
             path: "dist/stories.json",
-            content: `[
-  {
-    "storyId": "test.template-t",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "doc": {
-      "id": "test.template-t",
-      "name": "test.template-t",
-      "dockind": "brick",
-      "properties": null,
-      "author": "abc",
-      "slots": null,
-      "history": null
-    },
-    "conf": [],
-    "originData": {
-      "appId": "test",
-      "id": "T-01",
-      "instanceId": "t",
-      "templateId": "template-t",
-      "creator": "abc",
-      "proxy": null,
-      "children": [
-        {
-          "instanceId": "t-1",
-          "type": "brick",
-          "brick": "easy-view",
-          "properties": "{\\"gap\\":\\"<% PROCESSORS.myPkg.myFunc(FN.abc()) %>\\"}",
-          "children": [
-            {
-              "instanceId": "t-1-1",
-              "type": "brick",
-              "brick": "general-button",
-              "mountPoint": "a",
-              "events": "{\\"click\\":{\\"action\\":\\"console.log\\"}}"
-            },
-            {
-              "instanceId": "t-1-2",
-              "type": "provider",
-              "brick": "test-provider",
-              "mountPoint": "b",
-              "bg": true
-            }
-          ]
-        }
-      ]
-    },
-    "useWidget": []
-  },
-  {
-    "storyId": "test.template-u",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "thumbnail": "bricks/app-1/dist/assets/abc.png",
-    "doc": {
-      "id": "test.template-u",
-      "name": "test.template-u",
-      "dockind": "brick",
-      "properties": [
-        {
-          "name": "a",
-          "type": "string",
-          "required": "-",
-          "default": "hello",
-          "description": "properties介绍"
-        },
-        {
-          "name": "b",
-          "type": "-",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        },
-        {
-          "name": "c",
-          "type": "cProps",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        },
-        {
-          "name": "d",
-          "type": "dProps",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        }
-      ],
-      "author": "abc",
-      "slots": [
-        {
-          "name": "toolbar",
-          "description": "slots介绍"
-        }
-      ],
-      "history": null,
-      "events": [
-        {
-          "type": "a.click",
-          "detail": "{data:Record<string,any>[]}",
-          "description": "events介绍"
-        }
-      ],
-      "methods": [
-        {
-          "name": "sayHello",
-          "params": "{ id: string | number, name: string }",
-          "description": "methods介绍"
-        }
-      ],
-      "interface": [
-        {
-          "kind": "interface",
-          "name": "cProps",
-          "typeParameter": null,
-          "children": [
-            {
-              "description": "this is a",
-              "name": "a",
-              "required": "false",
-              "type": "string"
-            },
-            {
-              "description": "",
-              "name": "b",
-              "required": false,
-              "type": "boolean"
-            },
-            {
-              "description": "",
-              "name": "c",
-              "required": false,
-              "type": "Record<string, any>"
-            },
-            {
-              "description": "",
-              "name": "d",
-              "required": false,
-              "type": "Array<cProps-childProps>"
-            }
-          ]
-        },
-        {
-          "kind": "interface",
-          "name": "cProps-childProps",
-          "typeParameter": null,
-          "children": [
-            {
-              "description": "",
-              "name": "e",
-              "required": false,
-              "type": "any"
-            }
-          ]
-        }
-      ]
-    },
-    "conf": [
-      {
-        "brick": "test.template-u",
-        "properties": {
-          "a": "test"
-        }
-      }
-    ],
-    "originData": {
-      "appId": "test",
-      "id": "T-02",
-      "instanceId": "u",
-      "templateId": "template-u",
-      "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": false\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
-      "children": [
-        {
-          "appId": "test-app",
-          "instanceId": "u-1",
-          "type": "brick",
-          "brick": "test-app.template-t",
-          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"bricks/app-1/dist/assets/6659b229.png\\"}"
-        }
-      ]
-    },
-    "useWidget": [
-      "test-app.template-t"
-    ]
-  },
-  {
-    "storyId": "test.template-v",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "thumbnail": null,
-    "doc": {
-      "id": "test.template-v",
-      "name": "test.template-v",
-      "dockind": "brick",
-      "author": "abc",
-      "history": null
-    },
-    "conf": [],
-    "originData": {
-      "appId": "test",
-      "id": "T-03",
-      "instanceId": "v",
-      "templateId": "template-v",
-      "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": null,\\n                \\"events\\": {},\\n                \\"methods\\": 1\\n              }"
-    },
-    "useWidget": []
-  },
-  {
-    "storyId": "test.template-w",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "doc": {
-      "id": "test.template-w",
-      "name": "test.template-w",
-      "dockind": "brick",
-      "properties": [
-        {
-          "name": "FProps",
-          "type": "fProps",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        }
-      ],
-      "author": "abc",
-      "history": null,
-      "interface": [
-        {
-          "kind": "interface",
-          "name": "fProps",
-          "typeParameter": null,
-          "children": [
-            {
-              "description": "",
-              "name": "a",
-              "required": false,
-              "type": "string"
-            }
-          ]
-        }
-      ]
-    },
-    "conf": [
-      {
-        "brick": "test.template-w",
-        "properties": {
-          "a": "test",
-          "background": "url('bricks/app-1/dist/assets/6659b229.png')"
-        }
-      }
-    ],
-    "originData": {
-      "appId": "test",
-      "id": "T-04",
-      "instanceId": "w",
-      "templateId": "template-w",
-      "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\",\\n                    \\"background\\": \\"url('bricks/app-1/dist/assets/6659b229.png')\\"\\n                  }\\n                }\\n              }"
-    },
-    "useWidget": []
-  }
-]`,
+            content: [
+              {
+                storyId: "app-1.template-t",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                doc: {
+                  id: "app-1.template-t",
+                  name: "app-1.template-t",
+                  dockind: "brick",
+                  properties: null,
+                  author: "abc",
+                  slots: null,
+                  history: null,
+                },
+                conf: [],
+                originData: {
+                  id: "T-01",
+                  instanceId: "t",
+                  templateId: "template-t",
+                  creator: "abc",
+                  proxy: null,
+                  children: [
+                    {
+                      instanceId: "t-1",
+                      type: "brick",
+                      brick: "easy-view",
+                      properties:
+                        '{"gap":"<% PROCESSORS.myPkg.myFunc(FN.abc()) %>"}',
+                      children: [
+                        {
+                          instanceId: "t-1-1",
+                          type: "brick",
+                          brick: "general-button",
+                          mountPoint: "a",
+                          events: '{"click":{"action":"console.log"}}',
+                        },
+                        {
+                          instanceId: "t-1-2",
+                          type: "provider",
+                          brick: "test-provider",
+                          mountPoint: "b",
+                          bg: true,
+                        },
+                      ],
+                    },
+                  ],
+                },
+                useWidget: [],
+              },
+              {
+                storyId: "app-1.template-u",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                thumbnail: "bricks/app-1/dist/assets/abc.png",
+                doc: {
+                  id: "app-1.template-u",
+                  name: "app-1.template-u",
+                  dockind: "brick",
+                  properties: [
+                    {
+                      name: "a",
+                      type: "string",
+                      required: "-",
+                      default: "hello",
+                      description: "properties介绍",
+                    },
+                    {
+                      name: "b",
+                      type: "-",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                    {
+                      name: "c",
+                      type: "cProps",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                    {
+                      name: "d",
+                      type: "dProps",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                  ],
+                  author: "abc",
+                  slots: [
+                    {
+                      name: "toolbar",
+                      description: "slots介绍",
+                    },
+                  ],
+                  history: null,
+                  events: [
+                    {
+                      type: "a.click",
+                      detail: "{data:Record<string,any>[]}",
+                      description: "events介绍",
+                    },
+                  ],
+                  methods: [
+                    {
+                      name: "sayHello",
+                      params: "{ id: string | number, name: string }",
+                      description: "methods介绍",
+                    },
+                  ],
+                  interface: [
+                    {
+                      kind: "interface",
+                      name: "cProps",
+                      typeParameter: null,
+                      children: [
+                        {
+                          description: "this is a",
+                          name: "a",
+                          required: "false",
+                          type: "string",
+                        },
+                        {
+                          description: "",
+                          name: "b",
+                          required: false,
+                          type: "boolean",
+                        },
+                        {
+                          description: "",
+                          name: "c",
+                          required: false,
+                          type: "Record<string, any>",
+                        },
+                        {
+                          description: "",
+                          name: "d",
+                          required: false,
+                          type: "Array<cProps-childProps>",
+                        },
+                      ],
+                    },
+                    {
+                      kind: "interface",
+                      name: "cProps-childProps",
+                      typeParameter: null,
+                      children: [
+                        {
+                          description: "",
+                          name: "e",
+                          required: false,
+                          type: "any",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                conf: [
+                  {
+                    brick: "app-1.template-u",
+                    properties: {
+                      a: "test",
+                    },
+                  },
+                ],
+                originData: {
+                  id: "T-02",
+                  instanceId: "u",
+                  templateId: "template-u",
+                  creator: "abc",
+                  proxy: expect.any(String),
+                  children: [
+                    {
+                      instanceId: "u-1",
+                      type: "brick",
+                      brick: "app-1.template-t",
+                      properties:
+                        '{"gridTemplateAreas":[["left","right"]],"url":"<% IMG.get(\'6659b229.png\') %>"}',
+                    },
+                  ],
+                },
+                useWidget: ["app-1.template-t"],
+              },
+              {
+                storyId: "app-1.template-v",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                thumbnail: null,
+                doc: {
+                  id: "app-1.template-v",
+                  name: "app-1.template-v",
+                  dockind: "brick",
+                  author: "abc",
+                  history: null,
+                },
+                conf: [],
+                originData: {
+                  id: "T-03",
+                  instanceId: "v",
+                  templateId: "template-v",
+                  creator: "abc",
+                  proxy:
+                    '{\n                "properties": null,\n                "events": {},\n                "methods": 1\n              }',
+                },
+                useWidget: [],
+              },
+              {
+                storyId: "app-1.template-w",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                doc: {
+                  id: "app-1.template-w",
+                  name: "app-1.template-w",
+                  dockind: "brick",
+                  properties: [
+                    {
+                      name: "FProps",
+                      type: "fProps",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                  ],
+                  author: "abc",
+                  history: null,
+                  interface: [
+                    {
+                      kind: "interface",
+                      name: "fProps",
+                      typeParameter: null,
+                      children: [
+                        {
+                          description: "",
+                          name: "a",
+                          required: false,
+                          type: "string",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                conf: [
+                  {
+                    brick: "app-1.template-w",
+                    properties: {
+                      a: "test",
+                      background:
+                        "url('bricks/app-1/dist/assets/6659b229.png')",
+                      src: "<% __WIDGET_IMG__(\"app-1\").get('my.png') %>",
+                    },
+                  },
+                ],
+                originData: {
+                  id: "T-04",
+                  instanceId: "w",
+                  templateId: "template-w",
+                  creator: "abc",
+                  proxy: expect.any(String),
+                },
+                useWidget: [],
+              },
+            ],
           },
           {
             path: "dist/snippets.json",
@@ -872,285 +839,283 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
 }`,
           },
           {
-            path: "dist/index.fdaef410.js",
+            path: "dist/index.fd0d08c9.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
           },
           {
             path: "dist/stories.json",
-            content: `[
-  {
-    "storyId": "test.template-t",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "doc": {
-      "id": "test.template-t",
-      "name": "test.template-t",
-      "dockind": "brick",
-      "properties": null,
-      "author": "abc",
-      "slots": null,
-      "history": null
-    },
-    "conf": [],
-    "originData": {
-      "appId": "test",
-      "id": "T-01",
-      "instanceId": "t",
-      "templateId": "template-t",
-      "creator": "abc",
-      "proxy": null,
-      "children": [
-        {
-          "instanceId": "t-1",
-          "type": "brick",
-          "brick": "easy-view",
-          "properties": "{\\"gap\\":\\"<% PROCESSORS.myPkg.myFunc(FN.abc()) %>\\"}",
-          "children": [
-            {
-              "instanceId": "t-1-1",
-              "type": "brick",
-              "brick": "general-button",
-              "mountPoint": "a",
-              "events": "{\\"click\\":{\\"action\\":\\"console.log\\"}}"
-            },
-            {
-              "instanceId": "t-1-2",
-              "type": "provider",
-              "brick": "test-provider",
-              "mountPoint": "b",
-              "bg": true
-            }
-          ]
-        }
-      ]
-    },
-    "useWidget": []
-  },
-  {
-    "storyId": "test.template-u",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "thumbnail": "bricks/app-2/dist/assets/abc.png",
-    "doc": {
-      "id": "test.template-u",
-      "name": "test.template-u",
-      "dockind": "brick",
-      "properties": [
-        {
-          "name": "a",
-          "type": "string",
-          "required": "-",
-          "default": "hello",
-          "description": "properties介绍"
-        },
-        {
-          "name": "b",
-          "type": "-",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        },
-        {
-          "name": "c",
-          "type": "cProps",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        },
-        {
-          "name": "d",
-          "type": "dProps",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        }
-      ],
-      "author": "abc",
-      "slots": [
-        {
-          "name": "toolbar",
-          "description": "slots介绍"
-        }
-      ],
-      "history": null,
-      "events": [
-        {
-          "type": "a.click",
-          "detail": "{data:Record<string,any>[]}",
-          "description": "events介绍"
-        }
-      ],
-      "methods": [
-        {
-          "name": "sayHello",
-          "params": "{ id: string | number, name: string }",
-          "description": "methods介绍"
-        }
-      ],
-      "interface": [
-        {
-          "kind": "interface",
-          "name": "cProps",
-          "typeParameter": null,
-          "children": [
-            {
-              "description": "this is a",
-              "name": "a",
-              "required": "false",
-              "type": "string"
-            },
-            {
-              "description": "",
-              "name": "b",
-              "required": false,
-              "type": "boolean"
-            },
-            {
-              "description": "",
-              "name": "c",
-              "required": false,
-              "type": "Record<string, any>"
-            },
-            {
-              "description": "",
-              "name": "d",
-              "required": false,
-              "type": "Array<cProps-childProps>"
-            }
-          ]
-        },
-        {
-          "kind": "interface",
-          "name": "cProps-childProps",
-          "typeParameter": null,
-          "children": [
-            {
-              "description": "",
-              "name": "e",
-              "required": false,
-              "type": "any"
-            }
-          ]
-        }
-      ]
-    },
-    "conf": [
-      {
-        "brick": "test.template-u",
-        "properties": {
-          "a": "test"
-        }
-      }
-    ],
-    "originData": {
-      "appId": "test",
-      "id": "T-02",
-      "instanceId": "u",
-      "templateId": "template-u",
-      "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"a\\": {\\n                    \\"ref\\":\\"b\\",\\n                    \\"refProperty\\":\\"c\\",\\n                    \\"description\\": \\"properties介绍\\",\\n                    \\"type\\": \\"string\\",\\n                    \\"default\\": \\"hello\\",\\n                    \\"required\\": false\\n                  },\\n                  \\"b\\": {\\n                    \\"ref\\": \\"b-ref\\",\\n                    \\"refProperty\\": \\"b-property\\"\\n                  },\\n                  \\"c\\": {\\n                    \\"ref\\": \\"c-ref\\",\\n                    \\"refProperty\\": \\"c-property\\",\\n                    \\"type\\": \\"cProps\\"\\n                  },\\n                  \\"d\\": {\\n                    \\"asVariable\\": true,\\n                    \\"type\\": \\"dProps\\"\\n                  }\\n                },\\n                \\"events\\": {\\n                  \\"a.click\\": {\\n                    \\"ref\\": \\"d\\",\\n                    \\"refEvent\\": \\"general.a.click\\",\\n                    \\"detail\\": \\"{data:Record<string,any>[]}\\",\\n                    \\"description\\": \\"events介绍\\"\\n                  }\\n                },\\n                \\"methods\\": {\\n                  \\"sayHello\\": {\\n                    \\"ref\\": \\"e\\",\\n                    \\"refMethod\\": \\"a.say\\",\\n                    \\"params\\": \\"{ id: string | number, name: string }\\",\\n                    \\"description\\": \\"methods介绍\\"\\n                  }\\n                },\\n                \\"slots\\": {\\n                  \\"toolbar\\": {\\n                    \\"ref\\": \\"f\\",\\n                    \\"refSlot\\": \\"f-toobar\\",\\n                    \\"description\\": \\"slots介绍\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"cProps\\": {\\n                    \\"a\\": {\\n                      \\"type\\": \\"string\\",\\n                      \\"description\\": \\"this is a\\",\\n                      \\"required\\": \\"false\\"\\n                    },\\n                    \\"b\\": \\"boolean\\",\\n                    \\"c\\": \\"Record<string, any>\\",\\n                    \\"d\\": \\"Array<cProps-childProps>\\"\\n                  },\\n                  \\"cProps-childProps\\": {\\n                    \\"e\\": \\"any\\"\\n                  }\\n                },\\n                \\"examples\\": [\\n                  {\\n                    \\"brick\\": \\"test.template-u\\",\\n                    \\"properties\\": {\\n                      \\"a\\": \\"test\\"\\n                    }\\n                  }\\n                ]\\n              }",
-      "children": [
-        {
-          "appId": "test-app",
-          "instanceId": "u-1",
-          "type": "brick",
-          "brick": "test-app.template-t",
-          "properties": "{\\"gridTemplateAreas\\":[[\\"left\\",\\"right\\"]],\\"url\\":\\"bricks/app-1/dist/assets/6659b229.png\\"}"
-        }
-      ]
-    },
-    "useWidget": [
-      "test-app.template-t"
-    ]
-  },
-  {
-    "storyId": "test.template-v",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "thumbnail": null,
-    "doc": {
-      "id": "test.template-v",
-      "name": "test.template-v",
-      "dockind": "brick",
-      "author": "abc",
-      "history": null
-    },
-    "conf": [],
-    "originData": {
-      "appId": "test",
-      "id": "T-03",
-      "instanceId": "v",
-      "templateId": "template-v",
-      "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": null,\\n                \\"events\\": {},\\n                \\"methods\\": 1\\n              }"
-    },
-    "useWidget": []
-  },
-  {
-    "storyId": "test.template-w",
-    "type": "brick",
-    "layerType": "widget",
-    "author": "abc",
-    "isCustomTemplate": true,
-    "doc": {
-      "id": "test.template-w",
-      "name": "test.template-w",
-      "dockind": "brick",
-      "properties": [
-        {
-          "name": "FProps",
-          "type": "fProps",
-          "required": "-",
-          "default": "-",
-          "description": "-"
-        }
-      ],
-      "author": "abc",
-      "history": null,
-      "interface": [
-        {
-          "kind": "interface",
-          "name": "fProps",
-          "typeParameter": null,
-          "children": [
-            {
-              "description": "",
-              "name": "a",
-              "required": false,
-              "type": "string"
-            }
-          ]
-        }
-      ]
-    },
-    "conf": [
-      {
-        "brick": "test.template-w",
-        "properties": {
-          "a": "test",
-          "background": "url('bricks/app-1/dist/assets/6659b229.png')"
-        }
-      }
-    ],
-    "originData": {
-      "appId": "test",
-      "id": "T-04",
-      "instanceId": "w",
-      "templateId": "template-w",
-      "creator": "abc",
-      "proxy": "{\\n                \\"properties\\": {\\n                  \\"FProps\\": {\\n                    \\"ref\\": \\"f-ref\\",\\n                    \\"refProperty\\": \\"f\\",\\n                    \\"type\\": \\"fProps\\"\\n                  }\\n                },\\n                \\"interfaces\\": {\\n                  \\"fProps\\": {\\n                    \\"a\\": \\"string\\"\\n                  }\\n                },\\n                \\"examples\\": {\\n                  \\"brick\\": \\"test.template-w\\",\\n                  \\"properties\\": {\\n                    \\"a\\": \\"test\\",\\n                    \\"background\\": \\"url('bricks/app-1/dist/assets/6659b229.png')\\"\\n                  }\\n                }\\n              }"
-    },
-    "useWidget": []
-  }
-]`,
+            content: [
+              {
+                storyId: "app-2.template-t",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                doc: {
+                  id: "app-2.template-t",
+                  name: "app-2.template-t",
+                  dockind: "brick",
+                  properties: null,
+                  author: "abc",
+                  slots: null,
+                  history: null,
+                },
+                conf: [],
+                originData: {
+                  id: "T-01",
+                  instanceId: "t",
+                  templateId: "template-t",
+                  creator: "abc",
+                  proxy: null,
+                  children: [
+                    {
+                      instanceId: "t-1",
+                      type: "brick",
+                      brick: "easy-view",
+                      properties:
+                        '{"gap":"<% PROCESSORS.myPkg.myFunc(FN.abc()) %>"}',
+                      children: [
+                        {
+                          instanceId: "t-1-1",
+                          type: "brick",
+                          brick: "general-button",
+                          mountPoint: "a",
+                          events: '{"click":{"action":"console.log"}}',
+                        },
+                        {
+                          instanceId: "t-1-2",
+                          type: "provider",
+                          brick: "test-provider",
+                          mountPoint: "b",
+                          bg: true,
+                        },
+                      ],
+                    },
+                  ],
+                },
+                useWidget: [],
+              },
+              {
+                storyId: "app-2.template-u",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                thumbnail: "bricks/app-2/dist/assets/abc.png",
+                doc: {
+                  id: "app-2.template-u",
+                  name: "app-2.template-u",
+                  dockind: "brick",
+                  properties: [
+                    {
+                      name: "a",
+                      type: "string",
+                      required: "-",
+                      default: "hello",
+                      description: "properties介绍",
+                    },
+                    {
+                      name: "b",
+                      type: "-",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                    {
+                      name: "c",
+                      type: "cProps",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                    {
+                      name: "d",
+                      type: "dProps",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                  ],
+                  author: "abc",
+                  slots: [
+                    {
+                      name: "toolbar",
+                      description: "slots介绍",
+                    },
+                  ],
+                  history: null,
+                  events: [
+                    {
+                      type: "a.click",
+                      detail: "{data:Record<string,any>[]}",
+                      description: "events介绍",
+                    },
+                  ],
+                  methods: [
+                    {
+                      name: "sayHello",
+                      params: "{ id: string | number, name: string }",
+                      description: "methods介绍",
+                    },
+                  ],
+                  interface: [
+                    {
+                      kind: "interface",
+                      name: "cProps",
+                      typeParameter: null,
+                      children: [
+                        {
+                          description: "this is a",
+                          name: "a",
+                          required: "false",
+                          type: "string",
+                        },
+                        {
+                          description: "",
+                          name: "b",
+                          required: false,
+                          type: "boolean",
+                        },
+                        {
+                          description: "",
+                          name: "c",
+                          required: false,
+                          type: "Record<string, any>",
+                        },
+                        {
+                          description: "",
+                          name: "d",
+                          required: false,
+                          type: "Array<cProps-childProps>",
+                        },
+                      ],
+                    },
+                    {
+                      kind: "interface",
+                      name: "cProps-childProps",
+                      typeParameter: null,
+                      children: [
+                        {
+                          description: "",
+                          name: "e",
+                          required: false,
+                          type: "any",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                conf: [
+                  {
+                    brick: "app-2.template-u",
+                    properties: {
+                      a: "test",
+                    },
+                  },
+                ],
+                originData: {
+                  id: "T-02",
+                  instanceId: "u",
+                  templateId: "template-u",
+                  creator: "abc",
+                  proxy: expect.any(String),
+                  children: [
+                    {
+                      instanceId: "u-1",
+                      type: "brick",
+                      brick: "app-2.template-t",
+                      properties:
+                        '{"gridTemplateAreas":[["left","right"]],"url":"<% IMG.get(\'6659b229.png\') %>"}',
+                    },
+                  ],
+                },
+                useWidget: ["app-2.template-t"],
+              },
+              {
+                storyId: "app-2.template-v",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                thumbnail: null,
+                doc: {
+                  id: "app-2.template-v",
+                  name: "app-2.template-v",
+                  dockind: "brick",
+                  author: "abc",
+                  history: null,
+                },
+                conf: [],
+                originData: {
+                  id: "T-03",
+                  instanceId: "v",
+                  templateId: "template-v",
+                  creator: "abc",
+                  proxy:
+                    '{\n                "properties": null,\n                "events": {},\n                "methods": 1\n              }',
+                },
+                useWidget: [],
+              },
+              {
+                storyId: "app-2.template-w",
+                type: "brick",
+                layerType: "widget",
+                author: "abc",
+                isCustomTemplate: true,
+                doc: {
+                  id: "app-2.template-w",
+                  name: "app-2.template-w",
+                  dockind: "brick",
+                  properties: [
+                    {
+                      name: "FProps",
+                      type: "fProps",
+                      required: "-",
+                      default: "-",
+                      description: "-",
+                    },
+                  ],
+                  author: "abc",
+                  history: null,
+                  interface: [
+                    {
+                      kind: "interface",
+                      name: "fProps",
+                      typeParameter: null,
+                      children: [
+                        {
+                          description: "",
+                          name: "a",
+                          required: false,
+                          type: "string",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                conf: [
+                  {
+                    brick: "app-2.template-w",
+                    properties: {
+                      a: "test",
+                      background:
+                        "url('bricks/app-2/dist/assets/6659b229.png')",
+                      src: "<% __WIDGET_IMG__(\"app-2\").get('my.png') %>",
+                    },
+                  },
+                ],
+                originData: {
+                  id: "T-04",
+                  instanceId: "w",
+                  templateId: "template-w",
+                  creator: "abc",
+                  proxy: expect.any(String),
+                },
+                useWidget: [],
+              },
+            ],
           },
         ],
         dependBricks: ["easy-view", "general-button", "test-provider"],
@@ -1177,8 +1142,21 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       },
     ],
   ])("BuildProjectOfTemplates(%j) should work", async (params, result) => {
-    const buildResult = await BuildProjectOfTemplates(params);
-    expect(buildResult).toEqual(result);
+    const { files: receivedFiles, ...receivedRest } =
+      await BuildProjectOfTemplates(params);
+    const { files: expectFiles, ...expectRest } = result;
+    expect(receivedRest).toEqual(expectRest);
+    expect(receivedFiles.length).toEqual(expectFiles.length);
+    receivedFiles.forEach(({ path, content }, index) => {
+      const { path: expectPath, content: expectContent } = expectFiles[index];
+      expect(path).toEqual(expectPath);
+      if (typeof expectContent !== "string" && path.endsWith(".json")) {
+        // require("fs-extra").outputFileSync(require("path").resolve(".vscode/tests", `${params.appId}.json`), content);
+        expect(JSON.parse(content)).toEqual(expectContent);
+      } else {
+        expect(content).toEqual(expectContent);
+      }
+    });
   });
 
   it("safe JSON parse, test", () => {
@@ -1246,7 +1224,6 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
       { id: "C", useWidget: [] },
     ]);
 
-    // @ts-ignore
-    expect(getDeepDependencies({}, new Map())).toEqual([]);
+    expect(getDeepDependencies({} as any, new Map())).toEqual([]);
   });
 });
