@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.4...@next-bricks/general-auth@1.12.5) (2021-11-17)
+
+
+### Bug Fixes
+
+* next新站点验证码登陆样式调整 refs DESKTOP-238 ([3b4bb02](https://github.com/easyops-cn/next-basics/commit/3b4bb025f1776db22ae63c5c6b77e08c63dd0dc8))
+
+
+
+
+
 ## [1.12.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.3...@next-bricks/general-auth@1.12.4) (2021-11-02)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.94.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.93.0...@next-bricks/next-builder@1.94.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* replace images in widget examples ([655a0d5](https://github.com/easyops-cn/next-basics/commit/655a0d53f54d263220f28d49cb3d407bb3670a1e))
+
+
+### Features
+
+* support getting images by static files ([40f506b](https://github.com/easyops-cn/next-basics/commit/40f506b73a79f3590a96f16aa842ce789389c3a1))
+
+
+
+
+
 # [1.93.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.92.0...@next-bricks/next-builder@1.93.0) (2021-11-11)
 
 
