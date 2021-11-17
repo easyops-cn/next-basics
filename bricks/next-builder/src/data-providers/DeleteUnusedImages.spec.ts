@@ -1,4 +1,4 @@
-import { DeleteUnUseImages } from "./DeleteUnUseImages";
+import { DeleteUnUseImages } from "./DeleteUnusedImages";
 import {
   InstanceApi_postSearch,
   InstanceApi_deleteInstanceBatch,
