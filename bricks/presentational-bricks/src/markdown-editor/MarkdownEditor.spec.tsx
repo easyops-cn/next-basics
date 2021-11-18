@@ -17,12 +17,12 @@ jest.mock("@next-sdk/object-store-sdk");
 
 // Mock `window.location`
 delete window.location;
-window.location = ({
+window.location = {
   origin: "http://localhost",
   pathname: "/next/a",
   search: "?b",
   hash: "#c",
-} as unknown) as Location;
+} as unknown as Location;
 
 jest.spyOn(kit, "getHistory").mockReturnValue({
   createHref: () => "/next/a?b#c",
