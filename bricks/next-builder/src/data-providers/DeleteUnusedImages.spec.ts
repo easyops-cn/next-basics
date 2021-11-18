@@ -59,7 +59,7 @@ jest.mock("@next-sdk/next-builder-sdk");
       case 2:
         return {
           content:
-            "### 标题一 \n [testC.png](/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testC2120211116173400.png)",
+            "### 标题一 \n [testC.png](/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testC2120211116173400.jpeg)[testD.png](/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testD2120211116173410.jpg)",
         };
     }
   }
@@ -244,12 +244,10 @@ describe("delete unuse images function should work", () => {
     });
     expect(InstanceApi_deleteInstanceBatch).toBeCalledWith(
       "MICRO_APP_RESOURCE_IMAGE",
-      { instanceIds: "c;d;e;f;g" }
+      { instanceIds: "e;f;g" }
     );
     expect(ObjectStoreApi_removeObjects).toBeCalledWith("next-builder", {
       objectNames: [
-        "testC2120211116173400.jpeg",
-        "testD2120211116173410.jpg",
         "testE2120211116173415.jpeg",
         "testF2120211116173420.jpeg",
         "testG2120211116173420.jpeg",

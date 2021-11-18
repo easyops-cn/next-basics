@@ -72,7 +72,7 @@ export async function DeleteUnUseImages({
   );
 
   const reg =
-    /\/next\/api\/gateway\/object_store.object_store.GetObject\/api\/v1\/objectStore\/bucket\/next-builder\/object\/[^/](.+[png|jpg|jpeg|gif])/g;
+    /\/next\/api\/gateway\/object_store.object_store.GetObject\/api\/v1\/objectStore\/bucket\/next-builder\/object\/.+?\.(?:png|jpe?g|gif)/g;
   const compareString = (str: string): void => {
     const match = str.match(reg);
     if (match) {
@@ -145,14 +145,3 @@ customElements.define(
   "next-builder.provider-delete-unuse-images",
   createProviderClass(DeleteUnUseImages)
 );
-
-[
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636714053010954356.png)\n### jpeg 测试\nwidth: 300 height: 300\n![image](/n",
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/test21636958706957822957.jpeg)\n\nwidth: 300 height: 300 & quality: 50\n![image](/n",
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/派大星16342827475056283201636963529980839049.jpg)\n\n### png 测试\nwidth: 300 height: 300\n![image](/n",
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636960665633764036.png)\n\nquailty: 20\n![image](/n",
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/test1636958725975716025.png)\n\nwidth: 300 height: 300 & quality: 50\n![image](/n",
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636959633444056857.png)\n\nquailty: 80\n![image](/n",
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636960971384203387.png)\n![image](/n",
-  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/test31636962323581878324.png)\n![image](/n",
-];
