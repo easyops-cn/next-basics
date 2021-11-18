@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.198.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.198.0...@next-bricks/forms@1.198.1) (2021-11-18)
+
+
+### Bug Fixes
+
+* 【模型设置】属性定义-结构体、结构体数组的定义不可以设置结构项id重复 closed INSTANCE-2023 ([d20967b](https://github.com/easyops-cn/next-basics/commit/d20967beaec2f23c44f8179d645344525024ee62))
+
+
+
+
+
 # [1.198.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.197.6...@next-bricks/forms@1.198.0) (2021-11-08)
 
 
