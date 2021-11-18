@@ -140,6 +140,6 @@ export async function DeleteUnUseImages({
 }
 
 customElements.define(
-  "next-builder.provider-delete-unuse-images",
+  "next-builder.provider-delete-unused-images",
   createProviderClass(DeleteUnUseImages)
 );
