@@ -129,6 +129,8 @@ const locale: Locale = {
   [K.ADD]: "Add",
   [K.MONTH]: "month",
   [K.CORRECT_CRONT_MSG]: "Please enter the correct time format",
+  [K.CONFIRM_MSG]:
+    "is the same as the attribute ID of an existing item, please re-specify!",
 };
 
 export default locale;
