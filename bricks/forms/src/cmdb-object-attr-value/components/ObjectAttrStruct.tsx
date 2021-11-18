@@ -245,8 +245,34 @@ export function LegacyObjectAttrStructForm(
   };
 
   const handleAddStructConfirm = () => {
+    //istanbul ignore next
     props.form.validateFields(async (err, data) => {
       if (err) {
+        return;
+      }
+      const structIdArr = value?.struct_define?.map((r) => r.id) || [];
+      if (structIdArr.includes(data.id)) {
+        Modal.warning({
+          title: "提示",
+          content: (
+            <div>
+              ID
+              <code
+                style={{
+                  color: "#c7254e",
+                  padding: "2px 4px",
+                  fontSize: "90%",
+                  backgroundColor: "#f9f2f4",
+                  borderRadius: "3px",
+                }}
+              >
+                {data.id}
+              </code>
+              {i18n.t(`${NS_FORMS}:${K.CONFIRM_MSG}`)}
+            </div>
+          ),
+          okText: i18n.t(`${NS_FORMS}:${K.CONFIRM}`),
+        });
         return;
       }
       let struct = value.struct_define;
