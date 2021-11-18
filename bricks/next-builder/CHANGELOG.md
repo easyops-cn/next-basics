@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.95.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.94.0...@next-bricks/next-builder@1.95.0) (2021-11-18)
+
+
+### Features
+
+* rename file name ([7e11d43](https://github.com/easyops-cn/next-basics/commit/7e11d434603cdf44d97872f556cd2a7e04edf276))
+* rename file name ([034b414](https://github.com/easyops-cn/next-basics/commit/034b414ae6c5b7908a87f980f9dce1c76d9ba58f))
+* support images to compress and support detele un use images ([f103e7d](https://github.com/easyops-cn/next-basics/commit/f103e7dc738926177c34feba30cb355915af84d2))
+* update type ([e59bee0](https://github.com/easyops-cn/next-basics/commit/e59bee0c5052769617eb5b28cfac0f55e60137bb))
+* update unit test ([8ac1b9c](https://github.com/easyops-cn/next-basics/commit/8ac1b9cc53341a9fbb6485741fdcad66bf993c96))
+* update unit test ([2491b14](https://github.com/easyops-cn/next-basics/commit/2491b140a4b8e3aacdf2436f0d7042ae076a5f70))
+* 更新删除图片匹配逻辑 ([0e87178](https://github.com/easyops-cn/next-basics/commit/0e87178ef6bf40ffc25302ccf02c1315262fddaf))
+* 更新图片路径正则 ([7892072](https://github.com/easyops-cn/next-basics/commit/78920726df0ff055624c251bfb69ee796eb346aa))
+
+
+
+
+
 # [1.94.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.93.0...@next-bricks/next-builder@1.94.0) (2021-11-17)
 
 
