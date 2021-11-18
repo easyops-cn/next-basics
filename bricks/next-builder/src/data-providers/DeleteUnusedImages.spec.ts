@@ -17,23 +17,23 @@ jest.mock("@next-sdk/next-builder-sdk");
 (InstanceApi_postSearch as jest.Mock).mockImplementationOnce(() => ({
   list: [
     {
-      url: "www.xxx.com/path/testA120211116173345.png",
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testA120211116173345.png",
       instanceId: "a",
     },
     {
-      url: "www.xxx.com/path/testB2120211116173350.jpeg",
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testB2120211116173350.jpeg",
       instanceId: "b",
     },
     {
-      url: "www.xxx.com/path/testC2120211116173400.jpeg",
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testC2120211116173400.jpeg",
       instanceId: "c",
     },
     {
-      url: "www.xxx.com/path/testD2120211116173410.jpg",
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testD2120211116173410.jpg",
       instanceId: "d",
     },
     {
-      url: "www.xxx.com/path/testE2120211116173415.jpeg",
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testE2120211116173415.jpeg",
       instanceId: "e",
     },
   ],
@@ -54,12 +54,12 @@ jest.mock("@next-sdk/next-builder-sdk");
       case 1:
         return {
           content:
-            "### 标题一 \n [testA.png](www.xxx.com/path/testA120211116173345.png) \n [testB.jpeg](www.xxx.com/path/testB2120211116173350.jpeg)",
+            "### 标题一 \n [testA.png](/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testA120211116173345.png) \n [testB.jpeg](/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testB2120211116173350.jpeg)",
         };
       case 2:
         return {
           content:
-            "### 标题一 \n [testC.png](www.xxx.com/path/testC2120211116173400.png)",
+            "### 标题一 \n [testC.png](/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testC2120211116173400.png)",
         };
     }
   }
@@ -82,18 +82,19 @@ describe("delete unuse images function should work", () => {
           {
             brick: "any-brick",
             properties: {
-              propA: "www.xxx.com/path/testA120211116173345.png",
+              propA:
+                "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testA120211116173345.png",
               propB: {
                 background:
-                  'url("www.xxx.com/path/testB2120211116173350.jpeg")',
+                  'url("/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testB2120211116173350.jpeg")',
               },
               useBrick: [
                 {
                   brick: "any-brick",
                   properties: {
                     propC: [
-                      "www.xxx.com/path/testC2120211116173400.jpeg",
-                      "www.xxx.com/path/testD2120211116173410.jpg",
+                      "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testC2120211116173400.jpeg",
+                      "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testD2120211116173410.jpg",
                     ],
                   },
                 },
@@ -124,7 +125,8 @@ describe("delete unuse images function should work", () => {
             {
               brick: "b-x",
               properties: {
-                propE: "url('www.xxx.com/path/testE2120211116173415.jpeg')",
+                propE:
+                  "url('/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testE2120211116173415.jpeg')",
               },
             },
           ],
@@ -152,31 +154,31 @@ describe("delete unuse images function should work", () => {
     (InstanceApi_postSearch as jest.Mock).mockImplementationOnce(() => ({
       list: [
         {
-          url: "www.xxx.com/path/testA120211116173345.png",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testA120211116173345.png",
           instanceId: "a",
         },
         {
-          url: "www.xxx.com/path/testB2120211116173350.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testB2120211116173350.jpeg",
           instanceId: "b",
         },
         {
-          url: "www.xxx.com/path/testC2120211116173400.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testC2120211116173400.jpeg",
           instanceId: "c",
         },
         {
-          url: "www.xxx.com/path/testD2120211116173410.jpg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testD2120211116173410.jpg",
           instanceId: "d",
         },
         {
-          url: "www.xxx.com/path/testE2120211116173415.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testE2120211116173415.jpeg",
           instanceId: "e",
         },
         {
-          url: "www.xxx.com/path/testF2120211116173420.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testF2120211116173420.jpeg",
           instanceId: "f-delete",
         },
         {
-          url: "www.xxx.com/path/testG2120211116173420.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testG2120211116173420.jpeg",
           instanceId: "g-delete",
         },
       ],
@@ -205,31 +207,31 @@ describe("delete unuse images function should work", () => {
     (InstanceApi_postSearch as jest.Mock).mockImplementationOnce(() => ({
       list: [
         {
-          url: "www.xxx.com/path/testA120211116173345.png",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testA120211116173345.png",
           instanceId: "a",
         },
         {
-          url: "www.xxx.com/path/testB2120211116173350.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testB2120211116173350.jpeg",
           instanceId: "b",
         },
         {
-          url: "www.xxx.com/path/testC2120211116173400.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testC2120211116173400.jpeg",
           instanceId: "c",
         },
         {
-          url: "www.xxx.com/path/testD2120211116173410.jpg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testD2120211116173410.jpg",
           instanceId: "d",
         },
         {
-          url: "www.xxx.com/path/testE2120211116173415.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testE2120211116173415.jpeg",
           instanceId: "e",
         },
         {
-          url: "www.xxx.com/path/testF2120211116173420.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testF2120211116173420.jpeg",
           instanceId: "f",
         },
         {
-          url: "www.xxx.com/path/testG2120211116173420.jpeg",
+          url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testG2120211116173420.jpeg",
           instanceId: "g",
         },
       ],

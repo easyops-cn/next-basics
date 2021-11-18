@@ -24,13 +24,6 @@ window.location = {
   hash: "#c",
 } as unknown as Location;
 
-URL.createObjectURL = jest.fn();
-
-let onLoadFn: () => void;
-Image.prototype.addEventListener = jest.fn(async (type, fn) => {
-  if (type === "load") onLoadFn = fn;
-});
-
 jest.spyOn(kit, "getHistory").mockReturnValue({
   createHref: () => "/next/a?b#c",
 } as any);
@@ -99,7 +92,6 @@ describe("MarkdownEditor", () => {
           selectionEnd: 2,
         },
       });
-      onLoadFn();
     });
     expect(handleUploadImage).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledWith("12{{ image.png }}3");

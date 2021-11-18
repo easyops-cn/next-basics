@@ -51,19 +51,6 @@ export function MarkdownEditorItem(
     return `/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/${props.bucketName}/object/${objectName}`;
   };
 
-  const getImageInfo = (
-    file: File
-  ): Promise<{ width: number; height: number }> => {
-    return new Promise((resolve) => {
-      const image = new Image();
-      image.src = URL.createObjectURL(file);
-      image.addEventListener("load", () => {
-        const { width, height } = image;
-        resolve({ width, height });
-      });
-    });
-  };
-
   const filesPasted = (e: ClipboardEvent): void => {
     const items = e.clipboardData.items;
     forEach(items, async (item) => {
@@ -78,8 +65,6 @@ export function MarkdownEditorItem(
           : placeholderText;
         setValue(newValue);
         triggerChange(newValue);
-        const { width, height } = await getImageInfo(file);
-        const useMinSize = width >= 1024 && height >= 768;
         // 上传文件
         try {
           const response = await ObjectStoreApi_putObject(props.bucketName, {

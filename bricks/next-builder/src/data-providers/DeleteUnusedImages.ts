@@ -42,9 +42,9 @@ export async function DeleteUnUseImages({
 }> {
   // 获取所有图片
   const allImageReq = InstanceApi_postSearch("MICRO_APP_RESOURCE_IMAGE", {
-    fields: { from: true, name: true, url: true },
+    fields: { url: true },
     page_size: 3000,
-    query: { "project.instanceId": projectId, name: { $like: "%%" } },
+    query: { "project.instanceId": projectId },
   });
   const allDocListReq = DocumentApi_getDocumentsTreeByAppId(appId);
 
@@ -53,9 +53,16 @@ export async function DeleteUnUseImages({
     allDocListReq,
   ]);
 
+  if (allImageResponse.list.length === 0) {
+    return {
+      result: true,
+      message: "nothing to delete",
+    };
+  }
+
   const allImagesMap = new Map<string, string>();
   allImageResponse.list.forEach((item) => {
-    allImagesMap.set(getFileName(item.url), item.instanceId);
+    allImagesMap.set(item.url, item.instanceId);
   });
   const getDocDetailReq = allDocResponse.documentsTree.map((item) =>
     DocumentApi_getDocumentsDetails(item.documentId)
@@ -64,10 +71,10 @@ export async function DeleteUnUseImages({
     (item) => item.content
   );
 
-  const createRegRule = (): RegExp =>
-    new RegExp([...allImagesMap.keys()].join("|"));
+  const reg =
+    /\/next\/api\/gateway\/object_store.object_store.GetObject\/api\/v1\/objectStore\/bucket\/next-builder\/object\/[^/](.+[png|jpg|jpeg|gif])/g;
   const compareString = (str: string): void => {
-    const match = str.match(createRegRule());
+    const match = str.match(reg);
     if (match) {
       allImagesMap.delete(match[0]);
     }
@@ -95,25 +102,20 @@ export async function DeleteUnUseImages({
 
   const findImageInDocContent = (): void => {
     const allDocContent = allDocContentList.join("\n");
-    const hadMap = (): boolean => [...allImagesMap.values()].length > 0;
-    if (hadMap()) {
-      let imageRule = createRegRule();
-      let match;
-      while ((match = imageRule.exec(allDocContent)) !== null) {
-        allImagesMap.delete(match[0]);
-        if (hadMap()) {
-          imageRule = createRegRule();
-        } else {
-          break;
-        }
-      }
+    const result = allDocContent.match(reg);
+    if (result) {
+      result.forEach((url) => {
+        allImagesMap.delete(url);
+      });
     }
   };
 
   walk(storyboard);
   findImageInDocContent();
 
-  const needDeleteImages = [...allImagesMap.keys()];
+  const needDeleteImages = [...allImagesMap.keys()].map((item) =>
+    getFileName(item)
+  );
   if (needDeleteImages.length > 0) {
     const deleteImageBucketReq = ObjectStoreApi_removeObjects(bucketName, {
       objectNames: needDeleteImages,
@@ -140,6 +142,17 @@ export async function DeleteUnUseImages({
 }
 
 customElements.define(
-  "next-builder.provider-delete-unused-images",
+  "next-builder.provider-delete-unuse-images",
   createProviderClass(DeleteUnUseImages)
 );
+
+[
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636714053010954356.png)\n### jpeg 测试\nwidth: 300 height: 300\n![image](/n",
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/test21636958706957822957.jpeg)\n\nwidth: 300 height: 300 & quality: 50\n![image](/n",
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/派大星16342827475056283201636963529980839049.jpg)\n\n### png 测试\nwidth: 300 height: 300\n![image](/n",
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636960665633764036.png)\n\nquailty: 20\n![image](/n",
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/test1636958725975716025.png)\n\nwidth: 300 height: 300 & quality: 50\n![image](/n",
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636959633444056857.png)\n\nquailty: 80\n![image](/n",
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/B74A2A55-7353-4B1F-AC26-2BACE970EC6B1636960971384203387.png)\n![image](/n",
+  "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/test31636962323581878324.png)\n![image](/n",
+];
