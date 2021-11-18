@@ -84,8 +84,8 @@ export function MarkdownEditorItem(
         try {
           const response = await ObjectStoreApi_putObject(props.bucketName, {
             file: file,
-            width: useMinSize ? 1024 : width / 2,
-            height: useMinSize ? 768 : height / 2,
+            width: 1280,
+            height: 800,
           });
 
           const url = transformResponseToUrl(response.objectName);
