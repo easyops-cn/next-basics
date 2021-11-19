@@ -1,4 +1,4 @@
-import { DeleteUnUseImages } from "./DeleteUnusedImages";
+import { DeleteUnusedImages } from "./DeleteUnusedImages";
 import {
   InstanceApi_postSearch,
   InstanceApi_deleteInstanceBatch,
@@ -68,7 +68,7 @@ jest.mock("@next-sdk/next-builder-sdk");
 (InstanceApi_deleteInstanceBatch as jest.Mock).mockImplementation(() => ({}));
 (ObjectStoreApi_removeObjects as jest.Mock).mockImplementation(() => ({}));
 
-describe("delete unuse images function should work", () => {
+describe("delete unused images function should work", () => {
   const appId = "test-app";
   const projectId = "abc";
   const bucketName = "next-builder";
@@ -136,7 +136,7 @@ describe("delete unuse images function should work", () => {
   } as Storyboard;
 
   it("should work with nothing to delete", async () => {
-    const result = await DeleteUnUseImages({
+    const result = await DeleteUnusedImages({
       appId,
       projectId,
       storyboard,
@@ -183,7 +183,7 @@ describe("delete unuse images function should work", () => {
         },
       ],
     }));
-    const result = await DeleteUnUseImages({
+    const result = await DeleteUnusedImages({
       appId,
       projectId,
       storyboard,
@@ -236,7 +236,7 @@ describe("delete unuse images function should work", () => {
         },
       ],
     }));
-    const result = await DeleteUnUseImages({
+    const result = await DeleteUnusedImages({
       appId,
       projectId,
       storyboard: {} as Storyboard,
