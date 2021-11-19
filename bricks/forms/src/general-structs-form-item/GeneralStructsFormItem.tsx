@@ -7,7 +7,7 @@ import {
 import { Button, Table, Modal } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { set } from "antd";
-import { isObject, isFunction } from "lodash";
+import { isObject, isFunction, isEmpty } from "lodash";
 export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   name: string;
   modalVisible: boolean;
@@ -25,6 +25,7 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   createModalTitle?: string;
   editModalTitle?: string;
   structItemShowRenderFN?: () => any;
+  structInnerTableColumnsOrder?: string[];
 }
 
 export function GeneralStructsFormItem(
@@ -48,6 +49,7 @@ export function GeneralStructsFormItem(
     createModalTitle,
     editModalTitle,
     structItemShowRenderFN,
+    structInnerTableColumnsOrder,
   } = props;
   const footer = (
     <>
@@ -58,7 +60,11 @@ export function GeneralStructsFormItem(
     </>
   );
 
-  const columns = Object.keys(fieldsMap).map((key) => {
+  const columnKeys = isEmpty(structInnerTableColumnsOrder)
+    ? Object.keys(fieldsMap)
+    : structInnerTableColumnsOrder;
+
+  const columns = columnKeys.map((key) => {
     return {
       title: fieldsMap[key],
       key: key,

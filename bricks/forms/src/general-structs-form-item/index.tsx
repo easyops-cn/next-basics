@@ -200,6 +200,17 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   })
   structItemShowRenderFN: () => any;
 
+  /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 自定义结构体表格列的顺序
+   */
+  @property({
+    attribute: false,
+  })
+  structInnerTableColumnsOrder: string[];
+
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -395,6 +406,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             structItemShowRenderFN={this.structItemShowRenderFN}
+            structInnerTableColumnsOrder={this.structInnerTableColumnsOrder}
           />
         </BrickWrapper>,
         this._mountPoint
