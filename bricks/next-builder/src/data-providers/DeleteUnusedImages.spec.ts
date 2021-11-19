@@ -36,6 +36,10 @@ jest.mock("@next-sdk/next-builder-sdk");
       url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testE2120211116173415.jpeg",
       instanceId: "e",
     },
+    {
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testF2120211116173425.gif",
+      instanceId: "f",
+    },
   ],
 }));
 (DocumentApi_getDocumentsTreeByAppId as jest.Mock).mockImplementation(() => ({
@@ -107,6 +111,7 @@ describe("delete unused images function should work", () => {
                     brick: "any-brick",
                     properties: {
                       propD: "www.other.com/other.png",
+                      propF: "<% IMG.get('testF2120211116173425.gif') %>",
                     },
                   },
                 ],

@@ -37,12 +37,18 @@ export function findUsedImagesInStoryboard(
                   // Matching `<% IMG.get("...") %>`.
                   let arg: EstreeLiteral;
                   if (
-                    node.arguments.length > 1 &&
+                    node.arguments.length > 0 &&
                     ((arg = node.arguments[0] as unknown as EstreeLiteral),
                     arg.type === "Literal") &&
                     typeof arg.value === "string"
                   ) {
                     images.add(arg.value);
+                  } else {
+                    // eslint-disable-next-line no-console
+                    console.warn(
+                      "Unexpected dynamic accessing of `IMG.get(...)`:",
+                      value
+                    );
                   }
                 }
               },
@@ -51,7 +57,7 @@ export function findUsedImagesInStoryboard(
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error(
-            "Parse evaluation string failed when scanning functions:",
+            "Parse evaluation string failed when scanning images:",
             error
           );
         }
