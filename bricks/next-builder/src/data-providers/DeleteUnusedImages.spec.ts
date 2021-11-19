@@ -1,4 +1,4 @@
-import { DeleteUnUseImages } from "./DeleteUnusedImages";
+import { DeleteUnusedImages } from "./DeleteUnusedImages";
 import {
   InstanceApi_postSearch,
   InstanceApi_deleteInstanceBatch,
@@ -36,6 +36,10 @@ jest.mock("@next-sdk/next-builder-sdk");
       url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testE2120211116173415.jpeg",
       instanceId: "e",
     },
+    {
+      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/testF2120211116173425.gif",
+      instanceId: "f",
+    },
   ],
 }));
 (DocumentApi_getDocumentsTreeByAppId as jest.Mock).mockImplementation(() => ({
@@ -68,7 +72,7 @@ jest.mock("@next-sdk/next-builder-sdk");
 (InstanceApi_deleteInstanceBatch as jest.Mock).mockImplementation(() => ({}));
 (ObjectStoreApi_removeObjects as jest.Mock).mockImplementation(() => ({}));
 
-describe("delete unuse images function should work", () => {
+describe("delete unused images function should work", () => {
   const appId = "test-app";
   const projectId = "abc";
   const bucketName = "next-builder";
@@ -107,6 +111,7 @@ describe("delete unuse images function should work", () => {
                     brick: "any-brick",
                     properties: {
                       propD: "www.other.com/other.png",
+                      propF: "<% IMG.get('testF2120211116173425.gif') %>",
                     },
                   },
                 ],
@@ -136,7 +141,7 @@ describe("delete unuse images function should work", () => {
   } as Storyboard;
 
   it("should work with nothing to delete", async () => {
-    const result = await DeleteUnUseImages({
+    const result = await DeleteUnusedImages({
       appId,
       projectId,
       storyboard,
@@ -183,7 +188,7 @@ describe("delete unuse images function should work", () => {
         },
       ],
     }));
-    const result = await DeleteUnUseImages({
+    const result = await DeleteUnusedImages({
       appId,
       projectId,
       storyboard,
@@ -236,7 +241,7 @@ describe("delete unuse images function should work", () => {
         },
       ],
     }));
-    const result = await DeleteUnUseImages({
+    const result = await DeleteUnusedImages({
       appId,
       projectId,
       storyboard: {} as Storyboard,

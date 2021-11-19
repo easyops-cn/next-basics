@@ -8,8 +8,12 @@ import {
 } from "@next-sdk/next-builder-sdk";
 import { ObjectStoreApi_removeObjects } from "@next-sdk/object-store-sdk";
 import { Storyboard } from "@next-core/brick-types";
-import { createProviderClass, isObject } from "@next-core/brick-utils";
-import { PlainObject } from "../search-tree/utils";
+import { createProviderClass } from "@next-core/brick-utils";
+import {
+  findUsedImagesInStoryboard,
+  findUsedImagesInString,
+} from "./utils/findUsedImages";
+import { escapeRegExp } from "lodash";
 
 export interface DeleteUnUseImagesProps {
   // The human-readable id of an app.
@@ -25,12 +29,7 @@ export interface DeleteUnUseImagesProps {
   bucketName: string;
 }
 
-export const getFileName = (url: string): string => {
-  if (typeof url !== "string") return;
-  return url.substring(url.lastIndexOf("/") + 1);
-};
-
-export async function DeleteUnUseImages({
+export async function DeleteUnusedImages({
   appId,
   projectId,
   storyboard,
@@ -60,9 +59,19 @@ export async function DeleteUnUseImages({
     };
   }
 
+  const regexString = `${escapeRegExp(
+    `/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/${bucketName}/object/`
+  )}(.+?\\.(?:png|jpe?g|gif))`;
+  const regexSingleMatch = new RegExp(regexString);
+  const regexMultipleMatch = new RegExp(regexSingleMatch, "g");
+
   const allImagesMap = new Map<string, string>();
   allImageResponse.list.forEach((item) => {
-    allImagesMap.set(item.url, item.instanceId);
+    const matches = item.url.match(regexSingleMatch);
+    if (!matches) {
+      throw new Error(`Unexpected image url: ${item.url}`);
+    }
+    allImagesMap.set(matches[1], item.instanceId);
   });
   const getDocDetailReq = allDocResponse.documentsTree.map((item) =>
     DocumentApi_getDocumentsDetails(item.documentId)
@@ -71,59 +80,32 @@ export async function DeleteUnUseImages({
     (item) => item.content
   );
 
-  const reg =
-    /\/next\/api\/gateway\/object_store.object_store.GetObject\/api\/v1\/objectStore\/bucket\/next-builder\/object\/.+?\.(?:png|jpe?g|gif)/g;
-  const compareString = (str: string): void => {
-    const match = str.match(reg);
-    if (match) {
-      allImagesMap.delete(match[0]);
-    }
-  };
-
-  // 遍历
-  const walk = (tree: PlainObject): void => {
-    if (!tree) return;
-    Object.values(tree).forEach((child) => {
-      if (Array.isArray(child)) {
-        child.forEach((item) => {
-          if (isObject(item)) {
-            walk(item);
-          } else if (typeof item === "string") {
-            compareString(item);
-          }
-        });
-      } else if (isObject(child)) {
-        walk(child);
-      } else if (typeof child === "string") {
-        compareString(child);
-      }
-    });
-  };
-
-  const findImageInDocContent = (): void => {
-    const allDocContent = allDocContentList.join("\n");
-    const result = allDocContent.match(reg);
-    if (result) {
-      result.forEach((url) => {
-        allImagesMap.delete(url);
-      });
-    }
-  };
-
-  walk(storyboard);
-  findImageInDocContent();
-
-  const needDeleteImages = [...allImagesMap.keys()].map((item) =>
-    getFileName(item)
+  const usedImages = new Set<string>();
+  findUsedImagesInStoryboard(storyboard, regexMultipleMatch, usedImages);
+  findUsedImagesInString(
+    allDocContentList.join("\n"),
+    regexMultipleMatch,
+    usedImages
   );
-  if (needDeleteImages.length > 0) {
+
+  const unusedImages: string[] = [];
+  const unusedImageInstanceIds: string[] = [];
+
+  for (const [imageName, instanceId] of allImagesMap.entries()) {
+    if (!usedImages.has(imageName)) {
+      unusedImages.push(imageName);
+      unusedImageInstanceIds.push(instanceId);
+    }
+  }
+
+  if (unusedImages.length > 0) {
     const deleteImageBucketReq = ObjectStoreApi_removeObjects(bucketName, {
-      objectNames: needDeleteImages,
+      objectNames: unusedImages,
     });
     const deleteImageInstanceReq = InstanceApi_deleteInstanceBatch(
       "MICRO_APP_RESOURCE_IMAGE",
       {
-        instanceIds: [...allImagesMap.values()].join(";"),
+        instanceIds: unusedImageInstanceIds.join(";"),
       }
     );
     await Promise.all([deleteImageBucketReq, deleteImageInstanceReq]);
@@ -142,6 +124,6 @@ export async function DeleteUnUseImages({
 }
 
 customElements.define(
-  "next-builder.provider-delete-unuse-images",
-  createProviderClass(DeleteUnUseImages)
+  "next-builder.provider-delete-unused-images",
+  createProviderClass(DeleteUnusedImages)
 );
