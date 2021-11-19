@@ -24,11 +24,11 @@
 }
 
 .small {
-  height: 24px;
-  width: 24px;
+  height: 26px;
+  width: 26px;
   font-size: 12px;
   border-width: 2px;
-  line-height: 20px;
+  line-height: 22px;
   span {
     font-size: 6px;
   }
