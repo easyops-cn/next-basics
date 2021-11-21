@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.229.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.229.1...@next-bricks/presentational-bricks@1.229.2) (2021-11-21)
+
+
+### Bug Fixes
+
+* should not render if no src property ([a930c7b](https://github.com/easyops-cn/next-basics/commit/a930c7b5a358a2823c8c8199477c34826b6a0241))
+
+
+
+
+
 ## [1.229.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.229.0...@next-bricks/presentational-bricks@1.229.1) (2021-11-19)
 
 

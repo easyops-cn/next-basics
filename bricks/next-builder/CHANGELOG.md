@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.96.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.95.0...@next-bricks/next-builder@1.96.0) (2021-11-21)
+
+
+### Bug Fixes
+
+* refine searching unused images ([16b9969](https://github.com/easyops-cn/next-basics/commit/16b99694c8de467165f9b19b9d653b4e78fa66a7))
+
+
+### Features
+
+* recognize `IMG.get(...)` when searching used images ([096aa40](https://github.com/easyops-cn/next-basics/commit/096aa4030a4daeada8c1e594bce4d2b24c8fa5c5))
+
+
+
+
+
 # [1.95.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.94.0...@next-bricks/next-builder@1.95.0) (2021-11-18)
 
 
