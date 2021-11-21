@@ -6,6 +6,16 @@ const spyOnDispatchEvent = jest.spyOn(window, "dispatchEvent");
 const spyOnRemoveLister = jest.spyOn(window, "removeEventListener");
 
 describe("presentational-bricks.general-iframe", () => {
+  it("render nothing if no src property", async () => {
+    const element = document.createElement(
+      "presentational-bricks.general-iframe"
+    ) as GeneralIframeElement;
+
+    await jest.runAllTimers();
+    document.body.appendChild(element);
+
+    expect(element.childNodes.length).toEqual(0);
+  });
   it("should create a custom element", async () => {
     const element = document.createElement(
       "presentational-bricks.general-iframe"
@@ -14,6 +24,7 @@ describe("presentational-bricks.general-iframe", () => {
     await jest.runAllTimers();
     expect(spyOnDispatchEvent).not.toBeCalled();
     document.body.appendChild(element);
+    element.src = "http://192.168.100.162";
     element.iframeStyle = {
       border: "0px",
     };
