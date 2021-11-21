@@ -109,7 +109,7 @@ export class GeneralIframeElement extends UpdatingElement {
 
   protected _render(): void {
     // istanbul ignore else
-    if (this.isConnected) {
+    if (this.isConnected && this.src) {
       if (!this.iframe) {
         this.iframe = document.createElement("iframe");
         this.appendChild(this.iframe);
