@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.229.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.229.2...@next-bricks/presentational-bricks@1.229.3) (2021-11-22)
+
+
+### Bug Fixes
+
+* **rank-table:** set min-with of ranking box ([d186cba](https://github.com/easyops-cn/next-basics/commit/d186cbab7056ad81182b73f68c7335eb1c8b7d09))
+
+
+
+
+
 ## [1.229.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.229.1...@next-bricks/presentational-bricks@1.229.2) (2021-11-21)
 
 
