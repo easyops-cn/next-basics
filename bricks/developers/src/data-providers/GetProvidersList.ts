@@ -1,25 +1,16 @@
 import { createProviderClass } from "@next-core/brick-utils";
-import { developHelper } from "@next-core/brick-kit";
-import { map, flatten } from "lodash";
+import { BootstrapV2Api_brickPackageInfo } from "@next-sdk/api-gateway-sdk";
 
-export function GetProvidersList(): Promise<any> {
-  const brickPackages = developHelper.getBrickPackages();
-  const prefix = "bricks/providers-of-";
-  const filteredPkg = brickPackages
-    .filter((pkg) => pkg.filePath.startsWith(prefix))
-    .map((pkg) => ({
-      id: pkg.filePath.substr(prefix.length).split("/")[0],
-      bricks: pkg.bricks,
+export async function GetProvidersList(): Promise<any> {
+  const brickPackages = await BootstrapV2Api_brickPackageInfo();
+  const prefix = "providers-of-";
+  const providersList = brickPackages.bricks
+    .filter((name) => name.startsWith(prefix))
+    .map((name) => ({
+      name,
+      type: "provider",
+      service: name.substr(prefix.length).split(".")[0],
     }));
-  const providersList = flatten(
-    map(filteredPkg, (item) => {
-      return item.bricks.map((brick) => ({
-        service: item.id,
-        name: brick,
-        type: "provider",
-      }));
-    })
-  );
   return { list: providersList };
 }
 
