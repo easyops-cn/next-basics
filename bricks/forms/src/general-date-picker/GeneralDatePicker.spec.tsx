@@ -46,33 +46,33 @@ describe("GeneralDatePicker", () => {
     const wrapper = mount(
       <GeneralDatePicker value="2019-10-01" picker="date" />
     );
-    expect(wrapper.find(DatePicker).prop("value").format("YYYY-MM-DD")).toBe(
-      "2019-10-01"
-    );
+    expect(
+      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-MM-DD")
+    ).toBe("2019-10-01");
 
     wrapper.setProps({
       value: "2020-01-01",
     });
     wrapper.update();
-    expect(wrapper.find(DatePicker).prop("value").format("YYYY-MM-DD")).toBe(
-      "2020-01-01"
-    );
+    expect(
+      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-MM-DD")
+    ).toBe("2020-01-01");
   });
   it("should update value week", () => {
     const wrapper = mount(
       <GeneralDatePicker value="2019-10周" picker="week" />
     );
-    expect(wrapper.find(DatePicker).prop("value").format("YYYY-ww周")).toBe(
-      "2019-10周"
-    );
+    expect(
+      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-ww周")
+    ).toBe("2019-10周");
 
     wrapper.setProps({
       value: "2020-20周",
     });
     wrapper.update();
-    expect(wrapper.find(DatePicker).prop("value").format("YYYY-ww周")).toBe(
-      "2020-20周"
-    );
+    expect(
+      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-ww周")
+    ).toBe("2020-20周");
   });
 
   describe("test disabled", () => {
@@ -174,7 +174,24 @@ describe("GeneralDatePicker", () => {
       ).toHaveLength(0);
       expect(
         secondColumn.find(".ant-picker-time-panel-cell-disabled")
-      ).toHaveLength(16);
+      ).toHaveLength(10);
+    });
+
+    it("test confirmDisabled", () => {
+      datePicker.setProps({
+        disabledDate: [
+          {
+            month: "1-12",
+          },
+        ],
+      });
+      datePicker.update();
+      expect(
+        datePicker
+          .find(DatePicker)
+          .prop("dropdownClassName")
+          .includes("confirmDisabled")
+      ).toBeFalsy();
     });
   });
 });

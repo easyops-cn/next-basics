@@ -1,10 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Icon from "@ant-design/icons";
 import { DatePicker } from "antd";
 import moment, { Moment } from "moment";
 import { BrickIcon } from "@next-core/brick-icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { DisabledDateType } from "../interfaces";
+import classNames from "classnames";
+import style from "./GeneralDatePicker.module.css";
 
 interface GeneralDatePickerProps extends FormItemWrapperProps {
   placeholder?: string;
@@ -75,6 +77,7 @@ export function GeneralDatePicker(
   props: GeneralDatePickerProps
 ): React.ReactElement {
   const { disabledDate, disabled } = props;
+  const [confirmDisabled, setConfirmDisabled] = useState(false);
 
   const crontab = useMemo(() => {
     if (!disabledDate) {
@@ -153,6 +156,7 @@ export function GeneralDatePicker(
     let disabledHours: number[] = [];
     let disabledMinutes: number[] = [];
     let disabledSeconds: number[] = [];
+    let matchCurDate = false;
     crontab.forEach((cron) => {
       const { isAllTime, fields } = cron;
       //时分秒都没输入，则所有时间都可选
@@ -163,6 +167,12 @@ export function GeneralDatePicker(
         isInFieldSetOrRanges(curMonth, month) &&
         isInFieldSetOrRanges(curWeekday, weekday) &&
         isInFieldSetOrRanges(curDate, date);
+      matchCurDate =
+        matchCurDate ||
+        (isMatchDate &&
+          isInFieldSetOrRanges(curHour, hour) &&
+          isInFieldSetOrRanges(curMinute, minute) &&
+          isInFieldSetOrRanges(currentSecond, second));
       if (isMatchDate) {
         const hourFields = isEmptyFieldSetOrRanges(hour)
           ? [...Array(24).keys()]
@@ -190,6 +200,7 @@ export function GeneralDatePicker(
         }
       }
     });
+    setConfirmDisabled(matchCurDate);
     return {
       disabledHours: () => disabledHours,
       disabledMinutes: () => disabledMinutes,
@@ -201,11 +212,14 @@ export function GeneralDatePicker(
     <FormItemWrapper {...props}>
       {props.picker === "date" ? (
         <DatePicker
-          value={
+          defaultValue={
             props.name && props.formElement
               ? undefined
               : props.value && moment(props.value, props.format || "YYYY-MM-DD")
           }
+          dropdownClassName={classNames({
+            [style.confirmDisabled]: confirmDisabled,
+          })}
           format={props.format || "YYYY-MM-DD"}
           showTime={props.showTime}
           onChange={handleChange}
@@ -220,11 +234,14 @@ export function GeneralDatePicker(
         />
       ) : (
         <DatePicker
-          value={
+          defaultValue={
             props.name && props.formElement
               ? undefined
               : props.value && moment(props.value, props.format || "gggg-ww周")
           }
+          dropdownClassName={classNames({
+            [style.confirmDisabled]: confirmDisabled,
+          })}
           format={props.format || "gggg-ww周"}
           onChange={handleChange}
           style={props.inputBoxStyle}
