@@ -8,12 +8,14 @@ import styles from "./AppBarBreadcrumb.module.css";
 
 interface BasicBreadcrumbProps {
   breadcrumb?: BreadcrumbItemConf[];
+  noCurrentApp?: boolean;
 }
 
 export function AppBarBreadcrumb(
   props: BasicBreadcrumbProps
 ): React.ReactElement {
   const { currentApp, previousWorkspace } = useRecentApps();
+  const { items: breadcrumbItems } = currentApp?.breadcrumb || {};
 
   const handleGoBackPreviousWorkspace = (): void => {
     getRuntime().popWorkspaceStack();
@@ -35,9 +37,18 @@ export function AppBarBreadcrumb(
         </a>
       )}
       <Breadcrumb separator=">">
-        {currentApp ? (
+        {breadcrumbItems &&
+          breadcrumbItems.map((item: BreadcrumbItemConf, index: number) => {
+            return (
+              <Breadcrumb.Item key={index}>
+                {index === 0 && <HomeOutlined />}
+                {item.to ? <Link to={item.to}>{item.text}</Link> : item.text}
+              </Breadcrumb.Item>
+            );
+          })}
+        {currentApp && !props.noCurrentApp ? (
           <Breadcrumb.Item>
-            <HomeOutlined />
+            {!breadcrumbItems?.length && <HomeOutlined />}
             <span>
               {props.breadcrumb &&
               props.breadcrumb.length > 0 &&

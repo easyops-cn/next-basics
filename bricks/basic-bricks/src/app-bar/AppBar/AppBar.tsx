@@ -20,12 +20,14 @@ interface AppBarProps {
   pageTitle: string;
   breadcrumb?: BreadcrumbItemConf[];
   documentId?: string;
+  noCurrentApp?: boolean;
 }
 
 export function AppBar({
   pageTitle,
   breadcrumb,
   documentId,
+  noCurrentApp,
 }: AppBarProps): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
@@ -154,7 +156,7 @@ export function AppBar({
           </>
         )}
 
-        <AppBarBreadcrumb breadcrumb={breadcrumb} />
+        <AppBarBreadcrumb breadcrumb={breadcrumb} noCurrentApp={noCurrentApp} />
       </div>
       <div className={styles.actionsContainer}>
         <AppDocumentLink documentId={documentId} />

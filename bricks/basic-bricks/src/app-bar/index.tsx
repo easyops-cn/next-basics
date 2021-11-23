@@ -11,6 +11,11 @@ class AppBarElement extends UpdatingElement {
   @property()
   documentId: string;
 
+  @property({
+    type: Boolean,
+  })
+  noCurrentApp: boolean;
+
   private _breadcrumb: BreadcrumbItemConf[] = [];
 
   connectedCallback(): void {
@@ -33,6 +38,7 @@ class AppBarElement extends UpdatingElement {
           <AppBar
             pageTitle={this.pageTitle}
             breadcrumb={this._breadcrumb}
+            noCurrentApp={this.noCurrentApp}
             documentId={this.documentId}
           />
         </BrickWrapper>,
