@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.156.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.155.5...@next-bricks/basic-bricks@1.156.0) (2021-11-23)
+
+
+### Features
+
+* support common breadcrumb ([#857](https://github.com/easyops-cn/next-basics/issues/857)) ([ab53a45](https://github.com/easyops-cn/next-basics/commit/ab53a45bf273e84beeb19ab52223cbe148b88771))
+
+
+
+
+
 ## [1.155.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.155.4...@next-bricks/basic-bricks@1.155.5) (2021-11-21)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
