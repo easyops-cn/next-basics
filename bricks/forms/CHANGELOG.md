@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.199.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.199.1...@next-bricks/forms@1.199.2) (2021-11-23)
+
+
+### Bug Fixes
+
+* **forms:** 结构项id唯一校验 ([e06c881](https://github.com/easyops-cn/next-basics/commit/e06c8812c07ae5c39e3c55c1d4eebbfe8fa053a7))
+
+
+
+
+
 ## [1.199.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.199.0...@next-bricks/forms@1.199.1) (2021-11-21)
 
 **Note:** Version bump only for package @next-bricks/forms
