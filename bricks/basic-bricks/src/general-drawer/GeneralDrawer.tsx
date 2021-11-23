@@ -105,13 +105,6 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
                   : { lib: "antd", icon: "left", theme: "outlined" }
               }
             ></GeneralIcon>
-            {props.useBigOuterSwitch && (
-              <div>
-                {props.visible
-                  ? props.customSwitchConfig?.openText
-                  : props.customSwitchConfig?.closeText}
-              </div>
-            )}
           </div>
         )}
         <Spin spinning={props.loading} tip="Loading...">
