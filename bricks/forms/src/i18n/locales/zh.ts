@@ -118,7 +118,7 @@ const locale: Locale = {
   [K.ADD]: "添加",
   [K.MONTH]: "月",
   [K.CORRECT_CRONT_MSG]: "请填写正确的时间格式",
-  [K.CONFIRM_MSG]: "与已有结构项ID重复，请重新指定！",
+  [K.DUPLICATE_STRUCTURE_ITEM_ID]: "{{id}}与已有结构项ID重复，请重新指定！",
 };
 
 export default locale;

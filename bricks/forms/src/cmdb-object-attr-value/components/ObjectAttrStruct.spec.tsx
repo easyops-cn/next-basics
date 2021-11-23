@@ -1,9 +1,18 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
-import { Modal, Row, Radio, Button, Table, Input, Select } from "antd";
+import {
+  Modal,
+  Row,
+  Radio,
+  Button,
+  Table,
+  Input,
+  Select,
+  RadioChangeEvent,
+} from "antd";
 import { CmdbObjectApi_getObjectAll } from "@next-sdk/cmdb-sdk";
-import { IPRegex, ObjectAttrStruct } from "./ObjectAttrStruct";
+import { IPRegex, ObjectAttrStruct, StructValueType } from "./ObjectAttrStruct";
 import { NS_FORMS, K } from "../../i18n/constants";
 import i18n from "i18next";
 jest.mock("@next-sdk/cmdb-sdk");
@@ -44,7 +53,7 @@ mockLoadObject.mockResolvedValue({
 const defaultValue = {
   default: "",
   struct_define: [],
-};
+} as StructValueType;
 
 describe("ObjectAttrStruct", () => {
   it("should work", async () => {
@@ -63,7 +72,7 @@ describe("ObjectAttrStruct", () => {
         target: {
           value: "import",
         },
-      });
+      } as unknown as RadioChangeEvent);
 
       await (global as any).flushPromises();
     });
@@ -115,14 +124,18 @@ describe("ObjectAttrStruct", () => {
     };
 
     const wrapper = mount(<ObjectAttrStruct {...props} />);
-    wrapper.find(Button).at(0).invoke("onClick")();
-    expect(wrapper.find("Modal").at(0).props().visible).toBeTruthy();
+    wrapper.find(Button).at(0).invoke("onClick")(null);
+    expect(wrapper.find(Modal).at(0).props().visible).toBeTruthy();
     wrapper.update();
-    wrapper.find(Input).at(0).invoke("onChange")("structId");
-    wrapper.find(Input).at(1).invoke("onChange")("structName");
-    wrapper.find(Select).at(0).invoke("onChange")("date");
+    wrapper.find(Input).at(0).invoke("onChange")(
+      "structId" as unknown as ChangeEvent<HTMLInputElement>
+    );
+    wrapper.find(Input).at(1).invoke("onChange")(
+      "structName" as unknown as ChangeEvent<HTMLInputElement>
+    );
+    wrapper.find(Select).at(0).invoke("onChange")("date", null);
 
-    wrapper.find(Modal).at(0).invoke("onOk")(); // 点击弹窗确认按钮
+    wrapper.find(Modal).at(0).invoke("onOk")(null); // 点击弹窗确认按钮
 
     expect(props.onChange).toBeCalledWith({
       default: "",
@@ -136,7 +149,7 @@ describe("ObjectAttrStruct", () => {
     });
 
     wrapper.update();
-    expect(wrapper.find("Modal").at(0).props().visible).toBeFalsy();
+    expect(wrapper.find(Modal).at(0).props().visible).toBeFalsy();
     expect(wrapper.find(Table).at(0).props().dataSource.length).toBe(1);
     const optionBtnDiv = wrapper.find(".struct-option-btn-group").at(0);
     expect(optionBtnDiv.props().children.length).toBe(2);
@@ -144,15 +157,15 @@ describe("ObjectAttrStruct", () => {
 
     await jest.runAllTimers();
     wrapper.update();
-    expect(wrapper.find("Modal").at(0).props().title).toBe(
+    expect(wrapper.find(Modal).at(0).props().title).toBe(
       i18n.t(`${NS_FORMS}:${K.TITLE_EDIT_STRUCTURE_ITEM}`)
     );
 
-    wrapper.find(Modal).at(0).invoke("onCancel")(); // 点击弹窗确认按钮
+    wrapper.find(Modal).at(0).invoke("onCancel")(null); // 点击弹窗确认按钮
 
     await jest.runAllTimers();
     wrapper.update();
-    expect(wrapper.find("Modal").at(0).props().visible).toBeFalsy();
+    expect(wrapper.find(Modal).at(0).props().visible).toBeFalsy();
     optionBtnDiv.childAt(1).invoke("onClick")();
     expect(spyOnModalConfirm).toBeCalledWith(
       expect.objectContaining({
@@ -178,13 +191,17 @@ describe("ObjectAttrStruct", () => {
     };
 
     const wrapper = mount(<ObjectAttrStruct {...props} />);
-    wrapper.find(Button).at(0).invoke("onClick")();
-    expect(wrapper.find("Modal").at(0).props().visible).toBeTruthy();
+    wrapper.find(Button).at(0).invoke("onClick")(null);
+    expect(wrapper.find(Modal).at(0).props().visible).toBeTruthy();
     wrapper.update();
-    wrapper.find(Input).at(0).invoke("onChange")("structId");
-    wrapper.find(Input).at(1).invoke("onChange")("structName");
-    wrapper.find(Select).at(0).invoke("onChange")("enum");
-    wrapper.find(Modal).at(0).invoke("onOk")(); // 点击弹窗确认按钮
+    wrapper.find(Input).at(0).invoke("onChange")(
+      "structId" as unknown as ChangeEvent<HTMLInputElement>
+    );
+    wrapper.find(Input).at(1).invoke("onChange")(
+      "structName" as unknown as ChangeEvent<HTMLInputElement>
+    );
+    wrapper.find(Select).at(0).invoke("onChange")("enum", null);
+    wrapper.find(Modal).at(0).invoke("onOk")(null); // 点击弹窗确认按钮
     expect(props.onChange).toBeCalledWith({
       default: "",
       struct_define: [
@@ -209,17 +226,17 @@ describe("ObjectAttrStruct", () => {
       target: {
         value: "import",
       },
-    });
+    } as unknown as RadioChangeEvent);
 
     wrapper.update();
-    wrapper.find(Button).at(0).invoke("onClick")();
+    wrapper.find(Button).at(0).invoke("onClick")(null);
     await (global as any).flushPromises();
-    expect(wrapper.find("Modal").at(1).props().visible).toBeTruthy();
+    expect(wrapper.find(Modal).at(1).props().visible).toBeTruthy();
     wrapper.update();
-    wrapper.find(Select).at(0).invoke("onChange")("object2");
+    wrapper.find(Select).at(0).invoke("onChange")("object2", null);
     wrapper.update();
     expect(wrapper.find("Table").at(2).props().dataSource.length).toBe(1);
-    wrapper.find("Modal").at(1).invoke("onOk")(); // 点击弹窗确认按钮
+    wrapper.find(Modal).at(1).invoke("onOk")(null); // 点击弹窗确认按钮
 
     expect(props.onChange).toBeCalledWith({
       default: "",
@@ -231,5 +248,7 @@ describe("ObjectAttrStruct", () => {
         },
       ],
     });
+
+    wrapper.find(Modal).at(1).invoke("onCancel")(null);
   });
 });
