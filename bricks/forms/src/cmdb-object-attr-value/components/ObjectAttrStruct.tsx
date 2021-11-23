@@ -20,7 +20,7 @@ interface StructDefine {
   regex?: string[];
 }
 
-interface StructValueType {
+export interface StructValueType {
   default: string;
   struct_define: StructDefine[];
 }
@@ -53,7 +53,7 @@ export const IPRegex =
 const regexType = ["str", "int", "arr", "json", "ip", "enum", "enums"];
 
 export interface LegacyObjectAttrStructProps extends FormComponentProps {
-  value: any;
+  value: StructValueType;
   onChange: (newValue?: any) => void;
   mode: string;
 }
@@ -250,38 +250,18 @@ export function LegacyObjectAttrStructForm(
       if (err) {
         return;
       }
-      const structIdArr = value?.struct_define?.map((r) => r.id) || [];
-      if (structIdArr.includes(data.id)) {
-        Modal.warning({
-          title: "提示",
-          content: (
-            <div>
-              ID
-              <code
-                style={{
-                  color: "#c7254e",
-                  padding: "2px 4px",
-                  fontSize: "90%",
-                  backgroundColor: "#f9f2f4",
-                  borderRadius: "3px",
-                }}
-              >
-                {data.id}
-              </code>
-              {i18n.t(`${NS_FORMS}:${K.CONFIRM_MSG}`)}
-            </div>
-          ),
-          okText: i18n.t(`${NS_FORMS}:${K.CONFIRM}`),
-        });
-        return;
-      }
-      let struct = value.struct_define;
-      if (!isEmpty(currentStruct)) {
-        struct = value.struct_define.filter(
-          (item) => item.id !== currentStruct.id
+      const new_struct_define = [...value.struct_define];
+      if (isEmpty(currentStruct)) {
+        new_struct_define.push(data);
+      } else {
+        const currentStructId = value.struct_define.findIndex(
+          (item) => item.id === currentStruct.id
         );
+        if (currentStructId !== -1) {
+          new_struct_define[currentStructId] = data;
+        }
       }
-      handleValueChange({ ...value, struct_define: [...struct, data] });
+      handleValueChange({ ...value, struct_define: new_struct_define });
       setAddStructModalVisible(false);
       setCurValueType("");
       props.form.resetFields();
@@ -387,6 +367,23 @@ export function LegacyObjectAttrStructForm(
                 {
                   pattern: /^[a-zA-Z][a-zA-Z_0-9]{0,31}$/gi,
                   message: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_ID_LIMIT}`),
+                },
+                {
+                  validator: (rule, curValue, cb) => {
+                    const structIdArr =
+                      value.struct_define?.map((r) => r.id) || [];
+                    if (
+                      currentStruct.id !== curValue &&
+                      structIdArr.includes(curValue)
+                    ) {
+                      cb(
+                        i18n.t(`${NS_FORMS}:${K.DUPLICATE_STRUCTURE_ITEM_ID}`, {
+                          id: curValue,
+                        })
+                      );
+                    }
+                    cb();
+                  },
                 },
               ],
             })(<Input autoFocus />)}
