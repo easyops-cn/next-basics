@@ -1,0 +1,12 @@
+.confirmDisabled {
+  :global {
+    .ant-picker-ok .ant-btn {
+      color: var(--text-color-disabled);
+      background: var(--antd-background-color-base);
+      border-color: var(--antd-border-color-base);
+      text-shadow: none;
+      box-shadow: none;
+      pointer-events: none;
+    }
+  }
+}
