@@ -1,15 +1,12 @@
-import { developHelper } from "@next-core/brick-kit";
+import { BootstrapV2Api_brickPackageInfo } from "@next-sdk/api-gateway-sdk";
 import { createProviderClass } from "@next-core/brick-utils";
 
 // Get all providers including auto-generated ones and custom ones.
-export function GetAllProviders(): string[] {
-  return developHelper
-    .getBrickPackages()
-    .flatMap((pkg) =>
-      pkg.filePath.startsWith("bricks/providers-of-")
-        ? pkg.bricks
-        : pkg.providers ?? []
-    );
+export async function GetAllProviders(): Promise<string[]> {
+  const brickPackages = await BootstrapV2Api_brickPackageInfo();
+  return brickPackages.bricks
+    .filter((name) => name.startsWith("providers-of-"))
+    .concat(brickPackages.providers ?? []);
 }
 
 customElements.define(

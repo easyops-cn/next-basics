@@ -1,37 +1,27 @@
-import * as kit from "@next-core/brick-kit";
+import { BootstrapV2Api_brickPackageInfo } from "@next-sdk/api-gateway-sdk";
 import { redirectTo, providersSubMenu, serviceData } from "./processors";
 
-const spyOnGetBrickPackages = jest
-  .spyOn(kit.developHelper, "getBrickPackages")
-  .mockReturnValue([
-    {
-      filePath: "bricks/providers-of-cmdb/dist/index.js",
-      bricks: ["providers-of-cmdb.cmdb-object-api-get-detail"],
-    },
-    {
-      filePath: "bricks/providers-of-micro-app/dist/index.js",
-      bricks: [
-        "providers-of-micro-app.installed-micro-app-api-get-installed-micro-app",
-      ],
-    },
-    {
-      filePath: "bricks/basic-bricks/dist/index.js",
-      bricks: ["basic-bricks.micro-app"],
-    },
-    {
-      filePath: "bricks/empty-bricks/dist/index.js",
-      bricks: [],
-    },
-  ]);
+jest.mock("@next-sdk/api-gateway-sdk");
+
+(BootstrapV2Api_brickPackageInfo as jest.Mock).mockResolvedValue({
+  bricks: [
+    "providers-of-cmdb.cmdb-object-api-get-detail",
+    "providers-of-micro-app.installed-micro-app-api-get-installed-micro-app",
+    "providers-of-cmdb.post-search-V2",
+    "basic-bricks.micro-app",
+  ],
+});
 
 describe("redirectTo", () => {
+  it("should work when service not found", async () => {
+    (BootstrapV2Api_brickPackageInfo as jest.Mock).mockReturnValueOnce({
+      bricks: [],
+      templates: [],
+    });
+    expect(await redirectTo()).toBe("/developers/providers/");
+  });
   it("should work", async () => {
     expect(await redirectTo()).toBe("/developers/providers/cmdb");
-  });
-
-  it("should work when service not found", async () => {
-    spyOnGetBrickPackages.mockReturnValueOnce([]);
-    expect(await redirectTo()).toBe("/developers/providers/");
   });
 });
 

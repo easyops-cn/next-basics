@@ -1,4 +1,5 @@
 import { developHelper, getRuntime, i18nText } from "@next-core/brick-kit";
+import { BootstrapV2Api_brickPackageInfo } from "@next-sdk/api-gateway-sdk";
 import {
   InstanceApi_postSearchV3,
   InstanceGraphApi_traverseGraphV2,
@@ -6,46 +7,28 @@ import {
 
 jest.mock("@next-core/brick-kit");
 jest.mock("@next-sdk/cmdb-sdk");
+jest.mock("@next-sdk/api-gateway-sdk");
 
 jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
 
-jest.spyOn(developHelper, "getBrickPackages").mockReturnValue([
-  {
-    filePath: "bricks/basic-bricks/dist/index.js",
-    bricks: [
-      "basic-bricks.micro-view",
-      "basic-bricks.general-button",
-      "basic-bricks.any-brick",
-    ],
-  },
-  {
-    filePath: "bricks/next-builder/dist/index.js",
-    bricks: [
-      "next-builder.builder-container",
-      "next-builder.provider-get-all-providers",
-    ],
-    providers: ["next-builder.provider-get-all-providers"],
-  },
-  {
-    filePath: "bricks/providers-of-cmdb/dist/index.js",
-    bricks: [
-      "providers-of-cmdb.get-instance-list",
-      "providers-of-cmdb.get-instance-detail",
-    ],
-    providers: [],
-  },
-]);
-
-jest.spyOn(developHelper, "getTemplatePackages").mockReturnValue([
-  {
-    filePath: "templates/test-a/dist/index.js",
-    templates: ["test-a.template-a1", "test-a.template-a2"],
-  },
-  {
-    filePath: "templates/test-b/dist/index.js",
-    templates: ["test-b.template-b1", "test-b.template-b2"],
-  },
-]);
+(BootstrapV2Api_brickPackageInfo as jest.Mock).mockResolvedValue({
+  bricks: [
+    "basic-bricks.micro-view",
+    "basic-bricks.general-button",
+    "basic-bricks.any-brick",
+    "next-builder.builder-container",
+    "next-builder.provider-get-all-providers",
+    "providers-of-cmdb.get-instance-list",
+    "providers-of-cmdb.get-instance-detail",
+  ],
+  providers: ["next-builder.provider-get-all-providers"],
+  templates: [
+    "test-a.template-a1",
+    "test-a.template-a2",
+    "test-b.template-b1",
+    "test-b.template-b2",
+  ],
+});
 
 (i18nText as jest.Mock).mockImplementation((data) => data?.zh);
 

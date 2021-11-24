@@ -2547,6 +2547,11 @@
   resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.15.tgz#349647103846e17942e8ded9ea38d8f1284eb425"
   integrity sha512-enbk22YadePzXEeH3/hV6/VzKz07EextICrmm1XnL+PBMsxK3x66Q12YKkwXBO17f4dSoaBkKiYy64sca/cmRg==
 
+"@next-sdk/api-gateway-sdk@^2.0.17":
+  version "2.0.17"
+  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.17.tgz#0ac1365076c1bd18db5208b72147df4808f43a6c"
+  integrity sha512-g4uCTvwI4O59Bbx3n9p+1dua0m1D/C+N76rDsCiLA8EGkbwOJ7BDDxkuAtc48nu1vYBA9wgYcMz8g81IYHqbAg==
+
 "@next-sdk/auth-sdk@^1.0.0", "@next-sdk/auth-sdk@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@next-sdk/auth-sdk/-/auth-sdk-1.2.0.tgz#283bdf72676280bf73d20807f8784318eace5e99"

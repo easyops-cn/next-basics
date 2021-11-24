@@ -1,11 +1,12 @@
 import { RequestCustomOptions } from "@next-core/brick-http";
-import { developHelper, getRuntime, i18nText } from "@next-core/brick-kit";
+import { getRuntime, i18nText } from "@next-core/brick-kit";
 import { BrickConf, MenuIcon } from "@next-core/brick-types";
 import { createProviderClass, pipes } from "@next-core/brick-utils";
 import {
   InstanceApi_postSearchV3,
   InstanceGraphApi_traverseGraphV2,
 } from "@next-sdk/cmdb-sdk";
+import { BootstrapV2Api_brickPackageInfo } from "@next-sdk/api-gateway-sdk";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 
 export interface BrickLibraryItem {
@@ -37,88 +38,94 @@ export async function GetBrickLibrary(
   const flags = getRuntime().getFeatureFlags();
   const installedBricksEnabled = flags["next-builder-installed-bricks"];
 
-  const [customTemplates, installedBricks, installedSnippets, hostedSnippets] =
-    await Promise.all([
-      InstanceApi_postSearchV3(
-        "STORYBOARD_TEMPLATE",
-        {
-          fields: ["templateId", "id", "layerType"],
-          page_size: 3000,
-          query: {
-            "project.instanceId": projectId,
-          },
+  const [
+    brickPackageInfo,
+    customTemplates,
+    installedBricks,
+    installedSnippets,
+    hostedSnippets,
+  ] = await Promise.all([
+    BootstrapV2Api_brickPackageInfo(),
+    InstanceApi_postSearchV3(
+      "STORYBOARD_TEMPLATE",
+      {
+        fields: ["templateId", "id", "layerType"],
+        page_size: 3000,
+        query: {
+          "project.instanceId": projectId,
         },
-        options
-      ),
-      installedBricksEnabled
-        ? InstanceApi_postSearchV3(
-            "INSTALLED_BRICK_ATOM@EASYOPS",
-            {
-              fields: [
-                "id",
-                "text",
-                "category",
-                "description",
-                "icon",
-                "editor",
-                "editorProps",
-                "thumbnail",
-                "layerType",
-              ],
-              page_size: 3000,
-            },
-            options
-          )
-        : { list: [] },
-      !ignoreSnippets && installedBricksEnabled
-        ? InstanceApi_postSearchV3(
-            "INSTALLED_BRICK_SNIPPET@EASYOPS",
-            {
-              fields: [
-                "id",
-                "text",
-                "category",
-                "description",
-                "thumbnail",
-                "bricks",
-                "layerType",
-              ],
-              page_size: 3000,
-            },
-            options
-          )
-        : { list: [] },
-      !ignoreSnippets && installedBricksEnabled
-        ? InstanceGraphApi_traverseGraphV2(
-            {
-              child: [
-                {
-                  child: [
-                    {
-                      depth: -1,
-                      parentOut: "children",
-                      select_fields: ["*"],
-                    },
-                  ],
-                  depth: -1,
-                  parentOut: "children",
-                  select_fields: ["*"],
-                },
-              ],
-              object_id: "STORYBOARD_SNIPPET",
-              query: {
-                "project.instanceId": projectId,
-              },
-              select_fields: ["*"],
-            },
-            options
-          )
-        : {
-            topic_vertices: [],
-            vertices: [],
-            edges: [],
+      },
+      options
+    ),
+    installedBricksEnabled
+      ? InstanceApi_postSearchV3(
+          "INSTALLED_BRICK_ATOM@EASYOPS",
+          {
+            fields: [
+              "id",
+              "text",
+              "category",
+              "description",
+              "icon",
+              "editor",
+              "editorProps",
+              "thumbnail",
+              "layerType",
+            ],
+            page_size: 3000,
           },
-    ]);
+          options
+        )
+      : { list: [] },
+    !ignoreSnippets && installedBricksEnabled
+      ? InstanceApi_postSearchV3(
+          "INSTALLED_BRICK_SNIPPET@EASYOPS",
+          {
+            fields: [
+              "id",
+              "text",
+              "category",
+              "description",
+              "thumbnail",
+              "bricks",
+              "layerType",
+            ],
+            page_size: 3000,
+          },
+          options
+        )
+      : { list: [] },
+    !ignoreSnippets && installedBricksEnabled
+      ? InstanceGraphApi_traverseGraphV2(
+          {
+            child: [
+              {
+                child: [
+                  {
+                    depth: -1,
+                    parentOut: "children",
+                    select_fields: ["*"],
+                  },
+                ],
+                depth: -1,
+                parentOut: "children",
+                select_fields: ["*"],
+              },
+            ],
+            object_id: "STORYBOARD_SNIPPET",
+            query: {
+              "project.instanceId": projectId,
+            },
+            select_fields: ["*"],
+          },
+          options
+        )
+      : {
+          topic_vertices: [],
+          vertices: [],
+          edges: [],
+        },
+  ]);
 
   const installedBricksMap = new Map<string, Record<string, any>>();
 
@@ -126,52 +133,52 @@ export async function GetBrickLibrary(
     installedBricksMap.set(brick.id, brick);
   }
 
-  return developHelper
-    .getBrickPackages()
-    .flatMap<BrickLibraryItem>((pkg) =>
-      pkg.filePath.startsWith("bricks/providers-of-")
-        ? pkg.bricks.map((name) => ({
-            type: "provider",
-            id: name,
-            title: getBrickLastName(name),
-            $searchTextPool: [name.toLowerCase()],
-          }))
-        : pkg.bricks.map((name) => {
-            const type = pkg.providers?.includes(name) ? "provider" : "brick";
-            const installedBrick =
-              installedBricksEnabled &&
-              type === "brick" &&
-              installedBricksMap.get(name);
-            return {
-              type,
-              id: name,
-              ...(installedBrick
-                ? {
-                    title:
-                      i18nText(installedBrick.text) || getBrickLastName(name),
-                    category: installedBrick.category,
-                    description: i18nText(installedBrick.description),
-                    layerType: installedBrick.layerType || "brick",
-                    thumbnail: installedBrick.thumbnail,
-                    icon: installedBrick.icon,
-                    editor: installedBrick.editor,
-                    editorProps: installedBrick.editorProps,
-                    $searchTextPool: (installedBrick.text
-                      ? (Object.values(installedBrick.text) as string[]).filter(
-                          Boolean
-                        )
-                      : []
+  return brickPackageInfo.bricks
+    .map<BrickLibraryItem>((name) => {
+      if (name.startsWith("providers-of-")) {
+        return {
+          type: "provider",
+          id: name,
+          title: getBrickLastName(name),
+          $searchTextPool: [name.toLowerCase()],
+        };
+      } else {
+        const type = brickPackageInfo.providers?.includes(name)
+          ? "provider"
+          : "brick";
+        const installedBrick =
+          installedBricksEnabled &&
+          type === "brick" &&
+          installedBricksMap.get(name);
+        return {
+          type,
+          id: name,
+          ...(installedBrick
+            ? {
+                title: i18nText(installedBrick.text) || getBrickLastName(name),
+                category: installedBrick.category,
+                description: i18nText(installedBrick.description),
+                layerType: installedBrick.layerType || "brick",
+                thumbnail: installedBrick.thumbnail,
+                icon: installedBrick.icon,
+                editor: installedBrick.editor,
+                editorProps: installedBrick.editorProps,
+                $searchTextPool: (installedBrick.text
+                  ? (Object.values(installedBrick.text) as string[]).filter(
+                      Boolean
                     )
-                      .concat(name)
-                      .map((text) => text.toLocaleLowerCase()),
-                  }
-                : {
-                    title: getBrickLastName(name),
-                    $searchTextPool: [name.toLowerCase()],
-                  }),
-            };
-          })
-    )
+                  : []
+                )
+                  .concat(name)
+                  .map((text) => text.toLocaleLowerCase()),
+              }
+            : {
+                title: getBrickLastName(name),
+                $searchTextPool: [name.toLowerCase()],
+              }),
+        };
+      }
+    })
     .concat(
       customTemplates.list.map<BrickLibraryItem>((item) => ({
         type: "customTemplate",
@@ -222,14 +229,12 @@ export async function GetBrickLibrary(
             .concat(item.snippetId)
             .map((text) => text.toLocaleLowerCase()),
         })),
-      developHelper.getTemplatePackages().flatMap<BrickLibraryItem>((pkg) =>
-        pkg.templates.map((name) => ({
-          type: "template",
-          id: name,
-          title: getBrickLastName(name),
-          $searchTextPool: [name.toLowerCase()],
-        }))
-      )
+      brickPackageInfo.templates.map<BrickLibraryItem>((name) => ({
+        type: "template",
+        id: name,
+        title: getBrickLastName(name),
+        $searchTextPool: [name.toLowerCase()],
+      }))
     );
 }
 
