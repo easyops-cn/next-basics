@@ -298,30 +298,47 @@ const consoleError = jest
       : {}
 );
 
-(InstanceApi_getDetail as jest.Mock).mockImplementation(() => ({
-  imgs: [
-    {
-      name: "viewpoint.png",
-      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
-    },
-    {
-      name: "blue-bg.png",
-      url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
-    },
-  ],
-  functions: [
-    {
-      name: "abc",
-      source: "function abc() {}",
-      tests: [],
-    },
-    {
-      name: "xyz",
-      source: "function xyz() {}",
-      typescript: true,
-    },
-  ],
-}));
+(InstanceApi_getDetail as jest.Mock).mockImplementation(
+  (objectId, instanceId) => ({
+    imgs: [
+      {
+        name: "viewpoint.png",
+        url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/viewpoint1632809932499594914.png",
+      },
+      {
+        name: "blue-bg.png",
+        url: "/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/blue-bg1632809958790451533.png",
+      },
+    ],
+    functions: [
+      {
+        name: "abc",
+        source: "function abc() {}",
+        tests: [],
+      },
+      {
+        name: "xyz",
+        source: "function xyz() {}",
+        typescript: true,
+      },
+    ],
+    i18n:
+      instanceId === "project-1"
+        ? [
+            {
+              name: "HELLO",
+              zh: "你好",
+              en: "Hello",
+            },
+            {
+              name: "WORLD",
+              zh: "世界",
+              en: "World",
+            },
+          ]
+        : [],
+  })
+);
 
 describe("BuildProjectOfTemplates", () => {
   it.each<[BuildProjectOfTemplatesParams, BuildInfoForProjectOfTemplates]>([
@@ -344,7 +361,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.1fa326bf.js",
+            path: "dist/index.1295e1e4.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -451,6 +468,39 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-v", {
     "methods": 1
   },
   "bricks": []
+}),
+Object(n.getRuntime)().registerCustomTemplate("app-1.template-w", {
+  "proxy": {
+    "properties": {
+      "FProps": {
+        "ref": "f-ref",
+        "refProperty": "f",
+        "type": "fProps"
+      }
+    }
+  },
+  "bricks": []
+}),
+Object(n.getRuntime)().registerWidgetFunctions("app-1", [
+  {
+    "name": "abc",
+    "source": "function abc() {}"
+  },
+  {
+    "name": "xyz",
+    "source": "function xyz() {}",
+    "typescript": true
+  }
+]),
+Object(n.getRuntime)().registerWidgetI18n("app-1", {
+  "en": {
+    "HELLO": "Hello",
+    "WORLD": "World"
+  },
+  "zh": {
+    "HELLO": "你好",
+    "WORLD": "世界"
+  }
 })`),
           },
           {
