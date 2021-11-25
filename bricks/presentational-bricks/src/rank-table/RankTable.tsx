@@ -98,7 +98,7 @@ export function RankTable(props: RankTableProps): React.ReactElement {
           ...columnConf
         } = column;
 
-        const Awards = index === 0 ? renderAwards : (): any => null;
+        const Awards = index === 0 ? renderAwards : null;
         if (headerBrick?.useBrick || titleUseBrick) {
           if (titleUseBrick) {
             // eslint-disable-next-line no-console
@@ -147,7 +147,7 @@ export function RankTable(props: RankTableProps): React.ReactElement {
           // eslint-disable-next-line react/display-name
           columnConf.render = (value, record, index) => (
             <>
-              {Awards(index)}
+              {Awards?.(index)}
               {value + valueSuffix}
             </>
           );
@@ -171,7 +171,7 @@ export function RankTable(props: RankTableProps): React.ReactElement {
           // eslint-disable-next-line react/display-name
           columnConf.render = (text: string, record, trend) => (
             <div style={{ display: "flex", alignItems: "center" }}>
-              {Awards(trend)}
+              {Awards?.(trend)}
               <span style={{ flex: 1 }}>{text}</span>
             </div>
           );
