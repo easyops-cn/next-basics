@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.349.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.349.0...@next-bricks/developers@1.349.1) (2021-11-25)
+
+
+### Bug Fixes
+
+* replace the api to get the all brick package ([51f262b](https://github.com/easyops-cn/next-basics/commit/51f262b6c1d264dc639bca57cfdf647e8d5e623b))
+
+
+
+
+
 # [1.349.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.348.0...@next-bricks/developers@1.349.0) (2021-11-08)
 
 

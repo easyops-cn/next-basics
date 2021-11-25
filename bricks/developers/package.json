@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/developers",
-  "version": "1.349.0",
+  "version": "1.349.1",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/developers",
   "license": "GPL-3.0",
@@ -23,8 +23,8 @@
   },
   "devDependencies": {
     "@next-libs/basic-components": "^3.2.5",
-    "@next-sdk/api-gateway-sdk": "^2.0.17",
     "@next-libs/clipboard": "^3.0.2",
+    "@next-sdk/api-gateway-sdk": "^2.0.17",
     "change-case": "^4.1.2",
     "classnames": "^2.3.1",
     "react-markdown": "^5.0.3",
