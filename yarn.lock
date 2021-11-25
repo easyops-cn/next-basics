@@ -2448,7 +2448,7 @@
     react-dnd "^11.1.3"
     react-dnd-html5-backend "^11.1.3"
 
-"@next-libs/basic-components@^3.2.3", "@next-libs/basic-components@^3.2.5":
+"@next-libs/basic-components@^3.2.5":
   version "3.2.5"
   resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.5.tgz#7577402d5cd260b66eb2e316796939dc40f1824b"
   integrity sha512-sw7X3gXHlfXwcEUcbo8WLkyCu5jJEQ2bWNskmfmz3/Sx7eaRfCFvfmCXFn5m4mSE9KRyJjYdluT/i5XkPtAtRg==
@@ -2460,15 +2460,15 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.2.tgz#0062beedab56666f22a2f7a6f811635179730e64"
   integrity sha512-NTal//gM/X/pE6NFUDOxlsspUaPS20k8JyOejwf1CtJRochoRjlo+nkkkQCp8sNmVGqt4N4bRk0nW8APmeBAnA==
 
-"@next-libs/cmdb-instances@^6.9.4":
-  version "6.9.4"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.9.4.tgz#a248cc2f0a5a587bd3713313bcbcce269ac99edd"
-  integrity sha512-WIMxgBW3MNInKugGBewcVbXWnabXaUlyaNZrCUBSQE90o3dg3lojINDXJTwvLj8zTDA2m24Tx1COC6Bfh+7hhg==
+"@next-libs/cmdb-instances@^6.12.3":
+  version "6.12.3"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.12.3.tgz#c7f3f57c854a1b7e1b437ef929a01147b1ff499e"
+  integrity sha512-m805iO8X4L8bpwT3ZVENsjjZj3IOsnT5wlhE8batDihvwFBVhvw/NzPiil8io/AHzopw6Efy6w6hsKlNJjm5Sg==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
     "@next-libs/basic-components" "^3.2.5"
-    "@next-libs/cmdb-utils" "^3.0.2"
-    "@next-libs/code-editor-components" "^4.0.11"
+    "@next-libs/cmdb-utils" "^3.0.3"
+    "@next-libs/code-editor-components" "^4.0.12"
     "@next-libs/forms" "^3.2.7"
     "@next-libs/storage" "^2.0.2"
     "@next-sdk/cmdb-sdk" "^2.1.13"
@@ -2480,10 +2480,10 @@
     immutability-helper "^3.1.1"
     marked "^2.1.3"
 
-"@next-libs/cmdb-utils@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.0.2.tgz#1320344bfac8e3be685a7ab655a540ef9db38904"
-  integrity sha512-LOpfG08I7RjS/Jnq3izoX8z8LUaI3+rQSMJ2t2t1ibG/48MoJJ+Bgc3VhmH4cJIkxxQTaxFzwM+eeAw2NQAJuA==
+"@next-libs/cmdb-utils@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.0.3.tgz#305d5d1cc8c7680c32df3f95e5a3442a56d5390d"
+  integrity sha512-7I4e9E1QdW7U2b5bk98AVJCLkwHG8uUzG9IM3zKLkLXlKdquwisKD1fGQsUEsuR4yR/jC2TAXEliRlsdmn/fkQ==
   dependencies:
     "@next-sdk/cmdb-sdk" "^2.1.1"
 
@@ -2498,10 +2498,10 @@
     prismjs "^1.23.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/code-editor-components@^4.0.11", "@next-libs/code-editor-components@^4.0.8":
-  version "4.0.11"
-  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.0.11.tgz#8a7c4fddca6ec900071997c8dbe374eaf11dbbb2"
-  integrity sha512-tdCPweH7dezHQBRmsrSizfWXarpiVPXa/tKnQp6RerdCDe0hui3yHYFbNmoJ/Dq/8SFeXrhC5LeaSI1jeQbvyQ==
+"@next-libs/code-editor-components@^4.0.12":
+  version "4.0.12"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.0.12.tgz#c1094ac76c3d17820bd9384c4878e2e5fc26dfb7"
+  integrity sha512-LULUliHBqzniheMMvSCygITHlCk3cQ8RfGEuAMYvvw2h79VHLyP9S5mx2RQbQGc3wFwEPiVZ/RU8IzSp8cBokA==
   dependencies:
     "@next-libs/basic-components" "^3.2.5"
     "@next-libs/clipboard" "^3.0.2"
@@ -2527,7 +2527,7 @@
   resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-2.0.2.tgz#e7635ca102ea6a0e9859ca07a7815807896b69ea"
   integrity sha512-poJSo2iWVDa5rTTFUygBHFi1qtTPPz2FR16XZgyIyq3NfQ2wNNJvoh/USmm9wfGQm375zM5O2B2WkpgLxW63EQ==
 
-"@next-libs/forms@^3.2.5", "@next-libs/forms@^3.2.7":
+"@next-libs/forms@^3.2.7":
   version "3.2.7"
   resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.7.tgz#d0cd8d0d4de9dc01f64368fa9f64020ef6bf2ed2"
   integrity sha512-MZLw91vD7d1psBVpW17V1eId4bLULNLHXoNlCl9gWz/ufpjoEdGAFCfdTEr/Kex0nZcboITyVPcgrZqTXvqeCw==
@@ -2542,12 +2542,7 @@
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.12.tgz#575d54d42c334adbadc72027f25b59f99461892d"
   integrity sha512-APb0+ZqCNNi28xn8pdbM0scPt4bICov7P0FPyGSj89FsBbSqAakzRetVVhP8BmrrzOGmYxFvpSSBLFlF0FLk8w==
 
-"@next-sdk/api-gateway-sdk@^2.0.14", "@next-sdk/api-gateway-sdk@^2.0.15":
-  version "2.0.15"
-  resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.15.tgz#349647103846e17942e8ded9ea38d8f1284eb425"
-  integrity sha512-enbk22YadePzXEeH3/hV6/VzKz07EextICrmm1XnL+PBMsxK3x66Q12YKkwXBO17f4dSoaBkKiYy64sca/cmRg==
-
-"@next-sdk/api-gateway-sdk@^2.0.17":
+"@next-sdk/api-gateway-sdk@^2.0.14", "@next-sdk/api-gateway-sdk@^2.0.15", "@next-sdk/api-gateway-sdk@^2.0.17":
   version "2.0.17"
   resolved "https://registry.npmjs.org/@next-sdk/api-gateway-sdk/-/api-gateway-sdk-2.0.17.tgz#0ac1365076c1bd18db5208b72147df4808f43a6c"
   integrity sha512-g4uCTvwI4O59Bbx3n9p+1dua0m1D/C+N76rDsCiLA8EGkbwOJ7BDDxkuAtc48nu1vYBA9wgYcMz8g81IYHqbAg==
