@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.97.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.96.1...@next-bricks/next-builder@1.97.0) (2021-11-26)
+
+
+### Features
+
+* support i18n in widgets ([13f3644](https://github.com/easyops-cn/next-basics/commit/13f364457655eb16e821d7ad1736894892e7ab5a))
+
+
+
+
+
 ## [1.96.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.96.0...@next-bricks/next-builder@1.96.1) (2021-11-25)
 
 
