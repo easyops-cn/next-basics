@@ -11,6 +11,7 @@ export function replaceWidgetFunctions<T>(data: T, appId: string): T {
   const patterns = new Map<string, string>([
     ["FN", `__WIDGET_FN__[${stringifyAppId}]`],
     ["IMG", `__WIDGET_IMG__(${stringifyAppId})`],
+    ["I18N", `__WIDGET_I18N__(${stringifyAppId})`],
   ]);
   const keywords = [...patterns.keys()];
 
@@ -22,16 +23,9 @@ export function replaceWidgetFunctions<T>(data: T, appId: string): T {
         try {
           result = preevaluate(value, {
             hooks: {
-              beforeVisit(node) {
-                if (node.type === "MemberExpression") {
-                  if (
-                    !node.computed &&
-                    node.object.type === "Identifier" &&
-                    patterns.has(node.object.name) &&
-                    node.property.type === "Identifier"
-                  ) {
-                    replacements.push(node.object);
-                  }
+              beforeVisitGlobal(node) {
+                if (patterns.has(node.name)) {
+                  replacements.push(node);
                 }
               },
             },

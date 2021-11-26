@@ -21,7 +21,10 @@ import {
 } from "@next-sdk/cmdb-sdk";
 import { paramCase } from "change-case";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
-import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
+import {
+  getBrickPackageIndexJs,
+  RawI18nItem,
+} from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
 import { replaceWidgetFunctions } from "./utils/replaceWidgetFunctions";
 import { PlainObject } from "../search-tree/utils";
@@ -158,12 +161,12 @@ export async function BuildProjectOfTemplates({
     projectId,
     {
       fields:
-        "imgs.url,imgs.name,functions.name,functions.source,functions.typescript",
+        "imgs.url,imgs.name,functions.name,functions.source,functions.typescript,i18n.name,i18n.zh,i18n.en",
     }
   );
 
   // Make parallel requests.
-  const [templatesResponse, snippetsResponse, imagesAndFunctionsResponse] =
+  const [templatesResponse, snippetsResponse, projectDetailResponse] =
     await Promise.all([
       templatesGraphReq,
       snippetsGraphReq,
@@ -406,12 +409,11 @@ export async function BuildProjectOfTemplates({
     }
   });
 
-  const functions =
-    imagesAndFunctionsResponse.functions as StoryboardFunction[];
   const indexJsContent = getBrickPackageIndexJs({
     appId,
     templates,
-    functions,
+    functions: projectDetailResponse.functions as StoryboardFunction[],
+    i18n: projectDetailResponse.i18n as RawI18nItem[],
   });
   const storiesJSONContent = JSON.stringify(stories, null, 2);
 
@@ -420,8 +422,8 @@ export async function BuildProjectOfTemplates({
     imagesPath: thumbnailList,
   };
 
-  if (Array.isArray(imagesAndFunctionsResponse.imgs)) {
-    imagesAndFunctionsResponse.imgs.forEach((file) => {
+  if (Array.isArray(projectDetailResponse.imgs)) {
+    projectDetailResponse.imgs.forEach((file) => {
       images.imagesPath.push({
         imageOssPath: file.url,
         fileName: getBaseName(file.url),

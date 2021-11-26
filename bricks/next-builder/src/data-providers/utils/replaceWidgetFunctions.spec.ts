@@ -7,10 +7,10 @@ describe("replaceWidgetFunctions", () => {
     [
       {
         props: {
-          a: '<% CTX.haveFun(FN.abc(), FN.xyz, FN, FN["oops"], "FN") %>',
+          a: '<% CTX.haveFun(FN.abc(), FN.xyz, "FN") %>',
           b: [
             `
-            <%~ CTX.haveFun(FN.abc(), FN.xyz, FN, FN["oops"], "FN") %>
+            <%~ CTX.haveFun(FN.abc(), FN.xyz, "FN") %>
           `,
           ],
           c: 1,
@@ -19,14 +19,15 @@ describe("replaceWidgetFunctions", () => {
           f: ["FN.bad()", "<% FN. %>"],
           g: '<% CTX.haveFun("FN") %>',
           h: '<% IMG.get("my.png") %>',
+          i: '<% I18N("HELLO") %>',
         },
       },
       {
         props: {
-          a: '<% CTX.haveFun(__WIDGET_FN__["test-app"].abc(), __WIDGET_FN__["test-app"].xyz, FN, FN["oops"], "FN") %>',
+          a: '<% CTX.haveFun(__WIDGET_FN__["test-app"].abc(), __WIDGET_FN__["test-app"].xyz, "FN") %>',
           b: [
             `
-            <%~ CTX.haveFun(__WIDGET_FN__["test-app"].abc(), __WIDGET_FN__["test-app"].xyz, FN, FN["oops"], "FN") %>
+            <%~ CTX.haveFun(__WIDGET_FN__["test-app"].abc(), __WIDGET_FN__["test-app"].xyz, "FN") %>
           `,
           ],
           c: 1,
@@ -35,6 +36,7 @@ describe("replaceWidgetFunctions", () => {
           f: ["FN.bad()", "<% FN. %>"],
           g: '<% CTX.haveFun("FN") %>',
           h: '<% __WIDGET_IMG__("test-app").get("my.png") %>',
+          i: '<% __WIDGET_I18N__("test-app")("HELLO") %>',
         },
       },
     ],
