@@ -21,11 +21,14 @@ describe("findUsedImagesInStoryboard", () => {
               properties: {
                 propA: "<% IMG.get('a.png') %>",
                 propB:
-                  "<% FLAGS['some'] ? IMG.get('b.png') : IMG.get('c.png') %>",
+                  "<% () => FLAGS['some'] ? IMG.get('b.png') : IMG.get('c.png') %>",
                 propC: "(D:/oss/d.jpg E:/oss/e.gif)",
                 propD: "<% IMG.get(a ? 'bad.png' : 'bad.gif') %>",
                 propE: "IMG.get('bad.png')",
                 propF: "<% CTX.get('bad.png') %>",
+                propG: "<% IMG.any('bad.png') %>",
+                propH: "<% (IMG) => IMG.get('bad.png') %>",
+                propI: "<% any.IMG('bad.png') %>",
               },
             },
           ],
