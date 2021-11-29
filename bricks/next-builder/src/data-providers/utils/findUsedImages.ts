@@ -1,4 +1,3 @@
-import { MemberExpression } from "@babel/types";
 import { Storyboard } from "@next-core/brick-types";
 import {
   isEvaluable,
@@ -19,36 +18,39 @@ export function findUsedImagesInStoryboard(
       if (value.includes(IMG) && isEvaluable(value)) {
         try {
           preevaluate(value, {
+            withParent: true,
             hooks: {
-              beforeVisit(node) {
-                let member: MemberExpression;
-                // Matching `<% IMG.get(...) %>`.
-                if (
-                  node.type === "CallExpression" &&
-                  ((member = node.callee as MemberExpression),
-                  member.type === "MemberExpression") &&
-                  !member.computed &&
-                  member.object.type === "Identifier" &&
-                  member.object.name === IMG &&
-                  member.property.type === "Identifier" &&
-                  !member.computed &&
-                  member.property.name === "get"
-                ) {
-                  // Matching `<% IMG.get("...") %>`.
-                  let arg: EstreeLiteral;
+              beforeVisitGlobal(node, parent) {
+                if (node.name === IMG) {
+                  const memberParent = parent[parent.length - 1];
+                  const callParent = parent[parent.length - 2];
+                  // Matching `<% IMG.get(...) %>`.
                   if (
-                    node.arguments.length > 0 &&
-                    ((arg = node.arguments[0] as unknown as EstreeLiteral),
-                    arg.type === "Literal") &&
-                    typeof arg.value === "string"
+                    callParent?.node.type === "CallExpression" &&
+                    callParent?.key === "callee" &&
+                    memberParent?.node.type === "MemberExpression" &&
+                    memberParent.key === "object" &&
+                    !memberParent.node.computed &&
+                    memberParent.node.property.type === "Identifier" &&
+                    memberParent.node.property.name === "get"
                   ) {
-                    images.add(arg.value);
-                  } else {
-                    // eslint-disable-next-line no-console
-                    console.warn(
-                      "Unexpected dynamic accessing of `IMG.get(...)`:",
-                      value
-                    );
+                    // Matching `<% IMG.get("...") %>`.
+                    let arg: EstreeLiteral;
+                    if (
+                      callParent.node.arguments.length > 0 &&
+                      ((arg = callParent.node
+                        .arguments[0] as unknown as EstreeLiteral),
+                      arg.type === "Literal") &&
+                      typeof arg.value === "string"
+                    ) {
+                      images.add(arg.value);
+                    } else {
+                      // eslint-disable-next-line no-console
+                      console.warn(
+                        "Unexpected dynamic accessing of `IMG.get(...)`:",
+                        value
+                      );
+                    }
                   }
                 }
               },

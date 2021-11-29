@@ -36,6 +36,9 @@ describe("scanContextsInStoryboard", () => {
                   bad: "CTX.bad1()",
                   bad3: "<% CTX[bad3] %>",
                   bad4: "<% CTX.bad4( %>",
+                  bad5: "<% (CTX) => CTX.bad5() %>",
+                  bad6: "<% bad6.CTX %>",
+                  bad7: "<% CTX('bad7') %>",
                 },
               },
             ],
@@ -62,6 +65,10 @@ describe("scanContextsInStoryboard", () => {
                   {
                     action: "context.assign",
                     args: ["good8"],
+                  },
+                  {
+                    action: "console.log",
+                    args: ["<% () => CTX.good9() %>"],
                   },
                   {
                     action: "context.unknown",
@@ -95,6 +102,7 @@ describe("scanContextsInStoryboard", () => {
       "good6",
       "good7",
       "good8",
+      "good9",
     ]);
     expect(consoleError).toBeCalledTimes(1);
   });

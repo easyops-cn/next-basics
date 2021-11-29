@@ -1,4 +1,3 @@
-import { MemberExpression } from "@babel/types";
 import { Storyboard } from "@next-core/brick-types";
 import { isObject, isEvaluable, preevaluate } from "@next-core/brick-utils";
 
@@ -39,20 +38,28 @@ function collectContexts(
     if (data.includes(CTX) && isEvaluable(data)) {
       try {
         preevaluate(data, {
-          visitors: {
-            MemberExpression(node: MemberExpression) {
-              if (
-                node.object.type === "Identifier" &&
-                node.object.name === CTX
-              ) {
-                if (!node.computed && node.property.type === "Identifier") {
-                  readContexts.add(node.property.name);
-                } else if (
-                  node.computed &&
-                  (node.property as any).type === "Literal" &&
-                  typeof (node.property as any).value === "string"
+          withParent: true,
+          hooks: {
+            beforeVisitGlobal(node, parent): void {
+              if (node.name === CTX) {
+                const memberParent = parent[parent.length - 1];
+                if (
+                  memberParent?.node.type === "MemberExpression" &&
+                  memberParent.key === "object"
                 ) {
-                  readContexts.add((node.property as any).value);
+                  const memberNode = memberParent.node;
+                  if (
+                    !memberNode.computed &&
+                    memberNode.property.type === "Identifier"
+                  ) {
+                    readContexts.add(memberNode.property.name);
+                  } else if (
+                    memberNode.computed &&
+                    (memberNode.property as any).type === "Literal" &&
+                    typeof (memberNode.property as any).value === "string"
+                  ) {
+                    readContexts.add((memberNode.property as any).value);
+                  }
                 }
               }
             },

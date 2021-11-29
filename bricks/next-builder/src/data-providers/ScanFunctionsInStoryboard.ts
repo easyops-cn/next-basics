@@ -1,10 +1,10 @@
-import { MemberExpression } from "@babel/types";
 import { Storyboard, StoryboardFunction } from "@next-core/brick-types";
 import {
   createProviderClass,
   isEvaluable,
   isObject,
   precookFunction,
+  PrecookHooks,
   preevaluate,
 } from "@next-core/brick-utils";
 
@@ -18,13 +18,14 @@ export function ScanFunctionsInStoryboard({
   storyboard,
 }: ScanFunctionsInStoryboardParams): string[] {
   const collection = new Set<string>();
+  const beforeVisitGlobal = beforeVisitGlobalFactory(collection);
   collectFunctions(
     [storyboard.routes, storyboard.meta?.customTemplates],
-    collection
+    beforeVisitGlobal
   );
   if (Array.isArray(storyboard.meta?.functions)) {
     for (const fn of storyboard.meta.functions) {
-      collectFunctionsInFunctionSource(fn, collection);
+      collectFunctionsInFunctionSource(fn, beforeVisitGlobal);
     }
   }
   return Array.from(collection);
@@ -32,18 +33,15 @@ export function ScanFunctionsInStoryboard({
 
 function collectFunctions(
   data: unknown,
-  collection: Set<string>,
+  beforeVisitGlobal: PrecookHooks["beforeVisitGlobal"],
   memo = new WeakSet()
 ): void {
   if (typeof data === "string") {
     if (data.includes(FN) && isEvaluable(data)) {
       try {
         preevaluate(data, {
-          visitors: {
-            MemberExpression(node: MemberExpression) {
-              addToFunctionCollection(node, collection);
-            },
-          },
+          withParent: true,
+          hooks: { beforeVisitGlobal },
         });
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -61,11 +59,11 @@ function collectFunctions(
     memo.add(data);
     if (Array.isArray(data)) {
       for (const item of data) {
-        collectFunctions(item, collection, memo);
+        collectFunctions(item, beforeVisitGlobal, memo);
       }
     } else {
       for (const item of Object.values(data)) {
-        collectFunctions(item, collection, memo);
+        collectFunctions(item, beforeVisitGlobal, memo);
       }
     }
   }
@@ -73,16 +71,13 @@ function collectFunctions(
 
 function collectFunctionsInFunctionSource(
   { source, typescript }: StoryboardFunction,
-  collection: Set<string>
+  beforeVisitGlobal: PrecookHooks["beforeVisitGlobal"]
 ): void {
   try {
     precookFunction(source, {
-      visitors: {
-        MemberExpression(node: MemberExpression) {
-          addToFunctionCollection(node, collection);
-        },
-      },
       typescript,
+      withParent: true,
+      hooks: { beforeVisitGlobal },
     });
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -93,18 +88,22 @@ function collectFunctionsInFunctionSource(
   }
 }
 
-function addToFunctionCollection(
-  node: MemberExpression,
+function beforeVisitGlobalFactory(
   collection: Set<string>
-): void {
-  if (
-    !node.computed &&
-    node.object.type === "Identifier" &&
-    node.object.name === FN &&
-    node.property.type === "Identifier"
-  ) {
-    collection.add(node.property.name);
-  }
+): PrecookHooks["beforeVisitGlobal"] {
+  return function beforeVisitGlobal(node, parent): void {
+    if (node.name === FN) {
+      const memberParent = parent[parent.length - 1];
+      if (
+        memberParent?.node.type === "MemberExpression" &&
+        memberParent.key === "object" &&
+        !memberParent.node.computed &&
+        memberParent.node.property.type === "Identifier"
+      ) {
+        collection.add(memberParent.node.property.name);
+      }
+    }
+  };
 }
 
 customElements.define(
