@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.200.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.199.4...@next-bricks/forms@1.200.0) (2021-11-30)
+
+
+### Features
+
+* **select:** add easyopsEmptyProps props  Refs ([33aae1f](https://github.com/easyops-cn/next-basics/commit/33aae1fb6f6e4deae3dbdf5b9a32b0ab4cae3a57))
+
+
+
+
+
 ## [1.199.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.199.3...@next-bricks/forms@1.199.4) (2021-11-25)
 
 **Note:** Version bump only for package @next-bricks/forms
