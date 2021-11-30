@@ -1,5 +1,6 @@
-import { paramCase, snakeCase, pascalCase } from "change-case";
+import { paramCase } from "change-case";
 import { uniq } from "lodash";
+import { JSON_SCHEMA, safeDump } from "js-yaml";
 import {
   createProviderClass,
   scanTemplatesInStoryboard,
@@ -12,6 +13,11 @@ import { Storyboard } from "@next-core/brick-types";
 
 export interface ScanBricksAndTemplatesParams {
   storyboard: Storyboard;
+  version?: string;
+  dependencies?: {
+    name: string;
+    constraint: string;
+  }[];
 }
 
 interface ScanBricksAndTemplatesResult {
@@ -20,43 +26,117 @@ interface ScanBricksAndTemplatesResult {
   templates: string[];
   processors: string[];
   processorPackages: string[];
-  contracts: ContractDeclaration[];
+  contractData?: string;
 }
 
-interface ContractDeclaration {
+interface ImplementedContract extends ContractBase {
+  type: "route";
+  path: string;
+  deps?: DependContract[];
+}
+
+type DependContract =
+  | DependContractOfApi
+  | DependContractOfBrick
+  | DependContractOfTemplate;
+
+interface DependContractOfApi extends ContractBase {
+  type: "contract";
   contract: string;
+}
+
+interface DependContractOfBrick extends ContractBase {
+  type: "brick";
+  brick: string;
+}
+
+interface DependContractOfTemplate extends ContractBase {
+  type: "template";
+  template: string;
+}
+
+interface ContractBase {
   version: string;
 }
 
 export function ScanBricksAndTemplates({
   storyboard,
+  version,
+  dependencies,
 }: ScanBricksAndTemplatesParams): ScanBricksAndTemplatesResult {
   const processors = scanProcessorsInStoryboard(storyboard);
   const { bricks, customApis } = scanStoryboard(storyboard);
-  const contracts: ContractDeclaration[] = [];
+  const templates = scanTemplatesInStoryboard(storyboard);
 
-  for (const brick of bricks) {
-    const match = brick.match(/^providers-of-([^.]+)\.(.+?)-api-(.+)$/);
-    if (match) {
-      contracts.push({
-        contract: `easyops.api.${snakeCase(match[1])}.${snakeCase(
-          match[2]
-        )}.${pascalCase(match[3])}`,
-        version: "*",
+  const legacyCustomApis: string[] = [];
+  const flowApis: string[] = [];
+
+  for (const api of customApis) {
+    (api.includes(":") ? flowApis : legacyCustomApis).push(api);
+  }
+
+  let contractData: string;
+  if (version && storyboard.app) {
+    const dependenciesMap = new Map(
+      dependencies?.map(({ name, constraint }) => [name, constraint]) ?? []
+    );
+
+    const deps: DependContract[] = [];
+    for (const api of flowApis) {
+      const [contract, v] = api.split(":");
+      deps.push({
+        type: "contract",
+        contract: contract.replace("@", "."),
+        version: v,
       });
     }
+
+    for (const brick of bricks) {
+      deps.push({
+        type: "brick",
+        brick,
+        version: dependenciesMap.get(`${brick.split(".")[0]}-NB`) ?? "*",
+      });
+    }
+
+    for (const template of templates) {
+      deps.push({
+        type: "template",
+        template,
+        version: dependenciesMap.get(`${template.split(".")[0]}-NT`) ?? "*",
+      });
+    }
+
+    const contracts: ImplementedContract[] = [
+      {
+        type: "route",
+        path: storyboard.app.homepage,
+        version,
+        deps,
+      },
+    ];
+    contractData = safeDump(
+      { contracts },
+      {
+        indent: 2,
+        schema: JSON_SCHEMA,
+        skipInvalid: true,
+        noRefs: true,
+        noCompatMode: true,
+      }
+    );
   }
 
   return {
-    apis: mapCustomApisToNameAndNamespace(customApis),
+    apis: mapCustomApisToNameAndNamespace(legacyCustomApis),
     bricks,
-    templates: scanTemplatesInStoryboard(storyboard),
+    templates,
     processors,
     processorPackages: uniq(
       // The package name should always be the param-case of processor's namespace.
       processors.map((item) => paramCase(item.split(".")[0]))
     ),
-    contracts,
+    contractData,
   };
 }
 
