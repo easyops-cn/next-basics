@@ -88,6 +88,24 @@ describe("GeneralSelect", () => {
     const wrapper = shallow(
       <GeneralSelect
         name="gender"
+        suffixBrick={{
+          brick: "presentational-bricks.brick-value-mapping",
+          properties: {
+            mapping: {
+              success: {
+                text: "成功",
+                color: "green",
+              },
+              failed: {
+                text: "成功",
+                color: "green",
+              },
+            },
+          },
+          transform: {
+            value: "@status",
+          },
+        }}
         options={[
           { label: "other", value: "other" },
           { label: "one", value: "one" },
