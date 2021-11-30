@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.98.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.97.1...@next-bricks/next-builder@1.98.0) (2021-11-30)
+
+
+### Features
+
+* support build contract data ([91bec43](https://github.com/easyops-cn/next-basics/commit/91bec43d3407e1c020298a9952290c2a19757501))
+
+
+
+
+
 ## [1.97.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.97.0...@next-bricks/next-builder@1.97.1) (2021-11-30)
 
 
