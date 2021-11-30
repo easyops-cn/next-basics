@@ -150,7 +150,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
           ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
           : {})}
         dropdownStyle={{ padding: "2px" }}
-        notFoundContent={!isNil(emptyProps) && <EasyopsEmpty {...emptyProps} />}
+        notFoundContent={<EasyopsEmpty {...emptyProps} />}
       >
         {props.groupBy
           ? getOptsGroups(props.options, props.groupBy)
