@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { UseBrickConf } from "@next-core/brick-types";
-import { BrickAsComponent } from "@next-core/brick-kit";
+import {
+  BrickAsComponent,
+  EasyopsEmpty,
+  EasyopsEmptyProps,
+} from "@next-core/brick-kit";
 import { Select } from "antd";
 import {
   FormItemWrapper,
@@ -8,7 +12,7 @@ import {
   GeneralComplexOption,
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
-import { debounce, groupBy } from "lodash";
+import { debounce, groupBy, isNil } from "lodash";
 
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
@@ -23,6 +27,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   allowClear?: boolean;
   showSearch?: boolean;
   disabled?: boolean;
+  emptyProps?: EasyopsEmptyProps;
   suffix?: {
     useBrick: UseBrickConf;
   };
@@ -46,6 +51,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     suffixBrickStyle,
     tokenSeparators,
     hiddenCheckedValueSuffix,
+    emptyProps,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
   React.useEffect(() => {
@@ -144,6 +150,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
           ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
           : {})}
         dropdownStyle={{ padding: "2px" }}
+        notFoundContent={!isNil(emptyProps) && <EasyopsEmpty {...emptyProps} />}
       >
         {props.groupBy
           ? getOptsGroups(props.options, props.groupBy)

@@ -6,6 +6,7 @@ import {
   property,
   event,
   EventEmitter,
+  EasyopsEmptyProps,
 } from "@next-core/brick-kit";
 import { GeneralSelect, GeneralSelectProps } from "./GeneralSelect";
 import {
@@ -33,6 +34,7 @@ export interface ComplexOption<T = string | number> {
  * 1.59.0:新增属性 `emptyOption`
  * 1.72.0:新增属性 `groupBy`
  * 1.77.0:新增属性 `tokenSeparators`
+ * 1.200.0:新增属性 `emptyProps`
  * @memo
  * ```typescript
  * interface LabeledValue {
@@ -318,6 +320,15 @@ export class GeneralSelectElement extends FormItemElement {
   debounceSearchDelay: number;
 
   /**
+   * @kind EasyopsEmptyProps
+   * @default
+   * @description 空option 时候可以自定义 EasyopsEmpty 配置实现自定义的无数据提示
+   * @group advanced
+   */
+  @property({ attribute: false })
+  emptyProps: EasyopsEmptyProps;
+
+  /**
    * @detail `any`
    * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值
    */
@@ -427,6 +438,7 @@ export class GeneralSelectElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             tokenSeparators={this.tokenSeparators}
+            emptyProps={this.emptyProps}
             popoverPositionType={this.popoverPositionType}
             {...(this.mode === "tags" ? { pattern: this.pattern } : {})}
           />
