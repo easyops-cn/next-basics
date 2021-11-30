@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.97.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.97.0...@next-bricks/next-builder@1.97.1) (2021-11-30)
+
+
+### Bug Fixes
+
+* refine code scanning for expressions and functions ([71ad317](https://github.com/easyops-cn/next-basics/commit/71ad317decca0f75f4c5609c31cb588aea945008))
+
+
+
+
+
 # [1.97.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.96.1...@next-bricks/next-builder@1.97.0) (2021-11-26)
 
 
