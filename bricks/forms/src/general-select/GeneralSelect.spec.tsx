@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import { Select } from "antd";
 import { formatOptions } from "@next-libs/forms";
 import { GeneralSelect } from "./GeneralSelect";
+import { EasyopsEmpty } from "@next-core/brick-kit";
 
 describe("GeneralSelect", () => {
   it("should execute change method", async () => {
@@ -83,7 +84,27 @@ describe("GeneralSelect", () => {
     wrapper.update();
     expect(wrapper.find("BrickAsComponent").length).toEqual(1);
   });
+  it("should render EasyopsEmpty", () => {
+    const wrapper = shallow(
+      <GeneralSelect
+        name="gender"
+        options={[
+          { label: "other", value: "other" },
+          { label: "one", value: "one" },
+        ]}
+        label="hello"
+        placeholder="who"
+        value="abc"
+        emptyProps={{ description: "自定义文本" }}
+      />
+    );
+    wrapper.find(Select).invoke("onSearch")("q");
 
+    expect(EasyopsEmpty.length).toEqual(1);
+    expect(wrapper.find(Select).prop("notFoundContent")).toStrictEqual(
+      <EasyopsEmpty description="自定义文本" />
+    );
+  });
   it("should trigger change event", () => {
     const handleDebounceSearch = jest.fn();
 
