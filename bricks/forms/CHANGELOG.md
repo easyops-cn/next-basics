@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.200.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.1...@next-bricks/forms@1.200.2) (2021-12-01)
+
+
+### Bug Fixes
+
+* **forms:** modify general-radio dashboard type style ([fed2a1e](https://github.com/easyops-cn/next-basics/commit/fed2a1e29ca091ccfc84e4996f810e9a9dc6d82d))
+
+
+
+
+
 ## [1.200.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.0...@next-bricks/forms@1.200.1) (2021-12-01)
 
 
