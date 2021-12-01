@@ -57,7 +57,10 @@
 .dashboardRadio {
   :global(.ant-radio-group) {
     border-radius: 6px;
-    border: 1px solid #e5e9f1;
+    /* border: 1px solid #e5e9f1; */
+    border: none;
+    height: 32px;
+    background-color: #f2f5f9;
   }
 
   :global(.ant-radio-button-wrapper) {
@@ -65,37 +68,37 @@
     padding: 0 30px;
     font-size: 14px;
     color: #777f99;
-    border-right: none;
-    border-left: none;
+    border: none;
+    height: 28px;
+    margin: 2px;
   }
 
   :global(.ant-radio-group-solid
       .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)) {
     background: #ffffff;
     border-radius: 6px;
-    border: 1px solid #e5e9f1;
-    color: #0060ff;
+    color: #1a7aff;
   }
 
-  :global(.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before) {
+  :global(.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled, .ant-radio-button-wrapper-checked)::before) {
     background: #fff;
   }
 
   :global(.ant-radio-button-wrapper:first-child) {
     border-right: none;
-    border-left: 1px solid var(--antd-border-color-base);
     border-radius: 6px 0 0 6px;
   }
 
   :global(.ant-radio-button-wrapper:last-child) {
-    border-right: 1px solid var(--antd-border-color-base);
     border-radius: 0 6px 6px 0;
   }
-
-  :global(.ant-radio-button-wrapper:not(:first-child)::before) {
+  :global(.ant-radio-button-wrapper:not(:first-child, .ant-radio-button-wrapper-checked)::before) {
+    display: none;
+  }
+  :global(.ant-radio-button-wrapper:not(:last-child, .ant-radio-button-wrapper-checked)::after) {
     position: absolute;
     top: 50%;
-    left: -1px;
+    right: -1px;
     display: block;
     box-sizing: content-box;
     width: 1px;
@@ -105,5 +108,22 @@
     transition: background-color 0.3s;
     content: "";
     transform: translateY(-50%);
+  }
+  :global(.ant-radio-button-wrapper-checked::before) {
+    position: absolute;
+    top: 50%;
+    left: -4px;
+    display: block;
+    box-sizing: content-box;
+    width: 1px;
+    height: 19px;
+    line-height: 19px;
+    background-color: #f2f5f9;
+    transition: background-color 0.3s;
+    content: "";
+    transform: translateY(-50%);
+  }
+  :global(.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover)::before {
+    background-color: #f2f5f9;
   }
 }
