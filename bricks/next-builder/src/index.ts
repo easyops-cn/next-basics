@@ -34,3 +34,4 @@ import "./function-debugger-store";
 import "./function-debugger-statusbar";
 import "./data-providers/RunStoryboardFunctionTests";
 import "./data-providers/DeleteUnusedImages";
+import "./data-providers/LintStoryboard";
