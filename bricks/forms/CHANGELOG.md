@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.200.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.0...@next-bricks/forms@1.200.1) (2021-12-01)
+
+
+### Bug Fixes
+
+* **select:** delete isNil emptyProps  Refs ([da58441](https://github.com/easyops-cn/next-basics/commit/da5844159da20e13fd50af43f02d73809ccbcae0))
+
+
+
+
+
 # [1.200.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.199.4...@next-bricks/forms@1.200.0) (2021-11-30)
 
 
