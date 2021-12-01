@@ -240,7 +240,6 @@ describe("brick-table", () => {
     element.filterSourceData(new CustomEvent("", { detail: { q: "" } }));
     document.body.removeChild(element);
   });
-
   it(`set property should work`, () => {
     const element = document.createElement(
       "presentational-bricks.brick-table"
@@ -341,5 +340,42 @@ describe("brick-table", () => {
         detail: expect.arrayContaining([item0]),
       })
     );
+  });
+
+  it("exactSearch should work", async () => {
+    const dataSource = {
+      list: [
+        ...props.dataSource.list,
+        {
+          key: "3",
+          name: "Bruce Wayne4",
+          age: null,
+          address: "New York No. 1 Lake Park",
+          tags: ["nice", "good"],
+        },
+      ],
+      total: 4,
+    };
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+
+    element.frontSearch = true;
+    element.dataSource = dataSource as any;
+    element.columns = props.columns as any;
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    element.filterSourceData(
+      new CustomEvent("", { detail: { q: "Bruce Wayne" } })
+    );
+    await jest.runAllTimers();
+    expect(element.processedDataSource.length).toBe(2);
+    element.exactSearch = true;
+    element.filterSourceData(
+      new CustomEvent("", { detail: { q: "Bruce Wayne" } })
+    );
+    await jest.runAllTimers();
+    expect(element.processedDataSource.length).toBe(1);
+    document.body.removeChild(element);
   });
 });

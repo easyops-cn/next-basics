@@ -133,6 +133,7 @@ export interface CellStatusProps {
  * @author lynette
  * @slots
  * @history
+ * 1.230.0:新增属性 `exactSearch` 在开启前端搜索的情况下可以配置精确搜索
  * 1.168.0:新增属性 `optimizedColumns`
  * 1.153.0:`columns` 属性新增 `headerBrick`、废弃 `titleUseBrick`
  * 1.145.0:新增`stripEmptyExpandableChildren`属性
@@ -786,6 +787,17 @@ export class BrickTableElement extends UpdatingElement {
   frontSearchQuery = "";
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否精确搜索
+   */
+  @property({
+    type: Boolean,
+  })
+  exactSearch: boolean;
+
+  /**
    * @kind string[]
    * @required false
    * @default -
@@ -980,7 +992,9 @@ export class BrickTableElement extends UpdatingElement {
 
   // 搜索过滤
   filterSourceData(event: CustomEvent): void {
-    const q = event.detail.q.trim().toLowerCase();
+    const q = this.exactSearch
+      ? event.detail.q.trim()
+      : event.detail.q.trim().toLowerCase();
     if (this.shouldUpdateUrlParams) {
       const history = getHistory();
       const urlSearchParams = new URLSearchParams(history.location.search);
@@ -1068,6 +1082,9 @@ export class BrickTableElement extends UpdatingElement {
         const value = get(item, key);
         if (isNil(value)) {
           return false;
+        }
+        if (this.exactSearch) {
+          return value === q;
         }
         return JSON.stringify(value).toLowerCase().includes(q);
       });
