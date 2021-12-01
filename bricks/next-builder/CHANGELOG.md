@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.99.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.98.0...@next-bricks/next-builder@1.99.0) (2021-12-01)
+
+
+### Features
+
+* support linting storyboard ([015f173](https://github.com/easyops-cn/next-basics/commit/015f173058a80f6d220ff7ad3c9cb70de417826e))
+
+
+
+
+
 # [1.98.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.97.1...@next-bricks/next-builder@1.98.0) (2021-11-30)
 
 
