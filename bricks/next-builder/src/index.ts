@@ -35,3 +35,4 @@ import "./function-debugger-statusbar";
 import "./data-providers/RunStoryboardFunctionTests";
 import "./data-providers/DeleteUnusedImages";
 import "./data-providers/LintStoryboard";
+import "./data-providers/CreateThemeLayout";
