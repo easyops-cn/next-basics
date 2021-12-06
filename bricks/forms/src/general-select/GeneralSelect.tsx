@@ -85,7 +85,9 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     ? {
         showSearch: true,
         filterOption: (input: string, option: any) => {
-          return option.label?.toLowerCase().includes(input.toLowerCase());
+          return option.label
+            ?.toLowerCase()
+            .includes(input.trim().toLowerCase());
         },
       }
     : {
