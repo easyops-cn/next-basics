@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.200.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.2...@next-bricks/forms@1.200.3) (2021-12-06)
+
+
+### Bug Fixes
+
+* **forms:** select搜索自动剔除前后空格 ([17622fa](https://github.com/easyops-cn/next-basics/commit/17622fafff1a7454329c7b0dce279cce6edf278f))
+
+
+
+
+
 ## [1.200.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.1...@next-bricks/forms@1.200.2) (2021-12-01)
 
 
