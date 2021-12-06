@@ -11,25 +11,28 @@ interface ItemHttpType {
   name: string;
   title: string;
 }
+
+enum HttpStatusCode {
+  FORBIDDEN = "403",
+  NOT_FOUND = "404",
+  SERVER_ERROR = "500",
+}
+
 interface CategoryType {
   [n: string]: ItemHttpType;
 }
 
-const FORBIDDEN = "403";
-const NOT_FOUND = "404";
-const SERVER_ERROR = "500";
-
 // 满足现有插画库所拥有的插画状态，如需添加请按照现有格式添加
-const httpCodeObj: CategoryType = {
-  [FORBIDDEN]: {
+const httpCodeIllustrationMap: CategoryType = {
+  [HttpStatusCode.FORBIDDEN]: {
     name: "http-403",
     title: "无访问权限",
   },
-  [NOT_FOUND]: {
+  [HttpStatusCode.NOT_FOUND]: {
     name: "http-404",
     title: "未找到页面",
   },
-  [SERVER_ERROR]: {
+  [HttpStatusCode.SERVER_ERROR]: {
     name: "http-500",
     title: "服务端异常",
   },
@@ -37,15 +40,16 @@ const httpCodeObj: CategoryType = {
 
 export function PageError(props: PageErrorProps): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
-  const isException: boolean = Object.keys(httpCodeObj).includes(props.code);
+  const httpCodeItem: ItemHttpType = httpCodeIllustrationMap[props.code];
+  const isException = !!httpCodeItem;
   return (
     <div style={{ textAlign: "center", marginTop: 100 }}>
       {isException ? (
         <BrickIllustration
           mode="guide"
           category="exception"
-          name={httpCodeObj[props.code]?.name}
-          header={{ title: httpCodeObj[props.code]?.title }}
+          name={httpCodeItem?.name}
+          header={{ title: httpCodeItem?.title }}
         ></BrickIllustration>
       ) : (
         <>
