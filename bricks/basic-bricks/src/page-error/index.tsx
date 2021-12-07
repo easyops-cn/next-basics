@@ -7,8 +7,8 @@ class PageErrorElement extends UpdatingElement {
   @property()
   error: string;
 
-  @property()
-  code: string;
+  @property({ type: Number })
+  code: number;
 
   connectedCallback(): void {
     // istanbul ignore else
