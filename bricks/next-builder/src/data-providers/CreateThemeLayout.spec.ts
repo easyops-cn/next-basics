@@ -1,8 +1,5 @@
 import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
-import {
-  CreateThemeLayout,
-  CreateThemeLayoutParams,
-} from "./CreateThemeLayout";
+import { CreateThemeLayout } from "./CreateThemeLayout";
 
 jest.mock("@next-sdk/cmdb-sdk");
 

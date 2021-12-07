@@ -36,3 +36,4 @@ import "./data-providers/RunStoryboardFunctionTests";
 import "./data-providers/DeleteUnusedImages";
 import "./data-providers/LintStoryboard";
 import "./data-providers/CreateThemeLayout";
+import "./data-providers/DeleteThemeTemplate";
