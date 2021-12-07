@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.231.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.230.0...@next-bricks/presentational-bricks@1.231.0) (2021-12-07)
+
+
+### Features
+
+* **general-image:** add open and close method ([cdd1d64](https://github.com/easyops-cn/next-basics/commit/cdd1d64a2409d58d39a5eab1b6bb86b7c6a66b5e))
+
+
+
+
+
 # [1.230.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.229.5...@next-bricks/presentational-bricks@1.230.0) (2021-12-01)
 
 
