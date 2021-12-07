@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
+// TODO 待抽取
 import { BrickIllustration } from "../../../presentational-bricks/src/brick-illustration/BrickIllustration";
 
 interface PageErrorProps {
