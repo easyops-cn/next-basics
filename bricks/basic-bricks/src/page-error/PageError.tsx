@@ -2,9 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
 import { BrickIllustration } from "../../../presentational-bricks/src/brick-illustration/BrickIllustration";
+
 interface PageErrorProps {
   error: string;
-  code: string;
+  code: number;
 }
 
 interface ItemHttpType {
@@ -13,34 +14,34 @@ interface ItemHttpType {
 }
 
 enum HttpStatusCode {
-  FORBIDDEN = "403",
-  NOT_FOUND = "404",
-  SERVER_ERROR = "500",
+  FORBIDDEN = 403,
+  NOT_FOUND = 404,
+  SERVER_ERROR = 500,
 }
 
 interface CategoryType {
-  [n: string]: ItemHttpType;
+  [n: number]: ItemHttpType;
 }
 
 // 满足现有插画库所拥有的插画状态，如需添加请按照现有格式添加
 const httpCodeIllustrationMap: CategoryType = {
   [HttpStatusCode.FORBIDDEN]: {
     name: "http-403",
-    title: "无访问权限",
+    title: "FORBIDDEN",
   },
   [HttpStatusCode.NOT_FOUND]: {
     name: "http-404",
-    title: "未找到页面",
+    title: "NOT_FOUND",
   },
   [HttpStatusCode.SERVER_ERROR]: {
     name: "http-500",
-    title: "服务端异常",
+    title: "SERVER_ERROR",
   },
 };
 
 export function PageError(props: PageErrorProps): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
-  const httpCodeItem: ItemHttpType = httpCodeIllustrationMap[props.code];
+  const httpCodeItem = httpCodeIllustrationMap[props.code];
   const isException = !!httpCodeItem;
   return (
     <div style={{ textAlign: "center", marginTop: 100 }}>
@@ -48,8 +49,8 @@ export function PageError(props: PageErrorProps): React.ReactElement {
         <BrickIllustration
           mode="guide"
           category="exception"
-          name={httpCodeItem?.name}
-          header={{ title: httpCodeItem?.title }}
+          name={httpCodeItem.name}
+          header={{ title: t(K[httpCodeItem.title]) }}
         ></BrickIllustration>
       ) : (
         <>
