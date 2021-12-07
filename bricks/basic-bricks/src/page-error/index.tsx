@@ -7,6 +7,9 @@ class PageErrorElement extends UpdatingElement {
   @property()
   error: string;
 
+  @property({ type: Number })
+  code: number;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -24,7 +27,7 @@ class PageErrorElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <PageError error={this.error} />
+          <PageError error={this.error} code={this.code} />
         </BrickWrapper>,
         this
       );

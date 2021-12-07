@@ -15,6 +15,9 @@ export enum K {
   OK = "OK",
   COVERT_TO_LANGUAGE = "COVERT_TO_LANGUAGE",
   SEARCH_BY_NAME_KEYWORD = "SEARCH_BY_NAME_KEYWORD",
+  FORBIDDEN = "FORBIDDEN",
+  NOT_FOUND = "NOT_FOUND",
+  SERVER_ERROR = "SERVER_ERROR",
 }
 
 export type Locale = { [key in K]: string };

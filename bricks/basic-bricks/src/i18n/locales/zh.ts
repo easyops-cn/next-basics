@@ -15,6 +15,9 @@ const locale: Locale = {
   [K.OK]: "确定",
   [K.COVERT_TO_LANGUAGE]: "Convert to English",
   [K.SEARCH_BY_NAME_KEYWORD]: "通过名称/关键字搜索",
+  [K.FORBIDDEN]: "无访问权限",
+  [K.NOT_FOUND]: "未找到页面",
+  [K.SERVER_ERROR]: "服务端异常",
 };
 
 export default locale;
