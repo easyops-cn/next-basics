@@ -28,6 +28,7 @@ import {
 import { simpleHash } from "./utils/simpleHash";
 import { replaceWidgetFunctions } from "./utils/replaceWidgetFunctions";
 import { PlainObject } from "../search-tree/utils";
+import { getBaseGraphParams } from "../shared/storyboard/getBaseGraphParams";
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
@@ -110,51 +111,19 @@ export async function BuildProjectOfTemplates({
   appId,
   projectId,
 }: BuildProjectOfTemplatesParams): Promise<BuildInfoForProjectOfTemplates> {
-  const templatesGraphReq = InstanceGraphApi_traverseGraphV2({
-    object_id: MODEL_STORYBOARD_TEMPLATE,
-    query: {
-      "project.instanceId": projectId,
-    },
+  const templatesGraphReq = InstanceGraphApi_traverseGraphV2(
+    getBaseGraphParams({
+      projectId,
+      objectId: MODEL_STORYBOARD_TEMPLATE,
+    })
+  );
 
-    select_fields: ["*", "parent"],
-    child: [
-      {
-        child: [
-          {
-            depth: -1,
-            parentOut: "children",
-            select_fields: ["*", "parent"],
-          },
-        ],
-
-        depth: -1,
-        parentOut: "children",
-        select_fields: ["*", "parent"],
-      },
-    ],
-  });
-
-  const snippetsGraphReq = InstanceGraphApi_traverseGraphV2({
-    child: [
-      {
-        child: [
-          {
-            depth: -1,
-            parentOut: "children",
-            select_fields: ["*"],
-          },
-        ],
-        depth: -1,
-        parentOut: "children",
-        select_fields: ["*"],
-      },
-    ],
-    object_id: MODEL_STORYBOARD_SNIPPET,
-    query: {
-      "project.instanceId": projectId,
-    },
-    select_fields: ["*"],
-  });
+  const snippetsGraphReq = InstanceGraphApi_traverseGraphV2(
+    getBaseGraphParams({
+      projectId,
+      objectId: MODEL_STORYBOARD_SNIPPET,
+    })
+  );
 
   const imagesAndFunctionsReq = InstanceApi_getDetail(
     "PROJECT_MICRO_APP",
