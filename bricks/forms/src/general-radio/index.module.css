@@ -65,7 +65,7 @@
 
   :global(.ant-radio-button-wrapper) {
     background: #f0f3fa;
-    padding: 0 30px;
+    padding: 0 28px;
     font-size: 14px;
     color: #777f99;
     border: none;
@@ -109,7 +109,7 @@
     content: "";
     transform: translateY(-50%);
   }
-  :global(.ant-radio-button-wrapper-checked::before) {
+  :global(.ant-radio-button-wrapper-checked:not(:first-child)::before) {
     position: absolute;
     top: 50%;
     left: -4px;
