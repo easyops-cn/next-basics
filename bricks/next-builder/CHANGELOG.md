@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.100.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.99.0...@next-bricks/next-builder@1.100.0) (2021-12-07)
+
+
+### Features
+
+* new provider: create theme layout ([b52860e](https://github.com/easyops-cn/next-basics/commit/b52860e852891feeb311937ee698835a81f11000))
+
+
+
+
+
 # [1.99.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.98.0...@next-bricks/next-builder@1.99.0) (2021-12-01)
 
 
