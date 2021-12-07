@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.157.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.156.2...@next-bricks/basic-bricks@1.157.0) (2021-12-07)
+
+
+### Features
+
+* 丰富接口异常情况页面错误处理 ([1a51f72](https://github.com/easyops-cn/next-basics/commit/1a51f7248f63f9ad40e83c796a855ea8ad1eadb2))
+
+
+
+
+
 ## [1.156.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.156.1...@next-bricks/basic-bricks@1.156.2) (2021-11-25)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
