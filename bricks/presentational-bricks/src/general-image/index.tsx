@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  UpdatingElement,
+  property,
+  method,
+} from "@next-core/brick-kit";
 import { Image } from "antd";
 import { GeneralImage, GeneralImageProps } from "./GeneralImage";
 
@@ -113,6 +118,14 @@ export class GeneralImageElement extends UpdatingElement {
   })
   extraContainerStyle: React.CSSProperties;
 
+  /**
+   * @default -
+   * @required
+   * @description 是否显示预览
+   * @group advanced
+   */
+  @property({ attribute: false }) visible: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -125,6 +138,27 @@ export class GeneralImageElement extends UpdatingElement {
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
   }
+
+  /**
+   * @description 打开预览
+   */
+  @method() open(): void {
+    this.visible = true;
+  }
+
+  /**
+   * @description 关闭预览
+   */
+  @method() close(): void {
+    this.visible = false;
+  }
+
+  private _handleVisibleChange = (
+    visible: boolean,
+    prevVisible: boolean
+  ): void => {
+    this.visible = visible;
+  };
 
   protected _render(): void {
     // istanbul ignore else
@@ -142,6 +176,8 @@ export class GeneralImageElement extends UpdatingElement {
             dataSource={this.dataSource}
             extra={this.extra}
             extraContainerStyle={this.extraContainerStyle}
+            visible={this.visible}
+            onVisibleChange={this._handleVisibleChange}
           />
         </BrickWrapper>,
         this
