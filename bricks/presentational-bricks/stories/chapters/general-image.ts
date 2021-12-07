@@ -20,11 +20,51 @@ export const GeneralImageStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "基本用法",
+      },
       brick: "presentational-bricks.general-image",
       properties: {
         imgSrc:
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
         imgWidth: 200,
+      },
+    },
+    {
+      description: {
+        title: "调用 open() 打开预览",
+      },
+      brick: "div",
+      slots: {
+        "": {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              properties: {
+                buttonName: "open()",
+              },
+              events: {
+                "general.button.click": [
+                  {
+                    target: "#image-to-preview",
+                    method: "open",
+                  },
+                ],
+              },
+            },
+            {
+              brick: "presentational-bricks.general-image",
+              properties: {
+                id: "image-to-preview",
+                hidden: true,
+                imgSrc:
+                  "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+                imgWidth: 200,
+              },
+            },
+          ],
+        },
       },
     },
   ],
