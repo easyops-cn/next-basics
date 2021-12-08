@@ -39,3 +39,5 @@ import "./data-providers/CreateThemeLayout";
 import "./data-providers/DeleteThemeTemplate";
 import "./data-providers/BuildProjectOfThemeTemplate";
 import "./data-providers/ExperimentalExportThemeTemplate";
+import "./data-providers/ApplyThemeTemplate";
+import "./data-providers/ApplyThemePage";

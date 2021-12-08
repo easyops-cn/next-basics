@@ -24,22 +24,18 @@ export async function preStoryboardAssembly({
   projectId,
   options,
 }: PreStoryboardAssemblyParams): Promise<PreStoryboardAssemblyResult> {
-  const routeGraphParams = getBaseGraphParams({
-    projectId,
-    objectId: MODEL_STORYBOARD_ROUTE,
-  });
-
-  const routeGraphReq = InstanceGraphApi_traverseGraphV2({
-    ...routeGraphParams,
-    object_id: MODEL_STORYBOARD_ROUTE,
-    query: {
-      ...routeGraphParams.query,
-      // Find first-level routes as topic vertices.
-      parent: {
-        $exists: false,
+  const routeGraphReq = InstanceGraphApi_traverseGraphV2(
+    getBaseGraphParams({
+      projectId,
+      objectId: MODEL_STORYBOARD_ROUTE,
+      extraQuery: {
+        // Find first-level routes as topic vertices.
+        parent: {
+          $exists: false,
+        },
       },
-    },
-  });
+    })
+  );
 
   const templateGraphReq = InstanceGraphApi_traverseGraphV2(
     getBaseGraphParams({
