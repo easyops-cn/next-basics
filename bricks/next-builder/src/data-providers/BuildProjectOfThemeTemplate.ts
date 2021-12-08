@@ -24,7 +24,7 @@ interface LayoutItem {
   layoutId: string;
   name: I18nData;
   templateId: string;
-  snippetId: unknown;
+  snippetId: string;
 }
 
 interface RawLayoutItem {
