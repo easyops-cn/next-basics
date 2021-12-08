@@ -4,10 +4,10 @@ import {
   InstanceApi_getDetail,
   InstanceApi_GetDetailResponseBody,
   InstanceGraphApi_traverseGraphV2,
-  InstanceGraphApi_TraverseGraphV2RequestBody,
   InstanceGraphApi_TraverseGraphV2ResponseBody,
 } from "@next-sdk/cmdb-sdk";
 import { sortBy } from "lodash";
+import { getBaseGraphParams } from "./getBaseGraphParams";
 import {
   PreStoryboardAssemblyParams,
   PreStoryboardAssemblyResult,
@@ -24,35 +24,16 @@ export async function preStoryboardAssembly({
   projectId,
   options,
 }: PreStoryboardAssemblyParams): Promise<PreStoryboardAssemblyResult> {
-  const baseGraphParams: Omit<
-    InstanceGraphApi_TraverseGraphV2RequestBody,
-    "object_id"
-  > = {
-    query: {
-      "project.instanceId": projectId,
-    },
-    select_fields: ["*"],
-    child: [
-      {
-        child: [
-          {
-            depth: -1,
-            parentOut: "children",
-            select_fields: ["*"],
-          },
-        ],
-        depth: -1,
-        parentOut: "children",
-        select_fields: ["*"],
-      },
-    ],
-  };
+  const routeGraphParams = getBaseGraphParams({
+    projectId,
+    objectId: MODEL_STORYBOARD_ROUTE,
+  });
 
   const routeGraphReq = InstanceGraphApi_traverseGraphV2({
-    ...baseGraphParams,
+    ...routeGraphParams,
     object_id: MODEL_STORYBOARD_ROUTE,
     query: {
-      ...baseGraphParams.query,
+      ...routeGraphParams.query,
       // Find first-level routes as topic vertices.
       parent: {
         $exists: false,
@@ -60,10 +41,12 @@ export async function preStoryboardAssembly({
     },
   });
 
-  const templateGraphReq = InstanceGraphApi_traverseGraphV2({
-    ...baseGraphParams,
-    object_id: MODEL_STORYBOARD_TEMPLATE,
-  });
+  const templateGraphReq = InstanceGraphApi_traverseGraphV2(
+    getBaseGraphParams({
+      projectId,
+      objectId: MODEL_STORYBOARD_TEMPLATE,
+    })
+  );
 
   const requests = [routeGraphReq, templateGraphReq] as Promise<unknown>[];
 

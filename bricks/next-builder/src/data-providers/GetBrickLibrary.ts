@@ -8,6 +8,7 @@ import {
 } from "@next-sdk/cmdb-sdk";
 import { BootstrapV2Api_brickPackageInfo } from "@next-sdk/api-gateway-sdk";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
+import { getBaseGraphParams } from "../shared/storyboard/getBaseGraphParams";
 
 export interface BrickLibraryItem {
   type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
@@ -97,27 +98,10 @@ export async function GetBrickLibrary(
       : { list: [] },
     !ignoreSnippets && installedBricksEnabled
       ? InstanceGraphApi_traverseGraphV2(
-          {
-            child: [
-              {
-                child: [
-                  {
-                    depth: -1,
-                    parentOut: "children",
-                    select_fields: ["*"],
-                  },
-                ],
-                depth: -1,
-                parentOut: "children",
-                select_fields: ["*"],
-              },
-            ],
-            object_id: "STORYBOARD_SNIPPET",
-            query: {
-              "project.instanceId": projectId,
-            },
-            select_fields: ["*"],
-          },
+          getBaseGraphParams({
+            projectId,
+            objectId: "STORYBOARD_SNIPPET",
+          }),
           options
         )
       : {
