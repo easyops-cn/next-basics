@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.232.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.231.0...@next-bricks/presentational-bricks@1.232.0) (2021-12-08)
+
+
+### Features
+
+* **general-image:** add visible-change event ([c5efc65](https://github.com/easyops-cn/next-basics/commit/c5efc6513d06bdbd402ec188df368d478eabc99b))
+
+
+
+
+
 # [1.231.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.230.0...@next-bricks/presentational-bricks@1.231.0) (2021-12-07)
 
 
