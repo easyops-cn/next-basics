@@ -5,8 +5,9 @@ import {
   UpdatingElement,
   property,
   method,
+  event,
+  EventEmitter,
 } from "@next-core/brick-kit";
-import { Image } from "antd";
 import { GeneralImage, GeneralImageProps } from "./GeneralImage";
 
 /**
@@ -126,6 +127,13 @@ export class GeneralImageElement extends UpdatingElement {
    */
   @property({ attribute: false }) visible: boolean;
 
+  /**
+   * @detail boolean
+   * @description 是否显示预览改变事件
+   */
+  @event({ type: "general-image.visible-change" })
+  visibleChangeEventEmitter: EventEmitter;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -153,11 +161,9 @@ export class GeneralImageElement extends UpdatingElement {
     this.visible = false;
   }
 
-  private _handleVisibleChange = (
-    visible: boolean,
-    prevVisible: boolean
-  ): void => {
+  private _handleVisibleChange = (visible: boolean): void => {
     this.visible = visible;
+    this.visibleChangeEventEmitter.emit(visible);
   };
 
   protected _render(): void {
