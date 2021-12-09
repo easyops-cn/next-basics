@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.232.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.232.0...@next-bricks/presentational-bricks@1.232.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** 修复modal国际化失效 ([7118f6b](https://github.com/easyops-cn/next-basics/commit/7118f6bd356b55943ff99ba3c10a74cda1a40b98))
+
+
+
+
+
 # [1.232.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.231.0...@next-bricks/presentational-bricks@1.232.0) (2021-12-08)
 
 
