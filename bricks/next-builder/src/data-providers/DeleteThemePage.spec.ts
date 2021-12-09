@@ -1,6 +1,6 @@
 import { InstanceApi_deleteInstance } from "@next-sdk/cmdb-sdk";
 import { StoryboardApi_deleteStoryboardNode } from "@next-sdk/next-builder-sdk";
-import { DeleteThemeTemplate } from "./DeleteThemeTemplate";
+import { DeleteThemePage } from "./DeleteThemePage";
 
 jest.mock("@next-sdk/cmdb-sdk");
 jest.mock("@next-sdk/next-builder-sdk");
@@ -9,20 +9,20 @@ jest.mock("@next-sdk/next-builder-sdk");
   (objectId, instanceId) => ({ instanceId })
 );
 
-describe("DeleteThemeTemplate", () => {
+describe("DeleteThemePage", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it("should work", async () => {
     expect(
-      await DeleteThemeTemplate({
-        layoutInstanceId: "layout-a",
+      await DeleteThemePage({
+        themePageId: "page-a",
         templateId: "T-01",
         snippetId: "S-02",
       })
     ).toEqual({
-      instanceId: "layout-a",
+      instanceId: "page-a",
     });
     expect(StoryboardApi_deleteStoryboardNode).toBeCalledTimes(2);
     expect(StoryboardApi_deleteStoryboardNode).toHaveBeenNthCalledWith(
@@ -37,11 +37,11 @@ describe("DeleteThemeTemplate", () => {
 
   it("should ignore template and snippet", async () => {
     expect(
-      await DeleteThemeTemplate({
-        layoutInstanceId: "layout-a",
+      await DeleteThemePage({
+        themePageId: "page-a",
       })
     ).toEqual({
-      instanceId: "layout-a",
+      instanceId: "page-a",
     });
     expect(StoryboardApi_deleteStoryboardNode).toBeCalledTimes(0);
   });

@@ -28,38 +28,38 @@ jest.mock("@next-sdk/cmdb-sdk");
       constraint: "*",
     },
   ],
-  layouts: [
+  pageTemplates: [
     {
-      layoutId: "home",
+      pageTypeId: "home",
       name: {
         en: "Home",
         zh: "首页",
       },
-      customTemplate: [
+      template: [
         {
-          templateId: "tpl-layout-home",
+          templateId: "tpl-page-home",
         },
       ],
       snippet: [
         {
-          snippetId: "layout-home",
+          snippetId: "page-home",
         },
       ],
     },
     {
-      layoutId: "list",
+      pageTypeId: "list",
       name: {
         en: "List",
         zh: "列表",
       },
-      customTemplate: [
+      template: [
         {
-          templateId: "tpl-layout-list",
+          templateId: "tpl-page-list",
         },
       ],
       snippet: [
         {
-          snippetId: "layout-list",
+          snippetId: "page-list",
         },
       ],
     },
@@ -77,11 +77,11 @@ jest.mock("@next-sdk/cmdb-sdk");
           topic_vertices: [
             {
               instanceId: "a",
-              templateId: "tpl-layout-home",
+              templateId: "tpl-page-home",
             },
             {
               instanceId: "b",
-              templateId: "tpl-layout-list",
+              templateId: "tpl-page-list",
             },
             {
               instanceId: "v",
@@ -124,11 +124,11 @@ jest.mock("@next-sdk/cmdb-sdk");
           topic_vertices: [
             {
               instanceId: "x",
-              snippetId: "layout-home",
+              snippetId: "page-home",
             },
             {
               instanceId: "y",
-              snippetId: "layout-list",
+              snippetId: "page-list",
             },
           ],
           vertices: [
@@ -176,24 +176,24 @@ describe("BuildProjectOfThemeTemplate", () => {
             constraint: "*",
           },
         ],
-        layouts: [
+        pageTemplates: [
           {
-            layoutId: "home",
+            pageTypeId: "home",
             name: {
               en: "Home",
               zh: "首页",
             },
-            templateId: "tpl-layout-home",
-            snippetId: "layout-home",
+            templateId: "tpl-page-home",
+            snippetId: "page-home",
           },
           {
-            layoutId: "list",
+            pageTypeId: "list",
             name: {
               en: "List",
               zh: "列表",
             },
-            templateId: "tpl-layout-list",
-            snippetId: "layout-list",
+            templateId: "tpl-page-list",
+            snippetId: "page-list",
           },
         ],
         templates: [
@@ -205,7 +205,7 @@ describe("BuildProjectOfThemeTemplate", () => {
               },
             ],
             instanceId: "a",
-            templateId: "tpl-layout-home",
+            templateId: "tpl-page-home",
           },
           {
             children: [
@@ -215,7 +215,7 @@ describe("BuildProjectOfThemeTemplate", () => {
               },
             ],
             instanceId: "b",
-            templateId: "tpl-layout-list",
+            templateId: "tpl-page-list",
           },
           {
             children: [
@@ -237,7 +237,7 @@ describe("BuildProjectOfThemeTemplate", () => {
               },
             ],
             instanceId: "x",
-            snippetId: "layout-home",
+            snippetId: "page-home",
           },
           {
             children: [
@@ -247,7 +247,7 @@ describe("BuildProjectOfThemeTemplate", () => {
               },
             ],
             instanceId: "y",
-            snippetId: "layout-list",
+            snippetId: "page-list",
           },
         ],
       },

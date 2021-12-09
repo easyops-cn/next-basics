@@ -2,21 +2,21 @@ import { I18nData } from "@next-core/brick-types";
 import { createProviderClass } from "@next-core/brick-utils";
 import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
 
-export interface CreateThemeLayoutParams {
+export interface CreateThemePageParams {
   // Project instance ID.
   projectId: string;
   appId: string;
-  layoutId: string;
+  pageTypeId: string;
   name: I18nData;
 }
 
-export async function CreateThemeLayout({
+export async function CreateThemePage({
   projectId,
   appId,
-  layoutId,
+  pageTypeId,
   name,
-}: CreateThemeLayoutParams): Promise<unknown> {
-  const templateId = `tpl-layout-${layoutId}`;
+}: CreateThemePageParams): Promise<unknown> {
+  const templateId = `tpl-page-${pageTypeId}`;
   // Currently, There is a bug when creating multiple instances of
   // sub-models which have the same parent which has an auto-increment field.
   // So we create the template and snippet in sequence.
@@ -29,7 +29,7 @@ export async function CreateThemeLayout({
   const snippet = await InstanceApi_createInstance("STORYBOARD_SNIPPET", {
     project: projectId,
     appId,
-    snippetId: `layout-${layoutId}`,
+    snippetId: `page-${pageTypeId}`,
     type: "snippet",
     text: name,
     layerType: "layout",
@@ -42,11 +42,11 @@ export async function CreateThemeLayout({
       mountPoint: "bricks",
       parent: snippet.instanceId,
     }),
-    InstanceApi_createInstance("STORYBOARD_THEME_LAYOUT", {
+    InstanceApi_createInstance("STORYBOARD_THEME_PAGE", {
       project: projectId,
-      layoutId,
+      pageTypeId,
       name,
-      customTemplate: tpl.instanceId,
+      template: tpl.instanceId,
       snippet: snippet.instanceId,
     }),
   ]);
@@ -54,6 +54,6 @@ export async function CreateThemeLayout({
 }
 
 customElements.define(
-  "next-builder.provider-create-theme-layout",
-  createProviderClass(CreateThemeLayout)
+  "next-builder.provider-create-theme-page",
+  createProviderClass(CreateThemePage)
 );

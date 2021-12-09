@@ -1,5 +1,5 @@
 import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
-import { CreateThemeLayout } from "./CreateThemeLayout";
+import { CreateThemePage } from "./CreateThemePage";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
@@ -13,26 +13,26 @@ jest.mock("@next-sdk/cmdb-sdk");
       return {
         instanceId: "snippet-a",
       };
-    case "STORYBOARD_THEME_LAYOUT":
+    case "STORYBOARD_THEME_PAGE":
       return {
-        instanceId: "layout-a",
+        instanceId: "page-a",
       };
   }
 });
 
-describe("CreateThemeLayout", () => {
+describe("CreateThemePage", () => {
   it("should work", async () => {
     expect(
-      await CreateThemeLayout({
+      await CreateThemePage({
         projectId: "project-a",
         appId: "app-a",
-        layoutId: "home",
+        pageTypeId: "home",
         name: {
           en: "My Layout",
         },
       })
     ).toEqual({
-      instanceId: "layout-a",
+      instanceId: "page-a",
     });
     expect(InstanceApi_createInstance).toBeCalledTimes(4);
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
@@ -41,7 +41,7 @@ describe("CreateThemeLayout", () => {
       {
         project: "project-a",
         appId: "app-a",
-        templateId: `tpl-layout-home`,
+        templateId: `tpl-page-home`,
         type: "custom-template",
       }
     );
@@ -51,7 +51,7 @@ describe("CreateThemeLayout", () => {
       {
         project: "project-a",
         appId: "app-a",
-        snippetId: `layout-home`,
+        snippetId: `page-home`,
         type: "snippet",
         text: {
           en: "My Layout",
@@ -64,7 +64,7 @@ describe("CreateThemeLayout", () => {
       "STORYBOARD_BRICK",
       {
         appId: "app-a",
-        brick: `tpl-layout-home`,
+        brick: `tpl-page-home`,
         type: "brick",
         mountPoint: "bricks",
         parent: "snippet-a",
@@ -72,14 +72,14 @@ describe("CreateThemeLayout", () => {
     );
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
       4,
-      "STORYBOARD_THEME_LAYOUT",
+      "STORYBOARD_THEME_PAGE",
       {
         project: "project-a",
-        layoutId: "home",
+        pageTypeId: "home",
         name: {
           en: "My Layout",
         },
-        customTemplate: "tpl-a",
+        template: "tpl-a",
         snippet: "snippet-a",
       }
     );

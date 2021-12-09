@@ -14,23 +14,23 @@ export interface BuildProjectOfThemeTemplateResult {
   themeId: string;
   name: I18nData;
   layoutType: string;
-  layouts: LayoutItem[];
+  pageTemplates: PageTemplateItem[];
   templates: unknown[];
   snippets: unknown[];
   dependencies: unknown[];
 }
 
-interface LayoutItem {
-  layoutId: string;
+interface PageTemplateItem {
+  pageTypeId: string;
   name: I18nData;
   templateId: string;
   snippetId: string;
 }
 
 interface RawLayoutItem {
-  layoutId: string;
+  pageTypeId: string;
   name: I18nData;
-  customTemplate: [
+  template: [
     {
       templateId: string;
     }
@@ -54,10 +54,10 @@ export async function BuildProjectOfThemeTemplate({
         "appSetting.layoutType",
         "appSetting.locales",
         "dependencies",
-        "layouts.layoutId",
-        "layouts.name",
-        "layouts.customTemplate.templateId",
-        "layouts.snippet.snippetId",
+        "pageTemplates.pageTypeId",
+        "pageTemplates.name",
+        "pageTemplates.template.templateId",
+        "pageTemplates.snippet.snippetId",
       ].join(","),
     }
   );
@@ -96,12 +96,14 @@ export async function BuildProjectOfThemeTemplate({
     themeId: projectDetail.appId,
     name: getLocaleName(projectDetail.appSetting.locales),
     layoutType: projectDetail.appSetting.layoutType,
-    layouts: (projectDetail.layouts as RawLayoutItem[]).map((item) => ({
-      layoutId: item.layoutId,
-      name: item.name,
-      templateId: item.customTemplate[0].templateId,
-      snippetId: item.snippet[0].snippetId,
-    })),
+    pageTemplates: (projectDetail.pageTemplates as RawLayoutItem[]).map(
+      (item) => ({
+        pageTypeId: item.pageTypeId,
+        name: item.name,
+        templateId: item.template[0].templateId,
+        snippetId: item.snippet[0].snippetId,
+      })
+    ),
     templates,
     snippets,
     dependencies: projectDetail.dependencies,
