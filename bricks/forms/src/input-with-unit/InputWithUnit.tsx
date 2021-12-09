@@ -37,8 +37,8 @@ export function InputGroup(
   }
   const precision = props.precision ?? 0;
 
-  const [inputNumber, setInputNumber] = React.useState(props.value);
-  const [selectUnit, setSelectUnit] = React.useState(props.unit);
+  const [inputNumber, setInputNumber] = React.useState<number>();
+  const [selectUnit, setSelectUnit] = React.useState<string>();
 
   const transformUnit = (n: number, currentUnit: string): number => {
     const select = units.find((unit) => unit.id === currentUnit);
@@ -59,6 +59,8 @@ export function InputGroup(
     index = Math.max(1, index);
     const suitableUnit = units[index - 1];
     if (precision === 0 && value % suitableUnit.divisor > 0) {
+      setInputNumber(props.value);
+      setSelectUnit(props.unit);
       return;
     }
 
@@ -92,8 +94,7 @@ export function InputGroup(
         handleChange("" as any);
       }
     }
-    // todo(ice): no update value from form
-  }, []);
+  }, [props.value]);
 
   return (
     <div ref={ref}>
