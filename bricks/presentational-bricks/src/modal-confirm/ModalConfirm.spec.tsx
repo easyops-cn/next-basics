@@ -2,11 +2,22 @@ import React from "react";
 import { Modal, Input } from "antd";
 import { mount } from "enzyme";
 import { ModalConfirm, ModalConfirmProps } from "./ModalConfirm";
-import { BrickAsComponent } from "@next-core/brick-kit";
 
 const mockUpdate = jest.fn();
-const spyOnModalConfirm = jest.spyOn(Modal, "confirm");
-spyOnModalConfirm.mockReturnValue({ update: mockUpdate, destroy: jest.fn() });
+const mockModalMethod = jest.fn();
+
+jest.spyOn(Modal, "useModal").mockReturnValue([
+  {
+    confirm: mockModalMethod,
+    info: mockModalMethod,
+    success: mockModalMethod,
+    warning: mockModalMethod,
+    error: mockModalMethod,
+  },
+  <></>,
+]);
+
+mockModalMethod.mockReturnValue({ update: mockUpdate, destroy: jest.fn() });
 
 const props: any = {
   type: "confirm",
@@ -38,14 +49,14 @@ describe("ModalConfirm", () => {
       />
     );
     expect(wrapper).toMatchSnapshot();
-    expect(spyOnModalConfirm).toBeCalled();
+    expect(mockModalMethod).toBeCalled();
     const modalProps =
-      spyOnModalConfirm.mock.calls[spyOnModalConfirm.mock.calls.length - 1][0];
-    modalProps.onOk();
+      mockModalMethod.mock.calls[mockModalMethod.mock.calls.length - 1][0];
+    modalProps.onOk().catch((err) => err);
     expect(mockOnOk).toBeCalled();
     modalProps.onCancel();
     expect(mockOnCancel).toBeCalled();
-    spyOnModalConfirm.mockClear();
+    mockModalMethod.mockClear();
 
     wrapper.setProps({
       visible: false,
@@ -57,7 +68,7 @@ describe("ModalConfirm", () => {
       onCancel: undefined,
     });
     expect(wrapper).toMatchSnapshot();
-    expect(spyOnModalConfirm).not.toBeCalled();
+    expect(mockModalMethod).not.toBeCalled();
   });
 
   it("expect should work", () => {
@@ -77,7 +88,7 @@ describe("ModalConfirm", () => {
     wrapper.setProps({ visible: true });
 
     const modalProps =
-      spyOnModalConfirm.mock.calls[spyOnModalConfirm.mock.calls.length - 1][0];
+      mockModalMethod.mock.calls[mockModalMethod.mock.calls.length - 1][0];
     expect(modalProps.okButtonProps.disabled).toBe(true);
 
     const contentWrapper = mount(modalProps.content as React.ReactElement);

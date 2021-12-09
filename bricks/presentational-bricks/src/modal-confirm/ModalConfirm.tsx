@@ -41,6 +41,7 @@ const parseHTMLTemplate = (template: string, context: Record<string, any>) => {
 };
 
 export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
+  const [modalEntity, contextHolder] = Modal.useModal();
   const { t } = useTranslation(NS_PRESENTATIONAL_BRICKS);
   const {
     visible,
@@ -136,7 +137,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
   useEffect(() => {
     if (!modal && visible) {
       setModal(
-        Modal[type]({
+        modalEntity[type]({
           title: title,
           content: contentBrick?.useBrick ? brickContent : modalContent,
           okText: okText,
@@ -194,5 +195,5 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
     }
   }, [inputValue]);
 
-  return null;
+  return <>{contextHolder}</>;
 }
