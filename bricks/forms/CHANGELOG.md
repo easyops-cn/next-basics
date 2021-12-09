@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.200.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.4...@next-bricks/forms@1.200.5) (2021-12-09)
+
+
+### Bug Fixes
+
+* fix the bug of that forms cannot update value of this brick ([72e3468](https://github.com/easyops-cn/next-basics/commit/72e34680f433e6ec4f8236a3e5f8ca89af4fad78)), closes [Refs#MONITOR-2702](https://github.com/Refs/issues/MONITOR-2702)
+
+
+
+
+
 ## [1.200.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.3...@next-bricks/forms@1.200.4) (2021-12-07)
 
 

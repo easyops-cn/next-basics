@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.102.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.101.0...@next-bricks/next-builder@1.102.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* rename `layout` to `theme-page` ([ef5190a](https://github.com/easyops-cn/next-basics/commit/ef5190ac8503e625bc3e031ef537d2352b50353f))
+
+
+### Features
+
+* support applying theme template and layout ([7107ef8](https://github.com/easyops-cn/next-basics/commit/7107ef86c036484a877475f2246cabb15b711d84))
+* support building theme template ([aac7126](https://github.com/easyops-cn/next-basics/commit/aac712686ae784c0e5e95ce2b0d8f9cca4649504))
+
+
+
+
+
 # [1.101.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.100.0...@next-bricks/next-builder@1.101.0) (2021-12-07)
 
 
