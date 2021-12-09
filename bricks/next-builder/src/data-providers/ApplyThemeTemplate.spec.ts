@@ -33,51 +33,51 @@ jest.mock("./utils/appendBricksFactory");
 (InstanceApi_postSearchV3 as jest.Mock).mockResolvedValue({
   list: [
     {
-      layouts: [
+      pageTemplates: [
         {
-          layoutId: "home",
+          pageTypeId: "home",
           name: { en: "Home" },
-          templateId: "tpl-layout-home",
-          snippetId: "layout-home",
+          templateId: "tpl-page-home",
+          snippetId: "page-home",
         },
         {
-          layoutId: "list",
+          pageTypeId: "list",
           name: { en: "List" },
-          templateId: "tpl-layout-list",
-          snippetId: "layout-list",
+          templateId: "tpl-page-list",
+          snippetId: "page-list",
         },
       ],
       templates: [
         {
-          templateId: "tpl-layout-home",
+          templateId: "tpl-page-home",
           proxy: "{}",
           layerType: "layout",
           children: [
             {
-              brick: "brick-in-tpl-layout-home",
+              brick: "brick-in-tpl-page-home",
             },
           ],
         },
         {
-          templateId: "tpl-layout-basic-view",
+          templateId: "tpl-page-basic-view",
         },
         {
-          templateId: "tpl-layout-list",
+          templateId: "tpl-page-list",
         },
       ],
       snippets: [
         {
-          snippetId: "layout-home",
+          snippetId: "page-home",
           text: { en: "Home" },
           layerType: "layout",
           children: [
             {
-              brick: "brick-in-layout-home",
+              brick: "brick-in-page-home",
             },
           ],
         },
         {
-          snippetId: "layout-list",
+          snippetId: "page-list",
         },
       ],
       layoutType: "business",
@@ -127,7 +127,7 @@ describe("ApplyThemeTemplate", () => {
       {
         project: "my-project",
         appId: "my-app",
-        templateId: "tpl-layout-home",
+        templateId: "tpl-page-home",
         type: "custom-template",
         proxy: "{}",
         layerType: "layout",
@@ -135,7 +135,7 @@ describe("ApplyThemeTemplate", () => {
     );
     expect(appendBricks).toHaveBeenNthCalledWith(
       1,
-      [{ brick: "brick-in-tpl-layout-home" }],
+      [{ brick: "brick-in-tpl-page-home" }],
       "instance:1"
     );
 
@@ -145,7 +145,7 @@ describe("ApplyThemeTemplate", () => {
       {
         project: "my-project",
         appId: "my-app",
-        templateId: "tpl-layout-basic-view",
+        templateId: "tpl-page-basic-view",
         type: "custom-template",
       }
     );
@@ -157,7 +157,7 @@ describe("ApplyThemeTemplate", () => {
       {
         project: "my-project",
         appId: "my-app",
-        templateId: "tpl-layout-list",
+        templateId: "tpl-page-list",
         type: "custom-template",
       }
     );
@@ -169,7 +169,7 @@ describe("ApplyThemeTemplate", () => {
       {
         project: "my-project",
         appId: "my-app",
-        snippetId: "layout-home",
+        snippetId: "page-home",
         type: "snippet",
         text: { en: "Home" },
         layerType: "layout",
@@ -177,7 +177,7 @@ describe("ApplyThemeTemplate", () => {
     );
     expect(appendBricks).toHaveBeenNthCalledWith(
       4,
-      [{ brick: "brick-in-layout-home" }],
+      [{ brick: "brick-in-page-home" }],
       "instance:4"
     );
 
@@ -187,7 +187,7 @@ describe("ApplyThemeTemplate", () => {
       {
         project: "my-project",
         appId: "my-app",
-        snippetId: "layout-list",
+        snippetId: "page-list",
         type: "snippet",
       }
     );
@@ -195,24 +195,24 @@ describe("ApplyThemeTemplate", () => {
 
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
       6,
-      "STORYBOARD_THEME_LAYOUT",
+      "STORYBOARD_THEME_PAGE",
       {
         project: "my-project",
-        layoutId: "home",
+        pageTypeId: "home",
         name: { en: "Home" },
-        customTemplate: "instance:1",
+        template: "instance:1",
         snippet: "instance:4",
       }
     );
 
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
       7,
-      "STORYBOARD_THEME_LAYOUT",
+      "STORYBOARD_THEME_PAGE",
       {
         project: "my-project",
-        layoutId: "list",
+        pageTypeId: "list",
         name: { en: "List" },
-        customTemplate: "instance:3",
+        template: "instance:3",
         snippet: "instance:5",
       }
     );
@@ -221,7 +221,7 @@ describe("ApplyThemeTemplate", () => {
       "PROJECT_MICRO_APP",
       "my-project",
       {
-        layouts: ["instance:6", "instance:7"],
+        pageTemplates: ["instance:6", "instance:7"],
         appSetting: {
           homepage: "/my-app",
           layoutType: "business",

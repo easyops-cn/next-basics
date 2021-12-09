@@ -2,17 +2,17 @@ import { createProviderClass } from "@next-core/brick-utils";
 import { InstanceApi_deleteInstance } from "@next-sdk/cmdb-sdk";
 import { StoryboardApi_deleteStoryboardNode } from "@next-sdk/next-builder-sdk";
 
-export interface DeleteThemeTemplateParams {
-  layoutInstanceId: string;
+export interface DeleteThemePageParams {
+  themePageId: string;
   templateId?: string;
   snippetId?: string;
 }
 
-export async function DeleteThemeTemplate({
-  layoutInstanceId,
+export async function DeleteThemePage({
+  themePageId,
   templateId,
   snippetId,
-}: DeleteThemeTemplateParams): Promise<unknown> {
+}: DeleteThemePageParams): Promise<unknown> {
   // Delete its associated template and snippet first.
   await Promise.all(
     [
@@ -20,14 +20,10 @@ export async function DeleteThemeTemplate({
       snippetId && StoryboardApi_deleteStoryboardNode(snippetId),
     ].filter(Boolean)
   );
-  return InstanceApi_deleteInstance(
-    "STORYBOARD_THEME_LAYOUT",
-    layoutInstanceId,
-    {}
-  );
+  return InstanceApi_deleteInstance("STORYBOARD_THEME_PAGE", themePageId, {});
 }
 
 customElements.define(
-  "next-builder.provider-delete-theme-template",
-  createProviderClass(DeleteThemeTemplate)
+  "next-builder.provider-delete-theme-page",
+  createProviderClass(DeleteThemePage)
 );

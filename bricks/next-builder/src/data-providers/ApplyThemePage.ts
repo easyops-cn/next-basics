@@ -7,16 +7,16 @@ import { getBaseGraphParams } from "../shared/storyboard/getBaseGraphParams";
 import { appendBricksFactory } from "./utils/appendBricksFactory";
 import { getBrickNodeAttrs } from "./utils/getBrickNodeAttrs";
 
-export interface ApplyThemeLayoutParams {
+export interface ApplyThemePageParams {
   projectId: string;
   appId: string;
   routeId: string;
-  layoutId: string;
+  pageTypeId: string;
 }
 
 interface PartialProject {
-  layouts: {
-    layoutId: string;
+  pageTemplates: {
+    pageTypeId: string;
     snippet: {
       instanceId: string;
     }[];
@@ -27,17 +27,17 @@ export async function ApplyThemePage({
   projectId,
   appId,
   routeId,
-  layoutId,
-}: ApplyThemeLayoutParams): Promise<unknown> {
+  pageTypeId,
+}: ApplyThemePageParams): Promise<unknown> {
   const [projectDetail, brickAttrs] = await Promise.all([
     InstanceApi_getDetail("PROJECT_MICRO_APP", projectId, {
-      fields: "layouts.layoutId,layouts.snippet.instanceId",
+      fields: "pageTemplates.pageTypeId,pageTemplates.snippet.instanceId",
     }) as Promise<PartialProject>,
     getBrickNodeAttrs(),
   ]);
 
-  const layoutInstanceId = projectDetail.layouts.find(
-    (layout) => layout.layoutId === layoutId
+  const themePageId = projectDetail.pageTemplates.find(
+    (layout) => layout.pageTypeId === pageTypeId
   ).snippet[0].instanceId;
 
   const snippetsGraph = await InstanceGraphApi_traverseGraphV2(
@@ -45,7 +45,7 @@ export async function ApplyThemePage({
       projectId,
       objectId: "STORYBOARD_SNIPPET",
       extraQuery: {
-        instanceId: layoutInstanceId,
+        instanceId: themePageId,
       },
     })
   );

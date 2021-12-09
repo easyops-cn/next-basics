@@ -13,13 +13,13 @@ jest.mock("./utils/appendBricksFactory");
 (getBrickNodeAttrs as jest.Mock).mockResolvedValue(["type", "brick"]);
 
 (InstanceApi_getDetail as jest.Mock).mockResolvedValue({
-  layouts: [
+  pageTemplates: [
     {
-      layoutId: "list",
+      pageTypeId: "list",
       snippet: [{ instanceId: "snippet:list" }],
     },
     {
-      layoutId: "home",
+      pageTypeId: "home",
       snippet: [{ instanceId: "snippet:home" }],
     },
   ],
@@ -70,7 +70,7 @@ describe("ApplyThemePage", () => {
       projectId: "my-project",
       appId: "my-app",
       routeId: "my-route",
-      layoutId: "home",
+      pageTypeId: "home",
     });
 
     expect(result).toEqual({

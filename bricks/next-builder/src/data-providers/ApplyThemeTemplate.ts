@@ -16,28 +16,28 @@ export interface ApplyThemeTemplateParams {
 }
 
 interface ThemeData {
-  layouts: LayoutItem[];
-  templates: ThemeTemplate[];
-  snippets: ThemeSnippet[];
+  pageTemplates: PageTemplateItem[];
+  templates: CustomTemplate[];
+  snippets: Snippet[];
   layoutType: unknown;
   dependencies: DependencyItem[];
 }
 
-interface LayoutItem {
-  layoutId: string;
+interface PageTemplateItem {
+  pageTypeId: string;
   name: I18nData;
   templateId: string;
   snippetId: string;
 }
 
-interface ThemeTemplate {
+interface CustomTemplate {
   templateId: string;
   proxy?: string;
   layerType?: string;
   children?: TreeNode[];
 }
 
-interface ThemeSnippet {
+interface Snippet {
   snippetId: string;
   text?: I18nData;
   layerType?: string;
@@ -69,7 +69,7 @@ export async function ApplyThemeTemplate({
         },
       },
       fields: [
-        "layouts",
+        "pageTemplates",
         "templates",
         "snippets",
         "layoutType",
@@ -79,7 +79,7 @@ export async function ApplyThemeTemplate({
     getBrickNodeAttrs(),
   ]);
 
-  const [{ layouts, templates, snippets, layoutType, dependencies }] =
+  const [{ pageTemplates, templates, snippets, layoutType, dependencies }] =
     themes.list as ThemeData[];
 
   const appendBricks = appendBricksFactory(appId, brickAttrs);
@@ -115,23 +115,20 @@ export async function ApplyThemeTemplate({
     await appendBricks(snippet.children, instance.instanceId);
   }
 
-  const instantiatedLayouts: string[] = [];
-  for (const layout of layouts) {
-    const instance = await InstanceApi_createInstance(
-      "STORYBOARD_THEME_LAYOUT",
-      {
-        project: projectId,
-        layoutId: layout.layoutId,
-        name: layout.name,
-        customTemplate: templateMap.get(layout.templateId),
-        snippet: snippetMap.get(layout.snippetId),
-      }
-    );
-    instantiatedLayouts.push(instance.instanceId);
+  const instantiatedPages: string[] = [];
+  for (const page of pageTemplates) {
+    const instance = await InstanceApi_createInstance("STORYBOARD_THEME_PAGE", {
+      project: projectId,
+      pageTypeId: page.pageTypeId,
+      name: page.name,
+      template: templateMap.get(page.templateId),
+      snippet: snippetMap.get(page.snippetId),
+    });
+    instantiatedPages.push(instance.instanceId);
   }
 
   await InstanceApi_updateInstanceV2("PROJECT_MICRO_APP", projectId, {
-    layouts: instantiatedLayouts,
+    pageTemplates: instantiatedPages,
     appSetting: {
       ...projectDetail.appSetting,
       layoutType,
