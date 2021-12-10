@@ -131,6 +131,7 @@ describe("ApplyThemeTemplate", () => {
         type: "custom-template",
         proxy: "{}",
         layerType: "layout",
+        isFromTheme: true,
       }
     );
     expect(appendBricks).toHaveBeenNthCalledWith(
@@ -147,6 +148,7 @@ describe("ApplyThemeTemplate", () => {
         appId: "my-app",
         templateId: "tpl-page-basic-view",
         type: "custom-template",
+        isFromTheme: true,
       }
     );
     expect(appendBricks).toHaveBeenNthCalledWith(2, undefined, "instance:2");
@@ -159,6 +161,7 @@ describe("ApplyThemeTemplate", () => {
         appId: "my-app",
         templateId: "tpl-page-list",
         type: "custom-template",
+        isFromTheme: true,
       }
     );
     expect(appendBricks).toHaveBeenNthCalledWith(3, undefined, "instance:3");
@@ -173,6 +176,7 @@ describe("ApplyThemeTemplate", () => {
         type: "snippet",
         text: { en: "Home" },
         layerType: "layout",
+        isFromTheme: true,
       }
     );
     expect(appendBricks).toHaveBeenNthCalledWith(
@@ -189,6 +193,7 @@ describe("ApplyThemeTemplate", () => {
         appId: "my-app",
         snippetId: "page-list",
         type: "snippet",
+        isFromTheme: true,
       }
     );
     expect(appendBricks).toHaveBeenNthCalledWith(5, undefined, "instance:5");
