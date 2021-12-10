@@ -96,6 +96,7 @@ export async function ApplyThemeTemplate({
       type: "custom-template",
       proxy: tpl.proxy,
       layerType: tpl.layerType,
+      isFromTheme: true,
     });
     templateMap.set(tpl.templateId, instance.instanceId);
     await appendBricks(tpl.children, instance.instanceId);
@@ -110,6 +111,7 @@ export async function ApplyThemeTemplate({
       type: "snippet",
       text: snippet.text,
       layerType: snippet.layerType,
+      isFromTheme: true,
     });
     snippetMap.set(snippet.snippetId, instance.instanceId);
     await appendBricks(snippet.children, instance.instanceId);
