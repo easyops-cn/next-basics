@@ -16,3 +16,5 @@ import "./data-providers/GetBricksDoc";
 import "./illustration-card";
 import "./data-providers/GetIllustrations";
 import "./lazy-bricks";
+import "./provider-group-list";
+import "./provider-group-menu";
