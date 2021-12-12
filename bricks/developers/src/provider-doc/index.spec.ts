@@ -19,6 +19,19 @@ describe("developers.provider-doc", () => {
     document.body.appendChild(element);
     await jest.runAllTimers();
     expect(spyOnRender).toBeCalled();
+
+    const spyOnDispatch = jest.spyOn(element, "dispatchEvent");
+
+    const component =
+      spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
+        .children;
+
+    component.props.onDebuggerExpand(true);
+
+    expect((spyOnDispatch.mock.calls[0][0] as CustomEvent).detail).toEqual(
+      true
+    );
+
     document.body.removeChild(element);
     await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();

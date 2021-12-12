@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AceEditor from "react-ace";
 import { Button, Collapse, Modal } from "antd";
@@ -14,16 +14,34 @@ import styles from "./ProviderDebugger.module.css";
 
 export interface ProviderDebuggerProps {
   providerName: string;
+  debuggerPanelExpand?: boolean;
+  onDebuggerExpand?: (flag: boolean) => void;
 }
+
+export const DEBUGGER_PANEL_KEY = "debuggerPanelKey";
 
 export function ProviderDebugger({
   providerName,
+  debuggerPanelExpand,
+  onDebuggerExpand,
 }: ProviderDebuggerProps): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
   const [rawParameters, setRawParameters] = useState("");
   const [requestState, setRequestState] = useState<RequestState>({
     status: "initial",
   });
+
+  const [activeKey, setActiveKey] = useState<string[]>(
+    debuggerPanelExpand ? [DEBUGGER_PANEL_KEY] : []
+  );
+
+  const handlerPanelChange = (key: string | string[]): void => {
+    onDebuggerExpand?.(key.includes(DEBUGGER_PANEL_KEY));
+  };
+
+  useEffect(() => {
+    setActiveKey(debuggerPanelExpand ? [DEBUGGER_PANEL_KEY] : []);
+  }, [debuggerPanelExpand]);
 
   const handleDoRequest = useCallback(async () => {
     const parameters = parseParameters(rawParameters);
@@ -48,8 +66,12 @@ export function ProviderDebugger({
   }, []);
 
   return (
-    <Collapse collapsible="header" style={{ marginBottom: -12 }}>
-      <Collapse.Panel header={t(K.DEBUGGER)} key="1">
+    <Collapse
+      style={{ marginBottom: -12 }}
+      activeKey={activeKey}
+      onChange={handlerPanelChange}
+    >
+      <Collapse.Panel header={t(K.DEBUGGER)} key={DEBUGGER_PANEL_KEY}>
         <div className={styles.debuggerContainer}>
           <div className={styles.parametersContainer}>
             <div className={styles.parametersLabel}>

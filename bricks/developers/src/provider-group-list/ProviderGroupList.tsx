@@ -52,7 +52,7 @@ export function ProviderGroupList(
       {dataSource?.map((item) => (
         <div key={item.name}>
           <div>
-            <a id={item.name} className={styles.anchor}></a>
+            <a id={item.name} className={styles.anchor} />
             <div className={styles.groupName}>{item.name}</div>
           </div>
           <div className={styles.content}>
@@ -61,7 +61,7 @@ export function ProviderGroupList(
                 <span
                   className={styles.dot}
                   style={{ backgroundColor: getColor(index) }}
-                ></span>
+                />
                 <Link
                   className={styles.name}
                   onClick={() => onClick?.(item.name, row)}

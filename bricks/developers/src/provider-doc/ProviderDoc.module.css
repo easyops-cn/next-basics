@@ -9,3 +9,21 @@ td.code {
   top: -66px;
   visibility: hidden;
 }
+
+.basicInfo {
+  dt {
+    float: left;
+    margin-right: 8px;
+    font-weight: 500;
+  }
+  dd {
+    margin-left: 5px;
+
+    .paragraph {
+      margin-bottom: 0px;
+      :global(.ant-typography-copy) {
+        vertical-align: middle;
+      }
+    }
+  }
+}

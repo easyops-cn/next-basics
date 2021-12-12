@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Card, Table } from "antd";
+import { Card, Table, Typography } from "antd";
 import { ColumnProps } from "antd/lib/table";
 import { Type } from "typedoc/dist/lib/serialization/schema";
 import { ProcessedProviderDoc } from "../provider-provider-doc/interfaces";
@@ -12,7 +12,9 @@ import { ProviderDebugger } from "./ProviderDebugger/ProviderDebugger";
 
 interface ProviderDocProps {
   docData: ProcessedProviderDoc;
-  showCard: boolean;
+  showCard?: boolean;
+  debuggerPanelExpand?: boolean;
+  onDebuggerExpand?: (flag: boolean) => void;
 }
 
 const gap = 32;
@@ -20,6 +22,8 @@ const gap = 32;
 export function ProviderDoc({
   docData,
   showCard,
+  debuggerPanelExpand,
+  onDebuggerExpand,
 }: ProviderDocProps): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
 
@@ -62,14 +66,32 @@ export function ProviderDoc({
 
   const content = (
     <>
-      <p>{docData.comment}</p>
-      <ProviderDebugger providerName={providerName} />
-      {docData.endpoint && (
-        <>
-          <h2 style={{ marginTop: gap }}>{t(K.REQUEST)}</h2>
-          <p>{docData.endpoint}</p>
-        </>
-      )}
+      <ProviderDebugger
+        providerName={providerName}
+        debuggerPanelExpand={debuggerPanelExpand}
+        onDebuggerExpand={onDebuggerExpand}
+      />
+      <h2 style={{ marginTop: gap }}>基本信息</h2>
+      <dl className={styles.basicInfo}>
+        <dt>provider:</dt>
+        <dd>
+          <Typography.Paragraph copyable className={styles.paragraph}>
+            {providerName}
+          </Typography.Paragraph>
+        </dd>
+        {docData.endpoint && (
+          <>
+            <dt>{t(K.ENDPOINT_METHOD)}</dt>
+            <dd>{docData.endpoint.split(/\s+/)[0]}</dd>
+            <dt>{t(K.ENDPOINT_URL)}</dt>
+            <dd>
+              <Typography.Paragraph copyable className={styles.paragraph}>
+                {docData.endpoint.split(/\s+/)[1]}
+              </Typography.Paragraph>
+            </dd>
+          </>
+        )}
+      </dl>
       <h2 style={{ marginTop: gap }}>{t(K.PARAMETERS)}</h2>
       {docData.parameters.length > 0 ? (
         <Table
@@ -97,7 +119,7 @@ export function ProviderDoc({
   );
 
   return showCard ? (
-    <Card title={providerName} bordered={false}>
+    <Card title={docData.comment} bordered={false}>
       {content}
     </Card>
   ) : (
