@@ -1,23 +1,18 @@
 import ReactDOM from "react-dom";
 import "./";
 
-const spyOnRender = jest.spyOn(ReactDOM, "render").mockImplementation(() => {
-  // do nothing
-});
+const spyOnRender = jest
+  .spyOn(ReactDOM, "render")
+  .mockImplementation(() => null);
 const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
-  .mockImplementation((() => {
-    // do nothing
-  }) as any);
+  .mockImplementation(() => null);
 
-describe("developers.provider-doc", () => {
-  it("should create a custom element", async () => {
-    const element = document.createElement("developers.provider-doc");
-    // Always waiting for async `(dis)connectedCallback`
-    await jest.runAllTimers();
+describe("developers.provider-group-menu", () => {
+  it("should create a custom element", () => {
+    const element = document.createElement("developers.provider-group-menu");
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
-    await jest.runAllTimers();
     expect(spyOnRender).toBeCalled();
 
     const spyOnDispatch = jest.spyOn(element, "dispatchEvent");
@@ -26,14 +21,12 @@ describe("developers.provider-doc", () => {
       spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0]["props"]
         .children;
 
-    component.props.onDebuggerExpand(true);
-
+    component.props.onFold(true);
     expect((spyOnDispatch.mock.calls[0][0] as CustomEvent).detail).toEqual(
       true
     );
 
     document.body.removeChild(element);
-    await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();
   });
 });

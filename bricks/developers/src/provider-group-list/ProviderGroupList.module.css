@@ -1,0 +1,53 @@
+.groupName {
+  position: relative;
+  height: 28px;
+  color: #595959;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    width: 98%;
+    left: 0;
+    height: 1px;
+    border-radius: 2px;
+    background: linear-gradient(130deg, #f9f9f9, #97979745);
+  }
+}
+
+.content {
+  display: grid;
+  margin-bottom: 16px;
+  padding: 24px 0px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px 15px;
+
+  .item {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .name {
+      height: 22px;
+      line-height: 22px;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 10px;
+      color: #595959;
+
+      &:hover {
+        color: #0071eb;
+      }
+    }
+
+    .dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      top: calc(50% - 2px);
+    }
+  }
+}

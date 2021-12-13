@@ -1,8 +1,8 @@
 import React from "react";
-import { shallow } from "enzyme";
-import { Button, Modal } from "antd";
+import { shallow, mount } from "enzyme";
+import { Button, Collapse, Modal } from "antd";
 import AceEditor from "react-ace";
-import { ProviderDebugger } from "./ProviderDebugger";
+import { ProviderDebugger, DEBUGGER_PANEL_KEY } from "./ProviderDebugger";
 import { makeRequest } from "./makeRequest";
 import { parseParameters } from "./parseParameters";
 
@@ -163,5 +163,31 @@ describe("ProviderDebugger", () => {
         content: "Error: oops",
       })
     );
+  });
+
+  it("toggle panel  should work", async () => {
+    const mockDebuggerExpand = jest.fn();
+    const wrapper = mount(
+      <ProviderDebugger
+        providerName="my.test-provider"
+        debuggerPanelExpand={false}
+        onDebuggerExpand={mockDebuggerExpand}
+      />
+    );
+
+    expect(wrapper.find(Collapse).prop("activeKey")).toEqual([]);
+
+    wrapper.setProps({
+      debuggerPanelExpand: true,
+    });
+
+    wrapper.update();
+    expect(wrapper.find(Collapse).prop("activeKey")).toEqual([
+      DEBUGGER_PANEL_KEY,
+    ]);
+
+    wrapper.find(Collapse).invoke("onChange")([]);
+
+    expect(mockDebuggerExpand).toHaveBeenCalledWith(false);
   });
 });

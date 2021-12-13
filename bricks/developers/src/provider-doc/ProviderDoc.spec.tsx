@@ -13,6 +13,7 @@ describe("ProviderDoc", () => {
       brickName: "cmdb-object-api-get-detail",
       comment: "获取模型详情",
       parameters: [],
+      endpoint: "GET api/cmdb",
       returns: {
         type: "reference",
       },
@@ -27,9 +28,7 @@ describe("ProviderDoc", () => {
       ]),
     };
     const wrapper = shallow(<ProviderDoc docData={docData} showCard={true} />);
-    expect(wrapper.find(Card).prop("title")).toBe(
-      "providers-of-cmdb.cmdb-object-api-get-detail"
-    );
+    expect(wrapper.find(Card).prop("title")).toBe("获取模型详情");
     expect(wrapper.find(GeneralReference).length).toBe(1);
     wrapper.setProps({
       showCard: false,

@@ -39,6 +39,8 @@ const locale: Locale = {
   [K.LABEL_FOR_RESPONSE]: "Response:",
   [K.LABEL_FOR_RESPONSE_OK]: "Response OK:",
   [K.LABEL_FOR_RESPONSE_ERROR]: "Response Error:",
+  [K.ENDPOINT_METHOD]: "Request Method:",
+  [K.ENDPOINT_URL]: "Request URL:",
 };
 
 export default locale;
