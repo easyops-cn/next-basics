@@ -199,7 +199,10 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
     } catch (error) {
       Modal.error({
         title: t(K.REGISTER_FAILED),
-        content: httpErrorToString(error),
+        content:
+          isCommonSignup && !hideInvite
+            ? t(K.WRONG_VERIFICATION_CODE)
+            : t(K.WRONG_INVITE_CODE),
       });
     }
   };
@@ -411,6 +414,10 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                         {
                           required: true,
                           message: t(K.PLEASE_INPUT_PHRASE),
+                        },
+                        {
+                          pattern: /^\d{6}$/,
+                          message: t(K.PLEASE_INPUT_VALID_PHRASE),
                         },
                       ]}
                       name="verification_code"
