@@ -1,4 +1,4 @@
-import { AppLocales, I18nData } from "@next-core/brick-types";
+import { I18nData } from "@next-core/brick-types";
 import { createProviderClass, pipes } from "@next-core/brick-utils";
 import {
   InstanceApi_getDetail,
@@ -12,7 +12,8 @@ export interface BuildProjectOfThemeTemplateParams {
 
 export interface BuildProjectOfThemeTemplateResult {
   themeId: string;
-  name: I18nData;
+  name: string;
+  locales?: unknown;
   layoutType: string;
   pageTemplates: PageTemplateItem[];
   templates: unknown[];
@@ -22,14 +23,16 @@ export interface BuildProjectOfThemeTemplateResult {
 
 interface PageTemplateItem {
   pageTypeId: string;
-  name: I18nData;
+  name: string;
+  locales?: unknown;
   templateId: string;
   snippetId: string;
 }
 
 interface RawLayoutItem {
   pageTypeId: string;
-  name: I18nData;
+  name: string;
+  locales?: unknown;
   template: [
     {
       templateId: string;
@@ -51,11 +54,13 @@ export async function BuildProjectOfThemeTemplate({
     {
       fields: [
         "appId",
+        "name",
         "appSetting.layoutType",
         "appSetting.locales",
         "dependencies",
         "pageTemplates.pageTypeId",
         "pageTemplates.name",
+        "pageTemplates.locales",
         "pageTemplates.template.templateId",
         "pageTemplates.snippet.snippetId",
       ].join(","),
@@ -94,12 +99,14 @@ export async function BuildProjectOfThemeTemplate({
 
   return {
     themeId: projectDetail.appId,
-    name: getLocaleName(projectDetail.appSetting.locales),
-    layoutType: projectDetail.appSetting.layoutType,
+    name: projectDetail.name,
+    locales: projectDetail.appSetting?.locales,
+    layoutType: projectDetail.appSetting?.layoutType,
     pageTemplates: (projectDetail.pageTemplates as RawLayoutItem[]).map(
       (item) => ({
         pageTypeId: item.pageTypeId,
         name: item.name,
+        locales: item.locales,
         templateId: item.template[0].templateId,
         snippetId: item.snippet[0].snippetId,
       })
@@ -108,14 +115,6 @@ export async function BuildProjectOfThemeTemplate({
     snippets,
     dependencies: projectDetail.dependencies,
   };
-}
-
-function getLocaleName(locales: AppLocales): I18nData {
-  return Object.fromEntries(
-    Object.entries(locales)
-      .map(([lang, locale]) => [lang, locale.name])
-      .filter((entry) => entry[1])
-  );
 }
 
 customElements.define(

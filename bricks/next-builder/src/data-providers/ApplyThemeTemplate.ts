@@ -1,4 +1,3 @@
-import { I18nData } from "@next-core/brick-types";
 import { createProviderClass } from "@next-core/brick-utils";
 import {
   InstanceApi_createInstance,
@@ -25,7 +24,8 @@ interface ThemeData {
 
 interface PageTemplateItem {
   pageTypeId: string;
-  name: I18nData;
+  name: string;
+  locales?: unknown;
   templateId: string;
   snippetId: string;
 }
@@ -39,7 +39,7 @@ interface CustomTemplate {
 
 interface Snippet {
   snippetId: string;
-  text?: I18nData;
+  text?: unknown;
   layerType?: string;
   children?: TreeNode[];
 }
@@ -123,6 +123,7 @@ export async function ApplyThemeTemplate({
       project: projectId,
       pageTypeId: page.pageTypeId,
       name: page.name,
+      locales: page.locales,
       template: templateMap.get(page.templateId),
       snippet: snippetMap.get(page.snippetId),
     });

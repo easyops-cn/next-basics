@@ -36,13 +36,21 @@ jest.mock("./utils/appendBricksFactory");
       pageTemplates: [
         {
           pageTypeId: "home",
-          name: { en: "Home" },
+          name: "Home",
           templateId: "tpl-page-home",
           snippetId: "page-home",
         },
         {
           pageTypeId: "list",
-          name: { en: "List" },
+          name: "List",
+          locales: {
+            en: {
+              name: "List",
+            },
+            zh: {
+              name: "List",
+            },
+          },
           templateId: "tpl-page-list",
           snippetId: "page-list",
         },
@@ -204,7 +212,7 @@ describe("ApplyThemeTemplate", () => {
       {
         project: "my-project",
         pageTypeId: "home",
-        name: { en: "Home" },
+        name: "Home",
         template: "instance:1",
         snippet: "instance:4",
       }
@@ -216,7 +224,15 @@ describe("ApplyThemeTemplate", () => {
       {
         project: "my-project",
         pageTypeId: "list",
-        name: { en: "List" },
+        name: "List",
+        locales: {
+          en: {
+            name: "List",
+          },
+          zh: {
+            name: "List",
+          },
+        },
         template: "instance:3",
         snippet: "instance:5",
       }

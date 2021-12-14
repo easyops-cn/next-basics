@@ -27,9 +27,7 @@ describe("CreateThemePage", () => {
         projectId: "project-a",
         appId: "app-a",
         pageTypeId: "home",
-        name: {
-          en: "My Layout",
-        },
+        name: "My Layout",
       })
     ).toEqual({
       instanceId: "page-a",
@@ -55,6 +53,7 @@ describe("CreateThemePage", () => {
         type: "snippet",
         text: {
           en: "My Layout",
+          zh: "My Layout",
         },
         layerType: "layout",
       }
@@ -76,9 +75,7 @@ describe("CreateThemePage", () => {
       {
         project: "project-a",
         pageTypeId: "home",
-        name: {
-          en: "My Layout",
-        },
+        name: "My Layout",
         template: "tpl-a",
         snippet: "snippet-a",
       }

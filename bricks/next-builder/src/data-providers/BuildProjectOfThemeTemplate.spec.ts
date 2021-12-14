@@ -11,6 +11,7 @@ jest.mock("@next-sdk/cmdb-sdk");
 
 (InstanceApi_getDetail as jest.Mock).mockResolvedValue({
   appId: "my-theme",
+  name: "My Theme",
   appSetting: {
     layoutType: "business",
     locales: {
@@ -31,10 +32,7 @@ jest.mock("@next-sdk/cmdb-sdk");
   pageTemplates: [
     {
       pageTypeId: "home",
-      name: {
-        en: "Home",
-        zh: "首页",
-      },
+      name: "Home",
       template: [
         {
           templateId: "tpl-page-home",
@@ -48,9 +46,14 @@ jest.mock("@next-sdk/cmdb-sdk");
     },
     {
       pageTypeId: "list",
-      name: {
-        en: "List",
-        zh: "列表",
+      name: "List",
+      locales: {
+        en: {
+          name: "List",
+        },
+        zh: {
+          name: "列表",
+        },
       },
       template: [
         {
@@ -165,9 +168,14 @@ describe("BuildProjectOfThemeTemplate", () => {
       },
       {
         themeId: "my-theme",
-        name: {
-          en: "My Theme",
-          zh: "我的主题",
+        name: "My Theme",
+        locales: {
+          en: {
+            name: "My Theme",
+          },
+          zh: {
+            name: "我的主题",
+          },
         },
         layoutType: "business",
         dependencies: [
@@ -179,18 +187,20 @@ describe("BuildProjectOfThemeTemplate", () => {
         pageTemplates: [
           {
             pageTypeId: "home",
-            name: {
-              en: "Home",
-              zh: "首页",
-            },
+            name: "Home",
             templateId: "tpl-page-home",
             snippetId: "page-home",
           },
           {
             pageTypeId: "list",
-            name: {
-              en: "List",
-              zh: "列表",
+            name: "List",
+            locales: {
+              en: {
+                name: "List",
+              },
+              zh: {
+                name: "列表",
+              },
             },
             templateId: "tpl-page-list",
             snippetId: "page-list",
