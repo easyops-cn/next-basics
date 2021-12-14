@@ -33,6 +33,7 @@ jest.mock("@next-sdk/cmdb-sdk");
     {
       pageTypeId: "home",
       name: "Home",
+      thumbnail: "home.png",
       template: [
         {
           templateId: "tpl-page-home",
@@ -188,6 +189,7 @@ describe("BuildProjectOfThemeTemplate", () => {
           {
             pageTypeId: "home",
             name: "Home",
+            thumbnail: "home.png",
             templateId: "tpl-page-home",
             snippetId: "page-home",
           },

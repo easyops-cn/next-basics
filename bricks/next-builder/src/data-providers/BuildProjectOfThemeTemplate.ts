@@ -1,4 +1,3 @@
-import { I18nData } from "@next-core/brick-types";
 import { createProviderClass, pipes } from "@next-core/brick-utils";
 import {
   InstanceApi_getDetail,
@@ -24,6 +23,7 @@ export interface BuildProjectOfThemeTemplateResult {
 interface PageTemplateItem {
   pageTypeId: string;
   name: string;
+  thumbnail?: string;
   locales?: unknown;
   templateId: string;
   snippetId: string;
@@ -32,6 +32,7 @@ interface PageTemplateItem {
 interface RawLayoutItem {
   pageTypeId: string;
   name: string;
+  thumbnail?: string;
   locales?: unknown;
   template: [
     {
@@ -60,6 +61,7 @@ export async function BuildProjectOfThemeTemplate({
         "dependencies",
         "pageTemplates.pageTypeId",
         "pageTemplates.name",
+        "pageTemplates.thumbnail",
         "pageTemplates.locales",
         "pageTemplates.template.templateId",
         "pageTemplates.snippet.snippetId",
@@ -106,6 +108,7 @@ export async function BuildProjectOfThemeTemplate({
       (item) => ({
         pageTypeId: item.pageTypeId,
         name: item.name,
+        thumbnail: item.thumbnail,
         locales: item.locales,
         templateId: item.template[0].templateId,
         snippetId: item.snippet[0].snippetId,
