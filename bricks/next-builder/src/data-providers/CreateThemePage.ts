@@ -1,4 +1,3 @@
-import { I18nData } from "@next-core/brick-types";
 import { createProviderClass } from "@next-core/brick-utils";
 import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
 
@@ -7,7 +6,7 @@ export interface CreateThemePageParams {
   projectId: string;
   appId: string;
   pageTypeId: string;
-  name: I18nData;
+  name: string;
 }
 
 export async function CreateThemePage({
@@ -31,7 +30,10 @@ export async function CreateThemePage({
     appId,
     snippetId: `page-${pageTypeId}`,
     type: "snippet",
-    text: name,
+    text: {
+      en: name,
+      zh: name,
+    },
     layerType: "layout",
   });
   const [, layout] = await Promise.all([
