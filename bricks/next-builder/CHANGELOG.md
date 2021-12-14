@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.102.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.102.0...@next-bricks/next-builder@1.102.1) (2021-12-14)
+
+
+### Bug Fixes
+
+* mark `isFromTheme` for templates from theme ([6d54b6d](https://github.com/easyops-cn/next-basics/commit/6d54b6d0a11e7062c2326e4ef0f7203b2d06770e))
+
+
+
+
+
 # [1.102.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.101.0...@next-bricks/next-builder@1.102.0) (2021-12-09)
 
 

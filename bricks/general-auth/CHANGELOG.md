@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.5...@next-bricks/general-auth@1.13.0) (2021-12-14)
+
+
+### Features
+
+* update the message ([d732b1a](https://github.com/easyops-cn/next-basics/commit/d732b1a83d172ace1a96820f89d63abe00b5817c)), closes [Refs#SERVICE_OBSERVE-1005](https://github.com/Refs/issues/SERVICE_OBSERVE-1005)
+
+
+
+
+
 ## [1.12.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.4...@next-bricks/general-auth@1.12.5) (2021-11-17)
 
 

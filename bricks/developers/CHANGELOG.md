@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.350.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.349.1...@next-bricks/developers@1.350.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* develop doc refactor ([e8f3b3c](https://github.com/easyops-cn/next-basics/commit/e8f3b3c163181a9545486a348a3434855d433e61))
+
+
+### Features
+
+* add developer provider-v2 router ([4f6d044](https://github.com/easyops-cn/next-basics/commit/4f6d04461fa63c0da4c6875330054cc0b90d2182))
+
+
+
+
+
 ## [1.349.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.349.0...@next-bricks/developers@1.349.1) (2021-11-25)
 
 
