@@ -37,7 +37,7 @@ const locale: Locale = {
   [K.REGISTER_COMMONLY]: "普通注册",
   [K.REGISTER_AND_JOIN]: "注册并加入企业",
   [K.USERNAME_TIPS]:
-    "{{minLength}}至{{maxLength}}个字符，以字母、数字开头，只能包含字母、数字、下划线、中划线、点",
+    '{{minLength}}至{{maxLength}}个字符，以字母、数字开头，只能包含字母、数字、"_"、"-"、"."',
   [K.PLEASE_ENTER_VALID_EMAIL]: "请填写有效的邮箱",
   [K.GET_VERIFY_CODE]: "获取验证码",
   [K.PLEASE_FILL_IN_VALID_PHONE_NUMBER]: "请输入有效的手机号码",
@@ -54,6 +54,9 @@ const locale: Locale = {
   [K.REGISTER_SUCCESS]: "注册成功",
   [K.REGISTER_FAILED]: "注册失败",
   [K.PLEASE_CONFIRM_PASSWORD]: "请确认密码",
+  [K.PLEASE_INPUT_VALID_PHRASE]: "请输入有效的验证码",
+  [K.WRONG_VERIFICATION_CODE]: "验证码校验错误",
+  [K.WRONG_INVITE_CODE]: "邀请码已失效，请联系管理员重新获取",
 };
 
 export default locale;

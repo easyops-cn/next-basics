@@ -208,4 +208,11 @@ describe("GeneralSignup", () => {
     await (global as any).flushPromises();
     wrapper.update();
   });
+
+  it("should jump to the login form when the login link is clicked", () => {
+    const wrapper = mount(<GeneralSignup />);
+    const spyOnGetHistory = jest.spyOn(kit, "getHistory");
+    wrapper.find("#LogInLink").simulate("click");
+    expect(spyOnGetHistory).toBeCalled();
+  });
 });

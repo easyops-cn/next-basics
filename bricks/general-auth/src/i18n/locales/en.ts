@@ -40,7 +40,7 @@ const locale: Locale = {
   [K.REGISTER_COMMONLY]: "Register commonly",
   [K.REGISTER_AND_JOIN]: "Register and join",
   [K.USERNAME_TIPS]:
-    "Please enter a {{minLength}} to {{maxLength}} digit username, starting with a letter or a number, and can only contain letters, numbers, underscores, dots",
+    'Please enter a {{minLength}} to {{maxLength}} digit username, starting with a letter or a number, and can only contain letters, numbers, "_","-","."',
   [K.PLEASE_ENTER_VALID_EMAIL]: "Please enter valid email",
   [K.GET_VERIFY_CODE]: "Get verification code",
   [K.PLEASE_FILL_IN_VALID_PHONE_NUMBER]: "Please fill in a valid phone number",
@@ -57,6 +57,10 @@ const locale: Locale = {
   [K.REGISTER_SUCCESS]: "Register successfully",
   [K.REGISTER_FAILED]: "Register failed",
   [K.PLEASE_CONFIRM_PASSWORD]: "Please input password again",
+  [K.PLEASE_INPUT_VALID_PHRASE]: "Please input valid verification code",
+  [K.WRONG_VERIFICATION_CODE]: "Wrong verification code",
+  [K.WRONG_INVITE_CODE]:
+    "The validation of the invitation code failed.Please ask the administrator for a new one.",
 };
 
 export default locale;
