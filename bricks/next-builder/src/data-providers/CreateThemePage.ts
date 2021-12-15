@@ -7,6 +7,8 @@ export interface CreateThemePageParams {
   appId: string;
   pageTypeId: string;
   name: string;
+  thumbnail?: string;
+  locales?: unknown;
 }
 
 export async function CreateThemePage({
@@ -14,6 +16,8 @@ export async function CreateThemePage({
   appId,
   pageTypeId,
   name,
+  thumbnail,
+  locales,
 }: CreateThemePageParams): Promise<unknown> {
   const templateId = `tpl-page-${pageTypeId}`;
   // Currently, There is a bug when creating multiple instances of
@@ -48,6 +52,8 @@ export async function CreateThemePage({
       project: projectId,
       pageTypeId,
       name,
+      thumbnail,
+      locales,
       template: tpl.instanceId,
       snippet: snippet.instanceId,
     }),

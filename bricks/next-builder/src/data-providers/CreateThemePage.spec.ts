@@ -28,6 +28,15 @@ describe("CreateThemePage", () => {
         appId: "app-a",
         pageTypeId: "home",
         name: "My Layout",
+        thumbnail: "fun.png",
+        locales: {
+          en: {
+            name: "Home",
+          },
+          zh: {
+            name: "首页",
+          },
+        },
       })
     ).toEqual({
       instanceId: "page-a",
@@ -76,6 +85,15 @@ describe("CreateThemePage", () => {
         project: "project-a",
         pageTypeId: "home",
         name: "My Layout",
+        thumbnail: "fun.png",
+        locales: {
+          en: {
+            name: "Home",
+          },
+          zh: {
+            name: "首页",
+          },
+        },
         template: "tpl-a",
         snippet: "snippet-a",
       }

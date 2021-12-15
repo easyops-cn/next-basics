@@ -25,6 +25,7 @@ interface ThemeData {
 interface PageTemplateItem {
   pageTypeId: string;
   name: string;
+  thumbnail?: string;
   locales?: unknown;
   templateId: string;
   snippetId: string;
@@ -123,6 +124,7 @@ export async function ApplyThemeTemplate({
       project: projectId,
       pageTypeId: page.pageTypeId,
       name: page.name,
+      thumbnail: page.thumbnail,
       locales: page.locales,
       template: templateMap.get(page.templateId),
       snippet: snippetMap.get(page.snippetId),
