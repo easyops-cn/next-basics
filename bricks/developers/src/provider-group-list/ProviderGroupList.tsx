@@ -1,12 +1,12 @@
-import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import { NS_DEVELOPERS, K } from "../i18n/constants";
+import React, { useCallback, useMemo } from "react";
+import i18next from "i18next";
 import styles from "./ProviderGroupList.module.css";
 import { Link } from "@next-libs/basic-components";
 
 export interface GroupItem {
   name: string;
   label?: string;
+  description?: string;
   items: Array<{
     name: string;
     description?: string;
@@ -47,6 +47,12 @@ export function ProviderGroupList(
     return colorList[position % colorLength];
   }, []);
 
+  const currentLang = useMemo(() => i18next.language?.split("-")[0], []);
+  const getLabel = useCallback(
+    (row) => `${row.label} (${row.description?.[currentLang] || row.name})`,
+    [currentLang]
+  );
+
   return (
     <div style={containerStyle}>
       {dataSource?.map((item) => (
@@ -66,7 +72,7 @@ export function ProviderGroupList(
                   className={styles.name}
                   onClick={() => onClick?.(item.name, row)}
                 >
-                  <span title={row.label}>{`${row.label} (${row.label})`}</span>
+                  <span title={getLabel(row)}>{getLabel(row)}</span>
                 </Link>
               </div>
             ))}
