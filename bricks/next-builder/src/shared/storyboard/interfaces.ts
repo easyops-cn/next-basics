@@ -12,6 +12,7 @@ import { MenuNode } from "@next-core/brick-utils";
 export interface StoryboardAssemblyParamsBase {
   // The instanceId of a project.
   projectId: string;
+  storyboardType?: StoryboardType;
 }
 
 export interface PreStoryboardAssemblyParams
@@ -25,11 +26,15 @@ export interface PreStoryboardAssemblyOptions {
    * It will ignore the request for project info if enabled.
    */
   minimal?: boolean;
+
+  storyboardType?: StoryboardType;
 }
 
 export interface StoryboardAssemblyParams extends StoryboardAssemblyParamsBase {
   options?: BuildOptions;
 }
+
+export type StoryboardType = "micro-app" | "theme-template";
 
 export interface StoryboardAssemblyResult {
   // The auto-incremental id of a project, such as `P-001`.
