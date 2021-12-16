@@ -65,7 +65,11 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
 
   const handleChange = (newValue: any): void => {
     props.onChange?.(newValue);
-    props.onChangeV2?.(props.options.find((item) => item.value === newValue));
+    const newValueV2 =
+      props.mode === "multiple"
+        ? props.options.filter((item) => newValue.includes(item.value))
+        : props.options.find((item) => item.value === newValue);
+    props.onChangeV2?.(newValueV2);
     setCheckedValue(newValue);
   };
 
