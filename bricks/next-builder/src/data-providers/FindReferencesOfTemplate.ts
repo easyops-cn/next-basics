@@ -46,8 +46,9 @@ export async function FindReferencesOfTemplate({
   templateList,
   projectInstanceId,
 }: FindReferencesOfTemplateParams): Promise<TemplateReference[]> {
-  const projects = templateList.find((item) => item.templateId === templateId)
-    ?.project;
+  const projects = templateList.find(
+    (item) => item.templateId === templateId
+  )?.project;
 
   // Returns early if no templates were found.
   if (!projects?.length) {
@@ -66,7 +67,6 @@ export async function FindReferencesOfTemplate({
       .map(async (project) => ({
         project,
         storyboard: await minimalStoryboardAssembly({
-          appId: project.appId,
           projectId: project.instanceId,
           options: { keepIds: true },
         }),
