@@ -337,7 +337,7 @@ export class GeneralSelectElement extends FormItemElement {
   >;
   /**
    * @detail `{label: string, value: any}	`
-   * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值和标签
+   * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值 (暂不支持 `mode`为 `tags`的场景)
    */
   @event({ type: "general.select.change.v2" }) changeEventV2: EventEmitter<
     Record<string, any>
