@@ -17,11 +17,13 @@ jest.mock("@next-core/brick-kit", () => ({
 
 jest.mock("../shared/storyboard/minimalStoryboardAssembly");
 
-(minimalStoryboardAssembly as jest.MockedFunction<
-  typeof minimalStoryboardAssembly
->).mockImplementation(({ appId }) =>
+(
+  minimalStoryboardAssembly as jest.MockedFunction<
+    typeof minimalStoryboardAssembly
+  >
+).mockImplementation(({ projectId }) =>
   Promise.resolve(
-    appId === "test-app"
+    projectId === "test-project"
       ? ({
           routes: [
             {
