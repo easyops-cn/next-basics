@@ -273,7 +273,7 @@ const mockGetDetail = (
 describe("StoryboardAssembly", () => {
   it.each<[StoryboardAssemblyParams, StoryboardAssemblyResult]>([
     [
-      { appId: "test-app", projectId: "test-project" },
+      { projectId: "test-project" },
       {
         projectId: "P-239",
         storyboard: {
@@ -428,7 +428,6 @@ describe("StoryboardAssembly", () => {
 
     [
       {
-        appId: "test-app",
         projectId: "test-project",
         options: { keepIds: true },
       },
@@ -632,7 +631,6 @@ describe("StoryboardAssembly", () => {
     mockGetDetail.mockRejectedValueOnce("oops");
     expect(
       StoryboardAssembly({
-        appId: "test-app",
         projectId: "test-project",
       })
     ).rejects.toBe("oops");
