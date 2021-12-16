@@ -14,6 +14,7 @@ export interface GroupItem {
 
 export interface NamespaceItem {
   name: string;
+  label?: string;
   description?: string;
   groups: GroupItem[];
 }
@@ -57,7 +58,10 @@ export function ProviderGroupList(
         <div key={item.name}>
           <div>
             <a id={item.name} className={styles.anchor} />
-            <div className={styles.groupName}>{item.name}</div>
+            <div className={styles.nameWrapper}>
+              <span className={styles.groupName}>{item.label}</span>
+              <span className={styles.divider} />
+            </div>
           </div>
           <div className={styles.content}>
             {item.groups?.map((row, index) => (
