@@ -14,6 +14,13 @@
     height: 1px;
     border-radius: 2px;
     background: linear-gradient(130deg, #f9f9f9, #97979745);
+    mask-image: linear-gradient(
+      to right,
+      #f9f9f9 6px,
+      #979797 6px,
+      transparent 0px
+    );
+    mask-size: 8px 2px;
   }
 }
 
