@@ -8,6 +8,7 @@ describe("ProviderGroupList", () => {
       dataSource: [
         {
           name: "cmdb",
+          label: "cmdb",
           description: "cmdb",
           groups: [
             {
