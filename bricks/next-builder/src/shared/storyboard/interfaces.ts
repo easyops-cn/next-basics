@@ -13,6 +13,7 @@ export interface StoryboardAssemblyParamsBase {
   // The instanceId of a project.
   projectId: string;
   storyboardType?: StoryboardType;
+  useTheme?: boolean;
 }
 
 export interface PreStoryboardAssemblyParams

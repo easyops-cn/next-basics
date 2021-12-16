@@ -339,17 +339,44 @@ const mockFactory: Record<string, Record<string, any>> = {
       ],
     },
   },
+  "use-theme-project": {
+    detail: {
+      projectId: "P-241",
+      appSetting: {
+        homepage: "/use-theme-project",
+      },
+      pageTemplates: [
+        {
+          pageTypeId: "home",
+          snippet: [{ instanceId: "snippet-home" }],
+        },
+        {
+          pageTypeId: "list",
+          snippet: [{ instanceId: "snippet-list" }],
+        },
+      ],
+    },
+  },
 };
 
 (
   InstanceGraphApi_traverseGraphV2 as jest.MockedFunction<
     typeof InstanceGraphApi_traverseGraphV2
   >
-).mockImplementation((params) =>
-  Promise.resolve(
-    cloneDeep(mockFactory[params.query["project.instanceId"]][params.object_id])
-  )
-);
+).mockImplementation((params) => {
+  const projectId = params.query["project.instanceId"];
+  return Promise.resolve(
+    cloneDeep(
+      mockFactory[
+        projectId === "use-theme-project"
+          ? params.object_id === "STORYBOARD_SNIPPET"
+            ? "theme-project"
+            : "test-project"
+          : projectId
+      ][params.object_id]
+    )
+  );
+});
 
 const mockGetDetail = (
   InstanceApi_getDetail as jest.MockedFunction<typeof InstanceApi_getDetail>
@@ -726,7 +753,7 @@ describe("StoryboardAssembly", () => {
                   brick: "z",
                 },
               ],
-              path: "/_theme_/my-theme/preview/home",
+              path: "/_theme_/my-theme/_dev_only_/theme-preview/home",
               type: "bricks",
             },
             {
@@ -735,7 +762,7 @@ describe("StoryboardAssembly", () => {
                   brick: "y",
                 },
               ],
-              path: "/_theme_/my-theme/preview/list",
+              path: "/_theme_/my-theme/_dev_only_/theme-preview/list",
               type: "bricks",
             },
           ],
@@ -744,6 +771,132 @@ describe("StoryboardAssembly", () => {
               {
                 name: "tpl-01",
                 bricks: [{ brick: "x" }],
+              },
+            ],
+          },
+        },
+      },
+    ],
+
+    [
+      { projectId: "use-theme-project", useTheme: true },
+      {
+        projectId: "P-241",
+        storyboard: {
+          routes: [
+            {
+              path: "/a",
+              type: "bricks",
+              providers: ["p1"],
+              bricks: [
+                {
+                  brick: "m",
+                  if: false,
+                  slots: {
+                    m1: {
+                      type: "bricks",
+                      bricks: [{ brick: "p" }, { template: "q" }],
+                    },
+
+                    m2: {
+                      type: "routes",
+                      routes: [
+                        {
+                          path: "/a/d",
+                          type: "bricks",
+                          bricks: [],
+                        },
+
+                        {
+                          path: "/a/e",
+                          type: "bricks",
+                          bricks: [],
+                        },
+                      ],
+                    },
+                  },
+                },
+
+                { brick: "n" },
+              ],
+            },
+
+            {
+              path: "/b",
+              type: "routes",
+              permissionsPreCheck: [
+                "<% `cmdb:${QUERY.objectId}_instance_create` %>",
+              ],
+
+              routes: [
+                {
+                  path: "/b/c",
+                  type: "bricks",
+                  bricks: [{ brick: "o" }],
+                },
+              ],
+            },
+
+            {
+              bricks: [
+                {
+                  brick: "z",
+                },
+              ],
+              path: "/use-theme-project/_dev_only_/theme-preview/home",
+              type: "bricks",
+            },
+            {
+              bricks: [
+                {
+                  brick: "y",
+                },
+              ],
+              path: "/use-theme-project/_dev_only_/theme-preview/list",
+              type: "bricks",
+            },
+          ],
+
+          meta: {
+            customTemplates: [
+              {
+                name: "tpl-01",
+                proxy: {
+                  properties: {
+                    one: {
+                      ref: "ref-01",
+                      refProperty: "two",
+                    },
+                  },
+                },
+
+                bricks: [
+                  {
+                    brick: "z",
+                    slots: {
+                      m5: {
+                        type: "bricks",
+                        bricks: [
+                          {
+                            brick: "y",
+                            ref: "two",
+                            slots: {
+                              m6: {
+                                type: "bricks",
+                                bricks: [{ brick: "x" }],
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  },
+                ],
+              },
+              {
+                name: "tpl-02",
+                proxy: undefined,
+                bricks: [],
               },
             ],
           },

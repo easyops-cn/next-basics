@@ -2,9 +2,7 @@ import { BuilderRouteNode, BuilderSnippetNode } from "@next-core/brick-types";
 import { pipes } from "@next-core/brick-utils";
 import {
   InstanceApi_getDetail,
-  InstanceApi_GetDetailResponseBody,
   InstanceGraphApi_traverseGraphV2,
-  InstanceGraphApi_TraverseGraphV2ResponseBody,
 } from "@next-sdk/cmdb-sdk";
 import { sortBy } from "lodash";
 import { buildPreviewRoutesForTheme } from "./buildPreviewRoutesForTheme";
@@ -25,33 +23,40 @@ const MODEL_PROJECT_MICRO_APP = "PROJECT_MICRO_APP";
 export async function preStoryboardAssembly({
   projectId,
   storyboardType,
+  useTheme,
   options,
 }: PreStoryboardAssemblyParams): Promise<PreStoryboardAssemblyResult> {
   const isTheme = storyboardType === "theme-template";
-  const routeOrSnippetGraphReq = InstanceGraphApi_traverseGraphV2(
-    getBaseGraphParams(
-      isTheme
-        ? {
-            projectId,
-            objectId: MODEL_STORYBOARD_SNIPPET,
-            extraQuery: {
-              themePage: {
-                $exists: true,
-              },
+  const hasTheme = isTheme || useTheme;
+
+  const routeGraphReq = isTheme
+    ? null
+    : InstanceGraphApi_traverseGraphV2(
+        getBaseGraphParams({
+          projectId,
+          objectId: MODEL_STORYBOARD_ROUTE,
+          extraQuery: {
+            // Find first-level routes as topic vertices.
+            parent: {
+              $exists: false,
             },
-          }
-        : {
-            projectId,
-            objectId: MODEL_STORYBOARD_ROUTE,
-            extraQuery: {
-              // Find first-level routes as topic vertices.
-              parent: {
-                $exists: false,
-              },
+          },
+        })
+      );
+
+  const themeGraphReq = hasTheme
+    ? InstanceGraphApi_traverseGraphV2(
+        getBaseGraphParams({
+          projectId,
+          objectId: MODEL_STORYBOARD_SNIPPET,
+          extraQuery: {
+            themePage: {
+              $exists: true,
             },
-          }
-    )
-  );
+          },
+        })
+      )
+    : null;
 
   const templateGraphReq = InstanceGraphApi_traverseGraphV2(
     getBaseGraphParams({
@@ -60,59 +65,57 @@ export async function preStoryboardAssembly({
     })
   );
 
-  const requests = [
-    routeOrSnippetGraphReq,
-    templateGraphReq,
-  ] as Promise<unknown>[];
-
-  if (!options?.minimal) {
-    requests.push(
-      InstanceApi_getDetail(MODEL_PROJECT_MICRO_APP, projectId, {
+  const projectInfoReq = options?.minimal
+    ? null
+    : InstanceApi_getDetail(MODEL_PROJECT_MICRO_APP, projectId, {
         fields: [
           "*",
           "i18n.*",
           "functions.name",
           "functions.source",
           "functions.typescript",
-          ...(isTheme
+          ...(hasTheme
             ? ["pageTemplates.pageTypeId", "pageTemplates.snippet.instanceId"]
             : ["menus.*", "menus.items", "menus.items.children"]),
         ].join(","),
-      })
-    );
-  }
+      });
 
   const [
-    routeOrSnippetGraphResponse,
+    routeGraphResponse,
+    themeGraphResponse,
     templateGraphResponse,
     projectInfoResponse,
-  ] = await Promise.all<
-    InstanceGraphApi_TraverseGraphV2ResponseBody,
-    InstanceGraphApi_TraverseGraphV2ResponseBody,
-    InstanceApi_GetDetailResponseBody
-  >(requests as any);
+  ] = await Promise.all([
+    routeGraphReq,
+    themeGraphReq,
+    templateGraphReq,
+    projectInfoReq,
+  ]);
 
-  const routeOrSnippetTree = pipes.graphTree(
-    routeOrSnippetGraphResponse as pipes.GraphData,
-    {
-      sort: {
-        key: "sort",
-        order: 1,
-      },
-    }
-  );
+  const routes = routeGraphResponse
+    ? (pipes.graphTree(routeGraphResponse as pipes.GraphData, {
+        sort: {
+          key: "sort",
+          order: 1,
+        },
+      }) as BuilderRouteNode[])
+    : [];
 
-  const routes: BuilderRouteNode[] = isTheme
+  const themPreviewRoutes = hasTheme
     ? buildPreviewRoutesForTheme(
         projectInfoResponse.appSetting.homepage,
         projectInfoResponse.pageTemplates,
-        routeOrSnippetTree as BuilderSnippetNode[]
+        pipes.graphTree(
+          themeGraphResponse as pipes.GraphData
+        ) as BuilderSnippetNode[]
       )
-    : (routeOrSnippetTree as BuilderRouteNode[]);
+    : [];
 
   return {
     minimalBuildInfo: {
-      routeList: sortBy(routes, (item) => item.sort ?? -Infinity),
+      routeList: sortBy(routes, (item) => item.sort ?? -Infinity).concat(
+        themPreviewRoutes
+      ),
       // Warn: `pipes.graphTree()` will mutate the input.
       templateList: pipes
         .graphTree(templateGraphResponse as pipes.GraphData, {
