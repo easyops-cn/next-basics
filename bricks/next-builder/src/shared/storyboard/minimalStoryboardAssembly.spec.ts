@@ -218,7 +218,6 @@ describe("minimalStoryboardAssembly", () => {
   it.each<[StoryboardAssemblyParams, StoryboardAssemblyResult]>([
     [
       {
-        appId: "test-app",
         projectId: "test-project",
         options: { keepIds: true },
       },
@@ -367,7 +366,6 @@ describe("minimalStoryboardAssembly", () => {
     mockTraverseGraphV2.mockRejectedValueOnce("oops");
     expect(
       minimalStoryboardAssembly({
-        appId: "test-app",
         projectId: "test-project",
       })
     ).rejects.toBe("oops");

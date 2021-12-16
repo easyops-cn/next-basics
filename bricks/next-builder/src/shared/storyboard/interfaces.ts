@@ -10,9 +10,6 @@ import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
 
 export interface StoryboardAssemblyParamsBase {
-  // The human-readable id of an app.
-  appId: string;
-
   // The instanceId of a project.
   projectId: string;
 }
