@@ -1,5 +1,4 @@
-import React, { useCallback, useMemo } from "react";
-import i18next from "i18next";
+import React, { useCallback } from "react";
 import styles from "./ProviderGroupList.module.css";
 import { Link } from "@next-libs/basic-components";
 
@@ -47,10 +46,9 @@ export function ProviderGroupList(
     return colorList[position % colorLength];
   }, []);
 
-  const currentLang = useMemo(() => i18next.language?.split("-")[0], []);
   const getLabel = useCallback(
-    (row) => `${row.label} (${row.description?.[currentLang] || row.name})`,
-    [currentLang]
+    (row: GroupItem) => `${row.description || row.label} (${row.name})`,
+    []
   );
 
   return (
