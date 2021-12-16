@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  .terminalWrapper {
+    position: relative;
+    .terminal {
+      max-height: 450px;
+      padding: 16px;
+      overflow: auto;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      color: #909399;
+
+      .toolbar {
+        display: none;
+        position: absolute;
+        top: 12px;
+        right: 15px;
+        line-height: 12px;
+        font-size: 12px;
+        text-align: center;
+        box-shadow: none;
+        transition: all 0.8s;
+        border-radius: 50%;
+        border: none;
+        z-index: 1;
+        .copyIcon {
+          opacity: 0.5;
+          cursor: pointer;
+          font-size: 16px;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
+      &:hover {
+        .toolbar {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .title {
+    color: #464646;
+  }
+}
+
+.customPopoverOverlay {
+  dl {
+    color: #595959;
+    dt {
+      font-weight: 500;
+    }
+  }
+
+  .header {
+    font-size: 16px;
+  }
+}

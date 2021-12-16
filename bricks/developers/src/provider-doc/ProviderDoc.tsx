@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Card, Table, Typography } from "antd";
+import { Card, Table, Typography, Select } from "antd";
 import { ColumnProps } from "antd/lib/table";
 import { Type } from "typedoc/dist/lib/serialization/schema";
 import { ProcessedProviderDoc } from "../provider-provider-doc/interfaces";
@@ -9,6 +9,7 @@ import { GeneralReference } from "./GeneralReference/GeneralReference";
 import { NS_DEVELOPERS, K } from "../i18n/constants";
 import styles from "./ProviderDoc.module.css";
 import { ProviderDebugger } from "./ProviderDebugger/ProviderDebugger";
+import { ProviderSample } from "./ProviderSample/ProviderSample";
 
 interface ProviderDocProps {
   docData: ProcessedProviderDoc;
@@ -107,6 +108,10 @@ export function ProviderDoc({
       <code>
         <GeneralType type={docData.returns} />
       </code>
+      <h2 style={{ marginTop: gap }}>{t(K.SAMPLE_LIST)}</h2>
+      {docData.examples && (
+        <ProviderSample examples={docData.examples}></ProviderSample>
+      )}
       <h2 style={{ marginTop: gap }}>{t(K.TYPE_REFERENCES)}</h2>
       {docData.usedReferenceIds.length > 0 ? (
         docData.usedReferenceIds.map((id) => (
