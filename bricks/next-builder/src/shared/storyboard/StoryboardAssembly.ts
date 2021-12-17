@@ -11,11 +11,13 @@ import { preStoryboardAssembly } from "./preStoryboardAssembly";
 export async function StoryboardAssembly({
   projectId,
   storyboardType,
+  useTheme,
   options,
 }: StoryboardAssemblyParams): Promise<StoryboardAssemblyResult> {
   const { minimalBuildInfo, projectInfo } = await preStoryboardAssembly({
     projectId,
     storyboardType,
+    useTheme,
   });
 
   return {
