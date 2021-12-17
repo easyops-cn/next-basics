@@ -1,5 +1,6 @@
 .nameWrapper {
   display: flex;
+  gap: 12px;
   align-items: center;
 
   .groupName {
@@ -13,6 +14,7 @@
   .divider {
     flex: 1;
     height: 1px;
+    margin: 0 15px;
     border-radius: 2px;
     background: linear-gradient(130deg, #f9f9f9, #97979745);
     mask-image: linear-gradient(
@@ -28,7 +30,7 @@
 .content {
   display: grid;
   margin-bottom: 16px;
-  padding: 24px 0px;
+  padding: 24px 36px;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px 15px;
 

@@ -72,7 +72,7 @@ export function ProviderDoc({
         debuggerPanelExpand={debuggerPanelExpand}
         onDebuggerExpand={onDebuggerExpand}
       />
-      <h2 style={{ marginTop: gap }}>基本信息</h2>
+      <h2 style={{ marginTop: gap }}>{t(K.BASIC_INFO)}</h2>
       <dl className={styles.basicInfo}>
         <dt>provider:</dt>
         <dd>
@@ -108,9 +108,11 @@ export function ProviderDoc({
       <code>
         <GeneralType type={docData.returns} />
       </code>
-      <h2 style={{ marginTop: gap }}>{t(K.SAMPLE_LIST)}</h2>
       {docData.examples && (
-        <ProviderSample examples={docData.examples}></ProviderSample>
+        <>
+          <h2 style={{ marginTop: gap }}>{t(K.SAMPLE_LIST)}</h2>
+          <ProviderSample examples={docData.examples}></ProviderSample>
+        </>
       )}
       <h2 style={{ marginTop: gap }}>{t(K.TYPE_REFERENCES)}</h2>
       {docData.usedReferenceIds.length > 0 ? (
