@@ -72,6 +72,15 @@ describe("forms.general-form", () => {
       name: "rose",
     });
 
+    element.setInitValue({ name: "tonny" }, { runInMacrotask: true });
+    expect(setFieldsValue).not.toBeCalledWith({
+      name: "tonny",
+    });
+    await jest.runAllTimers();
+    expect(setFieldsValue).toBeCalledWith({
+      name: "tonny",
+    });
+
     element.reset();
     expect(resetFields).toBeCalled();
 

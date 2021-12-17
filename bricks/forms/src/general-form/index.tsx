@@ -425,11 +425,19 @@ export class GeneralFormElement
    * @param options
    */
   @method()
-  setInitValue(value: any, options?: { runInMicrotask?: boolean }): void {
-    if (options?.runInMicrotask) {
-      queueMicrotask(() => {
-        this._setInitValue(value);
-      });
+  setInitValue(
+    value: any,
+    options?: { runInMicrotask?: boolean; runInMacrotask?: boolean }
+  ): void {
+    if (options) {
+      options.runInMicrotask &&
+        queueMicrotask(() => {
+          this._setInitValue(value);
+        });
+      options.runInMacrotask &&
+        setTimeout(() => {
+          this._setInitValue(value);
+        });
     } else {
       this._setInitValue(value);
     }
