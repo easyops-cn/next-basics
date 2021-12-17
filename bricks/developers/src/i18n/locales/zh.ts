@@ -39,6 +39,7 @@ const locale: Locale = {
   [K.LABEL_FOR_RESPONSE]: "响应:",
   [K.LABEL_FOR_RESPONSE_OK]: "响应成功:",
   [K.LABEL_FOR_RESPONSE_ERROR]: "响应错误:",
+  [K.BASIC_INFO]: "基本信息",
   [K.ENDPOINT_METHOD]: "请求方式:",
   [K.ENDPOINT_URL]: "请求接口:",
   [K.SAMPLE_LIST]: "示例列表",

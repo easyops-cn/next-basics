@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import styles from "./ProviderGroupList.module.css";
 import { Link } from "@next-libs/basic-components";
+import { ReactComponent as APISvg } from "../images/api.svg";
 
 export interface GroupItem {
   name: string;
@@ -32,10 +33,10 @@ const colorList = [
   "var(--theme-orange-color)",
   "var(--theme-cyan-color)",
   "var(--theme-purple-color)",
-  "var(--theme-geekblue-color)",
-  "var(--theme-doderblue-color)",
-  "var(--theme-lightorange-color)",
-  "var(--theme-goldenrod-color)",
+  "var(--theme-jewelryblue-color)",
+  "var(--theme-yellowgreen-color)",
+  "var(--theme-slategray-color)",
+  "var(--theme-lightpurple-color)",
 ];
 
 export function ProviderGroupList(
@@ -59,6 +60,7 @@ export function ProviderGroupList(
           <div>
             <a id={item.name} className={styles.anchor} />
             <div className={styles.nameWrapper}>
+              <APISvg style={{ width: 24, height: 24 }} />
               <span className={styles.groupName}>{item.label}</span>
               <span className={styles.divider} />
             </div>

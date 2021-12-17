@@ -39,6 +39,7 @@ const locale: Locale = {
   [K.LABEL_FOR_RESPONSE]: "Response:",
   [K.LABEL_FOR_RESPONSE_OK]: "Response OK:",
   [K.LABEL_FOR_RESPONSE_ERROR]: "Response Error:",
+  [K.BASIC_INFO]: "Basic Info",
   [K.ENDPOINT_METHOD]: "Request Method:",
   [K.ENDPOINT_URL]: "Request URL:",
   [K.SAMPLE_LIST]: "Sample List",
