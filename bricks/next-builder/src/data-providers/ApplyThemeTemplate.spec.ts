@@ -100,6 +100,45 @@ jest.mock("./utils/appendBricksFactory");
           constraint: "^3.0.0",
         },
       ],
+      i18n: [
+        {
+          name: "HELLO",
+          zh: "你好",
+          en: "Hello",
+        },
+        {
+          name: "WORLD",
+          zh: "世界",
+          en: "World",
+        },
+      ],
+      imgs: [
+        {
+          name: "one.png",
+          url: "/any/one.png",
+        },
+        {
+          name: "two.png",
+          url: "/any/two.png",
+        },
+      ],
+      functions: [
+        {
+          name: "sayHello",
+          source: `function sayHello() {}`,
+          tests: [
+            {
+              input: "[]",
+              output: "undefined",
+            },
+          ],
+        },
+        {
+          name: "sayGoodbye",
+          source: `function sayGoodbye(): void {}`,
+          typescript: true,
+        },
+      ],
     },
   ],
 });
@@ -127,7 +166,7 @@ describe("ApplyThemeTemplate", () => {
       appId: "my-app",
     });
 
-    expect(InstanceApi_createInstance).toBeCalledTimes(7);
+    expect(InstanceApi_createInstance).toBeCalledTimes(13);
     expect(appendBricks).toBeCalledTimes(5);
 
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
@@ -263,6 +302,79 @@ describe("ApplyThemeTemplate", () => {
             constraint: "^3.0.0",
           },
         ],
+      }
+    );
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      8,
+      "STORYBOARD_I18N",
+      {
+        project: "my-project",
+        id: "my-project-HELLO",
+        name: "HELLO",
+        zh: "你好",
+        en: "Hello",
+      }
+    );
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      9,
+      "STORYBOARD_I18N",
+      {
+        project: "my-project",
+        id: "my-project-WORLD",
+        name: "WORLD",
+        zh: "世界",
+        en: "World",
+      }
+    );
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      10,
+      "MICRO_APP_RESOURCE_IMAGE",
+      {
+        project: "my-project",
+        from: "theme-builder",
+        name: "one.png",
+        url: "/any/one.png",
+      }
+    );
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      11,
+      "MICRO_APP_RESOURCE_IMAGE",
+      {
+        project: "my-project",
+        from: "theme-builder",
+        name: "two.png",
+        url: "/any/two.png",
+      }
+    );
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      12,
+      "STORYBOARD_FUNCTION",
+      {
+        project: "my-project",
+        name: "sayHello",
+        source: `function sayHello() {}`,
+        tests: [
+          {
+            input: "[]",
+            output: "undefined",
+          },
+        ],
+      }
+    );
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      13,
+      "STORYBOARD_FUNCTION",
+      {
+        project: "my-project",
+        name: "sayGoodbye",
+        source: `function sayGoodbye(): void {}`,
+        typescript: true,
       }
     );
   });

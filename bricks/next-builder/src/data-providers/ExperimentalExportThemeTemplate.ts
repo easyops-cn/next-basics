@@ -43,6 +43,8 @@ export async function ExperimentalExportThemeTemplate({
     );
   }
 
+  // Todo: import images into ObjectStore.
+
   // Update the existed theme template.
   return InstanceApi_updateInstance(
     MODEL_INSTALLED_THEME_TEMPLATE,

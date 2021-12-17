@@ -4,6 +4,12 @@ import {
   InstanceGraphApi_traverseGraphV2,
 } from "@next-sdk/cmdb-sdk";
 import { getBaseGraphParams } from "../shared/storyboard/getBaseGraphParams";
+import {
+  FunctionNode,
+  I18nNode,
+  ImageNode,
+} from "../shared/storyboard/interfaces";
+import { arrayPick } from "./utils/arrayPick";
 
 export interface BuildProjectOfThemeTemplateParams {
   projectId: string;
@@ -18,6 +24,9 @@ export interface BuildProjectOfThemeTemplateResult {
   templates: unknown[];
   snippets: unknown[];
   dependencies: unknown[];
+  i18n: I18nNode[];
+  imgs: ImageNode[];
+  functions: FunctionNode[];
 }
 
 interface PageTemplateItem {
@@ -59,6 +68,14 @@ export async function BuildProjectOfThemeTemplate({
         "appSetting.layoutType",
         "appSetting.locales",
         "dependencies",
+        "i18n.name",
+        "i18n.zh",
+        "i18n.en",
+        "imgs.name",
+        "imgs.url",
+        "functions.name",
+        "functions.typescript",
+        "functions.source",
         "pageTemplates.pageTypeId",
         "pageTemplates.name",
         "pageTemplates.thumbnail",
@@ -117,6 +134,14 @@ export async function BuildProjectOfThemeTemplate({
     templates,
     snippets,
     dependencies: projectDetail.dependencies,
+    i18n: arrayPick(projectDetail.i18n, ["name", "zh", "en"]),
+    imgs: arrayPick(projectDetail.imgs, ["name", "url"]),
+    functions: arrayPick(projectDetail.functions, [
+      "name",
+      "typescript",
+      "source",
+      "tests",
+    ]),
   };
 }
 

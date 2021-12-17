@@ -5,6 +5,11 @@ import {
   InstanceApi_postSearchV3,
   InstanceApi_updateInstanceV2,
 } from "@next-sdk/cmdb-sdk";
+import {
+  FunctionNode,
+  I18nNode,
+  ImageNode,
+} from "../shared/storyboard/interfaces";
 import { appendBricksFactory, TreeNode } from "./utils/appendBricksFactory";
 import { getBrickNodeAttrs } from "./utils/getBrickNodeAttrs";
 
@@ -20,6 +25,9 @@ interface ThemeData {
   snippets: Snippet[];
   layoutType: unknown;
   dependencies: DependencyItem[];
+  i18n: I18nNode[];
+  imgs: ImageNode[];
+  functions: FunctionNode[];
 }
 
 interface PageTemplateItem {
@@ -47,7 +55,7 @@ interface Snippet {
 
 interface PartialProject {
   appSetting?: Record<string, unknown>;
-  dependencies?: DependencyItem[];
+  dependencies: DependencyItem[];
 }
 
 interface DependencyItem {
@@ -75,13 +83,26 @@ export async function ApplyThemeTemplate({
         "snippets",
         "layoutType",
         "dependencies",
+        "i18n",
+        "imgs",
+        "functions",
       ],
     }),
     getBrickNodeAttrs(),
   ]);
 
-  const [{ pageTemplates, templates, snippets, layoutType, dependencies }] =
-    themes.list as ThemeData[];
+  const [
+    {
+      pageTemplates,
+      templates,
+      snippets,
+      layoutType,
+      dependencies,
+      i18n,
+      imgs,
+      functions,
+    },
+  ] = themes.list as ThemeData[];
 
   const appendBricks = appendBricksFactory(appId, brickAttrs);
 
@@ -150,6 +171,34 @@ export async function ApplyThemeTemplate({
         ]
       : dependencies,
   });
+
+  // Currently there is no API can do batch creations without unique attributes.
+  // `InstanceApi_importInstance` requires unique keys which must be attributes,
+  // but not relations. However, these instances below have no unique attribute.
+  await Promise.all(
+    [
+      i18n?.map((item) =>
+        InstanceApi_createInstance("STORYBOARD_I18N", {
+          ...item,
+          project: projectId,
+          id: `${projectId}-${item.name}`,
+        })
+      ),
+      imgs?.map((item) =>
+        InstanceApi_createInstance("MICRO_APP_RESOURCE_IMAGE", {
+          ...item,
+          project: projectId,
+          from: "theme-builder",
+        })
+      ),
+      functions?.map((item) =>
+        InstanceApi_createInstance("STORYBOARD_FUNCTION", {
+          ...item,
+          project: projectId,
+        })
+      ),
+    ].flat()
+  );
 
   return {
     projectId,
