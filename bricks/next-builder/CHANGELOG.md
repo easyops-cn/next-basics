@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.103.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.102.1...@next-bricks/next-builder@1.103.0) (2021-12-17)
+
+
+### Bug Fixes
+
+* appId is not required any more for building storyboard ([d7b9462](https://github.com/easyops-cn/next-basics/commit/d7b94622c41f5a149e63ce12ad33d6d037bbb6cd))
+* appId is not required any more for building storyboard ([5c6d5a4](https://github.com/easyops-cn/next-basics/commit/5c6d5a4f1c9464998979467b975ef343174dc28b))
+* refactor theme locales ([753cc96](https://github.com/easyops-cn/next-basics/commit/753cc967a9e96be051f191ac0f2bc5a16a9bcd42))
+
+
+### Features
+
+* assembly storyboard for theme ([b7d09e0](https://github.com/easyops-cn/next-basics/commit/b7d09e05c0070ee35740a2ad223953fc8501ac24))
+* support theme preview routes for micro-apps too ([430aa9d](https://github.com/easyops-cn/next-basics/commit/430aa9da471341c6e6f97d259b0e27e7ec7b36cc))
+* support theme thumbnails ([0e56d88](https://github.com/easyops-cn/next-basics/commit/0e56d88d199db7514657e651b7538a0743ad25de))
+
+
+
+
+
 ## [1.102.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.102.0...@next-bricks/next-builder@1.102.1) (2021-12-14)
 
 

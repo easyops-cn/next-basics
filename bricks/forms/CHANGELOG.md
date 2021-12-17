@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.201.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.5...@next-bricks/forms@1.201.0) (2021-12-17)
+
+
+### Bug Fixes
+
+* **forms:**  修复 `general.select.change.v2` 在 多选的时候，吐出去的数据不对的问题 ([71abbc2](https://github.com/easyops-cn/next-basics/commit/71abbc29e3c06d94a72a28b998d3d9456ea24592))
+
+
+### Features
+
+* **GeneralForm:** setInitValue support runInMacrotask ([fcab846](https://github.com/easyops-cn/next-basics/commit/fcab846ac0a4dfaf351a2099a64d51ca9242d51b))
+
+
+
+
+
 ## [1.200.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.4...@next-bricks/forms@1.200.5) (2021-12-09)
 
 
