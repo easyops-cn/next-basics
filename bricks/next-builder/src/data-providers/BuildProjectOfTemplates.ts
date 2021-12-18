@@ -21,14 +21,12 @@ import {
 } from "@next-sdk/cmdb-sdk";
 import { paramCase } from "change-case";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
-import {
-  getBrickPackageIndexJs,
-  RawI18nItem,
-} from "./utils/getBrickPackageIndexJs";
+import { getBrickPackageIndexJs } from "./utils/getBrickPackageIndexJs";
 import { simpleHash } from "./utils/simpleHash";
 import { replaceWidgetFunctions } from "./utils/replaceWidgetFunctions";
 import { PlainObject } from "../search-tree/utils";
 import { getBaseGraphParams } from "../shared/storyboard/getBaseGraphParams";
+import { I18nNode } from "../shared/storyboard/interfaces";
 
 const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
@@ -382,7 +380,7 @@ export async function BuildProjectOfTemplates({
     appId,
     templates,
     functions: projectDetailResponse.functions as StoryboardFunction[],
-    i18n: projectDetailResponse.i18n as RawI18nItem[],
+    i18n: projectDetailResponse.i18n as I18nNode[],
   });
   const storiesJSONContent = JSON.stringify(stories, null, 2);
 

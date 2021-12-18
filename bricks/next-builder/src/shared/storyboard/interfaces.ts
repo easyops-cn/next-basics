@@ -5,6 +5,7 @@ import {
   MetaI18n,
   BuilderRouteNode,
   BuilderBrickNode,
+  StoryboardFunction,
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
@@ -103,4 +104,13 @@ export interface I18nNode {
   name: string;
   en: string;
   zh: string;
+}
+
+export interface ImageNode {
+  name: string;
+  url: string;
+}
+
+export interface FunctionNode extends StoryboardFunction {
+  tests?: unknown[];
 }

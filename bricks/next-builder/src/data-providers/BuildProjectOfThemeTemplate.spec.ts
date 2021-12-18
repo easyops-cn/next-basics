@@ -68,6 +68,48 @@ jest.mock("@next-sdk/cmdb-sdk");
       ],
     },
   ],
+  i18n: [
+    {
+      name: "HELLO",
+      zh: "你好",
+      en: "Hello",
+      instanceId: "any",
+    },
+    {
+      name: "WORLD",
+      zh: "世界",
+      en: "World",
+    },
+  ],
+  imgs: [
+    {
+      name: "one.png",
+      url: "/any/one.png",
+      instanceId: "any",
+    },
+    {
+      name: "two.png",
+      url: "/any/two.png",
+    },
+  ],
+  functions: [
+    {
+      name: "sayHello",
+      source: `function sayHello() {}`,
+      instanceId: "any",
+      tests: [
+        {
+          input: "[]",
+          output: "undefined",
+        },
+      ],
+    },
+    {
+      name: "sayGoodbye",
+      source: `function sayGoodbye(): void {}`,
+      typescript: true,
+    },
+  ],
 });
 
 (
@@ -260,6 +302,45 @@ describe("BuildProjectOfThemeTemplate", () => {
             ],
             instanceId: "y",
             snippetId: "page-list",
+          },
+        ],
+        i18n: [
+          {
+            name: "HELLO",
+            zh: "你好",
+            en: "Hello",
+          },
+          {
+            name: "WORLD",
+            zh: "世界",
+            en: "World",
+          },
+        ],
+        imgs: [
+          {
+            name: "one.png",
+            url: "/any/one.png",
+          },
+          {
+            name: "two.png",
+            url: "/any/two.png",
+          },
+        ],
+        functions: [
+          {
+            name: "sayHello",
+            source: `function sayHello() {}`,
+            tests: [
+              {
+                input: "[]",
+                output: "undefined",
+              },
+            ],
+          },
+          {
+            name: "sayGoodbye",
+            source: `function sayGoodbye(): void {}`,
+            typescript: true,
           },
         ],
       },
