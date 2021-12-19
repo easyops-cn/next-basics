@@ -14,6 +14,7 @@ import { ProviderSample } from "./ProviderSample/ProviderSample";
 interface ProviderDocProps {
   docData: ProcessedProviderDoc;
   showCard?: boolean;
+  docKey?: string;
   debuggerPanelExpand?: boolean;
   onDebuggerExpand?: (flag: boolean) => void;
 }
@@ -21,6 +22,7 @@ interface ProviderDocProps {
 const gap = 32;
 
 export function ProviderDoc({
+  docKey,
   docData,
   showCard,
   debuggerPanelExpand,
@@ -68,6 +70,7 @@ export function ProviderDoc({
   const content = (
     <>
       <ProviderDebugger
+        key={docKey}
         providerName={providerName}
         debuggerPanelExpand={debuggerPanelExpand}
         onDebuggerExpand={onDebuggerExpand}
@@ -111,7 +114,10 @@ export function ProviderDoc({
       {docData.examples && (
         <>
           <h2 style={{ marginTop: gap }}>{t(K.SAMPLE_LIST)}</h2>
-          <ProviderSample examples={docData.examples}></ProviderSample>
+          <ProviderSample
+            key={docKey}
+            examples={docData.examples}
+          ></ProviderSample>
         </>
       )}
       <h2 style={{ marginTop: gap }}>{t(K.TYPE_REFERENCES)}</h2>
