@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.351.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.0...@next-bricks/developers@1.351.1) (2021-12-19)
+
+
+### Bug Fixes
+
+* developer doc support re-render ([b4fde21](https://github.com/easyops-cn/next-basics/commit/b4fde21e7de8f3a9f0c8a74cf25b92972b2ad1f1))
+* sytle refactor ([2c68e73](https://github.com/easyops-cn/next-basics/commit/2c68e73b64e6a611b70ef7771e80fb808550334d))
+
+
+
+
+
 # [1.351.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.350.0...@next-bricks/developers@1.351.0) (2021-12-17)
 
 

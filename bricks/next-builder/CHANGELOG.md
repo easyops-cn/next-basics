@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.104.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.103.0...@next-bricks/next-builder@1.104.0) (2021-12-19)
+
+
+### Features
+
+* support i18n, images and functions in theme ([ab68d3e](https://github.com/easyops-cn/next-basics/commit/ab68d3e8c56e057a8f19e95bc67782860c75ddd5))
+
+
+
+
+
 # [1.103.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.102.1...@next-bricks/next-builder@1.103.0) (2021-12-17)
 
 
