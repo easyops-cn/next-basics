@@ -16,11 +16,15 @@ import { path } from "d3-path";
 export interface OpenCloseOption {
   noEvent?: boolean;
 }
+/**
+ * 文字和图标只会显示其中一个，优先显示图标，文字最多显示4个字符。
+ */
 export interface ICustomSwitchConfig {
   openText?: string;
   openIcon?: any;
   closeText?: string;
   closeIcon?: any;
+  top?: string;
 }
 /**
  * @id basic-bricks.general-drawer

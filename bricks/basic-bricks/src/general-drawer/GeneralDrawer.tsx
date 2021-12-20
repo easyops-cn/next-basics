@@ -70,6 +70,29 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
   ) {
     classNameList.push("switch");
   }
+
+  const getOuterSwitchNode = () => {
+    if (!props.useBigOuterSwitch) {
+      const outerIcon = props.visible
+        ? { lib: "antd", icon: "right", theme: "outlined" }
+        : { lib: "antd", icon: "left", theme: "outlined" };
+      return <GeneralIcon icon={outerIcon} />;
+    } else {
+      if (!props.customSwitchConfig) return;
+      const outerIcon = props.visible
+        ? props.customSwitchConfig.openIcon
+        : props.customSwitchConfig.closeIcon;
+      const outerText = props.visible
+        ? props.customSwitchConfig.openText
+        : props.customSwitchConfig.closeText;
+      return outerIcon ? (
+        <GeneralIcon icon={outerIcon} />
+      ) : (
+        <span className="outerText">{outerText?.slice(0, 4)}</span>
+      );
+    }
+  };
+
   return (
     <>
       <Drawer
@@ -93,18 +116,13 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
                 ? "outerBtn bigOuterBtn"
                 : "outerBtn defaultOuterBtn"
             }
+            style={{
+              top: props.useBigOuterSwitch
+                ? props.customSwitchConfig?.top
+                : null,
+            }}
           >
-            <GeneralIcon
-              icon={
-                props.visible
-                  ? props.useBigOuterSwitch
-                    ? props.customSwitchConfig?.openIcon
-                    : { lib: "antd", icon: "right", theme: "outlined" }
-                  : props.useBigOuterSwitch
-                  ? props.customSwitchConfig?.closeIcon
-                  : { lib: "antd", icon: "left", theme: "outlined" }
-              }
-            ></GeneralIcon>
+            {getOuterSwitchNode()}
           </div>
         )}
         <Spin spinning={props.loading} tip="Loading...">
