@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.158.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.157.0...@next-bricks/basic-bricks@1.158.0) (2021-12-20)
+
+
+### Features
+
+* **basic-bricks:** customSwitchConfig支持文字 ([d8477b6](https://github.com/easyops-cn/next-basics/commit/d8477b6fe5e2c9131ebf832e7d8705b054dcdc36))
+
+
+
+
+
 # [1.157.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.156.2...@next-bricks/basic-bricks@1.157.0) (2021-12-07)
 
 

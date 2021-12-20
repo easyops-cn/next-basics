@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.351.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.2...@next-bricks/developers@1.351.3) (2021-12-20)
+
+
+### Bug Fixes
+
+* ui style ([63c2ddd](https://github.com/easyops-cn/next-basics/commit/63c2dddfb859d403c6b54d2d8cbf4c1b6eb62ae3))
+
+
+
+
+
 ## [1.351.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.1...@next-bricks/developers@1.351.2) (2021-12-20)
 
 
