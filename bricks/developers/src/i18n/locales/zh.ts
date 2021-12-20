@@ -45,6 +45,7 @@ const locale: Locale = {
   [K.SAMPLE_LIST]: "示例列表",
   [K.REQUEST_SAMPLE]: "请求示例",
   [K.RESPONSE_SAMPLE]: "响应示例",
+  [K.COPY_SUCCESS]: "复制成功",
 };
 
 export default locale;

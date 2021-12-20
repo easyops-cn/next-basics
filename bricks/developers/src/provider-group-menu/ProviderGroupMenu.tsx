@@ -23,7 +23,7 @@ export function ProviderGroupMenu(
   };
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <span
         onClick={handleClick}
         className={classNames(styles.customIcon, { [styles.fasten]: fold })}
@@ -32,9 +32,9 @@ export function ProviderGroupMenu(
       </span>
 
       <div
+        className={styles.container}
         style={{
           display: fold ? "none" : "block",
-          marginTop: 40,
           ...containerStyle,
         }}
       >

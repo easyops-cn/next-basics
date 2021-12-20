@@ -116,6 +116,7 @@ export function ProviderDoc({
           <h2 style={{ marginTop: gap }}>{t(K.SAMPLE_LIST)}</h2>
           <ProviderSample
             key={docKey}
+            endpoint={docData.endpoint}
             examples={docData.examples}
           ></ProviderSample>
         </>

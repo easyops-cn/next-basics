@@ -10,9 +10,14 @@ interface BaseFields {
   body?: string;
 }
 
+interface RequestFields extends BaseFields {
+  uri?: string;
+  method?: string;
+}
+
 export interface ExampleItem {
   description?: I18nData;
-  request: BaseFields;
+  request: RequestFields;
   response: BaseFields;
 }
 export interface ProcessedProviderDoc {
