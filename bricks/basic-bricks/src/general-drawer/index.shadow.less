@@ -58,7 +58,7 @@
 }
 
 .defaultOuterBtn  {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   width: 16px;
   height: 35px;
   color: #fff;
@@ -74,7 +74,10 @@
 }
 .bigOuterBtn {
   width: 48px;
-  height: 34px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(180deg, #00AAF7 0%, #0071EB 100%);
   box-shadow: -2px 8px 12px 0px rgba(0, 113, 235, 0.5);
   border-radius: 10px 0px 0px 10px;
@@ -82,10 +85,15 @@
   left: -48px;
   text-align: center;
   color: #fff;
-  padding-top: 14px;
-  svg {
+
+  .anticon {
     width: 20px;
     height: 20px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 .switch {
@@ -94,3 +102,7 @@
   }
 }
 
+.outerText{
+  max-width: 28px;
+  line-height: 1.3;
+}
