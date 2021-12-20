@@ -3,13 +3,14 @@ import { useTranslation } from "react-i18next";
 import { NS_DEVELOPERS, K } from "../../i18n/constants";
 import { i18nText } from "@next-core/brick-kit";
 import { ExampleItem } from "../../provider-provider-doc/interfaces";
-import { Select, Popover } from "antd";
+import { Select, Popover, message } from "antd";
 import { Clipboard } from "@next-libs/clipboard";
 import { ProfileOutlined } from "@ant-design/icons";
 import styles from "./ProviderSample.module.css";
 
 export interface ProviderSampleProps {
   examples?: ExampleItem[];
+  endpoint?: string;
 }
 
 const overlayInnerWidth = 300;
@@ -18,7 +19,7 @@ export function ProviderSample(props: ProviderSampleProps): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
   const [curIndex, setCurIndex] = useState(0);
 
-  const { examples = [] } = props;
+  const { examples = [], endpoint } = props;
 
   const getHeaderInfo = useCallback(
     (headers: Record<string, string> = {}): React.ReactElement => {
@@ -57,7 +58,11 @@ export function ProviderSample(props: ProviderSampleProps): React.ReactElement {
           <code>{content}</code>
           <div className={styles.toolbar}>
             <span className={styles.copyIcon}>
-              <Clipboard text={content} icon={{ theme: "outlined" }} />
+              <Clipboard
+                text={content}
+                icon={{ theme: "outlined" }}
+                onCopy={() => message.success(t(K.COPY_SUCCESS))}
+              />
             </span>
           </div>
         </pre>
@@ -67,6 +72,11 @@ export function ProviderSample(props: ProviderSampleProps): React.ReactElement {
 
   return (
     <div className={styles.container}>
+      {renderContent(
+        request?.method && request?.uri
+          ? `${request.method} ${request.uri}`
+          : endpoint
+      )}
       <Select
         onChange={handlerChange}
         value={curIndex}

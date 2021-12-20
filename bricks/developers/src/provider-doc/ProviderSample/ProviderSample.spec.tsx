@@ -1,11 +1,12 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { ProviderSample } from "./ProviderSample";
-import { Select } from "antd";
+import { Select, message } from "antd";
 import { Clipboard } from "@next-libs/clipboard";
 
 describe("ProviderSample", () => {
   it("should work", () => {
+    const spyonMessage = jest.spyOn(message, "success");
     const examples = [
       {
         description: {
@@ -45,23 +46,37 @@ describe("ProviderSample", () => {
         },
       },
     ];
-    const wrapper = shallow(<ProviderSample examples={examples} />);
+    const wrapper = shallow(
+      <ProviderSample
+        examples={examples}
+        endpoint="POST /api/v2/next-builder/storiesjson"
+      />
+    );
 
     expect(wrapper.find(".title").length).toEqual(2);
+
     expect(wrapper.find(Clipboard).at(0).prop("text")).toEqual(
+      "POST /api/v2/next-builder/storiesjson"
+    );
+
+    wrapper.find(Clipboard).at(0).invoke("onCopy")("some text", true);
+
+    expect(spyonMessage).toHaveBeenCalled();
+
+    expect(wrapper.find(Clipboard).at(1).prop("text")).toEqual(
       '{\n  "storyIds": [\n    "basic-bricks.general-link"\n  ],\n  "fields": [\n    "label",\n    "url",\n    "description"\n  ]\n}'
     );
 
     wrapper.find(Select).invoke("onChange")(1, null);
 
     wrapper.update();
-    expect(wrapper.find(Clipboard).at(0).prop("text")).toEqual(
+    expect(wrapper.find(Clipboard).at(1).prop("text")).toEqual(
       '{\n  "storyIds": [\n    "basic-bricks.general-button"\n  ],\n  "fields": [\n    "id",\n    "author",\n    "description"\n  ]\n}'
     );
   });
 
   it("should work with empty data", () => {
-    const wrapper = shallow(<ProviderSample />);
+    const wrapper = shallow(<ProviderSample endpoint="" />);
     expect(wrapper.find(Select).length).toEqual(1);
   });
 });
