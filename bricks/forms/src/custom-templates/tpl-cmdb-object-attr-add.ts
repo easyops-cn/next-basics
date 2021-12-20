@@ -179,7 +179,6 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                         {
                           label: i18n.t(`${NS_FORMS}:${K.READONLY}`),
                           value: "readonly",
-                          disabled: true,
                         },
                         {
                           label: i18n.t(`${NS_FORMS}:${K.UNIQUE}`),
