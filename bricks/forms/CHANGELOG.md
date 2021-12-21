@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.201.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.201.0...@next-bricks/forms@1.201.1) (2021-12-21)
+
+
+### Bug Fixes
+
+* **cmdb:** 结构体属性支持readonly配置 ([8e7d076](https://github.com/easyops-cn/next-basics/commit/8e7d076fc3aac5b6e630ab6a8c6292dd45a50e2f))
+
+
+
+
+
 # [1.201.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.200.5...@next-bricks/forms@1.201.0) (2021-12-17)
 
 
