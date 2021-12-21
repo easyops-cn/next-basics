@@ -117,6 +117,25 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
               },
             },
             {
+              brick: "forms.general-input",
+              properties: {
+                dataset: {
+                  testid: "cmdb-object-attr-add-description-input",
+                },
+                name: "description",
+                label: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_DESCRIPTION}`),
+                message: {
+                  pattern: i18n.t(
+                    `${NS_FORMS}:${K.ATTRIBUTE_DESCRIPTION_LIMIT}`
+                  ),
+                },
+                pattern: "^[\\s\\S]{1,20}$",
+                placeholder: i18n.t(
+                  `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION}`
+                ),
+              },
+            },
+            {
               brick: "forms.cmdb-object-attr-value",
               ref: "attrValue",
               properties: {

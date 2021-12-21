@@ -131,6 +131,9 @@ const locale: Locale = {
   [K.CORRECT_CRONT_MSG]: "Please enter the correct time format",
   [K.DUPLICATE_STRUCTURE_ITEM_ID]:
     "{{id}} is the same as the attribute ID of an existing item, please re-specify!",
+  [K.ATTRIBUTE_DESCRIPTION]: "Attribute description",
+  [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "Please enter 1 to 20 characters",
+  [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "Please enter attribute description",
 };
 
 export default locale;
