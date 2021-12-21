@@ -72,11 +72,6 @@ export function ProviderSample(props: ProviderSampleProps): React.ReactElement {
 
   return (
     <div className={styles.container}>
-      {renderContent(
-        request?.method && request?.uri
-          ? `${request.method} ${request.uri}`
-          : endpoint
-      )}
       <Select
         onChange={handlerChange}
         value={curIndex}
@@ -90,10 +85,10 @@ export function ProviderSample(props: ProviderSampleProps): React.ReactElement {
         ))}
       </Select>
 
-      {request?.body && (
-        <div>
-          <h4 className={styles.title}>
-            {t(K.REQUEST_SAMPLE)}{" "}
+      <div>
+        <h4 className={styles.title}>
+          {t(K.REQUEST_SAMPLE)}{" "}
+          {request?.headers && (
             <Popover
               overlayClassName={styles.customPopoverOverlay}
               overlayInnerStyle={{ minWidth: overlayInnerWidth }}
@@ -102,10 +97,15 @@ export function ProviderSample(props: ProviderSampleProps): React.ReactElement {
             >
               <ProfileOutlined />
             </Popover>
-          </h4>
-          {renderContent(request.body)}
-        </div>
-      )}
+          )}
+        </h4>
+        {renderContent(
+          request?.method && request?.uri
+            ? `${request.method} ${request.uri}`
+            : endpoint
+        )}
+        {request?.body && renderContent(request.body)}
+      </div>
 
       {response?.body && (
         <div>
