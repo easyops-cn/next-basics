@@ -41,3 +41,4 @@ import "./data-providers/BuildProjectOfThemeTemplate";
 import "./data-providers/ExperimentalExportThemeTemplate";
 import "./data-providers/ApplyThemeTemplate";
 import "./data-providers/ApplyThemePage";
+import "./data-providers/GetProviderOfStoryboard";
