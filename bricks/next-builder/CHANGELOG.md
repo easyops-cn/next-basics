@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.106.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.105.0...@next-bricks/next-builder@1.106.0) (2021-12-22)
+
+
+### Features
+
+* storyboard高级搜索功能支持 ([#892](https://github.com/easyops-cn/next-basics/issues/892)) ([6adafdb](https://github.com/easyops-cn/next-basics/commit/6adafdbc222df6909188f7431948a2802de4d5e8))
+* support get provider of storyborad ([#914](https://github.com/easyops-cn/next-basics/issues/914)) ([b263f58](https://github.com/easyops-cn/next-basics/commit/b263f58b3aae20f117cbbe58e9cf062cb1e0c3a9))
+
+
+
+
+
 # [1.105.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.104.0...@next-bricks/next-builder@1.105.0) (2021-12-22)
 
 
