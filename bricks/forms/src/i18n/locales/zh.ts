@@ -119,6 +119,9 @@ const locale: Locale = {
   [K.MONTH]: "月",
   [K.CORRECT_CRONT_MSG]: "请填写正确的时间格式",
   [K.DUPLICATE_STRUCTURE_ITEM_ID]: "{{id}}与已有结构项ID重复，请重新指定！",
+  [K.ATTRIBUTE_DESCRIPTION]: "属性说明",
+  [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "请输入1至20个字符",
+  [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "请输入属性说明",
 };
 
 export default locale;
