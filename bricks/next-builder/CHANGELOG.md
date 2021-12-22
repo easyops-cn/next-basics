@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.105.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.104.0...@next-bricks/next-builder@1.105.0) (2021-12-22)
+
+
+### Features
+
+* 删除未使用图片优化 ([#911](https://github.com/easyops-cn/next-basics/issues/911)) ([5f130c0](https://github.com/easyops-cn/next-basics/commit/5f130c0cd14169c9a1ea2c2b2980c76f4883aaab))
+
+
+
+
+
 # [1.104.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.103.0...@next-bricks/next-builder@1.104.0) (2021-12-19)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.202.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.201.1...@next-bricks/forms@1.202.0) (2021-12-22)
+
+
+### Features
+
+* **cmdb:** cmdb模型属性加属性说明 ([838e0db](https://github.com/easyops-cn/next-basics/commit/838e0dbc2d3f1dd4449562631cec64cb11eb1fa5))
+* **cmdb:** 增加属性说明字段 ([9e69bda](https://github.com/easyops-cn/next-basics/commit/9e69bda011d882b3c5ef9e065f9ddd9bf2d69f69))
+
+
+
+
+
 ## [1.201.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.201.0...@next-bricks/forms@1.201.1) (2021-12-21)
 
 
