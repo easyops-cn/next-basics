@@ -2481,6 +2481,26 @@
     immutability-helper "^3.1.1"
     marked "^2.1.3"
 
+"@next-libs/cmdb-instances@^6.13.0":
+  version "6.13.0"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.13.0.tgz#c2734bbd6e730ccb613d5fae5b8684328efdcc94"
+  integrity sha512-NS7Wau6G0KiXh0Z24PHjro0V0i2vu4YPP7jsDINTTaLJmkbubdAnlqCdGMFlEs6Q5AiEdy3ZW2xcfTNz/1OlLw==
+  dependencies:
+    "@next-core/brick-types" "^2.16.0"
+    "@next-libs/basic-components" "^3.2.5"
+    "@next-libs/cmdb-utils" "^3.0.3"
+    "@next-libs/code-editor-components" "^4.0.12"
+    "@next-libs/forms" "^3.2.7"
+    "@next-libs/storage" "^2.0.2"
+    "@next-sdk/cmdb-sdk" "^2.1.13"
+    "@next-sdk/permission-sdk" "^2.1.1"
+    "@types/file-saver" "^2.0.3"
+    classnames "^2.3.1"
+    dompurify "^2.3.1"
+    file-saver "^2.0.5"
+    immutability-helper "^3.1.1"
+    marked "^2.1.3"
+
 "@next-libs/cmdb-utils@^3.0.3":
   version "3.0.3"
   resolved "https://registry.npmjs.org/@next-libs/cmdb-utils/-/cmdb-utils-3.0.3.tgz#305d5d1cc8c7680c32df3f95e5a3442a56d5390d"

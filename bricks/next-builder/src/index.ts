@@ -16,7 +16,7 @@ import "./data-providers/StoryboardAssembly";
 import "./data-providers/ScanI18nInStoryboard";
 import "./data-providers/FindReferencesOfTemplate";
 import "./data-providers/ApplyStoryboardSnippet";
-import "./search-tree";
+// !Lazy: import "./search-tree";
 import "./lazy-bricks";
 import "./data-providers/ScanFunctionsInStoryboard";
 import "./data-providers/BuildProjectOfTemplates";

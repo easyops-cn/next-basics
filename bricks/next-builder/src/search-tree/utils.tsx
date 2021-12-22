@@ -6,11 +6,23 @@ import {
   symbolForNodeId,
   symbolForNodeInstanceId,
 } from "../shared/storyboard/buildStoryboard";
+import { operation, SearchInfoProps, SearchItem } from "./SearchTree";
 import { Key } from "antd/lib/table/interface";
+import { safeDump, JSON_SCHEMA } from "js-yaml";
 
 export const symbolForHightlight = Symbol.for("hightlight");
 export const symbolForRealParentId = Symbol.for("realParentId");
 export const NODE_INFO = "$$info";
+
+export function yamlStringify(value: unknown, indent = 2) {
+  return safeDump(value, {
+    indent,
+    schema: JSON_SCHEMA,
+    skipInvalid: true,
+    noRefs: true,
+    noCompatMode: true,
+  });
+}
 
 const iconTypeConstants = {
   app: {
@@ -299,69 +311,175 @@ export function buildTree(treeData: PlainObject | Array<PlainObject>) {
   return traversalData(treeData);
 }
 
-export function filter(
-  tree: PlainObject | Array<PlainObject>,
-  text: string,
-  config: SearchConfig = {
-    supportKey: true,
-    supportFuzzy: true,
-    supportIngoreCase: true,
+function compare(searchItem: SearchItem, data: string): boolean {
+  const { text, op } = searchItem;
+  switch (op) {
+    case operation.$like:
+      if (typeof data === "string" || typeof data === "number") {
+        return String(data).indexOf(text as string) >= 0;
+      } else {
+        return walk(
+          data,
+          (value) => String(value).indexOf(text as string) >= 0,
+          op
+        );
+      }
+    case operation.$nlike:
+      if (typeof data === "string" || typeof data === "number") {
+        return String(data).indexOf(text as string) < 0;
+      } else {
+        return walk(
+          data,
+          (value) => String(value).indexOf(text as string) < 0,
+          op
+        );
+      }
+    case operation.$eq:
+      if (Array.isArray(text)) {
+        return text.includes(data);
+      }
+      return data == text;
+    case operation.$ne:
+      if (Array.isArray(text)) {
+        return !text.includes(data);
+      }
+      return data != text;
+    case operation.$exists:
+      if (text) {
+        // true 存在
+        return data != "" || data !== undefined || data !== null;
+      } else {
+        // false 不存在
+        return data == "" || data === undefined || data === null;
+      }
   }
-) {
+}
+
+function getResult(result: boolean[], op: operation): boolean {
+  if (op === operation.$nlike) {
+    return result.every((item) => item);
+  }
+  return result.some((item) => item);
+}
+
+function walk(
+  data: unknown,
+  fn: (item: unknown) => boolean,
+  op: operation
+): boolean {
+  if (Array.isArray(data)) {
+    return getResult(
+      data.map((item) => walk(item, fn, op)),
+      op
+    );
+  } else if (isObject(data)) {
+    return getResult(
+      Object.values(data).map((item) => walk(item, fn, op)),
+      op
+    );
+  } else {
+    return fn(data);
+  }
+}
+
+export function isMatch(
+  originData: PlainObject,
+  searchInfo: SearchInfoProps
+): boolean {
+  const searchFields = Object.keys(searchInfo);
+  const matchObjKeys = Object.keys(originData);
+
+  const isIncludes = searchFields.every((filed) =>
+    matchObjKeys.includes(filed)
+  );
+  if (!isIncludes) return false;
+
+  for (let i = 0; i < searchFields.length; i++) {
+    if (compare(searchInfo[searchFields[i]], originData[searchFields[i]]))
+      continue;
+    return false;
+  }
+
+  return true;
+}
+
+export function filter(props: {
+  tree: PlainObject | Array<PlainObject>;
+  text: string | SearchInfoProps;
+  config?: SearchConfig;
+}) {
+  const {
+    tree,
+    text,
+    config = {
+      supportFuzzy: true,
+      supportKey: true,
+      supportIngoreCase: true,
+    },
+  } = props;
+  const isSenior = isObject(text);
   const matchKey: Key[] = [];
 
-  const isEqual = (v: string): boolean => {
-    let a = v;
-    let b = text;
-    if (config.supportIngoreCase) {
-      a = v.toLocaleLowerCase();
-      b = text.toLocaleLowerCase();
-    }
-    if (config.supportFuzzy) {
-      return a.includes(b);
+  const isEqual = (v: string | PlainObject): boolean => {
+    if (typeof v === "string") {
+      let a = v;
+      let b = text;
+      if (config.supportIngoreCase) {
+        a = v.toLocaleLowerCase();
+        b = (text as string).toLocaleLowerCase();
+      }
+      if (config.supportFuzzy) {
+        return a.includes(b as string);
+      } else {
+        return a === b;
+      }
     } else {
-      return a === b;
+      return isMatch(v, text as SearchInfoProps);
     }
   };
 
-  const setMatchItem = (item: PlainObject) => {
+  const setMatchItem = (item: PlainObject): boolean => {
     item[symbolForHightlight as any] = true;
-    // <% I18N(\"EDIT\", \"Edit\") %>
     item.key && matchKey.push(item.key);
+    return true;
   };
 
   const filterNode = (item: PlainObject | string, text: string): boolean => {
     if (isObject(item) && item) {
       for (const [k, v] of Object.entries(item)) {
         if (!["children", "key", "icon", symbolForHightlight].includes(k)) {
-          if (config.supportKey && isEqual(k)) {
-            setMatchItem(item);
-            return true;
+          if (!isSenior && config.supportKey && isEqual(k)) {
+            return setMatchItem(item);
           }
           if (Array.isArray(v)) {
             for (let i = 0; i < v.length; i++) {
               if (isObject(v[i])) {
-                if (filterNode(v[i], text)) {
-                  setMatchItem(item);
-                  return true;
+                if (isSenior && isEqual(v[i])) {
+                  return setMatchItem(item);
                 }
-              } else if (typeof v[i] === "string" && isEqual(v[i])) {
-                setMatchItem(item);
-                return true;
+                if (filterNode(v[i], text)) {
+                  return setMatchItem(item);
+                }
+              } else if (
+                !isSenior &&
+                typeof v[i] === "string" &&
+                isEqual(v[i])
+              ) {
+                return setMatchItem(item);
               }
             }
           } else if (isObject(v)) {
-            if (filterNode(v, text)) {
-              setMatchItem(item);
-              return true;
+            if (isSenior && isEqual(v)) {
+              return setMatchItem(item);
+            } else if (filterNode(v, text)) {
+              return setMatchItem(item);
             }
-          } else if (typeof v === "string" && isEqual(v)) {
-            setMatchItem(item);
-            return true;
+          } else if (!isSenior && typeof v === "string" && isEqual(v)) {
+            return setMatchItem(item);
           }
         }
       }
-    } else {
+    } else if (!isSenior) {
       return typeof item === "string" && isEqual(item);
     }
   };
@@ -376,7 +494,7 @@ export function filter(
   };
 
   const getNodes = (result: Array<PlainObject>, node: PlainObject) => {
-    const isNodeMatch = nodeMatch(node, text);
+    const isNodeMatch = nodeMatch(node, text as string);
     const children = childMatch(node?.children ?? []);
 
     if (children.length) {
@@ -392,6 +510,6 @@ export function filter(
 
   return {
     tree: tree.reduce(getNodes, []),
-    matchKey: matchKey,
+    matchKey,
   };
 }

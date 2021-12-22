@@ -3,11 +3,18 @@ import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Tree, Input } from "antd";
 import { NODE_INFO, symbolForHightlight, symbolForRealParentId } from "./utils";
-import { SearchTree, titleRender, SearchTreeProps } from "./SearchTree";
+import {
+  SearchTree,
+  titleRender,
+  SearchTreeProps,
+  operation,
+} from "./SearchTree";
+import { InstanceList } from "@next-libs/cmdb-instances";
 import {
   symbolForNodeId,
   symbolForNodeInstanceId,
 } from "../shared/storyboard/buildStoryboard";
+import * as kit from "@next-core/brick-kit";
 
 const getWrapper = (props: SearchTreeProps) => mount(<SearchTree {...props} />);
 const baseProps: SearchTreeProps = {
@@ -20,6 +27,24 @@ const baseProps: SearchTreeProps = {
     storyboard: {},
   },
 };
+
+jest.mock("@next-libs/cmdb-instances", () => ({
+  InstanceList: jest.fn(() => {
+    return "<div>Fake InstanceList</div>";
+  }),
+}));
+
+const mockInstanceList = InstanceList as any as jest.Mock;
+
+jest.spyOn(kit, "getHistory").mockReturnValue({
+  location: {
+    origin: "http://localhost",
+    pathname: "/next/a",
+    search: "?b",
+    hash: "#c:d",
+  },
+  createHref: () => "http://localhost/test",
+} as any);
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -103,6 +128,66 @@ describe("SearchTree", () => {
       expect(wrapper.find(".ant-tree-title").at(2).html()).toBe(
         '<span class="ant-tree-title"><span>meta</span></span>'
       );
+
+      mockInstanceList.mock.calls[0][0].autoSearch([
+        {
+          id: "a",
+          values: [null],
+          currentCondition: {
+            operations: [
+              {
+                operator: operation.$eq,
+              },
+            ],
+          },
+        },
+        {
+          id: "brick",
+          values: ["general-button"],
+          currentCondition: {
+            operations: [
+              {
+                operator: operation.$eq,
+              },
+            ],
+          },
+        },
+      ]);
+      jest.runAllTimers();
+      wrapper.update();
+      expect(wrapper.html().indexOf("general-button")).toBeTruthy();
+      expect(wrapper.html().indexOf("general-select")).toBe(-1);
+
+      mockInstanceList.mock.calls[0][0].autoSearch([
+        {
+          id: "a",
+          values: [null],
+          currentCondition: {
+            operations: [
+              {
+                operator: operation.$eq,
+              },
+            ],
+          },
+        },
+        {
+          id: "b",
+          values: [null],
+          currentCondition: {
+            operations: [
+              {
+                operator: operation.$exists,
+              },
+            ],
+          },
+        },
+      ]);
+      jest.runAllTimers();
+      wrapper.update();
+      expect(wrapper.html().indexOf("general-button")).toBe(-1);
+      expect(wrapper.html().indexOf("general-select")).toBe(-1);
+
+      expect(mockInstanceList).toBeCalled();
     });
 
     it("mock event should work", () => {
@@ -124,10 +209,16 @@ describe("SearchTree", () => {
         titleClick: mockClick,
         titleFocus: mockMouseEnter,
         titleBlur: mockMouseLeave,
+        searchContent: {
+          useBrick: {
+            brick: "div",
+          },
+        },
       });
 
       const wrapper = getWrapper(newProps);
       expect(mockClick).toBeCalledTimes(0);
+      expect(wrapper.find(kit.BrickAsComponent).length).toBe(0);
 
       wrapper.find(".ant-tree-title").at(0).simulate("click");
       wrapper.find(Tree).invoke("onMouseEnter")({
@@ -175,6 +266,7 @@ describe("SearchTree", () => {
       wrapper.find(".ant-tree-title").at(1).simulate("click");
 
       expect(mockClick).toBeCalledTimes(2);
+      expect(wrapper.find(kit.BrickAsComponent).length).toBe(1);
       expect(clickResult).toMatchObject({
         info: {
           type: "bricks",
@@ -251,20 +343,21 @@ describe("SearchTree", () => {
       expect(wrapper.html().indexOf("general-select")).toBe(-1);
     });
 
-    it("filter icon click and filter will change", () => {
+    it("filter icon click and filter will change", async () => {
       const newProps = Object.assign({}, baseProps, {
         treeData: storyboard,
       });
       const wrapper = getWrapper(newProps);
 
       // ingore case
-      act(() => {
+      await act(async () => {
         wrapper.find(Input).invoke("onChange")({
           target: {
             value: "GENERAL",
           },
         });
       });
+      jest.runAllTimers();
       expect(wrapper.html().includes("general-button")).toBeTruthy();
 
       act(() => {
@@ -281,6 +374,7 @@ describe("SearchTree", () => {
           },
         });
       });
+      jest.runAllTimers();
       expect(wrapper.html().includes("general-button")).toBeTruthy();
 
       act(() => {
@@ -297,6 +391,7 @@ describe("SearchTree", () => {
           },
         });
       });
+      jest.runAllTimers();
       expect(wrapper.html().includes("tpl-test-1")).toBeTruthy();
 
       act(() => {

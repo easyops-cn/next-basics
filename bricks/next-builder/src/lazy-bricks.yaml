@@ -1,3 +1,4 @@
 lazyBricks:
   - builder-container
   - event-config-form
+  - search-tree

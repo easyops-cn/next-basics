@@ -9,6 +9,7 @@ import {
 } from "@next-core/brick-kit";
 import { SearchTree } from "./SearchTree";
 import { StoryboardAssemblyResult } from "../shared/storyboard/interfaces";
+import { UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id next-builder.search-tree
@@ -115,6 +116,18 @@ export class SearchTreeElement extends UpdatingElement {
   supportFuzzy = true;
 
   /**
+   * @default
+   * @required
+   * @description
+   */
+  @property({
+    attribute: false,
+  })
+  searchContent: {
+    useBrick: UseBrickConf;
+  };
+
+  /**
    * @detail unknow
    * @description 点击节点数据
    */
@@ -155,6 +168,7 @@ export class SearchTreeElement extends UpdatingElement {
             titleClick={this._handleTitleClick}
             titleFocus={this._handleTitleFocus}
             titleBlur={this._handleTitleBlur}
+            searchContent={this.searchContent}
           />
         </BrickWrapper>,
         this
