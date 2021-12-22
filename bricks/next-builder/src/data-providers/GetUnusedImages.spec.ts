@@ -1,13 +1,9 @@
-import { DeleteUnusedImages } from "./DeleteUnusedImages";
-import {
-  InstanceApi_postSearch,
-  InstanceApi_deleteInstanceBatch,
-} from "@next-sdk/cmdb-sdk";
+import { DeleteUnusedImages } from "./GetUnusedImages";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import {
   DocumentApi_getDocumentsDetails,
   DocumentApi_getDocumentsTreeByAppId,
 } from "@next-sdk/next-builder-sdk";
-import { ObjectStoreApi_removeObjects } from "@next-sdk/object-store-sdk";
 import { Storyboard } from "@next-core/brick-types";
 
 jest.mock("@next-sdk/object-store-sdk");
@@ -68,9 +64,6 @@ jest.mock("@next-sdk/next-builder-sdk");
     }
   }
 );
-
-(InstanceApi_deleteInstanceBatch as jest.Mock).mockImplementation(() => ({}));
-(ObjectStoreApi_removeObjects as jest.Mock).mockImplementation(() => ({}));
 
 describe("delete unused images function should work", () => {
   const appId = "test-app";
@@ -147,11 +140,23 @@ describe("delete unused images function should work", () => {
       storyboard,
       bucketName,
     });
-    expect(InstanceApi_deleteInstanceBatch).toBeCalledTimes(0);
-    expect(ObjectStoreApi_removeObjects).toBeCalledTimes(0);
     expect(result).toEqual({
-      result: true,
-      message: "nothing to delete",
+      unusedImages: [],
+    });
+  });
+
+  it("should work while response was nothing", async () => {
+    (InstanceApi_postSearch as jest.Mock).mockImplementationOnce(() => ({
+      list: [],
+    }));
+    const result = await DeleteUnusedImages({
+      appId,
+      projectId,
+      storyboard,
+      bucketName,
+    });
+    expect(result).toEqual({
+      unusedImages: [],
     });
   });
 
@@ -194,17 +199,17 @@ describe("delete unused images function should work", () => {
       storyboard,
       bucketName,
     });
-    expect(InstanceApi_deleteInstanceBatch).toBeCalledWith(
-      "MICRO_APP_RESOURCE_IMAGE",
-      { instanceIds: "f-delete;g-delete" }
-    );
-    expect(ObjectStoreApi_removeObjects).toBeCalledWith("next-builder", {
-      objectNames: ["testF2120211116173420.jpeg", "testG2120211116173420.jpeg"],
-    });
     expect(result).toEqual({
-      result: true,
-      message: "delete images success",
-      needReload: true,
+      unusedImages: [
+        {
+          name: "testF2120211116173420.jpeg",
+          instanceId: "f-delete",
+        },
+        {
+          name: "testG2120211116173420.jpeg",
+          instanceId: "g-delete",
+        },
+      ],
     });
   });
 
@@ -247,21 +252,12 @@ describe("delete unused images function should work", () => {
       storyboard: {} as Storyboard,
       bucketName,
     });
-    expect(InstanceApi_deleteInstanceBatch).toBeCalledWith(
-      "MICRO_APP_RESOURCE_IMAGE",
-      { instanceIds: "e;f;g" }
-    );
-    expect(ObjectStoreApi_removeObjects).toBeCalledWith("next-builder", {
-      objectNames: [
-        "testE2120211116173415.jpeg",
-        "testF2120211116173420.jpeg",
-        "testG2120211116173420.jpeg",
-      ],
-    });
     expect(result).toEqual({
-      result: true,
-      message: "delete images success",
-      needReload: true,
+      unusedImages: [
+        { instanceId: "e", name: "testE2120211116173415.jpeg" },
+        { instanceId: "f", name: "testF2120211116173420.jpeg" },
+        { instanceId: "g", name: "testG2120211116173420.jpeg" },
+      ],
     });
   });
 });

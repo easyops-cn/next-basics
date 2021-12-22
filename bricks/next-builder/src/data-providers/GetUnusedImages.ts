@@ -1,12 +1,8 @@
-import {
-  InstanceApi_deleteInstanceBatch,
-  InstanceApi_postSearch,
-} from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import {
   DocumentApi_getDocumentsDetails,
   DocumentApi_getDocumentsTreeByAppId,
 } from "@next-sdk/next-builder-sdk";
-import { ObjectStoreApi_removeObjects } from "@next-sdk/object-store-sdk";
 import { Storyboard } from "@next-core/brick-types";
 import { createProviderClass } from "@next-core/brick-utils";
 import {
@@ -29,16 +25,17 @@ export interface DeleteUnUseImagesProps {
   bucketName: string;
 }
 
+interface imageItem {
+  name: string;
+  instanceId: string;
+}
+
 export async function DeleteUnusedImages({
   appId,
   projectId,
   storyboard,
   bucketName,
-}: DeleteUnUseImagesProps): Promise<{
-  result: boolean;
-  message: string;
-  needReload?: boolean;
-}> {
+}: DeleteUnUseImagesProps): Promise<{ unusedImages: Array<imageItem> }> {
   // 获取所有图片
   const allImageReq = InstanceApi_postSearch("MICRO_APP_RESOURCE_IMAGE", {
     fields: { url: true },
@@ -54,8 +51,7 @@ export async function DeleteUnusedImages({
 
   if (allImageResponse.list.length === 0) {
     return {
-      result: true,
-      message: "nothing to delete",
+      unusedImages: [],
     };
   }
 
@@ -88,42 +84,23 @@ export async function DeleteUnusedImages({
     usedImages
   );
 
-  const unusedImages: string[] = [];
-  const unusedImageInstanceIds: string[] = [];
+  const unusedImages: Array<imageItem> = [];
 
   for (const [imageName, instanceId] of allImagesMap.entries()) {
     if (!usedImages.has(imageName)) {
-      unusedImages.push(imageName);
-      unusedImageInstanceIds.push(instanceId);
+      unusedImages.push({
+        name: imageName,
+        instanceId,
+      });
     }
   }
 
-  if (unusedImages.length > 0) {
-    const deleteImageBucketReq = ObjectStoreApi_removeObjects(bucketName, {
-      objectNames: unusedImages,
-    });
-    const deleteImageInstanceReq = InstanceApi_deleteInstanceBatch(
-      "MICRO_APP_RESOURCE_IMAGE",
-      {
-        instanceIds: unusedImageInstanceIds.join(";"),
-      }
-    );
-    await Promise.all([deleteImageBucketReq, deleteImageInstanceReq]);
-
-    return {
-      result: true,
-      message: "delete images success",
-      needReload: true,
-    };
-  } else {
-    return {
-      result: true,
-      message: "nothing to delete",
-    };
-  }
+  return {
+    unusedImages,
+  };
 }
 
 customElements.define(
-  "next-builder.provider-delete-unused-images",
+  "next-builder.provider-get-unused-images",
   createProviderClass(DeleteUnusedImages)
 );

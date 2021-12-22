@@ -33,7 +33,7 @@ import "./function-debugger-toolbar";
 import "./function-debugger-store";
 import "./function-debugger-statusbar";
 import "./data-providers/RunStoryboardFunctionTests";
-import "./data-providers/DeleteUnusedImages";
+import "./data-providers/GetUnusedImages";
 import "./data-providers/LintStoryboard";
 import "./data-providers/CreateThemePage";
 import "./data-providers/DeleteThemePage";
