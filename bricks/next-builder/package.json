@@ -24,7 +24,7 @@
   "sideEffects": true,
   "devDependencies": {
     "@next-libs/basic-components": "^3.2.5",
-    "@next-libs/cmdb-instances": "^6.13.0",
+    "@next-libs/cmdb-instances": "^6.15.0",
     "@next-libs/code-editor-components": "^4.0.12",
     "@next-libs/storage": "^2.0.2",
     "@next-sdk/api-gateway-sdk": "^2.0.17",
