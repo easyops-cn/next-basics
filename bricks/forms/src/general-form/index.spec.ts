@@ -20,6 +20,7 @@ describe("forms.general-form", () => {
     const resetFields = jest.fn();
     const setFieldsValue = jest.fn();
     const isFieldTouched = jest.fn();
+    const getFieldsValue = jest.fn(() => ({}));
     const dispatchEvent = jest.spyOn(element, "dispatchEvent");
     element.staticValues = { id: "fake", a: { a1: 111 } };
     element.formUtils = {
@@ -27,12 +28,28 @@ describe("forms.general-form", () => {
       resetFields,
       setFieldsValue,
       isFieldTouched,
+      getFieldsValue,
     } as any;
+    jest.spyOn(element, "childNodes", "get").mockReturnValue([
+      {
+        nodeName: "FORMS.GENERAL-STRUCTS-FORM-ITEM",
+        name: "structs",
+        value: { b: "22" },
+        childNodes: [],
+      },
+    ] as unknown as NodeListOf<ChildNode>);
     expect(element.layout).toBe("horizontal");
     element.layout = "unknown" as any;
     expect(element.layout).toBe("horizontal");
     element.layout = "inline";
     expect(element.layout).toBe("inline");
+
+    // getFieldsValue
+    expect(element.getFieldsValue()).toEqual({
+      id: "fake",
+      a: { a1: 111 },
+      structs: { b: "22" },
+    });
 
     validateFields.mockImplementationOnce((fn) => {
       fn(null, { hello: "world", a: { a2: 222 } });
@@ -44,6 +61,7 @@ describe("forms.general-form", () => {
       id: "fake",
       hello: "world",
       a: { a1: 111, a2: 222 },
+      structs: { b: "22" },
     });
 
     validateFields.mockImplementationOnce((fn) => {
