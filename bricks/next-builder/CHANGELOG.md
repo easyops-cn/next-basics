@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.107.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.106.0...@next-bricks/next-builder@1.107.0) (2021-12-27)
+
+
+### Features
+
+* **buildAndPush:** add mocks fields in storyboard.meta ([#918](https://github.com/easyops-cn/next-basics/issues/918)) ([5060acd](https://github.com/easyops-cn/next-basics/commit/5060acd31cb52e96ff8ba2955f17cbde69bd3c6e))
+
+
+
+
+
 # [1.106.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.105.0...@next-bricks/next-builder@1.106.0) (2021-12-22)
 
 
