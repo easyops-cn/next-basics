@@ -68,7 +68,7 @@ export function buildStoryboardV2(data: BuildInfoV2): StoryboardToBuild {
 
   return {
     routes,
-    meta: { customTemplates, menus, i18n, functions },
+    meta: { customTemplates, menus, i18n, functions, mocks: data.mocks },
     dependsAll: data.dependsAll,
   };
 }

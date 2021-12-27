@@ -4,6 +4,7 @@ import {
   StoryboardAssemblyResult,
 } from "./interfaces";
 import { preStoryboardAssembly } from "./preStoryboardAssembly";
+import { simpleHash } from "../../data-providers/utils/simpleHash";
 
 /**
  * Assemble a full storyboard.
@@ -27,6 +28,10 @@ export async function StoryboardAssembly({
       menus: projectInfo.menus,
       i18n: projectInfo.i18n,
       functions: projectInfo.functions,
+      mocks: projectInfo.mockRule?.map((item: { url: string }) => ({
+        uri: item.url,
+        mockId: simpleHash(`${projectId}.${item.url}`),
+      })),
       dependsAll: projectInfo.dependsAll,
       options: {
         keepIds: options?.keepIds,

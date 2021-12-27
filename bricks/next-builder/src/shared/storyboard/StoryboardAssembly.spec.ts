@@ -256,6 +256,17 @@ const mockFactory: Record<string, Record<string, any>> = {
         },
       ],
 
+      mockRule: [
+        {
+          instanceId: "a",
+          url: "app-1/homepage/getDetail",
+        },
+        {
+          instanceId: "b",
+          url: "app-1/homepage/getDetail/:instanceId",
+        },
+      ],
+
       dependsAll: false,
     },
   },
@@ -533,6 +544,16 @@ describe("StoryboardAssembly", () => {
                 SETTINGS: "设置",
               },
             },
+            mocks: [
+              {
+                mockId: "185495f7",
+                uri: "app-1/homepage/getDetail",
+              },
+              {
+                mockId: "bac08540",
+                uri: "app-1/homepage/getDetail/:instanceId",
+              },
+            ],
           },
 
           dependsAll: false,
@@ -731,6 +752,16 @@ describe("StoryboardAssembly", () => {
                 SETTINGS: "设置",
               },
             },
+            mocks: [
+              {
+                mockId: "185495f7",
+                uri: "app-1/homepage/getDetail",
+              },
+              {
+                mockId: "bac08540",
+                uri: "app-1/homepage/getDetail/:instanceId",
+              },
+            ],
           },
 
           dependsAll: false,

@@ -74,6 +74,7 @@ export async function preStoryboardAssembly({
           "functions.name",
           "functions.source",
           "functions.typescript",
+          "mockRule.url",
           ...(hasTheme
             ? ["pageTemplates.pageTypeId", "pageTemplates.snippet.instanceId"]
             : ["menus.*", "menus.items", "menus.items.children"]),

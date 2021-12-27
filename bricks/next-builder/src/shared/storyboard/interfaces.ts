@@ -6,6 +6,7 @@ import {
   BuilderRouteNode,
   BuilderBrickNode,
   StoryboardFunction,
+  MockRule,
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
@@ -48,6 +49,7 @@ export interface StoryboardAssemblyResult {
 export interface PreStoryboardAssemblyResult {
   minimalBuildInfo: Pick<BuildInfo, "routeList" | "templateList">;
   projectInfo?: InstanceApi_GetDetailResponseBody;
+  mocks?: MockRule[];
 }
 
 export interface BuildInfo {
@@ -59,6 +61,7 @@ export interface BuildInfo {
   dependsAll?: boolean;
   options?: BuildOptions;
   functions?: FunctionNode[];
+  mocks?: MockRule[];
 }
 
 export type BuildInfoV2 = Omit<BuildInfo, "brickList">;
@@ -95,6 +98,7 @@ export interface StoryboardToBuild {
     menus?: Record<string, unknown>[];
     i18n?: MetaI18n;
     functions?: Pick<FunctionNode, "name" | "source" | "typescript">[];
+    mocks?: MockRule[];
   };
 
   dependsAll?: boolean;
