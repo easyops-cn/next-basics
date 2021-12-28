@@ -1,6 +1,6 @@
 .collapseBar {
   height: 51px;
-  border-top: 1px solid rgba(194, 225, 255, 0.15);
+  border-top: 1px solid var(--ant-menu-collapse-bar-border-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,6 +11,6 @@
   }
 
   &:hover {
-    background-color: rgba(194, 225, 255, 0.1);
+    background-color: var(--ant-menu-collapse-bar-bg);
   }
 }

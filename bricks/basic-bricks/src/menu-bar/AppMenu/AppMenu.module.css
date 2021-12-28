@@ -36,15 +36,15 @@
   height: 50px;
   border-radius: 6px;
   padding: 0 10px 0 24px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background-color: var(--antd-menu-title-bg);
+  color: var(--antd-menu-title-color);
   font-size: 16px;
   overflow: hidden;
   transition: none;
 
   &:hover {
-    color: #fff;
-    background-color: #3e86e6;
+    color: var(--antd-menu-title-color);
+    background-color: var(--antd-menu-item-hover);
   }
 }
 
@@ -67,6 +67,16 @@
   margin-left: 14px;
 }
 
+.appMenu :global(.ant-menu-inline) {
+  :global(.ant-menu-item-selected)::after {
+    border-right-color: transparent;
+  }
+
+  :global(.ant-menu-item):after {
+    border-right-color: transparent;
+  }
+}
+
 .appMenu :global(.ant-menu) {
   background-color: transparent;
 
@@ -75,11 +85,11 @@
     border-radius: 6px;
 
     &:not(:global(.ant-menu-item-selected)):hover {
-      background-color: #3e86e6;
+      background-color: var(--antd-menu-item-hover);
     }
 
     > a {
-      color: #fff;
+      color: var(--antd-menu-color);
 
       :global(.anticon) svg {
         vertical-align: -0.125em;
@@ -88,10 +98,10 @@
   }
 
   :global(.ant-menu-item-selected) {
-    background-color: #0071eb;
+    background-color: var(--antd-menu-item-selected-bg);
 
     > a {
-      color: #fff;
+      color: var(--antd-menu-color);
     }
   }
 
@@ -106,7 +116,7 @@
 
   :global(.ant-menu-submenu-title) {
     margin: 0;
-    color: #fff;
+    color: var(--antd-menu-color);
 
     :global(.ant-menu-submenu-arrow) {
       &::before,
@@ -121,11 +131,11 @@
     margin-right: -12px;
     padding-left: 12px;
     padding-right: 12px;
-    background-color: rgba(0, 99, 206, 0.2);
+    background-color: var(--ant-menu-submenu-selected-bg);
   }
 
   :global(.ant-menu-item-group-title) {
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--ant-menu-item-group-title-color);
     transition: none;
   }
 }
