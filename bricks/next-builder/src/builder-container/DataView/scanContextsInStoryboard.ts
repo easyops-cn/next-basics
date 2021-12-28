@@ -1,6 +1,5 @@
 import { Storyboard } from "@next-core/brick-types";
 import {
-  isObject,
   PrecookHooks,
   EstreeLiteral,
   visitStoryboardExpressions,
@@ -27,8 +26,27 @@ function scanContextsInAnyByReadOrWrite(data: unknown): {
   const readContexts = new Set<string>();
   const writeContexts = new Set<string>();
   const beforeVisitContext = beforeVisitContextFactory(readContexts);
-  visitStoryboardExpressions(data, beforeVisitContext, CTX);
-  collectWritingContexts(data, writeContexts);
+  visitStoryboardExpressions(data, beforeVisitContext, {
+    matchExpressionString(value) {
+      return value.includes(CTX);
+    },
+    visitObject: function (
+      value: unknown[] | Record<string | number | symbol, unknown>
+    ) {
+      if (
+        !Array.isArray(value) &&
+        (value.action === "context.replace" ||
+          value.action === "context.assign") &&
+        Array.isArray(value.args) &&
+        typeof value.args[0] === "string" &&
+        // Ignore evaluations and placeholders,
+        // E.g.: `<% QUERY.x %>` or `${QUERY.x}`.
+        !/[<{]/.test(value.args[0])
+      ) {
+        writeContexts.add(value.args[0]);
+      }
+    } as (v: object) => void,
+  });
   return {
     readContexts: Array.from(readContexts),
     writeContexts: Array.from(writeContexts),
@@ -59,31 +77,4 @@ function beforeVisitContextFactory(
       }
     }
   };
-}
-
-function collectWritingContexts(
-  data: unknown,
-  writeContexts: Set<string>,
-  memo = new WeakSet()
-): void {
-  if (isObject(data)) {
-    // Avoid call stack overflow.
-    if (memo.has(data)) {
-      return;
-    }
-    memo.add(data);
-    for (const item of Array.isArray(data) ? data : Object.values(data)) {
-      collectWritingContexts(item, writeContexts, memo);
-    }
-    if (
-      (data.action === "context.replace" || data.action === "context.assign") &&
-      Array.isArray(data.args) &&
-      typeof data.args[0] === "string" &&
-      // Ignore evaluations and placeholders,
-      // E.g.: `<% QUERY.x %>` or `${QUERY.x}`.
-      !/[<{]/.test(data.args[0])
-    ) {
-      writeContexts.add(data.args[0]);
-    }
-  }
 }
