@@ -28,10 +28,12 @@ export async function StoryboardAssembly({
       menus: projectInfo.menus,
       i18n: projectInfo.i18n,
       functions: projectInfo.functions,
-      mocks: projectInfo.mockRule?.map((item: { url: string }) => ({
-        uri: item.url,
-        mockId: simpleHash(`${projectId}.${item.url}`),
-      })),
+      mocks: projectInfo.mockRule && {
+        mockId: simpleHash(`${projectId}.${new Date().getTime()}`),
+        mockList: projectInfo.mockRule?.map((item: { url: string }) => ({
+          uri: item.url,
+        })),
+      },
       dependsAll: projectInfo.dependsAll,
       options: {
         keepIds: options?.keepIds,
