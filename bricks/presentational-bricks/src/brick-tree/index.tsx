@@ -113,6 +113,14 @@ export class BrickTreeElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
+   * @default -
+   * @description 是否也根据key值搜索，启用后匹配项会整体高亮
+   */
+  @property({ attribute: false }) alsoSearchByKey: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
    * @default false
    * @description 是否根据ui规范控制title中的样式,仅在树的title中含‘全部’和‘默认’时使用
    */
@@ -245,6 +253,7 @@ export class BrickTreeElement extends UpdatingElement {
             showSpecificationTitleStyle={this.showSpecificationTitleStyle}
             defaultExpandAll={this.defaultExpandAll}
             deselectable={this.deselectable}
+            alsoSearchByKey={this.alsoSearchByKey}
           />
         </BrickWrapper>,
         this

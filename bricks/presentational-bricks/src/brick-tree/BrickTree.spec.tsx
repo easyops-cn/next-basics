@@ -82,6 +82,18 @@ describe("BrickTree", () => {
     expect(mockScrollBy).toBeCalledTimes(1);
   });
 
+  it("should expand the nodes that match search value by key", () => {
+    const { getByTestId, getByText, getAllByText } = render(
+      <BrickTree dataSource={dataSource} searchable alsoSearchByKey />
+    );
+
+    fireEvent.change(getByTestId("search-input"), { target: { value: "100" } });
+
+    const mockScrollBy = getAllByText("0-1-0-0")[0].scrollBy;
+
+    expect(mockScrollBy).toBeCalledTimes(2);
+  });
+
   it("should be able to check all", () => {
     const onCheck = jest.fn();
     const wrapper = shallow<BrickTreeProps>(
