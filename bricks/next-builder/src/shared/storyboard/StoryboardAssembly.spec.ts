@@ -12,6 +12,15 @@ import { StoryboardAssembly } from "./StoryboardAssembly";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
+beforeAll(() => {
+  jest.useFakeTimers("modern");
+  jest.setSystemTime(new Date(2021, 12, 29));
+});
+
+afterAll(() => {
+  jest.useRealTimers();
+});
+
 const mockFactory: Record<string, Record<string, any>> = {
   "test-project": {
     STORYBOARD_TEMPLATE: {
@@ -544,16 +553,17 @@ describe("StoryboardAssembly", () => {
                 SETTINGS: "设置",
               },
             },
-            mocks: [
-              {
-                mockId: "185495f7",
-                uri: "app-1/homepage/getDetail",
-              },
-              {
-                mockId: "bac08540",
-                uri: "app-1/homepage/getDetail/:instanceId",
-              },
-            ],
+            mocks: {
+              mockId: "fe549d7d",
+              mockList: [
+                {
+                  uri: "app-1/homepage/getDetail",
+                },
+                {
+                  uri: "app-1/homepage/getDetail/:instanceId",
+                },
+              ],
+            },
           },
 
           dependsAll: false,
@@ -752,16 +762,17 @@ describe("StoryboardAssembly", () => {
                 SETTINGS: "设置",
               },
             },
-            mocks: [
-              {
-                mockId: "185495f7",
-                uri: "app-1/homepage/getDetail",
-              },
-              {
-                mockId: "bac08540",
-                uri: "app-1/homepage/getDetail/:instanceId",
-              },
-            ],
+            mocks: {
+              mockId: "fe549d7d",
+              mockList: [
+                {
+                  uri: "app-1/homepage/getDetail",
+                },
+                {
+                  uri: "app-1/homepage/getDetail/:instanceId",
+                },
+              ],
+            },
           },
 
           dependsAll: false,
