@@ -39,6 +39,9 @@
   color: #0071eb;
   background-color: #ebf3fd;
 }
+.matchTextTotal {
+  color: #0071eb;
+}
 .titleSpace {
   :global .ant-tree-treenode:nth-child(2) {
     margin-bottom: 8px;

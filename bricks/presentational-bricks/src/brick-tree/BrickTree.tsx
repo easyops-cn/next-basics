@@ -139,6 +139,7 @@ export interface BrickTreeProps {
   showSpecificationTitleStyle?: boolean;
   defaultExpandAll?: boolean;
   deselectable?: boolean;
+  alsoSearchByKey?: boolean;
 }
 
 export function BrickTree(props: BrickTreeProps): React.ReactElement {
@@ -157,6 +158,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     showSpecificationTitleStyle,
     defaultExpandAll,
     deselectable,
+    alsoSearchByKey,
   } = props;
   const [allChecked, setAllChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -219,18 +221,20 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     let isHit = false;
 
     nodes.forEach((node) => {
-      const length = node.children?.length;
-      if (length ? searchParent : true) {
+      const childrenLength = node.children?.length;
+      if (childrenLength ? searchParent : true) {
         if (
-          typeof node.title === "string" &&
-          node.title?.toLocaleLowerCase()?.includes(searchValue)
+          (typeof node.title === "string" &&
+            node.title?.toLocaleLowerCase()?.includes(searchValue)) ||
+          (props.alsoSearchByKey &&
+            node.key.toString()?.toLocaleLowerCase()?.includes(searchValue))
         ) {
           isHit = true;
         }
       }
 
       if (
-        length &&
+        childrenLength &&
         getExpandedKeysBySearchValue(node.children, searchValue, expandedKeys)
       ) {
         expandedKeys.push(node.key);
@@ -368,7 +372,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
             {...configProps}
             treeData={treeData}
             titleRender={(node) => {
-              const { title: _title, children } = node;
+              const { title: _title, children, key: _key } = node;
               let title: React.ReactNode = _title;
               //根据ui规范，全部或者默认的节点，字体加粗，间距加宽
               const allOrDefaultFlag =
@@ -379,6 +383,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                 (searchParent ? true : !children?.length)
               ) {
                 const index = _title.toLocaleLowerCase().indexOf(searchValue);
+                const kIndex = alsoSearchByKey
+                  ? _key.toString()?.toLocaleLowerCase().indexOf(searchValue)
+                  : -1;
 
                 if (index >= 0) {
                   const beforeStr = _title.substring(0, index);
@@ -412,9 +419,44 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                         }
                       })()}
                     >
-                      {beforeStr}
-                      <span className={styles.matchText}>{matchStr}</span>
-                      {afterStr}
+                      {alsoSearchByKey ? (
+                        // 如果也按key搜索，就整体高亮（因为key不会展示）
+                        <span className={styles.matchTextTotal}>{_title}</span>
+                      ) : (
+                        <>
+                          {beforeStr}
+                          <span className={styles.matchText}>{matchStr}</span>
+                          {afterStr}
+                        </>
+                      )}
+                    </span>
+                  );
+                } else if (kIndex >= 0) {
+                  title = (
+                    <span
+                      ref={(() => {
+                        if (!nodeMatchedRef.current) {
+                          nodeMatchedRef.current = true;
+
+                          return (el: HTMLElement) => {
+                            if (el) {
+                              const nodeEl =
+                                el.closest(".ant-tree-treenode") || el;
+                              const treeContainerEl = treeContainerRef.current;
+
+                              treeContainerEl.scrollBy(
+                                undefined,
+                                nodeEl.getBoundingClientRect().top -
+                                  treeContainerEl.getBoundingClientRect().top
+                              );
+                            }
+                          };
+                        } else {
+                          return null;
+                        }
+                      })()}
+                    >
+                      <span className={styles.matchTextTotal}>{_title}</span>
                     </span>
                   );
                 }
