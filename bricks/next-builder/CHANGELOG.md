@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.108.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.107.0...@next-bricks/next-builder@1.108.0) (2021-12-29)
+
+
+### Features
+
+* **StoryboardAssembly:** build&push  mocks 结构更新 ([24e09dc](https://github.com/easyops-cn/next-basics/commit/24e09dc29b7500a6e72fe6542717e7950cade194))
+
+
+
+
+
 # [1.107.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.106.0...@next-bricks/next-builder@1.107.0) (2021-12-27)
 
 
