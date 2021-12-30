@@ -64,7 +64,7 @@ export function ObjectAttrArr(props: ObjectAttrArrProps): React.ReactElement {
         {t(K.ATTRIBUTE_DEFAULT_VALUE)}
         <Row>
           <Select
-            value={value?.default}
+            value={value?.default ?? ([] as any)}
             mode="tags"
             style={{ width: "100%" }}
             placeholder={i18n.t(`${NS_FORMS}:${K.ARRAY_LIMIT}`)}
