@@ -36,6 +36,7 @@ interface LegacyGeneralButtonProps {
   tooltipConfig?: TooltipConfig;
   target?: string;
   fadedText?: boolean;
+  buttonStyle?: React.CSSProperties;
 }
 
 export function GeneralButton({
@@ -56,6 +57,7 @@ export function GeneralButton({
   target,
   tooltipConfig,
   fadedText,
+  buttonStyle,
 }: LegacyGeneralButtonProps): React.ReactElement {
   if (!buttonIcon && buttonProps?.icon) {
     buttonIcon = buttonProps.icon;
@@ -66,6 +68,7 @@ export function GeneralButton({
       className={classNames(styles.iconButton, {
         [styles.fadedText]: fadedText && buttonType === "text",
       })}
+      style={buttonStyle}
       shape={buttonShape}
       size={buttonSize}
       onClick={onClick}
