@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.159.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.158.1...@next-bricks/basic-bricks@1.159.0) (2021-12-30)
+
+
+### Bug Fixes
+
+* replace with css varibales ([6053d52](https://github.com/easyops-cn/next-basics/commit/6053d52fd4f421076cffefc3cf34a663debb413c))
+
+
+### Features
+
+* **basic-bricks:**  add buttonStyle property ([586aeb5](https://github.com/easyops-cn/next-basics/commit/586aeb5d9c6841ea0201df2a2172772295fdc24a))
+
+
+
+
+
 ## [1.158.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.158.0...@next-bricks/basic-bricks@1.158.1) (2021-12-29)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
