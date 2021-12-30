@@ -265,6 +265,18 @@ export class GeneralButtonElement extends UpdatingElement {
   detail: Record<string, any> = {};
 
   /**
+   * @kind React.CSSProperties
+   * @required -
+   * @default -
+   * @description 适用于按钮某些场景下，需要自定义一些样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  buttonStyle: React.CSSProperties;
+
+  /**
    * @detail `any`
    * @description 按钮被点击时触发, detail 为 dataSource 数据
    */
@@ -327,6 +339,7 @@ export class GeneralButtonElement extends UpdatingElement {
             target={this.target}
             tooltipConfig={this.tooltipConfig}
             fadedText={this.fadedText}
+            buttonStyle={this.buttonStyle}
           />
         </BrickWrapper>,
         this
