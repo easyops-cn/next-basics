@@ -121,7 +121,7 @@
     :global(.ant-menu-submenu-arrow) {
       &::before,
       &::after {
-        background: #fff;
+        background: var(--antd-menu-color);
       }
     }
   }
