@@ -42,3 +42,5 @@ import "./data-providers/ExperimentalExportThemeTemplate";
 import "./data-providers/ApplyThemeTemplate";
 import "./data-providers/ApplyThemePage";
 import "./data-providers/GetProviderOfStoryboard";
+import "./data-providers/GetTypeDeclarations";
+import "./data-providers/GetTypeDeclarationsOfFn";
