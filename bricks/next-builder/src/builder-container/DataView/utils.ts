@@ -1,6 +1,5 @@
 import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
 import { forEach } from "lodash";
-import { ContextConf } from "@next-core/brick-types";
 
 export interface OptionType {
   value: string;
@@ -84,6 +83,10 @@ export const safeLoadField = (value: string, field: string): any => {
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn(value, `Illegal ${field}`);
+    return {
+      help: `${field} is error`,
+      $$validateStatus: "error",
+    };
   }
   return result;
 };
@@ -102,18 +105,31 @@ export const safeLoadFields = (
   return result;
 };
 
+const filterErrorFields = (fields: Record<string, any>): Record<string, any> =>
+  Object.fromEntries(
+    Object.entries(fields).filter(([_k, v]) => v.$$validateStatus)
+  );
+
 export function computeItemToSubmit(
   contextValue: ContextItemFormValue
-): ContextConf {
+): Record<string, any> {
   const isValue = contextValue.type === ContextType.VALUE;
   if (isValue) {
+    const computedFields = safeLoadFields({
+      value: (contextValue as contextItemValueConf).value,
+      if: contextValue.if,
+      onChange: contextValue.onChange,
+    });
+    const errorFields = filterErrorFields(computedFields);
+    if (Object.values(errorFields).length) {
+      return {
+        error: true,
+        errorFields,
+      };
+    }
     return {
       name: contextValue.name,
-      ...safeLoadFields({
-        value: (contextValue as contextItemValueConf).value,
-        if: contextValue.if,
-        onChange: contextValue.onChange,
-      }),
+      ...computedFields,
     };
   } else {
     const computedFields = safeLoadFields({
@@ -125,6 +141,13 @@ export function computeItemToSubmit(
       onChange: (contextValue as contextItemResolveConf).onChange,
       onReject: (contextValue as contextItemResolveConf).onReject,
     });
+    const errorFields = filterErrorFields(computedFields);
+    if (Object.values(errorFields).length) {
+      return {
+        error: true,
+        errorFields,
+      };
+    }
     return {
       name: contextValue.name,
       resolve: {

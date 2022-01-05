@@ -64,7 +64,7 @@ describe("safeLoadFields", () => {
 });
 
 describe("computeItemToSubmit", () => {
-  it.each<[string, ContextItemFormValue, ContextConf]>([
+  it.each<[string, ContextItemFormValue, ContextConf | Record<string, any>]>([
     [
       "should work when type is value",
       {
@@ -125,6 +125,45 @@ describe("computeItemToSubmit", () => {
             },
           },
         ],
+      },
+    ],
+    [
+      "should work when type is value and value is error",
+      {
+        type: ContextType.VALUE,
+        value: "- a: \nb",
+        name: "userInfo",
+      },
+      {
+        error: true,
+        errorFields: {
+          value: {
+            help: "value is error",
+            $$validateStatus: "error",
+          },
+        },
+      },
+    ],
+    [
+      "should work when type is resolve of use-provider",
+      {
+        type: ContextType.RESOLVE,
+        useProvider: "provider-a",
+        value: "- a: \nb",
+        resolveIf: "- a: \nb",
+      },
+      {
+        error: true,
+        errorFields: {
+          value: {
+            help: "value is error",
+            $$validateStatus: "error",
+          },
+          resolveIf: {
+            help: "resolveIf is error",
+            $$validateStatus: "error",
+          },
+        },
       },
     ],
     [

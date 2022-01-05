@@ -53,6 +53,15 @@ describe("ContextItemForm", () => {
     wrapper.find(Form).invoke("onFinish")({
       name: "data-a",
       type: "resolve",
+      value: "-a: \nb",
+    });
+
+    expect(onContextItemUpdate).toBeCalledTimes(0);
+    expect(wrapper.html().indexOf("value is error") >= 0).toBeTruthy();
+
+    wrapper.find(Form).invoke("onFinish")({
+      name: "data-a",
+      type: "resolve",
       resolve: {
         useProvider: "provider-a",
         args: "- arg1\n",

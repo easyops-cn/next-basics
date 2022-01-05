@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Input, Radio, Form, AutoComplete } from "antd";
+import { Input, Radio, Form, AutoComplete, FormItemProps } from "antd";
 import {
   computeItemToSubmit,
   ContextItemFormValue,
@@ -38,6 +38,27 @@ export function ContextItemForm({
   );
   const [providerOptions, setProviderOptions] = useState(originalProviderList);
   const [contextType, setContextType] = useState(ContextType.VALUE);
+  const [errorFields, setErrorFields] = useState<
+    Record<string, { help: string }>
+  >({});
+
+  const getFormItemProps = (
+    name: string,
+    text: string | boolean = true
+  ): FormItemProps => {
+    let label = name;
+    if (typeof text === "string") {
+      label = text;
+    } else if (text) {
+      label = name[0].toUpperCase() + name.substr(1);
+    }
+    return {
+      name,
+      label,
+      validateStatus: errorFields[name] ? "error" : "success",
+      help: errorFields[name]?.help,
+    };
+  };
 
   const typeOptions = useMemo(() => {
     return [
@@ -81,10 +102,25 @@ export function ContextItemForm({
 
   const onSettingFormFinish = (values: ContextItemFormValue): void => {
     const computedValue = computeItemToSubmit(values);
-    onContextItemUpdate?.(computedValue);
+    if (computedValue.error) {
+      setErrorFields(computedValue.errorFields);
+      return;
+    }
+    setErrorFields({});
+    onContextItemUpdate?.(computedValue as ContextConf);
   };
 
-  const getCodeEditorItem = (field: string): React.ReactNode => {
+  const handleCodeChange = (field: string): void => {
+    if (errorFields[field]) {
+      delete errorFields[field];
+      setErrorFields({ ...errorFields });
+    }
+  };
+
+  const getCodeEditorItem = (
+    field: string,
+    reallyField?: string
+  ): React.ReactNode => {
     return (
       <CodeEditorItem
         tabSize={2}
@@ -98,6 +134,7 @@ export function ContextItemForm({
         schemaRef={fieldCodeEditorConfigMap[field].schemaRef}
         highlightTokens={highlightTokens}
         onClickHighlightToken={onClickHighlightToken}
+        onChange={() => handleCodeChange(reallyField ?? field)}
       ></CodeEditorItem>
     );
   };
@@ -116,7 +153,7 @@ export function ContextItemForm({
       >
         <Input />
       </Form.Item>
-      <Form.Item name="type" label="Type">
+      <Form.Item {...getFormItemProps("type")}>
         <Radio.Group
           options={typeOptions}
           optionType="button"
@@ -130,15 +167,14 @@ export function ContextItemForm({
         </Radio.Group>
       </Form.Item>
       {contextType === ContextType.VALUE ? (
-        <Form.Item label="Value" name="value">
+        <Form.Item {...getFormItemProps("name")}>
           {getCodeEditorItem("value")}
         </Form.Item>
       ) : (
         <>
           {contextType === ContextType.SELECTOR_RESOLVE ? (
             <Form.Item
-              name="provider"
-              label="Provider"
+              {...getFormItemProps("provider")}
               rules={[{ required: true, message: "Provider is required!" }]}
             >
               <Input />
@@ -152,31 +188,30 @@ export function ContextItemForm({
               <AutoComplete options={providerOptions} onSearch={onSearch} />
             </Form.Item>
           )}
-          <Form.Item label="Args" name="args">
+          <Form.Item {...getFormItemProps("args")}>
             {getCodeEditorItem("args")}
           </Form.Item>
-          <Form.Item label="Transform" name="transform">
+          <Form.Item {...getFormItemProps("transform")}>
             {getCodeEditorItem("transform")}
           </Form.Item>
-          <Form.Item label="onReject" name="onReject">
+          <Form.Item {...getFormItemProps("onReject", false)}>
             {getCodeEditorItem("onReject")}
           </Form.Item>
-          <Form.Item label="If of resolve" name="resolveIf">
-            {getCodeEditorItem("if")}
+          <Form.Item {...getFormItemProps("resolveIf", "If of resolve")}>
+            {getCodeEditorItem("if", "resolveIf")}
           </Form.Item>
           <Form.Item
-            label="Fallback value"
-            name="value"
+            {...getFormItemProps("value", "Fallback value")}
             tooltip="The value of context will fallback to this value when the if of resolve is false."
           >
             {getCodeEditorItem("value")}
           </Form.Item>
         </>
       )}
-      <Form.Item label="If" name="if">
+      <Form.Item {...getFormItemProps("if")}>
         {getCodeEditorItem("if")}
       </Form.Item>
-      <Form.Item label="onChange" name="onChange">
+      <Form.Item {...getFormItemProps("onChange", false)}>
         {getCodeEditorItem("onChange")}
       </Form.Item>
     </Form>
