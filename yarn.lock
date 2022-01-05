@@ -2362,6 +2362,11 @@
     rollup-plugin-postcss "^4.0.2"
     string-hash "^1.1.3"
 
+"@next-core/storyboard-function-types@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/@next-core/storyboard-function-types/-/storyboard-function-types-0.2.0.tgz#2502b91587a93620af9f96ca1625a8a5a82334a4"
+  integrity sha512-RdiT1s+dpoCZB7QblcMSuUL7VQHUKzRvRe2luN2my5VdgB3zpfFHUlHW2QxqD41xDddSHgLQPJAMspJGnhG83A==
+
 "@next-core/supply@^1.0.18":
   version "1.0.18"
   resolved "https://registry.npmjs.org/@next-core/supply/-/supply-1.0.18.tgz#1deb54eb00e2302a6514858c4d41722e6af1e08c"
