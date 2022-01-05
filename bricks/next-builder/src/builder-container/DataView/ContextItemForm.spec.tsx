@@ -4,6 +4,7 @@ import { ContextItemForm, ContextItemFormProps } from "./ContextItemForm";
 import { AutoComplete, Form, Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { CodeEditorItem } from "@next-libs/code-editor-components";
 
 jest.mock("../BuilderUIContext");
 
@@ -50,14 +51,21 @@ describe("ContextItemForm", () => {
     // Trigger component updating.
     wrapper.setProps({});
 
+    expect(wrapper.html().indexOf("onChange is error") <= 0).toBeTruthy();
+
     wrapper.find(Form).invoke("onFinish")({
       name: "data-a",
       type: "resolve",
-      value: "-a: \nb",
+      onChange: "-a: \nb",
     });
 
     expect(onContextItemUpdate).toBeCalledTimes(0);
-    expect(wrapper.html().indexOf("value is error") >= 0).toBeTruthy();
+    expect(wrapper.html().indexOf("onChange is error") >= 0).toBeTruthy();
+
+    wrapper.find(CodeEditorItem).last().invoke("onChange")("onChange");
+    await jest.runAllTimers();
+
+    expect(wrapper.html().indexOf("onChange is error") <= 0).toBeTruthy();
 
     wrapper.find(Form).invoke("onFinish")({
       name: "data-a",
