@@ -102,12 +102,12 @@ export function ContextItemForm({
 
   const onSettingFormFinish = (values: ContextItemFormValue): void => {
     const computedValue = computeItemToSubmit(values);
-    if (computedValue.error) {
+    if ("error" in computedValue) {
       setErrorFields(computedValue.errorFields);
       return;
     }
     setErrorFields({});
-    onContextItemUpdate?.(computedValue as ContextConf);
+    onContextItemUpdate?.(computedValue);
   };
 
   const handleCodeChange = (field: string): void => {
@@ -119,7 +119,7 @@ export function ContextItemForm({
 
   const getCodeEditorItem = (
     field: string,
-    reallyField?: string
+    realField?: string
   ): React.ReactNode => {
     return (
       <CodeEditorItem
@@ -134,7 +134,7 @@ export function ContextItemForm({
         schemaRef={fieldCodeEditorConfigMap[field].schemaRef}
         highlightTokens={highlightTokens}
         onClickHighlightToken={onClickHighlightToken}
-        onChange={() => handleCodeChange(reallyField ?? field)}
+        onChange={() => handleCodeChange(realField ?? field)}
       ></CodeEditorItem>
     );
   };

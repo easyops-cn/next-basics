@@ -1,5 +1,6 @@
 import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
 import { forEach } from "lodash";
+import { ContextConf } from "@next-core/brick-types";
 
 export interface OptionType {
   value: string;
@@ -39,6 +40,11 @@ interface contextItemSelectorProviderResolveConf
   extends contextResolveBaseConf {
   type: ContextType.SELECTOR_RESOLVE;
   provider: string;
+}
+
+interface errorField {
+  help: string;
+  $$validateStatus: boolean;
 }
 
 export type ContextItemFormValue =
@@ -85,7 +91,7 @@ export const safeLoadField = (value: string, field: string): any => {
     console.warn(value, `Illegal ${field}`);
     return {
       help: `${field} is error`,
-      $$validateStatus: "error",
+      $$validateStatus: true,
     };
   }
   return result;
@@ -105,14 +111,16 @@ export const safeLoadFields = (
   return result;
 };
 
-const filterErrorFields = (fields: Record<string, any>): Record<string, any> =>
+const filterErrorFields = (
+  fields: Record<string, any>
+): Record<string, errorField> =>
   Object.fromEntries(
     Object.entries(fields).filter(([_k, v]) => v.$$validateStatus)
   );
 
 export function computeItemToSubmit(
   contextValue: ContextItemFormValue
-): Record<string, any> {
+): ContextConf | { error: boolean; errorFields: Record<string, errorField> } {
   const isValue = contextValue.type === ContextType.VALUE;
   if (isValue) {
     const computedFields = safeLoadFields({
