@@ -139,7 +139,7 @@ describe("computeItemToSubmit", () => {
         errorFields: {
           value: {
             help: "value is error",
-            $$validateStatus: "error",
+            $$validateStatus: true,
           },
         },
       },
@@ -157,11 +157,11 @@ describe("computeItemToSubmit", () => {
         errorFields: {
           value: {
             help: "value is error",
-            $$validateStatus: "error",
+            $$validateStatus: true,
           },
           resolveIf: {
             help: "resolveIf is error",
-            $$validateStatus: "error",
+            $$validateStatus: true,
           },
         },
       },
