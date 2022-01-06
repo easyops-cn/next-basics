@@ -269,16 +269,19 @@ const mockFactory: Record<string, Record<string, any>> = {
         {
           instanceId: "a",
           url: "app-1/homepage/getDetail",
+          provider: "provider-of-cmdb.get-detail",
           isEnable: true,
         },
         {
           instanceId: "b",
           url: "app-1/homepage/getDetail/:instanceId",
+          provider: "provider-of-cmdb.get-detail-v1",
           isEnable: true,
         },
         {
           instanceId: "c",
           url: "app-1/homepage/getDetail/:instanceId/list",
+          provider: "test-abd@getMockDetail",
           isEnable: false,
         },
       ],
@@ -565,9 +568,11 @@ describe("StoryboardAssembly", () => {
               mockList: [
                 {
                   uri: "app-1/homepage/getDetail",
+                  provider: "provider-of-cmdb.get-detail",
                 },
                 {
                   uri: "app-1/homepage/getDetail/:instanceId",
+                  provider: "provider-of-cmdb.get-detail-v1",
                 },
               ],
             },
@@ -774,9 +779,11 @@ describe("StoryboardAssembly", () => {
               mockList: [
                 {
                   uri: "app-1/homepage/getDetail",
+                  provider: "provider-of-cmdb.get-detail",
                 },
                 {
                   uri: "app-1/homepage/getDetail/:instanceId",
+                  provider: "provider-of-cmdb.get-detail-v1",
                 },
               ],
             },
