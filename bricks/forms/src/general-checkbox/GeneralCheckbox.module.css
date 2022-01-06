@@ -1,19 +1,6 @@
 .generalCheckBox {
-  :global(.ant-checkbox-wrapper) {
-    border-radius: 4px;
-    padding: 2px 4px;
-
-    &:hover {
-      background: #ebf3fd;
-    }
-  }
-
   :global(.ant-checkbox-wrapper + .ant-checkbox-wrapper) {
     margin-left: 16px;
-  }
-
-  :global(.ant-checkbox-wrapper-checked) {
-    background: #f5f5f5;
   }
 }
 

@@ -60,24 +60,31 @@
     /* border: 1px solid #e5e9f1; */
     border: none;
     height: 32px;
-    background-color: #f2f5f9;
+    background-color: var(--antd-dashboard-radio-bg);
   }
 
   :global(.ant-radio-button-wrapper) {
-    background: #f0f3fa;
+    background: var(--antd-dashboard-radio-item-bg);
     padding: 0 28px;
     font-size: 14px;
-    color: #777f99;
+    color: var(--antd-dashboard-radio-item-color);
     border: none;
     height: 28px;
     margin: 2px;
   }
 
+  :global(.ant-radio-button-wrapper-disabled) {
+    color: var(--antd-dashboard-radio-item-disabled-color);
+  }
+
   :global(.ant-radio-group-solid
       .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)) {
-    background: #ffffff;
+    &:focus-within {
+      box-shadow: var(--antd-dashboard-radio-item-checked-shadow);
+    }
+    background: var(--antd-dashboard-radio-item-checked-bg);
     border-radius: 6px;
-    color: #1a7aff;
+    color: var(--antd-dashboard-radio-item-checked-color);
   }
 
   :global(.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled, .ant-radio-button-wrapper-checked)::before) {
@@ -118,12 +125,12 @@
     width: 1px;
     height: 19px;
     line-height: 19px;
-    background-color: #f2f5f9;
+    background-color: var(--antd-border-color-base);
     transition: background-color 0.3s;
     content: "";
     transform: translateY(-50%);
   }
   :global(.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover)::before {
-    background-color: #f2f5f9;
+    background-color: var(--antd-border-color-base);
   }
 }
