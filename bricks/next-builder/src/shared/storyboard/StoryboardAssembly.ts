@@ -30,9 +30,11 @@ export async function StoryboardAssembly({
       functions: projectInfo.functions,
       mocks: projectInfo.mockRule && {
         mockId: simpleHash(`${projectId}.${new Date().getTime()}`),
-        mockList: projectInfo.mockRule?.map((item: { url: string }) => ({
-          uri: item.url,
-        })),
+        mockList: projectInfo.mockRule
+          .filter((item: { isEnable: boolean }) => item.isEnable)
+          ?.map((item: { url: string }) => ({
+            uri: item.url,
+          })),
       },
       dependsAll: projectInfo.dependsAll,
       options: {

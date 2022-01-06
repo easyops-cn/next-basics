@@ -269,10 +269,17 @@ const mockFactory: Record<string, Record<string, any>> = {
         {
           instanceId: "a",
           url: "app-1/homepage/getDetail",
+          isEnable: true,
         },
         {
           instanceId: "b",
           url: "app-1/homepage/getDetail/:instanceId",
+          isEnable: true,
+        },
+        {
+          instanceId: "c",
+          url: "app-1/homepage/getDetail/:instanceId/list",
+          isEnable: false,
         },
       ],
 
