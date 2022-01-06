@@ -42,6 +42,11 @@ interface contextItemSelectorProviderResolveConf
   provider: string;
 }
 
+interface errorField {
+  help: string;
+  $$validateStatus: boolean;
+}
+
 export type ContextItemFormValue =
   | contextItemValueConf
   | contextItemResolveConf
@@ -84,6 +89,10 @@ export const safeLoadField = (value: string, field: string): any => {
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn(value, `Illegal ${field}`);
+    return {
+      help: `${field} is error`,
+      $$validateStatus: true,
+    };
   }
   return result;
 };
@@ -102,18 +111,33 @@ export const safeLoadFields = (
   return result;
 };
 
+const filterErrorFields = (
+  fields: Record<string, any>
+): Record<string, errorField> =>
+  Object.fromEntries(
+    Object.entries(fields).filter(([_k, v]) => v.$$validateStatus)
+  );
+
 export function computeItemToSubmit(
   contextValue: ContextItemFormValue
-): ContextConf {
+): ContextConf | { error: boolean; errorFields: Record<string, errorField> } {
   const isValue = contextValue.type === ContextType.VALUE;
   if (isValue) {
+    const computedFields = safeLoadFields({
+      value: (contextValue as contextItemValueConf).value,
+      if: contextValue.if,
+      onChange: contextValue.onChange,
+    });
+    const errorFields = filterErrorFields(computedFields);
+    if (Object.values(errorFields).length) {
+      return {
+        error: true,
+        errorFields,
+      };
+    }
     return {
       name: contextValue.name,
-      ...safeLoadFields({
-        value: (contextValue as contextItemValueConf).value,
-        if: contextValue.if,
-        onChange: contextValue.onChange,
-      }),
+      ...computedFields,
     };
   } else {
     const computedFields = safeLoadFields({
@@ -125,6 +149,13 @@ export function computeItemToSubmit(
       onChange: (contextValue as contextItemResolveConf).onChange,
       onReject: (contextValue as contextItemResolveConf).onReject,
     });
+    const errorFields = filterErrorFields(computedFields);
+    if (Object.values(errorFields).length) {
+      return {
+        error: true,
+        errorFields,
+      };
+    }
     return {
       name: contextValue.name,
       resolve: {
