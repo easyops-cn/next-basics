@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.109.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.109.0...@next-bricks/next-builder@1.109.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* **ContextItemForm:** fix submit while data error ([b2150b4](https://github.com/easyops-cn/next-basics/commit/b2150b4185be13948d287d4bedfdf1c76d39dd27))
+* **ContextItemForm:** update ts ([a271b46](https://github.com/easyops-cn/next-basics/commit/a271b46aa502c2b496e2b3d7615c3df6d53e3039))
+* **ContextItemForm:** update unit test ([0c8594e](https://github.com/easyops-cn/next-basics/commit/0c8594e0ac1ec14f350fc5c457373af96de31512))
+* **ContextItemForm:** update unit test ([6875cd3](https://github.com/easyops-cn/next-basics/commit/6875cd34b4b195b5761564155daa0c06a91d5018))
+
+
+
+
+
 # [1.109.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.108.0...@next-bricks/next-builder@1.109.0) (2022-01-06)
 
 
