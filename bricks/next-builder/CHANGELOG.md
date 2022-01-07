@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.110.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.109.1...@next-bricks/next-builder@1.110.0) (2022-01-07)
+
+
+### Features
+
+* **preStoryboardAssembly:** mocks add provider ([ca09a8e](https://github.com/easyops-cn/next-basics/commit/ca09a8eaa074882185340e72eb1d3fdfc10a6eba))
+
+
+
+
+
 ## [1.109.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.109.0...@next-bricks/next-builder@1.109.1) (2022-01-06)
 
 
