@@ -72,13 +72,16 @@
     transition: none;
 
     :global(.anticon) {
-      margin-right: 14px;
       vertical-align: middle;
       color: var(--antd-text-color-secondary);
     }
 
     :global(.ant-menu-submenu-arrow) {
       color: var(--text-color-disabled);
+    }
+
+    &:active {
+      background-color: transparent;
     }
   }
 
