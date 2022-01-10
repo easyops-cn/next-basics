@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@next-core/custom-antd-styles": "^1.8.13",
+    "@next-core/custom-antd-styles": "^1.11.0",
     "@next-libs/basic-components": "^3.2.5",
     "@next-libs/clipboard": "^3.0.2",
     "@next-libs/cmdb-utils": "^3.0.3",
