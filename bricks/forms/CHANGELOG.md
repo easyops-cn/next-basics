@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.202.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.3...@next-bricks/forms@1.202.4) (2022-01-10)
+
+
+### Bug Fixes
+
+* style refine ([6b907e1](https://github.com/easyops-cn/next-basics/commit/6b907e1120ee303a856e68f78bc0ab6f7db7fbcf))
+
+
+
+
+
 ## [1.202.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.2...@next-bricks/forms@1.202.3) (2022-01-07)
 
 **Note:** Version bump only for package @next-bricks/forms
