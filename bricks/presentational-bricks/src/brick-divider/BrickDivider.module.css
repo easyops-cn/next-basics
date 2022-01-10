@@ -6,7 +6,7 @@
   margin: 24px 0;
 }
 .DividerRadiationText {
-  color: #262626;
+  color: var(--antd-divider-radiation-text-color);
   display: flex;
   white-space: nowrap;
 }
@@ -17,8 +17,7 @@
   width: 95%;
   transform: translateY(50%);
   height: 1px;
-  background: linear-gradient(to right, transparent, #f9f9f9, #979797, #979797)
-    no-repeat;
+  background: var(--antd-divider-radiation-color);
   -webkit-mask-image: linear-gradient(
     to right,
     #f9f9f9 6px,
@@ -35,9 +34,9 @@
 
 .DividerRadiation .ProportionText {
   font-size: 12px;
-  color: #595959;
+  color: var(--antd-divider-radiation-proportion-normal-text-color);
   line-height: 25px;
 }
 .DividerRadiation .ProportionText strong {
-  color: #262626;
+  color: var(--antd-divider-radiation-proportion-strong-text-color);
 }
