@@ -373,6 +373,13 @@ describe("getFunctionStep", () => {
       root: "root",
     });
     expect(
+      getFunctionStep({ stepList: [], fieldRelations: [] } as StepParams)
+    ).toEqual({
+      edges: [],
+      nodes: [{ id: "root", type: "flow" }],
+      root: "root",
+    });
+    expect(
       getFunctionStep({
         stepList: [{ name: "createInstance", id: "1" }],
       } as StepParams)
