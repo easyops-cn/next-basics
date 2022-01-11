@@ -175,7 +175,7 @@ export function getFunctionStep(
 
   let stepDescendantsMap: Map<string, Set<string>>;
 
-  if (stepList) {
+  if (stepList && stepList.length > 0) {
     let firstStepId: string;
     for (const step of stepList) {
       const stepId = step.id;
