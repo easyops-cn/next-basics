@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.13.3...@next-bricks/flow-builder@1.13.4) (2022-01-11)
+
+
+### Bug Fixes
+
+* **flow-builder:** 未设置步骤时,参数设计报错 ([a6e3e79](https://github.com/easyops-cn/next-basics/commit/a6e3e7996123a75511de0886d1c1fe832db63afc))
+
+
+
+
+
 ## [1.13.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.13.2...@next-bricks/flow-builder@1.13.3) (2021-11-25)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
