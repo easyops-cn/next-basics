@@ -15,6 +15,20 @@ describe("FoldBrickV2Editor", () => {
       $$parsedProperties: {},
     });
     const wrapper = shallow(<FoldBrickV2Editor nodeUid={1} />);
-    expect(wrapper.find("div").text()).toBe("my-brick");
+    expect(wrapper.find("div").at(0).text()).toBe("my-brick");
+  });
+
+  it("name should use foldName", () => {
+    mockUseBuilderNode.mockReturnValueOnce({
+      type: "brick",
+      id: "B-001",
+      brick: "fold-brick-v2",
+      alias: "my-brick",
+      $$parsedProperties: {
+        foldName: "查看",
+      },
+    });
+    const wrapper = shallow(<FoldBrickV2Editor nodeUid={1} />);
+    expect(wrapper.find("div").at(0).text()).toBe("查看");
   });
 });
