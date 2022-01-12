@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.160.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.159.2...@next-bricks/basic-bricks@1.160.0) (2022-01-12)
+
+
+### Features
+
+* button style ([599aa02](https://github.com/easyops-cn/next-basics/commit/599aa020bd21f070ab8eef7265ea81d39c8d8917))
+* **fold-brick-v2:** add editor ([e8ac347](https://github.com/easyops-cn/next-basics/commit/e8ac3475fa8598e7972b0598f041b688ca1b491e))
+* **fold-brick-v2:** update unit test ([5d9ed20](https://github.com/easyops-cn/next-basics/commit/5d9ed20f4d8d87496b9b99c4c1e0c0c769b86fbb))
+
+
+
+
+
 ## [1.159.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.159.1...@next-bricks/basic-bricks@1.159.2) (2022-01-10)
 
 

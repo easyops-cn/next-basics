@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.234.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.233.1...@next-bricks/presentational-bricks@1.234.0) (2022-01-12)
+
+
+### Features
+
+* button style ([599aa02](https://github.com/easyops-cn/next-basics/commit/599aa020bd21f070ab8eef7265ea81d39c8d8917))
+* divider style ([fb385fd](https://github.com/easyops-cn/next-basics/commit/fb385fd7b424a8ecd5c6c999cdda302a49c05302))
+
+
+
+
+
 ## [1.233.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.233.0...@next-bricks/presentational-bricks@1.233.1) (2022-01-10)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
