@@ -15,7 +15,7 @@
   }
   .anchorLinkContainer {
     display: flex;
-    background: var(--color-fill-bg-base-1);
+    background: var(--antd-anchor-radio-type-bg);
     border-radius: 15px;
     padding: 2px;
     :global(.ant-anchor-link) {
