@@ -46,18 +46,18 @@
 .iconButton {
   &:global(.ant-btn) {
     font-size: 16px;
-    color: #8c8c8c;
-    background: #f5f5f5;
+    color: var(--antd-btn-special-icon-type-color);
+    background: var(--antd-btn-special-icon-type-bg);
     border: none;
 
     &:hover {
-      color: #0071eb;
-      background: #d8ecff;
+      color: var(--antd-btn-special-icon-type-hover-color);
+      background: var(--antd-btn-special-icon-type-hover-bg);
     }
 
     &[disabled] {
-      color: #bfbfbf;
-      background: #f5f5f5;
+      color: var(--antd-btn-special-icon-type-disabled-color);
+      background: var(--antd-btn-special-icon-type-disabled-bg);
     }
 
     :global(.anticon) {
@@ -85,19 +85,19 @@
 }
 
 .moreIconButton {
-  background: #f5f5f5;
-  color: #8c8c8c;
+  background: var(--antd-btn-special-icon-type-bg);
+  color: var(--antd-btn-special-icon-type-color);
   border: none;
   border-radius: 16px;
 
   &:hover {
-    color: #0071eb;
-    background: #d8ecff;
+    color: var(--antd-btn-special-icon-type-hover-color);
+    background: var(--antd-btn-special-icon-type-hover-bg);
   }
 
   &[disabled] {
-    color: #bfbfbf;
-    background: #f5f5f5;
+    color: var(--antd-btn-special-icon-type-disabled-color);
+    background: var(--antd-btn-special-icon-type-disabled-bg);
   }
 
   &:global(.ant-btn) {
@@ -124,7 +124,7 @@
 
 .dropdownMenuItem {
   &:hover {
-    background-color: #ecf6fd;
+    background-color: var(--app-bar-dropdown-menu-item-hover-bg);
   }
 }
 

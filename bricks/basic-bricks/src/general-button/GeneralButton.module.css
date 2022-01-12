@@ -1,6 +1,6 @@
 .fadedText {
   &:global(.ant-btn-text) {
-    color: #8c8c8c;
+    color: var(--antd-btn-fade-text-color);
   }
 }
 
