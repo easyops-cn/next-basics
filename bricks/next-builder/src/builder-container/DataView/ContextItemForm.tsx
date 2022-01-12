@@ -167,7 +167,7 @@ export function ContextItemForm({
         </Radio.Group>
       </Form.Item>
       {contextType === ContextType.VALUE ? (
-        <Form.Item {...getFormItemProps("name")}>
+        <Form.Item {...getFormItemProps("value")}>
           {getCodeEditorItem("value")}
         </Form.Item>
       ) : (
