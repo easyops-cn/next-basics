@@ -77,12 +77,6 @@ export function ProviderDoc({
       />
       <h2 style={{ marginTop: gap }}>{t(K.BASIC_INFO)}</h2>
       <dl className={styles.basicInfo}>
-        <dt>provider:</dt>
-        <dd>
-          <Typography.Paragraph copyable className={styles.paragraph}>
-            {providerName}
-          </Typography.Paragraph>
-        </dd>
         {docData.endpoint && (
           <>
             <dt>{t(K.ENDPOINT_METHOD)}</dt>
@@ -95,6 +89,12 @@ export function ProviderDoc({
             </dd>
           </>
         )}
+        <dt>provider:</dt>
+        <dd>
+          <Typography.Paragraph copyable className={styles.paragraph}>
+            {providerName}
+          </Typography.Paragraph>
+        </dd>
       </dl>
       <h2 style={{ marginTop: gap }}>{t(K.PARAMETERS)}</h2>
       {docData.parameters.length > 0 ? (
