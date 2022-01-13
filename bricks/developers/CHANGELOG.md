@@ -3,128 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.351.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.3...@next-bricks/developers@1.351.4) (2021-12-21)
+## [1.351.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.4...@next-bricks/developers@1.351.5) (2022-01-13)
 
+**Note:** Version bump only for package @next-bricks/developers
+
+## [1.351.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.3...@next-bricks/developers@1.351.4) (2021-12-21)
 
 ### Bug Fixes
 
-* ui modify ([4f408ef](https://github.com/easyops-cn/next-basics/commit/4f408ef1c7392d15d12d5e1515f3cd2ebfd839c1))
-
-
-
-
+- ui modify ([4f408ef](https://github.com/easyops-cn/next-basics/commit/4f408ef1c7392d15d12d5e1515f3cd2ebfd839c1))
 
 ## [1.351.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.2...@next-bricks/developers@1.351.3) (2021-12-20)
 
-
 ### Bug Fixes
 
-* ui style ([63c2ddd](https://github.com/easyops-cn/next-basics/commit/63c2dddfb859d403c6b54d2d8cbf4c1b6eb62ae3))
-
-
-
-
+- ui style ([63c2ddd](https://github.com/easyops-cn/next-basics/commit/63c2dddfb859d403c6b54d2d8cbf4c1b6eb62ae3))
 
 ## [1.351.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.1...@next-bricks/developers@1.351.2) (2021-12-20)
 
-
 ### Bug Fixes
 
-* doc refactor ([2779ffd](https://github.com/easyops-cn/next-basics/commit/2779ffd78095d8872e98f59d58a9ecbb13ae5dd8))
-
-
-
-
+- doc refactor ([2779ffd](https://github.com/easyops-cn/next-basics/commit/2779ffd78095d8872e98f59d58a9ecbb13ae5dd8))
 
 ## [1.351.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.0...@next-bricks/developers@1.351.1) (2021-12-19)
 
-
 ### Bug Fixes
 
-* developer doc support re-render ([b4fde21](https://github.com/easyops-cn/next-basics/commit/b4fde21e7de8f3a9f0c8a74cf25b92972b2ad1f1))
-* sytle refactor ([2c68e73](https://github.com/easyops-cn/next-basics/commit/2c68e73b64e6a611b70ef7771e80fb808550334d))
-
-
-
-
+- developer doc support re-render ([b4fde21](https://github.com/easyops-cn/next-basics/commit/b4fde21e7de8f3a9f0c8a74cf25b92972b2ad1f1))
+- sytle refactor ([2c68e73](https://github.com/easyops-cn/next-basics/commit/2c68e73b64e6a611b70ef7771e80fb808550334d))
 
 # [1.351.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.350.0...@next-bricks/developers@1.351.0) (2021-12-17)
 
-
 ### Bug Fixes
 
-* add description ([7e8f9f6](https://github.com/easyops-cn/next-basics/commit/7e8f9f692d35fd88e9023c794cb65489dcd7af5a))
-* fix style ([cc1d823](https://github.com/easyops-cn/next-basics/commit/cc1d82307f70527412ab0397dc196a2e39a6d1bf))
-* ui modify ([af4e713](https://github.com/easyops-cn/next-basics/commit/af4e713f8eec760a178f47afe0cdc549f22ab14d))
-
+- add description ([7e8f9f6](https://github.com/easyops-cn/next-basics/commit/7e8f9f692d35fd88e9023c794cb65489dcd7af5a))
+- fix style ([cc1d823](https://github.com/easyops-cn/next-basics/commit/cc1d82307f70527412ab0397dc196a2e39a6d1bf))
+- ui modify ([af4e713](https://github.com/easyops-cn/next-basics/commit/af4e713f8eec760a178f47afe0cdc549f22ab14d))
 
 ### Features
 
-* support request/response sample ([b22691e](https://github.com/easyops-cn/next-basics/commit/b22691e548a8a59b5e78123ae358f4d1299e64be))
-
-
-
-
+- support request/response sample ([b22691e](https://github.com/easyops-cn/next-basics/commit/b22691e548a8a59b5e78123ae358f4d1299e64be))
 
 # [1.350.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.349.1...@next-bricks/developers@1.350.0) (2021-12-14)
 
-
 ### Bug Fixes
 
-* develop doc refactor ([e8f3b3c](https://github.com/easyops-cn/next-basics/commit/e8f3b3c163181a9545486a348a3434855d433e61))
-
+- develop doc refactor ([e8f3b3c](https://github.com/easyops-cn/next-basics/commit/e8f3b3c163181a9545486a348a3434855d433e61))
 
 ### Features
 
-* add developer provider-v2 router ([4f6d044](https://github.com/easyops-cn/next-basics/commit/4f6d04461fa63c0da4c6875330054cc0b90d2182))
-
-
-
-
+- add developer provider-v2 router ([4f6d044](https://github.com/easyops-cn/next-basics/commit/4f6d04461fa63c0da4c6875330054cc0b90d2182))
 
 ## [1.349.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.349.0...@next-bricks/developers@1.349.1) (2021-11-25)
 
-
 ### Bug Fixes
 
-* replace the api to get the all brick package ([51f262b](https://github.com/easyops-cn/next-basics/commit/51f262b6c1d264dc639bca57cfdf647e8d5e623b))
-
-
-
-
+- replace the api to get the all brick package ([51f262b](https://github.com/easyops-cn/next-basics/commit/51f262b6c1d264dc639bca57cfdf647e8d5e623b))
 
 # [1.349.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.348.0...@next-bricks/developers@1.349.0) (2021-11-08)
 
-
 ### Features
 
-* **BrickPreview:** support checkoutTplContext ([f3d9fdb](https://github.com/easyops-cn/next-basics/commit/f3d9fdb3f55e0afc9f543198f189511c8a226e0d))
-
-
-
-
+- **BrickPreview:** support checkoutTplContext ([f3d9fdb](https://github.com/easyops-cn/next-basics/commit/f3d9fdb3f55e0afc9f543198f189511c8a226e0d))
 
 # [1.348.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.347.0...@next-bricks/developers@1.348.0) (2021-10-28)
 
-
 ### Features
 
-* stories json add local cache ([841f8ae](https://github.com/easyops-cn/next-basics/commit/841f8ae329f80891fd831e055410f1f0dab8d1b0))
-
-
-
-
+- stories json add local cache ([841f8ae](https://github.com/easyops-cn/next-basics/commit/841f8ae329f80891fd831e055410f1f0dab8d1b0))
 
 # [1.347.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.346.0...@next-bricks/developers@1.347.0) (2021-09-26)
 
-
 ### Features
 
-* update dependencies and yarn.lock ([410d132](https://github.com/easyops-cn/next-basics/commit/410d1329081c33cc5a571cf937f0b50eb56129b4))
-
-
-
-
+- update dependencies and yarn.lock ([410d132](https://github.com/easyops-cn/next-basics/commit/410d1329081c33cc5a571cf937f0b50eb56129b4))
 
 # [1.346.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.345.0...@next-bricks/developers@1.346.0) (2021-09-23)
 
