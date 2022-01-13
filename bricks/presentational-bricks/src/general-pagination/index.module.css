@@ -7,9 +7,9 @@
 }
 
 .totalText {
-  color: var(--text-color-disabled);
+  color: var(--antd-paination-total-text);
   .total {
     font-weight: normal;
-    color: var(--text-color-default);
+    color: var(--antd-pagination-total-strong-text);
   }
 }
