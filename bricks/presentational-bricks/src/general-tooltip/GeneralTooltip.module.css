@@ -7,13 +7,37 @@
 .iconContainer {
   position: relative;
   top: -1px;
-  color: #167be0;
+  color: var(--color-brand);
 }
 
 .iconContainer:hover {
-  color: #53a7fb;
+  color: var(--color-brand-hover);
 }
 
 .text {
   margin-right: 5px;
+}
+
+:global(.ant-tooltip-inner) {
+  border-radius: var(--larger-border-radius);
+  box-shadow: var(--feedback-container-shadow);
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-weight-400);
+}
+
+:global(.ant-popover-inner) {
+  background: var(--color-fill-bg-container-4);
+  border-radius: var(--larger-border-radius);
+  box-shadow: var(--feedback-container-shadow);
+
+  :global(.ant-tooltip-inner-content) {
+    font-size: var(--sub-title-font-size-small);
+    font-weight: var(--font-weight-400);
+  }
+}
+
+:global(.ant-popover-title) {
+  font-size: var(--sub-title-font-size);
+  font-weight: var(--font-weight-500);
+  color: var(--color-strong-text);
 }
