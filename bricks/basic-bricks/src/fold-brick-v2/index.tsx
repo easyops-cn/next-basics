@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { FoldBrickV2 } from "./FoldBrickV2";
 import style from "./style.shadow.less";
+import { uniqueId } from "lodash";
 
 /**
  * @id basic-bricks.fold-brick-v2
@@ -20,6 +21,7 @@ import style from "./style.shadow.less";
  * @noInheritDoc
  */
 export class FoldBrickV2Element extends UpdatingElement {
+  private _id = uniqueId("foldBrickButton");
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
 
@@ -136,7 +138,7 @@ export class FoldBrickV2Element extends UpdatingElement {
   listenToClick = (e: Event): void => {
     const paths = e.composedPath() as HTMLElement[];
     for (const path of paths) {
-      if (path.id === "foldBrickButton") {
+      if (path.id === this._id) {
         this.show = !this.show;
         this._render();
         break;
@@ -166,6 +168,7 @@ export class FoldBrickV2Element extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <FoldBrickV2
+            _id={this._id}
             foldName={this.foldName}
             foldStyle={this.foldStyle}
             show={this.show}

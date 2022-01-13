@@ -4,6 +4,7 @@ import { UpOutlined } from "@ant-design/icons";
 import { Divider } from "antd";
 
 interface FoldBrickV2Props {
+  _id: string;
   foldName: string;
   foldStyle?: Record<string, string>;
   show: boolean;
@@ -18,7 +19,7 @@ export function FoldBrickV2(props: FoldBrickV2Props): React.ReactElement {
   const fold = (
     <div
       style={props.foldStyle}
-      id="foldBrickButton"
+      id={props._id}
       className={classNames("foldContainer", {
         foldPrimaryActive: props.type === "primary",
       })}
