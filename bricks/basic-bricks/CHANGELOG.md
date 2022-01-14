@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.161.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.160.1...@next-bricks/basic-bricks@1.161.0) (2022-01-14)
+
+
+### Features
+
+* **Anchor:** add props: disabledJump, event: anchor.click/anchor.change ([996e3a1](https://github.com/easyops-cn/next-basics/commit/996e3a1be097780d261b1f9d41ed23887d630a8f))
+* **Anchor:** update unit test ([1258ec2](https://github.com/easyops-cn/next-basics/commit/1258ec2080b1b369b1a0ddbdf11e5030538a69fd))
+
+
+
+
+
 ## [1.160.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.160.0...@next-bricks/basic-bricks@1.160.1) (2022-01-13)
 
 ### Bug Fixes
