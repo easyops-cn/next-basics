@@ -114,7 +114,7 @@ describe("GeneralAnchor", () => {
     wrapper.find(Link).at(0).simulate("click");
 
     expect(handleChange).toBeCalled();
-    expect(result).toBe({
+    expect(result).toEqual({
       balabala: 123,
       href: "https://192.168.100.162/next/resource-monitor#saas-monitor",
       title: "应用资源",
