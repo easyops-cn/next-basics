@@ -10,4 +10,13 @@
 }
 :global(.ant-alert-message) {
   line-height: 22px;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-weight-400);
+  color: var(--color-normal-text);
+}
+
+:global(.ant-alert-description) {
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-weight-400);
+  color: var(--color-normal-text);
 }

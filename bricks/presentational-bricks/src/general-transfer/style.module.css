@@ -7,7 +7,9 @@
 }
 
 .footer {
-  color: rgb(191, 191, 191);
   text-align: right;
   padding: 10px;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-weight-400);
+  color: var(--color-secondary-text);
 }
