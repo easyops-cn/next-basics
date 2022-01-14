@@ -10,9 +10,21 @@ interface GeneralAnchorProps {
   anchorList: AnchorListType[];
   type?: "default" | "radio";
   extraBrick?: { useBrick: UseBrickConf };
+  handleClick?: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    arg: AnchorListType
+  ) => void;
+  handleChange?: (currentActiveLink: string) => void;
 }
 export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
-  const { anchorList, configProps, type, extraBrick } = props;
+  const {
+    anchorList,
+    configProps,
+    type,
+    extraBrick,
+    handleClick,
+    handleChange,
+  } = props;
   const { Link } = Anchor;
   const renderAnchorList = (
     anchorList: AnchorListType[],
@@ -20,11 +32,18 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
   ) => {
     return anchorList.map((item: AnchorListType, i: number) => {
       return (
-        <Link title={item.title} href={item.href} target={item.target} key={i}>
-          {type === "default" &&
-            item.children?.length &&
-            renderAnchorList(item.children, type)}
-        </Link>
+        <span key={i} onClick={(e) => handleClick(e, item)}>
+          <Link
+            title={item.title}
+            href={item.href}
+            target={item.target}
+            key={i}
+          >
+            {type === "default" &&
+              item.children?.length &&
+              renderAnchorList(item.children, type)}
+          </Link>
+        </span>
       );
     });
   };
@@ -37,6 +56,7 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
           [styles.anchorWrapper]: type !== "default",
         },
       ])}
+      onChange={handleChange}
     >
       {type === "default" ? (
         renderAnchorList(anchorList, type)
