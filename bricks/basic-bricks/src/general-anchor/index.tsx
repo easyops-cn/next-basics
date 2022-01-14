@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  property,
+  UpdatingElement,
+  event,
+  EventEmitter,
+} from "@next-core/brick-kit";
 import { GeneralAnchor } from "./GeneralAnchor";
 import { AnchorLinkProps, AnchorProps } from "antd";
 import { UseBrickConf } from "@next-core/brick-types";
@@ -63,6 +69,38 @@ export class GeneralAnchorElement extends UpdatingElement {
   @property({ attribute: false })
   extraBrick: { useBrick: UseBrickConf };
 
+  /**
+   * @default false
+   * @required false
+   * @description 禁用默认跳转事件
+   */
+  @property({ type: Boolean })
+  disabledJump: boolean;
+
+  /**
+   * @detail { title: string; href: string }
+   * @description 锚点点击事件
+   */
+  @event({ type: "anchor.click" })
+  anchorClick: EventEmitter<Record<string, any>>;
+  private _handleClick = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    item: AnchorListType
+  ): void => {
+    if (this.disabledJump) event.preventDefault();
+    this.anchorClick.emit(item);
+  };
+
+  /**
+   * @detail { title: string; href: string }
+   * @description 锚点点击事件
+   */
+  @event({ type: "anchor.change" })
+  anchorChange: EventEmitter<Record<string, any>>;
+  private _handleChange = (currentActiveLink: string): void => {
+    this.anchorChange.emit({ currentActiveLink });
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -86,6 +124,8 @@ export class GeneralAnchorElement extends UpdatingElement {
             configProps={this.configProps}
             type={this.type || "default"}
             extraBrick={this.extraBrick}
+            handleClick={this._handleClick}
+            handleChange={this._handleChange}
           />
         </BrickWrapper>,
         this
