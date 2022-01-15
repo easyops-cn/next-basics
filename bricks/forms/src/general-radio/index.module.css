@@ -125,12 +125,12 @@
     width: 1px;
     height: 19px;
     line-height: 19px;
-    background-color: var(--antd-border-color-base);
+    background-color: var(--antd-dashboard-radio-item-checked-border-color);
     transition: background-color 0.3s;
     content: "";
     transform: translateY(-50%);
   }
   :global(.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover)::before {
-    background-color: var(--antd-border-color-base);
+    background-color: var(--antd-dashboard-radio-item-checked-border-color);
   }
 }
