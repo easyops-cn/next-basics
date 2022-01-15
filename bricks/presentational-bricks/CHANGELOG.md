@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.235.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.234.1...@next-bricks/presentational-bricks@1.235.0) (2022-01-15)
+
+
+### Features
+
+* alert styles ([21457ef](https://github.com/easyops-cn/next-basics/commit/21457ef7c18453c21aefa0d5a241b6dd7389792e))
+* brick_next version change ([bf8c3e4](https://github.com/easyops-cn/next-basics/commit/bf8c3e47dfbcbc343a7ec6bd95b48463f31eda3b))
+* delete styles ([9b087d3](https://github.com/easyops-cn/next-basics/commit/9b087d36fff6357ee2dc70cbcccdf143c01aa761))
+* **presentational-bricks.brick-result:** result styles ([b75d118](https://github.com/easyops-cn/next-basics/commit/b75d118ddf7562590295e52eb21b14662080a39e))
+* **presentational-bricks.general-tooltip:** tooltip styles ([1cfadaf](https://github.com/easyops-cn/next-basics/commit/1cfadaf114cdf6b9f81a615ff9dfe2cadc6c4602))
+* **presentational-bricks.general-transfer:** transfer styles ([1429158](https://github.com/easyops-cn/next-basics/commit/14291587ab2520d714c5b5d72dfb6196d47f2206))
+* search styles ([241eecd](https://github.com/easyops-cn/next-basics/commit/241eecda8b10be4845afd0ed2720c1377cd7b487))
+* search styles ([65b6eea](https://github.com/easyops-cn/next-basics/commit/65b6eea2d27f71adcb131281fd3ea283c2540805))
+
+
+
+
+
 ## [1.234.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.234.0...@next-bricks/presentational-bricks@1.234.1) (2022-01-14)
 
 
