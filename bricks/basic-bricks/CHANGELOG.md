@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.162.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.162.0...@next-bricks/basic-bricks@1.162.1) (2022-01-17)
+
+
+### Bug Fixes
+
+* **general-anchor:** 修复点击事件多次触发 ([881b679](https://github.com/easyops-cn/next-basics/commit/881b679d2182337566883ce3b0e71e27e0449d25))
+
+
+
+
+
 # [1.162.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.161.0...@next-bricks/basic-bricks@1.162.0) (2022-01-17)
 
 
