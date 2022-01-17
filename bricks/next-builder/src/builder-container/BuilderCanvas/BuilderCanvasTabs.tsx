@@ -93,13 +93,13 @@ export function BuilderCanvasTabs(): React.ReactElement {
   );
 
   return (
-    <div
-      className={classNames(
-        styles.tabsOuterWrapper,
-        sharedStyles.customScrollbarContainer
-      )}
-    >
-      <div className={styles.tabsInnerWrapper}>
+    <div className={styles.tabsOuterWrapper}>
+      <div
+        className={classNames(
+          styles.tabsInnerWrapper,
+          sharedStyles.customScrollbarContainer
+        )}
+      >
         <ul className={styles.tabs}>{tabs}</ul>
       </div>
     </div>
