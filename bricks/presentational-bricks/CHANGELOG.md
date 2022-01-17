@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.236.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.235.0...@next-bricks/presentational-bricks@1.236.0) (2022-01-17)
+
+
+### Features
+
+* replace css variables ([9d2760c](https://github.com/easyops-cn/next-basics/commit/9d2760ca615eb4237f1daa6b1f13f61a5e805c51))
+
+
+
+
+
 # [1.235.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.234.1...@next-bricks/presentational-bricks@1.235.0) (2022-01-15)
 
 
