@@ -87,13 +87,16 @@ export class GeneralAnchorElement extends UpdatingElement {
     event: React.MouseEvent<HTMLElement, MouseEvent>,
     item: AnchorListType
   ): void => {
-    if (this.disabledJump) event.preventDefault();
+    event.stopPropagation();
+    if (this.disabledJump) {
+      event.preventDefault();
+    }
     this.anchorClick.emit(item);
   };
 
   /**
-   * @detail { title: string; href: string }
-   * @description 锚点点击事件
+   * @detail { currentActiveLink: string }
+   * @description 锚点改变事件
    */
   @event({ type: "anchor.change" })
   anchorChange: EventEmitter<Record<string, any>>;
