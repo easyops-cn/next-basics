@@ -207,52 +207,32 @@ export function GeneralDatePicker(
       disabledSeconds: () => disabledSeconds,
     };
   };
+  const isDatePicker = props.picker === "date";
+  const format = props.format || (isDatePicker ? "YYYY-MM-DD" : "gggg-ww周");
 
   return (
     <FormItemWrapper {...props}>
-      {props.picker === "date" ? (
-        <DatePicker
-          defaultValue={
-            props.name && props.formElement
-              ? undefined
-              : props.value && moment(props.value, props.format || "YYYY-MM-DD")
-          }
-          dropdownClassName={classNames({
-            [style.confirmDisabled]: confirmDisabled,
-          })}
-          format={props.format || "YYYY-MM-DD"}
-          showTime={props.showTime}
-          onChange={handleChange}
-          style={props.inputBoxStyle}
-          placeholder={props.placeholder}
-          onOk={handleOk}
-          suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
-          picker={props.picker}
-          disabledDate={disabledDate && handleDisabledDate}
-          disabledTime={disabledDate && handleDisabledTime}
-          disabled={disabled}
-        />
-      ) : (
-        <DatePicker
-          defaultValue={
-            props.name && props.formElement
-              ? undefined
-              : props.value && moment(props.value, props.format || "gggg-ww周")
-          }
-          dropdownClassName={classNames({
-            [style.confirmDisabled]: confirmDisabled,
-          })}
-          format={props.format || "gggg-ww周"}
-          onChange={handleChange}
-          style={props.inputBoxStyle}
-          placeholder={props.placeholder}
-          suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
-          picker={props.picker}
-          disabledDate={disabledDate && handleDisabledDate}
-          disabledTime={disabledDate && handleDisabledTime}
-          disabled={disabled}
-        />
-      )}
+      <DatePicker
+        defaultValue={
+          props.name && props.formElement
+            ? undefined
+            : props.value && moment(props.value, format)
+        }
+        dropdownClassName={classNames({
+          [style.confirmDisabled]: confirmDisabled,
+        })}
+        format={format}
+        showTime={isDatePicker ? props.showTime : undefined}
+        onChange={handleChange}
+        style={props.inputBoxStyle}
+        placeholder={props.placeholder}
+        onOk={isDatePicker ? handleOk : undefined}
+        suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
+        picker={props.picker}
+        disabledDate={disabledDate && handleDisabledDate}
+        disabledTime={disabledDate && handleDisabledTime}
+        disabled={disabled}
+      />
     </FormItemWrapper>
   );
 }
