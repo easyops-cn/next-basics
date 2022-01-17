@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Icon from "@ant-design/icons";
 import { DatePicker } from "antd";
 import moment, { Moment } from "moment";
@@ -8,17 +8,25 @@ import { DisabledDateType } from "../interfaces";
 import classNames from "classnames";
 import style from "./GeneralDatePicker.module.css";
 
-interface GeneralDatePickerProps extends FormItemWrapperProps {
+interface InternalStateDatePickerProps {
   placeholder?: string;
-  value?: string;
+  value?: Moment;
   showTime?: boolean;
   inputBoxStyle?: React.CSSProperties;
-  onChange?: (value: string) => void;
-  onOk?: (value: string) => void;
   format?: string;
   picker?: "date" | "week";
   disabledDate?: DisabledDateType;
   disabled?: boolean;
+  onChange?: (value: Moment | null, dateString: string) => void;
+  onOk?: (date: Moment) => void;
+}
+
+interface GeneralDatePickerProps
+  extends Omit<InternalStateDatePickerProps, "value" | "onChange" | "onOk">,
+    FormItemWrapperProps {
+  value?: string;
+  onChange?: (value: string) => void;
+  onOk?: (value: string) => void;
 }
 
 interface FieldSetAndRanges {
@@ -73,12 +81,22 @@ const getFieldsFromFieldSetAndRanges = (
   return [...new Set(fields)];
 };
 
-export function GeneralDatePicker(
-  props: GeneralDatePickerProps
+export function InternalStateDatePicker(
+  props: InternalStateDatePickerProps
 ): React.ReactElement {
-  const { disabledDate, disabled } = props;
+  const {
+    picker,
+    format,
+    showTime,
+    inputBoxStyle,
+    disabledDate,
+    placeholder,
+    disabled,
+    onChange,
+    onOk,
+  } = props;
+  const [value, setValue] = useState(props.value);
   const [confirmDisabled, setConfirmDisabled] = useState(false);
-
   const crontab = useMemo(() => {
     if (!disabledDate) {
       return;
@@ -115,13 +133,9 @@ export function GeneralDatePicker(
     });
   }, [disabledDate]);
 
-  const handleChange = (date: moment.Moment, dateString: string): void => {
-    props.onChange?.(dateString);
-  };
-
-  const handleOk = (date: moment.Moment): void => {
-    props.onOk?.(date?.format(props.format));
-  };
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
 
   const handleDisabledDate = (date: Moment): boolean => {
     const curYear = date.year();
@@ -207,31 +221,57 @@ export function GeneralDatePicker(
       disabledSeconds: () => disabledSeconds,
     };
   };
-  const isDatePicker = props.picker === "date";
+
+  const isDatePicker = picker === "date";
+
+  return (
+    <DatePicker
+      value={value}
+      dropdownClassName={classNames({
+        [style.confirmDisabled]: confirmDisabled,
+      })}
+      format={format}
+      showTime={isDatePicker ? showTime : undefined}
+      onChange={onChange}
+      style={inputBoxStyle}
+      placeholder={placeholder}
+      onOk={isDatePicker ? onOk : undefined}
+      suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
+      picker={picker}
+      disabledDate={disabledDate && handleDisabledDate}
+      disabledTime={disabledDate && handleDisabledTime}
+      disabled={disabled}
+      onPanelChange={(value) => {
+        setValue(value);
+      }}
+    />
+  );
+}
+
+export function GeneralDatePicker(
+  props: GeneralDatePickerProps
+): React.ReactElement {
+  const { name, formElement, value, picker, ...restProps } = props;
+  const isDatePicker = picker === "date";
   const format = props.format || (isDatePicker ? "YYYY-MM-DD" : "gggg-ww周");
+
+  const handleChange = (date: moment.Moment, dateString: string): void => {
+    props.onChange?.(dateString);
+  };
+
+  const handleOk = (date: moment.Moment): void => {
+    props.onOk?.(date?.format(props.format));
+  };
 
   return (
     <FormItemWrapper {...props}>
-      <DatePicker
-        defaultValue={
-          props.name && props.formElement
-            ? undefined
-            : props.value && moment(props.value, format)
-        }
-        dropdownClassName={classNames({
-          [style.confirmDisabled]: confirmDisabled,
-        })}
+      <InternalStateDatePicker
+        {...restProps}
+        value={name && formElement ? undefined : value && moment(value, format)}
         format={format}
-        showTime={isDatePicker ? props.showTime : undefined}
         onChange={handleChange}
-        style={props.inputBoxStyle}
-        placeholder={props.placeholder}
         onOk={isDatePicker ? handleOk : undefined}
-        suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
-        picker={props.picker}
-        disabledDate={disabledDate && handleDisabledDate}
-        disabledTime={disabledDate && handleDisabledTime}
-        disabled={disabled}
+        picker={picker}
       />
     </FormItemWrapper>
   );

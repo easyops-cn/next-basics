@@ -3,7 +3,10 @@ import { shallow, mount } from "enzyme";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { install, InstalledClock } from "lolex";
-import { GeneralDatePicker } from "./GeneralDatePicker";
+import {
+  GeneralDatePicker,
+  InternalStateDatePicker,
+} from "./GeneralDatePicker";
 
 describe("GeneralDatePicker", () => {
   let clock: InstalledClock;
@@ -31,14 +34,14 @@ describe("GeneralDatePicker", () => {
         picker={"date"}
       />
     );
-    wrapper.find(DatePicker).invoke("onChange")(
+    wrapper.find(InternalStateDatePicker).invoke("onChange")(
       moment("2020-01-01", "YYYY-MM-DD"),
       "2020-01-01"
     );
     await Promise.resolve();
     expect(handleChange).toBeCalledWith("2020-01-01");
 
-    wrapper.find(DatePicker).invoke("onOk")(moment("2020-02-01"));
+    wrapper.find(InternalStateDatePicker).invoke("onOk")(moment("2020-02-01"));
     expect(handleOk).toBeCalledWith("2020-02-01");
   });
 
@@ -47,7 +50,7 @@ describe("GeneralDatePicker", () => {
       <GeneralDatePicker value="2019-10-01" picker="date" />
     );
     expect(
-      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-MM-DD")
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-MM-DD")
     ).toBe("2019-10-01");
 
     wrapper.setProps({
@@ -55,7 +58,7 @@ describe("GeneralDatePicker", () => {
     });
     wrapper.update();
     expect(
-      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-MM-DD")
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-MM-DD")
     ).toBe("2020-01-01");
   });
   it("should update value week", () => {
@@ -63,7 +66,7 @@ describe("GeneralDatePicker", () => {
       <GeneralDatePicker value="2019-10周" picker="week" />
     );
     expect(
-      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-ww周")
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-ww周")
     ).toBe("2019-10周");
 
     wrapper.setProps({
@@ -71,7 +74,7 @@ describe("GeneralDatePicker", () => {
     });
     wrapper.update();
     expect(
-      wrapper.find(DatePicker).prop("defaultValue").format("YYYY-ww周")
+      wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-ww周")
     ).toBe("2020-20周");
   });
 
@@ -174,7 +177,7 @@ describe("GeneralDatePicker", () => {
       ).toHaveLength(0);
       expect(
         secondColumn.find(".ant-picker-time-panel-cell-disabled")
-      ).toHaveLength(10);
+      ).toHaveLength(16);
     });
 
     it("test confirmDisabled", () => {
