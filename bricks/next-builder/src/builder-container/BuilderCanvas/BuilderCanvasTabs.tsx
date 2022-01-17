@@ -13,6 +13,7 @@ import { useBuilderUIContext } from "../BuilderUIContext";
 import { K, NS_NEXT_BUILDER } from "../../i18n/constants";
 
 import styles from "./BuilderCanvasTabs.module.css";
+import sharedStyles from "../../shared/scrollbar.module.css";
 
 export function BuilderCanvasTabs(): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
@@ -92,8 +93,15 @@ export function BuilderCanvasTabs(): React.ReactElement {
   );
 
   return (
-    <div className={styles.builderCanvasTabsWrapper}>
-      <ul className={styles.builderCanvasTabs}>{tabs}</ul>
+    <div
+      className={classNames(
+        styles.tabsOuterWrapper,
+        sharedStyles.customScrollbarContainer
+      )}
+    >
+      <div className={styles.tabsInnerWrapper}>
+        <ul className={styles.tabs}>{tabs}</ul>
+      </div>
     </div>
   );
 }
