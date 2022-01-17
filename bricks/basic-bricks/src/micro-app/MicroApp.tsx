@@ -6,22 +6,39 @@ import { BtnExitDashboardMode } from "./BtnExitDashboardMode";
 import { getRuntime } from "@next-core/brick-kit";
 
 interface MicroAppProps {
+  pageTitle?: string;
+  pageTitleScale?: number;
   bannerPageTitle?: string;
   bannerStyle?: React.CSSProperties;
-  pageTitle?: string;
   noGap?: boolean;
   dashboardMode?: boolean;
 }
 
-export function MicroApp(props: MicroAppProps): React.ReactElement {
+export function MicroApp({
+  pageTitle,
+  pageTitleScale,
+  bannerPageTitle,
+  bannerStyle,
+  noGap,
+  dashboardMode,
+}: MicroAppProps): React.ReactElement {
   const { dashboard_mode_logo_url } = getRuntime().getBrandSettings();
+
+  const scale = (dashboardMode && pageTitleScale) || 1;
+  const pageTitleStyle: React.CSSProperties =
+    scale === 1
+      ? null
+      : {
+          height: 76 * scale,
+        };
+
   return (
     <>
-      <div className="banner-container" style={props.bannerStyle}>
+      <div className="banner-container" style={bannerStyle}>
         <div className="banner-header-container">
           <div className="banner-page-title">
-            {props.bannerPageTitle ? (
-              <PageTitle pageTitle={props.bannerPageTitle} />
+            {bannerPageTitle ? (
+              <PageTitle pageTitle={bannerPageTitle} />
             ) : (
               <slot id="bannerTitleBarSlot" name="bannerTitleBar" />
             )}
@@ -34,11 +51,12 @@ export function MicroApp(props: MicroAppProps): React.ReactElement {
       </div>
       <div className="micro-app-container">
         <div className="header-container">
-          <div className="page-title">
-            {props.pageTitle ? (
+          <div className="page-title" style={pageTitleStyle}>
+            {pageTitle ? (
               <PageTitle
-                pageTitle={props.pageTitle}
-                dashboardMode={props.dashboardMode}
+                pageTitle={pageTitle}
+                pageTitleScale={scale}
+                dashboardMode={dashboardMode}
               />
             ) : (
               <slot id="titleBarSlot" name="titleBar" />
@@ -47,7 +65,7 @@ export function MicroApp(props: MicroAppProps): React.ReactElement {
           <div className="toolbar">
             <slot id="toolbarSlot" name="toolbar" />
           </div>
-          {props.dashboardMode && (
+          {dashboardMode && (
             <>
               <div className="logo-in-dashboard-mode">
                 {dashboard_mode_logo_url ? (
@@ -67,7 +85,7 @@ export function MicroApp(props: MicroAppProps): React.ReactElement {
           <div className="content-container">
             <div
               className={classNames("content-grid", {
-                "no-gap": props.noGap,
+                "no-gap": noGap,
               })}
             >
               <slot id="contentSlot" name="content" />

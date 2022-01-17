@@ -29,4 +29,28 @@ describe("PageTitle", () => {
     });
     expect(wrapper.find(".page-title-content").prop("style").fontSize).toBe(38);
   });
+
+  it("should update page title scale", () => {
+    const wrapper = shallow(<PageTitle pageTitle="hello" dashboardMode />);
+    expect(wrapper.find(".page-title-before").prop("style")).toBe(null);
+    expect(wrapper.find(".page-title-content").prop("style").fontSize).toBe(38);
+    expect(
+      wrapper.find(".page-title-content").prop("style").backgroundSize
+    ).toBe(undefined);
+    expect(wrapper.find(".page-title-after").prop("style")).toBe(null);
+
+    wrapper.setProps({
+      pageTitleScale: 2,
+    });
+    expect(wrapper.find(".page-title-before").prop("style")).toEqual({
+      backgroundSize: "1036px 90px",
+    });
+    expect(wrapper.find(".page-title-content").prop("style")).toMatchObject({
+      fontSize: 76,
+      backgroundSize: "100% 90px",
+    });
+    expect(wrapper.find(".page-title-after").prop("style")).toEqual({
+      backgroundSize: "1036px 90px",
+    });
+  });
 });
