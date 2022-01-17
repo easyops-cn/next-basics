@@ -163,6 +163,15 @@ export class MicroViewElement extends UpdatingElement {
   hasBannerToolbar: boolean;
 
   /**
+   * @description 标题栏大小比例，默认为 1，仅用于暗黑大屏模式。
+   * @group advanced
+   */
+  @property({
+    type: Number,
+  })
+  pageTitleScale: number;
+
+  /**
    * @description 用户点击退出大屏模式时触发。
    */
   @event({
@@ -204,6 +213,7 @@ export class MicroViewElement extends UpdatingElement {
         <MicroApp
           noGap={this.noGap}
           pageTitle={this.pageTitle}
+          pageTitleScale={this.pageTitleScale}
           dashboardMode={this.dashboardMode}
           bannerPageTitle={this.bannerPageTitle}
           bannerStyle={this.bannerStyle}
@@ -225,9 +235,8 @@ export class MicroViewElement extends UpdatingElement {
           } else if (titleBarSlot) {
             this.hasTitleBar = this._checkSlotBySelector(titleBarSlotSelector);
             titleBarSlot.addEventListener("slotchange", () => {
-              this.hasTitleBar = this._checkSlotBySelector(
-                titleBarSlotSelector
-              );
+              this.hasTitleBar =
+                this._checkSlotBySelector(titleBarSlotSelector);
             });
           }
           const toolbarSlotSelector = "#toolbarSlot";

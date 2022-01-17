@@ -4,6 +4,7 @@ import { MicroApp } from "./MicroApp";
 import { BtnExitDashboardMode } from "./BtnExitDashboardMode";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { getRuntime } from "@next-core/brick-kit";
+import { PageTitle } from "../page-title/PageTitle";
 
 jest.mock("@next-core/brick-kit");
 const brandFn = jest.fn().mockReturnValue({});
@@ -50,5 +51,16 @@ describe("MicroApp", () => {
     expect(wrapper.find("#bannerTitleBarSlot").length).toBe(1);
     expect(wrapper.find("#bannerToolbarSlot").length).toBe(1);
     expect(wrapper.find(".banner-container").prop("style")).toBe(bannerStyle);
+  });
+
+  it("should work with page title scale", () => {
+    const wrapper = shallow(<MicroApp pageTitle="Hello" dashboardMode />);
+    expect(wrapper.find(".page-title").prop("style")).toBe(null);
+    expect(wrapper.find(PageTitle).prop("pageTitleScale")).toBe(1);
+    wrapper.setProps({
+      pageTitleScale: 2,
+    });
+    expect(wrapper.find(".page-title").prop("style")).toEqual({ height: 152 });
+    expect(wrapper.find(PageTitle).prop("pageTitleScale")).toBe(2);
   });
 });
