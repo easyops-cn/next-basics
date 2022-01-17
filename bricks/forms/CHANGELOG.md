@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.202.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.6...@next-bricks/forms@1.202.7) (2022-01-17)
+
+
+### Bug Fixes
+
+* **forms:** `time-range-picker`首次onChange，某些场景会有问题 ([2f40a1f](https://github.com/easyops-cn/next-basics/commit/2f40a1f5ff1da50f761d2ea939f92fd98256b8a8))
+
+
+
+
+
 ## [1.202.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.5...@next-bricks/forms@1.202.6) (2022-01-17)
 
 
