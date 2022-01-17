@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.162.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.161.0...@next-bricks/basic-bricks@1.162.0) (2022-01-17)
+
+
+### Features
+
+* add property of `page-title-scale` for micro-view/micro-app ([e053cac](https://github.com/easyops-cn/next-basics/commit/e053cacb9e34a5eb660e20f31cd995b91b665787))
+
+
+
+
+
 # [1.161.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.160.1...@next-bricks/basic-bricks@1.161.0) (2022-01-14)
 
 
