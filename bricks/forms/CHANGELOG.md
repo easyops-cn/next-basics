@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.202.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.5...@next-bricks/forms@1.202.6) (2022-01-17)
+
+
+### Bug Fixes
+
+* **general-date-picker:** fix value not update ([71ebe71](https://github.com/easyops-cn/next-basics/commit/71ebe71df1acf2deeea9ad09fc4fc4c6062b98b7))
+
+
+
+
+
 ## [1.202.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.4...@next-bricks/forms@1.202.5) (2022-01-17)
 
 
