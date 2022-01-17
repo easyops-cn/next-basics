@@ -1,9 +1,9 @@
 .searchBtn {
-  color: var(--color-normal-text);
+  color: var(--color-secondary-text);
   background-image: none;
   &:hover,
   &:focus {
-    color: var(--color-strong-text);
+    color: var(--color-normal-text);
   }
 }
 
