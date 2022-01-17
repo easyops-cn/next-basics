@@ -26,6 +26,7 @@ interface TimeRangePickerProps extends FormItemWrapperProps {
   format: string;
   rangeType?: RangeType;
   onChange?: (range: TimeRange) => void;
+  emitChangeOnInit?: boolean;
 }
 
 type RealTimeRangePickerProps = Omit<
@@ -76,7 +77,7 @@ export function RealTimeRangePicker(
   };
 
   React.useEffect(() => {
-    if (!props.value && props.onChange) {
+    if (props.emitChangeOnInit && !props.value && props.onChange) {
       rangeType === "time"
         ? props.onChange(INIT_TIME_RANGE)
         : props.onChange(initRange);
@@ -103,14 +104,14 @@ export function RealTimeRangePicker(
         onChange={onStartTimeChange}
         value={!isEmpty(props.value?.startTime) ? startTime : undefined}
         format={props.format}
-      ></TimePicker>
+      />
       <Input disabled value="~" style={{ width: 32 }} />
       <TimePicker
         {...{ id: uniqueId("end-time-") }}
         onChange={onEndTimeChange}
         value={!isEmpty(props.value?.endTime) ? endTime : undefined}
         format={props.format}
-      ></TimePicker>
+      />
     </Input.Group>
   );
 
@@ -181,6 +182,7 @@ export function TimeRangePicker(
         value={props.value}
         rangeType={props.rangeType}
         onChange={props.onChange}
+        emitChangeOnInit={props.emitChangeOnInit}
       />
     </FormItemWrapper>
   );

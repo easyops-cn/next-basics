@@ -67,6 +67,7 @@ describe("TimeRangePicker", () => {
           startTime: "2020-03-16 01:23:45",
           endTime: "2020-03-16 12:34:56",
         }}
+        emitChangeOnInit={true}
       />
     );
     expect(wrapper.find(DatePicker.RangePicker)).toHaveLength(1);
@@ -109,6 +110,7 @@ describe("TimeRangePicker", () => {
         format="YYYY-MM-DD HH:mm:ss"
         onChange={fn}
         value={null}
+        emitChangeOnInit={true}
       />
     );
     expect(wrapper.find(DatePicker.RangePicker)).toHaveLength(1);
@@ -123,7 +125,11 @@ describe("RefTimeRangePicker", () => {
   it("should work", () => {
     const changeFn = jest.fn();
     const wrapper = mount(
-      <RefTimeRangePicker format="HH:mm:ss" onChange={changeFn} />
+      <RefTimeRangePicker
+        format="HH:mm:ss"
+        onChange={changeFn}
+        emitChangeOnInit={true}
+      />
     );
     expect(wrapper.find(TimePicker)).toHaveLength(2);
     expect(changeFn).toBeCalled();

@@ -24,6 +24,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 * @history
 * 1.28.0:新增 `time.range.change` 事件
 * 1.59.0:新增 `rangeType` 属性
+ * 1.202.7 新增 `emitChangeOnInit`属性
 * @memo
 * ```typescript
 * export interface TimeRange {
@@ -78,6 +79,15 @@ export class TimeRangePickerElement extends FormItemElement {
    */
   @property()
   rangeType: RangeType;
+
+  /**
+   * @kind `boolean`
+   * @required false
+   * @default  true
+   * @description 是否在初始化完成后额外触发一次`time.range.change`, 这里因为历史原因之前默认行为就是在初始化后会触发该事件，这里为了兼容之前的行为，默认值只能设置为 true。
+   */
+  @property({ attribute: false })
+  emitChangeOnInit = true;
 
   unequal = (
     rule: any,
@@ -185,6 +195,7 @@ export class TimeRangePickerElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            emitChangeOnInit={this.emitChangeOnInit}
           />
         </BrickWrapper>,
         this
