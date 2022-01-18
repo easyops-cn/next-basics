@@ -53,7 +53,7 @@ export class NavBarElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <NavBar
-            menuItems={this.menu.menuItems}
+            menuItems={this.menu?.menuItems ?? []}
             selectedKeys={this.selectedKeys}
           />
         </BrickWrapper>,
