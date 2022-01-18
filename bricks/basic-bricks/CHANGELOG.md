@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.163.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.162.1...@next-bricks/basic-bricks@1.163.0) (2022-01-18)
+
+
+### Features
+
+* **appBar:** create bricks from app-bar ([#948](https://github.com/easyops-cn/next-basics/issues/948)) ([f61ee59](https://github.com/easyops-cn/next-basics/commit/f61ee596c7cbb9d7702ba74231693b00750b3ed5))
+
+
+
+
+
 ## [1.162.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.162.0...@next-bricks/basic-bricks@1.162.1) (2022-01-17)
 
 
