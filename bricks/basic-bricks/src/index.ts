@@ -37,3 +37,5 @@ import "./easy-view";
 import "./header-bar";
 import "./general-anchor";
 import "./general-title";
+import "./launchpad-button";
+import "./app-bar-breadcrumb";

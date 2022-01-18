@@ -6,7 +6,7 @@ import { useRecentApps, getRuntime, getHistory } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import styles from "./AppBarBreadcrumb.module.css";
 
-interface BasicBreadcrumbProps {
+export interface BasicBreadcrumbProps {
   breadcrumb?: BreadcrumbItemConf[];
   noCurrentApp?: boolean;
 }
