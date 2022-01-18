@@ -8,6 +8,7 @@ import styles from "./GeneralCheckbox.module.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
+import classNames from "classnames";
 
 export interface GeneralCheckboxProps extends FormItemWrapperProps {
   options?: CheckboxOptionType | IconCheckboxItem[];
@@ -19,6 +20,7 @@ export interface GeneralCheckboxProps extends FormItemWrapperProps {
   text?: string;
   disabled?: boolean;
   type?: CheckboxType;
+  isCustom?: boolean;
 }
 export interface IconCheckboxItem {
   icon?: MenuIcon;
@@ -31,10 +33,18 @@ export interface IconCheckboxProps {
   name: string;
   value?: any[];
   disabled?: boolean;
+  isCustom?: boolean;
   onChange?: (checkList: any[]) => void;
 }
 export function IconCheckbox(props: IconCheckboxProps) {
-  const { options, name, value = [], disabled = false, onChange } = props;
+  const {
+    options,
+    name,
+    value = [],
+    disabled = false,
+    onChange,
+    isCustom = false,
+  } = props;
   /**
    * 选中事件
    * @param value
@@ -55,8 +65,12 @@ export function IconCheckbox(props: IconCheckboxProps) {
           key={item.value}
           className={
             disabled || item?.disabled
-              ? styles.disabledIconCheckbox
-              : styles.iconCheckbox
+              ? classNames(styles.disabledIconCheckbox, {
+                  [styles.disabledIconCustomCheckbox]: isCustom,
+                })
+              : classNames(styles.iconCheckbox, {
+                  [styles.iconCustomCheckbox]: isCustom,
+                })
           }
         >
           <div className={styles.inputBox}>
@@ -76,7 +90,7 @@ export function IconCheckbox(props: IconCheckboxProps) {
             {item.icon && (
               <GeneralIcon
                 style={{
-                  fontSize: "32px",
+                  fontSize: isCustom ? "52px" : "32px",
                 }}
                 icon={item.icon}
               ></GeneralIcon>
@@ -244,6 +258,7 @@ export function GeneralCheckboxItem(
         options={options}
         name={props.name}
         value={value}
+        isCustom={props.isCustom}
         disabled={disabled}
         onChange={onChange}
       />

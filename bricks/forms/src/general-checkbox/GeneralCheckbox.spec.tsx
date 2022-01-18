@@ -137,6 +137,7 @@ describe("GeneralCheckbox", () => {
     } as CheckboxChangeEvent);
     expect(handleChange).toBeCalledWith(onChangeChecked);
   });
+
   it("should type as icon checkbox", async () => {
     const handleChange = jest.fn();
     const wrapper = mount(
@@ -173,6 +174,55 @@ describe("GeneralCheckbox", () => {
         onChange={handleChange}
         type="icon"
       />
+    );
+    expect(wrapper.find('input[id="area-chart"]').simulate("change"));
+    expect(wrapper.find('input[id="bar-chart"]').simulate("change"));
+    wrapper.find(IconCheckbox).invoke("onChange")(["pie-chart", "bar-chart"]);
+    await (global as any).flushPromises();
+    expect(handleChange).toBeCalledWith(["pie-chart", "bar-chart"]);
+  });
+
+  it("should isCustom as true with type as icon checkbox", async () => {
+    const handleChange = jest.fn();
+    const wrapper = mount(
+      <GeneralCheckbox
+        options={[
+          {
+            icon: {
+              icon: "area-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "area-chart",
+          },
+          {
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "bar-chart",
+          },
+          {
+            icon: {
+              icon: "pie-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "pie-chart",
+            disabled: true,
+          },
+        ]}
+        isCustom={true}
+        name="icon"
+        value={["pie-chart", "bar-chart"]}
+        onChange={handleChange}
+        type="icon"
+      />
+    );
+    expect(wrapper.find(".iconCustomCheckbox").length).not.toBe(0);
+    expect(wrapper.find(".iconCustomCheckbox").length).toBeGreaterThanOrEqual(
+      1
     );
     expect(wrapper.find('input[id="area-chart"]').simulate("change"));
     expect(wrapper.find('input[id="bar-chart"]').simulate("change"));
