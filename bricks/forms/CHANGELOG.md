@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.203.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.7...@next-bricks/forms@1.203.0) (2022-01-19)
+
+
+### Features
+
+* delete styles ([b37ffe4](https://github.com/easyops-cn/next-basics/commit/b37ffe4829c1c50109a81dd7fd51235317b1eab2))
+* **forms.general-checkbox:** 在type为icon模式下优化样式，新增自定义样式 ([bf154ed](https://github.com/easyops-cn/next-basics/commit/bf154eddc7b9bf3075f78169ea8e870bcea86c2e))
+
+
+
+
+
 ## [1.202.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.202.6...@next-bricks/forms@1.202.7) (2022-01-17)
 
 
