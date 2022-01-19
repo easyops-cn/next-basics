@@ -29,7 +29,15 @@
   cursor: pointer;
 }
 
-.disabledIconCheckbox {
+.iconCustomCheckbox,
+.disabledIconCustomCheckbox {
+  width: 232px;
+  height: 142px;
+  margin: 0 15px 20px 0;
+}
+
+.disabledIconCheckbox,
+.disabledIconCustomCheckbox {
   cursor: not-allowed;
 }
 
@@ -46,6 +54,10 @@
 .content .text {
   font-size: 14px;
   color: #595959;
+}
+
+.iconCustomCheckbox .text {
+  margin-top: 8px;
 }
 
 .inputBox {
@@ -66,5 +78,13 @@
 }
 
 .iconCheckbox:hover input[type="checkbox"]::before {
+  border: 1px solid #65b2ff;
+}
+
+.iconCustomCheckbox:hover input[type="checkbox"]::before {
+  border: 1px solid #d9d9d9;
+}
+
+.iconCustomCheckbox input[type="checkbox"]:checked::before {
   border: 1px solid #65b2ff;
 }

@@ -170,6 +170,16 @@ export class GeneralCheckboxElement extends FormItemElement {
   disabled: boolean;
 
   /**
+   * @default false
+   * @required false
+   * @description 在icon模式下的优化样式，增加一种自定义样式，需设置 `type` 为 `icon` 才生效
+   */
+  @property({
+    type: Boolean,
+  })
+  isCustom: boolean;
+
+  /**
    * @detail `any[] | boolean`
    * @description 复选框变化时触发，`event.detail` 为当前选中的值列表
    */
@@ -218,6 +228,7 @@ export class GeneralCheckboxElement extends FormItemElement {
             text={this.text}
             disabled={this.disabled}
             type={this.type}
+            isCustom={this.isCustom}
           />
         </BrickWrapper>,
         this
