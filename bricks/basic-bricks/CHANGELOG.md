@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.164.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.163.0...@next-bricks/basic-bricks@1.164.0) (2022-01-19)
+
+
+### Features
+
+* **basic-bricks:** drawer支持打开抽屉自动滚动到顶部 ([31d2973](https://github.com/easyops-cn/next-basics/commit/31d2973392f24f9a89986efda435c5fcd24584fa))
+
+
+
+
+
 # [1.163.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.162.1...@next-bricks/basic-bricks@1.163.0) (2022-01-18)
 
 
