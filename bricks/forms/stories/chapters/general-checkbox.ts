@@ -188,7 +188,7 @@ export const GeneralCheckboxStory: Story = {
               theme: "outlined",
             },
             label: "area-chart",
-            value: "area-chart",
+            value: "area-chart-1",
           },
           {
             icon: {
@@ -197,7 +197,7 @@ export const GeneralCheckboxStory: Story = {
               theme: "outlined",
             },
             label: "bar-chart",
-            value: "bar-chart",
+            value: "bar-chart-1",
           },
           {
             icon: {
@@ -207,10 +207,10 @@ export const GeneralCheckboxStory: Story = {
             },
             disabled: true,
             label: "pie-chart",
-            value: "pie-chart",
+            value: "pie-chart-1",
           },
         ],
-        value: ["area-chart", "pie-chart"],
+        value: ["area-chart-1", "pie-chart-1"],
       },
       events: {
         "general.checkbox.change": {
