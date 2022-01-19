@@ -183,8 +183,8 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @description 打开抽屉时内容区是否自动滚动到顶部
    * @group basic
    */
-  @property({ type: Boolean })
-  scrollToTopWhenOpen: boolean;
+  @property({ attribute: false })
+  scrollToTopWhenOpen = true;
 
   constructor() {
     super();
