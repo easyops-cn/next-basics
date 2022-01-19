@@ -56,16 +56,8 @@
   color: #595959;
 }
 
-.content .icon {
-  font-size: 32px;
-}
-
 .iconCustomCheckbox .text {
   margin-top: 8px;
-}
-
-.iconCustomCheckbox .icon {
-  font-size: 52px;
 }
 
 .inputBox {
