@@ -2,6 +2,9 @@ import React from "react";
 import { mount } from "enzyme";
 import { GeneralDrawer } from "./GeneralDrawer";
 
+const spyOnScrollTo = jest.fn();
+window.HTMLElement.prototype.scrollTo = spyOnScrollTo;
+
 describe("GeneralModal", () => {
   it("should work", () => {
     const wrapper = mount(<GeneralDrawer visible={true} />);
@@ -47,5 +50,20 @@ describe("GeneralModal", () => {
     });
     wrapper.update();
     expect(wrapper.find(".bigOuterBtn").length).toBe(1);
+  });
+
+  it("scrollToTopWhenOpen should work", () => {
+    const wrapper = mount(
+      <GeneralDrawer visible={false} scrollToTopWhenOpen={true} />
+    );
+    expect(spyOnScrollTo).not.toBeCalled();
+    wrapper.setProps({
+      visible: true,
+    });
+    wrapper.update();
+    expect(spyOnScrollTo).toBeCalled();
+    expect(
+      spyOnScrollTo.mock.instances[0].classList.contains("ant-drawer-body")
+    ).toBe(true);
   });
 });

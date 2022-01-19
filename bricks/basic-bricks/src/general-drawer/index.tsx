@@ -49,7 +49,6 @@ export interface ICustomSwitchConfig {
 * | noEvent  | `boolean` | -        | -       | 不触发事件  |
  * @noInheritDoc
  */
-
 export class GeneralDrawerElement extends UpdatingElement {
   private _mountPoint: HTMLElement;
   private isVisible = false;
@@ -177,6 +176,16 @@ export class GeneralDrawerElement extends UpdatingElement {
   useBigOuterSwitch: boolean;
   customSwitchConfig: ICustomSwitchConfig;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 打开抽屉时内容区是否自动滚动到顶部
+   * @group basic
+   */
+  @property({ type: Boolean })
+  scrollToTopWhenOpen: boolean;
+
   constructor() {
     super();
 
@@ -288,6 +297,7 @@ export class GeneralDrawerElement extends UpdatingElement {
             hasOuterSwitch={this.hasOuterSwitch}
             useBigOuterSwitch={this.useBigOuterSwitch}
             customSwitchConfig={this.customSwitchConfig}
+            scrollToTopWhenOpen={this.scrollToTopWhenOpen}
           />
         </BrickWrapper>,
         this._mountPoint

@@ -1,9 +1,7 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { useRef, useEffect } from "react";
 import { Drawer, Spin } from "antd";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { NS_BASIC_BRICKS, K } from "../i18n/constants";
 import { DrawerProps } from "antd/lib/drawer";
 import { ICustomSwitchConfig } from "./index";
 interface GeneralDrawerProps {
@@ -23,10 +21,27 @@ interface GeneralDrawerProps {
   hasOuterSwitch?: boolean;
   useBigOuterSwitch?: boolean;
   customSwitchConfig?: ICustomSwitchConfig;
+  scrollToTopWhenOpen?: boolean;
 }
 
 export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
-  const { t } = useTranslation(NS_BASIC_BRICKS);
+  const { scrollToTopWhenOpen } = props;
+
+  const contentRef = useRef<HTMLDivElement>();
+
+  const findDrawerBody = (ele: HTMLElement): HTMLElement => {
+    if (ele) {
+      if (ele.classList.contains("ant-drawer-body")) return ele;
+      return findDrawerBody(ele.parentElement);
+    }
+  };
+
+  useEffect(() => {
+    scrollToTopWhenOpen &&
+      props.visible &&
+      findDrawerBody(contentRef.current)?.scrollTo(0, 0);
+  }, [props.visible]);
+
   const title = (
     <div className="header">
       {props.title ? (
@@ -41,23 +56,15 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       </div>
     </div>
   );
-  const [maxContentHeight, setMaxContentHeight] = React.useState<number>();
 
-  React.useEffect(() => {
-    if (props.hasFooter) {
-      const normalHeaderHeight = 64;
-      const drawerContentPadding = 24;
-      const manualFix = 4;
-      let height =
-        window.innerHeight -
-        normalHeaderHeight -
-        drawerContentPadding -
-        manualFix;
-      const normalFooterHeight = 64;
-      height -= normalFooterHeight;
-      setMaxContentHeight(height);
-    }
-  }, [props.hasFooter]);
+  const footer = props.hasFooter && (
+    <div className="footer">
+      <div className="footer-inner">
+        <slot id="footer" name="footer"></slot>
+      </div>
+    </div>
+  );
+
   const classNameList = [];
   if (props.isFloat) {
     classNameList.push("floatDrawer");
@@ -71,6 +78,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
     classNameList.push("switch");
   }
 
+  // istanbul ignore next
   const getOuterSwitchNode = () => {
     if (!props.useBigOuterSwitch) {
       const outerIcon = props.visible
@@ -98,6 +106,7 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
       <Drawer
         {...props.configProps}
         title={title}
+        footer={footer}
         width={props.width}
         visible={props.visible}
         getContainer={props.getContainer}
@@ -126,17 +135,10 @@ export function GeneralDrawer(props: GeneralDrawerProps): React.ReactElement {
           </div>
         )}
         <Spin spinning={props.loading} tip="Loading...">
-          <div className="content" style={{ maxHeight: maxContentHeight }}>
+          <div className="content" ref={contentRef}>
             <slot id="content" name="content"></slot>
           </div>
         </Spin>
-        {props.hasFooter && (
-          <div className="footer">
-            <div className="footer-inner">
-              <slot id="footer" name="footer"></slot>
-            </div>
-          </div>
-        )}
       </Drawer>
     </>
   );
