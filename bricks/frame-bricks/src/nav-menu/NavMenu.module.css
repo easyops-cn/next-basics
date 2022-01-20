@@ -1,4 +1,6 @@
-.navBarContainer {
+.navMenuContainer {
+  border-bottom: none;
+  line-height: 32px;
   :global(.ant-menu-submenu-horizontal) {
     color: #000000;
     margin: 0 4px !important;

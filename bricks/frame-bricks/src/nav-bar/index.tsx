@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
+import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
 import { NavBar } from "./NavBar";
-import { SidebarSubMenu } from "@next-core/brick-types";
+import styles from "./NavBar.shadow.css";
 
 /**
  * @id frame-bricks.nav-bar
@@ -13,26 +13,18 @@ import { SidebarSubMenu } from "@next-core/brick-types";
  * @noInheritDoc
  */
 export class NavBarElement extends UpdatingElement {
-  /**
-   * @kind SidebarSubMenu
-   * @required false
-   * @default -
-   * @description 菜单项
-   */
-  @property({
-    attribute: false,
-  })
-  menu: SidebarSubMenu;
+  private _mountPoint: HTMLElement;
 
-  /**
-   * @default
-   * @required false
-   * @description 选择菜单
-   */
-  @property({
-    attribute: false,
-  })
-  selectedKeys: string[];
+  constructor() {
+    super();
+
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    const styleElement = document.createElement("style");
+    styleElement.textContent = styles;
+    shadowRoot.appendChild(styleElement);
+    this._mountPoint = document.createElement("div");
+    shadowRoot.appendChild(this._mountPoint);
+  }
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -52,12 +44,9 @@ export class NavBarElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <NavBar
-            menuItems={this.menu?.menuItems ?? []}
-            selectedKeys={this.selectedKeys}
-          />
+          <NavBar />
         </BrickWrapper>,
-        this
+        this._mountPoint
       );
     }
   }
