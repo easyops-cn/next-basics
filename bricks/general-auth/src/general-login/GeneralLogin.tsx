@@ -192,6 +192,7 @@ export class LegacyGeneralLogin extends React.Component<
       username: result.username,
       userInstanceId: result.userInstanceId,
       accessRule: result.accessRule,
+      isAdmin: result.isAdmin,
     });
     const { state } = getHistory().location;
     const from =
