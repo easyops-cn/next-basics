@@ -1,13 +1,14 @@
 .awards {
   display: inline-block;
   font-family: "Roboto", sans-serif;
-  font-size: 19px;
-  font-weight: 500;
+  font-size: var(--card-title-font-size);
+  font-weight: var(--font-weight-500);
   width: 38px;
   height: 38px;
+  line-height: 30px;
   min-width: 38px;
   border-radius: 100%;
-  color: white;
+  color: var(--color-normal-icon);
   text-align: center;
   vertical-align: middle;
   position: relative;
@@ -15,7 +16,7 @@
   border-style: solid;
   z-index: 1;
   span {
-    font-size: 11px;
+    font-size: var(--sub-title-font-size-small);
   }
 }
 
@@ -37,30 +38,30 @@
 }
 
 .medalGold {
-  text-shadow: 0 0 4px #9d6c04;
-  background: linear-gradient(151deg, #ffb6a6 0%, #f53832 100%);
-  border-color: #fe3f4980;
-  overflow: hidden;
+  background-image: var(--rank-table-medal-gold-background-image);
+  border-color: var(--rank-table-medal-gold-border-color);
+  text-shadow: var(--rank-table-medal-gold-text-shadow);
   background-clip: content-box;
 }
 
 .medalSilver {
-  border-color: #fe782e80;
-  text-shadow: 0px 0px 4px #98a6ad;
-  background: linear-gradient(151deg, #fbdb6f 0%, #f67915 100%);
+  background-image: var(--rank-table-medal-silver-background-image);
+  border-color: var(--rank-table-medal-silver-border-color);
+  text-shadow: var(--rank-table-medal-silver-text-shadow);
   background-clip: content-box;
 }
+
 .medalBronze {
-  border-color: #ffd10180;
-  text-shadow: 0 0 4px #7d4604;
-  background: linear-gradient(151deg, #fbf644 0%, #feba1c 100%);
+  background-image: var(--rank-table-medal-bronze-background-image);
+  border-color: var(--rank-table-medal-bronze-border-color);
+  text-shadow: var(--rank-table-medal-bronze-text-shadow);
   background-clip: content-box;
 }
 
 .normalAwards {
-  background: #ebf3fd;
+  background: var(--color-info-bg);
   color: #5685eb;
-  border-color: #ebf3fd;
+  border-color: var(--color-info-bg);
 }
 
 .header {
@@ -75,9 +76,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 17px;
-    font-weight: bold;
-    color: #262626;
+    font-size: var(--card-title-font-size);
+    font-weight: var(--font-weight-500);
+    color: var(--color-normal-text);
   }
   .rightCell {
     font-size: 17px;

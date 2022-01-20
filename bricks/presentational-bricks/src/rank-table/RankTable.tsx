@@ -1,7 +1,5 @@
 import { Card, Table } from "antd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { NS_PRESENTATIONAL_BRICKS } from "../i18n/constants";
 import { isNil, toPath } from "lodash";
 import styles from "./RankTable.module.css";
 import { CustomColumn } from "../brick-table";
