@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.204.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.203.2...@next-bricks/forms@1.204.0) (2022-01-20)
+
+
+### Bug Fixes
+
+* checkbox refine ([9398722](https://github.com/easyops-cn/next-basics/commit/93987220a7bedec3ed9ee0e465ea4144a41fa034))
+* time range style ([acc7fe2](https://github.com/easyops-cn/next-basics/commit/acc7fe2651770ba52c3aee38edc5aea2dfbc8af3))
+
+
+### Features
+
+* fix modal style ([706bb3f](https://github.com/easyops-cn/next-basics/commit/706bb3ffd896b752987827fafa88aecaef64a4c0))
+
+
+
+
+
 ## [1.203.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.203.1...@next-bricks/forms@1.203.2) (2022-01-19)
 
 **Note:** Version bump only for package @next-bricks/forms

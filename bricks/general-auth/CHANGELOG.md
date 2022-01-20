@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.13.0...@next-bricks/general-auth@1.13.1) (2022-01-20)
+
+
+### Bug Fixes
+
+* fix admin role ([a97cc07](https://github.com/easyops-cn/next-basics/commit/a97cc072d2beb002811ccc5653ce8ef22eede1e0))
+
+
+
+
+
 # [1.13.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.12.5...@next-bricks/general-auth@1.13.0) (2021-12-14)
 
 

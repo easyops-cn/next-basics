@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.165.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.164.0...@next-bricks/basic-bricks@1.165.0) (2022-01-20)
+
+
+### Bug Fixes
+
+* checkbox refine ([9398722](https://github.com/easyops-cn/next-basics/commit/93987220a7bedec3ed9ee0e465ea4144a41fa034))
+* support dark theme ([fa29409](https://github.com/easyops-cn/next-basics/commit/fa294096037c670df93bb1de74e7069f699b1625))
+
+
+### Features
+
+* fix modal style ([706bb3f](https://github.com/easyops-cn/next-basics/commit/706bb3ffd896b752987827fafa88aecaef64a4c0))
+
+
+
+
+
 # [1.164.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.163.0...@next-bricks/basic-bricks@1.164.0) (2022-01-19)
 
 

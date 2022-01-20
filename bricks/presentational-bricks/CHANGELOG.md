@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.236.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.236.1...@next-bricks/presentational-bricks@1.236.2) (2022-01-20)
+
+
+### Bug Fixes
+
+* fix header color of rank-table ([1913d84](https://github.com/easyops-cn/next-basics/commit/1913d8401858a16eef783384a7eb5bf902829362))
+* support dark theme ([0066863](https://github.com/easyops-cn/next-basics/commit/006686389aa93e2b900c6159c121e62253b0c445))
+* support dark theme ([23ae96f](https://github.com/easyops-cn/next-basics/commit/23ae96f5748cc65915901f259186e131692ebd81))
+* support dark theme in brick-quick-entries ([ac7876e](https://github.com/easyops-cn/next-basics/commit/ac7876ec20aa9917bc3ef29733738d09f0fe620f))
+* use css variables ([d64b451](https://github.com/easyops-cn/next-basics/commit/d64b451ccfcb7994903fdcdb6d6a4e2c5e5df118))
+
+
+
+
+
 ## [1.236.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.236.0...@next-bricks/presentational-bricks@1.236.1) (2022-01-19)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
