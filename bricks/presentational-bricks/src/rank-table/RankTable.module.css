@@ -78,11 +78,11 @@
     gap: 10px;
     font-size: var(--card-title-font-size);
     font-weight: var(--font-weight-500);
-    color: var(--color-normal-text);
+    color: var(--color-header-text);
   }
   .rightCell {
     font-size: 17px;
-    color: #262626;
+    color: var(--color-header-text);
   }
 }
 
