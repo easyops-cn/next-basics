@@ -1,8 +1,7 @@
 import React from "react";
-import { omit, isEmpty } from "lodash";
-
+import { isEmpty } from "lodash";
 import { getHistory, BrickAsComponent } from "@next-core/brick-kit";
-import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
+import { UseBrickConf } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Tooltip } from "antd";
 import { LinkProps, TitleConfig } from "./index";
