@@ -105,7 +105,11 @@ export function RealTimeRangePicker(
         value={!isEmpty(props.value?.startTime) ? startTime : undefined}
         format={props.format}
       />
-      <Input disabled value="~" style={{ width: 32 }} />
+      <Input
+        disabled
+        value="~"
+        style={{ width: 32, background: "var(--input-fill-bg)" }}
+      />
       <TimePicker
         {...{ id: uniqueId("end-time-") }}
         onChange={onEndTimeChange}
