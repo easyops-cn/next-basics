@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styles from "./GeneralTitle.module.css";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
 import { Link } from "@next-libs/basic-components";
+
 interface GeneralTitleProps {
   mainTitle: string;
   subTitle?: string;
@@ -14,6 +15,7 @@ interface GeneralTitleProps {
   dataSource?: Record<string, any>;
   descSuffixBrick?: { useBrick: UseBrickConf };
 }
+
 export function GeneralTitle(props: GeneralTitleProps): React.ReactElement {
   const {
     mainTitle,

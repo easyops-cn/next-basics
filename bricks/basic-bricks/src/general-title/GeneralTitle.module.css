@@ -1,16 +1,16 @@
 .titleWrapper {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--sub-title-font-size);
+  font-weight: var(--font-weight-500);
   display: flex;
   align-items: center;
 }
 .titleWrapper .titleContent,
 .titleWrapper .titleContentUrl {
   margin: 0 5px 2px 0;
-  color: #262626;
+  color: var(--color-header-text);
 }
 .titleWrapper .titleContentUrl:hover {
-  color: #0071eb;
+  color: var(--text-color-link);
   cursor: pointer;
 }
 .titleWrapper .titleContent,
@@ -24,13 +24,13 @@
 }
 .descriptionWrapper {
   display: flex;
-  font-size: 12px;
+  font-size: var(--auxiliary-font-size-small);
   align-items: center;
 }
 
 .descriptionWrapper .descriptionContent {
   margin-top: 2px;
-  color: #8c8c8c;
+  color: var(--color-secondary-text);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
