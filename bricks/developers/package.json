@@ -22,7 +22,7 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
   "devDependencies": {
-    "@next-libs/basic-components": "^3.2.5",
+    "@next-libs/basic-components": "^3.2.6",
     "@next-libs/clipboard": "^3.0.2",
     "@next-sdk/api-gateway-sdk": "^2.0.17",
     "change-case": "^4.1.2",
