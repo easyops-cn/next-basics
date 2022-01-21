@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
 import { NavBar } from "./NavBar";
+import styles from "./NavBar.shadow.css";
 
 /**
  * @id frame-bricks.nav-bar
@@ -12,6 +13,19 @@ import { NavBar } from "./NavBar";
  * @noInheritDoc
  */
 export class NavBarElement extends UpdatingElement {
+  private _mountPoint: HTMLElement;
+
+  constructor() {
+    super();
+
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    const styleElement = document.createElement("style");
+    styleElement.textContent = styles;
+    shadowRoot.appendChild(styleElement);
+    this._mountPoint = document.createElement("div");
+    shadowRoot.appendChild(this._mountPoint);
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -32,7 +46,7 @@ export class NavBarElement extends UpdatingElement {
         <BrickWrapper>
           <NavBar />
         </BrickWrapper>,
-        this
+        this._mountPoint
       );
     }
   }

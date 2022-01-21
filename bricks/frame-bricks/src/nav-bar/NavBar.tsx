@@ -1,10 +1,25 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
-import styles from "./NavBar.module.css";
-import { useTranslation } from "react-i18next";
-import { NS_FRAME_BRICKS, K } from "../i18n/constants";
 
 export function NavBar(): React.ReactElement {
-  const { t } = useTranslation(NS_FRAME_BRICKS);
-
-  return <div className={styles.navBarContainer}>nav-bar works!</div>;
+  return (
+    <div className="nav-bar">
+      <div className="left-content">
+        <div className="nav-logo">
+          <slot id="logo" name="logo" />
+        </div>
+        <div className="nav-menu">
+          <slot id="menu" name="menu" />
+        </div>
+      </div>
+      <div className="right-content">
+        <div className="nav-buttons">
+          <slot id="buttons" name="buttons" />
+        </div>
+        <div className="nav-avator">
+          <slot id="avator" name="avator" />
+        </div>
+      </div>
+    </div>
+  );
 }

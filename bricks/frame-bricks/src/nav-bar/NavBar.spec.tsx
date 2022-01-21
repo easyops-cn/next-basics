@@ -5,5 +5,7 @@ import { NavBar } from "./NavBar";
 describe("NavBar", () => {
   it("should work", () => {
     const wrapper = shallow(<NavBar />);
+
+    expect(wrapper).toMatchSnapshot();
   });
 });

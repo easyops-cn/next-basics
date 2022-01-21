@@ -1,8 +1,0 @@
-.navBarContainer {
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  height: var(--nav-bar-height);
-  background: var(--tag-yellow-background);
-}
