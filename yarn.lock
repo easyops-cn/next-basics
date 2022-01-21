@@ -2480,16 +2480,16 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.2.tgz#0062beedab56666f22a2f7a6f811635179730e64"
   integrity sha512-NTal//gM/X/pE6NFUDOxlsspUaPS20k8JyOejwf1CtJRochoRjlo+nkkkQCp8sNmVGqt4N4bRk0nW8APmeBAnA==
 
-"@next-libs/cmdb-instances@^6.15.0":
-  version "6.15.0"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.15.0.tgz#28089a4bdbaf0dd006645479e2c88b6f00844391"
-  integrity sha512-M665b8IHsJ6m5OoiAP2BStAHDi2hwtUlbhpSsqGkShaTY+Zu6DNNacWLfzWC2mpt3IH/8NQLS2vCNLF2j6ZHWA==
+"@next-libs/cmdb-instances@^6.18.4":
+  version "6.18.4"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.18.4.tgz#e0d44065a27893d3383980292dd066b933af2769"
+  integrity sha512-zSSrXsXl6WnGtJ+eLa3mCyGPzKUvU7FIKi0Tuv23AJDcbrdlANoOl3H6V1bisY1qrRtcJOE95hhse/uMCp2jug==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
     "@next-libs/basic-components" "^3.2.5"
     "@next-libs/cmdb-utils" "^3.0.3"
-    "@next-libs/code-editor-components" "^4.0.12"
-    "@next-libs/forms" "^3.2.7"
+    "@next-libs/code-editor-components" "^4.0.14"
+    "@next-libs/forms" "^3.2.9"
     "@next-libs/storage" "^2.0.2"
     "@next-sdk/cmdb-sdk" "^2.1.13"
     "@next-sdk/permission-sdk" "^2.1.1"
@@ -2530,6 +2530,18 @@
     classnames "^2.3.1"
     file-saver "^2.0.5"
 
+"@next-libs/code-editor-components@^4.0.14":
+  version "4.0.14"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.0.14.tgz#df1e761c4d7ddcb59a4c9d36c676925bd1527f01"
+  integrity sha512-78r3X37co/EP1V53Tnk8XWM6Y6R0RvxtcX9qNitY3OGXOzVxO9gr7aV3hpIcsqLoXQ6T6ktEgcgZr21Ok/67ng==
+  dependencies:
+    "@next-libs/basic-components" "^3.2.5"
+    "@next-libs/clipboard" "^3.0.2"
+    "@next-libs/forms" "^3.2.9"
+    ajv "^6.12.6"
+    classnames "^2.3.1"
+    file-saver "^2.0.5"
+
 "@next-libs/crontab@^2.0.3":
   version "2.0.3"
   resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-2.0.3.tgz#1bacccb7cd8295515d1f1e0675560b743bece118"
@@ -2551,6 +2563,11 @@
   version "3.2.7"
   resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.7.tgz#d0cd8d0d4de9dc01f64368fa9f64020ef6bf2ed2"
   integrity sha512-MZLw91vD7d1psBVpW17V1eId4bLULNLHXoNlCl9gWz/ufpjoEdGAFCfdTEr/Kex0nZcboITyVPcgrZqTXvqeCw==
+
+"@next-libs/forms@^3.2.9":
+  version "3.2.9"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.9.tgz#2ad8ff0091c13038920459583723290001d2c7d8"
+  integrity sha512-CIGecnUBQYgC3fyY0l2sa2rwmluSMPcl2vIX3NTpTApzWKgqJ07sorpRN+XJzGcVG17o50sVmtNFUX74+Y3fBQ==
 
 "@next-libs/storage@^2.0.2":
   version "2.0.2"
