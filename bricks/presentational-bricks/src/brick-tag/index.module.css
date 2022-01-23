@@ -3,12 +3,16 @@
 
   .closableTag:not(.disabledTag) {
     &:hover {
-      background-color: var(--stroke-color-default);
+      background-color: var(--antd-tag-closable-hover-bg);
     }
   }
 
-  .closableTag.disabledTag > span:global(.ant-tag-close-icon) {
-    display: none;
+  .closableTag.disabledTag {
+    color: var(--atnd-tag-closable-disabled-color);
+    background-color: var(--antd-tag-closable-disabled-bg) !important;
+    > span:global(.ant-tag-close-icon) {
+      display: none;
+    }
   }
 
   .round {
