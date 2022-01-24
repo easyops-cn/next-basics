@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.166.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.165.1...@next-bricks/basic-bricks@1.166.0) (2022-01-24)
+
+
+### Features
+
+* support customized log-out when auth guard is ignored ([97eabe3](https://github.com/easyops-cn/next-basics/commit/97eabe334fe575e46d1b192bbdec90a308a56050))
+
+
+
+
+
 ## [1.165.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.165.0...@next-bricks/basic-bricks@1.165.1) (2022-01-21)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
