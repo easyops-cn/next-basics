@@ -1,0 +1,12 @@
+.timeRange {
+  .timeRangeSplit {
+    background: var(--input-fill-bg);
+    pointer-events: none;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  :global(.ant-picker):first-child {
+    margin-right: 0;
+  }
+}
