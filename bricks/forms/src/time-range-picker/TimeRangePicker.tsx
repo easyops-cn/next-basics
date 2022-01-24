@@ -8,6 +8,7 @@ import { RangeValue } from "rc-picker/lib/interface";
 import moment from "moment";
 import { NS_FORMS, K } from "../i18n/constants";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
+import styles from "./TimeRangePicker.module.css";
 
 export interface TimeRange {
   startTime: string;
@@ -98,7 +99,7 @@ export function RealTimeRangePicker(
   }, [props.value]);
 
   const timeRange = (
-    <Input.Group compact>
+    <Input.Group compact className={styles.timeRange}>
       <TimePicker
         {...{ id: uniqueId("start-time-") }}
         onChange={onStartTimeChange}
@@ -107,8 +108,11 @@ export function RealTimeRangePicker(
       />
       <Input
         disabled
+        className={styles.timeRangeSplit}
         value="~"
-        style={{ width: 32, background: "var(--input-fill-bg)" }}
+        style={{
+          width: 32,
+        }}
       />
       <TimePicker
         {...{ id: uniqueId("end-time-") }}
