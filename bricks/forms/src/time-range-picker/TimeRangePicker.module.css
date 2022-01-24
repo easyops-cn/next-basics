@@ -1,5 +1,6 @@
 .timeRange {
   .timeRangeSplit {
+    width: 32px !important;
     background: var(--input-fill-bg);
     pointer-events: none;
     border-left: 0;
