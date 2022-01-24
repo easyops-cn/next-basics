@@ -48,6 +48,7 @@ const getMicroApps = jest
     },
   ]);
 
+const getMiscSettings = jest.fn().mockReturnValue({});
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: () => ({
     base_title: "DevOps 管理专家",
@@ -55,6 +56,7 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
 
   getFeatureFlags,
   getMicroApps,
+  getMiscSettings,
 } as any);
 
 delete window.location;
@@ -65,6 +67,7 @@ window.location = {
 describe("AppBar", () => {
   afterEach(() => {
     document.title = "";
+    window.NO_AUTH_GUARD = false;
   });
 
   it("should render default avatar", () => {
@@ -218,5 +221,22 @@ describe("AppBar", () => {
     const dropdown = wrapper.find(Dropdown);
     const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
     expect(submenu.find('[data-testid="menu-item-logout"]').length).toBe(1);
+  });
+
+  it("should show customized logout when auth guard is ignored", async () => {
+    window.NO_AUTH_GUARD = true;
+    getMiscSettings.mockReturnValueOnce({
+      customizedLogOut: "/my-logout",
+    });
+    const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
+    expect(wrapper.find(".actionsContainer").find(Link).prop("to")).toBe(
+      "/my-logout"
+    );
+  });
+
+  it("should show no customized logout when auth guard is ignored", async () => {
+    window.NO_AUTH_GUARD = true;
+    const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
+    expect(wrapper.find(".actionsContainer").find(Link).length).toBe(0);
   });
 });

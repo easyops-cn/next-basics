@@ -52,6 +52,6 @@ declare module "*.worker.ts" {
 }
 
 interface Window {
-  /** The public root, E.g. "hello-world/-/" */
-  PUBLIC_ROOT?: string;
+  /** The app needs no auth guard.  */
+  NO_AUTH_GUARD?: boolean;
 }

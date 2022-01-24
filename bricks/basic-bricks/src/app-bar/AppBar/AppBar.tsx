@@ -57,6 +57,13 @@ export function AppBar({
     []
   );
 
+  const getCustomizedLogOutLink = React.useCallback(() => {
+    const { customizedLogOut } = getRuntime().getMiscSettings();
+    return customizedLogOut ? (
+      <Link to={customizedLogOut}>{t(K.LOGOUT)}</Link>
+    ) : null;
+  }, [t]);
+
   const currentLang = i18next.language?.split("-")[0];
 
   React.useEffect(() => {
@@ -161,7 +168,9 @@ export function AppBar({
       <div className={styles.actionsContainer}>
         <AppDocumentLink documentId={documentId} />
         <div>
-          {username ? (
+          {window.NO_AUTH_GUARD ? (
+            getCustomizedLogOutLink()
+          ) : username ? (
             <Dropdown
               overlay={
                 <Menu>
