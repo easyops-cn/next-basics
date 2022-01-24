@@ -8,7 +8,7 @@
   }
 
   .closableTag.disabledTag {
-    color: var(--atnd-tag-closable-disabled-color);
+    color: var(--antd-tag-closable-disabled-color);
     background-color: var(--antd-tag-closable-disabled-bg) !important;
     > span:global(.ant-tag-close-icon) {
       display: none;
