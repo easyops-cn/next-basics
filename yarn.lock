@@ -2480,16 +2480,16 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.2.tgz#0062beedab56666f22a2f7a6f811635179730e64"
   integrity sha512-NTal//gM/X/pE6NFUDOxlsspUaPS20k8JyOejwf1CtJRochoRjlo+nkkkQCp8sNmVGqt4N4bRk0nW8APmeBAnA==
 
-"@next-libs/cmdb-instances@^6.18.5":
-  version "6.18.5"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.18.5.tgz#d73d81559b88821c7dac6097ec6754a902f06698"
-  integrity sha512-fU/tq2kAKQtdjhkd6AwEFSywlNJZoVX9ODgWG8ETEa6Up65PGjayRwvhbW75AI8iK8E13H9PeiUh5unFi1xwfA==
+"@next-libs/cmdb-instances@^6.18.7":
+  version "6.18.7"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.18.7.tgz#e54659fee9b651ca9e2858a3125df838fc372526"
+  integrity sha512-WpOXnPGK5R/oypYdS2YxkKHWMvRtRJptxKADZ78OMEPIYUNgg4MGX114Zciq4ejEK2QOk5mB6E4HpimChAJZpw==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
     "@next-libs/basic-components" "^3.2.6"
     "@next-libs/cmdb-utils" "^3.0.3"
-    "@next-libs/code-editor-components" "^4.0.15"
-    "@next-libs/forms" "^3.2.10"
+    "@next-libs/code-editor-components" "^4.0.16"
+    "@next-libs/forms" "^3.2.11"
     "@next-libs/storage" "^2.0.2"
     "@next-sdk/cmdb-sdk" "^2.1.13"
     "@next-sdk/permission-sdk" "^2.1.1"
@@ -2518,14 +2518,14 @@
     prismjs "^1.23.0"
     resize-observer-polyfill "^1.5.1"
 
-"@next-libs/code-editor-components@^4.0.15":
-  version "4.0.15"
-  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.0.15.tgz#79b266a303d3eca7e2a14a0c43ef884a245056f9"
-  integrity sha512-h49V0dQiMTbJSKLQuHzfgZ25EAc2hJziseyiwR89sewYYUGvwYb/OoJvxlpsiBJyKQTSGXvatksFAch4s1KJew==
+"@next-libs/code-editor-components@^4.0.16":
+  version "4.0.16"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.0.16.tgz#dd7f47e3c102db53995a583084184a97db931df9"
+  integrity sha512-/VQK/khjFeOSv5ee05kfgt6xvegs6iCifMzGFp+rDciY1wKO11p6oMVxIlgTcpJcjp3m4vXOfI3zNocjtf4e2Q==
   dependencies:
     "@next-libs/basic-components" "^3.2.6"
     "@next-libs/clipboard" "^3.0.2"
-    "@next-libs/forms" "^3.2.10"
+    "@next-libs/forms" "^3.2.11"
     ajv "^6.12.6"
     classnames "^2.3.1"
     file-saver "^2.0.5"
@@ -2547,10 +2547,10 @@
   resolved "https://registry.npmjs.org/@next-libs/datetime/-/datetime-2.0.2.tgz#e7635ca102ea6a0e9859ca07a7815807896b69ea"
   integrity sha512-poJSo2iWVDa5rTTFUygBHFi1qtTPPz2FR16XZgyIyq3NfQ2wNNJvoh/USmm9wfGQm375zM5O2B2WkpgLxW63EQ==
 
-"@next-libs/forms@^3.2.10":
-  version "3.2.10"
-  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.10.tgz#bb9c0dece6422ed2d8746d48cc5d5515fff58889"
-  integrity sha512-wGJsUfDrnlln2a2LBsTHknNE2S/yqcdTiLDDVokX6ElkpmWwR5Y5YNqsyxa+aLTNF9zobcfLSJNdys787/JbTg==
+"@next-libs/forms@^3.2.11":
+  version "3.2.11"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.11.tgz#ea90164a562df435f09c4e088fe388bff8f3def0"
+  integrity sha512-fU3ebpXKbhgD9RkHT+KUUiHM8IPqBCtmuVjOpt5IDGWf08nLJeHNm8gnB8PK4+sb5aq/iPPA8KIefgsz5O/yhA==
 
 "@next-libs/storage@^2.0.2":
   version "2.0.2"
