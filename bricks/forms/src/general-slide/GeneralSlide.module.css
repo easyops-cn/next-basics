@@ -46,7 +46,7 @@
   }
 
   :global(.ant-slider-track) {
-    background-color: var(--atnd-slide-dashboard-track-background-color);
+    background-color: var(--antd-slide-dashboard-track-background-color);
     opacity: 0.2;
   }
 
