@@ -39,7 +39,7 @@ html[data-theme="dark"] {
   }
 
   :global(.ant-table-small .ant-table-thead) {
-    background: #f2f5f9;
+    background: var(--antd-table-header-bg);
   }
 
   :global(.ant-table-small .ant-table-row) {
