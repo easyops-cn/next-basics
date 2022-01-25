@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.205.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.204.4...@next-bricks/forms@1.205.0) (2022-01-25)
+
+
+### Bug Fixes
+
+* refine style ([6f568f7](https://github.com/easyops-cn/next-basics/commit/6f568f709d29e2630854476dbb739c8ff4719134))
+* refine style ([0ef94bc](https://github.com/easyops-cn/next-basics/commit/0ef94bc3a711a7dd16439960bb79f5b4054a75bc))
+
+
+### Features
+
+* **forms:** add method getFieldsValue ([775e76a](https://github.com/easyops-cn/next-basics/commit/775e76a2fc1cca522cab0d7273f3796b4cb8b136))
+
+
+
+
+
 ## [1.204.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.204.3...@next-bricks/forms@1.204.4) (2022-01-24)
 
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.3.0...@next-bricks/frame-bricks@0.4.0) (2022-01-25)
+
+
+### Features
+
+* Nav支持主题样式，sidebar加入移入移出事件 ([0e889a6](https://github.com/easyops-cn/next-basics/commit/0e889a6f1f889a4e62f945a4ab07ef72ec8c022e))
+* update unit test ([cf8b08f](https://github.com/easyops-cn/next-basics/commit/cf8b08faa09e2338a6cbe353a6a431ff6fd09b69))
+* update unit test ([7f5b009](https://github.com/easyops-cn/next-basics/commit/7f5b009d272d07e96ef6e0a6438ad9eec04ebac3))
+
+
+
+
+
 # [0.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.2.0...@next-bricks/frame-bricks@0.3.0) (2022-01-21)
 
 
