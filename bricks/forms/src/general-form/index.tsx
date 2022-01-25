@@ -513,6 +513,19 @@ export class GeneralFormElement
     });
   }
   /**
+   * @description 获取表单值
+   */
+  @method() getFieldsValue(): Record<string, any> {
+    const values = this.formUtils.getFieldsValue();
+    const formatValues = this.formatFormValues(values);
+    this.childNodes.forEach((node: any) => {
+      if (node.nodeName === "FORMS.GENERAL-STRUCTS-FORM-ITEM") {
+        formatValues[node.name] = node.value;
+      }
+    });
+    return formatValues;
+  }
+  /**
    * @description 表单验证成功时触发
    */
   @event({ type: "validate.success" }) successEvent: EventEmitter<
