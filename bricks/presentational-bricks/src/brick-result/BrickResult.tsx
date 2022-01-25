@@ -4,6 +4,8 @@ import { Result } from "antd";
 import { ResultStatusType } from "antd/lib/result";
 import { EmptyResult, EmptyResultStatus } from "@next-libs/basic-components";
 import { getIllustration } from "@next-core/illustrations";
+import { useCurrentTheme } from "@next-core/brick-kit";
+
 export enum BrickResultStatus {
   Success = "success",
   Error = "error",
@@ -35,10 +37,11 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
   } = props;
   const icon = props.icon ? <LegacyIcon type={props.icon} /> : "";
   const emptyResultStatus = Object.values(EmptyResultStatus);
+  const theme = useCurrentTheme();
 
   const image = React.useMemo(() => {
-    return getIllustration({ name, category });
-  }, [name, category]);
+    return getIllustration({ name, category, theme });
+  }, [name, category, theme]);
 
   return emptyResultStatus.includes(props.status as EmptyResultStatus) ? (
     <Result
