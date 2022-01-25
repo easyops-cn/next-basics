@@ -70,16 +70,42 @@ describe("SideBar", () => {
   });
 
   it("should work when first used", () => {
+    const mouseEnter = jest.fn();
+    const mouseLeave = jest.fn();
     const wrapper = shallow(
-      <SideBar menu={menuData1} expandedState={ExpandedState.Expanded} />
+      <SideBar
+        menu={menuData1}
+        onMouseEnter={mouseEnter}
+        onMouseLeave={mouseLeave}
+      />
     );
     expect(
       wrapper.find(Tooltip).prop("color").startsWith("linear-gradient")
     ).toBe(true);
+
+    wrapper.simulate("mouseenter");
+    expect(mouseEnter).toBeCalledTimes(1);
+    wrapper.simulate("mouseleave");
+    expect(mouseLeave).toBeCalledTimes(1);
+
+    wrapper.simulate("mouseenter");
+    expect(mouseEnter).toBeCalledTimes(2);
+
     wrapper.find(".fixedIcon").simulate("click");
     expect(
       wrapper.find(Tooltip).prop("color").startsWith("linear-gradient")
     ).not.toBe(true);
+
+    wrapper.simulate("mouseleave");
+    expect(mouseLeave).toBeCalledTimes(1);
+
+    wrapper.simulate("mouseenter");
+    expect(mouseEnter).toBeCalledTimes(3);
+
+    wrapper.find(".fixedIcon").simulate("click");
+
+    wrapper.simulate("mouseleave");
+    expect(mouseLeave).toBeCalledTimes(2);
   });
 
   it("should work with no props", () => {
