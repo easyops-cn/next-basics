@@ -2,7 +2,7 @@
   border-bottom: none;
   line-height: 32px;
   :global(.ant-menu-submenu-horizontal) {
-    color: #000000;
+    color: var(--antd-text-color);
     margin: 0 4px !important;
 
     :global(.ant-menu-submenu-title .anticon) {
@@ -19,10 +19,10 @@
         top: -2px;
         right: 4px;
         transition: none;
-        color: #bfbfbf;
+        color: var(--antd-text-color);
       }
       :global(.ant-menu-submenu-arrow) {
-        color: #bfbfbf;
+        color: var(--antd-text-color);
 
         &::before,
         &::after {
@@ -46,6 +46,7 @@
     &:global(.ant-menu-submenu-selected),
     &:global(.ant-menu-submenu-active) {
       border-bottom: none !important;
+      top: 0 !important;
     }
 
     /* subMenu-title hover样式 */
@@ -61,32 +62,34 @@
         right: 4px;
       }
       > span {
+        text-shadow: 0px 0px 1px black;
         background-color: rgba(245, 245, 245, 1) !important;
         color: rgba(38, 38, 38, 1) !important;
-        font-weight: 400 !important;
+        /* font-weight: 400 !important; */
       }
     }
 
     /* subMenu展开时subMenu-title样式 */
     &:global(.ant-menu-submenu-open .ant-menu-submenu-title) {
-      font-weight: 500;
+      text-shadow: 0px 0px 1px black;
     }
 
     /* subMenu子项被选中时subMenu-title样式 */
     &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
-      color: #000;
+      color: var(--antd-text-color);
       > span {
+        text-shadow: 0px 0px 0.5px black;
         background-color: rgba(0, 0, 0, 0.04);
-        font-weight: 700;
         padding: 4px 16px 4px 8px;
       }
     }
   }
   /* menu-item 样式 */
   > :global(.ant-menu-item) {
-    color: #000;
+    color: var(--antd-text-color);
     border-bottom: none !important;
     margin: 0 4px !important;
+    top: 0;
     > a {
       padding: 4px 8px;
       border-radius: 4px;
@@ -94,47 +97,55 @@
 
     &:global(.ant-menu-item-selected) {
       a {
+        text-shadow: 0px 0px 0.5px black;
         background-color: rgba(245, 245, 245, 1) !important;
         color: rgba(38, 38, 38, 1) !important;
-        font-weight: 500 !important;
       }
       border-bottom: none !important;
     }
 
     &:global(:not(.ant-menu-item-selected):hover) {
       a {
+        text-shadow: 0px 0px 0.5px black;
         background-color: rgba(245, 245, 245, 1) !important;
         color: rgba(38, 38, 38, 1) !important;
-        font-weight: 700 !important;
       }
       border-bottom: none !important;
     }
   }
 }
 
+/* 下拉弹窗样式 */
 .popupWrapper {
   :global(.ant-menu) {
     :global(.ant-menu-submenu-title) {
       padding: 0px 4px 0px 14px;
       margin: 0 2px;
       font-size: 14px;
-      color: #595959;
+      color: var(--antd-text-color);
       line-height: 14px;
     }
 
     :global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       > span {
-        color: #595959 !important;
-        font-weight: 400 !important;
+        text-shadow: 0px 0px 1px black;
+        color: var(--antd-text-color) !important;
       }
     }
 
     :global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
       > span {
-        font-weight: 500 !important;
+        text-shadow: 0px 0px 0.5px black;
+        color: var(--antd-text-color);
       }
     }
   }
+
+  :global(.ant-menu-item-group-list) {
+    margin: 0 4px;
+  }
+
+  /* 子菜单项样式 */
   .subMenuWrapper {
     margin: 2px 0;
     height: 28px;
@@ -143,10 +154,10 @@
       padding: 0px 24px 0px 14px;
       margin: 2px;
       font-size: 14px;
-      color: #595959;
+      color: var(--antd-text-color);
       line-height: 28px;
       height: 28px;
-      border-radius: 6px;
+      border-radius: var(--card-default-border-radius);
     }
 
     :global(.ant-menu-submenu-arrow) {
@@ -157,11 +168,11 @@
       color: inherit;
       background-color: rgba(245, 245, 245, 1) !important;
       > span {
+        text-shadow: 0px 0px 1px black;
         color: rgba(38, 38, 38, 1) !important;
-        font-weight: 500 !important;
       }
       :global(.ant-menu-submenu-arrow) {
-        color: #595959;
+        color: rgba(38, 38, 38, 1) !important;
       }
     }
 
@@ -169,20 +180,22 @@
       color: inherit;
       background-color: rgba(245, 245, 245, 1) !important;
       > span {
+        text-shadow: 0px 0px 0.5px black;
         color: rgba(38, 38, 38, 1) !important;
-        font-weight: 500 !important;
       }
       :global(.ant-menu-submenu-arrow) {
-        color: #595959;
+        color: rgba(38, 38, 38, 1) !important;
       }
     }
   }
 
+  /* 菜单组样式 */
   .groupWrapper {
     :global(.ant-menu-item-group-title) {
       color: inherit;
       background-color: inherit;
       > span {
+        /* text-shadow: 0px 0px 1px black; */
         color: #bfbfbf !important;
         font-weight: 400 !important;
         font-size: 12px;
@@ -192,14 +205,16 @@
     }
   }
 
+  /* 菜单子项样式 */
   .simpleMenuItem {
     padding: 0px 4px 0px 14px;
-    margin: 4px 0px;
+    margin: 4px !important;
     height: 28px;
     line-height: 28px;
+    border-radius: var(--card-default-border-radius);
     span {
       font-size: 14px;
-      color: #595959;
+      color: var(--antd-text-color);
       line-height: 14px;
       margin: 0 2px;
     }
@@ -213,14 +228,16 @@
     color: inherit;
     background-color: rgba(245, 245, 245, 1) !important;
     span {
+      text-shadow: 0px 0px 1px black;
       color: rgba(38, 38, 38, 1) !important;
-      font-weight: 500 !important;
     }
   }
 
   :global(.ant-menu-item-selected) {
+    text-shadow: 0px 0px 0.5px black;
     background-color: rgba(245, 245, 245, 1) !important;
-    color: rgba(38, 38, 38, 1) !important;
-    font-weight: 500 !important;
+    span {
+      color: rgba(38, 38, 38, 1);
+    }
   }
 }
