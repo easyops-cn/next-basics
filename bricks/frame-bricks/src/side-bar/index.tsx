@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  property,
+  UpdatingElement,
+  event,
+  EventEmitter,
+} from "@next-core/brick-kit";
 import { ExpandedState, SideBar } from "./SideBar";
 import { SidebarSubMenu } from "@next-core/brick-types";
 
@@ -35,6 +41,26 @@ export class SideBarElement extends UpdatingElement {
   })
   expandedState: ExpandedState = ExpandedState.Collapsed;
 
+  /**
+   * @detail
+   * @description
+   */
+  @event({ type: "side.bar.enter" })
+  _handleMouseEnter: EventEmitter<Record<string, any>>;
+  handleMouseEnter = () => {
+    this._handleMouseEnter.emit();
+  };
+
+  /**
+   * @detail
+   * @description
+   */
+  @event({ type: "side.bar.leave" })
+  _handleMouseLeave: EventEmitter<Record<string, any>>;
+  handleMouseLeave = () => {
+    this._handleMouseLeave.emit();
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -53,7 +79,12 @@ export class SideBarElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <SideBar menu={this.menu} expandedState={this.expandedState} />
+          <SideBar
+            menu={this.menu}
+            expandedState={this.expandedState}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+          />
         </BrickWrapper>,
         this
       );

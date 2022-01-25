@@ -13,6 +13,8 @@ import { JsonStorage } from "@next-libs/storage";
 interface SideBarProps {
   menu?: SidebarSubMenu;
   expandedState?: ExpandedState;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 export enum ExpandedState {
@@ -24,7 +26,7 @@ export enum ExpandedState {
 export const SIDE_BAR_HAS_BEEN_USED = "side-bar-has-been-used";
 
 export function SideBar(props: SideBarProps): React.ReactElement {
-  const { menu } = props;
+  const { menu, onMouseEnter, onMouseLeave } = props;
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
   const [expandedState, setExpandedState] = useState<ExpandedState>(
     props.expandedState || ExpandedState.Collapsed
@@ -51,6 +53,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         ? expandedState
         : ExpandedState.Hovered
     );
+    onMouseEnter && onMouseEnter();
   };
 
   const handleMouseLeave = (): void => {
@@ -59,6 +62,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         ? expandedState
         : ExpandedState.Collapsed
     );
+    expandedState !== ExpandedState.Expanded && onMouseLeave && onMouseLeave();
   };
 
   return menu ? (
