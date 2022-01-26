@@ -445,4 +445,69 @@ describe("Mount DesktopSlider", () => {
 
     expect(launchpadService.pushVisitor).toBeCalled();
   });
+
+  it("query custom item should work", () => {
+    const desktops: DesktopData[] = [
+      {
+        items: [
+          {
+            type: "app",
+            id: "hello",
+          },
+          {
+            type: "dir",
+            id: "work",
+            name: "wow",
+            items: [
+              {
+                type: "app",
+                id: "haha",
+              },
+              {
+                type: "custom",
+                id: "sailor",
+                name: "测试一",
+                url: "/sailor-test",
+              },
+            ],
+          },
+          {
+            type: "app",
+            id: "rest",
+          },
+        ],
+      },
+    ];
+
+    const wrapper = mount(
+      <DesktopSlider
+        microApps={apps}
+        desktops={desktops}
+        q="sailor"
+        arrowWidthPercent={9}
+      />
+    );
+
+    expect(wrapper.find(Desktop).last().prop("desktop")).toMatchInlineSnapshot(`
+      Object {
+        "items": Array [
+          Object {
+            "app": Object {
+              "homepage": "/sailor-test",
+              "id": "sailor",
+              "localeName": "测试一",
+              "name": "测试一",
+              "type": "custom",
+              "url": "/sailor-test",
+            },
+            "id": "sailor",
+            "name": "测试一",
+            "type": "custom",
+            "url": "/sailor-test",
+          },
+        ],
+        "name": "-",
+      }
+    `);
+  });
 });

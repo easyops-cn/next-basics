@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { LeftOutlined, RightOutlined, HomeFilled } from "@ant-design/icons";
 import { chunk } from "lodash";
 import classNames from "classnames";
-import { MicroApp, DesktopData } from "@next-core/brick-types";
+import {
+  MicroApp,
+  DesktopData,
+  DesktopItemCustom,
+} from "@next-core/brick-types";
 import { getHistory, getRuntime } from "@next-core/brick-kit";
 import { Desktop } from "../Desktop/Desktop";
 import { useLaunchpadSettingsContext } from "../LaunchpadSettingsContext";
@@ -14,6 +18,8 @@ import {
   getRememberedDesktopCursor,
   setRememberedDesktopCursor,
 } from "./desktopCursor";
+
+type appItem = MicroApp & { type?: "app" | "custom" };
 
 interface DesktopSliderProps {
   microApps: MicroApp[];
@@ -35,25 +41,45 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   useEffect(() => {
     enableMyDesktop && launchpadService.setMaxVisitorLength(8);
   }, [columns, enableMyDesktop]);
-  const mapAppsToDesktop = (apps: MicroApp[]): DesktopData => ({
+  const mapItemToDesktop = (apps: appItem[]): DesktopData => ({
     name: "-",
-    items: apps.map((app) => ({
-      type: "app",
-      id: app.id,
-      app,
-    })),
+    items: apps.map((app) => {
+      if (app.type === "custom") {
+        return {
+          id: app.id,
+          name: app.name,
+          url: app.homepage,
+          type: "custom",
+          app,
+        };
+      }
+      return {
+        type: "app",
+        id: app.id,
+        app,
+      };
+    }),
+  });
+
+  const transformCustomItem = (item: DesktopItemCustom): appItem => ({
+    id: item.id,
+    localeName: item.name,
+    name: item.name,
+    homepage: item.url,
+    ...item,
+    type: "custom",
   });
 
   let desktops: DesktopData[];
-  let validApps = props.microApps;
+  let validItems = props.microApps;
 
   if (props.desktops && props.desktops.length > 0) {
-    validApps = [];
+    validItems = [];
 
     const id2app = props.microApps.reduce((acc, app) => {
       acc.set(app.id, app);
       return acc;
-    }, new Map<string, MicroApp>());
+    }, new Map<string, appItem>());
 
     desktops = props.desktops
       .map((desktop) => ({
@@ -63,7 +89,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
             if (item.type === "app") {
               if (id2app.has(item.id)) {
                 const app = id2app.get(item.id);
-                validApps.push(app);
+                validItems.push(app);
                 id2app.delete(item.id);
                 return {
                   type: item.type,
@@ -78,7 +104,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
                   if (item.type === "app") {
                     if (id2app.has(item.id)) {
                       const app = id2app.get(item.id);
-                      validApps.push(app);
+                      validItems.push(app);
                       id2app.delete(item.id);
                       return {
                         type: item.type,
@@ -87,6 +113,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
                       };
                     }
                   } else if (item.type === "custom") {
+                    validItems.push(transformCustomItem(item));
                     return item;
                   }
                 })
@@ -101,6 +128,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
                 };
               }
             } else if (item.type === "custom") {
+              validItems.push(transformCustomItem(item));
               return item;
             }
           })
@@ -111,13 +139,13 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
       .filter((desktop) => desktop.items.length > 0);
   } else {
     // 如果没有定义桌面列表（例如本地开发模式），则自动按数量切割。
-    desktops = chunk(props.microApps, columns * rows).map(mapAppsToDesktop);
+    desktops = chunk(props.microApps, columns * rows).map(mapItemToDesktop);
   }
   let filteredDesktop: DesktopData;
   if (props.q) {
     const lowerQ = props.q.toLowerCase();
-    filteredDesktop = mapAppsToDesktop(
-      validApps
+    filteredDesktop = mapItemToDesktop(
+      validItems
         .filter(
           (app) =>
             app.localeName.toLowerCase().includes(lowerQ) ||
