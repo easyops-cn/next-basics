@@ -10,6 +10,8 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import styles from "./index.module.css";
 import { RadioType } from ".";
 import { UiType } from "../interfaces";
+import classNames from "classnames";
+
 export interface GeneralRadioProps extends FormItemWrapperProps {
   type?: RadioType;
   options: GeneralOption[];
@@ -48,14 +50,16 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
       {options?.map((item: any) => (
         <label
           htmlFor={item.value}
-          className={disabled ? styles.disabledIconRadio : styles.iconRadio}
+          className={classNames(styles.iconRadio, {
+            [styles.disabledIconRadio]: disabled || item.disabled,
+          })}
           key={item.value}
         >
           <input
             type="radio"
             value={item.value}
             name={name}
-            disabled={disabled}
+            disabled={disabled || item.disabled}
             id={item.value}
             onChange={handleChange}
             checked={value === item.value}
@@ -70,7 +74,7 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                   icon={item.icon}
                 ></GeneralIcon>
               )}
-              <div className={styles.text}>{item.label}</div>
+              <div>{item.label}</div>
             </div>
           </Tooltip>
         </label>
@@ -118,6 +122,7 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
             value={props.value}
             onChange={handleChange}
             options={options}
+            disabled={disabled}
             name={props.name}
           />
         ) : (
