@@ -64,6 +64,7 @@
       width: 1px;
       height: 9px;
       border: 1px solid var(--antd-slider-dashboard-hander-icon-color);
+      background: var(--antd-slider-dashboard-hander-icon-color);
       top: 50%;
       left: 50%;
       transform: translate(-3px, -50%);
@@ -75,6 +76,7 @@
       width: 1px;
       height: 9px;
       border: 1px solid var(--antd-slider-dashboard-hander-icon-color);
+      background: var(--antd-slider-dashboard-hander-icon-color);
       top: 50%;
       left: 50%;
       transform: translate(1px, -50%);
