@@ -14,11 +14,13 @@ export function GetIllustrations(): { name: string; category: string }[] {
   const categories = Object.keys(illustrations);
   return categories.reduce((prev, next, index) => {
     const illustrationList = illustrations[next];
-    const result = illustrationList.map((v) => ({
-      name: v,
-      category: next,
-      color: COLORS[index] || COLORS[getRandomNumber()],
-    }));
+    const result = illustrationList
+      .map((v) => ({
+        name: v,
+        category: next,
+        color: COLORS[index] || COLORS[getRandomNumber()],
+      }))
+      .filter((v) => !/-dark$/g.test(v.name));
     prev = [...prev, ...result];
     return prev;
   }, []);

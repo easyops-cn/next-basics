@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 import classNames from "classnames";
 import { Link } from "@next-libs/basic-components";
 import { IllustrationFooter, IllustrationHeader } from "./index";
+import { useCurrentTheme } from "@next-core/brick-kit";
 
 interface BrickIllustrationProps extends IllustrationProps {
   mode: "feedback" | "guide";
@@ -19,9 +20,10 @@ export function BrickIllustration({
   footer,
   imageStyle,
 }: BrickIllustrationProps): React.ReactElement {
+  const theme = useCurrentTheme();
   const image = useMemo(() => {
-    return getIllustration({ name, category });
-  }, [name, category]);
+    return getIllustration({ name, category, theme });
+  }, [name, category, theme]);
 
   const renderHeader = useMemo(() => {
     return (
