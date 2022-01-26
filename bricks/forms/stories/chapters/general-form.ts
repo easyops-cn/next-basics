@@ -470,6 +470,106 @@ export const story: Story = {
         },
       },
     },
+    {
+      description: {
+        title: "获取当前表单值",
+        message: "通过getFieldsValue方法获取表单值，展示当前表单填写情况",
+      },
+      brick: "forms.general-form",
+      events: {
+        "validate.error": {
+          action: "console.warn",
+          args: ["${EVENT.type}", "${EVENT.detail}"],
+        },
+        "validate.success": {
+          action: "console.log",
+          args: ["${EVENT.type}", "${EVENT.detail}"],
+        },
+      },
+      properties: {
+        id: "preview-form",
+        values: {
+          description: "lucy",
+          username: "easyops",
+        },
+      },
+      slots: {
+        items: {
+          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              events: {
+                "general.button.click": [
+                  {
+                    target: "#preview-form",
+                    method: "getFieldsValue",
+                    callback: {
+                      success: [
+                        {
+                          target: "#preview-alert",
+                          properties: {
+                            hidden: false,
+                            message:
+                              "<% `用户名：${EVENT.detail.username} 描述：${EVENT.detail.description}` %>",
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+              properties: {
+                buttonName: "预览表单填写效果",
+              },
+            },
+            {
+              brick: "presentational-bricks.brick-alert",
+              properties: {
+                id: "preview-alert",
+                hidden: true,
+                showIcon: true,
+                type: "info",
+                style: {
+                  margin: "20px 0",
+                },
+              },
+            },
+            {
+              brick: "forms.general-input",
+              properties: {
+                label: "用户名",
+                labelTooltip: "一些帮助信息",
+                name: "username",
+                placeholder: "请输入用户名",
+                required: true,
+              },
+            },
+            {
+              brick: "forms.general-text-area",
+              properties: {
+                autoSize: {
+                  maxRows: 8,
+                  minRows: 3,
+                },
+                label: "描述",
+                name: "description",
+                placeholder: "请填写描述",
+                required: true,
+              },
+            },
+            {
+              brick: "forms.general-buttons",
+              properties: {
+                cancelText: "取消",
+                showCancelButton: true,
+                submitText: "提交",
+              },
+            },
+          ],
+          type: "bricks",
+        },
+      },
+    },
   ],
 };
 
