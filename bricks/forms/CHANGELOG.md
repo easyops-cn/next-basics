@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.205.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.205.0...@next-bricks/forms@1.205.1) (2022-01-26)
+
+
+### Bug Fixes
+
+* slider style ([783f15d](https://github.com/easyops-cn/next-basics/commit/783f15dc87225efa4016841529f29dd91d9796f0))
+* **style:** 修改cascade样式 ([cb787cc](https://github.com/easyops-cn/next-basics/commit/cb787cc196dc0af5a8bfa0f4e211c29ed8aa6f6e))
+
+
+
+
+
 # [1.205.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.204.4...@next-bricks/forms@1.205.0) (2022-01-25)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.236.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.236.6...@next-bricks/presentational-bricks@1.236.7) (2022-01-26)
+
+
+### Bug Fixes
+
+* **style:** 增加timeline样式 ([4b15544](https://github.com/easyops-cn/next-basics/commit/4b15544955b76b5d8f3dfae558fe1977792a457a))
+* **style:** 挪动timeline样式到antd custom ([073a64b](https://github.com/easyops-cn/next-basics/commit/073a64b637b145017f331eb77f1ab5edc712a9fa))
+
+
+
+
+
 ## [1.236.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.236.5...@next-bricks/presentational-bricks@1.236.6) (2022-01-25)
 
 

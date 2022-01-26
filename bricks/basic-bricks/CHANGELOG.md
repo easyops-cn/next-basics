@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.166.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.166.1...@next-bricks/basic-bricks@1.166.2) (2022-01-26)
+
+
+### Bug Fixes
+
+* **launchButton:** fix query custom item couldn't found ([0859c82](https://github.com/easyops-cn/next-basics/commit/0859c826e941de7001339b4de8a317a9e41b47ec))
+
+
+
+
+
 ## [1.166.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.166.0...@next-bricks/basic-bricks@1.166.1) (2022-01-25)
 
 
