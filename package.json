@@ -46,7 +46,7 @@
     "@next-core/easyops-analytics": "^0.7.2",
     "@next-core/editor-bricks-helper": "^0.33.20",
     "@next-core/fontawesome-library": "^1.1.23",
-    "@next-core/illustrations": "^0.4.6",
+    "@next-core/illustrations": "^0.5.1",
     "@next-core/pipes": "^1.0.1",
     "@size-limit/file": "^7.0.4",
     "@types/d3": "^6.7.5",

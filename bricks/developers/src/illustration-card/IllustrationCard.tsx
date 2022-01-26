@@ -4,6 +4,7 @@ import { getIllustration, IllustrationProps } from "@next-core/illustrations";
 import styles from "./index.module.css";
 import { PresetColorTypes } from "antd/lib/_util/colors";
 import { Clipboard } from "@next-libs/clipboard";
+import { useCurrentTheme } from "@next-core/brick-kit";
 
 interface IllustrationCardProps extends IllustrationProps {
   style?: CSSProperties;
@@ -20,15 +21,16 @@ export function IllustrationCard({
   color,
 }: IllustrationCardProps): React.ReactElement {
   const [loading, setLoading] = useState(true);
+  const theme = useCurrentTheme();
   const image = useMemo(() => {
-    const src = getIllustration({ name, category });
+    const src = getIllustration({ name, category, theme });
 
     return (
       <>
         <img src={src} onLoad={() => setLoading(false)} />
       </>
     );
-  }, [name, category]);
+  }, [name, category, theme]);
 
   const handleCopy = (text: string) => {
     message.success(`\`${text}\` copied 🎉`);

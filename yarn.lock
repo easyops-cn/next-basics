@@ -2331,6 +2331,13 @@
   resolved "https://registry.npmjs.org/@next-core/illustrations/-/illustrations-0.4.6.tgz#a8a72477d3859f2c00a822566787e85806bd464e"
   integrity sha512-HcNkdO/prceveoi/1sCf1054XuRzuGKXdjVkgRCVWfEuwckwo8yW5+7P2s/Idv15+jvYGQGmHFRyupWeZAUoAA==
 
+"@next-core/illustrations@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/@next-core/illustrations/-/illustrations-0.5.1.tgz#6ed6e3e6a488cf39e7a230fa58ea6ad56863f35d"
+  integrity sha512-+wVpvymVg6vqUJVX5Q537SXonceNHg9rUKehoRCk14r2c++1kkSk7aoTi4zBDAhM2FZxOlnU3KELoLMfiIutOw==
+  dependencies:
+    "@next-core/brick-types" "^2.56.0"
+
 "@next-core/jest-config-factory@^0.2.5":
   version "0.2.5"
   resolved "https://registry.npmjs.org/@next-core/jest-config-factory/-/jest-config-factory-0.2.5.tgz#327f043be5a96bd3eec602b8f6610cb4aa511fff"
@@ -2472,6 +2479,13 @@
   version "3.2.6"
   resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.2.6.tgz#aa249176f168246ef873b648c58c9650c524755e"
   integrity sha512-cfuo4UPu1EANTuw1NbauG3V8Kgu4qpOdt8uTQYkZBkw7iZHAk80IMP5by52pXsd3wcQtMqgPdcHAtLMLavGDqg==
+  dependencies:
+    "@next-core/brick-types" "^2.16.0"
+
+"@next-libs/basic-components@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.3.0.tgz#28e6178af091ed5b8b5ffe1b810d6baeb6482eda"
+  integrity sha512-2mBQIQ39WcxsOTp10idtRCjp2Fd/iSv3G7uyVY72KXGpg708be0MROas6volF/A7gEUlaiK61JpAVdAQu5FbRw==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 
