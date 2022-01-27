@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.167.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.166.2...@next-bricks/basic-bricks@1.167.0) (2022-01-27)
+
+
+### Features
+
+* support customized log-out page by app ([da96ea0](https://github.com/easyops-cn/next-basics/commit/da96ea08a186eaedf311298ac5628f21a7cf2f00))
+
+
+
+
+
 ## [1.166.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.166.1...@next-bricks/basic-bricks@1.166.2) (2022-01-26)
 
 

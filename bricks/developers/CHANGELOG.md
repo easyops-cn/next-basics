@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.352.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.6...@next-bricks/developers@1.352.0) (2022-01-27)
+
+
+### Features
+
+* brick-illustration adapt to dark theme and illustrationCard, provider-get-illustrations filter dark theme ([86576b9](https://github.com/easyops-cn/next-basics/commit/86576b9fd691462a6230d993e0438cf836c220f9))
+
+
+
+
+
 ## [1.351.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.5...@next-bricks/developers@1.351.6) (2022-01-21)
 
 **Note:** Version bump only for package @next-bricks/developers
