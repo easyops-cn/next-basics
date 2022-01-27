@@ -5,7 +5,12 @@ import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Menu, Dropdown, Divider, Avatar, Tooltip } from "antd";
 import { AvatarProps } from "antd/lib/avatar";
 import { BreadcrumbItemConf } from "@next-core/brick-types";
-import { getAuth, getHistory, getRuntime } from "@next-core/brick-kit";
+import {
+  getAuth,
+  getHistory,
+  getRuntime,
+  useCurrentApp,
+} from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
@@ -57,12 +62,13 @@ export function AppBar({
     []
   );
 
+  const currentApp = useCurrentApp();
+
   const getCustomizedLogOutLink = React.useCallback(() => {
-    const { customizedLogOut } = getRuntime().getMiscSettings();
-    return customizedLogOut ? (
-      <Link to={customizedLogOut}>{t(K.LOGOUT)}</Link>
-    ) : null;
-  }, [t]);
+    const logOutPage =
+      currentApp?.config?.customizedLogOutPageInNoAuthGuardMode;
+    return logOutPage ? <Link to={logOutPage}>{t(K.LOGOUT)}</Link> : null;
+  }, [currentApp, t]);
 
   const currentLang = i18next.language?.split("-")[0];
 

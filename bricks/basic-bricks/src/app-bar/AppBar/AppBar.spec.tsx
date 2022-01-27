@@ -1,7 +1,7 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
-import { Dropdown, Avatar, Menu } from "antd";
+import { Dropdown, Avatar } from "antd";
 import * as brickKit from "@next-core/brick-kit";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
@@ -48,7 +48,6 @@ const getMicroApps = jest
     },
   ]);
 
-const getMiscSettings = jest.fn().mockReturnValue({});
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: () => ({
     base_title: "DevOps 管理专家",
@@ -56,8 +55,11 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
 
   getFeatureFlags,
   getMicroApps,
-  getMiscSettings,
 } as any);
+
+const useCurrentApp = jest
+  .spyOn(brickKit, "useCurrentApp")
+  .mockReturnValue(null);
 
 delete window.location;
 window.location = {
@@ -225,9 +227,11 @@ describe("AppBar", () => {
 
   it("should show customized logout when auth guard is ignored", async () => {
     window.NO_AUTH_GUARD = true;
-    getMiscSettings.mockReturnValueOnce({
-      customizedLogOut: "/my-logout",
-    });
+    useCurrentApp.mockReturnValueOnce({
+      config: {
+        customizedLogOutPageInNoAuthGuardMode: "/my-logout",
+      },
+    } as any);
     const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
     expect(wrapper.find(".actionsContainer").find(Link).prop("to")).toBe(
       "/my-logout"
