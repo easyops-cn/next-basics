@@ -119,6 +119,18 @@ export class GeneralInputNumberElement extends FormItemElement {
    * @kind number
    * @required false
    * @default -
+   * @description 数值精度
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  precision: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
    * @description 数字输入框最小值
    * @group advanced
    */
@@ -200,6 +212,7 @@ export class GeneralInputNumberElement extends FormItemElement {
             min={this.min}
             max={this.max}
             step={this.step}
+            precision={this.precision}
             message={this.message}
             validator={this.validator}
             notRender={this.notRender}

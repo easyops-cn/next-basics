@@ -9,6 +9,7 @@ export interface GeneralInputNumberProps extends FormItemWrapperProps {
   max?: number;
   min?: number;
   step?: number;
+  precision?: number;
   readOnly?: boolean;
   disabled?: boolean;
   inputBoxStyle?: React.CSSProperties;
@@ -19,10 +20,10 @@ export interface GeneralInputNumberProps extends FormItemWrapperProps {
 export function GeneralInputNumber(
   props: GeneralInputNumberProps
 ): React.ReactElement {
-  const { step, max, min, readOnly, disabled } = props;
+  const { step, max, min, precision, readOnly, disabled, ...restProps } = props;
 
   return (
-    <FormItemWrapper {...omit(props, ["min", "max"])}>
+    <FormItemWrapper {...restProps}>
       <InputNumber
         value={
           props.name && props.formElement ? undefined : (props.value as any)
@@ -31,6 +32,7 @@ export function GeneralInputNumber(
         min={min}
         max={max}
         step={step}
+        precision={precision}
         readOnly={readOnly}
         disabled={disabled}
         onChange={props.onChange}
