@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.238.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.237.0...@next-bricks/presentational-bricks@1.238.0) (2022-01-27)
+
+
+### Features
+
+* **presentational-bricks:** add text-collapse brick ([9b73c0e](https://github.com/easyops-cn/next-basics/commit/9b73c0ea00b3dc2237914af54aab811b0fc223c1))
+
+
+
+
+
 # [1.237.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.236.7...@next-bricks/presentational-bricks@1.237.0) (2022-01-27)
 
 
