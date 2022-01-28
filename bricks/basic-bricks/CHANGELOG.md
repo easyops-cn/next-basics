@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.167.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.0...@next-bricks/basic-bricks@1.167.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* fix the bug that the brick do not tell anything when options and dataSource are not set ([2b75d27](https://github.com/easyops-cn/next-basics/commit/2b75d276fc1412a451d1e8aa0971402b3f5e6ba8)), closes [Refs#MONITOR-3017](https://github.com/Refs/issues/MONITOR-3017)
+
+
+
+
+
 # [1.167.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.166.2...@next-bricks/basic-bricks@1.167.0) (2022-01-27)
 
 
