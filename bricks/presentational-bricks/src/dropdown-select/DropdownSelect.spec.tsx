@@ -99,6 +99,7 @@ describe("DropdownSelect", () => {
       dropdownTrigger.querySelector(".dropdownLabelBox").textContent
     ).toEqual("666");
   });
+
   it("should work with options", () => {
     const options = [
       {
@@ -134,6 +135,18 @@ describe("DropdownSelect", () => {
     );
     fireEvent.click(optionEl);
     expect(mockOnChange).toBeCalledWith(option.value, option);
+  });
+
+  it("should work without options and dataSource", () => {
+    const mockOnChange = jest.fn();
+    const { getByTestId, container, rerender } = render(
+      <DropdownSelect options={[]} dataSource={[]} onChange={mockOnChange} />
+    );
+    const dropdownTrigger = getByTestId("dropdown-trigger");
+    fireEvent.click(dropdownTrigger);
+    const dropdownMenu =
+      container.ownerDocument.querySelector(".ant-dropdown-menu");
+    expect(dropdownMenu).toBe(null);
   });
 
   it("should work with multiple", () => {

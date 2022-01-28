@@ -1,13 +1,13 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { Menu, Dropdown, Popover } from "antd";
 import { parseTemplate } from "@next-libs/cmdb-utils";
 import { UseBrickConf } from "@next-core/brick-types";
-import { get } from "lodash";
+import { get, isArray, isEmpty } from "lodash";
 import styles from "./DropdownSelect.module.css";
 import { Option } from "../interfaces";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { BrickAsComponent } from "@next-core/brick-kit";
+import { BrickAsComponent, EasyopsEmpty } from "@next-core/brick-kit";
 import classnames from "classnames";
 interface DropdownSelectProps {
   dataSource?: any[];
@@ -248,9 +248,26 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     props.selectedKeys,
     props.defaultSelectedKeys,
   ]);
+  const emptyImage = useMemo(() => {
+    return (
+      <div style={{ padding: "10px 0", background: "white" }}>
+        <EasyopsEmpty></EasyopsEmpty>
+      </div>
+    );
+  }, []);
+  const isNotEmptyArr = useCallback((arr): boolean => {
+    if (!isArray(arr)) return false;
+    return !isEmpty(arr);
+  }, []);
   return (
     <Dropdown
-      overlay={props.multipleSelect ? multiSelectMenu : menu}
+      overlay={
+        isNotEmptyArr(props.options) || isNotEmptyArr(props.dataSource)
+          ? props.multipleSelect
+            ? multiSelectMenu
+            : menu
+          : emptyImage
+      }
       trigger={["click"]}
       disabled={props.disabled}
       visible={visible}
