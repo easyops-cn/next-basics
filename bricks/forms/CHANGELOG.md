@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.206.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.205.2...@next-bricks/forms@1.206.0) (2022-01-28)
+
+
+### Features
+
+* **general-input-number:** add precision property ([78fc1c6](https://github.com/easyops-cn/next-basics/commit/78fc1c62386fdd71ffac949c20e9edd48730c6a5))
+
+
+
+
+
 ## [1.205.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.205.1...@next-bricks/forms@1.205.2) (2022-01-27)
 
 **Note:** Version bump only for package @next-bricks/forms
