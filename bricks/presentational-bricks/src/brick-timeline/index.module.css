@@ -10,6 +10,7 @@
 
   .leftArea {
     flex: 1;
+    margin: 32px;
 
     .title {
       line-height: 20px;
