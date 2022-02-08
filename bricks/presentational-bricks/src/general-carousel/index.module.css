@@ -31,6 +31,10 @@
         }
       }
 
+      .slick-slide {
+        pointer-events: auto;
+      }
+
       .carousel-dots-dark {
         li button {
           background: #e4e4e4;
