@@ -1,6 +1,6 @@
 .activeItem {
   color: var(--theme-blue-color);
-  background: rgba(235, 243, 253, 1);
+  background: var(--checkbox-bg-hover);
 }
 
 .activeItem:before {
