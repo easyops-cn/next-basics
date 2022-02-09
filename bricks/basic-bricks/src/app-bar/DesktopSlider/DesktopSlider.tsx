@@ -29,7 +29,7 @@ interface DesktopSliderProps {
 }
 
 export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
-  const enableMyDesktop = getRuntime().getFeatureFlags()["enable-my-desktop"];
+  const enableMyDesktop = true;
   const [desktopCursor, setDesktopCursor] = React.useState(
     getRememberedDesktopCursor()
   );
@@ -190,7 +190,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
   }, [desktopCursor]);
 
   const slideRight = React.useCallback((): void => {
-    const length = enableMyDesktop ? desktops.length : desktops.length + 1;
+    const length = desktops.length;
     if (desktopCursor < length) {
       throttledSetDesktopCursor(desktopCursor + 1);
     }
@@ -224,7 +224,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
         /* istanbul ignore next: compatibility */ event.which;
       const currentDesktop = props.q
         ? filteredDesktop
-        : desktops[enableMyDesktop ? desktopCursor - 1 : desktopCursor];
+        : desktops[desktopCursor - 1];
       if (key === "Enter" || key === 13) {
         event.preventDefault();
         if (appCursor >= 0 && appCursor < currentDesktop.items.length) {
@@ -325,9 +325,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     }, 50);
   };
 
-  const sliderChildrenLength = enableMyDesktop
-    ? desktops.length + 1
-    : desktops.length;
+  const sliderChildrenLength = desktops.length + 1;
 
   return (
     <div
@@ -337,10 +335,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
       })}
     >
       <div className={styles.desktopSelector}>
-        {[
-          ...(enableMyDesktop ? [{ name: <HomeFilled /> }] : []),
-          ...desktops,
-        ].map((desktop, index) => (
+        {[...[{ name: <HomeFilled /> }], ...desktops].map((desktop, index) => (
           <React.Fragment key={index}>
             {index !== 0 && <span className={styles.selectorSeparator} />}
             <a
@@ -376,11 +371,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
               desktop={desktop}
               desktopCount={desktops.length}
               arrowWidthPercent={props.arrowWidthPercent}
-              activeIndex={
-                (enableMyDesktop ? desktopCursor - 1 : desktopCursor) === index
-                  ? appCursor
-                  : -1
-              }
+              activeIndex={desktopCursor - 1 === index ? appCursor : -1}
             />
           ))}
         </div>
