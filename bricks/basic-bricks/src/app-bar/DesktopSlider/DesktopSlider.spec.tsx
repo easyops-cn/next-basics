@@ -392,35 +392,6 @@ describe("Mount DesktopSlider", () => {
     },
   ];
 
-  it.each<[string, number]>([
-    ["ArrowRight", 0],
-    ["ArrowDown", 0],
-    ["ArrowLeft", 2],
-    ["ArrowUp", 2],
-    ["a", -1],
-  ])("when press %s, new active should be %d", (key, index) => {
-    mockGetRuntime.mockReturnValue({
-      getFeatureFlags: () => ({ "enable-my-desktop": false }),
-    } as any);
-
-    const wrapper = mount(
-      <DesktopSlider
-        microApps={apps}
-        desktops={desktops}
-        arrowWidthPercent={9}
-      />
-    );
-    act(() => {
-      window.dispatchEvent(
-        new KeyboardEvent("keydown", {
-          key,
-        })
-      );
-    });
-    wrapper.update();
-    expect(wrapper.find("Desktop").prop("activeIndex")).toBe(index);
-  });
-
   it("active item with enter hotkey", () => {
     mockGetRuntime.mockReturnValue({
       getFeatureFlags: () => ({ "enable-my-desktop": true }),
@@ -432,9 +403,9 @@ describe("Mount DesktopSlider", () => {
         microApps={apps}
         desktops={desktops}
         arrowWidthPercent={9}
+        q="hello"
       />
     );
-
     act(() => {
       window.dispatchEvent(
         new KeyboardEvent("keydown", {
@@ -442,7 +413,6 @@ describe("Mount DesktopSlider", () => {
         })
       );
     });
-
     expect(launchpadService.pushVisitor).toBeCalled();
   });
 
