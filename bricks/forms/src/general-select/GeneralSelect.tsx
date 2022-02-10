@@ -5,7 +5,7 @@ import {
   EasyopsEmpty,
   EasyopsEmptyProps,
 } from "@next-core/brick-kit";
-import { Select } from "antd";
+import { Select, Tooltip } from "antd";
 import {
   FormItemWrapper,
   FormItemWrapperProps,
@@ -16,6 +16,7 @@ import { debounce, groupBy, isNil } from "lodash";
 
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
+  optionTooltip?: boolean;
   groupBy?: string;
   mode?: string;
   placeholder?: string;
@@ -107,21 +108,26 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         label={op.label}
         className={style.itemOption}
       >
-        <div className={style.option}>
-          <span className={style.label}>{op.label}</span>
-          {suffix
-            ? suffix.useBrick &&
-              showSuffix(op) && (
-                <div className={style.suffixContainer} style={suffixStyle}>
-                  <BrickAsComponent useBrick={suffix.useBrick} data={op} />
-                </div>
-              )
-            : suffixBrick && (
-                <div className={style.suffixContainer} style={suffixBrickStyle}>
-                  <BrickAsComponent useBrick={suffixBrick} data={op} />
-                </div>
-              )}
-        </div>
+        <Tooltip title={props.optionTooltip ? op.label : ""}>
+          <div className={style.option}>
+            <span className={style.label}>{op.label}</span>
+            {suffix
+              ? suffix.useBrick &&
+                showSuffix(op) && (
+                  <div className={style.suffixContainer} style={suffixStyle}>
+                    <BrickAsComponent useBrick={suffix.useBrick} data={op} />
+                  </div>
+                )
+              : suffixBrick && (
+                  <div
+                    className={style.suffixContainer}
+                    style={suffixBrickStyle}
+                  >
+                    <BrickAsComponent useBrick={suffixBrick} data={op} />
+                  </div>
+                )}
+          </div>
+        </Tooltip>
       </Select.Option>
     ));
   };
