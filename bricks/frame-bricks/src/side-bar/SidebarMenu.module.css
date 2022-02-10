@@ -11,7 +11,7 @@
   }
 
   :global(.ant-menu-submenu-selected):not(:global(.ant-menu-submenu-open)) {
-    background-color: var(--antd-menu-item-hover);
+    background-color: var(--antd-menu-item-selected-bg);
     color: #fff !important;
     border-radius: var(--card-default-border-radius);
 
