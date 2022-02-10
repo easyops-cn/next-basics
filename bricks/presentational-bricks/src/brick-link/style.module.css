@@ -1,28 +1,28 @@
 presentational-bricks\.brick-link {
   a {
     vertical-align: middle;
-    color: var(--bg-color-button-link);
+    color: var(--antd-btn-link-color);
 
     &:hover,
     &:focus {
-      color: var(--bg-color-button-link-hover);
+      color: var(--antd-btn-link-hover-color);
     }
 
     &.active,
     &:active {
-      color: var(--bg-color-button-link-pressed);
+      color: var(--antd-btn-link-active-color);
     }
   }
 }
 
 .externalIcon {
   margin-left: 6px;
-  color: #bdbdbd;
+  color: var(--color-disabled-text);
   display: inline-block;
 }
 
 .disabledLink {
-  color: #bfbfbf;
+  color: var(--color-disabled-text);
   cursor: not-allowed;
 }
 
@@ -37,5 +37,5 @@ presentational-bricks\.brick-link {
   }
 }
 .underLine:hover {
-  border-bottom: 1px solid #0071eb;
+  border-bottom: 1px solid var(--antd-btn-link-hover-color);
 }

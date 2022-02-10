@@ -10,19 +10,14 @@
   display: flex;
   cursor: pointer;
   align-items: center;
-  color: rgba(0, 0, 0, 0.65);
+  color: var(--color-normal-text);
   font-size: 14px;
 }
 .foldPrimaryActive {
-  color: var(--bg-color-button-link);
+  color: var(--antd-btn-link-color);
 
   &:hover,
   &:focus {
-    color: var(--bg-color-button-link-hover);
-  }
-
-  &.active,
-  &:active {
-    color: var(--bg-color-button-link-pressed);
+    color: var(--antd-btn-link-hover-color);
   }
 }
