@@ -10,12 +10,17 @@
     background: transparent;
   }
 
-  :global(.ant-menu-submenu-selected) {
-    background-color: var(--antd-menu-item-hover);
-  }
+  :global(.ant-menu-submenu-selected):not(:global(.ant-menu-submenu-open)) {
+    background-color: var(--antd-menu-item-selected-bg);
+    color: #fff !important;
+    border-radius: var(--card-default-border-radius);
 
-  :global(.ant-menu-inline) {
-    padding: 0px 12px 4px 12px;
+    :global(.anticon),
+    :global(.ant-menu-submenu-arrow),
+    .simpleMenuItemText,
+    .subMenuTitleText {
+      color: #fff !important;
+    }
   }
 
   .menuItemIcon {
@@ -27,7 +32,7 @@
 
     > :global(.anticon) {
       margin-right: 0;
-      color: var(--antd-menu-color) !important;
+      color: var(--antd-text-color) !important;
     }
   }
 
@@ -58,7 +63,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
-    color: var(--antd-menu-color);
+    color: var(--antd-text-color);
     flex: 1;
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
@@ -83,8 +88,13 @@
 
   .simpleMenuItem {
     &:global(.ant-menu-item-active) {
-      background: var(--antd-menu-item-hover) !important;
+      background-color: #f0f6ff;
       opacity: 1;
+
+      :global(.anticon),
+      .simpleMenuItemText {
+        color: #595959 !important;
+      }
     }
 
     &:global(.ant-menu-item-selected) {
@@ -105,8 +115,14 @@
   .subMenuWrapper {
     &:global(.ant-menu-submenu-active) {
       :global(.ant-menu-submenu-title) {
-        background: var(--antd-menu-item-hover) !important;
-        opacity: 1;
+        background-color: #f0f6ff;
+      }
+
+      :global(.anticon),
+      :global(.ant-menu-submenu-title),
+      :global(.ant-menu-submenu-arrow),
+      .subMenuTitleText {
+        color: #595959 !important;
       }
     }
 
@@ -123,7 +139,10 @@
 
       :global(.ant-menu-submenu-arrow) {
         right: 12px;
-        color: var(--antd-menu-color) !important;
+      }
+      .subMenuTitleText,
+      :global(.ant-menu-submenu-arrow) {
+        color: var(--antd-text-color);
       }
     }
 
@@ -142,6 +161,7 @@
   &:global(.ant-menu) {
     background: transparent;
     width: 100%;
+    padding: 0 12px;
   }
 
   :global(.ant-menu-item) > a,
@@ -170,7 +190,7 @@
   .simpleMenuItem,
   .subMenuWrapper :global(.ant-menu-submenu-title),
   .groupWrapper :global(.ant-menu-item-group-title) {
-    padding: 0 24px !important;
+    padding: 0 10px !important;
   }
 
   .menuItemIcon + .menuText {
