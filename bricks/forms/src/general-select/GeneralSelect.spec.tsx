@@ -30,6 +30,12 @@ describe("GeneralSelect", () => {
     expect(handleChange).toBeCalledWith("one");
     await (global as any).flushPromises();
     expect(handleChangeV2).toBeCalledWith({ label: "one", value: "one" });
+    wrapper.setProps({
+      mode: "multiple",
+    });
+    wrapper.find(Select).invoke("onChange")("one", null);
+    await (global as any).flushPromises();
+    expect(handleChange).toBeCalledWith("one");
   });
 
   it("should render suffix brick", () => {
