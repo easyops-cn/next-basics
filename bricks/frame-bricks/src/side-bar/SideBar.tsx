@@ -106,9 +106,9 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         >
           <i className={styles.fixedIcon} onClick={handleFixedIconClick}>
             {expandedState === ExpandedState.Expanded ? (
-              <FixedSvg width={14} height={14} />
+              <FixedSvg width={20} height={20} />
             ) : (
-              <ToFixedSvg width={14} height={14} />
+              <ToFixedSvg width={20} height={20} />
             )}
           </i>
         </Tooltip>
