@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.207.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.206.0...@next-bricks/forms@1.207.0) (2022-02-10)
+
+
+### Features
+
+* **forms:** `general-radio`  `type` 属性新增  `icon-circle` 类型样式 ([84076ca](https://github.com/easyops-cn/next-basics/commit/84076cae4231f6a3c3c4615b383027dde05ca8c4))
+* **generalSelect:** add SelectOption tooltip ([23207e8](https://github.com/easyops-cn/next-basics/commit/23207e8265be62996faeeab8e3c7315bcf65ce2b))
+
+
+
+
+
 # [1.206.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.205.2...@next-bricks/forms@1.206.0) (2022-01-28)
 
 
