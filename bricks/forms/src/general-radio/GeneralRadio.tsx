@@ -25,6 +25,7 @@ export interface GeneralRadioProps extends FormItemWrapperProps {
 
 interface IconRadioGroupProps {
   options: GeneralOption[];
+  type: "icon" | "icon-circle";
   disabled?: boolean;
   name?: string;
   value?: any;
@@ -32,7 +33,7 @@ interface IconRadioGroupProps {
 }
 
 function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
-  const { options, name, disabled, onChange } = props;
+  const { options, name, disabled, onChange, type } = props;
   const [value, setValue] = useState(undefined);
 
   useEffect(() => {
@@ -50,8 +51,10 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
       {options?.map((item: any) => (
         <label
           htmlFor={item.value}
-          className={classNames(styles.iconRadio, {
+          className={classNames({
             [styles.disabledIconRadio]: disabled || item.disabled,
+            [styles.iconRadio]: type === "icon",
+            [styles.circleIconRadio]: type === "icon-circle",
           })}
           key={item.value}
         >
@@ -65,17 +68,28 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
             checked={value === item.value}
           />
           <Tooltip title={item.tooltip}>
-            <div className={styles.content}>
-              {item.icon && (
-                <GeneralIcon
-                  style={{
-                    fontSize: "32px",
-                  }}
-                  icon={item.icon}
-                ></GeneralIcon>
-              )}
-              <div>{item.label}</div>
-            </div>
+            {type === "icon" ? (
+              <div className={styles.content}>
+                {item.icon && (
+                  <GeneralIcon
+                    style={{
+                      fontSize: "32px",
+                    }}
+                    icon={item.icon}
+                  />
+                )}
+                <div>{item.label}</div>
+              </div>
+            ) : (
+              <div className={styles.circleIconContent}>
+                {item.icon && (
+                  <div className={styles.circleIcon}>
+                    <GeneralIcon icon={item.icon} />
+                  </div>
+                )}
+                <span>{item.label}</span>
+              </div>
+            )}
           </Tooltip>
         </label>
       ))}
@@ -101,7 +115,7 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
           <Component value={item.value} disabled={item.disabled}>
             {Component === Radio.Button && item.icon ? (
               <>
-                <GeneralIcon icon={item.icon}></GeneralIcon>
+                <GeneralIcon icon={item.icon} />
                 {item.label && (
                   <span style={{ paddingLeft: "5px" }}>{item.label}</span>
                 )}
@@ -117,13 +131,14 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
   return (
     <div className={uiType === "dashboard" ? styles.dashboardRadio : ""}>
       <FormItemWrapper {...props}>
-        {props.type === "icon" ? (
+        {props.type === "icon" || props.type === "icon-circle" ? (
           <IconRadioGroup
             value={props.value}
             onChange={handleChange}
             options={options}
             disabled={disabled}
             name={props.name}
+            type={props.type}
           />
         ) : (
           <Radio.Group

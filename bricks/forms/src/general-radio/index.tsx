@@ -15,7 +15,7 @@ import { GeneralRadio } from "./GeneralRadio";
 import { RadioGroupButtonStyle } from "antd/lib/radio";
 import { UiType } from "../interfaces";
 
-export type RadioType = "button" | "default" | "icon";
+export type RadioType = "button" | "default" | "icon" | "icon-circle";
 
 /**
  * @id forms.general-radio
@@ -27,6 +27,7 @@ export type RadioType = "button" | "default" | "icon";
  * @history
  * 1.0.0: 新增构件 `forms.general-radio`
  * 1.1.0: 构件 type 属性，添加`icon`图标类型样式
+ * 1.207.0: `type` 属性新增  `icon-circle` 类型样式
  * @memo
  * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
  * ```typescript

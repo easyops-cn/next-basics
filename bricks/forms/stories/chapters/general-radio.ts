@@ -351,6 +351,41 @@ export const GeneralRadioStory: Story = {
         value: "area-chart",
       },
     },
+    {
+      brick: "forms.general-radio",
+      events: {
+        "general.radio.change": {
+          action: "console.log",
+          args: ["${EVENT.detail}"],
+        },
+      },
+      properties: {
+        label: "图标",
+        name: "circleIcon",
+        options: [
+          {
+            icon: {
+              lib: "easyops",
+              category: "monitor",
+              icon: "create-strategy",
+            },
+            label: "新建并绑定策略",
+            value: "create",
+          },
+          {
+            icon: {
+              lib: "easyops",
+              category: "monitor",
+              icon: "bind-strategy",
+            },
+            label: "绑定已有策略",
+            value: "bind",
+          },
+        ],
+        type: "icon-circle",
+        value: "create",
+      },
+    },
   ],
   previewColumns: 2,
 };
