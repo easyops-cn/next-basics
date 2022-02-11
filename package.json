@@ -34,21 +34,21 @@
   "devDependencies": {
     "@ant-design/compatible": "^1.0.8",
     "@ant-design/icons": "^4.5.0",
-    "@babel/runtime": "^7.16.5",
+    "@babel/runtime": "^7.16.7",
     "@fortawesome/react-fontawesome": "^0.1.16",
-    "@next-core/babel-runtime-helpers": "^1.0.17",
-    "@next-core/brick-http": "^2.3.5",
-    "@next-core/brick-icons": "^2.26.2",
-    "@next-core/brick-kit": "^2.103.7",
-    "@next-core/brick-types": "^2.56.0",
-    "@next-core/brick-utils": "^2.33.0",
-    "@next-core/dev-dependencies": "^1.12.103",
-    "@next-core/easyops-analytics": "^0.7.2",
-    "@next-core/editor-bricks-helper": "^0.33.23",
-    "@next-core/fontawesome-library": "^1.1.23",
-    "@next-core/illustrations": "^0.5.1",
+    "@next-core/babel-runtime-helpers": "^1.0.18",
+    "@next-core/brick-http": "^2.3.6",
+    "@next-core/brick-icons": "^2.26.5",
+    "@next-core/brick-kit": "^2.103.9",
+    "@next-core/brick-types": "^2.56.1",
+    "@next-core/brick-utils": "^2.33.1",
+    "@next-core/dev-dependencies": "^1.12.112",
+    "@next-core/easyops-analytics": "^0.7.3",
+    "@next-core/editor-bricks-helper": "^0.33.25",
+    "@next-core/fontawesome-library": "^1.1.24",
+    "@next-core/illustrations": "^0.5.2",
     "@next-core/pipes": "^1.0.1",
-    "@size-limit/file": "^7.0.4",
+    "@size-limit/file": "^7.0.5",
     "@types/d3": "^6.7.5",
     "@types/dompurify": "^2.3.1",
     "@types/echarts": "^4.9.12",
@@ -75,7 +75,7 @@
     "echarts": "^4.9.0",
     "enzyme": "^3.11.0",
     "history": "^4.10.1",
-    "i18next": "^21.6.0",
+    "i18next": "^21.6.10",
     "js-yaml": "^3.14.1",
     "lodash": "^4.17.21",
     "lolex": "^5.1.2",
@@ -85,7 +85,7 @@
     "react-dnd": "^11.1.3",
     "react-dnd-html5-backend": "^11.1.3",
     "react-dom": "^16.14.0",
-    "react-i18next": "^11.15.1",
+    "react-i18next": "^11.15.3",
     "react-transition-group": "^4.4.2"
   },
   "workspaces": [
@@ -97,11 +97,11 @@
   "resolutions": {
     "@types/react": "^16.14.21",
     "lodash": "^4.17.21",
-    "@next-core/brick-types": "^2.56.0",
+    "@next-core/brick-types": "^2.56.1",
     "@testing-library/dom": "^7.31.2",
     "ua-parser-js": "0.7.19"
   },
   "easyops": {
-    "dev-dependencies": "1.12.103"
+    "dev-dependencies": "1.12.112"
   }
 }
