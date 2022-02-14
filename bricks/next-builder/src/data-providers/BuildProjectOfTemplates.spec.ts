@@ -42,6 +42,7 @@ const consoleError = jest
               templateId: "template-t",
               creator: "abc",
               proxy: null,
+              state: null,
             },
             {
               id: "T-02",
@@ -123,6 +124,12 @@ const consoleError = jest
                   }
                 ]
               }`,
+              state: `[
+                {
+                  "name": "myState",
+                  "value": "any data",
+                }
+              ]`,
             },
             {
               id: "T-03",
@@ -135,6 +142,7 @@ const consoleError = jest
                 "events": {},
                 "methods": 1
               }`,
+              state: "",
             },
             {
               id: "T-04",
@@ -341,6 +349,10 @@ const consoleError = jest
 );
 
 describe("BuildProjectOfTemplates", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it.each<[BuildProjectOfTemplatesParams, BuildInfoForProjectOfTemplates]>([
     [
       {
@@ -528,6 +540,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   templateId: "template-t",
                   creator: "abc",
                   proxy: null,
+                  state: null,
                   children: [
                     {
                       instanceId: "t-1",
@@ -680,6 +693,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   templateId: "template-u",
                   creator: "abc",
                   proxy: expect.any(String),
+                  state: expect.any(String),
                   children: [
                     {
                       instanceId: "u-1",
@@ -714,6 +728,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   creator: "abc",
                   proxy:
                     '{\n                "properties": null,\n                "events": {},\n                "methods": 1\n              }',
+                  state: "",
                 },
                 useWidget: [],
               },
@@ -919,6 +934,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   templateId: "template-t",
                   creator: "abc",
                   proxy: null,
+                  state: null,
                   children: [
                     {
                       instanceId: "t-1",
@@ -1071,6 +1087,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   templateId: "template-u",
                   creator: "abc",
                   proxy: expect.any(String),
+                  state: expect.any(String),
                   children: [
                     {
                       instanceId: "u-1",
@@ -1105,6 +1122,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   creator: "abc",
                   proxy:
                     '{\n                "properties": null,\n                "events": {},\n                "methods": 1\n              }',
+                  state: "",
                 },
                 useWidget: [],
               },
@@ -1214,15 +1232,18 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
       "name": "abc",
       "age": 18
     }`;
-    const errorJSON = `{
-      "name": "abc",
-      "age": 18,
-    }`;
     expect(safeJSONParse(rightJSON)).toEqual({
       name: "abc",
       age: 18,
     });
-    safeJSONParse(errorJSON);
+  });
+
+  it("should handle json parse error", () => {
+    const errorJSON = `{
+      "name": "abc",
+      "age: 18
+    }`;
+    expect(safeJSONParse(errorJSON)).toBe(undefined);
     expect(consoleError).toBeCalledTimes(1);
   });
 

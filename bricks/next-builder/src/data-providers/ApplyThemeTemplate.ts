@@ -42,6 +42,7 @@ interface PageTemplateItem {
 interface CustomTemplate {
   templateId: string;
   proxy?: string;
+  state?: string;
   layerType?: string;
   children?: TreeNode[];
 }
@@ -117,6 +118,7 @@ export async function ApplyThemeTemplate({
       templateId: tpl.templateId,
       type: "custom-template",
       proxy: tpl.proxy,
+      state: tpl.state,
       layerType: tpl.layerType,
       isFromTheme: true,
     });

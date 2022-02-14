@@ -60,6 +60,7 @@ jest.mock("./utils/appendBricksFactory");
         {
           templateId: "tpl-page-home",
           proxy: "{}",
+          state: "[]",
           layerType: "layout",
           children: [
             {
@@ -178,6 +179,7 @@ describe("ApplyThemeTemplate", () => {
         templateId: "tpl-page-home",
         type: "custom-template",
         proxy: "{}",
+        state: "[]",
         layerType: "layout",
         isFromTheme: true,
       }

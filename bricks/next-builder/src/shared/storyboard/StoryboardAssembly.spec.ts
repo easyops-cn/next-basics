@@ -38,7 +38,16 @@ const mockFactory: Record<string, Record<string, any>> = {
                 },
               },
             },
-
+            null,
+            2
+          ),
+          state: JSON.stringify(
+            [
+              {
+                name: "myState",
+                value: "any data",
+              },
+            ],
             null,
             2
           ),
@@ -48,6 +57,7 @@ const mockFactory: Record<string, Record<string, any>> = {
           instanceId: "r",
           templateId: "tpl-02",
           proxy: "",
+          state: "",
         },
       ],
 
@@ -488,7 +498,12 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 },
-
+                state: [
+                  {
+                    name: "myState",
+                    value: "any data",
+                  },
+                ],
                 bricks: [
                   {
                     brick: "z",
@@ -515,6 +530,7 @@ describe("StoryboardAssembly", () => {
               {
                 name: "tpl-02",
                 proxy: undefined,
+                state: undefined,
                 bricks: [],
               },
             ],
@@ -688,7 +704,12 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 },
-
+                state: [
+                  {
+                    name: "myState",
+                    value: "any data",
+                  },
+                ],
                 bricks: [
                   {
                     [symbolForNodeId]: "T-B-01",
@@ -726,6 +747,7 @@ describe("StoryboardAssembly", () => {
                 [symbolForNodeId]: "B-T-02",
                 name: "tpl-02",
                 proxy: undefined,
+                state: undefined,
                 bricks: [],
               },
             ],
@@ -925,7 +947,12 @@ describe("StoryboardAssembly", () => {
                     },
                   },
                 },
-
+                state: [
+                  {
+                    name: "myState",
+                    value: "any data",
+                  },
+                ],
                 bricks: [
                   {
                     brick: "z",
@@ -952,6 +979,7 @@ describe("StoryboardAssembly", () => {
               {
                 name: "tpl-02",
                 proxy: undefined,
+                state: undefined,
                 bricks: [],
               },
             ],

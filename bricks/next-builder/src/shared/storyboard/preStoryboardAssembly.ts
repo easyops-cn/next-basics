@@ -132,6 +132,7 @@ export async function preStoryboardAssembly({
           templateId: template.templateId,
           children: template.children,
           proxy: template.proxy ? JSON.parse(template.proxy) : undefined,
+          state: template.state ? JSON.parse(template.state) : undefined,
         })),
     },
 

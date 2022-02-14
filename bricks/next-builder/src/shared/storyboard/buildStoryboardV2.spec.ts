@@ -124,6 +124,12 @@ describe("buildStoryboardV2", () => {
                 },
               },
             },
+            state: [
+              {
+                name: "myState",
+                value: "any data",
+              },
+            ],
             children: [
               {
                 id: "T-B-01",
@@ -269,6 +275,12 @@ describe("buildStoryboardV2", () => {
                   },
                 },
               },
+              state: [
+                {
+                  name: "myState",
+                  value: "any data",
+                },
+              ],
               bricks: [
                 {
                   brick: "z",

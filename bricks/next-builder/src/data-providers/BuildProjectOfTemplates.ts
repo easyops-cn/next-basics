@@ -3,6 +3,7 @@ import {
   BrickConfInTemplate,
   BuilderCustomTemplateNode,
   CustomTemplate,
+  CustomTemplateState,
   SnippetDefinition,
   Story,
   Storyboard,
@@ -32,8 +33,8 @@ const MODEL_STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
 const MODEL_STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
 const IMAGE_SAVE_FILE_PATH = "dist/assets";
 
-export function safeJSONParse(str: string): Record<string, unknown> {
-  let result: Record<string, unknown> = {};
+export function safeJSONParse(str: string): unknown {
+  let result;
   try {
     result = JSON.parse(str);
   } catch {
@@ -66,7 +67,8 @@ export const getDeepDependencies = (
 
 function getCleanProxy(proxy: string): unknown {
   if (proxy) {
-    const { examples, interfaces, ...rest } = safeJSONParse(proxy);
+    const { examples, interfaces, ...rest } =
+      (safeJSONParse(proxy) as Record<string, unknown>) ?? {};
     return rest;
   }
 }
@@ -179,6 +181,9 @@ export async function BuildProjectOfTemplates({
     (item) => ({
       name: `${appId}.${item.templateId}`,
       proxy: getCleanProxy(item.proxy),
+      state: item.state
+        ? (safeJSONParse(item.state) as CustomTemplateState[])
+        : undefined,
       bricks: replaceWidgetFunctions(
         buildBricks(item.children, {
           appId,
