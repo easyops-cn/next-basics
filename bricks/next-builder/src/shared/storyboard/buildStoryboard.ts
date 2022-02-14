@@ -112,6 +112,7 @@ export function buildStoryboard(data: BuildInfo): StoryboardToBuild {
   const customTemplates = data.templateList?.map((template) => ({
     name: template.templateId,
     proxy: template.proxy,
+    state: template.state,
     bricks: buildBricks(template.children, ctx) as BrickConfInTemplate[],
     ...(keepIds
       ? {

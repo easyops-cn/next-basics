@@ -7,6 +7,7 @@ import {
   BuilderBrickNode,
   StoryboardFunction,
   MockRule,
+  CustomTemplateState,
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
@@ -89,6 +90,7 @@ export interface TemplateNode {
   id?: string;
   children?: BuilderBrickNode[];
   proxy?: CustomTemplateProxy;
+  state?: CustomTemplateState[];
 }
 
 export interface StoryboardToBuild {

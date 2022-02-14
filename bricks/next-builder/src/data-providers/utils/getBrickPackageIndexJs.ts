@@ -19,7 +19,11 @@ ${templates
         tpl.name,
         null,
         2
-      )}, ${JSON.stringify({ proxy: tpl.proxy, bricks: tpl.bricks }, null, 2)})`
+      )}, ${JSON.stringify(
+        { proxy: tpl.proxy, state: tpl.state, bricks: tpl.bricks },
+        null,
+        2
+      )})`
   )
   .concat(
     Array.isArray(functions) && functions.length > 0
