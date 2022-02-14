@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.111.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.110.5...@next-bricks/next-builder@1.111.0) (2022-02-14)
+
+
+### Features
+
+* support building template with state ([a1f6624](https://github.com/easyops-cn/next-basics/commit/a1f6624ca040a836513f460093f2758b457fc71e))
+
+
+
+
+
 ## [1.110.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.110.4...@next-bricks/next-builder@1.110.5) (2022-01-24)
 
 **Note:** Version bump only for package @next-bricks/next-builder
