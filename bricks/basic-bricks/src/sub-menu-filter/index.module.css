@@ -57,7 +57,7 @@
       }
 
       &:not(:global(.ant-menu-item-selected)):hover {
-        background-color: var(--menu-item-hover);
+        background-color: var(--sub-menu-brick-item-hover-bg);
       }
 
       &:not(:global(.ant-menu-item-selected)):active {
