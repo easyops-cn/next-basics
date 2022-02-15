@@ -2,20 +2,20 @@
   --operator-columns-width: 30px;
 
   .operatorBtn {
-    color: #8c8c8c;
+    color: var(--color-secondary-text);
     font-size: 20px;
     padding: 0;
     padding-left: 4px;
     &:hover {
-      color: #595959;
+      color: var(--color-auxiliary-text);
     }
     &[disabled] {
-      color: #bfbfbf;
+      color: var(--text-color-disabled);
     }
   }
 
   &.showBackground {
-    background-color: rgb(245, 245, 245);
+    background-color: var(--color-fill-bg-base-1);
     border-radius: 6px;
     padding: 16px;
   }
