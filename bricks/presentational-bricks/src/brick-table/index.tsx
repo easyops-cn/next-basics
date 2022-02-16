@@ -1488,7 +1488,7 @@ export class BrickTableElement extends UpdatingElement {
     }));
     tempDataSource = tempDataSource.filter((item) => {
       return every(filtersArray, (filter) => {
-        return filter.value?.includes(get(item, filter.key));
+        return filter.value?.includes(get(item, filter.key)) ?? true;
       });
     });
     return tempDataSource;
