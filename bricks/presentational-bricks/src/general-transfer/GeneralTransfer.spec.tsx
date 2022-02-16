@@ -61,7 +61,7 @@ describe("GeneralTransfer", () => {
       />
     );
     const transfer = wrapper.find(Transfer).first();
-    transfer.invoke("onChange")(["1", "2", "3"], "left", []);
+    transfer.invoke("onChange")(["1", "2", "3"], "right", []);
     expect(changeFn).not.toHaveBeenCalled();
   });
 });
