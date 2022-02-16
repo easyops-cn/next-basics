@@ -6,7 +6,7 @@ import {
   CmdbInstanceSelectItem,
 } from "./CmdbInstanceSelect";
 import * as kit from "@next-core/brick-kit";
-import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
 import { Select } from "antd";
 import i18n from "i18next";
 import { act } from "react-dom/test-utils";
@@ -16,7 +16,7 @@ jest.spyOn(i18n, "t").mockReturnValue("后台搜索");
 jest.mock("@next-sdk/cmdb-sdk");
 const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 
-const mockPostSearch = InstanceApi_postSearch as jest.Mock;
+const mockPostSearch = InstanceApi_postSearchV3 as jest.Mock;
 
 afterEach(() => {
   mockPostSearch.mockClear();
@@ -78,11 +78,7 @@ describe("CmdbInstanceSelect", () => {
     );
 
     expect(mockPostSearch.mock.calls[0][1]).toEqual({
-      fields: {
-        hostname: true,
-        memo: true,
-        instanceId: true,
-      },
+      fields: ["instanceId", "hostname", "memo"],
       permission: ["read"],
       page_size: undefined,
       query: {
@@ -315,11 +311,7 @@ describe("CmdbInstanceSelect", () => {
     );
 
     expect(mockPostSearch.mock.calls[0][1]).toEqual({
-      fields: {
-        name: true,
-        instanceId: true,
-      },
-
+      fields: ["instanceId", "name"],
       page_size: undefined,
       query: {
         $and: [
@@ -387,12 +379,7 @@ describe("CmdbInstanceSelect", () => {
     );
 
     expect(mockPostSearch.mock.calls[0][1]).toEqual({
-      fields: {
-        name: true,
-        title: true,
-        instanceId: true,
-      },
-
+      fields: ["instanceId", "name", "title"],
       page_size: undefined,
       query: {
         $and: [
