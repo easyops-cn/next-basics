@@ -32,10 +32,14 @@ export function GeneralTransfer(
 
   const onChange = (
     targetKeys: string[],
-    direction: string,
+    direction: "left" | "right",
     moveKeys: string[]
   ): void => {
-    if (!props.maxSelected || targetKeys.length <= props.maxSelected) {
+    if (
+      direction === "left" ||
+      !props.maxSelected ||
+      targetKeys.length <= props.maxSelected
+    ) {
       props.onChange(targetKeys);
     } else {
       Modal.warning({
