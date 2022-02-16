@@ -8,7 +8,7 @@
 @import "~@next-core/brick-icons/dist/styles/index.css";
 
 .ant-collapse.ant-collapse-ghost {
-  background: #ffffff;
+  background: var(--antd-component-background);
   border-radius: 6px;
   overflow: hidden;
 
@@ -34,7 +34,7 @@
         align-items: center;
         flex: 1;
         font-weight: 500;
-        color: rgba(0, 0, 0, 0.85);
+        color: var(--color-header-text);
         font-size: 16px;
 
         .headerIcon {
@@ -53,7 +53,7 @@
           .cardTitle {
             font-family: PingFangSC-Medium, PingFang SC;
             font-weight: 500;
-            color: var(--text-color-title);
+            color: var(--color-header-text);
             line-height: 22px;
             font-size: 16px;
           }
@@ -70,12 +70,12 @@
               }
 
               .descriptionItemLabel {
-                color: var(--text-color-secondary);
+                color: var(--color-secondary-text);
                 margin-right: 10px;
               }
 
               .descriptionItemText {
-                color: var(--text-color-title);
+                color: var(--color-header-text);
               }
             }
           }
@@ -114,7 +114,7 @@
         left: 50%;
         top: 0;
         transform: translateX(-50%);
-        background: #e8e8e8;
+        background: var(--color-text-divider-line);
       }
 
       .ant-collapse-content-box {
