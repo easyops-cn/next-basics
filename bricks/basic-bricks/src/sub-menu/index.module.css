@@ -1,5 +1,5 @@
 .subMenuContainer {
-  background: #ffffff;
+  background: var(--antd-app-submenu-bg);
   border-radius: 6px;
   padding: 20px 0;
   .header {
@@ -8,9 +8,9 @@
     font-size: 18px;
     padding: 0 24px 16px 24px;
     line-height: 26px;
-    color: #000;
+    color: var(--color-header-text);
     i {
-      color: #8c8c8c;
+      color: var(--color-secondary-text);
       width: 24px;
       text-align: center;
     }
@@ -35,7 +35,7 @@
     }
 
     :global(.ant-menu-sub.ant-menu-inline) {
-      background-color: #f7f7f7;
+      background-color: var(--sub-menu-brick-group-bg);
       border-radius: 6px;
     }
 
@@ -49,16 +49,16 @@
       }
 
       &:not(:global(.ant-menu-item-selected)):hover {
-        background-color: #f2f5f9;
+        background-color: var(--sub-menu-brick-item-hover-bg);
       }
 
       &:not(:global(.ant-menu-item-selected)):active {
-        background-color: #d8e4f0;
+        background-color: var(--sub-menu-brick-item-active-bg);
       }
     }
 
     :global(.ant-menu-item-selected) {
-      background-color: #e0eeff;
+      background-color: var(--app-submenu-active-bg);
     }
 
     :global(.ant-menu-submenu-title) {

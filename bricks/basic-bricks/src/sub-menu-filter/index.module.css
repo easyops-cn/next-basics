@@ -10,10 +10,10 @@
     font-size: 18px;
     padding: 0 24px 16px 24px;
     line-height: 26px;
-    color: #000;
+    color: var(--color-header-text);
 
     i {
-      color: #8c8c8c;
+      color: var(--color-secondary-text);
       width: 24px;
       text-align: center;
     }
@@ -44,7 +44,7 @@
     }
 
     :global(.ant-menu-sub.ant-menu-inline) {
-      background-color: #f7f7f7;
+      background-color: var(--sub-menu-filter-group-bg);
       border-radius: 6px;
     }
 
@@ -61,12 +61,12 @@
       }
 
       &:not(:global(.ant-menu-item-selected)):active {
-        background-color: #d8e4f0;
+        background-color: var(--sub-menu-brick-item-active-bg);
       }
     }
 
     :global(.ant-menu-item-selected) {
-      background-color: var(--antd-app-submenu-active-bg);
+      background-color: var(--app-submenu-active-bg);
     }
 
     :global(.ant-menu-submenu-title) {
@@ -106,12 +106,12 @@
 
   :global(.ant-menu) {
     :global(.ant-menu-submenu) {
-      color: #000000d9;
+      color: var(--color-normal-text);
 
       /* subMenu-title hover样式 */
       &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
         color: inherit;
-        background-color: #ebebeb;
+        background-color: var(--sub-menu-filter-transparent-type-item-hover-bg);
       }
 
       /* subMenu展开时subMenu-title样式 */
@@ -122,21 +122,21 @@
       /* subMenu子项被选中时subMenu-title样式 */
       &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
         background-color: inherit;
-        color: #116ac3;
+        color: var(--sub-menu-filter-transparent-type-group-selected-color);
 
         .menuItemMainPart > i {
-          color: #116ac3;
+          color: var(--sub-menu-filter-transparent-type-group-selected-color);
         }
 
         :global(.ant-menu-submenu-arrow) {
-          color: #116ac3;
+          color: var(--sub-menu-filter-transparent-type-group-selected-color);
         }
       }
 
       /* subMenu-title 普通样式 */
       :global(.ant-menu-submenu-title) {
         :global(.ant-menu-submenu-arrow) {
-          color: #bfbfbf;
+          color: var(--color-disabled-text);
 
           &::before,
           &::after {
@@ -145,7 +145,7 @@
         }
 
         .menuItemMainPart > i {
-          color: #8c8c8c;
+          color: var(--color-secondary-text);
         }
       }
 
@@ -157,15 +157,17 @@
 
     /* menu-item 样式 */
     :global(.ant-menu-item) {
-      color: #8c8c8c;
+      color: var(--sub-menu-filter-transparent-type-item-color);
 
       &:global(.ant-menu-item-selected) {
-        background-color: #ebf3fd;
-        color: #116ac3;
+        background-color: var(
+          --sub-menu-filter-transparent-type-group-selected-bg
+        );
+        color: var(--sub-menu-filter-transparent-type-group-selected-color);
       }
 
       &:global(:not(.ant-menu-item-selected):hover) {
-        background-color: #ebebeb;
+        background-color: var(--sub-menu-filter-transparent-type-item-hover-bg);
       }
     }
   }
