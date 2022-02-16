@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Anchor, AnchorProps } from "antd";
 import { AnchorListType } from "./index";
 import { UseBrickConf } from "@next-core/brick-types";
@@ -26,7 +26,6 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
     handleChange,
   } = props;
   const { Link } = Anchor;
-  const [activeLink, setActiveLink] = useState("");
   const renderAnchorList = (
     anchorList: AnchorListType[],
     type?: "default" | "radio"
@@ -48,28 +47,6 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
       );
     });
   };
-
-  useEffect(() => {
-    /* TODO(astrid): 初始锚点无法滚动到对应位置 */
-    const sharpMatcherRegx = /#([\S ]+)$/;
-    const initHash =
-      anchorList.find((item) => item.href.includes(activeLink || location.hash))
-        ?.href || "";
-    if (initHash) {
-      setActiveLink(initHash);
-      const sharpLinkMatch = sharpMatcherRegx.exec(initHash.toString());
-      const target = document.getElementById(sharpLinkMatch[1]);
-      if (target) {
-        setTimeout(() => {
-          window.scrollTo({
-            top: target.offsetTop - (configProps?.offsetTop || 56),
-          });
-        });
-        handleChange(activeLink);
-      }
-    }
-  }, []);
-
   return (
     <Anchor
       offsetTop={56}
@@ -80,7 +57,6 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
         },
       ])}
       onChange={handleChange}
-      getCurrentAnchor={() => activeLink}
     >
       {type === "default" ? (
         renderAnchorList(anchorList, type)
