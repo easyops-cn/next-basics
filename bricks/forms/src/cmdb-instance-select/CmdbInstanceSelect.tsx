@@ -13,7 +13,7 @@ import {
 } from "lodash";
 import { handleHttpError } from "@next-core/brick-kit";
 import { ModeOption } from "antd/lib/select";
-import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
+import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
 import { getInstanceNameKey, parseTemplate } from "@next-libs/cmdb-utils";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import classNames from "classnames";
@@ -88,22 +88,16 @@ export function CmdbInstanceSelectItem(
   const [total, setTotal] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const computeFields = () => {
-    const fieldsLabels = Array.isArray(fields.label)
-      ? Object.fromEntries(fields?.label.map((label) => [label, true]))
-      : { [fields.label]: true };
-    return {
-      ...fieldsLabels,
-      [fields.value]: true,
-      ...(props.objectId === "USER"
-        ? {
-            user_icon: true,
-          }
-        : {}),
-      ...extraSearchKey.reduce((obj, key) => {
-        obj[key] = true;
-        return obj;
-      }, {} as any),
-    };
+    const result = [
+      fields.value,
+      ...(Array.isArray(fields.label) ? fields.label : [fields.label]),
+      ...extraSearchKey,
+    ];
+
+    if (props.objectId === "USER") {
+      result.push("user_icon");
+    }
+    return result;
   };
 
   const handleChange = (newValue: any): void => {
@@ -144,7 +138,7 @@ export function CmdbInstanceSelectItem(
         const fieldsQuery = Array.isArray(fields.label)
           ? fields.label.map((label) => ({ [label]: { $like: `%${q}%` } }))
           : [{ [fields.label]: { $like: `%${q}%` } }];
-        const data = await InstanceApi_postSearch(props.objectId, {
+        const data = await InstanceApi_postSearchV3(props.objectId, {
           query: {
             $and: [
               {
