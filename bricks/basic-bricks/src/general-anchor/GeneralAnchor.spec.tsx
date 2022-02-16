@@ -82,6 +82,7 @@ describe("GeneralAnchor", () => {
 
   it("handleClick and handleChange should work", () => {
     const handleChange = jest.fn();
+    window.scrollTo = jest.fn();
     let result;
     const handleClick = (
       _e: React.MouseEvent<HTMLElement, MouseEvent>,
