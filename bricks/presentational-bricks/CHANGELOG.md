@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.5...@next-bricks/presentational-bricks@1.238.6) (2022-02-16)
+
+
+### Bug Fixes
+
+* **transfer:** 穿梭框右边超过最大数支持勾选转换到左边 Refs MONITOR-3013 ([6abce81](https://github.com/easyops-cn/next-basics/commit/6abce816e603ba5e9310c8c8dd6c81eaffd5e985))
+
+
+
+
+
 ## [1.238.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.4...@next-bricks/presentational-bricks@1.238.5) (2022-02-14)
 
 
