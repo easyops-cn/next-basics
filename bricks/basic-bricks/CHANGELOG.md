@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.167.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.4...@next-bricks/basic-bricks@1.167.5) (2022-02-16)
+
+
+### Bug Fixes
+
+* dynamic form item style refine ([366d3fa](https://github.com/easyops-cn/next-basics/commit/366d3faa14a5aada89098b53bf02e23d389279e7))
+* fix hover style ([5eeb9db](https://github.com/easyops-cn/next-basics/commit/5eeb9db628d1a23864a418030c7f7cb77730582d))
+
+
+
+
+
 ## [1.167.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.3...@next-bricks/basic-bricks@1.167.4) (2022-02-14)
 
 

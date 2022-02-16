@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.207.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.207.1...@next-bricks/forms@1.207.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* dynamic form item style refine ([366d3fa](https://github.com/easyops-cn/next-basics/commit/366d3faa14a5aada89098b53bf02e23d389279e7))
+* **forms:** cmdb-instance-select构件换V3接口 ([a9bee30](https://github.com/easyops-cn/next-basics/commit/a9bee30e7161f0b24a537bd5022190ad4d547ce6))
+
+
+
+
+
 ## [1.207.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.207.0...@next-bricks/forms@1.207.1) (2022-02-14)
 
 
