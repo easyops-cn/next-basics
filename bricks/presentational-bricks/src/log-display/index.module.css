@@ -1,9 +1,9 @@
 .terminal {
   min-height: 80px;
   padding: 10px;
-  border: 1px solid #292c33;
-  background-color: #2f333d;
-  color: #c5c8c6;
+  border: 1px solid var(--log-display-border-color);
+  background-color: var(--log-display-bg);
+  color: var(--log-display-color);
 }
 
 .ellipsis {
@@ -17,7 +17,7 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: #c5c8c6;
+    background: var(--log-display-color);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
 
     &:nth-child(1) {
