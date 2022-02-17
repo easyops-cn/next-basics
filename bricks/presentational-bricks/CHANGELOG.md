@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.6...@next-bricks/presentational-bricks@1.238.7) (2022-02-17)
+
+
+### Bug Fixes
+
+* collapse card style ([08da3ea](https://github.com/easyops-cn/next-basics/commit/08da3ea6d74c0557fac1adc90d8e4f7d6efabf97))
+* **table:** 修复filters没值时导致table没数据的问题 Refs ([2f5e7fa](https://github.com/easyops-cn/next-basics/commit/2f5e7fa75de1e5c3ab975d53fabd72ed4b4d646b))
+
+
+
+
+
 ## [1.238.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.5...@next-bricks/presentational-bricks@1.238.6) (2022-02-16)
 
 
