@@ -21,16 +21,17 @@ const linkList = [
 describe("GeneralAnchor", () => {
   it("should work", () => {
     const { Link } = Anchor;
-    const wrapper = shallow(<GeneralAnchor anchorList={linkList} />);
+    const wrapper = mount(<GeneralAnchor anchorList={linkList} />);
     expect(wrapper.find(Anchor).length).toBe(1);
     expect(wrapper.find(Anchor).prop("offsetTop")).toBe(56);
     wrapper.setProps({
       type: "radio",
     });
+
     wrapper.update();
-    expect(wrapper.find(".anchorWrapper").length).toBe(1);
-    expect(wrapper.find(".anchorContainer").length).toBe(1);
-    expect(wrapper.find(".anchorLinkContainer").length).toBe(1);
+    expect(wrapper.find("div.anchorWrapper").length).toBe(1);
+    expect(wrapper.find("div.anchorContainer").length).toBe(1);
+    expect(wrapper.find("div.anchorLinkContainer").length).toBe(1);
     expect(wrapper.find(Link).length).toBe(3);
   });
   it("should work and type ", () => {
