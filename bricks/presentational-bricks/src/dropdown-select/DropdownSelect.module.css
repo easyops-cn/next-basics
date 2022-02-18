@@ -8,7 +8,7 @@
 .dropdownTriggerShape {
   font-size: 14px;
   padding: 3px 10px;
-  box-shadow: 0px 2px 6px 0px #dcdcdc;
+  box-shadow: var(--dropdown-select-shape-type-trigger-shadow);
   border-radius: 6px;
   border: 1px solid var(--color-border-divider-line);
 }
@@ -30,7 +30,7 @@
 }
 
 .placeholder {
-  color: #bfbfbf;
+  color: var(--color-auxiliary-text);
 }
 
 .optionTitle {
