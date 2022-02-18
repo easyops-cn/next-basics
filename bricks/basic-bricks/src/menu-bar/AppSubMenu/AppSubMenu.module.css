@@ -97,14 +97,14 @@
 
   :global(.ant-menu-submenu) {
     &:global(.ant-menu-submenu-selected) {
-      background: #f7f7f7;
+      background: var(--menu-submenu-group-selected-bg);
       border-radius: 6px;
 
       > :global(.ant-menu-submenu-title) {
         font-weight: 500;
 
         :global(.anticon) {
-          color: rgba(0, 0, 0, 0.55);
+          color: var(--color-auxiliary-text);
         }
       }
     }
