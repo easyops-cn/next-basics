@@ -20,22 +20,24 @@
 | issueTypeConfig     | IssueTypeConfig[]                                                         | -        | -                                  | issue 类型的配置，支持自定义类型和对应的背景色、icon 等，不配置的时候将使用默认配置，具体定义如下表  |
 | issuePriorityConfig | IssuePriorityConfig[]                                                     | -        | -                                  | issue 优先级的配置，支持自定义优先级名称和对应的背景色等，不配置的时候将使用默认配置，具体定义如下表 |
 | issueAvatar         | Array<"assignee" \| "producer" \|"tester" \| "reporter" \| "subscribers"> | -        | ["assignee", "producer", "tester"] | 取 issueInfo 中相关角色信息作为头像显示                                                              |
+| topRightBrick       | {useBrick: UseBrickConf }                                                 | -        | -                                  | 右上角自定义展示构件                                                                                 |
 
 ### IssueInfo
 
-| property       | type                                               | required | default | description                                                                      |
-| -------------- | -------------------------------------------------- | -------- | ------- | -------------------------------------------------------------------------------- |
-| name           | string                                             | ✔️       | -       | issue 名称                                                                       |
-| title          | string                                             | ✔️       | -       | issue 标题                                                                       |
-| type           | string                                             | -        | -       | issue 类型                                                                       |
-| priority       | string                                             | -        | -       | issue 优先级，默认可选 high/medium/low，也支持自定义                             |
-| storyPoint     | number                                             | -        | -       | 估时                                                                             |
-| storyPointUnit | string                                             | -        | -       | 估时单位                                                                         |
-| assignee       | {name:string,instanceId:string,user_icon:string}[] | -        | -       | 负责人，会在卡片头像区的第一列显示，若无数据时会默认显示灰色头像                 |
-| reporter       | {name:string,instanceId:string,user_icon:string}[] | -        | -       | 报告人                                                                           |
-| tester         | {name:string,instanceId:string,user_icon:string}[] | -        | -       | 测试人， 会在卡片头像区的第二列显示，若无数据时会默认显示灰色头像                |
-| groupId        | number                                             | -        | -       | 用于自动给 issue 卡片带上分组色条，内置 8 个颜色，该值取值 0-7                   |
-| resolution     | string                                             | -        | -       | 标记卡片的解决结果，如果该字段不为空，则表示卡片处于完成状态，标题会做删除线处理 |
+| property                 | type                                               | required | default | description                                                                      |
+| ------------------------ | -------------------------------------------------- | -------- | ------- | -------------------------------------------------------------------------------- |
+| name                     | string                                             | ✔️       | -       | issue 名称                                                                       |
+| title                    | string                                             | ✔️       | -       | issue 标题                                                                       |
+| type                     | string                                             | -        | -       | issue 类型                                                                       |
+| priority                 | string                                             | -        | -       | issue 优先级，默认可选 high/medium/low，也支持自定义                             |
+| storyPoint               | number                                             | -        | -       | 估时                                                                             |
+| storyPointUnit           | string                                             | -        | -       | 估时单位                                                                         |
+| assignee                 | {name:string,instanceId:string,user_icon:string}[] | -        | -       | 负责人，会在卡片头像区的第一列显示，若无数据时会默认显示灰色头像                 |
+| reporter                 | {name:string,instanceId:string,user_icon:string}[] | -        | -       | 报告人                                                                           |
+| tester                   | {name:string,instanceId:string,user_icon:string}[] | -        | -       | 测试人， 会在卡片头像区的第二列显示，若无数据时会默认显示灰色头像                |
+| groupId                  | number                                             | -        | -       | 用于自动给 issue 卡片带上分组色条，内置 8 个颜色，该值取值 0-7                   |
+| resolution               | string                                             | -        | -       | 标记卡片的解决结果，如果该字段不为空，则表示卡片处于完成状态，标题会做删除线处理 |
+| isShowSubtasksStatistics | boolean                                            | -        | false   | 是否显示任务和 bug 的分别统计                                                    |
 
 ### IssueTypeConfig
 

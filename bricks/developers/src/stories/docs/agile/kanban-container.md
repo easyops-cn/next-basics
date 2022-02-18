@@ -24,6 +24,8 @@
 | shouldAdaptHeight | boolean                                                                                       | -        | false   | 是否自适应高度为撑满浏览器窗口                                         |
 | bottomSize        | number                                                                                        | -        | 44      | 容器底部距离浏览器窗口底部的大小                                       |
 | columnWidth       | number                                                                                        | -        | 290     | 列宽度                                                                 |
+| containerStyle    | React.CSSProperties                                                                           |          | -       | 自定义容器的样式                                                       |
+| isHiddenNumber    | boolean                                                                                       |          | false   | 是否显示当前用到的卡片数量                                             |
 
 `<agile.kanban-container>` 为卡片项自定义展示构件传递的数据源为：
 
