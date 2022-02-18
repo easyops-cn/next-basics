@@ -512,10 +512,8 @@ export class GeneralFormElement
       }
     });
   }
-  /**
-   * @description 获取表单值
-   */
-  @method() getFieldsValue(): Record<string, any> {
+
+  _getFieldsValue(): Record<string, any> {
     const values = this.formUtils.getFieldsValue();
     const formatValues = this.formatFormValues(values);
     this.childNodes.forEach((node: any) => {
@@ -524,6 +522,24 @@ export class GeneralFormElement
       }
     });
     return formatValues;
+  }
+
+  /**
+   * @description 获取表单值
+   */
+  @method() getFieldsValue(options?: {
+    runInMicrotask?: boolean;
+    runInMacrotask?: boolean;
+  }): Record<string, any> | Promise<Record<string, any>> {
+    if (!(options?.runInMicrotask || options?.runInMacrotask)) {
+      return this._getFieldsValue();
+    }
+    return new Promise((resolve, reject) => {
+      options.runInMicrotask &&
+        queueMicrotask(() => resolve(this._getFieldsValue()));
+      options.runInMacrotask &&
+        setTimeout(() => resolve(this._getFieldsValue()));
+    });
   }
   /**
    * @description 表单验证成功时触发
