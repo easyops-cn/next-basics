@@ -1,7 +1,14 @@
 .cardItem {
+  &:global(.ant-card) {
+    background: var(--entry-card-item-bg);
+  }
   &:global(.ant-card-bordered) {
     border: 0;
-    border-radius: 8px;
+    border-radius: var(--entry-card-item-radius);
+  }
+
+  &:global(.ant-card-hoverable:hover) {
+    box-shadow: var(--entry-card-item-hover-shadow);
   }
 
   &:global(.ant-card):not(:hover) {
@@ -37,11 +44,11 @@
 
   &:hover {
     &.hoverHighLight {
-      color: var(--text-color-link);
+      color: var(--entry-card-item-highlight-hover-color);
     }
 
     &:not(.hoverHighLight) {
-      color: #08132d;
+      color: var(--entry-card-item-default-hover-color);
     }
   }
 

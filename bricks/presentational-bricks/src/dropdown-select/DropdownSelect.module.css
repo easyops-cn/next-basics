@@ -8,9 +8,9 @@
 .dropdownTriggerShape {
   font-size: 14px;
   padding: 3px 10px;
-  box-shadow: 0px 2px 6px 0px #dcdcdc;
+  box-shadow: var(--dropdown-select-shape-type-trigger-shadow);
   border-radius: 6px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--color-border-divider-line);
 }
 .dropdownLabel {
   overflow: hidden;
@@ -30,7 +30,7 @@
 }
 
 .placeholder {
-  color: #bfbfbf;
+  color: var(--color-auxiliary-text);
 }
 
 .optionTitle {
@@ -51,13 +51,13 @@
 .menuBox {
   :global(.ant-dropdown-menu-item) {
     &:global(.active) {
-      background-color: #f5f5f5;
+      background-color: var(--menu-dropdown-bg);
     }
   }
   :global(.ant-dropdown-menu-item-selected) {
-    background-color: #f5f5f5;
+    background-color: var(--menu-dropdown-bg);
   }
   :global(.ant-dropdown-menu-item:hover) {
-    background-color: #ebf3fd;
+    background-color: var(--antd-item-hover-bg);
   }
 }
