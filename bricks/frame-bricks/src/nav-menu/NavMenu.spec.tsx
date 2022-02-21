@@ -3,6 +3,15 @@ import { Menu } from "antd";
 import { mount } from "enzyme";
 import { NavMenu } from "./NavMenu";
 import { SidebarSubMenu } from "@next-core/brick-types";
+import * as brickKit from "@next-core/brick-kit";
+
+jest.spyOn(brickKit, "getHistory").mockReturnValue({
+  location: {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  listen: () => {},
+} as any);
+
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({} as any);
 
 const mockData = {
   title: "二级菜单标题",

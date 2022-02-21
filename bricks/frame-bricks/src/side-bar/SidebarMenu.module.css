@@ -11,15 +11,17 @@
   }
 
   :global(.ant-menu-submenu-selected):not(:global(.ant-menu-submenu-open)) {
-    background-color: var(--antd-menu-item-selected-bg);
-    color: #fff !important;
+    background-color: var(--color-brand);
+    color: var(--color-strong-text) !important;
+    font-weight: 500;
+    font-size: var(--sub-title-font-size);
     border-radius: var(--card-default-border-radius);
 
     :global(.anticon),
     :global(.ant-menu-submenu-arrow),
     .simpleMenuItemText,
     .subMenuTitleText {
-      color: #fff !important;
+      color: var(--color-normal-icon) !important;
     }
   }
 
@@ -32,7 +34,7 @@
 
     > :global(.anticon) {
       margin-right: 0;
-      color: var(--antd-text-color) !important;
+      color: var(--color-normal-text) !important;
     }
   }
 
@@ -63,7 +65,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
-    color: var(--antd-text-color);
+    color: var(--color-normal-text);
     flex: 1;
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
@@ -88,22 +90,18 @@
 
   .simpleMenuItem {
     &:global(.ant-menu-item-active) {
-      background-color: #f0f6ff;
+      background-color: var(--color-fill-bg-base-1);
+      border-radius: var(--larger-border-radius);
       opacity: 1;
-
-      :global(.anticon),
-      .simpleMenuItemText {
-        color: #595959 !important;
-      }
     }
 
     &:global(.ant-menu-item-selected) {
-      background: var(--antd-menu-item-selected-bg) !important;
+      background: var(--color-brand) !important;
       box-shadow: 0px 2px 12px 0px #1a7aff4d;
 
       :global(.anticon),
       .simpleMenuItemText {
-        color: #fff !important;
+        color: var(--color-normal-icon) !important;
       }
     }
 
@@ -115,18 +113,20 @@
   .subMenuWrapper {
     &:global(.ant-menu-submenu-active) {
       :global(.ant-menu-submenu-title) {
-        background-color: #f0f6ff;
+        background-color: var(--color-fill-bg-base-1);
+        border-radius: var(--larger-border-radius);
       }
 
       :global(.anticon),
       :global(.ant-menu-submenu-title),
       :global(.ant-menu-submenu-arrow),
       .subMenuTitleText {
-        color: #595959 !important;
+        color: var(--color-strong-text) !important;
       }
     }
 
     &:global(.ant-menu-submenu-open) {
+      border-radius: var(--larger-border-radius);
       :global(.ant-menu-submenu-title) {
         opacity: 1;
       }
@@ -142,7 +142,7 @@
       }
       .subMenuTitleText,
       :global(.ant-menu-submenu-arrow) {
-        color: var(--antd-text-color);
+        color: var(--color-normal-text);
       }
     }
 
@@ -154,7 +154,7 @@
   .groupWrapper {
     .groupText {
       font-size: 12px;
-      color: #a9a9a9;
+      color: var(--color-secondary-text);
     }
   }
 

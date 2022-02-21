@@ -4,6 +4,16 @@ import { ExpandedState, SideBar } from "./SideBar";
 import { menuData1, menuData2 } from "./mockData";
 import { Tooltip } from "antd";
 
+import * as brickKit from "@next-core/brick-kit";
+
+jest.spyOn(brickKit, "getHistory").mockReturnValue({
+  location: {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  listen: () => {},
+} as any);
+
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({} as any);
+
 jest.mock("@next-libs/storage", () => ({
   JsonStorage: jest.fn(() => {
     let mockStorageValue: any;

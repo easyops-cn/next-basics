@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
-import { SidebarMenu } from "./SidebarMenu";
-import { SidebarSubMenu } from "@next-core/brick-types";
+import * as SideBarComponent from "./SidebarMenu";
+import { SidebarMenu, SidebarSubMenu } from "@next-core/brick-types";
 import { ReactComponent as FixedSvg } from "../images/fixed.svg";
 import { ReactComponent as ToFixedSvg } from "../images/toFixed.svg";
 import classNames from "classnames";
 import { Tooltip } from "antd";
+import { getRuntime } from "@next-core/brick-kit";
 import { JsonStorage } from "@next-libs/storage";
 
 interface SideBarProps {
@@ -34,8 +35,23 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const [showFirstUsedTooltip, setShowFirstUsedTooltip] = useState<boolean>(
     !storage.getItem(SIDE_BAR_HAS_BEEN_USED)
   );
+  const [menus, setMenus] = useState<SidebarMenu>(menu);
 
   const { t } = useTranslation(NS_FRAME_BRICKS);
+
+  const getMenu = async (): Promise<void> => {
+    if (menu) return;
+    const appMenu = getRuntime().getCurrentRoute().menu;
+
+    if (appMenu && "menuId" in appMenu) {
+      const menu = await getRuntime().fetchMenu(appMenu?.menuId);
+      setMenus(menu);
+    }
+  };
+
+  useEffect(() => {
+    getMenu();
+  }, []);
 
   const handleFixedIconClick = (): void => {
     setShowFirstUsedTooltip(false);
@@ -65,7 +81,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     expandedState !== ExpandedState.Expanded && onMouseLeave && onMouseLeave();
   };
 
-  return menu ? (
+  return menus ? (
     <div
       className={classNames(styles.sideBarContainer, {
         [styles.hovered]: expandedState === ExpandedState.Hovered,
@@ -81,8 +97,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
           {menu.title}
         </div>
       </div>
-      <SidebarMenu
-        menuItems={menu.menuItems || []}
+      <SideBarComponent.SidebarMenu
+        menuItems={menus?.menuItems || []}
         collapsed={expandedState === ExpandedState.Collapsed}
       />
       <div className={styles.sideBarFooter}>

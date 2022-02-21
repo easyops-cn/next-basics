@@ -2,7 +2,7 @@
   border-bottom: none;
   line-height: 32px;
   :global(.ant-menu-submenu-horizontal) {
-    color: var(--antd-text-color);
+    color: var(--color-normal-text);
     margin: 0 4px !important;
 
     :global(.ant-menu-submenu-title .anticon) {
@@ -19,10 +19,10 @@
         top: -2px;
         right: 4px;
         transition: none;
-        color: var(--antd-text-color);
+        color: var(--color-normal-text);
       }
       :global(.ant-menu-submenu-arrow) {
-        color: var(--antd-text-color);
+        color: var(--color-normal-text);
 
         &::before,
         &::after {
@@ -62,31 +62,23 @@
         right: 4px;
       }
       > span {
-        text-shadow: 0px 0px 1px black;
-        background-color: rgba(245, 245, 245, 1) !important;
-        color: rgba(38, 38, 38, 1) !important;
-        /* font-weight: 400 !important; */
+        background-color: var(--v8-top-menu-item-hover) !important;
+        color: var(--color-strong-text) !important;
       }
-    }
-
-    /* subMenu展开时subMenu-title样式 */
-    &:global(.ant-menu-submenu-open .ant-menu-submenu-title) {
-      text-shadow: 0px 0px 1px black;
     }
 
     /* subMenu子项被选中时subMenu-title样式 */
     &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
-      color: var(--antd-text-color);
+      color: var(--color-normal-text);
       > span {
-        text-shadow: 0px 0px 0.5px black;
-        background-color: rgba(0, 0, 0, 0.04);
+        background-color: var(--v8-top-menu-item-selected-bg);
         padding: 4px 16px 4px 8px;
       }
     }
   }
   /* menu-item 样式 */
   > :global(.ant-menu-item) {
-    color: var(--antd-text-color);
+    color: var(--color-normal-text);
     border-bottom: none !important;
     margin: 0 4px !important;
     top: 0;
@@ -97,18 +89,16 @@
 
     &:global(.ant-menu-item-selected) {
       a {
-        text-shadow: 0px 0px 0.5px black;
-        background-color: rgba(245, 245, 245, 1) !important;
-        color: rgba(38, 38, 38, 1) !important;
+        background-color: var(--v8-top-menu-item-selected-bg) !important;
+        color: var(--color-normal-text) !important;
       }
       border-bottom: none !important;
     }
 
     &:global(:not(.ant-menu-item-selected):hover) {
       a {
-        text-shadow: 0px 0px 0.5px black;
-        background-color: rgba(245, 245, 245, 1) !important;
-        color: rgba(38, 38, 38, 1) !important;
+        background-color: var(--v8-top-menu-item-hover) !important;
+        color: var(--color-strong-text) !important;
       }
       border-bottom: none !important;
     }
@@ -118,25 +108,25 @@
 /* 下拉弹窗样式 */
 .popupWrapper {
   :global(.ant-menu) {
+    background-color: var(--antd-component-background) !important;
+
     :global(.ant-menu-submenu-title) {
       padding: 0px 4px 0px 14px;
       margin: 0 2px;
       font-size: 14px;
-      color: var(--antd-text-color);
+      color: var(--color-normal-text);
       line-height: 14px;
     }
 
     :global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       > span {
-        text-shadow: 0px 0px 1px black;
-        color: var(--antd-text-color) !important;
+        color: var(--color-normal-text) !important;
       }
     }
 
     :global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
       > span {
-        text-shadow: 0px 0px 0.5px black;
-        color: var(--antd-text-color);
+        color: var(--color-normal-text);
       }
     }
   }
@@ -154,7 +144,7 @@
       padding: 0px 24px 0px 14px;
       margin: 2px;
       font-size: 14px;
-      color: var(--antd-text-color);
+      color: var(--color-normal-text);
       line-height: 28px;
       height: 28px;
       border-radius: var(--card-default-border-radius);
@@ -166,25 +156,23 @@
 
     &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       color: inherit;
-      background-color: rgba(245, 245, 245, 1) !important;
+      background-color: var(--v8-top-menu-item-hover) !important;
       > span {
-        text-shadow: 0px 0px 1px black;
-        color: rgba(38, 38, 38, 1) !important;
+        color: var(--color-strong-text) !important;
       }
       :global(.ant-menu-submenu-arrow) {
-        color: rgba(38, 38, 38, 1) !important;
+        color: var(--color-strong-text) !important;
       }
     }
 
     &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
       color: inherit;
-      background-color: rgba(245, 245, 245, 1) !important;
+      background-color: var(--v8-top-menu-item-selected-bg) !important;
       > span {
-        text-shadow: 0px 0px 0.5px black;
-        color: rgba(38, 38, 38, 1) !important;
+        color: var(--color-strong-text) !important;
       }
       :global(.ant-menu-submenu-arrow) {
-        color: rgba(38, 38, 38, 1) !important;
+        color: var(--color-strong-text) !important;
       }
     }
   }
@@ -195,8 +183,7 @@
       color: inherit;
       background-color: inherit;
       > span {
-        /* text-shadow: 0px 0px 1px black; */
-        color: #bfbfbf !important;
+        color: var(--color-secondary-text) !important;
         font-weight: 400 !important;
         font-size: 12px;
         height: 20px;
@@ -214,7 +201,7 @@
     border-radius: var(--card-default-border-radius);
     span {
       font-size: 14px;
-      color: var(--antd-text-color);
+      color: var(--color-normal-text);
       line-height: 14px;
       margin: 0 2px;
     }
@@ -226,18 +213,16 @@
 
   .simpleMenuItem:global(.ant-menu-item-active) {
     color: inherit;
-    background-color: rgba(245, 245, 245, 1) !important;
+    background-color: var(--v8-top-menu-item-hover) !important;
     span {
-      text-shadow: 0px 0px 1px black;
-      color: rgba(38, 38, 38, 1) !important;
+      color: var(--color-normal-text) !important;
     }
   }
 
   :global(.ant-menu-item-selected) {
-    text-shadow: 0px 0px 0.5px black;
-    background-color: rgba(245, 245, 245, 1) !important;
+    background-color: var(--v8-top-menu-item-selected-bg) !important;
     span {
-      color: rgba(38, 38, 38, 1);
+      color: var(--color-strong-text);
     }
   }
 }

@@ -1,13 +1,19 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu } from "antd";
+import { UnregisterCallback, Location } from "history";
 import {
   SidebarMenuSimpleItem,
   SidebarMenuItem,
   SidebarMenuGroup,
 } from "@next-core/brick-types";
+import { getRuntime, getHistory } from "@next-core/brick-kit";
 import classNames from "classnames";
-import { GeneralIcon, Link } from "@next-libs/basic-components";
+import {
+  GeneralIcon,
+  Link,
+  initMenuItemAndMatchCurrentPathKeys,
+} from "@next-libs/basic-components";
 import style from "./NavMenu.module.css";
 
 interface SidebarMenuProps {
@@ -28,7 +34,38 @@ function isSubMenu(
 
 export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   const { menuItems, selectedKeys } = props;
+  const [menus, setMenus] = useState(menuItems);
+
+  const history = getHistory();
+  const [location, setLocation] = useState<Location>(history.location);
+  const unlisten: UnregisterCallback = history.listen((location) => {
+    setLocation(location);
+  });
+  const { pathname, search } = location;
+
   const [selectedKey, setSelectedKey] = useState(selectedKeys ?? []);
+
+  const getMenu = async (): Promise<void> => {
+    if (menuItems) return;
+    const appMenu = getRuntime().getCurrentRoute().menu;
+
+    if (appMenu && "menuId" in appMenu) {
+      const menu = await getRuntime().fetchMenu(appMenu?.menuId);
+      const { selectedKeys } = initMenuItemAndMatchCurrentPathKeys(
+        menu.menuItems,
+        pathname,
+        search,
+        ""
+      );
+      setSelectedKey(selectedKeys);
+      setMenus(menu.menuItems);
+    }
+  };
+
+  useEffect(() => {
+    getMenu();
+    return unlisten;
+  }, []);
 
   const renderSimpleMenuItem = (
     item: SidebarMenuSimpleItem,
@@ -96,11 +133,11 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         popupClassName={style.popupWrapper}
         title={
           <span>
-            {item.icon && (
+            {/* {item.icon && (
               <i className={style.menuItemIcon}>
                 <GeneralIcon icon={item.icon} size={14} />
               </i>
-            )}
+            )} */}
             <span
               className={classNames(style.menuText, style.subMenuTitleText)}
             >
@@ -122,8 +159,8 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     return isSubMenu(item, showSubMenu)
       ? renderSubMenu(item)
       : isGroup(item)
-      ? renderGroupMenu(item, showEmptyIcon)
-      : renderSimpleMenuItem(item, showEmptyIcon);
+      ? renderGroupMenu(item, false)
+      : renderSimpleMenuItem(item, false);
   };
 
   return (
@@ -133,7 +170,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       className={style.navMenuContainer}
       onClick={(e) => setSelectedKey([e.key as string])}
     >
-      {menuItems.map((item) => renderMenuItem(item, undefined, true))}
+      {menus.map((item) => renderMenuItem(item, undefined, true))}
     </Menu>
   );
 }
