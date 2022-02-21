@@ -71,7 +71,7 @@ export const story: Story = {
       },
       brick: "agile.issue-card",
       properties: {
-        topRightOperate: {
+        topRightBrick: {
           useBrick: {
             brick: "basic-bricks.general-custom-buttons",
             events: {
