@@ -281,8 +281,8 @@ export function RealUploadFile(
     onRemove: handleRemove,
     supportServerRender: true,
     progress: {
-      strokeColor: "#2FC25B",
-      trailColor: "#F5F5F5",
+      strokeColor: "var(--color-success)",
+      trailColor: "var(--color-fill-bg-base-1)",
       strokeWidth: "1px",
       showInfo: false,
     },

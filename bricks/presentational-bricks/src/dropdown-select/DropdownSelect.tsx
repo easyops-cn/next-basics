@@ -284,7 +284,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
           style={{
             backgroundColor: props.disabled
               ? "var(--dropdown-select-shape-type-disable-bg)"
-              : "var(--color-fill-bg-container-4)",
+              : "var(--color-fill-bg-container-1)",
           }}
           data-testid="dropdown-trigger-multiple"
         >
