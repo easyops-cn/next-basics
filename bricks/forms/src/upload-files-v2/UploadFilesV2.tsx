@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from "react";
-import { uniqueId, forEach, map, findIndex, some, isEqual } from "lodash";
+import { uniqueId, map, findIndex, some, isEqual } from "lodash";
+import { useCurrentTheme } from "@next-core/brick-kit";
 import update from "immutability-helper";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -78,7 +79,7 @@ export function RealUploadFile(
   ref: any
 ): React.ReactElement {
   const { uploadButtonProps } = props;
-
+  const theme = useCurrentTheme();
   const { t } = useTranslation(NS_FORMS);
   const [value, setValue] = React.useState([]);
   const [fileList, setFileList] = useState([]);
@@ -87,7 +88,7 @@ export function RealUploadFile(
   const buttonIcon: MenuIcon = {
     lib: "easyops",
     category: "colored-common",
-    icon: "upload",
+    icon: theme == "dark-v2" ? "upload-dark" : "upload-light",
   };
 
   React.useEffect(() => {
