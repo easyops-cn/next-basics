@@ -38,7 +38,7 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "@next-core/babel-runtime-helpers": "^1.0.18",
     "@next-core/brick-http": "^2.3.6",
-    "@next-core/brick-icons": "^2.26.9",
+    "@next-core/brick-icons": "^2.26.11",
     "@next-core/brick-kit": "^2.106.0",
     "@next-core/brick-types": "^2.59.0",
     "@next-core/brick-utils": "^2.35.0",
@@ -102,6 +102,6 @@
     "ua-parser-js": "0.7.19"
   },
   "easyops": {
-    "dev-dependencies": "1.12.130"
+    "dev-dependencies": "1.12.132"
   }
 }
