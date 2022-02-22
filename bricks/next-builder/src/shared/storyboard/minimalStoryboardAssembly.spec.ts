@@ -232,6 +232,7 @@ describe("minimalStoryboardAssembly", () => {
               {
                 [symbolForNodeId]: "B-01",
                 [symbolForNodeInstanceId]: "instance-b01",
+                iid: "instance-b01",
                 brick: "m",
                 if: false,
                 slots: {
@@ -241,12 +242,14 @@ describe("minimalStoryboardAssembly", () => {
                       {
                         [symbolForNodeId]: "B-04",
                         [symbolForNodeInstanceId]: "instance-b04",
+                        iid: "instance-b04",
                         brick: "p",
                       },
 
                       {
                         [symbolForNodeId]: "B-05",
                         [symbolForNodeInstanceId]: "instance-b05",
+                        iid: "instance-b05",
                         template: "q",
                       },
                     ],
@@ -276,6 +279,7 @@ describe("minimalStoryboardAssembly", () => {
               {
                 [symbolForNodeId]: "B-02",
                 [symbolForNodeInstanceId]: "instance-b02",
+                iid: "instance-b02",
                 brick: "n",
               },
             ],
@@ -298,6 +302,7 @@ describe("minimalStoryboardAssembly", () => {
                   {
                     [symbolForNodeId]: "B-03",
                     [symbolForNodeInstanceId]: "instance-b03",
+                    iid: "instance-b03",
                     brick: "o",
                   },
                 ],
@@ -324,6 +329,7 @@ describe("minimalStoryboardAssembly", () => {
                 {
                   [symbolForNodeId]: "T-B-01",
                   [symbolForNodeInstanceId]: "b",
+                  iid: "b",
                   brick: "z",
                   slots: {
                     m5: {
@@ -332,6 +338,7 @@ describe("minimalStoryboardAssembly", () => {
                         {
                           [symbolForNodeId]: "T-B-02",
                           [symbolForNodeInstanceId]: "c",
+                          iid: "c",
                           brick: "y",
                           ref: "two",
                           slots: {
@@ -341,6 +348,7 @@ describe("minimalStoryboardAssembly", () => {
                                 {
                                   [symbolForNodeId]: "T-B-03",
                                   [symbolForNodeInstanceId]: "d",
+                                  iid: "d",
                                   brick: "x",
                                 },
                               ],

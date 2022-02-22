@@ -221,12 +221,16 @@ describe("buildStoryboardV2", () => {
             providers: ["p1"],
             bricks: [
               {
+                iid: "instance-b01",
                 brick: "m",
                 if: false,
                 slots: {
                   m1: {
                     type: "bricks",
-                    bricks: [{ brick: "p" }, { template: "q" }],
+                    bricks: [
+                      { iid: "instance-b04", brick: "p" },
+                      { iid: "instance-b05", template: "q" },
+                    ],
                   },
                   m2: {
                     type: "routes",
@@ -245,7 +249,7 @@ describe("buildStoryboardV2", () => {
                   },
                 },
               },
-              { brick: "n" },
+              { iid: "instance-b02", brick: "n" },
             ],
           },
           {
@@ -258,7 +262,7 @@ describe("buildStoryboardV2", () => {
               {
                 path: "/b/c",
                 type: "bricks",
-                bricks: [{ brick: "o" }],
+                bricks: [{ iid: "instance-b03", brick: "o" }],
               },
             ],
           },
@@ -283,18 +287,20 @@ describe("buildStoryboardV2", () => {
               ],
               bricks: [
                 {
+                  iid: "instance-t-b01",
                   brick: "z",
                   slots: {
                     m5: {
                       type: "bricks",
                       bricks: [
                         {
+                          iid: "instance-t-b02",
                           brick: "y",
                           ref: "two",
                           slots: {
                             m6: {
                               type: "bricks",
-                              bricks: [{ brick: "x" }],
+                              bricks: [{ iid: "instance-t-b03", brick: "x" }],
                             },
                           },
                         },
@@ -553,6 +559,7 @@ describe("buildStoryboardV2", () => {
               {
                 [symbolForNodeId]: "B-01",
                 [symbolForNodeInstanceId]: "instance-b01",
+                iid: "instance-b01",
                 brick: "m",
                 if: false,
               },
@@ -568,6 +575,7 @@ describe("buildStoryboardV2", () => {
                 {
                   [symbolForNodeId]: "T-B-01",
                   [symbolForNodeInstanceId]: "instance-t-b01",
+                  iid: "instance-t-b01",
                   brick: "z",
                 },
               ],
@@ -645,11 +653,13 @@ describe("buildStoryboardV2", () => {
             segues: undefined,
             bricks: [
               {
+                iid: "5c4de59f26f55",
                 brick: "presentational-bricks.brick-table",
                 portal: false,
                 properties: {
                   otherFields: ["yes"],
                   useBrick: {
+                    iid: "instance-b02",
                     brick: "presentational-bricks.brick-value-mapping",
                     if: false,
                     lifeCycle: undefined,
@@ -745,11 +755,13 @@ describe("buildStoryboardV2", () => {
           {
             bricks: [
               {
+                iid: "5c4de59f26f55",
                 brick: "presentational-bricks.brick-table",
                 portal: false,
                 properties: {
                   useBrick: [
                     {
+                      iid: "instance-b02",
                       brick: "presentational-bricks.brick-value-mapping",
                       if: false,
                       lifeCycle: undefined,
@@ -760,6 +772,7 @@ describe("buildStoryboardV2", () => {
                       [symbolForNodeInstanceId]: "instance-b02",
                     },
                     {
+                      iid: "instance-b03",
                       brick: "presentational-bricks.icon-select",
                       if: false,
                       lifeCycle: undefined,
@@ -770,6 +783,7 @@ describe("buildStoryboardV2", () => {
                       [symbolForNodeInstanceId]: "instance-b03",
                     },
                     {
+                      iid: "instance-b04",
                       brick: "presentational-bricks.more-select",
                       if: false,
                       lifeCycle: undefined,
@@ -853,6 +867,7 @@ describe("buildStoryboardV2", () => {
               {
                 [symbolForNodeId]: "B-45235",
                 [symbolForNodeInstanceId]: "5c4de59f26f55",
+                iid: "5c4de59f26f55",
                 brick: "presentational-bricks.brick-table",
                 portal: false,
                 properties: {

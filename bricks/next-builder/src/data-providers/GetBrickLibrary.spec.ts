@@ -330,6 +330,7 @@ describe("GetBrickLibrary", () => {
           "bricks": Array [
             Object {
               "brick": "easy-view",
+              "iid": "x-1",
               "properties": Object {
                 "gap": 10,
               },
@@ -343,6 +344,7 @@ describe("GetBrickLibrary", () => {
                           "action": "console.log",
                         },
                       },
+                      "iid": "x-1-1",
                     },
                   ],
                   "type": "bricks",
@@ -352,6 +354,7 @@ describe("GetBrickLibrary", () => {
                     Object {
                       "bg": true,
                       "brick": "test-provider",
+                      "iid": "x-1-2",
                     },
                   ],
                   "type": "bricks",
@@ -376,6 +379,7 @@ describe("GetBrickLibrary", () => {
           "bricks": Array [
             Object {
               "brick": "easy-view",
+              "iid": "y-1",
               "properties": Object {
                 "gridTemplateAreas": Array [
                   Array [

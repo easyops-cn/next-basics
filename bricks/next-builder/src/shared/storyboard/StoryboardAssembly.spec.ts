@@ -438,12 +438,16 @@ describe("StoryboardAssembly", () => {
               providers: ["p1"],
               bricks: [
                 {
+                  iid: "instance-b01",
                   brick: "m",
                   if: false,
                   slots: {
                     m1: {
                       type: "bricks",
-                      bricks: [{ brick: "p" }, { template: "q" }],
+                      bricks: [
+                        { iid: "instance-b04", brick: "p" },
+                        { iid: "instance-b05", template: "q" },
+                      ],
                     },
 
                     m2: {
@@ -465,7 +469,7 @@ describe("StoryboardAssembly", () => {
                   },
                 },
 
-                { brick: "n" },
+                { iid: "instance-b02", brick: "n" },
               ],
             },
 
@@ -480,7 +484,7 @@ describe("StoryboardAssembly", () => {
                 {
                   path: "/b/c",
                   type: "bricks",
-                  bricks: [{ brick: "o" }],
+                  bricks: [{ iid: "instance-b03", brick: "o" }],
                 },
               ],
             },
@@ -506,18 +510,20 @@ describe("StoryboardAssembly", () => {
                 ],
                 bricks: [
                   {
+                    iid: "b",
                     brick: "z",
                     slots: {
                       m5: {
                         type: "bricks",
                         bricks: [
                           {
+                            iid: "c",
                             brick: "y",
                             ref: "two",
                             slots: {
                               m6: {
                                 type: "bricks",
-                                bricks: [{ brick: "x" }],
+                                bricks: [{ iid: "d", brick: "x" }],
                               },
                             },
                           },
@@ -617,6 +623,7 @@ describe("StoryboardAssembly", () => {
                 {
                   [symbolForNodeId]: "B-01",
                   [symbolForNodeInstanceId]: "instance-b01",
+                  iid: "instance-b01",
                   brick: "m",
                   if: false,
                   slots: {
@@ -626,12 +633,14 @@ describe("StoryboardAssembly", () => {
                         {
                           [symbolForNodeId]: "B-04",
                           [symbolForNodeInstanceId]: "instance-b04",
+                          iid: "instance-b04",
                           brick: "p",
                         },
 
                         {
                           [symbolForNodeId]: "B-05",
                           [symbolForNodeInstanceId]: "instance-b05",
+                          iid: "instance-b05",
                           template: "q",
                         },
                       ],
@@ -661,6 +670,7 @@ describe("StoryboardAssembly", () => {
                 {
                   [symbolForNodeId]: "B-02",
                   [symbolForNodeInstanceId]: "instance-b02",
+                  iid: "instance-b02",
                   brick: "n",
                 },
               ],
@@ -683,6 +693,7 @@ describe("StoryboardAssembly", () => {
                     {
                       [symbolForNodeId]: "B-03",
                       [symbolForNodeInstanceId]: "instance-b03",
+                      iid: "instance-b03",
                       brick: "o",
                     },
                   ],
@@ -712,6 +723,7 @@ describe("StoryboardAssembly", () => {
                 ],
                 bricks: [
                   {
+                    iid: "b",
                     [symbolForNodeId]: "T-B-01",
                     [symbolForNodeInstanceId]: "b",
                     brick: "z",
@@ -722,6 +734,7 @@ describe("StoryboardAssembly", () => {
                           {
                             [symbolForNodeId]: "T-B-02",
                             [symbolForNodeInstanceId]: "c",
+                            iid: "c",
                             brick: "y",
                             ref: "two",
                             slots: {
@@ -731,6 +744,7 @@ describe("StoryboardAssembly", () => {
                                   {
                                     [symbolForNodeId]: "T-B-03",
                                     [symbolForNodeInstanceId]: "d",
+                                    iid: "d",
                                     brick: "x",
                                   },
                                 ],
@@ -828,6 +842,7 @@ describe("StoryboardAssembly", () => {
             {
               bricks: [
                 {
+                  iid: "b",
                   brick: "z",
                 },
               ],
@@ -837,6 +852,7 @@ describe("StoryboardAssembly", () => {
             {
               bricks: [
                 {
+                  iid: "a",
                   brick: "y",
                 },
               ],
@@ -848,7 +864,7 @@ describe("StoryboardAssembly", () => {
             customTemplates: [
               {
                 name: "tpl-01",
-                bricks: [{ brick: "x" }],
+                bricks: [{ iid: "b", brick: "x" }],
               },
             ],
           },
@@ -868,12 +884,16 @@ describe("StoryboardAssembly", () => {
               providers: ["p1"],
               bricks: [
                 {
+                  iid: "instance-b01",
                   brick: "m",
                   if: false,
                   slots: {
                     m1: {
                       type: "bricks",
-                      bricks: [{ brick: "p" }, { template: "q" }],
+                      bricks: [
+                        { iid: "instance-b04", brick: "p" },
+                        { iid: "instance-b05", template: "q" },
+                      ],
                     },
 
                     m2: {
@@ -895,7 +915,7 @@ describe("StoryboardAssembly", () => {
                   },
                 },
 
-                { brick: "n" },
+                { iid: "instance-b02", brick: "n" },
               ],
             },
 
@@ -910,7 +930,7 @@ describe("StoryboardAssembly", () => {
                 {
                   path: "/b/c",
                   type: "bricks",
-                  bricks: [{ brick: "o" }],
+                  bricks: [{ iid: "instance-b03", brick: "o" }],
                 },
               ],
             },
@@ -918,6 +938,7 @@ describe("StoryboardAssembly", () => {
             {
               bricks: [
                 {
+                  iid: "b",
                   brick: "z",
                 },
               ],
@@ -927,6 +948,7 @@ describe("StoryboardAssembly", () => {
             {
               bricks: [
                 {
+                  iid: "a",
                   brick: "y",
                 },
               ],
@@ -955,18 +977,20 @@ describe("StoryboardAssembly", () => {
                 ],
                 bricks: [
                   {
+                    iid: "b",
                     brick: "z",
                     slots: {
                       m5: {
                         type: "bricks",
                         bricks: [
                           {
+                            iid: "c",
                             brick: "y",
                             ref: "two",
                             slots: {
                               m6: {
                                 type: "bricks",
-                                bricks: [{ brick: "x" }],
+                                bricks: [{ iid: "d", brick: "x" }],
                               },
                             },
                           },

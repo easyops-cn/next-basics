@@ -373,11 +373,12 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.1295e1e4.js",
+            path: "dist/index.8945e1a5.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
     {
+      "iid": "t-1",
       "brick": "easy-view",
       "properties": {
         "gap": "<% PROCESSORS.myPkg.myFunc(__WIDGET_FN__[\\"app-1\\"].abc()) %>"
@@ -387,6 +388,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
           "type": "bricks",
           "bricks": [
             {
+              "iid": "t-1-1",
               "brick": "general-button",
               "events": {
                 "click": {
@@ -400,6 +402,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
           "type": "bricks",
           "bricks": [
             {
+              "iid": "t-1-2",
               "brick": "test-provider",
               "bg": true
             }
@@ -460,6 +463,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
   },
   "bricks": [
     {
+      "iid": "u-1",
       "brick": "app-1.template-t",
       "properties": {
         "gridTemplateAreas": [
@@ -805,6 +809,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
       "thumbnail": "bricks/app-1/dist/assets/abc.jpeg",
       "bricks": [
         {
+          "iid": "x-1",
           "brick": "easy-view",
           "properties": {
             "gap": 10
@@ -814,6 +819,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
               "type": "bricks",
               "bricks": [
                 {
+                  "iid": "x-1-1",
                   "brick": "general-button",
                   "events": {
                     "click": {
@@ -827,6 +833,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
               "type": "bricks",
               "bricks": [
                 {
+                  "iid": "x-1-2",
                   "brick": "test-provider",
                   "bg": true
                 }
@@ -842,6 +849,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
       "thumbnail": null,
       "bricks": [
         {
+          "iid": "y-1",
           "brick": "easy-view",
           "properties": {
             "gridTemplateAreas": [
@@ -904,7 +912,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
 }`,
           },
           {
-            path: "dist/index.fd0d08c9.js",
+            path: "dist/index.44cbf997.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
