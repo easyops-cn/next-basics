@@ -16,7 +16,7 @@
   margin: 5px 0;
   width: 100%;
   text-align: center;
-  color: rgba(0, 0, 0, 0.65);
+  color: var(--color-auxiliary-text);
 }
 
 .link:hover {
@@ -24,7 +24,7 @@
 }
 
 .link:hover {
-  color: #167be0;
+  color: var(--antd-link-color);
 }
 
 .icon {
@@ -34,10 +34,11 @@
 .text {
   text-align: center;
   font-size: 14px;
+  color: var(--color-normal-text);
 }
 .multiCardGeneralVerticalLine {
   margin: 20px 0;
-  border-left: 1px solid #e8e8e8;
+  border-left: 1px solid var(--color-text-divider-line);
   opacity: 0.55;
 }
 .verticalLine {
