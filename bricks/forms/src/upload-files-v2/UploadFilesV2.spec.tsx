@@ -1,9 +1,11 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { Upload } from "antd";
 import { UploadFilesV2 } from "./UploadFilesV2";
 import { NS_FORMS, K } from "../i18n/constants";
+import * as brickKit from "@next-core/brick-kit";
+import { GeneralIcon } from "@next-libs/basic-components";
 import i18n from "i18next";
 jest.mock("@next-core/brick-http");
 
@@ -482,5 +484,21 @@ describe("UploadFilesV2", () => {
     expect(
       wrapper.find(".ant-upload-drag").hasClass("uploadContainerDisplayNone")
     ).toBeFalsy();
+  });
+
+  it("should show light icon", () => {
+    const syponUseCurrentTheme = jest
+      .spyOn(brickKit, "useCurrentTheme")
+      .mockReturnValue("dark-v2");
+    const wrapper = mount(
+      <UploadFilesV2 url={url} value={fileList} uploadDraggable />
+    );
+
+    expect(wrapper.find(GeneralIcon).at(0).prop("icon")).toEqual({
+      category: "colored-common",
+      icon: "upload-dark",
+      lib: "easyops",
+    });
+    syponUseCurrentTheme.mockRestore();
   });
 });

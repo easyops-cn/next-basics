@@ -109,6 +109,10 @@
         margin-bottom: 10px !important;
       }
     }
+
+    :global(.ant-upload-drag-icon .easyops-icon) {
+      font-size: 3.2em;
+    }
   }
 }
 .textContainer {
