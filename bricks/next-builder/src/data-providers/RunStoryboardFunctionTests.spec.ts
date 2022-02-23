@@ -39,6 +39,7 @@ describe("RunStoryboardFunctionTests", () => {
             tests: {
               total: 0,
               passed: 0,
+              failed: 0,
             },
           },
           coverageByFunction: {},
@@ -119,6 +120,7 @@ describe("RunStoryboardFunctionTests", () => {
             tests: {
               total: 4,
               passed: 2,
+              failed: 2,
             },
           },
           coverageByFunction: {
@@ -149,6 +151,7 @@ describe("RunStoryboardFunctionTests", () => {
               tests: {
                 total: 1,
                 passed: 1,
+                failed: 0,
                 list: [true],
               },
             },
@@ -179,6 +182,7 @@ describe("RunStoryboardFunctionTests", () => {
               tests: {
                 total: 2,
                 passed: 1,
+                failed: 1,
                 list: [true, false],
               },
             },
@@ -210,6 +214,7 @@ describe("RunStoryboardFunctionTests", () => {
               tests: {
                 total: 0,
                 passed: 0,
+                failed: 0,
                 list: [],
               },
             },
@@ -268,6 +273,7 @@ describe("RunStoryboardFunctionTests", () => {
               tests: {
                 total: 2,
                 passed: 1,
+                failed: 1,
                 list: [true, false],
               },
               processedCoverage: {
