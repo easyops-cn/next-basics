@@ -68,8 +68,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   }, []);
 
   const renderSimpleMenuItem = (
-    item: SidebarMenuSimpleItem,
-    showEmptyIcon?: boolean
+    item: SidebarMenuSimpleItem
   ): React.ReactNode => {
     return (
       <Menu.Item
@@ -78,15 +77,6 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         className={style.simpleMenuItem}
       >
         <Link to={item.to} href={item.href} target={item.target}>
-          {showEmptyIcon ? (
-            <i className={style.menuItemIcon}></i>
-          ) : (
-            item.icon && (
-              <i className={style.menuItemIcon}>
-                <GeneralIcon icon={item.icon} size={14} />
-              </i>
-            )
-          )}
           <span
             className={classNames(style.menuText, style.simpleMenuItemText)}
           >
@@ -97,30 +87,18 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     );
   };
 
-  const renderGroupMenu = (
-    item: SidebarMenuGroup,
-    showEmptyIcon?: boolean
-  ): React.ReactNode => {
+  const renderGroupMenu = (item: SidebarMenuGroup): React.ReactNode => {
     return (
       <Menu.ItemGroup
         key={item.key}
         className={style.groupWrapper}
         title={
-          <span>
-            <i
-              className={classNames(style.menuItemIcon, style.groupTitlePoint, {
-                [style.hideGroupTitlePoint]: showEmptyIcon,
-              })}
-            ></i>
-            <span className={classNames(style.menuText, style.groupText)}>
-              {item.title}
-            </span>
+          <span className={classNames(style.menuText, style.groupText)}>
+            {item.title}
           </span>
         }
       >
-        {item.items?.map((innerItem) =>
-          renderMenuItem(innerItem, showEmptyIcon)
-        )}
+        {item.items?.map((innerItem) => renderMenuItem(innerItem))}
       </Menu.ItemGroup>
     );
   };
@@ -132,17 +110,8 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         className={style.subMenuWrapper}
         popupClassName={style.popupWrapper}
         title={
-          <span>
-            {/* {item.icon && (
-              <i className={style.menuItemIcon}>
-                <GeneralIcon icon={item.icon} size={14} />
-              </i>
-            )} */}
-            <span
-              className={classNames(style.menuText, style.subMenuTitleText)}
-            >
-              {item.title}
-            </span>
+          <span className={classNames(style.menuText, style.subMenuTitleText)}>
+            {item.title}
           </span>
         }
       >
@@ -159,8 +128,8 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     return isSubMenu(item, showSubMenu)
       ? renderSubMenu(item)
       : isGroup(item)
-      ? renderGroupMenu(item, false)
-      : renderSimpleMenuItem(item, false);
+      ? renderGroupMenu(item)
+      : renderSimpleMenuItem(item);
   };
 
   return (

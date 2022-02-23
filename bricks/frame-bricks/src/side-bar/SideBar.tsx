@@ -16,6 +16,7 @@ interface SideBarProps {
   expandedState?: ExpandedState;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  onSideBarFixed?: (isFiexed: boolean) => void;
 }
 
 export enum ExpandedState {
@@ -27,7 +28,7 @@ export enum ExpandedState {
 export const SIDE_BAR_HAS_BEEN_USED = "side-bar-has-been-used";
 
 export function SideBar(props: SideBarProps): React.ReactElement {
-  const { menu, onMouseEnter, onMouseLeave } = props;
+  const { menu, onMouseEnter, onMouseLeave, onSideBarFixed } = props;
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
   const [expandedState, setExpandedState] = useState<ExpandedState>(
     props.expandedState || ExpandedState.Collapsed
@@ -56,11 +57,15 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const handleFixedIconClick = (): void => {
     setShowFirstUsedTooltip(false);
     storage.setItem(SIDE_BAR_HAS_BEEN_USED, true);
-    setExpandedState(
+
+    const currentState =
       expandedState === ExpandedState.Expanded
         ? ExpandedState.Collapsed
-        : ExpandedState.Expanded
-    );
+        : ExpandedState.Expanded;
+
+    setExpandedState(currentState);
+
+    onSideBarFixed?.(currentState === ExpandedState.Expanded);
   };
 
   const handleMouseEnter = (): void => {
@@ -69,7 +74,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         ? expandedState
         : ExpandedState.Hovered
     );
-    onMouseEnter && onMouseEnter();
+    onMouseEnter?.();
   };
 
   const handleMouseLeave = (): void => {
@@ -78,7 +83,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         ? expandedState
         : ExpandedState.Collapsed
     );
-    expandedState !== ExpandedState.Expanded && onMouseLeave && onMouseLeave();
+    expandedState !== ExpandedState.Expanded && onMouseLeave?.();
   };
 
   return menus ? (

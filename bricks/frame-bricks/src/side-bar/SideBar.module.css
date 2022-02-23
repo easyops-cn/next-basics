@@ -1,6 +1,6 @@
 .sideBarContainer {
   position: fixed;
-  top: var(--app-bar-height);
+  top: calc(var(--app-bar-height) + 1px);
   left: 0;
   bottom: 0;
   z-index: 99;

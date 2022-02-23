@@ -47,7 +47,7 @@ export class SideBarElement extends UpdatingElement {
    */
   @event({ type: "side.bar.enter" })
   _handleMouseEnter: EventEmitter<Record<string, any>>;
-  handleMouseEnter = () => {
+  handleMouseEnter = (): void => {
     this._handleMouseEnter.emit();
   };
 
@@ -57,8 +57,18 @@ export class SideBarElement extends UpdatingElement {
    */
   @event({ type: "side.bar.leave" })
   _handleMouseLeave: EventEmitter<Record<string, any>>;
-  handleMouseLeave = () => {
+  handleMouseLeave = (): void => {
     this._handleMouseLeave.emit();
+  };
+
+  /**
+   * @detail
+   * @description
+   */
+  @event({ type: "side.bar.fixed" })
+  _handleSideBarFixed: EventEmitter<boolean>;
+  handleSideBarFixed = (isFixed: boolean): void => {
+    this._handleSideBarFixed.emit(isFixed);
   };
 
   connectedCallback(): void {
@@ -84,6 +94,7 @@ export class SideBarElement extends UpdatingElement {
             expandedState={this.expandedState}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
+            onSideBarFixed={this.handleSideBarFixed}
           />
         </BrickWrapper>,
         this

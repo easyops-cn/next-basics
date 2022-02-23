@@ -1,6 +1,7 @@
 .navMenuContainer {
   border-bottom: none;
   line-height: 32px;
+  background: none !important;
   :global(.ant-menu-submenu-horizontal) {
     color: var(--color-normal-text);
     margin: 0 4px !important;
@@ -132,7 +133,7 @@
   }
 
   :global(.ant-menu-item-group-list) {
-    margin: 0 4px;
+    margin: 0 2px;
   }
 
   /* 子菜单项样式 */
@@ -225,4 +226,15 @@
       color: var(--color-strong-text);
     }
   }
+}
+
+.popupWrapper::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  filter: blur(32px);
+  z-index: -1;
+  /* background-size:cover; */
 }
