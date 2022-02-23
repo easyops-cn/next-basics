@@ -24,9 +24,9 @@
   "sideEffects": true,
   "devDependencies": {
     "@next-core/storyboard-function-types": "^0.2.1",
-    "@next-libs/basic-components": "^3.2.6",
-    "@next-libs/cmdb-instances": "^6.18.7",
-    "@next-libs/code-editor-components": "^4.0.16",
+    "@next-libs/basic-components": "^3.3.1",
+    "@next-libs/cmdb-instances": "^6.21.0",
+    "@next-libs/code-editor-components": "^4.0.20",
     "@next-libs/storage": "^2.0.2",
     "@next-sdk/api-gateway-sdk": "^2.0.17",
     "@next-sdk/cmdb-sdk": "^2.1.1",
