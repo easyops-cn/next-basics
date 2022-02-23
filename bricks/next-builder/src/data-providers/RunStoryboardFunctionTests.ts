@@ -13,6 +13,7 @@ import {
   CoverageStatType,
   ProcessedCoverageOk,
   StoryboardFunctionWithTests,
+  TestStats,
 } from "../shared/functions/interfaces";
 import { processSerializableValue } from "../shared/functions/processSerializableValue";
 import { getProcessedCoverage } from "../shared/functions/getProcessedCoverage";
@@ -34,8 +35,7 @@ interface CoverageReport {
   processedCoverage?: ProcessedCoverageOk;
 }
 
-interface TestsCount {
-  total: number;
+interface TestsCount extends TestStats {
   passed: number;
   list?: boolean[];
 }
@@ -88,6 +88,7 @@ export function RunStoryboardFunctionTests({
         {
           total: fnTotal,
           passed: fnPassed,
+          failed: fnTotal - fnPassed,
           list,
         },
         keepProcessedCoverage
@@ -100,6 +101,7 @@ export function RunStoryboardFunctionTests({
     coverage: accumulateCoverageReport(validCoverages, {
       total,
       passed,
+      failed: total - passed,
     }),
     coverageByFunction,
   };
