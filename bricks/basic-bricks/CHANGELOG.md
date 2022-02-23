@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.167.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.8...@next-bricks/basic-bricks@1.167.9) (2022-02-23)
+
+
+### Bug Fixes
+
+* card style ([1a40ae5](https://github.com/easyops-cn/next-basics/commit/1a40ae586618d12cf6ffd395e1c4f1fd0dc7c009))
+
+
+
+
+
 ## [1.167.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.7...@next-bricks/basic-bricks@1.167.8) (2022-02-18)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
