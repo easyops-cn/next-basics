@@ -45,7 +45,8 @@ export function PageTitle({
                     }),
               }
             : {
-                fontSize: 18,
+                fontSize: "var(--page-title-font-size)",
+                fontWeight: "var(--page-title-font-weight)",
                 lineHeight: "32px",
               }),
         }}

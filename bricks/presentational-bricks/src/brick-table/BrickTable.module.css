@@ -1,5 +1,5 @@
 .brickTableOddRow {
-  background-color: rgba(250, 250, 250, 1);
+  background-color: var(--color-fill-bg-base-4);
 }
 
 html[data-theme="dark"] {
@@ -21,13 +21,13 @@ html[data-theme="dark"] {
   :global(.ant-table-tbody) {
     tr.dropOverDownward {
       td {
-        border-bottom: 2px dashed #1890ff;
+        border-bottom: 2px dashed var(--antd-table-drop-hover-border-color);
       }
     }
 
     tr.dropOverUpward {
       td {
-        border-top: 2px dashed #1890ff;
+        border-top: 2px dashed var(--antd-table-drop-hover-border-color);
       }
     }
   }
@@ -95,7 +95,7 @@ html[data-theme="dark"] {
   :global(thead.ant-table-thead) {
     tr {
       th {
-        background: rgba(242, 245, 249, 0.5);
+        background: var(--antd-table-header-bg);
       }
     }
   }
