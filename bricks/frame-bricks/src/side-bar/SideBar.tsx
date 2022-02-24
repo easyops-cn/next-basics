@@ -98,8 +98,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     >
       <div className={styles.menuTitle}>
         <i className={styles.menuTitlePoint} />
-        <div className={styles.menuTitleText} title={menu.title}>
-          {menu.title}
+        <div className={styles.menuTitleText} title={menus.title}>
+          {menus.title}
         </div>
       </div>
       <SideBarComponent.SidebarMenu

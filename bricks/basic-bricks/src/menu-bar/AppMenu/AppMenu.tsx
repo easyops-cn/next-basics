@@ -55,21 +55,6 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
 
   const { menu, collapsed } = props;
   const showRelatedApps = menu?.showRelatedApps;
-  const [menus, setMenus] = React.useState<SidebarMenu>(menu);
-
-  const getMenu = async (): Promise<void> => {
-    if (menu) return;
-    const appMenu = getRuntime().getCurrentRoute().menu;
-
-    if (appMenu && "menuId" in appMenu) {
-      const menu = await getRuntime().fetchMenu(appMenu?.menuId);
-      setMenus(menu);
-    }
-  };
-
-  React.useEffect(() => {
-    getMenu();
-  }, []);
 
   React.useEffect(() => {
     (async () => {
@@ -120,21 +105,21 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
         />
       ))}
       <div className={styles.menuGroup}>
-        {menus?.title && (
-          <MenuTooltip collapsed={collapsed} title={menus.title}>
-            {menus.link ? (
-              <Link to={menus.link} className={styles.menuTitleLink}>
+        {menu?.title && (
+          <MenuTooltip collapsed={collapsed} title={menu.title}>
+            {menu.link ? (
+              <Link to={menu.link} className={styles.menuTitleLink}>
                 <i className={styles.menuTitleIcon}>
-                  <GeneralIcon icon={menus.icon} />
+                  <GeneralIcon icon={menu.icon} />
                 </i>
-                <span className={styles.menuTitleText}>{menus.title}</span>
+                <span className={styles.menuTitleText}>{menu.title}</span>
               </Link>
             ) : (
               <a className={styles.menuTitleLink} role="button">
                 <i className={styles.menuTitleIcon}>
-                  <GeneralIcon icon={menus.icon} />
+                  <GeneralIcon icon={menu.icon} />
                 </i>
-                <span className={styles.menuTitleText}>{menus.title}</span>
+                <span className={styles.menuTitleText}>{menu.title}</span>
               </a>
             )}
           </MenuTooltip>
@@ -142,12 +127,12 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
         <div
           className={classNames(styles.menuContainer, {
             [styles.empty]: !(
-              Array.isArray(menus.menuItems) && menus.menuItems.length > 0
+              Array.isArray(menu.menuItems) && menu.menuItems.length > 0
             ),
           })}
         >
           <Sidebar
-            menuItems={menus.menuItems || []}
+            menuItems={menu.menuItems || []}
             inlineIndent={30}
             collapsed={collapsed}
           ></Sidebar>

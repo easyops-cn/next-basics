@@ -1,18 +1,51 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { ExpandedState, SideBar } from "./SideBar";
+import { SidebarMenu } from "./SidebarMenu";
 import { menuData1, menuData2 } from "./mockData";
 import { Tooltip } from "antd";
 
 import * as brickKit from "@next-core/brick-kit";
+import { act } from "@testing-library/react";
 
 jest.spyOn(brickKit, "getHistory").mockReturnValue({
-  location: {},
+  location: {
+    pathname: "/page-1",
+  },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   listen: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  createHref: () => {},
 } as any);
 
-jest.spyOn(brickKit, "getRuntime").mockReturnValue({} as any);
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  fetchMenu: () => {
+    return {
+      title: "app-1",
+      menuItems: [
+        {
+          text: "page-1",
+          type: "default",
+          key: "0",
+          to: "/page-1",
+        },
+        {
+          text: "page-2",
+          type: "default",
+          key: "1",
+          to: "/page-2",
+        },
+      ],
+    };
+  },
+  getCurrentRoute: () => {
+    return {
+      menu: {
+        menuId: "123",
+      },
+    };
+  },
+} as any);
 
 jest.mock("@next-libs/storage", () => ({
   JsonStorage: jest.fn(() => {
@@ -118,8 +151,16 @@ describe("SideBar", () => {
     expect(mouseLeave).toBeCalledTimes(2);
   });
 
-  it("should work with no props", () => {
-    const wrapper = shallow(<SideBar />);
+  it("should work with no props", async () => {
+    const wrapper = mount(<SideBar />);
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    expect(wrapper.find(SidebarMenu).length).toBe(1);
+
     expect(wrapper).toBeTruthy();
   });
 });

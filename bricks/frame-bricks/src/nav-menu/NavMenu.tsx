@@ -10,15 +10,14 @@ import {
 import { getRuntime, getHistory } from "@next-core/brick-kit";
 import classNames from "classnames";
 import {
-  GeneralIcon,
   Link,
   initMenuItemAndMatchCurrentPathKeys,
 } from "@next-libs/basic-components";
 import style from "./NavMenu.module.css";
 
 interface SidebarMenuProps {
-  menuItems: SidebarMenuItem[];
-  selectedKeys: string[];
+  menuItems?: SidebarMenuItem[];
+  selectedKeys?: string[];
 }
 
 function isGroup(item: SidebarMenuItem): item is SidebarMenuGroup {
@@ -34,7 +33,7 @@ function isSubMenu(
 
 export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   const { menuItems, selectedKeys } = props;
-  const [menus, setMenus] = useState(menuItems);
+  const [menus, setMenus] = useState(menuItems ?? []);
 
   const history = getHistory();
   const [location, setLocation] = useState<Location>(history.location);
@@ -57,8 +56,8 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         search,
         ""
       );
-      setSelectedKey(selectedKeys);
       setMenus(menu.menuItems);
+      setSelectedKey(selectedKeys);
     }
   };
 
@@ -122,7 +121,6 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
 
   const renderMenuItem = (
     item: SidebarMenuItem,
-    showEmptyIcon?: boolean,
     showSubMenu?: boolean
   ): React.ReactNode => {
     return isSubMenu(item, showSubMenu)
@@ -139,7 +137,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       className={style.navMenuContainer}
       onClick={(e) => setSelectedKey([e.key as string])}
     >
-      {menus.map((item) => renderMenuItem(item, undefined, true))}
+      {menus.map((item) => renderMenuItem(item, true))}
     </Menu>
   );
 }
