@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
-import { SidebarMenu } from "./SidebarMenu";
-import { SidebarSubMenu } from "@next-core/brick-types";
+import * as SideBarComponent from "./SidebarMenu";
+import { SidebarMenu, SidebarSubMenu } from "@next-core/brick-types";
 import { ReactComponent as FixedSvg } from "../images/fixed.svg";
 import { ReactComponent as ToFixedSvg } from "../images/toFixed.svg";
 import classNames from "classnames";
 import { Tooltip } from "antd";
+import { getRuntime } from "@next-core/brick-kit";
 import { JsonStorage } from "@next-libs/storage";
 
 interface SideBarProps {
@@ -15,6 +16,7 @@ interface SideBarProps {
   expandedState?: ExpandedState;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  onSideBarFixed?: (isFiexed: boolean) => void;
 }
 
 export enum ExpandedState {
@@ -26,7 +28,7 @@ export enum ExpandedState {
 export const SIDE_BAR_HAS_BEEN_USED = "side-bar-has-been-used";
 
 export function SideBar(props: SideBarProps): React.ReactElement {
-  const { menu, onMouseEnter, onMouseLeave } = props;
+  const { menu, onMouseEnter, onMouseLeave, onSideBarFixed } = props;
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
   const [expandedState, setExpandedState] = useState<ExpandedState>(
     props.expandedState || ExpandedState.Collapsed
@@ -34,17 +36,36 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const [showFirstUsedTooltip, setShowFirstUsedTooltip] = useState<boolean>(
     !storage.getItem(SIDE_BAR_HAS_BEEN_USED)
   );
+  const [menus, setMenus] = useState<SidebarMenu>(menu);
 
   const { t } = useTranslation(NS_FRAME_BRICKS);
+
+  const getMenu = async (): Promise<void> => {
+    if (menu) return;
+    const appMenu = getRuntime().getCurrentRoute().menu;
+
+    if (appMenu && "menuId" in appMenu) {
+      const menu = await getRuntime().fetchMenu(appMenu?.menuId);
+      setMenus(menu);
+    }
+  };
+
+  useEffect(() => {
+    getMenu();
+  }, []);
 
   const handleFixedIconClick = (): void => {
     setShowFirstUsedTooltip(false);
     storage.setItem(SIDE_BAR_HAS_BEEN_USED, true);
-    setExpandedState(
+
+    const currentState =
       expandedState === ExpandedState.Expanded
         ? ExpandedState.Collapsed
-        : ExpandedState.Expanded
-    );
+        : ExpandedState.Expanded;
+
+    setExpandedState(currentState);
+
+    onSideBarFixed?.(currentState === ExpandedState.Expanded);
   };
 
   const handleMouseEnter = (): void => {
@@ -53,7 +74,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         ? expandedState
         : ExpandedState.Hovered
     );
-    onMouseEnter && onMouseEnter();
+    onMouseEnter?.();
   };
 
   const handleMouseLeave = (): void => {
@@ -62,10 +83,10 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         ? expandedState
         : ExpandedState.Collapsed
     );
-    expandedState !== ExpandedState.Expanded && onMouseLeave && onMouseLeave();
+    expandedState !== ExpandedState.Expanded && onMouseLeave?.();
   };
 
-  return menu ? (
+  return menus ? (
     <div
       className={classNames(styles.sideBarContainer, {
         [styles.hovered]: expandedState === ExpandedState.Hovered,
@@ -77,12 +98,12 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     >
       <div className={styles.menuTitle}>
         <i className={styles.menuTitlePoint} />
-        <div className={styles.menuTitleText} title={menu.title}>
-          {menu.title}
+        <div className={styles.menuTitleText} title={menus.title}>
+          {menus.title}
         </div>
       </div>
-      <SidebarMenu
-        menuItems={menu.menuItems || []}
+      <SideBarComponent.SidebarMenu
+        menuItems={menus?.menuItems || []}
         collapsed={expandedState === ExpandedState.Collapsed}
       />
       <div className={styles.sideBarFooter}>
