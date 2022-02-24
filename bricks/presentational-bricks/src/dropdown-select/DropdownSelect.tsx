@@ -250,7 +250,12 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
   ]);
   const emptyImage = useMemo(() => {
     return (
-      <div style={{ padding: "10px 0", background: "white" }}>
+      <div
+        style={{
+          padding: "10px 0",
+          background: "var(--color-fill-bg-container-4)",
+        }}
+      >
         <EasyopsEmpty></EasyopsEmpty>
       </div>
     );

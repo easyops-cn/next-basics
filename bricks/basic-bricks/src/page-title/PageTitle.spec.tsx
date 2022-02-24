@@ -22,7 +22,9 @@ describe("PageTitle", () => {
 
   it("should toggle dashboard mode", () => {
     const wrapper = shallow(<PageTitle pageTitle="hello" />);
-    expect(wrapper.find(".page-title-content").prop("style").fontSize).toBe(18);
+    expect(wrapper.find(".page-title-content").prop("style").fontSize).toBe(
+      "var(--page-title-font-size)"
+    );
 
     wrapper.setProps({
       dashboardMode: true,

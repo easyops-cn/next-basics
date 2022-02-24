@@ -29,9 +29,9 @@
 
 .cardItem {
   &.ant-card {
+    background: var(--card-item-bg);
     &:hover {
       border-color: transparent;
-      background: var(--card-item-bg);
 
       .showOperationAreaWhenHovering {
         visibility: visible;
@@ -49,7 +49,7 @@
 
 .cardTitle {
   font-size: 16px;
-  color: var(--text-color-title);
+  color: var(--card-item-title-color);
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,7 +59,7 @@
 .cardSubtitle {
   font-size: 12px;
   font-weight: 400;
-  color: var(--text-color-secondary);
+  color: var(--card-item-sub-title-color);
   line-height: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -70,7 +70,7 @@
   margin-top: 12px;
   margin-bottom: 16px;
   font-size: 14px;
-  color: var(--text-color-secondary);
+  color: var(--card-item-desc-color);
   line-height: 20px;
   position: relative;
   text-overflow: ellipsis;
