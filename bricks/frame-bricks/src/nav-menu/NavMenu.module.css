@@ -132,10 +132,6 @@
     }
   }
 
-  :global(.ant-menu-item-group-list) {
-    margin: 0 2px;
-  }
-
   /* 子菜单项样式 */
   .subMenuWrapper {
     margin: 2px 0;

@@ -114,7 +114,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
           </span>
         }
       >
-        {item.items?.map((innerItem) => renderMenuItem(innerItem, true))}
+        {item.items?.map((innerItem) => renderMenuItem(innerItem))}
       </Menu.SubMenu>
     );
   };
