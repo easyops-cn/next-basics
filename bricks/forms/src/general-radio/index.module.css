@@ -105,6 +105,9 @@
     border: none;
     height: 28px;
     margin: 2px;
+    &:global(:not(.ant-radio-button-wrapper-disabled)):hover {
+      color: var(--antd-dashboard-radio-item-checked-color);
+    }
   }
 
   :global(.ant-radio-button-wrapper-disabled) {
