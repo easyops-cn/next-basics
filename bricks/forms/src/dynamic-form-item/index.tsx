@@ -59,6 +59,7 @@ export interface SelectProps {
   disabled?: boolean;
   disabledHandler?: (row: any, index: number) => boolean;
   allowClear?: boolean;
+  popoverPositionType?: "default" | "parent";
 }
 export interface FormItemColumnsProps extends BaseColumnsProps {
   type:
@@ -80,7 +81,8 @@ export interface FormItemColumnsProps extends BaseColumnsProps {
 * @description 多列显示可以动态增加或删除的表单项，目前支持 input 和 select 等多种类型
 * @author jo
 * @slots
-* @history
+* @history*
+* 1.209.0: `type`为`select`时候，增加 `popoverPositionType`属性
 * 1.137.0:支持级联菜单
 * 1.99.0:新增类型 `password` 和属性 `encrypt`
 * 1.91.0:新增属性 `disabledAddButton` 和 `disabledDeleteButton`
