@@ -486,8 +486,8 @@ describe("UploadFilesV2", () => {
     ).toBeFalsy();
   });
 
-  it("should show light icon", () => {
-    const syponUseCurrentTheme = jest
+  it("should show dark icon", () => {
+    const spyOnUseCurrentTheme = jest
       .spyOn(brickKit, "useCurrentTheme")
       .mockReturnValue("dark-v2");
     const wrapper = mount(
@@ -499,6 +499,6 @@ describe("UploadFilesV2", () => {
       icon: "upload-dark",
       lib: "easyops",
     });
-    syponUseCurrentTheme.mockRestore();
+    spyOnUseCurrentTheme.mockRestore();
   });
 });

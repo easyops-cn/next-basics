@@ -4,6 +4,8 @@ import { act } from "react-dom/test-utils";
 import { Upload, Modal, message, Input, Mentions } from "antd";
 import { RcFile } from "antd/lib/upload/interface";
 import { http } from "@next-core/brick-http";
+import * as brickKit from "@next-core/brick-kit";
+import { GeneralIcon } from "@next-libs/basic-components";
 import { UploadImg } from "./UploadImg";
 import * as kit from "@next-core/brick-kit";
 jest.mock("@next-core/brick-http");
@@ -646,5 +648,21 @@ describe("UploadImg", () => {
       showMentions: false,
     });
     expect(wrapper.find(Mentions).length).toBe(0);
+  });
+
+  it("should show dark icon", () => {
+    const spyOnUseCurrentTheme = jest
+      .spyOn(brickKit, "useCurrentTheme")
+      .mockReturnValue("dark-v2");
+    const wrapper = mount(
+      <UploadImg listType="picture" bucketName="monitor" uploadDraggable />
+    );
+
+    expect(wrapper.find(GeneralIcon).at(0).prop("icon")).toEqual({
+      category: "colored-common",
+      icon: "upload-dark",
+      lib: "easyops",
+    });
+    spyOnUseCurrentTheme.mockRestore();
   });
 });

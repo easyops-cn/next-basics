@@ -22,7 +22,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon, UserInfo } from "@next-core/brick-types";
-import { getRuntime } from "@next-core/brick-kit";
+import { getRuntime, useCurrentTheme } from "@next-core/brick-kit";
 import { ReactComponent as ImageUpload } from "./image-upload.svg";
 import { FileUtils } from "../utils";
 
@@ -116,11 +116,12 @@ export function RealUploadImg(
   const [previewVisible, setPreviewVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [allUser, serAllUser] = useState<UserInfo[]>();
+  const theme = useCurrentTheme();
 
   const buttonIcon: MenuIcon = {
     lib: "easyops",
     category: "colored-common",
-    icon: "upload",
+    icon: theme == "dark-v2" ? "upload-dark" : "upload-light",
   };
 
   React.useEffect(() => {
