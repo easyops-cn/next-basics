@@ -97,6 +97,9 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
           allowClear={selectProps.allowClear}
           maxTagCount={selectProps.maxTagCount}
           showSearch
+          {...(selectProps.popoverPositionType === "parent"
+            ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
+            : {})}
         >
           {selectProps.options?.map((option) => (
             <Select.Option
@@ -156,7 +159,7 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
               filter: customizeFilter(cascaderProps?.fieldNames?.label),
             }
           }
-        ></Cascader>
+        />
       );
     } else if (column.type === "password") {
       return (
