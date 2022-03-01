@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Tooltip, Button, Divider } from "antd";
+import { Tooltip, Button, Divider, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 import {
   BranchesOutlined,
@@ -18,7 +18,10 @@ import {
   BuilderCustomTemplateNode,
   BuilderSnippetNode,
 } from "@next-core/brick-types";
-import { useBuilderNode } from "@next-core/editor-bricks-helper";
+import {
+  useBuilderNode,
+  useBuilderData,
+} from "@next-core/editor-bricks-helper";
 import styles from "./BuilderToolbar.module.css";
 import { RootNodeSelect } from "../RootNodeSelect/RootNodeSelect";
 import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
@@ -37,13 +40,15 @@ export function BuilderToolbar(): React.ReactElement {
     []
   );
 
-  const [libsDropdownVisible, setLibsDropdownVisible] = useState<
-    { [key in typeof LayerType[keyof typeof LayerType]]: boolean }
-  >({
+  const [libsDropdownVisible, setLibsDropdownVisible] = useState<{
+    [key in typeof LayerType[keyof typeof LayerType]]: boolean;
+  }>({
     [LayerType.LAYOUT]: false,
     [LayerType.WIDGET]: false,
     [LayerType.BRICK]: false,
   });
+
+  const { wrapperNode } = useBuilderData();
 
   const {
     onCurrentRouteClick,
@@ -55,6 +60,8 @@ export function BuilderToolbar(): React.ReactElement {
     fullscreen,
     setFullscreen,
     onWorkbenchClose,
+    hiddenWrapper,
+    setHiddenWrapper,
   } = useBuilderUIContext();
 
   const rootNode = useBuilderNode({ isRoot: true });
@@ -132,6 +139,19 @@ export function BuilderToolbar(): React.ReactElement {
         <RootNodeSelect />
       </div>
       <div className={styles.toolbarRight}>
+        {wrapperNode ? (
+          <Switch
+            checkedChildren="显示布局"
+            unCheckedChildren="隐藏布局"
+            checked={hiddenWrapper}
+            onChange={setHiddenWrapper}
+            size="small"
+            style={{
+              marginRight: 10,
+              top: -1,
+            }}
+          />
+        ) : null}
         {enableLayerView && (
           <>
             <LibraryDropdown

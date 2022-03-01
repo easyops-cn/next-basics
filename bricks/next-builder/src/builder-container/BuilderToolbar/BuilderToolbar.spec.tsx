@@ -1,15 +1,21 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
-import { Tooltip } from "antd";
+import { Tooltip, Switch } from "antd";
 import * as helper from "@next-core/editor-bricks-helper";
 import { BuilderToolbar } from "./BuilderToolbar";
 import { LibraryDropdown } from "../LibraryDropdown/LibraryDropdown";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { BuilderDataType } from "../interfaces";
+
 import { getRuntime } from "@next-core/brick-kit";
 
 const mockUseBuilderNode = jest.spyOn(helper, "useBuilderNode");
+const mockUseBuilderData = jest
+  .spyOn(helper, "useBuilderData")
+  .mockReturnValue({
+    wrapper: null,
+  } as any);
 
 jest.mock("../BuilderUIContext");
 jest.mock("@next-core/brick-kit");
@@ -30,7 +36,8 @@ const [
   mockCurrentRouteClick,
   mockBuildAndPush,
   mockPreview,
-] = [jest.fn(), jest.fn(), jest.fn(), jest.fn(), jest.fn()];
+  mockSetHiddenWrapper,
+] = [jest.fn(), jest.fn(), jest.fn(), jest.fn(), jest.fn(), jest.fn()];
 
 describe("BuilderToolbar", () => {
   beforeEach(() => {
@@ -162,5 +169,30 @@ describe("BuilderToolbar", () => {
     expect(tooltipWrapper.find(Tooltip).at(0).prop("overlayStyle")).toEqual({
       display: "none",
     });
+  });
+
+  it("should show the hidden wrapper switch", () => {
+    mockUseBuilderUIContext.mockReturnValue({
+      onCurrentRouteClick: mockCurrentRouteClick,
+      onBuildAndPush: mockBuildAndPush,
+      onPreview: mockPreview,
+      dataType: BuilderDataType.ROUTE_OF_BRICKS,
+      hiddenWrapper: true,
+      setHiddenWrapper: mockSetHiddenWrapper,
+    });
+    mockUseBuilderNode.mockReturnValue({
+      id: "R-01",
+      type: "bricks",
+      path: "/",
+    });
+    mockUseBuilderData.mockReturnValue({
+      wrapperNode: {
+        $$uid: 1,
+      },
+    } as any);
+    const wrapper = shallow(<BuilderToolbar />);
+    expect(wrapper.find(Switch).length).toBe(1);
+    wrapper.find(Switch).prop("onChange")(true, {} as MouseEvent);
+    expect(mockSetHiddenWrapper).toBeCalled();
   });
 });

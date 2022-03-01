@@ -88,6 +88,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   clipboardData?: BuilderClipboard;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
+  initialHiddenWrapper?: boolean;
   initialEventStreamNodeId?: string;
   /** @deprecated */
   initialClipboardType?: BuilderClipboardType;
@@ -104,6 +105,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   onNodeClick?: (event: CustomEvent<BuilderRuntimeNode>) => void;
   onToggleFullscreen?: (fullscreen?: boolean) => void;
   onSwitchToolboxTab?: (tab?: ToolboxTab) => void;
+  onSwitchHiddenWrapper?: (isHidden?: boolean) => void;
   onSelectEventStreamNode?: (nodeId?: string) => void;
   /** @deprecated */
   onClipboardChange?: (clipboard: BuilderClipboard) => void;
@@ -143,6 +145,7 @@ export function LegacyBuilderContainer(
     clipboardData,
     initialFullscreen,
     initialToolboxTab,
+    initialHiddenWrapper,
     initialEventStreamNodeId,
     initialClipboardType,
     initialClipboardSource,
@@ -159,6 +162,7 @@ export function LegacyBuilderContainer(
     onAskForAppendingRoute,
     onToggleFullscreen,
     onSwitchToolboxTab,
+    onSwitchHiddenWrapper,
     onSelectEventStreamNode,
     onClipboardChange,
     onNodeCopy,
@@ -192,6 +196,9 @@ export function LegacyBuilderContainer(
     [initialToolboxTab]
   );
   const [toolboxTab, setToolboxTab] = React.useState(memoToolboxTab);
+
+  const [hiddenWrapper, setHiddenWrapper] =
+    React.useState<boolean>(initialHiddenWrapper);
 
   const [eventStreamNodeId, setEventStreamNodeId] = React.useState(
     initialEventStreamNodeId
@@ -339,6 +346,10 @@ export function LegacyBuilderContainer(
   }, [toolboxTab, onSwitchToolboxTab]);
 
   React.useEffect(() => {
+    onSwitchHiddenWrapper?.(hiddenWrapper);
+  }, [hiddenWrapper, onSwitchHiddenWrapper]);
+
+  React.useEffect(() => {
     setEventStreamNodeId(initialEventStreamNodeId);
   }, [initialEventStreamNodeId]);
 
@@ -413,6 +424,8 @@ export function LegacyBuilderContainer(
         onWorkbenchClose,
         highlightTokens,
         onClickHighlightToken,
+        hiddenWrapper,
+        setHiddenWrapper,
       }}
     >
       <div

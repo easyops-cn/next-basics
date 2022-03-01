@@ -414,4 +414,24 @@ describe("next-builder.builder-container", () => {
 
     document.body.removeChild(element);
   });
+
+  it("should handle hiddenWrapper switch", () => {
+    const element = document.createElement(
+      "next-builder.builder-container"
+    ) as BuilderContainerElement;
+
+    document.body.appendChild(element);
+
+    const wrapper = shallow(spyOnRender.mock.calls[0][0] as any);
+    const onSwitchHiddenWrapper = jest.fn();
+    element.addEventListener("wrapper.hidden.switch", onSwitchHiddenWrapper);
+    wrapper.find(BuilderContainer).invoke("onSwitchHiddenWrapper")(true);
+    expect(onSwitchHiddenWrapper).toBeCalledWith(
+      expect.objectContaining({
+        detail: true,
+      })
+    );
+
+    document.body.removeChild(element);
+  });
 });

@@ -31,7 +31,8 @@ export async function ApplyThemePage({
 }: ApplyThemePageParams): Promise<unknown> {
   const [projectDetail, brickAttrs] = await Promise.all([
     InstanceApi_getDetail("PROJECT_MICRO_APP", projectId, {
-      fields: "pageTemplates.pageTypeId,pageTemplates.snippet.instanceId",
+      fields:
+        "pageTemplates.pageTypeId,pageTemplates.snippet.instanceId,pageTemplates.type",
     }) as Promise<PartialProject>,
     getBrickNodeAttrs(),
   ]);

@@ -10,8 +10,14 @@ import { BuilderCanvasTabs } from "./BuilderCanvasTabs";
 import styles from "./BuilderCanvas.module.css";
 
 export function BuilderCanvas(): React.ReactElement {
-  const { dataType, processing, fullscreen, eventStreamNodeId, canvasIndex } =
-    useBuilderUIContext();
+  const {
+    dataType,
+    processing,
+    fullscreen,
+    eventStreamNodeId,
+    canvasIndex,
+    hiddenWrapper,
+  } = useBuilderUIContext();
   const independentPortalCanvas = React.useMemo(
     () => dataType !== BuilderDataType.ROUTE_OF_ROUTES && !eventStreamNodeId,
     [dataType, eventStreamNodeId]
@@ -43,6 +49,7 @@ export function BuilderCanvas(): React.ReactElement {
               independentPortalCanvas={independentPortalCanvas}
               canvasIndex={canvasIndex}
               fullscreen={fullscreen}
+              hiddenWrapper={hiddenWrapper}
               mountPoint={
                 dataType === BuilderDataType.ROUTE_OF_ROUTES
                   ? "routes"

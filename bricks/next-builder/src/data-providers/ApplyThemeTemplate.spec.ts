@@ -40,6 +40,7 @@ jest.mock("./utils/appendBricksFactory");
           thumbnail: "home.png",
           templateId: "tpl-page-home",
           snippetId: "page-home",
+          type: "wrapper",
         },
         {
           pageTypeId: "list",
@@ -258,6 +259,7 @@ describe("ApplyThemeTemplate", () => {
         thumbnail: "home.png",
         template: "instance:1",
         snippet: "instance:4",
+        type: "wrapper",
       }
     );
 

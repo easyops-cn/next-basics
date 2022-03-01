@@ -37,6 +37,7 @@ interface PageTemplateItem {
   locales?: unknown;
   templateId: string;
   snippetId: string;
+  type?: string;
 }
 
 interface CustomTemplate {
@@ -45,6 +46,7 @@ interface CustomTemplate {
   state?: string;
   layerType?: string;
   children?: TreeNode[];
+  layoutType?: string;
 }
 
 interface Snippet {
@@ -151,6 +153,7 @@ export async function ApplyThemeTemplate({
       locales: page.locales,
       template: templateMap.get(page.templateId),
       snippet: snippetMap.get(page.snippetId),
+      type: page.type,
     });
     instantiatedPages.push(instance.instanceId);
   }

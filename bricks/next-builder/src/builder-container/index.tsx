@@ -133,6 +133,9 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   toolboxTab: ToolboxTab;
 
+  @property({ type: Boolean })
+  hiddenWrapper: boolean;
+
   @property()
   eventStreamNodeId: string;
 
@@ -284,6 +287,13 @@ export class BuilderContainerElement extends UpdatingElement {
   private _toolboxTabSwitchEmitter: EventEmitter<{
     toolboxTab: ToolboxTab;
   }>;
+
+  /**
+   * @detail
+   * @description
+   */
+  @event({ type: "wrapper.hidden.switch" })
+  private _wrapprHiddenSwitchEmitter: EventEmitter<boolean>;
 
   @event({
     type: "eventStream.node.select",
@@ -451,6 +461,10 @@ export class BuilderContainerElement extends UpdatingElement {
         toolboxTab,
       });
     }
+  };
+
+  private _handleSwitchHiddenWrapper = (isHidden: boolean): void => {
+    this._wrapprHiddenSwitchEmitter.emit(isHidden);
   };
 
   private _handleSelectEventsViewNode = (id: string): void => {
@@ -662,6 +676,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 clipboardData={this.clipboardData}
                 initialFullscreen={this.fullscreen}
                 initialToolboxTab={this.toolboxTab}
+                initialHiddenWrapper={this.hiddenWrapper}
                 initialEventStreamNodeId={this.eventStreamNodeId}
                 initialClipboardType={this.clipboardType}
                 initialClipboardSource={this.clipboardSource}
@@ -676,6 +691,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 onAskForDeletingNode={this._handleAskForDeletingNode}
                 onToggleFullscreen={this._handleToggleFullscreen}
                 onSwitchToolboxTab={this._handleSwitchToolboxTab}
+                onSwitchHiddenWrapper={this._handleSwitchHiddenWrapper}
                 onSelectEventStreamNode={this._handleSelectEventsViewNode}
                 onClipboardChange={this._handleClipboardChange}
                 onNodeCopy={this._handleNodeCopy}

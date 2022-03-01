@@ -43,6 +43,7 @@ interface RawLayoutItem {
   name: string;
   thumbnail?: string;
   locales?: unknown;
+  type?: string;
   template: [
     {
       templateId: string;
@@ -82,6 +83,7 @@ export async function BuildProjectOfThemeTemplate({
         "pageTemplates.locales",
         "pageTemplates.template.templateId",
         "pageTemplates.snippet.snippetId",
+        "pageTemplates.type",
       ].join(","),
     }
   );
@@ -129,6 +131,7 @@ export async function BuildProjectOfThemeTemplate({
         locales: item.locales,
         templateId: item.template[0].templateId,
         snippetId: item.snippet[0].snippetId,
+        type: item.type,
       })
     ),
     templates,

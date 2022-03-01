@@ -54,6 +54,8 @@ export interface ContextOfBuilderUI {
   onWorkbenchClose?: () => void;
   highlightTokens?: HighlightTokenSettings[];
   onClickHighlightToken?: (token: { type: string; value: string }) => void;
+  hiddenWrapper?: boolean;
+  setHiddenWrapper?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const BuilderUIContext = React.createContext<ContextOfBuilderUI>({});
