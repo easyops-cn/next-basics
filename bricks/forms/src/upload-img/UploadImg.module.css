@@ -11,12 +11,13 @@
     display: block;
   }
 
-  :global(.ant-upload-list-picture-card-container) {
-    background: #fff;
+  :global(.ant-upload-list-picture-card-container
+      .ant-upload-list-item-list-type-picture-card) {
+    background: var(--antd-upload-list-type-picture-card-bg);
   }
 
   :global(.ant-upload-select-picture-card) {
-    background: var(--theme-gray-background);
+    background: var(--antd-upload-select-picture-card-bg);
   }
 
   /* text style */
@@ -28,13 +29,13 @@
     /* 上传失败 */
     &:global(.ant-upload-list-item-error) {
       :global(.ant-upload-list-item-name) {
-        color: var(--bg-color-button-danger) !important;
+        color: var(--antd-upload-error-color) !important;
       }
 
       :global(.ant-upload-list-item-card-actions-btn .anticon) {
         position: initial;
         opacity: 1;
-        color: var(--bg-color-button-danger) !important;
+        color: var(--antd-upload-error-color) !important;
       }
     }
 
@@ -63,7 +64,7 @@
 
       /* 文件名 */
       :global(.ant-upload-list-item-name) {
-        color: var(--text-color-default);
+        color: var(--color-auxiliary-text);
         overflow: inherit;
       }
 
@@ -79,7 +80,7 @@
             font-size: 14px;
 
             &:hover {
-              color: #ed493c;
+              color: var(--color-error);
             }
           }
         }
@@ -96,13 +97,13 @@
 
   /* picture style */
   :global(.ant-upload-list-item-list-type-picture) {
-    background: #f8f9fc;
-    border-color: #eceef3;
+    background: var(--antd-upload-list-type-picture-bg);
+    border-color: var(--antd-upload-list-type-picture-border-color);
     border-style: solid;
 
     &:hover {
-      background: var(--theme-blue-background);
-      border-color: var(--theme-blue-background);
+      background: var(--antd-upload-list-type-picture-hover-bg);
+      border-color: var(--antd-upload-list-type-picture-hover-bg);
       border-style: solid;
 
       :global(.ant-upload-list-item-card-actions-btn) {
@@ -117,8 +118,8 @@
 
     /* 上传失败 */
     &:global(.ant-upload-list-item-error) {
-      background: rgba(237, 73, 60, 0.1);
-      border-color: rgba(237, 73, 60, 0.5);
+      background: var(--antd-upload-list-type-picture-error-bg);
+      border-color: var(--antd-upload-list-type-picture-error-border-color);
       border-style: solid;
 
       /* 右上角删除按钮 */
@@ -127,7 +128,7 @@
 
         :global(.anticon) {
           position: initial;
-          color: var(--bg-color-button-danger) !important;
+          color: var(--antd-upload-error-color) !important;
         }
       }
     }
@@ -173,7 +174,7 @@
           }
 
           .upload-file-size {
-            color: var(--text-color-disabled);
+            color: var(--color-secondary-text);
             line-height: 17px;
             font-size: 12px;
           }
@@ -184,7 +185,7 @@
 
           .upload-file-error-info {
             display: inline-block;
-            color: #ed493c;
+            color: var(--color-error);
             height: 18px;
             line-height: 18px;
           }
@@ -209,7 +210,7 @@
             font-size: 16px;
 
             &:hover {
-              color: #ed493c;
+              color: var(--color-error);
             }
           }
         }
@@ -226,17 +227,21 @@
 
   /* draggableUpload style*/
   :global(.ant-upload-drag) {
-    background: #f8f9fc !important;
-    border-color: #b9c6de !important;
+    background: var(--antd-upload-drag-bg) !important;
+    border-color: var(--antd-upload-drag-border-color) !important;
 
     &:hover {
-      background: var(--theme-blue-background) !important;
-      border-color: var(--color-brand) !important;
+      background: var(--antd-upload-drag-hover-bg) !important;
+      border-color: var(--antd-upload-drag-hover-border-color) !important;
     }
 
     &:global(.ant-upload-drag-hover) {
-      background: var(--theme-blue-background) !important;
-      border-color: var(--color-brand) !important;
+      background: var(--antd-upload-drag-hover-bg) !important;
+      border-color: var(--antd-upload-drag-hover-border-color) !important;
+    }
+
+    :global(.ant-upload-drag-icon .easyops-icon) {
+      font-size: 3.2em;
     }
 
     :global(.ant-upload-btn) {
@@ -266,7 +271,7 @@
 .avatar {
   margin-right: 10px;
   &.defaultIcon {
-    background-color: #167be0;
+    background-color: var(--color-brand);
     vertical-align: middle;
   }
 }
