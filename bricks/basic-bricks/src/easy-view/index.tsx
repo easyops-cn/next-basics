@@ -15,8 +15,6 @@ import styles from "./EasyView.shadow.css";
  * @noInheritDoc
  */
 export class EasyViewElement extends UpdatingElement {
-  private _mountPoint: HTMLElement;
-
   /**
    * @description 以键值对形式定义多个 [grid-area](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area)
    */
@@ -53,20 +51,14 @@ export class EasyViewElement extends UpdatingElement {
   @property({ attribute: false })
   styleByAreas: Record<string, React.CSSProperties>;
 
+  private _shadowRoot: ShadowRoot;
+
   constructor() {
     super();
 
     // ** Create a shadow root to encapsulate styles. **
     // ** Create your shadow root in the constructor. **
-    const shadowRoot = this.attachShadow({ mode: "open" });
-
-    const styleElement = document.createElement("style");
-    styleElement.textContent = styles;
-    shadowRoot.appendChild(styleElement);
-
-    this._mountPoint = document.createElement("div");
-    // ** Place any children the element creates into its shadow root. **
-    shadowRoot.appendChild(this._mountPoint);
+    this._shadowRoot = this.attachShadow({ mode: "open" });
   }
 
   connectedCallback(): void {
@@ -81,17 +73,20 @@ export class EasyViewElement extends UpdatingElement {
     // istanbul ignore else
     if (this.isConnected) {
       ReactDOM.render(
-        <BrickWrapper>
-          <EasyView
-            gridAreas={this.gridAreas}
-            gridTemplateAreas={this.gridTemplateAreas}
-            gridTemplateColumns={this.gridTemplateColumns}
-            gridTemplateRows={this.gridTemplateRows}
-            containerStyle={this.containerStyle}
-            styleByAreas={this.styleByAreas}
-          />
-        </BrickWrapper>,
-        this._mountPoint
+        <>
+          <style>{styles}</style>
+          <BrickWrapper>
+            <EasyView
+              gridAreas={this.gridAreas}
+              gridTemplateAreas={this.gridTemplateAreas}
+              gridTemplateColumns={this.gridTemplateColumns}
+              gridTemplateRows={this.gridTemplateRows}
+              containerStyle={this.containerStyle}
+              styleByAreas={this.styleByAreas}
+            />
+          </BrickWrapper>
+        </>,
+        this._shadowRoot
       );
     }
   }
