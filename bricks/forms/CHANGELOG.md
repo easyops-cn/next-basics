@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.208.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.208.2...@next-bricks/forms@1.208.3) (2022-03-01)
+
+
+### Bug Fixes
+
+* **forms:** add hover style ([bcb0dcb](https://github.com/easyops-cn/next-basics/commit/bcb0dcb44200d5431d162ef7ccdd0e42b4145d9c))
+* upload image style ([c3a2ed7](https://github.com/easyops-cn/next-basics/commit/c3a2ed7d11035c2f83ffbc0bace2f667c6488f69))
+
+
+
+
+
 ## [1.208.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.208.1...@next-bricks/forms@1.208.2) (2022-02-23)
 
 
