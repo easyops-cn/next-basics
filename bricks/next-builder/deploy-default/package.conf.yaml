@@ -5,6 +5,6 @@ dependencies:
     version: ^2.41.2
     local_deploy: true
   - name: next_builder_service
-    version: ^1.25.0
+    version: ^1.31.2
   - name: api_gateway
     version: ^1.44.0
