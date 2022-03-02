@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.13.1...@next-bricks/general-auth@1.14.0) (2022-03-02)
+
+
+### Features
+
+* add last login time ([6828936](https://github.com/easyops-cn/next-basics/commit/68289361c428af9098e3020a64a7d97b3f8aea88))
+
+
+
+
+
 ## [1.13.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.13.0...@next-bricks/general-auth@1.13.1) (2022-01-20)
 
 
