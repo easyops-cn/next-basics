@@ -66,6 +66,7 @@ interface GeneralLoginState {
   security_codeEnabled?: any;
 }
 export const lastLoginMethod = "LAST_LOGIN_METHOD";
+export const lastLoginTime = "LAST_LOGIN_TIME";
 
 export class LegacyGeneralLogin extends React.Component<
   GeneralLoginProps,
@@ -111,6 +112,7 @@ export class LegacyGeneralLogin extends React.Component<
           const req = values as unknown as AuthApi_LoginV2RequestBody;
           req.loginBy = this.state.currentLoginMethod;
           this.storage.setItem(lastLoginMethod, this.state.currentLoginMethod);
+          this.storage.setItem(lastLoginTime, Date.now());
           const result = await loginMethod(req, {
             params,
             interceptorParams: {

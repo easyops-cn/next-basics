@@ -61,9 +61,10 @@ const i18nProps: WithTranslation = {
   } as any,
   tReady: null,
 };
-
+const timeStamp = Date.now();
 const storage = {
   LAST_LOGIN_METHOD: "ldap",
+  LAST_LOGIN_TIME: timeStamp,
 } as any;
 (JsonStorage as jest.Mock).mockImplementation(() => {
   return {
@@ -124,6 +125,7 @@ describe("GeneralLogin", () => {
     wrapper.find(Form).at(1).simulate("submit", new Event("submit"));
     expect(spyOnLogin).toHaveBeenCalled();
     expect(storage["LAST_LOGIN_METHOD"]).toEqual("easyops");
+    expect(storage["LAST_LOGIN_TIME"]).toEqual(timeStamp);
   });
   it("should esb login successfully", (done) => {
     const form = {
