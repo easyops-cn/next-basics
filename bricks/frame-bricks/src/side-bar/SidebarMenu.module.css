@@ -10,10 +10,6 @@
     background: transparent;
   }
 
-  :global(.ant-menu-submenu-active) {
-    background-color: var(--v8-left-sidebar-item-hover) !important;
-  }
-
   :global(.ant-menu-submenu-selected):not(:global(.ant-menu-submenu-open)) {
     background-color: var(--color-brand);
     color: var(--color-strong-text) !important;
@@ -94,7 +90,7 @@
 
   .simpleMenuItem {
     &:global(.ant-menu-item-active) {
-      background-color: var(--v8-left-sidebar-item-hover) !important;
+      background-color: var(--palette-gray-4) !important;
       border-radius: var(--larger-border-radius);
       box-shadow: none !important;
     }
@@ -117,7 +113,7 @@
   .subMenuWrapper {
     &:global(.ant-menu-submenu-active) {
       :global(.ant-menu-submenu-title) {
-        background-color: var(--v8-left-sidebar-item-hover) !important;
+        background-color: var(--palette-gray-4) !important;
         border-radius: var(--larger-border-radius);
       }
 
