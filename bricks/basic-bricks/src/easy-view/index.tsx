@@ -66,7 +66,7 @@ export class EasyViewElement extends UpdatingElement {
   }
 
   disconnectedCallback(): void {
-    ReactDOM.unmountComponentAtNode(this);
+    ReactDOM.unmountComponentAtNode(this._shadowRoot);
   }
 
   protected _render(): void {
