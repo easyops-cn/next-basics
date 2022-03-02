@@ -2,7 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { ExpandedState, SideBar } from "./SideBar";
 import { SidebarMenu } from "./SidebarMenu";
-import { menuData1, menuData2 } from "./mockData";
+import { menuData1 } from "./mockData";
 import { Tooltip } from "antd";
 
 import * as brickKit from "@next-core/brick-kit";
@@ -162,5 +162,26 @@ describe("SideBar", () => {
     expect(wrapper.find(SidebarMenu).length).toBe(1);
 
     expect(wrapper).toBeTruthy();
+  });
+
+  it("should work while customItem was true", () => {
+    const wrapper = mount(
+      <SideBar
+        menu={{
+          title: "",
+          menuItems: [
+            {
+              text: "page-1",
+              type: "default",
+              key: "0",
+              to: "/page-1",
+            },
+          ],
+        }}
+        isCustom={true}
+      />
+    );
+
+    expect(wrapper.find(".ant-menu-item").length).toEqual(1);
   });
 });

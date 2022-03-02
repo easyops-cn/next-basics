@@ -114,7 +114,11 @@ const sideBarMenuItem = [
 describe("NavMenu", () => {
   it("should work", () => {
     const wrapper = mount(
-      <NavMenu menuItems={sideBarMenuItem} selectedKeys={["3"]} />
+      <NavMenu
+        menuItems={sideBarMenuItem}
+        isCustom={true}
+        selectedKeys={["3"]}
+      />
     );
 
     expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["3"]);
@@ -128,6 +132,16 @@ describe("NavMenu", () => {
     wrapper.update();
 
     expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["4"]);
+  });
+
+  it("should work while customItem was true", () => {
+    const wrapper = mount(
+      <NavMenu menuItems={[]} isCustom={true} selectedKeys={["3"]} />
+    );
+
+    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["3"]);
+
+    expect(wrapper.find(Menu.SubMenu).length).toBe(0);
   });
 
   it("should work while use getRuntime menu", async () => {

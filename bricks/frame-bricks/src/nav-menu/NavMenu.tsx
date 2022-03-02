@@ -17,6 +17,7 @@ import style from "./NavMenu.module.css";
 
 interface SidebarMenuProps {
   menuItems?: SidebarMenuItem[];
+  isCustom?: boolean;
   selectedKeys?: string[];
 }
 
@@ -32,7 +33,7 @@ function isSubMenu(
 }
 
 export function NavMenu(props: SidebarMenuProps): React.ReactElement {
-  const { menuItems, selectedKeys } = props;
+  const { menuItems, isCustom = false, selectedKeys } = props;
   const [menus, setMenus] = useState(menuItems ?? []);
 
   const history = getHistory();
@@ -45,7 +46,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   const [selectedKey, setSelectedKey] = useState(selectedKeys ?? []);
 
   const getMenu = async (): Promise<void> => {
-    if (menuItems) return;
+    if (isCustom) return;
     const appMenu = getRuntime().getCurrentRoute().menu;
 
     if (appMenu && "menuId" in appMenu) {

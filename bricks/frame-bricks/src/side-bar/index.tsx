@@ -31,6 +31,16 @@ export class SideBarElement extends UpdatingElement {
   menu: SidebarSubMenu;
 
   /**
+   * @default false
+   * @required false
+   * @description 是否开启自定义菜单
+   */
+  @property({
+    type: Boolean,
+  })
+  isCustom: boolean;
+
+  /**
    * @kind ExpandedState
    * @required false
    * @default -
@@ -91,6 +101,7 @@ export class SideBarElement extends UpdatingElement {
         <BrickWrapper>
           <SideBar
             menu={this.menu}
+            isCustom={this.isCustom}
             expandedState={this.expandedState}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}

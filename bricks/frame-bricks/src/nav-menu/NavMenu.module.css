@@ -191,7 +191,7 @@
 
   /* 菜单子项样式 */
   .simpleMenuItem {
-    padding: 0px 4px 0px 14px;
+    padding: 0px 4px;
     margin: 4px !important;
     height: 28px;
     line-height: 28px;
