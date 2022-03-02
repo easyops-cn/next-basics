@@ -158,6 +158,7 @@ export class MarkdownEditorElement extends FormItemElement {
             notRender={this.notRender}
             imagePreview={this.imagePreview}
             required={this.required}
+            pattern={this.pattern}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             previewContainerStyle={this.previewContainerStyle}
