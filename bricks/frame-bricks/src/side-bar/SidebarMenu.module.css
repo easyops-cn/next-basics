@@ -90,13 +90,13 @@
 
   .simpleMenuItem {
     &:global(.ant-menu-item-active) {
-      background-color: var(--color-fill-bg-base-1);
+      background-color: var(--palette-gray-4) !important;
       border-radius: var(--larger-border-radius);
-      opacity: 1;
+      box-shadow: none !important;
     }
 
     &:global(.ant-menu-item-selected) {
-      background: var(--color-brand) !important;
+      background: var(--color-brand);
       box-shadow: 0px 2px 12px 0px #1a7aff4d;
 
       :global(.anticon),
@@ -113,7 +113,7 @@
   .subMenuWrapper {
     &:global(.ant-menu-submenu-active) {
       :global(.ant-menu-submenu-title) {
-        background-color: var(--color-fill-bg-base-1);
+        background-color: var(--palette-gray-4) !important;
         border-radius: var(--larger-border-radius);
       }
 

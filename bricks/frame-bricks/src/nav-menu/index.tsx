@@ -25,6 +25,16 @@ export class NavMenuElement extends UpdatingElement {
   menu: SidebarSubMenu;
 
   /**
+   * @default false
+   * @required false
+   * @description 是否开启自定义菜单
+   */
+  @property({
+    type: Boolean,
+  })
+  isCustom: boolean;
+
+  /**
    * @default
    * @required false
    * @description 选择菜单
@@ -54,6 +64,7 @@ export class NavMenuElement extends UpdatingElement {
         <BrickWrapper>
           <NavMenu
             menuItems={this.menu?.menuItems ?? []}
+            isCustom={this.isCustom}
             selectedKeys={this.selectedKeys}
           />
         </BrickWrapper>,

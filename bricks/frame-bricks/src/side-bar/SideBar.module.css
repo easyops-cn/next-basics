@@ -10,7 +10,8 @@
   transition: all var(--side-bar-collapse-transition-duration)
     var(--side-bar-collapse-transition-timing-function);
 
-  box-shadow: var(--antd-menu-shadow);
+  border-right: 1px solid;
+  border-image: var(--v8-left-sidebar-border-right) 1;
 
   &::before {
     content: "";
@@ -21,7 +22,7 @@
     bottom: 0;
     z-index: -1;
     background: var(--left-menu-bg);
-    filter: blur(32px);
+    backdrop-filter: blur(32px);
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
   }
@@ -113,15 +114,15 @@
 .sideBarContainer.expanded {
   &::before {
     background: var(--v8-left-menu-bg);
-    filter: blur(32px);
+    backdrop-filter: blur(32px);
   }
 }
 
 .sideBarContainer.hovered {
-  box-shadow: 0px 0px 20px 0px rgba(26, 122, 255, 8%);
+  box-shadow: var(--left-sidebar-shadow);
 
   &::before {
     background: var(--v8-left-menu-hover-bg);
-    filter: blur(10px);
+    backdrop-filter: blur(32px);
   }
 }
