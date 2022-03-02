@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.13...@next-bricks/presentational-bricks@1.238.14) (2022-03-02)
+
+
+### Bug Fixes
+
+* **markdown-editor:** pass pattern property to MarkdownEditor ([280ffb8](https://github.com/easyops-cn/next-basics/commit/280ffb8919344532f12dcbb261908e497f89bda5))
+
+
+
+
+
 ## [1.238.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.12...@next-bricks/presentational-bricks@1.238.13) (2022-03-01)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

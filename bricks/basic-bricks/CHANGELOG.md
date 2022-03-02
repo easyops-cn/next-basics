@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.167.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.11...@next-bricks/basic-bricks@1.167.12) (2022-03-02)
+
+
+### Bug Fixes
+
+* **easy-view:** unmount the shadow root ([98ed102](https://github.com/easyops-cn/next-basics/commit/98ed10285d5d3be9d818d2a07965ce0f982f013b))
+
+
+
+
+
 ## [1.167.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.10...@next-bricks/basic-bricks@1.167.11) (2022-03-01)
 
 
