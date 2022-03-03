@@ -97,8 +97,13 @@ export const getAllStoryListV2 = (
   });
   books = [...atomBook, ...businessBook, ...externalBook];
   stories.forEach((story) => {
-    const finder = books.find((book) => book.category === story.category);
+    const finder = books.find((book) =>
+      story.layerType === "widget"
+        ? book.category === story.storyId.split(".")[0]
+        : book.category === story.category
+    );
     if (finder) {
+      !finder.stories && (finder.stories = []);
       const index = finder.stories.findIndex(
         (v) => v.storyId === story.storyId
       );
@@ -118,7 +123,7 @@ export const getAllStoryListV2 = (
     }
   });
   books.forEach((chapter) => {
-    chapter.stories.forEach((story) => {
+    chapter.stories?.forEach((story) => {
       if (story.deprecated) {
         return;
       }
