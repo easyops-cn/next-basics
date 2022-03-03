@@ -1348,7 +1348,9 @@ export class BrickTableElement extends UpdatingElement {
     // 过滤
     if (!isEmpty(filters)) {
       forEach(filters, (value: any, key) => {
-        urlSearchParams.set(key, value);
+        isNil(value) || value.length === 0
+          ? urlSearchParams.delete(key)
+          : urlSearchParams.set(key, value);
       });
     }
     // 排序
@@ -1485,7 +1487,7 @@ export class BrickTableElement extends UpdatingElement {
     const filtersArray = map(this.filters, (item, k) => ({
       key: k,
       value: item,
-    }));
+    })).filter((item) => !isNil(item.value) && item.value.length !== 0);
     tempDataSource = tempDataSource.filter((item) => {
       return every(filtersArray, (filter) => {
         return filter.value?.includes(get(item, filter.key)) ?? true;
