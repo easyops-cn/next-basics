@@ -51,6 +51,22 @@ describe("getAllStoryListV2", () => {
           },
         ],
       },
+      {
+        group: "widget",
+        title: {
+          en: "widget",
+          zh: "挂件",
+        },
+        items: [
+          {
+            category: "easyops-builtin-widgets",
+            title: {
+              en: "easyops-builtin-widgets",
+              zh: "内置挂件",
+            },
+          },
+        ],
+      },
     ];
     const stories = [
       {
@@ -155,6 +171,22 @@ describe("getAllStoryListV2", () => {
         },
         type: "brick",
       },
+      {
+        author: "sailor",
+        category: "test",
+        text: {
+          en: "list widget",
+          zh: "列表挂件",
+        },
+        description: {
+          en: "",
+          zh: "",
+        },
+        storyId: "easyops-builtin-widgets.tpl-list-widget",
+        layerType: "widget",
+        doc: null,
+        type: "brick",
+      },
     ];
     expect(getAllStoryListV2(categoryGroups, stories)).toEqual([
       {
@@ -213,6 +245,16 @@ describe("getAllStoryListV2", () => {
         title: "Fake Story of Correct Zh",
         description: "~",
         tags: ["Fake Chapter 1"],
+      },
+      {
+        subTitle: "sailor",
+        category: "easyops-builtin-widgets",
+        title: "列表挂件",
+        description: "~",
+        id: "easyops-builtin-widgets.tpl-list-widget",
+        icon: undefined,
+        tags: ["内置挂件"],
+        type: "brick",
       },
     ]);
 

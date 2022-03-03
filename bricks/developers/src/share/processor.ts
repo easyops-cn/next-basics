@@ -123,7 +123,7 @@ export const getAllStoryListV2 = (
     }
   });
   books.forEach((chapter) => {
-    chapter.stories.forEach((story) => {
+    chapter.stories?.forEach((story) => {
       if (story.deprecated) {
         return;
       }
