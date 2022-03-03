@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.353.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.352.4...@next-bricks/developers@1.353.0) (2022-03-03)
+
+
+### Features
+
+* developer center support show widget brick ([b0c0cb9](https://github.com/easyops-cn/next-basics/commit/b0c0cb9546162e57765dac76d45af65ec0d056a3))
+* update unit test ([ad3b33d](https://github.com/easyops-cn/next-basics/commit/ad3b33d70cb7fed0be88b0ce4852be1742a4b4ee))
+
+
+
+
+
 ## [1.352.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.352.3...@next-bricks/developers@1.352.4) (2022-02-23)
 
 **Note:** Version bump only for package @next-bricks/developers
