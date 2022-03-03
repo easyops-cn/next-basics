@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.14...@next-bricks/presentational-bricks@1.238.15) (2022-03-03)
+
+
+### Bug Fixes
+
+* **table:** 修复表格过滤功能bug Refs BRICK_STORE-2610 ([9778dd1](https://github.com/easyops-cn/next-basics/commit/9778dd13ac755635eac02ec9370372a2d278243c))
+
+
+
+
+
 ## [1.238.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.13...@next-bricks/presentational-bricks@1.238.14) (2022-03-02)
 
 
