@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.112.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.112.1...@next-bricks/next-builder@1.112.2) (2022-03-04)
+
+
+### Bug Fixes
+
+* search brick alias as well ([dade860](https://github.com/easyops-cn/next-basics/commit/dade8609696ffa7ad72ec5e3ea0e20e2eb246391))
+
+
+
+
+
 ## [1.112.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.112.0...@next-bricks/next-builder@1.112.1) (2022-03-01)
 
 **Note:** Version bump only for package @next-bricks/next-builder
