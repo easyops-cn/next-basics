@@ -47,7 +47,7 @@ export function StoryboardTreeView(): React.ReactElement {
     const trimmedQ = q?.trim().toLowerCase();
     if (trimmedQ) {
       nodes?.forEach((node) => {
-        if (deepMatch(node.$$normalized, trimmedQ)) {
+        if (deepMatch([node.alias, node.$$normalized], trimmedQ)) {
           nodesToHighlight.add(node.$$uid);
         }
       });
