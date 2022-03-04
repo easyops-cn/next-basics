@@ -123,6 +123,7 @@
     background: var(--antd-dashboard-radio-item-checked-bg);
     border-radius: 6px;
     color: var(--antd-dashboard-radio-item-checked-color);
+    font-weight: var(--font-weight-500);
   }
 
   :global(.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled, .ant-radio-button-wrapper-checked)::before) {
