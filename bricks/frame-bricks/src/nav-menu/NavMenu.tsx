@@ -47,17 +47,16 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
 
   const getMenu = async (): Promise<void> => {
     if (isCustom) return;
-    const appMenu = getRuntime().getCurrentRoute().menu;
+    const appMenu = getRuntime().getNavConfig();
 
-    if (appMenu && "menuId" in appMenu) {
-      const menu = await getRuntime().fetchMenu(appMenu?.menuId);
+    if (appMenu) {
       const { selectedKeys } = initMenuItemAndMatchCurrentPathKeys(
-        menu.menuItems,
+        appMenu.menu.menuItems,
         pathname,
         search,
         ""
       );
-      setMenus(menu.menuItems);
+      setMenus(appMenu.menu.menuItems);
       setSelectedKey(selectedKeys);
     }
   };

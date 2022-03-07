@@ -5,9 +5,12 @@ import { BreadcrumbItemConf } from "@next-core/brick-types";
 import { useRecentApps, getRuntime, getHistory } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import styles from "./AppBarBreadcrumb.module.css";
+import classnames from "classnames";
 
 export interface BasicBreadcrumbProps {
   breadcrumb?: BreadcrumbItemConf[];
+  className?: string;
+  separator?: string;
   noCurrentApp?: boolean;
 }
 
@@ -23,7 +26,7 @@ export function AppBarBreadcrumb(
   };
 
   return (
-    <div className={styles.breadcrumbContainer}>
+    <div className={classnames(styles.breadcrumbContainer, props.className)}>
       {previousWorkspace && (
         <a
           role="button"
@@ -36,7 +39,7 @@ export function AppBarBreadcrumb(
           </span>
         </a>
       )}
-      <Breadcrumb separator=">">
+      <Breadcrumb separator={props.separator || ">"}>
         {breadcrumbItems &&
           breadcrumbItems.map((item: BreadcrumbItemConf, index: number) => {
             return (

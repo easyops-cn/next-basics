@@ -49,11 +49,10 @@ export function SideBar(props: SideBarProps): React.ReactElement {
 
   const getMenu = async (): Promise<void> => {
     if (isCustom) return;
-    const appMenu = getRuntime().getCurrentRoute().menu;
+    const appMenu = getRuntime().getNavConfig();
 
-    if (appMenu && "menuId" in appMenu) {
-      const menu = await getRuntime().fetchMenu(appMenu.menuId);
-      setMenus(menu);
+    if (appMenu) {
+      setMenus(appMenu.subMenu as SidebarMenu);
     }
   };
 
