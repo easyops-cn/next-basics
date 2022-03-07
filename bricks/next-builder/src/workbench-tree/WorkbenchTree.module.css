@@ -1,0 +1,45 @@
+.tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nodeLabel {
+  color: #c5c5c5;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nodeLabel:hover {
+  background-color: #2a2d2e;
+}
+
+.nodeLabel:focus {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-offset: -1px;
+  outline-color: #007fd4;
+  background-color: #094771;
+  color: #fff;
+}
+
+.nodeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  width: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.nodeIcon.leaf {
+  color: var(--palette-blue-3);
+}
+
+.nodeName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

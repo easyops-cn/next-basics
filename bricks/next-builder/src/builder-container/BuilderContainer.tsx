@@ -11,7 +11,6 @@ import {
   Story,
 } from "@next-core/brick-types";
 import {
-  AbstractBuilderDataManager,
   BuilderRuntimeNode,
   EventDetailOfNodeAdd,
   EventDetailOfNodeMove,
@@ -19,6 +18,7 @@ import {
   EventDetailOfSnippetApply,
   SharedEditorConf,
   useBuilderDataManager,
+  type BuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { HighlightTokenSettings } from "@next-libs/code-editor-components";
 import { BuilderToolbox } from "./BuilderToolbox/BuilderToolbox";
@@ -186,7 +186,7 @@ export function LegacyBuilderContainer(
     onStoryboardQueryUpdate,
     onClickHighlightToken,
   }: BuilderContainerProps,
-  ref: React.Ref<AbstractBuilderDataManager>
+  ref: React.Ref<BuilderDataManager>
 ): React.ReactElement {
   const [fullscreen, setFullscreen] = React.useState(initialFullscreen);
   const [highlightNodes, setHighlightNodes] = React.useState(new Set<number>());

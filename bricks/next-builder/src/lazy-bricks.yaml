@@ -2,3 +2,9 @@ lazyBricks:
   - builder-container
   - event-config-form
   - search-tree
+  - group: workbench
+    bricks:
+      - workbench-action
+      - workbench-pane
+      - workbench-sidebar
+      - workbench-tree

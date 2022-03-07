@@ -44,3 +44,7 @@ import "./data-providers/ApplyThemePage";
 import "./data-providers/GetProviderOfStoryboard";
 import "./data-providers/GetTypeDeclarations";
 import "./data-providers/GetTypeDeclarationsOfFn";
+// !Lazy: import "./workbench-action";
+// !Lazy: import "./workbench-sidebar";
+// !Lazy: import "./workbench-pane";
+// !Lazy: import "./workbench-tree";
