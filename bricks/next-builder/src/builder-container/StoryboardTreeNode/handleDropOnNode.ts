@@ -1,10 +1,10 @@
 /* istanbul ignore file */
 // Todo(steve): Ignore tests temporarily for potential breaking change in the future.
 import {
-  AbstractBuilderDataManager,
   BuilderGroupedChildNode,
   BuilderRuntimeNode,
   getSortedIdsAfterDropped,
+  type BuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { DraggingNodeItem } from "../interfaces";
 
@@ -14,7 +14,7 @@ export interface HandleDropOnNodeParams {
   droppingParentNode: BuilderRuntimeNode;
   droppingSiblingGroups: BuilderGroupedChildNode[];
   droppingIndex: number;
-  manager: AbstractBuilderDataManager;
+  manager: BuilderDataManager;
 }
 
 export function handleDropOnNode({

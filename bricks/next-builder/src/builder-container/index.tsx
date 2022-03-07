@@ -28,7 +28,6 @@ import {
   EventDetailOfContextUpdated,
   BuilderRuntimeNode,
   BuilderProvider,
-  AbstractBuilderDataManager,
   isRouteNode,
   isBrickNode,
   EventDetailOfSnippetApply,
@@ -36,6 +35,7 @@ import {
   SnippetNodeInstance,
   EventDetailOfSnippetApplyStored,
   SharedEditorConf,
+  type BuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { HighlightTokenSettings } from "@next-libs/code-editor-components";
 import {
@@ -531,7 +531,7 @@ export class BuilderContainerElement extends UpdatingElement {
     this._eventNodeCutPasteEmitter.emit(detail);
   };
 
-  private _managerRef = React.createRef<AbstractBuilderDataManager>();
+  private _managerRef = React.createRef<BuilderDataManager>();
 
   private _handleContextUpdate = (context: ContextConf[]): void => {
     this._contextUpdateEmitter.emit(context);

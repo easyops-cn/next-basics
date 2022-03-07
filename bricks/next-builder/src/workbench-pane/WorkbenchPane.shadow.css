@@ -1,0 +1,69 @@
+:host {
+  display: block;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host([active]) {
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  color: #ccc;
+  height: 100%;
+}
+
+.pane-header {
+  display: flex;
+  align-items: center;
+  line-height: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.pane-header:focus {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-offset: -1px;
+  outline-color: #007fd4;
+}
+
+:host(:not(:first-child)) .pane-header {
+  border-top: 1px solid rgba(204, 204, 204, 0.2);
+}
+
+.title-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  width: 20px;
+  line-height: 1;
+}
+
+.pane-body {
+  flex-grow: 1;
+  min-height: 0;
+  display: none;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+:host([active]) .pane-body {
+  display: initial;
+}
+
+:host([active]) .scrolled {
+  box-shadow: #000000 0 6px 6px -6px inset;
+}
