@@ -35,7 +35,7 @@ describe("AppbarBreadcrumb", () => {
       />
     );
     expect(wrapper.html()).toEqual(
-      '<div class="breadcrumbContainer"><div class="ant-breadcrumb"><span><span class="ant-breadcrumb-link"><a>page1</a></span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link"><a>page2</a></span><span class="ant-breadcrumb-separator">/</span></span></div></div>'
+      '<div class="breadcrumbContainer appbarBreadcrumb"><div class="ant-breadcrumb"><span><span class="ant-breadcrumb-link"><a>page1</a></span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link"><a>page2</a></span><span class="ant-breadcrumb-separator">/</span></span></div></div>'
     );
   });
 
@@ -43,7 +43,7 @@ describe("AppbarBreadcrumb", () => {
     const wrapper = mount(<AppbarBreadcrumb breadcrumb={[]} />);
 
     expect(wrapper.html()).toEqual(
-      '<div class="breadcrumbContainer"><div class="ant-breadcrumb"><span><span class="ant-breadcrumb-link"><a>page3</a></span><span class="ant-breadcrumb-separator">/</span></span></div></div>'
+      '<div class="breadcrumbContainer appbarBreadcrumb"><div class="ant-breadcrumb"><span><span class="ant-breadcrumb-link"><a>page3</a></span><span class="ant-breadcrumb-separator">/</span></span></div></div>'
     );
   });
 });
