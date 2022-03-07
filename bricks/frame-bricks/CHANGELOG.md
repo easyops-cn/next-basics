@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.4.3...@next-bricks/frame-bricks@0.5.0) (2022-03-07)
+
+
+### Features
+
+* update menu fetch and style update ([281856e](https://github.com/easyops-cn/next-basics/commit/281856e4bb709326b6f802d2d3dc532130303443))
+* update unit test ([9f2d418](https://github.com/easyops-cn/next-basics/commit/9f2d418e045c7b4beb154b91bd2fb33d95e745f3))
+
+
+
+
+
 ## [0.4.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.4.2...@next-bricks/frame-bricks@0.4.3) (2022-03-02)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks

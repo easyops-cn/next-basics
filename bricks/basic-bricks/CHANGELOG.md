@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.168.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.13...@next-bricks/basic-bricks@1.168.0) (2022-03-07)
+
+
+### Features
+
+* update menu fetch and style update ([281856e](https://github.com/easyops-cn/next-basics/commit/281856e4bb709326b6f802d2d3dc532130303443))
+* update unit test ([9f2d418](https://github.com/easyops-cn/next-basics/commit/9f2d418e045c7b4beb154b91bd2fb33d95e745f3))
+
+
+
+
+
 ## [1.167.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.167.12...@next-bricks/basic-bricks@1.167.13) (2022-03-04)
 
 
