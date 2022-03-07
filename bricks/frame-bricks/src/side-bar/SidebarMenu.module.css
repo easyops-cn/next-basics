@@ -21,7 +21,7 @@
     :global(.ant-menu-submenu-arrow),
     .simpleMenuItemText,
     .subMenuTitleText {
-      color: var(--color-normal-icon) !important;
+      color: var(--color-normal-icon);
     }
   }
 
@@ -34,7 +34,7 @@
 
     > :global(.anticon) {
       margin-right: 0;
-      color: var(--color-normal-text) !important;
+      color: var(--color-normal-text);
     }
   }
 
@@ -93,6 +93,11 @@
       background-color: var(--palette-gray-4) !important;
       border-radius: var(--larger-border-radius);
       box-shadow: none !important;
+
+      :global(.anticon),
+      .simpleMenuItemText {
+        color: var(--color-normal-text) !important;
+      }
     }
 
     &:global(.ant-menu-item-selected) {
@@ -101,7 +106,7 @@
 
       :global(.anticon),
       .simpleMenuItemText {
-        color: var(--color-normal-icon) !important;
+        color: var(--color-normal-icon);
       }
     }
 

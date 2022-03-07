@@ -63,17 +63,17 @@
         right: 4px;
       }
       > span {
-        background-color: var(--v8-top-menu-item-hover) !important;
-        color: var(--color-strong-text) !important;
+        background-color: var(--v8-top-menu-item-hover);
+        color: var(--color-normal-text);
       }
     }
 
     /* subMenu子项被选中时subMenu-title样式 */
     &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
-      color: var(--color-normal-text);
       > span {
-        background-color: var(--v8-top-menu-item-selected-bg);
         padding: 4px 16px 4px 8px;
+        background-color: var(--v8-top-menu-item-selected-bg) !important;
+        color: var(--color-strong-text) !important;
       }
     }
   }
@@ -86,12 +86,13 @@
     > a {
       padding: 4px 8px;
       border-radius: 4px;
+      color: var(--color-normal-text);
     }
 
     &:global(.ant-menu-item-selected) {
       a {
         background-color: var(--v8-top-menu-item-selected-bg) !important;
-        color: var(--color-normal-text) !important;
+        color: var(--color-strong-text) !important;
       }
       border-bottom: none !important;
     }
@@ -99,7 +100,7 @@
     &:global(:not(.ant-menu-item-selected):hover) {
       a {
         background-color: var(--v8-top-menu-item-hover) !important;
-        color: var(--color-strong-text) !important;
+        color: var(--color-normal-text);
       }
       border-bottom: none !important;
     }
@@ -121,13 +122,13 @@
 
     :global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       > span {
-        color: var(--color-normal-text) !important;
+        color: var(--color-normal-text);
       }
     }
 
     :global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
       > span {
-        color: var(--color-normal-text);
+        color: var(--color-strong-text) !important;
       }
     }
   }
@@ -153,12 +154,12 @@
 
     &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       color: inherit;
-      background-color: var(--v8-top-menu-item-hover) !important;
+      background-color: var(--v8-top-menu-item-hover);
       > span {
-        color: var(--color-strong-text) !important;
+        color: var(--color-normal-text);
       }
       :global(.ant-menu-submenu-arrow) {
-        color: var(--color-strong-text) !important;
+        color: var(--color-normal-text);
       }
     }
 
@@ -212,14 +213,14 @@
     color: inherit;
     background-color: var(--v8-top-menu-item-hover) !important;
     span {
-      color: var(--color-normal-text) !important;
+      color: var(--color-normal-text);
     }
   }
 
   :global(.ant-menu-item-selected) {
     background-color: var(--v8-top-menu-item-selected-bg) !important;
     span {
-      color: var(--color-strong-text);
+      color: var(--color-strong-text) !important;
     }
   }
 }

@@ -32,15 +32,10 @@ let menuItems = [
 ];
 
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
-  fetchMenu: () => {
-    return {
-      menuItems: menuItems,
-    };
-  },
-  getCurrentRoute: () => {
+  getNavConfig: () => {
     return {
       menu: {
-        menuId: "123",
+        menuItems,
       },
     };
   },
@@ -161,7 +156,7 @@ describe("NavMenu", () => {
     expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["1"]);
   });
 
-  it("should work while use getRuntime  was null", async () => {
+  it("should work while use getRuntime was null", async () => {
     menuItems = [];
     const wrapper = mount(<NavMenu />);
 

@@ -19,10 +19,9 @@ jest.spyOn(brickKit, "getHistory").mockReturnValue({
 } as any);
 
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
-  fetchMenu: () => {
+  getNavConfig: () => {
     return {
-      title: "app-1",
-      menuItems: [
+      subMenu: [
         {
           text: "page-1",
           type: "default",
@@ -36,13 +35,6 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
           to: "/page-2",
         },
       ],
-    };
-  },
-  getCurrentRoute: () => {
-    return {
-      menu: {
-        menuId: "123",
-      },
     };
   },
 } as any);
