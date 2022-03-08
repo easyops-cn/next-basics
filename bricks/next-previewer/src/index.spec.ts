@@ -10,8 +10,6 @@ jest.spyOn(kit, "getRuntime").mockReturnValue({
   registerCustomProcessor: jest.fn(),
 } as any);
 
-jest.mock("./lazy-bricks", () => void 0);
-
 // Use `require` instead of `import` to avoid hoisting.
 require("./index");
 
