@@ -40,3 +40,7 @@
     align-items: center;
   }
 }
+
+:global(.ant-anchor-link-title) {
+  font-size: var(--antd-anchor-title-font-size);
+}
