@@ -21,7 +21,7 @@ export interface PreviewContainerProps {
   previewUrl: string;
 }
 
-const openerWindow: Window = window.opener;
+const openerWindow: Window = window.opener || window;
 
 function sendToggleInspecting(
   enabled: boolean,
@@ -140,20 +140,38 @@ export function PreviewContainer({
     }
   }, [previewOrigin, selectEnabled]);
 
+  const handleMouseOut = useMemo(() => {
+    if (!previewStarted) {
+      return null;
+    }
+    return () => {
+      openerWindow.postMessage({
+        sender: "preview-container",
+        forwardedFor: "previewer",
+        type: "hover-on-brick",
+        iidList: [],
+      } as PreviewMessageFromContainer);
+    };
+  }, [previewStarted]);
+
   return (
     <div className={styles.previewContainer}>
-      <iframe
-        className={styles.iframe}
-        src={previewUrl}
-        ref={iframeRef}
-        onLoad={handleIframeLoad}
-      />
       <div className={styles.toolbar}>
         <Button
           type={selectEnabled ? "primary" : "default"}
           disabled={!sameOriginWithOpener || !previewStarted}
           icon={<AimOutlined />}
+          size="small"
           onClick={handleToggleSelect}
+        />
+      </div>
+      <div className={styles.iframeContainer}>
+        <iframe
+          className={styles.iframe}
+          src={previewUrl}
+          ref={iframeRef}
+          onLoad={handleIframeLoad}
+          onMouseOut={handleMouseOut}
         />
       </div>
     </div>

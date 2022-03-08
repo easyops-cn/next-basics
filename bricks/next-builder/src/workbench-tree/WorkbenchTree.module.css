@@ -32,6 +32,10 @@
   color: #fff;
 }
 
+.nodeLabel.hover {
+  background-color: #094771;
+}
+
 .nodeIcon {
   display: flex;
   justify-content: center;
