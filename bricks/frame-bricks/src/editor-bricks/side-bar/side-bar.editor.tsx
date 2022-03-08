@@ -26,7 +26,7 @@ export function SideBarEditor({
   return (
     <EditorContainer
       nodeUid={nodeUid}
-      type={EditorBrickType.TRANSPARENT_CONTAINER}
+      type={EditorBrickType.CONTAINER}
       editorContainerStyle={{
         height: "100%",
         minHeight: "100%",
@@ -57,6 +57,6 @@ customElements.define(
       height: "100%",
       minHeight: "100%",
     },
-    selfLayout: EditorSelfLayout.BLOCK,
+    selfLayout: EditorSelfLayout.CONTAINER,
   })
 );

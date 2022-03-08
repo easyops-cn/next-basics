@@ -13,6 +13,7 @@ import {
   useOutlineEnabled,
 } from "@next-core/editor-bricks-helper";
 import styles from "./easy-view.editor.module.css";
+import { useBuilderData } from "@next-core/editor-bricks-helper";
 
 interface EasyViewProperties {
   gridAreas?: Record<string, (string | number)[]>;
@@ -27,6 +28,13 @@ export function EasyViewEditor({
   nodeUid,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<EasyViewProperties>({ nodeUid });
+  const { nodes, edges } = useBuilderData();
+  const parentUid = edges.find((item) => item.child === node.$$uid)?.parent;
+  const parentNode = nodes.find((item) => item.$$uid === parentUid);
+  let isWrapper = false;
+  if (parentNode.layoutType === "wrapper") {
+    isWrapper = true;
+  }
   const outlineEnabled = useOutlineEnabled(node.instanceId);
   const {
     gridAreas,
@@ -59,6 +67,14 @@ export function EasyViewEditor({
         minHeight: "100%",
         display: "flex",
         flexDirection: "column",
+        ...(isWrapper
+          ? {
+              minHeight: `calc(
+            100vh - var(--editor-brick-overlay-padding) * 2 - var(--page-card-gap) * 4 -
+              20px - var(--editor-brick-toolbar-height)
+          )`,
+            }
+          : {}),
       }}
     >
       <div
@@ -101,6 +117,7 @@ export function EasyViewEditor({
               slotName={area}
               slotContainerStyle={{ height: "100%", minHeight: "100%" }}
               dropZoneStyle={{ height: "100%", minHeight: "100%" }}
+              dropZoneBodyStyle={{ height: "100%", minHeight: "100%" }}
             />
           </div>
         ))}
