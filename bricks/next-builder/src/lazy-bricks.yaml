@@ -7,4 +7,6 @@ lazyBricks:
       - workbench-action
       - workbench-pane
       - workbench-sidebar
+      - workbench-store
+      - workbench-storyboard-tree
       - workbench-tree

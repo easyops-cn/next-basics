@@ -16,6 +16,9 @@ export class WorkbenchActionItemElement extends UpdatingElement {
   @property({ attribute: false })
   icon: MenuIcon;
 
+  @property()
+  to: string;
+
   @property({ type: Boolean })
   active: boolean;
 
@@ -37,7 +40,7 @@ export class WorkbenchActionItemElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <WorkbenchAction icon={this.icon} active={this.active} />
+          <WorkbenchAction icon={this.icon} to={this.to} active={this.active} />
         </BrickWrapper>,
         this
       );

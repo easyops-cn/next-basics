@@ -18,30 +18,34 @@ describe("WorkbenchPane", () => {
 
   it("should work", async () => {
     const onActiveChange = jest.fn();
-    const onPaneActivated = jest.fn();
+    const onFirstActivated = jest.fn();
     const wrapper = mount(
       <WorkbenchPane
         titleLabel="Hello"
         active={false}
         onActiveChange={onActiveChange}
-        onPaneActivated={onPaneActivated}
+        onFirstActivated={onFirstActivated}
       />
     );
     expect(wrapper.find(RightOutlined).length).toBe(1);
     expect(onActiveChange).toBeCalledTimes(1);
     expect(onActiveChange).toHaveBeenNthCalledWith(1, false);
-    expect(onPaneActivated).not.toBeCalled();
+    expect(onFirstActivated).not.toBeCalled();
 
-    wrapper.find(".pane").simulate("click");
+    wrapper.find(".pane-header").simulate("click");
     expect(wrapper.find(DownOutlined).length).toBe(1);
     expect(onActiveChange).toBeCalledTimes(2);
     expect(onActiveChange).toHaveBeenNthCalledWith(2, true);
-    expect(onPaneActivated).toBeCalledTimes(1);
+    expect(onFirstActivated).toBeCalledTimes(1);
+
+    wrapper.find(".pane-header").simulate("click");
+    expect(wrapper.find(RightOutlined).length).toBe(1);
+    expect(onActiveChange).toBeCalledTimes(3);
+    expect(onActiveChange).toHaveBeenNthCalledWith(3, false);
 
     // Re-active will be ignored.
-    wrapper.find(".pane").simulate("click");
-    expect(onActiveChange).toBeCalledTimes(2);
-    expect(onPaneActivated).toBeCalledTimes(1);
+    wrapper.find(".pane-header").simulate("click");
+    expect(onFirstActivated).toBeCalledTimes(1);
 
     expect(wrapper.find(".pane-body").hasClass("scrolled")).toBe(false);
     await act(async () => {

@@ -1,5 +1,6 @@
 :host {
   display: block;
+  transition: flex 0.2s;
 }
 
 :host([hidden]) {
@@ -13,8 +14,8 @@
 }
 
 :host([active]) {
-  flex-grow: 1;
-  min-height: 0;
+  flex: 1;
+  min-height: 25px;
 }
 
 .pane {
@@ -27,9 +28,11 @@
 .pane-header {
   display: flex;
   align-items: center;
-  line-height: 22px;
-  height: 22px;
+  font-size: 13px;
+  line-height: 24px;
+  height: 25px;
   cursor: pointer;
+  border-top: 1px solid transparent;
 }
 
 .pane-header:focus {
@@ -40,16 +43,25 @@
 }
 
 :host(:not(:first-child)) .pane-header {
-  border-top: 1px solid rgba(204, 204, 204, 0.2);
+  border-top-color: rgba(204, 204, 204, 0.2);
 }
 
 .title-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
-  width: 20px;
+  width: 24px;
+  padding-right: 2px;
   line-height: 1;
+  flex-shrink: 0;
+}
+
+.title-label {
+  text-transform: uppercase;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pane-body {

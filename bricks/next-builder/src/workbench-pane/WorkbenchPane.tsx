@@ -33,16 +33,17 @@ export interface WorkbenchPaneProps {
   titleLabel?: string;
   active?: boolean;
   onActiveChange?(active: boolean): void;
-  onPaneActivated?(): void;
+  onFirstActivated?(): void;
 }
 
 export function WorkbenchPane({
   titleLabel,
   active,
   onActiveChange,
-  onPaneActivated,
+  onFirstActivated,
 }: WorkbenchPaneProps): React.ReactElement {
   const [internalActive, setInternalActive] = useState(active);
+  const [activatedOnce, setActivatedOnce] = useState(false);
 
   useEffect(() => {
     setInternalActive(active);
@@ -53,11 +54,12 @@ export function WorkbenchPane({
   }, [internalActive, onActiveChange]);
 
   const handleClick = useCallback(() => {
-    setInternalActive(true);
-    if (!internalActive) {
-      onPaneActivated?.();
+    setInternalActive((previousActive) => !previousActive);
+    if (!activatedOnce && !internalActive) {
+      setActivatedOnce(true);
+      onFirstActivated?.();
     }
-  }, [internalActive, onPaneActivated]);
+  }, [activatedOnce, internalActive, onFirstActivated]);
 
   const scrollBodyRef = useRef<HTMLDivElement>();
 
@@ -72,8 +74,8 @@ export function WorkbenchPane({
   );
 
   return (
-    <div className="pane" onClick={handleClick}>
-      <div className="pane-header" tabIndex={0}>
+    <div className="pane">
+      <div className="pane-header" tabIndex={0} onClick={handleClick}>
         <span className="title-icon">
           {internalActive ? <DownOutlined /> : <RightOutlined />}
         </span>
