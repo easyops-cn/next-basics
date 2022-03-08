@@ -1,0 +1,18 @@
+.wrapper {
+  /* Try to use pre-defined css variables like `var(--editor-...)` */
+  /* See https://github.com/easyops-cn/next-core/blob/master/packages/brick-container/src/styles/editor-bricks-variables.css */
+  border-radius: var(--editor-brick-border-radius);
+  background: var(--editor-brick-skeleton-bg-light);
+  height: 100%;
+}
+
+.appName {
+  margin: 20px 10%;
+}
+
+.sibarItem {
+  width: 80%;
+  height: 22px;
+  background-color: #d0d1d2;
+  margin: 20px 10%;
+}
