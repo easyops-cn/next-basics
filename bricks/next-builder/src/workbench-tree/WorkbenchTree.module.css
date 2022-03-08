@@ -4,17 +4,25 @@
   padding: 0;
 }
 
+.placeholder {
+  color: var(--antd-input-placeholder-color);
+  padding: 0 15px;
+}
+
 .nodeLabel {
   color: #c5c5c5;
   display: flex;
   align-items: center;
   cursor: pointer;
+  height: 22px;
 }
 
 .nodeLabel:hover {
   background-color: #2a2d2e;
+  color: #c5c5c5;
 }
 
+.nodeLabel.active,
 .nodeLabel:focus {
   outline-width: 1px;
   outline-style: solid;
@@ -28,14 +36,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
-  width: 20px;
+  font-size: 13px;
+  width: 22px;
+  padding-right: 6px;
   line-height: 1;
   flex-shrink: 0;
 }
 
-.nodeIcon.leaf {
-  color: var(--palette-blue-3);
+.nodeLabel.gray,
+.nodeLabel.gray:hover {
+  color: var(--palette-gray-7);
+}
+
+.nodeLabel.red .nodeIcon {
+  color: var(--palette-red-7);
+}
+.nodeLabel.green .nodeIcon {
+  color: var(--palette-green-7);
+}
+.nodeLabel.blue .nodeIcon {
+  color: var(--palette-blue-7);
+}
+.nodeLabel.orange .nodeIcon {
+  color: var(--palette-orange-7);
+}
+.nodeLabel.purple .nodeIcon {
+  color: var(--palette-purple-7);
+}
+.nodeLabel.cyan .nodeIcon {
+  color: var(--palette-cyan-7);
 }
 
 .nodeName {

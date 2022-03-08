@@ -26,23 +26,17 @@ export class WorkbenchPaneElement extends UpdatingElement {
   @property({ type: Boolean })
   active: boolean;
 
-  @event({ type: "active.change" })
-  private _activeChangeEvent: EventEmitter<{
-    active: boolean;
-  }>;
-
   private _onActiveChange = (active: boolean): void => {
     if (active !== this.active) {
       this.active = active;
-      this._activeChangeEvent.emit({ active });
     }
   };
 
-  @event({ type: "pane.activated" })
-  private _paneActivatedEvent: EventEmitter<void>;
+  @event({ type: "pane.firstActivated" })
+  private _onFirstActivatedEvent: EventEmitter<void>;
 
-  private _onPaneActivated = (): void => {
-    this._paneActivatedEvent.emit();
+  private _onFirstActivated = (): void => {
+    this._onFirstActivatedEvent.emit();
   };
 
   private _shadowRoot: ShadowRoot;
@@ -77,7 +71,7 @@ export class WorkbenchPaneElement extends UpdatingElement {
               titleLabel={this.titleLabel}
               active={this.active}
               onActiveChange={this._onActiveChange}
-              onPaneActivated={this._onPaneActivated}
+              onFirstActivated={this._onFirstActivated}
             />
           </BrickWrapper>
         </>,
