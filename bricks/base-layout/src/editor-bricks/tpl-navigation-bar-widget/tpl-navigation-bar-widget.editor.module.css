@@ -64,6 +64,22 @@
   }
 }
 
+.emptyStatus {
+  &::before {
+    content: attr(data-slot-id);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--stroke-color-default);
+    font-size: 20px;
+    border: 1px dashed;
+    border-radius: 4px;
+  }
+}
+
 .avatar {
   width: 32px;
   height: 32px;

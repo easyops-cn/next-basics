@@ -11,9 +11,9 @@ import {
   useBuilderGroupedChildNodes,
   useBuilderNode,
   useOutlineEnabled,
+  useBuilderData,
 } from "@next-core/editor-bricks-helper";
 import styles from "./easy-view.editor.module.css";
-import { useBuilderData } from "@next-core/editor-bricks-helper";
 
 interface EasyViewProperties {
   gridAreas?: Record<string, (string | number)[]>;
@@ -32,7 +32,7 @@ export function EasyViewEditor({
   const parentUid = edges.find((item) => item.child === node.$$uid)?.parent;
   const parentNode = nodes.find((item) => item.$$uid === parentUid);
   let isWrapper = false;
-  if (parentNode.layoutType === "wrapper") {
+  if (parentNode?.layoutType === "wrapper") {
     isWrapper = true;
   }
   const outlineEnabled = useOutlineEnabled(node.instanceId);
@@ -69,10 +69,7 @@ export function EasyViewEditor({
         flexDirection: "column",
         ...(isWrapper
           ? {
-              minHeight: `calc(
-            100vh - var(--editor-brick-overlay-padding) * 2 - var(--page-card-gap) * 4 -
-              20px - var(--editor-brick-toolbar-height)
-          )`,
+              minHeight: `calc(100vh - var(--editor-brick-overlay-padding) * 2 - var(--page-card-gap) * 4 - 20px - var(--editor-brick-toolbar-height))`,
             }
           : {}),
       }}

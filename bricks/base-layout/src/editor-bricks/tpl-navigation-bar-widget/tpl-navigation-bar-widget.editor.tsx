@@ -64,6 +64,7 @@ export function TplNavigationBarWidgetEditor({
                 flex: 1,
               }}
               slotContentLayout={EditorSlotContentLayout.BLOCK}
+              emptyClassName={styles.emptyStatus}
             />
           </div>
           <div className={styles.avatar} />
