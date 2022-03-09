@@ -28,9 +28,7 @@ export function EasyViewEditor({
   nodeUid,
 }: EditorComponentProps): React.ReactElement {
   const node = useBuilderNode<EasyViewProperties>({ nodeUid });
-  const { nodes, edges } = useBuilderData();
-  const parentUid = edges.find((item) => item.child === node.$$uid)?.parent;
-  const parentNode = nodes.find((item) => item.$$uid === parentUid);
+  const parentNode = useBuilderParentNode(node.$$uid);
   let isWrapper = false;
   if (parentNode?.layoutType === "wrapper") {
     isWrapper = true;
