@@ -10,16 +10,12 @@ const mockUseBuilderGroupedChildNodes = jest.spyOn(
   "useBuilderGroupedChildNodes"
 );
 
-const mockUseBuilderData = jest.spyOn(helper, "useBuilderData");
-const mockUsBuilderDataValue = {
-  rootId: "root",
-  nodes: [],
-  edges: [],
-} as any;
+const mockUseBuilderParentNode = jest.spyOn(helper, "useBuilderParentNode");
+const mockUseBuilderParentNodeValue = {} as any;
 
 describe("EasyViewEditor", () => {
   it("should work with gridAreas", () => {
-    mockUseBuilderData.mockReturnValueOnce(mockUsBuilderDataValue);
+    mockUseBuilderParentNode.mockReturnValueOnce(mockUseBuilderParentNodeValue);
     mockUseBuilderNode.mockReturnValueOnce({
       type: "brick",
       id: "B-001",
@@ -90,7 +86,7 @@ describe("EasyViewEditor", () => {
   });
 
   it("should work with gridTemplateAreas", () => {
-    mockUseBuilderData.mockReturnValueOnce(mockUsBuilderDataValue);
+    mockUseBuilderParentNode.mockReturnValueOnce(mockUseBuilderParentNodeValue);
     mockUseBuilderNode.mockReturnValueOnce({
       type: "brick",
       id: "B-001",
@@ -143,7 +139,7 @@ describe("EasyViewEditor", () => {
   });
 
   it("should work with no areas", () => {
-    mockUseBuilderData.mockReturnValueOnce(mockUsBuilderDataValue);
+    mockUseBuilderParentNode.mockReturnValueOnce(mockUseBuilderParentNodeValue);
     mockUseBuilderNode.mockReturnValueOnce({
       type: "brick",
       id: "B-001",
@@ -161,23 +157,9 @@ describe("EasyViewEditor", () => {
   });
 
   it("should work while editor was wrapper", () => {
-    mockUseBuilderData.mockReturnValueOnce({
-      rootId: "123",
-      nodes: [
-        {
-          $$uid: 1,
-          layoutType: "wrapper",
-        },
-        {
-          $$uid: 2,
-        },
-      ],
-      edges: [
-        {
-          parent: 1,
-          child: 2,
-        },
-      ],
+    mockUseBuilderParentNode.mockReturnValueOnce({
+      $$uid: 1,
+      layoutType: "wrapper",
     } as any);
     mockUseOutlineEnabled.mockReturnValueOnce(false);
     mockUseBuilderGroupedChildNodes.mockReturnValueOnce([]);

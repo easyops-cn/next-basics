@@ -11,7 +11,7 @@ import {
   useBuilderGroupedChildNodes,
   useBuilderNode,
   useOutlineEnabled,
-  useBuilderData,
+  useBuilderParentNode,
 } from "@next-core/editor-bricks-helper";
 import styles from "./easy-view.editor.module.css";
 
