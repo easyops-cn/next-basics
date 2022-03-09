@@ -3,31 +3,14 @@
 import React, { useMemo, type ReactElement } from "react";
 import { pick } from "lodash";
 import classNames from "classnames";
-import type { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
+import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
+import type { WorkbenchNodeData } from "./interfaces";
+import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
 
 import styles from "./WorkbenchTree.module.css";
-import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
 
 const treeLevelPadding = 10;
-
-export interface WorkbenchNodeData<T = unknown> {
-  key: string | number;
-  name: string;
-  icon?: MenuIcon;
-  data?: T;
-  labelColor?: string;
-  link?:
-    | {
-        to: string;
-      }
-    | {
-        href: string;
-      };
-  active?: boolean;
-  hover?: boolean;
-  children?: WorkbenchNodeData[];
-}
 
 export interface WorkbenchTreeProps {
   nodes: WorkbenchNodeData[];
@@ -84,24 +67,32 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
   return (
     <li>
       <Link
-        className={classNames(styles.nodeLabel, {
+        className={classNames(styles.nodeLabelRow, {
           [styles.active]: node.active,
           [styles.hover]: hoverKey && node.key === hoverKey,
         })}
-        style={{
-          paddingLeft: level * treeLevelPadding + 5,
-          color: node.labelColor,
-        }}
         tabIndex={0}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         noEmptyHref
         {...pick(node.link, ["to", "href"])}
       >
-        <span className={styles.nodeIcon}>
-          <GeneralIcon icon={node.icon} />
-        </span>
-        <span className={styles.nodeName}>{node.name}</span>
+        <div
+          className={styles.nodeLabel}
+          style={{
+            paddingLeft: level * treeLevelPadding + 5,
+            color: node.labelColor,
+          }}
+        >
+          <span className={styles.nodeIcon}>
+            <GeneralIcon icon={node.icon} />
+          </span>
+          <span className={styles.nodeName}>{node.name}</span>
+        </div>
+        <WorkbenchMiniActionBar
+          className={styles.nodeActionsBar}
+          data={node.data}
+        />
       </Link>
       {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
     </li>

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { WorkbenchNodeData } from "./WorkbenchTree";
+import type { WorkbenchNodeData } from "./interfaces";
 
 export interface ContextOfWorkbenchTree {
   hoverKey?: string | number;
