@@ -21,6 +21,7 @@ export function WorkbenchAction({
       className={classNames(styles.action, { [styles.active]: active })}
       role="button"
       to={to}
+      noEmptyHref
     >
       <GeneralIcon icon={icon} size={24} />
     </Link>

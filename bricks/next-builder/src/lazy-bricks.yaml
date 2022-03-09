@@ -8,5 +8,5 @@ lazyBricks:
       - workbench-pane
       - workbench-sidebar
       - workbench-store
-      - workbench-storyboard-tree
+      - workbench-brick-tree
       - workbench-tree

@@ -22,7 +22,6 @@
   color: #c5c5c5;
 }
 
-.nodeLabel.active,
 .nodeLabel:focus {
   outline-width: 1px;
   outline-style: solid;
@@ -32,8 +31,9 @@
   color: #fff;
 }
 
-.nodeLabel.hover {
-  background-color: #094771;
+.nodeLabel.active,
+.nodeLabel.hover:not(:hover) {
+  background-color: #37373d;
 }
 
 .nodeIcon {

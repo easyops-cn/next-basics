@@ -4,7 +4,7 @@ import { getRuntime } from "@next-core/brick-kit";
 import { BuilderRouteNode } from "@next-core/brick-types";
 import { WorkbenchNodeData } from "../workbench-tree/WorkbenchTree";
 
-export function workbenchRouteTree(
+export function getWorkbenchRouteTree(
   routes: BuilderRouteNode[],
   activeRouteId?: string,
   linkFn?: (routeId: string) => WorkbenchNodeData["link"]
@@ -17,9 +17,25 @@ export function workbenchRouteTree(
   for (const route of routes) {
     const node: WorkbenchNodeData = {
       key: route.id,
-      type: route.type,
       name: route.alias || route.path,
       active: activeRouteId && activeRouteId === route.id,
+      icon: {
+        lib: "antd",
+        theme: "outlined",
+        icon:
+          route.type === "redirect"
+            ? "enter"
+            : route.type === "routes"
+            ? "down"
+            : "branches",
+        color:
+          route.type === "redirect"
+            ? "var(--palette-cyan-7)"
+            : route.type === "routes"
+            ? undefined
+            : "var(--palette-blue-7)",
+      },
+      data: route,
     };
 
     if (linkFn) {
@@ -56,6 +72,6 @@ export function workbenchRouteTree(
 }
 
 getRuntime().registerCustomProcessor(
-  "nextBuilder.workbenchRouteTree",
-  workbenchRouteTree
+  "nextBuilder.getWorkbenchRouteTree",
+  getWorkbenchRouteTree
 );

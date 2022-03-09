@@ -2,38 +2,21 @@
 // For temporary usage only, will change soon.
 import React, { useMemo, type ReactElement } from "react";
 import { pick } from "lodash";
-import classNames, { type Argument as ClassNamesArgument } from "classnames";
-import {
-  EnterOutlined,
-  BranchesOutlined,
-  BuildOutlined,
-  DatabaseOutlined,
-  DownOutlined,
-  GoldOutlined,
-  MessageOutlined,
-  QuestionOutlined,
-} from "@ant-design/icons";
-import { Link } from "@next-libs/basic-components";
+import classNames from "classnames";
+import type { MenuIcon } from "@next-core/brick-types";
+import { GeneralIcon, Link } from "@next-libs/basic-components";
 
 import styles from "./WorkbenchTree.module.css";
 import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
 
 const treeLevelPadding = 10;
 
-export type WorkbenchNodeType =
-  | "bricks"
-  | "routes"
-  | "redirect"
-  | "brick"
-  | "template"
-  | "provider"
-  | "portal"
-  | "mount-point";
-
-export interface WorkbenchNodeData {
+export interface WorkbenchNodeData<T = unknown> {
   key: string | number;
   name: string;
-  type: WorkbenchNodeType;
+  icon?: MenuIcon;
+  data?: T;
+  labelColor?: string;
   link?:
     | {
         to: string;
@@ -90,77 +73,37 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
     useWorkbenchTreeContext();
 
   const onMouseEnter = useMemo(
-    () => mouseEnterFactory?.(node.key),
-    [mouseEnterFactory, node.key]
+    () => mouseEnterFactory?.(node),
+    [mouseEnterFactory, node]
   );
   const onMouseLeave = useMemo(
-    () => mouseLeaveFactory?.(node.key),
-    [mouseLeaveFactory, node.key]
+    () => mouseLeaveFactory?.(node),
+    [mouseLeaveFactory, node]
   );
 
   return (
     <li>
       <Link
-        className={classNames(
-          styles.nodeLabel,
-          getNodeClass(node, isLeaf, hoverKey)
-        )}
+        className={classNames(styles.nodeLabel, {
+          [styles.active]: node.active,
+          [styles.hover]: hoverKey && node.key === hoverKey,
+        })}
         style={{
           paddingLeft: level * treeLevelPadding + 5,
+          color: node.labelColor,
         }}
         tabIndex={0}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        noEmptyHref
         {...pick(node.link, ["to", "href"])}
       >
-        <span className={styles.nodeIcon}>{getNodeIcon(node, isLeaf)}</span>
+        <span className={styles.nodeIcon}>
+          <GeneralIcon icon={node.icon} />
+        </span>
         <span className={styles.nodeName}>{node.name}</span>
       </Link>
       {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
     </li>
   );
-}
-
-function getNodeClass(
-  node: WorkbenchNodeData,
-  isLeaf: boolean,
-  hoverKey: string | number
-): ClassNamesArgument {
-  return {
-    [styles.active]: node.active,
-    [styles.hover]: hoverKey && node.key === hoverKey,
-    [styles.blue]: node.type === "bricks" || (isLeaf && node.type === "routes"),
-    [styles.cyan]: node.type === "redirect",
-    [styles.green]: node.type === "brick",
-    [styles.gray]: node.type === "mount-point",
-    [styles.orange]: node.type === "provider",
-    [styles.purple]: node.type === "portal",
-    [styles.red]: node.type === "template",
-  };
-}
-
-function getNodeIcon(
-  node: WorkbenchNodeData,
-  isLeaf: boolean
-): React.ReactElement {
-  switch (node.type) {
-    case "routes":
-      return isLeaf ? <BranchesOutlined /> : <DownOutlined />;
-    case "mount-point":
-      return <DownOutlined />;
-    case "bricks":
-      return <BranchesOutlined />;
-    case "redirect":
-      return <EnterOutlined style={{ transform: "rotate(180deg)" }} />;
-    case "brick":
-      return <BuildOutlined />;
-    case "provider":
-      return <DatabaseOutlined />;
-    case "portal":
-      return <MessageOutlined />;
-    case "template":
-      return <GoldOutlined />;
-    default:
-      return <QuestionOutlined />;
-  }
 }
