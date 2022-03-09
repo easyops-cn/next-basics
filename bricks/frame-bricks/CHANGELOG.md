@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.5.0...@next-bricks/frame-bricks@0.6.0) (2022-03-09)
+
+
+### Features
+
+* style change ([e6a7a0a](https://github.com/easyops-cn/next-basics/commit/e6a7a0a17c40799b047183a151886142d70fec8a))
+* support editor for navbar & sidebar ([ef7b569](https://github.com/easyops-cn/next-basics/commit/ef7b5692b375ae1c7535430ef69c030094dbb108))
+
+
+
+
+
 # [0.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.4.3...@next-bricks/frame-bricks@0.5.0) (2022-03-07)
 
 
