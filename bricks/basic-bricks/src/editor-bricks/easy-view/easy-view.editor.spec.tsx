@@ -10,8 +10,12 @@ const mockUseBuilderGroupedChildNodes = jest.spyOn(
   "useBuilderGroupedChildNodes"
 );
 
+const mockUseBuilderParentNode = jest.spyOn(helper, "useBuilderParentNode");
+const mockUseBuilderParentNodeValue = {} as any;
+
 describe("EasyViewEditor", () => {
   it("should work with gridAreas", () => {
+    mockUseBuilderParentNode.mockReturnValueOnce(mockUseBuilderParentNodeValue);
     mockUseBuilderNode.mockReturnValueOnce({
       type: "brick",
       id: "B-001",
@@ -82,6 +86,7 @@ describe("EasyViewEditor", () => {
   });
 
   it("should work with gridTemplateAreas", () => {
+    mockUseBuilderParentNode.mockReturnValueOnce(mockUseBuilderParentNodeValue);
     mockUseBuilderNode.mockReturnValueOnce({
       type: "brick",
       id: "B-001",
@@ -134,6 +139,7 @@ describe("EasyViewEditor", () => {
   });
 
   it("should work with no areas", () => {
+    mockUseBuilderParentNode.mockReturnValueOnce(mockUseBuilderParentNodeValue);
     mockUseBuilderNode.mockReturnValueOnce({
       type: "brick",
       id: "B-001",
@@ -148,5 +154,30 @@ describe("EasyViewEditor", () => {
     expect(container.hasClass("empty")).toBe(true);
     expect(container.prop("style")).toEqual({});
     expect(container.children().length).toBe(0);
+  });
+
+  it("should work while editor was wrapper", () => {
+    mockUseBuilderParentNode.mockReturnValueOnce({
+      $$uid: 1,
+      layoutType: "wrapper",
+    } as any);
+    mockUseOutlineEnabled.mockReturnValueOnce(false);
+    mockUseBuilderGroupedChildNodes.mockReturnValueOnce([]);
+    mockUseBuilderNode.mockReturnValueOnce({
+      type: "brick",
+      id: "B-001",
+      brick: "easy-view",
+      alias: "my-brick",
+      $$parsedProperties: {},
+      $$uid: 2,
+    });
+
+    const wrapper = shallow(<EasyViewEditor nodeUid={2} />);
+    expect(wrapper.at(0).prop("editorBodyStyle")).toStrictEqual({
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+      minHeight: `calc(100vh - var(--editor-brick-overlay-padding) * 2 - var(--page-card-gap) * 4 - 20px - var(--editor-brick-toolbar-height))`,
+    });
   });
 });
