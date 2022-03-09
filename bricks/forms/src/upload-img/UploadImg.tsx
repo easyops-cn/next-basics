@@ -24,6 +24,7 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon, UserInfo } from "@next-core/brick-types";
 import { getRuntime, useCurrentTheme } from "@next-core/brick-kit";
 import { ReactComponent as ImageUpload } from "./image-upload.svg";
+import { ReactComponent as ImageUploadDark } from "./image-upload-dark.svg";
 import { FileUtils } from "../utils";
 
 export interface UploadImgValue {
@@ -286,6 +287,8 @@ export function RealUploadImg(
         <div>
           {props.maxNumber === 1 && disabled ? (
             <LoadingOutlined />
+          ) : theme === "dark-v2" ? (
+            <ImageUploadDark />
           ) : (
             <ImageUpload />
           )}
