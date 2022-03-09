@@ -75,7 +75,7 @@ export function TplNavigationBarWidgetEditor({
 }
 
 customElements.define(
-  "base-layout.tpl-navigation-bar-widget--editor",
+  "editors-of-base-layout.tpl-navigation-bar-widget--editor",
   EditorElementFactory(TplNavigationBarWidgetEditor, {
     selfLayout: EditorSelfLayout.CONTAINER,
   })
