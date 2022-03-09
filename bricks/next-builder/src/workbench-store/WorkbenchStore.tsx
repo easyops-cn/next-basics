@@ -7,6 +7,8 @@ import type {
 } from "@next-core/brick-types";
 import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
 import { BuilderDataType } from "../builder-container/interfaces";
+import { useHoverOnBrick } from "./useHoverOnBrick";
+import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
 
 export interface WorkbenchStoreProps {
   dataSource?: BuilderRouteOrBrickNode[];
@@ -58,6 +60,10 @@ export function WorkbenchStore({
     }
     setDataType(type);
   }, [dataSource, manager, templateSources]);
+
+  useHoverOnBrick(manager);
+
+  useListenOnPreviewMessage(manager);
 
   return null;
 }

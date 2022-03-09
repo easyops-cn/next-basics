@@ -51,3 +51,4 @@ import "./custom-processors/workbenchRouteTree";
 // !Lazy: import "./workbench-tree";
 // !Lazy: import "./workbench-store";
 // !Lazy: import "./workbench-storyboard-tree";
+import "./preview-container";

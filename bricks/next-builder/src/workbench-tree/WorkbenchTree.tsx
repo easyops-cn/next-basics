@@ -1,6 +1,7 @@
 // istanbul ignore file
 // For temporary usage only, will change soon.
-import React, { type ReactElement } from "react";
+import React, { useMemo, type ReactElement } from "react";
+import { pick } from "lodash";
 import classNames, { type Argument as ClassNamesArgument } from "classnames";
 import {
   EnterOutlined,
@@ -11,11 +12,11 @@ import {
   GoldOutlined,
   MessageOutlined,
   QuestionOutlined,
-  SisternodeOutlined,
 } from "@ant-design/icons";
 import { Link } from "@next-libs/basic-components";
 
 import styles from "./WorkbenchTree.module.css";
+import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
 
 const treeLevelPadding = 10;
 
@@ -41,6 +42,7 @@ export interface WorkbenchNodeData {
         href: string;
       };
   active?: boolean;
+  hover?: boolean;
   children?: WorkbenchNodeData[];
 }
 
@@ -84,15 +86,32 @@ export interface TreeNodeProps {
 
 function TreeNode({ node, level }: TreeNodeProps): ReactElement {
   const isLeaf = !node.children?.length;
+  const { hoverKey, mouseEnterFactory, mouseLeaveFactory } =
+    useWorkbenchTreeContext();
+
+  const onMouseEnter = useMemo(
+    () => mouseEnterFactory?.(node.key),
+    [mouseEnterFactory, node.key]
+  );
+  const onMouseLeave = useMemo(
+    () => mouseLeaveFactory?.(node.key),
+    [mouseLeaveFactory, node.key]
+  );
+
   return (
     <li>
       <Link
-        className={classNames(styles.nodeLabel, getNodeClass(node, isLeaf))}
+        className={classNames(
+          styles.nodeLabel,
+          getNodeClass(node, isLeaf, hoverKey)
+        )}
         style={{
           paddingLeft: level * treeLevelPadding + 5,
         }}
         tabIndex={0}
-        {...node.link}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        {...pick(node.link, ["to", "href"])}
       >
         <span className={styles.nodeIcon}>{getNodeIcon(node, isLeaf)}</span>
         <span className={styles.nodeName}>{node.name}</span>
@@ -104,10 +123,12 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
 
 function getNodeClass(
   node: WorkbenchNodeData,
-  isLeaf: boolean
+  isLeaf: boolean,
+  hoverKey: string | number
 ): ClassNamesArgument {
   return {
     [styles.active]: node.active,
+    [styles.hover]: hoverKey && node.key === hoverKey,
     [styles.blue]: node.type === "bricks" || (isLeaf && node.type === "routes"),
     [styles.cyan]: node.type === "redirect",
     [styles.green]: node.type === "brick",

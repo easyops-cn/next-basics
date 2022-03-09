@@ -1,0 +1,27 @@
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #1e1e1e;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.2);
+  padding: 10px;
+}
+
+.iframeContainer {
+  flex: 1;
+  padding: 20px;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 1px solid rgba(204, 204, 204, 0.2);
+}
