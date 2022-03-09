@@ -5,8 +5,9 @@ lazyBricks:
   - group: workbench
     bricks:
       - workbench-action
+      - workbench-brick-tree
+      - workbench-mini-action-bar
       - workbench-pane
       - workbench-sidebar
       - workbench-store
-      - workbench-brick-tree
       - workbench-tree

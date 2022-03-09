@@ -8,6 +8,7 @@ import {
   UpdatingElement,
 } from "@next-core/brick-kit";
 import { WorkbenchPane } from "./WorkbenchPane";
+
 import styles from "./WorkbenchPane.shadow.css";
 import sharedStyles from "../shared/scrollbar.shadow.css";
 

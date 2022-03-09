@@ -7,31 +7,24 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
+import { WorkbenchMiniActionBar } from "../shared/workbench/WorkbenchMiniActionBar";
+import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
 import type {
   ActionClickDetail,
-  WorkbenchNodeData,
   WorkbenchTreeAction,
 } from "../shared/workbench/interfaces";
-import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
-import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 
 /**
- * @id next-builder.workbench-tree
+ * @id next-builder.workbench-mini-action-bar
  * @author steve
  * @history
- * 1.x.0: 新增构件 `next-builder.workbench-tree`
+ * 1.x.0: 新增构件 `next-builder.workbench-mini-action-bar`
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchTreeElement extends UpdatingElement {
-  @property({ attribute: false })
-  nodes: WorkbenchNodeData[];
-
+export class WorkbenchMiniActionBarElement extends UpdatingElement {
   @property({ attribute: false })
   actions: WorkbenchTreeAction[];
-
-  @property()
-  placeholder: string;
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -41,11 +34,6 @@ export class WorkbenchTreeElement extends UpdatingElement {
   };
 
   connectedCallback(): void {
-    // Don't override user's style settings.
-    // istanbul ignore else
-    if (!this.style.display) {
-      this.style.display = "block";
-    }
     this._render();
   }
 
@@ -64,7 +52,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
               onActionClick: this._handleActionClick,
             }}
           >
-            <WorkbenchTree nodes={this.nodes} placeholder={this.placeholder} />
+            <WorkbenchMiniActionBar />
           </WorkbenchActionsContext.Provider>
         </BrickWrapper>,
         this
@@ -73,4 +61,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
   }
 }
 
-customElements.define("next-builder.workbench-tree", WorkbenchTreeElement);
+customElements.define(
+  "next-builder.workbench-mini-action-bar",
+  WorkbenchMiniActionBarElement
+);

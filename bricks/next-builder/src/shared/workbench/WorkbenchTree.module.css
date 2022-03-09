@@ -9,30 +9,43 @@
   padding: 0 15px;
 }
 
-.nodeLabel {
-  color: #c5c5c5;
+.nodeLabelRow {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
   height: 22px;
 }
 
-.nodeLabel:hover {
+.nodeLabelRow:hover {
   background-color: #2a2d2e;
-  color: #c5c5c5;
 }
 
-.nodeLabel:focus {
+.nodeLabelRow:focus {
   outline-width: 1px;
   outline-style: solid;
   outline-offset: -1px;
   outline-color: #007fd4;
   background-color: #094771;
+}
+
+.nodeLabel {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.nodeAction,
+.nodeAction:hover,
+.nodeLabelRow .nodeLabel {
+  color: #c5c5c5;
+}
+
+.nodeLabelRow:focus .nodeLabel {
   color: #fff;
 }
 
-.nodeLabel.active,
-.nodeLabel.hover:not(:hover) {
+.nodeLabelRow.active,
+.nodeLabelRow.hover:not(:hover) {
   background-color: #37373d;
 }
 
@@ -47,32 +60,12 @@
   flex-shrink: 0;
 }
 
-.nodeLabel.gray,
-.nodeLabel.gray:hover {
-  color: var(--palette-gray-7);
-}
-
-.nodeLabel.red .nodeIcon {
-  color: var(--palette-red-7);
-}
-.nodeLabel.green .nodeIcon {
-  color: var(--palette-green-7);
-}
-.nodeLabel.blue .nodeIcon {
-  color: var(--palette-blue-7);
-}
-.nodeLabel.orange .nodeIcon {
-  color: var(--palette-orange-7);
-}
-.nodeLabel.purple .nodeIcon {
-  color: var(--palette-purple-7);
-}
-.nodeLabel.cyan .nodeIcon {
-  color: var(--palette-cyan-7);
-}
-
 .nodeName {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.nodeLabelRow:not(.hover, :hover) .nodeActionsBar {
+  display: none;
 }

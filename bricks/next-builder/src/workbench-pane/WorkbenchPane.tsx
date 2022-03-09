@@ -76,10 +76,13 @@ export function WorkbenchPane({
   return (
     <div className="pane">
       <div className="pane-header" tabIndex={0} onClick={handleClick}>
-        <span className="title-icon">
-          {internalActive ? <DownOutlined /> : <RightOutlined />}
-        </span>
-        <div className="title-label">{titleLabel}</div>
+        <div className="pane-title">
+          <span className="title-icon">
+            {internalActive ? <DownOutlined /> : <RightOutlined />}
+          </span>
+          <div className="title-label">{titleLabel}</div>
+        </div>
+        <slot name="actions" />
       </div>
       <div
         className={classNames("pane-body", "custom-scrollbar-container", {

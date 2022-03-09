@@ -2,17 +2,15 @@
 // For temporary usage only, will change soon.
 import React, { useCallback, useMemo } from "react";
 import {
-  BuilderRuntimeNode,
   useBuilderData,
   useBuilderDataManager,
   useHoverNodeUid,
+  type BuilderRuntimeNode,
 } from "@next-core/editor-bricks-helper";
 import { sortBy } from "lodash";
-import {
-  WorkbenchNodeData,
-  WorkbenchTree,
-} from "../workbench-tree/WorkbenchTree";
-import { WorkbenchTreeContext } from "../workbench-tree/WorkbenchTreeContext";
+import type { WorkbenchNodeData } from "../shared/workbench/interfaces";
+import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
+import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 
 export interface WorkbenchBrickTreeProps {
   placeholder?: string;
@@ -81,6 +79,11 @@ export function WorkbenchBrickTree({
               icon: "down",
             },
             labelColor: "var(--palette-gray-7)",
+            data: {
+              type: "mount-point",
+              mountPoint: edge.mountPoint,
+              nodeUid,
+            },
             children: [],
           };
           groups.set(edge.mountPoint, group);

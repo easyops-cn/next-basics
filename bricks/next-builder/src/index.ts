@@ -52,3 +52,4 @@ import "./custom-processors/getWorkbenchRouteTree";
 // !Lazy: import "./workbench-store";
 // !Lazy: import "./workbench-brick-tree";
 import "./preview-container";
+// !Lazy: import "./workbench-mini-action-bar";

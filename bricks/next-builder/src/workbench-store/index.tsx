@@ -10,7 +10,7 @@ import { WorkbenchStore } from "./WorkbenchStore";
 
 /**
  * @id next-builder.workbench-store
- * @author weareoutman
+ * @author steve
  * @history
  * 1.x.0: 新增构件 `next-builder.workbench-store`
  * @docKind brick

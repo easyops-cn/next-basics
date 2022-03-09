@@ -2,7 +2,7 @@
 // For temporary usage only, will change soon.
 import { getRuntime } from "@next-core/brick-kit";
 import { BuilderRouteNode } from "@next-core/brick-types";
-import { WorkbenchNodeData } from "../workbench-tree/WorkbenchTree";
+import type { WorkbenchNodeData } from "../shared/workbench/interfaces";
 
 export function getWorkbenchRouteTree(
   routes: BuilderRouteNode[],
