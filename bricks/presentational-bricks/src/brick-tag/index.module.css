@@ -45,6 +45,7 @@
   .grayTag {
     color: var(--tag-gray-color);
     background-color: var(--tag-gray-background) !important;
+    border-color: var(--tag-gray-border-color) !important;
   }
 
   .grayInverseTag {
