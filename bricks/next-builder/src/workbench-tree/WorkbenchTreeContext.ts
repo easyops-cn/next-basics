@@ -1,9 +1,10 @@
 import { createContext, useContext } from "react";
+import type { WorkbenchNodeData } from "./WorkbenchTree";
 
 export interface ContextOfWorkbenchTree {
   hoverKey?: string | number;
-  mouseEnterFactory?(key: string | number): void;
-  mouseLeaveFactory?(key: string | number): void;
+  mouseEnterFactory?(node: WorkbenchNodeData): void;
+  mouseLeaveFactory?(node: WorkbenchNodeData): void;
 }
 
 export const WorkbenchTreeContext = createContext<ContextOfWorkbenchTree>({});

@@ -26,13 +26,17 @@ export class WorkbenchPaneElement extends UpdatingElement {
   @property({ type: Boolean })
   active: boolean;
 
+  @event({ type: "active.change" })
+  private _onActiveChangeEvent: EventEmitter<boolean>;
+
   private _onActiveChange = (active: boolean): void => {
     if (active !== this.active) {
       this.active = active;
+      this._onActiveChangeEvent.emit(active);
     }
   };
 
-  @event({ type: "pane.firstActivated" })
+  @event({ type: "active.firstActivated" })
   private _onFirstActivatedEvent: EventEmitter<void>;
 
   private _onFirstActivated = (): void => {

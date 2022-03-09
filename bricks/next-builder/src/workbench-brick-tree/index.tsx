@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
-import { WorkbenchStoryboardTree } from "./WorkbenchStoryboardTree";
+import { WorkbenchBrickTree } from "./WorkbenchBrickTree";
 import { BuilderProvider } from "@next-core/editor-bricks-helper";
 
 /**
- * @id next-builder.workbench-storyboard-tree
+ * @id next-builder.workbench-brick-tree
  * @author weareoutman
  * @history
- * 1.x.0: 新增构件 `next-builder.workbench-storyboard-tree`
+ * 1.x.0: 新增构件 `next-builder.workbench-brick-tree`
  * @docKind brick
  * @noInheritDoc
  */
@@ -35,7 +35,7 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
-            <WorkbenchStoryboardTree placeholder={this.placeholder} />
+            <WorkbenchBrickTree placeholder={this.placeholder} />
           </BuilderProvider>
         </BrickWrapper>,
         this
@@ -45,6 +45,6 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
 }
 
 customElements.define(
-  "next-builder.workbench-storyboard-tree",
+  "next-builder.workbench-brick-tree",
   WorkbenchStoryboardTreeElement
 );

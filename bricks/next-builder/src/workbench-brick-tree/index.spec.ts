@@ -8,11 +8,9 @@ const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
   .mockImplementation(() => null);
 
-describe("next-builder.workbench-storyboard-tree", () => {
+describe("next-builder.workbench-brick-tree", () => {
   it("should create a custom element", () => {
-    const element = document.createElement(
-      "next-builder.workbench-storyboard-tree"
-    );
+    const element = document.createElement("next-builder.workbench-brick-tree");
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
     expect(spyOnRender).toBeCalled();

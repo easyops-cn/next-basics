@@ -10,42 +10,45 @@ import {
 import { sortBy } from "lodash";
 import {
   WorkbenchNodeData,
-  WorkbenchNodeType,
   WorkbenchTree,
 } from "../workbench-tree/WorkbenchTree";
 import { WorkbenchTreeContext } from "../workbench-tree/WorkbenchTreeContext";
 
-export interface WorkbenchStoryboardTreeProps {
+export interface WorkbenchBrickTreeProps {
   placeholder?: string;
 }
 
-export function WorkbenchStoryboardTree({
+export function WorkbenchBrickTree({
   placeholder,
-}: WorkbenchStoryboardTreeProps): React.ReactElement {
+}: WorkbenchBrickTreeProps): React.ReactElement {
   const { nodes, edges, rootId } = useBuilderData();
   const hoverNodeUid = useHoverNodeUid();
   const manager = useBuilderDataManager();
 
   const mouseEnterFactory = useCallback(
-    (nodeUid: number) => {
-      return () => {
-        const prevUid = manager.getHoverNodeUid();
-        if (prevUid !== nodeUid) {
-          manager.setHoverNodeUid(nodeUid);
-        }
-      };
+    (node: WorkbenchNodeData<BuilderRuntimeNode>) => {
+      return node.data
+        ? () => {
+            const prevUid = manager.getHoverNodeUid();
+            if (prevUid !== node.data.$$uid) {
+              manager.setHoverNodeUid(node.data.$$uid);
+            }
+          }
+        : null;
     },
     [manager]
   );
 
   const mouseLeaveFactory = useCallback(
-    (nodeUid: number) => {
-      return () => {
-        const prevUid = manager.getHoverNodeUid();
-        if (prevUid === nodeUid) {
-          manager.setHoverNodeUid(undefined);
-        }
-      };
+    (node: WorkbenchNodeData<BuilderRuntimeNode>) => {
+      return node.data
+        ? () => {
+            const prevUid = manager.getHoverNodeUid();
+            if (prevUid === node.data.$$uid) {
+              manager.setHoverNodeUid(undefined);
+            }
+          }
+        : null;
     },
     [manager]
   );
@@ -71,8 +74,13 @@ export function WorkbenchStoryboardTree({
         if (!group) {
           group = {
             key: edge.mountPoint,
-            type: "mount-point",
             name: edge.mountPoint,
+            icon: {
+              lib: "antd",
+              theme: "outlined",
+              icon: "down",
+            },
+            labelColor: "var(--palette-gray-7)",
             children: [],
           };
           groups.set(edge.mountPoint, group);
@@ -85,15 +93,42 @@ export function WorkbenchStoryboardTree({
     }
 
     function getEntityNode(node: BuilderRuntimeNode): WorkbenchNodeData {
+      let icon = "question";
+      let color: string;
+      if (node.bg || node.type === "provider") {
+        icon = "database";
+        color = "orange";
+      } else if (node.portal) {
+        icon = "message";
+        color = "purple";
+      } else {
+        switch (node.type) {
+          case "routes":
+          case "bricks":
+          case "redirect":
+            icon = "branches";
+            color = "blue";
+            break;
+          case "template":
+            icon = "gold";
+            color = "red";
+            break;
+          case "brick":
+            icon = "build";
+            color = "green";
+            break;
+        }
+      }
       return {
         key: node.$$uid,
         name: node.alias,
-        type: node.bg
-          ? "provider"
-          : node.portal
-          ? "portal"
-          : (node.type as WorkbenchNodeType),
-        // link: `#brick,${node.instanceId}`,
+        icon: {
+          lib: "antd",
+          theme: "outlined",
+          icon,
+          color,
+        },
+        data: node,
         children: getChildren(node.$$uid),
       };
     }
