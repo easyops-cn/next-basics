@@ -1,8 +1,8 @@
 {
-  "name": "@next-bricks/base-layout",
+  "name": "@next-bricks/editors-of-base-layout",
   "version": "0.0.0",
   "description": "> TODO: description",
-  "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/base-layout",
+  "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/editors-of-base-layout",
   "license": "GPL-3.0",
   "files": [
     "dist",

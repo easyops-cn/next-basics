@@ -1,4 +1,4 @@
-export const NS_BASE_LAYOUT = "base-layout";
+export const NS_BASE_LAYOUT = "editors-of-base-layout";
 
 export enum K {
   BASE_LAYOUT = "BASE_LAYOUT",
