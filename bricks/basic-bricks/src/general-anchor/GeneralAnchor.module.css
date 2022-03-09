@@ -41,6 +41,16 @@
   }
 }
 
+:global(.ant-anchor-ink) {
+  &::before {
+    background-color: var(--antd-anchor-column-bar-bg);
+  }
+  :global(.ant-anchor-ink-ball) {
+    background-color: var(--antd-anchor-link-ball-bg);
+    border-color: var(--antd-anchor-link-ball-color);
+  }
+}
 :global(.ant-anchor-link-title) {
   font-size: var(--antd-anchor-title-font-size);
+  font-weight: var(--antd-anchor-title-font-weight);
 }
