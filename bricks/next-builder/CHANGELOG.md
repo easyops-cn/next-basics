@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.113.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.112.2...@next-bricks/next-builder@1.113.0) (2022-03-09)
+
+
+### Features
+
+* add new brick: preview-container ([253e0db](https://github.com/easyops-cn/next-basics/commit/253e0dbda23e07770b60d63e7aaf6929782fdd8d))
+* add new bricks of workbench ([c185411](https://github.com/easyops-cn/next-basics/commit/c185411d896d9cc73e9e7cda22e404995c794aaf))
+* add some new bricks of workbench ([25749c6](https://github.com/easyops-cn/next-basics/commit/25749c616f24f9cf08bd55190ab0bc66b02527df))
+* interaction with previewer ([2e6279e](https://github.com/easyops-cn/next-basics/commit/2e6279e95c33fa848d1deb4381ba86f38a0c7b73))
+
+
+
+
+
 ## [1.112.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.112.1...@next-bricks/next-builder@1.112.2) (2022-03-04)
 
 
