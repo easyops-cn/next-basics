@@ -32,6 +32,7 @@ const debounce = (fn: SimpleFunction): SimpleFunction => {
 export interface WorkbenchPaneProps {
   titleLabel?: string;
   active?: boolean;
+  badge?: number;
   onActiveChange?(active: boolean): void;
   onFirstActivated?(): void;
 }
@@ -39,6 +40,7 @@ export interface WorkbenchPaneProps {
 export function WorkbenchPane({
   titleLabel,
   active,
+  badge,
   onActiveChange,
   onFirstActivated,
 }: WorkbenchPaneProps): React.ReactElement {
@@ -83,6 +85,7 @@ export function WorkbenchPane({
           <div className="title-label">{titleLabel}</div>
         </div>
         <slot name="actions" />
+        {badge !== null && <div className="badge">{badge}</div>}
       </div>
       <div
         className={classNames("pane-body", "custom-scrollbar-container", {
