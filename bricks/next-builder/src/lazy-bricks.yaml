@@ -6,6 +6,7 @@ lazyBricks:
     bricks:
       - workbench-action
       - workbench-brick-tree
+      - workbench-context-menu
       - workbench-mini-action-bar
       - workbench-pane
       - workbench-sidebar

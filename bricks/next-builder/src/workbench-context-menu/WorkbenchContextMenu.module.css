@@ -1,0 +1,18 @@
+.menuWrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+}
+
+.dropdownMenu {
+  width: fit-content;
+  width: -moz-fit-content;
+  min-width: 100px;
+}
+
+.dropdownMenu :global(.ant-divider-horizontal) {
+  margin: 6px 0;
+}

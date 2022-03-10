@@ -52,7 +52,7 @@ export interface TreeNodeProps {
 
 function TreeNode({ node, level }: TreeNodeProps): ReactElement {
   const isLeaf = !node.children?.length;
-  const { hoverKey, mouseEnterFactory, mouseLeaveFactory } =
+  const { hoverKey, mouseEnterFactory, mouseLeaveFactory, contextMenuFactory } =
     useWorkbenchTreeContext();
 
   const onMouseEnter = useMemo(
@@ -62,6 +62,11 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
   const onMouseLeave = useMemo(
     () => mouseLeaveFactory?.(node),
     [mouseLeaveFactory, node]
+  );
+
+  const onContextMenu = useMemo(
+    () => contextMenuFactory?.(node),
+    [contextMenuFactory, node]
   );
 
   return (
@@ -74,6 +79,7 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
         tabIndex={0}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        onContextMenu={onContextMenu}
         noEmptyHref
         {...pick(node.link, ["to", "href"])}
       >
