@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.114.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.113.0...@next-bricks/next-builder@1.114.0) (2022-03-10)
+
+
+### Bug Fixes
+
+* refine workbench tree ([49fa725](https://github.com/easyops-cn/next-basics/commit/49fa7255a9b7a80d14bda291dedaca738b1bbe07))
+
+
+### Features
+
+* workbench mini action bar ([989f632](https://github.com/easyops-cn/next-basics/commit/989f632d2454901fd049501f32a01bf36234762b))
+
+
+
+
+
 # [1.113.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.112.2...@next-bricks/next-builder@1.113.0) (2022-03-09)
 
 

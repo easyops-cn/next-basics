@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.208.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.208.5...@next-bricks/forms@1.208.6) (2022-03-10)
+
+
+### Bug Fixes
+
+* upload image icon ([8ba3cbd](https://github.com/easyops-cn/next-basics/commit/8ba3cbd6563d9e1dc003eb29019aa923eb5ef920))
+
+
+
+
+
 ## [1.208.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.208.4...@next-bricks/forms@1.208.5) (2022-03-09)
 
 **Note:** Version bump only for package @next-bricks/forms
