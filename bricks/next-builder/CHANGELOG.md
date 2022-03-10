@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.115.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.114.0...@next-bricks/next-builder@1.115.0) (2022-03-10)
+
+
+### Features
+
+* resize sidebar ([2f330fa](https://github.com/easyops-cn/next-basics/commit/2f330fab89775ac7ac331e136f12cb900271937e))
+
+
+
+
+
 # [1.114.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.113.0...@next-bricks/next-builder@1.114.0) (2022-03-10)
 
 

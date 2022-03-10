@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.239.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.18...@next-bricks/presentational-bricks@1.239.0) (2022-03-10)
+
+
+### Features
+
+* card-item构件中cardTitle和descriptions中的html元素加上title属性 refs DEPLOYMENT_ORCHESTRATION-434 ([00a08aa](https://github.com/easyops-cn/next-basics/commit/00a08aa3257e00d5175511da1ead530521208920))
+
+
+
+
+
 ## [1.238.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.17...@next-bricks/presentational-bricks@1.238.18) (2022-03-10)
 
 
