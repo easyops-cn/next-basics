@@ -148,6 +148,11 @@ describe("compareVersion", () => {
     ["1.2.3", "^1.2.3", false],
     ["^1.2.3", "1.2.4", false],
     ["~1.2.3", "~1.2.4", false],
+    ["^1.0", "^1.0.1", "^1.0.1"],
+    ["^1", "^1.1", "^1.1"],
+    ["^1.1", "^1", "^1.1"],
+    ["1", "0", false],
+    ["^a.b.c", "^e.f.g", false],
   ])("test", (version1, version2, result) => {
     expect(compareVersion(version1, version2)).toBe(result);
   });

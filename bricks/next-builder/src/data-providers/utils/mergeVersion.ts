@@ -7,13 +7,14 @@ export interface DependencyItem {
 export function compareVersion(local: string, remote: string): string | false {
   const compare = (version1: number[], version2: number[]): number[] => {
     let index = 0;
-    const length = version1.length;
+    const length = Math.max(version1.length, version2.length);
+    const getValue = (number: number): number => number ?? 0;
     while (index < length) {
-      if (version1[index] === version2[index]) {
+      if (getValue(version1[index]) === getValue(version2[index])) {
         index++;
         continue;
       }
-      if (version1[index] > version2[index]) {
+      if (getValue(version1[index]) > getValue(version2[index])) {
         return version1;
       }
       return version2;
@@ -21,11 +22,13 @@ export function compareVersion(local: string, remote: string): string | false {
     // equal
     return version1;
   };
-  if (local.startsWith("^") && remote.startsWith("^")) {
-    //
-    const versionReg = new RegExp(/(\d+).(\d+).(\d+)/);
-    const [_localVersion, ...version1] = local.match(versionReg);
-    const [_remoteVersion, ...version2] = remote.match(versionReg);
+
+  if (local?.startsWith("^") && remote?.startsWith("^")) {
+    const versionReg = new RegExp(/(\d+)/g);
+    const version1 = local.match(versionReg);
+    const version2 = remote.match(versionReg);
+
+    if (!version1 || !version2) return false;
 
     return `^${compare(version1.map(Number), version2.map(Number)).join(".")}`;
   }
