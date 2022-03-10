@@ -40,9 +40,9 @@ export function mergeVersion(
   curDeps: DependencyItem[],
   remoteDeps: DependencyItem[]
 ): DependencyItem[] {
-  const remoteMap = new Map(remoteDeps.map((item) => [item.name, item]));
+  const remoteMap = new Map(remoteDeps?.map((item) => [item.name, item]));
   let result: DependencyItem[] = [];
-  for (let i = 0; i < curDeps.length; i++) {
+  for (let i = 0; i < curDeps?.length; i++) {
     const curDep = curDeps[i];
     const remoteDep = remoteMap.get(curDep.name);
     if (remoteDep) {
