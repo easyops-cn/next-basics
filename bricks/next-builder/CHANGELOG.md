@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.116.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.115.0...@next-bricks/next-builder@1.116.0) (2022-03-10)
+
+
+### Bug Fixes
+
+* fix bug when arguments is undefined ([21a1890](https://github.com/easyops-cn/next-basics/commit/21a189000bb017a845e9059941b064a1a90e09d8))
+
+
+### Features
+
+* merge version unit test update ([83288b9](https://github.com/easyops-cn/next-basics/commit/83288b90d9af9afd730137be47b7e3a992a4d409))
+* support merge version and replace theme ([216554d](https://github.com/easyops-cn/next-basics/commit/216554d20e9374c9f77e0992595150c6d2070eb6))
+* support pane badge ([5c22392](https://github.com/easyops-cn/next-basics/commit/5c22392fdfd24e83702d7ebe3e3357a88fbc17f3))
+* workbench context menu ([a2de3ba](https://github.com/easyops-cn/next-basics/commit/a2de3ba1edae102449b9106dabcb6d527b90fb02))
+
+
+
+
+
 # [1.115.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.114.0...@next-bricks/next-builder@1.115.0) (2022-03-10)
 
 
