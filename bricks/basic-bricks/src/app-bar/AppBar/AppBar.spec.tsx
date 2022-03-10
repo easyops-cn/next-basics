@@ -53,6 +53,8 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getMicroApps,
 } as any);
 
+jest.spyOn(brickKit, "useCurrentApp").mockReturnValue(null);
+
 delete window.location;
 window.location = {
   reload: jest.fn(),
@@ -61,6 +63,7 @@ window.location = {
 describe("AppBar", () => {
   afterEach(() => {
     document.title = "";
+    window.NO_AUTH_GUARD = true;
   });
 
   it("should set page title", async () => {
@@ -104,7 +107,7 @@ describe("AppBar", () => {
     getFeatureFlags.mockImplementation(() => ({
       "license-expires-detection": true,
     }));
-    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
+    mount(<AppBar pageTitle="" breadcrumb={null} />);
     await act(async () => {
       await (global as any).flushPromises();
     });
