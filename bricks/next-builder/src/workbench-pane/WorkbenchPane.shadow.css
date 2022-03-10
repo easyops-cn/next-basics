@@ -21,7 +21,6 @@
 
 .pane-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   border-top: 1px solid transparent;
@@ -45,6 +44,7 @@
   line-height: 24px;
   height: 25px;
   min-width: 0;
+  flex: 1;
 }
 
 .title-icon {
@@ -83,4 +83,15 @@
 
 :host(:not(:hover)) ::slotted([slot="actions"]) {
   display: none;
+}
+
+.badge {
+  background-color: rgb(77, 77, 77);
+  color: rgb(255, 255, 255);
+  border-radius: 11px;
+  height: 18px;
+  padding: 3px 6px;
+  line-height: 13px;
+  margin: 0 3px;
+  font-size: 12px;
 }

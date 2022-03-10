@@ -25,6 +25,9 @@
   outline-style: solid;
   outline-offset: -1px;
   outline-color: #007fd4;
+}
+
+.nodeLabelRow.active:focus {
   background-color: #094771;
 }
 

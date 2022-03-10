@@ -27,6 +27,9 @@ export class WorkbenchPaneElement extends UpdatingElement {
   @property({ type: Boolean })
   active: boolean;
 
+  @property({ type: Number })
+  badge: number;
+
   @event({ type: "active.change" })
   private _onActiveChangeEvent: EventEmitter<boolean>;
 
@@ -75,6 +78,7 @@ export class WorkbenchPaneElement extends UpdatingElement {
             <WorkbenchPane
               titleLabel={this.titleLabel}
               active={this.active}
+              badge={this.badge}
               onActiveChange={this._onActiveChange}
               onFirstActivated={this._onFirstActivated}
             />

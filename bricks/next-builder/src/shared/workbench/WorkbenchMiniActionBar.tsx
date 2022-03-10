@@ -1,3 +1,4 @@
+// istanbul ignore file: working in progress
 import React, { useCallback, useMemo } from "react";
 import classNames from "classnames";
 import { looseCheckIfByTransform } from "@next-core/brick-kit";
@@ -58,7 +59,7 @@ function WorkbenchSubAction({
     [action.action, data, onActionClick]
   );
 
-  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+  const preventMouseEvent = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
   }, []);
@@ -69,8 +70,9 @@ function WorkbenchSubAction({
       key={action.action}
       title={action.title}
       role="button"
-      onMouseDown={handleMouseDown}
       onClick={handleActionClick}
+      onContextMenu={preventMouseEvent}
+      onMouseDown={preventMouseEvent}
     >
       <GeneralIcon icon={action.icon} />
     </a>

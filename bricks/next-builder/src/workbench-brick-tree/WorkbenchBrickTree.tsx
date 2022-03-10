@@ -51,6 +51,23 @@ export function WorkbenchBrickTree({
     [manager]
   );
 
+  const contextMenuFactory = useCallback(
+    (node: WorkbenchNodeData<BuilderRuntimeNode>) => {
+      return node.data
+        ? (event: React.MouseEvent) => {
+            event.preventDefault();
+            manager.contextMenuChange({
+              active: true,
+              node: node.data,
+              x: event.clientX,
+              y: event.clientY,
+            });
+          }
+        : null;
+    },
+    [manager]
+  );
+
   const doNotExpandTemplates = true;
 
   const tree = useMemo(() => {
@@ -146,6 +163,7 @@ export function WorkbenchBrickTree({
         hoverKey: hoverNodeUid,
         mouseEnterFactory,
         mouseLeaveFactory,
+        contextMenuFactory,
       }}
     >
       <WorkbenchTree nodes={tree} placeholder={placeholder} />
