@@ -1,15 +1,11 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
-import { Dropdown, Avatar } from "antd";
 import * as brickKit from "@next-core/brick-kit";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
-import { Link } from "@next-libs/basic-components";
 import { AppBar } from "./AppBar";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
-import { UserOutlined } from "@ant-design/icons";
-import i18next from "i18next";
 
 jest.mock("@next-sdk/user-service-sdk");
 jest.mock("@next-sdk/air-admin-service-sdk");
@@ -57,10 +53,6 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getMicroApps,
 } as any);
 
-const useCurrentApp = jest
-  .spyOn(brickKit, "useCurrentApp")
-  .mockReturnValue(null);
-
 delete window.location;
 window.location = {
   reload: jest.fn(),
@@ -69,70 +61,6 @@ window.location = {
 describe("AppBar", () => {
   afterEach(() => {
     document.title = "";
-    window.NO_AUTH_GUARD = false;
-  });
-
-  it("should render default avatar", () => {
-    const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
-    expect(wrapper.find(Avatar).prop("size")).toBe("small");
-    function Icon(): React.ReactElement {
-      return wrapper.find(Avatar).prop("icon") as React.ReactElement;
-    }
-    const icon = shallow(<Icon />);
-    expect(icon.find(UserOutlined).length).toBe(1);
-  });
-
-  it("should render user avatar", async () => {
-    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
-    wrapper.update();
-    expect(wrapper.find(Avatar).props()).toMatchObject({
-      size: "small",
-      src: "avatar.png",
-    });
-  });
-
-  it("should handle general logout", () => {
-    getFeatureFlags.mockReturnValueOnce({ "sso-enabled": false });
-    const wrapper = shallow(<AppBar pageTitle="Hello" breadcrumb={null} />);
-    (
-      wrapper.find(Dropdown).prop("overlay") as React.ReactElement
-    ).props.children[1].props.onClick();
-    expect(spyOnHistoryReplace).toBeCalledWith("/auth/logout");
-  });
-
-  it("should handle sso logout", () => {
-    getFeatureFlags.mockReturnValue({ "sso-enabled": true });
-    const wrapper = shallow(<AppBar pageTitle="Hello" breadcrumb={null} />);
-    (
-      wrapper.find(Dropdown).prop("overlay") as React.ReactElement
-    ).props.children[1].props.onClick();
-    expect(spyOnHistoryReplace).toBeCalledWith("/sso-auth/logout");
-  });
-
-  it("should handle redirectToMe", async () => {
-    const wrapper = mount(<AppBar pageTitle="Hello" breadcrumb={null} />);
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
-    (
-      wrapper.find(Dropdown).prop("overlay") as React.ReactElement
-    ).props.children[0].props.onClick();
-    expect(spyOnHistoryPush).toBeCalledWith("/account-setting");
-  });
-
-  it("should render when user is not logged in.", () => {
-    jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({
-      username: undefined,
-    });
-
-    const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
-    expect(wrapper.find(Avatar).length).toBe(0);
-    expect(wrapper.find(".appBar").childAt(1).find(Link).prop("to")).toBe(
-      "/auth/login"
-    );
   });
 
   it("should set page title", async () => {
@@ -181,66 +109,5 @@ describe("AppBar", () => {
       await (global as any).flushPromises();
     });
     expect(CustomerApi_getExpiration).toHaveBeenCalled();
-  });
-
-  it("should handle language change", async () => {
-    getFeatureFlags.mockImplementation(() => ({
-      "switch-language": true,
-    }));
-    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
-    const switchLanguageBtn = (
-      wrapper.find(Dropdown).prop("overlay") as React.ReactElement
-    ).props.children[2].props.children[1];
-    switchLanguageBtn.props.onClick();
-    await (global as any).flushPromises();
-    expect(i18next.language).toEqual("zh-CN");
-    expect(i18next.changeLanguage).toHaveBeenCalledWith("en");
-    expect(window.location.reload).toBeCalled();
-    expect(switchLanguageBtn.props.children.props.placement).toBe("left");
-    expect(switchLanguageBtn.props.children.props.title).toBe(
-      "COVERT_TO_LANGUAGE"
-    );
-  });
-
-  it("should hide logout", async () => {
-    getFeatureFlags.mockImplementation(() => ({
-      "next-hide-logout": true,
-    }));
-    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
-    const dropdown = wrapper.find(Dropdown);
-    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
-    expect(submenu.find('[data-testid="menu-item-logout"]').length).toBe(0);
-  });
-
-  it("should not hide logout", async () => {
-    getFeatureFlags.mockImplementation(() => ({
-      "next-hide-logout": false,
-    }));
-    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
-    const dropdown = wrapper.find(Dropdown);
-    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
-    expect(submenu.find('[data-testid="menu-item-logout"]').length).toBe(1);
-  });
-
-  it("should show customized logout when auth guard is ignored", async () => {
-    window.NO_AUTH_GUARD = true;
-    useCurrentApp.mockReturnValueOnce({
-      config: {
-        customizedLogOutPageInNoAuthGuardMode: "/my-logout",
-      },
-    } as any);
-    const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
-    expect(wrapper.find(".actionsContainer").find(Link).prop("to")).toBe(
-      "/my-logout"
-    );
-  });
-
-  it("should show no customized logout when auth guard is ignored", async () => {
-    window.NO_AUTH_GUARD = true;
-    const wrapper = shallow(<AppBar pageTitle="" breadcrumb={null} />);
-    expect(wrapper.find(".actionsContainer").find(Link).length).toBe(0);
   });
 });
