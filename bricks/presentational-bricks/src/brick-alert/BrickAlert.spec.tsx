@@ -1,6 +1,7 @@
 import React from "react";
 import { Alert } from "antd";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
+import * as brickKit from "@next-core/brick-kit";
 import { BrickAlert } from "./BrickAlert";
 import { UpOutlined } from "@ant-design/icons";
 
@@ -83,5 +84,22 @@ describe("BrickAlert", () => {
     );
     const alert = wrapper.find(Alert).first();
     expect(alert.prop("icon")).toBeUndefined();
+  });
+
+  it("should render dark icon", () => {
+    const spyOnUseCurrentTheme = jest
+      .spyOn(brickKit, "useCurrentTheme")
+      .mockReturnValue("dark-v2");
+    const wrapper = mount(
+      <BrickAlert
+        type="info"
+        message="brick alert text"
+        iconSize="big"
+        foldDesc={true}
+      />
+    );
+
+    expect(wrapper.find(".ant-alert-info").length).toEqual(1);
+    spyOnUseCurrentTheme.mockRestore();
   });
 });
