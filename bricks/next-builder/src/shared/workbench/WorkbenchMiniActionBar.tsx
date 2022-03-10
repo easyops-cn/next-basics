@@ -23,7 +23,7 @@ export function WorkbenchMiniActionBar({
   );
 
   if (!enabledActions?.length) {
-    return;
+    return null;
   }
 
   return (
@@ -58,12 +58,18 @@ function WorkbenchSubAction({
     [action.action, data, onActionClick]
   );
 
+  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  }, []);
+
   return (
     <a
       className={styles.action}
       key={action.action}
       title={action.title}
       role="button"
+      onMouseDown={handleMouseDown}
       onClick={handleActionClick}
     >
       <GeneralIcon icon={action.icon} />

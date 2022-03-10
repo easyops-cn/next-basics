@@ -1,6 +1,5 @@
 :host {
   display: block;
-  transition: flex 0.2s;
 }
 
 :host([hidden]) {
@@ -11,11 +10,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-:host([active]) {
-  flex: 1;
-  min-height: 25px;
 }
 
 .pane {
