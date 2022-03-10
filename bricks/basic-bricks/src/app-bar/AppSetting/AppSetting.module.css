@@ -1,0 +1,11 @@
+.dropdownMenuItem {
+  color: var(--app-bar-dropdown-menu-item-color);
+  &:hover {
+    background-color: var(--app-bar-dropdown-menu-item-hover-bg);
+  }
+
+  .dropdownBtn {
+    margin: -5px -12px;
+    padding: 5px 12px;
+  }
+}

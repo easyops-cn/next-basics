@@ -39,3 +39,4 @@ import "./general-anchor";
 import "./general-title";
 import "./launchpad-button";
 import "./app-bar-breadcrumb";
+import "./app-bar-setting";
