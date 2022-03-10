@@ -79,7 +79,9 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   // 标题和标题后的slot
   const cardTitle = (
     <div className="cardTitleWithTagSlot">
-      <div className="cardTitle">{props.cardTitle}</div>
+      <div className="cardTitle" title={props.cardTitle}>
+        {props.cardTitle}
+      </div>
       <slot id="afterTitleSlot" name="afterTitle" />
     </div>
   );
@@ -164,6 +166,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
             {map(descriptionList, (item) => {
               return (
                 <li
+                  title={item}
                   key={item}
                   className={classNames({
                     withCircle: !hideDescCircle,
