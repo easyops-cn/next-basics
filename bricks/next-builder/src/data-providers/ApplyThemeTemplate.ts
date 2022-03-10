@@ -12,6 +12,7 @@ import {
 } from "../shared/storyboard/interfaces";
 import { appendBricksFactory, TreeNode } from "./utils/appendBricksFactory";
 import { getBrickNodeAttrs } from "./utils/getBrickNodeAttrs";
+import { mergeVersion, DependencyItem } from "./utils/mergeVersion";
 
 export interface ApplyThemeTemplateParams {
   projectId: string;
@@ -59,10 +60,6 @@ interface Snippet {
 interface PartialProject {
   appSetting?: Record<string, unknown>;
   dependencies: DependencyItem[];
-}
-
-interface DependencyItem {
-  name: string;
 }
 
 export async function ApplyThemeTemplate({
@@ -165,15 +162,7 @@ export async function ApplyThemeTemplate({
       layoutType,
     },
     dependencies: projectDetail.dependencies?.length
-      ? [
-          ...projectDetail.dependencies,
-          // Currently ignore updating duplicated dependencies.
-          // Todo(steve): choose the intersection version range for duplicated dependencies.
-          ...dependencies.filter(
-            (dep) =>
-              !projectDetail.dependencies.some((d) => d.name === dep.name)
-          ),
-        ]
+      ? mergeVersion(projectDetail.dependencies, dependencies)
       : dependencies,
   });
 
