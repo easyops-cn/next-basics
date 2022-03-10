@@ -134,6 +134,7 @@ describe("mergeVersion", () => {
         },
       ],
     ],
+    [undefined, null, []],
   ])("test", (dependItem1, dependItem2, result) => {
     expect(mergeVersion(dependItem1, dependItem2)).toEqual(result);
   });
