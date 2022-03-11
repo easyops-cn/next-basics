@@ -51,7 +51,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     if (isCustom) return;
     const appMenu = getRuntime().getNavConfig();
 
-    if (appMenu) {
+    if (appMenu.subMenu) {
       setMenus(appMenu.subMenu as SidebarMenu);
     }
   };

@@ -49,7 +49,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     if (isCustom) return;
     const appMenu = getRuntime().getNavConfig();
 
-    if (appMenu) {
+    if (appMenu.menu) {
       const { selectedKeys } = initMenuItemAndMatchCurrentPathKeys(
         appMenu.menu.menuItems,
         pathname,
