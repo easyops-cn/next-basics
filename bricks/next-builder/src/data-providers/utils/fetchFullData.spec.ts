@@ -7,7 +7,7 @@ describe("fetchFullData", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
-  it("should work", async () => {
+  it("case 1", async () => {
     (InstanceApi_postSearchV3 as jest.Mock).mockImplementation((_, params) => {
       if (params.page === 1) {
         return {
@@ -29,7 +29,7 @@ describe("fetchFullData", () => {
     expect(InstanceApi_postSearchV3).toBeCalledTimes(2);
   });
 
-  it("should work", async () => {
+  it("case 2", async () => {
     (InstanceApi_postSearchV3 as jest.Mock).mockImplementation((_, params) => {
       if (params.page <= 3) {
         return {
@@ -49,5 +49,20 @@ describe("fetchFullData", () => {
 
     expect(result.list.length).toBe(10010);
     expect(InstanceApi_postSearchV3).toBeCalledTimes(4);
+  });
+
+  it("case 3", async () => {
+    (InstanceApi_postSearchV3 as jest.Mock).mockImplementation(() => {
+      return {
+        list: new Array(100).fill(1),
+        total: 100,
+      };
+    });
+    const result = await fetchFullData("HOST", {
+      fields: ["id"],
+    });
+
+    expect(result.list.length).toBe(100);
+    expect(InstanceApi_postSearchV3).toBeCalledTimes(1);
   });
 });
