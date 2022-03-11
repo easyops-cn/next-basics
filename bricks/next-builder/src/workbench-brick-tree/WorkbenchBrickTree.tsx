@@ -4,6 +4,7 @@ import React, { useCallback, useMemo } from "react";
 import {
   useBuilderData,
   useBuilderDataManager,
+  useBuilderNode,
   useHoverNodeUid,
   type BuilderRuntimeNode,
 } from "@next-core/editor-bricks-helper";
@@ -13,13 +14,16 @@ import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 
 export interface WorkbenchBrickTreeProps {
+  type?: BuilderRuntimeNode["type"];
   placeholder?: string;
 }
 
 export function WorkbenchBrickTree({
+  type,
   placeholder,
 }: WorkbenchBrickTreeProps): React.ReactElement {
-  const { nodes, edges, rootId } = useBuilderData();
+  const { nodes, edges } = useBuilderData();
+  const rootNode = useBuilderNode({ isRoot: true });
   const hoverNodeUid = useHoverNodeUid();
   const manager = useBuilderDataManager();
 
@@ -71,12 +75,16 @@ export function WorkbenchBrickTree({
   const doNotExpandTemplates = true;
 
   const tree = useMemo(() => {
-    function getChildren(nodeUid: number): WorkbenchNodeData[] {
+    if (type === "redirect") {
+      return [];
+    }
+
+    function getChildren(node: BuilderRuntimeNode): WorkbenchNodeData[] {
       const groups = new Map<string, WorkbenchNodeData>();
       const relatedEdges = sortBy(
         edges.filter(
           (edge) =>
-            edge.parent === nodeUid &&
+            edge.parent === node.$$uid &&
             (doNotExpandTemplates
               ? !edge.$$isTemplateInternal
               : !edge.$$isTemplateDelegated)
@@ -99,7 +107,7 @@ export function WorkbenchBrickTree({
             data: {
               type: "mount-point",
               mountPoint: edge.mountPoint,
-              nodeUid,
+              parent: node,
             },
             children: [],
           };
@@ -117,28 +125,34 @@ export function WorkbenchBrickTree({
       let color: string;
       if (node.bg || node.type === "provider") {
         icon = "database";
-        color = "orange";
+        color = "var(--palette-orange-7)";
       } else if (node.portal) {
         icon = "message";
-        color = "purple";
+        color = "var(--palette-purple-7)";
       } else {
         switch (node.type) {
           case "routes":
+            icon = "down";
+            break;
           case "bricks":
-          case "redirect":
             icon = "branches";
-            color = "blue";
+            color = "var(--palette-blue-7)";
+            break;
+          case "redirect":
+            icon = "double-right";
+            color = "var(--palette-cyan-7)";
             break;
           case "template":
             icon = "gold";
-            color = "red";
+            color = "var(--palette-red-7)";
             break;
           case "brick":
             icon = "build";
-            color = "green";
+            color = "var(--palette-green-7)";
             break;
         }
       }
+      const children = getChildren(node);
       return {
         key: node.$$uid,
         name: node.alias,
@@ -149,13 +163,19 @@ export function WorkbenchBrickTree({
           color,
         },
         data: node,
-        children: getChildren(node.$$uid),
+        children:
+          type === "bricks"
+            ? children
+            : type === "routes"
+            ? children.find((group) => group.key === "routes")?.children
+            : null,
       };
     }
 
-    return getChildren(rootId).find((group) => group.key === "bricks")
-      ?.children;
-  }, [doNotExpandTemplates, edges, nodes, rootId]);
+    return getChildren(rootNode).find(
+      (group) => group.key === (type === "routes" ? type : "bricks")
+    )?.children;
+  }, [doNotExpandTemplates, edges, nodes, rootNode, type]);
 
   return (
     <WorkbenchTreeContext.Provider

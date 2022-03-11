@@ -7,7 +7,10 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { BuilderProvider } from "@next-core/editor-bricks-helper";
+import {
+  BuilderProvider,
+  type BuilderRuntimeNode,
+} from "@next-core/editor-bricks-helper";
 import { WorkbenchBrickTree } from "./WorkbenchBrickTree";
 import type {
   ActionClickDetail,
@@ -24,6 +27,9 @@ import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsCon
  * @noInheritDoc
  */
 export class WorkbenchStoryboardTreeElement extends UpdatingElement {
+  @property()
+  type: BuilderRuntimeNode["type"];
+
   @property({ attribute: false })
   actions: WorkbenchTreeAction[];
 
@@ -62,7 +68,10 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
                 onActionClick: this._handleActionClick,
               }}
             >
-              <WorkbenchBrickTree placeholder={this.placeholder} />
+              <WorkbenchBrickTree
+                type={this.type}
+                placeholder={this.placeholder}
+              />
             </WorkbenchActionsContext.Provider>
           </BuilderProvider>
         </BrickWrapper>,
