@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.170.0...@next-bricks/basic-bricks@1.171.0) (2022-03-11)
+
+
+### Features
+
+* support event-agent ([ad521b4](https://github.com/easyops-cn/next-basics/commit/ad521b49e8210008fcaae27c18d2648549959949))
+
+
+
+
+
 # [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.169.0...@next-bricks/basic-bricks@1.170.0) (2022-03-10)
 
 
