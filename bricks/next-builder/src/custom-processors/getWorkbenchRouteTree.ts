@@ -7,7 +7,10 @@ import type { WorkbenchNodeData } from "../shared/workbench/interfaces";
 export function getWorkbenchRouteTree(
   routes: BuilderRouteNode[],
   activeRouteId?: string,
-  linkFn?: (routeId: string) => WorkbenchNodeData["link"]
+  linkFn?: (
+    routeId: string,
+    routeType: BuilderRouteNode["type"]
+  ) => WorkbenchNodeData["link"]
 ): WorkbenchNodeData[] {
   const tree: WorkbenchNodeData[] = [];
   const routeIds = new Set(routes.map((route) => route.id));
@@ -24,7 +27,7 @@ export function getWorkbenchRouteTree(
         theme: "outlined",
         icon:
           route.type === "redirect"
-            ? "enter"
+            ? "double-right"
             : route.type === "routes"
             ? "down"
             : "branches",
@@ -39,7 +42,7 @@ export function getWorkbenchRouteTree(
     };
 
     if (linkFn) {
-      node.link = linkFn(route.id);
+      node.link = linkFn(route.id, route.type);
     }
 
     routeNodeMap.set(route.id, node);

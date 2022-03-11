@@ -69,6 +69,22 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
     [contextMenuFactory, node]
   );
 
+  const nodeLabelCallback = useMemo(
+    () =>
+      node.active
+        ? (element: HTMLElement) => {
+            element?.scrollIntoView({
+              block: "center",
+              inline: "center",
+              // behavior: "smooth",
+            });
+          }
+        : null,
+    // Only for initial active node.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
     <li>
       <Link
@@ -83,18 +99,19 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
         noEmptyHref
         {...pick(node.link, ["to", "href"])}
       >
-        <div
+        <span
           className={styles.nodeLabel}
           style={{
             paddingLeft: level * treeLevelPadding + 5,
             color: node.labelColor,
           }}
+          ref={nodeLabelCallback}
         >
           <span className={styles.nodeIcon}>
             <GeneralIcon icon={node.icon} />
           </span>
           <span className={styles.nodeName}>{node.name}</span>
-        </div>
+        </span>
         <WorkbenchMiniActionBar
           className={styles.nodeActionsBar}
           data={node.data}

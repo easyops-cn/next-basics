@@ -16,3 +16,7 @@
 .dropdownMenu :global(.ant-divider-horizontal) {
   margin: 6px 0;
 }
+
+.dropdownMenu :global(.ant-dropdown-menu-item-disabled) {
+  pointer-events: none;
+}

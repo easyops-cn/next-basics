@@ -1,5 +1,6 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useCallback } from "react";
 import classnames from "classnames";
+import { useCurrentTheme } from "@next-core/brick-kit";
 import Icon, {
   CheckCircleFilled,
   CloseCircleFilled,
@@ -16,6 +17,11 @@ import { ReactComponent as BigInfoCircleOutlined } from "../images/info-circle-o
 import { ReactComponent as BigErrorCircleOutlined } from "../images/error-circle-o.svg";
 import { ReactComponent as BigSuccessCircleOutlined } from "../images/success-circle-o.svg";
 import { ReactComponent as BigWarningCircleOutlined } from "../images/warning-circle-o.svg";
+
+import { ReactComponent as BigInfoCircleOutlinedDark } from "../images/info-circle-dark.svg";
+import { ReactComponent as BigErrorCircleOutlinedDark } from "../images/error-circle-dark.svg";
+import { ReactComponent as BigSuccessCircleOutlinedDark } from "../images/success-circle-dark.svg";
+import { ReactComponent as BigWarningCircleOutlinedDark } from "../images/warning-circle-dark.svg";
 
 interface BrickAlertProps {
   message: string;
@@ -36,6 +42,7 @@ interface BrickAlertProps {
 
 export function BrickAlert(props: BrickAlertProps): React.ReactElement {
   const [show, setShow] = React.useState<boolean>(false);
+  const theme = useCurrentTheme();
   const onClose = () => {
     props.onClose?.();
   };
@@ -99,22 +106,44 @@ export function BrickAlert(props: BrickAlertProps): React.ReactElement {
       ""
     );
   // istanbul ignore next
+
+  const getThemeIcon = useCallback(
+    (
+      lightIcon: React.ReactElement,
+      darkIcon: React.ReactElement
+    ): React.ReactElement => {
+      return theme == "dark-v2" ? darkIcon : lightIcon;
+    },
+    [theme]
+  );
   const customIcon = () => {
     let icon: React.ReactNode;
     let iconRender: any;
     if (props.iconSize === "big") {
       switch (props.type) {
         case "info":
-          iconRender = <BigInfoCircleOutlined />;
+          iconRender = getThemeIcon(
+            <BigInfoCircleOutlined />,
+            <BigInfoCircleOutlinedDark />
+          );
           break;
         case "success":
-          iconRender = <BigSuccessCircleOutlined />;
+          iconRender = getThemeIcon(
+            <BigSuccessCircleOutlined />,
+            <BigSuccessCircleOutlinedDark />
+          );
           break;
         case "warning":
-          iconRender = <BigWarningCircleOutlined />;
+          iconRender = getThemeIcon(
+            <BigWarningCircleOutlined />,
+            <BigWarningCircleOutlinedDark />
+          );
           break;
         case "error":
-          iconRender = <BigErrorCircleOutlined />;
+          iconRender = getThemeIcon(
+            <BigErrorCircleOutlined />,
+            <BigErrorCircleOutlinedDark />
+          );
           break;
       }
       icon = <Icon component={() => iconRender} />;
