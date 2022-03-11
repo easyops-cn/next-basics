@@ -15,7 +15,7 @@
   }
 
   &.showBackground {
-    background-color: var(--color-fill-bg-base-1);
+    background-color: var(--custom-form-item-wrapper-bg);
     border-radius: 6px;
     padding: 16px;
   }
