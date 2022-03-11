@@ -9,6 +9,7 @@ import {
 import { BootstrapV2Api_brickPackageInfo } from "@next-sdk/api-gateway-sdk";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 import { getBaseGraphParams } from "../shared/storyboard/getBaseGraphParams";
+import { fetchFullData } from "./utils/fetchFullData";
 
 export interface BrickLibraryItem {
   type: "brick" | "template" | "customTemplate" | "provider" | "snippet";
@@ -59,7 +60,7 @@ export async function GetBrickLibrary(
       options
     ),
     installedBricksEnabled
-      ? InstanceApi_postSearchV3(
+      ? fetchFullData(
           "INSTALLED_BRICK_ATOM@EASYOPS",
           {
             fields: [
