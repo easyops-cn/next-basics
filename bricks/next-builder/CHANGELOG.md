@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.117.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.116.0...@next-bricks/next-builder@1.117.0) (2022-03-11)
+
+
+### Bug Fixes
+
+* refine workbench ([b61153f](https://github.com/easyops-cn/next-basics/commit/b61153f3a443d42f6346c16704fdd656d9ebe3ec))
+
+
+### Features
+
+* support fetch full data ([2fe705b](https://github.com/easyops-cn/next-basics/commit/2fe705b9c9101bd15f3aa595783585b99bebf577))
+
+
+
+
+
 # [1.116.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.115.0...@next-bricks/next-builder@1.116.0) (2022-03-10)
 
 ### Bug Fixes

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.239.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.0...@next-bricks/presentational-bricks@1.239.1) (2022-03-11)
+
+
+### Bug Fixes
+
+* dark theme ([f0b96d3](https://github.com/easyops-cn/next-basics/commit/f0b96d3fc37bc4f0c22a5b5bc2e5fc4ec3c7823e))
+
+
+
+
+
 # [1.239.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.238.18...@next-bricks/presentational-bricks@1.239.0) (2022-03-10)
 
 
