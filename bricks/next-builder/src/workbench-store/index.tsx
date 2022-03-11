@@ -1,7 +1,18 @@
-import React from "react";
+import React, { createRef } from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
-import { BuilderProvider } from "@next-core/editor-bricks-helper";
+import {
+  BrickWrapper,
+  event,
+  type EventEmitter,
+  method,
+  property,
+  UpdatingElement,
+} from "@next-core/brick-kit";
+import {
+  type BuilderDataManager,
+  BuilderProvider,
+  BuilderRuntimeNode,
+} from "@next-core/editor-bricks-helper";
 import type {
   BuilderCustomTemplateNode,
   BuilderRouteOrBrickNode,
@@ -26,6 +37,22 @@ export class WorkbenchStoreElement extends UpdatingElement {
   @property({ attribute: false })
   templateSources: BuilderCustomTemplateNode[];
 
+  @event({
+    type: "node.delete",
+  })
+  private _nodeDeleteEmitter: EventEmitter<BuilderRuntimeNode>;
+
+  // istanbul ignore next
+  @method()
+  deleteNode(node: BuilderRuntimeNode): void {
+    this._managerRef.current.nodeDelete(node);
+    this._nodeDeleteEmitter.emit({
+      ...node,
+    });
+  }
+
+  private _managerRef = createRef<BuilderDataManager>();
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -46,6 +73,7 @@ export class WorkbenchStoreElement extends UpdatingElement {
         <BrickWrapper>
           <BuilderProvider>
             <WorkbenchStore
+              ref={this._managerRef}
               dataSource={this.dataSource}
               templateSources={this.templateSources}
             />

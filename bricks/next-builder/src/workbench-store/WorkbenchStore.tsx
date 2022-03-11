@@ -1,11 +1,14 @@
 // istanbul ignore file
 // For temporary usage only, will change soon.
-import React, { useEffect } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import type {
   BuilderCustomTemplateNode,
   BuilderRouteOrBrickNode,
 } from "@next-core/brick-types";
-import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
+import {
+  type BuilderDataManager,
+  useBuilderDataManager,
+} from "@next-core/editor-bricks-helper";
 import { BuilderDataType } from "../builder-container/interfaces";
 import { useHoverOnBrick } from "./useHoverOnBrick";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
@@ -15,12 +18,13 @@ export interface WorkbenchStoreProps {
   templateSources?: BuilderCustomTemplateNode[];
 }
 
-export function WorkbenchStore({
-  dataSource,
-  templateSources,
-}: WorkbenchStoreProps): React.ReactElement {
-  const [dataType, setDataType] = React.useState<BuilderDataType>();
+export function LegacyWorkbenchStore(
+  { dataSource, templateSources }: WorkbenchStoreProps,
+  ref: React.Ref<BuilderDataManager>
+): React.ReactElement {
   const manager = useBuilderDataManager();
+
+  useImperativeHandle(ref, () => manager);
 
   useEffect(() => {
     let type = BuilderDataType.UNKNOWN;
@@ -58,7 +62,6 @@ export function WorkbenchStore({
       // eslint-disable-next-line no-console
       console.error("Unexpected dataSource", dataSource);
     }
-    setDataType(type);
   }, [dataSource, manager, templateSources]);
 
   useHoverOnBrick(manager);
@@ -67,3 +70,5 @@ export function WorkbenchStore({
 
   return null;
 }
+
+export const WorkbenchStore = forwardRef(LegacyWorkbenchStore);
