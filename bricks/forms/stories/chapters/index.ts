@@ -31,6 +31,7 @@ import { inputWithUnitStory } from "./input-with-unit";
 import { timeRangePickerStory } from "./time-range-picker";
 import { uploadImgStory } from "./upload-img";
 import { userGroupSelectStory } from "./user-or-user-group-select";
+import { DynamicFormItemV2Story } from "./dynamic-form-item-v2";
 
 export const Chapters = [
   GeneralFromStory,
@@ -66,4 +67,5 @@ export const Chapters = [
   timeRangePickerStory,
   uploadImgStory,
   userGroupSelectStory,
+  DynamicFormItemV2Story,
 ];

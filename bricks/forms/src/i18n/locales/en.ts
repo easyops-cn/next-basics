@@ -134,6 +134,7 @@ const locale: Locale = {
   [K.ATTRIBUTE_DESCRIPTION]: "Attribute description",
   [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "Please enter 1 to 20 characters",
   [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "Please enter attribute description",
+  [K.VALIDATION_FAILED]: "{{label}} validation failed",
 };
 
 export default locale;

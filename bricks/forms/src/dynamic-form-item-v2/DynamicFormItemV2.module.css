@@ -1,0 +1,40 @@
+.dynamicForm {
+  background-color: var(--color-fill-bg-base-1);
+  border-radius: 6px;
+  padding: 16px;
+
+  :global(.ant-form-item) {
+    margin-bottom: 0;
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .displayNone {
+    display: none;
+  }
+
+  .addRowBtn {
+    width: calc(100% - 38px);
+  }
+
+  .removeRowBtn {
+    color: var(--color-secondary-text);
+    font-size: 20px;
+    padding: 0;
+    padding-left: 4px;
+
+    &:hover {
+      color: var(--color-auxiliary-text);
+    }
+
+    &[disabled] {
+      color: var(--text-color-disabled);
+    }
+  }
+}
