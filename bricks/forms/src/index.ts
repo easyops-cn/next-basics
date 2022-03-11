@@ -36,3 +36,4 @@ import "./upload-files";
 import "./dynamic-user-select-item";
 import "./upload-files-v2";
 import "./lazy-bricks";
+import "./dynamic-form-item-v2";

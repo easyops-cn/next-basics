@@ -122,6 +122,7 @@ const locale: Locale = {
   [K.ATTRIBUTE_DESCRIPTION]: "属性说明",
   [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "请输入1至20个字符",
   [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "请输入属性说明",
+  [K.VALIDATION_FAILED]: "{{label}}校验失败",
 };
 
 export default locale;
