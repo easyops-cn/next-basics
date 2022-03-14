@@ -2659,6 +2659,11 @@
   resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.16.tgz#8c316bb86f84fff6525dee126772579eb8c15a95"
   integrity sha512-pDJiGV+F+7ziajUm/5lZY3fZ+S9cW8cc8MXmtZAj1a57UU9S2m/ZE3qKaRi2whDLdAjJhhgPX89ngt2nnSoyOA==
 
+"@next-libs/forms@^3.2.17":
+  version "3.2.17"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.17.tgz#3ba3f6439ce68be3cef8a480e6f38d5901f587ed"
+  integrity sha512-WzkrL4fWToTcIdTXPllZYhn+Kgvwb/MKV4WAa/hmrBELa7wcBZ0ibJa8p0L48OxHnX27W0+d67Muamz8Y2OUGg==
+
 "@next-libs/storage@^2.0.2":
   version "2.0.2"
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-2.0.2.tgz#59bc984ba098bf817670dfcf87f7302be8f62a4c"
