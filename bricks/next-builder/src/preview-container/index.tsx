@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  event,
+  type EventEmitter,
+  property,
+  UpdatingElement,
+} from "@next-core/brick-kit";
 import { PreviewContainer } from "./PreviewContainer";
 
 /**
@@ -14,6 +20,26 @@ import { PreviewContainer } from "./PreviewContainer";
 export class PreviewContainerElement extends UpdatingElement {
   @property()
   previewUrl: string;
+
+  @property({ type: Boolean })
+  inspecting: boolean;
+
+  @event({ type: "inspecting.toggle" })
+  private _inspectingToggleEvent: EventEmitter<boolean>;
+
+  private _handleInspectingToggle = (enabled: boolean): void => {
+    if (this.inspecting !== enabled) {
+      this.inspecting = enabled;
+      this._inspectingToggleEvent.emit(enabled);
+    }
+  };
+
+  @event({ type: "preview.start" })
+  private _previewStartEvent: EventEmitter<void>;
+
+  private _handlePreviewStart = (): void => {
+    this._previewStartEvent.emit();
+  };
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -33,7 +59,12 @@ export class PreviewContainerElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <PreviewContainer previewUrl={this.previewUrl} />
+          <PreviewContainer
+            previewUrl={this.previewUrl}
+            inspecting={this.inspecting}
+            onInspectingToggle={this._handleInspectingToggle}
+            onPreviewStart={this._handlePreviewStart}
+          />
         </BrickWrapper>,
         this
       );

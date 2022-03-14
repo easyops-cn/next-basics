@@ -6,8 +6,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Button } from "antd";
-import { AimOutlined } from "@ant-design/icons";
 import type {
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
@@ -19,6 +17,9 @@ import styles from "./PreviewContainer.module.css";
 
 export interface PreviewContainerProps {
   previewUrl: string;
+  inspecting?: boolean;
+  onPreviewStart?(): void;
+  onInspectingToggle?(enabled: boolean): void;
 }
 
 const openerWindow: Window = window.opener || window;
@@ -40,11 +41,22 @@ function sendToggleInspecting(
 
 export function PreviewContainer({
   previewUrl,
+  inspecting,
+  onPreviewStart,
+  onInspectingToggle,
 }: PreviewContainerProps): React.ReactElement {
   const iframeRef = useRef<HTMLIFrameElement>();
 
-  const [selectEnabled, setSelectEnabled] = useState(false);
+  const [internalInspecting, setInternalInspecting] = useState(inspecting);
   const [previewStarted, setPreviewStarted] = useState(false);
+
+  useEffect(() => {
+    setInternalInspecting(inspecting);
+  }, [inspecting]);
+
+  useEffect(() => {
+    onInspectingToggle(internalInspecting);
+  }, [internalInspecting, onInspectingToggle]);
 
   const previewOrigin = useMemo(() => {
     const url = new URL(previewUrl, location.origin);
@@ -72,8 +84,8 @@ export function PreviewContainer({
       previewOrigin
     );
     // Once the iframe is loaded, send the message again.
-    sendToggleInspecting(selectEnabled, iframeRef, previewOrigin);
-  }, [previewOrigin, selectEnabled]);
+    sendToggleInspecting(inspecting, iframeRef, previewOrigin);
+  }, [inspecting, previewOrigin]);
 
   useEffect(() => {
     if (!sameOriginWithOpener) {
@@ -108,7 +120,7 @@ export function PreviewContainer({
             } as PreviewMessageFromContainer);
             break;
           case "select-brick":
-            setSelectEnabled(false);
+            setInternalInspecting(false);
             // Send to builder.
             openerWindow.postMessage({
               ...data,
@@ -120,6 +132,7 @@ export function PreviewContainer({
             break;
           case "preview-started":
             setPreviewStarted(true);
+            onPreviewStart();
             break;
         }
       }
@@ -128,17 +141,13 @@ export function PreviewContainer({
     return () => {
       window.removeEventListener("message", listener);
     };
-  }, [previewOrigin, sameOriginWithOpener]);
-
-  const handleToggleSelect = useCallback(() => {
-    setSelectEnabled((prev) => !prev);
-  }, []);
+  }, [onPreviewStart, previewOrigin, sameOriginWithOpener]);
 
   useEffect(() => {
     if (loadedRef.current) {
-      sendToggleInspecting(selectEnabled, iframeRef, previewOrigin);
+      sendToggleInspecting(internalInspecting, iframeRef, previewOrigin);
     }
-  }, [previewOrigin, selectEnabled]);
+  }, [previewOrigin, internalInspecting]);
 
   const handleMouseOut = useMemo(() => {
     if (!previewStarted) {
@@ -155,25 +164,12 @@ export function PreviewContainer({
   }, [previewStarted]);
 
   return (
-    <div className={styles.previewContainer}>
-      <div className={styles.toolbar}>
-        <Button
-          type={selectEnabled ? "primary" : "default"}
-          disabled={!sameOriginWithOpener || !previewStarted}
-          icon={<AimOutlined />}
-          size="small"
-          onClick={handleToggleSelect}
-        />
-      </div>
-      <div className={styles.iframeContainer}>
-        <iframe
-          className={styles.iframe}
-          src={previewUrl}
-          ref={iframeRef}
-          onLoad={handleIframeLoad}
-          onMouseOut={handleMouseOut}
-        />
-      </div>
-    </div>
+    <iframe
+      className={styles.iframe}
+      src={previewUrl}
+      ref={iframeRef}
+      onLoad={handleIframeLoad}
+      onMouseOut={handleMouseOut}
+    />
   );
 }
