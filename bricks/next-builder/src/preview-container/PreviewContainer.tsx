@@ -6,6 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import ResizeObserver from "resize-observer-polyfill";
 import type {
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
@@ -14,10 +15,12 @@ import type {
 } from "@next-core/brick-types";
 
 import styles from "./PreviewContainer.module.css";
+import classNames from "classnames";
 
 export interface PreviewContainerProps {
   previewUrl: string;
   inspecting?: boolean;
+  viewportWidth?: number;
   onPreviewStart?(): void;
   onInspectingToggle?(enabled: boolean): void;
 }
@@ -42,10 +45,12 @@ function sendToggleInspecting(
 export function PreviewContainer({
   previewUrl,
   inspecting,
+  viewportWidth,
   onPreviewStart,
   onInspectingToggle,
 }: PreviewContainerProps): React.ReactElement {
   const iframeRef = useRef<HTMLIFrameElement>();
+  const containerRef = useRef<HTMLDivElement>();
 
   const [internalInspecting, setInternalInspecting] = useState(inspecting);
   const [previewStarted, setPreviewStarted] = useState(false);
@@ -163,13 +168,57 @@ export function PreviewContainer({
     };
   }, [previewStarted]);
 
+  const [scale, setScale] = useState(1);
+
+  const computeScale = useCallback(() => {
+    setScale(containerRef.current.offsetWidth / viewportWidth);
+  }, [viewportWidth]);
+
+  // istanbul ignore next
+  useEffect(() => {
+    if (!viewportWidth) {
+      setScale(1);
+      return;
+    }
+    if (containerRef.current) {
+      computeScale();
+      const resizeObserver = new ResizeObserver(computeScale);
+      resizeObserver.observe(containerRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [computeScale, viewportWidth]);
+
+  const containerOversized = scale > 1;
+
   return (
-    <iframe
-      className={styles.iframe}
-      src={previewUrl}
-      ref={iframeRef}
-      onLoad={handleIframeLoad}
-      onMouseOut={handleMouseOut}
-    />
+    <div
+      className={classNames(styles.previewContainer, {
+        [styles.oversized]: containerOversized,
+      })}
+      ref={containerRef}
+    >
+      <iframe
+        className={styles.iframe}
+        src={previewUrl}
+        ref={iframeRef}
+        onLoad={handleIframeLoad}
+        onMouseOut={handleMouseOut}
+        style={
+          containerOversized
+            ? {
+                width: viewportWidth,
+                height: "100%",
+                transform: `initial`,
+              }
+            : {
+                width: `${100 / scale}%`,
+                height: `${100 / scale}%`,
+                transform: `scale(${scale})`,
+              }
+        }
+      />
+    </div>
   );
 }
