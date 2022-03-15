@@ -1,3 +1,4 @@
+import * as kit from "@next-core/brick-kit";
 import {
   setPreviewFromOrigin,
   startInspecting,
@@ -8,6 +9,24 @@ import { previewStart } from "./previewStart";
 
 jest.mock("./inspector");
 jest.mock("./overlay");
+
+const historyListeners = new Set<(loc: string) => void>();
+const history = {
+  location: "/a",
+  createHref(loc) {
+    return `/next${loc}`;
+  },
+  listen(fn) {
+    historyListeners.add(fn);
+  },
+  push(path) {
+    this.location = path;
+    for (const fn of historyListeners) {
+      fn(path);
+    }
+  },
+} as any;
+jest.spyOn(kit, "getHistory").mockReturnValue(history);
 
 const parentPostMessage = jest.fn();
 // Must delete it first in Jest.
@@ -25,7 +44,9 @@ document.body.appendChild(brick);
 describe("previewStart", () => {
   it("should work", () => {
     previewStart("http://localhost:8081");
-    expect(parentPostMessage).toBeCalledWith(
+    expect(parentPostMessage).toBeCalledTimes(2);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      1,
       {
         sender: "previewer",
         type: "preview-started",
@@ -33,10 +54,31 @@ describe("previewStart", () => {
       "http://localhost:8081"
     );
     expect(setPreviewFromOrigin).toBeCalledWith("http://localhost:8081");
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      2,
+      {
+        sender: "previewer",
+        type: "url-change",
+        url: "http://localhost/next/a",
+      },
+      "http://localhost:8081"
+    );
+
+    history.push("/b");
+    expect(parentPostMessage).toBeCalledTimes(3);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      3,
+      {
+        sender: "previewer",
+        type: "url-change",
+        url: "http://localhost/next/b",
+      },
+      "http://localhost:8081"
+    );
 
     // Ignore re-start.
     previewStart("http://localhost:8081");
-    expect(parentPostMessage).toBeCalledTimes(1);
+    expect(parentPostMessage).toBeCalledTimes(3);
 
     const listener = addEventListener.mock.calls[0][1] as EventListener;
     listener({

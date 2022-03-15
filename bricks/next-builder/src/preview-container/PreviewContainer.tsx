@@ -1,7 +1,9 @@
 // istanbul ignore file: working in progress
 import React, {
+  forwardRef,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useRef,
   useState,
@@ -23,6 +25,11 @@ export interface PreviewContainerProps {
   viewportWidth?: number;
   onPreviewStart?(): void;
   onInspectingToggle?(enabled: boolean): void;
+  onUrlChange?(url: string): void;
+}
+
+export interface PreviewContainerRef {
+  refresh(): void;
 }
 
 const openerWindow: Window = window.opener || window;
@@ -42,13 +49,17 @@ function sendToggleInspecting(
   );
 }
 
-export function PreviewContainer({
-  previewUrl,
-  inspecting,
-  viewportWidth,
-  onPreviewStart,
-  onInspectingToggle,
-}: PreviewContainerProps): React.ReactElement {
+export function LegacyPreviewContainer(
+  {
+    previewUrl,
+    inspecting,
+    viewportWidth,
+    onPreviewStart,
+    onInspectingToggle,
+    onUrlChange,
+  }: PreviewContainerProps,
+  ref: React.Ref<PreviewContainerRef>
+): React.ReactElement {
   const iframeRef = useRef<HTMLIFrameElement>();
   const containerRef = useRef<HTMLDivElement>();
 
@@ -91,6 +102,27 @@ export function PreviewContainer({
     // Once the iframe is loaded, send the message again.
     sendToggleInspecting(inspecting, iframeRef, previewOrigin);
   }, [inspecting, previewOrigin]);
+
+  const refresh = useCallback(() => {
+    iframeRef.current.contentWindow.postMessage(
+      {
+        sender: "preview-container",
+        type: "refresh",
+      } as PreviewMessageFromContainer,
+      previewOrigin
+    );
+  }, [previewOrigin]);
+
+  const handleUrlChange = useCallback(
+    (url: string) => {
+      onUrlChange?.(url);
+    },
+    [onUrlChange]
+  );
+
+  useImperativeHandle(ref, () => ({
+    refresh,
+  }));
 
   useEffect(() => {
     if (!sameOriginWithOpener) {
@@ -139,6 +171,9 @@ export function PreviewContainer({
             setPreviewStarted(true);
             onPreviewStart();
             break;
+          case "url-change":
+            handleUrlChange(data.url);
+            break;
         }
       }
     };
@@ -146,7 +181,7 @@ export function PreviewContainer({
     return () => {
       window.removeEventListener("message", listener);
     };
-  }, [onPreviewStart, previewOrigin, sameOriginWithOpener]);
+  }, [handleUrlChange, onPreviewStart, previewOrigin, sameOriginWithOpener]);
 
   useEffect(() => {
     if (loadedRef.current) {
@@ -222,3 +257,5 @@ export function PreviewContainer({
     </div>
   );
 }
+
+export const PreviewContainer = forwardRef(LegacyPreviewContainer);
