@@ -73,7 +73,9 @@
 
   &:not(.disabledIconRadio):hover {
     .circleIconContent {
-      border-color: #65b2ff;
+      .circleIcon {
+        border-color: #65b2ff;
+      }
     }
   }
 }
