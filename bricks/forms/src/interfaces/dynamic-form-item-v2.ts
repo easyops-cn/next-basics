@@ -172,6 +172,10 @@ export interface BasicColumn {
    * 表单项所占份额
    */
   flex?: string | number;
+  /**
+   * 表单项默认值
+   */
+  defaultValue?: any;
 }
 
 export type Column = BasicColumn &

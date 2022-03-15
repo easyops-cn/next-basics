@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { DynamicFormItemV2 } from "./DynamicFormItemV2";
 import { Column } from "../interfaces";
+import { cloneDeep } from "lodash";
 
 const columns = [
   {
@@ -48,6 +49,13 @@ describe("DynamicFormItemV2", () => {
     expect(wrapper.find("Row.row")).toHaveLength(0);
     expect(onChange).lastCalledWith([]);
     expect(onRemove).lastCalledWith({ detail: {}, index: 0 });
+
+    const _columns = cloneDeep(columns);
+    _columns[0].defaultValue = "a";
+    wrapper.setProps({ columns: _columns });
+    wrapper.update();
+    wrapper.find(".addRowBtn").at(0).simulate("click");
+    expect(onAdd).lastCalledWith({ detail: { input: "a" }, index: 0 });
   });
 
   it("disabled & hide button should work", () => {

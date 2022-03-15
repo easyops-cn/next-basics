@@ -83,6 +83,15 @@ const LegacyDynamicFormItemV2 = forwardRef(
       [columns]
     );
 
+    const defaultValues = useMemo(
+      () =>
+        columns.reduce(
+          (pre, cur) => ({ ...pre, [cur.name]: cur.defaultValue }),
+          {}
+        ),
+      [columns]
+    );
+
     return (
       <div className={style.dynamicForm}>
         <Form
@@ -152,9 +161,8 @@ const LegacyDynamicFormItemV2 = forwardRef(
                   type="dashed"
                   onClick={() => {
                     const index = fields.length;
-                    const defaultValue = {};
-                    add(defaultValue);
-                    onAdd?.({ detail: defaultValue, index });
+                    add(defaultValues);
+                    onAdd?.({ detail: defaultValues, index });
                   }}
                   icon={<PlusOutlined />}
                 >
