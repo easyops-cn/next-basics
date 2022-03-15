@@ -9,6 +9,8 @@ import {
   getHistory,
   getRuntime,
   useCurrentApp,
+  getCurrentTheme,
+  batchSetAppsLocalTheme,
 } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
@@ -20,6 +22,8 @@ export function AppSetting(): React.ReactElement {
   const currentApp = useCurrentApp();
   const username = getAuth().username;
   const currentLang = i18next.language?.split("-")[0];
+  const { appsTheme }: Record<string, any> = getRuntime().getMiscSettings();
+  const theme = getCurrentTheme();
 
   const [avatarSrc, setAvatarSrc] = React.useState<string>();
   const [accountEntryEnabled, setAccountEntry] = React.useState<boolean>(false);
@@ -71,6 +75,11 @@ export function AppSetting(): React.ReactElement {
     return logOutPage ? <Link to={logOutPage}>{t(K.LOGOUT)}</Link> : null;
   }, [currentApp, t]);
 
+  const themeText = React.useMemo(
+    () => (theme === "light" ? t(K.DARK_THEME) : t(K.LIGHT_THEME)),
+    [t, theme]
+  );
+
   const ssoEnabled = React.useMemo(
     () => getRuntime().getFeatureFlags()["sso-enabled"],
     []
@@ -85,6 +94,13 @@ export function AppSetting(): React.ReactElement {
     () => getRuntime().getFeatureFlags()["switch-language"],
     []
   );
+
+  const switchThemeEnable = React.useMemo(() => {
+    return (
+      getRuntime().getFeatureFlags()["switch-theme"] &&
+      appsTheme?.supportedApps?.includes(currentApp?.id)
+    );
+  }, [appsTheme, currentApp]);
 
   const handleLogout = (): void => {
     getHistory().replace("/auth/logout");
@@ -107,6 +123,28 @@ export function AppSetting(): React.ReactElement {
     }
     location.reload();
   };
+
+  const handleSwitchTheme = (): void => {
+    const data = appsTheme?.supportedApps?.reduce(
+      (obj: Record<string, string>, app: string) => ({
+        ...obj,
+        [app]: theme === "light" ? "dark-v2" : "light",
+      }),
+      {}
+    );
+    batchSetAppsLocalTheme(data);
+    location.reload();
+  };
+
+  const DropdownIconStyle = React.useMemo(
+    () => ({
+      minWidth: "12px",
+      marginRight: "8px",
+      fontSize: "12px",
+      verticalAlign: "-0.1em",
+    }),
+    []
+  );
 
   return (
     <div>
@@ -162,18 +200,33 @@ export function AppSetting(): React.ReactElement {
                             icon: "language",
                             category: "default",
                           }}
-                          style={{
-                            minWidth: "12px",
-                            marginRight: "8px",
-                            fontSize: "12px",
-                            verticalAlign: "-0.1em",
-                          }}
+                          style={DropdownIconStyle}
                         />
                         {currentLang === "en" ? "中文" : "English"}
                       </div>
                     </Tooltip>
                   </Menu.Item>
                 </>
+              )}
+              {switchThemeEnable && (
+                <Menu.Item
+                  className={styles.dropdownMenuItem}
+                  onClick={handleSwitchTheme}
+                >
+                  <Tooltip title={t(K.SWITCH_THEME)} placement="left">
+                    <div className={styles.dropdownBtn}>
+                      <GeneralIcon
+                        icon={{
+                          lib: "antd",
+                          icon: "skin",
+                          theme: "outlined",
+                        }}
+                        style={DropdownIconStyle}
+                      />
+                      {themeText}
+                    </div>
+                  </Tooltip>
+                </Menu.Item>
               )}
             </Menu>
           }
