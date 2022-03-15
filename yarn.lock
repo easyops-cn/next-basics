@@ -2218,12 +2218,12 @@
   resolved "https://registry.npmjs.org/@next-core/brick-http/-/brick-http-2.3.7.tgz#ccd1b1e943f441458c4d5faa3074bee44d61fddc"
   integrity sha512-I06ezasbjByw2VW3SadK3RtslII8vqfzzIRRURHUNJ0WLi35OuC1296Pi+eCHqgMebQCF8HqmiIx1G0KU0Pypg==
 
-"@next-core/brick-icons@^2.26.13", "@next-core/brick-icons@^2.26.14":
+"@next-core/brick-icons@^2.26.14":
   version "2.26.14"
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.26.14.tgz#8d60a12b43f90cebb71a1e4f5eef3edbad2a6ad5"
   integrity sha512-NVN+Tc/Pb6rNINZnE4azbTqtyj+eWaWtYxbwkOD/dmijMWQFe32KzdjVHXsBdOOXl6pRZ4Te05Sc3YK56E1v+g==
 
-"@next-core/brick-kit@^2.107.3", "@next-core/brick-kit@^2.107.4":
+"@next-core/brick-kit@^2.107.4":
   version "2.107.4"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.107.4.tgz#9dfe7c8733b92613d5b2ddd9c6cb34d7f0052df6"
   integrity sha512-sQLaRsavkzdn9zSeZs+EstnJtjhBytBysPEJh/Q+3eMYYy5gcSjkrInIvrV/bD66vGLYXkPhGV/b/VGicBi3bA==
@@ -2258,12 +2258,12 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.60.0", "@next-core/brick-types@^2.60.1":
-  version "2.60.0"
-  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.60.0.tgz#11e1017ab56ad3e2f286afe05d35a4805b577a96"
-  integrity sha512-ilhVCGV58sWhTGI6LNZKnDBYmj+gNhwnXIRNy6VntWfszalG1cROUN8jDTDHES3jcs+ccsjoyYqN4PKIzJKbWg==
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.60.1":
+  version "2.60.1"
+  resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.60.1.tgz#881296e49b09217028fc92da47c17733d4788563"
+  integrity sha512-WvnM9rs7V+1lPnnYHk59dZvGxZWcNhUnptUm8JNUI2l/AJ+5aXmjrbM/i9JIXuN1gjisMeDc6rKcrpzhykaqgw==
 
-"@next-core/brick-utils@^2.35.2", "@next-core/brick-utils@^2.35.3":
+"@next-core/brick-utils@^2.35.3":
   version "2.35.3"
   resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.35.3.tgz#3a08a78c86d001e57e5fe9ec3ee283396ea9d2ca"
   integrity sha512-iRdfvHX05Kp1sZ50jBvpJP/YUSRHiIdSzouqvtCHHfBTOS9kZBp0OeswiUwNdhxQ8esBWk24mVpOteT7NGGq+w==
@@ -2388,7 +2388,7 @@
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/-/easyops-analytics-0.7.4.tgz#4e462fd434ba36aa5e31e482910c6d614f29a33b"
   integrity sha512-U8v+Z1Aofu1oOrYfUwyLl14yxwBrwW/1M0lzsUfV78fg7tQZX8vIw/j4Y7b1FXeafo9a6grMb88Ujf8adlWAtw==
 
-"@next-core/editor-bricks-helper@^0.37.1", "@next-core/editor-bricks-helper@^0.37.2":
+"@next-core/editor-bricks-helper@^0.37.2":
   version "0.37.2"
   resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.37.2.tgz#4037259859f01ef2665dc7ef82d893fa08ea4f44"
   integrity sha512-QLqMNLIfimblIfcqxqWLFlU+aYBYGbVhwqQiVoVQ+NqPEi+bpboXm5arOMahltT9sErv6NXHbI98lCbyiJQ+9Q==
@@ -2414,7 +2414,7 @@
     "@fortawesome/free-brands-svg-icons" "^5.15.4"
     "@fortawesome/free-solid-svg-icons" "^5.15.4"
 
-"@next-core/illustrations@^0.5.6", "@next-core/illustrations@^0.5.7":
+"@next-core/illustrations@^0.5.7":
   version "0.5.7"
   resolved "https://registry.npmjs.org/@next-core/illustrations/-/illustrations-0.5.7.tgz#8baa3a97772dceb49f0eb2db41c718d157dc9e81"
   integrity sha512-fLme6G06JmlxHACK53XZ2O1XORuaAymcJjsMhXXEr0qQro3S2dCdz885wdh6WU5j10xD1G2ENevIToKMTRGJww==
