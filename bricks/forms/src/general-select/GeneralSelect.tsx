@@ -63,6 +63,9 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
       );
     }
   }, [suffixBrick]);
+  React.useEffect(() => {
+    setCheckedValue(props.value);
+  }, [props.value]);
 
   const handleChange = (newValue: any): void => {
     props.onChange?.(newValue);
