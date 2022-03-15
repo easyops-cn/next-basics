@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import ReactDOM from "react-dom";
 import {
   BrickWrapper,
@@ -6,8 +6,9 @@ import {
   type EventEmitter,
   property,
   UpdatingElement,
+  method,
 } from "@next-core/brick-kit";
-import { PreviewContainer } from "./PreviewContainer";
+import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
 
 /**
  * @id next-builder.preview-container
@@ -44,6 +45,20 @@ export class PreviewContainerElement extends UpdatingElement {
     this._previewStartEvent.emit();
   };
 
+  @event({ type: "url.change" })
+  private _urlChangeEvent: EventEmitter<string>;
+
+  private _handleUrlChange = (url: string): void => {
+    this._urlChangeEvent.emit(url);
+  };
+
+  private _previewContainerRef = createRef<PreviewContainerRef>();
+
+  @method()
+  refresh(): void {
+    this._previewContainerRef.current.refresh();
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -63,11 +78,13 @@ export class PreviewContainerElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <PreviewContainer
+            ref={this._previewContainerRef}
             previewUrl={this.previewUrl}
             inspecting={this.inspecting}
             viewportWidth={this.viewportWidth}
             onInspectingToggle={this._handleInspectingToggle}
             onPreviewStart={this._handlePreviewStart}
+            onUrlChange={this._handleUrlChange}
           />
         </BrickWrapper>,
         this

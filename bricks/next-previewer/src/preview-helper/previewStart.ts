@@ -1,5 +1,8 @@
+import { getHistory } from "@next-core/brick-kit";
 import type {
+  PluginLocation,
   PreviewMessagePreviewerPreviewStarted,
+  PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
 } from "@next-core/brick-types";
 import { showOverlay } from "./overlay";
@@ -46,7 +49,27 @@ export function previewStart(previewFromOrigin: string): void {
         case "toggle-inspecting":
           data.enabled ? startInspecting() : stopInspecting();
           break;
+        case "refresh":
+          location.reload();
+          break;
       }
     }
   );
+
+  const history = getHistory();
+
+  const sendLocationChange = (loc: PluginLocation): void => {
+    window.parent.postMessage(
+      {
+        sender: "previewer",
+        type: "url-change",
+        url: location.origin + history.createHref(loc),
+      } as PreviewMessagePreviewerUrlChange,
+      previewFromOrigin
+    );
+  };
+
+  sendLocationChange(history.location);
+
+  history.listen(sendLocationChange);
 }
