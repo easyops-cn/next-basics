@@ -49,7 +49,9 @@ describe("BrickLink", () => {
       />
     );
 
-    expect(wrapper.find("GeneralIcon").prop("style").color).toBe("#bfbfbf");
+    expect(wrapper.find("GeneralIcon").prop("style").color).toBe(
+      "var(--color-disabled-text)"
+    );
     expect(wrapper.find("Link").length).toBe(0);
     expect(wrapper.find("span").at(0).text()).toBe("<GeneralIcon />aaa");
   });

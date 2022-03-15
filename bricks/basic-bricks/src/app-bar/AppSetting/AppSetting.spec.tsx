@@ -1,7 +1,7 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 import { shallow, mount } from "enzyme";
-import { Dropdown, Avatar } from "antd";
+import { Dropdown, Avatar, Menu } from "antd";
 import * as brickKit from "@next-core/brick-kit";
 import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { Link } from "@next-libs/basic-components";
@@ -37,6 +37,7 @@ jest.spyOn(brickKit, "getAuth").mockReturnValue({
 });
 
 const getFeatureFlags = jest.fn().mockReturnValue({});
+const getCurrentTheme = jest.fn().mockReturnValue("light");
 const getMicroApps = jest
   .fn()
   .mockReturnValueOnce([])
@@ -50,7 +51,12 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: () => ({
     base_title: "DevOps 管理专家",
   }),
-
+  getMiscSettings: () => ({
+    appsTheme: {
+      supportedApps: ["apm", "events"],
+    },
+  }),
+  getCurrentTheme,
   getFeatureFlags,
   getMicroApps,
 } as any);
@@ -188,5 +194,30 @@ describe("AppBar", () => {
     window.NO_AUTH_GUARD = true;
     const wrapper = shallow(<AppSetting />);
     expect(wrapper.find(".actionsContainer").find(Link).length).toBe(0);
+  });
+
+  it("should work with dark mode", () => {
+    getFeatureFlags.mockReturnValue({
+      "switch-theme": true,
+    });
+    const spyOnBatchSetAppsLocalTheme = jest.spyOn(
+      brickKit,
+      "batchSetAppsLocalTheme"
+    );
+    useCurrentApp.mockReturnValue({
+      id: "apm",
+      name: "apm",
+      homepage: "/apm",
+    });
+
+    const wrapper = mount(<AppSetting />);
+    const dropdown = wrapper.find(Dropdown);
+    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
+
+    submenu.find(Menu.Item).last().invoke("onClick")(null);
+    expect(spyOnBatchSetAppsLocalTheme.mock.calls[0][0]).toEqual({
+      apm: "light",
+      events: "light",
+    });
   });
 });

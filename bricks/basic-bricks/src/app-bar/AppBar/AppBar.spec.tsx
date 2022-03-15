@@ -48,7 +48,7 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: () => ({
     base_title: "DevOps 管理专家",
   }),
-
+  getMiscSettings: () => ({}),
   getFeatureFlags,
   getMicroApps,
 } as any);
