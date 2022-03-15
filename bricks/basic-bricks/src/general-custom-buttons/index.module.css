@@ -55,6 +55,11 @@
       background: var(--antd-btn-special-icon-type-hover-bg);
     }
 
+    &:active {
+      color: var(--antd-btn-special-icon-type-active-color);
+      background: var(--antd-btn-special-icon-type-active-bg);
+    }
+
     &[disabled] {
       color: var(--antd-btn-special-icon-type-disabled-color);
       background: var(--antd-btn-special-icon-type-disabled-bg);
