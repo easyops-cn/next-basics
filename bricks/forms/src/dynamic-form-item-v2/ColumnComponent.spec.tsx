@@ -177,8 +177,32 @@ describe("ColumnComponent", () => {
     });
     expect(wrapper.find(Input).prop("disabled")).toBeFalsy();
     wrapper.setProps({
-      rowValue: { input: "input" },
+      formValue: [{ input: "input" }],
     });
     expect(wrapper.find(Input).prop("disabled")).toBeTruthy();
+  });
+
+  it("unique should work", () => {
+    const column = {
+      ...inputColumn,
+      rules: [
+        { unique: true, message: "unique" },
+        { required: true, message: "这个是必填项" },
+      ],
+    };
+    const wrapper = shallow(
+      <ColumnComponent
+        column={column}
+        field={field}
+        rowIndex={0}
+        hasLabel={true}
+        formValue={[{ input: "a" }, { input: "a" }]}
+      />
+    );
+
+    const validatorFn = jest.fn();
+    const customValidator = wrapper.find(Form.Item).prop("rules")[0].validator;
+    customValidator({ message: "unique" }, "a", validatorFn);
+    expect(validatorFn).toBeCalledWith("unique");
   });
 });
