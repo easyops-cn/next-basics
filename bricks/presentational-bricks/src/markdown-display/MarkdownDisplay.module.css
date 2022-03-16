@@ -295,7 +295,7 @@ html[data-theme="dark-v2"] {
     }
 
     blockquote {
-      border-left: 4px solid var(--color-border-divider-line);
+      border-left: 4px solid var(--palette-rgba-gray-5);
       color: var(--color-normal-text);
     }
 
