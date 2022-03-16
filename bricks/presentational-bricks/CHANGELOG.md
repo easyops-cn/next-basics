@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.239.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.3...@next-bricks/presentational-bricks@1.239.4) (2022-03-16)
+
+
+### Bug Fixes
+
+* style refine ([fbd797e](https://github.com/easyops-cn/next-basics/commit/fbd797ea670d8e051649d037c037b43386d236b2))
+
+
+
+
+
 ## [1.239.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.2...@next-bricks/presentational-bricks@1.239.3) (2022-03-16)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.211.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.210.0...@next-bricks/forms@1.211.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* **forms:** add placeholder ([e6456a8](https://github.com/easyops-cn/next-basics/commit/e6456a8c771ec021626f39090220070700bde32a))
+* **forms:** support labelTooltip ([265a401](https://github.com/easyops-cn/next-basics/commit/265a4011f672f56a1865e15edfcf61963604ed62))
+
+
+### Features
+
+* **forms:** support uniq rule ([9cbc6e0](https://github.com/easyops-cn/next-basics/commit/9cbc6e0f25f41fcdbab9c58b8a01071fd8b07f7d))
+
+
+
+
+
 # [1.210.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.209.1...@next-bricks/forms@1.210.0) (2022-03-16)
 
 
