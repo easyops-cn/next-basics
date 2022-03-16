@@ -217,9 +217,10 @@ export function AppSetting(): React.ReactElement {
                     <div className={styles.dropdownBtn}>
                       <GeneralIcon
                         icon={{
-                          lib: "antd",
-                          icon: "skin",
-                          theme: "outlined",
+                          lib: "easyops",
+                          icon:
+                            theme === "light" ? "dark-theme" : "light-theme",
+                          category: "default",
                         }}
                         style={DropdownIconStyle}
                       />
