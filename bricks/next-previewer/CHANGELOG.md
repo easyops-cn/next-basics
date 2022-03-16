@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@0.1.0...@next-bricks/next-previewer@0.2.0) (2022-03-16)
+
+
+### Features
+
+* refresh preview and listen on url change ([aa0ced9](https://github.com/easyops-cn/next-basics/commit/aa0ced9b1be08fed3c34467be324c0a4c0ec6232))
+
+
+
+
+
 # 0.1.0 (2022-03-09)
 
 

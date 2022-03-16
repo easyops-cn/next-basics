@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.210.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.209.1...@next-bricks/forms@1.210.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* **forms:** general-radio: type: "icon-circle",add hover style ([d7e75d3](https://github.com/easyops-cn/next-basics/commit/d7e75d3890cfc16ad10b9976d62350a32a5f94b9))
+* **forms:** radio style refine ([8428e3b](https://github.com/easyops-cn/next-basics/commit/8428e3bcdf951a035ed8465527770627c3cf3c12))
+* **forms:** 当hiddenCheckedValueSuffix为true，手动负责value，suffix显示有问题 ([e6f3d87](https://github.com/easyops-cn/next-basics/commit/e6f3d87e0f8443bfdd8bf3dfc42242ae33430253))
+* **forms:** 新建结构体从已有模型中引入，回填regex&浮点型去除限制位数 ([7170280](https://github.com/easyops-cn/next-basics/commit/717028009b753b1f8327e6de0da79d76acab2ba4))
+
+
+### Features
+
+* **forms:** support defaultValue ([1ba4325](https://github.com/easyops-cn/next-basics/commit/1ba432562f69887b5ff8182eb5bd27fea374fff7))
+
+
+
+
+
 ## [1.209.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.209.0...@next-bricks/forms@1.209.1) (2022-03-11)
 
 **Note:** Version bump only for package @next-bricks/forms

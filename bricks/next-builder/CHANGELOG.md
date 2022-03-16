@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.118.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.117.2...@next-bricks/next-builder@1.118.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* simplyfy preview-container ([09e287d](https://github.com/easyops-cn/next-basics/commit/09e287d03a6f38bba7efe46706c9d803552f2f17))
+
+
+### Features
+
+* refresh preview and listen on url change ([aa0ced9](https://github.com/easyops-cn/next-basics/commit/aa0ced9b1be08fed3c34467be324c0a4c0ec6232))
+* support deleting node ([1084379](https://github.com/easyops-cn/next-basics/commit/10843799299c39a9b3f5a3278fe57e595d59e42a))
+* support setting viewport width ([33062a7](https://github.com/easyops-cn/next-basics/commit/33062a7a2c4c96d5f56e9f3f53109e3a0076f569))
+
+
+
+
+
 ## [1.117.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.117.1...@next-bricks/next-builder@1.117.2) (2022-03-11)
 
 
