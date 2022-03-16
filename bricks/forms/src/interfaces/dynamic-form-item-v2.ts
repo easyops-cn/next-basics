@@ -167,7 +167,7 @@ export interface BasicColumn {
   /**
    * 表单项校验规则
    */
-  rules?: Rule[];
+  rules?: ({ unique: boolean; message: string } & Rule)[];
   /**
    * 表单项所占份额
    */

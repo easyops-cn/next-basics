@@ -117,7 +117,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
                             hasLabel={hasLabel}
                             rowIndex={name}
                             column={column}
-                            rowValue={rowValue}
+                            formValue={value}
                             field={{ key, name, ...restField }}
                           />
                         </Col>

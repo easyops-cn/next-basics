@@ -2,14 +2,14 @@ import React, { useMemo } from "react";
 import { FormListFieldData } from "antd/lib/form/FormList";
 import { Column, ComponentType, SelectProps } from "../interfaces";
 import { Cascader, Form, Input, InputNumber, Select } from "antd";
-import { groupBy } from "lodash";
+import { groupBy, isEqual, isNil } from "lodash";
 import { getRealValue } from "./util";
 
 interface ColumnComponentProps {
   column: Column;
   field: FormListFieldData;
   rowIndex?: number;
-  rowValue?: Record<string, any>;
+  formValue?: Record<string, any>[];
   hasLabel?: boolean;
 }
 
@@ -37,9 +37,11 @@ const getOptsGroups = (
 export function ColumnComponent(
   props: ColumnComponentProps
 ): React.ReactElement {
-  const { column, field, rowIndex, hasLabel, rowValue } = props;
-  const { label, name, rules } = column;
+  const { column, field, rowIndex, hasLabel, formValue } = props;
+  const { label, name } = column;
   const { name: fieldName, ...restField } = field;
+
+  const rowValue = formValue?.[rowIndex];
 
   const labelNode = useMemo(
     () => hasLabel && rowIndex === 0 && <div>{label}</div>,
@@ -49,6 +51,29 @@ export function ColumnComponent(
   const disabled = useMemo(
     () => getRealValue(column.props?.disabled, [rowValue, rowIndex]),
     [column.props?.disabled, rowValue, rowIndex]
+  );
+
+  const rules = useMemo(
+    () =>
+      column.rules?.map((rule) => {
+        if (rule.unique) {
+          return {
+            validator: (rule: any, value: any, cb: any) => {
+              if (!isNil(value) && value !== "") {
+                const valueList = formValue?.map((row) => row[name]);
+                const matchList = valueList.filter(
+                  (v, i) => isEqual(v, value) && i !== rowIndex
+                );
+                matchList.length && cb(rule.message);
+              }
+              cb();
+            },
+            message: rule.message,
+          };
+        }
+        return rule;
+      }),
+    [column.rules, formValue, name, rowIndex]
   );
 
   switch (column.type) {
