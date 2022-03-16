@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
 import { Form } from "@ant-design/compatible";
-import { Input, Row, InputNumber, Alert } from "antd";
+import { Row, InputNumber } from "antd";
 import { isNil } from "lodash";
 import styles from "./index.module.css";
 import i18n from "i18next";
@@ -56,9 +56,7 @@ export function ObjectAttrFloat(
         <Row>
           <InputNumber
             value={value?.default}
-            placeholder={i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`)}
             style={{ width: "100%" }}
-            step={0.0001}
             onChange={(e) => {
               handleValueChange({ ...value, default: e });
             }}
