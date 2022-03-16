@@ -256,10 +256,10 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
     {
       validator: this.strSeriesNumberAndAutoIncrementIDValidator,
     },
-    {
-      message: i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`),
-      validator: this.floatMaxLengthNotMatch,
-    },
+    // {
+    //   message: i18n.t(`${NS_FORMS}:${K.FLOAT_LIMIT}`),
+    //   validator: this.floatMaxLengthNotMatch,
+    // },
   ];
 
   protected _render(): void {

@@ -490,6 +490,7 @@ export function LegacyObjectAttrStructForm(
                 id: selectedRow.id,
                 name: selectedRow.name,
                 type: selectedRow.value.type,
+                regex: selectedRow.value.regex,
               };
             }),
           });
