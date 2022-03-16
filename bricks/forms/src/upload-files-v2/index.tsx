@@ -285,6 +285,7 @@ export class UploadFilesV2Element extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            labelTooltip={this.labelTooltip}
             hideDragBtnWhenAchieveMax={this.hideDragBtnWhenAchieveMax}
             uploadButtonProps={this.uploadButtonProps}
           />
