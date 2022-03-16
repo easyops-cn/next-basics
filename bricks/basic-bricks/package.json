@@ -30,7 +30,7 @@
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"
   },
   "devDependencies": {
-    "@next-core/custom-antd-styles": "^1.23.18",
+    "@next-core/custom-antd-styles": "^1.23.19",
     "@next-libs/basic-components": "^3.4.0",
     "@next-libs/storage": "^2.0.2",
     "@next-sdk/air-admin-service-sdk": "^2.1.12",
