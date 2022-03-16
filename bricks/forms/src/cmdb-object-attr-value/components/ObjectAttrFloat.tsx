@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
-import { Form } from "@ant-design/compatible";
 import { Row, InputNumber } from "antd";
 import { isNil } from "lodash";
 import styles from "./index.module.css";
@@ -57,6 +56,9 @@ export function ObjectAttrFloat(
           <InputNumber
             value={value?.default}
             style={{ width: "100%" }}
+            placeholder={i18n.t(
+              `${NS_FORMS}:${K.PLACEHOLDER_SYSTEM_ONLY_DISPLAYS}`
+            )}
             onChange={(e) => {
               handleValueChange({ ...value, default: e });
             }}

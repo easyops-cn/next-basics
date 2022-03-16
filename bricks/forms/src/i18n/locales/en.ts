@@ -135,6 +135,8 @@ const locale: Locale = {
   [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "Please enter 1 to 20 characters",
   [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "Please enter attribute description",
   [K.VALIDATION_FAILED]: "{{label}} validation failed",
+  [K.PLACEHOLDER_SYSTEM_ONLY_DISPLAYS]:
+    "The system only displays 4 decimal places",
 };
 
 export default locale;
