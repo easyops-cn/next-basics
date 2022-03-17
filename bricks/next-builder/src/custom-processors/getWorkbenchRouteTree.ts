@@ -21,7 +21,6 @@ export function getWorkbenchRouteTree(
     const node: WorkbenchNodeData = {
       key: route.id,
       name: route.alias || route.path,
-      active: activeRouteId && activeRouteId === route.id,
       icon: {
         lib: "antd",
         theme: "outlined",

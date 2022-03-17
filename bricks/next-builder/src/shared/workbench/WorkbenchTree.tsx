@@ -52,8 +52,16 @@ export interface TreeNodeProps {
 
 function TreeNode({ node, level }: TreeNodeProps): ReactElement {
   const isLeaf = !node.children?.length;
-  const { hoverKey, mouseEnterFactory, mouseLeaveFactory, contextMenuFactory } =
-    useWorkbenchTreeContext();
+  const {
+    hoverKey,
+    activeKey,
+    clickFactory,
+    mouseEnterFactory,
+    mouseLeaveFactory,
+    contextMenuFactory,
+  } = useWorkbenchTreeContext();
+
+  const onClick = useMemo(() => clickFactory?.(node), [clickFactory, node]);
 
   const onMouseEnter = useMemo(
     () => mouseEnterFactory?.(node),
@@ -69,9 +77,11 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
     [contextMenuFactory, node]
   );
 
+  const isActive = activeKey && node.key === activeKey;
+
   const nodeLabelCallback = useMemo(
     () =>
-      node.active
+      isActive
         ? (element: HTMLElement) => {
             element?.scrollIntoView({
               block: "center",
@@ -89,7 +99,7 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
     <li>
       <Link
         className={classNames(styles.nodeLabelRow, {
-          [styles.active]: node.active,
+          [styles.active]: isActive,
           [styles.hover]: hoverKey && node.key === hoverKey,
         })}
         tabIndex={0}
@@ -97,6 +107,7 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
         onMouseLeave={onMouseLeave}
         onContextMenu={onContextMenu}
         noEmptyHref
+        onClick={onClick}
         {...pick(node.link, ["to", "href"])}
       >
         <span
