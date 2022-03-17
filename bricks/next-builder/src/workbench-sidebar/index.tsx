@@ -18,18 +18,6 @@ export class WorkbenchSidebarElement extends UpdatingElement {
   @property()
   titleLabel: string;
 
-  @property()
-  sizeStorageKey: string;
-
-  @property({ type: Number })
-  defaultSize: number;
-
-  @property({ type: Number })
-  minSize: number;
-
-  @property({ type: Number })
-  minSpace: number;
-
   private _shadowRoot: ShadowRoot;
 
   constructor() {
@@ -82,13 +70,7 @@ export class WorkbenchSidebarElement extends UpdatingElement {
         <>
           <style>{styles}</style>
           <BrickWrapper>
-            <WorkbenchSidebar
-              titleLabel={this.titleLabel}
-              sizeStorageKey={this.sizeStorageKey}
-              defaultSize={this.defaultSize}
-              minSize={this.minSize}
-              minSpace={this.minSpace}
-            />
+            <WorkbenchSidebar titleLabel={this.titleLabel} />
           </BrickWrapper>
         </>,
         this._shadowRoot,
