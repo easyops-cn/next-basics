@@ -14,6 +14,7 @@ import type {
 } from "../shared/workbench/interfaces";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
+import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 
 /**
  * @id next-builder.workbench-tree
@@ -32,6 +33,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
 
   @property()
   placeholder: string;
+
+  @property({ attribute: false })
+  activeKey: string | number;
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -64,7 +68,16 @@ export class WorkbenchTreeElement extends UpdatingElement {
               onActionClick: this._handleActionClick,
             }}
           >
-            <WorkbenchTree nodes={this.nodes} placeholder={this.placeholder} />
+            <WorkbenchTreeContext.Provider
+              value={{
+                activeKey: this.activeKey,
+              }}
+            >
+              <WorkbenchTree
+                nodes={this.nodes}
+                placeholder={this.placeholder}
+              />
+            </WorkbenchTreeContext.Provider>
           </WorkbenchActionsContext.Provider>
         </BrickWrapper>,
         this

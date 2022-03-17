@@ -16,24 +16,60 @@ import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 export interface WorkbenchBrickTreeProps {
   type?: BuilderRuntimeNode["type"];
   placeholder?: string;
+  activeInstanceId?: string;
+  onNodeClick?(node: BuilderRuntimeNode): void;
+}
+
+type WorkbenchBrickTreeNode =
+  | BuilderRuntimeNode
+  | {
+      type: "mount-point";
+      mountPoint: string;
+      parent: BuilderRuntimeNode;
+    };
+
+function isNormalNode(
+  node: WorkbenchBrickTreeNode
+): node is BuilderRuntimeNode {
+  return node.type !== "mount-point";
 }
 
 export function WorkbenchBrickTree({
   type,
   placeholder,
+  activeInstanceId,
+  onNodeClick,
 }: WorkbenchBrickTreeProps): React.ReactElement {
   const { nodes, edges } = useBuilderData();
   const rootNode = useBuilderNode({ isRoot: true });
   const hoverNodeUid = useHoverNodeUid();
   const manager = useBuilderDataManager();
 
+  const clickFactory = useCallback(
+    ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
+      return isNormalNode(data)
+        ? (event: React.MouseEvent) => {
+            // Q: It's weird that we MUST stop propagation here.
+            // Or this listener will be called twice.
+            // This may be a known issue of React 16 with shadow DOM,
+            // which is hopefully fixed in react 17.
+            // And a potential workaround for react 16:
+            // https://github.com/facebook/react/issues/9242#issuecomment-534096832
+            event.stopPropagation();
+            onNodeClick(data);
+          }
+        : null;
+    },
+    [onNodeClick]
+  );
+
   const mouseEnterFactory = useCallback(
-    (node: WorkbenchNodeData<BuilderRuntimeNode>) => {
-      return node.data
+    ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
+      return isNormalNode(data)
         ? () => {
             const prevUid = manager.getHoverNodeUid();
-            if (prevUid !== node.data.$$uid) {
-              manager.setHoverNodeUid(node.data.$$uid);
+            if (prevUid !== data.$$uid) {
+              manager.setHoverNodeUid(data.$$uid);
             }
           }
         : null;
@@ -42,11 +78,11 @@ export function WorkbenchBrickTree({
   );
 
   const mouseLeaveFactory = useCallback(
-    (node: WorkbenchNodeData<BuilderRuntimeNode>) => {
-      return node.data
+    ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
+      return isNormalNode(data)
         ? () => {
             const prevUid = manager.getHoverNodeUid();
-            if (prevUid === node.data.$$uid) {
+            if (prevUid === data.$$uid) {
               manager.setHoverNodeUid(undefined);
             }
           }
@@ -56,13 +92,13 @@ export function WorkbenchBrickTree({
   );
 
   const contextMenuFactory = useCallback(
-    (node: WorkbenchNodeData<BuilderRuntimeNode>) => {
-      return node.data
+    ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
+      return isNormalNode(data)
         ? (event: React.MouseEvent) => {
             event.preventDefault();
             manager.contextMenuChange({
               active: true,
-              node: node.data,
+              node: data,
               x: event.clientX,
               y: event.clientY,
             });
@@ -79,8 +115,13 @@ export function WorkbenchBrickTree({
       return [];
     }
 
-    function getChildren(node: BuilderRuntimeNode): WorkbenchNodeData[] {
-      const groups = new Map<string, WorkbenchNodeData>();
+    function getChildren(
+      node: BuilderRuntimeNode
+    ): WorkbenchNodeData<WorkbenchBrickTreeNode>[] {
+      const groups = new Map<
+        string,
+        WorkbenchNodeData<WorkbenchBrickTreeNode>
+      >();
       const relatedEdges = sortBy(
         edges.filter(
           (edge) =>
@@ -96,7 +137,7 @@ export function WorkbenchBrickTree({
         let group = groups.get(edge.mountPoint);
         if (!group) {
           group = {
-            key: edge.mountPoint,
+            key: `${node.$$uid}:${edge.mountPoint}`,
             name: edge.mountPoint,
             icon: {
               lib: "antd",
@@ -120,7 +161,9 @@ export function WorkbenchBrickTree({
       return Array.from(groups.values());
     }
 
-    function getEntityNode(node: BuilderRuntimeNode): WorkbenchNodeData {
+    function getEntityNode(
+      node: BuilderRuntimeNode
+    ): WorkbenchNodeData<WorkbenchBrickTreeNode> {
       let icon = "question";
       let color: string;
       if (node.bg || node.type === "provider") {
@@ -167,20 +210,28 @@ export function WorkbenchBrickTree({
           type === "bricks"
             ? children
             : type === "routes"
-            ? children.find((group) => group.key === "routes")?.children
+            ? children.find((group) => group.name === "routes")?.children
             : null,
       };
     }
 
     return getChildren(rootNode).find(
-      (group) => group.key === (type === "routes" ? type : "bricks")
+      (group) => group.name === (type === "routes" ? type : "bricks")
     )?.children;
   }, [doNotExpandTemplates, edges, nodes, rootNode, type]);
+
+  const activeKey = useMemo(() => {
+    return activeInstanceId
+      ? nodes.find((node) => node.instanceId === activeInstanceId)?.$$uid
+      : null;
+  }, [activeInstanceId, nodes]);
 
   return (
     <WorkbenchTreeContext.Provider
       value={{
         hoverKey: hoverNodeUid,
+        activeKey,
+        clickFactory,
         mouseEnterFactory,
         mouseLeaveFactory,
         contextMenuFactory,

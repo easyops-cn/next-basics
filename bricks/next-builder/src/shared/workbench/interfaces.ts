@@ -13,7 +13,6 @@ export interface WorkbenchNodeData<T = unknown> {
     | {
         href: string;
       };
-  active?: boolean;
   hover?: boolean;
   children?: WorkbenchNodeData[];
 }
