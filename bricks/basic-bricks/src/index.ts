@@ -41,3 +41,4 @@ import "./launchpad-button";
 import "./app-bar-breadcrumb";
 import "./app-bar-setting";
 import "./event-agent";
+import "./resizable-box";
