@@ -32,6 +32,9 @@ export class ResizableBoxElement extends UpdatingElement {
   @property({ attribute: false })
   boxStyle: React.CSSProperties;
 
+  @property({ attribute: false })
+  boxStyleWhenNotResizing: React.CSSProperties;
+
   private _shadowRoot: ShadowRoot;
 
   constructor() {
@@ -64,6 +67,7 @@ export class ResizableBoxElement extends UpdatingElement {
               minSize={this.minSize}
               minSpace={this.minSpace}
               boxStyle={this.boxStyle}
+              boxStyleWhenNotResizing={this.boxStyleWhenNotResizing}
             />
           </BrickWrapper>
         </>,

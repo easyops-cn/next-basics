@@ -49,6 +49,6 @@
   display: none;
 }
 
-.bar.active .mask {
+.resizing + .bar .mask {
   display: block;
 }
