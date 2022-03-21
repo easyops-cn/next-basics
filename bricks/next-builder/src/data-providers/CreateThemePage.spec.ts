@@ -21,6 +21,14 @@ jest.mock("@next-sdk/cmdb-sdk");
 });
 
 describe("CreateThemePage", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should work", async () => {
     expect(
       await CreateThemePage({
@@ -37,6 +45,8 @@ describe("CreateThemePage", () => {
             name: "首页",
           },
         },
+        layoutList: "header,sider",
+        layoutType: "UI8.0",
       })
     ).toEqual({
       instanceId: "page-a",
@@ -72,7 +82,16 @@ describe("CreateThemePage", () => {
       "STORYBOARD_BRICK",
       {
         appId: "app-a",
-        brick: `tpl-page-home`,
+        brick: `basic-bricks.easy-view`,
+        properties: JSON.stringify({
+          gridAreas: {
+            header: [1, 1, 2, 3],
+            sider: [2, 1, 3, 2],
+            content: [2, 2, 3, 3],
+          },
+          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+          gridTemplateRows: ["var(--app-bar-height)", "auto"],
+        }),
         type: "brick",
         mountPoint: "bricks",
         parent: "snippet-a",
@@ -96,7 +115,97 @@ describe("CreateThemePage", () => {
         },
         template: "tpl-a",
         snippet: "snippet-a",
+        layoutList: "header,sider",
+        layoutType: "UI8.0",
       }
     );
   });
+
+  it.each<[string, number, unknown]>([
+    [
+      "header,sider",
+      5,
+      {
+        appId: "app-a",
+        brick: `basic-bricks.easy-view`,
+        properties: JSON.stringify({
+          gridAreas: {
+            header: [1, 2, 2, 3],
+            sider: [1, 1, 3, 2],
+            content: [2, 2, 3, 3],
+          },
+          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+          gridTemplateRows: ["var(--app-bar-height)", "auto"],
+        }),
+        type: "brick",
+        mountPoint: "bricks",
+        parent: "snippet-a",
+      },
+    ],
+    [
+      "header",
+      5,
+      {
+        appId: "app-a",
+        brick: `basic-bricks.easy-view`,
+        properties: JSON.stringify({
+          gridAreas: {
+            header: [1, 1, 2, 3],
+            content: [2, 1, 3, 3],
+          },
+          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+          gridTemplateRows: ["var(--app-bar-height)", "auto"],
+        }),
+        type: "brick",
+        mountPoint: "bricks",
+        parent: "snippet-a",
+      },
+    ],
+    [
+      "sider",
+      8,
+      {
+        appId: "app-a",
+        brick: `basic-bricks.easy-view`,
+        properties: JSON.stringify({
+          gridAreas: {
+            sider: [1, 1, 3, 2],
+            content: [1, 2, 3, 3],
+          },
+          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+          gridTemplateRows: ["var(--app-bar-height)", "auto"],
+        }),
+        type: "brick",
+        mountPoint: "bricks",
+        parent: "snippet-a",
+      },
+    ],
+  ])(
+    "should work when layoutList or layoutType",
+    async (layoutList, layoytType, result) => {
+      await CreateThemePage({
+        projectId: "project-a",
+        appId: "app-a",
+        pageTypeId: "home",
+        name: "My Layout",
+        thumbnail: "fun.png",
+        locales: {
+          en: {
+            name: "Home",
+          },
+          zh: {
+            name: "首页",
+          },
+        },
+        layoutList,
+        layoutType: layoytType === 5 ? "UI5.0" : "UI8.0",
+      });
+
+      expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+        3,
+        "STORYBOARD_BRICK",
+        result
+      );
+    }
+  );
 });

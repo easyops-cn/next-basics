@@ -9,7 +9,64 @@ export interface CreateThemePageParams {
   name: string;
   thumbnail?: string;
   locales?: unknown;
+  layoutType?: "UI5.0" | "UI8.0";
+  layoutList?: string;
 }
+
+interface GridProps {
+  gridAreas: Record<string, unknown>;
+  gridTemplateColumns: string[];
+  gridTemplateRows: string[];
+}
+
+const UI_5_PROPERTY: GridProps = {
+  gridAreas: {
+    header: [1, 2, 2, 3],
+    sider: [1, 1, 3, 2],
+    content: [2, 2, 3, 3],
+  },
+  gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+  gridTemplateRows: ["var(--app-bar-height)", "auto"],
+};
+const UI_8_PROPERTY: GridProps = {
+  gridAreas: {
+    header: [1, 1, 2, 3],
+    sider: [2, 1, 3, 2],
+    content: [2, 2, 3, 3],
+  },
+  gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+  gridTemplateRows: ["var(--app-bar-height)", "auto"],
+};
+
+const EASY_VIEW_PROPERTY = {
+  "UI5.0": UI_5_PROPERTY,
+  "UI8.0": UI_8_PROPERTY,
+};
+
+const filterView = (girdWrapper: GridProps, showList: string[]): GridProps => {
+  if (girdWrapper?.gridAreas) {
+    if (showList.length > 0) {
+      if (showList.includes("header") && showList.includes("sider")) {
+        return girdWrapper;
+      } else if (!showList.includes("header") && showList.includes("sider")) {
+        girdWrapper.gridAreas = {
+          sider: [1, 1, 3, 2],
+          content: [1, 2, 3, 3],
+        };
+      } else if (showList.includes("header") && !showList.includes("sider")) {
+        girdWrapper.gridAreas = {
+          header: [1, 1, 2, 3],
+          content: [2, 1, 3, 3],
+        };
+      }
+    } else {
+      girdWrapper.gridAreas = {
+        content: [1, 1, 3, 3],
+      };
+    }
+  }
+  return girdWrapper;
+};
 
 export async function CreateThemePage({
   projectId,
@@ -18,6 +75,8 @@ export async function CreateThemePage({
   name,
   thumbnail,
   locales,
+  layoutList = "",
+  layoutType,
 }: CreateThemePageParams): Promise<unknown> {
   const templateId = `tpl-page-${pageTypeId}`;
   // Currently, There is a bug when creating multiple instances of
@@ -43,7 +102,13 @@ export async function CreateThemePage({
   const [, layout] = await Promise.all([
     InstanceApi_createInstance("STORYBOARD_BRICK", {
       appId,
-      brick: templateId,
+      brick: "basic-bricks.easy-view",
+      properties: JSON.stringify(
+        filterView(
+          EASY_VIEW_PROPERTY[layoutType],
+          layoutList.split(",").filter(Boolean)
+        )
+      ),
       type: "brick",
       mountPoint: "bricks",
       parent: snippet.instanceId,
@@ -56,6 +121,8 @@ export async function CreateThemePage({
       locales,
       template: tpl.instanceId,
       snippet: snippet.instanceId,
+      layoutType,
+      layoutList,
     }),
   ]);
   return layout;
