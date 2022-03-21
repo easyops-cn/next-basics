@@ -23,6 +23,7 @@ export interface PreviewContainerProps {
   previewUrl: string;
   inspecting?: boolean;
   viewportWidth?: number;
+  previewOnNewWindow?: boolean;
   onPreviewStart?(): void;
   onInspectingToggle?(enabled: boolean): void;
   onUrlChange?(url: string): void;
@@ -31,8 +32,6 @@ export interface PreviewContainerProps {
 export interface PreviewContainerRef {
   refresh(): void;
 }
-
-const openerWindow: Window = window.opener || window;
 
 function sendToggleInspecting(
   enabled: boolean,
@@ -54,6 +53,7 @@ export function LegacyPreviewContainer(
     previewUrl,
     inspecting,
     viewportWidth,
+    previewOnNewWindow,
     onPreviewStart,
     onInspectingToggle,
     onUrlChange,
@@ -65,6 +65,7 @@ export function LegacyPreviewContainer(
 
   const [internalInspecting, setInternalInspecting] = useState(inspecting);
   const [previewStarted, setPreviewStarted] = useState(false);
+  const openerWindow: Window = previewOnNewWindow ? window.opener : window;
 
   useEffect(() => {
     setInternalInspecting(inspecting);
@@ -87,7 +88,7 @@ export function LegacyPreviewContainer(
     } catch (e) {
       return false;
     }
-  }, []);
+  }, [openerWindow]);
 
   const loadedRef = useRef(false);
   const handleIframeLoad = useCallback(() => {
@@ -165,7 +166,7 @@ export function LegacyPreviewContainer(
               forwardedFor: data.sender,
             } as PreviewMessageFromContainer);
             // Todo(steve): Focus not working?
-            openerWindow.focus();
+            // openerWindow.focus();
             break;
           case "preview-started":
             setPreviewStarted(true);
@@ -181,7 +182,13 @@ export function LegacyPreviewContainer(
     return () => {
       window.removeEventListener("message", listener);
     };
-  }, [handleUrlChange, onPreviewStart, previewOrigin, sameOriginWithOpener]);
+  }, [
+    handleUrlChange,
+    onPreviewStart,
+    openerWindow,
+    previewOrigin,
+    sameOriginWithOpener,
+  ]);
 
   useEffect(() => {
     if (loadedRef.current) {
@@ -201,7 +208,7 @@ export function LegacyPreviewContainer(
         iidList: [],
       } as PreviewMessageFromContainer);
     };
-  }, [previewStarted]);
+  }, [openerWindow, previewStarted]);
 
   const [scale, setScale] = useState(1);
 
