@@ -28,16 +28,6 @@ export class PreviewContainerElement extends UpdatingElement {
   @property({ type: Number })
   viewportWidth: number;
 
-  @event({ type: "inspecting.toggle" })
-  private _inspectingToggleEvent: EventEmitter<boolean>;
-
-  private _handleInspectingToggle = (enabled: boolean): void => {
-    if (this.inspecting !== enabled) {
-      this.inspecting = enabled;
-      this._inspectingToggleEvent.emit(enabled);
-    }
-  };
-
   @event({ type: "preview.start" })
   private _previewStartEvent: EventEmitter<void>;
 
@@ -82,7 +72,6 @@ export class PreviewContainerElement extends UpdatingElement {
             previewUrl={this.previewUrl}
             inspecting={this.inspecting}
             viewportWidth={this.viewportWidth}
-            onInspectingToggle={this._handleInspectingToggle}
             onPreviewStart={this._handlePreviewStart}
             onUrlChange={this._handleUrlChange}
           />

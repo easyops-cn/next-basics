@@ -23,16 +23,14 @@ export interface PreviewContainerProps {
   previewUrl: string;
   inspecting?: boolean;
   viewportWidth?: number;
+  previewOnNewWindow?: boolean;
   onPreviewStart?(): void;
-  onInspectingToggle?(enabled: boolean): void;
   onUrlChange?(url: string): void;
 }
 
 export interface PreviewContainerRef {
   refresh(): void;
 }
-
-const openerWindow: Window = window.opener || window;
 
 function sendToggleInspecting(
   enabled: boolean,
@@ -54,8 +52,8 @@ export function LegacyPreviewContainer(
     previewUrl,
     inspecting,
     viewportWidth,
+    previewOnNewWindow,
     onPreviewStart,
-    onInspectingToggle,
     onUrlChange,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
@@ -63,16 +61,8 @@ export function LegacyPreviewContainer(
   const iframeRef = useRef<HTMLIFrameElement>();
   const containerRef = useRef<HTMLDivElement>();
 
-  const [internalInspecting, setInternalInspecting] = useState(inspecting);
   const [previewStarted, setPreviewStarted] = useState(false);
-
-  useEffect(() => {
-    setInternalInspecting(inspecting);
-  }, [inspecting]);
-
-  useEffect(() => {
-    onInspectingToggle(internalInspecting);
-  }, [internalInspecting, onInspectingToggle]);
+  const openerWindow: Window = previewOnNewWindow ? window.opener : window;
 
   const previewOrigin = useMemo(() => {
     const url = new URL(previewUrl, location.origin);
@@ -87,7 +77,7 @@ export function LegacyPreviewContainer(
     } catch (e) {
       return false;
     }
-  }, []);
+  }, [openerWindow]);
 
   const loadedRef = useRef(false);
   const handleIframeLoad = useCallback(() => {
@@ -157,7 +147,6 @@ export function LegacyPreviewContainer(
             } as PreviewMessageFromContainer);
             break;
           case "select-brick":
-            setInternalInspecting(false);
             // Send to builder.
             openerWindow.postMessage({
               ...data,
@@ -165,7 +154,7 @@ export function LegacyPreviewContainer(
               forwardedFor: data.sender,
             } as PreviewMessageFromContainer);
             // Todo(steve): Focus not working?
-            openerWindow.focus();
+            // openerWindow.focus();
             break;
           case "preview-started":
             setPreviewStarted(true);
@@ -181,13 +170,19 @@ export function LegacyPreviewContainer(
     return () => {
       window.removeEventListener("message", listener);
     };
-  }, [handleUrlChange, onPreviewStart, previewOrigin, sameOriginWithOpener]);
+  }, [
+    handleUrlChange,
+    onPreviewStart,
+    openerWindow,
+    previewOrigin,
+    sameOriginWithOpener,
+  ]);
 
   useEffect(() => {
     if (loadedRef.current) {
-      sendToggleInspecting(internalInspecting, iframeRef, previewOrigin);
+      sendToggleInspecting(inspecting, iframeRef, previewOrigin);
     }
-  }, [previewOrigin, internalInspecting]);
+  }, [previewOrigin, inspecting]);
 
   const handleMouseOut = useMemo(() => {
     if (!previewStarted) {
@@ -201,7 +196,7 @@ export function LegacyPreviewContainer(
         iidList: [],
       } as PreviewMessageFromContainer);
     };
-  }, [previewStarted]);
+  }, [openerWindow, previewStarted]);
 
   const [scale, setScale] = useState(1);
 
