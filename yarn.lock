@@ -2218,12 +2218,12 @@
   resolved "https://registry.npmjs.org/@next-core/brick-http/-/brick-http-2.3.7.tgz#ccd1b1e943f441458c4d5faa3074bee44d61fddc"
   integrity sha512-I06ezasbjByw2VW3SadK3RtslII8vqfzzIRRURHUNJ0WLi35OuC1296Pi+eCHqgMebQCF8HqmiIx1G0KU0Pypg==
 
-"@next-core/brick-icons@^2.26.15", "@next-core/brick-icons@^2.26.16":
+"@next-core/brick-icons@^2.26.16":
   version "2.26.16"
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.26.16.tgz#ad747c6f05873c83e6a1c132c141839e33ec2ebc"
   integrity sha512-MpiL2kBKV6Pm1GqB48zmCGPLAU8/o8+qwKrt84FG3W8Ms8JiuM3h1oT04EY/31jgIl03omHt2zKrlXy9b0Kgqg==
 
-"@next-core/brick-kit@^2.107.4", "@next-core/brick-kit@^2.108.0":
+"@next-core/brick-kit@^2.108.0":
   version "2.108.0"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.108.0.tgz#759e0b2b034298b1e2525160cfe5d707bcc2bc0b"
   integrity sha512-f/A8FGHBzeawtfAqCV3oaBP1x3vuFHRF5mHHPHlk79qojnzUoeEg/x+m80neKGAEPuJwG5mKJTI3SeNS/tb93A==
@@ -2263,7 +2263,7 @@
   resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.60.1.tgz#881296e49b09217028fc92da47c17733d4788563"
   integrity sha512-WvnM9rs7V+1lPnnYHk59dZvGxZWcNhUnptUm8JNUI2l/AJ+5aXmjrbM/i9JIXuN1gjisMeDc6rKcrpzhykaqgw==
 
-"@next-core/brick-utils@^2.35.3", "@next-core/brick-utils@^2.36.0":
+"@next-core/brick-utils@^2.36.0":
   version "2.36.0"
   resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.36.0.tgz#1532033924d689478f5e009c7c6a9f8208510dfe"
   integrity sha512-JThOgNZTXsmQzvJxVeBIf/++K9M4LBGBdFTy8uZFsBsf8xwUVjmGkl7oc5f4v5j8QUDjgdfQ6Ep23EHCBcVScA==
@@ -2388,7 +2388,7 @@
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/-/easyops-analytics-0.7.4.tgz#4e462fd434ba36aa5e31e482910c6d614f29a33b"
   integrity sha512-U8v+Z1Aofu1oOrYfUwyLl14yxwBrwW/1M0lzsUfV78fg7tQZX8vIw/j4Y7b1FXeafo9a6grMb88Ujf8adlWAtw==
 
-"@next-core/editor-bricks-helper@^0.37.2", "@next-core/editor-bricks-helper@^0.37.3":
+"@next-core/editor-bricks-helper@^0.37.3":
   version "0.37.3"
   resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.37.3.tgz#8e3d1a52ac537c18687a4c9fa8959dc4ec4a41c0"
   integrity sha512-JDdEhURAfZ+jM1KrJYu2AyAesD4FbwPkYjxvdXdNE0s8IUHA1ab2HOUtGnpyJtwLV2Mzj0YW37DACj9xRkerkA==
