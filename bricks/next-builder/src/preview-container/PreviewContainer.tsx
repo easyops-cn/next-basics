@@ -25,7 +25,6 @@ export interface PreviewContainerProps {
   viewportWidth?: number;
   previewOnNewWindow?: boolean;
   onPreviewStart?(): void;
-  onInspectingToggle?(enabled: boolean): void;
   onUrlChange?(url: string): void;
 }
 
@@ -55,7 +54,6 @@ export function LegacyPreviewContainer(
     viewportWidth,
     previewOnNewWindow,
     onPreviewStart,
-    onInspectingToggle,
     onUrlChange,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
@@ -63,17 +61,8 @@ export function LegacyPreviewContainer(
   const iframeRef = useRef<HTMLIFrameElement>();
   const containerRef = useRef<HTMLDivElement>();
 
-  const [internalInspecting, setInternalInspecting] = useState(inspecting);
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
-
-  useEffect(() => {
-    setInternalInspecting(inspecting);
-  }, [inspecting]);
-
-  useEffect(() => {
-    onInspectingToggle(internalInspecting);
-  }, [internalInspecting, onInspectingToggle]);
 
   const previewOrigin = useMemo(() => {
     const url = new URL(previewUrl, location.origin);
@@ -158,7 +147,6 @@ export function LegacyPreviewContainer(
             } as PreviewMessageFromContainer);
             break;
           case "select-brick":
-            setInternalInspecting(false);
             // Send to builder.
             openerWindow.postMessage({
               ...data,
@@ -192,9 +180,9 @@ export function LegacyPreviewContainer(
 
   useEffect(() => {
     if (loadedRef.current) {
-      sendToggleInspecting(internalInspecting, iframeRef, previewOrigin);
+      sendToggleInspecting(inspecting, iframeRef, previewOrigin);
     }
-  }, [previewOrigin, internalInspecting]);
+  }, [previewOrigin, inspecting]);
 
   const handleMouseOut = useMemo(() => {
     if (!previewStarted) {

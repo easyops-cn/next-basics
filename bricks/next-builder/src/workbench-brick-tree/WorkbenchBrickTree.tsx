@@ -1,6 +1,6 @@
 // istanbul ignore file
 // For temporary usage only, will change soon.
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import {
   useBuilderData,
   useBuilderDataManager,
@@ -45,6 +45,15 @@ export function WorkbenchBrickTree({
   const hoverNodeUid = useHoverNodeUid();
   const manager = useBuilderDataManager();
 
+  useEffect(() => {
+    const fn = manager.onNodeClick((event) => {
+      onNodeClick(event.detail);
+    });
+    return () => {
+      fn();
+    };
+  }, [manager, onNodeClick]);
+
   const clickFactory = useCallback(
     ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
       return isNormalNode(data)
@@ -56,11 +65,11 @@ export function WorkbenchBrickTree({
             // And a potential workaround for react 16:
             // https://github.com/facebook/react/issues/9242#issuecomment-534096832
             event.stopPropagation();
-            onNodeClick(data);
+            manager.nodeClick(data);
           }
         : null;
     },
-    [onNodeClick]
+    [manager]
   );
 
   const mouseEnterFactory = useCallback(
