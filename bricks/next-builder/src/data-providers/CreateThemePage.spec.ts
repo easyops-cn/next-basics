@@ -21,14 +21,6 @@ jest.mock("@next-sdk/cmdb-sdk");
 });
 
 describe("CreateThemePage", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it("should work", async () => {
     expect(
       await CreateThemePage({
