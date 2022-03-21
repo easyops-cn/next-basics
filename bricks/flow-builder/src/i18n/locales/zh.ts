@@ -33,6 +33,7 @@ const locale: Locale = {
   [K.ENUM_LABEL]: "枚举值",
   [K.VALIDATOR_LABEL]: "校验器(validator)",
   [K.FIELD_PARAMS]: "参数",
+  [K.ADD_FIELD_PARAMS_TIPS]: "添加 `{{name}}` 的子属性",
 };
 
 export default locale;

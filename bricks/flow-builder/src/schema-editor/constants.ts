@@ -1,4 +1,5 @@
-import { EditorTitleProps } from "./interfaces";
+import React from "react";
+import { EditorTitleProps, EditorOfContext } from "./interfaces";
 import i18next from "i18next";
 import { K, NS_FLOW_BUILDER } from "../i18n/constants";
 
@@ -30,3 +31,5 @@ export const compareMethodList = ["gte", "lte", "gt", "lt"];
 export const numberTypeList = ["int", "int64", "float"];
 
 export const modelRefCache = new Map<string, string>();
+
+export const EditorContext = React.createContext<EditorOfContext>({});

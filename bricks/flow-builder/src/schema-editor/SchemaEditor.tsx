@@ -5,7 +5,7 @@ import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { get, set } from "lodash";
 import { SchemaItem } from "./components/schema-item/SchemaItem";
 import { AddPropertyModal } from "./components/add-property-modal/AddPropertyModal";
-import { titleList } from "./constants";
+import { titleList, EditorContext } from "./constants";
 import { SchemaItemProperty, SchemaRootNodeProperty } from "./interfaces";
 import {
   getGridTemplateColumns,
@@ -24,12 +24,23 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   disabledModelType: boolean;
 }
 
+interface ItemData {
+  isEdit?: boolean;
+  initValue?: SchemaItemProperty;
+  trackId?: string;
+}
+
 export const SchemaEditorWrapper = forwardRef<
   HTMLDivElement,
   SchemaEditorProps
 >(function LegacySchemaEditor(props, ref): React.ReactElement {
   const { hiddenRootNode, disabledModelType } = props;
+  const rootTrackId = "root";
   const [visible, setVisible] = useState(false);
+  const [curItemData, SetCurItemData] = useState<ItemData>({
+    initValue: {} as SchemaItemProperty,
+    trackId: rootTrackId,
+  });
   const [property, setProperty] = useState<SchemaItemProperty>(
     processFormInitvalue({ name: props.name, ...props.value })
   );
@@ -56,7 +67,7 @@ export const SchemaEditorWrapper = forwardRef<
   const handleAdd = (data: SchemaItemProperty, traceId?: string): void => {
     const mutableProps = { ...property };
 
-    if (traceId === "root") {
+    if (traceId === rootTrackId) {
       mutableProps.fields = mutableProps.fields || [];
       mutableProps.fields.push(data);
     } else {
@@ -103,8 +114,36 @@ export const SchemaEditorWrapper = forwardRef<
     props.onChange?.(processFormData(mutableProps));
   };
 
+  const handleModal = (
+    itemData: SchemaItemProperty,
+    isEdit: boolean,
+    trackId: string
+  ): void => {
+    SetCurItemData({
+      isEdit,
+      trackId,
+      initValue: itemData,
+    });
+    setVisible(true);
+  };
+
+  const handleSubmit = (
+    data: SchemaItemProperty,
+    trackId: string,
+    isEdit: boolean
+  ): void => {
+    isEdit ? handleEdit?.(data, trackId) : handleAdd?.(data, trackId);
+  };
+
   return (
-    <>
+    <EditorContext.Provider
+      value={{
+        onEdit: handleEdit,
+        onRemove: handleRemove,
+        onCreate: handleAdd,
+        onModal: handleModal,
+      }}
+    >
       <div className={styles.editor} ref={ref}>
         <div className={styles.title} style={{ gridTemplateColumns }}>
           {processedTitleList.map((item, index) => (
@@ -117,23 +156,21 @@ export const SchemaEditorWrapper = forwardRef<
             style={{ gridTemplateColumns: gridTemplateColumns }}
             itemData={property}
             readonly={props.readonly}
-            trackId="root"
+            trackId={rootTrackId}
             hideDeleteBtn={true}
             hiddenRootNode={hiddenRootNode}
             disabledModelType={disabledModelType}
-            onEdit={handleEdit}
-            onRemove={handleRemove}
-            onCreate={handleAdd}
           />
         </div>
       </div>
       <AddPropertyModal
+        {...curItemData}
         disabledModelType={disabledModelType}
         visible={visible}
         onClose={() => setVisible(false)}
-        onSubmit={(data) => handleAdd(data)}
+        onSubmit={handleSubmit}
       />
-    </>
+    </EditorContext.Provider>
   );
 });
 

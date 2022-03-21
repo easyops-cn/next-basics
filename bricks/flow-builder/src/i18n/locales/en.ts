@@ -2,8 +2,8 @@ import { Locale, K } from "../constants";
 
 const locale: Locale = {
   [K.FLOW_BUILDER]: "Flow Builder",
-  [K.SCHEMA_ITEM_NORMAL]: "Normal Inteface",
-  [K.SCHEMA_ITEM_REF]: "Reference Inteface",
+  [K.SCHEMA_ITEM_NORMAL]: "Normal Interface",
+  [K.SCHEMA_ITEM_REF]: "Reference Interface",
   [K.PATTERN_INPUT_PLANCEHOLDER]: "Please input RegExp",
   [K.ENUM_INPUT_PLANCEHOLDER]: "Please input enum value",
   [K.COMPARE_METHOD_PLANCEHOLDER]: "Compare method",
@@ -14,7 +14,7 @@ const locale: Locale = {
   [K.ARRAY]: "array",
   [K.SIMPLE_TYPE]: "Simple Type",
   [K.MODEL_TYPE]: "Model Type",
-  [K.REF_VALIDATE_REQUIRED_MSG]: "Pealse select field of Ref",
+  [K.REF_VALIDATE_REQUIRED_MSG]: "Please select field of Ref",
   [K.MODEL_SEARCH_PLANCEHOLDER]: "Search with keyword",
   [K.FIELDS_MAPPING_REQUIRED_MSG]: "{{name}} is required",
   [K.EDIT]: "Edit",
@@ -36,6 +36,7 @@ const locale: Locale = {
   [K.ENUM_LABEL]: "Enum",
   [K.VALIDATOR_LABEL]: "Validator",
   [K.FIELD_PARAMS]: "Params",
+  [K.ADD_FIELD_PARAMS_TIPS]: "add `{{name}}` children properties",
 };
 
 export default locale;

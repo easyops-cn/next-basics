@@ -45,3 +45,14 @@ export interface ModelFieldItem {
   type?: string;
   description?: string;
 }
+
+export interface EditorOfContext {
+  onEdit?(data: SchemaItemProperty, traceId?: string): void;
+  onRemove?(traceId: string): void;
+  onCreate?(data: SchemaItemProperty, traceId: string): void;
+  onModal?(
+    itemData: SchemaItemProperty,
+    isEdit: boolean,
+    trackId: string
+  ): void;
+}

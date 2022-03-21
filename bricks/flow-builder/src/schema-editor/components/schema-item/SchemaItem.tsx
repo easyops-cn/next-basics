@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { Checkbox, Button, Tag, Tooltip } from "antd";
 import {
   SettingOutlined,
@@ -7,10 +7,9 @@ import {
 } from "@ant-design/icons";
 import classNames from "classnames";
 import { SchemaItemProperty } from "../../interfaces";
-import { AddPropertyModal } from "../add-property-modal/AddPropertyModal";
 import editorStyles from "../../SchemaEditor.module.css";
 import { getGridTemplateColumns, filterTitleList } from "../../processor";
-import { titleList } from "../../constants";
+import { titleList, EditorContext } from "../../constants";
 import styles from "./SchemaItem.module.css";
 import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
@@ -34,64 +33,48 @@ export function SchemaItem({
   readonly,
   className,
   itemData,
-  onCreate,
-  onEdit,
-  onRemove,
   trackId,
   hideDeleteBtn,
   hiddenRootNode,
   disabledModelType,
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
-  const [visible, setVisible] = useState(false);
-  const [initValue, setInitValue] = useState({} as SchemaItemProperty);
-  const [isEdit, setEdit] = useState(false);
-
-  const handleSubmit = (
-    data: SchemaItemProperty,
-    trackId: string,
-    isEdit: boolean
-  ): void => {
-    isEdit ? onEdit?.(data, trackId) : onCreate(data, trackId);
-  };
-
-  const handleRemove = (trackId: string): void => {
-    onRemove(trackId);
-  };
-
-  const handleChildEdit = (data: SchemaItemProperty, trackId: string): void => {
-    onEdit?.(data, trackId);
-  };
-
-  const handleChildRemove = (trackId: string): void => {
-    onRemove(trackId);
-  };
+  const editorContext = useContext(EditorContext);
+  const [hover, setHover] = useState(false);
 
   const openEditModal = (): void => {
-    setEdit(true);
-    setInitValue({ ...itemData });
-    setVisible(true);
+    editorContext.onModal({ ...itemData }, true, trackId);
   };
 
   const openCreateModal = (): void => {
-    setEdit(false);
-    setInitValue({});
-    setVisible(true);
+    editorContext.onModal({} as SchemaItemProperty, false, trackId);
   };
+
+  const displayName = useMemo(
+    () => itemData.name || itemData.ref,
+    [itemData.name, itemData.ref]
+  );
 
   const offsetPadding = useMemo(() => {
     return 20 * (trackId.split("-").length - 1);
   }, [trackId]);
 
   return (
-    <>
+    <div>
       <div
         style={style}
         className={className}
         hidden={trackId === "root" && hiddenRootNode}
       >
-        <div style={{ paddingLeft: offsetPadding }}>
-          {itemData.name || "--"}
+        <div
+          title={displayName}
+          className={styles.textEllipsis}
+          style={{
+            paddingLeft: offsetPadding,
+            ...(hover ? { color: "var(--color-brand)" } : {}),
+          }}
+        >
+          {displayName}
         </div>
         <div>
           <Checkbox checked={itemData.required} disabled />
@@ -112,7 +95,7 @@ export function SchemaItem({
             </Tag>
           </Tooltip>
         </div>
-        <div className={styles.description} title={itemData.description}>
+        <div className={styles.textEllipsis} title={itemData.description}>
           {itemData.description}
         </div>
         {!readonly && (
@@ -129,7 +112,7 @@ export function SchemaItem({
               <Button
                 type="link"
                 className={editorStyles.deleteBtn}
-                onClick={() => handleRemove(trackId)}
+                onClick={() => editorContext.onRemove?.(trackId)}
               >
                 <DeleteOutlined />
               </Button>
@@ -150,9 +133,6 @@ export function SchemaItem({
           trackId={`${trackId}-${index}`}
           itemData={item}
           disabledModelType={disabledModelType}
-          onEdit={handleChildEdit}
-          onRemove={handleChildRemove}
-          onCreate={onCreate}
         />
       ))}
       {!readonly && itemData.type?.includes("object") && (
@@ -160,6 +140,9 @@ export function SchemaItem({
           <Button
             className={editorStyles.iconBtn}
             type="link"
+            title={t(K.ADD_FIELD_PARAMS_TIPS, { name: displayName })}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
             onClick={openCreateModal}
           >
             <PlusCircleOutlined />
@@ -167,15 +150,6 @@ export function SchemaItem({
           </Button>
         </div>
       )}
-      <AddPropertyModal
-        isEdit={isEdit}
-        visible={visible}
-        trackId={trackId}
-        onClose={() => setVisible(false)}
-        onSubmit={handleSubmit}
-        initValue={initValue}
-        disabledModelType={disabledModelType}
-      />
-    </>
+    </div>
   );
 }

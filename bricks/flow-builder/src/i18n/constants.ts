@@ -33,6 +33,7 @@ export enum K {
   ENUM_LABEL = "ENUM_LABEL",
   VALIDATOR_LABEL = "VALIDATOR_LABEL",
   FIELD_PARAMS = "FIELD_PARAMS",
+  ADD_FIELD_PARAMS_TIPS = "ADD_FIELD_PARAMS_TIPS",
 }
 
 export type Locale = { [key in K]: string };

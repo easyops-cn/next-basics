@@ -290,6 +290,7 @@ export function AddPropertyModal({
   return (
     <Modal
       title="property modal"
+      destroyOnClose
       visible={visible}
       onOk={handleOk}
       onCancel={handleClose}
