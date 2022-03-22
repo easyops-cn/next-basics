@@ -68,6 +68,28 @@ const filterView = (girdWrapper: GridProps, showList: string[]): GridProps => {
   return girdWrapper;
 };
 
+const filterProxySlots = (
+  filterList: string[] = []
+): Record<string, { ref: string; refSlot: string }> => {
+  const slotsProxy = {
+    header: {
+      ref: "view",
+      refSlot: "header",
+    },
+    sider: {
+      ref: "view",
+      refSlot: "sider",
+    },
+    content: {
+      ref: "view",
+      refSlot: "content",
+    },
+  };
+  if (!filterList.includes("header")) delete slotsProxy.header;
+  if (!filterList.includes("sider")) delete slotsProxy.sider;
+  return slotsProxy;
+};
+
 export async function CreateThemePage({
   projectId,
   appId,
@@ -79,6 +101,7 @@ export async function CreateThemePage({
   layoutType,
 }: CreateThemePageParams): Promise<unknown> {
   const templateId = `tpl-page-${pageTypeId}`;
+  const filterLayoutList = layoutList.split(",").filter(Boolean);
   // Currently, There is a bug when creating multiple instances of
   // sub-models which have the same parent which has an auto-increment field.
   // So we create the template and snippet in sequence.
@@ -86,6 +109,9 @@ export async function CreateThemePage({
     project: projectId,
     appId,
     templateId: templateId,
+    proxy: JSON.stringify({
+      slots: filterProxySlots(filterLayoutList),
+    }),
     type: "custom-template",
   });
   const snippet = await InstanceApi_createInstance("STORYBOARD_SNIPPET", {
@@ -99,19 +125,24 @@ export async function CreateThemePage({
     },
     layerType: "layout",
   });
-  const [, layout] = await Promise.all([
+  const [, , layout] = await Promise.all([
+    InstanceApi_createInstance("STORYBOARD_BRICK", {
+      appId,
+      brick: templateId,
+      type: "brick",
+      mountPoint: "bricks",
+      parent: snippet.instanceId,
+    }),
     InstanceApi_createInstance("STORYBOARD_BRICK", {
       appId,
       brick: "basic-bricks.easy-view",
       properties: JSON.stringify(
-        filterView(
-          EASY_VIEW_PROPERTY[layoutType],
-          layoutList.split(",").filter(Boolean)
-        )
+        filterView(EASY_VIEW_PROPERTY[layoutType], filterLayoutList)
       ),
+      ref: "view",
       type: "brick",
       mountPoint: "bricks",
-      parent: snippet.instanceId,
+      parent: tpl.instanceId,
     }),
     InstanceApi_createInstance("STORYBOARD_THEME_PAGE", {
       project: projectId,
