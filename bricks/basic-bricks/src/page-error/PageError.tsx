@@ -51,7 +51,7 @@ export function PageError(props: PageErrorProps): React.ReactElement {
           mode="guide"
           category="exception"
           name={httpCodeItem.name}
-          header={{ title: t(K[httpCodeItem.title]) }}
+          header={{ title: t(K[httpCodeItem.title]), description: props.error }}
         ></BrickIllustration>
       ) : (
         <>
