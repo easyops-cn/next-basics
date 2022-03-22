@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.172.0...@next-bricks/basic-bricks@1.173.0) (2022-03-22)
+
+
+### Features
+
+* basic-bricks.page-error支持展示错误详情 refs DEVOPS_MANAGEMENT-347 ([03ee3e0](https://github.com/easyops-cn/next-basics/commit/03ee3e0dd98555a32ebe8aec80bd4d6787d00b43))
+
+
+
+
+
 # [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.171.2...@next-bricks/basic-bricks@1.172.0) (2022-03-22)
 
 
