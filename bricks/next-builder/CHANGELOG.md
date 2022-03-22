@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.120.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.119.0...@next-bricks/next-builder@1.120.0) (2022-03-22)
+
+
+### Features
+
+* create easy view for tempalte ([0b341fd](https://github.com/easyops-cn/next-basics/commit/0b341fd9515b63f303d06340fa712130ef7df289))
+* support create theme page with easy-view ([6e8c853](https://github.com/easyops-cn/next-basics/commit/6e8c85345a3ae970ea8abd9d678c58eefbbf5700))
+* unit test ([9fb540e](https://github.com/easyops-cn/next-basics/commit/9fb540ec0fc75c57287130fbca0a6ce12912081b))
+
+
+
+
+
 # [1.119.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.118.0...@next-bricks/next-builder@1.119.0) (2022-03-22)
 
 
