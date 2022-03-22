@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.171.2...@next-bricks/basic-bricks@1.172.0) (2022-03-22)
+
+
+### Bug Fixes
+
+* **resizable-box:** allow setting style when not resizing ([0a4c5f9](https://github.com/easyops-cn/next-basics/commit/0a4c5f980b491f8afe6157d007647aee35d1c12b))
+* use debounceByAnimationFrame ([41723db](https://github.com/easyops-cn/next-basics/commit/41723dbde0cc51b5ee0c17c4e34c99af227b5340))
+
+
+### Features
+
+* add new brick: resizable-box ([a60e661](https://github.com/easyops-cn/next-basics/commit/a60e661099201a234ce6d5e6efa6e45bfd15cedd))
+
+
+
+
+
 ## [1.171.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.171.1...@next-bricks/basic-bricks@1.171.2) (2022-03-16)
 
 

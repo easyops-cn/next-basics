@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.119.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.118.0...@next-bricks/next-builder@1.119.0) (2022-03-22)
+
+
+### Bug Fixes
+
+* do not toggle inspecting after select brick ([b8c8dd8](https://github.com/easyops-cn/next-basics/commit/b8c8dd84dfb00f1fc128f972322c640e6f5cc22b))
+* move resizable as a standalone brick ([49118e6](https://github.com/easyops-cn/next-basics/commit/49118e62adbee2c612701d44c78f04f7f0f85f91))
+* preview on new window only if specified ([e87b12b](https://github.com/easyops-cn/next-basics/commit/e87b12bc609fe2b73c85aea89ec6993ee802e2c9))
+* use debounceByAnimationFrame ([41723db](https://github.com/easyops-cn/next-basics/commit/41723dbde0cc51b5ee0c17c4e34c99af227b5340))
+
+
+### Features
+
+* **workbench-tree:** support click on tree node ([bd6953d](https://github.com/easyops-cn/next-basics/commit/bd6953d8e1de44b3ae877f86be324e690f4c5bc1))
+
+
+
+
+
 # [1.118.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.117.2...@next-bricks/next-builder@1.118.0) (2022-03-16)
 
 
