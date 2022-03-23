@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
 import { SchemaEditor } from "./SchemaEditor";
-import { SchemaRootNodeProperty } from "./interfaces";
+import { SchemaRootNodeProperty, ModelDefinition } from "./interfaces";
 
 /**
  * @id shared-editors.schema-editor
@@ -62,6 +62,18 @@ export class SchemaEditorElement extends FormItemElement {
   })
   disabledModelType: boolean;
 
+  /**
+   * @kind ModelDefinition[]
+   * @required -️
+   * @default false
+   * @description 模型定义
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  modelDefinitionList: ModelDefinition[] = [];
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -94,6 +106,7 @@ export class SchemaEditorElement extends FormItemElement {
             readonly={this.readonly}
             hiddenRootNode={this.hiddenRootNode}
             disabledModelType={this.disabledModelType}
+            modelDefinitionList={this.modelDefinitionList}
           />
         </BrickWrapper>,
         this

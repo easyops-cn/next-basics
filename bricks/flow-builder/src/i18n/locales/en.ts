@@ -3,11 +3,12 @@ import { Locale, K } from "../constants";
 const locale: Locale = {
   [K.FLOW_BUILDER]: "Flow Builder",
   [K.SCHEMA_ITEM_NORMAL]: "Normal Interface",
-  [K.SCHEMA_ITEM_REF]: "Reference Interface",
-  [K.PATTERN_INPUT_PLANCEHOLDER]: "Please input RegExp",
-  [K.ENUM_INPUT_PLANCEHOLDER]: "Please input enum value",
-  [K.COMPARE_METHOD_PLANCEHOLDER]: "Compare method",
-  [K.COMPARE_VALUE_PLANCEHOLDER]:
+  [K.SCHEMA_ITEM_REF]: "Reference",
+  [K.SCHEMA_ITEM_MODEL]: "Model",
+  [K.PATTERN_INPUT_PLACEHOLDER]: "Please input RegExp",
+  [K.ENUM_INPUT_PLACEHOLDER]: "Please input enum value",
+  [K.COMPARE_METHOD_PLACEHOLDER]: "Compare method",
+  [K.COMPARE_VALUE_PLACEHOLDER]:
     "Please select compare method before input number",
   [K.FIELDS_MAPPING_EDIT_TOOLTIP]:
     "Can't edit sub-attributes under the `object[]` type",
@@ -15,7 +16,7 @@ const locale: Locale = {
   [K.SIMPLE_TYPE]: "Simple Type",
   [K.MODEL_TYPE]: "Model Type",
   [K.REF_VALIDATE_REQUIRED_MSG]: "Please select field of Ref",
-  [K.MODEL_SEARCH_PLANCEHOLDER]: "Search with keyword",
+  [K.MODEL_SEARCH_PLACEHOLDER]: "Search with keyword",
   [K.FIELDS_MAPPING_REQUIRED_MSG]: "{{name}} is required",
   [K.EDIT]: "Edit",
   [K.CANCEL]: "Cancel",

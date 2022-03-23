@@ -194,7 +194,7 @@ export function AddPropertyModal({
               <Select
                 mode="tags"
                 style={{ width: "100%" }}
-                placeholder={t(K.ENUM_INPUT_PLANCEHOLDER)}
+                placeholder={t(K.ENUM_INPUT_PLACEHOLDER)}
               ></Select>
             </Form.Item>
           )

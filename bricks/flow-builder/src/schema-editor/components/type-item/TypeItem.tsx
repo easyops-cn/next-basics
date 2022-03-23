@@ -97,7 +97,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
         filterOption={false}
         onChange={handleChange}
         onSearch={debounceSearch}
-        placeholder={t(K.MODEL_SEARCH_PLANCEHOLDER)}
+        placeholder={t(K.MODEL_SEARCH_PLACEHOLDER)}
       >
         {mixGroupList.map((item) => (
           <Select.OptGroup key={item.group} label={item.group}>

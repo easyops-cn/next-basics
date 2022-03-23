@@ -96,7 +96,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         value={refValue.name}
         showSearch
         filterOption={false}
-        placeholder={t(K.MODEL_SEARCH_PLANCEHOLDER)}
+        placeholder={t(K.MODEL_SEARCH_PLACEHOLDER)}
         onChange={handleModelChange}
         onSearch={debounceSearch}
       >

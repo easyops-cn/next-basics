@@ -4,6 +4,8 @@ import {
   SettingOutlined,
   DeleteOutlined,
   PlusCircleOutlined,
+  RightOutlined,
+  DownOutlined,
 } from "@ant-design/icons";
 import classNames from "classnames";
 import { SchemaItemProperty } from "../../interfaces";
@@ -17,10 +19,10 @@ import { useTranslation } from "react-i18next";
 export interface SchemaItemProps {
   className?: string;
   style?: React.CSSProperties;
-  trackId: string;
-  onEdit?: (data: SchemaItemProperty, trackId: string) => void;
-  onRemove?: (trackId: string) => void;
-  onCreate?: (data: SchemaItemProperty, trackId: string) => void;
+  traceId: string;
+  onEdit?: (data: SchemaItemProperty, traceId: string) => void;
+  onRemove?: (traceId: string) => void;
+  onCreate?: (data: SchemaItemProperty, traceId: string) => void;
   itemData: SchemaItemProperty;
   hideDeleteBtn?: boolean;
   readonly?: boolean;
@@ -33,7 +35,7 @@ export function SchemaItem({
   readonly,
   className,
   itemData,
-  trackId,
+  traceId,
   hideDeleteBtn,
   hiddenRootNode,
   disabledModelType,
@@ -41,13 +43,21 @@ export function SchemaItem({
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const editorContext = useContext(EditorContext);
   const [hover, setHover] = useState(false);
+  const [expand, setExpand] = useState(false);
+  const {
+    modelDefinitionList,
+    onModal,
+    onRemove,
+    showModelDefinition,
+    hideModelDefinition,
+  } = editorContext;
 
   const openEditModal = (): void => {
-    editorContext.onModal({ ...itemData }, true, trackId);
+    onModal?.({ ...itemData }, true, traceId);
   };
 
   const openCreateModal = (): void => {
-    editorContext.onModal({} as SchemaItemProperty, false, trackId);
+    onModal?.({} as SchemaItemProperty, false, traceId);
   };
 
   const displayName = useMemo(
@@ -56,15 +66,52 @@ export function SchemaItem({
   );
 
   const offsetPadding = useMemo(() => {
-    return 20 * (trackId.split("-").length - 1);
-  }, [trackId]);
+    return 20 * (traceId.split("-").length - 1);
+  }, [traceId]);
+
+  const modelDefinition = useMemo(() => {
+    return modelDefinitionList.find(
+      (item) =>
+        item.name ===
+        (itemData.ref ? itemData.ref.split(".")[0] : itemData.type)
+    );
+  }, [modelDefinitionList, itemData.type, itemData.ref]);
+
+  const handleExpand = (): void => {
+    setExpand(true);
+    if (itemData.ref) {
+      const [, field] = itemData.ref.split(".");
+      showModelDefinition(
+        field === "*"
+          ? modelDefinition
+          : {
+              name: itemData.ref,
+              fields: modelDefinition.fields.filter(
+                (item) => item.name === field
+              ),
+            },
+        traceId
+      );
+    } else {
+      showModelDefinition(modelDefinition, traceId);
+    }
+  };
+
+  const handleFold = (): void => {
+    setExpand(false);
+    hideModelDefinition(traceId);
+  };
+
+  const handleClick = (): void => {
+    expand ? handleFold() : handleExpand();
+  };
 
   return (
-    <div>
+    <div className={classNames({ [styles.highlight]: expand })}>
       <div
         style={style}
         className={className}
-        hidden={trackId === "root" && hiddenRootNode}
+        hidden={traceId === "root" && hiddenRootNode}
       >
         <div
           title={displayName}
@@ -74,7 +121,18 @@ export function SchemaItem({
             ...(hover ? { color: "var(--color-brand)" } : {}),
           }}
         >
-          {displayName}
+          {modelDefinition ? (
+            <span onClick={handleClick} style={{ cursor: "pointer" }}>
+              {expand ? (
+                <DownOutlined className={styles.caret} />
+              ) : (
+                <RightOutlined className={styles.caret} />
+              )}
+              {displayName}
+            </span>
+          ) : (
+            displayName
+          )}
         </div>
         <div>
           <Checkbox checked={itemData.required} disabled />
@@ -112,7 +170,7 @@ export function SchemaItem({
               <Button
                 type="link"
                 className={editorStyles.deleteBtn}
-                onClick={() => editorContext.onRemove?.(trackId)}
+                onClick={() => onRemove?.(traceId)}
               >
                 <DeleteOutlined />
               </Button>
@@ -123,14 +181,14 @@ export function SchemaItem({
       {itemData.fields?.map((item, index) => (
         <SchemaItem
           className={editorStyles.schemaItem}
-          readonly={readonly}
+          readonly={readonly || !!modelDefinition}
           style={{
             gridTemplateColumns: getGridTemplateColumns(
               filterTitleList(titleList, readonly)
             ),
           }}
           key={index}
-          trackId={`${trackId}-${index}`}
+          traceId={`${traceId}-${index}`}
           itemData={item}
           disabledModelType={disabledModelType}
         />

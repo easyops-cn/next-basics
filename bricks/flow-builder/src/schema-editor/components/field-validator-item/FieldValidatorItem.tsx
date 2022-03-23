@@ -72,7 +72,7 @@ export function FieldValidatorItem({
     <div>
       {fieldValue.type === "string" && (
         <Input
-          placeholder={t(K.PATTERN_INPUT_PLANCEHOLDER)}
+          placeholder={t(K.PATTERN_INPUT_PLACEHOLDER)}
           value={fieldValue.pattern}
           onChange={handleRegChange}
         />

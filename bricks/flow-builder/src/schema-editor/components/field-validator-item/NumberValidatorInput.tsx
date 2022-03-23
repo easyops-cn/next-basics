@@ -45,7 +45,7 @@ export function NumberValidatorInput(
             <Select
               value={item.method}
               style={{ width: 100 }}
-              placeholder={t(K.COMPARE_METHOD_PLANCEHOLDER)}
+              placeholder={t(K.COMPARE_METHOD_PLACEHOLDER)}
               onChange={(value) => handleChange(value, "method", index)}
             >
               {compareMethodList.map((name) => (
@@ -59,7 +59,7 @@ export function NumberValidatorInput(
               style={{ width: "calc(100% - 100px)" }}
               min={0}
               step={1}
-              placeholder={t(K.COMPARE_VALUE_PLANCEHOLDER)}
+              placeholder={t(K.COMPARE_VALUE_PLACEHOLDER)}
               onChange={(value) =>
                 handleChange(value as number, "value", index)
               }

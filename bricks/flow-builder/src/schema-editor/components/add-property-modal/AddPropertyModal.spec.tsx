@@ -58,7 +58,7 @@ describe("AddPropertyModal", () => {
     ).toEqual(1);
 
     wrapper
-      .find("Select[placeholder='ENUM_INPUT_PLANCEHOLDER']")
+      .find("Select[placeholder='ENUM_INPUT_PLACEHOLDER']")
       .invoke("onChange")(["a", "b", "c"]);
 
     await wrapper.find(Form).prop("form").validateFields();
@@ -145,7 +145,7 @@ describe("AddPropertyModal", () => {
     wrapper.update();
 
     wrapper
-      .find("Select[placeholder='ENUM_INPUT_PLANCEHOLDER']")
+      .find("Select[placeholder='ENUM_INPUT_PLACEHOLDER']")
       .invoke("onChange")(["10", "20", "30"]);
 
     await wrapper.find(Form).prop("form").validateFields();

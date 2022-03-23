@@ -6,7 +6,11 @@ import { get, set } from "lodash";
 import { SchemaItem } from "./components/schema-item/SchemaItem";
 import { AddPropertyModal } from "./components/add-property-modal/AddPropertyModal";
 import { titleList, EditorContext } from "./constants";
-import { SchemaItemProperty, SchemaRootNodeProperty } from "./interfaces";
+import {
+  SchemaItemProperty,
+  SchemaRootNodeProperty,
+  ModelDefinition,
+} from "./interfaces";
 import {
   getGridTemplateColumns,
   calcItemPosition,
@@ -22,6 +26,7 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   onChange?: (data: SchemaRootNodeProperty) => void;
   hiddenRootNode?: boolean;
   disabledModelType: boolean;
+  modelDefinitionList?: ModelDefinition[];
 }
 
 interface ItemData {
@@ -34,12 +39,12 @@ export const SchemaEditorWrapper = forwardRef<
   HTMLDivElement,
   SchemaEditorProps
 >(function LegacySchemaEditor(props, ref): React.ReactElement {
-  const { hiddenRootNode, disabledModelType } = props;
-  const rootTrackId = "root";
+  const { hiddenRootNode, disabledModelType, modelDefinitionList = [] } = props;
+  const rootTraceId = "root";
   const [visible, setVisible] = useState(false);
   const [curItemData, SetCurItemData] = useState<ItemData>({
     initValue: {} as SchemaItemProperty,
-    trackId: rootTrackId,
+    trackId: rootTraceId,
   });
   const [property, setProperty] = useState<SchemaItemProperty>(
     processFormInitvalue({ name: props.name, ...props.value })
@@ -64,22 +69,26 @@ export const SchemaEditorWrapper = forwardRef<
     [processedTitleList]
   );
 
-  const handleAdd = (data: SchemaItemProperty, traceId?: string): void => {
+  const handleAdd = (
+    data: SchemaItemProperty | SchemaItemProperty[],
+    traceId?: string,
+    emitOnChange = true
+  ): void => {
     const mutableProps = { ...property };
 
-    if (traceId === rootTrackId) {
+    if (traceId === rootTraceId) {
       mutableProps.fields = mutableProps.fields || [];
-      mutableProps.fields.push(data);
+      mutableProps.fields.push(...[].concat(data));
     } else {
       const path = calcItemPosition(traceId);
 
       const find: SchemaItemProperty = get(mutableProps, path);
       find.fields = find.fields || [];
-      find.fields.push(data);
+      find.fields.push(...[].concat(data));
     }
 
     setProperty(mutableProps);
-    props.onChange?.(processFormData(mutableProps));
+    emitOnChange && props.onChange?.(processFormData(mutableProps));
   };
 
   const handleEdit = (data: SchemaItemProperty, traceId: string): void => {
@@ -114,6 +123,28 @@ export const SchemaEditorWrapper = forwardRef<
     props.onChange?.(processFormData(mutableProps));
   };
 
+  const showModelDefinition = (
+    modelDefinition: ModelDefinition,
+    traceId: string
+  ): void => {
+    // no need emit onChange
+    handleAdd(modelDefinition.fields, traceId, false);
+  };
+
+  const hideModelDefinition = (traceId: string): void => {
+    const mutableProps = { ...property };
+    if (traceId === rootTraceId) {
+      delete mutableProps.fields;
+    } else {
+      const path = calcItemPosition(traceId);
+      const find = get(mutableProps, path);
+
+      delete find.fields;
+    }
+
+    setProperty(mutableProps);
+  };
+
   const handleModal = (
     itemData: SchemaItemProperty,
     isEdit: boolean,
@@ -138,10 +169,13 @@ export const SchemaEditorWrapper = forwardRef<
   return (
     <EditorContext.Provider
       value={{
+        modelDefinitionList: modelDefinitionList,
         onEdit: handleEdit,
         onRemove: handleRemove,
         onCreate: handleAdd,
         onModal: handleModal,
+        showModelDefinition,
+        hideModelDefinition,
       }}
     >
       <div className={styles.editor} ref={ref}>
@@ -156,7 +190,7 @@ export const SchemaEditorWrapper = forwardRef<
             style={{ gridTemplateColumns: gridTemplateColumns }}
             itemData={property}
             readonly={props.readonly}
-            trackId={rootTrackId}
+            traceId={rootTraceId}
             hideDeleteBtn={true}
             hiddenRootNode={hiddenRootNode}
             disabledModelType={disabledModelType}

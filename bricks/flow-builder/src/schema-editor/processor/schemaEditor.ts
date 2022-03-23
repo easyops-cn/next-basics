@@ -1,4 +1,4 @@
-import { isNil, omit } from "lodash";
+import { isNil, omit, uniq } from "lodash";
 import {
   processValidatorInitValue,
   formatValidatorData,
@@ -176,7 +176,8 @@ export function collectFields(
 
     result.push(property);
 
-    if (item.fields) {
+    if (item.fields && item.type?.includes("object")) {
+      // 只有 object/object[] 类型的 fields 才需要提交, 其他 fields 仅为前台引用模型展示用
       property.fields = [];
       collectFields(
         item.fields,
@@ -212,7 +213,7 @@ export function processFormData(
 
   return {
     ...result,
-    required: requiredList,
+    required: uniq(requiredList),
     default: defaultData,
     ...(importSet.size !== 0 ? { import: Array.from(importSet) } : {}),
   };
