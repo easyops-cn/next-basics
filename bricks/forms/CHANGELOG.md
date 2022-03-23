@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.212.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.211.3...@next-bricks/forms@1.212.0) (2022-03-23)
+
+
+### Features
+
+* raido add type ([a6e92b3](https://github.com/easyops-cn/next-basics/commit/a6e92b338b46a61c1a1463d63bbf2e669c9042b3))
+
+
+
+
+
 ## [1.211.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.211.2...@next-bricks/forms@1.211.3) (2022-03-23)
 
 
