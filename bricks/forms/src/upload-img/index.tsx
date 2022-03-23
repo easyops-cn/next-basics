@@ -292,6 +292,7 @@ export class UploadImgElement extends FormItemElement {
             useFullUrlPath={this.useFullUrlPath}
             getPreview={this.getPreview}
             showMentions={this.showMentions}
+            labelTooltip={this.labelTooltip}
           />
         </BrickWrapper>,
         this
