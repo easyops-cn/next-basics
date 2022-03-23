@@ -38,42 +38,51 @@
   }
 }
 
-.circleIconRadio {
+.specialIconRadio {
   position: relative;
   display: inline-block;
   width: auto;
   margin-right: 80px;
   text-align: center;
   cursor: pointer;
+  line-height: 1;
   > input[type="radio"] {
     width: 0;
     height: 0;
-    &:checked ~ .circleIconContent,
-    &:checked ~ .circleIconContent .circleIcon {
+    &:checked ~ .iconContent,
+    &:checked ~ .iconContent .circleIcon,
+    &:checked ~ .iconContent .squareIcon {
       border-color: var(--color-brand);
       color: var(--color-brand);
       border-width: var(--border-width-double-base);
     }
   }
-  .circleIconContent {
+  .iconContent {
     color: var(--color-normal-text);
-    .circleIcon {
+    .circleIcon,
+    .squareIcon {
       display: flex;
       flex-direction: column;
       justify-content: center;
       margin: auto auto 6px;
       background: var(--color-fill-bg-container-1);
-      border-radius: 50%;
       border: var(--border-width-base) solid var(--color-border-divider-line);
       width: 94px;
       height: 94px;
       font-size: 46px;
     }
+    .circleIcon {
+      border-radius: 50%;
+    }
+    .squareIcon {
+      border-radius: 0;
+    }
   }
 
   &:not(.disabledIconRadio):hover {
-    .circleIconContent {
-      .circleIcon {
+    .iconContent {
+      .circleIcon,
+      .squareIcon {
         border-color: var(--color-brand-hover);
       }
     }
@@ -83,12 +92,13 @@
 .disabledIconRadio {
   cursor: not-allowed;
   .content,
-  .circleIconContent .circleIcon {
+  .iconContent .circleIcon,
+  .iconContent .squareIcon {
     background: var(--color-fill-bg-base-1);
     border-color: var(--color-border-divider-line);
   }
   .content,
-  .circleIconContent {
+  .iconContent {
     color: var(--color-disabled-text);
   }
 }

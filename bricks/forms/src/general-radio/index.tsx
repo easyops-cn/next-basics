@@ -15,7 +15,12 @@ import { GeneralRadio } from "./GeneralRadio";
 import { RadioGroupButtonStyle } from "antd/lib/radio";
 import { UiType } from "../interfaces";
 
-export type RadioType = "button" | "default" | "icon" | "icon-circle";
+export type RadioType =
+  | "button"
+  | "default"
+  | "icon"
+  | "icon-circle"
+  | "icon-square";
 
 /**
  * @id forms.general-radio

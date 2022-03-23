@@ -25,7 +25,7 @@ export interface GeneralRadioProps extends FormItemWrapperProps {
 
 interface IconRadioGroupProps {
   options: GeneralOption[];
-  type: "icon" | "icon-circle";
+  type: "icon" | "icon-circle" | "icon-square";
   disabled?: boolean;
   name?: string;
   value?: any;
@@ -54,7 +54,8 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
           className={classNames({
             [styles.disabledIconRadio]: disabled || item.disabled,
             [styles.iconRadio]: type === "icon",
-            [styles.circleIconRadio]: type === "icon-circle",
+            [styles.specialIconRadio]:
+              type === "icon-circle" || type === "icon-square",
           })}
           key={item.value}
         >
@@ -81,9 +82,19 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                 <div>{item.label}</div>
               </div>
             ) : (
-              <div className={styles.circleIconContent}>
+              <div
+                className={classNames({
+                  [styles.iconContent]:
+                    type === "icon-circle" || type === "icon-square",
+                })}
+              >
                 {item.icon && (
-                  <div className={styles.circleIcon}>
+                  <div
+                    className={classNames({
+                      [styles.circleIcon]: type === "icon-circle",
+                      [styles.squareIcon]: type === "icon-square",
+                    })}
+                  >
                     <GeneralIcon icon={item.icon} />
                   </div>
                 )}
@@ -131,7 +142,9 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
   return (
     <div className={uiType === "dashboard" ? styles.dashboardRadio : ""}>
       <FormItemWrapper {...props}>
-        {props.type === "icon" || props.type === "icon-circle" ? (
+        {props.type === "icon" ||
+        props.type === "icon-circle" ||
+        props.type === "icon-square" ? (
           <IconRadioGroup
             value={props.value}
             onChange={handleChange}
