@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.211.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.211.2...@next-bricks/forms@1.211.3) (2022-03-23)
+
+
+### Bug Fixes
+
+* **forms:** support labelTooltip ([70dbe54](https://github.com/easyops-cn/next-basics/commit/70dbe542433c5191dad87d3154382aef767cc477))
+
+
+
+
+
 ## [1.211.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.211.1...@next-bricks/forms@1.211.2) (2022-03-22)
 
 **Note:** Version bump only for package @next-bricks/forms
