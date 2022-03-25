@@ -2,7 +2,7 @@ import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Form } from "@ant-design/compatible";
 import { Card, Input, Button, Spin, Tabs, Tooltip, Row } from "antd";
-import { get, debounce } from "lodash";
+import { debounce } from "lodash";
 import { FormComponentProps } from "@ant-design/compatible/lib/form/Form";
 import {
   getHistory,
@@ -236,6 +236,7 @@ export class LegacyGeneralLogin extends React.Component<
     const service = params.get("service");
     const featureFlags = getRuntime().getFeatureFlags();
     const misc = getRuntime().getMiscSettings();
+    const lastMethod = this.storage.getItem(lastLoginMethod);
     this.loginMethods = misc.enabled_login_types ?? ["easyops"];
     this.state = {
       loggingIn: false,
@@ -243,9 +244,9 @@ export class LegacyGeneralLogin extends React.Component<
       imageHeight: window.innerHeight,
       loginErrorMsg: "",
       currentLoginMethod:
-        this.storage.getItem(lastLoginMethod) ??
-        this.loginMethods?.[0] ??
-        "easyops",
+        lastMethod && this.loginMethods?.includes(lastMethod)
+          ? lastMethod
+          : this.loginMethods?.[0] ?? "easyops",
       yzm: "",
       yzm_value: "",
       security_codeEnabled: getRuntime().getFeatureFlags()["security-code"],

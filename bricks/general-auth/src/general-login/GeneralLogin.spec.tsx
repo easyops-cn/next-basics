@@ -33,7 +33,6 @@ const spyOnMFALogin = jest.spyOn(
   apiGatewaySdk,
   "MfaApi_generateRandomTotpSecret"
 );
-jest.mock("@next-libs/storage");
 const spyOnMFASetRule = jest.spyOn(apiGatewaySdk, "MfaApi_verifyUserIsSetRule");
 const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
@@ -127,6 +126,54 @@ describe("GeneralLogin", () => {
     expect(storage["LAST_LOGIN_METHOD"]).toEqual("easyops");
     expect(storage["LAST_LOGIN_TIME"]).toEqual(timeStamp);
   });
+  it("should work when last login method doesn't exist in misc", (done) => {
+    const invalidStorage = {
+      LAST_LOGIN_METHOD: "wx",
+      LAST_LOGIN_TIME: timeStamp,
+    } as any;
+    (JsonStorage as jest.Mock).mockImplementation(() => {
+      return {
+        getItem: (key: string): string => {
+          return invalidStorage[key];
+        },
+        setItem: (key: string, value: string): void => {
+          invalidStorage[key] = value;
+        },
+      };
+    });
+    const form = {
+      getFieldDecorator: () => (comp: React.Component) => comp,
+      validateFields: jest.fn().mockImplementation(async (fn) => {
+        await fn(null, {
+          username: "mock-user",
+          password: "mock-pswd",
+        });
+        expect(spyOnAuthenticate).toBeCalledWith({
+          org: 1,
+          username: "mock-user",
+          userInstanceId: "abc",
+          accessRule: "cmdb",
+        });
+        expect(spyOnReloadMicroApps).toBeCalled();
+        expect(spyOnReloadSharedData).toBeCalled();
+        expect(spyOnHistoryPush).toBeCalledWith(createLocation("/mock-from"));
+        done();
+      }),
+    };
+    const wrapper = shallow(
+      <LegacyGeneralLogin form={form as any} {...i18nProps} />
+    );
+    expect(wrapper).toBeTruthy();
+    expect(wrapper.find(Card).find(Tabs).prop("activeKey")).toEqual("easyops");
+    spyOnLogin.mockResolvedValueOnce({
+      loggedIn: true,
+      username: "mock-user",
+      userInstanceId: "abc",
+      org: 1,
+      accessRule: "cmdb",
+    });
+    wrapper.find(Form).at(1).simulate("submit", new Event("submit"));
+  });
   it("should esb login successfully", (done) => {
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
@@ -163,7 +210,6 @@ describe("GeneralLogin", () => {
     } as any);
     wrapper.find(Form).at(0).simulate("submit", new Event("submit"));
   });
-
   it("should work when open mfa ", (done) => {
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
