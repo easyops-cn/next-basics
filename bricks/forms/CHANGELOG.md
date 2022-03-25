@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.213.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.212.0...@next-bricks/forms@1.213.0) (2022-03-25)
+
+
+### Bug Fixes
+
+* **forms:** 修复maxNumber为1时图片无法删除 ([6c4046f](https://github.com/easyops-cn/next-basics/commit/6c4046fd2d83fb46c9bcb6c9442b3730f2899d93))
+
+
+### Features
+
+* **forms:** rules.validator可获取整个表单项数据 ([1ee9a49](https://github.com/easyops-cn/next-basics/commit/1ee9a49f77270ab337c8147cf48492f8a46db28a))
+
+
+
+
+
 # [1.212.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.211.3...@next-bricks/forms@1.212.0) (2022-03-23)
 
 

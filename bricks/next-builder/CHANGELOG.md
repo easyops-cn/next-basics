@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.122.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.121.0...@next-bricks/next-builder@1.122.0) (2022-03-25)
+
+
+### Features
+
+* support clipboard in workbench ([efdd5ec](https://github.com/easyops-cn/next-basics/commit/efdd5eca2ff3264c445bdd157b85efaa394bcaed))
+* support move node up or down ([c666fc0](https://github.com/easyops-cn/next-basics/commit/c666fc0d702fe08ce8880cb4f83f33c8b20a4fe4))
+
+
+
+
+
 # [1.121.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.120.1...@next-bricks/next-builder@1.121.0) (2022-03-25)
 
 
