@@ -205,4 +205,35 @@ describe("ColumnComponent", () => {
     customValidator({ message: "unique" }, "a", validatorFn);
     expect(validatorFn).toBeCalledWith("unique");
   });
+
+  it("validator should work", () => {
+    const column = {
+      ...inputColumn,
+      rules: [
+        {
+          validator: (rule, value, cb, fullValue) => cb(fullValue),
+        },
+      ],
+    };
+    const formValue = [{ input: "a" }, { input: "b" }];
+    const rowIndex = 0;
+    const wrapper = shallow(
+      <ColumnComponent
+        column={column}
+        field={field}
+        rowIndex={rowIndex}
+        hasLabel={true}
+        formValue={formValue}
+      />
+    );
+
+    const validatorFn = jest.fn();
+    const customValidator = wrapper.find(Form.Item).prop("rules")[0].validator;
+    customValidator({ message: "validator" }, "a", validatorFn);
+    expect(validatorFn).toBeCalledWith({
+      formValue,
+      rowIndex,
+      rowValue: formValue[rowIndex],
+    });
+  });
 });

@@ -4,7 +4,8 @@ import {
   CascaderOptionType,
   FieldNamesType,
 } from "antd/lib/cascader";
-import { Rule } from "antd/lib/form";
+import { Rule, RuleObject } from "antd/lib/form";
+import { StoreValue } from "antd/lib/form/interface";
 
 export enum ComponentType {
   INPUT = "input",
@@ -167,7 +168,19 @@ export interface BasicColumn {
   /**
    * 表单项校验规则
    */
-  rules?: ({ unique: boolean; message: string } & Rule)[];
+  rules?: ({ unique: boolean; message: string } & Rule & {
+      message?: string;
+      validator: (
+        rule: RuleObject,
+        value: StoreValue,
+        callback: (error?: string) => void,
+        fullValue: {
+          formValue: Record<string, any>[];
+          rowValue: Record<string, any>;
+          rowIndex: number;
+        }
+      ) => Promise<void | any> | void;
+    })[];
   /**
    * 表单项所占份额
    */
