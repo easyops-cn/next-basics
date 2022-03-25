@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.14.0...@next-bricks/general-auth@1.14.1) (2022-03-25)
+
+
+### Bug Fixes
+
+* **login:** 用最后一次登录方式前判断下在不在配置内 ([baa7c0f](https://github.com/easyops-cn/next-basics/commit/baa7c0fcceafde303d2cb15f8d25660ca461919b))
+
+
+
+
+
 # [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.13.1...@next-bricks/general-auth@1.14.0) (2022-03-02)
 
 
