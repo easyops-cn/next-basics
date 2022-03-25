@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.121.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.120.1...@next-bricks/next-builder@1.121.0) (2022-03-25)
+
+
+### Features
+
+* support create theme page select layout ([#1117](https://github.com/easyops-cn/next-basics/issues/1117)) ([371a94d](https://github.com/easyops-cn/next-basics/commit/371a94d85560e38201d361947ae63f563cb9171a))
+
+
+
+
+
 ## [1.120.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.120.0...@next-bricks/next-builder@1.120.1) (2022-03-23)
 
 **Note:** Version bump only for package @next-bricks/next-builder
