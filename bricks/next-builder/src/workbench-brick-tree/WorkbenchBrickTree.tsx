@@ -1,6 +1,6 @@
 // istanbul ignore file
 // For temporary usage only, will change soon.
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
   useBuilderData,
   useBuilderDataManager,
@@ -17,7 +17,6 @@ export interface WorkbenchBrickTreeProps {
   type?: BuilderRuntimeNode["type"];
   placeholder?: string;
   activeInstanceId?: string;
-  onNodeClick?(node: BuilderRuntimeNode): void;
 }
 
 type WorkbenchBrickTreeNode =
@@ -38,21 +37,11 @@ export function WorkbenchBrickTree({
   type,
   placeholder,
   activeInstanceId,
-  onNodeClick,
 }: WorkbenchBrickTreeProps): React.ReactElement {
   const { nodes, edges } = useBuilderData();
   const rootNode = useBuilderNode({ isRoot: true });
   const hoverNodeUid = useHoverNodeUid();
   const manager = useBuilderDataManager();
-
-  useEffect(() => {
-    const fn = manager.onNodeClick((event) => {
-      onNodeClick(event.detail);
-    });
-    return () => {
-      fn();
-    };
-  }, [manager, onNodeClick]);
 
   const clickFactory = useCallback(
     ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {

@@ -11,7 +11,8 @@ import {
 import {
   type BuilderDataManager,
   BuilderProvider,
-  BuilderRuntimeNode,
+  type BuilderRuntimeNode,
+  type EventDetailOfNodeReorder,
 } from "@next-core/editor-bricks-helper";
 import type {
   BuilderCustomTemplateNode,
@@ -37,6 +38,24 @@ export class WorkbenchStoreElement extends UpdatingElement {
   @property({ attribute: false })
   templateSources: BuilderCustomTemplateNode[];
 
+  @event({ type: "node.click" })
+  private _nodeClickEvent: EventEmitter<BuilderRuntimeNode>;
+
+  private _handleNodeClick = (event: CustomEvent<BuilderRuntimeNode>): void => {
+    this._nodeClickEvent.emit(event.detail);
+  };
+
+  @event({
+    type: "node.reorder",
+  })
+  private _nodeReorderEmitter: EventEmitter<EventDetailOfNodeReorder>;
+
+  private _handleNodeReorder = (
+    event: CustomEvent<EventDetailOfNodeReorder>
+  ): void => {
+    this._nodeReorderEmitter.emit(event.detail);
+  };
+
   @event({
     type: "node.delete",
   })
@@ -49,6 +68,22 @@ export class WorkbenchStoreElement extends UpdatingElement {
     this._nodeDeleteEmitter.emit({
       ...node,
     });
+  }
+
+  // istanbul ignore next
+  @method()
+  moveNode(node: BuilderRuntimeNode, direction: "up" | "down"): void {
+    this._managerRef.current.moveNode(node, direction);
+  }
+
+  // istanbul ignore next
+  @method()
+  moveMountPoint(
+    node: BuilderRuntimeNode,
+    mountPoint: string,
+    direction: "up" | "down"
+  ): void {
+    this._managerRef.current.moveMountPoint(node, mountPoint, direction);
   }
 
   private _managerRef = createRef<BuilderDataManager>();
@@ -76,6 +111,8 @@ export class WorkbenchStoreElement extends UpdatingElement {
               ref={this._managerRef}
               dataSource={this.dataSource}
               templateSources={this.templateSources}
+              onNodeClick={this._handleNodeClick}
+              onNodeReorder={this._handleNodeReorder}
             />
           </BuilderProvider>
         </BrickWrapper>,
