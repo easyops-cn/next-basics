@@ -8,6 +8,8 @@ import type {
 import {
   type BuilderDataManager,
   useBuilderDataManager,
+  type BuilderRuntimeNode,
+  type EventDetailOfNodeReorder,
 } from "@next-core/editor-bricks-helper";
 import { BuilderDataType } from "../builder-container/interfaces";
 import { useHoverOnBrick } from "./useHoverOnBrick";
@@ -16,10 +18,17 @@ import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
 export interface WorkbenchStoreProps {
   dataSource?: BuilderRouteOrBrickNode[];
   templateSources?: BuilderCustomTemplateNode[];
+  onNodeClick?(event: CustomEvent<BuilderRuntimeNode>): void;
+  onNodeReorder?(event: CustomEvent<EventDetailOfNodeReorder>): void;
 }
 
 export function LegacyWorkbenchStore(
-  { dataSource, templateSources }: WorkbenchStoreProps,
+  {
+    dataSource,
+    templateSources,
+    onNodeClick,
+    onNodeReorder,
+  }: WorkbenchStoreProps,
   ref: React.Ref<BuilderDataManager>
 ): React.ReactElement {
   const manager = useBuilderDataManager();
@@ -63,6 +72,18 @@ export function LegacyWorkbenchStore(
       console.error("Unexpected dataSource", dataSource);
     }
   }, [dataSource, manager, templateSources]);
+
+  useEffect(() => {
+    const removeListeners = [
+      manager.onNodeClick(onNodeClick),
+      manager.onNodeReorder(onNodeReorder),
+    ];
+    return () => {
+      for (const fn of removeListeners) {
+        fn();
+      }
+    };
+  }, [manager, onNodeClick, onNodeReorder]);
 
   useHoverOnBrick(manager);
 

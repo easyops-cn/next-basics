@@ -11,11 +11,13 @@ import styles from "./WorkbenchMiniActionBar.module.css";
 export interface WorkbenchSubActionBarProps {
   data?: unknown;
   className?: string;
+  gap?: number;
 }
 
 export function WorkbenchMiniActionBar({
   data,
   className,
+  gap,
 }: WorkbenchSubActionBarProps): React.ReactElement {
   const { actions } = useWorkbenchActionsContext();
   const enabledActions = useMemo(
@@ -28,7 +30,7 @@ export function WorkbenchMiniActionBar({
   }
 
   return (
-    <div className={classNames(styles.actionsBar, className)}>
+    <div className={classNames(styles.actionsBar, className)} style={{ gap }}>
       {enabledActions.map((item) => (
         <WorkbenchSubAction key={item.action} action={item} data={data} />
       ))}

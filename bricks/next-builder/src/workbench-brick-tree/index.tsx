@@ -39,13 +39,6 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
   @property({ type: String })
   activeInstanceId: string;
 
-  @event({ type: "node.click" })
-  private _nodeClickEvent: EventEmitter<BuilderRuntimeNode>;
-
-  private _handleNodeClick = (detail: BuilderRuntimeNode): void => {
-    this._nodeClickEvent.emit(detail);
-  };
-
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -82,7 +75,6 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
                 type={this.type}
                 placeholder={this.placeholder}
                 activeInstanceId={this.activeInstanceId}
-                onNodeClick={this._handleNodeClick}
               />
             </WorkbenchActionsContext.Provider>
           </BuilderProvider>

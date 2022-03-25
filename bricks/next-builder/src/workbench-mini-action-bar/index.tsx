@@ -52,7 +52,7 @@ export class WorkbenchMiniActionBarElement extends UpdatingElement {
               onActionClick: this._handleActionClick,
             }}
           >
-            <WorkbenchMiniActionBar />
+            <WorkbenchMiniActionBar gap={3} />
           </WorkbenchActionsContext.Provider>
         </BrickWrapper>,
         this
