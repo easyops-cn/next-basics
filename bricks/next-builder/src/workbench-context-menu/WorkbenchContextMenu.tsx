@@ -1,5 +1,11 @@
 // istanbul ignore file: working in progress
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Divider, Menu } from "antd";
 import {
   useBuilderContextMenuStatus,
@@ -7,11 +13,14 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { looseCheckIfByTransform } from "@next-core/brick-kit";
 import { ActionClickDetail } from "../shared/workbench/interfaces";
+import type { BuilderClipboard } from "../builder-container/interfaces";
+import { useCanPaste } from "../builder-container/BuilderContextMenu/useCanPaste";
 
 import styles from "./WorkbenchContextMenu.module.css";
 
 export interface WorkbenchContextMenuProps {
   menu: ContextMenuItem[];
+  clipboard?: BuilderClipboard;
   onActionClick?(detail: ActionClickDetail): void;
 }
 
@@ -31,12 +40,19 @@ export interface ContextMenuDivider {
 
 export function WorkbenchContextMenu({
   menu,
+  clipboard,
   onActionClick,
 }: WorkbenchContextMenuProps): React.ReactElement {
   const contextMenuStatus = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
   const [menuPosition, setMenuPosition] = useState<React.CSSProperties>();
   const wrapperRef = useRef<HTMLDivElement>();
+
+  const canPasteCallback = useCanPaste();
+  const canPaste = useMemo(
+    () => canPasteCallback(clipboard, contextMenuStatus.node),
+    [canPasteCallback, clipboard, contextMenuStatus.node]
+  );
 
   const handleCloseMenu = useCallback(
     (event: React.MouseEvent) => {
@@ -96,15 +112,38 @@ export function WorkbenchContextMenu({
               ) : (
                 <Menu.Item
                   key={item.action}
-                  disabled={item.disabled}
+                  disabled={
+                    // We customize default behaviors for certain actions.
+                    typeof item.disabled === "boolean"
+                      ? item.disabled
+                      : item.action === "paste"
+                      ? !canPaste
+                      : item.action === "clear-clipboard"
+                      ? !clipboard
+                      : undefined
+                  }
                   onClick={() => {
                     onActionClick({
                       action: item.action,
                       data: contextMenuStatus.node,
+                      ...(item.action === "paste"
+                        ? {
+                            clipboard,
+                          }
+                        : null),
                     });
                   }}
                 >
                   {item.text}
+                  {item.action === "paste" && clipboard?.nodeAlias && (
+                    <span className={styles.pasteNameWrapper}>
+                      (
+                      <span className={styles.pasteName}>
+                        {clipboard.nodeAlias}
+                      </span>
+                      )
+                    </span>
+                  )}
                 </Menu.Item>
               )
             ) : null

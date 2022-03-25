@@ -2,8 +2,15 @@ lazyBricks:
   - builder-container
   - event-config-form
   - search-tree
+  - group: function-debugger
+    bricks:
+      - function-debugger-sidebar
+      - function-debugger-toolbar
+      - function-debugger-store
+      - function-debugger-statusbar
   - group: workbench
     bricks:
+      - preview-container
       - workbench-action
       - workbench-brick-tree
       - workbench-context-menu

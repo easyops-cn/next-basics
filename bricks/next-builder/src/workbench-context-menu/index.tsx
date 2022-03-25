@@ -10,6 +10,7 @@ import {
 import { BuilderProvider } from "@next-core/editor-bricks-helper";
 import { ContextMenuItem, WorkbenchContextMenu } from "./WorkbenchContextMenu";
 import { ActionClickDetail } from "../shared/workbench/interfaces";
+import type { BuilderClipboard } from "../builder-container/interfaces";
 
 /**
  * @id next-builder.workbench-context-menu
@@ -22,6 +23,9 @@ import { ActionClickDetail } from "../shared/workbench/interfaces";
 export class WorkbenchContextMenuElement extends UpdatingElement {
   @property({ attribute: false })
   menu: ContextMenuItem[];
+
+  @property({ attribute: false })
+  clipboard: BuilderClipboard;
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -51,6 +55,7 @@ export class WorkbenchContextMenuElement extends UpdatingElement {
           <BuilderProvider>
             <WorkbenchContextMenu
               menu={this.menu}
+              clipboard={this.clipboard}
               onActionClick={this._handleActionClick}
             />
           </BuilderProvider>
