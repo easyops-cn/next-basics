@@ -2218,12 +2218,12 @@
   resolved "https://registry.npmjs.org/@next-core/brick-http/-/brick-http-2.3.7.tgz#ccd1b1e943f441458c4d5faa3074bee44d61fddc"
   integrity sha512-I06ezasbjByw2VW3SadK3RtslII8vqfzzIRRURHUNJ0WLi35OuC1296Pi+eCHqgMebQCF8HqmiIx1G0KU0Pypg==
 
-"@next-core/brick-icons@^2.26.18", "@next-core/brick-icons@^2.26.21":
+"@next-core/brick-icons@^2.26.21":
   version "2.26.21"
   resolved "https://registry.npmjs.org/@next-core/brick-icons/-/brick-icons-2.26.21.tgz#4f941ae3746c0635e1a553f3578c97a27f3a1124"
   integrity sha512-IiSoENix8cDtQMEOnDe646N6DI6baXSXrUdTHO4PYdTVwf968IjuocgdJ5JeENsH3PROl3z7awyf+LiOsxJBQQ==
 
-"@next-core/brick-kit@^2.110.0", "@next-core/brick-kit@^2.111.1":
+"@next-core/brick-kit@^2.111.1":
   version "2.111.1"
   resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.111.1.tgz#013cbb6b43c72e5f7122164a98d58e4e67ea3153"
   integrity sha512-/4YVuqDRQsX38tYpo3ZS5zo7OByjPDbRjUT+VglLmZt0G/S7ZilzbRhssfm6z/FbMT4VVe6erzQljN8OWieAMw==
@@ -2263,7 +2263,7 @@
   resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.60.1.tgz#881296e49b09217028fc92da47c17733d4788563"
   integrity sha512-WvnM9rs7V+1lPnnYHk59dZvGxZWcNhUnptUm8JNUI2l/AJ+5aXmjrbM/i9JIXuN1gjisMeDc6rKcrpzhykaqgw==
 
-"@next-core/brick-utils@^2.36.0", "@next-core/brick-utils@^2.37.1":
+"@next-core/brick-utils@^2.37.1":
   version "2.37.1"
   resolved "https://registry.npmjs.org/@next-core/brick-utils/-/brick-utils-2.37.1.tgz#0ba73f5a95da393838006b05d26871a32940b722"
   integrity sha512-bKN/1VjcoF6LllZvMzFbmqeh5dF2ftkYIupad85yC8/oOW/P1d88ThFz1QxjvI9/gR6rehpoQn0urg0uIAhiVA==
@@ -2387,15 +2387,6 @@
   version "0.7.4"
   resolved "https://registry.npmjs.org/@next-core/easyops-analytics/-/easyops-analytics-0.7.4.tgz#4e462fd434ba36aa5e31e482910c6d614f29a33b"
   integrity sha512-U8v+Z1Aofu1oOrYfUwyLl14yxwBrwW/1M0lzsUfV78fg7tQZX8vIw/j4Y7b1FXeafo9a6grMb88Ujf8adlWAtw==
-
-"@next-core/editor-bricks-helper@^0.37.6":
-  version "0.37.6"
-  resolved "https://registry.npmjs.org/@next-core/editor-bricks-helper/-/editor-bricks-helper-0.37.6.tgz#c8984a7a099ed9e71ecba4cdada14f1bfc5f0bf5"
-  integrity sha512-/uFb4grWIHRyiFGZovGkqsO+l4yDMIB6jIh1bfdo7C3n3n4UE+I2HOU3ZDQn8A3xmITCmatC7zCy5uvnUBU6mA==
-  dependencies:
-    "@next-core/brick-types" "^2.60.1"
-    "@ungap/event-target" "^0.2.3"
-    classnames "^2.3.1"
 
 "@next-core/editor-bricks-helper@^0.38.0":
   version "0.38.0"
