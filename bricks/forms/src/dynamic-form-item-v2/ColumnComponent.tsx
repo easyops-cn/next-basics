@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { FormListFieldData } from "antd/lib/form/FormList";
 import { Column, ComponentType, SelectProps } from "../interfaces";
 import { Cascader, Form, Input, InputNumber, Select } from "antd";
-import { groupBy, isEqual, isNil } from "lodash";
+import _, { groupBy, isEqual, isNil, partial } from "lodash";
 import { getRealValue } from "./util";
 
 interface ColumnComponentProps {
@@ -56,15 +56,25 @@ export function ColumnComponent(
   const rules = useMemo(
     () =>
       column.rules?.map((rule) => {
+        if (typeof rule.validator === "function") {
+          return {
+            message: rule.message,
+            validator: partial(rule.validator, _, _, _, {
+              formValue,
+              rowValue,
+              rowIndex,
+            }),
+          };
+        }
         if (rule.unique) {
           return {
             validator: (rule: any, value: any, cb: any) => {
               if (!isNil(value) && value !== "") {
                 const valueList = formValue?.map((row) => row[name]);
-                const matchList = valueList.filter(
+                const matchList = valueList?.filter(
                   (v, i) => isEqual(v, value) && i !== rowIndex
                 );
-                matchList.length && cb(rule.message);
+                matchList?.length && cb(rule.message);
               }
               cb();
             },
@@ -73,7 +83,7 @@ export function ColumnComponent(
         }
         return rule;
       }),
-    [column.rules, formValue, name, rowIndex]
+    [column.rules, formValue, name, rowIndex, rowValue]
   );
 
   switch (column.type) {
