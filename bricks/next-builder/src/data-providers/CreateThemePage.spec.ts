@@ -1,5 +1,5 @@
 import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
-import { CreateThemePage } from "./CreateThemePage";
+import { CreateThemePage, LayoutEnums } from "./CreateThemePage";
 
 jest.mock("@next-sdk/cmdb-sdk");
 
@@ -41,8 +41,7 @@ describe("CreateThemePage", () => {
             name: "首页",
           },
         },
-        layoutList: "header,sider",
-        layoutType: "UI8.0",
+        layoutType: LayoutEnums.HEADER_THROUGH_SIDEBAR,
       })
     ).toEqual({
       instanceId: "page-a",
@@ -112,7 +111,7 @@ describe("CreateThemePage", () => {
             sider: [2, 1, 3, 2],
             content: [2, 2, 3, 3],
           },
-          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+          gridTemplateColumns: ["auto", "1fr"],
           gridTemplateRows: ["var(--app-bar-height)", "auto"],
         }),
         ref: "view",
@@ -139,16 +138,34 @@ describe("CreateThemePage", () => {
         },
         template: "tpl-a",
         snippet: "snippet-a",
-        layoutList: "header,sider",
-        layoutType: "UI8.0",
+        layoutType: LayoutEnums.HEADER_THROUGH_SIDEBAR,
       }
     );
   });
 
-  it.each<[string, "UI5.0" | "UI8.0", unknown]>([
+  it.each<[LayoutEnums, unknown]>([
     [
-      "header,sider",
-      "UI5.0",
+      LayoutEnums.HEADER_THROUGH_SIDEBAR,
+      {
+        appId: "app-a",
+        brick: `basic-bricks.easy-view`,
+        properties: JSON.stringify({
+          gridAreas: {
+            header: [1, 1, 2, 3],
+            sider: [2, 1, 3, 2],
+            content: [2, 2, 3, 3],
+          },
+          gridTemplateColumns: ["auto", "1fr"],
+          gridTemplateRows: ["var(--app-bar-height)", "auto"],
+        }),
+        ref: "view",
+        type: "brick",
+        mountPoint: "bricks",
+        parent: "tpl-a",
+      },
+    ],
+    [
+      LayoutEnums.SIDEBAR_THROUGH_HEADER,
       {
         appId: "app-a",
         brick: `basic-bricks.easy-view`,
@@ -158,7 +175,7 @@ describe("CreateThemePage", () => {
             sider: [1, 1, 3, 2],
             content: [2, 2, 3, 3],
           },
-          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
+          gridTemplateColumns: ["auto", "1fr"],
           gridTemplateRows: ["var(--app-bar-height)", "auto"],
         }),
         ref: "view",
@@ -168,8 +185,7 @@ describe("CreateThemePage", () => {
       },
     ],
     [
-      "header",
-      "UI5.0",
+      LayoutEnums.HEADER,
       {
         appId: "app-a",
         brick: `basic-bricks.easy-view`,
@@ -178,7 +194,6 @@ describe("CreateThemePage", () => {
             header: [1, 1, 2, 3],
             content: [2, 1, 3, 3],
           },
-          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
           gridTemplateRows: ["var(--app-bar-height)", "auto"],
         }),
         ref: "view",
@@ -188,18 +203,16 @@ describe("CreateThemePage", () => {
       },
     ],
     [
-      "sider",
-      "UI8.0",
+      LayoutEnums.SIDEBAR_LEFT,
       {
         appId: "app-a",
         brick: `basic-bricks.easy-view`,
         properties: JSON.stringify({
           gridAreas: {
-            sider: [1, 1, 3, 2],
+            sider: [1, 1, 3, 1],
             content: [1, 2, 3, 3],
           },
-          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
-          gridTemplateRows: ["var(--app-bar-height)", "auto"],
+          gridTemplateColumns: ["auto", "1fr"],
         }),
         ref: "view",
         type: "brick",
@@ -208,8 +221,25 @@ describe("CreateThemePage", () => {
       },
     ],
     [
-      "",
-      "UI8.0",
+      LayoutEnums.SIDEBAR_RIGHT,
+      {
+        appId: "app-a",
+        brick: `basic-bricks.easy-view`,
+        properties: JSON.stringify({
+          gridAreas: {
+            content: [1, 1, 3, 1],
+            sider: [1, 2, 3, 3],
+          },
+          gridTemplateColumns: ["auto", "1fr"],
+        }),
+        ref: "view",
+        type: "brick",
+        mountPoint: "bricks",
+        parent: "tpl-a",
+      },
+    ],
+    [
+      LayoutEnums.NULL,
       {
         appId: "app-a",
         brick: `basic-bricks.easy-view`,
@@ -217,8 +247,6 @@ describe("CreateThemePage", () => {
           gridAreas: {
             content: [1, 1, 3, 3],
           },
-          gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
-          gridTemplateRows: ["var(--app-bar-height)", "auto"],
         }),
         ref: "view",
         type: "brick",
@@ -228,7 +256,7 @@ describe("CreateThemePage", () => {
     ],
   ])(
     "should work when layoutList or layoutType",
-    async (layoutList, layoytType, result) => {
+    async (layoutType, result) => {
       await CreateThemePage({
         projectId: "project-a",
         appId: "app-a",
@@ -243,8 +271,7 @@ describe("CreateThemePage", () => {
             name: "首页",
           },
         },
-        layoutList,
-        layoutType: layoytType,
+        layoutType: layoutType,
       });
 
       expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(

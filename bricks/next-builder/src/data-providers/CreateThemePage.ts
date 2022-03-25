@@ -9,85 +9,79 @@ export interface CreateThemePageParams {
   name: string;
   thumbnail?: string;
   locales?: unknown;
-  layoutType?: "UI5.0" | "UI8.0";
+  layoutType?: LayoutEnums;
   layoutList?: string;
 }
 
-interface GridProps {
-  gridAreas: Record<string, unknown>;
-  gridTemplateColumns: string[];
-  gridTemplateRows: string[];
+export enum LayoutEnums {
+  SIDEBAR_THROUGH_HEADER = "sider-through-header",
+  HEADER_THROUGH_SIDEBAR = "header-through-sider",
+  HEADER = "header",
+  SIDEBAR_LEFT = "sider-left",
+  SIDEBAR_RIGHT = "sider-right",
+  NULL = "null",
 }
 
-const UI_5_PROPERTY: GridProps = {
-  gridAreas: {
-    header: [1, 2, 2, 3],
-    sider: [1, 1, 3, 2],
-    content: [2, 2, 3, 3],
-  },
-  gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
-  gridTemplateRows: ["var(--app-bar-height)", "auto"],
-};
-const UI_8_PROPERTY: GridProps = {
-  gridAreas: {
-    header: [1, 1, 2, 3],
-    sider: [2, 1, 3, 2],
-    content: [2, 2, 3, 3],
-  },
-  gridTemplateColumns: ["var(--sub-menu-bar-width)", "auto"],
-  gridTemplateRows: ["var(--app-bar-height)", "auto"],
-};
-
 const EASY_VIEW_PROPERTY = {
-  "UI5.0": UI_5_PROPERTY,
-  "UI8.0": UI_8_PROPERTY,
+  [LayoutEnums.SIDEBAR_THROUGH_HEADER]: {
+    gridAreas: {
+      header: [1, 2, 2, 3],
+      sider: [1, 1, 3, 2],
+      content: [2, 2, 3, 3],
+    },
+    gridTemplateColumns: ["auto", "1fr"],
+    gridTemplateRows: ["var(--app-bar-height)", "auto"],
+  },
+  [LayoutEnums.HEADER_THROUGH_SIDEBAR]: {
+    gridAreas: {
+      header: [1, 1, 2, 3],
+      sider: [2, 1, 3, 2],
+      content: [2, 2, 3, 3],
+    },
+    gridTemplateColumns: ["auto", "1fr"],
+    gridTemplateRows: ["var(--app-bar-height)", "auto"],
+  },
+  [LayoutEnums.HEADER]: {
+    gridAreas: {
+      header: [1, 1, 2, 3],
+      content: [2, 1, 3, 3],
+    },
+    gridTemplateRows: ["var(--app-bar-height)", "auto"],
+  },
+  [LayoutEnums.SIDEBAR_LEFT]: {
+    gridAreas: {
+      sider: [1, 1, 3, 1],
+      content: [1, 2, 3, 3],
+    },
+    gridTemplateColumns: ["auto", "1fr"],
+  },
+  [LayoutEnums.SIDEBAR_RIGHT]: {
+    gridAreas: {
+      content: [1, 1, 3, 1],
+      sider: [1, 2, 3, 3],
+    },
+    gridTemplateColumns: ["auto", "1fr"],
+  },
+  [LayoutEnums.NULL]: {
+    gridAreas: {
+      content: [1, 1, 3, 3],
+    },
+  },
 };
 
-const filterView = (girdWrapper: GridProps, showList: string[]): GridProps => {
-  if (girdWrapper?.gridAreas) {
-    if (showList.length > 0) {
-      if (showList.includes("header") && showList.includes("sider")) {
-        return girdWrapper;
-      } else if (!showList.includes("header") && showList.includes("sider")) {
-        girdWrapper.gridAreas = {
-          sider: [1, 1, 3, 2],
-          content: [1, 2, 3, 3],
-        };
-      } else if (showList.includes("header") && !showList.includes("sider")) {
-        girdWrapper.gridAreas = {
-          header: [1, 1, 2, 3],
-          content: [2, 1, 3, 3],
-        };
-      }
-    } else {
-      girdWrapper.gridAreas = {
-        content: [1, 1, 3, 3],
-      };
-    }
-  }
-  return girdWrapper;
-};
-
-const filterProxySlots = (
-  filterList: string[] = []
+const getProxySlots = (
+  layoutType: LayoutEnums
 ): Record<string, { ref: string; refSlot: string }> => {
-  const slotsProxy = {
-    header: {
-      ref: "view",
-      refSlot: "header",
-    },
-    sider: {
-      ref: "view",
-      refSlot: "sider",
-    },
-    content: {
-      ref: "view",
-      refSlot: "content",
-    },
-  };
-  if (!filterList.includes("header")) delete slotsProxy.header;
-  if (!filterList.includes("sider")) delete slotsProxy.sider;
-  return slotsProxy;
+  const layout = EASY_VIEW_PROPERTY[layoutType];
+  return Object.fromEntries(
+    Object.keys(layout.gridAreas).map((item) => [
+      item,
+      {
+        ref: "view",
+        refSlot: item,
+      },
+    ])
+  );
 };
 
 export async function CreateThemePage({
@@ -97,11 +91,9 @@ export async function CreateThemePage({
   name,
   thumbnail,
   locales,
-  layoutList = "",
   layoutType,
 }: CreateThemePageParams): Promise<unknown> {
   const templateId = `tpl-page-${pageTypeId}`;
-  const filterLayoutList = layoutList.split(",").filter(Boolean);
   // Currently, There is a bug when creating multiple instances of
   // sub-models which have the same parent which has an auto-increment field.
   // So we create the template and snippet in sequence.
@@ -110,7 +102,7 @@ export async function CreateThemePage({
     appId,
     templateId: templateId,
     proxy: JSON.stringify({
-      slots: filterProxySlots(filterLayoutList),
+      slots: getProxySlots(layoutType),
     }),
     type: "custom-template",
   });
@@ -136,9 +128,7 @@ export async function CreateThemePage({
     InstanceApi_createInstance("STORYBOARD_BRICK", {
       appId,
       brick: "basic-bricks.easy-view",
-      properties: JSON.stringify(
-        filterView(EASY_VIEW_PROPERTY[layoutType], filterLayoutList)
-      ),
+      properties: JSON.stringify(EASY_VIEW_PROPERTY[layoutType]),
       ref: "view",
       type: "brick",
       mountPoint: "bricks",
@@ -153,7 +143,6 @@ export async function CreateThemePage({
       template: tpl.instanceId,
       snippet: snippet.instanceId,
       layoutType,
-      layoutList,
     }),
   ]);
   return layout;
