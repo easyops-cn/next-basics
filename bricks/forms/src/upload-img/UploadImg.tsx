@@ -308,25 +308,9 @@ export function RealUploadImg(
   };
 
   const uploadNode = (): React.ReactElement => {
-    if (
-      props.maxNumber === 1 &&
-      props.listType === "picture-card" &&
-      !props.uploadDraggable
-    ) {
-      return imageList?.[0]?.preview || imageList?.[0]?.url ? (
-        <img
-          src={imageList[0].preview || imageList[0].url}
-          alt="avatar"
-          className={styles.pictureCardImage}
-        />
-      ) : (
-        uploadButton()
-      );
-    } else {
-      return !props.maxNumber || imageList?.length < props.maxNumber
-        ? uploadButton()
-        : null;
-    }
+    return !props.maxNumber || imageList?.length < props.maxNumber
+      ? uploadButton()
+      : null;
   };
 
   const filesPasted = (e): void => {
@@ -558,13 +542,6 @@ export function RealUploadImg(
     method: "put",
     action,
     listType: props.listType,
-    ...(props.maxNumber === 1 &&
-    props.listType === "picture-card" &&
-    !props.uploadDraggable
-      ? {
-          showUploadList: false,
-        }
-      : {}),
     fileList: imageList,
     onPreview: handlePreview,
     onChange: handleChange,

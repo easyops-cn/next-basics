@@ -408,7 +408,8 @@ describe("UploadImg", () => {
       await (global as any).flushPromises();
     });
     wrapper.update();
-    expect(wrapper.find(".ant-upload-list-item").length).toBe(0);
+    expect(wrapper.find(".ant-upload-list-item").length).toBe(1);
+    expect(wrapper.find(".ant-upload-text").length).toBe(0);
     wrapper.setProps({
       maxNumber: 2,
       value: {
