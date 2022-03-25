@@ -86,6 +86,12 @@ jest.mock("./utils/appendBricksFactory");
               brick: "brick-in-page-home",
             },
           ],
+          context: JSON.stringify([
+            {
+              name: "test",
+              value: "1",
+            },
+          ]),
         },
         {
           snippetId: "page-list",
@@ -228,6 +234,12 @@ describe("ApplyThemeTemplate", () => {
         text: { en: "Home" },
         layerType: "layout",
         isFromTheme: true,
+        context: JSON.stringify([
+          {
+            name: "test",
+            value: "1",
+          },
+        ]),
       }
     );
     expect(appendBricks).toHaveBeenNthCalledWith(

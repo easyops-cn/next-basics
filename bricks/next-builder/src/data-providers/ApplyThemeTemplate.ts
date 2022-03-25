@@ -55,6 +55,7 @@ interface Snippet {
   text?: unknown;
   layerType?: string;
   children?: TreeNode[];
+  context?: Record<string, unknown>;
 }
 
 interface PartialProject {
@@ -135,6 +136,7 @@ export async function ApplyThemeTemplate({
       text: snippet.text,
       layerType: snippet.layerType,
       isFromTheme: true,
+      context: snippet.context,
     });
     snippetMap.set(snippet.snippetId, instance.instanceId);
     await appendBricks(snippet.children, instance.instanceId);

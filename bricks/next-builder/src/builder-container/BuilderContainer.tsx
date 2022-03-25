@@ -86,6 +86,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   containerForContextModal?: string;
   migrateClipboard?: boolean;
   clipboardData?: BuilderClipboard;
+  showDataView?: boolean;
   initialFullscreen?: boolean;
   initialToolboxTab?: ToolboxTab;
   initialHiddenWrapper?: boolean;
@@ -143,6 +144,7 @@ export function LegacyBuilderContainer(
     containerForContextModal,
     migrateClipboard,
     clipboardData,
+    showDataView,
     initialFullscreen,
     initialToolboxTab,
     initialHiddenWrapper,
@@ -440,7 +442,10 @@ export function LegacyBuilderContainer(
         <div className={styles.builderContainer}>
           <BuilderToolbar />
           <div className={styles.builderBodyWrapper}>
-            <BuilderToolbox onContextUpdate={onContextUpdate} />
+            <BuilderToolbox
+              showDataView={showDataView}
+              onContextUpdate={onContextUpdate}
+            />
             <BuilderCanvas />
           </div>
         </div>

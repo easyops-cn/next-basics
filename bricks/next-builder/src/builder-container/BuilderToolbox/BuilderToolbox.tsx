@@ -18,6 +18,7 @@ import { localStorageKeyForShowRelatedNodesBasedOnEvents } from "../constants";
 import styles from "./BuilderToolbox.module.css";
 
 export interface BuilderToolboxProps {
+  showDataView?: boolean;
   onContextUpdate?: (context: ContextConf[]) => void;
 }
 
@@ -38,6 +39,7 @@ const defaultToolboxWidth = 273;
 const minToolboxWidth = defaultToolboxWidth;
 
 export function BuilderToolbox({
+  showDataView = false,
   onContextUpdate,
 }: BuilderToolboxProps): React.ReactElement {
   const {
@@ -102,7 +104,7 @@ export function BuilderToolbox({
       availableDataTypes: [
         BuilderDataType.ROUTE_OF_BRICKS,
         BuilderDataType.ROUTE_OF_ROUTES,
-      ],
+      ].concat(showDataView ? [dataType] : []),
     },
   ];
 
