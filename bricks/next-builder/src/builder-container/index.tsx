@@ -174,6 +174,12 @@ export class BuilderContainerElement extends UpdatingElement {
   highlightTokens: HighlightTokenSettings[];
 
   /**
+   * @description 是否展示context编辑tab。
+   */
+  @property()
+  showDataView: boolean;
+
+  /**
    * @description 用于容纳 Context 模态框的容器的 CSS Selector。
    */
   @property()
@@ -674,6 +680,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 containerForContextModal={this.containerForContextModal}
                 migrateClipboard={this.migrateClipboard}
                 clipboardData={this.clipboardData}
+                showDataView={this.showDataView}
                 initialFullscreen={this.fullscreen}
                 initialToolboxTab={this.toolboxTab}
                 initialHiddenWrapper={this.hiddenWrapper}

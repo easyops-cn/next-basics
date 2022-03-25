@@ -2,6 +2,7 @@ import { createProviderClass, pipes } from "@next-core/brick-utils";
 import {
   InstanceApi_getDetail,
   InstanceGraphApi_traverseGraphV2,
+  InstanceApi_updateInstanceV2,
 } from "@next-sdk/cmdb-sdk";
 import { getBaseGraphParams } from "../shared/storyboard/getBaseGraphParams";
 import { appendBricksFactory } from "./utils/appendBricksFactory";
@@ -56,6 +57,12 @@ export async function ApplyThemePage({
       order: 1,
     },
   })[0];
+
+  if (snippet.context) {
+    await InstanceApi_updateInstanceV2("STORYBOARD_ROUTE", routeId, {
+      context: snippet.context,
+    });
+  }
 
   const appendBricks = appendBricksFactory(appId, brickAttrs);
   await appendBricks(snippet.children, routeId);

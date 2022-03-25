@@ -1,6 +1,7 @@
 import {
   InstanceApi_getDetail,
   InstanceGraphApi_traverseGraphV2,
+  InstanceApi_updateInstanceV2,
 } from "@next-sdk/cmdb-sdk";
 import { ApplyThemePage } from "./ApplyThemePage";
 import { appendBricksFactory } from "./utils/appendBricksFactory";
@@ -25,10 +26,18 @@ jest.mock("./utils/appendBricksFactory");
   ],
 });
 
+(InstanceApi_updateInstanceV2 as jest.Mock).mockResolvedValue({});
+
 (InstanceGraphApi_traverseGraphV2 as jest.Mock).mockResolvedValue({
   topic_vertices: [
     {
       instanceId: "snippet:home",
+      context: JSON.stringify([
+        {
+          name: "test",
+          value: 1,
+        },
+      ]),
     },
   ],
   vertices: [
@@ -87,6 +96,8 @@ describe("ApplyThemePage", () => {
         },
       })
     );
+
+    expect(InstanceApi_updateInstanceV2).toBeCalledTimes(1);
 
     expect(appendBricks).toBeCalledWith(
       [

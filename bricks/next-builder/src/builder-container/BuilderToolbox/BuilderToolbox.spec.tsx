@@ -79,6 +79,15 @@ describe("BuilderToolbox", () => {
     expect(wrapper2.find("DataView").length).toBe(1);
   });
 
+  it("should should data view", () => {
+    dataType = BuilderDataType.SNIPPET;
+    const wrapper1 = mount(<BuilderToolbox />);
+    expect(wrapper1.find(".tabLink").length).toBe(1);
+
+    const wrapper2 = mount(<BuilderToolbox showDataView={true} />);
+    expect(wrapper2.find(".tabLink").length).toBe(2);
+  });
+
   it("should display 2 tabLink", () => {
     dataType = BuilderDataType.CUSTOM_TEMPLATE;
     const wrapper = shallow(<BuilderToolbox />);
