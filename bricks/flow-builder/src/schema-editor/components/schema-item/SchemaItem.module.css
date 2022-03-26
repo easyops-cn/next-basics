@@ -24,6 +24,17 @@
   }
 }
 
+.modelDefinitionTag {
+  &:global(.ant-tag) {
+    color: var(--tag-gray-color);
+    background: var(--tag-gray-background);
+  }
+}
+
+.modelDefinitionText {
+  color: #7f7f81;
+}
+
 .textEllipsis {
   white-space: nowrap;
   overflow: hidden;
@@ -32,8 +43,8 @@
 
 .caret {
   font-size: 10px;
-  padding: 5px;
-  padding-left: 0;
+  padding-right: 5px;
+  vertical-align: baseline;
 }
 
 .highlight {

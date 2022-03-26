@@ -295,6 +295,7 @@ export function AddPropertyModal({
       onOk={handleOk}
       onCancel={handleClose}
       width={600}
+      maskClosable={false}
     >
       <Form
         name="properties-form"

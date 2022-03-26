@@ -34,6 +34,7 @@ export interface SchemaRootNodeProperty {
   description?: string;
   fields?: SchemaItemProperty[];
   import?: string[];
+  importModelDefinition?: ModelDefinition[];
 }
 
 export interface AddedSchemaFormItem extends SchemaItemProperty {
@@ -49,6 +50,7 @@ export interface ModelFieldItem {
 export interface ModelDefinition {
   name: string;
   fields?: SchemaItemProperty[];
+  updated?: boolean;
 }
 
 export interface EditorOfContext {
@@ -66,4 +68,5 @@ export interface EditorOfContext {
   ): void;
   showModelDefinition(modelDefinition: ModelDefinition, traceId: string): void;
   hideModelDefinition?(traceId: string): void;
+  updateModelDefinition?(): void;
 }

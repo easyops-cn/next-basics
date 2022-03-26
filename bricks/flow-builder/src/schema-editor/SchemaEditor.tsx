@@ -5,6 +5,7 @@ import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { get, set } from "lodash";
 import { SchemaItem } from "./components/schema-item/SchemaItem";
 import { AddPropertyModal } from "./components/add-property-modal/AddPropertyModal";
+import { ContractContext } from "./ContractContext";
 import { titleList, EditorContext } from "./constants";
 import {
   SchemaItemProperty,
@@ -26,7 +27,6 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   onChange?: (data: SchemaRootNodeProperty) => void;
   hiddenRootNode?: boolean;
   disabledModelType: boolean;
-  modelDefinitionList?: ModelDefinition[];
 }
 
 interface ItemData {
@@ -39,7 +39,7 @@ export const SchemaEditorWrapper = forwardRef<
   HTMLDivElement,
   SchemaEditorProps
 >(function LegacySchemaEditor(props, ref): React.ReactElement {
-  const { hiddenRootNode, disabledModelType, modelDefinitionList = [] } = props;
+  const { hiddenRootNode, disabledModelType } = props;
   const rootTraceId = "root";
   const [visible, setVisible] = useState(false);
   const [curItemData, SetCurItemData] = useState<ItemData>({
@@ -50,6 +50,11 @@ export const SchemaEditorWrapper = forwardRef<
     processFormInitvalue({ name: props.name, ...props.value })
   );
 
+  const contractContext = useMemo(
+    () => ContractContext.getInstance(property.importModelDefinition),
+    [property.importModelDefinition]
+  );
+
   useEffect(() => {
     setProperty(processFormInitvalue({ name: props.name, ...props.value }));
   }, [props.name, props.value]);
@@ -57,6 +62,10 @@ export const SchemaEditorWrapper = forwardRef<
   useEffect(() => {
     // trigger to update formdata on first rendered
     props.onChange?.(processFormData(property));
+
+    return () => {
+      ContractContext.cleanInstance();
+    };
   }, []);
 
   const processedTitleList = useMemo(
@@ -166,16 +175,21 @@ export const SchemaEditorWrapper = forwardRef<
     isEdit ? handleEdit?.(data, trackId) : handleAdd?.(data, trackId);
   };
 
+  const emitFormDataOnchange = (): void => {
+    props.onChange(processFormData(property));
+  };
+
   return (
     <EditorContext.Provider
       value={{
-        modelDefinitionList: modelDefinitionList,
         onEdit: handleEdit,
         onRemove: handleRemove,
         onCreate: handleAdd,
         onModal: handleModal,
         showModelDefinition,
         hideModelDefinition,
+        modelDefinitionList: contractContext.getModelDefinition(),
+        updateModelDefinition: emitFormDataOnchange,
       }}
     >
       <div className={styles.editor} ref={ref}>
@@ -194,6 +208,7 @@ export const SchemaEditorWrapper = forwardRef<
             hideDeleteBtn={true}
             hiddenRootNode={hiddenRootNode}
             disabledModelType={disabledModelType}
+            parentsModel={[]}
           />
         </div>
       </div>

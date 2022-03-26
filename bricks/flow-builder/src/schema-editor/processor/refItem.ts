@@ -23,3 +23,7 @@ export function checkRequired(_: unknown, value: string): Promise<void> {
     );
   }
 }
+
+export function extractRefType(ref = ""): string {
+  return ref.split(".")[0];
+}

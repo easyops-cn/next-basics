@@ -9,13 +9,15 @@ import {
   processTypeItemInitValue,
   processTypeItemData,
 } from "../../processor";
+import { ContractContext } from "../../ContractContext";
 import { modelRefCache } from "../../constants";
-import { ModelFieldItem } from "../../interfaces";
+import { ModelDefinition, ModelFieldItem } from "../../interfaces";
 
 export interface ContractModel {
   name: string;
   namespaceId: string;
   fields: ModelFieldItem[];
+  importModelDefinition?: ModelDefinition[];
   [key: string]: unknown;
 }
 export interface mixGroupContract {
@@ -61,7 +63,19 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
       value,
     };
     const find = modelList.find((item) => item.name === value);
-    find && modelRefCache.set(value, `${find.namespaceId}.${find.name}`);
+    if (find) {
+      modelRefCache.set(value, `${find.namespaceId}.${find.name}`);
+      // 放入当前的模型的定义
+      const modelDefinitionList = [
+        {
+          name: find.name,
+          fields: find.fields,
+        },
+        ...(find.importModelDefinition || []),
+      ];
+      ContractContext.getInstance().addModelDefinition(modelDefinitionList);
+    }
+
     setTypeValue(newValue);
     props.onChange(processTypeItemData(newValue));
   };

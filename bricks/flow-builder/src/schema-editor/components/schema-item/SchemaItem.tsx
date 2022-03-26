@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Checkbox, Button, Tag, Tooltip } from "antd";
 import {
   SettingOutlined,
@@ -8,13 +8,20 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import classNames from "classnames";
+import { NotifyBadge } from "../notify-badge/NotifyBadge";
 import { SchemaItemProperty } from "../../interfaces";
 import editorStyles from "../../SchemaEditor.module.css";
-import { getGridTemplateColumns, filterTitleList } from "../../processor";
+import {
+  getGridTemplateColumns,
+  filterTitleList,
+  isModelDefinition,
+  calcModelDefinition,
+} from "../../processor";
 import { titleList, EditorContext } from "../../constants";
 import styles from "./SchemaItem.module.css";
 import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
+import { isEmpty } from "lodash";
 
 export interface SchemaItemProps {
   className?: string;
@@ -28,6 +35,8 @@ export interface SchemaItemProps {
   readonly?: boolean;
   hiddenRootNode?: boolean;
   disabledModelType?: boolean;
+  isModelDefinitionRow?: boolean;
+  parentsModel?: string[];
 }
 
 export function SchemaItem({
@@ -39,6 +48,8 @@ export function SchemaItem({
   hideDeleteBtn,
   hiddenRootNode,
   disabledModelType,
+  isModelDefinitionRow,
+  parentsModel,
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const editorContext = useContext(EditorContext);
@@ -50,7 +61,12 @@ export function SchemaItem({
     onRemove,
     showModelDefinition,
     hideModelDefinition,
+    updateModelDefinition,
   } = editorContext;
+
+  useEffect(() => {
+    setExpand(!isEmpty(itemData.fields));
+  }, [itemData.fields]);
 
   const openEditModal = (): void => {
     onModal?.({ ...itemData }, true, traceId);
@@ -71,11 +87,16 @@ export function SchemaItem({
 
   const modelDefinition = useMemo(() => {
     return modelDefinitionList.find(
-      (item) =>
-        item.name ===
-        (itemData.ref ? itemData.ref.split(".")[0] : itemData.type)
+      (item) => item.name === calcModelDefinition(itemData)
     );
-  }, [modelDefinitionList, itemData.type, itemData.ref]);
+  }, [modelDefinitionList, itemData]);
+
+  const isSefRef = useMemo(
+    () =>
+      isModelDefinition(itemData) &&
+      parentsModel.includes(calcModelDefinition(itemData)),
+    [itemData, parentsModel]
+  );
 
   const handleExpand = (): void => {
     setExpand(true);
@@ -107,7 +128,9 @@ export function SchemaItem({
   };
 
   return (
-    <div className={classNames({ [styles.highlight]: expand })}>
+    <div
+      className={classNames({ [styles.highlight]: modelDefinition && expand })}
+    >
       <div
         style={style}
         className={className}
@@ -115,13 +138,15 @@ export function SchemaItem({
       >
         <div
           title={displayName}
-          className={styles.textEllipsis}
+          className={classNames(styles.textEllipsis, {
+            [styles.modelDefinitionText]: isModelDefinitionRow,
+          })}
           style={{
             paddingLeft: offsetPadding,
             ...(hover ? { color: "var(--color-brand)" } : {}),
           }}
         >
-          {modelDefinition ? (
+          {modelDefinition && !isSefRef ? (
             <span onClick={handleClick} style={{ cursor: "pointer" }}>
               {expand ? (
                 <DownOutlined className={styles.caret} />
@@ -147,17 +172,29 @@ export function SchemaItem({
               className={classNames({
                 [styles.typeTag]: itemData.type,
                 [styles.refTag]: itemData.ref,
+                [styles.modelDefinitionTag]: isModelDefinitionRow,
               })}
             >
               {itemData.type || itemData.ref}
             </Tag>
           </Tooltip>
+          {!readonly && modelDefinition?.updated && (
+            <NotifyBadge
+              onFinish={updateModelDefinition}
+              modelName={calcModelDefinition(itemData)}
+            />
+          )}
         </div>
-        <div className={styles.textEllipsis} title={itemData.description}>
+        <div
+          className={classNames(styles.textEllipsis, {
+            [styles.modelDefinitionText]: isModelDefinitionRow,
+          })}
+          title={itemData.description}
+        >
           {itemData.description}
         </div>
         {!readonly && (
-          <div>
+          <div hidden={isModelDefinitionRow}>
             <Button
               type="link"
               className={editorStyles.iconBtn}
@@ -180,8 +217,14 @@ export function SchemaItem({
       </div>
       {itemData.fields?.map((item, index) => (
         <SchemaItem
+          parentsModel={
+            isModelDefinition(itemData)
+              ? [...parentsModel, calcModelDefinition(itemData)]
+              : [...parentsModel]
+          }
           className={editorStyles.schemaItem}
-          readonly={readonly || !!modelDefinition}
+          isModelDefinitionRow={isModelDefinitionRow || !!modelDefinition}
+          readonly={readonly}
           style={{
             gridTemplateColumns: getGridTemplateColumns(
               filterTitleList(titleList, readonly)
@@ -194,7 +237,10 @@ export function SchemaItem({
         />
       ))}
       {!readonly && itemData.type?.includes("object") && (
-        <div style={{ paddingLeft: 20 + offsetPadding }}>
+        <div
+          style={{ paddingLeft: 20 + offsetPadding }}
+          hidden={isModelDefinitionRow}
+        >
           <Button
             className={editorStyles.iconBtn}
             type="link"

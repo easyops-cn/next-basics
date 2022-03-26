@@ -38,6 +38,8 @@ const locale: Locale = {
   [K.VALIDATOR_LABEL]: "Validator",
   [K.FIELD_PARAMS]: "Params",
   [K.ADD_FIELD_PARAMS_TIPS]: "add `{{name}}` children properties",
+  [K.MODEL_DEFINITION_UPDATE_MESSAGE]:
+    "The model has been updated, whether to get the latest model definition",
 };
 
 export default locale;

@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { useContractModels } from "../../hooks/useContractModels";
 import { fecthModelData } from "../../hooks/useCurModel";
+import { ContractContext } from "../../ContractContext";
 import { ModelFieldItem } from "../../interfaces";
 import { processRefItemData, processRefItemInitValue } from "../../processor";
 import { modelRefCache } from "../../constants";
@@ -58,6 +59,15 @@ export function RefItem(props: RefItemProps): React.ReactElement {
     const find = modelList.find((item) => item.name === value);
     // istanbul ignore else
     if (find) {
+      // 放入当前的模型的定义
+      const modelDefinitionList = [
+        {
+          name: find.name,
+          fields: find.fields,
+        },
+        ...(find.importModelDefinition || []),
+      ];
+      ContractContext.getInstance().addModelDefinition(modelDefinitionList);
       setFieldList(find.fields);
     }
   };
