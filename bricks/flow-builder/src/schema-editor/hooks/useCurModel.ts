@@ -3,7 +3,7 @@ import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { ContractModel } from "../components/type-item/TypeItem";
 import { handleHttpError } from "@next-core/brick-kit";
 
-export async function fecthModelData(
+export async function fetchModelData(
   modelName: string
 ): Promise<ContractModel> {
   try {
@@ -37,7 +37,7 @@ export function useCurModel(
 
   useEffect(() => {
     (async () => {
-      const data = await fecthModelData(name);
+      const data = await fetchModelData(name);
       setModeData(data);
     })();
   }, [name]);

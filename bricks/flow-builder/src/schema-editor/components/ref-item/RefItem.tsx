@@ -4,7 +4,8 @@ import { debounce, isEmpty } from "lodash";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { useContractModels } from "../../hooks/useContractModels";
-import { fecthModelData } from "../../hooks/useCurModel";
+import { fetchModelData } from "../../hooks/useCurModel";
+import { MoreOption } from "../more-option/MoreOption";
 import { ContractContext } from "../../ContractContext";
 import { ModelFieldItem } from "../../interfaces";
 import { processRefItemData, processRefItemInitValue } from "../../processor";
@@ -22,7 +23,7 @@ export interface RefItemProps {
 
 export function RefItem(props: RefItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
-  const [{ modelList }, setQ] = useContractModels();
+  const [{ modelList }, setQ, setPageSize] = useContractModels();
   const [fieldList, setFieldList] = useState<ModelFieldItem[]>([]);
   const [refValue, setRefValue] = useState<ProcessRefItemValue>(
     processRefItemInitValue(props.value)
@@ -35,7 +36,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
 
   useEffect(() => {
     (async () => {
-      const data = await fecthModelData(refValue.name);
+      const data = await fetchModelData(refValue.name);
       setFieldList(data?.fields);
     })();
   }, [refValue.name]);
@@ -109,6 +110,14 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         placeholder={t(K.MODEL_SEARCH_PLACEHOLDER)}
         onChange={handleModelChange}
         onSearch={debounceSearch}
+        dropdownRender={(menu) => (
+          <>
+            {menu}
+            {modelList.length > 0 && (
+              <MoreOption onChange={(pageSize) => setPageSize(pageSize)} />
+            )}
+          </>
+        )}
       >
         {modelList.map((item) => (
           <Select.Option key={item.name} value={item.name}>

@@ -5,6 +5,7 @@ import { debounce } from "lodash";
 import { useContractModels } from "../../hooks/useContractModels";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { Link } from "@next-libs/basic-components";
+import { MoreOption } from "../more-option/MoreOption";
 import {
   processFilterModes,
   processTypeItemInitValue,
@@ -42,7 +43,7 @@ export interface TypeItemProps {
 
 export function TypeItem(props: TypeItemProps): React.ReactElement {
   const { type } = props;
-  const [{ q, modelList }, setQ] = useContractModels({
+  const [{ q, modelList }, setQ, setPageSize] = useContractModels({
     disabledModelType: type === "normal",
   });
   const [typeValue, setTypeValue] = useState<ProcessTypeValue>(
@@ -116,6 +117,14 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
           onChange={handleChange}
           onSearch={debounceSearch}
           placeholder={t(K.MODEL_SEARCH_PLACEHOLDER)}
+          dropdownRender={(menu) => (
+            <>
+              {menu}
+              {type === "model" && mixGroupList.length > 0 && (
+                <MoreOption onChange={(pageSize) => setPageSize(pageSize)} />
+              )}
+            </>
+          )}
         >
           {mixGroupList.map((item) => (
             <Select.OptGroup key={item.group} label={item.group}>
