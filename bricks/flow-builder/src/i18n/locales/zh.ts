@@ -36,6 +36,7 @@ const locale: Locale = {
   [K.FIELD_PARAMS]: "参数",
   [K.ADD_FIELD_PARAMS_TIPS]: "添加 `{{name}}` 的子属性",
   [K.MODEL_DEFINITION_UPDATE_MESSAGE]: "该模型有更新，是否获取最新模型定义",
+  [K.MODEL_DEFINITION_CREATE_TIPS]: "找不到模型？前往新建",
 };
 
 export default locale;

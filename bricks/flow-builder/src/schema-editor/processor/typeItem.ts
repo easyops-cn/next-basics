@@ -31,27 +31,32 @@ export function extractType(type = ""): string {
 
 export function processFilterModes(
   modelList: ContractModel[],
-  q = ""
+  q = "",
+  type: "normal" | "model"
 ): mixGroupContract[] {
   const basicGroup = {
     group: i18next.t(`${NS_FLOW_BUILDER}:${K.SIMPLE_TYPE}`),
     items: [],
   } as mixGroupContract;
 
-  innerTypeList
-    .filter((type) => type.includes(q.toLowerCase()))
-    .forEach((type) => {
-      basicGroup.items.push({ label: type, value: type });
-    });
+  if (type === "normal") {
+    innerTypeList
+      .filter((type) => type.includes(q.toLowerCase()))
+      .forEach((type) => {
+        basicGroup.items.push({ label: type, value: type });
+      });
+  }
 
   const ModelGroup = {
     group: i18next.t(`${NS_FLOW_BUILDER}:${K.MODEL_TYPE}`),
     items: [],
   } as mixGroupContract;
 
-  modelList.forEach((item) => {
-    ModelGroup.items.push({ label: item.name, value: item.name });
-  });
+  if (type === "model") {
+    modelList.forEach((item) => {
+      ModelGroup.items.push({ label: item.name, value: item.name });
+    });
+  }
 
   return [basicGroup, ModelGroup].filter((item) => !isEmpty(item.items));
 }

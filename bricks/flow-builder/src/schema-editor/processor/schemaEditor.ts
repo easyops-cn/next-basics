@@ -64,9 +64,11 @@ export function isTypeChange(
 export function processItemInitValue(
   data = {} as SchemaItemProperty
 ): AddedSchemaFormItem {
+  const isNormalType =
+    innerTypeList.includes(calcModelDefinition(data)) || !data.type;
   return {
     ...data,
-    origin: data.ref ? "reference" : "normal",
+    origin: data.ref ? "reference" : isNormalType ? "normal" : "model",
     ...([...numberTypeList, "string"].includes(data.type)
       ? { validate: processValidatorInitValue(data.validate) }
       : {}),

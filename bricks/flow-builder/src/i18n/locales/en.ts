@@ -40,6 +40,7 @@ const locale: Locale = {
   [K.ADD_FIELD_PARAMS_TIPS]: "add `{{name}}` children properties",
   [K.MODEL_DEFINITION_UPDATE_MESSAGE]:
     "The model has been updated, whether to get the latest model definition",
+  [K.MODEL_DEFINITION_CREATE_TIPS]: "Can't find a model? go to create",
 };
 
 export default locale;

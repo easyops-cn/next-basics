@@ -67,7 +67,7 @@ export function AddPropertyModal({
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("origin") === "normal" && (
+          ["normal", "model"].includes(getFieldValue("origin")) && (
             <Form.Item
               name="name"
               label={t(K.NAME_LABEL)}
@@ -90,9 +90,12 @@ export function AddPropertyModal({
         initialValue="normal"
         label={t(K.CATEGORY_LABEL)}
       >
-        <Select>
+        <Select onChange={() => form.resetFields(["type", "ref"])}>
           <Select.Option key="normal" value="normal">
             {t(K.SCHEMA_ITEM_NORMAL)}
+          </Select.Option>
+          <Select.Option key="model" value="model">
+            {t(K.SCHEMA_ITEM_MODEL)}
           </Select.Option>
           <Select.Option key="reference" value="reference">
             {t(K.SCHEMA_ITEM_REF)}
@@ -100,7 +103,7 @@ export function AddPropertyModal({
         </Select>
       </Form.Item>
     ),
-    [disabledModelType, t]
+    [disabledModelType, t, form]
   );
 
   const typeFormItem = useMemo(
@@ -112,14 +115,16 @@ export function AddPropertyModal({
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("origin") === "normal" ? (
+          ["normal", "model"].includes(getFieldValue("origin")) ? (
             <Form.Item
               name="type"
               label={t(K.TYPE_LABEL)}
               rules={[{ required: true }]}
               messageVariables={{ label: "type" }}
             >
-              <TypeItem disabledModelType={disabledModelType} />
+              <TypeItem
+                type={getFieldValue("origin") === "model" ? "model" : "normal"}
+              />
             </Form.Item>
           ) : (
             <Form.Item
@@ -134,7 +139,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [disabledModelType, form, t]
+    [form, t]
   );
 
   const defaultFormItem = useMemo(
@@ -272,7 +277,7 @@ export function AddPropertyModal({
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("origin") === "normal" && (
+          ["normal", "model"].includes(getFieldValue("origin")) && (
             <Form.Item
               name="description"
               label={t(K.DESCRIPTION_LABEL)}

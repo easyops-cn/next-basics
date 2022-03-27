@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { debounce } from "lodash";
 import { useContractModels } from "../../hooks/useContractModels";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
+import { Link } from "@next-libs/basic-components";
 import {
   processFilterModes,
   processTypeItemInitValue,
@@ -36,12 +37,14 @@ export interface ProcessTypeValue {
 export interface TypeItemProps {
   value?: string;
   onChange?: (value: string) => void;
-  disabledModelType?: boolean;
+  type?: "normal" | "model";
 }
 
 export function TypeItem(props: TypeItemProps): React.ReactElement {
-  const { disabledModelType } = props;
-  const [{ q, modelList }, setQ] = useContractModels({ disabledModelType });
+  const { type } = props;
+  const [{ q, modelList }, setQ] = useContractModels({
+    disabledModelType: type === "normal",
+  });
   const [typeValue, setTypeValue] = useState<ProcessTypeValue>(
     processTypeItemInitValue(props.value)
   );
@@ -53,8 +56,8 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
 
   const mixGroupList = useMemo(
-    () => processFilterModes(modelList, q),
-    [modelList, q]
+    () => processFilterModes(modelList, q, type),
+    [modelList, q, type]
   );
 
   const handleChange = (value: string): void => {
@@ -103,33 +106,40 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
   };
 
   return (
-    <div style={{ display: "flex", gap: 8 }}>
-      <Select
-        value={typeValue.value}
-        style={{ flex: 1, minWidth: 0 }}
-        showSearch
-        filterOption={false}
-        onChange={handleChange}
-        onSearch={debounceSearch}
-        placeholder={t(K.MODEL_SEARCH_PLACEHOLDER)}
-      >
-        {mixGroupList.map((item) => (
-          <Select.OptGroup key={item.group} label={item.group}>
-            {item.items.map((row) => (
-              <Select.Option key={row.value} value={row.value}>
-                {row.value}
-              </Select.Option>
-            ))}
-          </Select.OptGroup>
-        ))}
-      </Select>
-      <Checkbox
-        checked={typeValue.isArray}
-        style={{ marginTop: -4 }}
-        onChange={(e) => handleCheckChange(e.target.checked)}
-      >
-        {t(K.ARRAY)}
-      </Checkbox>
-    </div>
+    <>
+      <div style={{ display: "flex", gap: 8 }}>
+        <Select
+          value={typeValue.value}
+          style={{ flex: 1, minWidth: 0 }}
+          showSearch
+          filterOption={false}
+          onChange={handleChange}
+          onSearch={debounceSearch}
+          placeholder={t(K.MODEL_SEARCH_PLACEHOLDER)}
+        >
+          {mixGroupList.map((item) => (
+            <Select.OptGroup key={item.group} label={item.group}>
+              {item.items.map((row) => (
+                <Select.Option key={row.value} value={row.value}>
+                  {row.value}
+                </Select.Option>
+              ))}
+            </Select.OptGroup>
+          ))}
+        </Select>
+        <Checkbox
+          checked={typeValue.isArray}
+          style={{ marginTop: -4 }}
+          onChange={(e) => handleCheckChange(e.target.checked)}
+        >
+          {t(K.ARRAY)}
+        </Checkbox>
+      </div>
+      {type === "model" && (
+        <Link target="_blank" to="/models/create">
+          {t(K.MODEL_DEFINITION_CREATE_TIPS)}
+        </Link>
+      )}
+    </>
   );
 }
