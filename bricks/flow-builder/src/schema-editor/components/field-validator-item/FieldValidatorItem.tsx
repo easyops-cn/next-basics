@@ -36,36 +36,36 @@ export function FieldValidatorItem({
 
   const handleRegChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;
-    const newFeildValue = update(fieldValue, { pattern: { $set: value } });
-    setFieldValue(newFeildValue);
+    const newFieldValue = update(fieldValue, { pattern: { $set: value } });
+    setFieldValue(newFieldValue);
 
-    onChange(newFeildValue);
+    onChange(newFieldValue);
   };
 
   const handleAdd = (): void => {
-    const newFeildValue = update(fieldValue, {
+    const newFieldValue = update(fieldValue, {
       compare: { $push: [{ method: undefined, value: undefined }] },
     });
-    setFieldValue(newFeildValue);
-    onChange?.(newFeildValue);
+    setFieldValue(newFieldValue);
+    onChange?.(newFieldValue);
   };
 
   const handleRemove = (index: number): void => {
-    const newFeildValue = update(fieldValue, {
+    const newFieldValue = update(fieldValue, {
       compare: { $splice: [[index, 1]] },
     });
 
-    setFieldValue(newFeildValue);
-    onChange?.(newFeildValue);
+    setFieldValue(newFieldValue);
+    onChange?.(newFieldValue);
   };
 
   const handleNumberValidatorChange = (list: NumberCompareItem[]): void => {
-    const newFeildValue = {
+    const newFieldValue = {
       ...fieldValue,
       compare: list,
     };
-    setFieldValue(newFeildValue);
-    onChange?.(newFeildValue);
+    setFieldValue(newFieldValue);
+    onChange?.(newFieldValue);
   };
 
   return (

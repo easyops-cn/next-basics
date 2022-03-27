@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { Checkbox, Button, Tag, Tooltip } from "antd";
+import { Checkbox, Button, Tag, Tooltip, Badge } from "antd";
 import {
   SettingOutlined,
   DeleteOutlined,
@@ -8,7 +8,6 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import classNames from "classnames";
-import { NotifyBadge } from "../notify-badge/NotifyBadge";
 import { SchemaItemProperty } from "../../interfaces";
 import editorStyles from "../../SchemaEditor.module.css";
 import {
@@ -16,8 +15,9 @@ import {
   filterTitleList,
   isModelDefinition,
   calcModelDefinition,
+  getModelRefData,
 } from "../../processor";
-import { titleList, EditorContext } from "../../constants";
+import { titleList, EditorContext, rootTraceId } from "../../constants";
 import styles from "./SchemaItem.module.css";
 import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
@@ -49,19 +49,18 @@ export function SchemaItem({
   hiddenRootNode,
   disabledModelType,
   isModelDefinitionRow,
-  parentsModel,
+  parentsModel = [],
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const editorContext = useContext(EditorContext);
   const [hover, setHover] = useState(false);
   const [expand, setExpand] = useState(false);
   const {
-    modelDefinitionList,
+    modelDefinitionList = [],
     onModal,
     onRemove,
     showModelDefinition,
     hideModelDefinition,
-    updateModelDefinition,
   } = editorContext;
 
   useEffect(() => {
@@ -91,7 +90,7 @@ export function SchemaItem({
     );
   }, [modelDefinitionList, itemData]);
 
-  const isSefRef = useMemo(
+  const isSelfRef = useMemo(
     () =>
       isModelDefinition(itemData) &&
       parentsModel.includes(calcModelDefinition(itemData)),
@@ -101,16 +100,8 @@ export function SchemaItem({
   const handleExpand = (): void => {
     setExpand(true);
     if (itemData.ref) {
-      const [, field] = itemData.ref.split(".");
       showModelDefinition(
-        field === "*"
-          ? modelDefinition
-          : {
-              name: itemData.ref,
-              fields: modelDefinition.fields.filter(
-                (item) => item.name === field
-              ),
-            },
+        getModelRefData(itemData.ref, modelDefinition, modelDefinitionList),
         traceId
       );
     } else {
@@ -134,7 +125,7 @@ export function SchemaItem({
       <div
         style={style}
         className={className}
-        hidden={traceId === "root" && hiddenRootNode}
+        hidden={traceId === rootTraceId && hiddenRootNode}
       >
         <div
           title={displayName}
@@ -146,7 +137,7 @@ export function SchemaItem({
             ...(hover ? { color: "var(--color-brand)" } : {}),
           }}
         >
-          {modelDefinition && !isSefRef ? (
+          {modelDefinition && !isSelfRef ? (
             <span onClick={handleClick} style={{ cursor: "pointer" }}>
               {expand ? (
                 <DownOutlined className={styles.caret} />
@@ -179,10 +170,9 @@ export function SchemaItem({
             </Tag>
           </Tooltip>
           {!readonly && modelDefinition?.updated && (
-            <NotifyBadge
-              onFinish={updateModelDefinition}
-              modelName={calcModelDefinition(itemData)}
-            />
+            <Tooltip title={t(K.MODEL_DEFINITION_UPDATE_MESSAGE)}>
+              <Badge color="orange" />
+            </Tooltip>
           )}
         </div>
         <div

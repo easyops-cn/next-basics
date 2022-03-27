@@ -11,7 +11,8 @@ const locale: Locale = {
   [K.COMPARE_VALUE_PLACEHOLDER]: "请先选择比较器再填写相应的数值",
   [K.FIELDS_MAPPING_EDIT_TOOLTIP]: "不能编辑 `object[]` 类型下的子属性",
   [K.ARRAY]: "数组",
-  [K.SIMPLE_TYPE]: "简单属性",
+  [K.SIMPLE_TYPE]: "简单类型",
+  [K.CUSTOM_TYPE]: "自定义类型",
   [K.MODEL_TYPE]: "模型",
   [K.REF_VALIDATE_REQUIRED_MSG]: "请选择引用的字段",
   [K.MODEL_SEARCH_PLACEHOLDER]: "按关键字搜索",
@@ -35,7 +36,7 @@ const locale: Locale = {
   [K.VALIDATOR_LABEL]: "校验器(validator)",
   [K.FIELD_PARAMS]: "参数",
   [K.ADD_FIELD_PARAMS_TIPS]: "添加 `{{name}}` 的子属性",
-  [K.MODEL_DEFINITION_UPDATE_MESSAGE]: "该模型有更新，是否获取最新模型定义",
+  [K.MODEL_DEFINITION_UPDATE_MESSAGE]: "有更新",
   [K.MODEL_DEFINITION_CREATE_TIPS]: "找不到模型？前往新建",
 };
 

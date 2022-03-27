@@ -13,8 +13,7 @@ import {
   SchemaRootNodeProperty,
   ModelDefinition,
 } from "../interfaces";
-import { numberTypeList, modelRefCache } from "../constants";
-import { K, NS_FLOW_BUILDER } from "../../i18n/constants";
+import { numberTypeList } from "../constants";
 import { innerTypeList } from "../constants";
 import { ContractContext } from "../ContractContext";
 
@@ -23,10 +22,7 @@ export function filterTitleList(
   readonly: boolean
 ): EditorTitleProps[] {
   return readonly
-    ? titleList.filter(
-        (item) =>
-          item.title !== i18next.t(`${NS_FLOW_BUILDER}:${K.SETTING_LABEL}`)
-      )
+    ? titleList.filter((item) => item.key !== "setting")
     : titleList;
 }
 
@@ -50,25 +46,20 @@ export function isTypeChange(
   current: SchemaItemProperty,
   prev: SchemaItemProperty
 ): boolean {
-  if (current.type) {
-    if (prev.ref || (prev.type && current.type !== prev.type)) return true;
-  }
-
-  if (current.ref) {
-    if (prev.type || (prev.ref && prev.ref !== current.ref)) return true;
-  }
-
-  return false;
+  return calcModelDefinition(current) !== calcModelDefinition(prev);
 }
 
 export function processItemInitValue(
   data = {} as SchemaItemProperty
 ): AddedSchemaFormItem {
-  const isNormalType =
-    innerTypeList.includes(calcModelDefinition(data)) || !data.type;
+  const isNormalType = !isModelDefinition(data);
   return {
     ...data,
-    origin: data.ref ? "reference" : isNormalType ? "normal" : "model",
+    origin: data.ref
+      ? "reference"
+      : isNormalType || !data.type
+      ? "normal"
+      : "model",
     ...([...numberTypeList, "string"].includes(data.type)
       ? { validate: processValidatorInitValue(data.validate) }
       : {}),
@@ -89,11 +80,9 @@ export function processFields(
   {
     requiredList,
     defaultData,
-    importList,
   }: {
     requiredList: string[];
     defaultData: Record<string, unknown>;
-    importList: string[];
   },
   result: SchemaItemProperty[]
 ): void {
@@ -113,12 +102,11 @@ export function processFields(
 
     result.push(property);
 
-    extractModelRef(item, importList);
     if (item.fields) {
       property.fields = [];
       processFields(
         item.fields,
-        { requiredList, defaultData, importList },
+        { requiredList, defaultData },
         property.fields
       );
     }
@@ -141,13 +129,21 @@ export function processFormInitvalue(
     result.required = true;
   }
 
-  processFields(
-    data.fields,
-    { requiredList, defaultData, importList: data.import },
-    result.fields
-  );
+  processFields(data.fields, { requiredList, defaultData }, result.fields);
 
   return result;
+}
+
+export function collectImport(
+  item: SchemaItemProperty,
+  importSet: Set<string>
+): void {
+  const modelName = calcModelDefinition(item);
+  const contractContext = ContractContext.getInstance();
+
+  if (contractContext.hasImportNamespace(modelName)) {
+    importSet.add(contractContext.getSingleNamespace(modelName));
+  }
 }
 
 export function collectFields(
@@ -156,12 +152,10 @@ export function collectFields(
     requiredList,
     defaultData,
     importSet,
-    modelDefinitionSet,
   }: {
     requiredList: string[];
     defaultData: Record<string, unknown>;
     importSet: Set<string>;
-    modelDefinitionSet: Map<string, ModelDefinition>;
   },
   result: SchemaItemProperty[]
 ): void {
@@ -178,19 +172,7 @@ export function collectFields(
       defaultData[item.name] = item.default;
     }
 
-    const modelRef = modelRefCache.get(extractType(item.type) || item.ref);
-    if (modelRef) {
-      importSet.add(modelRef);
-    }
-
-    const modelDefinitions =
-      ContractContext.getInstance().getChildrenModelDefinition(
-        calcModelDefinition(item)
-      );
-
-    modelDefinitions.forEach((item) => {
-      modelDefinitionSet.set(item.name, item);
-    });
+    collectImport(item, importSet);
 
     const property = {
       ...omit(item, ["fields", "required", "refRequired", "default"]),
@@ -203,7 +185,7 @@ export function collectFields(
       property.fields = [];
       collectFields(
         item.fields,
-        { requiredList, defaultData, importSet, modelDefinitionSet },
+        { requiredList, defaultData, importSet },
         property.fields
       );
     }
@@ -213,15 +195,10 @@ export function collectFields(
 export function processFormData(
   data: SchemaItemProperty
 ): SchemaRootNodeProperty {
-  const result: SchemaItemProperty = omit(data, [
-    "fields",
-    "import",
-    "importModelDefinition",
-  ]);
+  const result: SchemaItemProperty = omit(data, ["fields", "import"]);
   const requiredList: string[] = [];
   const defaultData: Record<string, unknown> = {};
   const importSet = new Set<string>();
-  const modelDefinitionSet = new Map<string, ModelDefinition>();
   result.fields = [];
 
   if (data.required) {
@@ -232,18 +209,11 @@ export function processFormData(
     defaultData[data.name] = data.default;
   }
 
-  const modelDefinitions =
-    ContractContext.getInstance().getChildrenModelDefinition(
-      extractType(data.type) || extractRefType(data.ref)
-    );
-
-  modelDefinitions.forEach((item) => {
-    modelDefinitionSet.set(item.name, item);
-  });
+  collectImport(data, importSet);
 
   collectFields(
     data.fields,
-    { requiredList, defaultData, importSet, modelDefinitionSet },
+    { requiredList, defaultData, importSet },
     result.fields
   );
 
@@ -252,30 +222,7 @@ export function processFormData(
     required: uniq(requiredList),
     default: defaultData,
     ...(importSet.size !== 0 ? { import: Array.from(importSet) } : {}),
-    importModelDefinition: Array.from(modelDefinitionSet.values()),
   };
-}
-
-export function extractModelRef(
-  item: SchemaItemProperty,
-  importList: string[] = []
-): void {
-  const importMap: Map<string, string> = importList.reduce((map, item) => {
-    map.set(item.split(".")?.pop(), item);
-    return map;
-  }, new Map());
-
-  if (item.name && item.type) {
-    const modelName = extractType(item.type);
-    importMap.has(modelName) &&
-      modelRefCache.set(modelName, importMap.get(modelName));
-  }
-
-  if (item.ref) {
-    const modelName = item.ref.split(".")[0];
-    importMap.has(modelName) &&
-      modelRefCache.set(item.ref, importMap.get(modelName));
-  }
 }
 
 export function getRefRequiredFields(
@@ -290,7 +237,11 @@ export function getRefRequiredFields(
 export function isModelDefinition(item: SchemaItemProperty): boolean {
   if (item.ref) return true;
 
-  return !innerTypeList.includes(extractType(item.type));
+  const customTypeList = ContractContext.getInstance().customTypeList;
+
+  return ![...innerTypeList, ...customTypeList].includes(
+    extractType(item.type)
+  );
 }
 
 export function calcModelDefinition(item: SchemaItemProperty): string {

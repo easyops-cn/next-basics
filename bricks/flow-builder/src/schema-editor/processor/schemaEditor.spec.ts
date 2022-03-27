@@ -6,12 +6,11 @@ import {
   processItemData,
   processFormInitvalue,
   processFormData,
-  extractModelRef,
   getRefRequiredFields,
   filterTitleList,
 } from "./schemaEditor";
 import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
-import * as constantsModuel from "../constants";
+import { ContractContext } from "../ContractContext";
 
 describe("processor tst", () => {
   describe("filterTitleList", () => {
@@ -19,30 +18,30 @@ describe("processor tst", () => {
       expect(
         filterTitleList(
           [
-            { width: "50px", title: "a" },
-            { width: "100px", title: "b" },
-            { title: "Setting" },
+            { width: "50px", title: "a", key: "a" },
+            { width: "100px", title: "b", key: "b" },
+            { title: "Setting", key: "setting" },
           ],
           false
         )
       ).toEqual([
-        { width: "50px", title: "a" },
-        { width: "100px", title: "b" },
-        { title: "Setting" },
+        { width: "50px", title: "a", key: "a" },
+        { width: "100px", title: "b", key: "b" },
+        { title: "Setting", key: "setting" },
       ]);
 
       expect(
         filterTitleList(
           [
-            { width: "50px", title: "a" },
-            { width: "100px", title: "b" },
-            { title: "Setting" },
+            { width: "50px", title: "a", key: "a" },
+            { width: "100px", title: "b", key: "b" },
+            { title: "Setting", key: "setting" },
           ],
           true
         )
       ).toEqual([
-        { width: "50px", title: "a" },
-        { width: "100px", title: "b" },
+        { width: "50px", title: "a", key: "a" },
+        { width: "100px", title: "b", key: "b" },
       ]);
     });
   });
@@ -50,9 +49,9 @@ describe("processor tst", () => {
   describe("getGridTemplateColumns", () => {
     it("should return correct value", () => {
       const result = getGridTemplateColumns([
-        { width: "50px", title: "a" },
-        { width: "100px", title: "b" },
-        { title: "c" },
+        { width: "50px", title: "a", key: "a" },
+        { width: "100px", title: "b", key: "b" },
+        { title: "c", key: "c" },
       ]);
 
       expect(result).toEqual("50px 100px 1fr");
@@ -76,7 +75,7 @@ describe("processor tst", () => {
   });
 
   describe("isTypeChange", () => {
-    it("should return true or false accroding type", () => {
+    it("should return true or false according type", () => {
       const result = isTypeChange(
         { name: "a", type: "object" },
         { name: "a", type: "string" }
@@ -118,6 +117,24 @@ describe("processor tst", () => {
       );
 
       expect(result6).toEqual(false);
+
+      const result7 = isTypeChange(
+        { name: "a", type: "" },
+        { name: "a", type: "string" }
+      );
+      expect(result7).toEqual(true);
+
+      const result8 = isTypeChange(
+        { name: "a", ref: "Custom" },
+        { name: "a", type: "" }
+      );
+      expect(result8).toEqual(true);
+
+      const result9 = isTypeChange(
+        { name: "a", type: "" },
+        { name: "a", type: "" }
+      );
+      expect(result9).toEqual(false);
     });
   });
 
@@ -127,7 +144,7 @@ describe("processor tst", () => {
       expect(result).toEqual({ name: "a", ref: "IP", origin: "reference" });
 
       const result2 = processItemInitValue({ name: "a", type: "IP" });
-      expect(result2).toEqual({ name: "a", type: "IP", origin: "normal" });
+      expect(result2).toEqual({ name: "a", type: "IP", origin: "model" });
 
       const result3 = processItemInitValue();
       expect(result3).toEqual({ origin: "normal" });
@@ -594,10 +611,9 @@ describe("processor tst", () => {
     });
 
     it("should process form data with import data", () => {
-      (constantsModuel.modelRefCache as Map<string, string>) = new Map([
-        ["DeployLabel", "api.easyops.DeployLabel"],
-      ]);
+      const contract = ContractContext.getInstance();
 
+      contract.addImportNamespace("DeployLabel", "api.easyops.DeployLabel");
       const formData = {
         fields: [
           {
@@ -656,59 +672,8 @@ describe("processor tst", () => {
         required: ["labels", "TrackData.instanceId"],
         type: "object",
       });
-    });
-  });
 
-  describe("extractModelRef", () => {
-    beforeEach(() => {
-      jest.resetModules();
-    });
-
-    it("should return empty map", () => {
-      (constantsModuel.modelRefCache as Map<string, string>) = new Map();
-
-      extractModelRef(
-        {
-          name: "name",
-          required: true,
-          type: "PluginData",
-        },
-        []
-      );
-
-      expect(constantsModuel.modelRefCache).toEqual(new Map());
-    });
-
-    it("should return namespace data", () => {
-      (constantsModuel.modelRefCache as Map<string, string>) = new Map();
-
-      extractModelRef(
-        {
-          name: "params",
-          required: true,
-          type: "PluginData[]",
-        },
-        ["api.easyops.PluginData", "api.easyops.FlowData"]
-      );
-
-      expect(constantsModuel.modelRefCache).toEqual(
-        new Map([["PluginData", "api.easyops.PluginData"]])
-      );
-
-      extractModelRef(
-        {
-          name: "flow",
-          ref: "FlowData.id",
-        },
-        ["api.easyops.FlowData"]
-      );
-
-      expect(constantsModuel.modelRefCache).toEqual(
-        new Map([
-          ["PluginData", "api.easyops.PluginData"],
-          ["FlowData.id", "api.easyops.FlowData"],
-        ])
-      );
+      ContractContext.cleanInstance();
     });
   });
 

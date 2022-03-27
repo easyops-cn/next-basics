@@ -1,20 +1,27 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { Select, Checkbox } from "antd";
 import { TypeItem } from "./TypeItem";
+import { MoreOption } from "../more-option/MoreOption";
+
+jest.mock("@next-libs/basic-components", () => {
+  return {
+    Link: function Link() {
+      return <div>Link</div>;
+    },
+  };
+});
 
 jest.mock("../../hooks/useContractModels", () => ({
-  useContractModels: jest
-    .fn()
-    .mockReturnValue([
-      {
-        q: "yy",
-        modelList: [
-          { name: "DeployType", namespaceId: "api.easyops.DeployType" },
-        ],
-      },
-      jest.fn(),
-    ]),
+  useContractModels: jest.fn().mockReturnValue([
+    {
+      q: "yy",
+      modelList: [
+        { name: "DeployType", namespaceId: "api.easyops.DeployType" },
+      ],
+    },
+    jest.fn(),
+  ]),
 }));
 
 jest.mock("../../constants", () => ({
@@ -28,7 +35,6 @@ jest.mock("../../constants", () => ({
     "object",
     "file",
   ],
-  modelRefCache: new Map([["DeployType", "api.easyops.DeployType"]]),
 }));
 
 describe("TypeItem", () => {
@@ -53,5 +59,21 @@ describe("TypeItem", () => {
     wrapper.find(Checkbox).invoke("onChange")({ target: { checked: true } });
 
     expect(props.onChange).toHaveBeenCalledWith("DeployType[]");
+  });
+
+  it("should work with model type", () => {
+    const props = {
+      value: "DeployType",
+      type: "model",
+      onChange: jest.fn(),
+    };
+    const wrapper = mount(<TypeItem {...props} />);
+
+    wrapper
+      .find(Select)
+      .prop("dropdownRender")(null)
+      .props.children[1].props.onChange(100);
+
+    expect(props.onChange).toHaveBeenCalledWith(100);
   });
 });

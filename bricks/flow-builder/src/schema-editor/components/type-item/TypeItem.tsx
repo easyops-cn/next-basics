@@ -12,7 +12,6 @@ import {
   processTypeItemData,
 } from "../../processor";
 import { ContractContext } from "../../ContractContext";
-import { modelRefCache } from "../../constants";
 import { ModelDefinition, ModelFieldItem } from "../../interfaces";
 
 export interface ContractModel {
@@ -39,10 +38,11 @@ export interface TypeItemProps {
   value?: string;
   onChange?: (value: string) => void;
   type?: "normal" | "model";
+  allowClear?: boolean;
 }
 
 export function TypeItem(props: TypeItemProps): React.ReactElement {
-  const { type } = props;
+  const { type = "normal", allowClear } = props;
   const [{ q, modelList }, setQ, setPageSize] = useContractModels({
     disabledModelType: type === "normal",
   });
@@ -68,7 +68,6 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
     };
     const find = modelList.find((item) => item.name === value);
     if (find) {
-      modelRefCache.set(value, `${find.namespaceId}.${find.name}`);
       // 放入当前的模型的定义
       const modelDefinitionList = [
         {
@@ -77,7 +76,12 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
         },
         ...(find.importModelDefinition || []),
       ];
-      ContractContext.getInstance().addModelDefinition(modelDefinitionList);
+      const contractContext = ContractContext.getInstance();
+      contractContext.addModelDefinition(modelDefinitionList);
+      contractContext.addImportNamespace(
+        find.name,
+        `${find.namespaceId}.${find.name}`
+      );
     }
 
     setTypeValue(newValue);
@@ -113,6 +117,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
           value={typeValue.value}
           style={{ flex: 1, minWidth: 0 }}
           showSearch
+          allowClear={allowClear}
           filterOption={false}
           onChange={handleChange}
           onSearch={debounceSearch}
@@ -145,7 +150,7 @@ export function TypeItem(props: TypeItemProps): React.ReactElement {
         </Checkbox>
       </div>
       {type === "model" && (
-        <Link target="_blank" to="/models/create">
+        <Link target="_blank" to="/contract-center/models/create">
           {t(K.MODEL_DEFINITION_CREATE_TIPS)}
         </Link>
       )}

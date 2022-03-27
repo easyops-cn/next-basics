@@ -2,6 +2,7 @@ import {
   processRefItemData,
   processRefItemInitValue,
   checkRequired,
+  extractRefType,
 } from "./refItem";
 
 describe("refItem processor", () => {
@@ -41,6 +42,14 @@ describe("refItem processor", () => {
       await expect(checkRequired({}, "")).rejects.toThrow(
         "flow-builder:REF_VALIDATE_REQUIRED_MSG"
       );
+    });
+  });
+
+  describe("extractRefType", () => {
+    it("should work", () => {
+      expect(extractRefType("Admin.*")).toEqual("Admin");
+
+      expect(extractRefType()).toEqual("");
     });
   });
 });

@@ -3,17 +3,30 @@ import { calcModelDefinition } from "./processor";
 
 export class ContractContext {
   static instance: ContractContext;
-  private _modelDefinitionSet = new Map<string, ModelDefinition>();
+  private _modelDefinitionMap = new Map<string, ModelDefinition>();
+  private _importMap = new Map<string, string>();
+  public customTypeList: string[];
 
-  constructor(list: ModelDefinition[]) {
-    list?.forEach((item) => {
-      this._modelDefinitionSet.set(item.name, item);
+  constructor(
+    definitionList: ModelDefinition[],
+    importList: string[],
+    customTypeList: string[] = []
+  ) {
+    definitionList?.forEach((item) => {
+      this._modelDefinitionMap.set(item.name, item);
     });
+
+    importList?.forEach((namespace) => {
+      const key = namespace.split(".").pop();
+      this._importMap.set(key, namespace);
+    });
+
+    this.customTypeList = customTypeList;
   }
 
   getModelDefinition(): ModelDefinition[] {
     const list = [];
-    for (const [, modelDefinition] of this._modelDefinitionSet) {
+    for (const [, modelDefinition] of this._modelDefinitionMap) {
       list.push(modelDefinition);
     }
 
@@ -22,79 +35,43 @@ export class ContractContext {
 
   addModelDefinition(newModelList: ModelDefinition[]): void {
     newModelList?.forEach((model) => {
-      this._modelDefinitionSet.set(model.name, model);
+      this._modelDefinitionMap.set(model.name, model);
     });
   }
 
-  updateModelDefinition(name: string, modelList: ModelDefinition[]): void {
-    const removedModelList = this.getChildrenModelDefinition(name);
-    removedModelList.forEach((model) => {
-      this._modelDefinitionSet.delete(model.name);
-    });
-
-    modelList.forEach((model) => {
-      this._modelDefinitionSet.set(model.name, model);
-    });
+  getImportNamespaceList(): string[] {
+    return Array.from(this._importMap.values());
   }
 
-  private _getChildrenModelDefinition(
-    fields: SchemaItemProperty[],
-    modelList: ModelDefinition[],
-    parentModels: string[]
-  ): void {
-    fields?.forEach((item) => {
-      const modelName = calcModelDefinition(item);
-      const find = this._modelDefinitionSet.get(modelName);
-
-      if (find) {
-        const hasSelfRef = parentModels.includes(modelName);
-
-        if (!hasSelfRef) {
-          modelList.push(find);
-          parentModels.push(modelName);
-          if (find.fields) {
-            this._getChildrenModelDefinition(
-              find.fields,
-              modelList,
-              parentModels
-            );
-          }
-        }
-      } else {
-        if (item.fields) {
-          this._getChildrenModelDefinition(
-            item.fields,
-            modelList,
-            parentModels
-          );
-        }
-      }
-    });
+  addImportNamespace(key: string, namespace: string): void {
+    this._importMap.set(key, namespace);
   }
 
-  getChildrenModelDefinition(name: string): ModelDefinition[] {
-    const list: ModelDefinition[] = [];
-    const parentModels: string[] = [];
-    const model = this._modelDefinitionSet.get(name);
-
-    if (!model) return [];
-
-    list.push(model);
-    parentModels.push(model.name);
-
-    this._getChildrenModelDefinition(model.fields, list, parentModels);
-
-    return list;
+  hasImportNamespace(key: string): boolean {
+    return this._importMap.has(key);
   }
 
-  static getInstance(list?: ModelDefinition[]): ContractContext {
+  getSingleNamespace(key: string): string {
+    return this._importMap.get(key);
+  }
+
+  static getInstance(
+    definitionList?: ModelDefinition[],
+    importList?: string[],
+    customTypeList?: string[]
+  ): ContractContext {
     if (!this.instance) {
-      this.instance = new ContractContext(list);
+      this.instance = new ContractContext(
+        definitionList,
+        importList,
+        customTypeList
+      );
     }
     return this.instance;
   }
 
   static cleanInstance(): void {
+    // istanbul ignore else
     if (this.instance) {
       this.instance = null;
     }

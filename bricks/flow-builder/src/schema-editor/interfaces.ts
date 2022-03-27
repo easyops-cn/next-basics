@@ -1,4 +1,5 @@
 export interface EditorTitleProps {
+  key: string;
   title: string;
   width?: number | string;
 }
@@ -68,5 +69,4 @@ export interface EditorOfContext {
   ): void;
   showModelDefinition(modelDefinition: ModelDefinition, traceId: string): void;
   hideModelDefinition?(traceId: string): void;
-  updateModelDefinition?(): void;
 }

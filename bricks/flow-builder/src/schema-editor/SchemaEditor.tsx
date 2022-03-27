@@ -1,12 +1,12 @@
 /* istanbul ignore file */
 //  Ignore tests temporarily, watting for production confirmation
-import React, { forwardRef, useEffect, useMemo, useState } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
-import { get, set } from "lodash";
+import { get, isEmpty, set } from "lodash";
 import { SchemaItem } from "./components/schema-item/SchemaItem";
 import { AddPropertyModal } from "./components/add-property-modal/AddPropertyModal";
 import { ContractContext } from "./ContractContext";
-import { titleList, EditorContext } from "./constants";
+import { titleList, EditorContext, rootTraceId } from "./constants";
 import {
   SchemaItemProperty,
   SchemaRootNodeProperty,
@@ -26,7 +26,11 @@ export interface SchemaEditorProps extends FormItemWrapperProps {
   readonly?: boolean;
   onChange?: (data: SchemaRootNodeProperty) => void;
   hiddenRootNode?: boolean;
-  disabledModelType: boolean;
+  disabledModelType?: boolean;
+  enableWrapper?: boolean;
+  customTypeList?: string[];
+  rootNodeRequired?: Record<string, boolean>;
+  importModelDefinition?: ModelDefinition[];
 }
 
 interface ItemData {
@@ -39,8 +43,14 @@ export const SchemaEditorWrapper = forwardRef<
   HTMLDivElement,
   SchemaEditorProps
 >(function LegacySchemaEditor(props, ref): React.ReactElement {
-  const { hiddenRootNode, disabledModelType } = props;
-  const rootTraceId = "root";
+  const {
+    hiddenRootNode,
+    disabledModelType,
+    enableWrapper,
+    customTypeList,
+    rootNodeRequired,
+    importModelDefinition,
+  } = props;
   const [visible, setVisible] = useState(false);
   const [curItemData, SetCurItemData] = useState<ItemData>({
     initValue: {} as SchemaItemProperty,
@@ -50,9 +60,12 @@ export const SchemaEditorWrapper = forwardRef<
     processFormInitvalue({ name: props.name, ...props.value })
   );
 
-  const contractContext = useMemo(
-    () => ContractContext.getInstance(property.importModelDefinition),
-    [property.importModelDefinition]
+  const contractContext = useRef(
+    ContractContext.getInstance(
+      importModelDefinition,
+      property.import,
+      customTypeList
+    )
   );
 
   useEffect(() => {
@@ -103,7 +116,7 @@ export const SchemaEditorWrapper = forwardRef<
   const handleEdit = (data: SchemaItemProperty, traceId: string): void => {
     let mutableProps = { ...property };
 
-    if (traceId === "root") {
+    if (traceId === rootTraceId) {
       mutableProps = {
         ...data,
         fields: isTypeChange(data, mutableProps) ? [] : mutableProps.fields,
@@ -175,10 +188,6 @@ export const SchemaEditorWrapper = forwardRef<
     isEdit ? handleEdit?.(data, trackId) : handleAdd?.(data, trackId);
   };
 
-  const emitFormDataOnchange = (): void => {
-    props.onChange(processFormData(property));
-  };
-
   return (
     <EditorContext.Provider
       value={{
@@ -188,8 +197,7 @@ export const SchemaEditorWrapper = forwardRef<
         onModal: handleModal,
         showModelDefinition,
         hideModelDefinition,
-        modelDefinitionList: contractContext.getModelDefinition(),
-        updateModelDefinition: emitFormDataOnchange,
+        modelDefinitionList: contractContext.current?.getModelDefinition(),
       }}
     >
       <div className={styles.editor} ref={ref}>
@@ -214,7 +222,9 @@ export const SchemaEditorWrapper = forwardRef<
       </div>
       <AddPropertyModal
         {...curItemData}
+        enableWrapper={enableWrapper}
         disabledModelType={disabledModelType}
+        rootNodeRequired={rootNodeRequired}
         visible={visible}
         onClose={() => setVisible(false)}
         onSubmit={handleSubmit}

@@ -14,6 +14,7 @@ const locale: Locale = {
     "Can't edit sub-attributes under the `object[]` type",
   [K.ARRAY]: "array",
   [K.SIMPLE_TYPE]: "Simple Type",
+  [K.CUSTOM_TYPE]: "Custom Type",
   [K.MODEL_TYPE]: "Model Type",
   [K.REF_VALIDATE_REQUIRED_MSG]: "Please select field of Ref",
   [K.MODEL_SEARCH_PLACEHOLDER]: "Search with keyword",
@@ -38,8 +39,7 @@ const locale: Locale = {
   [K.VALIDATOR_LABEL]: "Validator",
   [K.FIELD_PARAMS]: "Params",
   [K.ADD_FIELD_PARAMS_TIPS]: "add `{{name}}` children properties",
-  [K.MODEL_DEFINITION_UPDATE_MESSAGE]:
-    "The model has been updated, whether to get the latest model definition",
+  [K.MODEL_DEFINITION_UPDATE_MESSAGE]: "There is an update",
   [K.MODEL_DEFINITION_CREATE_TIPS]: "Can't find a model? go to create",
 };
 

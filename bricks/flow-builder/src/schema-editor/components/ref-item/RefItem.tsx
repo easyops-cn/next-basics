@@ -9,7 +9,6 @@ import { MoreOption } from "../more-option/MoreOption";
 import { ContractContext } from "../../ContractContext";
 import { ModelFieldItem } from "../../interfaces";
 import { processRefItemData, processRefItemInitValue } from "../../processor";
-import { modelRefCache } from "../../constants";
 
 export interface ProcessRefItemValue {
   name?: string;
@@ -68,7 +67,12 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         },
         ...(find.importModelDefinition || []),
       ];
-      ContractContext.getInstance().addModelDefinition(modelDefinitionList);
+      const contractContext = ContractContext.getInstance();
+      contractContext.addModelDefinition(modelDefinitionList);
+      contractContext.addImportNamespace(
+        find.name,
+        `${find.namespaceId}.${find.name}`
+      );
       setFieldList(find.fields);
     }
   };
@@ -91,12 +95,6 @@ export function RefItem(props: RefItemProps): React.ReactElement {
     };
 
     setRefValue(newValue);
-    const find = modelList.find((item) => item.name === newValue.name);
-    find &&
-      modelRefCache.set(
-        `${newValue.name}.${newValue.field}`,
-        `${find.namespaceId}.${find.name}`
-      );
     props.onChange(processRefItemData(newValue));
   };
 

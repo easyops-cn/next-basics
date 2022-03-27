@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { Modal, Form, Input, Select, Radio, Switch, InputNumber } from "antd";
@@ -9,6 +9,7 @@ import {
   processItemData,
   checkRequired,
 } from "../../processor";
+import { rootTraceId } from "../../constants";
 import { FieldValidatorItem } from "../field-validator-item/FieldValidatorItem";
 import { TypeItem } from "../../components/type-item/TypeItem";
 import { RefItem } from "../../components/ref-item/RefItem";
@@ -26,6 +27,8 @@ export interface AddPropertyModalProps {
   initValue?: SchemaItemProperty;
   isEdit?: boolean;
   disabledModelType?: boolean;
+  enableWrapper?: boolean;
+  rootNodeRequired?: Record<string, boolean>;
 }
 
 export function AddPropertyModal({
@@ -36,6 +39,8 @@ export function AddPropertyModal({
   trackId,
   isEdit,
   disabledModelType,
+  enableWrapper,
+  rootNodeRequired,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -119,10 +124,20 @@ export function AddPropertyModal({
             <Form.Item
               name="type"
               label={t(K.TYPE_LABEL)}
-              rules={[{ required: true }]}
+              rules={[
+                {
+                  required:
+                    trackId === rootTraceId && isEdit
+                      ? rootNodeRequired?.type
+                      : true,
+                },
+              ]}
               messageVariables={{ label: "type" }}
             >
               <TypeItem
+                allowClear={
+                  trackId === rootTraceId && isEdit && !rootNodeRequired?.type
+                }
                 type={getFieldValue("origin") === "model" ? "model" : "normal"}
               />
             </Form.Item>
@@ -139,7 +154,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [form, t]
+    [form, isEdit, rootNodeRequired, t, trackId]
   );
 
   const defaultFormItem = useMemo(
@@ -268,6 +283,35 @@ export function AddPropertyModal({
     [t]
   );
 
+  const showWrapperFormItem = useMemo(() => {
+    return enableWrapper && trackId === rootTraceId && isEdit;
+  }, [enableWrapper, trackId, isEdit]);
+
+  const wrapperFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.origin !== currentValues.origin
+        }
+      >
+        {({ getFieldValue }) =>
+          ["normal", "model"].includes(getFieldValue("origin")) && (
+            <Form.Item
+              initialValue={true}
+              name="wrapper"
+              label="wrapper"
+              valuePropName="checked"
+            >
+              <Switch />
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    []
+  );
+
   const descriptionFormItem = useMemo(
     () => (
       <Form.Item
@@ -281,7 +325,14 @@ export function AddPropertyModal({
             <Form.Item
               name="description"
               label={t(K.DESCRIPTION_LABEL)}
-              rules={[{ required: true }]}
+              rules={[
+                {
+                  required:
+                    trackId === rootTraceId && isEdit
+                      ? rootNodeRequired?.description
+                      : true,
+                },
+              ]}
             >
               <Input.TextArea />
             </Form.Item>
@@ -289,7 +340,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [t]
+    [t, trackId, isEdit, rootNodeRequired]
   );
 
   return (
@@ -319,6 +370,7 @@ export function AddPropertyModal({
         {enumFormItem}
 
         {validatorFormItem}
+        {showWrapperFormItem && wrapperFormItem}
         {descriptionFormItem}
       </Form>
     </Modal>

@@ -3,6 +3,15 @@ import { Form, Modal, Select, Radio, InputNumber } from "antd";
 import { mount, shallow } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { AddPropertyModal } from "./AddPropertyModal";
+import { Link } from "@next-libs/basic-components";
+
+jest.mock("@next-libs/basic-components", () => {
+  return {
+    Link: function Link() {
+      return <div>Link</div>;
+    },
+  };
+});
 
 describe("AddPropertyModal", () => {
   it("should work", () => {
@@ -153,5 +162,33 @@ describe("AddPropertyModal", () => {
     expect(wrapper.find(Form).prop("form").getFieldValue("enum")).toEqual([
       10, 20, 30,
     ]);
+  });
+
+  it("should work with response root node", async () => {
+    const props = {
+      visible: true,
+      isEdit: true,
+      trackId: "root",
+      enableWrapper: true,
+      rootNodeRequired: {
+        type: true,
+        description: true,
+      },
+      onClose: jest.fn(),
+      onSubmit: jest.fn(),
+      initValue: {
+        type: "Task",
+        name: "response",
+        description: "响应体",
+      },
+    };
+    const wrapper = mount(<AddPropertyModal {...props} />);
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+
+    expect(wrapper.find(Link).prop("to")).toEqual(
+      "/contract-center/models/create"
+    );
   });
 });
