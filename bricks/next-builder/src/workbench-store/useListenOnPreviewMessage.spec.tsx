@@ -25,6 +25,7 @@ const manager = {
   },
   setHoverNodeUid: jest.fn(),
   nodeClick: jest.fn(),
+  contextMenuChange: jest.fn(),
 } as any;
 
 function TestComponent(): React.ReactElement {
@@ -92,6 +93,35 @@ describe("useListenOnPreviewMessage", () => {
       })
     );
     expect(manager.nodeClick).not.toBeCalled();
+    wrapper.unmount();
+  });
+
+  it("should work for context menu on brick", () => {
+    (useHoverNodeUid as jest.Mock).mockReturnValue(1);
+    const wrapper = mount(<TestComponent />);
+    window.dispatchEvent(
+      new MessageEvent("message", {
+        data: {
+          sender: "preview-container",
+          forwardedFor: "previewer",
+          type: "context-menu-on-brick",
+          iidList: ["i-3", "i-2", "i-1"],
+          position: {
+            x: 100,
+            y: 200,
+          },
+        },
+        origin: location.origin,
+      })
+    );
+    expect(manager.contextMenuChange).toBeCalledWith({
+      active: true,
+      node: expect.objectContaining({
+        instanceId: "i-1",
+      }),
+      x: 100,
+      y: 200,
+    });
     wrapper.unmount();
   });
 

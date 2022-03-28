@@ -32,6 +32,18 @@ export function useListenOnPreviewMessage(manager: BuilderDataManager): void {
           }
           break;
         }
+        case "context-menu-on-brick": {
+          const node = findPreviewNode(data.iidList, manager);
+          if (node) {
+            manager.contextMenuChange({
+              active: true,
+              node,
+              x: data.position.x,
+              y: data.position.y,
+            });
+          }
+          break;
+        }
       }
     };
     window.addEventListener("message", listener);
