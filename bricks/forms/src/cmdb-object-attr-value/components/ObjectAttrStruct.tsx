@@ -2,7 +2,7 @@ import React from "react";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { Form } from "@ant-design/compatible";
 import { Modal, Row, Radio, Button, Table, Input, Select, Tag } from "antd";
-import { isNil, isEmpty } from "lodash";
+import _, { isNil, isEmpty, omit } from "lodash";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";
 import { CmdbObjectApi_getObjectAll, CmdbModels } from "@next-sdk/cmdb-sdk";
@@ -18,6 +18,7 @@ interface StructDefine {
   name: string;
   type: string;
   regex?: string[];
+  isNew?: boolean;
 }
 
 export interface StructValueType {
@@ -82,7 +83,6 @@ export function LegacyObjectAttrStructForm(
   const [selectedObjectAttrKeys, setSelectedObjectAttrKeys] = React.useState(
     []
   );
-
   const [loadingObject, setLoadingObject] = React.useState(false);
 
   const memoizeAttrList = React.useMemo(() => {
@@ -252,7 +252,7 @@ export function LegacyObjectAttrStructForm(
       }
       const new_struct_define = [...value.struct_define];
       if (isEmpty(currentStruct)) {
-        new_struct_define.push(data);
+        new_struct_define.push({ ...data, isNew: true });
       } else {
         const currentStructId = value.struct_define.findIndex(
           (item) => item.id === currentStruct.id
@@ -261,7 +261,10 @@ export function LegacyObjectAttrStructForm(
           new_struct_define[currentStructId] = data;
         }
       }
-      handleValueChange({ ...value, struct_define: new_struct_define });
+      handleValueChange({
+        ...value,
+        struct_define: new_struct_define.map((item) => omit(item, ["isNew"])),
+      });
       setAddStructModalVisible(false);
       setCurValueType("");
       props.form.resetFields();
@@ -412,6 +415,7 @@ export function LegacyObjectAttrStructForm(
               <Select
                 onChange={(value) => setCurValueType(value as string)}
                 style={{ width: "100%" }}
+                disabled={!isEmpty(currentStruct) && !currentStruct?.isNew}
               >
                 {valueTypeList
                   .filter(
