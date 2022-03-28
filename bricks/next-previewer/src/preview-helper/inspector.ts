@@ -1,10 +1,11 @@
 // istanbul ignore file: working in progress
 // https://github.com/facebook/react/blob/cae635054e17a6f107a39d328649137b83f25972/packages/react-devtools-shared/src/backend/views/Highlighter/index.js
 import { throttle } from "lodash";
-import {
+import type {
   PreviewMessagePreviewerHoverOnBrick,
   PreviewMessagePreviewerSelectBrick,
-} from "@next-core/brick-types";
+  PreviewMessagePreviewerContextMenuOnBrick,
+} from "@next-types/preview";
 
 let previewProxyOrigin: string;
 

@@ -3,7 +3,7 @@ import {
   useHoverNodeUid,
   type BuilderDataManager,
 } from "@next-core/editor-bricks-helper";
-import type { PreviewMessageBuilderHoverOnBrick } from "@next-core/brick-types";
+import type { PreviewMessageBuilderHoverOnBrick } from "@next-types/preview";
 
 export function useHoverOnBrick(manager: BuilderDataManager): void {
   const hoverNodeUid = useHoverNodeUid();

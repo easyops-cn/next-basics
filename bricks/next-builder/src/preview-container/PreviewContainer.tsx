@@ -14,7 +14,7 @@ import type {
   PreviewMessageContainerToggleInspecting,
   PreviewMessageFromContainer,
   PreviewMessageToContainer,
-} from "@next-core/brick-types";
+} from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
 import classNames from "classnames";

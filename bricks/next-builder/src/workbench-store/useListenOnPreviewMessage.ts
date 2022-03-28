@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import type { PreviewerMessageToBuilder } from "@next-core/brick-types";
+import type { PreviewerMessageToBuilder } from "@next-types/preview";
 import type {
   BuilderDataManager,
   BuilderRuntimeNode,
