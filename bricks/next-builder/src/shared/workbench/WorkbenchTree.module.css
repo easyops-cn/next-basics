@@ -16,7 +16,8 @@
   height: 22px;
 }
 
-.nodeLabelRow:hover {
+.nodeLabelRow:hover,
+.nodeLabelRow.hover {
   background-color: #2a2d2e;
 }
 
@@ -47,8 +48,7 @@
   color: #fff;
 }
 
-.nodeLabelRow.active,
-.nodeLabelRow.hover:not(:hover) {
+.nodeLabelRow.active {
   background-color: #37373d;
 }
 
@@ -69,6 +69,6 @@
   white-space: nowrap;
 }
 
-.nodeLabelRow:not(.hover, :hover) .nodeActionsBar {
+.nodeLabelRow:not(:hover) .nodeActionsBar {
   display: none;
 }
