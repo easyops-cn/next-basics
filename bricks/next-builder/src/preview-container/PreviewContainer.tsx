@@ -90,9 +90,7 @@ export function LegacyPreviewContainer(
       } as PreviewMessageContainerStartPreview,
       previewOrigin
     );
-    // Once the iframe is loaded, send the message again.
-    sendToggleInspecting(inspecting, iframeRef, previewOrigin);
-  }, [inspecting, previewOrigin]);
+  }, [previewOrigin]);
 
   const refresh = useCallback(() => {
     iframeRef.current.contentWindow.postMessage(
@@ -163,6 +161,8 @@ export function LegacyPreviewContainer(
             break;
           }
           case "preview-started":
+            // Once the preview is started, send the message again.
+            sendToggleInspecting(inspecting, iframeRef, previewOrigin);
             setPreviewStarted(true);
             onPreviewStart();
             break;
@@ -183,6 +183,7 @@ export function LegacyPreviewContainer(
     previewOrigin,
     sameOriginWithOpener,
     scale,
+    inspecting,
   ]);
 
   useEffect(() => {
