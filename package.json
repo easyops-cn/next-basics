@@ -92,7 +92,7 @@
     "bricks/*",
     "libs/*",
     "micro-apps/*",
-    "templates/*"
+    "types/*"
   ],
   "resolutions": {
     "@types/react": "^16.14.23",

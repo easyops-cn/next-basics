@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import type { PreviewerMessageToBuilder } from "@next-core/brick-types";
+import type { PreviewerMessageToBuilder } from "@next-types/preview";
 import type {
   BuilderDataManager,
   BuilderRuntimeNode,
@@ -29,6 +29,18 @@ export function useListenOnPreviewMessage(manager: BuilderDataManager): void {
           const node = findPreviewNode(data.iidList, manager);
           if (node) {
             manager.nodeClick(node);
+          }
+          break;
+        }
+        case "context-menu-on-brick": {
+          const node = findPreviewNode(data.iidList, manager);
+          if (node) {
+            manager.contextMenuChange({
+              active: true,
+              node,
+              x: data.position.x,
+              y: data.position.y,
+            });
           }
           break;
         }
