@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.213.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.213.0...@next-bricks/forms@1.213.1) (2022-03-28)
+
+
+### Bug Fixes
+
+* 修改forms.advanced.setting样式   Closes BRICK_STORE-2657 ([533f390](https://github.com/easyops-cn/next-basics/commit/533f3905bcaf2548b8ead2ebefeb860a8d0bd6c0))
+
+
+
+
+
 # [1.213.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.212.0...@next-bricks/forms@1.213.0) (2022-03-25)
 
 
