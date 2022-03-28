@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.213.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.213.1...@next-bricks/forms@1.213.2) (2022-03-28)
+
+
+### Bug Fixes
+
+* **cmdb:** 结构项类型不可以修改 ([e835070](https://github.com/easyops-cn/next-basics/commit/e8350709a3b91266fe13628e87af421d4a9f5dbf))
+
+
+
+
+
 ## [1.213.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.213.0...@next-bricks/forms@1.213.1) (2022-03-28)
 
 
