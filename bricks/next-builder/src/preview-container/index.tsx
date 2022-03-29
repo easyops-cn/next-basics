@@ -8,6 +8,7 @@ import {
   UpdatingElement,
   method,
 } from "@next-core/brick-kit";
+import type { Storyboard } from "@next-core/brick-types";
 import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
 
 /**
@@ -45,8 +46,13 @@ export class PreviewContainerElement extends UpdatingElement {
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
-  refresh(): void {
-    this._previewContainerRef.current.refresh();
+  refresh(appId: string, storyboardPatch: Partial<Storyboard>): void {
+    this._previewContainerRef.current.refresh(appId, storyboardPatch);
+  }
+
+  @method()
+  reload(): void {
+    this._previewContainerRef.current.reload();
   }
 
   connectedCallback(): void {

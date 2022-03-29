@@ -9,6 +9,8 @@ import React, {
   useState,
 } from "react";
 import ResizeObserver from "resize-observer-polyfill";
+import classNames from "classnames";
+import type { Storyboard } from "@next-core/brick-types";
 import type {
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
@@ -17,7 +19,6 @@ import type {
 } from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
-import classNames from "classnames";
 
 export interface PreviewContainerProps {
   previewUrl: string;
@@ -29,7 +30,8 @@ export interface PreviewContainerProps {
 }
 
 export interface PreviewContainerRef {
-  refresh(): void;
+  refresh(appId: string, storyboardPatch: Partial<Storyboard>): void;
+  reload(): void;
 }
 
 function sendToggleInspecting(
@@ -92,11 +94,26 @@ export function LegacyPreviewContainer(
     );
   }, [previewOrigin]);
 
-  const refresh = useCallback(() => {
+  const refresh = useCallback(
+    (appId: string, storyboardPatch: Partial<Storyboard>) => {
+      iframeRef.current.contentWindow.postMessage(
+        {
+          sender: "preview-container",
+          type: "refresh",
+          appId,
+          storyboardPatch,
+        } as PreviewMessageFromContainer,
+        previewOrigin
+      );
+    },
+    [previewOrigin]
+  );
+
+  const reload = useCallback(() => {
     iframeRef.current.contentWindow.postMessage(
       {
         sender: "preview-container",
-        type: "refresh",
+        type: "reload",
       } as PreviewMessageFromContainer,
       previewOrigin
     );
@@ -111,6 +128,7 @@ export function LegacyPreviewContainer(
 
   useImperativeHandle(ref, () => ({
     refresh,
+    reload,
   }));
 
   useEffect(() => {

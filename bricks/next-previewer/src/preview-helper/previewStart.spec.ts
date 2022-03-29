@@ -25,8 +25,16 @@ const history = {
       fn(path);
     }
   },
+  reload: jest.fn(),
 } as any;
 jest.spyOn(kit, "getHistory").mockReturnValue(history);
+jest.spyOn(kit.developHelper, "updateStoryboard").mockImplementation();
+
+delete window.location;
+window.location = {
+  origin: "http://localhost",
+  reload: jest.fn(),
+} as unknown as Location;
 
 const parentPostMessage = jest.fn();
 // Must delete it first in Jest.
@@ -153,5 +161,28 @@ describe("previewStart", () => {
       },
     } as any);
     expect(stopInspecting).toBeCalledTimes(1);
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "reload",
+      },
+    } as any);
+    expect(window.location.reload).toBeCalledTimes(1);
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "refresh",
+        appId: "my-app",
+        storyboardPatch: { routes: [] },
+      },
+    } as any);
+    expect(kit.developHelper.updateStoryboard).toBeCalledWith("my-app", {
+      routes: [],
+    });
+    expect(history.reload).toBeCalledTimes(1);
   });
 });
