@@ -1,7 +1,9 @@
 .treeWrapper {
   overflow: auto;
   flex-grow: 1;
-  background: var(--antd-component-background);
+  background: var(--color-fill-bg-container-4);
+  border-radius: var(--larger-border-radius);
+  box-shadow: var(--connected-overlay-shadow);
 
   &.withSuffix {
     .suffixBrickWrapper {
@@ -36,11 +38,11 @@
 }
 
 .matchText {
-  color: #0071eb;
-  background-color: #ebf3fd;
+  color: var(--color-brand);
+  background: var(--menu-dropdown-bg);
 }
 .matchTextTotal {
-  color: #0071eb;
+  color: var(--color-brand);
 }
 .titleSpace {
   :global .ant-tree-treenode:nth-child(2) {
