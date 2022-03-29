@@ -58,7 +58,7 @@ export function BrickIllustration({
         })}
       >
         {renderHeader}
-        <img src={image} style={imageStyle} />
+        <img src={image} className={styles.imageDefault} style={imageStyle} />
         {renderFooter}
       </div>
     </div>
