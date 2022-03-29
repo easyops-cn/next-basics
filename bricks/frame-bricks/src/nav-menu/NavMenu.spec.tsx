@@ -4,41 +4,15 @@ import { mount } from "enzyme";
 import { NavMenu } from "./NavMenu";
 import { SidebarMenuItem } from "@next-core/brick-types";
 import * as brickKit from "@next-core/brick-kit";
-import { act } from "react-dom/test-utils";
 
 jest.spyOn(brickKit, "getHistory").mockReturnValue({
   location: {
-    pathname: "/page-1",
+    pathname: "/page-1-2",
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   listen: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   createHref: () => {},
-} as any);
-
-let menuItems = [
-  {
-    text: "page-1",
-    type: "default",
-    key: "0",
-    to: "/page-1",
-  },
-  {
-    text: "page-2",
-    type: "default",
-    key: "1",
-    to: "/page-2",
-  },
-];
-
-jest.spyOn(brickKit, "getRuntime").mockReturnValue({
-  getNavConfig: () => {
-    return {
-      menu: {
-        menuItems,
-      },
-    };
-  },
 } as any);
 
 const sideBarMenuItem = [
@@ -65,7 +39,7 @@ const sideBarMenuItem = [
           {
             text: "subMenu-group-item-1",
             type: "default",
-            key: "1",
+            to: "/page-1-1",
             icon: {
               color: "geekblue",
               icon: "anchor",
@@ -76,7 +50,7 @@ const sideBarMenuItem = [
           {
             text: "subMenu-group-item-2",
             type: "default",
-            key: "2",
+            to: "/page-1-2",
             icon: {
               color: "geekblue",
               icon: "anchor",
@@ -95,57 +69,26 @@ const sideBarMenuItem = [
       {
         type: "default",
         text: "group-2-item-1",
-        key: "3",
       },
     ],
   },
   {
     type: "default",
     text: "page-3",
-    key: "4",
+  },
+  {
+    type: "default",
+    text: "page-4",
   },
 ] as SidebarMenuItem[];
 
 describe("NavMenu", () => {
   it("should work", () => {
-    const wrapper = mount(
-      <NavMenu
-        menuItems={sideBarMenuItem}
-        isCustom={true}
-        selectedKeys={["3"]}
-      />
-    );
+    const wrapper = mount(<NavMenu menuItems={sideBarMenuItem} />);
 
-    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["3"]);
+    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["0.0.1"]);
 
     expect(wrapper.find(Menu.SubMenu).length).toBe(2);
-
-    expect(wrapper.find(Menu.Item).length).toBe(1);
-
-    wrapper.find(Menu.Item).last().simulate("click");
-
-    wrapper.update();
-
-    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["4"]);
-  });
-
-  it("should work while customItem was true", () => {
-    const wrapper = mount(
-      <NavMenu menuItems={[]} isCustom={true} selectedKeys={["3"]} />
-    );
-
-    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["3"]);
-
-    expect(wrapper.find(Menu.SubMenu).length).toBe(0);
-  });
-
-  it("should work while use getRuntime menu", async () => {
-    const wrapper = mount(<NavMenu />);
-
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
-    wrapper.update();
 
     expect(wrapper.find(Menu.Item).length).toBe(2);
 
@@ -153,18 +96,12 @@ describe("NavMenu", () => {
 
     wrapper.update();
 
-    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["1"]);
+    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["3"]);
   });
 
-  it("should work while use getRuntime was null", async () => {
-    menuItems = [];
-    const wrapper = mount(<NavMenu />);
+  it("should work while customItem was true", () => {
+    const wrapper = mount(<NavMenu menuItems={[]} />);
 
-    await act(async () => {
-      await (global as any).flushPromises();
-    });
-    wrapper.update();
-
-    expect(wrapper.find(Menu.Item).length).toBe(0);
+    expect(wrapper.find(Menu.SubMenu).length).toBe(0);
   });
 });

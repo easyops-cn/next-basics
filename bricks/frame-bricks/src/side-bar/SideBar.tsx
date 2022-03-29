@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
 import * as SideBarComponent from "./SidebarMenu";
-import { SidebarMenu, SidebarSubMenu } from "@next-core/brick-types";
+import { SidebarSubMenu } from "@next-core/brick-types";
 import { ReactComponent as FixedSvg } from "../images/fixed.svg";
 import { ReactComponent as ToFixedSvg } from "../images/toFixed.svg";
 import classNames from "classnames";
 import { Tooltip } from "antd";
-import { getRuntime } from "@next-core/brick-kit";
 import { JsonStorage } from "@next-libs/storage";
 
 interface SideBarProps {
@@ -30,8 +29,7 @@ export const SIDE_BAR_HAS_BEEN_USED = "side-bar-has-been-used";
 
 export function SideBar(props: SideBarProps): React.ReactElement {
   const {
-    menu,
-    isCustom = false,
+    menu = {} as SidebarSubMenu,
     onMouseEnter,
     onMouseLeave,
     onSideBarFixed,
@@ -43,22 +41,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const [showFirstUsedTooltip, setShowFirstUsedTooltip] = useState<boolean>(
     !storage.getItem(SIDE_BAR_HAS_BEEN_USED)
   );
-  const [menus, setMenus] = useState<SidebarMenu>(menu);
 
   const { t } = useTranslation(NS_FRAME_BRICKS);
-
-  const getMenu = async (): Promise<void> => {
-    if (isCustom) return;
-    const appMenu = getRuntime().getNavConfig();
-
-    if (appMenu.subMenu) {
-      setMenus(appMenu.subMenu as SidebarMenu);
-    }
-  };
-
-  useEffect(() => {
-    getMenu();
-  }, []);
 
   const handleFixedIconClick = (): void => {
     setShowFirstUsedTooltip(false);
@@ -92,7 +76,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     expandedState !== ExpandedState.Expanded && onMouseLeave?.();
   };
 
-  return menus ? (
+  return (
     <div
       className={classNames(styles.sideBarContainer, {
         [styles.hovered]: expandedState === ExpandedState.Hovered,
@@ -104,12 +88,12 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     >
       <div className={styles.menuTitle}>
         <i className={styles.menuTitlePoint} />
-        <div className={styles.menuTitleText} title={menus.title}>
-          {menus.title}
+        <div className={styles.menuTitleText} title={menu.title}>
+          {menu.title}
         </div>
       </div>
       <SideBarComponent.SidebarMenu
-        menuItems={menus?.menuItems || []}
+        menuItems={menu?.menuItems || []}
         collapsed={expandedState === ExpandedState.Collapsed}
       />
       <div className={styles.sideBarFooter}>
@@ -141,5 +125,5 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         </Tooltip>
       </div>
     </div>
-  ) : null;
+  );
 }

@@ -18,27 +18,6 @@ jest.spyOn(brickKit, "getHistory").mockReturnValue({
   createHref: () => {},
 } as any);
 
-jest.spyOn(brickKit, "getRuntime").mockReturnValue({
-  getNavConfig: () => {
-    return {
-      subMenu: [
-        {
-          text: "page-1",
-          type: "default",
-          key: "0",
-          to: "/page-1",
-        },
-        {
-          text: "page-2",
-          type: "default",
-          key: "1",
-          to: "/page-2",
-        },
-      ],
-    };
-  },
-} as any);
-
 jest.mock("@next-libs/storage", () => ({
   JsonStorage: jest.fn(() => {
     let mockStorageValue: any;
@@ -165,12 +144,10 @@ describe("SideBar", () => {
             {
               text: "page-1",
               type: "default",
-              key: "0",
               to: "/page-1",
             },
           ],
         }}
-        isCustom={true}
       />
     );
 
