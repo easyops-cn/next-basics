@@ -73,7 +73,6 @@
     align-items: center;
   }
   &.hoverable:hover {
-    border-color: #ffffff;
     border-radius: var(--larger-border-radius);
     box-shadow: var(--hover-shadow);
     .operatingArea {
