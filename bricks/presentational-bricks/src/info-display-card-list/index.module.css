@@ -8,6 +8,7 @@
 
   &:global(.ant-card) {
     &:hover {
+      background-color: var(--card-item-hover-bg);
       border-color: transparent;
     }
   }
