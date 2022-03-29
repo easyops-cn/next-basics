@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.125.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.124.1...@next-bricks/next-builder@1.125.0) (2022-03-29)
+
+
+### Features
+
+* support updating storyboard on the fly ([7005d96](https://github.com/easyops-cn/next-basics/commit/7005d96d23f975b089ecf8f9ec208991735924bb))
+
+
+
+
+
 ## [1.124.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.124.0...@next-bricks/next-builder@1.124.1) (2022-03-29)
 
 
