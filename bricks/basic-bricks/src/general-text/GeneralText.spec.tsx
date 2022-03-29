@@ -12,12 +12,11 @@ describe("GeneralText", () => {
       fontSize: 16,
     });
 
+    const span1 = wrapper.find("span").at(0);
+
     expect(wrapper.text()).toBe("def");
-    expect(wrapper.find("span").prop("style")).toEqual({
+    expect(span1.prop("style")).toEqual({
       fontSize: 16,
-      fontWight: 700,
-      color: "#abc",
-      lineHeight: "16px",
     });
 
     wrapper.setProps({
@@ -30,7 +29,10 @@ describe("GeneralText", () => {
       },
     });
 
-    expect(wrapper.find("span").prop("style")).toEqual({
+    const span2 = wrapper.find("span").at(0);
+
+    expect(wrapper.text()).toBe("def");
+    expect(span2.prop("style")).toEqual({
       fontSize: 20,
       fontWight: 100,
       color: "#def",
