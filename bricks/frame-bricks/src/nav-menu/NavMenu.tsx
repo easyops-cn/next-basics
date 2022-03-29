@@ -7,7 +7,7 @@ import {
   SidebarMenuItem,
   SidebarMenuGroup,
 } from "@next-core/brick-types";
-import { getRuntime, getHistory } from "@next-core/brick-kit";
+import { getHistory } from "@next-core/brick-kit";
 import classNames from "classnames";
 import {
   Link,
@@ -33,8 +33,7 @@ function isSubMenu(
 }
 
 export function NavMenu(props: SidebarMenuProps): React.ReactElement {
-  const { menuItems, isCustom = false, selectedKeys } = props;
-  const [menus, setMenus] = useState(menuItems ?? []);
+  const { menuItems } = props;
 
   const history = getHistory();
   const [location, setLocation] = useState<Location>(history.location);
@@ -43,26 +42,20 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   });
   const { pathname, search } = location;
 
-  const [selectedKey, setSelectedKey] = useState(selectedKeys ?? []);
+  const [selectedKey, setSelectedKey] = useState<string[]>([]);
 
-  const getMenu = async (): Promise<void> => {
-    if (isCustom) return;
-    const appMenu = getRuntime().getNavConfig();
-
-    if (appMenu.menu) {
-      const { selectedKeys } = initMenuItemAndMatchCurrentPathKeys(
-        appMenu.menu.menuItems,
-        pathname,
-        search,
-        ""
-      );
-      setMenus(appMenu.menu.menuItems);
-      setSelectedKey(selectedKeys);
-    }
+  const setSelected = async (): Promise<void> => {
+    const { selectedKeys } = initMenuItemAndMatchCurrentPathKeys(
+      menuItems,
+      pathname,
+      search,
+      ""
+    );
+    setSelectedKey(selectedKeys);
   };
 
   useEffect(() => {
-    getMenu();
+    setSelected();
     return unlisten;
   }, []);
 
@@ -137,7 +130,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       className={style.navMenuContainer}
       onClick={(e) => setSelectedKey([e.key as string])}
     >
-      {menus.map((item) => renderMenuItem(item, true))}
+      {menuItems.map((item) => renderMenuItem(item, true))}
     </Menu>
   );
 }
