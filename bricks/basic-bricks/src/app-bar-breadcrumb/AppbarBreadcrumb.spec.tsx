@@ -2,7 +2,6 @@ import React from "react";
 import { mount } from "enzyme";
 import * as kit from "@next-core/brick-kit";
 import { AppbarBreadcrumb } from "./AppbarBreadcrumb";
-import { act } from "react-dom/test-utils";
 
 jest.spyOn(kit, "getHistory").mockReturnValue({
   push: jest.fn(),
@@ -34,16 +33,13 @@ describe("AppbarBreadcrumb", () => {
         separator="/"
       />
     );
-    expect(wrapper.html()).toEqual(
-      '<div class="breadcrumbContainer appbarBreadcrumb"><div class="ant-breadcrumb"><span><span class="ant-breadcrumb-link"><a>page1</a></span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link"><a>page2</a></span><span class="ant-breadcrumb-separator">/</span></span></div></div>'
-    );
+    expect(wrapper.prop("breadcrumb").length).toBe(2);
+    expect(wrapper.find(".ant-breadcrumb-link").length).toBe(2);
   });
 
   it("should work while props.breadcrumb was null", () => {
     const wrapper = mount(<AppbarBreadcrumb breadcrumb={[]} />);
 
-    expect(wrapper.html()).toEqual(
-      '<div class="breadcrumbContainer appbarBreadcrumb"><div class="ant-breadcrumb"><span><span class="ant-breadcrumb-link"><a>page3</a></span><span class="ant-breadcrumb-separator">/</span></span></div></div>'
-    );
+    expect(wrapper.find(".ant-breadcrumb-link").length).toBe(1);
   });
 });

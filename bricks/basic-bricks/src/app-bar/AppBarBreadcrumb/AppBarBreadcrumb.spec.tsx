@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import { Breadcrumb } from "antd";
 import * as kit from "@next-core/brick-kit";
 import { AppBarBreadcrumb } from "./AppBarBreadcrumb";
-import { Link } from "@next-libs/basic-components";
+import { GeneralIcon, Link } from "@next-libs/basic-components";
 
 const spyOnHistoryPush = jest.fn();
 jest.spyOn(kit, "getHistory").mockReturnValue({
@@ -53,8 +53,10 @@ describe("AppBarBreadcrumb", () => {
             text: "Second",
           },
         ]}
+        showCurrentAppIcon
       />
     );
+    expect(wrapper.find(GeneralIcon).length).toBe(1);
     expect(wrapper.find(Breadcrumb.Item).length).toBe(3);
   });
 

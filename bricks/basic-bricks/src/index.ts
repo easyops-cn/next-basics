@@ -42,3 +42,5 @@ import "./app-bar-breadcrumb";
 import "./app-bar-setting";
 import "./event-agent";
 import "./resizable-box";
+import "./general-text";
+import "./app-document-link";

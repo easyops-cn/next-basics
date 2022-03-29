@@ -24,6 +24,7 @@ export function AppbarBreadcrumb(
         ...props,
         breadcrumb,
         separator: "/",
+        showCurrentAppIcon: true,
       }}
     />
   );
