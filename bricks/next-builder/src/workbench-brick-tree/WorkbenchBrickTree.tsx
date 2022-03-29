@@ -164,7 +164,11 @@ export function WorkbenchBrickTree({
     ): WorkbenchNodeData<WorkbenchBrickTreeNode> {
       let icon = "question";
       let color: string;
-      if (node.bg || node.type === "provider") {
+      const isRoot = node === rootNode;
+      if (isRoot) {
+        icon = "branches";
+        color = "var(--palette-blue-7)";
+      } else if (node.bg || node.type === "provider") {
         icon = "database";
         color = "var(--palette-orange-7)";
       } else if (node.portal) {
@@ -213,9 +217,13 @@ export function WorkbenchBrickTree({
       };
     }
 
-    return getChildren(rootNode).find(
+    rootNode.$$isRoot = true;
+    const rootEntity = getEntityNode(rootNode);
+    rootEntity.children = getChildren(rootNode).find(
       (group) => group.name === (type === "routes" ? type : "bricks")
     )?.children;
+
+    return [rootEntity];
   }, [doNotExpandTemplates, edges, nodes, rootNode, type]);
 
   const activeKey = useMemo(() => {
