@@ -1,0 +1,6 @@
+{
+  "name": "@next-types/preview",
+  "version": "1.0.1",
+  "private": true,
+  "typings": "index.d.ts"
+}

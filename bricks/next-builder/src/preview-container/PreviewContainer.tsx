@@ -14,7 +14,7 @@ import type {
   PreviewMessageContainerToggleInspecting,
   PreviewMessageFromContainer,
   PreviewMessageToContainer,
-} from "@next-core/brick-types";
+} from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
 import classNames from "classnames";
@@ -60,6 +60,7 @@ export function LegacyPreviewContainer(
 ): React.ReactElement {
   const iframeRef = useRef<HTMLIFrameElement>();
   const containerRef = useRef<HTMLDivElement>();
+  const [scale, setScale] = useState(1);
 
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
@@ -89,9 +90,7 @@ export function LegacyPreviewContainer(
       } as PreviewMessageContainerStartPreview,
       previewOrigin
     );
-    // Once the iframe is loaded, send the message again.
-    sendToggleInspecting(inspecting, iframeRef, previewOrigin);
-  }, [inspecting, previewOrigin]);
+  }, [previewOrigin]);
 
   const refresh = useCallback(() => {
     iframeRef.current.contentWindow.postMessage(
@@ -139,13 +138,6 @@ export function LegacyPreviewContainer(
       } else if (data.sender === "previewer" && origin === previewOrigin) {
         switch (data.type) {
           case "hover-on-brick":
-            // Send to builder.
-            openerWindow.postMessage({
-              ...data,
-              sender: "preview-container",
-              forwardedFor: data.sender,
-            } as PreviewMessageFromContainer);
-            break;
           case "select-brick":
             // Send to builder.
             openerWindow.postMessage({
@@ -153,10 +145,25 @@ export function LegacyPreviewContainer(
               sender: "preview-container",
               forwardedFor: data.sender,
             } as PreviewMessageFromContainer);
-            // Todo(steve): Focus not working?
-            // openerWindow.focus();
             break;
+          case "context-menu-on-brick": {
+            const box = iframeRef.current.getBoundingClientRect();
+            const maxScale = scale > 1 ? 1 : scale;
+            // Send to builder.
+            openerWindow.postMessage({
+              ...data,
+              position: {
+                x: box.left + data.position.x * maxScale,
+                y: box.top + data.position.y * maxScale,
+              },
+              sender: "preview-container",
+              forwardedFor: data.sender,
+            } as PreviewMessageFromContainer);
+            break;
+          }
           case "preview-started":
+            // Once the preview is started, send the message again.
+            sendToggleInspecting(inspecting, iframeRef, previewOrigin);
             setPreviewStarted(true);
             onPreviewStart();
             break;
@@ -176,6 +183,8 @@ export function LegacyPreviewContainer(
     openerWindow,
     previewOrigin,
     sameOriginWithOpener,
+    scale,
+    inspecting,
   ]);
 
   useEffect(() => {
@@ -198,8 +207,6 @@ export function LegacyPreviewContainer(
     };
   }, [openerWindow, previewStarted]);
 
-  const [scale, setScale] = useState(1);
-
   const computeScale = useCallback(() => {
     setScale(containerRef.current.offsetWidth / viewportWidth);
   }, [viewportWidth]);
@@ -220,12 +227,10 @@ export function LegacyPreviewContainer(
     }
   }, [computeScale, viewportWidth]);
 
-  const containerOversized = scale > 1;
-
   return (
     <div
       className={classNames(styles.previewContainer, {
-        [styles.oversized]: containerOversized,
+        [styles.oversized]: scale > 1,
       })}
       ref={containerRef}
     >
@@ -236,7 +241,7 @@ export function LegacyPreviewContainer(
         onLoad={handleIframeLoad}
         onMouseOut={handleMouseOut}
         style={
-          containerOversized
+          scale > 1
             ? {
                 width: viewportWidth,
                 height: "100%",

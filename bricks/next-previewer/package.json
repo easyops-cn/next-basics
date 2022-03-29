@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/next-previewer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/next-previewer",
   "license": "GPL-3.0",
@@ -28,5 +28,8 @@
     "pack:tar": "npm pack",
     "postpack:tar": "node scripts/rename-tar-package.js"
   },
-  "sideEffects": true
+  "sideEffects": true,
+  "devDependencies": {
+    "@next-types/preview": "^1.0.1"
+  }
 }

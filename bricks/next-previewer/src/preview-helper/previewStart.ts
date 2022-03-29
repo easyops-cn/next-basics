@@ -1,10 +1,10 @@
 import { getHistory } from "@next-core/brick-kit";
+import type { PluginLocation } from "@next-core/brick-types";
 import type {
-  PluginLocation,
   PreviewMessagePreviewerPreviewStarted,
   PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
-} from "@next-core/brick-types";
+} from "@next-types/preview";
 import { showOverlay } from "./overlay";
 import {
   setPreviewFromOrigin,

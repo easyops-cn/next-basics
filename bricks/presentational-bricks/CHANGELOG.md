@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.240.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.240.0...@next-bricks/presentational-bricks@1.240.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* fix style ([d3d9ec4](https://github.com/easyops-cn/next-basics/commit/d3d9ec40b1a81dc5e7771239d8906f64caa5e028)), closes [Refs#BRICK_STORE-2651](https://github.com/Refs/issues/BRICK_STORE-2651)
+
+
+
+
+
+# [1.240.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.8...@next-bricks/presentational-bricks@1.240.0) (2022-03-29)
+
+
+### Features
+
+* adapt to the dark theme ([ba68bf2](https://github.com/easyops-cn/next-basics/commit/ba68bf2a97ee80147112699c574a140d318bdf15)), closes [Refs#BRICK_STORE-2651](https://github.com/Refs/issues/BRICK_STORE-2651)
+
+
+
+
+
+## [1.239.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.7...@next-bricks/presentational-bricks@1.239.8) (2022-03-29)
+
+
+### Bug Fixes
+
+* 修改presentational-bricks.collapsible-card-item样式  Closes BRICK_STORE-2652 ([9fe136c](https://github.com/easyops-cn/next-basics/commit/9fe136c7a589cf94195020dbb3d9f41ac268d32c))
+
+
+
+
+
 ## [1.239.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.6...@next-bricks/presentational-bricks@1.239.7) (2022-03-28)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

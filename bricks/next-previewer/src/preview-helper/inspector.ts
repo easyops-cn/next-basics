@@ -1,10 +1,11 @@
 // istanbul ignore file: working in progress
 // https://github.com/facebook/react/blob/cae635054e17a6f107a39d328649137b83f25972/packages/react-devtools-shared/src/backend/views/Highlighter/index.js
 import { throttle } from "lodash";
-import {
+import type {
   PreviewMessagePreviewerHoverOnBrick,
   PreviewMessagePreviewerSelectBrick,
-} from "@next-core/brick-types";
+  PreviewMessagePreviewerContextMenuOnBrick,
+} from "@next-types/preview";
 
 let previewProxyOrigin: string;
 
@@ -29,6 +30,7 @@ function registerListeners(): void {
   window.addEventListener("pointerover", onPointerOver, true);
   window.addEventListener("pointerup", onMouseEvent, true);
   window.addEventListener("pointerleave", onPointerLeave, true);
+  window.addEventListener("contextmenu", onContextMenu, true);
 }
 
 function unregisterListeners(): void {
@@ -40,6 +42,7 @@ function unregisterListeners(): void {
   window.removeEventListener("pointerover", onPointerOver, true);
   window.removeEventListener("pointerup", onMouseEvent, true);
   window.removeEventListener("pointerleave", onPointerLeave, true);
+  window.removeEventListener("contextmenu", onContextMenu, true);
 }
 
 function onClick(event: MouseEvent): void {
@@ -94,6 +97,36 @@ function onPointerLeave(event: MouseEvent): void {
     } as PreviewMessagePreviewerHoverOnBrick,
     previewProxyOrigin
   );
+}
+
+function onContextMenu(event: MouseEvent): void {
+  event.preventDefault();
+  event.stopPropagation();
+  contextMenuOnBrick(event.target as HTMLElement, {
+    x: event.clientX,
+    y: event.clientY,
+  });
+}
+
+function contextMenuOnBrick(
+  brick: HTMLElement,
+  position: {
+    x: number;
+    y: number;
+  }
+): void {
+  const iidList = getPossibleBrickIidList(brick);
+  if (iidList.length > 0) {
+    window.parent.postMessage(
+      {
+        sender: "previewer",
+        type: "context-menu-on-brick",
+        iidList,
+        position,
+      } as PreviewMessagePreviewerContextMenuOnBrick,
+      previewProxyOrigin
+    );
+  }
 }
 
 function selectBrick(brick: HTMLElement): void {

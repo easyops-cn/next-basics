@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.124.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.124.0...@next-bricks/next-builder@1.124.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* **preview:** fix context menu position ([d986b6a](https://github.com/easyops-cn/next-basics/commit/d986b6a6fccaf85ae90e7b0ab81204e77b4e01b4))
+
+
+
+
+
+# [1.124.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.123.0...@next-bricks/next-builder@1.124.0) (2022-03-28)
+
+
+### Bug Fixes
+
+* fix inspecting when reload preview ([77596c8](https://github.com/easyops-cn/next-basics/commit/77596c829f4b517ff075c785e9af64a6ad29c02d))
+* refine brick tree hover style ([7f80849](https://github.com/easyops-cn/next-basics/commit/7f8084953ce9582b9d87df1a9454ad79593173af))
+
+
+### Features
+
+* support context menu on preview ([1288a3d](https://github.com/easyops-cn/next-basics/commit/1288a3d632e12f56302cab7e0a30655f445fe551))
+
+
+
+
+
 # [1.123.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.122.0...@next-bricks/next-builder@1.123.0) (2022-03-25)
 
 
