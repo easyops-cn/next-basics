@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.241.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.0...@next-bricks/presentational-bricks@1.241.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* **brick-illustration :** 修改空状态占比优化 ([21e2ff3](https://github.com/easyops-cn/next-basics/commit/21e2ff3b4c524839f47a7ba6d479e6f9667972bf))
+
+
+
+
+
 # [1.241.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.240.2...@next-bricks/presentational-bricks@1.241.0) (2022-03-29)
 
 
