@@ -11,6 +11,11 @@
   padding: 16px 24px;
   align-items: center;
   position: relative;
+  &.borderButtom {
+    border-bottom-width: var(--border-width-base);
+    border-bottom-color: var(--color-text-divider-line);
+    border-bottom-style: solid;
+  }
   &:hover {
     cursor: pointer;
   }
@@ -44,18 +49,21 @@
       line-height: 32px;
     }
     .collapsibleTitle {
-      font-size: 16px;
-      color: #595959;
+      font-size: var(--card-title-font-size);
+      color: var(--color-normal-text);
+      font-weight: var(--font-weight-400);
     }
   }
 }
 
 .brickCollapsibleCardContainer {
   position: relative;
-  background: #ffffff;
-  border: 1px solid rgba(217, 217, 217, 1);
-  border-radius: 4px;
+  background: var(--color-fill-bg-container-1);
+  border-radius: var(--larger-border-radius);
   overflow: hidden;
+  border-width: var(--border-width-base);
+  border-color: var(--color-border-divider-line);
+  border-style: solid;
   .operatingArea {
     opacity: 0;
     display: grid;
@@ -66,8 +74,8 @@
   }
   &.hoverable:hover {
     border-color: #ffffff;
-    border-radius: 4px;
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+    border-radius: var(--larger-border-radius);
+    box-shadow: var(--hover-shadow);
     .operatingArea {
       opacity: 1;
     }
