@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.240.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.240.1...@next-bricks/presentational-bricks@1.240.2) (2022-03-29)
+
+
+### Bug Fixes
+
+* 修改presentational-bricks.collapsible-card-item样式  Closes BRICK_STORE-2652 ([b7532bb](https://github.com/easyops-cn/next-basics/commit/b7532bbb6462cf1f4efae772e07acb46b6b9889b))
+
+
+
+
+
 ## [1.240.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.240.0...@next-bricks/presentational-bricks@1.240.1) (2022-03-29)
 
 
