@@ -130,7 +130,7 @@ describe("SideBar", () => {
     });
     wrapper.update();
 
-    expect(wrapper.find(SidebarMenu).length).toBe(0);
+    expect(wrapper.find(SidebarMenu).length).toBe(1);
 
     expect(wrapper).toBeTruthy();
   });
