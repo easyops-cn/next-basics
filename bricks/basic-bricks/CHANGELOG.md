@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.173.3...@next-bricks/basic-bricks@1.174.0) (2022-03-29)
+
+
+### Features
+
+* add app document link ([6b66a6a](https://github.com/easyops-cn/next-basics/commit/6b66a6a736d8eeaacfec878a7eb8b96316056b20))
+* theme-brick support ([cd5c4bf](https://github.com/easyops-cn/next-basics/commit/cd5c4bff3d306e4fc61b3e3ac9c5aefe98ce2161))
+* update brick display ([4720df4](https://github.com/easyops-cn/next-basics/commit/4720df45a6f9477e4363a5d00fb347ce376af2e4))
+* update unit test ([9d12158](https://github.com/easyops-cn/next-basics/commit/9d12158a4d4f43a7b31c100468ef51a91b8a51b8))
+
+
+
+
+
 ## [1.173.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.173.2...@next-bricks/basic-bricks@1.173.3) (2022-03-29)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
