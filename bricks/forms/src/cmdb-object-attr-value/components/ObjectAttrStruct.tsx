@@ -263,7 +263,7 @@ export function LegacyObjectAttrStructForm(
       }
       handleValueChange({
         ...value,
-        struct_define: new_struct_define.map((item) => omit(item, ["isNew"])),
+        struct_define: new_struct_define,
       });
       setAddStructModalVisible(false);
       setCurValueType("");
