@@ -148,12 +148,13 @@ export function LegacyPreviewContainer(
             break;
           case "context-menu-on-brick": {
             const box = iframeRef.current.getBoundingClientRect();
+            const maxScale = scale > 1 ? 1 : scale;
             // Send to builder.
             openerWindow.postMessage({
               ...data,
               position: {
-                x: box.left + data.position.x * scale,
-                y: box.top + data.position.y * scale,
+                x: box.left + data.position.x * maxScale,
+                y: box.top + data.position.y * maxScale,
               },
               sender: "preview-container",
               forwardedFor: data.sender,
@@ -226,12 +227,10 @@ export function LegacyPreviewContainer(
     }
   }, [computeScale, viewportWidth]);
 
-  const containerOversized = scale > 1;
-
   return (
     <div
       className={classNames(styles.previewContainer, {
-        [styles.oversized]: containerOversized,
+        [styles.oversized]: scale > 1,
       })}
       ref={containerRef}
     >
@@ -242,7 +241,7 @@ export function LegacyPreviewContainer(
         onLoad={handleIframeLoad}
         onMouseOut={handleMouseOut}
         style={
-          containerOversized
+          scale > 1
             ? {
                 width: viewportWidth,
                 height: "100%",
