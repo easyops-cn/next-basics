@@ -1,6 +1,6 @@
 // istanbul ignore file: nothing logical
 import { UpdatingElement } from "@next-core/brick-kit";
-import type { PreviewHelperBrick } from "@next-core/brick-types";
+import type { PreviewHelperBrick } from "@next-types/preview";
 import { previewStart } from "./previewStart";
 
 /**
