@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.124.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.124.0...@next-bricks/next-builder@1.124.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* **preview:** fix context menu position ([d986b6a](https://github.com/easyops-cn/next-basics/commit/d986b6a6fccaf85ae90e7b0ab81204e77b4e01b4))
+
+
+
+
+
 # [1.124.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.123.0...@next-bricks/next-builder@1.124.0) (2022-03-28)
 
 

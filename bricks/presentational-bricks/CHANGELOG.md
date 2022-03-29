@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.240.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.8...@next-bricks/presentational-bricks@1.240.0) (2022-03-29)
+
+
+### Features
+
+* adapt to the dark theme ([ba68bf2](https://github.com/easyops-cn/next-basics/commit/ba68bf2a97ee80147112699c574a140d318bdf15)), closes [Refs#BRICK_STORE-2651](https://github.com/Refs/issues/BRICK_STORE-2651)
+
+
+
+
+
 ## [1.239.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.239.7...@next-bricks/presentational-bricks@1.239.8) (2022-03-29)
 
 
