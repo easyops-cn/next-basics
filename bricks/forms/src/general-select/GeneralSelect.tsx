@@ -110,6 +110,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         value={op.value as string}
         label={op.label}
         className={style.itemOption}
+        disabled={op.disabled}
       >
         <Tooltip title={props.optionTooltip ? op.label : ""}>
           <div className={style.option}>
