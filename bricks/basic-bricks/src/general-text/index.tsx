@@ -74,7 +74,7 @@ export class GeneralTextElement extends UpdatingElement {
     // Don't override user's style settings.
     // istanbul ignore else
     if (!this.style.display) {
-      this.style.display = "inline-block";
+      this.style.display = "inline";
     }
     this._render();
   }
