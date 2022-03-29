@@ -1,3 +1,5 @@
+import type { Storyboard } from "@next-core/brick-types";
+
 /** @internal */
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string): void;
@@ -21,7 +23,8 @@ export interface PreviewMessageBuilderHoverOnBrick extends PreviewBaseMessage {
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerToggleInspecting
-  | PreviewMessageContainerRefresh;
+  | PreviewMessageContainerRefresh
+  | PreviewMessageContainerReload;
 
 /** @internal */
 export type PreviewMessageFromContainer =
@@ -29,7 +32,8 @@ export type PreviewMessageFromContainer =
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
   | PreviewMessageContainerPreviewerContextMenuOnBrick
-  | PreviewMessageContainerRefresh;
+  | PreviewMessageContainerRefresh
+  | PreviewMessageContainerReload;
 
 /** @internal */
 export type PreviewMessageToContainer =
@@ -106,6 +110,14 @@ export interface PreviewMessageContainerToggleInspecting
 export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {
   sender: "preview-container";
   type: "refresh";
+  appId: string;
+  storyboardPatch: Partial<Storyboard>;
+}
+
+/** @internal */
+export interface PreviewMessageContainerReload extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "reload";
 }
 
 /** @internal */

@@ -1,4 +1,4 @@
-import { getHistory } from "@next-core/brick-kit";
+import { developHelper, getHistory } from "@next-core/brick-kit";
 import type { PluginLocation } from "@next-core/brick-types";
 import type {
   PreviewMessagePreviewerPreviewStarted,
@@ -50,6 +50,10 @@ export function previewStart(previewFromOrigin: string): void {
           data.enabled ? startInspecting() : stopInspecting();
           break;
         case "refresh":
+          developHelper.updateStoryboard(data.appId, data.storyboardPatch);
+          getHistory().reload();
+          break;
+        case "reload":
           location.reload();
           break;
       }
