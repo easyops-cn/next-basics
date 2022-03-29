@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.214.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.213.5...@next-bricks/forms@1.214.0) (2022-03-29)
+
+
+### Features
+
+* **forms:** support select-option disabled ([fb81fbc](https://github.com/easyops-cn/next-basics/commit/fb81fbcf4fc0925f76951224bd99c738120fb7df))
+
+
+
+
+
 ## [1.213.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.213.4...@next-bricks/forms@1.213.5) (2022-03-29)
 
 
