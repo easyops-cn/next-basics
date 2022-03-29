@@ -71,11 +71,6 @@ export class GeneralTextElement extends UpdatingElement {
   customStyle: CSSProperties;
 
   connectedCallback(): void {
-    // Don't override user's style settings.
-    // istanbul ignore else
-    if (!this.style.display) {
-      this.style.display = "inline";
-    }
     this._render();
   }
 
