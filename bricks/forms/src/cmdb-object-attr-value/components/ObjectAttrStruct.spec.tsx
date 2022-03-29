@@ -144,6 +144,7 @@ describe("ObjectAttrStruct", () => {
           id: "structId",
           name: "structName",
           type: "date",
+          isNew: true,
         },
       ],
     });
@@ -209,6 +210,7 @@ describe("ObjectAttrStruct", () => {
           id: "structId",
           name: "structName",
           type: "enum",
+          isNew: true,
           regex: [],
         },
       ],
