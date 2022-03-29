@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.6.1...@next-bricks/frame-bricks@0.7.0) (2022-03-29)
+
+
+### Features
+
+* sidebar and nav use props data ([efe61e7](https://github.com/easyops-cn/next-basics/commit/efe61e7219628bc7645ac071d38a2751ff831d15))
+* update unit test ([2c46c34](https://github.com/easyops-cn/next-basics/commit/2c46c342b0117b5ed3743d6b97a58345f67f051f))
+
+
+
+
+
 ## [0.6.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.6.0...@next-bricks/frame-bricks@0.6.1) (2022-03-11)
 
 
