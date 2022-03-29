@@ -12,6 +12,7 @@ export interface BasicBreadcrumbProps {
   className?: string;
   separator?: string;
   noCurrentApp?: boolean;
+  showCurrentAppIcon?: boolean;
 }
 
 export function AppBarBreadcrumb(
@@ -51,7 +52,12 @@ export function AppBarBreadcrumb(
           })}
         {currentApp && !props.noCurrentApp ? (
           <Breadcrumb.Item>
-            {!breadcrumbItems?.length && <HomeOutlined />}
+            {!breadcrumbItems?.length &&
+              (props.showCurrentAppIcon ? (
+                <GeneralIcon icon={currentApp.menuIcon} />
+              ) : (
+                <HomeOutlined />
+              ))}
             <span>
               {props.breadcrumb &&
               props.breadcrumb.length > 0 &&
