@@ -3,7 +3,6 @@
   flex-grow: 1;
   background: var(--color-fill-bg-container-4);
   border-radius: var(--larger-border-radius);
-  box-shadow: var(--connected-overlay-shadow);
 
   &.withSuffix {
     .suffixBrickWrapper {
@@ -39,7 +38,7 @@
 
 .matchText {
   color: var(--color-brand);
-  background: var(--menu-dropdown-bg);
+  background: var(--app-submenu-active-bg);
 }
 .matchTextTotal {
   color: var(--color-brand);
