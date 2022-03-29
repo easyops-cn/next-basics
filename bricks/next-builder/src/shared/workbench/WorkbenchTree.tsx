@@ -55,6 +55,7 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
   const {
     hoverKey,
     activeKey,
+    basePaddingLeft,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
@@ -113,7 +114,7 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
         <span
           className={styles.nodeLabel}
           style={{
-            paddingLeft: level * treeLevelPadding + 5,
+            paddingLeft: level * treeLevelPadding + basePaddingLeft,
             color: node.labelColor,
           }}
           ref={nodeLabelCallback}

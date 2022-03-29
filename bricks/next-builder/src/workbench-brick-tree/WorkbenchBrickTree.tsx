@@ -237,6 +237,7 @@ export function WorkbenchBrickTree({
       value={{
         hoverKey: hoverNodeUid,
         activeKey,
+        basePaddingLeft: 0,
         clickFactory,
         mouseEnterFactory,
         mouseLeaveFactory,

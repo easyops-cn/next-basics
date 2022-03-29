@@ -71,6 +71,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
             <WorkbenchTreeContext.Provider
               value={{
                 activeKey: this.activeKey,
+                basePaddingLeft: 5,
               }}
             >
               <WorkbenchTree

@@ -4,6 +4,7 @@ import type { WorkbenchNodeData } from "./interfaces";
 export interface ContextOfWorkbenchTree {
   hoverKey?: string | number;
   activeKey?: string | number;
+  basePaddingLeft?: number;
   clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
