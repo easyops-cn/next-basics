@@ -1,4 +1,5 @@
 import type { MenuIcon } from "@next-core/brick-types";
+import type { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export interface WorkbenchNodeData<T = unknown> {
   key: string | number;
@@ -27,3 +28,8 @@ export interface ActionClickDetail {
   action: string;
   data?: unknown;
 }
+
+export type WorkbenchRuntimeNode = BuilderRuntimeNode & {
+  $isRoot?: boolean;
+  $nextChildSort?: number;
+};

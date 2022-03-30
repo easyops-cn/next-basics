@@ -7,13 +7,11 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import {
-  BuilderProvider,
-  type BuilderRuntimeNode,
-} from "@next-core/editor-bricks-helper";
+import { BuilderProvider } from "@next-core/editor-bricks-helper";
 import { WorkbenchBrickTree } from "./WorkbenchBrickTree";
 import type {
   ActionClickDetail,
+  WorkbenchRuntimeNode,
   WorkbenchTreeAction,
 } from "../shared/workbench/interfaces";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
@@ -28,7 +26,7 @@ import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsCon
  */
 export class WorkbenchStoryboardTreeElement extends UpdatingElement {
   @property()
-  type: BuilderRuntimeNode["type"];
+  type: WorkbenchRuntimeNode["type"];
 
   @property({ attribute: false })
   actions: WorkbenchTreeAction[];
