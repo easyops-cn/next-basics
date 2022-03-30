@@ -181,14 +181,14 @@ export class GeneralCarouselElement extends UpdatingElement {
   /**
    * @kind number
    * @required false
-   * @default 1000
+   * @default 3000
    * @description 自定义轮播项的停留时间
    * @group advanced
    */
   @property({
     attribute: false,
   })
-  autoplaySpeed = 1000;
+  autoplaySpeed = 3000;
 
   /**
    * @kind any[]
