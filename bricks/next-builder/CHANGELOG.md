@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.126.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.125.1...@next-bricks/next-builder@1.126.0) (2022-03-30)
+
+
+### Bug Fixes
+
+* refine workbench runtime node ([2737dfc](https://github.com/easyops-cn/next-basics/commit/2737dfc964c604aa38fd84727ac3aa4fe7e19f94))
+
+
+### Features
+
+* theme build & push support context ([c6971a6](https://github.com/easyops-cn/next-basics/commit/c6971a6befbdc5fe077db98f789f91c41013779e))
+
+
+
+
+
 ## [1.125.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.125.0...@next-bricks/next-builder@1.125.1) (2022-03-30)
 
 
