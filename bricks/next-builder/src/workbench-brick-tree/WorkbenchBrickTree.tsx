@@ -6,30 +6,32 @@ import {
   useBuilderDataManager,
   useBuilderNode,
   useHoverNodeUid,
-  type BuilderRuntimeNode,
 } from "@next-core/editor-bricks-helper";
 import { sortBy } from "lodash";
-import type { WorkbenchNodeData } from "../shared/workbench/interfaces";
+import type {
+  WorkbenchNodeData,
+  WorkbenchRuntimeNode,
+} from "../shared/workbench/interfaces";
 import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 
 export interface WorkbenchBrickTreeProps {
-  type?: BuilderRuntimeNode["type"];
+  type?: WorkbenchRuntimeNode["type"];
   placeholder?: string;
   activeInstanceId?: string;
 }
 
 type WorkbenchBrickTreeNode =
-  | BuilderRuntimeNode
+  | WorkbenchRuntimeNode
   | {
       type: "mount-point";
       mountPoint: string;
-      parent: BuilderRuntimeNode;
+      parent: WorkbenchRuntimeNode;
     };
 
 function isNormalNode(
   node: WorkbenchBrickTreeNode
-): node is BuilderRuntimeNode {
+): node is WorkbenchRuntimeNode {
   return node.type !== "mount-point";
 }
 
@@ -114,7 +116,7 @@ export function WorkbenchBrickTree({
     }
 
     function getChildren(
-      node: BuilderRuntimeNode
+      node: WorkbenchRuntimeNode
     ): WorkbenchNodeData<WorkbenchBrickTreeNode>[] {
       const groups = new Map<
         string,
@@ -130,6 +132,12 @@ export function WorkbenchBrickTree({
         ),
         [(edge) => edge.sort]
       );
+
+      const maxSort =
+        relatedEdges.length > 0
+          ? relatedEdges[relatedEdges.length - 1].sort
+          : 0;
+      node.$nextChildSort = typeof maxSort === "number" ? maxSort + 1 : 1;
 
       for (const edge of relatedEdges) {
         let group = groups.get(edge.mountPoint);
@@ -160,12 +168,11 @@ export function WorkbenchBrickTree({
     }
 
     function getEntityNode(
-      node: BuilderRuntimeNode
+      node: WorkbenchRuntimeNode
     ): WorkbenchNodeData<WorkbenchBrickTreeNode> {
       let icon = "question";
       let color: string;
-      const isRoot = node === rootNode;
-      if (isRoot) {
+      if (node.$isRoot) {
         icon = "branches";
         color = "var(--palette-blue-7)";
       } else if (node.bg || node.type === "provider") {
@@ -209,21 +216,18 @@ export function WorkbenchBrickTree({
         },
         data: node,
         children:
-          type === "bricks"
+          node.$isRoot || type === "routes"
+            ? children.find(
+                (group) => group.name === (type === "routes" ? type : "bricks")
+              )?.children
+            : type === "bricks"
             ? children
-            : type === "routes"
-            ? children.find((group) => group.name === "routes")?.children
             : null,
       };
     }
 
-    rootNode.$$isRoot = true;
-    const rootEntity = getEntityNode(rootNode);
-    rootEntity.children = getChildren(rootNode).find(
-      (group) => group.name === (type === "routes" ? type : "bricks")
-    )?.children;
-
-    return [rootEntity];
+    rootNode.$isRoot = true;
+    return [getEntityNode(rootNode)];
   }, [doNotExpandTemplates, edges, nodes, rootNode, type]);
 
   const activeKey = useMemo(() => {
