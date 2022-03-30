@@ -18,6 +18,7 @@ export function buildPreviewRoutesForTheme(
       ({
         type: "bricks",
         path: `${homepage}/_dev_only_/theme-preview/${page.pageTypeId}`,
+        context: snippetMap.get(page.snippet[0].instanceId)?.context,
         children: snippetMap.get(page.snippet[0].instanceId).children,
       } as BuilderRouteNode)
   );
