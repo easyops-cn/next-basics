@@ -12,6 +12,7 @@ import ResizeObserver from "resize-observer-polyfill";
 import classNames from "classnames";
 import type { Storyboard } from "@next-core/brick-types";
 import type {
+  BrickOutline,
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
   PreviewMessageFromContainer,
@@ -94,6 +95,51 @@ export function LegacyPreviewContainer(
     );
   }, [previewOrigin]);
 
+  const [hoverIid, setHoverIid] = useState<string>();
+  const [activeIid, setActiveIid] = useState<string>();
+  const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
+  const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
+
+  useEffect(() => {
+    // Active overrides hover.
+    if (hoverIid === activeIid) {
+      setHoverOutlines([]);
+    }
+  }, [activeIid, hoverIid]);
+
+  const [scroll, setScroll] = useState({ x: 0, y: 0 });
+
+  const adjustOutlines = useCallback(
+    (outlines: BrickOutline[]): BrickOutline[] => {
+      const padding = 2;
+      const border = 1;
+      const offsetLeft = scale > 1 ? iframeRef.current.offsetLeft : padding;
+      const adjustedScale = Math.min(scale, 1);
+      return outlines.map(({ width, height, left, top }) => ({
+        width: width * adjustedScale,
+        height: height * adjustedScale,
+        left: (left - scroll.x) * adjustedScale + offsetLeft + border,
+        top: (top - scroll.y) * adjustedScale + padding + border,
+      }));
+    },
+    [scale, scroll.x, scroll.y]
+  );
+
+  const [adjustedHoverOutlines, setAdjustedHoverOutlines] = useState<
+    BrickOutline[]
+  >([]);
+  const [adjustedActiveOutlines, setAdjustedActiveOutlines] = useState<
+    BrickOutline[]
+  >([]);
+
+  useEffect(() => {
+    setAdjustedHoverOutlines(adjustOutlines(hoverOutlines));
+  }, [hoverOutlines, adjustOutlines]);
+
+  useEffect(() => {
+    setAdjustedActiveOutlines(adjustOutlines(activeOutlines));
+  }, [activeOutlines, adjustOutlines]);
+
   const refresh = useCallback(
     (appId: string, storyboardPatch: Partial<Storyboard>) => {
       iframeRef.current.contentWindow.postMessage(
@@ -117,6 +163,10 @@ export function LegacyPreviewContainer(
       } as PreviewMessageFromContainer,
       previewOrigin
     );
+    setHoverIid(null);
+    setHoverOutlines([]);
+    setActiveIid(null);
+    setActiveOutlines([]);
   }, [previewOrigin]);
 
   const handleUrlChange = useCallback(
@@ -141,8 +191,8 @@ export function LegacyPreviewContainer(
       if (!data) {
         return;
       }
-      if (data.sender === "builder") {
-        if (data.type === "hover-on-brick" && origin === location.origin) {
+      if (data.sender === "builder" && origin === location.origin) {
+        if (data.type === "hover-on-brick" || data.type === "select-brick") {
           // Send to preview.
           iframeRef.current.contentWindow.postMessage(
             {
@@ -163,6 +213,18 @@ export function LegacyPreviewContainer(
               sender: "preview-container",
               forwardedFor: data.sender,
             } as PreviewMessageFromContainer);
+            break;
+          case "scroll":
+            setScroll(data.scroll);
+            break;
+          case "highlight-brick":
+            if (data.highlightType === "active") {
+              setActiveIid(data.iid);
+              setActiveOutlines(data.outlines);
+            } else {
+              setHoverIid(data.iid);
+              setHoverOutlines(data.outlines);
+            }
             break;
           case "context-menu-on-brick": {
             const box = iframeRef.current.getBoundingClientRect();
@@ -225,10 +287,6 @@ export function LegacyPreviewContainer(
     };
   }, [openerWindow, previewStarted]);
 
-  const computeScale = useCallback(() => {
-    setScale(containerRef.current.offsetWidth / viewportWidth);
-  }, [viewportWidth]);
-
   // istanbul ignore next
   useEffect(() => {
     if (!viewportWidth) {
@@ -236,6 +294,9 @@ export function LegacyPreviewContainer(
       return;
     }
     if (containerRef.current) {
+      const computeScale = (): void => {
+        setScale(containerRef.current.offsetWidth / viewportWidth);
+      };
       computeScale();
       const resizeObserver = new ResizeObserver(computeScale);
       resizeObserver.observe(containerRef.current);
@@ -243,7 +304,7 @@ export function LegacyPreviewContainer(
         resizeObserver.disconnect();
       };
     }
-  }, [computeScale, viewportWidth]);
+  }, [viewportWidth]);
 
   return (
     <div
@@ -272,8 +333,39 @@ export function LegacyPreviewContainer(
               }
         }
       />
+      {adjustedHoverOutlines.map((outline, index) => (
+        <BrickOutlineComponent key={index} type="hover" {...outline} />
+      ))}
+      {adjustedActiveOutlines.map((outline, index) => (
+        <BrickOutlineComponent key={index} type="active" {...outline} />
+      ))}
     </div>
   );
 }
 
 export const PreviewContainer = forwardRef(LegacyPreviewContainer);
+
+interface BrickOutlineComponentProps extends BrickOutline {
+  type: "active" | "hover";
+}
+
+function BrickOutlineComponent({
+  type,
+  width,
+  height,
+  left,
+  top,
+}: BrickOutlineComponentProps): React.ReactElement {
+  const borderWidth = 2;
+  return (
+    <div
+      className={`${styles.outline} ${styles[type]}`}
+      style={{
+        width: width + borderWidth * 2,
+        height: height + borderWidth * 2,
+        left: left - borderWidth,
+        top: top - borderWidth,
+      }}
+    ></div>
+  );
+}

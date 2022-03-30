@@ -1,15 +1,23 @@
 import React from "react";
 import { mount } from "enzyme";
-import { useHoverOnBrick } from "./useHoverOnBrick";
-import { useHoverNodeUid } from "@next-core/editor-bricks-helper";
+import { useHighlightBrick } from "./useHighlightBrick";
+import {
+  useHoverNodeUid,
+  useActiveNodeUid,
+} from "@next-core/editor-bricks-helper";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useHoverNodeUid: jest.fn(),
+  useActiveNodeUid: jest.fn(),
 }));
 
 const postMessage = jest.spyOn(window, "postMessage").mockImplementation();
 
-function TestComponent(): React.ReactElement {
+function TestComponent({
+  type,
+}: {
+  type: "active" | "hover";
+}): React.ReactElement {
   const manager = {
     getData() {
       return {
@@ -28,18 +36,18 @@ function TestComponent(): React.ReactElement {
       };
     },
   } as any;
-  useHoverOnBrick(manager);
+  useHighlightBrick(type, manager);
   return null;
 }
 
-describe("useHoverOnBrick", () => {
+describe("useHighlightBrick", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it("should work", () => {
+  it("should work for hover", () => {
     (useHoverNodeUid as jest.Mock).mockReturnValue(1);
-    mount(<TestComponent />);
+    mount(<TestComponent type="hover" />);
     expect(postMessage).toBeCalledWith({
       sender: "builder",
       type: "hover-on-brick",
@@ -49,7 +57,7 @@ describe("useHoverOnBrick", () => {
 
   it("should work when hover on node other than brick", () => {
     (useHoverNodeUid as jest.Mock).mockReturnValue(2);
-    mount(<TestComponent />);
+    mount(<TestComponent type="hover" />);
     expect(postMessage).toBeCalledWith({
       sender: "builder",
       type: "hover-on-brick",
@@ -59,10 +67,30 @@ describe("useHoverOnBrick", () => {
 
   it("should work when hover on non-existed node", () => {
     (useHoverNodeUid as jest.Mock).mockReturnValue(3);
-    mount(<TestComponent />);
+    mount(<TestComponent type="hover" />);
     expect(postMessage).toBeCalledWith({
       sender: "builder",
       type: "hover-on-brick",
+      iid: undefined,
+    });
+  });
+
+  it("should work for active", () => {
+    (useActiveNodeUid as jest.Mock).mockReturnValue(1);
+    mount(<TestComponent type="active" />);
+    expect(postMessage).toBeCalledWith({
+      sender: "builder",
+      type: "select-brick",
+      iid: "i-1",
+    });
+  });
+
+  it("should work for active null", () => {
+    (useActiveNodeUid as jest.Mock).mockReturnValue(null);
+    mount(<TestComponent type="active" />);
+    expect(postMessage).toBeCalledWith({
+      sender: "builder",
+      type: "select-brick",
       iid: undefined,
     });
   });

@@ -9,7 +9,6 @@ import {
   UpdatingElement,
 } from "@next-core/brick-kit";
 import {
-  type BuilderDataManager,
   BuilderProvider,
   type BuilderRuntimeNode,
   type EventDetailOfNodeReorder,
@@ -18,7 +17,7 @@ import type {
   BuilderCustomTemplateNode,
   BuilderRouteOrBrickNode,
 } from "@next-core/brick-types";
-import { WorkbenchStore } from "./WorkbenchStore";
+import { WorkbenchStore, type WorkbenchStoreRef } from "./WorkbenchStore";
 
 /**
  * @id next-builder.workbench-store
@@ -64,7 +63,7 @@ export class WorkbenchStoreElement extends UpdatingElement {
   // istanbul ignore next
   @method()
   deleteNode(node: BuilderRuntimeNode): void {
-    this._managerRef.current.nodeDelete(node);
+    this._storeRef.current.manager.nodeDelete(node);
     this._nodeDeleteEmitter.emit({
       ...node,
     });
@@ -73,7 +72,7 @@ export class WorkbenchStoreElement extends UpdatingElement {
   // istanbul ignore next
   @method()
   moveNode(node: BuilderRuntimeNode, direction: "up" | "down"): void {
-    this._managerRef.current.moveNode(node, direction);
+    this._storeRef.current.manager.moveNode(node, direction);
   }
 
   // istanbul ignore next
@@ -83,10 +82,15 @@ export class WorkbenchStoreElement extends UpdatingElement {
     mountPoint: string,
     direction: "up" | "down"
   ): void {
-    this._managerRef.current.moveMountPoint(node, mountPoint, direction);
+    this._storeRef.current.manager.moveMountPoint(node, mountPoint, direction);
   }
 
-  private _managerRef = createRef<BuilderDataManager>();
+  @method()
+  previewStart(): void {
+    this._storeRef.current.previewStart();
+  }
+
+  private _storeRef = createRef<WorkbenchStoreRef>();
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -108,7 +112,7 @@ export class WorkbenchStoreElement extends UpdatingElement {
         <BrickWrapper>
           <BuilderProvider>
             <WorkbenchStore
-              ref={this._managerRef}
+              ref={this._storeRef}
               dataSource={this.dataSource}
               templateSources={this.templateSources}
               onNodeClick={this._handleNodeClick}

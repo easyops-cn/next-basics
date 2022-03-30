@@ -1,6 +1,6 @@
 // istanbul ignore file
 // For temporary usage only, will change soon.
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import {
   useBuilderData,
   useBuilderDataManager,
@@ -235,6 +235,15 @@ export function WorkbenchBrickTree({
       ? nodes.find((node) => node.instanceId === activeInstanceId)?.$$uid
       : null;
   }, [activeInstanceId, nodes]);
+
+  useEffect(
+    () => {
+      manager.setActiveNodeUid(activeKey);
+    },
+    // One-time effect only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   return (
     <WorkbenchTreeContext.Provider

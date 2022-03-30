@@ -1,6 +1,11 @@
 // istanbul ignore file
 // For temporary usage only, will change soon.
-import React, { forwardRef, useEffect, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+} from "react";
 import type {
   BuilderCustomTemplateNode,
   BuilderRouteOrBrickNode,
@@ -11,15 +16,21 @@ import {
   type BuilderRuntimeNode,
   type EventDetailOfNodeReorder,
 } from "@next-core/editor-bricks-helper";
+import type { PreviewMessageBuilderSelectBrick } from "@next-types/preview";
 import { BuilderDataType } from "../builder-container/interfaces";
-import { useHoverOnBrick } from "./useHoverOnBrick";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
+import { useHighlightBrick } from "./useHighlightBrick";
 
 export interface WorkbenchStoreProps {
   dataSource?: BuilderRouteOrBrickNode[];
   templateSources?: BuilderCustomTemplateNode[];
   onNodeClick?(event: CustomEvent<BuilderRuntimeNode>): void;
   onNodeReorder?(event: CustomEvent<EventDetailOfNodeReorder>): void;
+}
+
+export interface WorkbenchStoreRef {
+  manager: BuilderDataManager;
+  previewStart(): void;
 }
 
 export function LegacyWorkbenchStore(
@@ -29,11 +40,25 @@ export function LegacyWorkbenchStore(
     onNodeClick,
     onNodeReorder,
   }: WorkbenchStoreProps,
-  ref: React.Ref<BuilderDataManager>
+  ref: React.Ref<WorkbenchStoreRef>
 ): React.ReactElement {
   const manager = useBuilderDataManager();
+  const previewStart = useCallback(() => {
+    let iid = null;
+    const activeNodeUid = manager.getActiveNodeUid();
+    if (activeNodeUid) {
+      iid = manager
+        .getData()
+        .nodes.find((node) => node.$$uid === activeNodeUid)?.instanceId;
+    }
+    window.postMessage({
+      sender: "builder",
+      type: "select-brick",
+      iid,
+    } as PreviewMessageBuilderSelectBrick);
+  }, [manager]);
 
-  useImperativeHandle(ref, () => manager);
+  useImperativeHandle(ref, () => ({ manager, previewStart }));
 
   useEffect(() => {
     let type = BuilderDataType.UNKNOWN;
@@ -85,8 +110,8 @@ export function LegacyWorkbenchStore(
     };
   }, [manager, onNodeClick, onNodeReorder]);
 
-  useHoverOnBrick(manager);
-
+  useHighlightBrick("hover", manager);
+  useHighlightBrick("active", manager);
   useListenOnPreviewMessage(manager);
 
   return null;

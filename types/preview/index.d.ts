@@ -1,32 +1,43 @@
 import type { Storyboard } from "@next-core/brick-types";
 
-/** @internal */
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string): void;
 }
 
-/** @internal */
 export interface PreviewBaseMessage {
   sender: "builder" | "preview-container" | "previewer";
   type: string;
   forwardedFor?: "builder" | "previewer";
 }
 
-/** @internal */
 export interface PreviewMessageBuilderHoverOnBrick extends PreviewBaseMessage {
   sender: "builder";
   type: "hover-on-brick";
   iid: string;
 }
 
-/** @internal */
+export interface PreviewMessageBuilderSelectBrick extends PreviewBaseMessage {
+  sender: "builder";
+  type: "select-brick";
+  iid: string;
+}
+
+export type PreviewMessageFromPreviewer =
+  | PreviewMessagePreviewerHoverOnBrick
+  | PreviewMessagePreviewerSelectBrick
+  | PreviewMessagePreviewerHighlightBrick
+  | PreviewMessagePreviewerContextMenuOnBrick
+  | PreviewMessagePreviewerPreviewStarted
+  | PreviewMessagePreviewerUrlChange
+  | PreviewMessagePreviewerScroll;
+
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnBrick
+  | PreviewMessageContainerBuilderSelectBrick
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload;
 
-/** @internal */
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerPreviewerHoverOnBrick
@@ -35,29 +46,28 @@ export type PreviewMessageFromContainer =
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload;
 
-/** @internal */
 export type PreviewMessageToContainer =
   | PreviewMessageBuilderHoverOnBrick
+  | PreviewMessageBuilderSelectBrick
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
+  | PreviewMessagePreviewerHighlightBrick
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
-  | PreviewMessagePreviewerUrlChange;
+  | PreviewMessagePreviewerUrlChange
+  | PreviewMessagePreviewerScroll;
 
-/** @internal */
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
   | PreviewMessageContainerPreviewerContextMenuOnBrick;
 
-/** @internal */
 export interface PreviewMessagePreviewerPreviewStarted
   extends PreviewBaseMessage {
   sender: "previewer";
   type: "preview-started";
 }
 
-/** @internal */
 export interface PreviewMessagePreviewerHoverOnBrick
   extends PreviewBaseMessage {
   sender: "previewer";
@@ -65,14 +75,21 @@ export interface PreviewMessagePreviewerHoverOnBrick
   iidList: string[];
 }
 
-/** @internal */
 export interface PreviewMessagePreviewerSelectBrick extends PreviewBaseMessage {
   sender: "previewer";
   type: "select-brick";
   iidList: string[];
 }
 
-/** @internal */
+export interface PreviewMessagePreviewerHighlightBrick
+  extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "highlight-brick";
+  highlightType: "active" | "hover";
+  outlines: BrickOutline[];
+  iid: string;
+}
+
 export interface PreviewMessagePreviewerContextMenuOnBrick
   extends PreviewBaseMessage {
   sender: "previewer";
@@ -84,21 +101,27 @@ export interface PreviewMessagePreviewerContextMenuOnBrick
   };
 }
 
-/** @internal */
 export interface PreviewMessagePreviewerUrlChange extends PreviewBaseMessage {
   sender: "previewer";
   type: "url-change";
   url: string;
 }
 
-/** @internal */
+export interface PreviewMessagePreviewerScroll extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "scroll";
+  scroll: {
+    x: number;
+    y: number;
+  };
+}
+
 export interface PreviewMessageContainerStartPreview
   extends PreviewBaseMessage {
   sender: "preview-container";
   type: "start-preview";
 }
 
-/** @internal */
 export interface PreviewMessageContainerToggleInspecting
   extends PreviewBaseMessage {
   sender: "preview-container";
@@ -106,7 +129,6 @@ export interface PreviewMessageContainerToggleInspecting
   enabled: boolean;
 }
 
-/** @internal */
 export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {
   sender: "preview-container";
   type: "refresh";
@@ -114,36 +136,44 @@ export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {
   storyboardPatch: Partial<Storyboard>;
 }
 
-/** @internal */
 export interface PreviewMessageContainerReload extends PreviewBaseMessage {
   sender: "preview-container";
   type: "reload";
 }
 
-/** @internal */
 export interface PreviewMessageContainerBuilderHoverOnBrick
   extends Omit<PreviewMessageBuilderHoverOnBrick, "sender"> {
   sender: "preview-container";
   forwardedFor: "builder";
 }
 
-/** @internal */
+export interface PreviewMessageContainerBuilderSelectBrick
+  extends Omit<PreviewMessageBuilderSelectBrick, "sender"> {
+  sender: "preview-container";
+  forwardedFor: "builder";
+}
+
 export interface PreviewMessageContainerPreviewerHoverOnBrick
   extends Omit<PreviewMessagePreviewerHoverOnBrick, "sender"> {
   sender: "preview-container";
   forwardedFor: "previewer";
 }
 
-/** @internal */
 export interface PreviewMessageContainerPreviewerSelectBrick
   extends Omit<PreviewMessagePreviewerSelectBrick, "sender"> {
   sender: "preview-container";
   forwardedFor: "previewer";
 }
 
-/** @internal */
 export interface PreviewMessageContainerPreviewerContextMenuOnBrick
   extends Omit<PreviewMessagePreviewerContextMenuOnBrick, "sender"> {
   sender: "preview-container";
   forwardedFor: "previewer";
+}
+
+export interface BrickOutline {
+  width: number;
+  height: number;
+  left: number;
+  top: number;
 }
