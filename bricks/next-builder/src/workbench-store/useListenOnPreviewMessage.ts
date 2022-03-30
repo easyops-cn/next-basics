@@ -4,6 +4,7 @@ import type {
   BuilderDataManager,
   BuilderRuntimeNode,
 } from "@next-core/editor-bricks-helper";
+import { sendHighlightBrick } from "./useHighlightBrick";
 
 export function useListenOnPreviewMessage(manager: BuilderDataManager): void {
   useEffect(() => {
@@ -44,6 +45,11 @@ export function useListenOnPreviewMessage(manager: BuilderDataManager): void {
           }
           break;
         }
+        case "resize":
+          // Re-send highlight message to trigger resizing brick outline.
+          sendHighlightBrick("active", manager.getActiveNodeUid(), manager);
+          sendHighlightBrick("hover", manager.getHoverNodeUid(), manager);
+          break;
       }
     };
     window.addEventListener("message", listener);

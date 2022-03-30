@@ -96,7 +96,9 @@ export function LegacyPreviewContainer(
   }, [previewOrigin]);
 
   const [hoverIid, setHoverIid] = useState<string>();
+  const [hoverAlias, setHoverAlias] = useState<string>();
   const [activeIid, setActiveIid] = useState<string>();
+  const [activeAlias, setActiveAlias] = useState<string>();
   const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
   const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
 
@@ -164,8 +166,10 @@ export function LegacyPreviewContainer(
       previewOrigin
     );
     setHoverIid(null);
+    setHoverAlias(null);
     setHoverOutlines([]);
     setActiveIid(null);
+    setActiveAlias(null);
     setActiveOutlines([]);
   }, [previewOrigin]);
 
@@ -207,6 +211,7 @@ export function LegacyPreviewContainer(
         switch (data.type) {
           case "hover-on-brick":
           case "select-brick":
+          case "resize":
             // Send to builder.
             openerWindow.postMessage({
               ...data,
@@ -220,9 +225,11 @@ export function LegacyPreviewContainer(
           case "highlight-brick":
             if (data.highlightType === "active") {
               setActiveIid(data.iid);
+              setActiveAlias(data.alias);
               setActiveOutlines(data.outlines);
             } else {
               setHoverIid(data.iid);
+              setHoverAlias(data.alias);
               setHoverOutlines(data.outlines);
             }
             break;
@@ -334,10 +341,20 @@ export function LegacyPreviewContainer(
         }
       />
       {adjustedHoverOutlines.map((outline, index) => (
-        <BrickOutlineComponent key={index} type="hover" {...outline} />
+        <BrickOutlineComponent
+          key={index}
+          alias={hoverAlias}
+          type="hover"
+          {...outline}
+        />
       ))}
       {adjustedActiveOutlines.map((outline, index) => (
-        <BrickOutlineComponent key={index} type="active" {...outline} />
+        <BrickOutlineComponent
+          key={index}
+          alias={activeAlias}
+          type="active"
+          {...outline}
+        />
       ))}
     </div>
   );
@@ -347,25 +364,32 @@ export const PreviewContainer = forwardRef(LegacyPreviewContainer);
 
 interface BrickOutlineComponentProps extends BrickOutline {
   type: "active" | "hover";
+  alias: string;
 }
 
 function BrickOutlineComponent({
   type,
+  alias,
   width,
   height,
   left,
   top,
 }: BrickOutlineComponentProps): React.ReactElement {
   const borderWidth = 2;
+  const overflowed = top < 20;
   return (
     <div
-      className={`${styles.outline} ${styles[type]}`}
+      className={classNames(styles.outline, styles[type], {
+        [styles.overflowed]: overflowed,
+      })}
       style={{
         width: width + borderWidth * 2,
         height: height + borderWidth * 2,
         left: left - borderWidth,
         top: top - borderWidth,
       }}
-    ></div>
+    >
+      <div className={styles.alias}>{alias}</div>
+    </div>
   );
 }
