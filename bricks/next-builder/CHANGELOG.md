@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.125.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.125.0...@next-bricks/next-builder@1.125.1) (2022-03-30)
+
+
+### Bug Fixes
+
+* **workbench:** show root node ([140d855](https://github.com/easyops-cn/next-basics/commit/140d8554c595763a14b7cdc3dff6ce9c62f9bed3))
+* **workbench:** support setting initial padding ([8ea92bf](https://github.com/easyops-cn/next-basics/commit/8ea92bf8b12f1170a82ae8604554a967960c67e4))
+
+
+
+
+
 # [1.125.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.124.1...@next-bricks/next-builder@1.125.0) (2022-03-29)
 
 

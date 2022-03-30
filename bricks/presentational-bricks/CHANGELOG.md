@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.241.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.1...@next-bricks/presentational-bricks@1.241.2) (2022-03-30)
+
+
+### Bug Fixes
+
+* support general-carousel ([ce6a925](https://github.com/easyops-cn/next-basics/commit/ce6a925d96dbf205e21c668a5450f7430d4db645))
+
+
+
+
+
 ## [1.241.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.0...@next-bricks/presentational-bricks@1.241.1) (2022-03-29)
 
 
