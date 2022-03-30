@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.127.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.126.0...@next-bricks/next-builder@1.127.0) (2022-03-30)
+
+
+### Bug Fixes
+
+* fix theme build add sort rule ([9298dd3](https://github.com/easyops-cn/next-basics/commit/9298dd323649f746db6ca8ac9222413e2abdf5f6))
+
+
+### Features
+
+* support highlighting active brick ([b83c0d8](https://github.com/easyops-cn/next-basics/commit/b83c0d8c4443fc20d4fc9afede96c6190c299971))
+
+
+
+
+
 # [1.126.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.125.1...@next-bricks/next-builder@1.126.0) (2022-03-30)
 
 
