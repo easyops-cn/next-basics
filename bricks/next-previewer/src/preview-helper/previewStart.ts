@@ -1,11 +1,13 @@
 import { developHelper, getHistory } from "@next-core/brick-kit";
 import type { PluginLocation } from "@next-core/brick-types";
 import type {
-  PreviewMessagePreviewerPreviewStarted,
+  BrickOutline,
+  PreviewMessageFromPreviewer,
+  PreviewMessagePreviewerHighlightBrick,
+  PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
 } from "@next-types/preview";
-import { showOverlay } from "./overlay";
 import {
   setPreviewFromOrigin,
   startInspecting,
@@ -19,14 +21,40 @@ export function previewStart(previewFromOrigin: string): void {
     return;
   }
   started = true;
-  window.parent.postMessage(
-    {
-      sender: "previewer",
-      type: "preview-started",
-    } as PreviewMessagePreviewerPreviewStarted,
-    previewFromOrigin
-  );
+
+  const sendMessage = <T extends PreviewMessageFromPreviewer>(
+    message: Omit<T, "sender">
+  ): void => {
+    window.parent.postMessage(
+      {
+        sender: "previewer",
+        ...message,
+      },
+      previewFromOrigin
+    );
+  };
+
+  sendMessage({ type: "preview-started" });
   setPreviewFromOrigin(previewFromOrigin);
+
+  function getBrickOutlines(iid: string): BrickOutline[] {
+    if (!iid) {
+      return [];
+    }
+    const elements = document.querySelectorAll<HTMLElement>(
+      `[data-iid="${iid}"]`
+    );
+    return [...elements].map((element) => {
+      const { width, height, left, top } = element.getBoundingClientRect();
+      return {
+        width,
+        height,
+        left: left + window.scrollX,
+        top: top + window.scrollY,
+      };
+    });
+  }
+
   window.addEventListener(
     "message",
     ({ data, origin }: MessageEvent<PreviewMessageToPreviewer>) => {
@@ -39,11 +67,16 @@ export function previewStart(previewFromOrigin: string): void {
       }
       switch (data.type) {
         case "hover-on-brick":
+        case "select-brick":
           if (data.forwardedFor === "builder") {
-            const elements = document.querySelectorAll<HTMLElement>(
-              `[data-iid="${data.iid}"]`
-            );
-            showOverlay([...elements]);
+            const outlines = getBrickOutlines(data.iid);
+            sendMessage<PreviewMessagePreviewerHighlightBrick>({
+              type: "highlight-brick",
+              highlightType:
+                data.type === "hover-on-brick" ? "hover" : "active",
+              outlines,
+              iid: data.iid,
+            });
           }
           break;
         case "toggle-inspecting":
@@ -60,17 +93,23 @@ export function previewStart(previewFromOrigin: string): void {
     }
   );
 
+  window.addEventListener("scroll", () => {
+    sendMessage<PreviewMessagePreviewerScroll>({
+      type: "scroll",
+      scroll: {
+        x: window.scrollX,
+        y: window.scrollY,
+      },
+    });
+  });
+
   const history = getHistory();
 
   const sendLocationChange = (loc: PluginLocation): void => {
-    window.parent.postMessage(
-      {
-        sender: "previewer",
-        type: "url-change",
-        url: location.origin + history.createHref(loc),
-      } as PreviewMessagePreviewerUrlChange,
-      previewFromOrigin
-    );
+    sendMessage<PreviewMessagePreviewerUrlChange>({
+      type: "url-change",
+      url: location.origin + history.createHref(loc),
+    });
   };
 
   sendLocationChange(history.location);

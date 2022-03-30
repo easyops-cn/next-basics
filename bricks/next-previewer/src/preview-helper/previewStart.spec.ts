@@ -4,11 +4,9 @@ import {
   startInspecting,
   stopInspecting,
 } from "./inspector";
-import { showOverlay } from "./overlay";
 import { previewStart } from "./previewStart";
 
 jest.mock("./inspector");
-jest.mock("./overlay");
 
 const historyListeners = new Set<(loc: string) => void>();
 const history = {
@@ -129,8 +127,8 @@ describe("previewStart", () => {
     } as any);
     expect(startInspecting).not.toBeCalled();
     expect(stopInspecting).not.toBeCalled();
-    expect(showOverlay).not.toBeCalled();
 
+    // Hover on brick.
     listener({
       origin: "http://localhost:8081",
       data: {
@@ -140,7 +138,64 @@ describe("previewStart", () => {
         iid: "i-01",
       },
     } as any);
-    expect(showOverlay).toBeCalledWith([brick]);
+    expect(parentPostMessage).toBeCalledTimes(4);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      4,
+      {
+        sender: "previewer",
+        type: "highlight-brick",
+        highlightType: "hover",
+        outlines: [{ width: 0, height: 0, left: 0, top: 0 }],
+        iid: "i-01",
+      },
+      "http://localhost:8081"
+    );
+
+    // Select brick.
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "select-brick",
+        forwardedFor: "builder",
+        iid: "i-01",
+      },
+    } as any);
+    expect(parentPostMessage).toBeCalledTimes(5);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      5,
+      {
+        sender: "previewer",
+        type: "highlight-brick",
+        highlightType: "active",
+        outlines: [{ width: 0, height: 0, left: 0, top: 0 }],
+        iid: "i-01",
+      },
+      "http://localhost:8081"
+    );
+
+    // Unselect brick.
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "select-brick",
+        forwardedFor: "builder",
+        iid: null,
+      },
+    } as any);
+    expect(parentPostMessage).toBeCalledTimes(6);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      6,
+      {
+        sender: "previewer",
+        type: "highlight-brick",
+        highlightType: "active",
+        outlines: [],
+        iid: null,
+      },
+      "http://localhost:8081"
+    );
 
     listener({
       origin: "http://localhost:8081",
