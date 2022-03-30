@@ -108,9 +108,12 @@ export async function preStoryboardAssembly({
     ? buildPreviewRoutesForTheme(
         projectInfoResponse.appSetting.homepage,
         projectInfoResponse.pageTemplates,
-        pipes.graphTree(
-          themeGraphResponse as pipes.GraphData
-        ) as BuilderSnippetNode[]
+        pipes.graphTree(themeGraphResponse as pipes.GraphData, {
+          sort: {
+            key: "sort",
+            order: 1,
+          },
+        }) as BuilderSnippetNode[]
       )
     : [];
 
