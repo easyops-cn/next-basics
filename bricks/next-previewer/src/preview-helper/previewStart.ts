@@ -4,6 +4,7 @@ import type {
   BrickOutline,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerHighlightBrick,
+  PreviewMessagePreviewerResize,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
@@ -76,6 +77,7 @@ export function previewStart(previewFromOrigin: string): void {
                 data.type === "hover-on-brick" ? "hover" : "active",
               outlines,
               iid: data.iid,
+              alias: data.alias,
             });
           }
           break;
@@ -100,6 +102,12 @@ export function previewStart(previewFromOrigin: string): void {
         x: window.scrollX,
         y: window.scrollY,
       },
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    sendMessage<PreviewMessagePreviewerResize>({
+      type: "resize",
     });
   });
 

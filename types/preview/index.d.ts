@@ -14,12 +14,14 @@ export interface PreviewMessageBuilderHoverOnBrick extends PreviewBaseMessage {
   sender: "builder";
   type: "hover-on-brick";
   iid: string;
+  alias: string;
 }
 
 export interface PreviewMessageBuilderSelectBrick extends PreviewBaseMessage {
   sender: "builder";
   type: "select-brick";
   iid: string;
+  alias: string;
 }
 
 export type PreviewMessageFromPreviewer =
@@ -29,7 +31,8 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
-  | PreviewMessagePreviewerScroll;
+  | PreviewMessagePreviewerScroll
+  | PreviewMessagePreviewerResize;
 
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnBrick
@@ -43,6 +46,7 @@ export type PreviewMessageFromContainer =
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
   | PreviewMessageContainerPreviewerContextMenuOnBrick
+  | PreviewMessageContainerPreviewerResize
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload;
 
@@ -55,12 +59,14 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
-  | PreviewMessagePreviewerScroll;
+  | PreviewMessagePreviewerScroll
+  | PreviewMessagePreviewerResize;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
-  | PreviewMessageContainerPreviewerContextMenuOnBrick;
+  | PreviewMessageContainerPreviewerContextMenuOnBrick
+  | PreviewMessageContainerPreviewerResize;
 
 export interface PreviewMessagePreviewerPreviewStarted
   extends PreviewBaseMessage {
@@ -88,6 +94,7 @@ export interface PreviewMessagePreviewerHighlightBrick
   highlightType: "active" | "hover";
   outlines: BrickOutline[];
   iid: string;
+  alias: string;
 }
 
 export interface PreviewMessagePreviewerContextMenuOnBrick
@@ -114,6 +121,11 @@ export interface PreviewMessagePreviewerScroll extends PreviewBaseMessage {
     x: number;
     y: number;
   };
+}
+
+export interface PreviewMessagePreviewerResize extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "resize";
 }
 
 export interface PreviewMessageContainerStartPreview
@@ -167,6 +179,12 @@ export interface PreviewMessageContainerPreviewerSelectBrick
 
 export interface PreviewMessageContainerPreviewerContextMenuOnBrick
   extends Omit<PreviewMessagePreviewerContextMenuOnBrick, "sender"> {
+  sender: "preview-container";
+  forwardedFor: "previewer";
+}
+
+export interface PreviewMessageContainerPreviewerResize
+  extends Omit<PreviewMessagePreviewerResize, "sender"> {
   sender: "preview-container";
   forwardedFor: "previewer";
 }

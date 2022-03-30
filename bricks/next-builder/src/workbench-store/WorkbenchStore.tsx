@@ -19,7 +19,7 @@ import {
 import type { PreviewMessageBuilderSelectBrick } from "@next-types/preview";
 import { BuilderDataType } from "../builder-container/interfaces";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
-import { useHighlightBrick } from "./useHighlightBrick";
+import { sendHighlightBrick, useHighlightBrick } from "./useHighlightBrick";
 
 export interface WorkbenchStoreProps {
   dataSource?: BuilderRouteOrBrickNode[];
@@ -44,18 +44,7 @@ export function LegacyWorkbenchStore(
 ): React.ReactElement {
   const manager = useBuilderDataManager();
   const previewStart = useCallback(() => {
-    let iid = null;
-    const activeNodeUid = manager.getActiveNodeUid();
-    if (activeNodeUid) {
-      iid = manager
-        .getData()
-        .nodes.find((node) => node.$$uid === activeNodeUid)?.instanceId;
-    }
-    window.postMessage({
-      sender: "builder",
-      type: "select-brick",
-      iid,
-    } as PreviewMessageBuilderSelectBrick);
+    sendHighlightBrick("active", manager.getActiveNodeUid(), manager);
   }, [manager]);
 
   useImperativeHandle(ref, () => ({ manager, previewStart }));
