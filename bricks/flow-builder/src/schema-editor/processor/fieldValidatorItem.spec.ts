@@ -19,6 +19,8 @@ describe("processor", () => {
 
       const result3 = processValidatorInitValue();
       expect(result3).toEqual({});
+      const result4 = processValidatorInitValue(null);
+      expect(result4).toEqual(undefined);
     });
   });
 

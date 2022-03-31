@@ -7,6 +7,7 @@ import { ValidateField } from "../interfaces";
 export function processValidatorInitValue(
   data: ValidateField = {}
 ): ProcessValidateField {
+  if (!data) return;
   const result: ProcessValidateField = {};
   for (const [key, value] of Object.entries(data)) {
     if (compareMethodList.includes(key)) {

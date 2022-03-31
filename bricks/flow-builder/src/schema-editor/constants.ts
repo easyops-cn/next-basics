@@ -40,4 +40,6 @@ export const compareMethodList = ["gte", "lte", "gt", "lt"];
 
 export const numberTypeList = ["int", "int64", "float"];
 
-export const EditorContext = React.createContext<EditorOfContext>({});
+export const EditorContext = React.createContext<EditorOfContext>({
+  modelDefinitionList: [],
+});

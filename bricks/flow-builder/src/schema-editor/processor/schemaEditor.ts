@@ -11,7 +11,6 @@ import {
   SchemaItemProperty,
   AddedSchemaFormItem,
   SchemaRootNodeProperty,
-  ModelDefinition,
 } from "../interfaces";
 import { numberTypeList } from "../constants";
 import { innerTypeList } from "../constants";
@@ -61,7 +60,7 @@ export function processItemInitValue(
       ? "normal"
       : "model",
     ...([...numberTypeList, "string"].includes(data.type)
-      ? { validate: processValidatorInitValue(data.validate) }
+      ? { validateRule: processValidatorInitValue(data.validateRule) }
       : {}),
   };
 }
@@ -70,8 +69,10 @@ export function processItemData(
   data = {} as AddedSchemaFormItem
 ): SchemaItemProperty {
   return {
-    ...omit(data, "origin", "validate"),
-    ...(data.validate ? { validate: formatValidatorData(data.validate) } : {}),
+    ...omit(data, "origin", "validateRule"),
+    ...(data.validateRule
+      ? { validateRule: formatValidatorData(data.validateRule) }
+      : {}),
   };
 }
 

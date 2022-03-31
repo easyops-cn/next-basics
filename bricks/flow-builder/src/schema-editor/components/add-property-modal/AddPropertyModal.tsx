@@ -237,7 +237,7 @@ export function AddPropertyModal({
           getFieldValue("origin") === "normal" &&
           [...numberTypeList, "string"].includes(getFieldValue("type")) && (
             <Form.Item
-              name="validate"
+              name="validateRule"
               label={t(K.VALIDATOR_LABEL)}
               getValueProps={(v) => ({
                 value: { ...v, type: getFieldValue("type") },

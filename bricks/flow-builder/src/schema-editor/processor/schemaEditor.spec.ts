@@ -154,7 +154,7 @@ describe("processor tst", () => {
         name: "name",
         origin: "normal",
         type: "string",
-        validate: {},
+        validateRule: {},
       });
     });
   });
@@ -182,7 +182,7 @@ describe("processor tst", () => {
         name: "a",
         type: "string",
         origin: "normal",
-        validate: {
+        validateRule: {
           type: "string",
           pattern: "\\w+",
         } as ProcessValidateField,
@@ -190,7 +190,7 @@ describe("processor tst", () => {
       expect(result4).toEqual({
         name: "a",
         type: "string",
-        validate: {
+        validateRule: {
           pattern: "\\w+",
         },
       });

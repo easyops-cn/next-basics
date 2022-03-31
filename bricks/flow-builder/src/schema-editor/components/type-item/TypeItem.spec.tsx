@@ -1,8 +1,8 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import { Select, Checkbox } from "antd";
 import { TypeItem } from "./TypeItem";
-import { MoreOption } from "../more-option/MoreOption";
+import { useContractModels } from "../../hooks/useContractModels";
 
 jest.mock("@next-libs/basic-components", () => {
   return {
@@ -21,6 +21,7 @@ jest.mock("../../hooks/useContractModels", () => ({
       ],
     },
     jest.fn(),
+    jest.fn,
   ]),
 }));
 
@@ -62,6 +63,17 @@ describe("TypeItem", () => {
   });
 
   it("should work with model type", () => {
+    const mockChangeSizeFn = jest.fn();
+    (useContractModels as jest.Mock).mockReturnValue([
+      {
+        q: "yy",
+        modelList: [
+          { name: "DeployType", namespaceId: "api.easyops.DeployType" },
+        ],
+      },
+      jest.fn(),
+      mockChangeSizeFn,
+    ]);
     const props = {
       value: "DeployType",
       type: "model",
@@ -74,6 +86,6 @@ describe("TypeItem", () => {
       .prop("dropdownRender")(null)
       .props.children[1].props.onChange(100);
 
-    expect(props.onChange).toHaveBeenCalledWith(100);
+    expect(mockChangeSizeFn).toHaveBeenCalled();
   });
 });

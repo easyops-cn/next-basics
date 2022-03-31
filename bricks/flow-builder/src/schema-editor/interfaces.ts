@@ -23,6 +23,7 @@ export interface SchemaItemProperty
   refRequired?: string[];
   default?: string | number;
   validate?: ValidateField;
+  validateRule?: ValidateField;
   enum?: string[] | number[];
 }
 
@@ -67,6 +68,6 @@ export interface EditorOfContext {
     isEdit: boolean,
     trackId: string
   ): void;
-  showModelDefinition(modelDefinition: ModelDefinition, traceId: string): void;
+  showModelDefinition?(modelDefinition: ModelDefinition, traceId: string): void;
   hideModelDefinition?(traceId: string): void;
 }
