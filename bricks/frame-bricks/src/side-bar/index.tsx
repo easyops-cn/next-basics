@@ -33,33 +33,23 @@ export class SideBarElement extends UpdatingElement {
   /**
    * @kind ExpandedState
    * @required false
-   * @default -
-   * @description 展开状态，默认折叠收起
+   * @default collapsed
+   * @description 展开状态，默认折叠收起, 数据会做通过 localStorage 存储
    */
   @property({
     attribute: false,
   })
-  expandedState: ExpandedState = ExpandedState.Collapsed;
+  expandedState: ExpandedState;
 
   /**
-   * @detail
-   * @description
+   * @default false
+   * @required false
+   * @description 是否隐藏固定按钮
    */
-  @event({ type: "side.bar.enter" })
-  _handleMouseEnter: EventEmitter<Record<string, any>>;
-  handleMouseEnter = (): void => {
-    this._handleMouseEnter.emit();
-  };
-
-  /**
-   * @detail
-   * @description
-   */
-  @event({ type: "side.bar.leave" })
-  _handleMouseLeave: EventEmitter<Record<string, any>>;
-  handleMouseLeave = (): void => {
-    this._handleMouseLeave.emit();
-  };
+  @property({
+    type: Boolean,
+  })
+  hiddenFixedIcon: boolean;
 
   /**
    * @detail
@@ -76,6 +66,11 @@ export class SideBarElement extends UpdatingElement {
     // istanbul ignore else
     if (!this.style.display) {
       this.style.display = "block";
+      this.style.transition =
+        "all var(--side-bar-collapse-transition-duration) var(--side-bar-collapse-transition-timing-function)";
+      this.style.position = "sticky";
+      this.style.top = "var(--app-bar-height)";
+      this.style.zIndex = "101";
     }
     this._render();
   }
@@ -90,10 +85,10 @@ export class SideBarElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <SideBar
+            wrapperDOM={this}
             menu={this.menu}
             expandedState={this.expandedState}
-            onMouseEnter={this.handleMouseEnter}
-            onMouseLeave={this.handleMouseLeave}
+            hiddenFixedIcon={this.hiddenFixedIcon}
             onSideBarFixed={this.handleSideBarFixed}
           />
         </BrickWrapper>,
