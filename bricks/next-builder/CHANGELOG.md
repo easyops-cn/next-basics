@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.128.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.127.0...@next-bricks/next-builder@1.128.0) (2022-03-31)
+
+
+### Bug Fixes
+
+* refine brick outline style ([566171b](https://github.com/easyops-cn/next-basics/commit/566171b754412a97b89dddbcc237c336bd3a7740))
+
+
+### Features
+
+* refine highlight brick ([0fc5fca](https://github.com/easyops-cn/next-basics/commit/0fc5fca275987819cd718e904feceb3598051e2d))
+
+
+
+
+
 # [1.127.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.126.0...@next-bricks/next-builder@1.127.0) (2022-03-30)
 
 

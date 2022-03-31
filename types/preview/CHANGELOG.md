@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.2.0...@next-types/preview@1.3.0) (2022-03-31)
+
+
+### Features
+
+* refine highlight brick ([0fc5fca](https://github.com/easyops-cn/next-basics/commit/0fc5fca275987819cd718e904feceb3598051e2d))
+
+
+
+
+
 # [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.1.0...@next-types/preview@1.2.0) (2022-03-30)
 
 
