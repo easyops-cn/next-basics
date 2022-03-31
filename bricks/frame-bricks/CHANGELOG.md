@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.7.0...@next-bricks/frame-bricks@0.8.0) (2022-03-31)
+
+
+### Features
+
+* sidebar style position use sticky ([11a3918](https://github.com/easyops-cn/next-basics/commit/11a39181cf44f3c8da967943d4d986ca13bdc4ce))
+* update unit test ([bdef51d](https://github.com/easyops-cn/next-basics/commit/bdef51d1c067b06ea90618a115ed3a598cbecb97))
+
+
+
+
+
 # [0.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.6.1...@next-bricks/frame-bricks@0.7.0) (2022-03-29)
 
 
