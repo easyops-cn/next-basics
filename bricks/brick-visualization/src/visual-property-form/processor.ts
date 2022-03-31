@@ -83,7 +83,7 @@ export function calculateValue(
 
       if (supportMenuType.includes(item.type as string)) {
         const reg = /<% APP\.getMenu\((.*)\) %>/;
-        obj[item.name] = v.match(reg)?.[1]?.replace(/'|"/g, "");
+        obj[item.name] = v.match(reg)?.[1]?.replace(/'|"/g, "") || v;
       }
     }
     return obj;

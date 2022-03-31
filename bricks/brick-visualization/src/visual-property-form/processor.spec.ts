@@ -74,6 +74,8 @@ describe("processor test", () => {
         { name: "menu1", type: "Menu", description: "菜单一" },
         { name: "menu2", type: "SidebarSubMenu", description: "菜单二" },
         { name: "menu3", type: "Menu", description: "菜单三" },
+        { name: "menu4", type: "SidebarSubMenu", description: "菜单四" },
+        { name: "menu5", type: "Menu", description: "菜单五" },
       ];
 
       const brickProperties = {
@@ -84,6 +86,8 @@ describe("processor test", () => {
         menu1: "<% APP.getMenu(menu-1) %>",
         menu2: "<% APP.getMenu('menu-2') %>",
         menu3: '<% APP.getMenu("menu-3") %>',
+        menu4: "x",
+        menu5: "<% APP.getMenu(menu-5 %>",
       };
       const result = calculateValue(propertyList, brickProperties);
       expect(result).toEqual({
@@ -95,6 +99,8 @@ describe("processor test", () => {
         menu1: "menu-1",
         menu2: "menu-2",
         menu3: "menu-3",
+        menu4: "x",
+        menu5: "<% APP.getMenu(menu-5 %>",
       });
     });
 
