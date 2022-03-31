@@ -3,7 +3,6 @@ import { shallow, mount } from "enzyme";
 import { ExpandedState, SideBar } from "./SideBar";
 import { SidebarMenu } from "./SidebarMenu";
 import { menuData1 } from "./mockData";
-import { Tooltip } from "antd";
 
 import * as brickKit from "@next-core/brick-kit";
 import { act } from "@testing-library/react";
@@ -81,45 +80,6 @@ describe("SideBar", () => {
     wrapper.find(".fixedIcon").simulate("click");
     expect(wrapper.find(".sideBarContainer").hasClass("hovered")).toBe(false);
     expect(wrapper.find(".sideBarContainer").hasClass("expanded")).toBe(false);
-  });
-
-  it("should work when first used", () => {
-    const mouseEnter = jest.fn();
-    const mouseLeave = jest.fn();
-    const wrapper = shallow(
-      <SideBar
-        menu={menuData1}
-        onMouseEnter={mouseEnter}
-        onMouseLeave={mouseLeave}
-      />
-    );
-    expect(
-      wrapper.find(Tooltip).prop("color").startsWith("linear-gradient")
-    ).toBe(true);
-
-    wrapper.simulate("mouseenter");
-    expect(mouseEnter).toBeCalledTimes(1);
-    wrapper.simulate("mouseleave");
-    expect(mouseLeave).toBeCalledTimes(1);
-
-    wrapper.simulate("mouseenter");
-    expect(mouseEnter).toBeCalledTimes(2);
-
-    wrapper.find(".fixedIcon").simulate("click");
-    expect(
-      wrapper.find(Tooltip).prop("color").startsWith("linear-gradient")
-    ).not.toBe(true);
-
-    wrapper.simulate("mouseleave");
-    expect(mouseLeave).toBeCalledTimes(1);
-
-    wrapper.simulate("mouseenter");
-    expect(mouseEnter).toBeCalledTimes(3);
-
-    wrapper.find(".fixedIcon").simulate("click");
-
-    wrapper.simulate("mouseleave");
-    expect(mouseLeave).toBeCalledTimes(2);
   });
 
   it("should work with no props", async () => {

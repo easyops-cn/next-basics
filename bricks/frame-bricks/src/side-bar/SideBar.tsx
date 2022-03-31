@@ -13,7 +13,7 @@ import { SideBarElement } from "./index";
 
 interface SideBarProps {
   menu?: SidebarSubMenu;
-  wrapperDOM: SideBarElement;
+  wrapperDOM?: SideBarElement;
   expandedState?: ExpandedState;
   hiddenFixedIcon?: boolean;
   onSideBarFixed?: (isFiexed: boolean) => void;
@@ -58,10 +58,12 @@ export function SideBar(props: SideBarProps): React.ReactElement {
 
     setExpandedState(currentState);
 
-    if (currentState === ExpandedState.Expanded) {
-      wrapperDOM.style.width = "var(--side-bar-width)";
-    } else {
-      wrapperDOM.style.width = "var(--side-bar-collapsed-width)";
+    if (wrapperDOM) {
+      if (currentState === ExpandedState.Expanded) {
+        wrapperDOM.style.width = "var(--side-bar-width)";
+      } else {
+        wrapperDOM.style.width = "var(--side-bar-collapsed-width)";
+      }
     }
 
     storage.setItem(SIDE_BAR_EXPAND_STATE, currentState);
@@ -85,10 +87,12 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   };
 
   useEffect(() => {
-    if (expandedState === ExpandedState.Expanded) {
-      wrapperDOM.style.width = "var(--side-bar-width)";
-    } else {
-      wrapperDOM.style.width = "var(--side-bar-collapsed-width)";
+    if (wrapperDOM) {
+      if (expandedState === ExpandedState.Expanded) {
+        wrapperDOM.style.width = "var(--side-bar-width)";
+      } else {
+        wrapperDOM.style.width = "var(--side-bar-collapsed-width)";
+      }
     }
   }, [wrapperDOM, expandedState]);
 
