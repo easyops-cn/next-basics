@@ -8,7 +8,7 @@ import {
   EventEmitter,
   method,
 } from "@next-core/brick-kit";
-import { FieldsMappingEditor, EdiotrRef } from "./FieldsMappingEditor";
+import { FieldsMappingEditor, EditorRef } from "./FieldsMappingEditor";
 import { FieldItem } from "./interfaces";
 
 /**
@@ -20,7 +20,7 @@ import { FieldItem } from "./interfaces";
  * @noInheritDoc
  */
 export class FieldsMappingEditorElement extends UpdatingElement {
-  private _editorRefs = React.createRef<EdiotrRef>();
+  private _editorRefs = React.createRef<EditorRef>();
   /**
    * @kind FieldItem[]
    * @required false

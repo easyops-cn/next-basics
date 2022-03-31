@@ -4,10 +4,11 @@ import { debounce, isEmpty } from "lodash";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { useContractModels } from "../../hooks/useContractModels";
-import { fecthModelData } from "../../hooks/useCurModel";
+import { fetchModelData } from "../../hooks/useCurModel";
+import { MoreOption } from "../more-option/MoreOption";
+import { ContractContext } from "../../ContractContext";
 import { ModelFieldItem } from "../../interfaces";
 import { processRefItemData, processRefItemInitValue } from "../../processor";
-import { modelRefCache } from "../../constants";
 
 export interface ProcessRefItemValue {
   name?: string;
@@ -21,7 +22,7 @@ export interface RefItemProps {
 
 export function RefItem(props: RefItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
-  const [{ modelList }, setQ] = useContractModels();
+  const [{ modelList }, setQ, setPageSize] = useContractModels();
   const [fieldList, setFieldList] = useState<ModelFieldItem[]>([]);
   const [refValue, setRefValue] = useState<ProcessRefItemValue>(
     processRefItemInitValue(props.value)
@@ -34,7 +35,7 @@ export function RefItem(props: RefItemProps): React.ReactElement {
 
   useEffect(() => {
     (async () => {
-      const data = await fecthModelData(refValue.name);
+      const data = await fetchModelData(refValue.name);
       setFieldList(data?.fields);
     })();
   }, [refValue.name]);
@@ -58,6 +59,20 @@ export function RefItem(props: RefItemProps): React.ReactElement {
     const find = modelList.find((item) => item.name === value);
     // istanbul ignore else
     if (find) {
+      // 放入当前的模型的定义
+      const modelDefinitionList = [
+        {
+          name: find.name,
+          fields: find.fields,
+        },
+        ...(find.importModelDefinition || []),
+      ];
+      const contractContext = ContractContext.getInstance();
+      contractContext.addModelDefinition(modelDefinitionList);
+      contractContext.addImportNamespace(
+        find.name,
+        `${find.namespaceId}.${find.name}`
+      );
       setFieldList(find.fields);
     }
   };
@@ -80,12 +95,6 @@ export function RefItem(props: RefItemProps): React.ReactElement {
     };
 
     setRefValue(newValue);
-    const find = modelList.find((item) => item.name === newValue.name);
-    find &&
-      modelRefCache.set(
-        `${newValue.name}.${newValue.field}`,
-        `${find.namespaceId}.${find.name}`
-      );
     props.onChange(processRefItemData(newValue));
   };
 
@@ -96,9 +105,17 @@ export function RefItem(props: RefItemProps): React.ReactElement {
         value={refValue.name}
         showSearch
         filterOption={false}
-        placeholder={t(K.MODEL_SEARCH_PLANCEHOLDER)}
+        placeholder={t(K.MODEL_SEARCH_PLACEHOLDER)}
         onChange={handleModelChange}
         onSearch={debounceSearch}
+        dropdownRender={(menu) => (
+          <>
+            {menu}
+            {modelList.length > 0 && (
+              <MoreOption onChange={(pageSize) => setPageSize(pageSize)} />
+            )}
+          </>
+        )}
       >
         {modelList.map((item) => (
           <Select.Option key={item.name} value={item.name}>

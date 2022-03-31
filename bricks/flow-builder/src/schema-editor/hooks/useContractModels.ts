@@ -3,14 +3,20 @@ import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
 import { ContractModel } from "../components/type-item/TypeItem";
 import { handleHttpError } from "@next-core/brick-kit";
 
+export interface ContractModelsParams {
+  disabledModelType?: boolean;
+}
+
 export function useContractModels({
   disabledModelType,
-}: { disabledModelType?: boolean } = {}): [
+}: ContractModelsParams = {}): [
   { q: string; modelList: ContractModel[] },
-  (prevState: string) => void
+  (prevState: string) => void,
+  (prevState: number) => void
 ] {
   const [modelList, setModelList] = useState<ContractModel[]>([]);
   const [q, setQ] = useState<string>("");
+  const [pageSize, setPageSize] = useState(20);
 
   useEffect(() => {
     !disabledModelType &&
@@ -21,7 +27,7 @@ export function useContractModels({
               "FLOW_BUILDER_MODEL_CONTRACT@EASYOPS",
               {
                 page: 1,
-                page_size: 20,
+                page_size: pageSize,
                 query: {
                   $or: [
                     { name: { $like: `%${q}%` } },
@@ -39,7 +45,7 @@ export function useContractModels({
           handleHttpError(err);
         }
       })();
-  }, [q, disabledModelType]);
+  }, [q, disabledModelType, pageSize]);
 
-  return [{ q, modelList }, setQ];
+  return [{ q, modelList }, setQ, setPageSize];
 }

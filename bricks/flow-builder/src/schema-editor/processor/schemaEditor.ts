@@ -1,23 +1,27 @@
-import { isNil, omit } from "lodash";
+import { isNil, omit, uniq } from "lodash";
+import i18next from "i18next";
 import {
   processValidatorInitValue,
   formatValidatorData,
 } from "./filedValidatorItem";
 import { extractType } from "./typeItem";
+import { extractRefType } from "./refItem";
 import {
   EditorTitleProps,
   SchemaItemProperty,
   AddedSchemaFormItem,
   SchemaRootNodeProperty,
 } from "../interfaces";
-import { numberTypeList, modelRefCache } from "../constants";
+import { numberTypeList } from "../constants";
+import { innerTypeList } from "../constants";
+import { ContractContext } from "../ContractContext";
 
 export function filterTitleList(
   titleList: EditorTitleProps[],
   readonly: boolean
 ): EditorTitleProps[] {
   return readonly
-    ? titleList.filter((item) => item.title !== "Setting")
+    ? titleList.filter((item) => item.key !== "setting")
     : titleList;
 }
 
@@ -41,25 +45,22 @@ export function isTypeChange(
   current: SchemaItemProperty,
   prev: SchemaItemProperty
 ): boolean {
-  if (current.type) {
-    if (prev.ref || (prev.type && current.type !== prev.type)) return true;
-  }
-
-  if (current.ref) {
-    if (prev.type || (prev.ref && prev.ref !== current.ref)) return true;
-  }
-
-  return false;
+  return calcModelDefinition(current) !== calcModelDefinition(prev);
 }
 
 export function processItemInitValue(
   data = {} as SchemaItemProperty
 ): AddedSchemaFormItem {
+  const isNormalType = !isModelDefinition(data);
   return {
     ...data,
-    origin: data.ref ? "reference" : "normal",
+    origin: data.ref
+      ? "reference"
+      : isNormalType || !data.type
+      ? "normal"
+      : "model",
     ...([...numberTypeList, "string"].includes(data.type)
-      ? { validate: processValidatorInitValue(data.validate) }
+      ? { validateRule: processValidatorInitValue(data.validateRule) }
       : {}),
   };
 }
@@ -68,8 +69,10 @@ export function processItemData(
   data = {} as AddedSchemaFormItem
 ): SchemaItemProperty {
   return {
-    ...omit(data, "origin", "validate"),
-    ...(data.validate ? { validate: formatValidatorData(data.validate) } : {}),
+    ...omit(data, "origin", "validateRule"),
+    ...(data.validateRule
+      ? { validateRule: formatValidatorData(data.validateRule) }
+      : {}),
   };
 }
 
@@ -78,11 +81,9 @@ export function processFields(
   {
     requiredList,
     defaultData,
-    importList,
   }: {
     requiredList: string[];
     defaultData: Record<string, unknown>;
-    importList: string[];
   },
   result: SchemaItemProperty[]
 ): void {
@@ -102,12 +103,11 @@ export function processFields(
 
     result.push(property);
 
-    extractModelRef(item, importList);
     if (item.fields) {
       property.fields = [];
       processFields(
         item.fields,
-        { requiredList, defaultData, importList },
+        { requiredList, defaultData },
         property.fields
       );
     }
@@ -130,13 +130,21 @@ export function processFormInitvalue(
     result.required = true;
   }
 
-  processFields(
-    data.fields,
-    { requiredList, defaultData, importList: data.import },
-    result.fields
-  );
+  processFields(data.fields, { requiredList, defaultData }, result.fields);
 
   return result;
+}
+
+export function collectImport(
+  item: SchemaItemProperty,
+  importSet: Set<string>
+): void {
+  const modelName = calcModelDefinition(item);
+  const contractContext = ContractContext.getInstance();
+
+  if (contractContext.hasImportNamespace(modelName)) {
+    importSet.add(contractContext.getSingleNamespace(modelName));
+  }
 }
 
 export function collectFields(
@@ -165,10 +173,7 @@ export function collectFields(
       defaultData[item.name] = item.default;
     }
 
-    const modelRef = modelRefCache.get(extractType(item.type) || item.ref);
-    if (modelRef) {
-      importSet.add(modelRef);
-    }
+    collectImport(item, importSet);
 
     const property = {
       ...omit(item, ["fields", "required", "refRequired", "default"]),
@@ -176,7 +181,8 @@ export function collectFields(
 
     result.push(property);
 
-    if (item.fields) {
+    if (item.fields && item.type?.includes("object")) {
+      // 只有 object/object[] 类型的 fields 才需要提交, 其他 fields 仅为前台引用模型展示用
       property.fields = [];
       collectFields(
         item.fields,
@@ -204,6 +210,8 @@ export function processFormData(
     defaultData[data.name] = data.default;
   }
 
+  collectImport(data, importSet);
+
   collectFields(
     data.fields,
     { requiredList, defaultData, importSet },
@@ -212,32 +220,10 @@ export function processFormData(
 
   return {
     ...result,
-    required: requiredList,
+    required: uniq(requiredList),
     default: defaultData,
     ...(importSet.size !== 0 ? { import: Array.from(importSet) } : {}),
   };
-}
-
-export function extractModelRef(
-  item: SchemaItemProperty,
-  importList: string[] = []
-): void {
-  const importMap: Map<string, string> = importList.reduce((map, item) => {
-    map.set(item.split(".")?.pop(), item);
-    return map;
-  }, new Map());
-
-  if (item.name && item.type) {
-    const modelName = item.type.replace(/\[\]$/, "");
-    importMap.has(modelName) &&
-      modelRefCache.set(modelName, importMap.get(modelName));
-  }
-
-  if (item.ref) {
-    const modelName = item.ref.split(".")[0];
-    importMap.has(modelName) &&
-      modelRefCache.set(item.ref, importMap.get(modelName));
-  }
 }
 
 export function getRefRequiredFields(
@@ -247,4 +233,20 @@ export function getRefRequiredFields(
   const model = ref.split(".")[0];
 
   return requiredList?.filter((item) => item.includes(model));
+}
+
+export function isModelDefinition(item: SchemaItemProperty): boolean {
+  if (item.ref) return true;
+
+  const customTypeList = ContractContext.getInstance().customTypeList;
+
+  return ![...innerTypeList, ...customTypeList].includes(
+    extractType(item.type)
+  );
+}
+
+export function calcModelDefinition(item: SchemaItemProperty): string {
+  if (item.ref) return extractRefType(item.ref);
+
+  return extractType(item.type);
 }

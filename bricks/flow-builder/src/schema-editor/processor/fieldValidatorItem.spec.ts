@@ -19,6 +19,8 @@ describe("processor", () => {
 
       const result3 = processValidatorInitValue();
       expect(result3).toEqual({});
+      const result4 = processValidatorInitValue(null);
+      expect(result4).toEqual(undefined);
     });
   });
 
@@ -44,6 +46,12 @@ describe("processor", () => {
         type: "int",
       });
       expect(result4).toEqual({});
+
+      const result5 = formatValidatorData({
+        compare: [{ method: "lt", value: 0 }],
+        type: "int",
+      });
+      expect(result5).toEqual({ lt: 0 });
     });
   });
 });

@@ -1,32 +1,42 @@
-import React, { useMemo, useState } from "react";
-import { Checkbox, Button, Tag, Tooltip } from "antd";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Checkbox, Button, Tag, Tooltip, Badge } from "antd";
 import {
   SettingOutlined,
   DeleteOutlined,
   PlusCircleOutlined,
+  RightOutlined,
+  DownOutlined,
 } from "@ant-design/icons";
 import classNames from "classnames";
 import { SchemaItemProperty } from "../../interfaces";
-import { AddPropertyModal } from "../add-property-modal/AddPropertyModal";
 import editorStyles from "../../SchemaEditor.module.css";
-import { getGridTemplateColumns, filterTitleList } from "../../processor";
-import { titleList } from "../../constants";
+import {
+  getGridTemplateColumns,
+  filterTitleList,
+  isModelDefinition,
+  calcModelDefinition,
+  getModelRefData,
+} from "../../processor";
+import { titleList, EditorContext, rootTraceId } from "../../constants";
 import styles from "./SchemaItem.module.css";
 import { K, NS_FLOW_BUILDER } from "../../../i18n/constants";
 import { useTranslation } from "react-i18next";
+import { isEmpty } from "lodash";
 
 export interface SchemaItemProps {
   className?: string;
   style?: React.CSSProperties;
-  trackId: string;
-  onEdit?: (data: SchemaItemProperty, trackId: string) => void;
-  onRemove?: (trackId: string) => void;
-  onCreate?: (data: SchemaItemProperty, trackId: string) => void;
+  traceId: string;
+  onEdit?: (data: SchemaItemProperty, traceId: string) => void;
+  onRemove?: (traceId: string) => void;
+  onCreate?: (data: SchemaItemProperty, traceId: string) => void;
   itemData: SchemaItemProperty;
   hideDeleteBtn?: boolean;
   readonly?: boolean;
   hiddenRootNode?: boolean;
   disabledModelType?: boolean;
+  isModelDefinitionRow?: boolean;
+  parentsModel?: string[];
 }
 
 export function SchemaItem({
@@ -34,64 +44,111 @@ export function SchemaItem({
   readonly,
   className,
   itemData,
-  onCreate,
-  onEdit,
-  onRemove,
-  trackId,
+  traceId,
   hideDeleteBtn,
   hiddenRootNode,
   disabledModelType,
+  isModelDefinitionRow,
+  parentsModel = [],
 }: SchemaItemProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
-  const [visible, setVisible] = useState(false);
-  const [initValue, setInitValue] = useState({} as SchemaItemProperty);
-  const [isEdit, setEdit] = useState(false);
+  const editorContext = useContext(EditorContext);
+  const [hover, setHover] = useState(false);
+  const [expand, setExpand] = useState(false);
+  const {
+    modelDefinitionList = [],
+    onModal,
+    onRemove,
+    showModelDefinition,
+    hideModelDefinition,
+  } = editorContext;
 
-  const handleSubmit = (
-    data: SchemaItemProperty,
-    trackId: string,
-    isEdit: boolean
-  ): void => {
-    isEdit ? onEdit?.(data, trackId) : onCreate(data, trackId);
-  };
-
-  const handleRemove = (trackId: string): void => {
-    onRemove(trackId);
-  };
-
-  const handleChildEdit = (data: SchemaItemProperty, trackId: string): void => {
-    onEdit?.(data, trackId);
-  };
-
-  const handleChildRemove = (trackId: string): void => {
-    onRemove(trackId);
-  };
+  useEffect(() => {
+    setExpand(!isEmpty(itemData.fields));
+  }, [itemData.fields]);
 
   const openEditModal = (): void => {
-    setEdit(true);
-    setInitValue({ ...itemData });
-    setVisible(true);
+    onModal?.({ ...itemData }, true, traceId);
   };
 
   const openCreateModal = (): void => {
-    setEdit(false);
-    setInitValue({});
-    setVisible(true);
+    onModal?.({} as SchemaItemProperty, false, traceId);
   };
 
+  const displayName = useMemo(
+    () => itemData.name || itemData.ref,
+    [itemData.name, itemData.ref]
+  );
+
   const offsetPadding = useMemo(() => {
-    return 20 * (trackId.split("-").length - 1);
-  }, [trackId]);
+    return 20 * (traceId.split("-").length - 1);
+  }, [traceId]);
+
+  const modelDefinition = useMemo(() => {
+    return modelDefinitionList.find(
+      (item) => item.name === calcModelDefinition(itemData)
+    );
+  }, [modelDefinitionList, itemData]);
+
+  const isSelfRef = useMemo(
+    () =>
+      isModelDefinition(itemData) &&
+      parentsModel.includes(calcModelDefinition(itemData)),
+    [itemData, parentsModel]
+  );
+
+  const handleExpand = (): void => {
+    setExpand(true);
+    if (itemData.ref) {
+      showModelDefinition(
+        getModelRefData(itemData.ref, modelDefinition, modelDefinitionList),
+        traceId
+      );
+    } else {
+      showModelDefinition(modelDefinition, traceId);
+    }
+  };
+
+  const handleFold = (): void => {
+    setExpand(false);
+    hideModelDefinition(traceId);
+  };
+
+  const handleClick = (): void => {
+    expand ? handleFold() : handleExpand();
+  };
 
   return (
-    <>
+    <div
+      className={classNames({ [styles.highlight]: modelDefinition && expand })}
+    >
       <div
         style={style}
         className={className}
-        hidden={trackId === "root" && hiddenRootNode}
+        hidden={traceId === rootTraceId && hiddenRootNode}
       >
-        <div style={{ paddingLeft: offsetPadding }}>
-          {itemData.name || "--"}
+        <div
+          title={displayName}
+          className={classNames(styles.textEllipsis, {
+            [styles.modelDefinitionText]: isModelDefinitionRow,
+          })}
+          style={{
+            paddingLeft: offsetPadding,
+            ...(hover ? { color: "var(--color-brand)" } : {}),
+          }}
+        >
+          {modelDefinition && !isSelfRef ? (
+            <span onClick={handleClick} style={{ cursor: "pointer" }}>
+              {expand ? (
+                <DownOutlined className={styles.caret} />
+              ) : (
+                <RightOutlined className={styles.caret} />
+              )}
+              {displayName}
+            </span>
+          ) : (
+            displayName
+          )}
         </div>
         <div>
           <Checkbox checked={itemData.required} disabled />
@@ -106,17 +163,28 @@ export function SchemaItem({
               className={classNames({
                 [styles.typeTag]: itemData.type,
                 [styles.refTag]: itemData.ref,
+                [styles.modelDefinitionTag]: isModelDefinitionRow,
               })}
             >
               {itemData.type || itemData.ref}
             </Tag>
           </Tooltip>
+          {!readonly && modelDefinition?.updated && (
+            <Tooltip title={t(K.MODEL_DEFINITION_UPDATE_MESSAGE)}>
+              <Badge color="orange" />
+            </Tooltip>
+          )}
         </div>
-        <div className={styles.description} title={itemData.description}>
+        <div
+          className={classNames(styles.textEllipsis, {
+            [styles.modelDefinitionText]: isModelDefinitionRow,
+          })}
+          title={itemData.description}
+        >
           {itemData.description}
         </div>
         {!readonly && (
-          <div>
+          <div hidden={isModelDefinitionRow}>
             <Button
               type="link"
               className={editorStyles.iconBtn}
@@ -129,7 +197,7 @@ export function SchemaItem({
               <Button
                 type="link"
                 className={editorStyles.deleteBtn}
-                onClick={() => handleRemove(trackId)}
+                onClick={() => onRemove?.(traceId)}
               >
                 <DeleteOutlined />
               </Button>
@@ -139,7 +207,13 @@ export function SchemaItem({
       </div>
       {itemData.fields?.map((item, index) => (
         <SchemaItem
+          parentsModel={
+            isModelDefinition(itemData)
+              ? [...parentsModel, calcModelDefinition(itemData)]
+              : [...parentsModel]
+          }
           className={editorStyles.schemaItem}
+          isModelDefinitionRow={isModelDefinitionRow || !!modelDefinition}
           readonly={readonly}
           style={{
             gridTemplateColumns: getGridTemplateColumns(
@@ -147,19 +221,22 @@ export function SchemaItem({
             ),
           }}
           key={index}
-          trackId={`${trackId}-${index}`}
+          traceId={`${traceId}-${index}`}
           itemData={item}
           disabledModelType={disabledModelType}
-          onEdit={handleChildEdit}
-          onRemove={handleChildRemove}
-          onCreate={onCreate}
         />
       ))}
       {!readonly && itemData.type?.includes("object") && (
-        <div style={{ paddingLeft: 20 + offsetPadding }}>
+        <div
+          style={{ paddingLeft: 20 + offsetPadding }}
+          hidden={isModelDefinitionRow}
+        >
           <Button
             className={editorStyles.iconBtn}
             type="link"
+            title={t(K.ADD_FIELD_PARAMS_TIPS, { name: displayName })}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
             onClick={openCreateModal}
           >
             <PlusCircleOutlined />
@@ -167,15 +244,6 @@ export function SchemaItem({
           </Button>
         </div>
       )}
-      <AddPropertyModal
-        isEdit={isEdit}
-        visible={visible}
-        trackId={trackId}
-        onClose={() => setVisible(false)}
-        onSubmit={handleSubmit}
-        initValue={initValue}
-        disabledModelType={disabledModelType}
-      />
-    </>
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+import { ContractContext } from "../ContractContext";
 import {
   processFilterModes,
   processTypeItemData,
@@ -23,6 +24,12 @@ describe("typeItem processor", () => {
 
   describe("processFilterModes", () => {
     it("should work", () => {
+      ContractContext.getInstance(
+        [],
+        [],
+        ["object_id", "attr_id", "email", "ip"]
+      );
+
       const list = [
         { name: "Host", namespaceId: "api.easyops.host" },
         {
@@ -32,7 +39,7 @@ describe("typeItem processor", () => {
         },
       ];
 
-      const result = processFilterModes(list, "object");
+      const result = processFilterModes(list, "object", "normal");
 
       expect(result).toEqual([
         {
@@ -40,15 +47,12 @@ describe("typeItem processor", () => {
           items: [{ label: "object", value: "object" }],
         },
         {
-          group: "flow-builder:FROM_MODEL",
-          items: [
-            { label: "Host", value: "Host" },
-            { label: "DeployType", value: "DeployType" },
-          ],
+          group: "flow-builder:CUSTOM_TYPE",
+          items: [{ label: "object_id", value: "object_id" }],
         },
       ]);
 
-      const result2 = processFilterModes(list);
+      const result2 = processFilterModes(list, "", "normal");
 
       expect(result2).toEqual([
         {
@@ -66,6 +70,19 @@ describe("typeItem processor", () => {
           ],
         },
         {
+          group: "flow-builder:CUSTOM_TYPE",
+          items: [
+            { label: "object_id", value: "object_id" },
+            { label: "attr_id", value: "attr_id" },
+            { label: "email", value: "email" },
+            { label: "ip", value: "ip" },
+          ],
+        },
+      ]);
+
+      const result3 = processFilterModes(list, "", "model");
+      expect(result3).toEqual([
+        {
           group: "flow-builder:FROM_MODEL",
           items: [
             { label: "Host", value: "Host" },
@@ -73,6 +90,8 @@ describe("typeItem processor", () => {
           ],
         },
       ]);
+
+      ContractContext.cleanInstance();
     });
   });
 

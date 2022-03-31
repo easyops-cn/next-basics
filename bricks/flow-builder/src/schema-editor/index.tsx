@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrickWrapper, property } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
 import { SchemaEditor } from "./SchemaEditor";
-import { SchemaRootNodeProperty } from "./interfaces";
+import { SchemaRootNodeProperty, ModelDefinition } from "./interfaces";
 
 /**
  * @id shared-editors.schema-editor
@@ -51,6 +51,21 @@ export class SchemaEditorElement extends FormItemElement {
   hiddenRootNode: boolean;
 
   /**
+   * @kind Record<string, boolean>
+   * @required true
+   * @default false
+   * @description 配置根节点项是否必填
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  rootNodeRequired = {
+    description: false,
+    type: false,
+  };
+
+  /**
    * @kind boolean
    * @required -️
    * @default false
@@ -61,6 +76,42 @@ export class SchemaEditorElement extends FormItemElement {
     type: Boolean,
   })
   disabledModelType: boolean;
+
+  /**
+   * @kind boolean
+   * @required -️
+   * @default false
+   * @description 根节点是否增加 wrapper 的配置
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  enableWrapper: boolean;
+
+  /**
+   * @kind string[]
+   * @required -️
+   * @default false
+   * @description 平台自定义的普通类型列表
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  customTypeList: string[] = [];
+
+  /**
+   * @kind ModelDefinition[]
+   * @required -️
+   * @default false
+   * @description 平台自定义的普通类型列表
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  importModelDefinition: ModelDefinition[] = [];
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -94,6 +145,10 @@ export class SchemaEditorElement extends FormItemElement {
             readonly={this.readonly}
             hiddenRootNode={this.hiddenRootNode}
             disabledModelType={this.disabledModelType}
+            enableWrapper={this.enableWrapper}
+            customTypeList={this.customTypeList}
+            rootNodeRequired={this.rootNodeRequired}
+            importModelDefinition={this.importModelDefinition}
           />
         </BrickWrapper>,
         this

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { Modal, Form, Input, Select, Radio, Switch, InputNumber } from "antd";
@@ -9,6 +9,7 @@ import {
   processItemData,
   checkRequired,
 } from "../../processor";
+import { rootTraceId } from "../../constants";
 import { FieldValidatorItem } from "../field-validator-item/FieldValidatorItem";
 import { TypeItem } from "../../components/type-item/TypeItem";
 import { RefItem } from "../../components/ref-item/RefItem";
@@ -26,6 +27,8 @@ export interface AddPropertyModalProps {
   initValue?: SchemaItemProperty;
   isEdit?: boolean;
   disabledModelType?: boolean;
+  enableWrapper?: boolean;
+  rootNodeRequired?: Record<string, boolean>;
 }
 
 export function AddPropertyModal({
@@ -36,6 +39,8 @@ export function AddPropertyModal({
   trackId,
   isEdit,
   disabledModelType,
+  enableWrapper,
+  rootNodeRequired,
 }: AddPropertyModalProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
   const [form] = Form.useForm();
@@ -67,7 +72,7 @@ export function AddPropertyModal({
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("origin") === "normal" && (
+          ["normal", "model"].includes(getFieldValue("origin")) && (
             <Form.Item
               name="name"
               label={t(K.NAME_LABEL)}
@@ -90,9 +95,12 @@ export function AddPropertyModal({
         initialValue="normal"
         label={t(K.CATEGORY_LABEL)}
       >
-        <Select>
+        <Select onChange={() => form.resetFields(["type", "ref"])}>
           <Select.Option key="normal" value="normal">
             {t(K.SCHEMA_ITEM_NORMAL)}
+          </Select.Option>
+          <Select.Option key="model" value="model">
+            {t(K.SCHEMA_ITEM_MODEL)}
           </Select.Option>
           <Select.Option key="reference" value="reference">
             {t(K.SCHEMA_ITEM_REF)}
@@ -100,7 +108,7 @@ export function AddPropertyModal({
         </Select>
       </Form.Item>
     ),
-    [disabledModelType, t]
+    [disabledModelType, t, form]
   );
 
   const typeFormItem = useMemo(
@@ -112,14 +120,26 @@ export function AddPropertyModal({
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("origin") === "normal" ? (
+          ["normal", "model"].includes(getFieldValue("origin")) ? (
             <Form.Item
               name="type"
               label={t(K.TYPE_LABEL)}
-              rules={[{ required: true }]}
+              rules={[
+                {
+                  required:
+                    trackId === rootTraceId && isEdit
+                      ? rootNodeRequired?.type
+                      : true,
+                },
+              ]}
               messageVariables={{ label: "type" }}
             >
-              <TypeItem disabledModelType={disabledModelType} />
+              <TypeItem
+                allowClear={
+                  trackId === rootTraceId && isEdit && !rootNodeRequired?.type
+                }
+                type={getFieldValue("origin") === "model" ? "model" : "normal"}
+              />
             </Form.Item>
           ) : (
             <Form.Item
@@ -134,7 +154,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [disabledModelType, form, t]
+    [form, isEdit, rootNodeRequired, t, trackId]
   );
 
   const defaultFormItem = useMemo(
@@ -194,7 +214,7 @@ export function AddPropertyModal({
               <Select
                 mode="tags"
                 style={{ width: "100%" }}
-                placeholder={t(K.ENUM_INPUT_PLANCEHOLDER)}
+                placeholder={t(K.ENUM_INPUT_PLACEHOLDER)}
               ></Select>
             </Form.Item>
           )
@@ -217,7 +237,7 @@ export function AddPropertyModal({
           getFieldValue("origin") === "normal" &&
           [...numberTypeList, "string"].includes(getFieldValue("type")) && (
             <Form.Item
-              name="validate"
+              name="validateRule"
               label={t(K.VALIDATOR_LABEL)}
               getValueProps={(v) => ({
                 value: { ...v, type: getFieldValue("type") },
@@ -263,6 +283,35 @@ export function AddPropertyModal({
     [t]
   );
 
+  const showWrapperFormItem = useMemo(() => {
+    return enableWrapper && trackId === rootTraceId && isEdit;
+  }, [enableWrapper, trackId, isEdit]);
+
+  const wrapperFormItem = useMemo(
+    () => (
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) =>
+          prevValues.origin !== currentValues.origin
+        }
+      >
+        {({ getFieldValue }) =>
+          ["normal", "model"].includes(getFieldValue("origin")) && (
+            <Form.Item
+              initialValue={true}
+              name="wrapper"
+              label="wrapper"
+              valuePropName="checked"
+            >
+              <Switch />
+            </Form.Item>
+          )
+        }
+      </Form.Item>
+    ),
+    []
+  );
+
   const descriptionFormItem = useMemo(
     () => (
       <Form.Item
@@ -272,11 +321,18 @@ export function AddPropertyModal({
         }
       >
         {({ getFieldValue }) =>
-          getFieldValue("origin") === "normal" && (
+          ["normal", "model"].includes(getFieldValue("origin")) && (
             <Form.Item
               name="description"
               label={t(K.DESCRIPTION_LABEL)}
-              rules={[{ required: true }]}
+              rules={[
+                {
+                  required:
+                    trackId === rootTraceId && isEdit
+                      ? rootNodeRequired?.description
+                      : true,
+                },
+              ]}
             >
               <Input.TextArea />
             </Form.Item>
@@ -284,16 +340,18 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [t]
+    [t, trackId, isEdit, rootNodeRequired]
   );
 
   return (
     <Modal
       title="property modal"
+      destroyOnClose
       visible={visible}
       onOk={handleOk}
       onCancel={handleClose}
       width={600}
+      maskClosable={false}
     >
       <Form
         name="properties-form"
@@ -312,6 +370,7 @@ export function AddPropertyModal({
         {enumFormItem}
 
         {validatorFormItem}
+        {showWrapperFormItem && wrapperFormItem}
         {descriptionFormItem}
       </Form>
     </Modal>

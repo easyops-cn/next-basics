@@ -1,4 +1,5 @@
 export interface EditorTitleProps {
+  key: string;
   title: string;
   width?: number | string;
 }
@@ -22,6 +23,7 @@ export interface SchemaItemProperty
   refRequired?: string[];
   default?: string | number;
   validate?: ValidateField;
+  validateRule?: ValidateField;
   enum?: string[] | number[];
 }
 
@@ -34,14 +36,38 @@ export interface SchemaRootNodeProperty {
   description?: string;
   fields?: SchemaItemProperty[];
   import?: string[];
+  importModelDefinition?: ModelDefinition[];
 }
 
 export interface AddedSchemaFormItem extends SchemaItemProperty {
-  origin: "normal" | "reference";
+  origin: "normal" | "reference" | "model";
 }
 
 export interface ModelFieldItem {
   name: string;
   type?: string;
   description?: string;
+}
+
+export interface ModelDefinition {
+  name: string;
+  fields?: SchemaItemProperty[];
+  updated?: boolean;
+}
+
+export interface EditorOfContext {
+  modelDefinitionList: ModelDefinition[];
+  onEdit?(data: SchemaItemProperty, traceId?: string): void;
+  onRemove?(traceId: string): void;
+  onCreate?(
+    data: SchemaItemProperty | SchemaItemProperty[],
+    traceId: string
+  ): void;
+  onModal?(
+    itemData: SchemaItemProperty,
+    isEdit: boolean,
+    trackId: string
+  ): void;
+  showModelDefinition?(modelDefinition: ModelDefinition, traceId: string): void;
+  hideModelDefinition?(traceId: string): void;
 }

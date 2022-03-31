@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import { Select } from "antd";
 import { RefItem } from "./RefItem";
 import { useContractModels } from "../../hooks/useContractModels";
-import { fecthModelData } from "../../hooks/useCurModel";
+import { fetchModelData } from "../../hooks/useCurModel";
 
 jest.mock("../../hooks/useContractModels");
 jest.mock("../../hooks/useCurModel");
@@ -39,7 +39,7 @@ describe("RefItem", () => {
       mockSetQFn,
     ]);
 
-    (fecthModelData as jest.Mock).mockReturnValue({
+    (fetchModelData as jest.Mock).mockReturnValue({
       q: "yy",
       modelList: [
         { name: "Host", namespaceId: "api.easyops.host" },

@@ -7,7 +7,7 @@ import React, {
   useImperativeHandle,
 } from "react";
 import classNames from "classnames";
-import { Table, Tooltip, Typography, Tag, Button } from "antd";
+import { Table, Tooltip, Tag, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { Form } from "antd";
 import { set } from "lodash";
@@ -31,13 +31,13 @@ export interface FieldsMappingEditorProps {
   loading?: boolean;
 }
 
-export interface EdiotrRef {
+export interface EditorRef {
   setRowData: (rowData: FieldItem) => void;
 }
 
 export function LegacyFieldsMappingEditor(
   props: FieldsMappingEditorProps,
-  ref: React.Ref<EdiotrRef>
+  ref: React.Ref<EditorRef>
 ): React.ReactElement {
   const { onChange, loading, onRowEdit } = props;
   const { t } = useTranslation(NS_FLOW_BUILDER);
@@ -96,7 +96,7 @@ export function LegacyFieldsMappingEditor(
     []
   );
 
-  const renderOprationItem = useCallback(
+  const renderOperationItem = useCallback(
     (_: string, record: FieldItem) => {
       const handleEdit = (record: FieldItem, e: React.MouseEvent): void => {
         e.stopPropagation();
@@ -118,7 +118,7 @@ export function LegacyFieldsMappingEditor(
         </Tooltip>
       );
     },
-    [onRowEdit]
+    [onRowEdit, t]
   );
 
   const renderSourceItem = useCallback(
@@ -153,7 +153,7 @@ export function LegacyFieldsMappingEditor(
     {
       title: "operation",
       dataIndex: "operation",
-      render: renderOprationItem,
+      render: renderOperationItem,
       width: 100,
     },
   ];
