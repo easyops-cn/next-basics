@@ -25,6 +25,15 @@ import { processFormValue, extractCommonProps } from "./processor";
  */
 export class VisualPropertyFormElement extends UpdatingElement {
   private _formUtils = React.createRef<visualFormUtils>();
+
+  /**
+   * @default
+   * @required -
+   * @description 项目projectId
+   */
+  @property({ type: String })
+  projectId: string;
+
   /**
    * @kind PropertyType[]
    * @required true
@@ -73,6 +82,15 @@ export class VisualPropertyFormElement extends UpdatingElement {
     attribute: false,
   })
   emptyConfig: VisualPropertyFormProps["emptyConfig"];
+
+  /**
+   * @description 菜单设置点击事件
+   */
+  @event({ type: "menu.setting.click" })
+  menuSettingClickEvent: EventEmitter<void>;
+  private _handleMenuSettingClick = (): void => {
+    this.menuSettingClickEvent.emit();
+  };
 
   /**
    * @description 表单验证成功时触发
@@ -145,11 +163,13 @@ export class VisualPropertyFormElement extends UpdatingElement {
         <BrickWrapper>
           <VisualPropertyForm
             ref={this._formUtils}
+            projectId={this.projectId}
             labelIcon={this.labelIcon}
             propertyTypeList={extractCommonProps(this.propertyTypeList)}
             brickProperties={this.brickProperties}
             brickInfo={this.brickInfo}
             emptyConfig={this.emptyConfig}
+            menuSettingClick={this._handleMenuSettingClick}
             onValuesChange={this._handleValuesChange}
           />
         </BrickWrapper>,

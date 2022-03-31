@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useState,
-} from "react";
+import React, { useEffect, useImperativeHandle, useState } from "react";
 import {
   Form,
   Input,
@@ -24,6 +19,7 @@ import { FormProps } from "antd/lib/form";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { IconSelectFormItem } from "./components/IconSelect/IconSelectFormItem";
 import { ColorEditorItem } from "./components/ColorEditor/ColorEditorItem";
+import { MenuEditorItem } from "./components/MenuEditor/MenuEditorItem";
 import {
   mergeProperties,
   calculateValue,
@@ -41,6 +37,7 @@ import {
 } from "../interfaces";
 
 export interface VisualPropertyFormProps {
+  projectId?: string;
   propertyTypeList: PropertyType[];
   labelIcon: {
     normal?: MenuIcon;
@@ -52,6 +49,7 @@ export interface VisualPropertyFormProps {
     type: "brick" | "provider" | "template";
   };
   emptyConfig?: EmptyProps;
+  menuSettingClick?: () => void;
 }
 
 export function LegacyVisualPropertyForm(
@@ -59,11 +57,13 @@ export function LegacyVisualPropertyForm(
   ref: React.Ref<visualFormUtils>
 ): React.ReactElement {
   const {
+    projectId,
     labelIcon,
     propertyTypeList,
     brickProperties,
     brickInfo,
     emptyConfig,
+    menuSettingClick,
   } = props;
   const [form] = Form.useForm();
   const [typeList, setTypeList] = useState<UnionPropertyType[]>(
@@ -266,6 +266,19 @@ export function LegacyVisualPropertyForm(
     );
   };
 
+  const renderMenuItem = (item: PropertyType): React.ReactElement => {
+    return (
+      <MenuEditorItem
+        projectId={projectId}
+        key={item.name}
+        name={item.name}
+        label={renderLabel(item, true)}
+        required={item.required === Required.True}
+        menuSettingClick={menuSettingClick}
+      />
+    );
+  };
+
   const getFormItem = (item: PropertyType): React.ReactElement => {
     switch (item.type) {
       case "string":
@@ -280,6 +293,9 @@ export function LegacyVisualPropertyForm(
         return renderIconItem(item);
       case "Color":
         return renderColorItem(item);
+      case "Menu":
+      case "SidebarSubMenu":
+        return renderMenuItem(item);
       default:
         return renderCodeEditorItem(item);
     }

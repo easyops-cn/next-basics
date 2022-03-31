@@ -71,6 +71,9 @@ describe("processor test", () => {
         { name: "age", type: "number", description: "年龄" },
         { name: "nickname", type: "string", description: "昵称" },
         { name: "count", type: "number", description: "数量" },
+        { name: "menu1", type: "Menu", description: "菜单一" },
+        { name: "menu2", type: "SidebarSubMenu", description: "菜单二" },
+        { name: "menu3", type: "Menu", description: "菜单三" },
       ];
 
       const brickProperties = {
@@ -78,6 +81,9 @@ describe("processor test", () => {
         age: 123,
         hobby: "run",
         category: "student",
+        menu1: "<% APP.getMenu(menu-1) %>",
+        menu2: "<% APP.getMenu('menu-2') %>",
+        menu3: '<% APP.getMenu("menu-3") %>',
       };
       const result = calculateValue(propertyList, brickProperties);
       expect(result).toEqual({
@@ -86,6 +92,9 @@ describe("processor test", () => {
         nickname: undefined,
         name: "lucy",
         others: "hobby: run\ncategory: student\n",
+        menu1: "menu-1",
+        menu2: "menu-2",
+        menu3: "menu-3",
       });
     });
 
@@ -143,11 +152,17 @@ describe("processor test", () => {
         count: 234,
         required: true,
         others: "a: 3\nb: 4\ntest: true",
+        menu1: "menu-1",
+        menu2: "<% APP.getMenu('menu-2') %>",
+        menu3: '<% APP.getMenu("menu-3") %>',
       };
 
       const result = processFormValue(values, [
         { name: "options", type: "OptionsProps" },
         { name: "type", type: "string", mode: "advanced" },
+        { name: "menu1", type: "Menu" },
+        { name: "menu2", type: "SidebarSubMenu" },
+        { name: "menu3", type: "Menu" },
       ]);
 
       expect(result).toEqual({
@@ -160,6 +175,9 @@ describe("processor test", () => {
         a: 3,
         b: 4,
         test: true,
+        menu1: "<% APP.getMenu('menu-1') %>",
+        menu2: "<% APP.getMenu('menu-2') %>",
+        menu3: '<% APP.getMenu("menu-3") %>',
       });
     });
   });
