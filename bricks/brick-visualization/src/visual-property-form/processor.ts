@@ -52,6 +52,7 @@ export function yaml(value: string): any {
 }
 
 function calcMenuValue(value: string): string {
+  if (!value) return;
   if (value.startsWith("<%")) {
     return value;
   }
