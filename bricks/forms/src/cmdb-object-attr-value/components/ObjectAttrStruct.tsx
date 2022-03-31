@@ -258,7 +258,10 @@ export function LegacyObjectAttrStructForm(
           (item) => item.id === currentStruct.id
         );
         if (currentStructId !== -1) {
-          new_struct_define[currentStructId] = data;
+          new_struct_define[currentStructId] = {
+            ...data,
+            isNew: new_struct_define[currentStructId].isNew,
+          };
         }
       }
       handleValueChange({
