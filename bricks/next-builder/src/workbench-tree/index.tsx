@@ -44,6 +44,13 @@ export class WorkbenchTreeElement extends UpdatingElement {
     this._actionClickEvent.emit(detail);
   };
 
+  @event({ type: "node.click" })
+  private _nodeClickEvent: EventEmitter<unknown>;
+
+  private _nodeClickFactory = (node: WorkbenchNodeData) => () => {
+    this._nodeClickEvent.emit(node.data);
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -72,6 +79,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
               value={{
                 activeKey: this.activeKey,
                 basePaddingLeft: 5,
+                clickFactory: this._nodeClickFactory,
               }}
             >
               <WorkbenchTree
