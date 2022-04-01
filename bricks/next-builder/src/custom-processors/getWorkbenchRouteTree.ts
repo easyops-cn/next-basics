@@ -20,7 +20,7 @@ export function getWorkbenchRouteTree(
   for (const route of routes) {
     const node: WorkbenchNodeData = {
       key: route.id,
-      name: route.alias || route.path,
+      name: route.alias || route.path.replace(/^\$\{APP\.homepage\}/, ""),
       icon: {
         lib: "antd",
         theme: "outlined",
