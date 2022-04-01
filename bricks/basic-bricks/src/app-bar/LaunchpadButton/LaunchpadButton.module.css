@@ -13,6 +13,7 @@
 }
 
 .launchpadLink:hover .launchpadIcon {
+  color: var(--color-brand-hover) !important;
   filter: none;
   opacity: 1;
 }

@@ -12,22 +12,23 @@
 
     /* subMenu-title 普通样式 */
     :global(.ant-menu-submenu-title) {
-      &::after {
-        content: "^";
-        position: absolute;
-        display: inline-block;
-        transform: rotate(180deg);
-        top: -2px;
-        right: 4px;
-        transition: none;
-        color: var(--color-normal-text);
-      }
       :global(.ant-menu-submenu-arrow) {
         color: var(--color-normal-text);
-
+        display: block;
+        right: 0px;
+        top: 18px;
+        &::before {
+          transform: rotate(-45deg) translateX(2.5px);
+        }
+        &::after {
+          transform: rotate(45deg) translateX(-2.5px);
+        }
         &::before,
         &::after {
-          height: 1px;
+          transition: background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+            transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+            top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+            color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
       }
       > span {
@@ -54,13 +55,14 @@
     &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       color: inherit;
       background-color: inherit;
-      &::after {
-        content: "^";
-        position: absolute;
-        display: inline-block;
-        transform: rotate(0deg);
-        top: 2px;
-        right: 4px;
+      :global(.ant-menu-submenu-arrow) {
+        top: 14px;
+        &::before {
+          transform: rotate(45deg) translateX(2.5px);
+        }
+        &::after {
+          transform: rotate(-45deg) translateX(-2.5px);
+        }
       }
       > span {
         background-color: var(--v8-top-menu-item-hover);
