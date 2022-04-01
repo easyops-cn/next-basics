@@ -29,8 +29,13 @@ function TestComponent({
           },
           {
             $$uid: 2,
-            type: "custom-template",
+            type: "template",
             instanceId: "i-2",
+          },
+          {
+            $$uid: 3,
+            type: "custom-template",
+            instanceId: "i-3",
           },
         ],
       };
@@ -66,7 +71,7 @@ describe("useHighlightBrick", () => {
   });
 
   it("should work when hover on non-existed node", () => {
-    (useHoverNodeUid as jest.Mock).mockReturnValue(3);
+    (useHoverNodeUid as jest.Mock).mockReturnValue(4);
     mount(<TestComponent type="hover" />);
     expect(postMessage).toBeCalledWith({
       sender: "builder",
@@ -76,12 +81,12 @@ describe("useHighlightBrick", () => {
   });
 
   it("should work for active", () => {
-    (useActiveNodeUid as jest.Mock).mockReturnValue(1);
+    (useActiveNodeUid as jest.Mock).mockReturnValue(3);
     mount(<TestComponent type="active" />);
     expect(postMessage).toBeCalledWith({
       sender: "builder",
       type: "select-brick",
-      iid: "i-1",
+      iid: "i-3",
     });
   });
 

@@ -101,10 +101,12 @@ export function LegacyPreviewContainer(
   const [activeAlias, setActiveAlias] = useState<string>();
   const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
   const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
+  const [rootTpl, setRootTpl] = useState<string>(null);
+  const [rootTplOutlines, setRootTplOutlines] = useState<BrickOutline[]>([]);
 
   useEffect(() => {
     // Active overrides hover.
-    if (hoverIid === activeIid) {
+    if (hoverIid && hoverIid === activeIid) {
       setHoverOutlines([]);
     }
   }, [activeIid, hoverIid]);
@@ -133,6 +135,9 @@ export function LegacyPreviewContainer(
   const [adjustedActiveOutlines, setAdjustedActiveOutlines] = useState<
     BrickOutline[]
   >([]);
+  const [adjustedRootTplOutlines, setAdjustedRootTplOutlines] = useState<
+    BrickOutline[]
+  >([]);
 
   useEffect(() => {
     setAdjustedHoverOutlines(adjustOutlines(hoverOutlines));
@@ -141,6 +146,10 @@ export function LegacyPreviewContainer(
   useEffect(() => {
     setAdjustedActiveOutlines(adjustOutlines(activeOutlines));
   }, [activeOutlines, adjustOutlines]);
+
+  useEffect(() => {
+    setAdjustedRootTplOutlines(adjustOutlines(rootTplOutlines));
+  }, [rootTplOutlines, adjustOutlines]);
 
   const refresh = useCallback(
     (appId: string, storyboardPatch: Partial<Storyboard>) => {
@@ -171,6 +180,8 @@ export function LegacyPreviewContainer(
     setActiveIid(null);
     setActiveAlias(null);
     setActiveOutlines([]);
+    setRootTpl(null);
+    setRootTplOutlines([]);
   }, [previewOrigin]);
 
   const handleUrlChange = useCallback(
@@ -196,7 +207,11 @@ export function LegacyPreviewContainer(
         return;
       }
       if (data.sender === "builder" && origin === location.origin) {
-        if (data.type === "hover-on-brick" || data.type === "select-brick") {
+        if (
+          data.type === "hover-on-brick" ||
+          data.type === "select-brick" ||
+          data.type === "init-root-tpl"
+        ) {
           // Send to preview.
           iframeRef.current.contentWindow.postMessage(
             {
@@ -221,6 +236,10 @@ export function LegacyPreviewContainer(
             break;
           case "scroll":
             setScroll(data.scroll);
+            break;
+          case "highlight-root-tpl":
+            setRootTpl(data.rootTpl);
+            setRootTplOutlines(data.outlines);
             break;
           case "highlight-brick":
             if (data.highlightType === "active") {
@@ -340,6 +359,15 @@ export function LegacyPreviewContainer(
               }
         }
       />
+      {adjustedRootTplOutlines.map((outline, index) => (
+        <BrickOutlineComponent
+          key={index}
+          alias={rootTpl}
+          type="rootTpl"
+          hidden={adjustedActiveOutlines.length > 0}
+          {...outline}
+        />
+      ))}
       {adjustedHoverOutlines.map((outline, index) => (
         <BrickOutlineComponent
           key={index}
@@ -363,13 +391,15 @@ export function LegacyPreviewContainer(
 export const PreviewContainer = forwardRef(LegacyPreviewContainer);
 
 interface BrickOutlineComponentProps extends BrickOutline {
-  type: "active" | "hover";
+  type: "active" | "hover" | "rootTpl";
   alias: string;
+  hidden?: boolean;
 }
 
 function BrickOutlineComponent({
   type,
   alias,
+  hidden,
   width,
   height,
   left,
@@ -381,6 +411,7 @@ function BrickOutlineComponent({
     <div
       className={classNames(styles.outline, styles[type], {
         [styles.overflowed]: overflowed,
+        [styles.hidden]: hidden,
       })}
       style={{
         width: width + borderWidth * 2,

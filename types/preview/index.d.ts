@@ -10,16 +10,27 @@ export interface PreviewBaseMessage {
   forwardedFor?: "builder" | "previewer";
 }
 
-export interface PreviewMessageBuilderHoverOnBrick extends PreviewBaseMessage {
+export interface PreviewMessageBuilderHoverOnBrick
+  extends PreviewBaseMessage,
+    HighlightBaseInfo {
   sender: "builder";
   type: "hover-on-brick";
-  iid: string;
-  alias: string;
 }
 
-export interface PreviewMessageBuilderSelectBrick extends PreviewBaseMessage {
+export interface PreviewMessageBuilderSelectBrick
+  extends PreviewBaseMessage,
+    HighlightBaseInfo {
   sender: "builder";
   type: "select-brick";
+}
+
+export interface PreviewMessageBuilderInitRootTpl extends PreviewBaseMessage {
+  sender: "builder";
+  type: "init-root-tpl";
+  rootTpl: string;
+}
+
+export interface HighlightBaseInfo {
   iid: string;
   alias: string;
 }
@@ -28,6 +39,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
+  | PreviewMessagePreviewerHighlightRootTpl
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
@@ -37,6 +49,7 @@ export type PreviewMessageFromPreviewer =
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerBuilderSelectBrick
+  | PreviewMessageContainerBuilderInitRootTpl
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload;
@@ -53,9 +66,11 @@ export type PreviewMessageFromContainer =
 export type PreviewMessageToContainer =
   | PreviewMessageBuilderHoverOnBrick
   | PreviewMessageBuilderSelectBrick
+  | PreviewMessageBuilderInitRootTpl
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
+  | PreviewMessagePreviewerHighlightRootTpl
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
@@ -88,13 +103,20 @@ export interface PreviewMessagePreviewerSelectBrick extends PreviewBaseMessage {
 }
 
 export interface PreviewMessagePreviewerHighlightBrick
-  extends PreviewBaseMessage {
+  extends PreviewBaseMessage,
+    HighlightBaseInfo {
   sender: "previewer";
   type: "highlight-brick";
   highlightType: "active" | "hover";
   outlines: BrickOutline[];
-  iid: string;
-  alias: string;
+}
+
+export interface PreviewMessagePreviewerHighlightRootTpl
+  extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "highlight-root-tpl";
+  rootTpl: string;
+  outlines: BrickOutline[];
 }
 
 export interface PreviewMessagePreviewerContextMenuOnBrick
@@ -161,6 +183,12 @@ export interface PreviewMessageContainerBuilderHoverOnBrick
 
 export interface PreviewMessageContainerBuilderSelectBrick
   extends Omit<PreviewMessageBuilderSelectBrick, "sender"> {
+  sender: "preview-container";
+  forwardedFor: "builder";
+}
+
+export interface PreviewMessageContainerBuilderInitRootTpl
+  extends Omit<PreviewMessageBuilderInitRootTpl, "sender"> {
   sender: "preview-container";
   forwardedFor: "builder";
 }

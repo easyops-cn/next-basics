@@ -1,9 +1,10 @@
-import { developHelper, getHistory } from "@next-core/brick-kit";
+import { developHelper, getHistory, getRuntime } from "@next-core/brick-kit";
 import type { PluginLocation } from "@next-core/brick-types";
 import type {
   BrickOutline,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerHighlightBrick,
+  PreviewMessagePreviewerHighlightRootTpl,
   PreviewMessagePreviewerResize,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
@@ -38,24 +39,6 @@ export function previewStart(previewFromOrigin: string): void {
   sendMessage({ type: "preview-started" });
   setPreviewFromOrigin(previewFromOrigin);
 
-  function getBrickOutlines(iid: string): BrickOutline[] {
-    if (!iid) {
-      return [];
-    }
-    const elements = document.querySelectorAll<HTMLElement>(
-      `[data-iid="${iid}"]`
-    );
-    return [...elements].map((element) => {
-      const { width, height, left, top } = element.getBoundingClientRect();
-      return {
-        width,
-        height,
-        left: left + window.scrollX,
-        top: top + window.scrollY,
-      };
-    });
-  }
-
   window.addEventListener(
     "message",
     ({ data, origin }: MessageEvent<PreviewMessageToPreviewer>) => {
@@ -78,6 +61,16 @@ export function previewStart(previewFromOrigin: string): void {
               outlines,
               iid: data.iid,
               alias: data.alias,
+            });
+          }
+          break;
+        case "init-root-tpl":
+          if (data.forwardedFor === "builder") {
+            const outlines = getTplOutlines(data.rootTpl);
+            sendMessage<PreviewMessagePreviewerHighlightRootTpl>({
+              type: "highlight-root-tpl",
+              outlines,
+              rootTpl: data.rootTpl,
             });
           }
           break;
@@ -123,4 +116,32 @@ export function previewStart(previewFromOrigin: string): void {
   sendLocationChange(history.location);
 
   history.listen(sendLocationChange);
+}
+
+function getBrickOutlines(iid: string): BrickOutline[] {
+  if (!iid) {
+    return [];
+  }
+  const elements = document.querySelectorAll<HTMLElement>(
+    `[data-iid="${iid}"]`
+  );
+  return getOutlines(elements);
+}
+
+function getTplOutlines(tpl: string): BrickOutline[] {
+  const appId = getRuntime().getCurrentApp().id;
+  const elements = document.querySelectorAll<HTMLElement>(`${appId}\\.${tpl}`);
+  return getOutlines(elements);
+}
+
+function getOutlines(elements: NodeListOf<HTMLElement>): BrickOutline[] {
+  return [...elements].map((element) => {
+    const { width, height, left, top } = element.getBoundingClientRect();
+    return {
+      width,
+      height,
+      left: left + window.scrollX,
+      top: top + window.scrollY,
+    };
+  });
 }
