@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useState,
-} from "react";
+import React, { useEffect, useImperativeHandle, useState } from "react";
 import {
   Form,
   Input,
@@ -24,13 +19,15 @@ import { FormProps } from "antd/lib/form";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { IconSelectFormItem } from "./components/IconSelect/IconSelectFormItem";
 import { ColorEditorItem } from "./components/ColorEditor/ColorEditorItem";
+import { MenuEditorItem } from "./components/MenuEditor/MenuEditorItem";
 import {
   mergeProperties,
   calculateValue,
   groupByType,
   yamlStringify,
 } from "./processor";
-import { OTHER_FORM_ITEM_FIELD } from "./constant";
+import { OTHER_FORM_ITEM_FIELD, supportMenuType } from "./constant";
+import { matchNoramlMenuValue } from "./processor";
 import {
   PropertyType,
   BrickProperties,
@@ -41,6 +38,7 @@ import {
 } from "../interfaces";
 
 export interface VisualPropertyFormProps {
+  projectId?: string;
   propertyTypeList: PropertyType[];
   labelIcon: {
     normal?: MenuIcon;
@@ -52,6 +50,7 @@ export interface VisualPropertyFormProps {
     type: "brick" | "provider" | "template";
   };
   emptyConfig?: EmptyProps;
+  menuSettingClick?: () => void;
 }
 
 export function LegacyVisualPropertyForm(
@@ -59,11 +58,13 @@ export function LegacyVisualPropertyForm(
   ref: React.Ref<visualFormUtils>
 ): React.ReactElement {
   const {
+    projectId,
     labelIcon,
     propertyTypeList,
     brickProperties,
     brickInfo,
     emptyConfig,
+    menuSettingClick,
   } = props;
   const [form] = Form.useForm();
   const [typeList, setTypeList] = useState<UnionPropertyType[]>(
@@ -89,7 +90,11 @@ export function LegacyVisualPropertyForm(
     const newTypeList = mergeProperties(propertyTypeList, brickProperties);
     setTypeList(newTypeList);
 
-    const newValue = calculateValue(propertyTypeList, brickProperties);
+    const newValue = calculateValue(
+      propertyTypeList,
+      brickProperties,
+      newTypeList
+    );
     form.setFieldsValue(newValue);
   }, [propertyTypeList, brickProperties]);
 
@@ -100,13 +105,19 @@ export function LegacyVisualPropertyForm(
       selected.mode === ItemModeType.Advanced
         ? ItemModeType.Normal
         : ItemModeType.Advanced;
+
+    let value = selected.value;
+    if (nextMode === ItemModeType.Normal) {
+      if (supportMenuType.includes(selected.type as string)) {
+        value = matchNoramlMenuValue(value);
+      }
+    } else if (isNil(selected.value)) {
+      value = "";
+    } else {
+      value = yamlStringify(selected.value);
+    }
     form.setFieldsValue({
-      [name]:
-        nextMode === ItemModeType.Normal
-          ? selected.value
-          : isNil(selected.value)
-          ? ""
-          : yamlStringify(selected.value),
+      [name]: value,
     });
     const newTypeList = update(typeList, {
       $splice: [[index, 1, { ...selected, mode: nextMode }]],
@@ -266,6 +277,21 @@ export function LegacyVisualPropertyForm(
     );
   };
 
+  const renderMenuItem = (item: UnionPropertyType): React.ReactElement => {
+    return item.mode === ItemModeType.Advanced ? (
+      renderEditorItem(item)
+    ) : (
+      <MenuEditorItem
+        projectId={projectId}
+        key={item.name}
+        name={item.name}
+        label={renderLabel(item)}
+        required={item.required === Required.True}
+        menuSettingClick={menuSettingClick}
+      />
+    );
+  };
+
   const getFormItem = (item: PropertyType): React.ReactElement => {
     switch (item.type) {
       case "string":
@@ -280,6 +306,9 @@ export function LegacyVisualPropertyForm(
         return renderIconItem(item);
       case "Color":
         return renderColorItem(item);
+      case "Menu":
+      case "SidebarSubMenu":
+        return renderMenuItem(item);
       default:
         return renderCodeEditorItem(item);
     }
@@ -297,7 +326,11 @@ export function LegacyVisualPropertyForm(
       layout="vertical"
       form={form}
       onValuesChange={props.onValuesChange}
-      initialValues={calculateValue(propertyTypeList, brickProperties)}
+      initialValues={calculateValue(
+        propertyTypeList,
+        brickProperties,
+        typeList
+      )}
     >
       <Collapse ghost defaultActiveKey="0" className={styles.panelContainer}>
         {groupByType(typeList)?.map(([category, list], index) => {

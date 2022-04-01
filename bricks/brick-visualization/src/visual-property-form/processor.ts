@@ -8,6 +8,7 @@ import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
 import _, { omit, isEmpty, groupBy } from "lodash";
 import {
   supportBasicType,
+  supportMenuType,
   OTHER_FORM_ITEM_FIELD,
   commonProps,
 } from "./constant";
@@ -50,9 +51,28 @@ export function yaml(value: string): any {
   return safeLoad(value, { schema: JSON_SCHEMA, json: true });
 }
 
+export function matchNoramlMenuValue(value: unknown): unknown {
+  if (typeof value === "string") {
+    const reg = /<% APP\.getMenu\((.*)\) %>/;
+    return value.match(reg)?.[1]?.replace(/'|"/g, "") || value;
+  }
+  return value;
+}
+
+function calcMenuValue(value: string): string {
+  if (typeof value === "string") {
+    if (value.startsWith("<%")) {
+      return value;
+    }
+    return `<% APP.getMenu('${value}') %>`;
+  }
+  return value;
+}
+
 export function calculateValue(
   propertyList: PropertyType[] = [],
-  brickProperties: BrickProperties = {}
+  brickProperties: BrickProperties = {},
+  typeList: UnionPropertyType[] = []
 ): Record<string, any> {
   const othersValue: Record<string, any> = {};
   for (const [key, value] of Object.entries(brickProperties)) {
@@ -65,9 +85,23 @@ export function calculateValue(
   const processValue = propertyList.reduce((obj: any, item) => {
     const v = brickProperties[item.name];
     obj[item.name] = v;
+    if (v !== undefined) {
+      if (
+        !supportBasicType.concat(supportMenuType).includes(item.type as string)
+      ) {
+        obj[item.name] = yamlStringify(v);
+      }
 
-    if (v !== undefined && !supportBasicType.includes(item.type as string)) {
-      obj[item.name] = yamlStringify(v);
+      if (supportMenuType.includes(item.type as string)) {
+        const selected = typeList.find(
+          (typeItem) => typeItem.name === item.name
+        );
+        if (selected?.mode === ItemModeType.Advanced) {
+          obj[item.name] = v;
+        } else {
+          obj[item.name] = matchNoramlMenuValue(v);
+        }
+      }
     }
     return obj;
   }, {});
@@ -101,6 +135,12 @@ export function isUseYamlParse(
   const find = typeList?.find((item) => item.name === field.key);
 
   if (find) {
+    if (
+      supportMenuType.includes(find.type as string) &&
+      find.mode !== ItemModeType.Advanced
+    )
+      return false;
+
     const isBasicType = supportBasicType.includes(find.type as string);
 
     if (isBasicType && find.mode === ItemModeType.Advanced) return true;
@@ -111,15 +151,30 @@ export function isUseYamlParse(
   return false;
 }
 
+export function isUseMenuParse(
+  field: { key: string; value: any },
+  typeList: UnionPropertyType[]
+): boolean {
+  const item = typeList.find((item) => item.name === field.key);
+  if (supportMenuType.includes(item?.type as string)) {
+    return true;
+  }
+  return false;
+}
+
 export function processFormValue(
   values = {},
   typeList: UnionPropertyType[]
 ): Record<string, any> {
   const formData: Record<string, any> = {};
   for (const [key, value] of Object.entries(values)) {
-    formData[key] = isUseYamlParse({ key, value }, typeList)
-      ? yaml(value)
-      : value;
+    if (isUseYamlParse({ key, value }, typeList)) {
+      formData[key] = yaml(value);
+    } else if (isUseMenuParse({ key, value }, typeList)) {
+      formData[key] = calcMenuValue(value as string);
+    } else {
+      formData[key] = value;
+    }
   }
 
   return {

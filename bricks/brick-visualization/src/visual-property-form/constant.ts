@@ -9,6 +9,8 @@ export const supportBasicType = [
   "Color",
 ];
 
+export const supportMenuType = ["Menu", "SidebarSubMenu"];
+
 export const OTHER_FORM_ITEM_FIELD = "others";
 
 export const commonProps: PropertyType[] = [

@@ -247,4 +247,33 @@ describe("VisualPropertyForm", () => {
 
     expect(wrapper.find("ColorEditorItem").length).toBe(1);
   });
+
+  it("should render menu", () => {
+    const props = {
+      brickProperties: [
+        {
+          menu: "<% APP.getMenu('menu-1') %>",
+        },
+      ],
+      propertyTypeList: [{ name: "menu", type: "Menu", description: "menu" }],
+      labelIcon: {
+        normal: {
+          lib: "fa",
+          icon: "code",
+          prefix: "fas",
+          color: "#167be0",
+        },
+        advanced: {
+          lib: "fa",
+          icon: "cog",
+          prefix: "fas",
+          color: "#167be0",
+        },
+      },
+    } as any;
+
+    const wrapper = mount(<VisualPropertyForm {...props} />);
+
+    expect(wrapper.find("MenuEditorItem").length).toBe(1);
+  });
 });
