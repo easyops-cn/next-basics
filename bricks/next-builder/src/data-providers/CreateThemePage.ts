@@ -1,5 +1,11 @@
 import { createProviderClass } from "@next-core/brick-utils";
-import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceApi_createInstance,
+  InstanceApi_getDetail,
+  type InstanceApi_GetDetailResponseBody,
+} from "@next-sdk/cmdb-sdk";
+import { StoryboardApi_cloneBricks } from "@next-sdk/next-builder-sdk";
+import { ContextConf } from "@next-core/brick-types";
 
 export interface CreateThemePageParams {
   // Project instance ID.
@@ -11,6 +17,16 @@ export interface CreateThemePageParams {
   locales?: unknown;
   layoutType?: LayoutEnums;
   layoutList?: string;
+  pageTemplate?: pageTemplate;
+}
+
+interface instaceBody {
+  id: string;
+  instanceId: string;
+}
+interface pageTemplate {
+  snippet: instaceBody[];
+  template: instaceBody[];
 }
 
 export enum LayoutEnums {
@@ -69,6 +85,11 @@ const EASY_VIEW_PROPERTY = {
   },
 };
 
+const STORYBOARD_BRICK = "STORYBOARD_BRICK";
+const STORYBOARD_TEMPLATE = "STORYBOARD_TEMPLATE";
+const STORYBOARD_SNIPPET = "STORYBOARD_SNIPPET";
+const STORYBOARD_THEME_PAGE = "STORYBOARD_THEME_PAGE";
+
 const getProxySlots = (
   layoutType: LayoutEnums
 ): Record<string, { ref: string; refSlot: string }> => {
@@ -92,21 +113,119 @@ export async function CreateThemePage({
   thumbnail,
   locales,
   layoutType,
+  pageTemplate,
 }: CreateThemePageParams): Promise<unknown> {
   const templateId = `tpl-page-${pageTypeId}`;
   // Currently, There is a bug when creating multiple instances of
   // sub-models which have the same parent which has an auto-increment field.
   // So we create the template and snippet in sequence.
-  const tpl = await InstanceApi_createInstance("STORYBOARD_TEMPLATE", {
+  const createBricks = async ({
+    templateInstanceId,
+    snippetInstanceId,
+  }: {
+    templateInstanceId: string;
+    snippetInstanceId: string;
+  }): Promise<boolean> => {
+    await Promise.all([
+      InstanceApi_createInstance(STORYBOARD_BRICK, {
+        appId,
+        brick: templateId,
+        type: "brick",
+        mountPoint: "bricks",
+        parent: snippetInstanceId,
+      }),
+      InstanceApi_createInstance(STORYBOARD_BRICK, {
+        appId,
+        brick: "basic-bricks.easy-view",
+        properties: JSON.stringify(EASY_VIEW_PROPERTY[layoutType]),
+        ref: "view",
+        type: "brick",
+        mountPoint: "bricks",
+        parent: templateInstanceId,
+      }),
+    ]);
+    return true;
+  };
+
+  const copyBricks = async ({
+    templateId,
+    snippetId,
+    copyData,
+  }: {
+    templateId: string;
+    snippetId: string;
+    copyData: {
+      theme: InstanceApi_GetDetailResponseBody;
+      snippet: InstanceApi_GetDetailResponseBody;
+    };
+  }): Promise<boolean> => {
+    const { theme = {}, snippet = {} } = copyData;
+    const copyTemplateIds: string[] =
+      theme.children?.map((item: Record<string, unknown>) => item.id) || [];
+    const copySnippetIds: string[] =
+      snippet.children?.map((item: Record<string, unknown>) => item.id) || [];
+
+    await Promise.all(
+      copyTemplateIds.map((id: string) =>
+        StoryboardApi_cloneBricks({
+          newAppId: appId,
+          newParentBrickId: templateId,
+          sourceBrickId: id,
+        })
+      )
+    );
+
+    await Promise.all(
+      copySnippetIds.map((id: string) =>
+        StoryboardApi_cloneBricks({
+          newAppId: appId,
+          newParentBrickId: snippetId,
+          sourceBrickId: id,
+        })
+      )
+    );
+
+    return true;
+  };
+
+  let proxy: string;
+  let snippetContext: ContextConf[];
+  let themeBaseData, snippetBaseData;
+  if (pageTemplate) {
+    [themeBaseData, snippetBaseData] = await Promise.all([
+      pageTemplate.template[0]?.id &&
+        InstanceApi_getDetail(
+          "STORYBOARD_TEMPLATE",
+          pageTemplate.template[0].instanceId,
+          {
+            fields: "proxy,state,children",
+          }
+        ),
+      pageTemplate.snippet[0]?.id &&
+        InstanceApi_getDetail(
+          "STORYBOARD_SNIPPET",
+          pageTemplate.snippet[0].instanceId,
+          {
+            fields: "context,children",
+          }
+        ),
+    ]);
+    proxy = themeBaseData?.proxy;
+    snippetContext = snippetBaseData?.context;
+  } else if (layoutType) {
+    proxy = JSON.stringify({
+      slots: getProxySlots(layoutType),
+    });
+  }
+
+  const tpl = await InstanceApi_createInstance(STORYBOARD_TEMPLATE, {
     project: projectId,
     appId,
     templateId: templateId,
-    proxy: JSON.stringify({
-      slots: getProxySlots(layoutType),
-    }),
+    proxy: proxy,
     type: "custom-template",
   });
-  const snippet = await InstanceApi_createInstance("STORYBOARD_SNIPPET", {
+  const snippet = await InstanceApi_createInstance(STORYBOARD_SNIPPET, {
     project: projectId,
     appId,
     snippetId: `page-${pageTypeId}`,
@@ -116,36 +235,37 @@ export async function CreateThemePage({
       zh: name,
     },
     layerType: "layout",
+    context: snippetContext,
   });
-  const [, , layout] = await Promise.all([
-    InstanceApi_createInstance("STORYBOARD_BRICK", {
-      appId,
-      brick: templateId,
-      type: "brick",
-      mountPoint: "bricks",
-      parent: snippet.instanceId,
-    }),
-    InstanceApi_createInstance("STORYBOARD_BRICK", {
-      appId,
-      brick: "basic-bricks.easy-view",
-      properties: JSON.stringify(EASY_VIEW_PROPERTY[layoutType]),
-      ref: "view",
-      type: "brick",
-      mountPoint: "bricks",
-      parent: tpl.instanceId,
-    }),
-    InstanceApi_createInstance("STORYBOARD_THEME_PAGE", {
-      project: projectId,
-      pageTypeId,
-      name,
-      thumbnail,
-      locales,
-      template: tpl.instanceId,
-      snippet: snippet.instanceId,
-      layoutType,
-    }),
-  ]);
-  return layout;
+
+  if (pageTemplate) {
+    await copyBricks({
+      templateId: tpl.id,
+      snippetId: snippet.id,
+      copyData: {
+        theme: themeBaseData,
+        snippet: snippetBaseData,
+      },
+    });
+  } else {
+    await createBricks({
+      templateInstanceId: tpl.instanceId,
+      snippetInstanceId: snippet.instanceId,
+    });
+  }
+
+  await InstanceApi_createInstance(STORYBOARD_THEME_PAGE, {
+    project: projectId,
+    pageTypeId,
+    name,
+    thumbnail,
+    locales,
+    template: tpl.instanceId,
+    snippet: snippet.instanceId,
+    layoutType,
+  });
+
+  return true;
 }
 
 customElements.define(
