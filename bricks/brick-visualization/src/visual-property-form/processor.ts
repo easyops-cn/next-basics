@@ -51,17 +51,28 @@ export function yaml(value: string): any {
   return safeLoad(value, { schema: JSON_SCHEMA, json: true });
 }
 
-function calcMenuValue(value: string): string {
-  if (!value) return;
-  if (value.startsWith("<%")) {
-    return value;
+export function matchNoramlMenuValue(value: unknown): unknown {
+  if (typeof value === "string") {
+    const reg = /<% APP\.getMenu\((.*)\) %>/;
+    return value.match(reg)?.[1]?.replace(/'|"/g, "") || value;
   }
-  return `<% APP.getMenu('${value}') %>`;
+  return value;
+}
+
+function calcMenuValue(value: string): string {
+  if (typeof value === "string") {
+    if (value.startsWith("<%")) {
+      return value;
+    }
+    return `<% APP.getMenu('${value}') %>`;
+  }
+  return value;
 }
 
 export function calculateValue(
   propertyList: PropertyType[] = [],
-  brickProperties: BrickProperties = {}
+  brickProperties: BrickProperties = {},
+  typeList: UnionPropertyType[] = []
 ): Record<string, any> {
   const othersValue: Record<string, any> = {};
   for (const [key, value] of Object.entries(brickProperties)) {
@@ -82,8 +93,14 @@ export function calculateValue(
       }
 
       if (supportMenuType.includes(item.type as string)) {
-        const reg = /<% APP\.getMenu\((.*)\) %>/;
-        obj[item.name] = v.match(reg)?.[1]?.replace(/'|"/g, "") || v;
+        const selected = typeList.find(
+          (typeItem) => typeItem.name === item.name
+        );
+        if (selected?.mode === ItemModeType.Advanced) {
+          obj[item.name] = v;
+        } else {
+          obj[item.name] = matchNoramlMenuValue(v);
+        }
       }
     }
     return obj;
@@ -118,7 +135,11 @@ export function isUseYamlParse(
   const find = typeList?.find((item) => item.name === field.key);
 
   if (find) {
-    if (supportMenuType.includes(find.type as string)) return false;
+    if (
+      supportMenuType.includes(find.type as string) &&
+      find.mode !== ItemModeType.Advanced
+    )
+      return false;
 
     const isBasicType = supportBasicType.includes(find.type as string);
 

@@ -26,7 +26,8 @@ import {
   groupByType,
   yamlStringify,
 } from "./processor";
-import { OTHER_FORM_ITEM_FIELD } from "./constant";
+import { OTHER_FORM_ITEM_FIELD, supportMenuType } from "./constant";
+import { matchNoramlMenuValue } from "./processor";
 import {
   PropertyType,
   BrickProperties,
@@ -89,7 +90,11 @@ export function LegacyVisualPropertyForm(
     const newTypeList = mergeProperties(propertyTypeList, brickProperties);
     setTypeList(newTypeList);
 
-    const newValue = calculateValue(propertyTypeList, brickProperties);
+    const newValue = calculateValue(
+      propertyTypeList,
+      brickProperties,
+      newTypeList
+    );
     form.setFieldsValue(newValue);
   }, [propertyTypeList, brickProperties]);
 
@@ -100,13 +105,19 @@ export function LegacyVisualPropertyForm(
       selected.mode === ItemModeType.Advanced
         ? ItemModeType.Normal
         : ItemModeType.Advanced;
+
+    let value = selected.value;
+    if (nextMode === ItemModeType.Normal) {
+      if (supportMenuType.includes(selected.type as string)) {
+        value = matchNoramlMenuValue(value);
+      }
+    } else if (isNil(selected.value)) {
+      value = "";
+    } else {
+      value = yamlStringify(selected.value);
+    }
     form.setFieldsValue({
-      [name]:
-        nextMode === ItemModeType.Normal
-          ? selected.value
-          : isNil(selected.value)
-          ? ""
-          : yamlStringify(selected.value),
+      [name]: value,
     });
     const newTypeList = update(typeList, {
       $splice: [[index, 1, { ...selected, mode: nextMode }]],
@@ -266,13 +277,15 @@ export function LegacyVisualPropertyForm(
     );
   };
 
-  const renderMenuItem = (item: PropertyType): React.ReactElement => {
-    return (
+  const renderMenuItem = (item: UnionPropertyType): React.ReactElement => {
+    return item.mode === ItemModeType.Advanced ? (
+      renderEditorItem(item)
+    ) : (
       <MenuEditorItem
         projectId={projectId}
         key={item.name}
         name={item.name}
-        label={renderLabel(item, true)}
+        label={renderLabel(item)}
         required={item.required === Required.True}
         menuSettingClick={menuSettingClick}
       />
@@ -313,7 +326,11 @@ export function LegacyVisualPropertyForm(
       layout="vertical"
       form={form}
       onValuesChange={props.onValuesChange}
-      initialValues={calculateValue(propertyTypeList, brickProperties)}
+      initialValues={calculateValue(
+        propertyTypeList,
+        brickProperties,
+        typeList
+      )}
     >
       <Collapse ghost defaultActiveKey="0" className={styles.panelContainer}>
         {groupByType(typeList)?.map(([category, list], index) => {

@@ -6,6 +6,7 @@ import {
   groupByType,
   isUseYamlParse,
   extractCommonProps,
+  matchNoramlMenuValue,
 } from "./processor";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -76,7 +77,9 @@ describe("processor test", () => {
         { name: "menu3", type: "Menu", description: "菜单三" },
         { name: "menu4", type: "SidebarSubMenu", description: "菜单四" },
         { name: "menu5", type: "Menu", description: "菜单五" },
-        { name: "menu6", type: "Menu", description: "菜单五" },
+        { name: "menu6", type: "Menu", description: "菜单六" },
+        { name: "menu7", type: "Menu", description: "菜单七" },
+        { name: "menu8", type: "Menu", description: "菜单八" },
       ];
 
       const brickProperties = {
@@ -90,6 +93,14 @@ describe("processor test", () => {
         menu4: "x",
         menu5: "<% APP.getMenu(menu-5 %>",
         menu6: undefined,
+        menu7: {
+          title: "menu-7",
+          menuItems: {
+            title: "menu-7-1",
+            to: "/menu-7-1",
+          },
+        },
+        menu8: [1, 2, 3],
       };
       const result = calculateValue(propertyList, brickProperties);
       expect(result).toEqual({
@@ -104,6 +115,14 @@ describe("processor test", () => {
         menu4: "x",
         menu5: "<% APP.getMenu(menu-5 %>",
         menu6: undefined,
+        menu7: {
+          title: "menu-7",
+          menuItems: {
+            title: "menu-7-1",
+            to: "/menu-7-1",
+          },
+        },
+        menu8: [1, 2, 3],
       });
     });
 
@@ -164,6 +183,8 @@ describe("processor test", () => {
         menu1: "menu-1",
         menu2: "<% APP.getMenu('menu-2') %>",
         menu3: '<% APP.getMenu("menu-3") %>',
+        menu4:
+          'title: "menu-4"\nto: "/menu-4"\nmenuItems:\n  - title: "menu-4-1"',
       };
 
       const result = processFormValue(values, [
@@ -172,6 +193,7 @@ describe("processor test", () => {
         { name: "menu1", type: "Menu" },
         { name: "menu2", type: "SidebarSubMenu" },
         { name: "menu3", type: "Menu" },
+        { name: "menu4", type: "Menu", mode: "advanced" },
       ]);
 
       expect(result).toEqual({
@@ -187,6 +209,15 @@ describe("processor test", () => {
         menu1: "<% APP.getMenu('menu-1') %>",
         menu2: "<% APP.getMenu('menu-2') %>",
         menu3: '<% APP.getMenu("menu-3") %>',
+        menu4: {
+          title: "menu-4",
+          to: "/menu-4",
+          menuItems: [
+            {
+              title: "menu-4-1",
+            },
+          ],
+        },
       });
     });
   });
@@ -321,6 +352,26 @@ describe("processor test", () => {
     it("should return empty array if typeList is empty", () => {
       const result = extractCommonProps([]);
       expect(result).toEqual([]);
+    });
+
+    it("matchNoramlMenuValue should work", () => {
+      const result1 = matchNoramlMenuValue("menu-1");
+      expect(result1).toBe("menu-1");
+
+      const result2 = matchNoramlMenuValue("<% APP.getMenu('menu-2') %>");
+      expect(result2).toBe("menu-2");
+
+      const result3 = matchNoramlMenuValue('<% APP.getMenu("menu-3") %>');
+      expect(result3).toBe("menu-3");
+
+      const result4 = matchNoramlMenuValue('<% APP.getMenu("menu-4 %>');
+      expect(result4).toBe('<% APP.getMenu("menu-4 %>');
+
+      const result5 = matchNoramlMenuValue(undefined);
+      expect(result5).toBe(undefined);
+
+      const result6 = matchNoramlMenuValue({ a: 1 });
+      expect(result6).toEqual({ a: 1 });
     });
   });
 });
