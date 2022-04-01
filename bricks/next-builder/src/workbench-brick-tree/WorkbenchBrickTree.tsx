@@ -173,8 +173,12 @@ export function WorkbenchBrickTree({
       let icon = "question";
       let color: string;
       if (node.$isRoot) {
-        icon = "branches";
-        color = "var(--palette-blue-7)";
+        if (node.type === "custom-template") {
+          icon = "block";
+        } else {
+          icon = "branches";
+          color = "var(--palette-blue-7)";
+        }
       } else if (node.bg || node.type === "provider") {
         icon = "database";
         color = "var(--palette-orange-7)";
@@ -207,7 +211,7 @@ export function WorkbenchBrickTree({
       const children = getChildren(node);
       return {
         key: node.$$uid,
-        name: node.alias,
+        name: node.type === "custom-template" ? node.templateId : node.alias,
         icon: {
           lib: "antd",
           theme: "outlined",
@@ -220,7 +224,7 @@ export function WorkbenchBrickTree({
             ? children.find(
                 (group) => group.name === (type === "routes" ? type : "bricks")
               )?.children
-            : type === "bricks"
+            : type === "bricks" || type === "custom-template"
             ? children
             : null,
       };
