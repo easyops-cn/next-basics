@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.13.10...@next-bricks/flow-builder@1.14.0) (2022-04-01)
+
+
+### Bug Fixes
+
+* extract model type ([ef3f172](https://github.com/easyops-cn/next-basics/commit/ef3f172e52fce8a661ef2e2b6b08d724c0cb9378))
+* Optimize the number of select displayed ([21fc3af](https://github.com/easyops-cn/next-basics/commit/21fc3af8982a7febaf4bdef5d22219c46900173c))
+* refine collect contract logic ([db5e75f](https://github.com/easyops-cn/next-basics/commit/db5e75f9ab6732f6d402809f2b6d636aedd67fbd))
+* schema editor refactor ([01c31da](https://github.com/easyops-cn/next-basics/commit/01c31da96fdf439bd88d82729cfcdc949eac2d9d))
+* support model definition ([58738f9](https://github.com/easyops-cn/next-basics/commit/58738f94f570488ef792bc304131c81d8d20fcda))
+* validate -> validateRule ([9fc2367](https://github.com/easyops-cn/next-basics/commit/9fc2367122c46f5f9156f2c464d1a8b9c582568e))
+
+
+### Features
+
+* schema-editor support update ([d6cb825](https://github.com/easyops-cn/next-basics/commit/d6cb825b4b4e6d3c6bc0405b79ff377a293ce1ae))
+
+
+
+
+
 ## [1.13.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.13.9...@next-bricks/flow-builder@1.13.10) (2022-03-16)
 
 **Note:** Version bump only for package @next-bricks/flow-builder

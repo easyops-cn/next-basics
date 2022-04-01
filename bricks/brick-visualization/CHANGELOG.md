@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.8.9...@next-bricks/brick-visualization@1.9.0) (2022-04-01)
+
+
+### Features
+
+* menu type add advanced mode ([1fe9a56](https://github.com/easyops-cn/next-basics/commit/1fe9a568125189d7fcb7c49b919d6dc3f1d87efa))
+* update calc ([5eb34ad](https://github.com/easyops-cn/next-basics/commit/5eb34ad8c494e3cda88c0cdb63fb56e971614bb8))
+* update unit test ([9df04a2](https://github.com/easyops-cn/next-basics/commit/9df04a2a698c5329bb87189cdcc8e06fda8fecf6))
+* update unit test ([d9add23](https://github.com/easyops-cn/next-basics/commit/d9add23076006aa568fb941ca379998632654961))
+* visualPropertyForm support MenuType ([e82c56a](https://github.com/easyops-cn/next-basics/commit/e82c56a107a989074080addb0f2b39193123f0ee))
+
+
+
+
+
 ## [1.8.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.8.8...@next-bricks/brick-visualization@1.8.9) (2022-03-16)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
