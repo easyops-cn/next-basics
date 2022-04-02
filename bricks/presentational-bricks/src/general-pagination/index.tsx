@@ -64,11 +64,13 @@ export class GeneralPaginationElement extends UpdatingElement {
       this.pageSize = pageSize;
       this.pageUpdate.emit({ page });
     }
-    const history = getHistory();
-    const urlSearchParams = new URLSearchParams(history.location.search);
-    urlSearchParams.set("page", this.page as any);
-    urlSearchParams.set("pageSize", this.pageSize as any);
-    history.push(`?${urlSearchParams}`);
+    if (this.shouldUpdateUrlParams) {
+      const history = getHistory();
+      const urlSearchParams = new URLSearchParams(history.location.search);
+      urlSearchParams.set("page", this.page as any);
+      urlSearchParams.set("pageSize", this.pageSize as any);
+      history.push(`?${urlSearchParams}`);
+    }
   };
 
   protected _render(): void {
@@ -180,6 +182,17 @@ export class GeneralPaginationElement extends UpdatingElement {
   fields = {
     total: "total",
   };
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否更新 url 参数
+   */
+  @property({
+    attribute: false,
+  })
+  shouldUpdateUrlParams = true;
 }
 
 customElements.define(
