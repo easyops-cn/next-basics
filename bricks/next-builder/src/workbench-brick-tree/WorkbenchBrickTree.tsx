@@ -150,7 +150,7 @@ export function WorkbenchBrickTree({
               theme: "outlined",
               icon: "down",
             },
-            labelColor: "var(--palette-gray-7)",
+            labelColor: "var(--palette-gray-6)",
             data: {
               type: "mount-point",
               mountPoint: edge.mountPoint,
@@ -175,16 +175,17 @@ export function WorkbenchBrickTree({
       if (node.$isRoot) {
         if (node.type === "custom-template") {
           icon = "block";
+          color = "var(--palette-purple-7)";
         } else {
           icon = "branches";
-          color = "var(--palette-blue-7)";
+          color = "var(--palette-blue-6)";
         }
       } else if (node.bg || node.type === "provider") {
         icon = "database";
-        color = "var(--palette-orange-7)";
+        color = "var(--palette-orange-6)";
       } else if (node.portal) {
         icon = "message";
-        color = "var(--palette-purple-7)";
+        color = "var(--palette-pink-6)";
       } else {
         switch (node.type) {
           case "routes":
@@ -192,19 +193,19 @@ export function WorkbenchBrickTree({
             break;
           case "bricks":
             icon = "branches";
-            color = "var(--palette-blue-7)";
+            color = "var(--palette-blue-6)";
             break;
           case "redirect":
             icon = "double-right";
-            color = "var(--palette-cyan-7)";
+            color = "var(--palette-cyan-6)";
             break;
           case "template":
             icon = "gold";
-            color = "var(--palette-red-7)";
+            color = "var(--palette-red-6)";
             break;
           case "brick":
             icon = "build";
-            color = "var(--palette-green-7)";
+            color = "var(--palette-green-6)";
             break;
         }
       }

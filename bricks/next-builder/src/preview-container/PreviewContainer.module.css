@@ -36,8 +36,16 @@
   border-color: rgba(var(--palette-blue-6-channel), 0.3);
 }
 
+.outline.rootTpl {
+  border-color: rgba(var(--palette-purple-6-channel), 0.3);
+}
+
 .outline.overflowed {
   border-radius: 4px;
+}
+
+.outline.hidden {
+  visibility: hidden;
 }
 
 .alias {
@@ -58,6 +66,10 @@
 
 .outline.hover .alias {
   background: rgba(var(--palette-blue-6-channel), 0.3);
+}
+
+.outline.rootTpl .alias {
+  background: rgba(var(--palette-purple-6-channel), 0.3);
 }
 
 .outline.overflowed .alias {
