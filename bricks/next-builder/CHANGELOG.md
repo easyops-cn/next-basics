@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.130.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.129.0...@next-bricks/next-builder@1.130.0) (2022-04-02)
+
+
+### Bug Fixes
+
+* **workbench:** support custom template ([86f2fe6](https://github.com/easyops-cn/next-basics/commit/86f2fe65f66a517632bd488b9b977b851b1cc845))
+
+
+### Features
+
+* add state ([b40b8d1](https://github.com/easyops-cn/next-basics/commit/b40b8d1236ea9c1bccb10fcb15abe616eccd0b86))
+* support create theme with page template ([63744d5](https://github.com/easyops-cn/next-basics/commit/63744d5b2b4eebafe41fa4af66fe8252188f96bd))
+
+
+
+
+
 # [1.129.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.128.0...@next-bricks/next-builder@1.129.0) (2022-04-01)
 
 
