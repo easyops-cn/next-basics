@@ -367,6 +367,7 @@ describe("CreateThemePage", () => {
         appId: "app-a",
         templateId: `tpl-page-home`,
         proxy: "proxy",
+        state: "state",
         type: "custom-template",
       }
     );

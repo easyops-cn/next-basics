@@ -189,6 +189,7 @@ export async function CreateThemePage({
   };
 
   let proxy: string;
+  let state: ContextConf[];
   let snippetContext: ContextConf[];
   let themeBaseData, snippetBaseData;
   if (pageTemplate) {
@@ -211,6 +212,7 @@ export async function CreateThemePage({
         ),
     ]);
     proxy = themeBaseData?.proxy;
+    state = themeBaseData?.state;
     snippetContext = snippetBaseData?.context;
   } else if (layoutType) {
     proxy = JSON.stringify({
@@ -222,7 +224,8 @@ export async function CreateThemePage({
     project: projectId,
     appId,
     templateId: templateId,
-    proxy: proxy,
+    proxy,
+    state,
     type: "custom-template",
   });
   const snippet = await InstanceApi_createInstance(STORYBOARD_SNIPPET, {
