@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.3.0...@next-types/preview@1.3.1) (2022-04-02)
+
+
+### Bug Fixes
+
+* support highlight custom-template ([a3c854a](https://github.com/easyops-cn/next-basics/commit/a3c854af9c5056c41159497de716ec1d74a1cef1))
+
+
+
+
+
 # [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.2.0...@next-types/preview@1.3.0) (2022-03-31)
 
 
