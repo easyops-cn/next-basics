@@ -84,4 +84,17 @@ describe("presentational-bricks.general-pagination", () => {
     expect(urlSearchParams.get("pageSize")).toBe("15");
     document.body.removeChild(element);
   });
+  it(`should dispatch "filter.update" when pageSize is changed"`, async () => {
+    const element = document.createElement(
+      "presentational-bricks.general-pagination"
+    );
+    Object.assign(element, { ...props, shouldUpdateUrlParams: false });
+    element.addEventListener("filter.update", mockEventListener);
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.handleOnChange(3, 15);
+    document.body.removeChild(element);
+  });
 });
