@@ -1,31 +1,71 @@
-import { InstanceApi_createInstance } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceApi_createInstance,
+  InstanceApi_getDetail,
+} from "@next-sdk/cmdb-sdk";
+import { StoryboardApi_cloneBricks } from "@next-sdk/next-builder-sdk";
 import { CreateThemePage, LayoutEnums } from "./CreateThemePage";
 
 jest.mock("@next-sdk/cmdb-sdk");
+jest.mock("@next-sdk/next-builder-sdk");
 
 (InstanceApi_createInstance as jest.Mock).mockImplementation((objectId) => {
   switch (objectId) {
     case "STORYBOARD_TEMPLATE":
       return {
         instanceId: "tpl-a",
+        id: "T-1",
       };
     case "STORYBOARD_SNIPPET":
       return {
         instanceId: "snippet-a",
+        id: "S-1",
       };
     case "STORYBOARD_THEME_PAGE":
       return {
         instanceId: "page-a",
+        id: "TT-1",
       };
   }
 });
+
+(InstanceApi_getDetail as jest.Mock).mockImplementation((objectId) => {
+  switch (objectId) {
+    case "STORYBOARD_TEMPLATE":
+      return {
+        proxy: "proxy",
+        state: "state",
+        children: [
+          {
+            id: "T-001",
+          },
+          {
+            id: "T-002",
+          },
+        ],
+      };
+    case "STORYBOARD_SNIPPET":
+      return {
+        context: "context",
+        children: [
+          {
+            id: "S-001",
+          },
+          {
+            id: "S-002",
+          },
+        ],
+      };
+  }
+});
+
+(StoryboardApi_cloneBricks as jest.Mock).mockImplementation(() => ({}));
 
 describe("CreateThemePage", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("should work", async () => {
+  it("should work then use layout create", async () => {
     expect(
       await CreateThemePage({
         projectId: "project-a",
@@ -43,9 +83,7 @@ describe("CreateThemePage", () => {
         },
         layoutType: LayoutEnums.HEADER_THROUGH_SIDEBAR,
       })
-    ).toEqual({
-      instanceId: "page-a",
-    });
+    ).toEqual(true);
     expect(InstanceApi_createInstance).toBeCalledTimes(5);
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
       1,
@@ -281,4 +319,146 @@ describe("CreateThemePage", () => {
       );
     }
   );
+
+  it("should work then use theme template create", async () => {
+    expect(
+      await CreateThemePage({
+        projectId: "project-a",
+        appId: "app-a",
+        pageTypeId: "home",
+        name: "My Layout",
+        thumbnail: "fun.png",
+        locales: {
+          en: {
+            name: "Home",
+          },
+          zh: {
+            name: "首页",
+          },
+        },
+        pageTemplate: {
+          template: [
+            {
+              id: "B-001",
+              instanceId: "abc",
+            },
+          ],
+          snippet: [
+            {
+              id: "B-001",
+              instanceId: "abc",
+            },
+          ],
+        },
+      })
+    ).toBe(true);
+
+    expect(InstanceApi_getDetail).toBeCalledTimes(2);
+
+    expect(InstanceApi_createInstance).toBeCalledTimes(3);
+
+    expect(StoryboardApi_cloneBricks).toBeCalledTimes(4);
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      1,
+      "STORYBOARD_TEMPLATE",
+      {
+        project: "project-a",
+        appId: "app-a",
+        templateId: `tpl-page-home`,
+        proxy: "proxy",
+        state: "state",
+        type: "custom-template",
+      }
+    );
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      2,
+      "STORYBOARD_SNIPPET",
+      {
+        project: "project-a",
+        appId: "app-a",
+        snippetId: `page-home`,
+        type: "snippet",
+        text: {
+          en: "My Layout",
+          zh: "My Layout",
+        },
+        layerType: "layout",
+        context: "context",
+      }
+    );
+
+    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(1, {
+      newAppId: "app-a",
+      newParentBrickId: "T-1",
+      sourceBrickId: "T-001",
+    });
+    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(2, {
+      newAppId: "app-a",
+      newParentBrickId: "T-1",
+      sourceBrickId: "T-002",
+    });
+    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(3, {
+      newAppId: "app-a",
+      newParentBrickId: "S-1",
+      sourceBrickId: "S-001",
+    });
+    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(4, {
+      newAppId: "app-a",
+      newParentBrickId: "S-1",
+      sourceBrickId: "S-002",
+    });
+
+    expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
+      3,
+      "STORYBOARD_THEME_PAGE",
+      {
+        project: "project-a",
+        pageTypeId: "home",
+        name: "My Layout",
+        thumbnail: "fun.png",
+        locales: {
+          en: {
+            name: "Home",
+          },
+          zh: {
+            name: "首页",
+          },
+        },
+        template: "tpl-a",
+        snippet: "snippet-a",
+      }
+    );
+  });
+
+  it("should work while template was null", async () => {
+    expect(
+      await CreateThemePage({
+        projectId: "project-a",
+        appId: "app-a",
+        pageTypeId: "home",
+        name: "My Layout",
+        thumbnail: "fun.png",
+        locales: {
+          en: {
+            name: "Home",
+          },
+          zh: {
+            name: "首页",
+          },
+        },
+        pageTemplate: {
+          template: [],
+          snippet: [],
+        },
+      })
+    ).toBe(true);
+
+    expect(InstanceApi_getDetail).toBeCalledTimes(0);
+
+    expect(InstanceApi_createInstance).toBeCalledTimes(3);
+
+    expect(StoryboardApi_cloneBricks).toBeCalledTimes(0);
+  });
 });
