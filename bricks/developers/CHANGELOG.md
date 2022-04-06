@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.353.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.1...@next-bricks/developers@1.353.2) (2022-04-06)
+
+
+### Bug Fixes
+
+* **developers.illustration-card-list:** 修改图片尺寸使视觉统一  Closes DESIGNER_ROUTINE-546 ([439ebbe](https://github.com/easyops-cn/next-basics/commit/439ebbe05a82fda748325b5a2183cacdb8739079))
+* **developers.illustration-card-list:** 修改图片尺寸使视觉统一  Closes DESIGNER_ROUTINE-546 ([bf8af56](https://github.com/easyops-cn/next-basics/commit/bf8af566788b715fb176e28af19acc425e60c2c2))
+
+
+
+
+
 ## [1.353.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.0...@next-bricks/developers@1.353.1) (2022-03-09)
 
 **Note:** Version bump only for package @next-bricks/developers
