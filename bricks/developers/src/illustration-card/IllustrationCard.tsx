@@ -27,7 +27,11 @@ export function IllustrationCard({
 
     return (
       <>
-        <img src={src} onLoad={() => setLoading(false)} />
+        <img
+          src={src}
+          style={{ height: 180, objectFit: "contain" }}
+          onLoad={() => setLoading(false)}
+        />
       </>
     );
   }, [name, category, theme]);
