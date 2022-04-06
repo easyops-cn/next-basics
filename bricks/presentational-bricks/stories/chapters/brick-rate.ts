@@ -27,7 +27,7 @@ export const BrickRateStory: Story = {
         allowHalf: true,
         disabled: false,
         rateStyle: {
-          color: "#ED493C",
+          color: "var(--color-error)",
         },
       },
       description: {
@@ -44,7 +44,7 @@ export const BrickRateStory: Story = {
         disabled: true,
         type: "A",
         rateStyle: {
-          color: "#ED493C",
+          color: "var(--color-error)",
         },
       },
       description: {
@@ -63,7 +63,7 @@ export const BrickRateStory: Story = {
           lib: "antd",
           icon: "heart",
         },
-        colors: ["#FFCF64", "#FFA235", "#ED493C"],
+        colors: ["var(--color-warning)", "#dc8324", "var(--color-error)"],
       },
       description: {
         title: "等级图标每一级可以对应不同颜色",
@@ -81,7 +81,7 @@ export const BrickRateStory: Story = {
           lib: "antd",
           icon: "heart",
         },
-        colors: ["#FFCF64", "#FFA235", "#ED493C"],
+        colors: ["var(--color-warning)", "#dc8324", "var(--color-error)"],
         tooltips: ["第一级", "第二级", "第三级"],
       },
       description: {
