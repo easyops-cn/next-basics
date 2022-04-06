@@ -5,6 +5,7 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
+import { getBroadcastChannelPolyfill } from "./polyfill";
 
 export interface BroadcastChannelProps {
   channelName: string;
@@ -16,32 +17,31 @@ export function LegacyBroadcastChannel(
   ref: Ref<Pick<BroadcastChannel, "postMessage">>
 ): React.ReactElement {
   const channelRef = useRef<BroadcastChannel>();
+  const polyfillRef = useRef<typeof BroadcastChannel>();
 
   useImperativeHandle(ref, () => ({
     postMessage(message: unknown) {
-      channelRef.current?.postMessage(message);
+      return channelRef.current?.postMessage(message);
     },
   }));
 
   useEffect(() => {
-    const currentChannel = (channelRef.current = channelName
-      ? new BroadcastChannel(channelName)
-      : null);
-    return () => {
-      currentChannel?.close();
-    };
-  }, [channelName]);
-
-  useEffect(() => {
     const handleMessage = (event: MessageEvent): void => {
-      onMessage(event.data);
+      // When using polyfill, the message event is the message data itself.
+      onMessage(window.BroadcastChannel ? event.data : event);
     };
-    const currentChannel = channelRef.current;
-    currentChannel?.addEventListener("message", handleMessage);
+    (async () => {
+      polyfillRef.current = await getBroadcastChannelPolyfill();
+      channelRef.current = channelName
+        ? new polyfillRef.current(channelName)
+        : null;
+      channelRef.current?.addEventListener("message", handleMessage);
+    })();
     return () => {
-      currentChannel?.removeEventListener("message", handleMessage);
+      channelRef.current?.close();
+      channelRef.current?.removeEventListener("message", handleMessage);
     };
-  }, [onMessage]);
+  }, [channelName, onMessage]);
 
   return null;
 }
