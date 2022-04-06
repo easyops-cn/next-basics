@@ -98,7 +98,7 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                     <GeneralIcon icon={item.icon} />
                   </div>
                 )}
-                <span>{item.label}</span>
+                <span title={item.label}>{item.label}</span>
               </div>
             )}
           </Tooltip>

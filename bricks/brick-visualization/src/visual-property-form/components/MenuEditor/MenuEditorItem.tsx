@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Select } from "antd";
+import { Form, Select, Tooltip } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { InstanceApi_getDetail } from "@next-sdk/cmdb-sdk";
 
@@ -81,15 +81,18 @@ export function MenuEditorItem(props: MenuEditorItemProps): React.ReactElement {
           display: "inline-block",
         }}
       >
-        <GeneralIcon
-          icon={{
-            category: "app",
-            color: "blue",
-            icon: "launchpad-setting",
-            lib: "easyops",
-          }}
-          onClick={handleMenuSettingClick}
-        />
+        <Tooltip title="配置菜单数据">
+          {" "}
+          <GeneralIcon
+            icon={{
+              category: "app",
+              color: "blue",
+              icon: "launchpad-setting",
+              lib: "easyops",
+            }}
+            onClick={handleMenuSettingClick}
+          />
+        </Tooltip>
       </div>
     </div>
   );
