@@ -210,6 +210,13 @@ describe("buildStoryboardV2", () => {
             typescript: true,
           },
         ],
+        contracts: [
+          {
+            contract: "easyops.api.flow_builder.flow.GetFlowStepFieldsMapping",
+            type: "contract",
+            version: "1.0.0",
+          },
+        ],
         dependsAll: false,
       },
       // Output
@@ -360,6 +367,14 @@ describe("buildStoryboardV2", () => {
               name: "sayExclamation",
               source: "function sayExclamation() {}",
               typescript: true,
+            },
+          ],
+          contracts: [
+            {
+              contract:
+                "easyops.api.flow_builder.flow.GetFlowStepFieldsMapping",
+              type: "contract",
+              version: "1.0.0",
             },
           ],
         },
