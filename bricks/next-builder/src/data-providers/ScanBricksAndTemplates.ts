@@ -35,12 +35,12 @@ interface ImplementedContract extends ContractBase {
   deps?: DependContract[];
 }
 
-type DependContract =
+export type DependContract =
   | DependContractOfApi
   | DependContractOfBrick
   | DependContractOfTemplate;
 
-interface DependContractOfApi extends ContractBase {
+export interface DependContractOfApi extends ContractBase {
   type: "contract";
   contract: string;
 }

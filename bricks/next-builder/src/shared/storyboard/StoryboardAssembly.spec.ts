@@ -260,7 +260,30 @@ const mockFactory: Record<string, Record<string, any>> = {
           },
         },
       ],
-
+      storyboardJson: JSON.stringify({
+        app: "test-project",
+        routes: [
+          {
+            path: "/abc",
+            type: "bricks",
+            bricks: [
+              {
+                brick: "brick-pkg-a.brick-a",
+                lifeCycle: {
+                  useResolves: [
+                    {
+                      useProvider: "easyops.flow_api@FlowApiB:1.0.0",
+                    },
+                    {
+                      useProvider: "easyops.flow_api@GetCmdbDetail:1.0.0",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      }),
       i18n: [
         {
           name: "FILES",
@@ -598,6 +621,18 @@ describe("StoryboardAssembly", () => {
                 },
               ],
             },
+            contracts: [
+              {
+                contract: "easyops.flow_api.FlowApiB",
+                type: "contract",
+                version: "1.0.0",
+              },
+              {
+                contract: "easyops.flow_api.GetCmdbDetail",
+                type: "contract",
+                version: "1.0.0",
+              },
+            ],
           },
 
           dependsAll: false,
@@ -823,6 +858,18 @@ describe("StoryboardAssembly", () => {
                 },
               ],
             },
+            contracts: [
+              {
+                contract: "easyops.flow_api.FlowApiB",
+                type: "contract",
+                version: "1.0.0",
+              },
+              {
+                contract: "easyops.flow_api.GetCmdbDetail",
+                type: "contract",
+                version: "1.0.0",
+              },
+            ],
           },
 
           dependsAll: false,
