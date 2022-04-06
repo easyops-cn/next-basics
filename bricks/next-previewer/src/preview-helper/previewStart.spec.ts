@@ -27,6 +27,9 @@ const history = {
 } as any;
 jest.spyOn(kit, "getHistory").mockReturnValue(history);
 jest.spyOn(kit.developHelper, "updateStoryboard").mockImplementation();
+jest
+  .spyOn(kit.developHelper, "updateTemplatePreviewSettings")
+  .mockImplementation();
 
 delete window.location;
 window.location = {
@@ -239,5 +242,27 @@ describe("previewStart", () => {
       routes: [],
     });
     expect(history.reload).toBeCalledTimes(1);
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "refresh",
+        appId: "my-app",
+        storyboardPatch: { routes: [] },
+        templateId: "my-tpl",
+        settings: {
+          properties: { dataTest: "good" },
+        },
+      },
+    } as any);
+    expect(kit.developHelper.updateTemplatePreviewSettings).toBeCalledWith(
+      "my-app",
+      "my-tpl",
+      {
+        properties: { dataTest: "good" },
+      }
+    );
+    expect(history.reload).toBeCalledTimes(2);
   });
 });

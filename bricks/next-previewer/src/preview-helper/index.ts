@@ -1,13 +1,16 @@
 // istanbul ignore file: nothing logical
 import { UpdatingElement } from "@next-core/brick-kit";
-import type { PreviewHelperBrick } from "@next-types/preview";
+import type {
+  PreviewHelperBrick,
+  PreviewStartOptions,
+} from "@next-types/preview";
 import { previewStart } from "./previewStart";
 
 /**
  * @id next-previewer.preview-helper
  * @author steve
  * @history
- * 1.x.0: 新增构件 `next-previewer.preview-helper`
+ * 1.0.0: 新增构件 `next-previewer.preview-helper`
  * @docKind brick
  * @noInheritDoc
  */
@@ -19,8 +22,8 @@ export class PreviewHelperElement
     // Do nothing.
   }
 
-  start(previewFromOrigin: string): void {
-    previewStart(previewFromOrigin);
+  start(previewFromOrigin: string, options?: PreviewStartOptions): void {
+    previewStart(previewFromOrigin, options);
   }
 }
 

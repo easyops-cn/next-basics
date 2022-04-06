@@ -1,14 +1,14 @@
-import { developHelper, getHistory, getRuntime } from "@next-core/brick-kit";
+import { developHelper, getHistory } from "@next-core/brick-kit";
 import type { PluginLocation } from "@next-core/brick-types";
 import type {
   BrickOutline,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerHighlightBrick,
-  PreviewMessagePreviewerHighlightRootTpl,
   PreviewMessagePreviewerResize,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
+  PreviewStartOptions,
 } from "@next-types/preview";
 import {
   setPreviewFromOrigin,
@@ -18,7 +18,10 @@ import {
 
 let started = false;
 
-export function previewStart(previewFromOrigin: string): void {
+export function previewStart(
+  previewFromOrigin: string,
+  options?: PreviewStartOptions
+): void {
   if (started) {
     return;
   }
@@ -64,21 +67,18 @@ export function previewStart(previewFromOrigin: string): void {
             });
           }
           break;
-        case "init-root-tpl":
-          if (data.forwardedFor === "builder") {
-            const outlines = getTplOutlines(data.rootTpl);
-            sendMessage<PreviewMessagePreviewerHighlightRootTpl>({
-              type: "highlight-root-tpl",
-              outlines,
-              rootTpl: data.rootTpl,
-            });
-          }
-          break;
         case "toggle-inspecting":
           data.enabled ? startInspecting() : stopInspecting();
           break;
         case "refresh":
           developHelper.updateStoryboard(data.appId, data.storyboardPatch);
+          if (data.templateId) {
+            developHelper.updateTemplatePreviewSettings(
+              data.appId,
+              data.templateId,
+              data.settings
+            );
+          }
           getHistory().reload();
           break;
         case "reload":
@@ -116,6 +116,15 @@ export function previewStart(previewFromOrigin: string): void {
   sendLocationChange(history.location);
 
   history.listen(sendLocationChange);
+
+  if (options?.templateId) {
+    developHelper.updateTemplatePreviewSettings(
+      options.appId,
+      options.templateId,
+      options.settings
+    );
+    getHistory().reload();
+  }
 }
 
 function getBrickOutlines(iid: string): BrickOutline[] {
@@ -125,12 +134,6 @@ function getBrickOutlines(iid: string): BrickOutline[] {
   const elements = document.querySelectorAll<HTMLElement>(
     `[data-iid="${iid}"]`
   );
-  return getOutlines(elements);
-}
-
-function getTplOutlines(tpl: string): BrickOutline[] {
-  const appId = getRuntime().getCurrentApp().id;
-  const elements = document.querySelectorAll<HTMLElement>(`${appId}\\.${tpl}`);
   return getOutlines(elements);
 }
 
