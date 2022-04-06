@@ -3,4 +3,8 @@
     background-color: var(--theme-gray-border-color);
     text-align: center;
   }
+  .imgCss {
+    height: 180px;
+    object-fit: contain;
+  }
 }

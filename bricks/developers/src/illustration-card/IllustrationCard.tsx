@@ -29,7 +29,7 @@ export function IllustrationCard({
       <>
         <img
           src={src}
-          style={{ height: 180, objectFit: "contain" }}
+          className={styles.imgCss}
           onLoad={() => setLoading(false)}
         />
       </>
