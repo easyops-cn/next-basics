@@ -29,8 +29,9 @@ const mockProps = {
               $lte: 60,
             },
             style: {
-              backgroundColor: "var(--theme-red-color)",
+              backgroundColor: "var(--color-error)",
               color: "rgba(255, 255, 255, 1)",
+              borderRadius: "var(--larger-border-radius)",
             },
             label: "@{value}",
           },
@@ -44,8 +45,9 @@ const mockProps = {
               ],
             },
             style: {
-              backgroundColor: "var(--theme-orange-color)",
+              backgroundColor: "var(--color-warning)",
               color: "rgba(255, 255, 255, 1)",
+              borderRadius: "var(--larger-border-radius)",
             },
             label: "@{value}",
           },
@@ -59,8 +61,9 @@ const mockProps = {
               ],
             },
             style: {
-              backgroundColor: "var(--theme-green-color)",
+              backgroundColor: "var(--color-success)",
               color: "rgba(255, 255, 255, 1)",
+              borderRadius: "var(--larger-border-radius)",
             },
             label: "@{value}",
           },
