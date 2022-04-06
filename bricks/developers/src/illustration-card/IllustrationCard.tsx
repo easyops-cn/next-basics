@@ -27,7 +27,11 @@ export function IllustrationCard({
 
     return (
       <>
-        <img src={src} onLoad={() => setLoading(false)} />
+        <img
+          src={src}
+          className={styles.imgCss}
+          onLoad={() => setLoading(false)}
+        />
       </>
     );
   }, [name, category, theme]);
