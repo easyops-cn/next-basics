@@ -3,43 +3,50 @@ import { mount } from "enzyme";
 import { SimpleFunction } from "@next-core/brick-types";
 import { BroadcastChannelComponent } from "./BroadcastChannel";
 
-const channels = new Map<string, Set<any>>();
-window.BroadcastChannel = class BroadcastChannel {
-  messageListeners = new Set<SimpleFunction>();
-  constructor(private channelName: string) {
-    let list = channels.get(channelName);
-    if (!list) {
-      channels.set(channelName, (list = new Set()));
+jest.mock("./polyfill", () => {
+  const channels = new Map<string, Set<any>>();
+  class BroadcastChannel {
+    messageListeners = new Set<SimpleFunction>();
+    private channelName: string;
+    constructor(channelName: string) {
+      this.channelName = channelName;
+      let list = channels.get(channelName);
+      if (!list) {
+        channels.set(channelName, (list = new Set()));
+      }
+      list.add(this);
     }
-    list.add(this);
-  }
-  addEventListener(eventType: string, fn: SimpleFunction): void {
-    if (eventType === "message") {
-      this.messageListeners.add(fn);
+    addEventListener(eventType: string, fn: SimpleFunction): void {
+      if (eventType === "message") {
+        this.messageListeners.add(fn);
+      }
     }
-  }
-  removeEventListener(eventType: string, fn: SimpleFunction): void {
-    if (eventType === "message") {
-      this.messageListeners.delete(fn);
+    removeEventListener(eventType: string, fn: SimpleFunction): void {
+      if (eventType === "message") {
+        this.messageListeners.delete(fn);
+      }
     }
-  }
-  postMessage(data: unknown): void {
-    for (const channel of channels.get(this.channelName) ?? []) {
-      if (channel !== this) {
-        for (const fn of channel.messageListeners) {
-          fn({ data });
+    postMessage(data: unknown): void {
+      for (const channel of channels.get(this.channelName) ?? []) {
+        if (channel !== this) {
+          for (const fn of channel.messageListeners) {
+            fn({ data });
+          }
         }
       }
     }
+    close(): void {
+      this.messageListeners.clear();
+      channels.get(this.channelName).delete(this);
+    }
   }
-  close(): void {
-    this.messageListeners.clear();
-    channels.get(this.channelName).delete(this);
-  }
-} as any;
+  return {
+    getBroadcastChannelPolyfill: () => Promise.resolve(BroadcastChannel),
+  };
+});
 
 describe("BroadcastChannelComponent", () => {
-  it("should work", () => {
+  it("should work", async () => {
     const channelName = "my-channel";
 
     const onMessageA = jest.fn();
@@ -81,6 +88,8 @@ describe("BroadcastChannelComponent", () => {
         ref={refD}
       />
     );
+
+    await (global as any).flushPromises();
 
     refA.current.postMessage({
       hello: "world",
