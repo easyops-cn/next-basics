@@ -90,19 +90,23 @@
 
   .simpleMenuItem {
     &:global(.ant-menu-item-active) {
-      background-color: var(--palette-gray-4) !important;
+      background: var(--palette-gray-4);
       border-radius: var(--larger-border-radius);
       box-shadow: none !important;
     }
 
     &:global(.ant-menu-item-selected) {
-      background: var(--color-brand);
+      background: var(--color-brand-hover);
       box-shadow: 0px 2px 12px 0px #1a7aff4d;
 
       :global(.anticon),
       .simpleMenuItemText {
         color: var(--color-normal-icon);
       }
+    }
+
+    &:global(.ant-menu-item-selected):not(:global(.ant-menu-item-active)) {
+      background: var(--color-brand) !important;
     }
 
     &::after {
@@ -113,7 +117,7 @@
   .subMenuWrapper {
     &:global(.ant-menu-submenu-active) {
       :global(.ant-menu-submenu-title) {
-        background-color: var(--palette-gray-4) !important;
+        background: var(--palette-gray-4);
         border-radius: var(--larger-border-radius);
       }
 
