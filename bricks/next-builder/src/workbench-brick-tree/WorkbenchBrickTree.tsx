@@ -7,6 +7,7 @@ import {
   useBuilderNode,
   useHoverNodeUid,
 } from "@next-core/editor-bricks-helper";
+import { isBrickNode, isCustomTemplateNode } from "@next-core/brick-utils";
 import { sortBy } from "lodash";
 import type {
   WorkbenchNodeData,
@@ -14,10 +15,12 @@ import type {
 } from "../shared/workbench/interfaces";
 import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
+import { deepMatch } from "../builder-container/utils";
 
 export interface WorkbenchBrickTreeProps {
   type?: WorkbenchRuntimeNode["type"];
   placeholder?: string;
+  searchPlaceholder?: string;
   activeInstanceId?: string;
 }
 
@@ -38,6 +41,7 @@ function isNormalNode(
 export function WorkbenchBrickTree({
   type,
   placeholder,
+  searchPlaceholder,
   activeInstanceId,
 }: WorkbenchBrickTreeProps): React.ReactElement {
   const { nodes, edges } = useBuilderData();
@@ -260,9 +264,32 @@ export function WorkbenchBrickTree({
         mouseEnterFactory,
         mouseLeaveFactory,
         contextMenuFactory,
+        matchNode: matchBrickNode,
       }}
     >
-      <WorkbenchTree nodes={tree} placeholder={placeholder} />
+      <WorkbenchTree
+        nodes={tree}
+        placeholder={placeholder}
+        searchPlaceholder={searchPlaceholder}
+      />
     </WorkbenchTreeContext.Provider>
+  );
+}
+
+function matchBrickNode(
+  node: WorkbenchNodeData<WorkbenchBrickTreeNode>,
+  lowerTrimmedQuery?: string
+): boolean {
+  return (
+    node.data.type !== "mount-point" &&
+    deepMatch(
+      isCustomTemplateNode(node.data)
+        ? node.name
+        : [
+            node.name,
+            isBrickNode(node.data) ? node.data.$$normalized : node.data.path,
+          ],
+      lowerTrimmedQuery
+    )
   );
 }

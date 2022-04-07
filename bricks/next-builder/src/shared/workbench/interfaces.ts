@@ -15,6 +15,8 @@ export interface WorkbenchNodeData<T = unknown> {
         href: string;
       };
   children?: WorkbenchNodeData[];
+  matched?: boolean;
+  matchedSelf?: boolean;
 }
 
 export interface WorkbenchTreeAction {
