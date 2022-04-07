@@ -63,7 +63,11 @@ export const BrickRateStory: Story = {
           lib: "antd",
           icon: "heart",
         },
-        colors: ["var(--color-warning)", "#E38306", "var(--color-error)"],
+        colors: [
+          "var(--color-warning)",
+          "var(--palette-orange-6)",
+          "var(--color-error)",
+        ],
       },
       description: {
         title: "等级图标每一级可以对应不同颜色",
@@ -81,7 +85,11 @@ export const BrickRateStory: Story = {
           lib: "antd",
           icon: "heart",
         },
-        colors: ["var(--color-warning)", "#E38306", "var(--color-error)"],
+        colors: [
+          "var(--color-warning)",
+          "var(--palette-orange-6)",
+          "var(--color-error)",
+        ],
         tooltips: ["第一级", "第二级", "第三级"],
       },
       description: {
