@@ -154,6 +154,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         value={props.name && props.formElement ? undefined : props.value}
         size={props.size}
         disabled={props.disabled}
+        defaultActiveFirstOption={false}
         mode={props.mode as "multiple" | "tags"}
         placeholder={props.placeholder}
         onChange={handleChange}
