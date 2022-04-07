@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@0.6.1...@next-bricks/next-previewer@0.7.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* remove template-preview-loader ([2445883](https://github.com/easyops-cn/next-basics/commit/24458833d92be43e3a2b7a1039b46236f1c9fd41))
+
+
+### Features
+
+* support previewing template by settings ([3ce05fe](https://github.com/easyops-cn/next-basics/commit/3ce05fec6fc84bdde4b73384c0d030ac0f946f47))
+
+
+### BREAKING CHANGES
+
+* Release 1.x
+
+
+
+
+
 ## [0.6.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@0.6.0...@next-bricks/next-previewer@0.6.1) (2022-04-02)
 
 

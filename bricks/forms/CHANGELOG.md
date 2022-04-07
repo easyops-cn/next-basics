@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.214.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.214.3...@next-bricks/forms@1.214.4) (2022-04-07)
+
+
+### Bug Fixes
+
+* 去除下拉框打开时第一个选项的默认hover态 ([16c8be7](https://github.com/easyops-cn/next-basics/commit/16c8be735b3249abea64b8d6733311d38a97b567))
+
+
+
+
+
 ## [1.214.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.214.2...@next-bricks/forms@1.214.3) (2022-04-06)
 
 **Note:** Version bump only for package @next-bricks/forms

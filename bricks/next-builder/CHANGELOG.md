@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.131.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.130.2...@next-bricks/next-builder@1.131.0) (2022-04-07)
+
+
+### Features
+
+* support previewing template by settings ([5df1d51](https://github.com/easyops-cn/next-basics/commit/5df1d51d05a554958f47c11d2dc3fdf111cda28c))
+* support search in workbench tree ([91209f2](https://github.com/easyops-cn/next-basics/commit/91209f2280337ec90bd2ffa409b23c4e7b5e95aa))
+
+
+
+
+
 ## [1.130.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.130.1...@next-bricks/next-builder@1.130.2) (2022-04-06)
 
 

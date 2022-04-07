@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.3.1...@next-types/preview@1.4.0) (2022-04-07)
+
+
+### Features
+
+* support previewing template by settings ([5df1d51](https://github.com/easyops-cn/next-basics/commit/5df1d51d05a554958f47c11d2dc3fdf111cda28c))
+
+
+
+
+
 ## [1.3.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.3.0...@next-types/preview@1.3.1) (2022-04-02)
 
 
