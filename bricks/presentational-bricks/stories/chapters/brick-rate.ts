@@ -65,7 +65,7 @@ export const BrickRateStory: Story = {
         },
         colors: [
           "var(--color-warning)",
-          "var(--palette-Orange-6)",
+          "var(--palette-orange-6)",
           "var(--color-error)",
         ],
       },
@@ -87,7 +87,7 @@ export const BrickRateStory: Story = {
         },
         colors: [
           "var(--color-warning)",
-          "var(--palette-Orange-6)",
+          "var(--palette-orange-6)",
           "var(--color-error)",
         ],
         tooltips: ["第一级", "第二级", "第三级"],
