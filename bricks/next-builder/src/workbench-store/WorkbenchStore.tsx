@@ -18,11 +18,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { BuilderDataType } from "../builder-container/interfaces";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
-import {
-  sendHighlightBrick,
-  sendInitRootTpl,
-  useHighlightBrick,
-} from "./useHighlightBrick";
+import { sendHighlightBrick, useHighlightBrick } from "./useHighlightBrick";
 
 export interface WorkbenchStoreProps {
   dataSource?: BuilderRouteOrBrickNode[];
@@ -47,7 +43,6 @@ export function LegacyWorkbenchStore(
 ): React.ReactElement {
   const manager = useBuilderDataManager();
   const previewStart = useCallback(() => {
-    sendInitRootTpl(manager);
     sendHighlightBrick("active", manager.getActiveNodeUid(), manager);
   }, [manager]);
 
@@ -85,7 +80,6 @@ export function LegacyWorkbenchStore(
           ? new Map(templateSources.map((tpl) => [tpl.templateId, tpl]))
           : undefined
       );
-      sendInitRootTpl(manager);
     } else {
       // eslint-disable-next-line no-console
       console.error("Unexpected dataSource", dataSource);

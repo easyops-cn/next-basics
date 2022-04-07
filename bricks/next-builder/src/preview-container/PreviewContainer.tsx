@@ -17,12 +17,16 @@ import type {
   PreviewMessageContainerToggleInspecting,
   PreviewMessageFromContainer,
   PreviewMessageToContainer,
+  PreviewSettings,
 } from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
 
 export interface PreviewContainerProps {
   previewUrl: string;
+  appId?: string;
+  templateId?: string;
+  previewSettings: PreviewSettings;
   inspecting?: boolean;
   viewportWidth?: number;
   previewOnNewWindow?: boolean;
@@ -53,6 +57,9 @@ function sendToggleInspecting(
 export function LegacyPreviewContainer(
   {
     previewUrl,
+    appId,
+    templateId,
+    previewSettings,
     inspecting,
     viewportWidth,
     previewOnNewWindow,
@@ -90,10 +97,15 @@ export function LegacyPreviewContainer(
       {
         sender: "preview-container",
         type: "start-preview",
+        options: {
+          appId,
+          templateId,
+          settings: previewSettings,
+        },
       } as PreviewMessageContainerStartPreview,
       previewOrigin
     );
-  }, [previewOrigin]);
+  }, [appId, previewOrigin, previewSettings, templateId]);
 
   const [hoverIid, setHoverIid] = useState<string>();
   const [hoverAlias, setHoverAlias] = useState<string>();
@@ -101,8 +113,6 @@ export function LegacyPreviewContainer(
   const [activeAlias, setActiveAlias] = useState<string>();
   const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
   const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
-  const [rootTpl, setRootTpl] = useState<string>(null);
-  const [rootTplOutlines, setRootTplOutlines] = useState<BrickOutline[]>([]);
 
   useEffect(() => {
     // Active overrides hover.
@@ -135,9 +145,6 @@ export function LegacyPreviewContainer(
   const [adjustedActiveOutlines, setAdjustedActiveOutlines] = useState<
     BrickOutline[]
   >([]);
-  const [adjustedRootTplOutlines, setAdjustedRootTplOutlines] = useState<
-    BrickOutline[]
-  >([]);
 
   useEffect(() => {
     setAdjustedHoverOutlines(adjustOutlines(hoverOutlines));
@@ -147,10 +154,6 @@ export function LegacyPreviewContainer(
     setAdjustedActiveOutlines(adjustOutlines(activeOutlines));
   }, [activeOutlines, adjustOutlines]);
 
-  useEffect(() => {
-    setAdjustedRootTplOutlines(adjustOutlines(rootTplOutlines));
-  }, [rootTplOutlines, adjustOutlines]);
-
   const refresh = useCallback(
     (appId: string, storyboardPatch: Partial<Storyboard>) => {
       iframeRef.current.contentWindow.postMessage(
@@ -159,11 +162,13 @@ export function LegacyPreviewContainer(
           type: "refresh",
           appId,
           storyboardPatch,
+          templateId,
+          settings: previewSettings,
         } as PreviewMessageFromContainer,
         previewOrigin
       );
     },
-    [previewOrigin]
+    [previewOrigin, previewSettings, templateId]
   );
 
   const reload = useCallback(() => {
@@ -180,8 +185,6 @@ export function LegacyPreviewContainer(
     setActiveIid(null);
     setActiveAlias(null);
     setActiveOutlines([]);
-    setRootTpl(null);
-    setRootTplOutlines([]);
   }, [previewOrigin]);
 
   const handleUrlChange = useCallback(
@@ -207,11 +210,7 @@ export function LegacyPreviewContainer(
         return;
       }
       if (data.sender === "builder" && origin === location.origin) {
-        if (
-          data.type === "hover-on-brick" ||
-          data.type === "select-brick" ||
-          data.type === "init-root-tpl"
-        ) {
+        if (data.type === "hover-on-brick" || data.type === "select-brick") {
           // Send to preview.
           iframeRef.current.contentWindow.postMessage(
             {
@@ -236,10 +235,6 @@ export function LegacyPreviewContainer(
             break;
           case "scroll":
             setScroll(data.scroll);
-            break;
-          case "highlight-root-tpl":
-            setRootTpl(data.rootTpl);
-            setRootTplOutlines(data.outlines);
             break;
           case "highlight-brick":
             if (data.highlightType === "active") {
@@ -359,15 +354,6 @@ export function LegacyPreviewContainer(
               }
         }
       />
-      {adjustedRootTplOutlines.map((outline, index) => (
-        <BrickOutlineComponent
-          key={index}
-          alias={rootTpl}
-          type="rootTpl"
-          hidden={adjustedActiveOutlines.length > 0}
-          {...outline}
-        />
-      ))}
       {adjustedHoverOutlines.map((outline, index) => (
         <BrickOutlineComponent
           key={index}

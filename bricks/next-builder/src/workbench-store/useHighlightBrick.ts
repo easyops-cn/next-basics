@@ -6,7 +6,6 @@ import {
 } from "@next-core/editor-bricks-helper";
 import type {
   PreviewMessageBuilderHoverOnBrick,
-  PreviewMessageBuilderInitRootTpl,
   PreviewMessageBuilderSelectBrick,
 } from "@next-types/preview";
 
@@ -49,15 +48,4 @@ export function sendHighlightBrick(
     iid,
     alias,
   } as PreviewMessageBuilderHoverOnBrick | PreviewMessageBuilderSelectBrick);
-}
-
-export function sendInitRootTpl(manager: BuilderDataManager): void {
-  const { rootId, nodes } = manager.getData();
-  const root = nodes.find((node) => node.$$uid === rootId);
-  const rootTpl = root?.type === "custom-template" ? root.templateId : null;
-  window.postMessage({
-    sender: "builder",
-    type: "init-root-tpl",
-    rootTpl,
-  } as PreviewMessageBuilderInitRootTpl);
 }

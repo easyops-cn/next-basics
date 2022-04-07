@@ -10,6 +10,7 @@ import {
 } from "@next-core/brick-kit";
 import type { Storyboard } from "@next-core/brick-types";
 import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
+import { PreviewSettings } from "@next-types/preview";
 
 /**
  * @id next-builder.preview-container
@@ -22,6 +23,15 @@ import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
 export class PreviewContainerElement extends UpdatingElement {
   @property()
   previewUrl: string;
+
+  @property()
+  appId: string;
+
+  @property()
+  templateId: string;
+
+  @property({ attribute: false })
+  previewSettings: PreviewSettings;
 
   @property({ type: Boolean })
   inspecting: boolean;
@@ -76,6 +86,9 @@ export class PreviewContainerElement extends UpdatingElement {
           <PreviewContainer
             ref={this._previewContainerRef}
             previewUrl={this.previewUrl}
+            appId={this.appId}
+            templateId={this.templateId}
+            previewSettings={this.previewSettings}
             inspecting={this.inspecting}
             viewportWidth={this.viewportWidth}
             onPreviewStart={this._handlePreviewStart}

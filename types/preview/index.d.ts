@@ -1,7 +1,7 @@
 import type { Storyboard } from "@next-core/brick-types";
 
 export interface PreviewHelperBrick {
-  start(previewFromOrigin: string): void;
+  start(previewFromOrigin: string, options: unknown): void;
 }
 
 export interface PreviewBaseMessage {
@@ -24,12 +24,6 @@ export interface PreviewMessageBuilderSelectBrick
   type: "select-brick";
 }
 
-export interface PreviewMessageBuilderInitRootTpl extends PreviewBaseMessage {
-  sender: "builder";
-  type: "init-root-tpl";
-  rootTpl: string;
-}
-
 export interface HighlightBaseInfo {
   iid: string;
   alias: string;
@@ -39,7 +33,6 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
-  | PreviewMessagePreviewerHighlightRootTpl
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
@@ -49,7 +42,6 @@ export type PreviewMessageFromPreviewer =
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerBuilderSelectBrick
-  | PreviewMessageContainerBuilderInitRootTpl
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload;
@@ -66,11 +58,9 @@ export type PreviewMessageFromContainer =
 export type PreviewMessageToContainer =
   | PreviewMessageBuilderHoverOnBrick
   | PreviewMessageBuilderSelectBrick
-  | PreviewMessageBuilderInitRootTpl
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
-  | PreviewMessagePreviewerHighlightRootTpl
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
@@ -108,14 +98,6 @@ export interface PreviewMessagePreviewerHighlightBrick
   sender: "previewer";
   type: "highlight-brick";
   highlightType: "active" | "hover";
-  outlines: BrickOutline[];
-}
-
-export interface PreviewMessagePreviewerHighlightRootTpl
-  extends PreviewBaseMessage {
-  sender: "previewer";
-  type: "highlight-root-tpl";
-  rootTpl: string;
   outlines: BrickOutline[];
 }
 
@@ -168,6 +150,8 @@ export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {
   type: "refresh";
   appId: string;
   storyboardPatch: Partial<Storyboard>;
+  templateId?: string;
+  settings?: PreviewSettings;
 }
 
 export interface PreviewMessageContainerReload extends PreviewBaseMessage {
@@ -183,12 +167,6 @@ export interface PreviewMessageContainerBuilderHoverOnBrick
 
 export interface PreviewMessageContainerBuilderSelectBrick
   extends Omit<PreviewMessageBuilderSelectBrick, "sender"> {
-  sender: "preview-container";
-  forwardedFor: "builder";
-}
-
-export interface PreviewMessageContainerBuilderInitRootTpl
-  extends Omit<PreviewMessageBuilderInitRootTpl, "sender"> {
   sender: "preview-container";
   forwardedFor: "builder";
 }
@@ -222,4 +200,14 @@ export interface BrickOutline {
   height: number;
   left: number;
   top: number;
+}
+
+export interface PreviewStartOptions {
+  appId: string;
+  templateId: string;
+  settings?: PreviewSettings;
+}
+
+export interface PreviewSettings {
+  properties?: Record<string, unknown>;
 }
