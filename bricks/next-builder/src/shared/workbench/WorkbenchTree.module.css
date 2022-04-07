@@ -1,3 +1,7 @@
+.searchBox {
+  padding: 5px 10px;
+}
+
 .tree {
   list-style: none;
   margin: 0;
@@ -46,6 +50,10 @@
 
 .nodeLabelRow:focus .nodeLabel {
   color: #fff;
+}
+
+.nodeLabelRow.matched .nodeLabel {
+  color: var(--palette-orange-6);
 }
 
 .nodeLabelRow.active {

@@ -34,6 +34,9 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
   @property()
   placeholder: string;
 
+  @property()
+  searchPlaceholder: string;
+
   @property({ type: String })
   activeInstanceId: string;
 
@@ -72,6 +75,7 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
               <WorkbenchBrickTree
                 type={this.type}
                 placeholder={this.placeholder}
+                searchPlaceholder={this.searchPlaceholder}
                 activeInstanceId={this.activeInstanceId}
               />
             </WorkbenchActionsContext.Provider>

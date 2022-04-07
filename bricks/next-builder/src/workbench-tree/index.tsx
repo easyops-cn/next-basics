@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { pick } from "lodash";
 import {
   BrickWrapper,
   event,
@@ -15,6 +16,7 @@ import type {
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
+import { deepMatch } from "../builder-container/utils";
 
 /**
  * @id next-builder.workbench-tree
@@ -34,8 +36,17 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property()
   placeholder: string;
 
+  @property()
+  searchPlaceholder: string;
+
   @property({ attribute: false })
   activeKey: string | number;
+
+  @property({ type: Boolean })
+  showMatchedNodeOnly: boolean;
+
+  @property({ attribute: false })
+  matchNodeDataFields: string | string[];
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -79,12 +90,23 @@ export class WorkbenchTreeElement extends UpdatingElement {
               value={{
                 activeKey: this.activeKey,
                 basePaddingLeft: 5,
+                showMatchedNodeOnly: this.showMatchedNodeOnly,
                 clickFactory: this._nodeClickFactory,
+                matchNode: (node, lowerTrimmedQuery) =>
+                  deepMatch(node.name, lowerTrimmedQuery) ||
+                  (!!this.matchNodeDataFields?.length &&
+                    deepMatch(
+                      this.matchNodeDataFields === "*"
+                        ? node.data
+                        : pick(node.data, this.matchNodeDataFields),
+                      lowerTrimmedQuery
+                    )),
               }}
             >
               <WorkbenchTree
                 nodes={this.nodes}
                 placeholder={this.placeholder}
+                searchPlaceholder={this.searchPlaceholder}
               />
             </WorkbenchTreeContext.Provider>
           </WorkbenchActionsContext.Provider>

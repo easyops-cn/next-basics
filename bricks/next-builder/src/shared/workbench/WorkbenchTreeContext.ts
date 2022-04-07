@@ -5,10 +5,12 @@ export interface ContextOfWorkbenchTree {
   hoverKey?: string | number;
   activeKey?: string | number;
   basePaddingLeft?: number;
+  showMatchedNodeOnly?: boolean;
   clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
   contextMenuFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
+  matchNode?(node: WorkbenchNodeData, lowerTrimmedQuery?: string): boolean;
 }
 
 export const WorkbenchTreeContext = createContext<ContextOfWorkbenchTree>({});

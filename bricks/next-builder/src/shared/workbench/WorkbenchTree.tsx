@@ -1,6 +1,15 @@
 // istanbul ignore file
 // For temporary usage only, will change soon.
-import React, { useMemo, type ReactElement } from "react";
+import React, {
+  type ChangeEvent,
+  useCallback,
+  useMemo,
+  useState,
+  type ReactElement,
+  createContext,
+  useContext,
+} from "react";
+import { Input } from "antd";
 import { pick } from "lodash";
 import classNames from "classnames";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
@@ -9,12 +18,14 @@ import type { WorkbenchNodeData } from "./interfaces";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
 
 import styles from "./WorkbenchTree.module.css";
+import { SearchOutlined } from "@ant-design/icons";
 
 const treeLevelPadding = 10;
 
 export interface WorkbenchTreeProps {
   nodes: WorkbenchNodeData[];
   placeholder?: string;
+  searchPlaceholder?: string;
 }
 
 export interface TreeListProps {
@@ -22,13 +33,54 @@ export interface TreeListProps {
   level: number;
 }
 
+const SearchingContext = createContext(false);
+
 export function WorkbenchTree({
   nodes,
   placeholder,
+  searchPlaceholder,
 }: WorkbenchTreeProps): ReactElement {
+  const [q, setQ] = useState<string>(null);
+
+  const handleSearchChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setQ(event.target.value);
+    },
+    []
+  );
+
+  const { matchNode } = useWorkbenchTreeContext();
+
+  const trimmedLowerQ = q?.trim().toLowerCase();
+  const filteredNodes = useMemo(() => {
+    if (!trimmedLowerQ || !nodes) {
+      return nodes;
+    }
+    const walk = (node: WorkbenchNodeData): boolean => {
+      node.matchedSelf = matchNode(node, trimmedLowerQ);
+      const hasMatchedChildren = node.children?.map(walk).includes(true);
+      node.matched = node.matchedSelf || hasMatchedChildren;
+      return node.matched;
+    };
+    nodes.forEach(walk);
+    return nodes.slice();
+  }, [trimmedLowerQ, nodes, matchNode]);
+
   return nodes?.length ? (
-    <div className={styles.container}>
-      <TreeList nodes={nodes} level={1} />
+    <div>
+      <div className={styles.searchBox}>
+        <Input
+          value={q}
+          onChange={handleSearchChange}
+          size="small"
+          placeholder={searchPlaceholder}
+          prefix={<SearchOutlined />}
+          allowClear
+        />
+      </div>
+      <SearchingContext.Provider value={!!q}>
+        <TreeList nodes={filteredNodes} level={1} />
+      </SearchingContext.Provider>
     </div>
   ) : (
     <div className={styles.placeholder}>{placeholder}</div>
@@ -56,11 +108,13 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
     hoverKey,
     activeKey,
     basePaddingLeft,
+    showMatchedNodeOnly,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
     contextMenuFactory,
   } = useWorkbenchTreeContext();
+  const searching = useContext(SearchingContext);
 
   const onClick = useMemo(() => clickFactory?.(node), [clickFactory, node]);
 
@@ -96,12 +150,18 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
     []
   );
 
+  if (searching && showMatchedNodeOnly && !node.matched) {
+    return null;
+  }
+
   return (
     <li>
       <Link
         className={classNames(styles.nodeLabelRow, {
           [styles.active]: isActive,
           [styles.hover]: hoverKey && node.key === hoverKey,
+          [styles.matched]:
+            searching && node.matchedSelf && !showMatchedNodeOnly,
         })}
         tabIndex={0}
         onMouseEnter={onMouseEnter}
