@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.4.0...@next-types/preview@1.4.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* trigger re-computing active/hover node outlines ([ceb4858](https://github.com/easyops-cn/next-basics/commit/ceb4858f5ec96304f52260c77bbea0452e344c64))
+
+
+
+
+
 # [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.3.1...@next-types/preview@1.4.0) (2022-04-07)
 
 

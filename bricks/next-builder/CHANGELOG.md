@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.133.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.133.0...@next-bricks/next-builder@1.133.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* trigger re-computing active/hover node outlines ([ceb4858](https://github.com/easyops-cn/next-basics/commit/ceb4858f5ec96304f52260c77bbea0452e344c64))
+
+
+
+
+
 # [1.133.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.132.0...@next-bricks/next-builder@1.133.0) (2022-04-08)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.1.0...@next-bricks/next-previewer@1.1.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* observe mutations and re-sending hover/active brick outlines ([f8d43a1](https://github.com/easyops-cn/next-basics/commit/f8d43a15a7c5a3cdd58c6c1132931955114ace2c))
+* trigger re-computing active/hover node outlines ([ceb4858](https://github.com/easyops-cn/next-basics/commit/ceb4858f5ec96304f52260c77bbea0452e344c64))
+
+
+
+
+
 # [1.1.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@0.7.0...@next-bricks/next-previewer@1.1.0) (2022-04-08)
 
 
