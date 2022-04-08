@@ -9,8 +9,8 @@ import {
   method,
 } from "@next-core/brick-kit";
 import type { Storyboard } from "@next-core/brick-types";
-import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
 import { PreviewSettings } from "@next-types/preview";
+import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
 
 /**
  * @id next-builder.preview-container
@@ -56,6 +56,13 @@ export class PreviewContainerElement extends UpdatingElement {
     this._urlChangeEvent.emit(url);
   };
 
+  @event({ type: "scale.change" })
+  private _scaleChangeEvent: EventEmitter<number>;
+
+  private _handleScaleChange = (scale: number): void => {
+    this._scaleChangeEvent.emit(scale);
+  };
+
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
@@ -97,6 +104,7 @@ export class PreviewContainerElement extends UpdatingElement {
             viewportHeight={this.viewportHeight}
             onPreviewStart={this._handlePreviewStart}
             onUrlChange={this._handleUrlChange}
+            onScaleChange={this._handleScaleChange}
           />
         </BrickWrapper>,
         this
