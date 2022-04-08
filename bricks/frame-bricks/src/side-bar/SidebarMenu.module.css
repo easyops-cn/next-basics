@@ -116,7 +116,7 @@
 
   .subMenuWrapper {
     &:global(.ant-menu-submenu-active) {
-      :global(.ant-menu-submenu-title) {
+      > :global(.ant-menu-submenu-title) {
         background: var(--palette-gray-4);
         border-radius: var(--larger-border-radius);
       }
@@ -148,6 +148,17 @@
 
     :global(.ant-menu-sub) {
       background: transparent !important;
+    }
+    .subMenuWrapper {
+      .subMenuTitleText {
+        margin-left: 18px;
+      }
+      :global(.ant-menu-submenu-title) {
+        padding: 0 28px 0 22px !important;
+      }
+      .simpleMenuItem {
+        padding-left: 52px !important;
+      }
     }
   }
 
