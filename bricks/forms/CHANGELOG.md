@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.215.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.214.4...@next-bricks/forms@1.215.0) (2022-04-08)
+
+
+### Features
+
+* **general-switch:** add checkedText unCheckedText checkedIcon and unCheckedIcon properties ([a720c19](https://github.com/easyops-cn/next-basics/commit/a720c19878e04c7c39f708968d32c6e2b25d1789))
+
+
+
+
+
 ## [1.214.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.214.3...@next-bricks/forms@1.214.4) (2022-04-07)
 
 
