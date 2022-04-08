@@ -229,7 +229,6 @@ export function LegacyPreviewContainer(
         switch (data.type) {
           case "hover-on-brick":
           case "select-brick":
-          case "resize":
             // Send to builder.
             openerWindow.postMessage({
               ...data,
@@ -318,29 +317,32 @@ export function LegacyPreviewContainer(
 
   // istanbul ignore next
   useEffect(() => {
-    if (!viewportWidth) {
-      setScaleX(1);
-    }
-    if (!viewportHeight) {
-      setScaleY(1);
-    }
-    if (containerRef.current && (viewportWidth || viewportHeight)) {
+    if (containerRef.current) {
       const computeScale = (): void => {
-        if (viewportWidth) {
-          setScaleX(containerRef.current.offsetWidth / viewportWidth);
-        }
-        if (viewportHeight) {
-          setScaleY(containerRef.current.offsetHeight / viewportHeight);
-        }
+        setScaleX(
+          viewportWidth ? containerRef.current.offsetWidth / viewportWidth : 1
+        );
+        setScaleY(
+          viewportHeight
+            ? containerRef.current.offsetHeight / viewportHeight
+            : 1
+        );
       };
       computeScale();
-      const resizeObserver = new ResizeObserver(computeScale);
+      const resizeObserver = new ResizeObserver(() => {
+        computeScale();
+        // Trigger re-computing active/hover node outlines, after the container resized.
+        openerWindow.postMessage({
+          type: "resize",
+          sender: "preview-container",
+        } as PreviewMessageFromContainer);
+      });
       resizeObserver.observe(containerRef.current);
       return () => {
         resizeObserver.disconnect();
       };
     }
-  }, [viewportWidth, viewportHeight]);
+  }, [viewportWidth, viewportHeight, openerWindow]);
 
   useEffect(() => {
     onScaleChange?.(minScale);

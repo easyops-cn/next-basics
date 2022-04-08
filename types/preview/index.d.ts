@@ -36,8 +36,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
-  | PreviewMessagePreviewerScroll
-  | PreviewMessagePreviewerResize;
+  | PreviewMessagePreviewerScroll;
 
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnBrick
@@ -51,9 +50,9 @@ export type PreviewMessageFromContainer =
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
   | PreviewMessageContainerPreviewerContextMenuOnBrick
-  | PreviewMessageContainerPreviewerResize
   | PreviewMessageContainerRefresh
-  | PreviewMessageContainerReload;
+  | PreviewMessageContainerReload
+  | PreviewMessageContainerResize;
 
 export type PreviewMessageToContainer =
   | PreviewMessageBuilderHoverOnBrick
@@ -64,14 +63,13 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
-  | PreviewMessagePreviewerScroll
-  | PreviewMessagePreviewerResize;
+  | PreviewMessagePreviewerScroll;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
   | PreviewMessageContainerPreviewerContextMenuOnBrick
-  | PreviewMessageContainerPreviewerResize;
+  | PreviewMessageContainerResize;
 
 export interface PreviewMessagePreviewerPreviewStarted
   extends PreviewBaseMessage {
@@ -127,11 +125,6 @@ export interface PreviewMessagePreviewerScroll extends PreviewBaseMessage {
   };
 }
 
-export interface PreviewMessagePreviewerResize extends PreviewBaseMessage {
-  sender: "previewer";
-  type: "resize";
-}
-
 export interface PreviewMessageContainerStartPreview
   extends PreviewBaseMessage {
   sender: "preview-container";
@@ -157,6 +150,11 @@ export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {
 export interface PreviewMessageContainerReload extends PreviewBaseMessage {
   sender: "preview-container";
   type: "reload";
+}
+
+export interface PreviewMessageContainerResize extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "resize";
 }
 
 export interface PreviewMessageContainerBuilderHoverOnBrick
@@ -185,12 +183,6 @@ export interface PreviewMessageContainerPreviewerSelectBrick
 
 export interface PreviewMessageContainerPreviewerContextMenuOnBrick
   extends Omit<PreviewMessagePreviewerContextMenuOnBrick, "sender"> {
-  sender: "preview-container";
-  forwardedFor: "previewer";
-}
-
-export interface PreviewMessageContainerPreviewerResize
-  extends Omit<PreviewMessagePreviewerResize, "sender"> {
   sender: "preview-container";
   forwardedFor: "previewer";
 }
