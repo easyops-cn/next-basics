@@ -33,6 +33,7 @@ export interface PreviewContainerProps {
   previewOnNewWindow?: boolean;
   onPreviewStart?(): void;
   onUrlChange?(url: string): void;
+  onScaleChange?(scale: number): void;
 }
 
 export interface PreviewContainerRef {
@@ -67,6 +68,7 @@ export function LegacyPreviewContainer(
     previewOnNewWindow,
     onPreviewStart,
     onUrlChange,
+    onScaleChange,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -74,7 +76,7 @@ export function LegacyPreviewContainer(
   const containerRef = useRef<HTMLDivElement>();
   const [scaleX, setScaleX] = useState(1);
   const [scaleY, setScaleY] = useState(1);
-  const minScale = Math.min(scaleX, scaleY);
+  const minScale = Math.min(scaleX, scaleY, 1);
 
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
@@ -131,12 +133,11 @@ export function LegacyPreviewContainer(
     (outlines: BrickOutline[]): BrickOutline[] => {
       const offsetLeft = iframeRef.current.offsetLeft;
       const offsetTop = iframeRef.current.offsetTop;
-      const adjustedScale = Math.min(minScale, 1);
       return outlines.map(({ width, height, left, top }) => ({
-        width: width * adjustedScale,
-        height: height * adjustedScale,
-        left: (left - scroll.x) * adjustedScale + offsetLeft,
-        top: (top - scroll.y) * adjustedScale + offsetTop,
+        width: width * minScale,
+        height: height * minScale,
+        left: (left - scroll.x) * minScale + offsetLeft,
+        top: (top - scroll.y) * minScale + offsetTop,
       }));
     },
     [minScale, scroll.x, scroll.y]
@@ -341,21 +342,18 @@ export function LegacyPreviewContainer(
     }
   }, [viewportWidth, viewportHeight]);
 
+  useEffect(() => {
+    onScaleChange?.(minScale);
+  }, [minScale, onScaleChange]);
+
   return (
     <div className={styles.previewContainer} ref={containerRef}>
       <div
         className={styles.iframeContainer}
-        style={
-          minScale >= 1
-            ? {
-                width: viewportWidth || "100%",
-                height: viewportHeight || "100%",
-              }
-            : {
-                width: minScale * viewportWidth || "100%",
-                height: minScale * viewportHeight || "100%",
-              }
-        }
+        style={{
+          width: minScale * viewportWidth || "100%",
+          height: minScale * viewportHeight || "100%",
+        }}
       >
         <iframe
           className={styles.iframe}
@@ -363,19 +361,11 @@ export function LegacyPreviewContainer(
           ref={iframeRef}
           onLoad={handleIframeLoad}
           onMouseOut={handleMouseOut}
-          style={
-            minScale >= 1
-              ? {
-                  width: viewportWidth || "100%",
-                  height: viewportHeight || "100%",
-                  transform: "initial",
-                }
-              : {
-                  width: viewportWidth || `${100 / minScale}%`,
-                  height: viewportHeight || `${100 / minScale}%`,
-                  transform: `scale(${minScale})`,
-                }
-          }
+          style={{
+            width: viewportWidth || `${100 / minScale}%`,
+            height: viewportHeight || `${100 / minScale}%`,
+            transform: `scale(${minScale})`,
+          }}
         />
       </div>
       {adjustedHoverOutlines.map((outline, index) => (
