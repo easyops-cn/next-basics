@@ -9,6 +9,7 @@ import type {
   PreviewMessageToPreviewer,
   PreviewStartOptions,
 } from "@next-types/preview";
+import { throttle } from "lodash";
 import {
   setPreviewFromOrigin,
   startInspecting,
@@ -41,6 +42,26 @@ export function previewStart(
   sendMessage({ type: "preview-started" });
   setPreviewFromOrigin(previewFromOrigin);
 
+  let hoverIid: string;
+  let hoverAlias: string;
+  let activeIid: string;
+  let activeAlias: string;
+
+  const sendHighlightBrickOutlines = (
+    type: "hover" | "active",
+    iid: string,
+    alias: string
+  ): void => {
+    const outlines = getBrickOutlines(iid);
+    sendMessage<PreviewMessagePreviewerHighlightBrick>({
+      type: "highlight-brick",
+      highlightType: type,
+      outlines,
+      iid: iid,
+      alias: alias,
+    });
+  };
+
   window.addEventListener(
     "message",
     ({ data, origin }: MessageEvent<PreviewMessageToPreviewer>) => {
@@ -51,39 +72,39 @@ export function previewStart(
       ) {
         return;
       }
-      switch (data.type) {
-        case "hover-on-brick":
-        case "select-brick":
-          if (data.forwardedFor === "builder") {
-            const outlines = getBrickOutlines(data.iid);
-            sendMessage<PreviewMessagePreviewerHighlightBrick>({
-              type: "highlight-brick",
-              highlightType:
-                data.type === "hover-on-brick" ? "hover" : "active",
-              outlines,
-              iid: data.iid,
-              alias: data.alias,
-            });
-          }
-          break;
-        case "toggle-inspecting":
-          data.enabled ? startInspecting() : stopInspecting();
-          break;
-        case "refresh":
-          developHelper.updateStoryboard(data.appId, data.storyboardPatch);
-          if (data.templateId) {
-            developHelper.updateTemplatePreviewSettings(
-              data.appId,
-              data.templateId,
-              data.settings
-            );
-          }
-          getHistory().reload();
-          break;
-        case "reload":
-          location.reload();
-          break;
-      }
+      if (data.forwardedFor === "builder") {
+        switch (data.type) {
+          case "hover-on-brick":
+            hoverIid = data.iid;
+            hoverAlias = data.alias;
+            sendHighlightBrickOutlines("hover", data.iid, data.alias);
+            break;
+          case "select-brick":
+            activeIid = data.iid;
+            activeAlias = data.alias;
+            sendHighlightBrickOutlines("active", data.iid, data.alias);
+            break;
+        }
+      } else
+        switch (data.type) {
+          case "toggle-inspecting":
+            data.enabled ? startInspecting() : stopInspecting();
+            break;
+          case "refresh":
+            developHelper.updateStoryboard(data.appId, data.storyboardPatch);
+            if (data.templateId) {
+              developHelper.updateTemplatePreviewSettings(
+                data.appId,
+                data.templateId,
+                data.settings
+              );
+            }
+            getHistory().reload();
+            break;
+          case "reload":
+            location.reload();
+            break;
+        }
     }
   );
 
@@ -118,6 +139,19 @@ export function previewStart(
     );
     getHistory().reload();
   }
+
+  const mutationCallback = (): void => {
+    if (hoverIid) {
+      sendHighlightBrickOutlines("hover", hoverIid, hoverAlias);
+    }
+    if (activeIid) {
+      sendHighlightBrickOutlines("active", activeIid, activeAlias);
+    }
+  };
+  const mutationObserver = new MutationObserver(
+    throttle(mutationCallback, 100, { leading: false })
+  );
+  mutationObserver.observe(document.body, { subtree: true, childList: true });
 }
 
 function getBrickOutlines(iid: string): BrickOutline[] {
