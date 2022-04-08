@@ -39,6 +39,9 @@ export class PreviewContainerElement extends UpdatingElement {
   @property({ type: Number })
   viewportWidth: number;
 
+  @property({ type: Number })
+  viewportHeight: number;
+
   @event({ type: "preview.start" })
   private _previewStartEvent: EventEmitter<void>;
 
@@ -91,6 +94,7 @@ export class PreviewContainerElement extends UpdatingElement {
             previewSettings={this.previewSettings}
             inspecting={this.inspecting}
             viewportWidth={this.viewportWidth}
+            viewportHeight={this.viewportHeight}
             onPreviewStart={this._handlePreviewStart}
             onUrlChange={this._handleUrlChange}
           />
