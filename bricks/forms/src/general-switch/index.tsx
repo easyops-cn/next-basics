@@ -8,6 +8,7 @@ import {
 } from "@next-core/brick-kit";
 import { GeneralSwitch } from "./GeneralSwitch";
 import { FormItemElement } from "@next-libs/forms";
+import { MenuIcon } from "@next-core/brick-types";
 
 /**
  * @id forms.general-switch
@@ -65,6 +66,34 @@ export class GeneralSwitchElement extends FormItemElement {
   size: "default" | "small" = "default";
 
   /**
+   * @required false
+   * @description 选中时的图标
+   */
+  @property({ attribute: false })
+  checkedIcon: MenuIcon;
+
+  /**
+   * @required false
+   * @description 非选中时的图标
+   */
+  @property({ attribute: false })
+  unCheckedIcon: MenuIcon;
+
+  /**
+   * @required false
+   * @description 选中时的文本
+   */
+  @property({ attribute: false })
+  checkedText: string;
+
+  /**
+   * @required false
+   * @description 非选中时的文本
+   */
+  @property({ attribute: false })
+  unCheckedText: string;
+
+  /**
    * @detail `boolean`
    * @description 开关改变时触发, `event.detail` 为当前选择的值
    */
@@ -97,6 +126,10 @@ export class GeneralSwitchElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             disabled={this.disabled}
+            checkedIcon={this.checkedIcon}
+            unCheckedIcon={this.unCheckedIcon}
+            checkedText={this.checkedText}
+            unCheckedText={this.unCheckedText}
           />
         </BrickWrapper>,
         this
