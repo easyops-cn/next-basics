@@ -29,6 +29,7 @@ export interface PreviewContainerProps {
   previewSettings: PreviewSettings;
   inspecting?: boolean;
   viewportWidth?: number;
+  viewportHeight?: number;
   previewOnNewWindow?: boolean;
   onPreviewStart?(): void;
   onUrlChange?(url: string): void;
@@ -62,6 +63,7 @@ export function LegacyPreviewContainer(
     previewSettings,
     inspecting,
     viewportWidth,
+    viewportHeight,
     previewOnNewWindow,
     onPreviewStart,
     onUrlChange,
@@ -70,7 +72,9 @@ export function LegacyPreviewContainer(
 ): React.ReactElement {
   const iframeRef = useRef<HTMLIFrameElement>();
   const containerRef = useRef<HTMLDivElement>();
-  const [scale, setScale] = useState(1);
+  const [scaleX, setScaleX] = useState(1);
+  const [scaleY, setScaleY] = useState(1);
+  const minScale = Math.min(scaleX, scaleY);
 
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
@@ -125,18 +129,17 @@ export function LegacyPreviewContainer(
 
   const adjustOutlines = useCallback(
     (outlines: BrickOutline[]): BrickOutline[] => {
-      const padding = 2;
-      const border = 1;
-      const offsetLeft = scale > 1 ? iframeRef.current.offsetLeft : padding;
-      const adjustedScale = Math.min(scale, 1);
+      const offsetLeft = iframeRef.current.offsetLeft;
+      const offsetTop = iframeRef.current.offsetTop;
+      const adjustedScale = Math.min(minScale, 1);
       return outlines.map(({ width, height, left, top }) => ({
         width: width * adjustedScale,
         height: height * adjustedScale,
-        left: (left - scroll.x) * adjustedScale + offsetLeft + border,
-        top: (top - scroll.y) * adjustedScale + padding + border,
+        left: (left - scroll.x) * adjustedScale + offsetLeft,
+        top: (top - scroll.y) * adjustedScale + offsetTop,
       }));
     },
-    [scale, scroll.x, scroll.y]
+    [minScale, scroll.x, scroll.y]
   );
 
   const [adjustedHoverOutlines, setAdjustedHoverOutlines] = useState<
@@ -249,7 +252,7 @@ export function LegacyPreviewContainer(
             break;
           case "context-menu-on-brick": {
             const box = iframeRef.current.getBoundingClientRect();
-            const maxScale = scale > 1 ? 1 : scale;
+            const maxScale = scaleX > 1 ? 1 : scaleX;
             // Send to builder.
             openerWindow.postMessage({
               ...data,
@@ -284,7 +287,7 @@ export function LegacyPreviewContainer(
     openerWindow,
     previewOrigin,
     sameOriginWithOpener,
-    scale,
+    scaleX,
     inspecting,
   ]);
 
@@ -299,24 +302,35 @@ export function LegacyPreviewContainer(
       return null;
     }
     return () => {
-      openerWindow.postMessage({
-        sender: "preview-container",
-        forwardedFor: "previewer",
-        type: "hover-on-brick",
-        iidList: [],
-      } as PreviewMessageFromContainer);
+      // Delay posting message to allow iframe inner hovering message be sent before
+      // mouse out from iframe itself.
+      setTimeout(() => {
+        openerWindow.postMessage({
+          sender: "preview-container",
+          forwardedFor: "previewer",
+          type: "hover-on-brick",
+          iidList: [],
+        } as PreviewMessageFromContainer);
+      }, 100);
     };
   }, [openerWindow, previewStarted]);
 
   // istanbul ignore next
   useEffect(() => {
     if (!viewportWidth) {
-      setScale(1);
-      return;
+      setScaleX(1);
     }
-    if (containerRef.current) {
+    if (!viewportHeight) {
+      setScaleY(1);
+    }
+    if (containerRef.current && (viewportWidth || viewportHeight)) {
       const computeScale = (): void => {
-        setScale(containerRef.current.offsetWidth / viewportWidth);
+        if (viewportWidth) {
+          setScaleX(containerRef.current.offsetWidth / viewportWidth);
+        }
+        if (viewportHeight) {
+          setScaleY(containerRef.current.offsetHeight / viewportHeight);
+        }
       };
       computeScale();
       const resizeObserver = new ResizeObserver(computeScale);
@@ -325,35 +339,45 @@ export function LegacyPreviewContainer(
         resizeObserver.disconnect();
       };
     }
-  }, [viewportWidth]);
+  }, [viewportWidth, viewportHeight]);
 
   return (
-    <div
-      className={classNames(styles.previewContainer, {
-        [styles.oversized]: scale > 1,
-      })}
-      ref={containerRef}
-    >
-      <iframe
-        className={styles.iframe}
-        src={previewUrl}
-        ref={iframeRef}
-        onLoad={handleIframeLoad}
-        onMouseOut={handleMouseOut}
+    <div className={styles.previewContainer} ref={containerRef}>
+      <div
+        className={styles.iframeContainer}
         style={
-          scale > 1
+          minScale >= 1
             ? {
-                width: viewportWidth,
-                height: "100%",
-                transform: `initial`,
+                width: viewportWidth || "100%",
+                height: viewportHeight || "100%",
               }
             : {
-                width: `${100 / scale}%`,
-                height: `${100 / scale}%`,
-                transform: `scale(${scale})`,
+                width: minScale * viewportWidth || "100%",
+                height: minScale * viewportHeight || "100%",
               }
         }
-      />
+      >
+        <iframe
+          className={styles.iframe}
+          src={previewUrl}
+          ref={iframeRef}
+          onLoad={handleIframeLoad}
+          onMouseOut={handleMouseOut}
+          style={
+            minScale >= 1
+              ? {
+                  width: viewportWidth || "100%",
+                  height: viewportHeight || "100%",
+                  transform: "initial",
+                }
+              : {
+                  width: viewportWidth || `${100 / minScale}%`,
+                  height: viewportHeight || `${100 / minScale}%`,
+                  transform: `scale(${minScale})`,
+                }
+          }
+        />
+      </div>
       {adjustedHoverOutlines.map((outline, index) => (
         <BrickOutlineComponent
           key={index}
