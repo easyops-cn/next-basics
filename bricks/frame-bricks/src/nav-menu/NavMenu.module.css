@@ -139,7 +139,7 @@
     height: 28px;
     line-height: 28px;
     :global(.ant-menu-submenu-title) {
-      padding: 0px 24px 0px 14px;
+      padding: 0px 24px 0px 8px;
       margin: 2px;
       font-size: 14px;
       color: var(--color-normal-text);
