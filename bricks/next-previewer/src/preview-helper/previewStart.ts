@@ -4,7 +4,6 @@ import type {
   BrickOutline,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerHighlightBrick,
-  PreviewMessagePreviewerResize,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
@@ -95,12 +94,6 @@ export function previewStart(
         x: window.scrollX,
         y: window.scrollY,
       },
-    });
-  });
-
-  window.addEventListener("resize", () => {
-    sendMessage<PreviewMessagePreviewerResize>({
-      type: "resize",
     });
   });
 

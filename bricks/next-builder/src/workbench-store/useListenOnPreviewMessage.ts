@@ -15,9 +15,16 @@ export function useListenOnPreviewMessage(manager: BuilderDataManager): void {
       if (
         origin !== location.origin ||
         !data ||
-        data.sender !== "preview-container" ||
-        data.forwardedFor !== "previewer"
+        data.sender !== "preview-container"
       ) {
+        return;
+      }
+      if (data.type === "resize") {
+        // Re-send highlight message to trigger resizing brick outline.
+        sendHighlightBrick("active", manager.getActiveNodeUid(), manager);
+        sendHighlightBrick("hover", manager.getHoverNodeUid(), manager);
+      }
+      if (data.forwardedFor !== "previewer") {
         return;
       }
       switch (data.type) {
@@ -45,11 +52,6 @@ export function useListenOnPreviewMessage(manager: BuilderDataManager): void {
           }
           break;
         }
-        case "resize":
-          // Re-send highlight message to trigger resizing brick outline.
-          sendHighlightBrick("active", manager.getActiveNodeUid(), manager);
-          sendHighlightBrick("hover", manager.getHoverNodeUid(), manager);
-          break;
       }
     };
     window.addEventListener("message", listener);
