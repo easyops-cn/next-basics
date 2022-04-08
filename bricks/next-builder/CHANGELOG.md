@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.132.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.131.1...@next-bricks/next-builder@1.132.0) (2022-04-08)
+
+
+### Features
+
+* **workbench:** support setting viewport size ([1ced158](https://github.com/easyops-cn/next-basics/commit/1ced1580ab0c63c544300cd428d5c3e9d6d7fe0e))
+
+
+
+
+
 ## [1.131.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.131.0...@next-bricks/next-builder@1.131.1) (2022-04-07)
 
 
