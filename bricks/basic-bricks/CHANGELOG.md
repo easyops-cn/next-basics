@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.174.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.2...@next-bricks/basic-bricks@1.174.3) (2022-04-08)
+
+
+### Bug Fixes
+
+* wrap desktop selector ([d88e3a5](https://github.com/easyops-cn/next-basics/commit/d88e3a58f7e6f79c9a033a83854f7f4aa2fee954))
+
+
+
+
+
 ## [1.174.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.1...@next-bricks/basic-bricks@1.174.2) (2022-04-06)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

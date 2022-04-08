@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.8.2...@next-bricks/frame-bricks@0.8.3) (2022-04-08)
+
+**Note:** Version bump only for package @next-bricks/frame-bricks
+
+
+
+
+
 ## [0.8.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@0.8.1...@next-bricks/frame-bricks@0.8.2) (2022-04-06)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
