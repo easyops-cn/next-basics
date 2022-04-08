@@ -91,12 +91,6 @@ describe("NavMenu", () => {
     expect(wrapper.find(Menu.SubMenu).length).toBe(2);
 
     expect(wrapper.find(Menu.Item).length).toBe(2);
-
-    wrapper.find(Menu.Item).last().simulate("click");
-
-    wrapper.update();
-
-    expect(wrapper.find(Menu).prop("selectedKeys")).toEqual(["3"]);
   });
 
   it("should work while customItem was true", () => {

@@ -128,7 +128,6 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       mode="horizontal"
       selectedKeys={selectedKey}
       className={style.navMenuContainer}
-      onClick={(e) => setSelectedKey([e.key as string])}
     >
       {menuItems.map((item) => renderMenuItem(item, true))}
     </Menu>
