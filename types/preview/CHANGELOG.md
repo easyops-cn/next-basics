@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.4.1...@next-types/preview@1.5.0) (2022-04-11)
+
+
+### Features
+
+* do not inspect when route is not matching ([73af2da](https://github.com/easyops-cn/next-basics/commit/73af2da0cf0a5097e7cf44b2c5fa99df03a22291))
+
+
+
+
+
 ## [1.4.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.4.0...@next-types/preview@1.4.1) (2022-04-08)
 
 
