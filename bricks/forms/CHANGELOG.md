@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.215.0...@next-bricks/forms@1.215.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **crontab-input:** 适配暗色模式 ([b826cbf](https://github.com/easyops-cn/next-basics/commit/b826cbfac7e76fff48cdb0c65eda8c2574c3fb4e))
+
+
+
+
+
 # [1.215.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.214.4...@next-bricks/forms@1.215.0) (2022-04-08)
 
 

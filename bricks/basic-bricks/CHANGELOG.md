@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.174.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.3...@next-bricks/basic-bricks@1.174.4) (2022-04-11)
+
+
+### Bug Fixes
+
+* **general-card:** 适配暗色模式 ([301f37a](https://github.com/easyops-cn/next-basics/commit/301f37a33f08de23ae640a15ca89b587c8010f30))
+
+
+
+
+
 ## [1.174.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.2...@next-bricks/basic-bricks@1.174.3) (2022-04-08)
 
 
