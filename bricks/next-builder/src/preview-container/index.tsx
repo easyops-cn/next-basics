@@ -30,6 +30,12 @@ export class PreviewContainerElement extends UpdatingElement {
   @property()
   templateId: string;
 
+  @property()
+  routePath: string;
+
+  @property({ type: Boolean })
+  routeExact: boolean;
+
   @property({ attribute: false })
   previewSettings: PreviewSettings;
 
@@ -98,6 +104,8 @@ export class PreviewContainerElement extends UpdatingElement {
             previewUrl={this.previewUrl}
             appId={this.appId}
             templateId={this.templateId}
+            routePath={this.routePath}
+            routeExact={this.routeExact}
             previewSettings={this.previewSettings}
             inspecting={this.inspecting}
             viewportWidth={this.viewportWidth}
