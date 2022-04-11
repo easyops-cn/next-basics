@@ -425,6 +425,8 @@ describe("BuilderContextMenu", () => {
       sourceId: "B-007",
       nodeType: "brick",
       nodeAlias: "my-brick",
+      sourceInstanceId: "abc",
+      sourceProjectInstanceId: "project-a",
     };
     mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
@@ -448,6 +450,8 @@ describe("BuilderContextMenu", () => {
     expect(onNodeCopyPaste).toBeCalledWith({
       sourceId: "B-007",
       targetId: "B-001",
+      sourceInstanceId: "abc",
+      sourceProjectInstanceId: "project-a",
     });
   });
 
@@ -456,6 +460,7 @@ describe("BuilderContextMenu", () => {
       type: BuilderClipboardType.CUT,
       sourceInstanceId: "instance-b",
       nodeType: "brick",
+      sourceProjectInstanceId: "project-a",
     };
     mockUseBuilderContextMenuStatus.mockReturnValue({
       active: true,
@@ -479,6 +484,7 @@ describe("BuilderContextMenu", () => {
     expect(onNodeCutPaste).toBeCalledWith({
       sourceInstanceId: "instance-b",
       targetInstanceId: "instance-a",
+      sourceProjectInstanceId: "project-a",
     });
   });
 

@@ -5,7 +5,7 @@ export function getBaseGraphParams({
   objectId,
   extraQuery,
 }: {
-  projectId: string;
+  projectId?: string;
   objectId: string;
   extraQuery?: Record<string, unknown>;
 }): InstanceGraphApi_TraverseGraphV2RequestBody {
