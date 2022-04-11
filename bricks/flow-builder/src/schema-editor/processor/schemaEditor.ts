@@ -181,7 +181,7 @@ export function collectFields(
 
     result.push(property);
 
-    if (item.fields && item.type?.includes("object")) {
+    if (item.fields && allowExpandFields(item.type)) {
       // 只有 object/object[] 类型的 fields 才需要提交, 其他 fields 仅为前台引用模型展示用
       property.fields = [];
       collectFields(
@@ -249,4 +249,8 @@ export function calcModelDefinition(item: SchemaItemProperty): string {
   if (item.ref) return extractRefType(item.ref);
 
   return extractType(item.type);
+}
+
+export function allowExpandFields(type: string): boolean {
+  return type === "object" || type === "object[]";
 }
