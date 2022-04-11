@@ -8,6 +8,7 @@ import {
   processFormData,
   getRefRequiredFields,
   filterTitleList,
+  allowExpandFields,
 } from "./schemaEditor";
 import { ProcessValidateField } from "../components/field-validator-item/FieldValidatorItem";
 import { ContractContext } from "../ContractContext";
@@ -683,5 +684,10 @@ describe("processor tst", () => {
 
       expect(result).toEqual(undefined);
     });
+  });
+
+  describe("allowExpandFields", () => {
+    expect(allowExpandFields("object")).toEqual(true);
+    expect(allowExpandFields("object[]")).toEqual(true);
   });
 });

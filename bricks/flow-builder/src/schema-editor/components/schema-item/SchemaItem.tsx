@@ -16,6 +16,7 @@ import {
   isModelDefinition,
   calcModelDefinition,
   getModelRefData,
+  allowExpandFields,
 } from "../../processor";
 import { titleList, EditorContext, rootTraceId } from "../../constants";
 import styles from "./SchemaItem.module.css";
@@ -226,7 +227,7 @@ export function SchemaItem({
           disabledModelType={disabledModelType}
         />
       ))}
-      {!readonly && itemData.type?.includes("object") && (
+      {!readonly && allowExpandFields(itemData.type) && (
         <div
           style={{ paddingLeft: 20 + offsetPadding }}
           hidden={isModelDefinitionRow}
