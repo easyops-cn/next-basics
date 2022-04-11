@@ -1,5 +1,5 @@
 .calendar {
-  background: #fff;
+  background: var(--antd-component-background);
   display: inline-block;
   vertical-align: top;
 
@@ -42,7 +42,7 @@
           padding-right: 0;
           text-align: center;
           height: 30px;
-          color: #000000d9;
+          color: var(--color-header-text);
         }
 
         tbody td {

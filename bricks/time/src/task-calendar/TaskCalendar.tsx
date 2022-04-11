@@ -131,7 +131,7 @@ export function TaskCalendar(props: TaskCalendarProps): React.ReactElement {
           })}
           style={{
             borderColor: date.isSame(selectedData.date, "date")
-              ? "#666"
+              ? "var(--color-auxiliary-text)"
               : importanceColor,
             backgroundColor: importanceColor,
             height: dateCellHeight,

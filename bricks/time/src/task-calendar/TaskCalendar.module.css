@@ -1,19 +1,20 @@
 .taskCalendar {
+  --antd-calendar-bg: var(--color-fill-bg-container-1);
   padding: 0 15px;
-  background: #fff;
+  background: var(--antd-component-background);
 
   /* ================== Date Panel ================== */
   :global(.ant-picker-date-panel .ant-picker-content .ant-picker-cell) {
     &:not(:global(.ant-picker-cell-in-view)) {
       .dateNumber,
       .dateText {
-        color: #00000040 !important;
+        color: var(--color-disabled-text) !important;
       }
     }
 
     &:hover {
       .dateContainer {
-        border-color: #666;
+        border-color: var(--palette-gray-8);
       }
     }
 
@@ -26,17 +27,13 @@
         border-color: inherit;
 
         .dateNumber {
-          color: #fff !important;
-        }
-
-        .dateText {
-          color: #000000cc;
+          color: var(--color-normal-icon) !important;
         }
       }
 
       height: 50px;
       border-radius: 10%;
-      border: 1px solid #ccc;
+      border: 1px solid var(--color-border-divider-line);
       position: relative;
 
       .briefText {
@@ -44,7 +41,7 @@
         left: 2px;
         top: -1px;
         font-size: 12px;
-        color: var(--theme-red-color);
+        color: var(--color-error);
       }
 
       .taskPoint {
@@ -64,12 +61,12 @@
         align-items: center;
 
         .dateNumber {
-          color: #000000d9;
+          color: var(--color-header-text);
         }
 
         .dateText {
           font-size: 12px;
-          color: #666;
+          color: var(--color-auxiliary-text);
         }
       }
     }
@@ -82,14 +79,14 @@
 
   .dateInfo {
     height: 30px;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid var(--color-text-divider-line);
+    border-bottom: 1px solid var(--color-text-divider-line);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     .importantItem {
-      color: #fff;
+      color: var(--color-normal-icon);
       margin-right: 8px;
       padding: 3px 4px;
       border-radius: 5px;
@@ -127,7 +124,7 @@
         }
 
         .taskItemTime {
-          background: #eee;
+          background: var(--color-fill-bg-base-1);
           padding: 0 4px;
           margin-left: 8px;
         }
