@@ -36,6 +36,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
+  | PreviewMessagePreviewerRouteMatchChange
   | PreviewMessagePreviewerScroll;
 
 export type PreviewMessageToPreviewer =
@@ -63,6 +64,7 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
+  | PreviewMessagePreviewerRouteMatchChange
   | PreviewMessagePreviewerScroll;
 
 export type PreviewerMessageToBuilder =
@@ -116,6 +118,13 @@ export interface PreviewMessagePreviewerUrlChange extends PreviewBaseMessage {
   url: string;
 }
 
+export interface PreviewMessagePreviewerRouteMatchChange
+  extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "route-match-change";
+  match: boolean;
+}
+
 export interface PreviewMessagePreviewerScroll extends PreviewBaseMessage {
   sender: "previewer";
   type: "scroll";
@@ -129,6 +138,7 @@ export interface PreviewMessageContainerStartPreview
   extends PreviewBaseMessage {
   sender: "preview-container";
   type: "start-preview";
+  options?: PreviewStartOptions;
 }
 
 export interface PreviewMessageContainerToggleInspecting
@@ -195,8 +205,10 @@ export interface BrickOutline {
 }
 
 export interface PreviewStartOptions {
-  appId: string;
-  templateId: string;
+  appId?: string;
+  templateId?: string;
+  routePath?: string;
+  routeExact?: boolean;
   settings?: PreviewSettings;
 }
 

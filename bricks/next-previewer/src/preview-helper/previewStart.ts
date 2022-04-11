@@ -1,9 +1,11 @@
 import { developHelper, getHistory } from "@next-core/brick-kit";
 import type { PluginLocation } from "@next-core/brick-types";
+import { matchPath } from "@next-core/brick-utils";
 import type {
   BrickOutline,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerHighlightBrick,
+  PreviewMessagePreviewerRouteMatchChange,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
@@ -125,6 +127,16 @@ export function previewStart(
       type: "url-change",
       url: location.origin + history.createHref(loc),
     });
+    if (options?.routePath) {
+      const match = matchPath(loc.pathname, {
+        path: options.routePath,
+        exact: options.routeExact,
+      });
+      sendMessage<PreviewMessagePreviewerRouteMatchChange>({
+        type: "route-match-change",
+        match: !!match,
+      });
+    }
   };
 
   sendLocationChange(history.location);

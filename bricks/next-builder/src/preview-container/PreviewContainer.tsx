@@ -26,7 +26,9 @@ export interface PreviewContainerProps {
   previewUrl: string;
   appId?: string;
   templateId?: string;
-  previewSettings: PreviewSettings;
+  routePath?: string;
+  routeExact?: boolean;
+  previewSettings?: PreviewSettings;
   inspecting?: boolean;
   viewportWidth?: number;
   viewportHeight?: number;
@@ -62,6 +64,8 @@ export function LegacyPreviewContainer(
     appId,
     templateId,
     previewSettings,
+    routePath,
+    routeExact,
     inspecting,
     viewportWidth,
     viewportHeight,
@@ -77,6 +81,7 @@ export function LegacyPreviewContainer(
   const [scaleX, setScaleX] = useState(1);
   const [scaleY, setScaleY] = useState(1);
   const minScale = Math.min(scaleX, scaleY, 1);
+  const [routeMatch, setRouteMatch] = useState(true);
 
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
@@ -106,12 +111,21 @@ export function LegacyPreviewContainer(
         options: {
           appId,
           templateId,
+          routePath,
+          routeExact,
           settings: previewSettings,
         },
       } as PreviewMessageContainerStartPreview,
       previewOrigin
     );
-  }, [appId, previewOrigin, previewSettings, templateId]);
+  }, [
+    appId,
+    templateId,
+    routePath,
+    routeExact,
+    previewSettings,
+    previewOrigin,
+  ]);
 
   const [hoverIid, setHoverIid] = useState<string>();
   const [hoverAlias, setHoverAlias] = useState<string>();
@@ -274,6 +288,9 @@ export function LegacyPreviewContainer(
           case "url-change":
             handleUrlChange(data.url);
             break;
+          case "route-match-change":
+            setRouteMatch(data.match);
+            break;
         }
       }
     };
@@ -293,9 +310,11 @@ export function LegacyPreviewContainer(
 
   useEffect(() => {
     if (loadedRef.current) {
-      sendToggleInspecting(inspecting, iframeRef, previewOrigin);
+      // Do not inspect if route doesn't match.
+      // E.g., when redirected to login page after preview started.
+      sendToggleInspecting(inspecting && routeMatch, iframeRef, previewOrigin);
     }
-  }, [previewOrigin, inspecting]);
+  }, [previewOrigin, inspecting, routeMatch]);
 
   const handleMouseOut = useMemo(() => {
     if (!previewStarted) {

@@ -10,17 +10,21 @@ jest.mock("./inspector");
 
 const historyListeners = new Set<(loc: string) => void>();
 const history = {
-  location: "/a",
+  location: {
+    pathname: "/a",
+  },
   createHref(loc) {
-    return `/next${loc}`;
+    return `/next${loc.pathname}`;
   },
   listen(fn) {
     historyListeners.add(fn);
   },
-  push(path) {
-    this.location = path;
+  push(pathname) {
+    this.location = {
+      pathname,
+    };
     for (const fn of historyListeners) {
-      fn(path);
+      fn(this.location);
     }
   },
   reload: jest.fn(),
@@ -52,8 +56,12 @@ document.body.appendChild(brick);
 
 describe("previewStart", () => {
   it("should work", () => {
-    previewStart("http://localhost:8081");
-    expect(parentPostMessage).toBeCalledTimes(2);
+    previewStart("http://localhost:8081", {
+      routePath: "/a",
+      routeExact: true,
+    });
+    expect(setPreviewFromOrigin).toBeCalledWith("http://localhost:8081");
+    expect(parentPostMessage).toBeCalledTimes(3);
     expect(parentPostMessage).toHaveBeenNthCalledWith(
       1,
       {
@@ -62,7 +70,6 @@ describe("previewStart", () => {
       },
       "http://localhost:8081"
     );
-    expect(setPreviewFromOrigin).toBeCalledWith("http://localhost:8081");
     expect(parentPostMessage).toHaveBeenNthCalledWith(
       2,
       {
@@ -72,11 +79,20 @@ describe("previewStart", () => {
       },
       "http://localhost:8081"
     );
-
-    history.push("/b");
-    expect(parentPostMessage).toBeCalledTimes(3);
     expect(parentPostMessage).toHaveBeenNthCalledWith(
       3,
+      {
+        sender: "previewer",
+        type: "route-match-change",
+        match: true,
+      },
+      "http://localhost:8081"
+    );
+
+    history.push("/b");
+    expect(parentPostMessage).toBeCalledTimes(5);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      4,
       {
         sender: "previewer",
         type: "url-change",
@@ -84,10 +100,19 @@ describe("previewStart", () => {
       },
       "http://localhost:8081"
     );
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      5,
+      {
+        sender: "previewer",
+        type: "route-match-change",
+        match: false,
+      },
+      "http://localhost:8081"
+    );
 
     // Ignore re-start.
     previewStart("http://localhost:8081");
-    expect(parentPostMessage).toBeCalledTimes(3);
+    expect(parentPostMessage).toBeCalledTimes(5);
 
     const listener = addEventListener.mock.calls[0][1] as EventListener;
     listener({
@@ -141,9 +166,9 @@ describe("previewStart", () => {
         iid: "i-01",
       },
     } as any);
-    expect(parentPostMessage).toBeCalledTimes(4);
+    expect(parentPostMessage).toBeCalledTimes(6);
     expect(parentPostMessage).toHaveBeenNthCalledWith(
-      4,
+      6,
       {
         sender: "previewer",
         type: "highlight-brick",
@@ -164,9 +189,9 @@ describe("previewStart", () => {
         iid: "i-01",
       },
     } as any);
-    expect(parentPostMessage).toBeCalledTimes(5);
+    expect(parentPostMessage).toBeCalledTimes(7);
     expect(parentPostMessage).toHaveBeenNthCalledWith(
-      5,
+      7,
       {
         sender: "previewer",
         type: "highlight-brick",
@@ -187,9 +212,9 @@ describe("previewStart", () => {
         iid: null,
       },
     } as any);
-    expect(parentPostMessage).toBeCalledTimes(6);
+    expect(parentPostMessage).toBeCalledTimes(8);
     expect(parentPostMessage).toHaveBeenNthCalledWith(
-      6,
+      8,
       {
         sender: "previewer",
         type: "highlight-brick",
