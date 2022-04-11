@@ -3,7 +3,7 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(1, 1fr);
   grid-column-gap: 20px;
-  background: rgba(245, 245, 245, 1);
+  background: var(--custom-form-item-wrapper-bg);
   border-radius: 6px;
   padding: 16px;
   margin-bottom: 5px;
