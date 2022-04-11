@@ -2,6 +2,7 @@
 // For temporary usage only, will change soon.
 import React, { useCallback, useEffect, useMemo } from "react";
 import {
+  useBuilderContextMenuStatus,
   useBuilderData,
   useBuilderDataManager,
   useBuilderNode,
@@ -47,6 +48,7 @@ export function WorkbenchBrickTree({
   const { nodes, edges } = useBuilderData();
   const rootNode = useBuilderNode({ isRoot: true });
   const hoverNodeUid = useHoverNodeUid();
+  const { active, node: activeContextMenuNode } = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
 
   const clickFactory = useCallback(
@@ -257,7 +259,7 @@ export function WorkbenchBrickTree({
   return (
     <WorkbenchTreeContext.Provider
       value={{
-        hoverKey: hoverNodeUid,
+        hoverKey: active ? activeContextMenuNode.$$uid : hoverNodeUid,
         activeKey,
         basePaddingLeft: 0,
         clickFactory,

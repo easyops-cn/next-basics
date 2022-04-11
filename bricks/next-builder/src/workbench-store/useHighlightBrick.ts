@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {
   useActiveNodeUid,
+  useBuilderContextMenuStatus,
   useHoverNodeUid,
   type BuilderDataManager,
 } from "@next-core/editor-bricks-helper";
@@ -15,7 +16,13 @@ export function useHighlightBrick(
 ): void {
   const hoverNodeUid = useHoverNodeUid();
   const activeNodeUid = useActiveNodeUid();
-  const highlightNodeUid = type === "active" ? activeNodeUid : hoverNodeUid;
+  const { active, node: activeContextMenuNode } = useBuilderContextMenuStatus();
+  const highlightNodeUid =
+    type === "active"
+      ? activeNodeUid
+      : active
+      ? activeContextMenuNode.$$uid
+      : hoverNodeUid;
 
   useEffect(() => {
     sendHighlightBrick(type, highlightNodeUid, manager);
