@@ -4,11 +4,13 @@ import { useHighlightBrick } from "./useHighlightBrick";
 import {
   useHoverNodeUid,
   useActiveNodeUid,
+  useBuilderContextMenuStatus,
 } from "@next-core/editor-bricks-helper";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useHoverNodeUid: jest.fn(),
   useActiveNodeUid: jest.fn(),
+  useBuilderContextMenuStatus: jest.fn().mockReturnValue({ active: false }),
 }));
 
 const postMessage = jest.spyOn(window, "postMessage").mockImplementation();
@@ -97,6 +99,21 @@ describe("useHighlightBrick", () => {
       sender: "builder",
       type: "select-brick",
       iid: undefined,
+    });
+  });
+
+  it("should work for context menu node", () => {
+    (useHoverNodeUid as jest.Mock).mockReturnValue(1);
+    (useBuilderContextMenuStatus as jest.Mock).mockReturnValue({
+      active: true,
+      node: { $$uid: 3 },
+    });
+
+    mount(<TestComponent type="hover" />);
+    expect(postMessage).toBeCalledWith({
+      sender: "builder",
+      type: "hover-on-brick",
+      iid: "i-3",
     });
   });
 });
