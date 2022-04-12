@@ -96,14 +96,15 @@ export async function PasteBricks({
         })
       );
 
-      const templateTree = templateGraphRep
-        ? pipes.graphTree(templateGraphRep as pipes.GraphData, {
-            sort: {
-              key: "sort",
-              order: 1,
-            },
-          })
-        : [];
+      const templateTree = pipes.graphTree(
+        templateGraphRep as pipes.GraphData,
+        {
+          sort: {
+            key: "sort",
+            order: 1,
+          },
+        }
+      );
 
       const walkDeepTree = (templateId: string): void => {
         const tree = templateTree.find(
