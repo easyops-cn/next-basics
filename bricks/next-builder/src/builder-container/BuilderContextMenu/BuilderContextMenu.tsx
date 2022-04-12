@@ -91,6 +91,7 @@ export function BuilderContextMenu({
     const data: BuilderClipboard = {
       type: BuilderClipboardType.COPY,
       sourceId: contextMenuStatus.node.id,
+      sourceInstanceId: contextMenuStatus.node.instanceId,
       nodeType: contextMenuStatus.node.type,
       nodeAlias: contextMenuStatus.node.alias,
     };
@@ -114,11 +115,14 @@ export function BuilderContextMenu({
       onNodeCutPaste({
         sourceInstanceId: clipboard.sourceInstanceId,
         targetInstanceId: contextMenuStatus.node.instanceId,
+        sourceProjectInstanceId: clipboard.sourceProjectInstanceId,
       });
     } else {
       onNodeCopyPaste({
         sourceId: clipboard.sourceId,
         targetId: contextMenuStatus.node.id,
+        sourceInstanceId: clipboard.sourceInstanceId,
+        sourceProjectInstanceId: clipboard.sourceProjectInstanceId,
       });
     }
     legacySetClipboard(null);

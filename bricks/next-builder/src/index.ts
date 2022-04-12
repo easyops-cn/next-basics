@@ -55,3 +55,4 @@ import "./custom-processors/getWorkbenchRouteTree";
 // !Lazy: import "./workbench-mini-action-bar";
 import "./data-providers/ReplaceSingleThemePage";
 // !Lazy: import "./workbench-context-menu";
+import "./data-providers/PasteBricks";

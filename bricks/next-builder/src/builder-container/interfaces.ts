@@ -65,6 +65,7 @@ export type BuilderClipboard = BuilderClipboardOfCopy | BuilderClipboardOfCut;
 export interface BuilderClipboardOfCopy extends BuilderClipboardBase {
   type: BuilderClipboardType.COPY;
   sourceId: string;
+  sourceInstanceId: string;
 }
 
 export interface BuilderClipboardOfCut extends BuilderClipboardBase {
@@ -76,6 +77,7 @@ export interface BuilderClipboardBase {
   type: BuilderClipboardType;
   nodeType: string;
   nodeAlias?: string;
+  sourceProjectInstanceId?: string;
 }
 
 export enum BuilderClipboardType {
@@ -86,11 +88,14 @@ export enum BuilderClipboardType {
 export interface BuilderPasteDetailOfCopy {
   sourceId: string;
   targetId: string;
+  sourceInstanceId: string;
+  sourceProjectInstanceId: string;
 }
 
 export interface BuilderPasteDetailOfCut {
   sourceInstanceId: string;
   targetInstanceId: string;
+  sourceProjectInstanceId: string;
 }
 
 export interface BuilderAppendBrickOrRouteDetail {
