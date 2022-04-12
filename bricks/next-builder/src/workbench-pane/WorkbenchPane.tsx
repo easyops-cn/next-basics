@@ -56,7 +56,11 @@ export function WorkbenchPane({
   );
 
   return (
-    <div className="pane">
+    <div
+      className={classNames("pane", {
+        scrolled,
+      })}
+    >
       <div className="pane-header" tabIndex={0} onClick={handleClick}>
         <div className="pane-title">
           <span className="title-icon">
@@ -66,11 +70,10 @@ export function WorkbenchPane({
         </div>
         <slot name="actions" />
         {badge !== null && <div className="badge">{badge}</div>}
+        <div className="pane-scroll-shadow"></div>
       </div>
       <div
-        className={classNames("pane-body", "custom-scrollbar-container", {
-          scrolled,
-        })}
+        className="pane-body custom-scrollbar-container"
         onScroll={handleScroll}
         ref={scrollBodyRef}
       >
