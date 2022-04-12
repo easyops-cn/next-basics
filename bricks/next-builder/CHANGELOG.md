@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.136.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.135.1...@next-bricks/next-builder@1.136.0) (2022-04-12)
+
+
+### Features
+
+* create theme support link template ([7c68bde](https://github.com/easyops-cn/next-basics/commit/7c68bde59043db47243979e54f75dc94c5fbae7e))
+* support cut and copy bricks with link tpl ([8452d07](https://github.com/easyops-cn/next-basics/commit/8452d0712f2422cadaa111ac039a2fab932b66fa))
+* update code ([ad97f9c](https://github.com/easyops-cn/next-basics/commit/ad97f9cebd05a118a52d2dc2f20bf7916c216c17))
+
+
+
+
+
 ## [1.135.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.135.0...@next-bricks/next-builder@1.135.1) (2022-04-12)
 
 **Note:** Version bump only for package @next-bricks/next-builder
