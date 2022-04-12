@@ -1,5 +1,3 @@
-// istanbul ignore file
-// For temporary usage only, will change soon.
 import React, {
   type ChangeEvent,
   useCallback,
@@ -12,13 +10,13 @@ import React, {
 import { Input } from "antd";
 import { pick } from "lodash";
 import classNames from "classnames";
+import { SearchOutlined } from "@ant-design/icons";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
 import type { WorkbenchNodeData } from "./interfaces";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
 
 import styles from "./WorkbenchTree.module.css";
-import { SearchOutlined } from "@ant-design/icons";
 
 const treeLevelPadding = 10;
 
