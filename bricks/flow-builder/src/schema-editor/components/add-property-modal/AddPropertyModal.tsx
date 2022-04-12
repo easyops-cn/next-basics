@@ -53,14 +53,9 @@ export function AddPropertyModal({
     form.submit();
   };
 
-  const handleClose = (): void => {
-    form.resetFields();
-    onClose?.();
-  };
-
   const handleFinish = (values: AddedSchemaFormItem): void => {
     onSubmit?.(processItemData(values), trackId, isEdit);
-    handleClose();
+    onClose?.();
   };
 
   const nameFormItem = useMemo(
@@ -349,7 +344,8 @@ export function AddPropertyModal({
       destroyOnClose
       visible={visible}
       onOk={handleOk}
-      onCancel={handleClose}
+      onCancel={onClose}
+      afterClose={() => form.resetFields()}
       width={600}
       maskClosable={false}
     >
