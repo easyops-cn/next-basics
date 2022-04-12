@@ -47,13 +47,13 @@ describe("WorkbenchPane", () => {
     wrapper.find(".pane-header").simulate("click");
     expect(onFirstActivated).toBeCalledTimes(1);
 
-    expect(wrapper.find(".pane-body").hasClass("scrolled")).toBe(false);
+    expect(wrapper.find(".pane").hasClass("scrolled")).toBe(false);
     await act(async () => {
       wrapper.find(".pane-body").getDOMNode().scrollTop = 20;
       wrapper.find(".pane-body").simulate("scroll");
       await (global as any).flushPromises();
       wrapper.update();
     });
-    expect(wrapper.find(".pane-body").hasClass("scrolled")).toBe(true);
+    expect(wrapper.find(".pane").hasClass("scrolled")).toBe(true);
   });
 });

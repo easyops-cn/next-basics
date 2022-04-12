@@ -24,6 +24,7 @@
   align-items: center;
   cursor: pointer;
   border-top: 1px solid transparent;
+  position: relative;
 }
 
 .pane-header:focus {
@@ -35,6 +36,21 @@
 
 :host(:not(:first-child)) .pane-header {
   border-top-color: rgba(204, 204, 204, 0.2);
+}
+
+.pane-scroll-shadow {
+  display: none;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  box-shadow: #000000 0 6px 6px -6px inset;
+  z-index: 1;
+}
+
+.scrolled .pane-scroll-shadow {
+  display: block;
 }
 
 .pane-title {
@@ -75,10 +91,6 @@
 
 :host([active]) .pane-body {
   display: initial;
-}
-
-:host([active]) .scrolled {
-  box-shadow: #000000 0 6px 6px -6px inset;
 }
 
 :host(:not(:hover)) ::slotted([slot="actions"]) {
