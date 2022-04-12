@@ -22,6 +22,9 @@ export class WorkbenchActionItemElement extends UpdatingElement {
   @property({ type: Boolean })
   active: boolean;
 
+  @property()
+  tooltip: string;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -40,7 +43,12 @@ export class WorkbenchActionItemElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <WorkbenchAction icon={this.icon} to={this.to} active={this.active} />
+          <WorkbenchAction
+            icon={this.icon}
+            to={this.to}
+            active={this.active}
+            tooltip={this.tooltip}
+          />
         </BrickWrapper>,
         this
       );
