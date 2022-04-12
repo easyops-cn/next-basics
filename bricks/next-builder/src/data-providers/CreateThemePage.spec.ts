@@ -2,9 +2,10 @@ import {
   InstanceApi_createInstance,
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
-import { StoryboardApi_cloneBricks } from "@next-sdk/next-builder-sdk";
+import { PasteBricks } from "./PasteBricks";
 import { CreateThemePage, LayoutEnums } from "./CreateThemePage";
 
+jest.mock("./PasteBricks");
 jest.mock("@next-sdk/cmdb-sdk");
 jest.mock("@next-sdk/next-builder-sdk");
 
@@ -37,9 +38,11 @@ jest.mock("@next-sdk/next-builder-sdk");
         children: [
           {
             id: "T-001",
+            instanceId: "t-001",
           },
           {
             id: "T-002",
+            instanceId: "t-002",
           },
         ],
       };
@@ -49,16 +52,18 @@ jest.mock("@next-sdk/next-builder-sdk");
         children: [
           {
             id: "S-001",
+            instanceId: "s-001",
           },
           {
             id: "S-002",
+            instanceId: "s-002",
           },
         ],
       };
   }
 });
 
-(StoryboardApi_cloneBricks as jest.Mock).mockImplementation(() => ({}));
+(PasteBricks as jest.Mock).mockImplementation(() => ({}));
 
 describe("CreateThemePage", () => {
   beforeEach(() => {
@@ -82,6 +87,7 @@ describe("CreateThemePage", () => {
           },
         },
         layoutType: LayoutEnums.HEADER_THROUGH_SIDEBAR,
+        sourceProjectId: "source-projectid",
       })
     ).toEqual(true);
     expect(InstanceApi_createInstance).toBeCalledTimes(5);
@@ -350,6 +356,7 @@ describe("CreateThemePage", () => {
             },
           ],
         },
+        sourceProjectId: "source-projectid",
       })
     ).toBe(true);
 
@@ -357,7 +364,7 @@ describe("CreateThemePage", () => {
 
     expect(InstanceApi_createInstance).toBeCalledTimes(3);
 
-    expect(StoryboardApi_cloneBricks).toBeCalledTimes(4);
+    expect(PasteBricks).toBeCalledTimes(4);
 
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
       1,
@@ -389,25 +396,37 @@ describe("CreateThemePage", () => {
       }
     );
 
-    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(1, {
+    expect(PasteBricks).toHaveBeenNthCalledWith(1, {
       newAppId: "app-a",
       newParentBrickId: "T-1",
       sourceBrickId: "T-001",
+      newProjectInstanceId: "project-a",
+      sourceBrickInstanceId: "t-001",
+      sourceProjectInstanceId: "source-projectid",
     });
-    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(2, {
+    expect(PasteBricks).toHaveBeenNthCalledWith(2, {
       newAppId: "app-a",
       newParentBrickId: "T-1",
       sourceBrickId: "T-002",
+      newProjectInstanceId: "project-a",
+      sourceBrickInstanceId: "t-002",
+      sourceProjectInstanceId: "source-projectid",
     });
-    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(3, {
+    expect(PasteBricks).toHaveBeenNthCalledWith(3, {
       newAppId: "app-a",
       newParentBrickId: "S-1",
       sourceBrickId: "S-001",
+      newProjectInstanceId: "project-a",
+      sourceBrickInstanceId: "s-001",
+      sourceProjectInstanceId: "source-projectid",
     });
-    expect(StoryboardApi_cloneBricks).toHaveBeenNthCalledWith(4, {
+    expect(PasteBricks).toHaveBeenNthCalledWith(4, {
       newAppId: "app-a",
       newParentBrickId: "S-1",
       sourceBrickId: "S-002",
+      newProjectInstanceId: "project-a",
+      sourceBrickInstanceId: "s-002",
+      sourceProjectInstanceId: "source-projectid",
     });
 
     expect(InstanceApi_createInstance).toHaveBeenNthCalledWith(
@@ -459,6 +478,6 @@ describe("CreateThemePage", () => {
 
     expect(InstanceApi_createInstance).toBeCalledTimes(3);
 
-    expect(StoryboardApi_cloneBricks).toBeCalledTimes(0);
+    expect(PasteBricks).toBeCalledTimes(0);
   });
 });

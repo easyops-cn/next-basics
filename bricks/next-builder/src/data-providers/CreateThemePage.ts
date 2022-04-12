@@ -4,8 +4,8 @@ import {
   InstanceApi_getDetail,
   type InstanceApi_GetDetailResponseBody,
 } from "@next-sdk/cmdb-sdk";
-import { StoryboardApi_cloneBricks } from "@next-sdk/next-builder-sdk";
 import { ContextConf } from "@next-core/brick-types";
+import { PasteBricks } from "./PasteBricks";
 
 export interface CreateThemePageParams {
   // Project instance ID.
@@ -18,6 +18,7 @@ export interface CreateThemePageParams {
   layoutType?: LayoutEnums;
   layoutList?: string;
   pageTemplate?: pageTemplate;
+  sourceProjectId?: string;
 }
 
 interface instaceBody {
@@ -114,6 +115,7 @@ export async function CreateThemePage({
   locales,
   layoutType,
   pageTemplate,
+  sourceProjectId,
 }: CreateThemePageParams): Promise<unknown> {
   const templateId = `tpl-page-${pageTypeId}`;
   // Currently, There is a bug when creating multiple instances of
@@ -160,27 +162,39 @@ export async function CreateThemePage({
     };
   }): Promise<boolean> => {
     const { theme = {}, snippet = {} } = copyData;
-    const copyTemplateIds: string[] =
-      theme.children?.map((item: Record<string, unknown>) => item.id) || [];
-    const copySnippetIds: string[] =
-      snippet.children?.map((item: Record<string, unknown>) => item.id) || [];
+    const copyTemplateIds: instaceBody[] =
+      theme.children?.map((item: Record<string, unknown>) => ({
+        id: item.id,
+        instanceId: item.instanceId,
+      })) || [];
+    const copySnippetIds: instaceBody[] =
+      snippet.children?.map((item: Record<string, unknown>) => ({
+        id: item.id,
+        instanceId: item.instanceId,
+      })) || [];
 
     await Promise.all(
-      copyTemplateIds.map((id: string) =>
-        StoryboardApi_cloneBricks({
+      copyTemplateIds.map((item) =>
+        PasteBricks({
           newAppId: appId,
+          newProjectInstanceId: projectId,
           newParentBrickId: templateId,
-          sourceBrickId: id,
+          sourceBrickId: item.id,
+          sourceProjectInstanceId: sourceProjectId,
+          sourceBrickInstanceId: item.instanceId,
         })
       )
     );
 
     await Promise.all(
-      copySnippetIds.map((id: string) =>
-        StoryboardApi_cloneBricks({
+      copySnippetIds.map((item) =>
+        PasteBricks({
           newAppId: appId,
+          newProjectInstanceId: projectId,
           newParentBrickId: snippetId,
-          sourceBrickId: id,
+          sourceBrickId: item.id,
+          sourceProjectInstanceId: sourceProjectId,
+          sourceBrickInstanceId: item.instanceId,
         })
       )
     );

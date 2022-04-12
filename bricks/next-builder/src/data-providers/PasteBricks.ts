@@ -26,7 +26,7 @@ export interface PasteBricksParams {
   /** 是否导入linked sourceBrick关联的template */
   linked?: boolean;
   /** 类型: cut/copy */
-  type: "cut" | "copy";
+  type?: "cut" | "copy";
 }
 
 const MODEL_STORYBOARD_BRICK = "STORYBOARD_BRICK";
@@ -57,31 +57,30 @@ export async function PasteBricks({
   newParentBrickId,
   newAppId,
   linked = true,
-  type,
+  type = "copy",
 }: PasteBricksParams): Promise<boolean> {
   const isNeedLinkTemplate =
     linked && sourceProjectInstanceId !== newProjectInstanceId;
-  const brickGraphReq = await InstanceGraphApi_traverseGraphV2(
-    getBaseGraphParams({
-      objectId: MODEL_STORYBOARD_BRICK,
-      extraQuery: {
-        instanceId: sourceBrickInstanceId,
-      },
-    })
-  );
-
-  const brickTree = brickGraphReq
-    ? pipes.graphTree(brickGraphReq as pipes.GraphData, {
-        sort: {
-          key: "sort",
-          order: 1,
-        },
-      })
-    : [];
-
   const templateMap = new Map<string, string>();
   const templateSet = new Set<string>();
+
   if (isNeedLinkTemplate) {
+    const brickGraphReq = await InstanceGraphApi_traverseGraphV2(
+      getBaseGraphParams({
+        objectId: MODEL_STORYBOARD_BRICK,
+        extraQuery: {
+          instanceId: sourceBrickInstanceId,
+        },
+      })
+    );
+
+    const brickTree = pipes.graphTree(brickGraphReq as pipes.GraphData, {
+      sort: {
+        key: "sort",
+        order: 1,
+      },
+    });
+
     walkTree(brickTree, (item) => {
       if ((item.brick as string).startsWith("tpl-")) {
         templateSet.add(item.brick);
@@ -110,18 +109,14 @@ export async function PasteBricks({
         const tree = templateTree.find(
           (item) => item.templateId === templateId
         );
-        if (!tree) {
-          templateMap.delete(templateId);
-          return;
-        }
+        if (!tree) return;
         templateMap.set(templateId, tree.instanceId);
-        tree &&
-          walkTree(tree, (item) => {
-            const templateId: string = item.brick ?? "";
-            if (templateId.startsWith("tpl-")) {
-              !templateMap.has(templateId) && walkDeepTree(templateId);
-            }
-          });
+        walkTree(tree, (item) => {
+          const templateId: string = item.brick ?? "";
+          if (templateId.startsWith("tpl-")) {
+            !templateMap.has(templateId) && walkDeepTree(templateId);
+          }
+        });
       };
 
       templateList.forEach(walkDeepTree);
