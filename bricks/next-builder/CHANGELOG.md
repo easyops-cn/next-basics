@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.135.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.134.0...@next-bricks/next-builder@1.135.0) (2022-04-12)
+
+
+### Bug Fixes
+
+* refine workbench pane scroll shadow ([9fc211a](https://github.com/easyops-cn/next-basics/commit/9fc211a4d1dc59b70198d9691730e808aed95b2f))
+
+
+### Features
+
+* add tooltip for workbench-action ([2b72b1a](https://github.com/easyops-cn/next-basics/commit/2b72b1a5580ed09f16436072ee3b182a15ed502c))
+
+
+
+
+
 # [1.134.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.133.1...@next-bricks/next-builder@1.134.0) (2022-04-11)
 
 

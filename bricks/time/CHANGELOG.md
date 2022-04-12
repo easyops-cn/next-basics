@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.3.0...@next-bricks/time@1.3.1) (2022-04-12)
+
+
+### Bug Fixes
+
+* task calendar style ([089c3e7](https://github.com/easyops-cn/next-basics/commit/089c3e73c33578ae071e6a76794fb1fb000e1eac))
+
+
+
+
+
 # [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.2.0...@next-bricks/time@1.3.0) (2021-08-19)
 
 
