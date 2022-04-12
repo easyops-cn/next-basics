@@ -10,10 +10,8 @@ export const generalModalStory: Story = {
     zh: "模态框",
   },
   description: {
-    en:
-      "provide slot to hold other custom elements, different from forms.general-modal",
-    zh:
-      "提供插槽以展示其他构件，注意与表单通用模态框 (forms.general-modal) 的不同",
+    en: "provide slot to hold other custom elements, different from forms.general-modal",
+    zh: "提供插槽以展示其他构件，注意与表单通用模态框 (forms.general-modal) 的不同",
   },
   icon: {
     lib: "fa",
@@ -336,7 +334,7 @@ export const generalModalStory: Story = {
                     {
                       brick: "presentational-bricks.brick-tag",
                       properties: {
-                        color: "var(--bg-color-button-warning)",
+                        color: "var(--color-warning)",
                         showCard: false,
                         tagList: ["警告"],
                         tagStyle: {
