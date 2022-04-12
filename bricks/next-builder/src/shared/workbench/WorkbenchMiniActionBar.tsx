@@ -1,4 +1,3 @@
-// istanbul ignore file: working in progress
 import React, { useCallback, useMemo } from "react";
 import classNames from "classnames";
 import { looseCheckIfByTransform } from "@next-core/brick-kit";
@@ -69,7 +68,6 @@ function WorkbenchSubAction({
   return (
     <a
       className={styles.action}
-      key={action.action}
       title={action.title}
       role="button"
       onClick={handleActionClick}
