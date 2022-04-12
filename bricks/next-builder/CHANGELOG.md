@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.136.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.136.0...@next-bricks/next-builder@1.136.1) (2022-04-12)
+
+
+### Bug Fixes
+
+* fix preview iframe style ([bb16501](https://github.com/easyops-cn/next-basics/commit/bb16501364f5817c96d19b24ea3e3f6ac0237328))
+
+
+
+
+
 # [1.136.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.135.1...@next-bricks/next-builder@1.136.0) (2022-04-12)
 
 
