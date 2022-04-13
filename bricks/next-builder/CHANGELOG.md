@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.136.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.136.1...@next-bricks/next-builder@1.136.2) (2022-04-13)
+
+
+### Bug Fixes
+
+* **workbench-tree:** auto disable move actions ([1dd6ff2](https://github.com/easyops-cn/next-basics/commit/1dd6ff27604df6ec8070a490e8b4f9bf7aef451d))
+
+
+
+
+
 ## [1.136.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.136.0...@next-bricks/next-builder@1.136.1) (2022-04-12)
 
 
