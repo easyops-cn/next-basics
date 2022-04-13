@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.215.2...@next-bricks/forms@1.215.3) (2022-04-13)
+
+
+### Bug Fixes
+
+* change radio styles ([de7a11f](https://github.com/easyops-cn/next-basics/commit/de7a11f6e538681008c6aaf4d50a875218f958d3))
+
+
+
+
+
 ## [1.215.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.215.1...@next-bricks/forms@1.215.2) (2022-04-12)
 
 **Note:** Version bump only for package @next-bricks/forms
