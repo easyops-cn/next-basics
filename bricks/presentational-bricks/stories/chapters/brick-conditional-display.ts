@@ -96,7 +96,7 @@ export const BrickConditionalDisplayStory: Story = {
             ],
           },
           style: {
-            backgroundColor: "rgba(47, 194, 91, 1)",
+            backgroundColor: "var(--color-success)",
             color: "rgba(255, 255, 255, 1)",
           },
           label: "良好",
