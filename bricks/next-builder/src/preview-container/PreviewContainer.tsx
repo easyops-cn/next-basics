@@ -178,15 +178,13 @@ export function LegacyPreviewContainer(
         {
           sender: "preview-container",
           type: "refresh",
-          appId,
           storyboardPatch,
-          templateId,
           settings: previewSettings,
         } as PreviewMessageFromContainer,
         previewOrigin
       );
     },
-    [previewOrigin, previewSettings, templateId]
+    [previewOrigin, previewSettings]
   );
 
   const reload = useCallback(() => {

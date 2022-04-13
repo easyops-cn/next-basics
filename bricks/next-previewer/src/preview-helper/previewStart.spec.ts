@@ -59,7 +59,10 @@ describe("previewStart", () => {
     previewStart("http://localhost:8081", {
       routePath: "/a",
       routeExact: true,
+      appId: "my-app",
+      templateId: "my-tpl",
     });
+    expect(history.reload).toBeCalledTimes(1);
     expect(setPreviewFromOrigin).toBeCalledWith("http://localhost:8081");
     expect(parentPostMessage).toBeCalledTimes(3);
     expect(parentPostMessage).toHaveBeenNthCalledWith(
@@ -111,7 +114,7 @@ describe("previewStart", () => {
     );
 
     // Ignore re-start.
-    previewStart("http://localhost:8081");
+    previewStart("http://localhost:8081", {});
     expect(parentPostMessage).toBeCalledTimes(5);
 
     const listener = addEventListener.mock.calls[0][1] as EventListener;
@@ -259,23 +262,20 @@ describe("previewStart", () => {
       data: {
         sender: "preview-container",
         type: "refresh",
-        appId: "my-app",
         storyboardPatch: { routes: [] },
       },
     } as any);
     expect(kit.developHelper.updateStoryboard).toBeCalledWith("my-app", {
       routes: [],
     });
-    expect(history.reload).toBeCalledTimes(1);
+    expect(history.reload).toBeCalledTimes(2);
 
     listener({
       origin: "http://localhost:8081",
       data: {
         sender: "preview-container",
         type: "refresh",
-        appId: "my-app",
         storyboardPatch: { routes: [] },
-        templateId: "my-tpl",
         settings: {
           properties: { dataTest: "good" },
         },
@@ -288,6 +288,6 @@ describe("previewStart", () => {
         properties: { dataTest: "good" },
       }
     );
-    expect(history.reload).toBeCalledTimes(2);
+    expect(history.reload).toBeCalledTimes(3);
   });
 });

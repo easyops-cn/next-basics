@@ -138,7 +138,7 @@ export interface PreviewMessageContainerStartPreview
   extends PreviewBaseMessage {
   sender: "preview-container";
   type: "start-preview";
-  options?: PreviewStartOptions;
+  options: PreviewStartOptions;
 }
 
 export interface PreviewMessageContainerToggleInspecting
@@ -151,9 +151,7 @@ export interface PreviewMessageContainerToggleInspecting
 export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {
   sender: "preview-container";
   type: "refresh";
-  appId: string;
   storyboardPatch: Partial<Storyboard>;
-  templateId?: string;
   settings?: PreviewSettings;
 }
 
