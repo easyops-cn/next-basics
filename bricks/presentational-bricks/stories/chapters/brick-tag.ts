@@ -46,7 +46,7 @@ export const BrickTagStory: Story = {
             {
               brick: "presentational-bricks.brick-tag",
               properties: {
-                color: "var(--bg-color-button-warning)",
+                color: "var(--color-warning)",
                 showCard: true,
                 showTagCircle: false,
                 tagList: ["Active", "Normal"],
@@ -180,7 +180,7 @@ export const BrickTagStory: Story = {
               brick: "presentational-bricks.brick-tag",
               properties: {
                 showCard: false,
-                color: "var(--bg-color-button-danger)",
+                color: "var(--color-error)",
                 tagList: ["严重"],
               },
             },
