@@ -86,10 +86,17 @@ export function WorkbenchTree({
 }
 
 function TreeList({ nodes, level }: TreeListProps): ReactElement {
+  const lastIndex = nodes.length - 1;
   return (
     <ul className={styles.tree}>
-      {nodes.map((node) => (
-        <TreeNode key={node.key} node={node} level={level} />
+      {nodes.map((node, index) => (
+        <TreeNode
+          key={node.key}
+          node={node}
+          level={level}
+          isFirst={index === 0}
+          isLast={index === lastIndex}
+        />
       ))}
     </ul>
   );
@@ -98,9 +105,16 @@ function TreeList({ nodes, level }: TreeListProps): ReactElement {
 export interface TreeNodeProps {
   node: WorkbenchNodeData;
   level: number;
+  isFirst?: boolean;
+  isLast?: boolean;
 }
 
-function TreeNode({ node, level }: TreeNodeProps): ReactElement {
+function TreeNode({
+  node,
+  level,
+  isFirst,
+  isLast,
+}: TreeNodeProps): ReactElement {
   const isLeaf = !node.children?.length;
   const {
     hoverKey,
@@ -185,6 +199,8 @@ function TreeNode({ node, level }: TreeNodeProps): ReactElement {
         <WorkbenchMiniActionBar
           className={styles.nodeActionsBar}
           data={node.data}
+          isFirst={isFirst}
+          isLast={isLast}
         />
       </Link>
       {isLeaf || <TreeList nodes={node.children} level={level + 1} />}

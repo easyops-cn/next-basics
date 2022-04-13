@@ -11,12 +11,16 @@ export interface WorkbenchSubActionBarProps {
   data?: unknown;
   className?: string;
   gap?: number;
+  isFirst?: boolean;
+  isLast?: boolean;
 }
 
 export function WorkbenchMiniActionBar({
   data,
   className,
   gap,
+  isFirst,
+  isLast,
 }: WorkbenchSubActionBarProps): React.ReactElement {
   const { actions } = useWorkbenchActionsContext();
   const enabledActions = useMemo(
@@ -31,7 +35,13 @@ export function WorkbenchMiniActionBar({
   return (
     <div className={classNames(styles.actionsBar, className)} style={{ gap }}>
       {enabledActions.map((item) => (
-        <WorkbenchSubAction key={item.action} action={item} data={data} />
+        <WorkbenchSubAction
+          key={item.action}
+          action={item}
+          data={data}
+          isFirst={isFirst}
+          isLast={isLast}
+        />
       ))}
     </div>
   );
@@ -40,24 +50,33 @@ export function WorkbenchMiniActionBar({
 interface WorkbenchSubActionProps {
   action: WorkbenchTreeAction;
   data?: unknown;
+  isFirst?: boolean;
+  isLast?: boolean;
 }
 
 function WorkbenchSubAction({
   action,
   data,
+  isFirst,
+  isLast,
 }: WorkbenchSubActionProps): React.ReactElement {
   const { onActionClick } = useWorkbenchActionsContext();
+
+  const disabled =
+    (isFirst && action.action === "move-up") ||
+    (isLast && action.action === "move-down");
 
   const handleActionClick = useCallback(
     (event: React.MouseEvent) => {
       event.preventDefault();
       event.stopPropagation();
-      onActionClick?.({
-        action: action.action,
-        data: data,
-      });
+      disabled ||
+        onActionClick?.({
+          action: action.action,
+          data: data,
+        });
     },
-    [action.action, data, onActionClick]
+    [action.action, data, disabled, onActionClick]
   );
 
   const preventMouseEvent = useCallback((event: React.MouseEvent) => {
@@ -67,7 +86,7 @@ function WorkbenchSubAction({
 
   return (
     <a
-      className={styles.action}
+      className={classNames(styles.action, { [styles.disabled]: disabled })}
       title={action.title}
       role="button"
       onClick={handleActionClick}

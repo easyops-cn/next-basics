@@ -21,3 +21,10 @@
 .action:hover {
   color: #c5c5c5;
 }
+
+.disabled,
+.disabled:hover {
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+  background-color: initial;
+}
