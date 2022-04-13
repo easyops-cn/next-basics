@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.136.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.136.2...@next-bricks/next-builder@1.136.3) (2022-04-13)
+
+
+### Bug Fixes
+
+* re-update tempalate preview after login ([0764a15](https://github.com/easyops-cn/next-basics/commit/0764a1571c7b3c1cc14701bb3c95b89e0372ee87))
+
+
+
+
+
 ## [1.136.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.136.1...@next-bricks/next-builder@1.136.2) (2022-04-13)
 
 
