@@ -9,6 +9,7 @@ import type {
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
   PreviewMessageToPreviewer,
+  PreviewSettings,
   PreviewStartOptions,
 } from "@next-types/preview";
 import { throttle } from "lodash";
@@ -22,7 +23,7 @@ let started = false;
 
 export function previewStart(
   previewFromOrigin: string,
-  options?: PreviewStartOptions
+  options: PreviewStartOptions
 ): void {
   if (started) {
     return;
@@ -64,6 +65,20 @@ export function previewStart(
     });
   };
 
+  let lastTemplatePreviewSettings: PreviewSettings;
+  if (options.templateId) {
+    lastTemplatePreviewSettings = options.settings;
+  }
+
+  const updateTemplatePreviewSettings = (): void => {
+    developHelper.updateTemplatePreviewSettings(
+      options.appId,
+      options.templateId,
+      lastTemplatePreviewSettings
+    );
+    getHistory().reload();
+  };
+
   window.addEventListener(
     "message",
     ({ data, origin }: MessageEvent<PreviewMessageToPreviewer>) => {
@@ -93,15 +108,13 @@ export function previewStart(
             data.enabled ? startInspecting() : stopInspecting();
             break;
           case "refresh":
-            developHelper.updateStoryboard(data.appId, data.storyboardPatch);
-            if (data.templateId) {
-              developHelper.updateTemplatePreviewSettings(
-                data.appId,
-                data.templateId,
-                data.settings
-              );
+            developHelper.updateStoryboard(options.appId, data.storyboardPatch);
+            if (options.templateId) {
+              lastTemplatePreviewSettings = data.settings;
+              updateTemplatePreviewSettings();
+            } else {
+              getHistory().reload();
             }
-            getHistory().reload();
             break;
           case "reload":
             location.reload();
@@ -122,20 +135,39 @@ export function previewStart(
 
   const history = getHistory();
 
+  let previewPageMatch = true;
   const sendLocationChange = (loc: PluginLocation): void => {
     sendMessage<PreviewMessagePreviewerUrlChange>({
       type: "url-change",
       url: location.origin + history.createHref(loc),
     });
-    if (options?.routePath) {
-      const match = matchPath(loc.pathname, {
+    if (options.routePath) {
+      const match = !!matchPath(loc.pathname, {
         path: options.routePath,
         exact: options.routeExact,
       });
       sendMessage<PreviewMessagePreviewerRouteMatchChange>({
         type: "route-match-change",
-        match: !!match,
+        match,
       });
+
+      // Re-update template preview settings once match route again (typically after login).
+      if (options.templateId && !previewPageMatch && match) {
+        const mainMountPoint = document.querySelector("#main-mount-point");
+        const placeholderLoadObserver = new MutationObserver(() => {
+          // We observe when the placeholder is appeared.
+          if (
+            mainMountPoint.childNodes.length === 1 &&
+            (mainMountPoint.firstChild as HTMLElement).tagName === "SPAN" &&
+            mainMountPoint.firstChild.childNodes.length === 0
+          ) {
+            updateTemplatePreviewSettings();
+            placeholderLoadObserver.disconnect();
+          }
+        });
+        placeholderLoadObserver.observe(mainMountPoint, { childList: true });
+      }
+      previewPageMatch = match;
     }
   };
 
@@ -143,13 +175,8 @@ export function previewStart(
 
   history.listen(sendLocationChange);
 
-  if (options?.templateId) {
-    developHelper.updateTemplatePreviewSettings(
-      options.appId,
-      options.templateId,
-      options.settings
-    );
-    getHistory().reload();
+  if (options.templateId) {
+    updateTemplatePreviewSettings();
   }
 
   const mutationCallback = (): void => {
