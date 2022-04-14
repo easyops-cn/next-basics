@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.174.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.5...@next-bricks/basic-bricks@1.174.6) (2022-04-14)
+
+
+### Bug Fixes
+
+* **drawer:** 抽屉增加scroll方法 ([862e1cc](https://github.com/easyops-cn/next-basics/commit/862e1ccf34890f944fcc8c973b7b6ddcb0aa517d))
+
+
+
+
+
 ## [1.174.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.4...@next-bricks/basic-bricks@1.174.5) (2022-04-14)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
