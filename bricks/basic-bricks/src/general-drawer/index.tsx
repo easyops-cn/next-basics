@@ -12,7 +12,6 @@ import {
 import { GeneralDrawer } from "./GeneralDrawer";
 import style from "./index.shadow.less";
 import { DrawerProps } from "antd/lib/drawer";
-import { path } from "d3-path";
 export interface OpenCloseOption {
   noEvent?: boolean;
 }
@@ -326,6 +325,14 @@ export class GeneralDrawerElement extends UpdatingElement {
     if (!option?.noEvent) {
       this.drawerOpen.emit({});
     }
+  }
+  /**
+   * @description 抽屉内部内容上下滚动
+   */
+  @method() bodyScroll(top: number): void {
+    this._mountPoint
+      .querySelector(".ant-drawer-body")
+      .scroll({ top, behavior: "smooth" });
   }
   /**
    *
