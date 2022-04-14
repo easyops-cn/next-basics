@@ -1,0 +1,55 @@
+.scrollContainer {
+  height: 35px;
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  height: 43px;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid rgb(37, 37, 38);
+  background-color: rgb(45, 45, 45);
+  color: rgba(255, 255, 255, 0.5);
+  height: 35px;
+  width: 120px;
+  min-width: fit-content;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding-left: 10px;
+  user-select: none;
+}
+
+.active {
+  background-color: rgb(30, 30, 30);
+  color: #fff;
+}
+
+.tabIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tabName {
+  flex-grow: 1;
+}
+
+.actionsBar {
+  font-size: 12px;
+}
+
+.tab:not(:hover) .actionsBar {
+  visibility: hidden;
+}

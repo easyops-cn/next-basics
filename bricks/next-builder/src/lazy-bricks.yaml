@@ -18,4 +18,5 @@ lazyBricks:
       - workbench-pane
       - workbench-sidebar
       - workbench-store
+      - workbench-tabs
       - workbench-tree
