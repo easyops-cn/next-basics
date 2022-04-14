@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.241.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.8...@next-bricks/presentational-bricks@1.241.9) (2022-04-14)
+
+
+### Bug Fixes
+
+* **brick-alert-number:** 适配告警数量暗色模式 ([330dc95](https://github.com/easyops-cn/next-basics/commit/330dc954ec762e64a317223d2fa5a88ff8afd6b6))
+* **brick-conditional-display:** 适配文档的暗色模式，修改颜色变量 ([2cf8f16](https://github.com/easyops-cn/next-basics/commit/2cf8f16bd23fd40836900e6a4f216643f7d32511))
+* **brick-tag:** 适配表格文档的暗色模式，修改颜色变量 ([eefddc7](https://github.com/easyops-cn/next-basics/commit/eefddc7ecf6b0d9d44af4f5cc5157d1c3ec72ab7))
+* 适配表格文档的暗色模式，使用颜色变量 ([8ec74dd](https://github.com/easyops-cn/next-basics/commit/8ec74ddfd1b190118d6de1face84fd570940f029))
+
+
+
+
+
 ## [1.241.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.7...@next-bricks/presentational-bricks@1.241.8) (2022-04-14)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

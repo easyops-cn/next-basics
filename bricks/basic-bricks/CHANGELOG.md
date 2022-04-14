@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.174.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.6...@next-bricks/basic-bricks@1.174.7) (2022-04-14)
+
+
+### Bug Fixes
+
+* **general-modal:** 适配模态框的暗色模式，修改其文档展示示例 ([150044a](https://github.com/easyops-cn/next-basics/commit/150044ae48b266e09f91c2cdc0235f9a8e9abe87))
+
+
+
+
+
 ## [1.174.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.5...@next-bricks/basic-bricks@1.174.6) (2022-04-14)
 
 
