@@ -79,7 +79,7 @@ export const BrickTableStory: Story = {
               properties: {
                 showCard: false,
                 configProps: {
-                  color: "#108ee9",
+                  color: "var(--color-brand)",
                 },
               },
             },
@@ -653,7 +653,7 @@ export const BrickTableStory: Story = {
               properties: {
                 showCard: false,
                 configProps: {
-                  color: "#108ee9",
+                  color: "var(--color-brand)",
                 },
               },
             },

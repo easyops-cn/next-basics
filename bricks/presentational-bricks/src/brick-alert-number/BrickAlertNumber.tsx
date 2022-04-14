@@ -12,14 +12,14 @@ const rules: RuleProps[] = [
   {
     condition: { $eq: 0 },
     style: {
-      backgroundColor: "var(--bg-color-button-success)",
+      backgroundColor: "var(--color-success)",
       color: "white",
     },
   },
   {
     condition: { $gte: 1 },
     style: {
-      backgroundColor: "var(--bg-color-button-warning)",
+      backgroundColor: "var(--color-warning)",
       color: "white",
     },
   },
