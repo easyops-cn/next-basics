@@ -166,6 +166,7 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
             notRender={this.notRender}
             objectMap={objectMap}
             objectId={this.objectId}
+            modelData={objectMap[this.objectId]}
             instanceIdList={this.value}
             onChange={this._handleChange}
             onChangeV2={this._handleChangeV2}
