@@ -286,9 +286,13 @@ export class GeneralFormElement
 
   private _getGeneralForm(): ConnectedForm {
     if (this._GeneralForm) return this._GeneralForm;
-    this._GeneralForm = GeneralFormGen(this.name);
+    this._GeneralForm = GeneralFormGen(this.name, this._handlerValuesChange);
     return this._GeneralForm;
   }
+
+  private _handlerValuesChange = (value: Record<string, any>): void => {
+    this.valuesChangeEvent.emit(value);
+  };
 
   protected _render(): void {
     // istanbul ignore else
@@ -553,6 +557,14 @@ export class GeneralFormElement
   @event({ type: "validate.error" }) errorEvent: EventEmitter<
     Record<string, any>
   >;
+
+  /**
+   * @description 表单项有修改时触发
+   */
+  @event({ type: "values.change" }) valuesChangeEvent: EventEmitter<
+    Record<string, any>
+  >;
+
   lowLevelValidate(callback?: (params?: any) => void): void {
     this.formUtils.validateFields((err, values) => {
       // Todo(steve): shadowRoot is readonly
