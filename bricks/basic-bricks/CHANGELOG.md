@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.174.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.8...@next-bricks/basic-bricks@1.174.9) (2022-04-15)
+
+
+### Bug Fixes
+
+* **general-card:** 修复没有footer也显示分割线的问题 ([3a65d89](https://github.com/easyops-cn/next-basics/commit/3a65d890ddd38ef969b5c7ab849e5e201a20d08e))
+
+
+
+
+
 ## [1.174.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.7...@next-bricks/basic-bricks@1.174.8) (2022-04-15)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
