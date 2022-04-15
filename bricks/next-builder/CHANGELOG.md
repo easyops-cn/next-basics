@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.139.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.138.0...@next-bricks/next-builder@1.139.0) (2022-04-15)
+
+
+### Features
+
+* **workbench:** show text icon ([4d4edb2](https://github.com/easyops-cn/next-basics/commit/4d4edb2f7300da02b112ee6b56d33ae515f95392))
+
+
+
+
+
 # [1.138.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.137.0...@next-bricks/next-builder@1.138.0) (2022-04-15)
 
 
