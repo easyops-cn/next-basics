@@ -64,10 +64,6 @@ test("WorkbenchTree with nodes", async () => {
                 key: "4",
                 name: "n-4",
               },
-              {
-                key: "5",
-                name: "<% I18N('BTN_SUBMIT', 'Submit') %>",
-              },
             ],
           },
         ]}
@@ -117,7 +113,6 @@ test("WorkbenchTree with nodes", async () => {
   );
   expect(onContextMenu).toBeCalledWith(2, expect.anything());
 
-  expect(container.querySelectorAll(".nodeName")[4].textContent).toBe("Submit");
   fireEvent.change(getByPlaceholderText("Search"), { target: { value: "4" } });
   expect(rootTree.children.length).toBe(1);
   expect(
@@ -139,4 +134,46 @@ test("WorkbenchTree with nodes", async () => {
       .querySelector(".nodeLabelRow")
       .classList.contains("matched")
   ).toBe(false);
+});
+
+test("while isTransform is true, should tranform", () => {
+  const { container } = render(
+    <WorkbenchTreeContext.Provider
+      value={{
+        isTransformName: true,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: "1",
+            name: "<% I18N('BTN_SUBMIT', 'Submit') %>",
+          },
+        ]}
+      />
+    </WorkbenchTreeContext.Provider>
+  );
+  expect(container.querySelectorAll(".nodeName")[0].textContent).toBe("Submit");
+});
+
+test("while isTransform is false, should nottranform", () => {
+  const { container } = render(
+    <WorkbenchTreeContext.Provider
+      value={{
+        isTransformName: false,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: "1",
+            name: "<% I18N('BTN_SUBMIT', 'Submit') %>",
+          },
+        ]}
+      />
+    </WorkbenchTreeContext.Provider>
+  );
+  expect(container.querySelectorAll(".nodeName")[0].textContent).toBe(
+    "<% I18N('BTN_SUBMIT', 'Submit') %>"
+  );
 });
