@@ -175,6 +175,7 @@ export class GeneralCardElement extends UpdatingElement {
             fillVertical={this.fillVertical}
             verticalCenter={this.verticalCenter}
             isFixedFooter={this.isFixedFooter}
+            hasFooter={this.hasFooter}
           />
         </BrickWrapper>,
         this._mountPoint,
