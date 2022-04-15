@@ -36,6 +36,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property()
   placeholder: string;
 
+  @property({ type: Boolean })
+  isTransformName: boolean;
+
   @property()
   searchPlaceholder: string;
 
@@ -91,6 +94,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 activeKey: this.activeKey,
                 basePaddingLeft: 5,
                 showMatchedNodeOnly: this.showMatchedNodeOnly,
+                isTransformName: this.isTransformName,
                 clickFactory: this._nodeClickFactory,
                 matchNode: (node, lowerTrimmedQuery) =>
                   deepMatch(node.name, lowerTrimmedQuery) ||

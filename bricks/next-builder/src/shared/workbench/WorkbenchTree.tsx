@@ -120,6 +120,7 @@ function TreeNode({
   const {
     hoverKey,
     activeKey,
+    isTransformName,
     basePaddingLeft,
     showMatchedNodeOnly,
     clickFactory,
@@ -196,7 +197,9 @@ function TreeNode({
             <GeneralIcon icon={node.icon} />
           </span>
           <span className={styles.nodeName}>
-            {smartDisplayForEvaluableString(node.name)}
+            {isTransformName
+              ? smartDisplayForEvaluableString(node.name)
+              : node.name}
           </span>
         </span>
         <WorkbenchMiniActionBar
