@@ -59,7 +59,10 @@ export type ConnectedForm = ConnectedComponentClass<
   Omit<LegacyGeneralFormProps, keyof WrappedFormInternalProps>
 >;
 
-export const GeneralFormGen = (name?: string): ConnectedForm => {
+export const GeneralFormGen = (
+  name?: string,
+  onValuesChange?: (value: Record<string, any>) => void
+): ConnectedForm => {
   return Form.create<LegacyGeneralFormProps>({
     name,
     mapPropsToFields(props: LegacyGeneralFormProps) {
@@ -86,6 +89,9 @@ export const GeneralFormGen = (name?: string): ConnectedForm => {
             {}
           )
         : {};
+    },
+    onValuesChange(_, values) {
+      onValuesChange?.(values);
     },
   })(LegacyGeneralForm);
 };
