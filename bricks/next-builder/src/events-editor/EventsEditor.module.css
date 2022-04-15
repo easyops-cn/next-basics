@@ -106,3 +106,50 @@
     border-top: 1px dashed #e5e5e5;
   }
 }
+
+html[data-theme="dark-v2"] {
+  .brickName {
+    background: var(--palette-cyan-4);
+  }
+  .eventName {
+    color: var(--color-secondary-text);
+  }
+
+  .iconWrapper {
+    .plusIcon {
+      color: var(--color-brand);
+      &:hover {
+        color: var(--color-brand-hover);
+      }
+    }
+
+    .removeIcon {
+      color: var(--color-error);
+      &:hover {
+        color: var(--color-error-hover);
+      }
+    }
+  }
+
+  .eventName {
+    &::before {
+      border-color: var(--color-border-divider-line);
+    }
+  }
+
+  .eventWrapper {
+    .strikeLine {
+      border-left-color: var(--color-border-divider-line);
+    }
+  }
+
+  .actionArea {
+    &::before {
+      border-top-color: var(--color-border-divider-line);
+    }
+  }
+
+  .addIcon {
+    color: var(--color-secondary-text);
+  }
+}

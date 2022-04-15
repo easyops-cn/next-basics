@@ -7,6 +7,7 @@ import React, {
   useCallback,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { useCurrentTheme } from "@next-core/brick-kit";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import {
@@ -61,6 +62,7 @@ export function LegacyEventConfigForm(
   ref: React.Ref<Partial<FormInstance>>
 ): React.ReactElement {
   const { t } = useTranslation(NS_NEXT_BUILDER);
+  const theme = useCurrentTheme();
   const {
     labelCol,
     wrapperCol,
@@ -111,7 +113,7 @@ export function LegacyEventConfigForm(
           maxLines="Infinity"
           printMargin={false}
           showLineNumbers={true}
-          theme="tomorrow"
+          theme={theme === "dark-v2" ? "monokai" : "tomorrow"}
           enableLiveAutocompletion={true}
           mode="brick_next_yaml"
           highlightTokens={highlightTokens}
