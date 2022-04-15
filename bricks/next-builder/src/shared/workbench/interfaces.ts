@@ -4,7 +4,7 @@ import type { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 export interface WorkbenchNodeData<T = unknown> {
   key: string | number;
   name: string;
-  icon?: MenuIcon;
+  icon?: MenuIcon | TextIcon;
   data?: T;
   labelColor?: string;
   link?:
@@ -35,3 +35,9 @@ export type WorkbenchRuntimeNode = BuilderRuntimeNode & {
   $isRoot?: boolean;
   $nextChildSort?: number;
 };
+
+export interface TextIcon {
+  lib: "text";
+  icon: string;
+  color?: string;
+}

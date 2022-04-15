@@ -136,7 +136,7 @@ test("WorkbenchTree with nodes", async () => {
   ).toBe(false);
 });
 
-test("while isTransform is true, should tranform", () => {
+test("while isTransform is true, should transform", () => {
   const { container } = render(
     <WorkbenchTreeContext.Provider
       value={{
@@ -153,10 +153,10 @@ test("while isTransform is true, should tranform", () => {
       />
     </WorkbenchTreeContext.Provider>
   );
-  expect(container.querySelectorAll(".nodeName")[0].textContent).toBe("Submit");
+  expect(container.querySelector(".nodeName").textContent).toBe("Submit");
 });
 
-test("while isTransform is false, should nottranform", () => {
+test("while isTransform is false, should not transform", () => {
   const { container } = render(
     <WorkbenchTreeContext.Provider
       value={{
@@ -173,7 +173,29 @@ test("while isTransform is false, should nottranform", () => {
       />
     </WorkbenchTreeContext.Provider>
   );
-  expect(container.querySelectorAll(".nodeName")[0].textContent).toBe(
+  expect(container.querySelector(".nodeName").textContent).toBe(
     "<% I18N('BTN_SUBMIT', 'Submit') %>"
   );
+});
+
+test("tabs with text-icon", () => {
+  const { container } = render(
+    <WorkbenchTree
+      nodes={[
+        {
+          key: "1",
+          name: "Text",
+          icon: {
+            lib: "text",
+            icon: "TS",
+            color: "blue",
+          },
+        },
+      ]}
+    />
+  );
+  expect(container.querySelector(".nodeIcon").textContent).toBe("TS");
+  expect(
+    (container.querySelector(".nodeIcon").firstChild as HTMLElement).style.color
+  ).toBe("blue");
 });

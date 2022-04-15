@@ -11,11 +11,12 @@ import { Input } from "antd";
 import { pick } from "lodash";
 import classNames from "classnames";
 import { SearchOutlined } from "@ant-design/icons";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
 import type { WorkbenchNodeData } from "./interfaces";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
-import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
+import { WorkbenchTextIcon } from "./WorkbenchTextIcon";
 
 import styles from "./WorkbenchTree.module.css";
 
@@ -194,7 +195,11 @@ function TreeNode({
           ref={nodeLabelCallback}
         >
           <span className={styles.nodeIcon}>
-            <GeneralIcon icon={node.icon} />
+            {node.icon?.lib === "text" ? (
+              <WorkbenchTextIcon icon={node.icon} />
+            ) : (
+              <GeneralIcon icon={node.icon} />
+            )}
           </span>
           <span className={styles.nodeName}>
             {isTransformName

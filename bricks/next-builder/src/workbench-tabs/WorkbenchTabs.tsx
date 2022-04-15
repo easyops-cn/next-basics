@@ -5,7 +5,11 @@ import type { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { WorkbenchMiniActionBar } from "../shared/workbench/WorkbenchMiniActionBar";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
-import { ActionClickDetail } from "../shared/workbench/interfaces";
+import type {
+  ActionClickDetail,
+  TextIcon,
+} from "../shared/workbench/interfaces";
+import { WorkbenchTextIcon } from "../shared/workbench/WorkbenchTextIcon";
 
 import styles from "./WorkbenchTabs.module.css";
 import sharedStyles from "../shared/scrollbar.module.css";
@@ -20,7 +24,7 @@ export interface WorkbenchTabsProps {
 export interface WorkbenchTabConf {
   key: string | number;
   name: string;
-  icon?: MenuIcon;
+  icon?: MenuIcon | TextIcon;
   type?: string;
 }
 
@@ -99,7 +103,11 @@ export function WorkbenchTabs({
               ref={tab.key === initialActiveTabKey ? activeTabCallback : null}
             >
               <span className={styles.tabIcon}>
-                <GeneralIcon icon={tab.icon} />
+                {tab.icon?.lib === "text" ? (
+                  <WorkbenchTextIcon icon={tab.icon} />
+                ) : (
+                  <GeneralIcon icon={tab.icon} />
+                )}
               </span>
               <span className={styles.tabName}>{tab.name}</span>
               <WorkbenchMiniActionBar
