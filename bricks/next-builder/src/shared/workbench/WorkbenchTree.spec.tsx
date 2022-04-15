@@ -64,6 +64,10 @@ test("WorkbenchTree with nodes", async () => {
                 key: "4",
                 name: "n-4",
               },
+              {
+                key: "5",
+                name: "<% I18N('BTN_SUBMIT', 'Submit') %>",
+              },
             ],
           },
         ]}
@@ -113,6 +117,7 @@ test("WorkbenchTree with nodes", async () => {
   );
   expect(onContextMenu).toBeCalledWith(2, expect.anything());
 
+  expect(container.querySelectorAll(".nodeName")[4].textContent).toBe("Submit");
   fireEvent.change(getByPlaceholderText("Search"), { target: { value: "4" } });
   expect(rootTree.children.length).toBe(1);
   expect(
