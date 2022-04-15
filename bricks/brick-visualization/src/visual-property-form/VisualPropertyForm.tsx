@@ -10,6 +10,7 @@ import {
   Empty,
 } from "antd";
 import { EmptyProps } from "antd/lib/empty";
+import { useCurrentTheme } from "@next-core/brick-kit";
 import { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import update from "immutability-helper";
@@ -57,6 +58,7 @@ export function LegacyVisualPropertyForm(
   props: VisualPropertyFormProps,
   ref: React.Ref<visualFormUtils>
 ): React.ReactElement {
+  const theme = useCurrentTheme();
   const {
     projectId,
     labelIcon,
@@ -157,6 +159,7 @@ export function LegacyVisualPropertyForm(
         name={item.name}
         label={renderLabel(item, hideIcon)}
         required={item.required === Required.True}
+        theme={theme === "dark-v2" ? "monokai" : "tomorrow"}
         jsonSchema={item?.jsonSchema}
         schemaRef={item?.schemaRef}
         mode="brick_next_yaml"

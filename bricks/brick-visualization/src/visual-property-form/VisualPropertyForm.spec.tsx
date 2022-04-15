@@ -4,11 +4,11 @@ import { mount, shallow } from "enzyme";
 import { VisualPropertyForm } from "./VisualPropertyForm";
 import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { act } from "react-dom/test-utils";
-// import { SketchPicker } from "react-color";
+import * as brickKit from "@next-core/brick-kit";
 
 jest.mock("@next-libs/code-editor-components", () => ({
-  CodeEditorItem: function MockEditor() {
-    return <div>code editor</div>;
+  CodeEditorItem: function MockEditor(props: any) {
+    return <div date-theme={props.theme}>code editor</div>;
   },
 }));
 
@@ -98,6 +98,9 @@ describe("VisualPropertyForm", () => {
   });
 
   it("should work with differnt mode", () => {
+    const spyOnUseTheme = jest
+      .spyOn(brickKit, "useCurrentTheme")
+      .mockReturnValue("dark-v2");
     const props = {
       brickProperties: {
         name: "lucy",
@@ -131,6 +134,11 @@ describe("VisualPropertyForm", () => {
     wrapper.find(".iconContainer").at(0).invoke("onClick")("name");
     expect(wrapper.find(Input).length).toEqual(1);
     expect(wrapper.find("MockEditor").length).toEqual(1);
+    expect(wrapper.find("MockEditor div").prop("date-theme")).toEqual(
+      "tomorrow"
+    );
+
+    spyOnUseTheme.mockRestore();
   });
 
   it("should render template params", () => {

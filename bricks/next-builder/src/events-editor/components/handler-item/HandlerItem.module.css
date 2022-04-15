@@ -54,3 +54,19 @@
 .unknown > .handleContainer > .icon {
   color: #f0493c;
 }
+
+html[data-theme="dark-v2"] {
+  .handleContainer {
+    background: var(--color-fill-bg-base-3);
+    &:hover {
+      background: var(--color-fill-bg-base-2);
+    }
+  }
+
+  .handler {
+    color: var(--color-normal-text);
+  }
+  .ifTag {
+    background: var(--color-secondary-text);
+  }
+}
