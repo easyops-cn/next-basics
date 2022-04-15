@@ -5,6 +5,7 @@ import { CardProps } from "antd/lib/card";
 import { ButtonProps } from "antd/lib/button";
 import { isEmpty } from "lodash";
 import ResizeObserver from "resize-observer-polyfill";
+import classNames from "classnames";
 
 export interface OperationButton {
   // to listen for
@@ -24,6 +25,7 @@ export interface GeneralCardProps {
   fillVertical?: boolean;
   verticalCenter?: boolean;
   isFixedFooter?: boolean;
+  hasFooter?: boolean;
 }
 
 export function GeneralCard({
@@ -34,6 +36,7 @@ export function GeneralCard({
   fillVertical,
   verticalCenter,
   isFixedFooter,
+  hasFooter,
 }: GeneralCardProps): React.ReactElement {
   const [paddingBottom, setPaddingBottom] = useState(0);
   const [fixedStyle, setFixedStyle] = useState({});
@@ -148,7 +151,10 @@ export function GeneralCard({
         <slot id="contentSlot" name="content" />
       </div>
       <div
-        className="generalCardFooter"
+        className={classNames({
+          ["generalCardFooter"]: true,
+          ["generalCardWithFooter"]: hasFooter,
+        })}
         ref={footerRef}
         style={{
           ...fixedStyle,
