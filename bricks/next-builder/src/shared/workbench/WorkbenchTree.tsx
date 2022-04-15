@@ -15,6 +15,7 @@ import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
 import type { WorkbenchNodeData } from "./interfaces";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
+import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 
 import styles from "./WorkbenchTree.module.css";
 
@@ -119,6 +120,7 @@ function TreeNode({
   const {
     hoverKey,
     activeKey,
+    isTransformName,
     basePaddingLeft,
     showMatchedNodeOnly,
     clickFactory,
@@ -194,7 +196,11 @@ function TreeNode({
           <span className={styles.nodeIcon}>
             <GeneralIcon icon={node.icon} />
           </span>
-          <span className={styles.nodeName}>{node.name}</span>
+          <span className={styles.nodeName}>
+            {isTransformName
+              ? smartDisplayForEvaluableString(node.name)
+              : node.name}
+          </span>
         </span>
         <WorkbenchMiniActionBar
           className={styles.nodeActionsBar}

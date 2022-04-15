@@ -135,3 +135,45 @@ test("WorkbenchTree with nodes", async () => {
       .classList.contains("matched")
   ).toBe(false);
 });
+
+test("while isTransform is true, should tranform", () => {
+  const { container } = render(
+    <WorkbenchTreeContext.Provider
+      value={{
+        isTransformName: true,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: "1",
+            name: "<% I18N('BTN_SUBMIT', 'Submit') %>",
+          },
+        ]}
+      />
+    </WorkbenchTreeContext.Provider>
+  );
+  expect(container.querySelectorAll(".nodeName")[0].textContent).toBe("Submit");
+});
+
+test("while isTransform is false, should nottranform", () => {
+  const { container } = render(
+    <WorkbenchTreeContext.Provider
+      value={{
+        isTransformName: false,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: "1",
+            name: "<% I18N('BTN_SUBMIT', 'Submit') %>",
+          },
+        ]}
+      />
+    </WorkbenchTreeContext.Provider>
+  );
+  expect(container.querySelectorAll(".nodeName")[0].textContent).toBe(
+    "<% I18N('BTN_SUBMIT', 'Submit') %>"
+  );
+});
