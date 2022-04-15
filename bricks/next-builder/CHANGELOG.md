@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.138.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.137.0...@next-bricks/next-builder@1.138.0) (2022-04-15)
+
+
+### Features
+
+* **workBenchTree:** add isTransformName props ([981cf2f](https://github.com/easyops-cn/next-basics/commit/981cf2f3e5c3038d9a56c20c08328c98cf70b430))
+* **workBenchTree:** support calc node name ([9958646](https://github.com/easyops-cn/next-basics/commit/9958646e250a7ebc291af22b548c5ae720305252))
+* **workBenchTree:** update unit test ([d724d40](https://github.com/easyops-cn/next-basics/commit/d724d40b1bccf831d78d34231cf71e86947a590b))
+
+
+
+
+
 # [1.137.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.136.3...@next-bricks/next-builder@1.137.0) (2022-04-14)
 
 

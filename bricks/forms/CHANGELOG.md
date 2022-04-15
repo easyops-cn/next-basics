@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.216.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.215.4...@next-bricks/forms@1.216.0) (2022-04-15)
+
+
+### Features
+
+* support values.change events ([ecf3896](https://github.com/easyops-cn/next-basics/commit/ecf38960d960a6e98652ad79c71c6980c213b10a))
+
+
+
+
+
 ## [1.215.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.215.3...@next-bricks/forms@1.215.4) (2022-04-14)
 
 **Note:** Version bump only for package @next-bricks/forms
