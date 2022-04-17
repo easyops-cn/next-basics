@@ -21,6 +21,7 @@ import { CodeEditorFormItem } from "./components/CodeEditor/CodeEditorFormItem";
 import { IconSelectFormItem } from "./components/IconSelect/IconSelectFormItem";
 import { ColorEditorItem } from "./components/ColorEditor/ColorEditorItem";
 import { MenuEditorItem } from "./components/MenuEditor/MenuEditorItem";
+import { ReactComponent as DarkEmpty } from "./images/empty-dark.svg";
 import {
   mergeProperties,
   calculateValue,
@@ -319,8 +320,9 @@ export function LegacyVisualPropertyForm(
 
   return isEmpty(typeList) ? (
     <Empty
+      className={styles.empty}
       description={emptyConfig?.description}
-      image={Empty.PRESENTED_IMAGE_SIMPLE}
+      image={theme === "dark-v2" ? <DarkEmpty /> : Empty.PRESENTED_IMAGE_SIMPLE}
       imageStyle={emptyConfig?.imageStyle}
     />
   ) : (

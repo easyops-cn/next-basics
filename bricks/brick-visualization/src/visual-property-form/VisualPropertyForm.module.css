@@ -25,3 +25,9 @@
   /* hiden temporary */
   display: none;
 }
+
+.empty {
+  :global(.ant-empty-description) {
+    color: var(--color-disabled-text);
+  }
+}
