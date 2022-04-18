@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.141.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.140.0...@next-bricks/next-builder@1.141.0) (2022-04-18)
+
+
+### Features
+
+* **workbenQuickEntry:** add new Brick ([2e2ba1f](https://github.com/easyops-cn/next-basics/commit/2e2ba1f27e0c4f90768350819a5de734bb3da875))
+
+
+
+
+
 # [1.140.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.139.1...@next-bricks/next-builder@1.140.0) (2022-04-18)
 
 
