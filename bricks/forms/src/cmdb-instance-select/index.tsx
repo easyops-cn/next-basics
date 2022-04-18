@@ -238,6 +238,15 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    */
   @property({ attribute: false })
   permission?: Array<"read" | "update" | "operate">;
+
+  /**
+   * @kind boolean
+   * @default
+   * @description 是否忽略不存在字段
+   * @group advanced
+   */
+  @property({ attribute: false })
+  ignoreMissingFieldError?: boolean;
   /**
    * @default false
    * @required false
@@ -307,6 +316,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             disabled={this.disabled}
             permission={this.permission}
             showTooltip={this.showTooltip}
+            ignoreMissingFieldError={this.ignoreMissingFieldError}
           />
         </BrickWrapper>,
         this
