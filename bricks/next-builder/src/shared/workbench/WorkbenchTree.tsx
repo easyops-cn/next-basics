@@ -26,6 +26,7 @@ export interface WorkbenchTreeProps {
   nodes: WorkbenchNodeData[];
   placeholder?: string;
   searchPlaceholder?: string;
+  noSearch?: boolean;
 }
 
 export interface TreeListProps {
@@ -39,6 +40,7 @@ export function WorkbenchTree({
   nodes,
   placeholder,
   searchPlaceholder,
+  noSearch,
 }: WorkbenchTreeProps): ReactElement {
   const [q, setQ] = useState<string>(null);
 
@@ -53,7 +55,7 @@ export function WorkbenchTree({
 
   const trimmedLowerQ = q?.trim().toLowerCase();
   const filteredNodes = useMemo(() => {
-    if (!trimmedLowerQ || !nodes) {
+    if (noSearch || !trimmedLowerQ || !nodes) {
       return nodes;
     }
     const walk = (node: WorkbenchNodeData): boolean => {
@@ -64,20 +66,22 @@ export function WorkbenchTree({
     };
     nodes.forEach(walk);
     return nodes.slice();
-  }, [trimmedLowerQ, nodes, matchNode]);
+  }, [noSearch, trimmedLowerQ, nodes, matchNode]);
 
   return nodes?.length ? (
     <div>
-      <div className={styles.searchBox}>
-        <Input
-          value={q}
-          onChange={handleSearchChange}
-          size="small"
-          placeholder={searchPlaceholder}
-          prefix={<SearchOutlined />}
-          allowClear
-        />
-      </div>
+      {!noSearch && (
+        <div className={styles.searchBox}>
+          <Input
+            value={q}
+            onChange={handleSearchChange}
+            size="small"
+            placeholder={searchPlaceholder}
+            prefix={<SearchOutlined />}
+            allowClear
+          />
+        </div>
+      )}
       <SearchingContext.Provider value={!!q}>
         <TreeList nodes={filteredNodes} level={1} />
       </SearchingContext.Provider>

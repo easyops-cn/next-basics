@@ -199,3 +199,23 @@ test("tabs with text-icon", () => {
     (container.querySelector(".nodeIcon").firstChild as HTMLElement).style.color
   ).toBe("blue");
 });
+
+test("tabs with no-search", () => {
+  const { container } = render(
+    <WorkbenchTree
+      nodes={[
+        {
+          key: 1,
+          name: "n-1",
+        },
+        {
+          key: 2,
+          name: "n-2",
+        },
+      ]}
+      noSearch
+    />
+  );
+  expect(container.querySelector(".searchBox")).toBe(null);
+  expect(container.querySelector(".tree").children.length).toBe(2);
+});

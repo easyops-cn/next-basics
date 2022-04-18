@@ -42,6 +42,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property()
   searchPlaceholder: string;
 
+  @property({ type: Boolean })
+  noSearch: boolean;
+
   @property({ attribute: false })
   activeKey: string | number;
 
@@ -111,6 +114,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 nodes={this.nodes}
                 placeholder={this.placeholder}
                 searchPlaceholder={this.searchPlaceholder}
+                noSearch={this.noSearch}
               />
             </WorkbenchTreeContext.Provider>
           </WorkbenchActionsContext.Provider>
