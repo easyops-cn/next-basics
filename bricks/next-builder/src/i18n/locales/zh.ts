@@ -25,6 +25,7 @@ const locale: Locale = {
   [K.ENTER_FULLSCREEN]: "进入全屏模式",
   [K.EXIT_FULLSCREEN]: "退出全屏模式",
   [K.CLOSE]: "关闭",
+  [K.MORE]: "更多",
   [K.NODE_ACTION_EVENTS_VIEW]: "事件视图",
   [K.NODE_ACTION_COPY]: "复制",
   [K.NODE_ACTION_CUT]: "剪切",

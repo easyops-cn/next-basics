@@ -2648,6 +2648,13 @@
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-2.0.2.tgz#59bc984ba098bf817670dfcf87f7302be8f62a4c"
   integrity sha512-6sz9tIyonGDWIynO2DnmEZhOpGFVpnfLNP9hSjgWI3LRE3O826zdOxUnHx1QiWL8h8CIWHcElb/ULy5R64/oOA==
 
+"@next-libs/visit-history@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/@next-libs/visit-history/-/visit-history-2.0.2.tgz#d54c6a2cd7e793dd88bfd30e55d4c3ea3e4548e9"
+  integrity sha512-iwLu7O4ici7HGqsfM0yWl7uRfrij4OCEq/8ouz3OVn0iKpl4XFZuN9Qj1vEZo96b8wxtLhGdu8TsTZJ197S0JA==
+  dependencies:
+    "@next-libs/storage" "^2.0.2"
+
 "@next-sdk/air-admin-service-sdk@^2.1.12":
   version "2.1.12"
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.12.tgz#575d54d42c334adbadc72027f25b59f99461892d"
