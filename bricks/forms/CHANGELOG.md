@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.217.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.216.0...@next-bricks/forms@1.217.0) (2022-04-18)
+
+
+### Features
+
+* **forms:** support ignoreMissingFieldError ([9bfd78c](https://github.com/easyops-cn/next-basics/commit/9bfd78cb1e770ff92a531ec7f5edc42afc57617d))
+
+
+
+
+
 # [1.216.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.215.4...@next-bricks/forms@1.216.0) (2022-04-15)
 
 

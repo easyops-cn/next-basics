@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.174.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.9...@next-bricks/basic-bricks@1.174.10) (2022-04-18)
+
+
+### Bug Fixes
+
+* refactor hasfooter ([d4c4b43](https://github.com/easyops-cn/next-basics/commit/d4c4b436ee649c34ee2bd23cd4800dfe331c43a4))
+
+
+
+
+
 ## [1.174.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.8...@next-bricks/basic-bricks@1.174.9) (2022-04-15)
 
 

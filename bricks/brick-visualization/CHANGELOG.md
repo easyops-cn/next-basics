@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.9.2...@next-bricks/brick-visualization@1.9.3) (2022-04-18)
+
+
+### Bug Fixes
+
+* dark mode ([b73e246](https://github.com/easyops-cn/next-basics/commit/b73e246e90b21b4abd15c84802744db1ea262c04))
+* dark mode ([55aca5b](https://github.com/easyops-cn/next-basics/commit/55aca5b886d527972484389ec0a8fc7c0f9f4f2a))
+
+
+
+
+
 ## [1.9.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.9.1...@next-bricks/brick-visualization@1.9.2) (2022-04-12)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization

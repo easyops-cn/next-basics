@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.139.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.139.0...@next-bricks/next-builder@1.139.1) (2022-04-18)
+
+
+### Bug Fixes
+
+* dark mode ([55aca5b](https://github.com/easyops-cn/next-basics/commit/55aca5b886d527972484389ec0a8fc7c0f9f4f2a))
+* support workbench-tree with no search ([500144f](https://github.com/easyops-cn/next-basics/commit/500144f634d910b112661b807571698868e79e8b))
+
+
+
+
+
 # [1.139.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.138.0...@next-bricks/next-builder@1.139.0) (2022-04-15)
 
 
