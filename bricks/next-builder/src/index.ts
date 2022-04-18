@@ -46,6 +46,7 @@ import "./data-providers/GetTypeDeclarations";
 import "./data-providers/GetTypeDeclarationsOfFn";
 import "./custom-processors/getWorkbenchRouteTree";
 // !Lazy: import "./workbench-action";
+// !Lazy: import "./workbench-action-list";
 // !Lazy: import "./workbench-sidebar";
 // !Lazy: import "./workbench-pane";
 // !Lazy: import "./workbench-tree";

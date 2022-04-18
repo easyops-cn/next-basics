@@ -12,6 +12,7 @@ lazyBricks:
     bricks:
       - preview-container
       - workbench-action
+      - workbench-action-list
       - workbench-brick-tree
       - workbench-context-menu
       - workbench-mini-action-bar
