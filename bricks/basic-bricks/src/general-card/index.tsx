@@ -80,6 +80,14 @@ export class GeneralCardElement extends UpdatingElement {
   hasExtraSlot: boolean;
 
   /**
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  hasFooter: boolean;
+
+  /**
    * @kind boolean
    * @required false
    * @default true
@@ -96,7 +104,6 @@ export class GeneralCardElement extends UpdatingElement {
   private _operationBtns: OperationButton[] = [];
   private idEventNameMap: Map<string, string> = new Map();
   private eventDetailMap: Map<string, any> = new Map();
-  private hasFooter: boolean;
   private _getFooterSlot(): HTMLSlotElement {
     return this.shadowRoot.querySelector("#footerSlot") as HTMLSlotElement;
   }
@@ -154,6 +161,8 @@ export class GeneralCardElement extends UpdatingElement {
   }
 
   disconnectedCallback(): void {
+    const footerSlot = this._getFooterSlot();
+    footerSlot?.removeEventListener("slotchange", this._checkFooterSlot);
     ReactDOM.unmountComponentAtNode(this._mountPoint);
   }
 
@@ -175,7 +184,6 @@ export class GeneralCardElement extends UpdatingElement {
             fillVertical={this.fillVertical}
             verticalCenter={this.verticalCenter}
             isFixedFooter={this.isFixedFooter}
-            hasFooter={this.hasFooter}
           />
         </BrickWrapper>,
         this._mountPoint,

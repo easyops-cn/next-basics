@@ -56,6 +56,7 @@
   z-index: 999;
 }
 
-.generalCardWithFooter {
-  border-top: var(--border-width-base) solid var(--color-border-divider-line);
+:host([has-footer]) .generalCardFooter {
+  border-top: var(--border-width-base) solid
+    var(--antd-card-footer-top-border-color);
 }
