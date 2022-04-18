@@ -1,0 +1,7 @@
+.workBenchActionList {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  height: 100%;
+  background-color: rgb(51, 51, 51);
+}
