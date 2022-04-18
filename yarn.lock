@@ -2571,10 +2571,10 @@
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.2.tgz#0062beedab56666f22a2f7a6f811635179730e64"
   integrity sha512-NTal//gM/X/pE6NFUDOxlsspUaPS20k8JyOejwf1CtJRochoRjlo+nkkkQCp8sNmVGqt4N4bRk0nW8APmeBAnA==
 
-"@next-libs/cmdb-instances@^6.21.17":
-  version "6.21.17"
-  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.21.17.tgz#0012fdfa70740ae012a5a8cdcaaa4c15ac9c1755"
-  integrity sha512-fT6hdk0dGDpRtvv+KNm8Po8DwSb6dNXI5AEvOeKwMwdK4ZOwvjBodUFrJvmgnOX3NLqkLtiolurcHxpoc/Upmg==
+"@next-libs/cmdb-instances@^6.21.17", "@next-libs/cmdb-instances@^6.21.18":
+  version "6.21.18"
+  resolved "https://registry.npmjs.org/@next-libs/cmdb-instances/-/cmdb-instances-6.21.18.tgz#4f0cc914517fa19290254dea97eccb8aec13c0bb"
+  integrity sha512-gG0ikV0SbbdyQSSNRM9G2YF1/6yKA/GqegkXP3q40EeQskENpO0SBtVmzxtp3s7srATIOkZs/Ug69YmBFwo6XQ==
   dependencies:
     "@next-core/brick-types" "^2.16.0"
     "@next-libs/basic-components" "^3.4.0"
