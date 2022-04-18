@@ -7,7 +7,7 @@
 
 .debug,
 .test.input {
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr minmax(0, 1fr) 1fr;
 }
 
 .test.output {
@@ -23,6 +23,10 @@
 .header,
 .secondHeader {
   padding: 0 8px;
+}
+
+.header {
+  white-space: nowrap;
 }
 
 .headerSuffix {

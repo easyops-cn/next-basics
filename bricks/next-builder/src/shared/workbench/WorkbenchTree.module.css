@@ -15,7 +15,6 @@
 
 .nodeLabelRow {
   display: flex;
-  justify-content: space-between;
   cursor: pointer;
   height: 22px;
 }
@@ -40,6 +39,7 @@
   display: flex;
   align-items: center;
   min-width: 0;
+  flex: 1;
 }
 
 .nodeAction,
@@ -79,4 +79,8 @@
 
 .nodeLabelRow:not(:hover) .nodeActionsBar {
   display: none;
+}
+
+.badge {
+  margin: 0 3px;
 }
