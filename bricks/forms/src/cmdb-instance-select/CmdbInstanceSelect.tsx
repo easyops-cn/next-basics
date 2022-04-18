@@ -40,6 +40,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   disabled?: boolean;
   permission?: Array<"read" | "update" | "operate">;
   showTooltip?: boolean;
+  ignoreMissingFieldError?: boolean;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -73,6 +74,7 @@ export function CmdbInstanceSelectItem(
     pageSize,
     showSearchTip,
     permission,
+    ignoreMissingFieldError,
   } = props;
   const userQuery = formatUserQuery(props.instanceQuery);
   //istanbul ignore else
@@ -156,6 +158,7 @@ export function CmdbInstanceSelectItem(
           ...(permission ? { permission } : {}),
           fields: computeFields(),
           page_size: pageSizeQuery || pageSize,
+          ignore_missing_field_error: ignoreMissingFieldError,
         });
 
         list = data.list;
