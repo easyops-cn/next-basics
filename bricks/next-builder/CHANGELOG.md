@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.140.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.139.1...@next-bricks/next-builder@1.140.0) (2022-04-18)
+
+
+### Features
+
+* **workBenchActionList:** add new brick ([2716e99](https://github.com/easyops-cn/next-basics/commit/2716e99f29026a6aa26d81d783be5d3be8a63961))
+* **workBenchActionList:** update lazy-brick.yaml ([b290532](https://github.com/easyops-cn/next-basics/commit/b2905326c65a1ffbd8e88c993ac21af4d61562d9))
+
+
+
+
+
 ## [1.139.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.139.0...@next-bricks/next-builder@1.139.1) (2022-04-18)
 
 
