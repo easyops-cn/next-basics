@@ -58,3 +58,4 @@ import "./data-providers/ReplaceSingleThemePage";
 // !Lazy: import "./workbench-context-menu";
 import "./data-providers/PasteBricks";
 // !Lazy: import "./workbench-tabs";
+// !Lazy: import "./workbench-quick-entry";

@@ -1,0 +1,25 @@
+.quickEntryWrapper {
+  .title {
+    font-size: 22px;
+    color: var(--color-strong-text);
+    padding: 12px 0;
+  }
+
+  .entryList {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    > a {
+      padding: 4px 0;
+      > span {
+        margin-right: 6px;
+      }
+    }
+  }
+  .moreButton {
+    padding: 4px 0;
+    font-size: 18px;
+    color: var(--antd-link-color);
+    cursor: pointer;
+  }
+}

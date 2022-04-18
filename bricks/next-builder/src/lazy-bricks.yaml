@@ -21,3 +21,4 @@ lazyBricks:
       - workbench-store
       - workbench-tabs
       - workbench-tree
+      - workbench-quick-entry

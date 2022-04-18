@@ -25,6 +25,7 @@ const locale: Locale = {
   [K.ENTER_FULLSCREEN]: "Enter fullscreen",
   [K.EXIT_FULLSCREEN]: "Exit fullscreen",
   [K.CLOSE]: "Close",
+  [K.MORE]: "More",
   [K.NODE_ACTION_EVENTS_VIEW]: "Events view",
   [K.NODE_ACTION_COPY]: "Copy",
   [K.NODE_ACTION_CUT]: "Cut",
