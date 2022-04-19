@@ -19,7 +19,7 @@ const locale: Locale = {
   [K.DARK_THEME]: "暗黑主题",
   [K.SEARCH_BY_NAME_KEYWORD]: "通过名称/关键字搜索",
   [K.FORBIDDEN]: "无访问权限",
-  [K.NOT_FOUND]: "未找到页面",
+  [K.NOT_FOUND]: "请求资源不存在",
   [K.SERVER_ERROR]: "服务端异常",
 };
 
