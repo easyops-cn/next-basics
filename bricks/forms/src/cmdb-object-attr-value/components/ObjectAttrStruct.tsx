@@ -1,5 +1,10 @@
 import React from "react";
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  SwapOutlined,
+} from "@ant-design/icons";
 import { Form } from "@ant-design/compatible";
 import { Modal, Row, Radio, Button, Table, Input, Select, Tag } from "antd";
 import _, { isNil, isEmpty, omit } from "lodash";
@@ -9,6 +14,22 @@ import { CmdbObjectApi_getObjectAll, CmdbModels } from "@next-sdk/cmdb-sdk";
 import { valueTypeList } from "../CmdbObjectAttrValue";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../../i18n/constants";
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from "react-sortable-hoc";
+import styles from "./index.module.css";
+import { ColumnsType } from "antd/lib/table";
+
+export interface SortEnd {
+  oldIndex: number;
+  newIndex: number;
+  collection: number | string;
+  isKeySorting: boolean;
+  nodes: HTMLElement[];
+}
+
 const Option = Select.Option;
 
 const currentLang = i18n.language?.split("-")[0];
@@ -43,7 +64,7 @@ const objectAttrColumns = [
     title: i18n.t(`${NS_FORMS}:${K.ATTRIBUTE_TYPE}`),
     dataIndex: ["value", "type"],
     key: "type",
-    render: (text, record) =>
+    render: (text: string, record: any) =>
       valueTypeList.filter((type) => type.key === text)[0].text,
   },
 ];
@@ -73,7 +94,9 @@ export function LegacyObjectAttrStructForm(
 
   const [importStructModalVisible, setImportStructModalVisible] =
     React.useState(false);
-  const [currentStruct, setCurrentStruct] = React.useState<StructDefine>({});
+  const [currentStruct, setCurrentStruct] = React.useState<StructDefine>(
+    {} as StructDefine
+  );
   const [cmdbObjectList, setCmdbObjectList] = React.useState<
     Partial<CmdbModels.ModelCmdbObject>[]
   >([]);
@@ -155,6 +178,47 @@ export function LegacyObjectAttrStructForm(
     </div>
   );
 
+  const DragHandle = SortableHandle(() => (
+    <SwapOutlined className={styles.iconRotate} />
+  ));
+
+  const SortableItem = SortableElement((props: any) => <tr {...props} />);
+
+  const SortableBody = SortableContainer((props: any) => <tbody {...props} />);
+
+  const onSortEnd = ({ oldIndex, newIndex }: SortEnd) => {
+    const dataSource = value?.struct_define;
+    if (oldIndex !== newIndex) {
+      const tempData = [].concat(dataSource);
+      const temp = tempData[oldIndex];
+      tempData[oldIndex] = tempData[newIndex];
+      tempData[newIndex] = temp;
+      handleValueChange({
+        ...value,
+        struct_define: tempData.filter((el) => !!el),
+      });
+    }
+  };
+
+  const DraggableContainer = (props: any) => (
+    <SortableBody
+      useDragHandle
+      disableAutoscroll
+      helperClass={styles["row-dragging"]}
+      onSortEnd={onSortEnd}
+      {...props}
+    />
+  );
+
+  const DraggableBodyRow = ({ className, style, ...restProps }: any) => {
+    const dataSource = value?.struct_define;
+    // function findIndex base on Table rowKey props and should always be a right array index
+    const index = dataSource.findIndex(
+      (x) => x?.id === restProps["data-row-key"]
+    );
+    return <SortableItem index={index} {...restProps} />;
+  };
+
   const structColumns = [
     {
       title: i18n.t(`${NS_FORMS}:${K.STRUCTURE_ITEM_ID}`),
@@ -172,14 +236,22 @@ export function LegacyObjectAttrStructForm(
       title: i18n.t(`${NS_FORMS}:${K.TYPE}`),
       dataIndex: "type",
       key: "type",
-      render: (text, record) =>
+      render: (text: string, record: any) =>
         valueTypeList.filter((type) => type.key === text)[0].text,
     },
 
     {
       title: i18n.t(`${NS_FORMS}:${K.HANDEL}`),
       key: "action",
-      render: (text, record) => getOptionBtns(record),
+      render: (text: string, record: any) => getOptionBtns(record),
+    },
+
+    {
+      title: "排序",
+      dataIndex: "sort",
+      width: 70,
+      className: styles["drag-visible"],
+      render: () => <DragHandle />,
     },
   ];
 
@@ -200,7 +272,7 @@ export function LegacyObjectAttrStructForm(
       title: i18n.t(`${NS_FORMS}:${K.TYPE}`),
       dataIndex: "type",
       key: "type",
-      render: (text, record) =>
+      render: (text: string, record: any) =>
         valueTypeList.filter((type) => type.key === text)[0].text,
     },
 
@@ -208,7 +280,7 @@ export function LegacyObjectAttrStructForm(
       title: i18n.t(`${NS_FORMS}:${K.ENUM_REGEX_JSON}`),
       dataIndex: "regex",
       key: "regex",
-      render: (text, record) => {
+      render: (text: any, record: { regex: any[]; type: string }) => {
         if (
           Array.isArray(record.regex) &&
           ["enums", "enum"].includes(record.type)
@@ -224,7 +296,15 @@ export function LegacyObjectAttrStructForm(
     {
       title: i18n.t(`${NS_FORMS}:${K.HANDEL}`),
       key: "action",
-      render: (text, record) => getOptionBtns(record),
+      render: (text: any, record: any) => getOptionBtns(record),
+    },
+
+    {
+      title: "排序",
+      dataIndex: "sort",
+      width: 70,
+      className: styles["drag-visible"],
+      render: () => <DragHandle />,
     },
   ];
 
@@ -313,7 +393,7 @@ export function LegacyObjectAttrStructForm(
             <Button
               icon={<PlusOutlined />}
               onClick={() => {
-                setCurrentStruct({});
+                setCurrentStruct({} as StructDefine);
                 setAddStructModalVisible(true);
               }}
             >
@@ -335,13 +415,19 @@ export function LegacyObjectAttrStructForm(
       <div style={{ marginTop: 15 }}>
         <Table
           columns={
-            value?.struct_define?.some((item) => regexType.includes(item.type))
+            (value?.struct_define?.some((item) => regexType.includes(item.type))
               ? structWithEnumColumns
-              : structColumns
+              : structColumns) as ColumnsType<StructDefine>
           }
           dataSource={value?.struct_define}
           pagination={false}
           rowKey="id"
+          components={{
+            body: {
+              wrapper: DraggableContainer,
+              row: DraggableBodyRow,
+            },
+          }}
         />
       </div>
       <Modal
@@ -538,7 +624,7 @@ export function LegacyObjectAttrStructForm(
             <Table
               columns={objectAttrColumns}
               dataSource={memoizeAttrList}
-              rowSelection={rowSelection}
+              rowSelection={rowSelection as any}
               pagination={false}
               rowKey={"id"}
             />
