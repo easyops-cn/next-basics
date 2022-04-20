@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.142.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.0...@next-bricks/next-builder@1.142.1) (2022-04-20)
+
+
+### Bug Fixes
+
+* support badge in workbench-tree ([8ae94db](https://github.com/easyops-cn/next-basics/commit/8ae94db11ffb7a07e06510a6d2b2e4a435c4be08))
+* **workbench-tabs:** allow history blocked ([ee05989](https://github.com/easyops-cn/next-basics/commit/ee05989844b68eab975978fc1a7ee9d6c19b4745))
+
+
+
+
+
 # [1.142.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.141.0...@next-bricks/next-builder@1.142.0) (2022-04-20)
 
 
