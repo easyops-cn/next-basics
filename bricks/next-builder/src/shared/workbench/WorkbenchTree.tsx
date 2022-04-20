@@ -217,6 +217,11 @@ function TreeNode({
           isFirst={isFirst}
           isLast={isLast}
         />
+        {node.badge && (
+          <span className={styles.badge}>
+            <GeneralIcon icon={node.badge} />
+          </span>
+        )}
       </Link>
       {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
     </li>

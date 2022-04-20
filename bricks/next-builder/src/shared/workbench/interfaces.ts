@@ -14,6 +14,7 @@ export interface WorkbenchNodeData<T = unknown> {
     | {
         href: string;
       };
+  badge?: MenuIcon;
   children?: WorkbenchNodeData[];
   matched?: boolean;
   matchedSelf?: boolean;

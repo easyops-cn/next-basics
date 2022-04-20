@@ -141,6 +141,7 @@ test("while isTransform is true, should transform", () => {
     <WorkbenchTreeContext.Provider
       value={{
         isTransformName: true,
+        basePaddingLeft: 0,
       }}
     >
       <WorkbenchTree
@@ -161,6 +162,7 @@ test("while isTransform is false, should not transform", () => {
     <WorkbenchTreeContext.Provider
       value={{
         isTransformName: false,
+        basePaddingLeft: 0,
       }}
     >
       <WorkbenchTree
@@ -180,19 +182,25 @@ test("while isTransform is false, should not transform", () => {
 
 test("tabs with text-icon", () => {
   const { container } = render(
-    <WorkbenchTree
-      nodes={[
-        {
-          key: "1",
-          name: "Text",
-          icon: {
-            lib: "text",
-            icon: "TS",
-            color: "blue",
+    <WorkbenchTreeContext.Provider
+      value={{
+        basePaddingLeft: 0,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: "1",
+            name: "Text",
+            icon: {
+              lib: "text",
+              icon: "TS",
+              color: "blue",
+            },
           },
-        },
-      ]}
-    />
+        ]}
+      />
+    </WorkbenchTreeContext.Provider>
   );
   expect(container.querySelector(".nodeIcon").textContent).toBe("TS");
   expect(
@@ -202,19 +210,25 @@ test("tabs with text-icon", () => {
 
 test("tabs with no-search", () => {
   const { container } = render(
-    <WorkbenchTree
-      nodes={[
-        {
-          key: 1,
-          name: "n-1",
-        },
-        {
-          key: 2,
-          name: "n-2",
-        },
-      ]}
-      noSearch
-    />
+    <WorkbenchTreeContext.Provider
+      value={{
+        basePaddingLeft: 0,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: 1,
+            name: "n-1",
+          },
+          {
+            key: 2,
+            name: "n-2",
+          },
+        ]}
+        noSearch
+      />
+    </WorkbenchTreeContext.Provider>
   );
   expect(container.querySelector(".searchBox")).toBe(null);
   expect(container.querySelector(".tree").children.length).toBe(2);
