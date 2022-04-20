@@ -251,6 +251,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   useEffect(() => {
     setExpandedKeys(_expandedKeys);
   }, [_expandedKeys]);
+  useEffect(() => {
+    nodeMatchedRef.current = false;
+  }, [searchValue]);
 
   let searchValueLength: number;
 
@@ -260,8 +263,10 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
 
   const onChange = useCallback(
     debounce((value: string) => {
-      setSearchValue(value);
-      nodeMatchedRef.current = false;
+      // 等到 expandedKeys 更新后，也就是展开状态改变后，再触发跳转到第一个匹配项
+      setTimeout(() => {
+        setSearchValue(value);
+      });
 
       if (value) {
         const expandedKeys: React.Key[] = [];

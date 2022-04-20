@@ -68,30 +68,32 @@ describe("BrickTree", () => {
 
     expect(wrapper.find(Empty).length).toBe(1);
   });
-  it("should expand the nodes that match search value", () => {
+  it("should expand the nodes that match search value", async () => {
     const { getByTestId, getByText, getAllByText } = render(
       <BrickTree dataSource={dataSource} searchable />
     );
 
     fireEvent.change(getByTestId("search-input"), { target: { value: "1-0" } });
+    await jest.runAllTimers();
 
     const mockScrollBy = getAllByText("1-0")[0].scrollBy;
 
-    expect(mockScrollBy).toBeCalledTimes(1);
+    expect(mockScrollBy).toBeCalledTimes(2);
     fireEvent.click(getByText("0"));
-    expect(mockScrollBy).toBeCalledTimes(1);
+    expect(mockScrollBy).toBeCalledTimes(2);
   });
 
-  it("should expand the nodes that match search value by key", () => {
+  it("should expand the nodes that match search value by key", async () => {
     const { getByTestId, getByText, getAllByText } = render(
       <BrickTree dataSource={dataSource} searchable alsoSearchByKey />
     );
 
     fireEvent.change(getByTestId("search-input"), { target: { value: "100" } });
+    await jest.runAllTimers();
 
     const mockScrollBy = getAllByText("0-1-0-0")[0].scrollBy;
 
-    expect(mockScrollBy).toBeCalledTimes(2);
+    expect(mockScrollBy).toBeCalledTimes(4);
   });
 
   it("should be able to check all", () => {
@@ -251,7 +253,7 @@ describe("BrickTree", () => {
     expect(onCheck).lastCalledWith(["00", "0100", "10"]);
   });
 
-  it("caseSensitiveWhenSearching should work", () => {
+  it("caseSensitiveWhenSearching should work", async () => {
     const data = [
       {
         title: "全部",
@@ -294,10 +296,14 @@ describe("BrickTree", () => {
     wrapper.find("[data-testid='search-input']").at(0).invoke("onChange")({
       target: { value: "abc" },
     } as any);
+    await jest.runAllTimers();
+    wrapper.update();
     expect(wrapper.find(".matchText").at(0).text()).toEqual("abc");
     wrapper.find("[data-testid='search-input']").at(0).invoke("onChange")({
       target: { value: "cab" },
     } as any);
+    await jest.runAllTimers();
+    wrapper.update();
     expect(wrapper.find(".matchText").at(0).text()).toEqual("cAB");
   });
 
