@@ -266,10 +266,15 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       if (value) {
         const expandedKeys: React.Key[] = [];
 
-        getExpandedKeysBySearchValue(treeData, value, expandedKeys, {
-          searchParent,
-          alsoSearchByKey,
-        });
+        getExpandedKeysBySearchValue(
+          treeData,
+          value.toLocaleLowerCase(),
+          expandedKeys,
+          {
+            searchParent,
+            alsoSearchByKey,
+          }
+        );
         setExpandedKeys(expandedKeys);
       }
     }, 500),
@@ -399,9 +404,15 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                 searchValue &&
                 (searchParent ? true : !children?.length)
               ) {
-                const index = _title.toLocaleLowerCase().indexOf(searchValue);
+                const lowerCaseSearchValue = searchValue.toLocaleLowerCase();
+                const index = _title
+                  .toLocaleLowerCase()
+                  .indexOf(lowerCaseSearchValue);
                 const kIndex = alsoSearchByKey
-                  ? _key.toString()?.toLocaleLowerCase().indexOf(searchValue)
+                  ? _key
+                      .toString()
+                      ?.toLocaleLowerCase()
+                      .indexOf(lowerCaseSearchValue)
                   : -1;
 
                 if (index >= 0) {
