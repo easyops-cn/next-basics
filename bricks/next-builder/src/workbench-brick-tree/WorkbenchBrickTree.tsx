@@ -216,9 +216,15 @@ export function WorkbenchBrickTree({
         }
       }
       const children = getChildren(node);
+      const name =
+        node.type === "custom-template"
+          ? node.templateId
+          : node.type === "snippet"
+          ? node.snippetId
+          : node.alias;
       return {
         key: node.$$uid,
-        name: node.type === "custom-template" ? node.templateId : node.alias,
+        name,
         icon: {
           lib: "antd",
           theme: "outlined",
@@ -231,7 +237,7 @@ export function WorkbenchBrickTree({
             ? children.find(
                 (group) => group.name === (type === "routes" ? type : "bricks")
               )?.children
-            : type === "bricks" || type === "custom-template"
+            : ["bricks", "custom-template", "snippet"].includes(type)
             ? children
             : null,
       };
