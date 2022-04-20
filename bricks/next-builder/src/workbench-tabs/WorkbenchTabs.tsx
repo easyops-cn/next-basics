@@ -17,6 +17,7 @@ import sharedStyles from "../shared/scrollbar.module.css";
 export interface WorkbenchTabsProps {
   tabs: WorkbenchTabConf[];
   activeTabKey?: string | number;
+  historyBlocked?: boolean;
   onTabClose?(tab: WorkbenchTabConf): void;
   onTabClick?(tab: WorkbenchTabConf): void;
 }
@@ -31,6 +32,7 @@ export interface WorkbenchTabConf {
 export function WorkbenchTabs({
   tabs,
   activeTabKey,
+  historyBlocked,
   onTabClose,
   onTabClick,
 }: WorkbenchTabsProps): React.ReactElement {
@@ -50,10 +52,12 @@ export function WorkbenchTabs({
 
   const onTabClickFactory = useCallback(
     (tab: WorkbenchTabConf) => () => {
-      setInternalActiveTabKey(tab.key);
+      if (!historyBlocked) {
+        setInternalActiveTabKey(tab.key);
+      }
       onTabClick?.(tab);
     },
-    [onTabClick]
+    [historyBlocked, onTabClick]
   );
 
   // Only for initial active node.
@@ -110,10 +114,14 @@ export function WorkbenchTabs({
                 )}
               </span>
               <span className={styles.tabName}>{tab.name}</span>
-              <WorkbenchMiniActionBar
-                className={styles.actionsBar}
-                data={tab}
-              />
+              {historyBlocked && tab.key === internalActiveTabKey ? (
+                <span className={styles.modifiedIcon}></span>
+              ) : (
+                <WorkbenchMiniActionBar
+                  className={styles.actionsBar}
+                  data={tab}
+                />
+              )}
             </li>
           ))}
         </ul>

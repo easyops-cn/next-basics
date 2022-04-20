@@ -169,8 +169,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
   ): void => {
     this._activeTabChangeEmitter.emit(activeTab);
   };
-
-  private _handleOriginalFunctionChangeEmitterbChange = (
+  private _handleOriginalFunctionChange = (
     originalFunction: DebuggerStateOriginalFunction
   ): void => {
     this._originalFunctionChangeEmitter.emit(originalFunction);
@@ -256,9 +255,7 @@ export class FunctionDebuggerStoreElement extends UpdatingElement {
             ref={this._storeRef}
             runTestsAutomaticallyTimeout={this.runTestsAutomaticallyTimeout}
             onActiveTabChange={this._handleActiveTabChange}
-            onOriginalFunctionChange={
-              this._handleOriginalFunctionChangeEmitterbChange
-            }
+            onOriginalFunctionChange={this._handleOriginalFunctionChange}
             onFunctionModified={this._handleFunctionModified}
             onDebugInputChange={this._handleDebugInputChange}
             onDebugOutputChange={this._handleDebugOutputChange}

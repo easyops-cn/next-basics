@@ -24,6 +24,9 @@ export class WorkbenchTabsElement extends UpdatingElement {
   @property({ attribute: false })
   activeTabKey: string | number;
 
+  @property({ type: Boolean })
+  historyBlocked: boolean;
+
   @event({ type: "tab.close" })
   private _tableCloseEvent: EventEmitter<WorkbenchTabConf>;
 
@@ -59,6 +62,7 @@ export class WorkbenchTabsElement extends UpdatingElement {
           <WorkbenchTabs
             tabs={this.tabs}
             activeTabKey={this.activeTabKey}
+            historyBlocked={this.historyBlocked}
             onTabClose={this._handleTabClose}
             onTabClick={this._handleTabClick}
           />
