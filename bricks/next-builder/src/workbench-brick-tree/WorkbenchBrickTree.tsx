@@ -179,12 +179,18 @@ export function WorkbenchBrickTree({
       let icon = "question";
       let color: string;
       if (node.$isRoot) {
-        if (node.type === "custom-template") {
-          icon = "block";
-          color = "var(--palette-purple-7)";
-        } else {
-          icon = "branches";
-          color = "var(--palette-blue-6)";
+        switch (node.type) {
+          case "custom-template":
+            icon = "block";
+            color = "var(--palette-purple-7)";
+            break;
+          case "snippet":
+            icon = "snippets";
+            color = "var(--palette-teal-7)";
+            break;
+          default:
+            icon = "branches";
+            color = "var(--palette-blue-6)";
         }
       } else if (node.bg || node.type === "provider") {
         icon = "database";
