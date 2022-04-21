@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import Icon from "@ant-design/icons";
 import { Tree, Input, Checkbox, Empty } from "antd";
 import { TreeProps, DataNode } from "antd/lib/tree";
@@ -18,6 +24,7 @@ import {
   get,
   difference,
   intersection,
+  debounce,
 } from "lodash";
 import { EventDataNode } from "rc-tree/lib/interface";
 import { UseBrickConf } from "@next-core/brick-types";
@@ -105,6 +112,44 @@ function getAllCheckedState(
         : false
     );
 }
+
+const getExpandedKeysBySearchValue = (
+  nodes: DataNode[],
+  searchValue: string,
+  expandedKeys: React.Key[],
+  options?: { searchParent?: boolean; alsoSearchByKey?: boolean }
+): boolean => {
+  let isHit = false;
+
+  nodes.forEach((node) => {
+    const childrenLength = node.children?.length;
+    if (childrenLength ? options?.searchParent : true) {
+      if (
+        (typeof node.title === "string" &&
+          node.title?.toLocaleLowerCase()?.includes(searchValue)) ||
+        (options?.alsoSearchByKey &&
+          node.key.toString()?.toLocaleLowerCase()?.includes(searchValue))
+      ) {
+        isHit = true;
+      }
+    }
+
+    if (
+      childrenLength &&
+      getExpandedKeysBySearchValue(
+        node.children,
+        searchValue,
+        expandedKeys,
+        options
+      )
+    ) {
+      expandedKeys.push(node.key);
+      isHit = true;
+    }
+  });
+
+  return isHit;
+};
 
 export interface BrickTreeProps {
   selectedKeys?: React.Key[];
@@ -206,6 +251,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
   useEffect(() => {
     setExpandedKeys(_expandedKeys);
   }, [_expandedKeys]);
+  useEffect(() => {
+    nodeMatchedRef.current = false;
+  }, [searchValue]);
 
   let searchValueLength: number;
 
@@ -213,51 +261,30 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     searchValueLength = searchValue.length;
   }
 
-  const getExpandedKeysBySearchValue = (
-    nodes: DataNode[],
-    searchValue: string,
-    expandedKeys: React.Key[]
-  ) => {
-    let isHit = false;
+  const onChange = useCallback(
+    debounce((value: string) => {
+      // 等到 expandedKeys 更新后，也就是展开状态改变后，再触发跳转到第一个匹配项
+      setTimeout(() => {
+        setSearchValue(value);
+      });
 
-    nodes.forEach((node) => {
-      const childrenLength = node.children?.length;
-      if (childrenLength ? searchParent : true) {
-        if (
-          (typeof node.title === "string" &&
-            node.title?.toLocaleLowerCase()?.includes(searchValue)) ||
-          (props.alsoSearchByKey &&
-            node.key.toString()?.toLocaleLowerCase()?.includes(searchValue))
-        ) {
-          isHit = true;
-        }
+      if (value) {
+        const expandedKeys: React.Key[] = [];
+
+        getExpandedKeysBySearchValue(
+          treeData,
+          value.toLocaleLowerCase(),
+          expandedKeys,
+          {
+            searchParent,
+            alsoSearchByKey,
+          }
+        );
+        setExpandedKeys(expandedKeys);
       }
-
-      if (
-        childrenLength &&
-        getExpandedKeysBySearchValue(node.children, searchValue, expandedKeys)
-      ) {
-        expandedKeys.push(node.key);
-        isHit = true;
-      }
-    });
-
-    return isHit;
-  };
-
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value?.toLocaleLowerCase();
-
-    setSearchValue(value);
-    nodeMatchedRef.current = false;
-
-    if (value) {
-      const expandedKeys: React.Key[] = [];
-
-      getExpandedKeysBySearchValue(treeData, value, expandedKeys);
-      setExpandedKeys(expandedKeys);
-    }
-  };
+    }, 500),
+    [treeData, searchParent, alsoSearchByKey]
+  );
 
   const onCheckAllChange = (e: CheckboxChangeEvent) => {
     const checked = e.target.checked;
@@ -336,7 +363,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
       {searchable && (
         <Input.Search
           placeholder={placeholder}
-          onChange={onChange}
+          onChange={(e) => onChange(e.target.value)}
           style={{ marginBottom: 8 }}
           data-testid="search-input"
         />
@@ -382,9 +409,15 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
                 searchValue &&
                 (searchParent ? true : !children?.length)
               ) {
-                const index = _title.toLocaleLowerCase().indexOf(searchValue);
+                const lowerCaseSearchValue = searchValue.toLocaleLowerCase();
+                const index = _title
+                  .toLocaleLowerCase()
+                  .indexOf(lowerCaseSearchValue);
                 const kIndex = alsoSearchByKey
-                  ? _key.toString()?.toLocaleLowerCase().indexOf(searchValue)
+                  ? _key
+                      .toString()
+                      ?.toLocaleLowerCase()
+                      .indexOf(lowerCaseSearchValue)
                   : -1;
 
                 if (index >= 0) {
