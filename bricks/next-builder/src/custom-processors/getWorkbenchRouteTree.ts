@@ -1,5 +1,3 @@
-// istanbul ignore file
-// For temporary usage only, will change soon.
 import { getRuntime } from "@next-core/brick-kit";
 import { BuilderRouteNode } from "@next-core/brick-types";
 import type { WorkbenchNodeData } from "../shared/workbench/interfaces";
@@ -40,9 +38,7 @@ export function getWorkbenchRouteTree(
       data: route,
     };
 
-    if (linkFn) {
-      node.link = linkFn(route.id, route.type);
-    }
+    node.link = linkFn?.(route.id, route.type);
 
     routeNodeMap.set(route.id, node);
 

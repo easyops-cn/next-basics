@@ -1,5 +1,3 @@
-// istanbul ignore file
-// For temporary usage only, will change soon.
 import React, { useCallback, useEffect, useMemo } from "react";
 import {
   useBuilderContextMenuStatus,
@@ -8,7 +6,11 @@ import {
   useBuilderNode,
   useHoverNodeUid,
 } from "@next-core/editor-bricks-helper";
-import { isBrickNode, isCustomTemplateNode } from "@next-core/brick-utils";
+import {
+  isBrickNode,
+  isCustomTemplateNode,
+  isSnippetNode,
+} from "@next-core/brick-utils";
 import { sortBy } from "lodash";
 import type {
   WorkbenchNodeData,
@@ -19,7 +21,6 @@ import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 import { deepMatch } from "../builder-container/utils";
 
 export interface WorkbenchBrickTreeProps {
-  type?: WorkbenchRuntimeNode["type"];
   placeholder?: string;
   searchPlaceholder?: string;
   activeInstanceId?: string;
@@ -40,7 +41,6 @@ function isNormalNode(
 }
 
 export function WorkbenchBrickTree({
-  type,
   placeholder,
   searchPlaceholder,
   activeInstanceId,
@@ -114,10 +114,8 @@ export function WorkbenchBrickTree({
     [manager]
   );
 
-  const doNotExpandTemplates = true;
-
   const tree = useMemo(() => {
-    if (type === "redirect") {
+    if (!rootNode) {
       return [];
     }
 
@@ -130,11 +128,7 @@ export function WorkbenchBrickTree({
       >();
       const relatedEdges = sortBy(
         edges.filter(
-          (edge) =>
-            edge.parent === node.$$uid &&
-            (doNotExpandTemplates
-              ? !edge.$$isTemplateInternal
-              : !edge.$$isTemplateDelegated)
+          (edge) => edge.parent === node.$$uid && !edge.$$isTemplateInternal
         ),
         [(edge) => edge.sort]
       );
@@ -239,11 +233,13 @@ export function WorkbenchBrickTree({
         },
         data: node,
         children:
-          node.$isRoot || type === "routes"
+          node.$isRoot || rootNode.type === "routes"
             ? children.find(
-                (group) => group.name === (type === "routes" ? type : "bricks")
+                (group) =>
+                  group.name ===
+                  (rootNode.type === "routes" ? rootNode.type : "bricks")
               )?.children
-            : ["bricks", "custom-template", "snippet"].includes(type)
+            : ["bricks", "custom-template", "snippet"].includes(rootNode.type)
             ? children
             : null,
       };
@@ -251,7 +247,7 @@ export function WorkbenchBrickTree({
 
     rootNode.$isRoot = true;
     return [getEntityNode(rootNode)];
-  }, [doNotExpandTemplates, edges, nodes, rootNode, type]);
+  }, [edges, nodes, rootNode]);
 
   const activeKey = useMemo(() => {
     return activeInstanceId
@@ -297,7 +293,7 @@ function matchBrickNode(
   return (
     node.data.type !== "mount-point" &&
     deepMatch(
-      isCustomTemplateNode(node.data)
+      isCustomTemplateNode(node.data) || isSnippetNode(node.data)
         ? node.name
         : [
             node.name,

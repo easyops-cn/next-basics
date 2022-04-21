@@ -11,7 +11,6 @@ import { BuilderProvider } from "@next-core/editor-bricks-helper";
 import { WorkbenchBrickTree } from "./WorkbenchBrickTree";
 import type {
   ActionClickDetail,
-  WorkbenchRuntimeNode,
   WorkbenchTreeAction,
 } from "../shared/workbench/interfaces";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
@@ -25,9 +24,6 @@ import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsCon
  * @noInheritDoc
  */
 export class WorkbenchStoryboardTreeElement extends UpdatingElement {
-  @property()
-  type: WorkbenchRuntimeNode["type"];
-
   @property({ attribute: false })
   actions: WorkbenchTreeAction[];
 
@@ -73,7 +69,6 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
               }}
             >
               <WorkbenchBrickTree
-                type={this.type}
                 placeholder={this.placeholder}
                 searchPlaceholder={this.searchPlaceholder}
                 activeInstanceId={this.activeInstanceId}
