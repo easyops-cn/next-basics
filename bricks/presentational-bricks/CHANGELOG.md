@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.241.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.11...@next-bricks/presentational-bricks@1.241.12) (2022-04-21)
+
+
+### Bug Fixes
+
+* **brick-tree:** add debounce to search ([586d9ef](https://github.com/easyops-cn/next-basics/commit/586d9ef8b39a4bbdb1ecb4e578896b6bd1d5ba18))
+* **brick-tree:** fix search can't jump to item which is collapsed before ([d13d091](https://github.com/easyops-cn/next-basics/commit/d13d091121fd6bfe01c514c146908e15d3ed951d))
+* **brick-tree:** fix upper case search value not working ([7b7f131](https://github.com/easyops-cn/next-basics/commit/7b7f131ba596bcb2939b5ffc26996a004f029cd3))
+
+
+
+
+
 ## [1.241.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.10...@next-bricks/presentational-bricks@1.241.11) (2022-04-18)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
