@@ -1,4 +1,3 @@
-// istanbul ignore file: working in progress
 import React, {
   useCallback,
   useEffect,
@@ -66,9 +65,9 @@ export function WorkbenchContextMenu({
 
   useEffect(() => {
     // Keep menu in viewport.
-    const menu = wrapperRef.current?.firstElementChild as HTMLElement;
-    if (menu) {
-      const { width, height } = menu.getBoundingClientRect();
+    const menuElement = wrapperRef.current?.firstElementChild as HTMLElement;
+    if (menuElement) {
+      const { width, height } = menuElement.getBoundingClientRect();
       setMenuPosition({
         left:
           contextMenuStatus.x + width > document.documentElement.clientWidth
