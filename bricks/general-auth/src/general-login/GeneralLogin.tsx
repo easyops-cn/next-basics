@@ -24,7 +24,7 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { NS_GENERAL_AUTH, K } from "../i18n/constants";
 import { GetProps } from "@ant-design/compatible/lib/form/interface";
-import resetLegacyIframe from "../shared/resetLegacyIframe";
+import { encryptValue, resetLegacyIframe } from "../shared";
 import styles from "./GeneralLogin.module.css";
 import loginPng from "../images/login.png";
 import { Link } from "@next-libs/basic-components";
@@ -108,8 +108,14 @@ export class LegacyGeneralLogin extends React.Component<
           if (sso) {
             params = { service: this.state.service };
           }
-          const loginMethod = esbLoginEnabled ? esbLogin : AuthApi_loginV2;
+          let loginMethod: typeof esbLogin | typeof AuthApi_loginV2;
           const req = values as unknown as AuthApi_LoginV2RequestBody;
+          if (esbLoginEnabled) {
+            loginMethod = esbLogin;
+          } else {
+            loginMethod = AuthApi_loginV2;
+            req.password = encryptValue(req.password);
+          }
           req.loginBy = this.state.currentLoginMethod;
           this.storage.setItem(lastLoginMethod, this.state.currentLoginMethod);
           this.storage.setItem(lastLoginTime, Date.now());
@@ -249,7 +255,7 @@ export class LegacyGeneralLogin extends React.Component<
           : this.loginMethods?.[0] ?? "easyops",
       yzm: "",
       yzm_value: "",
-      security_codeEnabled: getRuntime().getFeatureFlags()["security-code"],
+      security_codeEnabled: featureFlags["security-code"],
     };
     const enabledQRCode = featureFlags["wx-QR-code"];
     if (enabledQRCode) {
