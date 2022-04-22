@@ -16,7 +16,6 @@ import {
   type BuilderRuntimeNode,
   type EventDetailOfNodeReorder,
 } from "@next-core/editor-bricks-helper";
-import { BuilderDataType } from "../builder-container/interfaces";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
 import { sendHighlightBrick, useHighlightBrick } from "./useHighlightBrick";
 
@@ -49,31 +48,12 @@ export function LegacyWorkbenchStore(
   useImperativeHandle(ref, () => ({ manager, previewStart }));
 
   useEffect(() => {
-    let type = BuilderDataType.UNKNOWN;
-    let rootNode: BuilderRouteOrBrickNode;
-    if (dataSource?.length === 1) {
-      rootNode = dataSource[0];
-      switch (rootNode.type) {
-        case "bricks":
-          type = BuilderDataType.ROUTE_OF_BRICKS;
-          break;
-        case "routes":
-          type = BuilderDataType.ROUTE_OF_ROUTES;
-          break;
-        case "redirect":
-          type = BuilderDataType.ROUTE_OF_REDIRECT;
-          break;
-        case "custom-template":
-          type = BuilderDataType.CUSTOM_TEMPLATE;
-          break;
-        case "snippet":
-          type = BuilderDataType.SNIPPET;
-          break;
-        // Rest types are currently not supported,
-        // such as `"brick"`.
-      }
-    }
-    if (type !== BuilderDataType.UNKNOWN) {
+    if (
+      dataSource?.length === 1 &&
+      ["bricks", "routes", "redirect", "custom-template", "snippet"].includes(
+        dataSource[0].type
+      )
+    ) {
       manager.dataInit(
         dataSource[0],
         templateSources
