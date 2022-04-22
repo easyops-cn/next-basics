@@ -32,7 +32,7 @@ import {
   AuthApi_RegisterRequestBody,
 } from "@next-sdk/api-gateway-sdk";
 import { validateMap } from "./validateProvider";
-import { resetLegacyIframe } from "../shared";
+import { encryptValue, resetLegacyIframe } from "../shared";
 import { createLocation } from "history";
 
 const duration = 60;
@@ -173,7 +173,8 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
     getHistory().push(redirect);
   };
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: Record<string, any>): Promise<void> => {
+    values.password = encryptValue(values.password);
     try {
       let result: Record<string, any>;
       if (isCommonSignup && !hideInvite) {
