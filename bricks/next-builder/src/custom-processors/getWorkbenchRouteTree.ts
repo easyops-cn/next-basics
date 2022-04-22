@@ -7,7 +7,8 @@ export function getWorkbenchRouteTree(
   activeRouteId?: string,
   linkFn?: (
     routeId: string,
-    routeType: BuilderRouteNode["type"]
+    routeType: BuilderRouteNode["type"],
+    routeInstanceId: string
   ) => WorkbenchNodeData["link"]
 ): WorkbenchNodeData[] {
   const tree: WorkbenchNodeData[] = [];
@@ -38,7 +39,7 @@ export function getWorkbenchRouteTree(
       data: route,
     };
 
-    node.link = linkFn?.(route.id, route.type);
+    node.link = linkFn?.(route.id, route.type, route.instanceId);
 
     routeNodeMap.set(route.id, node);
 
