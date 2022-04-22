@@ -2,6 +2,7 @@ import {
   StoryboardFunctionRegistryFactory,
   StoryboardFunctionRegistry,
 } from "@next-core/brick-kit";
+import MockDate from "mockdate";
 import { RawCoverage, SerializableValue } from "./interfaces";
 import { CoverageFactory } from "./CoverageFactory";
 import { generalizedJsonParse } from "./processSerializableValue";
@@ -32,6 +33,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
     let ok = false;
     let raw: string;
     if (input.ok) {
+      MockDate.set("2015-07-20T09:15:00+08:00");
       try {
         const value = storyboardFunctions[fn](
           // Re-parse input to avoid mutating after tests run.
@@ -43,6 +45,7 @@ export function FunctionDebuggerFactory(): FunctionDebugger {
       } catch (e) {
         error = String(e);
       }
+      MockDate.reset();
     } else {
       error = input.error;
     }

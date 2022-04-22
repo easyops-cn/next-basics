@@ -387,7 +387,7 @@ describe("FunctionDebuggerStore", () => {
         storeRef.current.dispatch({
           type: "updateSource",
           source:
-            "function myFunc(thing: string): string { return `my ${thing}` }",
+            "function myFunc(thing: string): string { return `my ${thing} ${moment().format()}` }",
         });
       });
       const { onTestsChange, ...restHandlers } = handlers;
@@ -483,7 +483,7 @@ describe("FunctionDebuggerStore", () => {
           testModified: true,
           testReceived: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testUpdatable: true,
@@ -492,7 +492,7 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestReceivedChange).toBeCalledTimes(1);
       expect(onTestReceivedChange).toBeCalledWith({
         ok: true,
-        raw: '"my treasure"',
+        raw: '"my treasure 2015-07-20T09:15:00+08:00"',
         error: undefined,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -538,7 +538,7 @@ describe("FunctionDebuggerStore", () => {
         },
         {
           input: '[\n  "treasure"\n]',
-          output: '"my treasure"',
+          output: '"my treasure 2015-07-20T09:15:00+08:00"',
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
@@ -546,14 +546,14 @@ describe("FunctionDebuggerStore", () => {
           },
           testExpect: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testMatched: true,
           testModified: true,
           testReceived: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testUpdatable: false,
@@ -568,7 +568,7 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestExpectChange).toBeCalledTimes(1);
       expect(onTestExpectChange).toBeCalledWith({
         ok: true,
-        raw: '"my treasure"',
+        raw: '"my treasure 2015-07-20T09:15:00+08:00"',
         error: undefined,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -616,7 +616,7 @@ describe("FunctionDebuggerStore", () => {
         },
         {
           input: '[\n  "treasure"\n]',
-          output: '"my treasure"',
+          output: '"my treasure 2015-07-20T09:15:00+08:00"',
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
@@ -624,14 +624,14 @@ describe("FunctionDebuggerStore", () => {
           },
           testExpect: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testMatched: true,
           testModified: true,
           testReceived: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testUpdatable: false,
@@ -689,7 +689,7 @@ describe("FunctionDebuggerStore", () => {
         },
         {
           input: '[\n  "treasure"\n]',
-          output: '"my treasure"',
+          output: '"my treasure 2015-07-20T09:15:00+08:00"',
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
@@ -697,14 +697,14 @@ describe("FunctionDebuggerStore", () => {
           },
           testExpect: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testMatched: true,
           testModified: true,
           testReceived: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testUpdatable: false,
@@ -757,7 +757,7 @@ describe("FunctionDebuggerStore", () => {
         },
         {
           input: '[\n  "treasure"\n]',
-          output: '"my treasure"',
+          output: '"my treasure 2015-07-20T09:15:00+08:00"',
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
@@ -765,14 +765,14 @@ describe("FunctionDebuggerStore", () => {
           },
           testExpect: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testMatched: true,
           testModified: true,
           testReceived: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testUpdatable: false,
@@ -827,14 +827,14 @@ describe("FunctionDebuggerStore", () => {
           testModified: true,
           testReceived: {
             ok: true,
-            raw: '"my pleasure"',
+            raw: '"my pleasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testUpdatable: true,
         },
         {
           input: '[\n  "treasure"\n]',
-          output: '"my treasure"',
+          output: '"my treasure 2015-07-20T09:15:00+08:00"',
           testInput: {
             ok: true,
             raw: '[\n  "treasure"\n]',
@@ -842,14 +842,14 @@ describe("FunctionDebuggerStore", () => {
           },
           testExpect: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testMatched: true,
           testModified: true,
           testReceived: {
             ok: true,
-            raw: '"my treasure"',
+            raw: '"my treasure 2015-07-20T09:15:00+08:00"',
             error: undefined,
           },
           testUpdatable: false,
@@ -858,7 +858,7 @@ describe("FunctionDebuggerStore", () => {
       expect(onTestReceivedChange).toBeCalledTimes(1);
       expect(onTestReceivedChange).toBeCalledWith({
         ok: true,
-        raw: '"my pleasure"',
+        raw: '"my pleasure 2015-07-20T09:15:00+08:00"',
         error: undefined,
       });
       expect(onTestMatchedChange).toBeCalledTimes(1);
@@ -889,7 +889,7 @@ describe("FunctionDebuggerStore", () => {
               {
                 count: 2,
                 startColumn: 42,
-                endColumn: 62,
+                endColumn: 83,
                 isWholeLine: false,
               },
             ],
@@ -918,16 +918,16 @@ describe("FunctionDebuggerStore", () => {
       data: {
         name: "myFunc",
         source:
-          "function myFunc(thing: string): string { return `my ${thing}` }",
+          "function myFunc(thing: string): string { return `my ${thing} ${moment().format()}` }",
         typescript: true,
         tests: [
           {
             input: '[\n  "pleasure"\n]',
-            output: '"my pleasure"',
+            output: '"my pleasure 2015-07-20T09:15:00+08:00"',
           },
           {
             input: '[\n  "treasure"\n]',
-            output: '"my treasure"',
+            output: '"my treasure 2015-07-20T09:15:00+08:00"',
           },
         ],
       },
