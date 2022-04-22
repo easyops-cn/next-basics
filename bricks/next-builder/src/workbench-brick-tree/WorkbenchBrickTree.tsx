@@ -9,8 +9,10 @@ import {
 import {
   isBrickNode,
   isCustomTemplateNode,
+  isRouteNode,
   isSnippetNode,
 } from "@next-core/brick-utils";
+import type { BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import { sortBy } from "lodash";
 import type {
   WorkbenchNodeData,
@@ -32,6 +34,7 @@ type WorkbenchBrickTreeNode =
       type: "mount-point";
       mountPoint: string;
       parent: WorkbenchRuntimeNode;
+      mountPointType?: "routes" | "bricks";
     };
 
 function isNormalNode(
@@ -162,6 +165,14 @@ export function WorkbenchBrickTree({
         }
         const childNode = nodes.find((node) => node.$$uid === edge.child);
         group.children.push(getEntityNode(childNode));
+      }
+
+      for (const group of groups.values()) {
+        group.data.mountPointType = group.children.some((child) =>
+          isRouteNode(child.data as BuilderRouteOrBrickNode)
+        )
+          ? "routes"
+          : "bricks";
       }
 
       return Array.from(groups.values());
