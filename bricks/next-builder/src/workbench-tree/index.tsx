@@ -54,6 +54,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property({ attribute: false })
   matchNodeDataFields: string | string[];
 
+  @property({ attribute: false })
+  fixedActionsFor: Record<string, unknown> | Record<string, unknown>[];
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -98,6 +101,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 basePaddingLeft: 5,
                 showMatchedNodeOnly: this.showMatchedNodeOnly,
                 isTransformName: this.isTransformName,
+                fixedActionsFor: this.fixedActionsFor,
                 clickFactory: this._nodeClickFactory,
                 matchNode: (node, lowerTrimmedQuery) =>
                   deepMatch(node.name, lowerTrimmedQuery) ||

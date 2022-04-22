@@ -1,5 +1,6 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { WorkbenchTree } from "./WorkbenchTree";
 import {
   ContextOfWorkbenchTree,
@@ -74,6 +75,7 @@ test("WorkbenchTree with nodes", async () => {
   );
   expect(container.querySelector(".placeholder")).toBe(null);
   expect(container.querySelector(".searchBox")).toBeTruthy();
+  expect(container.querySelector(".fixedActions")).toBe(null);
 
   const rootTree = container.querySelector(".tree");
   const firstLevelLinks = [...rootTree.children].map((child) =>
@@ -232,4 +234,39 @@ test("tabs with no-search", () => {
   );
   expect(container.querySelector(".searchBox")).toBe(null);
   expect(container.querySelector(".tree").children.length).toBe(2);
+});
+
+test("tabs with fixed actions", () => {
+  const { container } = render(
+    <WorkbenchTreeContext.Provider
+      value={{
+        basePaddingLeft: 0,
+        fixedActionsFor: {
+          type: "tests",
+        },
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: "1",
+            name: "Others",
+            data: {
+              type: "others",
+            },
+          },
+          {
+            key: "2",
+            name: "Tests",
+            data: {
+              type: "tests",
+            },
+          },
+        ]}
+      />
+    </WorkbenchTreeContext.Provider>
+  );
+  expect(
+    container.querySelector(".fixedActions > .nodeLabel > .nodeName")
+  ).toHaveTextContent("Tests");
 });
