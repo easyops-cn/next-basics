@@ -8,7 +8,7 @@ import React, {
   useContext,
 } from "react";
 import { Input } from "antd";
-import { pick } from "lodash";
+import { isMatch, pick } from "lodash";
 import classNames from "classnames";
 import { SearchOutlined } from "@ant-design/icons";
 import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
@@ -128,6 +128,7 @@ function TreeNode({
     isTransformName,
     basePaddingLeft,
     showMatchedNodeOnly,
+    fixedActionsFor,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
@@ -181,6 +182,13 @@ function TreeNode({
           [styles.hover]: hoverKey && node.key === hoverKey,
           [styles.matched]:
             searching && node.matchedSelf && !showMatchedNodeOnly,
+          [styles.fixedActions]:
+            fixedActionsFor &&
+            []
+              .concat(fixedActionsFor)
+              .some((source) =>
+                isMatch(node.data as Record<string, unknown>, source)
+              ),
         })}
         tabIndex={0}
         onMouseEnter={onMouseEnter}

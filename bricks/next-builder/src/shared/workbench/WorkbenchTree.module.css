@@ -17,6 +17,7 @@
   display: flex;
   cursor: pointer;
   height: 22px;
+  padding-right: 10px;
 }
 
 .nodeLabelRow:hover,
@@ -77,7 +78,7 @@
   white-space: nowrap;
 }
 
-.nodeLabelRow:not(:hover) .nodeActionsBar {
+.nodeLabelRow:not(:hover, .fixedActions) .nodeActionsBar {
   display: none;
 }
 

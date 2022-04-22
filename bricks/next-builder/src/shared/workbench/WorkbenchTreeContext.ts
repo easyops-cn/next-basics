@@ -7,6 +7,7 @@ export interface ContextOfWorkbenchTree {
   basePaddingLeft?: number;
   showMatchedNodeOnly?: boolean;
   isTransformName?: boolean;
+  fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
   clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
