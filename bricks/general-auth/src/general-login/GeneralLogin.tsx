@@ -24,7 +24,7 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { NS_GENERAL_AUTH, K } from "../i18n/constants";
 import { GetProps } from "@ant-design/compatible/lib/form/interface";
-import resetLegacyIframe from "../shared/resetLegacyIframe";
+import { resetLegacyIframe } from "../shared";
 import styles from "./GeneralLogin.module.css";
 import loginPng from "../images/login.png";
 import { Link } from "@next-libs/basic-components";

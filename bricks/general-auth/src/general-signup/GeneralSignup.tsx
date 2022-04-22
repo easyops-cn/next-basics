@@ -32,7 +32,7 @@ import {
   AuthApi_RegisterRequestBody,
 } from "@next-sdk/api-gateway-sdk";
 import { validateMap } from "./validateProvider";
-import resetLegacyIframe from "../shared/resetLegacyIframe";
+import { resetLegacyIframe } from "../shared";
 import { createLocation } from "history";
 
 const duration = 60;
