@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.142.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.5...@next-bricks/next-builder@1.142.6) (2022-04-22)
+
+
+### Bug Fixes
+
+* **workbench-tree:** support fixed actions ([b2c36b7](https://github.com/easyops-cn/next-basics/commit/b2c36b7d3285a3c6b3c014073af26a455649766d))
+
+
+
+
+
 ## [1.142.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.4...@next-bricks/next-builder@1.142.5) (2022-04-22)
 
 
