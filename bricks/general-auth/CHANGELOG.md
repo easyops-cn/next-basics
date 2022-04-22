@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.14.1...@next-bricks/general-auth@1.15.0) (2022-04-22)
+
+
+### Features
+
+* add encryptValue custom processor ([d0850b4](https://github.com/easyops-cn/next-basics/commit/d0850b4608850657cc48ade5feab104cbf871880))
+* support encrypted password ([9802a6b](https://github.com/easyops-cn/next-basics/commit/9802a6b88a3d11da2248fe55139d96b3a42cc068))
+
+
+
+
+
 ## [1.14.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.14.0...@next-bricks/general-auth@1.14.1) (2022-03-25)
 
 
