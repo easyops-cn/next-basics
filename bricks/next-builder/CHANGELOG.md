@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.142.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.3...@next-bricks/next-builder@1.142.4) (2022-04-22)
+
+
+### Bug Fixes
+
+* mark mount point type ([a15229d](https://github.com/easyops-cn/next-basics/commit/a15229d5fb3aad0b1b34f854680a9bb9d9c0bd80))
+
+
+
+
+
 ## [1.142.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.2...@next-bricks/next-builder@1.142.3) (2022-04-22)
 
 **Note:** Version bump only for package @next-bricks/next-builder
