@@ -5,5 +5,5 @@ dependencies:
     version: ^2.29.11
     local_deploy: true
   - name: api_gateway
-    version: ^1.40.0
+    version: ^1.52.1
     local_deploy: true
