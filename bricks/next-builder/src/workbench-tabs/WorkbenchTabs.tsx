@@ -1,4 +1,3 @@
-// istanbul ignore file: working in progress
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import type { MenuIcon } from "@next-core/brick-types";
@@ -15,7 +14,7 @@ import styles from "./WorkbenchTabs.module.css";
 import sharedStyles from "../shared/scrollbar.module.css";
 
 export interface WorkbenchTabsProps {
-  tabs: WorkbenchTabConf[];
+  tabs?: WorkbenchTabConf[];
   activeTabKey?: string | number;
   historyBlocked?: boolean;
   onTabClose?(tab: WorkbenchTabConf): void;
@@ -96,6 +95,7 @@ export function WorkbenchTabs({
             styles.tabs,
             sharedStyles.customScrollbarContainer
           )}
+          role="menu"
         >
           {tabs?.map((tab) => (
             <li
@@ -104,6 +104,7 @@ export function WorkbenchTabs({
                 [styles.active]: tab.key === internalActiveTabKey,
               })}
               onClick={onTabClickFactory(tab)}
+              role="menuitem"
               ref={tab.key === initialActiveTabKey ? activeTabCallback : null}
             >
               <span className={styles.tabIcon}>
