@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.15.0...@next-bricks/general-auth@1.15.1) (2022-04-22)
+
+**Note:** Version bump only for package @next-bricks/general-auth
+
+
+
+
+
 # [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.14.1...@next-bricks/general-auth@1.15.0) (2022-04-22)
 
 
