@@ -69,6 +69,13 @@ export class PreviewContainerElement extends UpdatingElement {
     this._scaleChangeEvent.emit(scale);
   };
 
+  @event({ type: "route.match" })
+  private _routeMatchEvent: EventEmitter<boolean>;
+
+  private _handleRouteMatch = (match: boolean): void => {
+    this._routeMatchEvent.emit(match);
+  };
+
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
@@ -113,6 +120,7 @@ export class PreviewContainerElement extends UpdatingElement {
             onPreviewStart={this._handlePreviewStart}
             onUrlChange={this._handleUrlChange}
             onScaleChange={this._handleScaleChange}
+            onRouteMatch={this._handleRouteMatch}
           />
         </BrickWrapper>,
         this

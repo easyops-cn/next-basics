@@ -36,6 +36,7 @@ export interface PreviewContainerProps {
   onPreviewStart?(): void;
   onUrlChange?(url: string): void;
   onScaleChange?(scale: number): void;
+  onRouteMatch?(match: boolean): void;
 }
 
 export interface PreviewContainerRef {
@@ -73,6 +74,7 @@ export function LegacyPreviewContainer(
     onPreviewStart,
     onUrlChange,
     onScaleChange,
+    onRouteMatch,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -288,6 +290,7 @@ export function LegacyPreviewContainer(
             break;
           case "route-match-change":
             setRouteMatch(data.match);
+            onRouteMatch?.(data.match);
             break;
         }
       }
@@ -299,6 +302,7 @@ export function LegacyPreviewContainer(
   }, [
     handleUrlChange,
     onPreviewStart,
+    onRouteMatch,
     openerWindow,
     previewOrigin,
     sameOriginWithOpener,
