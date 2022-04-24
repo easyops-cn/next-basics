@@ -10,6 +10,8 @@ node_modules
 *.log
 report.*.json
 /dev-settings.yaml
+/dev-https.key
+/dev-https.cert
 /dev.config.js
 /mock-micro-apps
 
