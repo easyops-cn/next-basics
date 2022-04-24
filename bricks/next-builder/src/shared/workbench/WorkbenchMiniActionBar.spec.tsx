@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
 import { WorkbenchActionsContext } from "./WorkbenchActionsContext";
 
@@ -10,7 +10,7 @@ test("WorkbenchMiniActionBar with no actions", () => {
 
 test("WorkbenchMiniActionBar with actions", () => {
   const onActionClick = jest.fn();
-  const { getAllByRole } = render(
+  render(
     <WorkbenchActionsContext.Provider
       value={{
         actions: [
@@ -48,28 +48,28 @@ test("WorkbenchMiniActionBar with actions", () => {
     </WorkbenchActionsContext.Provider>
   );
 
-  expect(getAllByRole("button").length).toBe(2);
+  expect(screen.getAllByRole("button").length).toBe(2);
 
   expect(onActionClick).toBeCalledTimes(0);
-  fireEvent.click(getAllByRole("button")[0]);
+  fireEvent.click(screen.getAllByRole("button")[0]);
   expect(onActionClick).toHaveBeenNthCalledWith(1, {
     action: "add",
     data: { type: "production" },
   });
 
   expect(onActionClick).toBeCalledTimes(1);
-  fireEvent.click(getAllByRole("button")[1]);
+  fireEvent.click(screen.getAllByRole("button")[1]);
   expect(onActionClick).toHaveBeenNthCalledWith(2, {
     action: "move-up",
     data: { type: "production" },
   });
 
-  fireEvent.mouseDown(getAllByRole("button")[0]);
+  fireEvent.mouseDown(screen.getAllByRole("button")[0]);
 });
 
 test("WorkbenchMiniActionBar with actions for moving first node", () => {
   const onActionClick = jest.fn();
-  const { getAllByRole } = render(
+  render(
     <WorkbenchActionsContext.Provider
       value={{
         actions: [
@@ -97,19 +97,23 @@ test("WorkbenchMiniActionBar with actions for moving first node", () => {
     </WorkbenchActionsContext.Provider>
   );
 
-  expect(getAllByRole("button")[0].classList.contains("disabled")).toBe(true);
-  expect(getAllByRole("button")[1].classList.contains("disabled")).toBe(false);
+  expect(screen.getAllByRole("button")[0].classList.contains("disabled")).toBe(
+    true
+  );
+  expect(screen.getAllByRole("button")[1].classList.contains("disabled")).toBe(
+    false
+  );
 
-  fireEvent.click(getAllByRole("button")[0]);
+  fireEvent.click(screen.getAllByRole("button")[0]);
   expect(onActionClick).toBeCalledTimes(0);
 
-  fireEvent.click(getAllByRole("button")[1]);
+  fireEvent.click(screen.getAllByRole("button")[1]);
   expect(onActionClick).toBeCalledTimes(1);
 });
 
 test("WorkbenchMiniActionBar with actions for moving last node", () => {
   const onActionClick = jest.fn();
-  const { getAllByRole } = render(
+  render(
     <WorkbenchActionsContext.Provider
       value={{
         actions: [
@@ -137,12 +141,39 @@ test("WorkbenchMiniActionBar with actions for moving last node", () => {
     </WorkbenchActionsContext.Provider>
   );
 
-  expect(getAllByRole("button")[0].classList.contains("disabled")).toBe(false);
-  expect(getAllByRole("button")[1].classList.contains("disabled")).toBe(true);
+  expect(screen.getAllByRole("button")[0].classList.contains("disabled")).toBe(
+    false
+  );
+  expect(screen.getAllByRole("button")[1].classList.contains("disabled")).toBe(
+    true
+  );
 
-  fireEvent.click(getAllByRole("button")[0]);
+  fireEvent.click(screen.getAllByRole("button")[0]);
   expect(onActionClick).toBeCalledTimes(1);
 
-  fireEvent.click(getAllByRole("button")[1]);
+  fireEvent.click(screen.getAllByRole("button")[1]);
   expect(onActionClick).toBeCalledTimes(1);
+});
+
+test("WorkbenchMiniActionBar with hidden actions", () => {
+  render(
+    <WorkbenchActionsContext.Provider
+      value={{
+        actions: [
+          {
+            action: "add",
+            icon: {
+              lib: "antd",
+              theme: "outlined",
+              icon: "plus",
+            },
+          },
+        ],
+        actionsHidden: true,
+      }}
+    >
+      <WorkbenchMiniActionBar />
+    </WorkbenchActionsContext.Provider>
+  );
+  expect(screen.queryByRole("button")).toBe(null);
 });

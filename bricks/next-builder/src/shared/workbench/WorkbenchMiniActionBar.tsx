@@ -22,13 +22,13 @@ export function WorkbenchMiniActionBar({
   isFirst,
   isLast,
 }: WorkbenchSubActionBarProps): React.ReactElement {
-  const { actions } = useWorkbenchActionsContext();
+  const { actions, actionsHidden } = useWorkbenchActionsContext();
   const enabledActions = useMemo(
     () => actions?.filter((item) => looseCheckIfByTransform(item, data)),
     [actions, data]
   );
 
-  if (!enabledActions?.length) {
+  if (actionsHidden || !enabledActions?.length) {
     return null;
   }
 
