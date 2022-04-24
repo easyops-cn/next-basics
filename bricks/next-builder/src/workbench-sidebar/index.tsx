@@ -2,9 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { WorkbenchSidebar } from "./WorkbenchSidebar";
-import type { WorkbenchPaneElement } from "../workbench-pane";
 
 import styles from "./WorkbenchSidebar.shadow.css";
+
+interface WorkbenchSidebarChildElement extends HTMLElement {
+  active?: boolean;
+  activeFlex?: string;
+}
 
 /**
  * @id next-builder.workbench-sidebar
@@ -38,10 +42,10 @@ export class WorkbenchSidebarElement extends UpdatingElement {
 
   private _reflowPanes = (): void => {
     const slot = this._getPanesSlot();
-    const panes = slot.assignedNodes() as WorkbenchPaneElement[];
+    const panes = slot.assignedNodes() as WorkbenchSidebarChildElement[];
     for (const pane of panes) {
       if (pane.active) {
-        pane.style.flex = "1";
+        pane.style.flex = String(pane.activeFlex ?? "1");
       } else {
         pane.style.flex = "initial";
       }
