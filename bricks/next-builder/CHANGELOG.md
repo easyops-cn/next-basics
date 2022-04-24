@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.143.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.143.2...@next-bricks/next-builder@1.143.3) (2022-04-24)
+
+
+### Bug Fixes
+
+* **workbench-sidebar:** support setting active flex for children ([b0328e7](https://github.com/easyops-cn/next-basics/commit/b0328e7b33d7563c4a4cfcec43db08a0811991d5))
+
+
+
+
+
 ## [1.143.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.143.1...@next-bricks/next-builder@1.143.2) (2022-04-24)
 
 
