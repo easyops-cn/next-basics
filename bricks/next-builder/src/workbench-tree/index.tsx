@@ -33,6 +33,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property({ attribute: false })
   actions: WorkbenchTreeAction[];
 
+  @property({ type: Boolean })
+  actionsHidden: boolean;
+
   @property()
   placeholder: string;
 
@@ -92,6 +95,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
           <WorkbenchActionsContext.Provider
             value={{
               actions: this.actions,
+              actionsHidden: this.actionsHidden,
               onActionClick: this._handleActionClick,
             }}
           >

@@ -3,6 +3,7 @@ import type { ActionClickDetail, WorkbenchTreeAction } from "./interfaces";
 
 export interface ContextOfWorkbenchActions {
   actions?: WorkbenchTreeAction[];
+  actionsHidden?: boolean;
   onActionClick?(detail: ActionClickDetail): void;
 }
 
