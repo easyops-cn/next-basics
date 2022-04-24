@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.142.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.6...@next-bricks/next-builder@1.142.7) (2022-04-24)
+
+
+### Bug Fixes
+
+* support mock date in storyboard functions ([4c7f845](https://github.com/easyops-cn/next-basics/commit/4c7f8453e9bd7a05b7abf43dd5999cc736d4939e))
+
+
+
+
+
 ## [1.142.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.5...@next-bricks/next-builder@1.142.6) (2022-04-22)
 
 
