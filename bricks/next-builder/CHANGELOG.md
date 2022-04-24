@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.143.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.143.1...@next-bricks/next-builder@1.143.2) (2022-04-24)
+
+
+### Bug Fixes
+
+* **preview-container:** support route.match event ([87b46e4](https://github.com/easyops-cn/next-basics/commit/87b46e45d183da636b7da5eb5a9fc10a744e9d30))
+
+
+
+
+
 ## [1.143.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.143.0...@next-bricks/next-builder@1.143.1) (2022-04-24)
 
 
