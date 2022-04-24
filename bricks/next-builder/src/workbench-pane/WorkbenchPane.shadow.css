@@ -87,6 +87,7 @@
   display: none;
   overflow: hidden;
   overflow-y: auto;
+  overflow-y: overlay;
 }
 
 :host([active]) .pane-body {
