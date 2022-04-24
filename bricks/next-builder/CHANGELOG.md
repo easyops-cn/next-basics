@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.143.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.143.0...@next-bricks/next-builder@1.143.1) (2022-04-24)
+
+
+### Bug Fixes
+
+* refine scrollbar style ([546cc70](https://github.com/easyops-cn/next-basics/commit/546cc70bca5479dd48a4c1c04a84f87763262c94))
+
+
+
+
+
 # [1.143.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.7...@next-bricks/next-builder@1.143.0) (2022-04-24)
 
 
