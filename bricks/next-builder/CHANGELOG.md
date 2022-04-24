@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.143.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.7...@next-bricks/next-builder@1.143.0) (2022-04-24)
+
+
+### Features
+
+* **workbench-actions:** support hidden actions ([e50f073](https://github.com/easyops-cn/next-basics/commit/e50f073b7d63d3e536c9ec3e0e4d94ebd61d29b8))
+
+
+
+
+
 ## [1.142.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.142.6...@next-bricks/next-builder@1.142.7) (2022-04-24)
 
 
