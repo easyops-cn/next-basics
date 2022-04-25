@@ -81,7 +81,7 @@ export function buildStoryboardV2(data: BuildInfoV2): StoryboardToBuild {
   };
 }
 
-function buildRoutes(
+export function buildRoutes(
   nodes: BuilderRouteNode[],
   ctx: BuildContext
 ): RouteConf[] {

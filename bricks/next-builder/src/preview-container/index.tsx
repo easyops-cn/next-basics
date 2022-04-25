@@ -8,7 +8,7 @@ import {
   UpdatingElement,
   method,
 } from "@next-core/brick-kit";
-import type { Storyboard } from "@next-core/brick-types";
+import type { BuilderRouteNode, Storyboard } from "@next-core/brick-types";
 import { PreviewSettings } from "@next-types/preview";
 import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
 
@@ -29,6 +29,11 @@ export class PreviewContainerElement extends UpdatingElement {
 
   @property()
   templateId: string;
+
+  @property({
+    attribute: false,
+  })
+  snippetGraphData: BuilderRouteNode[];
 
   @property()
   routePath: string;
@@ -79,8 +84,12 @@ export class PreviewContainerElement extends UpdatingElement {
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
-  refresh(appId: string, storyboardPatch: Partial<Storyboard>): void {
-    this._previewContainerRef.current.refresh(appId, storyboardPatch);
+  refresh(
+    appId: string,
+    storyboardPatch: Partial<Storyboard>,
+    options: Record<string, unknown>
+  ): void {
+    this._previewContainerRef.current.refresh(appId, storyboardPatch, options);
   }
 
   @method()
@@ -111,6 +120,7 @@ export class PreviewContainerElement extends UpdatingElement {
             previewUrl={this.previewUrl}
             appId={this.appId}
             templateId={this.templateId}
+            snippetGraphData={this.snippetGraphData}
             routePath={this.routePath}
             routeExact={this.routeExact}
             previewSettings={this.previewSettings}
