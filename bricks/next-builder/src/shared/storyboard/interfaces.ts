@@ -64,7 +64,15 @@ export interface BuildInfo {
   options?: BuildOptions;
   functions?: FunctionNode[];
   mocks?: MockRule[];
-  contracts?: DependContractOfApi[];
+  dependencies?: {
+    name: string;
+    constraint: string;
+  }[];
+  app?: {
+    id: string;
+    homepage: string;
+    name: string;
+  };
 }
 
 export type BuildInfoV2 = Omit<BuildInfo, "brickList">;

@@ -117,6 +117,15 @@ const mockFactory: Record<string, Record<string, any>> = {
           permissionsPreCheck:
             '["<% `cmdb:${QUERY.objectId}_instance_create` %>"]',
           sort: 1,
+          context: [
+            {
+              name: "ttttt",
+              resolve: {
+                useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+                args: ["APP"],
+              },
+            },
+          ],
         },
         {
           id: "R-01",
@@ -260,30 +269,6 @@ const mockFactory: Record<string, Record<string, any>> = {
           },
         },
       ],
-      storyboardJson: JSON.stringify({
-        app: "test-project",
-        routes: [
-          {
-            path: "/abc",
-            type: "bricks",
-            bricks: [
-              {
-                brick: "brick-pkg-a.brick-a",
-                lifeCycle: {
-                  useResolves: [
-                    {
-                      useProvider: "easyops.flow_api@FlowApiB:1.0.0",
-                    },
-                    {
-                      useProvider: "easyops.flow_api@GetCmdbDetail:1.0.0",
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        ],
-      }),
       i18n: [
         {
           name: "FILES",
@@ -318,7 +303,6 @@ const mockFactory: Record<string, Record<string, any>> = {
           isEnable: false,
         },
       ],
-
       dependsAll: false,
     },
   },
@@ -459,9 +443,11 @@ describe("StoryboardAssembly", () => {
               path: "/a",
               type: "bricks",
               providers: ["p1"],
+              segues: undefined,
               bricks: [
                 {
                   iid: "instance-b01",
+                  lifeCycle: undefined,
                   brick: "m",
                   if: false,
                   slots: {
@@ -502,7 +488,15 @@ describe("StoryboardAssembly", () => {
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
-
+              context: [
+                {
+                  name: "ttttt",
+                  resolve: {
+                    useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+                    args: ["APP"],
+                  },
+                },
+              ],
               routes: [
                 {
                   path: "/b/c",
@@ -569,6 +563,7 @@ describe("StoryboardAssembly", () => {
                 menuId: "menu-a",
                 items: [
                   {
+                    children: undefined,
                     text: "Menu Item 1",
                   },
 
@@ -579,6 +574,7 @@ describe("StoryboardAssembly", () => {
                         text: "Menu Item 2-1",
                         children: [
                           {
+                            children: undefined,
                             text: "Menu Item 2-1-1",
                           },
                         ],
@@ -590,6 +586,7 @@ describe("StoryboardAssembly", () => {
 
               {
                 menuId: "menu-b",
+                items: undefined,
                 dynamicItems: true,
                 itemsResolve: {
                   useProvider: "my.menu-provider",
@@ -621,16 +618,12 @@ describe("StoryboardAssembly", () => {
                 },
               ],
             },
+            functions: undefined,
             contracts: [
               {
-                contract: "easyops.flow_api.FlowApiB",
+                contract: "easyops.api.cmdb.instance.PostSearch",
                 type: "contract",
-                version: "1.0.0",
-              },
-              {
-                contract: "easyops.flow_api.GetCmdbDetail",
-                type: "contract",
-                version: "1.0.0",
+                version: "1.1.0",
               },
             ],
           },
@@ -639,7 +632,6 @@ describe("StoryboardAssembly", () => {
         },
       },
     ],
-
     [
       {
         projectId: "test-project",
@@ -653,12 +645,14 @@ describe("StoryboardAssembly", () => {
               [symbolForNodeId]: "R-01",
               path: "/a",
               type: "bricks",
+              segues: undefined,
               providers: ["p1"],
               bricks: [
                 {
                   [symbolForNodeId]: "B-01",
                   [symbolForNodeInstanceId]: "instance-b01",
                   iid: "instance-b01",
+                  lifeCycle: undefined,
                   brick: "m",
                   if: false,
                   slots: {
@@ -734,6 +728,15 @@ describe("StoryboardAssembly", () => {
                   ],
                 },
               ],
+              context: [
+                {
+                  name: "ttttt",
+                  resolve: {
+                    useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+                    args: ["APP"],
+                  },
+                },
+              ],
             },
           ],
 
@@ -806,6 +809,7 @@ describe("StoryboardAssembly", () => {
                 menuId: "menu-a",
                 items: [
                   {
+                    children: undefined,
                     text: "Menu Item 1",
                   },
 
@@ -816,6 +820,7 @@ describe("StoryboardAssembly", () => {
                         text: "Menu Item 2-1",
                         children: [
                           {
+                            children: undefined,
                             text: "Menu Item 2-1-1",
                           },
                         ],
@@ -828,6 +833,7 @@ describe("StoryboardAssembly", () => {
               {
                 menuId: "menu-b",
                 dynamicItems: true,
+                items: undefined,
                 itemsResolve: {
                   useProvider: "my.menu-provider",
                 },
@@ -858,16 +864,12 @@ describe("StoryboardAssembly", () => {
                 },
               ],
             },
+            functions: undefined,
             contracts: [
               {
-                contract: "easyops.flow_api.FlowApiB",
+                contract: "easyops.api.cmdb.instance.PostSearch",
                 type: "contract",
-                version: "1.0.0",
-              },
-              {
-                contract: "easyops.flow_api.GetCmdbDetail",
-                type: "contract",
-                version: "1.0.0",
+                version: "1.1.0",
               },
             ],
           },
@@ -893,6 +895,7 @@ describe("StoryboardAssembly", () => {
                   brick: "z",
                 },
               ],
+              context: undefined,
               path: "/_theme_/my-theme/_dev_only_/theme-preview/home",
               type: "bricks",
             },
@@ -903,15 +906,24 @@ describe("StoryboardAssembly", () => {
                   brick: "y",
                 },
               ],
+              context: undefined,
               path: "/_theme_/my-theme/_dev_only_/theme-preview/list",
               type: "bricks",
             },
           ],
+          dependsAll: undefined,
           meta: {
+            mocks: undefined,
+            menus: undefined,
+            i18n: undefined,
+            functions: undefined,
+            contracts: [],
             customTemplates: [
               {
                 name: "tpl-01",
                 bricks: [{ iid: "b", brick: "x" }],
+                proxy: undefined,
+                state: undefined,
               },
             ],
           },
@@ -929,9 +941,11 @@ describe("StoryboardAssembly", () => {
               path: "/a",
               type: "bricks",
               providers: ["p1"],
+              segues: undefined,
               bricks: [
                 {
                   iid: "instance-b01",
+                  lifeCycle: undefined,
                   brick: "m",
                   if: false,
                   slots: {
@@ -972,7 +986,15 @@ describe("StoryboardAssembly", () => {
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
-
+              context: [
+                {
+                  name: "ttttt",
+                  resolve: {
+                    useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+                    args: ["APP"],
+                  },
+                },
+              ],
               routes: [
                 {
                   path: "/b/c",
@@ -989,6 +1011,7 @@ describe("StoryboardAssembly", () => {
                   brick: "z",
                 },
               ],
+              context: undefined,
               path: "/use-theme-project/_dev_only_/theme-preview/home",
               type: "bricks",
             },
@@ -999,12 +1022,17 @@ describe("StoryboardAssembly", () => {
                   brick: "y",
                 },
               ],
+              context: undefined,
               path: "/use-theme-project/_dev_only_/theme-preview/list",
               type: "bricks",
             },
           ],
-
+          dependsAll: undefined,
           meta: {
+            functions: undefined,
+            i18n: undefined,
+            menus: undefined,
+            mocks: undefined,
             customTemplates: [
               {
                 name: "tpl-01",
@@ -1052,6 +1080,13 @@ describe("StoryboardAssembly", () => {
                 proxy: undefined,
                 state: undefined,
                 bricks: [],
+              },
+            ],
+            contracts: [
+              {
+                contract: "easyops.api.cmdb.instance.PostSearch",
+                type: "contract",
+                version: "1.1.0",
               },
             ],
           },
