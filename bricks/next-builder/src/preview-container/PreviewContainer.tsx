@@ -10,7 +10,11 @@ import React, {
 } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 import classNames from "classnames";
-import type { Storyboard } from "@next-core/brick-types";
+import type {
+  BuilderBrickNode,
+  BuilderSnippetNode,
+  Storyboard,
+} from "@next-core/brick-types";
 import type {
   BrickOutline,
   PreviewMessageContainerStartPreview,
@@ -21,14 +25,13 @@ import type {
 } from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
-import { buildRoutes } from "../shared/storyboard/buildStoryboardV2";
-import { BuilderRouteNode } from "@next-core/brick-types";
+import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 
 export interface PreviewContainerProps {
   previewUrl: string;
   appId?: string;
   templateId?: string;
-  snippetGraphData?: BuilderRouteNode[];
+  snippetGraphData?: BuilderSnippetNode[];
   routePath?: string;
   routeExact?: boolean;
   previewSettings?: PreviewSettings;
@@ -113,12 +116,12 @@ export function LegacyPreviewContainer(
 
   const loadedRef = useRef(false);
 
-  const getSnippetData = (snippetGraphData: BuilderRouteNode[]) => {
+  const getSnippetData = (snippetGraphData: BuilderSnippetNode[]) => {
     if (snippetGraphData) {
       return {
         snippetId: snippetGraphData[0].snippetId,
-        bricks: buildRoutes(
-          snippetGraphData[0].children as BuilderRouteNode[],
+        bricks: buildBricks(
+          snippetGraphData[0].children as BuilderBrickNode[],
           {}
         ),
       };
@@ -202,7 +205,7 @@ export function LegacyPreviewContainer(
     (
       appId: string,
       storyboardPatch: Partial<Storyboard>,
-      options: { snippetGraphData: BuilderRouteNode[] }
+      options: { snippetGraphData: BuilderSnippetNode[] }
     ) => {
       const snippetData = getSnippetData(
         options.snippetGraphData || snippetGraphData
