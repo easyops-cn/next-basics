@@ -12,9 +12,10 @@ import {
   RadioChangeEvent,
 } from "antd";
 import { CmdbObjectApi_getObjectAll } from "@next-sdk/cmdb-sdk";
-import { IPRegex, ObjectAttrStruct, StructValueType } from "./ObjectAttrStruct";
+import { ObjectAttrStruct, StructValueType } from "./ObjectAttrStruct";
 import { NS_FORMS, K } from "../../i18n/constants";
 import i18n from "i18next";
+import { IPRegex } from "./constants";
 jest.mock("@next-sdk/cmdb-sdk");
 
 const spyOnModalConfirm = jest.spyOn(Modal, "confirm");
