@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.144.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.144.0...@next-bricks/next-builder@1.144.1) (2022-04-25)
+
+
+### Bug Fixes
+
+* 基于当前编辑后的 storyboard 的数据搜集 contract 信息 ([aca64c2](https://github.com/easyops-cn/next-basics/commit/aca64c2ec06b69b52393843b8956980dc74d8129))
+
+
+
+
+
 # [1.144.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.143.3...@next-bricks/next-builder@1.144.0) (2022-04-25)
 
 
