@@ -21,6 +21,7 @@ import {
 } from "react-sortable-hoc";
 import styles from "./index.module.css";
 import { ColumnsType } from "antd/lib/table";
+import { IPRegex } from "./constants";
 
 export interface SortEnd {
   oldIndex: number;
@@ -70,8 +71,6 @@ const objectAttrColumns = [
 ];
 
 // eslint-disable-next-line no-useless-escape
-export const IPRegex =
-  "^^(d|[1-9]d|1dd|2([0-4]d|5[0-5])).(d|[1-9]d|1dd|2([0-4]d|5[0-5])).(d|[1-9]d|1dd|2([0-4]d|5[0-5])).(d|[1-9]d|1dd|2([0-4]d|5[0-5]))$";
 const regexType = ["str", "int", "arr", "json", "ip", "enum", "enums"];
 
 export interface LegacyObjectAttrStructProps extends FormComponentProps {
