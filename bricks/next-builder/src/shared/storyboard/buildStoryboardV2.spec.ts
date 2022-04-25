@@ -5,6 +5,8 @@ import {
   symbolForNodeInstanceId,
 } from "./buildStoryboardV2";
 
+import * as dataProvider from "../../data-providers/ScanBricksAndTemplates";
+
 const consoleError = jest
   .spyOn(console, "error")
   .mockImplementation(() => void 0);
@@ -210,13 +212,6 @@ describe("buildStoryboardV2", () => {
             typescript: true,
           },
         ],
-        contracts: [
-          {
-            contract: "easyops.api.flow_builder.flow.GetFlowStepFieldsMapping",
-            type: "contract",
-            version: "1.0.0",
-          },
-        ],
         dependsAll: false,
       },
       // Output
@@ -367,14 +362,6 @@ describe("buildStoryboardV2", () => {
               name: "sayExclamation",
               source: "function sayExclamation() {}",
               typescript: true,
-            },
-          ],
-          contracts: [
-            {
-              contract:
-                "easyops.api.flow_builder.flow.GetFlowStepFieldsMapping",
-              type: "contract",
-              version: "1.0.0",
             },
           ],
         },
@@ -900,6 +887,105 @@ describe("buildStoryboardV2", () => {
         ],
       } as any,
     ],
+    [
+      "collect contracts",
+      {
+        app: {
+          id: "test-app",
+          name: "test-app",
+          homepage: "/test-app",
+        },
+        routeList: [
+          {
+            id: "R-01",
+            instanceId: "instance-r01",
+            path: "/a",
+            type: "bricks",
+            parent: [], // Empty parent also works.
+            providers: '["p1"]',
+            segues: null,
+            context: [
+              {
+                name: "ttttt",
+                resolve: {
+                  useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+                  args: ["APP"],
+                },
+              },
+            ],
+            // Fields should be removed.
+            _ts: 123,
+            org: 1,
+          },
+        ],
+        templateList: [],
+        menus: [],
+        i18n: [],
+        functions: [
+          {
+            name: "sayHello",
+            source: "function sayHello() {}",
+            description: "Say hello",
+          },
+          {
+            name: "sayExclamation",
+            source: "function sayExclamation() {}",
+            description: "Say exclamation",
+            typescript: true,
+          },
+        ],
+        dependsAll: false,
+      },
+      // Output
+      {
+        dependsAll: false,
+        meta: {
+          contracts: [
+            {
+              contract: "easyops.api.cmdb.instance.PostSearch",
+              type: "contract",
+              version: "1.1.0",
+            },
+          ],
+          customTemplates: [],
+          functions: [
+            {
+              name: "sayHello",
+              source: "function sayHello() {}",
+              typescript: undefined,
+            },
+            {
+              name: "sayExclamation",
+              source: "function sayExclamation() {}",
+              typescript: true,
+            },
+          ],
+          i18n: {
+            en: {},
+            zh: {},
+          },
+          menus: [],
+        },
+        routes: [
+          {
+            bricks: [],
+            context: [
+              {
+                name: "ttttt",
+                resolve: {
+                  args: ["APP"],
+                  useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+                },
+              },
+            ],
+            path: "/a",
+            providers: ["p1"],
+            segues: undefined,
+            type: "bricks",
+          },
+        ],
+      },
+    ],
   ])("buildStoryboardV2 should work %s", (condition, input, output) => {
     const cloneOfInput = clone(input);
     expect(buildStoryboardV2(input)).toEqual(output);
@@ -944,6 +1030,9 @@ describe("buildStoryboardV2", () => {
   ])(
     "buildStoryboardV2 should warn `%s` if %s",
     (message, condition, input) => {
+      jest
+        .spyOn(dataProvider, "ScanBricksAndTemplates")
+        .mockReturnValue({ contractData: "" } as any);
       buildStoryboardV2(input);
       expect(consoleError).toBeCalledTimes(1);
       expect(consoleError.mock.calls[0][0]).toBe(message);

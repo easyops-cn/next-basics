@@ -13,7 +13,14 @@ import {
   normalizeMenu,
   isRouteNode,
 } from "@next-core/brick-utils";
+import { safeLoad, JSON_SCHEMA } from "js-yaml";
+import { get } from "lodash";
 import { BuildInfoV2, StoryboardToBuild } from "./interfaces";
+import {
+  ScanBricksAndTemplates,
+  DependContract,
+  DependContractOfApi,
+} from "../../data-providers/ScanBricksAndTemplates";
 
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
@@ -67,15 +74,37 @@ export function buildStoryboardV2(data: BuildInfoV2): StoryboardToBuild {
     typescript: fn.typescript,
   }));
 
+  const meta = {
+    customTemplates,
+    menus,
+    i18n,
+    functions,
+    mocks: data.mocks,
+  };
+
+  // 基于当前最新的 storyboard 扫描 contract 信息
+  const { contractData: contractStr } = ScanBricksAndTemplates({
+    storyboard: {
+      app: data.app,
+      routes,
+      meta,
+    },
+    version: "workspace",
+    dependencies: data.dependencies,
+  });
+
+  const deps: DependContract[] = get(
+    safeLoad(contractStr, { schema: JSON_SCHEMA, json: true }),
+    "contracts[0].deps"
+  );
+
   return {
     routes,
     meta: {
-      customTemplates,
-      menus,
-      i18n,
-      functions,
-      mocks: data.mocks,
-      contracts: data.contracts,
+      ...meta,
+      contracts: deps?.filter(
+        (item) => item.type === "contract"
+      ) as DependContractOfApi[],
     },
     dependsAll: data.dependsAll,
   };
