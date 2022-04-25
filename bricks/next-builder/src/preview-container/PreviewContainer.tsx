@@ -21,11 +21,14 @@ import type {
 } from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
+import { buildRoutes } from "../shared/storyboard/buildStoryboardV2";
+import { BuilderRouteNode } from "@next-core/brick-types";
 
 export interface PreviewContainerProps {
   previewUrl: string;
   appId?: string;
   templateId?: string;
+  snippetGraphData?: BuilderRouteNode[];
   routePath?: string;
   routeExact?: boolean;
   previewSettings?: PreviewSettings;
@@ -40,7 +43,11 @@ export interface PreviewContainerProps {
 }
 
 export interface PreviewContainerRef {
-  refresh(appId: string, storyboardPatch: Partial<Storyboard>): void;
+  refresh(
+    appId: string,
+    storyboardPatch: Partial<Storyboard>,
+    options: Record<string, unknown>
+  ): void;
   reload(): void;
 }
 
@@ -64,6 +71,7 @@ export function LegacyPreviewContainer(
     previewUrl,
     appId,
     templateId,
+    snippetGraphData,
     previewSettings,
     routePath,
     routeExact,
@@ -104,8 +112,17 @@ export function LegacyPreviewContainer(
   }, [openerWindow]);
 
   const loadedRef = useRef(false);
+
+  const getSnippetData = (snippetGraphData: BuilderRouteNode[]) => {
+    return {
+      snippetId: snippetGraphData[0].snippetId,
+      bricks: buildRoutes(snippetGraphData[0].children, {}),
+    };
+  };
+
   const handleIframeLoad = useCallback(() => {
     loadedRef.current = true;
+    const snippetData = getSnippetData(snippetGraphData);
     iframeRef.current.contentWindow.postMessage(
       {
         sender: "preview-container",
@@ -113,6 +130,7 @@ export function LegacyPreviewContainer(
         options: {
           appId,
           templateId,
+          snippetData: JSON.stringify(snippetData),
           routePath,
           routeExact,
           settings: previewSettings,
@@ -123,6 +141,7 @@ export function LegacyPreviewContainer(
   }, [
     appId,
     templateId,
+    snippetGraphData,
     routePath,
     routeExact,
     previewSettings,
@@ -175,18 +194,28 @@ export function LegacyPreviewContainer(
   }, [activeOutlines, adjustOutlines]);
 
   const refresh = useCallback(
-    (appId: string, storyboardPatch: Partial<Storyboard>) => {
+    (
+      appId: string,
+      storyboardPatch: Partial<Storyboard>,
+      options: { snippetGraphData: BuilderRouteNode[] }
+    ) => {
+      const snippetData = getSnippetData(
+        options.snippetGraphData || snippetGraphData
+      );
       iframeRef.current.contentWindow.postMessage(
         {
           sender: "preview-container",
           type: "refresh",
           storyboardPatch,
           settings: previewSettings,
+          options: {
+            snippetData: JSON.stringify(snippetData),
+          },
         } as PreviewMessageFromContainer,
         previewOrigin
       );
     },
-    [previewOrigin, previewSettings]
+    [previewOrigin, previewSettings, snippetGraphData]
   );
 
   const reload = useCallback(() => {

@@ -153,6 +153,7 @@ export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {
   type: "refresh";
   storyboardPatch: Partial<Storyboard>;
   settings?: PreviewSettings;
+  options?: PreviewStartOptions;
 }
 
 export interface PreviewMessageContainerReload extends PreviewBaseMessage {
@@ -205,6 +206,7 @@ export interface BrickOutline {
 export interface PreviewStartOptions {
   appId?: string;
   templateId?: string;
+  snippetData?: any;
   routePath?: string;
   routeExact?: boolean;
   settings?: PreviewSettings;
