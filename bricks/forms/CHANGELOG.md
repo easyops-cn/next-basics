@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.217.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.3...@next-bricks/forms@1.217.4) (2022-04-25)
+
+
+### Bug Fixes
+
+* **forms:** 结构项ip支持ipv6 ([336a843](https://github.com/easyops-cn/next-basics/commit/336a843f482292ffb1a0806c0d7f6d5b33eb677f))
+
+
+
+
+
 ## [1.217.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.2...@next-bricks/forms@1.217.3) (2022-04-19)
 
 **Note:** Version bump only for package @next-bricks/forms
