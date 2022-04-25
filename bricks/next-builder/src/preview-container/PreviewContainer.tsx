@@ -114,10 +114,15 @@ export function LegacyPreviewContainer(
   const loadedRef = useRef(false);
 
   const getSnippetData = (snippetGraphData: BuilderRouteNode[]) => {
-    return {
-      snippetId: snippetGraphData[0].snippetId,
-      bricks: buildRoutes(snippetGraphData[0].children, {}),
-    };
+    if (snippetGraphData) {
+      return {
+        snippetId: snippetGraphData[0].snippetId,
+        bricks: buildRoutes(
+          snippetGraphData[0].children as BuilderRouteNode[],
+          {}
+        ),
+      };
+    }
   };
 
   const handleIframeLoad = useCallback(() => {
@@ -130,7 +135,7 @@ export function LegacyPreviewContainer(
         options: {
           appId,
           templateId,
-          snippetData: JSON.stringify(snippetData),
+          snippetData: snippetData && JSON.stringify(snippetData),
           routePath,
           routeExact,
           settings: previewSettings,
@@ -209,7 +214,7 @@ export function LegacyPreviewContainer(
           storyboardPatch,
           settings: previewSettings,
           options: {
-            snippetData: JSON.stringify(snippetData),
+            snippetData: snippetData && JSON.stringify(snippetData),
           },
         } as PreviewMessageFromContainer,
         previewOrigin
