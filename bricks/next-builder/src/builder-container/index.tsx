@@ -98,6 +98,10 @@ export class BuilderContainerElement extends UpdatingElement {
   @property({ attribute: false })
   providerList: string[];
 
+  // This is a list which contains all flow api.
+  @property({ attribute: false })
+  flowApiList: string[];
+
   // This will be deprecated soon.
   @property({ attribute: false })
   storyList: Story[];
@@ -670,6 +674,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 brickList={this.brickList}
                 editorList={this.editorList}
                 providerList={this.providerList}
+                flowApiList={this.flowApiList}
                 routeList={this.routeList}
                 templateList={this.templateList}
                 snippetList={this.snippetList}

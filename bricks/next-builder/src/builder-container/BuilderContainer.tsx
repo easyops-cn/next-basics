@@ -76,6 +76,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   brickList?: BrickOptionItem[];
   editorList?: SharedEditorConf[];
   providerList?: string[];
+  flowApiList?: string[];
   storyList?: Story[];
   routeList?: BuilderRouteNode[];
   templateList?: BuilderCustomTemplateNode[];
@@ -134,6 +135,7 @@ export function LegacyBuilderContainer(
     brickList,
     editorList,
     providerList,
+    flowApiList,
     storyList,
     routeList,
     templateList,
@@ -392,6 +394,7 @@ export function LegacyBuilderContainer(
         dataType,
         brickList,
         providerList,
+        flowApiList,
         storyList,
         routeList,
         templateList,

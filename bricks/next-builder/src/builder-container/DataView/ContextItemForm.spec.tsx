@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { ContextItemForm, ContextItemFormProps } from "./ContextItemForm";
-import { AutoComplete, Form, Radio } from "antd";
+import { AutoComplete, Form, Radio, Select } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
@@ -47,9 +47,25 @@ describe("ContextItemForm", () => {
 
     mockUseBuilderUIContext.mockReturnValue({
       providerList: ["provider-a", "provider-b"],
+      flowApiList: ["easyops.api.cmdb.instance@PostSearch:1.1.0"],
     });
     // Trigger component updating.
     wrapper.setProps({});
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find('FormItemInput[label="useProvider"]')
+        .find(Select)
+        .prop("options")
+    ).toEqual([
+      { label: "provider-a", value: "provider-a" },
+      { label: "provider-b", value: "provider-b" },
+      {
+        label: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+        value: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+      },
+    ]);
 
     expect(wrapper.html().indexOf("onChange is error") <= 0).toBeTruthy();
 

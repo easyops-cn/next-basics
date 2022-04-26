@@ -20,6 +20,7 @@ export interface ContextOfBuilderUI {
   dataType?: BuilderDataType;
   brickList?: BrickOptionItem[];
   providerList?: string[];
+  flowApiList?: string[];
   storyList?: Story[];
   routeList?: BuilderRouteNode[];
   templateList?: BuilderCustomTemplateNode[];
