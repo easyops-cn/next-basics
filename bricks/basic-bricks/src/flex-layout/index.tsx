@@ -20,32 +20,32 @@ export class FlexLayoutElement extends UpdatingElement {
   /**
    * @description 定义[flex-direction]:设置主轴方向
    */
-  @property({ attribute: false })
-  flexDirection = "row";
+  @property({ type: String })
+  flexDirection: string;
 
   /**
    * @description 定义[justify-content]:设置主轴上子元素的排列方式
    */
-  @property({ attribute: false })
-  justifyContent = "flex-start";
+  @property({ type: String })
+  justifyContent: string;
 
   /**
    * @description 定义[align-items]:设置侧轴上的子元素排列方式（单行）
    */
-  @property({ attribute: false })
-  alignItems = "stretch";
+  @property({ type: String })
+  alignItems: string;
 
   /**
    * @description 定义[align-content]:设置侧轴上的子元素排列方式（多行）
    */
-  @property({ attribute: false })
-  alignContent = "stretch";
+  @property({ type: String })
+  alignContent: string;
 
   /**
    * @description 定义[flex-wrap]:设置换行方式
    */
-  @property({ attribute: false })
-  flexWrap = "nowrap";
+  @property({ type: String })
+  flexWrap: string;
 
   @method()
   escapeHTML(str: string): string {
@@ -77,14 +77,15 @@ export class FlexLayoutElement extends UpdatingElement {
   protected _render(): void {
     // istanbul ignore else
     const _styles = `:host { display: flex; flex-direction: ${this.escapeHTML(
-      this.flexDirection
+      this.flexDirection ?? "row"
     )}; flex-wrap: ${this.escapeHTML(
-      this.flexWrap
+      this.flexWrap ?? "nowrap"
     )}; justify-content: ${this.escapeHTML(
-      this.justifyContent
+      this.justifyContent ?? "flex-start"
     )}; align-items: ${this.escapeHTML(
-      this.alignItems
-    )}; align-content: ${this.escapeHTML(this.alignContent)}}`;
+      this.alignItems ?? "stretch"
+    )}; align-content: ${this.escapeHTML(this.alignContent ?? "stretch")}}`;
+
     if (this.isConnected) {
       ReactDOM.render(
         <>
