@@ -26,15 +26,22 @@ export function ContextItemForm({
   onContextItemUpdate,
   settingItemForm,
 }: ContextItemFormProps): React.ReactElement {
-  const { providerList, highlightTokens, onClickHighlightToken } =
+  const { providerList, flowApiList, highlightTokens, onClickHighlightToken } =
     useBuilderUIContext();
   const originalProviderList = useMemo(
     () =>
-      (providerList ?? []).map((provider) => ({
-        label: provider,
-        value: provider,
-      })),
-    [providerList]
+      (providerList ?? [])
+        .map((provider) => ({
+          label: provider,
+          value: provider,
+        }))
+        .concat(
+          (flowApiList ?? []).map((flowApi) => ({
+            label: flowApi,
+            value: flowApi,
+          }))
+        ),
+    [providerList, flowApiList]
   );
   const [providerOptions, setProviderOptions] = useState(originalProviderList);
   const [contextType, setContextType] = useState(ContextType.VALUE);
