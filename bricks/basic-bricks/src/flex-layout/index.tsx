@@ -42,7 +42,7 @@ export class FlexLayoutElement extends UpdatingElement {
   alignContent = "stretch";
 
   /**
-   * @description 定义[align-content]:设置侧轴上的子元素排列方式（多行）
+   * @description 定义[flex-wrap]:设置换行方式
    */
   @property({ attribute: false })
   flexWrap = "nowrap";
