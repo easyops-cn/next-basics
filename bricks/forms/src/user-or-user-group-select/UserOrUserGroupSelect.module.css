@@ -1,5 +1,5 @@
 .UserOrUserGroupSelectContainer {
-  display: grid;
+  display: flex;
   align-items: center;
   position: relative;
   .extra {
