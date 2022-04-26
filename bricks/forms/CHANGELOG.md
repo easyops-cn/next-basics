@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.217.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.4...@next-bricks/forms@1.217.5) (2022-04-26)
+
+
+### Bug Fixes
+
+* **forms:** user-or-user-group-select选项过长，样式溢出 ([d4a5ee9](https://github.com/easyops-cn/next-basics/commit/d4a5ee9f19b174fd9e1d43c31bb19dc2c9a29a5d))
+
+
+
+
+
 ## [1.217.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.3...@next-bricks/forms@1.217.4) (2022-04-25)
 
 
