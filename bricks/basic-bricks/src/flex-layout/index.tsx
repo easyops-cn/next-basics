@@ -1,11 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {
-  BrickWrapper,
-  method,
-  property,
-  UpdatingElement,
-} from "@next-core/brick-kit";
+import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 
 /**
  * @id basic-bricks.flex-layout
@@ -47,13 +42,9 @@ export class FlexLayoutElement extends UpdatingElement {
   @property({ type: String })
   flexWrap: string;
 
-  @method()
-  escapeHTML(str: string): string {
-    return str
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+  // Process user's input
+  processString(str: string): string {
+    return str.split(";")[0];
   }
 
   private _shadowRoot: ShadowRoot;
@@ -76,15 +67,15 @@ export class FlexLayoutElement extends UpdatingElement {
 
   protected _render(): void {
     // istanbul ignore else
-    const _styles = `:host { display: flex; flex-direction: ${this.escapeHTML(
+    const _styles = `:host { display: flex; flex-direction: ${this.processString(
       this.flexDirection ?? "row"
-    )}; flex-wrap: ${this.escapeHTML(
+    )}; flex-wrap: ${this.processString(
       this.flexWrap ?? "nowrap"
-    )}; justify-content: ${this.escapeHTML(
+    )}; justify-content: ${this.processString(
       this.justifyContent ?? "flex-start"
-    )}; align-items: ${this.escapeHTML(
+    )}; align-items: ${this.processString(
       this.alignItems ?? "stretch"
-    )}; align-content: ${this.escapeHTML(this.alignContent ?? "stretch")}}`;
+    )}; align-content: ${this.processString(this.alignContent ?? "stretch")}}`;
 
     if (this.isConnected) {
       ReactDOM.render(
