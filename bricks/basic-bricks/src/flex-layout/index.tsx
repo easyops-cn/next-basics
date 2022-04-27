@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
+import { property, UpdatingElement } from "@next-core/brick-kit";
 
 /**
  * @id basic-bricks.flex-layout
@@ -81,9 +81,7 @@ export class FlexLayoutElement extends UpdatingElement {
       ReactDOM.render(
         <>
           <style>{_styles}</style>
-          <BrickWrapper>
-            <slot name="content" />
-          </BrickWrapper>
+          <slot />
         </>,
         this._shadowRoot
       );
