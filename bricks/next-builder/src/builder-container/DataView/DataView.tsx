@@ -123,6 +123,14 @@ export function DataView({
               provider: (contextValue.resolve as SelectorProviderResolveConf)
                 .provider,
             }
+          : (
+              contextValue?.resolve as UseProviderResolveConf
+            ).useProvider?.includes("@")
+          ? {
+              type: ContextType.FLOW_API,
+              flowApi: (contextValue.resolve as UseProviderResolveConf)
+                .useProvider,
+            }
           : {
               type: ContextType.RESOLVE,
               useProvider: (contextValue.resolve as UseProviderResolveConf)

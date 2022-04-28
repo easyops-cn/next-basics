@@ -9,11 +9,13 @@ import {
 import {
   ContextConf,
   SelectorProviderResolveConf,
+  UseProviderResolveConf,
 } from "@next-core/brick-types";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { FormInstance } from "antd/lib/form";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useBuilderUIContext } from "../BuilderUIContext";
+import { ContractAutoComplete } from "../../shared/components/contract-auto-complete/ContractAutoComplete";
 
 export interface ContextItemFormProps {
   data: ContextConf;
@@ -26,22 +28,15 @@ export function ContextItemForm({
   onContextItemUpdate,
   settingItemForm,
 }: ContextItemFormProps): React.ReactElement {
-  const { providerList, flowApiList, highlightTokens, onClickHighlightToken } =
+  const { providerList, highlightTokens, onClickHighlightToken } =
     useBuilderUIContext();
   const originalProviderList = useMemo(
     () =>
-      (providerList ?? [])
-        .map((provider) => ({
-          label: provider,
-          value: provider,
-        }))
-        .concat(
-          (flowApiList ?? []).map((flowApi) => ({
-            label: flowApi,
-            value: flowApi,
-          }))
-        ),
-    [providerList, flowApiList]
+      (providerList ?? []).map((provider) => ({
+        label: provider,
+        value: provider,
+      })),
+    [providerList]
   );
   const [providerOptions, setProviderOptions] = useState(originalProviderList);
   const [contextType, setContextType] = useState(ContextType.VALUE);
@@ -71,6 +66,7 @@ export function ContextItemForm({
     return [
       { label: "Value", value: ContextType.VALUE },
       { label: "Provider", value: ContextType.RESOLVE },
+      { label: "FlowApi", value: ContextType.FLOW_API },
       ...((data?.resolve as SelectorProviderResolveConf)?.provider
         ? [
             {
@@ -88,6 +84,8 @@ export function ContextItemForm({
       ? ContextType.VALUE
       : (data.resolve as SelectorProviderResolveConf).provider
       ? ContextType.SELECTOR_RESOLVE
+      : (data.resolve as UseProviderResolveConf).useProvider?.includes("@")
+      ? ContextType.FLOW_API
       : ContextType.RESOLVE;
     setContextType(type);
   }, [data]);
@@ -185,6 +183,14 @@ export function ContextItemForm({
               rules={[{ required: true, message: "Provider is required!" }]}
             >
               <Input />
+            </Form.Item>
+          ) : contextType === ContextType.FLOW_API ? (
+            <Form.Item
+              label="flowApi"
+              name="flowApi"
+              rules={[{ required: true, message: "Please select a provider!" }]}
+            >
+              <ContractAutoComplete />
             </Form.Item>
           ) : (
             <Form.Item
