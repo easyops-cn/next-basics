@@ -69,17 +69,6 @@ export class EventConfigFormElement extends UpdatingElement {
   })
   providerList: string[] = [];
 
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description flow api 列表
-   */
-  @property({
-    attribute: false,
-  })
-  flowApiList: string[] = [];
-
   @property()
   type: "event" | "lifeCycle";
 
@@ -225,7 +214,6 @@ export class EventConfigFormElement extends UpdatingElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             providerList={this.providerList}
-            flowApiList={this.flowApiList}
             type={this.type}
             docUrl={this.docUrl}
             lifeCycle={this.lifeCycle}

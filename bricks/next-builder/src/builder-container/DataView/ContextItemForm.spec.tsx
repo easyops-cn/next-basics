@@ -5,6 +5,7 @@ import { AutoComplete, Form, Radio, Select } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useBuilderUIContext } from "../BuilderUIContext";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
+import { ContractAutoComplete } from "../../shared/components/contract-auto-complete/ContractAutoComplete";
 
 jest.mock("../BuilderUIContext");
 
@@ -47,7 +48,6 @@ describe("ContextItemForm", () => {
 
     mockUseBuilderUIContext.mockReturnValue({
       providerList: ["provider-a", "provider-b"],
-      flowApiList: ["easyops.api.cmdb.instance@PostSearch:1.1.0"],
     });
     // Trigger component updating.
     wrapper.setProps({});
@@ -61,10 +61,6 @@ describe("ContextItemForm", () => {
     ).toEqual([
       { label: "provider-a", value: "provider-a" },
       { label: "provider-b", value: "provider-b" },
-      {
-        label: "easyops.api.cmdb.instance@PostSearch:1.1.0",
-        value: "easyops.api.cmdb.instance@PostSearch:1.1.0",
-      },
     ]);
 
     expect(wrapper.html().indexOf("onChange is error") <= 0).toBeTruthy();
@@ -111,7 +107,7 @@ describe("ContextItemForm", () => {
       },
     });
     expect(wrapper.find(Form.Item).length).toBe(5);
-    expect(wrapper.find(Radio).children().length).toBe(2);
+    expect(wrapper.find(Radio).children().length).toBe(3);
 
     wrapper.setProps({
       data: {
@@ -125,6 +121,22 @@ describe("ContextItemForm", () => {
         },
       },
     });
-    expect(wrapper.find(Radio).children().length).toBe(3);
+    expect(wrapper.find(Radio).children().length).toBe(4);
+
+    wrapper.setProps({
+      data: {
+        name: "data-d",
+        type: "flow-api",
+        resolve: {
+          useProvider: "cmdb.instance.postsearch@1.0.0",
+          args: "- arg1\n",
+          if: "false\n",
+          transform: "value: <% DATA %>\n",
+        },
+      },
+    });
+
+    wrapper.update();
+    expect(wrapper.find(ContractAutoComplete).length).toEqual(1);
   });
 });

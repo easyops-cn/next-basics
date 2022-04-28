@@ -40,12 +40,12 @@ import {
 } from "../shared/visual-events/interfaces";
 import { isNil, debounce } from "lodash";
 import { getActionOptions } from "../shared/visual-events/getActionOptions";
+import { ContractAutoComplete } from "../shared/components/contract-auto-complete/ContractAutoComplete";
 
 export interface EventConfigFormProps {
   labelCol?: ColProps;
   wrapperCol?: ColProps;
   providerList?: string[];
-  flowApiList?: string[];
   useInCustomTemplate?: boolean;
   type: "event" | "lifeCycle";
   pathList?: string[];
@@ -68,7 +68,6 @@ export function LegacyEventConfigForm(
     wrapperCol,
     onValuesChange,
     providerList,
-    flowApiList,
     type,
     docUrl,
     lifeCycle,
@@ -122,7 +121,7 @@ export function LegacyEventConfigForm(
         ></CodeEditorItem>
       );
     },
-    [highlightTokens, onClickHighlightToken]
+    [highlightTokens, onClickHighlightToken, theme]
   );
 
   const HandleTypeChange = useCallback(
@@ -392,14 +391,7 @@ export function LegacyEventConfigForm(
                 messageVariables={{ label: "flow" }}
                 style={inlineFormItemStyle}
               >
-                <AutoComplete
-                  options={flowApiList?.map((api) => ({ value: api }))}
-                  filterOption={(inputValue, option) =>
-                    option?.value
-                      .toUpperCase()
-                      .indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                ></AutoComplete>
+                <ContractAutoComplete />
               </Form.Item>
               <Tooltip title={t(K.LINK_TO_FLOWER_BUILDER)}>
                 <Link target="_blank" to="/flow-builder">
@@ -411,7 +403,7 @@ export function LegacyEventConfigForm(
         }
       </Form.Item>
     ),
-    [flowApiList, t, inlineFormItemStyle]
+    [t, inlineFormItemStyle]
   );
 
   const useProviderMethod = useMemo(

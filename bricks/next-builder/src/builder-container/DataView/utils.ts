@@ -10,6 +10,7 @@ export interface OptionType {
 export enum ContextType {
   RESOLVE = "resolve",
   SELECTOR_RESOLVE = "selector-resolve",
+  FLOW_API = "flow-api",
   VALUE = "value",
 }
 
@@ -31,8 +32,9 @@ interface contextResolveBaseConf extends contextItemBaseConf {
 }
 
 interface contextItemResolveConf extends contextResolveBaseConf {
-  type: ContextType.RESOLVE;
-  useProvider: string;
+  type: ContextType.RESOLVE | ContextType.FLOW_API;
+  useProvider?: string;
+  flowApi?: string;
   onReject?: string;
 }
 
@@ -163,6 +165,10 @@ export function computeItemToSubmit(
           ? {
               provider: (contextValue as contextItemSelectorProviderResolveConf)
                 .provider,
+            }
+          : contextValue.type === ContextType.FLOW_API
+          ? {
+              useProvider: (contextValue as contextItemResolveConf).flowApi,
             }
           : {
               useProvider: (contextValue as contextItemResolveConf).useProvider,

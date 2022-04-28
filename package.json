@@ -48,6 +48,7 @@
     "@next-core/fontawesome-library": "^1.1.26",
     "@next-core/illustrations": "^0.5.17",
     "@next-core/pipes": "^1.0.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "@size-limit/file": "^7.0.8",
     "@types/d3": "^6.7.5",
     "@types/dompurify": "^2.3.3",

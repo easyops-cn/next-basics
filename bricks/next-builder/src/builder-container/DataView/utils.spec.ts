@@ -128,6 +128,47 @@ describe("computeItemToSubmit", () => {
       },
     ],
     [
+      "should work when type is resolve of flow-api",
+      {
+        type: ContextType.FLOW_API,
+        flowApi: "cmdb.instance.postSearch@1.0.0",
+        value: "[]",
+        if: "<% QUERY.q %>",
+        resolveIf: "<% QUERY.page > 0 %>",
+        args: "- P-1",
+        transform: "value: <% DATA %>\n",
+        name: "new",
+        onChange: '- target: "#id"\n  properties:\n    a: 1',
+        onReject: "transform:\n  value: <% DATA.message %>",
+      },
+      {
+        value: [],
+        if: "<% QUERY.q %>",
+        name: "new",
+        resolve: {
+          useProvider: "cmdb.instance.postSearch@1.0.0",
+          if: "<% QUERY.page > 0 %>",
+          args: ["P-1"],
+          transform: {
+            value: "<% DATA %>",
+          },
+          onReject: {
+            transform: {
+              value: "<% DATA.message %>",
+            },
+          },
+        },
+        onChange: [
+          {
+            target: "#id",
+            properties: {
+              a: 1,
+            },
+          },
+        ],
+      },
+    ],
+    [
       "should work when type is value and value is error",
       {
         type: ContextType.VALUE,
