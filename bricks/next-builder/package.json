@@ -27,6 +27,7 @@
     "@next-libs/basic-components": "^3.4.0",
     "@next-libs/cmdb-instances": "^6.21.24",
     "@next-libs/code-editor-components": "^4.0.29",
+    "@next-libs/forms": "^3.2.22",
     "@next-libs/storage": "^2.0.2",
     "@next-libs/visit-history": "2.0.2",
     "@next-sdk/api-gateway-sdk": "^2.0.17",
