@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.217.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.6...@next-bricks/forms@1.217.7) (2022-04-29)
+
+
+### Bug Fixes
+
+* **general-structs-form-item:** add runInMacrotask option when call setInitValue ([296650b](https://github.com/easyops-cn/next-basics/commit/296650b2e68ef157f748e0daf4ce8e6557388dea))
+
+
+
+
+
 ## [1.217.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.5...@next-bricks/forms@1.217.6) (2022-04-28)
 
 **Note:** Version bump only for package @next-bricks/forms
