@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.146.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.146.0...@next-bricks/next-builder@1.146.1) (2022-04-29)
+
+
+### Bug Fixes
+
+* miss notRender ([a29b607](https://github.com/easyops-cn/next-basics/commit/a29b6075e85dcc9d1a6588ca2593e10b96a97046))
+
+
+
+
+
 # [1.146.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.145.0...@next-bricks/next-builder@1.146.0) (2022-04-28)
 
 
