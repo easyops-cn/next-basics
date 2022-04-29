@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { handleHttpError } from "@next-core/brick-kit";
 import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
 
 interface ContractParams {
@@ -50,7 +49,9 @@ export function useContract({
 
         setContractList(list as ContractField[]);
       } catch (err) {
-        handleHttpError(err);
+        // eslint-disable-next-line no-console
+        console.error(err);
+        setContractList([]);
       }
     })();
   }, [pageSize, query]);

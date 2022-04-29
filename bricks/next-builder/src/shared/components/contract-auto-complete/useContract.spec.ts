@@ -1,6 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { useContract } from "./useContract";
-import * as brickKit from "@next-core/brick-kit";
 import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
 
 jest.mock("@next-sdk/cmdb-sdk");
@@ -67,12 +66,12 @@ describe("useContract", () => {
       new Error("http error")
     );
 
-    const spyOnHandleHttpError = jest.spyOn(brickKit, "handleHttpError");
+    const spyOnConsoleError = jest.spyOn(window.console, "error");
 
     renderHook(() => useContract({}));
 
     await (global as any).flushPromises();
-    expect(spyOnHandleHttpError).toHaveBeenCalled();
+    expect(spyOnConsoleError).toHaveBeenCalled();
     (InstanceApi_postSearchV3 as jest.Mock).mockClear();
   });
 });
