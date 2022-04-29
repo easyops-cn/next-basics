@@ -228,14 +228,18 @@ export class GeneralStructsFormItemElement extends FormItemElement {
       if (this._isEdit) {
         // 如果编辑，给表单赋值
         this._childComponent[0].formUtils.resetFields();
-        this._childComponent[0].setInitValue(this.value[this._editIndex]);
+        this._childComponent[0].setInitValue(this.value[this._editIndex], {
+          runInMacrotask: true,
+        });
         this.innerFormInitEvent.emit(this.value[this._editIndex]);
       } else {
         // 如果新建
         if (this.structDefaultValues) {
           this._childComponent[0] &&
             this._childComponent[0].setInitValue &&
-            this._childComponent[0].setInitValue(this.structDefaultValues);
+            this._childComponent[0].setInitValue(this.structDefaultValues, {
+              runInMacrotask: true,
+            });
           this.innerFormInitEvent.emit(this.structDefaultValues);
         }
       }
