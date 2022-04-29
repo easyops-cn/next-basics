@@ -60,6 +60,7 @@ export class ContractAutoCompleteElement extends FormItemElement {
             label={this.label}
             labelTooltip={this.labelTooltip}
             placeholder={this.placeholder}
+            notRender={this.notRender}
             value={this.value}
             required={this.required}
             helpBrick={this.helpBrick}
