@@ -129,12 +129,14 @@ function TreeNode({
     basePaddingLeft,
     showMatchedNodeOnly,
     fixedActionsFor,
+    collapsible,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
     contextMenuFactory,
   } = useWorkbenchTreeContext();
   const searching = useContext(SearchingContext);
+  const [collapsed, setCollapsed] = useState(false);
 
   const onClick = useMemo(() => clickFactory?.(node), [clickFactory, node]);
 
@@ -170,6 +172,20 @@ function TreeNode({
     []
   );
 
+  const handleCollapse = useCallback((event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setCollapsed((prev) => !prev);
+  }, []);
+
+  const preventMouseEvent = useCallback((event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  }, []);
+
+  // Disallow collapse leaf nodes, or any nodes when searching.
+  const allowCollapse = collapsible && !isLeaf && !searching;
+
   if (searching && showMatchedNodeOnly && !node.matched) {
     return null;
   }
@@ -189,6 +205,8 @@ function TreeNode({
               .some((source) =>
                 isMatch(node.data as Record<string, unknown>, source)
               ),
+          [styles.collapsed]: allowCollapse && collapsed,
+          [styles.collapsible]: allowCollapse,
         })}
         tabIndex={0}
         onMouseEnter={onMouseEnter}
@@ -201,17 +219,34 @@ function TreeNode({
         <span
           className={styles.nodeLabel}
           style={{
-            paddingLeft: level * treeLevelPadding + basePaddingLeft,
+            paddingLeft: level * treeLevelPadding + basePaddingLeft - 2,
             color: node.labelColor,
           }}
           ref={nodeLabelCallback}
         >
-          <span className={styles.nodeIcon}>
-            {node.icon?.lib === "text" ? (
-              <WorkbenchTextIcon icon={node.icon} />
-            ) : (
-              <GeneralIcon icon={node.icon} />
+          <span className={styles.nodeIconWrapper}>
+            {allowCollapse && (
+              <span
+                className={styles.collapseIcon}
+                onClick={handleCollapse}
+                onMouseDown={preventMouseEvent}
+              >
+                <GeneralIcon
+                  icon={{
+                    lib: "antd",
+                    theme: "outlined",
+                    icon: collapsed ? "right" : "down",
+                  }}
+                />
+              </span>
             )}
+            <span className={styles.nodeIcon}>
+              {node.icon?.lib === "text" ? (
+                <WorkbenchTextIcon icon={node.icon} />
+              ) : (
+                <GeneralIcon icon={node.icon} />
+              )}
+            </span>
           </span>
           <span className={styles.nodeName}>
             {isTransformName

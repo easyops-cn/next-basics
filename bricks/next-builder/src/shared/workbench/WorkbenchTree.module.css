@@ -61,15 +61,40 @@
   background-color: #37373d;
 }
 
-.nodeIcon {
+.nodeIconWrapper {
+  display: flex;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.nodeIcon,
+.collapseIcon {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
   font-size: 13px;
-  width: 22px;
-  padding-right: 6px;
-  line-height: 1;
-  flex-shrink: 0;
+}
+
+.collapseIcon {
+  display: none;
+}
+
+.nodeLabelRow.collapsed .nodeIcon,
+.nodeLabelRow.collapsible .nodeIconWrapper:hover .nodeIcon {
+  display: none;
+}
+
+.nodeLabelRow.collapsed .collapseIcon,
+.nodeLabelRow.collapsible .nodeIconWrapper:hover .collapseIcon {
+  display: flex;
+}
+
+.nodeLabelRow.collapsible .nodeIcon:hover,
+.nodeLabelRow.collapsible .collapseIcon:hover {
+  background-color: rgba(90, 93, 94, 0.31);
 }
 
 .nodeName {
@@ -84,4 +109,8 @@
 
 .badge {
   margin: 0 3px;
+}
+
+.collapsed + .tree {
+  display: none;
 }

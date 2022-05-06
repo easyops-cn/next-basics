@@ -281,6 +281,7 @@ export function WorkbenchBrickTree({
         hoverKey: active ? activeContextMenuNode.$$uid : hoverNodeUid,
         activeKey,
         basePaddingLeft: 0,
+        collapsible: true,
         clickFactory,
         mouseEnterFactory,
         mouseLeaveFactory,
