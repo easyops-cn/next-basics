@@ -76,6 +76,8 @@ test("WorkbenchTree with nodes", async () => {
   expect(container.querySelector(".placeholder")).toBe(null);
   expect(container.querySelector(".searchBox")).toBeTruthy();
   expect(container.querySelector(".fixedActions")).toBe(null);
+  expect(container.querySelector(".collapsed")).toBe(null);
+  expect(container.querySelector(".collapseIcon")).toBe(null);
 
   const rootTree = container.querySelector(".tree");
   const firstLevelLinks = [...rootTree.children].map((child) =>
@@ -91,14 +93,14 @@ test("WorkbenchTree with nodes", async () => {
   expect(
     (firstLevelLinks[2].querySelector(".nodeLabel") as HTMLElement).style
       .paddingLeft
-  ).toEqual("15px");
+  ).toEqual("13px");
   expect(
     (
       (firstLevelLinks[2].nextSibling as HTMLElement).querySelector(
         ".nodeLabel"
       ) as HTMLElement
     ).style.paddingLeft
-  ).toEqual("25px");
+  ).toEqual("23px");
 
   expect(onMouseEnter).not.toBeCalled();
   fireEvent.mouseEnter(firstLevelLinks[1]);
@@ -182,7 +184,7 @@ test("while isTransform is false, should not transform", () => {
   );
 });
 
-test("tabs with text-icon", () => {
+test("WorkbenchTree with text-icon", () => {
   const { container } = render(
     <WorkbenchTreeContext.Provider
       value={{
@@ -210,7 +212,7 @@ test("tabs with text-icon", () => {
   ).toBe("blue");
 });
 
-test("tabs with no-search", () => {
+test("WorkbenchTree with no-search", () => {
   const { container } = render(
     <WorkbenchTreeContext.Provider
       value={{
@@ -236,7 +238,7 @@ test("tabs with no-search", () => {
   expect(container.querySelector(".tree").children.length).toBe(2);
 });
 
-test("tabs with fixed actions", () => {
+test("WorkbenchTree with fixed actions", () => {
   const { container } = render(
     <WorkbenchTreeContext.Provider
       value={{
@@ -269,4 +271,88 @@ test("tabs with fixed actions", () => {
   expect(
     container.querySelector(".fixedActions > .nodeLabel > .nodeName")
   ).toHaveTextContent("Tests");
+});
+
+test("WorkbenchTree with collapsible nodes", async () => {
+  const onMouseEnter = jest.fn();
+  const onMouseLeave = jest.fn();
+  const onContextMenu = jest.fn();
+  const mouseEnterFactory: ContextOfWorkbenchTree["mouseEnterFactory"] =
+    (node) => () =>
+      onMouseEnter(node.key);
+  const mouseLeaveFactory: ContextOfWorkbenchTree["mouseLeaveFactory"] =
+    (node) => () =>
+      onMouseLeave(node.key);
+  const contextMenuFactory: ContextOfWorkbenchTree["contextMenuFactory"] =
+    (node) => (e) =>
+      onContextMenu(node.key, e);
+  const { container, getByPlaceholderText } = render(
+    <WorkbenchTreeContext.Provider
+      value={{
+        activeKey: 1,
+        hoverKey: 2,
+        basePaddingLeft: 5,
+        matchNode(node, q) {
+          return node.name.includes(q);
+        },
+        showMatchedNodeOnly: true,
+        collapsible: true,
+        mouseEnterFactory,
+        mouseLeaveFactory,
+        contextMenuFactory,
+      }}
+    >
+      <WorkbenchTree
+        nodes={[
+          {
+            key: 1,
+            name: "n-1",
+          },
+          {
+            key: 2,
+            name: "n-2",
+          },
+          {
+            key: 3,
+            name: "n-3",
+            children: [
+              {
+                key: "4",
+                name: "n-4",
+              },
+            ],
+          },
+        ]}
+        placeholder="No nodes"
+        searchPlaceholder="Search"
+      />
+    </WorkbenchTreeContext.Provider>
+  );
+  expect(container.querySelector(".collapsed")).toBe(null);
+  expect(container.querySelectorAll(".collapseIcon").length).toBe(1);
+
+  fireEvent.mouseDown(container.querySelector(".collapseIcon"));
+  fireEvent.click(container.querySelector(".collapseIcon"));
+
+  expect(container.querySelectorAll(".collapsed").length).toBe(1);
+  expect(container.querySelector(".collapsed .nodeName")).toHaveTextContent(
+    "n-3"
+  );
+
+  const rootTree = container.querySelector(".tree");
+
+  fireEvent.change(getByPlaceholderText("Search"), { target: { value: "4" } });
+
+  // All nodes will be resumed as expanded when searching.
+  expect(container.querySelector(".collapsed")).toBe(null);
+
+  expect(rootTree.children.length).toBe(1);
+  expect(
+    (rootTree.firstChild as HTMLElement).querySelector(".nodeName").textContent
+  ).toBe("n-3");
+  expect(
+    (rootTree.firstChild as HTMLElement)
+      .querySelector(".tree")
+      .querySelector(".nodeName").textContent
+  ).toBe("n-4");
 });
