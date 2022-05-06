@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.13...@next-bricks/basic-bricks@1.175.0) (2022-05-06)
+
+
+### Bug Fixes
+
+* **flex-layout:** 删除brickWrap标签,去掉slot的name属性 ([b334ba4](https://github.com/easyops-cn/next-basics/commit/b334ba407423f2fec7f9e4bdd4f0228f4fa6f5e0))
+* **flex-layout:** 处理用户所输入的字符串变量 ([465e413](https://github.com/easyops-cn/next-basics/commit/465e413e4eb427a793350673effebcd1c4e4786c))
+
+
+### Features
+
+* **flex-layout:** 新增flex-layout构件 ([8c6eab2](https://github.com/easyops-cn/next-basics/commit/8c6eab26faced066b39fcbaedf08747872822819))
+
+
+
+
+
 ## [1.174.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.174.12...@next-bricks/basic-bricks@1.174.13) (2022-04-27)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
