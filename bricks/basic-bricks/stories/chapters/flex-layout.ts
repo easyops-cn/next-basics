@@ -20,7 +20,7 @@ export const flexLayoutStory: Story = {
   conf: {
     brick: "basic-bricks.flex-layout",
     properties: {
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       style: {
         border: "1px solid black",
