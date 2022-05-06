@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.147.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.146.3...@next-bricks/next-builder@1.147.0) (2022-05-06)
+
+
+### Features
+
+* **workbench-tree:** support collapsible nodes ([eb30c58](https://github.com/easyops-cn/next-basics/commit/eb30c58bf98b489b831e0a13983a9c69722e282a))
+
+
+
+
+
 ## [1.146.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.146.2...@next-bricks/next-builder@1.146.3) (2022-05-06)
 
 
