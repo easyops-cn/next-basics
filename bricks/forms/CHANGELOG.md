@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.217.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.8...@next-bricks/forms@1.217.9) (2022-05-06)
+
+
+### Bug Fixes
+
+* **forms:** 修复表单项中下拉框文本太长导致超出容器的问题 Refs EVENT-867 ([a1d295b](https://github.com/easyops-cn/next-basics/commit/a1d295bfea2ed19103fd34462ee8339285b7188f))
+
+
+
+
+
 ## [1.217.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.7...@next-bricks/forms@1.217.8) (2022-04-29)
 
 
