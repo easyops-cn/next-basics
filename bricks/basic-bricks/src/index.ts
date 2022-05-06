@@ -45,3 +45,4 @@ import "./resizable-box";
 import "./general-text";
 import "./app-document-link";
 import "./flex-layout";
+import "./general-popup";
