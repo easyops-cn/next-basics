@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.175.1...@next-bricks/basic-bricks@1.176.0) (2022-05-06)
+
+
+### Features
+
+* add general-popup brick ([05e1af6](https://github.com/easyops-cn/next-basics/commit/05e1af6daaac47f839ef7e877b5254b38a0b3428))
+* use css variable ([d7b32b0](https://github.com/easyops-cn/next-basics/commit/d7b32b0d63ec5fd15a8f344e1f77e080b7dc5b97))
+
+
+
+
+
 ## [1.175.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.175.0...@next-bricks/basic-bricks@1.175.1) (2022-05-06)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
