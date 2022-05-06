@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Form } from "@ant-design/compatible";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";
 import { ConnectedComponentClass } from "@ant-design/compatible/lib/form/interface";
@@ -8,6 +8,7 @@ import {
 } from "@ant-design/compatible/lib/form/Form";
 import moment from "moment";
 import { AbstractGeneralFormElement } from "@next-libs/forms";
+import ResizeObserver from "resize-observer-polyfill";
 import { FormAlignment } from "../interfaces";
 
 const AlignmentJustifyContentValueMap: Record<FormAlignment, string> = {
@@ -34,10 +35,25 @@ export function LegacyGeneralForm({
   alignment,
   formStyle,
 }: LegacyGeneralFormProps): React.ReactElement {
+  const divRef = useRef<HTMLDivElement>();
+  const [width, setWidth] = useState(0);
   formElement.formUtils = form;
+
+  //istanbul ignore next
+  React.useEffect(() => {
+    const ro = new ResizeObserver(() => {
+      const rect = divRef.current.getBoundingClientRect();
+      setWidth(rect.width);
+    });
+    ro.observe(divRef.current);
+    return () => {
+      ro.disconnect();
+    };
+  }, []);
 
   return (
     <div
+      ref={divRef}
       className="form-container"
       style={{ justifyContent: AlignmentJustifyContentValueMap[alignment] }}
     >
@@ -48,7 +64,9 @@ export function LegacyGeneralForm({
           ...formStyle,
         }}
       >
-        <slot id="itemsSlot" name="items" />
+        <div style={{ maxWidth: width }}>
+          <slot id="itemsSlot" name="items" />
+        </div>
       </Form>
     </div>
   );

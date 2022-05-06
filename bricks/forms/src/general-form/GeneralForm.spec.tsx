@@ -64,4 +64,20 @@ describe("LegacyGeneralForm", () => {
     );
     expect(formElement.formUtils).toBe(formUtils);
   });
+  it("should  `maxWidthLimited`", () => {
+    const formElement = {} as any;
+    const formUtils = {} as any;
+    shallow(
+      <LegacyGeneralForm
+        formElement={formElement}
+        form={formUtils}
+        layout="inline"
+        values={{
+          username: "hello",
+        }}
+        maxWidthLimited={true}
+      />
+    );
+    expect(formElement.formUtils).toBe(formUtils);
+  });
 });
