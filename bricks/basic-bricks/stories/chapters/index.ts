@@ -32,6 +32,7 @@ import { transformAgentStory } from "./transform-agent";
 import { headerBarStory } from "./header-bar";
 import { generalAnchorStory } from "./general-anchor";
 import { generalTitleStory } from "./general-title";
+import { flexLayoutStory } from "./flex-layout";
 
 export const Chapters = [
   advanceListContainerStory,
@@ -68,4 +69,5 @@ export const Chapters = [
   headerBarStory,
   generalAnchorStory,
   generalTitleStory,
+  flexLayoutStory,
 ];
