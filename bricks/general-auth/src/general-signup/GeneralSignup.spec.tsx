@@ -35,6 +35,7 @@ spyOnKit.mockReturnValue({
   getBrandSettings: brandFn,
   getFeatureFlags: () => ({
     "enable-backend-password-config": true,
+    "enable-nickname-config": true,
   }),
 } as any);
 const spyOnGetPasswordConfig = jest.spyOn(
@@ -187,6 +188,7 @@ describe("GeneralSignup", () => {
       accessRule: "",
       username: "test",
       org: 12345,
+      nickname: "abc",
     });
     jest.spyOn(kit, "getHistory").mockReturnValue({
       location: {
@@ -196,9 +198,10 @@ describe("GeneralSignup", () => {
       push: jest.fn(),
     } as any);
     const wrapper = mount(<GeneralSignup />);
-    expect(wrapper.find(Input)).toHaveLength(4);
+    expect(wrapper.find(Input)).toHaveLength(5);
     wrapper.find(Form).at(0).invoke("onFinish")({
       username: "test",
+      nickname: "abc",
       email: "123@qq.com",
       password: "123456",
       password2: "123456",
