@@ -68,7 +68,14 @@ export function GeneralButton({
       className={classNames(styles.iconButton, {
         [styles.fadedText]: fadedText && buttonType === "text",
       })}
-      style={buttonStyle}
+      style={{
+        ...buttonStyle,
+        ...(disabled
+          ? {
+              pointerEvents: "none",
+            }
+          : null),
+      }}
       shape={buttonShape}
       size={buttonSize}
       onClick={onClick}
@@ -97,7 +104,12 @@ export function GeneralButton({
       arrowPointAtCenter={arrowPointAtCenter}
     >
       {buttonUrl || buttonHref ? (
-        <Link to={buttonUrl} target={target} href={buttonHref}>
+        <Link
+          to={buttonUrl}
+          target={target}
+          href={buttonHref}
+          disabled={disabled}
+        >
           {getButtonNode()}
         </Link>
       ) : (
