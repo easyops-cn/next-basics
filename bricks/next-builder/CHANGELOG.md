@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.147.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.147.1...@next-bricks/next-builder@1.147.2) (2022-05-07)
+
+
+### Bug Fixes
+
+* 修复编辑契约时光标偏移问题 ([98be163](https://github.com/easyops-cn/next-basics/commit/98be1634f8399b4cce47dc03df1838cd2ff615fa))
+
+
+
+
+
 ## [1.147.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.147.0...@next-bricks/next-builder@1.147.1) (2022-05-07)
 
 
