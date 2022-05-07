@@ -71,7 +71,7 @@ describe("LegacyGeneralForm", () => {
       <LegacyGeneralForm
         formElement={formElement}
         form={formUtils}
-        layout="inline"
+        layout="vertical"
         values={{
           username: "hello",
         }}
