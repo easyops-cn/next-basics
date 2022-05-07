@@ -161,7 +161,72 @@ describe("CmdbInstanceSelect", () => {
     expect(spyOnHandleHttpError).toBeCalledWith(new Error("http error"));
   });
 
-  it("should render origin label if user  don't set field props", async () => {
+  it("should render origin label if user set showKeyField is true", async () => {
+    const list = [
+      {
+        hostname: "host1",
+        objectId: "HOST",
+        instanceId: "abc",
+        mem: "主机1",
+        "#showKey": ["host1"],
+      },
+
+      {
+        hostname: "host2",
+        instanceId: "bcd",
+        objectId: "HOST",
+        mem: "主机2",
+        "#showKey": ["host2"],
+      },
+
+      {
+        hostname: "host3",
+        instanceId: "efg",
+        objectId: "HOST",
+        mem: "主机3",
+        "#showKey": ["host3"],
+      },
+    ];
+
+    mockPostSearch.mockResolvedValueOnce({
+      list,
+    });
+
+    const wrapper = mount(
+      <CmdbInstanceSelect
+        objectId="HOST"
+        name="ack"
+        label="host"
+        placeholder="选择主机"
+        value="world"
+        firstRender={false}
+        showKeyField={true}
+        popoverPositionType="parent"
+      />
+    );
+
+    await (global as any).flushPromises();
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find(Select)
+        .first()
+        .prop("children")
+        .map((child) => child.props.children.props.children[1])
+    ).toEqual(list.map((item) => item["#showKey"].join("")));
+
+    const childElement = document.createElement("div");
+    const parnetElement = document.createElement("div");
+
+    parnetElement.append(childElement);
+
+    expect(
+      wrapper.find(Select).invoke("getPopupContainer")(childElement)
+    ).toEqual(parnetElement);
+  });
+
+  it("should render origin label if user don't set field props ", async () => {
     const list = [
       {
         hostname: "host1",
