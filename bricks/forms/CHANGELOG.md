@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.218.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.218.0...@next-bricks/forms@1.218.1) (2022-05-07)
+
+
+### Bug Fixes
+
+* **forms:** 修复layout: inline情况下，forms容器宽度由items项撑开 Refs EVENT-867 ([1e2cb33](https://github.com/easyops-cn/next-basics/commit/1e2cb33a4ff6416ca56a9fb01bd38209f53c584d))
+
+
+
+
+
 # [1.218.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.9...@next-bricks/forms@1.218.0) (2022-05-07)
 
 
