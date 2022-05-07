@@ -9,7 +9,7 @@ const unmountComponentAtNode = jest
   .mockImplementation(() => null);
 
 describe("next-builder.contract-auto-complete", () => {
-  it("should create a custom element", () => {
+  it("should create a custom element", async () => {
     const element = document.createElement(
       "next-builder.contract-auto-complete"
     );
@@ -20,6 +20,8 @@ describe("next-builder.contract-auto-complete", () => {
     const spyOnDispatch = jest.spyOn(element, "dispatchEvent");
 
     spyOnRender.mock.calls[0][0].props.children.props.onChange("flow.api");
+
+    await (global as any).flushPromises();
 
     expect((spyOnDispatch.mock.calls[0][0] as CustomEvent).type).toEqual(
       "contract.change"
