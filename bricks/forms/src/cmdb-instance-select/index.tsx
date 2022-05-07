@@ -247,6 +247,16 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    */
   @property({ attribute: false })
   ignoreMissingFieldError?: boolean;
+
+  /**
+   * @default boolean
+   * @required
+   * @description 实例通过showKey自定义展示
+   * @group advanced
+   */
+  @property({ attribute: false })
+  showKeyField?: boolean;
+
   /**
    * @default false
    * @required false
@@ -317,6 +327,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             permission={this.permission}
             showTooltip={this.showTooltip}
             ignoreMissingFieldError={this.ignoreMissingFieldError}
+            showKeyField={this.showKeyField}
           />
         </BrickWrapper>,
         this

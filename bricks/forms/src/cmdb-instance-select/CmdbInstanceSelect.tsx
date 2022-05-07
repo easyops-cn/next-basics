@@ -41,6 +41,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   permission?: Array<"read" | "update" | "operate">;
   showTooltip?: boolean;
   ignoreMissingFieldError?: boolean;
+  showKeyField?: boolean;
 }
 
 export interface ComplexOption<T = string | number> {
@@ -60,9 +61,11 @@ export function CmdbInstanceSelectItem(
   ref: any
 ): React.ReactElement {
   const {
+    showKeyField,
     // 默认显示 label 为模型的 name/hostname, value 为 instanceId
+    // 当showKeyField时，实例展示是用showKey里的数据展示
     fields = {
-      label: [getInstanceNameKey(props.objectId)],
+      label: [showKeyField ? "#showKey" : getInstanceNameKey(props.objectId)],
       value: "instanceId",
     },
 
@@ -196,6 +199,13 @@ export function CmdbInstanceSelectItem(
       if (Array.isArray(label)) {
         const firstKey = label[0];
         const resKey = label.slice(1, label.length).join(",");
+        if (Array.isArray(firstKey) && props.showKeyField) {
+          const subFirstKey = firstKey[0];
+          const subResKey = firstKey.slice(1, firstKey.length).join(",");
+          return subResKey && props.isMultiLabel
+            ? `${subFirstKey}(${subResKey})`
+            : subFirstKey ?? "";
+        }
         return resKey && props.isMultiLabel
           ? `${firstKey}(${resKey})`
           : firstKey ?? "";
