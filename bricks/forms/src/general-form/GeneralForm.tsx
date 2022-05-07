@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useEffect, useRef, useState } from "react";
 import { Form } from "@ant-design/compatible";
 import { FormComponentProps } from "@ant-design/compatible/lib/form";
 import { ConnectedComponentClass } from "@ant-design/compatible/lib/form/interface";
@@ -40,7 +40,7 @@ export function LegacyGeneralForm({
   formElement.formUtils = form;
 
   //istanbul ignore next
-  React.useEffect(() => {
+  useEffect(() => {
     const ro = new ResizeObserver(() => {
       const rect = divRef.current
         .getElementsByClassName("form-wrap")?.[0]
@@ -53,6 +53,17 @@ export function LegacyGeneralForm({
     };
   }, []);
 
+  const slotCom = useMemo(() => {
+    if (layout === "inline") {
+      return <slot id="itemsSlot" name="items" />;
+    } else {
+      return (
+        <div style={{ maxWidth: width || undefined }}>
+          <slot id="itemsSlot" name="items" />
+        </div>
+      );
+    }
+  }, [layout, width]);
   return (
     <div
       ref={divRef}
@@ -67,9 +78,7 @@ export function LegacyGeneralForm({
           ...formStyle,
         }}
       >
-        <div style={{ maxWidth: width || undefined }}>
-          <slot id="itemsSlot" name="items" />
-        </div>
+        {slotCom}
       </Form>
     </div>
   );
