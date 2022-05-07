@@ -44,7 +44,10 @@ export class ContractAutoCompleteElement extends FormItemElement {
 
   private _handlerChange = (value: string): void => {
     this.value = value;
-    this._contractChange.emit(value);
+    this._render();
+    Promise.resolve().then(() => {
+      this._contractChange.emit(value);
+    });
   };
 
   protected _render(): void {
