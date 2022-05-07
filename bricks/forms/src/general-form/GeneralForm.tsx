@@ -64,7 +64,7 @@ export function LegacyGeneralForm({
           ...formStyle,
         }}
       >
-        <div style={{ maxWidth: width }}>
+        <div style={{ maxWidth: width || undefined }}>
           <slot id="itemsSlot" name="items" />
         </div>
       </Form>
