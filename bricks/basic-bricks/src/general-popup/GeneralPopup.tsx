@@ -80,8 +80,6 @@ export function GeneralPopup({
         className="GeneralPopup"
         ref={popupRef}
         style={{
-          width: popupWidth ?? "500px",
-          height: popupHeight,
           transform: `translate(${pointerPosition[0]}, ${pointerPosition[1]})`,
         }}
       >
@@ -97,7 +95,13 @@ export function GeneralPopup({
             />
           </span>
         </div>
-        <div className="content">
+        <div
+          className="content"
+          style={{
+            width: popupWidth ?? "500px",
+            height: popupHeight,
+          }}
+        >
           <slot name="content" />
         </div>
       </div>

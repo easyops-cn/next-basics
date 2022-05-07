@@ -23,8 +23,8 @@
 }
 
 .content {
-  border-radius: 0 0 6px 6px;
-  background: var(--antd-component-background);
+  overflow: auto;
+  background: var(--antd-dropdown-menu-bg);
   padding: 20px;
   margin-top: -1px;
 }
