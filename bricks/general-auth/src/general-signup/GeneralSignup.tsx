@@ -10,6 +10,7 @@ import {
   SafetyOutlined,
   LeftOutlined,
   RightOutlined,
+  SolutionOutlined,
 } from "@ant-design/icons";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
@@ -294,7 +295,16 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
                   placeholder={t(K.USERNAME)}
                 />
               </Form.Item>
-
+              {enabledFeatures["enable-nickname-config"] && hideInvite && (
+                <Form.Item validateFirst={false} name="nickname">
+                  <Input
+                    prefix={
+                      <SolutionOutlined className={styles.inputPrefixIcon} />
+                    }
+                    placeholder={t(K.NICKNAME)}
+                  />
+                </Form.Item>
+              )}
               <Form.Item
                 name="email"
                 validateFirst={true}

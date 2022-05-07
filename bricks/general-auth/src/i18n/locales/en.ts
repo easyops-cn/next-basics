@@ -6,6 +6,7 @@ const locale: Locale = {
   [K.UNKNOWN_ERROR]: "Unknown Error",
   [K.PLEASE_INPUT_USERNAME]: "Please input username!",
   [K.USERNAME]: "Username",
+  [K.NICKNAME]: "Name (Optional)",
   [K.PLEASE_INPUT_PASSWORD]: "Please input password!",
   [K.PASSWORD]: "Password",
   [K.REMEMBER_ME]: "Remember me",

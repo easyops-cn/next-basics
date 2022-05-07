@@ -6,6 +6,7 @@ const locale: Locale = {
   [K.UNKNOWN_ERROR]: "未知错误",
   [K.PLEASE_INPUT_USERNAME]: "请输入用户名！",
   [K.USERNAME]: "用户名",
+  [K.NICKNAME]: "姓名（选填）",
   [K.PLEASE_INPUT_PASSWORD]: "请输入密码！",
   [K.PASSWORD]: "密码",
   [K.REMEMBER_ME]: "自动登录",
