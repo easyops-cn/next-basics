@@ -81,15 +81,40 @@ export class GeneralPopupElement extends UpdatingElement {
     this._shadowRoot = this.attachShadow({ mode: "open" });
   }
 
+  redirectClick = (e: MouseEvent): void => {
+    const paths = e.composedPath() as HTMLElement[];
+    for (const path of paths) {
+      if (path.nodeName.toLowerCase() === "#document-fragment") {
+        break;
+      }
+      if (
+        path.nodeName.toLowerCase() === "span" &&
+        path.className.includes("anticon anticon-close")
+      ) {
+        this.closePopup();
+        break;
+      }
+    }
+  };
+
+  listenClick(): void {
+    this.addEventListener("click", this.redirectClick);
+  }
+
+  removeListenClick(): void {
+    this.removeEventListener("click", this.redirectClick);
+  }
+
   connectedCallback(): void {
     if (!this.style.display) {
       this.style.display = "block";
     }
-
+    this.listenClick();
     this._render();
   }
 
   disconnectedCallback(): void {
+    this.removeListenClick();
     ReactDOM.unmountComponentAtNode(this._shadowRoot);
   }
 
@@ -105,7 +130,6 @@ export class GeneralPopupElement extends UpdatingElement {
               popupHeight={this.popupHeight}
               popupTitle={this.popupTitle}
               visible={this.isVisible}
-              closePopup={this.closePopup}
             />
           </BrickWrapper>
         </>,

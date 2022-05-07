@@ -7,7 +7,6 @@ export interface GeneralPopupProps {
   popupTitle?: string;
   popupWidth?: React.CSSProperties["width"];
   popupHeight?: React.CSSProperties["height"];
-  closePopup?: () => void;
 }
 
 export function GeneralPopup({
@@ -15,7 +14,6 @@ export function GeneralPopup({
   popupWidth,
   popupHeight,
   visible,
-  closePopup,
 }: GeneralPopupProps): React.ReactElement {
   const popupRef = useRef<HTMLDivElement>();
   const [isMove, setIsMove] = useState(false);
@@ -57,10 +55,6 @@ export function GeneralPopup({
     setLastPoint({ x: lastX, y: lastY });
   };
 
-  const handleCloseClick = (): void => {
-    closePopup();
-  };
-
   useEffect(() => {
     if (!isMove) {
       return;
@@ -85,7 +79,7 @@ export function GeneralPopup({
       >
         <div className="header" onMouseDown={handleMouseDown}>
           <span className="title">{popupTitle}</span>
-          <span className="close" onClick={handleCloseClick}>
+          <span className="close">
             <GeneralIcon
               icon={{
                 icon: "close",
