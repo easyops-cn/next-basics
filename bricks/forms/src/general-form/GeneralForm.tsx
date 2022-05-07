@@ -42,8 +42,10 @@ export function LegacyGeneralForm({
   //istanbul ignore next
   React.useEffect(() => {
     const ro = new ResizeObserver(() => {
-      const rect = divRef.current.getBoundingClientRect();
-      setWidth(rect.width);
+      const rect = divRef.current
+        .getElementsByClassName("form-wrap")?.[0]
+        ?.getBoundingClientRect();
+      setWidth(rect?.width);
     });
     ro.observe(divRef.current);
     return () => {
@@ -58,6 +60,7 @@ export function LegacyGeneralForm({
       style={{ justifyContent: AlignmentJustifyContentValueMap[alignment] }}
     >
       <Form
+        className="form-wrap"
         layout={layout}
         style={{
           ...(maxWidthLimited ? { maxWidth: 1332 } : undefined),
