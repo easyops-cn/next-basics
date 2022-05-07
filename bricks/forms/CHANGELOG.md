@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.218.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.9...@next-bricks/forms@1.218.0) (2022-05-07)
+
+
+### Features
+
+* 添加showKey入参情况下的实例默认展示 ([2118b35](https://github.com/easyops-cn/next-basics/commit/2118b350960db50c2fcf6cf326e48cd55c78e657)), closes [Refs#INSTANCE-2333](https://github.com/Refs/issues/INSTANCE-2333)
+
+
+
+
+
 ## [1.217.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.217.8...@next-bricks/forms@1.217.9) (2022-05-06)
 
 
