@@ -35,6 +35,7 @@ export async function StoryboardAssembly({
           ?.map((item: { url: string; provider: string }) => ({
             uri: item.url,
             provider: item.provider,
+            method: item.method,
           })),
       },
       dependencies: projectInfo.dependencies,
