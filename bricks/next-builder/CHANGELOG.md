@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.149.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.148.0...@next-bricks/next-builder@1.149.0) (2022-05-10)
+
+
+### Features
+
+* support emitting event of node toggle ([4a4990d](https://github.com/easyops-cn/next-basics/commit/4a4990d340ebc8cae783929ea4b4ddae6ab4bebf))
+
+
+
+
+
 # [1.148.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.147.3...@next-bricks/next-builder@1.148.0) (2022-05-10)
 
 
