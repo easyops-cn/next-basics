@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.148.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.147.3...@next-bricks/next-builder@1.148.0) (2022-05-10)
+
+
+### Features
+
+* mock use method ([07d050c](https://github.com/easyops-cn/next-basics/commit/07d050c4971d8d23ad612baa94729648dac027d5))
+
+
+
+
+
 ## [1.147.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.147.2...@next-bricks/next-builder@1.147.3) (2022-05-07)
 
 **Note:** Version bump only for package @next-bricks/next-builder
