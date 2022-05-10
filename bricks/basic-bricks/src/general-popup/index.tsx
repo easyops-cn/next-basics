@@ -19,6 +19,14 @@ import { GeneralPopup } from "./GeneralPopup";
  */
 export class GeneralPopupElement extends UpdatingElement {
   /**
+   * @default -
+   * @required false
+   * @description 浮层Id, 如果有设置浮层id, 会开启位置记录功能
+   */
+  @property({ type: String })
+  popupId: string;
+
+  /**
    * @default 500
    * @required false
    * @description 弹窗宽度
@@ -126,6 +134,7 @@ export class GeneralPopupElement extends UpdatingElement {
           <style>{styles}</style>
           <BrickWrapper>
             <GeneralPopup
+              popupId={this.popupId}
               popupWidth={this.popupWidth}
               popupHeight={this.popupHeight}
               popupTitle={this.popupTitle}
