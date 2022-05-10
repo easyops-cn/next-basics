@@ -135,7 +135,7 @@ yarn serve --server https://admin.easyops.local
 
 3. 运行本地服务并启用特定开关，例如：`yarn serve --local-bricks=forms --subdir --cookie-same-site-none`。
 
-   - 当 Visual Builder 的 origin 和预览模板的 origin 不同时，必须设置 `--cookie-same-site-none`。
+   - 当 Visual Builder 的 origin 和预览目标的 origin 不同时，必须设置 `--cookie-same-site-none`。
      - 为什么？因为当我们使用跨域 iframe 来预览时，cookies 默认将被忽略，因此登录认证将失败。
 
 4. 刷新 Visual Builder，你可以在底部看见预览地址显示为类似 `http://localhost:8081/next/your-app`。
