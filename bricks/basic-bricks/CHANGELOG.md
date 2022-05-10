@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.177.2...@next-bricks/basic-bricks@1.178.0) (2022-05-10)
+
+
+### Features
+
+* **general-popup:**  support storage and limit ([87f14b9](https://github.com/easyops-cn/next-basics/commit/87f14b97bc53c4a73d1434dfd6554d0aace79c02))
+* **general-popup:** delete namespace field ([1273a15](https://github.com/easyops-cn/next-basics/commit/1273a15bf2152b3a333d7d9e158af09114ae2c21))
+* **general-popup:** update unit test ([65a60c8](https://github.com/easyops-cn/next-basics/commit/65a60c8b2b731e8def71dc4e9d983ccb3cdedb9f))
+
+
+
+
+
 ## [1.177.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.177.1...@next-bricks/basic-bricks@1.177.2) (2022-05-07)
 
 
