@@ -1,8 +1,15 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { debounceByAnimationFrame } from "@next-core/brick-utils";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
+import { JsonStorage, debounceByAnimationFrame } from "@next-core/brick-utils";
 import { GeneralIcon } from "@next-libs/basic-components";
 
 export interface GeneralPopupProps {
+  popupId?: string;
   visible: boolean;
   popupTitle?: string;
   popupWidth?: React.CSSProperties["width"];
@@ -10,6 +17,7 @@ export interface GeneralPopupProps {
 }
 
 export function GeneralPopup({
+  popupId,
   popupTitle,
   popupWidth,
   popupHeight,
@@ -17,11 +25,22 @@ export function GeneralPopup({
 }: GeneralPopupProps): React.ReactElement {
   const popupRef = useRef<HTMLDivElement>();
   const [isMove, setIsMove] = useState(false);
-  const [lastPoint, setLastPoint] = useState({ x: 0, y: 0 });
-  const [curPoint, setCurPoint] = useState({ x: 0, y: 0 });
-  const [pointerPosition, setPointerPosition] = useState<
-    Array<number | string>
-  >([]);
+  const [curPoint, setCurPoint] = useState({
+    offsetX: 0,
+    offsetY: 0,
+  });
+  const [pointerPosition, setPointerPosition] = useState<Array<number>>([]);
+
+  const storage = useMemo(
+    () =>
+      popupId
+        ? new JsonStorage<Record<string, Array<number>>>(
+            localStorage,
+            "general-popup-postion-"
+          )
+        : null,
+    [popupId]
+  );
 
   const debouncedSetPoint = useMemo(
     () => debounceByAnimationFrame(setPointerPosition),
@@ -29,31 +48,49 @@ export function GeneralPopup({
   );
 
   const handleMouseDown = (e: React.MouseEvent): void => {
+    e.stopPropagation();
     setIsMove(true);
-    const { pageX, pageY } = e;
-    setCurPoint({ x: pageX, y: pageY });
-    if (lastPoint.x === 0 && lastPoint.y === 0) {
-      const { width, height } = popupRef.current.getBoundingClientRect();
-      setLastPoint({ x: Number(`-${width / 2}`), y: Number(`-${height / 2}`) });
-    }
+    setCurPoint({
+      offsetX: e.nativeEvent.offsetX,
+      offsetY: e.nativeEvent.offsetY,
+    });
   };
 
   const handleMouseMove = (e: MouseEvent): void => {
     if (isMove) {
-      const { pageX, pageY } = e;
-      const pointX = pageX - curPoint.x + lastPoint.x;
-      const pointY = pageY - curPoint.y + lastPoint.y;
-      debouncedSetPoint([`${pointX}px`, `${pointY}px`]);
+      const { width, height } = popupRef.current.getBoundingClientRect();
+      const { innerWidth, innerHeight } = window;
+      const maxX = innerWidth - width;
+      const maxY = innerHeight - height;
+      const pointX = e.clientX - curPoint.offsetX;
+      const pointY = e.clientY - curPoint.offsetY;
+      debouncedSetPoint([
+        pointX <= 0 ? 0 : pointX >= maxX ? maxX : pointX,
+        pointY <= 0 ? 0 : pointY >= maxY ? maxY : pointY,
+      ]);
     }
   };
 
-  const handleMouseUp = (e: MouseEvent): void => {
+  const handleMouseUp = (): void => {
     setIsMove(false);
-    const { pageX, pageY } = e;
-    const lastX = pageX - curPoint.x + lastPoint.x;
-    const lastY = pageY - curPoint.y + lastPoint.y;
-    setLastPoint({ x: lastX, y: lastY });
+    popupId &&
+      storage.setItem(popupId, [pointerPosition[0], pointerPosition[1]]);
   };
+
+  const initPos = useCallback(() => {
+    const { innerWidth, innerHeight } = window;
+    const initPostion = [
+      innerWidth / 2 - popupRef.current.offsetWidth / 2,
+      innerHeight / 2 - popupRef.current.offsetHeight / 2,
+    ];
+    return popupId ? storage.getItem(popupId) ?? initPostion : initPostion;
+  }, [popupId, storage]);
+
+  useEffect(() => {
+    if (popupRef.current) {
+      setPointerPosition(initPos());
+    }
+  }, [visible, initPos]);
 
   useEffect(() => {
     if (!isMove) {
@@ -74,7 +111,7 @@ export function GeneralPopup({
         className="GeneralPopup"
         ref={popupRef}
         style={{
-          transform: `translate(${pointerPosition[0]}, ${pointerPosition[1]})`,
+          transform: `translate(${pointerPosition[0]}px, ${pointerPosition[1]}px)`,
         }}
       >
         <div className="header" onMouseDown={handleMouseDown}>
