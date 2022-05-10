@@ -9,7 +9,6 @@ import { JsonStorage, debounceByAnimationFrame } from "@next-core/brick-utils";
 import { GeneralIcon } from "@next-libs/basic-components";
 
 export interface GeneralPopupProps {
-  namespace?: string;
   popupId?: string;
   visible: boolean;
   popupTitle?: string;
@@ -18,7 +17,6 @@ export interface GeneralPopupProps {
 }
 
 export function GeneralPopup({
-  namespace,
   popupId,
   popupTitle,
   popupWidth,
@@ -38,10 +36,10 @@ export function GeneralPopup({
       popupId
         ? new JsonStorage<Record<string, Array<number>>>(
             localStorage,
-            namespace ?? "general-popup-postion-"
+            "general-popup-postion-"
           )
         : null,
-    [popupId, namespace]
+    [popupId]
   );
 
   const debouncedSetPoint = useMemo(
