@@ -88,6 +88,7 @@ test("WorkbenchBrickTree with route of redirect", () => {
 
 test("WorkbenchBrickTree with route of bricks", () => {
   const ref = createRef<BuilderDataManager>();
+  const onNodeToggle = jest.fn();
   // Given a tree:
   //       1 <route>
   //      ↙ ↘
@@ -150,7 +151,11 @@ test("WorkbenchBrickTree with route of bricks", () => {
         },
       ],
     },
-    <WorkbenchBrickTree searchPlaceholder="Search" activeInstanceId="i-2" />
+    <WorkbenchBrickTree
+      searchPlaceholder="Search"
+      activeInstanceId="i-2"
+      onNodeToggle={onNodeToggle}
+    />
   );
 
   const rootTree = container.querySelector(".tree");
@@ -179,6 +184,25 @@ test("WorkbenchBrickTree with route of bricks", () => {
   expect(
     container.querySelector(".nodeLabelRow.active > .nodeLabel > .nodeName")
   ).toHaveTextContent("alias-a");
+
+  // Collapse a mount-point.
+  expect(onNodeToggle).not.toBeCalled();
+  fireEvent.click(
+    screen
+      .getByText("toolbar", { selector: ".nodeName" })
+      .parentElement.querySelector(".collapseIcon")
+  );
+  expect(onNodeToggle).toBeCalledTimes(1);
+  expect(onNodeToggle).toHaveBeenNthCalledWith(1, "i-3:toolbar", true);
+
+  // Collapse a brick.
+  fireEvent.click(
+    screen
+      .getByText("brick-b", { selector: ".nodeName" })
+      .parentElement.querySelector(".collapseIcon")
+  );
+  expect(onNodeToggle).toBeCalledTimes(2);
+  expect(onNodeToggle).toHaveBeenNthCalledWith(2, "i-3", true);
 
   // Search by brick properties.
   fireEvent.change(screen.getByPlaceholderText("Search"), {

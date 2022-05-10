@@ -36,11 +36,24 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
   @property({ type: String })
   activeInstanceId: string;
 
+  @property({ attribute: false })
+  collapsedNodes: string[];
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
   private _handleActionClick = (detail: ActionClickDetail): void => {
     this._actionClickEvent.emit(detail);
+  };
+
+  @event({ type: "node.toggle" })
+  private _nodeToggleEvent: EventEmitter<{
+    nodeId: string;
+    collapsed: boolean;
+  }>;
+
+  private _handleNodeToggle = (nodeId: string, collapsed: boolean): void => {
+    this._nodeToggleEvent.emit({ nodeId, collapsed });
   };
 
   connectedCallback(): void {
@@ -72,6 +85,8 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
                 placeholder={this.placeholder}
                 searchPlaceholder={this.searchPlaceholder}
                 activeInstanceId={this.activeInstanceId}
+                onNodeToggle={this._handleNodeToggle}
+                collapsedNodes={this.collapsedNodes}
               />
             </WorkbenchActionsContext.Provider>
           </BuilderProvider>

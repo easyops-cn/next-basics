@@ -277,6 +277,7 @@ test("WorkbenchTree with collapsible nodes", async () => {
   const onMouseEnter = jest.fn();
   const onMouseLeave = jest.fn();
   const onContextMenu = jest.fn();
+  const onNodeToggle = jest.fn();
   const mouseEnterFactory: ContextOfWorkbenchTree["mouseEnterFactory"] =
     (node) => () =>
       onMouseEnter(node.key);
@@ -297,6 +298,10 @@ test("WorkbenchTree with collapsible nodes", async () => {
         },
         showMatchedNodeOnly: true,
         collapsible: true,
+        getCollapsedId(node) {
+          return node.key;
+        },
+        onNodeToggle,
         mouseEnterFactory,
         mouseLeaveFactory,
         contextMenuFactory,
@@ -330,6 +335,7 @@ test("WorkbenchTree with collapsible nodes", async () => {
   );
   expect(container.querySelector(".collapsed")).toBe(null);
   expect(container.querySelectorAll(".collapseIcon").length).toBe(1);
+  expect(onNodeToggle).not.toBeCalled();
 
   fireEvent.mouseDown(container.querySelector(".collapseIcon"));
   fireEvent.click(container.querySelector(".collapseIcon"));
@@ -338,6 +344,8 @@ test("WorkbenchTree with collapsible nodes", async () => {
   expect(container.querySelector(".collapsed .nodeName")).toHaveTextContent(
     "n-3"
   );
+  expect(onNodeToggle).toBeCalledTimes(1);
+  expect(onNodeToggle).toHaveBeenNthCalledWith(1, 3, true);
 
   const rootTree = container.querySelector(".tree");
 

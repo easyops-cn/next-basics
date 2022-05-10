@@ -6,6 +6,7 @@ import React, {
   type ReactElement,
   createContext,
   useContext,
+  useEffect,
 } from "react";
 import { Input } from "antd";
 import { isMatch, pick } from "lodash";
@@ -130,13 +131,19 @@ function TreeNode({
     showMatchedNodeOnly,
     fixedActionsFor,
     collapsible,
+    collapsedNodes,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
     contextMenuFactory,
+    onNodeToggle,
+    getCollapsedId,
   } = useWorkbenchTreeContext();
   const searching = useContext(SearchingContext);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapseClicked, setCollapseClicked] = useState(false);
+  const [collapsed, setCollapsed] = useState(
+    collapsedNodes?.includes(getCollapsedId?.(node)) ?? false
+  );
 
   const onClick = useMemo(() => clickFactory?.(node), [clickFactory, node]);
 
@@ -175,6 +182,7 @@ function TreeNode({
   const handleCollapse = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
+    setCollapseClicked(true);
     setCollapsed((prev) => !prev);
   }, []);
 
@@ -182,6 +190,12 @@ function TreeNode({
     event.preventDefault();
     event.stopPropagation();
   }, []);
+
+  useEffect(() => {
+    if (collapseClicked) {
+      onNodeToggle?.(getCollapsedId?.(node), collapsed);
+    }
+  }, [collapseClicked, collapsed, getCollapsedId, node, onNodeToggle]);
 
   // Disallow collapse leaf nodes, or any nodes when searching.
   const allowCollapse = collapsible && !isLeaf && !searching;
@@ -230,6 +244,8 @@ function TreeNode({
                 className={styles.collapseIcon}
                 onClick={handleCollapse}
                 onMouseDown={preventMouseEvent}
+                title={collapsed ? "Expand" : "Collapse"}
+                role="button"
               >
                 <GeneralIcon
                   icon={{

@@ -26,6 +26,8 @@ export interface WorkbenchBrickTreeProps {
   placeholder?: string;
   searchPlaceholder?: string;
   activeInstanceId?: string;
+  collapsedNodes?: string[];
+  onNodeToggle?(nodeId: string, collapsed: boolean): void;
 }
 
 type WorkbenchBrickTreeNode =
@@ -47,6 +49,8 @@ export function WorkbenchBrickTree({
   placeholder,
   searchPlaceholder,
   activeInstanceId,
+  collapsedNodes,
+  onNodeToggle,
 }: WorkbenchBrickTreeProps): React.ReactElement {
   const { nodes, edges } = useBuilderData();
   const rootNode = useBuilderNode({ isRoot: true });
@@ -282,11 +286,14 @@ export function WorkbenchBrickTree({
         activeKey,
         basePaddingLeft: 0,
         collapsible: true,
+        collapsedNodes,
         clickFactory,
         mouseEnterFactory,
         mouseLeaveFactory,
         contextMenuFactory,
         matchNode: matchBrickNode,
+        onNodeToggle,
+        getCollapsedId,
       }}
     >
       <WorkbenchTree
@@ -314,4 +321,12 @@ function matchBrickNode(
       lowerTrimmedQuery
     )
   );
+}
+
+function getCollapsedId(
+  node: WorkbenchNodeData<WorkbenchBrickTreeNode>
+): string {
+  return node.data.type === "mount-point"
+    ? `${node.data.parent.instanceId}:${node.data.mountPoint}`
+    : node.data.instanceId;
 }

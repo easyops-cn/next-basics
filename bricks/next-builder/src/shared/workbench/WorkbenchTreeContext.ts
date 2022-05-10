@@ -9,11 +9,14 @@ export interface ContextOfWorkbenchTree {
   isTransformName?: boolean;
   fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
   collapsible?: boolean;
+  collapsedNodes?: (string | number)[];
   clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
   contextMenuFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   matchNode?(node: WorkbenchNodeData, lowerTrimmedQuery?: string): boolean;
+  onNodeToggle?(nodeId: string | number, collapsed: boolean): void;
+  getCollapsedId?(node: WorkbenchNodeData): string | number;
 }
 
 export const WorkbenchTreeContext = createContext<ContextOfWorkbenchTree>({});
