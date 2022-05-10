@@ -63,7 +63,10 @@ export interface BuildInfo {
   dependsAll?: boolean;
   options?: BuildOptions;
   functions?: FunctionNode[];
-  mocks?: MockRule[];
+  mocks?: {
+    mockId: string;
+    mockList: MockRule[];
+  };
   dependencies?: {
     name: string;
     constraint: string;

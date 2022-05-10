@@ -77,6 +77,7 @@ export async function preStoryboardAssembly({
           "mockRule.url",
           "mockRule.isEnable",
           "mockRule.provider",
+          "mockRule.method",
           ...(hasTheme
             ? ["pageTemplates.pageTypeId", "pageTemplates.snippet.instanceId"]
             : ["menus.*", "menus.items", "menus.items.children"]),
