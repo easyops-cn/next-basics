@@ -21,6 +21,14 @@ export class GeneralPopupElement extends UpdatingElement {
   /**
    * @default -
    * @required false
+   * @description 命名空间, 配合popupId使用
+   */
+  @property({ type: String })
+  namespace: string;
+
+  /**
+   * @default -
+   * @required false
    * @description 浮层Id, 如果有设置浮层id, 会开启位置记录功能
    */
   @property({ type: String })
@@ -134,6 +142,7 @@ export class GeneralPopupElement extends UpdatingElement {
           <style>{styles}</style>
           <BrickWrapper>
             <GeneralPopup
+              namespace={this.namespace}
               popupId={this.popupId}
               popupWidth={this.popupWidth}
               popupHeight={this.popupHeight}
