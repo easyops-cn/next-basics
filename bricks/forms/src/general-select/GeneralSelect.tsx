@@ -42,6 +42,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   size?: "small" | "middle" | "large";
   tokenSeparators?: string[];
   popoverPositionType?: "default" | "parent";
+  filterByLabelAndValue?: boolean;
 }
 
 export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
@@ -88,14 +89,17 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     props.onSearch?.(value);
     handleDebounceSearch?.(value);
   };
-
+  const match = (input: string, field: string) => {
+    return field?.toLowerCase().includes(input.trim().toLowerCase());
+  };
   const searchProps = props.showSearch
     ? {
         showSearch: true,
         filterOption: (input: string, option: any) => {
-          return option.label
-            ?.toLowerCase()
-            .includes(input.trim().toLowerCase());
+          return (
+            match(input, option.label) ||
+            (match(input, option.value) && props.filterByLabelAndValue)
+          );
         },
       }
     : {

@@ -339,6 +339,13 @@ export class GeneralSelectElement extends FormItemElement {
    */
   @property({ attribute: false })
   emptyProps: EasyopsEmptyProps;
+  /**
+   * @default false
+   * @required false
+   * @description 搜索时是否同时根据value和label过滤options，否则只根据label过滤
+   */
+  @property({ type: Boolean })
+  filterByLabelAndValue: boolean;
 
   /**
    * @detail `any`
@@ -454,6 +461,7 @@ export class GeneralSelectElement extends FormItemElement {
             emptyProps={this.emptyProps}
             popoverPositionType={this.popoverPositionType}
             {...(this.mode === "tags" ? { pattern: this.pattern } : {})}
+            filterByLabelAndValue={this.filterByLabelAndValue}
           />
         </BrickWrapper>,
         this
