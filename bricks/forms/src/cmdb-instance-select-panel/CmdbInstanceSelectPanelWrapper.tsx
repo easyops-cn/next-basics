@@ -7,7 +7,6 @@ import { CmdbInstancesSelectPanel } from "@next-libs/cmdb-instances";
 
 export interface CmdbInstanceSelectPanelWrapperProps
   extends FormItemWrapperProps {
-  modelData?: Partial<CmdbModels.ModelCmdbObject>;
   objectMap: { [key: string]: Partial<CmdbModels.ModelCmdbObject> };
   objectId: string;
   instanceIdList: string[];
@@ -39,7 +38,6 @@ export function CmdbInstanceSelectPanelWrapper(
       <RefCmdbInstancesSelectPanel
         objectMap={props.objectMap}
         objectId={props.objectId}
-        modelData={props.modelData}
         value={
           props.name && props.formElement ? undefined : props.instanceIdList
         }
