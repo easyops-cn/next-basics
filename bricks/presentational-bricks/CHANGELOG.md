@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.242.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.15...@next-bricks/presentational-bricks@1.242.0) (2022-05-12)
+
+
+### Features
+
+* **presentational-bricks.card-item:** 添加属性onlyOperateSlot Closes INSTANCE-2375 ([267e5a0](https://github.com/easyops-cn/next-basics/commit/267e5a0902c6afaff0f7c473f9c38bf60a013761))
+
+
+
+
+
 ## [1.241.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.241.14...@next-bricks/presentational-bricks@1.241.15) (2022-05-07)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
