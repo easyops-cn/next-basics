@@ -1437,9 +1437,9 @@ describe("searchConfig should work", () => {
     expect(
       filter({
         tree: treeData,
-        text: "general-",
+        text: "general-button",
         config: {
-          supportFuzzy: true,
+          supportFullWord: true,
         },
       }).tree.length
     ).toBe(1);
@@ -1448,31 +1448,31 @@ describe("searchConfig should work", () => {
         tree: treeData,
         text: "general-",
         config: {
-          supportFuzzy: false,
+          supportFullWord: false,
         },
       }).tree.length
-    ).toBe(0);
+    ).toBe(1);
   });
 
-  it("supportKey should work", () => {
+  it("supportWordCase should work", () => {
     expect(
       filter({
         tree: treeData,
         text: "GENERAL-BUTTON",
         config: {
-          supportIngoreCase: true,
-        },
-      }).tree.length
-    ).toBe(1);
-    expect(
-      filter({
-        tree: treeData,
-        text: "GENERAL-BUTTON",
-        config: {
-          supportIngoreCase: false,
+          supportWordCase: true,
         },
       }).tree.length
     ).toBe(0);
+    expect(
+      filter({
+        tree: treeData,
+        text: "GENERAL-BUTTON",
+        config: {
+          supportWordCase: false,
+        },
+      }).tree.length
+    ).toBe(1);
   });
 });
 
