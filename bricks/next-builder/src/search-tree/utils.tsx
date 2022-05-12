@@ -131,10 +131,10 @@ interface builTreeOptions {
 export interface SearchConfig {
   /** 根据key值搜索 */
   supportKey?: boolean;
-  /** 支持模糊搜索 */
-  supportFuzzy?: boolean;
+  /** 支持全字搜索 */
+  supportFullWord?: boolean;
   /** 支持忽略大小写搜索 */
-  supportIngoreCase?: boolean;
+  supportWordCase?: boolean;
 }
 
 function getType(item: PlainObject): keyof typeof iconTypeConstants {
@@ -412,9 +412,9 @@ export function filter(props: {
     tree,
     text,
     config = {
-      supportFuzzy: true,
+      supportFullWord: false,
+      supportWordCase: false,
       supportKey: true,
-      supportIngoreCase: true,
     },
   } = props;
   const isSenior = isObject(text);
@@ -424,14 +424,14 @@ export function filter(props: {
     if (typeof v === "string") {
       let a = v;
       let b = text;
-      if (config.supportIngoreCase) {
+      if (!config.supportWordCase) {
         a = v.toLocaleLowerCase();
         b = (text as string).toLocaleLowerCase();
       }
-      if (config.supportFuzzy) {
-        return a.includes(b as string);
-      } else {
+      if (config.supportFullWord) {
         return a === b;
+      } else {
+        return a.includes(b as string);
       }
     } else {
       return isMatch(v, text as SearchInfoProps);

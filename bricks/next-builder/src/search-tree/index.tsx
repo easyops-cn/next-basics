@@ -96,25 +96,24 @@ export class SearchTreeElement extends UpdatingElement {
   /**
    * @default true
    * @required false
-   * @description 支持 忽略大小写 搜索
+   * @description 支持 大小写 搜索
    */
   @property({
     type: Boolean,
     attribute: false,
   })
-  supportIngoreCase = true;
+  supportWordCase = false;
 
   /**
    * @default true
    * @required false
-   * @description 支持 模糊 搜索
+   * @description 支持 全字 搜索
    */
   @property({
     type: Boolean,
     attribute: false,
   })
-  supportFuzzy = true;
-
+  supportFullWord = false;
   /**
    * @default
    * @required
@@ -162,8 +161,8 @@ export class SearchTreeElement extends UpdatingElement {
             height={this.height}
             searchConfig={{
               supportKey: this.supportKey,
-              supportIngoreCase: this.supportIngoreCase,
-              supportFuzzy: this.supportFuzzy,
+              supportWordCase: this.supportWordCase,
+              supportFullWord: this.supportFullWord,
             }}
             titleClick={this._handleTitleClick}
             titleFocus={this._handleTitleFocus}

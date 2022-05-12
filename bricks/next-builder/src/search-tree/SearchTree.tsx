@@ -61,7 +61,7 @@ export interface SearchTreeProps {
 
 enum searchType {
   key,
-  fuzzy,
+  fullWord,
   ingoreCase,
 }
 
@@ -125,11 +125,11 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
   const [supportKey, setSupportKey] = useState<boolean>(
     searchConfig.supportKey ?? true
   );
-  const [supportIngoreCase, setSupportIngoreCase] = useState<boolean>(
-    searchConfig.supportIngoreCase ?? true
+  const [supportWordCase, setSupportWordCase] = useState<boolean>(
+    searchConfig.supportWordCase ?? false
   );
-  const [supportFuzzy, setSupportFuzzy] = useState<boolean>(
-    searchConfig.supportFuzzy ?? true
+  const [supportFullWord, setSupportFullWord] = useState<boolean>(
+    searchConfig.supportFullWord ?? false
   );
 
   const [searchContentDetail, setSearchContentDetail] = useState<{
@@ -146,8 +146,8 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
           config: Object.assign(
             {},
             {
-              supportFuzzy,
-              supportIngoreCase,
+              supportFullWord,
+              supportWordCase,
               supportKey,
             },
             searchConfig
@@ -191,7 +191,11 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setValue(event.target.value);
-    setFilterTree(event.target.value.trim());
+    setFilterTree(event.target.value.trim(), {
+      supportFullWord,
+      supportWordCase,
+      supportKey,
+    });
   };
 
   const renderTitle = (nodeData: PlainObject): JSX.Element =>
@@ -227,10 +231,10 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
 
   const handleClickIcon = (type: searchType): void => {
     switch (type) {
-      case searchType.fuzzy:
-        setSupportFuzzy(!supportFuzzy);
+      case searchType.fullWord:
+        setSupportFullWord(!supportFullWord);
         setFilterTree(value, {
-          supportFuzzy: !supportFuzzy,
+          supportFullWord: !supportFullWord,
         });
         break;
       case searchType.key:
@@ -240,9 +244,9 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
         });
         break;
       case searchType.ingoreCase:
-        setSupportIngoreCase(!supportIngoreCase);
+        setSupportWordCase(!supportWordCase);
         setFilterTree(value, {
-          supportIngoreCase: !supportIngoreCase,
+          supportWordCase: !supportWordCase,
         });
         break;
     }
@@ -254,7 +258,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
         <span title="区分大小写">
           <GeneralIcon
             icon={{
-              color: supportIngoreCase ? "orange" : "#8c8c8c",
+              color: supportWordCase ? "orange" : "#8c8c8c",
               icon: "ingore-case",
               category: "default",
               lib: "easyops",
@@ -269,7 +273,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
         <span title="全字匹配">
           <GeneralIcon
             icon={{
-              color: !supportFuzzy ? "orange" : "#8c8c8c",
+              color: supportFullWord ? "orange" : "#8c8c8c",
               category: "default",
               icon: "full-word",
               lib: "easyops",
@@ -278,7 +282,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
             style={{
               marginRight: 5,
             }}
-            onClick={() => handleClickIcon(searchType.fuzzy)}
+            onClick={() => handleClickIcon(searchType.fullWord)}
           />
         </span>
         <span title="支持Key查询">

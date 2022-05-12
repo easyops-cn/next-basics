@@ -353,7 +353,7 @@ describe("SearchTree", () => {
       await act(async () => {
         wrapper.find(Input).invoke("onChange")({
           target: {
-            value: "GENERAL",
+            value: "general",
           },
         });
       });
