@@ -82,6 +82,17 @@ export class CardItemElement extends UpdatingElement {
   private hasBottomRightOperateSlot: boolean;
 
   /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 解决只有operateSlot时宽度不能占满
+   */
+  @property({
+    type: Boolean,
+  })
+  private onlyOperateSlot: boolean;
+
+  /**
    * @kind CardLayoutType
    * @required false
    * @default "icon-as-background"
@@ -589,6 +600,7 @@ export class CardItemElement extends UpdatingElement {
             descMaxLine={this.descMaxLine}
             hasOperateSlot={this.hasOperateSlot}
             hasBottomRightOperateSlot={this.hasBottomRightOperateSlot}
+            onlyOperateSlot={this.onlyOperateSlot}
             iconSize={mutableProps.iconSize}
             iconOffsetX={mutableProps.iconOffsetX}
             iconOffsetY={mutableProps.iconOffsetY}
