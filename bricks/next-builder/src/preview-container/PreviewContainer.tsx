@@ -407,7 +407,12 @@ export function LegacyPreviewContainer(
   }, [minScale, onScaleChange]);
 
   return (
-    <div className={styles.previewContainer} ref={containerRef}>
+    <div
+      className={classNames(styles.previewContainer, {
+        [styles.inspecting]: inspecting,
+      })}
+      ref={containerRef}
+    >
       <div
         className={styles.iframeContainer}
         style={{
