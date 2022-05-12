@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.149.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.149.0...@next-bricks/next-builder@1.149.1) (2022-05-12)
+
+
+### Bug Fixes
+
+* hide brick outline when not inspecting ([121484e](https://github.com/easyops-cn/next-basics/commit/121484e7d16a2489948809230d5548132e8eb834))
+
+
+
+
+
 # [1.149.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.148.0...@next-bricks/next-builder@1.149.0) (2022-05-10)
 
 
