@@ -26,6 +26,7 @@ interface CardItemProps {
   descMaxLine?: number;
   hasOperateSlot?: boolean;
   hasBottomRightOperateSlot?: boolean;
+  onlyOperateSlot?: boolean;
   iconSize?: string | number;
   iconOffsetX?: string | number;
   iconOffsetY?: string | number;
@@ -61,6 +62,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     descriptionDataType,
     reverseBgColor,
     shape,
+    onlyOperateSlot,
   } = props;
   const hasBottomSlot =
     cardLayoutType === CardLayoutType.ICON_AS_BACKGROUND
@@ -197,10 +199,14 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   // 左下方区域的slot
   const bottomLeftOperateArea = (
     <div
-      className={classNames("operateContainer", "operatingArea", {
-        hideOperate: props.hideOperate,
-        showOperationAreaWhenHovering: props.showOperationAreaWhenHovering,
-      })}
+      className={classNames(
+        "operateContainer",
+        !onlyOperateSlot && "operatingArea",
+        {
+          hideOperate: props.hideOperate,
+          showOperationAreaWhenHovering: props.showOperationAreaWhenHovering,
+        }
+      )}
     >
       <slot id="operateSlot" name="operate" />
     </div>
@@ -230,7 +236,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
   // 下方区域的slot组合
   const bottomOperateArea = (
     <div
-      className={classNames("operateArea", {
+      className={classNames(!onlyOperateSlot && "operateArea", {
         hideOperate: props.hideOperate,
         showOperationAreaWhenHovering: props.showOperationAreaWhenHovering,
       })}
