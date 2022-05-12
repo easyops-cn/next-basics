@@ -118,7 +118,9 @@ const locale: Locale = {
   [K.BRICK_CATEGORY_CARD_LIST]: "卡片列表",
   [K.BRICK_CATEGORY_ENTRY]: "功能入口",
   [K.BRICK_CATEGORY_NUMBER]: "统计数值",
-  [K.CONTRACT_OPTIONS_TIPS]: "仅展示前 {{count}} 项,更多结果请搜索",
+  [K.CONTRACT_OPTIONS_TIPS_PREFIX]: "仅展示前",
+  [K.CONTRACT_OPTIONS_TIPS_SUFFIX]: "项,更多结果请搜索",
+  [K.CONTRACT_VALIDATE_MESSAGE]: "请填写正确的契约名称",
 };
 
 export default locale;

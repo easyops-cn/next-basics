@@ -1,7 +1,10 @@
-.optionWrapper {
-  padding: 8px 20px;
-  font-weight: 400;
-  color: #999;
-  white-space: nowrap;
-  font-style: italic;
+.wrapper {
+  display: flex;
+  gap: 6px;
+  .name {
+    flex: 5;
+  }
+  .version {
+    flex: 1;
+  }
 }

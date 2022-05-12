@@ -123,8 +123,10 @@ const locale: Locale = {
   [K.BRICK_CATEGORY_CARD_LIST]: "Card List",
   [K.BRICK_CATEGORY_ENTRY]: "Entry Card",
   [K.BRICK_CATEGORY_NUMBER]: "Statistics Number",
-  [K.CONTRACT_OPTIONS_TIPS]:
-    "Only the first {{count}} items are displayed, please search for more results",
+  [K.CONTRACT_OPTIONS_TIPS_PREFIX]: "Only the first",
+  [K.CONTRACT_OPTIONS_TIPS_SUFFIX]:
+    "items are displayed, please search for more results",
+  [K.CONTRACT_VALIDATE_MESSAGE]: "Please fill in the correct contract name ",
 };
 
 export default locale;
