@@ -33,6 +33,10 @@
   pointer-events: none;
 }
 
+.previewContainer:not(.inspecting) .outline {
+  display: none;
+}
+
 .outline.active {
   border-color: var(--palette-blue-6);
 }
