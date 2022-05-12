@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.219.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.218.4...@next-bricks/forms@1.219.0) (2022-05-12)
+
+
+### Bug Fixes
+
+* **cmdb:** fix forms.cmdb-instance-select-panel 参数错误 ([e033efe](https://github.com/easyops-cn/next-basics/commit/e033efefc8f0fdfc474b0eeb97bf321ad19721ad))
+
+
+### Features
+
+* **forms:** select支持根据value过滤options ([60113f8](https://github.com/easyops-cn/next-basics/commit/60113f88a29c0de01b84e5c9abcc772b35f85ca4))
+
+
+
+
+
 ## [1.218.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.218.3...@next-bricks/forms@1.218.4) (2022-05-07)
 
 **Note:** Version bump only for package @next-bricks/forms
