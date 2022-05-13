@@ -270,9 +270,9 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
       return;
     }
     const rect = node.getBoundingClientRect();
-    const maxHeight = document.documentElement.clientHeight - rect.top - 40;
-    node.style.maxHeight = `${maxHeight}px`;
-    node.style.height = `${maxHeight}px`;
+    // 屏幕高度 - dom距离顶部距离 - 外层padding - input & instanceList高度
+    const maxHeight =
+      document.documentElement.clientHeight - rect.top - 40 - 100;
     setMaxHeight(maxHeight);
   }, []);
 
@@ -318,7 +318,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
               showIcon={true}
               treeData={tree}
               virtual={true}
-              height={maxHeight - 100}
+              height={maxHeight}
               titleRender={renderTitle}
               onSelect={onSelect}
               onMouseEnter={onMouseEnter}
