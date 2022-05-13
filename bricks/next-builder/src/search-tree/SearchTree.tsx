@@ -62,11 +62,13 @@ enum searchType {
   ingoreCase,
 }
 
+export const hightlightColor = "#cbcb62";
+
 export const titleRender = (props: { nodeData: PlainObject }): JSX.Element => {
   const { nodeData } = props;
   const style = {
     color: nodeData[symbolForHightlight as any]
-      ? "yellow"
+      ? "#cbcb62"
       : nodeData.unlink
       ? "#aaa"
       : null,

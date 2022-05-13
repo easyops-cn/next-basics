@@ -8,6 +8,7 @@ import {
   titleRender,
   SearchTreeProps,
   operation,
+  hightlightColor,
 } from "./SearchTree";
 import { InstanceList } from "@next-libs/cmdb-instances";
 import {
@@ -331,7 +332,7 @@ describe("SearchTree", () => {
             .children as React.ReactElement
         ).props.style
       ).toEqual({
-        color: "yellow",
+        color: hightlightColor,
       });
       expect(wrapper.html().indexOf("general-select")).toBeTruthy();
 
@@ -492,7 +493,7 @@ describe("titleRender", () => {
         },
       }),
       /* eslint-disable react/jsx-key */
-      <span style={{ color: "yellow" }}>hightlighttest</span>,
+      <span style={{ color: hightlightColor }}>hightlighttest</span>,
     ],
   ])("%s", (_condition, params, result) => {
     expect(titleRender(params)).toEqual(result);
