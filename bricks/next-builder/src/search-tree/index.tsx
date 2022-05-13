@@ -65,15 +65,6 @@ export class SearchTreeElement extends UpdatingElement {
   dataSource: StoryboardAssemblyResult;
 
   /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 树高度, 设置高度可以控制Tree开启虚拟渲染模式, 不会因为storyBoard同时展开全部节点, DOM过多导致的页面卡顿
-   */
-  @property({ type: Number })
-  height: number;
-
-  /**
    * @detail unknow
    * @description 点击节点数据
    */
@@ -158,7 +149,6 @@ export class SearchTreeElement extends UpdatingElement {
             appId={this.appId}
             projectId={this.projectId}
             treeData={this.dataSource}
-            height={this.height}
             searchConfig={{
               supportKey: this.supportKey,
               supportWordCase: this.supportWordCase,

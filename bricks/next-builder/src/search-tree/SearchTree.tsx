@@ -1,3 +1,4 @@
+import _, { size } from "lodash";
 import React, { useState, useEffect, useRef } from "react";
 import { cloneDeep, debounce } from "lodash";
 import { Tree, Input } from "antd";
@@ -7,13 +8,10 @@ import {
   filter,
   buildTree,
   symbolForHightlight,
-  symbolForRealParentId,
   NODE_INFO,
-  getTitle,
   PlainObject,
   SearchConfig,
 } from "./utils";
-import { symbolForNodeInstanceId } from "../shared/storyboard/buildStoryboard";
 import { Key } from "antd/lib/table/interface";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Field, InstanceList } from "@next-libs/cmdb-instances";
@@ -49,7 +47,6 @@ export interface SearchTreeProps {
   appId: string;
   projectId: string;
   treeData: StoryboardAssemblyResult;
-  height?: number;
   searchConfig?: SearchConfig;
   searchContent: {
     useBrick: UseBrickConf;
@@ -65,58 +62,28 @@ enum searchType {
   ingoreCase,
 }
 
-export const titleRender = (props: {
-  homepage: string;
-  appId: string;
-  projectId: string;
-  nodeData: PlainObject;
-}): JSX.Element => {
-  const { homepage, appId, projectId, nodeData } = props;
+export const titleRender = (props: { nodeData: PlainObject }): JSX.Element => {
+  const { nodeData } = props;
   const style = {
-    background: nodeData[symbolForHightlight as any] ? "yellow" : null,
-    color: nodeData.unlink ? "#aaa" : null,
+    color: nodeData[symbolForHightlight as any]
+      ? "yellow"
+      : nodeData.unlink
+      ? "#aaa"
+      : null,
   };
-  if (nodeData[NODE_INFO]?.[symbolForRealParentId] && !nodeData.unlink) {
-    let url = "";
-    if (nodeData.isTpl) {
-      // template
-      if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
-        // brick
-        url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO][symbolForRealParentId]}/visualize-builder?fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
-      } else {
-        url = `${homepage}/project/${projectId}/app/${appId}/template/${nodeData[NODE_INFO][symbolForRealParentId]}/visualize-builder?fullscreen=1`;
-      }
-    } else {
-      // page
-      if (nodeData[NODE_INFO][symbolForNodeInstanceId]) {
-        // brick
-        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0#brick,${nodeData[NODE_INFO][symbolForNodeInstanceId]}`;
-      } else {
-        url = `${homepage}/project/${projectId}/app/${appId}/visualize-builder?root=${nodeData[NODE_INFO][symbolForRealParentId]}&fullscreen=1&canvasIndex=0`;
-      }
-    }
-    nodeData.url = url;
-    return (
-      <a style={style} href={url}>
-        {getTitle(nodeData[NODE_INFO]) || nodeData.title}
-      </a>
-    );
-  }
   return <span style={style}>{nodeData.title}</span>;
 };
 
 export function SearchTree(props: SearchTreeProps): React.ReactElement {
   const {
     treeData,
-    homepage,
-    appId,
-    projectId,
-    height,
     searchConfig = {},
     titleClick,
     titleFocus,
     titleBlur,
   } = props;
+  const searchTreeRef = useRef<HTMLDivElement>(null);
+  const instanceListRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState("");
   const baseTree = buildTree(treeData?.storyboard);
   const [tree, setTree] = useState(baseTree);
@@ -131,10 +98,10 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
   const [supportFullWord, setSupportFullWord] = useState<boolean>(
     searchConfig.supportFullWord ?? false
   );
+  const [maxHeight, setMaxHeight] = useState<number>(0);
 
   const [searchContentDetail, setSearchContentDetail] = useState<{
     info: PlainObject;
-    url: string;
   }>();
 
   const setFilterTree = useRef(
@@ -200,33 +167,26 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
 
   const renderTitle = (nodeData: PlainObject): JSX.Element =>
     titleRender({
-      homepage,
-      appId,
-      projectId,
       nodeData,
     });
 
   const onSelect = (_selectedKeys: React.Key[], item: PlainObject): void => {
     titleClick?.({
       info: item.node[NODE_INFO],
-      url: item.node.url,
     });
     setSearchContentDetail({
       info: item.node[NODE_INFO],
-      url: item.node.url,
     });
   };
 
   const onMouseEnter = (info: NodeMouseEventParams): void =>
     titleFocus?.({
       info: (info.node as PlainObject)[NODE_INFO],
-      url: (info.node as PlainObject).url,
     });
 
   const onMouseLeave = (info: NodeMouseEventParams): void =>
     titleBlur?.({
       info: (info.node as PlainObject)[NODE_INFO],
-      url: (info.node as PlainObject).url,
     });
 
   const handleClickIcon = (type: searchType): void => {
@@ -304,19 +264,39 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     );
   };
 
+  const resize = React.useCallback(() => {
+    const node = searchTreeRef.current;
+    if (!node) {
+      return;
+    }
+    const rect = node.getBoundingClientRect();
+    const maxHeight = document.documentElement.clientHeight - rect.top - 40;
+    node.style.maxHeight = `${maxHeight}px`;
+    node.style.height = `${maxHeight}px`;
+    setMaxHeight(maxHeight);
+  }, []);
+
+  useEffect(() => {
+    resize();
+    window.addEventListener("resize", resize);
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, [resize]);
+
   useEffect(() => {
     setTree(buildTree(treeData?.storyboard));
   }, [treeData]);
 
   return (
-    <div>
+    <div ref={searchTreeRef}>
       <Input
         placeholder="输入关键字搜索StoryBoard"
         value={value}
         onChange={handleFilterChange}
         suffix={renderInputSuffixIcon()}
       />
-      <div style={{ marginTop: 10 }}>
+      <div ref={instanceListRef} style={{ marginTop: 10 }}>
         <InstanceList
           searchDisabled
           hideInstanceList
@@ -338,7 +318,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
               showIcon={true}
               treeData={tree}
               virtual={true}
-              height={Number(height)}
+              height={maxHeight - 100}
               titleRender={renderTitle}
               onSelect={onSelect}
               onMouseEnter={onMouseEnter}

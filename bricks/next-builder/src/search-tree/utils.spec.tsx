@@ -1,13 +1,7 @@
 import React from "react";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { isMatch, PlainObject } from "./utils";
-import {
-  buildTree,
-  filter,
-  symbolForHightlight,
-  symbolForRealParentId,
-  clone,
-} from "./utils";
+import { buildTree, filter, symbolForHightlight, clone } from "./utils";
 import {
   symbolForNodeId,
   symbolForNodeInstanceId,
@@ -87,34 +81,39 @@ describe("buildTree should work", () => {
       mockData,
       [
         {
-          $$info: { [symbolForRealParentId]: "" },
+          $$info: {},
           children: [
             {
               $$info: {
+                nodeId: "B-01",
+                parentId: "B-01",
                 type: "bricks",
                 [symbolForNodeId]: "B-01",
-                [symbolForRealParentId]: "B-01",
               },
               children: [
                 {
                   $$info: {
                     brick: "general-button",
+                    instanceId: "123123",
+                    nodeId: "B-02",
+                    parentId: "B-01",
                     path: "${APP.homepage}/test-1",
                     properties: { test: 1 },
                     [symbolForNodeInstanceId]: "123123",
                     [symbolForNodeId]: "B-02",
-                    [symbolForRealParentId]: "B-01",
                   },
                   children: [
                     {
-                      $$info: { [symbolForRealParentId]: "B-01" },
+                      $$info: { parentId: "B-01" },
                       children: [
                         {
                           $$info: {
                             brick: "general-button",
+                            instanceId: "slots-brick",
+                            nodeId: "s-01-01",
+                            parentId: "B-01",
                             [symbolForNodeInstanceId]: "slots-brick",
                             [symbolForNodeId]: "s-01-01",
-                            [symbolForRealParentId]: "B-01",
                           },
                           icon: (
                             <GeneralIcon
@@ -170,11 +169,13 @@ describe("buildTree should work", () => {
                 {
                   $$info: {
                     brick: "general-select",
+                    instanceId: "234",
+                    nodeId: "B-04",
+                    parentId: "B-01",
                     path: "${APP.homepage}/test-2",
                     properties: { test: 2 },
                     [symbolForNodeInstanceId]: "234",
                     [symbolForNodeId]: "B-04",
-                    [symbolForRealParentId]: "B-01",
                   },
                   icon: (
                     <GeneralIcon
@@ -223,16 +224,17 @@ describe("buildTree should work", () => {
           title: "routes",
         },
         {
-          $$info: { [symbolForRealParentId]: "" },
+          $$info: {},
           children: [
             {
-              $$info: { [symbolForRealParentId]: "" },
+              $$info: {},
               children: [
                 {
                   $$info: {
                     name: "tpl-test-1",
+                    nodeId: "t-01",
+                    parentId: "t-01",
                     [symbolForNodeId]: "t-01",
-                    [symbolForRealParentId]: "t-01",
                   },
                   icon: (
                     <span
@@ -251,8 +253,9 @@ describe("buildTree should work", () => {
                 {
                   $$info: {
                     name: "tpl-test-2",
+                    nodeId: "t-02",
+                    parentId: "t-02",
                     [symbolForNodeId]: "t-02",
-                    [symbolForRealParentId]: "t-02",
                   },
                   icon: (
                     <span
@@ -284,16 +287,14 @@ describe("buildTree should work", () => {
               title: "customTemplates",
             },
             {
-              $$info: {
-                [symbolForRealParentId]: "",
-              },
+              $$info: {},
               children: [
                 {
                   $$info: {
                     name: "getFunctionsByCondition",
+                    parentId: "",
                     source: "function testA() {console.log(a)}",
                     typescript: true,
-                    [symbolForRealParentId]: "",
                   },
                   icon: (
                     <span
@@ -312,8 +313,8 @@ describe("buildTree should work", () => {
                 {
                   $$info: {
                     name: "getFunctionsByCondition",
+                    parentId: "",
                     source: "function testB() {console.log(b)}",
-                    [symbolForRealParentId]: "",
                   },
                   icon: (
                     <span
@@ -368,7 +369,7 @@ describe("buildTree should work", () => {
       },
       [
         {
-          $$info: { [symbolForRealParentId]: "" },
+          $$info: {},
           icon: (
             <span
               style={{
@@ -384,7 +385,7 @@ describe("buildTree should work", () => {
           title: "routes",
         },
         {
-          $$info: { [symbolForRealParentId]: "" },
+          $$info: {},
           icon: (
             <span
               style={{
@@ -465,33 +466,37 @@ describe("buildTree should work", () => {
       },
       [
         {
-          $$info: { [symbolForRealParentId]: "" },
+          $$info: {},
           children: [
             {
               $$info: {
                 alias: "Project Menu",
+                nodeId: "router-1",
+                parentId: "router-1",
                 type: "routes",
                 [symbolForNodeId]: "router-1",
-                [symbolForRealParentId]: "router-1",
               },
               children: [
                 {
                   $$info: {
                     alias: "/images",
+                    nodeId: "router-child-1",
+                    parentId: "router-child-1",
                     path: "${APP.homepage}/project/:projectId/app/:appId/images",
                     type: "bricks",
                     [symbolForNodeId]: "router-child-1",
-                    [symbolForRealParentId]: "router-child-1",
                   },
                   children: [
                     {
                       $$info: {
                         brick: "general-view",
+                        instanceId: "instance-01",
+                        nodeId: "B-02",
+                        parentId: "router-child-1",
                         path: "${APP.homepage}/test-1",
                         properties: { test: 1 },
                         [symbolForNodeInstanceId]: "instance-01",
                         [symbolForNodeId]: "B-02",
-                        [symbolForRealParentId]: "router-child-1",
                       },
                       icon: (
                         <GeneralIcon
@@ -556,45 +561,44 @@ describe("buildTree should work", () => {
           title: "routes",
         },
         {
-          $$info: {
-            [symbolForRealParentId]: "",
-          },
+          $$info: {},
           children: [
             {
-              $$info: {
-                [symbolForRealParentId]: "",
-              },
+              $$info: {},
               children: [
                 {
                   $$info: {
                     name: "tpl-test-1",
+                    nodeId: "t-01",
+                    parentId: "t-01",
                     [symbolForNodeId]: "t-01",
-                    [symbolForRealParentId]: "t-01",
                   },
                   children: [
                     {
                       $$info: {
                         brick: "general-button",
+                        instanceId: "123123",
+                        nodeId: "B-02",
+                        parentId: "t-01",
                         path: "${APP.homepage}/test-1",
-                        properties: {
-                          test: 1,
-                        },
+                        properties: { test: 1 },
                         [symbolForNodeInstanceId]: "123123",
                         [symbolForNodeId]: "B-02",
-                        [symbolForRealParentId]: "t-01",
                       },
                       children: [
                         {
                           $$info: {
-                            [symbolForRealParentId]: "t-01",
+                            parentId: "t-01",
                           },
                           children: [
                             {
                               $$info: {
                                 brick: "general-button",
+                                instanceId: "slots-brick",
+                                nodeId: "s-01-01",
+                                parentId: "t-01",
                                 [symbolForNodeInstanceId]: "slots-brick",
                                 [symbolForNodeId]: "s-01-01",
-                                [symbolForRealParentId]: "t-01",
                               },
                               icon: (
                                 <GeneralIcon
@@ -643,10 +647,7 @@ describe("buildTree should work", () => {
                             lib: "antd",
                             theme: "outlined",
                           }}
-                          style={{
-                            fontSize: 12,
-                            margin: "0 2px",
-                          }}
+                          style={{ fontSize: 12, margin: "0 2px" }}
                         />
                       ),
                       isTpl: true,
@@ -722,13 +723,14 @@ describe("fitler should work", () => {
       {
         tree: [
           {
-            $$info: { [symbolForRealParentId]: "" },
+            $$info: {},
             children: [
               {
                 $$info: {
                   type: "bricks",
+                  nodeId: "B-01",
+                  parentId: "B-01",
                   [symbolForNodeId]: "B-01",
-                  [symbolForRealParentId]: "B-01",
                 },
                 children: [
                   {
@@ -736,20 +738,24 @@ describe("fitler should work", () => {
                       brick: "general-button",
                       path: "${APP.homepage}/test-1",
                       properties: { test: 1 },
+                      instanceId: "123123",
+                      nodeId: "B-02",
+                      parentId: "B-01",
                       [symbolForNodeInstanceId]: "123123",
                       [symbolForNodeId]: "B-02",
-                      [symbolForRealParentId]: "B-01",
                     },
                     children: [
                       {
-                        $$info: { [symbolForRealParentId]: "B-01" },
+                        $$info: { parentId: "B-01" },
                         children: [
                           {
                             $$info: {
                               brick: "general-button",
+                              instanceId: "slots-brick",
+                              nodeId: "s-01-01",
                               [symbolForNodeInstanceId]: "slots-brick",
                               [symbolForNodeId]: "s-01-01",
-                              [symbolForRealParentId]: "B-01",
+                              parentId: "B-01",
                             },
                             icon: (
                               <GeneralIcon
@@ -809,9 +815,11 @@ describe("fitler should work", () => {
                       brick: "general-select",
                       path: "${APP.homepage}/test-2",
                       properties: { test: 2 },
+                      instanceId: "234",
+                      nodeId: "B-04",
                       [symbolForNodeInstanceId]: "234",
                       [symbolForNodeId]: "B-04",
-                      [symbolForRealParentId]: "B-01",
+                      parentId: "B-01",
                     },
                     icon: (
                       <GeneralIcon
@@ -873,13 +881,14 @@ describe("fitler should work", () => {
       {
         tree: [
           {
-            $$info: { [symbolForRealParentId]: "" },
+            $$info: {},
             children: [
               {
                 $$info: {
                   type: "bricks",
+                  nodeId: "B-01",
                   [symbolForNodeId]: "B-01",
-                  [symbolForRealParentId]: "B-01",
+                  parentId: "B-01",
                 },
                 children: [
                   {
@@ -887,20 +896,24 @@ describe("fitler should work", () => {
                       brick: "general-button",
                       path: "${APP.homepage}/test-1",
                       properties: { test: 1 },
+                      instanceId: "123123",
+                      nodeId: "B-02",
                       [symbolForNodeInstanceId]: "123123",
                       [symbolForNodeId]: "B-02",
-                      [symbolForRealParentId]: "B-01",
+                      parentId: "B-01",
                     },
                     children: [
                       {
-                        $$info: { [symbolForRealParentId]: "B-01" },
+                        $$info: { parentId: "B-01" },
                         children: [
                           {
                             $$info: {
                               brick: "general-button",
+                              instanceId: "slots-brick",
+                              nodeId: "s-01-01",
                               [symbolForNodeInstanceId]: "slots-brick",
                               [symbolForNodeId]: "s-01-01",
-                              [symbolForRealParentId]: "B-01",
+                              parentId: "B-01",
                             },
                             icon: (
                               <GeneralIcon
@@ -998,16 +1011,17 @@ describe("fitler should work", () => {
       {
         tree: [
           {
-            $$info: { [symbolForRealParentId]: "" },
+            $$info: {},
             children: [
               {
-                $$info: { [symbolForRealParentId]: "" },
+                $$info: {},
                 children: [
                   {
                     $$info: {
                       name: "tpl-test-1",
+                      nodeId: "t-01",
                       [symbolForNodeId]: "t-01",
-                      [symbolForRealParentId]: "t-01",
+                      parentId: "t-01",
                     },
                     icon: (
                       <span
@@ -1063,17 +1077,17 @@ describe("fitler should work", () => {
       {
         tree: [
           {
-            $$info: { [symbolForRealParentId]: "" },
+            $$info: {},
             children: [
               {
-                $$info: { [symbolForRealParentId]: "" },
+                $$info: {},
                 children: [
                   {
                     $$info: {
                       name: "getFunctionsByCondition",
                       source: "function testA() {console.log(a)}",
                       typescript: true,
-                      [symbolForRealParentId]: "",
+                      parentId: "",
                       [symbolForHightlight]: true,
                     },
                     icon: (
@@ -1130,17 +1144,17 @@ describe("fitler should work", () => {
       {
         tree: [
           {
-            $$info: { [symbolForRealParentId]: "" },
+            $$info: {},
             children: [
               {
-                $$info: { [symbolForRealParentId]: "" },
+                $$info: {},
                 children: [
                   {
                     $$info: {
                       name: "getFunctionsByCondition",
                       source: "function testB() {console.log(b)}",
-                      [symbolForRealParentId]: "",
                       [symbolForHightlight]: true,
+                      parentId: "",
                     },
                     icon: (
                       <span
@@ -1267,161 +1281,7 @@ describe("searchConfig should work", () => {
           supportKey: true,
         },
       })
-    ).toEqual({
-      tree: [
-        {
-          $$info: { [symbolForRealParentId]: "" },
-          children: [
-            {
-              $$info: { [symbolForRealParentId]: "" },
-              children: [
-                {
-                  [symbolForHightlight]: true,
-                  $$info: {
-                    [symbolForHightlight]: true,
-                    name: "tpl-test-1",
-                    [symbolForRealParentId]: "t-01",
-                    [symbolForNodeId]: "t-01",
-                  },
-                  icon: (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        height: 12,
-                        margin: "0 2px",
-                        width: 12,
-                      }}
-                    />
-                  ),
-                  isTpl: true,
-                  key: "meta/customTemplates/0",
-                  title: "tpl-test-1",
-                },
-                {
-                  [symbolForHightlight]: true,
-                  $$info: {
-                    [symbolForHightlight]: true,
-                    name: "tpl-test-2",
-                    [symbolForRealParentId]: "t-02",
-                    [symbolForNodeId]: "t-02",
-                  },
-                  icon: (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        height: 12,
-                        margin: "0 2px",
-                        width: 12,
-                      }}
-                    />
-                  ),
-                  isTpl: true,
-                  key: "meta/customTemplates/1",
-                  title: "tpl-test-2",
-                },
-              ],
-              icon: (
-                <span
-                  style={{
-                    display: "inline-block",
-                    height: 12,
-                    margin: "0 2px",
-                    width: 12,
-                  }}
-                />
-              ),
-              isTpl: true,
-              key: "meta/customTemplates",
-              title: "customTemplates",
-            },
-            {
-              $$info: {
-                [symbolForRealParentId]: "",
-              },
-              children: [
-                {
-                  $$info: {
-                    name: "getFunctionsByCondition",
-                    source: "function testA() {console.log(a)}",
-                    typescript: true,
-                    [symbolForRealParentId]: "",
-                    [symbolForHightlight]: true,
-                  },
-                  icon: (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        height: 12,
-                        margin: "0 2px",
-                        width: 12,
-                      }}
-                    />
-                  ),
-                  isTpl: false,
-                  key: "meta/functions/0",
-                  title: "getFunctionsByCondition",
-                  [symbolForHightlight]: true,
-                },
-                {
-                  $$info: {
-                    name: "getFunctionsByCondition",
-                    source: "function testB() {console.log(b)}",
-                    [symbolForRealParentId]: "",
-                    [symbolForHightlight]: true,
-                  },
-                  icon: (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        height: 12,
-                        margin: "0 2px",
-                        width: 12,
-                      }}
-                    />
-                  ),
-                  isTpl: false,
-                  key: "meta/functions/1",
-                  title: "getFunctionsByCondition",
-                  [symbolForHightlight]: true,
-                },
-              ],
-              icon: (
-                <span
-                  style={{
-                    display: "inline-block",
-                    height: 12,
-                    margin: "0 2px",
-                    width: 12,
-                  }}
-                />
-              ),
-              isTpl: false,
-              key: "meta/functions",
-              title: "functions",
-            },
-          ],
-          icon: (
-            <span
-              style={{
-                display: "inline-block",
-                height: 12,
-                margin: "0 2px",
-                width: 12,
-              }}
-            />
-          ),
-          isTpl: false,
-          key: "meta",
-          title: "meta",
-        },
-      ],
-      matchKey: [
-        "meta/customTemplates/0",
-        "meta/customTemplates/1",
-        "meta/functions/0",
-        "meta/functions/1",
-      ],
-    });
+    ).toMatchSnapshot();
     expect(
       filter({
         tree: treeData,
@@ -1539,13 +1399,14 @@ describe("searchInfo should work", () => {
       matchKey: ["routes/0/bricks/3"],
       tree: [
         {
-          $$info: { [symbolForRealParentId]: "" },
+          $$info: {},
           children: [
             {
               $$info: {
-                type: "bricks",
+                parentId: "B-01",
+                nodeId: "B-01",
                 [symbolForNodeId]: "B-01",
-                [symbolForRealParentId]: "B-01",
+                type: "bricks",
               },
               children: [
                 {
@@ -1563,9 +1424,11 @@ describe("searchInfo should work", () => {
                       },
                       [symbolForHightlight]: true,
                     },
+                    instanceId: "234",
+                    nodeId: "B-04",
+                    parentId: "B-01",
                     [symbolForNodeInstanceId]: "234",
                     [symbolForNodeId]: "B-04",
-                    [symbolForRealParentId]: "B-01",
                     [symbolForHightlight]: true,
                   },
                   icon: (
@@ -1648,213 +1511,7 @@ describe("searchInfo should work", () => {
           },
         },
       })
-    ).toEqual({
-      matchKey: ["routes/0/bricks/0", "routes/0/bricks/2"],
-      tree: [
-        {
-          $$info: { [symbolForRealParentId]: "" },
-          children: [
-            {
-              $$info: {
-                type: "bricks",
-                [symbolForNodeId]: "B-01",
-                [symbolForRealParentId]: "B-01",
-              },
-              children: [
-                {
-                  $$info: {
-                    brick: "general-button",
-                    path: "${APP.homepage}/test-1",
-                    properties: { test: 1 },
-                    [symbolForNodeInstanceId]: "123123",
-                    [symbolForNodeId]: "B-02",
-                    [symbolForRealParentId]: "B-01",
-                  },
-                  children: [
-                    {
-                      $$info: { [symbolForRealParentId]: "B-01" },
-                      children: [
-                        {
-                          $$info: {
-                            brick: "general-button",
-                            [symbolForNodeInstanceId]: "slots-brick",
-                            [symbolForNodeId]: "s-01-01",
-                            [symbolForRealParentId]: "B-01",
-                          },
-                          icon: (
-                            <GeneralIcon
-                              icon={{
-                                color: "cyan",
-                                icon: "codepen",
-                                lib: "antd",
-                                theme: "outlined",
-                              }}
-                              style={{
-                                fontSize: 12,
-                                margin: "0 2px",
-                              }}
-                            />
-                          ),
-                          isTpl: false,
-                          key: "routes/0/bricks/0/slots/content/bricks/0",
-                          title: "general-button",
-                        },
-                      ],
-                      icon: (
-                        <GeneralIcon
-                          icon={{
-                            color: "cyan",
-                            category: "app",
-                            icon: "container",
-                            lib: "easyops",
-                          }}
-                          style={{ fontSize: 12, margin: "0 2px" }}
-                        />
-                      ),
-                      isTpl: false,
-                      key: "routes/0/bricks/0/slots/content",
-                      title: "content",
-                      unlink: true,
-                    },
-                  ],
-                  icon: (
-                    <GeneralIcon
-                      icon={{
-                        color: "cyan",
-                        icon: "codepen",
-                        lib: "antd",
-                        theme: "outlined",
-                      }}
-                      style={{ fontSize: 12, margin: "0 2px" }}
-                    />
-                  ),
-                  isTpl: false,
-                  key: "routes/0/bricks/0",
-                  title: "general-button",
-                  [symbolForHightlight]: true,
-                },
-                {
-                  $$info: {
-                    brick: "general-button",
-                    path: "${APP.homepage}/test-1",
-                    properties: { test: 1 },
-                    [symbolForNodeInstanceId]: "123123",
-                    [symbolForNodeId]: "B-03",
-                    [symbolForRealParentId]: "B-01",
-                  },
-                  children: [
-                    {
-                      $$info: { [symbolForRealParentId]: "B-01" },
-                      children: [
-                        {
-                          $$info: {
-                            brick: "general-button",
-                            [symbolForNodeInstanceId]: "slots-brick",
-                            [symbolForNodeId]: "s-03-01",
-                            [symbolForRealParentId]: "B-01",
-                          },
-                          icon: (
-                            <GeneralIcon
-                              icon={{
-                                color: "cyan",
-                                icon: "codepen",
-                                lib: "antd",
-                                theme: "outlined",
-                              }}
-                              style={{
-                                fontSize: 12,
-                                margin: "0 2px",
-                              }}
-                            />
-                          ),
-                          isTpl: false,
-                          key: "routes/0/bricks/2/slots/content/bricks/0",
-                          title: "general-button",
-                        },
-                      ],
-                      icon: (
-                        <GeneralIcon
-                          icon={{
-                            category: "app",
-                            color: "cyan",
-                            icon: "container",
-                            lib: "easyops",
-                          }}
-                          style={{ fontSize: 12, margin: "0 2px" }}
-                        />
-                      ),
-                      isTpl: false,
-                      key: "routes/0/bricks/2/slots/content",
-                      title: "content",
-                      unlink: true,
-                    },
-                  ],
-                  icon: (
-                    <GeneralIcon
-                      icon={{
-                        color: "cyan",
-                        icon: "codepen",
-                        lib: "antd",
-                        theme: "outlined",
-                      }}
-                      style={{ fontSize: 12, margin: "0 2px" }}
-                    />
-                  ),
-                  isTpl: false,
-                  key: "routes/0/bricks/2",
-                  title: "general-button",
-                  [symbolForHightlight]: true,
-                },
-              ],
-              icon: (
-                <GeneralIcon
-                  icon={{
-                    category: "app",
-                    color: "cyan",
-                    icon: "container",
-                    lib: "easyops",
-                  }}
-                  style={{ fontSize: 12, margin: "0 2px" }}
-                />
-              ),
-              isTpl: false,
-              key: "routes/0",
-              title: "bricks",
-            },
-          ],
-          icon: (
-            <span
-              style={{
-                display: "inline-block",
-                height: 12,
-                margin: "0 2px",
-                width: 12,
-              }}
-            />
-          ),
-          isTpl: false,
-          key: "routes",
-          title: "routes",
-        },
-      ],
-    });
-
-    // expect(
-    //   filter({
-    //     tree: tree,
-    //     text: "",
-    //     searchInfo: {
-    //       brick: {
-    //         type: "$eq",
-    //         text: "general-deep-brick",
-    //       },
-    //       alias: {
-    //         type: "$or",
-    //         text: "deep-1"
-    //       },
-    //     },
-    //   })
-    // ).toEqual("");
+    ).toMatchSnapshot();
   });
 });
 

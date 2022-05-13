@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import { isObject } from "@next-core/brick-utils";
 import { GeneralIcon } from "@next-libs/basic-components";
@@ -101,7 +102,19 @@ const iconTypeConstants = {
 
 const ingoreKey = ["bricks", "slots"];
 
-const supportKey = [
+const filterIgnoreKeys = [
+  "children",
+  "key",
+  "icon",
+  "instanceId",
+  "nodeId",
+  "parentId",
+  "iid",
+  "unlink",
+  symbolForHightlight,
+];
+
+const supportKeys = [
   "routes",
   "bricks",
   "slots",
@@ -214,6 +227,14 @@ function traversalArray(
     ) {
       parentId = treeData[i][symbolForNodeId as any];
     }
+    const nodeInfo = _.omitBy(
+      {
+        instanceId: treeData[i][symbolForNodeInstanceId as any],
+        nodeId: treeData[i][symbolForNodeId as any],
+        parentId,
+      },
+      _.isNil
+    );
     const child: PlainObject = {
       title,
       key: path,
@@ -221,7 +242,7 @@ function traversalArray(
       isTpl: options?.isTemplate,
       [NODE_INFO]: clone({
         ...treeData[i],
-        [symbolForRealParentId]: parentId,
+        ...nodeInfo,
       }),
     };
     if (options?.isSlots) child.unlink = true;
@@ -244,7 +265,7 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
   let isSlots = false;
 
   for (const key of Object.keys(treeData)) {
-    if (supportKey.includes(key) || options?.isSlots) {
+    if (supportKeys.includes(key) || options?.isSlots) {
       let isParentRoutes = false;
       let parentId = options?.parentId ?? "";
       let isTemplate = options?.isTemplate ?? false;
@@ -259,13 +280,12 @@ function traversalObject(treeData: PlainObject, options: builTreeOptions) {
       const path = getPath(options?.parentPath ?? "", key);
       if (path === "meta/customTemplates") isTemplate = true;
       const child: PlainObject = {
-        title: key,
+        title: isSlots || options?.isSlots ? key || "slots" : key,
         key: path,
         icon: getTypeIcon(getType(treeData[key])),
         isTpl: isTemplate,
         [NODE_INFO]: clone({
-          // ...treeData[key],
-          [symbolForRealParentId]: parentId,
+          ...(parentId ? { parentId } : {}),
         }),
       };
       if (options?.isSlots) child.unlink = true;
@@ -447,7 +467,7 @@ export function filter(props: {
   const filterNode = (item: PlainObject | string, text: string): boolean => {
     if (isObject(item) && item) {
       for (const [k, v] of Object.entries(item)) {
-        if (!["children", "key", "icon", symbolForHightlight].includes(k)) {
+        if (!filterIgnoreKeys.includes(k)) {
           if (!isSenior && config.supportKey && isEqual(k)) {
             return setMatchItem(item);
           }
