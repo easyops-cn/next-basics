@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
+import { ContractCenterApi_searchContract } from "@next-sdk/next-builder-sdk";
 
 interface ContractParams {
   pageSize?: number;
@@ -7,9 +7,8 @@ interface ContractParams {
 }
 
 interface ContractField {
-  name: string;
-  version: string;
-  namespaceId: string;
+  fullContractName?: string;
+  version: string[];
 }
 
 export function useContract({
@@ -17,30 +16,25 @@ export function useContract({
   q = "",
 }: ContractParams): [ContractField[]] {
   const [contractList, setContractList] = useState<ContractField[]>([]);
-  const [query, setQ] = useState<string>("");
+  const [query, setQ] = useState<string>(q);
+  const [count, setCount] = useState(pageSize);
 
   useEffect(() => {
     setQ(q);
   }, [q]);
 
   useEffect(() => {
+    setCount(pageSize);
+  }, [pageSize]);
+
+  useEffect(() => {
     (async () => {
       try {
-        const { list } = await InstanceApi_postSearchV3(
-          "FLOW_BUILDER_API_CONTRACT@EASYOPS",
+        const { list } = await ContractCenterApi_searchContract(
           {
             page: 1,
-            page_size: pageSize,
-            fields: ["name", "namespaceId", "version"],
-            query: {
-              namespaceId: {
-                $exists: true,
-              },
-              $or: [
-                { name: { $like: `%${query}%` } },
-                { namespaceId: { $like: `%${query}%` } },
-              ],
-            },
+            pageSize: count,
+            fullContractName: query,
           },
           {
             interceptorParams: { ignoreLoadingBar: true },
@@ -54,7 +48,7 @@ export function useContract({
         setContractList([]);
       }
     })();
-  }, [pageSize, query]);
+  }, [query, count]);
 
   return [contractList];
 }

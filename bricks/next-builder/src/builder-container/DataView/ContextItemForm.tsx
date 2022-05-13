@@ -15,7 +15,10 @@ import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { FormInstance } from "antd/lib/form";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useBuilderUIContext } from "../BuilderUIContext";
-import { ContractAutoComplete } from "../../shared/components/contract-auto-complete/ContractAutoComplete";
+import {
+  ContractAutoComplete,
+  checkContractRule,
+} from "../../shared/components/contract-auto-complete/ContractAutoComplete";
 
 export interface ContextItemFormProps {
   data: ContextConf;
@@ -188,7 +191,10 @@ export function ContextItemForm({
             <Form.Item
               label="flowApi"
               name="flowApi"
-              rules={[{ required: true, message: "Please select a provider!" }]}
+              rules={[
+                { required: true, message: "Please select a flowAPi!" },
+                { validator: checkContractRule },
+              ]}
             >
               <ContractAutoComplete />
             </Form.Item>

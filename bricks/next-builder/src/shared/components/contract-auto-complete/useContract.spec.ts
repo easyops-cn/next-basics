@@ -1,32 +1,28 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { useContract } from "./useContract";
-import { InstanceApi_postSearchV3 } from "@next-sdk/cmdb-sdk";
+import { ContractCenterApi_searchContract } from "@next-sdk/next-builder-sdk";
 
-jest.mock("@next-sdk/cmdb-sdk");
+jest.mock("@next-sdk/next-builder-sdk");
 
 describe("useContract", () => {
   it("should work", async () => {
-    (InstanceApi_postSearchV3 as jest.Mock).mockImplementation(
-      (objectId, data) =>
-        Promise.resolve({
-          list: [
-            {
-              name: "postSearch",
-              version: "1.0.0",
-              namespaceId: "cmdb.instance",
-            },
-            {
-              name: "postSearchV2",
-              version: "1.1.0",
-              namespaceId: "cmdb.instance",
-            },
-            {
-              name: "postSearchV3",
-              version: "1.2.0",
-              namespaceId: "cmdb.instance",
-            },
-          ].slice(0, data?.page_size),
-        })
+    (ContractCenterApi_searchContract as jest.Mock).mockImplementation((data) =>
+      Promise.resolve({
+        list: [
+          {
+            fullContractName: "cmdb.instance@postSearch",
+            version: ["1.0.0"],
+          },
+          {
+            name: "cmdb.instance@postSearchV2",
+            version: ["1.1.0"],
+          },
+          {
+            name: "cmdb.instance@postSearchV3",
+            version: ["1.2.0"],
+          },
+        ].slice(0, data?.pageSize),
+      })
     );
 
     const { result, waitForNextUpdate, rerender } = renderHook(
@@ -39,16 +35,17 @@ describe("useContract", () => {
     await waitForNextUpdate();
 
     expect(result.current[0]).toEqual([
-      { name: "postSearch", namespaceId: "cmdb.instance", version: "1.0.0" },
       {
-        name: "postSearchV2",
-        version: "1.1.0",
-        namespaceId: "cmdb.instance",
+        fullContractName: "cmdb.instance@postSearch",
+        version: ["1.0.0"],
       },
       {
-        name: "postSearchV3",
-        version: "1.2.0",
-        namespaceId: "cmdb.instance",
+        name: "cmdb.instance@postSearchV2",
+        version: ["1.1.0"],
+      },
+      {
+        name: "cmdb.instance@postSearchV3",
+        version: ["1.2.0"],
       },
     ]);
 
@@ -56,13 +53,16 @@ describe("useContract", () => {
 
     await waitForNextUpdate();
     expect(result.current[0]).toEqual([
-      { name: "postSearch", namespaceId: "cmdb.instance", version: "1.0.0" },
+      {
+        fullContractName: "cmdb.instance@postSearch",
+        version: ["1.0.0"],
+      },
     ]);
-    (InstanceApi_postSearchV3 as jest.Mock).mockClear();
+    (ContractCenterApi_searchContract as jest.Mock).mockClear();
   });
 
   it("provider return error", async () => {
-    (InstanceApi_postSearchV3 as jest.Mock).mockRejectedValue(
+    (ContractCenterApi_searchContract as jest.Mock).mockRejectedValue(
       new Error("http error")
     );
 
@@ -72,6 +72,6 @@ describe("useContract", () => {
 
     await (global as any).flushPromises();
     expect(spyOnConsoleError).toHaveBeenCalled();
-    (InstanceApi_postSearchV3 as jest.Mock).mockClear();
+    (ContractCenterApi_searchContract as jest.Mock).mockClear();
   });
 });
