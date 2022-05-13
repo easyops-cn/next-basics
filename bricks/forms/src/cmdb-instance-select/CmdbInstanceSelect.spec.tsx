@@ -73,12 +73,13 @@ describe("CmdbInstanceSelect", () => {
         value="world"
         firstRender={true}
         extraSearchKey={["memo"]}
+        extraFields={["ip"]}
         permission={["read"]}
       />
     );
 
     expect(mockPostSearch.mock.calls[0][1]).toEqual({
-      fields: ["instanceId", "hostname", "memo"],
+      fields: ["instanceId", "hostname", "memo", "ip"],
       permission: ["read"],
       page_size: undefined,
       query: {

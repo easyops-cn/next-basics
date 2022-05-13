@@ -171,6 +171,18 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   extraSearchKey: string[];
 
   /**
+   * @kind string[]
+   * @required false
+   * @default -
+   * @description 配置接口需要返回的额外字段
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  extraFields: string[];
+
+  /**
    * @kind number
    * @required false
    * @default 30
@@ -318,6 +330,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             extraSearchKey={this.extraSearchKey}
+            extraFields={this.extraFields}
             pageSize={this.pageSize}
             popoverPositionType={this.popoverPositionType}
             isMultiLabel={this.isMultiLabel}
