@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.220.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.219.0...@next-bricks/forms@1.220.0) (2022-05-13)
+
+
+### Features
+
+* **cmdb-instance-select:** add extraFields property ([8e99840](https://github.com/easyops-cn/next-basics/commit/8e9984052ee89e50ce2e09ec0a167f330afeda8a))
+
+
+
+
+
 # [1.219.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.218.4...@next-bricks/forms@1.219.0) (2022-05-12)
 
 
