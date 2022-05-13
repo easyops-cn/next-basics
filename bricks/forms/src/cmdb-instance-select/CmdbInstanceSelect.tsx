@@ -33,6 +33,7 @@ export interface CmdbInstanceSelectProps extends FormItemWrapperProps {
   allowClear?: boolean;
   inputBoxStyle?: React.CSSProperties;
   extraSearchKey?: string[];
+  extraFields?: string[];
   popoverPositionType?: "default" | "parent";
   isMultiLabel?: boolean;
   showSearchTip?: boolean;
@@ -71,6 +72,7 @@ export function CmdbInstanceSelectItem(
 
     minimumInputLength = 0,
     extraSearchKey = [],
+    extraFields = [],
     mode,
     placeholder,
     allowClear,
@@ -97,6 +99,7 @@ export function CmdbInstanceSelectItem(
       fields.value,
       ...(Array.isArray(fields.label) ? fields.label : [fields.label]),
       ...extraSearchKey,
+      ...extraFields,
     ];
 
     if (props.objectId === "USER") {
