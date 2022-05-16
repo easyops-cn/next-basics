@@ -13,7 +13,12 @@ import {
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
 import { debounce, groupBy } from "lodash";
-import { setTooltip } from "./utils";
+
+export const setTooltip = (event: any) => {
+  if (event?.target?.offsetWidth < event?.target?.scrollWidth) {
+    event?.target.setAttribute("title", event.target.innerHTML);
+  }
+};
 
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
@@ -89,6 +94,10 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     props.onSearch?.(value);
     handleDebounceSearch?.(value);
   };
+  const handleMouseEnter = (e: any): void => {
+    props.onMouseEnter?.(e);
+    setTooltip(e);
+  };
   const match = (input: string, field: string) => {
     return field?.toLowerCase().includes(input.trim().toLowerCase());
   };
@@ -116,7 +125,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         className={style.itemOption}
         disabled={op.disabled}
       >
-        <div className={style.option} onMouseEnter={setTooltip}>
+        <div className={style.option} onMouseEnter={handleMouseEnter}>
           <span className={style.label}>{op.label}</span>
           {suffix
             ? suffix.useBrick &&
@@ -157,7 +166,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         mode={props.mode as "multiple" | "tags"}
         placeholder={props.placeholder}
         onChange={handleChange}
-        onMouseEnter={setTooltip}
+        onMouseEnter={handleMouseEnter}
         dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
         allowClear={props.allowClear}
         style={props.inputBoxStyle}

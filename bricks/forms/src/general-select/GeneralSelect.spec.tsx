@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import { Select } from "antd";
 import { formatOptions } from "@next-libs/forms";
 import { GeneralSelect } from "./GeneralSelect";
@@ -234,5 +234,23 @@ describe("GeneralSelect", () => {
     expect(
       wrapper.find(Select).invoke("getPopupContainer")(childElement)
     ).toEqual(parnetElement);
+  });
+
+  it("should execute mouseEnter method", () => {
+    const handleMouseEnter = jest.fn();
+
+    const wrapper = shallow(
+      <GeneralSelect
+        options={[
+          { label: "other", value: "other" },
+          { label: "one", value: "one" },
+        ]}
+        placeholder="who"
+        onMouseEnter={handleMouseEnter}
+      />
+    );
+
+    wrapper.find(Select).invoke("onMouseEnter")({} as any);
+    expect(handleMouseEnter).toBeCalled();
   });
 });
