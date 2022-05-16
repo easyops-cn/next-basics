@@ -178,7 +178,7 @@ describe("GeneralSelect", () => {
   });
 
   it("should update value", () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <GeneralSelect
         options={formatOptions(["good", "better"])}
         value="good"
@@ -216,7 +216,7 @@ describe("GeneralSelect", () => {
     expect(optGroup.find(Select.Option).length).toEqual(2);
   });
   it("popoverPositionType should work", () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <GeneralSelect
         options={[
           { label: "苹果", value: "apple" },
