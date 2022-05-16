@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import { Tree, Input } from "antd";
@@ -8,6 +8,7 @@ import {
   titleRender,
   SearchTreeProps,
   operation,
+  hightlightColor,
 } from "./SearchTree";
 import { InstanceList } from "@next-libs/cmdb-instances";
 import {
@@ -15,6 +16,7 @@ import {
   symbolForNodeInstanceId,
 } from "../shared/storyboard/buildStoryboard";
 import * as kit from "@next-core/brick-kit";
+import { StoryboardToBuild } from "../shared/storyboard/interfaces";
 
 const getWrapper = (props: SearchTreeProps) => mount(<SearchTree {...props} />);
 const baseProps: SearchTreeProps = {
@@ -24,7 +26,10 @@ const baseProps: SearchTreeProps = {
   height: 500,
   treeData: {
     projectId: "abc",
-    storyboard: {},
+    storyboard: {} as StoryboardToBuild,
+  },
+  searchContent: {
+    useBrick: undefined,
   },
 };
 
@@ -46,11 +51,42 @@ jest.spyOn(kit, "getHistory").mockReturnValue({
   createHref: () => "http://localhost/test",
 } as any);
 
+window.innerWidth = 1000;
+window.innerHeight = 500;
+
+const originalOffsetWidth = Object.getOwnPropertyDescriptor(
+  HTMLElement.prototype,
+  "offsetWidth"
+);
+const originalOffsetHeight = Object.getOwnPropertyDescriptor(
+  HTMLElement.prototype,
+  "offsetHeight"
+);
+const getBoundingClientRectSpy = jest.fn(() => ({ width: 600, height: 400 }));
+
 beforeEach(() => {
+  Object.defineProperty(HTMLElement.prototype, "clientHeight", {
+    configurable: true,
+    value: 400,
+  });
+  Object.defineProperty(HTMLElement.prototype, "getBoundingClientRect", {
+    configurable: true,
+    value: getBoundingClientRectSpy,
+  });
   jest.useFakeTimers();
 });
 afterEach(() => {
   jest.useRealTimers();
+  Object.defineProperty(
+    HTMLElement.prototype,
+    "offsetHeight",
+    originalOffsetHeight
+  );
+  Object.defineProperty(
+    HTMLElement.prototype,
+    "offsetWidth",
+    originalOffsetWidth
+  );
 });
 
 describe("SearchTree", () => {
@@ -122,7 +158,7 @@ describe("SearchTree", () => {
       wrapper.find(".ant-tree-switcher").at(0).simulate("click");
 
       expect(wrapper.find(".ant-tree-title").at(1).html()).toBe(
-        '<span class="ant-tree-title"><a href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&amp;fullscreen=1&amp;canvasIndex=0">page1</a></span>'
+        '<span class="ant-tree-title"><span>page1</span></span>'
       );
 
       expect(wrapper.find(".ant-tree-title").at(2).html()).toBe(
@@ -227,7 +263,7 @@ describe("SearchTree", () => {
           [NODE_INFO]: {
             [symbolForRealParentId]: "id-1",
           },
-        },
+        } as any,
       });
       wrapper.find(Tree).invoke("onMouseLeave")({
         event: null,
@@ -235,14 +271,13 @@ describe("SearchTree", () => {
           [NODE_INFO]: {
             [symbolForRealParentId]: "id-1",
           },
-        },
+        } as any,
       });
       expect(mockClick).toBeCalledTimes(1);
       expect(clickResult).toMatchObject({
         info: {
           [symbolForRealParentId]: "",
         },
-        url: undefined,
       });
 
       expect(mockMouseEnter).toBeCalledTimes(1);
@@ -250,14 +285,12 @@ describe("SearchTree", () => {
         info: {
           [symbolForRealParentId]: "id-1",
         },
-        url: undefined,
       });
       expect(mockMouseLeave).toBeCalledTimes(1);
       expect(leaveResult).toMatchObject({
         info: {
           [symbolForRealParentId]: "id-1",
         },
-        url: undefined,
       });
 
       wrapper.find(".ant-tree-switcher").at(0).simulate("click");
@@ -272,7 +305,6 @@ describe("SearchTree", () => {
           type: "bricks",
           [symbolForRealParentId]: "B-01",
         },
-        url: "/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0",
       });
     });
 
@@ -287,7 +319,7 @@ describe("SearchTree", () => {
           target: {
             value: "general",
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
         jest.runAllTimers();
       });
       wrapper.update();
@@ -295,10 +327,12 @@ describe("SearchTree", () => {
       expect(wrapper.html().indexOf("general-button")).toBeTruthy();
       // expect(wrapper.find('.ant-tree-title').at(0).props().children.props.style).toBe(undefined)
       expect(
-        wrapper.find(".ant-tree-title").at(3).props().children.props.style
+        (
+          wrapper.find(".ant-tree-title").at(3).props()
+            .children as React.ReactElement
+        ).props.style
       ).toEqual({
-        background: "yellow",
-        color: null,
+        color: hightlightColor,
       });
       expect(wrapper.html().indexOf("general-select")).toBeTruthy();
 
@@ -307,7 +341,7 @@ describe("SearchTree", () => {
           target: {
             value: "general-button",
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
         jest.runAllTimers();
       });
       wrapper.update();
@@ -320,7 +354,7 @@ describe("SearchTree", () => {
           target: {
             value: "",
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
         jest.runAllTimers();
       });
       wrapper.update();
@@ -333,7 +367,7 @@ describe("SearchTree", () => {
           target: {
             value: "this is a null test",
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
         jest.runAllTimers();
       });
 
@@ -355,13 +389,17 @@ describe("SearchTree", () => {
           target: {
             value: "general",
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
       });
       jest.runAllTimers();
       expect(wrapper.html().includes("general-button")).toBeTruthy();
 
       act(() => {
-        wrapper.find("GeneralIcon").at(0).props().onClick();
+        wrapper
+          .find("GeneralIcon")
+          .at(0)
+          .props()
+          .onClick({} as React.MouseEvent);
         jest.runAllTimers();
       });
       expect(wrapper.html().includes("general-button")).toBeFalsy();
@@ -372,13 +410,17 @@ describe("SearchTree", () => {
           target: {
             value: "general",
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
       });
       jest.runAllTimers();
       expect(wrapper.html().includes("general-button")).toBeTruthy();
 
       act(() => {
-        wrapper.find("GeneralIcon").at(1).props().onClick();
+        wrapper
+          .find("GeneralIcon")
+          .at(1)
+          .props()
+          .onClick({} as React.MouseEvent);
         jest.runAllTimers();
       });
       expect(wrapper.html().includes("general-button")).toBeFalsy();
@@ -389,13 +431,17 @@ describe("SearchTree", () => {
           target: {
             value: "name",
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
       });
       jest.runAllTimers();
       expect(wrapper.html().includes("tpl-test-1")).toBeTruthy();
 
       act(() => {
-        wrapper.find("GeneralIcon").at(2).props().onClick();
+        wrapper
+          .find("GeneralIcon")
+          .at(2)
+          .props()
+          .onClick({} as React.MouseEvent);
         jest.runAllTimers();
       });
       expect(wrapper.html().includes("tpl-test-1")).toBeFalsy();
@@ -407,90 +453,35 @@ describe("titleRender", () => {
   it.each([
     [
       "template",
-      Object.assign({}, baseProps, {
+      {
         nodeData: {
-          [NODE_INFO]: {
-            name: "tpl-test-1",
-            [symbolForRealParentId]: "B-01",
-          },
-          isTpl: true,
+          title: "tpl-test-1",
         },
-      }),
+      },
       /* eslint-disable react/jsx-key */
-      <a
-        style={{ background: null, color: null }}
-        href="/next-builder/project/abc/app/next-builder/template/B-01/visualize-builder?fullscreen=1"
+      <span
+        style={{
+          color: null,
+        }}
       >
         tpl-test-1
-      </a>,
+      </span>,
     ],
     [
-      "template-brick",
-      Object.assign({}, baseProps, {
+      "brick",
+      {
         nodeData: {
-          [NODE_INFO]: {
-            brick: "general-button",
-            [symbolForRealParentId]: "B-01",
-            [symbolForNodeInstanceId]: "B-02",
-          },
-          isTpl: true,
+          title: "general-button",
         },
-      }),
+      },
       /* eslint-disable react/jsx-key */
-      <a
-        style={{ background: null, color: null }}
-        href="/next-builder/project/abc/app/next-builder/template/B-01/visualize-builder?fullscreen=1&canvasIndex=0#brick,B-02"
+      <span
+        style={{
+          color: null,
+        }}
       >
         general-button
-      </a>,
-    ],
-    [
-      "page",
-      Object.assign({}, baseProps, {
-        nodeData: {
-          [NODE_INFO]: {
-            alias: "pagetest",
-            [symbolForRealParentId]: "B-01",
-          },
-        },
-      }),
-      /* eslint-disable react/jsx-key */
-      <a
-        style={{ background: null, color: null }}
-        href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0"
-      >
-        pagetest
-      </a>,
-    ],
-    [
-      "page-brick",
-      Object.assign({}, baseProps, {
-        nodeData: {
-          [NODE_INFO]: {
-            brick: "general-button",
-            [symbolForRealParentId]: "B-01",
-            [symbolForNodeInstanceId]: "B-02",
-          },
-        },
-      }),
-      /* eslint-disable react/jsx-key */
-      <a
-        style={{ background: null, color: null }}
-        href="/next-builder/project/abc/app/next-builder/visualize-builder?root=B-01&fullscreen=1&canvasIndex=0#brick,B-02"
-      >
-        general-button
-      </a>,
-    ],
-    [
-      "normal",
-      Object.assign({}, baseProps, {
-        nodeData: {
-          title: "title-test",
-          [NODE_INFO]: {},
-        },
-      }),
-      /* eslint-disable react/jsx-key */
-      <span style={{ background: null, color: null }}>title-test</span>,
+      </span>,
     ],
     [
       "hight",
@@ -502,7 +493,7 @@ describe("titleRender", () => {
         },
       }),
       /* eslint-disable react/jsx-key */
-      <span style={{ background: "yellow", color: null }}>hightlighttest</span>,
+      <span style={{ color: hightlightColor }}>hightlighttest</span>,
     ],
   ])("%s", (_condition, params, result) => {
     expect(titleRender(params)).toEqual(result);
