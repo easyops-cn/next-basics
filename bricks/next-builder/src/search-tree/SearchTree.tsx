@@ -1,4 +1,4 @@
-import _, { size } from "lodash";
+import _ from "lodash";
 import React, { useState, useEffect, useRef } from "react";
 import { cloneDeep, debounce } from "lodash";
 import { Tree, Input } from "antd";
@@ -21,6 +21,7 @@ import { BrickAsComponent } from "@next-core/brick-kit";
 import searchBoardModel from "./searchModel.json";
 import { ModelCmdbObject } from "@next-sdk/cmdb-sdk/dist/types/model/cmdb";
 import { UseBrickConf } from "@next-core/brick-types";
+import ResizeObserver from "resize-observer-polyfill";
 
 export enum operation {
   /** 等于 */
@@ -85,7 +86,7 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     titleBlur,
   } = props;
   const searchTreeRef = useRef<HTMLDivElement>(null);
-  const instanceListRef = useRef<HTMLDivElement>(null);
+  const searchWapperRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState("");
   const baseTree = buildTree(treeData?.storyboard);
   const [tree, setTree] = useState(baseTree);
@@ -266,49 +267,45 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
     );
   };
 
-  const resize = React.useCallback(() => {
-    const node = searchTreeRef.current;
-    if (!node) {
-      return;
-    }
-    const rect = node.getBoundingClientRect();
-    // 屏幕高度 - dom距离顶部距离 - 外层padding - input & instanceList高度
-    const maxHeight =
-      document.documentElement.clientHeight - rect.top - 40 - 100;
-    setMaxHeight(maxHeight);
-  }, []);
-
   useEffect(() => {
-    resize();
-    window.addEventListener("resize", resize);
+    const resizeObserver = new ResizeObserver(() => {
+      const maxHeight =
+        searchTreeRef.current.getBoundingClientRect().height -
+        searchWapperRef.current.getBoundingClientRect().height;
+      setMaxHeight(maxHeight);
+    });
+    resizeObserver.observe(searchTreeRef.current);
+    resizeObserver.observe(searchWapperRef.current);
     return () => {
-      window.removeEventListener("resize", resize);
+      resizeObserver.disconnect();
     };
-  }, [resize]);
+  }, []);
 
   useEffect(() => {
     setTree(buildTree(treeData?.storyboard));
   }, [treeData]);
 
   return (
-    <div ref={searchTreeRef}>
-      <Input
-        placeholder="输入关键字搜索StoryBoard"
-        value={value}
-        onChange={handleFilterChange}
-        suffix={renderInputSuffixIcon()}
-      />
-      <div ref={instanceListRef} style={{ marginTop: 10 }}>
-        <InstanceList
-          searchDisabled
-          hideInstanceList
-          relatedToMeDisabled
-          showHiddenInfoDisabled
-          objectId={searchBoardModel.objectId}
-          objectList={[searchBoardModel as ModelCmdbObject]}
-          disabledDefaultFields
-          autoSearch={handleAutoSearch}
+    <div ref={searchTreeRef} style={{ height: "100%" }}>
+      <div ref={searchWapperRef}>
+        <Input
+          placeholder="输入关键字搜索StoryBoard"
+          value={value}
+          onChange={handleFilterChange}
+          suffix={renderInputSuffixIcon()}
         />
+        <div style={{ marginTop: 10 }}>
+          <InstanceList
+            searchDisabled
+            hideInstanceList
+            relatedToMeDisabled
+            showHiddenInfoDisabled
+            objectId={searchBoardModel.objectId}
+            objectList={[searchBoardModel as ModelCmdbObject]}
+            disabledDefaultFields
+            autoSearch={handleAutoSearch}
+          />
+        </div>
       </div>
       {tree.length ? (
         <div className={className(styles.searchWrapper)}>
