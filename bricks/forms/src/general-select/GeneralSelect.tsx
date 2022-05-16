@@ -5,18 +5,18 @@ import {
   EasyopsEmpty,
   EasyopsEmptyProps,
 } from "@next-core/brick-kit";
-import { Select, Tooltip } from "antd";
+import { Select } from "antd";
 import {
   FormItemWrapper,
   FormItemWrapperProps,
   GeneralComplexOption,
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
-import { debounce, groupBy, isNil } from "lodash";
+import { debounce, groupBy } from "lodash";
+import { setTooltip } from "./utils";
 
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
-  optionTooltip?: boolean;
   groupBy?: string;
   mode?: string;
   placeholder?: string;
@@ -116,26 +116,21 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         className={style.itemOption}
         disabled={op.disabled}
       >
-        <Tooltip title={props.optionTooltip ? op.label : ""}>
-          <div className={style.option}>
-            <span className={style.label}>{op.label}</span>
-            {suffix
-              ? suffix.useBrick &&
-                showSuffix(op) && (
-                  <div className={style.suffixContainer} style={suffixStyle}>
-                    <BrickAsComponent useBrick={suffix.useBrick} data={op} />
-                  </div>
-                )
-              : suffixBrick && (
-                  <div
-                    className={style.suffixContainer}
-                    style={suffixBrickStyle}
-                  >
-                    <BrickAsComponent useBrick={suffixBrick} data={op} />
-                  </div>
-                )}
-          </div>
-        </Tooltip>
+        <div className={style.option} onMouseEnter={setTooltip}>
+          <span className={style.label}>{op.label}</span>
+          {suffix
+            ? suffix.useBrick &&
+              showSuffix(op) && (
+                <div className={style.suffixContainer} style={suffixStyle}>
+                  <BrickAsComponent useBrick={suffix.useBrick} data={op} />
+                </div>
+              )
+            : suffixBrick && (
+                <div className={style.suffixContainer} style={suffixBrickStyle}>
+                  <BrickAsComponent useBrick={suffixBrick} data={op} />
+                </div>
+              )}
+        </div>
       </Select.Option>
     ));
   };
