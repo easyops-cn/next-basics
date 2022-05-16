@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.150.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.149.3...@next-bricks/next-builder@1.150.0) (2022-05-16)
+
+
+### Features
+
+* **SearchTree:**  add ResizeObserver ([cbc3017](https://github.com/easyops-cn/next-basics/commit/cbc30177132687f355e2434777f07c1cadf9815c))
+* **SearchTree:**  update high light color ([f336b9e](https://github.com/easyops-cn/next-basics/commit/f336b9e6ea00e97d1b86586383e2bb888672674b))
+* **SearchTree:**  update ref size ([9e98a06](https://github.com/easyops-cn/next-basics/commit/9e98a066acc618522e236e5d803cf05d92f0813b))
+
+
+
+
+
 ## [1.149.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.149.2...@next-bricks/next-builder@1.149.3) (2022-05-13)
 
 
