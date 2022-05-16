@@ -157,6 +157,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         mode={props.mode as "multiple" | "tags"}
         placeholder={props.placeholder}
         onChange={handleChange}
+        onMouseEnter={setTooltip}
         dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
         allowClear={props.allowClear}
         style={props.inputBoxStyle}
