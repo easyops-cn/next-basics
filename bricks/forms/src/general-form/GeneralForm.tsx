@@ -74,7 +74,7 @@ export function LegacyGeneralForm({
         className="form-wrap"
         layout={layout}
         style={{
-          ...(maxWidthLimited ? { maxWidth: 1332 } : undefined),
+          ...(maxWidthLimited ? { maxWidth: 800 } : undefined),
           ...formStyle,
         }}
       >
