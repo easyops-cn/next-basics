@@ -11,6 +11,7 @@ export interface WorkbenchActionProps {
   tooltip?: string;
   to?: string;
   href?: string;
+  target?: string;
   active?: boolean;
   linkClick?: (e: React.MouseEvent) => void;
 }
@@ -20,6 +21,7 @@ export function WorkbenchAction({
   tooltip,
   to,
   href,
+  target,
   active,
   linkClick,
 }: WorkbenchActionProps): React.ReactElement {
@@ -32,7 +34,7 @@ export function WorkbenchAction({
         href={href}
         noEmptyHref
         onClick={linkClick}
-        target={href ? "_blank" : "_self"}
+        target={target}
       >
         <GeneralIcon icon={icon} size={24} />
       </Link>

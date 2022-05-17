@@ -13,6 +13,7 @@ describe("WorkbenchAction", () => {
           icon: "search",
         }}
         to="/abc"
+        target="_self"
         linkClick={mockClick}
       />
     );
@@ -27,18 +28,5 @@ describe("WorkbenchAction", () => {
 
     wrapper.find("Link").at(0).simulate("click");
     expect(mockClick).toBeCalledTimes(1);
-
-    const wrapper2 = shallow(
-      <WorkbenchAction
-        icon={{
-          lib: "antd",
-          theme: "outlined",
-          icon: "search",
-        }}
-        href="http://www.abc.com"
-      />
-    );
-
-    expect(wrapper2.find("Link").prop("target")).toBe("_blank");
   });
 });

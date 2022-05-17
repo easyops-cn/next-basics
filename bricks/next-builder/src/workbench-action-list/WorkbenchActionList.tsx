@@ -60,6 +60,7 @@ export function WorkbenchActionList(
                 tooltip={item.text}
                 to={url as string}
                 href={item.href}
+                target={item.target}
                 active={activeIndex === index}
                 linkClick={() => handleLinkClick(item)}
               />
