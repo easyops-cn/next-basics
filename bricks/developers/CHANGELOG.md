@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.354.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.3...@next-bricks/developers@1.354.0) (2022-05-17)
+
+
+### Features
+
+* **Preview:**  preview support dark theme ([1549bed](https://github.com/easyops-cn/next-basics/commit/1549bedf67664a6e5f8794e7f303f8fb67a3f26e))
+
+
+
+
+
 ## [1.353.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.2...@next-bricks/developers@1.353.3) (2022-05-07)
 
 **Note:** Version bump only for package @next-bricks/developers
