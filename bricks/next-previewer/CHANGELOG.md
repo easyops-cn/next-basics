@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.3.0...@next-bricks/next-previewer@1.4.0) (2022-05-17)
+
+
+### Features
+
+* support capturing preview screenshot ([fd92838](https://github.com/easyops-cn/next-basics/commit/fd928388cb71d0cfb9ce97496a1c381725634ccd))
+
+
+
+
+
 # [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.2.1...@next-bricks/next-previewer@1.3.0) (2022-04-25)
 
 

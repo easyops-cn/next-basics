@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/utils@1.0.3...@next-bricks/utils@1.1.0) (2022-05-17)
+
+
+### Features
+
+* support capturing preview screenshot ([fd92838](https://github.com/easyops-cn/next-basics/commit/fd928388cb71d0cfb9ce97496a1c381725634ccd))
+
+
+
+
+
 ## [1.0.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/utils@1.0.2...@next-bricks/utils@1.0.3) (2022-04-06)
 
 

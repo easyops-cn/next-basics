@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.6.0...@next-types/preview@1.7.0) (2022-05-17)
+
+
+### Features
+
+* support capturing preview screenshot ([fd92838](https://github.com/easyops-cn/next-basics/commit/fd928388cb71d0cfb9ce97496a1c381725634ccd))
+
+
+
+
+
 # [1.6.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.5.1...@next-types/preview@1.6.0) (2022-04-25)
 
 

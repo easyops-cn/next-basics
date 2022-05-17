@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.151.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.150.0...@next-bricks/next-builder@1.151.0) (2022-05-17)
+
+
+### Features
+
+* support capturing preview screenshot ([fd92838](https://github.com/easyops-cn/next-basics/commit/fd928388cb71d0cfb9ce97496a1c381725634ccd))
+* **workbench-quick-entry:** support thumbnails ([7af4582](https://github.com/easyops-cn/next-basics/commit/7af45827f9e6bb53189d1d2aa0364a6c930406c1))
+
+
+
+
+
 # [1.150.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.149.3...@next-bricks/next-builder@1.150.0) (2022-05-16)
 
 
