@@ -39,21 +39,8 @@ export function WorkbenchActionList(
     setActiveIndex(Number(selectedKeys[0]));
   }, [menu, location]);
 
-  const handleLinkClick = (
-    e: React.MouseEvent,
-    item: SidebarMenuSimpleItem,
-    index: number
-  ): void => {
-    e.preventDefault();
-    if (item.href) {
-      window.open(item.href, "_blank");
-    } else {
-      if (activeIndex !== index && historyMap.has(index)) {
-        history.push(historyMap.get(index));
-      } else {
-        history.push(item.to);
-      }
-    }
+  const handleLinkClick = (item: SidebarMenuSimpleItem): void => {
+    if (item.href) return;
     historyMap.set(activeIndex, `${location.pathname}${location.search}`);
   };
 
@@ -62,14 +49,19 @@ export function WorkbenchActionList(
       {menu?.menuItems
         ?.map((item, index) => {
           if (item.type === "default") {
+            let url = item.to;
+            if (activeIndex !== index && historyMap.has(index)) {
+              url = historyMap.get(index);
+            }
             return (
               <WorkbenchAction
                 key={index}
                 icon={item.icon}
                 tooltip={item.text}
-                to={(item.to || item.href) as string}
+                to={url as string}
+                href={item.href}
                 active={activeIndex === index}
-                linkClick={(e) => handleLinkClick(e, item, index)}
+                linkClick={() => handleLinkClick(item)}
               />
             );
           }
