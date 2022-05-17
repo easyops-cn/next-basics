@@ -1,7 +1,10 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { fireEvent, render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { createHistory } from "@next-core/brick-kit";
 import { WorkbenchQuickEntry } from "./WorkbenchQuickEntry";
-import { GeneralIcon, Link } from "@next-libs/basic-components";
+
+createHistory();
 
 const mockData = [
   {
@@ -31,7 +34,7 @@ const mockMoreClickFn = jest.fn();
 
 describe("WorkbenchQuickEntry", () => {
   it("should work", () => {
-    const wrapper = shallow(
+    render(
       <WorkbenchQuickEntry
         entryTitle="快速入口"
         entryList={[
@@ -52,17 +55,19 @@ describe("WorkbenchQuickEntry", () => {
       />
     );
 
-    expect(wrapper.find(".title").at(0).text()).toBe("快速入口");
-    expect(wrapper.find(Link).children().at(0).text()).toBe("入口一");
-    expect(wrapper.find(Link).length).toBe(2);
-    expect(wrapper.find(GeneralIcon).length).toBe(1);
+    expect(document.querySelector(".title")).toHaveTextContent("快速入口");
+    expect(document.querySelectorAll("a").length).toBe(2);
+    expect(document.querySelectorAll("a")[0]).toHaveTextContent("入口一");
+    expect(document.querySelectorAll("a")[1]).toHaveTextContent("入口二");
+
+    expect(screen.queryByRole("img").dataset.icon).toEqual("copy");
   });
 
   it("should hidden more button", () => {
-    const wrapper = mount(
+    render(
       <WorkbenchQuickEntry
         entryTitle="最近访问"
-        isShowMoreButton
+        showMoreButton
         moreButtonText="更多"
         onMoreButtonClick={mockMoreClickFn}
         history={{
@@ -75,15 +80,18 @@ describe("WorkbenchQuickEntry", () => {
       />
     );
 
-    expect(wrapper.find(Link).children().at(0).text()).toBe("访问记录1");
+    expect(document.querySelectorAll("a").length).toBe(2);
+    expect(document.querySelectorAll("a")[0]).toHaveTextContent("访问记录1");
+    expect(document.querySelectorAll("a")[1]).toHaveTextContent("访问记录2");
 
+    expect(screen.queryByRole("button")).toHaveTextContent("更多");
     expect(mockMoreClickFn).toBeCalledTimes(0);
-    wrapper.find(".moreButton").at(0).simulate("click");
+    fireEvent.click(screen.queryByRole("button"));
     expect(mockMoreClickFn).toBeCalledTimes(1);
   });
 
   it("should delete item", () => {
-    const wrapper = mount(
+    render(
       <WorkbenchQuickEntry
         entryTitle="最近访问"
         history={{
@@ -102,6 +110,35 @@ describe("WorkbenchQuickEntry", () => {
       />
     );
 
-    expect(wrapper.find(Link).children().at(0).text()).toBe("访问记录2");
+    expect(document.querySelectorAll("a").length).toBe(1);
+    expect(document.querySelectorAll("a")[0]).toHaveTextContent("访问记录2");
+  });
+
+  it("should show thumbnails", () => {
+    render(
+      <WorkbenchQuickEntry
+        entryTitle="最近"
+        showThumbnails
+        entryList={[
+          {
+            text: "一",
+            to: "/1",
+          },
+          {
+            text: "二",
+            to: "/2",
+            thumbnail: "data:image/png;base64",
+          },
+        ]}
+      />
+    );
+
+    expect(document.querySelector(".quickEntryWrapper").classList).toContain(
+      "showThumbnails"
+    );
+    expect(screen.queryAllByRole("img")[0].dataset.icon).toEqual("picture");
+    expect((screen.queryAllByRole("img")[1] as HTMLImageElement).src).toEqual(
+      "data:image/png;base64"
+    );
   });
 });
