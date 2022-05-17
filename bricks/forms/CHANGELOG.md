@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.221.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.220.0...@next-bricks/forms@1.221.0) (2022-05-17)
+
+
+### Bug Fixes
+
+* **general-select:** 增加方法的ts类型限制 ([a597450](https://github.com/easyops-cn/next-basics/commit/a59745077645d2192c281ddc00e564b0a917380b))
+
+
+### Features
+
+* **general-select:** 根据选项内容长度情况支持tooltip ([7d81fd9](https://github.com/easyops-cn/next-basics/commit/7d81fd9bf125fe85b3f9b5191836dd45316c7f40))
+* **general-select:** 根据选项内容长度情况支持tooltip ([8814753](https://github.com/easyops-cn/next-basics/commit/88147537d971164cfcb95799e392a98bdd5231f4))
+* **general-select:** 根据选项内容长度情况支持tooltip ([6a05905](https://github.com/easyops-cn/next-basics/commit/6a05905a7de8d757e760307dd49f7f6e63532e49))
+
+
+
+
+
 # [1.220.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.219.0...@next-bricks/forms@1.220.0) (2022-05-13)
 
 
