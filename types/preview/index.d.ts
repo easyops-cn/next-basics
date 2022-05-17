@@ -37,14 +37,17 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
   | PreviewMessagePreviewerRouteMatchChange
-  | PreviewMessagePreviewerScroll;
+  | PreviewMessagePreviewerScroll
+  | PreviewMessagePreviewerCaptureOk
+  | PreviewMessagePreviewerCaptureFailed;
 
 export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerBuilderSelectBrick
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerRefresh
-  | PreviewMessageContainerReload;
+  | PreviewMessageContainerReload
+  | PreviewMessageContainerCapture;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnBrick
@@ -53,7 +56,8 @@ export type PreviewMessageFromContainer =
   | PreviewMessageContainerPreviewerContextMenuOnBrick
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload
-  | PreviewMessageContainerResize;
+  | PreviewMessageContainerResize
+  | PreviewMessageContainerCapture;
 
 export type PreviewMessageToContainer =
   | PreviewMessageBuilderHoverOnBrick
@@ -65,7 +69,9 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
   | PreviewMessagePreviewerRouteMatchChange
-  | PreviewMessagePreviewerScroll;
+  | PreviewMessagePreviewerScroll
+  | PreviewMessagePreviewerCaptureOk
+  | PreviewMessagePreviewerCaptureFailed;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnBrick
@@ -134,6 +140,18 @@ export interface PreviewMessagePreviewerScroll extends PreviewBaseMessage {
   };
 }
 
+export interface PreviewMessagePreviewerCaptureOk extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "capture-ok";
+  screenshot: string;
+}
+
+export interface PreviewMessagePreviewerCaptureFailed
+  extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "capture-failed";
+}
+
 export interface PreviewMessageContainerStartPreview
   extends PreviewBaseMessage {
   sender: "preview-container";
@@ -164,6 +182,13 @@ export interface PreviewMessageContainerReload extends PreviewBaseMessage {
 export interface PreviewMessageContainerResize extends PreviewBaseMessage {
   sender: "preview-container";
   type: "resize";
+}
+
+export interface PreviewMessageContainerCapture extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "capture";
+  maxWidth: number;
+  maxHeight: number;
 }
 
 export interface PreviewMessageContainerBuilderHoverOnBrick

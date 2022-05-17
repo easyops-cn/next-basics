@@ -30,6 +30,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-types/preview": "^1.6.0"
+    "@next-types/preview": "^1.6.0",
+    "html2canvas": "^1.4.1"
   }
 }

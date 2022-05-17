@@ -1,4 +1,5 @@
 import * as kit from "@next-core/brick-kit";
+import { capture } from "./capture";
 import {
   setPreviewFromOrigin,
   startInspecting,
@@ -7,6 +8,7 @@ import {
 import { previewStart } from "./previewStart";
 
 jest.mock("./inspector");
+jest.mock("./capture");
 
 const historyListeners = new Set<(loc: string) => void>();
 const history = {
@@ -35,6 +37,8 @@ jest
   .spyOn(kit.developHelper, "updateTemplatePreviewSettings")
   .mockImplementation();
 
+const mockCapture = capture as jest.Mock;
+
 delete window.location;
 window.location = {
   origin: "http://localhost",
@@ -55,7 +59,7 @@ brick.dataset.iid = "i-01";
 document.body.appendChild(brick);
 
 describe("previewStart", () => {
-  it("should work", () => {
+  it("should work", async () => {
     previewStart("http://localhost:8081", {
       routePath: "/a",
       routeExact: true,
@@ -289,5 +293,52 @@ describe("previewStart", () => {
       }
     );
     expect(history.reload).toBeCalledTimes(3);
+
+    mockCapture.mockResolvedValueOnce("data:image/png;base64");
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "capture",
+        maxWidth: 200,
+        maxHeight: 150,
+      },
+    } as any);
+    expect(capture).toHaveBeenNthCalledWith(1, 200, 150);
+    expect(parentPostMessage).toBeCalledTimes(8);
+    await (global as any).flushPromises();
+    expect(parentPostMessage).toBeCalledTimes(9);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      9,
+      {
+        sender: "previewer",
+        type: "capture-ok",
+        screenshot: "data:image/png;base64",
+      },
+      "http://localhost:8081"
+    );
+
+    mockCapture.mockRejectedValueOnce(null);
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "capture",
+        maxWidth: 400,
+        maxHeight: 300,
+      },
+    } as any);
+    expect(capture).toHaveBeenNthCalledWith(2, 400, 300);
+    expect(parentPostMessage).toBeCalledTimes(9);
+    await (global as any).flushPromises();
+    expect(parentPostMessage).toBeCalledTimes(10);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      10,
+      {
+        sender: "previewer",
+        type: "capture-failed",
+      },
+      "http://localhost:8081"
+    );
   });
 });
