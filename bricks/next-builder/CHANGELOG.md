@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.152.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.151.0...@next-bricks/next-builder@1.152.0) (2022-05-17)
+
+
+### Features
+
+* **WorkBenchActionList:** support history record ([94282e0](https://github.com/easyops-cn/next-basics/commit/94282e0ee6e45c390bdc875b2a3a65e1332891c7))
+* **WorkBenchActionList:** update code ([d38457b](https://github.com/easyops-cn/next-basics/commit/d38457b018e55a7f5457c92a9793eaf3143ff527))
+* **WorkBenchActionList:** update rule ([9b91832](https://github.com/easyops-cn/next-basics/commit/9b918322628bff49e22f6efbf46d0933ac1277ec))
+
+
+
+
+
 # [1.151.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.150.0...@next-bricks/next-builder@1.151.0) (2022-05-17)
 
 
