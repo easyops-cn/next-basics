@@ -11,6 +11,7 @@ export interface WorkbenchActionProps {
   tooltip?: string;
   to?: string;
   active?: boolean;
+  linkClick?: (e: React.MouseEvent) => void;
 }
 
 export function WorkbenchAction({
@@ -18,6 +19,7 @@ export function WorkbenchAction({
   tooltip,
   to,
   active,
+  linkClick,
 }: WorkbenchActionProps): React.ReactElement {
   return (
     <Tooltip title={tooltip} placement="right">
@@ -26,6 +28,7 @@ export function WorkbenchAction({
         role="button"
         to={to}
         noEmptyHref
+        onClick={linkClick}
       >
         <GeneralIcon icon={icon} size={24} />
       </Link>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SidebarSubMenu } from "@next-core/brick-types";
+import { SidebarSubMenu, SidebarMenuSimpleItem } from "@next-core/brick-types";
 import { WorkbenchAction } from "../workbench-action/WorkbenchAction";
 import styles from "./WorkbenchActionList.module.css";
 import { getHistory } from "@next-core/brick-kit";
@@ -9,6 +9,8 @@ import { initMenuItemAndMatchCurrentPathKeys } from "@next-libs/basic-components
 interface WorkbenchActionListProps {
   menu: SidebarSubMenu;
 }
+
+const historyMap = new Map<number, string>();
 
 export function WorkbenchActionList(
   props: WorkbenchActionListProps
@@ -37,6 +39,24 @@ export function WorkbenchActionList(
     setActiveIndex(Number(selectedKeys[0]));
   }, [menu, location]);
 
+  const handleLinkClick = (
+    e: React.MouseEvent,
+    item: SidebarMenuSimpleItem,
+    index: number
+  ): void => {
+    e.preventDefault();
+    if (item.href) {
+      window.open(item.href, "_blank");
+    } else {
+      if (activeIndex !== index && historyMap.has(index)) {
+        history.push(historyMap.get(index));
+      } else {
+        history.push(item.to);
+      }
+    }
+    historyMap.set(activeIndex, `${location.pathname}${location.search}`);
+  };
+
   return (
     <div className={styles.workBenchActionList}>
       {menu?.menuItems
@@ -49,6 +69,7 @@ export function WorkbenchActionList(
                 tooltip={item.text}
                 to={(item.to || item.href) as string}
                 active={activeIndex === index}
+                linkClick={(e) => handleLinkClick(e, item, index)}
               />
             );
           }

@@ -4,6 +4,7 @@ import { WorkbenchAction } from "./WorkbenchAction";
 
 describe("WorkbenchAction", () => {
   it("should work", () => {
+    const mockClick = jest.fn();
     const wrapper = shallow(
       <WorkbenchAction
         icon={{
@@ -11,6 +12,7 @@ describe("WorkbenchAction", () => {
           theme: "outlined",
           icon: "search",
         }}
+        linkClick={mockClick}
       />
     );
     expect(wrapper.find(".action").hasClass("active")).toBe(false);
@@ -19,5 +21,8 @@ describe("WorkbenchAction", () => {
       active: true,
     });
     expect(wrapper.find(".action").hasClass("active")).toBe(true);
+
+    wrapper.find("Link").at(0).simulate("click");
+    expect(mockClick).toBeCalledTimes(1);
   });
 });
