@@ -242,8 +242,8 @@ export class GeneralFormElement
    * @default `false`
    * @group advanced
    */
-  @property({ type: Boolean })
-  maxWidthLimited: boolean;
+  @property({ attribute: false })
+  maxWidthLimited = true;
 
   /**
    * @description 表单达到最大宽度后的对齐方式
