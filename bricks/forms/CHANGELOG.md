@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.221.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.221.0...@next-bricks/forms@1.221.1) (2022-05-17)
+
+
+### Bug Fixes
+
+* **general-forms:** 修改forms默认最大宽度 ([040e7d2](https://github.com/easyops-cn/next-basics/commit/040e7d22e9a8715ff1b5a122e6346047ed3cf60b))
+* **general-forms:** 修改froms的maxwidth ([d8d6542](https://github.com/easyops-cn/next-basics/commit/d8d6542b9d566c35991e8f47ac8efa93119c3559))
+
+
+
+
+
 # [1.221.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.220.0...@next-bricks/forms@1.221.0) (2022-05-17)
 
 
