@@ -8,9 +8,13 @@ import {
   UpdatingElement,
   method,
 } from "@next-core/brick-kit";
-import type { BuilderRouteNode, Storyboard } from "@next-core/brick-types";
+import type { BuilderSnippetNode, Storyboard } from "@next-core/brick-types";
 import { PreviewSettings } from "@next-types/preview";
-import { PreviewContainer, type PreviewContainerRef } from "./PreviewContainer";
+import {
+  CaptureStatus,
+  PreviewContainer,
+  type PreviewContainerRef,
+} from "./PreviewContainer";
 
 /**
  * @id next-builder.preview-container
@@ -33,7 +37,7 @@ export class PreviewContainerElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  snippetGraphData: BuilderRouteNode[];
+  snippetGraphData: BuilderSnippetNode[];
 
   @property()
   routePath: string;
@@ -52,6 +56,12 @@ export class PreviewContainerElement extends UpdatingElement {
 
   @property({ type: Number })
   viewportHeight: number;
+
+  @property({ type: Number })
+  screenshotMaxWidth: number;
+
+  @property({ type: Number })
+  screenshotMaxHeight: number;
 
   @event({ type: "preview.start" })
   private _previewStartEvent: EventEmitter<void>;
@@ -81,6 +91,20 @@ export class PreviewContainerElement extends UpdatingElement {
     this._routeMatchEvent.emit(match);
   };
 
+  @event({ type: "captureStatus.change" })
+  private _captureStatusChangeEvent: EventEmitter<CaptureStatus>;
+
+  private _handleCaptureStatusChange = (status: CaptureStatus): void => {
+    this._captureStatusChangeEvent.emit(status);
+  };
+
+  @event({ type: "screenshot.capture" })
+  private _screenshotCaptureEvent: EventEmitter<string>;
+
+  private _handleScreenshotCapture = (screenshot: string): void => {
+    this._screenshotCaptureEvent.emit(screenshot);
+  };
+
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
@@ -95,6 +119,11 @@ export class PreviewContainerElement extends UpdatingElement {
   @method()
   reload(): void {
     this._previewContainerRef.current.reload();
+  }
+
+  @method()
+  capture(): void {
+    this._previewContainerRef.current.capture();
   }
 
   connectedCallback(): void {
@@ -127,10 +156,14 @@ export class PreviewContainerElement extends UpdatingElement {
             inspecting={this.inspecting}
             viewportWidth={this.viewportWidth}
             viewportHeight={this.viewportHeight}
+            screenshotMaxWidth={this.screenshotMaxWidth}
+            screenshotMaxHeight={this.screenshotMaxHeight}
             onPreviewStart={this._handlePreviewStart}
             onUrlChange={this._handleUrlChange}
             onScaleChange={this._handleScaleChange}
             onRouteMatch={this._handleRouteMatch}
+            onCaptureStatusChange={this._handleCaptureStatusChange}
+            onScreenshotCapture={this._handleScreenshotCapture}
           />
         </BrickWrapper>,
         this

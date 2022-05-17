@@ -39,11 +39,17 @@ export interface PreviewContainerProps {
   viewportWidth?: number;
   viewportHeight?: number;
   previewOnNewWindow?: boolean;
+  screenshotMaxWidth?: number;
+  screenshotMaxHeight?: number;
   onPreviewStart?(): void;
   onUrlChange?(url: string): void;
   onScaleChange?(scale: number): void;
   onRouteMatch?(match: boolean): void;
+  onCaptureStatusChange?(status: CaptureStatus): void;
+  onScreenshotCapture?(screenshot: string): void;
 }
+
+export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
 
 export interface PreviewContainerRef {
   refresh(
@@ -52,6 +58,7 @@ export interface PreviewContainerRef {
     options: Record<string, unknown>
   ): void;
   reload(): void;
+  capture(): void;
 }
 
 function sendToggleInspecting(
@@ -82,10 +89,14 @@ export function LegacyPreviewContainer(
     viewportWidth,
     viewportHeight,
     previewOnNewWindow,
+    screenshotMaxWidth,
+    screenshotMaxHeight,
     onPreviewStart,
     onUrlChange,
     onScaleChange,
     onRouteMatch,
+    onCaptureStatusChange,
+    onScreenshotCapture,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -95,6 +106,7 @@ export function LegacyPreviewContainer(
   const [scaleY, setScaleY] = useState(1);
   const minScale = Math.min(scaleX, scaleY, 1);
   const [routeMatch, setRouteMatch] = useState(true);
+  const [captureStatus, setCaptureStatus] = useState<CaptureStatus>("idle");
 
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
@@ -242,6 +254,19 @@ export function LegacyPreviewContainer(
     setActiveOutlines([]);
   }, [previewOrigin]);
 
+  const capture = useCallback(() => {
+    setCaptureStatus("capturing");
+    iframeRef.current.contentWindow.postMessage(
+      {
+        sender: "preview-container",
+        type: "capture",
+        maxWidth: screenshotMaxWidth,
+        maxHeight: screenshotMaxHeight,
+      } as PreviewMessageFromContainer,
+      previewOrigin
+    );
+  }, [previewOrigin, screenshotMaxHeight, screenshotMaxWidth]);
+
   const handleUrlChange = useCallback(
     (url: string) => {
       onUrlChange?.(url);
@@ -252,6 +277,7 @@ export function LegacyPreviewContainer(
   useImperativeHandle(ref, () => ({
     refresh,
     reload,
+    capture,
   }));
 
   useEffect(() => {
@@ -329,6 +355,13 @@ export function LegacyPreviewContainer(
             setRouteMatch(data.match);
             onRouteMatch?.(data.match);
             break;
+          case "capture-ok":
+            setCaptureStatus("ok");
+            onScreenshotCapture(data.screenshot);
+            break;
+          case "capture-failed":
+            setCaptureStatus("failed");
+            break;
         }
       }
     };
@@ -345,6 +378,7 @@ export function LegacyPreviewContainer(
     sameOriginWithOpener,
     scaleX,
     inspecting,
+    onScreenshotCapture,
   ]);
 
   useEffect(() => {
@@ -405,6 +439,12 @@ export function LegacyPreviewContainer(
   useEffect(() => {
     onScaleChange?.(minScale);
   }, [minScale, onScaleChange]);
+
+  useEffect(() => {
+    if (captureStatus !== "idle") {
+      onCaptureStatusChange?.(captureStatus);
+    }
+  }, [captureStatus, onCaptureStatusChange]);
 
   return (
     <div

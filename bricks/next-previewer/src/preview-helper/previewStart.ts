@@ -4,6 +4,8 @@ import { matchPath } from "@next-core/brick-utils";
 import type {
   BrickOutline,
   PreviewMessageFromPreviewer,
+  PreviewMessagePreviewerCaptureFailed,
+  PreviewMessagePreviewerCaptureOk,
   PreviewMessagePreviewerHighlightBrick,
   PreviewMessagePreviewerRouteMatchChange,
   PreviewMessagePreviewerScroll,
@@ -13,6 +15,7 @@ import type {
   PreviewStartOptions,
 } from "@next-types/preview";
 import { throttle } from "lodash";
+import { capture } from "./capture";
 import {
   setPreviewFromOrigin,
   startInspecting,
@@ -129,6 +132,21 @@ export function previewStart(
             break;
           case "reload":
             location.reload();
+            break;
+          case "capture":
+            capture(data.maxWidth, data.maxHeight).then(
+              (screenshot) => {
+                sendMessage<PreviewMessagePreviewerCaptureOk>({
+                  type: "capture-ok",
+                  screenshot,
+                });
+              },
+              () => {
+                sendMessage<PreviewMessagePreviewerCaptureFailed>({
+                  type: "capture-failed",
+                });
+              }
+            );
             break;
         }
     }
