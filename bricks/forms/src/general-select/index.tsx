@@ -360,11 +360,6 @@ export class GeneralSelectElement extends FormItemElement {
    */
   @event({ type: "general.select.blur" }) blurEvent: EventEmitter;
   /**
-   * @detail `null`
-   * @description 鼠标进入时触发
-   */
-  @event({ type: "general.select.mouseEnter" }) mouseEnterEvent: EventEmitter;
-  /**
    * @detail `any`
    * @description 搜索时被触发，`event.detail` 为当前选择项的值
    */
@@ -393,10 +388,6 @@ export class GeneralSelectElement extends FormItemElement {
 
   private _handleFocus = (): void => {
     this.focusEvent.emit();
-  };
-
-  private _handleMouseEnter = (): void => {
-    this.mouseEnterEvent.emit();
   };
 
   private _handleBlur = (): void => {
@@ -446,7 +437,6 @@ export class GeneralSelectElement extends FormItemElement {
             onFocus={this._handleFocus}
             onBlur={this._handleBlur}
             onSearch={this._handleSearch}
-            onMouseEnter={this._handleMouseEnter}
             onDebounceSearch={this._handleDebounceSearch}
             debounceSearchDelay={this.debounceSearchDelay}
             helpBrick={this.helpBrick}
