@@ -88,18 +88,6 @@ export class GeneralSelectElement extends FormItemElement {
   /**
    * @kind boolean
    * @required false
-   * @default false
-   * @description 选项提示
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  optionTooltip = false;
-
-  /**
-   * @kind boolean
-   * @required false
    * @default -
    * @description 是否必填项
    */
@@ -425,7 +413,6 @@ export class GeneralSelectElement extends FormItemElement {
             formElement={this.getFormElement()}
             name={this.name}
             options={options}
-            optionTooltip={this.optionTooltip}
             groupBy={this.groupBy}
             label={this.label}
             labelTooltip={this.labelTooltip}
