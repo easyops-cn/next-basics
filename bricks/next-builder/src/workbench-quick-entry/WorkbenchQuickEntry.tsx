@@ -7,11 +7,13 @@ import { VisitHistory } from "@next-libs/visit-history";
 
 import styles from "./WorkbenchQuickEntry.module.css";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
+import classNames from "classnames";
 
 export interface listItem {
   icon?: MenuIcon;
   text: string;
   to: string;
+  thumbnail?: string;
 }
 
 export interface historyProps {
@@ -28,25 +30,32 @@ export interface historyProps {
 interface WorkbenchQuickEntryProps {
   entryTitle: string;
   entryList?: Array<listItem>;
+  showThumbnails?: boolean;
+  thumbnailWidth?: number;
+  thumbnailHeight?: number;
   moreButtonText?: string;
-  onMoreButtonClick?: () => void;
-  isShowMoreButton?: boolean;
+  showMoreButton?: boolean;
   history?: historyProps;
+  onMoreButtonClick?: () => void;
 }
 
-export function WorkbenchQuickEntry(
-  props: WorkbenchQuickEntryProps
-): React.ReactElement {
-  const {
-    entryTitle,
-    entryList,
-    history,
-    moreButtonText,
-    isShowMoreButton,
-    onMoreButtonClick,
-  } = props;
+export function WorkbenchQuickEntry({
+  entryTitle,
+  entryList,
+  history,
+  moreButtonText,
+  showMoreButton,
+  showThumbnails,
+  thumbnailWidth,
+  thumbnailHeight,
+  onMoreButtonClick,
+}: WorkbenchQuickEntryProps): React.ReactElement {
   const [list, setList] = useState(entryList);
   const { t } = useTranslation(NS_NEXT_BUILDER);
+
+  useEffect(() => {
+    setList(entryList);
+  }, [entryList]);
 
   useEffect(() => {
     if (history) {
@@ -86,26 +95,79 @@ export function WorkbenchQuickEntry(
   }, [history]);
 
   return (
-    <div className={styles.quickEntryWrapper}>
+    <div
+      className={classNames(styles.quickEntryWrapper, {
+        [styles.showThumbnails]: showThumbnails,
+      })}
+    >
       <div className={styles.title}>{entryTitle}</div>
       <div className={styles.entryList}>
-        {list?.map((item, index) => {
-          return (
-            <Link to={item.to} key={index}>
-              {item.icon && <GeneralIcon icon={item.icon} />}
-              {item.text}
-            </Link>
-          );
-        })}
+        {list?.map((item, index) => (
+          <QuickEntryItem
+            item={item}
+            showThumbnails={showThumbnails}
+            thumbnailWidth={thumbnailWidth}
+            thumbnailHeight={thumbnailHeight}
+            key={index}
+          />
+        ))}
       </div>
-      {isShowMoreButton && (
+      {showMoreButton && (
         <div
           className={styles.moreButton}
           onClick={() => onMoreButtonClick?.()}
+          role="button"
         >
           {moreButtonText ?? `${t(K.MORE)}...`}
         </div>
       )}
     </div>
+  );
+}
+
+interface QuickEntryItemProps {
+  item: listItem;
+  showThumbnails?: boolean;
+  thumbnailWidth?: number;
+  thumbnailHeight?: number;
+}
+
+function QuickEntryItem({
+  item,
+  showThumbnails,
+  thumbnailWidth,
+  thumbnailHeight,
+}: QuickEntryItemProps): React.ReactElement {
+  return (
+    <Link
+      to={item.to}
+      className={styles.entry}
+      style={{ width: thumbnailWidth }}
+    >
+      {showThumbnails ? (
+        <>
+          <span className={styles.label}>{item.text}</span>
+          <span
+            className={styles.thumbnail}
+            style={{ height: thumbnailHeight }}
+          >
+            {item.thumbnail ? (
+              <img src={item.thumbnail} />
+            ) : (
+              <span className={styles.thumbnailPlaceholder}>
+                <GeneralIcon
+                  icon={{ lib: "antd", icon: "picture", theme: "outlined" }}
+                />
+              </span>
+            )}
+          </span>
+        </>
+      ) : (
+        <>
+          {item.icon && <GeneralIcon icon={item.icon} />}
+          {item.text}
+        </>
+      )}
+    </Link>
   );
 }

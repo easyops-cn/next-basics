@@ -32,15 +32,24 @@ export class WorkbenchQuickEntryElement extends UpdatingElement {
   history: historyProps;
 
   @property({ type: Boolean })
-  isShowMoreButton: boolean;
+  showMoreButton: boolean;
 
   @property({ type: String })
   moreButtonText: string;
 
+  @property({ type: Boolean })
+  showThumbnails: boolean;
+
+  @property({ type: Number })
+  thumbnailWidth: number;
+
+  @property({ type: Number })
+  thumbnailHeight: number;
+
   @event({ type: "more.button.click" })
   private _moreButtonClick: EventEmitter;
 
-  private handleMoreButtonClick = () => {
+  private _handleMoreButtonClick = (): void => {
     this._moreButtonClick.emit();
   };
 
@@ -66,9 +75,12 @@ export class WorkbenchQuickEntryElement extends UpdatingElement {
             entryTitle={this.entryTitle}
             entryList={this.entryList}
             history={this.history}
-            isShowMoreButton={this.isShowMoreButton}
+            showMoreButton={this.showMoreButton}
             moreButtonText={this.moreButtonText}
-            onMoreButtonClick={this.handleMoreButtonClick}
+            showThumbnails={this.showThumbnails}
+            thumbnailWidth={this.thumbnailWidth}
+            thumbnailHeight={this.thumbnailHeight}
+            onMoreButtonClick={this._handleMoreButtonClick}
           />
         </BrickWrapper>,
         this
