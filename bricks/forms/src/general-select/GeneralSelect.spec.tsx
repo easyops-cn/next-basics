@@ -240,7 +240,7 @@ describe("GeneralSelect", () => {
     const handleMouseEnter = jest.fn();
 
     const wrapper = shallow(
-      <GeneralSelect
+      <Select
         options={[
           { label: "other", value: "other" },
           { label: "one", value: "one" },
@@ -250,7 +250,7 @@ describe("GeneralSelect", () => {
       />
     );
 
-    wrapper.find(Select).invoke("onMouseEnter")({} as any);
+    wrapper.invoke("onMouseEnter")({} as any);
     expect(handleMouseEnter).toBeCalled();
   });
 });
