@@ -11,3 +11,5 @@ import "./custom-processors/getFunctionStep";
 import "./custom-processors/calcFlowInfo";
 import "./custom-processors/processFieldInitValue";
 import "./custom-processors/processFieldsMaping";
+import "./custom-processors/getRequestExampleOfYaml";
+import "./custom-processors/calcExampleFields";
