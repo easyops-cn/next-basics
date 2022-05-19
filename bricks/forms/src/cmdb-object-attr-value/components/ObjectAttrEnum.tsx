@@ -51,7 +51,7 @@ export function ObjectAttrEnum(props: ObjectAttrIntProps): React.ReactElement {
           <Select
             mode="tags"
             style={{ width: "100%" }}
-            value={value?.regex}
+            value={value?.regex || undefined}
             placeholder={i18n.t(
               `${NS_FORMS}:${K.PLEASE_INPUT_ENUMERATED_VALUE}`
             )}
