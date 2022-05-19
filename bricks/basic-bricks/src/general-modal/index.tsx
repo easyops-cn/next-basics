@@ -157,6 +157,16 @@ export class GeneralModalElement extends UpdatingElement {
   hideCancelButton: boolean;
 
   /**
+   * @kind string
+   * @required false
+   * @default `right`
+   * @description 按钮的位置 left | center | right
+   * @group basic
+   */
+  @property()
+  footerPosition: string;
+
+  /**
    * @kind boolean
    * @required false
    * @default `true`
@@ -164,6 +174,42 @@ export class GeneralModalElement extends UpdatingElement {
    * @group basic
    */
   @property({ attribute: false }) closeWhenOk = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 点击取消时，是否立即关闭模态框，如果设为`false`，则需要自行关闭。
+   * @group basic
+   */
+  @property({ attribute: false }) closeWhenCancel = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 是否需要隐藏弹窗内容的padding
+   * @group basic
+   */
+  @property({ attribute: false }) isHiddenBodyPadding = false;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 是否需要隐藏弹窗头部的分割线
+   * @group basic
+   */
+  @property({ attribute: false }) isHiddenHeaderBorder = false;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `true`
+   * @description 是否需要隐藏底部特殊的颜色
+   * @group basic
+   */
+  @property({ attribute: false }) isHiddenFooterColor = false;
 
   /**
    * @kind boolean
@@ -286,7 +332,9 @@ export class GeneralModalElement extends UpdatingElement {
           !isInFooterContainer
         ) {
           this.generalModalCancel.emit();
-          this.close();
+          if (this.closeWhenCancel) {
+            this.close();
+          }
         }
         return;
       }
@@ -342,6 +390,10 @@ export class GeneralModalElement extends UpdatingElement {
             okDisabled={this.okDisabled}
             confirmLoading={this.confirmLoading}
             onAfterClose={this.handleAfterClose}
+            footerPosition={this.footerPosition}
+            isHiddenBodyPadding={this.isHiddenBodyPadding}
+            isHiddenHeaderBorder={this.isHiddenHeaderBorder}
+            isHiddenFooterColor={this.isHiddenFooterColor}
           />
         </BrickWrapper>,
         this._mountPoint
