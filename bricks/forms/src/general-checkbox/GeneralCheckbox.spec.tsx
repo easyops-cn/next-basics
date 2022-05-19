@@ -230,4 +230,21 @@ describe("GeneralCheckbox", () => {
     await (global as any).flushPromises();
     expect(handleChange).toBeCalledWith(["pie-chart", "bar-chart"]);
   });
+
+  it("should add color-className to checkbox", () => {
+    const wrapper = mount(
+      <GeneralCheckbox
+        options={[
+          { label: "苹果", value: "Apple", checkboxColor: "red" },
+          { label: "梨子", value: "Pear", checkboxColor: "orange" },
+        ]}
+        value={["Apple", "Pear"]}
+      />
+    );
+
+    expect(wrapper.find(".checkbox-red").at(0).prop("value")).toEqual("Apple");
+    expect(wrapper.find(".checkbox-orange").at(0).prop("value")).toEqual(
+      "Pear"
+    );
+  });
 });

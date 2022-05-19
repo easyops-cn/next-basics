@@ -109,3 +109,137 @@
 .iconCustomCheckbox input[type="checkbox"]:checked::before {
   border: 1px solid var(--antd-checkbox-custom-type-item-hover-border-color);
 }
+
+.checkbox-red {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-red-6);
+    border-color: var(--palette-red-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-red-6);
+  }
+}
+
+.checkbox-orange {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-orange-6);
+    border-color: var(--palette-orange-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-orange-6);
+  }
+}
+
+.checkbox-amber {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-amber-6);
+    border-color: var(--palette-amber-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-amber-6);
+  }
+}
+
+.checkbox-yellow {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-yellow-6);
+    border-color: var(--palette-yellow-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-yellow-6);
+  }
+}
+
+.checkbox-green {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-green-6);
+    border-color: var(--palette-green-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-green-6);
+  }
+}
+
+.checkbox-teal {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-teal-6);
+    border-color: var(--palette-teal-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-teal-6);
+  }
+}
+
+.checkbox-cyan {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-cyan-6);
+    border-color: var(--palette-cyan-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-cyan-6);
+  }
+}
+
+.checkbox-blue {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-blue-6);
+    border-color: var(--palette-blue-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-blue-6);
+  }
+}
+
+.checkbox-indigo {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-indigo-6);
+    border-color: var(--palette-indigo-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-indigo-6);
+  }
+}
+
+.checkbox-deep-purple {
+  --checkbox-deep-purple: #6641f9;
+
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--checkbox-deep-purple);
+    border-color: var(--checkbox-deep-purple);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--checkbox-deep-purple);
+  }
+}
+
+.checkbox-purple {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-purple-6);
+    border-color: var(--palette-purple-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-purple-6);
+  }
+}
+
+.checkbox-pink {
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--palette-pink-6);
+    border-color: var(--palette-pink-6);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--palette-pink-6);
+  }
+}
+
+.checkbox-blue-gray {
+  --checkbox-blue-gray: #778dc3;
+
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--checkbox-blue-gray);
+    border-color: var(--checkbox-blue-gray);
+  }
+  :global(.ant-checkbox-checked::after) {
+    border: 1px solid var(--checkbox-blue-gray);
+  }
+}

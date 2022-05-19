@@ -11,7 +11,7 @@ import { MenuIcon } from "@next-core/brick-types";
 import classNames from "classnames";
 
 export interface GeneralCheckboxProps extends FormItemWrapperProps {
-  options?: CheckboxOptionType | IconCheckboxItem[];
+  options?: CheckboxOptionType | IconCheckboxItem[] | CheckboxColorOptionType;
   value?: CheckboxValueType[] | CheckboxValueType;
   colSpan?: number;
   onChange?: (value: CheckboxValueType[] | CheckboxValueType) => void;
@@ -28,6 +28,11 @@ export interface IconCheckboxItem {
   label?: any;
   disabled?: boolean;
 }
+
+export interface CheckboxColorOptionType extends CheckboxOptionType {
+  checkboxColor?: string;
+}
+
 export interface IconCheckboxProps {
   options: IconCheckboxItem[];
   name: string;
@@ -165,8 +170,18 @@ export function GeneralCheckboxItem(
     item: CheckboxOptionType,
     isGridType: boolean
   ): React.ReactElement => {
+    const checkboxColor = (item as CheckboxColorOptionType)?.checkboxColor;
+    const checkboxColorStyle = checkboxColor
+      ? `checkbox-${checkboxColor}`
+      : undefined;
+
     const checkbox = (
-      <Checkbox value={item.value} key={item.value} disabled={!!item?.disabled}>
+      <Checkbox
+        value={item.value}
+        key={item.value}
+        disabled={!!item.disabled}
+        className={styles[`${checkboxColorStyle}`]}
+      >
         {item.label}
       </Checkbox>
     );

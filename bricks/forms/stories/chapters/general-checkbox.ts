@@ -54,6 +54,31 @@ export const GeneralCheckboxStory: Story = {
     },
     {
       brick: "forms.general-checkbox",
+      description: {
+        title: "设置选项颜色",
+        message:
+          "在使用非icon类型checkbox并传入options时，可传入「checkboxColor」属性设置选框颜色，可用颜色包括：red、orange、amber、yellow、green、teal、cyan、blue、indigo、purple、deep-purple、pink 和 blue-gray。",
+      },
+      properties: {
+        name: "user",
+        label: "用户",
+        options: [
+          { label: "管理员", value: "Administrator", checkboxColor: "teal" },
+          { label: "测试", value: "tester", checkboxColor: "orange" },
+          { label: "开发", value: "developer", checkboxColor: "pink" },
+          { label: "PM", value: "pm", checkboxColor: "amber" },
+        ],
+        value: ["tester", "developer", "Administrator", "pm"],
+      },
+      events: {
+        "general.checkbox.change": {
+          action: "console.log",
+          args: ["用户", "${EVENT.detail}"],
+        },
+      },
+    },
+    {
+      brick: "forms.general-checkbox",
       properties: {
         name: "user",
         label: "用户(多列场景)",
