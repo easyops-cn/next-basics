@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.222.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.222.0...@next-bricks/forms@1.222.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* 修复枚举类型空标签的问题 ([8ea34e7](https://github.com/easyops-cn/next-basics/commit/8ea34e7ee20eaf42d8c4eb7eebb6baf644284e16)), closes [Refs#EVENT-938](https://github.com/Refs/issues/EVENT-938)
+
+
+
+
+
 # [1.222.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.221.3...@next-bricks/forms@1.222.0) (2022-05-19)
 
 
