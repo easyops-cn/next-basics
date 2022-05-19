@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.14.5...@next-bricks/flow-builder@1.15.0) (2022-05-19)
+
+
+### Features
+
+* example field processor ([6ef7b34](https://github.com/easyops-cn/next-basics/commit/6ef7b345a024f92c99db8e71f26d8b5f7a521a79))
+
+
+
+
+
 ## [1.14.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.14.4...@next-bricks/flow-builder@1.14.5) (2022-05-07)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
