@@ -57,7 +57,7 @@ export const GeneralCheckboxStory: Story = {
       description: {
         title: "设置选项颜色",
         message:
-          "在使用checkbox（type = default）传入options时，可传入「checkboxColor」属性设置选框颜色，可用颜色包括：red、orange、amber、yellow、green、teal、cyan、blue、indigo、purple、deep-purple、pink 和 blue-gray。",
+          "在为checkbox（type = default）传入options时，可传入「checkboxColor」属性设置选框颜色，可用颜色包括：red、orange、amber、yellow、green、teal、cyan、blue、indigo、purple、deep-purple、pink 和 blue-gray。",
       },
       properties: {
         name: "user",
@@ -82,7 +82,7 @@ export const GeneralCheckboxStory: Story = {
       description: {
         title: "设置checkbox图标",
         message:
-          "在使用checkbox（type = default）传入options时，可传入「icon」属性为checkbox设置图标，图标来源可以为src（httpSrc/DataSrc）或lib。",
+          "在为checkbox（type = default）传入options时，可传入「icon」属性为其设置图标，图标来源可以为src（httpSrc/DataSrc）或平台的图标库。",
       },
       properties: {
         label: "用户列表",
@@ -195,7 +195,7 @@ export const GeneralCheckboxStory: Story = {
     {
       description: {
         title: "使用icon类型样式案例",
-        message: "icon图标来源可以为src（httpSrc/DataSrc）或lib",
+        message: "icon图标来源可以为src（httpSrc/DataSrc）或平台的图标库",
       },
       brick: "forms.general-checkbox",
       properties: {
