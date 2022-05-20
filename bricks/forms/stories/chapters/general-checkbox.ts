@@ -57,7 +57,7 @@ export const GeneralCheckboxStory: Story = {
       description: {
         title: "设置选项颜色",
         message:
-          "在使用非icon类型checkbox并传入options时，可传入「checkboxColor」属性设置选框颜色，可用颜色包括：red、orange、amber、yellow、green、teal、cyan、blue、indigo、purple、deep-purple、pink 和 blue-gray。",
+          "在使用checkbox（type = default）传入options时，可传入「checkboxColor」属性设置选框颜色，可用颜色包括：red、orange、amber、yellow、green、teal、cyan、blue、indigo、purple、deep-purple、pink 和 blue-gray。",
       },
       properties: {
         name: "user",
@@ -75,6 +75,51 @@ export const GeneralCheckboxStory: Story = {
           action: "console.log",
           args: ["用户", "${EVENT.detail}"],
         },
+      },
+    },
+    {
+      brick: "forms.general-checkbox",
+      description: {
+        title: "设置checkbox图标",
+        message:
+          "在使用checkbox（type = default）传入options时，可传入「icon」属性为checkbox设置图标，图标来源可以为src（httpSrc/DataSrc）或lib。",
+      },
+      properties: {
+        label: "用户列表",
+        name: "user",
+        options: [
+          {
+            label: "管理员",
+            value: "Administrator",
+            icon: {
+              imgSrc:
+                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            },
+          },
+          {
+            label: "目标用户",
+            value: "tester",
+            icon: {
+              icon: "aim",
+              lib: "antd",
+              theme: "outlined",
+              color: {
+                startColor: "red",
+                endColor: "blue",
+              },
+            },
+          },
+          {
+            label: "其他用户",
+            value: "developer",
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+          },
+        ],
+        value: ["tester", "developer"],
       },
     },
     {
@@ -150,6 +195,7 @@ export const GeneralCheckboxStory: Story = {
     {
       description: {
         title: "使用icon类型样式案例",
+        message: "icon图标来源可以为src（httpSrc/DataSrc）或lib",
       },
       brick: "forms.general-checkbox",
       properties: {
@@ -159,9 +205,8 @@ export const GeneralCheckboxStory: Story = {
         options: [
           {
             icon: {
-              lib: "antd",
-              icon: "area-chart",
-              theme: "outlined",
+              imgSrc:
+                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             },
             label: "area-chart",
             value: "area-chart",

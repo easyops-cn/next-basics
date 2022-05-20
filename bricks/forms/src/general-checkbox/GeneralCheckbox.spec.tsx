@@ -4,6 +4,7 @@ import { GeneralCheckbox, IconCheckbox } from "./GeneralCheckbox";
 import { formatOptions } from "@next-libs/forms";
 import { Checkbox, Collapse } from "antd";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
+import { GeneralIcon } from "@next-libs/basic-components";
 describe("GeneralCheckbox", () => {
   it("should work", async () => {
     const handleChange = jest.fn();
@@ -246,5 +247,31 @@ describe("GeneralCheckbox", () => {
     expect(wrapper.find(".checkbox-orange").at(0).prop("value")).toEqual(
       "Pear"
     );
+  });
+
+  it("should render general-icon for default checkbox", () => {
+    const wrapper = mount(
+      <GeneralCheckbox
+        options={[
+          {
+            icon: {
+              icon: "area-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "area-chart",
+          },
+          {
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "bar-chart",
+          },
+        ]}
+      />
+    );
+    expect(wrapper.find(GeneralIcon).length).toEqual(2);
   });
 });

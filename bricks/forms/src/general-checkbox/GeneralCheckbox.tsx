@@ -11,7 +11,7 @@ import { MenuIcon } from "@next-core/brick-types";
 import classNames from "classnames";
 
 export interface GeneralCheckboxProps extends FormItemWrapperProps {
-  options?: CheckboxOptionType | IconCheckboxItem[] | CheckboxColorOptionType;
+  options?: CheckboxOptionType | IconCheckboxItem[] | CheckboxOtherOptionType;
   value?: CheckboxValueType[] | CheckboxValueType;
   colSpan?: number;
   onChange?: (value: CheckboxValueType[] | CheckboxValueType) => void;
@@ -29,8 +29,13 @@ export interface IconCheckboxItem {
   disabled?: boolean;
 }
 
-export interface CheckboxColorOptionType extends CheckboxOptionType {
+declare type SrcIcon = {
+  imgSrc?: string;
+  imgStyle?: React.CSSProperties;
+};
+export interface CheckboxOtherOptionType extends CheckboxOptionType {
   checkboxColor?: string;
+  icon?: MenuIcon | SrcIcon;
 }
 
 export interface IconCheckboxProps {
@@ -97,6 +102,7 @@ export function IconCheckbox(props: IconCheckboxProps) {
                 style={{
                   fontSize: isCustom ? "52px" : "32px",
                 }}
+                size={isCustom ? 52 : 32}
                 icon={item.icon}
               ></GeneralIcon>
             )}
@@ -170,10 +176,38 @@ export function GeneralCheckboxItem(
     item: CheckboxOptionType,
     isGridType: boolean
   ): React.ReactElement => {
-    const checkboxColor = (item as CheckboxColorOptionType)?.checkboxColor;
+    const checkboxColor = (item as CheckboxOtherOptionType)?.checkboxColor;
     const checkboxColorStyle = checkboxColor
       ? `checkbox-${checkboxColor}`
       : undefined;
+
+    const icon = (item as CheckboxOtherOptionType)?.icon;
+    let iconNode: JSX.Element = null;
+    if (icon) {
+      if ("imgSrc" in icon) {
+        const mergedIcon: SrcIcon = {
+          imgSrc: icon.imgSrc,
+          imgStyle: {
+            marginRight: "8px",
+            verticalAlign: "-0.42em",
+            ...icon.imgStyle,
+          },
+        };
+        iconNode = <GeneralIcon icon={mergedIcon} size={22} />;
+      } else {
+        iconNode = (
+          <GeneralIcon
+            icon={icon}
+            style={{
+              fontSize: "22px",
+              marginRight: "8px",
+              verticalAlign: "-0.25em",
+            }}
+            size={22}
+          />
+        );
+      }
+    }
 
     const checkbox = (
       <Checkbox
@@ -182,6 +216,7 @@ export function GeneralCheckboxItem(
         disabled={!!item.disabled}
         className={styles[`${checkboxColorStyle}`]}
       >
+        {iconNode}
         {item.label}
       </Checkbox>
     );
