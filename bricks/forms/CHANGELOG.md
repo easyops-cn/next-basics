@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.223.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.222.1...@next-bricks/forms@1.223.0) (2022-05-20)
+
+
+### Features
+
+* **general-checkbox:** 支持checkbox设置图标 ([1bab351](https://github.com/easyops-cn/next-basics/commit/1bab351ab83e6ad382bfdc547b1fdde1c1ae4359))
+
+
+
+
+
 ## [1.222.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.222.0...@next-bricks/forms@1.222.1) (2022-05-19)
 
 
