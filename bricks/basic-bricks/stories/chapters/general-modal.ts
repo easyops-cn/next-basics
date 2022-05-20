@@ -148,6 +148,7 @@ export const generalModalStory: Story = {
     {
       description: {
         title: "模态框标题对齐方式和图标",
+        message: "图标来源可以为src（httpSrc/DataSrc）或平台的图标库",
       },
       brick: "div",
       slots: {
