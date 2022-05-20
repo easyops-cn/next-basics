@@ -17,6 +17,10 @@ const titleAlignPropertyMap: Record<string, string> = {
   end: "flex-end",
 };
 
+declare type SrcIcon = {
+  imgSrc?: string;
+  imgStyle?: React.CSSProperties;
+};
 interface GeneralModalProps {
   visible: boolean;
   configProps?: ModalProps;
@@ -24,7 +28,7 @@ interface GeneralModalProps {
   hideCancelButton?: boolean;
   enableFooterSlot?: boolean;
   titleAlign?: string;
-  titleIcon?: MenuIcon;
+  titleIcon?: MenuIcon | SrcIcon;
   fullscreen?: boolean;
   okDisabled?: boolean;
   confirmLoading?: boolean;
@@ -121,6 +125,31 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     delete configProps.footer;
   }
 
+  let iconNode: JSX.Element = null;
+  if (titleIcon) {
+    if ("imgSrc" in titleIcon) {
+      const mergedIcon: SrcIcon = {
+        imgSrc: titleIcon.imgSrc,
+        imgStyle: {
+          marginRight: "8px",
+          ...titleIcon.imgStyle,
+        },
+      };
+      iconNode = <GeneralIcon icon={mergedIcon} size={20} />;
+    } else {
+      iconNode = (
+        <GeneralIcon
+          icon={titleIcon}
+          style={{
+            fontSize: "20px",
+            marginRight: "8px",
+          }}
+          size={20}
+        />
+      );
+    }
+  }
+
   return (
     <Modal
       className={classnames({ wrapper: hideCancelButton })}
@@ -133,9 +162,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
               justifyContent: titleAlignPropertyMap[titleAlign],
             }}
           >
-            {titleIcon && (
-              <GeneralIcon icon={titleIcon} style={{ marginRight: 8 }} />
-            )}
+            {iconNode}
             {modalTitle}
             <span className="headerExtra">
               <slot id="headerExtra" name="headerExtra"></slot>
