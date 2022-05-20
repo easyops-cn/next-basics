@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.178.0...@next-bricks/basic-bricks@1.179.0) (2022-05-20)
+
+
+### Features
+
+* **general-modal:** 支持modal图标src形式 ([f6095e8](https://github.com/easyops-cn/next-basics/commit/f6095e8a364160255aafad3d09e991d9ab16fca2))
+
+
+
+
+
 # [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.177.2...@next-bricks/basic-bricks@1.178.0) (2022-05-10)
 
 
