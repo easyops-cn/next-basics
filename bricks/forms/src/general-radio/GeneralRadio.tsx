@@ -155,12 +155,29 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
           );
         }
       }
+
+      let buttonIcon: JSX.Element = null;
+      if (Component === Radio.Button && icon) {
+        if ("imgSrc" in icon) {
+          const mergedIcon = {
+            imgSrc: icon.imgSrc,
+            imgStyle: {
+              verticalAlign: "-0.125em",
+              ...icon.imgStyle,
+            },
+          };
+          buttonIcon = <GeneralIcon icon={mergedIcon} size={14} />;
+        } else {
+          buttonIcon = <GeneralIcon icon={icon} size={14} />;
+        }
+      }
+
       return (
         <Tooltip key={item.value} title={item.tooltip}>
           <Component value={item.value} disabled={item.disabled}>
             {Component === Radio.Button && icon ? (
               <>
-                <GeneralIcon icon={icon} size={14} />
+                {buttonIcon}
                 {item.label && (
                   <span style={{ paddingLeft: "5px" }}>{item.label}</span>
                 )}
