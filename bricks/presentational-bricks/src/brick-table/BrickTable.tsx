@@ -63,6 +63,7 @@ export interface BrickTableProps {
   optimizedColumns?: Array<string | number>;
   ellipsisInfo?: boolean;
   thTransparent?: boolean;
+  showHeader?: boolean;
 }
 
 const DraggableBodyRow = ({
@@ -208,6 +209,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
     optimizedColumns,
     onDelete, // 用于 brick form 中，will be deprecated
     ellipsisInfo,
+    showHeader,
   } = props;
 
   const initData = useMemo(() => {
@@ -521,6 +523,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
       }
       expandIcon={getCustomExpandIcon}
       scroll={scroll}
+      showHeader={showHeader}
       {...configProps}
     />
   );

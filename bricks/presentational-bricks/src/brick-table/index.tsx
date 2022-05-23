@@ -920,6 +920,16 @@ export class BrickTableElement extends UpdatingElement {
   @property({ attribute: false })
   thTransparent: boolean;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否显示表头
+   */
+  @property({
+    attribute: false,
+  })
+  showHeader = true;
   // 对外获取内部 _dataSource 的值
   // istanbul ignore next
   get processedDataSource() {
@@ -1609,6 +1619,7 @@ export class BrickTableElement extends UpdatingElement {
             error={this._error}
             onChange={this._handleOnChange}
             showCard={this.showCard}
+            showHeader={this.showHeader}
             expandedRowBrick={this.expandedRowBrick}
             expandIconAsCell={this.expandIconAsCell}
             expandIconColumnIndex={this.expandIconColumnIndex}
