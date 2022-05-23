@@ -23,6 +23,11 @@ export interface GeneralRadioProps extends FormItemWrapperProps {
   uiType?: UiType;
 }
 
+declare type SrcIcon = {
+  imgSrc?: string;
+  imgStyle?: React.CSSProperties;
+};
+
 interface IconRadioGroupProps {
   options: GeneralOption[];
   type: "icon" | "icon-circle" | "icon-square";
@@ -76,6 +81,7 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                     style={{
                       fontSize: "32px",
                     }}
+                    size={32}
                     icon={item.icon}
                   />
                 )}
@@ -95,7 +101,7 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                       [styles.squareIcon]: type === "icon-square",
                     })}
                   >
-                    <GeneralIcon icon={item.icon} />
+                    <GeneralIcon icon={item.icon} size={46} />
                   </div>
                 )}
                 <span title={item.label}>{item.label}</span>
@@ -121,18 +127,49 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
     options: GeneralOption[]
   ): React.ReactNode => {
     return options.map((item: any) => {
+      const icon = item.icon;
+
+      let defaultIcon: JSX.Element = null;
+      if (Component === Radio && icon) {
+        if ("imgSrc" in icon) {
+          const mergedIcon: SrcIcon = {
+            imgSrc: icon.imgSrc,
+            imgStyle: {
+              marginRight: "8px",
+              verticalAlign: "-0.42em",
+              ...icon.imgStyle,
+            },
+          };
+          defaultIcon = <GeneralIcon icon={mergedIcon} size={22} />;
+        } else {
+          defaultIcon = (
+            <GeneralIcon
+              icon={icon}
+              style={{
+                fontSize: "22px",
+                marginRight: "8px",
+                verticalAlign: "-0.25em",
+              }}
+              size={22}
+            />
+          );
+        }
+      }
       return (
         <Tooltip key={item.value} title={item.tooltip}>
           <Component value={item.value} disabled={item.disabled}>
-            {Component === Radio.Button && item.icon ? (
+            {Component === Radio.Button && icon ? (
               <>
-                <GeneralIcon icon={item.icon} />
+                <GeneralIcon icon={icon} size={14} />
                 {item.label && (
                   <span style={{ paddingLeft: "5px" }}>{item.label}</span>
                 )}
               </>
             ) : (
-              item.label
+              <>
+                {defaultIcon}
+                {item.label}
+              </>
             )}
           </Component>
         </Tooltip>

@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import { Radio } from "antd";
 import { formatOptions } from "@next-libs/forms";
 import { GeneralRadio } from "./GeneralRadio";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 describe("GeneralRadio", () => {
   it("should work", () => {
@@ -199,5 +200,34 @@ describe("GeneralRadio", () => {
     } as any);
     await (global as any).flushPromises();
     expect(handleChange).toHaveBeenCalled();
+  });
+
+  it("should render general-icon for default radio", () => {
+    const wrapper = mount(
+      <GeneralRadio
+        options={[
+          {
+            icon: {
+              icon: "area-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "area-chart",
+            label: "area-chart",
+          },
+          {
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "bar-chart",
+            label: "bar-chart",
+          },
+        ]}
+        type="default"
+      />
+    );
+    expect(wrapper.find(GeneralIcon).length).toEqual(2);
   });
 });

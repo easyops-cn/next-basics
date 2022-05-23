@@ -64,6 +64,55 @@ export const GeneralRadioStory: Story = {
       },
     },
     {
+      brick: "forms.general-radio",
+      description: {
+        title: "当type = default时，给radio设置图标",
+      },
+      events: {
+        "general.radio.change": {
+          action: "console.log",
+          args: ["city3", "${EVENT.detail}"],
+        },
+      },
+      properties: {
+        label: "城市",
+        name: "city",
+        options: [
+          {
+            label: "上海",
+            value: "Shanghai",
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+          },
+          {
+            icon: {
+              imgSrc:
+                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            },
+            label: "北京",
+            value: "Beijing",
+          },
+          {
+            label: "成都",
+            value: "Chengdu",
+            icon: {
+              color: {
+                endColor: "blue",
+                startColor: "red",
+              },
+              icon: "aim",
+              lib: "antd",
+              theme: "outlined",
+            },
+          },
+        ],
+        value: "Beijing",
+      },
+    },
+    {
       brick: "forms.general-form",
       properties: {
         values: {
