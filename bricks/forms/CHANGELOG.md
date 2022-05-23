@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.224.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.223.0...@next-bricks/forms@1.224.0) (2022-05-23)
+
+
+### Features
+
+* **time-range-picker:** rangeType增加hmTime支持选择时分 Refs DATA_QUALITY-217 ([7057657](https://github.com/easyops-cn/next-basics/commit/705765748ab51ab0f13fafb55e26465bc8b4c24f))
+
+
+
+
+
 # [1.223.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.222.1...@next-bricks/forms@1.223.0) (2022-05-20)
 
 
