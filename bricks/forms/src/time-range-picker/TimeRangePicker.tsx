@@ -20,7 +20,7 @@ const INIT_TIME_RANGE: TimeRange = {
   endTime: "23:59:59",
 };
 
-export type RangeType = "time" | "date" | "dateTime";
+export type RangeType = "time" | "date" | "dateTime" | "hmTime";
 
 interface TimeRangePickerProps extends FormItemWrapperProps {
   value?: TimeRange;
@@ -39,8 +39,9 @@ export function RealTimeRangePicker(
   props: RealTimeRangePickerProps,
   ref: any
 ): React.ReactElement {
+  const times = ["time", "hmTime"];
   const rangeType = props.rangeType ?? "time";
-  const today = rangeType === "time" ? "" : moment().format("YYYY-MM-DD ");
+  const today = times.includes(rangeType) ? "" : moment().format("YYYY-MM-DD ");
   const initRange = {
     startTime: today + INIT_TIME_RANGE.startTime,
     endTime: today + INIT_TIME_RANGE.endTime,
@@ -79,7 +80,7 @@ export function RealTimeRangePicker(
 
   React.useEffect(() => {
     if (props.emitChangeOnInit && !props.value && props.onChange) {
-      rangeType === "time"
+      times.includes(rangeType)
         ? props.onChange(INIT_TIME_RANGE)
         : props.onChange(initRange);
     }
@@ -166,7 +167,7 @@ export function RealTimeRangePicker(
       suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
     />
   );
-  const range = rangeType === "time" ? timeRange : dateRange;
+  const range = times.includes(rangeType) ? timeRange : dateRange;
 
   return <div ref={ref}>{range}</div>;
 }

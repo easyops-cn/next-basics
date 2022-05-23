@@ -32,7 +32,7 @@ import { NS_FORMS, K } from "../i18n/constants";
 *  endTime: string;
 *}
 
-*export type RangeType = "time" | "date" | "dateTime";
+*export type RangeType = "time" | "date" | "dateTime" | "hmTime";
 *```
 */
 export class TimeRangePickerElement extends FormItemElement {
@@ -169,6 +169,9 @@ export class TimeRangePickerElement extends FormItemElement {
           break;
         case "dateTime":
           format = `YYYY-MM-DD ${this._defaultFormat}`;
+          break;
+        case "hmTime":
+          format = `HH:mm`;
           break;
       }
 
