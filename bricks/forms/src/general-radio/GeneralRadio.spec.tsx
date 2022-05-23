@@ -238,4 +238,41 @@ describe("GeneralRadio", () => {
     );
     expect(wrapper.find(GeneralIcon).length).toEqual(3);
   });
+
+  it("should render general-icon for button radio", () => {
+    const wrapper = mount(
+      <GeneralRadio
+        options={[
+          {
+            icon: {
+              icon: "area-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "area-chart",
+            label: "area-chart",
+          },
+          {
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "bar-chart",
+            label: "bar-chart",
+          },
+          {
+            icon: {
+              imgSrc:
+                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            },
+            label: "pie-chart",
+            value: "pie-chart",
+          },
+        ]}
+        type="button"
+      />
+    );
+    expect(wrapper.find(GeneralIcon).length).toEqual(3);
+  });
 });
