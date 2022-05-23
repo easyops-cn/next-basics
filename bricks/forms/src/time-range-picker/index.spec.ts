@@ -71,7 +71,21 @@ describe("forms.time-range-picker", () => {
     element._handleChange({ startTime: "02:23:45", endTime: "08:30:00" });
     expect((dispatchEvent.mock.calls[0][0] as CustomEvent).detail).toEqual({
       startTime: "02:23:45",
-      endTime: "08:30:00"
+      endTime: "08:30:00",
+    });
+  });
+
+  it("should rangeType=hmTime", async () => {
+    const element = document.createElement("forms.time-range-picker") as any;
+    element.rangeType = "hmTime";
+    await jest.runAllTimers();
+    document.body.appendChild(element);
+    const dispatchEvent = jest.spyOn(element, "dispatchEvent");
+
+    element._handleChange({ startTime: "02:23", endTime: "08:30" });
+    expect((dispatchEvent.mock.calls[0][0] as CustomEvent).detail).toEqual({
+      startTime: "02:23",
+      endTime: "08:30",
     });
   });
 });
