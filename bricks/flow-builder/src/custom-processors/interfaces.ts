@@ -22,3 +22,26 @@ export interface CategoryNode {
   category: "category" | "item";
   children?: CategoryNode[];
 }
+
+export interface Example {
+  description: {
+    zh: string;
+    en: string;
+  };
+  request: any;
+  response: any;
+}
+
+export interface ExtField {
+  name?: string;
+  source?: "body" | "query";
+}
+
+export interface ContractData {
+  examples: Example[];
+  endpoint: {
+    ext_fields?: ExtField[];
+    method: string;
+    uri: string;
+  };
+}
