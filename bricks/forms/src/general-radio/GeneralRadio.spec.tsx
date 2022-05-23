@@ -224,10 +224,18 @@ describe("GeneralRadio", () => {
             value: "bar-chart",
             label: "bar-chart",
           },
+          {
+            icon: {
+              imgSrc:
+                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            },
+            label: "pie-chart",
+            value: "pie-chart",
+          },
         ]}
         type="default"
       />
     );
-    expect(wrapper.find(GeneralIcon).length).toEqual(2);
+    expect(wrapper.find(GeneralIcon).length).toEqual(3);
   });
 });
