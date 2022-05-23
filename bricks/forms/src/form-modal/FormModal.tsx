@@ -3,14 +3,20 @@ import { Modal } from "antd";
 import { ButtonType, ButtonProps } from "antd/lib/button";
 import { SingleBrickAsComponent } from "@next-core/brick-kit";
 import { UseSingleBrickConf } from "@next-core/brick-types";
-
+import { MenuIcon } from "@next-core/brick-types";
 import { GeneralFormElement } from "../general-form";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 const defaultFormBrick: UseSingleBrickConf = {
   brick: "forms.general-form",
   properties: {
     layout: "vertical",
   },
+};
+
+declare type SrcIcon = {
+  imgSrc?: string;
+  imgStyle?: React.CSSProperties;
 };
 
 export interface FormModalProps {
@@ -35,6 +41,7 @@ export interface FormModalProps {
   destroyOnClose?: boolean;
   mask?: boolean;
   testId?: string;
+  titleIcon?: MenuIcon | SrcIcon;
   onOk?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onCancel?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
@@ -48,6 +55,8 @@ export function FormModal(props: FormModalProps): React.ReactElement {
     cancelButtonProps,
     okButtonProps,
     testId,
+    titleIcon,
+    title,
     ...modalProps
   } = props;
   const formBrick = useMemo((): UseSingleBrickConf => {
@@ -92,6 +101,30 @@ export function FormModal(props: FormModalProps): React.ReactElement {
     });
   };
 
+  let iconNode: JSX.Element = null;
+  if (titleIcon) {
+    if ("imgSrc" in titleIcon) {
+      const mergedIcon: SrcIcon = {
+        imgSrc: titleIcon.imgSrc,
+        imgStyle: {
+          marginRight: "8px",
+          ...titleIcon.imgStyle,
+        },
+      };
+      iconNode = <GeneralIcon icon={mergedIcon} size={20} />;
+    } else {
+      iconNode = (
+        <GeneralIcon
+          icon={titleIcon}
+          style={{
+            fontSize: "20px",
+            marginRight: "8px",
+          }}
+        />
+      );
+    }
+  }
+
   return (
     <Modal
       onOk={handleOk}
@@ -112,6 +145,19 @@ export function FormModal(props: FormModalProps): React.ReactElement {
         React.cloneElement(node as React.ReactElement, {
           "data-testid": `${testId}-content`,
         })
+      }
+      title={
+        title && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {iconNode}
+            {title}
+          </div>
+        )
       }
       {...modalProps}
     >

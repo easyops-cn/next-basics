@@ -13,6 +13,12 @@ import style from "./index.shadow.less";
 import { ButtonType } from "antd/lib/button";
 import { get } from "lodash";
 import { GeneralFormElement } from "../general-form";
+import { MenuIcon } from "@next-core/brick-types";
+
+declare type SrcIcon = {
+  imgSrc?: string;
+  imgStyle?: React.CSSProperties;
+};
 
 export interface OpenCloseOption {
   noEvent?: boolean;
@@ -37,10 +43,10 @@ export interface ChildeFormElement extends HTMLElement {
 * 1.76.0:`open` 和 `close` 方法新增 `noEvent` 选项
 * @memo
 * 该构件既可以作为一个独立的模态框表单，也可以作为表单里面的某个表单项存在，具体查看实例。
-*  
+*
 * 1.当作为独立模态框表单，可由其他触发，比如按钮。与general-modal+general-form组合起来不一样的是，这个模态框表单已经默认有了提交按钮及校验失败模态框不关闭的能力
-* 
-* 2.当作为表单里面的表单项存在，可用于某个字段较复杂配置的情况下，配置构件收集数据<br/>    
+*
+* 2.当作为表单里面的表单项存在，可用于某个字段较复杂配置的情况下，配置构件收集数据<br/>
 
 * > Tips: slots.content 中的构件，如果不是用 general-forms，那么希望点击确认按钮有校验操作，则需自己实现类似于 general-forms 中的 validate 方法；希望点击取消按钮有重置操作，则需自己实现类似于 general-forms 中的 reset 方法。
 
@@ -70,6 +76,15 @@ export class GeneralModalElement extends FormItemElement {
     attribute: false,
   })
   modalWidth: string | number;
+
+  /**
+   * @kind `MenuIcon | SrcIcon`
+   * @required false
+   * @default -
+   * @description 标题图标
+   * @group basic
+   */
+  @property({ attribute: false }) titleIcon?: MenuIcon | SrcIcon;
 
   /**
    * @kind `Record<string, any>`
@@ -306,6 +321,7 @@ export class GeneralModalElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            titleIcon={this.titleIcon}
           />
         </BrickWrapper>,
         this._mountPoint,
