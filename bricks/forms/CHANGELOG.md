@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.225.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.224.0...@next-bricks/forms@1.225.0) (2022-05-23)
+
+
+### Bug Fixes
+
+* **general-radio:** 修改button样式 ([4fbeb2e](https://github.com/easyops-cn/next-basics/commit/4fbeb2edea7eecc24ebb2c4638d4be837c7f7325))
+
+
+### Features
+
+* **general-radio:** 支持type=default的单选框带图标;图标设置支持src形式 ([a0d7b30](https://github.com/easyops-cn/next-basics/commit/a0d7b3081a9d85b69ec48feeb3c9f61e6d5ec33b))
+
+
+
+
+
 # [1.224.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.223.0...@next-bricks/forms@1.224.0) (2022-05-23)
 
 
