@@ -7,8 +7,7 @@ import { MenuIcon } from "@next-core/brick-types";
 import { NS_BASIC_BRICKS, K } from "../i18n/constants";
 import { useTranslation } from "react-i18next";
 
-const fullscreenTopOffset = 40;
-
+const fullscreenMargin = 20;
 const titleAlignPropertyMap: Record<string, string> = {
   start: "flex-start",
   left: "flex-start",
@@ -72,7 +71,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
           setTimeout(() => {
             setBodyHeight(
               window.innerHeight -
-                fullscreenTopOffset -
+                fullscreenMargin * 2 -
                 modalHeaderRef.current.getBoundingClientRect().height -
                 modalFooterRef.current.getBoundingClientRect().height
             );
@@ -171,8 +170,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         )
       }
       footer={footer || defaultFooter}
-      width={fullscreen ? "100%" : undefined}
-      style={fullscreen ? { top: fullscreenTopOffset } : undefined}
+      width={fullscreen ? `calc(100% - ${fullscreenMargin * 2}px)` : undefined}
       bodyStyle={fullscreen ? { height: bodyHeight } : undefined}
       wrapClassName={classnames({ fullscreen })}
       {...configProps}
