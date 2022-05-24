@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.179.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.1...@next-bricks/basic-bricks@1.179.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* 增加modal属性 refs BRICK_STORE-2751 ([a0f6ff9](https://github.com/easyops-cn/next-basics/commit/a0f6ff95119cddcfe01223eed714a8c40ca113b0))
+
+
+
+
+
 ## [1.179.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.0...@next-bricks/basic-bricks@1.179.1) (2022-05-23)
 
 
