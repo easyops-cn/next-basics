@@ -1,23 +1,7 @@
 import { getRuntime } from "@next-core/brick-kit";
 import { safeDump, JSON_SCHEMA } from "js-yaml";
+import { Example, ContractData } from "./interfaces";
 import { compact } from "lodash";
-
-interface Example {
-  description: {
-    zh: string;
-    en: string;
-  };
-  request: any;
-  response: any;
-}
-
-interface ContractData {
-  examples: Example[];
-  endpoint: {
-    method: string;
-    uri: string;
-  };
-}
 
 export function getRequestExampleOfYaml(
   contractData: ContractData,

@@ -13,3 +13,4 @@ import "./custom-processors/processFieldInitValue";
 import "./custom-processors/processFieldsMaping";
 import "./custom-processors/getRequestExampleOfYaml";
 import "./custom-processors/calcExampleFields";
+import "./custom-processors/getParamsOfDebug";
