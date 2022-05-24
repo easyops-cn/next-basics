@@ -10,7 +10,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { GeneralModal } from "./GeneralModal";
+import { GeneralModal, positionType } from "./GeneralModal";
 import style from "./index.shadow.less";
 import { get, pick, forEach, set } from "lodash";
 import { MenuIcon } from "@next-core/brick-types";
@@ -164,7 +164,7 @@ export class GeneralModalElement extends UpdatingElement {
    * @group basic
    */
   @property()
-  footerPosition: string;
+  footerPosition: positionType;
 
   /**
    * @kind boolean

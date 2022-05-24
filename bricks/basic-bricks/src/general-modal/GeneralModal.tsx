@@ -16,6 +16,8 @@ const titleAlignPropertyMap: Record<string, string> = {
   end: "flex-end",
 };
 
+export type positionType = "left" | "center" | "right";
+
 declare type SrcIcon = {
   imgSrc?: string;
   imgStyle?: React.CSSProperties;
@@ -31,7 +33,7 @@ interface GeneralModalProps {
   fullscreen?: boolean;
   okDisabled?: boolean;
   confirmLoading?: boolean;
-  footerPosition?: string;
+  footerPosition?: positionType;
   isHiddenBodyPadding?: boolean;
   isHiddenHeaderBorder?: boolean;
   isHiddenFooterColor?: boolean;
