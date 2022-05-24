@@ -202,14 +202,12 @@
 }
 
 .checkbox-deep-purple {
-  --checkbox-deep-purple: #6641f9;
-
   :global(.ant-checkbox-checked .ant-checkbox-inner) {
-    background-color: var(--checkbox-deep-purple);
-    border-color: var(--checkbox-deep-purple);
+    background-color: var(--antd-checkbox-color-deep-purple);
+    border-color: var(--antd-checkbox-color-deep-purple);
   }
   :global(.ant-checkbox-checked::after) {
-    border: 1px solid var(--checkbox-deep-purple);
+    border: 1px solid var(--antd-checkbox-color-deep-purple);
   }
 }
 
@@ -234,13 +232,11 @@
 }
 
 .checkbox-blue-gray {
-  --checkbox-blue-gray: #778dc3;
-
   :global(.ant-checkbox-checked .ant-checkbox-inner) {
-    background-color: var(--checkbox-blue-gray);
-    border-color: var(--checkbox-blue-gray);
+    background-color: var(--antd-checkbox-color-blue-gray);
+    border-color: var(--antd-checkbox-color-blue-gray);
   }
   :global(.ant-checkbox-checked::after) {
-    border: 1px solid var(--checkbox-blue-gray);
+    border: 1px solid var(--antd-checkbox-color-blue-gray);
   }
 }
