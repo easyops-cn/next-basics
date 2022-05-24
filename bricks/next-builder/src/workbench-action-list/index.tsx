@@ -13,6 +13,9 @@ import { SidebarSubMenu } from "@next-core/brick-types";
  * @noInheritDoc
  */
 export class WorkbenchActionListElement extends UpdatingElement {
+  @property({ type: String })
+  appId: string;
+
   @property({ attribute: false })
   menu: SidebarSubMenu;
 
@@ -34,7 +37,7 @@ export class WorkbenchActionListElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <WorkbenchActionList menu={this.menu} />
+          <WorkbenchActionList appId={this.appId} menu={this.menu} />
         </BrickWrapper>,
         this
       );
