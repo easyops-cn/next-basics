@@ -94,6 +94,10 @@ export const GeneralCheckboxStory: Story = {
             icon: {
               imgSrc:
                 "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+              imgStyle: {
+                objectFit: "cover",
+                borderRadius: "50%",
+              },
             },
           },
           {
@@ -104,8 +108,8 @@ export const GeneralCheckboxStory: Story = {
               lib: "antd",
               theme: "outlined",
               color: {
-                startColor: "red",
-                endColor: "blue",
+                startColor: "var(--palette-red-6)",
+                endColor: "var(--palette-blue-6)",
               },
             },
           },

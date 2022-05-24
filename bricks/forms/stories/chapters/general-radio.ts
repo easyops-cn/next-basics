@@ -91,6 +91,10 @@ export const GeneralRadioStory: Story = {
             icon: {
               imgSrc:
                 "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+              imgStyle: {
+                objectFit: "cover",
+                borderRadius: "50%",
+              },
             },
             label: "北京",
             value: "Beijing",
@@ -100,8 +104,8 @@ export const GeneralRadioStory: Story = {
             value: "Chengdu",
             icon: {
               color: {
-                endColor: "blue",
-                startColor: "red",
+                endColor: "var(--palette-blue-6)",
+                startColor: "var(--palette-red-6)",
               },
               icon: "aim",
               lib: "antd",
