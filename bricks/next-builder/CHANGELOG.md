@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.152.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.152.0...@next-bricks/next-builder@1.152.1) (2022-05-24)
+
+
+### Bug Fixes
+
+* **workBenchActionList:** fix jump error ([7138c9d](https://github.com/easyops-cn/next-basics/commit/7138c9d10bbc4123fa92bb8a7dc3c0a1efc33906))
+
+
+
+
+
 # [1.152.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.151.0...@next-bricks/next-builder@1.152.0) (2022-05-17)
 
 

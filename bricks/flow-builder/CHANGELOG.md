@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.15.0...@next-bricks/flow-builder@1.16.0) (2022-05-24)
+
+
+### Features
+
+* calc debug params processor ([22da8ec](https://github.com/easyops-cn/next-basics/commit/22da8ec9aec332875859454cb2a16286602410c2))
+
+
+
+
+
 # [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.14.5...@next-bricks/flow-builder@1.15.0) (2022-05-19)
 
 
