@@ -101,7 +101,9 @@ const menuData = {
 
 describe("WorkbenchActionList", () => {
   it("should work", () => {
-    const wrapper = mount(<WorkbenchActionList menu={menuData} />);
+    const wrapper = mount(
+      <WorkbenchActionList menu={menuData} appId="app-1" />
+    );
     expect(wrapper.find("WorkbenchAction").length).toBe(3);
     expect(wrapper.find("WorkbenchAction").at(0).prop("active")).toBe(true);
     expect(wrapper.find("WorkbenchAction").at(1).prop("active")).toBe(false);

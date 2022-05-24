@@ -7,15 +7,17 @@ import { UnregisterCallback, Location } from "history";
 import { initMenuItemAndMatchCurrentPathKeys } from "@next-libs/basic-components";
 
 interface WorkbenchActionListProps {
+  appId: string;
   menu: SidebarSubMenu;
 }
 
+let currentAppId: string;
 const historyMap = new Map<number, string>();
 
 export function WorkbenchActionList(
   props: WorkbenchActionListProps
 ): React.ReactElement {
-  const { menu } = props;
+  const { menu, appId } = props;
   const history = getHistory();
   const [activeIndex, setActiveIndex] = useState<number>();
   const [location, setLocation] = useState<Location>(history.location);
@@ -26,6 +28,14 @@ export function WorkbenchActionList(
     });
     return unlisten;
   }, []);
+
+  useEffect(() => {
+    if (!currentAppId) currentAppId = appId;
+    if (currentAppId !== appId) {
+      historyMap.clear();
+      currentAppId = appId;
+    }
+  }, [appId]);
 
   useEffect(() => {
     const { pathname, search } = location;
