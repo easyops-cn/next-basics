@@ -16,6 +16,8 @@ const titleAlignPropertyMap: Record<string, string> = {
   end: "flex-end",
 };
 
+export type positionType = "left" | "center" | "right";
+
 declare type SrcIcon = {
   imgSrc?: string;
   imgStyle?: React.CSSProperties;
@@ -31,6 +33,10 @@ interface GeneralModalProps {
   fullscreen?: boolean;
   okDisabled?: boolean;
   confirmLoading?: boolean;
+  footerPosition?: positionType;
+  isHiddenBodyPadding?: boolean;
+  isHiddenHeaderBorder?: boolean;
+  isHiddenFooterColor?: boolean;
   onAfterClose?: () => void;
 }
 
@@ -47,6 +53,10 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     okDisabled,
     confirmLoading,
     onAfterClose,
+    isHiddenBodyPadding,
+    isHiddenHeaderBorder,
+    isHiddenFooterColor,
+    footerPosition = "right",
   } = props;
   const modalHeaderRef = useRef<HTMLDivElement>();
   const modalFooterRef = useRef<HTMLDivElement>();
@@ -98,7 +108,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
 
   let footer = undefined;
   const defaultFooter = (
-    <div>
+    <div style={{ textAlign: `${footerPosition}` }}>
       <Button type="link" className="cancelBtn">
         {configProps?.cancelText || t(K.CANCEL)}
       </Button>
@@ -115,13 +125,16 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
 
   if (enableFooterSlot) {
     footer = (
-      <div className="footer-container">
+      <div
+        className="footer-container"
+        style={{ justifyContent: titleAlignPropertyMap[footerPosition] }}
+      >
         <slot name="footer"></slot>
         <div></div>
         {configProps && configProps.footer !== null && defaultFooter}
       </div>
     );
-    delete configProps.footer;
+    delete configProps?.footer;
   }
 
   let iconNode: JSX.Element = null;
@@ -151,7 +164,12 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
 
   return (
     <Modal
-      className={classnames({ wrapper: hideCancelButton })}
+      className={classnames({
+        wrapper: hideCancelButton,
+        headerWrapper: isHiddenHeaderBorder,
+        bodyWrapper: isHiddenBodyPadding,
+        footerWrapper: isHiddenFooterColor,
+      })}
       title={
         modalTitle && (
           <div

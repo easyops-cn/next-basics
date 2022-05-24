@@ -30,6 +30,10 @@ describe("GeneralModal", () => {
       okDisabled: true,
       hideCancelButton: true,
       modalTitle: "title",
+      titleIcon: {
+        icon: "plus",
+        lib: "antd",
+      },
     };
     const wrapper = mount(<GeneralModal {...props} />);
     // wrapper类加上display: none实现的隐藏取消按钮，所以还是2个Button
@@ -40,6 +44,8 @@ describe("GeneralModal", () => {
     expect(wrapper.find("Button").at(1).find("span").text()).toBe("SomeOkText");
     wrapper.setProps({ okDisabled: false });
     expect(wrapper.find("Button").at(1).prop("disabled")).toBeFalsy();
+    expect(wrapper.find(".ant-modal-title").text()).toBe("default");
+    expect(wrapper.find(".anticon").length).toBe(1);
   });
 
   it("should work in fullscreen mode", () => {
