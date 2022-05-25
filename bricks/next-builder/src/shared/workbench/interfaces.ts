@@ -2,6 +2,7 @@ import type { MenuIcon } from "@next-core/brick-types";
 import type { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 
 export interface WorkbenchNodeData<T = unknown> {
+  if?: boolean;
   key: string | number;
   name: string;
   icon?: MenuIcon | TextIcon;
