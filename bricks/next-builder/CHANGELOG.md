@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.153.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.152.1...@next-bricks/next-builder@1.153.0) (2022-05-25)
+
+
+### Features
+
+* **workBenchTree:** support render condition ([d92aac4](https://github.com/easyops-cn/next-basics/commit/d92aac47823236edcdfe6095b46bcc293d0268d6))
+
+
+
+
+
 ## [1.152.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.152.0...@next-bricks/next-builder@1.152.1) (2022-05-24)
 
 
