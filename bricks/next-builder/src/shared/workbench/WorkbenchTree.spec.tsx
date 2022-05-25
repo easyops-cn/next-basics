@@ -66,6 +66,12 @@ test("WorkbenchTree with nodes", async () => {
                 name: "n-4",
               },
             ],
+            if: true,
+          },
+          {
+            key: 5,
+            name: "n-5",
+            if: false,
           },
         ]}
         placeholder="No nodes"
@@ -121,6 +127,10 @@ test("WorkbenchTree with nodes", async () => {
   expect(rootTree.children.length).toBe(1);
   expect(
     (rootTree.firstChild as HTMLElement).querySelector(".nodeName").textContent
+  ).toBe("n-3");
+  expect(
+    (rootTree.firstChild as HTMLElement).querySelector(".nodeName").lastChild
+      .textContent
   ).toBe("n-3");
   expect(
     (rootTree.firstChild as HTMLElement)

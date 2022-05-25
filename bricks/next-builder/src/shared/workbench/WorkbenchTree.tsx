@@ -18,6 +18,7 @@ import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
 import type { WorkbenchNodeData } from "./interfaces";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
 import { WorkbenchTextIcon } from "./WorkbenchTextIcon";
+import { looseCheckIfOfComputed } from "@next-core/brick-kit";
 
 import styles from "./WorkbenchTree.module.css";
 
@@ -96,15 +97,17 @@ function TreeList({ nodes, level }: TreeListProps): ReactElement {
   const lastIndex = nodes.length - 1;
   return (
     <ul className={styles.tree}>
-      {nodes.map((node, index) => (
-        <TreeNode
-          key={node.key}
-          node={node}
-          level={level}
-          isFirst={index === 0}
-          isLast={index === lastIndex}
-        />
-      ))}
+      {nodes
+        .filter((item) => looseCheckIfOfComputed(item))
+        .map((node, index) => (
+          <TreeNode
+            key={node.key}
+            node={node}
+            level={level}
+            isFirst={index === 0}
+            isLast={index === lastIndex}
+          />
+        ))}
     </ul>
   );
 }
