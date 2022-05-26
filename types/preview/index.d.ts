@@ -143,7 +143,7 @@ export interface PreviewMessagePreviewerScroll extends PreviewBaseMessage {
 export interface PreviewMessagePreviewerCaptureOk extends PreviewBaseMessage {
   sender: "previewer";
   type: "capture-ok";
-  screenshot: string;
+  screenshot: Blob;
 }
 
 export interface PreviewMessagePreviewerCaptureFailed
