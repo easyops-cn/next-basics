@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.4.0...@next-bricks/next-previewer@1.5.0) (2022-05-26)
+
+
+### Features
+
+* capture return Blob ([d9bd986](https://github.com/easyops-cn/next-basics/commit/d9bd98607f546cfc8bf712ebf833e9e39905048f))
+
+
+
+
+
 # [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.3.0...@next-bricks/next-previewer@1.4.0) (2022-05-17)
 
 

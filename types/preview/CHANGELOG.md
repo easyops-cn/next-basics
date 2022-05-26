@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.7.0...@next-types/preview@1.8.0) (2022-05-26)
+
+
+### Features
+
+* capture return Blob ([d9bd986](https://github.com/easyops-cn/next-basics/commit/d9bd98607f546cfc8bf712ebf833e9e39905048f))
+
+
+
+
+
 # [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.6.0...@next-types/preview@1.7.0) (2022-05-17)
 
 
