@@ -141,6 +141,16 @@ export class BrickAlertElement extends UpdatingElement {
   foldDesc: boolean;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 设置描述区折叠模式的标签文案
+   * @group advanced
+   */
+  @property({ type: String })
+  foldDescLabel: string;
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -228,6 +238,7 @@ export class BrickAlertElement extends UpdatingElement {
             iconSize={this.iconSize}
             messageStyle={this.messageStyle}
             foldDesc={this.foldDesc}
+            foldDescLabel={this.foldDescLabel}
           />
         </BrickWrapper>,
         this,

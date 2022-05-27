@@ -38,6 +38,7 @@ interface BrickAlertProps {
   iconSize?: "big" | "small" | "default";
   messageStyle?: CSSProperties;
   foldDesc?: boolean;
+  foldDescLabel?: string;
 }
 
 export function BrickAlert(props: BrickAlertProps): React.ReactElement {
@@ -64,7 +65,9 @@ export function BrickAlert(props: BrickAlertProps): React.ReactElement {
               cursor: "pointer",
             }}
           >
-            <span style={{ ...props.messageStyle }}>故障排查</span>
+            <span style={{ ...props.messageStyle }}>
+              {props.foldDescLabel ?? "故障排查"}
+            </span>
             <UpOutlined
               rotate={show ? 0 : 180}
               style={{ marginLeft: "4px", lineHeight: "0px", fontSize: "12px" }}
