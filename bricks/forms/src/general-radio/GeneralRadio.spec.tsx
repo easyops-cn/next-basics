@@ -122,6 +122,52 @@ describe("GeneralRadio", () => {
     await (global as any).flushPromises();
     expect(handleChange).toHaveBeenCalled();
   });
+  it("should type=illustration", async () => {
+    const handleChange = jest.fn();
+    const wrapper = mount(
+      <GeneralRadio
+        options={[
+          {
+            icon: {
+              icon: "area-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "area-chart",
+            label: "area-chart",
+          },
+          {
+            icon: {
+              icon: "bar-chart",
+              lib: "antd",
+              theme: "outlined",
+            },
+            value: "bar-chart",
+            label: "bar-chart",
+          },
+        ]}
+        type="illustration"
+        name="icon"
+        label="icon选择"
+        value="bar-chart"
+        useBrick={{
+          brick: "tpl-card-list-base-item-of-illustration",
+          properties: {
+            detail: true,
+            background: "blue",
+          },
+        }}
+        onChange={handleChange}
+      />
+    );
+    expect(wrapper.find(".illustrationRadio").length).toBe(2);
+    expect(wrapper.find('input[id="bar-chart"]').prop("checked")).toBe(true);
+    wrapper.find('input[id="area-chart"]').invoke("onChange")({
+      target: { value: "area-chart" },
+    } as any);
+    await (global as any).flushPromises();
+    expect(handleChange).toHaveBeenCalled();
+  });
   it("should type is icon-circle", async () => {
     const handleChange = jest.fn();
     const wrapper = mount(
