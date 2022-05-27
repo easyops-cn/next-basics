@@ -16,9 +16,11 @@ import { UseBrickConf } from "@next-core/brick-types";
 
 interface IllustrationOptions {
   url: string;
-  description: string;
+  description?: string;
   title: string;
-  color: string;
+  backgroundColor?: string;
+  value: string;
+  [propName: string]: any;
 }
 export interface GeneralRadioProps extends FormItemWrapperProps {
   type?: RadioType;
