@@ -17,10 +17,60 @@ describe("calcExampleFields", () => {
         {
           name: "age",
           ref: "USER.age",
+          __fields__: [
+            {
+              name: "age",
+              type: "int",
+            },
+          ],
         },
         {
           name: "ids",
           type: "string[]",
+        },
+        {
+          name: "instance",
+          type: "InstanceData[]",
+          __fields__: [
+            {
+              name: "instanceId",
+              type: "string",
+            },
+          ],
+        },
+        {
+          name: "filter",
+          type: "Filter",
+          __fields__: [
+            {
+              name: "time",
+              type: "string",
+            },
+          ],
+        },
+        {
+          name: "fields",
+          type: "FieldContract[]",
+          __fields__: [
+            {
+              name: "name",
+              type: "string",
+            },
+            {
+              name: "fields",
+              type: "FieldContract[]",
+              __fields__: [
+                {
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  name: "fields",
+                  type: "FieldContract[]",
+                },
+              ],
+            },
+          ],
         },
         {
           name: "data",
@@ -48,8 +98,22 @@ describe("calcExampleFields", () => {
         },
       ],
       {
-        age: "USER.age",
+        age: "int",
         data: { instanceId: "string", isEdit: "boolean" },
+        instance: [
+          {
+            instanceId: "string",
+          },
+        ],
+        filter: {
+          time: "string",
+        },
+        fields: [
+          {
+            name: "string",
+            fields: ["FieldContract"],
+          },
+        ],
         ids: ["string"],
         name: "string",
         notify: [{ time: "string" }],
