@@ -34,7 +34,11 @@ import {
   flatten,
 } from "lodash";
 import { TablePaginationConfig, TableProps } from "antd/lib/table";
-import { TableRowSelection, SorterResult } from "antd/lib/table/interface";
+import {
+  TableRowSelection,
+  SorterResult,
+  RowSelectionType,
+} from "antd/lib/table/interface";
 import {
   compareFunMap,
   getKeysOfData,
@@ -48,6 +52,7 @@ import { ColumnProps } from "antd/lib/table";
 import { DataIndex } from "rc-table/lib/interface";
 import { MenuIcon } from "@next-core/brick-types";
 import { BrickWrapperConfig } from "../interfaces";
+import { SizeType } from "antd/lib/config-provider/SizeContext";
 export interface RowDisabledProps {
   field: string;
   value: any;
@@ -930,10 +935,50 @@ export class BrickTableElement extends UpdatingElement {
     attribute: false,
   })
   showHeader = true;
+
+  /**
+   * @kind false | TablePaginationConfig
+   * @required false
+   * @default -
+   * @description 是否显示分页
+   */
+  @property({
+    attribute: false,
+  })
+  pagination: false | TablePaginationConfig;
+
+  /**
+   * @kind SizeType
+   * @required false
+   * @default -
+   * @description 表格大小（antd原生size）
+   */
+  @property({
+    attribute: false,
+  })
+  size: SizeType;
+
+  /**
+   * @kind RowSelectionType
+   * @required false
+   * @default -
+   * @description 选框类型（单选/多选）
+   */
+  @property({
+    attribute: false,
+  })
+  type: RowSelectionType;
+
   // 对外获取内部 _dataSource 的值
   // istanbul ignore next
   get processedDataSource() {
     return this._dataSource;
+  }
+
+  // 对外获取内部 _finalConfigProps 的值
+  // istanbul ignore next
+  get processConfigProps() {
+    return this._finalConfigProps;
   }
 
   // 对外获取内部 _columns 的值
@@ -1690,9 +1735,12 @@ export class BrickTableElement extends UpdatingElement {
       this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
     if (this.configProps) {
       this._finalConfigProps = cloneDeep(this.configProps);
-      this._finalConfigProps.pagination = this.configProps.pagination !==
-        false && {
+      this._finalConfigProps.pagination = (this.configProps.pagination !==
+        false ||
+        (this.configProps.pagination === undefined &&
+          this.pagination !== false)) && {
         ...defaultPagination,
+        ...this.pagination,
         ...this.configProps.pagination,
       };
       if (this.configProps.rowSelection) {
@@ -1747,10 +1795,14 @@ export class BrickTableElement extends UpdatingElement {
           },
         };
         if (this.configProps.rowSelection === true) {
-          this._finalConfigProps.rowSelection = defaultRowSelection;
+          this._finalConfigProps.rowSelection = {
+            ...defaultRowSelection,
+            type: this.type,
+          };
         } else {
           this._finalConfigProps.rowSelection = {
             ...defaultRowSelection,
+            type: this.type,
             ...this.configProps.rowSelection,
             ...(defaultRowSelection.selectedRowKeys
               ? { selectedRowKeys: defaultRowSelection.selectedRowKeys }
@@ -1759,9 +1811,15 @@ export class BrickTableElement extends UpdatingElement {
         }
       }
     } else {
-      this._finalConfigProps = {
-        pagination: defaultPagination,
-      };
+      this._finalConfigProps = {};
+      this._finalConfigProps.pagination =
+        this.pagination !== false ? defaultPagination : false;
+      if (this.size) {
+        this._finalConfigProps.size = this.size;
+      }
+      if (this.type) {
+        this._finalConfigProps.rowSelection = { type: this.type };
+      }
     }
 
     // 初始化列排序
