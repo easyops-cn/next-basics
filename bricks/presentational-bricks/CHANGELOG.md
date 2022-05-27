@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.243.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.242.1...@next-bricks/presentational-bricks@1.243.0) (2022-05-27)
+
+
+### Features
+
+* **brick-alert:** 支持配置折叠描述区文案 ([12483a9](https://github.com/easyops-cn/next-basics/commit/12483a95c69e3e1a036fbf0267c3d8a0b88e8ec0))
+
+
+
+
+
 ## [1.242.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.242.0...@next-bricks/presentational-bricks@1.242.1) (2022-05-23)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
