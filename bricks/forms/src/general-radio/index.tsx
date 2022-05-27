@@ -14,13 +14,15 @@ import {
 import { GeneralRadio } from "./GeneralRadio";
 import { RadioGroupButtonStyle } from "antd/lib/radio";
 import { UiType } from "../interfaces";
+import { UseBrickConf } from "@next-core/brick-types";
 
 export type RadioType =
   | "button"
   | "default"
   | "icon"
   | "icon-circle"
-  | "icon-square";
+  | "icon-square"
+  | "illustration";
 
 /**
  * @id forms.general-radio
@@ -159,6 +161,19 @@ export class GeneralRadioElement extends FormItemElement {
     attribute: false,
   })
   uiType: UiType = "default";
+
+  /**
+   * @kind `{useBrick: UseBrickConf }`
+   * @required false
+   * @default
+   * @description 自定义radio的内容
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  useBrick: UseBrickConf;
+
   /**
    * @detail `string | number`
    * @description 单选框变化时被触发，`event.detail` 为选项值
@@ -200,6 +215,7 @@ export class GeneralRadioElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             buttonStyle={this.buttonStyle}
             uiType={this.uiType}
+            useBrick={this.useBrick}
           />
         </BrickWrapper>,
         this
