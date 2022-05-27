@@ -146,7 +146,7 @@ describe("GeneralRadio", () => {
             label: "bar-chart",
           },
         ]}
-        type="illustration"
+        type="custom"
         name="icon"
         label="icon选择"
         value="bar-chart"
