@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.16.0...@next-bricks/flow-builder@1.17.0) (2022-05-27)
+
+
+### Features
+
+* custom processor ([7c65e03](https://github.com/easyops-cn/next-basics/commit/7c65e032a5f0acb3d3701481f0deda530f7ec4a2))
+
+
+
+
+
 # [1.16.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.15.0...@next-bricks/flow-builder@1.16.0) (2022-05-24)
 
 

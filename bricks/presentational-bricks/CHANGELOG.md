@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.244.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.243.0...@next-bricks/presentational-bricks@1.244.0) (2022-05-27)
+
+
+### Features
+
+* **brick-table:** 暴露size/type/pagination属性 ([70d3efb](https://github.com/easyops-cn/next-basics/commit/70d3efb88abf85f562fef388ba5846fd81a6d30b))
+
+
+
+
+
 # [1.243.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.242.1...@next-bricks/presentational-bricks@1.243.0) (2022-05-27)
 
 
