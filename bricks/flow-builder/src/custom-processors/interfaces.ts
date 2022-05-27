@@ -45,3 +45,18 @@ export interface ContractData {
     uri: string;
   };
 }
+
+export interface Field {
+  name: string;
+  type?: string;
+  description?: string;
+  ref?: string;
+  fields?: Field[];
+  // 前端计算的 fields
+  __fields__?: Field[];
+}
+
+export interface ModelDefinition {
+  name: string;
+  fields?: Field[];
+}

@@ -34,8 +34,11 @@ export function getRequestExampleOfYaml(
   }
 
   try {
-    const body = JSON.parse(curExample.request.body);
-    result.data = body;
+    // istanbul ignore else
+    if (curExample.request.body) {
+      const body = JSON.parse(curExample.request.body);
+      result.data = body;
+    }
   } catch (error) {
     // istanbul ignore next
     // eslint-disable-next-line no-console

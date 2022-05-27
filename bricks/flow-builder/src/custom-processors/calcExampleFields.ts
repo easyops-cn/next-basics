@@ -1,56 +1,57 @@
 import { getRuntime } from "@next-core/brick-kit";
+import { isEmpty } from "lodash";
+import { calcModelDefinition } from "../schema-editor/processor/schemaEditor";
+import { Field } from "./interfaces";
 
-interface Field {
-  name?: string;
-  type?: string;
-  ref?: string;
-  fields?: Field[];
-}
+function _calcExampleField(
+  field: Field,
+  result: any,
+  parentModels: string[]
+): void {
+  const isArrayType = field.type?.endsWith("[]");
 
-function isFieldRef(field: Field): boolean {
-  return !!field.ref;
-}
+  if (field.__fields__) {
+    const curModel = calcModelDefinition(field);
 
-function getFieldType(field: Field): string {
-  return isFieldRef(field) ? field.ref : field.type;
-}
+    if (!parentModels.includes(curModel)) {
+      const models = [...parentModels, curModel];
 
-function isArrayType(field: Field): boolean {
-  return isFieldRef(field)
-    ? field.ref.endsWith("[]")
-    : field.type.endsWith("[]");
-}
-
-function _calcExampleFields(fields: Field[], data: Record<string, any>): void {
-  fields?.forEach((item) => {
-    const type = getFieldType(item);
-    if (isArrayType(item)) {
-      if (type === "object[]") {
-        const obj = {};
-        data[item.name] = [obj];
-
-        _calcExampleFields(item.fields, obj);
+      if (field.ref) {
+        field.__fields__.forEach((item) => {
+          _calcExampleField(item, result, models);
+        });
       } else {
-        data[item.name] = [type.replace("[]", "")];
+        const curData = {};
+        result[field.name] = isArrayType ? [curData] : curData;
+
+        field.__fields__.forEach((item) => {
+          _calcExampleField(item, curData, models);
+        });
       }
     } else {
-      if (type === "object") {
-        const obj = {};
-        data[item.name] = obj;
-        _calcExampleFields(item.fields, obj);
-      } else {
-        data[item.name] = type;
-      }
+      result[field.name] = isArrayType ? [curModel] : curModel;
     }
-  });
+  } else if (!isEmpty(field.fields)) {
+    const curData = {};
+    result[field.name] = isArrayType ? [curData] : curData;
+    field.fields.forEach((item) => {
+      _calcExampleField(item, curData, [...parentModels]);
+    });
+  } else {
+    const type = field.type?.replace("[]", "");
+    result[field.name] = isArrayType ? [type] : field.type;
+  }
 }
 
-export function calcExampleFields(fields: Field[]): any {
-  const collectedData = {};
+export function calcExampleFields(fieldList: Field[]): any {
+  const result = {};
+  const parentModels: string[] = [];
 
-  _calcExampleFields(fields, collectedData);
+  fieldList?.forEach((item) => {
+    _calcExampleField(item, result, [...parentModels]);
+  });
 
-  return collectedData;
+  return result;
 }
 
 getRuntime().registerCustomProcessor(
