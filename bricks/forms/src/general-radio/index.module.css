@@ -215,7 +215,7 @@
     width: 0;
     height: 0;
 
-    &:checked ~ .illustrationContent {
+    &:checked ~ .customContent {
       box-shadow: var(--hover-shadow);
     }
   }
@@ -227,11 +227,10 @@
     top: 0;
     color: var(--color-normal-text);
     border-radius: var(--larger-border-radius);
-    border: var(--border-width-base) solid var(--color-border-divider-line);
   }
 
   &:not(.disabledIconRadio):hover {
-    .content {
+    .customContent {
       box-shadow: var(--hover-shadow);
     }
   }
