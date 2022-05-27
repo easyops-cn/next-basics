@@ -160,7 +160,7 @@ describe("GeneralRadio", () => {
         onChange={handleChange}
       />
     );
-    expect(wrapper.find(".illustrationRadio").length).toBe(2);
+    expect(wrapper.find(".customRadio").length).toBe(2);
     expect(wrapper.find('input[id="bar-chart"]').prop("checked")).toBe(true);
     wrapper.find('input[id="area-chart"]').invoke("onChange")({
       target: { value: "area-chart" },

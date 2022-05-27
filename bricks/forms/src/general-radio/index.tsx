@@ -22,7 +22,7 @@ export type RadioType =
   | "icon"
   | "icon-circle"
   | "icon-square"
-  | "illustration";
+  | "custom";
 
 /**
  * @id forms.general-radio
@@ -141,6 +141,18 @@ export class GeneralRadioElement extends FormItemElement {
   size: "large" | "middle" | "small";
 
   /**
+   * @kind customStyle
+   * @required false
+   * @default -
+   * @description 	自定义radio的外层样式
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  customStyle: React.CSSProperties;
+
+  /**
    * @kind RadioGroupButtonStyle
    * @required false
    * @default `solid`
@@ -216,6 +228,7 @@ export class GeneralRadioElement extends FormItemElement {
             buttonStyle={this.buttonStyle}
             uiType={this.uiType}
             useBrick={this.useBrick}
+            customStyle={this.customStyle}
           />
         </BrickWrapper>,
         this
