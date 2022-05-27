@@ -975,6 +975,12 @@ export class BrickTableElement extends UpdatingElement {
     return this._dataSource;
   }
 
+  // 对外获取内部 _finalConfigProps 的值
+  // istanbul ignore next
+  get processConfigProps() {
+    return this._finalConfigProps;
+  }
+
   // 对外获取内部 _columns 的值
   // istanbul ignore next
   get processedColumns() {

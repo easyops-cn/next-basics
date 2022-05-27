@@ -45,8 +45,13 @@ const props = {
     },
   ],
   configProps: {
+    size: "middle",
+    pagination: true,
     rowSelection: true,
   },
+  size: "small" as any,
+  type: "radio" as any,
+  pagination: false,
   dataSource: {
     list: [
       {
@@ -376,6 +381,26 @@ describe("brick-table", () => {
     );
     await jest.runAllTimers();
     expect(element.processedDataSource.length).toBe(1);
+    document.body.removeChild(element);
+  });
+
+  it("should get correct _finalConfigProps", async () => {
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+
+    element.configProps = props.configProps;
+    element.dataSource = props.dataSource as any;
+    element.columns = props.columns as any;
+    element.size = props.size as any;
+    element.pagination = props.pagination as any;
+    element.type = props.type as any;
+
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(element.processConfigProps.rowSelection.type).toBe("radio");
+    expect(element.processConfigProps.size).toBe("middle");
+    expect(element.processConfigProps.pagination).not.toEqual(undefined);
     document.body.removeChild(element);
   });
 });
