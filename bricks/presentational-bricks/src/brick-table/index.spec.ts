@@ -403,4 +403,36 @@ describe("brick-table", () => {
     expect(element.processConfigProps.pagination).not.toEqual(undefined);
     document.body.removeChild(element);
   });
+
+  it("property pagination should work", async () => {
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+
+    element.configProps = { ...props.configProps, pagination: null };
+    element.dataSource = props.dataSource as any;
+    element.columns = props.columns as any;
+    element.pagination = false;
+
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(element.processConfigProps.pagination).toEqual(false);
+    document.body.removeChild(element);
+  });
+
+  it("property type should work", async () => {
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+
+    element.configProps = { ...props.configProps, rowSelection: null };
+    element.dataSource = props.dataSource as any;
+    element.columns = props.columns as any;
+    element.type = "checkbox" as any;
+
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(element.processConfigProps.rowSelection.type).toBe("checkbox");
+    document.body.removeChild(element);
+  });
 });
