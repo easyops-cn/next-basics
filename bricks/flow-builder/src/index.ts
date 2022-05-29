@@ -16,3 +16,4 @@ import "./custom-processors/calcExampleFields";
 import "./custom-processors/getParamsOfDebug";
 import "./custom-processors/expandFields";
 import "./custom-processors/getFileTypeFields";
+import "./multiple-files-form";
