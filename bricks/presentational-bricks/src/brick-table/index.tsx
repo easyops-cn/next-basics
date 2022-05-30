@@ -940,7 +940,7 @@ export class BrickTableElement extends UpdatingElement {
    * @kind false | TablePaginationConfig
    * @required false
    * @default -
-   * @description 是否显示分页
+   * @description 是否显示分页，影响优先级低于configProps.pagination
    */
   @property({
     attribute: false,
@@ -951,7 +951,7 @@ export class BrickTableElement extends UpdatingElement {
    * @kind SizeType
    * @required false
    * @default -
-   * @description 表格大小（antd原生size）
+   * @description 表格大小（antd原生size），影响优先级低于configProps.size
    */
   @property({
     attribute: false,
@@ -962,7 +962,7 @@ export class BrickTableElement extends UpdatingElement {
    * @kind RowSelectionType
    * @required false
    * @default -
-   * @description 选框类型（单选/多选）
+   * @description 选框类型（单选/多选），影响优先级低于configProps.rowSelection.type
    */
   @property({
     attribute: false,
@@ -1735,14 +1735,23 @@ export class BrickTableElement extends UpdatingElement {
       this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
     if (this.configProps) {
       this._finalConfigProps = cloneDeep(this.configProps);
-      this._finalConfigProps.pagination = (this.configProps.pagination !==
-        false ||
-        (this.configProps.pagination === undefined &&
-          this.pagination !== false)) && {
-        ...defaultPagination,
-        ...this.pagination,
-        ...this.configProps.pagination,
-      };
+      if (this.configProps.pagination !== false) {
+        this._finalConfigProps.pagination = {
+          ...defaultPagination,
+          ...this.pagination,
+          ...this.configProps.pagination,
+        };
+        if (
+          (this.configProps.pagination === undefined ||
+            this.configProps.pagination === null) &&
+          this.pagination === false
+        ) {
+          this._finalConfigProps.pagination = false;
+        }
+      }
+      if (!this.configProps.size) {
+        this._finalConfigProps.size = this.size;
+      }
       if (this.configProps.rowSelection) {
         let rowDisabledConfig: RowDisabledProps[];
 
@@ -1797,16 +1806,22 @@ export class BrickTableElement extends UpdatingElement {
         if (this.configProps.rowSelection === true) {
           this._finalConfigProps.rowSelection = {
             ...defaultRowSelection,
-            type: this.type,
+            type: this.type ?? "checkbox",
           };
         } else {
           this._finalConfigProps.rowSelection = {
             ...defaultRowSelection,
-            type: this.type,
+            type: this.type ?? "checkbox",
             ...this.configProps.rowSelection,
             ...(defaultRowSelection.selectedRowKeys
               ? { selectedRowKeys: defaultRowSelection.selectedRowKeys }
               : {}),
+          };
+        }
+      } else {
+        if (this.type) {
+          this._finalConfigProps.rowSelection = {
+            type: this.type,
           };
         }
       }
@@ -1814,12 +1829,8 @@ export class BrickTableElement extends UpdatingElement {
       this._finalConfigProps = {};
       this._finalConfigProps.pagination =
         this.pagination !== false ? defaultPagination : false;
-      if (this.size) {
-        this._finalConfigProps.size = this.size;
-      }
-      if (this.type) {
-        this._finalConfigProps.rowSelection = { type: this.type };
-      }
+      this._finalConfigProps.size = this.size;
+      this._finalConfigProps.rowSelection = this.type && { type: this.type };
     }
 
     // 初始化列排序
