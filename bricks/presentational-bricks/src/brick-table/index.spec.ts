@@ -420,7 +420,7 @@ describe("brick-table", () => {
     document.body.removeChild(element);
   });
 
-  it("property type should work", async () => {
+  it("property type should work when rowSelection is null", async () => {
     const element = document.createElement(
       "presentational-bricks.brick-table"
     ) as BrickTableElement;
@@ -433,6 +433,28 @@ describe("brick-table", () => {
     document.body.appendChild(element);
     await jest.runAllTimers();
     expect(element.processConfigProps.rowSelection.type).toBe("checkbox");
+    expect(element.processConfigProps.rowSelection.onChange).not.toBe(
+      undefined
+    );
+    document.body.removeChild(element);
+  });
+
+  it("property type should work when configProps is null", async () => {
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+
+    element.configProps = null;
+    element.dataSource = props.dataSource as any;
+    element.columns = props.columns as any;
+    element.type = "checkbox" as any;
+
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(element.processConfigProps.rowSelection.type).toBe("checkbox");
+    expect(element.processConfigProps.rowSelection.onChange).not.toBe(
+      undefined
+    );
     document.body.removeChild(element);
   });
 });
