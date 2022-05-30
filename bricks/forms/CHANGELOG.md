@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.225.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.225.1...@next-bricks/forms@1.225.2) (2022-05-30)
+
+
+### Bug Fixes
+
+* 自定义插画radio refs BRICK_STORE-2731 ([51649e7](https://github.com/easyops-cn/next-basics/commit/51649e7fa350bc9bd5ac5f5f30b83c89ab2921da))
+* 自定义插画radio refs BRICK_STORE-2731 ([eb1343c](https://github.com/easyops-cn/next-basics/commit/eb1343cfb5d069cf68f11b54cc8d8a5167b3af1d))
+
+
+
+
+
 ## [1.225.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.225.0...@next-bricks/forms@1.225.1) (2022-05-24)
 
 
