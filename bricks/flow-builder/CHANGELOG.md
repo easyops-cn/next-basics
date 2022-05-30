@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.17.0...@next-bricks/flow-builder@1.18.0) (2022-05-30)
+
+
+### Features
+
+* upload files form ([335376e](https://github.com/easyops-cn/next-basics/commit/335376e7c9ae12388ce9ea1a89ef80c201fe3c9b))
+
+
+
+
+
 # [1.17.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.16.0...@next-bricks/flow-builder@1.17.0) (2022-05-27)
 
 
