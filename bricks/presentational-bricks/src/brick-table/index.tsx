@@ -1733,6 +1733,56 @@ export class BrickTableElement extends UpdatingElement {
 
     const rowKey =
       this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+    let rowDisabledConfig: RowDisabledProps[];
+
+    if (this.rowDisabledConfig) {
+      rowDisabledConfig = Array.isArray(this.rowDisabledConfig)
+        ? this.rowDisabledConfig
+        : [this.rowDisabledConfig];
+    }
+
+    // 当 rowSelection 为 true 或者有相关配置的时候的默认行选择配置
+    const defaultRowSelection: TableRowSelection<any> = {
+      ...(rowKey
+        ? {
+            selectedRowKeys: this._isInSelect
+              ? this.selectedRowKeys
+              : this.storeCheckedByUrl
+              ? this._getCheckedFromUrl()
+              : this.defaultSelectAll
+              ? this._handleDefaultSelectAll()
+              : this.selectedRowKeys,
+            onSelect: this._handleOnSelect,
+            onSelectAll: this._handleSelectAll,
+            onChange: this._handleRowSelectChange,
+            preserveSelectedRowKeys: true,
+          }
+        : {
+            // 当用户没有设置rowKey时的兼容处理
+            onChange: this._handleRowSelectChange,
+            preserveSelectedRowKeys: true,
+          }),
+      getCheckboxProps: (record: any) => {
+        if (
+          !isEmpty(this._disabledChildrenKeys) &&
+          this._disabledChildrenKeys.includes(get(record, rowKey))
+        ) {
+          return {
+            disabled: true,
+          };
+        }
+        if (!rowDisabledConfig) return {};
+
+        return {
+          disabled: rowDisabledConfig.some((config) => {
+            const { field, value, operator } = config;
+            const fun = compareFunMap[operator];
+
+            return fun?.(value, get(record, field));
+          }),
+        };
+      },
+    };
     if (this.configProps) {
       this._finalConfigProps = cloneDeep(this.configProps);
       if (this.configProps.pagination !== false) {
@@ -1753,56 +1803,6 @@ export class BrickTableElement extends UpdatingElement {
         this._finalConfigProps.size = this.size;
       }
       if (this.configProps.rowSelection) {
-        let rowDisabledConfig: RowDisabledProps[];
-
-        if (this.rowDisabledConfig) {
-          rowDisabledConfig = Array.isArray(this.rowDisabledConfig)
-            ? this.rowDisabledConfig
-            : [this.rowDisabledConfig];
-        }
-
-        // 当 rowSelection 为 true 或者有相关配置的时候的默认行选择配置
-        const defaultRowSelection: TableRowSelection<any> = {
-          ...(rowKey
-            ? {
-                selectedRowKeys: this._isInSelect
-                  ? this.selectedRowKeys
-                  : this.storeCheckedByUrl
-                  ? this._getCheckedFromUrl()
-                  : this.defaultSelectAll
-                  ? this._handleDefaultSelectAll()
-                  : this.selectedRowKeys,
-                onSelect: this._handleOnSelect,
-                onSelectAll: this._handleSelectAll,
-                onChange: this._handleRowSelectChange,
-                preserveSelectedRowKeys: true,
-              }
-            : {
-                // 当用户没有设置rowKey时的兼容处理
-                onChange: this._handleRowSelectChange,
-                preserveSelectedRowKeys: true,
-              }),
-          getCheckboxProps: (record: any) => {
-            if (
-              !isEmpty(this._disabledChildrenKeys) &&
-              this._disabledChildrenKeys.includes(get(record, rowKey))
-            ) {
-              return {
-                disabled: true,
-              };
-            }
-            if (!rowDisabledConfig) return {};
-
-            return {
-              disabled: rowDisabledConfig.some((config) => {
-                const { field, value, operator } = config;
-                const fun = compareFunMap[operator];
-
-                return fun?.(value, get(record, field));
-              }),
-            };
-          },
-        };
         if (this.configProps.rowSelection === true) {
           this._finalConfigProps.rowSelection = {
             ...defaultRowSelection,
@@ -1821,6 +1821,7 @@ export class BrickTableElement extends UpdatingElement {
       } else {
         if (this.type) {
           this._finalConfigProps.rowSelection = {
+            ...defaultRowSelection,
             type: this.type,
           };
         }
@@ -1830,7 +1831,10 @@ export class BrickTableElement extends UpdatingElement {
       this._finalConfigProps.pagination =
         this.pagination !== false ? defaultPagination : false;
       this._finalConfigProps.size = this.size;
-      this._finalConfigProps.rowSelection = this.type && { type: this.type };
+      this._finalConfigProps.rowSelection = this.type && {
+        ...defaultRowSelection,
+        type: this.type,
+      };
     }
 
     // 初始化列排序
