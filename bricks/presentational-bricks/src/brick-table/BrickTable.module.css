@@ -100,3 +100,13 @@ html[data-theme="dark"] {
     }
   }
 }
+
+.zebraPatternTable {
+  :global(.ant-table-tbody) {
+    tr {
+      td {
+        border-bottom: 0;
+      }
+    }
+  }
+}

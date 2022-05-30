@@ -495,6 +495,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
         [styles.expandIconCellHidden]: !expandIconAsCell,
         [styles.customDropTable]: props.tableDraggable,
         [styles.tableThTransparent]: props.thTransparent,
+        [styles.zebraPatternTable]: data?.length >= 2 && props.zebraPattern,
       })}
       dataSource={data}
       {...(props.tableDraggable
