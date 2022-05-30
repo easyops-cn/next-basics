@@ -11,16 +11,28 @@ import styles from "./index.module.css";
 import { RadioType } from ".";
 import { UiType } from "../interfaces";
 import classNames from "classnames";
+import { BrickAsComponent } from "@next-core/brick-kit";
+import { UseBrickConf } from "@next-core/brick-types";
 
+interface CustomOptions {
+  url: string;
+  description?: string;
+  title: string;
+  backgroundColor?: string;
+  value: string;
+  [propName: string]: any;
+}
 export interface GeneralRadioProps extends FormItemWrapperProps {
   type?: RadioType;
-  options: GeneralOption[];
+  options: GeneralOption[] | CustomOptions[];
   value?: any;
   disabled?: boolean;
   onChange?: (value: any) => void;
   buttonStyle?: RadioGroupButtonStyle;
   size?: "large" | "middle" | "small";
   uiType?: UiType;
+  useBrick?: UseBrickConf;
+  customStyle?: React.CSSProperties;
 }
 
 declare type SrcIcon = {
@@ -30,15 +42,17 @@ declare type SrcIcon = {
 
 interface IconRadioGroupProps {
   options: GeneralOption[];
-  type: "icon" | "icon-circle" | "icon-square";
+  type: "icon" | "icon-circle" | "icon-square" | "custom";
   disabled?: boolean;
   name?: string;
   value?: any;
+  useBrick?: UseBrickConf;
   onChange?: (value: any) => void;
+  customStyle?: React.CSSProperties;
 }
 
 function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
-  const { options, name, disabled, onChange, type } = props;
+  const { options, name, disabled, onChange, type, customStyle } = props;
   const [value, setValue] = useState(undefined);
 
   useEffect(() => {
@@ -56,9 +70,11 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
       {options?.map((item: any) => (
         <label
           htmlFor={item.value}
+          style={customStyle}
           className={classNames({
             [styles.disabledIconRadio]: disabled || item.disabled,
             [styles.iconRadio]: type === "icon",
+            [styles.customRadio]: type === "custom",
             [styles.specialIconRadio]:
               type === "icon-circle" || type === "icon-square",
           })}
@@ -86,6 +102,13 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                   />
                 )}
                 <div>{item.label}</div>
+              </div>
+            ) : type === "custom" ? (
+              <div className={styles.customContent}>
+                <BrickAsComponent
+                  useBrick={props.useBrick}
+                  data={item}
+                ></BrickAsComponent>
               </div>
             ) : (
               <div
@@ -198,7 +221,8 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
       <FormItemWrapper {...props}>
         {props.type === "icon" ||
         props.type === "icon-circle" ||
-        props.type === "icon-square" ? (
+        props.type === "icon-square" ||
+        props.type === "custom" ? (
           <IconRadioGroup
             value={props.value}
             onChange={handleChange}
@@ -206,6 +230,8 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
             disabled={disabled}
             name={props.name}
             type={props.type}
+            useBrick={props.useBrick}
+            customStyle={props.customStyle}
           />
         ) : (
           <Radio.Group
