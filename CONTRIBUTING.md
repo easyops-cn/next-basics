@@ -56,7 +56,7 @@ you can:
 1. Make sure your repository is using `@next-core/brick-container v2.66.31+` (run `yarn why '@next-core/brick-container'`), or upgrades by `yarn renew` or RenovateBot.
 2. Toggle a flag by LocalStorage: run `localStorage.setItem('visual-builder-preview-with-localhost', '1')` in your browser console of Visual Builder.
 
-   - Setting it to `'0'` or remove it will disable local preview.
+   - Then refresh the browser, there will be a button with experiment tube icon on the toolbar above the preview page, allow you to toggle whether to enable preview with localhost.
 
 3. Run local serve with certain flags, E.g.: `yarn serve --local-bricks=forms --subdir --cookie-same-site-none`.
 
@@ -131,7 +131,7 @@ yarn serve --server https://admin.easyops.local
 1. 确保你的项目的框架版本 `@next-core/brick-container v2.66.31+` （运行 `yarn why '@next-core/brick-container'`），否则使用 `yarn renew` 或 RenovateBot 更新。
 2. 设置 LocalStorage 启用一个标记位：在 Visual Builder 页面的浏览器控制台运行 `localStorage.setItem('visual-builder-preview-with-localhost', '1')`。
 
-   - 将它设置为 `'0'` 或者删除它将禁用本地预览。
+   - 然后刷新浏览器，预览页面上方的工具栏将显示一个带有实验烧杯图标的按钮，允许你切换是否使用本地预览。
 
 3. 运行本地服务并启用特定开关，例如：`yarn serve --local-bricks=forms --subdir --cookie-same-site-none`。
 
