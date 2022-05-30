@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.244.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.1...@next-bricks/presentational-bricks@1.244.2) (2022-05-30)
+
+
+### Bug Fixes
+
+* 补充size/type/pagination属性的影响优先级逻辑 ([0c31a96](https://github.com/easyops-cn/next-basics/commit/0c31a96572fda77be425d4800f96e3f4589279ea))
+
+
+
+
+
 ## [1.244.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.0...@next-bricks/presentational-bricks@1.244.1) (2022-05-30)
 
 
