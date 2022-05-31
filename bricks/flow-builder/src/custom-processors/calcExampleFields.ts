@@ -43,13 +43,17 @@ function _calcExampleField(
   }
 }
 
-export function calcExampleFields(fieldList: Field[]): any {
+export function calcExampleFields(field: Field): any {
   const result = {};
   const parentModels: string[] = [];
 
-  fieldList?.forEach((item) => {
-    _calcExampleField(item, result, [...parentModels]);
-  });
+  const childrenFields = field.__fields__ || field.fields;
+
+  if (!isEmpty(childrenFields)) {
+    childrenFields.forEach((item) => {
+      _calcExampleField(item, result, [...parentModels]);
+    });
+  }
 
   return result;
 }

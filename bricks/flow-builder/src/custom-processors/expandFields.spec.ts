@@ -173,6 +173,45 @@ describe("expandFields", () => {
         ],
       },
     ],
+    [
+      {
+        name: "request",
+        ref: "CmdbObject.objectId",
+      },
+      [
+        {
+          name: "CmdbObject",
+          fields: [
+            {
+              ref: "ObjectBasicInfo.*",
+            },
+          ],
+        },
+        {
+          name: "ObjectBasicInfo",
+          fields: [
+            {
+              name: "name",
+              type: "string",
+            },
+            {
+              name: "objectId",
+              type: "object_id",
+            },
+          ],
+        },
+      ],
+      {
+        name: "request",
+        ref: "CmdbObject.objectId",
+        __fields__: [
+          {
+            name: "objectId",
+            type: "object_id",
+          },
+        ],
+      },
+    ],
     [undefined, [], undefined],
   ])("should work", (field, definitionList, result) => {
     expect(expandFields(field, definitionList)).toEqual(result);

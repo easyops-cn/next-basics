@@ -1,7 +1,7 @@
 import { getRuntime } from "@next-core/brick-kit";
 import { safeDump, JSON_SCHEMA } from "js-yaml";
 import { Example, ContractData } from "./interfaces";
-import { compact } from "lodash";
+import { compact, isEmpty } from "lodash";
 
 export function getRequestExampleOfYaml(
   contractData: ContractData,
@@ -10,7 +10,7 @@ export function getRequestExampleOfYaml(
   const result: any = {};
   const uri = contractData.endpoint.uri;
 
-  const uriRegex = new RegExp(uri.replace(/\/:\w+/g, "/(\\w+)"));
+  const uriRegex = new RegExp(uri.replace(/\/:[@\w]+/g, "/([@\\w]+)"));
 
   const path = curExample.request.uri;
 
@@ -45,7 +45,11 @@ export function getRequestExampleOfYaml(
     console.error(error);
   }
 
-  const args = compact([...result.uriParams, result.data, result.queryParams]);
+  const args = compact([
+    ...result.uriParams,
+    isEmpty(result.data) ? null : result.data,
+    result.queryParams,
+  ]);
 
   return safeDump(args, {
     indent: 2,
