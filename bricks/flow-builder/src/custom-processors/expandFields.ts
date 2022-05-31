@@ -29,7 +29,21 @@ function processRef(
 
       processModel(find, definitionList, models);
     } else {
-      const childrenField = find.fields?.find((item) => item.name === refField);
+      let childrenField;
+
+      for (const item of find.fields) {
+        if (item.name === refField) {
+          childrenField = item;
+          break;
+        } else if (item.ref) {
+          processRef(item, definitionList, [...parentModels]);
+          const find = item.__fields__.find((item) => item.name === refField);
+          if (find) {
+            childrenField = find;
+            break;
+          }
+        }
+      }
 
       // istanbul ignore else
       if (childrenField) {
