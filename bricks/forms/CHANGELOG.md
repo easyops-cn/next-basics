@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.225.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.225.2...@next-bricks/forms@1.225.3) (2022-05-31)
+
+
+### Bug Fixes
+
+* 删除custom类型下的radio描边 refs BRICK_STORE-2749 ([161f886](https://github.com/easyops-cn/next-basics/commit/161f8863b8f98523037f06c68ab61830040add6c))
+
+
+
+
+
 ## [1.225.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.225.1...@next-bricks/forms@1.225.2) (2022-05-30)
 
 

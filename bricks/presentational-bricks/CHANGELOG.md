@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.244.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.3...@next-bricks/presentational-bricks@1.244.4) (2022-05-31)
+
+
+### Bug Fixes
+
+* 兼容在无configProps和无rowSelection的情况下,设置type需要能触发select事件 ([654d390](https://github.com/easyops-cn/next-basics/commit/654d390438e14e888f0b8fb68cd9bc9f7cac8133))
+
+
+
+
+
 ## [1.244.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.2...@next-bricks/presentational-bricks@1.244.3) (2022-05-30)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
