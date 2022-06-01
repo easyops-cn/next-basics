@@ -26,14 +26,21 @@ const items = {
     },
   ],
 };
-const titleContent = {
+const srcTitleContent = {
   title: "title",
   titleIcon: {
     imgSrc:
       "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
   },
 };
-const titleObj = (
+const menuTitleContent = {
+  title: "title",
+  titleIcon: {
+    icon: "plus",
+    lib: "antd",
+  },
+};
+const titleMatchObj1 = (
   <div style={{ alignItems: "center", display: "flex" }}>
     <GeneralIcon
       icon={{
@@ -42,6 +49,17 @@ const titleObj = (
         imgStyle: { marginRight: "8px" },
       }}
       size={20}
+    />
+    title
+  </div>
+);
+const titleMatchObj2 = (
+  <div style={{ alignItems: "center", display: "flex" }}>
+    <GeneralIcon
+      icon={{
+        icon: "plus",
+        lib: "antd",
+      }}
     />
     title
   </div>
@@ -77,7 +95,7 @@ describe("FormModal", () => {
         dataSource={dataSource}
         testId={testId}
         {...modalProps}
-        {...titleContent}
+        {...srcTitleContent}
         onOk={mockOnOk}
       />
     );
@@ -111,7 +129,7 @@ describe("FormModal", () => {
     spyOnLowLevelValidate.mockImplementation((callback) => {
       callback?.();
     });
-    const modal = wrapper.find(Modal);
+    let modal = wrapper.find(Modal);
     expect(modal.props()).toEqual(
       expect.objectContaining({
         ...modalProps,
@@ -129,6 +147,10 @@ describe("FormModal", () => {
         "data-testid"
       ]
     ).toBe(`${testId}-content`);
-    expect(modal.prop("title")).toMatchObject(titleObj);
+    expect(modal.prop("title")).toMatchObject(titleMatchObj1);
+    wrapper.setProps({ titleIcon: menuTitleContent.titleIcon });
+    wrapper.update();
+    modal = wrapper.find(Modal);
+    expect(modal.prop("title")).toMatchObject(titleMatchObj2);
   });
 });

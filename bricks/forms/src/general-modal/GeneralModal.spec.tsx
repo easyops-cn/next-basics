@@ -5,11 +5,16 @@ import { GeneralIcon } from "@next-libs/basic-components";
 
 describe("GeneralModal", () => {
   it("should work", () => {
-    const icon = {
+    const srcIcon = {
       imgSrc:
         "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     } as any;
-    const titleObj = (
+    const menuIcon = {
+      icon: "plus",
+      lib: "antd",
+    } as any;
+
+    const titleMatchObj1 = (
       <div
         className="formsGeneralModalTitle"
         style={{ alignItems: "center", display: "flex" }}
@@ -21,6 +26,18 @@ describe("GeneralModal", () => {
             imgStyle: { marginRight: "8px" },
           }}
           size={20}
+        />
+        配置管理
+      </div>
+    );
+    const titleMatchObj2 = (
+      <div
+        className="formsGeneralModalTitle"
+        style={{ alignItems: "center", display: "flex" }}
+      >
+        <GeneralIcon
+          icon={{ menuIcon: { icon: "plus", lib: "antd" } }}
+          style={{ fontSize: "20px", marginRight: "8px" }}
         />
         配置管理
       </div>
@@ -37,9 +54,13 @@ describe("GeneralModal", () => {
         cancelText="取消"
         okType="default"
         btnText="点击调整"
-        titleIcon={icon}
+        titleIcon={srcIcon}
       />
     );
-    expect(wrapper.find("Modal").prop("title")).toMatchObject(titleObj);
+    expect(wrapper.find("Modal").prop("title")).toMatchObject(titleMatchObj1);
+
+    wrapper.setProps({ titleIcon: { menuIcon } });
+    wrapper.update();
+    expect(wrapper.find("Modal").prop("title")).toMatchObject(titleMatchObj2);
   });
 });
