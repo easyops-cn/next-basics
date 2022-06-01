@@ -10,7 +10,7 @@ export function getRequestExampleOfYaml(
   const result: any = {};
   const uri = contractData.endpoint.uri;
 
-  const uriRegex = new RegExp(uri.replace(/\/:[@\w]+/g, "/([@\\w]+)"));
+  const uriRegex = new RegExp(uri.replace(/\/:[@_-\w]+/g, "/([@_-\\w]+)"));
 
   const path = curExample.request.uri;
 
