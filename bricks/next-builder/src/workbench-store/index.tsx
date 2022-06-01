@@ -12,6 +12,7 @@ import {
   BuilderProvider,
   type BuilderRuntimeNode,
   type EventDetailOfNodeReorder,
+  type EventDetailOfWorkbenchTreeNodeMove,
 } from "@next-core/editor-bricks-helper";
 import type {
   BuilderCustomTemplateNode,
@@ -53,6 +54,16 @@ export class WorkbenchStoreElement extends UpdatingElement {
     event: CustomEvent<EventDetailOfNodeReorder>
   ): void => {
     this._nodeReorderEmitter.emit(event.detail);
+  };
+
+  @event({
+    type: "node.move",
+  })
+  private _nodeMoveEmitter: EventEmitter<EventDetailOfWorkbenchTreeNodeMove>;
+  private _handleNodeMove = (
+    event: CustomEvent<EventDetailOfWorkbenchTreeNodeMove>
+  ): void => {
+    this._nodeMoveEmitter.emit(event.detail);
   };
 
   @event({
@@ -117,6 +128,7 @@ export class WorkbenchStoreElement extends UpdatingElement {
               templateSources={this.templateSources}
               onNodeClick={this._handleNodeClick}
               onNodeReorder={this._handleNodeReorder}
+              onWorkbenchTreeNodeMove={this._handleNodeMove}
             />
           </BuilderProvider>
         </BrickWrapper>,

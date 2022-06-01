@@ -15,6 +15,10 @@ import { SearchOutlined } from "@ant-design/icons";
 import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
+import {
+  useWorkbenchTreeDndContext,
+  dragStatusEnum,
+} from "./WorkbenchTreeDndContext";
 import type { WorkbenchNodeData } from "./interfaces";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
 import { WorkbenchTextIcon } from "./WorkbenchTextIcon";
@@ -23,7 +27,7 @@ import { looseCheckIfOfComputed } from "@next-core/brick-kit";
 import styles from "./WorkbenchTree.module.css";
 
 const treeLevelPadding = 10;
-
+const borderStyle = "0 0 0 1px #ba6d30";
 export interface WorkbenchTreeProps {
   nodes: WorkbenchNodeData[];
   placeholder?: string;
@@ -95,8 +99,9 @@ export function WorkbenchTree({
 
 function TreeList({ nodes, level }: TreeListProps): ReactElement {
   const lastIndex = nodes.length - 1;
+  const { onDragOver, onDragEnd } = useWorkbenchTreeDndContext();
   return (
-    <ul className={styles.tree}>
+    <ul className={styles.tree} onDragOver={onDragOver} onDragEnd={onDragEnd}>
       {nodes
         .filter((item) => looseCheckIfOfComputed(item))
         .map((node, index) => (
@@ -142,6 +147,9 @@ function TreeNode({
     onNodeToggle,
     getCollapsedId,
   } = useWorkbenchTreeContext();
+  const { allow, onDragStart, dragOverNode, dragStatus } =
+    useWorkbenchTreeDndContext();
+
   const searching = useContext(SearchingContext);
   const [collapseClicked, setCollapseClicked] = useState(false);
   const [collapsed, setCollapsed] = useState(
@@ -182,6 +190,32 @@ function TreeNode({
     []
   );
 
+  const nodeUid = useMemo(() => {
+    if (node.data) {
+      const getNodeUid = (data: Record<string, any>): number | string => {
+        return data.type === "mount-point"
+          ? `${data.parent.$$uid}:${data.mountPoint}`
+          : data.$$uid;
+      };
+      return getNodeUid(node.data);
+    }
+  }, [node.data]);
+
+  const hoverStyle = useMemo((): React.CSSProperties => {
+    const dragUid = dragOverNode?.getAttribute("data-uid");
+    const commomStyle: React.CSSProperties = {};
+    let hoverStyle: React.CSSProperties;
+    if (Number(dragUid) === nodeUid) {
+      if (dragStatus === dragStatusEnum.inside) {
+        hoverStyle = {
+          boxShadow: borderStyle,
+          background: "rgba(255, 255, 255, 0.1)",
+        };
+      }
+    }
+    return Object.assign(commomStyle, hoverStyle);
+  }, [dragOverNode, nodeUid, dragStatus]);
+
   const handleCollapse = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
@@ -208,7 +242,12 @@ function TreeNode({
   }
 
   return (
-    <li>
+    <li
+      draggable={allow && typeof nodeUid === "number"}
+      onDragStart={onDragStart}
+      data-uid={nodeUid}
+      style={hoverStyle}
+    >
       <Link
         className={classNames(styles.nodeLabelRow, {
           [styles.active]: isActive,

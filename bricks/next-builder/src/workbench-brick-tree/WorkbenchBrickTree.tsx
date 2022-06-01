@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import {
   useBuilderContextMenuStatus,
   useBuilderData,
@@ -21,6 +21,10 @@ import type {
 import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 import { deepMatch } from "../builder-container/utils";
+import {
+  WorkbenchTreeDndContext,
+  dragStatusEnum,
+} from "../shared/workbench/WorkbenchTreeDndContext";
 
 export interface WorkbenchBrickTreeProps {
   placeholder?: string;
@@ -45,6 +49,11 @@ function isNormalNode(
   return node.type !== "mount-point";
 }
 
+const placeholderDOM = document.createElement("li");
+placeholderDOM.className = "placeholder";
+placeholderDOM.style.height = "22px";
+placeholderDOM.style.border = "1px dashed rgb(80,80,80)";
+
 export function WorkbenchBrickTree({
   placeholder,
   searchPlaceholder,
@@ -57,6 +66,9 @@ export function WorkbenchBrickTree({
   const hoverNodeUid = useHoverNodeUid();
   const { active, node: activeContextMenuNode } = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
+  const [overNode, setOverNode] = useState<HTMLElement>(null);
+  const [overStatus, setOverStatus] = useState<dragStatusEnum>(null);
+  const [curNode, setCurNode] = useState<HTMLElement>(null);
 
   const clickFactory = useCallback(
     ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
@@ -264,6 +276,95 @@ export function WorkbenchBrickTree({
     return [getEntityNode(rootNode)];
   }, [edges, nodes, rootNode]);
 
+  const findDragParent = (element: HTMLElement, equal = true): HTMLElement => {
+    let node = element;
+    while (node) {
+      if (node.draggable && (equal || node !== element)) {
+        return node;
+      }
+      node = node.parentElement;
+    }
+  };
+
+  const getDragState = (
+    e: React.DragEvent<HTMLElement>
+  ): {
+    node: HTMLElement;
+    status: dragStatusEnum;
+  } => {
+    const node = findDragParent(e.target as HTMLElement);
+    if (node === curNode) {
+      return;
+    }
+    const { top, bottom } = node.getBoundingClientRect();
+    let status: dragStatusEnum;
+    if (e.clientY < top + 5) {
+      status = dragStatusEnum.top;
+    } else if (e.clientY > bottom - 5) {
+      status = dragStatusEnum.bottom;
+    } else if (e.clientY > top && e.clientY < bottom) {
+      status = dragStatusEnum.inside;
+    }
+
+    return {
+      node,
+      status,
+    };
+  };
+
+  const handleOnDragStart = (e: React.DragEvent<HTMLElement>): void => {
+    setCurNode(e.target as HTMLElement);
+  };
+
+  const handleOnDragOver = (e: React.DragEvent<HTMLElement>): void => {
+    e.preventDefault();
+    if ((e.target as HTMLElement).className === "placeholder") return;
+    const dom = getDragState(e);
+    if (dom && !curNode?.contains(dom.node)) {
+      setOverNode(dom.node);
+      setOverStatus(dom.status);
+      const spanDOM = dom.node.querySelector("a > span") as HTMLElement;
+      const paddingLeft = spanDOM?.style?.paddingLeft;
+      if (dom.status === dragStatusEnum.top) {
+        placeholderDOM.style.opacity = "1";
+        placeholderDOM.style.marginLeft = paddingLeft;
+        dom.node.parentNode.insertBefore(placeholderDOM, dom.node);
+      } else if (dom.status === dragStatusEnum.bottom) {
+        placeholderDOM.style.opacity = "1";
+        placeholderDOM.style.marginLeft = paddingLeft;
+        dom.node.parentNode.insertBefore(placeholderDOM, dom.node.nextSibling);
+      } else {
+        placeholderDOM.style.opacity = "0";
+      }
+    }
+  };
+  const handleOnDragEnd = (e: React.DragEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    let parentNode = overNode;
+    placeholderDOM.parentNode &&
+      placeholderDOM.parentNode.removeChild(placeholderDOM);
+    if ([dragStatusEnum.top, dragStatusEnum.bottom].includes(overStatus)) {
+      parentNode = findDragParent(parentNode, false);
+    }
+    const getUid = (dom: HTMLElement): number => {
+      const id = dom.getAttribute("data-uid");
+      return Number(id);
+    };
+    if (parentNode) {
+      manager.workbenchTreeNodeMove({
+        dragNodeUid: getUid(curNode),
+        dragOverNodeUid: getUid(overNode),
+        dragParentNodeUid: getUid(parentNode),
+        dragStatus: overStatus,
+      });
+    }
+    setTimeout(() => {
+      setCurNode(null);
+      setOverNode(null);
+    });
+  };
+
   const activeKey = useMemo(() => {
     return activeInstanceId
       ? nodes.find((node) => node.instanceId === activeInstanceId)?.$$uid
@@ -296,11 +397,23 @@ export function WorkbenchBrickTree({
         getCollapsedId,
       }}
     >
-      <WorkbenchTree
-        nodes={tree}
-        placeholder={placeholder}
-        searchPlaceholder={searchPlaceholder}
-      />
+      <WorkbenchTreeDndContext.Provider
+        value={{
+          allow: true,
+          dragNode: curNode,
+          dragOverNode: overNode,
+          dragStatus: overStatus,
+          onDragStart: handleOnDragStart,
+          onDragOver: handleOnDragOver,
+          onDragEnd: handleOnDragEnd,
+        }}
+      >
+        <WorkbenchTree
+          nodes={tree}
+          placeholder={placeholder}
+          searchPlaceholder={searchPlaceholder}
+        />
+      </WorkbenchTreeDndContext.Provider>
     </WorkbenchTreeContext.Provider>
   );
 }
