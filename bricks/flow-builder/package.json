@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/flow-builder",
-  "version": "1.18.2",
+  "version": "1.19.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/flow-builder",
   "license": "GPL-3.0",
@@ -35,8 +35,8 @@
     "@next-libs/code-editor-components": "^4.0.31",
     "@next-libs/forms": "^3.2.24",
     "@next-sdk/cmdb-sdk": "^2.1.1",
-    "immutability-helper": "^3.1.1",
-    "file-saver": "^2.0.5"
+    "file-saver": "^2.0.5",
+    "immutability-helper": "^3.1.1"
   },
   "peerDependencies": {
     "@next-dll/ace": "*"
