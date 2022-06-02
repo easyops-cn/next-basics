@@ -101,7 +101,8 @@ export function BrickDocument({
     if (!value) return "-";
 
     const str = value.replace(/`/g, "");
-    if (interfaceIds.includes(str) && renderLink) {
+    const type = str.replace(/\s*\[\s*\]\s*/, "");
+    if (interfaceIds.includes(type) && renderLink) {
       const hashHref = getCurHashHref();
       return (
         <span
