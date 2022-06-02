@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.154.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.153.1...@next-bricks/next-builder@1.154.0) (2022-06-02)
+
+
+### Features
+
+* **workbenchBrickTree:** support dnd ([97bea0b](https://github.com/easyops-cn/next-basics/commit/97bea0bb2b0df04022c50f28ecb3c82d4dabf0ff))
+* **workbenchBrickTree:** update code and dep ([c046d7b](https://github.com/easyops-cn/next-basics/commit/c046d7b2c04e4ca93d3bf0a76784bcf0c5472092))
+
+
+
+
+
 ## [1.153.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.153.0...@next-bricks/next-builder@1.153.1) (2022-05-26)
 
 **Note:** Version bump only for package @next-bricks/next-builder
