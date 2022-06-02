@@ -117,6 +117,21 @@ function TreeList({ nodes, level }: TreeListProps): ReactElement {
   );
 }
 
+function PlaceholderDOM({
+  style,
+}: {
+  style: React.CSSProperties;
+}): React.ReactElement {
+  const { dragStatus } = useWorkbenchTreeDndContext();
+  const styles: React.CSSProperties = {
+    height: 22,
+    border: "1px dashed rgb(80,80,80)",
+    opacity: dragStatus === dragStatusEnum.inside ? "0" : "1",
+    ...style,
+  };
+
+  return <li className="workbenchTree-placeholder-dom" style={styles} />;
+}
 export interface TreeNodeProps {
   node: WorkbenchNodeData;
   level: number;
@@ -150,7 +165,9 @@ function TreeNode({
   const { allow, onDragStart, dragOverNode, dragStatus } =
     useWorkbenchTreeDndContext();
 
+  const nodePaddingLeft = level * treeLevelPadding + basePaddingLeft - 2;
   const searching = useContext(SearchingContext);
+  const [cacheDragStatus, setCacheDragStatus] = useState(null);
   const [collapseClicked, setCollapseClicked] = useState(false);
   const [collapsed, setCollapsed] = useState(
     collapsedNodes?.includes(getCollapsedId?.(node)) ?? false
@@ -201,11 +218,27 @@ function TreeNode({
     }
   }, [node.data]);
 
+  useEffect(() => {
+    if (dragStatus === dragStatusEnum.inside) {
+      return;
+    }
+    if ([dragStatusEnum.top, dragStatusEnum.bottom].includes(dragStatus)) {
+      setCacheDragStatus(dragStatus);
+    }
+  }, [dragStatus]);
+
+  const isDragActive = useMemo(() => {
+    if (dragOverNode) {
+      const dragUid = dragOverNode.dataset.uid;
+      return Number(dragUid) === nodeUid;
+    }
+    return false;
+  }, [dragOverNode, nodeUid]);
+
   const hoverStyle = useMemo((): React.CSSProperties => {
-    const dragUid = dragOverNode?.getAttribute("data-uid");
     const commomStyle: React.CSSProperties = {};
     let hoverStyle: React.CSSProperties;
-    if (Number(dragUid) === nodeUid) {
+    if (isDragActive) {
       if (dragStatus === dragStatusEnum.inside) {
         hoverStyle = {
           boxShadow: borderStyle,
@@ -214,7 +247,7 @@ function TreeNode({
       }
     }
     return Object.assign(commomStyle, hoverStyle);
-  }, [dragOverNode, nodeUid, dragStatus]);
+  }, [isDragActive, dragStatus]);
 
   const handleCollapse = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
@@ -242,89 +275,107 @@ function TreeNode({
   }
 
   return (
-    <li
-      draggable={allow && typeof nodeUid === "number"}
-      onDragStart={onDragStart}
-      data-uid={nodeUid}
-      style={hoverStyle}
-    >
-      <Link
-        className={classNames(styles.nodeLabelRow, {
-          [styles.active]: isActive,
-          [styles.hover]: hoverKey && node.key === hoverKey,
-          [styles.matched]:
-            searching && node.matchedSelf && !showMatchedNodeOnly,
-          [styles.fixedActions]:
-            fixedActionsFor &&
-            []
-              .concat(fixedActionsFor)
-              .some((source) =>
-                isMatch(node.data as Record<string, unknown>, source)
-              ),
-          [styles.collapsed]: allowCollapse && collapsed,
-          [styles.collapsible]: allowCollapse,
-        })}
-        tabIndex={0}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onContextMenu={onContextMenu}
-        noEmptyHref
-        onClick={onClick}
-        {...pick(node.link, ["to", "href"])}
-      >
-        <span
-          className={styles.nodeLabel}
+    <>
+      {isDragActive && level !== 1 && cacheDragStatus === dragStatusEnum.top && (
+        <PlaceholderDOM
           style={{
-            paddingLeft: level * treeLevelPadding + basePaddingLeft - 2,
-            color: node.labelColor,
+            marginLeft: nodePaddingLeft,
           }}
-          ref={nodeLabelCallback}
+        />
+      )}
+      <li
+        draggable={allow && typeof nodeUid === "number"}
+        onDragStart={onDragStart}
+        data-uid={nodeUid}
+        style={hoverStyle}
+      >
+        <Link
+          className={classNames(styles.nodeLabelRow, {
+            [styles.active]: isActive,
+            [styles.hover]: hoverKey && node.key === hoverKey,
+            [styles.matched]:
+              searching && node.matchedSelf && !showMatchedNodeOnly,
+            [styles.fixedActions]:
+              fixedActionsFor &&
+              []
+                .concat(fixedActionsFor)
+                .some((source) =>
+                  isMatch(node.data as Record<string, unknown>, source)
+                ),
+            [styles.collapsed]: allowCollapse && collapsed,
+            [styles.collapsible]: allowCollapse,
+          })}
+          tabIndex={0}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onContextMenu={onContextMenu}
+          noEmptyHref
+          onClick={onClick}
+          {...pick(node.link, ["to", "href"])}
         >
-          <span className={styles.nodeIconWrapper}>
-            {allowCollapse && (
-              <span
-                className={styles.collapseIcon}
-                onClick={handleCollapse}
-                onMouseDown={preventMouseEvent}
-                title={collapsed ? "Expand" : "Collapse"}
-                role="button"
-              >
-                <GeneralIcon
-                  icon={{
-                    lib: "antd",
-                    theme: "outlined",
-                    icon: collapsed ? "right" : "down",
-                  }}
-                />
-              </span>
-            )}
-            <span className={styles.nodeIcon}>
-              {node.icon?.lib === "text" ? (
-                <WorkbenchTextIcon icon={node.icon} />
-              ) : (
-                <GeneralIcon icon={node.icon} />
+          <span
+            className={styles.nodeLabel}
+            style={{
+              paddingLeft: nodePaddingLeft,
+              color: node.labelColor,
+            }}
+            ref={nodeLabelCallback}
+          >
+            <span className={styles.nodeIconWrapper}>
+              {allowCollapse && (
+                <span
+                  className={styles.collapseIcon}
+                  onClick={handleCollapse}
+                  onMouseDown={preventMouseEvent}
+                  title={collapsed ? "Expand" : "Collapse"}
+                  role="button"
+                >
+                  <GeneralIcon
+                    icon={{
+                      lib: "antd",
+                      theme: "outlined",
+                      icon: collapsed ? "right" : "down",
+                    }}
+                  />
+                </span>
               )}
+              <span className={styles.nodeIcon}>
+                {node.icon?.lib === "text" ? (
+                  <WorkbenchTextIcon icon={node.icon} />
+                ) : (
+                  <GeneralIcon icon={node.icon} />
+                )}
+              </span>
+            </span>
+            <span className={styles.nodeName}>
+              {isTransformName
+                ? smartDisplayForEvaluableString(node.name)
+                : node.name}
             </span>
           </span>
-          <span className={styles.nodeName}>
-            {isTransformName
-              ? smartDisplayForEvaluableString(node.name)
-              : node.name}
-          </span>
-        </span>
-        <WorkbenchMiniActionBar
-          className={styles.nodeActionsBar}
-          data={node.data}
-          isFirst={isFirst}
-          isLast={isLast}
-        />
-        {node.badge && (
-          <span className={styles.badge}>
-            <GeneralIcon icon={node.badge} />
-          </span>
+          <WorkbenchMiniActionBar
+            className={styles.nodeActionsBar}
+            data={node.data}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
+          {node.badge && (
+            <span className={styles.badge}>
+              <GeneralIcon icon={node.badge} />
+            </span>
+          )}
+        </Link>
+        {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
+      </li>
+      {isDragActive &&
+        level !== 1 &&
+        cacheDragStatus === dragStatusEnum.bottom && (
+          <PlaceholderDOM
+            style={{
+              marginLeft: nodePaddingLeft,
+            }}
+          />
         )}
-      </Link>
-      {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
-    </li>
+    </>
   );
 }

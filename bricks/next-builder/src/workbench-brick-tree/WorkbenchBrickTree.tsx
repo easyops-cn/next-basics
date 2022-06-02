@@ -49,11 +49,6 @@ function isNormalNode(
   return node.type !== "mount-point";
 }
 
-const placeholderDOM = document.createElement("li");
-placeholderDOM.className = "placeholder";
-placeholderDOM.style.height = "22px";
-placeholderDOM.style.border = "1px dashed rgb(80,80,80)";
-
 export function WorkbenchBrickTree({
   placeholder,
   searchPlaceholder,
@@ -66,6 +61,7 @@ export function WorkbenchBrickTree({
   const hoverNodeUid = useHoverNodeUid();
   const { active, node: activeContextMenuNode } = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
+  const [isDrag, setIsDrag] = useState<boolean>(false);
   const [overNode, setOverNode] = useState<HTMLElement>(null);
   const [overStatus, setOverStatus] = useState<dragStatusEnum>(null);
   const [curNode, setCurNode] = useState<HTMLElement>(null);
@@ -313,43 +309,31 @@ export function WorkbenchBrickTree({
   };
 
   const handleOnDragStart = (e: React.DragEvent<HTMLElement>): void => {
+    setIsDrag(true);
     setCurNode(e.target as HTMLElement);
   };
 
   const handleOnDragOver = (e: React.DragEvent<HTMLElement>): void => {
     e.preventDefault();
-    if ((e.target as HTMLElement).className === "placeholder") return;
+    if (!isDrag) return;
+    if ((e.target as HTMLElement).className === "workbenchTree-placeholder-dom")
+      return;
     const dom = getDragState(e);
     if (dom && !curNode?.contains(dom.node)) {
       setOverNode(dom.node);
       setOverStatus(dom.status);
-      const spanDOM = dom.node.querySelector("a > span") as HTMLElement;
-      const paddingLeft = spanDOM?.style?.paddingLeft;
-      if (dom.status === dragStatusEnum.top) {
-        placeholderDOM.style.opacity = "1";
-        placeholderDOM.style.marginLeft = paddingLeft;
-        dom.node.parentNode.insertBefore(placeholderDOM, dom.node);
-      } else if (dom.status === dragStatusEnum.bottom) {
-        placeholderDOM.style.opacity = "1";
-        placeholderDOM.style.marginLeft = paddingLeft;
-        dom.node.parentNode.insertBefore(placeholderDOM, dom.node.nextSibling);
-      } else {
-        placeholderDOM.style.opacity = "0";
-      }
     }
   };
   const handleOnDragEnd = (e: React.DragEvent<HTMLElement>): void => {
     e.preventDefault();
     e.stopPropagation();
+    setIsDrag(false);
     let parentNode = overNode;
-    placeholderDOM.parentNode &&
-      placeholderDOM.parentNode.removeChild(placeholderDOM);
     if ([dragStatusEnum.top, dragStatusEnum.bottom].includes(overStatus)) {
       parentNode = findDragParent(parentNode, false);
     }
     const getUid = (dom: HTMLElement): number => {
-      const id = dom.getAttribute("data-uid");
-      return Number(id);
+      return Number(dom.dataset.uid);
     };
     if (parentNode) {
       manager.workbenchTreeNodeMove({
