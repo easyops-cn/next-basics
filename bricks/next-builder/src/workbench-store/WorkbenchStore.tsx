@@ -15,6 +15,7 @@ import {
   useBuilderDataManager,
   type BuilderRuntimeNode,
   type EventDetailOfNodeReorder,
+  type EventDetailOfWorkbenchTreeNodeMove,
 } from "@next-core/editor-bricks-helper";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
 import { sendHighlightBrick, useHighlightBrick } from "./useHighlightBrick";
@@ -24,6 +25,9 @@ export interface WorkbenchStoreProps {
   templateSources?: BuilderCustomTemplateNode[];
   onNodeClick?(event: CustomEvent<BuilderRuntimeNode>): void;
   onNodeReorder?(event: CustomEvent<EventDetailOfNodeReorder>): void;
+  onWorkbenchTreeNodeMove?(
+    event: CustomEvent<EventDetailOfWorkbenchTreeNodeMove>
+  ): void;
 }
 
 export interface WorkbenchStoreRef {
@@ -37,6 +41,7 @@ export function LegacyWorkbenchStore(
     templateSources,
     onNodeClick,
     onNodeReorder,
+    onWorkbenchTreeNodeMove,
   }: WorkbenchStoreProps,
   ref: React.Ref<WorkbenchStoreRef>
 ): React.ReactElement {
@@ -70,13 +75,14 @@ export function LegacyWorkbenchStore(
     const removeListeners = [
       manager.onNodeClick(onNodeClick),
       manager.onNodeReorder(onNodeReorder),
+      manager.onWorkbenchTreeNodeMove(onWorkbenchTreeNodeMove),
     ];
     return () => {
       for (const fn of removeListeners) {
         fn();
       }
     };
-  }, [manager, onNodeClick, onNodeReorder]);
+  }, [manager, onNodeClick, onNodeReorder, onWorkbenchTreeNodeMove]);
 
   useHighlightBrick("hover", manager);
   useHighlightBrick("active", manager);

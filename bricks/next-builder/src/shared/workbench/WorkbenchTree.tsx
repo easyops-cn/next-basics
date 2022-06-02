@@ -15,6 +15,10 @@ import { SearchOutlined } from "@ant-design/icons";
 import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
+import {
+  useWorkbenchTreeDndContext,
+  dragStatusEnum,
+} from "./WorkbenchTreeDndContext";
 import type { WorkbenchNodeData } from "./interfaces";
 import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
 import { WorkbenchTextIcon } from "./WorkbenchTextIcon";
@@ -23,7 +27,7 @@ import { looseCheckIfOfComputed } from "@next-core/brick-kit";
 import styles from "./WorkbenchTree.module.css";
 
 const treeLevelPadding = 10;
-
+const borderStyle = "0 0 0 1px #ba6d30";
 export interface WorkbenchTreeProps {
   nodes: WorkbenchNodeData[];
   placeholder?: string;
@@ -95,8 +99,9 @@ export function WorkbenchTree({
 
 function TreeList({ nodes, level }: TreeListProps): ReactElement {
   const lastIndex = nodes.length - 1;
+  const { onDragOver, onDragEnd } = useWorkbenchTreeDndContext();
   return (
-    <ul className={styles.tree}>
+    <ul className={styles.tree} onDragOver={onDragOver} onDragEnd={onDragEnd}>
       {nodes
         .filter((item) => looseCheckIfOfComputed(item))
         .map((node, index) => (
@@ -112,6 +117,21 @@ function TreeList({ nodes, level }: TreeListProps): ReactElement {
   );
 }
 
+function PlaceholderDOM({
+  style,
+}: {
+  style: React.CSSProperties;
+}): React.ReactElement {
+  const { dragStatus } = useWorkbenchTreeDndContext();
+  const styles: React.CSSProperties = {
+    height: 22,
+    border: "1px dashed rgb(80,80,80)",
+    opacity: dragStatus === dragStatusEnum.inside ? "0" : "1",
+    ...style,
+  };
+
+  return <li className="workbenchTree-placeholder-dom" style={styles} />;
+}
 export interface TreeNodeProps {
   node: WorkbenchNodeData;
   level: number;
@@ -142,7 +162,12 @@ function TreeNode({
     onNodeToggle,
     getCollapsedId,
   } = useWorkbenchTreeContext();
+  const { allow, onDragStart, dragOverNode, dragStatus } =
+    useWorkbenchTreeDndContext();
+
+  const nodePaddingLeft = level * treeLevelPadding + basePaddingLeft - 2;
   const searching = useContext(SearchingContext);
+  const [cacheDragStatus, setCacheDragStatus] = useState(null);
   const [collapseClicked, setCollapseClicked] = useState(false);
   const [collapsed, setCollapsed] = useState(
     collapsedNodes?.includes(getCollapsedId?.(node)) ?? false
@@ -182,6 +207,48 @@ function TreeNode({
     []
   );
 
+  const nodeUid = useMemo(() => {
+    if (node.data) {
+      const getNodeUid = (data: Record<string, any>): number | string => {
+        return data.type === "mount-point"
+          ? `${data.parent.$$uid}:${data.mountPoint}`
+          : data.$$uid;
+      };
+      return getNodeUid(node.data);
+    }
+  }, [node.data]);
+
+  useEffect(() => {
+    if (dragStatus === dragStatusEnum.inside) {
+      return;
+    }
+    if ([dragStatusEnum.top, dragStatusEnum.bottom].includes(dragStatus)) {
+      setCacheDragStatus(dragStatus);
+    }
+  }, [dragStatus]);
+
+  const isDragActive = useMemo(() => {
+    if (dragOverNode) {
+      const dragUid = dragOverNode.dataset.uid;
+      return Number(dragUid) === nodeUid;
+    }
+    return false;
+  }, [dragOverNode, nodeUid]);
+
+  const hoverStyle = useMemo((): React.CSSProperties => {
+    const commomStyle: React.CSSProperties = {};
+    let hoverStyle: React.CSSProperties;
+    if (isDragActive) {
+      if (dragStatus === dragStatusEnum.inside) {
+        hoverStyle = {
+          boxShadow: borderStyle,
+          background: "rgba(255, 255, 255, 0.1)",
+        };
+      }
+    }
+    return Object.assign(commomStyle, hoverStyle);
+  }, [isDragActive, dragStatus]);
+
   const handleCollapse = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
@@ -208,84 +275,107 @@ function TreeNode({
   }
 
   return (
-    <li>
-      <Link
-        className={classNames(styles.nodeLabelRow, {
-          [styles.active]: isActive,
-          [styles.hover]: hoverKey && node.key === hoverKey,
-          [styles.matched]:
-            searching && node.matchedSelf && !showMatchedNodeOnly,
-          [styles.fixedActions]:
-            fixedActionsFor &&
-            []
-              .concat(fixedActionsFor)
-              .some((source) =>
-                isMatch(node.data as Record<string, unknown>, source)
-              ),
-          [styles.collapsed]: allowCollapse && collapsed,
-          [styles.collapsible]: allowCollapse,
-        })}
-        tabIndex={0}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onContextMenu={onContextMenu}
-        noEmptyHref
-        onClick={onClick}
-        {...pick(node.link, ["to", "href"])}
-      >
-        <span
-          className={styles.nodeLabel}
+    <>
+      {isDragActive && level !== 1 && cacheDragStatus === dragStatusEnum.top && (
+        <PlaceholderDOM
           style={{
-            paddingLeft: level * treeLevelPadding + basePaddingLeft - 2,
-            color: node.labelColor,
+            marginLeft: nodePaddingLeft,
           }}
-          ref={nodeLabelCallback}
+        />
+      )}
+      <li
+        draggable={allow && typeof nodeUid === "number"}
+        onDragStart={onDragStart}
+        data-uid={nodeUid}
+        style={hoverStyle}
+      >
+        <Link
+          className={classNames(styles.nodeLabelRow, {
+            [styles.active]: isActive,
+            [styles.hover]: hoverKey && node.key === hoverKey,
+            [styles.matched]:
+              searching && node.matchedSelf && !showMatchedNodeOnly,
+            [styles.fixedActions]:
+              fixedActionsFor &&
+              []
+                .concat(fixedActionsFor)
+                .some((source) =>
+                  isMatch(node.data as Record<string, unknown>, source)
+                ),
+            [styles.collapsed]: allowCollapse && collapsed,
+            [styles.collapsible]: allowCollapse,
+          })}
+          tabIndex={0}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onContextMenu={onContextMenu}
+          noEmptyHref
+          onClick={onClick}
+          {...pick(node.link, ["to", "href"])}
         >
-          <span className={styles.nodeIconWrapper}>
-            {allowCollapse && (
-              <span
-                className={styles.collapseIcon}
-                onClick={handleCollapse}
-                onMouseDown={preventMouseEvent}
-                title={collapsed ? "Expand" : "Collapse"}
-                role="button"
-              >
-                <GeneralIcon
-                  icon={{
-                    lib: "antd",
-                    theme: "outlined",
-                    icon: collapsed ? "right" : "down",
-                  }}
-                />
-              </span>
-            )}
-            <span className={styles.nodeIcon}>
-              {node.icon?.lib === "text" ? (
-                <WorkbenchTextIcon icon={node.icon} />
-              ) : (
-                <GeneralIcon icon={node.icon} />
+          <span
+            className={styles.nodeLabel}
+            style={{
+              paddingLeft: nodePaddingLeft,
+              color: node.labelColor,
+            }}
+            ref={nodeLabelCallback}
+          >
+            <span className={styles.nodeIconWrapper}>
+              {allowCollapse && (
+                <span
+                  className={styles.collapseIcon}
+                  onClick={handleCollapse}
+                  onMouseDown={preventMouseEvent}
+                  title={collapsed ? "Expand" : "Collapse"}
+                  role="button"
+                >
+                  <GeneralIcon
+                    icon={{
+                      lib: "antd",
+                      theme: "outlined",
+                      icon: collapsed ? "right" : "down",
+                    }}
+                  />
+                </span>
               )}
+              <span className={styles.nodeIcon}>
+                {node.icon?.lib === "text" ? (
+                  <WorkbenchTextIcon icon={node.icon} />
+                ) : (
+                  <GeneralIcon icon={node.icon} />
+                )}
+              </span>
+            </span>
+            <span className={styles.nodeName}>
+              {isTransformName
+                ? smartDisplayForEvaluableString(node.name)
+                : node.name}
             </span>
           </span>
-          <span className={styles.nodeName}>
-            {isTransformName
-              ? smartDisplayForEvaluableString(node.name)
-              : node.name}
-          </span>
-        </span>
-        <WorkbenchMiniActionBar
-          className={styles.nodeActionsBar}
-          data={node.data}
-          isFirst={isFirst}
-          isLast={isLast}
-        />
-        {node.badge && (
-          <span className={styles.badge}>
-            <GeneralIcon icon={node.badge} />
-          </span>
+          <WorkbenchMiniActionBar
+            className={styles.nodeActionsBar}
+            data={node.data}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
+          {node.badge && (
+            <span className={styles.badge}>
+              <GeneralIcon icon={node.badge} />
+            </span>
+          )}
+        </Link>
+        {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
+      </li>
+      {isDragActive &&
+        level !== 1 &&
+        cacheDragStatus === dragStatusEnum.bottom && (
+          <PlaceholderDOM
+            style={{
+              marginLeft: nodePaddingLeft,
+            }}
+          />
         )}
-      </Link>
-      {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
-    </li>
+    </>
   );
 }
