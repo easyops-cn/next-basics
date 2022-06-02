@@ -519,9 +519,12 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
       onExpandedRowsChange={onExpandedRowsChange}
       rowKey={rowKey}
       childrenColumnName={childrenColumnName}
-      rowClassName={(record, index) =>
-        props.zebraPattern && index % 2 ? styles.brickTableOddRow : ""
-      }
+      rowClassName={(record, index) => {
+        if (record.invalidRow) {
+          return styles.invalidRow;
+        }
+        return props.zebraPattern && index % 2 ? styles.brickTableOddRow : "";
+      }}
       expandIcon={getCustomExpandIcon}
       scroll={scroll}
       showHeader={showHeader}
