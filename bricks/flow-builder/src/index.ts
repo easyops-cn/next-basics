@@ -17,3 +17,4 @@ import "./custom-processors/getParamsOfDebug";
 import "./custom-processors/expandFields";
 import "./custom-processors/getFileTypeFields";
 import "./multiple-files-form";
+import "./data-providers/CustomDownloadFile";
