@@ -23,7 +23,7 @@ export async function StoryboardAssembly({
 
   return {
     projectId: projectInfo.projectId,
-    storyboard: buildStoryboardV2({
+    storyboard: await buildStoryboardV2({
       ...minimalBuildInfo,
       menus: projectInfo.menus,
       i18n: projectInfo.i18n,

@@ -2717,10 +2717,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/msgsender-sdk/-/msgsender-sdk-2.1.1.tgz#df9205716c56fc531556bfa0e98e60cfe780ec32"
   integrity sha512-ezfJkbVLkee70eiliTi8faTm9k0yMVyIGe3iKnfiMuc6/RfbqHYB1skEtmttc2uqpkvf6Vre5qN5jOBfjfTzUQ==
 
-"@next-sdk/next-builder-sdk@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-2.5.1.tgz#011770296e2be50c6786ded5dfeefb54f4c81b30"
-  integrity sha512-PnPMrg5MGUe+5Afbvoo12J6sJDtwsnC5te7GarD5spnuHYc3blvCvRLzTWq//SKEpcXuAoN7h0mvv88oU5u8YA==
+"@next-sdk/next-builder-sdk@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.npmjs.org/@next-sdk/next-builder-sdk/-/next-builder-sdk-2.6.0.tgz#fe225d8aa21dea0cb46169fcb98a65026efca602"
+  integrity sha512-w9nXr0XPYWw9b1/vqU4HOgJ4zz1ZWhAAvMBAg3M9lHnKX7Hd4i3HjuDacJ1j2qa4JjHKmGeHuznl8bvN/Yo9tw==
 
 "@next-sdk/object-store-sdk@^2.1.1", "@next-sdk/object-store-sdk@^2.1.2":
   version "2.1.2"

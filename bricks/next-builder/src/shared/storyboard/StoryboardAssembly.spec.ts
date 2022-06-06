@@ -9,6 +9,19 @@ import {
   StoryboardAssemblyResult,
 } from "./interfaces";
 import { StoryboardAssembly } from "./StoryboardAssembly";
+import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
+
+(ContractCenterApi_batchSearchContract as jest.Mock).mockReturnValue({
+  list: [
+    {
+      contract: "easyops.api.cmdb.instance.PostSearch",
+      type: "contract",
+      version: "1.1.0",
+    },
+  ],
+});
+
+jest.mock("@next-sdk/next-builder-sdk");
 
 jest.mock("@next-sdk/cmdb-sdk");
 
@@ -924,7 +937,7 @@ describe("StoryboardAssembly", () => {
             menus: undefined,
             i18n: undefined,
             functions: undefined,
-            contracts: [],
+            contracts: undefined,
             customTemplates: [
               {
                 name: "tpl-01",

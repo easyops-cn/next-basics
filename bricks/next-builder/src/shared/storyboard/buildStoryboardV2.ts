@@ -6,6 +6,7 @@ import {
   BuilderBrickNode,
   BuilderRouteOrBrickNode,
   SlotConf,
+  Contract,
 } from "@next-core/brick-types";
 import {
   isObject,
@@ -14,8 +15,9 @@ import {
   isRouteNode,
 } from "@next-core/brick-utils";
 import { safeLoad, JSON_SCHEMA } from "js-yaml";
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
 import { BuildInfoV2, StoryboardToBuild } from "./interfaces";
+import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
 import {
   ScanBricksAndTemplates,
   DependContract,
@@ -34,7 +36,9 @@ interface BuildContext {
 /**
  * Refined building storyboard with graph api response.
  */
-export function buildStoryboardV2(data: BuildInfoV2): StoryboardToBuild {
+export async function buildStoryboardV2(
+  data: BuildInfoV2
+): Promise<StoryboardToBuild> {
   const keepIds = data.options?.keepIds;
   const ctx: BuildContext = {
     keepIds,
@@ -98,13 +102,37 @@ export function buildStoryboardV2(data: BuildInfoV2): StoryboardToBuild {
     "contracts[0].deps"
   );
 
+  const contracts = deps?.filter(
+    (item) => item.type === "contract"
+  ) as DependContractOfApi[];
+
+  let contractList: Contract[];
+  if (!isEmpty(contracts)) {
+    try {
+      contractList = (
+        await ContractCenterApi_batchSearchContract({
+          contract: contracts.map((item) => {
+            const arr = item.contract.split(".");
+            const apiName = arr.pop();
+
+            return {
+              fullContractName: `${arr.join(".")}@${apiName}`,
+              version: item.version,
+            };
+          }),
+        })
+      ).list as Contract[];
+    } catch (e) {
+      /* istanbul ignore next */
+      contractList = [];
+    }
+  }
+
   return {
     routes,
     meta: {
       ...meta,
-      contracts: deps?.filter(
-        (item) => item.type === "contract"
-      ) as DependContractOfApi[],
+      contracts: contractList,
     },
     dependsAll: data.dependsAll,
   };
