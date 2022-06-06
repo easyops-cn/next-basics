@@ -7,7 +7,7 @@ import React, {
   useCallback,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { useCurrentTheme } from "@next-core/brick-kit";
+import { useCurrentTheme, getRuntime } from "@next-core/brick-kit";
 import { FormInstance, FormProps } from "antd/lib/form";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import {
@@ -394,7 +394,14 @@ export function LegacyEventConfigForm(
                 <ContractAutoComplete />
               </Form.Item>
               <Tooltip title={t(K.LINK_TO_FLOWER_BUILDER)}>
-                <Link target="_blank" to="/flow-builder">
+                <Link
+                  target="_blank"
+                  to={
+                    getRuntime().hasInstalledApp("contract-center")
+                      ? "/contract-center"
+                      : "/flow-builder"
+                  }
+                >
                   <FileSearchOutlined />
                 </Link>
               </Tooltip>
