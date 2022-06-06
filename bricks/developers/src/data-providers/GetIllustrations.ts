@@ -9,21 +9,34 @@ export function getRandomNumber(): number {
   return ~~(Math.random() * length);
 }
 
-export function GetIllustrations(): { name: string; category: string }[] {
+export function GetIllustrations(
+  category: string = undefined
+): { name: string; category: string }[] {
   const illustrations = illustrationsByCategory as Record<string, string[]>;
   const categories = Object.keys(illustrations);
-  return categories.reduce((prev, next, index) => {
-    const illustrationList = illustrations[next];
-    const result = illustrationList
+  if (category === "all" || !category) {
+    return categories.reduce((prev, next, index) => {
+      const illustrationList = illustrations[next];
+      const result = illustrationList
+        .map((v) => ({
+          name: v,
+          category: next,
+          color: COLORS[index] || COLORS[getRandomNumber()],
+        }))
+        .filter((v) => !/-dark$/g.test(v.name));
+      prev = [...prev, ...result];
+      return prev;
+    }, []);
+  } else {
+    const categoryIllustrations = illustrations[category];
+    return categoryIllustrations
       .map((v) => ({
         name: v,
-        category: next,
-        color: COLORS[index] || COLORS[getRandomNumber()],
+        category: category,
+        color: COLORS[0],
       }))
       .filter((v) => !/-dark$/g.test(v.name));
-    prev = [...prev, ...result];
-    return prev;
-  }, []);
+  }
 }
 
 customElements.define(
