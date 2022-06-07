@@ -8,10 +8,10 @@ import {
   StoryboardFunction,
   MockRule,
   CustomTemplateState,
+  Contract,
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
-import { DependContractOfApi } from "../../data-providers/ScanBricksAndTemplates";
 
 export interface StoryboardAssemblyParamsBase {
   // The instanceId of a project.
@@ -114,7 +114,7 @@ export interface StoryboardToBuild {
     i18n?: MetaI18n;
     functions?: Pick<FunctionNode, "name" | "source" | "typescript">[];
     mocks?: MockRule[];
-    contracts?: DependContractOfApi[];
+    contracts?: Contract[];
   };
 
   dependsAll?: boolean;

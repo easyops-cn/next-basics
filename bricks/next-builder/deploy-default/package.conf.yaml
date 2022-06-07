@@ -2,9 +2,9 @@ install_path: /usr/local/easyops/bricks/next-builder-NB
 user: "easyops:easyops"
 dependencies:
   - name: brick_next
-    version: ^2.68.4
+    version: ^2.68.5
     local_deploy: true
   - name: next_builder_service
-    version: ^1.31.2
+    version: ^1.36.5
   - name: api_gateway
     version: ^1.44.0

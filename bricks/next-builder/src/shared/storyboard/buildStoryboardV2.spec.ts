@@ -5,7 +5,22 @@ import {
   symbolForNodeInstanceId,
 } from "./buildStoryboardV2";
 
+import { BuildInfoV2, StoryboardToBuild } from "./interfaces";
 import * as dataProvider from "../../data-providers/ScanBricksAndTemplates";
+import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
+
+(ContractCenterApi_batchSearchContract as jest.Mock).mockReturnValue({
+  list: [
+    {
+      namespaceId: "easyops.api.cmdb.instance.PostSearch",
+      name: "PostSearch",
+      version: "1.1.0",
+      serviceName: "logic.cmdb.service",
+    },
+  ],
+});
+
+jest.mock("@next-sdk/next-builder-sdk");
 
 const consoleError = jest
   .spyOn(console, "error")
@@ -16,13 +31,7 @@ describe("buildStoryboardV2", () => {
     jest.clearAllMocks();
   });
 
-  it.each<
-    [
-      string,
-      Parameters<typeof buildStoryboardV2>[0],
-      ReturnType<typeof buildStoryboardV2>
-    ]
-  >([
+  it.each<[string, BuildInfoV2, StoryboardToBuild]>([
     [
       "",
       // Input
@@ -942,9 +951,10 @@ describe("buildStoryboardV2", () => {
         meta: {
           contracts: [
             {
-              contract: "easyops.api.cmdb.instance.PostSearch",
-              type: "contract",
+              namespaceId: "easyops.api.cmdb.instance.PostSearch",
+              name: "PostSearch",
               version: "1.1.0",
+              serviceName: "logic.cmdb.service",
             },
           ],
           customTemplates: [],
@@ -986,9 +996,9 @@ describe("buildStoryboardV2", () => {
         ],
       },
     ],
-  ])("buildStoryboardV2 should work %s", (condition, input, output) => {
+  ])("buildStoryboardV2 should work %s", async (condition, input, output) => {
     const cloneOfInput = clone(input);
-    expect(buildStoryboardV2(input)).toEqual(output);
+    expect(await buildStoryboardV2(input)).toEqual(output);
     // `input` should never be mutated.
     expect(input).toEqual(cloneOfInput);
     expect(consoleError).not.toBeCalled();
@@ -1029,11 +1039,11 @@ describe("buildStoryboardV2", () => {
     ],
   ])(
     "buildStoryboardV2 should warn `%s` if %s",
-    (message, condition, input) => {
+    async (message, condition, input) => {
       jest
         .spyOn(dataProvider, "ScanBricksAndTemplates")
         .mockReturnValue({ contractData: "" } as any);
-      buildStoryboardV2(input);
+      await buildStoryboardV2(input);
       expect(consoleError).toBeCalledTimes(1);
       expect(consoleError.mock.calls[0][0]).toBe(message);
     }
