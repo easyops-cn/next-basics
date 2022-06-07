@@ -23,7 +23,7 @@ export function BrickDescriptions(
 ): React.ReactElement {
   const { configProps, itemList, hideGroups } = props;
 
-  const hideGroupsSet = new Set(hideGroups);
+  const hideGroupsSet = new Set([].concat(hideGroups).filter(Boolean));
   // istanbul ignore next
   const renderLegacyComponent = (
     item: BrickDescriptionsItemProps
