@@ -10,8 +10,13 @@ import {
 } from "@next-core/brick-kit";
 import { UseSingleBrickConf } from "@next-core/brick-types";
 import { ButtonType, ButtonProps } from "antd/lib/button";
-
+import { MenuIcon } from "@next-core/brick-types";
 import { FormModal } from "./FormModal";
+
+declare type SrcIcon = {
+  imgSrc?: string;
+  imgStyle?: React.CSSProperties;
+};
 
 /**
  * @id forms.form-modal
@@ -44,6 +49,15 @@ export class FormModalElement extends UpdatingElement {
    * @description 表单构件的 items 插槽的构件配置
    */
   @property({ attribute: false }) items: { useBrick: UseSingleBrickConf[] };
+
+  /**
+   * @kind `MenuIcon | SrcIcon`
+   * @required false
+   * @default -
+   * @description 标题图标
+   * @group basic
+   */
+  @property({ attribute: false }) titleIcon?: MenuIcon | SrcIcon;
 
   /**
    * @kind `{ useBrick: Omit<UseSingleBrickConf, 'brick'> }`
@@ -282,6 +296,7 @@ export class FormModalElement extends UpdatingElement {
             itemBricks={this.itemBricks}
             dataSource={this.dataSource}
             testId={this.dataset.testid}
+            titleIcon={this.titleIcon}
             onOk={this._handleOk}
             onCancel={this._handleCancel}
           />

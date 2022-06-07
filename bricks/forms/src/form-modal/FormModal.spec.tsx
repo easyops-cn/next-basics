@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Modal } from "antd";
 import { SingleBrickAsComponent } from "@next-core/brick-kit";
-
+import { GeneralIcon } from "@next-libs/basic-components";
 import { FormModal } from "./FormModal";
 import "../general-form";
 import { GeneralFormElement } from "../general-form";
@@ -26,9 +26,46 @@ const items = {
     },
   ],
 };
+const srcTitleContent = {
+  title: "title",
+  titleIcon: {
+    imgSrc:
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+  },
+};
+const menuTitleContent = {
+  title: "title",
+  titleIcon: {
+    icon: "plus",
+    lib: "antd",
+  },
+};
+const titleMatchObj1 = (
+  <div style={{ alignItems: "center", display: "flex" }}>
+    <GeneralIcon
+      icon={{
+        imgSrc:
+          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        imgStyle: { marginRight: "8px" },
+      }}
+      size={20}
+    />
+    title
+  </div>
+);
+const titleMatchObj2 = (
+  <div style={{ alignItems: "center", display: "flex" }}>
+    <GeneralIcon
+      icon={{
+        icon: "plus",
+        lib: "antd",
+      }}
+    />
+    title
+  </div>
+);
 const modalProps = {
   visible: true,
-  title: "title",
   confirmLoading: true,
   closable: true,
   centered: true,
@@ -58,6 +95,7 @@ describe("FormModal", () => {
         dataSource={dataSource}
         testId={testId}
         {...modalProps}
+        {...srcTitleContent}
         onOk={mockOnOk}
       />
     );
@@ -91,7 +129,7 @@ describe("FormModal", () => {
     spyOnLowLevelValidate.mockImplementation((callback) => {
       callback?.();
     });
-    const modal = wrapper.find(Modal);
+    let modal = wrapper.find(Modal);
     expect(modal.props()).toEqual(
       expect.objectContaining({
         ...modalProps,
@@ -109,5 +147,10 @@ describe("FormModal", () => {
         "data-testid"
       ]
     ).toBe(`${testId}-content`);
+    expect(modal.prop("title")).toMatchObject(titleMatchObj1);
+    wrapper.setProps({ titleIcon: menuTitleContent.titleIcon });
+    wrapper.update();
+    modal = wrapper.find(Modal);
+    expect(modal.prop("title")).toMatchObject(titleMatchObj2);
   });
 });

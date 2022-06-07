@@ -124,6 +124,10 @@ export const GeneralModalStory: Story = {
                 label: "用户",
                 modalTitle: "添加用户",
                 required: true,
+                titleIcon: {
+                  icon: "plus",
+                  lib: "antd",
+                },
               },
               slots: {
                 content: {

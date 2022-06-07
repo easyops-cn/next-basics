@@ -4,6 +4,14 @@ import { ButtonType } from "antd/lib/button";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import i18n from "i18next";
 import { NS_FORMS, K } from "../i18n/constants";
+import { GeneralIcon } from "@next-libs/basic-components";
+import { MenuIcon } from "@next-core/brick-types";
+
+declare type SrcIcon = {
+  imgSrc?: string;
+  imgStyle?: React.CSSProperties;
+};
+
 interface GeneralModalProps extends FormItemWrapperProps {
   visible: boolean;
   modalTitle: string;
@@ -14,6 +22,7 @@ interface GeneralModalProps extends FormItemWrapperProps {
   okType?: ButtonType;
   btnText?: string;
   okDisabled?: boolean;
+  titleIcon?: MenuIcon | SrcIcon;
 }
 
 export function GeneralModal(props: GeneralModalProps): React.ReactElement {
@@ -32,6 +41,32 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
     </>
   );
 
+  let iconNode: JSX.Element = null;
+  if (props.titleIcon) {
+    if ("imgSrc" in props.titleIcon) {
+      const mergedIcon: SrcIcon = {
+        imgSrc: props.titleIcon.imgSrc,
+        imgStyle: {
+          marginRight: "8px",
+          borderRadius: "50%",
+          objectFit: "cover",
+          ...props.titleIcon.imgStyle,
+        },
+      };
+      iconNode = <GeneralIcon icon={mergedIcon} size={20} />;
+    } else {
+      iconNode = (
+        <GeneralIcon
+          icon={props.titleIcon}
+          style={{
+            fontSize: "20px",
+            marginRight: "8px",
+          }}
+        />
+      );
+    }
+  }
+
   return (
     <FormItemWrapper {...props}>
       <>
@@ -40,7 +75,20 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         </a>
         <Modal
           width={props.modalWidth}
-          title={props.modalTitle}
+          title={
+            props.modalTitle && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+                className="formsGeneralModalTitle"
+              >
+                {iconNode}
+                {props.modalTitle}
+              </div>
+            )
+          }
           visible={props.visible}
           forceRender={true}
           getContainer={props.container}

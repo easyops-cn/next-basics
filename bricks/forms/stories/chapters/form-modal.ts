@@ -46,6 +46,10 @@ export const formModalStory: Story = {
                 dataset: {
                   testid: "basic-usage-demo-modal",
                 },
+                titleIcon: {
+                  icon: "plus",
+                  lib: "antd",
+                },
                 modalTitle: "编辑信息",
                 dataSource: {
                   level: "high",
