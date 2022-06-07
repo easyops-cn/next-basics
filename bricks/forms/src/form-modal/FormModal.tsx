@@ -108,6 +108,8 @@ export function FormModal(props: FormModalProps): React.ReactElement {
         imgSrc: titleIcon.imgSrc,
         imgStyle: {
           marginRight: "8px",
+          borderRadius: "50%",
+          objectFit: "cover",
           ...titleIcon.imgStyle,
         },
       };

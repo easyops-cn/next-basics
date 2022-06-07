@@ -48,6 +48,8 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         imgSrc: props.titleIcon.imgSrc,
         imgStyle: {
           marginRight: "8px",
+          borderRadius: "50%",
+          objectFit: "cover",
           ...props.titleIcon.imgStyle,
         },
       };
