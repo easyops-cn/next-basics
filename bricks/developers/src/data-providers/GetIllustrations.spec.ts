@@ -28,8 +28,8 @@ describe("GetIllustrations", () => {
     const result = GetIllustrations("exception");
 
     expect(result).toEqual([
-      { category: "exception", color: "pink", name: "c" },
-      { category: "exception", color: "pink", name: "d" },
+      { category: "exception", color: "red", name: "c" },
+      { category: "exception", color: "red", name: "d" },
     ]);
   });
 
