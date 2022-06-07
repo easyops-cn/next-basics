@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.154.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.154.1...@next-bricks/next-builder@1.154.2) (2022-06-07)
+
+
+### Bug Fixes
+
+* flow url refine ([09bf0fd](https://github.com/easyops-cn/next-basics/commit/09bf0fd510b6e1c97c22656e221ff279efb649a0))
+* refactor collect contract ([6489b2e](https://github.com/easyops-cn/next-basics/commit/6489b2e9a0eb0b1ea658b32d4258bd0ccb4f7689))
+
+
+
+
+
 ## [1.154.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.154.0...@next-bricks/next-builder@1.154.1) (2022-06-02)
 
 
