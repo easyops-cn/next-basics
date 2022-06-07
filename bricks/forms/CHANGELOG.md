@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.226.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.225.4...@next-bricks/forms@1.226.0) (2022-06-07)
+
+
+### Bug Fixes
+
+* **model:** 增加默认边框弧度 ([3cc17db](https://github.com/easyops-cn/next-basics/commit/3cc17db8da1c98d9b2e10e8d66fade457eae02b6))
+
+
+### Features
+
+* **modal:** 支持icon ([15831b8](https://github.com/easyops-cn/next-basics/commit/15831b8f9984d9061c5f91e36ed0f0570cd67215))
+
+
+
+
+
 ## [1.225.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.225.3...@next-bricks/forms@1.225.4) (2022-06-02)
 
 **Note:** Version bump only for package @next-bricks/forms
