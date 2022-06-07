@@ -58,6 +58,10 @@ export interface SelectProps {
   placeholder?: string;
   disabled?: boolean;
   disabledHandler?: (row: any, index: number) => boolean;
+  selectedHandler?: (
+    row: any,
+    index: number
+  ) => Array<{ label: string; value: string; [key: string]: any }>;
   allowClear?: boolean;
   popoverPositionType?: "default" | "parent";
 }

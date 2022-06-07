@@ -268,6 +268,51 @@ describe("DynamicFormItem", () => {
     const wrapper = shallow(<RowFormItem {...props} />);
     expect(wrapper.find(Input).prop("disabled")).toEqual(true);
   });
+  it("should work base on different selectProps condition", () => {
+    const props = {
+      prefixId: "dynamic[1]",
+      rowIndex: 1,
+      row: {
+        type: "origin",
+        operate: "contain",
+        content: ["a", "b"],
+      },
+      columns: [
+        {
+          name: "content",
+          type: "input",
+          inputProps: {
+            placeholder: "填写相应的关键字",
+          },
+        },
+        {
+          name: "operate",
+          type: "select",
+          selectProps: {
+            placeholder: "比较器",
+            selectedHandler: (row: any, index: number) =>
+              index === 0
+                ? [
+                    { lablel: "包含", value: "contain" },
+                    { label: "不包含", value: "notContain" },
+                  ]
+                : [
+                    { label: "正确", value: true },
+                    { label: "错误", value: false },
+                    { label: "有点正常", value: "test" },
+                  ],
+          },
+        },
+      ],
+      form: {
+        getFieldDecorator: () => (comp: React.Component) => comp,
+      } as any,
+    };
+
+    const wrapper = shallow(<RowFormItem {...props} />);
+    expect(wrapper.find(Form.Item).at(1).children().type()).toEqual(Select);
+    expect(wrapper.find(Select).at(0).find(Select.Option).length).toBe(3);
+  });
   it("Show user options", () => {
     const props = {
       prefixId: "dynamic[0]",
