@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.355.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.354.1...@next-bricks/developers@1.355.0) (2022-06-07)
+
+
+### Bug Fixes
+
+* 修改获取插画标签颜色的规则 ([0321db1](https://github.com/easyops-cn/next-basics/commit/0321db19bf8aadd05794364327b76db3a7707a43))
+
+
+### Features
+
+* add resources to illustration lib of developers ([f1919b2](https://github.com/easyops-cn/next-basics/commit/f1919b27b0bc057cf047d5d1fedb7fe20e31ed2c))
+
+
+
+
+
 ## [1.354.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.354.0...@next-bricks/developers@1.354.1) (2022-06-02)
 
 
