@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.227.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.226.0...@next-bricks/forms@1.227.0) (2022-06-08)
+
+
+### Features
+
+* 动态表单项构件为的columns中的的selec可以设置option选项 refs PIPELINE-1604 ([497a0a4](https://github.com/easyops-cn/next-basics/commit/497a0a487cf7a37da1c7038e80c8a8e1b6a5206d))
+
+
+
+
+
 # [1.226.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.225.4...@next-bricks/forms@1.226.0) (2022-06-07)
 
 

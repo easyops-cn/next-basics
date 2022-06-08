@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.244.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.5...@next-bricks/presentational-bricks@1.244.6) (2022-06-08)
+
+
+### Bug Fixes
+
+* hideGroups string不生效 ([50cd01c](https://github.com/easyops-cn/next-basics/commit/50cd01c609faa726a950b8e270ac85f575c4d636))
+
+
+
+
+
 ## [1.244.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.4...@next-bricks/presentational-bricks@1.244.5) (2022-06-02)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
