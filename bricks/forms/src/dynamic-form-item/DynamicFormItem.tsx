@@ -101,7 +101,9 @@ export function RowFormItem(props: RowFormItemProps): React.ReactElement {
             ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
             : {})}
         >
-          {selectProps.options?.map((option) => (
+          {(
+            selectProps.options || selectProps.selectedHandler?.(row, rowIndex)
+          )?.map((option) => (
             <Select.Option
               key={option.value}
               value={option.value}
