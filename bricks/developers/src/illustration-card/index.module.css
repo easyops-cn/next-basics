@@ -6,5 +6,8 @@
   .imgCss {
     height: 180px;
     object-fit: contain;
+    width: 98%;
+    display: block;
+    margin: 0 auto;
   }
 }
