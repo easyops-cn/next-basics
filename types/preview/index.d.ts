@@ -10,6 +10,13 @@ export interface PreviewBaseMessage {
   forwardedFor?: "builder" | "previewer";
 }
 
+export interface PreviewMessageBuilderHoverOnMain
+  extends PreviewBaseMessage,
+    HighlightBaseInfo {
+  sender: "builder";
+  type: "hover-on-main";
+}
+
 export interface PreviewMessageBuilderHoverOnBrick
   extends PreviewBaseMessage,
     HighlightBaseInfo {
@@ -30,6 +37,7 @@ export interface HighlightBaseInfo {
 }
 
 export type PreviewMessageFromPreviewer =
+  | PreviewMessagePreviewerHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
@@ -42,6 +50,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerCaptureFailed;
 
 export type PreviewMessageToPreviewer =
+  | PreviewMessageContainerBuilderHoverOnMain
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerBuilderSelectBrick
   | PreviewMessageContainerToggleInspecting
@@ -50,6 +59,7 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerCapture;
 
 export type PreviewMessageFromContainer =
+  | PreviewMessageContainerBuilderHoverOnMain
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
@@ -62,6 +72,7 @@ export type PreviewMessageFromContainer =
 export type PreviewMessageToContainer =
   | PreviewMessageBuilderHoverOnBrick
   | PreviewMessageBuilderSelectBrick
+  | PreviewMessageBuilderHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
@@ -74,6 +85,7 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerCaptureFailed;
 
 export type PreviewerMessageToBuilder =
+  | PreviewMessageContainerPreviewerHoverOnMain
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
   | PreviewMessageContainerPreviewerContextMenuOnBrick
@@ -85,6 +97,10 @@ export interface PreviewMessagePreviewerPreviewStarted
   type: "preview-started";
 }
 
+export interface PreviewMessagePreviewerHoverOnMain extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "hover-on-main";
+}
 export interface PreviewMessagePreviewerHoverOnBrick
   extends PreviewBaseMessage {
   sender: "previewer";
@@ -191,6 +207,12 @@ export interface PreviewMessageContainerCapture extends PreviewBaseMessage {
   maxHeight: number;
 }
 
+export interface PreviewMessageContainerBuilderHoverOnMain
+  extends Omit<PreviewMessageBuilderHoverOnMain, "sender"> {
+  sender: "preview-container";
+  forwardedFor: "builder";
+}
+
 export interface PreviewMessageContainerBuilderHoverOnBrick
   extends Omit<PreviewMessageBuilderHoverOnBrick, "sender"> {
   sender: "preview-container";
@@ -203,6 +225,11 @@ export interface PreviewMessageContainerBuilderSelectBrick
   forwardedFor: "builder";
 }
 
+export interface PreviewMessageContainerPreviewerHoverOnMain
+  extends Omit<PreviewMessagePreviewerHoverOnMain, "sender"> {
+  sender: "preview-container";
+  forwardedFor: "previewer";
+}
 export interface PreviewMessageContainerPreviewerHoverOnBrick
   extends Omit<PreviewMessagePreviewerHoverOnBrick, "sender"> {
   sender: "preview-container";
