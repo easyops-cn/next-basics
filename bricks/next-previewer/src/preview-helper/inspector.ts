@@ -1,10 +1,11 @@
 // istanbul ignore file: working in progress
 // https://github.com/facebook/react/blob/cae635054e17a6f107a39d328649137b83f25972/packages/react-devtools-shared/src/backend/views/Highlighter/index.js
-import { throttle } from "lodash";
+import { throttle, isEqual } from "lodash";
 import type {
   PreviewMessagePreviewerHoverOnBrick,
   PreviewMessagePreviewerSelectBrick,
   PreviewMessagePreviewerContextMenuOnBrick,
+  PreviewMessagePreviewerHoverOnMain,
 } from "@next-types/preview";
 
 let previewProxyOrigin: string;
@@ -30,6 +31,7 @@ function registerListeners(): void {
   window.addEventListener("pointerover", onPointerOver, true);
   window.addEventListener("pointerup", onMouseEvent, true);
   window.addEventListener("pointerleave", onPointerLeave, true);
+  window.addEventListener("dragover", onDragOver, true);
   window.addEventListener("contextmenu", onContextMenu, true);
 }
 
@@ -42,6 +44,7 @@ function unregisterListeners(): void {
   window.removeEventListener("pointerover", onPointerOver, true);
   window.removeEventListener("pointerup", onMouseEvent, true);
   window.removeEventListener("pointerleave", onPointerLeave, true);
+  window.removeEventListener("dragover", onDragOver, true);
   window.removeEventListener("contextmenu", onContextMenu, true);
 }
 
@@ -59,7 +62,15 @@ function onMouseEvent(event: MouseEvent): void {
 const hoverOnBrick = throttle(
   (brick: HTMLElement) => {
     const iidList = getPossibleBrickIidList(brick);
-    if (iidList.length > 0) {
+    if (brick.tagName === "BODY") {
+      window.parent.postMessage(
+        {
+          sender: "previewer",
+          type: "hover-on-main",
+        } as PreviewMessagePreviewerHoverOnMain,
+        previewProxyOrigin
+      );
+    } else if (iidList.length > 0) {
       window.parent.postMessage(
         {
           sender: "previewer",
@@ -97,6 +108,10 @@ function onPointerLeave(event: MouseEvent): void {
     } as PreviewMessagePreviewerHoverOnBrick,
     previewProxyOrigin
   );
+}
+
+function onDragOver(event: DragEvent): void {
+  hoverOnBrick(event.target as HTMLElement);
 }
 
 function onContextMenu(event: MouseEvent): void {

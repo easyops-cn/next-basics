@@ -26,6 +26,11 @@ import type {
 
 import styles from "./PreviewContainer.module.css";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
+import {
+  BuilderDataManager,
+  EventDetailOfNodeAdd,
+  useBuilderDataManager,
+} from "@next-core/editor-bricks-helper";
 
 export interface PreviewContainerProps {
   previewUrl: string;
@@ -41,6 +46,7 @@ export interface PreviewContainerProps {
   previewOnNewWindow?: boolean;
   screenshotMaxWidth?: number;
   screenshotMaxHeight?: number;
+  onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onPreviewStart?(): void;
   onUrlChange?(url: string): void;
   onScaleChange?(scale: number): void;
@@ -50,6 +56,7 @@ export interface PreviewContainerProps {
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
+export type Direction = "top" | "right" | "bottom" | "left" | "inside";
 
 export interface PreviewContainerRef {
   refresh(
@@ -59,6 +66,7 @@ export interface PreviewContainerRef {
   ): void;
   reload(): void;
   capture(): void;
+  manager: BuilderDataManager;
 }
 
 function sendToggleInspecting(
@@ -91,6 +99,7 @@ export function LegacyPreviewContainer(
     previewOnNewWindow,
     screenshotMaxWidth,
     screenshotMaxHeight,
+    onNodeAdd,
     onPreviewStart,
     onUrlChange,
     onScaleChange,
@@ -100,13 +109,27 @@ export function LegacyPreviewContainer(
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
+  const manager = useBuilderDataManager();
   const iframeRef = useRef<HTMLIFrameElement>();
   const containerRef = useRef<HTMLDivElement>();
+  const [scroll, setScroll] = useState({ x: 0, y: 0 });
   const [scaleX, setScaleX] = useState(1);
   const [scaleY, setScaleY] = useState(1);
   const minScale = Math.min(scaleX, scaleY, 1);
   const [routeMatch, setRouteMatch] = useState(true);
   const [captureStatus, setCaptureStatus] = useState<CaptureStatus>("idle");
+  const [hoverIid, setHoverIid] = useState<string>();
+  const [hoverAlias, setHoverAlias] = useState<string>();
+  const [activeIid, setActiveIid] = useState<string>();
+  const [activeAlias, setActiveAlias] = useState<string>();
+  const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
+  const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
+  const [dragDirection, setDragDirection] = useState<Direction>();
+  const refScroll = useRef(scroll);
+  const loadedRef = useRef(false);
+  const refHoverIid = useRef<string>();
+  const refHoverOutlines = useRef<BrickOutline[]>();
+  const refDragDirection = useRef<Direction>();
 
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
@@ -126,8 +149,6 @@ export function LegacyPreviewContainer(
     }
   }, [openerWindow]);
 
-  const loadedRef = useRef(false);
-
   const getSnippetData = (snippetGraphData: BuilderSnippetNode[]) => {
     if (Array.isArray(snippetGraphData) && snippetGraphData.length > 0) {
       return {
@@ -140,9 +161,75 @@ export function LegacyPreviewContainer(
     }
   };
 
+  const handleOnDragOver = useCallback((e: DragEvent): void => {
+    e.preventDefault();
+    const { clientX, clientY } = e;
+    if (refHoverOutlines.current?.length > 0) {
+      const currentHoverNode = refHoverOutlines.current[0];
+      const { left, top, width, height } = currentHoverNode;
+      const { x, y } = refScroll.current;
+      const isLeft = clientX - left - x < 10;
+      const isRight =
+        clientX - (left + (width - x)) > -10 &&
+        clientX - (left + (width - x)) < 0;
+      const isTop = clientY - (top - y) < 10;
+      const isBottom =
+        clientY - (top + (height - y)) > -10 &&
+        clientY - (top + (height - y)) < 0;
+      const direction: Direction = isLeft
+        ? "left"
+        : isRight
+        ? "right"
+        : isTop
+        ? "top"
+        : isBottom
+        ? "bottom"
+        : "inside";
+
+      setDragDirection(direction);
+      refDragDirection.current = dragDirection;
+    }
+  }, []);
+
+  const handleOnDrop = useCallback(
+    (e: DragEvent): void => {
+      e.preventDefault();
+      const nodeData = e.dataTransfer.getData("nodeData");
+      if (nodeData) {
+        const direction = refDragDirection.current;
+        const dragStatus =
+          direction === "inside"
+            ? "inside"
+            : ["top", "left"].includes(direction)
+            ? "top"
+            : ["right", "bottom"].includes(direction)
+            ? "bottom"
+            : "";
+        manager.workbenchNodeAdd({
+          nodeData: JSON.parse(nodeData),
+          dragOverNodeInstanceId: refHoverIid.current,
+          dragStatus,
+        });
+      }
+    },
+    [manager]
+  );
+
+  const handleDragEnd = (e: DragEvent): void => {
+    e.preventDefault();
+    setDragDirection(null);
+    refDragDirection.current = null;
+  };
+
   const handleIframeLoad = useCallback(() => {
     loadedRef.current = true;
     const snippetData = getSnippetData(snippetGraphData);
+    iframeRef.current.contentDocument.addEventListener(
+      "dragover",
+      handleOnDragOver
+    );
+    iframeRef.current.contentDocument.addEventListener("drop", handleOnDrop);
+    document.addEventListener("dragend", handleDragEnd);
     iframeRef.current.contentWindow.postMessage(
       {
         sender: "preview-container",
@@ -159,30 +246,25 @@ export function LegacyPreviewContainer(
       previewOrigin
     );
   }, [
+    snippetGraphData,
+    handleOnDragOver,
+    handleOnDrop,
     appId,
     templateId,
-    snippetGraphData,
     routePath,
     routeExact,
     previewSettings,
     previewOrigin,
   ]);
 
-  const [hoverIid, setHoverIid] = useState<string>();
-  const [hoverAlias, setHoverAlias] = useState<string>();
-  const [activeIid, setActiveIid] = useState<string>();
-  const [activeAlias, setActiveAlias] = useState<string>();
-  const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
-  const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
-
   useEffect(() => {
     // Active overrides hover.
     if (hoverIid && hoverIid === activeIid) {
       setHoverOutlines([]);
     }
-  }, [activeIid, hoverIid]);
-
-  const [scroll, setScroll] = useState({ x: 0, y: 0 });
+    refHoverIid.current = hoverIid;
+    refHoverOutlines.current = hoverOutlines;
+  }, [activeIid, hoverIid, hoverOutlines]);
 
   const adjustOutlines = useCallback(
     (outlines: BrickOutline[]): BrickOutline[] => {
@@ -278,7 +360,28 @@ export function LegacyPreviewContainer(
     refresh,
     reload,
     capture,
+    manager,
   }));
+
+  useEffect(() => {
+    const removeListeners = [manager.onNodeAdd(onNodeAdd)];
+    return () => {
+      for (const fn of removeListeners) {
+        fn();
+      }
+      if (loadedRef.current) {
+        iframeRef.current.contentDocument.removeEventListener(
+          "dragover",
+          handleOnDragOver
+        );
+        iframeRef.current.contentDocument.removeEventListener(
+          "drop",
+          handleOnDrop
+        );
+      }
+      document.removeEventListener("dragend", handleDragEnd);
+    };
+  }, [handleOnDragOver, handleOnDrop, manager, onNodeAdd]);
 
   useEffect(() => {
     if (!sameOriginWithOpener) {
@@ -301,9 +404,19 @@ export function LegacyPreviewContainer(
             } as PreviewMessageFromContainer,
             previewOrigin
           );
+        } else if (data.type === "hover-on-main") {
+          iframeRef.current.contentWindow.postMessage(
+            {
+              ...data,
+              sender: "preview-container",
+              forwardedFor: data.sender,
+            } as PreviewMessageFromContainer,
+            previewOrigin
+          );
         }
       } else if (data.sender === "previewer" && origin === previewOrigin) {
         switch (data.type) {
+          case "hover-on-main":
           case "hover-on-brick":
           case "select-brick":
             // Send to builder.
@@ -315,6 +428,7 @@ export function LegacyPreviewContainer(
             break;
           case "scroll":
             setScroll(data.scroll);
+            refScroll.current = data.scroll;
             break;
           case "highlight-brick":
             if (data.highlightType === "active") {
@@ -477,7 +591,10 @@ export function LegacyPreviewContainer(
         <BrickOutlineComponent
           key={index}
           alias={hoverAlias}
+          iid={hoverIid}
+          overIid={hoverIid}
           type="hover"
+          dragDirection={dragDirection}
           {...outline}
         />
       ))}
@@ -485,7 +602,10 @@ export function LegacyPreviewContainer(
         <BrickOutlineComponent
           key={index}
           alias={activeAlias}
+          iid={activeIid}
+          overIid={hoverIid}
           type="active"
+          dragDirection={dragDirection}
           {...outline}
         />
       ))}
@@ -499,6 +619,9 @@ interface BrickOutlineComponentProps extends BrickOutline {
   type: "active" | "hover" | "rootTpl";
   alias: string;
   hidden?: boolean;
+  iid?: string;
+  overIid?: string;
+  dragDirection?: Direction;
 }
 
 function BrickOutlineComponent({
@@ -509,9 +632,23 @@ function BrickOutlineComponent({
   height,
   left,
   top,
+  iid,
+  overIid,
+  dragDirection,
 }: BrickOutlineComponentProps): React.ReactElement {
   const borderWidth = 2;
   const overflowed = top < 20;
+  const isDrag = dragDirection && iid === overIid;
+  const dragStyle = isDrag
+    ? dragDirection === "inside"
+      ? {
+          border: "2px dashed goldenrod",
+        }
+      : {
+          [`border-${dragDirection}`]: "2px dashed goldenrod",
+        }
+    : {};
+  const isHiddenAlias = isDrag && dragDirection !== "inside";
   return (
     <div
       className={classNames(styles.outline, styles[type], {
@@ -523,9 +660,10 @@ function BrickOutlineComponent({
         height: height + borderWidth * 2,
         left: left - borderWidth,
         top: top - borderWidth,
+        ...dragStyle,
       }}
     >
-      <div className={styles.alias}>{alias}</div>
+      {!isHiddenAlias && <div className={styles.alias}>{alias}</div>}
     </div>
   );
 }
