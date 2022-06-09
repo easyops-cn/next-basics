@@ -1,3 +1,4 @@
+import { i18nText } from "@next-core/brick-kit";
 import {
   PropertyType,
   UnionPropertyType,
@@ -37,7 +38,7 @@ export function mergeProperties(
   }));
 }
 
-export function yamlStringify(value: unknown, indent = 2) {
+export function yamlStringify(value: unknown, indent = 2): string {
   return safeDump(value, {
     indent,
     schema: JSON_SCHEMA,
@@ -188,7 +189,17 @@ export function processFormValue(
 export function groupByType(
   typeList?: UnionPropertyType[]
 ): Array<[string, UnionPropertyType[]]> {
-  return Object.entries(groupBy(typeList, (item) => item.group || "basic"));
+  return Object.entries(
+    groupBy(typeList, (item) => {
+      const group = item.group || "basic";
+      const i18nData = item.groupI18n && item.groupI18n[group];
+      if (i18nData) {
+        return i18nText(i18nData);
+      }
+
+      return group;
+    })
+  );
 }
 
 export function extractCommonProps(typeList: PropertyType[]): PropertyType[] {

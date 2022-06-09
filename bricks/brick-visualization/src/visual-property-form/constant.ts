@@ -19,4 +19,9 @@ export const commonProps: PropertyType[] = [
     type: "string",
     description: "构件 ID",
   },
+  {
+    name: "style",
+    type: "Record<string, any>",
+    description: "构件样式",
+  },
 ];

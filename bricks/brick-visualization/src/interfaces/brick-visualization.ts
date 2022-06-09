@@ -24,6 +24,7 @@ export interface PropertyType {
   description?: string;
   default?: string;
   group?: string;
+  groupI18n?: Record<string, { [language: string]: string }>;
 }
 
 export interface UnionPropertyType extends PropertyType {
