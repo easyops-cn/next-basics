@@ -223,7 +223,7 @@ describe("processor test", () => {
   });
 
   describe("groupbyType", () => {
-    it("shoould return empty if no value", () => {
+    it("should return empty if no value", () => {
       const result = groupByType();
       expect(result).toEqual([]);
     });
@@ -282,6 +282,108 @@ describe("processor test", () => {
         ],
       ]);
     });
+
+    it("should work with i18n", () => {
+      const typeList = [
+        {
+          name: "name",
+          type: "string",
+          description: "名称",
+          mode: "normal",
+          group: "basic",
+          groupI18n: {
+            basic: {
+              zh: "基本",
+              en: "basic",
+            },
+            ui: {
+              zh: "外观",
+              en: "UI",
+            },
+          },
+        },
+        {
+          name: "age",
+          type: "number",
+          description: "年龄",
+          mode: "normal",
+          groupI18n: {
+            basic: {
+              zh: "基本",
+              en: "basic",
+            },
+            ui: {
+              zh: "外观",
+              en: "UI",
+            },
+          },
+        },
+        {
+          name: "value",
+          type: "Value",
+          description: "值",
+          mode: "advanced",
+          group: "advanced",
+          groupI18n: {
+            basic: {
+              zh: "基本",
+              en: "basic",
+            },
+            ui: {
+              zh: "外观",
+              en: "UI",
+            },
+          },
+        },
+      ] as any;
+
+      const result = groupByType(typeList);
+
+      expect(result).toEqual([
+        [
+          "基本",
+          [
+            {
+              description: "名称",
+              group: "basic",
+              groupI18n: {
+                basic: { en: "basic", zh: "基本" },
+                ui: { en: "UI", zh: "外观" },
+              },
+              mode: "normal",
+              name: "name",
+              type: "string",
+            },
+            {
+              description: "年龄",
+              groupI18n: {
+                basic: { en: "basic", zh: "基本" },
+                ui: { en: "UI", zh: "外观" },
+              },
+              mode: "normal",
+              name: "age",
+              type: "number",
+            },
+          ],
+        ],
+        [
+          "advanced",
+          [
+            {
+              description: "值",
+              group: "advanced",
+              groupI18n: {
+                basic: { en: "basic", zh: "基本" },
+                ui: { en: "UI", zh: "外观" },
+              },
+              mode: "advanced",
+              name: "value",
+              type: "Value",
+            },
+          ],
+        ],
+      ]);
+    });
   });
 
   describe("useYamlParse", () => {
@@ -323,7 +425,7 @@ describe("processor test", () => {
       const typeList = [
         {
           name: "name",
-          type: "stirng",
+          type: "string",
           description: "名称",
         },
         {
@@ -336,9 +438,10 @@ describe("processor test", () => {
       const result = extractCommonProps(typeList);
       expect(result).toEqual([
         { name: "id", type: "string", description: "构件 ID" },
+        { name: "style", type: "Record<string, any>", description: "构件样式" },
         {
           name: "name",
-          type: "stirng",
+          type: "string",
           description: "名称",
         },
         {
