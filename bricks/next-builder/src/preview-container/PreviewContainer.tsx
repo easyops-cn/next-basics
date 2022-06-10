@@ -161,9 +161,8 @@ export function LegacyPreviewContainer(
     }
   };
 
-  const handleOnDragOver = useCallback((e: DragEvent): void => {
-    e.preventDefault();
-    const { clientX, clientY } = e;
+  const setDirection = (pos: { x: number; y: number }): void => {
+    const { x: clientX, y: clientY } = pos;
     if (refHoverOutlines.current?.length > 0) {
       const currentHoverNode = refHoverOutlines.current[0];
       const { left, top, width, height } = currentHoverNode;
@@ -187,48 +186,41 @@ export function LegacyPreviewContainer(
         : "inside";
 
       setDragDirection(direction);
-      refDragDirection.current = dragDirection;
+      refDragDirection.current = direction;
     }
-  }, []);
+  };
+
+  const handleDragEnd = (): void => {
+    refDragDirection.current = null;
+    setDragDirection(null);
+  };
 
   const handleOnDrop = useCallback(
-    (e: DragEvent): void => {
-      e.preventDefault();
-      const nodeData = e.dataTransfer.getData("nodeData");
-      if (nodeData) {
-        const direction = refDragDirection.current;
-        const dragStatus =
-          direction === "inside"
-            ? "inside"
-            : ["top", "left"].includes(direction)
-            ? "top"
-            : ["right", "bottom"].includes(direction)
-            ? "bottom"
-            : "";
-        manager.workbenchNodeAdd({
-          nodeData: JSON.parse(nodeData),
-          dragOverNodeInstanceId: refHoverIid.current,
-          dragStatus,
-        });
-      }
+    (nodeData): void => {
+      const direction = refDragDirection.current;
+      const dragStatus =
+        direction === "inside"
+          ? "inside"
+          : ["top", "left"].includes(direction)
+          ? "top"
+          : ["right", "bottom"].includes(direction)
+          ? "bottom"
+          : "";
+      manager.workbenchNodeAdd({
+        nodeData: nodeData,
+        dragOverNodeInstanceId: refHoverIid.current,
+        dragStatus,
+      });
+      setTimeout(() => {
+        handleDragEnd();
+      }, 100);
     },
     [manager]
   );
 
-  const handleDragEnd = (e: DragEvent): void => {
-    e.preventDefault();
-    setDragDirection(null);
-    refDragDirection.current = null;
-  };
-
   const handleIframeLoad = useCallback(() => {
     loadedRef.current = true;
     const snippetData = getSnippetData(snippetGraphData);
-    iframeRef.current.contentDocument.addEventListener(
-      "dragover",
-      handleOnDragOver
-    );
-    iframeRef.current.contentDocument.addEventListener("drop", handleOnDrop);
     document.addEventListener("dragend", handleDragEnd);
     iframeRef.current.contentWindow.postMessage(
       {
@@ -247,8 +239,6 @@ export function LegacyPreviewContainer(
     );
   }, [
     snippetGraphData,
-    handleOnDragOver,
-    handleOnDrop,
     appId,
     templateId,
     routePath,
@@ -262,9 +252,7 @@ export function LegacyPreviewContainer(
     if (hoverIid && hoverIid === activeIid) {
       setHoverOutlines([]);
     }
-    refHoverIid.current = hoverIid;
-    refHoverOutlines.current = hoverOutlines;
-  }, [activeIid, hoverIid, hoverOutlines]);
+  }, [activeIid, hoverIid]);
 
   const adjustOutlines = useCallback(
     (outlines: BrickOutline[]): BrickOutline[] => {
@@ -369,19 +357,9 @@ export function LegacyPreviewContainer(
       for (const fn of removeListeners) {
         fn();
       }
-      if (loadedRef.current) {
-        iframeRef.current.contentDocument.removeEventListener(
-          "dragover",
-          handleOnDragOver
-        );
-        iframeRef.current.contentDocument.removeEventListener(
-          "drop",
-          handleOnDrop
-        );
-      }
       document.removeEventListener("dragend", handleDragEnd);
     };
-  }, [handleOnDragOver, handleOnDrop, manager, onNodeAdd]);
+  }, [manager, onNodeAdd]);
 
   useEffect(() => {
     if (!sameOriginWithOpener) {
@@ -425,6 +403,12 @@ export function LegacyPreviewContainer(
               sender: "preview-container",
               forwardedFor: data.sender,
             } as PreviewMessageFromContainer);
+            if (data.isDirection) {
+              setDirection(data.position);
+            }
+            break;
+          case "previewer-drop":
+            handleOnDrop(data.nodeData);
             break;
           case "scroll":
             setScroll(data.scroll);
@@ -440,6 +424,8 @@ export function LegacyPreviewContainer(
               setHoverAlias(data.alias);
               setHoverOutlines(data.outlines);
             }
+            refHoverIid.current = data.iid;
+            refHoverOutlines.current = data.outlines;
             break;
           case "context-menu-on-brick": {
             const box = iframeRef.current.getBoundingClientRect();
@@ -493,6 +479,7 @@ export function LegacyPreviewContainer(
     scaleX,
     inspecting,
     onScreenshotCapture,
+    handleOnDrop,
   ]);
 
   useEffect(() => {

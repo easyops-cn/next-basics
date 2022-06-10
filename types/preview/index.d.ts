@@ -31,6 +31,12 @@ export interface PreviewMessageBuilderSelectBrick
   type: "select-brick";
 }
 
+export interface PreviewMessageBuilderDrop extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "previewer-drop";
+  nodeData: Record<string, any>;
+}
+
 export interface HighlightBaseInfo {
   iid: string;
   alias: string;
@@ -40,6 +46,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
+  | PreviewMessagePreviewerDrop
   | PreviewMessagePreviewerHighlightBrick
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
@@ -72,7 +79,9 @@ export type PreviewMessageFromContainer =
 export type PreviewMessageToContainer =
   | PreviewMessageBuilderHoverOnBrick
   | PreviewMessageBuilderSelectBrick
+  | PreviewMessageBuilderDrop
   | PreviewMessageBuilderHoverOnMain
+  | PreviewMessagePreviewerHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
@@ -97,21 +106,33 @@ export interface PreviewMessagePreviewerPreviewStarted
   type: "preview-started";
 }
 
+export interface PreviewMessagePreviewerDrop extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "previewer-drop";
+  nodeData: Record<string, any>;
+}
+
 export interface PreviewMessagePreviewerHoverOnMain extends PreviewBaseMessage {
   sender: "previewer";
   type: "hover-on-main";
+  isDirection?: boolean;
+  position?: { x: number; y: number };
 }
 export interface PreviewMessagePreviewerHoverOnBrick
   extends PreviewBaseMessage {
   sender: "previewer";
   type: "hover-on-brick";
   iidList: string[];
+  isDirection?: boolean;
+  position?: { x: number; y: number };
 }
 
 export interface PreviewMessagePreviewerSelectBrick extends PreviewBaseMessage {
   sender: "previewer";
   type: "select-brick";
   iidList: string[];
+  isDirection: boolean;
+  position: { x: number; y: number };
 }
 
 export interface PreviewMessagePreviewerHighlightBrick
