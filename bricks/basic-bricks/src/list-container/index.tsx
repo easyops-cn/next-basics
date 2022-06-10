@@ -23,7 +23,7 @@ import { ListContainer } from "./ListContainer";
  *   "ui": {
  *     "en": "UI",
  *     "zh": "外观"
- *   },
+ *   }
  * }
  * @memo
  * @noInheritDoc
