@@ -27,6 +27,12 @@ export interface OptionGroup {
   options: (CheckboxOptionType | IconCheckboxItem)[];
 }
 
+export interface LabeledValue {
+  label: string;
+  value: string | number;
+  disabled: boolean;
+}
+
 /**
 * @id forms.general-checkbox
 * @name forms.general-checkbox
@@ -35,26 +41,34 @@ export interface OptionGroup {
 * @author jo
 * @slots
 * @history
-* 1.145.0:新增属性 `isGroup``optionGroups`，支持选项分组
 * 1.146.0:新增属性 `type`，支持复选框选项`default``icon`样式
+* 1.145.0:新增属性 `isGroup``optionGroups`，支持选项分组
+* @groupI18N
+* {
+*   "basicFormItem": {
+*     "en": "BasicFormItem",
+*     "zh": "表单项常用"
+*   },
+*   "advanceFormItem": {
+*     "en": "AdvanceFormItem",
+*     "zh": "表单项高级"
+*   },
+*   "ui": {
+*     "en": "UI",
+*     "zh": "外观"
+*   }
+* }
 * @memo
 
 * > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
-* ```typescript
-*interface LabeledValue {
-*  label: string;
-*  value: string | number;
-*  disabled: boolean;
-*}
-*```
 */
 export class GeneralCheckboxElement extends FormItemElement {
   /**
    * @kind CheckboxType
    * @required false
-   * @default `default`
+   * @default default
    * @description 	多选框样式类型(不支持分组复选框）
-   * @group advanced
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -65,6 +79,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required true
    * @default -
    * @description 多选框字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
@@ -73,6 +88,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default -
    * @description 多选框字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
@@ -81,6 +97,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default -
    * @description 多选框选项表
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -92,7 +109,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required -
    * @default -
    * @description 输入框当前选中始值
-
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -104,6 +121,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default -
    * @description 多选框字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -112,6 +130,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -120,6 +139,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
@@ -128,6 +148,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required true
    * @default -
    * @description 多选框选项分组数据，需要设置 `isGroup` 为 `true` 才生效
+   * @group advanceFormItem
    */
   @property({
     attribute: false,
@@ -138,12 +159,18 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default false
    * @description 是否为分组复选框，若为 `true`，则可设置分组数据 `optionGroups`
+   * @group advanceFormItem
    */
   @property({
     type: Boolean,
   })
   isGroup: boolean;
 
+  /**
+   * @required false
+   * @description 用值1~24来表示每一列跨越的范围，如三个等宽的列可以设置`colSpan: 8`
+   * @group ui
+   */
   @property({
     type: Number,
   })
@@ -153,6 +180,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default -
    * @description 作为单个复选框使用时的选项文本
+   * @group basicFormItem
    */
   @property({
     type: String,
@@ -163,6 +191,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default false
    * @description 作为单个复选框使用时的禁用状态
+   * @group basicFormItem
    */
   @property({
     type: Boolean,
@@ -173,6 +202,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @default false
    * @required false
    * @description 在icon模式下的优化样式，增加一种自定义样式，需设置 `type` 为 `icon` 才生效
+   * @group ui
    */
   @property({
     type: Boolean,
