@@ -135,6 +135,7 @@ export interface CellStatusProps {
  * @name presentational-bricks.brick-table
  * @docKind brick
  * @description 当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时
+ * @groupI18N {"basic": {"en": "Basic", "zh": "常用"},"advanced": {"en": "Advanced", "zh": "高级"}}
  * @author lynette
  * @slots
  * @history
