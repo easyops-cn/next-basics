@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.0...@next-bricks/forms@1.227.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* **general-buttons:** 先执行本身的事件，在触发form表单校验，确保validate.success拿到最新的数据  Refs SERVICE_OBSERVE-1405 ([bc08d4b](https://github.com/easyops-cn/next-basics/commit/bc08d4bc805654d9152644a5ee3c9efdde9c8ab7))
+
+
+
+
+
 # [1.227.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.226.0...@next-bricks/forms@1.227.0) (2022-06-08)
 
 
