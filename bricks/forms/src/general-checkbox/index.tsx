@@ -43,6 +43,21 @@ export interface LabeledValue {
 * @history
 * 1.146.0:新增属性 `type`，支持复选框选项`default``icon`样式
 * 1.145.0:新增属性 `isGroup``optionGroups`，支持选项分组
+* @groupI18N
+* {
+*   "basicFormItem": {
+*     "en": "BasicFormItem",
+*     "zh": "表单项常用"
+*   },
+*   "advanceFormItem": {
+*     "en": "AdvanceFormItem",
+*     "zh": "表单项高级"
+*   },
+*   "UI": {
+*     "en": "UI",
+*     "zh": "外观"
+*   },
+* }
 * @memo
 
 * > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
