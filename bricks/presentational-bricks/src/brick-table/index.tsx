@@ -948,6 +948,17 @@ export class BrickTableElement extends UpdatingElement {
   pagination: false | TablePaginationConfig;
 
   /**
+   * @kind false | TableRowSelection
+   * @required false
+   * @default -
+   * @description 表格行是否可选择，优先级低于configProps.rowSelection
+   */
+  @property({
+    attribute: false,
+  })
+  rowSelection: false | TableRowSelection<any>;
+
+  /**
    * @kind SizeType
    * @required false
    * @default -
@@ -1653,7 +1664,6 @@ export class BrickTableElement extends UpdatingElement {
           this._columns
         );
       }
-
       this._initConfigProps();
       ReactDOM.render(
         <BrickWrapper wrapperConfig={this.wrapperConfig}>
@@ -1802,7 +1812,8 @@ export class BrickTableElement extends UpdatingElement {
       if (!this.configProps.size) {
         this._finalConfigProps.size = this.size;
       }
-      if (this.configProps.rowSelection) {
+      const rowSelec = this.configProps.rowSelection ?? this.rowSelection;
+      if (rowSelec) {
         if (this.configProps.rowSelection === true) {
           this._finalConfigProps.rowSelection = {
             ...defaultRowSelection,
@@ -1812,19 +1823,17 @@ export class BrickTableElement extends UpdatingElement {
           this._finalConfigProps.rowSelection = {
             ...defaultRowSelection,
             type: this.type ?? "checkbox",
-            ...this.configProps.rowSelection,
+            ...rowSelec,
             ...(defaultRowSelection.selectedRowKeys
               ? { selectedRowKeys: defaultRowSelection.selectedRowKeys }
               : {}),
           };
         }
-      } else {
-        if (this.type) {
-          this._finalConfigProps.rowSelection = {
-            ...defaultRowSelection,
-            type: this.type,
-          };
-        }
+      } else if (this.type) {
+        this._finalConfigProps.rowSelection = {
+          ...defaultRowSelection,
+          type: this.type,
+        };
       }
     } else {
       this._finalConfigProps = {};
