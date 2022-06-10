@@ -8,6 +8,7 @@ import {
 import type {
   PreviewMessageBuilderHoverOnBrick,
   PreviewMessageBuilderSelectBrick,
+  PreviewMessageBuilderHoverOnMain,
 } from "@next-types/preview";
 
 export function useHighlightBrick(
@@ -47,6 +48,13 @@ export function sendHighlightBrick(
     ) {
       iid = highlightNode.instanceId;
       alias = highlightNode.alias;
+    } else if (highlightNode.type === "bricks") {
+      // root
+      window.postMessage({
+        sender: "builder",
+        type: "hover-on-main",
+      } as PreviewMessageBuilderHoverOnMain);
+      return;
     }
   }
   window.postMessage({

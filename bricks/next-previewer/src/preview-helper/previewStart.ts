@@ -107,6 +107,9 @@ export function previewStart(
             hoverAlias = data.alias;
             sendHighlightBrickOutlines("hover", data.iid, data.alias);
             break;
+          case "hover-on-main":
+            sendHighlightBrickOutlines("hover", "#main-mount-point", "root");
+            break;
           case "select-brick":
             activeIid = data.iid;
             activeAlias = data.alias;
@@ -245,10 +248,17 @@ function getBrickOutlines(iid: string): BrickOutline[] {
   if (!iid) {
     return [];
   }
+  const isRoot = iid.includes("#");
   const elements = document.querySelectorAll<HTMLElement>(
-    `[data-iid="${iid}"]`
+    isRoot ? iid : `[data-iid="${iid}"]`
   );
-  return getOutlines(elements);
+  const outlines = getOutlines(elements);
+  return isRoot
+    ? outlines.map((item) => ({
+        ...item,
+        height: window.innerHeight - item.top,
+      }))
+    : outlines;
 }
 
 function getOutlines(elements: NodeListOf<HTMLElement>): BrickOutline[] {

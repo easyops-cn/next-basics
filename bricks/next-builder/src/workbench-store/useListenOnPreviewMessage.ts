@@ -33,6 +33,9 @@ export function useListenOnPreviewMessage(manager: BuilderDataManager): void {
             findPreviewNode(data.iidList, manager)?.$$uid
           );
           break;
+        case "hover-on-main":
+          manager.setHoverNodeUid(manager.getData().rootId);
+          break;
         case "select-brick": {
           const node = findPreviewNode(data.iidList, manager);
           if (node) {

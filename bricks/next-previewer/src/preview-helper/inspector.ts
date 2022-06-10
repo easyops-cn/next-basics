@@ -5,6 +5,8 @@ import type {
   PreviewMessagePreviewerHoverOnBrick,
   PreviewMessagePreviewerSelectBrick,
   PreviewMessagePreviewerContextMenuOnBrick,
+  PreviewMessagePreviewerHoverOnMain,
+  PreviewMessagePreviewerDrop,
 } from "@next-types/preview";
 
 let previewProxyOrigin: string;
@@ -30,6 +32,8 @@ function registerListeners(): void {
   window.addEventListener("pointerover", onPointerOver, true);
   window.addEventListener("pointerup", onMouseEvent, true);
   window.addEventListener("pointerleave", onPointerLeave, true);
+  window.addEventListener("dragover", onDragOver, true);
+  window.addEventListener("drop", onDrop, true);
   window.addEventListener("contextmenu", onContextMenu, true);
 }
 
@@ -42,6 +46,8 @@ function unregisterListeners(): void {
   window.removeEventListener("pointerover", onPointerOver, true);
   window.removeEventListener("pointerup", onMouseEvent, true);
   window.removeEventListener("pointerleave", onPointerLeave, true);
+  window.removeEventListener("dragover", onDragOver, true);
+  window.removeEventListener("drop", onDrop, true);
   window.removeEventListener("contextmenu", onContextMenu, true);
 }
 
@@ -57,14 +63,33 @@ function onMouseEvent(event: MouseEvent): void {
 }
 
 const hoverOnBrick = throttle(
-  (brick: HTMLElement) => {
+  (e: MouseEvent, isDirection = false) => {
+    const brick = e.target as HTMLElement;
     const iidList = getPossibleBrickIidList(brick);
-    if (iidList.length > 0) {
+    if (brick.tagName === "BODY") {
+      window.parent.postMessage(
+        {
+          sender: "previewer",
+          type: "hover-on-main",
+          isDirection,
+          position: {
+            x: e.clientX,
+            y: e.clientY,
+          },
+        } as PreviewMessagePreviewerHoverOnMain,
+        previewProxyOrigin
+      );
+    } else if (iidList.length > 0) {
       window.parent.postMessage(
         {
           sender: "previewer",
           type: "hover-on-brick",
           iidList,
+          isDirection,
+          position: {
+            x: e.clientX,
+            y: e.clientY,
+          },
         } as PreviewMessagePreviewerHoverOnBrick,
         previewProxyOrigin
       );
@@ -77,13 +102,13 @@ const hoverOnBrick = throttle(
 function onPointerDown(event: MouseEvent): void {
   event.preventDefault();
   event.stopPropagation();
-  hoverOnBrick(event.target as HTMLElement);
+  hoverOnBrick(event);
 }
 
 function onPointerOver(event: MouseEvent): void {
   event.preventDefault();
   event.stopPropagation();
-  hoverOnBrick(event.target as HTMLElement);
+  hoverOnBrick(event);
 }
 
 function onPointerLeave(event: MouseEvent): void {
@@ -95,6 +120,26 @@ function onPointerLeave(event: MouseEvent): void {
       type: "hover-on-brick",
       iidList: [],
     } as PreviewMessagePreviewerHoverOnBrick,
+    previewProxyOrigin
+  );
+}
+
+function onDragOver(event: DragEvent): void {
+  event.preventDefault();
+  hoverOnBrick(event, true);
+}
+
+function onDrop(event: DragEvent): void {
+  event.preventDefault();
+  // dragstart should setData: nodeData and it's work
+  const nodeData = event.dataTransfer.getData("nodeData");
+  if (!nodeData) return;
+  window.parent.postMessage(
+    {
+      sender: "previewer",
+      type: "previewer-drop",
+      nodeData: JSON.parse(nodeData),
+    } as PreviewMessagePreviewerDrop,
     previewProxyOrigin
   );
 }

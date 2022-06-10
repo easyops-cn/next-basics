@@ -21,6 +21,7 @@ const manager = {
           $$isTemplateInternalNode: true,
         },
       ],
+      rootId: "root-1",
     };
   },
   setHoverNodeUid: jest.fn(),
@@ -53,6 +54,23 @@ describe("useListenOnPreviewMessage", () => {
       })
     );
     expect(manager.setHoverNodeUid).toBeCalledWith(1);
+    wrapper.unmount();
+  });
+
+  it("should work for hover on main", () => {
+    (useHoverNodeUid as jest.Mock).mockReturnValue(1);
+    const wrapper = mount(<TestComponent />);
+    window.dispatchEvent(
+      new MessageEvent("message", {
+        data: {
+          sender: "preview-container",
+          forwardedFor: "previewer",
+          type: "hover-on-main",
+        },
+        origin: location.origin,
+      })
+    );
+    expect(manager.setHoverNodeUid).toBeCalledWith("root-1");
     wrapper.unmount();
   });
 
