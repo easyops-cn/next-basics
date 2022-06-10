@@ -73,3 +73,4 @@ import "./dropdown-button";
 import "./lazy-bricks";
 import "./basic-icon";
 import "./text-collapse";
+import "./table-transfer";

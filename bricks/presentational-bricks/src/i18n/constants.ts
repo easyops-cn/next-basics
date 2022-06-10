@@ -32,6 +32,7 @@ export enum K {
   SELECTED_OPTIONS = "SELECTED_OPTIONS",
   FULL_TEXT_SEARCH = "FULL_TEXT_SEARCH",
   IP_SEARCH = "IP_SEARCH",
+  SORT = "SORT",
 }
 
 export type Locale = { [key in K]: string };
