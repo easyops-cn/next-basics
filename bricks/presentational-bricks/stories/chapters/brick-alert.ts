@@ -59,6 +59,11 @@ export const BrickAlertStory: Story = {
       },
     },
     {
+      description: {
+        title: "",
+        message:
+          "本示例额外使用了通过target改变具体构件属性的知识点，具体可查看[设置指定构件属性方式](/next-docs/docs/brick-next/events#custom-handlers-properties)",
+      },
       brick: "presentational-bricks.brick-alert",
       properties: {
         id: "pseudoSlot",
