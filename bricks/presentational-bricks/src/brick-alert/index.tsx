@@ -23,10 +23,10 @@ export type AlertType = "success" | "error" | "info" | "warning";
  * @slots
  * description:仅当 `enableDescSlot` 为真，才存在该插槽
  * @history
- * 1.159.0:新增属性：`stripLocalStorageUrlSuffix`
- * 1.155.0:新增属性： `enableMessageSlot` `noBorderRadio` `iconSize` `messageStyle` `foldDesc` `enableActionSlot`
  * 1.96.0:新增属性：`enableDescSlot`
  * 1.72.0:新增属性：`localStorageKey`
+ * 1.159.0:新增属性：`stripLocalStorageUrlSuffix`
+ * 1.155.0:新增属性： `enableMessageSlot` `noBorderRadio` `iconSize` `messageStyle` `foldDesc` `enableActionSlot`
  * @memo
  * @noInheritDoc
  */
@@ -125,7 +125,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description 搭配localStorageKey使用，为true时，关闭localStorageKey的url命名空间。
+   * @description 搭配`localStorageKey`使用，为true时，关闭localStorageKey的url命名空间。
    */
   @property({ type: Boolean })
   stripLocalStorageUrlSuffix: boolean;
@@ -134,7 +134,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description 描述区折叠模式,仅enableMessageSlot为true时可用
+   * @description 描述区折叠模式,仅`enableMessageSlot`为true时可用
    * @group advanced
    */
   @property({ attribute: false })

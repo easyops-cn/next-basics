@@ -11,9 +11,9 @@ import { BrickUser } from "./BrickUser";
  * @author ice
  * @slots
  * @history
- * 1.152.0:新属性 `showNickname`
  * 1.62.0:新属性 `userNameOrId`
  * 1.47.0:新属性 `size`, `shape`
+ * 1.152.0:新属性 `shwNickname`
  * @memo
  * @noInheritDoc
  */
