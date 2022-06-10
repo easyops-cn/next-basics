@@ -1,11 +1,12 @@
 // istanbul ignore file: working in progress
 // https://github.com/facebook/react/blob/cae635054e17a6f107a39d328649137b83f25972/packages/react-devtools-shared/src/backend/views/Highlighter/index.js
-import { throttle, isEqual } from "lodash";
+import { throttle } from "lodash";
 import type {
   PreviewMessagePreviewerHoverOnBrick,
   PreviewMessagePreviewerSelectBrick,
   PreviewMessagePreviewerContextMenuOnBrick,
   PreviewMessagePreviewerHoverOnMain,
+  PreviewMessagePreviewerDrop,
 } from "@next-types/preview";
 
 let previewProxyOrigin: string;
@@ -32,6 +33,7 @@ function registerListeners(): void {
   window.addEventListener("pointerup", onMouseEvent, true);
   window.addEventListener("pointerleave", onPointerLeave, true);
   window.addEventListener("dragover", onDragOver, true);
+  window.addEventListener("drop", onDrop, true);
   window.addEventListener("contextmenu", onContextMenu, true);
 }
 
@@ -45,6 +47,7 @@ function unregisterListeners(): void {
   window.removeEventListener("pointerup", onMouseEvent, true);
   window.removeEventListener("pointerleave", onPointerLeave, true);
   window.removeEventListener("dragover", onDragOver, true);
+  window.removeEventListener("drop", onDrop, true);
   window.removeEventListener("contextmenu", onContextMenu, true);
 }
 
@@ -60,13 +63,19 @@ function onMouseEvent(event: MouseEvent): void {
 }
 
 const hoverOnBrick = throttle(
-  (brick: HTMLElement) => {
+  (e: MouseEvent, isDirection = false) => {
+    const brick = e.target as HTMLElement;
     const iidList = getPossibleBrickIidList(brick);
     if (brick.tagName === "BODY") {
       window.parent.postMessage(
         {
           sender: "previewer",
           type: "hover-on-main",
+          isDirection,
+          position: {
+            x: e.clientX,
+            y: e.clientY,
+          },
         } as PreviewMessagePreviewerHoverOnMain,
         previewProxyOrigin
       );
@@ -76,6 +85,11 @@ const hoverOnBrick = throttle(
           sender: "previewer",
           type: "hover-on-brick",
           iidList,
+          isDirection,
+          position: {
+            x: e.clientX,
+            y: e.clientY,
+          },
         } as PreviewMessagePreviewerHoverOnBrick,
         previewProxyOrigin
       );
@@ -88,13 +102,13 @@ const hoverOnBrick = throttle(
 function onPointerDown(event: MouseEvent): void {
   event.preventDefault();
   event.stopPropagation();
-  hoverOnBrick(event.target as HTMLElement);
+  hoverOnBrick(event);
 }
 
 function onPointerOver(event: MouseEvent): void {
   event.preventDefault();
   event.stopPropagation();
-  hoverOnBrick(event.target as HTMLElement);
+  hoverOnBrick(event);
 }
 
 function onPointerLeave(event: MouseEvent): void {
@@ -111,7 +125,23 @@ function onPointerLeave(event: MouseEvent): void {
 }
 
 function onDragOver(event: DragEvent): void {
-  hoverOnBrick(event.target as HTMLElement);
+  event.preventDefault();
+  hoverOnBrick(event, true);
+}
+
+function onDrop(event: DragEvent): void {
+  event.preventDefault();
+  // dragstart should setData: nodeData and it's work
+  const nodeData = event.dataTransfer.getData("nodeData");
+  if (!nodeData) return;
+  window.parent.postMessage(
+    {
+      sender: "previewer",
+      type: "previewer-drop",
+      nodeData: JSON.parse(nodeData),
+    } as PreviewMessagePreviewerDrop,
+    previewProxyOrigin
+  );
 }
 
 function onContextMenu(event: MouseEvent): void {
