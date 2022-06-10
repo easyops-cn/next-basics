@@ -56,7 +56,7 @@ export interface LabeledValue {
 *   "ui": {
 *     "en": "UI",
 *     "zh": "外观"
-*   },
+*   }
 * }
 * @memo
 
