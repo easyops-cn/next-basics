@@ -12,41 +12,58 @@ import styles from "./EasyView.shadow.css";
  * @history
  * 1.127.0: 新增构件 `basic-bricks.easy-view`
  * @docKind brick
+ * @groupI18N
+ * {
+ *   "basic": {
+ *     "en": "Basic",
+ *     "zh": "常用"
+ *   },
+ *   "UI": {
+ *     "en": "UI",
+ *     "zh": "外观"
+ *   },
+ * }
  * @noInheritDoc
  */
 export class EasyViewElement extends UpdatingElement {
   /**
    * @description 以键值对形式定义多个 [grid-area](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area)
+   * @group basic
    */
   @property({ attribute: false })
   gridAreas: Record<string, (string | number)[]>;
 
   /**
    * @description 定义 [grid-template-areas](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas)
+   * @group basic
    */
   @property({ attribute: false })
   gridTemplateAreas: string[][];
 
   /**
    * @description 定义 [grid-template-columns](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+   * @group basic
    */
   @property({ attribute: false })
   gridTemplateColumns: string | string[];
 
   /**
    * @description 定义 [grid-template-rows](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows)
+   * @group basic
    */
   @property({ attribute: false })
   gridTemplateRows: string | string[];
 
   /**
    * @description 定义网格容器的样式
+   * @group UI
    */
   @property({ attribute: false })
   containerStyle: React.CSSProperties;
 
   /**
    * @description 定义网格内各区域的样式
+   * @group UI
    */
   @property({ attribute: false })
   styleByAreas: Record<string, React.CSSProperties>;
