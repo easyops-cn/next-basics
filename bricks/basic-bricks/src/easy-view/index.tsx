@@ -21,7 +21,7 @@ import styles from "./EasyView.shadow.css";
  *   "ui": {
  *     "en": "UI",
  *     "zh": "外观"
- *   },
+ *   }
  * }
  * @noInheritDoc
  */
