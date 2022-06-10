@@ -23,10 +23,10 @@ export type AlertType = "success" | "error" | "info" | "warning";
  * @slots
  * description:仅当 `enableDescSlot` 为真，才存在该插槽
  * @history
- * 1.96.0:新增属性：`enableDescSlot`
- * 1.72.0:新增属性：`localStorageKey`
  * 1.159.0:新增属性：`stripLocalStorageUrlSuffix`
  * 1.155.0:新增属性： `enableMessageSlot` `noBorderRadio` `iconSize` `messageStyle` `foldDesc` `enableActionSlot`
+ * 1.96.0:新增属性：`enableDescSlot`
+ * 1.72.0:新增属性：`localStorageKey`
  * @memo
  * @noInheritDoc
  */
