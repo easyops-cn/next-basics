@@ -191,7 +191,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
         };
         const SortableItem = SortableElement(
           (props: React.HTMLAttributes<HTMLTableRowElement>) => (
-            <tr {...props} />
+            <tr {...props} style={{ zIndex: 99999, marginTop: "-5px" }} />
           )
         );
         const SortableBody = SortableContainer(
