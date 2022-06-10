@@ -32,6 +32,7 @@ const locale: Locale = {
   [K.SELECTED_OPTIONS]: "Selected {{number}} options",
   [K.FULL_TEXT_SEARCH]: "Fulltext Search",
   [K.IP_SEARCH]: "IP Search ",
+  [K.SORT]: "Sort",
 };
 
 export default locale;

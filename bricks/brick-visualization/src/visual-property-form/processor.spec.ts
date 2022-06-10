@@ -291,7 +291,7 @@ describe("processor test", () => {
           description: "名称",
           mode: "normal",
           group: "basic",
-          groupI18n: {
+          groupI18N: {
             basic: {
               zh: "基本",
               en: "basic",
@@ -307,7 +307,7 @@ describe("processor test", () => {
           type: "number",
           description: "年龄",
           mode: "normal",
-          groupI18n: {
+          groupI18N: {
             basic: {
               zh: "基本",
               en: "basic",
@@ -324,7 +324,7 @@ describe("processor test", () => {
           description: "值",
           mode: "advanced",
           group: "advanced",
-          groupI18n: {
+          groupI18N: {
             basic: {
               zh: "基本",
               en: "basic",
@@ -346,7 +346,7 @@ describe("processor test", () => {
             {
               description: "名称",
               group: "basic",
-              groupI18n: {
+              groupI18N: {
                 basic: { en: "basic", zh: "基本" },
                 ui: { en: "UI", zh: "外观" },
               },
@@ -356,7 +356,7 @@ describe("processor test", () => {
             },
             {
               description: "年龄",
-              groupI18n: {
+              groupI18N: {
                 basic: { en: "basic", zh: "基本" },
                 ui: { en: "UI", zh: "外观" },
               },
@@ -372,7 +372,7 @@ describe("processor test", () => {
             {
               description: "值",
               group: "advanced",
-              groupI18n: {
+              groupI18N: {
                 basic: { en: "basic", zh: "基本" },
                 ui: { en: "UI", zh: "外观" },
               },
