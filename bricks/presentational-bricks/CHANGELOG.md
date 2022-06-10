@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.245.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.6...@next-bricks/presentational-bricks@1.245.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* fix type ([6be214a](https://github.com/easyops-cn/next-basics/commit/6be214a9897459707d02c75e3be9ceccb676d830))
+* new fixDoc ([bb37a88](https://github.com/easyops-cn/next-basics/commit/bb37a8896b9340b7e725875c689280c0cff72191))
+* new fixDoc ([b966b6c](https://github.com/easyops-cn/next-basics/commit/b966b6c9199cb59a45003b3119b41ca53567d999))
+* **transfer:** drag style ([e471720](https://github.com/easyops-cn/next-basics/commit/e471720c3eaf67a6d60465c769789ff75efa672c))
+
+
+### Features
+
+* **transfer:** 新增表格穿梭框构件 ([814b4b0](https://github.com/easyops-cn/next-basics/commit/814b4b0adb14d66f96c5b7b064cf41dbebb12748))
+
+
+
+
+
 ## [1.244.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.5...@next-bricks/presentational-bricks@1.244.6) (2022-06-08)
 
 

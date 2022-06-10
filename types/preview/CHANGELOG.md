@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.8.0...@next-types/preview@1.9.0) (2022-06-10)
+
+
+### Features
+
+* drag and drop events move into inspector ([0529839](https://github.com/easyops-cn/next-basics/commit/0529839c9f7da2b0227b91e51e334c97940be747))
+* **PreviewContainer:** support brick drag ([8c0c55e](https://github.com/easyops-cn/next-basics/commit/8c0c55eab90b845b9a8eb8e262ce89e0b9fedefa))
+
+
+
+
+
 # [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.7.0...@next-types/preview@1.8.0) (2022-05-26)
 
 
