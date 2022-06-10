@@ -12,17 +12,29 @@ import { ListContainer } from "./ListContainer";
  * @author steve
  * @slots
  * @history
- * 1.20.0:新增构件
  * 1.41.0:支持 `containerStyle` 配置
+ * 1.20.0:新增构件
+ * @groupI18N
+ * {
+ *   "basic": {
+ *     "en": "Basic",
+ *     "zh": "常用"
+ *   },
+ *   "ui": {
+ *     "en": "UI",
+ *     "zh": "外观"
+ *   }
+ * }
  * @memo
  * @noInheritDoc
  */
 export class ListContainerElement extends UpdatingElement {
   /**
-   * @kind [UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)
+   * @kind UseBrickConf
    * @required true
-   * @default `[]`
-   * @description 使用的子构件配置
+   * @default []
+   * @description 使用的子构件配置,具体查阅[UseBrickConf](/next-docs/docs/micro-app/brick-use-brick)
+   * @group basic
    */
   @property({
     attribute: false,
@@ -32,8 +44,9 @@ export class ListContainerElement extends UpdatingElement {
   /**
    * @kind `any[]`
    * @required true
-   * @default `[]`
+   * @default []
    * @description 数据列表
+   * @group basic
    */
   @property({
     attribute: false,
@@ -42,8 +55,9 @@ export class ListContainerElement extends UpdatingElement {
 
   /**
    * @kind string | number
-   * @default `"var(--card-content-gap)"`
-   * @description 间距
+   * @default "var(--card-content-gap)"
+   * @description 间距(配合extraContainerStyle使用)
+   * @group ui
    */
   @property({
     attribute: false,
@@ -53,22 +67,24 @@ export class ListContainerElement extends UpdatingElement {
   /**
    * @kind Record<string, any>
    * @default -
-   * @description 自定义容器的样式，容器本身默认是 grid 布局，如果`containerStyle`不为空则覆盖掉容器本身的样式配置
-   */
-  @property({
-    attribute: false,
-  })
-  containerStyle: React.CSSProperties;
-
-  /**
-   * @kind Record<string, any>
-   * @default -
    * @description 容器本身默认是 grid 布局，可以设置额外的样式。
+   * @group ui
    */
   @property({
     attribute: false,
   })
   extraContainerStyle: React.CSSProperties;
+
+  /**
+   * @kind Record<string, any>
+   * @default -
+   * @description 自定义容器的样式，容器本身默认是 grid 布局，如果`containerStyle`不为空则覆盖掉容器本身的样式配置
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  containerStyle: React.CSSProperties;
 
   connectedCallback(): void {
     // istanbul ignore else
