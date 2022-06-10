@@ -192,7 +192,7 @@ export function groupByType(
   return Object.entries(
     groupBy(typeList, (item) => {
       const group = item.group || "basic";
-      const i18nData = item.groupI18n && item.groupI18n[group];
+      const i18nData = item.groupI18N && item.groupI18N[group];
       if (i18nData) {
         return i18nText(i18nData);
       }
