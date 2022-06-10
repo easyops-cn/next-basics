@@ -18,7 +18,7 @@ import styles from "./EasyView.shadow.css";
  *     "en": "Basic",
  *     "zh": "常用"
  *   },
- *   "UI": {
+ *   "ui": {
  *     "en": "UI",
  *     "zh": "外观"
  *   },
@@ -56,14 +56,14 @@ export class EasyViewElement extends UpdatingElement {
 
   /**
    * @description 定义网格容器的样式
-   * @group UI
+   * @group ui
    */
   @property({ attribute: false })
   containerStyle: React.CSSProperties;
 
   /**
    * @description 定义网格内各区域的样式
-   * @group UI
+   * @group ui
    */
   @property({ attribute: false })
   styleByAreas: Record<string, React.CSSProperties>;
