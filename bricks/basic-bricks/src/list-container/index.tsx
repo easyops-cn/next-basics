@@ -20,7 +20,7 @@ import { ListContainer } from "./ListContainer";
  *     "en": "Basic",
  *     "zh": "常用"
  *   },
- *   "UI": {
+ *   "ui": {
  *     "en": "UI",
  *     "zh": "外观"
  *   },
@@ -57,7 +57,7 @@ export class ListContainerElement extends UpdatingElement {
    * @kind string | number
    * @default "var(--card-content-gap)"
    * @description 间距(配合extraContainerStyle使用)
-   * @group UI
+   * @group ui
    */
   @property({
     attribute: false,
@@ -68,7 +68,7 @@ export class ListContainerElement extends UpdatingElement {
    * @kind Record<string, any>
    * @default -
    * @description 容器本身默认是 grid 布局，可以设置额外的样式。
-   * @group UI
+   * @group ui
    */
   @property({
     attribute: false,
@@ -79,7 +79,7 @@ export class ListContainerElement extends UpdatingElement {
    * @kind Record<string, any>
    * @default -
    * @description 自定义容器的样式，容器本身默认是 grid 布局，如果`containerStyle`不为空则覆盖掉容器本身的样式配置
-   * @group UI
+   * @group ui
    */
   @property({
     attribute: false,
