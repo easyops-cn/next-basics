@@ -53,7 +53,7 @@ export interface LabeledValue {
 *     "en": "AdvanceFormItem",
 *     "zh": "表单项高级"
 *   },
-*   "UI": {
+*   "ui": {
 *     "en": "UI",
 *     "zh": "外观"
 *   },
@@ -169,7 +169,7 @@ export class GeneralCheckboxElement extends FormItemElement {
   /**
    * @required false
    * @description 用值1~24来表示每一列跨越的范围，如三个等宽的列可以设置`colSpan: 8`
-   * @group UI
+   * @group ui
    */
   @property({
     type: Number,
@@ -202,7 +202,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @default false
    * @required false
    * @description 在icon模式下的优化样式，增加一种自定义样式，需设置 `type` 为 `icon` 才生效
-   * @group UI
+   * @group ui
    */
   @property({
     type: Boolean,
