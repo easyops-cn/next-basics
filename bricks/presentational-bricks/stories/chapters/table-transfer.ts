@@ -1,6 +1,6 @@
 import { Story } from "@next-core/brick-types";
 
-export const GeneralTransferStory: Story = {
+export const TableTransferStory: Story = {
   storyId: "presentational-bricks.table-transfer",
   category: "layout",
   type: "brick",

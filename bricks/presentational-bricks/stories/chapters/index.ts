@@ -62,6 +62,7 @@ import { RankTableStory } from "./rank-table";
 import { DropdownButtonStory } from "./dropdown-button";
 import { BasicIconStory } from "./basic-icon";
 import { TextCollapseStory } from "./text-collapse";
+import { TableTransferStory } from "./table-transfer";
 export const Chapters = [
   AgentStatusStory,
   BasicProgressStory,
@@ -127,4 +128,5 @@ export const Chapters = [
   RankTableStory,
   DropdownButtonStory,
   BasicIconStory,
+  TableTransferStory,
 ];
