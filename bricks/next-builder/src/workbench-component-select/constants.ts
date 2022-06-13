@@ -10,19 +10,17 @@ interface suggestType {
 export const suggest: suggestType = {
   brick: frequentlyUsedBricks,
   layout: [],
+  customTemplate: [],
   widget: [],
   snippet: [],
-  template: [],
-  customTemplate: [],
 };
 
 export const i18nTransform: Record<string, string> = {
   brick: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK}`),
   layout: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT}`),
+  customTemplate: i18next.t(`${NS_NEXT_BUILDER}:${K.CUSTOMTEMPLATE}`),
   widget: i18next.t(`${NS_NEXT_BUILDER}:${K.WIDGET}`),
   snippet: i18next.t(`${NS_NEXT_BUILDER}:${K.SNIPPET}`),
-  template: i18next.t(`${NS_NEXT_BUILDER}:${K.TEMPLATE}`),
-  customTemplate: i18next.t(`${NS_NEXT_BUILDER}:${K.CUSTOMTEMPLATE}`),
 };
 
 const brickGroup = [
@@ -79,6 +77,10 @@ const brickGroup = [
   {
     key: "other",
     text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_OTHER}`),
+  },
+  {
+    key: "template",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.TEMPLATE}`),
   },
 ];
 

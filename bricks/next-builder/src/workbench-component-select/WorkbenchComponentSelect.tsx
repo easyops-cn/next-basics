@@ -11,7 +11,7 @@ import {
 import { i18nText } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
 import { BuildFilled } from "@ant-design/icons";
-import { debounce, cloneDeep } from "lodash";
+import { debounce } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import styles from "./WorkbenchComponentSelect.module.css";
 
@@ -71,9 +71,13 @@ export function WorkbenchComponentSelect({
             ? obj[item.layerType].push(item)
             : (obj[item.layerType] = [item]);
         } else {
-          obj[item.type]
-            ? obj[item.type].push(item)
-            : (obj[item.type] = [item]);
+          let key = item.type;
+          const brickItem: BrickOptionItem = {
+            ...item,
+            category: item.type === "template" ? item.type : item.category,
+          };
+          if (item.type === "template") key = "brick";
+          obj[key] ? obj[key].push(brickItem) : (obj[key] = [brickItem]);
         }
       });
       return obj;
@@ -169,7 +173,8 @@ function ComponentList({
       } else {
         result = result.concat(renderList);
       }
-      const newGroup: groupItem[] = cloneDeep(initGroup());
+      const newGroup: groupItem[] = initGroup();
+      newGroup.forEach((item) => (item.children = []));
       result.forEach((item) => {
         if (item.category) {
           const res = newGroup.find((child) => child.key === item.category);
