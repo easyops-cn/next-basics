@@ -121,6 +121,13 @@ const locale: Locale = {
   [K.CONTRACT_OPTIONS_TIPS_PREFIX]: "仅展示前",
   [K.CONTRACT_OPTIONS_TIPS_SUFFIX]: "项,更多结果请搜索",
   [K.CONTRACT_VALIDATE_MESSAGE]: "请填写正确的契约名称",
+  [K.BRICK_SUGGEST]: "推荐",
+  [K.BRICK]: "原子构件",
+  [K.WIDGET]: "挂件",
+  [K.SNIPPET]: "片段",
+  [K.TEMPLATE]: "业务模板",
+  [K.CUSTOMTEMPLATE]: "自定义模板",
+  [K.LAYOUT]: "布局",
 };
 
 export default locale;

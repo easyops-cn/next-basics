@@ -127,6 +127,13 @@ const locale: Locale = {
   [K.CONTRACT_OPTIONS_TIPS_SUFFIX]:
     "items are displayed, please search for more results",
   [K.CONTRACT_VALIDATE_MESSAGE]: "Please fill in the correct contract name ",
+  [K.BRICK_SUGGEST]: "Suggest",
+  [K.BRICK]: "Atom Brick",
+  [K.WIDGET]: "Widget",
+  [K.SNIPPET]: "Snippet",
+  [K.TEMPLATE]: "Template",
+  [K.CUSTOMTEMPLATE]: "Custom template",
+  [K.LAYOUT]: "Layout",
 };
 
 export default locale;
