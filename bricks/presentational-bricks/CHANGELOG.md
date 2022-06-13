@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.245.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.2...@next-bricks/presentational-bricks@1.245.3) (2022-06-13)
+
+
+### Bug Fixes
+
+* **transfer:** fix穿梭框右边选中会导致左边disabled失效bug ([5b4044a](https://github.com/easyops-cn/next-basics/commit/5b4044a5a140c486d7c1acf3bdbfb3e47e03dfd0))
+
+
+
+
+
 ## [1.245.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.1...@next-bricks/presentational-bricks@1.245.2) (2022-06-13)
 
 
