@@ -18,20 +18,18 @@ import {
   set,
   isEmpty,
   merge,
-  orderBy,
   isNil,
   forEach,
   cloneDeep,
   isArray,
-  uniqBy,
   uniq,
-  pullAllBy,
   pullAll,
   every,
   find,
   pull,
   filter,
   flatten,
+  keyBy,
 } from "lodash";
 import { TablePaginationConfig, TableProps } from "antd/lib/table";
 import {
@@ -896,6 +894,16 @@ export class BrickTableElement extends UpdatingElement {
   storeCheckedByUrl: boolean;
 
   /**
+   * @kind Record<string, unknown>[]
+   * @required false
+   * @default -
+   * @description 额外的行，通常为跨页勾选时，不在当前页的行
+   * @group advanced
+   */
+  @property({ attribute: false })
+  extraRows: Record<string, unknown>[] = [];
+
+  /**
    * @kind boolean
    * @required false
    * @default false
@@ -1192,9 +1200,14 @@ export class BrickTableElement extends UpdatingElement {
   ): void => {
     const rowKey =
       this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
-    this._selectedRows = selectedRows;
+    const rowKeyRowMap = keyBy(selectedRows, rowKey);
     if (this._selected) {
-      const _selectedRows = [...selectedRows, ...this._allChildren];
+      const _selectedRowKeys = [...selectedRowKeys];
+      this._allChildren.forEach((child) => {
+        const rowKeyValue = child[rowKey];
+        _selectedRowKeys.push(rowKeyValue);
+        rowKeyRowMap[rowKeyValue] = child;
+      });
       if (this.autoSelectParentWhenAllChildrenSelected && this._selectedRow) {
         const selectedRowKeySet = new Set(selectedRowKeys);
         const parent = this._findParentByChildKeyValue(
@@ -1209,10 +1222,12 @@ export class BrickTableElement extends UpdatingElement {
             (item) => selectedRowKeySet.has(item[rowKey] as string)
           )
         ) {
-          _selectedRows.push(parent);
+          const rowKeyValue = parent[rowKey] as string;
+          _selectedRowKeys.push(rowKeyValue);
+          rowKeyRowMap[rowKeyValue] = parent;
         }
       }
-      this._selectedRows = uniqBy(_selectedRows, rowKey);
+      this.selectedRowKeys = uniq(_selectedRowKeys);
     } else {
       let parent: Record<string, unknown>;
 
@@ -1223,14 +1238,16 @@ export class BrickTableElement extends UpdatingElement {
           this._dataSource
         );
       }
-      this._selectedRows = pullAllBy(
-        selectedRows,
-        this._allChildren.concat(parent),
-        rowKey
+      this.selectedRowKeys = pullAll(
+        selectedRowKeys,
+        map(this._allChildren.concat(parent), rowKey)
       );
     }
     this._selectedRow = undefined;
-    this.selectedRowKeys = map(this._selectedRows, rowKey);
+    const extraRowKeyRowMap = keyBy(this.extraRows, rowKey);
+    this._selectedRows = this.selectedRowKeys.map(
+      (key) => rowKeyRowMap[key] || extraRowKeyRowMap[key]
+    );
 
     let detail = null;
     const data = isEmpty(this._selectUpdateEventDetailField)
@@ -1248,10 +1265,9 @@ export class BrickTableElement extends UpdatingElement {
     if (!this._selectUpdateEventName) {
       this.selectUpdate.emit(detail);
     } else {
-      const eventName = this._selectUpdateEventName
-        ? this._selectUpdateEventName
-        : "select.update";
-      this.dispatchEvent(new CustomEvent(eventName, { detail }));
+      this.dispatchEvent(
+        new CustomEvent(this._selectUpdateEventName, { detail })
+      );
     }
   };
 
@@ -1465,10 +1481,9 @@ export class BrickTableElement extends UpdatingElement {
             if (!this._selectUpdateEventName) {
               this.selectUpdate.emit([]);
             } else {
-              const eventName = this._selectUpdateEventName
-                ? this._selectUpdateEventName
-                : "select.update";
-              this.dispatchEvent(new CustomEvent(eventName, { detail: [] }));
+              this.dispatchEvent(
+                new CustomEvent(this._selectUpdateEventName, { detail: [] })
+              );
             }
           }}
         >
