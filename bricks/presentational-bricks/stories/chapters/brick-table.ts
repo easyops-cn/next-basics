@@ -36,7 +36,6 @@ export const BrickTableStory: Story = {
           operator: "$eq",
         },
         rowSelection: true,
-        configProps: {},
         hiddenColumns: ["name"],
         columns: [
           {
@@ -622,7 +621,6 @@ export const BrickTableStory: Story = {
         dataset: { testid: "tree-data-demo" },
         rowKey: "id",
         rowSelection: true,
-        configProps: {},
         columns: [
           {
             title: "Name",
@@ -763,7 +761,6 @@ export const BrickTableStory: Story = {
         showCard: false,
         rowSelection: true,
         pagination: false,
-        configProps: {},
         columns: [
           {
             title: "包名称",
@@ -862,7 +859,6 @@ export const BrickTableStory: Story = {
                 showCard: false,
                 rowSelection: true,
                 pagination: false,
-                configProps: {},
                 frontSearchFilterKeys: ["packageName"],
                 columns: [
                   {
@@ -1135,7 +1131,6 @@ export const BrickTableStory: Story = {
                 shouldUpdateUrlParams: true,
                 shouldRenderWhenUrlParamsUpdate: false,
                 rowSelection: true,
-                configProps: {},
                 rowKey: "name",
                 columns: [
                   {
