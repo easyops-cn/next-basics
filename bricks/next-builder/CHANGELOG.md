@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.156.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.155.0...@next-bricks/next-builder@1.156.0) (2022-06-13)
+
+
+### Features
+
+* support workbenchComponentSelct ([8d77d56](https://github.com/easyops-cn/next-basics/commit/8d77d562b06434c367133540d12a34a507284784))
+* update fiter function ([da33e67](https://github.com/easyops-cn/next-basics/commit/da33e67cfe7f7f1bf935d101437a2116b2e78f60))
+* update unit test ([b11dbe8](https://github.com/easyops-cn/next-basics/commit/b11dbe8eb31d7d993aaecafd48597daaac56a41f))
+
+
+
+
+
 # [1.155.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.154.2...@next-bricks/next-builder@1.155.0) (2022-06-10)
 
 
