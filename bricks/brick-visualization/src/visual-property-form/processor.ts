@@ -12,6 +12,7 @@ import {
   supportMenuType,
   OTHER_FORM_ITEM_FIELD,
   commonProps,
+  groupI18nMap,
 } from "./constant";
 
 export function isAdvanceMode(value: unknown): boolean {
@@ -192,7 +193,8 @@ export function groupByType(
   return Object.entries(
     groupBy(typeList, (item) => {
       const group = item.group || "basic";
-      const i18nData = item.groupI18N && item.groupI18N[group];
+      const groupI18N = { ...groupI18nMap, ...item.groupI18N };
+      const i18nData = groupI18N && groupI18N[group];
       if (i18nData) {
         return i18nText(i18nData);
       }

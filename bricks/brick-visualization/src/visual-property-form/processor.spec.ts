@@ -8,6 +8,7 @@ import {
   extractCommonProps,
   matchNoramlMenuValue,
 } from "./processor";
+import { groupI18nMap } from "./constant";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 jest.mock("@next-libs/code-editor-components", () => {});
@@ -251,7 +252,7 @@ describe("processor test", () => {
 
       expect(result).toEqual([
         [
-          "basic",
+          "常用",
           [
             {
               name: "name",
@@ -269,7 +270,7 @@ describe("processor test", () => {
           ],
         ],
         [
-          "advanced",
+          "高级",
           [
             {
               name: "value",
@@ -307,6 +308,7 @@ describe("processor test", () => {
           type: "number",
           description: "年龄",
           mode: "normal",
+          group: "test",
           groupI18N: {
             basic: {
               zh: "基本",
@@ -354,8 +356,14 @@ describe("processor test", () => {
               name: "name",
               type: "string",
             },
+          ],
+        ],
+        [
+          "test",
+          [
             {
               description: "年龄",
+              group: "test",
               groupI18N: {
                 basic: { en: "basic", zh: "基本" },
                 ui: { en: "UI", zh: "外观" },
@@ -367,7 +375,7 @@ describe("processor test", () => {
           ],
         ],
         [
-          "advanced",
+          "高级",
           [
             {
               description: "值",
@@ -437,8 +445,20 @@ describe("processor test", () => {
 
       const result = extractCommonProps(typeList);
       expect(result).toEqual([
-        { name: "id", type: "string", description: "构件 ID" },
-        { name: "style", type: "Record<string, any>", description: "构件样式" },
+        {
+          name: "id",
+          type: "string",
+          description: "构件 ID",
+          group: "basic",
+          groupI18N: groupI18nMap,
+        },
+        {
+          name: "style",
+          type: "Record<string, any>",
+          description: "构件样式",
+          group: "ui",
+          groupI18N: groupI18nMap,
+        },
         {
           name: "name",
           type: "string",
