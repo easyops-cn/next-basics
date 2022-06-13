@@ -99,6 +99,10 @@ export class TableTransferElement extends UpdatingElement {
    */
   @property({ attribute: false })
   titles: string[];
+  /**
+   * @detail
+   * @description 当选项发生转移时发出的事件，event.detail是	右侧框数据的 key 集合
+   */
   @event({ type: "table.transfer.change" })
   tableTransferChangeEvent: EventEmitter<string[]>;
   change = (keys: string[]) => {

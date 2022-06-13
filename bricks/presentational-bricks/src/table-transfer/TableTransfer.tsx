@@ -82,7 +82,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
     dragSortable,
     sortTitle = t(K.SORT),
     disabled,
-    selectedKeys,
+    selectedKeys: originSelectedKeys,
     maxSelected,
     listStyle,
     titles,
@@ -91,6 +91,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
   const [dataSource, setDataSource] = useState([]);
   const [rightColumns, setRightColumns] = useState([]);
   const [targetKeys, setTargetKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState([]);
   useEffect(() => {
     const modifiedDataSource = filterDisabledDataSource(
       originDataSource,
@@ -99,6 +100,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
     );
     setDataSource(modifiedDataSource);
     setTargetKeys(originTargetKeys);
+    setSelectedKeys(originSelectedKeys);
     if (dragSortable) {
       const DragHandle = SortableHandle(() => (
         <MenuOutlined style={{ cursor: "grab", color: "#999" }} />
@@ -108,7 +110,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
         { title: sortTitle, dataIndex: "sort", render: () => <DragHandle /> },
       ]);
     }
-  }, [originDataSource, originTargetKeys, originColumns]);
+  }, [originDataSource, originTargetKeys, originColumns, originSelectedKeys]);
   const onChange = (nextTargetKeys: string[], direction: "left" | "right") => {
     if (
       direction === "left" ||
@@ -131,13 +133,19 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
       });
     }
   };
-
+  const onSelectChange = (
+    sourceSelectedKeys: string[],
+    targetSelectedKeys: string[]
+  ) => {
+    setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
+  };
   return (
     <Transfer
       targetKeys={targetKeys}
       selectedKeys={selectedKeys}
       dataSource={dataSource}
       onChange={onChange}
+      onSelectChange={onSelectChange}
       showSelectAll={false}
       listStyle={listStyle}
       showSearch
