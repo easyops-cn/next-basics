@@ -8,7 +8,6 @@ describe("WorkbenchComponentSelect", () => {
     const wrapper = render(
       <WorkbenchComponentSelect brickList={[]} storyList={[]} />
     );
-    fireEvent.click(screen.getByTestId("my-brick"));
     expect(wrapper).toBeTruthy();
   });
 });
