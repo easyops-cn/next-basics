@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.3...@next-bricks/presentational-bricks@1.246.0) (2022-06-13)
+
+
+### Features
+
+* **brick-table:** add extraRows property ([19aaf76](https://github.com/easyops-cn/next-basics/commit/19aaf769893ed7b59446beb8d474583e63a50ddf))
+
+
+
+
+
 ## [1.245.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.2...@next-bricks/presentational-bricks@1.245.3) (2022-06-13)
 
 
