@@ -9,6 +9,7 @@ import {
   arrayMoveImmutable,
   filterDisabledDataSource,
   filterOptions,
+  transferData,
 } from "./TableTransfer";
 import { cloneDeep } from "lodash";
 describe("TableTransfer", () => {
@@ -196,5 +197,80 @@ describe("TableTransfer", () => {
         columns
       )
     ).toEqual(true);
+  });
+  it("should work with transferData", () => {
+    const list = [
+      { key: "key1", title: "key1" },
+      { key: "key2", title: "key2" },
+      { key: "key3", title: "key3" },
+      { key: "key4", title: "key4" },
+      { key: "key5", title: "key5" },
+      { key: "key6", title: "key6" },
+      { key: "key7", title: "key7" },
+      { key: "key8", title: "key8" },
+    ];
+    expect(
+      transferData({
+        dataSource: list,
+        selected: true,
+        direction: "left",
+        max: 3,
+        targetKeys: ["key1", "key2"],
+        selectedKeys: ["key3"],
+        key: "key3",
+      })
+    ).toEqual([
+      { key: "key1", title: "key1" },
+      { key: "key2", title: "key2" },
+      { key: "key3", title: "key3" },
+      { key: "key4", title: "key4", disabled: true },
+      { key: "key5", title: "key5", disabled: true },
+      { key: "key6", title: "key6", disabled: true },
+      { key: "key7", title: "key7", disabled: true },
+      { key: "key8", title: "key8", disabled: true },
+    ]);
+    expect(
+      transferData({
+        dataSource: list,
+        selected: false,
+        direction: "left",
+        max: 3,
+        targetKeys: ["key1", "key2"],
+        selectedKeys: ["key3"],
+        key: "key3",
+      })
+    ).toEqual(list);
+    expect(
+      transferData({
+        dataSource: list,
+        selected: true,
+        direction: "right",
+        max: 3,
+        targetKeys: ["key1", "key2"],
+        selectedKeys: ["key1"],
+        key: "key1",
+      })
+    ).toEqual(list);
+    expect(
+      transferData({
+        dataSource: list,
+        selected: false,
+        direction: "right",
+        max: 3,
+        targetKeys: ["key1", "key2"],
+        selectedKeys: ["key1"],
+        key: "key1",
+      })
+    ).toEqual(list);
+    expect(
+      transferData({
+        dataSource: list,
+        selected: false,
+        direction: "left",
+        targetKeys: ["key1", "key2"],
+        selectedKeys: ["key4"],
+        key: "key4",
+      })
+    ).toEqual(list);
   });
 });
