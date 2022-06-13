@@ -1,0 +1,55 @@
+.searchWrapper {
+  padding: 0 10px 10px 10px;
+}
+
+.componentCategory {
+  color: var(--text-color-title);
+  padding: 10px;
+}
+
+.componentWraper {
+  display: grid;
+  grid-gap: 5px 15px;
+  padding: 0 15px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.componentItem {
+  flex-direction: column;
+  gap: 8px;
+  height: auto;
+  padding: 8px 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: grab;
+  min-width: 0;
+  border-radius: 6px;
+  background: var(--tag-gray-background);
+}
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  width: 60px;
+  height: 55px;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+.name {
+  width: 100%;
+  text-align: center;
+  flex: auto;
+  padding: 0 10px;
+  min-width: 0;
+  color: var(--text-color-title);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

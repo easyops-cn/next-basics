@@ -60,3 +60,4 @@ import "./data-providers/PasteBricks";
 // !Lazy: import "./workbench-tabs";
 // !Lazy: import "./workbench-quick-entry";
 import "./shared/components/contract-auto-complete";
+import "./workbench-component-select";
