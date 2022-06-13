@@ -145,20 +145,6 @@ export class PreviewContainerElement extends UpdatingElement {
     this._previewContainerRef.current.manager.nodeAddStored(detail);
   }
 
-  @event({
-    type: "node.add",
-  })
-  private _nodeAddEmitter: EventEmitter<FulfilledEventDetailOfBrickAdd>;
-  private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
-    this._nodeAddEmitter.emit({
-      ...event.detail,
-      nodeData: {
-        appId: this.appId,
-        ...event.detail.nodeData,
-      },
-    });
-  };
-
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -192,7 +178,6 @@ export class PreviewContainerElement extends UpdatingElement {
               viewportHeight={this.viewportHeight}
               screenshotMaxWidth={this.screenshotMaxWidth}
               screenshotMaxHeight={this.screenshotMaxHeight}
-              onNodeAdd={this._handleNodeAdd}
               onPreviewStart={this._handlePreviewStart}
               onUrlChange={this._handleUrlChange}
               onScaleChange={this._handleScaleChange}

@@ -46,7 +46,6 @@ export interface PreviewContainerProps {
   previewOnNewWindow?: boolean;
   screenshotMaxWidth?: number;
   screenshotMaxHeight?: number;
-  onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onPreviewStart?(): void;
   onUrlChange?(url: string): void;
   onScaleChange?(scale: number): void;
@@ -99,7 +98,6 @@ export function LegacyPreviewContainer(
     previewOnNewWindow,
     screenshotMaxWidth,
     screenshotMaxHeight,
-    onNodeAdd,
     onPreviewStart,
     onUrlChange,
     onScaleChange,
@@ -221,7 +219,6 @@ export function LegacyPreviewContainer(
   const handleIframeLoad = useCallback(() => {
     loadedRef.current = true;
     const snippetData = getSnippetData(snippetGraphData);
-    document.addEventListener("dragend", handleDragEnd);
     iframeRef.current.contentWindow.postMessage(
       {
         sender: "preview-container",
@@ -352,14 +349,11 @@ export function LegacyPreviewContainer(
   }));
 
   useEffect(() => {
-    const removeListeners = [manager.onNodeAdd(onNodeAdd)];
+    document.addEventListener("dragend", handleDragEnd);
     return () => {
-      for (const fn of removeListeners) {
-        fn();
-      }
       document.removeEventListener("dragend", handleDragEnd);
     };
-  }, [manager, onNodeAdd]);
+  }, []);
 
   useEffect(() => {
     if (!sameOriginWithOpener) {
