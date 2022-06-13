@@ -13,7 +13,7 @@ import { MenuOutlined } from "@ant-design/icons";
 import { Transfer, Table, Modal, TableColumnType } from "antd";
 import difference from "lodash/difference";
 import styles from "./index.module.css";
-import { cloneDeep, isNumber, get } from "lodash";
+import { cloneDeep, isNumber, get, uniq } from "lodash";
 
 interface TableTransferProps {
   dataSource: any[];
@@ -58,6 +58,41 @@ export function filterDisabledDataSource(
         delete item.disabled;
       }
     });
+  }
+  return result;
+}
+export function transferData(options: {
+  dataSource: Record<string, any>[];
+  selected: boolean;
+  direction: "left" | "right";
+  max?: number;
+  targetKeys: string[];
+  selectedKeys: string[];
+  key: string;
+}) {
+  const {
+    dataSource,
+    selected,
+    direction,
+    max,
+    targetKeys,
+    selectedKeys: listSelectedKeys,
+    key,
+  } = options;
+  let result = cloneDeep(dataSource);
+  if (isNumber(max) && direction === "left") {
+    const allKeys = uniq([...(targetKeys || []), ...(listSelectedKeys || [])]);
+    if (selected) {
+      allKeys.push(key);
+    } else {
+      const index = allKeys.indexOf(key);
+      allKeys.splice(index, 1);
+    }
+    result = filterDisabledDataSource(
+      result,
+      allKeys.length >= max ? allKeys : [],
+      max
+    );
   }
   return result;
 }
@@ -139,6 +174,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
   ) => {
     setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
   };
+
   return (
     <Transfer
       targetKeys={targetKeys}
@@ -179,17 +215,17 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
           },
           onSelect({ key }, selected) {
             onItemSelect(key as string, selected);
-            if (isNumber(maxSelected)) {
-              const modifiedDataSource = filterDisabledDataSource(
-                dataSource,
-                selected &&
-                  targetKeys.length + listSelectedKeys.length + 1 >= maxSelected
-                  ? [...targetKeys, ...listSelectedKeys, key]
-                  : [],
-                maxSelected
-              );
-              setDataSource(modifiedDataSource);
-            }
+            const modifiedDataSource = transferData({
+              dataSource,
+              selected,
+              direction,
+              max: maxSelected,
+              key,
+              targetKeys,
+              selectedKeys,
+            });
+
+            setDataSource(modifiedDataSource);
           },
           selectedRowKeys: listSelectedKeys,
           hideSelectAll:
