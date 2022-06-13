@@ -93,7 +93,7 @@ export class PopoverContainerElement extends UpdatingElement {
   popoverContentStyle: Record<string, any>;
 
   /**
-   * @kind top\|left\|right\|bottom\|topLeft\|topRight\|bottomLeft\|bottomRight\|leftTop\|leftBottom\|rightTop\|rightBottom
+   * @kind top|left|right|bottom|topLeft|topRight|bottomLeft|bottomRight|leftTop|leftBottom|rightTop|rightBottom
    * @required false
    * @default bottom
    * @description 气泡框位置。注意设置该属性的时候可能需要调整`popoverContentStyle`。
@@ -104,7 +104,7 @@ export class PopoverContainerElement extends UpdatingElement {
   placement: TooltipPlacement;
 
   /**
-   * @kind "always"\|"hover"\|"never"
+   * @kind "always"|"hover"|"never"
    * @required false
    * @default hover
    * @description 在什么时候显示 Icon
@@ -151,7 +151,7 @@ export class PopoverContainerElement extends UpdatingElement {
   data: any;
 
   /**
-   * @kind hover\|click
+   * @kind hover|click
    * @required false
    * @default click
    * @description 触发行为
