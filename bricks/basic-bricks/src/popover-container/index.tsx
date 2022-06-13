@@ -74,7 +74,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @kind MenuIcon
    * @required false
    * @default { lib: "fa", icon: "pencil-alt", prefix: "fas" }
-   * @description 触发弹出框的 icon [MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
+   * @description 触发弹出框的 icon [MenuIcon](/next-docs/docs/api-reference/brick-types.menuicon#menuicon-interface)
    */
   @property({
     attribute: false,
