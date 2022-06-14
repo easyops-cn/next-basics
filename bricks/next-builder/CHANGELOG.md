@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.157.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.156.0...@next-bricks/next-builder@1.157.0) (2022-06-14)
+
+
+### Features
+
+* support snippet apply and move event to store ([4522ef3](https://github.com/easyops-cn/next-basics/commit/4522ef3e5c99ba0c85eb8cc3c68e1b2ff09a3d8d))
+
+
+
+
+
 # [1.156.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.155.0...@next-bricks/next-builder@1.156.0) (2022-06-13)
 
 
