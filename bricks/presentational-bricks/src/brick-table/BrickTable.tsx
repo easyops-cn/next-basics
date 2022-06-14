@@ -200,7 +200,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   const {
     configProps,
     columns,
-    rowKey,
+    rowKey = "key",
     expandIconAsCell,
     expandIconColumnIndex,
     childrenColumnName,
@@ -213,13 +213,8 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
   } = props;
 
   const initData = useMemo(() => {
-    return (
-      props.dataSource &&
-      (rowKey
-        ? props.dataSource
-        : props.dataSource.map((item, index) =>
-            isNil(item.key) ? { ...item, key: index } : item
-          ))
+    return props.dataSource?.map((item, index) =>
+      isNil(item[rowKey]) ? { ...item, [rowKey]: index } : item
     );
   }, [props.dataSource, rowKey]);
 

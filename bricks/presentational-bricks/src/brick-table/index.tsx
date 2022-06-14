@@ -455,7 +455,7 @@ export class BrickTableElement extends UpdatingElement {
   /**
    * @kind string
    * @required false
-   * @default -
+   * @default "key"
    * @description 指定每一行的 key，不指定则默认为索引 index。强烈建议设置该属性，否则在某些情况下可能行为不如预期。
    * @group basic
    */
@@ -1049,7 +1049,7 @@ export class BrickTableElement extends UpdatingElement {
   private _fields: {
     dataSource?: string; // 指定 dataSource 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 list
     total?: string; // 指定 total 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 total
-    rowKey?: string | number; // 指定每一行的 key，不指定则默认为 index
+    rowKey?: string; // 指定每一行的 key，不指定则默认为 index
     page?: string; // 指定请求后台 page 参数 path
     pageSize?: string; // 指定请求后台 pageSize 参数 path
     ascend?: string | number; // 指定 ascend 排序对应字段，例如有些后台对应为 1 ，有些对应为 "asc"。这里默认为 "ascend"。
@@ -1200,6 +1200,9 @@ export class BrickTableElement extends UpdatingElement {
     return dataSource;
   }
 
+  private _getRowKey = (): string =>
+    this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey ?? "key";
+
   private _findParentByChildKeyValue = (
     value: string,
     rowKey: string,
@@ -1238,8 +1241,7 @@ export class BrickTableElement extends UpdatingElement {
     selectedRowKeys: string[],
     selectedRows: any[]
   ): void => {
-    const rowKey =
-      this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+    const rowKey = this._getRowKey();
     const rowKeyRowMap = keyBy(selectedRows, rowKey);
     if (this._selected) {
       const _selectedRowKeys = [...selectedRowKeys];
@@ -1337,8 +1339,7 @@ export class BrickTableElement extends UpdatingElement {
     this._selected = checked;
     this._selectedRow = row;
     this._isInSelect = true;
-    const rowKey =
-      this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+    const rowKey = this._getRowKey();
     const allChildren = this.selectAllChildren
       ? this._getSelectedRowsWithChildren(row)
       : [];
@@ -1369,8 +1370,7 @@ export class BrickTableElement extends UpdatingElement {
   ): void => {
     this._selected = selected;
     this._isInSelect = true;
-    const rowKey =
-      this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+    const rowKey = this._getRowKey();
     if (this.selectAllChildren) {
       const allParentKeys = map(this._dataSource, rowKey);
       const changedParentRows = changeRows.filter((v) =>
@@ -1624,8 +1624,7 @@ export class BrickTableElement extends UpdatingElement {
     record: Record<string, any>
   ): void => {
     if (this.expandedRowKeys) {
-      const rowKey =
-        this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+      const rowKey = this._getRowKey();
       const pullKeys: string[] = [get(record, rowKey)];
       const recordChildren = get(record, this.childrenColumnName);
       if (!isEmpty(recordChildren)) {
@@ -1670,8 +1669,7 @@ export class BrickTableElement extends UpdatingElement {
   @method()
   expandAll() {
     const allKeys: string[] = [];
-    const rowKey =
-      this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+    const rowKey = this._getRowKey();
     getKeysOfData(this._dataSource, rowKey, this.childrenColumnName, allKeys);
     this.expandedRowKeys = allKeys;
   }
@@ -1728,7 +1726,7 @@ export class BrickTableElement extends UpdatingElement {
             onExpand={this._handleOnExpand}
             onExpandedRowsChange={this._handleOnExpandedRowsChange}
             expandedRowKeys={this.expandedRowKeys}
-            rowKey={this.rowKey ?? (this._fields.rowKey as string)}
+            rowKey={this._getRowKey()}
             childrenColumnName={this.childrenColumnName}
             tableDraggable={this.tableDraggable || this.draggable}
             onDrag={this._handleOnDrag}
@@ -1755,8 +1753,7 @@ export class BrickTableElement extends UpdatingElement {
   // istanbul ignore next
   private _handleDefaultSelectAll = () => {
     this._isInSelect = true;
-    const rowKey =
-      this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+    const rowKey = this._getRowKey();
     this._selectedRows = this._getAllRows();
     this.selectedRowKeys = map(this._selectedRows, rowKey);
     return this.selectedRowKeys;
@@ -1786,8 +1783,7 @@ export class BrickTableElement extends UpdatingElement {
       ),
     };
 
-    const rowKey =
-      this.rowKey ?? this._fields.rowKey ?? this.configProps?.rowKey;
+    const rowKey = this._getRowKey();
     let rowDisabledConfig: RowDisabledProps[];
 
     if (this.rowDisabledConfig) {
