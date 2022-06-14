@@ -281,6 +281,7 @@ export class GeneralModalElement extends UpdatingElement {
    */
   @property({
     attribute: false,
+    __deprecated_and_for_compatibility_only: true,
   })
   fields: {
     modalTitle: string;
