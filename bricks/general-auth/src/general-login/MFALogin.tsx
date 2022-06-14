@@ -69,6 +69,7 @@ export function MFALogin(props: MFALoginProps) {
           const result = await MfaApi_updateUserTotpSecret({
             username,
             secret,
+            org,
           });
           if (!result.error) {
             await httpVerifyTotpCode(values);
