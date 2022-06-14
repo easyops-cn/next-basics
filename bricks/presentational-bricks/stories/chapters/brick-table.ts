@@ -21,14 +21,12 @@ export const BrickTableStory: Story = {
     {
       description: {
         title: "基础用法",
-        message: "注意对表格数据进行筛选时，需将页码恢复为第一页。",
+        message: "注意对表格数据进行筛选时，需将页码恢复为第一页",
       },
       brick: "presentational-bricks.brick-table",
       properties: {
         dataset: { testid: "basic-demo" },
         rowKey: "id",
-        page: "${query.page=1|number}",
-        pageSize: "${query.pageSize=10|number}",
         shouldUpdateUrlParams: false,
         rowDisabledConfig: {
           field: "name",
@@ -73,11 +71,9 @@ export const BrickTableStory: Story = {
             dataIndex: "tags",
             useBrick: {
               brick: "presentational-bricks.brick-tag",
-              transform: {
-                tagList: "@{cellData}",
-              },
               properties: {
                 showCard: false,
+                tagList: "<% DATA.cellData %>",
                 configProps: {
                   color: "var(--color-brand)",
                 },
@@ -90,10 +86,8 @@ export const BrickTableStory: Story = {
             dataIndex: "operate",
             useBrick: {
               brick: "presentational-bricks.brick-link",
-              transform: {
-                dataSource: "@{rowData}",
-              },
               properties: {
+                dataSource: "<% DATA.rowData %>",
                 notToJumpWhenEmpty: true,
                 icon: {
                   lib: "fa",
@@ -229,13 +223,10 @@ export const BrickTableStory: Story = {
         expandedRowBrick: {
           useBrick: {
             brick: "presentational-bricks.brick-table",
-            transformFrom: "rowData",
-            transform: {
-              dataSource: {
-                list: "@{containerList}",
-              },
-            },
             properties: {
+              dataSource: {
+                list: "<% DATA.rowData.containerList %>",
+              },
               style: {
                 background: "#f5f5f5",
               },
@@ -259,10 +250,8 @@ export const BrickTableStory: Story = {
                   dataIndex: "operate",
                   useBrick: {
                     brick: "presentational-bricks.brick-link",
-                    transform: {
-                      dataSource: "@{rowData}",
-                    },
                     properties: {
+                      dataSource: "<% DATA.rowData %>",
                       notToJumpWhenEmpty: true,
                       icon: {
                         lib: "fa",
@@ -373,8 +362,6 @@ export const BrickTableStory: Story = {
       properties: {
         dataset: { testid: "customized-expand-icon-demo" },
         rowKey: "id",
-        page: "${query.page=1|number}",
-        pageSize: "${query.pageSize=10|number}",
         expandIcon: {
           collapsedIcon: {
             lib: "fa",
@@ -505,8 +492,8 @@ export const BrickTableStory: Story = {
             dataIndex: "branch",
             useBrick: {
               brick: "presentational-bricks.brick-link",
-              transform: {
-                label: "@{cellData}",
+              properties: {
+                label: "<% DATA.cellData %>",
               },
             },
             cellStatus: {
@@ -540,10 +527,8 @@ export const BrickTableStory: Story = {
             dataIndex: "status",
             useBrick: {
               brick: "presentational-bricks.brick-value-mapping",
-              transform: {
-                value: "@{cellData}",
-              },
               properties: {
+                value: "<% DATA.cellData %>",
                 mapping: {
                   success: {
                     color: "green",
@@ -647,10 +632,8 @@ export const BrickTableStory: Story = {
             dataIndex: "tags",
             useBrick: {
               brick: "presentational-bricks.brick-tag",
-              transform: {
-                tagList: "@{cellData}",
-              },
               properties: {
+                tagList: "<% DATA.cellData %>",
                 showCard: false,
                 configProps: {
                   color: "var(--color-brand)",
@@ -664,10 +647,8 @@ export const BrickTableStory: Story = {
             dataIndex: "operate",
             useBrick: {
               brick: "presentational-bricks.brick-link",
-              transform: {
-                dataSource: "@{rowData}",
-              },
               properties: {
+                dataSource: "<% DATA.rowData %>",
                 notToJumpWhenEmpty: true,
                 icon: {
                   lib: "fa",
@@ -816,6 +797,7 @@ export const BrickTableStory: Story = {
     {
       description: {
         title: "前端搜索",
+        message: "前端搜索需要搭配构件的 `filterSourceData` 方法使用",
       },
       brick: "basic-bricks.general-card",
       properties: {
@@ -858,6 +840,7 @@ export const BrickTableStory: Story = {
             {
               brick: "presentational-bricks.brick-table",
               properties: {
+                id: "front-search-table",
                 dataset: { testid: "front-search-table" },
                 rowKey: "id",
                 frontSearch: true,
@@ -918,6 +901,7 @@ export const BrickTableStory: Story = {
     {
       description: {
         title: "内容滚动",
+        message: "当宽度过小时，内容滑动显示",
       },
       brick: "presentational-bricks.brick-table",
       properties: {
@@ -1066,7 +1050,7 @@ export const BrickTableStory: Story = {
                   title: "通知内容",
                   useBrick: {
                     brick: "presentational-bricks.markdown-display",
-                    transform: {
+                    properties: {
                       value: '<% DATA.cellData || "暂无数据"  %>',
                     },
                   },
@@ -1078,7 +1062,7 @@ export const BrickTableStory: Story = {
                   title: "告警维度",
                   useBrick: {
                     brick: "presentational-bricks.markdown-display",
-                    transform: {
+                    properties: {
                       value: '<% DATA.cellData || "暂无数据"  %>',
                     },
                   },
@@ -1090,7 +1074,7 @@ export const BrickTableStory: Story = {
                   title: "通知人",
                   useBrick: {
                     brick: "presentational-bricks.markdown-display",
-                    transform: {
+                    properties: {
                       value: '<% DATA.cellData || "暂无数据"  %>',
                     },
                   },
@@ -1107,10 +1091,9 @@ export const BrickTableStory: Story = {
             },
             transform: {
               dataSource: {
-                list: "@{containerList}",
+                list: "<% DATA.rowData.containerList %>",
               },
             },
-            transformFrom: "rowData",
           },
         },
         expandIconAsCell: false,
@@ -1245,7 +1228,7 @@ export const BrickTableStory: Story = {
             title: "IP",
             useBrick: {
               brick: "span",
-              transform: {
+              properties: {
                 textContent: "<% DATA.cellData || DATA.rowData.clusterName %>",
               },
             },
@@ -1311,6 +1294,8 @@ export const BrickTableStory: Story = {
       description: {
         title:
           "使用 flattenTreeDataListAndCalcRowSpan custom processor 平铺树形结构列表，并计算行合并",
+        message:
+          "以上示例使用了 `PROCESSORS` 加工函数，具体可查看 [Custom Processors](/next-docs/docs/brick-next/custom-processors)",
       },
       brick: "presentational-bricks.brick-table",
       properties: {
