@@ -39,15 +39,14 @@ export const popoverContainerStory: Story = {
               brick: "basic-bricks.popover-container",
               properties: {
                 showPopoverBg: false,
+                data: "<% DATA %>",
                 id: "story-point-edit",
                 displayBrick: {
                   useBrick: {
                     brick: "div",
                     properties: {
                       id: "story-point-display",
-                    },
-                    transform: {
-                      textContent: "@{storyPoint}",
+                      textContent: "<% DATA.storyPoint %>",
                     },
                   },
                 },
@@ -61,6 +60,7 @@ export const popoverContainerStory: Story = {
                       inputBoxStyle: {
                         width: 60,
                       },
+                      value: "<% DATA.storyPoint %>",
                       allowClear: false,
                       options: [
                         {
@@ -88,9 +88,6 @@ export const popoverContainerStory: Story = {
                           value: "3",
                         },
                       ],
-                    },
-                    transform: {
-                      value: "@{storyPoint}",
                     },
                     events: {
                       "general.select.change": [
@@ -120,9 +117,6 @@ export const popoverContainerStory: Story = {
                   action: "console.log",
                 },
               },
-              transform: {
-                data: "@{}",
-              },
             },
           },
           {
@@ -131,6 +125,7 @@ export const popoverContainerStory: Story = {
               brick: "basic-bricks.popover-container",
               properties: {
                 dataset: { testid: "basic-usage-click-demo" },
+                data: "<% DATA %>",
                 showPopoverBg: false,
                 id: "user-quick-edit",
                 displayBrick: {
@@ -139,9 +134,7 @@ export const popoverContainerStory: Story = {
                     properties: {
                       id: "show-user",
                       size: "large",
-                    },
-                    transform: {
-                      userNameOrId: "@{assignee[0].name}",
+                      userNameOrId: "<% DATA.assignee[0].name %>",
                     },
                   },
                 },
@@ -178,9 +171,6 @@ export const popoverContainerStory: Story = {
                   action: "console.log",
                 },
               },
-              transform: {
-                data: "@{}",
-              },
             },
           },
         ],
@@ -213,6 +203,7 @@ export const popoverContainerStory: Story = {
                 },
                 placement: "top",
                 trigger: "hover",
+                data: "<% DATA %>",
                 popoverIcon: {
                   lib: "easyops",
                   category: "app",
@@ -221,8 +212,8 @@ export const popoverContainerStory: Story = {
                 displayBrick: {
                   useBrick: {
                     brick: "div",
-                    transform: {
-                      textContent: "@{name}",
+                    properties: {
+                      textContent: "<% DATA.name %>",
                     },
                   },
                 },
@@ -244,10 +235,8 @@ export const popoverContainerStory: Story = {
                       configProps: {
                         pagination: false,
                       },
-                    },
-                    transform: {
                       dataSource: {
-                        list: "@{data}",
+                        list: "<% DATA.data %>",
                       },
                     },
                   },
@@ -257,9 +246,6 @@ export const popoverContainerStory: Story = {
                 "visible.change": {
                   action: "console.log",
                 },
-              },
-              transform: {
-                data: "@{}",
               },
             },
           },
@@ -273,6 +259,9 @@ export const popoverContainerStory: Story = {
         triggerByIcon: false,
         placement: "top",
         trigger: "hover",
+        style: {
+          display: "inline-block",
+        },
         displayBrick: {
           useBrick: {
             brick: "presentational-bricks.brick-value-mapping",

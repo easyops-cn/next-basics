@@ -22,6 +22,17 @@ import { ActionType } from "rc-trigger/lib/interface";
  * @history
  * 1.39.0:新增属性 `triggerByIcon`,`showIcon`
  * 1.33.0:新增构件 `basic-bricks.popover-container`
+ * @groupI18N
+ * {
+ *   "basic": {
+ *     "en": "Basic",
+ *     "zh": "常用"
+ *   },
+ *   "ui": {
+ *     "en": "UI",
+ *     "zh": "外观"
+ *   }
+ * }
  * @memo
  * ### CustomBrick
 
@@ -47,6 +58,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 展示构件
+   * @group basic
    */
   @property({
     attribute: false,
@@ -61,6 +73,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 弹出框构件
+   * @group basic
    */
   @property({
     attribute: false,
@@ -74,7 +87,8 @@ export class PopoverContainerElement extends UpdatingElement {
    * @kind MenuIcon
    * @required false
    * @default { lib: "fa", icon: "pencil-alt", prefix: "fas" }
-   * @description 触发弹出框的 icon [MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
+   * @description 触发弹出框的 icon [MenuIcon](/next-docs/docs/api-reference/brick-types.menuicon#menuicon-interface)
+   * @group ui
    */
   @property({
     attribute: false,
@@ -86,6 +100,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default {width:200px}
    * @description popover 内容区域的样式，默认给了 200 的宽度。由于我们的弹出框拥有自定义构件的能力，在第一次点击之前，popover 是不知道所渲染构件的宽高，可能发生错位的问题。可以通过设置宽高来解决问题。注意，根据不同的`placement`需要按需调整宽度/高度。[详见](https://github.com/ant-design/ant-design/issues/3545)
+   * @group ui
    */
   @property({
     attribute: false,
@@ -93,10 +108,11 @@ export class PopoverContainerElement extends UpdatingElement {
   popoverContentStyle: Record<string, any>;
 
   /**
-   * @kind top\|left\|right\|bottom\|topLeft\|topRight\|bottomLeft\|bottomRight\|leftTop\|leftBottom\|rightTop\|rightBottom
+   * @kind top|left|right|bottom|topLeft|topRight|bottomLeft|bottomRight|leftTop|leftBottom|rightTop|rightBottom
    * @required false
    * @default bottom
    * @description 气泡框位置。注意设置该属性的时候可能需要调整`popoverContentStyle`。
+   * @group ui
    */
   @property({
     attribute: false,
@@ -104,11 +120,11 @@ export class PopoverContainerElement extends UpdatingElement {
   placement: TooltipPlacement;
 
   /**
-   * @kind "always"\|"hover"\|"never"
+   * @kind "always"|"hover"|"never"
    * @required false
    * @default hover
    * @description 在什么时候显示 Icon
-   *
+   * @group ui
    */
   @property({
     attribute: false,
@@ -120,7 +136,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default 1030
    * @description popover的z轴顺序
-   *
+   * @group ui
    */
   @property({
     attribute: false,
@@ -131,7 +147,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 触发方式
-   *
+   * @group basic
    */
   @property({
     attribute: false,
@@ -144,6 +160,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 整体数据，如果展示构件和弹出框构件数据都来自于同一个 provider，可以直接配置 data，如果来源不一样，可以分别配置 CustomBrick.data
+   * @group basic
    */
   @property({
     attribute: false,
@@ -151,10 +168,11 @@ export class PopoverContainerElement extends UpdatingElement {
   data: any;
 
   /**
-   * @kind hover\|click
+   * @kind hover|click
    * @required false
    * @default click
    * @description 触发行为
+   * @group basic
    */
   @property({
     attribute: false,
@@ -166,6 +184,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 弹出框是否可见
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -177,6 +196,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 是否显示 popover 的默认背景
+   * @group ui
    */
   @property({
     attribute: false,
@@ -188,6 +208,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否高亮，由[general-graph](developers/brick-book/brick/graph.general-graph)构件设置。
+   * @group ui
    */
   @property({
     attribute: false,
@@ -199,6 +220,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否被关联，由[general-graph](developers/brick-book/brick/graph.general-graph)构件设置。
+   * @group ui
    */
   @property({
     attribute: false,
@@ -210,6 +232,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否弱化，由[general-graph](developers/brick-book/brick/graph.general-graph)构件设置。
+   * @group ui
    */
   @property({
     attribute: false,
@@ -221,6 +244,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否透传拓扑视图的高亮相关属性给子展示构件。由于该构件常用于[general-graph](developers/brick-book/brick/graph.general-graph)构件，故特别增设该属性。开启之后将会透传highlighted(高亮节点)/related(关联节点)/faded(淡化节点)三个属性给子展示构件，以实现高亮功能。
+   * @group ui
    */
   @property({
     type: Boolean,
