@@ -137,6 +137,7 @@ export class LegacyGeneralLogin extends React.Component<
             if (!result.loggedIn && isSet) {
               const mfaResult = await MfaApi_generateRandomTotpSecret({
                 username: result.username,
+                org: result.org,
               });
               const params = {
                 MFALogin: true,
