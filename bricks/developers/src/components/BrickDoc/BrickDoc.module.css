@@ -253,11 +253,8 @@
   }
 
   .badge {
-    height: 20px;
-    font-size: 12px;
-    line-height: 16px;
+    line-height: 20px;
     margin-left: 5px;
-    background: #fbac00;
   }
 
   .interfaceTitle {

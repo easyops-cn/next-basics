@@ -33,10 +33,11 @@ const doc = {
   properties: [
     {
       name: "dateCell",
-      type: "[UseBrickConf](#UseBrickConf)",
+      type: "UseBrickConf",
       required: "-",
       default: "-",
-      description: "自定义 brick 渲染日期单元格，返回内容会被追加到单元格",
+      description:
+        "自定义 brick 渲染日期单元格，返回内容会被追加到单元格, 具体查看 [UseBrickConf](#UseBrickConf)",
     },
     {
       name: "fullscreen",
@@ -47,17 +48,18 @@ const doc = {
     },
     {
       name: "mode",
-      type: "[CalendarMode](#calendarmode)",
+      type: "CalendarMode",
       required: "false",
       default: "month",
-      description: "初始模式.",
+      description: "初始模式.[UseBrickConf](#UseBrickConf)",
     },
     {
       name: "monthCell",
-      type: "[UseBrickConf](#UseBrickConf)",
+      type: "UseBrickConf",
       required: "true",
       default: "-",
-      description: "自定义 brick 渲染日期单元格，返回内容会被追加到单元格",
+      description:
+        "自定义 brick 渲染日期单元格，返回内容会被追加到单元格，具体查看 [UseBrickConf](#UseBrickConf)",
     },
     {
       name: "testIn",
@@ -68,22 +70,34 @@ const doc = {
     },
     {
       name: "value",
-      type: "[moment](http://www.baidu.com)",
+      type: "moment",
       required: "false",
       default: "当前日期",
-      description: "value  日历默认值.",
+      description: "value  日历默认值. 具体查看 [moment](http://www.baidu.com)",
+    },
+    {
+      name: "highlight",
+      type: "HighlightProps",
+      required: false,
+      default: "-",
+      description: "高亮选项",
+      deprecated: true,
     },
   ],
   events: [
     {
       type: "presentational.calendar.onChange",
-      detail: "[moment](https://www.moment.com)",
-      description: "日期变化事件",
+      detail: "moment",
+      description: "日期变化事件 具体查看 [moment](http://www.baidu.com)",
     },
     {
       type: "presentational.calendar.onSelect",
-      detail: "[moment](https://www.baidu.com)",
-      description: "日期变化事件",
+      detail: "moment",
+      description: "日期变化事件 具体查看 [moment](http://www.baidu.com)",
+    },
+    {
+      type: "presentational.calendar.onClick",
+      description: "日期点击事件",
     },
   ],
   methods: [
