@@ -1859,7 +1859,7 @@ export class BrickTableElement extends UpdatingElement {
       }
       const rowSelec = this.configProps.rowSelection ?? this.rowSelection;
       if (rowSelec) {
-        if (this.configProps.rowSelection === true) {
+        if (rowSelec === true) {
           this._finalConfigProps.rowSelection = {
             ...defaultRowSelection,
             type: this.type ?? "checkbox",
@@ -1879,6 +1879,8 @@ export class BrickTableElement extends UpdatingElement {
           ...defaultRowSelection,
           type: this.type,
         };
+      } else {
+        this._finalConfigProps.rowSelection = false;
       }
     } else {
       this._finalConfigProps = {};
