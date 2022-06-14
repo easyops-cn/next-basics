@@ -420,6 +420,22 @@ describe("brick-table", () => {
     document.body.removeChild(element);
   });
 
+  it("property rowSelection should work", async () => {
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+
+    element.configProps = { ...props.configProps, rowSelection: null };
+    element.dataSource = props.dataSource as any;
+    element.columns = props.columns as any;
+    element.rowSelection = false;
+
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(element.processConfigProps.rowSelection).toEqual(false);
+    document.body.removeChild(element);
+  });
+
   it("property type should work when rowSelection is null", async () => {
     const element = document.createElement(
       "presentational-bricks.brick-table"

@@ -33,9 +33,7 @@ export const BrickTableStory: Story = {
           value: "John Brown",
           operator: "$eq",
         },
-        configProps: {
-          rowSelection: true,
-        },
+        rowSelection: true,
         hiddenColumns: ["name"],
         columns: [
           {
@@ -231,8 +229,8 @@ export const BrickTableStory: Story = {
                 background: "#f5f5f5",
               },
               showCard: false,
+              pagination: false,
               configProps: {
-                pagination: false,
                 bordered: false,
               },
               columns: [
@@ -607,9 +605,7 @@ export const BrickTableStory: Story = {
       properties: {
         dataset: { testid: "tree-data-demo" },
         rowKey: "id",
-        configProps: {
-          rowSelection: true,
-        },
+        rowSelection: true,
         columns: [
           {
             title: "Name",
@@ -744,10 +740,8 @@ export const BrickTableStory: Story = {
         rowKey: "id",
         tableDraggable: true,
         showCard: false,
-        configProps: {
-          rowSelection: true,
-          pagination: false,
-        },
+        rowSelection: true,
+        pagination: false,
         columns: [
           {
             title: "包名称",
@@ -846,10 +840,8 @@ export const BrickTableStory: Story = {
                 frontSearch: true,
                 shouldUpdateUrlParams: false,
                 showCard: false,
-                configProps: {
-                  rowSelection: true,
-                  pagination: false,
-                },
+                rowSelection: true,
+                pagination: false,
                 frontSearchFilterKeys: ["packageName"],
                 columns: [
                   {
@@ -1080,9 +1072,9 @@ export const BrickTableStory: Story = {
                   },
                 },
               ],
+              pagination: false,
               configProps: {
                 bordered: false,
-                pagination: false,
               },
               showCard: false,
               style: {
@@ -1121,9 +1113,7 @@ export const BrickTableStory: Story = {
                 pageSize: "${query.page_size=10|number}",
                 shouldUpdateUrlParams: true,
                 shouldRenderWhenUrlParamsUpdate: false,
-                configProps: {
-                  rowSelection: true,
-                },
+                rowSelection: true,
                 rowKey: "name",
                 columns: [
                   {
