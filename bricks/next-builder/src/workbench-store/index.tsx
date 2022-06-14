@@ -10,15 +10,35 @@ import {
 } from "@next-core/brick-kit";
 import {
   BuilderProvider,
+  type EventDetailOfNodeAdd,
+  type EventDetailOfSnippetApplyStored,
+  type SnippetNodeDetail,
+  type SnippetNodeInstance,
   type BuilderRuntimeNode,
   type EventDetailOfNodeReorder,
   type EventDetailOfWorkbenchTreeNodeMove,
+  EventDetailOfNodeAddStored,
 } from "@next-core/editor-bricks-helper";
 import type {
   BuilderCustomTemplateNode,
   BuilderRouteOrBrickNode,
 } from "@next-core/brick-types";
 import { WorkbenchStore, type WorkbenchStoreRef } from "./WorkbenchStore";
+import {
+  EventDetailOfSnippetApply,
+  NodeInstance,
+} from "@next-core/editor-bricks-helper";
+
+type WithAppId<T> = T & {
+  appId: string;
+};
+interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
+  nodeData: WithAppId<NodeInstance>;
+}
+
+interface FulfilledSnippetNodeDetail extends SnippetNodeDetail {
+  nodeData: WithAppId<SnippetNodeInstance>;
+}
 
 /**
  * @id next-builder.workbench-store
@@ -29,6 +49,14 @@ import { WorkbenchStore, type WorkbenchStoreRef } from "./WorkbenchStore";
  * @noInheritDoc
  */
 export class WorkbenchStoreElement extends UpdatingElement {
+  /**
+   * @default
+   * @required
+   * @description
+   */
+  @property({ type: String })
+  appId: string;
+
   // This is the main data of the storyboard tree.
   @property({ attribute: false })
   dataSource: BuilderRouteOrBrickNode[];
@@ -43,6 +71,42 @@ export class WorkbenchStoreElement extends UpdatingElement {
 
   private _handleNodeClick = (event: CustomEvent<BuilderRuntimeNode>): void => {
     this._nodeClickEvent.emit(event.detail);
+  };
+
+  @event({
+    type: "node.add",
+  })
+  private _nodeAddEmitter: EventEmitter<FulfilledEventDetailOfBrickAdd>;
+  private _handleNodeAdd = (event: CustomEvent<EventDetailOfNodeAdd>): void => {
+    this._nodeAddEmitter.emit({
+      ...event.detail,
+      nodeData: {
+        appId: this.appId,
+        ...event.detail.nodeData,
+      },
+    });
+  };
+  @event({
+    type: "snippet.apply",
+  })
+  private _snippetApplyEmitter: EventEmitter<EventDetailOfSnippetApply>;
+  private _handleSnippetApply = (
+    event: CustomEvent<EventDetailOfSnippetApply>
+  ): void => {
+    const fillAppId = (
+      nodeDetail: SnippetNodeDetail
+    ): FulfilledSnippetNodeDetail => ({
+      ...nodeDetail,
+      nodeData: {
+        ...nodeDetail.nodeData,
+        appId: this.appId,
+      },
+      children: nodeDetail.children.map(fillAppId),
+    });
+    this._snippetApplyEmitter.emit({
+      ...event.detail,
+      nodeDetails: event.detail.nodeDetails.map(fillAppId),
+    });
   };
 
   @event({
@@ -70,6 +134,18 @@ export class WorkbenchStoreElement extends UpdatingElement {
     type: "node.delete",
   })
   private _nodeDeleteEmitter: EventEmitter<BuilderRuntimeNode>;
+
+  // istanbul ignore next
+  @method()
+  nodeAddStored(detail: EventDetailOfNodeAddStored): void {
+    this._storeRef.current.manager.nodeAddStored(detail);
+  }
+
+  // istanbul ignore next
+  @method()
+  snippetApplyStored(detail: EventDetailOfSnippetApplyStored): void {
+    this._storeRef.current.manager.snippetApplyStored(detail);
+  }
 
   // istanbul ignore next
   @method()
@@ -129,6 +205,8 @@ export class WorkbenchStoreElement extends UpdatingElement {
               onNodeClick={this._handleNodeClick}
               onNodeReorder={this._handleNodeReorder}
               onWorkbenchTreeNodeMove={this._handleNodeMove}
+              onNodeAdd={this._handleNodeAdd}
+              onSnippetApply={this._handleSnippetApply}
             />
           </BuilderProvider>
         </BrickWrapper>,
