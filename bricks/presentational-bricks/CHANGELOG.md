@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.246.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.246.0...@next-bricks/presentational-bricks@1.246.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* refine doc ([9f30207](https://github.com/easyops-cn/next-basics/commit/9f302078d3af77ffb5119be2eb25a932b6360e09))
+* **transfer:** fix点击表格行checkbox之外超出最大限制时没有禁用选项的问题 ([3821e08](https://github.com/easyops-cn/next-basics/commit/3821e0864ac5c4913e658d075a21be6dc1aee6d1))
+
+
+
+
+
 # [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.3...@next-bricks/presentational-bricks@1.246.0) (2022-06-13)
 
 
