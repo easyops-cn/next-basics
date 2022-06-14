@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.247.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.246.1...@next-bricks/presentational-bricks@1.247.0) (2022-06-14)
+
+
+### Features
+
+* **brick-table:** 提升rowSelection属性到最外层配置 ([5920f4f](https://github.com/easyops-cn/next-basics/commit/5920f4ff72239dae8b9bdd70d6a9a6001e7bf26a))
+
+
+
+
+
 ## [1.246.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.246.0...@next-bricks/presentational-bricks@1.246.1) (2022-06-14)
 
 
