@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.247.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.247.0...@next-bricks/presentational-bricks@1.247.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **brick-table:** unify processing logic for rowKey ([0864c02](https://github.com/easyops-cn/next-basics/commit/0864c02c8a8173b3f4a2c6a1ebe2d367da90ca94))
+
+
+
+
+
 # [1.247.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.246.1...@next-bricks/presentational-bricks@1.247.0) (2022-06-14)
 
 
