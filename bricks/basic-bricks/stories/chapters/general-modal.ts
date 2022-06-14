@@ -39,7 +39,7 @@ export const generalModalStory: Story = {
             {
               brick: "basic-bricks.general-button",
               properties: {
-                buttonName: "点击弹出模态框 with slot",
+                buttonName: "点击弹出模态框，带 footer slot",
               },
               events: {
                 "general.button.click": {
@@ -147,8 +147,8 @@ export const generalModalStory: Story = {
     },
     {
       description: {
-        title: "模态框标题对齐方式和图标",
-        message: "图标来源可以为src（httpSrc/DataSrc）或平台的图标库",
+        title: "标题相关：对齐方式、图标、标题后自定义构件",
+        message: "图标来源可以为src(httpSrc/DataSrc)或平台的图标库",
       },
       brick: "div",
       slots: {
@@ -170,6 +170,22 @@ export const generalModalStory: Story = {
             {
               brick: "basic-bricks.general-modal",
               slots: {
+                headerExtra: {
+                  bricks: [
+                    {
+                      brick: "presentational-bricks.brick-tag",
+                      properties: {
+                        color: "var(--color-warning)",
+                        showCard: false,
+                        tagList: ["警告"],
+                        tagStyle: {
+                          marginLeft: "-4px",
+                        },
+                      },
+                    },
+                  ],
+                  type: "bricks",
+                },
                 content: {
                   type: "bricks",
                   bricks: [
@@ -189,7 +205,9 @@ export const generalModalStory: Story = {
                 titleAlign: "center",
                 titleIcon: {
                   lib: "antd",
-                  icon: "plus",
+                  icon: "warning",
+                  theme: "outlined",
+                  color: "var(--color-warning)",
                 },
               },
               events: {
@@ -287,69 +305,6 @@ export const generalModalStory: Story = {
               },
             },
           ],
-        },
-      },
-    },
-    {
-      description: {
-        title: "标题后自定义构件",
-      },
-      brick: "div",
-      slots: {
-        content: {
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              events: {
-                "general.button.click": {
-                  method: "open",
-                  target: "#title-extra",
-                },
-              },
-              properties: {
-                buttonName: "点击弹出模态框",
-              },
-            },
-            {
-              brick: "basic-bricks.general-modal",
-              properties: {
-                id: "title-extra",
-                modalTitle: "执行结果",
-                okText: "ok",
-                titleAlign: "left",
-              },
-              slots: {
-                content: {
-                  bricks: [
-                    {
-                      brick: "h3",
-                      properties: {
-                        textContent: "modal content",
-                      },
-                    },
-                  ],
-                  type: "bricks",
-                },
-                headerExtra: {
-                  bricks: [
-                    {
-                      brick: "presentational-bricks.brick-tag",
-                      properties: {
-                        color: "var(--color-warning)",
-                        showCard: false,
-                        tagList: ["警告"],
-                        tagStyle: {
-                          marginLeft: "-4px",
-                        },
-                      },
-                    },
-                  ],
-                  type: "bricks",
-                },
-              },
-            },
-          ],
-          type: "bricks",
         },
       },
     },

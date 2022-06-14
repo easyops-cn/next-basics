@@ -24,6 +24,13 @@ export interface OpenCloseOption {
  * @name basic-bricks.general-modal
  * @docKind brick
  * @description 提供插槽以展示其他构件，注意与表单通用模态框 (forms.general-modal) 的不同
+ * @groupI18N
+ * {
+ *    "basic": {"en": "Basic", "zh": "常用"},
+ *    "buttonAndInteract": {"en": "Button/Interact", "zh": "按钮及交互"},
+ *    "ui": {"en": "UI", "zh": "外观"},
+ *    "other": {"en": "其他", "zh": "other"}
+ * }
  * @author ice
  * @slots
  * content:模态框里面的内容
@@ -45,6 +52,8 @@ export interface OpenCloseOption {
  * @noInheritDoc
  */
 export class GeneralModalElement extends UpdatingElement {
+  // ----------------------- basic ----------------------------
+
   /**
    * @kind string
    * @required false
@@ -75,16 +84,6 @@ export class GeneralModalElement extends UpdatingElement {
   titleAlign?: string;
 
   /**
-   * @kind string | number
-   * @required false
-   * @default -
-   * @description 模态框宽度
-   * @group basic
-   */
-  @property({ attribute: false })
-  width: string | number;
-
-  /**
    * @kind Record<string, any>
    * @required false
    * @default -
@@ -96,72 +95,34 @@ export class GeneralModalElement extends UpdatingElement {
   })
   dataSource: Record<string, any>;
 
-  /**
-   * @kind string
-   * @required false
-   * @default `"确认"`
-   * @description 确认按钮文字
-   * @group basic
-   */
-  @property()
-  okText: string;
+  // ----------------------- ui ----------------------------
 
   /**
-   * @kind ButtonType
+   * @kind string | number
    * @required false
-   * @default `"primary"`
-   * @description 模态框确认按钮类型 ButtonType("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
-   * @group basic
+   * @default -
+   * @description 模态框宽度
+   * @group ui
    */
-  @property()
-  okType: ButtonType;
+  @property({ attribute: false })
+  width: string | number;
 
   /**
    * @kind boolean
    * @required false
-   * @default `false`
-   * @description 是否禁用确认按钮
-   * @group basic
+   * @default false
+   * @description 是否启用 footer 插槽
+   * @group ui
    */
   @property({ type: Boolean })
-  okDisabled: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 确定按钮 loading
-   * @group basic
-   */
-  @property({ type: Boolean })
-  confirmLoading: boolean;
+  enableFooterSlot: boolean;
 
   /**
    * @kind string
    * @required false
-   * @default `"取消"`
-   * @description 取消按钮文字
-   * @group basic
-   */
-  @property()
-  cancelText: string;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 是否隐藏取消按钮
-   * @group basic
-   */
-  @property({ type: Boolean })
-  hideCancelButton: boolean;
-
-  /**
-   * @kind string
-   * @required false
-   * @default `right`
+   * @default right
    * @description 按钮的位置 left | center | right
-   * @group basic
+   * @group ui
    */
   @property()
   footerPosition: positionType;
@@ -169,94 +130,154 @@ export class GeneralModalElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default `true`
-   * @description 点击确定时，是否立即关闭模态框，如果设为`false`，则需要自行关闭。
-   * @group basic
-   */
-  @property({ attribute: false }) closeWhenOk = true;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default `true`
-   * @description 点击取消时，是否立即关闭模态框，如果设为`false`，则需要自行关闭。
-   * @group basic
-   */
-  @property({ attribute: false }) closeWhenCancel = true;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default `true`
+   * @default true
    * @description 是否需要隐藏弹窗内容的padding
-   * @group basic
+   * @group ui
    */
-  @property({ attribute: false }) isHiddenBodyPadding = false;
+  @property({ attribute: false })
+  isHiddenBodyPadding = false;
 
   /**
    * @kind boolean
    * @required false
-   * @default `true`
+   * @default true
    * @description 是否需要隐藏弹窗头部的分割线
-   * @group basic
+   * @group ui
    */
-  @property({ attribute: false }) isHiddenHeaderBorder = false;
+  @property({ attribute: false })
+  isHiddenHeaderBorder = false;
 
   /**
    * @kind boolean
    * @required false
-   * @default `true`
+   * @default true
    * @description 是否需要隐藏底部特殊的颜色
-   * @group basic
+   * @group ui
    */
-  @property({ attribute: false }) isHiddenFooterColor = false;
+  @property({ attribute: false })
+  isHiddenFooterColor = false;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 是否启用 footer 插槽
-   * @group basic
-   */
-  @property({ type: Boolean })
-  enableFooterSlot: boolean;
-
-  /**
-   * @default `false`
+   * @default false
    * @description 全屏模式
-   * @group advanced
+   * @group ui
    */
   @property({ type: Boolean })
   fullscreen?: boolean;
 
+  // ----------------------- buttonAndInteract ----------------------------
+
+  /**
+   * @kind string
+   * @required false
+   * @default 确认
+   * @description 确认按钮文字
+   * @group buttonAndInteract
+   */
+  @property()
+  okText: string;
+
+  /**
+   * @kind ButtonType
+   * @required false
+   * @default primary
+   * @description 模态框确认按钮类型 ButtonType("link" | "default" | "primary" | "ghost" | "dashed" | "danger")
+   * @group buttonAndInteract
+   */
+  @property()
+  okType: ButtonType;
+
   /**
    * @kind boolean
    * @required false
-   * @default `true`
+   * @default false
+   * @description 是否禁用确认按钮
+   * @group buttonAndInteract
+   */
+  @property({ type: Boolean })
+  okDisabled: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 点击确定时，是否立即关闭模态框，如果设为`false`，则需要自行关闭。
+   * @group basic
+   */
+  @property({ attribute: false })
+  closeWhenOk = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 确定按钮 loading
+   * @group buttonAndInteract
+   */
+  @property({ type: Boolean })
+  confirmLoading: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default 取消
+   * @description 取消按钮文字
+   * @group buttonAndInteract
+   */
+  @property()
+  cancelText: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否隐藏取消按钮
+   * @group buttonAndInteract
+   */
+  @property({ type: Boolean })
+  hideCancelButton: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 点击取消时，是否立即关闭模态框，如果设为`false`，则需要自行关闭。
+   * @group buttonAndInteract
+   */
+  @property({ attribute: false })
+  closeWhenCancel = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
    * @description 是否点击背景关闭模态框
-   * @group advanced
+   * @group buttonAndInteract
    */
   @property({
     attribute: false,
   })
   maskClosable: boolean;
 
+  // ----------------------- other ----------------------------
+
   /**
    * @kind object
    * @required false
    * @default -
-   * @description 完全透传给 antd 的 Modal 属性，详见：[https://ant.design/components/modal-cn/#API](https://ant.design/components/modal-cn/#API)
-   * @group advanced
+   * @description 完全透传给 antd 的 Modal 属性，详见 [文档](https://ant.design/components/modal-cn#API)
+   * @group other
    */
   @property({ attribute: false })
   configProps: ModalProps;
 
   /**
    * @kind {modalTitle: string}
+   * @deprecated true
    * @required false
    * @default -
-   * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
-   * @group advanced
+   * @description `已废弃` 字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
+   * @group other
    */
   @property({
     attribute: false,
@@ -415,7 +436,7 @@ export class GeneralModalElement extends UpdatingElement {
     this._render();
   }
   /**
-   * @params `option?: OpenCloseOption`
+   * @params option?: OpenCloseOption
    * @description 打开 modal 时发出该事件
    */
   @event({ type: "modal.open" }) openModal: EventEmitter<Record<string, any>>;
@@ -446,14 +467,14 @@ export class GeneralModalElement extends UpdatingElement {
   @event({ type: "model.after.close" }) afterCloseModel: EventEmitter;
 
   /**
-   * @detail `dataSource`
-   * @description 当点击 modal 自带的取消按钮时发出该事件
+   * @detail `Record<string, any>`
+   * @description 当点击 modal 自带的取消按钮时发出该事件，detail来源为当前的dataSource属性值
    */
   @event({ type: "basic-bricks.general-modal.cancel" })
   generalModalCancel: EventEmitter;
   /**
-   * @detail `dataSource`
-   * @description 当点击 modal 自带的确认按钮时发出该事件
+   * @detail `Record<string, any>`
+   * @description 当点击 modal 自带的确认按钮时发出该事件，detail来源为当前的dataSource属性值
    */
   @event({ type: "basic-bricks.general-modal.confirm" })
   generalModalConfirm: EventEmitter;
