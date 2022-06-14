@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import type { ColumnsType, TableRowSelection } from "antd/es/table/interface";
-import type { TransferItem, TransferProps } from "antd/es/transfer";
+import type { TransferItem } from "antd/es/transfer";
 import type { SortableContainerProps, SortEnd } from "react-sortable-hoc";
 import {
   SortableContainer,
@@ -10,7 +10,7 @@ import {
   SortableHandle,
 } from "react-sortable-hoc";
 import { MenuOutlined } from "@ant-design/icons";
-import { Transfer, Table, Modal, TableColumnType } from "antd";
+import { Transfer, Table, Modal } from "antd";
 import difference from "lodash/difference";
 import styles from "./index.module.css";
 import { cloneDeep, isNumber, get, uniq } from "lodash";
@@ -149,8 +149,8 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
   const onChange = (nextTargetKeys: string[], direction: "left" | "right") => {
     if (
       direction === "left" ||
-      !props.maxSelected ||
-      nextTargetKeys.length <= props.maxSelected
+      !maxSelected ||
+      nextTargetKeys.length <= maxSelected
     ) {
       setTargetKeys(nextTargetKeys);
       change(nextTargetKeys);
@@ -163,16 +163,18 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
     } else {
       Modal.warning({
         title: "提示",
-        content: `所选数量超过最大限制（${props.maxSelected}），请重新选择`,
+        content: `所选数量超过最大限制（${maxSelected}），请重新选择`,
         okText: "知道了",
       });
     }
   };
-  const onSelectChange = (
-    sourceSelectedKeys: string[],
-    targetSelectedKeys: string[]
-  ) => {
-    setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
+  const onSelectChange = (sourceSelectedKeys: string[]) => {
+    const modifiedDataSource = filterDisabledDataSource(
+      dataSource,
+      [...sourceSelectedKeys, ...targetKeys],
+      maxSelected
+    );
+    setDataSource(modifiedDataSource);
   };
 
   return (
@@ -222,9 +224,8 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
               max: maxSelected,
               key,
               targetKeys,
-              selectedKeys,
+              selectedKeys: listSelectedKeys,
             });
-
             setDataSource(modifiedDataSource);
           },
           selectedRowKeys: listSelectedKeys,
