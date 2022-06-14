@@ -3,6 +3,78 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.246.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.246.0...@next-bricks/presentational-bricks@1.246.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* refine doc ([9f30207](https://github.com/easyops-cn/next-basics/commit/9f302078d3af77ffb5119be2eb25a932b6360e09))
+* **transfer:** fix点击表格行checkbox之外超出最大限制时没有禁用选项的问题 ([3821e08](https://github.com/easyops-cn/next-basics/commit/3821e0864ac5c4913e658d075a21be6dc1aee6d1))
+
+
+
+
+
+# [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.3...@next-bricks/presentational-bricks@1.246.0) (2022-06-13)
+
+
+### Features
+
+* **brick-table:** add extraRows property ([19aaf76](https://github.com/easyops-cn/next-basics/commit/19aaf769893ed7b59446beb8d474583e63a50ddf))
+
+
+
+
+
+## [1.245.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.2...@next-bricks/presentational-bricks@1.245.3) (2022-06-13)
+
+
+### Bug Fixes
+
+* **transfer:** fix穿梭框右边选中会导致左边disabled失效bug ([5b4044a](https://github.com/easyops-cn/next-basics/commit/5b4044a5a140c486d7c1acf3bdbfb3e47e03dfd0))
+
+
+
+
+
+## [1.245.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.1...@next-bricks/presentational-bricks@1.245.2) (2022-06-13)
+
+
+### Bug Fixes
+
+* **transfer:** fix重置selectedKeys后无法再选bug ([dd01ff1](https://github.com/easyops-cn/next-basics/commit/dd01ff148b05d4cc4d0f31c30da68edb6a28c5ae))
+
+
+
+
+
+## [1.245.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.245.0...@next-bricks/presentational-bricks@1.245.1) (2022-06-11)
+
+**Note:** Version bump only for package @next-bricks/presentational-bricks
+
+
+
+
+
+# [1.245.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.6...@next-bricks/presentational-bricks@1.245.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* fix type ([6be214a](https://github.com/easyops-cn/next-basics/commit/6be214a9897459707d02c75e3be9ceccb676d830))
+* new fixDoc ([bb37a88](https://github.com/easyops-cn/next-basics/commit/bb37a8896b9340b7e725875c689280c0cff72191))
+* new fixDoc ([b966b6c](https://github.com/easyops-cn/next-basics/commit/b966b6c9199cb59a45003b3119b41ca53567d999))
+* **transfer:** drag style ([e471720](https://github.com/easyops-cn/next-basics/commit/e471720c3eaf67a6d60465c769789ff75efa672c))
+
+
+### Features
+
+* **transfer:** 新增表格穿梭框构件 ([814b4b0](https://github.com/easyops-cn/next-basics/commit/814b4b0adb14d66f96c5b7b064cf41dbebb12748))
+
+
+
+
+
 ## [1.244.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.244.5...@next-bricks/presentational-bricks@1.244.6) (2022-06-08)
 
 

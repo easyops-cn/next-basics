@@ -75,7 +75,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @kind BrickDescriptionsItemProps[]
    * @required true
    * @default -
-   * @description 描述列表项，扩展自 ant-design DescriptionItem 相关配置项，额外扩展项如下，其他项查阅：[https://ant.design/components/descriptions-cn/#DescriptionItem](https://ant.design/components/descriptions-cn/#DescriptionItem)
+   * @description 描述列表项，扩展自 ant-design DescriptionItem 相关配置项，额外扩展项如下，其他项查阅：[DescriptionItem](https://ant.design/components/descriptions-cn/#DescriptionItem)
    */
   @property({
     attribute: false,
@@ -87,6 +87,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 是否显示卡片
+   * @group ui
    */
   @property({
     attribute: false,
@@ -98,6 +99,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default 3
    * @description 一行的 DescriptionItems 数量，可以写成像素值或支持响应式的对象写法 { xs: 8, sm: 16, md: 24}
+   * @group ui
    */
   @property({
     attribute: false,
@@ -109,7 +111,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default horizontal
    * @description 描述布局
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -121,7 +123,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否展示边框
-   * @group advanced
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -133,7 +135,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 设置列表的大小。可以设置为 middle 、small, 或不填（只有设置 bordered={true} 生效）
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -144,8 +146,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @kind DescriptionsProps
    * @required false
    * @default -
-   * @description ant-design 相关配置项,具体查阅：[https://ant.design/components/descriptions-cn/#Descriptions](https://ant.design/components/descriptions-cn/#Descriptions)
-   * @group advanced
+   * @description ant-design 相关配置项,具体查阅：[Descriptions](https://ant.design/components/descriptions-cn/#Descriptions)
    */
   @property({
     attribute: false,
@@ -157,7 +158,6 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 设置需要隐藏的描述列表项。请先在 itemList 中定义列表项所属 group
-   * @group advanced
    */
   @property({
     attribute: false,
@@ -170,7 +170,6 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @default -
    * @deprecated
    * @description [已废弃]数据来源，通常来源于后台
-   * @group advanced
    */
   @property({
     attribute: false,

@@ -125,7 +125,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description 搭配localStorageKey使用，为true时，关闭localStorageKey的url命名空间。
+   * @description 搭配`localStorageKey`使用，为true时，关闭localStorageKey的url命名空间。
    */
   @property({ type: Boolean })
   stripLocalStorageUrlSuffix: boolean;
@@ -134,7 +134,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description 描述区折叠模式,仅enableMessageSlot为true时可用
+   * @description 描述区折叠模式,仅`enableMessageSlot`为true时可用
    * @group advanced
    */
   @property({ attribute: false })

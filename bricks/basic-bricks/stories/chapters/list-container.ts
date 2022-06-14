@@ -21,30 +21,29 @@ export const listContainerStory: Story = {
     {
       brick: "basic-bricks.list-container",
       properties: {
+        data: ["正常", "异常", "未安装"],
         useBrick: {
           brick: "presentational-bricks.agent-status",
-          transform: {
-            value: "@{}",
+          properties: {
+            value: "<% DATA %>",
           },
         },
-        data: ["正常", "异常", "未安装"],
       },
     },
     {
       brick: "basic-bricks.list-container",
       properties: {
-        containerStyle: {
-          display: "grid",
-          gap: "20px",
+        gap: "20px",
+        extraContainerStyle: {
           gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
         },
+        data: ["正常", "异常", "未安装"],
         useBrick: {
           brick: "presentational-bricks.agent-status",
-          transform: {
-            value: "@{}",
+          properties: {
+            value: "<% DATA %>",
           },
         },
-        data: ["正常", "异常", "未安装"],
       },
     },
   ],

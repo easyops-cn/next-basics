@@ -34,10 +34,8 @@ export const BrickDescriptionsStory: Story = {
             label: "Tags",
             useBrick: {
               brick: "presentational-bricks.brick-tag",
-              transform: {
-                tagList: "@{tags}",
-              },
               properties: {
+                tagList: "<% DATA.tags %>",
                 configProps: {
                   color: "orange",
                 },
@@ -60,10 +58,8 @@ export const BrickDescriptionsStory: Story = {
             label: "开始时间",
             useBrick: {
               brick: "presentational-bricks.brick-humanize-time",
-              transform: {
-                value: "@{ctime}",
-              },
               properties: {
+                value: "<% DATA.ctime %>",
                 formatter: "full",
               },
             },
@@ -103,10 +99,8 @@ export const BrickDescriptionsStory: Story = {
             group: "a",
             useBrick: {
               brick: "presentational-bricks.brick-tag",
-              transform: {
-                tagList: "@{tags}",
-              },
               properties: {
+                tagList: "<% DATA.tags %>",
                 configProps: {
                   color: "orange",
                 },
@@ -155,10 +149,8 @@ export const BrickDescriptionsStory: Story = {
             group: "c",
             useBrick: {
               brick: "presentational-bricks.brick-tag",
-              transform: {
-                tagList: "@{tags}",
-              },
               properties: {
+                tagList: "<% DATA.tags %>",
                 configProps: {
                   color: "orange",
                 },

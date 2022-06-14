@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.10.1...@next-bricks/brick-visualization@1.10.2) (2022-06-14)
+
+
+### Bug Fixes
+
+* refine doc ([9f30207](https://github.com/easyops-cn/next-basics/commit/9f302078d3af77ffb5119be2eb25a932b6360e09))
+
+
+
+
+
+## [1.10.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.10.0...@next-bricks/brick-visualization@1.10.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* fix type ([6be214a](https://github.com/easyops-cn/next-basics/commit/6be214a9897459707d02c75e3be9ceccb676d830))
+
+
+
+
+
+# [1.10.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.9.6...@next-bricks/brick-visualization@1.10.0) (2022-06-10)
+
+
+### Features
+
+* group support i18n ([f4c2326](https://github.com/easyops-cn/next-basics/commit/f4c2326a1feb08d300dfcd54c8bef35dccff5912))
+
+
+
+
+
 ## [1.9.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.9.5...@next-bricks/brick-visualization@1.9.6) (2022-05-07)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization

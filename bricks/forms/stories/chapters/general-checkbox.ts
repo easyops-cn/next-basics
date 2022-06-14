@@ -29,7 +29,7 @@ export const GeneralCheckboxStory: Story = {
       events: {
         "general.checkbox.change": {
           action: "console.log",
-          args: ["水果", "${EVENT.detail}"],
+          args: ["水果", "<% EVENT.detail %>"],
         },
       },
     },
@@ -48,7 +48,7 @@ export const GeneralCheckboxStory: Story = {
       events: {
         "general.checkbox.change": {
           action: "console.log",
-          args: ["用户", "${EVENT.detail}"],
+          args: ["用户", "<% EVENT.detail %>"],
         },
       },
     },
@@ -73,7 +73,7 @@ export const GeneralCheckboxStory: Story = {
       events: {
         "general.checkbox.change": {
           action: "console.log",
-          args: ["用户", "${EVENT.detail}"],
+          args: ["用户", "<% EVENT.detail %>"],
         },
       },
     },
@@ -145,7 +145,7 @@ export const GeneralCheckboxStory: Story = {
       events: {
         "general.checkbox.change": {
           action: "console.log",
-          args: ["用户(多列场景)", "${EVENT.detail}"],
+          args: ["用户(多列场景)", "<% EVENT.detail %>"],
         },
       },
     },
@@ -192,7 +192,7 @@ export const GeneralCheckboxStory: Story = {
       events: {
         "general.checkbox.change": {
           action: "console.log",
-          args: ["商品", "${EVENT.detail}"],
+          args: ["商品", "<% EVENT.detail %>"],
         },
       },
     },
@@ -240,7 +240,7 @@ export const GeneralCheckboxStory: Story = {
       events: {
         "general.checkbox.change": {
           action: "console.log",
-          args: ["图标", "${EVENT.detail}"],
+          args: ["图标", "<% EVENT.detail %>"],
         },
       },
     },
@@ -289,7 +289,7 @@ export const GeneralCheckboxStory: Story = {
       events: {
         "general.checkbox.change": {
           action: "console.log",
-          args: ["图标", "${EVENT.detail}"],
+          args: ["图标", "<% EVENT.detail %>"],
         },
       },
     },

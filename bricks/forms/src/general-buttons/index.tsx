@@ -156,10 +156,10 @@ export class GeneralButtonsElement extends FormItemElement {
 
   @event({ type: "submit.button.click" }) submitEvent: EventEmitter;
   private _handleSubmitClick = (): void => {
+    this.submitEvent.emit();
     if (this.getFormElement()) {
       (this.getFormElement() as any).validate();
     }
-    this.submitEvent.emit();
     if (this.disableAfterClick) {
       this.submitDisabled = true;
     }

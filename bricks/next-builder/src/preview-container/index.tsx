@@ -11,10 +11,23 @@ import {
 import type { BuilderSnippetNode, Storyboard } from "@next-core/brick-types";
 import { PreviewSettings } from "@next-types/preview";
 import {
+  BuilderProvider,
+  EventDetailOfNodeAdd,
+  EventDetailOfNodeAddStored,
+  NodeInstance,
+} from "@next-core/editor-bricks-helper";
+import {
   CaptureStatus,
   PreviewContainer,
   type PreviewContainerRef,
 } from "./PreviewContainer";
+
+type WithAppId<T> = T & {
+  appId: string;
+};
+interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
+  nodeData: WithAppId<NodeInstance>;
+}
 
 /**
  * @id next-builder.preview-container
@@ -126,6 +139,12 @@ export class PreviewContainerElement extends UpdatingElement {
     this._previewContainerRef.current.capture();
   }
 
+  // istanbul ignore next
+  @method()
+  nodeAddStored(detail: EventDetailOfNodeAddStored): void {
+    this._previewContainerRef.current.manager.nodeAddStored(detail);
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -144,27 +163,29 @@ export class PreviewContainerElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <PreviewContainer
-            ref={this._previewContainerRef}
-            previewUrl={this.previewUrl}
-            appId={this.appId}
-            templateId={this.templateId}
-            snippetGraphData={this.snippetGraphData}
-            routePath={this.routePath}
-            routeExact={this.routeExact}
-            previewSettings={this.previewSettings}
-            inspecting={this.inspecting}
-            viewportWidth={this.viewportWidth}
-            viewportHeight={this.viewportHeight}
-            screenshotMaxWidth={this.screenshotMaxWidth}
-            screenshotMaxHeight={this.screenshotMaxHeight}
-            onPreviewStart={this._handlePreviewStart}
-            onUrlChange={this._handleUrlChange}
-            onScaleChange={this._handleScaleChange}
-            onRouteMatch={this._handleRouteMatch}
-            onCaptureStatusChange={this._handleCaptureStatusChange}
-            onScreenshotCapture={this._handleScreenshotCapture}
-          />
+          <BuilderProvider>
+            <PreviewContainer
+              ref={this._previewContainerRef}
+              previewUrl={this.previewUrl}
+              appId={this.appId}
+              templateId={this.templateId}
+              snippetGraphData={this.snippetGraphData}
+              routePath={this.routePath}
+              routeExact={this.routeExact}
+              previewSettings={this.previewSettings}
+              inspecting={this.inspecting}
+              viewportWidth={this.viewportWidth}
+              viewportHeight={this.viewportHeight}
+              screenshotMaxWidth={this.screenshotMaxWidth}
+              screenshotMaxHeight={this.screenshotMaxHeight}
+              onPreviewStart={this._handlePreviewStart}
+              onUrlChange={this._handleUrlChange}
+              onScaleChange={this._handleScaleChange}
+              onRouteMatch={this._handleRouteMatch}
+              onCaptureStatusChange={this._handleCaptureStatusChange}
+              onScreenshotCapture={this._handleScreenshotCapture}
+            />
+          </BuilderProvider>
         </BrickWrapper>,
         this
       );
