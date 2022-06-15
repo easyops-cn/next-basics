@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.159.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.158.0...@next-bricks/next-builder@1.159.0) (2022-06-15)
+
+
+### Features
+
+* support previewer auto resize ([40c6f97](https://github.com/easyops-cn/next-basics/commit/40c6f97bc9c6f486975a14465da7f3ef93fee360))
+
+
+
+
+
 # [1.158.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.157.0...@next-bricks/next-builder@1.158.0) (2022-06-15)
 
 
