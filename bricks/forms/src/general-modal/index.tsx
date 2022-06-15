@@ -191,6 +191,7 @@ export class GeneralModalElement extends FormItemElement {
    * @kind `{modalTitle: string}	`
    * @required false
    * @default -
+   * @deprecated
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 modalTitle
    * @group advanced
    */
@@ -352,21 +353,21 @@ export class GeneralModalElement extends FormItemElement {
 
   /**
    *
-   * @description  当点击 modal 自带的取消按钮时发出该事件
-   * @detail `dataSource`
+   * @description  当点击 modal 自带的取消按钮时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
+   * @detail `Record<string, any>`
    */
   @event({ type: "basic-bricks.general-modal.cancel" })
   cancelEvent: EventEmitter<Record<string, any>>;
   /**
    *
-   * @description  当点击 modal 自带的确认按钮时发出该事件
-   * @detail `dataSource`
+   * @description  当点击 modal 自带的确认按钮时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
+   * @detail `Record<string, any>`
    */
   @event({ type: "basic-bricks.general-modal.confirm" })
   confirmEvent: EventEmitter<Record<string, any>>;
   /**
-   * @detail `dataSource`
-   * @description  打开 modal 时发出该事件
+   * @detail `Record<string, any>`
+   * @description  打开 modal 时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
    */
   @event({ type: "modal.open" }) openEvent: EventEmitter<Record<string, any>>;
   /**
@@ -383,8 +384,8 @@ export class GeneralModalElement extends FormItemElement {
     }
   }
   /**
-   * @detail `dataSource`
-   * @description  关闭 modal 时发出该事件
+   * @detail `Record<string, any>`
+   * @description  关闭 modal 时发出该事件，事件的 detail 为构件的 dataSource 属性的当前值
    */
   @event({ type: "modal.close" }) closeEvent: EventEmitter<Record<string, any>>;
   /**

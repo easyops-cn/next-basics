@@ -18,6 +18,11 @@ export const GeneralModalStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "",
+        message:
+          "本示例额外使用了通过target改变具体构件方法的知识点，具体可查看[设置指定构件方法方式](/next-docs/docs/brick-next/events#custom-handlers-method)",
+      },
       brick: "div",
       slots: {
         "": {

@@ -154,6 +154,10 @@ export class GeneralButtonsElement extends FormItemElement {
   })
   cancelType: ButtonType;
 
+  /**
+   * @description 点击提交按钮触发的事件
+   * @detail -
+   */
   @event({ type: "submit.button.click" }) submitEvent: EventEmitter;
   private _handleSubmitClick = (): void => {
     this.submitEvent.emit();

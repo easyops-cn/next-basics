@@ -17,7 +17,13 @@ const extraStyles = `
 
 type MediaSize = "large" | "medium" | "small" | "xSmall";
 
-interface GridSettings {
+export interface ResponsiveSettings {
+  large?: GridSettings;
+  medium?: GridSettings;
+  small?: GridSettings;
+  xSmall?: GridSettings;
+}
+export interface GridSettings {
   columns?: number;
   rows?: number;
   templateColumns?: string;
@@ -42,22 +48,6 @@ const mediaQueryMap: Record<MediaSize, string> = {
  * @slots
  * @history
  * @memo
- * ### interface
- * ```typescript
- *   interface ResponsiveSettings {
- *   large?: GridSettings;
- *   medium?: GridSettings;
- *   small?: GridSettings;
- *   xSmall?: GridSettings;
- *   }
-
-  *  interface GridSettings {
-  *  columns?: number;
-  *  rows?: number;
-  *  columnSpan?: number;
-  *  rowSpan?: number;
-  *  }
-    ```
  * ### 响应式布局说明
 
 *Bootstrap 等 UI 框架是移动优先的设计，它们的响应式为默认匹配小屏幕，并由小到大适配。而 EasyOps 平台以 PC 优先，并由大到小适配。这里我们针对常见桌面显示器大小，分为以下五档（屏幕宽度）：
@@ -148,7 +138,7 @@ export class GridLayoutElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  responsive: Partial<Record<MediaSize, GridSettings>>;
+  responsive: ResponsiveSettings;
 
   constructor() {
     super();
