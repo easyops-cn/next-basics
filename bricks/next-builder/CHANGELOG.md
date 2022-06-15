@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.158.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.157.0...@next-bricks/next-builder@1.158.0) (2022-06-15)
+
+
+### Features
+
+* **PreviewContainer:** addNode support redirect parent ([199d580](https://github.com/easyops-cn/next-basics/commit/199d580e07ac2bbb418b36c44ff86819a28f2598))
+
+
+
+
+
 # [1.157.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.156.0...@next-bricks/next-builder@1.157.0) (2022-06-14)
 
 
