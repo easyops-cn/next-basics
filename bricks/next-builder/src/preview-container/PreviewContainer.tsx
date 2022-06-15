@@ -28,6 +28,8 @@ import styles from "./PreviewContainer.module.css";
 import { buildBricks } from "../shared/storyboard/buildStoryboardV2";
 import {
   BuilderDataManager,
+  BuilderRuntimeEdge,
+  BuilderRuntimeNode,
   EventDetailOfNodeAdd,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
@@ -52,6 +54,7 @@ export interface PreviewContainerProps {
   onRouteMatch?(match: boolean): void;
   onCaptureStatusChange?(status: CaptureStatus): void;
   onScreenshotCapture?(screenshot: string): void;
+  onPreviewerDrop?(params: Record<string, any>): void;
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
@@ -104,6 +107,7 @@ export function LegacyPreviewContainer(
     onRouteMatch,
     onCaptureStatusChange,
     onScreenshotCapture,
+    onPreviewerDrop,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -204,16 +208,60 @@ export function LegacyPreviewContainer(
           : ["right", "bottom"].includes(direction)
           ? "bottom"
           : "";
-      manager.workbenchNodeAdd({
-        nodeData: nodeData,
-        dragOverNodeInstanceId: refHoverIid.current,
-        dragStatus,
-      });
+      const { nodes, edges, rootId } = manager.getData();
+      const hoverInstanceId = refHoverIid.current;
+      if (hoverInstanceId === "#main-mount-point") {
+        const parentNodes = nodes.find((item) => item.$$uid === rootId);
+        onPreviewerDrop({
+          nodeData,
+          mountPoint: "bricks",
+          dragStatus,
+          parentNodes: [parentNodes],
+          parentNode: parentNodes,
+          dragOverInstanceId: parentNodes.instanceId,
+        });
+      } else {
+        const hoverNode = nodes.find(
+          (item) => item.instanceId === hoverInstanceId
+        );
+        const hoverEdge = edges.find((item) => item.child === hoverNode.$$uid);
+        const getAllParentEdges = (
+          edge: BuilderRuntimeEdge,
+          list: number[] = []
+        ): number[] => {
+          list.push(edge.parent);
+          const nodeEdge = edges.find((item) => item.child === edge.parent);
+          if (nodeEdge) {
+            list = list.concat(getAllParentEdges(nodeEdge));
+          }
+          return list;
+        };
+        const getAllParentNodes = (
+          edges: number[]
+        ): BuilderRuntimeNode<Record<string, unknown>>[] => {
+          return nodes.filter((item) => {
+            return edges.includes(item.$$uid);
+          });
+        };
+        const parentList = dragStatus === "inside" ? [hoverEdge.child] : [];
+        const parentEdges = getAllParentEdges(hoverEdge, parentList);
+        const parentNodes = getAllParentNodes(parentEdges);
+        onPreviewerDrop({
+          nodeData,
+          mountPoint:
+            dragStatus === "inside" ? "content" : hoverEdge.mountPoint,
+          dragStatus,
+          parentNodes,
+          parentNode: parentNodes[parentNodes.length - 1],
+          dragOverInstanceId: hoverInstanceId,
+        });
+      }
+
       setTimeout(() => {
         handleDragEnd();
       }, 100);
     },
-    [manager]
+    [manager, onPreviewerDrop]
   );
 
   const handleIframeLoad = useCallback(() => {

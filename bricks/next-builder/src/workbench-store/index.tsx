@@ -17,7 +17,8 @@ import {
   type BuilderRuntimeNode,
   type EventDetailOfNodeReorder,
   type EventDetailOfWorkbenchTreeNodeMove,
-  EventDetailOfNodeAddStored,
+  type EventDetailOfNodeAddStored,
+  type WorkbenchNodeAdd,
 } from "@next-core/editor-bricks-helper";
 import type {
   BuilderCustomTemplateNode,
@@ -139,6 +140,12 @@ export class WorkbenchStoreElement extends UpdatingElement {
   @method()
   nodeAddStored(detail: EventDetailOfNodeAddStored): void {
     this._storeRef.current.manager.nodeAddStored(detail);
+  }
+
+  // istanbul ignore next
+  @method()
+  previewNodeAdd(detail: WorkbenchNodeAdd): void {
+    this._storeRef.current.manager.workbenchNodeAdd(detail);
   }
 
   // istanbul ignore next
