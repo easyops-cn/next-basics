@@ -24,8 +24,9 @@ export function GeneralPopup({
   visible,
 }: GeneralPopupProps): React.ReactElement {
   const popupRef = useRef<HTMLDivElement>();
+  const headerRef = useRef<HTMLDivElement>();
   const [isMove, setIsMove] = useState(false);
-  const [curPoint, setCurPoint] = useState({
+  const curPointRef = useRef({
     offsetX: 0,
     offsetY: 0,
   });
@@ -47,13 +48,13 @@ export function GeneralPopup({
     []
   );
 
-  const handleMouseDown = (e: React.MouseEvent): void => {
+  const handleMouseDown = (e: MouseEvent): void => {
     e.stopPropagation();
     setIsMove(true);
-    setCurPoint({
-      offsetX: e.nativeEvent.offsetX,
-      offsetY: e.nativeEvent.offsetY,
-    });
+    curPointRef.current = {
+      offsetX: e.offsetX,
+      offsetY: e.offsetY,
+    };
   };
 
   const handleMouseMove = (e: MouseEvent): void => {
@@ -62,8 +63,8 @@ export function GeneralPopup({
       const { innerWidth, innerHeight } = window;
       const maxX = innerWidth - width;
       const maxY = innerHeight - height;
-      const pointX = e.clientX - curPoint.offsetX;
-      const pointY = e.clientY - curPoint.offsetY;
+      const pointX = e.clientX - curPointRef.current.offsetX;
+      const pointY = e.clientY - curPointRef.current.offsetY;
       debouncedSetPoint([
         pointX <= 0 ? 0 : pointX >= maxX ? maxX : pointX,
         pointY <= 0 ? 0 : pointY >= maxY ? maxY : pointY,
@@ -89,7 +90,12 @@ export function GeneralPopup({
   useEffect(() => {
     if (popupRef.current) {
       setPointerPosition(initPos());
+      headerRef.current.addEventListener("mousedown", handleMouseDown);
     }
+    return () => {
+      headerRef.current &&
+        headerRef.current.removeEventListener("mousedown", handleMouseDown);
+    };
   }, [visible, initPos]);
 
   useEffect(() => {
@@ -102,6 +108,8 @@ export function GeneralPopup({
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      headerRef.current &&
+        headerRef.current.removeEventListener("mousedown", handleMouseDown);
     };
   }, [isMove]);
 
@@ -114,7 +122,7 @@ export function GeneralPopup({
           transform: `translate(${pointerPosition[0]}px, ${pointerPosition[1]}px)`,
         }}
       >
-        <div className="header" onMouseDown={handleMouseDown}>
+        <div className="header" ref={headerRef}>
           <span className="title">{popupTitle}</span>
           <span className="close">
             <GeneralIcon
