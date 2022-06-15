@@ -36,8 +36,8 @@ import styles from "./MicroApp.shadow.css";
  * 1.89.0:新增 bannerPageTitle、bannerStyle 属性，banner、bannerTitleBar、bannerToolbar 插槽
  * @groupI18N
  * {
- *   "basic": {"zh": "常用", en: "Basic"},
- *    "ui": {"zh": "外观", en: "UI"}
+ *   "basic": {"zh": "常用", "en": "Basic"},
+ *    "ui": {"zh": "外观", "en": "UI"}
  * }
  * @memo
  * @noInheritDoc

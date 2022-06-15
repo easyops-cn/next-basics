@@ -35,6 +35,12 @@ export interface ComplexOption<T = string | number> {
  * 1.72.0:新增属性 `groupBy`
  * 1.77.0:新增属性 `tokenSeparators`
  * 1.200.0:新增属性 `emptyProps`
+ * @groupI18N
+ * {
+ *   "basicFormItem": {"zh": "表单项常用", "en": "Basic Form Item"},
+ *   "advanceFormItem": {"zh": "表单项常用", "en": "advance Form Item"},
+ *   "ui": {"zh": "外观", "en": "UI"}
+ * }
  * @memo
  * ```typescript
  * interface LabeledValue {
@@ -46,10 +52,10 @@ export interface ComplexOption<T = string | number> {
 export class GeneralSelectElement extends FormItemElement {
   /**
    * @kind string
-   * @required true
+   * @required false
    * @default -
    * @description 选择框字段名
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
   /**
@@ -57,7 +63,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 选择框字段说明
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
@@ -66,7 +72,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required true
    * @default -
    * @description 候选项列表
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -78,7 +84,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 选择框初始值
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -89,7 +95,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description 是否必填项
+   * @description basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -98,7 +104,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 选择框占位说明
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -106,8 +112,8 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind { useBrick: UseBrickConf }
    * @required false
    * @default -
-   * @description 支持在文本后添加自定义构件
-   * @group basic
+   * @description 支持在文本后添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -121,7 +127,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 选择框模式
-   * @group basic
+   * @group basicFormItem
    */
   @property()
   mode: string;
@@ -131,7 +137,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 校验文本信息
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
@@ -140,7 +146,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default
    * @description 输入框样式
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
@@ -152,7 +158,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 支持清除选项
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -164,7 +170,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default false
    * @description 是否禁用
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     type: Boolean,
@@ -176,7 +182,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default false
    * @description 是否隐藏当前选中的label项的suffix构件逻辑(`false`默认显示)
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
@@ -188,7 +194,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 支持搜索
-   * @group advanced
+   * @group advanceFormItem
    */
   @property({
     attribute: false,
@@ -198,7 +204,7 @@ export class GeneralSelectElement extends FormItemElement {
   /**
    * @kind "small" | "middle" | "large"
    * @required false
-   * @default "middle"
+   * @default middle
    * @description 选择框大小
    * @group advanced
    */
@@ -210,7 +216,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 空候选项，将插入到候选项列表最前面
-   * @group advanced
+   * @group advanceFormItem
    */
   @property({ attribute: false })
   emptyOption: GeneralComplexOption;
@@ -220,7 +226,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 设置后置构件容器的样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -232,7 +238,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 下拉菜单和选择器同宽
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -244,7 +250,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 基于 `options` 列表中的某个字段进行分组显示
-   * @group advanced
+   * @group advanceFormItem
    */
   @property({
     attribute: false,
@@ -256,7 +262,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 列表指定字段作为 label 和 value
-   * @group advanced
+   * @group advanceFormItem
    */
   @property({
     attribute: false,
@@ -268,7 +274,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 在 mode 为 `tags` 和 `multiple` 的模式下定义自动分词的分隔符
-   * @group advanced
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -280,41 +286,16 @@ export class GeneralSelectElement extends FormItemElement {
    * @required -
    * @default default
    * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
-   * @group advanced
+   * @group advanceFormItem
    */
   @property()
   popoverPositionType: GeneralSelectProps["popoverPositionType"];
 
   /**
-   * @kind UseBrickConf
-   * @required false
-   * @default -
-   * @description 支持在文本后添加自定义构件 [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
-   * @group advanced
-   * @deprecated
-   */
-  @property({
-    attribute: false,
-  })
-  suffixBrick: UseBrickConf;
-  /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description [已废弃]设置后置构件容器的样式
-   * @deprecated
-   * @group advanced
-   */
-  @property({
-    attribute: false,
-  })
-  suffixBrickStyle: React.CSSProperties = {};
-
-  /**
    * @kind number
    * @default 300
    * @description 设置防抖动搜索的时间间隔。
-   * @group advanced
+   * @group advanceFormItem
    */
   @property({ type: Number })
   debounceSearchDelay: number;
@@ -323,7 +304,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind EasyopsEmptyProps
    * @default
    * @description 空option 时候可以自定义 EasyopsEmpty 配置实现自定义的无数据提示
-   * @group advanced
+   * @group advanceFormItem
    */
   @property({ attribute: false })
   emptyProps: EasyopsEmptyProps;
@@ -331,9 +312,36 @@ export class GeneralSelectElement extends FormItemElement {
    * @default false
    * @required false
    * @description 搜索时是否同时根据value和label过滤options，否则只根据label过滤
+   * @group advanceFormItem
    */
   @property({ type: Boolean })
   filterByLabelAndValue: boolean;
+
+  /**
+   * @kind UseBrickConf
+   * @required false
+   * @default -
+   * @description 支持在文本后添加自定义构件 [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
+   * @group advanceFormItem
+   * @deprecated
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrick: UseBrickConf;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description [已废弃]设置后置构件容器的样式
+   * @deprecated
+   * @group advanceFormItem
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrickStyle: React.CSSProperties = {};
 
   /**
    * @detail `any`
@@ -343,25 +351,25 @@ export class GeneralSelectElement extends FormItemElement {
     Record<string, any>
   >;
   /**
-   * @detail `{label: string, value: any}	`
-   * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值 (暂不支持 `mode`为 `tags`的场景)
+   * @detail `{label: string, value: any, [key: string]: any}	`
+   * @description 下拉选中变化时被触发，`event.detail` 为当前整个选择项包含其他字段值(暂不支持 `mode`为 `tags`的场景)
    */
   @event({ type: "general.select.change.v2" }) changeEventV2: EventEmitter<
     Record<string, any>
   >;
   /**
-   * @detail `null`
+   * @detail `-`
    * @description 获得焦点时触发
    */
   @event({ type: "general.select.focus" }) focusEvent: EventEmitter;
   /**
-   * @detail `null`
+   * @detail `-`
    * @description 失焦时触发
    */
   @event({ type: "general.select.blur" }) blurEvent: EventEmitter;
   /**
-   * @detail `any`
-   * @description 搜索时被触发，`event.detail` 为当前选择项的值
+   * @detail `string`
+   * @description 搜索时被触发，`event.detail` 为当前输入的值
    */
   @event({ type: "general.select.search" }) searchEvent: EventEmitter<string>;
 

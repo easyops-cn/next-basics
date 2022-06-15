@@ -49,7 +49,7 @@ export const generalSelecttStory: Story = {
       events: {
         "general.select.change": {
           action: "console.log",
-          args: ["gender", "${EVENT.detail}"],
+          args: ["gender", "<% EVENT.detail %>"],
         },
       },
     },
@@ -139,9 +139,7 @@ export const generalSelecttStory: Story = {
                   color: "orange",
                 },
               },
-            },
-            transform: {
-              value: "@{type}",
+              value: "<% DATA.type %>",
             },
           },
         },
@@ -149,7 +147,7 @@ export const generalSelecttStory: Story = {
       events: {
         "general.select.change": {
           action: "console.log",
-          args: ["gender", "${EVENT.detail}"],
+          args: ["gender", "<% EVENT.detail %>"],
         },
         "general.select.search": {
           action: "console.log",
@@ -204,7 +202,7 @@ export const generalSelecttStory: Story = {
       events: {
         "general.select.change": {
           action: "console.log",
-          args: ["gender", "${EVENT.detail}"],
+          args: ["gender", "<% EVENT.detail %>"],
         },
         "general.select.change.v2": {
           action: "console.log",
