@@ -118,6 +118,13 @@ export class PreviewContainerElement extends UpdatingElement {
     this._screenshotCaptureEvent.emit(screenshot);
   };
 
+  @event({ type: "preview.drop" })
+  private _handlePreviewerDropEvent: EventEmitter<Record<string, any>>;
+
+  private _handlePreviewerDrop = (params: Record<string, any>): void => {
+    this._handlePreviewerDropEvent.emit(params);
+  };
+
   private _previewContainerRef = createRef<PreviewContainerRef>();
 
   @method()
@@ -184,6 +191,7 @@ export class PreviewContainerElement extends UpdatingElement {
               onRouteMatch={this._handleRouteMatch}
               onCaptureStatusChange={this._handleCaptureStatusChange}
               onScreenshotCapture={this._handleScreenshotCapture}
+              onPreviewerDrop={this._handlePreviewerDrop}
             />
           </BuilderProvider>
         </BrickWrapper>,

@@ -1,4 +1,7 @@
 .searchBox {
+  position: sticky;
+  top: 0;
+  background-color: rgb(37, 37, 38);
   padding: 5px 10px 10px;
 }
 
