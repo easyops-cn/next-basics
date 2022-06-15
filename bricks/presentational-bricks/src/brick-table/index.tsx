@@ -959,7 +959,7 @@ export class BrickTableElement extends UpdatingElement {
    * @kind false | TableRowSelection
    * @required false
    * @default -
-   * @description 表格行是否可选择，优先级低于configProps.rowSelection，具体查阅：[https://ant.design/components/table-cn/#rowSelection]
+   * @description 表格行是否可选择，具体查阅：[rowSelection](https://ant.design/components/table-cn/#rowSelection)
    */
   @property({
     attribute: false,

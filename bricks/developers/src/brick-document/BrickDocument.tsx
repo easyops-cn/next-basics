@@ -6,8 +6,9 @@ import style from "../components/BrickDoc/BrickDoc.module.css";
 import ReactMarkdown from "react-markdown";
 import { getHistory } from "@next-core/brick-kit";
 import { SmileTwoTone } from "@ant-design/icons";
-import { Button, Empty, Card, Tooltip } from "antd";
+import { Button, Empty, Card, Tooltip, Tag } from "antd";
 import classNames from "classnames";
+import { omit } from "lodash";
 import {
   StoryDoc,
   StoryDocEnum,
@@ -27,7 +28,7 @@ function flatten(text: any, child: any): any {
     : React.Children.toArray(child.props.children).reduce(flatten, text);
 }
 
-function renderHeading(props: Record<string, any>) {
+function renderHeading(props: Record<string, any>): React.ReactElement {
   const children = React.Children.toArray(props.children);
   const text = children.reduce(flatten, "");
   const slug = text.replace(/\W/g, "-");
@@ -97,18 +98,20 @@ export function BrickDocument({
     };
   };
 
-  const renderTypeAnnotation = (value: string) => {
-    if (!value) return "-";
+  const renderTypeAnnotation = (value: string): React.ReactElement | string => {
+    if (!value) return <code>-</code>;
 
     const str = value.replace(/`/g, "");
-    const type = str.replace(/\s*\[\s*\]\s*/, "");
-    if (interfaceIds.includes(type) && renderLink) {
+    if (interfaceIds.length && renderLink) {
       const hashHref = getCurHashHref();
-      return (
-        <span
-          dangerouslySetInnerHTML={generateInterfaceRef(str, hashHref)}
-        ></span>
-      );
+
+      const { __html: interfaceStr } = generateInterfaceRef(str, hashHref);
+
+      if (/<[Aa]\s+href\s*=/.test(interfaceStr)) {
+        return <span dangerouslySetInnerHTML={{ __html: interfaceStr }}></span>;
+      } else {
+        return <code>{interfaceStr}</code>;
+      }
     }
 
     return <code>{str}</code>;
@@ -150,7 +153,7 @@ export function BrickDocument({
   const renderTable = (
     columns: { title: string; key: string }[],
     values: any[]
-  ) => {
+  ): React.ReactElement => {
     return (
       <table>
         <thead>
@@ -177,7 +180,7 @@ export function BrickDocument({
                   <td key={i}>
                     {column.key === "required" ? (
                       renderRequiredAnnotation(value[column.key])
-                    ) : column.key === "type" ? (
+                    ) : ["detail", "type"].includes(column.key) ? (
                       renderTypeAnnotation(value[column.key])
                     ) : (
                       <span
@@ -198,7 +201,7 @@ export function BrickDocument({
     );
   };
 
-  const renderMarkDown = (source: string) => {
+  const renderMarkDown = (source: string): React.ReactElement => {
     return (
       <ReactMarkdown
         source={source}
@@ -210,7 +213,7 @@ export function BrickDocument({
     );
   };
 
-  const renderHistory = (history: StoryDocHistory[]) => {
+  const renderHistory = (history: StoryDocHistory[]): React.ReactElement => {
     const columns = [
       { title: "Version", key: "version" },
       {
@@ -231,15 +234,15 @@ export function BrickDocument({
     );
   };
 
-  const renderEnum = (enums: StoryDocInterface) => {
+  const renderEnum = (enums: StoryDocInterface): React.ReactElement => {
     return (
       enums && (
         <>
           <h3 className={style.interfaceTitle} id={enums.name}>
             {enums.name}
-            <Button danger size={"small"} className={style.badge}>
+            <Tag color="cyan" className={style.badge}>
               Enum
-            </Button>
+            </Tag>
           </h3>
           <pre>
             <code>
@@ -261,7 +264,9 @@ export function BrickDocument({
     );
   };
 
-  const renderInterface = (interfaces: StoryDocInterface) => {
+  const renderInterface = (
+    interfaces: StoryDocInterface
+  ): React.ReactElement => {
     const columns = [
       { title: "name", key: "name" },
       { title: "type", key: "type" },
@@ -280,9 +285,9 @@ export function BrickDocument({
               {interfaces.name}
               {interfaces.typeParameter}
             </span>
-            <Button danger size={"small"} className={style.badge}>
+            <Tag color="cyan" className={style.badge}>
               Interface
-            </Button>
+            </Tag>
           </h3>
           {renderTable(columns, interfaces.children)}
         </>
@@ -290,7 +295,7 @@ export function BrickDocument({
     );
   };
 
-  const renderTypeHref = (str: string) => {
+  const renderTypeHref = (str: string): string => {
     if (!renderLink) return str;
     str = str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const history = getHistory();
@@ -307,7 +312,7 @@ export function BrickDocument({
     return str;
   };
 
-  const renderType = (type: StoryDocType) => {
+  const renderType = (type: StoryDocType): React.ReactElement => {
     const descriptionString = type?.description
       ? `// ${type?.description}\n`
       : "";
@@ -319,9 +324,9 @@ export function BrickDocument({
               {type.name}
               {type.typeParameter}
             </span>
-            <Button danger size={"small"} className={style.badge}>
+            <Tag color="cyan" className={style.badge}>
               Type
-            </Button>
+            </Tag>
           </h3>
           <pre>
             <code>
@@ -340,7 +345,7 @@ export function BrickDocument({
 
   const renderInterfaceMix = (
     interfaces: (StoryDocInterface | StoryDocType)[]
-  ) => {
+  ): React.ReactElement => {
     return (
       Array.isArray(interfaces) &&
       interfaces.length > 0 && (
@@ -358,11 +363,13 @@ export function BrickDocument({
     );
   };
 
-  const renderMemo = (memo: string) => {
+  const renderMemo = (memo: string): React.ReactElement => {
     return memo && <>{renderMarkDown(memo)}</>;
   };
 
-  const renderProperties = (properties: StoryDocProperty[]) => {
+  const renderProperties = (
+    properties: StoryDocProperty[]
+  ): React.ReactElement => {
     const columns = [
       { title: "property", key: "name" },
       { title: "type", key: "type" },
@@ -384,26 +391,32 @@ export function BrickDocument({
     );
   };
 
-  const renderEvents = (events: StoryDocEvent[]) => {
+  const renderEvents = (events: StoryDocEvent[]): React.ReactElement => {
     const columns = [
-      { title: "type", key: "type" },
+      { title: "name", key: "name" },
       {
         title: "detail",
         key: "detail",
       },
       { title: "description", key: "description" },
     ];
+
+    // 文档中事件的 type 转成 name 字段统一展示
+    const processedEvents = events?.map((item) => ({
+      ...omit(item, ["type"]),
+      name: item.type,
+    }));
     return (
-      events && (
+      processedEvents && (
         <>
           <h1>Events</h1>
-          {renderTable(columns, events)}
+          {renderTable(columns, processedEvents)}
         </>
       )
     );
   };
 
-  const renderMethods = (methods: StoryDocMethod[]) => {
+  const renderMethods = (methods: StoryDocMethod[]): React.ReactElement => {
     const columns = [
       { title: "name", key: "name" },
       {
@@ -422,7 +435,7 @@ export function BrickDocument({
     );
   };
 
-  const renderSlots = (slots: StoryDocSlot[]) => {
+  const renderSlots = (slots: StoryDocSlot[]): React.ReactElement => {
     const columns = [
       { title: "name", key: "name" },
       { title: "description", key: "description" },
@@ -450,7 +463,7 @@ export function BrickDocument({
     </Empty>
   );
 
-  const renderDoc = () => {
+  const renderDoc = (): React.ReactElement => {
     return (
       <Card className={style.brickDocCard}>
         <div className={style.brickDocContainer}>
