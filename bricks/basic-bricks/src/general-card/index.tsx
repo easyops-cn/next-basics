@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
-import { GeneralCard, OperationButton } from "./GeneralCard";
+import { GeneralCard } from "./GeneralCard";
+import { OperationButton } from "../interfaces";
 import style from "./index.shadow.less";
 import { CardProps } from "antd/lib/card";
 import { isEmpty } from "lodash";
@@ -19,17 +20,11 @@ import { isEmpty } from "lodash";
  * footer:底部插槽，当底部滚动到窗口外时，默认固定在窗口底部，适用场景参考 http://192.168.100.162/next/resource-events/alert-config/inhibition-rule/create，其他情况，请设置`isFixedFooter`为false；
  * @history
  * 1.42.0:新增属性 `fillVertical`
- * @memo
- * ```typescript
- *  export interface OperationButton {
- *     // to listen for
- *     id: string;
- *     eventName: string;
- *     configProps: ButtonProps;
- *     text?: string;
- *    needData?: boolean;
- *   }
- *   ```
+ * @groupI18N
+ * {
+ *  "basic": {"en": "Basic", "zh": "常用"},
+ *  "ui": {"en": "UI", "zh": "外观"}
+ * }
  * @noInheritDoc
  */
 export class GeneralCardElement extends UpdatingElement {
@@ -48,7 +43,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 设置该属性后，设置卡片高度为 100%，卡片高度会自动撑满父容器
-   * @group basic
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -60,7 +55,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 设置该属性后，卡片内容区的元素自动垂直居中
-   * @group basic
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -80,7 +75,7 @@ export class GeneralCardElement extends UpdatingElement {
   hasExtraSlot: boolean;
 
   /**
-   * @group advanced
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -92,12 +87,28 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default true
    * @description footer滚动到窗口外时，是否需要将footer固定在窗口底部
-   * @group advanced
+   * @group basic
    */
   @property({
     attribute: false,
   })
   isFixedFooter = true;
+
+  /**
+   * @kind OperationButton[]
+   * @required false
+   * @default -
+   * @description 右上角的操作按钮列表，可自定义指定该按钮的名字，按钮点击后发出的事件等
+   */
+  @property({ attribute: false }) operationButtons: OperationButton[] = [];
+
+  /**
+   * @kind map
+   * @required false
+   * @default -
+   * @description 完全透传给 antd 的 Card 属性，详见：[Card](https://ant.design/components/card-cn/#Card)
+   */
+  @property({ attribute: false }) configProps: CardProps;
 
   private _mountPoint: HTMLElement;
   private _shadowRoot: ShadowRoot;
@@ -202,22 +213,6 @@ export class GeneralCardElement extends UpdatingElement {
     const detail = this.eventDetailMap.get(eventName) || {};
     this.dispatchEvent(new CustomEvent(eventName, { detail }));
   }
-
-  /**
-   * @kind map
-   * @required false
-   * @default -
-   * @description 完全透传给 antd 的 Card 属性，详见：[https://ant.design/components/card-cn/#Card](https://ant.design/components/card-cn/#Card)
-   */
-  @property({ attribute: false }) configProps: CardProps;
-
-  /**
-   * @kind OperationButton[]
-   * @required false
-   * @default -
-   * @description 右上角的操作按钮列表，可自定义指定该按钮的名字，并配置该按钮点击后发出的事件，在 storyboard 去监听该事件传给目标
-   */
-  @property({ attribute: false }) operationButtons: OperationButton[] = [];
 }
 
 customElements.define("basic-bricks.general-card", GeneralCardElement);
