@@ -168,13 +168,17 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
       });
     }
   };
-  const onSelectChange = (sourceSelectedKeys: string[]) => {
+  const onSelectChange = (
+    sourceSelectedKeys: string[],
+    targetSelectedKeys: string[]
+  ) => {
     const modifiedDataSource = filterDisabledDataSource(
       dataSource,
       [...sourceSelectedKeys, ...targetKeys],
       maxSelected
     );
     setDataSource(modifiedDataSource);
+    setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
   };
 
   return (
