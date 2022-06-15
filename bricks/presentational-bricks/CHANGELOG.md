@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.247.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.247.2...@next-bricks/presentational-bricks@1.247.3) (2022-06-15)
+
+
+### Bug Fixes
+
+* **transfer:** fix transfer重新赋selectedKeys属性后再也无法选中bug ([c968ac7](https://github.com/easyops-cn/next-basics/commit/c968ac79b7eb807239ed1c8e39353d280478632d))
+
+
+
+
+
 ## [1.247.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.247.1...@next-bricks/presentational-bricks@1.247.2) (2022-06-15)
 
 
