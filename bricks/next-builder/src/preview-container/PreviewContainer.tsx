@@ -55,6 +55,7 @@ export interface PreviewContainerProps {
   onCaptureStatusChange?(status: CaptureStatus): void;
   onScreenshotCapture?(screenshot: string): void;
   onPreviewerDrop?(params: Record<string, any>): void;
+  onPreviewerResize?(resize: PreviewerResize): void;
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
@@ -68,7 +69,13 @@ export interface PreviewContainerRef {
   ): void;
   reload(): void;
   capture(): void;
+  resize(): void;
   manager: BuilderDataManager;
+}
+
+export interface PreviewerResize {
+  x: number;
+  y: number;
 }
 
 function sendToggleInspecting(
@@ -108,6 +115,7 @@ export function LegacyPreviewContainer(
     onCaptureStatusChange,
     onScreenshotCapture,
     onPreviewerDrop,
+    onPreviewerResize,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -389,10 +397,18 @@ export function LegacyPreviewContainer(
     [onUrlChange]
   );
 
+  const resize = (): void => {
+    onPreviewerResize({
+      x: containerRef.current.offsetWidth,
+      y: containerRef.current.offsetHeight,
+    });
+  };
+
   useImperativeHandle(ref, () => ({
     refresh,
     reload,
     capture,
+    resize,
     manager,
   }));
 
@@ -562,6 +578,10 @@ export function LegacyPreviewContainer(
             ? containerRef.current.offsetHeight / viewportHeight
             : 1
         );
+        onPreviewerResize({
+          x: viewportWidth || containerRef.current.offsetWidth,
+          y: viewportHeight || containerRef.current.offsetHeight,
+        });
       };
       computeScale();
       const resizeObserver = new ResizeObserver(() => {
@@ -577,7 +597,7 @@ export function LegacyPreviewContainer(
         resizeObserver.disconnect();
       };
     }
-  }, [viewportWidth, viewportHeight, openerWindow]);
+  }, [viewportWidth, viewportHeight, openerWindow, onPreviewerResize]);
 
   useEffect(() => {
     onScaleChange?.(minScale);

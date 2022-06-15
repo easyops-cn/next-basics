@@ -12,22 +12,14 @@ import type { BuilderSnippetNode, Storyboard } from "@next-core/brick-types";
 import { PreviewSettings } from "@next-types/preview";
 import {
   BuilderProvider,
-  EventDetailOfNodeAdd,
   EventDetailOfNodeAddStored,
-  NodeInstance,
 } from "@next-core/editor-bricks-helper";
 import {
   CaptureStatus,
   PreviewContainer,
+  PreviewerResize,
   type PreviewContainerRef,
 } from "./PreviewContainer";
-
-type WithAppId<T> = T & {
-  appId: string;
-};
-interface FulfilledEventDetailOfBrickAdd extends EventDetailOfNodeAdd {
-  nodeData: WithAppId<NodeInstance>;
-}
 
 /**
  * @id next-builder.preview-container
@@ -125,7 +117,19 @@ export class PreviewContainerElement extends UpdatingElement {
     this._handlePreviewerDropEvent.emit(params);
   };
 
+  @event({ type: "preview.resize" })
+  private _handlePreviewResizeEvent: EventEmitter<PreviewerResize>;
+
+  private _handlePreivewResize = (resize: PreviewerResize): void => {
+    this._handlePreviewResizeEvent.emit(resize);
+  };
+
   private _previewContainerRef = createRef<PreviewContainerRef>();
+
+  @method()
+  resize(): void {
+    this._previewContainerRef.current.resize();
+  }
 
   @method()
   refresh(
@@ -192,6 +196,7 @@ export class PreviewContainerElement extends UpdatingElement {
               onCaptureStatusChange={this._handleCaptureStatusChange}
               onScreenshotCapture={this._handleScreenshotCapture}
               onPreviewerDrop={this._handlePreviewerDrop}
+              onPreviewerResize={this._handlePreivewResize}
             />
           </BuilderProvider>
         </BrickWrapper>,
