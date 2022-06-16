@@ -20,18 +20,65 @@ export const generalInputStory: Story = {
   conf: [
     {
       brick: "forms.general-input",
+      description: {
+        title: "基本使用",
+      },
       properties: {
-        dataset: { testid: "basic-usage-demo" },
         name: "username",
-        type: "email",
-        label: "邮箱",
+        type: "text",
+        label: "用户名",
         value: "test",
-        placeholder: "请输入邮箱地址",
+        placeholder: "请输入用户名",
       },
       events: {
         "general.input.change": {
           action: "console.log",
-          args: ["username", "${EVENT.detail}"],
+          args: ["username", "<% EVENT.detail %>"],
+        },
+        "general.input.blur": {
+          action: "console.log",
+        },
+      },
+    },
+    {
+      brick: "forms.general-input",
+      description: {
+        title: "复制按钮",
+      },
+      properties: {
+        name: "email",
+        type: "email",
+        label: "邮箱",
+        value: "",
+        placeholder: "请输入邮箱地址",
+        copyButton: true,
+      },
+      events: {
+        "general.input.change": {
+          action: "console.log",
+          args: ["username", "<% EVENT.detail %>"],
+        },
+        "general.input.blur": {
+          action: "console.log",
+        },
+      },
+    },
+    {
+      brick: "forms.general-input",
+      description: {
+        title: "密码框",
+      },
+      properties: {
+        name: "password",
+        type: "password",
+        label: "密码",
+        value: "123456",
+        placeholder: "请输入密码",
+      },
+      events: {
+        "general.input.change": {
+          action: "console.log",
+          args: ["username", "<% EVENT.detail %>"],
         },
         "general.input.blur": {
           action: "console.log",
@@ -40,6 +87,9 @@ export const generalInputStory: Story = {
     },
     {
       brick: "forms.general-form",
+      description: {
+        title: "正则校验，错误信息提示",
+      },
       slots: {
         items: {
           type: "bricks",
@@ -60,36 +110,42 @@ export const generalInputStory: Story = {
               events: {
                 "general.input.change": {
                   action: "console.log",
-                  args: ["production", "${EVENT.detail}"],
+                  args: ["production", "<% EVENT.detail %>"],
                 },
                 "general.input.press.enter": {
                   action: "console.log",
-                  args: ["${EVENT.detail.key}", "${EVENT.detail.keyCode}"],
-                },
-              },
-            },
-            {
-              brick: "forms.general-input",
-              properties: {
-                name: "url",
-                type: "url",
-                label: "url",
-                value: "",
-                placeholder: "请输入url",
-                addonBefore: "Http://",
-                addonAfter: ".com",
-              },
-              events: {
-                "general.input.change": {
-                  action: "console.log",
-                  args: ["username", "${EVENT.detail}"],
-                },
-                "general.input.blur": {
-                  action: "console.log",
+                  args: [
+                    "<% EVENT.detail.key %>",
+                    "<% EVENT.detail.keyCode %>",
+                  ],
                 },
               },
             },
           ],
+        },
+      },
+    },
+    {
+      brick: "forms.general-input",
+      description: {
+        title: "前缀，后缀",
+      },
+      properties: {
+        name: "url",
+        type: "url",
+        label: "url",
+        value: "",
+        placeholder: "请输入url",
+        addonBefore: "Http://",
+        addonAfter: ".com",
+      },
+      events: {
+        "general.input.change": {
+          action: "console.log",
+          args: ["username", "<% EVENT.detail %>"],
+        },
+        "general.input.blur": {
+          action: "console.log",
         },
       },
     },
