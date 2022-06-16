@@ -115,8 +115,7 @@ export class ModalConfirmElement extends UpdatingElement {
    * @deprecated
    * @group ui
    */
-  @property({ __deprecated_and_for_compatibility_only: true })
-  isDelete: boolean;
+  @property() isDelete: boolean;
 
   // -------------------------------- buttonAndInteract --------------------------------
 
@@ -196,7 +195,7 @@ export class ModalConfirmElement extends UpdatingElement {
    * @deprecated
    * @group other
    */
-  @property({ __deprecated_and_for_compatibility_only: true, type: Boolean })
+  @property({ type: Boolean })
   visible: boolean;
 
   /**
