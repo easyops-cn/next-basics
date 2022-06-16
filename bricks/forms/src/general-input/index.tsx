@@ -135,28 +135,6 @@ export class GeneralInputElement extends FormItemElement {
     type: Number,
   })
   maxLength: number;
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 最小长度
-   * @group advanced
-   */
-  @property({
-    type: Number,
-  })
-  min: number;
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 最大长度
-   * @group advanced
-   */
-  @property({
-    type: Number,
-  })
-  max: number;
 
   /**
    * @kind string
@@ -196,6 +174,32 @@ export class GeneralInputElement extends FormItemElement {
    */
   @property({ type: Boolean })
   copyButton: boolean;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最小长度
+   * @deprecated
+   * @group advanced
+   */
+  @property({
+    type: Number,
+  })
+  min: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最大长度
+   * @deprecated
+   * @group advanced
+   */
+  @property({
+    type: Number,
+  })
+  max: number;
 
   /**
    * @detail `string`
