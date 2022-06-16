@@ -59,11 +59,11 @@ export const story: Story = {
               events: {
                 "validate.success": {
                   action: "console.log",
-                  args: ["${EVENT.type}", "${EVENT.detail}"],
+                  args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
                 },
                 "validate.error": {
                   action: "console.warn",
-                  args: ["${EVENT.type}", "${EVENT.detail}"],
+                  args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
                 },
               },
               slots: {
@@ -220,11 +220,11 @@ export const story: Story = {
       events: {
         "validate.error": {
           action: "console.warn",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
       },
       properties: {
@@ -375,11 +375,11 @@ export const story: Story = {
               events: {
                 "validate.error": {
                   action: "console.warn",
-                  args: ["${EVENT.type}", "${EVENT.detail}"],
+                  args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
                 },
                 "validate.success": {
                   action: "console.log",
-                  args: ["${EVENT.type}", "${EVENT.detail}"],
+                  args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
                 },
               },
               properties: {
@@ -479,11 +479,11 @@ export const story: Story = {
       events: {
         "validate.error": {
           action: "console.warn",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
       },
       properties: {
