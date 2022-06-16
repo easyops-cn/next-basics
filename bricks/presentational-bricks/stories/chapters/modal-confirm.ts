@@ -52,16 +52,39 @@ export const ModalConfirmStory: Story = {
                 },
               },
             },
-          ],
-        },
-      },
-    },
-    {
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
+            {
+              brick: "basic-bricks.general-button",
+              properties: {
+                buttonName: "Info",
+              },
+              events: {
+                "general.button.click": {
+                  target: "presentational-bricks\\.modal-confirm#infoModal",
+                  method: "open",
+                },
+              },
+            },
+            {
+              brick: "presentational-bricks.modal-confirm",
+              properties: {
+                id: "infoModal",
+                type: "info",
+                dataSource: {
+                  name: "测试程序包",
+                  version: "1.0.0",
+                },
+                modalTitle: "info",
+                content: "#{name}更新中",
+              },
+              events: {
+                "confirm.ok": {
+                  action: "console.info",
+                },
+                "confirm.cancel": {
+                  action: "console.info",
+                },
+              },
+            },
             {
               brick: "basic-bricks.general-button",
               properties: {
@@ -97,59 +120,6 @@ export const ModalConfirmStory: Story = {
                 },
               },
             },
-          ],
-        },
-      },
-    },
-    {
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "Info",
-              },
-              events: {
-                "general.button.click": {
-                  target: "presentational-bricks\\.modal-confirm#infoModal",
-                  method: "open",
-                },
-              },
-            },
-            {
-              brick: "presentational-bricks.modal-confirm",
-              properties: {
-                id: "infoModal",
-                type: "info",
-                dataSource: {
-                  name: "测试程序包",
-                  version: "1.0.0",
-                },
-                modalTitle: "info",
-                content: "#{name}更新中",
-              },
-              events: {
-                "confirm.ok": {
-                  action: "console.info",
-                },
-                "confirm.cancel": {
-                  action: "console.info",
-                },
-              },
-            },
-          ],
-        },
-      },
-    },
-    {
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
             {
               brick: "basic-bricks.general-button",
               properties: {
@@ -183,16 +153,6 @@ export const ModalConfirmStory: Story = {
                 },
               },
             },
-          ],
-        },
-      },
-    },
-    {
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
             {
               brick: "basic-bricks.general-button",
               properties: {
@@ -226,16 +186,6 @@ export const ModalConfirmStory: Story = {
                 },
               },
             },
-          ],
-        },
-      },
-    },
-    {
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
             {
               brick: "basic-bricks.general-button",
               properties: {
@@ -253,12 +203,8 @@ export const ModalConfirmStory: Story = {
               properties: {
                 id: "warningModal",
                 type: "warning",
-                dataSource: {
-                  name: "测试程序包",
-                  version: "1.0.0",
-                },
                 modalTitle: "warning",
-                content: "#{name}更新警告",
+                content: "补丁更新警告",
               },
               events: {
                 "confirm.ok": {
@@ -272,6 +218,10 @@ export const ModalConfirmStory: Story = {
           ],
         },
       },
+      description: {
+        title: "基本",
+        message: "各种类型的确认对话框",
+      },
     },
     {
       brick: "div",
@@ -280,57 +230,53 @@ export const ModalConfirmStory: Story = {
           type: "bricks",
           bricks: [
             {
-              brick: "presentational-bricks.brick-utils",
-              bg: true,
-            },
-            {
-              brick: "providers-of-cmdb.instance-api-delete-instance",
-              injectDeep: true,
-              bg: true,
+              brick: "basic-bricks.general-button",
               properties: {
-                args: ["HOST", "1"],
+                buttonName: "Template Demo",
               },
               events: {
-                "response.success": [
-                  {
-                    target:
-                      "presentational-bricks\\.modal-confirm#instance-delete-modal",
-                    properties: {
-                      confirmLoading: false,
-                      cancelButtonProps: {
-                        disabled: false,
-                      },
-                    },
-                  },
-                  {
-                    target:
-                      "presentational-bricks\\.modal-confirm#confirmLoadingModal",
-                    method: "close",
-                  },
-                ],
-                "response.error": [
-                  {
-                    target:
-                      "presentational-bricks\\.modal-confirm#instance-delete-modal",
-                    properties: {
-                      confirmLoading: false,
-                      cancelButtonProps: {
-                        disabled: false,
-                      },
-                    },
-                  },
-                  {
-                    target:
-                      "presentational-bricks\\.modal-confirm#confirmLoadingModal",
-                    method: "close",
-                  },
-                  {
-                    target: "presentational-bricks\\.brick-utils",
-                    method: "handleHttpError",
-                  },
-                ],
+                "general.button.click": {
+                  target: "presentational-bricks\\.modal-confirm#warningModal",
+                  method: "open",
+                },
               },
             },
+            {
+              brick: "presentational-bricks.modal-confirm",
+              properties: {
+                id: "warningModal",
+                type: "warning",
+                dataSource: {
+                  name: "春节热更新",
+                  version: "1.0.0",
+                },
+                modalTitle: "warning",
+                content: "正在更新补丁 <strong>#{name}</strong>",
+                extraContent: "版本号 <strong>#{version}</strong>",
+              },
+              events: {
+                "confirm.ok": {
+                  action: "console.info",
+                },
+                "confirm.cancel": {
+                  action: "console.info",
+                },
+              },
+            },
+          ],
+        },
+      },
+      description: {
+        title: "使用模板语言",
+        message: "通过dataSource配合模板语言，实现内容的动态渲染",
+      },
+    },
+    {
+      brick: "div",
+      slots: {
+        "": {
+          type: "bricks",
+          bricks: [
             {
               brick: "basic-bricks.general-button",
               properties: {
@@ -359,17 +305,27 @@ export const ModalConfirmStory: Story = {
               events: {
                 "confirm.ok": [
                   {
-                    target: "providers-of-cmdb\\.instance-api-delete-instance",
-                    method: "execute",
+                    action: "message.info",
+                    args: ["requesting some api..."],
                   },
                   {
                     target:
                       "presentational-bricks\\.modal-confirm#confirmLoadingModal",
                     properties: {
                       confirmLoading: true,
-                      cancelButtonProps: {
-                        disabled: true,
-                      },
+                    },
+                  },
+                ],
+                "confirm.cancel": [
+                  {
+                    action: "message.warn",
+                    args: ["cancel requesting api..."],
+                  },
+                  {
+                    target:
+                      "presentational-bricks\\.modal-confirm#confirmLoadingModal",
+                    properties: {
+                      confirmLoading: false,
                     },
                   },
                 ],
@@ -377,6 +333,11 @@ export const ModalConfirmStory: Story = {
             },
           ],
         },
+      },
+      description: {
+        title: "Loading状态",
+        message:
+          "在发起后台请求并且请求较慢的情况下可以设置 loading 状态优化用户体验",
       },
     },
     {
@@ -390,24 +351,18 @@ export const ModalConfirmStory: Story = {
               properties: {
                 id: "delete-confirm",
                 modalTitle: "工作空间删除确认",
-                extraContent: "有关联的不能删除",
-                isDelete: true,
+                extraContent: "Tips: 有关联的不能删除",
+                okType: "danger",
               },
             },
             {
               brick: "basic-bricks.general-custom-buttons",
               properties: {
                 dataSource: {
-                  title: "role",
-                  count: 1,
+                  title: "MyWorkspace",
+                  relatedCount: 1,
                 },
                 customButtons: [
-                  {
-                    isDropdown: true,
-                    text: "另存为",
-                    icon: "file-add",
-                    eventName: "instance.saveAs",
-                  },
                   {
                     isDropdown: true,
                     text: "删除工作区间",
@@ -421,7 +376,6 @@ export const ModalConfirmStory: Story = {
                 "workload.delete": [
                   {
                     action: "console.log",
-                    args: ["${event.detail.count|boolean}"],
                   },
                   {
                     target: "#delete-confirm",
@@ -429,9 +383,9 @@ export const ModalConfirmStory: Story = {
                     args: [
                       {
                         content:
-                          "确认要删除工作空间<strong>${event.detail.title}</strong>吗？",
+                          "<% `确认要删除工作空间<strong>${EVENT.detail.title}</strong>吗?` %>",
                         okButtonProps: {
-                          disabled: "${event.detail.count|boolean}",
+                          disabled: "<% EVENT.detail.relatedCount %>",
                         },
                       },
                     ],
@@ -441,6 +395,11 @@ export const ModalConfirmStory: Story = {
             },
           ],
         },
+      },
+      description: {
+        title: "设置按钮的高级属性",
+        message:
+          "通过设置okButtonProps和cancelButtonProps来改变按钮样式，例如设置禁用",
       },
     },
   ],
