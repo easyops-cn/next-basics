@@ -13,6 +13,7 @@ import { Story } from "@next-core/brick-types";
 import { BuildFilled } from "@ant-design/icons";
 import { debounce } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
+import ResizeObserver from "resize-observer-polyfill";
 import styles from "./WorkbenchComponentSelect.module.css";
 
 interface ComponentSelectProps {
@@ -142,6 +143,7 @@ function ComponentList({
   const [group, setGroup] = useState<groupItem[]>(initGroup());
   const [list, setList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
+  const [columnNumber, setColumnNumber] = useState(3);
   const refWrapper = useRef<HTMLDivElement>();
 
   const getRenderData = useCallback(
@@ -196,6 +198,17 @@ function ComponentList({
   );
 
   useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      const { width } = refWrapper.current.getBoundingClientRect();
+      setColumnNumber(Math.round(width / 140));
+    });
+    resizeObserver.observe(refWrapper.current);
+    return () => {
+      resizeObserver.disconnect();
+    };
+  });
+
+  useEffect(() => {
     if (suggest[componentType].length) {
       setSuggestList(
         suggest[componentType].map((item) => {
@@ -234,7 +247,12 @@ function ComponentList({
             return (
               <div key={item.key}>
                 <div className={styles.componentCategory}>{item.text}</div>
-                <div className={styles.componentWraper}>
+                <div
+                  className={styles.componentWraper}
+                  style={{
+                    gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+                  }}
+                >
                   {item.children.map((item, index) => (
                     <ComponentItem key={index} {...item} />
                   ))}
@@ -244,7 +262,12 @@ function ComponentList({
           }
         })
       ) : (
-        <div className={styles.componentWraper}>
+        <div
+          className={styles.componentWraper}
+          style={{
+            gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+          }}
+        >
           {list.map((item, index) => (
             <ComponentItem key={index} {...item} />
           ))}
