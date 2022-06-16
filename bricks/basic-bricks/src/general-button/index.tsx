@@ -78,8 +78,8 @@ export class GeneralButtonElement extends UpdatingElement {
    * @kind MenuIcon
    * @required false
    * @default -
-   * @description 按钮 icon，支持[icon 图标库](developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
-   * @group basic
+   * @description 按钮 icon，支持的 [icon 图标库](developers/icon) 和 [MenuIcon配置](/next-docs/docs/api-reference/brick-types.menuicon#menuicon-interface)，另外如果是 antd 图标库可以直接引用图标名称配置 { "lib": "antd", "icon": "edit" }与 "edit"等价
+   * @group ui
    */
   @property({
     attribute: false,
@@ -110,16 +110,16 @@ export class GeneralButtonElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description 跳转的 target，例如可以设置为"\_blank"
+   * @description 跳转的 target，例如可以设置为"_blank"
    * @group basic
    */
   @property()
   target: string;
 
   /**
-   * @kind any
+   * @kind Record<string, any>
    * @required false
-   * @default `{}`
+   * @default {}
    * @description 替代之前 detail 属性，用法相同。暂存的数据在事件传出时使用
    * @group basic
    */
@@ -131,7 +131,7 @@ export class GeneralButtonElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default `false`
+   * @default false
    * @description 是否禁用按钮
    * @group basic
    */
@@ -141,8 +141,9 @@ export class GeneralButtonElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default `false`
+   * @default false
    * @description 按钮加载动画
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -154,7 +155,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮类型  ButtonType(`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon"|"text"`)
-   * @group basic
+   * @group ui
    */
   @property()
   buttonType: ButtonType;
@@ -162,9 +163,9 @@ export class GeneralButtonElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default `false`
+   * @default false
    * @description 设置危险按钮
-   * @group basic
+   * @group ui
    */
   @property({ type: Boolean })
   buttonDanger: boolean;
@@ -174,7 +175,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮形状，支持圆形、椭圆形，不设置为默认方形
-   * @group basic
+   * @group ui
    */
   @property()
   buttonShape: "circle" | "round";
@@ -184,7 +185,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮大小，支持大、小，不设置为默认中
-   * @group basic
+   * @group ui
    */
   @property()
   buttonSize: "small" | "large";
@@ -222,9 +223,9 @@ export class GeneralButtonElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default `false`
+   * @default false
    * @description 淡化按钮文字，按钮类型为 text 时可以设置。默认 `false` 文字按钮颜色和平台的字体颜色一样，在一些希望弱化文字颜色的场景下可以设置为 `true`。
-   * @group advanced
+   * @group ui
    */
   @property({ type: Boolean })
   fadedText: boolean;
@@ -232,9 +233,9 @@ export class GeneralButtonElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default `false`
+   * @default false
    * @description 点击按钮后自动禁用
-   * @group advanced
+   * @group basic
    */
   @property({ type: Boolean })
   disableAfterClick: boolean;
@@ -244,7 +245,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required -
    * @default -
    * @description 完全透传给 antd 的 Button 属性
-   * @group advanced
+   * @group basic
    */
   @property({
     attribute: false,
@@ -252,24 +253,11 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonProps: ButtonProps & { icon?: string };
 
   /**
-   * @kind any
-   * @required false
-   * @default {}
-   * @deprecated
-   * @description [已废弃]按钮点击事件传出的内容。当用于列表类构件，例如 `brick-table` 中，可通过传入传入 `detail` 来识别不通的行进行操作处理。
-   * @group advanced
-   */
-  @property({
-    attribute: false,
-  })
-  detail: Record<string, any> = {};
-
-  /**
    * @kind React.CSSProperties
    * @required -
    * @default -
    * @description 适用于按钮某些场景下，需要自定义一些样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -277,7 +265,20 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonStyle: React.CSSProperties;
 
   /**
-   * @detail `any`
+   * @kind any
+   * @required false
+   * @default {}
+   * @deprecated
+   * @description [已废弃]按钮点击事件传出的内容。当用于列表类构件，例如 `brick-table` 中，可通过传入传入 `detail` 来识别不通的行进行操作处理。
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  detail: Record<string, any> = {};
+
+  /**
+   * @detail `Record<string, any>`
    * @description 按钮被点击时触发, detail 为 dataSource 数据
    */
   @event({ type: "general.button.click", cancelable: true })
