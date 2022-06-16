@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.160.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.159.0...@next-bricks/next-builder@1.160.0) (2022-06-16)
+
+
+### Features
+
+* **componentSelect:** support resize change ([97dceb8](https://github.com/easyops-cn/next-basics/commit/97dceb86c7c38172e997de7538e9d8c16a8a135b))
+
+
+
+
+
 # [1.159.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.158.0...@next-bricks/next-builder@1.159.0) (2022-06-15)
 
 
