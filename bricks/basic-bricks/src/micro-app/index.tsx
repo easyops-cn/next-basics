@@ -34,6 +34,11 @@ import styles from "./MicroApp.shadow.css";
  * @history
  * 1.19.0:新增构件
  * 1.89.0:新增 bannerPageTitle、bannerStyle 属性，banner、bannerTitleBar、bannerToolbar 插槽
+ * @groupI18N
+ * {
+ *   "basic": {"zh": "常用", "en": "Basic"},
+ *    "ui": {"zh": "外观", "en": "UI"}
+ * }
  * @memo
  * @noInheritDoc
  */
@@ -49,11 +54,21 @@ export class MicroViewElement extends UpdatingElement {
   pageTitle: string;
 
   /**
+   * @kind string
+   * @required -
+   * @default -
+   * @description 设置 banner 标题。如果要使用复杂的标题构件，请使用插槽 `bannerTitleBar`
+   * @group basic
+   */
+  @property()
+  bannerPageTitle: string;
+
+  /**
    * @kind boolean
    * @required -
-   * @default `false`
+   * @default false
    * @description 内容区是否需要设置`overflow-x: auto`
-   * @group basic
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -63,9 +78,9 @@ export class MicroViewElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required -
-   * @default `false`
+   * @default false
    * @description 内容区默认为 grid 布局且有默认的 gap，设为 `true` 则使之没有 gap。
-   * @group basic
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -74,9 +89,9 @@ export class MicroViewElement extends UpdatingElement {
 
   /**
    * @kind boolean
-   * @default `false`
+   * @default false
    * @description 是否启用大屏模式。
-   * @group basic
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -84,10 +99,19 @@ export class MicroViewElement extends UpdatingElement {
   dashboardMode: boolean;
 
   /**
+   * @description 标题栏大小比例，默认为 1，仅用于暗黑大屏模式。
+   * @group ui
+   */
+  @property({
+    type: Number,
+  })
+  pageTitleScale: number;
+
+  /**
    * @kind boolean
-   * @default `false`
+   * @default false
    * @description 是否隐藏工具栏（常用语大屏模式）。
-   * @group basic
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -95,19 +119,9 @@ export class MicroViewElement extends UpdatingElement {
   hideToolbar: boolean;
 
   /**
-   * @kind string
-   * @required -
-   * @default -
-   * @description 设置 banner 标题。如果要使用复杂的标题构件，请使用插槽 `bannerTitleBar`
-   * @group advanced
-   */
-  @property()
-  bannerPageTitle: string;
-
-  /**
    * @default -
    * @description banner 的样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -115,7 +129,7 @@ export class MicroViewElement extends UpdatingElement {
   bannerStyle: React.CSSProperties;
 
   /**
-   * @group advanced
+   * @private
    */
   @property({
     type: Boolean,
@@ -123,7 +137,8 @@ export class MicroViewElement extends UpdatingElement {
   hasSubMenu: boolean;
 
   /**
-   * @group advanced
+   * @private
+   *
    */
   @property({
     type: Boolean,
@@ -131,7 +146,7 @@ export class MicroViewElement extends UpdatingElement {
   hasTitleBar: boolean;
 
   /**
-   * @group advanced
+   * @private
    */
   @property({
     type: Boolean,
@@ -139,7 +154,7 @@ export class MicroViewElement extends UpdatingElement {
   hasToolbar: boolean;
 
   /**
-   * @group advanced
+   * @private
    */
   @property({
     type: Boolean,
@@ -147,7 +162,7 @@ export class MicroViewElement extends UpdatingElement {
   hasBanner: boolean;
 
   /**
-   * @group advanced
+   * @private
    */
   @property({
     type: Boolean,
@@ -155,21 +170,12 @@ export class MicroViewElement extends UpdatingElement {
   hasBannerTitleBar: boolean;
 
   /**
-   * @group advanced
+   * @private
    */
   @property({
     type: Boolean,
   })
   hasBannerToolbar: boolean;
-
-  /**
-   * @description 标题栏大小比例，默认为 1，仅用于暗黑大屏模式。
-   * @group advanced
-   */
-  @property({
-    type: Number,
-  })
-  pageTitleScale: number;
 
   /**
    * @description 用户点击退出大屏模式时触发。

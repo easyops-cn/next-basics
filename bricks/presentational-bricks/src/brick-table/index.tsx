@@ -140,7 +140,7 @@ export interface CellStatusProps {
  *    "expand": {"en": "Expand/Collapse", "zh": "展开/折叠"},
  *    "ui": {"en": "UI", "zh": "外观"},
  *    "rowSelection": {"en": "RowSelection", "zh": "行选择配置(rowSelection)"},
- *    "other": {"en": "其他", "zh": "other"}
+ *    "other": {"en": "Other", "zh": "其他"}
  * }
  * @author lynette
  * @slots

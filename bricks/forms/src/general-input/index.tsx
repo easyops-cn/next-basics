@@ -21,11 +21,11 @@ import { FormItemElement } from "@next-libs/forms";
  * @groupI18N
  * {
  *  "basicFormItem": {
- *    "en": "BasicFormItem",
+ *    "en": "Basic Form Item",
  *    "zh": "表单项常用"
  *   },
- *  "advanceFormItem": {
- *    "en": "AdvanceFormItem",
+ *  "advancedFormItem": {
+ *    "en": "Advanced Form Item",
  *    "zh": "表单项高级"
  *   },
  *   "ui": {

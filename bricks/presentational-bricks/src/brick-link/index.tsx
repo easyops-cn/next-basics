@@ -21,9 +21,14 @@ import { MenuIcon } from "@next-core/brick-types";
  * @slots
  * @history
  * 1.169.0:新增属性`type`
+ * 1.89.11:使用 `dataSource` 代替之前 `detail`
  * 1.78.0:新增属性`detail`
  * 1.73.0:新增属性`disabled`,`tooltip`,`notToJumpWhenEmpty`，新增事件`link.click`
- * 1.89.11:使用 `dataSource` 代替之前 `detail`
+ * @groupI8N
+ * {
+ *  "basic": {"en": "Basic", "zh": "常用"},
+ *  "ui": {"en": "UI", "zh": "外观"}
+ * }
  * @memo
  * @noInheritDoc
  */
@@ -33,6 +38,7 @@ export class BrickLinkElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 链接的文字
+   * @group basic
    */
   @property()
   label: string;
@@ -41,34 +47,18 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description label颜色
-   */
-  @property()
-  labelColor: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 链接的 URL
+   * @group basic
    */
   @property()
   url: string;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 鼠标进入label时显示下划线
-   */
-  @property({ type: Boolean })
-  underLine: boolean;
-
-  /**
    * @kind string
    * @required false
    * @default -
-   * @description 是否使用原生 \<a\> 标签，通常用于外链的跳转
+   * @description 是否使用原生 <a> 标签，通常用于外链的跳转
+   * @group basic
    */
   @property()
   href: string;
@@ -78,6 +68,7 @@ export class BrickLinkElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 当将其配置成 `_blank` 时，默认在 label 后添加 external-link-alt icon
+   * @group basic
    */
   @property()
   target: string;
@@ -87,15 +78,49 @@ export class BrickLinkElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 提示
+   * @group basic
    */
   @property()
   tooltip: string;
 
   /**
+   * @kind Record<string, any>
+   * @required false
+   * @default -
+   * @description `link.click` 事件传出的数据， 替代之前的 `detail`
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  dataSource: Record<string, any>;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description label颜色
+   * @group ui
+   */
+  @property()
+  labelColor: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 鼠标进入label时显示下划线
+   * @group ui
+   */
+  @property({ type: Boolean })
+  underLine: boolean;
+
+  /**
    * @kind MenuIcon
    * @required false
-   * @default false
+   * @default -
    * @description 图标 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @group ui
    */
   @property({
     attribute: false,
@@ -107,6 +132,7 @@ export class BrickLinkElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否禁用
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -117,7 +143,8 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
-   * @description 是否隐藏target为_blank时label的补充icon
+   * @description 是否隐藏target为_blank时label后的icon
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -128,6 +155,7 @@ export class BrickLinkElement extends UpdatingElement {
    * @required false
    * @default false
    * @description url 为空时不跳转，但是会发出`link.click`点击事件
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -135,21 +163,10 @@ export class BrickLinkElement extends UpdatingElement {
   notToJumpWhenEmpty: boolean;
 
   /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
-   * @description `link.click` 事件传出的数据， 替代之前的 `detail`
-   */
-  @property({
-    attribute: false,
-  })
-  dataSource: Record<string, any>;
-
-  /**
-   * @default "link"
+   * @default link
    * @required false
    * @description 链接类型：默认链接 - link 和 文本链接 - text
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -157,10 +174,10 @@ export class BrickLinkElement extends UpdatingElement {
   type: "link" | "text" = "link";
 
   /**
-   * @default "left"
+   * @default left
    * @required false
    * @description 链接图标位置：左边 - left 右边 - right
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -171,9 +188,9 @@ export class BrickLinkElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
-   * @description 是否使用原生 \<a\> 标签, 为了跟平台规范一致准备废弃该属性，统一采用 href 属性表示原生标签跳转。
+   * @description [已废弃]是否使用原生 <a> 标签, 为了跟平台规范一致准备废弃该属性，统一采用 href 属性表示原生标签跳转。
    * @deprecated
-   * @group advanced
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -186,18 +203,18 @@ export class BrickLinkElement extends UpdatingElement {
    * @default -
    * @description [已废弃]链接的文字在数据源上的字段
    * @deprecated
-   * @group advanced
+   * @group basic
    */
   @property()
   labelField: string;
 
   /**
-   * @kind boolean
+   * @kind any
    * @required false
    * @default false
    * @description [已废弃]`link.click`事件的详情
-   * @description
-   * @group advanced
+   * @deprecated
+   * @group basic
    */
   @property({
     attribute: false,
@@ -210,14 +227,14 @@ export class BrickLinkElement extends UpdatingElement {
    * @default -
    * @description [已废弃]链接的 URL 的模板，可使用 #{a.b} 的标记使用数据源里的属性值
    * @deprecated
-   * @group advanced
+   * @group basic
    */
   @property()
   urlTemplate: string;
 
   /**
-   * @detail any
-   * @description 击 link 触发的事件，detail 为编排者输入的 detail
+   * @detail Record<string, any>
+   * @description 点击 link 触发的事件，事件 detail 为传入的 dataSource
    */
   @event({ type: "link.click", cancelable: true }) linkClick: EventEmitter<any>;
 

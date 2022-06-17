@@ -98,10 +98,10 @@ export class GeneralFormElement
   private _mountPoint: HTMLElement;
 
   /**
-   * @kind `Record<string,any>`
+   * @kind Record<string,any>
    * @default -
    * @required false
-   * @description 默认值。因为目前使用了 `mapPropsToFields` 来将 `values` 映射到表单项的值，当 `values` 有多个层级时，需要按表单项的 `name` 平铺。如源数据为 `{a: {b: 123}}` ，表单项的 `name` 为 `a.b`，那么需要将源数据转换为 `{"a.b": 123}` 传给 `values`
+   * @description 表单的初始值。当 `values` 有嵌套的层级时，需要按表单项的 `name` 平铺。如有源数据为 `{a: {b: 123}}` ，存在表单项的 `name` 为 `a.b`，要正确给该表单项赋值为 123， 那么 `values` 应该为 `{"a.b": 123}`
    * @group basic
    */
   @property({
@@ -110,13 +110,16 @@ export class GeneralFormElement
   values: Record<string, any>;
 
   /**
-   * @kind `Record<string, any>`
+   * @kind Record<string, any>
    * @required false
    * @default -
    * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
    * @group basic
    */
-  staticValues: Record<string, any>; // PS: 暂时不能使用 @property 装饰, 因为更新 staticValues 会重新渲染表单，但是 values 不是跟表单当前的值同步的，结果导致表单被重置
+  @property({
+    __unstable_doNotDecorate: true,
+  })
+  staticValues: Record<string, any>;
 
   /**
    * @kind string
@@ -129,11 +132,11 @@ export class GeneralFormElement
   declare name: string;
 
   /**
-   * @kind `'horizontal'|'vertical'|'inline'`
+   * @kind 'horizontal'|'vertical'|'inline'
    * @required -
-   * @default `horizontal`
+   * @default horizontal
    * @description 表单布局
-   * @group basic
+   * @group ui
    */
   @property({
     // Ensure `layout` is `FormLayout`.
@@ -154,11 +157,11 @@ export class GeneralFormElement
   layout: FormLayout;
 
   /**
-   * @kind `ColProps`
+   * @kind ColProps
    * @description 标签列布局样式（仅当 `layout="horizontal"` 时有效）
    * @default -
    * @require false
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -182,11 +185,11 @@ export class GeneralFormElement
   };
 
   /**
-   * @kind `ColProps`
+   * @kind ColProps
    * @description 输入控件列布局样式（仅当 `layout="horizontal"` 时有效）
    * @default -
    * @require false
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -212,11 +215,11 @@ export class GeneralFormElement
   // Will be Set in React component.
   formUtils: WrappedFormUtils;
   /**
-   * @kind `object`
+   * @kind object
    * @required -
    * @default -
    * @description 对 `values` 属性的数据进行申明和格式化，提供了表单提交后格式化表单项数据的功能。目前仅支持时间相关的表单项数据的格式化（因为时间相关的表单项构件提交后的数据为 moment 对象，需要根据不同场景定义给后台的数据），`{time: moment|YYYY-MM-DD}` 表示该字段为 moment 类型，数据提交后格式化为 `YYYY-MM-DD` 字符串的形式，详情如 demo 所示
-   * @group advanced
+   * @group basic
    */
   @property({
     attribute: false,
@@ -228,9 +231,9 @@ export class GeneralFormElement
   /**
    * @kind boolean
    * @description 是否不显示冒号
-   * @default `false`
+   * @default false
    * @required false
-   * @group advanced
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -239,23 +242,23 @@ export class GeneralFormElement
 
   /**
    * @description 是否限制表单的最大宽度
-   * @default `false`
-   * @group advanced
+   * @default false
+   * @group ui
    */
   @property({ type: Boolean })
   maxWidthLimited: boolean;
 
   /**
    * @description 表单达到最大宽度后的对齐方式
-   * @default `FormAlignment.Center`
-   * @group advanced
+   * @default center
+   * @group ui
    */
   @property({ attribute: false })
   alignment: FormAlignment = FormAlignment.Center;
 
   /**
    * @description 表单样式
-   * @group advanced
+   * @group ui
    */
   @property({ attribute: false })
   formStyle: React.CSSProperties;

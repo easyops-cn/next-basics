@@ -7,11 +7,19 @@ export const groupI18nMap = {
   },
   ui: {
     en: "UI",
-    zh: "样式",
+    zh: "外观",
   },
   advanced: {
     en: "Advanced",
     zh: "高级",
+  },
+  basicFormItem: {
+    en: "Basic Form Item",
+    zh: "表单项常用",
+  },
+  advancedFormItem: {
+    en: "Advanced Form Item",
+    zh: "表单项高级",
   },
   other: {
     en: "Other",

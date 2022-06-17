@@ -2,19 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { Card, Tooltip, Button } from "antd";
 import { CardProps } from "antd/lib/card";
-import { ButtonProps } from "antd/lib/button";
 import { isEmpty } from "lodash";
 import ResizeObserver from "resize-observer-polyfill";
-
-export interface OperationButton {
-  // to listen for
-  id: string;
-  eventName: string;
-  configProps: ButtonProps & { icon?: string };
-  tooltip?: string;
-  text?: string;
-  needData?: boolean;
-}
+import { OperationButton } from "../interfaces";
 
 export interface GeneralCardProps {
   configProps?: CardProps;

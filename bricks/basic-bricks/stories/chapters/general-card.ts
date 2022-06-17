@@ -233,7 +233,7 @@ export const generalCardStory: Story = {
       description: {
         title: "使用footer插槽",
         message:
-          "适用于多表单使用，具体场景请参考http://192.168.100.162/next/resource-events/alert-config/inhibition-rule/create",
+          "适用于多表单使用，具体场景请参考 [#1](http://192.168.100.162/next/resource-events/alert-config/inhibition-rule/create)",
       },
       brick: "forms.general-form",
       properties: {
