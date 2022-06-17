@@ -13,11 +13,26 @@ import { FormItemElement } from "@next-libs/forms";
  * @id forms.general-input
  * @name forms.general-input
  * @docKind brick
- * @description
+ * @description 通用输入框
  * @author steve
  * @slots
  * @history
  * 1.61.0:新增属性 `addonBefore`,`addonAfter`
+ * @groupI18N
+ * {
+ *  "basicFormItem": {
+ *    "en": "BasicFormItem",
+ *    "zh": "表单项常用"
+ *   },
+ *  "advanceFormItem": {
+ *    "en": "AdvanceFormItem",
+ *    "zh": "表单项高级"
+ *   },
+ *   "ui": {
+ *     "en": "UI",
+ *     "zh": "外观"
+ *   }
+ * }
  * @memo
  *>Tips: 对于 event.detail 为 Keyboard Event 时， 由于 react 对于合成事件的处理，打印出来的整个 Keyboard Event 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可查看 [查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
  *### METHODS
@@ -31,7 +46,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框字段名
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
@@ -40,7 +55,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框字段说明
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
   /**
@@ -48,7 +63,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框占位说明
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -57,7 +72,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否必填项
-   * @group basic
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -66,7 +81,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框初始值
-   * @group basic
+   * @group basicFormItem
    */
   @property()
   value: string;
@@ -76,7 +91,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否禁用
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false })
   disabled: boolean;
@@ -86,7 +101,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否只读
-   * @group basic
+   * @group basicFormItem
    */
   @property({ type: Boolean })
   readOnly: boolean;
@@ -96,7 +111,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default
    * @description 输入框样式
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
@@ -108,7 +123,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 校验文本信息
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
@@ -117,7 +132,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 最小长度
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     type: Number,
@@ -129,41 +144,19 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 最大长度
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     type: Number,
   })
   maxLength: number;
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 最小长度
-   * @group advanced
-   */
-  @property({
-    type: Number,
-  })
-  min: number;
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 最大长度
-   * @group advanced
-   */
-  @property({
-    type: Number,
-  })
-  max: number;
 
   /**
    * @kind string
    * @required false
    * @default -
    * @description 输入框类型,可输入password/email或者其他
-   * @group advanced
+   * @group basicFormItem
    */
   @property({ attribute: false }) type: string;
 
@@ -172,7 +165,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default
    * @description 设置前置标签
-   * @group advanced
+   * @group basicFormItem
    */
   @property()
   addonBefore: string;
@@ -182,7 +175,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default
    * @description 设置后置标签
-   * @group advanced
+   * @group basicFormItem
    */
   @property()
   addonAfter: string;
@@ -192,10 +185,36 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否显示复制按钮
-   * @group advanced
+   * @group ui
    */
   @property({ type: Boolean })
   copyButton: boolean;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最小长度
+   * @deprecated
+   * @group basicFormItem
+   */
+  @property({
+    type: Number,
+  })
+  min: number;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 最大长度
+   * @deprecated
+   * @group basicFormItem
+   */
+  @property({
+    type: Number,
+  })
+  max: number;
 
   /**
    * @detail `string`
