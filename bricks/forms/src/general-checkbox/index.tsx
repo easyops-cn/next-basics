@@ -46,11 +46,11 @@ export interface LabeledValue {
 * @groupI18N
 * {
 *   "basicFormItem": {
-*     "en": "BasicFormItem",
+*     "en": "Basic Form Item",
 *     "zh": "表单项常用"
 *   },
-*   "advanceFormItem": {
-*     "en": "AdvanceFormItem",
+*   "advancedFormItem": {
+*     "en": "Advanced Form Item",
 *     "zh": "表单项高级"
 *   },
 *   "ui": {
@@ -148,7 +148,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required true
    * @default -
    * @description 多选框选项分组数据，需要设置 `isGroup` 为 `true` 才生效
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
@@ -159,7 +159,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default false
    * @description 是否为分组复选框，若为 `true`，则可设置分组数据 `optionGroups`
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({
     type: Boolean,

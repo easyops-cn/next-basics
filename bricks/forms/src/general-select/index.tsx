@@ -38,7 +38,7 @@ export interface ComplexOption<T = string | number> {
  * @groupI18N
  * {
  *   "basicFormItem": {"zh": "表单项常用", "en": "Basic Form Item"},
- *   "advanceFormItem": {"zh": "表单项常用", "en": "advance Form Item"},
+ *   "advancedFormItem": {"zh": "表单项常用", "en": "advanced Form Item"},
  *   "ui": {"zh": "外观", "en": "UI"}
  * }
  * @memo
@@ -194,7 +194,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 支持搜索
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
@@ -216,7 +216,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 空候选项，将插入到候选项列表最前面
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({ attribute: false })
   emptyOption: GeneralComplexOption;
@@ -250,7 +250,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 基于 `options` 列表中的某个字段进行分组显示
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
@@ -262,7 +262,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 列表指定字段作为 label 和 value
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
@@ -286,7 +286,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required -
    * @default default
    * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property()
   popoverPositionType: GeneralSelectProps["popoverPositionType"];
@@ -295,7 +295,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind number
    * @default 300
    * @description 设置防抖动搜索的时间间隔。
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({ type: Number })
   debounceSearchDelay: number;
@@ -304,7 +304,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind EasyopsEmptyProps
    * @default
    * @description 空option 时候可以自定义 EasyopsEmpty 配置实现自定义的无数据提示
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({ attribute: false })
   emptyProps: EasyopsEmptyProps;
@@ -312,7 +312,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @default false
    * @required false
    * @description 搜索时是否同时根据value和label过滤options，否则只根据label过滤
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({ type: Boolean })
   filterByLabelAndValue: boolean;
@@ -322,7 +322,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 支持在文本后添加自定义构件 [UseBrickConf](http://docs.developers.easyops.cn/docs/brick-next/transform)
-   * @group advanceFormItem
+   * @group advancedFormItem
    * @deprecated
    */
   @property({
@@ -336,7 +336,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @default -
    * @description [已废弃]设置后置构件容器的样式
    * @deprecated
-   * @group advanceFormItem
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
