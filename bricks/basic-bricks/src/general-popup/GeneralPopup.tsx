@@ -90,6 +90,11 @@ export function GeneralPopup({
   useEffect(() => {
     if (popupRef.current) {
       setPointerPosition(initPos());
+      /**
+       * Antd Select构件在shadow dom会出现异常的情况
+       * 具体可参见: https://github.com/ant-design/ant-design/issues/28012
+       * 采用原生事件监听可避免该种情况发生
+       */
       headerRef.current.addEventListener("mousedown", handleMouseDown);
     }
     return () => {
@@ -108,8 +113,6 @@ export function GeneralPopup({
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
-      headerRef.current &&
-        headerRef.current.removeEventListener("mousedown", handleMouseDown);
     };
   }, [isMove]);
 
