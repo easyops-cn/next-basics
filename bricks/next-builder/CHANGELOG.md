@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.160.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.160.1...@next-bricks/next-builder@1.160.2) (2022-06-17)
+
+
+### Bug Fixes
+
+* add birck install info and fix popup down error ([c5f4ce6](https://github.com/easyops-cn/next-basics/commit/c5f4ce64e15f6758fd7c37ba4470ef2df674f8bd))
+
+
+
+
+
 ## [1.160.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.160.0...@next-bricks/next-builder@1.160.1) (2022-06-17)
 
 

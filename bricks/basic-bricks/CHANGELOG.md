@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.179.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.7...@next-bricks/basic-bricks@1.179.8) (2022-06-17)
+
+
+### Bug Fixes
+
+* add birck install info and fix popup down error ([c5f4ce6](https://github.com/easyops-cn/next-basics/commit/c5f4ce64e15f6758fd7c37ba4470ef2df674f8bd))
+
+
+
+
+
 ## [1.179.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.6...@next-bricks/basic-bricks@1.179.7) (2022-06-16)
 
 
