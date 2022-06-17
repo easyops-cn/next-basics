@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.160.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.160.0...@next-bricks/next-builder@1.160.1) (2022-06-17)
+
+
+### Bug Fixes
+
+* **previewContainer:** fix brick drop and still high light state ([aa7e359](https://github.com/easyops-cn/next-basics/commit/aa7e3593e661e0533593a72ba9a274ac08d4325d))
+
+
+
+
+
 # [1.160.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.159.0...@next-bricks/next-builder@1.160.0) (2022-06-16)
 
 
