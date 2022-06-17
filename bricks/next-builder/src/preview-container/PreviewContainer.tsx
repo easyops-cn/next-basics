@@ -265,9 +265,7 @@ export function LegacyPreviewContainer(
         });
       }
 
-      setTimeout(() => {
-        handleDragEnd();
-      }, 100);
+      handleDragEnd();
     },
     [manager, onPreviewerDrop]
   );

@@ -62,8 +62,9 @@ function onMouseEvent(event: MouseEvent): void {
   event.stopPropagation();
 }
 
+let isDragging = false;
 const hoverOnBrick = throttle(
-  (e: MouseEvent, isDirection = false) => {
+  (e: MouseEvent, isDirection?: boolean) => {
     const brick = e.target as HTMLElement;
     const iidList = getPossibleBrickIidList(brick);
     if (brick.tagName === "BODY") {
@@ -71,7 +72,7 @@ const hoverOnBrick = throttle(
         {
           sender: "previewer",
           type: "hover-on-main",
-          isDirection,
+          isDirection: isDirection ?? isDragging,
           position: {
             x: e.clientX,
             y: e.clientY,
@@ -85,7 +86,7 @@ const hoverOnBrick = throttle(
           sender: "previewer",
           type: "hover-on-brick",
           iidList,
-          isDirection,
+          isDirection: isDirection ?? isDragging,
           position: {
             x: e.clientX,
             y: e.clientY,
@@ -102,13 +103,13 @@ const hoverOnBrick = throttle(
 function onPointerDown(event: MouseEvent): void {
   event.preventDefault();
   event.stopPropagation();
-  hoverOnBrick(event);
+  hoverOnBrick(event, false);
 }
 
 function onPointerOver(event: MouseEvent): void {
   event.preventDefault();
   event.stopPropagation();
-  hoverOnBrick(event);
+  hoverOnBrick(event, false);
 }
 
 function onPointerLeave(event: MouseEvent): void {
@@ -126,13 +127,15 @@ function onPointerLeave(event: MouseEvent): void {
 
 function onDragOver(event: DragEvent): void {
   event.preventDefault();
-  hoverOnBrick(event, true);
+  isDragging = true;
+  hoverOnBrick(event);
 }
 
 function onDrop(event: DragEvent): void {
   event.preventDefault();
   // dragstart should setData: nodeData and it's work
   const nodeData = event.dataTransfer.getData("nodeData");
+  isDragging = false;
   if (!nodeData) return;
   window.parent.postMessage(
     {
