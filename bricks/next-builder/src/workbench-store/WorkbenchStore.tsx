@@ -21,6 +21,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
 import { sendHighlightBrick, useHighlightBrick } from "./useHighlightBrick";
+import { InstallExpandInfo } from "../builder-container/BuilderContainer";
 
 export interface WorkbenchStoreProps {
   dataSource?: BuilderRouteOrBrickNode[];
@@ -82,6 +83,7 @@ export function LegacyWorkbenchStore(
       manager.onNodeClick(onNodeClick),
       manager.onNodeReorder(onNodeReorder),
       manager.onWorkbenchTreeNodeMove(onWorkbenchTreeNodeMove),
+      manager.onNodeAdd((e) => InstallExpandInfo(e, manager)),
       manager.onNodeAdd(onNodeAdd),
       manager.onSnippetApply(onSnippetApply),
     ];
