@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.179.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.8...@next-bricks/basic-bricks@1.179.9) (2022-06-17)
+
+
+### Bug Fixes
+
+* refine button doc ([d302c91](https://github.com/easyops-cn/next-basics/commit/d302c9120cecc59ed79d7eda8ce3d34bce958bd5))
+* refine doc ([cc39916](https://github.com/easyops-cn/next-basics/commit/cc39916511c76d976f7757fdfc19563e72ebb40b))
+* refine general-card doc ([9a139af](https://github.com/easyops-cn/next-basics/commit/9a139af6fed0e88a0f213aebd15eaac07d9ee163))
+* refine micro-view doc ([24eb32b](https://github.com/easyops-cn/next-basics/commit/24eb32bb76ba326d4c70cba2f9324412b50b25fd))
+
+
+
+
+
 ## [1.179.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.7...@next-bricks/basic-bricks@1.179.8) (2022-06-17)
 
 
