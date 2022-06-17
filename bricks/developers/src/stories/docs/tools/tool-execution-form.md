@@ -6,9 +6,15 @@
 
 # INPUTS
 
-| property      | type                                                                                    | required | default | description                                                                                    |
-| ------------- | --------------------------------------------------------------------------------------- | -------- | ------- | ---------------------------------------------------------------------------------------------- |
-| toolData      | object                                                                                  | ✔️       | -       | 工具的详情信息，外层通过 provider 获取                                                         |
-| event         | BrickEventsMap                                                                          | -️       | -       | 工具执行 api 触发的事件 "response.success" 和 "response.error", 可以通过监听这些事件做相应处理 |
-| submitBtnText | string                                                                                  | -️       | 提交    | 提交按钮名称                                                                                   |
-| submitBtnType | 'default' &#124; "primary" &#124; "ghost" &#124; "dashed" &#124; "danger" &#124; "link" | -️       | primary | 提交按钮样式                                                                                   |
+| property      | type                                                                        | required | default | description                            |
+| ------------- | --------------------------------------------------------------------------- | -------- | ------- | -------------------------------------- |
+| toolData      | { toolId: string; vId: string; inputs: any[] }                              | ✔️       | -       | 工具的详情信息，外层通过 provider 获取 |
+| submitBtnText | string                                                                      | -️       | 提交    | 提交按钮名称                           |
+| submitBtnType | default &#124; primary &#124; ghost &#124; dashed &#124; danger &#124; link | -️       | primary | 提交按钮样式                           |
+
+# EVENTS
+
+| type             | detail | description       |
+| ---------------- | ------ | ----------------- |
+| response.success | -      | 工具执行 api 成功 |
+| response.error   | -      | 工具执行 api 失败 |
