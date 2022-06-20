@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.9...@next-bricks/basic-bricks@1.180.0) (2022-06-20)
+
+
+### Features
+
+* micro-app 兼容ui6.0和ui8.0的样式 ([0cd05ae](https://github.com/easyops-cn/next-basics/commit/0cd05aeea644c08012422015e4bf18cda2aec2e1))
+
+
+
+
+
 ## [1.179.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.8...@next-bricks/basic-bricks@1.179.9) (2022-06-17)
 
 
