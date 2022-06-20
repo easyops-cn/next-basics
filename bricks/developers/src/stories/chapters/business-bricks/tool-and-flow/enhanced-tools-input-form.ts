@@ -18,32 +18,15 @@ export const story: Story = {
     icon: "running",
   },
   conf: {
-    brick: "div",
-    slots: {
-      "": {
-        type: "bricks",
-        bricks: [
-          {
-            brick: "providers-of-tool.basic-api-get-tool",
-            injectDeep: true,
-            bg: true,
-            properties: {
-              args: ["b21cdeed0c7ec5f416a79d33f82705d4"],
-            },
-          },
-          {
-            brick: "tools.enhanced-tools-input-form",
-            lifeCycle: {
-              useResolves: [
-                {
-                  name: "toolData",
-                  provider: "providers-of-tool\\.basic-api-get-tool",
-                },
-              ],
-            },
-          },
-        ],
-      },
+    brick: "tools.enhanced-tools-input-form",
+    lifeCycle: {
+      useResolves: [
+        {
+          name: "toolData",
+          useProvider: "providers-of-tool.basic-api-get-tool",
+          args: ["b21cdeed0c7ec5f416a79d33f82705d4"],
+        },
+      ],
     },
   },
   doc: docMD,
