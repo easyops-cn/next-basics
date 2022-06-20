@@ -6,22 +6,22 @@
 
 # INPUTS
 
-| property           | type                     | required | default | description                                                                |
-| ------------------ | ------------------------ | -------- | ------- | -------------------------------------------------------------------------- |
-| tId                | string                   | ✔️       | -       | -                                                                          |
-| vId                | string                   | ✔️       | -       | -                                                                          |
-| toolData           | ToolModels.ModelTool     | ✔️       | -       | 工具的详情信息                                                             |
-| mode               | "preview" &#124; "edit"  | -        | "edit"  | -                                                                          |
-| value              | `Record<string, any>`    | -        | -       | 表单的初始值                                                               |
-| defaultInputsValue | ToolModels.ModelToolTask | -        | -       | 处理工具输入参数                                                           |
-| isEdit             | boolean                  | -        | false   | -                                                                          |
-| isSetValue         | boolean                  | -        | false   | -                                                                          |
-| hideExecuteUser    | boolean                  | -        | false   | -                                                                          |
-| isExecute          | boolean                  | -️       | false   | -                                                                          |
-| isNoAllowModify    | boolean                  | -️       | false   | 是否不允许表单修改（当为`true`,表单全部`disabled`,目前`执行用户`不受控制） |
-| layout             | FormLayout               | -️       | -       | -                                                                          |
-| wrapperCol         | object                   | -️       | -       | -                                                                          |
-| labelCol           | object                   | -️       | -       | -                                                                          |
+| property           | type                    | required | default | description                                                                |
+| ------------------ | ----------------------- | -------- | ------- | -------------------------------------------------------------------------- |
+| tId                | string                  | ✔️       | -       | -                                                                          |
+| vId                | string                  | ✔️       | -       | -                                                                          |
+| toolData           | `Record<string, any>`   | ✔️       | -       | 工具的详情信息                                                             |
+| mode               | "preview" &#124; "edit" | -        | "edit"  | -                                                                          |
+| value              | `Record<string, any>`   | -        | -       | 表单的初始值                                                               |
+| defaultInputsValue | `Record<string, any>`   | -        | -       | 处理工具输入参数                                                           |
+| isEdit             | boolean                 | -        | false   | -                                                                          |
+| isSetValue         | boolean                 | -        | false   | -                                                                          |
+| hideExecuteUser    | boolean                 | -        | false   | -                                                                          |
+| isExecute          | boolean                 | -️       | false   | -                                                                          |
+| isNoAllowModify    | boolean                 | -️       | false   | 是否不允许表单修改（当为`true`,表单全部`disabled`,目前`执行用户`不受控制） |
+| layout             | FormLayout              | -️       | -       | -                                                                          |
+| wrapperCol         | object                  | -️       | -       | -                                                                          |
+| labelCol           | object                  | -️       | -       | -                                                                          |
 
 # EVENTS
 
