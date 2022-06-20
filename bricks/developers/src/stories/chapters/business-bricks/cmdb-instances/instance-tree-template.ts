@@ -7,20 +7,20 @@ export const story: Story = {
   author: "jo",
   text: {
     en: "Instance Tree Template",
-    zh: "资源实例树"
+    zh: "资源实例树",
   },
   description: {
-    en: "Instance Tree Of Draggable",
-    zh: "可拖动的资源实例树"
+    en: "Deprecated",
+    zh: "已废弃",
   },
   icon: {
     lib: "fa",
-    icon: "stream"
+    icon: "stream",
   },
   conf: {
     brick: "basic-bricks.multiple-columns-card",
     properties: {
-      gridColumns: ["350px", 1]
+      gridColumns: ["350px", 1],
     },
     slots: {
       content: {
@@ -34,15 +34,15 @@ export const story: Story = {
               tabList: [
                 {
                   text: "实例拓扑",
-                  key: "0"
+                  key: "0",
                 },
                 {
                   text: "其他",
-                  key: "1"
-                }
+                  key: "1",
+                },
               ],
               slotType: "bricks",
-              activeTabIndex: 0
+              activeTabIndex: 0,
             },
             slots: {
               content: {
@@ -54,20 +54,20 @@ export const story: Story = {
                       initObjectIds: ["APP", "HOST"],
                       events: {
                         "instance-tree.drag-start": {
-                          action: "console.log"
+                          action: "console.log",
                         },
                         "instance-tree.drag-end": {
-                          action: "console.log"
-                        }
-                      }
-                    }
+                          action: "console.log",
+                        },
+                      },
+                    },
                   },
                   {
-                    brick: "div"
-                  }
-                ]
-              }
-            }
+                    brick: "div",
+                  },
+                ],
+              },
+            },
           },
           {
             brick: "div",
@@ -75,13 +75,13 @@ export const story: Story = {
               textContent: "相关信息",
               style: {
                 "line-height": "200px",
-                "text-align": "center"
-              }
-            }
-          }
-        ]
-      }
-    }
+                "text-align": "center",
+              },
+            },
+          },
+        ],
+      },
+    },
   },
-  doc: docMD
+  doc: docMD,
 };

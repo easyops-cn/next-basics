@@ -8,15 +8,15 @@ export const story: Story = {
   author: "jo",
   text: {
     en: "Dynamic Tool execution Form Template",
-    zh: "动态参数的工具执行"
+    zh: "动态参数的工具执行",
   },
   description: {
-    en: "Dynamic Tool Execution Template",
-    zh: "基于模板搭建的动态参数工具执行场景"
+    en: "Deprecated",
+    zh: "已废弃，请使用 `tools.enhanced-tools-input-form`",
   },
   icon: {
     lib: "fa",
-    icon: "running"
+    icon: "running",
   },
   conf: {
     brick: "div",
@@ -26,15 +26,15 @@ export const story: Story = {
         bricks: [
           {
             brick: "presentational-bricks.brick-utils",
-            bg: true
+            bg: true,
           },
           {
             brick: "providers-of-tool.basic-api-get-tool",
             injectDeep: true,
             bg: true,
             properties: {
-              args: [TOOL_ID2]
-            }
+              args: [TOOL_ID2],
+            },
           },
           {
             template: "tools.tool-execution-form",
@@ -42,9 +42,9 @@ export const story: Story = {
               useResolves: [
                 {
                   name: "toolData",
-                  provider: "providers-of-tool\\.basic-api-get-tool"
-                }
-              ]
+                  provider: "providers-of-tool\\.basic-api-get-tool",
+                },
+              ],
             },
             params: {
               events: {
@@ -52,18 +52,18 @@ export const story: Story = {
                   {
                     target: "presentational-bricks\\.brick-utils",
                     method: "message",
-                    args: ["success", "工具执行中"]
+                    args: ["success", "工具执行中"],
                   },
                   {
-                    action: "history.replace"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      }
-    }
+                    action: "history.replace",
+                  },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   },
-  doc: docMD
+  doc: docMD,
 };
