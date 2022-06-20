@@ -23,6 +23,8 @@ export function MicroApp({
   dashboardMode,
 }: MicroAppProps): React.ReactElement {
   const { dashboard_mode_logo_url } = getRuntime().getBrandSettings();
+  const featureFlags = getRuntime().getFeatureFlags();
+  const { subMenu } = getRuntime().getNavConfig();
 
   const scale = (dashboardMode && pageTitleScale) || 1;
   const pageTitleStyle: React.CSSProperties =
@@ -49,7 +51,12 @@ export function MicroApp({
         </div>
         <slot id="bannerSlot" name="banner" />
       </div>
-      <div className="micro-app-container">
+      <div
+        className={classNames("micro-app-container", {
+          "micro-view-container":
+            !!subMenu && !!featureFlags["support-ui-8.0-base-layout"],
+        })}
+      >
         <div className="header-container">
           <div className="page-title" style={pageTitleStyle}>
             {pageTitle ? (

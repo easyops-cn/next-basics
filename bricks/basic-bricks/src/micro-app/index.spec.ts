@@ -4,8 +4,53 @@ import { MicroViewElement } from "./";
 import * as brickKit from "@next-core/brick-kit";
 
 const brandFn = jest.fn().mockReturnValue({});
+const featureFlagsFn = jest.fn().mockReturnValue({
+  "support-ui-8.0-base-layout": true,
+});
+
+const getNavConfigFn = jest.fn().mockReturnValue({
+  subMenu: {
+    defaultCollapsed: undefined,
+    defaultCollapsedBreakpoint: 0,
+    icon: { category: "monitor", icon: "alert-rule", lib: "easyops" },
+    link: "/events/alert-rule-1",
+    menuItems: [
+      {
+        items: [
+          {
+            activeExcludes: [],
+            activeIncludes: [],
+            activeMatchSearch: false,
+            children: [],
+            creator: "easyops",
+            ctime: "2022-06-16 14:22:46",
+            defaultExpanded: false,
+            deleteAuthorizers: [],
+            exact: false,
+            icon: {
+              category: "app",
+              icon: "monitor-auto-recovery",
+              lib: "easyops",
+            },
+            instanceId: "12323",
+            org: 8888,
+            readAuthorizers: [],
+            sort: 0,
+            text: "test",
+            to: "/auto-recovery",
+            type: "default",
+          },
+        ],
+        title: "事件处理",
+        type: "group",
+      },
+    ],
+  },
+} as any);
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: brandFn,
+  getFeatureFlags: featureFlagsFn,
+  getNavConfig: getNavConfigFn,
 } as any);
 
 const spyOnRender = jest.spyOn(ReactDOM, "render");
