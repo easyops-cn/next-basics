@@ -6,6 +6,7 @@ import { story as flowExecutionFormTemplate } from "./flow-execution-form-templa
 import { story as jobExecutionFormTemplate } from "./job-execution-form-template";
 import { story as toolOutputTemplate } from "./tool-output";
 import { story as baseManualExecution } from "./base-manual-execution";
+import { story as enhancedToolsInputForm } from "./enhanced-tools-input-form";
 
 export const chapter: Chapter = {
   category: "tool-and-flow",
@@ -21,5 +22,6 @@ export const chapter: Chapter = {
     jobExecutionFormTemplate,
     toolOutputTemplate,
     baseManualExecution,
+    enhancedToolsInputForm,
   ],
 };
