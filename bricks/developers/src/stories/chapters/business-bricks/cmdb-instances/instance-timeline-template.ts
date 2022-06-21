@@ -8,15 +8,15 @@ export const story: Story = {
   author: "lynette",
   text: {
     en: "instance timeline template",
-    zh: "时间线事件列表模版"
+    zh: "时间线事件列表模版",
   },
   description: {
-    en: "cmdb instance change history timeline template",
-    zh: "cmdb 实例变更历史时间线模版，包括了详情模态框"
+    en: "Deprecated",
+    zh: "已废弃，请使用`cmdb-instance-widgets.tpl-cmdb-instance-timeline`",
   },
   icon: {
     lib: "fa",
-    icon: "stream"
+    icon: "stream",
   },
   conf: {
     template: "cmdb-instances.instance-timeline",
@@ -25,9 +25,9 @@ export const story: Story = {
       objectId: "HOST",
       showFilter: true,
       detailUrlTemplates: {
-        default: "/cmdb-instances/#{objectId}/instance/#{instanceId}"
-      }
-    }
+        default: "/cmdb-instances/#{objectId}/instance/#{instanceId}",
+      },
+    },
   },
-  doc: docMD
+  doc: docMD,
 };
