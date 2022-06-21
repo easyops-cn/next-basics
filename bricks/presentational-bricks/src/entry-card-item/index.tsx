@@ -139,6 +139,24 @@ export class EntryCardItemElement extends UpdatingElement {
   })
   cardStyle: React.CSSProperties;
 
+  /**
+   * @required false
+   * @default false
+   * @description 是否禁用
+   */
+  @property({
+    attribute: false,
+  })
+  disabled = false;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 鼠标悬浮的提示
+   */
+  @property() tip: string;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -179,6 +197,8 @@ export class EntryCardItemElement extends UpdatingElement {
             description={this.description}
             cardStyle={this.cardStyle}
             hoverHighLight={this.hoverHighLight}
+            disabled={this.disabled}
+            tip={this.tip}
           />
         </BrickWrapper>,
         this

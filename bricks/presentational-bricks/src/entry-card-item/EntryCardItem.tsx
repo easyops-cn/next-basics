@@ -1,7 +1,7 @@
 import React from "react";
 import { MenuIcon } from "@next-core/brick-types";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
-import { Card, Avatar } from "antd";
+import { Card, Avatar, Tooltip } from "antd";
 import classNames from "classnames";
 import styles from "./EntryCardItem.module.css";
 
@@ -26,6 +26,8 @@ interface EntryCardItemProps {
   description?: string;
   cardStyle?: React.CSSProperties;
   hoverHighLight?: boolean;
+  disabled?: boolean;
+  tip?: string;
 }
 
 export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
@@ -74,14 +76,19 @@ export function EntryCardItem(props: EntryCardItemProps): React.ReactElement {
   ) : (
     contentNode
   );
+  const tipNode = props.tip ? (
+    <Tooltip title={props.tip}>{cardNode}</Tooltip>
+  ) : (
+    cardNode
+  );
 
   const link = props.target ? (
     <Link target={props.target} href={props.url}>
-      {cardNode}
+      {tipNode}
     </Link>
   ) : (
-    <Link to={props.url}>{cardNode}</Link>
+    <Link to={props.url}>{tipNode}</Link>
   );
 
-  return <>{props.url ? link : cardNode}</>;
+  return <>{props.url && !props.disabled ? link : tipNode}</>;
 }
