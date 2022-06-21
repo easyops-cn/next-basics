@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.180.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.180.0...@next-bricks/basic-bricks@1.180.1) (2022-06-21)
+
+
+### Bug Fixes
+
+* 修复ui8.0下没有submenu下间距的问题 ([0ee369b](https://github.com/easyops-cn/next-basics/commit/0ee369b1458750564aada202a28b6e4629042c90))
+
+
+
+
+
 # [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.179.9...@next-bricks/basic-bricks@1.180.0) (2022-06-20)
 
 
