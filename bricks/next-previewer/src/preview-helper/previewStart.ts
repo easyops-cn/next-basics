@@ -3,10 +3,12 @@ import type { PluginLocation } from "@next-core/brick-types";
 import { matchPath } from "@next-core/brick-utils";
 import type {
   BrickOutline,
+  Position,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerCaptureFailed,
   PreviewMessagePreviewerCaptureOk,
   PreviewMessagePreviewerHighlightBrick,
+  PreviewMessagePreviewerHoverOnMain,
   PreviewMessagePreviewerRouteMatchChange,
   PreviewMessagePreviewerScroll,
   PreviewMessagePreviewerUrlChange,
@@ -17,6 +19,8 @@ import type {
 import { throttle } from "lodash";
 import { capture } from "./capture";
 import {
+  previewProxyOrigin,
+  getPossibleBrickIidList,
   setPreviewFromOrigin,
   startInspecting,
   stopInspecting,
@@ -52,6 +56,39 @@ export function previewStart(
   let hoverAlias: string;
   let activeIid: string;
   let activeAlias: string;
+
+  const handleHoverOnIframe = (pos: Position): void => {
+    const element = document.elementFromPoint(pos.x, pos.y);
+    if (element?.tagName === "BODY") {
+      window.parent.postMessage(
+        {
+          sender: "previewer",
+          type: "hover-on-main",
+          isDirection: true,
+          position: {
+            x: pos.x,
+            y: pos.y,
+          },
+        } as PreviewMessagePreviewerHoverOnMain,
+        previewProxyOrigin
+      );
+    } else {
+      const iidList = getPossibleBrickIidList(element as HTMLElement);
+      window.parent.postMessage(
+        {
+          sender: "previewer",
+          type: "hover-on-brick",
+          iidList,
+          isDirection: true,
+          position: {
+            x: pos.x,
+            y: pos.y,
+          },
+        },
+        previewProxyOrigin
+      );
+    }
+  };
 
   const sendHighlightBrickOutlines = (
     type: "hover" | "active",
@@ -114,6 +151,9 @@ export function previewStart(
             activeIid = data.iid;
             activeAlias = data.alias;
             sendHighlightBrickOutlines("active", data.iid, data.alias);
+            break;
+          case "hover-on-iframe":
+            handleHoverOnIframe(data.position);
             break;
         }
       } else

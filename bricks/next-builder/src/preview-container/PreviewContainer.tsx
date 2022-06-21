@@ -53,7 +53,7 @@ export interface PreviewContainerProps {
   onScaleChange?(scale: number): void;
   onRouteMatch?(match: boolean): void;
   onCaptureStatusChange?(status: CaptureStatus): void;
-  onScreenshotCapture?(screenshot: string): void;
+  onScreenshotCapture?(screenshot: Blob): void;
   onPreviewerDrop?(params: Record<string, any>): void;
   onPreviewerResize?(resize: PreviewerResize): void;
 }
@@ -135,6 +135,7 @@ export function LegacyPreviewContainer(
   const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
   const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
   const [dragDirection, setDragDirection] = useState<Direction>();
+  const [isShowMask, setIsShowMask] = useState<boolean>(false);
   const refScroll = useRef(scroll);
   const loadedRef = useRef(false);
   const refHoverIid = useRef<string>();
@@ -200,75 +201,113 @@ export function LegacyPreviewContainer(
     }
   };
 
-  const handleDragEnd = (): void => {
-    refDragDirection.current = null;
-    setDragDirection(null);
+  const isDragOverTheMask = (e: DragEvent): boolean => {
+    if (!iframeRef.current) return false;
+    const { left, top, right, bottom } =
+      iframeRef.current.getBoundingClientRect();
+    const { clientX, clientY } = e;
+    return (
+      clientX >= left && clientX <= right && clientY >= top && clientY <= bottom
+    );
+  };
+
+  const handleDragStart = (): void => {
+    setIsShowMask(true);
+  };
+
+  const handleDragOver = (e: DragEvent): void => {
+    e.preventDefault();
+    if (isDragOverTheMask(e)) {
+      const { left, top } = iframeRef.current.getBoundingClientRect();
+      iframeRef.current.contentWindow.postMessage({
+        sender: "preview-container",
+        position: {
+          x: e.clientX - left,
+          y: e.clientY - top,
+        },
+        forwardedFor: "builder",
+        type: "hover-on-iframe",
+      });
+    }
   };
 
   const handleOnDrop = useCallback(
-    (nodeData): void => {
-      const direction = refDragDirection.current;
-      const dragStatus =
-        direction === "inside"
-          ? "inside"
-          : ["top", "left"].includes(direction)
-          ? "top"
-          : ["right", "bottom"].includes(direction)
-          ? "bottom"
-          : "";
-      const { nodes, edges, rootId } = manager.getData();
-      const hoverInstanceId = refHoverIid.current;
-      if (hoverInstanceId === "#main-mount-point") {
-        const parentNodes = nodes.find((item) => item.$$uid === rootId);
-        onPreviewerDrop({
-          nodeData,
-          mountPoint: "bricks",
-          dragStatus,
-          parentNodes: [parentNodes],
-          parentNode: parentNodes,
-          dragOverInstanceId: parentNodes.instanceId,
-        });
-      } else {
-        const hoverNode = nodes.find(
-          (item) => item.instanceId === hoverInstanceId
-        );
-        const hoverEdge = edges.find((item) => item.child === hoverNode.$$uid);
-        const getAllParentEdges = (
-          edge: BuilderRuntimeEdge,
-          list: number[] = []
-        ): number[] => {
-          list.push(edge.parent);
-          const nodeEdge = edges.find((item) => item.child === edge.parent);
-          if (nodeEdge) {
-            list = list.concat(getAllParentEdges(nodeEdge));
-          }
-          return list;
-        };
-        const getAllParentNodes = (
-          edges: number[]
-        ): BuilderRuntimeNode<Record<string, unknown>>[] => {
-          return nodes.filter((item) => {
-            return edges.includes(item.$$uid);
-          });
-        };
-        const parentList = dragStatus === "inside" ? [hoverEdge.child] : [];
-        const parentEdges = getAllParentEdges(hoverEdge, parentList);
-        const parentNodes = getAllParentNodes(parentEdges);
-        onPreviewerDrop({
-          nodeData,
-          mountPoint:
-            dragStatus === "inside" ? "content" : hoverEdge.mountPoint,
-          dragStatus,
-          parentNodes,
-          parentNode: parentNodes[parentNodes.length - 1],
-          dragOverInstanceId: hoverInstanceId,
-        });
-      }
+    (e: DragEvent): void => {
+      e.preventDefault();
+      // dragstart should setData: nodeData and it's work
+      const nodeData = e.dataTransfer.getData("nodeData");
+      if (isDragOverTheMask(e) && nodeData) {
+        const transformNodeData = JSON.parse(nodeData);
+        const direction = refDragDirection.current;
+        const dragStatus =
+          direction === "inside"
+            ? "inside"
+            : ["top", "left"].includes(direction)
+            ? "top"
+            : ["right", "bottom"].includes(direction)
+            ? "bottom"
+            : "";
+        const { nodes, edges, rootId } = manager.getData();
+        const hoverInstanceId = refHoverIid.current;
 
-      handleDragEnd();
+        if (hoverInstanceId === "#main-mount-point") {
+          const parentNodes = nodes.find((item) => item.$$uid === rootId);
+          onPreviewerDrop({
+            nodeData: transformNodeData,
+            mountPoint: "bricks",
+            dragStatus,
+            parentNodes: [parentNodes],
+            parentNode: parentNodes,
+            dragOverInstanceId: parentNodes.instanceId,
+          });
+        } else {
+          const hoverNode = nodes.find(
+            (item) => item.instanceId === hoverInstanceId
+          );
+          const hoverEdge = edges.find(
+            (item) => item.child === hoverNode.$$uid
+          );
+          const getAllParentEdges = (
+            edge: BuilderRuntimeEdge,
+            list: number[] = []
+          ): number[] => {
+            list.push(edge.parent);
+            const nodeEdge = edges.find((item) => item.child === edge.parent);
+            if (nodeEdge) {
+              list = list.concat(getAllParentEdges(nodeEdge));
+            }
+            return list;
+          };
+          const getAllParentNodes = (
+            edges: number[]
+          ): BuilderRuntimeNode<Record<string, unknown>>[] => {
+            return nodes.filter((item) => {
+              return edges.includes(item.$$uid);
+            });
+          };
+          const parentList = dragStatus === "inside" ? [hoverEdge.child] : [];
+          const parentEdges = getAllParentEdges(hoverEdge, parentList);
+          const parentNodes = getAllParentNodes(parentEdges);
+          onPreviewerDrop({
+            nodeData: transformNodeData,
+            mountPoint:
+              dragStatus === "inside" ? "content" : hoverEdge.mountPoint,
+            dragStatus,
+            parentNodes,
+            parentNode: parentNodes[parentNodes.length - 1],
+            dragOverInstanceId: hoverInstanceId,
+          });
+        }
+      }
     },
     [manager, onPreviewerDrop]
   );
+
+  const handleDragEnd = (): void => {
+    refDragDirection.current = null;
+    setDragDirection(null);
+    setIsShowMask(false);
+  };
 
   const handleIframeLoad = useCallback(() => {
     loadedRef.current = true;
@@ -411,9 +450,15 @@ export function LegacyPreviewContainer(
   }));
 
   useEffect(() => {
-    document.addEventListener("dragend", handleDragEnd);
+    window.addEventListener("dragstart", handleDragStart);
+    window.addEventListener("dragover", handleDragOver);
+    window.addEventListener("drop", handleOnDrop);
+    window.addEventListener("dragend", handleDragEnd);
     return () => {
-      document.removeEventListener("dragend", handleDragEnd);
+      window.removeEventListener("dragstart", handleDragStart);
+      window.removeEventListener("dragover", handleDragOver);
+      window.removeEventListener("drop", handleOnDrop);
+      window.removeEventListener("dragend", handleDragEnd);
     };
   }, []);
 
@@ -462,9 +507,6 @@ export function LegacyPreviewContainer(
             if (data.isDirection) {
               setDirection(data.position);
             }
-            break;
-          case "previewer-drop":
-            handleOnDrop(data.nodeData);
             break;
           case "scroll":
             setScroll(data.scroll);
@@ -535,7 +577,6 @@ export function LegacyPreviewContainer(
     scaleX,
     inspecting,
     onScreenshotCapture,
-    handleOnDrop,
   ]);
 
   useEffect(() => {
@@ -631,6 +672,13 @@ export function LegacyPreviewContainer(
             width: viewportWidth || `${100 / minScale}%`,
             height: viewportHeight || `${100 / minScale}%`,
             transform: `scale(${minScale})`,
+            pointerEvents: isShowMask ? "none" : "initial",
+          }}
+        />
+        <div
+          className={styles.mask}
+          style={{
+            display: isShowMask ? "block" : "none",
           }}
         />
       </div>

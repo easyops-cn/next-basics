@@ -41,20 +41,21 @@ export function sendHighlightBrick(
     const highlightNode = manager
       .getData()
       .nodes.find((node) => node.$$uid === highlightNodeUid);
-    if (
-      highlightNode &&
-      (highlightNode.type === "brick" ||
-        highlightNode.type === "custom-template")
-    ) {
-      iid = highlightNode.instanceId;
-      alias = highlightNode.alias;
-    } else if (highlightNode.type === "bricks") {
-      // root
-      window.postMessage({
-        sender: "builder",
-        type: "hover-on-main",
-      } as PreviewMessageBuilderHoverOnMain);
-      return;
+    if (highlightNode) {
+      if (
+        highlightNode.type === "brick" ||
+        highlightNode.type === "custom-template"
+      ) {
+        iid = highlightNode.instanceId;
+        alias = highlightNode.alias;
+      } else if (highlightNode.type === "bricks") {
+        // root
+        window.postMessage({
+          sender: "builder",
+          type: "hover-on-main",
+        } as PreviewMessageBuilderHoverOnMain);
+        return;
+      }
     }
   }
   window.postMessage({
