@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.248.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.247.6...@next-bricks/presentational-bricks@1.248.0) (2022-06-21)
+
+
+### Features
+
+* **presentational-bricks:** table add invaidRow style ([6be266b](https://github.com/easyops-cn/next-basics/commit/6be266bccdb44b7d3c5ae519894c4e7835e3cf20))
+
+
+
+
+
 ## [1.247.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.247.5...@next-bricks/presentational-bricks@1.247.6) (2022-06-17)
 
 
