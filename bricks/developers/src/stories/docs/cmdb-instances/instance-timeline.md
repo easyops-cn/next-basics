@@ -2,11 +2,12 @@
 
 # INPUTS
 
-| property   | type    | required | default | description    |
-| ---------- | ------- | -------- | ------- | -------------- |
-| objectId   | string  | true     | -       | 模型 ID        |
-| instanceId | string  | true     | -       | 实例 ID        |
-| showFilter | boolean | false    | false   | 是否显示过滤器 |
+| property     | type    | required | default | description    |
+| ------------ | ------- | -------- | ------- | -------------- |
+| objectId     | string  | true     | -       | 模型 ID        |
+| instanceId   | string  | true     | -       | 实例 ID        |
+| showFilter   | boolean | false    | false   | 是否显示过滤器 |
+| showRollback | boolean | false    | false   | 是否显示回滚   |
 
 # EVENTS
 

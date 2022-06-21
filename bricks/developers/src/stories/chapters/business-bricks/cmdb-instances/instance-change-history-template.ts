@@ -7,15 +7,15 @@ export const story: Story = {
   author: "lynette",
   text: {
     en: "instance change history template",
-    zh: "实例变更详情模版"
+    zh: "实例变更详情模版",
   },
   description: {
-    en: "cmdb instance change history template",
-    zh: "cmdb 实例变更详情模版"
+    en: "Deprecated",
+    zh: "已废弃，请使用`cmdb-instance-widgets.tpl-instance-change-history`",
   },
   icon: {
     lib: "fa",
-    icon: "stream"
+    icon: "stream",
   },
   conf: {
     template: "cmdb-instances.instance-change-history",
@@ -24,9 +24,9 @@ export const story: Story = {
       event: "event.instance_relation.create",
       showCard: true,
       detailUrlTemplates: {
-        default: "/cmdb-instances/#{objectId}/instance/#{instanceId}"
-      }
-    }
+        default: "/cmdb-instances/#{objectId}/instance/#{instanceId}",
+      },
+    },
   },
-  doc: docMD
+  doc: docMD,
 };
