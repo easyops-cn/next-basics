@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import classNames from "classnames";
 import { PageTitle } from "../page-title/PageTitle";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { BtnExitDashboardMode } from "./BtnExitDashboardMode";
 import { getRuntime } from "@next-core/brick-kit";
+import { BrickConf, RouteConfOfBricks } from "@next-core/brick-types";
 
 interface MicroAppProps {
   pageTitle?: string;
@@ -22,10 +23,24 @@ export function MicroApp({
   noGap,
   dashboardMode,
 }: MicroAppProps): React.ReactElement {
-  const { dashboard_mode_logo_url } = getRuntime().getBrandSettings();
-  const featureFlags = getRuntime().getFeatureFlags();
-  const { subMenu } = getRuntime().getNavConfig();
+  const { getBrandSettings, getFeatureFlags, getNavConfig, getCurrentRoute } =
+    getRuntime();
+  const { dashboard_mode_logo_url } = getBrandSettings();
+  const featureFlag = !!getFeatureFlags()["support-ui-8.0-base-layout"];
+  const { subMenu } = getNavConfig();
+  const { bricks } = getCurrentRoute() as RouteConfOfBricks;
 
+  // 用于控制ui6.0和ui8.0样式
+  const isShowBreadcrumb = useMemo(() => {
+    if (!subMenu) {
+      return (
+        bricks.some((v: BrickConf) =>
+          ["base-layout.tpl-base-page-module"].includes(v.brick)
+        ) && featureFlag
+      );
+    }
+    return featureFlag;
+  }, [featureFlag, subMenu, bricks]);
   const scale = (dashboardMode && pageTitleScale) || 1;
   const pageTitleStyle: React.CSSProperties =
     scale === 1
@@ -53,8 +68,7 @@ export function MicroApp({
       </div>
       <div
         className={classNames("micro-app-container", {
-          "micro-view-container":
-            !!subMenu && !!featureFlags["support-ui-8.0-base-layout"],
+          "micro-view-container": isShowBreadcrumb,
         })}
       >
         <div className="header-container">

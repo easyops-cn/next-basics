@@ -11,6 +11,13 @@ const brandFn = jest.fn().mockReturnValue({});
 const featureFlagsFn = jest.fn().mockReturnValue({
   "support-ui-8.0-base-layout": true,
 });
+const getCurrentRouteFn = jest.fn().mockReturnValue({
+  bricks: [
+    {
+      brick: "base-layout.tpl-base-page-module",
+    },
+  ],
+});
 const getNavConfigFn = jest.fn().mockReturnValue({
   subMenu: {
     defaultCollapsed: undefined,
@@ -50,6 +57,7 @@ const getNavConfigFn = jest.fn().mockReturnValue({
   getBrandSettings: brandFn,
   getFeatureFlags: featureFlagsFn,
   getNavConfig: getNavConfigFn,
+  getCurrentRoute: getCurrentRouteFn,
 });
 
 describe("MicroApp", () => {
@@ -67,6 +75,12 @@ describe("MicroApp", () => {
   it("should work with page title", () => {
     const wrapper = shallow(<MicroApp pageTitle="Hello" />);
     expect(wrapper.find("#titleBarSlot").length).toBe(0);
+    expect(wrapper.find("PageTitle").prop("pageTitle")).toBe("Hello");
+  });
+
+  it("should work with banner page title", () => {
+    const wrapper = shallow(<MicroApp bannerPageTitle="Hello" />);
+    expect(wrapper.find("#bannerTitleBarSlot").length).toBe(0);
     expect(wrapper.find("PageTitle").prop("pageTitle")).toBe("Hello");
   });
 
@@ -120,6 +134,30 @@ describe("MicroApp", () => {
       getBrandSettings: brandFn,
       getFeatureFlags: featureFlagsFn,
       getNavConfig: getNavConfigFn,
+      getCurrentRoute: getCurrentRouteFn,
+    });
+    const wrapper = shallow(<MicroApp pageTitle="Hello" />);
+    expect(wrapper.find(".page-title").prop("style")).toBe(null);
+    expect(wrapper.find(PageTitle).prop("pageTitleScale")).toBe(1);
+    expect(wrapper.find(".micro-view-container").length).toBe(1);
+  });
+
+  it("should work with ui8.0 and subMenu is null by base-layout.tpl-homepage-base-module", () => {
+    const getNavConfigFn = jest.fn().mockReturnValue({
+      subMenu: null,
+    } as any);
+    const getCurrentRouteFn = jest.fn().mockReturnValue({
+      bricks: [
+        {
+          brick: "base-layout.tpl-homepage-base-module",
+        },
+      ],
+    });
+    (getRuntime as jest.Mock).mockReturnValue({
+      getBrandSettings: brandFn,
+      getFeatureFlags: featureFlagsFn,
+      getNavConfig: getNavConfigFn,
+      getCurrentRoute: getCurrentRouteFn,
     });
     const wrapper = shallow(<MicroApp pageTitle="Hello" />);
     expect(wrapper.find(".page-title").prop("style")).toBe(null);

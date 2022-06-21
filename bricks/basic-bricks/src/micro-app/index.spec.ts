@@ -7,7 +7,9 @@ const brandFn = jest.fn().mockReturnValue({});
 const featureFlagsFn = jest.fn().mockReturnValue({
   "support-ui-8.0-base-layout": true,
 });
-
+const getCurrentRouteFn = jest.fn().mockReturnValue({
+  bricks: [{ brick: "base-layout.tpl-base-page-module" }],
+});
 const getNavConfigFn = jest.fn().mockReturnValue({
   subMenu: {
     defaultCollapsed: undefined,
@@ -51,6 +53,7 @@ jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: brandFn,
   getFeatureFlags: featureFlagsFn,
   getNavConfig: getNavConfigFn,
+  getCurrentRoute: getCurrentRouteFn,
 } as any);
 
 const spyOnRender = jest.spyOn(ReactDOM, "render");
