@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.249.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.248.0...@next-bricks/presentational-bricks@1.249.0) (2022-06-21)
+
+
+### Features
+
+* presentational-bricks.entry-card-item支持disabled和tooltip属性 refs TOOL-1132 ([1912015](https://github.com/easyops-cn/next-basics/commit/1912015b216dc9a85abd35835f08eb4a5b399899))
+
+
+
+
+
 # [1.248.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.247.6...@next-bricks/presentational-bricks@1.248.0) (2022-06-21)
 
 
