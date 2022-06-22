@@ -134,7 +134,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
             }
             color={
               showFirstUsedTooltip
-                ? "linear-gradient(270deg, #8B6AF3 0%, #0042FF 100%)"
+                ? "linear-gradient(45deg, #1A7AFF 0%, #6BB3FF 100%)"
                 : "rgba(0, 0, 0, 0.65)"
             }
           >

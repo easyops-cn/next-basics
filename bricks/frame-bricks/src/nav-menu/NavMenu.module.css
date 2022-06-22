@@ -3,13 +3,6 @@
   line-height: 32px;
   background: none !important;
 
-  :global(.ant-menu-submenu-open),
-  :global(.ant-menu-submenu-active) {
-    :global(.ant-menu-submenu-arrow) {
-      transform: translateY(-4px);
-    }
-  }
-
   :global(.ant-menu-submenu-horizontal) {
     color: var(--color-normal-text);
     margin: 0 4px !important;
@@ -20,27 +13,8 @@
 
     /* subMenu-title 普通样式 */
     :global(.ant-menu-submenu-title) {
-      :global(.ant-menu-submenu-arrow) {
-        color: var(--color-normal-text);
-        display: block;
-        right: 4px;
-        top: 18px;
-        &::before {
-          transform: rotate(-45deg) translateX(2.5px);
-        }
-        &::after {
-          transform: rotate(45deg) translateX(-2.5px);
-        }
-        &::before,
-        &::after {
-          transition: background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
-            transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
-            top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
-            color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-      }
       > span {
-        padding: 4px 20px 4px 8px;
+        padding: 4px 8px 4px 8px;
         border-radius: 4px;
       }
     }
@@ -63,44 +37,35 @@
     &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       color: inherit;
       background-color: inherit;
-      :global(.ant-menu-submenu-arrow) {
-        &::before {
-          transform: rotate(45deg) translateX(2.5px);
-        }
-        &::after {
-          transform: rotate(-45deg) translateX(-2.5px);
-        }
-      }
       > span {
         background-color: var(--v8-top-menu-item-hover);
-        color: var(--color-normal-text);
       }
     }
   }
   /* menu-item 样式 */
   > :global(.ant-menu-item) {
-    color: var(--color-normal-text);
     border-bottom: none !important;
     margin: 0 4px !important;
     top: 0;
     > a {
       padding: 4px 8px;
       border-radius: 4px;
+    }
+  }
+  :global(.ant-menu-submenu-title) {
+    > span {
       color: var(--color-normal-text);
     }
   }
-  :global(.ant-menu-submenu-selected) {
-    :global(.ant-menu-submenu-title) {
-      > span {
-        background-color: var(--v8-top-menu-item-selected-bg);
-        color: var(--color-strong-text);
-      }
+  :global(.ant-menu-item) {
+    > a {
+      color: var(--color-normal-text);
     }
   }
   :global(:not(.ant-menu-item-selected):hover) {
     a {
       background-color: var(--v8-top-menu-item-hover);
-      color: var(--color-normal-text);
+      color: var(--color-strong-text);
     }
     border-bottom: none !important;
   }
@@ -147,28 +112,18 @@
       border-radius: var(--card-default-border-radius);
     }
 
-    :global(.ant-menu-submenu-arrow) {
-      right: 8px;
-    }
-
     &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       color: inherit;
       background-color: var(--v8-top-menu-item-hover);
       > span {
         color: var(--color-normal-text);
       }
-      :global(.ant-menu-submenu-arrow) {
-        color: var(--color-normal-text);
-      }
     }
 
     &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
       color: inherit;
-      background-color: var(--v8-top-menu-item-selected-bg) !important;
+      /* background-color: var(--v8-top-menu-item-selected-bg) !important; */
       > span {
-        color: var(--color-strong-text) !important;
-      }
-      :global(.ant-menu-submenu-arrow) {
         color: var(--color-strong-text) !important;
       }
     }
