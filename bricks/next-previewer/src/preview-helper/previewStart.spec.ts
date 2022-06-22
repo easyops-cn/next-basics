@@ -340,29 +340,5 @@ describe("previewStart", () => {
       },
       "http://localhost:8081"
     );
-
-    // Hover on main.
-    listener({
-      origin: "http://localhost:8081",
-      data: {
-        sender: "preview-container",
-        type: "hover-on-main",
-        forwardedFor: "builder",
-        iid: null,
-      },
-    } as any);
-    expect(parentPostMessage).toBeCalledTimes(11);
-    expect(parentPostMessage).toHaveBeenNthCalledWith(
-      11,
-      {
-        sender: "previewer",
-        type: "highlight-brick",
-        alias: "root",
-        highlightType: "hover",
-        iid: "#main-mount-point",
-        outlines: [],
-      },
-      "http://localhost:8081"
-    );
   });
 });

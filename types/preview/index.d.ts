@@ -4,10 +4,21 @@ export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
 }
 
+export interface Position {
+  x: number;
+  y: number;
+}
 export interface PreviewBaseMessage {
   sender: "builder" | "preview-container" | "previewer";
   type: string;
   forwardedFor?: "builder" | "previewer";
+}
+
+export interface PreviewMessageBuilderHoverOnIframe
+  extends PreviewBaseMessage,
+    HighlightBaseInfo {
+  sender: "builder";
+  type: "hover-on-iframe";
 }
 
 export interface PreviewMessageBuilderHoverOnMain
@@ -46,7 +57,6 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
-  | PreviewMessagePreviewerDrop
   | PreviewMessagePreviewerHighlightBrick
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
@@ -57,6 +67,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerCaptureFailed;
 
 export type PreviewMessageToPreviewer =
+  | PreviewMessageContainerBuilderHoverOnIframe
   | PreviewMessageContainerBuilderHoverOnMain
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerBuilderSelectBrick
@@ -66,6 +77,7 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerCapture;
 
 export type PreviewMessageFromContainer =
+  | PreviewMessageContainerBuilderHoverOnIframe
   | PreviewMessageContainerBuilderHoverOnMain
   | PreviewMessageContainerBuilderHoverOnBrick
   | PreviewMessageContainerPreviewerHoverOnBrick
@@ -77,6 +89,7 @@ export type PreviewMessageFromContainer =
   | PreviewMessageContainerCapture;
 
 export type PreviewMessageToContainer =
+  | PreviewMessageBuilderHoverOnIframe
   | PreviewMessageBuilderHoverOnBrick
   | PreviewMessageBuilderSelectBrick
   | PreviewMessageBuilderDrop
@@ -106,17 +119,11 @@ export interface PreviewMessagePreviewerPreviewStarted
   type: "preview-started";
 }
 
-export interface PreviewMessagePreviewerDrop extends PreviewBaseMessage {
-  sender: "previewer";
-  type: "previewer-drop";
-  nodeData: Record<string, any>;
-}
-
 export interface PreviewMessagePreviewerHoverOnMain extends PreviewBaseMessage {
   sender: "previewer";
   type: "hover-on-main";
   isDirection?: boolean;
-  position?: { x: number; y: number };
+  position?: Position;
 }
 export interface PreviewMessagePreviewerHoverOnBrick
   extends PreviewBaseMessage {
@@ -124,7 +131,7 @@ export interface PreviewMessagePreviewerHoverOnBrick
   type: "hover-on-brick";
   iidList: string[];
   isDirection?: boolean;
-  position?: { x: number; y: number };
+  position?: Position;
 }
 
 export interface PreviewMessagePreviewerSelectBrick extends PreviewBaseMessage {
@@ -132,7 +139,7 @@ export interface PreviewMessagePreviewerSelectBrick extends PreviewBaseMessage {
   type: "select-brick";
   iidList: string[];
   isDirection: boolean;
-  position: { x: number; y: number };
+  position: Position;
 }
 
 export interface PreviewMessagePreviewerHighlightBrick
@@ -226,6 +233,13 @@ export interface PreviewMessageContainerCapture extends PreviewBaseMessage {
   type: "capture";
   maxWidth: number;
   maxHeight: number;
+}
+
+export interface PreviewMessageContainerBuilderHoverOnIframe
+  extends Omit<PreviewMessageBuilderHoverOnIframe, "sender"> {
+  sender: "preview-container";
+  forwardedFor: "builder";
+  position: Position;
 }
 
 export interface PreviewMessageContainerBuilderHoverOnMain

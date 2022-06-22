@@ -104,9 +104,9 @@ export class PreviewContainerElement extends UpdatingElement {
   };
 
   @event({ type: "screenshot.capture" })
-  private _screenshotCaptureEvent: EventEmitter<string>;
+  private _screenshotCaptureEvent: EventEmitter<Blob>;
 
-  private _handleScreenshotCapture = (screenshot: string): void => {
+  private _handleScreenshotCapture = (screenshot: Blob): void => {
     this._screenshotCaptureEvent.emit(screenshot);
   };
 
