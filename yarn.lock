@@ -2593,6 +2593,13 @@
   dependencies:
     "@next-core/brick-types" "^2.16.0"
 
+"@next-libs/basic-components@^3.5.1":
+  version "3.5.1"
+  resolved "https://registry.npmjs.org/@next-libs/basic-components/-/basic-components-3.5.1.tgz#457e7e648ed1e9d017b667b665b62b60059e6b3e"
+  integrity sha512-g/2GRxtYavJQDdcQ7cyvvSa+j4mdBTHMAY6VCo9LyVzGHWe7Dnjj1/1dtMoT7dCtHEAcKO/Ntzl/1L1qAuWzmA==
+  dependencies:
+    "@next-core/brick-types" "^2.16.0"
+
 "@next-libs/clipboard@^3.0.2":
   version "3.0.2"
   resolved "https://registry.npmjs.org/@next-libs/clipboard/-/clipboard-3.0.2.tgz#0062beedab56666f22a2f7a6f811635179730e64"

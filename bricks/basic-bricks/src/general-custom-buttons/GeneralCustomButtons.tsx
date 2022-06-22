@@ -189,19 +189,20 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                 {text}
               </span>
             );
-            const textNode =
-              buttonUrl || buttonHref ? (
-                <Link
-                  href={buttonHref}
-                  to={buttonUrl}
-                  target={urlTarget}
-                  disabled={disabled}
-                >
-                  {wrapIcon}
-                </Link>
-              ) : (
-                wrapIcon
-              );
+            const textNode = (
+              <>
+                {wrapIcon}
+                {(buttonUrl || buttonHref) && (
+                  <Link
+                    href={buttonHref}
+                    to={buttonUrl}
+                    target={urlTarget}
+                    disabled={disabled}
+                    className={style.dropdownBtnLink}
+                  ></Link>
+                )}
+              </>
+            );
             const tooltipNode = (
               <Tooltip
                 title={disabled ? disabledTooltip : tooltip}
@@ -218,10 +219,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
             );
             return (
               <Menu.Item
-                className={classNames({
-                  [style.disabledMenuItem]: disabled,
-                  [style.dropdownMenuItem]: !disabled,
-                })}
+                className={style.dropdownMenuItem}
                 key={eventName}
                 style={{ color: disabled ? "" : color }}
                 disabled={disabled}
