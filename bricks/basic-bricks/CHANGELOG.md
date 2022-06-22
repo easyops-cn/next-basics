@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.180.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.180.1...@next-bricks/basic-bricks@1.180.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* **general-custom-buttons:** fix clickable area of link in dropdown ([44b402d](https://github.com/easyops-cn/next-basics/commit/44b402d751e2d305604451014d33105470eb0e7b))
+
+
+
+
+
 ## [1.180.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.180.0...@next-bricks/basic-bricks@1.180.1) (2022-06-21)
 
 
