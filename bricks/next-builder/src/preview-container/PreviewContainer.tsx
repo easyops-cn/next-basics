@@ -219,15 +219,18 @@ export function LegacyPreviewContainer(
     e.preventDefault();
     if (isDragOverTheMask(e)) {
       const { left, top } = iframeRef.current.getBoundingClientRect();
-      iframeRef.current.contentWindow.postMessage({
-        sender: "preview-container",
-        position: {
-          x: e.clientX - left,
-          y: e.clientY - top,
+      iframeRef.current.contentWindow.postMessage(
+        {
+          sender: "preview-container",
+          position: {
+            x: e.clientX - left,
+            y: e.clientY - top,
+          },
+          forwardedFor: "builder",
+          type: "hover-on-iframe",
         },
-        forwardedFor: "builder",
-        type: "hover-on-iframe",
-      });
+        previewOrigin
+      );
     }
   };
 
