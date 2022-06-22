@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.6.1...@next-bricks/next-previewer@1.7.0) (2022-06-22)
+
+
+### Features
+
+* support Iframe Drag Of Different Origin ([f07a105](https://github.com/easyops-cn/next-basics/commit/f07a105b979753ee679f2ea655e389e4891d1f28))
+
+
+
+
+
 ## [1.6.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.6.0...@next-bricks/next-previewer@1.6.1) (2022-06-17)
 
 

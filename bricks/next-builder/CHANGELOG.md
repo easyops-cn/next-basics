@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.161.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.160.2...@next-bricks/next-builder@1.161.0) (2022-06-22)
+
+
+### Features
+
+* post message  add origin ([1654904](https://github.com/easyops-cn/next-basics/commit/1654904ff37e334d16d02b70c83fe2195837ffb0))
+* support Iframe Drag Of Different Origin ([f07a105](https://github.com/easyops-cn/next-basics/commit/f07a105b979753ee679f2ea655e389e4891d1f28))
+
+
+
+
+
 ## [1.160.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.160.1...@next-bricks/next-builder@1.160.2) (2022-06-17)
 
 
