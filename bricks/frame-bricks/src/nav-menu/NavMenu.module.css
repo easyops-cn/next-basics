@@ -39,34 +39,33 @@
       background-color: inherit;
       > span {
         background-color: var(--v8-top-menu-item-hover);
-        color: var(--color-normal-text);
       }
     }
   }
   /* menu-item 样式 */
   > :global(.ant-menu-item) {
-    color: var(--color-normal-text);
     border-bottom: none !important;
     margin: 0 4px !important;
     top: 0;
     > a {
       padding: 4px 8px;
       border-radius: 4px;
+    }
+  }
+  :global(.ant-menu-submenu-title) {
+    > span {
       color: var(--color-normal-text);
     }
   }
-  :global(.ant-menu-submenu-selected) {
-    :global(.ant-menu-submenu-title) {
-      > span {
-        /* background-color: var(--v8-top-menu-item-selected-bg); */
-        color: var(--color-strong-text);
-      }
+  :global(.ant-menu-item) {
+    > a {
+      color: var(--color-normal-text);
     }
   }
   :global(:not(.ant-menu-item-selected):hover) {
     a {
       background-color: var(--v8-top-menu-item-hover);
-      color: var(--color-normal-text);
+      color: var(--color-strong-text);
     }
     border-bottom: none !important;
   }
