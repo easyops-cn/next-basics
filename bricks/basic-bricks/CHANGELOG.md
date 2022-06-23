@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.180.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.180.5...@next-bricks/basic-bricks@1.180.6) (2022-06-23)
+
+
+### Bug Fixes
+
+* micro-app兼容ui8.0样式 ([71fcda2](https://github.com/easyops-cn/next-basics/commit/71fcda253c39ce5d553a04be072d3caca5891362))
+
+
+
+
+
 ## [1.180.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.180.4...@next-bricks/basic-bricks@1.180.5) (2022-06-23)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
