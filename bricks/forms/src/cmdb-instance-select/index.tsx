@@ -21,12 +21,12 @@ import { FormItemElement } from "@next-libs/forms";
  * @author jo
  * @slots
  * @history
- * 1.44.0:新增属性 `allowClear`
- * 1.49.0:新增属性 `inputBoxStyle`
- * 1.77.0:新增属性 `extraSearchKey`
  * 1.79.0:新增事件 `forms.cmdb-instance-select.change.v2`
- * 1.117.1:新增数据类型 `fields.label`可以为数组
+ * 1.77.0:新增属性 `extraSearchKey`
+ * 1.49.0:新增属性 `inputBoxStyle`
+ * 1.44.0:新增属性 `allowClear`
  * 1.190.0:新增属性 `permission`
+ * 1.117.1:新增数据类型 `fields.label`可以为数组
  * @memo
  * ### 注意
  * 该构件是下拉框对 cmdb 列表的一个简单封装，只适用于于简单的数据选择和搜索，如果涉及到复杂的数据选择，可能需要有高级的过滤（比如主机数据，需要按 IP，按主机名，按状态等过滤），则建议用：[CMDB 实例输入表单项 ](developers/brick-book/brick/cmdb-instances.cmdb-instances-input-form)
@@ -235,7 +235,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   /**
    * @kind boolean
    * @required false
-   * @default `false`
+   * @default false
    * @description 是否禁用
    * @group advanced
    */
