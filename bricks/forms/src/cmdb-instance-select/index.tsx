@@ -37,6 +37,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required true
    * @default -
    * @description 下拉框字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
@@ -45,6 +46,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 下拉框字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
@@ -53,6 +55,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required true
    * @default -
    * @description 模型 id
+   * @group basicFormItem
    */
   @property()
   objectId: string;
@@ -62,6 +65,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 下拉框初始值
+   * @group basicFormItem
    */
   @property({ attribute: false }) value: string;
 
@@ -70,6 +74,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -78,6 +83,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
@@ -86,6 +92,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 下拉框占位说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -94,6 +101,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 多选模式，不是多选不需要填写
+   * @group basicFormItem
    */
   @property()
   mode: string;
@@ -103,6 +111,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default false
    * @description 支持清除选项
+   * @group basicFormItem
    */
   @property({
     type: Boolean,
@@ -114,6 +123,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框样式
+   * @group ui
    */
   @property({
     attribute: false,
@@ -125,7 +135,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default {label: name , value: instanceId}
    * @description 自定义 select 下拉选项的 label 和 value 字段， 默认 label 显示为模型的 name 值，value 为 instanceId
-   * @group advanced
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -137,7 +147,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 下拉框选项的过滤条件， 参数同 InstanceApi.postSearch 中的 query， 其中内置了关键字搜索的过滤条件，再根据用户输入合并 query 最终格式为 `$and: [internalQuery， userQuery]`
-   * @group advanced
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -151,7 +161,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default 0
    * @description 输入多少个字符才触发搜索动作， 默认 0 表示在点击下拉框时触发一次，后面每次输入都会进行搜索操作。
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
@@ -163,7 +173,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 配置额外的字段进行搜索，默认的是 label，若配置为 ["memo"]，则会基于 memo 和 label 两个字段进行联合搜索
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
@@ -175,7 +185,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 配置接口需要返回的额外字段
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
@@ -187,7 +197,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default 30
    * @description 配置搜索接口的pageSize，也是下拉框显示的条目数，默认30条
-   * @group advanced
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -199,7 +209,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required -
    * @default default
    * @description 下拉选项的渲染方式，`default` 为默认(表示渲染在 body 当中)，`parent` 表示渲染在该元素的父节点上，当发现下拉菜单跟随页面滚动，需要设置该属性为 `parent`
-   * @group advanced
+   * @group ui
    */
   @property()
   popoverPositionType: CmdbInstanceSelectProps["popoverPositionType"];
@@ -209,7 +219,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 控制下拉框中的label显示一个或者多个，当定义`labelTemplate`时，不起作用
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({ attribute: false })
   isMultiLabel = true;
@@ -218,7 +228,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @param showSearchTip
    * @default false
    * @description 下拉列表的最后一行是否显示提示：仅显示前**项，更多结果请搜索
-   * @group advanced
+   * @group ui
    */
   @property({ type: Boolean })
   showSearchTip: boolean;
@@ -228,7 +238,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default
    * @description 可自定义`label` 显示的模板
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({ attribute: false })
   labelTemplate: string;
@@ -237,7 +247,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default false
    * @description 是否禁用
-   * @group advanced
+   * @group basicFormItem
    */
   @property({ type: Boolean })
   disabled: boolean;
@@ -246,7 +256,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @kind Array<"read" | "update" | "operate">
    * @default
    * @description 按照权限过滤实例
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({ attribute: false })
   permission?: Array<"read" | "update" | "operate">;
@@ -255,7 +265,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @kind boolean
    * @default
    * @description 是否忽略不存在字段
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({ attribute: false })
   ignoreMissingFieldError?: boolean;
@@ -264,7 +274,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @default boolean
    * @required
    * @description 实例通过showKey自定义展示
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({ attribute: false })
   showKeyField?: boolean;
@@ -273,6 +283,7 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @default false
    * @required false
    * @description 下拉框中是否启用tooltip显示label全称,label过长时可使用
+   * @group basicFormItem
    */
   @property({ type: Boolean })
   showTooltip?: boolean;
