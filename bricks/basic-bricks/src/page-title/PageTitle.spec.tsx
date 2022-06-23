@@ -1,9 +1,24 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
-import { useApplyPageTitle } from "@next-core/brick-kit";
+import { useApplyPageTitle, getRuntime } from "@next-core/brick-kit";
 import { PageTitle } from "./PageTitle";
 
 jest.mock("@next-core/brick-kit");
+
+const featureFlagsFn = jest.fn().mockReturnValue({
+  "support-ui-8.0-base-layout": true,
+});
+const currentRouteFn = jest.fn().mockReturnValue({
+  bricks: [
+    {
+      brick: "base-layout.tpl-base-page-module",
+    },
+  ],
+});
+(getRuntime as jest.Mock).mockReturnValue({
+  getFeatureFlags: featureFlagsFn,
+  getCurrentRoute: currentRouteFn,
+});
 
 describe("PageTitle", () => {
   afterEach(() => {
@@ -18,6 +33,70 @@ describe("PageTitle", () => {
       pageTitle: "world",
     });
     expect(useApplyPageTitle).toBeCalledWith("world");
+    expect(wrapper.find(".page-title-content").prop("style").fontSize).toBe(
+      "var(--title-font-size-larger)"
+    );
+    expect(wrapper.find(".page-title-content").prop("style").fontWeight).toBe(
+      "normal"
+    );
+  });
+
+  it("should update page title with ui6.0", () => {
+    const wrapper = mount(<PageTitle pageTitle="hello" />);
+    expect(useApplyPageTitle).toBeCalledWith("hello");
+    const featureFlagsFn = jest.fn().mockReturnValue({
+      "support-ui-8.0-base-layout": false,
+    });
+    const currentRouteFn = jest.fn().mockReturnValue({
+      bricks: [
+        {
+          brick: "basic-bricks.micro-view",
+        },
+      ],
+    });
+    (getRuntime as jest.Mock).mockReturnValue({
+      getFeatureFlags: featureFlagsFn,
+      getCurrentRoute: currentRouteFn,
+    });
+    wrapper.setProps({
+      pageTitle: "world",
+    });
+    expect(useApplyPageTitle).toBeCalledWith("world");
+    expect(wrapper.find(".page-title-content").prop("style").fontSize).toBe(
+      "var(--page-title-font-size)"
+    );
+    expect(wrapper.find(".page-title-content").prop("style").fontWeight).toBe(
+      "var(--page-title-font-weight)"
+    );
+  });
+
+  it("should update page title with ui6.0", () => {
+    const wrapper = mount(<PageTitle pageTitle="hello" />);
+    expect(useApplyPageTitle).toBeCalledWith("hello");
+    const featureFlagsFn = jest.fn().mockReturnValue({
+      "support-ui-8.0-base-layout": false,
+    });
+    const currentRouteFn = jest.fn().mockReturnValue({
+      bricks: [
+        {
+          brick: "basic-bricks.micro-view",
+        },
+      ],
+    });
+    (getRuntime as jest.Mock).mockReturnValue({
+      getFeatureFlags: featureFlagsFn,
+      getCurrentRoute: currentRouteFn,
+    });
+    wrapper.setProps({
+      pageTitle: "world",
+    });
+    expect(useApplyPageTitle).toBeCalledWith("world");
+    expect(wrapper.find(".page-title-content").prop("style").fontSize).toBe(
+      "var(--page-title-font-size)"
+    );
+    expect(wrapper.find(".page-title-content").prop("style").fontWeight).toBe(
+      "var(--page-title-font-weight)"
+    );
   });
 
   it("should toggle dashboard mode", () => {

@@ -8,8 +8,21 @@ import { PageTitle } from "../page-title/PageTitle";
 
 jest.mock("@next-core/brick-kit");
 const brandFn = jest.fn().mockReturnValue({});
+
+const featureFlagsFn = jest.fn().mockReturnValue({
+  "support-ui-8.0-base-layout": true,
+});
+const currentRouteFn = jest.fn().mockReturnValue({
+  bricks: [
+    {
+      brick: "base-layout.tpl-base-page-module",
+    },
+  ],
+});
 (getRuntime as jest.Mock).mockReturnValue({
   getBrandSettings: brandFn,
+  getFeatureFlags: featureFlagsFn,
+  getCurrentRoute: currentRouteFn,
 });
 
 describe("MicroApp", () => {
@@ -68,5 +81,35 @@ describe("MicroApp", () => {
     });
     expect(wrapper.find(".page-title").prop("style")).toEqual({ height: 152 });
     expect(wrapper.find(PageTitle).prop("pageTitleScale")).toBe(2);
+  });
+
+  it("should work with ui8.0", () => {
+    const wrapper = shallow(<MicroApp pageTitle="Hello" />);
+    expect(wrapper.find(".page-title").prop("style")).toBe(null);
+    expect(wrapper.find(PageTitle).prop("pageTitleScale")).toBe(1);
+    expect(wrapper.find(".micro-view-container")).not.toBeNull();
+    expect(wrapper.find(".micro-view-container").length).toBe(1);
+  });
+
+  it("should work with ui6.0", () => {
+    const featureFlagsFn = jest.fn().mockReturnValue({
+      "support-ui-8.0-base-layout": false,
+    });
+    const currentRouteFn = jest.fn().mockReturnValue({
+      bricks: [
+        {
+          brick: "basic-bricks.micro-view",
+        },
+      ],
+    });
+    (getRuntime as jest.Mock).mockReturnValue({
+      getBrandSettings: brandFn,
+      getFeatureFlags: featureFlagsFn,
+      getCurrentRoute: currentRouteFn,
+    });
+    const wrapper = shallow(<MicroApp pageTitle="Hello" />);
+    expect(wrapper.find(".page-title").prop("style")).toBe(null);
+    expect(wrapper.find(PageTitle).prop("pageTitleScale")).toBe(1);
+    expect(wrapper.find(".micro-view-container").length).toBe(0);
   });
 });

@@ -4,9 +4,23 @@ import { MicroViewElement } from "./";
 import * as brickKit from "@next-core/brick-kit";
 
 const brandFn = jest.fn().mockReturnValue({});
+const featureFlagsFn = jest.fn().mockReturnValue({
+  "support-ui-8.0-base-layout": true,
+});
+const currentRouteFn = jest.fn().mockReturnValue({
+  bricks: [
+    {
+      brick: "base-layout.tpl-base-page-module",
+    },
+  ],
+});
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: brandFn,
+  getFeatureFlags: featureFlagsFn,
+  getCurrentRoute: currentRouteFn,
 } as any);
+
+jest.spyOn(brickKit, "useApplyPageTitle").mockReturnValue("hello" as any);
 
 const spyOnRender = jest.spyOn(ReactDOM, "render");
 const unmountComponentAtNode = jest.spyOn(ReactDOM, "unmountComponentAtNode");
@@ -16,7 +30,6 @@ describe("micro-app", () => {
     const element = document.createElement(
       "basic-bricks.micro-app"
     ) as MicroViewElement;
-
     // Always waiting for async `(dis)connectedCallback`
     await (global as any).flushPromises();
     expect(spyOnRender).not.toBeCalled();
@@ -68,6 +81,21 @@ describe("micro-app", () => {
 
     document.body.removeChild(element);
     await (global as any).flushPromises();
+    expect(unmountComponentAtNode).toBeCalled();
+  });
+
+  it("should work with pageTitle", async () => {
+    const element = document.createElement(
+      "basic-bricks.micro-app"
+    ) as MicroViewElement;
+    element.pageTitle = "hello";
+    // Always waiting for async `(dis)connectedCallback`
+    await (global as any).flushPromises();
+    document.body.appendChild(element);
+    await (global as any).flushPromises();
+    expect(spyOnRender).toBeCalled();
+    document.body.removeChild(element);
+    await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();
   });
 });
