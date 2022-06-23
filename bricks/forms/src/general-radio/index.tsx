@@ -14,7 +14,7 @@ import {
 import { GeneralRadio } from "./GeneralRadio";
 import { RadioGroupButtonStyle } from "antd/lib/radio";
 import { UiType } from "../interfaces";
-import { MenuIcon, UseBrickConf } from "@next-core/brick-types";
+import { UseBrickConf } from "@next-core/brick-types";
 
 export type RadioType =
   | "button"
@@ -23,14 +23,6 @@ export type RadioType =
   | "icon-circle"
   | "icon-square"
   | "custom";
-
-export interface LabeledValue {
-  label: string;
-  icon?: MenuIcon; // 仅在`buttonStyle` 为 `solid` 时有效，此时 `label` 会无效。
-  value: string | number;
-  disabled: boolean;
-  tooltip?: string;
-}
 
 /**
  * @id forms.general-radio
@@ -45,6 +37,15 @@ export interface LabeledValue {
  * 1.0.0: 新增构件 `forms.general-radio`
  * @memo
  * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
+ * ```typescript
+ *interface LabeledValue {
+ *  label: string;
+ *  icon?: MenuIcon; // 仅在`buttonStyle` 为 `solid` 时有效，此时 `label` 会无效。
+ *  value: string | number;
+ *  disabled: boolean;
+ *  tooltip?: string
+ *}
+ *```
  */
 export class GeneralRadioElement extends FormItemElement {
   /**
