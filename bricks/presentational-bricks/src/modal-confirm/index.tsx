@@ -20,10 +20,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @description 用于提示和二次确认的场景
  * @groupI18N
  * {
- *    "basic": {"en": "Basic", "zh": "常用"},
  *    "buttonAndInteract": {"en": "Button/Interact", "zh": "按钮及交互"},
- *    "ui": {"en": "UI", "zh": "外观"},
- *    "other": {"en": "其他", "zh": "other"}
  * }
  * @editor shared-editors.general-confirm--editor
  * @author jo

@@ -35,12 +35,6 @@ export interface ComplexOption<T = string | number> {
  * 1.72.0:新增属性 `groupBy`
  * 1.77.0:新增属性 `tokenSeparators`
  * 1.200.0:新增属性 `emptyProps`
- * @groupI18N
- * {
- *   "basicFormItem": {"zh": "表单项常用", "en": "Basic Form Item"},
- *   "advancedFormItem": {"zh": "表单项常用", "en": "advanced Form Item"},
- *   "ui": {"zh": "外观", "en": "UI"}
- * }
  * @memo
  * ```typescript
  * interface LabeledValue {

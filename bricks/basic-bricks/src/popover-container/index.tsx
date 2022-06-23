@@ -22,17 +22,6 @@ import { ActionType } from "rc-trigger/lib/interface";
  * @history
  * 1.39.0:新增属性 `triggerByIcon`,`showIcon`
  * 1.33.0:新增构件 `basic-bricks.popover-container`
- * @groupI18N
- * {
- *   "basic": {
- *     "en": "Basic",
- *     "zh": "常用"
- *   },
- *   "ui": {
- *     "en": "UI",
- *     "zh": "外观"
- *   }
- * }
  * @memo
  * ### CustomBrick
 

@@ -14,17 +14,6 @@ import { ListContainer } from "./ListContainer";
  * @history
  * 1.41.0:支持 `containerStyle` 配置
  * 1.20.0:新增构件
- * @groupI18N
- * {
- *   "basic": {
- *     "en": "Basic",
- *     "zh": "常用"
- *   },
- *   "ui": {
- *     "en": "UI",
- *     "zh": "外观"
- *   }
- * }
  * @memo
  * @noInheritDoc
  */
