@@ -26,6 +26,10 @@ export interface TooltipConfig {
    * 箭头是否指向目标元素中心
    */
   arrowPointAtCenter?: boolean;
+  /**
+   * 卡片样式
+   */
+  overlayStyle?: React.CSSProperties;
 }
 
 /**

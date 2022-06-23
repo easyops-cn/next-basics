@@ -35,7 +35,7 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
   } = props;
   let element: React.ReactElement;
   const customElementRef = useRef<HTMLDivElement>();
-  const { placement, arrowPointAtCenter } = tooltipConfig || {};
+  const { placement, arrowPointAtCenter, overlayStyle } = tooltipConfig || {};
 
   useEffect(() => {
     if (displayBrick?.useBrick) {
@@ -126,6 +126,7 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     },
     placement,
     arrowPointAtCenter,
+    overlayStyle,
     title,
     content: tipsElem,
   };
@@ -135,6 +136,7 @@ export function GeneralTooltip(props: GeneralTooltipProps): React.ReactElement {
     },
     placement,
     arrowPointAtCenter,
+    overlayStyle,
     title: tipsElem,
   };
 
