@@ -21,6 +21,29 @@ interface ComponentSelectProps {
   storyList: Story[];
 }
 
+export function setDragImage(
+  e: DragEvent | React.DragEvent,
+  title: string
+): void {
+  const canvas = document.createElement("canvas");
+  document.body.append(canvas);
+  const context = canvas.getContext("2d");
+  canvas.width = context.measureText(title).width + 60;
+  canvas.height = 20;
+  canvas.style.position = "absolute";
+  canvas.style.left = "-100%";
+  canvas.style.zIndex = "-100";
+
+  context.fillStyle = "#333333";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  context.fillStyle = "#999999";
+  context.font = "bold 14px Arial";
+  context.fillText(title, 20, 15);
+
+  e.dataTransfer.setDragImage(canvas, 0, 0);
+}
+
 function transformInfo(
   brick: BrickOptionItem,
   storyList: Story[]
@@ -281,24 +304,7 @@ function ComponentItem(
   componentData: Partial<BrickOptionItem>
 ): React.ReactElement {
   const handleDragStart = (e: React.DragEvent): void => {
-    const canvas = document.createElement("canvas");
-    document.body.append(canvas);
-    const context = canvas.getContext("2d");
-    const brick: string = componentData.title;
-    canvas.width = context.measureText(brick).width + 60;
-    canvas.height = 20;
-    canvas.style.position = "absolute";
-    canvas.style.left = "-100%";
-    canvas.style.zIndex = "-100";
-
-    context.fillStyle = "#333333";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    context.fillStyle = "#999999";
-    context.font = "bold 14px Arial";
-    context.fillText(brick, 20, 15);
-
-    e.dataTransfer.setDragImage(canvas, 0, 0);
+    setDragImage(e, componentData.title);
     const nodeData = {
       brick: componentData.id,
       bricks: componentData.bricks,
@@ -309,7 +315,14 @@ function ComponentItem(
 
   const getIcon = (data: Partial<BrickOptionItem>): React.ReactElement => {
     if (data.icon) {
-      return <GeneralIcon icon={data.icon} />;
+      return (
+        <GeneralIcon
+          icon={data.icon}
+          style={{
+            fontSize: 20,
+          }}
+        />
+      );
     }
     if (data.thumbnail) {
       return (

@@ -25,6 +25,7 @@ import {
   WorkbenchTreeDndContext,
   dragStatusEnum,
 } from "../shared/workbench/WorkbenchTreeDndContext";
+import { setDragImage } from "../workbench-component-select/WorkbenchComponentSelect";
 
 export interface WorkbenchBrickTreeProps {
   placeholder?: string;
@@ -310,7 +311,9 @@ export function WorkbenchBrickTree({
 
   const handleOnDragStart = (e: React.DragEvent<HTMLElement>): void => {
     setIsDrag(true);
-    setCurNode(e.target as HTMLElement);
+    const node = e.target as HTMLElement;
+    setDragImage(e, node.innerText);
+    setCurNode(node);
   };
 
   const handleOnDragOver = (e: React.DragEvent<HTMLElement>): void => {
@@ -324,10 +327,15 @@ export function WorkbenchBrickTree({
       setOverStatus(dom.status);
     }
   };
-  const handleOnDragEnd = (e: React.DragEvent<HTMLElement>): void => {
-    e.preventDefault();
-    e.stopPropagation();
+
+  const handleOnDragEnd = (): void => {
     setIsDrag(false);
+    setCurNode(null);
+    setOverNode(null);
+  };
+
+  const handleOnDrop = (e: React.DragEvent<HTMLElement>): void => {
+    e.preventDefault();
     let parentNode = overNode;
     if ([dragStatusEnum.top, dragStatusEnum.bottom].includes(overStatus)) {
       parentNode = findDragParent(parentNode, false);
@@ -343,10 +351,7 @@ export function WorkbenchBrickTree({
         dragStatus: overStatus,
       });
     }
-    setTimeout(() => {
-      setCurNode(null);
-      setOverNode(null);
-    });
+    handleOnDragEnd();
   };
 
   const activeKey = useMemo(() => {
@@ -358,6 +363,10 @@ export function WorkbenchBrickTree({
   useEffect(
     () => {
       manager.setActiveNodeUid(activeKey);
+      window.addEventListener("dragend", handleOnDragEnd);
+      return () => {
+        window.removeEventListener("dragend", handleOnDragEnd);
+      };
     },
     // One-time effect only.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -389,7 +398,7 @@ export function WorkbenchBrickTree({
           dragStatus: overStatus,
           onDragStart: handleOnDragStart,
           onDragOver: handleOnDragOver,
-          onDragEnd: handleOnDragEnd,
+          onDrop: handleOnDrop,
         }}
       >
         <WorkbenchTree

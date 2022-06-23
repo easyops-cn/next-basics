@@ -13,7 +13,7 @@ interface WorkbenchTreeDndContext {
   dragOverNode: HTMLElement;
   onDragStart: (e: React.DragEvent<HTMLElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLElement>) => void;
-  onDragEnd: (e: React.DragEvent<HTMLElement>) => void;
+  onDrop: (e: React.DragEvent<HTMLElement>) => void;
 }
 
 export const WorkbenchTreeDndContext = createContext<WorkbenchTreeDndContext>(
