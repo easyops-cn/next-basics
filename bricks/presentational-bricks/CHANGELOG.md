@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.250.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.249.2...@next-bricks/presentational-bricks@1.250.0) (2022-06-23)
+
+
+### Features
+
+* **general-tooltip:** tooltipConfig属性增加overlayStyle属性支持 ([61e4fe3](https://github.com/easyops-cn/next-basics/commit/61e4fe38c5c152824e7b31d47683ed85883c6d08))
+
+
+
+
+
 ## [1.249.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.249.1...@next-bricks/presentational-bricks@1.249.2) (2022-06-23)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
