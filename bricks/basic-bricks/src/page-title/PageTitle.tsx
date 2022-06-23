@@ -1,6 +1,6 @@
 import React from "react";
 import { useApplyPageTitle } from "@next-core/brick-kit";
-
+import { getNewUIStatus } from "../utils";
 interface PageTitleProps {
   pageTitle: string;
   pageTitleScale?: number;
@@ -13,7 +13,7 @@ export function PageTitle({
   dashboardMode,
 }: PageTitleProps): React.ReactElement {
   useApplyPageTitle(pageTitle);
-
+  const isShowNewUiMode = getNewUIStatus();
   const scale = (dashboardMode && pageTitleScale) || 1;
   const decoratorStyle =
     scale === 1
@@ -45,8 +45,12 @@ export function PageTitle({
                     }),
               }
             : {
-                fontSize: "var(--page-title-font-size)",
-                fontWeight: "var(--page-title-font-weight)",
+                fontSize: isShowNewUiMode
+                  ? "var(--title-font-size-larger)"
+                  : "var(--page-title-font-size)",
+                fontWeight: isShowNewUiMode
+                  ? "normal"
+                  : "var(--page-title-font-weight)",
                 lineHeight: "32px",
               }),
         }}

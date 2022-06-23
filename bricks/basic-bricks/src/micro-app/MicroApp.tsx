@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import classNames from "classnames";
 import { PageTitle } from "../page-title/PageTitle";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { BtnExitDashboardMode } from "./BtnExitDashboardMode";
 import { getRuntime } from "@next-core/brick-kit";
-
+import { getNewUIStatus } from "../utils";
 interface MicroAppProps {
   pageTitle?: string;
   pageTitleScale?: number;
@@ -23,7 +23,7 @@ export function MicroApp({
   dashboardMode,
 }: MicroAppProps): React.ReactElement {
   const { dashboard_mode_logo_url } = getRuntime().getBrandSettings();
-
+  const isShowNewUiMode = getNewUIStatus(true);
   const scale = (dashboardMode && pageTitleScale) || 1;
   const pageTitleStyle: React.CSSProperties =
     scale === 1
@@ -49,7 +49,11 @@ export function MicroApp({
         </div>
         <slot id="bannerSlot" name="banner" />
       </div>
-      <div className="micro-app-container">
+      <div
+        className={classNames("micro-app-container", {
+          "micro-view-container": isShowNewUiMode,
+        })}
+      >
         <div className="header-container">
           <div className="page-title" style={pageTitleStyle}>
             {pageTitle ? (
