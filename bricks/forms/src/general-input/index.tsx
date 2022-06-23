@@ -18,21 +18,6 @@ import { FormItemElement } from "@next-libs/forms";
  * @slots
  * @history
  * 1.61.0:新增属性 `addonBefore`,`addonAfter`
- * @groupI18N
- * {
- *  "basicFormItem": {
- *    "en": "Basic Form Item",
- *    "zh": "表单项常用"
- *   },
- *  "advancedFormItem": {
- *    "en": "Advanced Form Item",
- *    "zh": "表单项高级"
- *   },
- *   "ui": {
- *     "en": "UI",
- *     "zh": "外观"
- *   }
- * }
  * @memo
  *>Tips: 对于 event.detail 为 Keyboard Event 时， 由于 react 对于合成事件的处理，打印出来的整个 Keyboard Event 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可查看 [查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
  *### METHODS

@@ -26,10 +26,7 @@ export interface OpenCloseOption {
  * @description 提供插槽以展示其他构件，注意与表单通用模态框 (forms.general-modal) 的不同
  * @groupI18N
  * {
- *    "basic": {"en": "Basic", "zh": "常用"},
- *    "buttonAndInteract": {"en": "Button/Interact", "zh": "按钮及交互"},
- *    "ui": {"en": "UI", "zh": "外观"},
- *    "other": {"en": "其他", "zh": "other"}
+ *    "buttonAndInteract": {"en": "Button/Interact", "zh": "按钮及交互"}
  * }
  * @author ice
  * @slots

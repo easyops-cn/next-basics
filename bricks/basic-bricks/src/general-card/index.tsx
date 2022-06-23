@@ -20,11 +20,6 @@ import { isEmpty } from "lodash";
  * footer:底部插槽，当底部滚动到窗口外时，默认固定在窗口底部，适用场景参考 http://192.168.100.162/next/resource-events/alert-config/inhibition-rule/create，其他情况，请设置`isFixedFooter`为false；
  * @history
  * 1.42.0:新增属性 `fillVertical`
- * @groupI18N
- * {
- *  "basic": {"en": "Basic", "zh": "常用"},
- *  "ui": {"en": "UI", "zh": "外观"}
- * }
  * @noInheritDoc
  */
 export class GeneralCardElement extends UpdatingElement {

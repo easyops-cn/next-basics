@@ -12,17 +12,6 @@ import styles from "./EasyView.shadow.css";
  * @history
  * 1.127.0: 新增构件 `basic-bricks.easy-view`
  * @docKind brick
- * @groupI18N
- * {
- *   "basic": {
- *     "en": "Basic",
- *     "zh": "常用"
- *   },
- *   "ui": {
- *     "en": "UI",
- *     "zh": "外观"
- *   }
- * }
  * @noInheritDoc
  */
 export class EasyViewElement extends UpdatingElement {

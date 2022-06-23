@@ -135,12 +135,9 @@ export interface CellStatusProps {
  * @description 当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时
  * @groupI18N
  * {
- *    "basic": {"en": "Basic", "zh": "常用"},
  *    "paginationAndFilter": {"en": "Pagination/Order/Filter", "zh": "分页/排序及搜索"},
  *    "expand": {"en": "Expand/Collapse", "zh": "展开/折叠"},
- *    "ui": {"en": "UI", "zh": "外观"},
- *    "rowSelection": {"en": "RowSelection", "zh": "行选择配置(rowSelection)"},
- *    "other": {"en": "Other", "zh": "其他"}
+ *    "rowSelection": {"en": "RowSelection", "zh": "行选择配置(rowSelection)"}
  * }
  * @author lynette
  * @slots
