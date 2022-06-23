@@ -137,7 +137,7 @@ export interface CellStatusProps {
  * {
  *    "paginationAndFilter": {"en": "Pagination/Order/Filter", "zh": "分页/排序及搜索"},
  *    "expand": {"en": "Expand/Collapse", "zh": "展开/折叠"},
- *    "rowSelection": {"en": "RowSelection", "zh": "行选择配置(rowSelection)"},
+ *    "rowSelection": {"en": "RowSelection", "zh": "行选择配置(rowSelection)"}
  * }
  * @author lynette
  * @slots
