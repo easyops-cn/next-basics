@@ -30,7 +30,7 @@ export const GeneralRadioStory: Story = {
       events: {
         "general.radio.change": {
           action: "console.log",
-          args: ["city1", "${EVENT.detail}"],
+          args: ["city1", "<% EVENT.detail %>"],
         },
       },
     },
@@ -59,7 +59,7 @@ export const GeneralRadioStory: Story = {
       events: {
         "general.radio.change": {
           action: "console.log",
-          args: ["city2", "${EVENT.detail}"],
+          args: ["city2", "<% EVENT.detail %>"],
         },
       },
     },
@@ -71,7 +71,7 @@ export const GeneralRadioStory: Story = {
       events: {
         "general.radio.change": {
           action: "console.log",
-          args: ["city3", "${EVENT.detail}"],
+          args: ["city3", "<% EVENT.detail %>"],
         },
       },
       properties: {
@@ -138,7 +138,7 @@ export const GeneralRadioStory: Story = {
               events: {
                 "general.radio.change": {
                   action: "console.log",
-                  args: ["city3", "${EVENT.detail}"],
+                  args: ["city3", "<% EVENT.detail %>"],
                 },
               },
             },
@@ -166,7 +166,7 @@ export const GeneralRadioStory: Story = {
               events: {
                 "general.radio.change": {
                   action: "console.log",
-                  args: ["size", "${EVENT.detail}"],
+                  args: ["size", "<% EVENT.detail %>"],
                 },
               },
             },
@@ -214,7 +214,7 @@ export const GeneralRadioStory: Story = {
               events: {
                 "general.radio.change": {
                   action: "console.log",
-                  args: ["city3", "${EVENT.detail}"],
+                  args: ["city3", "<% EVENT.detail %>"],
                 },
               },
             },
@@ -230,7 +230,7 @@ export const GeneralRadioStory: Story = {
       events: {
         "general.radio.change": {
           action: "console.log",
-          args: ["${EVENT.detail}"],
+          args: ["<% EVENT.detail %>"],
         },
       },
       properties: {
@@ -365,7 +365,7 @@ export const GeneralRadioStory: Story = {
       events: {
         "general.radio.change": {
           action: "console.log",
-          args: ["${EVENT.detail}"],
+          args: ["<% EVENT.detail %>"],
         },
       },
       properties: {
@@ -409,7 +409,7 @@ export const GeneralRadioStory: Story = {
       events: {
         "general.radio.change": {
           action: "console.log",
-          args: ["${EVENT.detail}"],
+          args: ["<% EVENT.detail %>"],
         },
       },
       properties: {

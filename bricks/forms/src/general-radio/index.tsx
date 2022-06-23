@@ -32,9 +32,9 @@ export type RadioType =
  * @author jo
  * @slots
  * @history
- * 1.0.0: 新增构件 `forms.general-radio`
- * 1.1.0: 构件 type 属性，添加`icon`图标类型样式
  * 1.207.0: `type` 属性新增  `icon-circle` 类型样式
+ * 1.1.0: 构件 type 属性，添加`icon`图标类型样式
+ * 1.0.0: 新增构件 `forms.general-radio`
  * @memo
  * > Tips: 单选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
  * ```typescript
@@ -53,7 +53,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required true
    * @default -
    * @description 下拉框字段名
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
@@ -62,7 +62,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 单选框字段说明
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
@@ -71,7 +71,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required true
    * @default -
    * @description 单选框选项表
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -83,7 +83,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required true
    * @default -
    * @description 单选框当前选中始值
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false })
   value: any;
@@ -93,7 +93,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否必填项
-   * @group basic
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
@@ -102,16 +102,16 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 校验文本信息
-   * @group basic
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
    * @kind boolean
    * @required false
-   * @default  `false`
+   * @default  false
    * @description 是否禁用
-   * @group basic
+   * @group basicFormItem
    */
   @property({ type: Boolean })
   disabled: boolean;
@@ -119,9 +119,9 @@ export class GeneralRadioElement extends FormItemElement {
   /**
    * @kind RadioType
    * @required false
-   * @default `default`
+   * @default default
    * @description 	单选框样式类型
-   * @group advanced
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -133,7 +133,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 	大小，只对按钮样式生效
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -145,7 +145,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 	自定义radio的外层样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -155,9 +155,9 @@ export class GeneralRadioElement extends FormItemElement {
   /**
    * @kind RadioGroupButtonStyle
    * @required false
-   * @default `solid`
+   * @default solid
    * @description 	单选框样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -168,6 +168,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required -️
    * @default default
    * @description Ui样式，可选择 `dashboard` 样式，默认`default`
+   * @group ui
    */
   @property({
     attribute: false,
@@ -179,7 +180,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default
    * @description 自定义radio的内容
-   * @group basic
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
