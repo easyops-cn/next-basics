@@ -175,10 +175,16 @@ export function SearchTree(props: SearchTreeProps): React.ReactElement {
 
   const onSelect = (_selectedKeys: React.Key[], item: PlainObject): void => {
     titleClick?.({
-      info: item.node[NODE_INFO],
+      info: {
+        ...item.node[NODE_INFO],
+        isTpl: item.node.isTpl,
+      },
     });
     setSearchContentDetail({
-      info: item.node[NODE_INFO],
+      info: {
+        ...item.node[NODE_INFO],
+        isTpl: item.node.isTpl,
+      },
     });
   };
 
