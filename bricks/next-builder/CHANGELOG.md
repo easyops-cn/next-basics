@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.162.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.161.1...@next-bricks/next-builder@1.162.0) (2022-06-24)
+
+
+### Features
+
+* tree drop update ([c6f382c](https://github.com/easyops-cn/next-basics/commit/c6f382cc6aa91fa081230a099e5e9dadfa552b71))
+
+
+
+
+
 ## [1.161.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.161.0...@next-bricks/next-builder@1.161.1) (2022-06-23)
 
 
