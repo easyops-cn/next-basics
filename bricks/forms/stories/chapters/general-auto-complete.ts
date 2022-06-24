@@ -31,11 +31,11 @@ export const autoCompleteStory: Story = {
       events: {
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
         "validate.error": {
           action: "console.warn",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
       },
       slots: {
@@ -56,7 +56,7 @@ export const autoCompleteStory: Story = {
               events: {
                 "general.auto-complete.change": {
                   action: "console.log",
-                  args: ["auto-complete", "${EVENT.detail}"],
+                  args: ["auto-complete", "<% EVENT.detail %>"],
                 },
               },
             },
@@ -93,11 +93,11 @@ export const autoCompleteStory: Story = {
       events: {
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
         "validate.error": {
           action: "console.warn",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
         },
       },
       slots: {
@@ -119,7 +119,7 @@ export const autoCompleteStory: Story = {
               events: {
                 "general.auto-complete.change": {
                   action: "console.log",
-                  args: ["auto-complete", "${EVENT.detail}"],
+                  args: ["auto-complete", "<% EVENT.detail %>"],
                 },
               },
             },
