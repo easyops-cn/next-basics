@@ -72,6 +72,14 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default -
+   * @description 是否禁用
+   */
+  @property({ attribute: false }) declare disabled: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) declare required: boolean;
@@ -142,6 +150,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            disabled={this.disabled}
           />
         </BrickWrapper>,
         this

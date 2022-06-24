@@ -32,6 +32,7 @@ interface GeneralAutoCompleteProps extends FormItemWrapperProps {
   inputBoxStyle?: React.CSSProperties;
   onChange?: (value: SelectValue) => void;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export function GeneralAutoComplete(
@@ -69,6 +70,7 @@ export function GeneralAutoComplete(
         placeholder={props.placeholder}
         onChange={props.onChange}
         onSearch={onSearch}
+        disabled={props.disabled}
       />
     </FormItemWrapper>
   );
