@@ -194,6 +194,9 @@
   :global(.ant-menu-item-group-title) {
     margin: 10px 0 0 0 !important;
   }
+  .groupWrapper:first-of-type :global(.ant-menu-item-group-title) {
+    margin: 0px 0 0 0 !important;
+  }
 }
 
 .menuContainer:global(.ant-menu-inline-collapsed) {
