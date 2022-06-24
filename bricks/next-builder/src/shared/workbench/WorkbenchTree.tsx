@@ -49,6 +49,7 @@ export function WorkbenchTree({
   noSearch,
 }: WorkbenchTreeProps): ReactElement {
   const [q, setQ] = useState<string>(null);
+  const { onDragOver, onDrop } = useWorkbenchTreeDndContext();
 
   const handleSearchChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +90,9 @@ export function WorkbenchTree({
         </div>
       )}
       <SearchingContext.Provider value={!!q}>
-        <TreeList nodes={filteredNodes} level={1} />
+        <div onDragOver={onDragOver} onDrop={onDrop}>
+          <TreeList nodes={filteredNodes} level={1} />
+        </div>
       </SearchingContext.Provider>
     </div>
   ) : (
@@ -99,9 +102,8 @@ export function WorkbenchTree({
 
 function TreeList({ nodes, level }: TreeListProps): ReactElement {
   const lastIndex = nodes.length - 1;
-  const { onDragOver, onDragEnd } = useWorkbenchTreeDndContext();
   return (
-    <ul className={styles.tree} onDragOver={onDragOver} onDragEnd={onDragEnd}>
+    <ul className={styles.tree}>
       {nodes
         .filter((item) => looseCheckIfOfComputed(item))
         .map((node, index) => (
@@ -125,7 +127,7 @@ function PlaceholderDOM({
   const { dragStatus } = useWorkbenchTreeDndContext();
   const styles: React.CSSProperties = {
     height: 22,
-    border: "1px dashed rgb(80,80,80)",
+    border: "1px dashed goldenrod",
     opacity: dragStatus === dragStatusEnum.inside ? "0" : "1",
     ...style,
   };
@@ -162,7 +164,7 @@ function TreeNode({
     onNodeToggle,
     getCollapsedId,
   } = useWorkbenchTreeContext();
-  const { allow, onDragStart, dragOverNode, dragStatus } =
+  const { allow, onDragStart, dragNode, dragOverNode, dragStatus } =
     useWorkbenchTreeDndContext();
 
   const nodePaddingLeft = level * treeLevelPadding + basePaddingLeft - 2;
@@ -227,6 +229,14 @@ function TreeNode({
     }
   }, [dragStatus]);
 
+  const isDragNode = useMemo(() => {
+    if (dragNode) {
+      const dragUid = dragNode.dataset.uid;
+      return Number(dragUid) === nodeUid;
+    }
+    return false;
+  }, [dragNode, nodeUid]);
+
   const isDragActive = useMemo(() => {
     if (dragOverNode) {
       const dragUid = dragOverNode.dataset.uid;
@@ -235,19 +245,21 @@ function TreeNode({
     return false;
   }, [dragOverNode, nodeUid]);
 
-  const hoverStyle = useMemo((): React.CSSProperties => {
+  const nodeStyle = useMemo((): React.CSSProperties => {
     const commomStyle: React.CSSProperties = {};
-    let hoverStyle: React.CSSProperties;
+    let style: React.CSSProperties = {
+      opacity: isDragNode ? 0.2 : 1,
+    };
     if (isDragActive) {
       if (dragStatus === dragStatusEnum.inside) {
-        hoverStyle = {
+        style = {
           boxShadow: borderStyle,
           background: "rgba(255, 255, 255, 0.1)",
         };
       }
     }
-    return Object.assign(commomStyle, hoverStyle);
-  }, [isDragActive, dragStatus]);
+    return Object.assign(commomStyle, style);
+  }, [isDragActive, isDragNode, dragStatus]);
 
   const handleCollapse = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
@@ -287,7 +299,7 @@ function TreeNode({
         draggable={allow && typeof nodeUid === "number"}
         onDragStart={onDragStart}
         data-uid={nodeUid}
-        style={hoverStyle}
+        style={nodeStyle}
       >
         <Link
           className={classNames(styles.nodeLabelRow, {
