@@ -19,8 +19,7 @@
     top: 0;
     bottom: 0;
     z-index: -1;
-    background: var(--left-menu-bg);
-    backdrop-filter: blur(32px);
+    background: var(--color-fill-bg-container-1);
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
   }
@@ -117,18 +116,6 @@
   }
 }
 
-.sideBarContainer.expanded {
-  &::before {
-    background: var(--v8-left-menu-bg);
-    backdrop-filter: blur(32px);
-  }
-}
-
 .sideBarContainer.hovered {
   box-shadow: var(--left-sidebar-shadow);
-
-  &::before {
-    background: var(--v8-left-menu-hover-bg);
-    backdrop-filter: blur(32px);
-  }
 }
