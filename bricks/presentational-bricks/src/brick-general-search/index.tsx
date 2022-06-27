@@ -35,6 +35,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 提示语
+   * @group basic
    */
   @property()
   placeholder: string;
@@ -44,6 +45,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 是否更新 url 参数
+   * @group basic
    */
   @property({
     attribute: false,
@@ -55,6 +57,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 是否对输入框剔除前后空格
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -66,6 +69,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 输入的搜索关键字，常用于回填搜索框，如\${query.q}
+   * @group basic
    */
   @property({
     attribute: false,
@@ -77,6 +81,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 进行搜索的时候需重置的其他默认参数，如[{"field": "page", "value": 1}]即表示搜索的时候需要把页码重置成 1
+   * @group basic
    */
   @property({
     attribute: false,
@@ -88,6 +93,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default "q"
    * @description 当 `shouldUpdateUrlParams` 为真时，将以该值为 key 更新到 url 上
+   * @group basic
    */
   @property()
   qField: string;
@@ -97,6 +103,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否禁用自动聚焦
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -104,11 +111,45 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   disableAutofocus: boolean;
 
   /**
+   * @kind "all"|"ip"
+   * @required false
+   * @default 'all'
+   * @description 搜索类型
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  searchType: "all" | "ip" = "all";
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否支持ip搜索
+   * @group basic
+   */
+  @property({ type: Boolean })
+  searchTypeEnabled: boolean;
+
+  /**
+   * @kind number
+   * @required false
+   * @default 0
+   * @description 默认延迟时间
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  debounceTime = 0;
+
+  /**
    * @kind Size
    * @required false
    * @default default
    * @description 尺寸大小，可选`default、small、large、extraLarge`
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -120,7 +161,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default default
    * @description 形状，可选`default、round`
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -132,7 +173,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 输入框样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -144,7 +185,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -152,44 +193,11 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   buttonStyle: Record<string, any>;
 
   /**
-   * @kind string
-   * @required false
-   * @default query
-   * @deprecated
-   * @description [已废弃]filter.update 中 detail 的字段名
-   * @group advanced
-   */
-  @property({
-    attribute: false,
-  })
-  field = "query";
-
-  /**
-   * @kind number
-   * @required false
-   * @default 0
-   * @description 默认延迟时间
-   * @group advanced
-   */
-  @property({
-    attribute: false,
-  })
-  debounceTime = 0;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否支持ip搜索
-   */
-  @property({ type: Boolean })
-  searchTypeEnabled: boolean;
-
-  /**
    * @kind "defalut"|"radio"
    * @required "defalut"
    * @default true
    * @description 按类型搜索框样式
+   * @group ui
    */
   @property({
     attribute: false,
@@ -197,15 +205,16 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   searchBoxStyleType: "defalut" | "round" = "defalut";
 
   /**
-   * @kind "all"|"ip"
+   * @kind string
    * @required false
-   * @default 'all'
-   * @description 搜索类型
+   * @default query
+   * @deprecated
+   * @description [已废弃]filter.update 中 detail 的字段名
    */
   @property({
     attribute: false,
   })
-  searchType: "all" | "ip" = "all";
+  field = "query";
 
   /**
    * @detail Record<string,any>
