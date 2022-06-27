@@ -28,10 +28,6 @@
   padding: var(--page-padding);
 }
 
-:host .micro-view-container {
-  padding: var(--page-card-gap);
-}
-
 :host([has-title-bar]) .micro-app-container,
 :host([has-toolbar]) .micro-app-container {
   padding-top: var(--page-title-margin-top);
