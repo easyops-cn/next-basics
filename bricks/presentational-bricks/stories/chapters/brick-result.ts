@@ -151,7 +151,6 @@ export const BrickResultStory: Story = {
           category: "default",
           imageStyle: {
             width: "250px",
-            height: "250px",
           },
         },
       },
