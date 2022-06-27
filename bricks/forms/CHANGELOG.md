@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.9...@next-bricks/forms@1.227.10) (2022-06-27)
+
+
+### Bug Fixes
+
+* **forms.GeneralAutoComplete:** generalAutoComplete添加disabled属性 ([fd93aef](https://github.com/easyops-cn/next-basics/commit/fd93aef795c403831be7f681e8b30127b6468ee8))
+
+
+
+
+
 ## [1.227.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.8...@next-bricks/forms@1.227.9) (2022-06-23)
 
 **Note:** Version bump only for package @next-bricks/forms
