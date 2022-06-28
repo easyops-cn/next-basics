@@ -37,9 +37,9 @@ export interface ICustomSwitchConfig {
  * content:内容插槽位
  * footer:底部插槽位，仅当 `hasFooter` 为真时，该插槽才会存在
  * @history
- * 1.30.0:新增 `bodyStyle` 和 `drawerStyle` 配置
- * 1.34.0:新增插槽 `headerLeft`, `headerRight` 和 `footer`，新增 `general.drawer.open` 事件
  * 1.60.0:`open` 和 `close` 方法新增 `noEvent` 选项
+ * 1.34.0:新增插槽 `headerLeft`, `headerRight` 和 `footer`，新增 `general.drawer.open` 事件
+ * 1.30.0:新增 `bodyStyle` 和 `drawerStyle` 配置
  * @memo
  * ### OpenCloseOption
 
