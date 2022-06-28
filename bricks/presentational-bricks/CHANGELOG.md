@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.250.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.250.2...@next-bricks/presentational-bricks@1.250.3) (2022-06-28)
+
+
+### Bug Fixes
+
+* **brick-table:** 切换分页和页码的时候不应该触发sort.update事件 ([870d725](https://github.com/easyops-cn/next-basics/commit/870d725800c88c4ba4854b015e4f787202a97732))
+
+
+
+
+
 ## [1.250.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.250.1...@next-bricks/presentational-bricks@1.250.2) (2022-06-27)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
