@@ -1462,10 +1462,11 @@ export class BrickTableElement extends UpdatingElement {
           : urlSearchParams.set(key, value);
       });
     }
-    // 排序
+    // 排序: 切换分页和页码的时候不应该触发sort.update事件  排序触发/取消的时候，order的类型 'descend' | 'ascend' | null，没触发是false
     if (
-      sorter.columnKey !== this.sort ||
-      this._fields[sorter.order] !== this.order
+      (sorter.order || isNil(sorter.order)) &&
+      (sorter.columnKey !== this.sort ||
+        this._fields[sorter.order] !== this.order)
     ) {
       if (sorter.columnKey && sorter.order) {
         urlSearchParams.set("sort", sorter.columnKey as string);
