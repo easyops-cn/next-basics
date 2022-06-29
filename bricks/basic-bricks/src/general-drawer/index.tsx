@@ -72,16 +72,6 @@ export class GeneralDrawerElement extends UpdatingElement {
   loading: boolean;
 
   /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 宽度
-   * @group basic
-   */
-  @property({ type: Number })
-  width: number;
-
-  /**
    * @kind boolean
    * @required false
    * @default -
@@ -115,17 +105,27 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 是否展示遮罩
-   * @group basic
+   * @group ui
    */
   @property({ attribute: false })
   mask = true;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 宽度
+   * @group ui
+   */
+  @property({ type: Number })
+  width: number;
 
   /**
    * @kind Record<string, any>
    * @required false
    * @default -
    * @description 可用于设置 Drawer 内容部分的样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -137,7 +137,7 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 用于设置 Drawer 弹出层的样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -149,12 +149,20 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 用于设置 Drawer 头部的样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
   })
   headerStyle: Record<string, any>;
+  /**
+   * @default false
+   * @required false
+   * @description 是否浮层样式，如果设为true,则抽屉边缘会有外边距，圆角和阴影
+   * @group ui
+   */
+  @property({ type: Boolean })
+  isFloat: boolean;
   /**
    * @kind object
    * @required false
@@ -164,13 +172,7 @@ export class GeneralDrawerElement extends UpdatingElement {
    */
   @property({ attribute: false })
   configProps: DrawerProps;
-  /**
-   * @default false
-   * @required false
-   * @description 是否浮层样式，如果设为true,则抽屉边缘会有外边距，圆角和阴影
-   */
-  @property({ type: Boolean })
-  isFloat: boolean;
+
   hasOuterSwitch: boolean;
   useBigOuterSwitch: boolean;
   customSwitchConfig: ICustomSwitchConfig;
@@ -180,7 +182,7 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 打开抽屉时内容区是否自动滚动到顶部
-   * @group basic
+   * @group advanced
    */
   @property({ attribute: false })
   scrollToTopWhenOpen = true;
