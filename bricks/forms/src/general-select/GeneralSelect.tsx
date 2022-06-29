@@ -20,7 +20,19 @@ export const setTooltip = (event: React.MouseEvent) => {
     target.setAttribute("title", target.innerText);
   }
 };
-
+export const match = (input: string, field: string | number) => {
+  return field?.toString()?.toLowerCase()?.includes(input.trim().toLowerCase());
+};
+export const filterSearch = (
+  input: string,
+  option: any,
+  filterByLabelAndValue?: boolean
+) => {
+  return (
+    match(input, option.label) ||
+    (filterByLabelAndValue && match(input, option.value))
+  );
+};
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
   groupBy?: string;
@@ -60,6 +72,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     tokenSeparators,
     hiddenCheckedValueSuffix,
     emptyProps,
+    filterByLabelAndValue,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
   React.useEffect(() => {
@@ -95,17 +108,12 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     props.onSearch?.(value);
     handleDebounceSearch?.(value);
   };
-  const match = (input: string, field: string) => {
-    return field?.toLowerCase().includes(input.trim().toLowerCase());
-  };
+
   const searchProps = props.showSearch
     ? {
         showSearch: true,
         filterOption: (input: string, option: any) => {
-          return (
-            match(input, option.label) ||
-            (match(input, option.value) && props.filterByLabelAndValue)
-          );
+          return filterSearch(input, option, filterByLabelAndValue);
         },
       }
     : {
