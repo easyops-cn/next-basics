@@ -439,6 +439,48 @@ export const GeneralRadioStory: Story = {
         value: "create",
       },
     },
+    {
+      description: {
+        title:
+          "可通过easyops-builtin-widgets.tpl-card-list-base-item-of-illustration配置插画内容",
+      },
+      brick: "forms.general-radio",
+      properties: {
+        label: "图标",
+        useBrick: {
+          brick:
+            "easyops-builtin-widgets.tpl-card-list-base-item-of-illustration",
+          properties: {
+            detail: true,
+            background: "<% DATA.background %>",
+            topBg: "<% DATA.image %>",
+          },
+        },
+        name: "icon",
+        options: [
+          {
+            label: "green",
+            value: "green",
+            background: "green",
+            image:
+              "url('/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/create1653638263844900005.png')",
+          },
+          {
+            label: "blue",
+            value: "blue",
+            background: "blue",
+            image:
+              "url('/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/base-of-template1653642745768123613.png')",
+          },
+        ],
+        type: "custom",
+        value: "blue",
+        customStyle: {
+          height: "291px",
+          width: "212px",
+        },
+      },
+    },
   ],
   previewColumns: 2,
 };
