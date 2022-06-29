@@ -31,6 +31,16 @@ const BUTTON_TYPES = [
  * 1.42.0:新增 `submitTooltip` 属性
  * 1.75.0:新增属性 `disableAfterClick`
  * 1.77.0:`cancelType` 的默认值改为 `link`
+ * @excludesInherit
+ *  name
+ *  label
+ *  required
+ *  placeholder
+ *  pattern
+ *  message
+ *  validator
+ *  labelTooltip
+ *  trim
  * @memo
  */
 export class GeneralButtonsElement extends FormItemElement {

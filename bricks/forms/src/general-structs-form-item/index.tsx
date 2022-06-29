@@ -21,6 +21,9 @@ import { clone, pullAt } from "lodash";
  * items:添加/编辑结构体模态框里面的内容，应为一个表单，参考[通用表单](developers/brick-book/brick/forms.general-form)
  * @history
  * 1.x.0:新增构件 `forms.general-structs-form-item`
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @memo
  */
 export class GeneralStructsFormItemElement extends FormItemElement {

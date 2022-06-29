@@ -19,6 +19,9 @@ import { MenuIcon } from "@next-core/brick-types";
  * @slots
  * @history
  * 1.28.0:新增 `general.switch.change` 事件
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @memo
  */
 export class GeneralSwitchElement extends FormItemElement {

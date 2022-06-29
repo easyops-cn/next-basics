@@ -1,5 +1,7 @@
 [//]: # "business-bricks/cmdb-instances/instance-list.ts"
 
+> Tips: 该实例列表为构件类型会废弃之前使用的 legacy template 的方式，该构件的使用使用方式与之前一致,具体属性如下
+
 # INPUTS
 
 | property               | type                                                | required | default | description                                                                                                                                  |
@@ -17,7 +19,6 @@
 | moreButtonsDisabled    | boolean                                             | -        | false   | 是否展示"更多"的按钮。                                                                                                                       |
 | advancedSearchDisabled | boolean                                             | -        | false   | 是否展示高级搜索                                                                                                                             |
 | notifyUrl              | boolean                                             | -        | true    | 是否把搜索条件放上 url(刷新路由仍能保持条件)                                                                                                 |
-| events                 | object                                              | -        | -       | 相关事件，具体如下表                                                                                                                         |
 
 # EVENTS
 

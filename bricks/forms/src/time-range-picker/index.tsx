@@ -24,7 +24,10 @@ import { NS_FORMS, K } from "../i18n/constants";
 * @history
 * 1.28.0:新增 `time.range.change` 事件
 * 1.59.0:新增 `rangeType` 属性
- * 1.202.7 新增 `emitChangeOnInit`属性
+* 1.202.7 新增 `emitChangeOnInit`属性
+* @excludesInherit
+*  placeholder
+*  pattern
 * @memo
 * ```typescript
 * export interface TimeRange {

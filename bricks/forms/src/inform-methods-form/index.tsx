@@ -14,6 +14,9 @@ import { InformMethodsForm } from "./InformMethodsForm";
  * @author cyril
  * @slots
  * @history
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @memo
  */
 export class InformMethodsFormElement extends FormItemElement {

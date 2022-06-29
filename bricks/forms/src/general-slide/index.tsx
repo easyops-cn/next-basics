@@ -20,6 +20,9 @@ import { UiType } from "../interfaces";
  * @history
  * 1.x.0:新增构件 `forms.general-slide`
  * 1.100.0:新增属性 `onlyShowMode`、`size`
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @memo
  */
 export class GeneralSlideElement extends FormItemElement {

@@ -16,6 +16,9 @@ import { Column } from "../interfaces";
  * @author nlicroshan
  * @history
  * 1.x.0: 新增构件 `forms.dynamic-form-item-v2`
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @docKind brick
  */
 export class DynamicFormItemV2Element extends FormItemElement {

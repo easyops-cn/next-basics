@@ -20,6 +20,9 @@ import { UnitType } from "./libs/constants";
  * @history
  * 1.43.0:新增构件 `forms.input-with-unit`
  * 1.55.0:新增属性，`precision`, `availableUnits`
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @memo
  *
  *```typescript

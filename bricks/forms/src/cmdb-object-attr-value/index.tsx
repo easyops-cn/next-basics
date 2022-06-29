@@ -22,6 +22,9 @@ import { IPRegex } from "./components/constants";
 * @slots
 * @history
 * 1.83.0:新增构件 `forms.cmdb-object-attr-value`
+* @excludesInherit
+*  placeholder
+*  pattern
 * @memo
 * > type valueType =
   * | "str"

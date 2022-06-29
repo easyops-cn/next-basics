@@ -1,0 +1,4 @@
+.typeWrapper {
+  color: rgba(var(--palette-pink-8-channel), 0.9);
+  background-color: transparent;
+}

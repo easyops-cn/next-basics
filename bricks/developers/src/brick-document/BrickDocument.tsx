@@ -8,7 +8,7 @@ import { getHistory } from "@next-core/brick-kit";
 import { SmileTwoTone } from "@ant-design/icons";
 import { Button, Empty, Card, Tooltip, Tag } from "antd";
 import classNames from "classnames";
-import { omit } from "lodash";
+import { chain, omit } from "lodash";
 import {
   StoryDoc,
   StoryDocEnum,
@@ -20,6 +20,7 @@ import {
   StoryDocSlot,
   StoryDocType,
 } from "@next-core/brick-types";
+import styles from "./BrickDocument.module.css";
 import * as gfm from "remark-gfm";
 
 function flatten(text: any, child: any): any {
@@ -99,22 +100,25 @@ export function BrickDocument({
   };
 
   const renderTypeAnnotation = (value: string): React.ReactElement | string => {
-    if (!value) return <code>-</code>;
+    if (!value) return <span className={styles.typeWrapper}>-</span>;
 
     const str = value.replace(/`/g, "");
+
     if (interfaceIds.length && renderLink) {
       const hashHref = getCurHashHref();
 
-      const { __html: interfaceStr } = generateInterfaceRef(str, hashHref);
-
-      if (/<[Aa]\s+href\s*=/.test(interfaceStr)) {
-        return <span dangerouslySetInnerHTML={{ __html: interfaceStr }}></span>;
-      } else {
-        return <code>{interfaceStr}</code>;
-      }
+      return (
+        <span
+          className={styles.typeWrapper}
+          dangerouslySetInnerHTML={generateInterfaceRef(
+            str.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+            hashHref
+          )}
+        ></span>
+      );
     }
 
-    return <code>{str}</code>;
+    return <span className={styles.typeWrapper}>{str}</span>;
   };
 
   const convertMarkdownLinkToHtmlLink = (value: string) => {
@@ -180,7 +184,7 @@ export function BrickDocument({
                   <td key={i}>
                     {column.key === "required" ? (
                       renderRequiredAnnotation(value[column.key])
-                    ) : ["detail", "type"].includes(column.key) ? (
+                    ) : ["detail", "type", "params"].includes(column.key) ? (
                       renderTypeAnnotation(value[column.key])
                     ) : (
                       <span
@@ -381,11 +385,26 @@ export function BrickDocument({
       { title: "description", key: "description" },
     ];
 
+    const sortedProperties = chain(properties)
+      .reduce(
+        (arr, item) => {
+          if (item.deprecated) {
+            arr[1].push(item);
+          } else {
+            arr[0].push(item);
+          }
+          return arr;
+        },
+        [[], []]
+      )
+      .flatten()
+      .value();
+
     return (
-      properties && (
+      sortedProperties && (
         <>
           <h1>Properties</h1>
-          {renderTable(columns, properties)}
+          {renderTable(columns, sortedProperties)}
         </>
       )
     );

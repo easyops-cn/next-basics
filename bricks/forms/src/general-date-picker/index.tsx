@@ -19,6 +19,9 @@ import { DisabledDateType } from "../interfaces";
  * @slots
  * @history
  * 1.35.0:新增 `format` 属性
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @memo
  * > Tips: 在与 `general-form` 组合使用时， 若通过 form 下的 values 赋值给日期选择器，需要通过 `valueTypes` 申明数据类型，同时为了更方便的提交指定时间格式给后台，在申明数据后也提供了格式化日期的选项，以`|`分隔。（如上述 demo 所示）
  *  ### METHODS

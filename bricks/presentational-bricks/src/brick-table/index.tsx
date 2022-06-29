@@ -165,14 +165,13 @@ export interface CellStatusProps {
  * ### CustomColumn
  * | property             | type                  | required | default | description                                                    |
  * | -------------------- | --------------------- | -------- | ------- | -------------------------------------------------------------- |
- * | ~~component~~ | ~~CustomColumnComponent~~ | -        | -       | ~~ Deprecated。支持为某列自定义展示构件 ~~                          |
  * | valueSuffix          | string                | -        | -       | 字段的值展示时的后缀                                          |
  * | useBrick             | UseBrickConf          | -        | -       | 支持为某列自定义展示构件, 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)                                  |
  * | titleUseBrick        | UseBrickConf          | -        | -       | 支持为某列的标题自定义展示构件，可通过 DATA.title 获取标题文本,具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf) |
  * | filters | {text:string,value:any}[] | - | - | 表头的筛选菜单项 |
  * | verticalAlign | top \| bottom | - | - | 单元格内元素的垂直对齐方式 |
  * | colSpanKey | string | - | - | 每条记录的控制列合并的值的 key |
- * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key。如果希望将树形列表展平，并计算行合并的值，可以使用 flattenTreeDataListAndCalcRowSpan 自定义加工函数 |
+ * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key。如果希望将树形列表展平，并计算行合并的值，可以使用 flattenTreeDataListAndCalcRowSpan 自定义加工函数 |、* | ~~component~~ | ~~CustomColumnComponent~~ | -        | -       | ~~Deprecated。支持为某列自定义展示构件~~                          |
  *
  * ### UseBrickConf
  *
@@ -315,29 +314,29 @@ export interface CellStatusProps {
  *
  * | param        | type                                       | required | default | description                                                              |
  * | ------------ | ------------------------------------------ | -------- | ------- | ------------------------------------------------------------------------ |
- * | treeDataList | `Record<string, unknown>[]`                | ✔️       | -       | 树形数据列表                                                             |
- * | options      | `FlattenTreeDataListAndCalcRowSpanOptions` | ✔️       | -       | 函数选项                                                                 |
- * | depth        | `number`                                   | -        | 0       | 当前展平的深度，用于确定 `options.flattenConfigs` 中的当前层级的展平配置 |
+ * | treeDataList | Record<string, unknown>[]               | ✔️       | -       | 树形数据列表                                                             |
+ * | options      | FlattenTreeDataListAndCalcRowSpanOptions | ✔️       | -       | 函数选项                                                                 |
+ * | depth        | number                                | -        | 0       | 当前展平的深度，用于确定 `options.flattenConfigs` 中的当前层级的展平配置 |
  *
  * ### Returns
  *
  * | type                        | description                                                                                                                                                |
  * | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
- * | `Record<string, unknown>[]` | 展平后的列表，除了按照 `options.flattenConfigs` 进行展平外，还会生成相应层级以 `options.flattenConfigs[].parentInChildKey + "RowSpan"` 为 key 的行合并数据 |
+ * | Record<string, unknown>[] | 展平后的列表，除了按照 `options.flattenConfigs` 进行展平外，还会生成相应层级以 `options.flattenConfigs[].parentInChildKey + "RowSpan"` 为 key 的行合并数据 |
  *
  * ### FlattenTreeDataListAndCalcRowSpanOptions
  *
  * | property             | type              | required | default | description                              |
  * | -------------------- | ----------------- | -------- | ------- | ---------------------------------------- |
- * | flattenConfigs       | `FlattenConfig[]` | ✔️       | -       | 展平配置列表，按照由父到子的顺序一一对应 |
- * | omitChildrenInParent | `boolean`         | -        | -       | 展平后，是否省略父级里的子列表           |
+ * | flattenConfigs       | FlattenConfig[] | ✔️       | -       | 展平配置列表，按照由父到子的顺序一一对应 |
+ * | omitChildrenInParent | boolean       | -        | -       | 展平后，是否省略父级里的子列表           |
  *
  * ### FlattenConfig
  *
  * | property         | type     | required | default | description              |
  * | ---------------- | -------- | -------- | ------- | ------------------------ |
- * | childrenKey      | `string` | ✔️       | -       | 对应层级子列表的 key     |
- * | parentInChildKey | `string` | ✔️       | -       | 展平后，父级在子级的 key |
+ * | childrenKey      | string | ✔️       | -       | 对应层级子列表的 key     |
+ * | parentInChildKey | string | ✔️       | -       | 展平后，父级在子级的 key |
  *
  *
  * @noInheritDoc
@@ -559,7 +558,7 @@ export class BrickTableElement extends UpdatingElement {
    * @kind {useBrick:UseBrickConf}
    * @required false
    * @default -
-   * @description 自定义行展开的构件
+   * @description 自定义行展开的构件 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
    * @group expand
    */
   @property({
@@ -891,7 +890,7 @@ export class BrickTableElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 额外的行，通常为跨页勾选时，不在当前页的行
-   * @group advanced
+   * @group other
    */
   @property({ attribute: false })
   extraRows: Record<string, unknown>[] = [];

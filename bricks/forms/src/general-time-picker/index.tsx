@@ -20,6 +20,8 @@ import { TimePickerProps } from "antd/lib/time-picker";
  * @history
  * 1.29.0:新增 `general.time.open` 和 `general.time.close` 事件
  * 1.87.0:新增 configProps 透传
+ * @excludesInherit
+ *  pattern
  * @memo
  * > Tips: 在与 `general-form` 组合使用时， 若通过 form 下的 values 赋值给时间选择器，需要通过 `valueTypes` 申明数据类型，同时为了更方便的提交指定时间格式给后台，在申明数据后也提供了格式化时间的选项，以`|`分隔。（如上述 demo 所示）
  *  ### METHODS

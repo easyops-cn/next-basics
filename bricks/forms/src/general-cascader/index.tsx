@@ -22,6 +22,8 @@ import { ProcessedOptionData } from "../interfaces";
  * @history
  * 1.146.0 支持`limit`属性，以及支持空格分隔，做and搜索
  * 1.x.0:新增构件 `forms.general-cascader`
+ * @excludesInherit
+ *  pattern
  * @memo
  * ```typescript
  *interface CascaderOptionType {

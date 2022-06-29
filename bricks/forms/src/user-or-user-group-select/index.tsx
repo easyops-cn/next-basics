@@ -26,6 +26,8 @@ import { FormItemElement } from "@next-libs/forms";
  * 1.96.0:新增属性 `staticList`,`mergeUseAndUserGroup`
  * 1.31.0:新增 `optionsMode` 属性
  * 1.28.0:新增 `user.group.change` 事件
+ * @excludesInherit
+ *  pattern
  * @memo
  */
 export class UserOrUserGroupSelectElement extends FormItemElement {
