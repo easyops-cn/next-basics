@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Select } from "antd";
 import { formatOptions } from "@next-libs/forms";
-import { GeneralSelect } from "./GeneralSelect";
+import { GeneralSelect, match, filterSearch } from "./GeneralSelect";
 import { EasyopsEmpty } from "@next-core/brick-kit";
 
 describe("GeneralSelect", () => {
@@ -252,5 +252,38 @@ describe("GeneralSelect", () => {
 
     wrapper.invoke("onMouseEnter")({} as any);
     expect(handleMouseEnter).toBeCalled();
+  });
+  it("should work when filterByLabelAndValue", () => {
+    const mockSearch = jest.fn();
+    const wrapper = shallow(
+      <GeneralSelect
+        options={[
+          { label: "one", value: 1 },
+          { label: "two", value: 2 },
+        ]}
+        showSearch={true}
+        onSearch={mockSearch}
+      />
+    );
+    wrapper.invoke("onSearch")("1" as string);
+    expect(mockSearch).toBeCalledWith("1");
+  });
+});
+describe("functions", () => {
+  it("should work with match", () => {
+    expect(match("1", 123)).toEqual(true);
+    expect(match("a", "ABC")).toEqual(true);
+    expect(match(" b ", "ABC")).toEqual(true);
+  });
+  it("should work with filterSearch", () => {
+    expect(
+      filterSearch("sh", { value: "shanghai", label: "上海" }, false)
+    ).toEqual(false);
+    expect(
+      filterSearch("sh", { value: "shanghai", label: "上海" }, true)
+    ).toEqual(true);
+    expect(
+      filterSearch("上", { value: "shanghai", label: "上海" }, true)
+    ).toEqual(true);
   });
 });
