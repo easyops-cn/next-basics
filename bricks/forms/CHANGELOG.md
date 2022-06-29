@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.10...@next-bricks/forms@1.227.11) (2022-06-29)
+
+
+### Bug Fixes
+
+* **forms:** fix select search error when value type is number ([07a20e6](https://github.com/easyops-cn/next-basics/commit/07a20e690980a3ea97b7f75be24fdc1a9000b630))
+
+
+
+
+
 ## [1.227.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.9...@next-bricks/forms@1.227.10) (2022-06-27)
 
 
