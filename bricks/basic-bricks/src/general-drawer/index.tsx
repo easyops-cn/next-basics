@@ -168,7 +168,7 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 完全透传给 antd 的 Drawer 属性，详见：[https://ant.design/components/drawer-cn/#API](https://ant.design/components/drawer-cn/#API)
-   * @group advanced
+   * @group other
    */
   @property({ attribute: false })
   configProps: DrawerProps;
@@ -182,7 +182,7 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 打开抽屉时内容区是否自动滚动到顶部
-   * @group advanced
+   * @group other
    */
   @property({ attribute: false })
   scrollToTopWhenOpen = true;
