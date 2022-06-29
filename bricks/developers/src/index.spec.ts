@@ -3,8 +3,6 @@ const spyOnAddResourceBundle = (i18next.addResourceBundle = jest.fn());
 
 const spyOnDefine = jest.spyOn(window.customElements, "define");
 
-jest.mock("./lazy-bricks", () => void 0);
-
 // Use `require` instead of `import` to avoid hoisting.
 require("./index");
 
