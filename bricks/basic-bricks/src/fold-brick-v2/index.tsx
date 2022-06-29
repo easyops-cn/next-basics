@@ -10,6 +10,13 @@ import { uniqueId } from "lodash";
  * @name basic-bricks.fold-brick-v2
  * @docKind brick
  * @description 折叠容器，只折叠单个内容，支持slot
+ * @groupI18N
+ * {
+ *   "divider": {
+ *     "en": "Divider",
+ *     "zh": "分割线"
+ *   }
+ * }
  * @author momo
  * @slots
  * content:内容插槽
@@ -30,6 +37,7 @@ export class FoldBrickV2Element extends UpdatingElement {
    * @required true
    * @default -
    * @description 折叠展示名称
+   * @group basic
    */
   @property({
     attribute: false,
@@ -39,19 +47,9 @@ export class FoldBrickV2Element extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default true
-   * @description 是否显示展开图标
-   */
-  @property({
-    attribute: false,
-  })
-  isShowFoldIcon = true;
-
-  /**
-   * @kind boolean
-   * @required false
    * @default -
    * @description 是否默认展开
+   * @group basic
    */
   @property({
     attribute: false,
@@ -59,21 +57,11 @@ export class FoldBrickV2Element extends UpdatingElement {
   defaultShow?: boolean;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否展开
-   */
-  @property({
-    type: Boolean,
-  })
-  showDivider: boolean;
-
-  /**
    * @kind "normal" | "primary"
    * @required false
    * @default "normal"
    * @description 折叠面板类型
+   * @group basic
    */
   @property({
     attribute: false,
@@ -81,11 +69,47 @@ export class FoldBrickV2Element extends UpdatingElement {
   type: "normal" | "primary";
 
   /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否显示展开图标
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  isShowFoldIcon = true;
+
+  /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 折叠展示的样式编写
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  foldStyle: Record<string, string>;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否展示分割线
+   * @group divider
+   */
+  @property({
+    type: Boolean,
+  })
+  showDivider: boolean;
+
+  /**
    * @kind "left"|"right"
    * @required false
    * @default center
    * @description 分割线标题的位置
-   * @group advanced
+   * @group divider
    */
   @property({
     attribute: false,
@@ -97,7 +121,7 @@ export class FoldBrickV2Element extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否虚线
-   * @group advanced
+   * @group divider
    */
   @property({
     type: Boolean,
@@ -105,17 +129,8 @@ export class FoldBrickV2Element extends UpdatingElement {
   dividerDashed: boolean;
 
   /**
-   * @kind object
-   * @required false
-   * @default -
-   * @description 折叠展示的样式编写
-   * @group advanced
+   * @private
    */
-  @property({
-    attribute: false,
-  })
-  foldStyle: Record<string, string>;
-
   @property({
     type: Boolean,
   })
