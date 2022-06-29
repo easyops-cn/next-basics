@@ -3,7 +3,7 @@ import docMD from "../../../docs/cmdb-instances/instance-list.md";
 
 export const story: Story = {
   storyId: "cmdb-instances.instance-list",
-  type: "template",
+  type: "brick",
   author: "cyril",
   text: {
     en: "Instance List",
@@ -18,8 +18,8 @@ export const story: Story = {
     icon: "list",
   },
   conf: {
-    template: "cmdb-instances.instance-list",
-    params: {
+    brick: "cmdb-instances.instance-list",
+    properties: {
       objectId: "HOST",
       detailUrlTemplates: {
         HOST: "/cmdb-instances/#{objectId}/instance/#{instanceId}",

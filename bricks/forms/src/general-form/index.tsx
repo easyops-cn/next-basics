@@ -34,32 +34,6 @@ export const LAYOUT_ENUMS = ["horizontal", "vertical", "inline"];
 * 1.63.0   新增 `resetFields` 方法
 * @memo
 * > Tips: 在与 `general-form` 组合使用时， 若通过 form 下的 values 赋值给日期选择器，需要通过 `valueTypes` 申明数据类型，同时为了更方便的提交指定时间格式给后台，在申明数据后也提供了格式化日期的选项，以`|`分隔。（如上述 demo 所示）
-### ITEM INPUTS
-
-*下列属性是 form 为表单子项所申明的共有属性，但并不是所有属性都被每个表单项所实现，如 `placeholder,pattern` 只在 `input` 相关的表单项中使用才行。
-
-*| property     | type                                                                                                 | required                                                               | default | description                                                                                                      |
-*| ------------ | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
-*| name         | `string`                                                                                             | ✔️                                                                     | -       | 字段名                                                                                                           |
-*| label        | `string`                                                                                             | ✔️                                                                     | -       | 字段名说明                                                                                                       |
-*| required     | `string`                                                                                             | -️                                                                     | -       | 字段名说明                                                                                                       |
-*| placeholder  | `string`                                                                                             | -                                                                      | -       | 占位说明                                                                                                         |
-*| pattern      | `string`                                                                                             | -️                                                                     | -       | 正则表达式校验, 由于在 json 中配置仅支持 string 类型， 对于特殊字符需要额外再转义 /\w{3}/ -> '\\w{3}'            |
-*| message      | `Record<string,string>`                                                                              | -️                                                                     | -       | 校验文本信息                                                                                                     |
-*| validator    | `Pick<ValidationRule, "validator" \| "message"> \| Pick<ValidationRule, "validator" \| "message">[]` | -️                                                                     | -       | 自定义校验方法，[ValidationRule](https://3x.ant.design/components/form-cn/#%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99) |
-*| labelTooltip | `LabelTooltipProps \| string`                                                                                  | -️                                                                     | -       | 表单项 label 支持 tooltip，具体如 demo 所示                                                                      |
-*| helpBrick    | `HelpBrickProps \| string`| -️           | -       | 在每个表单项的右侧或者下侧插入一些文案或者复杂的提示, 配置如 demo 所示 |
-*| labelBrick   | `LabelBrick`          | -     | -        | 表单项 label 支持 useBrick。（不推荐使用，若要显示帮助提示信息，请使用helpBrick、labelTooltip)  |
-*| labelCol | `ColProps` | - | - | 标签列布局样式（仅当 `layout="horizontal"` 时有效） |
-*| wrapperCol | `ColProps` | - | - | 输入控件列布局样式（仅当 `layout="horizontal"` 时有效） |
-*| notRender | `Boolean` | - | - | 为true时不渲染该表单项，配合表单项的setNotRender方法使用，实现动态表单 |
-
-*下列方法是 form 为表单子项所申明的共有方法。
-
-*| property     | params                 |  description                                                                                                      |
-*| ------------ | ---------------------- |  ---------------------------------------------------------------------------------------------------------------- |
-*| setNotRender | `notRender:Boolean`    |  动态表单。参数为true时，不渲染该表单子项；反之，为false时，则渲染改表单子项。不渲染时，validate.success事件详情将不输出该表单子项的值。|
-*
 
 *```typescript
 *export interface LabelTooltipProps {

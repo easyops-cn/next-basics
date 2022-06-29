@@ -18,6 +18,9 @@ import { UploadButtonProps } from "../interfaces";
  * @history
  * 1.x.0: 新增构件 `forms.upload-files-v2`
  * @docKind brick
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  */
 export class UploadFilesV2Element extends FormItemElement {
   /**

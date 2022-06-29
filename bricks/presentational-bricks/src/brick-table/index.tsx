@@ -314,29 +314,29 @@ export interface CellStatusProps {
  *
  * | param        | type                                       | required | default | description                                                              |
  * | ------------ | ------------------------------------------ | -------- | ------- | ------------------------------------------------------------------------ |
- * | treeDataList | `Record<string, unknown>[]`                | ✔️       | -       | 树形数据列表                                                             |
- * | options      | `FlattenTreeDataListAndCalcRowSpanOptions` | ✔️       | -       | 函数选项                                                                 |
- * | depth        | `number`                                   | -        | 0       | 当前展平的深度，用于确定 `options.flattenConfigs` 中的当前层级的展平配置 |
+ * | treeDataList | Record<string, unknown>[]               | ✔️       | -       | 树形数据列表                                                             |
+ * | options      | FlattenTreeDataListAndCalcRowSpanOptions | ✔️       | -       | 函数选项                                                                 |
+ * | depth        | number                                | -        | 0       | 当前展平的深度，用于确定 `options.flattenConfigs` 中的当前层级的展平配置 |
  *
  * ### Returns
  *
  * | type                        | description                                                                                                                                                |
  * | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
- * | `Record<string, unknown>[]` | 展平后的列表，除了按照 `options.flattenConfigs` 进行展平外，还会生成相应层级以 `options.flattenConfigs[].parentInChildKey + "RowSpan"` 为 key 的行合并数据 |
+ * | Record<string, unknown>[] | 展平后的列表，除了按照 `options.flattenConfigs` 进行展平外，还会生成相应层级以 `options.flattenConfigs[].parentInChildKey + "RowSpan"` 为 key 的行合并数据 |
  *
  * ### FlattenTreeDataListAndCalcRowSpanOptions
  *
  * | property             | type              | required | default | description                              |
  * | -------------------- | ----------------- | -------- | ------- | ---------------------------------------- |
- * | flattenConfigs       | `FlattenConfig[]` | ✔️       | -       | 展平配置列表，按照由父到子的顺序一一对应 |
- * | omitChildrenInParent | `boolean`         | -        | -       | 展平后，是否省略父级里的子列表           |
+ * | flattenConfigs       | FlattenConfig[] | ✔️       | -       | 展平配置列表，按照由父到子的顺序一一对应 |
+ * | omitChildrenInParent | boolean       | -        | -       | 展平后，是否省略父级里的子列表           |
  *
  * ### FlattenConfig
  *
  * | property         | type     | required | default | description              |
  * | ---------------- | -------- | -------- | ------- | ------------------------ |
- * | childrenKey      | `string` | ✔️       | -       | 对应层级子列表的 key     |
- * | parentInChildKey | `string` | ✔️       | -       | 展平后，父级在子级的 key |
+ * | childrenKey      | string | ✔️       | -       | 对应层级子列表的 key     |
+ * | parentInChildKey | string | ✔️       | -       | 展平后，父级在子级的 key |
  *
  *
  * @noInheritDoc

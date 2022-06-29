@@ -20,6 +20,9 @@ import style from "./style.shadow.less";
  * content:内容插槽
  * @history
  * 1.87.0:新增构件 `forms.advance-setting`
+ * @excludesInherit
+ *  placeholder
+ *  pattern
  * @memo
  */
 export class AdvanceSettingElement extends FormItemElement {

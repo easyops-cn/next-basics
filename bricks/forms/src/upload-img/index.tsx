@@ -22,6 +22,8 @@ import { FormItemElement } from "@next-libs/forms";
  * 1.60.0:新增属性 `placeholder`,`autoSize`
  * 1.54.0:新增属性 `draggableUploadText`
  * 1.46.0:新增构件 `draggableUploadHint`
+ * @excludesInherit
+ *  pattern
  * @memo
  */
 export class UploadImgElement extends FormItemElement {

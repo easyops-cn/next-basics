@@ -22,6 +22,9 @@ import {
 * @slots
 * @history
 * 1.x.0:新增构件 `forms.dynamic-form-input-item`
+* @excludesInherit
+*  placeholder
+*  pattern
 * @memo
 * ###注意：
 * 该构件仅支持 input 类型，如果需要同时支持 input/select 的类型可使用进阶版 [动态表单项](developers/brick-book/brick/forms.dynamic-form-item)
