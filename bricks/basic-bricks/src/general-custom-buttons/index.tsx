@@ -27,7 +27,7 @@ export interface CustomButton {
    */
   text: string;
   /**
-   * 按钮 icon，支持[icon图标库](http://192.168.100.162/next/developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
+   * 按钮 icon，支持[icon图标库](/next/developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
    */
   icon: any;
   /**
@@ -111,18 +111,29 @@ export type DropdownPlacement =
  * @name basic-bricks.general-custom-buttons
  * @docKind brick
  * @description 可配置收纳起来的更多按钮，可配置不同事件
+ * @groupI18N
+ * {
+ *   "moreButton": {
+ *     "en": "MoreButton",
+ *     "zh": "更多按钮"
+ *   },
+ *   "dropdownButton": {
+ *     "en": "DropdownButton",
+ *     "zh": "含下拉选框的按钮"
+ *   }
+ * }
  * @author ice
  * @slots
  * @history
- * 1.28.0:新增 `updateButton` 方法，按钮新增 `id`, `disabled` 属性
- * 1.29.0:按钮新增 `buttonType`, `buttonShape` 属性
- * 1.30.0:按钮新增 `buttonSize`, `buttonUrl`, `urlTarget` 属性
- * 1.35.0:新增 `alignment` 属性
- * 1.40.0:按钮新增 `buttonHref`, `tooltip`, `tooltipPlacement` 属性
- * 1.45.0:新增 `dropdownPlacement` 属性, 按钮新增 `isDivider` 属性
- * 1.48.0:按钮新增 `hide` 属性
- * 1.59.0:新增属性 `disableAfterClick`
  * 1.72.0:新增属性 `loading`
+ * 1.59.0:新增属性 `disableAfterClick`
+ * 1.48.0:按钮新增 `hide` 属性
+ * 1.45.0:新增 `dropdownPlacement` 属性, 按钮新增 `isDivider` 属性
+ * 1.40.0:按钮新增 `buttonHref`, `tooltip`, `tooltipPlacement` 属性
+ * 1.35.0:新增 `alignment` 属性
+ * 1.30.0:按钮新增 `buttonSize`, `buttonUrl`, `urlTarget` 属性
+ * 1.29.0:按钮新增 `buttonType`, `buttonShape` 属性
+ * 1.28.0:新增 `updateButton` 方法，按钮新增 `id`, `disabled` 属性
  * @memo
  * @noInheritDoc
  */
@@ -132,6 +143,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 自定义按钮组
+   * @group basic
    */
   @property({ attribute: false })
   customButtons: CustomButton[];
@@ -139,17 +151,38 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   /**
    * @kind "start" | "center" | "end" | "stretch"
    * @required false
-   * @default `"center"`
+   * @default "center"
    * @description 对齐方式
+   * @group basic
    */
   @property()
   alignment: "start" | "center" | "end" | "stretch";
+
+  /**
+   * @kind any
+   * @required false
+   * @default -
+   * @description 按钮事件的 detail
+   * @group basic
+   */
+  @property({ attribute: false }) dataSource: any;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 点击按钮后自动禁用
+   * @group basic
+   */
+  @property({ type: Boolean })
+  disableAfterClick: boolean;
 
   /**
    * @kind boolean
    * @required false
    * @default -
    * @description 按钮组中 isDropdown 为 true 的按钮收纳成 dropdown。isMoreButton 为 true 时更多按钮显示纯icon样式，为 false 时显示icon+文字样式。
+   * @group moreButton
    */
   @property({
     type: Boolean,
@@ -161,6 +194,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    * @required false
    * @default -
    * @description isMoreButton 为 true 时更多按钮的图标，默认为`...`
+   * @group moreButton
    */
   @property({ attribute: false }) moreBtnIcon: any;
 
@@ -169,6 +203,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 更多按钮的类型，参考 general-button 构件
+   * @group moreButton
    */
   @property()
   moreButtonType: ButtonType;
@@ -178,31 +213,25 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
    * @required false
    * @default -
    * @description isMoreButton 为 true 时更多按钮的样式
+   * @group moreButton
    */
   @property() moreButtonShape: "no"; //UI规范中暂时只支持noShape。后面有需要可以支持circle。
 
   /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description 按钮事件的 detail
-   */
-  @property({ attribute: false }) dataSource: any;
-
-  /**
    * @kind string
    * @required false
-   * @default `"管理"`
+   * @default "管理"
    * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮文字
-   * @group advanced
+   * @group dropdownButton
    */
   @property() dropdownBtnText: string;
 
   /**
    * @kind `"default" | "link"`
    * @required false
-   * @default `"default"`
+   * @default "default"
    * @description dropdown按钮的类型
+   * @group dropdownButton
    */
   @property({ attribute: false })
   dropdownBtnType: "default" | "link" = "default";
@@ -210,31 +239,21 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   /**
    * @kind MenuIcon
    * @required false
-   * @default `"setting"`
+   * @default "setting"
    * @description isMoreButton 为 false 时，按钮组中 isDropdown 为 true 的按钮收纳成 dropdown，收纳起来的按钮 icon，支持[icon 图标库](/next/developers/icon)，可直接复制图标图标的配置（antd、fa 及 easyops 三种库都支持），也可只取 icon 字段的值（仅支持 antd 库）。配置{ "lib": "antd", "icon": "edit" }与 "edit"等价
-   * @group advanced
+   * @group dropdownButton
    */
   @property({ attribute: false }) dropdownBtnIcon: any;
 
   /**
    * @kind DropdownPlacement
    * @required false
-   * @default `"bottomRight"`
+   * @default "bottomRight"
    * @description dropdown 的弹出位置
-   * @group advanced
+   * @group dropdownButton
    */
   @property()
   dropdownPlacement: DropdownPlacement;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 点击按钮后自动禁用
-   * @group advanced
-   */
-  @property({ type: Boolean })
-  disableAfterClick: boolean;
 
   constructor() {
     super();
