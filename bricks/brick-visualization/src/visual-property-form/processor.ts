@@ -6,7 +6,7 @@ import {
   ItemModeType,
 } from "../interfaces";
 import { safeDump, JSON_SCHEMA, safeLoad } from "js-yaml";
-import _, { omit, isEmpty, groupBy } from "lodash";
+import { omit, isEmpty, groupBy } from "lodash";
 import {
   supportBasicType,
   supportMenuType,
@@ -188,10 +188,13 @@ export function processFormValue(
 }
 
 export function groupByType(
-  typeList?: UnionPropertyType[]
+  typeList: UnionPropertyType[] = []
 ): Array<[string, UnionPropertyType[]]> {
+  const normals = typeList.filter((item) => item.group !== "other");
+  const others = typeList.filter((item) => item.group === "other");
+
   return Object.entries(
-    groupBy(typeList, (item) => {
+    groupBy(normals.concat(others), (item) => {
       const group = item.group || "basic";
       const groupI18N = { ...groupI18nMap, ...item.groupI18N };
       const i18nData = groupI18N && groupI18N[group];

@@ -284,6 +284,94 @@ describe("processor test", () => {
       ]);
     });
 
+    it("other should at the bottom of the category", () => {
+      const typeList = [
+        {
+          name: "name",
+          type: "string",
+          description: "名称",
+          mode: "normal",
+          group: "basic",
+        },
+        {
+          name: "hobby",
+          type: "string",
+          description: "名称",
+          mode: "normal",
+          group: "other",
+        },
+        {
+          name: "test",
+          type: "string",
+          description: "测试",
+          mode: "normal",
+          group: "other",
+        },
+        { name: "age", type: "number", description: "年龄", mode: "normal" },
+        {
+          name: "value",
+          type: "Value",
+          description: "值",
+          mode: "advanced",
+          group: "advanced",
+        },
+      ] as any;
+
+      const result = groupByType(typeList);
+
+      expect(result).toEqual([
+        [
+          "常用",
+          [
+            {
+              name: "name",
+              type: "string",
+              description: "名称",
+              mode: "normal",
+              group: "basic",
+            },
+            {
+              name: "age",
+              type: "number",
+              description: "年龄",
+              mode: "normal",
+            },
+          ],
+        ],
+        [
+          "高级",
+          [
+            {
+              name: "value",
+              type: "Value",
+              description: "值",
+              mode: "advanced",
+              group: "advanced",
+            },
+          ],
+        ],
+        [
+          "其他",
+          [
+            {
+              name: "hobby",
+              type: "string",
+              description: "名称",
+              mode: "normal",
+              group: "other",
+            },
+            {
+              name: "test",
+              type: "string",
+              description: "测试",
+              mode: "normal",
+              group: "other",
+            },
+          ],
+        ],
+      ]);
+    });
+
     it("should work with i18n", () => {
       const typeList = [
         {
