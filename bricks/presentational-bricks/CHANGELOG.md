@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.251.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.250.4...@next-bricks/presentational-bricks@1.251.0) (2022-06-30)
+
+
+### Features
+
+* **dropdown-select:** add  selectTipText&selectBoxStyle properties ([2827cde](https://github.com/easyops-cn/next-basics/commit/2827cdeec47ab4264ffd4a652eaaf7c85c3ac691))
+
+
+
+
+
 ## [1.250.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.250.3...@next-bricks/presentational-bricks@1.250.4) (2022-06-29)
 
 
