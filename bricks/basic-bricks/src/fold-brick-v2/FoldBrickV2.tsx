@@ -9,7 +9,7 @@ interface FoldBrickV2Props {
   foldStyle?: Record<string, string>;
   show: boolean;
   showDivider?: boolean;
-  dividerOrientation?: "left" | "right";
+  dividerOrientation?: "left" | "right" | "center";
   dividerDashed?: boolean;
   isShowFoldIcon?: boolean;
   type?: "normal" | "primary";

@@ -105,7 +105,7 @@ export class FoldBrickV2Element extends UpdatingElement {
   showDivider: boolean;
 
   /**
-   * @kind "left"|"right"
+   * @kind "left"|"right"|"center"
    * @required false
    * @default center
    * @description 分割线标题的位置
@@ -114,7 +114,7 @@ export class FoldBrickV2Element extends UpdatingElement {
   @property({
     attribute: false,
   })
-  dividerOrientation: "left" | "right";
+  dividerOrientation: "left" | "right" | "center";
 
   /**
    * @kind boolean
