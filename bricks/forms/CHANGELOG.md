@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.13...@next-bricks/forms@1.227.14) (2022-06-30)
+
+
+### Bug Fixes
+
+* 去除自动计算和增加最小值 ([a8543df](https://github.com/easyops-cn/next-basics/commit/a8543dfa9b483cfd94de52664c844608c3878be8))
+
+
+
+
+
 ## [1.227.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.12...@next-bricks/forms@1.227.13) (2022-06-29)
 
 **Note:** Version bump only for package @next-bricks/forms
