@@ -20,14 +20,16 @@ export class PageTitleElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 页面标题
+   * @group basic
    */
   @property()
   pageTitle: string;
 
   /**
    * @kind boolean
-   * @default `false`
+   * @default false
    * @description 是否以 dashboard 模式显示
+   * @group basic
    */
   @property({
     type: Boolean,
