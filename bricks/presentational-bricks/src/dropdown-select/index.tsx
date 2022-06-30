@@ -134,7 +134,7 @@ export class DropdownSelectElement extends UpdatingElement {
   @property({ type: Number }) minSelectedItemLength?: number;
 
   /**
-   * @kind { userBrick: UseBrickConf }
+   * @kind { useBrick: UseBrickConf }
    * @required false
    * @default -
    * @description 提示构件
@@ -179,6 +179,23 @@ export class DropdownSelectElement extends UpdatingElement {
    * @description 多选时，当前label仅支持显示从构件外部传入,multipleLabel属性仅在dropdownButtonType为multiple时生效
    */
   @property() multipleLabel?: string;
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 下拉框提示信息
+   */
+  @property({ attribute: false })
+  selectTipText: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 下拉框样式
+   */
+  @property({ attribute: false })
+  selectBoxStyle: React.CSSProperties;
 
   /**
    * @kind "default" | "shape"
@@ -235,6 +252,8 @@ export class DropdownSelectElement extends UpdatingElement {
             heightFix={this.heightFix}
             tipBrick={this.tipBrick}
             minSelectedItemLength={this.minSelectedItemLength}
+            selectTipText={this.selectTipText}
+            selectBoxStyle={this.selectBoxStyle}
           />
         </BrickWrapper>,
         this

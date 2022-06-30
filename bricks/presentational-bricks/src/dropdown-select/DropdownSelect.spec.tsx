@@ -2,7 +2,6 @@ import React from "react";
 import { render, fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { DropdownSelect } from "./DropdownSelect";
-import { shallow } from "enzyme";
 
 const props = {
   dataSource: [
@@ -147,6 +146,24 @@ describe("DropdownSelect", () => {
     const dropdownMenu =
       container.ownerDocument.querySelector(".ant-dropdown-menu");
     expect(dropdownMenu).toBe(null);
+  });
+  it("should work with selectTipText", () => {
+    const mockOnChange = jest.fn();
+    const { getByTestId, container, rerender } = render(
+      <DropdownSelect
+        options={[{ label: "测试", value: "test" }]}
+        onChange={mockOnChange}
+        selectTipText="测试下拉框文案"
+      />
+    );
+    const dropdownTrigger = getByTestId("dropdown-trigger");
+    fireEvent.click(dropdownTrigger);
+    const dropdownMenu =
+      container.ownerDocument.querySelector(".ant-dropdown-menu");
+    expect(dropdownMenu.children[0].textContent).toBe("测试下拉框文案");
+    expect(
+      dropdownMenu.children[1].querySelector(".optionTitle")
+    ).toHaveTextContent("测试");
   });
 
   it("should work with multiple", () => {

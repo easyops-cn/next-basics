@@ -31,6 +31,8 @@ interface DropdownSelectProps {
   heightFix?: boolean;
   tipBrick?: { useBrick: UseBrickConf };
   minSelectedItemLength?: number;
+  selectTipText?: string;
+  selectBoxStyle?: React.CSSProperties;
 }
 
 export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
@@ -43,6 +45,8 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
     optionContent,
     valuePath,
     options,
+    selectTipText,
+    selectBoxStyle,
   } = props;
   if (!dataSource) {
     dataSource = [];
@@ -93,11 +97,17 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
   const menu = useMemo(
     () => (
       <Menu
-        style={
-          props.heightFix ? { maxHeight: "300px", overflow: "scroll" } : {}
-        }
+        style={{
+          ...(props.heightFix
+            ? { maxHeight: "300px", overflow: "scroll" }
+            : {}),
+          ...selectBoxStyle,
+        }}
         className={props.dropdownButtonType === "shape" && styles.menuBox}
       >
+        {selectTipText && (
+          <div className={styles.selectTipText}>{selectTipText}</div>
+        )}
         {options
           ? options.map((option) => (
               <Menu.Item
@@ -156,7 +166,7 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
   const multiSelectMenu = useMemo(() => {
     return (
       <Menu
-        style={{ maxHeight: "300px", overflow: "scroll" }}
+        style={{ maxHeight: "300px", overflow: "scroll", ...selectBoxStyle }}
         selectedKeys={props.selectedKeys}
         defaultSelectedKeys={props.selectedKeys}
         selectable
@@ -177,6 +187,9 @@ export function DropdownSelect(props: DropdownSelectProps): React.ReactElement {
         }
         className={props.dropdownButtonType === "shape" && styles.menuBox}
       >
+        {selectTipText && (
+          <div className={styles.selectTipText}>{selectTipText}</div>
+        )}
         {options
           ? options.map((option) => (
               <Menu.Item key={option.value}>
