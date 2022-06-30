@@ -72,4 +72,41 @@ describe("InputWithUnit", () => {
     wrapper.setProps({ availableUnits: ["s", "min", "hour"] });
     wrapper.setProps({ availableUnits: ["x"] });
   });
+
+  it("should work with useAutoCalculate is true", () => {
+    const fn = jest.fn();
+    const wrapper = mount(
+      <InputWithUnit
+        value={12}
+        unit="s"
+        unitType={UnitType.Time}
+        useAutoCalculate={true}
+        onChange={fn}
+      />
+    );
+    let inputNumber = wrapper.find(InputNumber).first();
+    const select = wrapper.find(Select).first();
+    expect(inputNumber.prop("value")).toBe(12);
+    select.invoke("onChange")("min", null);
+    expect(fn).toBeCalledWith(720);
+    fn.mockClear();
+    inputNumber = wrapper.find(InputNumber).first();
+    inputNumber.invoke("onChange")(60);
+    expect(fn).toBeCalledWith(3600);
+  });
+
+  it("should work with inputNumberMin is 60", () => {
+    const wrapper = mount(
+      <InputWithUnit
+        value={12}
+        unit="s"
+        unitType={UnitType.Time}
+        inputNumberMin={60}
+      />
+    );
+    const inputNumber = wrapper.find(InputNumber).first();
+    expect(inputNumber.prop("value")).toBe(60);
+    inputNumber.invoke("onChange")(12);
+    expect(inputNumber.prop("value")).toBe(60);
+  });
 });

@@ -113,6 +113,24 @@ export class InputWithUnitElement extends FormItemElement {
   precision: number;
 
   /**
+   * @kind boolean
+   * @default true
+   * @required false
+   * @description 默认开启整数整除自动转换
+   */
+  @property({ attribute: false })
+  useAutoCalculate = true;
+
+  /**
+   * @kind number
+   * @default Number.MIN_SAFE_INTEGER
+   * @required false
+   * @description 输入数字的最小值
+   */
+  @property({ type: Number })
+  inputNumberMin: number;
+
+  /**
    * @kind string[]
    * @required false
    * @default -
@@ -169,6 +187,8 @@ export class InputWithUnitElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            useAutoCalculate={this.useAutoCalculate}
+            inputNumberMin={this.inputNumberMin}
           />
         </BrickWrapper>,
         this
