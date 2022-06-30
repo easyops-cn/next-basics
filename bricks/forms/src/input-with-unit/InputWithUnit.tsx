@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Select, InputNumber } from "antd";
 import { isNumber, isEmpty, isNil } from "lodash";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
@@ -15,6 +15,8 @@ export interface InputWithUnitProps extends FormItemWrapperProps {
   precision?: number;
   availableUnits?: string[];
   inputBoxStyle?: React.CSSProperties;
+  useAutoCalculate?: boolean;
+  inputNumberMin?: number;
   onChange?: (value: number) => void;
 }
 
@@ -37,8 +39,9 @@ export function InputGroup(
   }
   const precision = props.precision ?? 0;
 
-  const [inputNumber, setInputNumber] = React.useState<number>();
-  const [selectUnit, setSelectUnit] = React.useState<string>();
+  const [inputNumber, setInputNumber] = useState<number>();
+  const [selectUnit, setSelectUnit] = useState<string>();
+  const [min, setMin] = useState<number>(Number.MIN_SAFE_INTEGER);
 
   const transformUnit = (n: number, currentUnit: string): number => {
     const select = units.find((unit) => unit.id === currentUnit);
@@ -57,13 +60,22 @@ export function InputGroup(
     }
 
     index = Math.max(1, index);
-    const suitableUnit = units[index - 1];
+    let suitableUnit: any;
+    if (selectUnit && !props.useAutoCalculate) {
+      suitableUnit = originUnits.find((unit) => unit.id === selectUnit);
+    } else {
+      suitableUnit = units[index - 1];
+    }
     if (precision === 0 && value % suitableUnit.divisor > 0) {
       setInputNumber(props.value);
       setSelectUnit(props.unit);
       return;
     }
-
+    if (props?.inputNumberMin) {
+      const min =
+        (props.inputNumberMin * baseUnit.divisor) / suitableUnit.divisor;
+      setMin(min);
+    }
     const smaller = +(value / suitableUnit.divisor).toFixed(precision);
     setInputNumber(smaller);
     setSelectUnit(suitableUnit.id);
@@ -103,6 +115,7 @@ export function InputGroup(
           placeholder={props.placeholder}
           value={inputNumber}
           onChange={handleChange}
+          min={min}
           style={props.inputBoxStyle}
         />
         <Select
@@ -135,6 +148,8 @@ export function InputWithUnit(props: InputWithUnitProps): React.ReactElement {
         unitType={props.unitType}
         onChange={props.onChange}
         inputBoxStyle={props.inputBoxStyle}
+        inputNumberMin={props.inputNumberMin}
+        useAutoCalculate={props.useAutoCalculate}
       />
     </FormItemWrapper>
   );
