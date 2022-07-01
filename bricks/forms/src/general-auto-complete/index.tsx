@@ -31,6 +31,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @required true
    * @default -
    * @description 字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
@@ -47,6 +48,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @required true
    * @default -
    * @description 补全选项列表
+   * @group basicFormItem
    */
   @property({ attribute: false })
   options: string[] | OptionType[];
@@ -56,6 +58,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @required false
    * @default -
    * @description 当前值
+   * @group basicFormItem
    */
   @property()
   value: string;
@@ -65,6 +68,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @required false
    * @default -
    * @description 占位说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -73,6 +77,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否禁用
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare disabled: boolean;
 
@@ -81,22 +86,25 @@ export class GeneralAutoCompleteElement extends FormItemElement {
    * @required false
    * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind `Record<string,string>`
+   * @kind Record<string,string>
    * @required false
    * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind `object`
+   * @kind object
    * @required false
    * @default
    * @description 输入框样式
+   * @group ui
    */
   @property({
     attribute: false,
@@ -115,7 +123,7 @@ export class GeneralAutoCompleteElement extends FormItemElement {
     ReactDOM.unmountComponentAtNode(this);
   }
   /**
-   * @detail `string`
+   * @detail string
    * @description 补全输入框变化时触发
    */
   @event({ type: "general.auto-complete.change" })

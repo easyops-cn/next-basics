@@ -171,7 +171,8 @@ export interface CellStatusProps {
  * | filters | {text:string,value:any}[] | - | - | 表头的筛选菜单项 |
  * | verticalAlign | top \| bottom | - | - | 单元格内元素的垂直对齐方式 |
  * | colSpanKey | string | - | - | 每条记录的控制列合并的值的 key |
- * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key。如果希望将树形列表展平，并计算行合并的值，可以使用 flattenTreeDataListAndCalcRowSpan 自定义加工函数 |、* | ~~component~~ | ~~CustomColumnComponent~~ | -        | -       | ~~Deprecated。支持为某列自定义展示构件~~                          |
+ * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key。如果希望将树形列表展平，并计算行合并的值，可以使用 flattenTreeDataListAndCalcRowSpan 自定义加工函数 |
+ * | ~~component~~ | ~~CustomColumnComponent~~ | -        | -       | ~~Deprecated。支持为某列自定义展示构件~~                          |
  *
  * ### UseBrickConf
  *
@@ -229,7 +230,7 @@ export interface CellStatusProps {
  *
  * ### pagination 默认配置
  *
- * 如果不希望分页，只需在 storyboard 中如下设置即可：
+ * 如果不希望分页，如下设置即可：
  *
  * ```
  * {
@@ -239,7 +240,7 @@ export interface CellStatusProps {
  * }
  * ```
  *
- * 如果希望覆盖默认配置，只需在 storyboard 中覆盖对应项即可，相关配置项具体查阅：[pagination](https://ant.design/components/pagination-cn/#API)
+ * 如果希望覆盖默认配置，覆盖对应项即可，相关配置项具体查阅：[pagination](https://ant.design/components/pagination-cn/#API)
  *
  * ```
  * {
@@ -263,7 +264,7 @@ export interface CellStatusProps {
  *
  * ### rowSelection 默认配置
  *
- * 行选择默认为 false，即如果不在 storyboard 中配置就不显示。如果要开启只需在 storyboard 中如下设置即可，这时 brick-table 会默认配置 onChange 事件：
+ * 行选择默认为 false，不配置就不显示。如果要开启如下设置即可，这时 brick-table 会默认配置 onChange 事件：
  *
  * ```
  * {
@@ -273,7 +274,7 @@ export interface CellStatusProps {
  * }
  * ```
  *
- * 如果希望覆盖或者扩展默认配置，只需在 storyboard 中覆盖对应项即可，相关配置项具体查阅：[rowSelection](https://ant.design/components/table-cn/#rowSelection)
+ * 如果希望覆盖或者扩展默认配置，覆盖对应项即可，相关配置项具体查阅：[rowSelection](https://ant.design/components/table-cn/#rowSelection)
  *
  * ```
  * {
