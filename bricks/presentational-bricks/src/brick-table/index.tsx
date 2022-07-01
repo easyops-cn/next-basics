@@ -1850,40 +1850,36 @@ export class BrickTableElement extends UpdatingElement {
       if (!this.configProps.size) {
         this._finalConfigProps.size = this.size;
       }
-      const rowSelec = this.configProps.rowSelection ?? this.rowSelection;
-      if (rowSelec) {
-        if (rowSelec === true) {
-          this._finalConfigProps.rowSelection = {
-            ...defaultRowSelection,
-            type: this.type ?? "checkbox",
-          };
-        } else {
-          this._finalConfigProps.rowSelection = {
-            ...defaultRowSelection,
-            type: this.type ?? "checkbox",
-            ...rowSelec,
-            ...(defaultRowSelection.selectedRowKeys
-              ? { selectedRowKeys: defaultRowSelection.selectedRowKeys }
-              : {}),
-          };
-        }
-      } else if (this.type) {
-        this._finalConfigProps.rowSelection = {
-          ...defaultRowSelection,
-          type: this.type,
-        };
-      } else {
-        this._finalConfigProps.rowSelection = false;
-      }
     } else {
       this._finalConfigProps = {};
       this._finalConfigProps.pagination =
         this.pagination !== false ? defaultPagination : false;
       this._finalConfigProps.size = this.size;
-      this._finalConfigProps.rowSelection = this.type && {
+    }
+    const rowSelec = this.configProps?.rowSelection ?? this.rowSelection;
+    if (rowSelec) {
+      if (rowSelec === true) {
+        this._finalConfigProps.rowSelection = {
+          ...defaultRowSelection,
+          type: this.type ?? "checkbox",
+        };
+      } else {
+        this._finalConfigProps.rowSelection = {
+          ...defaultRowSelection,
+          type: this.type ?? "checkbox",
+          ...rowSelec,
+          ...(defaultRowSelection.selectedRowKeys
+            ? { selectedRowKeys: defaultRowSelection.selectedRowKeys }
+            : {}),
+        };
+      }
+    } else if (this.type) {
+      this._finalConfigProps.rowSelection = {
         ...defaultRowSelection,
         type: this.type,
       };
+    } else {
+      this._finalConfigProps.rowSelection = false;
     }
 
     // 初始化列排序
