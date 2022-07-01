@@ -65,5 +65,5 @@
   font-size: var(--sub-title-font-size-small);
   font-weight: var(--font-weight-400);
   color: var(--color-secondary-text);
-  padding: 10px;
+  padding: 5px 12px;
 }
