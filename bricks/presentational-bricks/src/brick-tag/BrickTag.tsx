@@ -9,6 +9,8 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { MenuIcon } from "@next-core/brick-types";
 import { Color } from "../interfaces/brick-tag";
+import { BrickAsComponent } from "@next-core/brick-kit";
+import { UseBrickConf } from "@next-core/brick-types";
 export { Color } from "../interfaces/brick-tag";
 
 export const circleIcon: MenuIcon = {
@@ -53,6 +55,10 @@ export interface BrickTagProps extends TagProps {
   disabledTooltip?: string;
   cancelable?: boolean;
   tooltipProps?: TooltipProps;
+  afterBrick?: {
+    useBrick: UseBrickConf;
+    data?: any;
+  };
 }
 
 export function BrickTag(props: BrickTagProps): React.ReactElement {
@@ -66,6 +72,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
     closable,
     cancelable,
     tooltipProps,
+    afterBrick,
   } = props;
 
   const [checkedTag, setCheckedTag] = useState([]);
@@ -225,6 +232,12 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
       {componentType === TagTypeProps.CheckableTag
         ? renderTag(Tag.CheckableTag, tagList)
         : renderTag(Tag, tagList)}
+      {afterBrick && afterBrick.useBrick && (
+        <BrickAsComponent
+          useBrick={afterBrick.useBrick}
+          data={afterBrick.data}
+        ></BrickAsComponent>
+      )}
     </div>
   );
 }

@@ -11,7 +11,7 @@ import { BrickTag, TagTypeProps, TagListType } from "./BrickTag";
 import { Card, TooltipProps } from "antd";
 import { Color } from "../interfaces/brick-tag";
 import { get, map } from "lodash";
-
+import { UseBrickConf } from "@next-core/brick-types";
 /**
  * @id presentational-bricks.brick-tag
  * @name presentational-bricks.brick-tag
@@ -290,6 +290,21 @@ export class BrickTagElement extends UpdatingElement {
   })
   tagHoverStyle: Record<string, any>;
 
+  /**
+   * @kind {useBrick: UseBrickConf,data: any}
+   * @required false
+   * @default -
+   * @description 最后一个tag后面使用子构件，具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  afterBrick: {
+    useBrick: UseBrickConf;
+    data: unknown;
+  };
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -338,6 +353,7 @@ export class BrickTagElement extends UpdatingElement {
         disabledTooltip={this.disabledTooltip}
         cancelable={this.cancelable}
         tooltipProps={this.tooltipProps}
+        afterBrick={this.afterBrick}
       />
     );
   }

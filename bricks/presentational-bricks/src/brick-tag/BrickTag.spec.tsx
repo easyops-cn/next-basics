@@ -146,10 +146,16 @@ describe("BrickTag", () => {
         { key: "d", label: "d" },
         { key: "e", label: "e", disabled: true },
       ],
+      afterBrick: {
+        useBrick: {
+          brick: "span",
+        },
+      },
       handleOnClose,
     };
     const wrapper = mount(<BrickTag {...props} />);
     expect(wrapper.find("Tag").length).toEqual(5);
+    expect(wrapper.find("BrickAsComponent").length).toBe(1);
     expect(
       wrapper.find("Tag").at(0).find("span.anticon-close.ant-tag-close-icon")
         .length
