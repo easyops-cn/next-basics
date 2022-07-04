@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.14...@next-bricks/forms@1.227.15) (2022-07-04)
+
+
+### Bug Fixes
+
+* 修改@next-libs/cmdb-instances版本, 修复tooltip问题 refs DEVOPS_MANAGEMENT-469 ([f5ffc62](https://github.com/easyops-cn/next-basics/commit/f5ffc629e20c6f2dab203e5ebc21448356a1e9b7))
+
+
+
+
+
 ## [1.227.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.13...@next-bricks/forms@1.227.14) (2022-06-30)
 
 
