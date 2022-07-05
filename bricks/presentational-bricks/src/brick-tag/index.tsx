@@ -70,7 +70,7 @@ export class BrickTagElement extends UpdatingElement {
   @event({ type: "tag.click" }) tagClick: EventEmitter<TagListType>;
 
   /**
-   * @required true
+   * @required false
    * @description 标签列表，当已知的时候可直接在 storyboard 中声明
    * @group basic
    */
