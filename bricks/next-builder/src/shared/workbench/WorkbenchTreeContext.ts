@@ -10,6 +10,7 @@ export interface ContextOfWorkbenchTree {
   fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
   collapsible?: boolean;
   collapsedNodes?: (string | number)[];
+  nodeKey?: string;
   clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;

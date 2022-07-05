@@ -1,5 +1,11 @@
 // istanbul ignore file: working in progress
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+} from "react";
 import { JsonStorage, debounceByAnimationFrame } from "@next-core/brick-utils";
 import classNames from "classnames";
 import { SimpleFunction } from "@next-core/brick-types";
@@ -41,6 +47,7 @@ export function ResizableBox({
     [minSize, refinedDefaultSize]
   );
   const refinedMinSpace = useMemo(() => minSpace ?? 300, [minSpace]);
+  const refBar = useRef<HTMLDivElement>();
 
   const initSize = useCallback(() => {
     return storageKey
@@ -61,7 +68,7 @@ export function ResizableBox({
   }, [initSize]);
 
   const handleResizerMouseDown = useCallback(
-    (event: React.MouseEvent) => {
+    (event: MouseEvent) => {
       // Prevent text selecting.
       event.preventDefault();
       setResizerStatus({
@@ -99,10 +106,14 @@ export function ResizableBox({
 
     window.addEventListener("mousemove", handleResizerMouseMove);
     window.addEventListener("mouseup", handleResizerMouseUp);
+    // shadowRoot 中不能直接在组件中绑定React事件, 会导致子节点事件冲突
+    refBar.current.addEventListener("mousedown", handleResizerMouseDown);
 
     return () => {
       window.removeEventListener("mousemove", handleResizerMouseMove);
       window.removeEventListener("mouseup", handleResizerMouseUp);
+      refBar.current &&
+        refBar.current.removeEventListener("mousedown", handleResizerMouseDown);
     };
   }, [
     resizeDirection,
@@ -110,6 +121,7 @@ export function ResizableBox({
     refinedMinSpace,
     resizeStatus,
     debouncedSetSize,
+    handleResizerMouseDown,
   ]);
 
   useEffect(() => {
@@ -132,10 +144,7 @@ export function ResizableBox({
       >
         <slot name="content" />
       </div>
-      <div
-        className={classNames("bar", resizeDirection)}
-        onMouseDown={handleResizerMouseDown}
-      >
+      <div className={classNames("bar", resizeDirection)} ref={refBar}>
         {/* Use a fullscreen mask to keep cursor status when dragging the resizer. */}
         <div className="mask" />
       </div>

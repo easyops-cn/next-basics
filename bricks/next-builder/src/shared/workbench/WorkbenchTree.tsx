@@ -157,6 +157,7 @@ function TreeNode({
     fixedActionsFor,
     collapsible,
     collapsedNodes,
+    nodeKey,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
@@ -164,8 +165,14 @@ function TreeNode({
     onNodeToggle,
     getCollapsedId,
   } = useWorkbenchTreeContext();
-  const { allow, onDragStart, dragNode, dragOverNode, dragStatus } =
-    useWorkbenchTreeDndContext();
+  const {
+    allow,
+    allowMoveToRoot,
+    onDragStart,
+    dragNode,
+    dragOverNode,
+    dragStatus,
+  } = useWorkbenchTreeDndContext();
 
   const nodePaddingLeft = level * treeLevelPadding + basePaddingLeft - 2;
   const searching = useContext(SearchingContext);
@@ -213,12 +220,12 @@ function TreeNode({
     if (node.data) {
       const getNodeUid = (data: Record<string, any>): number | string => {
         return data.type === "mount-point"
-          ? `${data.parent.$$uid}:${data.mountPoint}`
-          : data.$$uid;
+          ? data.parent[nodeKey] || `${data.parent.$$uid}:${data.mountPoint}`
+          : data[nodeKey] || data.$$uid;
       };
       return getNodeUid(node.data);
     }
-  }, [node.data]);
+  }, [nodeKey, node.data]);
 
   useEffect(() => {
     if (dragStatus === dragStatusEnum.inside) {
@@ -232,7 +239,7 @@ function TreeNode({
   const isDragNode = useMemo(() => {
     if (dragNode) {
       const dragUid = dragNode.dataset.uid;
-      return Number(dragUid) === nodeUid;
+      return dragUid === String(nodeUid);
     }
     return false;
   }, [dragNode, nodeUid]);
@@ -240,7 +247,7 @@ function TreeNode({
   const isDragActive = useMemo(() => {
     if (dragOverNode) {
       const dragUid = dragOverNode.dataset.uid;
-      return Number(dragUid) === nodeUid;
+      return dragUid === String(nodeUid);
     }
     return false;
   }, [dragOverNode, nodeUid]);
@@ -288,16 +295,18 @@ function TreeNode({
 
   return (
     <>
-      {isDragActive && level !== 1 && cacheDragStatus === dragStatusEnum.top && (
-        <PlaceholderDOM
-          style={{
-            marginLeft: nodePaddingLeft,
-          }}
-        />
-      )}
+      {isDragActive &&
+        (allowMoveToRoot || level !== 1) &&
+        cacheDragStatus === dragStatusEnum.top && (
+          <PlaceholderDOM
+            style={{
+              marginLeft: nodePaddingLeft,
+            }}
+          />
+        )}
       <li
-        draggable={allow && typeof nodeUid === "number"}
-        onDragStart={onDragStart}
+        draggable={allow}
+        onDragStart={(e) => onDragStart(e, node)}
         data-uid={nodeUid}
         style={nodeStyle}
       >
@@ -380,7 +389,7 @@ function TreeNode({
         {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
       </li>
       {isDragActive &&
-        level !== 1 &&
+        (allowMoveToRoot || level !== 1) &&
         cacheDragStatus === dragStatusEnum.bottom && (
           <PlaceholderDOM
             style={{

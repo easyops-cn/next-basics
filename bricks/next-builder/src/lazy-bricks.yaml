@@ -23,3 +23,5 @@ lazyBricks:
       - workbench-tree
       - workbench-quick-entry
       - workbench-component-select
+      - workbench-common-tree
+      - workbench-common-context-menu

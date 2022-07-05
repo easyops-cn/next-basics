@@ -61,3 +61,5 @@ import "./custom-processors/getWorkbenchRouteTree";
 import "./data-providers/ReplaceSingleThemePage";
 import "./data-providers/PasteBricks";
 import "./shared/components/contract-auto-complete";
+// !Lazy: import "./workbench-common-tree";
+// !Lazy: import "./workbench-common-context-menu";
