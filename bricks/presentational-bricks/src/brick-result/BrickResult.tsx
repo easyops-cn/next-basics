@@ -5,17 +5,11 @@ import { ResultStatusType } from "antd/lib/result";
 import { EmptyResult, EmptyResultStatus } from "@next-libs/basic-components";
 import { getIllustration } from "@next-core/illustrations";
 import { useCurrentTheme } from "@next-core/brick-kit";
-export enum BrickResultStatus {
-  Success = "success",
-  Error = "error",
-  Info = "info",
-  Warning = "warning",
-  Empty = "empty",
-  E404 = "404",
-  E403 = "403",
-  E500 = "500",
-}
-export type IllustrationsStatus = "illustrations";
+import {
+  BrickResultStatus,
+  IllustrationsStatus,
+} from "../interfaces/brick-result";
+
 export interface IllustrationsConfig {
   imageStyle?: CSSProperties;
   name?: string;
