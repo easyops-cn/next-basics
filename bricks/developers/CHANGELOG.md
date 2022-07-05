@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.356.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.7...@next-bricks/developers@1.356.0) (2022-07-05)
+
+
+### Features
+
+* **BrickDocument:** add support for extendedTypes and indexSignature ([2873b43](https://github.com/easyops-cn/next-basics/commit/2873b432bea5905eb60e6016a29a6b0b3475abda))
+
+
+
+
+
 ## [1.355.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.6...@next-bricks/developers@1.355.7) (2022-06-29)
 
 
