@@ -44,11 +44,15 @@ export function AppSetting(): React.ReactElement {
       ) as HTMLLinkElement;
       link && (link.href = favicon);
     }
-    const isEnable = getRuntime()
-      .getMicroApps()
-      .some((item) => {
-        return item.id === "cmdb-account-setting";
-      });
+    const hideMyAccountEnabled =
+      getRuntime().getFeatureFlags()["next-hide-my-account"];
+    const isEnable =
+      !hideMyAccountEnabled &&
+      getRuntime()
+        .getMicroApps()
+        .some((item) => {
+          return item.id === "cmdb-account-setting";
+        });
     setAccountEntry(isEnable);
   }, []);
 
