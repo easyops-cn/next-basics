@@ -1,9 +1,10 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import { BrickTag, TagTypeProps, circleIcon } from "./BrickTag";
+import { BrickTag, circleIcon } from "./BrickTag";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { Tooltip } from "antd";
+import { TagTypeProps } from "../interfaces/brick-tag";
 
 describe("BrickTag", () => {
   it("should work when componentType is CheckableTag", () => {

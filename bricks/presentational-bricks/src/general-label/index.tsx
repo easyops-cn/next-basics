@@ -33,19 +33,15 @@ export class GeneralLabelElement extends UpdatingElement {
   labelClick: EventEmitter<any>;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 文字内容
+   * @group basic
    */
   @property()
   text: string;
 
   /**
-   * @kind MenuIcon
-   * @required false
-   * @default -
    * @description 前缀图标
+   * @group basic
    */
   @property({
     attribute: false,
@@ -53,10 +49,8 @@ export class GeneralLabelElement extends UpdatingElement {
   prefixIcon: MenuIcon;
 
   /**
-   * @kind MenuIcon
-   * @required false
-   * @default -
    * @description 后缀图标
+   * @group basic
    */
   @property({
     attribute: false,
@@ -64,28 +58,22 @@ export class GeneralLabelElement extends UpdatingElement {
   suffixIcon: MenuIcon;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 链接的 URL
+   * @group basic
    */
   @property()
   url: string;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 是否使用原生 <a> 标签，通常用于外链的跳转
+   * @group basic
    */
   @property()
   href: string;
 
   /**
-   * @kind any
-   * @required false
-   * @default -
-   * @description 代替 `data`， 同样为 `label.click`事件的传出的数据
+   * @description `label.click`事件的传出的数据
+   * @group other
    */
   @property({
     attribute: false,
@@ -93,12 +81,9 @@ export class GeneralLabelElement extends UpdatingElement {
   dataSource: any;
 
   /**
-   * @kind any
-   * @required false
-   * @default -
    * @description `label.click`事件的详情
    * @deprecated
-   * @group advnaced
+   * @group other
    */
   @property({
     attribute: false,

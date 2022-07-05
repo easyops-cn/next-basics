@@ -7,9 +7,9 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { BrickTag, TagTypeProps, TagListType } from "./BrickTag";
+import { BrickTag, TagListType } from "./BrickTag";
 import { Card, TooltipProps } from "antd";
-import { Color } from "../interfaces/brick-tag";
+import { Color, TagTypeProps } from "../interfaces/brick-tag";
 import { get, map } from "lodash";
 import { UseBrickConf } from "@next-core/brick-types";
 /**
@@ -70,10 +70,9 @@ export class BrickTagElement extends UpdatingElement {
   @event({ type: "tag.click" }) tagClick: EventEmitter<TagListType>;
 
   /**
-   * @kind TagListType[] 或者 string[]
-   * @required false
-   * @default -
+   * @required true
    * @description 标签列表，当已知的时候可直接在 storyboard 中声明
+   * @group basic
    */
   @property({
     attribute: false,
@@ -81,10 +80,9 @@ export class BrickTagElement extends UpdatingElement {
   tagList: TagListType[];
 
   /**
-   * @kind boolean
-   * @required false
    * @default false
    * @description 是否在标签内显示小圆点
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -92,10 +90,9 @@ export class BrickTagElement extends UpdatingElement {
   showTagCircle: boolean;
 
   /**
-   * @kind boolean
-   * @required false
    * @default true
    * @description 是否显示卡片
+   * @group basic
    */
   @property({
     attribute: false,
@@ -103,10 +100,9 @@ export class BrickTagElement extends UpdatingElement {
   showCard = true;
 
   /**
-   * @kind any
-   * @required false
-   * @default -
    * @description 数据源，通过 useResolves 从后台接口获取
+   * @deprecated
+   * @group other
    */
   @property({
     attribute: false,
@@ -114,19 +110,16 @@ export class BrickTagElement extends UpdatingElement {
   dataSource: Record<string, any>;
 
   /**
-   * @kind Color
-   * @required false
-   * @default -
    * @description 标签的颜色配置，当 `componentType=Tag` 且 `closable!=true` 时才有效，除了提供内置八种主题色，也支持直接赋色值（如 `#f5f5f5`）使用
+   * @group ui
    */
   @property()
   color: string | Color;
 
   /**
-   * @kind "Tag"/"CheckableTag"
-   * @required false
    * @default "Tag"
    * @description 组件类型，对应 ant-design 中的基本标签和可选中标签
+   * @group basic
    */
   @property({
     attribute: false,
@@ -134,10 +127,8 @@ export class BrickTagElement extends UpdatingElement {
   componentType: TagTypeProps;
 
   /**
-   * @kind string|string[]
-   * @required false
-   * @default -
    * @description componentType 为`CheckableTag`的时候默认选中的标签 key
+   * @group basic
    */
   @property({
     attribute: false,
@@ -145,10 +136,9 @@ export class BrickTagElement extends UpdatingElement {
   default: string | string[];
 
   /**
-   * @kind boolean
-   * @required false
    * @default true
    * @description 是否能多选，多选场景下右上角会有小圆点提示
+   * @group basic
    */
   @property({
     attribute: false,
@@ -156,10 +146,9 @@ export class BrickTagElement extends UpdatingElement {
   multipleCheck = true;
 
   /**
-   * @kind boolean
-   * @required false
    * @default true
    * @description 标签是否可以取消单选，在 `componentType` 为 `CheckableTag` 且 `multipleCheck` 为 `false` 时生效。
+   * @group basic
    */
   @property({
     attribute: false,
@@ -167,10 +156,9 @@ export class BrickTagElement extends UpdatingElement {
   cancelable = true;
 
   /**
-   * @kind boolean
-   * @required false
    * @default false
    * @description 标签是否可以关闭
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -178,11 +166,8 @@ export class BrickTagElement extends UpdatingElement {
   closable: boolean;
 
   /**
-   * @kind object
-   * @required false
-   * @default -
    * @description ant-design 相关配置项, [具体查阅](https://ant.design/components/tag-cn/#Tag) ，只有在 componentType=Tag 时才有效
-   * @group advanced
+   * @group other
    */
   @property({
     attribute: false,
@@ -190,21 +175,15 @@ export class BrickTagElement extends UpdatingElement {
   configProps: Record<string, any>;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 禁用标签的 tooltip
-   * @group advanced
+   * @group basic
    */
   @property()
   disabledTooltip: string;
 
   /**
-   * @kind object
-   * @required false
-   * @default -
    * @description 标签的 tooltip 相关配置项, [具体查阅](https://ant.design/components/tooltip-cn/#API)
-   * @group advanced
+   * @group other
    */
   @property({
     attribute: false,
@@ -212,21 +191,17 @@ export class BrickTagElement extends UpdatingElement {
   tooltipProps: TooltipProps;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 标签前的 label
-   * @group advanced
+   * @group basic
    */
   @property()
   label: string;
 
   /**
-   * @kind { label: string; key: string; icon?: string; tagList?: string; }
-   * @required false
    * @default { label: "label", key: "key", icon: "icon"}
    * @description 这里可以规定从 dataSource 中的哪个字段取标签渲染的数据，例如 dataSource 返回的数据为 [{key:"1"},{key:"2"}]，则可写成 {label: "key", key: "key"}
-   * @group advanced
+   * @deprecated
+   * @group other
    */
   @property({
     attribute: false,
@@ -243,11 +218,9 @@ export class BrickTagElement extends UpdatingElement {
   };
 
   /**
-   * @kind boolean
-   * @required false
    * @default false
    * @description 文字是否超出省略
-   * @group advanced
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -255,11 +228,8 @@ export class BrickTagElement extends UpdatingElement {
   textEllipsis: boolean;
 
   /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
    * @description 标签的自定义样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -267,11 +237,8 @@ export class BrickTagElement extends UpdatingElement {
   tagStyle: Record<string, any>;
 
   /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
    * @description 标签选中的自定义样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -279,11 +246,8 @@ export class BrickTagElement extends UpdatingElement {
   tagCheckedStyle: Record<string, any>;
 
   /**
-   * @kind Record<string, any>
-   * @required false
-   * @default -
    * @description 标签 Hover 的自定义样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
