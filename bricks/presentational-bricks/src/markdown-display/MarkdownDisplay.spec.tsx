@@ -77,4 +77,57 @@ describe("MarkdownDisplay", () => {
     expect(element.innerHTML.indexOf("ant-image") >= 0).toBeTruthy();
     jest.useRealTimers();
   });
+
+  it("image could be set size", async () => {
+    jest.useFakeTimers();
+    const element = document.createElement("div");
+    document.getElementById = jest.fn(() => element);
+    const wrapper1 = mount(
+      <MarkdownDisplay
+        imagePreview={false}
+        value="![img](http://www.baidu.com/a.jpg&style=200x200)"
+      />
+    );
+
+    expect(wrapper1.html()).toMatchInlineSnapshot(`
+      "<div class=\\"customMarkdown\\"><p><img height=\\"200\\" width=\\"200\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      </div>"
+    `);
+
+    const wrapper2 = mount(
+      <MarkdownDisplay
+        imagePreview={false}
+        value="![img](http://www.baidu.com/a.jpg&style=400×)"
+      />
+    );
+
+    expect(wrapper2.html()).toMatchInlineSnapshot(`
+      "<div class=\\"customMarkdown\\"><p><img height=\\"\\" width=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      </div>"
+    `);
+
+    const wrapper3 = mount(
+      <MarkdownDisplay
+        imagePreview={false}
+        value="![img](http://www.baidu.com/a.jpg&style=x400)"
+      />
+    );
+
+    expect(wrapper3.html()).toMatchInlineSnapshot(`
+      "<div class=\\"customMarkdown\\"><p><img height=\\"400\\" width=\\"\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      </div>"
+    `);
+
+    const wrapper4 = mount(
+      <MarkdownDisplay
+        imagePreview={false}
+        value="![img](http://www.baidu.com/a.jpgstyle=x400)"
+      />
+    );
+
+    expect(wrapper4.html()).toMatchInlineSnapshot(`
+      "<div class=\\"customMarkdown\\"><p><img height=\\"\\" width=\\"\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpgstyle=x400\\"></p>
+      </div>"
+    `);
+  });
 });
