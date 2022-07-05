@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { BrickResult, BrickResultStatus } from "./BrickResult";
+import { BrickResult } from "./BrickResult";
+import { BrickResultStatus } from "../interfaces/brick-result";
 
 describe("BrickResult", () => {
   it("should work", () => {
