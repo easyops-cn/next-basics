@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.252.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.251.2...@next-bricks/presentational-bricks@1.252.0) (2022-07-05)
+
+
+### Features
+
+* brick-tag添加useBrick和useBrickData属性 refs PERMISSION-252 ([6e5fdc5](https://github.com/easyops-cn/next-basics/commit/6e5fdc5fad2f60cfacef1abbb3d20c46d463d39e))
+
+
+
+
+
 ## [1.251.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.251.1...@next-bricks/presentational-bricks@1.251.2) (2022-07-03)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
