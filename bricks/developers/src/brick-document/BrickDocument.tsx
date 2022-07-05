@@ -121,7 +121,7 @@ export function BrickDocument({
     return <span className={styles.typeWrapper}>{str}</span>;
   };
 
-  const convertMarkdownLinkToHtmlLink = (value: string) => {
+  const convertMarkdownLinkToHtmlLink = (value: string): { __html: string } => {
     if (typeof value !== "string") return { __html: value || "-" };
 
     value = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -140,7 +140,7 @@ export function BrickDocument({
     }
 
     if (interfaceIds.length > 0 && renderLink) {
-      generateInterfaceRef(str, hashHref);
+      return generateInterfaceRef(str, hashHref);
     }
 
     const subsetReg = /`\s*([^]+?.*?[^]+?[^]?)`/g;
@@ -152,6 +152,43 @@ export function BrickDocument({
       };
 
     return { __html: str };
+  };
+
+  const renderTableCell = (
+    column: { title: string; key: string },
+    value: any
+  ): React.ReactElement | string => {
+    const { key } = column;
+
+    switch (key) {
+      case "required":
+        return renderRequiredAnnotation(value[column.key]);
+      case "detail":
+      case "type":
+      case "params":
+        return renderTypeAnnotation(value[column.key]);
+      case "description":
+      case "change":
+      case "default":
+        return (
+          <span
+            dangerouslySetInnerHTML={convertMarkdownLinkToHtmlLink(
+              value[column.key]
+            )}
+          ></span>
+        );
+      case "name": {
+        const parameter = value.parameters?.[0];
+
+        if (parameter) {
+          return `[${parameter.name}: ${parameter.type}]`;
+        }
+
+        // falls through
+      }
+      default:
+        return value[column.key];
+    }
   };
 
   const renderTable = (
@@ -181,21 +218,7 @@ export function BrickDocument({
                 })}
               >
                 {columns.map((column, i) => (
-                  <td key={i}>
-                    {column.key === "required" ? (
-                      renderRequiredAnnotation(value[column.key])
-                    ) : ["detail", "type", "params"].includes(column.key) ? (
-                      renderTypeAnnotation(value[column.key])
-                    ) : (
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: convertMarkdownLinkToHtmlLink(
-                            value[column.key]
-                          ).__html,
-                        }}
-                      ></span>
-                    )}
-                  </td>
+                  <td key={i}>{renderTableCell(column, value)}</td>
                 ))}
               </tr>
             </Tooltip>
@@ -269,7 +292,7 @@ export function BrickDocument({
   };
 
   const renderInterface = (
-    interfaces: StoryDocInterface
+    docInterface: StoryDocInterface
   ): React.ReactElement => {
     const columns = [
       { title: "name", key: "name" },
@@ -280,22 +303,39 @@ export function BrickDocument({
       },
       { title: "description", key: "description" },
     ];
+    const {
+      name,
+      typeParameter,
+      extendedTypes,
+      children = [],
+      indexSignature = [],
+    } = docInterface;
+    const extendedTypesLength = extendedTypes?.length;
 
     return (
-      interfaces && (
-        <>
-          <h3 className={style.interfaceTitle} id={interfaces.name}>
-            <span>
-              {interfaces.name}
-              {interfaces.typeParameter}
-            </span>
-            <Tag color="cyan" className={style.badge}>
-              Interface
+      <>
+        <h3 className={style.interfaceTitle} id={name}>
+          <span>
+            {name}
+            {typeParameter}
+          </span>
+          <Tag color="cyan" className={style.badge}>
+            Interface
+          </Tag>
+          {extendedTypes && (
+            <Tag color="green" className={style.badge}>
+              extends{" "}
+              {extendedTypes.map((type, index) => (
+                <React.Fragment key={type.name}>
+                  <strong>{renderTypeAnnotation(type.name)}</strong>
+                  {index + 1 < extendedTypesLength && ", "}
+                </React.Fragment>
+              ))}
             </Tag>
-          </h3>
-          {renderTable(columns, interfaces.children)}
-        </>
-      )
+          )}
+        </h3>
+        {renderTable(columns, [...children, ...indexSignature])}
+      </>
     );
   };
 
