@@ -18,3 +18,8 @@ export enum Color {
   "gray-inverse" = "gray-inverse",
   "yellow-inverse" = "yellow-inverse",
 }
+
+export enum TagTypeProps {
+  Tag = "Tag",
+  CheckableTag = "CheckableTag",
+}

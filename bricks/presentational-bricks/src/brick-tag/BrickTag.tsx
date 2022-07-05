@@ -8,9 +8,9 @@ import { isArray, differenceBy } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { MenuIcon } from "@next-core/brick-types";
-import { Color } from "../interfaces/brick-tag";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
+import { TagTypeProps, Color } from "../interfaces/brick-tag";
 export { Color } from "../interfaces/brick-tag";
 
 export const circleIcon: MenuIcon = {
@@ -18,11 +18,6 @@ export const circleIcon: MenuIcon = {
   icon: "circle",
   prefix: "fas",
 };
-
-export enum TagTypeProps {
-  Tag = "Tag",
-  CheckableTag = "CheckableTag",
-}
 
 export type TagListType = {
   key: string;
