@@ -80,6 +80,7 @@ export class BrickTagElement extends UpdatingElement {
   tagList: TagListType[];
 
   /**
+   * @required false
    * @default false
    * @description 是否在标签内显示小圆点
    * @group ui
@@ -90,6 +91,7 @@ export class BrickTagElement extends UpdatingElement {
   showTagCircle: boolean;
 
   /**
+   * @required false
    * @default true
    * @description 是否显示卡片
    * @group basic
@@ -100,6 +102,7 @@ export class BrickTagElement extends UpdatingElement {
   showCard = true;
 
   /**
+   * @required false
    * @description 数据源，通过 useResolves 从后台接口获取
    * @deprecated
    * @group other
@@ -110,6 +113,7 @@ export class BrickTagElement extends UpdatingElement {
   dataSource: Record<string, any>;
 
   /**
+   * @required false
    * @description 标签的颜色配置，当 `componentType=Tag` 且 `closable!=true` 时才有效，除了提供内置八种主题色，也支持直接赋色值（如 `#f5f5f5`）使用
    * @group ui
    */
@@ -117,6 +121,7 @@ export class BrickTagElement extends UpdatingElement {
   color: string | Color;
 
   /**
+   * @required false
    * @default "Tag"
    * @description 组件类型，对应 ant-design 中的基本标签和可选中标签
    * @group basic
@@ -127,6 +132,7 @@ export class BrickTagElement extends UpdatingElement {
   componentType: TagTypeProps;
 
   /**
+   * @required false
    * @description componentType 为`CheckableTag`的时候默认选中的标签 key
    * @group basic
    */
@@ -136,6 +142,7 @@ export class BrickTagElement extends UpdatingElement {
   default: string | string[];
 
   /**
+   * @required false
    * @default true
    * @description 是否能多选，多选场景下右上角会有小圆点提示
    * @group basic
@@ -146,6 +153,7 @@ export class BrickTagElement extends UpdatingElement {
   multipleCheck = true;
 
   /**
+   * @required false
    * @default true
    * @description 标签是否可以取消单选，在 `componentType` 为 `CheckableTag` 且 `multipleCheck` 为 `false` 时生效。
    * @group basic
@@ -156,6 +164,7 @@ export class BrickTagElement extends UpdatingElement {
   cancelable = true;
 
   /**
+   * @required false
    * @default false
    * @description 标签是否可以关闭
    * @group basic
@@ -166,6 +175,7 @@ export class BrickTagElement extends UpdatingElement {
   closable: boolean;
 
   /**
+   * @required false
    * @description ant-design 相关配置项, [具体查阅](https://ant.design/components/tag-cn/#Tag) ，只有在 componentType=Tag 时才有效
    * @group other
    */
@@ -175,6 +185,7 @@ export class BrickTagElement extends UpdatingElement {
   configProps: Record<string, any>;
 
   /**
+   * @required false
    * @description 禁用标签的 tooltip
    * @group basic
    */
@@ -182,6 +193,7 @@ export class BrickTagElement extends UpdatingElement {
   disabledTooltip: string;
 
   /**
+   * @required false
    * @description 标签的 tooltip 相关配置项, [具体查阅](https://ant.design/components/tooltip-cn/#API)
    * @group other
    */
@@ -191,6 +203,7 @@ export class BrickTagElement extends UpdatingElement {
   tooltipProps: TooltipProps;
 
   /**
+   * @required false
    * @description 标签前的 label
    * @group basic
    */
@@ -198,6 +211,7 @@ export class BrickTagElement extends UpdatingElement {
   label: string;
 
   /**
+   * @required false
    * @default { label: "label", key: "key", icon: "icon"}
    * @description 这里可以规定从 dataSource 中的哪个字段取标签渲染的数据，例如 dataSource 返回的数据为 [{key:"1"},{key:"2"}]，则可写成 {label: "key", key: "key"}
    * @deprecated
@@ -218,6 +232,7 @@ export class BrickTagElement extends UpdatingElement {
   };
 
   /**
+   * @required false
    * @default false
    * @description 文字是否超出省略
    * @group ui
@@ -228,6 +243,7 @@ export class BrickTagElement extends UpdatingElement {
   textEllipsis: boolean;
 
   /**
+   * @required false
    * @description 标签的自定义样式
    * @group ui
    */
@@ -237,6 +253,7 @@ export class BrickTagElement extends UpdatingElement {
   tagStyle: Record<string, any>;
 
   /**
+   * @required false
    * @description 标签选中的自定义样式
    * @group ui
    */
@@ -246,6 +263,7 @@ export class BrickTagElement extends UpdatingElement {
   tagCheckedStyle: Record<string, any>;
 
   /**
+   * @required false
    * @description 标签 Hover 的自定义样式
    * @group ui
    */
@@ -255,9 +273,7 @@ export class BrickTagElement extends UpdatingElement {
   tagHoverStyle: Record<string, any>;
 
   /**
-   * @kind {useBrick: UseBrickConf,data: any}
    * @required false
-   * @default -
    * @description 最后一个tag后面使用子构件，具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
    * @group advanced
    */
