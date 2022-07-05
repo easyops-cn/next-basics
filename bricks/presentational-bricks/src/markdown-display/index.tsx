@@ -18,12 +18,14 @@ import { get } from "lodash";
  */
 export class MarkdownDisplayElement extends UpdatingElement {
   /**
+   * @required false
    * @description markdown 展示内容
    * @group basic
    */
   @property({ attribute: false }) value: string;
 
   /**
+   * @required false
    * @description [已废弃]数据来源
    * @deprecated
    * @group advanced
@@ -31,6 +33,7 @@ export class MarkdownDisplayElement extends UpdatingElement {
   @property({ attribute: false }) dataSource: Record<string, any>;
 
   /**
+   * @required false
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
    * @deprecated
    * @group advanced
@@ -40,6 +43,7 @@ export class MarkdownDisplayElement extends UpdatingElement {
   };
 
   /**
+   * @required false
    * @default true
    * @description markdown 图片是否支持预览
    * @group basic
