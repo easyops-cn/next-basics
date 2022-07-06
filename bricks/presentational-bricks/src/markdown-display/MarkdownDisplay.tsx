@@ -39,24 +39,19 @@ export function MarkdownDisplay({
       out += ">" + text + "</a>";
       return out;
     },
-    image(href: string, _title: string, text: string) {
+    image(href: string, title: string, text: string) {
       /**
        * 场景实例
-       * ![text](href&style=WIDTH×HEIGHT)
-       * ![text](href&style=WIDTHxHEIGHT)
-       * ![text](href&style=WIDTHx)
-       * ![text](href&style=×HEIGHT)
+       * ![text](href "=WIDTH×HEIGHT")
+       * ![text](href "=WIDTHxHEIGHT")
+       * ![text](href "=WIDTHx")
+       * ![text](href "=×HEIGHT")
        */
-      const parts = /(.*)&style=(\d*)[x|×](\d*)$/.exec(href);
-      let src: string,
-        width = "",
-        height = "";
+      const parts = /=(\d*)[x|×](\d*)$/.exec(title);
+      let width: string, height: string;
       if (parts) {
-        src = parts[1];
-        if (parts[2]) width = parts[2];
-        if (parts[3]) height = parts[3];
-      } else {
-        src = href;
+        if (parts[1]) width = parts[1];
+        if (parts[2]) height = parts[2];
       }
       const imgId = uniqueId(text ?? "");
       if (imagePreview) {
@@ -65,12 +60,12 @@ export function MarkdownDisplay({
         setTimeout(() => {
           ReactDOM.render(
             <Image
-              src={src}
+              src={href}
               alt={text}
               fallback={errorImage}
               style={{
-                width: `${width}px`,
-                height: `${height}px`,
+                width: width ? `${width}px` : "",
+                height: height ? `${height}px` : "",
               }}
             />,
             document.getElementById(imgId)
@@ -80,7 +75,9 @@ export function MarkdownDisplay({
           <img src="${errorImage}">
         </div>`;
       } else {
-        return `<img src="${src}" alt="${text}" width="${width}" height="${height}">`;
+        return `<img src="${href}" alt="${text}" ${
+          width ? `width="${width}"` : ""
+        } ${height ? `height="${height}"` : ""}>`;
       }
     },
   } as Partial<marked.Renderer> as marked.Renderer;

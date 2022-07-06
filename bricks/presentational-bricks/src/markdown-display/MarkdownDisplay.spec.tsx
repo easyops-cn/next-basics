@@ -85,7 +85,7 @@ describe("MarkdownDisplay", () => {
     const wrapper1 = mount(
       <MarkdownDisplay
         imagePreview={false}
-        value="![img](http://www.baidu.com/a.jpg&style=200x200)"
+        value="![img](http://www.baidu.com/a.jpg '=200x200')"
       />
     );
 
@@ -97,36 +97,36 @@ describe("MarkdownDisplay", () => {
     const wrapper2 = mount(
       <MarkdownDisplay
         imagePreview={false}
-        value="![img](http://www.baidu.com/a.jpg&style=400×)"
+        value="![img](http://www.baidu.com/a.jpg '=400×')"
       />
     );
 
     expect(wrapper2.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"\\" width=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown\\"><p><img width=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
 
     const wrapper3 = mount(
       <MarkdownDisplay
         imagePreview={false}
-        value="![img](http://www.baidu.com/a.jpg&style=x400)"
+        value="![img](http://www.baidu.com/a.jpg '=x400')"
       />
     );
 
     expect(wrapper3.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"400\\" width=\\"\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      "<div class=\\"customMarkdown\\"><p><img height=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
       </div>"
     `);
 
     const wrapper4 = mount(
       <MarkdownDisplay
         imagePreview={false}
-        value="![img](http://www.baidu.com/a.jpgstyle=x400)"
+        value="![img](http://www.baidu.com/a.jpg =200x200)"
       />
     );
 
     expect(wrapper4.html()).toMatchInlineSnapshot(`
-      "<div class=\\"customMarkdown\\"><p><img height=\\"\\" width=\\"\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpgstyle=x400\\"></p>
+      "<div class=\\"customMarkdown\\"><p>![img](<a href=\\"http://www.baidu.com/a.jpg\\">http://www.baidu.com/a.jpg</a> =200x200)</p>
       </div>"
     `);
   });
