@@ -1,7 +1,13 @@
 import React from "react";
-import { UserOrUserGroupSelect } from "./UserOrUserGroupSelect";
+import {
+  UserOrUserGroupSelect,
+  UserSelectFormItem,
+} from "./UserOrUserGroupSelect";
 import { act } from "@testing-library/react";
-import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceApi_postSearch,
+  CmdbObjectApi_getObjectRef,
+} from "@next-sdk/cmdb-sdk";
 import { mount } from "enzyme";
 import { Select } from "antd";
 
@@ -26,49 +32,47 @@ describe("UserOrUserGroupSelect", () => {
       ],
     });
     const onChange = jest.fn();
-    let wrapper: any;
-    await act(async () => {
-      wrapper = mount(
-        <UserOrUserGroupSelect
-          onChange={onChange}
-          objectMap={{
-            USER: {
-              view: {
-                show_key: ["name", "nickname"],
-              },
-            },
 
-            USER_GROUP: {
-              view: {
-                show_key: ["name"],
-              },
+    const wrapper = mount(
+      <UserOrUserGroupSelect
+        onChange={onChange}
+        objectList={[
+          {
+            objectId: "USER",
+            view: {
+              show_key: ["name", "nickname"],
             },
-          }}
-          value={{
-            selectedUser: ["easyops"],
-          }}
-        />
-      );
+          },
+          {
+            objectId: "USER_GROUP",
+            view: {
+              show_key: ["name"],
+            },
+          },
+        ]}
+        value={{
+          selectedUser: ["easyops"],
+        }}
+      />
+    );
 
-      await (global as any).flushPromises();
-    });
-    wrapper.find(Select).invoke("onChange")([
-      { key: "easyops1", label: "easyops(uwin1)" },
-    ]);
+    await (global as any).flushPromises();
+    wrapper.find(Select).invoke("onChange")(
+      [{ key: "easyops1", label: "easyops(uwin1)" }],
+      null
+    );
 
     expect(wrapper.find(Select).prop("value")).toEqual([
       { key: "easyops1", label: "easyops(uwin1)" },
     ]);
 
-    await act(async () => {
-      wrapper.setProps({
-        value: {
-          selectedUser: ["easyops"],
-        },
-      });
-
-      await (global as any).flushPromises();
+    wrapper.setProps({
+      value: {
+        selectedUser: ["easyops"],
+      },
     });
+
+    await (global as any).flushPromises();
     wrapper.update();
     expect(wrapper.find(Select).prop("value")).toEqual([
       {
@@ -77,7 +81,7 @@ describe("UserOrUserGroupSelect", () => {
       },
     ]);
 
-    wrapper.find(Select).invoke("onChange")([]);
+    wrapper.find(Select).invoke("onChange")([], null);
     await (global as any).flushPromises();
     expect(onChange).toBeCalledWith(null);
   });
@@ -96,44 +100,51 @@ describe("UserOrUserGroupSelect", () => {
         },
       ],
     });
+    (CmdbObjectApi_getObjectRef as jest.Mock).mockResolvedValue({
+      data: [
+        {
+          objectId: "USER",
+          view: {
+            show_key: ["name", "nickname"],
+          },
+        },
+        {
+          objectId: "USER_GROUP",
+          view: {
+            show_key: ["name"],
+          },
+        },
+      ],
+    });
     const onChange = jest.fn();
-    let wrapper: any;
-    await act(async () => {
-      wrapper = mount(
-        <UserOrUserGroupSelect
-          onChange={onChange}
-          objectMap={{
-            USER: {
-              view: {
-                show_key: ["name", "nickname"],
-              },
-            },
-            USER_GROUP: {
-              view: {
-                show_key: ["name"],
-              },
-            },
-          }}
-          optionsMode="user"
-          query={{
-            instanceId: { $in: ["59eea4ad40bf8", "59eea4ad40bw2"] },
-          }}
-          staticList={["easyops"]}
-        />
-      );
-      await (global as any).flushPromises();
-    });
-    wrapper.find(Select).invoke("onChange")({
-      key: "test",
-      label: "test(xxx)",
-    });
-    expect(wrapper.find(Select).prop("value")).toEqual(["test", "test(xxx)"]);
-    await act(async () => {
-      wrapper.setProps({
-        optionsMode: "group",
-      });
-      await (global as any).flushPromises();
-    });
+
+    const wrapper = mount(
+      <UserOrUserGroupSelect
+        onChange={onChange}
+        optionsMode="user"
+        query={{
+          instanceId: { $in: ["59eea4ad40bf8", "59eea4ad40bw2"] },
+        }}
+        staticList={["easyops"]}
+      />
+    );
+    await (global as any).flushPromises();
     wrapper.update();
+    wrapper.find(Select).invoke("onChange")(
+      {
+        key: "test",
+        label: "test(xxx)",
+      },
+      null
+    );
+    expect(wrapper.find(Select).prop("value")).toEqual(["test", "test(xxx)"]);
+    wrapper.setProps({
+      optionsMode: "group",
+    });
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(UserSelectFormItem).prop("optionsMode")).toEqual(
+      "group"
+    );
   });
 });
