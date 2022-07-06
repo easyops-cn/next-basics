@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import ReactDOM from "react-dom";
 import {
   BrickWrapper,
@@ -27,15 +27,14 @@ import { OptionType } from "../interfaces";
  */
 export class GeneralAutoCompleteElement extends FormItemElement {
   /**
-   * @kind string
    * @required true
    * @default -
    * @description 字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
    * @required false
    * @default -
    * @description 字段说明
@@ -43,65 +42,65 @@ export class GeneralAutoCompleteElement extends FormItemElement {
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind string[]
    * @required true
    * @default -
    * @description 补全选项列表
+   * @group basicFormItem
    */
   @property({ attribute: false })
   options: string[] | OptionType[];
 
   /**
-   * @kind string
    * @required false
    * @default -
    * @description 当前值
+   * @group basicFormItem
    */
   @property()
   value: string;
 
   /**
-   * @kind string
    * @required false
    * @default -
    * @description 占位说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @kind boolean
    * @required false
    * @default -
    * @description 是否禁用
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare disabled: boolean;
 
   /**
-   * @kind boolean
    * @required false
    * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind `Record<string,string>`
    * @required false
    * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind `object`
    * @required false
    * @default
-   * @description 输入框样式
+   * @description 输入框样式,CSSProperties 包含的属性可[查看](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index),需要注意的是该属性中的 key 需要转为小驼峰命名的方式，如设置 background-color 样式其形式为 { backgroundColor: "red"}, 具体原因可 [查看](https://zh-hans.reactjs.org/docs/dom-elements.html#style)
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  inputBoxStyle: React.CSSProperties;
+  inputBoxStyle: CSSProperties;
 
   connectedCallback(): void {
     // istanbul ignore else
@@ -115,7 +114,6 @@ export class GeneralAutoCompleteElement extends FormItemElement {
     ReactDOM.unmountComponentAtNode(this);
   }
   /**
-   * @detail `string`
    * @description 补全输入框变化时触发
    */
   @event({ type: "general.auto-complete.change" })
