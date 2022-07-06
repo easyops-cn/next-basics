@@ -1,12 +1,14 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
-import {
-  BrickResult,
-  BrickResultStatus,
-  IllustrationsConfig,
-} from "./BrickResult";
+import { BrickResult } from "./BrickResult";
 import style from "./index.shadow.less";
+import {
+  BrickResultStatus,
+  EmptyResultStatus,
+  IllustrationsStatus,
+  IllustrationsConfig,
+} from "../interfaces/brick-result";
 
 /**
  * @id presentational-bricks.brick-result
@@ -19,82 +21,51 @@ import style from "./index.shadow.less";
  * @history
  * 1.54.0:新增状态，`EmptyResultStatus`, 与规范对齐
  * @memo
- * ```typescript
- * export enum BrickResultStatus {
- *   Success = "success",
- *   Error = "error",
- *   Info = "info",
- *   Warning = "warning",
- *   E404 = "404",
- *   E403 = "403",
- *   E500 = "500",
- * }
- *
- * export enum EmptyResultStatus {
- *   BrowserTooOld = "browser-too-old",
- *   Empty = "empty",
- *   NoData = "no-data",
- *   NoHistoryVersion = "no-history-version",
- *   NoVisitRecord = "no-visit-record",
- *   SearchEmpty = "search-empty",
- *   WelcomeToCreate = "welcome-to-create",
- * }
- *
- * export type IllustrationsStatus = "illustrations";
- *
- * export interface IllustrationsConfig {
- *   imageStyle?: CSSProperties;
- *   name?: string;
- *   category?: string;
- * }
- *
- * ```
  * @noInheritDoc
  */
+
 export class BrickResultElement extends UpdatingElement {
   private _mountPoint: HTMLElement;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 主标题文字
+   * @group basic
    */
   @property()
   customTitle: string;
 
   /**
-   * @kind `BrickResultStatus` | `EmptyResultStatus` | `IllustrationsStatus`
    * @required true
    * @default -
    * @description 结果的状态, 决定图标和颜色
+   * @group basic
    */
   @property({ attribute: false })
-  status: string;
+  status: BrickResultStatus | EmptyResultStatus | IllustrationsStatus;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 次标题文字
+   * @group basic
    */
   @property()
   subTitle: string;
 
   /**
-   * @kind string
    * @required false
    * @default -
    * @description [自定义图标](https://ant.design/components/icon-cn/), 仅当 status 为 `BrickResultStatus` 时有效
+   * @group ui
    */
   @property()
   icon: string;
 
   /**
-   * @kind IllustrationsConfig
    * @required false
    * @default {}
    * @description 自定义插画配置
+   * @group other
    */
   @property({ attribute: false })
   illustrationsConfig: IllustrationsConfig = {};

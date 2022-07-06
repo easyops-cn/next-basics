@@ -4,6 +4,11 @@ import { UseBrickConf } from "@next-core/brick-types";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { GeneralTooltip, GeneralTooltipProps } from "./GeneralTooltip";
 
+export interface DisplayBrick {
+  useBrick: UseBrickConf;
+  data?: any;
+}
+
 export type TooltipPlacement =
   | "top"
   | "left"
@@ -49,8 +54,8 @@ export class GeneralTooltipElement extends UpdatingElement {
   /**
    * @kind string | string[]
    * @required true
-   * @default -
    * @description 提示内容, 数组表示多行显示, 可根据平台提供的 transform 机制转换成所需的提示内容
+   * @group basic
    */
   @property({
     attribute: false,
@@ -60,8 +65,8 @@ export class GeneralTooltipElement extends UpdatingElement {
   /**
    * @kind MenuIcon
    * @required true
-   * @default -
    * @description 图标配置 [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
+   * @group basic
    */
   @property({
     attribute: false,
@@ -69,19 +74,17 @@ export class GeneralTooltipElement extends UpdatingElement {
   icon: GeneralTooltipProps["icon"];
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 文案
+   * @group basic
    */
   @property()
   text: string;
 
   /**
-   * @kind object
    * @required false
-   * @default -
    * @description 图标容器相关样式
+   * @group ui
    */
   @property({
     attribute: false,
@@ -93,6 +96,7 @@ export class GeneralTooltipElement extends UpdatingElement {
    * @required false
    * @default tooltip
    * @description 类型设置
+   * @group basic
    */
   @property({
     attribute: false,
@@ -100,28 +104,26 @@ export class GeneralTooltipElement extends UpdatingElement {
   type: GeneralTooltipProps["type"] = "tooltip";
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 提示内容的标题， 当 type = popover 时才生效
+   * @group basic
    */
   @property()
   header: string;
 
   /**
-   * @kind `TooltipConfig`
    * @required false
-   * @default -
    * @description tooltip的配置,配置属性见TooltipConfig
+   * @group other
    */
   @property({ attribute: false })
   tooltipConfig: TooltipConfig;
 
   /**
-   * @kind boolean
    * @required false
    * @default true
    * @description 是否只在icon上hover才显示tooltip，仅在不设置`displayBrick`时有效
+   * @group other
    */
   @property({
     attribute: false,
@@ -129,18 +131,14 @@ export class GeneralTooltipElement extends UpdatingElement {
   triggerByIcon = true;
 
   /**
-   * @kind CustomBrick
    * @required false
-   * @default -
    * @description 自定义展示内容构件，设置后`icon`和`text`会无效
+   * @group basic
    */
   @property({
     attribute: false,
   })
-  displayBrick: {
-    useBrick: UseBrickConf;
-    data?: any;
-  };
+  displayBrick: DisplayBrick;
 
   connectedCallback(): void {
     this.style.display = "inline-block";

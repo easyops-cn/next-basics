@@ -25,19 +25,17 @@ export interface LinkInfo {
  */
 export class BrickHumanizeTimeElement extends UpdatingElement {
   /**
-   * @kind string
    * @required false
-   * @default -
-   * @description 字符串的时间格式，如 "YYYY-MM-DD"
+   * @description 字符串的时间格式，如 "YYYY-MM-DD", [时间格式参照表](https://dayjs.gitee.io/docs/zh-CN/parse/string-format)
+   * @group basic
    */
   @property()
   inputFormat: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
-   * @description 展示时间格式，如 "YYYY-MM-DD"，当设置该属性时，属性 `formatter` 无效
+   * @description 展示时间格式，如 "YYYY-MM-DD"，当设置该属性时，属性 `formatter` 无效 [时间格式参照表](https://dayjs.gitee.io/docs/zh-CN/parse/string-format)
+   * @group basic
    */
   @property()
   outputFormat: string;
@@ -94,10 +92,10 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   }
 
   /**
-   * @kind Record<string, any>
    * @required false
-   * @default -
    * @description [已废弃]数据来源
+   * @deprecated
+   * @group other
    */
   @property({
     attribute: false,
@@ -105,10 +103,10 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   dataSource: Record<string, any>;
 
   /**
-   * @kind { value: string }
    * @required false
-   * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段的值
+   * @deprecated
+   * @group other
    */
   @property({
     attribute: false,
@@ -116,10 +114,9 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   fields: { value: string };
 
   /**
-   * @kind number | string
    * @required false
-   * @default -
    * @description 时间截，或字符串，当为字符串时，应提供时间格式 `inputFormat`
+   * @group basic
    */
   @property({
     attribute: false,
@@ -127,10 +124,10 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   value: number | string;
 
   /**
-   * @kind full|default|relative|future|accurate|auto
+   * @kind "full" | "default" | "relative" | "future" | "accurate" | "auto"
    * @required false
-   * @default -
-   * @description 枚举值：full, default, relative, future, accurate, auto
+   * @description 枚举值：full, default, relative, future, accurate, auto [类型链接](https://github.com/easyops-cn/next-libs/blob/207fe7ee3ac010ab860c23cd062216c8ca612f0c/libs/datetime/src/humanizeTime.ts#L9)
+   * @group basic
    */
   @property({
     attribute: false,
@@ -138,10 +135,10 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   formatter: HumanizeTimeFormat;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description value 值的单位是否为毫秒
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -149,10 +146,10 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   isMicrosecond: boolean;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 是否展示为耗费时间，例如：'1 个月 20 天'
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -160,10 +157,9 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   isCostTime: boolean;
 
   /**
-   * @kind LinkInfo
    * @required false
-   * @default -
    * @description 跳转链接，默认为空
+   * @group basic
    */
   @property({
     attribute: false,
