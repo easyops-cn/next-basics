@@ -104,16 +104,17 @@ export function ResizableBox({
       setResizerStatus(null);
     };
 
+    const refBarCurrent = refBar.current;
+
     window.addEventListener("mousemove", handleResizerMouseMove);
     window.addEventListener("mouseup", handleResizerMouseUp);
     // shadowRoot 中不能直接在组件中绑定React事件, 会导致子节点事件冲突
-    refBar.current.addEventListener("mousedown", handleResizerMouseDown);
+    refBarCurrent.addEventListener("mousedown", handleResizerMouseDown);
 
     return () => {
       window.removeEventListener("mousemove", handleResizerMouseMove);
       window.removeEventListener("mouseup", handleResizerMouseUp);
-      refBar.current &&
-        refBar.current.removeEventListener("mousedown", handleResizerMouseDown);
+      refBarCurrent.removeEventListener("mousedown", handleResizerMouseDown);
     };
   }, [
     resizeDirection,
