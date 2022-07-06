@@ -124,7 +124,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   value: number | string;
 
   /**
-   * @kind full | default | relative | future | accurate | auto
+   * @kind "full" | "default" | "relative" | "future" | "accurate" | "auto"
    * @required false
    * @description 枚举值：full, default, relative, future, accurate, auto [类型链接](https://github.com/easyops-cn/next-libs/blob/207fe7ee3ac010ab860c23cd062216c8ca612f0c/libs/datetime/src/humanizeTime.ts#L9)
    * @group basic
