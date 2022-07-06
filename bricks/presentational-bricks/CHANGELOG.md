@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.253.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.252.3...@next-bricks/presentational-bricks@1.253.0) (2022-07-06)
+
+
+### Features
+
+* **markdownEditor:** replace size params ([73ef67c](https://github.com/easyops-cn/next-basics/commit/73ef67c0e3e348750a818583da9096b7bd9d4042))
+* **markdownEditor:** support image set size ([54962fa](https://github.com/easyops-cn/next-basics/commit/54962fa82ebc58f453016ea6a45caffa3261bb53))
+
+
+
+
+
 ## [1.252.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.252.2...@next-bricks/presentational-bricks@1.252.3) (2022-07-06)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
