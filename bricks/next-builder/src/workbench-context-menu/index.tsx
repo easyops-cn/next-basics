@@ -5,9 +5,10 @@ import {
   event,
   type EventEmitter,
   property,
+  method,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { BuilderProvider } from "@next-core/editor-bricks-helper";
+import { BuilderContextMenuStatus } from "@next-core/editor-bricks-helper";
 import { ContextMenuItem, WorkbenchContextMenu } from "./WorkbenchContextMenu";
 import { ActionClickDetail } from "../shared/workbench/interfaces";
 import type { BuilderClipboard } from "../builder-container/interfaces";
@@ -27,12 +28,30 @@ export class WorkbenchContextMenuElement extends UpdatingElement {
   @property({ attribute: false })
   clipboard: BuilderClipboard;
 
+  @property({ attribute: false })
+  contextMenuStatus: BuilderContextMenuStatus = {} as BuilderContextMenuStatus;
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
   private _handleActionClick = (detail: ActionClickDetail): void => {
     this._actionClickEvent.emit(detail);
   };
+
+  private _handleContextMenuClose = (): void => {
+    this.contextMenuStatus.active = false;
+    this._render();
+  };
+
+  @method()
+  show(): void {
+    this.contextMenuStatus.active = true;
+  }
+
+  @method()
+  close(): void {
+    this._handleContextMenuClose();
+  }
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -52,13 +71,14 @@ export class WorkbenchContextMenuElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <BuilderProvider>
-            <WorkbenchContextMenu
-              menu={this.menu}
-              clipboard={this.clipboard}
-              onActionClick={this._handleActionClick}
-            />
-          </BuilderProvider>
+          <WorkbenchContextMenu
+            contextMenuStatus={this.contextMenuStatus}
+            menu={this.menu}
+            clipboard={this.clipboard}
+            canPaste={true}
+            onActionClick={this._handleActionClick}
+            handleCloseMenu={this._handleContextMenuClose}
+          />
         </BrickWrapper>,
         this
       );

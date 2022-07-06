@@ -2,40 +2,31 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {
   BrickWrapper,
-  event,
-  type EventEmitter,
-  property,
   UpdatingElement,
+  property,
+  event,
+  EventEmitter,
 } from "@next-core/brick-kit";
-import {
-  BuilderContextMenuStatus,
-  BuilderProvider,
-} from "@next-core/editor-bricks-helper";
+import { WorkbenchBrickContextMenu } from "./WorkbenchBrickContextMenu";
+import { ContextMenuItem } from "../workbench-context-menu/WorkbenchContextMenu";
+import { BuilderClipboard } from "../builder-container/interfaces";
 import { ActionClickDetail } from "../shared/workbench/interfaces";
-import type { BuilderClipboard } from "../builder-container/interfaces";
-import {
-  ContextMenuItem,
-  WorkbenchCommonContextMenu,
-} from "./WorkbenchCommonContextMenu";
-import { method } from "@next-core/brick-kit";
+import { BuilderProvider } from "@next-core/editor-bricks-helper";
 
 /**
- * @id next-builder.workbench-common-context-menu
+ * @id next-builder.workbench-brick-context-menu
  * @author SheRunFeng
  * @history
- * 1.x.0: 新增构件 `next-builder.workbench-common-context-menu`
+ * 1.x.0: 新增构件 `next-builder.workbench-brick-context-menu`
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchCommonContextMenuElement extends UpdatingElement {
+export class WorkbenchBrickContextMenuElement extends UpdatingElement {
   @property({ attribute: false })
   menu: ContextMenuItem[];
 
   @property({ attribute: false })
   clipboard: BuilderClipboard;
-
-  @property({ attribute: false })
-  contextMenuStatus: BuilderContextMenuStatus = {} as BuilderContextMenuStatus;
 
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
@@ -43,21 +34,6 @@ export class WorkbenchCommonContextMenuElement extends UpdatingElement {
   private _handleActionClick = (detail: ActionClickDetail): void => {
     this._actionClickEvent.emit(detail);
   };
-
-  private _handleContextMenuClose = (): void => {
-    this.contextMenuStatus.active = false;
-    this._render();
-  };
-
-  @method()
-  show(): void {
-    this.contextMenuStatus.active = true;
-  }
-
-  @method()
-  close(): void {
-    this._handleContextMenuClose();
-  }
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -78,12 +54,10 @@ export class WorkbenchCommonContextMenuElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
-            <WorkbenchCommonContextMenu
-              contextMenuStatus={this.contextMenuStatus}
+            <WorkbenchBrickContextMenu
               menu={this.menu}
               clipboard={this.clipboard}
               onActionClick={this._handleActionClick}
-              onContextMenuClose={this._handleContextMenuClose}
             />
           </BuilderProvider>
         </BrickWrapper>,
@@ -94,6 +68,6 @@ export class WorkbenchCommonContextMenuElement extends UpdatingElement {
 }
 
 customElements.define(
-  "next-builder.workbench-common-context-menu",
-  WorkbenchCommonContextMenuElement
+  "next-builder.workbench-brick-context-menu",
+  WorkbenchBrickContextMenuElement
 );

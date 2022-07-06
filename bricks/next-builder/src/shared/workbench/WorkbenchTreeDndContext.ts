@@ -9,16 +9,16 @@ export enum dragStatusEnum {
 
 interface WorkbenchTreeDndContext {
   allow?: boolean;
-  allowMoveToRoot?: boolean;
-  dragNode: HTMLElement;
+  allowDragToRoot?: boolean;
+  dragElement: HTMLElement;
+  dragOverElement: HTMLElement;
   dragStatus: dragStatusEnum;
-  dragOverNode: HTMLElement;
-  onDragStart: (
+  onDragStart?: (
     e: React.DragEvent<HTMLElement>,
     node: WorkbenchNodeData
   ) => void;
-  onDragOver: (e: React.DragEvent<HTMLElement>) => void;
-  onDrop: (e: React.DragEvent<HTMLElement>) => void;
+  onDragOver?: (e: React.DragEvent<HTMLElement>) => void;
+  onDrop?: (e: React.DragEvent<HTMLElement>) => void;
 }
 
 export const WorkbenchTreeDndContext = createContext<WorkbenchTreeDndContext>(
