@@ -38,20 +38,12 @@ export class WorkbenchContextMenuElement extends UpdatingElement {
     this._actionClickEvent.emit(detail);
   };
 
-  private _handleContextMenuClose = (): void => {
-    this.contextMenuStatus.active = false;
-    this._render();
+  private _handleContextMenuClose = (e: React.MouseEvent): void => {
+    e.preventDefault();
+    this.contextMenuStatus = {
+      active: false,
+    };
   };
-
-  @method()
-  show(): void {
-    this.contextMenuStatus.active = true;
-  }
-
-  @method()
-  close(): void {
-    this._handleContextMenuClose();
-  }
 
   connectedCallback(): void {
     // Don't override user's style settings.
