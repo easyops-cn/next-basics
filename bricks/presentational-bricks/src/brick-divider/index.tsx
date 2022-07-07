@@ -18,64 +18,62 @@ import { BrickDivider } from "./BrickDivider";
  */
 export class BrickDividerElement extends UpdatingElement {
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 标题
+   * @group basic
    */
   @property()
   dividerTitle: string;
 
   /**
-   * @kind "horizontal" | "vertical" | "radiation"
    * @required false
    * @default horizontal
    * @description 水平|垂直|放射类型,注意`radiation`是个特殊的类型，该样式是特定的
+   * @group basic
    */
   @property() type: "horizontal" | "vertical" | "radiation";
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 是否虚线
+   * @group basic
    */
   @property() dashed: boolean;
 
   /**
-   * @kind Record<string,any>
    * @required false
-   * @default -
    * @description 分割线自定义样式
+   * @group basic
    */
   @property({
     attribute: false,
   })
-  dividerStyle: any;
+  dividerStyle: React.CSSProperties;
 
   /**
-   * @kind "center" 或 "left" 或 "right"
+   * @kind "center" | "left" | "right"
    * @required false
    * @default center
    * @description 标题位置
+   * @group basic
    */
   @property()
   orientation: "center" | "left" | "right";
 
   /**
-   * @kind `boolean`
    * @required false
    * @default  false
    * @description 文字是否显示为普通正文样式
+   * @group ui
    */
   @property()
   plain: boolean;
 
   /**
-   * @kind `number[]`
    * @required  false
-   * @default   false
    * @description  当用于数值显示的情况，eg: 如果要展示"1/3"，那么传入就是[1,3], 该字段只适配于 type 为 `radiation`
+   * @group basic
    */
   @property({ attribute: false })
   proportion: number[];

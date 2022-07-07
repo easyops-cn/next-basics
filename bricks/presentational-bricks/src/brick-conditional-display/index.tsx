@@ -85,10 +85,9 @@ export interface LogicalCondition
  */
 export class BrickConditionalDisplayElement extends UpdatingElement {
   /**
-   * @kind RuleProps[]
    * @required false
-   * @default -
-   * @description 展示规则
+   * @description 展示规则, 具体请查看[Mongodb条件操作符](https://www.mongodb.com/docs/manual/reference/operator/query/)
+   * @group basic
    */
   @property({
     attribute: false,
@@ -96,10 +95,10 @@ export class BrickConditionalDisplayElement extends UpdatingElement {
   rules: RuleProps[] = [];
 
   /**
-   * @kind { value: string }
    * @required false
-   * @default -
    * @description [已废弃]显示的字段值，支持通过 path 指定
+   * @deprecated
+   * @group other
    */
   @property({
     attribute: false,
@@ -107,10 +106,9 @@ export class BrickConditionalDisplayElement extends UpdatingElement {
   fields: { value: string };
 
   /**
-   * @kind DataType
    * @required true
-   * @default -
    * @description 数据
+   * @group basic
    */
   @property({
     attribute: false,
@@ -122,6 +120,7 @@ export class BrickConditionalDisplayElement extends UpdatingElement {
    * @required false
    * @default label
    * @description 展示类型，label 表示通过标签的风格展示相关内容，default 表示默认的风格展示(display: block)
+   * @group basic
    */
   @property({
     attribute: false,
