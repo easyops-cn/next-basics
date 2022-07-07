@@ -518,6 +518,9 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
         if (record.invalidRow) {
           return styles.invalidRow;
         }
+        if (record.disabledRow) {
+          return styles.disabledRow;
+        }
         return props.zebraPattern && index % 2 ? styles.brickTableOddRow : "";
       }}
       expandIcon={getCustomExpandIcon}

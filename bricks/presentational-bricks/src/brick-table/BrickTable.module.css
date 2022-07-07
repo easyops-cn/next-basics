@@ -61,6 +61,17 @@ html[data-theme="dark"] {
         }
       }
     }
+
+    > tr.disabledRow {
+      > td {
+        background-color: var(--theme-gray-border-color);
+      }
+      &:hover {
+        > td {
+          background-color: var(--theme-gray-border-color);
+        }
+      }
+    }
   }
 }
 
