@@ -83,44 +83,41 @@ export class BrickValueMappingElement extends UpdatingElement {
   valueMappingClick: EventEmitter<Record<string, any>>;
 
   /**
-   * @kind string|number
+   * @kind string | number
    * @required false
-   * @default -
    * @description 原始值
+   * @group basic
    */
   @property() value: string | number;
   /**
-   * @kind Record<string, any>
    * @required false
-   * @default -
    * @description 替代 `data` 属性，click 事件时传出的数据
+   * @group basic
    */
   @property({ attribute: false }) dataSource: Record<string, any>;
 
   /**
-   * @kind { value: string }
    * @required false
-   * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
+   * @deprecated
+   * @group other
    */
   @property({ attribute: false }) fields: {
     value: string;
   };
   /**
-   * @kind { [value: string/number ]: MappingValue }
    * @required true
-   * @default -
    * @description 映射规则
+   * @group basic
    */
   @property({ attribute: false }) mapping: Record<
     string | number,
     MappingValue
   >;
   /**
-   * @kind boolean
    * @required false
-   * @default -
    * @description 显示文字旁边的小圈圈，按照平台规范通常表示状态的标签可设置为 true
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -128,28 +125,27 @@ export class BrickValueMappingElement extends UpdatingElement {
   showTagCircle: boolean;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 是否触发点击事件
+   * @group basic
    */
   @property({ type: Boolean })
   triggerClickEvent: boolean;
 
   /**
-   * @kind LinkProps
    * @required false
-   * @default -
    * @description 若设置且 `triggerClickEvent` 为 false，则点击可跳转
+   * @group basic
    */
   @property({ attribute: false })
   link: LinkProps;
 
   /**
-   * @kind any
    * @required false
-   * @default -
    * @description [已废弃]可用于接收 useBrick 传递过来的数据
+   * @deprecated
+   * @group other
    */
   @property({ attribute: false })
   data: any;
