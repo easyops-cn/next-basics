@@ -34,7 +34,7 @@ export class PageTitleElement extends UpdatingElement {
   @property({
     type: Boolean,
   })
-  dashboardMode: boolean;
+  dashboardMode?: boolean;
 
   connectedCallback(): void {
     this._render();

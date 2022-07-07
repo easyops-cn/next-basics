@@ -23,7 +23,7 @@ export class IndexCardElement extends HTMLElement {
 
   /**
    * @kind number
-   * @required no
+   * @required false
    * @default 24
    * @description 内容区的 gap，内容区固定为 grid 布局
    */
@@ -64,7 +64,7 @@ export class IndexCardElement extends HTMLElement {
 
   /**
    * @kind string
-   * @required no
+   * @required false
    * @default -
    * @description 卡片标题
    */

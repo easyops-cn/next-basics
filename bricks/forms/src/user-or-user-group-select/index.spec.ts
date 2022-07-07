@@ -16,9 +16,6 @@ describe("forms.user-or-user-group-select", () => {
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
     await jest.runAllTimers();
-    expect(spyOnRender).not.toBeCalled();
-    element.objectList = [{ objectId: "123" }];
-    await jest.runAllTimers();
     expect(spyOnRender).toBeCalled();
     document.body.removeChild(element);
     await jest.runAllTimers();
@@ -36,12 +33,12 @@ describe("forms.user-or-user-group-select", () => {
 
     element._handleChange({
       selectedUser: ["tester"],
-      selectedUserGroup: ["test group"]
+      selectedUserGroup: ["test group"],
     });
     await (global as any).flushPromises();
     expect((dispatchEvent.mock.calls[0][0] as CustomEvent).detail).toEqual({
       selectedUser: ["tester"],
-      selectedUserGroup: ["test group"]
+      selectedUserGroup: ["test group"],
     });
   });
 });

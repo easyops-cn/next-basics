@@ -19,6 +19,9 @@ export const datePickerStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "基本都用法",
+      },
       brick: "forms.general-date-picker",
       properties: {
         name: "date",
@@ -32,11 +35,16 @@ export const datePickerStory: Story = {
       events: {
         "general.date.change": {
           action: "console.log",
-          args: ["date", "${EVENT.detail}"],
+          args: ["date", "<% EVENT.detail %>"],
         },
       },
     },
     {
+      description: {
+        title: "跟表单搭配使用",
+        message:
+          "注意日期选择框输出的数据，需要通过 form 的 `valueTypes` 属性去格式化后再提交",
+      },
       brick: "forms.general-form",
       properties: {
         values: {
@@ -49,11 +57,11 @@ export const datePickerStory: Story = {
       events: {
         "validate.success": {
           action: "console.log",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["${EVENT.type}", "<% EVENT.detail %>"],
         },
         "validate.error": {
           action: "console.warn",
-          args: ["${EVENT.type}", "${EVENT.detail}"],
+          args: ["${EVENT.type}", "<% EVENT.detail %>"],
         },
       },
       slots: {
@@ -87,7 +95,7 @@ export const datePickerStory: Story = {
               events: {
                 "general.date.ok": {
                   action: "console.log",
-                  args: ["date", "${EVENT.detail}"],
+                  args: ["date", "<% EVENT.detail %>"],
                 },
               },
             },
@@ -121,7 +129,7 @@ export const datePickerStory: Story = {
       events: {
         "general.date.change": {
           action: "console.log",
-          args: ["date", "${EVENT.detail}"],
+          args: ["date", "<% EVENT.detail %>"],
         },
       },
       properties: {

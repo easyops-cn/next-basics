@@ -19,6 +19,9 @@ export const userGroupSelectStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "基本用法",
+      },
       brick: "div",
       slots: {
         "": {
@@ -31,17 +34,6 @@ export const userGroupSelectStory: Story = {
                   width: "500px",
                 },
               },
-              lifeCycle: {
-                useResolves: [
-                  {
-                    name: "objectList",
-                    field: "data",
-                    useProvider:
-                      "providers-of-cmdb.cmdb-object-api-get-object-ref",
-                    args: [{ ref_object: "USER,USER_GROUP" }],
-                  },
-                ],
-              },
               events: {
                 "user.group.change": {
                   action: "console.log",
@@ -53,6 +45,9 @@ export const userGroupSelectStory: Story = {
       },
     },
     {
+      description: {
+        title: "支持白名单配置",
+      },
       brick: "div",
       slots: {
         "": {
@@ -74,23 +69,16 @@ export const userGroupSelectStory: Story = {
                   action: "console.log",
                 },
               },
-              lifeCycle: {
-                useResolves: [
-                  {
-                    name: "objectList",
-                    field: "data",
-                    useProvider:
-                      "providers-of-cmdb.cmdb-object-api-get-object-ref",
-                    args: [{ ref_object: "USER,USER_GROUP" }],
-                  },
-                ],
-              },
             },
           ],
         },
       },
     },
     {
+      description: {
+        title:
+          "objectList 由外部提供数据时请使用`providers-of-cmdb.cmdb-object-api-get-object-all`",
+      },
       brick: "forms.general-form",
       properties: {
         values: {

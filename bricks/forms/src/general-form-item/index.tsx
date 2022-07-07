@@ -35,61 +35,53 @@ export interface ControlConfig {
  */
 export class GeneralFormItemElement extends FormItemElement {
   /**
-   * @kind string
    * @required true
-   * @default -
    * @description 表单项字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 表单项字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind `any`
    * @required false
-   * @default -
    * @description 表单项的值
+   * @group basicFormItem
    */
   @property({ attribute: false }) value: any;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 表单项字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @kind boolean
    * @required false
-   * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind `Record<string,string>`
    * @required false
-   * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind `ControlConfig`
-   * @required false
-   * @default -
    * @description 表单控件配置（已废弃，请使用 control 插槽）
-   * @group advanced
+   * @deprecated
+   * @group basicFormItem
    */
-  @property({ attribute: false }) control: ControlConfig;
+  @property({ attribute: false }) control?: ControlConfig;
 
   private _mountPoint: HTMLElement;
 
@@ -127,7 +119,6 @@ export class GeneralFormItemElement extends FormItemElement {
   }
   /**
    * @description 当表单项的值通过 `forms.general-form` 的 `setInitValue` 方法修改时的事件，`detail` 为修改后的值
-   * @detail `any`
    */
   @event({ type: "general-form-item.change" }) changeEvent: EventEmitter<
     Record<string, any>

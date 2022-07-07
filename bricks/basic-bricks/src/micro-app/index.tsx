@@ -100,7 +100,7 @@ export class MicroViewElement extends UpdatingElement {
   @property({
     type: Number,
   })
-  pageTitleScale: number;
+  pageTitleScale?: number;
 
   /**
    * @kind boolean
@@ -121,7 +121,7 @@ export class MicroViewElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  bannerStyle: React.CSSProperties;
+  bannerStyle?: React.CSSProperties;
 
   /**
    * @private

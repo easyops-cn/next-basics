@@ -28,7 +28,6 @@ export class AppbarBreadcrumbElement extends UpdatingElement {
 
   /**
    * @default
-   * @required
    * @description 面包屑配置
    */
   @property({
@@ -38,7 +37,6 @@ export class AppbarBreadcrumbElement extends UpdatingElement {
 
   /**
    * @default false
-   * @required
    * @description 是否隐藏当前应用名称
    */
   @property({
