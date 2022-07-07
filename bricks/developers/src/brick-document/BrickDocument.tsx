@@ -175,7 +175,7 @@ export function BrickDocument({
             dangerouslySetInnerHTML={convertMarkdownLinkToHtmlLink(
               value[column.key]
             )}
-          ></span>
+          />
         );
       case "name": {
         const parameter = value.parameters?.[0];
@@ -261,7 +261,7 @@ export function BrickDocument({
     );
   };
 
-  const renderEnum = (enums: StoryDocInterface): React.ReactElement => {
+  const renderEnum = (enums: StoryDocEnum): React.ReactElement => {
     return (
       enums && (
         <>
@@ -271,11 +271,18 @@ export function BrickDocument({
               Enum
             </Tag>
           </h3>
+          {enums.description && (
+            <ReactMarkdown
+              source={enums.description}
+              plugins={[gfm]}
+              linkTarget="_blank"
+            />
+          )}
           <pre>
             <code>
               <span className={"token keyword"}>enum</span> {enums.name} &#123;
               <br />
-              {(enums.children as StoryDocEnum[]).map((v) => {
+              {enums.children.map((v) => {
                 return (
                   <React.Fragment key={v.name}>
                     &nbsp;&nbsp;{v.name}{" "}
@@ -288,54 +295,6 @@ export function BrickDocument({
           </pre>
         </>
       )
-    );
-  };
-
-  const renderInterface = (
-    docInterface: StoryDocInterface
-  ): React.ReactElement => {
-    const columns = [
-      { title: "name", key: "name" },
-      { title: "type", key: "type" },
-      {
-        title: "required",
-        key: "required",
-      },
-      { title: "description", key: "description" },
-    ];
-    const {
-      name,
-      typeParameter,
-      extendedTypes,
-      children = [],
-      indexSignature = [],
-    } = docInterface;
-    const extendedTypesLength = extendedTypes?.length;
-
-    return (
-      <>
-        <h3 className={style.interfaceTitle} id={name}>
-          <span>
-            {name}
-            {typeParameter}
-          </span>
-          <Tag color="cyan" className={style.badge}>
-            Interface
-          </Tag>
-          {extendedTypes && (
-            <Tag color="green" className={style.badge}>
-              extends{" "}
-              {extendedTypes.map((type, index) => (
-                <React.Fragment key={type.name}>
-                  <strong>{renderTypeAnnotation(type.name)}</strong>
-                  {index + 1 < extendedTypesLength && ", "}
-                </React.Fragment>
-              ))}
-            </Tag>
-          )}
-        </h3>
-        {renderTable(columns, [...children, ...indexSignature])}
-      </>
     );
   };
 
@@ -356,10 +315,63 @@ export function BrickDocument({
     return str;
   };
 
+  const renderInterface = (
+    docInterface: StoryDocInterface
+  ): React.ReactElement => {
+    const columns = [
+      { title: "name", key: "name" },
+      { title: "type", key: "type" },
+      {
+        title: "required",
+        key: "required",
+      },
+      { title: "description", key: "description" },
+    ];
+    const {
+      name,
+      typeParameter,
+      extendedTypes,
+      description,
+      children = [],
+      indexSignature = [],
+    } = docInterface;
+    const extendedTypesLength = extendedTypes?.length;
+
+    return (
+      <>
+        <h3 className={style.interfaceTitle} id={name}>
+          <span>
+            {name}
+            {typeParameter}
+          </span>
+          <Tag color="cyan" className={style.badge}>
+            Interface
+          </Tag>
+          {extendedTypes && (
+            <Tag color="green" className={style.badge}>
+              extends{" "}
+              {extendedTypes.map((type, index) => (
+                <React.Fragment key={type.name}>
+                  <strong>{renderTypeHref(type.name)}</strong>
+                  {index + 1 < extendedTypesLength && ", "}
+                </React.Fragment>
+              ))}
+            </Tag>
+          )}
+        </h3>
+        {description && (
+          <ReactMarkdown
+            source={description}
+            plugins={[gfm]}
+            linkTarget="_blank"
+          />
+        )}
+        {renderTable(columns, [...children, ...indexSignature])}
+      </>
+    );
+  };
+
   const renderType = (type: StoryDocType): React.ReactElement => {
-    const descriptionString = type?.description
-      ? `// ${type?.description}\n`
-      : "";
     return (
       type && (
         <>
@@ -372,9 +384,15 @@ export function BrickDocument({
               Type
             </Tag>
           </h3>
+          {type.description && (
+            <ReactMarkdown
+              source={type.description}
+              plugins={[gfm]}
+              linkTarget="_blank"
+            />
+          )}
           <pre>
             <code>
-              {descriptionString}
               <span className={"token keyword"}>type</span>&nbsp;
               {type.name} ={" "}
               <span
@@ -388,7 +406,7 @@ export function BrickDocument({
   };
 
   const renderInterfaceMix = (
-    interfaces: (StoryDocInterface | StoryDocType)[]
+    interfaces: (StoryDocInterface | StoryDocEnum | StoryDocType)[]
   ): React.ReactElement => {
     return (
       Array.isArray(interfaces) &&
