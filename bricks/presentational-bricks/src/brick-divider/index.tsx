@@ -27,7 +27,7 @@ export class BrickDividerElement extends UpdatingElement {
 
   /**
    * @required false
-   * @default horizontal
+   * @default "horizontal"
    * @description 水平|垂直|放射类型,注意`radiation`是个特殊的类型，该样式是特定的
    * @group basic
    */
@@ -54,7 +54,7 @@ export class BrickDividerElement extends UpdatingElement {
   /**
    * @kind "center" | "left" | "right"
    * @required false
-   * @default center
+   * @default "center"
    * @description 标题位置
    * @group basic
    */

@@ -92,7 +92,7 @@ export class DatetimeSelectorElement extends UpdatingElement {
 
   /**
    * @required true
-   * @default now-1d
+   * @default "now-1d"
    * @description 默认起始时间，支持任意时间范围,相关规则请按下列规则书写（"now-1h", "now-1d", "now/d", "now-7d", "now-30d")  [正则表达式](https://github.com/easyops-cn/next-libs/blob/207fe7ee3ac010ab860c23cd062216c8ca612f0c/libs/datetime-components/src/processor/parseDatetimeRange.ts#L18)  注意当通过 \${query.from=now/d} 赋默认值给 form 属性时，由于 [placeholder 占位符语法](http://docs.developers.easyops.cn/docs/brick-next/placeholders) 不支持 `/` 的特殊字符解析，所以该值需要用字符串的形式来书写（如 demo 所示）。
    * @group basic
    */
@@ -119,9 +119,9 @@ export class DatetimeSelectorElement extends UpdatingElement {
   shouldUpdateUrlParams = true;
 
   /**
-   * @kind default | custom
+   * @kind "default" | "custom"
    * @required false
-   * @default default
+   * @default "default"
    * @description 时间选择器支持两种类型，一种是默认的，固定显示常用的几种时间范围，一种是自定义的，可根据需求定制特定时间范围
    * @group basic
    */
@@ -151,9 +151,9 @@ export class DatetimeSelectorElement extends UpdatingElement {
   placement: TooltipPlacement;
 
   /**
-   * @kind ms | s
+   * @kind "ms" | "s"
    * @required false
-   * @default `ms`
+   * @default "ms"
    * @description 指定时间戳的单位，目前支持秒和毫秒，默认为毫秒，切换为秒时，url 和事件传出的时间戳都会调整成以秒为单位
    * @group other
    */

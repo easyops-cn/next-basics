@@ -116,9 +116,9 @@ export class BrickConditionalDisplayElement extends UpdatingElement {
   dataSource: DataType;
 
   /**
-   * @kind default | label
+   * @kind "default" | "label"
    * @required false
-   * @default label
+   * @default "label"
    * @description 展示类型，label 表示通过标签的风格展示相关内容，default 表示默认的风格展示(display: block)
    * @group basic
    */

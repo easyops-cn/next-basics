@@ -11,7 +11,7 @@ export const BrickConditionalDisplayStory: Story = {
   },
   description: {
     en: "",
-    zh: "按不同条件渲染，比如告警数为0是绿色，大于1时显示黄色.更灵活的方式请通过表达式、函数来做数据处理",
+    zh: "按不同条件渲染，比如告警数为0是绿色，大于1时显示黄色, 更灵活的方式请通过表达式、函数来做数据处理",
   },
   icon: {
     lib: "fa",

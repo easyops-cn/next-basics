@@ -387,7 +387,6 @@ export class CardItemElement extends UpdatingElement {
 
   /**
    * @required false
-   * @default -
    * @description 图片图标的src
    * @group basic
    */
