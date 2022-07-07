@@ -14,7 +14,10 @@ import type {
   WorkbenchTreeAction,
 } from "../shared/workbench/interfaces";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
-import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
+import {
+  WorkbenchTree,
+  dropEmitProps,
+} from "../shared/workbench/WorkbenchTree";
 import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
 import { deepMatch } from "../builder-container/utils";
 
@@ -60,6 +63,18 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property({ attribute: false })
   fixedActionsFor: Record<string, unknown> | Record<string, unknown>[];
 
+  @property({ type: Boolean })
+  allowDrag: boolean;
+
+  @property({ type: Boolean })
+  allowDragToRoot: boolean;
+
+  @property({ type: Boolean })
+  allowDragToInside: boolean;
+
+  @property({ type: String })
+  nodeKey: string;
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -73,6 +88,27 @@ export class WorkbenchTreeElement extends UpdatingElement {
   private _nodeClickFactory = (node: WorkbenchNodeData) => () => {
     this._nodeClickEvent.emit(node.data);
   };
+
+  @event({ type: "node.drop" })
+  private _nodeDropEvent: EventEmitter<any>;
+
+  private _handleNodeDrop = (detail: dropEmitProps): void => {
+    this._nodeDropEvent.emit(detail);
+  };
+
+  @event({ type: "context.menu" })
+  private _nodeContextMenuEvent: EventEmitter<unknown>;
+
+  private _contextMenuFactory =
+    (node: WorkbenchNodeData) => (e: React.MouseEvent) => {
+      e.preventDefault();
+      this._nodeContextMenuEvent.emit({
+        active: true,
+        node: node.data,
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -106,7 +142,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 showMatchedNodeOnly: this.showMatchedNodeOnly,
                 isTransformName: this.isTransformName,
                 fixedActionsFor: this.fixedActionsFor,
+                nodeKey: this.nodeKey,
                 clickFactory: this._nodeClickFactory,
+                contextMenuFactory: this._contextMenuFactory,
                 matchNode: (node, lowerTrimmedQuery) =>
                   deepMatch(node.name, lowerTrimmedQuery) ||
                   (!!this.matchNodeDataFields?.length &&
@@ -123,6 +161,10 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 placeholder={this.placeholder}
                 searchPlaceholder={this.searchPlaceholder}
                 noSearch={this.noSearch}
+                dropEmit={this._handleNodeDrop}
+                allowDrag={this.allowDrag}
+                allowDragToInside={this.allowDragToInside}
+                allowDragToRoot={this.allowDragToRoot}
               />
             </WorkbenchTreeContext.Provider>
           </WorkbenchActionsContext.Provider>

@@ -1,37 +1,30 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import {
-  useBuilderContextMenuStatus,
-  useBuilderDataManager,
-} from "@next-core/editor-bricks-helper";
 import { ContextMenuItem, WorkbenchContextMenu } from "./WorkbenchContextMenu";
 import { useCanPaste } from "../builder-container/BuilderContextMenu/useCanPaste";
+import { BuilderContextMenuStatus } from "@next-core/editor-bricks-helper";
 
-jest.mock("@next-core/editor-bricks-helper");
 jest.mock("../builder-container/BuilderContextMenu/useCanPaste");
-
-const mockedUseBuilderContextMenuStatus =
-  useBuilderContextMenuStatus as jest.MockedFunction<
-    typeof useBuilderContextMenuStatus
-  >;
-const manager = {
-  contextMenuChange: jest.fn(),
-};
-(useBuilderDataManager as jest.Mock).mockReturnValue(manager);
 
 (useCanPaste as jest.MockedFunction<typeof useCanPaste>).mockReturnValue(
   (clipboard, node) => node?.id === "b-2"
 );
 
+let mockedContextMenuStatus: BuilderContextMenuStatus = {
+  active: false,
+};
+
 // Antd <Menu> produces errors too many.
 jest.spyOn(console, "error").mockImplementation();
 
 test("WorkbenchTree with no menu", () => {
-  mockedUseBuilderContextMenuStatus.mockReturnValue({
-    active: false,
-  });
-  const { container } = render(<WorkbenchContextMenu menu={[]} />);
+  const { container } = render(
+    <WorkbenchContextMenu
+      contextMenuStatus={mockedContextMenuStatus}
+      menu={[]}
+    />
+  );
   expect(
     (container.querySelector(".menuWrapper") as HTMLElement).style.display
   ).toBe("none");
@@ -39,7 +32,7 @@ test("WorkbenchTree with no menu", () => {
 });
 
 test("WorkbenchTree with menu", () => {
-  mockedUseBuilderContextMenuStatus.mockReturnValue({
+  mockedContextMenuStatus = {
     active: true,
     node: {
       type: "brick",
@@ -48,7 +41,7 @@ test("WorkbenchTree with menu", () => {
     },
     x: 10,
     y: 20,
-  });
+  };
   const menu: ContextMenuItem[] = [
     {
       action: "add",
@@ -77,7 +70,12 @@ test("WorkbenchTree with menu", () => {
       if: "<% DATA.type !== 'template' %>",
     },
   ];
-  const { container, rerender } = render(<WorkbenchContextMenu menu={menu} />);
+  const { container, rerender } = render(
+    <WorkbenchContextMenu
+      contextMenuStatus={mockedContextMenuStatus}
+      menu={menu}
+    />
+  );
   expect(
     (container.querySelector(".menuWrapper") as HTMLElement).style.display
   ).toBe("block");
@@ -116,7 +114,7 @@ test("WorkbenchTree with menu", () => {
     "true"
   );
 
-  mockedUseBuilderContextMenuStatus.mockReturnValue({
+  mockedContextMenuStatus = {
     active: true,
     node: {
       type: "brick",
@@ -125,14 +123,18 @@ test("WorkbenchTree with menu", () => {
     },
     x: -10,
     y: -20,
-  });
+  };
 
   const onActionClick = jest.fn();
+  const mockCloseMenu = jest.fn();
   rerender(
     <WorkbenchContextMenu
+      contextMenuStatus={mockedContextMenuStatus}
       menu={menu}
       clipboard={{ nodeAlias: "another-brick" } as any}
       onActionClick={onActionClick}
+      canPaste={true}
+      handleCloseMenu={mockCloseMenu}
     />
   );
 
@@ -165,10 +167,7 @@ test("WorkbenchTree with menu", () => {
       id: "b-2",
     },
   });
-  expect(manager.contextMenuChange).toBeCalledTimes(1);
-  expect(manager.contextMenuChange).toHaveBeenNthCalledWith(1, {
-    active: false,
-  });
+  expect(mockCloseMenu).toBeCalledTimes(1);
 
   fireEvent.click(screen.getAllByRole("menuitem")[1]);
   expect(onActionClick).toBeCalledTimes(2);
@@ -183,5 +182,5 @@ test("WorkbenchTree with menu", () => {
       nodeAlias: "another-brick",
     },
   });
-  expect(manager.contextMenuChange).toBeCalledTimes(2);
+  expect(mockCloseMenu).toBeCalledTimes(2);
 });

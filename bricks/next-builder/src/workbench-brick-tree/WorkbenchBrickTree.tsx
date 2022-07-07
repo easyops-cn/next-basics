@@ -18,14 +18,12 @@ import type {
   WorkbenchNodeData,
   WorkbenchRuntimeNode,
 } from "../shared/workbench/interfaces";
-import { WorkbenchTreeContext } from "../shared/workbench/WorkbenchTreeContext";
+import {
+  dropOptions,
+  WorkbenchTreeContext,
+} from "../shared/workbench/WorkbenchTreeContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 import { deepMatch } from "../builder-container/utils";
-import {
-  WorkbenchTreeDndContext,
-  dragStatusEnum,
-} from "../shared/workbench/WorkbenchTreeDndContext";
-import { setDragImage } from "../workbench-component-select/WorkbenchComponentSelect";
 
 export interface WorkbenchBrickTreeProps {
   placeholder?: string;
@@ -62,10 +60,6 @@ export function WorkbenchBrickTree({
   const hoverNodeUid = useHoverNodeUid();
   const { active, node: activeContextMenuNode } = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
-  const [isDrag, setIsDrag] = useState<boolean>(false);
-  const [overNode, setOverNode] = useState<HTMLElement>(null);
-  const [overStatus, setOverStatus] = useState<dragStatusEnum>(null);
-  const [curNode, setCurNode] = useState<HTMLElement>(null);
 
   const clickFactory = useCallback(
     ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
@@ -273,85 +267,22 @@ export function WorkbenchBrickTree({
     return [getEntityNode(rootNode)];
   }, [edges, nodes, rootNode]);
 
-  const findDragParent = (element: HTMLElement, equal = true): HTMLElement => {
-    let node = element;
-    while (node) {
-      if (node.draggable && (equal || node !== element)) {
-        return node;
-      }
-      node = node.parentElement;
-    }
-  };
-
-  const getDragState = (
-    e: React.DragEvent<HTMLElement>
-  ): {
-    node: HTMLElement;
-    status: dragStatusEnum;
-  } => {
-    const node = findDragParent(e.target as HTMLElement);
-    if (node === curNode) {
-      return;
-    }
-    const { top, bottom } = node.getBoundingClientRect();
-    let status: dragStatusEnum;
-    if (e.clientY < top + 5) {
-      status = dragStatusEnum.top;
-    } else if (e.clientY > bottom - 5) {
-      status = dragStatusEnum.bottom;
-    } else if (e.clientY > top && e.clientY < bottom) {
-      status = dragStatusEnum.inside;
-    }
-
-    return {
-      node,
-      status,
-    };
-  };
-
-  const handleOnDragStart = (e: React.DragEvent<HTMLElement>): void => {
-    setIsDrag(true);
-    const node = e.target as HTMLElement;
-    setDragImage(e, node.innerText);
-    setCurNode(node);
-  };
-
-  const handleOnDragOver = (e: React.DragEvent<HTMLElement>): void => {
+  const handleOnDrop = (
+    e: React.DragEvent<HTMLElement>,
+    { curElement, overElement, parentElement, overStatus }: dropOptions
+  ): void => {
     e.preventDefault();
-    if (!isDrag) return;
-    if ((e.target as HTMLElement).className === "workbenchTree-placeholder-dom")
-      return;
-    const dom = getDragState(e);
-    if (dom && !curNode?.contains(dom.node)) {
-      setOverNode(dom.node);
-      setOverStatus(dom.status);
-    }
-  };
-
-  const handleOnDragEnd = (): void => {
-    setIsDrag(false);
-    setCurNode(null);
-    setOverNode(null);
-  };
-
-  const handleOnDrop = (e: React.DragEvent<HTMLElement>): void => {
-    e.preventDefault();
-    let parentNode = overNode;
-    if ([dragStatusEnum.top, dragStatusEnum.bottom].includes(overStatus)) {
-      parentNode = findDragParent(parentNode, false);
-    }
     const getUid = (dom: HTMLElement): number => {
       return Number(dom.dataset.uid);
     };
-    if (parentNode) {
+    if (parentElement) {
       manager.workbenchTreeNodeMove({
-        dragNodeUid: getUid(curNode),
-        dragOverNodeUid: getUid(overNode),
-        dragParentNodeUid: getUid(parentNode),
+        dragNodeUid: getUid(curElement),
+        dragOverNodeUid: getUid(overElement),
+        dragParentNodeUid: getUid(parentElement),
         dragStatus: overStatus,
       });
     }
-    handleOnDragEnd();
   };
 
   const activeKey = useMemo(() => {
@@ -363,10 +294,6 @@ export function WorkbenchBrickTree({
   useEffect(
     () => {
       manager.setActiveNodeUid(activeKey);
-      window.addEventListener("dragend", handleOnDragEnd);
-      return () => {
-        window.removeEventListener("dragend", handleOnDragEnd);
-      };
     },
     // One-time effect only.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -388,25 +315,15 @@ export function WorkbenchBrickTree({
         matchNode: matchBrickNode,
         onNodeToggle,
         getCollapsedId,
+        onBrickDrop: handleOnDrop,
       }}
     >
-      <WorkbenchTreeDndContext.Provider
-        value={{
-          allow: true,
-          dragNode: curNode,
-          dragOverNode: overNode,
-          dragStatus: overStatus,
-          onDragStart: handleOnDragStart,
-          onDragOver: handleOnDragOver,
-          onDrop: handleOnDrop,
-        }}
-      >
-        <WorkbenchTree
-          nodes={tree}
-          placeholder={placeholder}
-          searchPlaceholder={searchPlaceholder}
-        />
-      </WorkbenchTreeDndContext.Provider>
+      <WorkbenchTree
+        nodes={tree}
+        placeholder={placeholder}
+        searchPlaceholder={searchPlaceholder}
+        allowDragToInside={true}
+      />
     </WorkbenchTreeContext.Provider>
   );
 }

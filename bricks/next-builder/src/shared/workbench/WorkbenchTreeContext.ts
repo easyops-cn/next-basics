@@ -1,5 +1,13 @@
 import { createContext, type MouseEvent, useContext } from "react";
 import type { WorkbenchNodeData } from "./interfaces";
+import { dragStatusEnum } from "./WorkbenchTreeDndContext";
+
+export interface dropOptions {
+  curElement: HTMLElement;
+  overElement: HTMLElement;
+  parentElement: HTMLElement;
+  overStatus: dragStatusEnum;
+}
 
 export interface ContextOfWorkbenchTree {
   hoverKey?: string | number;
@@ -10,6 +18,7 @@ export interface ContextOfWorkbenchTree {
   fixedActionsFor?: Record<string, unknown> | Record<string, unknown>[];
   collapsible?: boolean;
   collapsedNodes?: (string | number)[];
+  nodeKey?: string;
   clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
@@ -17,6 +26,7 @@ export interface ContextOfWorkbenchTree {
   matchNode?(node: WorkbenchNodeData, lowerTrimmedQuery?: string): boolean;
   onNodeToggle?(nodeId: string | number, collapsed: boolean): void;
   getCollapsedId?(node: WorkbenchNodeData): string | number;
+  onBrickDrop?(e: React.DragEvent<HTMLElement>, options: dropOptions): void;
 }
 
 export const WorkbenchTreeContext = createContext<ContextOfWorkbenchTree>({});

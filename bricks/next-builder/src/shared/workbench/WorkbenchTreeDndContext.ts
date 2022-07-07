@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { WorkbenchNodeData } from "./interfaces";
 
 export enum dragStatusEnum {
   inside = "inside",
@@ -8,12 +9,16 @@ export enum dragStatusEnum {
 
 interface WorkbenchTreeDndContext {
   allow?: boolean;
-  dragNode: HTMLElement;
+  allowDragToRoot?: boolean;
+  dragElement: HTMLElement;
+  dragOverElement: HTMLElement;
   dragStatus: dragStatusEnum;
-  dragOverNode: HTMLElement;
-  onDragStart: (e: React.DragEvent<HTMLElement>) => void;
-  onDragOver: (e: React.DragEvent<HTMLElement>) => void;
-  onDrop: (e: React.DragEvent<HTMLElement>) => void;
+  onDragStart?: (
+    e: React.DragEvent<HTMLElement>,
+    node: WorkbenchNodeData
+  ) => void;
+  onDragOver?: (e: React.DragEvent<HTMLElement>) => void;
+  onDrop?: (e: React.DragEvent<HTMLElement>) => void;
 }
 
 export const WorkbenchTreeDndContext = createContext<WorkbenchTreeDndContext>(
