@@ -67,7 +67,6 @@ export class GeneralDatePickerElement extends FormItemElement {
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   *
    * @required false
    * @description 校验文本信息
    * @group basicFormItem
@@ -102,9 +101,8 @@ export class GeneralDatePickerElement extends FormItemElement {
   format?: string;
 
   /**
-   * @description 日期选择框初始值
+   * @description 设置选择器类型
    * @group basicFormItem
-   * @required
    */
   @property({ attribute: false })
   picker?: "date" | "week" = "date";

@@ -51,7 +51,7 @@ export class ListContainerElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  gap: string | number;
+  gap?: string | number;
 
   /**
    * @kind Record<string, any>
@@ -62,7 +62,7 @@ export class ListContainerElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  extraContainerStyle: React.CSSProperties;
+  extraContainerStyle?: React.CSSProperties;
 
   /**
    * @kind Record<string, any>
@@ -73,7 +73,7 @@ export class ListContainerElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  containerStyle: React.CSSProperties;
+  containerStyle?: React.CSSProperties;
 
   connectedCallback(): void {
     // istanbul ignore else

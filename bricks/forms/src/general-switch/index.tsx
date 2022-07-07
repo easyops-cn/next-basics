@@ -26,32 +26,25 @@ import { MenuIcon } from "@next-core/brick-types";
  */
 export class GeneralSwitchElement extends FormItemElement {
   /**
-   * @kind string
    * @required true
-   * @default -
    * @description 表单项字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 表单项字段说明
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind boolean
    * @required false
-   * @default false
    * @description 初始值
    */
   @property({ type: Boolean })
-  value: boolean;
+  value?: boolean;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 是否禁用
@@ -60,9 +53,7 @@ export class GeneralSwitchElement extends FormItemElement {
   disabled: boolean;
 
   /**
-   * @kind `'default' | 'small'`
    * @required false
-   * @default 'default'
    * @description 开关大小
    */
   @property({ attribute: false })

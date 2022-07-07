@@ -81,7 +81,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
 
   /**
    * @description 固定白名单列表，该列表中的值用户不能取消。
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
@@ -91,7 +91,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   /**
    * @default false
    * @description 是否合并用户和用户组数据，当设置为 true 时，输入的`value`和`user.group.change`事件输出的 detail 都为`string[]`格式。
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -126,7 +126,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
 
   /**
    * @description  用户和用户组`search`接口的`query`，此参数比较适用于，两者接口需要参数相同的情况下使用
-   * @group basicFormItem
+   * @group other
    */
   @property({
     attribute: false,
@@ -134,15 +134,15 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   query?: Record<string, any>;
 
   /**
-   * @description 模型列表，不传该属性构件内部会发请求获取该列表，如果需要传该属性则优先使用外部传进来的数据，该数据来自"providers-of-cmdb.cmdb-object-api-get-object-all" 如 demo 所示
-   * @group basicFormItem
+   * @description 模型列表，不传该属性构件内部会发请求获取该列表，如果需要传该属性则优先使用外部传进来的数据，该数据来自"providers-of-cmdb.cmdb-object-api-get-object-ref" 如 demo 所示
+   * @group other
    */
   @property({ attribute: false })
   objectList?: Partial<CmdbModels.ModelCmdbObject>[];
 
   /**
    * @description 针对`USER/instance/_search`接口的`query`，此参数比较适用于，可能只需要针对用户做筛选的情况
-   * @group basicFormItem
+   * @group other
    */
   @property({
     attribute: false,
@@ -151,7 +151,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
 
   /**
    * @description 针对`USER_GROUP/instance/_search`接口的`query`，此参数比较适用于，可能只需要针对用户组做筛选的情况
-   * @group basicFormItem
+   * @group other
    */
   @property({
     attribute: false,

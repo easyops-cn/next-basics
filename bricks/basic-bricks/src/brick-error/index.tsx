@@ -15,21 +15,18 @@ import { BrickError } from "./BrickError";
 export class BrickErrorElement extends UpdatingElement {
   /**
    * @description 错误类型
-   * @required
    */
   @property()
   errorType: string;
 
   /**
    * @description 错误信息
-   * @required
    */
   @property()
   errorMessage: string;
 
   /**
    * @description 发生错误的构件名称
-   * @required
    */
   @property()
   brickName: string;

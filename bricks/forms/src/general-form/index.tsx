@@ -222,14 +222,14 @@ export class GeneralFormElement
    * @group ui
    */
   @property({ attribute: false })
-  alignment: FormAlignment = FormAlignment.Center;
+  alignment?: FormAlignment = FormAlignment.Center;
 
   /**
    * @description 表单样式
    * @group ui
    */
   @property({ attribute: false })
-  formStyle: React.CSSProperties;
+  formStyle?: React.CSSProperties;
 
   constructor() {
     super();
