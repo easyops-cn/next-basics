@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.357.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.356.0...@next-bricks/developers@1.357.0) (2022-07-07)
+
+
+### Features
+
+* **BrickDocument:** add support for description of enum and interface ([158774f](https://github.com/easyops-cn/next-basics/commit/158774f0548144b3fce94736e087aadc35f643df))
+
+
+
+
+
 # [1.356.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.7...@next-bricks/developers@1.356.0) (2022-07-05)
 
 
