@@ -10,7 +10,7 @@
     background: transparent;
   }
 
-  :global(.ant-menu-submenu-selected):not(:global(.ant-menu-submenu-open)) {
+  :global(.ant-menu-submenu-selected):not(:global(.ant-menu-submenu-open)):not(:global(.ant-menu-submenu-active)) {
     background-color: var(--color-brand);
     color: var(--color-strong-text) !important;
     font-weight: 500;
@@ -20,21 +20,20 @@
     :global(.anticon),
     :global(.ant-menu-submenu-arrow),
     .simpleMenuItemText,
-    .subMenuTitleText {
-      color: var(--color-normal-icon);
+    .subMenuTitleText,
+    .menuText {
+      color: var(--color-normal-icon) !important;
     }
   }
 
   .menuItemIcon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 16px;
     height: 16px;
 
     > :global(.anticon) {
       margin-right: 0;
       color: var(--color-normal-text);
+      line-height: inherit !important;
     }
   }
 
@@ -121,9 +120,7 @@
       }
 
       /* :global(.anticon), */
-      :global(.ant-menu-submenu-title),
-      :global(.ant-menu-submenu-arrow),
-      .subMenuTitleText {
+      :global(.ant-menu-submenu-title) {
         color: var(--color-strong-text) !important;
       }
     }
@@ -139,7 +136,6 @@
       :global(.ant-menu-submenu-arrow) {
         right: 12px;
       }
-      .subMenuTitleText,
       :global(.ant-menu-submenu-arrow) {
         color: var(--color-normal-text);
       }
@@ -175,7 +171,10 @@
   }
 
   :global(.ant-menu-item) > a,
-  :global(.ant-menu-submenu-title) > span,
+  :global(.ant-menu-submenu-title) > span {
+    display: flex;
+  }
+
   :global(.ant-menu-item-group-title) > span {
     display: flex;
     align-items: center;
