@@ -63,10 +63,9 @@ export class CostTimeElement extends UpdatingElement {
   }
 
   /**
-   * @kind number
    * @required false
-   * @default -
    * @description 消耗时间（毫秒级）
+   * @group basic
    */
   @property({
     type: Number,
@@ -74,10 +73,9 @@ export class CostTimeElement extends UpdatingElement {
   cost: number;
 
   /**
-   * @kind string|number
    * @required false
-   * @default -
    * @description 起始时间
+   * @group basic
    */
   @property({
     attribute: false,
@@ -85,10 +83,9 @@ export class CostTimeElement extends UpdatingElement {
   startTime: string | number;
 
   /**
-   * @kind string|number
    * @required false
-   * @default -
    * @description 结束时间
+   * @group basic
    */
   @property({
     attribute: false,
@@ -96,10 +93,9 @@ export class CostTimeElement extends UpdatingElement {
   endTime: string | number;
 
   /**
-   * @kind React.CSSProperties
    * @required false
-   * @default -
    * @description 单位样式
+   * @group ui
    */
   @property({
     attribute: false,
@@ -107,10 +103,10 @@ export class CostTimeElement extends UpdatingElement {
   unitStyle: React.CSSProperties;
 
   /**
-   * @kind any
    * @required false
-   * @default -
    * @description [已废弃]数据源
+   * @deprecated
+   * @group other
    */
   @property({
     attribute: false,
@@ -118,10 +114,10 @@ export class CostTimeElement extends UpdatingElement {
   dataSource: any;
 
   /**
-   * @kind { cost?: string; startTime?: string; endTime?: string; }
    * @required false
-   * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时对应字段
+   * @deprecated
+   * @group other
    */
   @property({ attribute: false }) fields: {
     cost?: string;

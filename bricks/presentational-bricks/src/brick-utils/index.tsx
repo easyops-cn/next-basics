@@ -39,9 +39,9 @@ export class BrickUtilsElement extends UpdatingElement {
     m[method](text as any);
   }
   /**
-   * @default
    * @required false
    * @description 复制成功/失败时的提示，默认为“复制成功/失败”
+   * @group basic
    */
   @property({ attribute: false }) messages: { success: string; error: string };
   /**

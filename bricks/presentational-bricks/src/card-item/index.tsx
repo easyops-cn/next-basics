@@ -82,10 +82,10 @@ export class CardItemElement extends UpdatingElement {
   private hasBottomRightOperateSlot: boolean;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 解决只有operateSlot时宽度不能占满
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -93,37 +93,34 @@ export class CardItemElement extends UpdatingElement {
   private onlyOperateSlot: boolean;
 
   /**
-   * @kind CardLayoutType
    * @required false
    * @default "icon-as-background"
    * @description 卡片布局类型，具体样式看 Demo
+   * @group basic
    */
   @property()
   cardLayoutType: CardLayoutType;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 卡片 title
+   * @group basic
    */
   @property()
   cardTitle: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 卡片 副标题
+   * @group basic
    */
   @property()
   cardSubtitle: string;
 
   /**
-   * @kind string[] | string |{ label: string; field?: string; value?: string }[]
    * @required false
-   * @default -
    * @description 描述信息
+   * @group basic
    */
   @property({
     attribute: false,
@@ -131,10 +128,10 @@ export class CardItemElement extends UpdatingElement {
   descriptionList: string[] | string | DescriptionItem[];
 
   /**
-   * @kind number
    * @required false
    * @default 3
    * @description 描述信息的最大行数，默认为 3 行，当信息比较少的时候可以设成 3 行以下。UI 规范建议 3 或者 3 以下。
+   * @group ui
    */
   @property({
     type: Number,
@@ -142,10 +139,9 @@ export class CardItemElement extends UpdatingElement {
   descMaxLine: number; // 默认为3，建议配置成3或者以下
 
   /**
-   * @kind boolean
    * @required false
-   * @default -
    * @description 描述信息为数组的时候，默认显示每个`<li>`前面的小圈圈，不需要的时候可以隐藏
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -153,46 +149,41 @@ export class CardItemElement extends UpdatingElement {
   hideDescCircle: boolean;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 卡片跳转 url，支持模版变量
+   * @group basic
    */
   @property()
   urlTemplate: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 卡片跳转 url， url 优先于 urlTemplate 执行
+   * @group basic
    */
   @property()
   url: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 卡片跳转 href，优先于 url 执行
+   * @group basic
    */
   @property()
   href: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 卡片跳转 target，例如可以设置成 _blank
+   * @group basic
    */
   @property()
   target: string;
 
   /**
-   * @kind Record<string, any>
    * @required true
-   * @default -
    * @description 卡片信息数据源
+   * @group basic
    */
   @property({
     attribute: false,
@@ -200,15 +191,9 @@ export class CardItemElement extends UpdatingElement {
   dataSource: Record<string, any>;
 
   /**
-   * @kind { cardTitle?: string;cardSubtitle?:string;descriptionList?: string;icon?:string;iconColor?:string;
-    iconStyle?: string;
-    iconSize?: string;
-    iconOffsetX?: string;
-    iconOffsetY?: string;
-    iconOpacity?: string;disabled?:string; }
-   * @required -
-   * @default -
+   * @required false
    * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
+   * @group other
    */
   @property({
     attribute: false,
@@ -228,10 +213,9 @@ export class CardItemElement extends UpdatingElement {
   };
 
   /**
-   * @kind MenuIcon
    * @required false
-   * @default -
-   * @description 卡片右下角的 icon
+   * @description 卡片右下角的 icon, [详细配置](https://github.com/easyops-cn/next-core/blob/34a0808712ecaa925d0860d281ab23cf3bec7317/packages/brick-types/src/menu.ts#L104), 也可参照示例中的写法
+   * @group basic
    */
   @property({
     attribute: false,
@@ -241,8 +225,8 @@ export class CardItemElement extends UpdatingElement {
   /**
    * @kind Record<string, any>
    * @required false
-   * @default -
    * @description 卡片右下角的 icon 的样式，例如需要调整 opacity、right、bottom 的时候可以使用
+   * @group ui
    */
   @property({
     attribute: false,
@@ -250,10 +234,9 @@ export class CardItemElement extends UpdatingElement {
   iconStyle: Record<string, any>;
 
   /**
-   * @kind Color
    * @required false
-   * @default -
-   * @description 卡片类型为 "icon-small-align-left" \| "icon-align-right" \| "icon-align-left" 的时候可以设置 icon 的颜色
+   * @description 卡片类型为 "icon-small-align-left" | "icon-align-right" | "icon-align-left" 的时候可以设置 icon 的颜色
+   * @group ui
    */
   @property({
     attribute: false,
@@ -261,28 +244,31 @@ export class CardItemElement extends UpdatingElement {
   iconColor: Color = "gray";
 
   /**
-   * @kind string|number
+   * @kind string | number
    * @required false
    * @default 100px
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的大小
+   * @group ui
    */
   @property()
   iconSize: string | number;
 
   /**
-   * @kind string|number
+   * @kind string | number
    * @required false
    * @default 0
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的 X 轴偏移量，向左为正数向右为负数
+   * @group basic
    */
   @property()
   iconOffsetX: string | number;
 
   /**
-   * @kind string|number
+   * @kind string | number
    * @required false
    * @default 0
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的 Y 轴偏移量，向上为正数向下为负数
+   * @group basic
    */
   @property()
   iconOffsetY: string | number;
@@ -292,6 +278,7 @@ export class CardItemElement extends UpdatingElement {
    * @required false
    * @default 0.45
    * @description 卡片类型为 "icon-as-background" 的时候可以设置 icon 的透明度
+   * @group ui
    */
   @property({
     type: Number,
@@ -299,10 +286,9 @@ export class CardItemElement extends UpdatingElement {
   iconOpacity: number;
 
   /**
-   * @kind {text: string; color?: Color; triangle?: boolean; field?: string; value?: any; isNotEqual?: boolean; hideOperate?: boolean;}
    * @required false
-   * @default -
    * @description 右上角 tag 标签
+   * @group other
    */
   @property({
     attribute: false,
@@ -318,18 +304,17 @@ export class CardItemElement extends UpdatingElement {
   };
 
   /**
-   * @kind map
    * @required false
-   * @default -
-   * @description 完全透传给 antd 的 Card 属性，详见：[https://ant.design/components/card-cn/#Card](https://ant.design/components/card-cn/#Card)
+   * @description 完全透传给 antd 的 Card 属性，详见：[antd卡片属性](https://ant.design/components/card-cn/#Card)
+   * @group other
    */
   @property({ attribute: false }) configProps: CardProps;
 
   /**
-   * @kind boolean
    * @required false
    * @default true
    * @description 卡片项是否显示外边框
+   * @group ui
    */
   @property({
     attribute: false,
@@ -337,10 +322,10 @@ export class CardItemElement extends UpdatingElement {
   bordered = true;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 是否鼠标悬浮显示操作区
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -348,10 +333,10 @@ export class CardItemElement extends UpdatingElement {
   showOperationAreaWhenHovering: boolean;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 是否总是总是展示描述区域
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -359,19 +344,19 @@ export class CardItemElement extends UpdatingElement {
   alwaysShowDescription: boolean;
 
   /**
-   * @kind 'list'|"section"
    * @required false
    * @default false
    * @description 指定描述区的显示形式，若descriptionList为数组时，应当指定为 `list`,若descriptionList为字符串时，应当指定为 `section`,单独使用卡片时无需设置该属性
+   * @group basic
    */
   @property()
   descriptionDataType: "list" | "section";
 
   /**
-   * @kind boolean
    * @required false
    * @default true
    * @description 卡片项是否hover浮起
+   * @group ui
    */
   @property({
     attribute: false,
@@ -379,10 +364,10 @@ export class CardItemElement extends UpdatingElement {
   hoverable = true;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 禁用卡片，禁用的卡片不可点击跳转。操作区配置了 slot 的卡片，请按需配置子构件的属性，例如将按钮设置成 disabled 等。
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -390,10 +375,10 @@ export class CardItemElement extends UpdatingElement {
   disabled: boolean;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 反转背景色，背景色为icon传入的颜色，icon为白色。
+   * @group ui
    */
   @property({
     type: Boolean,
@@ -401,28 +386,26 @@ export class CardItemElement extends UpdatingElement {
   reverseBgColor: boolean;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 图片图标的src
+   * @group basic
    */
   @property({ attribute: false })
   imgSrc: string;
 
   /**
-   * @kind boolean
    * @required false
    * @default false
    * @description 是否显示图片，默认显示图标，设置显示图片后，可配置 `imgSrc` 属性
+   * @group basic
    */
   @property({ type: Boolean })
   showImg: boolean;
 
   /**
-   * @kind number
    * @required false
-   * @default -
    * @description 图标是img时，可以设置 img 的大小，不设置时会铺满
+   * @group basic
    */
   @property({
     type: Number,
@@ -430,10 +413,10 @@ export class CardItemElement extends UpdatingElement {
   imgSize: number;
 
   /**
-   * @kind  "circle" | "square" | "round-square"
    * @default  "circle"
    * @required false
    * @description 设置icon背景形状，仅在设置`bg`为true时有效
+   * @group basic
    */
   @property({ attribute: false }) shape: "circle" | "square" | "round-square";
 

@@ -7,7 +7,7 @@ import styles from "./BrickDivider.module.css";
 interface BrickDividerProps {
   type?: "horizontal" | "vertical" | "radiation";
   dashed?: boolean;
-  dividerStyle?: any;
+  dividerStyle?: React.CSSProperties;
   dividerTitle?: string;
   orientation?: "center" | "left" | "right";
   plain?: boolean;

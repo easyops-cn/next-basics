@@ -23,13 +23,12 @@ export type IllustrationMode = "feedback" | "guide";
  * @history
  * 1.148.0: 新增构件 `presentational-bricks.brick-illustration`
  * @memo
- * >更多类型插画请移至[插画库](/developers/illustrations)
+ * >更多类型插画请移至[插画库](/next/developers/illustrations)
  * @docKind brick
  * @noInheritDoc
  */
 export class BrickIllustrationElement extends UpdatingElement {
   /**
-   * @default -
    * @required true
    * @description 插画名称
    */
@@ -37,41 +36,43 @@ export class BrickIllustrationElement extends UpdatingElement {
   name: string;
 
   /**
-   * @default `default`
+   * @default "default"
    * @required true
    * @description 插画类型
+   * @group basic
    */
   @property()
   category: string;
 
   /**
-   * @default -
-   * @required -
+   * @required false
    * @description 插画头部内容
+   * @group other
    */
   @property({ attribute: false })
   header: IllustrationHeader;
 
   /**
-   * @default -
    * @required false
    * @description 插画底部内容
+   * @group other
    */
   @property({ attribute: false })
   footer: IllustrationFooter;
 
   /**
-   * @default -
-   * @required -
+   * @required false
    * @description 插画模式
+   * @group other
+   * @deprecated
    */
   @property()
   mode: IllustrationMode;
 
   /**
-   * @default -
-   * @required -
+   * @required false
    * @description 图片样式
+   * @group ui
    */
   @property({ attribute: false })
   imageStyle: CSSProperties;
