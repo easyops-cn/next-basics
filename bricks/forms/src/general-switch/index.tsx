@@ -28,67 +28,68 @@ export class GeneralSwitchElement extends FormItemElement {
   /**
    * @required true
    * @description 表单项字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
   /**
    * @required false
    * @description 表单项字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @required false
    * @description 初始值
+   * @group basicFormItem
    */
   @property({ type: Boolean })
   value?: boolean;
 
   /**
-   * @required false
    * @default false
    * @description 是否禁用
+   * @group basicFormItem
    */
   @property({ type: Boolean })
-  disabled: boolean;
+  disabled?: boolean;
 
   /**
-   * @required false
    * @description 开关大小
+   * @group ui
    */
   @property({ attribute: false })
-  size: "default" | "small" = "default";
+  size?: "default" | "small" = "default";
 
   /**
-   * @required false
    * @description 选中时的图标
+   * @group ui
    */
   @property({ attribute: false })
-  checkedIcon: MenuIcon;
+  checkedIcon?: MenuIcon;
 
   /**
-   * @required false
    * @description 非选中时的图标
+   * @group ui
    */
   @property({ attribute: false })
-  unCheckedIcon: MenuIcon;
+  unCheckedIcon?: MenuIcon;
 
   /**
-   * @required false
    * @description 选中时的文本
+   * @group ui
    */
   @property({ attribute: false })
-  checkedText: string;
+  checkedText?: string;
 
   /**
-   * @required false
    * @description 非选中时的文本
+   * @group ui
    */
   @property({ attribute: false })
-  unCheckedText: string;
+  unCheckedText?: string;
 
   /**
-   * @detail `boolean`
    * @description 开关改变时触发, `event.detail` 为当前选择的值
    */
   @event({ type: "general.switch.change" }) changeEvent: EventEmitter<boolean>;
