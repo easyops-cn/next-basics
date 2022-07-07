@@ -19,26 +19,31 @@ export const DropdownSelectStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "单选示例",
+      },
       brick: "presentational-bricks.dropdown-select",
       properties: {
-        dataSource: [
+        options: [
           {
             label: "应用1",
-            value: "132b4a",
-            desc: "作为测试用",
+            value: "aaaa",
+            content: "描述1",
           },
           {
             label: "应用2",
-            value: "43bca6",
-            desc: "记录相关修改信息",
+            value: "bbbb",
+            content: "描述2",
+          },
+          {
+            label: "应用3",
+            value: "cccc",
+            content: "描述3",
           },
         ],
-        value: "43bca6",
-        label: "#{item.label}",
-        placeholder: "placeholder",
-        optionTitle: "#{item.label}",
-        optionContent: "#{item.desc}",
-        valuePath: "item.value",
+        placeholder: "请选择",
+        value: "aaaa",
+        labelFontSize: "16px",
       },
       events: {
         "select.change": {
@@ -47,26 +52,33 @@ export const DropdownSelectStory: Story = {
       },
     },
     {
+      description: {
+        title: "多选示例",
+      },
       brick: "presentational-bricks.dropdown-select",
       properties: {
-        dataSource: [
+        options: [
+          {
+            label: "应用1",
+            value: "aaaa",
+            content: "描述1",
+          },
+          {
+            label: "应用2",
+            value: "bbbb",
+            content: "描述2",
+          },
           {
             label: "应用3",
-            value: "132b4a",
-            desc: "作为开发用",
-          },
-          {
-            label: "应用4",
-            value: "43bca6",
-            desc: "记录相关创建信息",
+            value: "cccc",
+            content: "描述3",
           },
         ],
-        value: "应用4",
-        label: "#{item.label}",
-        placeholder: "placeholder",
-        optionTitle: "#{item.label}",
-        optionContent: "#{item.desc}",
-        valuePath: "item.label",
+        value: "bbbb",
+        placeholder: "请选择",
+        labelFontSize: "14px",
+        multipleSelect: true,
+        selectedKeys: ["aaaa", "bbbb"],
       },
       events: {
         "select.change": {
