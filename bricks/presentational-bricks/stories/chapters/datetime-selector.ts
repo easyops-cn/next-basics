@@ -11,8 +11,7 @@ export const DatetimeSelectorStory: Story = {
   },
   description: {
     en: "used to datetime filter",
-    zh:
-      "常用于时间的过滤，支持快速选择时间区间和自定义，例如图表或表格的时间过滤",
+    zh: "常用于时间的过滤，支持快速选择时间区间和自定义，例如图表或表格的时间过滤",
   },
   icon: {
     lib: "fa",
@@ -20,10 +19,13 @@ export const DatetimeSelectorStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "默认时间范围选项",
+      },
       brick: "presentational-bricks.datetime-selector",
       properties: {
-        from: '${query.from="now/d"}',
-        to: "${query.to}",
+        from: "<% QUERY.from || 'now/d' %>",
+        to: "<% QUERY.to %>",
       },
       events: {
         "datetime.selected.v2": {
@@ -35,11 +37,14 @@ export const DatetimeSelectorStory: Story = {
       },
     },
     {
+      description: {
+        title: "自定义时间范围选项",
+      },
       brick: "presentational-bricks.datetime-selector",
       properties: {
         shouldUpdateUrlParams: false,
-        from: '${query.from="now/d"}',
-        to: "${query.to}",
+        from: "<% QUERY.from || 'now/d' %>",
+        to: "<% QUERY.to %>",
         type: "custom",
         customTimeRange: [
           {
