@@ -63,11 +63,27 @@ interface ImageItem {
   [propName: string]: any;
 }
 
-function getBase64(file: File): Promise<string | ArrayBuffer> {
+function getImageDetail(file: File): Promise<{
+  base64: string;
+  width: number;
+  height: number;
+}> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      const image = new Image();
+      image.src = base64;
+      image.onload = () => {
+        resolve({
+          base64,
+          width: image.width,
+          height: image.height,
+        });
+      };
+      image.onerror = (error) => reject(error);
+    };
     reader.onerror = (error) => reject(error);
   });
 }
@@ -117,6 +133,10 @@ export function RealUploadImg(
   const [previewVisible, setPreviewVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [allUser, serAllUser] = useState<UserInfo[]>();
+  const [uploadData, setUploadData] = useState<{
+    width?: number;
+    quality?: number;
+  }>();
   const theme = useCurrentTheme();
 
   const buttonIcon: MenuIcon = {
@@ -168,7 +188,8 @@ export function RealUploadImg(
     if (isDone) {
       if (props.maxNumber === 1) {
         newFile.preview =
-          newFile.preview || (await getBase64(newFile.originFileObj));
+          newFile.preview ||
+          (await getImageDetail(newFile.originFileObj)).base64;
         setImageList([
           {
             ...newFile,
@@ -214,7 +235,8 @@ export function RealUploadImg(
 
   const handlePreview = async (file: any): Promise<void> => {
     if (!file.preview && file.originFileObj) {
-      file.preview = await getBase64(file.originFileObj);
+      const detail = await getImageDetail(file.originFileObj);
+      file.preview = detail?.base64;
     }
     setPreviewImage(file.preview || file.url);
     setPreviewVisible(true);
@@ -395,7 +417,17 @@ export function RealUploadImg(
         message.error(`上传文件体积大于限定体积`);
         reject(new Error("上传文件体积大于限定体积"));
       }
-      resolve(file);
+      getImageDetail(file)
+        .then((detail) => {
+          if (file.size > 1024 * 1024) {
+            setUploadData({
+              width: detail.width > 1200 ? 1200 : detail.width,
+              quality: 80,
+            });
+          }
+          resolve(file);
+        })
+        .catch((e) => reject(new Error(e)));
     });
   };
 
@@ -541,6 +573,7 @@ export function RealUploadImg(
 
     method: "put",
     action,
+    data: uploadData,
     listType: props.listType,
     fileList: imageList,
     onPreview: handlePreview,
