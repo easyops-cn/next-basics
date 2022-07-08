@@ -421,7 +421,7 @@ export function RealUploadImg(
         .then((detail) => {
           if (file.size > 1024 * 1024) {
             setUploadData({
-              width: Math.floor(detail.width * 0.8),
+              width: detail.width > 1200 ? 1200 : detail.width,
               quality: 80,
             });
           }
