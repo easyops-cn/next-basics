@@ -55,7 +55,7 @@ export function BrickDocument({
   const [rotate, setRotate] = useState(180);
   const [interfaceIds, setInterfaceIds] = useState([]);
 
-  const sharedDescList = useMemo(
+  const PresentedSharedDescList = useMemo(
     () =>
       sharedTypeDescList.filter((item) =>
         doc?.properties?.some((row) => row.type.includes(item.type))
@@ -113,34 +113,27 @@ export function BrickDocument({
     };
   };
 
-  const _renderTypeLink = (ids: string[], str: string): React.ReactElement => {
-    const hashHref = getCurHashHref();
-
-    return (
-      <span
-        className={styles.typeWrapper}
-        dangerouslySetInnerHTML={generateInterfaceRef(
-          ids,
-          str.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-          hashHref
-        )}
-      ></span>
-    );
-  };
-
   const renderTypeAnnotation = (value: string): React.ReactElement | string => {
     if (!value) return <span className={styles.typeWrapper}>-</span>;
 
     const str = value.replace(/`/g, "");
 
-    if (interfaceIds.length && renderLink) {
-      return _renderTypeLink(interfaceIds, str);
-    }
+    const mixInterfaceIds = [
+      ...interfaceIds,
+      ...PresentedSharedDescList.map((i) => i.type),
+    ];
+    if (mixInterfaceIds.length && renderLink) {
+      const hashHref = getCurHashHref();
 
-    if (sharedDescList.length) {
-      return _renderTypeLink(
-        sharedDescList.map((i) => i.type),
-        str
+      return (
+        <span
+          className={styles.typeWrapper}
+          dangerouslySetInnerHTML={generateInterfaceRef(
+            mixInterfaceIds,
+            str.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+            hashHref
+          )}
+        ></span>
       );
     }
 
@@ -597,7 +590,7 @@ export function BrickDocument({
           {renderMethods(brickDoc.methods)}
           {renderSlots(brickDoc.slots)}
           {renderInterfaceMix(brickDoc.interface)}
-          {renderSharedContent(sharedDescList)}
+          {renderSharedContent(PresentedSharedDescList)}
           {renderMemo(brickDoc.memo)}
         </div>
       </Card>

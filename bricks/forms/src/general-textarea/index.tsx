@@ -24,135 +24,111 @@ import { AutoSizeType } from "rc-textarea/lib/ResizableTextArea";
  */
 export class GeneralTextAreaElement extends FormItemElement {
   /**
-   * @kind string
    * @required true
-   * @default -
    * @description 下拉框字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 下拉框字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 初始值
+   * @group basicFormItem
    */
   @property()
-  value: string;
+  value?: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 下拉框占位说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default -
    * @description 是否只读
-   * @group basic
+   * @group basicFormItem
    */
   @property({ type: Boolean })
-  readOnly: boolean;
+  readOnly?: boolean;
 
   /**
-   * @kind boolean
-   * @required false
    * @default false
    * @description 是否禁用
+   * @group basicFormItem
    */
   @property({
     type: Boolean,
   })
-  disabled: boolean;
+  disabled?: boolean;
 
   /**
-   * @kind boolean
    * @required false
-   * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind `Record<string,string>`
    * @required false
-   * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind `boolean / AutoSizeType`
-   * @required false
-   * @default -
    * @description 自适应内容高度，或自配置
+   * @group ui
    */
   @property({ attribute: false })
-  autoSize: boolean | AutoSizeType;
+  autoSize?: boolean | AutoSizeType;
 
   /**
-   * @kind number
-   * @required false
-   * @default -
    * @description 最小长度
+   * @group advancedFormItem
    */
   @property({
     type: Number,
   })
-  min: number;
+  min?: number;
 
   /**
-   * @kind number
-   * @required false
-   * @default -
    * @description 最大长度
+   * @group advancedFormItem
    */
   @property({
     type: Number,
   })
-  max: number;
+  max?: number;
 
   /**
-   * @kind object
-   * @required false
-   * @default
    * @description 输入框样式
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  inputBoxStyle: React.CSSProperties;
+  inputBoxStyle?: React.CSSProperties;
 
   /**
-   * @detail `string`
    * @description 输入变化时被触发，`event.detail` 为当前值
    */
   @event({ type: "general.textarea.change" }) changeEvent: EventEmitter<string>;
   /**
-   * @detail `null`
    * @description 获得焦点时触发
    */
   @event({ type: "general.textarea.focus" }) focusEvent: EventEmitter;
   /**
-   * @detail `string`
    * @description 失焦时触发，而且会传出当前输入框当前值
    */
   @event({ type: "general.textarea.blur" }) blurEvent: EventEmitter<string>;
   /**
-   * @detail handleBlurReturn
    * @description 失焦时触发，而且会传出当前输入框光标所在的前后部分
    */
   @event({ type: "general.textarea.blur.V2" })
