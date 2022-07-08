@@ -24,13 +24,13 @@ export interface DatetimeSelectorProps {
   placement?: TooltipPlacement;
   resolution?: ResolutionProps;
   size?: ButtonSize;
+  selectNearDays?: number;
 }
 
 export function DatetimeSelector(
   props: DatetimeSelectorProps
 ): React.ReactElement {
   const { customTimeRange = [], type = "default", resolution, size } = props;
-
   const getInitDateRange = (): DateRangeProps => {
     const rangeList =
       type === "default"
@@ -75,6 +75,7 @@ export function DatetimeSelector(
       initDateRange={getInitDateRange()}
       placement={props.placement}
       size={size}
+      selectNearDays={props.selectNearDays}
     />
   );
 }
