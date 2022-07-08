@@ -14,7 +14,6 @@ const map = new Map([["irelia", { name: "irelia", user_icon: "/irelia.ico" }]]);
 jest.spyOn(kit, "getRuntime").mockReturnValue({
   getAllUserMapAsync: jest.fn().mockResolvedValue(map),
 } as any);
-HTMLCanvasElement.prototype.getContext = jest.fn();
 window.URL.createObjectURL = jest.fn();
 
 const fileList = [
@@ -27,6 +26,19 @@ const fileList = [
     url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
   },
 ];
+
+beforeAll(() => {
+  // Mocking Image.prototype.src to call the onload
+  // callbacks depending on the src passed to it
+  Object.defineProperty(global.Image.prototype, "src", {
+    // Define the property setter
+    set(src) {
+      if (src) {
+        setTimeout(() => this.onload());
+      }
+    },
+  });
+});
 
 describe("UploadImg", () => {
   it("should work", async () => {
@@ -91,17 +103,19 @@ describe("UploadImg", () => {
       new Error("上传文件体积大于限定体积")
     );
 
-    const allowResult = wrapper.find(Upload).invoke("beforeUpload")(
-      {
-        uid: "123",
-        size: 1024 * 1024,
-        type: "image/png",
-        name: "png",
-      } as RcFile,
-      [...fileList]
-    );
+    let allowResult;
+    await act(async () => {
+      allowResult = wrapper.find(Upload).invoke("beforeUpload")(
+        new File(["test"], "test.png", {
+          type: "image/png",
+        }) as RcFile,
+        [...fileList]
+      );
+      await (global as any).flushPromises();
+    });
+    await jest.runAllTimers();
     await expect(allowResult).resolves.toMatchObject({
-      size: 1024 * 1024,
+      size: 4,
     });
 
     wrapper.find(Upload).invoke("onChange")({
@@ -407,6 +421,7 @@ describe("UploadImg", () => {
       });
       await (global as any).flushPromises();
     });
+    await jest.runAllTimers();
     wrapper.update();
     expect(wrapper.find(".ant-upload-list-item").length).toBe(1);
     expect(wrapper.find(".ant-upload-text").length).toBe(0);
@@ -561,6 +576,7 @@ describe("UploadImg", () => {
       });
       await (global as any).flushPromises();
     });
+    await jest.runAllTimers();
     wrapper.update();
     expect(onChange).toBeCalledWith({
       images: [

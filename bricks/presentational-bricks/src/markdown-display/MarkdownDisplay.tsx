@@ -71,7 +71,7 @@ export function MarkdownDisplay({
             document.getElementById(imgId)
           );
         });
-        return `<div class="img-preview" id="${imgId}">
+        return `<div class="img-preview" style="text-align: center;" id="${imgId}">
           <img src="${errorImage}">
         </div>`;
       } else {
