@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_DEVELOPERS, K } from "../i18n/constants";
 import { BrickBookProps } from "../brick-book/BrickBook/BrickBook";
@@ -20,7 +20,9 @@ import {
   StoryDocSlot,
   StoryDocType,
 } from "@next-core/brick-types";
+import { sharedTypeDescList } from "./constants";
 import styles from "./BrickDocument.module.css";
+import { TypeDescItem } from "../interfaces";
 import * as gfm from "remark-gfm";
 
 function flatten(text: any, child: any): any {
@@ -52,6 +54,14 @@ export function BrickDocument({
   const [brickDoc, setBrickDoc] = useState<StoryDoc>(null);
   const [rotate, setRotate] = useState(180);
   const [interfaceIds, setInterfaceIds] = useState([]);
+
+  const sharedDescList = useMemo(
+    () =>
+      sharedTypeDescList.filter((item) =>
+        doc?.properties?.some((row) => row.type.includes(item.type))
+      ),
+    [doc?.properties]
+  );
 
   useEffect(() => {
     if (brickId && brickType && doc) {
@@ -86,7 +96,11 @@ export function BrickDocument({
     });
   };
 
-  const generateInterfaceRef = (str: string, hashHref: string) => {
+  const generateInterfaceRef = (
+    interfaceIds: string[],
+    str: string,
+    hashHref: string
+  ) => {
     const reg = new RegExp(
       `\\b(${interfaceIds.map((v) => v).join("|")})\\b`,
       "g"
@@ -99,22 +113,34 @@ export function BrickDocument({
     };
   };
 
+  const _renderTypeLink = (ids: string[], str: string): React.ReactElement => {
+    const hashHref = getCurHashHref();
+
+    return (
+      <span
+        className={styles.typeWrapper}
+        dangerouslySetInnerHTML={generateInterfaceRef(
+          ids,
+          str.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+          hashHref
+        )}
+      ></span>
+    );
+  };
+
   const renderTypeAnnotation = (value: string): React.ReactElement | string => {
     if (!value) return <span className={styles.typeWrapper}>-</span>;
 
     const str = value.replace(/`/g, "");
 
     if (interfaceIds.length && renderLink) {
-      const hashHref = getCurHashHref();
+      return _renderTypeLink(interfaceIds, str);
+    }
 
-      return (
-        <span
-          className={styles.typeWrapper}
-          dangerouslySetInnerHTML={generateInterfaceRef(
-            str.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-            hashHref
-          )}
-        ></span>
+    if (sharedDescList.length) {
+      return _renderTypeLink(
+        sharedDescList.map((i) => i.type),
+        str
       );
     }
 
@@ -140,7 +166,7 @@ export function BrickDocument({
     }
 
     if (interfaceIds.length > 0 && renderLink) {
-      return generateInterfaceRef(str, hashHref);
+      return generateInterfaceRef(interfaceIds, str, hashHref);
     }
 
     const subsetReg = /`\s*([^]+?.*?[^]+?[^]?)`/g;
@@ -527,6 +553,27 @@ export function BrickDocument({
     );
   };
 
+  const renderSharedContent = (
+    typeDescList: TypeDescItem[]
+  ): React.ReactElement => {
+    return (
+      <>
+        {typeDescList.map((item) => (
+          <React.Fragment key={item.type}>
+            <h3 className={style.interfaceTitle} id={item.type}>
+              {item.type}{" "}
+              <Tag color="purple" className={style.badge}>
+                External
+              </Tag>
+            </h3>
+
+            {renderMarkDown(item.description)}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  };
+
   const empty = (
     <Empty description={<span>Customize Documentation</span>}>
       <Button type="primary" onClick={handleCreateButtonClick}>
@@ -550,6 +597,7 @@ export function BrickDocument({
           {renderMethods(brickDoc.methods)}
           {renderSlots(brickDoc.slots)}
           {renderInterfaceMix(brickDoc.interface)}
+          {renderSharedContent(sharedDescList)}
           {renderMemo(brickDoc.memo)}
         </div>
       </Card>

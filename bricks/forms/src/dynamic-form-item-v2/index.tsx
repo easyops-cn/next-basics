@@ -23,23 +23,17 @@ import { Column } from "../interfaces";
  */
 export class DynamicFormItemV2Element extends FormItemElement {
   /**
-   * @kind Record<string, any>[]
-   * @required false
-   * @default -
    * @description 动态表单项的初始值
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     attribute: false,
   })
-  value: Record<string, any>[];
+  value?: Record<string, any>[];
 
   /**
-   * @kind Column[]
-   * @required true
-   * @default -
    * @description 每一列表单项的配置
-   * @group basic
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -48,61 +42,54 @@ export class DynamicFormItemV2Element extends FormItemElement {
 
   /**
    * @kind boolean | ((row: Record<string, any>, index: number) => boolean)
-   * @required false
-   * @default -
    * @description 是否隐藏每一行删除的按钮
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  hideRemoveButton:
+  hideRemoveButton?:
     | boolean
     | ((row: Record<string, any>, index: number) => boolean);
 
   /**
    * @kind boolean | ((row: Record<string, any>, index: number) => boolean)
-   * @required false
-   * @default -
    * @description 是否禁止每一行删除的按钮
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  disabledRemoveButton:
+  disabledRemoveButton?:
     | boolean
     | ((row: Record<string, any>, index: number) => boolean);
 
   /**
    * @kind boolean | ((value: Record<string, any>[]) => boolean)
-   * @required false
-   * @default -
    * @description 是否隐藏添加的按钮
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  hideAddButton: boolean | ((value: Record<string, any>[]) => boolean);
+  hideAddButton?: boolean | ((value: Record<string, any>[]) => boolean);
 
   /**
    * @kind boolean | ((value: Record<string, any>[]) => boolean)
-   * @required false
-   * @default -
    * @description 是否禁止添加的按钮
-   * @group basic
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  disabledAddButton: boolean | ((value: Record<string, any>[]) => boolean);
+  disabledAddButton?: boolean | ((value: Record<string, any>[]) => boolean);
 
   /**
-   * @detail Record<string, any>[]
    * @description 表单项值改变时触发
    */
-  @event({ type: "item.change" }) changeEvent: EventEmitter;
+  @event({ type: "item.change" }) changeEvent: EventEmitter<
+    Record<string, any>[]
+  >;
   private _handleChange = (detail: Record<string, any>[]): void => {
     this.changeEvent.emit(detail);
   };

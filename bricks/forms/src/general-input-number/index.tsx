@@ -21,33 +21,26 @@ import { FormItemElement } from "@next-libs/forms";
  *  placeholder
  * @memo
  * > Tips: 对于 event.detail 为 `Keyboard Event` 时， 由于 react 对于合成事件的处理，打印出来的整个 `Keyboard Event` 相关属性都为 null, 但可通过单独查看某个属性来得到值（如示例所示），相关详情信息可[查看 react 合成事件](https://zh-hans.reactjs.org/docs/events.html#event-pooling)。
- * ### METHODS
- *| name           | params | description            |
- *| -------------- | ------ | ---------------------- |
- *| getFormElement | -      | 获得输入框所属表单元素 |
  */
 export class GeneralInputNumberElement extends FormItemElement {
   /**
-   * @kind string
    * @required true
-   * @default -
    * @description 数字输入框字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 数字输入框字段说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind `number|string`
    * @required false
-   * @default -
    * @description 数字输入框初始值
+   * @group basicFormItem
    */
   @property({
     attribute: false,
@@ -55,106 +48,85 @@ export class GeneralInputNumberElement extends FormItemElement {
   value: number | string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 数字输入框占位说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @kind boolean
    * @required false
-   * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind boolean
    * @required false
-   * @default -
-   * @description 是否只读
-   */
-  @property({ type: Boolean }) readOnly: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default -
-   * @description 是否禁用
-   */
-  @property({ type: Boolean }) declare disabled: boolean;
-
-  /**
-   * @kind `Record<string,string>`
-   * @required false
-   * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind `object`
-   * @required false
-   * @default
+   * @description 是否禁用
+   * @group basicFormItem
+   */
+  @property({ type: Boolean }) disabled?: boolean;
+
+  /**
+   * @description 是否只读
+   * @group basicFormItem
+   */
+  @property({ type: Boolean }) readOnly?: boolean;
+
+  /**
    * @description 输入框样式
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  inputBoxStyle: React.CSSProperties;
+  inputBoxStyle?: React.CSSProperties;
 
   /**
-   * @kind number
-   * @required false
-   * @default -
    * @description 数字输框入步长
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
   })
-  step = 1;
+  step? = 1;
 
   /**
-   * @kind number
-   * @required false
-   * @default -
    * @description 数值精度
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
   })
-  precision: number;
+  precision?: number;
 
   /**
-   * @kind number
-   * @required false
-   * @default -
    * @description 数字输入框最小值
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({
     type: Number,
   })
-  min: number;
+  min?: number;
 
   /**
    * @kind number
-   * @required false
-   * @default -
    * @description 数字输入框最大值
-   * @group advanced
+   * @group advancedFormItem
    */
   @property({
     attribute: false,
   })
-  max = Infinity;
+  max? = Infinity;
 
   /**
-   * @detail `string`
    * @description 输入改变，`event.detail` 是当前值
    */
   @event({ type: "general.input.change" }) changeEvent: EventEmitter<
@@ -168,7 +140,6 @@ export class GeneralInputNumberElement extends FormItemElement {
     });
   };
   /**
-   * @detail `null`
    * @description 	获得焦点时触发
    */
   @event({ type: "general.input.focus" }) focusEvent: EventEmitter;
@@ -176,7 +147,6 @@ export class GeneralInputNumberElement extends FormItemElement {
     this.focusEvent.emit();
   };
   /**
-   * @detail `string|number`
    * @description 失焦时触发, 而且会传出当前输入框当前值
    */
   @event({ type: "general.input.blur" }) blurEvent: EventEmitter<
@@ -186,7 +156,6 @@ export class GeneralInputNumberElement extends FormItemElement {
     this.blurEvent.emit(this.value);
   };
   /**
-   * @detail `object`
    * @description 按下enter键触发，`event.detail` 为 [Keyboard Event](https://zh-hans.reactjs.org/docs/events.html#keyboard-events)
    */
   @event({ type: "general.input.press.enter" }) enterPressEvent: EventEmitter<

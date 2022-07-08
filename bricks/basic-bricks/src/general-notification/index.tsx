@@ -73,7 +73,6 @@ export class GeneralNotificationElement extends UpdatingElement {
   duration: number;
 
   /**
-   * @kind [React.CSSProperties](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/e434515761b36830c3e58a970abf5186f005adac/types/react/index.d.ts#L794)
    * @required false
    * @default -
    * @description icon css 样式
