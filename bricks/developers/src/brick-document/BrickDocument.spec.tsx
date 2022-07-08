@@ -83,6 +83,12 @@ const doc = {
       description: "高亮选项",
       deprecated: true,
     },
+    {
+      name: "inputStyle",
+      type: "CSSProperties",
+      required: false,
+      description: "输入框样式",
+    },
   ],
   events: [
     {

@@ -92,15 +92,13 @@ export class GeneralAutoCompleteElement extends FormItemElement {
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @required false
-   * @default
-   * @description 输入框样式,CSSProperties 包含的属性可[查看](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index),需要注意的是该属性中的 key 需要转为小驼峰命名的方式，如设置 background-color 样式其形式为 { backgroundColor: "red"}, 具体原因可 [查看](https://zh-hans.reactjs.org/docs/dom-elements.html#style)
+   * @description 输入框样式
    * @group ui
    */
   @property({
     attribute: false,
   })
-  inputBoxStyle: CSSProperties;
+  inputBoxStyle?: CSSProperties;
 
   connectedCallback(): void {
     // istanbul ignore else
