@@ -16,31 +16,31 @@ export class FlexLayoutElement extends UpdatingElement {
    * @description 定义[flex-direction]:设置主轴方向
    */
   @property({ type: String })
-  flexDirection: string;
+  flexDirection?: string;
 
   /**
    * @description 定义[justify-content]:设置主轴上子元素的排列方式
    */
   @property({ type: String })
-  justifyContent: string;
+  justifyContent?: string;
 
   /**
    * @description 定义[align-items]:设置侧轴上的子元素排列方式（单行）
    */
   @property({ type: String })
-  alignItems: string;
+  alignItems?: string;
 
   /**
    * @description 定义[align-content]:设置侧轴上的子元素排列方式（多行）
    */
   @property({ type: String })
-  alignContent: string;
+  alignContent?: string;
 
   /**
    * @description 定义[flex-wrap]:设置换行方式
    */
   @property({ type: String })
-  flexWrap: string;
+  flexWrap?: string;
 
   // Process user's input
   processString(str: string): string {

@@ -1,26 +1,19 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Divider, Menu } from "antd";
-import {
-  useBuilderContextMenuStatus,
-  useBuilderDataManager,
-} from "@next-core/editor-bricks-helper";
+import { BuilderContextMenuStatus } from "@next-core/editor-bricks-helper";
 import { looseCheckIfByTransform } from "@next-core/brick-kit";
 import { ActionClickDetail } from "../shared/workbench/interfaces";
 import type { BuilderClipboard } from "../builder-container/interfaces";
-import { useCanPaste } from "../builder-container/BuilderContextMenu/useCanPaste";
 
 import styles from "./WorkbenchContextMenu.module.css";
 
 export interface WorkbenchContextMenuProps {
+  contextMenuStatus?: BuilderContextMenuStatus;
   menu: ContextMenuItem[];
   clipboard?: BuilderClipboard;
+  canPaste?: boolean;
   onActionClick?(detail: ActionClickDetail): void;
+  handleCloseMenu?: (event: React.MouseEvent) => void;
 }
 
 export type ContextMenuItem = ContextMenuAction | ContextMenuDivider;
@@ -38,30 +31,15 @@ export interface ContextMenuDivider {
 }
 
 export function WorkbenchContextMenu({
+  contextMenuStatus,
   menu,
   clipboard,
+  canPaste,
   onActionClick,
+  handleCloseMenu,
 }: WorkbenchContextMenuProps): React.ReactElement {
-  const contextMenuStatus = useBuilderContextMenuStatus();
-  const manager = useBuilderDataManager();
   const [menuPosition, setMenuPosition] = useState<React.CSSProperties>();
   const wrapperRef = useRef<HTMLDivElement>();
-
-  const canPasteCallback = useCanPaste();
-  const canPaste = useMemo(
-    () => canPasteCallback(clipboard, contextMenuStatus.node),
-    [canPasteCallback, clipboard, contextMenuStatus.node]
-  );
-
-  const handleCloseMenu = useCallback(
-    (event: React.MouseEvent) => {
-      event.preventDefault();
-      manager.contextMenuChange({
-        active: false,
-      });
-    },
-    [manager]
-  );
 
   useEffect(() => {
     // Keep menu in viewport.

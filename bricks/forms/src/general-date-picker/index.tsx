@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import ReactDOM from "react-dom";
 import {
   BrickWrapper,
@@ -31,120 +31,98 @@ import { DisabledDateType } from "../interfaces";
  */
 export class GeneralDatePickerElement extends FormItemElement {
   /**
-   * @kind string
    * @required true
-   * @default -
    * @description 日期选择框字段名
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 日期选择框字段说明
+   * @required false
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 日期选择框初始值
+   * @group basicFormItem
    */
   @property()
   value: string;
 
   /**
-   * @kind string
    * @required false
-   * @default -
    * @description 日期选择框占位说明
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @kind boolean
    * @required false
-   * @default -
    * @description 是否必填项
+   * @group basicFormItem
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind `Record<string,string>`
    * @required false
-   * @default -
    * @description 校验文本信息
+   * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind `object`
-   * @required false
-   * @default
-   * @description 输入框样式
+   * @description 输入框样式,CSSProperties 包含的属性可[查看](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index),需要注意的是该属性中的 key 需要转为小驼峰命名的方式，如设置 background-color 样式其形式为 { backgroundColor: "red"}, 具体原因可 [查看](https://zh-hans.reactjs.org/docs/dom-elements.html#style)
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  inputBoxStyle: React.CSSProperties;
+  inputBoxStyle?: CSSProperties;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default `false`
    * @description 是否显示时间, 当设为 `true` 时, 请同时设置 `format` 为 `YYYY-MM-DD HH:mm:ss` 使其也显示具体时，分，秒 的时间
-   * @group advanced
+   * @group ui
    */
   @property({
     type: Boolean,
   })
-  showTime: boolean;
+  showTime?: boolean;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
    * @description 显示预览的格式，具体配置参考 [moment](https://momentjs.com/docs/#/displaying/format/)，注意，这里并非是定义给后台的数据格式，给后台的数据格式定义请参考 `general-form` 构件的 [valueTypes](developers/brick-book/brick/forms.general-form) 属性
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  format: string;
+  format?: string;
 
   /**
-   * @kind "date"|"week"
-   * @required false
-   * @default "date"
-   * @description 日期选择框初始值
-   * @group advanced
+   * @description 设置选择器类型
+   * @group basicFormItem
    */
   @property({ attribute: false })
-  picker: "date" | "week" = "date";
+  picker?: "date" | "week" = "date";
 
   /**
-   * @required false
-   * @default -
    * @description 不可选择的日期
-   * @group advanced
+   * @group basicFormItem
    */
   @property({ attribute: false })
-  disabledDate: DisabledDateType;
+  disabledDate?: DisabledDateType;
   /**
-   * @default
-   * @required false
    * @description 是否禁用
+   * @group basicFormItem
    */
   @property({ type: Boolean })
-  disabled: boolean;
+  disabled?: boolean;
 
   /**
- * @description 	日期变化时触发
-
- * @detail `string`
- */
+   * @description 	日期变化时触发
+   */
   @event({ type: "general.date.change" }) changeEvent: EventEmitter<string>;
   private _handleChange = (value: string): void => {
     this.value = value;
@@ -155,7 +133,6 @@ export class GeneralDatePickerElement extends FormItemElement {
   };
   /**
    * @description 点击确定按钮触发（showTime 为 true 使用）
-   * @detail `string`
    */
   @event({ type: "general.date.ok" }) okEvent: EventEmitter<string>;
   private _handleOk = (value: string): void => {

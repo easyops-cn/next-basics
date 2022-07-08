@@ -15,6 +15,7 @@ lazyBricks:
       - workbench-action-list
       - workbench-brick-tree
       - workbench-context-menu
+      - workbench-brick-context-menu
       - workbench-mini-action-bar
       - workbench-pane
       - workbench-sidebar

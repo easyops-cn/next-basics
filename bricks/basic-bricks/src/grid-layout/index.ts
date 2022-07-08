@@ -90,7 +90,7 @@ export class GridLayoutElement extends UpdatingElement {
   @property({
     type: Number,
   })
-  columns: number;
+  columns?: number;
 
   /**
    * @kind number
@@ -100,7 +100,7 @@ export class GridLayoutElement extends UpdatingElement {
   @property({
     type: Number,
   })
-  columnSpan: number;
+  columnSpan?: number;
 
   /**
    * @kind number
@@ -110,7 +110,7 @@ export class GridLayoutElement extends UpdatingElement {
   @property({
     type: Number,
   })
-  rows: number;
+  rows?: number;
 
   /**
    * @kind number
@@ -120,7 +120,7 @@ export class GridLayoutElement extends UpdatingElement {
   @property({
     type: Number,
   })
-  rowSpan: number;
+  rowSpan?: number;
 
   /**
    * @kind string
@@ -128,7 +128,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @description 	网格布局模板列，即 CSS 的 gridTemplateColumns，优先于 `columns`。
    */
   @property()
-  templateColumns: string;
+  templateColumns?: string;
 
   /**
    * @kind ResponsiveSettings
@@ -138,7 +138,7 @@ export class GridLayoutElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  responsive: ResponsiveSettings;
+  responsive?: ResponsiveSettings;
 
   constructor() {
     super();

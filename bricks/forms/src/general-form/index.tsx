@@ -72,7 +72,6 @@ export class GeneralFormElement
   private _mountPoint: HTMLElement;
 
   /**
-   * @kind Record<string,any>
    * @default -
    * @required false
    * @description 表单的初始值。当 `values` 有嵌套的层级时，需要按表单项的 `name` 平铺。如有源数据为 `{a: {b: 123}}` ，存在表单项的 `name` 为 `a.b`，要正确给该表单项赋值为 123， 那么 `values` 应该为 `{"a.b": 123}`
@@ -84,7 +83,6 @@ export class GeneralFormElement
   values: Record<string, any>;
 
   /**
-   * @kind Record<string, any>
    * @required false
    * @default -
    * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
@@ -96,7 +94,6 @@ export class GeneralFormElement
   staticValues: Record<string, any>;
 
   /**
-   * @kind string
    * @description 设置表单域内字段 id 的前缀
    * @default -
    * @required false
@@ -189,21 +186,18 @@ export class GeneralFormElement
   // Will be Set in React component.
   formUtils: WrappedFormUtils;
   /**
-   * @kind object
-   * @required -
    * @default -
-   * @description 对 `values` 属性的数据进行申明和格式化，提供了表单提交后格式化表单项数据的功能。目前仅支持时间相关的表单项数据的格式化（因为时间相关的表单项构件提交后的数据为 moment 对象，需要根据不同场景定义给后台的数据），`{time: moment|YYYY-MM-DD}` 表示该字段为 moment 类型，数据提交后格式化为 `YYYY-MM-DD` 字符串的形式，详情如 demo 所示
+   * @description 对 `values` 属性的数据进行格式化，提供了表单提交后格式化表单项数据的功能。目前仅支持时间相关的表单项数据的格式化（因为时间相关的表单项构件提交后的数据为 moment 对象，需要根据不同场景格式化数据后才提交给后台），`{time: moment|YYYY-MM-DD}` 表示该字段为 moment 类型，数据提交后格式化为 `YYYY-MM-DD` 字符串的形式，详情如 `普通表单 demo` 所示
    * @group basic
    */
   @property({
     attribute: false,
   })
-  valueTypes: Record<string, string>;
+  valueTypes?: Record<string, string>;
 
   private _GeneralForm: ConnectedForm;
 
   /**
-   * @kind boolean
    * @description 是否不显示冒号
    * @default false
    * @required false
@@ -228,14 +222,14 @@ export class GeneralFormElement
    * @group ui
    */
   @property({ attribute: false })
-  alignment: FormAlignment = FormAlignment.Center;
+  alignment?: FormAlignment = FormAlignment.Center;
 
   /**
    * @description 表单样式
    * @group ui
    */
   @property({ attribute: false })
-  formStyle: React.CSSProperties;
+  formStyle?: React.CSSProperties;
 
   constructor() {
     super();

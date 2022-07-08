@@ -8,7 +8,11 @@ import React, {
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, Button, Divider } from "antd";
 import styles from "./UserOrUserGroupSelect.module.css";
-import { InstanceApi_postSearch } from "@next-sdk/cmdb-sdk";
+import {
+  InstanceApi_postSearch,
+  CmdbModels,
+  CmdbObjectApi_getObjectRef,
+} from "@next-sdk/cmdb-sdk";
 import {
   zipObject,
   map,
@@ -25,11 +29,12 @@ import {
   groupBy,
   compact,
   some,
+  keyBy,
 } from "lodash";
 import { FormItemWrapperProps, FormItemWrapper } from "@next-libs/forms";
 import { getInstanceNameKeys } from "@next-libs/cmdb-utils";
 import { InstanceListModal } from "@next-libs/cmdb-instances";
-import { getAuth } from "@next-core/brick-kit";
+import { getAuth, handleHttpError } from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
@@ -56,8 +61,10 @@ export interface UserSelectFormItemProps {
   userQuery?: Record<string, any>;
 }
 
+type ModelObjectItem = Partial<CmdbModels.ModelCmdbObject>;
+
 interface UserOrUserGroupSelectProps extends FormItemWrapperProps {
-  objectMap: Record<string, any>;
+  objectMap?: Record<string, any>;
   placeholder?: string;
   value?: UserOrUserGroupSelectValue;
   hideAddMeQuickly?: boolean;
@@ -70,7 +77,10 @@ interface UserOrUserGroupSelectProps extends FormItemWrapperProps {
   hideInvalidUser?: boolean;
   userGroupQuery?: Record<string, any>;
   userQuery?: Record<string, any>;
+  objectList?: ModelObjectItem[];
 }
+
+let objectListCache: ModelObjectItem[];
 
 export function LegacyUserSelectFormItem(
   props: UserSelectFormItemProps,
@@ -640,17 +650,48 @@ export function LegacyUserSelectFormItem(
   );
 }
 
-export const UserSelectFormItem = forwardRef<HTMLDivElement>(
-  LegacyUserSelectFormItem
-);
+export const UserSelectFormItem = forwardRef(LegacyUserSelectFormItem);
 
 export function UserOrUserGroupSelect(
   props: UserOrUserGroupSelectProps
 ): React.ReactElement {
+  const [objectList, setObjectList] = useState<ModelObjectItem[]>(
+    props.objectList
+  );
+
+  useEffect(() => {
+    (async () => {
+      if (!props.objectList) {
+        if (objectListCache) {
+          setObjectList(objectListCache);
+        } else {
+          try {
+            const list = (
+              await CmdbObjectApi_getObjectRef({
+                ref_object: "USER,USER_GROUP",
+              })
+            ).data;
+            setObjectList(list);
+            objectListCache = list;
+          } catch (e) {
+            // istanbul ignore next
+            handleHttpError(e);
+          }
+        }
+      } else {
+        setObjectList(props.objectList);
+      }
+    })();
+  }, [props.objectList]);
+
+  if (!objectList) {
+    return null;
+  }
+
   return (
     <FormItemWrapper {...props}>
       <UserSelectFormItem
-        objectMap={props.objectMap}
+        objectMap={keyBy(objectList, "objectId")}
         placeholder={props.placeholder}
         value={props.value}
         hideAddMeQuickly={props.hideAddMeQuickly}

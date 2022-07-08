@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.163.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.162.3...@next-bricks/next-builder@1.163.0) (2022-07-07)
+
+
+### Features
+
+* remove commonTree and commonContextMenu ([75f3746](https://github.com/easyops-cn/next-basics/commit/75f37465122aad5a0dfc08b46fbd7168468d3fae))
+* remove unused code ([0554fab](https://github.com/easyops-cn/next-basics/commit/0554fab9142fe40482f7648050c07e6e86199d0d))
+* support common tree, tree item could be drag and show context menu ([66bbbdf](https://github.com/easyops-cn/next-basics/commit/66bbbdf014525263ec70d7eaa38d58c926d233f6))
+* update unit test ([807c291](https://github.com/easyops-cn/next-basics/commit/807c291fc1f6a40414a2be5f3dee45dbc2c6374a))
+
+
+
+
+
 ## [1.162.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.162.2...@next-bricks/next-builder@1.162.3) (2022-07-04)
 
 

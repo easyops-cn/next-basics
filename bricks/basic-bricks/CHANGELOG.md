@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.182.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.182.0...@next-bricks/basic-bricks@1.182.1) (2022-07-07)
+
+
+### Bug Fixes
+
+* doc refine ([ec8e058](https://github.com/easyops-cn/next-basics/commit/ec8e058398543ec80638cc20bdf03475d237caf2))
+
+
+
+
+
+# [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.181.0...@next-bricks/basic-bricks@1.182.0) (2022-07-07)
+
+
+### Features
+
+* **resizableBox:** update code ([7090a4c](https://github.com/easyops-cn/next-basics/commit/7090a4ca49e07a4b9d4df4cf0a1e471e5da8e207))
+* support common tree, tree item could be drag and show context menu ([66bbbdf](https://github.com/easyops-cn/next-basics/commit/66bbbdf014525263ec70d7eaa38d58c926d233f6))
+
+
+
+
+
 # [1.181.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.180.12...@next-bricks/basic-bricks@1.181.0) (2022-07-05)
 
 ### Features

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.254.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.253.0...@next-bricks/presentational-bricks@1.254.0) (2022-07-07)
+
+
+### Bug Fixes
+
+* doc refine ([ec8e058](https://github.com/easyops-cn/next-basics/commit/ec8e058398543ec80638cc20bdf03475d237caf2))
+
+
+### Features
+
+* **presentational-bricks:** brickTable support disabledRow style ([ab34438](https://github.com/easyops-cn/next-basics/commit/ab344380549bd7f53881239afeab187c9d34febc))
+
+
+
+
+
 # [1.253.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.252.3...@next-bricks/presentational-bricks@1.253.0) (2022-07-06)
 
 

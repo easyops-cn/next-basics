@@ -98,7 +98,7 @@ export class MarkdownEditorElement extends FormItemElement {
    * @required false
    * @default -
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
-   * @description
+   * @deprecated
    * @group advanced
    */
   @property({ attribute: false }) fields: {

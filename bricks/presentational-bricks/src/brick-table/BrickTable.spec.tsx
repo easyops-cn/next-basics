@@ -209,6 +209,7 @@ describe("BrickTable", () => {
         address: "Sidney No. 1 Lake Park",
         tags: ["teacher", "lucky", "lay"],
         status: "warning",
+        disabledRow: true,
       },
     ];
 
@@ -231,6 +232,7 @@ describe("BrickTable", () => {
     expect(wrapper.find("BrickAsComponent").length).toBeGreaterThan(0);
 
     expect(wrapper.find("tr").at(2).hasClass("invalidRow")).toBeTruthy();
+    expect(wrapper.find("tr").at(3).hasClass("disabledRow")).toBeTruthy();
   });
 
   it("useBrick should work", () => {

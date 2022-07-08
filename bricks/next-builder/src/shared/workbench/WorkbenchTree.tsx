@@ -25,14 +25,28 @@ import { WorkbenchTextIcon } from "./WorkbenchTextIcon";
 import { looseCheckIfOfComputed } from "@next-core/brick-kit";
 
 import styles from "./WorkbenchTree.module.css";
+import { WorkbenchTreeDndContext } from "./WorkbenchTreeDndContext";
+import { setDragImage } from "../../workbench-component-select/WorkbenchComponentSelect";
 
 const treeLevelPadding = 10;
 const borderStyle = "0 0 0 1px #ba6d30";
+
+export interface dropEmitProps {
+  nodes: WorkbenchNodeData[];
+  curNode: WorkbenchNodeData;
+  overNode: WorkbenchNodeData;
+  status: dragStatusEnum;
+}
+
 export interface WorkbenchTreeProps {
   nodes: WorkbenchNodeData[];
   placeholder?: string;
   searchPlaceholder?: string;
   noSearch?: boolean;
+  allowDrag?: boolean;
+  allowDragToRoot?: boolean;
+  allowDragToInside?: boolean;
+  dropEmit?: (detail: dropEmitProps) => void;
 }
 
 export interface TreeListProps {
@@ -47,9 +61,18 @@ export function WorkbenchTree({
   placeholder,
   searchPlaceholder,
   noSearch,
+  allowDragToRoot,
+  allowDragToInside,
+  dropEmit,
 }: WorkbenchTreeProps): ReactElement {
   const [q, setQ] = useState<string>(null);
-  const { onDragOver, onDrop } = useWorkbenchTreeDndContext();
+  const [isDragging, setIsDragging] = useState<boolean>();
+  const [curNode, setCurNode] = useState<WorkbenchNodeData>();
+  const [curElement, setCurElement] = useState<HTMLElement>();
+  const [overNode, setOverNode] = useState<WorkbenchNodeData>();
+  const [overElement, setOverElement] = useState<HTMLElement>();
+  const [overStatus, setOverStatus] = useState<dragStatusEnum>();
+  const { nodeKey, onBrickDrop } = useWorkbenchTreeContext();
 
   const handleSearchChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -75,6 +98,148 @@ export function WorkbenchTree({
     return nodes.slice();
   }, [noSearch, trimmedLowerQ, nodes, matchNode]);
 
+  const findDragParent = (element: HTMLElement, equal = true): HTMLElement => {
+    let node = element;
+    while (node) {
+      if (
+        node.draggable &&
+        (equal || node !== element) &&
+        node.tagName !== "A"
+      ) {
+        return node;
+      }
+      node = node.parentElement;
+    }
+  };
+
+  const findNode = (
+    nodes: WorkbenchNodeData[],
+    id: string,
+    nodeKey: string
+  ): WorkbenchNodeData => {
+    return nodes.find((item) => {
+      if ((item.data as Record<string, unknown>)[nodeKey] === id) {
+        return item;
+      }
+      if (item.children) {
+        return findNode(item.children, id, nodeKey);
+      }
+    });
+  };
+
+  const getDragState = (
+    e: React.DragEvent<HTMLElement>
+  ): {
+    element: HTMLElement;
+    node: WorkbenchNodeData;
+    status: dragStatusEnum;
+  } => {
+    const element = findDragParent(e.target as HTMLElement);
+    if (element === curElement) {
+      return;
+    }
+    const { top, bottom } = element.getBoundingClientRect();
+    const id = element.dataset.uid;
+    let status: dragStatusEnum;
+    const repair = allowDragToInside ? 5 : 10;
+    if (e.clientY < top + repair) {
+      status = dragStatusEnum.top;
+    } else if (e.clientY > bottom - repair) {
+      status = dragStatusEnum.bottom;
+    } else {
+      status = allowDragToInside ? dragStatusEnum.inside : null;
+    }
+
+    return {
+      element,
+      node: findNode(nodes, id, nodeKey),
+      status,
+    };
+  };
+
+  const handleOnDragStart = (
+    e: React.DragEvent,
+    node: WorkbenchNodeData
+  ): void => {
+    setIsDragging(true);
+    const element = e.target as HTMLElement;
+    setDragImage(e, element.innerText);
+    setCurElement(element);
+    setCurNode(node);
+  };
+
+  const handleOnDragOver = (e: React.DragEvent<HTMLElement>): void => {
+    e.preventDefault();
+    if (!isDragging) return;
+    if ((e.target as HTMLElement).className === "workbenchTree-placeholder-dom")
+      return;
+    const dom = getDragState(e);
+    if (dom && !curElement?.contains(dom.element)) {
+      setOverElement(dom.element);
+      setOverNode(dom.node);
+      setOverStatus(dom.status);
+    }
+  };
+
+  const handleOnDragEnd = (): void => {
+    setCurElement(null);
+    setOverElement(null);
+    setOverNode(null);
+    setOverStatus(null);
+    setIsDragging(false);
+  };
+
+  const handleOnDrop = (e: React.DragEvent<HTMLElement>): void => {
+    if (!isDragging) return;
+    if (onBrickDrop) {
+      let parentElement = overElement;
+      if ([dragStatusEnum.top, dragStatusEnum.bottom].includes(overStatus)) {
+        parentElement = findDragParent(parentElement, false);
+      }
+      onBrickDrop(e, {
+        curElement,
+        overElement,
+        parentElement,
+        overStatus,
+      });
+    } else {
+      const filterNodes = (nodes: WorkbenchNodeData[]): WorkbenchNodeData[] => {
+        let flag = false;
+        const newNodes = nodes.filter((node) => {
+          if (node.children) {
+            node.children = filterNodes(node.children);
+          }
+          if (node.key === overNode.key) flag = true;
+          return node.key !== curNode.key;
+        });
+        if (flag) {
+          newNodes.splice(
+            newNodes.findIndex((item) => item.key === overNode.key) +
+              (overStatus === "top" ? 0 : 1),
+            0,
+            curNode
+          );
+        }
+        return newNodes;
+      };
+
+      dropEmit({
+        nodes: filterNodes(nodes),
+        curNode,
+        overNode,
+        status: overStatus,
+      });
+    }
+    handleOnDragEnd();
+  };
+
+  useEffect(() => {
+    window.addEventListener("dragend", handleOnDragEnd);
+    return () => {
+      window.removeEventListener("dragend", handleOnDragEnd);
+    };
+  }, []);
+
   return nodes?.length ? (
     <div>
       {!noSearch && (
@@ -90,9 +255,20 @@ export function WorkbenchTree({
         </div>
       )}
       <SearchingContext.Provider value={!!q}>
-        <div onDragOver={onDragOver} onDrop={onDrop}>
-          <TreeList nodes={filteredNodes} level={1} />
-        </div>
+        <WorkbenchTreeDndContext.Provider
+          value={{
+            allow: true,
+            allowDragToRoot: allowDragToRoot,
+            dragElement: curElement,
+            dragOverElement: overElement,
+            dragStatus: overStatus,
+            onDragStart: handleOnDragStart,
+          }}
+        >
+          <div onDragOver={handleOnDragOver} onDrop={handleOnDrop}>
+            <TreeList nodes={filteredNodes} level={1} />
+          </div>
+        </WorkbenchTreeDndContext.Provider>
       </SearchingContext.Provider>
     </div>
   ) : (
@@ -157,6 +333,7 @@ function TreeNode({
     fixedActionsFor,
     collapsible,
     collapsedNodes,
+    nodeKey,
     clickFactory,
     mouseEnterFactory,
     mouseLeaveFactory,
@@ -164,8 +341,14 @@ function TreeNode({
     onNodeToggle,
     getCollapsedId,
   } = useWorkbenchTreeContext();
-  const { allow, onDragStart, dragNode, dragOverNode, dragStatus } =
-    useWorkbenchTreeDndContext();
+  const {
+    allow,
+    allowDragToRoot,
+    onDragStart,
+    dragElement,
+    dragOverElement,
+    dragStatus,
+  } = useWorkbenchTreeDndContext();
 
   const nodePaddingLeft = level * treeLevelPadding + basePaddingLeft - 2;
   const searching = useContext(SearchingContext);
@@ -213,12 +396,12 @@ function TreeNode({
     if (node.data) {
       const getNodeUid = (data: Record<string, any>): number | string => {
         return data.type === "mount-point"
-          ? `${data.parent.$$uid}:${data.mountPoint}`
-          : data.$$uid;
+          ? data.parent[nodeKey] || `${data.parent.$$uid}:${data.mountPoint}`
+          : data[nodeKey] || data.$$uid;
       };
       return getNodeUid(node.data);
     }
-  }, [node.data]);
+  }, [nodeKey, node.data]);
 
   useEffect(() => {
     if (dragStatus === dragStatusEnum.inside) {
@@ -229,26 +412,26 @@ function TreeNode({
     }
   }, [dragStatus]);
 
-  const isDragNode = useMemo(() => {
-    if (dragNode) {
-      const dragUid = dragNode.dataset.uid;
-      return Number(dragUid) === nodeUid;
+  const isDragElement = useMemo(() => {
+    if (dragElement) {
+      const dragUid = dragElement.dataset.uid;
+      return dragUid === String(nodeUid);
     }
     return false;
-  }, [dragNode, nodeUid]);
+  }, [dragElement, nodeUid]);
 
   const isDragActive = useMemo(() => {
-    if (dragOverNode) {
-      const dragUid = dragOverNode.dataset.uid;
-      return Number(dragUid) === nodeUid;
+    if (dragOverElement) {
+      const dragUid = dragOverElement.dataset.uid;
+      return dragUid === String(nodeUid);
     }
     return false;
-  }, [dragOverNode, nodeUid]);
+  }, [dragOverElement, nodeUid]);
 
   const nodeStyle = useMemo((): React.CSSProperties => {
     const commomStyle: React.CSSProperties = {};
     let style: React.CSSProperties = {
-      opacity: isDragNode ? 0.2 : 1,
+      opacity: isDragElement ? 0.2 : 1,
     };
     if (isDragActive) {
       if (dragStatus === dragStatusEnum.inside) {
@@ -259,7 +442,7 @@ function TreeNode({
       }
     }
     return Object.assign(commomStyle, style);
-  }, [isDragActive, isDragNode, dragStatus]);
+  }, [isDragActive, isDragElement, dragStatus]);
 
   const handleCollapse = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
@@ -288,16 +471,18 @@ function TreeNode({
 
   return (
     <>
-      {isDragActive && level !== 1 && cacheDragStatus === dragStatusEnum.top && (
-        <PlaceholderDOM
-          style={{
-            marginLeft: nodePaddingLeft,
-          }}
-        />
-      )}
+      {isDragActive &&
+        (allowDragToRoot || level !== 1) &&
+        cacheDragStatus === dragStatusEnum.top && (
+          <PlaceholderDOM
+            style={{
+              marginLeft: nodePaddingLeft,
+            }}
+          />
+        )}
       <li
-        draggable={allow && typeof nodeUid === "number"}
-        onDragStart={onDragStart}
+        draggable={allow}
+        onDragStart={(e) => onDragStart(e, node)}
         data-uid={nodeUid}
         style={nodeStyle}
       >
@@ -380,7 +565,7 @@ function TreeNode({
         {isLeaf || <TreeList nodes={node.children} level={level + 1} />}
       </li>
       {isDragActive &&
-        level !== 1 &&
+        (allowDragToRoot || level !== 1) &&
         cacheDragStatus === dragStatusEnum.bottom && (
           <PlaceholderDOM
             style={{
