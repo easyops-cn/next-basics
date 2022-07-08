@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.228.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.17...@next-bricks/forms@1.228.0) (2022-07-08)
+
+
+### Bug Fixes
+
+* doc refine ([4fab744](https://github.com/easyops-cn/next-basics/commit/4fab74470cf2db2e100d7bcf9d989b024ca2ad60))
+* support external view ([d388aec](https://github.com/easyops-cn/next-basics/commit/d388aecb7f15376b5e47cfdea4bb12ac065e6a79))
+
+
+### Features
+
+* **UploadImg:** support upload to compress ([b524dcc](https://github.com/easyops-cn/next-basics/commit/b524dccbb78cd7669bade4d7f1b8d7153220746b))
+* **UploadImg:** update compress size ([36815e3](https://github.com/easyops-cn/next-basics/commit/36815e3a816ccfb3fddabf05874cca8f6a1f091e))
+
+
+
+
+
 ## [1.227.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.227.16...@next-bricks/forms@1.227.17) (2022-07-07)
 
 

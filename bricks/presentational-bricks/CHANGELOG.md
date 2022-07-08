@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.255.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.254.0...@next-bricks/presentational-bricks@1.255.0) (2022-07-08)
+
+
+### Features
+
+* **UploadImg:** support upload to compress ([b524dcc](https://github.com/easyops-cn/next-basics/commit/b524dccbb78cd7669bade4d7f1b8d7153220746b))
+
+
+
+
+
 # [1.254.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.253.0...@next-bricks/presentational-bricks@1.254.0) (2022-07-07)
 
 
