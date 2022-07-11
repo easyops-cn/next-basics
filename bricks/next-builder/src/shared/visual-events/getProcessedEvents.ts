@@ -15,7 +15,7 @@ export function processHandlers(
       const list = castArray(events);
       handler[name as keyof BrickEventHandlerCallback] = list;
       list.forEach((item) => {
-        if (item.callback) {
+        if (item?.callback) {
           _processHandlers(item.callback);
         }
       });
@@ -24,7 +24,7 @@ export function processHandlers(
 
   const processedList = castArray(eventList);
   processedList.forEach((handler) => {
-    if ((handler as UseProviderEventHandler).callback) {
+    if ((handler as UseProviderEventHandler)?.callback) {
       _processHandlers((handler as UseProviderEventHandler).callback);
     }
   });

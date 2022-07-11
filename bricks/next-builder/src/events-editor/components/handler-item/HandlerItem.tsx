@@ -140,7 +140,7 @@ export function HandlerItem(props: HandlerItemProps): React.ReactElement {
             </div>
 
             <div className={sharedStyle.eventHandler}>
-              {item.events.map((row, rowIndex) => (
+              {item.events.filter(Boolean).map((row, rowIndex) => (
                 <HandlerItem
                   key={rowIndex}
                   name={`callback.${item.name}`}

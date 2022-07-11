@@ -64,6 +64,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   fixedActionsFor: Record<string, unknown> | Record<string, unknown>[];
 
   @property({ type: Boolean })
+  collapsible: boolean;
+
+  @property({ type: Boolean })
   allowDrag: boolean;
 
   @property({ type: Boolean })
@@ -143,6 +146,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 isTransformName: this.isTransformName,
                 fixedActionsFor: this.fixedActionsFor,
                 nodeKey: this.nodeKey,
+                collapsible: this.collapsible,
                 clickFactory: this._nodeClickFactory,
                 contextMenuFactory: this._contextMenuFactory,
                 matchNode: (node, lowerTrimmedQuery) =>
