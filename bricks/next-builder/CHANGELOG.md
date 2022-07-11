@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.163.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.163.0...@next-bricks/next-builder@1.163.1) (2022-07-11)
+
+
+### Bug Fixes
+
+* event render error when callback.success was null ([f276ab0](https://github.com/easyops-cn/next-basics/commit/f276ab0d9f2c9a7873f21afb3b93908a8155438b))
+
+
+
+
+
 # [1.163.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.162.3...@next-bricks/next-builder@1.163.0) (2022-07-07)
 
 
