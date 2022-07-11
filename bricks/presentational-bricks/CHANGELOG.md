@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.256.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.255.0...@next-bricks/presentational-bricks@1.256.0) (2022-07-11)
+
+
+### Features
+
+* **datetime-selector:** 指定范围时间选择器增加限制选择近n天属性 ([2503261](https://github.com/easyops-cn/next-basics/commit/2503261f27522f0b1ededf956e4e046d20bef879))
+
+
+
+
+
 # [1.255.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.254.0...@next-bricks/presentational-bricks@1.255.0) (2022-07-08)
 
 
