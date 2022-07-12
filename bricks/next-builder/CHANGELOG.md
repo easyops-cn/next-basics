@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.164.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.163.1...@next-bricks/next-builder@1.164.0) (2022-07-12)
+
+
+### Features
+
+* **workbenchContextMenu:** support paste child route ([04e3cf9](https://github.com/easyops-cn/next-basics/commit/04e3cf9b347cd1a0f9a58100615591a240d3b6a5))
+
+
+
+
+
 ## [1.163.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.163.0...@next-bricks/next-builder@1.163.1) (2022-07-11)
 
 
