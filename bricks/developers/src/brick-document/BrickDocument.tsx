@@ -371,7 +371,11 @@ export function BrickDocument({
               extends{" "}
               {extendedTypes.map((type, index) => (
                 <React.Fragment key={type.name}>
-                  <strong>{renderTypeHref(type.name)}</strong>
+                  <strong
+                    dangerouslySetInnerHTML={{
+                      __html: renderTypeHref(type.name),
+                    }}
+                  />
                   {index + 1 < extendedTypesLength && ", "}
                 </React.Fragment>
               ))}
