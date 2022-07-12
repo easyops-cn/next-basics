@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.182.2...@next-bricks/basic-bricks@1.183.0) (2022-07-12)
+
+
+### Features
+
+* breadcrumb add useCurrentMenuTitle ([dea1238](https://github.com/easyops-cn/next-basics/commit/dea12381923596464a2254ec8a53f545c563c2d9))
+
+
+
+
+
 ## [1.182.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.182.1...@next-bricks/basic-bricks@1.182.2) (2022-07-08)
 
 
