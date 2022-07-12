@@ -340,5 +340,30 @@ describe("previewStart", () => {
       },
       "http://localhost:8081"
     );
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "hover-on-context",
+        forwardedFor: "builder",
+        highlightNodes: [
+          {
+            iid: "i-01",
+            alias: "test",
+          },
+        ],
+      },
+    } as any);
+    expect(parentPostMessage).toBeCalledTimes(11);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(
+      11,
+      {
+        sender: "previewer",
+        type: "highlight-context",
+        outlines: [{ width: 0, height: 0, left: 0, top: 0, alias: "test" }],
+      },
+      "http://localhost:8081"
+    );
   });
 });

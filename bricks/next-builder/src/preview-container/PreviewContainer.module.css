@@ -45,6 +45,10 @@
   border-color: rgba(var(--palette-blue-6-channel), 0.3);
 }
 
+.outline.context {
+  border-color: var(--tag-yellow-color);
+}
+
 .outline.rootTpl {
   border-color: rgba(var(--palette-purple-6-channel), 0.3);
 }
@@ -75,6 +79,10 @@
 
 .outline.hover .alias {
   background: rgba(var(--palette-blue-6-channel), 0.3);
+}
+
+.outline.context .alias {
+  background: var(--tag-yellow-color);
 }
 
 .outline.rootTpl .alias {

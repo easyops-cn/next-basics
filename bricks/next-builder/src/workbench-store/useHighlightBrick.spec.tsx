@@ -4,12 +4,14 @@ import { useHighlightBrick } from "./useHighlightBrick";
 import {
   useHoverNodeUid,
   useActiveNodeUid,
+  useHighlightNodes,
   useBuilderContextMenuStatus,
 } from "@next-core/editor-bricks-helper";
 
 jest.mock("@next-core/editor-bricks-helper", () => ({
   useHoverNodeUid: jest.fn(),
   useActiveNodeUid: jest.fn(),
+  useHighlightNodes: jest.fn(),
   useBuilderContextMenuStatus: jest.fn().mockReturnValue({ active: false }),
 }));
 
@@ -64,6 +66,16 @@ describe("useHighlightBrick", () => {
       sender: "builder",
       type: "hover-on-brick",
       iid: "i-1",
+    });
+  });
+
+  it("should work for hover", () => {
+    (useHighlightNodes as jest.Mock).mockReturnValue(new Set([1]));
+    mount(<TestComponent type="hover" />);
+    expect(postMessage.mock.calls[1][0]).toEqual({
+      highlightNodes: [{ alias: undefined, iid: "i-1" }],
+      sender: "builder",
+      type: "hover-on-context",
     });
   });
 
