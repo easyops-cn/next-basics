@@ -41,6 +41,10 @@ export function WorkbenchContextMenu({
   const [menuPosition, setMenuPosition] = useState<React.CSSProperties>();
   const wrapperRef = useRef<HTMLDivElement>();
 
+  const isPaste = (action: string): boolean => {
+    return action.includes("paste");
+  };
+
   useEffect(() => {
     // Keep menu in viewport.
     const menuElement = wrapperRef.current?.firstElementChild as HTMLElement;
@@ -93,7 +97,7 @@ export function WorkbenchContextMenu({
                     // We customize default behaviors for certain actions.
                     typeof item.disabled === "boolean"
                       ? item.disabled
-                      : item.action === "paste"
+                      : isPaste(item.action)
                       ? !canPaste
                       : item.action === "clear-clipboard"
                       ? !clipboard
@@ -103,7 +107,7 @@ export function WorkbenchContextMenu({
                     onActionClick({
                       action: item.action,
                       data: contextMenuStatus.node,
-                      ...(item.action === "paste"
+                      ...(isPaste(item.action)
                         ? {
                             clipboard,
                           }
@@ -112,7 +116,7 @@ export function WorkbenchContextMenu({
                   }}
                 >
                   {item.text}
-                  {item.action === "paste" && clipboard?.nodeAlias && (
+                  {isPaste(item.action) && clipboard?.nodeAlias && (
                     <span className={styles.pasteNameWrapper}>
                       (
                       <span className={styles.pasteName}>
