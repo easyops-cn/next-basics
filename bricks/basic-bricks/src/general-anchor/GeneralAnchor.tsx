@@ -60,8 +60,10 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
     /* TODO(astrid): 初始锚点无法滚动到对应位置 */
     const sharpMatcherRegx = /#([\S ]+)$/;
     const initHash =
-      props?.anchorList.find((item) => item.href.includes(location.hash))
-        ?.href || "";
+      location.hash !== ""
+        ? props?.anchorList.find((item) => item.href.includes(location.hash))
+            ?.href
+        : "";
 
     if (initHash) {
       const sharpLinkMatch = sharpMatcherRegx.exec(initHash.toString());
