@@ -44,8 +44,11 @@ export function WorkbenchDataTree({
     ({ data }: WorkbenchNodeData<ContextConf>) => {
       return () => {
         const nodesToHighlight = new Set<number>();
+        const keyWord = nodes[0]?.type === "custom-template" ? "STATE" : "CTX";
         nodes.forEach((node) => {
-          if (scanContextsInAny(node.$$normalized).includes(data.name)) {
+          if (
+            scanContextsInAny(node.$$normalized, keyWord).includes(data.name)
+          ) {
             nodesToHighlight.add(node.$$uid);
           }
         });
