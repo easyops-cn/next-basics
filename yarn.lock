@@ -2304,10 +2304,10 @@
   resolved "https://registry.npmjs.org/@next-core/browserslist-config-next/-/browserslist-config-next-0.1.3.tgz#7b27b997ceae457d3c3f3b1c909407c16f86df81"
   integrity sha1-eye5l86uRX08PzsckJQHwW+G34E=
 
-"@next-core/build-config-factory@^2.21.0":
-  version "2.21.0"
-  resolved "https://registry.npmjs.org/@next-core/build-config-factory/-/build-config-factory-2.21.0.tgz#9b1ff5a3fa9a9185c6629787273c80a0dae56024"
-  integrity sha512-Ks1MyomTHeVdRAQl75hz6sPw5EMhga1EoqAKArQnavuqBGj/JINFYfC06sbTLrDdvltmcVR8x76pESu0u0UxmQ==
+"@next-core/build-config-factory@^2.23.0":
+  version "2.23.0"
+  resolved "https://registry.npmjs.org/@next-core/build-config-factory/-/build-config-factory-2.23.0.tgz#ecd85a7f8fb0a9b4d507f9d19a54f9c8f4b68cae"
+  integrity sha512-U9oe1JDiocwoW4OOaX510focwlVu2Nv45KYA7/1OwlHHnuok70Z/sDglbYXLEOWINsVt4uSMWqMhhvJs+gCXng==
   dependencies:
     "@next-core/brick-utils" "^2.37.21"
     "@next-core/repo-config" "^0.2.1"
@@ -2358,10 +2358,10 @@
   resolved "https://registry.npmjs.org/@next-core/custom-antd-styles/-/custom-antd-styles-1.24.10.tgz#faa6ec47201e153850852d3c4f6b52767a6ceaf8"
   integrity sha512-QY3k/NAm5LOGeHSewh9nAJy3NVGy8/TiVA5/jtUhYYuknPI0RpuRBsCrA8mlCpIccxQQ8jF0GnqJEto8CSzmRQ==
 
-"@next-core/dev-dependencies@^1.14.10":
-  version "1.14.10"
-  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.14.10.tgz#273464fd0d57939a2baec92bdc010b76ffa3fb7e"
-  integrity sha512-Mf5Sm4IUwBaahnK765gZNF8QhmqpNzFPrSYblMfxBe2jJTFVj8oh4FdvXejFu3FjYjMybn4R3eM7RFewXgMJjA==
+"@next-core/dev-dependencies@^1.14.12":
+  version "1.14.12"
+  resolved "https://registry.npmjs.org/@next-core/dev-dependencies/-/dev-dependencies-1.14.12.tgz#fe2452df8e1a1ed8d124341b9344ea9f189fbe8c"
+  integrity sha512-TJj8qwQSNa0TA4wWcsW8+st+fAO/kGW8ee69SsSFztby+QU2vU9lB6cWoEnY3yoXWtjzjoVf01UEvQfsNp7Tog==
   dependencies:
     "@babel/core" "^7.17.10"
     "@next-core/babel-preset-next" "^0.9.12"
@@ -2370,7 +2370,7 @@
     "@next-core/brick-dll" "^2.31.56"
     "@next-core/brick-scripts" "^2.7.5"
     "@next-core/browserslist-config-next" "^0.1.3"
-    "@next-core/build-config-factory" "^2.21.0"
+    "@next-core/build-config-factory" "^2.23.0"
     "@next-core/build-next-libs" "^0.2.12"
     "@next-core/custom-antd-styles" "^1.24.10"
     "@next-core/eslint-config-next" "^1.0.36"
