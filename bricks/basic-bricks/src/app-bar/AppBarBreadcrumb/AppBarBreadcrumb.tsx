@@ -1,7 +1,7 @@
 import React from "react";
 import { HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb } from "antd";
-import { BreadcrumbItemConf } from "@next-core/brick-types";
+import { BreadcrumbItemConf, SidebarMenu } from "@next-core/brick-types";
 import { useRecentApps, getRuntime, getHistory } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import styles from "./AppBarBreadcrumb.module.css";
@@ -13,13 +13,19 @@ export interface BasicBreadcrumbProps {
   separator?: string;
   noCurrentApp?: boolean;
   showCurrentAppIcon?: boolean;
+  menu?: Partial<SidebarMenu>;
 }
 
 export function AppBarBreadcrumb(
   props: BasicBreadcrumbProps
 ): React.ReactElement {
   const { currentApp, previousWorkspace } = useRecentApps();
-  const { items: breadcrumbItems } = currentApp?.breadcrumb || {};
+  const {
+    items: breadcrumbItems,
+    noCurrentApp: breadcrumbNoCurrentApp,
+    useCurrentMenuTitle,
+  } = currentApp?.breadcrumb || {};
+  const noCurrentApp = props.noCurrentApp || breadcrumbNoCurrentApp;
 
   const handleGoBackPreviousWorkspace = (): void => {
     getRuntime().popWorkspaceStack();
@@ -50,7 +56,7 @@ export function AppBarBreadcrumb(
               </Breadcrumb.Item>
             );
           })}
-        {currentApp && !props.noCurrentApp ? (
+        {currentApp && !noCurrentApp ? (
           <Breadcrumb.Item>
             {!breadcrumbItems?.length &&
               (props.showCurrentAppIcon ? (
@@ -67,6 +73,14 @@ export function AppBarBreadcrumb(
               ) : (
                 currentApp.localeName
               )}
+            </span>
+          </Breadcrumb.Item>
+        ) : null}
+        {useCurrentMenuTitle && props.menu ? (
+          <Breadcrumb.Item>
+            <GeneralIcon icon={props.menu.icon} />
+            <span>
+              <Link to={props.menu.link}>{props.menu.title}</Link>
             </span>
           </Breadcrumb.Item>
         ) : null}

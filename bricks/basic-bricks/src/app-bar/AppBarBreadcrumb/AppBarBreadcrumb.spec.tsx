@@ -134,6 +134,7 @@ describe("AppBarBreadcrumb", () => {
               text: "主页",
             },
           ],
+          useCurrentMenuTitle: true,
         },
       },
     });
@@ -144,11 +145,20 @@ describe("AppBarBreadcrumb", () => {
             text: "First",
           },
         ]}
+        menu={{
+          icon: {
+            lib: "easyops",
+            category: "default",
+            icon: "account",
+          },
+          title: "World",
+          link: "/hello/world",
+        }}
         noCurrentApp={true}
       />
     );
 
-    expect(wrapper.find(Breadcrumb.Item).length).toBe(2);
-    expect(wrapper.find(Link).length).toBe(0);
+    expect(wrapper.find(Breadcrumb.Item).length).toBe(3);
+    expect(wrapper.find(Link).length).toBe(1);
   });
 });
