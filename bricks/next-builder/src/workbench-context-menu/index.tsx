@@ -67,7 +67,7 @@ export class WorkbenchContextMenuElement extends UpdatingElement {
             contextMenuStatus={this.contextMenuStatus}
             menu={this.menu}
             clipboard={this.clipboard}
-            canPaste={true}
+            canPaste={!!this.clipboard}
             onActionClick={this._handleActionClick}
             handleCloseMenu={this._handleContextMenuClose}
           />
