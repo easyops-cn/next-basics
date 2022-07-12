@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.357.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.2...@next-bricks/developers@1.357.3) (2022-07-12)
+
+
+### Bug Fixes
+
+* **BrickDocument:** fix interface extended links ([8dd7c2a](https://github.com/easyops-cn/next-basics/commit/8dd7c2a26f581269337da81b9a9cfad62c831fad))
+
+
+
+
+
 ## [1.357.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.1...@next-bricks/developers@1.357.2) (2022-07-11)
 
 
