@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.183.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.183.0...@next-bricks/basic-bricks@1.183.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* **basic-bricks:** fix anchor构件在location.hash为空时仍会向上滚一点的问题 ([a74c68c](https://github.com/easyops-cn/next-basics/commit/a74c68cf01f8a032ba937faf1061923da8222e08))
+
+
+
+
+
 # [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.182.2...@next-bricks/basic-bricks@1.183.0) (2022-07-12)
 
 
