@@ -23,6 +23,7 @@ export function AppbarBreadcrumb(
       {...{
         ...props,
         breadcrumb,
+        menu: containerData.menu,
         separator: "/",
         showCurrentAppIcon: true,
       }}
