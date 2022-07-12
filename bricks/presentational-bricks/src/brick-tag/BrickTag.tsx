@@ -10,7 +10,7 @@ import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { MenuIcon } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import { UseBrickConf } from "@next-core/brick-types";
-import { TagTypeProps, Color } from "../interfaces/brick-tag";
+import { TagTypeProps, TagListType } from "../interfaces/brick-tag";
 export { Color } from "../interfaces/brick-tag";
 
 export const circleIcon: MenuIcon = {
@@ -19,25 +19,14 @@ export const circleIcon: MenuIcon = {
   prefix: "fas",
 };
 
-export type TagListType = {
-  key: string;
-  label: string;
-  tooltip?: string;
-  icon?: string | MenuIcon;
-  checked?: boolean;
-  color?: string | Color;
-  disabled?: boolean;
-  disabledTooltip?: string;
-};
-
 export interface BrickTagProps extends TagProps {
   componentType?: TagTypeProps;
   configProps?: TagProps | CheckableTagProps;
   tagList: TagListType[];
   textEllipsis?: boolean;
-  tagStyle?: any;
-  tagCheckedStyle?: any;
-  tagHoverStyle?: any;
+  tagStyle?: React.CSSProperties;
+  tagCheckedStyle?: React.CSSProperties;
+  tagHoverStyle?: React.CSSProperties;
   handleOnChange?: (items: TagListType[]) => void;
   handleOnClose?: (current, tagList: TagListType[]) => void;
   handleOnClick?: (tag: TagListType) => void;

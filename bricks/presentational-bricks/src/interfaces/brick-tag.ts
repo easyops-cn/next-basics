@@ -1,3 +1,5 @@
+import { MenuIcon } from "@next-core/brick-types";
+
 export enum Color {
   green = "green",
   red = "red",
@@ -23,3 +25,14 @@ export enum TagTypeProps {
   Tag = "Tag",
   CheckableTag = "CheckableTag",
 }
+
+export type TagListType = {
+  key: string;
+  label: string;
+  tooltip?: string;
+  icon?: string | MenuIcon;
+  checked?: boolean;
+  color?: string | Color;
+  disabled?: boolean;
+  disabledTooltip?: string;
+};

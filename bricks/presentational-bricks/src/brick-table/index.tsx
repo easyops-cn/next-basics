@@ -69,13 +69,17 @@ export interface RowDisabledProps {
 }
 
 export interface CustomColumnComponent {
+  /** 构件名称 */
   brick: string | any;
+  /** 字段值、列表项和 index 对应所用构件的属性的 key */
   fields?: {
     value?: string;
     item?: string;
     index?: string;
   };
+  /** 构件属性 */
   properties?: Record<string, any>;
+  /** 事件 */
   events?: BrickEventsMap;
 }
 
@@ -199,44 +203,13 @@ export interface CellStatusProps {
  * | rowData  | any    | 整行数据    |
  * | rowIndex | number | 行序号      |
  *
- * ### <del>CustomColumnComponent</del>
- *
- * <details>
- * <summary>展开</summary>
- *
- * | property   | type                                         | required | default | description                                     |
- * | ---------- | -------------------------------------------- | -------- | ------- | ----------------------------------------------- |
- * | brick      | string                                       | ✔️       | -       | 构件名称                                        |
- * | fields     | {value: string; item: string; index: string} | ✔️       | -       | 字段值、列表项和 index 对应所用构件的属性的 key |
- * | properties | object                                       | -        | -       | 构件属性                                        |
- * | events     | BrickEventsMap                               | -        | -       | 事件                                            |
- *
- * </details>
- *
- * ### fields
- * | property   | type   | required | default  | description                                                                                              |
- * | ---------- | ------ | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
- * | fields                | fieldsType                                                                           | -        | -        | 设置相关字段取自哪里，具体描述见下表      |
- *
- * ### fieldsType
- * | property   | type   | required | default  | description                                                                                              |
- * | ---------- | ------ | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
- * | dataSource | string | -        | list     | 指定 dataSource 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 list |
- * | total      | string | -        | total    | 指定 total 从哪里来，默认为列表接口返回格式是{list:[],page:1,pageSize:10,total:20}，即默认取自 total     |
- * | page       | string | -        | page     | 指定下表中 "page.update" 事件 detail 的 pagePath                                                         |
- * | pageSize   | string | -        | pageSize | 指定下表 "filter.update" 事件 detail 的 pageSizePath                                                     |
- * | ascend     | string | -        | ascend   | 指定 ascend 升序排序对应字段，例如有些后台对应为 1 ，有些对应为 "asc"。这里默认为 "ascend"               |
- * | descend    | string | -        | descend  | 指定 descend 降序排序对应字段，例如有些后台对应为 0 ，有些对应为 "desc"。这里默认为 "descend"            |
- *
  * ### pagination 默认配置
  *
  * 如果不希望分页，如下设置即可：
  *
  * ```
  * {
- *   "configProps": {
- *     "pagination": false
- *   }
+ *    "pagination": false
  * }
  * ```
  *
@@ -244,11 +217,9 @@ export interface CellStatusProps {
  *
  * ```
  * {
- *   "configProps": {
- *     "pagination": {
- *       "pageSizeOptions": ["10","100","1000"]
- *     }
- *   }
+ *   "pagination": {
+ *      "pageSizeOptions": ["10","100","1000"]
+ *    }
  * }
  * ```
  *
@@ -268,9 +239,7 @@ export interface CellStatusProps {
  *
  * ```
  * {
- *   "configProps": {
- *     "rowSelection": true
- *   }
+ *   "rowSelection": true
  * }
  * ```
  *
@@ -278,11 +247,9 @@ export interface CellStatusProps {
  *
  * ```
  * {
- *   "configProps": {
- *     "rowSelection": {
+ *   "rowSelection": {
  *       "columnWidth": "88px"
- *     }
- *   }
+ *    }
  * }
  * ```
  *
@@ -472,7 +439,7 @@ export class BrickTableElement extends UpdatingElement {
   /**
    * @required false
    * @default false
-   * @description 是否显示已选择信息和清除按钮。仅在设置了`configProps.rowSelection`时有效。默认不显示
+   * @description 是否显示已选择信息和清除按钮。仅在设置了`rowSelection`时有效。默认不显示
    * @group rowSelection
    */
   @property({
@@ -1732,7 +1699,7 @@ export class BrickTableElement extends UpdatingElement {
             <strong className={paginationStyle.total}>{totals}</strong>{" "}
             {i18n.t(`${NS_PRESENTATIONAL_BRICKS}:${K.PAGINATION_TOTAL_UNIT}`)}
           </span>
-          {this.configProps?.rowSelection &&
+          {(this.configProps?.rowSelection || this.rowSelection) &&
             this.showSelectInfo &&
             this.selectedRowKeys.length !== 0 &&
             this.renderSelectInfo()}
