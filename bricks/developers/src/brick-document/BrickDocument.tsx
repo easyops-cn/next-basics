@@ -143,37 +143,34 @@ export function BrickDocument({
   const convertMarkdownLinkToHtmlLink = (value: string): { __html: string } => {
     if (typeof value !== "string") return { __html: "-" };
 
-    let str = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    let innerHtml = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
     if (renderLink) {
-      str = str.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+      // replace markdown link
+      innerHtml = innerHtml.replace(
+        /\[(.+?)\]\((.+?)\)/g,
+        '<a href="$2">$1</a>'
+      );
 
+      // replace anchor
       const hashHref = getCurHashHref();
-      const anchorReg = /href=["'](#[a-zA-Z_-]+)["']/g;
-
-      if (anchorReg.test(str)) {
-        return {
-          __html: str.replace(anchorReg, function (v: string, s: string) {
-            return `href="${hashHref}${s}"`;
-          }),
-        };
-      }
-
-      if (interfaceIds.length > 0) {
-        return generateInterfaceRef(interfaceIds, str, hashHref);
-      }
+      innerHtml = innerHtml.replace(
+        /href=["'](#[a-zA-Z_-]+)["']/g,
+        function (v: string, s: string) {
+          return `href="${hashHref}${s}"`;
+        }
+      );
     }
 
-    const subsetReg = /`\s*([^]+?.*?[^]+?[^]?)`/g;
+    // replace markdown code
+    innerHtml = innerHtml.replace(
+      /`\s*(.+?)\s*`/g,
+      function (v: string, s: string) {
+        return `<code>${s}</code>`;
+      }
+    );
 
-    if (subsetReg.test(str))
-      return {
-        __html: str.replace(subsetReg, function (v: string) {
-          return `<code>${v.replace(/`/g, "")}</code>`;
-        }),
-      };
-
-    return { __html: str };
+    return { __html: innerHtml };
   };
 
   const renderTableCell = (
