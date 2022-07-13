@@ -13,6 +13,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
+import { ColProps } from "antd/lib/grid/col";
 import { GeneralFormGen, ConnectedForm } from "./GeneralForm";
 import { AbstractGeneralFormElement, FormItemElement } from "@next-libs/forms";
 import styles from "./GeneralForm.shadow.less";
@@ -72,30 +73,25 @@ export class GeneralFormElement
   private _mountPoint: HTMLElement;
 
   /**
-   * @default -
-   * @required false
    * @description 表单的初始值。当 `values` 有嵌套的层级时，需要按表单项的 `name` 平铺。如有源数据为 `{a: {b: 123}}` ，存在表单项的 `name` 为 `a.b`，要正确给该表单项赋值为 123， 那么 `values` 应该为 `{"a.b": 123}`
    * @group basic
    */
   @property({
     attribute: false,
   })
-  values: Record<string, any>;
+  values?: Record<string, any>;
 
   /**
-   * @required false
-   * @default -
    * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）
    * @group basic
    */
   @property({
     __unstable_doNotDecorate: true,
   })
-  staticValues: Record<string, any>;
+  staticValues?: Record<string, any>;
 
   /**
    * @description 设置表单域内字段 id 的前缀
-   * @default -
    * @required false
    * @group basic
    */
@@ -104,7 +100,7 @@ export class GeneralFormElement
 
   /**
    * @kind 'horizontal'|'vertical'|'inline'
-   * @required -
+   * @required false
    * @default horizontal
    * @description 表单布局
    * @group ui
@@ -128,16 +124,14 @@ export class GeneralFormElement
   layout: FormLayout;
 
   /**
-   * @kind ColProps
    * @description 标签列布局样式（仅当 `layout="horizontal"` 时有效）
-   * @default -
-   * @require false
+   * @required false
    * @group ui
    */
   @property({
     attribute: false,
   })
-  labelCol = {
+  labelCol: ColProps = {
     sm: {
       span: 24,
     },
@@ -156,16 +150,14 @@ export class GeneralFormElement
   };
 
   /**
-   * @kind ColProps
    * @description 输入控件列布局样式（仅当 `layout="horizontal"` 时有效）
-   * @default -
-   * @require false
+   * @required false
    * @group ui
    */
   @property({
     attribute: false,
   })
-  wrapperCol = {
+  wrapperCol: ColProps = {
     sm: {
       span: 18,
     },
@@ -186,7 +178,6 @@ export class GeneralFormElement
   // Will be Set in React component.
   formUtils: WrappedFormUtils;
   /**
-   * @default -
    * @description 对 `values` 属性的数据进行格式化，提供了表单提交后格式化表单项数据的功能。目前仅支持时间相关的表单项数据的格式化（因为时间相关的表单项构件提交后的数据为 moment 对象，需要根据不同场景格式化数据后才提交给后台），`{time: moment|YYYY-MM-DD}` 表示该字段为 moment 类型，数据提交后格式化为 `YYYY-MM-DD` 字符串的形式，详情如 `普通表单 demo` 所示
    * @group basic
    */
@@ -210,15 +201,13 @@ export class GeneralFormElement
 
   /**
    * @description 是否限制表单的最大宽度
-   * @default false
    * @group ui
    */
   @property({ type: Boolean })
-  maxWidthLimited: boolean;
+  maxWidthLimited?: boolean;
 
   /**
    * @description 表单达到最大宽度后的对齐方式
-   * @default center
    * @group ui
    */
   @property({ attribute: false })
@@ -396,8 +385,6 @@ export class GeneralFormElement
 
   /**
    * @description 表单设置初始值
-   * @param value
-   * @param options
    */
   @method()
   setInitValue(
@@ -424,7 +411,6 @@ export class GeneralFormElement
   }
   /**
    *
-   * @param `string[]`
    * @description 重置表单项的值，传入的是每个表单项的 `name`, 如果需要重置所有表单项传递 `null` 即可
    */
   @method()

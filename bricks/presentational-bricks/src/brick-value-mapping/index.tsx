@@ -14,12 +14,15 @@ import { BrickValueMapping } from "./BrickValueMapping";
 import { MenuIcon } from "@next-core/brick-types";
 
 export interface MappingValue {
+  /** 展示文本 */
   text?: string;
+  /** 标签颜色 */
   color?: Color;
   /**
    * [MenuIcon](http://docs.developers.easyops.cn/docs/brick-next/icon)
    */
   icon?: MenuIcon;
+  /** 图标大小 */
   iconSize?: number;
 }
 
@@ -32,11 +35,11 @@ export interface MappingValue {
  * @author ice
  * @slots
  * @history
+ * 1.89.11:使用 `dataSource` 代替之前 `data`
+ * 1.83.0:新增 `triggerClickEvent`, `link`, `data` 属性
  * 1.65.0:新增属性`shape`，支持大圆角
  * 1.52.0:新增特性，支持正则匹配
  * 1.48.0:新增特性，映射成 icon
- * 1.83.0:新增 `triggerClickEvent`, `link`, `data` 属性
- * 1.89.11:使用 `dataSource` 代替之前 `data`
  * @memo
  * ## 注意
  * > 如果需要区间的条件规则映射，比如大于、小于等，请使用[条件展示](developers/brick-book/brick/presentational-bricks.brick-conditional-display)
@@ -76,37 +79,31 @@ export interface MappingValue {
  */
 export class BrickValueMappingElement extends UpdatingElement {
   /**
-   * @detail { data: any, value: string }
    * @description 点击事件
    */
   @event({ type: "brick-value-mapping.click" })
-  valueMappingClick: EventEmitter<Record<string, any>>;
+  valueMappingClick: EventEmitter<{ data: any; value: string | number }>;
 
   /**
-   * @kind string | number
-   * @required false
    * @description 原始值
    * @group basic
    */
-  @property() value: string | number;
+  @property() value?: string | number;
   /**
-   * @required false
    * @description 替代 `data` 属性，click 事件时传出的数据
    * @group basic
    */
-  @property({ attribute: false }) dataSource: Record<string, any>;
+  @property({ attribute: false }) dataSource?: Record<string, any>;
 
   /**
-   * @required false
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
    * @deprecated
    * @group other
    */
-  @property({ attribute: false }) fields: {
+  @property({ attribute: false }) fields?: {
     value: string;
   };
   /**
-   * @required true
    * @description 映射规则
    * @group basic
    */
@@ -115,40 +112,36 @@ export class BrickValueMappingElement extends UpdatingElement {
     MappingValue
   >;
   /**
-   * @required false
    * @description 显示文字旁边的小圈圈，按照平台规范通常表示状态的标签可设置为 true
    * @group ui
    */
   @property({
     type: Boolean,
   })
-  showTagCircle: boolean;
+  showTagCircle?: boolean;
 
   /**
-   * @required false
    * @default false
    * @description 是否触发点击事件
    * @group basic
    */
   @property({ type: Boolean })
-  triggerClickEvent: boolean;
+  triggerClickEvent?: boolean;
 
   /**
-   * @required false
-   * @description 若设置且 `triggerClickEvent` 为 false，则点击可跳转
+   * @description 配置跳转链接，在 `triggerClickEvent` 为 false 生效
    * @group basic
    */
   @property({ attribute: false })
-  link: LinkProps;
+  link?: LinkProps;
 
   /**
-   * @required false
    * @description [已废弃]可用于接收 useBrick 传递过来的数据
    * @deprecated
    * @group other
    */
   @property({ attribute: false })
-  data: any;
+  data?: any;
 
   connectedCallback(): void {
     this.style.display = this.style.display || "block";

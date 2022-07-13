@@ -14,8 +14,7 @@ export const BrickValueMappingStory: Story = {
     icon: "book",
   },
   description: {
-    en:
-      "translate basic-type data to another text, according to what your mapping is",
+    en: "translate basic-type data to another text, according to what your mapping is",
     zh: "适用于将基本类型的数值转换成有意义的文本进行展示",
   },
   conf: [
@@ -56,7 +55,7 @@ export const BrickValueMappingStory: Story = {
                 "brick-value-mapping.click": [
                   {
                     action: "console.log",
-                    args: ["${EVENT.detail}"],
+                    args: ["<% EVENT.detail %>"],
                   },
                 ],
               },
@@ -134,7 +133,7 @@ export const BrickValueMappingStory: Story = {
                 },
               },
               transform: {
-                value: "@{cellData}",
+                value: "<% DATA.cellData %>",
               },
             },
           },
@@ -147,7 +146,7 @@ export const BrickValueMappingStory: Story = {
                 "brick-value-mapping.click": [
                   {
                     action: "console.log",
-                    args: ["${EVENT.detail}", "@{rowData}"],
+                    args: ["<% EVENT.detail %>", "<% DATA.rowData %>"],
                   },
                 ],
               },
@@ -166,7 +165,7 @@ export const BrickValueMappingStory: Story = {
                 },
               },
               transform: {
-                value: "@{cellData}",
+                value: "<% DATA.cellData %>",
               },
             },
           },
