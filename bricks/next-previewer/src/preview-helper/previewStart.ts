@@ -1,7 +1,7 @@
 import { developHelper, getHistory } from "@next-core/brick-kit";
 import type { PluginLocation } from "@next-core/brick-types";
 import { matchPath } from "@next-core/brick-utils";
-import {
+import type {
   BrickOutline,
   HighLightNode,
   Position,

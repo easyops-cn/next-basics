@@ -215,12 +215,16 @@ describe("scanContextsInAny", () => {
           action: "context.replace",
           args: ["good2", "any"],
         },
+        hover: {
+          action: "state.update",
+          args: ["good3_noMatch", "any"],
+        },
       },
     } as any;
     expect(scanContextsInAny(brickConf).sort()).toEqual(["good1", "good2"]);
   });
 
-  it("should work for context", () => {
+  it("should work for state", () => {
     const brickConf: BrickConf = {
       brick: "b-b",
       properties: {
@@ -231,6 +235,10 @@ describe("scanContextsInAny", () => {
         click: {
           action: "state.update",
           args: ["good2", "any"],
+        },
+        hover: {
+          action: "context.replace",
+          args: ["good3_noMatch", "any"],
         },
       },
     } as any;

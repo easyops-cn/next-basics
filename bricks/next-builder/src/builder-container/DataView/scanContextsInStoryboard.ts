@@ -5,11 +5,11 @@ import {
   visitStoryboardExpressions,
 } from "@next-core/brick-utils";
 
-type contextKeyWord = "CTX" | "STATE";
+type ContextKeyWord = "CTX" | "STATE";
 
 export function scanContextsInStoryboard(
   storyboard: Storyboard,
-  contextKeyWord: contextKeyWord
+  contextKeyWord: ContextKeyWord
 ): string[] {
   return scanContextsInAny(
     [storyboard.routes, storyboard.meta?.customTemplates],
@@ -19,7 +19,7 @@ export function scanContextsInStoryboard(
 
 export function scanContextsInAny(
   data: unknown,
-  contextKeyWord: contextKeyWord = "CTX"
+  contextKeyWord: ContextKeyWord = "CTX"
 ): string[] {
   const { readContexts, writeContexts } = scanContextsInAnyByReadOrWrite(
     data,
@@ -30,7 +30,7 @@ export function scanContextsInAny(
 
 function scanContextsInAnyByReadOrWrite(
   data: unknown,
-  contextKeyWord: contextKeyWord
+  contextKeyWord: ContextKeyWord
 ): {
   readContexts: string[];
   writeContexts: string[];
@@ -50,9 +50,10 @@ function scanContextsInAnyByReadOrWrite(
     ) {
       if (
         !Array.isArray(value) &&
-        (value.action === "context.replace" ||
-          value.action === "context.assign" ||
-          value.action === "state.update") &&
+        (contextKeyWord === "CTX"
+          ? value.action === "context.replace" ||
+            value.action === "context.assign"
+          : value.action === "state.update") &&
         Array.isArray(value.args) &&
         typeof value.args[0] === "string" &&
         // Ignore evaluations and placeholders,
@@ -71,7 +72,7 @@ function scanContextsInAnyByReadOrWrite(
 
 function beforeVisitContextFactory(
   readContexts: Set<string>,
-  contextKeyWord: contextKeyWord
+  contextKeyWord: ContextKeyWord
 ): PrecookHooks["beforeVisitGlobal"] {
   return function beforeVisitContext(node, parent): void {
     if (node.name === contextKeyWord) {
