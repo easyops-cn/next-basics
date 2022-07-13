@@ -451,9 +451,10 @@ export const GeneralRadioStory: Story = {
           brick:
             "easyops-builtin-widgets.tpl-card-list-base-item-of-illustration",
           properties: {
-            detail: true,
             background: "<% DATA.background %>",
             topBg: "<% DATA.image %>",
+            cardTitle: "<% DATA.title %>",
+            cardDesc: "<% DATA.description %>",
           },
         },
         name: "icon",
@@ -464,6 +465,8 @@ export const GeneralRadioStory: Story = {
             background: "green",
             image:
               "url('/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/create1653638263844900005.png')",
+            title: "标题一",
+            description: "这是第一个卡片的描述",
           },
           {
             label: "blue",
@@ -471,6 +474,8 @@ export const GeneralRadioStory: Story = {
             background: "blue",
             image:
               "url('/next/api/gateway/object_store.object_store.GetObject/api/v1/objectStore/bucket/next-builder/object/base-of-template1653642745768123613.png')",
+            title: "标题一",
+            description: "这是第一个卡片的描述",
           },
         ],
         type: "custom",
