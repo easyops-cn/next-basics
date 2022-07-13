@@ -10,6 +10,7 @@ interface GeneralAnchorProps {
   anchorList: AnchorListType[];
   type?: "default" | "radio";
   extraBrick?: { useBrick: UseBrickConf };
+  initOffset?: number;
   handleClick?: (
     event: React.MouseEvent<HTMLElement, MouseEvent>,
     arg: AnchorListType
@@ -55,7 +56,6 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
       );
     });
   };
-
   useEffect(() => {
     /* TODO(astrid): 初始锚点无法滚动到对应位置 */
     const sharpMatcherRegx = /#([\S ]+)$/;
@@ -64,7 +64,6 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
         ? props?.anchorList.find((item) => item.href.includes(location.hash))
             ?.href
         : "";
-
     if (initHash) {
       const sharpLinkMatch = sharpMatcherRegx.exec(initHash.toString());
       const target = document.getElementById(sharpLinkMatch[1]);
@@ -72,7 +71,9 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
       if (target) {
         setTimeout(() => {
           window.scrollTo({
-            top: target.offsetTop - (configProps?.offsetTop || 56),
+            top:
+              target.offsetTop + props.initOffset ??
+              0 - (configProps?.offsetTop ?? 56),
           });
         });
         handleChange(initHash);
@@ -92,7 +93,7 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
 
   return (
     <Anchor
-      offsetTop={56}
+      offsetTop={configProps?.offsetTop ?? 56}
       {...configProps}
       className={classnames([
         {
@@ -100,7 +101,7 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
         },
       ])}
       onChange={handleChange}
-      getCurrentAnchor={() => activeLink.current}
+      // getCurrentAnchor={() => activeLink.current}
     >
       {type === "default" ? (
         renderAnchorList(anchorList, type)

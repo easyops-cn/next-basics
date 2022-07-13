@@ -27,7 +27,7 @@
       color: var(--antd-anchor-radio-type-title-color);
     }
     :global(.ant-anchor-link-active > .ant-anchor-link-title) {
-      color: var(--antd-anchor-radio-type-title-active-color);
+      color: var(--color-brand);
       background: var(--antd-anchor-radio-type-title-active-bg);
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.09);
     }
