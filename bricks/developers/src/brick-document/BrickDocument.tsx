@@ -108,7 +108,7 @@ export function BrickDocument({
 
     return {
       __html: str.replace(reg, function (v: string) {
-        return `<a href='${hashHref}#${v}'>${v}</a>`;
+        return `<a href="${hashHref}#${v}">${v}</a>`;
       }),
     };
   };
@@ -141,28 +141,31 @@ export function BrickDocument({
   };
 
   const convertMarkdownLinkToHtmlLink = (value: string): { __html: string } => {
-    if (typeof value !== "string") return { __html: value || "-" };
+    if (typeof value !== "string") return { __html: "-" };
 
-    value = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    const link = renderLink ? "<a href='$2'>$1</a>" : "$1";
-    const str = value.replace(/\[(.+?)\]\((.+?)\)/g, link);
+    let str = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    const hashHref = getCurHashHref();
+    if (renderLink) {
+      str = str.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
 
-    const anchorReg = /\W(#[a-zA-Z_-]+\b)(?!;)/g;
-    if (anchorReg.test(str) && renderLink) {
-      return {
-        __html: str.replace(anchorReg, function (v: string, s: string) {
-          return `'${hashHref}${s}`;
-        }),
-      };
-    }
+      const hashHref = getCurHashHref();
+      const anchorReg = /href=["'](#[a-zA-Z_-]+)["']/g;
 
-    if (interfaceIds.length > 0 && renderLink) {
-      return generateInterfaceRef(interfaceIds, str, hashHref);
+      if (anchorReg.test(str)) {
+        return {
+          __html: str.replace(anchorReg, function (v: string, s: string) {
+            return `href="${hashHref}${s}"`;
+          }),
+        };
+      }
+
+      if (interfaceIds.length > 0) {
+        return generateInterfaceRef(interfaceIds, str, hashHref);
+      }
     }
 
     const subsetReg = /`\s*([^]+?.*?[^]+?[^]?)`/g;
+
     if (subsetReg.test(str))
       return {
         __html: str.replace(subsetReg, function (v: string) {
