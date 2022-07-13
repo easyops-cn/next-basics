@@ -76,7 +76,13 @@ export class GeneralAnchorElement extends UpdatingElement {
    */
   @property({ type: Boolean })
   disabledJump: boolean;
-
+  /**
+   * @default
+   * @required false
+   * @description 页面初始化时希望额外向上滚动的距离，例如在target有较大padding但是希望内容显示在上方时可设置。
+   */
+  @property({ attribute: false })
+  initOffset: number;
   /**
    * @detail { title: string; href: string }
    * @description 锚点点击事件
@@ -129,6 +135,7 @@ export class GeneralAnchorElement extends UpdatingElement {
             extraBrick={this.extraBrick}
             handleClick={this._handleClick}
             handleChange={this._handleChange}
+            initOffset={this.initOffset}
           />
         </BrickWrapper>,
         this
