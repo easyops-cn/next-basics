@@ -139,6 +139,15 @@ export function previewStart(
     getHistory().reload();
   };
 
+  const updateFormPreviewSettings = (): void => {
+    developHelper.updateFormPreviewSettings(
+      options.appId,
+      options.formId,
+      options.formData
+    );
+    getHistory().reload();
+  };
+
   window.addEventListener(
     "message",
     ({ data, origin }: MessageEvent<PreviewMessageToPreviewer>) => {
@@ -181,6 +190,8 @@ export function previewStart(
             if (options.templateId) {
               lastTemplatePreviewSettings = data.settings;
               updateTemplatePreviewSettings();
+            } else if (options.formId || options.formData) {
+              updateFormPreviewSettings();
             } else if (data.options.snippetData) {
               options.snippetData = data.options.snippetData;
               updateSnippetPreviewSettings();
@@ -254,6 +265,21 @@ export function previewStart(
         });
         placeholderLoadObserver.observe(mainMountPoint, { childList: true });
       }
+      if (options.formId && !previewPageMatch && match) {
+        const mainMountPoint = document.querySelector("#main-mount-point");
+        const placeholderLoadObserver = new MutationObserver(() => {
+          // We observe when the placeholder is appeared.
+          if (
+            mainMountPoint.childNodes.length === 1 &&
+            (mainMountPoint.firstChild as HTMLElement).tagName === "SPAN" &&
+            mainMountPoint.firstChild.childNodes.length === 0
+          ) {
+            updateFormPreviewSettings();
+            placeholderLoadObserver.disconnect();
+          }
+        });
+        placeholderLoadObserver.observe(mainMountPoint, { childList: true });
+      }
       if (options.snippetData && !previewPageMatch && match) {
         const mainMountPoint = document.querySelector("#main-mount-point");
         const placeholderLoadObserver = new MutationObserver(() => {
@@ -279,6 +305,10 @@ export function previewStart(
 
   if (options.templateId) {
     updateTemplatePreviewSettings();
+  }
+
+  if (options.formId || options.formData) {
+    updateFormPreviewSettings();
   }
 
   if (options.snippetData) {

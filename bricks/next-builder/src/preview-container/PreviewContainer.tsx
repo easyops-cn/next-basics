@@ -38,6 +38,8 @@ export interface PreviewContainerProps {
   previewUrl: string;
   appId?: string;
   templateId?: string;
+  formId?: string;
+  formData?: FormData;
   snippetGraphData?: BuilderSnippetNode[];
   routePath?: string;
   routeExact?: boolean;
@@ -98,6 +100,8 @@ export function LegacyPreviewContainer(
     previewUrl,
     appId,
     templateId,
+    formId,
+    formData,
     snippetGraphData,
     previewSettings,
     routePath,
@@ -323,6 +327,8 @@ export function LegacyPreviewContainer(
         options: {
           appId,
           templateId,
+          formId,
+          formData,
           snippetData: snippetData && JSON.stringify(snippetData),
           routePath,
           routeExact,
@@ -335,6 +341,8 @@ export function LegacyPreviewContainer(
     snippetGraphData,
     appId,
     templateId,
+    formId,
+    formData,
     routePath,
     routeExact,
     previewSettings,

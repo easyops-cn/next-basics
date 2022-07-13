@@ -325,6 +325,8 @@ export interface BrickOutline {
 export interface PreviewStartOptions {
   appId?: string;
   templateId?: string;
+  formId?: string;
+  formData?: FormData;
   snippetData?: any;
   routePath?: string;
   routeExact?: boolean;
@@ -333,4 +335,30 @@ export interface PreviewStartOptions {
 
 export interface PreviewSettings {
   properties?: Record<string, unknown>;
+}
+
+export interface fieldProperties {
+  defaultValue?: string;
+  description?: string;
+  id: string;
+  limit?: string[];
+  name: string;
+  type: string;
+  [key: string]: any;
+}
+
+export interface formSchemaProperties {
+  id?: string;
+  brick?: string;
+  sort?: number;
+  mountPoint?: string;
+  events?: BrickEventsMap;
+  properties?: Record<string, unknown>;
+  if?: string | boolean | ResolveConf;
+  [key: string]: any;
+}
+
+export interface FormData {
+  schema?: formSchemaProperties;
+  fields?: fieldProperties[];
 }

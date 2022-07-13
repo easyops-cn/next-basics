@@ -39,6 +39,12 @@ export class PreviewContainerElement extends UpdatingElement {
   @property()
   templateId: string;
 
+  @property()
+  formId: string;
+
+  @property({ attribute: false })
+  formData: FormData;
+
   @property({
     attribute: false,
   })
@@ -180,6 +186,8 @@ export class PreviewContainerElement extends UpdatingElement {
               previewUrl={this.previewUrl}
               appId={this.appId}
               templateId={this.templateId}
+              formId={this.formId}
+              formData={this.formData}
               snippetGraphData={this.snippetGraphData}
               routePath={this.routePath}
               routeExact={this.routeExact}
