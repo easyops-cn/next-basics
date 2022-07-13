@@ -134,6 +134,7 @@ export function LegacyPreviewContainer(
   const [activeAlias, setActiveAlias] = useState<string>();
   const [hoverOutlines, setHoverOutlines] = useState<BrickOutline[]>([]);
   const [activeOutlines, setActiveOutlines] = useState<BrickOutline[]>([]);
+  const [contextOutlines, setContextOutlines] = useState<BrickOutline[]>([]);
   const [dragDirection, setDragDirection] = useState<Direction>();
   const [isShowMask, setIsShowMask] = useState<boolean>(false);
   const refScroll = useRef(scroll);
@@ -351,11 +352,12 @@ export function LegacyPreviewContainer(
     (outlines: BrickOutline[]): BrickOutline[] => {
       const offsetLeft = iframeRef.current.offsetLeft;
       const offsetTop = iframeRef.current.offsetTop;
-      return outlines.map(({ width, height, left, top }) => ({
+      return outlines.map(({ width, height, left, top, alias }) => ({
         width: width * minScale,
         height: height * minScale,
         left: (left - scroll.x) * minScale + offsetLeft,
         top: (top - scroll.y) * minScale + offsetTop,
+        ...(alias ? { alias } : {}),
       }));
     },
     [minScale, scroll.x, scroll.y]
@@ -367,6 +369,9 @@ export function LegacyPreviewContainer(
   const [adjustedActiveOutlines, setAdjustedActiveOutlines] = useState<
     BrickOutline[]
   >([]);
+  const [adjustedContextOutlines, setAdjustedContextOutlines] = useState<
+    BrickOutline[]
+  >([]);
 
   useEffect(() => {
     setAdjustedHoverOutlines(adjustOutlines(hoverOutlines));
@@ -375,6 +380,10 @@ export function LegacyPreviewContainer(
   useEffect(() => {
     setAdjustedActiveOutlines(adjustOutlines(activeOutlines));
   }, [activeOutlines, adjustOutlines]);
+
+  useEffect(() => {
+    setAdjustedContextOutlines(adjustOutlines(contextOutlines));
+  }, [contextOutlines, adjustOutlines]);
 
   const refresh = useCallback(
     (
@@ -476,17 +485,13 @@ export function LegacyPreviewContainer(
         return;
       }
       if (data.sender === "builder" && origin === location.origin) {
-        if (data.type === "hover-on-brick" || data.type === "select-brick") {
+        if (
+          data.type === "hover-on-brick" ||
+          data.type === "select-brick" ||
+          data.type === "hover-on-main" ||
+          data.type === "hover-on-context"
+        ) {
           // Send to preview.
-          iframeRef.current.contentWindow.postMessage(
-            {
-              ...data,
-              sender: "preview-container",
-              forwardedFor: data.sender,
-            } as PreviewMessageFromContainer,
-            previewOrigin
-          );
-        } else if (data.type === "hover-on-main") {
           iframeRef.current.contentWindow.postMessage(
             {
               ...data,
@@ -527,6 +532,9 @@ export function LegacyPreviewContainer(
             }
             refHoverIid.current = data.iid;
             refHoverOutlines.current = data.outlines;
+            break;
+          case "highlight-context":
+            setContextOutlines(data.outlines);
             break;
           case "context-menu-on-brick": {
             const box = iframeRef.current.getBoundingClientRect();
@@ -707,6 +715,14 @@ export function LegacyPreviewContainer(
           {...outline}
         />
       ))}
+      {adjustedContextOutlines.map((outline, index) => (
+        <BrickOutlineComponent
+          key={index}
+          type="context"
+          dragDirection={dragDirection}
+          {...outline}
+        />
+      ))}
     </div>
   );
 }
@@ -714,8 +730,8 @@ export function LegacyPreviewContainer(
 export const PreviewContainer = forwardRef(LegacyPreviewContainer);
 
 interface BrickOutlineComponentProps extends BrickOutline {
-  type: "active" | "hover" | "rootTpl";
-  alias: string;
+  type: "active" | "hover" | "rootTpl" | "context";
+  alias?: string;
   hidden?: boolean;
   iid?: string;
   overIid?: string;

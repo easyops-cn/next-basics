@@ -28,6 +28,19 @@ export interface PreviewMessageBuilderHoverOnMain
   type: "hover-on-main";
 }
 
+export interface HighLightNode {
+  iid: numner;
+  alias: string;
+}
+
+export interface PreviewMessageBuilderHoverOnContext
+  extends PreviewBaseMessage,
+    HighlightBaseInfo {
+  sender: "builder";
+  type: "hover-on-context";
+  highlightNodes: HighLightNode[];
+}
+
 export interface PreviewMessageBuilderHoverOnBrick
   extends PreviewBaseMessage,
     HighlightBaseInfo {
@@ -58,6 +71,7 @@ export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
+  | PreviewMessagePreviewerHighlightContext
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
@@ -70,6 +84,7 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnIframe
   | PreviewMessageContainerBuilderHoverOnMain
   | PreviewMessageContainerBuilderHoverOnBrick
+  | PreviewMessageContainerBuilderHoverOnContext
   | PreviewMessageContainerBuilderSelectBrick
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerRefresh
@@ -80,6 +95,7 @@ export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
   | PreviewMessageContainerBuilderHoverOnMain
   | PreviewMessageContainerBuilderHoverOnBrick
+  | PreviewMessageContainerBuilderHoverOnContext
   | PreviewMessageContainerPreviewerHoverOnBrick
   | PreviewMessageContainerPreviewerSelectBrick
   | PreviewMessageContainerPreviewerContextMenuOnBrick
@@ -94,10 +110,12 @@ export type PreviewMessageToContainer =
   | PreviewMessageBuilderSelectBrick
   | PreviewMessageBuilderDrop
   | PreviewMessageBuilderHoverOnMain
+  | PreviewMessageBuilderHoverOnContext
   | PreviewMessagePreviewerHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
   | PreviewMessagePreviewerSelectBrick
   | PreviewMessagePreviewerHighlightBrick
+  | PreviewMessagePreviewerHighlightContext
   | PreviewMessagePreviewerContextMenuOnBrick
   | PreviewMessagePreviewerPreviewStarted
   | PreviewMessagePreviewerUrlChange
@@ -148,6 +166,13 @@ export interface PreviewMessagePreviewerHighlightBrick
   sender: "previewer";
   type: "highlight-brick";
   highlightType: "active" | "hover";
+  outlines: BrickOutline[];
+}
+
+export interface PreviewMessagePreviewerHighlightContext
+  extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "highlight-context";
   outlines: BrickOutline[];
 }
 
@@ -254,6 +279,12 @@ export interface PreviewMessageContainerBuilderHoverOnBrick
   forwardedFor: "builder";
 }
 
+export interface PreviewMessageContainerBuilderHoverOnContext
+  extends Omit<PreviewMessageBuilderHoverOnContext, "sender"> {
+  sender: "preview-container";
+  forwardedFor: "builder";
+}
+
 export interface PreviewMessageContainerBuilderSelectBrick
   extends Omit<PreviewMessageBuilderSelectBrick, "sender"> {
   sender: "preview-container";
@@ -288,6 +319,7 @@ export interface BrickOutline {
   height: number;
   left: number;
   top: number;
+  alias?: string;
 }
 
 export interface PreviewStartOptions {

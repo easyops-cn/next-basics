@@ -5,38 +5,55 @@ import {
   visitStoryboardExpressions,
 } from "@next-core/brick-utils";
 
-const CTX = "CTX";
+type ContextKeyWord = "CTX" | "STATE";
 
-export function scanContextsInStoryboard(storyboard: Storyboard): string[] {
-  return scanContextsInAny([
-    storyboard.routes,
-    storyboard.meta?.customTemplates,
-  ]);
+export function scanContextsInStoryboard(
+  storyboard: Storyboard,
+  contextKeyWord: ContextKeyWord
+): string[] {
+  return scanContextsInAny(
+    [storyboard.routes, storyboard.meta?.customTemplates],
+    contextKeyWord
+  );
 }
 
-export function scanContextsInAny(data: unknown): string[] {
-  const { readContexts, writeContexts } = scanContextsInAnyByReadOrWrite(data);
+export function scanContextsInAny(
+  data: unknown,
+  contextKeyWord: ContextKeyWord = "CTX"
+): string[] {
+  const { readContexts, writeContexts } = scanContextsInAnyByReadOrWrite(
+    data,
+    contextKeyWord
+  );
   return Array.from(new Set(readContexts.concat(writeContexts)));
 }
 
-function scanContextsInAnyByReadOrWrite(data: unknown): {
+function scanContextsInAnyByReadOrWrite(
+  data: unknown,
+  contextKeyWord: ContextKeyWord
+): {
   readContexts: string[];
   writeContexts: string[];
 } {
   const readContexts = new Set<string>();
   const writeContexts = new Set<string>();
-  const beforeVisitContext = beforeVisitContextFactory(readContexts);
+  const beforeVisitContext = beforeVisitContextFactory(
+    readContexts,
+    contextKeyWord
+  );
   visitStoryboardExpressions(data, beforeVisitContext, {
     matchExpressionString(value) {
-      return value.includes(CTX);
+      return value.includes(contextKeyWord);
     },
     visitObject: function (
       value: unknown[] | Record<string | number | symbol, unknown>
     ) {
       if (
         !Array.isArray(value) &&
-        (value.action === "context.replace" ||
-          value.action === "context.assign") &&
+        (contextKeyWord === "CTX"
+          ? value.action === "context.replace" ||
+            value.action === "context.assign"
+          : value.action === "state.update") &&
         Array.isArray(value.args) &&
         typeof value.args[0] === "string" &&
         // Ignore evaluations and placeholders,
@@ -54,10 +71,11 @@ function scanContextsInAnyByReadOrWrite(data: unknown): {
 }
 
 function beforeVisitContextFactory(
-  readContexts: Set<string>
+  readContexts: Set<string>,
+  contextKeyWord: ContextKeyWord
 ): PrecookHooks["beforeVisitGlobal"] {
   return function beforeVisitContext(node, parent): void {
-    if (node.name === CTX) {
+    if (node.name === contextKeyWord) {
       const memberParent = parent[parent.length - 1];
       if (
         memberParent?.node.type === "MemberExpression" &&

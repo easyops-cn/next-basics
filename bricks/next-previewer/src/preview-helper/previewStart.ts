@@ -3,11 +3,13 @@ import type { PluginLocation } from "@next-core/brick-types";
 import { matchPath } from "@next-core/brick-utils";
 import type {
   BrickOutline,
+  HighLightNode,
   Position,
   PreviewMessageFromPreviewer,
   PreviewMessagePreviewerCaptureFailed,
   PreviewMessagePreviewerCaptureOk,
   PreviewMessagePreviewerHighlightBrick,
+  PreviewMessagePreviewerHighlightContext,
   PreviewMessagePreviewerHoverOnMain,
   PreviewMessagePreviewerRouteMatchChange,
   PreviewMessagePreviewerScroll,
@@ -105,6 +107,16 @@ export function previewStart(
     });
   };
 
+  const sendHighlightBricksOutlines = (nodes: HighLightNode[]): void => {
+    const outlines = nodes
+      .map((node) => getBrickOutlines(node.iid, node.alias))
+      .flat();
+    sendMessage<PreviewMessagePreviewerHighlightContext>({
+      type: "highlight-context",
+      outlines,
+    });
+  };
+
   let lastTemplatePreviewSettings: PreviewSettings;
   if (options.templateId) {
     lastTemplatePreviewSettings = options.settings;
@@ -146,6 +158,9 @@ export function previewStart(
             break;
           case "hover-on-main":
             sendHighlightBrickOutlines("hover", "#main-mount-point", "root");
+            break;
+          case "hover-on-context":
+            sendHighlightBricksOutlines(data.highlightNodes);
             break;
           case "select-brick":
             activeIid = data.iid;
@@ -284,7 +299,7 @@ export function previewStart(
   mutationObserver.observe(document.body, { subtree: true, childList: true });
 }
 
-function getBrickOutlines(iid: string): BrickOutline[] {
+function getBrickOutlines(iid: string, alias?: string): BrickOutline[] {
   if (!iid) {
     return [];
   }
@@ -292,7 +307,7 @@ function getBrickOutlines(iid: string): BrickOutline[] {
   const elements = document.querySelectorAll<HTMLElement>(
     isRoot ? iid : `[data-iid="${iid}"]`
   );
-  const outlines = getOutlines(elements);
+  const outlines = getOutlines(elements, alias);
   return isRoot
     ? outlines.map((item) => ({
         ...item,
@@ -301,7 +316,10 @@ function getBrickOutlines(iid: string): BrickOutline[] {
     : outlines;
 }
 
-function getOutlines(elements: NodeListOf<HTMLElement>): BrickOutline[] {
+function getOutlines(
+  elements: NodeListOf<HTMLElement>,
+  alias?: string
+): BrickOutline[] {
   return [...elements].map((element) => {
     const { width, height, left, top } = element.getBoundingClientRect();
     return {
@@ -309,6 +327,7 @@ function getOutlines(elements: NodeListOf<HTMLElement>): BrickOutline[] {
       height,
       left: left + window.scrollX,
       top: top + window.scrollY,
+      alias,
     };
   });
 }

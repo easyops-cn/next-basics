@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   useActiveNodeUid,
   useBuilderContextMenuStatus,
+  useHighlightNodes,
   useHoverNodeUid,
   type BuilderDataManager,
 } from "@next-core/editor-bricks-helper";
@@ -9,6 +10,7 @@ import type {
   PreviewMessageBuilderHoverOnBrick,
   PreviewMessageBuilderSelectBrick,
   PreviewMessageBuilderHoverOnMain,
+  PreviewMessageBuilderHoverOnContext,
 } from "@next-types/preview";
 
 export function useHighlightBrick(
@@ -17,6 +19,7 @@ export function useHighlightBrick(
 ): void {
   const hoverNodeUid = useHoverNodeUid();
   const activeNodeUid = useActiveNodeUid();
+  const highlightNodes = useHighlightNodes();
   const { active, node: activeContextMenuNode } = useBuilderContextMenuStatus();
   const highlightNodeUid =
     type === "active"
@@ -28,6 +31,10 @@ export function useHighlightBrick(
   useEffect(() => {
     sendHighlightBrick(type, highlightNodeUid, manager);
   }, [highlightNodeUid, manager, type]);
+
+  useEffect(() => {
+    sendHighlightBricks(highlightNodes, manager);
+  }, [highlightNodes, manager]);
 }
 
 export function sendHighlightBrick(
@@ -64,4 +71,23 @@ export function sendHighlightBrick(
     iid,
     alias,
   } as PreviewMessageBuilderHoverOnBrick | PreviewMessageBuilderSelectBrick);
+}
+
+export function sendHighlightBricks(
+  highlightNodes: Set<number>,
+  manager: BuilderDataManager
+): void {
+  const nodes = highlightNodes
+    ? manager
+        .getData()
+        .nodes.filter((node) => [...highlightNodes].includes(node.$$uid))
+    : [];
+  window.postMessage({
+    sender: "builder",
+    type: "hover-on-context",
+    highlightNodes: nodes.map((node) => ({
+      iid: node.instanceId,
+      alias: node.alias,
+    })),
+  } as PreviewMessageBuilderHoverOnContext);
 }
