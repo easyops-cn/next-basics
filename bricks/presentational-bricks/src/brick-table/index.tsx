@@ -166,28 +166,7 @@ export interface CellStatusProps {
  * 1.57.1:新增 `shouldUpdateUrlParams` 属性和 `sort.update` 事件
  * @memo
  * > Tips: 在 react 中，boolean 类型的值是合法的子元素，但是不会被渲染出来。如果希望 boolean 值在表格单元格中展示成 `true`|`false`，可以使用平台管道进行转换，例如`@{someProperties|string}`。更多场景下可以结合 [基本数值映射构件](developers/brick-book/brick/presentational-bricks.brick-value-mapping) 把 boolean 类型的值转换成有意义的文本进行展示。
- * ### CustomColumn
- * | property             | type                  | required | default | description                                                    |
- * | -------------------- | --------------------- | -------- | ------- | -------------------------------------------------------------- |
- * | valueSuffix          | string                | -        | -       | 字段的值展示时的后缀                                          |
- * | useBrick             | UseBrickConf          | -        | -       | 支持为某列自定义展示构件, 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)                                  |
- * | titleUseBrick        | UseBrickConf          | -        | -       | 支持为某列的标题自定义展示构件，可通过 DATA.title 获取标题文本,具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf) |
- * | filters | {text:string,value:any}[] | - | - | 表头的筛选菜单项 |
- * | verticalAlign | top \| bottom | - | - | 单元格内元素的垂直对齐方式 |
- * | colSpanKey | string | - | - | 每条记录的控制列合并的值的 key |
- * | rowSpanKey | string | - | - | 每条记录的控制行合并的值的 key。如果希望将树形列表展平，并计算行合并的值，可以使用 flattenTreeDataListAndCalcRowSpan 自定义加工函数 |
- * | ~~component~~ | ~~CustomColumnComponent~~ | -        | -       | ~~Deprecated。支持为某列自定义展示构件~~                          |
- *
- * ### UseBrickConf
- *
- * | property      | type           | required | default | description                                        |
- * | ------------- | -------------- | -------- | ------- | -------------------------------------------------- |
- * | brick         | string         | ✔️       | -       | 构件名称                                           |
- * | properties    | object         | -        | -       | 构件属性                                           |
- * | events        | BrickEventsMap | -        | -       | 事件                                               |
- * | transform     | string\|object | -        | -       | 属性数据转换                                       |
- * | transformFrom | string         | -        | -       | 属性数据转换来自数据源的哪个字段，不填则为整个数据 |
- *
+
  * `<presentational-bricks.brick-table>` 为某列自定义展示构件传递的数据源为：
  *
  * | field       | type   | description |
