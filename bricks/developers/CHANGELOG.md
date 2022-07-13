@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.357.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.3...@next-bricks/developers@1.357.4) (2022-07-13)
+
+
+### Bug Fixes
+
+* fix anchor regexp ([d780c09](https://github.com/easyops-cn/next-basics/commit/d780c095884efb6da2e847e3d13bfa6b371fdda4))
+
+
+
+
+
 ## [1.357.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.2...@next-bricks/developers@1.357.3) (2022-07-12)
 
 
