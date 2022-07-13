@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.183.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.183.1...@next-bricks/basic-bricks@1.183.2) (2022-07-13)
+
+
+### Bug Fixes
+
+* **anchor:** fix页面滚动且在target区域内anchor高亮消失bug ([7b44a54](https://github.com/easyops-cn/next-basics/commit/7b44a54204a0bd84d39e7cec75fa059d250e58f7))
+
+
+
+
+
 ## [1.183.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.183.0...@next-bricks/basic-bricks@1.183.1) (2022-07-12)
 
 
