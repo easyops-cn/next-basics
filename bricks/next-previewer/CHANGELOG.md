@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.7.0...@next-bricks/next-previewer@1.8.0) (2022-07-13)
+
+
+### Features
+
+* support dataTree hover highlight brick ([425033c](https://github.com/easyops-cn/next-basics/commit/425033cfee4d8e1aaafa548c6d527b5344330ecb))
+* update type ([1c3fd02](https://github.com/easyops-cn/next-basics/commit/1c3fd029e7466b782ce8af8120360ecefaedc3af))
+
+
+
+
+
 # [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.6.1...@next-bricks/next-previewer@1.7.0) (2022-06-22)
 
 

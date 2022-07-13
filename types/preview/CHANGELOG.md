@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.10.0...@next-types/preview@1.11.0) (2022-07-13)
+
+
+### Features
+
+* support dataTree hover highlight brick ([425033c](https://github.com/easyops-cn/next-basics/commit/425033cfee4d8e1aaafa548c6d527b5344330ecb))
+
+
+
+
+
 # [1.10.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.9.0...@next-types/preview@1.10.0) (2022-06-22)
 
 
