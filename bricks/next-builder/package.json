@@ -25,9 +25,9 @@
   "devDependencies": {
     "@next-core/storyboard-function-types": "^0.2.7",
     "@next-libs/basic-components": "^3.5.1",
-    "@next-libs/cmdb-instances": "^6.35.4",
-    "@next-libs/code-editor-components": "^4.0.35",
-    "@next-libs/forms": "^3.2.26",
+    "@next-libs/cmdb-instances": "^6.35.6",
+    "@next-libs/code-editor-components": "^4.0.36",
+    "@next-libs/forms": "^3.2.27",
     "@next-libs/storage": "^2.0.2",
     "@next-libs/visit-history": "2.0.2",
     "@next-sdk/api-gateway-sdk": "^2.0.17",
