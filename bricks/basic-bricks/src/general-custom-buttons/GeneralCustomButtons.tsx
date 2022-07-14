@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { MenuIcon } from "@next-core/brick-types";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import {
   DownOutlined,
@@ -28,9 +29,9 @@ interface AdminButtonProps {
   buttons: CustomButton[];
   handleClick: (eventName: string, button: CustomButton) => void;
   dropdownBtnText?: string;
-  dropdownBtnIcon?: any;
+  dropdownBtnIcon?: MenuIcon | string;
   isMoreButton?: boolean;
-  moreBtnIcon?: any;
+  moreBtnIcon?: MenuIcon | string;
   moreButtonShape?: "circle" | "rectangle" | "no" | "icon";
   moreButtonType?: ButtonType;
   alignment?: "start" | "center" | "end" | "stretch";

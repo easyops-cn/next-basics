@@ -13,7 +13,7 @@ module.exports = sizeLimit({
     "next-builder": "400 KB",
     "presentational-bricks": "270 KB",
     "flow-builder": "380 KB",
-    developers: "190 KB",
+    developers: "192 KB",
     forms: "605 KB",
   },
   templates: {

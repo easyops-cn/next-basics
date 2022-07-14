@@ -89,6 +89,12 @@ const doc = {
       required: false,
       description: "输入框样式",
     },
+    {
+      name: "icon",
+      type: "MenuIcon",
+      required: false,
+      description: "图标icon",
+    },
   ],
   events: [
     {

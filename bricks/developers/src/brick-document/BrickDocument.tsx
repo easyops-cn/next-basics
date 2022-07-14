@@ -20,7 +20,7 @@ import {
   StoryDocSlot,
   StoryDocType,
 } from "@next-core/brick-types";
-import { sharedTypeDescList } from "./constants";
+import { sharedTypeDescList, sharedTypeExtendLink } from "./constants";
 import styles from "./BrickDocument.module.css";
 import { TypeDescItem } from "../interfaces";
 import * as gfm from "remark-gfm";
@@ -117,6 +117,31 @@ export function BrickDocument({
     if (!value) return <span className={styles.typeWrapper}>-</span>;
 
     const str = value.replace(/`/g, "");
+
+    const extendLinkType = sharedTypeExtendLink.find((item) =>
+      str.includes(item.type)
+    );
+    if (extendLinkType) {
+      const reg = new RegExp(
+        `\\b(${sharedTypeExtendLink.map((v) => v.type).join("|")})\\b`,
+        "g"
+      );
+
+      const href = `${
+        /https?:\/\//.test(extendLinkType.url) ? "" : location.origin
+      }${extendLinkType.url}`;
+
+      return (
+        <span
+          className={styles.typeWrapper}
+          dangerouslySetInnerHTML={{
+            __html: str.replace(reg, (v: string) => {
+              return `<a href='${href}' target='_blank'>${v}</a>`;
+            }),
+          }}
+        ></span>
+      );
+    }
 
     const mixInterfaceIds = [
       ...interfaceIds,
