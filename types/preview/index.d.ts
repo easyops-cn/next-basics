@@ -285,14 +285,14 @@ export interface PreviewMessageContainerProxyMethodSuccess
   extends PreviewBaseMessage {
   sender: "preview";
   type: "excute-proxy-method-success";
-  result: any;
+  result: ExcuteProxyMethodResult;
 }
 
 export interface PreviewMessageContainerProxyMethodError
   extends PreviewBaseMessage {
   sender: "preview";
   type: "excute-proxy-method-error";
-  result: any;
+  result: ExcuteProxyMethodResult;
 }
 
 export interface PreviewMessageContainerBuilderHoverOnMain
