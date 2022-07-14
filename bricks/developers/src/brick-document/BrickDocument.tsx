@@ -20,10 +20,11 @@ import {
   StoryDocSlot,
   StoryDocType,
 } from "@next-core/brick-types";
-import { sharedTypeDescList, sharedTypeExtendLink } from "./constants";
+import { sharedTypeExtendLink } from "./constants";
 import styles from "./BrickDocument.module.css";
 import { TypeDescItem } from "../interfaces";
 import * as gfm from "remark-gfm";
+import { collectSharedTypeList } from "./processor";
 
 function flatten(text: any, child: any): any {
   return typeof child === "string"
@@ -55,12 +56,9 @@ export function BrickDocument({
   const [rotate, setRotate] = useState(180);
   const [interfaceIds, setInterfaceIds] = useState([]);
 
-  const PresentedSharedDescList = useMemo(
-    () =>
-      sharedTypeDescList.filter((item) =>
-        doc?.properties?.some((row) => row.type.includes(item.type))
-      ),
-    [doc?.properties]
+  const presentedSharedDescList = useMemo(
+    () => collectSharedTypeList(doc),
+    [doc]
   );
 
   useEffect(() => {
@@ -145,7 +143,7 @@ export function BrickDocument({
 
     const mixInterfaceIds = [
       ...interfaceIds,
-      ...PresentedSharedDescList.map((i) => i.type),
+      ...presentedSharedDescList.map((i) => i.type),
     ];
     if (mixInterfaceIds.length && renderLink) {
       const hashHref = getCurHashHref();
@@ -619,7 +617,7 @@ export function BrickDocument({
           {renderMethods(brickDoc.methods)}
           {renderSlots(brickDoc.slots)}
           {renderInterfaceMix(brickDoc.interface)}
-          {renderSharedContent(PresentedSharedDescList)}
+          {renderSharedContent(presentedSharedDescList)}
           {renderMemo(brickDoc.memo)}
         </div>
       </Card>

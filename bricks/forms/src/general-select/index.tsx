@@ -275,22 +275,19 @@ export class GeneralSelectElement extends FormItemElement {
   popoverPositionType: GeneralSelectProps["popoverPositionType"];
 
   /**
-   * @kind number
    * @default 300
    * @description 设置防抖动搜索的时间间隔。
    * @group advancedFormItem
    */
   @property({ type: Number })
-  debounceSearchDelay: number;
+  debounceSearchDelay?: number;
 
   /**
-   * @kind EasyopsEmptyProps
-   * @default
    * @description 空option 时候可以自定义 EasyopsEmpty 配置实现自定义的无数据提示
    * @group advancedFormItem
    */
   @property({ attribute: false })
-  emptyProps: EasyopsEmptyProps;
+  emptyProps?: EasyopsEmptyProps;
   /**
    * @default false
    * @required false
