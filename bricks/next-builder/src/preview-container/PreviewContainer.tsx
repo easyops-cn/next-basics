@@ -620,7 +620,6 @@ export function LegacyPreviewContainer(
     scaleX,
     inspecting,
     onScreenshotCapture,
-    handleOnDrop,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
   ]);
