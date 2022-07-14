@@ -36,12 +36,6 @@ export interface ComplexOption<T = string | number> {
  * 1.77.0:新增属性 `tokenSeparators`
  * 1.200.0:新增属性 `emptyProps`
  * @memo
- * ```typescript
- * interface LabeledValue {
- * label: string;
- * value: string | number;
- * }
- * ```
  */
 export class GeneralSelectElement extends FormItemElement {
   /**
@@ -62,9 +56,7 @@ export class GeneralSelectElement extends FormItemElement {
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind string[]|number[]|LabeledValue[]
    * @required true
-   * @default -
    * @description 候选项列表
    * @group basicFormItem
    */
@@ -206,14 +198,11 @@ export class GeneralSelectElement extends FormItemElement {
   size: "small" | "middle" | "large";
 
   /**
-   * @kind LabeledValue
-   * @required false
-   * @default -
    * @description 空候选项，将插入到候选项列表最前面
    * @group advancedFormItem
    */
   @property({ attribute: false })
-  emptyOption: GeneralComplexOption;
+  emptyOption?: GeneralComplexOption;
 
   /**
    * @kind object

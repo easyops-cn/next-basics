@@ -224,14 +224,12 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property({ attribute: false })
   isMultiLabel = true;
   /**
-   * @kind boolean
-   * @param showSearchTip
    * @default false
    * @description 下拉列表的最后一行是否显示提示：仅显示前**项，更多结果请搜索
    * @group ui
    */
   @property({ type: Boolean })
-  showSearchTip: boolean;
+  showSearchTip?: boolean;
 
   /**
    * @kind string
