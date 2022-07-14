@@ -218,6 +218,31 @@ export function previewStart(
             );
             break;
         }
+      if (data.type === "excute-proxy-method") {
+        const [ref, method] = data.proxyMethodArgs;
+        const regx = /^[a-zA-Z-]+[.][a-zA-Z-]+$/;
+        let result: any = null;
+        const root = document.body;
+        try {
+          if (regx.test(ref)) {
+            result = root.getElementsByTagName(ref)[0][method]();
+          } else {
+            result = root.querySelector(ref)[method]();
+          }
+
+          window.parent.postMessage({
+            sender: "previewer",
+            type: "excute-proxy-method-success",
+            data: { method: method, res: result },
+          });
+        } catch (err) {
+          window.parent.postMessage({
+            sender: "previewer",
+            type: "excute-proxy-method-error",
+            data: { method: method, res: err },
+          });
+        }
+      }
     }
   );
 

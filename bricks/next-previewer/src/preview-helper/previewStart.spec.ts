@@ -365,5 +365,23 @@ describe("previewStart", () => {
       },
       "http://localhost:8081"
     );
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "excute-proxy-method",
+        proxyMethodArgs: ["div", "getAttributeNames"],
+      },
+    } as any);
+    expect(parentPostMessage).toBeCalledTimes(12);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(12, {
+      data: {
+        method: "getAttributeNames",
+        res: ["data-iid"],
+      },
+      sender: "previewer",
+      type: "excute-proxy-method-success",
+    });
   });
 });

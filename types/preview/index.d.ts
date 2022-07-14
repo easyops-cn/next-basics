@@ -66,6 +66,11 @@ export interface HighlightBaseInfo {
   alias: string;
 }
 
+export interface ExcuteProxyMethodResult {
+  method: string;
+  res: any;
+}
+
 export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
@@ -89,7 +94,8 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload
-  | PreviewMessageContainerCapture;
+  | PreviewMessageContainerCapture
+  | PreviewMessageContainerProxyMethod;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
@@ -122,7 +128,9 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerRouteMatchChange
   | PreviewMessagePreviewerScroll
   | PreviewMessagePreviewerCaptureOk
-  | PreviewMessagePreviewerCaptureFailed;
+  | PreviewMessagePreviewerCaptureFailed
+  | PreviewMessageContainerProxyMethodSuccess
+  | PreviewMessageContainerProxyMethodError;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnMain
@@ -265,6 +273,26 @@ export interface PreviewMessageContainerBuilderHoverOnIframe
   sender: "preview-container";
   forwardedFor: "builder";
   position: Position;
+}
+
+export interface PreviewMessageContainerProxyMethod extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "excute-proxy-method";
+  proxyMethodArgs: [ref: any, method: string];
+}
+
+export interface PreviewMessageContainerProxyMethodSuccess
+  extends PreviewBaseMessage {
+  sender: "preview";
+  type: "excute-proxy-method-success";
+  result: any;
+}
+
+export interface PreviewMessageContainerProxyMethodError
+  extends PreviewBaseMessage {
+  sender: "preview";
+  type: "excute-proxy-method-error";
+  result: any;
 }
 
 export interface PreviewMessageContainerBuilderHoverOnMain
