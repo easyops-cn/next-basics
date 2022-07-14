@@ -6,11 +6,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import {
-  formatOptions,
-  FormItemElement,
-  GeneralOption,
-} from "@next-libs/forms";
+import { FormItemElement } from "@next-libs/forms";
 import { GeneralAutoComplete } from "./GeneralAutoComplete";
 import { OptionType } from "../interfaces";
 

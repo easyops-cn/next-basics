@@ -23,47 +23,19 @@ import { FormAlignment } from "../interfaces";
 
 export const LAYOUT_ENUMS = ["horizontal", "vertical", "inline"];
 /**
-* @id forms.general-form
-* @name forms.general-form
-* @docKind brick
-* @description
-* @author steve
-* @slots
+ * @id forms.general-form
+ * @name forms.general-form
+ * @docKind brick
+ * @description
+ * @author steve
+ * @slots
  * items:表单项插槽
-* @history
-* 1.58.0  新增 `name` 属性
-* 1.63.0   新增 `resetFields` 方法
-* @memo
-* > Tips: 在与 `general-form` 组合使用时， 若通过 form 下的 values 赋值给日期选择器，需要通过 `valueTypes` 申明数据类型，同时为了更方便的提交指定时间格式给后台，在申明数据后也提供了格式化日期的选项，以`|`分隔。（如上述 demo 所示）
-
-*```typescript
-*export interface LabelTooltipProps {
-*   \\ tooltip 的文本内容
-*   content: string;
-*   \\ 图标设值跟平台图标设置一致
-*   icon: MenuIcon;
-*   \\ tooltip 的样式设置
-*   style?: React.CSSProperties;
-*   \\ 图标的样式设置
-*   iconStyle?: React.CSSProperties;
-*}
-
-* export interface HelpBrickProps {
-*   \\ 支持自定义组件
-*   useBrick: UseBrickConf;
-*   \\ 所放的位置，目前仅支持右侧和底部显示
-*   placement?: "right" | "bottom";
-*   \\ 组件容器的样式 可通过 top, bottom, left, right 精确调整位置
-*   containerStyle?: React.CSSProperties;
-* }
-
-*export interface LabelBrick {
-*   \\ 支持自定义组件
-*   useBrick: UseBrickConf;
-*}
-* ```
-* @noInheritDoc
-*/
+ * @history
+ * 1.58.0  新增 `name` 属性
+ * 1.63.0   新增 `resetFields` 方法
+ * @memo
+ * @noInheritDoc
+ */
 export class GeneralFormElement
   extends UpdatingElement
   implements AbstractGeneralFormElement
