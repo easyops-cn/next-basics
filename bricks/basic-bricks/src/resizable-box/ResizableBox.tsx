@@ -63,10 +63,6 @@ export function ResizableBox({
     []
   );
 
-  useEffect(() => {
-    setSize(initSize());
-  }, [initSize]);
-
   const handleResizerMouseDown = useCallback(
     (event: MouseEvent) => {
       // Prevent text selecting.
@@ -79,6 +75,19 @@ export function ResizableBox({
     },
     [size]
   );
+
+  useEffect(() => {
+    const refBarCurrent = refBar.current;
+    // shadowRoot 中不能直接在组件中绑定React事件, 会导致子节点事件冲突
+    refBarCurrent.addEventListener("mousedown", handleResizerMouseDown);
+    return () => {
+      refBarCurrent.removeEventListener("mousedown", handleResizerMouseDown);
+    };
+  }, [handleResizerMouseDown]);
+
+  useEffect(() => {
+    setSize(initSize());
+  }, [initSize]);
 
   useEffect(() => {
     if (!resizeStatus) {
@@ -104,17 +113,12 @@ export function ResizableBox({
       setResizerStatus(null);
     };
 
-    const refBarCurrent = refBar.current;
-
     window.addEventListener("mousemove", handleResizerMouseMove);
     window.addEventListener("mouseup", handleResizerMouseUp);
-    // shadowRoot 中不能直接在组件中绑定React事件, 会导致子节点事件冲突
-    refBarCurrent.addEventListener("mousedown", handleResizerMouseDown);
 
     return () => {
       window.removeEventListener("mousemove", handleResizerMouseMove);
       window.removeEventListener("mouseup", handleResizerMouseUp);
-      refBarCurrent.removeEventListener("mousedown", handleResizerMouseDown);
     };
   }, [
     resizeDirection,
@@ -122,7 +126,6 @@ export function ResizableBox({
     refinedMinSpace,
     resizeStatus,
     debouncedSetSize,
-    handleResizerMouseDown,
   ]);
 
   useEffect(() => {
