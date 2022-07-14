@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.357.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.4...@next-bricks/developers@1.357.5) (2022-07-14)
+
+
+### Bug Fixes
+
+* **BrickDocument:** change logic of convertMarkdownLinkToHtmlLink to do all processing in one call ([e9685ab](https://github.com/easyops-cn/next-basics/commit/e9685aba4b59e0b140b07c08ca151edd2f9eb3c6))
+
+
+
+
+
 ## [1.357.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.3...@next-bricks/developers@1.357.4) (2022-07-13)
 
 
