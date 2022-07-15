@@ -36,34 +36,19 @@ export function LegacyGeneralForm({
   formStyle,
 }: LegacyGeneralFormProps): React.ReactElement {
   const divRef = useRef<HTMLDivElement>();
-  const [width, setWidth] = useState(0);
   formElement.formUtils = form;
-
-  //istanbul ignore next
-  useEffect(() => {
-    const ro = new ResizeObserver(() => {
-      const rect = divRef.current
-        .getElementsByClassName("form-wrap")?.[0]
-        ?.getBoundingClientRect();
-      setWidth(rect?.width);
-    });
-    ro.observe(divRef.current);
-    return () => {
-      ro.disconnect();
-    };
-  }, []);
 
   const slotCom = useMemo(() => {
     if (layout === "inline") {
       return <slot id="itemsSlot" name="items" />;
     } else {
       return (
-        <div style={{ maxWidth: width || undefined }}>
+        <div style={{ maxWidth: "100%" }}>
           <slot id="itemsSlot" name="items" />
         </div>
       );
     }
-  }, [layout, width]);
+  }, [layout]);
   return (
     <div
       ref={divRef}
