@@ -24,13 +24,9 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon, UserInfo } from "@next-core/brick-types";
 import { getRuntime, useCurrentTheme } from "@next-core/brick-kit";
 import { ReactComponent as ImageUpload } from "./image-upload.svg";
+import { UploadImgValue } from "../interfaces";
 import { ReactComponent as ImageUploadDark } from "./image-upload-dark.svg";
 import { FileUtils } from "../utils";
-
-export interface UploadImgValue {
-  text?: string;
-  images?: any[];
-}
 
 interface UploadImgProps extends FormItemWrapperProps {
   listType?: "picture" | "picture-card" | "text";

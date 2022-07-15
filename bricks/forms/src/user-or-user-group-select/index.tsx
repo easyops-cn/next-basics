@@ -6,13 +6,11 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import {
-  UserOrUserGroupSelect,
-  UserOrUserGroupSelectValue,
-} from "./UserOrUserGroupSelect";
+import { UserOrUserGroupSelect } from "./UserOrUserGroupSelect";
 import { CmdbModels } from "@next-sdk/cmdb-sdk";
 import { groupBy, startsWith } from "lodash";
 import { FormItemElement } from "@next-libs/forms";
+import { UserOrUserGroupSelectValue } from "../interfaces";
 
 /**
  * @id forms.user-or-user-group-select

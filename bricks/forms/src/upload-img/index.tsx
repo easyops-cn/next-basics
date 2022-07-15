@@ -6,8 +6,9 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { UploadImg, UploadImgValue } from "./UploadImg";
+import { UploadImg } from "./UploadImg";
 import { FormItemElement } from "@next-libs/forms";
+import { UploadImgValue } from "../interfaces";
 
 /**
  * @id forms.upload-img

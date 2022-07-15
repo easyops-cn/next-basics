@@ -36,13 +36,9 @@ import { getInstanceNameKeys } from "@next-libs/cmdb-utils";
 import { InstanceListModal } from "@next-libs/cmdb-instances";
 import { getAuth, handleHttpError } from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
+import { UserOrUserGroupSelectValue } from "../interfaces";
 import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
-
-export type UserOrUserGroupSelectValue = {
-  selectedUser: string[];
-  selectedUserGroup: string[];
-};
 
 export interface UserSelectFormItemProps {
   children?: ReactNode;
