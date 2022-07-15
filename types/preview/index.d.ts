@@ -302,7 +302,7 @@ export interface PreviewMessageContainerProxyMethodError
 
 export interface PreviewMessageContainerDebug extends PreviewBaseMessage {
   sender: "preview";
-  type: "debug";
+  type: "preview.debug";
   res: any[];
 }
 

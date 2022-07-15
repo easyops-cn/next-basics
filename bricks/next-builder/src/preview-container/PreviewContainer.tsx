@@ -605,7 +605,7 @@ export function LegacyPreviewContainer(
           case "excute-proxy-method-error":
             onExcuteProxyMethodError(data.data);
             break;
-          case "debug":
+          case "preview.debug":
             onPreviewDebug(data.res);
             break;
         }
