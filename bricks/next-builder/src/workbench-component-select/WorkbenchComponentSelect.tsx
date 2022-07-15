@@ -19,6 +19,7 @@ import styles from "./WorkbenchComponentSelect.module.css";
 interface ComponentSelectProps {
   brickList: BrickOptionItem[];
   storyList: Story[];
+  isShowSuggest?: boolean;
 }
 
 export function setDragImage(
@@ -65,6 +66,7 @@ function transformInfo(
 export function WorkbenchComponentSelect({
   brickList,
   storyList,
+  isShowSuggest = true,
 }: ComponentSelectProps): React.ReactElement {
   const [filterValue, setFilterValue] = useState<Record<string, string>>({});
   const [componentList, setComponetList] =
@@ -137,6 +139,7 @@ export function WorkbenchComponentSelect({
                 componentList={v}
                 q={filterValue[k]}
                 storyList={storyList}
+                isShowSuggest={isShowSuggest}
               />
             </Tabs.TabPane>
           ))}
@@ -150,6 +153,7 @@ interface ComponentListProps {
   componentList: BrickOptionItem[];
   q: string;
   storyList: Story[];
+  isShowSuggest?: boolean;
 }
 
 function ComponentList({
@@ -157,12 +161,13 @@ function ComponentList({
   componentList,
   q,
   storyList,
+  isShowSuggest = true,
 }: ComponentListProps): React.ReactElement {
   const initGroup = useCallback((): groupItem[] => {
-    return suggest[componentType].length > 0
+    return suggest[componentType].length > 0 && isShowSuggest
       ? suggestGroup.concat(defaultGroup[componentType] ?? [])
       : defaultGroup[componentType] ?? [];
-  }, [componentType]);
+  }, [componentType, isShowSuggest]);
   const [group, setGroup] = useState<groupItem[]>(initGroup());
   const [list, setList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);

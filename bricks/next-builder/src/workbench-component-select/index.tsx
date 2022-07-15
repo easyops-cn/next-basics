@@ -24,6 +24,9 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
   })
   storyList: Story[];
 
+  @property({ attribute: false })
+  isShowSuggest: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -45,6 +48,7 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
           <WorkbenchComponentSelect
             brickList={this.brickList}
             storyList={this.storyList}
+            isShowSuggest={this.isShowSuggest ?? true}
           />
         </BrickWrapper>,
         this
