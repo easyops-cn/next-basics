@@ -1,4 +1,8 @@
 import type { Storyboard } from "@next-core/brick-types";
+import type {
+  formSchemaProperties,
+  fieldProperties,
+} from "@next-core/brick-kit/dist/types/core/CustomForms/ExpandCustomForm.d.ts";
 
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
@@ -66,6 +70,11 @@ export interface HighlightBaseInfo {
   alias: string;
 }
 
+export interface ExcuteProxyMethodResult {
+  method: string;
+  res: any;
+}
+
 export type PreviewMessageFromPreviewer =
   | PreviewMessagePreviewerHoverOnMain
   | PreviewMessagePreviewerHoverOnBrick
@@ -89,7 +98,8 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerToggleInspecting
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload
-  | PreviewMessageContainerCapture;
+  | PreviewMessageContainerCapture
+  | PreviewMessageContainerProxyMethod;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
@@ -122,7 +132,9 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerRouteMatchChange
   | PreviewMessagePreviewerScroll
   | PreviewMessagePreviewerCaptureOk
-  | PreviewMessagePreviewerCaptureFailed;
+  | PreviewMessagePreviewerCaptureFailed
+  | PreviewMessageContainerProxyMethodSuccess
+  | PreviewMessageContainerProxyMethodError;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnMain
@@ -267,6 +279,26 @@ export interface PreviewMessageContainerBuilderHoverOnIframe
   position: Position;
 }
 
+export interface PreviewMessageContainerProxyMethod extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "excute-proxy-method";
+  proxyMethodArgs: [ref: any, method: string, args?: any[]];
+}
+
+export interface PreviewMessageContainerProxyMethodSuccess
+  extends PreviewBaseMessage {
+  sender: "preview";
+  type: "excute-proxy-method-success";
+  result: ExcuteProxyMethodResult;
+}
+
+export interface PreviewMessageContainerProxyMethodError
+  extends PreviewBaseMessage {
+  sender: "preview";
+  type: "excute-proxy-method-error";
+  result: ExcuteProxyMethodResult;
+}
+
 export interface PreviewMessageContainerBuilderHoverOnMain
   extends Omit<PreviewMessageBuilderHoverOnMain, "sender"> {
   sender: "preview-container";
@@ -335,27 +367,6 @@ export interface PreviewStartOptions {
 
 export interface PreviewSettings {
   properties?: Record<string, unknown>;
-}
-
-export interface fieldProperties {
-  defaultValue?: string;
-  description?: string;
-  id: string;
-  limit?: string[];
-  name: string;
-  type: string;
-  [key: string]: any;
-}
-
-export interface formSchemaProperties {
-  id?: string;
-  brick?: string;
-  sort?: number;
-  mountPoint?: string;
-  events?: BrickEventsMap;
-  properties?: Record<string, unknown>;
-  if?: string | boolean | ResolveConf;
-  [key: string]: any;
 }
 
 export interface FormData {

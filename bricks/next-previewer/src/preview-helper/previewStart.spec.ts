@@ -365,5 +365,41 @@ describe("previewStart", () => {
       },
       "http://localhost:8081"
     );
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "excute-proxy-method",
+        proxyMethodArgs: ["div", "getAttributeNames"],
+      },
+    } as any);
+    expect(parentPostMessage).toBeCalledTimes(12);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(12, {
+      data: {
+        method: "getAttributeNames",
+        res: ["data-iid"],
+      },
+      sender: "previewer",
+      type: "excute-proxy-method-success",
+    });
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "excute-proxy-method",
+        proxyMethodArgs: ["div", "test"],
+      },
+    } as any);
+    expect(parentPostMessage).toBeCalledTimes(13);
+    expect(parentPostMessage).toHaveBeenNthCalledWith(13, {
+      data: {
+        method: "test",
+        res: "document.body.querySelector(...)[method] is not a function",
+      },
+      sender: "previewer",
+      type: "excute-proxy-method-error",
+    });
   });
 });

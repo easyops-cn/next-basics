@@ -9,7 +9,7 @@ import {
   method,
 } from "@next-core/brick-kit";
 import type { BuilderSnippetNode, Storyboard } from "@next-core/brick-types";
-import { PreviewSettings } from "@next-types/preview";
+import { ExcuteProxyMethodResult, PreviewSettings } from "@next-types/preview";
 import {
   BuilderProvider,
   EventDetailOfNodeAddStored,
@@ -79,6 +79,24 @@ export class PreviewContainerElement extends UpdatingElement {
 
   private _handlePreviewStart = (): void => {
     this._previewStartEvent.emit();
+  };
+
+  @event({ type: "excute.proxy.method.success" })
+  private _excuteProxyMethodSuccess: EventEmitter<ExcuteProxyMethodResult>;
+
+  private _handleExcuteProxyMethodSuccess = (
+    result: ExcuteProxyMethodResult
+  ): void => {
+    this._excuteProxyMethodSuccess.emit(result);
+  };
+
+  @event({ type: "excute.proxy.method.error" })
+  private _excuteProxyMethodError: EventEmitter<ExcuteProxyMethodResult>;
+
+  private _handleExcuteProxyMethodError = (
+    result: ExcuteProxyMethodResult
+  ): void => {
+    this._excuteProxyMethodError.emit(result);
   };
 
   @event({ type: "url.change" })
@@ -162,6 +180,11 @@ export class PreviewContainerElement extends UpdatingElement {
     this._previewContainerRef.current.manager.nodeAddStored(detail);
   }
 
+  @method()
+  excuteProxyMethod(ref: string, method: string, args?: any[]): void {
+    this._previewContainerRef.current.excuteProxyMethod(ref, method, args);
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -205,6 +228,8 @@ export class PreviewContainerElement extends UpdatingElement {
               onScreenshotCapture={this._handleScreenshotCapture}
               onPreviewerDrop={this._handlePreviewerDrop}
               onPreviewerResize={this._handlePreivewResize}
+              onExcuteProxyMethodSuccess={this._handleExcuteProxyMethodSuccess}
+              onExcuteProxyMethodError={this._handleExcuteProxyMethodError}
             />
           </BuilderProvider>
         </BrickWrapper>,

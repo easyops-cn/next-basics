@@ -218,6 +218,23 @@ export function previewStart(
             );
             break;
         }
+      if (data.type === "excute-proxy-method") {
+        const [ref, method, args = []] = data.proxyMethodArgs;
+        try {
+          const result = document.body.querySelector(ref)[method](...args);
+          window.parent.postMessage({
+            sender: "previewer",
+            type: "excute-proxy-method-success",
+            data: { method: method, res: result },
+          });
+        } catch (err) {
+          window.parent.postMessage({
+            sender: "previewer",
+            type: "excute-proxy-method-error",
+            data: { method: method, res: err.message },
+          });
+        }
+      }
     }
   );
 

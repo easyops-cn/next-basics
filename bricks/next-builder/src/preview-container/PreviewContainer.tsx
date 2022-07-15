@@ -17,6 +17,8 @@ import type {
 } from "@next-core/brick-types";
 import type {
   BrickOutline,
+  ExcuteProxyMethodResult,
+  PreviewMessageContainerProxyMethod,
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
   PreviewMessageFromContainer,
@@ -58,12 +60,15 @@ export interface PreviewContainerProps {
   onScreenshotCapture?(screenshot: Blob): void;
   onPreviewerDrop?(params: Record<string, any>): void;
   onPreviewerResize?(resize: PreviewerResize): void;
+  onExcuteProxyMethodSuccess?(result: ExcuteProxyMethodResult): void;
+  onExcuteProxyMethodError?(result: ExcuteProxyMethodResult): void;
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
 export type Direction = "top" | "right" | "bottom" | "left" | "inside";
 
 export interface PreviewContainerRef {
+  excuteProxyMethod(ref: string, method: string, args?: any[]): void;
   refresh(
     appId: string,
     storyboardPatch: Partial<Storyboard>,
@@ -120,6 +125,8 @@ export function LegacyPreviewContainer(
     onScreenshotCapture,
     onPreviewerDrop,
     onPreviewerResize,
+    onExcuteProxyMethodSuccess,
+    onExcuteProxyMethodError,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -461,12 +468,23 @@ export function LegacyPreviewContainer(
     });
   };
 
+  const excuteProxyMethod = useCallback((ref, method, args) => {
+    iframeRef.current.contentWindow.postMessage(
+      {
+        sender: "preview-container",
+        type: "excute-proxy-method",
+        proxyMethodArgs: [ref, method, args],
+      } as PreviewMessageContainerProxyMethod,
+      previewOrigin
+    );
+  }, []);
   useImperativeHandle(ref, () => ({
     refresh,
     reload,
     capture,
     resize,
     manager,
+    excuteProxyMethod,
   }));
 
   useEffect(() => {
@@ -579,6 +597,12 @@ export function LegacyPreviewContainer(
           case "capture-failed":
             setCaptureStatus("failed");
             break;
+          case "excute-proxy-method-success":
+            onExcuteProxyMethodSuccess(data.data);
+            break;
+          case "excute-proxy-method-error":
+            onExcuteProxyMethodError(data.data);
+            break;
         }
       }
     };
@@ -596,6 +620,8 @@ export function LegacyPreviewContainer(
     scaleX,
     inspecting,
     onScreenshotCapture,
+    onExcuteProxyMethodSuccess,
+    onExcuteProxyMethodError,
   ]);
 
   useEffect(() => {
