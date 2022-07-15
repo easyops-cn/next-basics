@@ -62,6 +62,7 @@ export interface PreviewContainerProps {
   onPreviewerResize?(resize: PreviewerResize): void;
   onExcuteProxyMethodSuccess?(result: ExcuteProxyMethodResult): void;
   onExcuteProxyMethodError?(result: ExcuteProxyMethodResult): void;
+  onPreviewDebug?(result: any[]): void;
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
@@ -127,6 +128,7 @@ export function LegacyPreviewContainer(
     onPreviewerResize,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
+    onPreviewDebug,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -602,6 +604,9 @@ export function LegacyPreviewContainer(
             break;
           case "excute-proxy-method-error":
             onExcuteProxyMethodError(data.data);
+            break;
+          case "preview.debug":
+            onPreviewDebug(data.res);
             break;
         }
       }

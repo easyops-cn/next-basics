@@ -99,6 +99,13 @@ export class PreviewContainerElement extends UpdatingElement {
     this._excuteProxyMethodError.emit(result);
   };
 
+  @event({ type: "preview.debug" })
+  private _onPreviewDebug: EventEmitter<any[]>;
+
+  private _handlePreviwDebug = (result: any[]): void => {
+    this._onPreviewDebug.emit(result);
+  };
+
   @event({ type: "url.change" })
   private _urlChangeEvent: EventEmitter<string>;
 
@@ -230,6 +237,7 @@ export class PreviewContainerElement extends UpdatingElement {
               onPreviewerResize={this._handlePreivewResize}
               onExcuteProxyMethodSuccess={this._handleExcuteProxyMethodSuccess}
               onExcuteProxyMethodError={this._handleExcuteProxyMethodError}
+              onPreviewDebug={this._handlePreviwDebug}
             />
           </BuilderProvider>
         </BrickWrapper>,
