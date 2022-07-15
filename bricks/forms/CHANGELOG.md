@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.228.6...@next-bricks/forms@1.228.7) (2022-07-15)
+
+
+### Bug Fixes
+
+* **GeneralForm:** max-width eval error ([7ca64e4](https://github.com/easyops-cn/next-basics/commit/7ca64e4529076910fa5c19306a35f98a178bf4e3))
+
+
+
+
+
 ## [1.228.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.228.5...@next-bricks/forms@1.228.6) (2022-07-15)
 
 **Note:** Version bump only for package @next-bricks/forms
