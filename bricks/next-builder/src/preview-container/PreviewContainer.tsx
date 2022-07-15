@@ -68,7 +68,7 @@ export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
 export type Direction = "top" | "right" | "bottom" | "left" | "inside";
 
 export interface PreviewContainerRef {
-  excuteProxyMethod(ref: string, method: string): void;
+  excuteProxyMethod(ref: string, method: string, args?: any[]): void;
   refresh(
     appId: string,
     storyboardPatch: Partial<Storyboard>,
@@ -468,12 +468,12 @@ export function LegacyPreviewContainer(
     });
   };
 
-  const excuteProxyMethod = useCallback((ref, method) => {
+  const excuteProxyMethod = useCallback((ref, method, args) => {
     iframeRef.current.contentWindow.postMessage(
       {
         sender: "preview-container",
         type: "excute-proxy-method",
-        proxyMethodArgs: [ref, method],
+        proxyMethodArgs: [ref, method, args],
       } as PreviewMessageContainerProxyMethod,
       previewOrigin
     );

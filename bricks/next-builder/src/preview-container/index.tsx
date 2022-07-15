@@ -181,8 +181,8 @@ export class PreviewContainerElement extends UpdatingElement {
   }
 
   @method()
-  excuteProxyMethod(ref: string, method: string): void {
-    this._previewContainerRef.current.excuteProxyMethod(ref, method);
+  excuteProxyMethod(ref: string, method: string, args?: any[]): void {
+    this._previewContainerRef.current.excuteProxyMethod(ref, method, args);
   }
 
   connectedCallback(): void {

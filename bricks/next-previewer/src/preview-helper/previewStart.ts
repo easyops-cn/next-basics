@@ -219,17 +219,9 @@ export function previewStart(
             break;
         }
       if (data.type === "excute-proxy-method") {
-        const [ref, method] = data.proxyMethodArgs;
-        const regx = /^[a-zA-Z-]+[.][a-zA-Z-]+$/;
-        let result: any = null;
-        const root = document.body;
+        const [ref, method, args = []] = data.proxyMethodArgs;
         try {
-          if (regx.test(ref)) {
-            result = root.getElementsByTagName(ref)[0][method]();
-          } else {
-            result = root.querySelector(ref)[method]();
-          }
-
+          const result = document.body.querySelector(ref)[method](...args);
           window.parent.postMessage({
             sender: "previewer",
             type: "excute-proxy-method-success",
@@ -239,7 +231,7 @@ export function previewStart(
           window.parent.postMessage({
             sender: "previewer",
             type: "excute-proxy-method-error",
-            data: { method: method, res: err },
+            data: { method: method, res: err.message },
           });
         }
       }
