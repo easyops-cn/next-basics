@@ -134,7 +134,8 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerCaptureOk
   | PreviewMessagePreviewerCaptureFailed
   | PreviewMessageContainerProxyMethodSuccess
-  | PreviewMessageContainerProxyMethodError;
+  | PreviewMessageContainerProxyMethodError
+  | PreviewMessageContainerDebug;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnMain
@@ -297,6 +298,12 @@ export interface PreviewMessageContainerProxyMethodError
   sender: "preview";
   type: "excute-proxy-method-error";
   result: ExcuteProxyMethodResult;
+}
+
+export interface PreviewMessageContainerDebug extends PreviewBaseMessage {
+  sender: "preview";
+  type: "debug";
+  res: any[];
 }
 
 export interface PreviewMessageContainerBuilderHoverOnMain
