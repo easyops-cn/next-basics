@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.166.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.165.1...@next-bricks/next-builder@1.166.0) (2022-07-15)
+
+
+### Features
+
+* **componentSelect:** add field isShowSuggest ([3147e60](https://github.com/easyops-cn/next-basics/commit/3147e602b1cd23762028ecad54cc7385ff74ddaa))
+
+
+
+
+
 ## [1.165.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.165.0...@next-bricks/next-builder@1.165.1) (2022-07-13)
 
 **Note:** Version bump only for package @next-bricks/next-builder
