@@ -24,7 +24,7 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import { ReactComponent as Logo } from "../images/logo-3.1.svg";
 import { NS_GENERAL_AUTH, K } from "../i18n/constants";
 import { GetProps } from "@ant-design/compatible/lib/form/interface";
-import { encryptValue, resetLegacyIframe } from "../shared";
+import { encryptValue, resetLegacyIframe, getCookieByName } from "../shared";
 import styles from "./GeneralLogin.module.css";
 import loginPng from "../images/login.png";
 import { Link } from "@next-libs/basic-components";
@@ -203,10 +203,21 @@ export class LegacyGeneralLogin extends React.Component<
       accessRule: result.accessRule,
       isAdmin: result.isAdmin,
     });
+    const pathFromCookie = atob(
+      decodeURIComponent(getCookieByName("SALOGINPATH"))
+    );
+    const queryFromCookie = atob(
+      decodeURIComponent(getCookieByName("SALOGINQUERY"))
+    );
     const { state } = getHistory().location;
     const from =
       state && state.from
         ? state.from
+        : pathFromCookie
+        ? {
+            pathname: pathFromCookie,
+            search: queryFromCookie,
+          }
         : {
             pathname: "/",
           };
