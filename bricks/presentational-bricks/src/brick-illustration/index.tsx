@@ -77,6 +77,14 @@ export class BrickIllustrationElement extends UpdatingElement {
   @property({ attribute: false })
   imageStyle: CSSProperties;
 
+  /**
+   * @default true
+   * @required false
+   * @description 在插画库的default分类下，使用新版本的图标替换default分类下图标
+   */
+  @property({ attribute: false })
+  useNewIllustration = true;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -102,6 +110,7 @@ export class BrickIllustrationElement extends UpdatingElement {
             imageStyle={this.imageStyle}
             header={this.header}
             footer={this.footer}
+            useNewIllustration={this.useNewIllustration}
           />
         </BrickWrapper>,
         this

@@ -3,7 +3,10 @@ import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { Result } from "antd";
 import { ResultStatusType } from "antd/lib/result";
 import { EmptyResult, EmptyResultStatus } from "@next-libs/basic-components";
-import { getIllustration } from "@next-core/illustrations";
+import {
+  getIllustration,
+  translateIllustrationConfig,
+} from "@next-core/illustrations";
 import { useCurrentTheme } from "@next-core/brick-kit";
 import {
   BrickResultStatus,
@@ -22,18 +25,25 @@ interface BrickResultProps {
   subTitle?: string;
   icon?: string;
   illustrationsConfig?: IllustrationsConfig;
+  useNewIllustration?: boolean;
 }
 
 export function BrickResult(props: BrickResultProps): React.ReactElement {
   const {
     illustrationsConfig: { name, category, imageStyle },
+    useNewIllustration,
   } = props;
   const icon = props.icon ? <LegacyIcon type={props.icon} /> : "";
   const emptyResultStatus = Object.values(EmptyResultStatus);
   const theme = useCurrentTheme();
+  const illustrationConfig = translateIllustrationConfig(useNewIllustration, {
+    name,
+    category,
+    theme,
+  });
   const image = React.useMemo(() => {
-    return getIllustration({ name, category, theme });
-  }, [name, category, theme]);
+    return getIllustration(illustrationConfig);
+  }, [illustrationConfig]);
 
   return emptyResultStatus.includes(props.status as EmptyResultStatus) ? (
     <Result

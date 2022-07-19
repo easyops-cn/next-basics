@@ -1,5 +1,9 @@
 import React, { CSSProperties, useMemo } from "react";
-import { getIllustration, IllustrationProps } from "@next-core/illustrations";
+import {
+  getIllustration,
+  IllustrationProps,
+  translateIllustrationConfig,
+} from "@next-core/illustrations";
 import styles from "./index.module.css";
 import classNames from "classnames";
 import { Link } from "@next-libs/basic-components";
@@ -11,6 +15,7 @@ interface BrickIllustrationProps extends IllustrationProps {
   imageStyle?: CSSProperties;
   header?: IllustrationHeader;
   footer?: IllustrationFooter;
+  useNewIllustration?: boolean;
 }
 export function BrickIllustration({
   name,
@@ -19,11 +24,17 @@ export function BrickIllustration({
   header,
   footer,
   imageStyle,
+  useNewIllustration,
 }: BrickIllustrationProps): React.ReactElement {
   const theme = useCurrentTheme();
+  const illustrationsConfig = translateIllustrationConfig(useNewIllustration, {
+    name,
+    category,
+    theme,
+  });
   const image = useMemo(() => {
-    return getIllustration({ name, category, theme });
-  }, [name, category, theme]);
+    return getIllustration(illustrationsConfig);
+  }, [illustrationsConfig]);
 
   const renderHeader = useMemo(() => {
     return (

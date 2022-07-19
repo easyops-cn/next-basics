@@ -70,6 +70,14 @@ export class BrickResultElement extends UpdatingElement {
   @property({ attribute: false })
   illustrationsConfig: IllustrationsConfig = {};
 
+  /**
+   * @default true
+   * @required false
+   * @description 在插画库的default分类下，使用新版本的图标替换default分类下图标
+   */
+  @property({ attribute: false })
+  useNewIllustration = true;
+
   constructor() {
     super();
 
@@ -104,6 +112,7 @@ export class BrickResultElement extends UpdatingElement {
             subTitle={this.subTitle}
             icon={this.icon}
             illustrationsConfig={this.illustrationsConfig}
+            useNewIllustration={this.useNewIllustration}
           />
         </BrickWrapper>,
         this._mountPoint
