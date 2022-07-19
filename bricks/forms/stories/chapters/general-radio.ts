@@ -85,6 +85,10 @@ export const GeneralRadioStory: Story = {
               icon: "bar-chart",
               lib: "antd",
               theme: "outlined",
+              iconStyle: {
+                color: "blue",
+                fontSize: "18px",
+              },
             },
           },
           {
