@@ -46,7 +46,7 @@
     "@next-core/easyops-analytics": "^0.7.9",
     "@next-core/editor-bricks-helper": "^0.42.16",
     "@next-core/fontawesome-library": "^1.1.29",
-    "@next-core/illustrations": "^0.8.6",
+    "@next-core/illustrations": "^0.9.1",
     "@next-core/pipes": "^1.0.5",
     "@size-limit/file": "^7.0.8",
     "@testing-library/react-hooks": "^7.0.2",
