@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.229.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.228.7...@next-bricks/forms@1.229.0) (2022-07-19)
+
+
+### Features
+
+* 支持radio自定义icon样式 ([892fa33](https://github.com/easyops-cn/next-basics/commit/892fa33530724684e967320810847a7439d2e084))
+
+
+
+
+
 ## [1.228.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.228.6...@next-bricks/forms@1.228.7) (2022-07-15)
 
 
