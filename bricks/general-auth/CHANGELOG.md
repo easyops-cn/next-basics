@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.16.2...@next-bricks/general-auth@1.17.0) (2022-07-19)
+
+
+### Features
+
+* **general-auth:** get redirect info from cookie ([d58302a](https://github.com/easyops-cn/next-basics/commit/d58302a400165c43bf7ff3aac396145987e7fe1e))
+
+
+
+
+
 ## [1.16.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.16.1...@next-bricks/general-auth@1.16.2) (2022-06-29)
 
 **Note:** Version bump only for package @next-bricks/general-auth
