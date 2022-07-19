@@ -96,8 +96,8 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                   <GeneralIcon
                     style={{
                       fontSize: "32px",
+                      ...item.icon.iconStyle,
                     }}
-                    size={32}
                     icon={item.icon}
                   />
                 )}
@@ -124,7 +124,10 @@ function IconRadioGroup(props: IconRadioGroupProps): React.ReactElement {
                       [styles.squareIcon]: type === "icon-square",
                     })}
                   >
-                    <GeneralIcon icon={item.icon} size={46} />
+                    <GeneralIcon
+                      icon={item.icon}
+                      style={{ fontSize: "46px", ...item.icon.iconStyle }}
+                    />
                   </div>
                 )}
                 <span title={item.label}>{item.label}</span>
@@ -172,8 +175,8 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
                 fontSize: "22px",
                 marginRight: "8px",
                 verticalAlign: "-0.25em",
+                ...icon.iconStyle,
               }}
-              size={22}
             />
           );
         }
@@ -191,7 +194,15 @@ export function GeneralRadio(props: GeneralRadioProps): React.ReactElement {
           };
           buttonIcon = <GeneralIcon icon={mergedIcon} size={14} />;
         } else {
-          buttonIcon = <GeneralIcon icon={icon} size={14} />;
+          buttonIcon = (
+            <GeneralIcon
+              icon={icon}
+              style={{
+                fontSize: "14px",
+                ...icon.iconStyle,
+              }}
+            />
+          );
         }
       }
 
