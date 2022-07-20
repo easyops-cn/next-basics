@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.185.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.184.0...@next-bricks/basic-bricks@1.185.0) (2022-07-20)
+
+
+### Features
+
+* changeAppBar ([46143c5](https://github.com/easyops-cn/next-basics/commit/46143c5bf45fe00fd0d6cef8f733b805f7fb9598))
+
+
+
+
+
 # [1.184.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.183.3...@next-bricks/basic-bricks@1.184.0) (2022-07-15)
 
 
