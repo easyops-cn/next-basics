@@ -16,9 +16,9 @@
 }
 
 .brickDocContainer {
-  color: #262626;
+  color: var(--text-color-title);
   a {
-    color: #4183c4;
+    color: var(--text-color-link);
   }
   :nth-child(1) {
     margin-top: 0;
@@ -34,7 +34,7 @@
     padding: 0;
     -webkit-font-smoothing: antialiased;
     font-size: 16px;
-    color: #262626;
+    color: var(--text-color-title);
     font-weight: normal;
     cursor: text;
     position: relative;
@@ -268,4 +268,60 @@
   text-decoration: line-through;
   text-decoration-style: solid;
   text-decoration-color: rgba(0, 0, 0, 0.65);
+}
+
+html[data-theme="dark-v2"] {
+  .brickDocCard {
+    background: var(--color-fill-bg-container-2);
+  }
+  .brickDocContainer {
+    a {
+      color: var(--color-brand);
+      &:hover,
+      &:focus {
+        color: var(--color-brand-hover);
+      }
+      &:active {
+        color: var(--color-brand-active);
+      }
+    }
+
+    hr {
+      border-bottom: 1px solid var(--color-border-divider-line);
+    }
+
+    blockquote {
+      border-left: 4px solid var(--palette-rgba-gray-5);
+      color: var(--color-normal-text);
+    }
+
+    pre,
+    code,
+    tt {
+      border: 1px solid var(--color-border-divider-line);
+      background-color: var(--color-fill-bg-base-1);
+    }
+
+    pre code {
+      border: none;
+      background: transparent;
+    }
+
+    table tr {
+      border-top: 1px solid var(--color-border-divider-line);
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    table tr:nth-child(2n) {
+      background-color: var(--color-fill-bg-base-1);
+    }
+
+    table tr th {
+      border: 1px solid var(--color-border-divider-line);
+    }
+
+    table tr td {
+      border: 1px solid var(--color-border-divider-line);
+    }
+  }
 }

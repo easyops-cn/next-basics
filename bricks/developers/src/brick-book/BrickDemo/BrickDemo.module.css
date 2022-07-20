@@ -13,7 +13,7 @@
 .demoContainerIcon {
   display: flex;
   align-items: center;
-  color: #3a3a3a;
+  color: var(--color-normal-text);
   font-weight: 500;
   font-size: 14px;
 }
@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #595959;
+  color: var(--text-color-default);
   font-size: 16px;
 }
 
@@ -53,5 +53,16 @@
   > :global(.ant-collapse-header) {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
+  }
+}
+
+html[data-theme="dark-v2"] {
+  .demoContainer {
+    background: var(--color-fill-bg-base-4);
+  }
+
+  .demoContainerEdit,
+  .demoContainerMemo {
+    background-color: var(--color-fill-bg-container-4);
   }
 }

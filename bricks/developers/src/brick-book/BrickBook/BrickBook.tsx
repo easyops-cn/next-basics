@@ -87,7 +87,7 @@ export function BrickBook({
           )}
           <span className={cssStyle.subTitle}> {story.author}</span>
         </h1>
-        <p style={{ marginBottom: "20px", color: "#595959" }}>
+        <p style={{ marginBottom: "20px", color: "var(--text-color-default)" }}>
           {" "}
           {description}{" "}
         </p>
