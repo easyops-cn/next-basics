@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.357.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.7...@next-bricks/developers@1.357.8) (2022-07-20)
+
+
+### Bug Fixes
+
+* brick-demo dark mode ([181a9dd](https://github.com/easyops-cn/next-basics/commit/181a9dd7ceaf2ccc70d0989b808b222e2ec7785c))
+
+
+
+
+
 ## [1.357.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.6...@next-bricks/developers@1.357.7) (2022-07-15)
 
 **Note:** Version bump only for package @next-bricks/developers
