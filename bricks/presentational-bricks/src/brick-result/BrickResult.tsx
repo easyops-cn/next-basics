@@ -6,8 +6,9 @@ import { EmptyResult, EmptyResultStatus } from "@next-libs/basic-components";
 import {
   getIllustration,
   translateIllustrationConfig,
+  IllustrationProps,
 } from "@next-core/illustrations";
-import { useCurrentTheme } from "@next-core/brick-kit";
+import { useCurrentTheme, useFeatureFlags } from "@next-core/brick-kit";
 import {
   BrickResultStatus,
   IllustrationsStatus,
@@ -36,14 +37,17 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
   const icon = props.icon ? <LegacyIcon type={props.icon} /> : "";
   const emptyResultStatus = Object.values(EmptyResultStatus);
   const theme = useCurrentTheme();
-  const illustrationConfig = translateIllustrationConfig(useNewIllustration, {
-    name,
-    category,
-    theme,
-  });
+  const [isFeatureFlag] = useFeatureFlags("support-new-illustrations");
   const image = React.useMemo(() => {
+    let illustrationConfig: IllustrationProps = { name, category, theme };
+    if (isFeatureFlag) {
+      illustrationConfig = translateIllustrationConfig(
+        useNewIllustration,
+        illustrationConfig
+      );
+    }
     return getIllustration(illustrationConfig);
-  }, [illustrationConfig]);
+  }, [name, category, theme, useNewIllustration, isFeatureFlag]);
 
   return emptyResultStatus.includes(props.status as EmptyResultStatus) ? (
     <Result

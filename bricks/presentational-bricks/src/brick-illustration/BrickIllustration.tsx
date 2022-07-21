@@ -8,7 +8,7 @@ import styles from "./index.module.css";
 import classNames from "classnames";
 import { Link } from "@next-libs/basic-components";
 import { IllustrationFooter, IllustrationHeader } from "./index";
-import { useCurrentTheme } from "@next-core/brick-kit";
+import { useCurrentTheme, useFeatureFlags } from "@next-core/brick-kit";
 
 interface BrickIllustrationProps extends IllustrationProps {
   mode: "feedback" | "guide";
@@ -27,14 +27,18 @@ export function BrickIllustration({
   useNewIllustration,
 }: BrickIllustrationProps): React.ReactElement {
   const theme = useCurrentTheme();
-  const illustrationsConfig = translateIllustrationConfig(useNewIllustration, {
-    name,
-    category,
-    theme,
-  });
+  const [isFeatureFlag] = useFeatureFlags("support-new-illustrations");
+
   const image = useMemo(() => {
-    return getIllustration(illustrationsConfig);
-  }, [illustrationsConfig]);
+    let illustrationConfig: IllustrationProps = { name, category, theme };
+    if (isFeatureFlag) {
+      illustrationConfig = translateIllustrationConfig(
+        useNewIllustration,
+        illustrationConfig
+      );
+    }
+    return getIllustration(illustrationConfig);
+  }, [name, category, theme, useNewIllustration, isFeatureFlag]);
 
   const renderHeader = useMemo(() => {
     return (
