@@ -2,6 +2,10 @@ import React from "react";
 import { shallow } from "enzyme";
 import { BrickIllustration } from "./BrickIllustration";
 import { Link } from "@next-libs/basic-components";
+import { useFeatureFlags } from "@next-core/brick-kit";
+jest.mock("@next-core/brick-kit");
+
+(useFeatureFlags as jest.Mock).mockReturnValue([false]);
 
 describe("BrickIllustration", () => {
   it("should work", () => {
@@ -36,5 +40,21 @@ describe("BrickIllustration", () => {
 
     expect(wrapper.find(".header").exists()).toBe(false);
     expect(wrapper.find(".footer").exists()).toBe(false);
+  });
+
+  it("should work with featureFlags is true ", () => {
+    (useFeatureFlags as jest.Mock).mockReturnValue([true]);
+    const wrapper = shallow(
+      <BrickIllustration
+        mode={"feedback"}
+        category={"default"}
+        name={"no-content"}
+        useNewIllustration={true}
+      />
+    );
+
+    expect(wrapper.children().find("img").prop("src")).toContain(
+      "assets/illustrations/easyops2/no-content"
+    );
   });
 });
