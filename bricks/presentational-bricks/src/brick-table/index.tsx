@@ -314,6 +314,14 @@ export class BrickTableElement extends UpdatingElement {
   >;
 
   /**
+   * @detail Record<string,any>[]
+   * @description 勾选框变化，detail 中为所选的行key集合
+   */
+  @event({ type: "select.row.keys.update" }) selectRowKeysUpdate: EventEmitter<
+    string[]
+  >;
+
+  /**
    * @detail {sort:string;order:string|number}
    * @description 排序变化，detail 中的 sort 为对应排序列的 key/dataIndex，order 为升序/降序
    */
@@ -1213,6 +1221,7 @@ export class BrickTableElement extends UpdatingElement {
         new CustomEvent(this._selectUpdateEventName, { detail })
       );
     }
+    this.selectRowKeysUpdate.emit(selectedRowKeys);
   };
 
   // istanbul ignore next
