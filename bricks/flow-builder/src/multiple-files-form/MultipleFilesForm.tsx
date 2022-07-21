@@ -9,6 +9,7 @@ import { isNil } from "lodash";
 export interface FileField {
   name: string;
   type: string;
+  required?: boolean;
 }
 
 export type UploadFormData = Record<string, UploadChangeParam>;
@@ -59,7 +60,12 @@ export function LegacyMultipleFilesForm(
       onFinishFailed={onFinishFailed}
     >
       {fieldList?.map((item) => (
-        <Form.Item key={item.name} name={item.name} label={item.name}>
+        <Form.Item
+          key={item.name}
+          name={item.name}
+          label={item.name}
+          rules={[{ required: item.required }]}
+        >
           <Upload
             maxCount={isMultipleFiles(item.type) ? null : 1}
             beforeUpload={() => false}
