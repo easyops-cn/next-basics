@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.257.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.257.1...@next-bricks/presentational-bricks@1.257.2) (2022-07-21)
+
+
+### Bug Fixes
+
+* 新增event事件: select.row.keys.update ([1bd3da0](https://github.com/easyops-cn/next-basics/commit/1bd3da07602e55667ecc716228f7b9ed08e7ee15))
+
+
+
+
+
 ## [1.257.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.257.0...@next-bricks/presentational-bricks@1.257.1) (2022-07-21)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
