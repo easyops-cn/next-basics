@@ -186,6 +186,37 @@ describe("brick-table", () => {
     );
     document.body.removeChild(element);
   });
+
+  it(`should dispatch "select.row.keys.update" when _handleRowSelectChange has been called"`, async () => {
+    const element = document.createElement(
+      "presentational-bricks.brick-table"
+    ) as BrickTableElement;
+    Object.assign(element, props);
+    element.addEventListener("select.row.keys.update", mockEventListener);
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.configProps.rowSelection.onChange(
+      ["1"],
+      [
+        {
+          key: "1",
+          name: "John Brown",
+          age: 32,
+          address: "New York No. 1 Lake Park",
+          tags: ["nice", "good"],
+        },
+      ]
+    );
+    expect(mockEventListener).toHaveBeenCalled();
+    expect(mockEventListener).toBeCalledWith(
+      expect.objectContaining({
+        detail: ["1"],
+      })
+    );
+    document.body.removeChild(element);
+  });
   it(`front search`, async () => {
     const element = document.createElement(
       "presentational-bricks.brick-table"
