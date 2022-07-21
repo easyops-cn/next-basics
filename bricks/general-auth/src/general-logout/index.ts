@@ -25,7 +25,24 @@ class GeneralLogoutElement extends HTMLElement {
         }
       }
 
-      this.dispatchEvent(new CustomEvent("logout.success"));
+      const logoutFromUrl = sessionStorage.getItem(
+        "easyops-auth-logoutFromUrl"
+      );
+      const logoutFromUrlFull = sessionStorage.getItem(
+        "easyops-auth-logoutFromUrlFull"
+      );
+
+      this.dispatchEvent(
+        new CustomEvent("logout.success", {
+          detail: {
+            logout_from: logoutFromUrl,
+            logout_from_full: logoutFromUrlFull,
+          },
+        })
+      );
+
+      sessionStorage.removeItem("easyops-auth-logoutFromUrl");
+      sessionStorage.removeItem("easyops-auth-logoutFromUrlFull");
     } catch (e) {
       this.textContent = httpErrorToString(e);
     }
