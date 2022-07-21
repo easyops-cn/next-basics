@@ -107,6 +107,15 @@ export function AppSetting(): React.ReactElement {
   }, [appsTheme, currentApp]);
 
   const handleLogout = (): void => {
+    // store the logout url
+    sessionStorage.setItem(
+      "easyops-auth-logoutFromUrlFull",
+      window.location.pathname + window.location.search
+    );
+    sessionStorage.setItem(
+      "easyops-auth-logoutFromUrl",
+      getHistory().location.pathname + getHistory().location.search
+    );
     getHistory().replace("/auth/logout");
   };
 

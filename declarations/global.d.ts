@@ -57,4 +57,10 @@ interface Window {
 
   /** The public root, E.g. "hello-world/-/" */
   PUBLIC_ROOT?: string;
+
+  /** The full location where user log out from, like: /next/my-app/some-page?q=abc */
+  EASYOPS_AUTH_LOGOUT_FROM_FULL?: string;
+
+  /** The location where user log out from, like: /my-app/some-page?q=abc */
+  EASYOPS_AUTH_LOGOUT_FROM?: string;
 }
