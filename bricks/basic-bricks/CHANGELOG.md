@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.185.0...@next-bricks/basic-bricks@1.186.0) (2022-07-21)
+
+
+### Features
+
+* **logout:** 平台登出后重定向回登出前url ([c6474bd](https://github.com/easyops-cn/next-basics/commit/c6474bd4f693e8a852c248ee42667115f0ae2713))
+
+
+
+
+
 # [1.185.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.184.0...@next-bricks/basic-bricks@1.185.0) (2022-07-20)
 
 
