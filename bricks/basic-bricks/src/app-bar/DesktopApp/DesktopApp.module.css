@@ -75,6 +75,7 @@
 
 .appLink:hover {
   color: #fff;
+  opacity: 0.6;
 }
 
 .appIcon {

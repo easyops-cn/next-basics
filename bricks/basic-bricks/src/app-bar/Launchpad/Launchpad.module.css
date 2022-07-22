@@ -1,5 +1,5 @@
 .launchpad {
-  background: linear-gradient(275deg, #282f3b 0%, #12151a 100%);
+  background: rgba(36, 41, 51, 0.93);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -9,7 +9,6 @@
   overflow: hidden;
   overflow-y: auto;
   color: #fff;
-  opacity: 0.95;
   backdrop-filter: blur(15px);
 }
 

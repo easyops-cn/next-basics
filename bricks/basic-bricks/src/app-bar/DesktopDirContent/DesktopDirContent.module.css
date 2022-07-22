@@ -20,7 +20,7 @@
 
 .dirContent {
   display: grid;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(18, 21, 26, 0.4);
   border-radius: 20px;
   width: 100%;
 }
