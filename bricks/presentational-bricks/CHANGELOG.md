@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.257.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.257.2...@next-bricks/presentational-bricks@1.257.3) (2022-07-22)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** fix tableTransfer的一些小bug ([c691c09](https://github.com/easyops-cn/next-basics/commit/c691c09cd3d90092a8cbaee1d4156dce8884ec1a))
+
+
+
+
+
 ## [1.257.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.257.1...@next-bricks/presentational-bricks@1.257.2) (2022-07-21)
 
 
