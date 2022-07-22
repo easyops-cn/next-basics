@@ -146,6 +146,7 @@ export interface CellStatusProps {
  * @author lynette
  * @slots
  * @history
+ * 1.257.2:新增 `select.row.keys.update`  事件
  * 1.230.0:新增属性 `exactSearch` 在开启前端搜索的情况下可以配置精确搜索
  * 1.168.0:新增属性 `optimizedColumns`
  * 1.153.0:`columns` 属性新增 `headerBrick`、废弃 `titleUseBrick`
