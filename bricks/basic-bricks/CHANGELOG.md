@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.186.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.186.0...@next-bricks/basic-bricks@1.186.1) (2022-07-22)
+
+
+### Bug Fixes
+
+* changeBgColor ([7f8e0d3](https://github.com/easyops-cn/next-basics/commit/7f8e0d3a78f2f1869bc3f5bd1fc07973fc35f163))
+
+
+
+
+
 # [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.185.0...@next-bricks/basic-bricks@1.186.0) (2022-07-21)
 
 
