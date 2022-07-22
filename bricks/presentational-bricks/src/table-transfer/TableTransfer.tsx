@@ -136,6 +136,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
     setDataSource(modifiedDataSource);
     setTargetKeys(originTargetKeys);
     setSelectedKeys(originSelectedKeys);
+
     if (dragSortable) {
       const DragHandle = SortableHandle(() => (
         <MenuOutlined style={{ cursor: "grab", color: "#999" }} />
@@ -144,6 +145,8 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
         ...originColumns,
         { title: sortTitle, dataIndex: "sort", render: () => <DragHandle /> },
       ]);
+    } else {
+      setRightColumns(originColumns);
     }
   }, [originDataSource, originTargetKeys, originColumns, originSelectedKeys]);
   const onChange = (nextTargetKeys: string[], direction: "left" | "right") => {
@@ -174,7 +177,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
   ) => {
     const modifiedDataSource = filterDisabledDataSource(
       dataSource,
-      [...sourceSelectedKeys, ...targetKeys],
+      [...(sourceSelectedKeys ?? []), ...(targetKeys ?? [])],
       maxSelected
     );
     setDataSource(modifiedDataSource);
@@ -292,6 +295,7 @@ export function TableTransfer(props: TableTransferProps): React.ReactElement {
                 );
               },
             })}
+            scroll={{ x: listStyle?.width }}
             components={
               dragSortable
                 ? {

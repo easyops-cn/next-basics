@@ -12,6 +12,7 @@ import {
   transferData,
 } from "./TableTransfer";
 import { cloneDeep } from "lodash";
+import { Trans } from "react-i18next";
 describe("TableTransfer", () => {
   const dataSource = [
     {
@@ -83,7 +84,6 @@ describe("TableTransfer", () => {
         dragSortable={true}
       />
     );
-    // expect(wrapper.find(Table)).toHaveLength(2);
     const transfer = wrapper.find(Transfer);
     transfer.invoke("onChange")(
       ["host.disk.total", "host.network.bytes_out"],
@@ -110,6 +110,23 @@ describe("TableTransfer", () => {
       title: "提示",
       content: `所选数量超过最大限制（3），请重新选择`,
       okText: "知道了",
+    });
+  });
+  it("should work", () => {
+    const wrapper = mount(
+      <TableTransfer
+        dataSource={cloneDeep(dataSource)}
+        columns={columns}
+        maxSelected={3}
+        dragSortable={true}
+      />
+    );
+    const table = wrapper.find(Transfer).find(Table);
+    expect(table).toHaveLength(2);
+    expect(table.at(0).prop("scroll")).toEqual({ x: undefined });
+    wrapper.setProps({ listStyle: { width: 300 } });
+    expect(wrapper.find(Transfer).find(Table).at(0).prop("scroll")).toEqual({
+      x: 300,
     });
   });
   it("should work width arrayMoveImmutable", () => {
