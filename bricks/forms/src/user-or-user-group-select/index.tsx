@@ -202,6 +202,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
           <UserOrUserGroupSelect
             formElement={this.getFormElement()}
             name={this.name}
+            objectList={this.objectList}
             label={this.label}
             labelTooltip={this.labelTooltip}
             message={this.message}
