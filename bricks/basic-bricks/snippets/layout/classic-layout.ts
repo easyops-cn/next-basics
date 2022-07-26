@@ -615,8 +615,8 @@ const snippets: SnippetDefinition[] = [
     layerType: "layout",
     category: "classic",
     text: {
-      zh: "标题栏-工具栏-内容 网格布局",
-      en: "Titlebar-toolbar-content grid layout",
+      zh: "标题栏-工具栏-内容 网格布局(等同于 micro-view)",
+      en: "Titlebar-toolbar-content grid layout(similar to  micro-view)",
     },
     thumbnail: classicTitlebarToolbarContentSvg,
     bricks: [
@@ -628,9 +628,9 @@ const snippets: SnippetDefinition[] = [
             ["content", "content"],
           ],
           containerStyle: {
-            padding: "16px",
+            padding: "var(--page-title-margin-bottom)",
             minHeight: "calc(100vh - var(--app-bar-height))",
-            gap: "16px",
+            gap: "var(--page-padding)",
           },
           gridTemplateRows: ["auto", "1fr"],
           gridTemplateColumns: ["1fr", "1fr"],

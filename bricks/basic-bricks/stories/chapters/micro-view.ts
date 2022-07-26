@@ -10,10 +10,8 @@ export const microViewStory: Story = {
     zh: "通用页面视图容器",
   },
   description: {
-    en:
-      "Support slots: `titleBar`, `toolbar`, `content`, `subMenu`, `banner`, `bannerTitleBar`, `bannerToolbar`",
-    zh:
-      "提供了 titleBar、toolbar、content、subMenu、banner、bannerTitleBar、bannerToolbar 插槽",
+    en: "Support slots: `titleBar`, `toolbar`, `content`, `subMenu`, `banner`, `bannerTitleBar`, `bannerToolbar` (Also be used directly through the snippet of easy-view)",
+    zh: "提供了 titleBar、toolbar、content、subMenu、banner、bannerTitleBar、bannerToolbar 插槽(也可通过 easy-view 的 snippet 直接使用)",
   },
   icon: {
     lib: "fa",

@@ -341,7 +341,7 @@ export function BrickDocument({
   };
 
   const renderTypeHref = (str: string): string => {
-    if (!renderLink) return str;
+    if (!renderLink || !str) return str;
     str = str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const history = getHistory();
     const href = `${history.createHref({
