@@ -30,6 +30,7 @@ import "./custom-processors/covertUseResolvesToFormValue";
 import "./custom-processors/covertFormValueToUseResolves";
 // !Lazy: import "./function-debugger-sidebar";
 // !Lazy: import "./function-debugger-toolbar";
+// !Lazy: import "./function-debugger-toolbar-v2";
 // !Lazy: import "./function-debugger-store";
 // !Lazy: import "./function-debugger-statusbar";
 import "./data-providers/RunStoryboardFunctionTests";
