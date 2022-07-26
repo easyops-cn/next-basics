@@ -13,6 +13,7 @@ export interface GeneralInputNumberRangeProps extends FormItemWrapperProps {
   precision?: number;
   readOnly?: boolean;
   disabled?: boolean;
+  placeholder?: string;
   inputBoxStyle?: React.CSSProperties;
   onChange?: (value: { min?: string | number; max?: string | number }) => void;
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
@@ -28,29 +29,30 @@ export function GeneralInputNumberRange(
     readOnly,
     disabled,
     precision,
-    value,
-    name,
-    inputBoxStyle,
-    onBlur,
-    onChange,
+    placeholder,
+    ...restProps
   } = props;
 
+  const value =
+    props.name && props.formElement
+      ? props.formElement.formUtils.getFieldValue(props.name)
+      : props.value;
   const _handleChange = (v: any) => {
-    onChange(v);
+    props.onChange(v);
   };
 
   useEffect(() => {
     // istanbul ignore next
-    props.formElement?.formUtils.setFieldsValue({ [name]: value });
-  }, [value]);
+    props.formElement?.formUtils.setFieldsValue({ [props.name]: props.value });
+  }, [props.value]);
 
   return (
-    <FormItemWrapper {...props}>
+    <FormItemWrapper {...restProps}>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          ...inputBoxStyle,
+          ...props.inputBoxStyle,
         }}
       >
         <InputNumber
@@ -59,12 +61,13 @@ export function GeneralInputNumberRange(
           min={min}
           max={value?.max && value.max > max ? value.max : (max as any)}
           step={step}
+          placeholder={placeholder?.split(";")[0]}
           precision={precision}
           readOnly={readOnly}
           disabled={disabled}
           onChange={(v) => _handleChange({ ...value, min: v })}
           style={{ width: "calc(50% - 24px)" }}
-          onBlur={onBlur}
+          onBlur={props.onBlur}
         />
         ~
         <InputNumber
@@ -73,12 +76,13 @@ export function GeneralInputNumberRange(
           min={value?.min && value.min > min ? value.min : (min as any)}
           max={max}
           step={step}
+          placeholder={placeholder?.split(";")[1]}
           precision={precision}
           readOnly={readOnly}
           disabled={disabled}
           onChange={(v) => _handleChange({ ...value, max: v })}
           style={{ width: "calc(50% - 24px)" }}
-          onBlur={onBlur}
+          onBlur={props.onBlur}
         />
       </div>
     </FormItemWrapper>

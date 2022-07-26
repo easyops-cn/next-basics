@@ -28,6 +28,12 @@ export class GeneralInputNumberRangeElement extends FormItemElement {
 
   /**
    * @required false
+   * @description 数字输入框占位说明，以分号间隔
+   * @group basicFormItem
+   */
+  @property({ attribute: false }) declare placeholder: string;
+  /**
+   * @required false
    * @description 数字区间输入框字段说明
    * @group basicFormItem
    */
@@ -162,6 +168,7 @@ export class GeneralInputNumberRangeElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            placeholder={this.placeholder}
             required={this.required}
             readOnly={this.readOnly}
             disabled={this.disabled}
