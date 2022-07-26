@@ -13,6 +13,7 @@ export const suggest: suggestType = {
   customTemplate: [],
   widget: [],
   snippet: [],
+  formItem: [],
 };
 
 export const i18nTransform: Record<string, string> = {
@@ -21,6 +22,7 @@ export const i18nTransform: Record<string, string> = {
   customTemplate: i18next.t(`${NS_NEXT_BUILDER}:${K.CUSTOMTEMPLATE}`),
   widget: i18next.t(`${NS_NEXT_BUILDER}:${K.WIDGET}`),
   snippet: i18next.t(`${NS_NEXT_BUILDER}:${K.SNIPPET}`),
+  formItem: i18next.t(`${NS_NEXT_BUILDER}:${K.FORMITEM}`),
 };
 
 const brickGroup = [

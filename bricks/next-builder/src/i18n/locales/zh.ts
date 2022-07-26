@@ -128,6 +128,7 @@ const locale: Locale = {
   [K.TEMPLATE]: "业务模板",
   [K.CUSTOMTEMPLATE]: "自定义模板",
   [K.LAYOUT]: "布局",
+  [K.FORMITEM]: "表单项",
 };
 
 export default locale;
