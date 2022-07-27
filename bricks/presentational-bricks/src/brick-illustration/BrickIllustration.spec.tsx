@@ -2,10 +2,22 @@ import React from "react";
 import { shallow } from "enzyme";
 import { BrickIllustration } from "./BrickIllustration";
 import { Link } from "@next-libs/basic-components";
-import { useFeatureFlags } from "@next-core/brick-kit";
+import {
+  useFeatureFlags,
+  getRuntime,
+  useCurrentApp,
+} from "@next-core/brick-kit";
 jest.mock("@next-core/brick-kit");
 
 (useFeatureFlags as jest.Mock).mockReturnValue([false]);
+
+(useCurrentApp as jest.Mock).mockReturnValue({ id: "events" });
+
+(getRuntime as jest.Mock).mockReturnValue({
+  getMiscSettings: jest.fn().mockReturnValue({
+    supportedNewIllustrationApps: [],
+  }),
+});
 
 describe("BrickIllustration", () => {
   it("should work", () => {
@@ -42,8 +54,13 @@ describe("BrickIllustration", () => {
     expect(wrapper.find(".footer").exists()).toBe(false);
   });
 
-  it("should work with featureFlags is true ", () => {
+  it("should work with featureFlags is true and contain events app ", () => {
     (useFeatureFlags as jest.Mock).mockReturnValue([true]);
+    (getRuntime as jest.Mock).mockReturnValue({
+      getMiscSettings: jest.fn().mockReturnValue({
+        supportedNewIllustrationApps: ["events"],
+      }),
+    });
     const wrapper = shallow(
       <BrickIllustration
         mode={"feedback"}
