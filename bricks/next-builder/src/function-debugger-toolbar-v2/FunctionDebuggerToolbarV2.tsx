@@ -16,9 +16,9 @@ export interface FunctionDebuggerToolbarProps {
   type?: "input" | "output" | "test-input" | "test-output";
   status?: "ok" | "failed" | null;
   saveDisabled?: boolean;
+  wantErrCheckStatus?: boolean;
   onButtonClick?: (detail: { action: string }) => void;
   onCheckboxCheck?: (checked: boolean) => void;
-  wantErrCheckStatus?: boolean;
 }
 
 export function FunctionDebuggerToolbarV2({
@@ -108,18 +108,22 @@ export function FunctionDebuggerToolbarV2({
               <PlayCircleOutlined />
             </div>
           </Tooltip>
-          {refinedType === "input" && (
-            <Tooltip title={"Add as a test case"}>
-              <div
-                className={classNames(styles.debuggerButton, {
-                  [styles.disabled]: saveDisabled,
-                })}
-                onClick={handleSaveClick}
-              >
+          <Tooltip
+            title={refinedType === "input" ? "Add as a test case" : "Update"}
+          >
+            <div
+              className={classNames(styles.debuggerButton, {
+                [styles.disabled]: saveDisabled,
+              })}
+              onClick={handleSaveClick}
+            >
+              {refinedType === "input" ? (
                 <PlusCircleOutlined />
-              </div>
-            </Tooltip>
-          )}
+              ) : (
+                <SaveOutlined />
+              )}
+            </div>
+          </Tooltip>
           {refinedType === "test-input" && (
             <Tooltip title="Delete">
               <div
@@ -133,41 +137,29 @@ export function FunctionDebuggerToolbarV2({
         </div>
       ) : (
         refinedType === "test-output" && (
-          <div style={{ display: "flex" }}>
-            <div className={styles.secondHeader}>
-              {status === "ok" ? (
-                <>
-                  <span className={styles.secondHeaderIcon}>
-                    <CheckOutlined />
-                  </span>
-                  <span>Test: passed</span>
-                </>
-              ) : status === "failed" ? (
-                <>
-                  <span className={styles.secondHeaderIcon}>
-                    <CloseOutlined />
-                  </span>
-                  <span>Test: failed</span>
-                </>
-              ) : (
-                <>
-                  <span className={styles.secondHeaderIcon}>
-                    <QuestionOutlined />
-                  </span>
-                  <span>Test: expired</span>
-                </>
-              )}
-            </div>
-            <Tooltip title={"Update"}>
-              <div
-                className={classNames(styles.debuggerButton, {
-                  [styles.disabled]: saveDisabled,
-                })}
-                onClick={handleSaveClick}
-              >
-                <SaveOutlined />
-              </div>
-            </Tooltip>
+          <div className={styles.secondHeader}>
+            {status === "ok" ? (
+              <>
+                <span className={styles.secondHeaderIcon}>
+                  <CheckOutlined />
+                </span>
+                <span>Test: passed</span>
+              </>
+            ) : status === "failed" ? (
+              <>
+                <span className={styles.secondHeaderIcon}>
+                  <CloseOutlined />
+                </span>
+                <span>Test: failed</span>
+              </>
+            ) : (
+              <>
+                <span className={styles.secondHeaderIcon}>
+                  <QuestionOutlined />
+                </span>
+                <span>Test: expired</span>
+              </>
+            )}
           </div>
         )
       )}
