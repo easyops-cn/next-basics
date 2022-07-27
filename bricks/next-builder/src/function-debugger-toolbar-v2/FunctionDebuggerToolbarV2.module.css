@@ -40,6 +40,10 @@
     background-color: var(--bg-color-button-primary-hover);
     border-radius: 0;
   }
+
+  :global(.ant-checkbox-wrapper-checked) {
+    background: transparent;
+  }
 }
 
 .headerSuffixCheckbox {

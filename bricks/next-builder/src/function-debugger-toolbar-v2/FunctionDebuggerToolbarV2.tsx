@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Tooltip, Checkbox } from "antd";
 import classNames from "classnames";
 import {
@@ -18,17 +18,24 @@ export interface FunctionDebuggerToolbarProps {
   saveDisabled?: boolean;
   onButtonClick?: (detail: { action: string }) => void;
   onCheckboxCheck?: (checked: boolean) => void;
+  wantErrCheckStatus?: boolean;
 }
 
 export function FunctionDebuggerToolbarV2({
   type,
   status,
   saveDisabled,
+  wantErrCheckStatus,
   onButtonClick,
   onCheckboxCheck,
 }: FunctionDebuggerToolbarProps): React.ReactElement {
   const refinedType = type ?? "input";
   const isInput = refinedType === "input" || refinedType === "test-input";
+  const [wantErrChecked, setWantErrChecked] = useState(false);
+
+  useEffect(() => {
+    setWantErrChecked(wantErrCheckStatus ?? false);
+  }, [wantErrCheckStatus]);
 
   const handleRunClick = useCallback(() => {
     onButtonClick?.({ action: "run" });
@@ -88,6 +95,7 @@ export function FunctionDebuggerToolbarV2({
               <Checkbox
                 className={styles.headerSuffixCheckbox}
                 onChange={handleCheckboxCheck}
+                checked={wantErrChecked}
               />
             </label>
           </span>

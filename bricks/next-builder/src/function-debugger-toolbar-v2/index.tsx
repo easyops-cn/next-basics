@@ -27,6 +27,9 @@ export class FunctionDebuggerToolbarV2Element extends UpdatingElement {
   @property({ type: Boolean })
   saveDisabled: boolean;
 
+  @property({ type: Boolean })
+  wantErrCheckStatus: boolean;
+
   @event({ type: "button.click" })
   private _buttonClickEmitter: EventEmitter<{ action: string }>;
 
@@ -62,6 +65,7 @@ export class FunctionDebuggerToolbarV2Element extends UpdatingElement {
           <FunctionDebuggerToolbarV2
             type={this.type}
             status={this.status}
+            wantErrCheckStatus={this.wantErrCheckStatus}
             saveDisabled={this.saveDisabled}
             onButtonClick={this._handleButtonClick}
             onCheckboxCheck={this._handleCheckboxCheck}
