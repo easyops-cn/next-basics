@@ -3,10 +3,21 @@ import { shallow } from "enzyme";
 import { BrickResult } from "./BrickResult";
 import { BrickResultStatus } from "../interfaces/brick-result";
 import { EmptyResultStatus } from "@next-libs/basic-components";
-import { useFeatureFlags } from "@next-core/brick-kit";
+import {
+  useFeatureFlags,
+  getRuntime,
+  useCurrentApp,
+} from "@next-core/brick-kit";
 
 jest.mock("@next-core/brick-kit");
 (useFeatureFlags as jest.Mock).mockReturnValue([false]);
+(useCurrentApp as jest.Mock).mockReturnValue({ id: "events" });
+
+(getRuntime as jest.Mock).mockReturnValue({
+  getMiscSettings: jest.fn().mockReturnValue({
+    supportedNewIllustrationApps: [],
+  }),
+});
 
 describe("BrickResult", () => {
   it("should work", () => {
@@ -45,8 +56,13 @@ describe("BrickResult", () => {
     expect(wrapper.find("Result").prop("status")).toBe("illustrations");
   });
 
-  it("should work with featureFlags is true", () => {
+  it("should work with featureFlags is true and contain events app", () => {
     (useFeatureFlags as jest.Mock).mockReturnValue([true]);
+    (getRuntime as jest.Mock).mockReturnValue({
+      getMiscSettings: jest.fn().mockReturnValue({
+        supportedNewIllustrationApps: ["events"],
+      }),
+    });
 
     const wrapper = shallow(
       <BrickResult status={"illustrations"} illustrationsConfig={{}} />

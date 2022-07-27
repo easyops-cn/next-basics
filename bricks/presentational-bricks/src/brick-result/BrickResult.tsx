@@ -8,7 +8,12 @@ import {
   translateIllustrationConfig,
   IllustrationProps,
 } from "@next-core/illustrations";
-import { useCurrentTheme, useFeatureFlags } from "@next-core/brick-kit";
+import {
+  useCurrentTheme,
+  useFeatureFlags,
+  getRuntime,
+  useCurrentApp,
+} from "@next-core/brick-kit";
 import {
   BrickResultStatus,
   IllustrationsStatus,
@@ -36,18 +41,31 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
   } = props;
   const icon = props.icon ? <LegacyIcon type={props.icon} /> : "";
   const emptyResultStatus = Object.values(EmptyResultStatus);
+  const app = useCurrentApp();
   const theme = useCurrentTheme();
   const [isFeatureFlag] = useFeatureFlags("support-new-illustrations");
+  const miscSettings = getRuntime().getMiscSettings();
+  const isSupportedApp = (
+    (miscSettings["supportedNewIllustrationApps"] || []) as any
+  ).includes(app.id);
+
   const image = React.useMemo(() => {
     let illustrationConfig: IllustrationProps = { name, category, theme };
-    if (isFeatureFlag) {
+    if (isFeatureFlag && isSupportedApp) {
       illustrationConfig = translateIllustrationConfig(
         useNewIllustration,
         illustrationConfig
       );
     }
     return getIllustration(illustrationConfig);
-  }, [name, category, theme, useNewIllustration, isFeatureFlag]);
+  }, [
+    name,
+    category,
+    theme,
+    useNewIllustration,
+    isFeatureFlag,
+    isSupportedApp,
+  ]);
 
   return emptyResultStatus.includes(props.status as EmptyResultStatus) ? (
     <Result
@@ -62,7 +80,7 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
       title={props.title}
       subTitle={props.subTitle}
       status={props.status as ResultStatusType}
-      icon={<img src={image} style={imageStyle} />}
+      icon={<img src={image} style={{ objectFit: "contain", ...imageStyle }} />}
     >
       <slot id="content" name="content"></slot>
     </Result>
