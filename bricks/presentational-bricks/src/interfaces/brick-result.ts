@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-
+import { IconSize } from "../brick-result/components/IllustrationWrapper";
 export enum BrickResultStatus {
   Success = "success",
   Error = "error",
@@ -26,4 +26,5 @@ export interface IllustrationsConfig {
   imageStyle?: CSSProperties;
   name?: string;
   category?: string;
+  size?: IconSize;
 }
