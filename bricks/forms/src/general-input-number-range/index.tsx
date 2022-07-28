@@ -5,9 +5,11 @@ import {
   event,
   EventEmitter,
   property,
-  UpdatingElement,
 } from "@next-core/brick-kit";
-import { GeneralInputNumberRange } from "./GeneralInputNumberRange";
+import {
+  GeneralInputNumberRange,
+  NumberRangeValue,
+} from "./GeneralInputNumberRange";
 import { FormItemElement } from "@next-libs/forms";
 
 /**
@@ -124,14 +126,9 @@ export class GeneralInputNumberRangeElement extends FormItemElement {
   /**
    * @description 输入改变，`event.detail` 是当前值
    */
-  @event({ type: "general.input.change" }) changeEvent: EventEmitter<{
-    min?: string | number;
-    max?: string | number;
-  }>;
-  private _handleChange = (value: {
-    min?: string | number;
-    max?: string | number;
-  }): void => {
+  @event({ type: "general.input.change" })
+  changeEvent: EventEmitter<NumberRangeValue>;
+  private _handleChange = (value: NumberRangeValue | null): void => {
     this.value = value;
     this._render();
     Promise.resolve().then(() => {
