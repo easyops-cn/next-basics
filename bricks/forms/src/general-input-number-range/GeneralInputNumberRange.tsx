@@ -1,12 +1,10 @@
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { InputNumber } from "antd";
-import React, { useEffect } from "react";
+import { isEmpty } from "lodash";
+import React from "react";
 
 export interface GeneralInputNumberRangeProps extends FormItemWrapperProps {
-  value?: {
-    min?: string | number;
-    max?: string | number;
-  };
+  value?: NumberRangeValue;
   max?: number;
   min?: number;
   step?: number;
@@ -15,8 +13,18 @@ export interface GeneralInputNumberRangeProps extends FormItemWrapperProps {
   disabled?: boolean;
   placeholder?: string;
   inputBoxStyle?: React.CSSProperties;
-  onChange?: (value: { min?: string | number; max?: string | number }) => void;
+  onChange?: (value: NumberRangeValue) => void;
   onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+}
+
+export interface NumberRangeValue {
+  min?: string | number;
+  max?: string | number;
+}
+
+interface NumberRangeProps {
+  value?: NumberRangeValue;
+  onChange?: (value: NumberRangeValue) => void;
 }
 
 export function GeneralInputNumberRange(
@@ -32,22 +40,31 @@ export function GeneralInputNumberRange(
     placeholder,
     ...restProps
   } = props;
+  const NumberRange: React.FC<NumberRangeProps> = ({ value, onChange }) => {
+    const minNumber = value?.min;
+    const maxNumber = value?.max;
+    const triggerChange = (changedValue: {
+      min?: number | string;
+      max?: number | string;
+    }) => {
+      const res = { ...value, ...changedValue };
+      if (!res.min) delete res.min;
+      if (!res.max) delete res.max;
+      onChange?.(isEmpty(res) ? null : res);
+    };
 
-  const value =
-    props.name && props.formElement
-      ? props.formElement.formUtils.getFieldValue(props.name)
-      : props.value;
-  const _handleChange = (v: any) => {
-    props.onChange(v);
-  };
+    const onMinChange = (e: { target: { value: string } }) => {
+      let value = parseInt(e?.target.value);
+      value = isNaN(value) ? null : value;
+      triggerChange({ min: value as number });
+    };
 
-  useEffect(() => {
-    // istanbul ignore next
-    props.formElement?.formUtils.setFieldsValue({ [props.name]: props.value });
-  }, [props.value]);
-
-  return (
-    <FormItemWrapper {...restProps}>
+    const onMaxChange = (e: { target: { value: string } }) => {
+      let value = parseInt(e?.target.value);
+      value = isNaN(value) ? null : value;
+      triggerChange({ max: value });
+    };
+    return (
       <div
         style={{
           display: "flex",
@@ -56,35 +73,40 @@ export function GeneralInputNumberRange(
         }}
       >
         <InputNumber
-          value={value?.min as any}
+          key="min-input-number"
+          value={minNumber as any}
           className="min-input-number"
-          min={min}
-          max={value?.max && value.max > max ? value.max : (max as any)}
+          min={min as number}
+          max={maxNumber < max ? maxNumber : (max as any)}
           step={step}
           placeholder={placeholder?.split(";")[0]}
           precision={precision}
           readOnly={readOnly}
           disabled={disabled}
-          onChange={(v) => _handleChange({ ...value, min: v })}
+          onBlur={onMinChange}
           style={{ width: "calc(50% - 24px)" }}
-          onBlur={props.onBlur}
         />
         ~
         <InputNumber
-          value={value?.max as any}
+          key="max-input-number"
+          value={maxNumber as any}
           className="max-input-number"
-          min={value?.min && value.min > min ? value.min : (min as any)}
-          max={max}
+          min={min < minNumber ? maxNumber : (min as any)}
+          max={max as number}
           step={step}
           placeholder={placeholder?.split(";")[1]}
           precision={precision}
           readOnly={readOnly}
           disabled={disabled}
-          onChange={(v) => _handleChange({ ...value, max: v })}
+          onBlur={onMaxChange}
           style={{ width: "calc(50% - 24px)" }}
-          onBlur={props.onBlur}
         />
       </div>
+    );
+  };
+  return (
+    <FormItemWrapper {...restProps}>
+      <NumberRange value={props.value} onChange={props.onChange} />
     </FormItemWrapper>
   );
 }
