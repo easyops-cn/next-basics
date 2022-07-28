@@ -18,11 +18,16 @@ import {
   BrickResultStatus,
   IllustrationsStatus,
 } from "../interfaces/brick-result";
-
+import {
+  IconSize,
+  IllustrationWrapper,
+} from "./components/IllustrationWrapper";
+import { pick } from "lodash";
 export interface IllustrationsConfig {
   imageStyle?: CSSProperties;
   name?: string;
   category?: string;
+  size?: IconSize;
 }
 
 interface BrickResultProps {
@@ -34,44 +39,48 @@ interface BrickResultProps {
   useNewIllustration?: boolean;
 }
 
-export function BrickResult(props: BrickResultProps): React.ReactElement {
-  const {
-    illustrationsConfig: { name, category, imageStyle },
-    useNewIllustration,
-  } = props;
-  const icon = props.icon ? <LegacyIcon type={props.icon} /> : "";
-  const emptyResultStatus = Object.values(EmptyResultStatus);
-  const app = useCurrentApp();
-  const theme = useCurrentTheme();
-  const [isFeatureFlag] = useFeatureFlags("support-new-illustrations");
-  const miscSettings = getRuntime().getMiscSettings();
-  const isSupportedApp = (
-    (miscSettings["supportedNewIllustrationApps"] || []) as any
-  ).includes(app.id);
+const emptyResultStatusMap: {
+  [key in EmptyResultStatus]: { name: string; category: string };
+} = {
+  [EmptyResultStatus.BrowserTooOld]: {
+    name: "browser-version-low",
+    category: "easyops2",
+  },
+  [EmptyResultStatus.NoData]: { name: "no-content", category: "easyops2" },
+  [EmptyResultStatus.Empty]: { name: "create-content", category: "easyops2" },
+  [EmptyResultStatus.NoHistoryVersion]: {
+    name: "no-history",
+    category: "easyops2",
+  },
+  [EmptyResultStatus.NoVisitRecord]: {
+    name: "search-no-content-dynamic",
+    category: "easyops2",
+  },
+  [EmptyResultStatus.SearchEmpty]: {
+    name: "search-empty",
+    category: "easyops2",
+  },
+  [EmptyResultStatus.WelcomeToCreate]: {
+    name: "add-app",
+    category: "easyops2",
+  },
+};
 
-  const image = React.useMemo(() => {
-    let illustrationConfig: IllustrationProps = { name, category, theme };
-    if (isFeatureFlag && isSupportedApp) {
-      illustrationConfig = translateIllustrationConfig(
-        useNewIllustration,
-        illustrationConfig
-      );
-    }
-    return getIllustration(illustrationConfig);
-  }, [
-    name,
-    category,
-    theme,
-    useNewIllustration,
-    isFeatureFlag,
-    isSupportedApp,
-  ]);
+export function BrickResult(props: BrickResultProps): React.ReactElement {
+  const emptyResultStatus = Object.values(EmptyResultStatus);
+  const icon = props.icon ? <LegacyIcon type={props.icon} /> : "";
 
   return emptyResultStatus.includes(props.status as EmptyResultStatus) ? (
     <Result
       title={props.title}
       subTitle={props.subTitle}
-      icon={<EmptyResult status={props.status as EmptyResultStatus} />}
+      icon={
+        <IllustrationWrapper
+          useNewIllustration={props.useNewIllustration}
+          size={IconSize.Unset}
+          {...emptyResultStatusMap[props.status as EmptyResultStatus]}
+        />
+      }
     >
       <slot id="content" name="content"></slot>
     </Result>
@@ -80,7 +89,12 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
       title={props.title}
       subTitle={props.subTitle}
       status={props.status as ResultStatusType}
-      icon={<img src={image} style={{ objectFit: "contain", ...imageStyle }} />}
+      icon={
+        <IllustrationWrapper
+          useNewIllustration={props.useNewIllustration}
+          {...(props.illustrationsConfig || {})}
+        />
+      }
     >
       <slot id="content" name="content"></slot>
     </Result>

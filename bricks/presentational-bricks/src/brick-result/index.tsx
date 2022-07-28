@@ -64,7 +64,7 @@ export class BrickResultElement extends UpdatingElement {
   /**
    * @required false
    * @default {}
-   * @description 自定义插画配置
+   * @description 自定义插画配置，size默认为middle，推荐使用size控制插画尺寸，可通过imageStyle覆盖size实现自定义大小（不推荐）
    * @group other
    */
   @property({ attribute: false })
