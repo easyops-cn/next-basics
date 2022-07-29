@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.230.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.229.4...@next-bricks/forms@1.230.0) (2022-07-29)
+
+
+### Features
+
+* **custom-templates:** 属性说明支持50个字符 ([11496e9](https://github.com/easyops-cn/next-basics/commit/11496e91bd6cfe8d1f30e76c04d77a513fa84c3f))
+
+
+
+
+
 ## [1.229.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.229.3...@next-bricks/forms@1.229.4) (2022-07-28)
 
 **Note:** Version bump only for package @next-bricks/forms
