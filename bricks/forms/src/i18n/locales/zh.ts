@@ -120,7 +120,7 @@ const locale: Locale = {
   [K.CORRECT_CRONT_MSG]: "请填写正确的时间格式",
   [K.DUPLICATE_STRUCTURE_ITEM_ID]: "{{id}}与已有结构项ID重复，请重新指定！",
   [K.ATTRIBUTE_DESCRIPTION]: "属性说明",
-  [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "请输入1至20个字符",
+  [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "请输入1至50个字符",
   [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "请输入属性说明",
   [K.VALIDATION_FAILED]: "{{label}}校验失败",
   [K.PLACEHOLDER_SYSTEM_ONLY_DISPLAYS]: "系统只显示4位小数",

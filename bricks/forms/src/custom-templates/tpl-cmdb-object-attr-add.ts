@@ -129,7 +129,7 @@ getRuntime().registerCustomTemplate("forms.tpl-cmdb-object-attr-add", {
                     `${NS_FORMS}:${K.ATTRIBUTE_DESCRIPTION_LIMIT}`
                   ),
                 },
-                pattern: "^[\\s\\S]{1,20}$",
+                pattern: "^[\\s\\S]{1,50}$",
                 placeholder: i18n.t(
                   `${NS_FORMS}:${K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION}`
                 ),
