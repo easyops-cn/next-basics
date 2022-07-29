@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.260.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.259.0...@next-bricks/presentational-bricks@1.260.0) (2022-07-29)
+
+
+### Features
+
+* **CardItem:** icon-as-background card support bottomRightOperate ([aa6f7e3](https://github.com/easyops-cn/next-basics/commit/aa6f7e3b8ae097377fb8dc6824421cea23c9f1b9))
+
+
+
+
+
 # [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.258.0...@next-bricks/presentational-bricks@1.259.0) (2022-07-29)
 
 
