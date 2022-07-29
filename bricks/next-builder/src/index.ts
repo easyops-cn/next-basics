@@ -1,5 +1,5 @@
 import "./i18n";
-import "./data-providers/ScanBricksAndTemplates";
+import "./data-providers/ScanBricksAndTemplatesProvider";
 import "./data-providers/GenerateBricksBasedOnModel";
 import "./data-providers/GetAttrBrickConf";
 import "./data-providers/GenerateTemplateProxy";
@@ -64,3 +64,4 @@ import "./data-providers/PasteBricks";
 import "./shared/components/contract-auto-complete";
 // !Lazy: import "./workbench-brick-context-menu";
 // !Lazy: import "./workbench-data-tree";
+// !Lazy: import "./workbench-backend";

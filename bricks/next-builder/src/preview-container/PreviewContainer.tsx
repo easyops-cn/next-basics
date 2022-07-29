@@ -24,6 +24,7 @@ import type {
   PreviewMessageFromContainer,
   PreviewMessageToContainer,
   PreviewSettings,
+  UpdateStoryboardType,
 } from "@next-types/preview";
 
 import styles from "./PreviewContainer.module.css";
@@ -32,7 +33,6 @@ import {
   BuilderDataManager,
   BuilderRuntimeEdge,
   BuilderRuntimeNode,
-  EventDetailOfNodeAdd,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 
@@ -406,7 +406,11 @@ export function LegacyPreviewContainer(
     (
       appId: string,
       storyboardPatch: Partial<Storyboard>,
-      options: { snippetGraphData: BuilderSnippetNode[] }
+      options: {
+        snippetGraphData: BuilderSnippetNode[];
+        updateStoryboardType?: UpdateStoryboardType;
+        settings?: PreviewSettings;
+      }
     ) => {
       const snippetData = getSnippetData(
         options.snippetGraphData || snippetGraphData
@@ -419,6 +423,8 @@ export function LegacyPreviewContainer(
           settings: previewSettings,
           options: {
             snippetData: snippetData && JSON.stringify(snippetData),
+            updateStoryboardType: options.updateStoryboardType,
+            settings: options.settings,
           },
         } as PreviewMessageFromContainer,
         previewOrigin

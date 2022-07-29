@@ -134,8 +134,7 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerCaptureOk
   | PreviewMessagePreviewerCaptureFailed
   | PreviewMessageContainerProxyMethodSuccess
-  | PreviewMessageContainerProxyMethodError
-  | PreviewMessageContainerDebug;
+  | PreviewMessageContainerProxyMethodError;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnMain
@@ -300,12 +299,6 @@ export interface PreviewMessageContainerProxyMethodError
   result: ExcuteProxyMethodResult;
 }
 
-export interface PreviewMessageContainerDebug extends PreviewBaseMessage {
-  sender: "preview";
-  type: "preview.debug";
-  res: any[];
-}
-
 export interface PreviewMessageContainerBuilderHoverOnMain
   extends Omit<PreviewMessageBuilderHoverOnMain, "sender"> {
   sender: "preview-container";
@@ -361,6 +354,8 @@ export interface BrickOutline {
   alias?: string;
 }
 
+export type UpdateStoryboardType = "route" | "template" | "snippet";
+
 export interface PreviewStartOptions {
   appId?: string;
   templateId?: string;
@@ -370,6 +365,7 @@ export interface PreviewStartOptions {
   routePath?: string;
   routeExact?: boolean;
   settings?: PreviewSettings;
+  updateStoryboardType?: UpdateStoryboardType;
 }
 
 export interface PreviewSettings {
@@ -380,3 +376,96 @@ export interface FormData {
   schema?: formSchemaProperties;
   fields?: fieldProperties[];
 }
+
+export type WorkbenchBackendCacheAction =
+  | WorkbenchBackendActionForInit
+  | WorkbenchBackendActionForGet
+  | WorkbenchBackendActionForInsert
+  | WorkbenchBackendActionForUpdate
+  | WorkbenchBackendActionForMove
+  | WorkbenchBackendActionForDelete;
+
+export interface WorkbenchBackendActionForInitDetail {
+  appId: string;
+  projectId: string;
+  basePath: string;
+}
+
+export interface WorkbenchBackendActionForInit {
+  action: "init";
+  data: WorkbenchBackendActionForInitDetail;
+}
+
+export interface WorkbenchBackendActionForGet {
+  action: "get";
+  data: {
+    instanceId: string;
+  };
+}
+
+export type WorkbenchBackendActionForInsertDetail = {
+  parentInstanceId?: string;
+  parent: string;
+  mountPoint: string;
+  brick: string;
+  sort?: number;
+  portal?: boolean;
+  bg?: boolean;
+  nodeData?: BuilderRuntimeNode;
+  dragOverInstanceId?: string;
+  dragStatus?: dragStatus;
+  type: "brick" | "provider";
+};
+export interface WorkbenchBackendActionForInsert {
+  action: "insert";
+  data: WorkbenchBackendActionForInsertDetail;
+}
+
+export interface WorkbenchBackendActionForUpdateDetail {
+  objectId: string;
+  instanceId: string;
+  property: Record<string, any>;
+}
+
+export interface WorkbenchBackendActionForUpdate {
+  action: "update";
+  data: WorkbenchBackendActionForUpdateDetail;
+}
+
+export interface WorkbenchBackendActionForMoveDetail {
+  nodeInstanceId: string;
+  nodeUid: number;
+  nodeIds: string[];
+  nodeData: NodeInstance;
+}
+
+export interface WorkbenchBackendActionForMove {
+  action: "move";
+  data: WorkbenchBackendActionForMoveDetail;
+}
+
+export interface WorkbenchBackendActionForDeleteDetail {
+  objectId: string;
+  instanceId: string;
+}
+
+export interface WorkbenchBackendActionForDelete {
+  action: "delete";
+  data: WorkbenchBackendActionForDeleteDetail;
+}
+
+declare module "worker-loader!*" {
+  class WebpackWorker extends Worker {
+    constructor();
+  }
+
+  export = WebpackWorker;
+}
+
+type backendAction =
+  | "init"
+  | "insert"
+  | "update"
+  | "delete"
+  | "clear"
+  | "get-queue";

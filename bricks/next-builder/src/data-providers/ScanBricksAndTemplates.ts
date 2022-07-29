@@ -139,8 +139,3 @@ export function ScanBricksAndTemplates({
     contractData,
   };
 }
-
-customElements.define(
-  "next-builder.provider-scan-bricks-and-templates",
-  createProviderClass(ScanBricksAndTemplates)
-);

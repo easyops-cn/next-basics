@@ -186,6 +186,27 @@ export function previewStart(
             data.enabled ? startInspecting() : stopInspecting();
             break;
           case "refresh":
+            if (data.options.updateStoryboardType) {
+              if (data.options.updateStoryboardType === "route") {
+                developHelper.updateStoryboardByRoute(
+                  options.appId,
+                  data.storyboardPatch
+                );
+              } else if (data.options.updateStoryboardType === "template") {
+                developHelper.updateStoryboardByTemplate(
+                  options.appId,
+                  data.storyboardPatch,
+                  data.options.settings
+                );
+              } else if (data.options.updateStoryboardType === "snippet") {
+                developHelper.updateStoryboardBySnippet(
+                  options.appId,
+                  data.storyboardPatch
+                );
+              }
+              getHistory().reload();
+              break;
+            }
             developHelper.updateStoryboard(options.appId, data.storyboardPatch);
             if (options.templateId) {
               lastTemplatePreviewSettings = data.settings;
