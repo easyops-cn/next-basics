@@ -2,6 +2,7 @@ import React, { CSSProperties } from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { BrickIllustration } from "./BrickIllustration";
+import { IconSize } from "../brick-result/components/IllustrationWrapper";
 
 export interface IllustrationHeader {
   title?: string;
@@ -34,6 +35,14 @@ export class BrickIllustrationElement extends UpdatingElement {
    */
   @property()
   name: string;
+
+  /**
+   * @required false
+   * @description 插画size,size默认为middle，推荐使用size控制插画尺寸，可通过imageStyle覆盖size实现自定义大小（不推荐）
+   * @default "middle"
+   */
+  @property({ attribute: false })
+  size: IconSize = IconSize.Middle;
 
   /**
    * @default "default"
@@ -111,6 +120,7 @@ export class BrickIllustrationElement extends UpdatingElement {
             header={this.header}
             footer={this.footer}
             useNewIllustration={this.useNewIllustration}
+            size={this.size}
           />
         </BrickWrapper>,
         this
