@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.167.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.166.2...@next-bricks/next-builder@1.167.0) (2022-07-29)
+
+
+### Features
+
+* change save btn position ([3706941](https://github.com/easyops-cn/next-basics/commit/370694121ff96bc51295c04c36cdc7cb4bb617fb))
+* feat FunctionDebuggerToolbarV2 ([49feaba](https://github.com/easyops-cn/next-basics/commit/49feaba84bd5f20f001ee8ab11f371d58bd1df05))
+* 支持wantErr checkbox设置checked状态 ([754e269](https://github.com/easyops-cn/next-basics/commit/754e269ccfb42cf266605b31e2131a90a8201503))
+
+
+
+
+
 ## [1.166.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.166.1...@next-bricks/next-builder@1.166.2) (2022-07-26)
 
 **Note:** Version bump only for package @next-bricks/next-builder
