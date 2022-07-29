@@ -77,7 +77,7 @@ export function GeneralInputNumberRange(
           value={minNumber as any}
           className="min-input-number"
           min={min as number}
-          max={maxNumber < max ? maxNumber : (max as any)}
+          max={max as any}
           step={step}
           placeholder={placeholder?.split(";")[0]}
           precision={precision}
@@ -91,7 +91,7 @@ export function GeneralInputNumberRange(
           key="max-input-number"
           value={maxNumber as any}
           className="max-input-number"
-          min={min < minNumber ? maxNumber : (min as any)}
+          min={min as any}
           max={max as number}
           step={step}
           placeholder={placeholder?.split(";")[1]}
