@@ -271,7 +271,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       {titleWithOperateArea}
       {description()}
       {cardIconAsBackground}
-      {bottomLeftOperateArea}
+      {props.icon ? bottomLeftOperateArea : bottomOperateArea}
     </Card>
   );
 
