@@ -132,7 +132,7 @@ const locale: Locale = {
   [K.DUPLICATE_STRUCTURE_ITEM_ID]:
     "{{id}} is the same as the attribute ID of an existing item, please re-specify!",
   [K.ATTRIBUTE_DESCRIPTION]: "Attribute description",
-  [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "Please enter 1 to 20 characters",
+  [K.ATTRIBUTE_DESCRIPTION_LIMIT]: "Please enter 1 to 50 characters",
   [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "Please enter attribute description",
   [K.VALIDATION_FAILED]: "{{label}} validation failed",
   [K.PLACEHOLDER_SYSTEM_ONLY_DISPLAYS]:
