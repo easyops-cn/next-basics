@@ -6,6 +6,7 @@ lazyBricks:
     bricks:
       - function-debugger-sidebar
       - function-debugger-toolbar
+      - function-debugger-toolbar-v2
       - function-debugger-store
       - function-debugger-statusbar
   - group: workbench
