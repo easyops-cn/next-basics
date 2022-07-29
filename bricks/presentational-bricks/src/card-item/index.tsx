@@ -50,7 +50,7 @@ export interface DescriptionItem {
  * afterTitle: 标题后面的slot，通常搭配"presentational-bricks.brick-value-mapping"使用
  * operate:操作区 slot，通常搭配"basic-bricks.general-button"使用。
  * topRightOperate:右上角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-as-background" | "icon-small-align-left" | "icon-align-left" | "icon-align-middle" | "block-icon-align-left"时可用。
- * bottomRightOperate:右下角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-small-align-left" | "icon-align-right" | "icon-align-left" 时可用。
+ * bottomRightOperate:右下角操作区 slot，通常搭配"basic-bricks.general-custom-buttons"使用。卡片类型 cardLayoutType 为 "icon-as-background"（icon不设置） | "icon-small-align-left" | "icon-align-right" | "icon-align-left" 时可用。
  * @history
  * 1.171.0: `cardLayoutType` 增加 "block-icon-align-left" 类型，新增属性 `showImg`,`imgSrc`,`tagConfig.color`,`tagConfig.triangle`
  * 1.160.0: `cardLayoutType` 增加 "icon-align-middle" 类型
