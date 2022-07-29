@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.258.0...@next-bricks/presentational-bricks@1.259.0) (2022-07-29)
+
+
+### Features
+
+* **BrickIllustration:**  BrickIllustration support set size ([0a79514](https://github.com/easyops-cn/next-basics/commit/0a795147512a5d47d7d7d6cd4dfb3b0515480cf9))
+
+
+
+
+
 # [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.257.5...@next-bricks/presentational-bricks@1.258.0) (2022-07-28)
 
 
