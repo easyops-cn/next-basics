@@ -11,6 +11,7 @@ import {
   NumberRangeValue,
 } from "./GeneralInputNumberRange";
 import { FormItemElement } from "@next-libs/forms";
+import { ValidationRule } from "@ant-design/compatible/lib/form";
 
 /**
  * @id forms.general-input-number-range
@@ -155,6 +156,27 @@ export class GeneralInputNumberRangeElement extends FormItemElement {
     this.blurEvent.emit(this.value);
   };
 
+  validateMinAndMax = (
+    rule: any,
+    value: any,
+    callback: (params?: any) => void
+  ): void => {
+    try {
+      if (value && value.min && value.max && value.min > value.max) {
+        throw new Error(rule.message);
+      }
+      callback();
+    } catch (err) {
+      callback(err);
+    }
+  };
+
+  private _builtInvalidator: Pick<ValidationRule, "validator" | "message">[] = [
+    {
+      message: "最小值不能大于最大值",
+      validator: this.validateMinAndMax,
+    },
+  ];
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -175,7 +197,11 @@ export class GeneralInputNumberRangeElement extends FormItemElement {
             step={this.step}
             precision={this.precision}
             message={this.message}
-            validator={this.validator}
+            validator={
+              this.validator
+                ? this._builtInvalidator.concat(this.validator)
+                : this._builtInvalidator
+            }
             notRender={this.notRender}
             inputBoxStyle={this.inputBoxStyle}
             onChange={this._handleChange}

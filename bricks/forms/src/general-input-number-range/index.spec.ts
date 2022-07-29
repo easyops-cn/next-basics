@@ -30,11 +30,13 @@ describe("forms.general-input-number", () => {
     const element = document.createElement(
       "forms.general-input-number-range"
     ) as GeneralInputNumberRangeElement;
+    const validate = jest.fn;
     await jest.runAllTimers();
     document.body.appendChild(element);
 
     const dispatchEvent = jest.spyOn(element, "dispatchEvent");
     element.value = { min: 1, max: 6 };
+    element.validator = validate;
 
     element._handleBlur();
     expect((dispatchEvent.mock.calls[0][0] as CustomEvent).detail).toEqual({
@@ -52,5 +54,21 @@ describe("forms.general-input-number", () => {
     expect((dispatchEvent.mock.calls[2][0] as CustomEvent).detail).toEqual({
       min: 1,
     });
+  });
+
+  it("validate should work", async () => {
+    const element = document.createElement(
+      "forms.general-input-number-range"
+    ) as GeneralInputNumberRangeElement;
+    await jest.runAllTimers();
+    document.body.appendChild(element);
+    const callbackFun = jest.fn();
+    element.validateMinAndMax(
+      { message: "最小值不能大于最大值" },
+      { min: 8, max: 2 },
+      callbackFun
+    );
+    expect(callbackFun).toHaveBeenCalled();
+    expect(element.validateMinAndMax).toThrow();
   });
 });
