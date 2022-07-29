@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { BrickIllustration } from "./BrickIllustration";
 import { Link } from "@next-libs/basic-components";
 import {
@@ -31,8 +31,8 @@ describe("BrickIllustration", () => {
       />
     );
 
-    expect(wrapper.find("img").prop("src")).toContain(
-      "assets/illustrations/default/no-content"
+    expect(wrapper.find("IllustrationWrapper").prop("name")).toEqual(
+      "no-content"
     );
     expect(wrapper.find(".title").at(0).text()).toBe("Header");
     expect(wrapper.find(".description").at(0).text()).toBe("desc..");
@@ -61,7 +61,7 @@ describe("BrickIllustration", () => {
         supportedNewIllustrationApps: ["events"],
       }),
     });
-    const wrapper = shallow(
+    const wrapper = mount(
       <BrickIllustration
         mode={"feedback"}
         category={"default"}

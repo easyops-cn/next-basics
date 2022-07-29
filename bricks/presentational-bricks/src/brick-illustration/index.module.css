@@ -36,13 +36,17 @@
 }
 
 @media (max-width: 1440px) {
-  .imageDefault {
-    width: 240px;
+  .illustrationWrapper {
+    img {
+      width: 240px;
+    }
   }
 }
 
 @media (min-width: 1440px) {
-  .imageDefault {
-    width: 300px;
+  .illustrationWrapper {
+    img {
+      width: 300px;
+    }
   }
 }
