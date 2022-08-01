@@ -1,6 +1,6 @@
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { InputNumber } from "antd";
-import { isEmpty } from "lodash";
+import { toString, isEmpty } from "lodash";
 import React from "react";
 
 export interface GeneralInputNumberRangeProps extends FormItemWrapperProps {
@@ -48,8 +48,8 @@ export function GeneralInputNumberRange(
       max?: number | string;
     }) => {
       const res = { ...value, ...changedValue };
-      if (!res.min) delete res.min;
-      if (!res.max) delete res.max;
+      if (!toString(res.min)) delete res.min;
+      if (!toString(res.max)) delete res.max;
       onChange?.(isEmpty(res) ? null : res);
     };
 
