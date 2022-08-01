@@ -11,6 +11,7 @@ import {
   NumberRangeValue,
 } from "./GeneralInputNumberRange";
 import { FormItemElement } from "@next-libs/forms";
+import { toString } from "lodash";
 import { ValidationRule } from "@ant-design/compatible/lib/form";
 
 /**
@@ -162,7 +163,12 @@ export class GeneralInputNumberRangeElement extends FormItemElement {
     callback: (params?: any) => void
   ): void => {
     try {
-      if (value && value.min && value.max && value.min > value.max) {
+      if (
+        value &&
+        toString(value.min) &&
+        toString(value.max) &&
+        value.min > value.max
+      ) {
         throw new Error(rule.message);
       }
       callback();
