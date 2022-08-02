@@ -67,6 +67,9 @@ export class WorkbenchStoreElement extends UpdatingElement {
   @property({ attribute: false })
   templateSources: BuilderCustomTemplateNode[];
 
+  @property({ type: String })
+  activeInstanceId: string;
+
   @event({ type: "node.click" })
   private _nodeClickEvent: EventEmitter<BuilderRuntimeNode>;
 
@@ -209,6 +212,7 @@ export class WorkbenchStoreElement extends UpdatingElement {
               ref={this._storeRef}
               dataSource={this.dataSource}
               templateSources={this.templateSources}
+              activeInstanceId={this.activeInstanceId}
               onNodeClick={this._handleNodeClick}
               onNodeReorder={this._handleNodeReorder}
               onWorkbenchTreeNodeMove={this._handleNodeMove}

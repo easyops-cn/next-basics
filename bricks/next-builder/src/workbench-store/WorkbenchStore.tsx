@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
 } from "react";
 import type {
   BuilderCustomTemplateNode,
@@ -18,6 +19,7 @@ import {
   type EventDetailOfWorkbenchTreeNodeMove,
   type EventDetailOfNodeAdd,
   type EventDetailOfSnippetApply,
+  useBuilderData,
 } from "@next-core/editor-bricks-helper";
 import { useListenOnPreviewMessage } from "./useListenOnPreviewMessage";
 import { sendHighlightBrick, useHighlightBrick } from "./useHighlightBrick";
@@ -26,6 +28,7 @@ import { InstallExpandInfo } from "../builder-container/BuilderContainer";
 export interface WorkbenchStoreProps {
   dataSource?: BuilderRouteOrBrickNode[];
   templateSources?: BuilderCustomTemplateNode[];
+  activeInstanceId?: string;
   onNodeClick?(event: CustomEvent<BuilderRuntimeNode>): void;
   onNodeReorder?(event: CustomEvent<EventDetailOfNodeReorder>): void;
   onWorkbenchTreeNodeMove?(
@@ -44,6 +47,7 @@ export function LegacyWorkbenchStore(
   {
     dataSource,
     templateSources,
+    activeInstanceId,
     onNodeClick,
     onNodeReorder,
     onWorkbenchTreeNodeMove,
@@ -53,6 +57,7 @@ export function LegacyWorkbenchStore(
   ref: React.Ref<WorkbenchStoreRef>
 ): React.ReactElement {
   const manager = useBuilderDataManager();
+  const { nodes } = useBuilderData();
   const previewStart = useCallback(() => {
     sendHighlightBrick("active", manager.getActiveNodeUid(), manager);
   }, [manager]);
@@ -101,6 +106,20 @@ export function LegacyWorkbenchStore(
     onWorkbenchTreeNodeMove,
   ]);
 
+  const activeKey = useMemo(() => {
+    return activeInstanceId
+      ? nodes.find((node) => node.instanceId === activeInstanceId)?.$$uid
+      : null;
+  }, [activeInstanceId, nodes]);
+
+  useEffect(
+    () => {
+      if (activeKey) manager.setActiveNodeUid(activeKey);
+    },
+    // One-time effect only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [activeKey]
+  );
   useHighlightBrick("hover", manager);
   useHighlightBrick("active", manager);
   useListenOnPreviewMessage(manager);
