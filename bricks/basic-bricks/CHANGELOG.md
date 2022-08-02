@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.186.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.186.2...@next-bricks/basic-bricks@1.186.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* 解决appDocumentLink的tooltip位置被覆盖问题 ([f0b47fe](https://github.com/easyops-cn/next-basics/commit/f0b47fe74fbfe184bd4cde6447d0cbaf2b6e5a0e))
+
+
+
+
+
 ## [1.186.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.186.1...@next-bricks/basic-bricks@1.186.2) (2022-07-27)
 
 
