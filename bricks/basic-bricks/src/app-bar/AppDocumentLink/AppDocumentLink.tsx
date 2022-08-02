@@ -40,7 +40,7 @@ export function AppDocumentLink({
 
   return (
     <div className={styles.docLinkContainer}>
-      <Tooltip title={t(K.HELP)}>
+      <Tooltip title={t(K.HELP)} placement="bottom">
         <Link to={docLink} target="_blank">
           <QuestionCircleOutlined />
         </Link>
