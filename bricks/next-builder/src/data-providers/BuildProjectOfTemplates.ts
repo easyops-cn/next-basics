@@ -317,6 +317,7 @@ export async function BuildProjectOfTemplates({
       author: templateItem.creator,
       text: templateItem.text,
       description: templateItem.description,
+      isExport: templateItem.isExport,
       isCustomTemplate: true,
       thumbnail:
         thumbnail &&
