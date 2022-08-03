@@ -17,8 +17,8 @@ import {
   BuilderProvider,
   BuilderRuntimeNode,
 } from "@next-core/editor-bricks-helper";
-import { pipes } from "@next-core/pipes";
 import { WorkbenchBackendCacheAction } from "@next-types/preview";
+import { pipes } from "@next-core/pipes";
 
 /**
  * @id next-builder.workbench-backend
@@ -36,7 +36,10 @@ export class WorkbenchBackendElement extends UpdatingElement {
   projectId: string;
 
   @property({ attribute: false })
-  originDataSource: pipes.GraphData;
+  rootNode: BuilderRuntimeNode;
+
+  @property({ type: String })
+  objectId: string;
 
   private _backendRef = createRef<WorkbenchBackendRef>();
 
@@ -77,6 +80,17 @@ export class WorkbenchBackendElement extends UpdatingElement {
     });
   };
 
+  @event({ type: "graphData.update" })
+  _graphDataUpdateEmitter: EventEmitter<{
+    graphData: pipes.GraphData;
+  }>;
+
+  handleGraphDataUpdate = (graphData: pipes.GraphData): void => {
+    this._graphDataUpdateEmitter.emit({
+      graphData,
+    });
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -100,8 +114,11 @@ export class WorkbenchBackendElement extends UpdatingElement {
               ref={this._backendRef}
               appId={this.appId}
               projectId={this.projectId}
+              rootNode={this.rootNode}
+              objectId={this.objectId}
               onStoryboardUpdate={this.handleStoryboardUpdate}
               onRootNodeUpdate={this.handleRootNodeUpdate}
+              onGraphDataUpdate={this.handleGraphDataUpdate}
             />
           </BuilderProvider>
         </BrickWrapper>,

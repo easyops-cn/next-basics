@@ -1,13 +1,13 @@
 import React, {
+  useState,
   forwardRef,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useCallback,
+  useMemo,
   useRef,
 } from "react";
-import Worker from "../worker/backend.worker.ts";
-import { getRuntime } from "@next-core/brick-kit";
+import { getHistory, getRuntime } from "@next-core/brick-kit";
 import {
   useBuilderData,
   useBuilderDataManager,
@@ -31,12 +31,20 @@ import type {
   CustomTemplate,
 } from "@next-core/brick-types";
 import type {
-  WorkbenchBackendActionForInit,
   WorkbenchBackendActionForInsertDetail,
   WorkbenchBackendCacheAction,
   UpdateStoryboardType,
   PreviewSettings,
 } from "@next-types/preview";
+import WorkerbenchBackend, {
+  LockState,
+  QueueItem,
+} from "../shared/workbench/WorkbenchBackend";
+import { Button, message, Modal, Popover, Tooltip } from "antd";
+import { GeneralIcon } from "@next-libs/basic-components";
+import styles from "./WorkbenchBackend.module.css";
+import { pipes } from "@next-core/pipes";
+import classnames from "classnames";
 
 export interface WorkbenchBackendRef {
   manager: BuilderDataManager;
@@ -61,12 +69,15 @@ type UpdateStoryboard =
 interface WorkbenchBackendProps {
   appId: string;
   projectId: string;
+  objectId: string;
+  rootNode: BuilderRuntimeNode;
   onStoryboardUpdate: ({
     storyboard,
     updateStoryboardType,
     settings,
   }: StoryboardUpdateParams) => void;
   onRootNodeUpdate: (node: BuilderRuntimeNode) => void;
+  onGraphDataUpdate: (graphData: pipes.GraphData) => void;
 }
 
 function getGraphTreeByBuilderData(
@@ -131,15 +142,31 @@ function LegacyWorkbenchBackend(
   {
     appId,
     projectId,
+    objectId,
+    rootNode,
     onStoryboardUpdate,
     onRootNodeUpdate,
+    onGraphDataUpdate,
   }: WorkbenchBackendProps,
   ref: React.Ref<WorkbenchBackendRef>
 ): React.ReactElement {
   const { rootId, nodes, edges } = useBuilderData();
+  const history = getHistory();
+  const [lockState, setLockState] = useState<LockState>({
+    lock: false,
+  });
+  const [error, setError] = useState(false);
+  const [showCaheActionList, setShowCacheActionList] = useState<boolean>(false);
+  const [cacheActionList, setCacheActionList] = useState<QueueItem[]>([]);
   const manager = useBuilderDataManager();
   const basePath = getRuntime().getBasePath();
-  const worker = useMemo(() => new Worker(), []);
+  const backendInstance = WorkerbenchBackend.getInstance({
+    appId,
+    projectId,
+    basePath,
+    rootNode,
+    objectId,
+  });
   const nodesCahceRef = useRef<Map<string, BuilderRuntimeNode>>(new Map());
 
   const setNodesCache = (
@@ -162,13 +189,11 @@ function LegacyWorkbenchBackend(
   const setNewStoryboard = useCallback((): void => {
     let storyboard: UpdateStoryboard;
     let settings: unknown;
-    const rootInstanceId = nodes.find(
-      (item) => item.$$uid === rootId
-    ).instanceId;
-    const rootNode = nodesCahceRef.current.get(rootInstanceId);
     const graphTree = getGraphTreeByBuilderData(
       rootId,
-      [...nodesCahceRef.current.values()],
+      [...nodesCahceRef.current.values()].filter(
+        (item) => !item.$$isMock || !item.$$isDelete
+      ),
       edges
     );
     let updateStoryboardType: UpdateStoryboardType;
@@ -208,7 +233,7 @@ function LegacyWorkbenchBackend(
         settings,
       });
     }
-  }, [nodes, edges, onStoryboardUpdate, rootId]);
+  }, [edges, onStoryboardUpdate, rootId, rootNode]);
 
   const getInstanceDetail = useCallback(
     (instanceId: string): BuilderRuntimeNode => {
@@ -241,7 +266,7 @@ function LegacyWorkbenchBackend(
     if (data.dragOverInstanceId) {
       manager.workbenchNodeAdd(data as WorkbenchNodeAdd);
     } else {
-      const parentUid = nodes.find(
+      const parentUid = [...nodesCahceRef.current.values()].find(
         (item) => item.instanceId === data.parent
       ).$$uid;
       const nodeUids = edges
@@ -257,10 +282,47 @@ function LegacyWorkbenchBackend(
         nodeIds: [],
       } as EventDetailOfNodeAdd);
     }
+    nodesCahceRef.current.set(data.nodeData.instanceId, data.nodeData);
+  };
+
+  const updateCacheActionList = useCallback(
+    (
+      detail: WorkbenchBackendCacheAction,
+      state: "resolve" | "reject"
+    ): void => {
+      const newList = cacheActionList.map((item) => {
+        if (item.uid === detail.uid) {
+          item.state = state;
+        }
+        return item;
+      });
+      setCacheActionList(newList);
+    },
+    [cacheActionList]
+  );
+
+  const handleUnlock = () => {
+    Modal.confirm({
+      title: "确认解锁",
+      content: (
+        <>
+          <span>
+            当前页面由用户 {lockState.modifier} 于 {lockState.mtime} 进行锁定;
+          </span>
+          <span>请确认是否进行解锁</span>
+        </>
+      ),
+      onOk: async () => {
+        await backendInstance.updateBrickTree();
+        await backendInstance.setLock(false);
+      },
+    });
   };
 
   const cacheAction = (detail: WorkbenchBackendCacheAction): any => {
     const { action, data } = detail;
+    if (action !== "get" && lockState.lock) return;
+    const nodesCahce = nodesCahceRef.current;
     switch (action) {
       case "get":
         return {
@@ -269,15 +331,11 @@ function LegacyWorkbenchBackend(
         };
       case "insert":
         handleBrickAddNode(data);
-        nodesCahceRef.current.set(data.nodeData.instanceId, data.nodeData);
         break;
       case "update":
         if (data) {
           const { instanceId, property } = data;
-          const rootInstanceId = nodes.find(
-            (item) => item.$$uid === rootId
-          ).instanceId;
-          const originProperty = nodesCahceRef.current.get(instanceId);
+          const originProperty = nodesCahce.get(instanceId);
           const mergeData = Object.assign(originProperty, property);
           manager.updateNode(instanceId, {
             ...mergeData,
@@ -290,66 +348,192 @@ function LegacyWorkbenchBackend(
                 }
               : {}),
           });
-          nodesCahceRef.current.set(instanceId, mergeData);
-          if (instanceId === rootInstanceId) {
+          nodesCahce.set(instanceId, mergeData);
+          if (instanceId === rootNode.instanceId) {
             onRootNodeUpdate(mergeData);
           }
         }
-        setNodesCache([...nodesCahceRef.current.values()], edges);
+        setNodesCache([...nodesCahce.values()], edges);
         setNewStoryboard();
         break;
       case "move":
         break;
       case "delete":
-        nodesCahceRef.current.delete(data.instanceId);
+        if (data.instanceId) {
+          const deleteItem = nodesCahce.get(data.instanceId);
+          nodesCahce.set(data.instanceId, {
+            ...deleteItem,
+            $$isDelete: true,
+          });
+        }
         break;
     }
-    worker.postMessage(detail);
+    detail.uid = uniqueId("cache-action");
+    detail.state = lockState.lock ? "reject" : "pending";
+    setCacheActionList([...cacheActionList, detail] as QueueItem[]);
+    backendInstance.push(detail as QueueItem);
   };
 
-  useEffect(() => {
-    const nodesCacheRef = nodesCahceRef.current;
-    setNodesCache(nodes, edges);
-    return () => {
-      nodesCacheRef.clear();
+  const handleWorkerMessage = useCallback(
+    (topic: string, detail: any): void => {
+      const nodesCache = nodesCahceRef.current;
+      if (topic === "message") {
+        const { action, data } = detail;
+        switch (action) {
+          case "insert":
+            if (detail.data) {
+              const { data, newData } = detail;
+              if (nodesCache.has(data.nodeData.instanceId)) {
+                const cacheItem = nodesCache.get(data.nodeData.instanceId);
+                const newCahceData = {
+                  ...cacheItem,
+                  instanceId: newData.instanceId,
+                  id: newData.id,
+                };
+                nodesCache.set(data.nodeData.instanceId, {
+                  ...newCahceData,
+                  $$isMock: true,
+                });
+                nodesCache.set(newData.instanceId, newCahceData);
+                manager.updateNode(data.nodeData.instanceId, newCahceData);
+              }
+            }
+            break;
+          case "instance-success":
+            updateCacheActionList(data, "resolve");
+            break;
+          case "instance-fail":
+            message.error("实例更新失败");
+            updateCacheActionList(data, "reject");
+            break;
+          case "lock":
+            setLockState(data);
+            if (data?.lock) {
+              message.error("当前页面已锁定, 不允许修改");
+              setCacheActionList(
+                cacheActionList.map((item) => {
+                  if (item.state === "pending") {
+                    return {
+                      ...item,
+                      state: "reject",
+                    };
+                  }
+                  return item;
+                })
+              );
+            }
+            break;
+          case "update-graph-data":
+            onGraphDataUpdate(data.graphData);
+            break;
+          case "build-fail":
+            message.error("build & push 失败");
+            break;
+          case "error":
+            message.error(data.error);
+            setCacheActionList(
+              cacheActionList.map((item) => {
+                if (item.state === "pending") {
+                  return {
+                    ...item,
+                    state: "reject",
+                  };
+                }
+                return item;
+              })
+            );
+            setError(true);
+            break;
+        }
+      }
+    },
+    [cacheActionList, manager, onGraphDataUpdate, updateCacheActionList]
+  );
+
+  const handleBeforePageLeave = useCallback(
+    (e: BeforeUnloadEvent): void => {
+      const isPeddingList = cacheActionList.filter(
+        (item) => item.state === "pending"
+      );
+      if (isPeddingList.length) {
+        e.preventDefault();
+        e.returnValue = "";
+      } else {
+        delete e.returnValue;
+      }
+    },
+    [cacheActionList]
+  );
+
+  const renderCacheActionList = useMemo(() => {
+    const nodeCahce = nodesCahceRef.current;
+    const ActionContants = {
+      insert: "新增",
+      update: "更新",
+      move: "移动",
+      delete: "删除",
     };
-  }, []);
+
+    const stateConstants = {
+      pending: "处理中",
+      resolve: "完成",
+      reject: "失败",
+    };
+
+    const getBrickId = (item: QueueItem): string => {
+      const { action, data } = item;
+      switch (action) {
+        case "insert":
+          return nodeCahce.get(data.nodeData.instanceId)?.id;
+        case "move":
+          return data.nodeInstanceId
+            ? nodeCahce.get(data.nodeInstanceId)?.id
+            : data.nodeIds.join(",");
+        case "update":
+        case "delete":
+          return nodeCahce.get(data.instanceId)?.id;
+      }
+    };
+
+    const itemContent = (item: QueueItem): string =>
+      `${ActionContants[item.action]}实例: [${getBrickId(item)}]`;
+
+    return (
+      <div className={styles.cacheActionListWrapper}>
+        {cacheActionList.length
+          ? [...cacheActionList].reverse().map((item) => {
+              return (
+                <div key={item.uid} className={styles.cacheActionItem}>
+                  <span title={itemContent(item)}>{itemContent(item)}</span>
+                  <span className={classnames(styles[item.state])}>
+                    {stateConstants[item.state]}
+                  </span>
+                </div>
+              );
+            })
+          : "暂无变更"}
+      </div>
+    );
+  }, [cacheActionList]);
 
   useEffect(() => {
-    const removeListeners = [manager.onNodeUpdate(() => setNewStoryboard())];
+    setNodesCache(nodes, edges);
+  }, [edges, nodes]);
+
+  useEffect(() => {
+    const removeListeners = [manager.onNodeUpdate(setNewStoryboard)];
+    window.addEventListener("beforeunload", handleBeforePageLeave);
     return () => {
       for (const fn of removeListeners) {
         fn();
       }
+      window.removeEventListener("beforeunload", handleBeforePageLeave);
     };
-  }, [manager, setNewStoryboard]);
+  }, [handleBeforePageLeave, history, manager, setNewStoryboard]);
 
   useEffect(() => {
     setNewStoryboard();
   }, [setNewStoryboard]);
-
-  const handleWorkerMessage = useCallback(
-    (e: WorkerEventMap["message"]): void => {
-      const { action, data, newData } = e.data;
-      const nodesCache = nodesCahceRef.current;
-      switch (action) {
-        case "insert":
-          if (nodesCache.has(data.nodeData.instanceId)) {
-            const cacheItem = nodesCache.get(data.nodeData.instanceId);
-            const newCahceData = {
-              ...cacheItem,
-              instanceId: newData.instanceId,
-              id: newData.id,
-            };
-            nodesCache.delete(data.nodeData.instanceId);
-            nodesCache.set(newData.instanceId, newCahceData);
-            manager.updateNode(data.nodeData.instanceId, newCahceData);
-          }
-          break;
-      }
-    },
-    []
-  );
 
   useImperativeHandle(ref, () => ({
     manager,
@@ -358,22 +542,70 @@ function LegacyWorkbenchBackend(
   }));
 
   useEffect(() => {
-    worker.postMessage({
-      action: "init",
-      data: {
-        appId,
-        projectId,
-        basePath,
-      },
-    } as WorkbenchBackendActionForInit);
-    worker.addEventListener("message", handleWorkerMessage);
+    const onMessage = backendInstance.subscribe("message", handleWorkerMessage);
     return () => {
-      worker.removeEventListener("message", handleWorkerMessage);
-      worker.terminate();
+      backendInstance.unsubscribe(onMessage);
     };
-  }, [worker, basePath, handleWorkerMessage, appId, projectId]);
+  }, [backendInstance, handleWorkerMessage]);
 
-  return null;
+  return (
+    <div className={styles.cacheActionWrapper}>
+      {lockState.lock ? (
+        <Tooltip title="解锁">
+          <Button
+            shape="circle"
+            icon={
+              <GeneralIcon
+                icon={{
+                  color: "var(--tag-red-color)",
+                  icon: "lock",
+                  lib: "fa",
+                  prefix: "fas",
+                }}
+              />
+            }
+            onClick={handleUnlock}
+          />
+        </Tooltip>
+      ) : (
+        <Popover
+          title="变更列表"
+          content={renderCacheActionList}
+          visible={showCaheActionList}
+          onVisibleChange={setShowCacheActionList}
+          overlayClassName={styles.cacheActionListPopover}
+          placement="bottomRight"
+          trigger="click"
+        >
+          <Tooltip title="变更列表">
+            <Button
+              shape="circle"
+              icon={
+                <GeneralIcon
+                  icon={{
+                    icon: "unordered-list",
+                    lib: "antd",
+                    theme: "outlined",
+                    color: "var(--antd-btn-default-color)",
+                  }}
+                />
+              }
+            />
+          </Tooltip>
+        </Popover>
+      )}
+      {cacheActionList.filter((item) => item.state === "pending").length ? (
+        <span
+          className={styles.tips}
+          style={{
+            backgroundColor: lockState.lock || error ? "#c52d2d" : "#6c6c6c",
+          }}
+        >
+          {cacheActionList.filter((item) => item.state === "pending").length}
+        </span>
+      ) : null}
+    </div>
+  );
 }
 
 export const WorkbenchBackend = forwardRef(LegacyWorkbenchBackend);

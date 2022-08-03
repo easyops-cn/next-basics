@@ -1,4 +1,5 @@
 import type { Storyboard } from "@next-core/brick-types";
+import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
 import type {
   formSchemaProperties,
   fieldProperties,
@@ -385,18 +386,27 @@ export type WorkbenchBackendCacheAction =
   | WorkbenchBackendActionForMove
   | WorkbenchBackendActionForDelete;
 
+interface WorkbencdBackendCacheActionCommon {
+  uid: string;
+  state: "pending" | "resolve" | "reject";
+}
+
 export interface WorkbenchBackendActionForInitDetail {
   appId: string;
   projectId: string;
   basePath: string;
+  objectId: string;
+  rootNode: BuilderRuntimeNode;
 }
 
-export interface WorkbenchBackendActionForInit {
+export interface WorkbenchBackendActionForInit
+  extends WorkbencdBackendCacheActionCommon {
   action: "init";
   data: WorkbenchBackendActionForInitDetail;
 }
 
-export interface WorkbenchBackendActionForGet {
+export interface WorkbenchBackendActionForGet
+  extends WorkbencdBackendCacheActionCommon {
   action: "get";
   data: {
     instanceId: string;
@@ -416,7 +426,8 @@ export type WorkbenchBackendActionForInsertDetail = {
   dragStatus?: dragStatus;
   type: "brick" | "provider";
 };
-export interface WorkbenchBackendActionForInsert {
+export interface WorkbenchBackendActionForInsert
+  extends WorkbencdBackendCacheActionCommon {
   action: "insert";
   data: WorkbenchBackendActionForInsertDetail;
 }
@@ -427,7 +438,8 @@ export interface WorkbenchBackendActionForUpdateDetail {
   property: Record<string, any>;
 }
 
-export interface WorkbenchBackendActionForUpdate {
+export interface WorkbenchBackendActionForUpdate
+  extends WorkbencdBackendCacheActionCommon {
   action: "update";
   data: WorkbenchBackendActionForUpdateDetail;
 }
@@ -439,7 +451,8 @@ export interface WorkbenchBackendActionForMoveDetail {
   nodeData: NodeInstance;
 }
 
-export interface WorkbenchBackendActionForMove {
+export interface WorkbenchBackendActionForMove
+  extends WorkbencdBackendCacheActionCommon {
   action: "move";
   data: WorkbenchBackendActionForMoveDetail;
 }
@@ -449,7 +462,8 @@ export interface WorkbenchBackendActionForDeleteDetail {
   instanceId: string;
 }
 
-export interface WorkbenchBackendActionForDelete {
+export interface WorkbenchBackendActionForDelete
+  extends WorkbencdBackendCacheActionCommon {
   action: "delete";
   data: WorkbenchBackendActionForDeleteDetail;
 }
