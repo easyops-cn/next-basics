@@ -1,5 +1,5 @@
 import "./i18n";
-import "./data-providers/ScanBricksAndTemplatesProvider";
+import "./data-providers/ScanBricksAndTemplates";
 import "./data-providers/GenerateBricksBasedOnModel";
 import "./data-providers/GetAttrBrickConf";
 import "./data-providers/GenerateTemplateProxy";

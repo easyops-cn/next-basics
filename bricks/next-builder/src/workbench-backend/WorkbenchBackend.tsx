@@ -12,10 +12,10 @@ import {
   useBuilderData,
   useBuilderDataManager,
   type BuilderDataManager,
-  type EventDetailOfNodeAdd,
   type BuilderRuntimeNode,
   type BuilderRuntimeEdge,
-  WorkbenchNodeAdd,
+  type WorkbenchNodeAdd,
+  NodeInstance,
 } from "@next-core/editor-bricks-helper";
 import {
   buildBricks,
@@ -35,15 +35,16 @@ import type {
   WorkbenchBackendCacheAction,
   UpdateStoryboardType,
   PreviewSettings,
+  BackendMessage,
+  LockState,
 } from "@next-types/preview";
 import WorkerbenchBackend, {
-  LockState,
   QueueItem,
 } from "../shared/workbench/WorkbenchBackend";
 import { Button, message, Modal, Popover, Tooltip } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
-import styles from "./WorkbenchBackend.module.css";
 import { pipes } from "@next-core/pipes";
+import styles from "./WorkbenchBackend.module.css";
 import classnames from "classnames";
 
 export interface WorkbenchBackendRef {
@@ -192,7 +193,7 @@ function LegacyWorkbenchBackend(
     const graphTree = getGraphTreeByBuilderData(
       rootId,
       [...nodesCahceRef.current.values()].filter(
-        (item) => !item.$$isMock || !item.$$isDelete
+        (item) => !item.$$isMock && !item.$$isDelete
       ),
       edges
     );
@@ -245,7 +246,7 @@ function LegacyWorkbenchBackend(
     [nodes, edges]
   );
 
-  const handleBrickAddNode = (
+  const handleAddBrick = (
     data: WorkbenchBackendActionForInsertDetail
   ): void => {
     const nodeUid = Number(uniqueId());
@@ -258,13 +259,13 @@ function LegacyWorkbenchBackend(
       instanceId: nodeInstanceId,
       brick: data.brick,
       mountPoint: data.mountPoint,
-      parent: data.parent,
+      parent: [nodes.find((node) => node.instanceId === data.parent)],
       portal: data.portal,
       bg: data.bg,
       type: data.type,
     };
     if (data.dragOverInstanceId) {
-      manager.workbenchNodeAdd(data as WorkbenchNodeAdd);
+      manager.workbenchNodeAdd(data);
     } else {
       const parentUid = [...nodesCahceRef.current.values()].find(
         (item) => item.instanceId === data.parent
@@ -280,7 +281,7 @@ function LegacyWorkbenchBackend(
         nodeUids,
         sort: data.sort,
         nodeIds: [],
-      } as EventDetailOfNodeAdd);
+      });
     }
     nodesCahceRef.current.set(data.nodeData.instanceId, data.nodeData);
   };
@@ -301,7 +302,7 @@ function LegacyWorkbenchBackend(
     [cacheActionList]
   );
 
-  const handleUnlock = () => {
+  const handleUnlock = (): void => {
     Modal.confirm({
       title: "确认解锁",
       content: (
@@ -330,25 +331,32 @@ function LegacyWorkbenchBackend(
           ...getInstanceDetail(data.instanceId),
         };
       case "insert":
-        handleBrickAddNode(data);
+        handleAddBrick(data);
         break;
       case "update":
         if (data) {
           const { instanceId, property } = data;
-          const originProperty = nodesCahce.get(instanceId);
-          const mergeData = Object.assign(originProperty, property);
+          const cacheProperty = nodesCahce.get(instanceId);
+          const mergeData = Object.assign(cacheProperty, property);
           manager.updateNode(instanceId, {
             ...mergeData,
             ...(property.alias
               ? {
                   alias:
                     property.alias ||
-                    originProperty.alias ||
+                    cacheProperty.alias ||
                     (mergeData.brick as string).split(".").pop(),
                 }
               : {}),
           });
           nodesCahce.set(instanceId, mergeData);
+          // 如果缓存的instanceId更新, 则需要更新两份缓存数据
+          if (!cacheProperty.instanceId.startsWith("mock")) {
+            nodesCahce.set(cacheProperty.instanceId, {
+              ...mergeData,
+              $$isMock: false,
+            });
+          }
           if (instanceId === rootNode.instanceId) {
             onRootNodeUpdate(mergeData);
           }
@@ -374,8 +382,8 @@ function LegacyWorkbenchBackend(
     backendInstance.push(detail as QueueItem);
   };
 
-  const handleWorkerMessage = useCallback(
-    (topic: string, detail: any): void => {
+  const handleBackendMessage = useCallback(
+    (topic: string, detail: BackendMessage): void => {
       const nodesCache = nodesCahceRef.current;
       if (topic === "message") {
         const { action, data } = detail;
@@ -542,11 +550,14 @@ function LegacyWorkbenchBackend(
   }));
 
   useEffect(() => {
-    const onMessage = backendInstance.subscribe("message", handleWorkerMessage);
+    const onMessage = backendInstance.subscribe(
+      "message",
+      handleBackendMessage
+    );
     return () => {
       backendInstance.unsubscribe(onMessage);
     };
-  }, [backendInstance, handleWorkerMessage]);
+  }, [backendInstance, handleBackendMessage]);
 
   return (
     <div className={styles.cacheActionWrapper}>

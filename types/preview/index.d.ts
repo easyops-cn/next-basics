@@ -1,9 +1,18 @@
-import type { Storyboard } from "@next-core/brick-types";
-import { BuilderRuntimeNode } from "@next-core/editor-bricks-helper";
+import type {
+  BrickConf,
+  BuilderBrickNode,
+  Storyboard,
+} from "@next-core/brick-types";
+import {
+  BuilderRuntimeNode,
+  NodeInstance,
+  WorkbenchNodeData,
+} from "@next-core/editor-bricks-helper";
 import type {
   formSchemaProperties,
   fieldProperties,
 } from "@next-core/brick-kit/dist/types/core/CustomForms/ExpandCustomForm.d.ts";
+import { pipes } from "@next-core/pipes";
 
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
@@ -421,7 +430,7 @@ export type WorkbenchBackendActionForInsertDetail = {
   sort?: number;
   portal?: boolean;
   bg?: boolean;
-  nodeData?: BuilderRuntimeNode;
+  nodeData: BuilderRuntimeNode;
   dragOverInstanceId?: string;
   dragStatus?: dragStatus;
   type: "brick" | "provider";
@@ -468,18 +477,51 @@ export interface WorkbenchBackendActionForDelete
   data: WorkbenchBackendActionForDeleteDetail;
 }
 
-declare module "worker-loader!*" {
-  class WebpackWorker extends Worker {
-    constructor();
-  }
+export type BackendMessage =
+  | BackendMessageForInsert
+  | BackendMessageForInstanceResponse
+  | BackendMessageForLock
+  | BackendMessageForUpdateGraphData
+  | BackMessageForBuildFail
+  | BackendMessageForError;
 
-  export = WebpackWorker;
+export interface BackendMessageForInsert {
+  action: "insert";
+  data: WorkbenchBackendActionForInsertDetail;
+  newData: BuilderBrickNode;
 }
 
-type backendAction =
-  | "init"
-  | "insert"
-  | "update"
-  | "delete"
-  | "clear"
-  | "get-queue";
+export interface BackendMessageForInstanceResponse {
+  action: "instance-success" | "instance-fail";
+  data: WorkbenchBackendCacheAction;
+}
+
+export interface LockState {
+  lock: boolean;
+  mtime?: string;
+  modifier?: string;
+}
+
+export interface BackendMessageForLock {
+  action: "lock";
+  data: LockState;
+}
+
+export interface BackendMessageForUpdateGraphData {
+  action: "update-graph-data";
+  data: {
+    graphData: pipes.GraphData;
+  };
+}
+
+export interface BackMessageForBuildFail {
+  action: "build-fail";
+  data?: unknown;
+}
+
+export interface BackendMessageForError {
+  action: "error";
+  data: {
+    error: string;
+  };
+}

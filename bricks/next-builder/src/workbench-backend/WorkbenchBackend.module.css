@@ -37,6 +37,10 @@
     white-space: nowrap;
     color: var(--tag-gray-color);
   }
+  > span:last-child {
+    width: 50px;
+    text-align: right;
+  }
 }
 
 .cacheActionItem:last-child {

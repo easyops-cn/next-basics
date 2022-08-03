@@ -20,11 +20,15 @@ import type {
   WorkbenchBackendActionForUpdate,
   WorkbenchBackendActionForMove,
   WorkbenchBackendActionForDelete,
+  LockState,
+  BackendMessage,
 } from "@next-types/preview";
 import { StoryboardAssembly } from "../storyboard/StoryboardAssembly";
 import { InstanceApi_getDetail } from "@next-sdk/cmdb-sdk";
 import { getAuth } from "@next-core/brick-kit";
 import { HttpResponseError } from "@next-core/brick-http";
+import { pipes } from "@next-core/pipes";
+import { BuilderBrickNode } from "@next-core/brick-types";
 
 const DELAY_AFTER_CHANGE_TIME = 60000 * 2;
 const POLL_TIME = 60000;
@@ -35,12 +39,6 @@ export type QueueItem =
   | WorkbenchBackendActionForUpdate
   | WorkbenchBackendActionForMove
   | WorkbenchBackendActionForDelete;
-
-export interface LockState {
-  lock: boolean;
-  mtime?: string;
-  modifier?: string;
-}
 
 export default class WorkerbenchBackend {
   private username = getAuth().username;
@@ -118,7 +116,7 @@ export default class WorkerbenchBackend {
     this.cacheQueue = [];
   }
 
-  publish(topic: string, args: any): void {
+  publish(topic: string, args: BackendMessage): void {
     if (!this.topics[topic]) {
       return;
     }
@@ -276,7 +274,7 @@ export default class WorkerbenchBackend {
       this.publish("message", {
         action: "update-graph-data",
         data: {
-          graphData,
+          graphData: graphData as pipes.GraphData,
         },
       });
     } catch (e) {
@@ -318,7 +316,7 @@ export default class WorkerbenchBackend {
       this.publish("message", {
         action: "insert",
         data,
-        newData: res,
+        newData: res as BuilderBrickNode,
       });
       return true;
     } catch (e) {
@@ -406,29 +404,23 @@ export default class WorkerbenchBackend {
       // eslint-disable-next-line no-console
       console.log("=== build finsh ===");
       this.isBuilding = false;
-      this.publish("message", {
-        action: "build-success",
-      });
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error("build fail", e);
       this.publish("error", {
         action: "build-fail",
-        error: e,
+        data: {
+          error: "build & push 失败",
+        },
       });
     }
   }
 
-  private batchDealRequest = async (): Promise<void> => {
-    // 进入批量变更操作
-    this.isDealing = true;
-    this.cleanTimer();
-
+  private async checkLockBeforeDealRequest(): Promise<boolean> {
     if (this.isLock) {
       // 如果当前页面属于锁定状态, 开启轮询
       this.startPollQueryLockState();
-      this.isDealing = false;
-      return;
+      return false;
     } else {
       // 如果当前页面非锁定状态, 判断其最近更新时间是否大于预设延时时间
       // 如果大于, 需要重新查询页面锁定状态, 如果非锁定, 则设置成锁定
@@ -443,16 +435,27 @@ export default class WorkerbenchBackend {
       if (needChange) {
         const isLock = await this.checkLock();
         if (isLock) {
-          this.isDealing = false;
           this.startPollQueryLockState();
-          return;
+          return false;
         }
         const isSuccess = await this.setLock(true);
         if (!isSuccess) {
-          this.isDealing = false;
-          return;
+          return false;
         }
       }
+    }
+    return true;
+  }
+
+  private batchDealRequest = async (): Promise<void> => {
+    // 进入批量变更操作
+    this.isDealing = true;
+    this.cleanTimer();
+
+    const isAllow = await this.checkLockBeforeDealRequest();
+    if (!isAllow) {
+      this.isDealing = false;
+      return;
     }
 
     if (this.size > 0) {
