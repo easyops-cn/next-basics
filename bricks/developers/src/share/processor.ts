@@ -127,6 +127,11 @@ export const getAllStoryListV2 = (
       if (story.deprecated) {
         return;
       }
+
+      if (story.isExport === false) {
+        return;
+      }
+
       const description = story.description
         ? i18nText(story.description) || DEFAULT_DESCRIPTION
         : DEFAULT_DESCRIPTION;

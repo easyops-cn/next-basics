@@ -10,7 +10,6 @@
 .componentWraper {
   display: grid;
   grid-gap: 5px 15px;
-  padding: 0 15px;
 }
 
 .componentItem {

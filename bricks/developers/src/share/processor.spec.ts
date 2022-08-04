@@ -187,6 +187,19 @@ describe("getAllStoryListV2", () => {
         doc: null,
         type: "brick",
       },
+      {
+        author: "lucy",
+        category: "list",
+        text: {
+          en: "list widget",
+          zh: "列表挂件",
+        },
+        storyId: "easyops-builtin-widgets.tpl-base-layout",
+        layerType: "widget",
+        doc: null,
+        type: "brick",
+        isExport: false,
+      },
     ];
     expect(getAllStoryListV2(categoryGroups, stories)).toEqual([
       {
