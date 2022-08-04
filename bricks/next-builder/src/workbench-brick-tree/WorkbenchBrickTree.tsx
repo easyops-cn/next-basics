@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
 import {
-  BuilderCanvasData,
   BuilderRuntimeEdge,
   BuilderRuntimeNode,
   useBuilderContextMenuStatus,
@@ -246,7 +245,7 @@ export function WorkbenchBrickTree({
         const children = getChildren(node);
         const getAliasName = (node: WorkbenchRuntimeNode): string => {
           const brick = node.brick as string;
-          return node.alias ? node.alias : brick.split(".").pop();
+          return node.alias ? node.alias : brick ? brick.split(".").pop() : "";
         };
         const name =
           node.type === "custom-template"
@@ -318,7 +317,7 @@ export function WorkbenchBrickTree({
 
   useEffect(() => {
     const removeListeners = [
-      manager.onNodeUpdate((e: CustomEvent<BuilderCanvasData>) => {
+      manager.onNodeUpdate((e) => {
         const { nodes, edges } = e.detail;
         setTree(getTree(rootNode, nodes, edges));
       }),

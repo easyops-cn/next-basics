@@ -1,5 +1,10 @@
 import { developHelper, getHistory } from "@next-core/brick-kit";
-import type { PluginLocation } from "@next-core/brick-types";
+import type {
+  BrickConf,
+  CustomTemplate,
+  PluginLocation,
+  RouteConf,
+} from "@next-core/brick-types";
 import { matchPath } from "@next-core/brick-utils";
 import type {
   BrickOutline,
@@ -186,22 +191,25 @@ export function previewStart(
             data.enabled ? startInspecting() : stopInspecting();
             break;
           case "refresh":
-            if (data.options.updateStoryboardType) {
+            if (data.options?.updateStoryboardType) {
               if (data.options.updateStoryboardType === "route") {
                 developHelper.updateStoryboardByRoute(
                   options.appId,
-                  data.storyboardPatch
+                  data.storyboardPatch as RouteConf
                 );
               } else if (data.options.updateStoryboardType === "template") {
                 developHelper.updateStoryboardByTemplate(
                   options.appId,
-                  data.storyboardPatch,
+                  data.storyboardPatch as CustomTemplate,
                   data.options.settings
                 );
               } else if (data.options.updateStoryboardType === "snippet") {
                 developHelper.updateStoryboardBySnippet(
                   options.appId,
-                  data.storyboardPatch
+                  data.storyboardPatch as {
+                    snippetId: string;
+                    bricks: BrickConf[];
+                  }
                 );
               }
               getHistory().reload();
