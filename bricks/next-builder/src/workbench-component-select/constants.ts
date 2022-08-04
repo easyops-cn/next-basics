@@ -7,6 +7,11 @@ interface suggestType {
   [k: string]: Partial<BrickOptionItem>[];
 }
 
+export interface BrickSortField {
+  group: string;
+  position: string[];
+}
+
 export const suggest: suggestType = {
   brick: frequentlyUsedBricks,
   layout: [],

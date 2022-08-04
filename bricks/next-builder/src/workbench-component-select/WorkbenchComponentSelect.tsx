@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Input, Tabs } from "antd";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useMemo,
+} from "react";
+import { Input, Tabs, Collapse } from "antd";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import {
   suggest,
@@ -7,13 +13,15 @@ import {
   suggestGroup,
   groupItem,
   i18nTransform,
+  BrickSortField,
 } from "./constants";
-import { i18nText } from "@next-core/brick-kit";
+import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
 import { BuildFilled } from "@ant-design/icons";
 import { debounce } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
+import { adjustBrickSort } from "./processor";
 import styles from "./WorkbenchComponentSelect.module.css";
 
 interface ComponentSelectProps {
@@ -96,13 +104,14 @@ export function WorkbenchComponentSelect({
           obj[item.layerType]
             ? obj[item.layerType].push(item)
             : (obj[item.layerType] = [item]);
-        } else {
-          let key = item.type;
+        }
+        // don't show legacy template
+        else if (item.type !== "template") {
+          const key = item.type;
           const brickItem: BrickOptionItem = {
             ...item,
-            category: item.type === "template" ? item.type : item.category,
+            category: item.category,
           };
-          if (item.type === "template") key = "brick";
           obj[key] ? obj[key].push(brickItem) : (obj[key] = [brickItem]);
         }
       });
@@ -172,7 +181,9 @@ function ComponentList({
   const [list, setList] = useState([]);
   const [suggestList, setSuggestList] = useState([]);
   const [columnNumber, setColumnNumber] = useState(3);
+  const [activePanels, setActivePanels] = useState<string[]>();
   const refWrapper = useRef<HTMLDivElement>();
+  const { config } = useMemo(() => getRuntime().getCurrentApp(), []);
 
   const getRenderData = useCallback(
     (
@@ -217,12 +228,16 @@ function ComponentList({
               });
         }
       });
+
       return {
-        group: newGroup,
+        group: adjustBrickSort(
+          newGroup,
+          config?.brickLibrarySort as BrickSortField[]
+        ),
         list: result,
       };
     },
-    [initGroup, storyList]
+    [initGroup, storyList, config.brickLibrarySort]
   );
 
   useEffect(() => {
@@ -256,6 +271,7 @@ function ComponentList({
   useEffect(() => {
     const { group, list } = getRenderData(suggestList.concat(componentList), q);
     setGroup(group);
+    setActivePanels(group.map((item) => item.key));
     setList(list);
   }, [suggestList, componentList, q, getRenderData]);
 
@@ -267,28 +283,38 @@ function ComponentList({
     }
   }, [group, list]);
 
+  const handlePanelChange = (keys: string[]): void => {
+    setActivePanels(keys);
+  };
+
   return (
     <div ref={refWrapper}>
       {group?.length > 0 ? (
-        group.map((item) => {
-          if (item.children?.length > 0) {
-            return (
-              <div key={item.key}>
-                <div className={styles.componentCategory}>{item.text}</div>
-                <div
-                  className={styles.componentWraper}
-                  style={{
-                    gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
-                  }}
-                >
-                  {item.children.map((item, index) => (
-                    <ComponentItem key={index} {...item} />
-                  ))}
-                </div>
-              </div>
-            );
-          }
-        })
+        <Collapse
+          ghost
+          activeKey={activePanels}
+          expandIconPosition="right"
+          onChange={(keys) => handlePanelChange(keys as string[])}
+        >
+          {group.map((item) => {
+            if (item.children?.length > 0) {
+              return (
+                <Collapse.Panel header={item.text} key={item.key}>
+                  <div
+                    className={styles.componentWraper}
+                    style={{
+                      gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+                    }}
+                  >
+                    {item.children.map((item, index) => (
+                      <ComponentItem key={index} {...item} />
+                    ))}
+                  </div>
+                </Collapse.Panel>
+              );
+            }
+          })}
+        </Collapse>
       ) : (
         <div
           className={styles.componentWraper}
