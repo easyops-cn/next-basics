@@ -142,9 +142,9 @@ export function getParamsDebugInfo(
 
   if (stepInfo) {
     if (stepId === "request") {
-      return get(stepInfo, ["input", field.mappingType, field.name]);
+      return get(stepInfo, [field.mappingType, field.name]);
     } else if (stepId === "response") {
-      return get(stepInfo, `output.body.data.${field.name}`);
+      return get(stepInfo, `output.${field.name}`);
     } else {
       return get(stepInfo, [fieldCategory, field.name]);
     }
