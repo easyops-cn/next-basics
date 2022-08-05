@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.357.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.9...@next-bricks/developers@1.357.10) (2022-08-05)
+
+
+### Bug Fixes
+
+* don't show the document if don't export ([d52db07](https://github.com/easyops-cn/next-basics/commit/d52db07c9e3604f44dbe125cdcb0e4076c746bb1))
+
+
+
+
+
 ## [1.357.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.8...@next-bricks/developers@1.357.9) (2022-07-27)
 
 

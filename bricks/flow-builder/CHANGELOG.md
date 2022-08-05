@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.19.4...@next-bricks/flow-builder@1.19.5) (2022-08-05)
+
+
+### Bug Fixes
+
+* 修复flow-builder编排调试中,拓扑调试值的取值不正确问题 ([817e481](https://github.com/easyops-cn/next-basics/commit/817e481007f768207471895f44c5b9f0dec454b7))
+
+
+
+
+
 ## [1.19.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.19.3...@next-bricks/flow-builder@1.19.4) (2022-07-21)
 
 
