@@ -407,9 +407,9 @@ describe("getFunctionStep", () => {
 describe("getParamsDebugInfo", () => {
   it("should work", () => {
     const flowInfo = [
-      { stepId: "request", input: { uri: { name: "hello" } } },
+      { stepId: "request", uri: { name: "hello" } },
       { stepId: "getDetail", input: { instanceId: "bbfd" } },
-      { stepId: "response", output: { body: { data: { result: "good" } } } },
+      { stepId: "response", output: { result: "good" } },
     ];
 
     expect(
