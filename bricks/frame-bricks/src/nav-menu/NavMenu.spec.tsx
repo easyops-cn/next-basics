@@ -25,6 +25,12 @@ const sideBarMenuItem = [
       lib: "fa",
       prefix: "fas",
     },
+    useBrick: {
+      brick: "span",
+      properties: {
+        textContent: "subMenu",
+      },
+    },
     items: [
       {
         type: "group",
@@ -34,6 +40,12 @@ const sideBarMenuItem = [
           icon: "anchor",
           lib: "fa",
           prefix: "fas",
+        },
+        useBrick: {
+          brick: "span",
+          properties: {
+            textContent: "group-1",
+          },
         },
         items: [
           {

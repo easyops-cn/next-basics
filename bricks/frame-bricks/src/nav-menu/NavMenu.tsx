@@ -4,16 +4,22 @@ import { Menu } from "antd";
 import { UnregisterCallback, Location } from "history";
 import {
   SidebarMenuSimpleItem,
-  SidebarMenuItem,
   SidebarMenuGroup,
+  UseBrickConf,
 } from "@next-core/brick-types";
-import { getHistory } from "@next-core/brick-kit";
+import { BrickAsComponent, getHistory } from "@next-core/brick-kit";
 import classNames from "classnames";
 import {
   Link,
   initMenuItemAndMatchCurrentPathKeys,
 } from "@next-libs/basic-components";
 import style from "./NavMenu.module.css";
+type MenuItemBrick = {
+  useBrick?: UseBrickConf;
+};
+type SidebarMenuSimpleItems = SidebarMenuSimpleItem & MenuItemBrick;
+type SidebarMenuGroups = SidebarMenuGroup & MenuItemBrick;
+type SidebarMenuItem = SidebarMenuSimpleItems | SidebarMenuGroups;
 
 interface SidebarMenuProps {
   menuItems?: SidebarMenuItem[];
@@ -21,14 +27,14 @@ interface SidebarMenuProps {
   selectedKeys?: string[];
 }
 
-function isGroup(item: SidebarMenuItem): item is SidebarMenuGroup {
+function isGroup(item: SidebarMenuItem): item is SidebarMenuGroups {
   return item.type === "group";
 }
 
 function isSubMenu(
   item: SidebarMenuItem,
   showMenu?: boolean
-): item is SidebarMenuGroup {
+): item is SidebarMenuGroups {
   return item.type === "subMenu" || (showMenu && item.type === "group");
 }
 
@@ -37,7 +43,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
 
   const history = getHistory();
   const [location, setLocation] = useState<Location>(history.location);
-  const unlisten: UnregisterCallback = history.listen((location) => {
+  const unListen: UnregisterCallback = history.listen((location) => {
     setLocation(location);
   });
   const { pathname, search } = location;
@@ -56,11 +62,30 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
 
   useEffect(() => {
     setSelected();
-    return unlisten;
+    return unListen;
   }, []);
 
+  const renderLinkCom = (item: SidebarMenuSimpleItems) => {
+    return (
+      <Link to={item.to} href={item.href} target={item.target}>
+        <span className={classNames(style.menuText, style.simpleMenuItemText)}>
+          {item.text}
+        </span>
+      </Link>
+    );
+  };
+  const renderSpanCom = (item: SidebarMenuGroups, classNme: string) => {
+    return (
+      <span className={classNames(style.menuText, classNme)}>{item.title}</span>
+    );
+  };
+  const renderBrickCom = (item: SidebarMenuItem) => {
+    return (
+      <BrickAsComponent useBrick={item.useBrick} data={item}></BrickAsComponent>
+    );
+  };
   const renderSimpleMenuItem = (
-    item: SidebarMenuSimpleItem
+    item: SidebarMenuSimpleItems
   ): React.ReactNode => {
     return (
       <Menu.Item
@@ -68,26 +93,20 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         title={item.text}
         className={style.simpleMenuItem}
       >
-        <Link to={item.to} href={item.href} target={item.target}>
-          <span
-            className={classNames(style.menuText, style.simpleMenuItemText)}
-          >
-            {item.text}
-          </span>
-        </Link>
+        {item.useBrick ? renderBrickCom(item) : renderLinkCom(item)}
       </Menu.Item>
     );
   };
 
-  const renderGroupMenu = (item: SidebarMenuGroup): React.ReactNode => {
+  const renderGroupMenu = (item: SidebarMenuGroups): React.ReactNode => {
     return (
       <Menu.ItemGroup
         key={item.key}
         className={style.groupWrapper}
         title={
-          <span className={classNames(style.menuText, style.groupText)}>
-            {item.title}
-          </span>
+          item.useBrick
+            ? renderBrickCom(item)
+            : renderSpanCom(item, style.groupText)
         }
       >
         {item.items?.map((innerItem) => renderMenuItem(innerItem))}
@@ -95,16 +114,16 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     );
   };
 
-  const renderSubMenu = (item: SidebarMenuGroup): React.ReactNode => {
+  const renderSubMenu = (item: SidebarMenuGroups): React.ReactNode => {
     return (
       <Menu.SubMenu
         key={item.key}
         className={style.subMenuWrapper}
         popupClassName={style.popupWrapper}
         title={
-          <span className={classNames(style.menuText, style.subMenuTitleText)}>
-            {item.title}
-          </span>
+          item.useBrick
+            ? renderBrickCom(item)
+            : renderSpanCom(item, style.subMenuTitleText)
         }
       >
         {item.items?.map((innerItem) => renderMenuItem(innerItem))}
