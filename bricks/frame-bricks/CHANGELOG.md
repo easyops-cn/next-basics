@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.1.5...@next-bricks/frame-bricks@1.2.0) (2022-08-08)
+
+
+### Features
+
+* **nav-menu:** 修nav-menu支持使用自定义构件展示  refs INSTANCE-2651 ([d57f0fe](https://github.com/easyops-cn/next-basics/commit/d57f0fe863d5b38986b568c0db45f92819b3b00f))
+
+
+
+
+
 ## [1.1.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.1.4...@next-bricks/frame-bricks@1.1.5) (2022-07-07)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
