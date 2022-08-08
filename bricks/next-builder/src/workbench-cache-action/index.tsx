@@ -9,10 +9,10 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 import {
-  WorkbenchBackend,
-  WorkbenchBackendRef,
+  WorkbenchCacheAction,
+  WorkbenchCacheActionRef,
   StoryboardUpdateParams,
-} from "./WorkbenchBackend";
+} from "./WorkbenchCacheAction";
 import {
   BuilderProvider,
   BuilderRuntimeNode,
@@ -21,14 +21,14 @@ import { WorkbenchBackendCacheAction } from "@next-types/preview";
 import { pipes } from "@next-core/pipes";
 
 /**
- * @id next-builder.workbench-backend
+ * @id next-builder.workbench-cache-action
  * @author SheRunFeng
  * @history
- * 1.x.0: 新增构件 `next-builder.workbench-backend`
+ * 1.x.0: 新增构件 `next-builder.workbench-cache-action`
  * @docKind brick
  * @noInheritDoc
  */
-export class WorkbenchBackendElement extends UpdatingElement {
+export class WorkbenchCacheActionElement extends UpdatingElement {
   @property({ type: String })
   appId: string;
 
@@ -41,7 +41,7 @@ export class WorkbenchBackendElement extends UpdatingElement {
   @property({ type: String })
   objectId: string;
 
-  private _backendRef = createRef<WorkbenchBackendRef>();
+  private _backendRef = createRef<WorkbenchCacheActionRef>();
 
   @event({ type: "cache.action" })
   _cacheActionEmitter: EventEmitter<any>;
@@ -110,7 +110,7 @@ export class WorkbenchBackendElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <BuilderProvider>
-            <WorkbenchBackend
+            <WorkbenchCacheAction
               ref={this._backendRef}
               appId={this.appId}
               projectId={this.projectId}
@@ -129,6 +129,6 @@ export class WorkbenchBackendElement extends UpdatingElement {
 }
 
 customElements.define(
-  "next-builder.workbench-backend",
-  WorkbenchBackendElement
+  "next-builder.workbench-cache-action",
+  WorkbenchCacheActionElement
 );

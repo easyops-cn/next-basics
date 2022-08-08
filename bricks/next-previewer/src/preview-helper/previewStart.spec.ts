@@ -36,6 +36,11 @@ jest.spyOn(kit.developHelper, "updateStoryboard").mockImplementation();
 jest
   .spyOn(kit.developHelper, "updateTemplatePreviewSettings")
   .mockImplementation();
+jest.spyOn(kit.developHelper, "updateStoryboardByRoute").mockImplementation();
+jest
+  .spyOn(kit.developHelper, "updateStoryboardByTemplate")
+  .mockImplementation();
+jest.spyOn(kit.developHelper, "updateStoryboardBySnippet").mockImplementation();
 
 const mockCapture = capture as jest.Mock;
 
@@ -401,5 +406,70 @@ describe("previewStart", () => {
       sender: "previewer",
       type: "excute-proxy-method-error",
     });
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "refresh",
+        storyboardPatch: { routes: [] },
+        options: {
+          updateStoryboardType: "route",
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.updateStoryboardByRoute).toBeCalledWith("my-app", {
+      routes: [],
+    });
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "refresh",
+        storyboardPatch: { routes: [] },
+        options: {
+          updateStoryboardType: "template",
+          settings: {
+            properties: {
+              textContent: 123,
+            },
+          },
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.updateStoryboardByTemplate).toBeCalledWith(
+      "my-app",
+      {
+        routes: [],
+      },
+      {
+        properties: {
+          textContent: 123,
+        },
+      }
+    );
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "refresh",
+        storyboardPatch: { snippetId: "test-snippet", bricks: [] },
+        options: {
+          updateStoryboardType: "snippet",
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.updateStoryboardBySnippet).toBeCalledWith(
+      "my-app",
+      {
+        snippetId: "test-snippet",
+        bricks: [],
+      }
+    );
   });
 });

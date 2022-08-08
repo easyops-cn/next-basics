@@ -64,4 +64,4 @@ import "./data-providers/PasteBricks";
 import "./shared/components/contract-auto-complete";
 // !Lazy: import "./workbench-brick-context-menu";
 // !Lazy: import "./workbench-data-tree";
-// !Lazy: import "./workbench-backend";
+// !Lazy: import "./workbench-cache-action";

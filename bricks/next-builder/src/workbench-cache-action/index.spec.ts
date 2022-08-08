@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import "./";
+import ".";
 
 const spyOnRender = jest
   .spyOn(ReactDOM, "render")
@@ -8,9 +8,11 @@ const unmountComponentAtNode = jest
   .spyOn(ReactDOM, "unmountComponentAtNode")
   .mockImplementation(() => null);
 
-describe("next-builder.workbench-backend", () => {
+describe("next-builder.workbench-cache-action", () => {
   it("should create a custom element", () => {
-    const element = document.createElement("next-builder.workbench-backend");
+    const element = document.createElement(
+      "next-builder.workbench-cache-action"
+    );
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
     expect(spyOnRender).toBeCalled();

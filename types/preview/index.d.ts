@@ -396,14 +396,13 @@ export type WorkbenchBackendCacheAction =
   | WorkbenchBackendActionForDelete;
 
 interface WorkbencdBackendCacheActionCommon {
-  uid: string;
-  state: "pending" | "resolve" | "reject";
+  uid?: string;
+  state?: "pending" | "resolve" | "reject";
 }
 
 export interface WorkbenchBackendActionForInitDetail {
   appId: string;
   projectId: string;
-  basePath: string;
   objectId: string;
   rootNode: BuilderRuntimeNode;
 }
@@ -480,7 +479,6 @@ export interface WorkbenchBackendActionForDelete
 export type BackendMessage =
   | BackendMessageForInsert
   | BackendMessageForInstanceResponse
-  | BackendMessageForLock
   | BackendMessageForUpdateGraphData
   | BackMessageForBuildFail
   | BackendMessageForError;
@@ -494,17 +492,6 @@ export interface BackendMessageForInsert {
 export interface BackendMessageForInstanceResponse {
   action: "instance-success" | "instance-fail";
   data: WorkbenchBackendCacheAction;
-}
-
-export interface LockState {
-  lock: boolean;
-  mtime?: string;
-  modifier?: string;
-}
-
-export interface BackendMessageForLock {
-  action: "lock";
-  data: LockState;
 }
 
 export interface BackendMessageForUpdateGraphData {
