@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
 import {
+  BuilderRuntimeEdge,
+  BuilderRuntimeNode,
   useBuilderContextMenuStatus,
   useBuilderData,
   useBuilderDataManager,
@@ -60,6 +62,8 @@ export function WorkbenchBrickTree({
   const hoverNodeUid = useHoverNodeUid();
   const { active, node: activeContextMenuNode } = useBuilderContextMenuStatus();
   const manager = useBuilderDataManager();
+  const [tree, setTree] =
+    useState<WorkbenchNodeData<WorkbenchBrickTreeNode>[]>();
 
   const clickFactory = useCallback(
     ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
@@ -124,148 +128,159 @@ export function WorkbenchBrickTree({
     [manager]
   );
 
-  const tree = useMemo(() => {
-    if (!rootNode) {
-      return [];
-    }
-
-    function getChildren(
-      node: WorkbenchRuntimeNode
-    ): WorkbenchNodeData<WorkbenchBrickTreeNode>[] {
-      const groups = new Map<
-        string,
-        WorkbenchNodeData<WorkbenchBrickTreeNode>
-      >();
-      const relatedEdges = sortBy(
-        edges.filter(
-          (edge) => edge.parent === node.$$uid && !edge.$$isTemplateInternal
-        ),
-        [(edge) => edge.sort]
-      );
-
-      const maxSort =
-        relatedEdges.length > 0
-          ? relatedEdges[relatedEdges.length - 1].sort
-          : 0;
-      node.$nextChildSort = typeof maxSort === "number" ? maxSort + 1 : 1;
-
-      for (const edge of relatedEdges) {
-        let group = groups.get(edge.mountPoint);
-        if (!group) {
-          group = {
-            key: `${node.$$uid}:${edge.mountPoint}`,
-            name: edge.mountPoint,
-            icon: {
-              lib: "antd",
-              theme: "outlined",
-              icon: "down",
-            },
-            labelColor: "var(--palette-gray-6)",
-            data: {
-              type: "mount-point",
-              mountPoint: edge.mountPoint,
-              parent: node,
-            },
-            children: [],
-          };
-          groups.set(edge.mountPoint, group);
-        }
-        const childNode = nodes.find((node) => node.$$uid === edge.child);
-        group.children.push(getEntityNode(childNode));
+  const getTree = useCallback(
+    (
+      rootNode: BuilderRuntimeNode,
+      nodes: BuilderRuntimeNode[],
+      edges: BuilderRuntimeEdge[]
+    ): WorkbenchNodeData<WorkbenchBrickTreeNode>[] => {
+      if (!rootNode) {
+        return [];
       }
 
-      for (const group of groups.values()) {
-        group.data.mountPointType = group.children.some((child) =>
-          isRouteNode(child.data as BuilderRouteOrBrickNode)
-        )
-          ? "routes"
-          : "bricks";
+      function getChildren(
+        node: WorkbenchRuntimeNode
+      ): WorkbenchNodeData<WorkbenchBrickTreeNode>[] {
+        const groups = new Map<
+          string,
+          WorkbenchNodeData<WorkbenchBrickTreeNode>
+        >();
+        const relatedEdges = sortBy(
+          edges.filter(
+            (edge) => edge.parent === node.$$uid && !edge.$$isTemplateInternal
+          ),
+          [(edge) => edge.sort]
+        );
+
+        const maxSort =
+          relatedEdges.length > 0
+            ? relatedEdges[relatedEdges.length - 1].sort
+            : 0;
+        node.$nextChildSort = typeof maxSort === "number" ? maxSort + 1 : 1;
+
+        for (const edge of relatedEdges) {
+          let group = groups.get(edge.mountPoint);
+          if (!group) {
+            group = {
+              key: `${node.$$uid}:${edge.mountPoint}`,
+              name: edge.mountPoint,
+              icon: {
+                lib: "antd",
+                theme: "outlined",
+                icon: "down",
+              },
+              labelColor: "var(--palette-gray-6)",
+              data: {
+                type: "mount-point",
+                mountPoint: edge.mountPoint,
+                parent: node,
+              },
+              children: [],
+            };
+            groups.set(edge.mountPoint, group);
+          }
+          const childNode = nodes.find((node) => node.$$uid === edge.child);
+          group.children.push(getEntityNode(childNode));
+        }
+
+        for (const group of groups.values()) {
+          group.data.mountPointType = group.children.some((child) =>
+            isRouteNode(child.data as BuilderRouteOrBrickNode)
+          )
+            ? "routes"
+            : "bricks";
+        }
+
+        return Array.from(groups.values());
       }
 
-      return Array.from(groups.values());
-    }
-
-    function getEntityNode(
-      node: WorkbenchRuntimeNode
-    ): WorkbenchNodeData<WorkbenchBrickTreeNode> {
-      let icon = "question";
-      let color: string;
-      if (node.$isRoot) {
-        switch (node.type) {
-          case "custom-template":
-            icon = "block";
-            color = "var(--palette-purple-7)";
-            break;
-          case "snippet":
-            icon = "snippets";
-            color = "var(--palette-teal-7)";
-            break;
-          default:
-            icon = "branches";
-            color = "var(--palette-blue-6)";
+      function getEntityNode(
+        node: WorkbenchRuntimeNode
+      ): WorkbenchNodeData<WorkbenchBrickTreeNode> {
+        let icon = "question";
+        let color: string;
+        if (node.$isRoot) {
+          switch (node.type) {
+            case "custom-template":
+              icon = "block";
+              color = "var(--palette-purple-7)";
+              break;
+            case "snippet":
+              icon = "snippets";
+              color = "var(--palette-teal-7)";
+              break;
+            default:
+              icon = "branches";
+              color = "var(--palette-blue-6)";
+          }
+        } else if (node.bg || node.type === "provider") {
+          icon = "database";
+          color = "var(--palette-orange-6)";
+        } else if (node.portal) {
+          icon = "message";
+          color = "var(--palette-pink-6)";
+        } else {
+          switch (node.type) {
+            case "routes":
+              icon = "down";
+              break;
+            case "bricks":
+              icon = "branches";
+              color = "var(--palette-blue-6)";
+              break;
+            case "redirect":
+              icon = "double-right";
+              color = "var(--palette-cyan-6)";
+              break;
+            case "template":
+              icon = "gold";
+              color = "var(--palette-red-6)";
+              break;
+            case "brick":
+              icon = "build";
+              color = "var(--palette-green-6)";
+              break;
+          }
         }
-      } else if (node.bg || node.type === "provider") {
-        icon = "database";
-        color = "var(--palette-orange-6)";
-      } else if (node.portal) {
-        icon = "message";
-        color = "var(--palette-pink-6)";
-      } else {
-        switch (node.type) {
-          case "routes":
-            icon = "down";
-            break;
-          case "bricks":
-            icon = "branches";
-            color = "var(--palette-blue-6)";
-            break;
-          case "redirect":
-            icon = "double-right";
-            color = "var(--palette-cyan-6)";
-            break;
-          case "template":
-            icon = "gold";
-            color = "var(--palette-red-6)";
-            break;
-          case "brick":
-            icon = "build";
-            color = "var(--palette-green-6)";
-            break;
-        }
+        const children = getChildren(node);
+        const getAliasName = (node: WorkbenchRuntimeNode): string => {
+          const brick = node.brick as string;
+          return node.alias ? node.alias : brick ? brick.split(".").pop() : "";
+        };
+        const name =
+          node.type === "custom-template"
+            ? node.templateId
+            : node.type === "snippet"
+            ? node.snippetId
+            : getAliasName(node);
+        return {
+          key: node.$$uid,
+          name,
+          icon: {
+            lib: "antd",
+            theme: "outlined",
+            icon,
+            color,
+          },
+          data: node,
+          children:
+            node.$isRoot || rootNode.type === "routes"
+              ? children.find(
+                  (group) =>
+                    group.name ===
+                    (rootNode.type === "routes" ? rootNode.type : "bricks")
+                )?.children
+              : ["bricks", "custom-template", "snippet"].includes(rootNode.type)
+              ? children
+              : null,
+        };
       }
-      const children = getChildren(node);
-      const name =
-        node.type === "custom-template"
-          ? node.templateId
-          : node.type === "snippet"
-          ? node.snippetId
-          : node.alias;
-      return {
-        key: node.$$uid,
-        name,
-        icon: {
-          lib: "antd",
-          theme: "outlined",
-          icon,
-          color,
-        },
-        data: node,
-        children:
-          node.$isRoot || rootNode.type === "routes"
-            ? children.find(
-                (group) =>
-                  group.name ===
-                  (rootNode.type === "routes" ? rootNode.type : "bricks")
-              )?.children
-            : ["bricks", "custom-template", "snippet"].includes(rootNode.type)
-            ? children
-            : null,
-      };
-    }
 
-    rootNode.$isRoot = true;
-    return [getEntityNode(rootNode)];
-  }, [edges, nodes, rootNode]);
+      rootNode.$isRoot = true;
+      return [getEntityNode(rootNode)];
+    },
+    []
+  );
 
   const handleOnDrop = (
     e: React.DragEvent<HTMLElement>,
@@ -299,6 +314,24 @@ export function WorkbenchBrickTree({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
+
+  useEffect(() => {
+    const removeListeners = [
+      manager.onNodeUpdate((e) => {
+        const { nodes, edges } = e.detail;
+        setTree(getTree(rootNode, nodes, edges));
+      }),
+    ];
+    return () => {
+      for (const fn of removeListeners) {
+        fn();
+      }
+    };
+  }, [getTree, manager, rootNode]);
+
+  useEffect(() => {
+    setTree(getTree(rootNode, nodes, edges));
+  }, [nodes, edges, rootNode, getTree]);
 
   return (
     <WorkbenchTreeContext.Provider

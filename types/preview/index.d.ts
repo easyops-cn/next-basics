@@ -1,8 +1,18 @@
-import type { Storyboard } from "@next-core/brick-types";
+import type {
+  BrickConf,
+  BuilderBrickNode,
+  Storyboard,
+} from "@next-core/brick-types";
+import {
+  BuilderRuntimeNode,
+  NodeInstance,
+  WorkbenchNodeData,
+} from "@next-core/editor-bricks-helper";
 import type {
   formSchemaProperties,
   fieldProperties,
 } from "@next-core/brick-kit/dist/types/core/CustomForms/ExpandCustomForm.d.ts";
+import { pipes } from "@next-core/pipes";
 
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
@@ -134,8 +144,7 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerCaptureOk
   | PreviewMessagePreviewerCaptureFailed
   | PreviewMessageContainerProxyMethodSuccess
-  | PreviewMessageContainerProxyMethodError
-  | PreviewMessageContainerDebug;
+  | PreviewMessageContainerProxyMethodError;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnMain
@@ -300,12 +309,6 @@ export interface PreviewMessageContainerProxyMethodError
   result: ExcuteProxyMethodResult;
 }
 
-export interface PreviewMessageContainerDebug extends PreviewBaseMessage {
-  sender: "preview";
-  type: "preview.debug";
-  res: any[];
-}
-
 export interface PreviewMessageContainerBuilderHoverOnMain
   extends Omit<PreviewMessageBuilderHoverOnMain, "sender"> {
   sender: "preview-container";
@@ -361,6 +364,8 @@ export interface BrickOutline {
   alias?: string;
 }
 
+export type UpdateStoryboardType = "route" | "template" | "snippet";
+
 export interface PreviewStartOptions {
   appId?: string;
   templateId?: string;
@@ -370,6 +375,7 @@ export interface PreviewStartOptions {
   routePath?: string;
   routeExact?: boolean;
   settings?: PreviewSettings;
+  updateStoryboardType?: UpdateStoryboardType;
 }
 
 export interface PreviewSettings {
@@ -379,4 +385,130 @@ export interface PreviewSettings {
 export interface FormData {
   schema?: formSchemaProperties;
   fields?: fieldProperties[];
+}
+
+export type WorkbenchBackendCacheAction =
+  | WorkbenchBackendActionForInit
+  | WorkbenchBackendActionForGet
+  | WorkbenchBackendActionForInsert
+  | WorkbenchBackendActionForUpdate
+  | WorkbenchBackendActionForMove
+  | WorkbenchBackendActionForDelete;
+
+interface WorkbencdBackendCacheActionCommon {
+  uid?: string;
+  state?: "pending" | "resolve" | "reject";
+}
+
+export interface WorkbenchBackendActionForInitDetail {
+  appId: string;
+  projectId: string;
+  objectId: string;
+  rootNode: BuilderRuntimeNode;
+}
+
+export interface WorkbenchBackendActionForInit
+  extends WorkbencdBackendCacheActionCommon {
+  action: "init";
+  data: WorkbenchBackendActionForInitDetail;
+}
+
+export interface WorkbenchBackendActionForGet
+  extends WorkbencdBackendCacheActionCommon {
+  action: "get";
+  data: {
+    instanceId: string;
+  };
+}
+
+export type WorkbenchBackendActionForInsertDetail = {
+  parentInstanceId?: string;
+  parent: string;
+  mountPoint: string;
+  brick: string;
+  sort?: number;
+  portal?: boolean;
+  bg?: boolean;
+  nodeData: BuilderRuntimeNode;
+  dragOverInstanceId?: string;
+  dragStatus?: dragStatus;
+  type: "brick" | "provider";
+};
+export interface WorkbenchBackendActionForInsert
+  extends WorkbencdBackendCacheActionCommon {
+  action: "insert";
+  data: WorkbenchBackendActionForInsertDetail;
+}
+
+export interface WorkbenchBackendActionForUpdateDetail {
+  objectId: string;
+  instanceId: string;
+  property: Record<string, any>;
+}
+
+export interface WorkbenchBackendActionForUpdate
+  extends WorkbencdBackendCacheActionCommon {
+  action: "update";
+  data: WorkbenchBackendActionForUpdateDetail;
+}
+
+export interface WorkbenchBackendActionForMoveDetail {
+  nodeInstanceId: string;
+  nodeUid: number;
+  nodeIds: string[];
+  nodeData: NodeInstance;
+}
+
+export interface WorkbenchBackendActionForMove
+  extends WorkbencdBackendCacheActionCommon {
+  action: "move";
+  data: WorkbenchBackendActionForMoveDetail;
+}
+
+export interface WorkbenchBackendActionForDeleteDetail {
+  objectId: string;
+  instanceId: string;
+}
+
+export interface WorkbenchBackendActionForDelete
+  extends WorkbencdBackendCacheActionCommon {
+  action: "delete";
+  data: WorkbenchBackendActionForDeleteDetail;
+}
+
+export type BackendMessage =
+  | BackendMessageForInsert
+  | BackendMessageForInstanceResponse
+  | BackendMessageForUpdateGraphData
+  | BackMessageForBuildFail
+  | BackendMessageForError;
+
+export interface BackendMessageForInsert {
+  action: "insert";
+  data: WorkbenchBackendActionForInsertDetail;
+  newData: BuilderBrickNode;
+}
+
+export interface BackendMessageForInstanceResponse {
+  action: "instance-success" | "instance-fail";
+  data: WorkbenchBackendCacheAction;
+}
+
+export interface BackendMessageForUpdateGraphData {
+  action: "update-graph-data";
+  data: {
+    graphData: pipes.GraphData;
+  };
+}
+
+export interface BackMessageForBuildFail {
+  action: "build-fail";
+  data?: unknown;
+}
+
+export interface BackendMessageForError {
+  action: "error";
+  data: {
+    error: string;
+  };
 }
