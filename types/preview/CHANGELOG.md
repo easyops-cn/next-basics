@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.11.2...@next-types/preview@1.12.0) (2022-08-08)
+
+
+### Features
+
+* Preview support use local source to Update ([c1d36e3](https://github.com/easyops-cn/next-basics/commit/c1d36e3b566eef9769fe4bd76f9d0bfbd661a4f5))
+* Preview support use local source to Update ([20f20d7](https://github.com/easyops-cn/next-basics/commit/20f20d74452bf73a2107cce177f226b5542d677c))
+* Preview support use local source to Update ([93701d3](https://github.com/easyops-cn/next-basics/commit/93701d3c393a8826d6036864b511d2469a2593b5))
+* update unit test and package.conf.yaml ([62afaca](https://github.com/easyops-cn/next-basics/commit/62afacaccae5a2563a1f4e547c5b9871247a1e0a))
+
+
+
+
+
 ## [1.11.2](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.11.1...@next-types/preview@1.11.2) (2022-07-15)
 
 **Note:** Version bump only for package @next-types/preview

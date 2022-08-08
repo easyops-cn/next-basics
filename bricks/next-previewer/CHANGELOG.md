@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.8.2...@next-bricks/next-previewer@1.9.0) (2022-08-08)
+
+
+### Features
+
+* Preview support use local source to Update ([93701d3](https://github.com/easyops-cn/next-basics/commit/93701d3c393a8826d6036864b511d2469a2593b5))
+* update .size-limit.js and unit test ([3148fbb](https://github.com/easyops-cn/next-basics/commit/3148fbb45af86562eb27a662dc9c57e433ae480a))
+* update unit test and package.conf.yaml ([62afaca](https://github.com/easyops-cn/next-basics/commit/62afacaccae5a2563a1f4e547c5b9871247a1e0a))
+
+
+
+
+
 ## [1.8.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.8.1...@next-bricks/next-previewer@1.8.2) (2022-07-15)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
