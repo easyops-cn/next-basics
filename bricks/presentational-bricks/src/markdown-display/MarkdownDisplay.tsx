@@ -48,7 +48,22 @@ export function MarkdownDisplay({
        * ![text](href "=×HEIGHT")
        */
       const parts = /=(\d*)[x|×](\d*)$/.exec(title);
+      const sizeData = /size=((big|small|middle))$/.exec(title);
       let width: string, height: string;
+      if (sizeData?.[1]) {
+        const size = sizeData[1];
+        switch (size) {
+          case "small":
+            height = "150";
+            break;
+          case "middle":
+            height = "250";
+            break;
+          case "big":
+            height = "400";
+            break;
+        }
+      }
       if (parts) {
         if (parts[1]) width = parts[1];
         if (parts[2]) height = parts[2];

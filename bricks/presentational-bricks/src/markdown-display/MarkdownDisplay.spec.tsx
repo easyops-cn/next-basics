@@ -129,5 +129,38 @@ describe("MarkdownDisplay", () => {
       "<div class=\\"customMarkdown\\"><p>![img](<a href=\\"http://www.baidu.com/a.jpg\\">http://www.baidu.com/a.jpg</a> =200x200)</p>
       </div>"
     `);
+
+    const wrapper5 = mount(
+      <MarkdownDisplay
+        imagePreview={false}
+        value="![img](http://www.baidu.com/a.jpg 'size=big')"
+      />
+    );
+    expect(wrapper5.html()).toMatchInlineSnapshot(`
+      "<div class=\\"customMarkdown\\"><p><img height=\\"400\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      </div>"
+    `);
+
+    const wrapper6 = mount(
+      <MarkdownDisplay
+        imagePreview={false}
+        value="![img](http://www.baidu.com/a.jpg 'size=middle')"
+      />
+    );
+    expect(wrapper6.html()).toMatchInlineSnapshot(`
+      "<div class=\\"customMarkdown\\"><p><img height=\\"250\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      </div>"
+    `);
+
+    const wrapper7 = mount(
+      <MarkdownDisplay
+        imagePreview={false}
+        value="![img](http://www.baidu.com/a.jpg 'size=small')"
+      />
+    );
+    expect(wrapper7.html()).toMatchInlineSnapshot(`
+      "<div class=\\"customMarkdown\\"><p><img height=\\"150\\" alt=\\"img\\" src=\\"http://www.baidu.com/a.jpg\\"></p>
+      </div>"
+    `);
   });
 });
