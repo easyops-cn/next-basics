@@ -224,6 +224,7 @@ describe("WorkbenchWorker", () => {
               textContent: "hello",
             }),
           },
+          mtime: "1",
         },
       });
     });
@@ -285,6 +286,7 @@ describe("WorkbenchWorker", () => {
           property: {
             path: "/page-a/1",
           },
+          mtime: "1",
         },
       });
     });

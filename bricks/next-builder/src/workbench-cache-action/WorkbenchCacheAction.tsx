@@ -19,7 +19,7 @@ import {
   buildBricks,
   buildRoutes,
 } from "../shared/storyboard/buildStoryboardV2";
-import { uniqueId } from "lodash";
+import { omit, uniqueId } from "lodash";
 import type {
   BrickConf,
   BuilderBrickNode,
@@ -33,12 +33,13 @@ import type {
   UpdateStoryboardType,
   PreviewSettings,
   BackendMessage,
+  WorkbenchBackendActionForInsertSnippet,
 } from "@next-types/preview";
 import WorkbenchBackend, {
   QueueItem,
 } from "../shared/workbench/WorkbenchBackend";
 import getGraphTreeByBuilderData from "../utils/getGraphTreeByBuilderData";
-import { Button, message, Popover, Tooltip } from "antd";
+import { Button, Modal, Popover, Tooltip } from "antd";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { pipes } from "@next-core/pipes";
 import styles from "./WorkbenchCacheAction.module.css";
@@ -225,6 +226,16 @@ function LegacyWorkbenchCacheAction(
     nodesCacheRef.current.set(data.nodeData.instanceId, data.nodeData);
   };
 
+  const handleAddSnippet = (
+    detail: WorkbenchBackendActionForInsertSnippet
+  ): void => {
+    const { data } = detail;
+    const snippetData = manager.workbenchNodeAdd(data, false);
+    if (snippetData) {
+      data.snippetData = snippetData;
+    }
+  };
+
   const updateCacheActionList = useCallback(
     (
       detail: WorkbenchBackendCacheAction,
@@ -253,11 +264,16 @@ function LegacyWorkbenchCacheAction(
       case "insert":
         handleAddBrick(data);
         break;
+      case "insert.snippet":
+        handleAddSnippet(detail);
+        break;
+      case "copy.data":
       case "update":
         if (data) {
           const { instanceId, property } = data;
           const cacheProperty = nodesCahce.get(instanceId);
           const mergeData = Object.assign(cacheProperty, property);
+          data.mtime = mergeData.mtime;
           nodesCahce.set(instanceId, mergeData);
           // 如果缓存的instanceId更新, 则需要更新两份缓存数据
           if (!cacheProperty.instanceId.startsWith("mock")) {
@@ -269,20 +285,22 @@ function LegacyWorkbenchCacheAction(
           if (instanceId === rootNode.instanceId) {
             onRootNodeUpdate(mergeData);
           }
-          manager.updateNode(instanceId, {
-            ...mergeData,
-            ...(property.alias
-              ? {
-                  alias:
-                    property.alias ||
-                    cacheProperty.alias ||
-                    (mergeData.brick as string).split(".").pop(),
-                }
-              : {}),
-          });
+          const updateNode = omit(
+            {
+              ...mergeData,
+              ...(property.alias
+                ? {
+                    alias:
+                      property.alias ||
+                      cacheProperty.alias ||
+                      (mergeData.brick as string).split(".").pop(),
+                  }
+                : {}),
+            },
+            ["$$isMock"]
+          ) as BuilderRuntimeNode;
+          manager.updateNode(mergeData.instanceId, updateNode);
         }
-        break;
-      case "move":
         break;
       case "delete":
         if (data.instanceId) {
@@ -292,6 +310,10 @@ function LegacyWorkbenchCacheAction(
             $$isDelete: true,
           });
         }
+        break;
+      case "move":
+      case "cut.brick":
+      case "copy.brick":
         break;
     }
     detail.uid = uniqueId("cache-action");
@@ -329,17 +351,23 @@ function LegacyWorkbenchCacheAction(
             updateCacheActionList(data, "resolve");
             break;
           case "instance-fail":
-            message.error("实例更新失败");
+            Modal.error({
+              title: "实例更新失败",
+            });
             updateCacheActionList(data, "reject");
             break;
           case "update-graph-data":
             onGraphDataUpdate(data.graphData);
             break;
           case "build-fail":
-            message.error("build & push 失败");
+            Modal.error({
+              title: "build & push 失败",
+            });
             break;
           case "error":
-            message.error(data.error);
+            Modal.error({
+              title: data.error,
+            });
             setCacheActionList(
               cacheActionList.map((item) => {
                 if (item.state === "pending") {
@@ -385,10 +413,6 @@ function LegacyWorkbenchCacheAction(
   }, [cacheActionList]);
 
   useEffect(() => {
-    setNodesCache(nodes, edges);
-  }, [edges, nodes]);
-
-  useEffect(() => {
     window.addEventListener("beforeunload", handleBeforePageLeave);
     const removeListeners = [
       manager.onNodeUpdate((e) => {
@@ -406,8 +430,9 @@ function LegacyWorkbenchCacheAction(
   }, [handleBeforePageLeave, history, manager, setNewStoryboard]);
 
   useEffect(() => {
+    setNodesCache(nodes, edges);
     setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges);
-  }, [edges, rootId, setNewStoryboard]);
+  }, [edges, nodes, rootId, setNewStoryboard]);
 
   useImperativeHandle(ref, () => ({
     manager,

@@ -1,4 +1,3 @@
-import { createProviderClass } from "@next-core/brick-utils";
 import { BuilderRouteOrBrickNode } from "@next-core/brick-types";
 import {
   EventDetailOfNodeAddStored,
@@ -78,8 +77,3 @@ export async function ApplyStoryBoardSnippet({
 
   return result;
 }
-
-customElements.define(
-  "next-builder.provider-apply-storyboard-snippet",
-  createProviderClass(ApplyStoryBoardSnippet)
-);

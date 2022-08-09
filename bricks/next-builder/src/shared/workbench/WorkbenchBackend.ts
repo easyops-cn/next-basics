@@ -4,9 +4,14 @@ import {
   InstanceApi_updateInstance,
   InstanceArchiveApi_archiveInstance,
   InstanceGraphApi_traverseGraphV2,
+  InstanceRelationApi_set,
+  InstanceApi_updateByQuery,
+  InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
 import {
   BuildApi_buildAndPush,
+  StoryboardApi_cloneBricks,
+  type StoryboardApi_CloneBricksRequestBody,
   StoryboardApi_sortStoryboardNodes,
 } from "@next-sdk/next-builder-sdk";
 import { StoryboardAssembly } from "../storyboard/StoryboardAssembly";
@@ -20,11 +25,22 @@ import type {
   WorkbenchBackendActionForUpdate,
   WorkbenchBackendActionForMove,
   WorkbenchBackendActionForDelete,
+  WorkbenchBackendActionForCopyData,
+  WorkbenchBackendActionForInsertSnippet,
+  WorkbenchBackendActionForCopyBrick,
+  WorkbenchBackendActionForCutBrick,
   BackendMessage,
+  WorkbenchBackendActionForInsertSnippetDetail,
 } from "@next-types/preview";
 import type { HttpResponseError } from "@next-core/brick-http";
 import { type pipes } from "@next-core/pipes";
 import type { BuilderBrickNode } from "@next-core/brick-types";
+import { ModelInstanceRelationRequest } from "@next-sdk/cmdb-sdk/dist/types/model/cmdb";
+import { ApplyStoryBoardSnippet } from "../../data-providers/ApplyStoryboardSnippet";
+import {
+  EventDetailOfSnippetApply,
+  SnippetNodeDetail,
+} from "@next-core/editor-bricks-helper";
 
 const DELAY_BUILD_TIME = 30000;
 
@@ -32,7 +48,11 @@ export type QueueItem =
   | WorkbenchBackendActionForInsert
   | WorkbenchBackendActionForUpdate
   | WorkbenchBackendActionForMove
-  | WorkbenchBackendActionForDelete;
+  | WorkbenchBackendActionForDelete
+  | WorkbenchBackendActionForCopyData
+  | WorkbenchBackendActionForInsertSnippet
+  | WorkbenchBackendActionForCopyBrick
+  | WorkbenchBackendActionForCutBrick;
 
 export default class WorkbenchBackend {
   private baseInfo: WorkbenchBackendActionForInitDetail;
@@ -44,16 +64,21 @@ export default class WorkbenchBackend {
   private isDealing = false;
   private isBuilding = false;
   private afterChangeTimer: NodeJS.Timeout;
+  private isNeedUpdateTree = false;
+  private mTimeMap = new Map<string, string>();
 
-  private static instance: WorkbenchBackend;
+  private static instance = new Map<string, WorkbenchBackend>();
 
   static getInstance(
     initData: WorkbenchBackendActionForInitDetail
   ): WorkbenchBackend {
-    if (!this.instance) {
-      this.instance = new WorkbenchBackend(initData);
+    const key = initData.rootNode.instanceId;
+    const instance = this.instance.get(key);
+    if (!instance) {
+      const newInstance = new WorkbenchBackend(initData);
+      this.instance.set(key, newInstance);
     }
-    return this.instance;
+    return this.instance.get(key);
   }
 
   constructor(initData: WorkbenchBackendActionForInitDetail) {
@@ -160,6 +185,7 @@ export default class WorkbenchBackend {
         },
         select_fields: ["*"],
       });
+      this.isNeedUpdateTree = false;
       this.publish("message", {
         action: "update-graph-data",
         data: {
@@ -204,12 +230,32 @@ export default class WorkbenchBackend {
     data: WorkbenchBackendActionForUpdateDetail
   ): Promise<boolean> {
     try {
-      await InstanceApi_updateInstance(
-        data.objectId,
-        this.mockInstanceIdCache.get(data.instanceId) || data.instanceId,
-        data.property
-      );
-      return true;
+      const instanceId =
+        this.mockInstanceIdCache.get(data.instanceId) || data.instanceId;
+      const mtime = this.mTimeMap.get(instanceId) || data.mtime;
+      const res = await InstanceApi_updateByQuery(data.objectId, {
+        query: {
+          instanceId: {
+            $eq: instanceId,
+          },
+          ...(mtime
+            ? {
+                mtime: {
+                  $eq: mtime,
+                },
+              }
+            : {}),
+        },
+        data: data.property,
+      });
+      if (res.successTotal > 0) {
+        const detail = await InstanceApi_getDetail(data.objectId, instanceId, {
+          fields: "mtime",
+        });
+        this.mTimeMap.set(instanceId, detail.mtime);
+        return true;
+      }
+      this.handleError(null, "更新实例失败");
     } catch (e) {
       this.handleError(e, "更新实例失败");
       return false;
@@ -262,6 +308,67 @@ export default class WorkbenchBackend {
     }
   }
 
+  private replaceSnippetData(data: EventDetailOfSnippetApply): void {
+    data.nodeIds = data.nodeIds.map((item) => {
+      if (typeof item === "string" && item.startsWith("mock")) {
+        return this.mockNodeIdCache.get(item);
+      }
+      return item;
+    });
+    const walkChildren = (data: SnippetNodeDetail): void => {
+      if (
+        typeof data.nodeData.parent === "string" &&
+        data.nodeData.parent.startsWith("mock")
+      ) {
+        data.nodeData.parent = this.mockInstanceIdCache.get(
+          data.nodeData.parent
+        );
+      }
+      data.children?.forEach(walkChildren);
+    };
+    data.nodeDetails.forEach(walkChildren);
+  }
+
+  private async insertSnippet(
+    data: WorkbenchBackendActionForInsertSnippetDetail
+  ): Promise<boolean> {
+    try {
+      this.replaceSnippetData(data.snippetData);
+      await ApplyStoryBoardSnippet(data.snippetData);
+      this.isNeedUpdateTree = true;
+      return true;
+    } catch (e) {
+      this.handleError(e, "新增代码片段失败");
+      return false;
+    }
+  }
+
+  private async copyBrick(
+    data: StoryboardApi_CloneBricksRequestBody
+  ): Promise<boolean> {
+    try {
+      await StoryboardApi_cloneBricks(data);
+      this.isNeedUpdateTree = true;
+      return true;
+    } catch (e) {
+      this.handleError(e, "粘贴失败");
+      return false;
+    }
+  }
+
+  private async cutBrick(
+    data: Partial<ModelInstanceRelationRequest>
+  ): Promise<boolean> {
+    try {
+      await InstanceRelationApi_set("STORYBOARD_NODE", "parent", data);
+      this.isNeedUpdateTree = true;
+      return true;
+    } catch (e) {
+      this.handleError(e, "剪切失败");
+      return false;
+    }
+  }
+
   private async buildAndPush(): Promise<void> {
     if (this.isBuilding) return;
     this.isBuilding = true;
@@ -298,7 +405,7 @@ export default class WorkbenchBackend {
 
     if (this.size > 0) {
       const task = this.shift();
-      if (task) {
+      if (task && task.state === "pending") {
         const { action, data } = task;
         // eslint-disable-next-line no-console
         console.log("batchDealRequest", action, data);
@@ -308,6 +415,7 @@ export default class WorkbenchBackend {
             case "insert":
               isSuccess = await this.createInstance(data);
               break;
+            case "copy.data":
             case "update":
               isSuccess = await this.updateInstance(data);
               break;
@@ -317,15 +425,19 @@ export default class WorkbenchBackend {
             case "delete":
               isSuccess = await this.deleteInstance(data);
               break;
+            case "insert.snippet":
+              isSuccess = await this.insertSnippet(data);
+              break;
+            case "copy.brick":
+              isSuccess = await this.copyBrick(data);
+              break;
+            case "cut.brick":
+              isSuccess = await this.cutBrick(data);
+              break;
           }
           if (isSuccess) {
             this.publish("message", {
               action: "instance-success",
-              data: task,
-            });
-          } else {
-            this.publish("message", {
-              action: "instance-fail",
               data: task,
             });
           }
@@ -343,6 +455,9 @@ export default class WorkbenchBackend {
       this.batchDealRequest();
     } else {
       this.isDealing = false;
+      if (this.isNeedUpdateTree) {
+        await this.updateBrickTree();
+      }
       // build-and-push
       // eslint-disable-next-line no-console
       console.log("=== ready to build ===");
