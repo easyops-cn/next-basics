@@ -431,8 +431,11 @@ function LegacyWorkbenchCacheAction(
 
   useEffect(() => {
     setNodesCache(nodes, edges);
+  }, [edges, nodes]);
+
+  useEffect(() => {
     setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges);
-  }, [edges, nodes, rootId, setNewStoryboard]);
+  }, [edges, rootId, setNewStoryboard]);
 
   useImperativeHandle(ref, () => ({
     manager,
