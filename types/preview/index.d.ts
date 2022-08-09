@@ -5,14 +5,16 @@ import type {
 } from "@next-core/brick-types";
 import {
   BuilderRuntimeNode,
+  EventDetailOfSnippetApply,
   NodeInstance,
-  WorkbenchNodeData,
 } from "@next-core/editor-bricks-helper";
 import type {
   formSchemaProperties,
   fieldProperties,
 } from "@next-core/brick-kit/dist/types/core/CustomForms/ExpandCustomForm.d.ts";
 import { pipes } from "@next-core/pipes";
+import { ModelInstanceRelationRequest } from "@next-sdk/cmdb-sdk/dist/types/model/cmdb";
+import { StoryboardApi_CloneBricksRequestBody } from "@next-sdk/next-builder-sdk";
 
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
@@ -393,7 +395,11 @@ export type WorkbenchBackendCacheAction =
   | WorkbenchBackendActionForInsert
   | WorkbenchBackendActionForUpdate
   | WorkbenchBackendActionForMove
-  | WorkbenchBackendActionForDelete;
+  | WorkbenchBackendActionForDelete
+  | WorkbenchBackendActionForInsertSnippet
+  | WorkbenchBackendActionForCopyData
+  | WorkbenchBackendActionForCopyBrick
+  | WorkbenchBackendActionForCutBrick;
 
 interface WorkbencdBackendCacheActionCommon {
   uid?: string;
@@ -444,6 +450,7 @@ export interface WorkbenchBackendActionForUpdateDetail {
   objectId: string;
   instanceId: string;
   property: Record<string, any>;
+  mtime: string;
 }
 
 export interface WorkbenchBackendActionForUpdate
@@ -474,6 +481,37 @@ export interface WorkbenchBackendActionForDelete
   extends WorkbencdBackendCacheActionCommon {
   action: "delete";
   data: WorkbenchBackendActionForDeleteDetail;
+}
+
+type WorkbenchBackendActionForInsertSnippetDetail =
+  WorkbenchBackendActionForInsertDetail & {
+    snippetData?: EventDetailOfSnippetApply;
+  };
+
+export interface WorkbenchBackendActionForInsertSnippet
+  extends WorkbencdBackendCacheActionCommon {
+  action: "insert.snippet";
+  data: WorkbenchBackendActionForInsertSnippetDetail;
+}
+
+export interface WorkbenchBackendActionForCopyData
+  extends WorkbencdBackendCacheActionCommon {
+  action: "copy.data";
+  data: WorkbenchBackendActionForUpdateDetail;
+  sourceName: string;
+}
+
+export interface WorkbenchBackendActionForCutBrick
+  extends WorkbencdBackendCacheActionCommon {
+  action: "cut.brick";
+  data: Partial<ModelInstanceRelationRequest>;
+  sourceId: string;
+}
+export interface WorkbenchBackendActionForCopyBrick
+  extends WorkbencdBackendCacheActionCommon {
+  action: "copy.brick";
+  data: StoryboardApi_CloneBricksRequestBody;
+  sourceId: string;
 }
 
 export type BackendMessage =

@@ -35,6 +35,7 @@ import {
   BuilderRuntimeNode,
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
+import { omit } from "lodash";
 
 export interface PreviewContainerProps {
   previewUrl: string;
@@ -310,7 +311,9 @@ export function LegacyPreviewContainer(
             mountPoint:
               dragStatus === "inside" ? "content" : hoverEdge.mountPoint,
             dragStatus,
-            parentNodes,
+            parentNodes: parentNodes.map((node) =>
+              omit(node, ["parent", "children"])
+            ),
             parentNode: parentNodes[parentNodes.length - 1],
             dragOverInstanceId: hoverInstanceId,
           });

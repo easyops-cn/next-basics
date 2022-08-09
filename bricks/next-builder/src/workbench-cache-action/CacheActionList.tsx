@@ -14,10 +14,14 @@ export function CacheActionList({
   nodeCache,
 }: CacheActionListProps): React.ReactElement {
   const ActionContants = {
-    insert: "新增",
-    update: "更新",
-    move: "移动",
-    delete: "删除",
+    insert: "新增实例",
+    update: "更新实例",
+    move: "移动实例",
+    delete: "删除实例",
+    "copy.data": "粘贴数据",
+    "copy.brick": "粘贴构件",
+    "cut.brick": "粘贴构件",
+    "insert.snippet": "新增片段",
   };
 
   const stateConstants = {
@@ -38,11 +42,18 @@ export function CacheActionList({
       case "update":
       case "delete":
         return nodeCache.get(data.instanceId)?.id;
+      case "cut.brick":
+      case "copy.brick":
+        return item.sourceId;
+      case "copy.data":
+        return item.sourceName;
+      case "insert.snippet":
+        return item.data.brick;
     }
   };
 
   const itemContent = (item: QueueItem): string =>
-    `${ActionContants[item.action]}实例: [${getBrickId(item)}]`;
+    `${ActionContants[item.action]}: [${getBrickId(item)}]`;
 
   return (
     <div className={styles.cacheActionListWrapper}>
