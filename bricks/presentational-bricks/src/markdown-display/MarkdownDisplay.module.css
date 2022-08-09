@@ -1,6 +1,6 @@
 .customMarkdown {
   a {
-    color: #4183c4;
+    color: #1a7aff;
   }
 
   h1,
@@ -9,14 +9,16 @@
   h4,
   h5,
   h6 {
-    margin: 20px 0 10px;
-    padding: 0;
+    margin: 20px 0 0px;
+    padding: 0 0 12px;
     font-weight: bold;
     -webkit-font-smoothing: antialiased;
     cursor: text;
     position: relative;
   }
-
+  strong {
+    background: #ffee7d 45%;
+  }
   h1:hover a,
   h2:hover a,
   h3:hover a,
@@ -77,11 +79,13 @@
 
   h5 {
     font-size: 14px;
+    margin-top: 12px;
   }
 
   h6 {
     color: #777777;
     font-size: 14px;
+    margin-top: 12px;
   }
 
   p,
@@ -90,15 +94,14 @@
   ol,
   dl,
   li,
-  table,
-  pre {
+  table {
     margin: 15px 0;
   }
 
   hr {
     padding: 0;
     border: 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e8e8e8;
   }
 
   a:first-child h1,
@@ -118,14 +121,48 @@
   h5 p,
   h6 p,
   p {
-    margin-top: 0;
+    /* margin-top: 0; */
+    margin: 0 0 4px;
+    padding-bottom: 16px;
+  }
+
+  ol li {
+    margin: 0;
+  }
+
+  ol li ol,
+  ul {
+    padding-left: 40px;
   }
 
   ul,
   ol {
-    padding-left: 30px;
+    padding-bottom: 16px;
+  }
+  ul li {
+    margin: 4px 0;
+  }
+  p + ul,
+  ul li ul > li:first-child {
+    margin-top: 4px;
+  }
+  h1 + ul,
+  h2 + ul,
+  h3 + ul,
+  h4 + ul,
+  h5 + ul,
+  h6 + ul {
+    margin-top: 0;
   }
 
+  h1 + img,
+  h2 + img,
+  h3 + img,
+  h4 + img,
+  h5 + img,
+  h6 + img {
+    margin-top: 12px;
+  }
   ul :first-child,
   ol :first-child {
     margin-top: 0;
@@ -135,6 +172,61 @@
   ol :last-child {
     margin-bottom: 0;
   }
+
+  li > p
+  /* , */
+  /* li >p:last-child  */ {
+    margin: 0 0 4px;
+    padding: 0 0 16px;
+  }
+
+  li > p:first-child,
+  li > p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  li:last-child > h1,
+  li:last-child > h2,
+  li:last-child > h3,
+  li:last-child > h4,
+  li:last-child > h5,
+  li:last-child > h6 {
+    padding-bottom: 0px;
+  }
+
+  ul li img:first-child {
+    margin-top: 20px;
+  }
+  ol li img:first-child {
+    margin-top: 16px;
+  }
+
+  li > ol:last-child,
+  li > ul:last-child {
+    padding-bottom: 0;
+  }
+  li > p:first-child + p,
+  li > blockquote:last-child {
+    margin-top: 20px;
+  }
+
+  li > blockquote:first-child {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  li > blockquote {
+    margin-left: 12px;
+  }
+
+  li > pre:first-child {
+    margin: 16px 0 20px;
+  }
+
+  /* li>pre:last-child{
+    margin-bottom: 0;
+  } */
 
   dl {
     padding: 0;
@@ -172,18 +264,56 @@
   dl dd > :last-child {
     margin-bottom: 0;
   }
+  h1 + blockquote,
+  h2 + blockquote,
+  h3 + blockquote,
+  h4 + blockquote,
+  h5 + blockquote,
+  h6 + blockquote {
+    margin-top: 8px;
+  }
 
+  p + blockquote {
+    margin-top: 4px;
+  }
+
+  p + ul,
+  p + ol {
+    margin-top: 0px;
+  }
   blockquote {
     border-left: 4px solid #dddddd;
-    padding: 0 15px;
+    padding: 16px 12px;
     color: #777777;
+    margin: 20px 0;
+  }
+
+  blockquote > blockquote {
+    margin-left: 12px;
   }
 
   blockquote > :first-child {
     margin-top: 0;
   }
 
+  blockquote > h1:first-child,
+  blockquote > h2:first-child,
+  blockquote > h3:first-child,
+  blockquote > h4:first-child {
+    padding-top: 20px;
+  }
+
+  blockquote > h5:first-child,
+  blockquote > h6:first-child {
+    padding-top: 12px;
+  }
+
+  blockquote > blockquote:last-child {
+    padding-bottom: 16px;
+  }
+
   blockquote > :last-child {
+    padding-bottom: 0px;
     margin-bottom: 0;
   }
 
@@ -230,6 +360,8 @@
 
   img {
     max-width: 100%;
+    margin-top: 4px;
+    margin-bottom: 20px;
   }
 
   code,
@@ -241,13 +373,17 @@
     background-color: #f8f8f8;
     border-radius: 3px;
   }
-
+  code {
+    color: #b70c5e;
+    background: #ffe6ec;
+  }
   pre code {
     margin: 0;
     padding: 0;
     white-space: pre;
     border: none;
     background: transparent;
+    color: var(--antd-text-color);
   }
 
   pre {
@@ -256,8 +392,9 @@
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
-    padding: 6px 10px;
+    padding: 16px 12px;
     border-radius: 3px;
+    margin: 0 0 20px;
   }
 
   pre code,
@@ -287,6 +424,10 @@ html[data-theme="dark-v2"] {
     h5,
     h6 {
       color: var(--color-strong-text);
+    }
+
+    strong {
+      background: #d5a21d 30%;
     }
 
     h2,
