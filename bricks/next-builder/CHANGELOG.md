@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.169.0...@next-bricks/next-builder@1.170.0) (2022-08-09)
+
+
+### Features
+
+* state 变量支持文档配置，以便在挂件文档中展示其属性信息 ([987f957](https://github.com/easyops-cn/next-basics/commit/987f957e04bb40734a1d7ff03426a3e668e226c9))
+
+
+
+
+
 # [1.169.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.168.0...@next-bricks/next-builder@1.169.0) (2022-08-08)
 
 
