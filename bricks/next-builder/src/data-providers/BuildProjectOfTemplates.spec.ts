@@ -127,7 +127,16 @@ const consoleError = jest
               state: `[
                 {
                   "name": "myState",
-                  "value": "any data",
+                  "value": "any data"
+                },
+                {
+                  "name": "instanceId",
+                  "value": "abc",
+                  "doc": {
+                    "type": "string",
+                    "required": false,
+                    "description": "实例 id"
+                  }
                 }
               ]`,
             },
@@ -176,6 +185,12 @@ const consoleError = jest
                   }
                 }
               }`,
+              state: `[
+                {
+                  "name": "age",
+                  "value": "18"
+                }
+              ]`,
             },
           ],
           vertices: [
@@ -373,7 +388,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.8945e1a5.js",
+            path: "dist/index.f91919f5.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -461,6 +476,16 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
       }
     }
   },
+  "state": [
+    {
+      "name": "myState",
+      "value": "any data"
+    },
+    {
+      "name": "instanceId",
+      "value": "abc"
+    }
+  ],
   "bricks": [
     {
       "iid": "u-1",
@@ -495,6 +520,12 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-w", {
       }
     }
   },
+  "state": [
+    {
+      "name": "age",
+      "value": "18"
+    }
+  ],
   "bricks": []
 }),
 Object(n.getRuntime)().registerWidgetFunctions("app-1", [
@@ -612,6 +643,12 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                       required: "-",
                       default: "-",
                       description: "-",
+                    },
+                    {
+                      name: "instanceId",
+                      type: "string",
+                      required: false,
+                      description: "实例 id",
                     },
                   ],
                   author: "abc",
@@ -790,6 +827,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   templateId: "template-w",
                   creator: "abc",
                   proxy: expect.any(String),
+                  state: expect.any(String),
                 },
                 useWidget: [],
               },
@@ -912,7 +950,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
 }`,
           },
           {
-            path: "dist/index.44cbf997.js",
+            path: "dist/index.15397f5a.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
@@ -1010,6 +1048,12 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                       required: "-",
                       default: "-",
                       description: "-",
+                    },
+                    {
+                      description: "实例 id",
+                      name: "instanceId",
+                      required: false,
+                      type: "string",
                     },
                   ],
                   author: "abc",
@@ -1188,6 +1232,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
                   templateId: "template-w",
                   creator: "abc",
                   proxy: expect.any(String),
+                  state: expect.any(String),
                 },
                 useWidget: [],
               },

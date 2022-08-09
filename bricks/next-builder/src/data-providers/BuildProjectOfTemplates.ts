@@ -1,4 +1,4 @@
-import { isEmpty, uniq } from "lodash";
+import { isEmpty, omit, uniq } from "lodash";
 import {
   BrickConfInTemplate,
   BuilderCustomTemplateNode,
@@ -8,6 +8,8 @@ import {
   Story,
   Storyboard,
   StoryboardFunction,
+  StoryDoc,
+  StoryDocProperty,
 } from "@next-core/brick-types";
 import {
   createProviderClass,
@@ -73,6 +75,12 @@ function getCleanProxy(proxy: string): unknown {
   }
 }
 
+function getCleanState(state: string): unknown[] {
+  const states = safeJSONParse(state) as Record<string, unknown>[];
+
+  return states?.map((item) => omit(item, "doc"));
+}
+
 export interface BuildProjectOfTemplatesParams {
   // The human-readable id of an app.
   appId: string;
@@ -105,6 +113,15 @@ export interface BuildInfoForProjectOfTemplates {
 export interface BrickPackageFile {
   path: string;
   content: string;
+}
+
+export interface ProcessedCustomTemplateState extends CustomTemplateState {
+  doc?: {
+    type?: string;
+    required?: boolean;
+    default?: unknown;
+    description?: string;
+  };
 }
 
 export async function BuildProjectOfTemplates({
@@ -182,7 +199,7 @@ export async function BuildProjectOfTemplates({
       name: `${appId}.${item.templateId}`,
       proxy: getCleanProxy(item.proxy),
       state: item.state
-        ? (safeJSONParse(item.state) as CustomTemplateState[])
+        ? (getCleanState(item.state) as CustomTemplateState[])
         : undefined,
       bricks: replaceWidgetFunctions(
         buildBricks(item.children, {
@@ -363,6 +380,24 @@ export async function BuildProjectOfTemplates({
       }
       // Allow examples to use `<% IMG.get(...) %>`
       stories.conf = replaceWidgetFunctions(stories.conf, appId);
+    }
+
+    if (templateItem.state) {
+      const properties = (
+        safeJSONParse(templateItem.state) as ProcessedCustomTemplateState[]
+      )
+        ?.filter((item) => item.doc)
+        .map((item) => ({
+          ...item.doc,
+          name: item.name,
+        })) as StoryDocProperty[];
+
+      if (properties?.length) {
+        const doc = stories.doc as StoryDoc;
+        doc.properties = doc.properties ?? [];
+
+        doc.properties.push(...properties);
+      }
     }
 
     depMap.set(storyId, useWidget);
