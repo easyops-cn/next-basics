@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.170.0...@next-bricks/next-builder@1.171.0) (2022-08-09)
+
+
+### Features
+
+* local sourceChangeSupport Copy &  Cut & Snippet & updateInstanceByMtime ([19ad97e](https://github.com/easyops-cn/next-basics/commit/19ad97e7eafb264fb36e01c3fa8fb4de0c8eaf87))
+* update package.conf.yaml ([e882162](https://github.com/easyops-cn/next-basics/commit/e8821627db8e1c99bba15c403dd8be4b202b7219))
+
+
+
+
+
 # [1.170.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.169.0...@next-bricks/next-builder@1.170.0) (2022-08-09)
 
 

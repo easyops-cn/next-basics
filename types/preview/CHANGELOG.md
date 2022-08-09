@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.12.0...@next-types/preview@1.13.0) (2022-08-09)
+
+
+### Features
+
+* local sourceChangeSupport Copy &  Cut & Snippet & updateInstanceByMtime ([19ad97e](https://github.com/easyops-cn/next-basics/commit/19ad97e7eafb264fb36e01c3fa8fb4de0c8eaf87))
+
+
+
+
+
 # [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.11.2...@next-types/preview@1.12.0) (2022-08-08)
 
 

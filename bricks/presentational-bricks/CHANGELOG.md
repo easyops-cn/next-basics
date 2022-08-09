@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.261.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.260.1...@next-bricks/presentational-bricks@1.261.0) (2022-08-09)
+
+
+### Features
+
+* markdown构件样式调整 refs BRICK_STORE-3028 ([cf2cb13](https://github.com/easyops-cn/next-basics/commit/cf2cb13f4e05515973c6c6289fd9fbb7f65d2dd6))
+
+
+
+
+
 ## [1.260.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.260.0...@next-bricks/presentational-bricks@1.260.1) (2022-08-03)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
