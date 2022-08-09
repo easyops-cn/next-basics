@@ -1,3 +1,4 @@
+import React from "react";
 import i18next from "i18next";
 import { frequentlyUsedBricks } from "../builder-container/constants";
 import { BrickOptionItem } from "../builder-container/interfaces";
@@ -145,3 +146,9 @@ export const defaultGroup: componentGroup = {
   widget: widgetGroup,
   layout: layoutGroup,
 };
+
+interface ComSelectContext {
+  snippetsOfBrickMap?: Map<string, BrickOptionItem[]>;
+}
+
+export const ComponentSelectContext = React.createContext<ComSelectContext>({});

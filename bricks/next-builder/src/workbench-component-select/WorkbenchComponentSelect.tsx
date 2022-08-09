@@ -4,8 +4,11 @@ import React, {
   useCallback,
   useRef,
   useMemo,
+  useContext,
 } from "react";
 import { Input, Tabs, Collapse } from "antd";
+import { useTranslation } from "react-i18next";
+import { CSSTransition } from "react-transition-group";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import {
   suggest,
@@ -14,6 +17,7 @@ import {
   groupItem,
   i18nTransform,
   BrickSortField,
+  ComponentSelectContext,
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
@@ -21,13 +25,20 @@ import { BuildFilled } from "@ant-design/icons";
 import { debounce } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
-import { adjustBrickSort } from "./processor";
+import { adjustBrickSort, getSnippetsOfBrickMap } from "./processor";
 import styles from "./WorkbenchComponentSelect.module.css";
+import classNames from "classnames";
+import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 
 interface ComponentSelectProps {
   brickList: BrickOptionItem[];
   storyList: Story[];
   isShowSuggest?: boolean;
+  onActionClick?: (
+    type: string,
+    data: BrickOptionItem,
+    e: React.MouseEvent
+  ) => void;
 }
 
 export function setDragImage(
@@ -75,6 +86,7 @@ export function WorkbenchComponentSelect({
   brickList,
   storyList,
   isShowSuggest = true,
+  onActionClick,
 }: ComponentSelectProps): React.ReactElement {
   const [filterValue, setFilterValue] = useState<Record<string, string>>({});
   const [componentList, setComponetList] =
@@ -130,34 +142,47 @@ export function WorkbenchComponentSelect({
     }
   }, [brickList, getBrickTransfromByType]);
 
+  const snippetsOfBrickMap = useMemo(
+    () => getSnippetsOfBrickMap(componentList?.snippet),
+    [componentList]
+  );
+
   return (
-    <div className={styles.componentSelect}>
-      <Tabs centered size="small">
-        {componentList &&
-          Object.entries(componentList).map(([k, v]) => (
-            <Tabs.TabPane tab={i18nTransform[k]} key={k}>
-              <div className={styles.searchWrapper}>
-                <Input
-                  placeholder={`Search for ${k}`}
-                  onChange={(e) => handleFilterChange(e, k)}
-                ></Input>
-              </div>
-              <ComponentList
-                key={k}
-                componentType={k}
-                componentList={v}
-                q={filterValue[k]}
-                storyList={storyList}
-                isShowSuggest={isShowSuggest}
-              />
-            </Tabs.TabPane>
-          ))}
-      </Tabs>
-    </div>
+    <ComponentSelectContext.Provider
+      value={{
+        snippetsOfBrickMap,
+      }}
+    >
+      <div className={styles.componentSelect}>
+        <Tabs centered size="small">
+          {componentList &&
+            Object.entries(componentList).map(([k, v]) => (
+              <Tabs.TabPane tab={i18nTransform[k]} key={k}>
+                <div className={styles.searchWrapper}>
+                  <Input
+                    placeholder={`Search for ${k}`}
+                    onChange={(e) => handleFilterChange(e, k)}
+                  ></Input>
+                </div>
+                <ComponentList
+                  key={k}
+                  componentType={k}
+                  componentList={v}
+                  q={filterValue[k]}
+                  storyList={storyList}
+                  isShowSuggest={isShowSuggest}
+                  onActionClick={onActionClick}
+                />
+              </Tabs.TabPane>
+            ))}
+        </Tabs>
+      </div>
+    </ComponentSelectContext.Provider>
   );
 }
 
-interface ComponentListProps {
+interface ComponentListProps
+  extends Pick<ComponentSelectProps, "onActionClick"> {
   componentType: string;
   componentList: BrickOptionItem[];
   q: string;
@@ -171,6 +196,7 @@ function ComponentList({
   q,
   storyList,
   isShowSuggest = true,
+  onActionClick,
 }: ComponentListProps): React.ReactElement {
   const initGroup = useCallback((): groupItem[] => {
     return suggest[componentType].length > 0 && isShowSuggest
@@ -300,16 +326,12 @@ function ComponentList({
             if (item.children?.length > 0) {
               return (
                 <Collapse.Panel header={item.text} key={item.key}>
-                  <div
-                    className={styles.componentWraper}
-                    style={{
-                      gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
-                    }}
-                  >
-                    {item.children.map((item, index) => (
-                      <ComponentItem key={index} {...item} />
-                    ))}
-                  </div>
+                  <ComponentGroup
+                    {...item}
+                    onActionClick={onActionClick}
+                    columnNumber={columnNumber}
+                    componentType={componentType}
+                  />
                 </Collapse.Panel>
               );
             }
@@ -317,14 +339,18 @@ function ComponentList({
         </Collapse>
       ) : (
         <div
-          className={styles.componentWraper}
+          className={styles.componentWrapper}
           style={{
             gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
             padding: "0 15px",
           }}
         >
           {list.map((item, index) => (
-            <ComponentItem key={index} {...item} />
+            <ComponentItem
+              key={index}
+              {...item}
+              onActionClick={onActionClick}
+            />
           ))}
         </div>
       )}
@@ -332,9 +358,124 @@ function ComponentList({
   );
 }
 
-function ComponentItem(
-  componentData: Partial<BrickOptionItem>
-): React.ReactElement {
+interface ComponentGroupProps extends groupItem {
+  columnNumber: number;
+  componentType: string;
+  onActionClick?: ComponentSelectProps["onActionClick"];
+}
+
+const findItemElement = (elem: HTMLElement): HTMLElement => {
+  while (elem) {
+    if (elem.className === styles.brickItem) {
+      return elem;
+    }
+
+    elem = elem.parentElement;
+  }
+};
+
+function ComponentGroup({
+  componentType,
+  children,
+  columnNumber,
+  onActionClick,
+}: ComponentGroupProps): React.ReactElement {
+  const [curIndex, setCurIndex] = useState<number>(-1);
+  const [show, setShow] = useState(false);
+  const [snippetsOfBrick, setSnippetsOfBrick] = useState<BrickOptionItem[]>([]);
+  const [arrowOffset, setArrowOffset] = useState(0);
+  const { snippetsOfBrickMap } = useContext(ComponentSelectContext);
+
+  const handleActionClick = (
+    type: string,
+    data: BrickOptionItem,
+    index: number,
+    e: React.MouseEvent
+  ): void => {
+    if (type === "snippet") {
+      setCurIndex(index);
+      setSnippetsOfBrick(snippetsOfBrickMap.get(data.id));
+      const brickItemElem = findItemElement(e.target as HTMLElement);
+      if (brickItemElem) {
+        const { width } = brickItemElem.getBoundingClientRect();
+        const cursor = index - Math.floor(index / columnNumber) * columnNumber;
+        // 15px 为项目之间的间距
+        const position = width * (cursor + 1) + cursor * 15 - width / 2;
+        setArrowOffset(position);
+      }
+      setShow(true);
+    }
+    onActionClick?.(type, data, e);
+  };
+
+  return (
+    <div
+      className={classNames(styles.componentWrapper, {
+        [styles.brickWrapper]: componentType === "brick",
+      })}
+      style={{
+        gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+      }}
+    >
+      {children.map((item, index) => (
+        <ComponentItem
+          key={item.id}
+          {...item}
+          onActionClick={(type, data, e) =>
+            handleActionClick(type, data, index, e)
+          }
+        />
+      ))}
+      {componentType === "brick" && (
+        <CSSTransition
+          in={show}
+          timeout={300}
+          unmountOnExit
+          classNames={{
+            enter: styles.slideEnter,
+            exit: styles.slideExit,
+          }}
+        >
+          <div
+            className={styles.popover}
+            style={{
+              gridRowStart: Math.floor(curIndex / columnNumber) + 2,
+              gridColumn: `span ${columnNumber}`,
+              gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+            }}
+          >
+            <span
+              className={styles.close}
+              onClick={() => setShow(false)}
+            ></span>
+            <span
+              className={styles.arrow}
+              style={{
+                left: arrowOffset,
+              }}
+            />
+            {snippetsOfBrick.map((row) => (
+              <ComponentItem
+                key={row.id}
+                {...row}
+                onDragEnd={() => setShow(false)}
+              />
+            ))}
+          </div>
+        </CSSTransition>
+      )}
+    </div>
+  );
+}
+
+interface ComponentItemProps extends Partial<BrickOptionItem> {
+  onActionClick?: ComponentSelectProps["onActionClick"];
+  onDragEnd?: (e: React.DragEvent) => void;
+}
+
+function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
+  const { snippetsOfBrickMap } = useContext(ComponentSelectContext);
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const handleDragStart = (e: React.DragEvent): void => {
     setDragImage(e, componentData.title);
     const nodeData = {
@@ -370,15 +511,60 @@ function ComponentItem(
     return <BuildFilled />;
   };
 
-  return (
+  const handleActionClick = (
+    type: string,
+    data: any,
+    e: React.MouseEvent
+  ): void => {
+    componentData.onActionClick?.(type, data, e);
+  };
+
+  const itemElem = (
     <div
       draggable="true"
       className={styles.componentItem}
       title={componentData.description || componentData.title}
       onDragStart={handleDragStart}
+      onDragEnd={componentData?.onDragEnd}
     >
       <div className={styles.icon}>{getIcon(componentData)}</div>
       <div className={styles.name}>{componentData.title}</div>
     </div>
   );
+
+  if (componentData.layerType === "brick" && componentData.type === "brick") {
+    return (
+      <div className={styles.brickItem}>
+        <div className={styles.actionWrapper}>
+          <span
+            className={styles.badge}
+            title={t(K.DOCUMENT)}
+            onClick={(e) => handleActionClick("document", componentData, e)}
+          >
+            <GeneralIcon
+              icon={{
+                lib: "easyops",
+                category: "app",
+                icon: "next-documents",
+              }}
+            />
+          </span>
+          {snippetsOfBrickMap.get(componentData.id) && (
+            <span
+              className={styles.badge}
+              title={t(K.SNIPPET)}
+              onClick={(e) => handleActionClick("snippet", componentData, e)}
+            >
+              <GeneralIcon
+                icon={{ lib: "antd", icon: "thunderbolt", theme: "outlined" }}
+              />
+            </span>
+          )}
+        </div>
+        {itemElem}
+      </div>
+    );
+  }
+
+  return itemElem;
 }

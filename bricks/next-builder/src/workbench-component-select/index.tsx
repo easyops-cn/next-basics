@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
+import {
+  BrickWrapper,
+  UpdatingElement,
+  property,
+  event,
+  EventEmitter,
+} from "@next-core/brick-kit";
 import { WorkbenchComponentSelect } from "./WorkbenchComponentSelect";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import { Story } from "@next-core/brick-types";
@@ -27,6 +33,9 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
   @property({ attribute: false })
   isShowSuggest: boolean;
 
+  @event({ type: "action.click" })
+  actionClickEmit: EventEmitter<{ type: string; data: any }>;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -35,6 +44,10 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
     }
     this._render();
   }
+
+  private _handlerActionClick = (type: string, data: any): void => {
+    this.actionClickEmit.emit({ type, data });
+  };
 
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
@@ -49,6 +62,7 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
             brickList={this.brickList}
             storyList={this.storyList}
             isShowSuggest={this.isShowSuggest ?? true}
+            onActionClick={this._handlerActionClick}
           />
         </BrickWrapper>,
         this
