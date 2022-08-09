@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.171.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.171.0...@next-bricks/next-builder@1.171.1) (2022-08-09)
+
+
+### Bug Fixes
+
+* update root node and update storyboard error ([4d8797e](https://github.com/easyops-cn/next-basics/commit/4d8797e4a9f8fe91faf3e0d22291f10a467d934d))
+
+
+
+
+
 # [1.171.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.170.0...@next-bricks/next-builder@1.171.0) (2022-08-09)
 
 
