@@ -2712,6 +2712,11 @@
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-2.3.2.tgz#7c9cca2218c02e3491f0e9e7094e2c0cfabd169a"
   integrity sha512-DNDuLWrxKNWFJzkj7DcmSworTMhJR8ENpQ7fGNMhAILqBvBcYvi9W+t0/NAgOz/gYNnG0tomeX/uk2/tNqahAQ==
 
+"@next-sdk/cmdb-sdk@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.0.2.tgz#2e9a4f9a88c162f968c2c30c21d10cda2b9bdf83"
+  integrity sha512-ItbwfjWtJygNAXiTioV1jW2c+0/ZLcTHkm4fKLU23Zn+CIFdUuEDqBTd5/SJ/WdLaHnG39kS82nfWR/quSiV9Q==
+
 "@next-sdk/micro-app-sdk@^2.1.1":
   version "2.1.1"
   resolved "https://registry.npmjs.org/@next-sdk/micro-app-sdk/-/micro-app-sdk-2.1.1.tgz#e441aaa303152c54451945703b5e96260dcb476e"
