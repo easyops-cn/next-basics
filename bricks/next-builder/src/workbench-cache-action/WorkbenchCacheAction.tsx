@@ -139,6 +139,7 @@ function LegacyWorkbenchCacheAction(
         edges,
       });
       let updateStoryboardType: UpdateStoryboardType;
+      const rootNode = nodes.find((item) => item.$$uid === rootId);
       if (graphTree) {
         if (rootNode.type === "custom-template") {
           updateStoryboardType = "template";
@@ -176,7 +177,7 @@ function LegacyWorkbenchCacheAction(
         });
       }
     },
-    [onStoryboardUpdate, rootNode]
+    [onStoryboardUpdate]
   );
 
   const getInstanceDetail = useCallback(
