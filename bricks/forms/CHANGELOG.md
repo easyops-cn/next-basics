@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.231.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.230.4...@next-bricks/forms@1.231.0) (2022-08-10)
+
+
+### Features
+
+* 构件支持选择近N天 ([006319e](https://github.com/easyops-cn/next-basics/commit/006319e0b0ee71e4323f7a19cff3c25aa1565cf8))
+
+
+
+
+
 ## [1.230.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.230.3...@next-bricks/forms@1.230.4) (2022-08-09)
 
 **Note:** Version bump only for package @next-bricks/forms
