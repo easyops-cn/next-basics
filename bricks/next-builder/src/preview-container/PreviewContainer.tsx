@@ -64,6 +64,7 @@ export interface PreviewContainerProps {
   onExcuteProxyMethodSuccess?(result: ExcuteProxyMethodResult): void;
   onExcuteProxyMethodError?(result: ExcuteProxyMethodResult): void;
   onPreviewDebug?(result: any[]): void;
+  onMatchApiCache?(num: number): void;
 }
 
 export type CaptureStatus = "idle" | "capturing" | "ok" | "failed";
@@ -130,6 +131,7 @@ export function LegacyPreviewContainer(
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
     onPreviewDebug,
+    onMatchApiCache,
   }: PreviewContainerProps,
   ref: React.Ref<PreviewContainerRef>
 ): React.ReactElement {
@@ -617,6 +619,9 @@ export function LegacyPreviewContainer(
           case "preview.debug":
             onPreviewDebug(data.res);
             break;
+          case "match-api-cache":
+            onMatchApiCache(data.num);
+            break;
         }
       }
     };
@@ -636,6 +641,8 @@ export function LegacyPreviewContainer(
     onScreenshotCapture,
     onExcuteProxyMethodSuccess,
     onExcuteProxyMethodError,
+    onPreviewDebug,
+    onMatchApiCache,
   ]);
 
   useEffect(() => {
