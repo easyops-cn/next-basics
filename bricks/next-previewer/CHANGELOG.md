@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.9.2...@next-bricks/next-previewer@1.10.0) (2022-08-10)
+
+
+### Features
+
+* support match api cache tips ([977e166](https://github.com/easyops-cn/next-basics/commit/977e166122755838e9e8816eec98a8329964e5b0))
+
+
+
+
+
 ## [1.9.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.9.1...@next-bricks/next-previewer@1.9.2) (2022-08-10)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
