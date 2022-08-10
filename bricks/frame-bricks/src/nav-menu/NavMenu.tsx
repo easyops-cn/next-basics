@@ -16,6 +16,7 @@ import {
 import style from "./NavMenu.module.css";
 type MenuItemBrick = {
   useBrick?: UseBrickConf;
+  instanceId?: string;
 };
 type SidebarMenuSimpleItems = SidebarMenuSimpleItem & MenuItemBrick;
 type SidebarMenuGroups = SidebarMenuGroup & MenuItemBrick;
@@ -89,7 +90,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   ): React.ReactNode => {
     return (
       <Menu.Item
-        key={String(item.key)}
+        key={item.instanceId}
         title={item.text}
         className={style.simpleMenuItem}
       >

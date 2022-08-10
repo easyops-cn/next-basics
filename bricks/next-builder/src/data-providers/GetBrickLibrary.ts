@@ -171,6 +171,7 @@ export async function GetBrickLibrary(
         id: item.templateId,
         title: item.templateId,
         nodeId: item.id,
+        instanceId: item.instanceId,
         layerType: item.layerType,
         $searchTextPool: [item.templateId.toLowerCase()],
       })),
