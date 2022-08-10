@@ -11,6 +11,7 @@ export interface MoveStoryboardNodeAndReorderParams {
   nodeData: NodeInstance;
   nodeIds: string[];
   nodeUid: number;
+  objectId?: string;
 }
 
 export interface MoveStoryboardNodeAndReorderResult {
@@ -23,9 +24,10 @@ export async function MoveStoryboardNodeAndReorder({
   nodeData,
   nodeIds,
   nodeUid,
+  objectId,
 }: MoveStoryboardNodeAndReorderParams): Promise<MoveStoryboardNodeAndReorderResult> {
   const stored = await InstanceApi_updateInstanceV2(
-    STORYBOARD_BRICK,
+    objectId ?? STORYBOARD_BRICK,
     nodeInstanceId,
     nodeData
   );

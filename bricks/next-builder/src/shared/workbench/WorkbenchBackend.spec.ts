@@ -15,7 +15,6 @@ const mockCreateInstance = jest.fn((_objectId, params) => ({
   instanceId: "new-iid",
   id: "new-id",
 }));
-const mockUpdateInstance = jest.fn();
 const mockUpdateIntanceByQuery = jest.fn((_) => ({
   successTotal: 1,
 }));
@@ -31,7 +30,6 @@ jest.mock("@next-sdk/cmdb-sdk", () => ({
   InstanceApi_getDetail: (...args) => mockGetDetail(args),
   InstanceApi_createInstance: (objectId, params) =>
     mockCreateInstance(objectId, params),
-  InstanceApi_updateInstance: (...args) => mockUpdateInstance(args),
   InstanceApi_updateByQuery: (...args) => mockUpdateIntanceByQuery(args),
   InstanceArchiveApi_archiveInstance: (...args) => mockDeleteInstance(args),
   InstanceGraphApi_traverseGraphV2: (...args) => mockGetGraphData(args),
@@ -255,7 +253,7 @@ describe("WorkbenchBackend should work", () => {
       state: "pending",
     } as WorkbenchBackendActionForMove);
 
-    expect(mockUpdateInstance).toBeCalledTimes(0);
+    expect(mockUpdateIntanceByQuery).toBeCalledTimes(2);
 
     expect(mockMoveInstance).toHaveBeenNthCalledWith(1, [
       { nodeIds: ["B-01", "B-02", "new-id"] },
@@ -271,16 +269,16 @@ describe("WorkbenchBackend should work", () => {
           parent: "new-parent",
           mountPoint: "new-content",
         },
+        objectId: "STORYBOARD_BRICK",
       },
       state: "pending",
     } as WorkbenchBackendActionForMove);
 
-    expect(mockUpdateInstance).toHaveBeenNthCalledWith(1, [
+    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(3, [
       "STORYBOARD_BRICK",
-      "new-iid",
       {
-        parent: "new-parent",
-        mountPoint: "new-content",
+        data: { mountPoint: "new-content", parent: "new-parent" },
+        query: { instanceId: { $eq: "new-iid" } },
       },
     ]);
     await (global as any).flushPromises();
@@ -424,7 +422,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(3, [
+    expect(mockUpdateIntanceByQuery).toHaveBeenNthCalledWith(4, [
       "STORYBOARD_ROUTE",
       {
         data: { context: [{ text: "test", value: "test" }] },
