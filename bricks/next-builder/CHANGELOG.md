@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.171.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.171.2...@next-bricks/next-builder@1.171.3) (2022-08-10)
+
+
+### Bug Fixes
+
+* update template root node error ([49031dd](https://github.com/easyops-cn/next-basics/commit/49031ddc82b6beca58c564b8b16c447f6c7c7443))
+
+
+
+
+
 ## [1.171.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.171.1...@next-bricks/next-builder@1.171.2) (2022-08-10)
 
 **Note:** Version bump only for package @next-bricks/next-builder
