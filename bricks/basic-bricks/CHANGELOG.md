@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.186.4...@next-bricks/basic-bricks@1.187.0) (2022-08-10)
+
+
+### Features
+
+* **basic-bricks:** getNewUIStatus适用模板里增加两个 ([f25e3a4](https://github.com/easyops-cn/next-basics/commit/f25e3a44caa23492a7e5583460edd8c9f9772e78))
+
+
+
+
+
 ## [1.186.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.186.3...@next-bricks/basic-bricks@1.186.4) (2022-08-03)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
