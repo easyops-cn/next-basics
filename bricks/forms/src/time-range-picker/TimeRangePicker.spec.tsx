@@ -90,6 +90,7 @@ describe("TimeRangePicker", () => {
           startTime: undefined,
           endTime: undefined,
         }}
+        selectNearDays={90}
       />
     );
     expect(wrapper.find(DatePicker.RangePicker)).toHaveLength(1);
@@ -99,6 +100,15 @@ describe("TimeRangePicker", () => {
     rangePicker.invoke("onOpenChange")(true);
     rangePicker.invoke("onOpenChange")(false);
     expect(fn).toBeCalled();
+    expect(
+      rangePicker.prop("disabledDate")(moment().subtract(100, "days"))
+    ).toBe(true);
+    expect(
+      rangePicker.prop("disabledDate")(moment().subtract(10, "days"))
+    ).toBe(false);
+    expect(rangePicker.prop("disabledDate")(moment().add(10, "days"))).toBe(
+      true
+    );
   });
 
   it("date range should work when default value is null", () => {

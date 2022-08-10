@@ -28,6 +28,7 @@ interface TimeRangePickerProps extends FormItemWrapperProps {
   rangeType?: RangeType;
   onChange?: (range: TimeRange) => void;
   emitChangeOnInit?: boolean;
+  selectNearDays?: number;
 }
 
 type RealTimeRangePickerProps = Omit<
@@ -142,12 +143,22 @@ export function RealTimeRangePicker(
   const rangeOk = (selectedTime: RangeValue<moment.Moment>) => {
     needConfirm.current = false;
     const dates = selectedTime;
-    setPrevStartTime(dates?.[0].clone());
-    setPrevEndTime(dates?.[1].clone());
+    setPrevStartTime(dates?.[0]?.clone());
+    setPrevEndTime(dates?.[1]?.clone());
     props.onChange?.({
-      startTime: dates?.[0].format(props.format),
-      endTime: dates?.[1].format(props.format),
+      startTime: dates?.[0]?.format(props.format),
+      endTime: dates?.[1]?.format(props.format),
     });
+  };
+
+  const disabledDate = (current: moment.Moment) => {
+    if (!props.selectNearDays) {
+      return false;
+    }
+    const tooSelectNearDays =
+      current <= moment().subtract(props.selectNearDays, "days") ||
+      current > moment().endOf("day");
+    return !!tooSelectNearDays;
   };
 
   const dateRange = (
@@ -163,6 +174,7 @@ export function RealTimeRangePicker(
       onChange={rangeChange}
       onOpenChange={onOpenChange}
       onOk={rangeOk}
+      disabledDate={disabledDate}
       separator={"~"}
       suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
     />
@@ -185,6 +197,7 @@ export function TimeRangePicker(
         rangeType={props.rangeType}
         onChange={props.onChange}
         emitChangeOnInit={props.emitChangeOnInit}
+        selectNearDays={props.selectNearDays}
       />
     </FormItemWrapper>
   );

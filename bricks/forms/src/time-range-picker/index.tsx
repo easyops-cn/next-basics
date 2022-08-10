@@ -84,6 +84,15 @@ export class TimeRangePickerElement extends FormItemElement {
   rangeType: RangeType;
 
   /**
+   * @kind number
+   * @default
+   * @required false
+   * @description 只有rangeType在`date` 和 `dateTime`下， 才支持只选择最近n天(当前时间向前n天)
+   */
+  @property()
+  selectNearDays: number;
+
+  /**
    * @kind `boolean`
    * @required false
    * @default  true
@@ -202,6 +211,7 @@ export class TimeRangePickerElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             emitChangeOnInit={this.emitChangeOnInit}
+            selectNearDays={this.selectNearDays}
           />
         </BrickWrapper>,
         this
