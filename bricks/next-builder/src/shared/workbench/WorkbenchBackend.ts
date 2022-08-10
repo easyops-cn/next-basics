@@ -1,7 +1,6 @@
 import { omit } from "lodash";
 import {
   InstanceApi_createInstance,
-  InstanceApi_updateInstance,
   InstanceArchiveApi_archiveInstance,
   InstanceGraphApi_traverseGraphV2,
   InstanceRelationApi_set,
@@ -42,7 +41,7 @@ import {
   SnippetNodeDetail,
 } from "@next-core/editor-bricks-helper";
 
-const DELAY_BUILD_TIME = 30000;
+const DELAY_BUILD_TIME = 10000;
 
 export type QueueItem =
   | WorkbenchBackendActionForInsert
@@ -197,6 +196,16 @@ export default class WorkbenchBackend {
     }
   }
 
+  private async updateMTime(
+    objectId: string,
+    instanceId: string
+  ): Promise<void> {
+    const detail = await InstanceApi_getDetail(objectId, instanceId, {
+      fields: "mtime",
+    });
+    this.mTimeMap.set(instanceId, detail.mtime);
+  }
+
   private async createInstance(
     data: WorkbenchBackendActionForInsertDetail
   ): Promise<boolean> {
@@ -248,14 +257,17 @@ export default class WorkbenchBackend {
         },
         data: data.property,
       });
+      if (res.total === 0) {
+        this.handleError(null, "实例修改冲突, 请尝试刷新页面");
+        return false;
+      }
+      if (res.failTotal > 0) {
+        this.handleError(null, "更新实例失败");
+        return false;
+      }
       if (res.successTotal > 0) {
-        const detail = await InstanceApi_getDetail(data.objectId, instanceId, {
-          fields: "mtime",
-        });
-        this.mTimeMap.set(instanceId, detail.mtime);
         return true;
       }
-      this.handleError(null, "更新实例失败");
     } catch (e) {
       this.handleError(e, "更新实例失败");
       return false;
@@ -276,12 +288,13 @@ export default class WorkbenchBackend {
         }
         return id;
       });
-      if (instanceId) {
-        await InstanceApi_updateInstance(
-          "STORYBOARD_BRICK",
-          instanceId,
-          data.nodeData
-        );
+      if (data.nodeData) {
+        await this.updateInstance({
+          objectId: data.objectId,
+          instanceId: instanceId,
+          property: data.nodeData,
+          mtime: data.mtime,
+        });
       }
       await StoryboardApi_sortStoryboardNodes({
         nodeIds,
@@ -418,9 +431,15 @@ export default class WorkbenchBackend {
             case "copy.data":
             case "update":
               isSuccess = await this.updateInstance(data);
+              if (isSuccess) {
+                await this.updateMTime(data.objectId, data.instanceId);
+              }
               break;
             case "move":
               isSuccess = await this.moveInstance(data);
+              if (isSuccess) {
+                await this.updateMTime(data.objectId, data.nodeInstanceId);
+              }
               break;
             case "delete":
               isSuccess = await this.deleteInstance(data);

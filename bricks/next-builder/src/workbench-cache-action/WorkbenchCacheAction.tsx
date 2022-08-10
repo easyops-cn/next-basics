@@ -34,6 +34,8 @@ import type {
   PreviewSettings,
   BackendMessage,
   WorkbenchBackendActionForInsertSnippet,
+  WorkbenchBackendActionForUpdateDetail,
+  WorkbenchBackendActionForDeleteDetail,
 } from "@next-types/preview";
 import WorkbenchBackend, {
   QueueItem,
@@ -44,6 +46,7 @@ import { GeneralIcon } from "@next-libs/basic-components";
 import { pipes } from "@next-core/pipes";
 import styles from "./WorkbenchCacheAction.module.css";
 import { CacheActionList } from "./CacheActionList";
+import { WorkbenchBackendActionForMoveDetail } from "../../../../types/preview/index";
 
 export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
@@ -226,6 +229,61 @@ function LegacyWorkbenchCacheAction(
     nodesCacheRef.current.set(data.nodeData.instanceId, data.nodeData);
   };
 
+  const handleUpdateBrick = (
+    data: WorkbenchBackendActionForUpdateDetail,
+    nodesCahce: Map<string, BuilderRuntimeNode>
+  ): void => {
+    const { instanceId, property } = data;
+    const cacheProperty = nodesCahce.get(instanceId);
+    const mergeData = Object.assign(cacheProperty, property);
+    data.mtime = mergeData.mtime;
+    nodesCahce.set(instanceId, mergeData);
+    // 如果缓存的instanceId更新, 则需要更新两份缓存数据
+    if (!cacheProperty.instanceId.startsWith("mock")) {
+      nodesCahce.set(cacheProperty.instanceId, {
+        ...mergeData,
+        $$isMock: false,
+      });
+    }
+    if (instanceId === rootNode.instanceId) {
+      onRootNodeUpdate(mergeData);
+    }
+    const updateNode = omit(
+      {
+        ...mergeData,
+        ...(property.alias
+          ? {
+              alias:
+                property.alias ||
+                cacheProperty.alias ||
+                (mergeData.brick as string).split(".").pop(),
+            }
+          : {}),
+      },
+      ["$$isMock"]
+    ) as BuilderRuntimeNode;
+    manager.updateNode(mergeData.instanceId, updateNode);
+  };
+
+  const handleDeleteBrick = (
+    data: WorkbenchBackendActionForDeleteDetail,
+    nodesCahce: Map<string, BuilderRuntimeNode>
+  ): void => {
+    const deleteItem = nodesCahce.get(data.instanceId);
+    nodesCahce.set(data.instanceId, {
+      ...deleteItem,
+      $$isDelete: true,
+    });
+  };
+
+  const handleMoveBrick = (
+    data: WorkbenchBackendActionForMoveDetail,
+    nodesCahce: Map<string, BuilderRuntimeNode>
+  ): void => {
+    const cache = nodesCahce.get(data.nodeInstanceId);
+    data.mtime = cache.mtime as string;
+  };
+
   const handleAddSnippet = (
     detail: WorkbenchBackendActionForInsertSnippet
   ): void => {
@@ -254,7 +312,7 @@ function LegacyWorkbenchCacheAction(
 
   const cacheAction = (detail: WorkbenchBackendCacheAction): any => {
     const { action, data } = detail;
-    const nodesCahce = nodesCacheRef.current;
+    const nodesCache = nodesCacheRef.current;
     switch (action) {
       case "get":
         return {
@@ -269,49 +327,14 @@ function LegacyWorkbenchCacheAction(
         break;
       case "copy.data":
       case "update":
-        if (data) {
-          const { instanceId, property } = data;
-          const cacheProperty = nodesCahce.get(instanceId);
-          const mergeData = Object.assign(cacheProperty, property);
-          data.mtime = mergeData.mtime;
-          nodesCahce.set(instanceId, mergeData);
-          // 如果缓存的instanceId更新, 则需要更新两份缓存数据
-          if (!cacheProperty.instanceId.startsWith("mock")) {
-            nodesCahce.set(cacheProperty.instanceId, {
-              ...mergeData,
-              $$isMock: false,
-            });
-          }
-          if (instanceId === rootNode.instanceId) {
-            onRootNodeUpdate(mergeData);
-          }
-          const updateNode = omit(
-            {
-              ...mergeData,
-              ...(property.alias
-                ? {
-                    alias:
-                      property.alias ||
-                      cacheProperty.alias ||
-                      (mergeData.brick as string).split(".").pop(),
-                  }
-                : {}),
-            },
-            ["$$isMock"]
-          ) as BuilderRuntimeNode;
-          manager.updateNode(mergeData.instanceId, updateNode);
-        }
+        handleUpdateBrick(data, nodesCache);
         break;
       case "delete":
-        if (data.instanceId) {
-          const deleteItem = nodesCahce.get(data.instanceId);
-          nodesCahce.set(data.instanceId, {
-            ...deleteItem,
-            $$isDelete: true,
-          });
-        }
+        handleDeleteBrick(data, nodesCache);
         break;
       case "move":
+        handleMoveBrick(data, nodesCache);
+        break;
       case "cut.brick":
       case "copy.brick":
         break;
@@ -435,7 +458,7 @@ function LegacyWorkbenchCacheAction(
 
   useEffect(() => {
     setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges);
-  }, [edges, rootId, setNewStoryboard]);
+  }, [rootId, setNewStoryboard]);
 
   useImperativeHandle(ref, () => ({
     manager,

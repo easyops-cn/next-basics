@@ -11,35 +11,40 @@ import {
 jest.mock("@next-sdk/cmdb-sdk");
 jest.mock("@next-sdk/next-builder-sdk");
 
-const mockUpdateInstanceV2 = (InstanceApi_updateInstanceV2 as jest.MockedFunction<
-  typeof InstanceApi_updateInstanceV2
->).mockResolvedValue({
+const mockUpdateInstanceV2 = (
+  InstanceApi_updateInstanceV2 as jest.MockedFunction<
+    typeof InstanceApi_updateInstanceV2
+  >
+).mockResolvedValue({
   id: "B-001",
   mountPoint: "toolbar",
 });
 
-const mockSortStoryboardNodes = (StoryboardApi_sortStoryboardNodes as jest.MockedFunction<
-  typeof StoryboardApi_sortStoryboardNodes
->).mockResolvedValue();
+const mockSortStoryboardNodes = (
+  StoryboardApi_sortStoryboardNodes as jest.MockedFunction<
+    typeof StoryboardApi_sortStoryboardNodes
+  >
+).mockResolvedValue();
 
 describe("MoveStoryboardNodeAndReorder", () => {
   it("should work", async () => {
     const params: MoveStoryboardNodeAndReorderParams = {
       nodeInstanceId: "instance-id-1",
-      nodeData: ({
+      nodeData: {
         parent: "any-parent",
         mountPoint: "toolbar",
-      } as Partial<NodeInstance>) as NodeInstance,
+      } as Partial<NodeInstance> as NodeInstance,
       nodeIds: ["B-001", "B-002"],
       nodeUid: 1,
+      objectId: "STORYBOARD_BRICK",
     };
 
     const result: MoveStoryboardNodeAndReorderResult = {
       nodeUid: 1,
-      nodeData: ({
+      nodeData: {
         id: "B-001",
         mountPoint: "toolbar",
-      } as Partial<BuilderRouteOrBrickNode>) as BuilderRouteOrBrickNode,
+      } as Partial<BuilderRouteOrBrickNode> as BuilderRouteOrBrickNode,
     };
 
     expect(await MoveStoryboardNodeAndReorder(params)).toEqual(result);

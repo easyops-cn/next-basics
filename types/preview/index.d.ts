@@ -464,6 +464,8 @@ export interface WorkbenchBackendActionForMoveDetail {
   nodeUid: number;
   nodeIds: string[];
   nodeData: NodeInstance;
+  objectId: string;
+  mtime?: string;
 }
 
 export interface WorkbenchBackendActionForMove
