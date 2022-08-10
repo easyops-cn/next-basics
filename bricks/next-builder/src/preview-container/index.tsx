@@ -106,6 +106,13 @@ export class PreviewContainerElement extends UpdatingElement {
     this._onPreviewDebug.emit(result);
   };
 
+  @event({ type: "match.api.cache" })
+  private _matchApiCacheEvent: EventEmitter<number>;
+
+  private _handleMatchApiCache = (num: number): void => {
+    this._matchApiCacheEvent.emit(num);
+  };
+
   @event({ type: "url.change" })
   private _urlChangeEvent: EventEmitter<string>;
 
@@ -238,6 +245,7 @@ export class PreviewContainerElement extends UpdatingElement {
               onExcuteProxyMethodSuccess={this._handleExcuteProxyMethodSuccess}
               onExcuteProxyMethodError={this._handleExcuteProxyMethodError}
               onPreviewDebug={this._handlePreviwDebug}
+              onMatchApiCache={this._handleMatchApiCache}
             />
           </BuilderProvider>
         </BrickWrapper>,

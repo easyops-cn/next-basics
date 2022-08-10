@@ -111,7 +111,8 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload
   | PreviewMessageContainerCapture
-  | PreviewMessageContainerProxyMethod;
+  | PreviewMessageContainerProxyMethod
+  | PreviewMessageContainerMatchApicache;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
@@ -146,7 +147,8 @@ export type PreviewMessageToContainer =
   | PreviewMessagePreviewerCaptureOk
   | PreviewMessagePreviewerCaptureFailed
   | PreviewMessageContainerProxyMethodSuccess
-  | PreviewMessageContainerProxyMethodError;
+  | PreviewMessageContainerProxyMethodError
+  | PreviewMessageContainerMatchApiCache;
 
 export type PreviewerMessageToBuilder =
   | PreviewMessageContainerPreviewerHoverOnMain
@@ -309,6 +311,13 @@ export interface PreviewMessageContainerProxyMethodError
   sender: "preview";
   type: "excute-proxy-method-error";
   result: ExcuteProxyMethodResult;
+}
+
+export interface PreviewMessageContainerMatchApiCache
+  extends PreviewBaseMessage {
+  sender: "previewer";
+  type: "match-api-cache";
+  num: number;
 }
 
 export interface PreviewMessageContainerBuilderHoverOnMain
