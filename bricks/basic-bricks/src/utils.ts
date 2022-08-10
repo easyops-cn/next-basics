@@ -7,7 +7,9 @@ export function getNewUIStatus(isSetPageTitleStyle?: boolean): boolean {
   const { bricks } = getCurrentRoute() as RouteConfOfBricks;
   const tplNames = [
     "base-layout.tpl-base-page-module",
+    "base-layout.tpl-base-page-module-cmdb",
     "base-layout.tpl-homepage-base-module",
+    "base-layout.tpl-homepage-base-module-cmdb",
   ];
   if (
     bricks.some((v: BrickConf) => tplNames.includes(v?.brick)) &&
@@ -15,7 +17,7 @@ export function getNewUIStatus(isSetPageTitleStyle?: boolean): boolean {
   ) {
     if (isSetPageTitleStyle) {
       return bricks.some((v: BrickConf) =>
-        tplNames.slice(0, 1).includes(v?.brick)
+        tplNames.slice(0, 2).includes(v?.brick)
       );
     }
     return true;
