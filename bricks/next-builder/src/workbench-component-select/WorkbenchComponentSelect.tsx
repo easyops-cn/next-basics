@@ -320,6 +320,7 @@ function ComponentList({
           className={styles.componentWraper}
           style={{
             gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+            padding: "0 15px",
           }}
         >
           {list.map((item, index) => (
