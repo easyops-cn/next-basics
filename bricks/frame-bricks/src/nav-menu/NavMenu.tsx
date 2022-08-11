@@ -90,7 +90,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   ): React.ReactNode => {
     return (
       <Menu.Item
-        key={item.instanceId}
+        key={item.key}
         title={item.text}
         className={style.simpleMenuItem}
       >
