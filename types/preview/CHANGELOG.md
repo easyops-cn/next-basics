@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.14.0...@next-types/preview@1.15.0) (2022-08-11)
+
+
+### Features
+
+* support user set build delay time ([4bfbd41](https://github.com/easyops-cn/next-basics/commit/4bfbd411163dd1dd83e6414a92e0fb16b87f7079))
+
+
+
+
+
 # [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.13.1...@next-types/preview@1.14.0) (2022-08-10)
 
 
