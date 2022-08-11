@@ -58,3 +58,14 @@
 .reject {
   color: var(--tag-red-color);
 }
+
+.setBuildTimeWrapper {
+  padding: 12px;
+  display: flex;
+  min-width: 260px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--tag-gray-border-color);
+  > span {
+    line-height: 28px;
+  }
+}

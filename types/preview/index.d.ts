@@ -420,6 +420,7 @@ export interface WorkbenchBackendActionForInitDetail {
   projectId: string;
   objectId: string;
   rootNode: BuilderRuntimeNode;
+  delayBuildTime: number;
 }
 
 export interface WorkbenchBackendActionForInit

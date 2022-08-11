@@ -12,6 +12,7 @@ import {
   WorkbenchCacheAction,
   WorkbenchCacheActionRef,
   StoryboardUpdateParams,
+  BuildAndPushState,
 } from "./WorkbenchCacheAction";
 import {
   BuilderProvider,
@@ -19,6 +20,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { WorkbenchBackendCacheAction } from "@next-types/preview";
 import { pipes } from "@next-core/pipes";
+import { Storyboard } from "@next-core/brick-types";
 
 /**
  * @id next-builder.workbench-cache-action
@@ -91,6 +93,22 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
     });
   };
 
+  @event({ type: "build.and.push" })
+  _buildAndPushEmitter: EventEmitter<{
+    state: BuildAndPushState;
+    storyboard: Storyboard;
+  }>;
+
+  handleBuildAndPush = (
+    state: BuildAndPushState,
+    storyboard: Storyboard
+  ): void => {
+    this._buildAndPushEmitter.emit({
+      state,
+      storyboard,
+    });
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -119,6 +137,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
               onStoryboardUpdate={this.handleStoryboardUpdate}
               onRootNodeUpdate={this.handleRootNodeUpdate}
               onGraphDataUpdate={this.handleGraphDataUpdate}
+              onBuildAndPush={this.handleBuildAndPush}
             />
           </BuilderProvider>
         </BrickWrapper>,
