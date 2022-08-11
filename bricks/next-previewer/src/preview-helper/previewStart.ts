@@ -97,17 +97,6 @@ export function previewStart(
     }
   };
 
-  const handleMatchCache = (num: number): void => {
-    window.parent.postMessage(
-      {
-        sender: "previewer",
-        type: "match-api-cache",
-        num,
-      },
-      previewProxyOrigin
-    );
-  };
-
   const sendHighlightBrickOutlines = (
     type: "hover" | "active",
     iid: string,
@@ -194,9 +183,6 @@ export function previewStart(
             break;
           case "hover-on-iframe":
             handleHoverOnIframe(data.position);
-            break;
-          case "match-api-cache":
-            handleMatchCache(data.num);
             break;
         }
       } else
