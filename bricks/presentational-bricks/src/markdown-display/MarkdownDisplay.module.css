@@ -15,8 +15,9 @@
     -webkit-font-smoothing: antialiased;
     cursor: text;
     position: relative;
+    color: #262626;
   }
-  strong {
+  mark {
     background: #ffee7d 45%;
   }
   h1:hover a,
@@ -90,8 +91,6 @@
 
   p,
   blockquote,
-  ul,
-  ol,
   dl,
   li,
   table {
@@ -122,6 +121,7 @@
   h6 p,
   p {
     /* margin-top: 0; */
+    color: #595959;
     margin: 0 0 4px;
     padding-bottom: 16px;
   }
@@ -138,6 +138,7 @@
   ul,
   ol {
     padding-bottom: 16px;
+    margin-bottom: 4px;
   }
   ul li {
     margin: 4px 0;
@@ -155,14 +156,6 @@
     margin-top: 0;
   }
 
-  h1 + img,
-  h2 + img,
-  h3 + img,
-  h4 + img,
-  h5 + img,
-  h6 + img {
-    margin-top: 12px;
-  }
   ul :first-child,
   ol :first-child {
     margin-top: 0;
@@ -173,15 +166,12 @@
     margin-bottom: 0;
   }
 
-  li > p
-  /* , */
-  /* li >p:last-child  */ {
+  li > p {
     margin: 0 0 4px;
     padding: 0 0 16px;
   }
 
-  li > p:first-child,
-  li > p:last-child {
+  li > p:first-child {
     margin-bottom: 0;
     padding-bottom: 0;
   }
@@ -196,9 +186,6 @@
   }
 
   ul li img:first-child {
-    margin-top: 20px;
-  }
-  ol li img:first-child {
     margin-top: 16px;
   }
 
@@ -206,7 +193,13 @@
   li > ul:last-child {
     padding-bottom: 0;
   }
-  li > p:first-child + p,
+  li > p:first-child + p {
+    margin: 20px 0 20px;
+    padding: 0;
+  }
+  li > p:first-child + blockquote {
+    margin-bottom: 20px;
+  }
   li > blockquote:last-child {
     margin-top: 20px;
   }
@@ -223,10 +216,6 @@
   li > pre:first-child {
     margin: 16px 0 20px;
   }
-
-  /* li>pre:last-child{
-    margin-bottom: 0;
-  } */
 
   dl {
     padding: 0;
@@ -282,7 +271,7 @@
     margin-top: 0px;
   }
   blockquote {
-    border-left: 4px solid #dddddd;
+    border-left: 6px solid #bcc0c5;
     padding: 16px 12px;
     color: #777777;
     margin: 20px 0;
@@ -360,7 +349,6 @@
 
   img {
     max-width: 100%;
-    margin-top: 4px;
     margin-bottom: 20px;
   }
 
@@ -374,7 +362,7 @@
     border-radius: 3px;
   }
   code {
-    color: #b70c5e;
+    color: #b30056;
     background: #ffe6ec;
   }
   pre code {
@@ -387,14 +375,14 @@
   }
 
   pre {
-    background-color: #f8f8f8;
-    border: 1px solid #cccccc;
+    background-color: rgba(26, 122, 255, 0.06);
+    border: 1px solid rgba(26, 122, 255, 0.08);
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
     padding: 16px 12px;
     border-radius: 3px;
-    margin: 0 0 20px;
+    margin: 20px 0 20px;
   }
 
   pre code,
@@ -423,11 +411,15 @@ html[data-theme="dark-v2"] {
     h4,
     h5,
     h6 {
-      color: var(--color-strong-text);
+      color: var(--color-header-text);
     }
 
-    strong {
-      background: #d5a21d 30%;
+    p {
+      color: var(--color-normal-text);
+    }
+
+    mark {
+      background: #5a481b;
     }
 
     h2,
@@ -436,17 +428,24 @@ html[data-theme="dark-v2"] {
     }
 
     blockquote {
-      border-left: 4px solid var(--palette-rgba-gray-5);
+      border-left: 6px solid #bcc0c5;
       color: var(--color-normal-text);
     }
 
-    pre,
     code,
     tt {
       border: 1px solid var(--color-border-divider-line);
       background-color: var(--color-fill-bg-base-1);
     }
 
+    pre {
+      background-color: rgba(63, 117, 221, 0.06);
+      border: 1px solid rgba(63, 117, 221, 0.08);
+    }
+
+    code {
+      color: #f3679a;
+    }
     pre code {
       border: none;
       background: transparent;
