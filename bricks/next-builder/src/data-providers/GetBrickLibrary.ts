@@ -55,7 +55,6 @@ export async function GetBrickLibrary(
         page_size: 3000,
         query: {
           "project.instanceId": projectId,
-          isExport: true,
         },
       },
       options
