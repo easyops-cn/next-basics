@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.172.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.172.0...@next-bricks/next-builder@1.172.1) (2022-08-11)
+
+
+### Reverts
+
+* Revert "fix(): 导出的才会在构件库列表中展示" ([95b9008](https://github.com/easyops-cn/next-basics/commit/95b900851d284ae588d85d3d892ef10d83c03ad5))
+
+
+
+
+
 # [1.172.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.171.3...@next-bricks/next-builder@1.172.0) (2022-08-10)
 
 
