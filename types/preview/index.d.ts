@@ -111,8 +111,7 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload
   | PreviewMessageContainerCapture
-  | PreviewMessageContainerProxyMethod
-  | PreviewMessageContainerMatchApicache;
+  | PreviewMessageContainerProxyMethod;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
@@ -413,6 +412,7 @@ export type WorkbenchBackendCacheAction =
 interface WorkbencdBackendCacheActionCommon {
   uid?: string;
   state?: "pending" | "resolve" | "reject";
+  isBuilding?: boolean;
 }
 
 export interface WorkbenchBackendActionForInitDetail {
@@ -529,6 +529,8 @@ export type BackendMessage =
   | BackendMessageForInsert
   | BackendMessageForInstanceResponse
   | BackendMessageForUpdateGraphData
+  | BackMessageForBuildStart
+  | BackMessageForBuildSuccess
   | BackMessageForBuildFail
   | BackendMessageForError;
 
@@ -547,6 +549,18 @@ export interface BackendMessageForUpdateGraphData {
   action: "update-graph-data";
   data: {
     graphData: pipes.GraphData;
+  };
+}
+
+export interface BackMessageForBuildStart {
+  action: "build-start";
+  data?: unknown;
+}
+
+export interface BackMessageForBuildSuccess {
+  action: "build-success";
+  data: {
+    storyboard: Partial<StoryboardToBuild>;
   };
 }
 
