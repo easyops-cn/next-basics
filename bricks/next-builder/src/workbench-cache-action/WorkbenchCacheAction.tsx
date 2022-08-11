@@ -86,7 +86,7 @@ export interface WorkbenchCacheActionProps {
   onBuildAndPush?: (state: BuildAndPushState, storyboard: Storyboard) => void;
 }
 
-const DELAY_BUILD_TIME = 10;
+const DELAY_BUILD_TIME = 30;
 const DELAY_BUILD_TIME_KEY = "VISUAL_BUILDER_DELAY_BUILD_TIME";
 
 function LegacyWorkbenchCacheAction(
@@ -482,7 +482,7 @@ function LegacyWorkbenchCacheAction(
 
   const handleOnBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
-    const time = /^\d+(\.\d+)?$/.test(value) ? value : DELAY_BUILD_TIME;
+    const time = value === "" ? DELAY_BUILD_TIME : value;
     backendInstance.setDelayBuildTime(Number(time));
     setDelayBuildTime(String(time));
     storage.setItem(DELAY_BUILD_TIME_KEY, time);
@@ -499,10 +499,12 @@ function LegacyWorkbenchCacheAction(
               <Input
                 size="small"
                 addonAfter="秒"
-                style={{ width: "80px" }}
+                style={{ width: "100px" }}
                 value={delayBuildTime}
                 onChange={(e) => setDelayBuildTime(e.target.value)}
                 onBlur={handleOnBlur}
+                type="number"
+                min="-1"
               />
             </Tooltip>
           </div>

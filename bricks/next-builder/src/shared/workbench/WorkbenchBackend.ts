@@ -494,6 +494,11 @@ export default class WorkbenchBackend {
       // eslint-disable-next-line no-console
       console.log("=== ready to build ===");
       // 如果任务队列已经清空, 则发起定时任务, 在规定时间后, 解锁页面, 并且发起build动作
+      if (this.baseInfo.delayBuildTime < 0) {
+        // eslint-disable-next-line no-console
+        console.log("=== time less than 0, build cancel ===");
+        return;
+      }
       this.afterChangeTimer = setTimeout(() => {
         this.buildAndPush();
       }, (this.baseInfo.delayBuildTime ?? 10) * 1000);
