@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.231.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.231.0...@next-bricks/forms@1.231.1) (2022-08-12)
+
+
+### Bug Fixes
+
+* 用户和用户组选择构件中当showkey属性为空时，Select的value中的label为必填的name属性的值  refs CNCD-28 ([6312501](https://github.com/easyops-cn/next-basics/commit/6312501677acace08804f9b9a37d3ab48cfe649f))
+
+
+
+
+
 # [1.231.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.230.4...@next-bricks/forms@1.231.0) (2022-08-10)
 
 
