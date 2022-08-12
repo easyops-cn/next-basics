@@ -97,8 +97,9 @@ export function LegacyUserSelectFormItem(
     instanceData: any
   ): string => {
     const showKey = objectId === "USER" ? userShowKey : userGroupShowKey;
+    let showName;
     if (Array.isArray(showKey)) {
-      const showName = showKey
+      showName = showKey
         .map((key, index) => {
           if (index === 0) {
             return instanceData[key];
@@ -107,10 +108,10 @@ export function LegacyUserSelectFormItem(
           }
         })
         .join("");
-      return showName;
     } else {
-      return instanceData[showKey];
+      showName = instanceData[showKey];
     }
+    return showName || instanceData.name;
   };
 
   const getStaticLabel = (label: string) => (
@@ -282,7 +283,6 @@ export function LegacyUserSelectFormItem(
           ...staticValueToSet,
           ...filter(labelValue, (v) => !props.staticList?.includes(v.key)),
         ];
-
         setSelectedValue(labelValue);
         staticValue.current = staticValueToSet;
       }
