@@ -260,7 +260,10 @@ export default class WorkbenchBackend {
         data: data.property,
       });
       if (res.total === 0) {
-        this.handleError(null, "实例修改冲突, 请尝试刷新页面");
+        this.handleError(
+          null,
+          "实例修改冲突,可能有其他人正在修改当前页面,请尝试刷新页面"
+        );
         return false;
       }
       if (res.failTotal > 0) {

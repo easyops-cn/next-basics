@@ -334,6 +334,8 @@ export function LegacyPreviewContainer(
   const handleIframeLoad = useCallback(() => {
     loadedRef.current = true;
     const snippetData = getSnippetData(snippetGraphData);
+    setHoverOutlines([]);
+    setActiveOutlines([]);
     iframeRef.current.contentWindow.postMessage(
       {
         sender: "preview-container",

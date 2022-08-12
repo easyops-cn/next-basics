@@ -135,11 +135,11 @@ export function WorkbenchTree({
     status: dragStatusEnum;
   } => {
     const element = findDragParent(e.target as HTMLElement);
-    if (element === curElement) {
+    const id = element.dataset.uid;
+    if (element === curElement || id.includes(":")) {
       return;
     }
     const { top, bottom } = element.getBoundingClientRect();
-    const id = element.dataset.uid;
     let status: dragStatusEnum;
     const repair = allowDragToInside ? 5 : 10;
     if (e.clientY < top + repair) {
