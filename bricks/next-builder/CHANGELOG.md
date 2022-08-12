@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.173.0...@next-bricks/next-builder@1.174.0) (2022-08-12)
+
+
+### Features
+
+* **BrickTree:** not allow drag in Slot ([e1c39b9](https://github.com/easyops-cn/next-basics/commit/e1c39b9ea638170ff54efa6bdc8223e29d5c4b65))
+
+
+
+
+
 # [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.172.2...@next-bricks/next-builder@1.173.0) (2022-08-11)
 
 
