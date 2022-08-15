@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.187.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.187.0...@next-bricks/basic-bricks@1.187.1) (2022-08-15)
+
+
+### Bug Fixes
+
+* support public cdn for app icons in launchpad ([8d4e0c8](https://github.com/easyops-cn/next-basics/commit/8d4e0c8f078b9bf412b9b8b5128c925556d8a3bd))
+
+
+
+
+
 # [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.186.4...@next-bricks/basic-bricks@1.187.0) (2022-08-10)
 
 
