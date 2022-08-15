@@ -21,6 +21,7 @@ import type {
   PreviewMessageContainerProxyMethod,
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
+  PreviewMessageContainerUpdatePreviewUrl,
   PreviewMessageFromContainer,
   PreviewMessageToContainer,
   PreviewSettings,
@@ -80,6 +81,7 @@ export interface PreviewContainerRef {
   reload(): void;
   capture(): void;
   resize(): void;
+  updatePreviewUrl(url: string): void;
   manager: BuilderDataManager;
 }
 
@@ -493,6 +495,18 @@ export function LegacyPreviewContainer(
       previewOrigin
     );
   }, []);
+
+  const updatePreviewUrl = (url: string): void => {
+    iframeRef.current.contentWindow.postMessage(
+      {
+        sender: "preview-container",
+        type: "update-preview-url",
+        url,
+      } as PreviewMessageContainerUpdatePreviewUrl,
+      previewOrigin
+    );
+  };
+
   useImperativeHandle(ref, () => ({
     refresh,
     reload,
@@ -500,6 +514,7 @@ export function LegacyPreviewContainer(
     resize,
     manager,
     excuteProxyMethod,
+    updatePreviewUrl,
   }));
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import React, {
   useEffect,
 } from "react";
 import { Input } from "antd";
-import { isMatch, pick } from "lodash";
+import { get, isMatch, pick } from "lodash";
 import classNames from "classnames";
 import { SearchOutlined } from "@ant-design/icons";
 import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
@@ -315,6 +315,7 @@ export interface TreeNodeProps {
   level: number;
   isFirst?: boolean;
   isLast?: boolean;
+  skipNotify?: boolean;
 }
 
 function TreeNode({
@@ -340,6 +341,7 @@ function TreeNode({
     contextMenuFactory,
     onNodeToggle,
     getCollapsedId,
+    skipNotify = true,
   } = useWorkbenchTreeContext();
   const {
     allow,
@@ -508,7 +510,16 @@ function TreeNode({
           onContextMenu={onContextMenu}
           noEmptyHref
           onClick={onClick}
-          {...pick(node.link, ["to", "href"])}
+          {...(skipNotify
+            ? { ...pick(node.link, ["to", "href"]) }
+            : {
+                to: {
+                  pathname: get(node.link, "to", "href"),
+                  state: {
+                    notify: false,
+                  },
+                },
+              })}
         >
           <span
             className={styles.nodeLabel}

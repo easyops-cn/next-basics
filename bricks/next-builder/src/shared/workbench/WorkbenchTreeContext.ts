@@ -27,6 +27,7 @@ export interface ContextOfWorkbenchTree {
   onNodeToggle?(nodeId: string | number, collapsed: boolean): void;
   getCollapsedId?(node: WorkbenchNodeData): string | number;
   onBrickDrop?(e: React.DragEvent<HTMLElement>, options: dropOptions): void;
+  skipNotify?: boolean;
 }
 
 export const WorkbenchTreeContext = createContext<ContextOfWorkbenchTree>({});
