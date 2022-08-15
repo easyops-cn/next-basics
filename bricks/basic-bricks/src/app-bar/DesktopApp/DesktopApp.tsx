@@ -65,7 +65,9 @@ export function DesktopApp({
             app.icons && app.icons.large
               ? /^(\/|https?:\/\/)/.test(app.icons.large)
                 ? app.icons.large
-                : `micro-apps/${app.id}/${app.icons.large}`
+                : `${window.PUBLIC_ROOT || ""}micro-apps/${app.id}/${
+                    app.icons.large
+                  }`
               : defaultAppIcon
           }
         />
