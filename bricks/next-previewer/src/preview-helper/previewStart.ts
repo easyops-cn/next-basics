@@ -264,6 +264,9 @@ export function previewStart(
           });
         }
       }
+      if (data.type === "update-preview-url") {
+        getHistory().push(data.url);
+      }
     }
   );
 

@@ -199,6 +199,11 @@ export class PreviewContainerElement extends UpdatingElement {
     this._previewContainerRef.current.excuteProxyMethod(ref, method, args);
   }
 
+  @method()
+  updatePreviewUrl(url: string): void {
+    this._previewContainerRef.current.updatePreviewUrl(url);
+  }
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

@@ -111,7 +111,8 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload
   | PreviewMessageContainerCapture
-  | PreviewMessageContainerProxyMethod;
+  | PreviewMessageContainerProxyMethod
+  | PreviewMessageContainerUpdatePreviewUrl;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
@@ -310,6 +311,13 @@ export interface PreviewMessageContainerProxyMethodError
   sender: "preview";
   type: "excute-proxy-method-error";
   result: ExcuteProxyMethodResult;
+}
+
+export interface PreviewMessageContainerUpdatePreviewUrl
+  extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "update-preview-url";
+  url: string;
 }
 
 export interface PreviewMessageContainerMatchApiCache

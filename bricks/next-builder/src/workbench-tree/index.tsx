@@ -78,6 +78,9 @@ export class WorkbenchTreeElement extends UpdatingElement {
   @property({ type: String })
   nodeKey: string;
 
+  @property({ type: Boolean })
+  skipNotify: boolean;
+
   @event({ type: "action.click" })
   private _actionClickEvent: EventEmitter<ActionClickDetail>;
 
@@ -147,6 +150,7 @@ export class WorkbenchTreeElement extends UpdatingElement {
                 fixedActionsFor: this.fixedActionsFor,
                 nodeKey: this.nodeKey,
                 collapsible: this.collapsible,
+                skipNotify: this.skipNotify,
                 clickFactory: this._nodeClickFactory,
                 contextMenuFactory: this._contextMenuFactory,
                 matchNode: (node, lowerTrimmedQuery) =>
