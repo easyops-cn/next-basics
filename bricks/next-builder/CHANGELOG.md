@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.175.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.1...@next-bricks/next-builder@1.175.2) (2022-08-16)
+
+
+### Bug Fixes
+
+* do not prepend public root for widget thumbnails ([7ab7ee5](https://github.com/easyops-cn/next-basics/commit/7ab7ee5ce4f6016ca3e015efe505de927dcd027f))
+* prepend public root for thumbnails if applicable ([df749d0](https://github.com/easyops-cn/next-basics/commit/df749d07188d8197b79b4195324cd830fd7364a0))
+
+
+
+
+
 ## [1.175.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.0...@next-bricks/next-builder@1.175.1) (2022-08-16)
 
 
