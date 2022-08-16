@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.187.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.187.1...@next-bricks/basic-bricks@1.187.2) (2022-08-16)
+
+
+### Bug Fixes
+
+* **basic-bricks:** advance-list-container构件添加notTriggerClickEventWhenInit属性 ([aacbd3e](https://github.com/easyops-cn/next-basics/commit/aacbd3e58f164468f8f14dd3e440dd2d4bde6a86))
+
+
+
+
+
 ## [1.187.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.187.0...@next-bricks/basic-bricks@1.187.1) (2022-08-15)
 
 
