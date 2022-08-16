@@ -1,4 +1,6 @@
 import { cloneDeep } from "lodash";
+import { BrickOptionItem } from "../builder-container/interfaces";
+import { scanBricksInBrickConf } from "@next-core/brick-utils";
 import { groupItem, BrickSortField } from "./constants";
 
 export function adjustBrickSort(
@@ -33,4 +35,34 @@ export function adjustBrickSort(
   });
 
   return list;
+}
+
+/**
+ *
+ * 在现有的 snippet 中找出只配置一个构件的片段，当成是该构件的下所属的 snippet
+ */
+export function getSnippetsOfBrickMap(
+  snippetList: BrickOptionItem[]
+): Map<string, BrickOptionItem[]> {
+  const brickMap = new Map();
+
+  snippetList?.forEach((item) => {
+    const bricks: string[] = [];
+    item.bricks?.forEach((brickConf) => {
+      bricks.push(...scanBricksInBrickConf(brickConf));
+    });
+
+    if (bricks.length === 1) {
+      const brick = bricks[0];
+      const find = brickMap.get(brick);
+      if (!find) {
+        const arr = [item];
+        brickMap.set(brick, arr);
+      } else {
+        find.push(item);
+      }
+    }
+  });
+
+  return brickMap;
 }
