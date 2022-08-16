@@ -173,9 +173,7 @@ export async function BuildProjectOfTemplates({
   };
 
   const getTransformFilePath = (fileName: string): string => {
-    return `${
-      window.PUBLIC_ROOT ?? ""
-    }bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${fileName}`;
+    return `bricks/${appId}/${IMAGE_SAVE_FILE_PATH}/${fileName}`;
   };
 
   const thumbnailList = getThumbnailList();
