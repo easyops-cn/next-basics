@@ -504,7 +504,12 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
             width: "auto",
             height: "100%",
           }}
-          src={data.thumbnail}
+          src={
+            // Prepend public_root if the thumbnail is not an absolute url.
+            /^https?:|^\//.test(data.thumbnail)
+              ? data.thumbnail
+              : `${window.PUBLIC_ROOT ?? ""}${data.thumbnail}`
+          }
         />
       );
     }
