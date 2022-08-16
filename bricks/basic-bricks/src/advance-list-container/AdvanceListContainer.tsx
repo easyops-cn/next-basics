@@ -12,9 +12,10 @@ export interface AdvanceListContainerProps {
   };
   titleBrick: { useBrick: UseBrickConf };
   suffixBrick?: { useBrick: UseBrickConf };
-  itemClick?: Function;
+  itemClick?: (detail: any) => void;
   selectable?: boolean;
   defaultActiveIndex?: number;
+  notTriggerClickEventWhenInit?: boolean;
 }
 export function AdvanceListContainer(
   props: AdvanceListContainerProps
@@ -37,7 +38,9 @@ export function AdvanceListContainer(
   useEffect(() => {
     if (props.data.list) {
       const item = props.data.list[props.defaultActiveIndex];
-      item && props.itemClick({ item, index: props.defaultActiveIndex });
+      item &&
+        !props.notTriggerClickEventWhenInit &&
+        props.itemClick({ item, index: props.defaultActiveIndex });
     }
   }, [props.defaultActiveIndex, props.data]);
   const renderItem = (
@@ -48,7 +51,7 @@ export function AdvanceListContainer(
       <div
         className={classNames({
           [style.itemContainer]: true,
-          [style.activeItem]: props.selectable && activeIndex === index
+          [style.activeItem]: props.selectable && activeIndex === index,
         })}
         onClick={() => clickItemEvent(item, index)}
       >

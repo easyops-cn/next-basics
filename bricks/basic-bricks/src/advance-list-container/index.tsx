@@ -104,7 +104,14 @@ export class AdvancedListContainerElement extends UpdatingElement {
 
   @property({ attribute: false })
   selectable = true;
-
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 设置`defaultActiveIndex`时，构件初始化时会默认触发item.click事件，如果item.click后需要刷新页面,则会造成构件不断render,页面不断重刷，为避免此情况，可将此项设为true
+   */
+  @property({ type: Boolean })
+  notTriggerClickEventWhenInit: boolean;
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -137,6 +144,7 @@ export class AdvancedListContainerElement extends UpdatingElement {
         titleBrick={this.titleBrick}
         suffixBrick={this.suffixBrick}
         itemClick={this._handleItemClick}
+        notTriggerClickEventWhenInit={this.notTriggerClickEventWhenInit}
       />
     );
   }
