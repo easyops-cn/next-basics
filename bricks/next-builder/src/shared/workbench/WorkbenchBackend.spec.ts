@@ -196,6 +196,8 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
+    expect(mockGetDetail).toBeCalledTimes(0);
+
     backendInstance.push({
       action: "update",
       data: {
@@ -219,6 +221,8 @@ describe("WorkbenchBackend should work", () => {
         query: { instanceId: { $eq: "new-iid" }, mtime: { $eq: "1" } },
       },
     ]);
+
+    expect(mockGetDetail).toBeCalledTimes(1);
 
     expect(handleBackendMessage).toHaveBeenLastCalledWith("message", {
       action: "instance-success",
@@ -273,10 +277,13 @@ describe("WorkbenchBackend should work", () => {
       },
     });
 
+    expect(mockGetDetail).toBeCalledTimes(2);
+
     backendInstance.push({
       action: "move",
       data: {
         nodeIds: ["B-01", "B-02", "mock_id_001"],
+        nodeInstanceIds: ["a", "b", "c"],
       },
       state: "pending",
     } as WorkbenchBackendActionForMove);
@@ -288,11 +295,14 @@ describe("WorkbenchBackend should work", () => {
     ]);
     await (global as any).flushPromises();
 
+    expect(mockGetDetail).toBeCalledTimes(5);
+
     backendInstance.push({
       action: "move",
       data: {
         nodeInstanceId: "new-iid",
         nodeIds: ["B-03", "new-id", "B-04"],
+        nodeInstanceIds: ["a", "b", "c"],
         nodeData: {
           parent: "new-parent",
           mountPoint: "new-content",
@@ -314,6 +324,7 @@ describe("WorkbenchBackend should work", () => {
     expect(mockMoveInstance).toHaveBeenNthCalledWith(2, [
       { nodeIds: ["B-03", "new-id", "B-04"] },
     ]);
+    expect(mockGetDetail).toBeCalledTimes(8);
     await (global as any).flushPromises();
 
     backendInstance.push({

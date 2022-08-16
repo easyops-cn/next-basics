@@ -302,8 +302,13 @@ function LegacyWorkbenchCacheAction(
     data: WorkbenchBackendActionForMoveDetail,
     nodesCahce: Map<string, BuilderRuntimeNode>
   ): void => {
-    const cache = nodesCahce.get(data.nodeInstanceId);
-    data.mtime = cache.mtime as string;
+    const nodeCacheArr = [...nodesCahce.values()];
+    data.nodeInstanceIds = data.nodeIds.map((id) => {
+      const node = nodeCacheArr.find((item) => item.id === id);
+      if (node) {
+        return node.instanceId;
+      }
+    });
   };
 
   const handleAddSnippet = (
@@ -624,14 +629,14 @@ function LegacyWorkbenchCacheAction(
           />
         </Tooltip>
       </Popover>
-      {cacheActionList.filter((item) => item.state === "pending").length ? (
+      {cacheActionList.filter((item) => item.state !== "reject").length ? (
         <span
           className={styles.tips}
           style={{
-            backgroundColor: error ? "#c52d2d" : "#6c6c6c",
+            backgroundColor: "#0071eb",
           }}
         >
-          {cacheActionList.filter((item) => item.state === "pending").length}
+          {cacheActionList.filter((item) => item.state !== "reject").length}
         </span>
       ) : null}
     </div>
