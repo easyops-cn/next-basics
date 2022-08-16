@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.357.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.10...@next-bricks/developers@1.357.11) (2022-08-16)
+
+
+### Bug Fixes
+
+* 修复不导出的挂件不在开发者中心展示 ([75db9f2](https://github.com/easyops-cn/next-basics/commit/75db9f2aec32f6a09dbaaaa6a2e2ad30add44034))
+
+
+
+
+
 ## [1.357.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.9...@next-bricks/developers@1.357.10) (2022-08-05)
 
 
