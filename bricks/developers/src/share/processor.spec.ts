@@ -198,7 +198,9 @@ describe("getAllStoryListV2", () => {
         layerType: "widget",
         doc: null,
         type: "brick",
-        isExport: false,
+        originData: {
+          isExport: false,
+        },
       },
     ];
     expect(getAllStoryListV2(categoryGroups, stories)).toEqual([
