@@ -15,7 +15,11 @@ import type {
 import { pipes } from "@next-core/pipes";
 import { ModelInstanceRelationRequest } from "@next-sdk/cmdb-sdk/dist/types/model/cmdb";
 import { StoryboardApi_CloneBricksRequestBody } from "@next-sdk/next-builder-sdk";
-
+import type {
+  FormProjectApi_CreateFormItemByFieldRequestBody,
+  FormProjectApi_CreateFormItemAndFieldRequestBody,
+  FormProjectApi_UpdateFormItemRequestBody,
+} from "@next-sdk/form-builder-service-sdk";
 export interface PreviewHelperBrick {
   start(previewFromOrigin: string, options: unknown): void;
 }
@@ -408,7 +412,10 @@ export type WorkbenchBackendCacheAction =
   | WorkbenchBackendActionForInsertSnippet
   | WorkbenchBackendActionForCopyData
   | WorkbenchBackendActionForCopyBrick
-  | WorkbenchBackendActionForCutBrick;
+  | WorkbenchBackendActionForCutBrick
+  | WorkbenchBackendActionForInsertFormItem
+  | WorkbenchBackendActionForDeleteFormItem
+  | WorkbenchBackendActionForUpdateFormItem;
 
 interface WorkbencdBackendCacheActionCommon {
   uid?: string;
@@ -525,12 +532,51 @@ export interface WorkbenchBackendActionForCopyBrick
   sourceId: string;
 }
 
+export type insertByFieldArgs = [
+  string | number,
+  FormProjectApi_CreateFormItemByFieldRequestBody,
+  HttpOptions
+];
+export type insertWithFieldArgs = [
+  string | number,
+  string | number,
+  FormProjectApi_CreateFormItemAndFieldRequestBody,
+  HttpOptions
+];
+export type updateFormItemArgs = [
+  string,
+  FormProjectApi_UpdateFormItemRequestBody,
+  HttpOptions
+];
+export type deleteFormItemArgs = [string, HttpOptions];
+
+export interface WorkbenchBackendActionForInsertFormItem
+  extends WorkbencdBackendCacheActionCommon {
+  action: "insert.formItem";
+  args: insertByFieldArgs | insertWithFieldArgs;
+  nodeData: any;
+  type: string;
+}
+
+export interface WorkbenchBackendActionForDeleteFormItem
+  extends WorkbencdBackendCacheActionCommon {
+  action: "delete.formItem";
+  args: deleteFormItemArgs;
+}
+
+export interface WorkbenchBackendActionForUpdateFormItem
+  extends WorkbencdBackendCacheActionCommon {
+  action: "update.formItem";
+  args: updateFormItemArgs;
+}
+
 export type BackendMessage =
   | BackendMessageForInsert
   | BackendMessageForInstanceResponse
   | BackendMessageForUpdateGraphData
   | BackMessageForBuildFail
-  | BackendMessageForError;
+  | BackendMessageForError
+  | BackendMessageForExecuteSuccess;
 
 export interface BackendMessageForInsert {
   action: "insert";
@@ -559,5 +605,13 @@ export interface BackendMessageForError {
   action: "error";
   data: {
     error: string;
+  };
+}
+
+export interface BackendMessageForExecuteSuccess {
+  action: "execute-success";
+  data: {
+    res: any;
+    op: string;
   };
 }

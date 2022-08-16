@@ -80,6 +80,7 @@ export interface WorkbenchCacheActionProps {
   }: StoryboardUpdateParams) => void;
   onRootNodeUpdate: (node: BuilderRuntimeNode) => void;
   onGraphDataUpdate: (graphData: pipes.GraphData) => void;
+  onExecuteSuccess: (res: { res: unknown; op: string }) => void;
 }
 
 function LegacyWorkbenchCacheAction(
@@ -91,6 +92,7 @@ function LegacyWorkbenchCacheAction(
     onStoryboardUpdate,
     onRootNodeUpdate,
     onGraphDataUpdate,
+    onExecuteSuccess,
   }: WorkbenchCacheActionProps,
   ref: React.Ref<WorkbenchCacheActionRef>
 ): React.ReactElement {
@@ -295,6 +297,42 @@ function LegacyWorkbenchCacheAction(
     }
   };
 
+  const handleAddFormItem = (data: any): void => {
+    const nodeUid = Number(uniqueId());
+    const nodeInstanceId = uniqueId("mock_instanceId_");
+    data.parent = data.nodeData?.parentItemId;
+    data.nodeData = {
+      ...data.nodeData,
+      $$uid: nodeUid,
+      id: data.nodeData?.id,
+      instanceId: nodeInstanceId,
+      brick: data.nodeData?.brick,
+      mountPoint: data.nodeData?.mountPoint,
+      parent: data.nodeData?.parentItemId,
+      type: data.nodeData?.type ?? "brick",
+    };
+    if (data.dragOverInstanceId) {
+      manager.workbenchNodeAdd(data);
+    } else {
+      const parentUid = [...nodesCacheRef.current.values()].find(
+        (item) => item.instanceId === data.parent
+      ).$$uid;
+      const nodeUids = edges
+        .filter((item) => item.parent === parentUid)
+        .map((item) => item.child)
+        .concat(nodeUid);
+      manager.nodeAdd({
+        nodeData: data.nodeData,
+        nodeUid,
+        parentUid,
+        nodeUids,
+        sort: data.nodeData?.sort,
+        nodeIds: [],
+      });
+    }
+    nodesCacheRef.current.set(data.nodeData.instanceId, data.nodeData);
+  };
+
   const updateCacheActionList = useCallback(
     (
       detail: WorkbenchBackendCacheAction,
@@ -325,6 +363,9 @@ function LegacyWorkbenchCacheAction(
         break;
       case "insert.snippet":
         handleAddSnippet(detail);
+        break;
+      case "insert.formItem":
+        handleAddFormItem(detail);
         break;
       case "copy.data":
       case "update":
@@ -387,6 +428,9 @@ function LegacyWorkbenchCacheAction(
             Modal.error({
               title: "build & push 失败",
             });
+            break;
+          case "execute-success":
+            onExecuteSuccess(data);
             break;
           case "error":
             Modal.error({

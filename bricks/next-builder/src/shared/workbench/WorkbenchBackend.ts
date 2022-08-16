@@ -13,6 +13,12 @@ import {
   type StoryboardApi_CloneBricksRequestBody,
   StoryboardApi_sortStoryboardNodes,
 } from "@next-sdk/next-builder-sdk";
+import {
+  FormProjectApi_updateFormItem,
+  FormProjectApi_deleteFormItem,
+  FormProjectApi_createFormItemByField,
+  FormProjectApi_createFormItemAndField,
+} from "@next-sdk/form-builder-service-sdk";
 import { StoryboardAssembly } from "../storyboard/StoryboardAssembly";
 import type {
   WorkbenchBackendActionForInitDetail,
@@ -30,6 +36,11 @@ import type {
   WorkbenchBackendActionForCutBrick,
   BackendMessage,
   WorkbenchBackendActionForInsertSnippetDetail,
+  WorkbenchBackendActionForInsertFormItem,
+  WorkbenchBackendActionForDeleteFormItem,
+  WorkbenchBackendActionForUpdateFormItem,
+  insertByFieldArgs,
+  insertWithFieldArgs,
 } from "@next-types/preview";
 import type { HttpResponseError } from "@next-core/brick-http";
 import { type pipes } from "@next-core/pipes";
@@ -51,7 +62,10 @@ export type QueueItem =
   | WorkbenchBackendActionForCopyData
   | WorkbenchBackendActionForInsertSnippet
   | WorkbenchBackendActionForCopyBrick
-  | WorkbenchBackendActionForCutBrick;
+  | WorkbenchBackendActionForCutBrick
+  | WorkbenchBackendActionForInsertFormItem
+  | WorkbenchBackendActionForDeleteFormItem
+  | WorkbenchBackendActionForUpdateFormItem;
 
 export default class WorkbenchBackend {
   private baseInfo: WorkbenchBackendActionForInitDetail;
@@ -411,6 +425,78 @@ export default class WorkbenchBackend {
     }
   }
 
+  private async createFormItem(
+    task: WorkbenchBackendActionForInsertFormItem
+  ): Promise<boolean> {
+    try {
+      let res: any;
+      const { type, args } = task;
+      if (type === "insertByField") {
+        res = await FormProjectApi_createFormItemByField(
+          ...(args as insertByFieldArgs)
+        );
+      } else if (type === "insertWithField") {
+        res = await FormProjectApi_createFormItemAndField(
+          ...(args as insertWithFieldArgs)
+        );
+      }
+      this.mockInstanceIdCache.set(task.nodeData.instanceId, res.instanceId);
+      this.publish("message", {
+        action: "execute-success",
+        data: {
+          res: res,
+          op: task.type,
+        },
+      });
+      return true;
+    } catch (e) {
+      this.handleError(e, "创建表单项失败");
+      return false;
+    }
+  }
+
+  private async updateFormItem(
+    task: WorkbenchBackendActionForUpdateFormItem
+  ): Promise<boolean> {
+    try {
+      const instance =
+        this.mockInstanceIdCache.get(task.args[0]) || task.args[0];
+      const res = await FormProjectApi_updateFormItem(instance, task.args[1]);
+      this.publish("message", {
+        action: "execute-success",
+        data: {
+          res: res,
+          op: "update",
+        },
+      });
+      return true;
+    } catch (e) {
+      this.handleError(e, "更新表单项失败");
+      return false;
+    }
+  }
+
+  private async deleteFormItem(
+    task: WorkbenchBackendActionForDeleteFormItem
+  ): Promise<boolean> {
+    try {
+      const instance =
+        this.mockInstanceIdCache.get(task.args[0]) || task.args[0];
+      const res = await FormProjectApi_deleteFormItem(instance);
+      this.publish("message", {
+        action: "execute-success",
+        data: {
+          res: res,
+          op: "delete",
+        },
+      });
+      return true;
+    } catch (e) {
+      this.handleError(e, "删除表单项失败");
+      return false;
+    }
+  }
+
   private batchDealRequest = async (): Promise<void> => {
     // 进入批量变更操作
     this.isDealing = true;
@@ -446,6 +532,15 @@ export default class WorkbenchBackend {
               break;
             case "insert.snippet":
               isSuccess = await this.insertSnippet(data);
+              break;
+            case "insert.formItem":
+              this.createFormItem(task);
+              break;
+            case "delete.formItem":
+              this.deleteFormItem(task);
+              break;
+            case "update.formItem":
+              this.updateFormItem(task);
               break;
             case "copy.brick":
               isSuccess = await this.copyBrick(data);

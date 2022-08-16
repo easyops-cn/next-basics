@@ -91,6 +91,16 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
     });
   };
 
+  @event({ type: "execute.success" })
+  _handleExecuteSuccess: EventEmitter<{
+    res: unknown;
+    op: string;
+  }>;
+
+  handleExecuteSuccess = (res: { res: unknown; op: string }): void => {
+    this._handleExecuteSuccess.emit(res);
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -119,6 +129,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
               onStoryboardUpdate={this.handleStoryboardUpdate}
               onRootNodeUpdate={this.handleRootNodeUpdate}
               onGraphDataUpdate={this.handleGraphDataUpdate}
+              onExecuteSuccess={this.handleExecuteSuccess}
             />
           </BuilderProvider>
         </BrickWrapper>,
