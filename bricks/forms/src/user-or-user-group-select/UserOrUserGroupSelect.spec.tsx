@@ -85,6 +85,47 @@ describe("UserOrUserGroupSelect", () => {
     await (global as any).flushPromises();
     expect(onChange).toBeCalledWith(null);
   });
+  it("should work showkey's attribute value of UserOrGroup is null", async () => {
+    mockPostSearch.mockResolvedValue({
+      list: [
+        {
+          instanceId: "instanceId",
+          name: "easyopstest",
+        },
+      ],
+    });
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <UserOrUserGroupSelect
+        onChange={onChange}
+        objectList={[
+          {
+            objectId: "USER",
+            view: {
+              show_key: ["test"],
+            },
+          },
+          {
+            objectId: "USER_GROUP",
+            view: {
+              show_key: ["name"],
+            },
+          },
+        ]}
+        value={{
+          selectedUser: ["easyopstest"],
+        }}
+      />
+    );
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(Select).prop("value")).toEqual([
+      {
+        key: "easyopstest",
+        label: "easyopstest",
+      },
+    ]);
+  });
   it("should work and query", async () => {
     mockPostSearch.mockResolvedValue({
       list: [

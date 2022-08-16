@@ -12,6 +12,7 @@ import {
   WorkbenchCacheAction,
   WorkbenchCacheActionRef,
   StoryboardUpdateParams,
+  BuildAndPushState,
 } from "./WorkbenchCacheAction";
 import {
   BuilderProvider,
@@ -19,6 +20,7 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { WorkbenchBackendCacheAction } from "@next-types/preview";
 import { pipes } from "@next-core/pipes";
+import { Storyboard } from "@next-core/brick-types";
 
 /**
  * @id next-builder.workbench-cache-action
@@ -99,6 +101,22 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
 
   handleExecuteSuccess = (res: { res: unknown; op: string }): void => {
     this._handleExecuteSuccess.emit(res);
+  
+  @event({ type: "build.and.push" })
+  _buildAndPushEmitter: EventEmitter<{
+    state: BuildAndPushState;
+    storyboard: Storyboard;
+  }>;
+
+  handleBuildAndPush = (
+    state: BuildAndPushState,
+    storyboard: Storyboard
+  ): void => {
+    this._buildAndPushEmitter.emit({
+      state,
+      storyboard,
+    });
+    
   };
 
   connectedCallback(): void {
@@ -130,6 +148,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
               onRootNodeUpdate={this.handleRootNodeUpdate}
               onGraphDataUpdate={this.handleGraphDataUpdate}
               onExecuteSuccess={this.handleExecuteSuccess}
+              onBuildAndPush={this.handleBuildAndPush}
             />
           </BuilderProvider>
         </BrickWrapper>,

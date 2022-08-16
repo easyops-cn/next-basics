@@ -135,6 +135,7 @@ const locale: Locale = {
   [K.CUSTOMTEMPLATE]: "Custom template",
   [K.LAYOUT]: "Layout",
   [K.FORMITEM]: "FORMITEM",
+  [K.DOCUMENT]: "Document",
 };
 
 export default locale;

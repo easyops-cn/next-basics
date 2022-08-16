@@ -116,7 +116,7 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerReload
   | PreviewMessageContainerCapture
   | PreviewMessageContainerProxyMethod
-  | PreviewMessageContainerMatchApicache;
+  | PreviewMessageContainerUpdatePreviewUrl;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
@@ -317,6 +317,13 @@ export interface PreviewMessageContainerProxyMethodError
   result: ExcuteProxyMethodResult;
 }
 
+export interface PreviewMessageContainerUpdatePreviewUrl
+  extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "update-preview-url";
+  url: string;
+}
+
 export interface PreviewMessageContainerMatchApiCache
   extends PreviewBaseMessage {
   sender: "previewer";
@@ -420,6 +427,7 @@ export type WorkbenchBackendCacheAction =
 interface WorkbencdBackendCacheActionCommon {
   uid?: string;
   state?: "pending" | "resolve" | "reject";
+  isBuilding?: boolean;
 }
 
 export interface WorkbenchBackendActionForInitDetail {
@@ -427,6 +435,7 @@ export interface WorkbenchBackendActionForInitDetail {
   projectId: string;
   objectId: string;
   rootNode: BuilderRuntimeNode;
+  delayBuildTime: number;
 }
 
 export interface WorkbenchBackendActionForInit
@@ -574,6 +583,8 @@ export type BackendMessage =
   | BackendMessageForInsert
   | BackendMessageForInstanceResponse
   | BackendMessageForUpdateGraphData
+  | BackMessageForBuildStart
+  | BackMessageForBuildSuccess
   | BackMessageForBuildFail
   | BackendMessageForError
   | BackendMessageForExecuteSuccess;
@@ -593,6 +604,18 @@ export interface BackendMessageForUpdateGraphData {
   action: "update-graph-data";
   data: {
     graphData: pipes.GraphData;
+  };
+}
+
+export interface BackMessageForBuildStart {
+  action: "build-start";
+  data?: unknown;
+}
+
+export interface BackMessageForBuildSuccess {
+  action: "build-success";
+  data: {
+    storyboard: Partial<StoryboardToBuild>;
   };
 }
 

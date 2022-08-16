@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.175.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.1...@next-bricks/next-builder@1.175.2) (2022-08-16)
+
+
+### Bug Fixes
+
+* do not prepend public root for widget thumbnails ([7ab7ee5](https://github.com/easyops-cn/next-basics/commit/7ab7ee5ce4f6016ca3e015efe505de927dcd027f))
+* prepend public root for thumbnails if applicable ([df749d0](https://github.com/easyops-cn/next-basics/commit/df749d07188d8197b79b4195324cd830fd7364a0))
+
+
+
+
+
+## [1.175.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.0...@next-bricks/next-builder@1.175.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* component select optimize ([1c9a55c](https://github.com/easyops-cn/next-basics/commit/1c9a55c4888c17ffc8085c847fa64b599efe01b7))
+
+
+
+
+
+# [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.174.1...@next-bricks/next-builder@1.175.0) (2022-08-15)
+
+
+### Features
+
+* support workbench Tree click not update page ([0301baf](https://github.com/easyops-cn/next-basics/commit/0301baffa6e23999244b0a35a1b5efde48d4b759))
+
+
+
+
+
+## [1.174.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.174.0...@next-bricks/next-builder@1.174.1) (2022-08-15)
+
+
+### Bug Fixes
+
+* fix workbench tree click triggered twice ([0498ef8](https://github.com/easyops-cn/next-basics/commit/0498ef805f1fbf34c1c8a9b31847555053aa3275))
+
+
+
+
+
+# [1.174.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.173.0...@next-bricks/next-builder@1.174.0) (2022-08-12)
+
+
+### Features
+
+* **BrickTree:** not allow drag in Slot ([e1c39b9](https://github.com/easyops-cn/next-basics/commit/e1c39b9ea638170ff54efa6bdc8223e29d5c4b65))
+
+
+
+
+
+# [1.173.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.172.2...@next-bricks/next-builder@1.173.0) (2022-08-11)
+
+
+### Features
+
+* support user set build delay time ([4bfbd41](https://github.com/easyops-cn/next-basics/commit/4bfbd411163dd1dd83e6414a92e0fb16b87f7079))
+* update input state ([fc024c1](https://github.com/easyops-cn/next-basics/commit/fc024c1cefd0a00fa9c8641d494a5008a5d8ba6e))
+
+
+
+
+
+## [1.172.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.172.1...@next-bricks/next-builder@1.172.2) (2022-08-11)
+
+
+### Bug Fixes
+
+* fix style ([b860078](https://github.com/easyops-cn/next-basics/commit/b860078ed98f45de2c4b71f5d313f025d6f53711))
+
+
+
+
+
 ## [1.172.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.172.0...@next-bricks/next-builder@1.172.1) (2022-08-11)
 
 

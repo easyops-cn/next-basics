@@ -26,6 +26,7 @@ import type {
   BuilderRouteNode,
   RouteConf,
   CustomTemplate,
+  Storyboard,
 } from "@next-core/brick-types";
 import type {
   WorkbenchBackendActionForInsertDetail,
@@ -36,17 +37,18 @@ import type {
   WorkbenchBackendActionForInsertSnippet,
   WorkbenchBackendActionForUpdateDetail,
   WorkbenchBackendActionForDeleteDetail,
+  WorkbenchBackendActionForMoveDetail,
 } from "@next-types/preview";
 import WorkbenchBackend, {
   QueueItem,
 } from "../shared/workbench/WorkbenchBackend";
 import getGraphTreeByBuilderData from "../utils/getGraphTreeByBuilderData";
-import { Button, Modal, Popover, Tooltip } from "antd";
-import { GeneralIcon } from "@next-libs/basic-components";
+import { Button, Modal, Popover, Tooltip, Input } from "antd";
+import { LoadingOutlined, SendOutlined } from "@ant-design/icons";
 import { pipes } from "@next-core/pipes";
 import styles from "./WorkbenchCacheAction.module.css";
 import { CacheActionList } from "./CacheActionList";
-import { WorkbenchBackendActionForMoveDetail } from "../../../../types/preview/index";
+import { JsonStorage } from "@next-libs/storage";
 
 export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
@@ -68,6 +70,7 @@ type UpdateStoryboard =
       bricks: BrickConf[];
     };
 
+export type BuildAndPushState = "building" | "success" | "fail";
 export interface WorkbenchCacheActionProps {
   appId: string;
   projectId: string;
@@ -81,7 +84,11 @@ export interface WorkbenchCacheActionProps {
   onRootNodeUpdate: (node: BuilderRuntimeNode) => void;
   onGraphDataUpdate: (graphData: pipes.GraphData) => void;
   onExecuteSuccess: (res: { res: unknown; op: string }) => void;
+  onBuildAndPush?: (state: BuildAndPushState, storyboard: Storyboard) => void;
 }
+
+const DELAY_BUILD_TIME = 30;
+const DELAY_BUILD_TIME_KEY = "VISUAL_BUILDER_DELAY_BUILD_TIME";
 
 function LegacyWorkbenchCacheAction(
   {
@@ -93,22 +100,30 @@ function LegacyWorkbenchCacheAction(
     onRootNodeUpdate,
     onGraphDataUpdate,
     onExecuteSuccess,
+    onBuildAndPush,
   }: WorkbenchCacheActionProps,
   ref: React.Ref<WorkbenchCacheActionRef>
 ): React.ReactElement {
+  const manager = useBuilderDataManager();
+  const storage = React.useMemo(() => new JsonStorage(localStorage), []);
   const { rootId, nodes, edges } = useBuilderData();
   const history = getHistory();
+  const [delayBuildTime, setDelayBuildTime] = useState<string>(
+    storage.getItem(DELAY_BUILD_TIME_KEY) ?? String(DELAY_BUILD_TIME)
+  );
+  const [buildState, setBuildState] = useState<BuildAndPushState>();
   const [error, setError] = useState(false);
   const [showCaheActionList, setShowCacheActionList] = useState<boolean>(false);
   const [cacheActionList, setCacheActionList] = useState<QueueItem[]>([]);
-  const manager = useBuilderDataManager();
+  const nodesCacheRef = useRef<Map<string, BuilderRuntimeNode>>(new Map());
+
   const backendInstance = WorkbenchBackend.getInstance({
     appId,
     projectId,
     rootNode,
     objectId,
+    delayBuildTime: Number(delayBuildTime),
   });
-  const nodesCacheRef = useRef<Map<string, BuilderRuntimeNode>>(new Map());
 
   const setNodesCache = (
     nodes: BuilderRuntimeNode[],
@@ -181,6 +196,10 @@ function LegacyWorkbenchCacheAction(
     },
     [onStoryboardUpdate]
   );
+
+  const build = (): void => {
+    backendInstance.buildAndPush();
+  };
 
   const getInstanceDetail = useCallback(
     (instanceId: string): BuilderRuntimeNode => {
@@ -424,7 +443,36 @@ function LegacyWorkbenchCacheAction(
           case "update-graph-data":
             onGraphDataUpdate(data.graphData);
             break;
+          case "build-start":
+            setBuildState("building");
+            setCacheActionList(
+              cacheActionList.map((item) => {
+                if (item.state === "resolve") {
+                  item.isBuilding = true;
+                }
+                return item;
+              })
+            );
+            break;
+          case "build-success":
+            onBuildAndPush("success", data.storyboard);
+            setBuildState("success");
+            if (data) {
+              setCacheActionList(
+                cacheActionList.filter((item) => !item.isBuilding)
+              );
+            }
+            break;
           case "build-fail":
+            setBuildState("fail");
+            setCacheActionList(
+              cacheActionList.map((item) => {
+                if (item.isBuilding) {
+                  item.isBuilding = false;
+                }
+                return item;
+              })
+            );
             Modal.error({
               title: "build & push 失败",
             });
@@ -452,7 +500,13 @@ function LegacyWorkbenchCacheAction(
         }
       }
     },
-    [cacheActionList, manager, onGraphDataUpdate, updateCacheActionList]
+    [
+      cacheActionList,
+      manager,
+      onBuildAndPush,
+      onGraphDataUpdate,
+      updateCacheActionList,
+    ]
   );
 
   const handleBeforePageLeave = useCallback(
@@ -470,15 +524,42 @@ function LegacyWorkbenchCacheAction(
     [cacheActionList]
   );
 
+  const handleOnBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    const time = value === "" ? DELAY_BUILD_TIME : value;
+    backendInstance.setDelayBuildTime(Number(time));
+    setDelayBuildTime(String(time));
+    storage.setItem(DELAY_BUILD_TIME_KEY, time);
+  };
+
   const renderCacheActionList = useMemo(() => {
     const nodeCache = nodesCacheRef.current;
     return (
-      <CacheActionList
-        cacheActionList={cacheActionList}
-        nodeCache={nodeCache}
-      />
+      <>
+        <div>
+          <div className={styles.setBuildTimeWrapper}>
+            <span>设置定时自动推送间隔</span>
+            <Tooltip title="推送将于推送任务全部执行完后,定时执行">
+              <Input
+                size="small"
+                addonAfter="秒"
+                style={{ width: "100px" }}
+                value={delayBuildTime}
+                onChange={(e) => setDelayBuildTime(e.target.value)}
+                onBlur={handleOnBlur}
+                type="number"
+                min="-1"
+              />
+            </Tooltip>
+          </div>
+        </div>
+        <CacheActionList
+          cacheActionList={cacheActionList}
+          nodeCache={nodeCache}
+        />
+      </>
     );
-  }, [cacheActionList]);
+  }, [cacheActionList, delayBuildTime]);
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleBeforePageLeave);
@@ -524,27 +605,22 @@ function LegacyWorkbenchCacheAction(
   return (
     <div className={styles.cacheActionWrapper}>
       <Popover
-        title="变更列表"
+        title="待推送变更列表"
         content={renderCacheActionList}
         visible={showCaheActionList}
         onVisibleChange={setShowCacheActionList}
         overlayClassName={styles.cacheActionListPopover}
         placement="bottomRight"
-        trigger="click"
       >
-        <Tooltip title="变更列表">
+        <Tooltip title="点击手动执行构建并推送">
           <Button
             shape="circle"
             icon={
-              <GeneralIcon
-                icon={{
-                  icon: "unordered-list",
-                  lib: "antd",
-                  theme: "outlined",
-                  color: "var(--antd-btn-default-color)",
-                }}
-              />
+              buildState === "building" ? <LoadingOutlined /> : <SendOutlined />
             }
+            danger={buildState === "fail"}
+            disabled={buildState === "building"}
+            onClick={build}
           />
         </Tooltip>
       </Popover>

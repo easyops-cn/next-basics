@@ -98,17 +98,6 @@ export function previewStart(
     }
   };
 
-  const handleMatchCache = (num: number): void => {
-    window.parent.postMessage(
-      {
-        sender: "previewer",
-        type: "match-api-cache",
-        num,
-      },
-      previewProxyOrigin
-    );
-  };
-
   const sendHighlightBrickOutlines = (
     type: "hover" | "active",
     iid: string,
@@ -196,9 +185,6 @@ export function previewStart(
           case "hover-on-iframe":
             handleHoverOnIframe(data.position);
             break;
-          case "match-api-cache":
-            handleMatchCache(data.num);
-            break;
         }
       } else
         switch (data.type) {
@@ -284,6 +270,9 @@ export function previewStart(
             data: { method: method, res: err.message },
           });
         }
+      }
+      if (data.type === "update-preview-url") {
+        getHistory().push(data.url);
       }
     }
   );

@@ -34,16 +34,8 @@ yarn serve --local-bricks=basic-bricks,forms
 # Serve using a specified port, default is 8081
 yarn serve --port 8083
 
-# Serve using a specified remote server, default is http://192.168.100.162
-yarn serve --server 163
-
-# If server is other than `192.168.100.*`, use full ip
-yarn serve --server 10.0.0.1
-
-# If server is other than `http://`, use protocol + ip
-# Tips: need `export NODE_EXTRA_CA_CERTS=${Path To Your easyops.cert.pem}`
-#       if use local https servers.
-yarn serve --server https://admin.easyops.local
+# Serve using a specified remote server, default is https://dev.easyops.local
+yarn serve --server https://uat.easyops.local
 ```
 
 ### Development with Instance Preview
@@ -112,14 +104,8 @@ yarn serve --local-bricks=basic-bricks,forms
 # 使用其它端口提供服务，默认为 8081
 yarn serve --port 8083
 
-# 使用指定的远端服务器，默认为 http://192.168.100.162
-yarn serve --server 163
-
-# 如果地址不为 `192.168.100.*`，应使用完整 IP 地址
-yarn serve --server 10.0.0.1
-
-# 如果服务不为 `http://`，应同时指定协议
-yarn serve --server https://admin.easyops.local
+# 使用指定的远端服务器，默认为 https://dev.easyops.local
+yarn serve --server https://uat.easyops.local
 ```
 
 ### 使用实时预览进行开发

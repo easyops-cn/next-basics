@@ -120,6 +120,7 @@ export enum K {
   CUSTOMTEMPLATE = "CUSTOMTEMPLATE",
   LAYOUT = "LAYOUT",
   FORMITEM = "FORMITEM",
+  DOCUMENT = "DOCUMENT",
 }
 
 export type Locale = { [key in K]: string };

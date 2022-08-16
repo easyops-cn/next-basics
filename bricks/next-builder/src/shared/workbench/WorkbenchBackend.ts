@@ -52,8 +52,6 @@ import {
   SnippetNodeDetail,
 } from "@next-core/editor-bricks-helper";
 
-const DELAY_BUILD_TIME = 10000;
-
 export type QueueItem =
   | WorkbenchBackendActionForInsert
   | WorkbenchBackendActionForUpdate
@@ -168,6 +166,10 @@ export default class WorkbenchBackend {
     }
   }
 
+  public setDelayBuildTime(time: number): void {
+    this.baseInfo.delayBuildTime = time;
+  }
+
   private cleanTimer(): void {
     clearTimeout(this.afterChangeTimer);
     this.afterChangeTimer = null;
@@ -272,7 +274,10 @@ export default class WorkbenchBackend {
         data: data.property,
       });
       if (res.total === 0) {
-        this.handleError(null, "实例修改冲突, 请尝试刷新页面");
+        this.handleError(
+          null,
+          "实例修改冲突,可能有其他人正在修改当前页面,请尝试刷新页面"
+        );
         return false;
       }
       if (res.failTotal > 0) {
@@ -396,12 +401,16 @@ export default class WorkbenchBackend {
     }
   }
 
-  private async buildAndPush(): Promise<void> {
+  async buildAndPush(): Promise<void> {
+    this.cleanTimer();
     if (this.isBuilding) return;
     this.isBuilding = true;
     try {
       // eslint-disable-next-line no-console
       console.log("=== building ===");
+      this.publish("message", {
+        action: "build-start",
+      });
       const result = await StoryboardAssembly({
         projectId: this.baseInfo.projectId,
         storyboardType: "micro-app",
@@ -413,10 +422,17 @@ export default class WorkbenchBackend {
       // eslint-disable-next-line no-console
       console.log("=== build finsh ===");
       this.isBuilding = false;
+      this.publish("message", {
+        action: "build-success",
+        data: {
+          storyboard: result.storyboard,
+        },
+      });
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error("build fail", e);
-      this.publish("error", {
+      this.isBuilding = false;
+      this.publish("message", {
         action: "build-fail",
         data: {
           error: "build & push 失败",
@@ -576,9 +592,14 @@ export default class WorkbenchBackend {
       // eslint-disable-next-line no-console
       console.log("=== ready to build ===");
       // 如果任务队列已经清空, 则发起定时任务, 在规定时间后, 解锁页面, 并且发起build动作
+      if (this.baseInfo.delayBuildTime < 0) {
+        // eslint-disable-next-line no-console
+        console.log("=== time less than 0, build cancel ===");
+        return;
+      }
       this.afterChangeTimer = setTimeout(() => {
         this.buildAndPush();
-      }, DELAY_BUILD_TIME);
+      }, (this.baseInfo.delayBuildTime ?? 10) * 1000);
     }
   };
 }
