@@ -128,7 +128,7 @@ export const getAllStoryListV2 = (
         return;
       }
 
-      if (story.isExport === false) {
+      if (story?.originData?.isExport === false) {
         return;
       }
 
