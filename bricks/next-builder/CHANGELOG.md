@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.175.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.0...@next-bricks/next-builder@1.175.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* component select optimize ([1c9a55c](https://github.com/easyops-cn/next-basics/commit/1c9a55c4888c17ffc8085c847fa64b599efe01b7))
+
+
+
+
+
 # [1.175.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.174.1...@next-bricks/next-builder@1.175.0) (2022-08-15)
 
 
