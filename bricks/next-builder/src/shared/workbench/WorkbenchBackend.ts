@@ -202,10 +202,12 @@ export default class WorkbenchBackend {
     objectId: string,
     instanceId: string
   ): Promise<void> {
-    const detail = await InstanceApi_getDetail(objectId, instanceId, {
+    const realInstanceId =
+      this.mockInstanceIdCache.get(instanceId) || instanceId;
+    const detail = await InstanceApi_getDetail(objectId, realInstanceId, {
       fields: "mtime",
     });
-    this.mTimeMap.set(instanceId, detail.mtime);
+    this.mTimeMap.set(realInstanceId, detail.mtime);
   }
 
   private async createInstance(
@@ -294,16 +296,23 @@ export default class WorkbenchBackend {
         return id;
       });
       if (data.nodeData) {
-        await this.updateInstance({
+        const isSuccess = await this.updateInstance({
           objectId: data.objectId,
           instanceId: instanceId,
           property: data.nodeData,
           mtime: data.mtime,
         });
+        if (!isSuccess) return false;
       }
       await StoryboardApi_sortStoryboardNodes({
         nodeIds,
       });
+      await Promise.all(
+        data.nodeInstanceIds.map((iid) => {
+          const instanceId = this.mockInstanceIdCache.get(iid) || iid;
+          this.updateMTime(data.objectId, instanceId);
+        })
+      );
       return true;
     } catch (e) {
       this.handleError(e, "移动实例失败");
@@ -453,9 +462,6 @@ export default class WorkbenchBackend {
               break;
             case "move":
               isSuccess = await this.moveInstance(data);
-              if (isSuccess) {
-                await this.updateMTime(data.objectId, data.nodeInstanceId);
-              }
               break;
             case "delete":
               isSuccess = await this.deleteInstance(data);

@@ -481,6 +481,7 @@ export interface WorkbenchBackendActionForMoveDetail {
   nodeInstanceId: string;
   nodeUid: number;
   nodeIds: string[];
+  nodeInstanceIds: string[];
   nodeData: NodeInstance;
   objectId: string;
   mtime?: string;
