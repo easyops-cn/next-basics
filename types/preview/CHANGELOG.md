@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.0...@next-types/preview@1.16.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* fix move error ([5521db8](https://github.com/easyops-cn/next-basics/commit/5521db8cb49ac8692c7707fc2fe7d8abb7234fcf))
+
+
+
+
+
 # [1.16.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.15.0...@next-types/preview@1.16.0) (2022-08-15)
 
 
