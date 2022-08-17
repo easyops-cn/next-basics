@@ -2717,11 +2717,6 @@
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.0.2.tgz#2e9a4f9a88c162f968c2c30c21d10cda2b9bdf83"
   integrity sha512-ItbwfjWtJygNAXiTioV1jW2c+0/ZLcTHkm4fKLU23Zn+CIFdUuEDqBTd5/SJ/WdLaHnG39kS82nfWR/quSiV9Q==
 
-"@next-sdk/form-builder-service-sdk@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/form-builder-service-sdk/-/form-builder-service-sdk-1.1.0.tgz#970c147a74461dd1bac8cb792db8867da8f6ca82"
-  integrity sha512-YpvQmz5cchR2s0HIIWFNk72mRELmwBoBS9arLA1gkcVNu8ICoU/pdvTzhQLFLwp61mvCy+sQc2eF3CdReI4Xng==
-
 "@next-sdk/micro-app-sdk@^2.1.1":
   version "2.1.1"
   resolved "https://registry.npmjs.org/@next-sdk/micro-app-sdk/-/micro-app-sdk-2.1.1.tgz#e441aaa303152c54451945703b5e96260dcb476e"
@@ -3731,19 +3726,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@>=16.9.0", "@types/react@^16.14.28":
+"@types/react@*", "@types/react@>=16.9.0", "@types/react@^16.14.28", "@types/react@^17":
   version "16.14.29"
   resolved "https://registry.npmjs.org/@types/react/-/react-16.14.29.tgz#8489c633afc629736ef221bdd3528bdbd1e67e4b"
   integrity sha512-I5IwEaefGZbpmmK1J7zHwZe3JkGxcRkc5WJUDWmNySVVovueViRTEUWV7spTvpe96l3nbKD/K6+GxoN69CYb/w==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^17":
-  version "17.0.48"
-  resolved "https://registry.npmjs.org/@types/react/-/react-17.0.48.tgz#a4532a8b91d7b27b8768b6fc0c3bccb760d15a6c"
-  integrity sha512-zJ6IYlJ8cYYxiJfUaZOQee4lh99mFihBoqkOSEGV+dFi9leROW6+PgstzQ+w3gWTnUfskALtQPGHK6dYmPj+2A==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -15027,7 +15013,7 @@ typescript@~4.7.4:
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
-ua-parser-js@^0.7.18:
+ua-parser-js@0.7.19, ua-parser-js@^0.7.18:
   version "0.7.19"
   resolved "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.19.tgz#94151be4c0a7fb1d001af7022fdaca4642659e4b"
   integrity sha512-T3PVJ6uz8i0HzPxOF9SWzWAlfN/DavlpQqepn22xgve/5QecC+XMCAtmUNnY7C9StehaV6exjUCI801lOI7QlQ==
