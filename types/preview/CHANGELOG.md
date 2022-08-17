@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.2](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.1...@next-types/preview@1.16.2) (2022-08-17)
+
+**Note:** Version bump only for package @next-types/preview
+
+
+
+
+
 ## [1.16.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.0...@next-types/preview@1.16.1) (2022-08-16)
 
 
