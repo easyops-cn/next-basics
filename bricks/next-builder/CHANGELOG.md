@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.175.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.4...@next-bricks/next-builder@1.175.5) (2022-08-17)
+
+
+### Bug Fixes
+
+* **WorkbenchTree:** skipNotify default value error ([1a037a0](https://github.com/easyops-cn/next-basics/commit/1a037a0afad9738e539dc8a02eb9d37977a38224))
+
+
+
+
+
 ## [1.175.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.3...@next-bricks/next-builder@1.175.4) (2022-08-17)
 
 **Note:** Version bump only for package @next-bricks/next-builder
