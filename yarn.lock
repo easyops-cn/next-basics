@@ -2717,6 +2717,11 @@
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.0.2.tgz#2e9a4f9a88c162f968c2c30c21d10cda2b9bdf83"
   integrity sha512-ItbwfjWtJygNAXiTioV1jW2c+0/ZLcTHkm4fKLU23Zn+CIFdUuEDqBTd5/SJ/WdLaHnG39kS82nfWR/quSiV9Q==
 
+"@next-sdk/form-builder-service-sdk@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@next-sdk/form-builder-service-sdk/-/form-builder-service-sdk-1.1.0.tgz#970c147a74461dd1bac8cb792db8867da8f6ca82"
+  integrity sha512-YpvQmz5cchR2s0HIIWFNk72mRELmwBoBS9arLA1gkcVNu8ICoU/pdvTzhQLFLwp61mvCy+sQc2eF3CdReI4Xng==
+
 "@next-sdk/micro-app-sdk@^2.1.1":
   version "2.1.1"
   resolved "https://registry.npmjs.org/@next-sdk/micro-app-sdk/-/micro-app-sdk-2.1.1.tgz#e441aaa303152c54451945703b5e96260dcb476e"

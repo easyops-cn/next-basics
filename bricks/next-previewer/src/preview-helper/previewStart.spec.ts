@@ -41,7 +41,7 @@ jest
   .spyOn(kit.developHelper, "updateStoryboardByTemplate")
   .mockImplementation();
 jest.spyOn(kit.developHelper, "updateStoryboardBySnippet").mockImplementation();
-
+jest.spyOn(kit.developHelper, "updateFormPreviewSettings").mockImplementation();
 const mockCapture = capture as jest.Mock;
 
 delete window.location;
@@ -470,6 +470,24 @@ describe("previewStart", () => {
         snippetId: "test-snippet",
         bricks: [],
       }
+    );
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "refresh",
+        storyboardPatch: { formSchema: {}, fieldList: [] },
+        options: {
+          updateStoryboardType: "form",
+        },
+      },
+    } as any);
+
+    expect(kit.developHelper.updateFormPreviewSettings).toBeCalledWith(
+      "my-app",
+      undefined,
+      { formSchema: {}, fieldList: [] }
     );
   });
 });

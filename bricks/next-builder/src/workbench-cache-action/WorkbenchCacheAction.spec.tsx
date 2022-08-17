@@ -13,7 +13,10 @@ import {
   WorkbenchCacheActionRef,
 } from "./WorkbenchCacheAction";
 import * as brickKit from "@next-core/brick-kit";
-import { WorkbenchBackendActionForInsert } from "@next-types/preview";
+import {
+  WorkbenchBackendActionForInsert,
+  WorkbenchBackendActionForInsertFormItem,
+} from "@next-types/preview";
 
 jest.mock("@next-core/editor-bricks-helper");
 jest.mock("@next-core/brick-kit");
@@ -98,6 +101,7 @@ describe("WorkbenchWorker", () => {
     const onStoryboardUpdate = jest.fn();
     const onRootNodeUpdate = jest.fn();
     const onGraphDataUpdate = jest.fn();
+    const onExecuteSuccess = jest.fn();
     const node = {
       $$uid: 1,
       id: "B-1",
@@ -116,6 +120,7 @@ describe("WorkbenchWorker", () => {
       onStoryboardUpdate: onStoryboardUpdate,
       onRootNodeUpdate: onRootNodeUpdate,
       onGraphDataUpdate: onGraphDataUpdate,
+      onExecuteSuccess: onExecuteSuccess,
     } as WorkbenchCacheActionProps;
     const { baseElement } = render(<WorkbenchCacheAction {...props} />);
     const cacheAction = cacheActionRef.current;
@@ -299,5 +304,21 @@ describe("WorkbenchWorker", () => {
       path: "/page-a/1",
       type: "bricks",
     });
+
+    act(() => {
+      cacheAction.cacheAction({
+        action: "insert.formItem",
+        nodeData: {
+          brick: "div",
+          mountPoint: "content",
+          parentItemId: "route-a",
+          sort: 1,
+          type: "brick",
+          id: "mock_instanceId_001",
+        },
+        type: "insertByField",
+      } as WorkbenchBackendActionForInsertFormItem);
+    });
+    expect(useBuilderDataManager).toBeCalledTimes(6);
   });
 });

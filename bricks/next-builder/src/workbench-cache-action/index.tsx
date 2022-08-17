@@ -93,6 +93,16 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
     });
   };
 
+  @event({ type: "execute.success" })
+  _handleExecuteSuccess: EventEmitter<{
+    res: unknown;
+    op: string;
+  }>;
+
+  handleExecuteSuccess = (res: { res: unknown; op: string }): void => {
+    this._handleExecuteSuccess.emit(res);
+  };
+
   @event({ type: "build.and.push" })
   _buildAndPushEmitter: EventEmitter<{
     state: BuildAndPushState;
@@ -137,6 +147,7 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
               onStoryboardUpdate={this.handleStoryboardUpdate}
               onRootNodeUpdate={this.handleRootNodeUpdate}
               onGraphDataUpdate={this.handleGraphDataUpdate}
+              onExecuteSuccess={this.handleExecuteSuccess}
               onBuildAndPush={this.handleBuildAndPush}
             />
           </BuilderProvider>
