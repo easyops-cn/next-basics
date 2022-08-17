@@ -101,7 +101,8 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
 
   handleExecuteSuccess = (res: { res: unknown; op: string }): void => {
     this._handleExecuteSuccess.emit(res);
-  
+  };
+
   @event({ type: "build.and.push" })
   _buildAndPushEmitter: EventEmitter<{
     state: BuildAndPushState;
@@ -116,7 +117,6 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
       state,
       storyboard,
     });
-    
   };
 
   connectedCallback(): void {
