@@ -341,7 +341,7 @@ function TreeNode({
     contextMenuFactory,
     onNodeToggle,
     getCollapsedId,
-    skipNotify = true,
+    skipNotify,
   } = useWorkbenchTreeContext();
   const {
     allow,
@@ -511,15 +511,15 @@ function TreeNode({
           noEmptyHref
           onClick={onClick}
           {...(skipNotify
-            ? { ...pick(node.link, ["to", "href"]) }
-            : {
+            ? {
                 to: {
                   pathname: get(node.link, "to", "href"),
                   state: {
                     notify: false,
                   },
                 },
-              })}
+              }
+            : { ...pick(node.link, ["to", "href"]) })}
         >
           <span
             className={styles.nodeLabel}
