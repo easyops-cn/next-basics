@@ -526,13 +526,15 @@ export default class WorkbenchBackend {
     // 进入批量变更操作
     this.isDealing = true;
     this.cleanTimer();
-
+    let autoBuild: boolean = this.size > 0 ? true : false;
     if (this.size > 0) {
       const task = this.shift();
+      if (!task) return;
       if (task && task.state === "pending") {
         const { action, data } = task;
         // eslint-disable-next-line no-console
         console.log("batchDealRequest", action, data);
+        autoBuild = action.includes("formItem") ? false : true;
         let isSuccess: boolean;
         try {
           switch (action) {
@@ -603,9 +605,11 @@ export default class WorkbenchBackend {
         console.log("=== time less than 0, build cancel ===");
         return;
       }
-      this.afterChangeTimer = setTimeout(() => {
-        this.buildAndPush();
-      }, (this.baseInfo.delayBuildTime ?? 10) * 1000);
+      if (autoBuild) {
+        this.afterChangeTimer = setTimeout(() => {
+          this.buildAndPush();
+        }, (this.baseInfo.delayBuildTime ?? 10) * 1000);
+      }
     }
   };
 }
