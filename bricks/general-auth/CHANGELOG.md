@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.18.0...@next-bricks/general-auth@1.18.1) (2022-08-19)
+
+
+### Bug Fixes
+
+* add csrfToken ([1264b35](https://github.com/easyops-cn/next-basics/commit/1264b35e0dec81213b62c99468eb864d00030f25))
+
+
+
+
+
 # [1.18.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.17.0...@next-bricks/general-auth@1.18.0) (2022-07-21)
 
 

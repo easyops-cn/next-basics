@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/general-auth",
-  "version": "1.18.0",
+  "version": "1.18.1",
   "description": "A brick package for general auth",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/general-auth",
   "license": "GPL-3.0",
