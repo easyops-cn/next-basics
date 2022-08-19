@@ -202,6 +202,7 @@ export class LegacyGeneralLogin extends React.Component<
       userInstanceId: result.userInstanceId,
       accessRule: result.accessRule,
       isAdmin: result.isAdmin,
+      csrfToken: result.csrfToken,
     });
     const pathFromCookie = atob(
       decodeURIComponent(getCookieByName("SALOGINPATH"))
