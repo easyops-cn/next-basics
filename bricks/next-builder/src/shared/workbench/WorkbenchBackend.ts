@@ -533,7 +533,7 @@ export default class WorkbenchBackend {
         const { action, data } = task;
         // eslint-disable-next-line no-console
         console.log("batchDealRequest", action, data);
-        this.autoBuild = action.includes("formItem") ? false : true;
+        this.autoBuild = !action.includes("formItem");
         let isSuccess: boolean;
         try {
           switch (action) {
