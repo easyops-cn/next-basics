@@ -1,5 +1,5 @@
 import { BuilderCanvasData } from "@next-core/editor-bricks-helper";
-import getGraphTreeByBuilderData from "./getGraphTreeByBuilderData";
+import { getGraphTreeByBuilderData } from "./getGraphTreeByBuilderData";
 
 describe("getGraphTreeByBuilderData", () => {
   it("should work", () => {

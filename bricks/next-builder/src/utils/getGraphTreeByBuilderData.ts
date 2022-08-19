@@ -4,27 +4,28 @@ import {
   BuilderRuntimeNode,
 } from "@next-core/editor-bricks-helper";
 
-export default function getGraphTreeByBuilderData({
+export function normalizeBuilderData(
+  node: BuilderRuntimeNode
+): BuilderRouteOrBrickNode {
+  return Object.fromEntries(
+    Object.entries(node).filter((item) => {
+      if (
+        item[0].startsWith("$") ||
+        item[1] === undefined ||
+        item[1] === null ||
+        item[1] === ""
+      )
+        return false;
+      return item;
+    })
+  ) as BuilderRouteOrBrickNode;
+}
+
+export function getGraphTreeByBuilderData({
   rootId,
   nodes,
   edges,
 }: BuilderCanvasData): BuilderRouteOrBrickNode {
-  const normalizeBuilderData = (
-    node: BuilderRuntimeNode
-  ): BuilderRouteOrBrickNode => {
-    return Object.fromEntries(
-      Object.entries(node).filter((item) => {
-        if (
-          item[0].startsWith("$") ||
-          item[1] === undefined ||
-          item[1] === null ||
-          item[1] === ""
-        )
-          return false;
-        return item;
-      })
-    ) as BuilderRouteOrBrickNode;
-  };
   const root = nodes.find((item) => item.$$uid === rootId);
   if (!root) return;
   const rootNode = normalizeBuilderData(root);
