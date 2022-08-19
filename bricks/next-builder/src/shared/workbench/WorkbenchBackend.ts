@@ -74,6 +74,7 @@ export default class WorkbenchBackend {
   private subUid = 0;
   private isDealing = false;
   private isBuilding = false;
+  private autoBuild = true;
   private afterChangeTimer: NodeJS.Timeout;
   private isNeedUpdateTree = false;
   private mTimeMap = new Map<string, string>();
@@ -526,15 +527,13 @@ export default class WorkbenchBackend {
     // 进入批量变更操作
     this.isDealing = true;
     this.cleanTimer();
-    let autoBuild: boolean = this.size > 0 ? true : false;
     if (this.size > 0) {
       const task = this.shift();
-      if (!task) return;
       if (task && task.state === "pending") {
         const { action, data } = task;
         // eslint-disable-next-line no-console
         console.log("batchDealRequest", action, data);
-        autoBuild = action.includes("formItem") ? false : true;
+        this.autoBuild = action.includes("formItem") ? false : true;
         let isSuccess: boolean;
         try {
           switch (action) {
@@ -605,7 +604,7 @@ export default class WorkbenchBackend {
         console.log("=== time less than 0, build cancel ===");
         return;
       }
-      if (autoBuild) {
+      if (this.autoBuild) {
         this.afterChangeTimer = setTimeout(() => {
           this.buildAndPush();
         }, (this.baseInfo.delayBuildTime ?? 10) * 1000);
