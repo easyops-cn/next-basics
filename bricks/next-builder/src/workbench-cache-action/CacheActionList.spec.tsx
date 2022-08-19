@@ -112,14 +112,16 @@ describe("WorkbenchWorker", () => {
       {
         action: "copy.brick",
         state: "pending",
-        data: null,
-        sourceId: "B-123",
+        data: {
+          sourceBrickId: "B-123",
+        },
       },
       {
         action: "cut.brick",
         state: "pending",
-        data: null,
-        sourceId: "B-456",
+        data: {
+          sourceBrickId: "B-456",
+        },
       },
     ] as QueueItem[];
 

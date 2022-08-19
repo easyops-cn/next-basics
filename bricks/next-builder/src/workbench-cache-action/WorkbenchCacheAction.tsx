@@ -42,13 +42,17 @@ import type {
 import WorkbenchBackend, {
   QueueItem,
 } from "../shared/workbench/WorkbenchBackend";
-import getGraphTreeByBuilderData from "../utils/getGraphTreeByBuilderData";
+import {
+  getGraphTreeByBuilderData,
+  normalizeBuilderData,
+} from "../utils/getGraphTreeByBuilderData";
 import { Button, Modal, Popover, Tooltip, Input } from "antd";
 import { LoadingOutlined, SendOutlined } from "@ant-design/icons";
 import { pipes } from "@next-core/pipes";
 import styles from "./WorkbenchCacheAction.module.css";
 import { CacheActionList } from "./CacheActionList";
 import { JsonStorage } from "@next-libs/storage";
+import { normalizeBuilderNode } from "@next-core/brick-utils";
 
 export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
@@ -112,7 +116,6 @@ function LegacyWorkbenchCacheAction(
     storage.getItem(DELAY_BUILD_TIME_KEY) ?? String(DELAY_BUILD_TIME)
   );
   const [buildState, setBuildState] = useState<BuildAndPushState>();
-  const [error, setError] = useState(false);
   const [showCaheActionList, setShowCacheActionList] = useState<boolean>(false);
   const [cacheActionList, setCacheActionList] = useState<QueueItem[]>([]);
   const nodesCacheRef = useRef<Map<string, BuilderRuntimeNode>>(new Map());
@@ -229,6 +232,9 @@ function LegacyWorkbenchCacheAction(
       bg: data.bg,
       type: data.type,
     };
+    data.nodeData.$$normalized = normalizeBuilderNode(
+      normalizeBuilderData(data.nodeData)
+    );
     if (data.dragOverInstanceId) {
       manager.workbenchNodeAdd(data);
     } else {
@@ -284,6 +290,9 @@ function LegacyWorkbenchCacheAction(
       },
       ["$$isMock"]
     ) as BuilderRuntimeNode;
+    updateNode.$$normalized = normalizeBuilderNode(
+      normalizeBuilderData(updateNode)
+    );
     manager.updateNode(mergeData.instanceId, updateNode);
   };
 
@@ -500,7 +509,6 @@ function LegacyWorkbenchCacheAction(
                 return item;
               })
             );
-            setError(true);
             break;
         }
       }

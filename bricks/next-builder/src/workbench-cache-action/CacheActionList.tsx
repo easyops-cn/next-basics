@@ -9,11 +9,15 @@ interface CacheActionListProps {
   nodeCache: Map<string, BuilderRuntimeNode>;
 }
 
+type ActionContantsType = {
+  [props: string]: string;
+};
+
 export function CacheActionList({
   cacheActionList,
   nodeCache,
 }: CacheActionListProps): React.ReactElement {
-  const ActionContants = {
+  const actionContants: ActionContantsType = {
     insert: "新增实例",
     update: "更新实例",
     move: "移动实例",
@@ -44,16 +48,16 @@ export function CacheActionList({
         return nodeCache.get(data.instanceId)?.id;
       case "cut.brick":
       case "copy.brick":
-        return item.sourceId;
+        return data.sourceBrickId;
       case "copy.data":
         return item.sourceName;
       case "insert.snippet":
-        return item.data.brick;
+        return data.brick;
     }
   };
 
   const itemContent = (item: QueueItem): string =>
-    `${ActionContants[item.action]}: [${getBrickId(item)}]`;
+    `${actionContants[item.action]}: [${getBrickId(item)}]`;
 
   return (
     <div className={styles.cacheActionListWrapper}>

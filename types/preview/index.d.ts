@@ -532,14 +532,16 @@ export interface WorkbenchBackendActionForCopyData
 export interface WorkbenchBackendActionForCutBrick
   extends WorkbencdBackendCacheActionCommon {
   action: "cut.brick";
-  data: Partial<ModelInstanceRelationRequest>;
-  sourceId: string;
+  data: Partial<ModelInstanceRelationRequest> & {
+    sourceBrickId: string;
+  };
 }
 export interface WorkbenchBackendActionForCopyBrick
   extends WorkbencdBackendCacheActionCommon {
   action: "copy.brick";
-  data: StoryboardApi_CloneBricksRequestBody;
-  sourceId: string;
+  data: StoryboardApi_CloneBricksRequestBody & {
+    sourceBrickId: string;
+  };
 }
 
 export type insertByFieldArgs = [
