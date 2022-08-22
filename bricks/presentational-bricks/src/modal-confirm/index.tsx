@@ -196,6 +196,16 @@ export class ModalConfirmElement extends UpdatingElement {
   visible: boolean;
 
   /**
+   * @kind string | number
+   * @required false
+   * @default -
+   * @description 模态框宽度
+   * @group ui
+   */
+  @property({ attribute: false })
+  width: string | number;
+
+  /**
    * @kind string
    * @required false
    * @default -
@@ -300,6 +310,7 @@ export class ModalConfirmElement extends UpdatingElement {
       "okButtonProps",
       "cancelButtonProps",
       "contentBrick",
+      "width",
     ]);
 
     const okButtonProps = props.okButtonProps;
@@ -367,6 +378,7 @@ export class ModalConfirmElement extends UpdatingElement {
             closeWhenOk={this.closeWhenOk}
             confirmLoading={this.confirmLoading}
             expect={this.expect}
+            width={this.width}
           />
         </BrickWrapper>,
         this

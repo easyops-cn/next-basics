@@ -17,6 +17,7 @@ exports[`ModalConfirm should work 1`] = `
   title="###{key1}$$"
   type="confirm"
   visible={true}
+  width={500}
 />
 `;
 
@@ -31,5 +32,6 @@ exports[`ModalConfirm should work 2`] = `
   }
   type="confirm"
   visible={false}
+  width={500}
 />
 `;

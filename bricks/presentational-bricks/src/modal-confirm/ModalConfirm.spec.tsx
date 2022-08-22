@@ -30,6 +30,7 @@ const props: any = {
   content: "## <strong>#{key2}</strong> $$",
   extraContent: "###{key3}$$",
   isDelete: true,
+  width: 500,
 };
 const mockOnOk = jest.fn();
 const mockOnCancel = jest.fn();
