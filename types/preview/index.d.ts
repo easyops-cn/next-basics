@@ -321,7 +321,8 @@ export interface PreviewMessageContainerUpdatePreviewUrl
   extends PreviewBaseMessage {
   sender: "preview-container";
   type: "update-preview-url";
-  url: string;
+  path: string;
+  exact?: boolean;
 }
 
 export interface PreviewMessageContainerMatchApiCache

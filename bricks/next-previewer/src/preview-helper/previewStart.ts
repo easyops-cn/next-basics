@@ -272,7 +272,9 @@ export function previewStart(
         }
       }
       if (data.type === "update-preview-url") {
-        getHistory().push(data.url);
+        options.routePath = data.path;
+        data.exact && (options.routeExact = data.exact);
+        getHistory().push(data.path);
       }
     }
   );
