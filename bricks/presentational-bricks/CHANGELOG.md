@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.262.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.261.1...@next-bricks/presentational-bricks@1.262.0) (2022-08-22)
+
+
+### Features
+
+* 提示框增加width属性  refs INSTANCE-2681 ([0f4fcb7](https://github.com/easyops-cn/next-basics/commit/0f4fcb7cb9c24fd115354e65c895d8381f66f2d9))
+
+
+
+
+
 ## [1.261.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.261.0...@next-bricks/presentational-bricks@1.261.1) (2022-08-11)
 
 
