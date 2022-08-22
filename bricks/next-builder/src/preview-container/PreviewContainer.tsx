@@ -81,7 +81,7 @@ export interface PreviewContainerRef {
   reload(): void;
   capture(): void;
   resize(): void;
-  updatePreviewUrl(url: string): void;
+  updatePreviewUrl(url: string, exact: boolean): void;
   manager: BuilderDataManager;
 }
 
@@ -496,12 +496,13 @@ export function LegacyPreviewContainer(
     );
   }, []);
 
-  const updatePreviewUrl = (url: string): void => {
+  const updatePreviewUrl = (url: string, exact: boolean): void => {
     iframeRef.current.contentWindow.postMessage(
       {
         sender: "preview-container",
         type: "update-preview-url",
-        url,
+        path: url,
+        exact: exact,
       } as PreviewMessageContainerUpdatePreviewUrl,
       previewOrigin
     );
