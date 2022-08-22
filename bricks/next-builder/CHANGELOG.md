@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.175.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.7...@next-bricks/next-builder@1.175.8) (2022-08-22)
+
+
+### Bug Fixes
+
+* update route and fix insepect button disabled error ([0f21b82](https://github.com/easyops-cn/next-basics/commit/0f21b825aca1ddb203e425026d8a44b10579e6d9))
+
+
+
+
+
 ## [1.175.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.6...@next-bricks/next-builder@1.175.7) (2022-08-19)
 
 **Note:** Version bump only for package @next-bricks/next-builder

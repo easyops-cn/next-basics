@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.4](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.3...@next-types/preview@1.16.4) (2022-08-22)
+
+
+### Bug Fixes
+
+* update route and fix insepect button disabled error ([0f21b82](https://github.com/easyops-cn/next-basics/commit/0f21b825aca1ddb203e425026d8a44b10579e6d9))
+
+
+
+
+
 ## [1.16.3](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.2...@next-types/preview@1.16.3) (2022-08-19)
 
 **Note:** Version bump only for package @next-types/preview
