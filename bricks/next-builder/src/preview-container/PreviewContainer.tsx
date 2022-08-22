@@ -37,6 +37,7 @@ import {
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { omit } from "lodash";
+import { getRuntime } from "@next-core/brick-kit";
 
 export interface PreviewContainerProps {
   previewUrl: string;
@@ -351,6 +352,9 @@ export function LegacyPreviewContainer(
           routePath,
           routeExact,
           settings: previewSettings,
+          clearPreviewRequestCacheIgnoreList:
+            getRuntime().getCurrentApp().config
+              ?.clearPreviewRequestCacheIgnoreList || [],
         },
       } as PreviewMessageContainerStartPreview,
       previewOrigin

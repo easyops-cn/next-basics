@@ -5,6 +5,17 @@ import { useBuilderDataManager } from "@next-core/editor-bricks-helper";
 
 jest.mock("@next-core/editor-bricks-helper");
 (useBuilderDataManager as jest.Mock).mockReturnValue(() => jest.fn());
+jest.mock("@next-core/brick-kit", () => {
+  return {
+    getRuntime: () => ({
+      getCurrentApp: () => ({
+        config: {
+          clearPreviewRequestCacheIgnoreList: [],
+        },
+      }),
+    }),
+  };
+});
 
 describe("PreviewContainer", () => {
   it("should work", () => {
