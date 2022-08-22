@@ -15,6 +15,7 @@ export interface ModalConfirmProps {
   visible: boolean;
   dataSource?: Record<string, any>;
   title?: string;
+  width?: string | number;
   content?: string;
   extraContent?: string;
   okText?: string;
@@ -58,6 +59,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
     cancelButtonProps,
     isDelete,
     type,
+    width,
   } = props;
   const title = useMemo(() => {
     return _title ? parseTemplate(_title, dataSource) : _title;
@@ -139,6 +141,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
       setModal(
         modalEntity[type]({
           title: title,
+          width,
           content: contentBrick?.useBrick ? brickContent : modalContent,
           okText: okText,
           cancelText: cancelText,
