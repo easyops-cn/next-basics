@@ -1,7 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { isEqual } from "lodash";
-import { UpdatingElement, property, method } from "@next-core/brick-kit";
+import {
+  UpdatingElement,
+  property,
+  method,
+  EventEmitter,
+  event,
+} from "@next-core/brick-kit";
 import { MenuIcon } from "@next-core/brick-types";
 import update from "immutability-helper";
 import { ButtonType, ButtonShape, ButtonSize } from "antd/lib/button";
@@ -220,6 +226,15 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   @property()
   dropdownPlacement?: DropdownPlacement;
 
+  /**
+   * @detail "boolean"
+   * @description dropdown是否显示
+   */
+  @event({
+    type: "buttons.visible.change",
+  })
+  onDropdownVisibleChange: EventEmitter<boolean>;
+
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
@@ -263,6 +278,10 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
     }
   }
 
+  handleDropdownVisibleChange = (visible: boolean) => {
+    this.onDropdownVisibleChange.emit(visible);
+  };
+
   protected _render() {
     this.style.display = "block";
     // istanbul ignore else
@@ -280,6 +299,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
           alignment={this.alignment}
           dropdownPlacement={this.dropdownPlacement}
           dropdownBtnType={this.dropdownBtnType}
+          onDropdownVisibleChange={this.handleDropdownVisibleChange}
         />,
         this
       );

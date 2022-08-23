@@ -37,6 +37,7 @@ interface AdminButtonProps {
   alignment?: "start" | "center" | "end" | "stretch";
   dropdownPlacement?: DropdownPlacement;
   dropdownBtnType?: "default" | "link";
+  onDropdownVisibleChange: (visible: boolean) => void;
 }
 
 const AvailableButtonTypeSet = new Set([
@@ -61,6 +62,10 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
       (info.item as React.Component<any>).props["data-button"]
     );
   }
+
+  onDropdownVisibleChange = (visible: boolean) => {
+    this.props.onDropdownVisibleChange(visible);
+  };
 
   render() {
     const {
@@ -239,6 +244,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
           overlay={menu}
           trigger={["click"]}
           placement={dropdownPlacement ?? "bottomRight"}
+          onVisibleChange={this.onDropdownVisibleChange}
         >
           {isMoreButton ? (
             <Button
