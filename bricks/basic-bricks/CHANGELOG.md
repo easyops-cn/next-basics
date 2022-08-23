@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.188.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.187.2...@next-bricks/basic-bricks@1.188.0) (2022-08-23)
+
+
+### Features
+
+* 补充支持gap类属性 ([81c1e7b](https://github.com/easyops-cn/next-basics/commit/81c1e7b5d7ce8efc81aeae19ddd59f47c0061931))
+
+
+
+
+
 ## [1.187.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.187.1...@next-bricks/basic-bricks@1.187.2) (2022-08-16)
 
 
