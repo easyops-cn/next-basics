@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.18.1...@next-bricks/general-auth@1.18.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* **general-signup:** encrypt password only when using AuthApi_register ([1ff12cf](https://github.com/easyops-cn/next-basics/commit/1ff12cf79f244425e275247bdb0f93e8a7b7e943))
+
+
+
+
+
 ## [1.18.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.18.0...@next-bricks/general-auth@1.18.1) (2022-08-19)
 
 
