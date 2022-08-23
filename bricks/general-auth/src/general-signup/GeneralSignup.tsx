@@ -175,7 +175,6 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
   };
 
   const onFinish = async (values: Record<string, any>): Promise<void> => {
-    values.password = encryptValue(values.password);
     try {
       let result: Record<string, any>;
       if (isCommonSignup && !hideInvite) {
@@ -185,6 +184,7 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
           }) as OrgApi_SaaSOrgRegisterRequestBody
         );
       } else {
+        values.password = encryptValue(values.password);
         result = await AuthApi_register(
           assign(
             omit(values, ["terms", "password2", "username"]),
