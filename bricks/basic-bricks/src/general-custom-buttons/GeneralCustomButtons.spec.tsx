@@ -228,12 +228,20 @@ describe("topology view admin buttons", () => {
         eventName: "save",
       },
     ];
+
+    const mockOnDropdownVisibleChange = jest.fn();
     const wrapper = shallow(
-      <GeneralCustomButtons buttons={buttons} dropdownBtnType="link" />
+      <GeneralCustomButtons
+        buttons={buttons}
+        dropdownBtnType="link"
+        onDropdownVisibleChange={mockOnDropdownVisibleChange}
+      />
     );
     const moreButton = wrapper.find(Button).at(0);
     expect(moreButton.prop("type")).toEqual("link");
     expect(moreButton.hasClass("dropdownBtnContainer")).toBeTruthy();
     expect(moreButton.text()).toEqual("管理");
+    wrapper.find(Dropdown).invoke("onVisibleChange")(true);
+    expect(mockOnDropdownVisibleChange).toHaveBeenCalledWith(true);
   });
 });
