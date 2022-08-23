@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.176.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.8...@next-bricks/next-builder@1.176.0) (2022-08-23)
+
+
+### Features
+
+* support clearPreviewRequestCacheIgnoreList ([6602d08](https://github.com/easyops-cn/next-basics/commit/6602d084d78cd234cd0e6d3f09cf0bac91326702))
+
+
+
+
+
 ## [1.175.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.175.7...@next-bricks/next-builder@1.175.8) (2022-08-22)
 
 
