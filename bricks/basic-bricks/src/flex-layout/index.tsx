@@ -43,12 +43,6 @@ export class FlexLayoutElement extends UpdatingElement {
   flexWrap?: string;
 
   /**
-   * @description 定义[gap]:设置元素间间隙
-   */
-  @property({ type: String })
-  gap?: string;
-
-  /**
    * @description 定义[column-gap]:设置元素列之间间隙
    */
   @property({ type: String })
@@ -95,8 +89,6 @@ export class FlexLayoutElement extends UpdatingElement {
       this.alignItems ?? "stretch"
     )}; align-content: ${this.processString(
       this.alignContent ?? "stretch"
-    )}; gap: ${this.processString(
-      this.gap ?? "0"
     )}; column-gap: ${this.processString(
       this.columnGap ?? "0"
     )}; row-gap: ${this.processString(this.rowGap ?? "0")}}`;
