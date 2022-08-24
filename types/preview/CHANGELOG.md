@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.4...@next-types/preview@1.17.0) (2022-08-24)
+
+
+### Features
+
+* **cacheAction:** support build not refresh ([fac6a6f](https://github.com/easyops-cn/next-basics/commit/fac6a6f1dda87166b63b6dddb06623e7da43e6ec))
+
+
+
+
+
 ## [1.16.4](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.3...@next-types/preview@1.16.4) (2022-08-22)
 
 
