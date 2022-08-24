@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.190.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.189.0...@next-bricks/basic-bricks@1.190.0) (2022-08-24)
+
+
+### Features
+
+* flex-layout支持gap属性 ([17560ad](https://github.com/easyops-cn/next-basics/commit/17560ad7d891f07233a10f7e0d0888025902bb3a))
+
+
+
+
+
 # [1.189.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.188.0...@next-bricks/basic-bricks@1.189.0) (2022-08-24)
 
 
