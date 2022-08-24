@@ -43,16 +43,10 @@ export class FlexLayoutElement extends UpdatingElement {
   flexWrap?: string;
 
   /**
-   * @description 定义[column-gap]:设置元素列之间间隙
+   * @description 定义[gap]:设置元素间隙
    */
   @property({ type: String })
-  columnGap?: string;
-
-  /**
-   * @description 定义[row-gap]:设置元素行之间间隙
-   */
-  @property({ type: String })
-  rowGap?: string;
+  gap?: string;
 
   // Process user's input
   processString(str: string): string {
@@ -89,9 +83,7 @@ export class FlexLayoutElement extends UpdatingElement {
       this.alignItems ?? "stretch"
     )}; align-content: ${this.processString(
       this.alignContent ?? "stretch"
-    )}; column-gap: ${this.processString(
-      this.columnGap ?? "0"
-    )}; row-gap: ${this.processString(this.rowGap ?? "0")}}`;
+    )}; gap: ${this.processString(this.gap ?? "0")}}`;
 
     if (this.isConnected) {
       ReactDOM.render(
