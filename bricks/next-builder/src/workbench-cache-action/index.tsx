@@ -13,6 +13,7 @@ import {
   WorkbenchCacheActionRef,
   StoryboardUpdateParams,
   BuildAndPushState,
+  BuildAndPushParams,
 } from "./WorkbenchCacheAction";
 import {
   BuilderProvider,
@@ -104,19 +105,10 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
   };
 
   @event({ type: "build.and.push" })
-  _buildAndPushEmitter: EventEmitter<{
-    state: BuildAndPushState;
-    storyboard: Storyboard;
-  }>;
+  _buildAndPushEmitter: EventEmitter<BuildAndPushParams>;
 
-  handleBuildAndPush = (
-    state: BuildAndPushState,
-    storyboard: Storyboard
-  ): void => {
-    this._buildAndPushEmitter.emit({
-      state,
-      storyboard,
-    });
+  handleBuildAndPush = (params: BuildAndPushParams): void => {
+    this._buildAndPushEmitter.emit(params);
   };
 
   connectedCallback(): void {

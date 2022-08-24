@@ -66,6 +66,12 @@ export interface StoryboardUpdateParams {
   settings?: PreviewSettings;
 }
 
+export interface BuildAndPushParams {
+  state: BuildAndPushState;
+  storyboard: Storyboard;
+  isNeedRefresh?: boolean;
+}
+
 type UpdateStoryboard =
   | RouteConf
   | CustomTemplate
@@ -88,7 +94,7 @@ export interface WorkbenchCacheActionProps {
   onRootNodeUpdate: (node: BuilderRuntimeNode) => void;
   onGraphDataUpdate: (graphData: pipes.GraphData) => void;
   onExecuteSuccess: (res: { res: unknown; op: string }) => void;
-  onBuildAndPush?: (state: BuildAndPushState, storyboard: Storyboard) => void;
+  onBuildAndPush?: (params: BuildAndPushParams) => void;
 }
 
 const DELAY_BUILD_TIME = 30;
@@ -201,7 +207,7 @@ function LegacyWorkbenchCacheAction(
   );
 
   const build = (): void => {
-    backendInstance.buildAndPush();
+    backendInstance.buildAndPush(true);
   };
 
   const getInstanceDetail = useCallback(
@@ -469,7 +475,10 @@ function LegacyWorkbenchCacheAction(
             );
             break;
           case "build-success":
-            onBuildAndPush("success", data.storyboard);
+            onBuildAndPush({
+              state: "success",
+              ...data,
+            });
             setBuildState("success");
             if (data) {
               setCacheActionList(
