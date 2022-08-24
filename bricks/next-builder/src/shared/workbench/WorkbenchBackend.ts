@@ -411,7 +411,7 @@ export default class WorkbenchBackend {
     }
   }
 
-  async buildAndPush(): Promise<void> {
+  async buildAndPush(isNeedRefresh: boolean): Promise<void> {
     this.cleanTimer();
     if (this.isBuilding) return;
     this.isBuilding = true;
@@ -436,6 +436,7 @@ export default class WorkbenchBackend {
         action: "build-success",
         data: {
           storyboard: result.storyboard,
+          isNeedRefresh,
         },
       });
     } catch (e) {

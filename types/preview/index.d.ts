@@ -620,6 +620,7 @@ export interface BackMessageForBuildSuccess {
   action: "build-success";
   data: {
     storyboard: Partial<StoryboardToBuild>;
+    isNeedRefresh?: boolean;
   };
 }
 
