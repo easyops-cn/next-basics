@@ -59,84 +59,16 @@ export const flexLayoutStory: Story = {
     {
       brick: "basic-bricks.flex-layout",
       description: {
-        title: "设置列间隙columnGap",
+        title: "使用gap改变元素间隙",
         message: "",
       },
       properties: {
-        columnGap: "20px",
-        style: {
-          background: "AliceBlue",
-          width: "247px",
-          border: "1px solid black",
-        },
-      },
-      slots: {
-        "": {
-          bricks: [
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "yellow",
-                },
-                textContent: "NO.1",
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "orange",
-                },
-                textContent: "NO.2",
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "DeepSkyBlue",
-                },
-                textContent: "NO.3",
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "Aquamarine",
-                },
-                textContent: "NO.4",
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "Chartreuse",
-                },
-                textContent: "NO.5",
-              },
-            },
-          ],
-          type: "bricks",
-        },
-      },
-    },
-    {
-      brick: "basic-bricks.flex-layout",
-      description: {
-        title: "设置行间隙rowGap",
-        message: "",
-      },
-      properties: {
-        rowGap: "10px",
-        columnGap: "20px",
+        gap: "20px",
         flexWrap: "wrap",
         style: {
           background: "AliceBlue",
-          width: "88px",
           border: "1px solid black",
+          width: "142px",
         },
       },
       slots: {
