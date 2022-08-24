@@ -63,7 +63,7 @@ export function DesktopApp({
           className={styles.appIcon}
           src={
             app.icons && app.icons.large
-              ? /^(\/|https?:\/\/)/.test(app.icons.large)
+              ? /^(?:https?|data):|^\//.test(app.icons.large)
                 ? app.icons.large
                 : `${window.PUBLIC_ROOT || ""}micro-apps/${app.id}/${
                     app.icons.large

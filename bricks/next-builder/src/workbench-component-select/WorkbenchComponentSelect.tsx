@@ -506,7 +506,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
           }}
           src={
             // Prepend public_root if the thumbnail is not an absolute url.
-            /^https?:|^\//.test(data.thumbnail)
+            /^(?:https?|data):|^\//.test(data.thumbnail)
               ? data.thumbnail
               : `${window.PUBLIC_ROOT ?? ""}${data.thumbnail}`
           }
