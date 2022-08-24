@@ -368,7 +368,13 @@ function matchBrickNode(
   return (
     node.data.type !== "mount-point" &&
     deepMatch(
-      isCustomTemplateNode(node.data) || isSnippetNode(node.data)
+      isCustomTemplateNode(node.data)
+        ? {
+            name: node.data.name,
+            proxy: node.data.proxy,
+            previewSettings: node.data.previewSettings,
+          }
+        : isSnippetNode(node.data)
         ? node.name
         : [
             node.name,
