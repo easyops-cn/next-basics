@@ -41,7 +41,7 @@ export function DesktopDir(props: NormalizedDesktopDir): React.ReactElement {
                 key={item.id}
                 src={
                   item.app.icons && item.app.icons.large
-                    ? /^(\/|https?:\/\/)/.test(item.app.icons.large)
+                    ? /^(?:https?|data):|^\//.test(item.app.icons.large)
                       ? item.app.icons.large
                       : `${window.PUBLIC_ROOT || ""}micro-apps/${item.id}/${
                           item.app.icons.large
