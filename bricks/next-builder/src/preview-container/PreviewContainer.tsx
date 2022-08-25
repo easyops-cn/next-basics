@@ -82,7 +82,7 @@ export interface PreviewContainerRef {
   reload(): void;
   capture(): void;
   resize(): void;
-  updatePreviewUrl(url: string, exact: boolean): void;
+  updatePreviewUrl(url: string, exact?: boolean): void;
   manager: BuilderDataManager;
 }
 

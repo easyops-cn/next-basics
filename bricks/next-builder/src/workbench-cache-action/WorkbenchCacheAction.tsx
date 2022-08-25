@@ -58,6 +58,7 @@ export interface WorkbenchCacheActionRef {
   manager: BuilderDataManager;
   getInstanceDetail: (instanceId: string) => BuilderRuntimeNode;
   cacheAction: (detail: WorkbenchBackendCacheAction) => any;
+  updateStoryboard: () => void;
 }
 
 export interface StoryboardUpdateParams {
@@ -86,11 +87,7 @@ export interface WorkbenchCacheActionProps {
   projectId: string;
   objectId: string;
   rootNode: BuilderRuntimeNode;
-  onStoryboardUpdate: ({
-    storyboard,
-    updateStoryboardType,
-    settings,
-  }: StoryboardUpdateParams) => void;
+  onStoryboardUpdate: (params: StoryboardUpdateParams) => void;
   onRootNodeUpdate: (node: BuilderRuntimeNode) => void;
   onGraphDataUpdate: (graphData: pipes.GraphData) => void;
   onExecuteSuccess: (res: { res: unknown; op: string }) => void;
@@ -583,6 +580,10 @@ function LegacyWorkbenchCacheAction(
     );
   }, [cacheActionList, delayBuildTime]);
 
+  const updateStoryboard = useCallback(() => {
+    setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges);
+  }, [setNewStoryboard, rootId, edges]);
+
   useEffect(() => {
     window.addEventListener("beforeunload", handleBeforePageLeave);
     const removeListeners = [
@@ -605,13 +606,14 @@ function LegacyWorkbenchCacheAction(
   }, [edges, nodes]);
 
   useEffect(() => {
-    setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges);
+    setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges, true);
   }, [rootId, setNewStoryboard]);
 
   useImperativeHandle(ref, () => ({
     manager,
     getInstanceDetail,
     cacheAction,
+    updateStoryboard,
   }));
 
   useEffect(() => {

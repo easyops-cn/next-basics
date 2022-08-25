@@ -57,6 +57,11 @@ export class WorkbenchCacheActionElement extends UpdatingElement {
     });
   }
 
+  @method()
+  updateStoryboard(): void {
+    this._backendRef.current.updateStoryboard();
+  }
+
   @event({ type: "storyboard.update" })
   _storyboardUpdateEmitter: EventEmitter<StoryboardUpdateParams>;
 
