@@ -4,17 +4,6 @@ import { Result } from "antd";
 import { ResultStatusType } from "antd/lib/result";
 import { EmptyResult, EmptyResultStatus } from "@next-libs/basic-components";
 import {
-  getIllustration,
-  translateIllustrationConfig,
-  IllustrationProps,
-} from "@next-core/illustrations";
-import {
-  useCurrentTheme,
-  useFeatureFlags,
-  getRuntime,
-  useCurrentApp,
-} from "@next-core/brick-kit";
-import {
   BrickResultStatus,
   IllustrationsStatus,
 } from "../interfaces/brick-result";
@@ -22,7 +11,6 @@ import {
   IconSize,
   IllustrationWrapper,
 } from "./components/IllustrationWrapper";
-import { pick } from "lodash";
 export interface IllustrationsConfig {
   imageStyle?: CSSProperties;
   name?: string;
@@ -37,6 +25,7 @@ interface BrickResultProps {
   icon?: string;
   illustrationsConfig?: IllustrationsConfig;
   useNewIllustration?: boolean;
+  emptyResultSize?: IconSize;
 }
 
 const emptyResultStatusMap: {
@@ -77,7 +66,7 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
       icon={
         <IllustrationWrapper
           useNewIllustration={props.useNewIllustration}
-          size={IconSize.Unset}
+          size={props.emptyResultSize || IconSize.Middle}
           {...emptyResultStatusMap[props.status as EmptyResultStatus]}
         />
       }
