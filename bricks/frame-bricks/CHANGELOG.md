@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.2.2...@next-bricks/frame-bricks@1.2.3) (2022-08-25)
+
+
+### Bug Fixes
+
+* changeDropDownColor ([1953422](https://github.com/easyops-cn/next-basics/commit/1953422cf7e83cd9e1b11b295acc6ce6a7283f0d))
+
+
+
+
+
 ## [1.2.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.2.1...@next-bricks/frame-bricks@1.2.2) (2022-08-11)
 
 
