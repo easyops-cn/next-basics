@@ -26,3 +26,7 @@
 :global(.ant-select-selector) .suffixContainer {
   margin-top: -1px;
 }
+:global(.ant-select-item-option-selected:not(.ant-select-item-option-disabled)) {
+  color: var(--v8-dropdown-selected);
+  background-color: var(--v8-dropdown-selected-bg);
+}

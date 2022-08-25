@@ -176,9 +176,9 @@
   }
 
   :global(.ant-menu-item-selected) {
-    background-color: var(--v8-top-menu-item-selected-bg) !important;
+    background-color: var(--v8-dropdown-selected-bg) !important;
     span {
-      color: var(--color-strong-text) !important;
+      color: var(--v8-dropdown-selected) !important;
     }
   }
 }
