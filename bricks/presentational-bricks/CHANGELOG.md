@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.262.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.262.0...@next-bricks/presentational-bricks@1.262.1) (2022-08-25)
+
+
+### Bug Fixes
+
+* **brick-result:** BrickResult support emptyResultSize ([565c257](https://github.com/easyops-cn/next-basics/commit/565c2577702566ec2b537548892da57b68b378e5))
+
+
+
+
+
 # [1.262.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.261.1...@next-bricks/presentational-bricks@1.262.0) (2022-08-22)
 
 
