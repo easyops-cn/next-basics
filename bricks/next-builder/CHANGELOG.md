@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.177.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.177.2...@next-bricks/next-builder@1.177.3) (2022-08-25)
+
+
+### Bug Fixes
+
+* route render error ([8ba9dfb](https://github.com/easyops-cn/next-basics/commit/8ba9dfb96ec8ade4126d981a281463bae1de4b84))
+
+
+
+
+
 ## [1.177.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.177.1...@next-bricks/next-builder@1.177.2) (2022-08-25)
 
 
