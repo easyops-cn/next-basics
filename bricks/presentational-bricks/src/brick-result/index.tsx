@@ -9,7 +9,7 @@ import {
   IllustrationsStatus,
   IllustrationsConfig,
 } from "../interfaces/brick-result";
-
+import { IconSize } from "./components/IllustrationWrapper";
 /**
  * @id presentational-bricks.brick-result
  * @name presentational-bricks.brick-result
@@ -78,6 +78,14 @@ export class BrickResultElement extends UpdatingElement {
   @property({ attribute: false })
   useNewIllustration = true;
 
+  /**
+   * @required false
+   * @description status为EmptyResultStatus时，设置插画的尺寸
+   * @group basic
+   */
+  @property()
+  emptyResultSize: IconSize;
+
   constructor() {
     super();
 
@@ -113,6 +121,7 @@ export class BrickResultElement extends UpdatingElement {
             icon={this.icon}
             illustrationsConfig={this.illustrationsConfig}
             useNewIllustration={this.useNewIllustration}
+            emptyResultSize={this.emptyResultSize}
           />
         </BrickWrapper>,
         this._mountPoint
