@@ -52,8 +52,10 @@ function scanContextsInAnyByReadOrWrite(
         !Array.isArray(value) &&
         (contextKeyWord === "CTX"
           ? value.action === "context.replace" ||
-            value.action === "context.assign"
-          : value.action === "state.update") &&
+            value.action === "context.assign" ||
+            value.action === "context.refresh"
+          : value.action === "state.update" ||
+            value.action === "state.refresh") &&
         Array.isArray(value.args) &&
         typeof value.args[0] === "string" &&
         // Ignore evaluations and placeholders,
