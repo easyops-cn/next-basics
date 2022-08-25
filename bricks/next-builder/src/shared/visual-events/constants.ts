@@ -8,6 +8,9 @@ export const recommendActionIds = [
   "handleHttpError",
   "context.replace",
   "context.assign",
+  "context.refresh",
+  "state.update",
+  "state.refresh",
   "console.log",
 ];
 
@@ -104,6 +107,18 @@ export const builtinActions = [
   {
     label: "替换 Context 值(context.replace)",
     value: "context.replace",
+  },
+  {
+    label: "刷新 Context 值(context.refresh)",
+    value: "context.refresh",
+  },
+  {
+    label: "替换 State 值(state.update)",
+    value: "state.update",
+  },
+  {
+    label: "刷新 State 值(state.refresh)",
+    value: "state.refresh",
   },
   {
     label: "模板发送自定义事件(tpl.dispatchEvent)",
