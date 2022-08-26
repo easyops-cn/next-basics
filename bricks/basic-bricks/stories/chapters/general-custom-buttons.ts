@@ -22,8 +22,7 @@ export const generalCustomButtonsStory: Story = {
     {
       description: {
         title: "基本用法",
-        message:
-          "将多个button组合在一起，常用于页面右上角操作位，此时应包含一个主按钮并右对齐。",
+        message: "将多个button组合在一起。",
       },
       brick: "basic-bricks.general-custom-buttons",
       properties: {
@@ -135,7 +134,7 @@ export const generalCustomButtonsStory: Story = {
       description: {
         title: "组合按钮1",
         message:
-          '组合按钮大于等于4个时，应只展示两个常用按钮，其他按钮收纳在"···"的更多按钮中。',
+          '位置为页面的右上角区域。使用形态为图标+文字按钮，默认放置三个，其中一个为主按钮，放于所有按钮的最左侧；≥3 的情况下，展示出两个，其他按钮用下拉按钮收起，收纳在"···"的更多按钮中。',
       },
       brick: "basic-bricks.general-custom-buttons",
       properties: {
@@ -390,7 +389,8 @@ export const generalCustomButtonsStory: Story = {
     {
       description: {
         title: "仅在卡片内部使用按钮",
-        message: "仅在卡片内部操作区使用按钮时，使用圆形图标按钮的样式。",
+        message:
+          "仅在卡片内部操作区使用按钮时，使用圆形图标按钮的样式。内容卡片无标题和内容卡片有标题，图标置于标题分割线之下的场景，使用文字按钮/图标【常见的次级操作如刷新、设置、刷新、导出等】，默认放置四个。≥4 的情况，展示出三个，其他按钮用【···】收起。",
       },
       brick: "basic-bricks.general-card",
       properties: {
@@ -513,7 +513,8 @@ export const generalCustomButtonsStory: Story = {
     {
       description: {
         title: "仅在卡片右上角操作区使用按钮",
-        message: "仅在卡片右上角操作区使用按钮时，使用圆形图标按钮的样式。",
+        message:
+          "仅在卡片右上角操作区使用按钮时，使用圆形图标按钮的样式。内容卡片无标题和内容卡片有标题，图标置于标题分割线之下的场景，使用文字按钮/图标【常见的次级操作如刷新、设置、刷新、导出等】，默认放置四个。≥4 的情况，展示出三个，其他按钮用【···】收起。",
       },
       brick: "basic-bricks.general-card",
       properties: {

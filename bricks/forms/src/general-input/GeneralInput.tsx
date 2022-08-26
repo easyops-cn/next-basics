@@ -19,6 +19,7 @@ interface InputGroupProps
   type?: string;
   placeholder?: string;
   value?: string;
+  size?: string;
   minLength?: number;
   maxLength?: number;
   readOnly?: boolean;
@@ -42,8 +43,23 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   ref
 ): React.ReactElement {
   const { t } = useTranslation(NS_FORMS);
-  const { formElement, value, inputBoxStyle, copyButton, ...inputProps } =
+  const { formElement, value, inputBoxStyle, size, copyButton, ...inputProps } =
     props;
+
+  const widthSize = (value: string) => {
+    switch (value) {
+      case "XS":
+        return "104px";
+      case "S":
+        return "216px";
+      case "M":
+        return "328px";
+      case "L":
+        return "440px";
+      case "XL":
+        return "552px";
+    }
+  };
 
   const handleCopy = (text: string, success: boolean) => {
     if (success) {
@@ -60,7 +76,12 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   };
 
   const input = (
-    <Input value={value} style={inputBoxStyle} ref={ref} {...inputProps} />
+    <Input
+      value={value}
+      style={inputBoxStyle ?? { width: widthSize(size ?? "S") }}
+      ref={ref}
+      {...inputProps}
+    />
   );
 
   return copyButton ? (

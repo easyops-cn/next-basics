@@ -125,6 +125,18 @@ export class GeneralInputElement extends FormItemElement {
   minLength: number;
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 宽度调整 有XS/S/M/L/XL四种值
+   * @group basicFormItem
+   */
+  @property({
+    type: String,
+  })
+  size: string;
+
+  /**
    * @kind number
    * @required false
    * @default -
@@ -284,6 +296,7 @@ export class GeneralInputElement extends FormItemElement {
             maxLength={this.maxLength}
             max={this.max}
             min={this.min}
+            size={this.size}
             pattern={this.pattern}
             message={this.message}
             validator={this.validator}
