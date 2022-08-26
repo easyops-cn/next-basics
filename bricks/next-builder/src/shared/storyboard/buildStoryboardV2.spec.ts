@@ -1,4 +1,6 @@
 import { clone } from "lodash";
+import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
+import { Contract } from "@next-core/brick-types";
 import {
   buildStoryboardV2,
   symbolForNodeId,
@@ -7,7 +9,6 @@ import {
 
 import { BuildInfoV2, StoryboardToBuild } from "./interfaces";
 import * as dataProvider from "../../data-providers/ScanBricksAndTemplates";
-import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
 
 (ContractCenterApi_batchSearchContract as jest.Mock).mockReturnValue({
   list: [
@@ -44,7 +45,7 @@ describe("buildStoryboardV2", () => {
             type: "bricks",
             parent: [], // Empty parent also works.
             providers: '["p1"]',
-            segues: null,
+            segues: null as unknown as string,
             children: [
               {
                 id: "B-01",
@@ -187,6 +188,7 @@ describe("buildStoryboardV2", () => {
                 ],
               },
             ],
+            i18n: {},
           },
           {
             menuId: "menu-b",
@@ -194,6 +196,7 @@ describe("buildStoryboardV2", () => {
             itemsResolve: {
               useProvider: "my.menu-provider",
             },
+            i18n: {},
           },
         ],
         i18n: [
@@ -343,6 +346,7 @@ describe("buildStoryboardV2", () => {
                   ],
                 },
               ],
+              i18n: {},
             },
             {
               menuId: "menu-b",
@@ -350,6 +354,7 @@ describe("buildStoryboardV2", () => {
               itemsResolve: {
                 useProvider: "my.menu-provider",
               },
+              i18n: {},
             },
           ],
           i18n: {
@@ -524,7 +529,7 @@ describe("buildStoryboardV2", () => {
             type: "bricks",
             parent: [], // Empty parent also works.
             providers: '["p1"]',
-            segues: null,
+            segues: null as unknown as string,
             children: [
               {
                 id: "B-01",
@@ -912,7 +917,7 @@ describe("buildStoryboardV2", () => {
             type: "bricks",
             parent: [], // Empty parent also works.
             providers: '["p1"]',
-            segues: null,
+            segues: null as unknown as string,
             context: [
               {
                 name: "ttttt",
@@ -955,7 +960,7 @@ describe("buildStoryboardV2", () => {
               name: "PostSearch",
               version: "1.1.0",
               serviceName: "logic.cmdb.service",
-            },
+            } as Partial<Contract> as Contract,
           ],
           customTemplates: [],
           functions: [
