@@ -6,6 +6,13 @@ import { CopyOutlined } from "@ant-design/icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { Clipboard } from "@next-libs/clipboard";
 
+export enum widthSize {
+  XS = "104px",
+  S = "216px",
+  M = "328px",
+  L = "440px",
+  XL = "552px",
+}
 interface InputGroupProps
   extends Omit<
     FormItemWrapperProps,
@@ -19,7 +26,7 @@ interface InputGroupProps
   type?: string;
   placeholder?: string;
   value?: string;
-  size?: string;
+  size?: widthSize;
   minLength?: number;
   maxLength?: number;
   readOnly?: boolean;
@@ -36,21 +43,6 @@ interface GeneralInputProps
   extends Omit<InputGroupProps, "onChange" | "onBlur"> {
   onChange?: (value: string) => void;
   onBlur?: (value: string) => void;
-}
-
-export function widthSize(value: string) {
-  switch (value) {
-    case "XS":
-      return "104px";
-    case "S":
-      return "216px";
-    case "M":
-      return "328px";
-    case "L":
-      return "440px";
-    case "XL":
-      return "552px";
-  }
 }
 
 const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
@@ -78,7 +70,7 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   const input = (
     <Input
       value={value}
-      style={inputBoxStyle ?? { width: widthSize(size) }}
+      style={inputBoxStyle ?? { width: widthSize[size] }}
       ref={ref}
       {...inputProps}
     />

@@ -6,7 +6,7 @@ import {
   event,
   EventEmitter,
 } from "@next-core/brick-kit";
-import { GeneralInput } from "./GeneralInput";
+import { GeneralInput, widthSize } from "./GeneralInput";
 import { FormItemElement } from "@next-libs/forms";
 
 /**
@@ -125,16 +125,16 @@ export class GeneralInputElement extends FormItemElement {
   minLength: number;
 
   /**
-   * @kind string
+   * @kind enum["XS", "S", "M", "L","XL"]
    * @required false
    * @default -
-   * @description 宽度调整 有XS/S/M/L/XL四种值
+   * @description 宽度调整 有XS/S/M/L/XL五种值
    * @group basicFormItem
    */
   @property({
     type: String,
   })
-  size: string;
+  size: widthSize;
 
   /**
    * @kind number

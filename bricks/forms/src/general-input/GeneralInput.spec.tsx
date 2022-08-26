@@ -61,11 +61,4 @@ describe("GeneralInput", () => {
     clipboard.invoke("onCopy")(value, true);
     expect(spyOnMessageSuccess).toBeCalledWith(i18next.t(K.COPY_SUCCESS));
   });
-
-  it("should work when widthSize has value", () => {
-    expect(widthSize("XL")).toEqual("552px");
-    expect(widthSize("XS")).toEqual("104px");
-    expect(widthSize("M")).toEqual("328px");
-    expect(widthSize("L")).toEqual("440px");
-  });
 });
