@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.177.3...@next-bricks/next-builder@1.178.0) (2022-08-26)
+
+
+### Features
+
+* bundle menu with i18n ([75a06c5](https://github.com/easyops-cn/next-basics/commit/75a06c558c5e15f54113c07e8097ba7711c3754c))
+
+
+
+
+
 ## [1.177.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.177.2...@next-bricks/next-builder@1.177.3) (2022-08-25)
 
 
