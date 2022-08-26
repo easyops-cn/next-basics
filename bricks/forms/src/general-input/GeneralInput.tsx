@@ -78,7 +78,7 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   const input = (
     <Input
       value={value}
-      style={inputBoxStyle ?? { width: widthSize(size ?? "S") }}
+      style={inputBoxStyle ?? { width: widthSize(size) }}
       ref={ref}
       {...inputProps}
     />
