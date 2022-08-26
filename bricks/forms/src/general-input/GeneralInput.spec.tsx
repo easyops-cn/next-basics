@@ -4,7 +4,7 @@ import { K } from "../i18n/constants";
 import { mount } from "enzyme";
 import { Input, message } from "antd";
 import { Clipboard } from "@next-libs/clipboard";
-import { GeneralInput } from "./GeneralInput";
+import { GeneralInput, widthSize } from "./GeneralInput";
 
 const spyOnMessageSuccess = jest.spyOn(message, "success");
 
@@ -60,5 +60,12 @@ describe("GeneralInput", () => {
 
     clipboard.invoke("onCopy")(value, true);
     expect(spyOnMessageSuccess).toBeCalledWith(i18next.t(K.COPY_SUCCESS));
+  });
+
+  it("should work when widthSize has value", () => {
+    expect(widthSize("XL")).toEqual("552px");
+    expect(widthSize("XS")).toEqual("104px");
+    expect(widthSize("M")).toEqual("328px");
+    expect(widthSize("L")).toEqual("440px");
   });
 });

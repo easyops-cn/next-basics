@@ -38,6 +38,21 @@ interface GeneralInputProps
   onBlur?: (value: string) => void;
 }
 
+export function widthSize(value: string) {
+  switch (value) {
+    case "XS":
+      return "104px";
+    case "S":
+      return "216px";
+    case "M":
+      return "328px";
+    case "L":
+      return "440px";
+    case "XL":
+      return "552px";
+  }
+}
+
 const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   props,
   ref
@@ -45,21 +60,6 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   const { t } = useTranslation(NS_FORMS);
   const { formElement, value, inputBoxStyle, size, copyButton, ...inputProps } =
     props;
-
-  const widthSize = (value: string) => {
-    switch (value) {
-      case "XS":
-        return "104px";
-      case "S":
-        return "216px";
-      case "M":
-        return "328px";
-      case "L":
-        return "440px";
-      case "XL":
-        return "552px";
-    }
-  };
 
   const handleCopy = (text: string, success: boolean) => {
     if (success) {
