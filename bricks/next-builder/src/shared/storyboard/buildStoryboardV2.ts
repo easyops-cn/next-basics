@@ -7,6 +7,7 @@ import {
   BuilderRouteOrBrickNode,
   SlotConf,
   Contract,
+  StoryboardMeta,
 } from "@next-core/brick-types";
 import {
   isObject,
@@ -23,6 +24,7 @@ import {
   DependContract,
   DependContractOfApi,
 } from "../../data-providers/ScanBricksAndTemplates";
+import { bundleMenu } from "./bundleMenu";
 
 export const symbolForNodeId = Symbol.for("nodeId");
 export const symbolForNodeInstanceId = Symbol.for("nodeInstanceId");
@@ -60,6 +62,10 @@ export async function buildStoryboardV2(
 
   const menus = data.menus?.map(normalizeMenu);
 
+  menus?.forEach((menu) => {
+    bundleMenu(menu, data.i18n);
+  });
+
   const i18n = data.i18n?.reduce(
     (acc, node) => {
       acc.en[node.name] = node.en;
@@ -78,7 +84,7 @@ export async function buildStoryboardV2(
     typescript: fn.typescript,
   }));
 
-  const meta = {
+  const meta: StoryboardToBuild["meta"] = {
     customTemplates,
     menus,
     i18n,
@@ -91,7 +97,7 @@ export async function buildStoryboardV2(
     storyboard: {
       app: data.app,
       routes,
-      meta,
+      meta: meta as Omit<StoryboardMeta, "menus"> as StoryboardMeta,
     },
     version: "workspace",
     dependencies: data.dependencies,

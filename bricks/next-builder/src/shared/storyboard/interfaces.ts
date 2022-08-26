@@ -9,6 +9,7 @@ import {
   MockRule,
   CustomTemplateState,
   Contract,
+  Mocks,
 } from "@next-core/brick-types";
 import { InstanceApi_GetDetailResponseBody } from "@next-sdk/cmdb-sdk";
 import { MenuNode } from "@next-core/brick-utils";
@@ -63,10 +64,7 @@ export interface BuildInfo {
   dependsAll?: boolean;
   options?: BuildOptions;
   functions?: FunctionNode[];
-  mocks?: {
-    mockId: string;
-    mockList: MockRule[];
-  };
+  mocks?: Mocks;
   dependencies?: {
     name: string;
     constraint: string;
@@ -113,7 +111,7 @@ export interface StoryboardToBuild {
     menus?: Record<string, unknown>[];
     i18n?: MetaI18n;
     functions?: Pick<FunctionNode, "name" | "source" | "typescript">[];
-    mocks?: MockRule[];
+    mocks?: Mocks;
     contracts?: Contract[];
   };
 

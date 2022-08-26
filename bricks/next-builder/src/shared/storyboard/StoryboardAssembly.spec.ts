@@ -10,6 +10,7 @@ import {
 } from "./interfaces";
 import { StoryboardAssembly } from "./StoryboardAssembly";
 import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
+import { Contract } from "@next-core/brick-types";
 
 (ContractCenterApi_batchSearchContract as jest.Mock).mockReturnValue({
   list: [
@@ -26,7 +27,7 @@ jest.mock("@next-sdk/next-builder-sdk");
 jest.mock("@next-sdk/cmdb-sdk");
 
 beforeAll(() => {
-  jest.useFakeTimers("modern");
+  jest.useFakeTimers();
   jest.setSystemTime(new Date(2021, 12, 29));
 });
 
@@ -280,6 +281,7 @@ const mockFactory: Record<string, Record<string, any>> = {
           itemsResolve: {
             useProvider: "my.menu-provider",
           },
+          i18n: {},
         },
       ],
       i18n: [
@@ -598,6 +600,7 @@ describe("StoryboardAssembly", () => {
                     ],
                   },
                 ],
+                i18n: {},
               },
 
               {
@@ -607,6 +610,7 @@ describe("StoryboardAssembly", () => {
                 itemsResolve: {
                   useProvider: "my.menu-provider",
                 },
+                i18n: {},
               },
             ],
 
@@ -642,7 +646,7 @@ describe("StoryboardAssembly", () => {
                 contract: "easyops.api.cmdb.instance.PostSearch",
                 type: "contract",
                 version: "1.1.0",
-              },
+              } as Partial<Contract> as Contract,
             ],
           },
 
@@ -846,6 +850,7 @@ describe("StoryboardAssembly", () => {
                     ],
                   },
                 ],
+                i18n: {},
               },
 
               {
@@ -855,6 +860,7 @@ describe("StoryboardAssembly", () => {
                 itemsResolve: {
                   useProvider: "my.menu-provider",
                 },
+                i18n: {},
               },
             ],
 
@@ -1107,7 +1113,7 @@ describe("StoryboardAssembly", () => {
                 contract: "easyops.api.cmdb.instance.PostSearch",
                 type: "contract",
                 version: "1.1.0",
-              },
+              } as Partial<Contract> as Contract,
             ],
           },
         },
