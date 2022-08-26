@@ -19,6 +19,11 @@ export const generalModalStory: Story = {
   },
   conf: [
     {
+      description: {
+        title: "",
+        message:
+          "全局完成类操作置于弹窗底部，使用文字按钮，一个主按钮，放于所有按钮的最右侧。",
+      },
       brick: "div",
       slots: {
         content: {

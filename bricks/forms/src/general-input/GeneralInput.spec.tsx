@@ -4,7 +4,7 @@ import { K } from "../i18n/constants";
 import { mount } from "enzyme";
 import { Input, message } from "antd";
 import { Clipboard } from "@next-libs/clipboard";
-import { GeneralInput } from "./GeneralInput";
+import { GeneralInput, widthSize } from "./GeneralInput";
 
 const spyOnMessageSuccess = jest.spyOn(message, "success");
 

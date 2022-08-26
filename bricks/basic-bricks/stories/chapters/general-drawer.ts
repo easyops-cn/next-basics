@@ -21,7 +21,8 @@ export const generalDrawerStory: Story = {
     {
       description: {
         title: "承载表单等操作场景",
-        message: "设置需要点击关闭按钮收回抽屉",
+        message:
+          "设置需要点击关闭按钮收回抽屉，全局完成类操作置于抽屉底部，使用文字按钮，放于左下角，放置三个，其中一个为主按钮，放于所有按钮的最左侧；≥3 的情况下，展示两个常用按钮，其他按钮用更多收起。",
       },
       brick: "div",
       slots: {
@@ -111,7 +112,7 @@ export const generalDrawerStory: Story = {
                         style: {
                           marginRight: "var(--page-card-gap)",
                         },
-                        alignment: "end",
+                        alignment: "start",
                         customButtons: [
                           {
                             text: "取消",
@@ -145,7 +146,7 @@ export const generalDrawerStory: Story = {
     {
       description: {
         title: "承载详细信息",
-        message: "点击抽屉外区域收回抽屉",
+        message: "点击抽屉外区域收回抽屉，抽屉右上角，使用按钮纯图标按钮",
       },
       brick: "div",
       slots: {

@@ -6,6 +6,13 @@ import { CopyOutlined } from "@ant-design/icons";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { Clipboard } from "@next-libs/clipboard";
 
+export enum widthSize {
+  XS = "104px",
+  S = "216px",
+  M = "328px",
+  L = "440px",
+  XL = "552px",
+}
 interface InputGroupProps
   extends Omit<
     FormItemWrapperProps,
@@ -19,6 +26,7 @@ interface InputGroupProps
   type?: string;
   placeholder?: string;
   value?: string;
+  size?: widthSize;
   minLength?: number;
   maxLength?: number;
   readOnly?: boolean;
@@ -42,7 +50,7 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   ref
 ): React.ReactElement {
   const { t } = useTranslation(NS_FORMS);
-  const { formElement, value, inputBoxStyle, copyButton, ...inputProps } =
+  const { formElement, value, inputBoxStyle, size, copyButton, ...inputProps } =
     props;
 
   const handleCopy = (text: string, success: boolean) => {
@@ -60,7 +68,12 @@ const InputGroup = forwardRef<Input, InputGroupProps>(function InputGroup(
   };
 
   const input = (
-    <Input value={value} style={inputBoxStyle} ref={ref} {...inputProps} />
+    <Input
+      value={value}
+      style={inputBoxStyle ?? { width: widthSize[size] }}
+      ref={ref}
+      {...inputProps}
+    />
   );
 
   return copyButton ? (
