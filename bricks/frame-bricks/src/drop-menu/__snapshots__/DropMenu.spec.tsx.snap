@@ -63,7 +63,7 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                 >
                   <Input
                     onChange={[Function]}
-                    placeholder="输入关键词搜索"
+                    placeholder="DEFAULT_PLACEHOLDER"
                     prefix={
                       <ForwardRef(SearchOutlined)
                         className="searchIcon"
@@ -94,11 +94,6 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                         />
                         <span
                           className="categoryTitle"
-                          style={
-                            Object {
-                              "fontSize": undefined,
-                            }
-                          }
                         >
                           xxx
                         </span>
@@ -114,7 +109,7 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                       <div
                         style={
                           Object {
-                            "height": "5pxß",
+                            "height": "5px",
                           }
                         }
                       />
@@ -123,11 +118,6 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                       >
                         <Link
                           href="/ddd"
-                          style={
-                            Object {
-                              "fontSize": undefined,
-                            }
-                          }
                         >
                           xxx
                         </Link>
@@ -405,7 +395,7 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                   >
                     <Input
                       onChange={[Function]}
-                      placeholder="输入关键词搜索"
+                      placeholder="DEFAULT_PLACEHOLDER"
                       prefix={
                         <ForwardRef(SearchOutlined)
                           className="searchIcon"
@@ -436,11 +426,6 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                           />
                           <span
                             className="categoryTitle"
-                            style={
-                              Object {
-                                "fontSize": undefined,
-                              }
-                            }
                           >
                             xxx
                           </span>
@@ -456,7 +441,7 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                         <div
                           style={
                             Object {
-                              "height": "5pxß",
+                              "height": "5px",
                             }
                           }
                         />
@@ -465,11 +450,6 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                         >
                           <Link
                             href="/ddd"
-                            style={
-                              Object {
-                                "fontSize": undefined,
-                              }
-                            }
                           >
                             xxx
                           </Link>
@@ -759,7 +739,7 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                     >
                       <Input
                         onChange={[Function]}
-                        placeholder="输入关键词搜索"
+                        placeholder="DEFAULT_PLACEHOLDER"
                         prefix={
                           <ForwardRef(SearchOutlined)
                             className="searchIcon"
@@ -790,11 +770,6 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                             />
                             <span
                               className="categoryTitle"
-                              style={
-                                Object {
-                                  "fontSize": undefined,
-                                }
-                              }
                             >
                               xxx
                             </span>
@@ -810,7 +785,7 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                           <div
                             style={
                               Object {
-                                "height": "5pxß",
+                                "height": "5px",
                               }
                             }
                           />
@@ -819,11 +794,6 @@ exports[`DropMenu should toMatchSnapshot work 1`] = `
                           >
                             <Link
                               href="/ddd"
-                              style={
-                                Object {
-                                  "fontSize": undefined,
-                                }
-                              }
                             >
                               xxx
                             </Link>

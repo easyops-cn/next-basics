@@ -11,7 +11,7 @@ import React, { Children, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
 import styles from "./DropMenu.module.css";
-import { t } from "i18next";
+import i18next, { t } from "i18next";
 
 interface DropMenuProps {
   menuData: any[];
@@ -115,7 +115,7 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
           <Input
             prefix={<SearchOutlined className={styles.searchIcon} />}
             onChange={onSearch}
-            placeholder={props.placeholder ?? t(K.DEFAULT_PLACEHOLDER)}
+            placeholder={props.placeholder ?? i18next.t(K.DEFAULT_PLACEHOLDER)}
           />
         </div>
         <div className={styles.masonry}>
