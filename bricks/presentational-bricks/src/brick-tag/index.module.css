@@ -65,6 +65,9 @@
   .disabledTag {
     cursor: not-allowed;
   }
+  .checkableTag:active {
+    color: #ffffff;
+  }
 }
 
 html[data-theme="dark"] {
