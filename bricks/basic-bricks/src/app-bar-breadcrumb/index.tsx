@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { AppbarBreadcrumb } from "./AppbarBreadcrumb";
-import { BreadcrumbItemConf } from "@next-core/brick-types";
+import { BreadcrumbItemConf, SidebarMenu } from "@next-core/brick-types";
 
 /**
  * @id basic-bricks.app-bar-breadcrumb
@@ -44,6 +44,11 @@ export class AppbarBreadcrumbElement extends UpdatingElement {
   })
   noCurrentApp: boolean;
 
+  @property({
+    attribute: false,
+  })
+  menu: Partial<SidebarMenu>;
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -52,6 +57,7 @@ export class AppbarBreadcrumbElement extends UpdatingElement {
           <AppbarBreadcrumb
             breadcrumb={this.breadcrumb ?? []}
             noCurrentApp={this.noCurrentApp}
+            menu={this.menu}
           />
         </BrickWrapper>,
         this
