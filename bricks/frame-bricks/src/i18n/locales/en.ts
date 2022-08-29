@@ -5,6 +5,7 @@ const locale: Locale = {
   [K.UNPIN_NAVIGATION]: "Unpin navigation",
   [K.FIXED_NAVIGATION]: "Fixed navigation",
   [K.CLICK_TO_FIX_NAVIGATION]: "Click to {{action}}",
+  [K.DEFAULT_PLACEHOLDER]: "Enter a keyword to search",
 };
 
 export default locale;
