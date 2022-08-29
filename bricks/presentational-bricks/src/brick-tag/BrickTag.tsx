@@ -159,6 +159,7 @@ export function BrickTag(props: BrickTagProps): React.ReactElement {
             [style.colorTag]:
               specificColor && !closable && TypeComponent === Tag,
             [style.disabledTag]: disabled,
+            [style.checkableTag]: TypeComponent === Tag.CheckableTag,
           })}
           closable={closable}
           {...(closable ? { onClose: () => onClose(item) } : {})}
