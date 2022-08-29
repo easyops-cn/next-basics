@@ -23,7 +23,6 @@ export class DropMenuElement extends UpdatingElement {
   menuData: any[];
 
   /**
-   * @kind Record<string,any>
    * @required false
    * @description 一级目录样式
    * @group ui
@@ -31,10 +30,9 @@ export class DropMenuElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  categoryStyle: Record<string, any>;
+  categoryStyle: React.CSSProperties;
 
   /**
-   * @kind Record<string,any>
    * @required false
    * @description 二级目录样式
    * @group ui
@@ -42,10 +40,9 @@ export class DropMenuElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  subCategoryStyle: Record<string, any>;
+  subCategoryStyle: React.CSSProperties;
 
   /**
-   * @kind Record<string,any>
    * @required false
    * @description 具体菜单样式
    * @group ui
@@ -53,7 +50,7 @@ export class DropMenuElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  instanceMenuStyle: Record<string, any>;
+  instanceMenuStyle: React.CSSProperties;
 
   /**
    * @required true

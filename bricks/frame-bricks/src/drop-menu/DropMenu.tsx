@@ -31,12 +31,11 @@ export function filterBySearch(groupList, value: string): any[] {
     // setDisplay(false);
     return groupList;
   }
-  const cloneArray = cloneDeep(groupList);
   const filteredGroups: any = [];
   const filterCategory = (objectList) => {
     return objectList?.filter((object) => matchSearchValue(object, value));
   };
-  cloneArray.forEach((category) => {
+  groupList.forEach((category) => {
     const filteredObjectList = filterCategory(category.children);
     const filteredSubCategoryObjectList: any = [];
     category.subCategory?.forEach((subCategory) => {
