@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.232.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.231.2...@next-bricks/forms@1.232.0) (2022-08-29)
+
+
+### Bug Fixes
+
+*  增加单元测试 ([ce26b7b](https://github.com/easyops-cn/next-basics/commit/ce26b7ba579e31ea427bf4b877be9aa9561333e3))
+* input默认暂时不为s ([5123db3](https://github.com/easyops-cn/next-basics/commit/5123db32583b6f18ac726e8aee5951da0fb37354))
+* 改成枚举值 ([fb6a33b](https://github.com/easyops-cn/next-basics/commit/fb6a33b998c1fb9ddf070063d3cbb5aeb7e26a11))
+
+
+### Features
+
+* 增加按钮描述以及给通用下拉框增加size属性 ([fc355ca](https://github.com/easyops-cn/next-basics/commit/fc355ca627f725995a3a21837e684e6e740e418e))
+
+
+
+
+
 ## [1.231.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.231.1...@next-bricks/forms@1.231.2) (2022-08-25)
 
 

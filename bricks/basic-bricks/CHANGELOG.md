@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.191.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.190.1...@next-bricks/basic-bricks@1.191.0) (2022-08-29)
+
+
+### Features
+
+* 增加按钮描述以及给通用下拉框增加size属性 ([fc355ca](https://github.com/easyops-cn/next-basics/commit/fc355ca627f725995a3a21837e684e6e740e418e))
+
+
+
+
+
 ## [1.190.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.190.0...@next-bricks/basic-bricks@1.190.1) (2022-08-24)
 
 
