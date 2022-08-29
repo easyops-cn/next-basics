@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.263.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.262.1...@next-bricks/presentational-bricks@1.263.0) (2022-08-29)
+
+
+### Features
+
+* **presentational-bricks:** Tag.checkableTag在active的情况下字体颜色加深 ([eded273](https://github.com/easyops-cn/next-basics/commit/eded273ff8b92dc3300e77dcfc0bbdfa5fec24fb))
+
+
+
+
+
 ## [1.262.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.262.0...@next-bricks/presentational-bricks@1.262.1) (2022-08-25)
 
 
