@@ -11,13 +11,14 @@ import React, { Children, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
 import styles from "./DropMenu.module.css";
+import { t } from "i18next";
 
 interface DropMenuProps {
   menuData: any[];
   title: string;
-  categoryFontSize?: string;
-  subCategoryFontSize?: string;
-  instanceMenuFontSize?: string;
+  categoryStyle?: React.CSSProperties;
+  subCategoryStyle?: React.CSSProperties;
+  instanceMenuStyle?: React.CSSProperties;
   placeholder?: string;
 }
 
@@ -74,7 +75,7 @@ export function SubCategory(subCategory) {
         <div className={styles.toggleWrapper}>
           <span
             className={styles.categoryNameContainer}
-            style={{ fontSize: subCategory.subCategoryFontSize }}
+            style={subCategory.subCategoryStyle}
           >
             {subCategory.title}
           </span>
@@ -87,7 +88,7 @@ export function SubCategory(subCategory) {
             <Link
               href={object.to}
               key={i}
-              style={{ fontSize: subCategory.instanceMenuFontSize }}
+              style={subCategory.instanceMenuStyle}
             >
               {object.name}
             </Link>
@@ -114,7 +115,7 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
           <Input
             prefix={<SearchOutlined className={styles.searchIcon} />}
             onChange={onSearch}
-            placeholder={props.placeholder ?? "输入关键词搜索"}
+            placeholder={props.placeholder ?? t(K.DEFAULT_PLACEHOLDER)}
           />
         </div>
         <div className={styles.masonry}>
@@ -132,7 +133,7 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
                     />
                     <span
                       className={styles.categoryTitle}
-                      style={{ fontSize: props.categoryFontSize }}
+                      style={props.categoryStyle}
                     >
                       {category.title}
                     </span>
@@ -140,13 +141,13 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
                   {displaySubCategory?.map((subCategory, i) => {
                     const newSubCategory = {
                       ...subCategory,
-                      subCategoryFontSize: props.subCategoryFontSize,
-                      instanceMenuFontSize: props.instanceMenuFontSize,
+                      subCategoryFontSize: props.subCategoryStyle,
+                      instanceMenuFontSize: props.instanceMenuStyle,
                     };
                     return <SubCategory {...newSubCategory} key={i} />;
                   })}
                   {displaySubCategory?.length && category?.children?.length ? (
-                    <div style={{ height: "5pxß" }}></div>
+                    <div style={{ height: "5px" }}></div>
                   ) : (
                     <></>
                   )}
@@ -156,10 +157,7 @@ export function DropMenu(props: DropMenuProps): React.ReactElement {
                         className={`${styles.objectItemContainer} ${styles.categoryNameContainer}`}
                         key={i}
                       >
-                        <Link
-                          href={object.to}
-                          style={{ fontSize: props.instanceMenuFontSize }}
-                        >
+                        <Link href={object.to} style={props.instanceMenuStyle}>
                           {object.name}
                         </Link>
                       </div>

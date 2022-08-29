@@ -14,8 +14,8 @@ import { DropMenu } from "./DropMenu";
 export class DropMenuElement extends UpdatingElement {
   /**
    * @required true
-   * @default -
    * @description 菜单数据源
+   * @group basic
    */
   @property({
     attribute: false,
@@ -23,39 +23,42 @@ export class DropMenuElement extends UpdatingElement {
   menuData: any[];
 
   /**
+   * @kind Record<string,any>
    * @required false
-   * @default -
-   * @description 一级目录字体大小
+   * @description 一级目录样式
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  categoryFontSize: string;
+  categoryStyle: Record<string, any>;
 
   /**
+   * @kind Record<string,any>
    * @required false
-   * @default -
-   * @description 二级目录字体大小
+   * @description 二级目录样式
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  subCategoryFontSize: string;
+  subCategoryStyle: Record<string, any>;
 
   /**
+   * @kind Record<string,any>
    * @required false
-   * @default -
-   * @description 具体菜单字体大小
+   * @description 具体菜单样式
+   * @group ui
    */
   @property({
     attribute: false,
   })
-  instanceMenuFontSize: string;
+  instanceMenuSyle: Record<string, any>;
 
   /**
    * @required true
-   * @default -
    * @description 菜单标题
+   * @group basic
    */
   @property({
     attribute: false,
@@ -64,8 +67,8 @@ export class DropMenuElement extends UpdatingElement {
 
   /**
    * @required false
-   * @default -
    * @description 搜索框输入提示语
+   * @group basic
    */
   @property({
     attribute: false,
@@ -92,9 +95,9 @@ export class DropMenuElement extends UpdatingElement {
         <BrickWrapper>
           <DropMenu
             menuData={this.menuData}
-            categoryFontSize={this.categoryFontSize}
-            subCategoryFontSize={this.subCategoryFontSize}
-            instanceMenuFontSize={this.instanceMenuFontSize}
+            categoryStyle={this.categoryStyle}
+            subCategoryStyle={this.subCategoryStyle}
+            instanceMenuStyle={this.instanceMenuStyle}
             title={this.menuTitle}
             placeholder={this.placeholder}
           />
