@@ -53,7 +53,7 @@ export class DropMenuElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  instanceMenuSyle: Record<string, any>;
+  instanceMenuStyle: Record<string, any>;
 
   /**
    * @required true
