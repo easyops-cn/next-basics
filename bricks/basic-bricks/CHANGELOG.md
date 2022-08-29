@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.192.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.191.0...@next-bricks/basic-bricks@1.192.0) (2022-08-29)
+
+
+### Features
+
+* add menu props ([4018aa5](https://github.com/easyops-cn/next-basics/commit/4018aa59e2dda8a8185df766c434626c1f87acda))
+
+
+
+
+
 # [1.191.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.190.1...@next-bricks/basic-bricks@1.191.0) (2022-08-29)
 
 
