@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.2.3...@next-bricks/frame-bricks@1.3.0) (2022-08-29)
+
+
+### Bug Fixes
+
+* addcss ([c07e0ae](https://github.com/easyops-cn/next-basics/commit/c07e0ae4ae6cff7d4b1bd6ef5605ce9b45848eb0))
+* 修改单元测试 ([abee860](https://github.com/easyops-cn/next-basics/commit/abee860f1aa121f7af125d3e26853fc3bc1a90b5))
+* 修改拼写错误 ([71b4eae](https://github.com/easyops-cn/next-basics/commit/71b4eae6434fc2f97b6b198a754183560b67892d))
+* 修改文档 ([daeb027](https://github.com/easyops-cn/next-basics/commit/daeb02765eb29c92d1ea57242357f535980b2a08))
+* 增加国际化 注释等 ([65002d9](https://github.com/easyops-cn/next-basics/commit/65002d9e7d35d518c8907fa4800990d11362127a))
+
+
+### Features
+
+* 增加drop-menu ([fbb8253](https://github.com/easyops-cn/next-basics/commit/fbb825334f4a55b5994c0d54abaf4bd63082d8b9))
+
+
+
+
+
 ## [1.2.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.2.2...@next-bricks/frame-bricks@1.2.3) (2022-08-25)
 
 
