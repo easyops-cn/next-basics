@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.18.3...@next-bricks/general-auth@1.18.4) (2022-08-30)
+
+
+### Bug Fixes
+
+* drop support for related apps ([22f5331](https://github.com/easyops-cn/next-basics/commit/22f5331dc6eb65d555e3262b235debc1acd24cc3))
+
+
+
+
+
 ## [1.18.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/general-auth@1.18.2...@next-bricks/general-auth@1.18.3) (2022-08-26)
 
 **Note:** Version bump only for package @next-bricks/general-auth
