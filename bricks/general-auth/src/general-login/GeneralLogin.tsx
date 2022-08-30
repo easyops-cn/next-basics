@@ -192,7 +192,6 @@ export class LegacyGeneralLogin extends React.Component<
     onLogin?: GeneralLoginProps["onLogin"]
   ): Promise<void> => {
     const runtime = getRuntime();
-    runtime.reloadSharedData();
     await runtime.reloadMicroApps();
     resetLegacyIframe();
 

@@ -1,16 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-import {
-  getRuntime,
-  useCurrentApp,
-  useLocation,
-  RelatedApp,
-} from "@next-core/brick-kit";
-import { SidebarMenu, MatchResult } from "@next-core/brick-types";
-import { matchPath } from "@next-core/brick-utils";
+import { SidebarMenu } from "@next-core/brick-types";
 import { Link } from "@next-libs/basic-components";
 import { GeneralIcon, Sidebar } from "@next-libs/basic-components";
-import { OtherAppMenu } from "./OtherAppMenu/OtherAppMenu";
 import { MenuTooltip } from "./MenuTooltip/MenuTooltip";
 import styles from "./AppMenu.module.css";
 
@@ -19,66 +11,8 @@ export interface AppMenuProps {
   collapsed?: boolean;
 }
 
-export function getRelatedAppsByPath(
-  relatedApps: RelatedApp[],
-  pathname: string
-): {
-  matchResult: MatchResult;
-  prependApps: RelatedApp[];
-  appendApps: RelatedApp[];
-} {
-  let matchResult: MatchResult;
-  let prependApps: RelatedApp[] = [];
-  let appendApps: RelatedApp[] = [];
-
-  const matchedAppIndex = relatedApps.findIndex((app) => {
-    const path = app.subPath.replace(/\$\{(\w+)\}/g, ":$1");
-    matchResult = matchPath(pathname, {
-      path,
-    });
-    return matchResult;
-  });
-
-  if (matchedAppIndex !== -1) {
-    prependApps = relatedApps.slice(0, matchedAppIndex);
-    appendApps = relatedApps.slice(matchedAppIndex + 1);
-  }
-  return { matchResult, prependApps, appendApps };
-}
-
 export function AppMenu(props: AppMenuProps): React.ReactElement {
-  const location = useLocation();
-  const app = useCurrentApp();
-  const [prependApps, setPrependApps] = React.useState<RelatedApp[]>([]);
-  const [appendApps, setAppendApps] = React.useState<RelatedApp[]>([]);
-  const [matchResult, setMatchResult] = React.useState<MatchResult>();
-
   const { menu, collapsed } = props;
-  const showRelatedApps = menu?.showRelatedApps;
-
-  React.useEffect(() => {
-    (async () => {
-      // `location.pathname` will be changed before app and menu changed.
-      // If the current location is not matching `app.homepage`,
-      // ignore the related apps refreshing.
-      if (
-        !app ||
-        !matchPath(location.pathname, {
-          path: app.homepage,
-        })
-      ) {
-        return;
-      }
-      const relatedApps = await getRuntime().getRelatedAppsAsync(app.id);
-      const tmp = getRelatedAppsByPath(
-        showRelatedApps ? relatedApps : [],
-        location.pathname
-      );
-      setPrependApps(tmp.prependApps);
-      setAppendApps(tmp.appendApps);
-      setMatchResult(tmp.matchResult);
-    })();
-  }, [app, location.pathname, showRelatedApps]);
 
   if (!menu) {
     return (
@@ -96,14 +30,6 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
         [styles.collapsed]: collapsed,
       })}
     >
-      {prependApps.map((app) => (
-        <OtherAppMenu
-          app={app}
-          matchResult={matchResult}
-          collapsed={collapsed}
-          key={app.microAppId}
-        />
-      ))}
       <div className={styles.menuGroup}>
         {menu?.title && (
           <MenuTooltip collapsed={collapsed} title={menu.title}>
@@ -138,14 +64,6 @@ export function AppMenu(props: AppMenuProps): React.ReactElement {
           ></Sidebar>
         </div>
       </div>
-      {appendApps.map((app) => (
-        <OtherAppMenu
-          app={app}
-          matchResult={matchResult}
-          collapsed={collapsed}
-          key={app.microAppId}
-        />
-      ))}
     </div>
   );
 }

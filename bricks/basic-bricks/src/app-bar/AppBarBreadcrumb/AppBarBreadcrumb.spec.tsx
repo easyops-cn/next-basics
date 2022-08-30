@@ -10,10 +10,6 @@ jest.spyOn(kit, "getHistory").mockReturnValue({
   push: spyOnHistoryPush,
 } as any);
 const spyOnUseRecentApps = jest.spyOn(kit, "useRecentApps");
-const popWorkspaceStack = jest.fn();
-jest.spyOn(kit, "getRuntime").mockReturnValue({
-  popWorkspaceStack,
-} as any);
 
 describe("AppBarBreadcrumb", () => {
   it("should work with no current app", () => {
@@ -58,27 +54,6 @@ describe("AppBarBreadcrumb", () => {
     );
     expect(wrapper.find(GeneralIcon).length).toBe(1);
     expect(wrapper.find(Breadcrumb.Item).length).toBe(3);
-  });
-
-  it("should work with current app and previous workspace", () => {
-    spyOnUseRecentApps.mockReturnValueOnce({
-      currentApp: {
-        id: "hello",
-        homepage: "/hello",
-        name: "Halo",
-        localeName: "Hello",
-      },
-      previousWorkspace: {
-        appId: "world",
-        appName: "世界",
-        appLocaleName: "World",
-        url: "/world",
-      },
-    });
-    const wrapper = shallow(<AppBarBreadcrumb breadcrumb={null} />);
-    wrapper.find(".workspaceButton").simulate("click");
-    expect(popWorkspaceStack).toBeCalled();
-    expect(spyOnHistoryPush).toBeCalledWith("/world");
   });
 
   it("should work with no current app and no breadcrumb", () => {

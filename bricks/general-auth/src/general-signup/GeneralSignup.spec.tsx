@@ -12,11 +12,7 @@ const brandFn = jest.fn().mockReturnValue({});
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 const spyOnHistoryPush = jest.fn();
 
-const spyOnAuthenticate = jest.spyOn(kit, "authenticate");
-const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 const spyOnReloadMicroApps = jest.fn();
-const spyOnReloadSharedData = jest.fn();
-const spyOnError = jest.spyOn(Modal, "error");
 const spyOnCommonRegister = jest.spyOn(apiGatewaySdk, "OrgApi_saaSOrgRegister");
 const spyOnJoinRegister = jest.spyOn(apiGatewaySdk, "AuthApi_register");
 
@@ -31,7 +27,6 @@ jest.spyOn(kit, "getHistory").mockReturnValue({
 } as any);
 spyOnKit.mockReturnValue({
   reloadMicroApps: spyOnReloadMicroApps,
-  reloadSharedData: spyOnReloadSharedData,
   getBrandSettings: brandFn,
   getFeatureFlags: () => ({
     "enable-backend-password-config": true,
