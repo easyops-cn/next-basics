@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.192.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.192.0...@next-bricks/basic-bricks@1.192.1) (2022-08-30)
+
+
+### Bug Fixes
+
+* fix launchpad blur not cleared in certain case ([f373958](https://github.com/easyops-cn/next-basics/commit/f373958c70ae65102a824a91040626a34cdd9408))
+
+
+
+
+
 # [1.192.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.191.0...@next-bricks/basic-bricks@1.192.0) (2022-08-29)
 
 
