@@ -2,7 +2,7 @@ import React from "react";
 import { HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb } from "antd";
 import { BreadcrumbItemConf, SidebarMenu } from "@next-core/brick-types";
-import { useRecentApps, getRuntime, getHistory } from "@next-core/brick-kit";
+import { useRecentApps } from "@next-core/brick-kit";
 import { Link, GeneralIcon } from "@next-libs/basic-components";
 import styles from "./AppBarBreadcrumb.module.css";
 import classnames from "classnames";
@@ -19,7 +19,7 @@ export interface BasicBreadcrumbProps {
 export function AppBarBreadcrumb(
   props: BasicBreadcrumbProps
 ): React.ReactElement {
-  const { currentApp, previousWorkspace } = useRecentApps();
+  const { currentApp } = useRecentApps();
   const {
     items: breadcrumbItems,
     noCurrentApp: breadcrumbNoCurrentApp,
@@ -27,25 +27,8 @@ export function AppBarBreadcrumb(
   } = currentApp?.breadcrumb || {};
   const noCurrentApp = props.noCurrentApp || breadcrumbNoCurrentApp;
 
-  const handleGoBackPreviousWorkspace = (): void => {
-    getRuntime().popWorkspaceStack();
-    getHistory().push(previousWorkspace.url);
-  };
-
   return (
     <div className={classnames(styles.breadcrumbContainer, props.className)}>
-      {previousWorkspace && (
-        <a
-          role="button"
-          className={styles.workspaceButton}
-          onClick={handleGoBackPreviousWorkspace}
-        >
-          <GeneralIcon icon={{ lib: "fa", icon: "reply" }} />
-          <span style={{ marginLeft: 7 }}>
-            {previousWorkspace.appLocaleName}
-          </span>
-        </a>
-      )}
       <Breadcrumb separator={props.separator || ">"}>
         {breadcrumbItems &&
           breadcrumbItems.map((item: BreadcrumbItemConf, index: number) => {

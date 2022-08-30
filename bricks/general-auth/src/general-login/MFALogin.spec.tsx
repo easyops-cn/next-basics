@@ -14,12 +14,10 @@ const spyOnUpdateUserTotpSecret = jest.spyOn(
 );
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 const spyOnReloadMicroApps = jest.fn();
-const spyOnReloadSharedData = jest.fn();
 const brandFn = jest.fn().mockReturnValue({});
 const getMiscSettings = jest.fn().mockReturnValue({});
 spyOnKit.mockReturnValue({
   reloadMicroApps: spyOnReloadMicroApps,
-  reloadSharedData: spyOnReloadSharedData,
   getBrandSettings: brandFn,
   getFeatureFlags: () => ({
     "forgot-password-enabled": true,

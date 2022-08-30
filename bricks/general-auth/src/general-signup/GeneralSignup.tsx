@@ -154,7 +154,6 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
   };
 
   const redirect = async (result: Record<string, any>): Promise<void> => {
-    runtime.reloadSharedData();
     await runtime.reloadMicroApps();
     resetLegacyIframe();
     authenticate({

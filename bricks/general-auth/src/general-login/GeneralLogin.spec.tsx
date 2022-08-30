@@ -1,12 +1,12 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { shallow } from "enzyme";
 import { createLocation } from "history";
 import { Form } from "@ant-design/compatible";
 import { Card, Modal, Tabs } from "antd";
 import * as kit from "@next-core/brick-kit";
 import * as authSdk from "@next-sdk/auth-sdk";
 import * as apiGatewaySdk from "@next-sdk/api-gateway-sdk";
-import { LegacyGeneralLogin, lastLoginMethod } from "./GeneralLogin";
+import { LegacyGeneralLogin } from "./GeneralLogin";
 import { WithTranslation } from "react-i18next";
 import { JsonStorage } from "@next-libs/storage";
 
@@ -17,7 +17,6 @@ jest.mock("@next-libs/storage");
 const spyOnAuthenticate = jest.spyOn(kit, "authenticate");
 const spyOnHandleHttpError = jest.spyOn(kit, "handleHttpError");
 const spyOnReloadMicroApps = jest.fn();
-const spyOnReloadSharedData = jest.fn();
 const brandFn = jest.fn().mockReturnValue({});
 
 const spyOnLogin = jest.spyOn(apiGatewaySdk, "AuthApi_loginV2");
@@ -31,7 +30,6 @@ const spyOnError = jest.spyOn(Modal, "error");
 const spyOnKit = jest.spyOn(kit, "getRuntime");
 spyOnKit.mockReturnValue({
   reloadMicroApps: spyOnReloadMicroApps,
-  reloadSharedData: spyOnReloadSharedData,
   getBrandSettings: brandFn,
   getFeatureFlags: () => ({
     "forgot-password-enabled": true,
@@ -75,7 +73,6 @@ describe("GeneralLogin", () => {
     spyOnHistoryPush.mockClear();
     spyOnAuthenticate.mockClear();
     spyOnReloadMicroApps.mockClear();
-    spyOnReloadSharedData.mockClear();
     spyOnError.mockClear();
     spyOnHandleHttpError.mockClear();
     spyOnKit.mockClear();
@@ -105,7 +102,6 @@ describe("GeneralLogin", () => {
           accessRule: "cmdb",
         });
         expect(spyOnReloadMicroApps).toBeCalled();
-        expect(spyOnReloadSharedData).toBeCalled();
         expect(spyOnHistoryPush).toBeCalledWith(createLocation("/mock-from"));
         done();
       }),
@@ -165,7 +161,6 @@ describe("GeneralLogin", () => {
           accessRule: "cmdb",
         });
         expect(spyOnReloadMicroApps).toBeCalled();
-        expect(spyOnReloadSharedData).toBeCalled();
         expect(spyOnHistoryPush).toBeCalledWith(createLocation("/mock-from"));
         done();
       }),
@@ -206,7 +201,6 @@ describe("GeneralLogin", () => {
           userInstanceId: "abc",
         });
         expect(spyOnReloadMicroApps).toBeCalled();
-        expect(spyOnReloadSharedData).toBeCalled();
         expect(spyOnHistoryPush).toBeCalledWith(createLocation("/mock-from"));
         done();
       }),
@@ -281,7 +275,7 @@ describe("GeneralLogin", () => {
       },
       push: spyOnHistoryPush,
     } as any);
-    expect.assertions(4);
+    expect.assertions(3);
     const form = {
       getFieldDecorator: () => (comp: React.Component) => comp,
       validateFields: jest.fn().mockImplementation(async (fn) => {
@@ -291,7 +285,6 @@ describe("GeneralLogin", () => {
         });
         expect(spyOnAuthenticate).not.toBeCalled();
         expect(spyOnReloadMicroApps).not.toBeCalled();
-        expect(spyOnReloadSharedData).not.toBeCalled();
       }),
     };
     const wrapper = shallow(
@@ -325,7 +318,6 @@ describe("GeneralLogin", () => {
         });
         expect(spyOnAuthenticate).not.toBeCalled();
         expect(spyOnReloadMicroApps).not.toBeCalled();
-        expect(spyOnReloadSharedData).not.toBeCalled();
         done();
       }),
     };
@@ -352,7 +344,6 @@ describe("GeneralLogin", () => {
         expect(spyOnLogin).not.toBeCalled();
         expect(spyOnAuthenticate).not.toBeCalled();
         expect(spyOnReloadMicroApps).not.toBeCalled();
-        expect(spyOnReloadSharedData).not.toBeCalled();
         done();
       }),
     };
@@ -379,7 +370,6 @@ describe("GeneralLogin", () => {
         expect(spyOnLogin).not.toBeCalled();
         expect(spyOnAuthenticate).not.toBeCalled();
         expect(spyOnReloadMicroApps).not.toBeCalled();
-        expect(spyOnReloadSharedData).not.toBeCalled();
         done();
       }),
     };
@@ -417,7 +407,6 @@ describe("GeneralLogin", () => {
           accessRule: "cmdb",
         });
         expect(spyOnReloadMicroApps).toBeCalled();
-        expect(spyOnReloadSharedData).toBeCalled();
         expect(spyOnHistoryPush).toBeCalledWith(
           createLocation({
             pathname: "/mock-from-cookie",
