@@ -14,7 +14,7 @@
     /* subMenu-title 普通样式 */
     :global(.ant-menu-submenu-title) {
       > span {
-        padding: 4px 8px 4px 8px;
+        padding: 4px 8px 8px 8px;
         border-radius: 4px;
       }
     }
@@ -73,12 +73,15 @@
 
 /* 下拉弹窗样式 */
 .popupWrapper {
+  padding: 4px 0px 3px 0px;
   :global(.ant-menu) {
     background: var(--antd-dropdown-menu-bg) !important;
+    border-radius: 6px;
+    box-shadow: 0px 4px 12px 0px rgba(17, 37, 64, 0.08);
 
     :global(.ant-menu-submenu-title) {
       padding: 0px 4px 0px 14px;
-      margin: 0 2px;
+      /* margin: 0 2px; */
       font-size: 14px;
       color: var(--color-normal-text);
       line-height: 14px;
@@ -91,29 +94,37 @@
     }
 
     :global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
+      background-color: var(--v8-top-menu-item-selected-bg) !important;
       > span {
-        color: var(--color-strong-text) !important;
+        /* color: var(--color-strong-text) !important; */
+        color: var(--color-brand) !important;
+      }
+      :global(.ant-menu-submenu-arrow) {
+        color: var(--color-brand);
       }
     }
   }
 
   /* 子菜单项样式 */
   .subMenuWrapper {
-    margin: 2px 0;
-    height: 28px;
-    line-height: 28px;
+    margin: 8px 0px;
+    height: 36px;
+    line-height: 36px;
     :global(.ant-menu-submenu-title) {
-      padding: 0px 24px 0px 8px;
-      margin: 2px;
+      /* padding: 0px 24px 0px 8px; */
       font-size: 14px;
       color: var(--color-normal-text);
-      line-height: 28px;
-      height: 28px;
-      border-radius: var(--card-default-border-radius);
+      line-height: 36px;
+      height: 36px;
+      /* border-radius: var(--card-default-border-radius); */
+      span {
+        margin: 0px 49px 0px 9px;
+      }
     }
 
     &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
       color: inherit;
+
       background-color: var(--v8-top-menu-item-hover);
       > span {
         color: var(--color-normal-text);
@@ -121,10 +132,11 @@
     }
 
     &:global(.ant-menu-submenu-selected .ant-menu-submenu-title) {
-      color: inherit;
-      /* background-color: var(--v8-top-menu-item-selected-bg) !important; */
+      /* color: inherit; */
+      background-color: var(--v8-top-menu-item-selected-bg) !important;
       > span {
-        color: var(--color-strong-text) !important;
+        /* color: var(--color-strong-text) !important; */
+        color: var(--color-brand) !important;
       }
     }
   }
@@ -137,7 +149,9 @@
     :global(.ant-menu-item-group-title) {
       color: inherit;
       background-color: inherit;
-      padding: 8px;
+      height: 28px;
+      margin-top: -8px;
+      /* padding: 8px; */
       > span {
         color: var(--color-secondary-text) !important;
         font-weight: 400 !important;
@@ -150,16 +164,21 @@
 
   /* 菜单子项样式 */
   .simpleMenuItem {
-    padding: 0px 4px;
-    margin: 4px !important;
-    height: 28px;
+    /* padding: 0px 4px; */
+    margin: 8px 0px;
+    height: 36px;
     line-height: 28px;
-    border-radius: var(--card-default-border-radius);
+    /* border-radius: var(--card-default-border-radius); */
     span {
       font-size: 14px;
       color: var(--color-normal-text);
-      line-height: 14px;
-      margin: 0 2px;
+      line-height: 36px;
+      margin: 0px 49px 0px 8px;
+    }
+    .menuItemIcon {
+      width: 16px;
+      height: 16px;
+      margin-right: -40px;
     }
   }
 
@@ -176,9 +195,10 @@
   }
 
   :global(.ant-menu-item-selected) {
-    background-color: var(--v8-dropdown-selected-bg) !important;
+    background-color: var(--v8-top-menu-item-selected-bg) !important;
     span {
-      color: var(--v8-dropdown-selected) !important;
+      color: var(--color-brand) !important;
+      font-weight: 500;
     }
   }
 }
