@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.178.0...@next-bricks/next-builder@1.179.0) (2022-08-31)
+
+
+### Features
+
+* **workbenchTree:** support context menu in anywhere ([b30d5fc](https://github.com/easyops-cn/next-basics/commit/b30d5fc63cdc0c060a2b806a569123591d3ca3c2))
+
+
+
+
+
 # [1.178.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.177.3...@next-bricks/next-builder@1.178.0) (2022-08-26)
 
 
