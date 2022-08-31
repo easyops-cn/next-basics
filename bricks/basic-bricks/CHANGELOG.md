@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.194.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.193.0...@next-bricks/basic-bricks@1.194.0) (2022-08-31)
+
+
+### Features
+
+* update default-app-icon.png ([00f2db0](https://github.com/easyops-cn/next-basics/commit/00f2db0a1c0c361ec98c6a1d7a78624fe13a0644))
+
+
+
+
+
 # [1.193.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.192.2...@next-bricks/basic-bricks@1.193.0) (2022-08-31)
 
 
