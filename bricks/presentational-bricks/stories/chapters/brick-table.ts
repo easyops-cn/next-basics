@@ -82,23 +82,54 @@ export const BrickTableStory: Story = {
             title: "操作",
             key: "operate",
             dataIndex: "operate",
-            useBrick: {
-              brick: "presentational-bricks.brick-link",
-              properties: {
-                dataSource: "<% DATA.rowData %>",
-                notToJumpWhenEmpty: true,
-                icon: {
-                  lib: "fa",
-                  icon: "tools",
-                  prefix: "fas",
+            useBrick: [
+              {
+                brick: "presentational-bricks.brick-link",
+                properties: {
+                  dataSource: "<% DATA.rowData %>",
+                  notToJumpWhenEmpty: true,
+                  label: "查看",
+                },
+                events: {
+                  "link.click": {
+                    action: "console.log",
+                  },
                 },
               },
-              events: {
-                "link.click": {
-                  action: "console.log",
+              {
+                brick: "presentational-bricks.brick-link",
+                properties: {
+                  dataSource: "<% DATA.rowData %>",
+                  notToJumpWhenEmpty: true,
+                  label: "订阅警报",
+                  style: {
+                    marginLeft: "8px",
+                  },
+                },
+                events: {
+                  "link.click": {
+                    action: "console.log",
+                  },
                 },
               },
-            },
+              {
+                brick: "presentational-bricks.brick-link",
+                properties: {
+                  dataSource: "<% DATA.rowData %>",
+                  notToJumpWhenEmpty: true,
+                  label: "删除",
+                  labelColor: "red",
+                  style: {
+                    marginLeft: "8px",
+                  },
+                },
+                events: {
+                  "link.click": {
+                    action: "console.log",
+                  },
+                },
+              },
+            ],
           },
         ],
         dataSource: {

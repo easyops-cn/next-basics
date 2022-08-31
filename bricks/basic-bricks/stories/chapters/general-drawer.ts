@@ -111,17 +111,18 @@ export const generalDrawerStory: Story = {
                       properties: {
                         style: {
                           marginRight: "var(--page-card-gap)",
+                          marginLeft: "15px",
                         },
                         alignment: "start",
                         customButtons: [
                           {
-                            text: "取消",
-                            buttonType: "text",
+                            buttonType: "primary",
+                            text: "保存",
                             eventName: "drawer.close",
                           },
                           {
-                            buttonType: "primary",
-                            text: "保存",
+                            text: "取消",
+                            buttonType: "text",
                             eventName: "drawer.close",
                           },
                         ],
