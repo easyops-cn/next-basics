@@ -15,7 +15,6 @@ import {
   GeneralIcon,
 } from "@next-libs/basic-components";
 import style from "./NavMenu.module.css";
-import { index } from "d3";
 type MenuItemBrick = {
   useBrick?: UseBrickConf;
   instanceId?: string;
