@@ -72,7 +72,8 @@ export function WorkbenchTree({
   const [overNode, setOverNode] = useState<WorkbenchNodeData>();
   const [overElement, setOverElement] = useState<HTMLElement>();
   const [overStatus, setOverStatus] = useState<dragStatusEnum>();
-  const { nodeKey, onBrickDrop } = useWorkbenchTreeContext();
+  const { nodeKey, onBrickDrop, contextMenuFactory, matchNode } =
+    useWorkbenchTreeContext();
 
   const handleSearchChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +82,10 @@ export function WorkbenchTree({
     []
   );
 
-  const { matchNode } = useWorkbenchTreeContext();
+  const onContextMenu = useMemo(
+    () => contextMenuFactory?.(),
+    [contextMenuFactory]
+  );
 
   const trimmedLowerQ = q?.trim().toLowerCase();
   const filteredNodes = useMemo(() => {
@@ -240,39 +244,51 @@ export function WorkbenchTree({
     };
   }, []);
 
-  return nodes?.length ? (
-    <div>
-      {!noSearch && (
-        <div className={styles.searchBox}>
-          <Input
-            value={q}
-            onChange={handleSearchChange}
-            size="small"
-            placeholder={searchPlaceholder}
-            prefix={<SearchOutlined />}
-            allowClear
-          />
+  return (
+    <div
+      style={{
+        height: "100%",
+      }}
+      onContextMenu={onContextMenu}
+    >
+      {nodes?.length ? (
+        <div>
+          {!noSearch && (
+            <div
+              className={styles.searchBox}
+              onContextMenu={(e) => e.stopPropagation()}
+            >
+              <Input
+                value={q}
+                onChange={handleSearchChange}
+                size="small"
+                placeholder={searchPlaceholder}
+                prefix={<SearchOutlined />}
+                allowClear
+              />
+            </div>
+          )}
+          <SearchingContext.Provider value={!!q}>
+            <WorkbenchTreeDndContext.Provider
+              value={{
+                allow: true,
+                allowDragToRoot: allowDragToRoot,
+                dragElement: curElement,
+                dragOverElement: overElement,
+                dragStatus: overStatus,
+                onDragStart: handleOnDragStart,
+              }}
+            >
+              <div onDragOver={handleOnDragOver} onDrop={handleOnDrop}>
+                <TreeList nodes={filteredNodes} level={1} />
+              </div>
+            </WorkbenchTreeDndContext.Provider>
+          </SearchingContext.Provider>
         </div>
+      ) : (
+        <div className={styles.placeholder}>{placeholder}</div>
       )}
-      <SearchingContext.Provider value={!!q}>
-        <WorkbenchTreeDndContext.Provider
-          value={{
-            allow: true,
-            allowDragToRoot: allowDragToRoot,
-            dragElement: curElement,
-            dragOverElement: overElement,
-            dragStatus: overStatus,
-            onDragStart: handleOnDragStart,
-          }}
-        >
-          <div onDragOver={handleOnDragOver} onDrop={handleOnDrop}>
-            <TreeList nodes={filteredNodes} level={1} />
-          </div>
-        </WorkbenchTreeDndContext.Provider>
-      </SearchingContext.Provider>
     </div>
-  ) : (
-    <div className={styles.placeholder}>{placeholder}</div>
   );
 }
 
@@ -371,8 +387,11 @@ function TreeNode({
     [mouseLeaveFactory, node]
   );
 
-  const onContextMenu = useMemo(
-    () => contextMenuFactory?.(node),
+  const onContextMenu = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      contextMenuFactory?.(node)?.(e);
+    },
     [contextMenuFactory, node]
   );
 
