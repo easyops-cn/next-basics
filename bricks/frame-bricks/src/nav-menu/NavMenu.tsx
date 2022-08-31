@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useState, useEffect } from "react";
-import { Menu } from "antd";
+import { Divider, Menu } from "antd";
 import { UnregisterCallback, Location } from "history";
 import {
   SidebarMenuSimpleItem,
@@ -12,11 +12,13 @@ import classNames from "classnames";
 import {
   Link,
   initMenuItemAndMatchCurrentPathKeys,
+  GeneralIcon,
 } from "@next-libs/basic-components";
 import style from "./NavMenu.module.css";
 type MenuItemBrick = {
   useBrick?: UseBrickConf;
   instanceId?: string;
+  divider?: boolean;
 };
 type SidebarMenuSimpleItems = SidebarMenuSimpleItem & MenuItemBrick;
 type SidebarMenuGroups = SidebarMenuGroup & MenuItemBrick;
@@ -70,6 +72,11 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     return (
       <Link to={item.to} href={item.href} target={item.target}>
         <span className={classNames(style.menuText, style.simpleMenuItemText)}>
+          {item.icon && (
+            <i className={style.menuItemIcon}>
+              <GeneralIcon icon={item.icon} />
+            </i>
+          )}
           {item.text}
         </span>
       </Link>
@@ -77,7 +84,12 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   };
   const renderSpanCom = (item: SidebarMenuGroups, classNme: string) => {
     return (
-      <span className={classNames(style.menuText, classNme)}>{item.title}</span>
+      <>
+        <span className={classNames(style.menuText, classNme)}>
+          {item.title}
+        </span>
+        {/* {item.divider &&(<Divider style={{height:"1px",marginTop:"-1px"}} />)} */}
+      </>
     );
   };
   const renderBrickCom = (item: SidebarMenuItem) => {
@@ -89,13 +101,20 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     item: SidebarMenuSimpleItems
   ): React.ReactNode => {
     return (
-      <Menu.Item
-        key={item.key}
-        title={item.text}
-        className={style.simpleMenuItem}
-      >
-        {item.useBrick ? renderBrickCom(item) : renderLinkCom(item)}
-      </Menu.Item>
+      <>
+        <Menu.Item
+          key={item.key}
+          title={item.text}
+          className={style.simpleMenuItem}
+        >
+          {item.useBrick ? renderBrickCom(item) : renderLinkCom(item)}
+        </Menu.Item>
+        {item.divider && (
+          <Menu.Divider
+            style={{ height: "1px", margin: "8px 12px 0px 12px" }}
+          />
+        )}
+      </>
     );
   };
 
