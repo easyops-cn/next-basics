@@ -14,7 +14,7 @@
     /* subMenu-title 普通样式 */
     :global(.ant-menu-submenu-title) {
       > span {
-        padding: 4px 8px 8px 8px;
+        padding: 4px 8px 4px 8px;
         border-radius: 4px;
       }
     }
@@ -120,6 +120,9 @@
       span {
         margin: 0px 49px 0px 9px;
       }
+      :global(.ant-menu-submenu-arrow) {
+        color: var(--color-normal-text);
+      }
     }
 
     &:global(.ant-menu-submenu-active .ant-menu-submenu-title) {
@@ -128,6 +131,9 @@
       background-color: var(--v8-top-menu-item-hover);
       > span {
         color: var(--color-normal-text);
+      }
+      :global(.ant-menu-submenu-arrow) {
+        color: var(--color-strong-text);
       }
     }
 
