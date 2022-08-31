@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.264.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.264.0...@next-bricks/presentational-bricks@1.264.1) (2022-08-31)
+
+
+### Bug Fixes
+
+* fix menu css and dom ([19ca0db](https://github.com/easyops-cn/next-basics/commit/19ca0db44ccb3d128a0dc2b8c4c157440a7679ee))
+
+
+
+
+
 # [1.264.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.263.0...@next-bricks/presentational-bricks@1.264.0) (2022-08-31)
 
 
