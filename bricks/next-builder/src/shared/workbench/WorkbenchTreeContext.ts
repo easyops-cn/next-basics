@@ -22,7 +22,7 @@ export interface ContextOfWorkbenchTree {
   clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
-  contextMenuFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
+  contextMenuFactory?(node?: WorkbenchNodeData): (event: MouseEvent) => void;
   matchNode?(node: WorkbenchNodeData, lowerTrimmedQuery?: string): boolean;
   onNodeToggle?(nodeId: string | number, collapsed: boolean): void;
   getCollapsedId?(node: WorkbenchNodeData): string | number;

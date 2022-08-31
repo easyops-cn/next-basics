@@ -112,7 +112,7 @@ export class WorkbenchDataTreeElement extends UpdatingElement {
       e.preventDefault();
       this._nodeContextMenuEvent.emit({
         active: true,
-        node: node.data,
+        node: node?.data,
         x: e.clientX,
         y: e.clientY,
       });

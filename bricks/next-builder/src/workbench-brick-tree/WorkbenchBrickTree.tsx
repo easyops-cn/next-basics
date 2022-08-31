@@ -112,8 +112,12 @@ export function WorkbenchBrickTree({
   );
 
   const contextMenuFactory = useCallback(
-    ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
-      return isNormalNode(data)
+    (
+      {
+        data,
+      }: WorkbenchNodeData<WorkbenchBrickTreeNode> = {} as WorkbenchNodeData<WorkbenchBrickTreeNode>
+    ) => {
+      return data && isNormalNode(data)
         ? (event: React.MouseEvent) => {
             event.preventDefault();
             manager.contextMenuChange({
