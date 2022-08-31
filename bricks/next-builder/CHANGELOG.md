@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.179.0...@next-bricks/next-builder@1.180.0) (2022-08-31)
+
+
+### Features
+
+* **WorkbenchPane:** add title slot ([c768265](https://github.com/easyops-cn/next-basics/commit/c7682656dcc5dacf582b8e3f1a5e3d08ce3c96a4))
+
+
+
+
+
 # [1.179.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.178.0...@next-bricks/next-builder@1.179.0) (2022-08-31)
 
 
