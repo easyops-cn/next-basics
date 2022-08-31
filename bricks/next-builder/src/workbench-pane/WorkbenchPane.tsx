@@ -67,6 +67,7 @@ export function WorkbenchPane({
             {internalActive ? <DownOutlined /> : <RightOutlined />}
           </span>
           <div className="title-label">{titleLabel}</div>
+          <slot name="title" />
         </div>
         <slot name="actions" />
         {badge !== null && <div className="badge">{badge}</div>}
