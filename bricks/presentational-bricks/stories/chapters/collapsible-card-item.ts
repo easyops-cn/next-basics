@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const CollapsibleCardItemStory: Story = {
   storyId: "presentational-bricks.collapsible-card-item",
-  category: "card",
+  category: "data-view-card",
   type: "brick",
   author: "lynette",
   text: {

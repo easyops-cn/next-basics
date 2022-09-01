@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickHumanizeTimeStory: Story = {
   storyId: "presentational-bricks.brick-humanize-time",
-  category: "value-mapping",
+  category: "data-view-value-mapping",
   type: "brick",
   author: "ice",
   text: {
@@ -11,8 +11,7 @@ export const BrickHumanizeTimeStory: Story = {
   },
   description: {
     en: "1h ago",
-    zh:
-      "如：3天前、过去2小时等。也可显示消耗时间，如1小时2分钟，也可显示为链接",
+    zh: "如：3天前、过去2小时等。也可显示消耗时间，如1小时2分钟，也可显示为链接",
   },
   icon: {
     lib: "fa",

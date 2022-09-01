@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickInputStory: Story = {
   storyId: "presentational-bricks.brick-input",
-  category: "other",
+  category: "interact-baisc",
   type: "brick",
   author: "momo",
   text: {

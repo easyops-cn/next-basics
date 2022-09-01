@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const LogDisplayStory: Story = {
   storyId: "presentational-bricks.log-display",
-  category: "data-view",
+  category: "data-view-component",
   type: "brick",
   author: "jo",
   text: {

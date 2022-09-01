@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const generalButtonStory: Story = {
   storyId: "basic-bricks.general-button",
-  category: "other",
+  category: "interact-baisc",
   type: "brick",
   author: "jo",
   text: {

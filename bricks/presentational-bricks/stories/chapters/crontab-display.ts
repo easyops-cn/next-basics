@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const CrontabDisplayStory: Story = {
   storyId: "presentational-bricks.crontab-display",
-  category: "form-input",
+  category: "data-view-value-mapping",
   type: "brick",
   author: "jo",
   text: {

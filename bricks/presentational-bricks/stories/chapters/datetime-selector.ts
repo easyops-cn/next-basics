@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const DatetimeSelectorStory: Story = {
   storyId: "presentational-bricks.datetime-selector",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "jo",
   text: {

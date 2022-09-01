@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const GeneralBadgeStory: Story = {
   storyId: "presentational-bricks.general-badge",
-  category: "data-view",
+  category: "data-view-info",
   type: "brick",
   author: "Jimmy",
   text: {

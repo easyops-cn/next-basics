@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const GeneralLabelStory: Story = {
   storyId: "presentational-bricks.general-label",
-  category: "value-mapping",
+  category: "data-view-value-mapping",
   type: "brick",
   author: "lynette",
   text: {
@@ -10,10 +10,8 @@ export const GeneralLabelStory: Story = {
     zh: "通用 label",
   },
   description: {
-    en:
-      "Display label,prefix icon and suffix icon.Support for configuration click event and url.",
-    zh:
-      "可用来展示基本文案、前后缀图标，可配置点击事件和 url 的通用 label 构件",
+    en: "Display label,prefix icon and suffix icon.Support for configuration click event and url.",
+    zh: "可用来展示基本文案、前后缀图标，可配置点击事件和 url 的通用 label 构件",
   },
   icon: {
     lib: "antd",

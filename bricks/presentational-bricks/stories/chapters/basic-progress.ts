@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BasicProgressStory: Story = {
   storyId: "presentational-bricks.basic-progress",
-  category: "data-view",
+  category: "data-view-info",
   type: "brick",
   author: "momo",
   text: {

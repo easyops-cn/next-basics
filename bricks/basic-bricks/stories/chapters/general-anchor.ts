@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const generalAnchorStory: Story = {
   storyId: "basic-bricks.general-anchor",
-  category: "description",
+  category: "interact-baisc",
   type: "brick",
   author: "astrid",
   text: {

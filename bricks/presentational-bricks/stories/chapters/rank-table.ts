@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const RankTableStory: Story = {
   storyId: "presentational-bricks.rank-table",
-  category: "general-tables",
+  category: "data-view-table",
   type: "brick",
   author: "Alex",
   text: {

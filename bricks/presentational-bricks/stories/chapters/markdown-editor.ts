@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const MarkdownEditorStory: Story = {
   storyId: "presentational-bricks.markdown-editor",
-  category: "form-input",
+  category: "form-input-advanced",
   type: "brick",
   author: "lynette",
   text: {

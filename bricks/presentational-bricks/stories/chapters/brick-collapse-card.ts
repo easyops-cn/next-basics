@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickCollapseCardStory: Story = {
   storyId: "presentational-bricks.brick-collapse-card",
-  category: "description",
+  category: "layout",
   type: "brick",
   author: "lynette",
   text: {

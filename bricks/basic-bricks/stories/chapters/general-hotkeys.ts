@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const generalHotkeysStory: Story = {
   storyId: "basic-bricks.general-hotkeys",
-  category: "other",
+  category: "interact-baisc",
   type: "brick",
   author: "lynette",
   text: {
