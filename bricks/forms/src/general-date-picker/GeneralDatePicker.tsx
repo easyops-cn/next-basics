@@ -224,6 +224,12 @@ export function InternalStateDatePicker(
 
   const isDatePicker = picker === "date";
 
+  const _handleOk = (date: Moment) => {
+    setValue(date);
+    onChange(date, date?.format(format));
+    onOk(date);
+  };
+
   return (
     <DatePicker
       value={value}
@@ -235,7 +241,7 @@ export function InternalStateDatePicker(
       onChange={onChange}
       style={inputBoxStyle}
       placeholder={placeholder}
-      onOk={isDatePicker ? onOk : undefined}
+      onOk={isDatePicker ? _handleOk : undefined}
       suffixIcon={<Icon component={() => <BrickIcon icon="calendar" />} />}
       picker={picker}
       disabledDate={disabledDate && handleDisabledDate}

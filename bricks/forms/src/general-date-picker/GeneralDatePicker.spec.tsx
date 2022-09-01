@@ -77,6 +77,21 @@ describe("GeneralDatePicker", () => {
       wrapper.find(InternalStateDatePicker).prop("value").format("YYYY-ww周")
     ).toBe("2020-20周");
   });
+  it("should work with onOk ", () => {
+    const handleOk = jest.fn();
+    const handleChange = jest.fn();
+    const wrapper = mount(
+      <GeneralDatePicker
+        picker="date"
+        format="YYYY-MM-DD"
+        onOk={handleOk}
+        onChange={handleChange}
+      />
+    );
+    wrapper.find(DatePicker).invoke("onOk")(moment("2020-09-01"));
+    expect(handleChange).toBeCalledWith("2020-09-01");
+    expect(handleOk).toBeCalledWith("2020-09-01");
+  });
 
   describe("test disabled", () => {
     const datePicker = mount(
