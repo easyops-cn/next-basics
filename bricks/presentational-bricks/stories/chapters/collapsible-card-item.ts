@@ -6,8 +6,8 @@ export const CollapsibleCardItemStory: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "collapsible card item",
-    zh: "折叠卡片项",
+    en: "Collapsible Card Item",
+    zh: "可折叠卡片项",
   },
   description: {
     en: "collapsible card item",

@@ -7,7 +7,7 @@ export const DatetimeSelectorStory: Story = {
   author: "jo",
   text: {
     en: "Datetime Selector",
-    zh: "时间选择器",
+    zh: "日期时间选择器",
   },
   description: {
     en: "used to datetime filter",

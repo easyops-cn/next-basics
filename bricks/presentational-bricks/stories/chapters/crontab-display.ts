@@ -6,8 +6,8 @@ export const CrontabDisplayStory: Story = {
   type: "brick",
   author: "jo",
   text: {
-    en: "Crontab Display",
-    zh: "定时任务时间展示",
+    en: "【Tool Flow】Crontab Display",
+    zh: "【工具流程】定时任务时间展示",
   },
   icon: {
     lib: "fa",

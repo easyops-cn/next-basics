@@ -6,8 +6,8 @@ export const RankTableStory: Story = {
   type: "brick",
   author: "Alex",
   text: {
-    en: "rank table",
-    zh: "排名表格",
+    en: "Rank Table",
+    zh: "表格-带排名",
   },
   description: {
     en: "rank table",
