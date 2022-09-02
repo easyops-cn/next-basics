@@ -114,7 +114,9 @@ describe("ObjectAttrStruct", () => {
         />
       );
       wrapper.find(".struct-option-btn-group").childAt(0).simulate("click");
-      expect(wrapper.find("tbody tr").childAt(3).text()).toBe(expected);
+      expect(wrapper.find("tbody tr[data-row-key]").childAt(3).text()).toBe(
+        expected
+      );
     }
   );
 

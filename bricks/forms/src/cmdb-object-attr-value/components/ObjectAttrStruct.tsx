@@ -413,6 +413,7 @@ export function LegacyObjectAttrStructForm(
       </div>
       <div style={{ marginTop: 15 }}>
         <Table
+          scroll={{ x: true }}
           columns={
             (value?.struct_define?.some((item) => regexType.includes(item.type))
               ? structWithEnumColumns
