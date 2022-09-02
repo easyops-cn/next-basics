@@ -77,6 +77,7 @@ function transformInfo(
       $searchTextPool: (brick.$searchTextPool || []).concat(
         find.text ? Object.values(find.text).filter(Boolean) : []
       ),
+      isExport: find.originData?.isExport,
     };
   }
   return brick;
@@ -220,7 +221,16 @@ function ComponentList({
       group: groupItem[];
     } => {
       let result: BrickOptionItem[] = [];
-      const renderList = list.map((item) => transformInfo(item, storyList));
+      const renderList: BrickOptionItem[] = [];
+
+      list.forEach((item) => {
+        const brick = transformInfo(item, storyList);
+
+        // 显性指定为 false 才不显示，其余情况都显示
+        if (brick.isExport !== false) {
+          renderList.push(brick);
+        }
+      });
       if (q) {
         const keywords = (q ?? "").toLowerCase().match(/\S+/g);
         for (const brick of renderList) {

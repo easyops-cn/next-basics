@@ -35,6 +35,7 @@ export async function getStoriesJSON(info?: installInfo) {
         "useWidget",
         "layerType",
         "type",
+        "originData.isExport",
       ],
     });
   }

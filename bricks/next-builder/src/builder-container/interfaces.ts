@@ -18,6 +18,7 @@ export interface BrickOptionItem {
   nodeId?: string;
   isHostedSnippet?: boolean;
   $searchTextPool?: string[];
+  isExport?: boolean;
 }
 
 export interface GroupedBricks {
