@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { generalButtonSvg } from "../images";
 
 export const generalButtonStory: Story = {
   storyId: "basic-bricks.general-button",
@@ -14,8 +15,7 @@ export const generalButtonStory: Story = {
     zh: "可发送点击事件、可配置按钮名称、按钮跳转链接等",
   },
   icon: {
-    lib: "fa",
-    icon: "pencil-alt",
+    imgSrc: generalButtonSvg,
   },
   conf: [
     {

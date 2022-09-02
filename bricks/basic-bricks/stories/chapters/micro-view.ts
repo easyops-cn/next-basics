@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { microViewSvg } from "../images";
 
 export const microViewStory: Story = {
   storyId: "basic-bricks.micro-view",
@@ -14,8 +15,7 @@ export const microViewStory: Story = {
     zh: "提供了 titleBar、toolbar、content、subMenu、banner、bannerTitleBar、bannerToolbar 插槽(也可通过 easy-view 的 snippet 直接使用)",
   },
   icon: {
-    lib: "fa",
-    icon: "box",
+    imgSrc: microViewSvg,
   },
   conf: [
     {

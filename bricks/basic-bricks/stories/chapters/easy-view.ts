@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { easyViewSvg } from "../images";
 
 export const easyViewStory: Story = {
   storyId: "basic-bricks.easy-view",
@@ -14,8 +15,7 @@ export const easyViewStory: Story = {
     zh: "基于网格的简易布局容器，可以根据 grid-area 名称自动生成对应的插槽",
   },
   icon: {
-    lib: "fa",
-    icon: "th",
+    imgSrc: easyViewSvg,
   },
   conf: {
     brick: "basic-bricks.easy-view",
