@@ -45,14 +45,14 @@ export class EasyViewElement extends UpdatingElement {
 
   /**
    * @description 定义网格容器的样式
-   * @group ui
+   * @group basic
    */
   @property({ attribute: false })
   containerStyle: React.CSSProperties;
 
   /**
    * @description 定义网格内各区域的样式
-   * @group ui
+   * @group basic
    */
   @property({ attribute: false })
   styleByAreas: Record<string, React.CSSProperties>;
