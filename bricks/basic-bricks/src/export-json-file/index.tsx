@@ -30,6 +30,7 @@ export class ExportJsonFileElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 导出的文件名
+   * @group basic
    */
   @property()
   fileName: string;
@@ -39,6 +40,7 @@ export class ExportJsonFileElement extends UpdatingElement {
    * @required -
    * @default -
    * @description 	导出的文件数据
+   * @group basic
    */
   @property({ attribute: false })
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
