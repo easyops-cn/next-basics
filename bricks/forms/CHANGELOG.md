@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.232.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.232.0...@next-bricks/forms@1.232.1) (2022-09-02)
+
+
+### Bug Fixes
+
+* **forms:** 切换月/年份，未点击日期时，点击确定后表单项未赋值 ([1b7ec05](https://github.com/easyops-cn/next-basics/commit/1b7ec05ef4aef0b53af8895162f73e2a7e576863))
+* **forms:** 编辑模型详情中的结构体数组时,列数据可能过多,增加横向滚动 ([8725754](https://github.com/easyops-cn/next-basics/commit/87257544da69ac970765d84cf90ac7d6eecd14a1))
+
+
+
+
+
 # [1.232.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.231.2...@next-bricks/forms@1.232.0) (2022-08-29)
 
 
