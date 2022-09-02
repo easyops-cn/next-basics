@@ -22,7 +22,7 @@ const mockProps = {
     useBrick: {
       brick: "presentational-bricks.brick-conditional-display",
       transform: {
-        dataSource: "@{value}",
+        dataSource: "<% DATA.value %>",
         rules: [
           {
             condition: {
@@ -33,7 +33,7 @@ const mockProps = {
               color: "rgba(255, 255, 255, 1)",
               borderRadius: "var(--larger-border-radius)",
             },
-            label: "@{value}",
+            label: "<% DATA.value %>",
           },
           {
             condition: {
@@ -49,7 +49,7 @@ const mockProps = {
               color: "rgba(255, 255, 255, 1)",
               borderRadius: "var(--larger-border-radius)",
             },
-            label: "@{value}",
+            label: "<% DATA.value %>",
           },
           {
             condition: {
@@ -65,7 +65,7 @@ const mockProps = {
               color: "rgba(255, 255, 255, 1)",
               borderRadius: "var(--larger-border-radius)",
             },
-            label: "@{value}",
+            label: "<% DATA.value %>",
           },
         ],
       },
@@ -75,7 +75,7 @@ const mockProps = {
     useBrick: {
       brick: "div",
       transform: {
-        textContent: "@{a}",
+        textContent: "<% DATA.a %>",
       },
     },
   },
