@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickResultSvg } from "../images";
 export const BrickResultStory: Story = {
   storyId: "presentational-bricks.brick-result",
   category: "feedback-and-tooltip",
@@ -14,8 +14,7 @@ export const BrickResultStory: Story = {
     zh: "结果页面，可配置其状态，标题，次要标题和自定义图标",
   },
   icon: {
-    lib: "fa",
-    icon: "bell",
+    imgSrc: brickResultSvg,
   },
   conf: [
     {

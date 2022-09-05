@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickValueMappingSvg } from "../images";
 export const BrickValueMappingStory: Story = {
   storyId: "presentational-bricks.brick-value-mapping",
   category: "data-transform",
@@ -10,8 +10,7 @@ export const BrickValueMappingStory: Story = {
     zh: "基本数值映射",
   },
   icon: {
-    lib: "fa",
-    icon: "book",
+    imgSrc: brickValueMappingSvg,
   },
   description: {
     en: "translate basic-type data to another text, according to what your mapping is",

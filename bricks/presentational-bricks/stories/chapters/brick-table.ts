@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickTableSvg } from "../images";
 export const BrickTableStory: Story = {
   storyId: "presentational-bricks.brick-table",
   category: "table",
@@ -14,8 +14,7 @@ export const BrickTableStory: Story = {
     zh: "当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时",
   },
   icon: {
-    lib: "fa",
-    icon: "table",
+    imgSrc: brickTableSvg,
   },
   conf: [
     {

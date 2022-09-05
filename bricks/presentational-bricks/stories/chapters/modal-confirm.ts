@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { modalConfirmSvg } from "../images";
 export const ModalConfirmStory: Story = {
   storyId: "presentational-bricks.modal-confirm",
   category: "feedback-and-tooltip",
@@ -14,8 +14,7 @@ export const ModalConfirmStory: Story = {
     zh: "用于提示和二次确认的场景",
   },
   icon: {
-    lib: "fa",
-    icon: "check-circle",
+    imgSrc: modalConfirmSvg,
   },
   conf: [
     {

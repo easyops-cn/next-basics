@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.brick-utils</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图三" transform="translate(-1316.000000, -103.000000)">
+            <g id="presentational-bricks.brick-utils" transform="translate(1316.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-16" transform="translate(6.000000, 11.000000)">
+                    <rect id="矩形备份-104" fill="#F4F5F9" x="0" y="0" width="93" height="32" rx="16"></rect>
+                    <rect id="矩形备份-104" fill="#52C41A" x="10" y="8" width="16" height="16" rx="8"></rect>
+                    <rect id="矩形" fill="#D6DBEC" x="34" y="11" width="40" height="10" rx="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

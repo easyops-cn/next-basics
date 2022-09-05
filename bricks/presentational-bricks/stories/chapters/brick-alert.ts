@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickAlertSvg } from "../images";
 export const BrickAlertStory: Story = {
   storyId: "presentational-bricks.brick-alert",
   category: "feedback-and-tooltip",
@@ -14,8 +14,7 @@ export const BrickAlertStory: Story = {
     zh: "警告提示，可配置颜色类型，描述和是否显示图标",
   },
   icon: {
-    lib: "fa",
-    icon: "bell",
+    imgSrc: brickAlertSvg,
   },
   conf: [
     {

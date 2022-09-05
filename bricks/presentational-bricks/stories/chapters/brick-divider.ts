@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickDividerSvg } from "../images";
 export const BrickDividerStory: Story = {
   storyId: "presentational-bricks.brick-divider",
   category: "container-display",
@@ -14,8 +14,7 @@ export const BrickDividerStory: Story = {
     zh: "分割线",
   },
   icon: {
-    lib: "antd",
-    type: "line",
+    imgSrc: brickDividerSvg,
   },
   conf: [
     {

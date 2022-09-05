@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickTagSvg } from "../images";
 export const BrickTagStory: Story = {
   storyId: "presentational-bricks.brick-tag",
   category: "display-component",
@@ -20,8 +20,7 @@ export const BrickTagStory: Story = {
     zh: "进行标记和分类的小标签，同时支持基本标签和可选中标签",
   },
   icon: {
-    lib: "fa",
-    icon: "tags",
+    imgSrc: brickTagSvg,
   },
   conf: [
     {

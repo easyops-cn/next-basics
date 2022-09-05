@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { dropdownSelectSvg } from "../images";
 export const DropdownSelectStory: Story = {
   storyId: "presentational-bricks.dropdown-select",
   category: "navigation",
@@ -14,8 +14,7 @@ export const DropdownSelectStory: Story = {
     zh: "用于菜单项较多时收纳相关菜单项",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: dropdownSelectSvg,
   },
   conf: [
     {

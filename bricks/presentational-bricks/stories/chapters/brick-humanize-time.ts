@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickHumanizeTimeSvg } from "../images";
 export const BrickHumanizeTimeStory: Story = {
   storyId: "presentational-bricks.brick-humanize-time",
   category: "data-transform",
@@ -14,8 +14,7 @@ export const BrickHumanizeTimeStory: Story = {
     zh: "如：3天前、过去2小时等。也可显示消耗时间，如1小时2分钟，也可显示为链接",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: brickHumanizeTimeSvg,
   },
   conf: [
     {

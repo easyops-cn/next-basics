@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalLabelSvg } from "../images";
 export const GeneralLabelStory: Story = {
   storyId: "presentational-bricks.general-label",
   category: "text",
@@ -14,9 +14,7 @@ export const GeneralLabelStory: Story = {
     zh: "可用来展示基本文案、前后缀图标，可配置点击事件和 url 的通用 label 构件",
   },
   icon: {
-    lib: "antd",
-    type: "book",
-    theme: "filled",
+    imgSrc: generalLabelSvg,
   },
   conf: [
     {
