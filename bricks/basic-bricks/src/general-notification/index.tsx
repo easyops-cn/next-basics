@@ -30,6 +30,7 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 通知提醒标题，必选
+   * @group basic
    */
   @property()
   message: string;
@@ -39,6 +40,7 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 通知提醒内容，必选
+   * @group basic
    */
   @property()
   description: string;
@@ -48,6 +50,7 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @required false
    * @default -
    * @description icon，具体查阅：[react icon](https://3x.ant.design/components/icon-cn/)
+   * @group basic
    */
   @property()
   icon: string;
@@ -57,7 +60,7 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @required false
    * @default topRight
    * @description 弹出位置，可选
-   * @group advanced
+   * @group ui
    */
   @property()
   placement: NotificationPlacement;
@@ -67,7 +70,7 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @required false
    * @default 4.5
    * @description 默认 4.5 秒后自动关闭，配置为 null 则不自动关闭
-   * @group advanced
+   * @group basic
    */
   @property({ type: Number })
   duration: number;
@@ -76,7 +79,7 @@ export class GeneralNotificationElement extends UpdatingElement {
    * @required false
    * @default -
    * @description icon css 样式
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -122,7 +125,7 @@ export class GeneralNotificationElement extends UpdatingElement {
   };
   /**
    *
-   * @params `success`| `error`| `info`| `warning`| `warn` |`open`
+   * @params `success` | `error` | `info` | `warning` | `warn` | `open`
    * @description  显示通知栏，默认为`open`
    */
   @method()
