@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { gridLayoutSvg } from "../images";
 export const gridLayoutStory: Story = {
   storyId: "basic-bricks.grid-layout",
   category: "container-layout",
@@ -14,8 +14,7 @@ export const gridLayoutStory: Story = {
     zh: "提供多行多列的响应式网格布局",
   },
   icon: {
-    lib: "fa",
-    icon: "th",
+    imgSrc: gridLayoutSvg,
   },
   conf: {
     brick: "basic-bricks.grid-layout",

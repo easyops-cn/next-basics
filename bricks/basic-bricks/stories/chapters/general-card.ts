@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalCardSvg } from "../images";
 export const generalCardStory: Story = {
   storyId: "basic-bricks.general-card",
   category: "container-display",
@@ -15,8 +15,7 @@ export const generalCardStory: Story = {
     zh: "常见于为多个构件提供统一的卡片容器，比如将搜索框与表格放在一起",
   },
   icon: {
-    lib: "fa",
-    icon: "address-card",
+    imgSrc: generalCardSvg,
   },
   conf: [
     {

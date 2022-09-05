@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="57px" viewBox="0 0 105 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>basic-bricks.page-title</title>
+    <g id="lydia" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="构件概览图二" transform="translate(-1294.000000, -193.000000)">
+            <g id="basic-bricks.page-title" transform="translate(1294.000000, 193.000000)">
+                <rect id="矩形备份-67" x="0" y="2" width="105" height="55" rx="4"></rect>
+                <rect id="矩形备份-69" fill="#D6DBEC" x="18" y="27" width="69" height="4" rx="1"></rect>
+                <rect id="矩形备份-70" fill="#D6DBEC" x="18" y="45" width="64.4" height="4" rx="1"></rect>
+                <rect id="矩形备份-71" fill="#D6DBEC" x="18" y="37" width="52.1333333" height="4" rx="1"></rect>
+                <text id="Aa" font-family="PingFangSC-Semibold, PingFang SC" font-size="16" font-weight="500" line-spacing="32" fill="#262626">
+                    <tspan x="18" y="17">Aa</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,6 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
-
+import { generalCustomButtonsSvg } from "../images";
 export const generalCustomButtonsStory: Story = {
   storyId: "basic-bricks.general-custom-buttons",
   category: "interact-baisc",
@@ -15,8 +15,7 @@ export const generalCustomButtonsStory: Story = {
     zh: "可配置收纳起来的更多按钮，可配置不同事件，常用于页面右上角、卡片右上角等操作位。",
   },
   icon: {
-    lib: "fa",
-    icon: "pencil-alt",
+    imgSrc: generalCustomButtonsSvg,
   },
   conf: [
     {

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalModalSvg } from "../images";
 export const generalModalStory: Story = {
   storyId: "basic-bricks.general-modal",
   category: "container-display",
@@ -14,8 +14,7 @@ export const generalModalStory: Story = {
     zh: "提供插槽以展示其他构件，注意与表单通用模态框 (forms.general-modal) 的不同",
   },
   icon: {
-    lib: "fa",
-    icon: "draw-polygon",
+    imgSrc: generalModalSvg,
   },
   conf: [
     {
