@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.180.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.180.0...@next-bricks/next-builder@1.180.1) (2022-09-05)
+
+
+### Bug Fixes
+
+* 挂件未导出时不再构件库中展示 ([8d9b9dd](https://github.com/easyops-cn/next-basics/commit/8d9b9dd2777959f14c49f073cc5a229016de4af8))
+
+
+
+
+
 # [1.180.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.179.0...@next-bricks/next-builder@1.180.0) (2022-08-31)
 
 
