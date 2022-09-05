@@ -13,3 +13,5 @@ export { default as pageTitleSvg } from "./basic-bricks.page-title.svg";
 export { default as popoverContainerSvg } from "./basic-bricks.popover-container.svg";
 export { default as advancedListContainerSvg } from "./basic-bricks.advanced-list-container.svg";
 export { default as listContainerSvg } from "./basic-bricks.list-container.svg";
+export { default as exportJsonFileSvg } from "./basic-bricks.export-json-file.svg";
+export { default as flexLayoutSvg } from "./basic-bricks.flex-layout.svg";

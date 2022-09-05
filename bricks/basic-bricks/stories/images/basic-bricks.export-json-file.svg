@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>basic-bricks.export-json-file</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图三" transform="translate(-50.000000, -364.000000)">
+            <g id="basic-bricks.export-json-file" transform="translate(50.000000, 364.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <rect id="矩形备份-60" stroke="#F4F5F9" x="25.5" y="7.5" width="54" height="40" rx="2"></rect>
+                <g id="编组-7" transform="translate(40.115721, 14.500000)">
+                    <path d="M17.9842793,4.60000003 L15.3842794,2 L13.3842794,0 L25.3842794,0 L25.3842794,12 L23.3842794,10 L20.7842793,7.40000002 L17.9842793,4.60000003 Z M18.1842794,2.00000002 L23.3842793,2.00000002 L23.3842793,7.2 L23.3842793,2.00000002 L18.1842794,2.00000002 Z" id="形状" fill="#778DC3"></path>
+                    <polyline id="路径-2" stroke="#778DC3" stroke-width="3" points="11.1095691 1.50000002 1.49358423e-16 1.50000002 0 25.7772097 23.8842794 25.7772097 23.8842794 13.6386048"></polyline>
+                    <path d="M13.9636792,10.8994803 C13.9636792,10.8994803 16.6038792,8.43298686 21.8842794,3.5" id="路径-18" stroke="#778DC3" stroke-width="3"></path>
+                </g>
+                <g id="导出" transform="translate(40.115721, 14.500000)"></g>
+            </g>
+        </g>
+    </g>
+</svg>
