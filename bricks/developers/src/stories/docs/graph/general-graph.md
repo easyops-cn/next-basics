@@ -17,6 +17,7 @@
 
 # 内置边[DrawLineOptions.type]
 
+- curve: 转折的直线
 - direct：直线
 - horizontal：水平方向的贝塞尔曲线
 - polyline：折线
@@ -120,14 +121,14 @@ node 节点自定义构件传递的数据源为：
 
 通用配置，各个类型的线在通用配置的基础上还可能有特定的扩展配置，详见下表。
 
-| property    | type                                             | required | default              | description          |
-| ----------- | ------------------------------------------------ | -------- | -------------------- | -------------------- |
-| type        | "auto" \| "horizontal" \| "direct"\|"polyline"   | -        | "auto"               | 画线类型。           |
-| arrow       | boolean                                          | -        | -                    | 是否绘制箭头         |
-| arrowType   | "solid" \| "outlined"                            | -        | "outlined"           | 箭头类型             |
-| strokeColor | string                                           | -        | "rgb(217, 217, 217)" | 画线颜色             |
-| strokeWidth | number                                           | -        | 1                    | 画线宽度             |
-| text        | { content: string; style?: Record<string, any> } | -        | -                    | 连线上显示的文字信息 |
+| property    | type                                                     | required | default              | description          |
+| ----------- | -------------------------------------------------------- | -------- | -------------------- | -------------------- |
+| type        | "auto" \| "horizontal" \| "direct"\| "curve"\|"polyline" | -        | "auto"               | 画线类型。           |
+| arrow       | boolean                                                  | -        | -                    | 是否绘制箭头         |
+| arrowType   | "solid" \| "outlined"                                    | -        | "outlined"           | 箭头类型             |
+| strokeColor | string                                                   | -        | "rgb(217, 217, 217)" | 画线颜色             |
+| strokeWidth | number                                                   | -        | 1                    | 画线宽度             |
+| text        | { content: string; style?: Record<string, any> }         | -        | -                    | 连线上显示的文字信息 |
 
 ### DrawLineOptions - polyline
 
