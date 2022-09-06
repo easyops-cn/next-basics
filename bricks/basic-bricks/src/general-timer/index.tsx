@@ -1,7 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { property, BrickWrapper, UpdatingElement, method } from "@next-core/brick-kit";
+import {
+  property,
+  BrickWrapper,
+  UpdatingElement,
+  method,
+} from "@next-core/brick-kit";
 /**
  * @id basic-bricks.general-timer
  * @name basic-bricks.general-timer
@@ -20,6 +25,7 @@ export class GeneralTimerElement extends UpdatingElement {
    * @required false
    * @default general-timer.timing-event
    * @description 定时抛出的事件
+   * @group basic
    */
   @property()
   eventName: string;
@@ -29,6 +35,7 @@ export class GeneralTimerElement extends UpdatingElement {
    * @required false
    * @default 60000
    * @description 定时间隔（单位：ms）
+   * @group basic
    */
   @property()
   interval: number;
@@ -38,6 +45,7 @@ export class GeneralTimerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 抛出事件的数据
+   * @group basic
    */
   @property()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,9 +58,9 @@ export class GeneralTimerElement extends UpdatingElement {
   private defaultInterval = 60000;
 
   /**
- *
- * @description 停止timer
- */
+   *
+   * @description 停止timer
+   */
   @method() stopTimer(): void {
     if (this._intervalId) {
       clearInterval(this._intervalId);
@@ -60,9 +68,9 @@ export class GeneralTimerElement extends UpdatingElement {
   }
 
   /**
-*
-* @description 重启timer
-*/
+   *
+   * @description 重启timer
+   */
   @method() reStartTimer(): void {
     this.stopTimer();
     this.startTimeout();
