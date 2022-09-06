@@ -41,6 +41,7 @@ import type {
   WorkbenchBackendActionForUpdateFormItem,
   insertByFieldArgs,
   insertWithFieldArgs,
+  WorkbenchSortData,
 } from "@next-types/preview";
 import type { HttpResponseError } from "@next-core/brick-http";
 import { type pipes } from "@next-core/pipes";
@@ -237,11 +238,23 @@ export default class WorkbenchBackend {
             parent: this.mockInstanceIdCache.get(data.parent) || data.parent,
             sort: data.sort || data.nodeData?.sort,
           },
-          ["nodeData", "dragOverInstanceId", "dragStatus", "parentInstanceId"]
+          [
+            "nodeData",
+            "dragOverInstanceId",
+            "dragStatus",
+            "parentInstanceId",
+            "sortData",
+          ]
         )
       );
       this.mockInstanceIdCache.set(data.nodeData.instanceId, res.instanceId);
       this.mockNodeIdCache.set(data.nodeData.id, res.id);
+      if (data.sortData) {
+        await this.sortInstance({
+          objectId: "STORYBOARD_BRICK",
+          ...data.sortData,
+        });
+      }
       this.publish("message", {
         action: "insert",
         data,
@@ -303,13 +316,7 @@ export default class WorkbenchBackend {
       const instanceId =
         this.mockInstanceIdCache.get(data.nodeInstanceId) ||
         data.nodeInstanceId;
-      const nodeIds = data.nodeIds.map((id) => {
-        const cache = this.mockNodeIdCache.get(id);
-        if (cache) {
-          return cache;
-        }
-        return id;
-      });
+
       if (data.nodeData) {
         const isSuccess = await this.updateInstance({
           objectId: data.objectId,
@@ -319,18 +326,38 @@ export default class WorkbenchBackend {
         });
         if (!isSuccess) return false;
       }
-      await StoryboardApi_sortStoryboardNodes({
-        nodeIds,
-      });
-      await Promise.all(
-        data.nodeInstanceIds.map((iid) => {
-          const instanceId = this.mockInstanceIdCache.get(iid) || iid;
-          this.updateMTime(data.objectId, instanceId);
-        })
-      );
-      return true;
+      return await this.sortInstance(data);
     } catch (e) {
       this.handleError(e, "移动实例失败");
+      return false;
+    }
+  }
+
+  private async sortInstance(
+    data: WorkbenchSortData & { objectId: string }
+  ): Promise<boolean> {
+    try {
+      if (data.nodeIds.length > 1) {
+        const nodeIds = data.nodeIds.map((id) => {
+          const cache = this.mockNodeIdCache.get(id);
+          if (cache) {
+            return cache;
+          }
+          return id;
+        });
+        await StoryboardApi_sortStoryboardNodes({
+          nodeIds,
+        });
+        await Promise.all(
+          data.nodeInstanceIds?.map((iid) => {
+            const instanceId = this.mockInstanceIdCache.get(iid) || iid;
+            this.updateMTime(data.objectId, instanceId);
+          })
+        );
+      }
+      return true;
+    } catch (e) {
+      this.handleError(e, "实例排序失败");
       return false;
     }
   }
@@ -411,7 +438,7 @@ export default class WorkbenchBackend {
     }
   }
 
-  async buildAndPush(isNeedRefresh: boolean): Promise<void> {
+  async buildAndPush(isNeedRefresh?: boolean): Promise<void> {
     this.cleanTimer();
     if (this.isBuilding) return;
     this.isBuilding = true;

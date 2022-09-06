@@ -26,13 +26,16 @@ import {
 } from "../shared/workbench/WorkbenchTreeContext";
 import { WorkbenchTree } from "../shared/workbench/WorkbenchTree";
 import { deepMatch } from "../builder-container/utils";
+import { WorkbenchBackendActionForInsertDetail } from "@next-types/preview";
 
 export interface WorkbenchBrickTreeProps {
   placeholder?: string;
   searchPlaceholder?: string;
   activeInstanceId?: string;
   collapsedNodes?: string[];
+  isDrag?: boolean;
   onNodeToggle?(nodeId: string, collapsed: boolean): void;
+  onAddBrickDrop?(params: WorkbenchBackendActionForInsertDetail): void;
 }
 
 type WorkbenchBrickTreeNode =
@@ -55,7 +58,9 @@ export function WorkbenchBrickTree({
   searchPlaceholder,
   activeInstanceId,
   collapsedNodes,
+  isDrag,
   onNodeToggle,
+  onAddBrickDrop,
 }: WorkbenchBrickTreeProps): React.ReactElement {
   const { nodes, edges } = useBuilderData();
   const rootNode = useBuilderNode({ isRoot: true });
@@ -286,23 +291,51 @@ export function WorkbenchBrickTree({
     []
   );
 
-  const handleOnDrop = (
-    e: React.DragEvent<HTMLElement>,
-    { curElement, overElement, parentElement, overStatus }: dropOptions
-  ): void => {
-    e.preventDefault();
-    const getUid = (dom: HTMLElement): number => {
-      return Number(dom.dataset.uid);
-    };
-    if (parentElement) {
-      manager.workbenchTreeNodeMove({
-        dragNodeUid: getUid(curElement),
-        dragOverNodeUid: getUid(overElement),
-        dragParentNodeUid: getUid(parentElement),
-        dragStatus: overStatus,
-      });
-    }
-  };
+  const handleOnDrop = useCallback(
+    (
+      e: React.DragEvent<HTMLElement>,
+      { curElement, overElement, parentElement, overStatus }: dropOptions
+    ): void => {
+      e.preventDefault();
+      const getUid = (dom: HTMLElement): number => {
+        const uid = dom.dataset.uid.split(":").shift();
+        return Number(uid);
+      };
+      const overUid = getUid(overElement);
+      const parentUid = getUid(parentElement);
+      const nodeData =
+        e.dataTransfer.getData("nodeData") &&
+        JSON.parse(e.dataTransfer.getData("nodeData"));
+      if (nodeData) {
+        const { nodes, edges } = manager.getData();
+        const overNode = nodes.find((item) => item.$$uid === overUid);
+        const parentNode = nodes.find((item) => item.$$uid === parentUid);
+        const mountPoint =
+          overStatus === "inside"
+            ? overNode.$$uid === rootNode.$$uid
+              ? "bricks"
+              : "content"
+            : edges.find((item) => item.child === overUid).mountPoint;
+        onAddBrickDrop({
+          nodeData: nodeData,
+          dragOverInstanceId: overNode.instanceId,
+          parent: parentNode.instanceId,
+          dragStatus: overStatus,
+          brick: nodeData.brick,
+          mountPoint,
+          type: "brick",
+        });
+      } else if (parentElement) {
+        manager.workbenchTreeNodeMove({
+          dragNodeUid: getUid(curElement),
+          dragOverNodeUid: overUid,
+          dragParentNodeUid: parentUid,
+          dragStatus: overStatus,
+        });
+      }
+    },
+    [manager, onAddBrickDrop, rootNode]
+  );
 
   const activeKey = useMemo(() => {
     return activeInstanceId
@@ -360,6 +393,7 @@ export function WorkbenchBrickTree({
         placeholder={placeholder}
         searchPlaceholder={searchPlaceholder}
         allowDragToInside={true}
+        isDrag={isDrag}
       />
     </WorkbenchTreeContext.Provider>
   );

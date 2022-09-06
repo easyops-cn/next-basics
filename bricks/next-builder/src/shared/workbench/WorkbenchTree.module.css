@@ -117,3 +117,10 @@
 .collapsed + .tree {
   display: none;
 }
+
+.hightlight {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-offset: -1px;
+  outline-color: #fcd93f;
+}

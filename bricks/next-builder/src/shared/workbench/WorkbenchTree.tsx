@@ -27,6 +27,7 @@ import { looseCheckIfOfComputed } from "@next-core/brick-kit";
 import styles from "./WorkbenchTree.module.css";
 import { WorkbenchTreeDndContext } from "./WorkbenchTreeDndContext";
 import { setDragImage } from "../../workbench-component-select/WorkbenchComponentSelect";
+import classnames from "classnames";
 
 const treeLevelPadding = 10;
 const borderStyle = "0 0 0 1px #ba6d30";
@@ -43,6 +44,7 @@ export interface WorkbenchTreeProps {
   placeholder?: string;
   searchPlaceholder?: string;
   noSearch?: boolean;
+  isDrag?: boolean;
   allowDrag?: boolean;
   allowDragToRoot?: boolean;
   allowDragToInside?: boolean;
@@ -60,13 +62,14 @@ export function WorkbenchTree({
   nodes,
   placeholder,
   searchPlaceholder,
+  isDrag,
   noSearch,
   allowDragToRoot,
   allowDragToInside,
   dropEmit,
 }: WorkbenchTreeProps): ReactElement {
   const [q, setQ] = useState<string>(null);
-  const [isDragging, setIsDragging] = useState<boolean>();
+  const [isDragging, setIsDragging] = useState<boolean>(isDrag);
   const [curNode, setCurNode] = useState<WorkbenchNodeData>();
   const [curElement, setCurElement] = useState<HTMLElement>();
   const [overNode, setOverNode] = useState<WorkbenchNodeData>();
@@ -238,6 +241,10 @@ export function WorkbenchTree({
   };
 
   useEffect(() => {
+    setIsDragging(isDrag);
+  }, [isDrag]);
+
+  useEffect(() => {
     window.addEventListener("dragend", handleOnDragEnd);
     return () => {
       window.removeEventListener("dragend", handleOnDragEnd);
@@ -279,7 +286,13 @@ export function WorkbenchTree({
                 onDragStart: handleOnDragStart,
               }}
             >
-              <div onDragOver={handleOnDragOver} onDrop={handleOnDrop}>
+              <div
+                className={classnames({
+                  [styles.hightlight]: isDrag,
+                })}
+                onDragOver={handleOnDragOver}
+                onDrop={handleOnDrop}
+              >
                 <TreeList nodes={filteredNodes} level={1} />
               </div>
             </WorkbenchTreeDndContext.Provider>

@@ -14,6 +14,7 @@ import type {
   WorkbenchTreeAction,
 } from "../shared/workbench/interfaces";
 import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
+import { WorkbenchBackendActionForInsertDetail } from "@next-types/preview";
 
 /**
  * @id next-builder.workbench-brick-tree
@@ -45,6 +46,18 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
   private _handleActionClick = (detail: ActionClickDetail): void => {
     this._actionClickEvent.emit(detail);
   };
+
+  @event({ type: "add.brick" })
+  private _addBrickEvent: EventEmitter<WorkbenchBackendActionForInsertDetail>;
+
+  private _handleAddBrickDrop = (
+    detail: WorkbenchBackendActionForInsertDetail
+  ): void => {
+    this._addBrickEvent.emit(detail);
+  };
+
+  @property({ type: Boolean })
+  isDrag: boolean;
 
   @event({ type: "node.toggle" })
   private _nodeToggleEvent: EventEmitter<{
@@ -85,8 +98,10 @@ export class WorkbenchStoryboardTreeElement extends UpdatingElement {
                 placeholder={this.placeholder}
                 searchPlaceholder={this.searchPlaceholder}
                 activeInstanceId={this.activeInstanceId}
-                onNodeToggle={this._handleNodeToggle}
                 collapsedNodes={this.collapsedNodes}
+                isDrag={this.isDrag}
+                onNodeToggle={this._handleNodeToggle}
+                onAddBrickDrop={this._handleAddBrickDrop}
               />
             </WorkbenchActionsContext.Provider>
           </BuilderProvider>
