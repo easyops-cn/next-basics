@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { crontabDisplaySvg } from "../images";
 export const CrontabDisplayStory: Story = {
   storyId: "presentational-bricks.crontab-display",
   category: "data-transform",
@@ -10,8 +10,7 @@ export const CrontabDisplayStory: Story = {
     zh: "【工具流程】定时任务时间展示",
   },
   icon: {
-    lib: "fa",
-    icon: "hourglass",
+    imgSrc: crontabDisplaySvg,
   },
   description: {
     en: "Crontab humanized Display",

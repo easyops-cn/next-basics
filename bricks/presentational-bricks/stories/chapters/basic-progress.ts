@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { basicProgressSvg } from "../images";
 export const BasicProgressStory: Story = {
   storyId: "presentational-bricks.basic-progress",
   category: "display-component",
@@ -14,8 +14,7 @@ export const BasicProgressStory: Story = {
     zh: "进度条展示",
   },
   icon: {
-    lib: "fa",
-    icon: "file-code",
+    imgSrc: basicProgressSvg,
   },
   conf: [
     {

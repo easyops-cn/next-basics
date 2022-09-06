@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalBadgeSvg } from "../images";
 export const GeneralBadgeStory: Story = {
   storyId: "presentational-bricks.general-badge",
   category: "display-component",
@@ -14,9 +14,7 @@ export const GeneralBadgeStory: Story = {
     zh: "徽标数展示，内容支持文字或构件",
   },
   icon: {
-    lib: "fa",
-    icon: "comment",
-    prefix: "fas",
+    imgSrc: generalBadgeSvg,
   },
   conf: [
     {

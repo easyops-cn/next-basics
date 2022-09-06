@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { dynamicGridContainerSvg } from "../images";
 export const DynamicGridContainerStory: Story = {
   storyId: "presentational-bricks.dynamic-grid-container",
   category: "container-layout",
@@ -13,8 +14,7 @@ export const DynamicGridContainerStory: Story = {
     zh: "提供动态网格布局，可自定义样式",
   },
   icon: {
-    lib: "fa",
-    icon: "th",
+    imgSrc: dynamicGridContainerSvg,
   },
   conf: [
     {

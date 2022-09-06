@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { copyableTextSvg } from "../images";
 export const CopyableTextStory: Story = {
   storyId: "presentational-bricks.copyable-text",
   category: "text",
@@ -14,8 +14,7 @@ export const CopyableTextStory: Story = {
     zh: "可复制文本",
   },
   icon: {
-    lib: "fa",
-    icon: "copy",
+    imgSrc: copyableTextSvg,
   },
   conf: [
     {

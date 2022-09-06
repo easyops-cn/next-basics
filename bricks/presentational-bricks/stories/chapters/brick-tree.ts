@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickTreeSvg } from "../images";
 export const BrickTreeStory: Story = {
   storyId: "presentational-bricks.brick-tree",
   type: "brick",
@@ -10,8 +10,7 @@ export const BrickTreeStory: Story = {
     zh: "树形构件",
   },
   icon: {
-    lib: "fa",
-    icon: "tree",
+    imgSrc: brickTreeSvg,
   },
   description: {
     en: "tree list",

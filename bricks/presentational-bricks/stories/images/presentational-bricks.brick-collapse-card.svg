@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.brick-collapse-card</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图四" transform="translate(-1316.000000, -103.000000)">
+            <g id="presentational-bricks.brick-collapse-card" transform="translate(1316.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <polyline id="路径-2" stroke="#778DC3" stroke-linecap="round" stroke-linejoin="round" transform="translate(45.500000, 15.500000) rotate(-90.000000) translate(-45.500000, -15.500000) " points="44 13 47 15.5 44 18"></polyline>
+                <g id="编组-7" transform="translate(10.000000, 11.000000)" fill="#778DC3">
+                    <rect id="矩形" x="0" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份" x="2" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-2" x="4" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-3" x="6" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-6" x="8" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-7" x="10" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-8" x="12" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-9" x="14" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-10" x="16" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-11" x="18" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-12" x="20" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-13" x="22" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-14" x="24" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-15" x="26" y="0" width="1" height="9"></rect>
+                    <rect id="矩形备份-16" x="28" y="0" width="1" height="9"></rect>
+                </g>
+                <g id="编组-16" transform="translate(10.000000, 25.000000)">
+                    <rect id="矩形备份-78" fill="#F4F5F9" x="0" y="0" width="85" height="21" rx="1"></rect>
+                    <rect id="矩形" fill="#D6DBEC" x="4" y="4" width="77" height="4"></rect>
+                    <rect id="矩形备份-20" fill="#D6DBEC" x="4" y="12" width="35" height="4"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

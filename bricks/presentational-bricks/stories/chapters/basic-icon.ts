@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { basicIconSvg } from "../images";
 export const BasicIconStory: Story = {
   storyId: "presentational-bricks.basic-icon",
   category: "display-component",
@@ -14,8 +14,7 @@ export const BasicIconStory: Story = {
     zh: "图标展示",
   },
   icon: {
-    lib: "antd",
-    icon: "smile",
+    imgSrc: basicIconSvg,
   },
   conf: [
     {

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickCollapseCardSvg } from "../images";
 export const BrickCollapseCardStory: Story = {
   storyId: "presentational-bricks.brick-collapse-card",
   category: "text",
@@ -14,8 +14,7 @@ export const BrickCollapseCardStory: Story = {
     zh: "详情折叠，有需要再展开，避免一开始太喧宾夺主，如工具详情",
   },
   icon: {
-    lib: "fa",
-    icon: "chevron-down",
+    imgSrc: brickCollapseCardSvg,
   },
   conf: [
     {

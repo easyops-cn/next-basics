@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { rankTableSvg } from "../images";
 export const RankTableStory: Story = {
   storyId: "presentational-bricks.rank-table",
   category: "table",
@@ -14,8 +14,7 @@ export const RankTableStory: Story = {
     zh: "排名表格",
   },
   icon: {
-    lib: "fa",
-    icon: "table",
+    imgSrc: rankTableSvg,
   },
   conf: [
     {

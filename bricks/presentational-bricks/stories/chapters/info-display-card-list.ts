@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { infoDisplayCardListSvg } from "../images";
 export const infoList = [
   {
     title: "合规性检查",
@@ -226,8 +227,7 @@ export const InfoDisplayCardList: Story = {
     zh: "信息展示卡片列表",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: infoDisplayCardListSvg,
   },
   conf: [
     {

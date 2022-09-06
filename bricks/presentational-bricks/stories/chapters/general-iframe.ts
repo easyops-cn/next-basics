@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalIframeSvg } from "../images";
 export const GeneralIframeStory: Story = {
   storyId: "presentational-bricks.general-iframe",
   category: "other",
@@ -14,8 +14,7 @@ export const GeneralIframeStory: Story = {
     zh: "可嵌入外部网站通用构件",
   },
   icon: {
-    lib: "fa",
-    icon: "external-link-square-alt",
+    imgSrc: generalIframeSvg,
   },
   conf: [
     {
