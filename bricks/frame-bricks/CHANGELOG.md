@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.3.3...@next-bricks/frame-bricks@1.3.4) (2022-09-06)
+
+
+### Bug Fixes
+
+* hide divider ([1da80b2](https://github.com/easyops-cn/next-basics/commit/1da80b219c2fc9b649f5977bb5a92fc1fa5323a8))
+
+
+
+
+
 ## [1.3.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.3.2...@next-bricks/frame-bricks@1.3.3) (2022-09-05)
 
 
