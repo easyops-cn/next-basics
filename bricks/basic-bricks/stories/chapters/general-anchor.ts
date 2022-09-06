@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalAnchorSvg } from "../images";
 export const generalAnchorStory: Story = {
   storyId: "basic-bricks.general-anchor",
   category: "interact-baisc",
@@ -14,9 +14,7 @@ export const generalAnchorStory: Story = {
     zh: "用于跳转到页面指定位置",
   },
   icon: {
-    lib: "fa",
-    icon: "link",
-    prefix: "fas",
+    imgSrc: generalAnchorSvg,
   },
   conf: [
     {

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalNotificationSvg } from "../images";
 export const generalNotificationStory: Story = {
   storyId: "basic-bricks.general-notification",
   category: "feedback-and-tooltip",
@@ -14,9 +14,7 @@ export const generalNotificationStory: Story = {
     zh: "普通的 notification",
   },
   icon: {
-    lib: "fa",
-    icon: "discord",
-    prefix: "fab",
+    imgSrc: generalNotificationSvg,
   },
   conf: [
     {

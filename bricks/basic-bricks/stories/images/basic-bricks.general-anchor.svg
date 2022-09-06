@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>basic-bricks.general-anchor</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图四" transform="translate(-280.000000, -103.000000)">
+            <g id="basic-bricks.general-anchor" transform="translate(280.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-9" transform="translate(27.000000, 8.000000)">
+                    <g id="编组-12备份" transform="translate(7.000000, 5.000000)">
+                        <rect id="矩形备份-60" fill="#1A7AFF" x="2.27373675e-13" y="0" width="45" height="8" rx="1"></rect>
+                        <g id="编组-7" transform="translate(0.000000, 12.000000)" fill="#D6DBEC">
+                            <rect id="矩形" x="0" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份" x="2" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-2" x="4" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-3" x="6" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-6" x="8" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-7" x="10" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-8" x="12" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-9" x="14" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-10" x="16" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-11" x="18" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-12" x="20" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-13" x="22" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-14" x="24" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-18" x="30" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-15" x="26" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-28" x="32" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-16" x="28" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-29" x="34" y="0" width="1" height="8"></rect>
+                        </g>
+                        <g id="编组-7备份" transform="translate(0.000000, 24.000000)" fill="#D6DBEC">
+                            <rect id="矩形" x="0" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份" x="2" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-2" x="4" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-3" x="6" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-6" x="8" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-7" x="10" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-8" x="12" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-9" x="14" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-10" x="16" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-11" x="18" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-12" x="20" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-13" x="22" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-14" x="24" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-15" x="26" y="0" width="1" height="8"></rect>
+                            <rect id="矩形备份-16" x="28" y="0" width="1" height="8"></rect>
+                        </g>
+                    </g>
+                    <line x1="2" y1="2.56384439e-17" x2="2" y2="39" id="路径-19" stroke="#D6DBEC"></line>
+                    <circle id="椭圆形" stroke="#1A7AFF" fill="#FFFFFF" cx="2" cy="8" r="2"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

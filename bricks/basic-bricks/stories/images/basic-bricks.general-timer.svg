@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>basic-bricks.general-timer</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图四" transform="translate(-670.000000, -103.000000)">
+            <g id="basic-bricks.general-timer" transform="translate(670.000000, 103.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-18" transform="translate(36.000000, 10.500000)" stroke="#778DC3" stroke-width="3">
+                    <circle id="椭圆形" cx="16" cy="19.5" r="14.5"></circle>
+                    <line x1="16" y1="5.26040848" x2="16" y2="0.5" id="路径-20"></line>
+                    <line x1="11.3904163" y1="0.5" x2="20.8169678" y2="0.5" id="路径-21"></line>
+                    <path d="M22.2596891,23.1847945 L16,20.3821681 L11.8342498,11.8368903" id="路径-26"></path>
+                    <line x1="16" y1="28.5" x2="16" y2="31.5" id="路径-27"></line>
+                    <line x1="6" y1="18" x2="6" y2="21" id="路径-27备份-2"></line>
+                    <line x1="27" y1="18" x2="27" y2="21" id="路径-27备份-3"></line>
+                    <line x1="16" y1="7.5" x2="16" y2="10.5" id="路径-27备份"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

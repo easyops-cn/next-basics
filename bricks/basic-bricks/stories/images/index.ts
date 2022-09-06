@@ -15,3 +15,9 @@ export { default as advancedListContainerSvg } from "./basic-bricks.advanced-lis
 export { default as listContainerSvg } from "./basic-bricks.list-container.svg";
 export { default as exportJsonFileSvg } from "./basic-bricks.export-json-file.svg";
 export { default as flexLayoutSvg } from "./basic-bricks.flex-layout.svg";
+export { default as generalAnchorSvg } from "./basic-bricks.general-anchor.svg";
+export { default as generalHotkeysSvg } from "./basic-bricks.general-hotkeys.svg";
+export { default as generalNotificationSvg } from "./basic-bricks.general-notification.svg";
+export { default as generalTimerSvg } from "./basic-bricks.general-timer.svg";
+export { default as generalTitleSvg } from "./basic-bricks.general-title.svg";
+export { default as subMenuFilterSvg } from "./basic-bricks.sub-menu-filter.svg";
