@@ -37,6 +37,7 @@ export function AdvanceListContainer(
   };
   useEffect(() => {
     if (props.data.list) {
+      setActiveIndex(props.defaultActiveIndex || 0);
       const item = props.data.list[props.defaultActiveIndex];
       item &&
         !props.notTriggerClickEventWhenInit &&
