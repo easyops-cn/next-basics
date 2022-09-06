@@ -163,8 +163,7 @@ const forceDataWithoutRoot = {
     {
       type: "node",
       __comment__: "Make a random node from 'G' to 'Z'",
-      id:
-        "<% `Random ${String.fromCharCode(Math.floor(Math.random() * Math.floor(20)) + 71)}` %>",
+      id: "<% `Random ${String.fromCharCode(Math.floor(Math.random() * Math.floor(20)) + 71)}` %>",
     },
   ],
   edges: [
@@ -500,7 +499,139 @@ const dataForHighlight = {
     },
   ],
 };
-
+const curveData = {
+  nodes: [
+    {
+      id: "5b681a5a04d26",
+      label: "GET:/api/v1/permission/validate",
+      type: "node",
+      serviceName: "logic.permission",
+      serviceId: "5aaec6de45fd6",
+    },
+    {
+      id: "5de5307a657a7",
+      label: "post:/object/:object_id/instance/_search",
+      alertCount: 0,
+      type: "node",
+      serviceName: "logic.cmdb.service",
+      serviceId: "5addacb5b7d49",
+    },
+    {
+      id: "5de5307aa7510",
+      label: "get:/object/:object_id/instance/:instance_id",
+      alertCount: 0,
+      type: "node",
+      serviceName: "logic.cmdb.service",
+      serviceId: "5addacb5b7d49",
+    },
+    {
+      id: "5de5307bd4995",
+      label: "get:/object/:objectid/instance/:instanceid/authorizers",
+      alertCount: 0,
+      type: "node",
+      serviceName: "logic.permission_service",
+      serviceId: "5b219b5414935",
+    },
+    {
+      id: "5de5307db1a74",
+      label: "put:/object/:object_id/instance/:instance_id",
+      alertCount: 0,
+      type: "node",
+      serviceName: "logic.cmdb.service",
+      serviceId: "5addacb5b7d49",
+    },
+    {
+      id: "5de53085ca664",
+      label: "put:/api/v1/next-builder/project/:projectid",
+      alertCount: 0,
+      type: "node",
+      serviceName: "logic.next_builder_service",
+      serviceId: "5aaed2c12efb2",
+    },
+  ],
+  edges: [
+    {
+      type: "link",
+      level: 0,
+      source: "5b681a5a04d26",
+      target: "5de5307a657a7",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5b681a5a04d26",
+      target: "5de5307aa7510",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de5307bd4995",
+      target: "5de5307a657a7",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de5307bd4995",
+      target: "5de5307aa7510",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de5307db1a74",
+      target: "5de5307a657a7",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de5307db1a74",
+      target: "5de5307bd4995",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de53085ca664",
+      target: "5b681a5a04d26",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de53085ca664",
+      target: "5de5307a657a7",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de53085ca664",
+      target: "5de5307bd4995",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+    {
+      type: "link",
+      level: 0,
+      source: "5de53085ca664",
+      target: "5de5307db1a74",
+      edges_id: "_API_calling_called_called_calling__API",
+      label: "被调API",
+    },
+  ],
+};
 export const story: Story = {
   storyId: "graph.general-graph",
   type: "brick",
@@ -515,10 +646,8 @@ export const story: Story = {
     prefix: "fab",
   },
   description: {
-    en:
-      "Support the definition of different layouts based on edgeType and the definition of different node bricks based on nodeType",
-    zh:
-      "支持根据边类型配置不同布局(force/tree/grid/link/dagre/manual)和节点构件的混合拓扑视图构件",
+    en: "Support the definition of different layouts based on edgeType and the definition of different node bricks based on nodeType",
+    zh: "支持根据边类型配置不同布局(force/tree/grid/link/dagre/manual)和节点构件的混合拓扑视图构件",
   },
   conf: [
     {
@@ -553,8 +682,7 @@ export const story: Story = {
                       strokeColor:
                         "<% DATA.edge.target === 'B' ? 'red': 'green' %>",
                       strokeWidth: "<% DATA.edge.target === 'B' ? 3 : 1 %>",
-                      text:
-                        "<% DATA.edge.target === 'B' ? { content: `50%\n200 ms`, style: { color: 'orange' } } : undefined %>",
+                      text: "<% DATA.edge.target === 'B' ? { content: `50%\n200 ms`, style: { color: 'orange' } } : undefined %>",
                     },
                   },
                 ],
@@ -880,6 +1008,59 @@ export const story: Story = {
                 },
                 transform: {
                   text: "<% DATA.node.label %>",
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
+    {
+      description: {
+        title: "使用 `nodeType` 过滤的 Dagre 布局，布局方向从左到右",
+        message: "curve转折的直线",
+      },
+      brick: "graph.general-graph",
+      properties: {
+        graphData: curveData,
+        graphView: {
+          groups: [
+            {
+              nodeType: "node",
+              layout: "dagre",
+              layoutOptions: {
+                ranksep: 60,
+                rankdir: "LR",
+                lines: [
+                  {
+                    edgeType: "link",
+                    drawOptions: {
+                      type: "curve",
+                      arrow: true,
+                      arrowType: "solid",
+                      strokeColor: "red",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          nodeBricks: [
+            {
+              nodeType: "node",
+              useBrick: {
+                brick: "monitor-alert.interface-graph-node",
+                transform: {
+                  interfaceName: "<% DATA.node.label %>",
+                  description: "所属服务",
+                  cardTitle: "<% DATA.node.label %>",
+                  serviceName: "<% DATA.node.serviceName %>",
+                  itemList: [
+                    {
+                      label: "吞吐量(TPM)",
+                      value: 99,
+                    },
+                  ],
                 },
               },
             },
@@ -1345,12 +1526,10 @@ export const story: Story = {
                   defaultBgColor: "#D6E8FB",
                 },
                 transform: {
-                  text:
-                    '<% DATA.node.label.length > 20 ? (DATA.node.label.substr(0, 17) + "...") : DATA.node.label %>',
+                  text: '<% DATA.node.label.length > 20 ? (DATA.node.label.substr(0, 17) + "...") : DATA.node.label %>',
                   icon: {
                     lib: "antd",
-                    icon:
-                      '<% DATA.node.type === "instance-group" ? "gateway" : "environment" %>',
+                    icon: '<% DATA.node.type === "instance-group" ? "gateway" : "environment" %>',
                   },
                   tagText: "<% DATA.node.alert_count > 0 ? 1 : 0 %>",
                   tagColor: '<% DATA.node.alert_count > 0 ? "red" : "green" %>',
@@ -1398,8 +1577,7 @@ export const story: Story = {
             {
               type: "node",
               __comment__: "Make a random node from 'G' to 'Z'",
-              id:
-                "<% `Random ${String.fromCharCode(Math.floor(Math.random() * Math.floor(20)) + 71)}` %>",
+              id: "<% `Random ${String.fromCharCode(Math.floor(Math.random() * Math.floor(20)) + 71)}` %>",
             },
           ],
           edges: [
