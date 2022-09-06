@@ -30,142 +30,155 @@ export const subMenuFilterStory: Story = {
       },
       properties: {
         defaultOpenKeys: ["diy"],
-        selectable: true,
-        multiple: false,
         defaultSelectedKeys: ["C++"],
         menuItems: [
           {
-            type: "item",
-            title: "全部",
-            key: "All",
             count: 100,
             icon: {
-              lib: "fa",
               icon: "cube",
+              lib: "fa",
             },
+            key: "All",
+            title: "全部",
+            type: "item",
           },
           {
-            type: "group",
-            title: "内置模板",
-            key: "built-in-template",
             items: [
               {
-                title: "Java",
-                key: "Java",
                 count: 60,
                 icon: {
-                  lib: "fa",
                   icon: "cube",
+                  lib: "fa",
                 },
+                key: "Java",
+                title: "Java",
               },
               {
-                title: "Go",
+                count: 10,
+                icon: {
+                  icon: "cube",
+                  lib: "fa",
+                },
                 key: "Go",
-                count: 10,
-                icon: {
-                  lib: "fa",
-                  icon: "cube",
-                },
+                title: "Go",
               },
               {
-                title: "Cc",
+                count: 10,
+                icon: {
+                  icon: "cube",
+                  lib: "fa",
+                },
                 key: "cc",
-                count: 10,
-                icon: {
-                  lib: "fa",
-                  icon: "cube",
-                },
+                title: "Cc",
               },
               {
-                title: "Python",
-                key: "Python",
                 count: 10,
                 icon: {
-                  lib: "fa",
                   icon: "cube",
+                  lib: "fa",
                 },
+                key: "Python",
+                title: "Python",
               },
             ],
+            key: "built-in-template",
+            title: "内置模板",
+            type: "group",
           },
           {
-            type: "group",
-            title: "自定义模板",
-            key: "customTemplate",
             items: [
               {
-                type: "subMenu",
-                title: "标准模板",
-                key: "standard",
                 icon: {
-                  lib: "easyops",
                   category: "model",
                   icon: "app",
+                  lib: "easyops",
                 },
                 items: [
                   {
-                    title: "C++",
-                    key: "C++",
                     count: 5,
+                    key: "C++",
+                    title: "C++",
                   },
                   {
-                    title: "C",
-                    key: "C",
                     count: 5,
+                    key: "C",
+                    title: "C",
                   },
                 ],
+                key: "standard",
+                title: "标准模板",
+                type: "subMenu",
               },
               {
-                type: "subMenu",
-                title: "个性化模板c",
-                key: "diy",
                 icon: {
-                  lib: "fa",
                   icon: "cube",
+                  lib: "fa",
                 },
                 items: [
                   {
-                    title: "易语言",
-                    key: "iyuyan",
                     count: 10,
                     icon: {
-                      lib: "fa",
                       icon: "cube",
+                      lib: "fa",
                     },
+                    key: "iyuyan",
+                    title: "易语言",
                   },
                 ],
+                key: "diy",
+                title: "个性化模板c",
+                type: "subMenu",
               },
             ],
+            key: "customTemplate",
+            title: "自定义模板",
+            type: "group",
           },
         ],
+        multiple: false,
+        selectable: true,
         suffixBrick: {
           useBrick: {
             brick: "presentational-bricks.brick-conditional-display",
-            transform: {
-              dataSource: "@{count}",
+            properties: {
+              dataSource: "<% DATA.count %>",
               rules: [
                 {
-                  condition: { $lte: 60 },
+                  condition: {
+                    $lte: 60,
+                  },
                   style: {
                     backgroundColor: "var(--theme-red-color)",
                     color: "rgba(255, 255, 255, 1)",
                   },
-                  label: "@{value}",
                 },
                 {
-                  condition: { $and: [{ $lte: 85, $gt: 60 }] },
+                  condition: {
+                    $and: [
+                      {
+                        $gt: 60,
+                        $lte: 85,
+                      },
+                    ],
+                  },
                   style: {
                     backgroundColor: "var(--theme-orange-color)",
                     color: "rgba(255, 255, 255, 1)",
                   },
-                  label: "@{value}",
                 },
                 {
-                  condition: { $and: [{ $lte: 100, $gt: 85 }] },
+                  condition: {
+                    $and: [
+                      {
+                        $gt: 85,
+                        $lte: 100,
+                      },
+                    ],
+                  },
                   style: {
                     backgroundColor: "var(--theme-green-color)",
                     color: "rgba(255, 255, 255, 1)",
                   },
-                  label: "@{value}",
                 },
               ],
             },
