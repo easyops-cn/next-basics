@@ -29,6 +29,10 @@ import { adjustBrickSort, getSnippetsOfBrickMap } from "./processor";
 import styles from "./WorkbenchComponentSelect.module.css";
 import classNames from "classnames";
 import { NS_NEXT_BUILDER, K } from "../i18n/constants";
+import {
+  WorkbenchTreeDndContext,
+  useWorkbenchTreeDndContext,
+} from "../shared/workbench/WorkbenchTreeDndContext";
 
 interface ComponentSelectProps {
   brickList: BrickOptionItem[];
@@ -39,6 +43,7 @@ interface ComponentSelectProps {
     data: BrickOptionItem,
     e: React.MouseEvent
   ) => void;
+  onDrag?: (isDrag: boolean) => void;
 }
 
 export function setDragImage(
@@ -88,6 +93,7 @@ export function WorkbenchComponentSelect({
   storyList,
   isShowSuggest = true,
   onActionClick,
+  onDrag,
 }: ComponentSelectProps): React.ReactElement {
   const [filterValue, setFilterValue] = useState<Record<string, string>>({});
   const [componentList, setComponetList] =
@@ -148,36 +154,53 @@ export function WorkbenchComponentSelect({
     [componentList]
   );
 
+  const handleOnDragStart = (): void => onDrag(true);
+
+  const handleOnDragEnd = (): void => onDrag(false);
+
+  useEffect(() => {
+    window.addEventListener("dragend", handleOnDragEnd);
+    return () => {
+      window.removeEventListener("dragend", handleOnDragEnd);
+    };
+  });
+
   return (
     <ComponentSelectContext.Provider
       value={{
         snippetsOfBrickMap,
       }}
     >
-      <div className={styles.componentSelect}>
-        <Tabs centered size="small">
-          {componentList &&
-            Object.entries(componentList).map(([k, v]) => (
-              <Tabs.TabPane tab={i18nTransform[k]} key={k}>
-                <div className={styles.searchWrapper}>
-                  <Input
-                    placeholder={`Search for ${k}`}
-                    onChange={(e) => handleFilterChange(e, k)}
-                  ></Input>
-                </div>
-                <ComponentList
-                  key={k}
-                  componentType={k}
-                  componentList={v}
-                  q={filterValue[k]}
-                  storyList={storyList}
-                  isShowSuggest={isShowSuggest}
-                  onActionClick={onActionClick}
-                />
-              </Tabs.TabPane>
-            ))}
-        </Tabs>
-      </div>
+      <WorkbenchTreeDndContext.Provider
+        value={{
+          onDragStart: handleOnDragStart,
+        }}
+      >
+        <div className={styles.componentSelect}>
+          <Tabs centered size="small">
+            {componentList &&
+              Object.entries(componentList).map(([k, v]) => (
+                <Tabs.TabPane tab={i18nTransform[k]} key={k}>
+                  <div className={styles.searchWrapper}>
+                    <Input
+                      placeholder={`Search for ${k}`}
+                      onChange={(e) => handleFilterChange(e, k)}
+                    ></Input>
+                  </div>
+                  <ComponentList
+                    key={k}
+                    componentType={k}
+                    componentList={v}
+                    q={filterValue[k]}
+                    storyList={storyList}
+                    isShowSuggest={isShowSuggest}
+                    onActionClick={onActionClick}
+                  />
+                </Tabs.TabPane>
+              ))}
+          </Tabs>
+        </div>
+      </WorkbenchTreeDndContext.Provider>
     </ComponentSelectContext.Provider>
   );
 }
@@ -486,6 +509,7 @@ interface ComponentItemProps extends Partial<BrickOptionItem> {
 function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
   const { snippetsOfBrickMap } = useContext(ComponentSelectContext);
   const { t } = useTranslation(NS_NEXT_BUILDER);
+  const { onDragStart } = useWorkbenchTreeDndContext();
   const handleDragStart = (e: React.DragEvent): void => {
     setDragImage(e, componentData.title);
     const nodeData = {
@@ -494,6 +518,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
       type: "brick",
     };
     e.dataTransfer.setData("nodeData", JSON.stringify(nodeData));
+    onDragStart(null, null);
   };
 
   const getIcon = (data: Partial<BrickOptionItem>): React.ReactElement => {

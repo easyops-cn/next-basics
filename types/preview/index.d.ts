@@ -453,6 +453,12 @@ export interface WorkbenchBackendActionForGet
   };
 }
 
+export interface WorkbenchSortData {
+  nodeUids?: number[];
+  nodeIds: string[];
+  nodeInstanceIds: string[];
+}
+
 export type WorkbenchBackendActionForInsertDetail = {
   parentInstanceId?: string;
   parent: string;
@@ -464,6 +470,7 @@ export type WorkbenchBackendActionForInsertDetail = {
   nodeData: BuilderRuntimeNode;
   dragOverInstanceId?: string;
   dragStatus?: dragStatus;
+  sortData?: WorkbenchSortData;
   type: "brick" | "provider";
 };
 export interface WorkbenchBackendActionForInsert

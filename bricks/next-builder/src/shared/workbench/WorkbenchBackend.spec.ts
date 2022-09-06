@@ -92,6 +92,7 @@ const backendInstance = WorkbenchBackend.getInstance({
   projectId: "project-a",
   objectId: "STORYBOARD_ROUTE",
   rootNode,
+  delayBuildTime: 30,
 });
 
 let listener: string;
@@ -477,7 +478,6 @@ describe("WorkbenchBackend should work", () => {
         newAppId: "xxx",
       },
       state: "pending",
-      sourceId: "general-text",
     });
     await (global as any).flushPromises();
 
@@ -486,15 +486,52 @@ describe("WorkbenchBackend should work", () => {
     backendInstance.push({
       action: "cut.brick",
       data: {
+        sourceBrickId: "general-text",
         instance_ids: ["B-1", "B-2"],
         related_instance_ids: ["efg"],
       },
       state: "pending",
-      sourceId: "general-text",
     });
     await (global as any).flushPromises();
 
     expect(mockCutBricks).toBeCalled();
+
+    expect(mockGetDetail).toBeCalledTimes(9);
+    expect(mockMoveInstance).toBeCalledTimes(2);
+
+    backendInstance.push({
+      action: "insert",
+      data: {
+        brick: "div",
+        mountPoint: "content",
+        parent: "parent",
+        type: "brick",
+        nodeData: {
+          instanceId: "mock_instanceId_002",
+          id: "mock_id_002",
+        },
+        sortData: {
+          nodeIds: ["B-1", "mock_id_002"],
+          nodeUids: [1, 2],
+          nodeInstanceIds: ["abc", "mock_instanceId_00"],
+        },
+      },
+      state: "pending",
+    } as WorkbenchBackendActionForInsert);
+
+    await (global as any).flushPromises();
+
+    expect(mockCreateInstance).toHaveBeenNthCalledWith(2, "STORYBOARD_BRICK", {
+      brick: "div",
+      mountPoint: "content",
+      parent: "parent",
+      type: "brick",
+    });
+
+    expect(mockMoveInstance).toHaveBeenNthCalledWith(3, [
+      { nodeIds: ["B-1", "new-id"] },
+    ]);
+    expect(mockGetDetail).toBeCalledTimes(11);
 
     backendInstance.push({
       action: "insert.formItem",

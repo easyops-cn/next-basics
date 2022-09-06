@@ -36,6 +36,19 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
   @event({ type: "action.click" })
   actionClickEmit: EventEmitter<{ type: string; data: any }>;
 
+  private _handlerActionClick = (type: string, data: any): void => {
+    this.actionClickEmit.emit({ type, data });
+  };
+
+  @event({ type: "on.drag" })
+  onDragEmit: EventEmitter<{ isDrag: boolean }>;
+
+  private _handleOnDrag = (isDrag: boolean): void => {
+    this.onDragEmit.emit({
+      isDrag,
+    });
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -44,10 +57,6 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
     }
     this._render();
   }
-
-  private _handlerActionClick = (type: string, data: any): void => {
-    this.actionClickEmit.emit({ type, data });
-  };
 
   disconnectedCallback(): void {
     ReactDOM.unmountComponentAtNode(this);
@@ -63,6 +72,7 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
             storyList={this.storyList}
             isShowSuggest={this.isShowSuggest ?? true}
             onActionClick={this._handlerActionClick}
+            onDrag={this._handleOnDrag}
           />
         </BrickWrapper>,
         this

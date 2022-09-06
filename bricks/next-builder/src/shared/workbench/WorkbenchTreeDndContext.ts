@@ -10,9 +10,9 @@ export enum dragStatusEnum {
 interface WorkbenchTreeDndContext {
   allow?: boolean;
   allowDragToRoot?: boolean;
-  dragElement: HTMLElement;
-  dragOverElement: HTMLElement;
-  dragStatus: dragStatusEnum;
+  dragElement?: HTMLElement;
+  dragOverElement?: HTMLElement;
+  dragStatus?: dragStatusEnum;
   onDragStart?: (
     e: React.DragEvent<HTMLElement>,
     node: WorkbenchNodeData

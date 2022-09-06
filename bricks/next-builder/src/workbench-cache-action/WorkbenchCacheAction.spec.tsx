@@ -75,6 +75,7 @@ let mockData = {
 
 const mockOnNodeUpdate = jest.fn((data) => () => data);
 const mockUpdateNode = jest.fn((data) => mockOnNodeUpdate(data));
+const mockDeleteNode = jest.fn();
 
 (useBuilderDataManager as jest.Mock).mockReturnValue({
   nodeAdd: jest.fn(() => {
@@ -85,6 +86,7 @@ const mockUpdateNode = jest.fn((data) => mockOnNodeUpdate(data));
   }),
   updateNode: mockUpdateNode,
   onNodeUpdate: mockOnNodeUpdate,
+  nodeDelete: mockDeleteNode,
 });
 (useBuilderData as jest.Mock).mockReturnValue(mockData);
 
@@ -273,14 +275,14 @@ describe("WorkbenchWorker", () => {
       });
     });
 
-    const deleteBrick = cacheAction.cacheAction({
+    cacheAction.cacheAction({
       action: "get",
       data: {
         instanceId: "brick-b",
       },
     });
 
-    expect(deleteBrick.$$isDelete).toBeTruthy();
+    expect(mockDeleteNode).toBeCalledWith({ $$uid: 2 });
 
     act(() => {
       cacheAction.cacheAction({

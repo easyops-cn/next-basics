@@ -158,7 +158,7 @@ function LegacyWorkbenchCacheAction(
       let settings: unknown;
       const graphTree = getGraphTreeByBuilderData({
         rootId,
-        nodes: nodes.filter((item) => !item.$$isMock && !item.$$isDelete),
+        nodes: nodes.filter((item) => !item.$$isMock),
         edges,
       });
       let updateStoryboardType: UpdateStoryboardType;
@@ -304,10 +304,9 @@ function LegacyWorkbenchCacheAction(
     nodesCahce: Map<string, BuilderRuntimeNode>
   ): void => {
     const deleteItem = nodesCahce.get(data.instanceId);
-    nodesCahce.set(data.instanceId, {
-      ...deleteItem,
-      $$isDelete: true,
-    });
+    manager.nodeDelete({
+      $$uid: deleteItem.$$uid,
+    } as BuilderRuntimeNode);
   };
 
   const handleMoveBrick = (
@@ -525,6 +524,7 @@ function LegacyWorkbenchCacheAction(
       onBuildAndPush,
       onGraphDataUpdate,
       updateCacheActionList,
+      onExecuteSuccess,
     ]
   );
 
@@ -606,8 +606,8 @@ function LegacyWorkbenchCacheAction(
   }, [edges, nodes]);
 
   useEffect(() => {
-    setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges, true);
-  }, [rootId, setNewStoryboard]);
+    setNewStoryboard(rootId, [...nodesCacheRef.current.values()], edges);
+  }, [rootId, setNewStoryboard, edges]);
 
   useImperativeHandle(ref, () => ({
     manager,
