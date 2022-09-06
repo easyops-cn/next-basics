@@ -6,13 +6,14 @@ export const magicBrickStory: Story = {
   category: "other",
   type: "brick",
   author: "lynette",
+  deprecated: true,
   text: {
     en: "Magic Brick",
     zh: "魔法构件",
   },
   description: {
-    en: "display default brick according to showType",
-    zh: "指定数据渲染类型，直接调用对应的展示构件渲染",
+    en: "Deprecated",
+    zh: "已废弃",
   },
   icon: {
     lib: "fa",

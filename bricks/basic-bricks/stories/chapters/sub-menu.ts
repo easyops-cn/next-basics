@@ -5,13 +5,14 @@ export const subMenuStory: Story = {
   category: "navigation",
   type: "brick",
   author: "lynette",
+  deprecated: true,
   text: {
     en: "sub-menu",
     zh: "二级子菜单",
   },
   description: {
-    en: "sub menu",
-    zh: "二级菜单",
+    en: "Deprecated",
+    zh: "已废弃",
   },
   icon: {
     lib: "fa",

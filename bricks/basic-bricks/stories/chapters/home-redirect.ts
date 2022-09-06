@@ -5,13 +5,14 @@ export const homeRedirectStory: Story = {
   category: "interact-baisc",
   type: "brick",
   author: "steve",
+  deprecated: true,
   text: {
     en: "redirection to app home",
     zh: "重定向到指定应用的首页",
   },
   description: {
-    en: "Tool brick for redirect to app home",
-    zh: "重定向到指定应用的首页",
+    en: "Deprecated",
+    zh: "已废弃",
   },
   icon: {
     lib: "fa",

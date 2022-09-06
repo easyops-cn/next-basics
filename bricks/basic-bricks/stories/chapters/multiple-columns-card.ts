@@ -5,13 +5,14 @@ export const multipleColumnsCardStory: Story = {
   category: "layout",
   type: "brick",
   author: "jo",
+  deprecated: true,
   text: {
     en: "Multiple Columns Card",
     zh: "多列布局卡片",
   },
   description: {
-    en: "support multiple columns card",
-    zh: "支持多列布局的容器",
+    en: "Deprecated",
+    zh: "已废弃，请使用 `basic-bricks.easy-view`",
   },
   icon: {
     lib: "fa",
@@ -150,20 +151,17 @@ export const multipleColumnsCardStory: Story = {
                   menuItems: [
                     {
                       text: "菜单项1",
-                      to:
-                        "/developers/brick-book/atom/multiple-columns-card/one",
+                      to: "/developers/brick-book/atom/multiple-columns-card/one",
                       exact: true,
                     },
                     {
                       text: "菜单项2",
-                      to:
-                        "/developers/brick-book/atom/multiple-columns-card/two",
+                      to: "/developers/brick-book/atom/multiple-columns-card/two",
                       exact: true,
                     },
                     {
                       text: "菜单项3",
-                      to:
-                        "/developers/brick-book/atom/multiple-columns-card/three",
+                      to: "/developers/brick-book/atom/multiple-columns-card/three",
                     },
                   ],
                 },
@@ -176,8 +174,7 @@ export const multipleColumnsCardStory: Story = {
                   type: "routes",
                   routes: [
                     {
-                      path:
-                        "/developers/brick-book/atom/multiple-columns-card/one",
+                      path: "/developers/brick-book/atom/multiple-columns-card/one",
                       bricks: [
                         {
                           brick: "div",
@@ -188,8 +185,7 @@ export const multipleColumnsCardStory: Story = {
                       ],
                     },
                     {
-                      path:
-                        "/developers/brick-book/atom/multiple-columns-card/two",
+                      path: "/developers/brick-book/atom/multiple-columns-card/two",
                       bricks: [
                         {
                           brick: "div",
@@ -200,8 +196,7 @@ export const multipleColumnsCardStory: Story = {
                       ],
                     },
                     {
-                      path:
-                        "/developers/brick-book/atom/multiple-columns-card/three",
+                      path: "/developers/brick-book/atom/multiple-columns-card/three",
                       bricks: [
                         {
                           brick: "div",
