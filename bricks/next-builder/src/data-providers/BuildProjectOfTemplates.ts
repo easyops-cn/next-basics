@@ -1,4 +1,5 @@
 import { isEmpty, omit, uniq } from "lodash";
+import { collectBricksByCustomTemplates } from "@next-core/brick-utils";
 import {
   BrickConfInTemplate,
   BuilderCustomTemplateNode,
@@ -18,6 +19,12 @@ import {
   scanProcessorsInStoryboard,
   isObject,
 } from "@next-core/brick-utils";
+
+import {
+  ContractCenterApi_batchSearchContract,
+  ContractCenterApi_BatchSearchContractRequestBody_contract_item,
+  ContractCenterApi_BatchSearchContractResponseBody_list_item,
+} from "@next-sdk/next-builder-sdk";
 import {
   InstanceGraphApi_traverseGraphV2,
   InstanceApi_getDetail,
@@ -415,9 +422,53 @@ export async function BuildProjectOfTemplates({
     }
   });
 
-  const indexJsContent = getBrickPackageIndexJs({
+  const collectionByTpl = collectBricksByCustomTemplates(templates);
+
+  const contractParams: ContractCenterApi_BatchSearchContractRequestBody_contract_item[] =
+    [];
+  const providerByTplMap = new Map();
+  for (const [tplName, bricks] of collectionByTpl.entries()) {
+    const contractApis = bricks.filter((brick: string) => brick.includes("@"));
+
+    providerByTplMap.set(tplName, contractApis);
+    contractParams.push(
+      ...contractApis.map((api: string) => ({
+        fullContractName: api.split(":")[0],
+        version: api.split(":")[1],
+      }))
+    );
+  }
+
+  let contracts: ContractCenterApi_BatchSearchContractResponseBody_list_item[];
+  if (contractParams.length > 0) {
+    contracts = (
+      await ContractCenterApi_batchSearchContract({
+        contract: contractParams,
+      })
+    ).list;
+  }
+
+  const processedTemplates = templates.map((tpl) => ({
+    ...tpl,
+    ...(!isEmpty(providerByTplMap.get(tpl.name))
+      ? {
+          contracts: providerByTplMap
+            .get(tpl.name)
+            .map((provider: string) =>
+              contracts?.find(
+                (contract) =>
+                  `${contract.namespaceId}@${contract.name}` ===
+                  provider.split(":")[0]
+              )
+            )
+            .filter(Boolean),
+        }
+      : {}),
+  }));
+
+  const indexJsContent = await getBrickPackageIndexJs({
     appId,
-    templates,
+    templates: processedTemplates,
     functions: projectDetailResponse.functions as StoryboardFunction[],
     i18n: projectDetailResponse.i18n as I18nNode[],
   });

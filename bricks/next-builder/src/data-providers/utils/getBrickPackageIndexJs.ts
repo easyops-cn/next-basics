@@ -20,7 +20,12 @@ ${templates
         null,
         2
       )}, ${JSON.stringify(
-        { proxy: tpl.proxy, state: tpl.state, bricks: tpl.bricks },
+        {
+          proxy: tpl.proxy,
+          state: tpl.state,
+          bricks: tpl.bricks,
+          contracts: tpl.contracts,
+        },
         null,
         2
       )})`
