@@ -88,7 +88,6 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
         <span className={classNames(style.menuText, classNme)}>
           {item.title}
         </span>
-        {/* {item.divider &&(<Divider style={{height:"1px",marginTop:"-1px"}} />)} */}
       </>
     );
   };
