@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.17.0...@next-types/preview@1.18.0) (2022-09-06)
+
+
+### Features
+
+* support ComponentSelect drag to brickTree ([9d774f7](https://github.com/easyops-cn/next-basics/commit/9d774f76d839b53e2c95afd24d61fb43a9e9443c))
+
+
+
+
+
 # [1.17.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.16.4...@next-types/preview@1.17.0) (2022-08-24)
 
 
