@@ -79,7 +79,7 @@ export class GeneralTitleElement extends UpdatingElement {
    * @required false
    * @default
    * @description 可以在描述前添加前缀
-   * @group advanced
+   * @group other
    */
   @property({
     attribute: false,
@@ -91,7 +91,7 @@ export class GeneralTitleElement extends UpdatingElement {
    * @required false
    * @default
    * @description 可以在标题后添加后缀
-   * @group advanced
+   * @group other
    */
   @property({
     attribute: false,
@@ -103,7 +103,7 @@ export class GeneralTitleElement extends UpdatingElement {
    * @required false
    * @default
    * @description 可以在描述后面添加后缀
-   * @group advanced
+   * @group other
    */
   @property({
     attribute: false,
@@ -115,7 +115,7 @@ export class GeneralTitleElement extends UpdatingElement {
    * @required false
    * @default
    * @description 数据源
-   * @group advanced
+   * @group other
    */
   @property({
     attribute: false,
@@ -127,7 +127,7 @@ export class GeneralTitleElement extends UpdatingElement {
    * @required false
    * @default
    * @description 字段映射, 跟 dataSource 一起使用来获得运行时 mainTitle、 description
-   * @group advanced
+   * @group other
    */
   @property({
     attribute: false,
