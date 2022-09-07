@@ -22,9 +22,9 @@ export interface ColorObj {
  * @author momo
  * @slots
  * @history
- * 1.82.2:新增构件 `presentational-bricks.basic-progress`
- * 1.82.3:color 颜色选择标准化
  * 1.90.0:新增 text 和 fontSIze 属性
+ * 1.82.3:color 颜色选择标准化
+ * 1.82.2:新增构件 `presentational-bricks.basic-progress`
  * @memo
  * ```typescript
  * export enum Color {
@@ -58,15 +58,17 @@ export class BasicProgressElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 进度值（只负责确定颜色的值）
+   * @group basic
    */
   @property({ attribute: false })
   value: number;
 
   /**
-   * @kind line|circle|dashboard
+   * @kind line | circle | dashboard
    * @required circle
    * @default dashboard
    * @description 类型
+   * @group basic
    */
   @property({ attribute: false })
   type: "line" | "circle" | "dashboard";
@@ -76,6 +78,7 @@ export class BasicProgressElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 展示内容
+   * @group basic
    */
   @property({ attribute: false })
   text: string;
@@ -84,25 +87,28 @@ export class BasicProgressElement extends UpdatingElement {
    * @kind string
    * @required false
    * @default -
-   * @description 展示内容的颜色
+   * @description 描述值
+   * @group basic
    */
   @property({ attribute: false })
-  textColor: string;
+  description: string;
 
   /**
    * @kind string
    * @required false
    * @default -
-   * @description 描述值
+   * @description 展示内容的颜色
+   * @group ui
    */
   @property({ attribute: false })
-  description: string;
+  textColor: string;
 
   /**
    * @kind ColorObj[]
    * @required false
    * @default -
    * @description 颜色范围
+   * @group ui
    */
   @property({ attribute: false })
   colorMap: ColorObj[];
@@ -112,7 +118,7 @@ export class BasicProgressElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 设定展示内容大小
-   * @group advanced
+   * @group ui
    */
   @property({ attribute: false })
   fontSize: string;
@@ -122,7 +128,7 @@ export class BasicProgressElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 透传[antd progress](https://3x.ant.design/components/progress-cn/)
-   * @group advanced
+   * @group other
    */
   @property({ attribute: false })
   configProps: Record<string, any>;
