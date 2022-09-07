@@ -5,6 +5,7 @@ export const BrickClusterTypeStory: Story = {
   category: "value-mapping",
   type: "brick",
   author: "ice",
+  deprecated: true,
   text: {
     en: "cluster type",
     zh: "集群类型",
