@@ -6,8 +6,8 @@ export const BrickConditionalDisplayStory: Story = {
   type: "brick",
   author: "cyril",
   text: {
-    en: "conditional display",
-    zh: "条件展示",
+    en: "Tag - Condition Judgment Display",
+    zh: "Tag标签-条件判断展示",
   },
   description: {
     en: "",

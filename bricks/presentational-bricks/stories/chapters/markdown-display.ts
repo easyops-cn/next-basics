@@ -6,8 +6,8 @@ export const MarkdownDisplayStory: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "Markdown Display",
-    zh: "展示Markdown",
+    en: "Markdown Information Display",
+    zh: "Markdown信息展示",
   },
   description: {
     en: "",

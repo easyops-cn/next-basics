@@ -6,8 +6,8 @@ export const flexLayoutStory: Story = {
   type: "brick",
   author: "kehua",
   text: {
-    en: "Flex Layout",
-    zh: "flex布局",
+    en: "Flex Layout Container",
+    zh: "Flex布局容器",
   },
   description: {
     en: "A Flex layout container",

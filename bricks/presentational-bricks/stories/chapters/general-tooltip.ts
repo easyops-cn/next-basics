@@ -6,8 +6,8 @@ export const GeneralTooltipStory: Story = {
   type: "brick",
   author: "jo",
   text: {
-    en: "general tooltip",
-    zh: "普通 tooltip",
+    en: "Tooltip Text Prompt",
+    zh: "Tooltip文字提示",
   },
   description: {
     en: "general tooltip",

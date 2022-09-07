@@ -87,8 +87,8 @@ export const advancedListContainerStory: Story = {
   type: "brick",
   author: "momo",
   text: {
-    en: "Dynamic List Container v2",
-    zh: "动态构件列表容器v2",
+    en: "Dynamic Vertical List Container",
+    zh: "动态纵向列表容器",
   },
   description: {
     en: "A list container support specified `useBrick`",

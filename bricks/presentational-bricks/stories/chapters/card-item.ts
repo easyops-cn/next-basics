@@ -6,8 +6,8 @@ export const CardItemStory: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "card item",
-    zh: "卡片项",
+    en: "Information Display Card",
+    zh: "信息展示卡片",
   },
   description: {
     en: "General card item",

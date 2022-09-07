@@ -7,8 +7,8 @@ export const multipleColumnsCardStory: Story = {
   author: "jo",
   deprecated: true,
   text: {
-    en: "Multiple Columns Card",
-    zh: "多列布局卡片",
+    en: "Multi Column Layout Container with Border",
+    zh: "带边框多列布局容器",
   },
   description: {
     en: "support multiple columns card",

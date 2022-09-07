@@ -6,8 +6,8 @@ export const GeneralLabelStory: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "general label",
-    zh: "通用 label",
+    en: "Text Information Display - Configurable Front and Rear Icons and Links",
+    zh: "文本信息展示-可配置前后图标与链接",
   },
   description: {
     en: "Display label,prefix icon and suffix icon.Support for configuration click event and url.",

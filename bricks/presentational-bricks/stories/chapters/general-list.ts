@@ -6,8 +6,8 @@ export const GeneralListStory: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "general list",
-    zh: "通用列表布局",
+    en: "List Layout",
+    zh: "列表布局",
   },
   description: {
     en: "general list",

@@ -6,8 +6,8 @@ export const generalNotificationStory: Story = {
   type: "brick",
   author: "Alex",
   text: {
-    en: "general notification",
-    zh: "普通 notification",
+    en: "Notification Reminder Box",
+    zh: "Notification通知提醒框",
   },
   description: {
     en: "general notification",

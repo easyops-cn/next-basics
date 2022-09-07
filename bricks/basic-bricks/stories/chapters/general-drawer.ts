@@ -7,7 +7,7 @@ export const generalDrawerStory: Story = {
   author: "ice",
   text: {
     en: "General Drawer",
-    zh: "抽屉容器",
+    zh: "Drawer抽屉",
   },
   description: {
     en: "provide slot to hold other custom elements",

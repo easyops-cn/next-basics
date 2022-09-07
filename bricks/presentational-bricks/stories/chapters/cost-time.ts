@@ -6,8 +6,8 @@ export const CostTimeStory: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "cost time",
-    zh: "耗时",
+    en: "Text Conversion - Automatic Conversion to UNIX Time Consuming",
+    zh: "文本转换-自动转换unix时间耗时",
   },
   description: {
     en: "such as 15 seconds,one day",
