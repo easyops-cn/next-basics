@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.233.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.232.1...@next-bricks/forms@1.233.0) (2022-09-07)
+
+
+### Features
+
+* 重新打包及修改普通下拉框颜色 ([1927072](https://github.com/easyops-cn/next-basics/commit/1927072da0397646b5c1a9bff36142e979adeadd))
+
+
+
+
+
 ## [1.232.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.232.0...@next-bricks/forms@1.232.1) (2022-09-02)
 
 
