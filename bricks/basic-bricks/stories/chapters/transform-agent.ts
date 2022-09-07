@@ -11,8 +11,8 @@ export const transformAgentStory: Story = {
   },
   deprecated: true,
   description: {
-    en: "Deprecated",
-    zh: "已废弃",
+    en: "An agent brick that transform properties from bricks to bricks",
+    zh: "一个代理构件支持将一些构件的属性转换并赋值给其它构件",
   },
   icon: {
     lib: "fa",
