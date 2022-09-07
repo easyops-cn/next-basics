@@ -7,7 +7,7 @@ import { ICustomSwitchConfig } from "./index";
 interface GeneralDrawerProps {
   visible: boolean;
   title?: string;
-  width?: number;
+  width?: number | string;
   getContainer?: HTMLElement;
   closable?: boolean;
   bodyStyle?: Record<string, any>;
