@@ -117,8 +117,8 @@ export class GeneralDrawerElement extends UpdatingElement {
    * @description 宽度
    * @group ui
    */
-  @property({ type: Number })
-  width: number;
+  @property({ attribute: false })
+  width: number | string;
 
   /**
    * @kind Record<string, any>
