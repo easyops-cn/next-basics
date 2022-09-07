@@ -11,8 +11,8 @@ export const homeRedirectStory: Story = {
     zh: "重定向到指定应用的首页",
   },
   description: {
-    en: "Deprecated",
-    zh: "已废弃",
+    en: "Tool brick for redirect to app home",
+    zh: "重定向到指定应用的首页",
   },
   icon: {
     lib: "fa",

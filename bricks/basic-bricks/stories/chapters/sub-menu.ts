@@ -11,8 +11,8 @@ export const subMenuStory: Story = {
     zh: "二级子菜单",
   },
   description: {
-    en: "Deprecated",
-    zh: "已废弃",
+    en: "sub menu",
+    zh: "二级菜单",
   },
   icon: {
     lib: "fa",

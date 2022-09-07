@@ -11,8 +11,8 @@ export const multipleColumnsCardStory: Story = {
     zh: "多列布局卡片",
   },
   description: {
-    en: "Deprecated",
-    zh: "已废弃，请使用 `basic-bricks.easy-view`",
+    en: "support multiple columns card",
+    zh: "支持多列布局的容器,推荐使用 `basic-bricks.easy-view`",
   },
   icon: {
     lib: "fa",

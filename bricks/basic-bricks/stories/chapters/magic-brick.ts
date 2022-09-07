@@ -12,8 +12,8 @@ export const magicBrickStory: Story = {
     zh: "魔法构件",
   },
   description: {
-    en: "Deprecated",
-    zh: "已废弃",
+    en: "display default brick according to showType",
+    zh: "指定数据渲染类型，直接调用对应的展示构件渲染",
   },
   icon: {
     lib: "fa",
