@@ -3,11 +3,12 @@ import docMD from "../../../docs/basic-providers/http-proxy.md";
 
 export const story: Story = {
   storyId: "basic-providers.provider-http-proxy",
+  category: "other",
   type: "brick",
   author: "dophi",
   text: {
     en: "http proxy provider",
-    zh: "通用 http provider",
+    zh: "转发http请求",
   },
   description: {
     en: "Send http request through api gateway proxy",
