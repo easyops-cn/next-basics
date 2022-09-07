@@ -15,7 +15,7 @@ import { MenuIcon } from "@next-core/brick-types";
  * @name presentational-bricks.basic-icon
  * @author qimengwu
  * @history
- * 1.x.0: 新增构件 `presentational-bricks.basic-icon`
+ * 1.0.0: 新增构件 `presentational-bricks.basic-icon`
  * @docKind brick
  * @description 基础icon构件
  * @noInheritDoc
@@ -26,6 +26,7 @@ export class BasicIconElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 图标
+   * @group basic
    */
   @property({ attribute: false })
   icon: MenuIcon | ImgIcon;
@@ -35,6 +36,7 @@ export class BasicIconElement extends UpdatingElement {
    * @required false
    * @default 24px
    * @description 图标大小
+   * @group basic
    */
   @property({ attribute: false })
   size: string;
@@ -44,6 +46,7 @@ export class BasicIconElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否渲染图标背景
+   * @group basic
    */
   @property({ type: Boolean })
   renderBg: boolean;
@@ -53,6 +56,7 @@ export class BasicIconElement extends UpdatingElement {
    * @required false
    * @default
    * @description 图标背景
+   * @group basic
    */
   @property()
   bg: string;
@@ -62,6 +66,7 @@ export class BasicIconElement extends UpdatingElement {
    * @required false
    * @default 46px
    * @description 图标背景大小
+   * @group basic
    */
   @property({ attribute: false })
   bgSize: string;
@@ -71,6 +76,7 @@ export class BasicIconElement extends UpdatingElement {
    * @required false
    * @default
    * @description 图标背景圆角大小
+   * @group basic
    */
   @property()
   bgBorderRadius: string;
@@ -78,6 +84,7 @@ export class BasicIconElement extends UpdatingElement {
   /**
    * @kind unknown
    * @description 数据源
+   * @group basic
    */
   @property({ attribute: false })
   dataSource: unknown;

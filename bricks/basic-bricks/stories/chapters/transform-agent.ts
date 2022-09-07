@@ -9,6 +9,7 @@ export const transformAgentStory: Story = {
     en: "Transform Agent",
     zh: "数据转换代理",
   },
+  deprecated: true,
   description: {
     en: "An agent brick that transform properties from bricks to bricks",
     zh: "一个代理构件支持将一些构件的属性转换并赋值给其它构件",

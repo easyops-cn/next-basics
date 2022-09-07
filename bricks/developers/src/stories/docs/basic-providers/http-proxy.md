@@ -5,7 +5,7 @@
 
 | Version | Change                                |
 | ------- | ------------------------------------- |
-| 1.x.0   | 新增构件 `basic-providers.http-proxy` |
+| 1.0.0   | 新增构件 `basic-providers.http-proxy` |
 
 </details>
 
