@@ -2,6 +2,7 @@ import {
   InstanceGraphApi_traverseGraphV2,
   InstanceApi_getDetail,
 } from "@next-sdk/cmdb-sdk";
+import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
 import {
   BuildInfoForProjectOfTemplates,
   BuildProjectOfTemplates,
@@ -12,6 +13,7 @@ import {
 } from "./BuildProjectOfTemplates";
 
 jest.mock("@next-sdk/cmdb-sdk");
+jest.mock("@next-sdk/next-builder-sdk");
 const consoleError = jest
   .spyOn(console, "error")
   .mockImplementation(() => void 0);
@@ -136,6 +138,13 @@ const consoleError = jest
                     "type": "string",
                     "required": false,
                     "description": "实例 id"
+                  }
+                },
+                {
+                  "name": "appList",
+                  "resolve": {
+                    "useProvider": "cmdb.instance@postsearch:1.0.0",
+                    "args": ["APP"]
                   }
                 }
               ]`,
@@ -363,6 +372,16 @@ const consoleError = jest
   })
 );
 
+(ContractCenterApi_batchSearchContract as jest.Mock).mockResolvedValue({
+  list: [
+    {
+      name: "postsearch",
+      namespaceId: "cmdb.instance",
+      version: "1.0.0",
+    },
+  ],
+});
+
 describe("BuildProjectOfTemplates", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -388,7 +407,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.f91919f5.js",
+            path: "dist/index.33a01be4.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -484,6 +503,15 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
     {
       "name": "instanceId",
       "value": "abc"
+    },
+    {
+      "name": "appList",
+      "resolve": {
+        "useProvider": "cmdb.instance@postsearch:1.0.0",
+        "args": [
+          "APP"
+        ]
+      }
     }
   ],
   "bricks": [
@@ -499,6 +527,13 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
         ],
         "url": "<% __WIDGET_IMG__(\\"app-1\\").get('6659b229.png') %>"
       }
+    }
+  ],
+  "contracts": [
+    {
+      "name": "postsearch",
+      "namespaceId": "cmdb.instance",
+      "version": "1.0.0"
     }
   ]
 }),
@@ -950,7 +985,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
 }`,
           },
           {
-            path: "dist/index.15397f5a.js",
+            path: "dist/index.7431f3eb.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
