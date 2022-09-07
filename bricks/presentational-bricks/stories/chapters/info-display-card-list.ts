@@ -214,7 +214,7 @@ export const infoList = [
 ];
 export const InfoDisplayCardList: Story = {
   storyId: "presentational-bricks.info-display-card-list",
-  category: "data-view-card",
+  category: "card-info",
   type: "brick",
   author: "dophi",
   text: {

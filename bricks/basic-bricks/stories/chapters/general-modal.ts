@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const generalModalStory: Story = {
   storyId: "basic-bricks.general-modal",
-  category: "layout",
+  category: "container-display",
   type: "brick",
   author: "ice",
   text: {

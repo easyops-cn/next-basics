@@ -83,7 +83,7 @@ const mockProps = {
 
 export const advancedListContainerStory: Story = {
   storyId: "basic-bricks.advanced-list-container",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "momo",
   text: {

@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const multipleColumnsCardStory: Story = {
   storyId: "basic-bricks.multiple-columns-card",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "jo",
   deprecated: true,

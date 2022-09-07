@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const easyViewStory: Story = {
   storyId: "basic-bricks.easy-view",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "steve",
   text: {

@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickHumanizeTimeStory: Story = {
   storyId: "presentational-bricks.brick-humanize-time",
-  category: "data-view-value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "ice",
   text: {

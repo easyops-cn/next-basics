@@ -1,7 +1,7 @@
 import { Story } from "@next-core/brick-types";
 export const DynamicGridContainerStory: Story = {
   storyId: "presentational-bricks.dynamic-grid-container",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "astrid",
   text: {

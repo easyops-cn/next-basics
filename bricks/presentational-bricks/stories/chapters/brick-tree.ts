@@ -3,7 +3,7 @@ import { Story } from "@next-core/brick-types";
 export const BrickTreeStory: Story = {
   storyId: "presentational-bricks.brick-tree",
   type: "brick",
-  category: "data-view-component",
+  category: "display-component",
   author: "jo",
   text: {
     en: "Tree",

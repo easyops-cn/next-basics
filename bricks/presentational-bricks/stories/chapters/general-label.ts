@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const GeneralLabelStory: Story = {
   storyId: "presentational-bricks.general-label",
-  category: "data-view-value-mapping",
+  category: "text",
   type: "brick",
   author: "lynette",
   text: {

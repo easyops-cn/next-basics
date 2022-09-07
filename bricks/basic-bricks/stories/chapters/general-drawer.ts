@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const generalDrawerStory: Story = {
   storyId: "basic-bricks.general-drawer",
-  category: "layout",
+  category: "container-display",
   type: "brick",
   author: "ice",
   text: {

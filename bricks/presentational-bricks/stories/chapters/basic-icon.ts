@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BasicIconStory: Story = {
   storyId: "presentational-bricks.basic-icon",
-  category: "data-view-info",
+  category: "display-component",
   type: "brick",
   author: "qimengwu",
   text: {

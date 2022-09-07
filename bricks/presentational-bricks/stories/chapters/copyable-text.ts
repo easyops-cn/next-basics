@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const CopyableTextStory: Story = {
   storyId: "presentational-bricks.copyable-text",
-  category: "data-view-info",
+  category: "text",
   type: "brick",
   author: "ann",
   text: {

@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickPlaceholderStory: Story = {
   storyId: "presentational-bricks.brick-placeholder",
-  category: "layout",
+  category: "container-display",
   type: "brick",
   author: "cyril",
   text: {

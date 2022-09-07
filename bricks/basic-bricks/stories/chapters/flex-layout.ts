@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const flexLayoutStory: Story = {
   storyId: "basic-bricks.flex-layout",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "kehua",
   text: {

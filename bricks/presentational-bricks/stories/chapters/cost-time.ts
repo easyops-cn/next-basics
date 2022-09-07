@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const CostTimeStory: Story = {
   storyId: "presentational-bricks.cost-time",
-  category: "data-view-value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "lynette",
   text: {

@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const popoverContainerStory: Story = {
   storyId: "basic-bricks.popover-container",
-  category: "layout",
+  category: "container-display",
   type: "brick",
   author: "lynette",
   text: {
