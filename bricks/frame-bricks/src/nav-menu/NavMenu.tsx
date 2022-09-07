@@ -72,11 +72,6 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     return (
       <Link to={item.to} href={item.href} target={item.target}>
         <span className={classNames(style.menuText, style.simpleMenuItemText)}>
-          {/* {item.icon && (
-            <i className={style.menuItemIcon}>
-              <GeneralIcon icon={item.icon} />
-            </i>
-          )} */}
           {item.text}
         </span>
       </Link>
