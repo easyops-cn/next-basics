@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.194.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.194.2...@next-bricks/basic-bricks@1.194.3) (2022-09-07)
+
+**Note:** Version bump only for package @next-bricks/basic-bricks
+
+
+
+
+
 ## [1.194.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.194.1...@next-bricks/basic-bricks@1.194.2) (2022-09-06)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
