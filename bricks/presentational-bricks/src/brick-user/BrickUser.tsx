@@ -1,12 +1,9 @@
 import React from "react";
 import classNames from "classnames";
 import { Avatar, Tooltip } from "antd";
-import { getRuntime } from "@next-core/brick-kit";
-import { UserInfo } from "@next-core/brick-types";
+import { useUserInfoByNameOrInstanceId } from "@next-libs/hooks";
 
 import cssStyle from "./style.module.css";
-
-const USERMAP = new Map<string, UserInfo>();
 
 interface BrickUserProps {
   userNameOrId: string;
@@ -24,33 +21,24 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
   const [userName, setUserName] = React.useState(props.userNameOrId);
   const [nickName, setNickName] = React.useState("");
 
+  const userInfo = useUserInfoByNameOrInstanceId(props.userNameOrId);
+
   React.useEffect(() => {
-    (async () => {
-      let user: UserInfo;
-      let icon: string;
-      if (USERMAP.size === 0) {
-        const userMap = await getRuntime().getAllUserMapAsync();
-        for (const [name, user] of userMap) {
-          USERMAP.set(name, user);
-          USERMAP.set(user.instanceId, user);
-        }
-      }
-      if (USERMAP.has(props.userNameOrId)) {
-        user = USERMAP.get(props.userNameOrId);
-        setUserName(user?.name);
-        setNickName(user?.nickname);
-      } else {
-        // 在用户列表中找不到时显示用户传进来的值
-        setUserName(props.userNameOrId);
-      }
-      if (props.iconUrl) {
-        icon = props.iconUrl;
-      } else {
-        icon = user?.user_icon;
-      }
-      setAvatarSrc(icon);
-    })();
-  }, [props.userNameOrId, props.iconUrl]);
+    if (userInfo) {
+      setUserName(userInfo.name);
+      setNickName(userInfo.nickname);
+    } else {
+      setUserName(props.userNameOrId);
+    }
+  }, [props.userNameOrId, userInfo]);
+
+  React.useEffect(() => {
+    if (props.iconUrl) {
+      setAvatarSrc(props.iconUrl);
+    } else {
+      setAvatarSrc(userInfo?.user_icon);
+    }
+  }, [props.iconUrl, userInfo]);
 
   if (!props.userNameOrId) return null;
 
