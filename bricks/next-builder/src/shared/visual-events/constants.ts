@@ -9,26 +9,11 @@ export const recommendActionIds = [
   "context.replace",
   "context.assign",
   "context.refresh",
+  "context.load",
   "state.update",
   "state.refresh",
+  "state.load",
   "console.log",
-];
-
-export const pageSwitchActionIds = [
-  "history.push",
-  "history.replace",
-  "history.goBack",
-  "history.goForward",
-  "history.reload",
-  "history.pushQuery",
-  "history.replaceQuery",
-  "history.pushAnchor",
-  "history.block",
-  "history.unblock",
-  "legacy.go",
-  "location.reload",
-  "location.assign",
-  "window.open",
 ];
 
 export const builtinActions = [
@@ -113,12 +98,20 @@ export const builtinActions = [
     value: "context.refresh",
   },
   {
+    label: "加载 Context 值(context.load)",
+    value: "context.load",
+  },
+  {
     label: "替换 State 值(state.update)",
     value: "state.update",
   },
   {
     label: "刷新 State 值(state.refresh)",
     value: "state.refresh",
+  },
+  {
+    label: "加载 State 值(state.load)",
+    value: "state.load",
   },
   {
     label: "模板发送自定义事件(tpl.dispatchEvent)",
@@ -210,4 +203,11 @@ export const builtinActions = [
   },
 ];
 
-export const hasCallbackActions = ["message.subscribe", "message.unsubscribe"];
+export const hasCallbackActions = [
+  "message.subscribe",
+  "message.unsubscribe",
+  "context.load",
+  "context.refresh",
+  "state.load",
+  "state.refresh",
+];
