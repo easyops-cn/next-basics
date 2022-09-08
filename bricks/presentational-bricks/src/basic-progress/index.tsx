@@ -56,7 +56,6 @@ export class BasicProgressElement extends UpdatingElement {
   /**
    * @kind number
    * @required true
-   * @default -
    * @description 进度值（只负责确定颜色的值）
    * @group basic
    */
@@ -76,7 +75,6 @@ export class BasicProgressElement extends UpdatingElement {
   /**
    * @kind string
    * @required false
-   * @default -
    * @description 展示内容
    * @group basic
    */
@@ -86,7 +84,6 @@ export class BasicProgressElement extends UpdatingElement {
   /**
    * @kind string
    * @required false
-   * @default -
    * @description 描述值
    * @group basic
    */
@@ -96,7 +93,6 @@ export class BasicProgressElement extends UpdatingElement {
   /**
    * @kind string
    * @required false
-   * @default -
    * @description 展示内容的颜色
    * @group ui
    */
@@ -106,7 +102,6 @@ export class BasicProgressElement extends UpdatingElement {
   /**
    * @kind ColorObj[]
    * @required false
-   * @default -
    * @description 颜色范围
    * @group ui
    */
@@ -116,7 +111,6 @@ export class BasicProgressElement extends UpdatingElement {
   /**
    * @kind string
    * @required false
-   * @default -
    * @description 设定展示内容大小
    * @group ui
    */
@@ -126,7 +120,6 @@ export class BasicProgressElement extends UpdatingElement {
   /**
    * @kind Record<string, any>
    * @required false
-   * @default -
    * @description 透传[antd progress](https://3x.ant.design/components/progress-cn/)
    * @group other
    */
