@@ -34,10 +34,10 @@ export function getNodeTreeByPath(
           },
           children: [],
           icon: {
-            category: "default",
+            icon: "folder",
+            lib: "antd",
+            theme: "filled",
             color: "orange",
-            icon: "tree",
-            lib: "easyops",
           },
           isContainer: true,
         } as WorkbenchNodeData;
