@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.181.3...@next-bricks/next-builder@1.182.0) (2022-09-08)
+
+
+### Features
+
+* **dataTree:** support classify ([0d374dc](https://github.com/easyops-cn/next-basics/commit/0d374dc80b924e72ddd11c670ca86552c6c92546))
+* update icon ([e4ba6f9](https://github.com/easyops-cn/next-basics/commit/e4ba6f997735712baaab5f039cc957274fca3f55))
+
+
+
+
+
 ## [1.181.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.181.2...@next-bricks/next-builder@1.181.3) (2022-09-08)
 
 
