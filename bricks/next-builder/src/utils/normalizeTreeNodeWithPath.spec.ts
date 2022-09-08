@@ -66,6 +66,7 @@ describe("normalizeTreeNodeWithPath", () => {
                   ],
                   "data": Object {
                     "$key": "a/b/c",
+                    "isContainer": true,
                   },
                   "icon": Object {
                     "color": "orange",
@@ -86,6 +87,7 @@ describe("normalizeTreeNodeWithPath", () => {
               ],
               "data": Object {
                 "$key": "a/b",
+                "isContainer": true,
               },
               "icon": Object {
                 "color": "orange",
@@ -102,6 +104,7 @@ describe("normalizeTreeNodeWithPath", () => {
           ],
           "data": Object {
             "$key": "a",
+            "isContainer": true,
           },
           "icon": Object {
             "color": "orange",
