@@ -18,11 +18,12 @@ import {
   i18nTransform,
   BrickSortField,
   ComponentSelectContext,
+  defaultBlankListOfBricks,
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
 import { BuildFilled } from "@ant-design/icons";
-import { debounce } from "lodash";
+import { debounce, compact } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
 import { adjustBrickSort, getSnippetsOfBrickMap } from "./processor";
@@ -98,6 +99,17 @@ export function WorkbenchComponentSelect({
   const [filterValue, setFilterValue] = useState<Record<string, string>>({});
   const [componentList, setComponetList] =
     useState<Record<string, BrickOptionItem[]>>();
+  const { config } = useMemo(() => getRuntime().getCurrentApp(), []);
+
+  const blankListOfBricks = useMemo(
+    () =>
+      compact(
+        defaultBlankListOfBricks.concat(
+          config.blankListOfBrickLibrary as string[]
+        )
+      ),
+    [config.blankListOfBrickLibrary]
+  );
 
   const setValue = useRef(
     debounce((v: string, type: string) => {
@@ -118,7 +130,10 @@ export function WorkbenchComponentSelect({
   const getBrickTransfromByType = useCallback(
     (brickList: BrickOptionItem[]): Record<string, BrickOptionItem[]> => {
       const obj: Record<string, BrickOptionItem[]> = {};
-      brickList.forEach((item) => {
+      const filterBricks = brickList.filter(
+        (item) => !blankListOfBricks.some((id) => item.id === id)
+      );
+      filterBricks.forEach((item) => {
         if (item.layerType !== undefined && item.layerType !== "brick") {
           obj[item.layerType]
             ? obj[item.layerType].push(item)
@@ -136,7 +151,7 @@ export function WorkbenchComponentSelect({
       });
       return obj;
     },
-    []
+    [blankListOfBricks]
   );
 
   useEffect(() => {
