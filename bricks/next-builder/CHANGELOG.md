@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.182.0...@next-bricks/next-builder@1.183.0) (2022-09-08)
+
+
+### Features
+
+* add isContainer in tree node ([24ac1ee](https://github.com/easyops-cn/next-basics/commit/24ac1eed3092c7e9b998decda11b5ad53ad6c6b0))
+
+
+
+
+
 # [1.182.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.181.3...@next-bricks/next-builder@1.182.0) (2022-09-08)
 
 
