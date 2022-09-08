@@ -21,6 +21,7 @@ import type {
   PreviewMessageContainerProxyMethod,
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
+  PreviewMessageContainerUpdatePreviewRoute,
   PreviewMessageContainerUpdatePreviewUrl,
   PreviewMessageFromContainer,
   PreviewMessageToContainer,
@@ -82,7 +83,6 @@ export interface PreviewContainerRef {
   reload(): void;
   capture(): void;
   resize(): void;
-  updatePreviewUrl(url: string, exact?: boolean): void;
   manager: BuilderDataManager;
 }
 
@@ -489,28 +489,60 @@ export function LegacyPreviewContainer(
     });
   };
 
-  const excuteProxyMethod = useCallback((ref, method, args) => {
-    iframeRef.current.contentWindow.postMessage(
-      {
-        sender: "preview-container",
-        type: "excute-proxy-method",
-        proxyMethodArgs: [ref, method, args],
-      } as PreviewMessageContainerProxyMethod,
-      previewOrigin
-    );
-  }, []);
+  const excuteProxyMethod = useCallback(
+    (ref, method, args) => {
+      iframeRef.current.contentWindow.postMessage(
+        {
+          sender: "preview-container",
+          type: "excute-proxy-method",
+          proxyMethodArgs: [ref, method, args],
+        } as PreviewMessageContainerProxyMethod,
+        previewOrigin
+      );
+    },
+    [previewOrigin]
+  );
 
-  const updatePreviewUrl = (url: string, exact: boolean): void => {
-    iframeRef.current.contentWindow.postMessage(
-      {
-        sender: "preview-container",
-        type: "update-preview-url",
-        path: url,
-        exact: exact,
-      } as PreviewMessageContainerUpdatePreviewUrl,
-      previewOrigin
-    );
-  };
+  const previewUrlInitializedRef = useRef(false);
+  const [initialPreviewUrl, setInitialPreviewUrl] = useState(previewUrl);
+  useEffect(() => {
+    // Never reset `iframe.src` once it has been set.
+    if (!previewUrlInitializedRef.current && previewUrl) {
+      previewUrlInitializedRef.current = true;
+      setInitialPreviewUrl(previewUrl);
+    }
+  }, [previewUrl]);
+
+  const lastPreviewUrlRef = useRef(previewUrl);
+  useEffect(() => {
+    if (lastPreviewUrlRef.current !== previewUrl) {
+      lastPreviewUrlRef.current = previewUrl;
+      if (loadedRef.current && previewUrl) {
+        iframeRef.current.contentWindow.postMessage(
+          {
+            sender: "preview-container",
+            type: "update-preview-url",
+            previewUrl,
+          } as PreviewMessageContainerUpdatePreviewUrl,
+          previewOrigin
+        );
+      }
+    }
+  }, [previewOrigin, previewUrl]);
+
+  useEffect(() => {
+    if (loadedRef.current) {
+      iframeRef.current.contentWindow.postMessage(
+        {
+          sender: "preview-container",
+          type: "update-preview-route",
+          routePath,
+          routeExact,
+        } as PreviewMessageContainerUpdatePreviewRoute,
+        previewOrigin
+      );
+    }
+  }, [previewOrigin, routeExact, routePath]);
 
   useImperativeHandle(ref, () => ({
     refresh,
@@ -519,7 +551,6 @@ export function LegacyPreviewContainer(
     resize,
     manager,
     excuteProxyMethod,
-    updatePreviewUrl,
   }));
 
   useEffect(() => {
@@ -752,7 +783,7 @@ export function LegacyPreviewContainer(
       >
         <iframe
           className={styles.iframe}
-          src={previewUrl}
+          src={initialPreviewUrl}
           ref={iframeRef}
           onLoad={handleIframeLoad}
           onMouseOut={handleMouseOut}
