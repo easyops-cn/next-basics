@@ -116,7 +116,8 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerReload
   | PreviewMessageContainerCapture
   | PreviewMessageContainerProxyMethod
-  | PreviewMessageContainerUpdatePreviewUrl;
+  | PreviewMessageContainerUpdatePreviewUrl
+  | PreviewMessageContainerUpdatePreviewRoute;
 
 export type PreviewMessageFromContainer =
   | PreviewMessageContainerBuilderHoverOnIframe
@@ -321,8 +322,15 @@ export interface PreviewMessageContainerUpdatePreviewUrl
   extends PreviewBaseMessage {
   sender: "preview-container";
   type: "update-preview-url";
-  path: string;
-  exact?: boolean;
+  previewUrl: string;
+}
+
+export interface PreviewMessageContainerUpdatePreviewRoute
+  extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "update-preview-route";
+  routePath: string;
+  routeExact: boolean;
 }
 
 export interface PreviewMessageContainerMatchApiCache

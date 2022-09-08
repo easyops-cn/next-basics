@@ -1,4 +1,4 @@
-import { developHelper, getHistory } from "@next-core/brick-kit";
+import { developHelper, getHistory, getRuntime } from "@next-core/brick-kit";
 import { formDataProperties } from "@next-core/brick-kit/dist/types/core/CustomForms/ExpandCustomForm";
 import type {
   BrickConf,
@@ -253,29 +253,43 @@ export function previewStart(
               }
             );
             break;
+          case "update-preview-url": {
+            // Remove origin first.
+            const url = data.previewUrl.startsWith(window.origin)
+              ? data.previewUrl.substring(window.origin.length)
+              : data.previewUrl;
+            // Then remove base path.
+            const basePath = getRuntime().getBasePath();
+            const to = url.startsWith(basePath)
+              ? url.substring(basePath.length - 1)
+              : url;
+            getHistory().push(to);
+            break;
+          }
+          case "update-preview-route": {
+            options.routePath = data.routePath;
+            options.routeExact = data.routeExact;
+            break;
+          }
+          case "excute-proxy-method": {
+            const [ref, method, args = []] = data.proxyMethodArgs;
+            try {
+              const result = document.body.querySelector(ref)[method](...args);
+              window.parent.postMessage({
+                sender: "previewer",
+                type: "excute-proxy-method-success",
+                data: { method: method, res: result },
+              });
+            } catch (err) {
+              window.parent.postMessage({
+                sender: "previewer",
+                type: "excute-proxy-method-error",
+                data: { method: method, res: err.message },
+              });
+            }
+            break;
+          }
         }
-      if (data.type === "excute-proxy-method") {
-        const [ref, method, args = []] = data.proxyMethodArgs;
-        try {
-          const result = document.body.querySelector(ref)[method](...args);
-          window.parent.postMessage({
-            sender: "previewer",
-            type: "excute-proxy-method-success",
-            data: { method: method, res: result },
-          });
-        } catch (err) {
-          window.parent.postMessage({
-            sender: "previewer",
-            type: "excute-proxy-method-error",
-            data: { method: method, res: err.message },
-          });
-        }
-      }
-      if (data.type === "update-preview-url") {
-        options.routePath = data.path;
-        data.exact && (options.routeExact = data.exact);
-        getHistory().push(data.path);
-      }
     }
   );
 

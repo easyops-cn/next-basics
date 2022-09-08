@@ -199,9 +199,10 @@ export class PreviewContainerElement extends UpdatingElement {
     this._previewContainerRef.current.excuteProxyMethod(ref, method, args);
   }
 
+  /** @deprecated */
   @method()
   updatePreviewUrl(url: string): void {
-    this._previewContainerRef.current.updatePreviewUrl(url);
+    //
   }
 
   connectedCallback(): void {
