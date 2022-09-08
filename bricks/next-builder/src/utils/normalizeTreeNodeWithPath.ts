@@ -31,6 +31,7 @@ export function getNodeTreeByPath(
           originKey: node.key,
           data: {
             [nodeKey]: path,
+            isContainer: true,
           },
           children: [],
           icon: {
