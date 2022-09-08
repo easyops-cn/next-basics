@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.181.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.181.2...@next-bricks/next-builder@1.181.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* add new builtin event actions ([3e8e34a](https://github.com/easyops-cn/next-basics/commit/3e8e34a9ef22a124093fd577dc680f760d800be9))
+
+
+
+
+
 ## [1.181.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.181.1...@next-bricks/next-builder@1.181.2) (2022-09-08)
 
 
