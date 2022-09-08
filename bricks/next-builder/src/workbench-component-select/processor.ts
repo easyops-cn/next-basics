@@ -1,7 +1,7 @@
 import { cloneDeep } from "lodash";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import { scanBricksInBrickConf } from "@next-core/brick-utils";
-import { groupItem, BrickSortField } from "./constants";
+import { groupItem, BrickSortField, SnippetType } from "./constants";
 
 export function adjustBrickSort(
   group: groupItem[],
@@ -39,13 +39,13 @@ export function adjustBrickSort(
 
 /**
  *
- * 在现有的 snippet 中找出只配置一个构件的片段，当成是该构件的下所属的 snippet
+ * 在现有的 snippet 中找出只配置一个构件的片段，当成是该构件的下所属的 `构件 snippet`
+ * 如果有 useInBricks 字段的，表明该 snippets 可用在这些构件上其归属于 `场景化 snippet`
  */
 export function getSnippetsOfBrickMap(
   snippetList: BrickOptionItem[]
-): Map<string, BrickOptionItem[]> {
+): Map<string, Map<SnippetType, BrickOptionItem[]>> {
   const brickMap = new Map();
-
   snippetList?.forEach((item) => {
     const bricks: string[] = [];
     item.bricks?.forEach((brickConf) => {
@@ -56,11 +56,27 @@ export function getSnippetsOfBrickMap(
       const brick = bricks[0];
       const find = brickMap.get(brick);
       if (!find) {
-        const arr = [item];
-        brickMap.set(brick, arr);
+        brickMap.set(brick, new Map([[SnippetType.SelfBrick, [item]]]));
       } else {
-        find.push(item);
+        const selfSnippets = find.get(SnippetType.SelfBrick);
+
+        selfSnippets
+          ? selfSnippets.push(item)
+          : find.set(SnippetType.SelfBrick, [item]);
       }
+    } else {
+      item.useInBricks?.forEach((brick) => {
+        const find = brickMap.get(brick);
+        if (!find) {
+          brickMap.set(brick, new Map([[SnippetType.Scene, [item]]]));
+        } else {
+          const sceneSnippets = find.get(SnippetType.Scene);
+
+          sceneSnippets
+            ? sceneSnippets.push(item)
+            : find.set(SnippetType.Scene, [item]);
+        }
+      });
     }
   });
 

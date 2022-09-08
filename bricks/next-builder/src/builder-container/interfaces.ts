@@ -19,6 +19,7 @@ export interface BrickOptionItem {
   isHostedSnippet?: boolean;
   $searchTextPool?: string[];
   isExport?: boolean;
+  useInBricks?: string[];
 }
 
 export interface GroupedBricks {

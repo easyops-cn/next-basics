@@ -544,6 +544,57 @@ describe("processor", () => {
     [
       [
         {
+          id: "presentational-bricks.brick-link",
+          title: "链接",
+          bricks: [
+            {
+              brick: "presentational-bricks.brick-link",
+              properties: {
+                label: "查看",
+              },
+            },
+          ],
+        },
+        {
+          id: "basic-bricks-widgets.general-button-mix",
+          title: "混合按钮",
+          bricks: [
+            {
+              brick: "basic-bricks.general-card",
+              slots: {
+                "": {
+                  type: "bricks",
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-button",
+                      properties: {
+                        buttonType: "primary",
+                      },
+                    },
+                    {
+                      brick: "basic-bricks.general-custom-buttons",
+                      properties: {
+                        alignment: "end",
+                        customButtons: [
+                          {
+                            buttonType: "primary",
+                            eventName: "button-create",
+                            text: "新建",
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          useInBricks: [
+            "basic-bricks.general-custom-buttons",
+            "basic-bricks.general-button",
+          ],
+        },
+        {
           id: "basic-bricks.general-button[primary]",
           title: "主按钮",
           bricks: [
@@ -734,11 +785,27 @@ describe("processor", () => {
                         },
                       },
                     },
+                    {
+                      brick: "basic-bricks.general-button",
+                      properties: {
+                        buttonType: "primary",
+                      },
+                    },
+                    {
+                      brick: "presentational-bricks.brick-link",
+                      properties: {
+                        label: "查看",
+                      },
+                    },
                   ],
                   type: "bricks",
                 },
               },
             },
+          ],
+          useInBricks: [
+            "basic-bricks.general-button",
+            "presentational-bricks.brick-link",
           ],
         },
         {
@@ -768,6 +835,7 @@ describe("processor", () => {
                 dataset: {
                   testid: "general-search-no-update-query",
                 },
+                buttonType: "primary",
                 placeholder: "搜索不更新 url 参数",
                 shouldTrimQuery: true,
                 shouldUpdateUrlParams: false,
@@ -779,71 +847,588 @@ describe("processor", () => {
       new Map([
         [
           "basic-bricks.general-button",
-          [
-            {
-              id: "basic-bricks.general-button[primary]",
-              title: "主按钮",
-              bricks: [
+          new Map([
+            [
+              "selfBrick",
+              [
                 {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonType: "primary",
-                  },
+                  id: "basic-bricks.general-button[primary]",
+                  title: "主按钮",
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-button",
+                      properties: {
+                        buttonType: "primary",
+                      },
+                    },
+                  ],
+                },
+                {
+                  id: "basic-bricks.general-button[default]",
+                  title: "默认按钮",
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-button",
+                      properties: {
+                        buttonType: "default",
+                      },
+                    },
+                  ],
                 },
               ],
-            },
-            {
-              id: "basic-bricks.general-button[default]",
-              title: "默认按钮",
-              bricks: [
+            ],
+            [
+              "scene",
+              [
                 {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonType: "default",
-                  },
+                  id: "basic-bricks-widgets.general-button-mix",
+                  title: "混合按钮",
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-card",
+                      slots: {
+                        "": {
+                          type: "bricks",
+                          bricks: [
+                            {
+                              brick: "basic-bricks.general-button",
+                              properties: {
+                                buttonType: "primary",
+                              },
+                            },
+                            {
+                              brick: "basic-bricks.general-custom-buttons",
+                              properties: {
+                                alignment: "end",
+                                customButtons: [
+                                  {
+                                    buttonType: "primary",
+                                    eventName: "button-create",
+                                    text: "新建",
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                  useInBricks: [
+                    "basic-bricks.general-custom-buttons",
+                    "basic-bricks.general-button",
+                  ],
+                },
+                {
+                  id: "presentational-bricks-widgets.card-item-with-description-drawer",
+                  title: "带描述抽屉的卡片项",
+                  bricks: [
+                    {
+                      bg: false,
+                      brick: "div",
+                      iid: "5e2a50d911d35",
+                      injectDeep: true,
+                      portal: false,
+                      slots: {
+                        "": {
+                          bricks: [
+                            {
+                              bg: false,
+                              brick: "presentational-bricks.card-item",
+                              events: {
+                                "presentational-bricks.card-item.click": {
+                                  method: "open",
+                                  target: "#my-drawer",
+                                },
+                              },
+                              iid: "5e2a50d912f2d",
+                              injectDeep: true,
+                              portal: false,
+                              properties: {
+                                cardLayoutType: "icon-small-align-left",
+                                cardSubtitle: "副标题文字",
+                                cardTitle: "卡片标题",
+                                dataset: {
+                                  testid: "drawer-card",
+                                },
+                                descriptionList: "点击查看详细信息",
+                                icon: {
+                                  icon: "chart-pie",
+                                  lib: "fa",
+                                },
+                                iconColor: "geekblue",
+                                style: {
+                                  width: "300px",
+                                },
+                              },
+                            },
+                            {
+                              bg: false,
+                              brick: "basic-bricks.general-drawer",
+                              iid: "5e2a50d9158f9",
+                              injectDeep: true,
+                              portal: false,
+                              properties: {
+                                closable: true,
+                                customTitle: "添加信息",
+                                dataset: {
+                                  testid: "drawer",
+                                },
+                                hasFooter: true,
+                                id: "my-drawer",
+                                maskClosable: true,
+                                width: 600,
+                              },
+                              slots: {
+                                content: {
+                                  bricks: [
+                                    {
+                                      bg: false,
+                                      brick:
+                                        "presentational-bricks.brick-descriptions",
+                                      iid: "5e2a51afac0ef",
+                                      injectDeep: true,
+                                      portal: false,
+                                      properties: {
+                                        column: 2,
+                                        dataset: {
+                                          testid: "drawer-description1",
+                                        },
+                                        descriptionTitle: "基本信息",
+                                        itemList: [
+                                          {
+                                            label: "名称",
+                                            text: "easyops",
+                                          },
+                                          {
+                                            label: "环境类型",
+                                            text: "无",
+                                          },
+                                          {
+                                            label: "授权模式",
+                                            text: "clientCert",
+                                          },
+                                          {
+                                            label: "服务供应商",
+                                          },
+                                        ],
+                                        showCard: false,
+                                      },
+                                    },
+                                    {
+                                      bg: false,
+                                      brick:
+                                        "presentational-bricks.brick-descriptions",
+                                      iid: "5e2a521ecab06",
+                                      injectDeep: true,
+                                      portal: false,
+                                      properties: {
+                                        column: 2,
+                                        dataset: {
+                                          testid: "drawer-description2",
+                                        },
+                                        descriptionTitle: "集群规格",
+                                        itemList: [
+                                          {
+                                            label: "集群来源",
+                                            text: "导入",
+                                          },
+                                          {
+                                            label: "Manter节点数量",
+                                            text: "3个",
+                                          },
+                                          {
+                                            label: "可分配CPU",
+                                            text: "12 Cores",
+                                          },
+                                          {
+                                            label: "可分配内存",
+                                            text: "44.8GIB",
+                                          },
+                                        ],
+                                        showCard: false,
+                                        style: {
+                                          marginTop: "20px",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                  type: "bricks",
+                                },
+                                headerRight: {
+                                  bricks: [
+                                    {
+                                      bg: false,
+                                      brick:
+                                        "basic-bricks.general-custom-buttons",
+                                      iid: "5e2a525344293",
+                                      injectDeep: true,
+                                      portal: false,
+                                      properties: {
+                                        customButtons: [
+                                          {
+                                            buttonType: "link",
+                                            icon: {
+                                              color: "#167be0",
+                                              icon: "share-alt",
+                                              lib: "fa",
+                                              prefix: "fas",
+                                            },
+                                            isDropdown: false,
+                                            tooltip: "分享",
+                                            tooltipPlacement: "bottom",
+                                          },
+                                        ],
+                                        dataset: {
+                                          testid: "drawer-share-btn",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                  type: "bricks",
+                                },
+                              },
+                            },
+                            {
+                              brick: "basic-bricks.general-button",
+                              properties: {
+                                buttonType: "primary",
+                              },
+                            },
+                            {
+                              brick: "presentational-bricks.brick-link",
+                              properties: {
+                                label: "查看",
+                              },
+                            },
+                          ],
+                          type: "bricks",
+                        },
+                      },
+                    },
+                  ],
+                  useInBricks: [
+                    "basic-bricks.general-button",
+                    "presentational-bricks.brick-link",
+                  ],
                 },
               ],
-            },
-          ],
+            ],
+          ]),
         ],
         [
           "presentational-bricks.brick-general-search",
-          [
-            {
-              id: "presentational-bricks-widgets.general-search-no-update-query",
-              title: "搜索框（不更新url）",
-              bricks: [
+          new Map([
+            [
+              "selfBrick",
+              [
                 {
-                  brick: "presentational-bricks.brick-general-search",
-                  events: {
-                    "filter.update": [
-                      {
-                        action: "message.success",
-                        args: ["点击搜索"],
+                  id: "presentational-bricks-widgets.general-search-no-update-query",
+                  title: "搜索框（不更新url）",
+                  bricks: [
+                    {
+                      brick: "presentational-bricks.brick-general-search",
+                      events: {
+                        "filter.update": [
+                          {
+                            action: "message.success",
+                            args: ["点击搜索"],
+                          },
+                        ],
+                        "query.change": [
+                          {
+                            action: "message.success",
+                            args: ["输入搜索"],
+                          },
+                        ],
                       },
-                    ],
-                    "query.change": [
-                      {
-                        action: "message.success",
-                        args: ["输入搜索"],
+                      iid: "5e2692449abbb",
+                      injectDeep: true,
+                      portal: false,
+                      properties: {
+                        dataset: {
+                          testid: "general-search-no-update-query",
+                        },
+                        buttonType: "primary",
+                        placeholder: "搜索不更新 url 参数",
+                        shouldTrimQuery: true,
+                        shouldUpdateUrlParams: false,
                       },
-                    ],
-                  },
-                  iid: "5e2692449abbb",
-                  injectDeep: true,
-                  portal: false,
-                  properties: {
-                    dataset: {
-                      testid: "general-search-no-update-query",
                     },
-                    placeholder: "搜索不更新 url 参数",
-                    shouldTrimQuery: true,
-                    shouldUpdateUrlParams: false,
-                  },
+                  ],
                 },
               ],
-            },
-          ],
+            ],
+          ]),
+        ],
+        [
+          "presentational-bricks.brick-link",
+          new Map([
+            [
+              "selfBrick",
+              [
+                {
+                  id: "presentational-bricks.brick-link",
+                  title: "链接",
+                  bricks: [
+                    {
+                      brick: "presentational-bricks.brick-link",
+                      properties: {
+                        label: "查看",
+                      },
+                    },
+                  ],
+                },
+              ],
+            ],
+            [
+              "scene",
+              [
+                {
+                  id: "presentational-bricks-widgets.card-item-with-description-drawer",
+                  title: "带描述抽屉的卡片项",
+                  bricks: [
+                    {
+                      bg: false,
+                      brick: "div",
+                      iid: "5e2a50d911d35",
+                      injectDeep: true,
+                      portal: false,
+                      slots: {
+                        "": {
+                          bricks: [
+                            {
+                              bg: false,
+                              brick: "presentational-bricks.card-item",
+                              events: {
+                                "presentational-bricks.card-item.click": {
+                                  method: "open",
+                                  target: "#my-drawer",
+                                },
+                              },
+                              iid: "5e2a50d912f2d",
+                              injectDeep: true,
+                              portal: false,
+                              properties: {
+                                cardLayoutType: "icon-small-align-left",
+                                cardSubtitle: "副标题文字",
+                                cardTitle: "卡片标题",
+                                dataset: {
+                                  testid: "drawer-card",
+                                },
+                                descriptionList: "点击查看详细信息",
+                                icon: {
+                                  icon: "chart-pie",
+                                  lib: "fa",
+                                },
+                                iconColor: "geekblue",
+                                style: {
+                                  width: "300px",
+                                },
+                              },
+                            },
+                            {
+                              bg: false,
+                              brick: "basic-bricks.general-drawer",
+                              iid: "5e2a50d9158f9",
+                              injectDeep: true,
+                              portal: false,
+                              properties: {
+                                closable: true,
+                                customTitle: "添加信息",
+                                dataset: {
+                                  testid: "drawer",
+                                },
+                                hasFooter: true,
+                                id: "my-drawer",
+                                maskClosable: true,
+                                width: 600,
+                              },
+                              slots: {
+                                content: {
+                                  bricks: [
+                                    {
+                                      bg: false,
+                                      brick:
+                                        "presentational-bricks.brick-descriptions",
+                                      iid: "5e2a51afac0ef",
+                                      injectDeep: true,
+                                      portal: false,
+                                      properties: {
+                                        column: 2,
+                                        dataset: {
+                                          testid: "drawer-description1",
+                                        },
+                                        descriptionTitle: "基本信息",
+                                        itemList: [
+                                          {
+                                            label: "名称",
+                                            text: "easyops",
+                                          },
+                                          {
+                                            label: "环境类型",
+                                            text: "无",
+                                          },
+                                          {
+                                            label: "授权模式",
+                                            text: "clientCert",
+                                          },
+                                          {
+                                            label: "服务供应商",
+                                          },
+                                        ],
+                                        showCard: false,
+                                      },
+                                    },
+                                    {
+                                      bg: false,
+                                      brick:
+                                        "presentational-bricks.brick-descriptions",
+                                      iid: "5e2a521ecab06",
+                                      injectDeep: true,
+                                      portal: false,
+                                      properties: {
+                                        column: 2,
+                                        dataset: {
+                                          testid: "drawer-description2",
+                                        },
+                                        descriptionTitle: "集群规格",
+                                        itemList: [
+                                          {
+                                            label: "集群来源",
+                                            text: "导入",
+                                          },
+                                          {
+                                            label: "Manter节点数量",
+                                            text: "3个",
+                                          },
+                                          {
+                                            label: "可分配CPU",
+                                            text: "12 Cores",
+                                          },
+                                          {
+                                            label: "可分配内存",
+                                            text: "44.8GIB",
+                                          },
+                                        ],
+                                        showCard: false,
+                                        style: {
+                                          marginTop: "20px",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                  type: "bricks",
+                                },
+                                headerRight: {
+                                  bricks: [
+                                    {
+                                      bg: false,
+                                      brick:
+                                        "basic-bricks.general-custom-buttons",
+                                      iid: "5e2a525344293",
+                                      injectDeep: true,
+                                      portal: false,
+                                      properties: {
+                                        customButtons: [
+                                          {
+                                            buttonType: "link",
+                                            icon: {
+                                              color: "#167be0",
+                                              icon: "share-alt",
+                                              lib: "fa",
+                                              prefix: "fas",
+                                            },
+                                            isDropdown: false,
+                                            tooltip: "分享",
+                                            tooltipPlacement: "bottom",
+                                          },
+                                        ],
+                                        dataset: {
+                                          testid: "drawer-share-btn",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                  type: "bricks",
+                                },
+                              },
+                            },
+                            {
+                              brick: "basic-bricks.general-button",
+                              properties: {
+                                buttonType: "primary",
+                              },
+                            },
+                            {
+                              brick: "presentational-bricks.brick-link",
+                              properties: {
+                                label: "查看",
+                              },
+                            },
+                          ],
+                          type: "bricks",
+                        },
+                      },
+                    },
+                  ],
+                  useInBricks: [
+                    "basic-bricks.general-button",
+                    "presentational-bricks.brick-link",
+                  ],
+                },
+              ],
+            ],
+          ]),
+        ],
+        [
+          "basic-bricks.general-custom-buttons",
+          new Map([
+            [
+              "scene",
+              [
+                {
+                  id: "basic-bricks-widgets.general-button-mix",
+                  title: "混合按钮",
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-card",
+                      slots: {
+                        "": {
+                          type: "bricks",
+                          bricks: [
+                            {
+                              brick: "basic-bricks.general-button",
+                              properties: {
+                                buttonType: "primary",
+                              },
+                            },
+                            {
+                              brick: "basic-bricks.general-custom-buttons",
+                              properties: {
+                                alignment: "end",
+                                customButtons: [
+                                  {
+                                    buttonType: "primary",
+                                    eventName: "button-create",
+                                    text: "新建",
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                  useInBricks: [
+                    "basic-bricks.general-custom-buttons",
+                    "basic-bricks.general-button",
+                  ],
+                },
+              ],
+            ],
+          ]),
         ],
       ]),
     ],

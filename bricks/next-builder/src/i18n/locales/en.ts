@@ -136,6 +136,8 @@ const locale: Locale = {
   [K.LAYOUT]: "Layout",
   [K.FORMITEM]: "FORMITEM",
   [K.DOCUMENT]: "Document",
+  [K.SELF_BRICK_SNIPPETS]: "Single brick snippets",
+  [K.SCENE_SNIPPETS]: "Scene snippets",
 };
 
 export default locale;

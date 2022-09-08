@@ -121,6 +121,8 @@ export enum K {
   LAYOUT = "LAYOUT",
   FORMITEM = "FORMITEM",
   DOCUMENT = "DOCUMENT",
+  SELF_BRICK_SNIPPETS = "SELF_BRICK_SNIPPETS",
+  SCENE_SNIPPETS = "SCENE_SNIPPETS",
 }
 
 export type Locale = { [key in K]: string };

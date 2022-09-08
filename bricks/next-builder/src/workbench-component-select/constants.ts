@@ -148,7 +148,7 @@ export const defaultGroup: componentGroup = {
 };
 
 interface ComSelectContext {
-  snippetsOfBrickMap?: Map<string, BrickOptionItem[]>;
+  snippetsOfBrickMap?: Map<string, Map<SnippetType, BrickOptionItem[]>>;
 }
 
 export const ComponentSelectContext = React.createContext<ComSelectContext>({});
@@ -172,3 +172,8 @@ export const defaultBlankListOfBricks: string[] = [
   "presentational-bricks.brick-cluster-type",
   "presentational-bricks.agent-status",
 ];
+
+export enum SnippetType {
+  SelfBrick = "selfBrick",
+  Scene = "scene",
+}
