@@ -19,6 +19,10 @@ export interface WorkbenchNodeData<T = unknown> {
   children?: WorkbenchNodeData[];
   matched?: boolean;
   matchedSelf?: boolean;
+  path?: string;
+  isContainer?: boolean;
+  originKey?: string;
+  parentPath?: string;
 }
 
 export interface WorkbenchTreeAction {

@@ -43,6 +43,7 @@ export function WorkbenchDataTree({
   const mouseEnterFactory = useCallback(
     ({ data }: WorkbenchNodeData<ContextConf>) => {
       return () => {
+        if (!data) return;
         const nodesToHighlight = new Set<number>();
         const keyWord = nodes[0]?.type === "custom-template" ? "STATE" : "CTX";
         nodes.forEach((node) => {
@@ -74,6 +75,7 @@ export function WorkbenchDataTree({
         nodeKey,
         clickFactory,
         contextMenuFactory,
+        collapsible: true,
         showMatchedNodeOnly: true,
         matchNode: (node, lowerTrimmedQuery) =>
           deepMatch(node.name, lowerTrimmedQuery) ||
@@ -91,7 +93,6 @@ export function WorkbenchDataTree({
         placeholder={placeholder}
         searchPlaceholder={searchPlaceholder}
         allowDragToRoot={true}
-        allowDragToInside={false}
         dropEmit={dropEmit}
       />
     </WorkbenchTreeContext.Provider>

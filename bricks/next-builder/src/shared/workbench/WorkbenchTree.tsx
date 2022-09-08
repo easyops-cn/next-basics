@@ -28,6 +28,10 @@ import styles from "./WorkbenchTree.module.css";
 import { WorkbenchTreeDndContext } from "./WorkbenchTreeDndContext";
 import { setDragImage } from "../../workbench-component-select/WorkbenchComponentSelect";
 import classnames from "classnames";
+import {
+  getNodesByPathTree,
+  getNodeTreeByPath,
+} from "../../utils/normalizeTreeNodeWithPath";
 
 const treeLevelPadding = 10;
 const borderStyle = "0 0 0 1px #ba6d30";
@@ -59,7 +63,7 @@ export interface TreeListProps {
 const SearchingContext = createContext(false);
 
 export function WorkbenchTree({
-  nodes,
+  nodes: originNode,
   placeholder,
   searchPlaceholder,
   isDrag,
@@ -77,6 +81,10 @@ export function WorkbenchTree({
   const [overStatus, setOverStatus] = useState<dragStatusEnum>();
   const { nodeKey, onBrickDrop, contextMenuFactory, matchNode } =
     useWorkbenchTreeContext();
+  const nodes = useMemo(
+    () => getNodeTreeByPath(originNode?.slice() ?? [], nodeKey),
+    [originNode, nodeKey]
+  );
 
   const handleSearchChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +151,7 @@ export function WorkbenchTree({
   } => {
     const element = findDragParent(e.target as HTMLElement);
     const id = element.dataset.uid;
-    if (element === curElement || id.includes(":")) {
+    if (element === curElement || id?.includes(":")) {
       return;
     }
     const { top, bottom } = element.getBoundingClientRect();
@@ -154,7 +162,7 @@ export function WorkbenchTree({
     } else if (e.clientY > bottom - repair) {
       status = dragStatusEnum.bottom;
     } else {
-      status = allowDragToInside ? dragStatusEnum.inside : null;
+      status = allowDragToInside ? dragStatusEnum.inside : overStatus;
     }
 
     return {
@@ -168,8 +176,10 @@ export function WorkbenchTree({
     e: React.DragEvent,
     node: WorkbenchNodeData
   ): void => {
-    setIsDragging(true);
+    e.stopPropagation();
     const element = e.target as HTMLElement;
+    if (element.dataset?.container) return;
+    setIsDragging(true);
     setDragImage(e, element.innerText);
     setCurElement(element);
     setCurNode(node);
@@ -210,19 +220,35 @@ export function WorkbenchTree({
         overStatus,
       });
     } else {
+      let realOverNode = overNode;
+      const findRealNode = (nodes: WorkbenchNodeData[], key: string): void => {
+        for (let i = 0; i < nodes.length; i++) {
+          if (nodes[i].key === key) {
+            realOverNode = nodes[i];
+            break;
+          }
+          if (nodes[i].children) {
+            findRealNode(nodes[i].children, key);
+          }
+        }
+      };
+      const overUid = overElement.dataset.uid;
+      findRealNode(nodes, overUid);
       const filterNodes = (nodes: WorkbenchNodeData[]): WorkbenchNodeData[] => {
         let flag = false;
+        const { container, uid } = overElement.dataset;
+        const realOverKey = container ? realOverNode.originKey : uid;
         const newNodes = nodes.filter((node) => {
           if (node.children) {
             node.children = filterNodes(node.children);
           }
-          if (node.key === overNode.key) flag = true;
+          if (node.key === realOverKey) flag = true;
           return node.key !== curNode.key;
         });
         if (flag) {
           newNodes.splice(
-            newNodes.findIndex((item) => item.key === overNode.key) +
-              (overStatus === "top" ? 0 : 1),
+            newNodes.findIndex((item) => item.key === realOverKey) +
+              (overStatus === "bottom" ? 1 : 0),
             0,
             curNode
           );
@@ -230,10 +256,22 @@ export function WorkbenchTree({
         return newNodes;
       };
 
+      const normalizeNode = getNodesByPathTree(nodes);
+      const realCurNode = curNode.isContainer
+        ? normalizeNode.find((item) => item.key === curNode.originKey)
+        : curNode;
+      const curNodeData = realCurNode.data as Record<string, unknown>;
+
+      if (overNode.isContainer) {
+        curNodeData.path = realOverNode.parentPath || realOverNode.path;
+      } else {
+        curNodeData.path = "";
+      }
+
       dropEmit({
-        nodes: filterNodes(nodes),
-        curNode,
-        overNode,
+        nodes: filterNodes(normalizeNode),
+        curNode: realCurNode,
+        overNode: realOverNode,
         status: overStatus,
       });
     }
@@ -354,6 +392,7 @@ function TreeNode({
   isLast,
 }: TreeNodeProps): ReactElement {
   const isLeaf = !node.children?.length;
+  const isContainer = node.isContainer;
   const {
     hoverKey,
     activeKey,
@@ -388,8 +427,6 @@ function TreeNode({
   const [collapsed, setCollapsed] = useState(
     collapsedNodes?.includes(getCollapsedId?.(node)) ?? false
   );
-
-  const onClick = useMemo(() => clickFactory?.(node), [clickFactory, node]);
 
   const onMouseEnter = useMemo(
     () => mouseEnterFactory?.(node),
@@ -427,6 +464,9 @@ function TreeNode({
   );
 
   const nodeUid = useMemo(() => {
+    if (isContainer) {
+      return node.key;
+    }
     if (node.data) {
       const getNodeUid = (data: Record<string, any>): number | string => {
         return data.type === "mount-point"
@@ -435,7 +475,7 @@ function TreeNode({
       };
       return getNodeUid(node.data);
     }
-  }, [nodeKey, node.data]);
+  }, [nodeKey, node, isContainer]);
 
   useEffect(() => {
     if (dragStatus === dragStatusEnum.inside) {
@@ -490,6 +530,17 @@ function TreeNode({
     event.stopPropagation();
   }, []);
 
+  const onClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (isContainer) {
+        handleCollapse(e);
+      } else {
+        return clickFactory?.(node)(e);
+      }
+    },
+    [clickFactory, handleCollapse, isContainer, node]
+  );
+
   useEffect(() => {
     if (collapseClicked) {
       onNodeToggle?.(getCollapsedId?.(node), collapsed);
@@ -519,6 +570,11 @@ function TreeNode({
         onDragStart={(e) => onDragStart(e, node)}
         data-uid={nodeUid}
         style={nodeStyle}
+        {...(isContainer
+          ? {
+              "data-container": isContainer,
+            }
+          : {})}
       >
         <Link
           className={classNames(styles.nodeLabelRow, {
