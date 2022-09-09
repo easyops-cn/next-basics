@@ -6,8 +6,8 @@ export const story: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "Header with dropdown",
-    zh: "带下拉框的header构件",
+    en: "Graph Node with Dropdown",
+    zh: "拓扑节点-带下拉选项",
   },
   icon: {
     lib: "antd",

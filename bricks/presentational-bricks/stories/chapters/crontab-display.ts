@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const CrontabDisplayStory: Story = {
   storyId: "presentational-bricks.crontab-display",
-  category: "form-input",
+  category: "data-transform",
   type: "brick",
   author: "jo",
   text: {
-    en: "Crontab Display",
-    zh: "定时任务时间展示",
+    en: "【Tool Flow】Crontab Display",
+    zh: "【工具流程】定时任务时间展示",
   },
   icon: {
     lib: "fa",

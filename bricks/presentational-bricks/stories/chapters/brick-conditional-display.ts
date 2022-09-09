@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickConditionalDisplayStory: Story = {
   storyId: "presentational-bricks.brick-conditional-display",
-  category: "value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "cyril",
   text: {
-    en: "conditional display",
-    zh: "条件展示",
+    en: "Tag - Condition Judgment Display",
+    zh: "Tag标签-条件判断展示",
   },
   description: {
     en: "",

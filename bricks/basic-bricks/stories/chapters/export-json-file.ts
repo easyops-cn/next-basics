@@ -23,138 +23,44 @@ export const exportJsonFileStory: Story = {
       brick: "div",
       slots: {
         "": {
-          type: "bricks",
           bricks: [
             {
-              brick: "providers-of-cmdb.instance-api-get-detail",
               bg: true,
-            },
-            {
               brick: "basic-bricks.export-json-file",
-              properties: {
-                id: "export-dashboard",
-              },
-              lifeCycle: {
-                useResolves: [
-                  {
-                    provider: "providers-of-cmdb\\.instance-api-get-detail",
-                    args: [
-                      "HOST",
-                      CMDB_HOST_INSTANCE_ID,
-                      {
-                        fields: "hostname,ip",
-                      },
-                    ],
-                    transform: {
-                      data: "<% DATA %>",
-                      fileName: "<% DATA.hostname + '.json' %>",
-                    },
-                  },
-                ],
-              },
               events: {
-                "json-file.export.success": {
-                  action: "console.log",
-                },
                 "json-file.export.failed": {
                   action: "console.log",
                 },
-              },
-              bg: true,
-            },
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "导出",
-                buttonIcon: {
-                  lib: "antd",
-                  icon: "export",
-                },
-              },
-              events: {
-                "general.button.click": [
-                  {
-                    target: "#export-dashboard",
-                    method: "export",
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
-    },
-    {
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "providers-of-cmdb.instance-api-get-detail",
-              bg: true,
-            },
-            {
-              brick: "basic-bricks.export-json-file",
-              properties: {
-                id: "export-dashboard",
-              },
-              events: {
                 "json-file.export.success": {
                   action: "console.log",
                 },
-                "json-file.export.failed": {
-                  action: "console.log",
-                },
               },
-              bg: true,
+              properties: {
+                id: "export-dashboard",
+                data: "export content",
+                fileName: "test.json",
+              },
             },
             {
               brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "导出",
-                buttonIcon: {
-                  lib: "antd",
-                  icon: "export",
-                },
-              },
               events: {
                 "general.button.click": [
                   {
-                    target: "#export-dashboard",
                     method: "export",
-                    args: [
-                      {
-                        detail: {
-                          data: "<% EVENT.target.data %>",
-                          fileName:
-                            "<% EVENT.target.data.hostname + '.json' %>",
-                        },
-                      },
-                    ],
+                    target: "#export-dashboard",
                   },
                 ],
               },
-              lifeCycle: {
-                useResolves: [
-                  {
-                    provider: "providers-of-cmdb\\.instance-api-get-detail",
-                    args: [
-                      "HOST",
-                      CMDB_HOST_INSTANCE_ID,
-                      {
-                        fields: "hostname,ip",
-                      },
-                    ],
-                    transform: {
-                      data: "<% DATA %>",
-                      fileName: "<% DATA.hostname + '.json' %>",
-                    },
-                  },
-                ],
+              properties: {
+                buttonIcon: {
+                  icon: "export",
+                  lib: "antd",
+                },
+                buttonName: "导出",
               },
             },
           ],
+          type: "bricks",
         },
       },
     },

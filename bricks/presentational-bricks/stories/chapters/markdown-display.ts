@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const MarkdownDisplayStory: Story = {
   storyId: "presentational-bricks.markdown-display",
-  category: "data-view",
+  category: "text",
   type: "brick",
   author: "lynette",
   text: {
-    en: "Markdown Display",
-    zh: "展示Markdown",
+    en: "Markdown Information Display",
+    zh: "Markdown信息展示",
   },
   description: {
     en: "",

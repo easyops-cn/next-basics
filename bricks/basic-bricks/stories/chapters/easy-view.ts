@@ -3,12 +3,12 @@ import { easyViewSvg } from "../images";
 
 export const easyViewStory: Story = {
   storyId: "basic-bricks.easy-view",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "steve",
   text: {
-    en: "Easy View",
-    zh: "简易网格布局",
+    en: "Grid Layout Container - Supports Grid Area",
+    zh: "网格布局容器-支持grid-area",
   },
   description: {
     en: "A grid layout container, which can generate slots by grid-area automatically",

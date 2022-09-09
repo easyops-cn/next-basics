@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const CollapsibleCardItemStory: Story = {
   storyId: "presentational-bricks.collapsible-card-item",
-  category: "card",
+  category: "card-info",
   type: "brick",
   author: "lynette",
   text: {
-    en: "collapsible card item",
-    zh: "折叠卡片项",
+    en: "Collapsible Card Item",
+    zh: "可折叠卡片项",
   },
   description: {
     en: "collapsible card item",

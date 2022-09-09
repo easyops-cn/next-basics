@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickDisplayStructsStory: Story = {
   storyId: "presentational-bricks.brick-display-structs",
-  category: "value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "ice",
   text: {
-    en: "display structs",
-    zh: "展示结构体或数组",
+    en: "Text Conversion - Automatically Convert Structures or Arrays",
+    zh: "文本转换-自动转换结构体或数组",
   },
   icon: { lib: "fa", icon: "cube" },
   description: {

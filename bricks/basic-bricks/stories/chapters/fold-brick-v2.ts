@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const foldBrickV2Story: Story = {
   storyId: "basic-bricks.fold-brick-v2",
-  category: "description",
+  category: "container-display",
   type: "brick",
   author: "momo",
   text: {
-    en: "fold brick",
-    zh: "折叠容器V2",
+    en: "More Information Folding Containers",
+    zh: "更多信息折叠容器",
   },
   description: {
     en: "",

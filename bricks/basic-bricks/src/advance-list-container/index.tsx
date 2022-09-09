@@ -66,22 +66,25 @@ export class AdvancedListContainerElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 列表数据
+   * @group basic
    */
   @property({ attribute: false })
   data: AdvanceListContainerProps["data"];
   /**
-   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @kind {useBrick:UseBrickConf}
    * @required true
    * @default -
-   * @description 列表项标题位置
+   * @description 列表项标题位置，相关类型[UseBrickConf](/next-docs/docs/api-reference/brick-types.usebrickconf)
+   * @group basic
    */
   @property({ attribute: false })
   titleBrick: AdvanceListContainerProps["titleBrick"];
   /**
-   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @kind {useBrick:UseBrickConf}
    * @required false
    * @default -
-   * @description 列表项 extra 位置（右边）
+   * @description 列表项 extra 位置（右边），相关类型[UseBrickConf](/next-docs/docs/api-reference/brick-types.usebrickconf)
+   * @group basic
    */
   @property({ attribute: false })
   suffixBrick: AdvanceListContainerProps["suffixBrick"];
@@ -90,6 +93,7 @@ export class AdvancedListContainerElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否展示 card
+   * @group ui
    */
   @property({ attribute: false })
   showCard: boolean;
@@ -98,20 +102,30 @@ export class AdvancedListContainerElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 默认选中项
+   * @group basic
    */
   @property({ attribute: false })
   defaultActiveIndex: number;
 
-  @property({ attribute: false })
-  selectable = true;
   /**
    * @kind boolean
    * @required false
    * @default false
    * @description 设置`defaultActiveIndex`时，构件初始化时会默认触发item.click事件，如果item.click后需要刷新页面,则会造成构件不断render,页面不断重刷，为避免此情况，可将此项设为true
+   * @group basic
    */
   @property({ type: Boolean })
   notTriggerClickEventWhenInit: boolean;
+
+  /**
+   * @required false
+   * @default true
+   * @description 选项是否可选
+   * @group basic
+   */
+  @property({ attribute: false })
+  selectable = true;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else

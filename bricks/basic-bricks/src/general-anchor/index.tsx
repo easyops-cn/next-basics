@@ -31,7 +31,8 @@ export class GeneralAnchorElement extends UpdatingElement {
    * @kind `AnchorListType[]`
    * @required true
    * @default -
-   * @description 锚点链接的list,会根据list的结构渲染出对应的锚点排布,
+   * @description 锚点链接的list,会根据list的结构渲染出对应的锚点排布
+   * @group basic
    */
   @property({
     attribute: false,
@@ -42,7 +43,8 @@ export class GeneralAnchorElement extends UpdatingElement {
    * @kind `AnchorProps`
    * @required false
    * @default -
-   * @description 锚点的具体参数，这里offsetTop设置了默认为`56`，其他参数可参考antd https://ant.design/docs/react/use-in-typescript-cn#Anchor-Props
+   * @description 锚点的具体参数，这里offsetTop设置了默认为`56`，其他参数可参考[antd](https://ant.design/docs/react/use-in-typescript-cn#Anchor-Props)
+   * @group basic
    */
   @property({
     attribute: false,
@@ -52,8 +54,9 @@ export class GeneralAnchorElement extends UpdatingElement {
   /**
    * @kind `"default" | "radio"`
    * @required false
-   * @default `default`
+   * @default default
    * @description 锚点的类型 ， `radio` 的类型不支持 `anchorList`属性有`children`，否则会样式有问题
+   * @group basic
    */
   @property({
     attribute: false,
@@ -73,6 +76,7 @@ export class GeneralAnchorElement extends UpdatingElement {
    * @default false
    * @required false
    * @description 禁用默认跳转事件
+   * @group basic
    */
   @property({ type: Boolean })
   disabledJump: boolean;
@@ -80,6 +84,7 @@ export class GeneralAnchorElement extends UpdatingElement {
    * @default
    * @required false
    * @description 页面初始化时希望额外向上滚动的距离，例如在target有较大padding但是希望内容显示在上方时可设置。
+   * @group ui
    */
   @property({ attribute: false })
   initOffset: number;

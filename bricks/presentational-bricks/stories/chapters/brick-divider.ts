@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickDividerStory: Story = {
   storyId: "presentational-bricks.brick-divider",
-  category: "other",
+  category: "container-display",
   type: "brick",
   author: "dophi",
   text: {

@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const DatetimeSelectorStory: Story = {
   storyId: "presentational-bricks.datetime-selector",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "jo",
   text: {
     en: "Datetime Selector",
-    zh: "时间选择器",
+    zh: "日期时间选择器",
   },
   description: {
     en: "used to datetime filter",

@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickValueMappingStory: Story = {
   storyId: "presentational-bricks.brick-value-mapping",
-  category: "value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "ice",
   text: {

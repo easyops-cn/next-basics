@@ -5,6 +5,7 @@ export const subMenuStory: Story = {
   category: "navigation",
   type: "brick",
   author: "lynette",
+  deprecated: true,
   text: {
     en: "sub-menu",
     zh: "二级子菜单",

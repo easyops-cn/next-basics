@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const GeneralCarouselStory: Story = {
   storyId: "presentational-bricks.general-carousel",
-  category: "layout",
+  category: "container-display",
   type: "brick",
   author: "jo",
   text: {

@@ -2,9 +2,10 @@ import { Story } from "@next-core/brick-types";
 
 export const homeRedirectStory: Story = {
   storyId: "basic-bricks.home-redirect",
-  category: "other",
+  category: "interact-baisc",
   type: "brick",
   author: "steve",
+  deprecated: true,
   text: {
     en: "redirection to app home",
     zh: "重定向到指定应用的首页",

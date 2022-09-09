@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickTagStory: Story = {
   storyId: "presentational-bricks.brick-tag",
-  category: "data-view",
+  category: "display-component",
   type: "brick",
   author: "lynette",
   text: {

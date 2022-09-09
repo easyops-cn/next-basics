@@ -6,8 +6,8 @@ export const story: Story = {
   type: "brick",
   author: "lynette",
   text: {
-    en: "Item with tag",
-    zh: "带标签的item构件",
+    en: "Graph Node with tag",
+    zh: "拓扑节点-带标签",
   },
   icon: {
     lib: "fa",

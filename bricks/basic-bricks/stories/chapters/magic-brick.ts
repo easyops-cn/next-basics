@@ -6,6 +6,7 @@ export const magicBrickStory: Story = {
   category: "other",
   type: "brick",
   author: "lynette",
+  deprecated: true,
   text: {
     en: "Magic Brick",
     zh: "魔法构件",

@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const listContainerStory: Story = {
   storyId: "basic-bricks.list-container",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "steve",
   text: {

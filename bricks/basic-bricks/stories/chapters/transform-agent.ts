@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const transformAgentStory: Story = {
   storyId: "basic-bricks.transform-agent",
-  category: "data-convert",
+  category: "other",
   type: "brick",
   author: "steve",
   text: {

@@ -6,7 +6,7 @@ import { property, UpdatingElement } from "@next-core/brick-kit";
  * @id basic-bricks.flex-layout
  * @author kehua
  * @history
- * 1.x.0: 新增构件 `basic-bricks.flex-layout`
+ * 1.0.0: 新增构件 `basic-bricks.flex-layout`
  * @docKind brick
  * @noInheritDoc
  */
@@ -14,36 +14,42 @@ import { property, UpdatingElement } from "@next-core/brick-kit";
 export class FlexLayoutElement extends UpdatingElement {
   /**
    * @description 定义[flex-direction]:设置主轴方向
+   * @group basic
    */
   @property({ type: String })
   flexDirection?: string;
 
   /**
    * @description 定义[justify-content]:设置主轴上子元素的排列方式
+   * @group basic
    */
   @property({ type: String })
   justifyContent?: string;
 
   /**
    * @description 定义[align-items]:设置侧轴上的子元素排列方式（单行）
+   * @group basic
    */
   @property({ type: String })
   alignItems?: string;
 
   /**
    * @description 定义[align-content]:设置侧轴上的子元素排列方式（多行）
+   * @group basic
    */
   @property({ type: String })
   alignContent?: string;
 
   /**
    * @description 定义[flex-wrap]:设置换行方式
+   * @group basic
    */
   @property({ type: String })
   flexWrap?: string;
 
   /**
    * @description 定义[gap]:设置元素间隙
+   * @group basic
    */
   @property({ type: String })
   gap?: string;

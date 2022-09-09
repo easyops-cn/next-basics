@@ -6,8 +6,8 @@ export const DropdownSelectStory: Story = {
   type: "brick",
   author: "jo",
   text: {
-    en: "Dropdown Select",
-    zh: "下拉菜单选择框",
+    en: "Menu with Dropdown Select",
+    zh: "菜单切换-带下拉选择",
   },
   description: {
     en: "To Store Related Menu Items When There Are Many Menu Items",

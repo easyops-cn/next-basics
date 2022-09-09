@@ -1,7 +1,7 @@
 import { Story } from "@next-core/brick-types";
 export const GeneralImageStory: Story = {
   storyId: "presentational-bricks.general-image",
-  category: "data-view",
+  category: "display-component",
   type: "brick",
   author: "Lynette",
   text: {

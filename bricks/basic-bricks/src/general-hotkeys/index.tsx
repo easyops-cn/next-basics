@@ -21,7 +21,7 @@ interface HotkeysConfig {
 * @memo
 * ### Supported Keys
 
-*  HotKeys 构件可以识别以下修饰符，方便配置：`⇧`, `shift`, `option`, `⌥`, `alt`, `ctrl`, `control`, `command`, and `⌘`.
+*  HotKeys 构件可以识别以下修饰符，方便配置：`⇧`, `shift`, `option`, `⌥`, `alt`, `ctrl`, `control`, `command`和 `⌘`.
 
 *  以下特殊键可用于配置快捷键：`backspace`, `tab`, `clear`, `enter`, `return`, `esc`, `escape`, `space`, `up`, `down`, `left`, `right`, `home`, `end`, `pageup`, `pagedown`, `del`, `delete` , `f1` 到 `f19`.
 
@@ -41,6 +41,7 @@ export class GeneralHotkeysElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 快捷键配置，支持的 keys 列表如下
+   * @group basic
    */
   @property({
     attribute: false,
@@ -51,6 +52,7 @@ export class GeneralHotkeysElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
+   * @group basic
    * @description 是否禁用
    */
   @property({

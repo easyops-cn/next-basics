@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const EntryCardItemStory: Story = {
   storyId: "presentational-bricks.entry-card-item",
-  category: "card",
+  category: "card-info",
   type: "brick",
   author: "lynette",
   text: {

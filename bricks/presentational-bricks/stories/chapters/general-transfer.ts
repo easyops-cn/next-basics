@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const GeneralTransferStory: Story = {
   storyId: "presentational-bricks.general-transfer",
-  category: "layout",
+  category: "container-display",
   type: "brick",
   author: "ice",
   text: {

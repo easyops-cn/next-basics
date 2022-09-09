@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickClusterTypeStory: Story = {
   storyId: "presentational-bricks.brick-cluster-type",
-  category: "value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "ice",
   deprecated: true,

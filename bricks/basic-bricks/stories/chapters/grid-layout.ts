@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const gridLayoutStory: Story = {
   storyId: "basic-bricks.grid-layout",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "steve",
   text: {

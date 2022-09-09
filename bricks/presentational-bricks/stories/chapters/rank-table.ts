@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const RankTableStory: Story = {
   storyId: "presentational-bricks.rank-table",
-  category: "general-tables",
+  category: "table",
   type: "brick",
   author: "Alex",
   text: {
-    en: "rank table",
-    zh: "排名表格",
+    en: "Rank Table",
+    zh: "表格-带排名",
   },
   description: {
     en: "rank table",

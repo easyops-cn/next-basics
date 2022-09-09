@@ -22,7 +22,7 @@ import { UseBrickConf } from "@next-core/brick-types";
  * @history
  * 1.58.0:新增构件 `basic-bricks.sub-menu-filter`
  * @memo
- * ### INTERFACE
+ * ### Interface
 
  * ```typescript
 *export declare type MenuIcon = AntdIcon | FaIcon | EasyopsIcon;
@@ -80,6 +80,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required -
    * @default -
    * @description 菜单项
+   * @group basic
    */
   @property({
     attribute: false,
@@ -87,10 +88,11 @@ export class SubMenuFilterElement extends UpdatingElement {
   menuItems: SubMenuFilterItem[];
 
   /**
-   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @kind {useBrick:UseBrickConf}
    * @required false
    * @default -
-   * @description 列表项 extra 位置（右边）
+   * @description 列表项 extra 位置（右边），相关文档[UseBrickConf](/next-docs/docs/api-reference/brick-types.usebrickconf)
+   * @group other
    */
   @property({
     attribute: false,
@@ -102,6 +104,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否展示搜索框
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -113,6 +116,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 搜索框 placeholder
+   * @group basic
    */
   @property()
   placeholder: string;
@@ -122,6 +126,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 初始选中的菜单项 key 数组
+   * @group basic
    */
   @property({
     attribute: false,
@@ -133,6 +138,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 初始展开的 SubMenu 菜单项 key 数组
+   * @group basic
    */
   @property({
     attribute: false,
@@ -144,6 +150,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 是否允许选中
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -155,6 +162,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否多选
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -166,7 +174,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default 24
    * @description 菜单缩进宽度
-   * @group advanced
+   * @group ui
    */
   @property({
     attribute: false,
@@ -178,6 +186,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否采用透明背景样式
+   * @group ui
    */
   @property({
     attribute: false,
@@ -189,6 +198,7 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 手风琴模式
+   * @group basic
    */
   @property({
     attribute: false,

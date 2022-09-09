@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickGeneralSearchStory: Story = {
   storyId: "presentational-bricks.brick-general-search",
-  category: "other",
+  category: "interact-baisc",
   type: "brick",
   author: "lynette",
   text: {
