@@ -161,7 +161,6 @@ export const defaultBlankListOfBricks: string[] = [
   "basic-bricks.header-bar",
   "presentational-bricks.single-field-edit",
   "forms.form-modal",
-  "forms.general-modal",
   "presentational-bricks.statistic-card",
   "presentational-bricks.brick-placeholder",
   "uw-presentation.logo-matrix",
