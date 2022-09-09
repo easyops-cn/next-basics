@@ -1,9 +1,9 @@
 import { Story } from "@next-core/brick-types";
-
+import { treeSelect } from "../images";
 export const TreeSelectStory: Story = {
   storyId: "forms.tree-select",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "steve",
   text: {
     en: "Tree Select",
@@ -14,9 +14,7 @@ export const TreeSelectStory: Story = {
     zh: "树型选择构件",
   },
   icon: {
-    lib: "easyops",
-    category: "default",
-    icon: "tree",
+    imgSrc: treeSelect,
   },
   conf: [
     {

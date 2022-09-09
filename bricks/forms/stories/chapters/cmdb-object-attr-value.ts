@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { cmdbObjectAttrValue } from "../images";
 
 export const cmdbObjectAttrValueStory: Story = {
   storyId: "forms.cmdb-object-attr-value",
@@ -14,8 +15,7 @@ export const cmdbObjectAttrValueStory: Story = {
     zh: "cmdb模型添加属性值，输出值类型",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: cmdbObjectAttrValue,
   },
   conf: [
     {

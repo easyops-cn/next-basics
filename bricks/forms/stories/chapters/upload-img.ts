@@ -3,7 +3,7 @@ import { Story } from "@next-core/brick-types";
 export const uploadImgStory: Story = {
   storyId: "forms.upload-img",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "lynette",
   text: {
     en: "upload img",
@@ -39,8 +39,7 @@ export const uploadImgStory: Story = {
           images: [
             {
               name: "image",
-              url:
-                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+              url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             },
           ],
         },
@@ -60,8 +59,7 @@ export const uploadImgStory: Story = {
           images: [
             {
               name: "image",
-              url:
-                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+              url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             },
           ],
         },
@@ -80,8 +78,7 @@ export const uploadImgStory: Story = {
           images: [
             {
               name: "image",
-              url:
-                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+              url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
             },
           ],
         },
@@ -120,8 +117,7 @@ export const uploadImgStory: Story = {
                     images: [
                       {
                         name: "image",
-                        url:
-                          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+                        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
                       },
                     ],
                   },

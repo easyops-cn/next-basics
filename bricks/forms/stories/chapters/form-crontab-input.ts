@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { crontabInput } from "../images";
 export const crontabInputStory: Story = {
   storyId: "forms.crontab-input",
   category: "form-input",
@@ -14,8 +14,7 @@ export const crontabInputStory: Story = {
     zh: "定时器任务表单项",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: crontabInput,
   },
   conf: {
     brick: "forms.general-form",

@@ -1,9 +1,9 @@
 import { Story } from "@next-core/brick-types";
-
+import { uploadFiles } from "../images";
 export const UploadFilesStory: Story = {
   storyId: "forms.upload-files",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "cyril",
   text: {
     en: "upload files",
@@ -14,8 +14,7 @@ export const UploadFilesStory: Story = {
     zh: "通过指定 API 上传文件",
   },
   icon: {
-    lib: "antd",
-    icon: "cloud-upload",
+    imgSrc: uploadFiles,
   },
   conf: [
     {
@@ -43,8 +42,7 @@ export const UploadFilesStory: Story = {
               brick: "forms.upload-files",
               properties: {
                 id: "upload-files",
-                url:
-                  "api/gateway/cmdb.instance.ImportInstanceWithJson/import/object/_DASHBOARD/instance/json",
+                url: "api/gateway/cmdb.instance.ImportInstanceWithJson/import/object/_DASHBOARD/instance/json",
                 name: "attachment",
                 data: {
                   "keys[0]": "instanceId",
@@ -97,8 +95,7 @@ export const UploadFilesStory: Story = {
       brick: "forms.upload-files",
       properties: {
         autoUpload: true,
-        url:
-          "/api/gateway/cmdb.instance.ImportInstanceWithJson/import/object/_DASHBOARD/instance/json",
+        url: "/api/gateway/cmdb.instance.ImportInstanceWithJson/import/object/_DASHBOARD/instance/json",
         name: "attachment",
         data: {
           "keys[0]": "instanceId",

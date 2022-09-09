@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const structsFormItemStory: Story = {
   storyId: "forms.general-structs-form-item",
-  category: "form-input",
+  category: "form-input-advanced",
   type: "brick",
   author: "ann",
   text: {
-    en: "General Struct Form Item",
-    zh: "编辑结构体表单项",
+    en: "Editable table",
+    zh: "可编辑表格",
   },
   description: {
     en: "",

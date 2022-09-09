@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const generalSelecttStory: Story = {
   storyId: "forms.general-select",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "steve",
   text: {
-    en: "General Select",
-    zh: "普通下拉选择框",
+    en: "Select",
+    zh: "下拉选择器",
   },
   description: {
     en: "",

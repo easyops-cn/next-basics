@@ -1,8 +1,8 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalCascader } from "../images";
 export const generalCascaderStory: Story = {
   storyId: "forms.general-cascader",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "jo",
   text: {
@@ -14,8 +14,7 @@ export const generalCascaderStory: Story = {
     zh: "从一组相关联的数据集合进行选择，用多级分类进行分隔，常见场景为省市区，公司层级，事物分类等",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalCascader,
   },
   conf: [
     {

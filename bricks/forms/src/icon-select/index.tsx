@@ -31,25 +31,22 @@ export type Size = number | "large" | "small" | "default";
  */
 export class IconSelectElement extends FormItemElement {
   /**
-   * @kind string
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 字段说明
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind MenuIcon
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 值[MenuIcon]((http://docs.developers.easyops.cn/docs/brick-next/icon))
    */
   @property({
@@ -58,32 +55,29 @@ export class IconSelectElement extends FormItemElement {
   value: MenuIcon;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 是否禁用
    */
   @property({ type: Boolean })
   disabled: boolean;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind `Record<string,string>`
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 校验文本信息
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
    * @default false
    * @description 是否可见
@@ -92,31 +86,27 @@ export class IconSelectElement extends FormItemElement {
   visible: boolean;
 
   /**
-   * @kind boolean
+   * @group ui
    * @required false
    * @default true
    * @description 是否显示背景。当 bg 为 false 时，选择颜色的输出为icon的字体颜色，数值为平台颜色变量，形如 `var(--theme-red-color)`。当 bg 为 true 时，选择颜色的输出为颜色描述字符串，形如 "green" | "red" | "blue" | "orange" | "cyan" | "purple" | "geekblue" | "gray"，可搭配 [card-item](developers/brick-book/brick/presentational-bricks.card-item) 等构件使用。
-   * @group advanced
    */
   @property({ attribute: false })
   bg = true;
 
   /**
-   * @kind boolean
+   * @group ui
    * @required false
    * @default true
    * @description 是否支持设置颜色
-   * @group advanced
    */
   @property({ attribute: false })
   setColor = true;
 
   /**
-   * @kind Colors
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 默认颜色
-   * @group advanced
    */
   @property({ attribute: false })
   defaultColor?: Colors;

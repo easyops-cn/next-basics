@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { advanceSetting } from "../images";
 export const advanceSettingStory: Story = {
   storyId: "forms.advance-setting",
   category: "form-input",
@@ -14,8 +14,7 @@ export const advanceSettingStory: Story = {
     zh: "",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: advanceSetting,
   },
   conf: [
     {

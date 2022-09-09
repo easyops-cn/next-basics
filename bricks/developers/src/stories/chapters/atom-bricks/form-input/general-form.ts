@@ -5,9 +5,10 @@ const story: Story = {
   storyId: "forms.general-form",
   type: "brick",
   author: "steve",
+  category: "form-input-basic",
   text: {
-    en: "General Form",
-    zh: "普通表单",
+    en: "Form",
+    zh: "表单",
   },
   description: {
     en: "",

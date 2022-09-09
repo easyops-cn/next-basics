@@ -3,11 +3,11 @@ import { Story } from "@next-core/brick-types";
 export const generalTimePickerStory: Story = {
   storyId: "forms.general-time-picker",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "steve",
   text: {
-    en: "General Time Picker",
-    zh: "普通时间选择框",
+    en: "Time Picker",
+    zh: "时间选择器",
   },
   description: {
     en: "",

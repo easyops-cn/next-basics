@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const GeneralRadioStory: Story = {
   storyId: "forms.general-radio",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "jo",
   text: {
-    en: "General Radio",
-    zh: "普通单选框",
+    en: "Radio",
+    zh: "单选框",
   },
   description: {
     en: "general Radio",

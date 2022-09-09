@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { dynamicFormItemV2 } from "../images";
 
 export const dynamicFormItemStory: Story = {
   deprecated: true,
@@ -15,8 +16,7 @@ export const dynamicFormItemStory: Story = {
     zh: "多列显示可以动态增加或删除的表单项，目前支持 input 和 select 等多种类型",
   },
   icon: {
-    lib: "fa",
-    icon: "columns",
+    imgSrc: dynamicFormItemV2,
   },
   conf: [
     {

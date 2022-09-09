@@ -33,68 +33,60 @@ import { UnitType } from "./libs/constants";
  */
 export class InputWithUnitElement extends FormItemElement {
   /**
-   * @kind string
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 字段说明
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind number
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 初始值
    */
   @property()
   value: number;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 占位说明
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 使用单位
    */
   @property()
   unit: string;
 
   /**
-   * @kind `UnitType`
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 单位类型，目前支持 "time" | "byte" | "byteRate"
    */
   @property()
   unitType: UnitType;
 
   /**
-   * @kind `object`
+   * @group ui
    * @required false
-   * @default
    * @description 输入框样式
    */
   @property({
@@ -103,7 +95,7 @@ export class InputWithUnitElement extends FormItemElement {
   inputBoxStyle: React.CSSProperties;
 
   /**
-   * @kind number
+   * @group basicFormItem
    * @required false
    * @default 0
    * @description 单位转换精确度；如果为 0，仅当整除时才转换
@@ -113,7 +105,7 @@ export class InputWithUnitElement extends FormItemElement {
   precision: number;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @default true
    * @required false
    * @description 默认开启整数整除自动转换
@@ -122,7 +114,7 @@ export class InputWithUnitElement extends FormItemElement {
   useAutoCalculate = true;
 
   /**
-   * @kind number
+   * @group basicFormItem
    * @default Number.MIN_SAFE_INTEGER
    * @required false
    * @description 输入数字的最小值
@@ -131,11 +123,9 @@ export class InputWithUnitElement extends FormItemElement {
   inputNumberMin: number;
 
   /**
-   * @kind string[]
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 可使用单位列表
-   * @group advanced
    */
   @property({ attribute: false })
   availableUnits: string[];

@@ -1,21 +1,20 @@
 import { Story } from "@next-core/brick-types";
-
+import { inputWithUnit } from "../images";
 export const inputWithUnitStory: Story = {
   storyId: "forms.input-with-unit",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "ice",
   text: {
     en: "Input with unit",
-    zh: "带有单位选择的输入框",
+    zh: "输入框-带单位选择",
   },
   description: {
     en: "output value with unit",
     zh: "根据单位输出值",
   },
   icon: {
-    lib: "fa",
-    icon: "edit",
+    imgSrc: inputWithUnit,
   },
   conf: [
     {

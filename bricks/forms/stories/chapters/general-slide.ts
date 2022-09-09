@@ -1,8 +1,8 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalSlide } from "../images";
 export const generalSlideStory: Story = {
   storyId: "forms.general-slide",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "jo",
   text: {
@@ -14,8 +14,7 @@ export const generalSlideStory: Story = {
     zh: "滑动型输入器，展示当前值和可选范围",
   },
   icon: {
-    lib: "fa",
-    icon: "sliders-h",
+    imgSrc: generalSlide,
   },
   conf: [
     {

@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const autoCompleteStory: Story = {
   storyId: "forms.general-auto-complete",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "ice",
   text: {
-    en: "Auto Complete",
-    zh: "自动补全",
+    en: "Input box with candidates",
+    zh: "带候选项的输入框",
   },
   description: {
     en: "an auto-complete input",
