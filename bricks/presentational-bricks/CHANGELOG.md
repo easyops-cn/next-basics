@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.264.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.264.3...@next-bricks/presentational-bricks@1.264.4) (2022-09-09)
+
+
+### Bug Fixes
+
+* refine brick user, don't request all users info ([538a184](https://github.com/easyops-cn/next-basics/commit/538a18480c08387e6fae80da09a2d67c14993ee4))
+
+
+
+
+
 ## [1.264.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.264.2...@next-bricks/presentational-bricks@1.264.3) (2022-09-08)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks

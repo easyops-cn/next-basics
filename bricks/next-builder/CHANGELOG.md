@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.184.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.183.0...@next-bricks/next-builder@1.184.0) (2022-09-09)
+
+
+### Bug Fixes
+
+* optimization ([b43e774](https://github.com/easyops-cn/next-basics/commit/b43e7740fb144be8e4e4aac917f87a3118c34acd))
+* unnecessary code ([b4f4527](https://github.com/easyops-cn/next-basics/commit/b4f4527d817e9714a7a6af6658177a042f7f058a))
+
+
+### Features
+
+* brick library support blank list ([8367747](https://github.com/easyops-cn/next-basics/commit/8367747506e5635eb9c1e1139841c27b57512f97))
+* support scene snippets ([db14059](https://github.com/easyops-cn/next-basics/commit/db1405961c70c91efbdb411b0da2ebdbbf728618))
+
+
+
+
+
 # [1.183.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.182.0...@next-bricks/next-builder@1.183.0) (2022-09-08)
 
 
