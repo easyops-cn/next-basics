@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const datePickerStory: Story = {
   storyId: "forms.general-date-picker",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "steve",
   text: {
-    en: "General Date Picker",
-    zh: "普通日期选择框",
+    en: "Date Picker",
+    zh: "日期选择框",
   },
   description: {
     en: "",

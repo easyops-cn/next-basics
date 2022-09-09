@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const GeneralModalStory: Story = {
   storyId: "forms.general-modal",
-  category: "form-input",
+  category: "form-input-advanced",
   type: "brick",
   text: {
     en: "General Modal",

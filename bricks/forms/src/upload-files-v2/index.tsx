@@ -24,39 +24,35 @@ import { UploadButtonProps } from "../interfaces";
  */
 export class UploadFilesV2Element extends FormItemElement {
   /**
-   * @kind string
+   * @group basicFormItem
    * @required true
-   * @default -
-   * @description 表单项字段名
+   * @description 表单项字段名sss
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 表单项字段说明
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 是否禁用
    */
   @property({ type: Boolean }) disabled: boolean;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
    * @default true
    * @description 达到最大上传数量时是否隐藏拖拽上传按钮，仅当`uploadDraggable`为`true`且设置`maxNumber`时有效
@@ -64,7 +60,7 @@ export class UploadFilesV2Element extends FormItemElement {
   @property({ attribute: false }) hideDragBtnWhenAchieveMax = true;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
    * @default false
    * @description 选择文件后是否直接上传。autoUpload为true时，文件会自动上传到url地址，每个value中存在response属性存储上传地址的返回信息。autoUpload为false时，文件不会自动上传，需要用户自行上传，每个value中存在file属性存储文件信息。
@@ -72,16 +68,15 @@ export class UploadFilesV2Element extends FormItemElement {
   @property({ type: Boolean }) autoUpload: boolean;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 上传的地址，仅在autoUpload为true时有效
    */
   @property()
   url: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 'post'
    * @description 上传请求的方法，仅在autoUpload为true时有效
@@ -90,7 +85,7 @@ export class UploadFilesV2Element extends FormItemElement {
   method: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 'file'
    * @description 发到后台的文件参数名，仅在autoUpload为true时有效
@@ -99,36 +94,32 @@ export class UploadFilesV2Element extends FormItemElement {
   uploadName: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 接受上传的文件类型，多个之间用,连接
    */
   @property({ attribute: false })
   accept: string;
 
   /**
-   * @kind { [key: string]: string; }
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 上传所需额外参数，仅在autoUpload为true时有效
    */
   @property({ attribute: false })
   data: { [key: string]: string };
 
   /**
-   * @kind {url:string,name:string}[]
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 上传文件表单项的值，其中`url`为文件的资源路径，`name`为文件名称。
    */
   @property({ attribute: false })
   value: UploadFileValueItem[];
 
   /**
-   * @kind number
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 最大上传数量
    */
   @property({
@@ -137,11 +128,10 @@ export class UploadFilesV2Element extends FormItemElement {
   maxNumber: number;
 
   /**
-   * @kind number
+   * @group basicFormItem
    * @required false
    * @default 100
    * @description 文件上传大小限制(MB)
-   * @group advanced
    */
   @property({
     type: Number,
@@ -149,7 +139,7 @@ export class UploadFilesV2Element extends FormItemElement {
   limitSize: number;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
    * @default false
    * @description 是否可以拖拽上传
@@ -160,7 +150,7 @@ export class UploadFilesV2Element extends FormItemElement {
   uploadDraggable: boolean;
 
   /**
-   * @kind boolean
+   * @group ui
    * @required false
    * @default false
    * @description 是否隐藏上传按钮，当`uploadDraggable`为`true`时不生效
@@ -171,7 +161,7 @@ export class UploadFilesV2Element extends FormItemElement {
   hideUploadButton: boolean;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 单击或拖拽图像到此区域上传
    * @description 拖拽上传的文字
@@ -180,7 +170,7 @@ export class UploadFilesV2Element extends FormItemElement {
   draggableUploadText: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 支持扩展名：.jpg .jpeg .png .gif ...
    * @description 拖拽上传的提示信息
@@ -198,9 +188,8 @@ export class UploadFilesV2Element extends FormItemElement {
   uploadButtonName: string;
 
   /**
-   * @kind UploadButtonProps
+   * @group advancedFormItem
    * @required false
-   * @default -
    * @description 上传按钮设置
    */
   @property({

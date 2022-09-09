@@ -30,23 +30,21 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   private _mountPoint: HTMLElement;
   private _childComponent: any;
   /**
-   * @kind string
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 下拉框字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 添加结构体作为表单项时在表单中的字段说明
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 添加
    * @description 点击打开模态框的按钮文字
@@ -57,9 +55,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   btnText: string;
 
   /**
-   * @kind `any[]`
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 结构体数组数据源
    */
   @property({
@@ -68,9 +65,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   value: any;
 
   /**
-   * @kind `any`
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 新建结构体时给表单设置默认值
    */
   @property({
@@ -79,9 +75,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   structDefaultValues: any;
 
   /**
-   * @kind `any`
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 结构体表格中字段与标签的键值对，见示例
    */
   @property({
@@ -90,7 +85,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   fieldsMap: any;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
    * @default true
    * @description 能否添加多个结构体
@@ -101,11 +96,10 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   multiple = true;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
    * @default false
    * @description 是否点击背景关闭模态框
-   * @group advanced
    */
   @property({
     type: Boolean,
@@ -113,31 +107,28 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   maskClosable: boolean;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 添加结构体
    * @description 添加结构体时模态框的标题
-   * @group advanced
    */
   @property()
   createModalTitle: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 编辑结构体
    * @description 编辑结构体时模态框的标题
-   * @group advanced
    */
   @property()
   editModalTitle: string;
 
   /**
-   * @kind `string|number`
+   * @group ui
    * @required false
    * @default 520px
    * @description 模态框宽度
-   * @group advanced
    */
   @property({
     attribute: false,
@@ -145,40 +136,49 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   modalWidth: string | number;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 确定
    * @description 模态框确认按钮文字
-   * @group advanced
    */
   @property()
   okText: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 取消
    * @description 模态框取消按钮文字
-   * @group advanced
    */
   @property()
   cancelText: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
    * @default 确定要删除该结构体吗？
    * @description 删除确认框标题
-   * @group advanced
    */
   @property()
   deleteText: string;
 
+  /**
+   * @group basicFormItem
+   * @required false
+   * @default false
+   * @description 是否显示modal
+   */
   @property({
     type: Boolean,
   })
   isVisible: boolean;
 
+  /**
+   * @group basicFormItem
+   * @required false
+   * @default false
+   * @description 是否显示确定modal
+   */
   @property({
     type: Boolean,
   })
@@ -187,15 +187,20 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   private _isEdit = false;
   private _editIndex: number;
 
+  /**
+   * @group basicFormItem
+   * @required false
+   * @default false
+   * @description 添加按钮是否置灰
+   */
   @property({
     type: Boolean,
   })
   addBtnDisabled: boolean;
 
   /**
-   * @kind ()=>any
+   * @group advancedFormItem
    * @required false
-   * @default -
    * @description 自定义结构体表格渲染函数
    */
   @property({
@@ -204,9 +209,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
   structItemShowRenderFN: () => any;
 
   /**
-   * @kind string[]
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 自定义结构体表格列的顺序
    */
   @property({

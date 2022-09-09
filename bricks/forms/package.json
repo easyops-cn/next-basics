@@ -22,7 +22,7 @@
     "build:webpack": "npm run build:webpack:main && npm run build:webpack:editors",
     "build:webpack:main": "webpack --config webpack.config.js",
     "build:webpack:editors": "webpack --config webpack.editors.js",
-    "build:stories": "if [ -d stories ];then  tsc stories/index.ts --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck --outDir dist/stories; else echo \" no stories \"; fi",
+    "build:stories": "if [ -d stories ];then  rollup --config rollup.stories.js; else echo \" no stories \"; fi",
     "postbuild": "ENABLE_GENERATE_DOC=true node scripts/post-build.js",
     "test": "cross-env NODE_ENV='test' jest",
     "test:ci": "cross-env NODE_ENV='test' CI=true jest"

@@ -3,11 +3,11 @@ import { Story } from "@next-core/brick-types";
 export const GeneralCheckboxStory: Story = {
   storyId: "forms.general-checkbox",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "jo",
   text: {
-    en: "General Checkbox",
-    zh: "普通多选框",
+    en: "Checkbox",
+    zh: "多选框",
   },
   description: {
     en: "General Checkbox",

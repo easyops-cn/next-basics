@@ -31,60 +31,52 @@ import { TimePickerProps } from "antd/lib/time-picker";
  */
 export class GeneralTimePickerElement extends FormItemElement {
   /**
-   * @kind string
+   * @group basicFormItem
    * @required true
-   * @default -
    * @description 时间选择框字段名
    */
   @property({ attribute: false }) declare name: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 时间选择框字段说明
    */
   @property({ attribute: false }) declare label: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 时间选择框框初始值
    */
   @property()
   value: string;
 
   /**
-   * @kind string
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 时间选择框占位说明
    */
   @property({ attribute: false }) declare placeholder: string;
 
   /**
-   * @kind boolean
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 是否必填项
    */
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind `Record<string,string>`
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 校验文本信息
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind [timePickerProps](https://3x.ant.design/components/time-picker-cn/)
+   * @group advancedFormItem
    * @required false
-   * @default -
-   * @description 透传 antd timePicker 属性
-   * @group advanced
+   * @description 透传 antd timePicker 属性 [timePickerProps](https://3x.ant.design/components/time-picker-cn/)
    */
   @property({ attribute: false })
   configProps: Partial<TimePickerProps>;

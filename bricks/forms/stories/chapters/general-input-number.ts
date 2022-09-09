@@ -3,11 +3,11 @@ import { Story } from "@next-core/brick-types";
 export const generalInputNumberStory: Story = {
   storyId: "forms.general-input-number",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "jo",
   text: {
-    en: "General Input Number",
-    zh: "普通数字输入框",
+    en: "Input Number",
+    zh: "数字输入框",
   },
   description: {
     en: "General Input Number",

@@ -1,8 +1,8 @@
 import { Story } from "@next-core/brick-types";
-
+import { timeRangePicker } from "../images";
 export const timeRangePickerStory: Story = {
   storyId: "forms.time-range-picker",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "ice",
   text: {
@@ -14,8 +14,7 @@ export const timeRangePickerStory: Story = {
     zh: "由两个时间选择器组成",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: timeRangePicker,
   },
   conf: [
     {

@@ -1,21 +1,20 @@
 import { Story } from "@next-core/brick-types";
-
+import { iconSelect } from "../images";
 export const iconSelectStory: Story = {
   storyId: "forms.icon-select",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "lynette",
   text: {
-    en: "icon select",
-    zh: "图标选择构件",
+    en: "Icon Select",
+    zh: "图标选择器",
   },
   description: {
     en: "support for selecting icon and output data in specific format",
     zh: "支持选择图标并且输出特定格式的数据",
   },
   icon: {
-    lib: "fa",
-    icon: "image",
+    imgSrc: iconSelect,
   },
   conf: [
     {

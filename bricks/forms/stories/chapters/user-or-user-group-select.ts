@@ -3,11 +3,11 @@ import { Story } from "@next-core/brick-types";
 export const userGroupSelectStory: Story = {
   storyId: "forms.user-or-user-group-select",
   type: "brick",
-  category: "form-input",
+  category: "form-input-business",
   author: "lynette",
   text: {
     en: "user-or-user-group-select",
-    zh: "用户（组）选择",
+    zh: "用户（组）选择器",
   },
   description: {
     en: "support to select user or user group by modal or select",

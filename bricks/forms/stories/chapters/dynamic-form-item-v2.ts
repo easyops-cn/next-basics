@@ -1,12 +1,13 @@
 import { Story } from "@next-core/brick-types";
+import { dynamicFormItemV2 } from "../images";
 
 export const DynamicFormItemV2Story: Story = {
   storyId: "forms.dynamic-form-item-v2",
   type: "brick",
-  category: "form-input",
+  category: "form-input-advanced",
   author: "nlicroshan",
   text: {
-    en: "Dynamic Form Item",
+    en: "Dynamic Form Item V2",
     zh: "动态表单项V2",
   },
   description: {
@@ -14,8 +15,7 @@ export const DynamicFormItemV2Story: Story = {
     zh: "多列显示可以动态增加或删除的表单项，目前支持 input 和 select 等多种类型",
   },
   icon: {
-    lib: "fa",
-    icon: "columns",
+    imgSrc: dynamicFormItemV2,
   },
   conf: [
     {

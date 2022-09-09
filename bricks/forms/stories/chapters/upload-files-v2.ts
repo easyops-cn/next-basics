@@ -1,21 +1,20 @@
 import { Story } from "@next-core/brick-types";
-
+import { uploadFilesV2 } from "../images";
 export const UploadFilesV2Story: Story = {
   storyId: "forms.upload-files-v2",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "nlicroshan",
   text: {
-    en: "upload files v2",
-    zh: "上传文件 v2",
+    en: "Custom storage uploads files",
+    zh: "自定义存储上传文件",
   },
   description: {
     en: "upload files by specific API",
     zh: "上传文件，适用于表单项中对接provider",
   },
   icon: {
-    lib: "antd",
-    icon: "cloud-upload",
+    imgSrc: uploadFilesV2,
   },
   conf: [
     {
@@ -36,8 +35,7 @@ export const UploadFilesV2Story: Story = {
                   files: [
                     {
                       name: "image",
-                      url:
-                        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+                      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
                     },
                   ],
                 },
@@ -76,8 +74,7 @@ export const UploadFilesV2Story: Story = {
                         autoUpload: true,
                         uploadButtonName: "上传",
                         method: "put",
-                        url:
-                          "api/gateway/object_store.object_store.PutObject/api/v1/objectStore/bucket/lytest/object",
+                        url: "api/gateway/object_store.object_store.PutObject/api/v1/objectStore/bucket/lytest/object",
                       },
                       events: {
                         "upload.files.change": {

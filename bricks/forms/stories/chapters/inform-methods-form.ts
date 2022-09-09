@@ -1,21 +1,20 @@
 import { Story } from "@next-core/brick-types";
-
+import { informMethodsForm } from "../images";
 export const informMethodsFormStory: Story = {
   storyId: "forms.inform-methods-form",
-  category: "form-input",
+  category: "form-input-business",
   type: "brick",
   author: "cyril",
   text: {
-    en: "inform-methods-form",
-    zh: "通知方式多选框",
+    en: "【Platform】inform-methods-form",
+    zh: "【平台】通知方式多选框",
   },
   description: {
     en: "select inform methods by checkbox",
     zh: "选择通知方式",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: informMethodsForm,
   },
   conf: [
     {

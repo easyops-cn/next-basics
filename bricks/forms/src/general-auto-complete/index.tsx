@@ -24,22 +24,20 @@ import { OptionType } from "../interfaces";
 export class GeneralAutoCompleteElement extends FormItemElement {
   /**
    * @required true
-   * @default -
    * @description 字段名
    * @group basicFormItem
    */
   @property({ attribute: false }) declare name: string;
 
   /**
+   * @group basicFormItem
    * @required false
-   * @default -
    * @description 字段说明
    */
   @property({ attribute: false }) declare label: string;
 
   /**
    * @required true
-   * @default -
    * @description 补全选项列表
    * @group basicFormItem
    */
@@ -48,7 +46,6 @@ export class GeneralAutoCompleteElement extends FormItemElement {
 
   /**
    * @required false
-   * @default -
    * @description 当前值
    * @group basicFormItem
    */
@@ -57,7 +54,6 @@ export class GeneralAutoCompleteElement extends FormItemElement {
 
   /**
    * @required false
-   * @default -
    * @description 占位说明
    * @group basicFormItem
    */
@@ -65,7 +61,6 @@ export class GeneralAutoCompleteElement extends FormItemElement {
 
   /**
    * @required false
-   * @default -
    * @description 是否禁用
    * @group basicFormItem
    */
@@ -73,7 +68,6 @@ export class GeneralAutoCompleteElement extends FormItemElement {
 
   /**
    * @required false
-   * @default -
    * @description 是否必填项
    * @group basicFormItem
    */
@@ -81,13 +75,13 @@ export class GeneralAutoCompleteElement extends FormItemElement {
 
   /**
    * @required false
-   * @default -
    * @description 校验文本信息
    * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
+   * @required false
    * @description 输入框样式
    * @group ui
    */

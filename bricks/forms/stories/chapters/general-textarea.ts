@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const generalTextareaStory: Story = {
   storyId: "forms.general-textarea",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "ice",
   text: {
-    en: "General Text Area",
-    zh: "普通多行文本输入框",
+    en: "Text Area",
+    zh: "多行文本输入框",
   },
   description: {
     en: "autoSize, value and placeholder configurable",

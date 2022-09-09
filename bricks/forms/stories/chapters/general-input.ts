@@ -2,12 +2,12 @@ import { Story } from "@next-core/brick-types";
 
 export const generalInputStory: Story = {
   storyId: "forms.general-input",
-  category: "form-input",
+  category: "form-input-basic",
   type: "brick",
   author: "steve",
   text: {
-    en: "General Input",
-    zh: "普通输入框",
+    en: "Input",
+    zh: "输入框",
   },
   description: {
     en: "",
