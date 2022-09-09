@@ -148,7 +148,31 @@ export const defaultGroup: componentGroup = {
 };
 
 interface ComSelectContext {
-  snippetsOfBrickMap?: Map<string, BrickOptionItem[]>;
+  snippetsOfBrickMap?: Map<string, Map<SnippetType, BrickOptionItem[]>>;
 }
 
 export const ComponentSelectContext = React.createContext<ComSelectContext>({});
+
+export const defaultBlankListOfBricks: string[] = [
+  "business-website.basic-view",
+  "business-website.basic-footer",
+  "business-website.basic-header",
+  "business-website.cart-item",
+  "basic-bricks.header-bar",
+  "presentational-bricks.single-field-edit",
+  "forms.form-modal",
+  "presentational-bricks.statistic-card",
+  "presentational-bricks.brick-placeholder",
+  "uw-presentation.logo-matrix",
+  "presentational-bricks.brick-alert-level",
+  "presentational-bricks.brick-alert-number",
+  "presentational-bricks.brick-alert-value",
+  "presentational-bricks.brick-alert-status",
+  "presentational-bricks.brick-cluster-type",
+  "presentational-bricks.agent-status",
+];
+
+export enum SnippetType {
+  SelfBrick = "selfBrick",
+  Scene = "scene",
+}

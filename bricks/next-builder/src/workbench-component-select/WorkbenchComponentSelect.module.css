@@ -35,9 +35,14 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s;
+
+  img {
+    background-color: #fff;
+    border-radius: 6px;
+  }
 }
 
-.icon:hover {
+.componentItem:hover .icon {
   transform: scale(1.2);
 }
 
@@ -123,6 +128,7 @@
     .actionWrapper {
       display: none;
       position: absolute;
+      z-index: 999;
       width: 100%;
       justify-content: space-between;
 
@@ -130,8 +136,8 @@
         height: 25px;
         width: 25px;
         border-radius: 6px;
-        color: rgba(255, 255, 255, 0.4);
-        background: var(--tag-gray-background);
+        color: rgba(255, 255, 255, 0.5);
+        background: rgba(0, 0, 0, 0.7);
         display: flex;
         justify-content: center;
         align-items: center;

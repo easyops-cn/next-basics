@@ -466,7 +466,7 @@ export async function BuildProjectOfTemplates({
       : {}),
   }));
 
-  const indexJsContent = await getBrickPackageIndexJs({
+  const indexJsContent = getBrickPackageIndexJs({
     appId,
     templates: processedTemplates,
     functions: projectDetailResponse.functions as StoryboardFunction[],

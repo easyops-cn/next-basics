@@ -18,11 +18,13 @@ import {
   i18nTransform,
   BrickSortField,
   ComponentSelectContext,
+  defaultBlankListOfBricks,
+  SnippetType,
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
 import { BuildFilled } from "@ant-design/icons";
-import { debounce } from "lodash";
+import { debounce, compact, isEmpty } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
 import { adjustBrickSort, getSnippetsOfBrickMap } from "./processor";
@@ -98,6 +100,17 @@ export function WorkbenchComponentSelect({
   const [filterValue, setFilterValue] = useState<Record<string, string>>({});
   const [componentList, setComponetList] =
     useState<Record<string, BrickOptionItem[]>>();
+  const { config } = useMemo(() => getRuntime().getCurrentApp(), []);
+
+  const blankListOfBricks = useMemo(
+    () =>
+      compact(
+        defaultBlankListOfBricks.concat(
+          config.blankListOfBrickLibrary as string[]
+        )
+      ),
+    [config.blankListOfBrickLibrary]
+  );
 
   const setValue = useRef(
     debounce((v: string, type: string) => {
@@ -118,7 +131,10 @@ export function WorkbenchComponentSelect({
   const getBrickTransfromByType = useCallback(
     (brickList: BrickOptionItem[]): Record<string, BrickOptionItem[]> => {
       const obj: Record<string, BrickOptionItem[]> = {};
-      brickList.forEach((item) => {
+      const filterBricks = brickList.filter(
+        (item) => !blankListOfBricks.some((id) => item.id === id)
+      );
+      filterBricks.forEach((item) => {
         if (item.layerType !== undefined && item.layerType !== "brick") {
           obj[item.layerType]
             ? obj[item.layerType].push(item)
@@ -136,7 +152,7 @@ export function WorkbenchComponentSelect({
       });
       return obj;
     },
-    []
+    [blankListOfBricks]
   );
 
   useEffect(() => {
@@ -413,9 +429,11 @@ function ComponentGroup({
   columnNumber,
   onActionClick,
 }: ComponentGroupProps): React.ReactElement {
+  const { t } = useTranslation(NS_NEXT_BUILDER);
   const [curIndex, setCurIndex] = useState<number>(-1);
   const [show, setShow] = useState(false);
-  const [snippetsOfBrick, setSnippetsOfBrick] = useState<BrickOptionItem[]>([]);
+  const [snippetsOfSelfBrick, setSnippetsOfSelfBrick] = useState([]);
+  const [snippetsOfScene, setSnippetsOfScene] = useState([]);
   const [arrowOffset, setArrowOffset] = useState(0);
   const { snippetsOfBrickMap } = useContext(ComponentSelectContext);
 
@@ -427,7 +445,9 @@ function ComponentGroup({
   ): void => {
     if (type === "snippet") {
       setCurIndex(index);
-      setSnippetsOfBrick(snippetsOfBrickMap.get(data.id));
+      const snippetsMap = snippetsOfBrickMap.get(data.id);
+      setSnippetsOfSelfBrick(snippetsMap?.get(SnippetType.SelfBrick));
+      setSnippetsOfScene(snippetsMap?.get(SnippetType.Scene));
       const brickItemElem = findItemElement(e.target as HTMLElement);
       if (brickItemElem) {
         const { width } = brickItemElem.getBoundingClientRect();
@@ -439,6 +459,31 @@ function ComponentGroup({
       setShow(true);
     }
     onActionClick?.(type, data, e);
+  };
+
+  const renderSnippetsGroup = (
+    snippets: BrickOptionItem[],
+    title: string
+  ): React.ReactElement => {
+    return (
+      <>
+        <span style={{ padding: "0 12px" }}>{title}</span>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
+          }}
+        >
+          {snippets.map((row) => (
+            <ComponentItem
+              key={row.id}
+              {...row}
+              onDragEnd={() => setShow(false)}
+            />
+          ))}
+        </div>
+      </>
+    );
   };
 
   return (
@@ -474,7 +519,6 @@ function ComponentGroup({
             style={{
               gridRowStart: Math.floor(curIndex / columnNumber) + 2,
               gridColumn: `span ${columnNumber}`,
-              gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
             }}
           >
             <span
@@ -487,13 +531,13 @@ function ComponentGroup({
                 left: arrowOffset,
               }}
             />
-            {snippetsOfBrick.map((row) => (
-              <ComponentItem
-                key={row.id}
-                {...row}
-                onDragEnd={() => setShow(false)}
-              />
-            ))}
+            {!isEmpty(snippetsOfSelfBrick) &&
+              renderSnippetsGroup(
+                snippetsOfSelfBrick,
+                t(K.SELF_BRICK_SNIPPETS)
+              )}
+            {!isEmpty(snippetsOfScene) &&
+              renderSnippetsGroup(snippetsOfScene, t(K.SCENE_SNIPPETS))}
           </div>
         </CSSTransition>
       )}
@@ -559,6 +603,14 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
     componentData.onActionClick?.(type, data, e);
   };
 
+  const isShowSnippets = useMemo(() => {
+    const snippetsMap = snippetsOfBrickMap.get(componentData.id);
+    return !(
+      isEmpty(snippetsMap?.get(SnippetType.SelfBrick)) &&
+      isEmpty(snippetsMap?.get(SnippetType.Scene))
+    );
+  }, [componentData.id, snippetsOfBrickMap]);
+
   const itemElem = (
     <div
       draggable="true"
@@ -589,7 +641,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
               }}
             />
           </span>
-          {snippetsOfBrickMap.get(componentData.id) && (
+          {isShowSnippets && (
             <span
               className={styles.badge}
               title={t(K.SNIPPET)}

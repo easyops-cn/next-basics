@@ -130,6 +130,8 @@ const locale: Locale = {
   [K.LAYOUT]: "布局",
   [K.FORMITEM]: "表单项",
   [K.DOCUMENT]: "文档",
+  [K.SELF_BRICK_SNIPPETS]: "构件片段",
+  [K.SCENE_SNIPPETS]: "场景片段",
 };
 
 export default locale;
