@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickRateSvg } from "../images";
 export const BrickRateStory: Story = {
   storyId: "presentational-bricks.brick-rate",
   category: "display-component",
@@ -14,9 +14,7 @@ export const BrickRateStory: Story = {
     zh: "对事物进行快速的评级操作",
   },
   icon: {
-    lib: "fa",
-    icon: "comment",
-    prefix: "fas",
+    imgSrc: brickRateSvg,
   },
   conf: [
     {

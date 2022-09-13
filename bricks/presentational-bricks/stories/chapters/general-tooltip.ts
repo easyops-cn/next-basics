@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalTooltipSvg } from "../images";
 export const GeneralTooltipStory: Story = {
   storyId: "presentational-bricks.general-tooltip",
   category: "feedback-and-tooltip",
@@ -14,9 +14,7 @@ export const GeneralTooltipStory: Story = {
     zh: "普通的 tooltip",
   },
   icon: {
-    lib: "fa",
-    icon: "discord",
-    prefix: "fab",
+    imgSrc: generalTooltipSvg,
   },
   conf: [
     {

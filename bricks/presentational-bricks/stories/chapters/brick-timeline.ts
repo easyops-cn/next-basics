@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickTimelineSvg } from "../images";
 export const BrickTimelineStory: Story = {
   storyId: "presentational-bricks.brick-timeline",
   category: "display-component",
@@ -14,8 +14,7 @@ export const BrickTimelineStory: Story = {
     zh: "垂直展示的时间流信息，常用于变更历史、工作动态等",
   },
   icon: {
-    lib: "fa",
-    icon: "stream",
+    imgSrc: brickTimelineSvg,
   },
   conf: [
     {

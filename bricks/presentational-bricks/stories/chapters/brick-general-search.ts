@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickGeneralSearchSvg } from "../images";
 export const BrickGeneralSearchStory: Story = {
   storyId: "presentational-bricks.brick-general-search",
   category: "interact-baisc",
@@ -14,8 +14,7 @@ export const BrickGeneralSearchStory: Story = {
     zh: "搜索框，满足大部分的搜索需求",
   },
   icon: {
-    lib: "fa",
-    icon: "search",
+    imgSrc: brickGeneralSearchSvg,
   },
   conf: [
     {

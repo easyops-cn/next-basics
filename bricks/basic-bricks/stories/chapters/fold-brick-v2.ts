@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { foldBrickV2Svg } from "../images";
 
 export const foldBrickV2Story: Story = {
   storyId: "basic-bricks.fold-brick-v2",
@@ -14,8 +15,7 @@ export const foldBrickV2Story: Story = {
     zh: "折叠容器，只折叠单个内容，支持slot",
   },
   icon: {
-    lib: "fa",
-    icon: "chevron-down",
+    imgSrc: foldBrickV2Svg,
   },
   conf: [
     {

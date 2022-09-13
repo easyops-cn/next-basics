@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalTimerSvg } from "../images";
 export const generalTimerStory: Story = {
   storyId: "basic-bricks.general-timer",
   category: "interact-baisc",
@@ -14,8 +14,7 @@ export const generalTimerStory: Story = {
     zh: "启动一个定时发出指定事件的定时器",
   },
   icon: {
-    lib: "antd",
-    icon: "clock-circle",
+    imgSrc: generalTimerSvg,
   },
   conf: [
     {

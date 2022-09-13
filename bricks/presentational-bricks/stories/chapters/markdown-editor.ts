@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { markdownEditorSvg } from "../images";
 export const MarkdownEditorStory: Story = {
   storyId: "presentational-bricks.markdown-editor",
   category: "form-input-advanced",
@@ -14,8 +14,7 @@ export const MarkdownEditorStory: Story = {
     zh: "Markdown编辑构件",
   },
   icon: {
-    lib: "fa",
-    icon: "edit",
+    imgSrc: markdownEditorSvg,
   },
   conf: [
     {

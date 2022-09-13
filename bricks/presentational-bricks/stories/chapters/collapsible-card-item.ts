@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { collapsibleCardItemSvg } from "../images";
 export const CollapsibleCardItemStory: Story = {
   storyId: "presentational-bricks.collapsible-card-item",
   category: "card-info",
@@ -14,8 +14,7 @@ export const CollapsibleCardItemStory: Story = {
     zh: "长条形可折叠卡片，里面可以放表单／description等构件",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: collapsibleCardItemSvg,
   },
   conf: {
     brick: "presentational-bricks.collapsible-card-item",

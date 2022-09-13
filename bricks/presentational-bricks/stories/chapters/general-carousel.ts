@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalCarouselSvg } from "../images";
 export const GeneralCarouselStory: Story = {
   storyId: "presentational-bricks.general-carousel",
   category: "container-display",
@@ -14,8 +14,7 @@ export const GeneralCarouselStory: Story = {
     zh: "通用的轮播图",
   },
   icon: {
-    lib: "fa",
-    icon: "caret-square-right",
+    imgSrc: generalCarouselSvg,
   },
   conf: [
     {

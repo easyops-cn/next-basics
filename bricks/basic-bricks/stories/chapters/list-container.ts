@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { listContainerSvg } from "../images";
 export const listContainerStory: Story = {
   storyId: "basic-bricks.list-container",
   category: "container-layout",
@@ -14,8 +14,7 @@ export const listContainerStory: Story = {
     zh: "可以指定子项使用特定构件的列表容器，相当于是动态的构件列表",
   },
   icon: {
-    lib: "fa",
-    icon: "th",
+    imgSrc: listContainerSvg,
   },
   conf: [
     {

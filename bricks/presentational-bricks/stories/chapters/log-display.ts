@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { logDisplaySvg } from "../images";
 export const LogDisplayStory: Story = {
   storyId: "presentational-bricks.log-display",
   category: "display-component",
@@ -14,8 +14,7 @@ export const LogDisplayStory: Story = {
     zh: "显示日志相关信息",
   },
   icon: {
-    lib: "fa",
-    icon: "file-code",
+    imgSrc: logDisplaySvg,
   },
   conf: [
     {

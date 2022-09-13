@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { subMenuFilterSvg } from "../images";
 export const subMenuFilterStory: Story = {
   storyId: "basic-bricks.sub-menu-filter",
   category: "navigation",
@@ -14,8 +14,7 @@ export const subMenuFilterStory: Story = {
     zh: "搜索能力二级菜单",
   },
   icon: {
-    lib: "fa",
-    icon: "indent",
+    imgSrc: subMenuFilterSvg,
   },
   conf: [
     {

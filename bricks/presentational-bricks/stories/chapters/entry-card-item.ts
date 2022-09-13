@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { entryCardItemSvg } from "../images";
 export const EntryCardItemStory: Story = {
   storyId: "presentational-bricks.entry-card-item",
   category: "card-info",
@@ -14,8 +14,7 @@ export const EntryCardItemStory: Story = {
     zh: "可配置icon和title的卡片项",
   },
   icon: {
-    lib: "fa",
-    icon: "list",
+    imgSrc: entryCardItemSvg,
   },
   conf: [
     {

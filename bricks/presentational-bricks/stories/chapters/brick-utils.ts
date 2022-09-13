@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickUtilsSvg } from "../images";
 export const BrickUtilsStory: Story = {
   storyId: "presentational-bricks.brick-utils",
   category: "other",
@@ -14,8 +14,7 @@ export const BrickUtilsStory: Story = {
     zh: "在构件提供一些常用的工具函数可以直接方便使用",
   },
   icon: {
-    lib: "fa",
-    icon: "pencil-alt",
+    imgSrc: brickUtilsSvg,
   },
   conf: [
     {

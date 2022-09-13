@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { dropdownButtonSvg } from "../images";
 export const DropdownButtonStory: Story = {
   storyId: "presentational-bricks.dropdown-button",
   category: "interact-baisc",
@@ -14,9 +14,7 @@ export const DropdownButtonStory: Story = {
     zh: "左边是按钮，右边是额外的相关功能菜单",
   },
   icon: {
-    lib: "antd",
-    icon: "menu",
-    theme: "outlined",
+    imgSrc: dropdownButtonSvg,
   },
   conf: [
     {

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { dateTimeSelectorSvg } from "../images";
 export const DatetimeSelectorStory: Story = {
   storyId: "presentational-bricks.datetime-selector",
   category: "form-input-basic",
@@ -14,8 +14,7 @@ export const DatetimeSelectorStory: Story = {
     zh: "常用于时间的过滤，支持快速选择时间区间和自定义，例如图表或表格的时间过滤",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: dateTimeSelectorSvg,
   },
   conf: [
     {

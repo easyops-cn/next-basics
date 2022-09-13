@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickConditionalDisplaySvg } from "../images";
 export const BrickConditionalDisplayStory: Story = {
   storyId: "presentational-bricks.brick-conditional-display",
   category: "data-transform",
@@ -14,8 +14,7 @@ export const BrickConditionalDisplayStory: Story = {
     zh: "按不同条件渲染，比如告警数为0是绿色，大于1时显示黄色, 更灵活的方式请通过表达式、函数来做数据处理",
   },
   icon: {
-    lib: "fa",
-    icon: "dolly",
+    imgSrc: brickConditionalDisplaySvg,
   },
   conf: {
     brick: "presentational-bricks.brick-conditional-display",

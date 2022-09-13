@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { cardItemSvg } from "../images";
 export const CardItemStory: Story = {
   storyId: "presentational-bricks.card-item",
   category: "card-info",
@@ -14,8 +14,7 @@ export const CardItemStory: Story = {
     zh: "通用卡片项",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: cardItemSvg,
   },
   conf: [
     {

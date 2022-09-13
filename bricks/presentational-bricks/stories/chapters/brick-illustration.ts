@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickIllustrationSvg } from "../images";
 export const BrickIllustrationStory: Story = {
   storyId: "presentational-bricks.brick-illustration",
   category: "feedback-and-tooltip",
@@ -15,8 +15,7 @@ export const BrickIllustrationStory: Story = {
     zh: "插画展示构件内容来自`插画库`，如需更多类型请到`插画库`挑选",
   },
   icon: {
-    lib: "antd",
-    icon: "picture",
+    imgSrc: brickIllustrationSvg,
   },
   conf: [
     {

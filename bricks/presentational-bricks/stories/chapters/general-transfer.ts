@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalTransferSvg } from "../images";
 export const GeneralTransferStory: Story = {
   storyId: "presentational-bricks.general-transfer",
   category: "container-display",
@@ -14,8 +14,7 @@ export const GeneralTransferStory: Story = {
     zh: "双栏穿梭选择框",
   },
   icon: {
-    lib: "fa",
-    icon: "draw-polygon",
+    imgSrc: generalTransferSvg,
   },
   conf: {
     brick: "presentational-bricks.general-transfer",

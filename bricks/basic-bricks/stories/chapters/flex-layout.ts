@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { flexLayoutSvg } from "../images";
 export const flexLayoutStory: Story = {
   storyId: "basic-bricks.flex-layout",
   category: "container-layout",
@@ -14,8 +14,7 @@ export const flexLayoutStory: Story = {
     zh: "基于Flex的布局容器",
   },
   icon: {
-    lib: "fa",
-    icon: "th",
+    imgSrc: flexLayoutSvg,
   },
   conf: [
     {

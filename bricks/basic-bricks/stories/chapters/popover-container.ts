@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { popoverContainerSvg } from "../images";
 export const popoverContainerStory: Story = {
   storyId: "basic-bricks.popover-container",
   category: "container-display",
@@ -14,9 +14,7 @@ export const popoverContainerStory: Story = {
     zh: "可以配置显示构件和弹出框构件，常用于快速编辑和详情展示",
   },
   icon: {
-    lib: "fa",
-    icon: "comment",
-    prefix: "fas",
+    imgSrc: popoverContainerSvg,
   },
   conf: [
     {

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickDescriptionsSvg } from "../images";
 export const BrickDescriptionsStory: Story = {
   storyId: "presentational-bricks.brick-descriptions",
   category: "text",
@@ -14,8 +14,7 @@ export const BrickDescriptionsStory: Story = {
     zh: "常用于概要信息的描述，2~3列",
   },
   icon: {
-    lib: "fa",
-    icon: "clipboard-list",
+    imgSrc: brickDescriptionsSvg,
   },
   conf: [
     {

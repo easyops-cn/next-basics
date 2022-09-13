@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { brickUserSvg } from "../images";
 export const BrickUserStory: Story = {
   storyId: "presentational-bricks.brick-user",
   category: "display-component",
@@ -14,8 +14,7 @@ export const BrickUserStory: Story = {
     zh: "展示用户头像加用户名",
   },
   icon: {
-    lib: "fa",
-    icon: "user",
+    imgSrc: brickUserSvg,
   },
   conf: [
     {

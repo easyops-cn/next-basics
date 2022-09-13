@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalDrawerSvg } from "../images";
 export const generalDrawerStory: Story = {
   storyId: "basic-bricks.general-drawer",
   category: "container-display",
@@ -14,8 +14,7 @@ export const generalDrawerStory: Story = {
     zh: "提供插槽以展示其他构件",
   },
   icon: {
-    lib: "fa",
-    icon: "draw-polygon",
+    imgSrc: generalDrawerSvg,
   },
   conf: [
     {

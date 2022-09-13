@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { costTimeSvg } from "../images";
 export const CostTimeStory: Story = {
   storyId: "presentational-bricks.cost-time",
   category: "data-transform",
@@ -14,8 +14,7 @@ export const CostTimeStory: Story = {
     zh: "如：15秒、1天",
   },
   icon: {
-    lib: "fa",
-    icon: "clock",
+    imgSrc: costTimeSvg,
   },
   conf: [
     {
