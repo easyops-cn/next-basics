@@ -1,8 +1,6 @@
 .logoBar {
   position: relative;
-  height: var(--app-bar-height);
   width: 100%;
-  padding: 0 22px 0 24px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -11,6 +9,16 @@
 .logoLink,
 .logoLink:hover {
   color: #fff;
+}
+
+.ui8 {
+  height: 100%;
+  padding: 0;
+}
+
+.ui5 {
+  height: var(--app-bar-height);
+  padding: 0 22px 0 24px;
 }
 
 :global(.menu-bar-collapsed) {

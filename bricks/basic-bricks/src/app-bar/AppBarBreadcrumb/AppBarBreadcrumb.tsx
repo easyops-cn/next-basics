@@ -25,7 +25,7 @@ export function AppBarBreadcrumb(
     noCurrentApp: breadcrumbNoCurrentApp,
     useCurrentMenuTitle,
   } = currentApp?.breadcrumb || {};
-  const noCurrentApp = props.noCurrentApp || breadcrumbNoCurrentApp;
+  const noCurrentApp = props.noCurrentApp ?? breadcrumbNoCurrentApp;
 
   return (
     <div className={classnames(styles.breadcrumbContainer, props.className)}>

@@ -4,11 +4,21 @@ import { LogoBar } from "./LogoBar";
 import { ReactComponent as Logo } from "../../images/logo-3.1.svg";
 import { getRuntime } from "@next-core/brick-kit";
 import { Link } from "@next-libs/basic-components";
+jest.mock("@next-core/brick-kit");
+
+const getCurrentAppFn = jest.fn().mockReturnValue({
+  layoutType: "bussiness",
+});
+const featureFlagsFn = jest.fn().mockReturnValue({
+  "support-ui-8.0-base-layout": true,
+});
 
 jest.mock("@next-core/brick-kit");
 const brandFn = jest.fn().mockReturnValue({});
 (getRuntime as jest.Mock).mockReturnValue({
   getBrandSettings: brandFn,
+  getFeatureFlags: featureFlagsFn,
+  getCurrentApp: getCurrentAppFn,
 });
 
 describe("LogoBar", () => {
