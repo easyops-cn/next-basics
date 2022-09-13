@@ -183,6 +183,10 @@ describe("WorkbenchBackend should work", () => {
       projectId: "project-a",
       storyboardJson:
         '{"routes":[{"bricks":[{"brick":"div","type":"brick"}],"type":"bricks"}]}',
+      ignoredResources: {
+        menus: true,
+        image: true,
+      },
     });
 
     expect(handleBackendMessage).toHaveBeenNthCalledWith(4, "message", {
