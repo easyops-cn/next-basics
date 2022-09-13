@@ -22,10 +22,11 @@ export async function capture(
     )
   ).default;
   const sourceCanvas = await html2canvas(document.body, {
-    logging: true,
+    logging: false,
     scale: 1,
     width: window.innerWidth,
     height: window.innerHeight,
+    foreignObjectRendering: true,
   });
   const targetCanvas = document.createElement("canvas");
   resizeScreenshot(sourceCanvas, targetCanvas, maxWidth, maxHeight);
