@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.11.7...@next-bricks/next-previewer@1.11.8) (2022-09-13)
+
+
+### Bug Fixes
+
+* enable foreignObjectRendering ([bff462e](https://github.com/easyops-cn/next-basics/commit/bff462e4d5f5035ec820f8339ba31d928be78efd))
+
+
+
+
+
 ## [1.11.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.11.6...@next-bricks/next-previewer@1.11.7) (2022-09-08)
 
 
