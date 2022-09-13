@@ -455,6 +455,10 @@ export default class WorkbenchBackend {
       await BuildApi_buildAndPush({
         projectId: result.projectId,
         storyboardJson: JSON.stringify(result.storyboard),
+        ignoredResources: {
+          menus: true,
+          image: true,
+        },
       });
       // eslint-disable-next-line no-console
       console.log("=== build finsh ===");
