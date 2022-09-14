@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.195.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.195.0...@next-bricks/basic-bricks@1.195.1) (2022-09-14)
+
+
+### Bug Fixes
+
+* fix logoBar render error when app was not found ([420b841](https://github.com/easyops-cn/next-basics/commit/420b841631d44b3621c04881f7378d574f07333c))
+
+
+
+
+
 # [1.195.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.194.7...@next-bricks/basic-bricks@1.195.0) (2022-09-13)
 
 
