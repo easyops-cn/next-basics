@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalAutoCompleteSvg } from "../images";
 export const autoCompleteStory: Story = {
   storyId: "forms.general-auto-complete",
   category: "form-input-basic",
@@ -14,8 +14,7 @@ export const autoCompleteStory: Story = {
     zh: "输入框自动完成功能",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalAutoCompleteSvg,
   },
   conf: [
     {

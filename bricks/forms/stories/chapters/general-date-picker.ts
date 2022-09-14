@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalDatePickerSvg } from "../images";
 export const datePickerStory: Story = {
   storyId: "forms.general-date-picker",
   category: "form-input-basic",
@@ -14,8 +14,7 @@ export const datePickerStory: Story = {
     zh: "",
   },
   icon: {
-    lib: "fa",
-    icon: "calendar",
+    imgSrc: generalDatePickerSvg,
   },
   conf: [
     {

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalSelectSvg } from "../images";
 export const generalSelecttStory: Story = {
   storyId: "forms.general-select",
   category: "form-input-basic",
@@ -14,8 +14,7 @@ export const generalSelecttStory: Story = {
     zh: "",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalSelectSvg,
   },
   conf: [
     {

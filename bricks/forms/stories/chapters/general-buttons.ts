@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalButtonsSvg } from "../images";
 export const generalButtonStory: Story = {
   storyId: "forms.general-buttons",
   type: "brick",
@@ -14,8 +14,7 @@ export const generalButtonStory: Story = {
     zh: "用于general-forms的通用按钮，可以配置submit按钮和cancel按钮",
   },
   icon: {
-    lib: "fa",
-    icon: "hockey-puck",
+    imgSrc: generalButtonsSvg,
   },
   conf: {
     brick: "forms.general-buttons",

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { uploadImgSvg } from "../images";
 export const uploadImgStory: Story = {
   storyId: "forms.upload-img",
   type: "brick",
@@ -14,8 +14,7 @@ export const uploadImgStory: Story = {
     zh: "对接平台对象存储，提供上传图片功能的构件",
   },
   icon: {
-    lib: "fa",
-    icon: "link",
+    imgSrc: uploadImgSvg,
   },
   conf: [
     {
