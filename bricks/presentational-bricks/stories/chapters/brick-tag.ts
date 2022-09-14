@@ -160,7 +160,7 @@ export const BrickTagStory: Story = {
       properties: {
         cardLayoutType: "icon-as-background",
         dataSource: {
-          descriptionList: ["Deployment 工作模式", "1 个负载均衡器", "啦啦"],
+          descriptionList: ["Deployment 工作模式", "1 个负载均衡器", "啦啦啦"],
           id: "1",
           name: "k8s警告等级",
         },

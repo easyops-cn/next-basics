@@ -429,7 +429,7 @@ export const story: Story = {
   icon: { lib: "fa", icon: "project-diagram" },
   description: {
     en: "",
-    zh: "根据节点，边，及布局类型，展示拓扑图",
+    zh: "根据节点，边，及布局类型，展示拓扑图。",
   },
   conf: [
     {
