@@ -156,7 +156,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
           ),
           cancelButtonProps: merge(
             {
-              type: "link",
+              type: "text",
             },
             cancelButtonProps
           ),
@@ -185,7 +185,7 @@ export function ModalConfirm(props: ModalConfirmProps): React.ReactElement {
           },
           { disabled: okDisabled }
         ),
-        cancelButtonProps: merge({ type: "link" }, cancelButtonProps),
+        cancelButtonProps: merge({ type: "text" }, cancelButtonProps),
       });
     }
   }, [props.confirmLoading, cancelButtonProps, okDisabled]);

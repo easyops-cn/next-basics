@@ -21,9 +21,9 @@ describe("forms.general-buttons", () => {
     element.submitType = "link";
     expect(element.submitType).toBe("link");
 
-    expect(element.cancelType).toBe("link");
+    expect(element.cancelType).toBe("text");
     element.cancelType = "unknown";
-    expect(element.cancelType).toBe("link");
+    expect(element.cancelType).toBe("text");
     element.cancelType = "danger";
     expect(element.cancelType).toBe("danger");
 

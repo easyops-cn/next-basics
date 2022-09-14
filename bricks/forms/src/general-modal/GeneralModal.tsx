@@ -28,7 +28,7 @@ interface GeneralModalProps extends FormItemWrapperProps {
 export function GeneralModal(props: GeneralModalProps): React.ReactElement {
   const footer = (
     <>
-      <Button className="cancelBtn" type="link">
+      <Button className="cancelBtn" type="text">
         {props.cancelText || i18n.t(`${NS_FORMS}:${K.CANCEL}`)}
       </Button>
       <Button

@@ -109,7 +109,7 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
   let footer = undefined;
   const defaultFooter = (
     <div style={{ textAlign: `${footerPosition}` }}>
-      <Button type="link" className="cancelBtn">
+      <Button type="text" className="cancelBtn">
         {configProps?.cancelText || t(K.CANCEL)}
       </Button>
       <Button
