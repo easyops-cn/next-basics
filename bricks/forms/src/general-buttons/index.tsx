@@ -153,7 +153,7 @@ export class GeneralButtonsElement extends FormItemElement {
         if (value && BUTTON_TYPES.includes(value)) {
           return value;
         }
-        return "link";
+        return "text";
       },
       toAttribute(value: string): string {
         if (BUTTON_TYPES.includes(value)) {

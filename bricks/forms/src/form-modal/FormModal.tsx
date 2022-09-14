@@ -132,7 +132,7 @@ export function FormModal(props: FormModalProps): React.ReactElement {
       onOk={handleOk}
       cancelButtonProps={
         {
-          type: "link",
+          type: "text",
           ...cancelButtonProps,
           "data-testid": "modal-button-cancel",
         } as ButtonProps
