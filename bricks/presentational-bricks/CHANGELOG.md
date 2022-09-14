@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.265.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.264.8...@next-bricks/presentational-bricks@1.265.0) (2022-09-14)
+
+
+### Features
+
+* **GeneralImage:** support imgStyle ([9def73f](https://github.com/easyops-cn/next-basics/commit/9def73f47759ae129516909b114e15e61f496131))
+
+
+
+
+
 ## [1.264.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.264.7...@next-bricks/presentational-bricks@1.264.8) (2022-09-14)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
