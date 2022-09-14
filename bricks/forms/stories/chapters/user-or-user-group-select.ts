@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { userOrUserGroupSelectSvg } from "../images";
 export const userGroupSelectStory: Story = {
   storyId: "forms.user-or-user-group-select",
   type: "brick",
@@ -14,8 +14,7 @@ export const userGroupSelectStory: Story = {
     zh: "支持配置选择用户／用户组，下拉框／弹框选择等",
   },
   icon: {
-    lib: "fa",
-    icon: "link",
+    imgSrc: userOrUserGroupSelectSvg,
   },
   conf: [
     {

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalModalSvg } from "../images";
 export const GeneralModalStory: Story = {
   storyId: "forms.general-modal",
   category: "form-input-advanced",
@@ -13,8 +13,7 @@ export const GeneralModalStory: Story = {
     zh: "既可以作为一个独立的模态框表单，也可以作为表单里面的某个表单项存在",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalModalSvg,
   },
   conf: [
     {

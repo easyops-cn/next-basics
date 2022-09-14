@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalFormSvg } from "../images";
 export const story: Story = {
   storyId: "forms.general-form",
   type: "brick",
@@ -14,8 +14,7 @@ export const story: Story = {
     zh: "通用表单容器",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalFormSvg,
   },
   conf: [
     {

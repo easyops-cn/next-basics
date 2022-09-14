@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalInputNumberSvg } from "../images";
 export const generalInputNumberStory: Story = {
   storyId: "forms.general-input-number",
   type: "brick",
@@ -14,8 +14,7 @@ export const generalInputNumberStory: Story = {
     zh: "通用的数字输入框",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalInputNumberSvg,
   },
   conf: {
     brick: "forms.general-input-number",

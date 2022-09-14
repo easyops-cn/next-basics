@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { cmdbInstanceSelectSvg } from "../images";
 export const cmdbInstanceSelectStory: Story = {
   storyId: "forms.cmdb-instance-select",
   type: "brick",
@@ -14,8 +14,7 @@ export const cmdbInstanceSelectStory: Story = {
     zh: "通过拉取 cmdb 实例数据作为数据源的下拉框",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: cmdbInstanceSelectSvg,
   },
   conf: [
     {

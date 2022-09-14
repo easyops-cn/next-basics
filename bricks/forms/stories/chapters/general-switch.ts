@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalSwitchSvg } from "../images";
 export const generalSwitch: Story = {
   storyId: "forms.general-switch",
   category: "form-input-basic",
@@ -14,8 +14,7 @@ export const generalSwitch: Story = {
     zh: "通用的开关",
   },
   icon: {
-    lib: "fa",
-    icon: "lock",
+    imgSrc: generalSwitchSvg,
   },
   conf: [
     {

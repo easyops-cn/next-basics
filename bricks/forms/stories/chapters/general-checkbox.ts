@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalCheckboxSvg } from "../images";
 export const GeneralCheckboxStory: Story = {
   storyId: "forms.general-checkbox",
   type: "brick",
@@ -14,8 +14,7 @@ export const GeneralCheckboxStory: Story = {
     zh: "通用多选框",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalCheckboxSvg,
   },
   conf: [
     {

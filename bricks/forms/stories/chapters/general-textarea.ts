@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalTextareaSvg } from "../images";
 export const generalTextareaStory: Story = {
   storyId: "forms.general-textarea",
   category: "form-input-basic",
@@ -14,8 +14,7 @@ export const generalTextareaStory: Story = {
     zh: "可支持配置 autoSize, value 和 placeholder",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalTextareaSvg,
   },
   conf: {
     brick: "forms.general-form",
