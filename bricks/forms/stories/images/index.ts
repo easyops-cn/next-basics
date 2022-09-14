@@ -31,3 +31,4 @@ export { default as generalSwitchSvg } from "./forms.general-switch.svg";
 export { default as generalTextareaSvg } from "./forms.general-textarea.svg";
 export { default as uploadImgSvg } from "./forms.upload-img.svg";
 export { default as userOrUserGroupSelectSvg } from "./forms.user-or-user-group-select.svg";
+export { default as generalTimePickerSvg } from "./forms.general-time-picker.svg";
