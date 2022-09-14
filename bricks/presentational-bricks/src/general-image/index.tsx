@@ -50,6 +50,16 @@ export class GeneralImageElement extends UpdatingElement {
   /**
    * @default -
    * @required
+   * @description 图像样式
+   */
+  @property({
+    attribute: false,
+  })
+  imgStyle: React.CSSProperties;
+
+  /**
+   * @default -
+   * @required
    * @description 图像宽度
    */
   @property({
@@ -174,6 +184,7 @@ export class GeneralImageElement extends UpdatingElement {
           <GeneralImage
             width={this.imgWidth}
             height={this.imgHeight}
+            imgStyle={this.imgStyle}
             src={this.imgSrc}
             alt={this.imgAlt}
             preview={this.preview}

@@ -9,6 +9,7 @@ import style from "./GeneralImage.module.css";
 
 export interface GeneralImageProps extends ImageProps {
   dataSource?: Record<string, any>;
+  imgStyle?: React.CSSProperties;
   extra?: {
     useBrick: UseBrickConf;
   };
@@ -21,6 +22,7 @@ export function GeneralImage(props: GeneralImageProps): React.ReactElement {
   const {
     width,
     height,
+    imgStyle,
     src,
     alt,
     preview,
@@ -34,12 +36,13 @@ export function GeneralImage(props: GeneralImageProps): React.ReactElement {
   } = props;
 
   return (
-    <div>
+    <div className={style.generalImage}>
       <Image
         width={width}
         height={height}
         src={src}
         alt={alt}
+        style={imgStyle}
         preview={!isNil(visible) ? { visible, onVisibleChange } : preview}
         placeholder={placeholder}
         fallback={fallback}
