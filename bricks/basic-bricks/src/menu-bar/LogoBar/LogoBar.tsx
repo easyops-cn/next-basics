@@ -10,7 +10,7 @@ export function LogoBar(): React.ReactElement {
   const currentApp = getRuntime().getCurrentApp();
   const flag = getRuntime().getFeatureFlags();
   const isUseUI8 =
-    currentApp.layoutType === "business" && flag["support-ui-8.0-base-layout"];
+    currentApp?.layoutType === "business" && flag["support-ui-8.0-base-layout"];
   const logo: React.ReactElement = brand.menu_bar_logo_url ? (
     <img
       src={brand.menu_bar_logo_url}
