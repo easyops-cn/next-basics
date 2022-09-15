@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.234.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.233.5...@next-bricks/forms@1.234.0) (2022-09-15)
+
+
+### Features
+
+* **forms:** 可疑接口缺少page参数 ([d7df935](https://github.com/easyops-cn/next-basics/commit/d7df9350ca80f4087464e7842764dbb67322b46b))
+
+
+
+
+
 ## [1.233.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.233.4...@next-bricks/forms@1.233.5) (2022-09-15)
 
 **Note:** Version bump only for package @next-bricks/forms
