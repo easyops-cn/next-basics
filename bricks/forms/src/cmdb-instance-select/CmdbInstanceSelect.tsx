@@ -163,6 +163,7 @@ export function CmdbInstanceSelectItem(
           },
           ...(permission ? { permission } : {}),
           fields: computeFields(),
+          page: 1,
           page_size: pageSizeQuery || pageSize,
           ignore_missing_field_error: ignoreMissingFieldError,
         });
