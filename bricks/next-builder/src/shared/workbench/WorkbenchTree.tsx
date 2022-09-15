@@ -306,6 +306,7 @@ export function WorkbenchTree({
               <Input
                 value={q}
                 onChange={handleSearchChange}
+                autoComplete="off"
                 size="small"
                 placeholder={searchPlaceholder}
                 prefix={<SearchOutlined />}

@@ -641,7 +641,10 @@ export interface BackMessageForBuildSuccess {
 
 export interface BackMessageForBuildFail {
   action: "build-fail";
-  data?: unknown;
+  data?: {
+    title: string;
+    content?: string;
+  };
 }
 
 export interface BackendMessageForError {

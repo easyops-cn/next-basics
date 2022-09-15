@@ -26,4 +26,5 @@
   background: var(--antd-dropdown-menu-bg);
   padding: 20px;
   margin-top: -1px;
+  height: calc(100vh - 100px);
 }
