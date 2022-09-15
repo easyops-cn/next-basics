@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { Avatar, Tooltip } from "antd";
-import { useUserInfoByNameOrInstanceId } from "@next-libs/hooks";
+import { Tooltip } from "antd";
+import { useAvatar } from "@next-libs/hooks";
 
 import cssStyle from "./style.module.css";
 
@@ -21,7 +21,11 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
   const [userName, setUserName] = React.useState(props.userNameOrId);
   const [nickName, setNickName] = React.useState("");
 
-  const userInfo = useUserInfoByNameOrInstanceId(props.userNameOrId);
+  const {
+    Avatar,
+    user: userInfo,
+    updateConfig,
+  } = useAvatar(props.userNameOrId);
 
   React.useEffect(() => {
     if (userInfo) {
@@ -40,6 +44,20 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
     }
   }, [props.iconUrl, userInfo]);
 
+  React.useEffect(() => {
+    const { shape, size, iconMargin } = props;
+    const conf = {
+      shape,
+      size,
+      style: {
+        backgroundColor: avatarSrc ? undefined : "rgb(0, 113, 235)",
+        margin: iconMargin,
+      },
+      src: avatarSrc,
+    };
+    updateConfig(conf);
+  }, [props.shape, props.size, props.iconMargin, avatarSrc]);
+
   if (!props.userNameOrId) return null;
 
   const name = props.showNicknameOrUsername
@@ -51,21 +69,7 @@ export function BrickUser(props: BrickUserProps): React.ReactElement {
   return (
     <Tooltip title={name} placement="topLeft">
       <span className={cssStyle.user}>
-        {!props.hideAvatar && (
-          <span>
-            <Avatar
-              src={avatarSrc}
-              shape={props.shape}
-              size={props.size}
-              style={{
-                backgroundColor: avatarSrc ? undefined : "rgb(0, 113, 235)",
-                margin: props.iconMargin,
-              }}
-            >
-              {userName?.slice(0, 2)}
-            </Avatar>
-          </span>
-        )}
+        {!props.hideAvatar && <span>{Avatar}</span>}
         {!props.hideUsername && (
           <span
             className={classNames({

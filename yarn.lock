@@ -2681,11 +2681,12 @@
   resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.2.28.tgz#d5ec5525ed0cd67415d0ae8880a524253816d4ab"
   integrity sha512-yFY16RffxJWaTte1To2S5ffeNIVPMDRm6IAc5GjCLvh1IsQHyumz/xGr/VTN2cXQnX4/6vgTwPFFL9oZzm+uSw==
 
-"@next-libs/hooks@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/@next-libs/hooks/-/hooks-2.1.0.tgz#e67babc5ff74f6c7e25352a88dcca0eb94cb109d"
-  integrity sha512-qJ/BZ+hef83AnGcxkyj1LDtwxLZEJFN0qe99a7bvSFbCbPS06NM+6XkOeIIv2sbYfDXvqlSpI6U3BC3awvkCCw==
+"@next-libs/hooks@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/@next-libs/hooks/-/hooks-2.2.0.tgz#78754d6a962d846c3ea997557a88b7df4ef3d2f7"
+  integrity sha512-JomZzO8BmbNlFUy0uf4Rd9/AVcB9lVUCEuVQZZ0uPxybBQCABjIYJQXOBgC5O/8xBAEX8aYbzDOl9CJElC/Oiw==
   dependencies:
+    "@next-sdk/cmdb-sdk" "^3.2.0"
     "@next-sdk/user-service-sdk" "^2.1.5"
 
 "@next-libs/storage@^2.0.2":
@@ -2724,6 +2725,11 @@
   version "3.1.0"
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.1.0.tgz#7a80476bb63ccf404cfa6f7d9bd217027d24eeb8"
   integrity sha512-0G4+NnJjLCx0gY3Ui+ANJeguwZFHEIg55M2T/iPcE+mOQLRXrN9OzxAKxFfz4Kw6H6JrZOvDizGmoO3frFN+0Q==
+
+"@next-sdk/cmdb-sdk@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.2.0.tgz#5033d4eb909d8f514b4c2d5ff334c1b32e1374e5"
+  integrity sha512-17qvmUJCnUSlaVUjfT3PlozvQWqbJDA85gPPoFXNLbVP7ldOCDnA5HQJlhj5UbrfM11c+YoR81bnkwwDVFKq2A==
 
 "@next-sdk/form-builder-service-sdk@^1.1.0":
   version "1.1.0"

@@ -2,12 +2,39 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import { useUserInfoByNameOrInstanceId } from "@next-libs/hooks";
 import { BrickUser } from "./BrickUser";
+import { UserAdminApi_searchAllUsersInfo } from "@next-sdk/user-service-sdk";
+jest.mock("@next-sdk/user-service-sdk");
 
-jest.mock("@next-libs/hooks");
-
-(useUserInfoByNameOrInstanceId as jest.Mock).mockImplementation(
-  (name: string) =>
-    name === "irelia" ? { name: "irelia", user_icon: "/irelia.ico" } : null
+const fakeUsers = [
+  {
+    name: "a",
+    instanceId: "1",
+    user_icon: "a.jpg",
+  },
+  {
+    name: "b",
+    instanceId: "2",
+    user_icon: "b.jpg",
+  },
+];
+(UserAdminApi_searchAllUsersInfo as jest.Mock).mockImplementation(
+  ({ query }: { query: any }) => {
+    // Fake matching.
+    const list = fakeUsers
+      .filter(
+        (user) =>
+          query.$or[0].name.$in.some((name: string) => name === user.name) ||
+          query.$or[1].instanceId.$in.some(
+            (instanceId: string) => instanceId === user.instanceId
+          )
+      )
+      .map((item) => ({ ...item }));
+    return list.length > 0
+      ? Promise.resolve({
+          list,
+        })
+      : Promise.reject(new Error("oops"));
+  }
 );
 
 describe("BrickUser", () => {
@@ -31,12 +58,15 @@ describe("BrickUser", () => {
   });
 
   it("useEffect should work", async () => {
-    const wrapper = mount(<BrickUser userNameOrId="akali" iconUrl="" />);
+    const wrapper = mount(<BrickUser userNameOrId="c" iconUrl="" />);
     expect(wrapper.find("Avatar").first().prop("src")).toBe(undefined);
 
-    wrapper.setProps({ userNameOrId: "irelia" });
+    wrapper.setProps({ userNameOrId: "a" });
+
+    await jest.advanceTimersByTime(100);
+    await (global as any).flushPromises();
     wrapper.update();
-    expect(wrapper.find("Avatar").first().prop("src")).toBe("/irelia.ico");
+    expect(wrapper.find("Avatar").first().prop("src")).toBe("a.jpg");
 
     wrapper.setProps({ iconUrl: "/path/to/ico" });
     wrapper.update();
