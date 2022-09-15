@@ -493,7 +493,7 @@ function LegacyWorkbenchCacheAction(
               })
             );
             Modal.error({
-              title: "build & push 失败",
+              ...data,
             });
             break;
           case "execute-success":

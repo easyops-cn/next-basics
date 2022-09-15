@@ -78,7 +78,7 @@ describe("normalizeTreeNodeWithPath", () => {
                   "key": "a/b/c",
                   "name": "c",
                   "originKey": undefined,
-                  "parentPath": "a",
+                  "parentPath": "a/b",
                 },
                 Object {
                   "name": "e",
@@ -116,7 +116,7 @@ describe("normalizeTreeNodeWithPath", () => {
           "key": "a",
           "name": "a",
           "originKey": undefined,
-          "parentPath": undefined,
+          "parentPath": "",
         },
         Object {
           "name": "d",

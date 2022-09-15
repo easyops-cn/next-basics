@@ -141,7 +141,7 @@ export function GeneralPopup({
           className="content"
           style={{
             width: popupWidth ?? "500px",
-            height: popupHeight,
+            maxHeight: popupHeight,
           }}
         >
           <slot name="content" />

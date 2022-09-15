@@ -27,7 +27,7 @@ export function getNodeTreeByPath(
         const newNode = {
           name: newPathList.pop(),
           key: path,
-          parentPath: newPathList[0],
+          parentPath: newPathList ? newPathList.join("/") : newPathList,
           originKey: node.key,
           data: {
             [nodeKey]: path,
@@ -56,7 +56,7 @@ export function getNodeTreeByPath(
 
   nodes.forEach((node, index) => {
     if (node.path) {
-      const pathList = node.path.split("/");
+      const pathList = node.path.split("/").filter(Boolean);
       createNodeByPath(pathList, nodes, node, index);
     }
   });

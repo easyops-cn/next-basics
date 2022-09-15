@@ -477,7 +477,8 @@ export default class WorkbenchBackend {
       this.publish("message", {
         action: "build-fail",
         data: {
-          error: "build & push 失败",
+          title: "build & push 失败",
+          content: e?.responseJson?.error as string,
         },
       });
     }
