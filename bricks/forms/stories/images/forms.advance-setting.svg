@@ -6,9 +6,12 @@
             <g id="forms.advance-setting" transform="translate(401.000000, 103.000000)">
                 <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
                 <polyline id="路径-2" stroke="#778DC3" stroke-linecap="round" stroke-linejoin="round" transform="translate(51.800000, 13.000000) rotate(-90.000000) translate(-51.800000, -13.000000) " points="50 10 53.6 13 50 16"></polyline>
-                <text id="高级设置" stroke="#778DC3" fill-rule="nonzero" font-family="PingFangSC-Regular, PingFang SC" font-size="10" font-weight="normal" fill="#5F5F5F">
-                    <tspan x="6" y="17">高级设置</tspan>
-                </text>
+                <g id="高级设置" transform="translate(6.580000, 8.770000)" fill="#5F5F5F" fill-rule="nonzero" stroke="#778DC3">
+                    <path d="" id="形状"></path>
+                    <path d="" id="形状"></path>
+                    <path d="" id="形状"></path>
+                    <path d="" id="形状"></path>
+                </g>
                 <g id="编组-16" transform="translate(6.000000, 23.000000)">
                     <rect id="矩形备份-78" fill="#F4F5F9" x="0" y="0" width="93" height="26" rx="1"></rect>
                     <rect id="矩形" fill="#D6DBEC" x="4" y="4" width="1" height="6"></rect>
