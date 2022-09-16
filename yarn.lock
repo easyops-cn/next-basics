@@ -2694,6 +2694,14 @@
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-2.0.2.tgz#59bc984ba098bf817670dfcf87f7302be8f62a4c"
   integrity sha512-6sz9tIyonGDWIynO2DnmEZhOpGFVpnfLNP9hSjgWI3LRE3O826zdOxUnHx1QiWL8h8CIWHcElb/ULy5R64/oOA==
 
+"@next-libs/user-components@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/@next-libs/user-components/-/user-components-0.1.0.tgz#f17db7bca68b5f9d7938e83f4757a1aacc362111"
+  integrity sha512-DGJJ1OVMJt+uiYwU8+DvXSnOJzT1LV3VAa/YWwqcBsau74s+ImnvIze/f0WsZoMJfocfZPACXgWkJBuBbKgzDA==
+  dependencies:
+    "@next-core/brick-types" "^2.16.0"
+    "@next-libs/hooks" "^2.2.0"
+
 "@next-libs/visit-history@2.0.2":
   version "2.0.2"
   resolved "https://registry.npmjs.org/@next-libs/visit-history/-/visit-history-2.0.2.tgz#d54c6a2cd7e793dd88bfd30e55d4c3ea3e4548e9"
