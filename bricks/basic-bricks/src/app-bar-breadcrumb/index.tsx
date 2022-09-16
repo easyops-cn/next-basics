@@ -39,7 +39,7 @@ export class AppbarBreadcrumbElement extends UpdatingElement {
    * @default -
    * @description 是否隐藏当前应用名称
    */
-  @property()
+  @property({ attribute: false })
   noCurrentApp: boolean;
 
   @property({
