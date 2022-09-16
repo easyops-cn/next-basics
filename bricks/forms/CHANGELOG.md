@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.234.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.234.0...@next-bricks/forms@1.234.1) (2022-09-16)
+
+
+### Bug Fixes
+
+* uploadImage 使用mentions时优化接口调用性能 ([c81eaa1](https://github.com/easyops-cn/next-basics/commit/c81eaa1284fb4c3d56ecf603b4cdecdd639e609d))
+
+
+
+
+
 # [1.234.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.233.5...@next-bricks/forms@1.234.0) (2022-09-15)
 
 
