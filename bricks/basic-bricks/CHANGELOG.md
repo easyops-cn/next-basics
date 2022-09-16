@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.195.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.195.3...@next-bricks/basic-bricks@1.195.4) (2022-09-16)
+
+
+### Bug Fixes
+
+* set noCurrentApp default value to undefined ([fbcdbc0](https://github.com/easyops-cn/next-basics/commit/fbcdbc025ef7afbfa0f8bf50713a6148f494a4b1))
+
+
+
+
+
 ## [1.195.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.195.2...@next-bricks/basic-bricks@1.195.3) (2022-09-15)
 
 
