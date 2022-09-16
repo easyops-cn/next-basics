@@ -36,12 +36,10 @@ export class AppbarBreadcrumbElement extends UpdatingElement {
   breadcrumb: BreadcrumbItemConf[];
 
   /**
-   * @default false
+   * @default -
    * @description 是否隐藏当前应用名称
    */
-  @property({
-    type: Boolean,
-  })
+  @property()
   noCurrentApp: boolean;
 
   @property({
