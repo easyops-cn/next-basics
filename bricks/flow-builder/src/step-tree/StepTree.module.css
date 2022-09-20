@@ -1,0 +1,12 @@
+.searchBox {
+  position: sticky;
+  z-index: 999;
+  top: 0;
+  background-color: rgb(37, 37, 38);
+  padding: 5px 10px 10px;
+}
+
+.placeholder {
+  color: var(--antd-input-placeholder-color);
+  padding: 0 15px;
+}

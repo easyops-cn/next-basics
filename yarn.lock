@@ -2709,7 +2709,7 @@
   dependencies:
     "@next-libs/storage" "^2.0.2"
 
-"@next-libs/visual-builder@1.2.0", "@next-libs/visual-builder@^1.2.0":
+"@next-libs/visual-builder@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.2.0.tgz#95e4f070ae545bf15a9300926067630a237c850f"
   integrity sha512-jX6yJ7TbSUEDTZ9t/bBJOi8/BVN4DRFxkgxO58G5WJPbXlBvy5cgYjm7LKK3z6RDY7o1MdbwMWEHw9ERda4qSA==
