@@ -2709,6 +2709,17 @@
   dependencies:
     "@next-libs/storage" "^2.0.2"
 
+"@next-libs/visual-builder@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.1.0.tgz#53c7da9bd9bcf08de93cd54524962de40ed8919a"
+  integrity sha512-urHtWW8TyuIALkHUv9vKRNUHaeihNnDYZoXtbIEpGxIFUS80T53NpYFlRXSrBDbe6moGQse+XtjGetyAcbGeVw==
+  dependencies:
+    "@next-libs/basic-components" "^3.5.2"
+    "@next-libs/code-editor-components" "^4.1.3"
+    "@next-libs/forms" "^3.2.28"
+    "@types/react-color" "^3.0.6"
+    react-color "^2.19.3"
+
 "@next-sdk/air-admin-service-sdk@^2.1.12":
   version "2.1.12"
   resolved "https://registry.npmjs.org/@next-sdk/air-admin-service-sdk/-/air-admin-service-sdk-2.1.12.tgz#575d54d42c334adbadc72027f25b59f99461892d"
