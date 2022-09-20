@@ -11,9 +11,10 @@ import {
 import {
   VisualPropertyForm,
   VisualPropertyFormProps,
-} from "./VisualPropertyForm";
-import { visualFormUtils } from "../interfaces";
-import { processFormValue, extractCommonProps } from "./processor";
+  processFormValue,
+  extractCommonProps,
+  visualFormUtils,
+} from "@next-libs/visual-builder";
 
 /**
  * @id brick-visualization.visual-property-form
