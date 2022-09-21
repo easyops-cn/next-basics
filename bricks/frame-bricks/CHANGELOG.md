@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.4.0...@next-bricks/frame-bricks@1.4.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* 优化navMenu样式 ([43c5797](https://github.com/easyops-cn/next-basics/commit/43c5797ff44ae20666dbc97e53aef4a896ec02ff))
+* 修复二级菜单折叠圆点不显示的问题 ([6c91030](https://github.com/easyops-cn/next-basics/commit/6c91030ed0b6eb455be6bcce52f1e33bf337d363))
+* 修改二级菜单hover颜色 ([244042d](https://github.com/easyops-cn/next-basics/commit/244042d5ec585bb072b6eedb5a88b3df85cdbd70))
+
+
+
+
+
 # [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.3.5...@next-bricks/frame-bricks@1.4.0) (2022-09-07)
 
 

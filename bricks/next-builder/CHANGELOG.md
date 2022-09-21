@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.185.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.185.1...@next-bricks/next-builder@1.185.2) (2022-09-21)
+
+
+### Bug Fixes
+
+* use workbenchMiniActionBar lib component ([07e187b](https://github.com/easyops-cn/next-basics/commit/07e187bcd48a2b164d0520a59906b5716939ed1c))
+
+
+
+
+
 ## [1.185.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.185.0...@next-bricks/next-builder@1.185.1) (2022-09-15)
 
 

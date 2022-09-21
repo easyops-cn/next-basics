@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.10.7...@next-bricks/brick-visualization@1.11.0) (2022-09-21)
+
+
+### Bug Fixes
+
+* use workbenchMiniActionBar lib component ([07e187b](https://github.com/easyops-cn/next-basics/commit/07e187bcd48a2b164d0520a59906b5716939ed1c))
+
+
+### Features
+
+* **brick-visualization:** 【visual-property-form】使用libs内的组件 ([449b9e6](https://github.com/easyops-cn/next-basics/commit/449b9e624485a32f136e11eda8a4237e38294dd3))
+
+
+
+
+
 ## [1.10.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.10.6...@next-bricks/brick-visualization@1.10.7) (2022-09-13)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
