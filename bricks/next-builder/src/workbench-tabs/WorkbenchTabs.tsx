@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import type { MenuIcon } from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
-import { WorkbenchMiniActionBar } from "../shared/workbench/WorkbenchMiniActionBar";
-import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
+import { WorkbenchMiniActionBar } from "@next-libs/visual-builder";
 import type {
   ActionClickDetail,
   TextIcon,
@@ -73,60 +72,55 @@ export function WorkbenchTabs({
   }, []);
 
   return (
-    <WorkbenchActionsContext.Provider
-      value={{
-        actions: [
-          {
-            action: "close",
-            title: "Close",
-            icon: {
-              lib: "antd",
-              theme: "outlined",
-              icon: "close",
-            },
-          },
-        ],
-        onActionClick,
-      }}
-    >
-      <div className={styles.scrollContainer}>
-        <ul
-          className={classNames(
-            styles.tabs,
-            sharedStyles.customScrollbarContainer
-          )}
-          role="menu"
-        >
-          {tabs?.map((tab) => (
-            <li
-              key={tab.key}
-              className={classNames(styles.tab, {
-                [styles.active]: tab.key === internalActiveTabKey,
-              })}
-              onClick={onTabClickFactory(tab)}
-              role="menuitem"
-              ref={tab.key === initialActiveTabKey ? activeTabCallback : null}
-            >
-              <span className={styles.tabIcon}>
-                {tab.icon?.lib === "text" ? (
-                  <WorkbenchTextIcon icon={tab.icon} />
-                ) : (
-                  <GeneralIcon icon={tab.icon} />
-                )}
-              </span>
-              <span className={styles.tabName}>{tab.name}</span>
-              {historyBlocked && tab.key === internalActiveTabKey ? (
-                <span className={styles.modifiedIcon}></span>
+    <div className={styles.scrollContainer}>
+      <ul
+        className={classNames(
+          styles.tabs,
+          sharedStyles.customScrollbarContainer
+        )}
+        role="menu"
+      >
+        {tabs?.map((tab) => (
+          <li
+            key={tab.key}
+            className={classNames(styles.tab, {
+              [styles.active]: tab.key === internalActiveTabKey,
+            })}
+            onClick={onTabClickFactory(tab)}
+            role="menuitem"
+            ref={tab.key === initialActiveTabKey ? activeTabCallback : null}
+          >
+            <span className={styles.tabIcon}>
+              {tab.icon?.lib === "text" ? (
+                <WorkbenchTextIcon icon={tab.icon} />
               ) : (
-                <WorkbenchMiniActionBar
-                  className={styles.actionsBar}
-                  data={tab}
-                />
+                <GeneralIcon icon={tab.icon} />
               )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </WorkbenchActionsContext.Provider>
+            </span>
+            <span className={styles.tabName}>{tab.name}</span>
+            {historyBlocked && tab.key === internalActiveTabKey ? (
+              <span className={styles.modifiedIcon}></span>
+            ) : (
+              <WorkbenchMiniActionBar
+                className={styles.actionsBar}
+                data={tab}
+                actions={[
+                  {
+                    action: "close",
+                    title: "Close",
+                    icon: {
+                      lib: "antd",
+                      theme: "outlined",
+                      icon: "close",
+                    },
+                  },
+                ]}
+                onActionClick={onActionClick}
+              />
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
