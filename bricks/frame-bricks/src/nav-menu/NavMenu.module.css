@@ -74,6 +74,7 @@
 /* 下拉弹窗样式 */
 .popupWrapper {
   padding: 4px 0px 3px 0px;
+  top: 41px !important;
   :global(.ant-menu) {
     background: var(--antd-dropdown-menu-bg) !important;
     border-radius: 6px;
@@ -194,7 +195,7 @@
 
   .simpleMenuItem:global(.ant-menu-item-active) {
     color: inherit;
-    background-color: var(--v8-top-menu-item-hover) !important;
+    background-color: var(--v8-top-menu-item-selected-bg) !important;
     span {
       color: var(--color-normal-text);
     }
@@ -205,6 +206,12 @@
     span {
       color: var(--color-brand) !important;
       font-weight: 500;
+    }
+  }
+
+  ul:first-child {
+    :global(.ant-menu-item-group-title) {
+      margin-top: 0;
     }
   }
 }
