@@ -38,6 +38,11 @@
   }
 
   .groupTitlePoint {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all var(--side-bar-collapse-transition-duration)
       var(--side-bar-collapse-transition-timing-function);
 
@@ -45,7 +50,7 @@
       content: "";
       width: 2px;
       height: 2px;
-      background: #8c8c8c;
+      background: var(--color-secondary-text);
       border-radius: 50%;
     }
 
