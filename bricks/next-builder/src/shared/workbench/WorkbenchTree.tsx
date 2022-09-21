@@ -15,12 +15,13 @@ import { SearchOutlined } from "@ant-design/icons";
 import { smartDisplayForEvaluableString } from "@next-core/brick-utils";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { useWorkbenchTreeContext } from "./WorkbenchTreeContext";
+import { useWorkbenchActionsContext } from "./WorkbenchActionsContext";
 import {
   useWorkbenchTreeDndContext,
   dragStatusEnum,
 } from "./WorkbenchTreeDndContext";
 import type { WorkbenchNodeData } from "./interfaces";
-import { WorkbenchMiniActionBar } from "./WorkbenchMiniActionBar";
+import { WorkbenchMiniActionBar } from "@next-libs/visual-builder";
 import { WorkbenchTextIcon } from "./WorkbenchTextIcon";
 import { looseCheckIfOfComputed } from "@next-core/brick-kit";
 
@@ -421,6 +422,9 @@ function TreeNode({
     dragStatus,
   } = useWorkbenchTreeDndContext();
 
+  const { actions, actionsHidden, onActionClick } =
+    useWorkbenchActionsContext();
+
   const nodePaddingLeft = level * treeLevelPadding + basePaddingLeft - 2;
   const searching = useContext(SearchingContext);
   const [cacheDragStatus, setCacheDragStatus] = useState(null);
@@ -655,6 +659,9 @@ function TreeNode({
             data={node.data}
             isFirst={isFirst}
             isLast={isLast}
+            actions={actions}
+            onActionClick={onActionClick}
+            actionsHidden={actionsHidden}
           />
           {node.badge && (
             <span className={styles.badge}>

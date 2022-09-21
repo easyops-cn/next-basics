@@ -7,8 +7,7 @@ import {
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
-import { WorkbenchMiniActionBar } from "../shared/workbench/WorkbenchMiniActionBar";
-import { WorkbenchActionsContext } from "../shared/workbench/WorkbenchActionsContext";
+import { WorkbenchMiniActionBar } from "@next-libs/visual-builder";
 import type {
   ActionClickDetail,
   WorkbenchTreeAction,
@@ -46,14 +45,11 @@ export class WorkbenchMiniActionBarElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <WorkbenchActionsContext.Provider
-            value={{
-              actions: this.actions,
-              onActionClick: this._handleActionClick,
-            }}
-          >
-            <WorkbenchMiniActionBar gap={3} />
-          </WorkbenchActionsContext.Provider>
+          <WorkbenchMiniActionBar
+            gap={3}
+            actions={this.actions}
+            onActionClick={this._handleActionClick}
+          />
         </BrickWrapper>,
         this
       );

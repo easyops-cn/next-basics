@@ -2709,10 +2709,10 @@
   dependencies:
     "@next-libs/storage" "^2.0.2"
 
-"@next-libs/visual-builder@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.1.0.tgz#53c7da9bd9bcf08de93cd54524962de40ed8919a"
-  integrity sha512-urHtWW8TyuIALkHUv9vKRNUHaeihNnDYZoXtbIEpGxIFUS80T53NpYFlRXSrBDbe6moGQse+XtjGetyAcbGeVw==
+"@next-libs/visual-builder@1.2.0", "@next-libs/visual-builder@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.2.0.tgz#95e4f070ae545bf15a9300926067630a237c850f"
+  integrity sha512-jX6yJ7TbSUEDTZ9t/bBJOi8/BVN4DRFxkgxO58G5WJPbXlBvy5cgYjm7LKK3z6RDY7o1MdbwMWEHw9ERda4qSA==
   dependencies:
     "@next-libs/basic-components" "^3.5.2"
     "@next-libs/code-editor-components" "^4.1.3"
@@ -2740,12 +2740,7 @@
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-2.3.2.tgz#7c9cca2218c02e3491f0e9e7094e2c0cfabd169a"
   integrity sha512-DNDuLWrxKNWFJzkj7DcmSworTMhJR8ENpQ7fGNMhAILqBvBcYvi9W+t0/NAgOz/gYNnG0tomeX/uk2/tNqahAQ==
 
-"@next-sdk/cmdb-sdk@^3.0.2", "@next-sdk/cmdb-sdk@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.1.0.tgz#7a80476bb63ccf404cfa6f7d9bd217027d24eeb8"
-  integrity sha512-0G4+NnJjLCx0gY3Ui+ANJeguwZFHEIg55M2T/iPcE+mOQLRXrN9OzxAKxFfz4Kw6H6JrZOvDizGmoO3frFN+0Q==
-
-"@next-sdk/cmdb-sdk@^3.2.0":
+"@next-sdk/cmdb-sdk@^3.0.2", "@next-sdk/cmdb-sdk@^3.1.0", "@next-sdk/cmdb-sdk@^3.2.0":
   version "3.2.0"
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.2.0.tgz#5033d4eb909d8f514b4c2d5ff334c1b32e1374e5"
   integrity sha512-17qvmUJCnUSlaVUjfT3PlozvQWqbJDA85gPPoFXNLbVP7ldOCDnA5HQJlhj5UbrfM11c+YoR81bnkwwDVFKq2A==
