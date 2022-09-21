@@ -119,3 +119,20 @@
 .sideBarContainer.hovered {
   box-shadow: var(--left-sidebar-shadow);
 }
+
+.sidebarContentContainer {
+  border-right: 0;
+  flex: 1;
+  overflow-y: auto;
+  box-shadow: 0 -17px 10px -16px rgb(0 0 0 / 8%) inset;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+}
+
+.hiddenSidebarContentContainerShadow {
+  box-shadow: none !important;
+}

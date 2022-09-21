@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
@@ -10,6 +10,8 @@ import classNames from "classnames";
 import { Tooltip } from "antd";
 import { JsonStorage } from "@next-libs/storage";
 import { SideBarElement } from "./index";
+import ResizeObserver from "rc-resize-observer";
+import { debounce } from "lodash";
 
 interface SideBarProps {
   menu?: SidebarSubMenu;
@@ -35,6 +37,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     hiddenFixedIcon,
     wrapperDOM,
   } = props;
+  const contentContainerRef = useRef<HTMLDivElement>();
   const storage = React.useMemo(() => new JsonStorage(localStorage), []);
   const [expandedState, setExpandedState] = useState<ExpandedState>(
     props.expandedState ||
@@ -45,6 +48,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     !storage.getItem(SIDE_BAR_HAS_BEEN_USED)
   );
 
+  const [showContentShadow, setShowContentShadow] = useState<boolean>(true);
+  const [sidebarContentHeight, setSidebarContentHeight] = useState<number>(0);
   const { t } = useTranslation(NS_FRAME_BRICKS);
 
   const handleFixedIconClick = (): void => {
@@ -96,6 +101,33 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     }
   }, [wrapperDOM, expandedState]);
 
+  useEffect(() => {
+    const currentDom = contentContainerRef.current;
+    const handleScroll = (e: any) => {
+      if (
+        e.target.scrollHeight - e.target.scrollTop - e.target.offsetHeight <=
+        0
+      ) {
+        setShowContentShadow(false);
+      } else {
+        setShowContentShadow(true);
+      }
+    };
+    currentDom?.addEventListener("scroll", handleScroll);
+    return () => {
+      currentDom?.removeEventListener("scroll", handleScroll);
+    };
+  }, [contentContainerRef]);
+
+  useEffect(() => {
+    const currentDom = contentContainerRef.current;
+    if (currentDom.scrollHeight <= currentDom.clientHeight) {
+      setShowContentShadow(false);
+    } else {
+      setShowContentShadow(true);
+    }
+  }, [contentContainerRef, sidebarContentHeight]);
+
   return (
     <div
       className={classNames(styles.sideBarContainer, {
@@ -112,10 +144,23 @@ export function SideBar(props: SideBarProps): React.ReactElement {
           {menu.title}
         </div>
       </div>
-      <SideBarComponent.SidebarMenu
-        menuItems={menu?.menuItems || []}
-        collapsed={expandedState === ExpandedState.Collapsed}
-      />
+      <ResizeObserver
+        onResize={debounce(({ height }) => {
+          setSidebarContentHeight(height);
+        }, 100)}
+      >
+        <div
+          ref={contentContainerRef}
+          className={classNames(styles.sidebarContentContainer, {
+            [styles.hiddenSidebarContentContainerShadow]: !showContentShadow,
+          })}
+        >
+          <SideBarComponent.SidebarMenu
+            menuItems={menu?.menuItems || []}
+            collapsed={expandedState === ExpandedState.Collapsed}
+          />
+        </div>
+      </ResizeObserver>
       <div className={styles.sideBarFooter}>
         {!hiddenFixedIcon && (
           <Tooltip
