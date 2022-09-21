@@ -1,0 +1,107 @@
+.treeWrapper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .nodeItem {
+    display: flex;
+    cursor: pointer;
+    height: 25px;
+    padding-left: 13px;
+    padding-right: 10px;
+
+    &:hover {
+      background-color: #2a2d2e;
+    }
+
+    &:focus {
+      outline-width: 1px;
+      outline-style: solid;
+      outline-offset: -1px;
+      outline-color: #007fd4;
+    }
+
+    &.active {
+      background-color: #37373d;
+    }
+
+    &.active:focus {
+      background-color: #094771;
+    }
+
+    &:not(:hover) .nodeActionsBar {
+      display: none;
+    }
+
+    &.matched .nodeLabel {
+      color: var(--palette-orange-6);
+    }
+  }
+
+  .nodeLabel {
+    display: flex;
+    color: #c5c5c5;
+    align-items: center;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .iconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+
+  .treeIndent {
+    align-self: stretch;
+    white-space: nowrap;
+  }
+
+  .treeIndentUnitLine,
+  .treeIndentUnitEnd,
+  .treeLine {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 100%;
+  }
+
+  .treeIndentUnitLine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    right: 12px;
+    bottom: -4px;
+    border-right: 1px solid var(--color-border-divider-line);
+  }
+
+  .treeLine {
+    &::before {
+      content: "";
+      position: absolute;
+
+      top: 0;
+      right: 12px;
+      bottom: -4px;
+      margin-left: -1px;
+      border-right: 1px solid var(--color-border-divider-line);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 14px;
+      right: 3px;
+      border-bottom: 1px solid var(--color-border-divider-line);
+    }
+
+    &.isLast::before {
+      height: 50%;
+    }
+  }
+}

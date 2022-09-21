@@ -18,3 +18,6 @@ import "./custom-processors/expandFields";
 import "./custom-processors/getFileTypeFields";
 import "./multiple-files-form";
 import "./data-providers/CustomDownloadFile";
+import "./step-tree";
+import "./custom-processors/getStepTreeData";
+import "./custom-processors/getFlowGraph";
