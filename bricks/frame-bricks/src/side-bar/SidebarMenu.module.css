@@ -93,7 +93,7 @@
 
   .simpleMenuItem {
     &:global(.ant-menu-item-active) {
-      background: var(--palette-gray-4);
+      background: var(--v8-top-menu-item-hover);
       border-radius: var(--larger-border-radius);
       box-shadow: none !important;
     }
