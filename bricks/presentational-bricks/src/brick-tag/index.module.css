@@ -68,6 +68,13 @@
   .checkableTag:active {
     color: #ffffff;
   }
+
+  :global(.ant-tag-checkable-checked) {
+    &.grayTag {
+      background-color: var(--theme-blue-border-color) !important;
+      color: #fff;
+    }
+  }
 }
 
 html[data-theme="dark"] {
