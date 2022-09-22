@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.196.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.195.4...@next-bricks/basic-bricks@1.196.0) (2022-09-22)
+
+
+### Features
+
+* support launchpad in standalone apps ([a910bf9](https://github.com/easyops-cn/next-basics/commit/a910bf91d6f89b917200269ce5959d0a4b6af852))
+
+
+
+
+
 ## [1.195.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.195.3...@next-bricks/basic-bricks@1.195.4) (2022-09-16)
 
 
