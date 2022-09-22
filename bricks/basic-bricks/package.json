@@ -34,6 +34,7 @@
     "@next-libs/basic-components": "^3.5.2",
     "@next-libs/storage": "^2.0.2",
     "@next-sdk/air-admin-service-sdk": "^2.1.12",
+    "@next-sdk/micro-app-standalone-sdk": "^1.1.1",
     "classnames": "^2.3.1",
     "hotkeys-js": "^3.8.7",
     "immutability-helper": "^3.1.1"

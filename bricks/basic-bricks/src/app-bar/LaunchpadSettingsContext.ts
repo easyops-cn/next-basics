@@ -1,6 +1,6 @@
 import React from "react";
 
-interface LaunchpadSettings {
+export interface LaunchpadSettings {
   columns: number;
   rows: number;
 }

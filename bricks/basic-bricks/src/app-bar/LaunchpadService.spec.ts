@@ -5,8 +5,10 @@ import {
   LaunchpadApi_createCollection,
   LaunchpadApi_deleteCollection,
 } from "@next-sdk/user-service-sdk";
+import { LaunchpadApi_getLaunchpadInfo } from "@next-sdk/micro-app-standalone-sdk";
 
 jest.mock("@next-sdk/user-service-sdk");
+jest.mock("@next-sdk/micro-app-standalone-sdk");
 
 const listCollectionData = [
   {
@@ -73,6 +75,7 @@ const spyOnListCollection = (
 spyOnListCollection.mock;
 const spyOnCreateCollection = LaunchpadApi_createCollection as jest.Mock;
 const spyOnDeleteCollection = LaunchpadApi_deleteCollection as jest.Mock;
+const spyOnGetLaunchpadInfo = LaunchpadApi_getLaunchpadInfo as jest.Mock;
 
 jest.mock("@next-core/brick-kit", () => {
   return {
@@ -220,9 +223,13 @@ const data = [
 ];
 
 describe("LaunchpadService", () => {
+  beforeEach(() => {
+    window.STANDALONE_MICRO_APPS = undefined;
+  });
   it("should work", async () => {
     //const service = launchpadService;
     const service = new LaunchpadService();
+    await service.init();
     await service.fetchFavoriteList();
     expect(service.getAllVisitors()).toHaveLength(0);
 
@@ -286,5 +293,30 @@ describe("LaunchpadService", () => {
         apps: [{ id: "f", sort: 1 }],
       },
     ]);
+  });
+
+  it("should fetch the launchpad info when window.STANDALONE_MICRO_APPS was true", async () => {
+    window.STANDALONE_MICRO_APPS = true;
+
+    spyOnGetLaunchpadInfo.mockResolvedValue({
+      settings: {
+        launchpad: {
+          columns: 7,
+          rows: 4,
+        },
+      },
+      microApps: [],
+      desktops: [],
+      siteSort: [],
+      storyboards: [],
+    });
+
+    const service = new LaunchpadService();
+
+    await service.init();
+
+    jest.runAllTimers();
+
+    expect(spyOnGetLaunchpadInfo).toBeCalledTimes(1);
   });
 });

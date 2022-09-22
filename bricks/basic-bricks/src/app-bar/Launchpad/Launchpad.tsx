@@ -7,6 +7,8 @@ import { DesktopSlider } from "../DesktopSlider/DesktopSlider";
 import { DesktopDirContext, DirWithCoordinates } from "../DesktopDirContext";
 import { LaunchpadSettingsContext } from "../LaunchpadSettingsContext";
 import { DesktopDirContent } from "../DesktopDirContent/DesktopDirContent";
+import { launchpadService } from "../LaunchpadService";
+import { GeneralIcon } from "@next-libs/basic-components";
 import styles from "./Launchpad.module.css";
 
 export interface LaunchpadProps {
@@ -15,15 +17,13 @@ export interface LaunchpadProps {
 
 export function Launchpad(props: LaunchpadProps): React.ReactElement {
   const runtime = getRuntime();
-
-  const desktops = runtime.getDesktops();
-  const settings = runtime.getLaunchpadSettings();
+  const { settings, desktops } = launchpadService.getBaseInfo();
 
   const getFilterMicroApps = (): MicroApp[] =>
     // 过滤掉状态为开发中的小产品
-    runtime
-      .getMicroApps()
-      // 兼容较老版本接口未返回 `status` 的情况。
+    launchpadService
+      .getBaseInfo()
+      .microApps // 兼容较老版本接口未返回 `status` 的情况。
       .filter(
         (item) =>
           !item.status ||
@@ -34,14 +34,21 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
   const [q, setQ] = React.useState("");
   const [microApps, setMicroApps] = React.useState(getFilterMicroApps());
   const [desktopDir, setDesktopDir] = React.useState<DirWithCoordinates>();
+  const [loading, setLoading] = React.useState<boolean>(
+    launchpadService.isFetching
+  );
 
   React.useEffect((): (() => void) => {
     let timer: NodeJS.Timeout;
     const pollingRunningAppStatus = async (): Promise<void> => {
       try {
-        await runtime.reloadMicroApps({
-          ignoreLoadingBar: true,
-        });
+        if (window.STANDALONE_MICRO_APPS) {
+          await launchpadService.fetchLaunchpadInfo();
+        } else {
+          await runtime.reloadMicroApps({
+            ignoreLoadingBar: true,
+          });
+        }
         const reloadApps = getFilterMicroApps();
         const installingApp = reloadApps.filter(
           (app: MicroApp) => app.installStatus === "running"
@@ -56,7 +63,16 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
         handleHttpError(error);
       }
     };
-    pollingRunningAppStatus();
+    if (!loading) {
+      pollingRunningAppStatus();
+    }
+
+    launchpadService.once("fetching-base-info", (isFetching) => {
+      setLoading(isFetching);
+      setMicroApps(getFilterMicroApps());
+      pollingRunningAppStatus();
+    });
+
     return (): void => clearTimeout(timer);
   }, []);
 
@@ -91,32 +107,50 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
         }}
       >
         <div className={styles.launchpad} onClick={props.onWillClose}>
-          <CSSTransition
-            in={!desktopDir}
-            timeout={100}
-            classNames={{
-              enter: styles.fadeEnter,
-              enterActive: styles.fadeEnterActive,
-              exit: styles.fadeExit,
-              exitActive: styles.fadeExitActive,
-              exitDone: styles.fadeExitDone,
-            }}
-          >
-            <div className={styles.launchpadContainer}>
-              <SearchBar onChange={handleChange} />
-              <DesktopSlider
-                q={q}
-                microApps={microApps}
-                desktops={desktops}
-                arrowWidthPercent={arrowWidthPercent}
+          {loading ? (
+            <div className={styles.loadingWrapper}>
+              <GeneralIcon
+                icon={{
+                  lib: "antd",
+                  icon: "loading",
+                  theme: "outlined",
+                  color: "cyan",
+                }}
+                style={{
+                  fontSize: 58,
+                }}
               />
             </div>
-          </CSSTransition>
-          {desktopDir && (
-            <DesktopDirContent
-              {...desktopDir}
-              arrowWidthPercent={arrowWidthPercent}
-            />
+          ) : (
+            <>
+              <CSSTransition
+                in={!desktopDir}
+                timeout={100}
+                classNames={{
+                  enter: styles.fadeEnter,
+                  enterActive: styles.fadeEnterActive,
+                  exit: styles.fadeExit,
+                  exitActive: styles.fadeExitActive,
+                  exitDone: styles.fadeExitDone,
+                }}
+              >
+                <div className={styles.launchpadContainer}>
+                  <SearchBar onChange={handleChange} />
+                  <DesktopSlider
+                    q={q}
+                    microApps={microApps}
+                    desktops={desktops}
+                    arrowWidthPercent={arrowWidthPercent}
+                  />
+                </div>
+              </CSSTransition>
+              {desktopDir && (
+                <DesktopDirContent
+                  {...desktopDir}
+                  arrowWidthPercent={arrowWidthPercent}
+                />
+              )}
+            </>
           )}
         </div>
       </DesktopDirContext.Provider>

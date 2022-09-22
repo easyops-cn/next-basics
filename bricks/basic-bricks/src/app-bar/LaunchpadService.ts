@@ -3,6 +3,8 @@ import {
   MicroApp,
   DesktopItemCustom,
   DesktopItemApp,
+  DesktopData,
+  SiteMapItem,
 } from "@next-core/brick-types";
 import {
   LaunchpadApi_ListCollectionResponseItem,
@@ -11,10 +13,21 @@ import {
   LaunchpadApi_createCollection,
   LaunchpadApi_deleteCollection,
 } from "@next-sdk/user-service-sdk";
+import { LaunchpadApi_getLaunchpadInfo } from "@next-sdk/micro-app-standalone-sdk";
 import { getRuntime, getAuth } from "@next-core/brick-kit";
 import { pick } from "lodash";
+import EventEmitter from "events";
+import i18next from "i18next";
+import { LaunchpadSettings } from "./LaunchpadSettingsContext";
 
-export class LaunchpadService {
+interface LaunchpadBaseInfo {
+  settings: LaunchpadSettings;
+  microApps: MicroApp[];
+  desktops: DesktopData[];
+  siteSort: SiteMapItem[];
+}
+
+export class LaunchpadService extends EventEmitter {
   readonly storageKey = `launchpad-recently-visited:${getAuth().org}`;
   private storage: JsonStorage;
   private favoriteList: LaunchpadApi_ListCollectionResponseItem[] = [];
@@ -22,17 +35,45 @@ export class LaunchpadService {
   private microApps: MicroApp[] = [];
   private customList: DesktopItemCustom[] = [];
   private maxVisitorLength = 7;
+  private baseInfo: LaunchpadBaseInfo = {
+    settings: {
+      columns: 7,
+      rows: 4,
+    },
+    microApps: [],
+    desktops: [],
+    siteSort: [],
+  };
+  public isFetching = window.STANDALONE_MICRO_APPS;
   constructor() {
+    super();
     this.storage = new JsonStorage(localStorage);
-    const runtime = getRuntime();
-    const desktops = runtime.getDesktops();
+  }
 
-    this.customList = desktops
+  init(): void {
+    if (window.STANDALONE_MICRO_APPS) {
+      setTimeout(async () => {
+        await this.fetchLaunchpadInfo();
+      });
+    } else {
+      const runtime = getRuntime();
+      this.baseInfo = {
+        desktops: runtime.getDesktops(),
+        microApps: runtime.getMicroApps(),
+        settings: runtime.getLaunchpadSettings(),
+        siteSort: runtime.getLaunchpadSiteMap(),
+      };
+
+      this.initValue();
+    }
+  }
+
+  private initValue(): void {
+    this.customList = this.baseInfo.desktops
       .map((desktop) => desktop.items.filter((i) => i.type === "custom"))
       .flat() as DesktopItemCustom[];
 
-    const microApps = runtime
-      .getMicroApps()
+    const microApps = this.baseInfo.microApps
       // 兼容较老版本接口未返回 `status` 的情况。
       .filter(
         (item) =>
@@ -54,6 +95,47 @@ export class LaunchpadService {
     ).list;
     this.setFavorites(result);
     return result;
+  }
+
+  async fetchLaunchpadInfo(): Promise<void> {
+    const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null);
+
+    for (const storyboard of launchpadInfo.storyboards) {
+      const app = storyboard.app as unknown as MicroApp;
+      if (app) {
+        if (app.locales) {
+          // Prefix to avoid conflict between brick package's i18n namespace.
+          const ns = `$tmp-${app.id}`;
+          // Support any languages in `app.locales`.
+          Object.entries(app.locales).forEach(([lang, resources]) => {
+            i18next.addResourceBundle(lang, ns, resources);
+          });
+          // Use `app.name` as the fallback `app.localeName`.
+          app.localeName = i18next.getFixedT(null, ns)("name", app.name);
+          // Remove the temporary i18n resource bundles.
+          Object.keys(app.locales).forEach((lang) => {
+            i18next.removeResourceBundle(lang, ns);
+          });
+        } else {
+          app.localeName = app.name;
+        }
+      }
+    }
+
+    this.baseInfo = {
+      ...launchpadInfo,
+      settings: launchpadInfo.settings.launchpad as LaunchpadSettings,
+      microApps: launchpadInfo.storyboards
+        .map((storyboard) => storyboard.app)
+        .filter(Boolean) as unknown as MicroApp[],
+    } as unknown as LaunchpadBaseInfo;
+    this.initValue();
+    this.isFetching = false;
+    this.emit("fetching-base-info", false);
+  }
+
+  getBaseInfo() {
+    return this.baseInfo;
   }
 
   getFavoritesLength() {
@@ -229,8 +311,8 @@ export class LaunchpadService {
   }
 
   getSitemapList() {
-    const curMicroApps = getRuntime().getMicroApps({ includeInternal: true });
-    const siteMapList = getRuntime().getLaunchpadSiteMap();
+    const curMicroApps = this.baseInfo.microApps.filter((app) => !app.internal);
+    const siteMapList = this.baseInfo.siteSort;
 
     return siteMapList?.map((item) => ({
       ...item,
