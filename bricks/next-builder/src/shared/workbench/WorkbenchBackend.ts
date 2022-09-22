@@ -65,10 +65,6 @@ export type QueueItem =
   | WorkbenchBackendActionForDeleteFormItem
   | WorkbenchBackendActionForUpdateFormItem;
 
-export type itemMapList = {
-  oldInstanceId: string;
-  newId: string;
-};
 export default class WorkbenchBackend {
   private baseInfo: WorkbenchBackendActionForInitDetail;
   private cacheQueue: QueueItem[] = this.observe<QueueItem[]>([]);
