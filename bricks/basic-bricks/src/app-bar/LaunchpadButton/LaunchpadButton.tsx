@@ -4,6 +4,7 @@ import { ReactComponent as LaunchpadSvg } from "../../images/launchpad.svg";
 import styles from "./LaunchpadButton.module.css";
 import { LaunchpadPortal } from "../LaunchpadPortal/LaunchpadPortal";
 import hotkeys from "hotkeys-js";
+import { launchpadService } from "../LaunchpadService";
 
 export function LaunchpadButton(): React.ReactElement {
   const [visible, setVisible] = useState(false);
@@ -16,6 +17,10 @@ export function LaunchpadButton(): React.ReactElement {
   };
   const handleLaunchpadWillClose = useCallback((): void => {
     getRuntime().toggleLaunchpadEffect(false);
+  }, []);
+
+  useEffect(() => {
+    launchpadService.init();
   }, []);
 
   useEffect(() => {

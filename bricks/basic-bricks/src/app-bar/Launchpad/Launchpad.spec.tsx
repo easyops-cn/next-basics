@@ -6,6 +6,7 @@ import { MicroApp, DesktopData } from "@next-core/brick-types";
 import { Launchpad } from "./Launchpad";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { DesktopSlider } from "../DesktopSlider/DesktopSlider";
+import { GeneralIcon } from "@next-libs/basic-components";
 
 jest.mock("@next-core/brick-kit");
 jest.mock("../SearchBar/SearchBar");
@@ -17,6 +18,16 @@ jest.mock("../LaunchpadService", () => {
       fetchFavoriteList: (): any[] => [],
       getAllVisitors: (): any[] => [],
       setMaxVisitorLength: jest.fn(),
+      getBaseInfo: () => ({
+        settings: {
+          columns: 7,
+          rows: 4,
+        },
+        microApps: [],
+        desktops: [],
+        siteSort: [],
+      }),
+      once: jest.fn(),
     },
   };
 });

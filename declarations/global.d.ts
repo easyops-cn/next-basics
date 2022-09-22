@@ -63,4 +63,7 @@ interface Window {
 
   /** The location where user log out from, like: /my-app/some-page?q=abc */
   EASYOPS_AUTH_LOGOUT_FROM?: string;
+
+  /** Markup for standalone micro-apps. */
+  STANDALONE_MICRO_APPS?: boolean;
 }
