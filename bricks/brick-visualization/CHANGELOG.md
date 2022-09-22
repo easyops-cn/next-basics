@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.11.0...@next-bricks/brick-visualization@1.12.0) (2022-09-22)
+
+
+### Features
+
+* step tree and processor ([210b389](https://github.com/easyops-cn/next-basics/commit/210b389d175f7daf8dd4025e15ac71b7af5d35d6))
+
+
+
+
+
 # [1.11.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.10.7...@next-bricks/brick-visualization@1.11.0) (2022-09-21)
 
 

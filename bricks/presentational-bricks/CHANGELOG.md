@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.265.1...@next-bricks/presentational-bricks@1.265.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* **BrickTag:** add disabled selected tag style ([501581d](https://github.com/easyops-cn/next-basics/commit/501581d18a63b0f988cec996387c52b05a3b8cab))
+
+
+
+
+
 ## [1.265.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.265.0...@next-bricks/presentational-bricks@1.265.1) (2022-09-15)
 
 

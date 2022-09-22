@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.19.6...@next-bricks/flow-builder@1.20.0) (2022-09-22)
+
+
+### Features
+
+* step tree and processor ([210b389](https://github.com/easyops-cn/next-basics/commit/210b389d175f7daf8dd4025e15ac71b7af5d35d6))
+
+
+
+
+
 ## [1.19.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.19.5...@next-bricks/flow-builder@1.19.6) (2022-09-13)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
