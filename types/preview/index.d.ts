@@ -560,15 +560,8 @@ export interface WorkbenchBackendActionForCopyBrick
   };
 }
 
-export type insertByFieldArgs = [
-  string | number,
-  FormProjectApi_CreateFormItemByFieldRequestBody,
-  HttpOptions
-];
-export type insertWithFieldArgs = [
-  string | number,
-  string | number,
-  FormProjectApi_CreateFormItemAndFieldRequestBody,
+export type insertFormItemArgs = [
+  FormProjectApi_CreateFormItemRequestBody,
   HttpOptions
 ];
 export type updateFormItemArgs = [
@@ -583,7 +576,6 @@ export interface WorkbenchBackendActionForInsertFormItem
   action: "insert.formItem";
   args: insertByFieldArgs | insertWithFieldArgs;
   nodeData: any;
-  type: string;
 }
 
 export interface WorkbenchBackendActionForDeleteFormItem

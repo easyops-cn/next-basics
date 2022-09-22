@@ -2739,10 +2739,10 @@
   resolved "https://registry.npmjs.org/@next-sdk/cmdb-sdk/-/cmdb-sdk-3.2.0.tgz#5033d4eb909d8f514b4c2d5ff334c1b32e1374e5"
   integrity sha512-17qvmUJCnUSlaVUjfT3PlozvQWqbJDA85gPPoFXNLbVP7ldOCDnA5HQJlhj5UbrfM11c+YoR81bnkwwDVFKq2A==
 
-"@next-sdk/form-builder-service-sdk@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@next-sdk/form-builder-service-sdk/-/form-builder-service-sdk-1.1.0.tgz#970c147a74461dd1bac8cb792db8867da8f6ca82"
-  integrity sha512-YpvQmz5cchR2s0HIIWFNk72mRELmwBoBS9arLA1gkcVNu8ICoU/pdvTzhQLFLwp61mvCy+sQc2eF3CdReI4Xng==
+"@next-sdk/form-builder-service-sdk@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/@next-sdk/form-builder-service-sdk/-/form-builder-service-sdk-1.2.2.tgz#1fbd70899cbc166d4a8c8c5115b39799ff268ee0"
+  integrity sha512-UbFIB1x61fBzmyo1t6WWrPMaBqQxMbCB2hWw49RBbrJI6E+67T3EjQDDlkZFZp9x4KAYGnlE6kTtaoM4fQUbtg==
 
 "@next-sdk/micro-app-sdk@^2.5.0":
   version "2.5.0"

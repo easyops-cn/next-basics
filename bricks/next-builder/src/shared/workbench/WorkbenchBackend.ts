@@ -16,8 +16,7 @@ import {
 import {
   FormProjectApi_updateFormItem,
   FormProjectApi_deleteFormItem,
-  FormProjectApi_createFormItemByField,
-  FormProjectApi_createFormItemAndField,
+  FormProjectApi_createFormItem,
 } from "@next-sdk/form-builder-service-sdk";
 import { StoryboardAssembly } from "../storyboard/StoryboardAssembly";
 import type {
@@ -39,8 +38,7 @@ import type {
   WorkbenchBackendActionForInsertFormItem,
   WorkbenchBackendActionForDeleteFormItem,
   WorkbenchBackendActionForUpdateFormItem,
-  insertByFieldArgs,
-  insertWithFieldArgs,
+  insertFormItemArgs,
   WorkbenchSortData,
 } from "@next-types/preview";
 import type { HttpResponseError } from "@next-core/brick-http";
@@ -52,6 +50,7 @@ import {
   EventDetailOfSnippetApply,
   SnippetNodeDetail,
 } from "@next-core/editor-bricks-helper";
+import { ModelDraftTemplateInfo_itemMapList_item } from "@next-sdk/form-builder-service-sdk/dist/types/model/form_builder_service";
 
 export type QueueItem =
   | WorkbenchBackendActionForInsert
@@ -66,10 +65,15 @@ export type QueueItem =
   | WorkbenchBackendActionForDeleteFormItem
   | WorkbenchBackendActionForUpdateFormItem;
 
+export type itemMapList = {
+  oldInstanceId: string;
+  newId: string;
+};
 export default class WorkbenchBackend {
   private baseInfo: WorkbenchBackendActionForInitDetail;
   private cacheQueue: QueueItem[] = this.observe<QueueItem[]>([]);
   private mockInstanceIdCache: Map<string, string> = new Map();
+  private draftInstanceIdCache: ModelDraftTemplateInfo_itemMapList_item[] = [];
   private mockNodeIdCache: Map<string, string> = new Map();
   private topics: Record<string, any> = {};
   private subUid = 0;
@@ -488,23 +492,20 @@ export default class WorkbenchBackend {
     task: WorkbenchBackendActionForInsertFormItem
   ): Promise<boolean> {
     try {
-      let res: any;
-      const { type, args } = task;
-      if (type === "insertByField") {
-        res = await FormProjectApi_createFormItemByField(
-          ...(args as insertByFieldArgs)
-        );
-      } else if (type === "insertWithField") {
-        res = await FormProjectApi_createFormItemAndField(
-          ...(args as insertWithFieldArgs)
-        );
-      }
-      this.mockInstanceIdCache.set(task.nodeData.instanceId, res.instanceId);
+      const { args } = task;
+      const res = await FormProjectApi_createFormItem(
+        ...(args as insertFormItemArgs)
+      );
+      this.mockInstanceIdCache.set(
+        task.nodeData.instanceId,
+        res.itemInstanceId
+      );
+      if (res.itemMapList) this.draftInstanceIdCache = res.itemMapList;
       this.publish("message", {
         action: "execute-success",
         data: {
           res: res,
-          op: task.type,
+          op: "insert",
         },
       });
       return true;
@@ -519,8 +520,13 @@ export default class WorkbenchBackend {
   ): Promise<boolean> {
     try {
       const instance =
-        this.mockInstanceIdCache.get(task.args[0]) || task.args[0];
+        this.mockInstanceIdCache.get(task.args[0]) ||
+        this.draftInstanceIdCache?.find(
+          (item) => item.oldInstanceId === task.args[0]
+        )?.newItem?.instanceId ||
+        task.args[0];
       const res = await FormProjectApi_updateFormItem(instance, task.args[1]);
+      if (res.itemMapList) this.draftInstanceIdCache = res.itemMapList;
       this.publish("message", {
         action: "execute-success",
         data: {
@@ -540,8 +546,13 @@ export default class WorkbenchBackend {
   ): Promise<boolean> {
     try {
       const instance =
-        this.mockInstanceIdCache.get(task.args[0]) || task.args[0];
-      const res = await FormProjectApi_deleteFormItem(instance);
+        this.mockInstanceIdCache.get(task.args[0]) ||
+        this.draftInstanceIdCache?.find(
+          (item) => item.oldInstanceId === task.args[0]
+        )?.newItem?.instanceId ||
+        task.args[0];
+      const res = await FormProjectApi_deleteFormItem(instance, task.args[1]);
+      if (res.itemMapList) this.draftInstanceIdCache = res.itemMapList;
       this.publish("message", {
         action: "execute-success",
         data: {
