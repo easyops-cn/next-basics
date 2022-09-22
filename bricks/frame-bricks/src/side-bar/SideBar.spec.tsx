@@ -113,4 +113,13 @@ describe("SideBar", () => {
 
     expect(wrapper.find(".ant-menu-item").length).toEqual(1);
   });
+
+  it("should hidden content box-shadow if it is scrolled to the bottom", () => {
+    const wrapper = mount(<SideBar menu={menuData1} />);
+    const e = {
+      target: { scrollHeight: 100, scrollTop: 50, offsetHeight: 60 },
+    };
+    wrapper.find(".sidebarContentContainer").simulate("scroll", e);
+    expect(wrapper.find(".hiddenSidebarContentContainerShadow").length).toBe(1);
+  });
 });
