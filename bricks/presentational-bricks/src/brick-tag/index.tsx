@@ -42,7 +42,7 @@ export class BrickTagElement extends UpdatingElement {
   checkedUpdateV2: EventEmitter<{ label: string; key: string }[]>;
 
   /**
-   * @description 当前关闭的tag和剩余的tagList
+   * @description 当前关闭的 tag 和剩余的tagList
    */
   @event({ type: "tag.close" }) tagClose: EventEmitter<{
     current: Record<string, any>;
