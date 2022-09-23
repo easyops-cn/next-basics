@@ -6,6 +6,9 @@ import {
   ContextOfWorkbenchTree,
   WorkbenchTreeContext,
 } from "./WorkbenchTreeContext";
+import { createHistory } from "@next-core/brick-kit";
+
+createHistory();
 
 test("WorkbenchTree with no nodes", () => {
   const { container } = render(

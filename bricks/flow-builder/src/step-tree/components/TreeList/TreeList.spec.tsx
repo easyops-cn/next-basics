@@ -4,6 +4,9 @@ import "@testing-library/jest-dom";
 import { TreeList } from "./TreeList";
 import { WorkbenchTreeContext } from "../../constants";
 import { StepTreeNodeData } from "../../../interfaces";
+import { createHistory } from "@next-core/brick-kit";
+
+createHistory();
 
 jest.mock("@next-libs/visual-builder", () => ({
   WorkbenchMiniActionBar: function () {
