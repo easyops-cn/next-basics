@@ -28,5 +28,9 @@
     "pack:tar": "npm pack",
     "postpack:tar": "node scripts/rename-tar-package.js"
   },
-  "sideEffects": true
+  "sideEffects": true,
+  "devDependencies": {
+    "@next-libs/basic-components": "^3.6.0",
+    "@next-libs/storage": "^2.0.2"
+  }
 }
