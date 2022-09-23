@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.5.1...@next-bricks/frame-bricks@1.5.2) (2022-09-23)
+
+
+### Bug Fixes
+
+* 修复NavMenu左侧不对齐的问题&重新实现支持divider特性的逻辑 ([cd3fdbf](https://github.com/easyops-cn/next-basics/commit/cd3fdbfe19d4a9ebc503f2b29711d9819b29394c))
+
+
+
+
+
 ## [1.5.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.5.0...@next-bricks/frame-bricks@1.5.1) (2022-09-23)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
