@@ -65,7 +65,9 @@ describe("getStepTreeData", () => {
             theme: "outlined",
           },
           key: "root",
-          name: "root",
+          name: "start",
+          id: "root",
+          iconTooltip: "task",
         },
         {
           children: [
@@ -81,6 +83,8 @@ describe("getStepTreeData", () => {
                   },
                   key: "step2",
                   name: "step2",
+                  id: "step2",
+                  iconTooltip: "task",
                 },
               ],
               data: {
@@ -97,6 +101,8 @@ describe("getStepTreeData", () => {
               },
               key: "branch1",
               name: "branch1",
+              id: "branch1",
+              iconTooltip: "branch",
             },
             {
               children: [
@@ -115,6 +121,8 @@ describe("getStepTreeData", () => {
                   },
                   key: "step3",
                   name: "step3",
+                  id: "step3",
+                  iconTooltip: "task",
                 },
               ],
               data: {
@@ -131,6 +139,8 @@ describe("getStepTreeData", () => {
               },
               key: "branch2",
               name: "branch2",
+              id: "branch2",
+              iconTooltip: "branch",
             },
           ],
           data: {
@@ -148,6 +158,8 @@ describe("getStepTreeData", () => {
           },
           key: "step1",
           name: "step1",
+          id: "step1",
+          iconTooltip: "choice",
         },
         {
           data: { end: true, id: "step5", name: "step5", type: "task" },
@@ -159,6 +171,8 @@ describe("getStepTreeData", () => {
           },
           key: "step5",
           name: "step5",
+          id: "step5",
+          iconTooltip: "task",
         },
       ],
     ],

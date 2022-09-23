@@ -24,6 +24,7 @@ export interface StepItem {
 
 export interface StepTreeNodeData {
   key: string;
+  id: string;
   name: string;
   icon?: MenuIcon;
   iconTooltip?: string;
