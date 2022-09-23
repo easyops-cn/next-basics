@@ -58,7 +58,9 @@ function getChildren(
     if (curStepData) {
       treeList.push({
         key: curStepData.id,
+        id: curStepData.id,
         name: curStepData.id,
+        iconTooltip: curStepData.type,
         icon: getIcon(curStepData.type),
         data: curStepData,
         ...(curStepData.children
@@ -108,9 +110,11 @@ export function getStepTreeData(
   stageList.forEach((item) => {
     const treeData = {
       key: item.id,
-      name: item.id,
+      name: item.name,
+      id: item.id,
       data: item,
       icon: getIcon(item.type),
+      iconTooltip: item.type,
       ...(item.children
         ? { children: getChildren(item.children, stepMap) }
         : {}),

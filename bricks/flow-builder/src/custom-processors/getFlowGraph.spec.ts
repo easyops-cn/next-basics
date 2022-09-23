@@ -120,6 +120,7 @@ describe("getFlowGraph", () => {
           {
             data: { id: "start", name: "start", next: "step1", type: "task" },
             id: "start",
+            name: "start",
             type: "node",
           },
           {
@@ -131,6 +132,7 @@ describe("getFlowGraph", () => {
               type: "choice",
             },
             id: "step1",
+            name: "step1",
             type: "node",
           },
           {
@@ -141,6 +143,7 @@ describe("getFlowGraph", () => {
               type: "branch",
             },
             id: "branch1",
+            name: "branch1",
             type: "node",
           },
           {
@@ -151,26 +154,31 @@ describe("getFlowGraph", () => {
               type: "branch",
             },
             id: "branch2",
+            name: "branch2",
             type: "node",
           },
           {
             data: { end: true, id: "step2", name: "step2", type: "task" },
             id: "step2",
+            name: "step2",
             type: "node",
           },
           {
             data: { end: true, id: "step3", name: "step3", type: "task" },
             id: "step3",
+            name: "step3",
             type: "node",
           },
           {
             data: { id: "step1End", name: "end", next: "step5", type: "task" },
             id: "step1End",
+            name: "end",
             type: "node",
           },
           {
             data: { end: true, id: "step5", name: "step5", type: "task" },
             id: "step5",
+            name: "step5",
             type: "node",
           },
         ],

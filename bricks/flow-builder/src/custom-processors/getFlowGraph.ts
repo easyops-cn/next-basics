@@ -41,6 +41,7 @@ export function getFlowGraph(data: OriginData): GraphData {
   data.steps?.forEach((item) => {
     nodes.push({
       id: item.id,
+      name: item.name,
       type: "node",
       data: item,
     });

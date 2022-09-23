@@ -129,7 +129,7 @@ export function TreeNode({
           onActionClick={onActionClick}
         />
       </Link>
-      {node.children?.length && (
+      {!!node.children?.length && (
         <TreeList
           nodes={node.children}
           level={level + 1}
