@@ -14,8 +14,9 @@ import {
 } from "@next-core/editor-bricks-helper";
 import { WorkbenchBrickTree } from "./WorkbenchBrickTree";
 import { act } from "react-dom/test-utils";
+import { createHistory } from "@next-core/brick-kit";
 
-// jest.mock("@next-core/editor-bricks-helper");
+createHistory();
 
 interface ManagerAgentProps {
   dataSource: BuilderRuntimeNode;
