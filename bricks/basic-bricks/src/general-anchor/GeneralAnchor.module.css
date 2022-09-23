@@ -3,6 +3,7 @@
   background: var(--antd-component-background);
   backdrop-filter: blur(3px);
   padding: 5px 0;
+  overflow: unset;
   .anchorContainer {
     width: 100%;
     display: flex;
