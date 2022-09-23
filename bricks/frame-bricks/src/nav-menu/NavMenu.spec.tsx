@@ -92,6 +92,11 @@ const sideBarMenuItem = [
     type: "default",
     text: "page-4",
   },
+  {
+    type: "default",
+    text: "page-5",
+    divider: true,
+  },
 ] as SidebarMenuItem[];
 
 describe("NavMenu", () => {
@@ -109,5 +114,11 @@ describe("NavMenu", () => {
     const wrapper = mount(<NavMenu menuItems={[]} />);
 
     expect(wrapper.find(Menu.SubMenu).length).toBe(0);
+  });
+
+  it("should be rendered as divider when item property `divider` is true", () => {
+    const wrapper = mount(<NavMenu menuItems={sideBarMenuItem} />);
+
+    expect(wrapper.find(Menu.Divider).length).toBe(1);
   });
 });

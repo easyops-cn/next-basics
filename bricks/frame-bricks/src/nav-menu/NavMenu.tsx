@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useState, useEffect } from "react";
-import { Divider, Menu } from "antd";
+import { Menu } from "antd";
 import { UnregisterCallback, Location } from "history";
 import {
   SidebarMenuSimpleItem,
@@ -28,6 +28,10 @@ interface SidebarMenuProps {
   menuItems?: SidebarMenuItem[];
   isCustom?: boolean;
   selectedKeys?: string[];
+}
+
+function isDivider(item: SidebarMenuItem) {
+  return item?.divider;
 }
 
 function isGroup(item: SidebarMenuItem): item is SidebarMenuGroups {
@@ -96,24 +100,24 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
       <BrickAsComponent useBrick={item.useBrick} data={item}></BrickAsComponent>
     );
   };
+
+  const renderDivider = () => {
+    return (
+      <Menu.Divider style={{ height: "1px", margin: "8px 12px 0px 12px" }} />
+    );
+  };
+
   const renderSimpleMenuItem = (
     item: SidebarMenuSimpleItems
   ): React.ReactNode => {
     return (
-      <>
-        <Menu.Item
-          key={item.key}
-          title={item.text}
-          className={style.simpleMenuItem}
-        >
-          {item.useBrick ? renderBrickCom(item) : renderLinkCom(item)}
-        </Menu.Item>
-        {item.divider && (
-          <Menu.Divider
-            style={{ height: "1px", margin: "8px 12px 0px 12px" }}
-          />
-        )}
-      </>
+      <Menu.Item
+        key={item.key}
+        title={item.text}
+        className={style.simpleMenuItem}
+      >
+        {item.useBrick ? renderBrickCom(item) : renderLinkCom(item)}
+      </Menu.Item>
     );
   };
 
@@ -154,7 +158,9 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     item: SidebarMenuItem,
     showSubMenu?: boolean
   ): React.ReactNode => {
-    return isSubMenu(item, showSubMenu)
+    return isDivider(item)
+      ? renderDivider()
+      : isSubMenu(item, showSubMenu)
       ? renderSubMenu(item)
       : isGroup(item)
       ? renderGroupMenu(item)
