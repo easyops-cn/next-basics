@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.196.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.1...@next-bricks/basic-bricks@1.196.2) (2022-09-23)
+
+
+### Bug Fixes
+
+* **anchor:** 锚点不要出现横向滚动条 ([a868bdd](https://github.com/easyops-cn/next-basics/commit/a868bddfcc05cf88ba23638d0ac9dc0d886bfadd))
+
+
+
+
+
 ## [1.196.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.0...@next-bricks/basic-bricks@1.196.1) (2022-09-23)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
