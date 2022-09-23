@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.4.1...@next-bricks/frame-bricks@1.5.0) (2022-09-23)
+
+
+### Features
+
+* 支持sidebarmenu列表超长时显示底部阴影 ([de0c2ce](https://github.com/easyops-cn/next-basics/commit/de0c2cedccd08e779370e93f4008484800b76378))
+
+
+
+
+
 ## [1.4.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.4.0...@next-bricks/frame-bricks@1.4.1) (2022-09-21)
 
 
