@@ -1,14 +1,5 @@
 .menuContainer {
   border-right: 0;
-  flex: 1;
-  overflow-y: auto;
-  scrollbar-width: none;
-  /* Firefox */
-
-  &::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-  }
 
   :global(.ant-menu-submenu-selected):not(:global(.ant-menu-submenu-open)):not(:global(.ant-menu-submenu-active)) {
     background-color: var(--color-brand);
