@@ -196,7 +196,7 @@
 
   .simpleMenuItem:global(.ant-menu-item-active) {
     color: inherit;
-    background-color: var(--v8-top-menu-item-selected-bg) !important;
+    background-color: var(--v8-top-menu-item-hover) !important;
     span {
       color: var(--color-normal-text);
     }
