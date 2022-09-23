@@ -79,6 +79,7 @@
     background: var(--antd-dropdown-menu-bg) !important;
     border-radius: 6px;
     box-shadow: 0px 4px 12px 0px rgba(17, 37, 64, 0.08);
+    padding: 4px 0;
 
     :global(.ant-menu-submenu-title) {
       padding: 0px 4px 0px 14px;
@@ -119,7 +120,7 @@
       height: 36px;
       /* border-radius: var(--card-default-border-radius); */
       span {
-        margin: 0px 49px 0px 9px;
+        margin: 0px 49px 0px 10px;
       }
       :global(.ant-menu-submenu-arrow) {
         color: var(--color-normal-text);
@@ -151,7 +152,7 @@
   /* 菜单组样式 */
   .groupWrapper {
     :global(.ant-menu-item) {
-      padding: 0 10px;
+      padding: 0 16px;
     }
     :global(.ant-menu-item-group-title) {
       color: inherit;
@@ -185,7 +186,7 @@
     .menuItemIcon {
       width: 16px;
       height: 16px;
-      margin-right: -40px;
+      margin-right: -49px;
     }
   }
 
