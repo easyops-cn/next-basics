@@ -27,8 +27,7 @@ const mockCloneBricks = jest.fn();
 const mockCutBricks = jest.fn();
 const mockUpdateFormItem = jest.fn();
 const mockDeleteFormItem = jest.fn();
-const mockCreateFormItemByField = jest.fn();
-const mockCreateFormItemAndField = jest.fn();
+const mockCreateFormItem = jest.fn();
 
 jest.mock("@next-sdk/cmdb-sdk", () => ({
   InstanceApi_getDetail: (...args) => mockGetDetail(args),
@@ -48,10 +47,7 @@ jest.mock("@next-sdk/next-builder-sdk", () => ({
 jest.mock("@next-sdk/form-builder-service-sdk", () => ({
   FormProjectApi_updateFormItem: (...args) => mockUpdateFormItem(...args),
   FormProjectApi_deleteFormItem: (...args) => mockDeleteFormItem(args),
-  FormProjectApi_createFormItemByField: (...args) =>
-    mockCreateFormItemByField(args),
-  FormProjectApi_createFormItemAndField: (...args) =>
-    mockCreateFormItemAndField(args),
+  FormProjectApi_createFormItem: (...args) => mockCreateFormItem(args),
 }));
 jest.mock("@next-core/brick-kit");
 
@@ -540,50 +536,32 @@ describe("WorkbenchBackend should work", () => {
     backendInstance.push({
       action: "insert.formItem",
       nodeData: {},
-      type: "insertByField",
       state: "pending",
-      args: ["123", { formTemplateId: "123", id: "test" }, ""],
+      args: [{ formTemplateId: "123", id: "test", isDraft: true }, ""],
     });
     await (global as any).flushPromises();
 
-    expect(mockCreateFormItemByField).toHaveBeenCalledWith([
-      "123",
-      { formTemplateId: "123", id: "test" },
-      "",
-    ]);
-
-    backendInstance.push({
-      action: "insert.formItem",
-      nodeData: {},
-      type: "insertWithField",
-      state: "pending",
-      args: ["123", { formTemplateId: "123", id: "test" }, ""],
-    });
-    await (global as any).flushPromises();
-
-    expect(mockCreateFormItemAndField).toHaveBeenCalledWith([
-      "123",
-      { formTemplateId: "123", id: "test" },
+    expect(mockCreateFormItem).toHaveBeenCalledWith([
+      { formTemplateId: "123", id: "test", isDraft: true },
       "",
     ]);
 
     backendInstance.push({
       action: "update.formItem",
       state: "pending",
-      args: ["123", { formId: "123", brick: "test" }, ""],
+      args: [
+        "123",
+        { formTemplateId: "123", brick: "test", isDraft: true },
+        "",
+      ],
     });
     await (global as any).flushPromises();
 
     expect(mockUpdateFormItem).toHaveBeenCalledWith("123", {
-      formId: "123",
+      formTemplateId: "123",
       brick: "test",
+      isDraft: true,
     });
-
-    expect(mockCreateFormItemAndField).toHaveBeenCalledWith([
-      "123",
-      { formTemplateId: "123", id: "test" },
-      "",
-    ]);
 
     backendInstance.push({
       action: "delete.formItem",
@@ -592,7 +570,7 @@ describe("WorkbenchBackend should work", () => {
     });
     await (global as any).flushPromises();
 
-    expect(mockDeleteFormItem).toHaveBeenCalledWith(["123"]);
+    expect(mockDeleteFormItem).toHaveBeenCalledWith(["123", ""]);
   });
 
   it("throw error should work", async () => {
