@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.196.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.2...@next-bricks/basic-bricks@1.196.3) (2022-09-25)
+
+
+### Bug Fixes
+
+* lauchpad image url and skip problem ([af17446](https://github.com/easyops-cn/next-basics/commit/af17446e8a4e5fae7837c70a0d835a1f9551c9e4))
+* update dependencies ([931f92c](https://github.com/easyops-cn/next-basics/commit/931f92c28afc04d4d0fd8a71c8a19d6d93b7d629))
+
+
+
+
+
 ## [1.196.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.1...@next-bricks/basic-bricks@1.196.2) (2022-09-23)
 
 
