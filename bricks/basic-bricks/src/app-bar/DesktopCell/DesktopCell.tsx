@@ -11,6 +11,7 @@ import {
   DesktopItemCustom,
 } from "@next-core/brick-types/dist/types/manifest";
 import { Modal } from "antd";
+import { getHistory } from "@next-core/brick-kit";
 
 interface DesktopCellProps {
   item: DesktopItem;
@@ -72,6 +73,12 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
   const handleAppClick = () => {
     const app = (props.item as DesktopItemApp).app;
     launchpadService.pushVisitor("app", app);
+    if (app.standaloneMode) {
+      const url = getHistory().createHref({
+        pathname: app.homepage,
+      });
+      location.replace(url);
+    }
   };
 
   const handleCustomClick = () => {
