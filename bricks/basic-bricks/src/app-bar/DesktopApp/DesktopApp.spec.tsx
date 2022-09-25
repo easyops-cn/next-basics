@@ -96,4 +96,22 @@ describe("DesktopApp", () => {
     expect(wrapper.find("img").prop("src")).toBe("http://a.com/b.jpg");
     expect(wrapper.find(".addIcon").hasClass("squareIcon")).toEqual(true);
   });
+
+  it("should render standalone-micro-apps icon", () => {
+    const app: MicroApp = {
+      id: "hello",
+      name: "世界",
+      localeName: "world",
+      homepage: "/hello",
+      icons: {
+        large: "icons/large.png",
+      },
+      currentVersion: "1.0.1",
+      standaloneMode: true,
+    };
+    const wrapper = shallow(<DesktopApp app={app} />);
+    expect(wrapper.find("img").prop("src")).toBe(
+      `sa-static/hello/versions/1.0.1/webroot/-/micro-apps/hello/icons/large.png`
+    );
+  });
 });

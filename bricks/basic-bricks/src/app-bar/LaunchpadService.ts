@@ -274,6 +274,7 @@ export class LaunchpadService extends EventEmitter {
           localeName: app.localeName,
           id: app.id,
           homepage: app.homepage,
+          standaloneMode: app.standaloneMode,
         } as MicroApp,
         type: "app",
       } as any;

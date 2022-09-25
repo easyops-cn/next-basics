@@ -1,10 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import {
-  Loading3QuartersOutlined,
-  PlusCircleFilled,
-  PlusCircleOutlined,
-} from "@ant-design/icons";
+import { Loading3QuartersOutlined, PlusCircleFilled } from "@ant-design/icons";
 import { getRuntime } from "@next-core/brick-kit";
 import { MicroApp } from "@next-core/brick-types";
 import { Link } from "@next-libs/basic-components";
@@ -65,9 +61,11 @@ export function DesktopApp({
             app.icons && app.icons.large
               ? /^(?:https?|data):|^\//.test(app.icons.large)
                 ? app.icons.large
-                : `${window.PUBLIC_ROOT || ""}micro-apps/${app.id}/${
-                    app.icons.large
-                  }`
+                : `${window.PUBLIC_ROOT || ""}${
+                    app.standaloneMode
+                      ? `sa-static/${app.id}/versions/${app.currentVersion}/webroot/-/`
+                      : ""
+                  }micro-apps/${app.id}/${app.icons.large}`
               : defaultAppIcon
           }
         />
