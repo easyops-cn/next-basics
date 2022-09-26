@@ -14,7 +14,12 @@ export function LogoBar(): React.ReactElement {
   const logo: React.ReactElement = brand.menu_bar_logo_url ? (
     <img
       src={brand.menu_bar_logo_url}
-      style={{ height: isUseUI8 ? 24 : 32, verticalAlign: "top" }}
+      style={{
+        height: isUseUI8 ? 24 : 32,
+        verticalAlign: "top",
+        paddingRight: isUseUI8 ? 12 : 0,
+        cursor: "pointer",
+      }}
     />
   ) : isUseUI8 ? (
     <GeneralIcon
