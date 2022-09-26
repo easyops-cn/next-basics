@@ -226,3 +226,9 @@
   filter: blur(32px);
   z-index: -1;
 }
+
+.popupWrapper {
+  .popupWrapper {
+    padding: 0 !important;
+  }
+}
