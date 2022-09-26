@@ -18,7 +18,6 @@ export function LogoBar(): React.ReactElement {
         height: isUseUI8 ? 24 : 32,
         verticalAlign: "top",
         paddingRight: isUseUI8 ? 12 : 0,
-        cursor: "pointer",
       }}
     />
   ) : isUseUI8 ? (
