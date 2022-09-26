@@ -11,6 +11,12 @@ jest.spyOn(kit, "getRuntime").mockReturnValue({
   resetWorkspaceStack,
 } as any);
 
+beforeEach(() => {
+  window.STANDALONE_MICRO_APPS = false;
+  window.PUBLIC_ROOT = "";
+  window.PUBLIC_CDN = "";
+});
+
 describe("DesktopApp", () => {
   it("should work", () => {
     const stopPropagation = jest.fn();
@@ -98,7 +104,8 @@ describe("DesktopApp", () => {
   });
 
   it("should render standalone-micro-apps icon", () => {
-    const app: MicroApp = {
+    window.STANDALONE_MICRO_APPS = true;
+    const app1: MicroApp = {
       id: "hello",
       name: "世界",
       localeName: "world",
@@ -109,9 +116,63 @@ describe("DesktopApp", () => {
       currentVersion: "1.0.1",
       standaloneMode: true,
     };
-    const wrapper = shallow(<DesktopApp app={app} />);
-    expect(wrapper.find("img").prop("src")).toBe(
-      `sa-static/hello/versions/1.0.1/webroot/-/micro-apps/hello/icons/large.png`
+    const wrapper1 = shallow(<DesktopApp app={app1} />);
+    expect(wrapper1.find("img").prop("src")).toBe(
+      `/sa-static/hello/versions/1.0.1/webroot/-/micro-apps/hello/icons/large.png`
+    );
+
+    const app2: MicroApp = {
+      id: "hello",
+      name: "世界",
+      localeName: "world",
+      homepage: "/hello",
+      icons: {
+        large: "icons/large.png",
+      },
+      currentVersion: "1.0.1",
+      standaloneMode: false,
+    };
+    const wrapper2 = shallow(<DesktopApp app={app2} />);
+    expect(wrapper2.find("img").prop("src")).toBe(
+      `micro-apps/hello/icons/large.png`
+    );
+  });
+
+  it("window.PUBLIC_ROOT and window.PUBLIC_CDN had value and url should be work", () => {
+    window.STANDALONE_MICRO_APPS = true;
+    window.PUBLIC_CDN = "/sa-static/app/1.0.2/";
+    window.PUBLIC_ROOT = "/public_cdn/";
+    const app1: MicroApp = {
+      id: "hello",
+      name: "世界",
+      localeName: "world",
+      homepage: "/hello",
+      icons: {
+        large: "icons/large.png",
+      },
+      currentVersion: "1.0.1",
+      standaloneMode: false,
+    };
+    const wrapper1 = shallow(<DesktopApp app={app1} />);
+    expect(wrapper1.find("img").prop("src")).toBe(
+      `/sa-static/app/1.0.2/micro-apps/hello/icons/large.png`
+    );
+
+    window.STANDALONE_MICRO_APPS = false;
+
+    const app2: MicroApp = {
+      id: "hello",
+      name: "世界",
+      localeName: "world",
+      homepage: "/hello",
+      icons: {
+        large: "icons/large.png",
+      },
+      currentVersion: "1.0.1",
+    };
+    const wrapper2 = shallow(<DesktopApp app={app2} />);
+    expect(wrapper2.find("img").prop("src")).toBe(
+      `/public_cdn/micro-apps/hello/icons/large.png`
     );
   });
 });
