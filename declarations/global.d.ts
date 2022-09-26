@@ -58,6 +58,9 @@ interface Window {
   /** The public root, E.g. "hello-world/-/" */
   PUBLIC_ROOT?: string;
 
+  /** The public cdn, E.g. "/sa-static/-/" */
+  PUBLIC_CDN?: string;
+
   /** The full location where user log out from, like: /next/my-app/some-page?q=abc */
   EASYOPS_AUTH_LOGOUT_FROM_FULL?: string;
 
