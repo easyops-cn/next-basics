@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.196.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.4...@next-bricks/basic-bricks@1.196.5) (2022-09-26)
+
+
+### Bug Fixes
+
+* fix launchpad App image error ([4d26310](https://github.com/easyops-cn/next-basics/commit/4d263108ffab03c5e4300ccea0e5fe49b154a119))
+
+
+
+
+
 ## [1.196.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.3...@next-bricks/basic-bricks@1.196.4) (2022-09-26)
 
 
