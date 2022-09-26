@@ -1,5 +1,6 @@
 import { getRuntime } from "@next-core/brick-kit";
 import { MenuIcon } from "@next-core/brick-types";
+import { isEmpty } from "lodash";
 import { StepItem, StepType, StepTreeNodeData } from "../interfaces";
 
 function getIcon(type: StepType): MenuIcon {
@@ -50,21 +51,37 @@ function getIcon(type: StepType): MenuIcon {
 
 function getChildren(
   stepIds: string[],
-  stepMap: Map<string, StepItem>
+  stepMap: Map<string, StepItem>,
+  startAt: string
 ): StepTreeNodeData[] {
   const treeList: StepTreeNodeData[] = [];
-  stepIds?.forEach((id) => {
-    const curStepData = stepMap.get(id);
+
+  /* istanbul ignore if */
+  if (!startAt) {
+    // eslint-disable-next-line no-console
+    console.error(`no start node specified in step of ${stepIds.join(",")}`);
+  }
+  const startNode = stepMap.get(startAt || stepIds[0]);
+
+  const stageList = getStageList(startNode, stepMap);
+
+  stageList?.forEach((curStepData) => {
     if (curStepData) {
       treeList.push({
         key: curStepData.id,
         id: curStepData.id,
-        name: curStepData.id,
+        name: curStepData.name,
         iconTooltip: curStepData.type,
         icon: getIcon(curStepData.type),
         data: curStepData,
-        ...(curStepData.children
-          ? { children: getChildren(curStepData.children, stepMap) }
+        ...(!isEmpty(curStepData.children)
+          ? {
+              children: getChildren(
+                curStepData.children,
+                stepMap,
+                curStepData.config?.startAt
+              ),
+            }
           : {}),
       });
     }
@@ -100,6 +117,11 @@ export function getStepTreeData(
 
   const stepMap = new Map<string, StepItem>();
   stepList.forEach((item) => {
+    /* istanbul ignore if */
+    if (!item.next && !item.pre && !item.parent) {
+      // eslint-disable-next-line no-console
+      console.warn(`${item.id} is isolated node`);
+    }
     stepMap.set(item.id, item);
   });
 
@@ -115,8 +137,10 @@ export function getStepTreeData(
       data: item,
       icon: getIcon(item.type),
       iconTooltip: item.type,
-      ...(item.children
-        ? { children: getChildren(item.children, stepMap) }
+      ...(!isEmpty(item.children)
+        ? {
+            children: getChildren(item.children, stepMap, item.config?.startAt),
+          }
         : {}),
     };
 

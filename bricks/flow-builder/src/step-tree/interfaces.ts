@@ -20,6 +20,7 @@ export interface ContextOfWorkbenchTree {
   activeKey?: string;
   nodeClickFactory?: (data: StepTreeNodeData) => (event: MouseEvent) => void;
   mouseEnterFactory?: (data: StepTreeNodeData) => () => void;
+  mouseLeaveFactory?: () => () => void;
   matchNode?: (node: StepTreeNodeData, lowerTrimmedQuery?: string) => boolean;
 }
 

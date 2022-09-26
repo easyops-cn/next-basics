@@ -1,13 +1,18 @@
 import { MenuIcon } from "@next-core/brick-types";
-export type StepType =
-  | "task"
-  | "choice"
-  | "parallel"
-  | "map"
-  | "branch"
-  | "iterator"
-  | "failed"
-  | "success";
+
+export const stepList = [
+  "task",
+  "choice",
+  "parallel",
+  "map",
+  "branch",
+  "end",
+  "iterator",
+  "failed",
+  "success",
+] as const;
+
+export type StepType = typeof stepList[number];
 
 export interface StepItem {
   id: string;
@@ -15,11 +20,15 @@ export interface StepItem {
   type: StepType;
   parameter?: any;
   output?: any;
-  config?: any;
-  end?: boolean;
+  config?: {
+    startAt?: string;
+    [key: string]: any;
+  };
+  pre?: string;
   next?: string;
   parent?: string;
   children?: string[];
+  end?: boolean;
 }
 
 export interface StepTreeNodeData {

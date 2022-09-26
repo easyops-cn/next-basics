@@ -68,11 +68,18 @@ export class StepTreeElement extends UpdatingElement {
       this._nodeClickEvent.emit(node.data);
     };
 
-  @event({ type: "node.hover" })
-  private _nodeHoverEvent: EventEmitter<StepTreeNodeData["data"]>;
+  @event({ type: "node.enter" })
+  private _nodeEnterEvent: EventEmitter<StepTreeNodeData["data"]>;
 
   private _nodeEnterFactory = (node: StepTreeNodeData) => () => {
-    this._nodeHoverEvent.emit(node.data);
+    this._nodeEnterEvent.emit(node.data);
+  };
+
+  @event({ type: "node.leave" })
+  private _nodeLeaveEvent: EventEmitter<void>;
+
+  private _nodeLeaveFactory = () => () => {
+    this._nodeLeaveEvent.emit();
   };
 
   private _matchNode = (
@@ -114,6 +121,7 @@ export class StepTreeElement extends UpdatingElement {
               onActionClick: this._handleActionClick,
               nodeClickFactory: this._nodeClickFactory,
               mouseEnterFactory: this._nodeEnterFactory,
+              mouseLeaveFactory: this._nodeLeaveFactory,
               matchNode: this._matchNode,
             }}
           >
