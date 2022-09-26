@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.196.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.3...@next-bricks/basic-bricks@1.196.4) (2022-09-26)
+
+
+### Bug Fixes
+
+* 完善logobar的样式 ([66face4](https://github.com/easyops-cn/next-basics/commit/66face4f1e8235bb7313f3b22068d98bbbb098ec))
+* 完善logobar的样式 ([457e41e](https://github.com/easyops-cn/next-basics/commit/457e41eb2719efb92a1d2df246247d2561c4bb61))
+
+
+
+
+
 ## [1.196.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.2...@next-bricks/basic-bricks@1.196.3) (2022-09-25)
 
 
