@@ -37,6 +37,50 @@ export const cmdbInstanceSelectStory: Story = {
       },
     },
     {
+      brick: "forms.general-select",
+      events: {
+        "general.select.change": {
+          action: "console.log",
+          args: ["模型", "<% EVENT.detail %>"],
+        },
+      },
+      description: {
+        title: "后端搜索",
+        message:
+          "后端搜索，默认Debounce为`300ms`（只能使用契约类型的provider）",
+      },
+      properties: {
+        dataset: {
+          testid: "basic-usage-demo",
+        },
+        inputBoxStyle: {
+          width: 120,
+        },
+        label: "模型",
+        name: "model",
+        placeholder: "请选择性别",
+        options: [
+          {
+            label: "A",
+            value: "MODEL_A",
+          },
+          {
+            label: "MODEL_B",
+            value: "B",
+          },
+        ],
+        fields: {
+          label: "name",
+          value: "objectId",
+        },
+        useBackend: {
+          provider: "easyops.api.cmdb.cmdb_object@ListObjectBasic:1.1.0",
+          args: '<% (q) => [{ q: `${q}` , fields: ["ID", "name", "address", "age"], page: 1, page_size: 10 }] %>',
+          transform: "<% (data) => data.list %>",
+        },
+      },
+    },
+    {
       brick: "forms.cmdb-instance-select",
       properties: {
         name: "app",

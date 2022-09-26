@@ -1,10 +1,24 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { Select } from "antd";
 import { formatOptions } from "@next-libs/forms";
 import { GeneralSelect, match, filterSearch } from "./GeneralSelect";
-import { EasyopsEmpty } from "@next-core/brick-kit";
+import * as kit from "@next-core/brick-kit";
 
+const mockQuery = jest.fn().mockImplementation((q) =>
+  Promise.resolve({
+    list: [
+      { label: "A", value: "a" },
+      { label: "B", value: "b" },
+      { label: "C", value: "c" },
+    ].filter((v) => v.value.includes(q)),
+  })
+);
+jest.spyOn(kit, "useProvider").mockReturnValue({
+  query: mockQuery,
+} as any);
+
+jest.spyOn(kit, "useProvider");
 describe("GeneralSelect", () => {
   it("should execute change method", async () => {
     const handleChange = jest.fn();
@@ -123,7 +137,7 @@ describe("GeneralSelect", () => {
       />
     );
     wrapper.find(Select).invoke("onSearch")("q");
-
+    const EasyopsEmpty = kit.EasyopsEmpty;
     expect(EasyopsEmpty.length).toEqual(1);
     expect(wrapper.find(Select).prop("notFoundContent")).toStrictEqual(
       <EasyopsEmpty description="自定义文本" />
@@ -155,7 +169,7 @@ describe("GeneralSelect", () => {
     expect(handleDebounceSearch).toHaveBeenCalledWith("qu");
   });
 
-  it("should trigger debounceSearch event", () => {
+  it("should trigger debounceSearch event", async () => {
     const handleSearch = jest.fn();
 
     const wrapper = shallow(
@@ -173,8 +187,39 @@ describe("GeneralSelect", () => {
     );
 
     wrapper.find(Select).invoke("onSearch")("q");
-
     expect(handleSearch).toHaveBeenCalledWith("q");
+  });
+
+  it("backend search should work", async () => {
+    const mockSearch = jest.fn();
+
+    const wrapper = mount(
+      <GeneralSelect
+        options={[
+          { label: "A", value: "a" },
+          { label: "B", value: "a" },
+        ]}
+        value="good"
+        useBackend={{
+          provider: "easyopsapi.cmdb@search:1.0.0",
+          args: (q) => [q, { page: 1 }],
+          transform: (data) => data.list,
+        }}
+        onSearch={mockSearch}
+      />
+    );
+
+    wrapper.find(Select).invoke("onSearch")("c");
+    jest.advanceTimersByTime(300);
+    await (global as any).flushPromises();
+
+    wrapper.update();
+    expect(wrapper.find(".ant-select").length).toBe(1);
+    expect(mockQuery).toHaveBeenCalledWith("easyopsapi.cmdb@search:1.0.0", [
+      "c",
+      { page: 1 },
+    ]);
+    expect(mockSearch).toHaveBeenCalledWith("c");
   });
 
   it("should update value", () => {
