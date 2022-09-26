@@ -74,7 +74,6 @@
 /* 下拉弹窗样式 */
 .popupWrapper {
   padding: 4px 0px 3px 0px;
-  top: 41px !important;
   :global(.ant-menu) {
     background: var(--antd-dropdown-menu-bg) !important;
     border-radius: 6px;
