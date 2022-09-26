@@ -60,6 +60,7 @@ export function TreeNode({
     actionsHidden,
     onActionClick,
     mouseEnterFactory,
+    mouseLeaveFactory,
   } = useContext(WorkbenchTreeContext);
 
   const { q } = useContext(TreeListContext);
@@ -78,6 +79,11 @@ export function TreeNode({
     [mouseEnterFactory, node]
   );
 
+  const onMouseLeave = useCallback(
+    () => mouseLeaveFactory?.()(),
+    [mouseLeaveFactory]
+  );
+
   return (
     <li>
       <Link
@@ -89,6 +95,7 @@ export function TreeNode({
         noEmptyHref
         onClick={onClick}
         onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         <span className={styles.treeIndent}>
           {[...Array(level - 1)].map((_, i) => {
