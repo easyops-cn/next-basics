@@ -4,6 +4,7 @@ import { useDesktopDirContext } from "../DesktopDirContext";
 import styles from "./DesktopDir.module.css";
 import defaultAppIcon from "../../images/default-app-icon.png";
 import { NormalizedDesktopDir } from "../interfaces";
+import { getImageUrl } from "../utils/getImageUrl";
 
 export function DesktopDir(props: NormalizedDesktopDir): React.ReactElement {
   const { setDesktopDir } = useDesktopDirContext();
@@ -39,15 +40,7 @@ export function DesktopDir(props: NormalizedDesktopDir): React.ReactElement {
               <img
                 className={styles.appIcon}
                 key={item.id}
-                src={
-                  item.app.icons && item.app.icons.large
-                    ? /^(?:https?|data):|^\//.test(item.app.icons.large)
-                      ? item.app.icons.large
-                      : `${window.PUBLIC_ROOT || ""}micro-apps/${item.id}/${
-                          item.app.icons.large
-                        }`
-                    : defaultAppIcon
-                }
+                src={getImageUrl(item.app, defaultAppIcon)}
               />
             ) : (
               <img
