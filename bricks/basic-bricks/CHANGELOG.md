@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.197.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.5...@next-bricks/basic-bricks@1.197.0) (2022-09-27)
+
+
+### Bug Fixes
+
+* fix image url error in dir ([b504393](https://github.com/easyops-cn/next-basics/commit/b504393817722cc460476ce05b69ce55eebc73b6))
+
+
+### Features
+
+* standalone launchpad not fetch in init ([e8a3235](https://github.com/easyops-cn/next-basics/commit/e8a3235e777de9c1f909baddae6019f6e259d336))
+
+
+
+
+
 ## [1.196.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.4...@next-bricks/basic-bricks@1.196.5) (2022-09-26)
 
 
