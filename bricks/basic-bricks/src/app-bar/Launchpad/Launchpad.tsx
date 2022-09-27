@@ -42,13 +42,9 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
     let timer: NodeJS.Timeout;
     const pollingRunningAppStatus = async (): Promise<void> => {
       try {
-        if (window.STANDALONE_MICRO_APPS) {
-          await launchpadService.fetchLaunchpadInfo();
-        } else {
-          await runtime.reloadMicroApps({
-            ignoreLoadingBar: true,
-          });
-        }
+        await runtime.reloadMicroApps({
+          ignoreLoadingBar: true,
+        });
         const reloadApps = getFilterMicroApps();
         const installingApp = reloadApps.filter(
           (app: MicroApp) => app.installStatus === "running"
@@ -63,15 +59,22 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
         handleHttpError(error);
       }
     };
-    if (!loading) {
+
+    const startFetchLaunchpadInfo = async (): Promise<void> => {
+      try {
+        await launchpadService.fetchLaunchpadInfo();
+        setLoading(false);
+        setMicroApps(getFilterMicroApps());
+      } catch (error) {
+        props.onWillClose();
+        handleHttpError(error);
+      }
+    };
+    if (window.STANDALONE_MICRO_APPS) {
+      startFetchLaunchpadInfo();
+    } else {
       pollingRunningAppStatus();
     }
-
-    launchpadService.once("fetching-base-info", (isFetching) => {
-      setLoading(isFetching);
-      setMicroApps(getFilterMicroApps());
-      pollingRunningAppStatus();
-    });
 
     return (): void => clearTimeout(timer);
   }, []);
