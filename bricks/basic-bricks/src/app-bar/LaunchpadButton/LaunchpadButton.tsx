@@ -20,10 +20,6 @@ export function LaunchpadButton(): React.ReactElement {
   }, []);
 
   useEffect(() => {
-    launchpadService.init();
-  }, []);
-
-  useEffect(() => {
     const unlisten = getHistory().listen(() => {
       // 当切换页面时，关闭 Launchpad。
       handleLaunchpadWillClose();

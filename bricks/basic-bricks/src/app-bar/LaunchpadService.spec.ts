@@ -296,8 +296,6 @@ describe("LaunchpadService", () => {
   });
 
   it("should fetch the launchpad info when window.STANDALONE_MICRO_APPS was true", async () => {
-    window.STANDALONE_MICRO_APPS = true;
-
     spyOnGetLaunchpadInfo.mockResolvedValue({
       settings: {
         launchpad: {
@@ -313,7 +311,7 @@ describe("LaunchpadService", () => {
 
     const service = new LaunchpadService();
 
-    await service.init();
+    await service.fetchLaunchpadInfo();
 
     jest.runAllTimers();
 

@@ -16,7 +16,6 @@ import {
 import { LaunchpadApi_getLaunchpadInfo } from "@next-sdk/micro-app-standalone-sdk";
 import { getRuntime, getAuth } from "@next-core/brick-kit";
 import { pick } from "lodash";
-import EventEmitter from "events";
 import i18next from "i18next";
 import { LaunchpadSettings } from "./LaunchpadSettingsContext";
 
@@ -27,7 +26,7 @@ interface LaunchpadBaseInfo {
   siteSort: SiteMapItem[];
 }
 
-export class LaunchpadService extends EventEmitter {
+export class LaunchpadService {
   readonly storageKey = `launchpad-recently-visited:${getAuth().org}`;
   private storage: JsonStorage;
   private favoriteList: LaunchpadApi_ListCollectionResponseItem[] = [];
@@ -46,26 +45,21 @@ export class LaunchpadService extends EventEmitter {
   };
   public isFetching = window.STANDALONE_MICRO_APPS;
   constructor() {
-    super();
     this.storage = new JsonStorage(localStorage);
+
+    this.init();
   }
 
   init(): void {
-    if (window.STANDALONE_MICRO_APPS) {
-      setTimeout(async () => {
-        await this.fetchLaunchpadInfo();
-      });
-    } else {
-      const runtime = getRuntime();
-      this.baseInfo = {
-        desktops: runtime.getDesktops(),
-        microApps: runtime.getMicroApps(),
-        settings: runtime.getLaunchpadSettings(),
-        siteSort: runtime.getLaunchpadSiteMap(),
-      };
+    const runtime = getRuntime();
+    this.baseInfo = {
+      desktops: runtime.getDesktops(),
+      microApps: runtime.getMicroApps(),
+      settings: runtime.getLaunchpadSettings(),
+      siteSort: runtime.getLaunchpadSiteMap(),
+    };
 
-      this.initValue();
-    }
+    this.initValue();
   }
 
   private initValue(): void {
@@ -131,7 +125,6 @@ export class LaunchpadService extends EventEmitter {
     } as unknown as LaunchpadBaseInfo;
     this.initValue();
     this.isFetching = false;
-    this.emit("fetching-base-info", false);
   }
 
   getBaseInfo() {
