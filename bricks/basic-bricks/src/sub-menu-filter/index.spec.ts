@@ -73,10 +73,44 @@ describe("basic-bricks.sub-menu-filter", () => {
       "props"
     ].children["props"].onSelect(["a", "b"]);
     expect(
-      (mockEventListener.mock.calls[
-        mockEventListener.mock.calls.length - 1
-      ][0] as CustomEvent).detail
+      (
+        mockEventListener.mock.calls[
+          mockEventListener.mock.calls.length - 1
+        ][0] as CustomEvent
+      ).detail
     ).toEqual(["a", "b"]);
+    mockEventListener.mockClear();
+  });
+
+  it("should be call menu.click event", async () => {
+    const element = document.createElement("basic-bricks.sub-menu-filter");
+    const menuItems = [
+      {
+        type: "item",
+        title: "全部",
+        key: "All",
+        count: 100,
+        icon: {
+          lib: "fa",
+          icon: "cube",
+        },
+      },
+    ];
+    (element as any).menuItems = menuItems;
+
+    element.addEventListener("menu.click", mockEventListener);
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children["props"].onClick(menuItems[0]);
+    expect(
+      (
+        mockEventListener.mock.calls[
+          mockEventListener.mock.calls.length - 1
+        ][0] as CustomEvent
+      ).detail
+    ).toEqual(menuItems[0]);
     mockEventListener.mockClear();
   });
 
@@ -112,9 +146,11 @@ describe("basic-bricks.sub-menu-filter", () => {
       "props"
     ].children["props"].onSearch(["q"]);
     expect(
-      (mockEventListener.mock.calls[
-        mockEventListener.mock.calls.length - 1
-      ][0] as CustomEvent).detail
+      (
+        mockEventListener.mock.calls[
+          mockEventListener.mock.calls.length - 1
+        ][0] as CustomEvent
+      ).detail
     ).toEqual(["q"]);
   });
 });

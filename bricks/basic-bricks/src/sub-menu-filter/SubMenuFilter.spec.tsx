@@ -148,6 +148,7 @@ describe("SubMenuFilter", () => {
     ],
     onSearch: jest.fn(),
     onSelect: jest.fn(),
+    onClick: jest.fn(),
   };
   let wrapper: ReactWrapper;
 
@@ -248,5 +249,20 @@ describe("SubMenuFilter", () => {
         },
       },
     ]);
+  });
+
+  it("should call onClick", async () => {
+    const menu = wrapper.find(Menu);
+    menu.invoke("onClick")({ key: "cc" });
+    expect(props.onClick).toHaveBeenCalledWith({
+      title: "Cc",
+      key: "cc",
+      count: 10,
+      icon: {
+        lib: "easyops",
+        category: "model",
+        icon: "go",
+      },
+    });
   });
 });

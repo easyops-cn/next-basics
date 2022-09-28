@@ -60,6 +60,7 @@ export interface SubMenuFilterProps {
   placeholder?: string;
   unsearchable: boolean;
   onSelect: (menuItem: SubMenuFilterItem[]) => void;
+  onClick: (menuItem: SubMenuFilterItem) => void;
   onSearch: (query: string) => void;
   multiple: boolean;
   inlineIndent?: number;
@@ -76,6 +77,7 @@ export function SubMenuFilter({
   placeholder = "",
   unsearchable,
   onSelect,
+  onClick,
   onSearch,
   multiple,
   inlineIndent,
@@ -251,6 +253,7 @@ export function SubMenuFilter({
       }
     }
   };
+
   const handleSelect = ({ key }: SelectParam) => {
     const newSelectedKeys = multiple
       ? [...new Set([...selectedKeys, key])]
@@ -264,6 +267,10 @@ export function SubMenuFilter({
     const newSelectedKeys = [...selectedKeys.filter((k) => k !== key)];
     setSelectedKeys(newSelectedKeys);
     onSelect && onSelect(getSelectedMenuItemByKeys(newSelectedKeys));
+  };
+
+  const handleClick = ({ key }: { key: React.Key }): void => {
+    onClick?.(getMenuItemByKey(rowMenuItem, key as string));
   };
 
   return (
@@ -289,6 +296,7 @@ export function SubMenuFilter({
         openKeys={openKeys}
         style={{ height: "100%", borderRight: 0 }}
         className={style.menuContainer}
+        onClick={handleClick}
         onSelect={handleSelect}
         onDeselect={handleDeselect}
         onOpenChange={handleOpenChange}

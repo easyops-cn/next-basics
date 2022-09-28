@@ -227,8 +227,18 @@ export class SubMenuFilterElement extends UpdatingElement {
    * @description 搜索 query
    */
   @event({ type: "menu.search" }) menuSearch: EventEmitter<string>;
+  /**
+   * @detail SubMenuFilterItem[]
+   * @description -
+   */
+  @event({ type: "menu.click" }) menuClick: EventEmitter<SubMenuFilterItem>;
+
   handleSelect = (menuItem: SubMenuFilterItem[]) => {
     this.menuSelect.emit(menuItem);
+  };
+
+  handleClick = (menuItem: SubMenuFilterItem): void => {
+    this.menuClick.emit(menuItem);
   };
 
   handleSearch = (q: string) => {
@@ -243,6 +253,7 @@ export class SubMenuFilterElement extends UpdatingElement {
           <SubMenuFilter
             multiple={this.multiple}
             onSelect={this.handleSelect}
+            onClick={this.handleClick}
             onSearch={this.handleSearch}
             selectable={this.selectable}
             unsearchable={this.unsearchable}
