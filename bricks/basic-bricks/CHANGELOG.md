@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.198.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.197.0...@next-bricks/basic-bricks@1.198.0) (2022-09-28)
+
+
+### Features
+
+* **sub-menu-filter:** add menu.click event ([facffa0](https://github.com/easyops-cn/next-basics/commit/facffa005b2f1b9ca7da42897c21a4de9bba9df7))
+
+
+
+
+
 # [1.197.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.196.5...@next-bricks/basic-bricks@1.197.0) (2022-09-27)
 
 
