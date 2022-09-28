@@ -43,15 +43,26 @@ export class GeneralFormElement
   readonly isFormElement = true;
 
   private _mountPoint: HTMLElement;
+  private _values: Record<string, any>;
 
   /**
+   * @required false
    * @description 表单的初始值。当 `values` 有嵌套的层级时，需要按表单项的 `name` 平铺。如有源数据为 `{a: {b: 123}}` ，存在表单项的 `name` 为 `a.b`，要正确给该表单项赋值为 123， 那么 `values` 应该为 `{"a.b": 123}`
    * @group basic
    */
   @property({
-    attribute: false,
+    __unstable_doNotDecorate: true,
   })
-  values?: Record<string, any>;
+  set values(value: Record<string, any>) {
+    this._values = value;
+
+    if (this.isConnected) {
+      this.setInitValue(value, { runInMacrotask: true });
+    }
+  }
+  get values(): Record<string, any> {
+    return this._values;
+  }
 
   /**
    * @description 静态值（在 `validate.success` 中将和表单值合并作为事件详情传递出去）

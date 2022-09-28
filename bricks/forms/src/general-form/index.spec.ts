@@ -148,11 +148,22 @@ describe("forms.general-form", () => {
       expect.anything()
     );
 
+    // not connected
+    const values1 = {};
+    element.values = values1;
+    expect(element.values).toBe(values1);
+    expect(setFieldsValue).not.toBeCalledWith(values1);
+
     // Always waiting for async `(dis)connectedCallback`
     await jest.runAllTimers();
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
+    //connected
+    const values2 = {};
+    element.values = values2;
     await jest.runAllTimers();
+    expect(element.values).toBe(values2);
+    expect(setFieldsValue).toBeCalledWith(values2);
     expect(spyOnRender).toBeCalled();
     document.body.removeChild(element);
     await jest.runAllTimers();
