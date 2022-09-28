@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.235.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.234.2...@next-bricks/forms@1.235.0) (2022-09-28)
+
+
+### Features
+
+* **general-form:** support setting form values via values property after first rendering ([11f3bb3](https://github.com/easyops-cn/next-basics/commit/11f3bb395011eceb6d94bd21fc7fb3f64984bd44))
+
+
+
+
+
 ## [1.234.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.234.1...@next-bricks/forms@1.234.2) (2022-09-23)
 
 **Note:** Version bump only for package @next-bricks/forms
