@@ -21,3 +21,4 @@ import "./data-providers/CustomDownloadFile";
 import "./step-tree";
 import "./custom-processors/getStepTreeData";
 import "./custom-processors/getFlowGraph";
+import "./custom-processors/packVarTemplateData";

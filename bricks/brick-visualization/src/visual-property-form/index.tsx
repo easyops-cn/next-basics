@@ -14,6 +14,7 @@ import {
   processFormValue,
   extractCommonProps,
   visualFormUtils,
+  PropertyType,
 } from "@next-libs/visual-builder";
 
 /**
@@ -83,6 +84,24 @@ export class VisualPropertyFormElement extends UpdatingElement {
     attribute: false,
   })
   emptyConfig: VisualPropertyFormProps["emptyConfig"];
+
+  /**
+   * @required -
+   * @default -
+   * @description 是否需要对属性分类
+   */
+  @property({ type: Boolean })
+  hiddenPropsCategory: boolean;
+
+  /**
+   * @required -
+   * @default -
+   * @description 构件共用的属性列表
+   */
+  @property({
+    attribute: false,
+  })
+  sharedPropertyList: PropertyType[];
 
   /**
    * @description 菜单设置点击事件
@@ -166,7 +185,11 @@ export class VisualPropertyFormElement extends UpdatingElement {
             ref={this._formUtils}
             projectId={this.projectId}
             labelIcon={this.labelIcon}
-            propertyTypeList={extractCommonProps(this.propertyTypeList)}
+            propertyTypeList={extractCommonProps(
+              this.propertyTypeList,
+              this.sharedPropertyList
+            )}
+            hiddenPropsCategory={this.hiddenPropsCategory}
             brickProperties={this.brickProperties}
             brickInfo={this.brickInfo}
             emptyConfig={this.emptyConfig}
