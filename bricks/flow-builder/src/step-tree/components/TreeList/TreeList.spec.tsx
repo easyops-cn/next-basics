@@ -39,7 +39,7 @@ describe("TreeList", () => {
           name: "step1",
           data: {
             id: "step1",
-            type: "choice",
+            type: "switch",
             name: "step1",
             next: "step5",
             children: ["branch3", "branch1", "branch2"],

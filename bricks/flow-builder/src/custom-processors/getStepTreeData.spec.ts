@@ -19,7 +19,7 @@ describe("getStepTreeData", () => {
         },
         {
           id: "step1",
-          type: "choice",
+          type: "switch",
           name: "step1",
           next: "step5",
           children: ["branch1", "branch2"],
@@ -125,7 +125,7 @@ describe("getStepTreeData", () => {
             id: "step1",
             name: "step1",
             next: "step5",
-            type: "choice",
+            type: "switch",
           },
           icon: {
             color: "var(--palette-indigo-6)",
@@ -133,7 +133,7 @@ describe("getStepTreeData", () => {
             lib: "antd",
             theme: "outlined",
           },
-          iconTooltip: "choice",
+          iconTooltip: "switch",
           id: "step1",
           key: "step1",
           name: "step1",

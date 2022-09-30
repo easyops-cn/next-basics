@@ -16,7 +16,7 @@ function getIcon(type: StepType): MenuIcon {
       icon = "node-expand";
       color = "var(--palette-yellow-6)";
       break;
-    case "choice":
+    case "switch":
       icon = "rollback";
       color = "var(--palette-indigo-6)";
       break;
