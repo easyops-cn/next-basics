@@ -6,6 +6,7 @@ import styles from "./ListContainer.module.css";
 
 interface ListContainerProps {
   data: any[];
+  itemKey?: string;
   useBrick: UseBrickConf;
   gap?: string | number;
   containerStyle?: React.CSSProperties;
@@ -13,18 +14,18 @@ interface ListContainerProps {
 }
 
 export function ListContainer(props: ListContainerProps): React.ReactElement {
-  if (!Array.isArray(props.data)) {
+  const { data, itemKey, gap, extraContainerStyle, useBrick } = props;
+
+  if (!Array.isArray(data)) {
     return null;
   }
 
-  let containerStyle: React.CSSProperties = {};
-  if (props.containerStyle) {
-    containerStyle = props.containerStyle;
-  } else {
+  let containerStyle: React.CSSProperties = props.containerStyle;
+  if (!containerStyle) {
     containerStyle = {
       display: "grid",
-      gap: props.gap ?? "var(--card-content-gap)",
-      ...props.extraContainerStyle,
+      gap: gap ?? "var(--card-content-gap)",
+      ...extraContainerStyle,
     };
   }
 
@@ -35,8 +36,12 @@ export function ListContainer(props: ListContainerProps): React.ReactElement {
       })}
       style={containerStyle}
     >
-      {props.data.map((item, index) => (
-        <BrickAsComponent key={index} data={item} useBrick={props.useBrick} />
+      {data.map((item, index) => (
+        <BrickAsComponent
+          key={(itemKey && item[itemKey]) ?? index}
+          data={item}
+          useBrick={useBrick}
+        />
       ))}
     </div>
   );
