@@ -43,6 +43,15 @@ export class ListContainerElement extends UpdatingElement {
   data: any[] = [];
 
   /**
+   * @description 数据项的 key，不设置默认使用 index
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  itemKey?: string;
+
+  /**
    * @kind string | number
    * @default "var(--card-content-gap)"
    * @description 间距(配合extraContainerStyle使用)
@@ -94,6 +103,7 @@ export class ListContainerElement extends UpdatingElement {
         <BrickWrapper>
           <ListContainer
             data={this.data}
+            itemKey={this.itemKey}
             useBrick={this.useBrick}
             gap={this.gap}
             containerStyle={this.containerStyle}
