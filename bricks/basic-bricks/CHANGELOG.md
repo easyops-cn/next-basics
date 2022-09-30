@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.199.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.198.0...@next-bricks/basic-bricks@1.199.0) (2022-09-30)
+
+
+### Features
+
+* **list-container:** add itemKey property ([83972f8](https://github.com/easyops-cn/next-basics/commit/83972f8c5e9be64518d5c1769f8a26a364da95ff))
+
+
+
+
+
 # [1.198.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.197.0...@next-bricks/basic-bricks@1.198.0) (2022-09-28)
 
 
