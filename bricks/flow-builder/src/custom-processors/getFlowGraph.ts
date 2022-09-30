@@ -59,7 +59,7 @@ export function getFlowGraph(data: OriginData): GraphData {
     });
   });
 
-  //过滤掉 branch 之前的关系
+  //过滤掉 branch 之间的关系
 
   branchNodes?.forEach((node) => {
     const relationA = data.relations?.find(

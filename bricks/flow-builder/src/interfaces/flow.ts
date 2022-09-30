@@ -2,7 +2,7 @@ import { MenuIcon } from "@next-core/brick-types";
 
 export const stepList = [
   "task",
-  "choice",
+  "switch",
   "parallel",
   "map",
   "branch",
