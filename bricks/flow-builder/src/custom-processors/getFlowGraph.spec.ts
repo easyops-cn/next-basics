@@ -28,20 +28,16 @@ describe("getFlowGraph", () => {
             src: "branch1",
           },
           {
+            src: "step2",
+            dst: "step2.1",
+          },
+          {
             dst: "step3",
             src: "branch2",
           },
           {
-            dst: "step1End",
-            src: "step2",
-          },
-          {
-            dst: "step1End",
-            src: "step3",
-          },
-          {
-            src: "step1End",
             dst: "step5",
+            src: "step1",
           },
         ],
         steps: [
@@ -62,7 +58,7 @@ describe("getFlowGraph", () => {
             id: "branch1",
             name: "branch1",
             type: "branch",
-            children: ["step2"],
+            children: ["step2", "step2.1"],
           },
           {
             id: "branch2",
@@ -74,6 +70,12 @@ describe("getFlowGraph", () => {
             id: "step2",
             type: "task",
             name: "step2",
+            next: "step2.1",
+          },
+          {
+            id: "step2.1",
+            type: "task",
+            name: "step2.1",
             end: true,
           },
           {
@@ -83,12 +85,6 @@ describe("getFlowGraph", () => {
             end: true,
           },
           {
-            id: "step1End",
-            type: "task",
-            name: "end",
-            next: "step5",
-          },
-          {
             id: "step5",
             name: "step5",
             type: "task",
@@ -96,20 +92,20 @@ describe("getFlowGraph", () => {
           },
         ],
       },
+      "start",
       {
         edges: [
           { source: "root", target: "start", type: "include" },
           { source: "root", target: "step1", type: "include" },
-          { source: "root", target: "step2", type: "include" },
-          { source: "root", target: "step3", type: "include" },
-          { source: "root", target: "step1End", type: "include" },
           { source: "root", target: "step5", type: "include" },
           { source: "start", target: "step1", type: "dagre" },
-          { source: "step1", target: "step2", type: "dagre" },
-          { source: "step1", target: "step3", type: "dagre" },
-          { source: "step2", target: "step1End", type: "dagre" },
-          { source: "step3", target: "step1End", type: "dagre" },
-          { source: "step1End", target: "step5", type: "dagre" },
+          { source: "step2", target: "step2.1", type: "dagre" },
+          { source: "step1", target: "step5", type: "dagre" },
+          { source: "step1", target: "branch1", type: "container" },
+          { source: "step1", target: "branch2", type: "container" },
+          { source: "branch1", target: "step2", type: "group" },
+          { source: "branch1", target: "step2.1", type: "group" },
+          { source: "branch2", target: "step3", type: "group" },
         ],
         nodes: [
           { id: "root", type: "node" },
@@ -129,24 +125,46 @@ describe("getFlowGraph", () => {
             },
             id: "step1",
             name: "step1",
+            type: "container",
+          },
+          {
+            data: {
+              children: ["step2", "step2.1"],
+              id: "branch1",
+              name: "branch1",
+              type: "branch",
+            },
+            id: "branch1",
+            name: "branch1",
+            type: "group",
+          },
+          {
+            data: {
+              children: ["step3"],
+              id: "branch2",
+              name: "branch2",
+              type: "branch",
+            },
+            id: "branch2",
+            name: "branch2",
+            type: "group",
+          },
+          {
+            data: { id: "step2", name: "step2", next: "step2.1", type: "task" },
+            id: "step2",
+            name: "step2",
             type: "node",
           },
           {
-            data: { end: true, id: "step2", name: "step2", type: "task" },
-            id: "step2",
-            name: "step2",
+            data: { end: true, id: "step2.1", name: "step2.1", type: "task" },
+            id: "step2.1",
+            name: "step2.1",
             type: "node",
           },
           {
             data: { end: true, id: "step3", name: "step3", type: "task" },
             id: "step3",
             name: "step3",
-            type: "node",
-          },
-          {
-            data: { id: "step1End", name: "end", next: "step5", type: "task" },
-            id: "step1End",
-            name: "end",
             type: "node",
           },
           {
@@ -159,173 +177,7 @@ describe("getFlowGraph", () => {
         root: "root",
       },
     ],
-    [
-      {
-        relations: [
-          {
-            src: "step1",
-            dst: "step2",
-          },
-          {
-            src: "step2",
-            dst: "step3",
-          },
-          {
-            src: "step3",
-            dst: "step4",
-          },
-          {
-            src: "step4",
-            dst: "end",
-          },
-        ],
-        steps: [
-          {
-            id: "step1",
-            type: "task",
-            name: "step1",
-            next: "step2",
-          },
-          {
-            id: "step2",
-            type: "switch",
-            name: "step2",
-            next: "step2",
-          },
-          {
-            children: ["step4"],
-            id: "step3",
-            name: "step3",
-            type: "branch",
-            parent: "step2",
-          },
-          {
-            id: "step4",
-            type: "task",
-            name: "step4",
-            parent: "step3",
-            next: "end",
-          },
-          {
-            id: "end",
-            type: "end",
-            name: "end",
-            parent: "step4",
-            end: true,
-          },
-        ],
-      },
-      {
-        edges: [
-          { source: "root", target: "step1", type: "include" },
-          { source: "root", target: "step2", type: "include" },
-          { source: "root", target: "step4", type: "include" },
-          { source: "root", target: "end", type: "include" },
-          { source: "step1", target: "step2", type: "dagre" },
-          { source: "step2", target: "step4", type: "dagre" },
-          { source: "step4", target: "end", type: "dagre" },
-        ],
-        nodes: [
-          { id: "root", type: "node" },
-          {
-            data: { id: "step1", name: "step1", next: "step2", type: "task" },
-            id: "step1",
-            name: "step1",
-            type: "node",
-          },
-          {
-            data: { id: "step2", name: "step2", next: "step2", type: "switch" },
-            id: "step2",
-            name: "step2",
-            type: "node",
-          },
-          {
-            data: {
-              id: "step4",
-              next: "end",
-              parent: "step3",
-              type: "task",
-              name: "step4",
-            },
-            id: "step4",
-            name: "step4",
-            type: "node",
-          },
-          {
-            data: {
-              end: true,
-              id: "end",
-              parent: "step4",
-              type: "end",
-              name: "end",
-            },
-            id: "end",
-            name: "end",
-            type: "end",
-          },
-        ],
-        root: "root",
-      },
-    ],
-    [
-      {
-        relations: [
-          {
-            src: "step1",
-            dst: "step2",
-          },
-          {
-            src: "step2",
-            dst: "step3",
-          },
-        ],
-        steps: [
-          {
-            id: "step1",
-            type: "task",
-            name: "step1",
-            next: "step2",
-          },
-          {
-            id: "step2",
-            type: "switch",
-            name: "step2",
-            next: "step2",
-          },
-          {
-            children: [],
-            id: "step3",
-            name: "step3",
-            type: "branch",
-            parent: "step2",
-          },
-        ],
-      },
-      {
-        edges: [
-          { source: "root", target: "step1", type: "include" },
-          { source: "root", target: "step2", type: "include" },
-          { source: "step1", target: "step2", type: "dagre" },
-        ],
-        nodes: [
-          { id: "root", type: "node" },
-          {
-            data: { id: "step1", name: "step1", next: "step2", type: "task" },
-            id: "step1",
-            name: "step1",
-            type: "node",
-          },
-          {
-            data: { id: "step2", name: "step2", next: "step2", type: "switch" },
-            id: "step2",
-            name: "step2",
-            type: "node",
-          },
-        ],
-        root: "root",
-      },
-    ],
-  ])("should work", (data, result) => {
-    expect(getFlowGraph(data)).toEqual(result);
+  ])("should work", (data, startId, result) => {
+    expect(getFlowGraph(data, startId)).toEqual(result);
   });
 });
