@@ -1,0 +1,83 @@
+@import '~@fullcalendar/common/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+.toastui-calendar-weekday-event{
+    border-left: none !important;
+    .test{
+        background-color: blue;
+    }
+    
+}
+.fc .fc-daygrid-day-events{
+    margin-top: 20px;
+}
+.fc-h-event .fc-event-title{
+    text-overflow: ellipsis;
+    color: rgb(51,51,51);
+}
+.eventCell{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgb(51,51,51);
+}
+.fc .fc-scrollgrid, .fc .fc-scrollgrid table{
+    table-layout: fixed;
+}
+
+.fc .fc-daygrid-day-frame .fc-daygrid-day-top .dayTopContainer{
+    visibility: visible !important;
+    position: relative;
+}
+.fc .fc-toolbar.fc-header-toolbar{
+    display: none;//自定义头部
+}
+.fc-h-event{
+    border: none;
+}
+.customHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 20px 10px;
+    border-left: 1px solid var(--fc-border-color, #ddd);
+    border-right: 1px solid var(--fc-border-color, #ddd);
+
+}
+.fc .fc-daygrid-event{
+    margin-top: 5px;
+}
+.headerTitle{
+    font-size: var(--page-title-font-size);
+    font-weight: var(--page-title-font-size);
+    color: var(--antd-heading-color);
+    
+}
+.holidayContainer{
+    white-space: nowrap;
+    color: red;
+    display: inline-block;
+    right: 40px;
+    top: 10px;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+
+}
+.todaySpan{
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    background-color: yellow;
+    height: 20px;
+    width: 20px;
+}
+.headerEndContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headerStartContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
