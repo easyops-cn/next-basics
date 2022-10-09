@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/calendar-bricks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/calendar-bricks",
   "license": "GPL-3.0",
@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "@fullcalendar/daygrid": "^5.11.3",
-    "@fullcalendar/react": "^5.11.2",
-    "@fullcalendar/interaction": "^5.11.3"
+    "@fullcalendar/interaction": "^5.11.3",
+    "@fullcalendar/react": "^5.11.2"
   },
   "sideEffects": true
 }
