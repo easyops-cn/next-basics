@@ -1,11 +1,10 @@
 import { getRuntime } from "@next-core/brick-kit";
+import { isEmpty } from "lodash";
 import { StepItem, StepType } from "../interfaces";
 
 interface Relation {
   dst: string;
   src: string;
-  __modifiedDst?: string;
-  __virtual?: boolean;
 }
 interface OriginData {
   relations: Relation[];
@@ -31,7 +30,24 @@ export interface GraphData {
   root: string;
 }
 
-export function getFlowGraph(data: OriginData): GraphData {
+const hasChildrenFLow = ["switch", "parallel", "map"];
+const childrenFLow = ["branch", "iterator"];
+
+function getStepType(type: StepType): string {
+  switch (type) {
+    case "switch":
+    case "parallel":
+    case "map":
+      return "container";
+    case "branch":
+    case "iterator":
+      return "group";
+    default:
+      return "node";
+  }
+}
+
+export function getFlowGraph(data: OriginData, startId: string): GraphData {
   const rootId = "root";
   const rootNode = {
     id: rootId,
@@ -39,49 +55,56 @@ export function getFlowGraph(data: OriginData): GraphData {
   };
   const nodes = [] as GraphNode[];
   const edges = [] as GraphEdges[];
+  const groupEdges = [] as GraphEdges[];
 
-  // 过滤掉 branch 类型的节点，在 graph 中不显示
-  const branchNodes = data.steps?.filter((item) => item.type === "branch");
-  const filterSteps = data.steps?.filter((item) => item.type !== "branch");
+  let findId = startId;
 
-  filterSteps?.forEach((item) => {
+  while (findId) {
+    edges.push({
+      source: rootId,
+      target: findId,
+      type: "include",
+    });
+
+    findId = data.steps?.find((item) => item.id === findId)?.next;
+  }
+
+  data.steps?.forEach((item) => {
     nodes.push({
       id: item.id,
       name: item.name,
-      type: item.type === "end" ? "end" : "node",
+      type: getStepType(item.type),
       data: item,
     });
 
-    edges.push({
-      source: rootId,
-      target: item.id,
-      type: "include",
-    });
-  });
+    if (hasChildrenFLow.includes(item.type) && !isEmpty(item.children)) {
+      item.children.forEach((c) => {
+        groupEdges.push({
+          source: item.id,
+          target: c,
+          type: "container",
+        });
+      });
+    }
 
-  //过滤掉 branch 之间的关系
-
-  branchNodes?.forEach((node) => {
-    const relationA = data.relations?.find(
-      (relation) => relation.dst === node.id
-    );
-    const relationB = data.relations.find(
-      (relation) => relation.src === node.id
-    );
-
-    if (relationA && relationB) {
-      relationA.__modifiedDst = relationB.dst;
-      relationB.__virtual = true;
-    } else if (relationA || relationB) {
-      relationA.__virtual = true;
+    if (childrenFLow.includes(item.type) && !isEmpty(item.children)) {
+      item.children.forEach((c) => {
+        groupEdges.push({
+          source: item.id,
+          target: c,
+          type: "group",
+        });
+      });
     }
   });
 
   data.relations?.forEach((item) => {
-    if (!item.__virtual) {
+    const source = groupEdges.find((e) => e.source === item.src);
+    const target = groupEdges.find((e) => e.target === item.dst);
+    if (!(source && target)) {
       edges.push({
         source: item.src,
-        target: item.__modifiedDst ?? item.dst,
+        target: item.dst,
         type: "dagre",
       });
     }
@@ -90,7 +113,7 @@ export function getFlowGraph(data: OriginData): GraphData {
   return {
     root: rootId,
     nodes: [rootNode, ...nodes],
-    edges,
+    edges: [...edges, ...groupEdges],
   };
 }
 

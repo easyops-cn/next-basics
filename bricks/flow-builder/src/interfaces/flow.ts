@@ -10,6 +10,7 @@ export const stepList = [
   "iterator",
   "failed",
   "success",
+  "pass",
 ] as const;
 
 export type StepType = typeof stepList[number];

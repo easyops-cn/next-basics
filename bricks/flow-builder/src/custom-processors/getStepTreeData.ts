@@ -40,6 +40,9 @@ function getIcon(type: StepType): MenuIcon {
       icon = "close-square";
       color = "var(--palette-red-6)";
       break;
+    case "pass":
+      icon = "rise";
+      color = "var(--palette-purple-6)";
   }
   return {
     lib: "antd",
