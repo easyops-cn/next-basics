@@ -15,7 +15,7 @@ import {
   agendaDataType,
   customHolidayType,
 } from "./AgendaCalendar";
-
+import { viewTypeEnum } from "./component/agendaCalendarContext";
 /**
  * @id calendar-bricks.agenda-calendar
  * @author bot
@@ -56,23 +56,40 @@ export class AgendaCalendarElement extends UpdatingElement {
   onDateSelect: EventEmitter<{ date: string; data: any }>;
 
   @event({ type: "calendar.onAgendaSelect" })
-  onAgendaSelect: EventEmitter<{ date: string; data: any }>;
+  onAgendaSelect: EventEmitter<{ data: any }>;
 
+  @event({ type: "calendar.onQuickSwitchDate" })
+  onQuickSwitchDate: EventEmitter<{
+    viewType: string;
+    type: string;
+    data: any;
+  }>;
+  // istanbul ignore next
   private _handleDateSelect = (date: string, data: any) => {
     this.onDateSelect.emit({ date, data });
   };
-
-  private _handleAgendaSelect = (date: string, data: any) => {
-    this.onAgendaSelect.emit({ date, data });
+  // istanbul ignore next
+  private _handleQuickSwitchDate = (
+    viewType: string,
+    type: string,
+    data: any
+  ) => {
+    this.onQuickSwitchDate.emit({ viewType, type, data });
+  };
+  // istanbul ignore next
+  private _handleAgendaSelect = (data: any) => {
+    this.onAgendaSelect.emit({ data });
   };
   private _calendarRef = createRef<any>();
 
   @method()
-  setViewType(type: "dayGridMonth" | "dayGridWeek"): void {
-    //日视图暂时不支持
+  setViewType(type: viewTypeEnum): void {
     this._calendarRef.current.getApi().changeView(type);
   }
-
+  @method()
+  gotoDate(date: string | number): void {
+    this._calendarRef.current.getApi().gotoDate(date);
+  }
   constructor() {
     super();
     const styleElement = document.createElement("style");
@@ -105,6 +122,7 @@ export class AgendaCalendarElement extends UpdatingElement {
             customHolidays={this.customHolidays}
             onAgendaSelect={this._handleAgendaSelect}
             onDateSelect={this._handleDateSelect}
+            onQuickSwitchDate={this._handleQuickSwitchDate}
             agendaData={this.agendaData}
             afterTitleBrick={this.afterTitleBrick}
             afterQuickSwitchBrick={this.afterQuickSwitchBrick}

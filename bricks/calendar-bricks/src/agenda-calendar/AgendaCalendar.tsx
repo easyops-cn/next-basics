@@ -10,11 +10,15 @@ import { useTranslation } from "react-i18next";
 import { Button, Tooltip } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { BrickAsComponent } from "@next-core/brick-kit";
-import FullCalendar from "@fullcalendar/react";
+import FullCalendar, { EventRenderRange } from "@fullcalendar/react";
 import { UseBrickConf } from "@next-core/brick-types";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
+import customDayViewPlugin from "./component/customDayPlugin";
+import {
+  customDayViewContext,
+  viewTypeEnum,
+} from "./component/agendaCalendarContext";
 const weekNameMap = {
   "0": "周日",
   "1": "周一",
@@ -46,7 +50,8 @@ export interface calendarProps {
   agendaData?: agendaDataType[];
   customHolidays?: customHolidayType[];
   onDateSelect(date: string, data: any): void;
-  onAgendaSelect(date: string, data: any): void;
+  onAgendaSelect(data: any): void;
+  onQuickSwitchDate(viewType: string, type: string, data: any): void;
   afterTitleBrick?: {
     useBrick: UseBrickConf;
     data?: any;
@@ -64,6 +69,10 @@ export function CalendarRender(props: calendarProps, ref: any) {
   const calendarApiRef = useRef<any>();
   const [holidayWidth, setHolidayWidth] = useState<number>(100);
   const [headerTitle, setHeaderTitle] = useState<string>();
+  const [viewType, setViewType] = useState<viewTypeEnum>(
+    viewTypeEnum.DAY_GRID_MONTH
+  );
+
   useImperativeHandle(ref, () => fullCalendarRef.current);
 
   useEffect(() => {
@@ -86,14 +95,28 @@ export function CalendarRender(props: calendarProps, ref: any) {
       resizer.disconnect();
     };
   }, []);
-
+  useEffect(() => {
+    if (calendarApiRef.current) {
+      const currentDate = calendarApiRef.current.getDate() as Date;
+      setHeaderTitle(
+        `${currentDate.getFullYear()}年${currentDate.getMonth() + 1}月${
+          viewType === viewTypeEnum.CUSTOM_DAY
+            ? currentDate.getDate() + "日"
+            : ""
+        }`
+      );
+    }
+  }, [viewType]);
   const eventSource = useMemo(() => {
     return props.agendaData?.map((i) => ({
       ...i,
       backgroundColor: i.backgroundColor || props.agendaColor,
-      allDay: "true",
     }));
   }, [props.agendaData]);
+
+  const handleCustomDayEventClick = (date: string, e: EventRenderRange) => {
+    props.onAgendaSelect(agendaData?.find((i) => i.id === e.def.publicId));
+  };
   const handleQuickSwitch = (type: string) => {
     if (type === "today") {
       calendarApiRef.current.today();
@@ -102,10 +125,12 @@ export function CalendarRender(props: calendarProps, ref: any) {
     } else {
       calendarApiRef.current.next();
     }
+    const currentDate = calendarApiRef.current.getDate() as Date;
+    props.onQuickSwitchDate(viewType, type, currentDate.toLocaleString());
     setHeaderTitle(
-      `${calendarApiRef.current.getDate().getFullYear()}年${
-        calendarApiRef.current.getDate().getMonth() + 1
-      }月`
+      `${currentDate.getFullYear()}年${currentDate.getMonth() + 1}月${
+        viewType === viewTypeEnum.CUSTOM_DAY ? currentDate.getDate() + "日" : ""
+      }`
     );
   };
 
@@ -158,105 +183,128 @@ export function CalendarRender(props: calendarProps, ref: any) {
           </div>
         </div>
       )}
-      <div ref={fullCalendarContainerRef}>
-        {
-          <FullCalendar
-            ref={fullCalendarRef}
-            events={eventSource as any}
-            initialView="dayGridMonth"
-            dayHeaderContent={(e) => {
-              return <div>{(weekNameMap as any)[e.dow]}</div>;
-            }}
-            plugins={[dayGridPlugin, interactionPlugin]}
-            // selectable={true}
-            initialDate={props.displayDate}
-            dayMaxEvents={true}
-            eventContent={(e) => {
-              return (
-                <div title={e.event.title} className="eventCell">
-                  {e.event.title}
-                </div>
-              );
-            }}
-            dayCellContent={(e) => {
-              const currentDate = e.date.getTime();
-              const showedHoliday = props.customHolidays?.filter((i: any) => {
-                const start = Date.parse(i.start);
-                const end = Date.parse(i.end);
-                if (start - currentDate >= ONE_DAY_MS) {
-                  return false;
-                } else if (end - currentDate <= 0) {
-                  return false;
-                } else {
-                  return true;
-                }
-              });
-              return (
-                <div
-                  style={{
-                    visibility: "hidden",
-                  }}
-                  className={"dayTopContainer"}
-                >
-                  <div style={{ float: "right", color: "rgb(51,51,51)" }}>
-                    {e.isToday ? (
-                      <span className="todaySpan">{e.date.getDate()}</span>
-                    ) : (
-                      e.date.getDate()
-                    )}
-                    日
+      <customDayViewContext.Provider
+        value={{
+          eventClick: handleCustomDayEventClick,
+          setViewType: (type: viewTypeEnum) => {
+            setViewType(type);
+          },
+        }}
+      >
+        <div
+          ref={fullCalendarContainerRef}
+          className={
+            viewType === viewTypeEnum.CUSTOM_DAY ? "customContainer" : ""
+          }
+        >
+          {
+            <FullCalendar
+              ref={fullCalendarRef}
+              events={eventSource as any}
+              initialView={viewTypeEnum.DAY_GRID_MONTH}
+              dayHeaderContent={(e) => {
+                return <div>{(weekNameMap as any)[e.dow]}</div>;
+              }}
+              plugins={[dayGridPlugin, interactionPlugin, customDayViewPlugin]}
+              // selectable={true}//控制月，周视图的日期是否可选。暂时不需要
+              initialDate={props.displayDate}
+              dayMaxEvents={true}
+              eventContent={(e) => {
+                return (
+                  <div
+                    title={e.event.title}
+                    className="eventCell"
+                    style={{ background: e.backgroundColor }}
+                  >
+                    {e.event.title}
                   </div>
-                  {!!showedHoliday?.length && (
-                    <div
-                      className="holidayContainer"
-                      style={{
-                        width: holidayWidth,
-                      }}
-                    >
-                      <Tooltip
-                        title={showedHoliday
-                          .map((i: any) => i.name?.trim())
-                          .join(" ")}
-                        placement="topLeft"
-                      >
-                        {showedHoliday
-                          .map((i: any) => i.name?.trim())
-                          .join(" ")}
-                      </Tooltip>
-                    </div>
-                  )}
-                </div>
-              );
-            }}
-            eventClick={
-              // istanbul ignore next
-              (e) => {
-                props.onAgendaSelect(
-                  e.view.calendar.getDate().toLocaleString(),
-                  agendaData?.find((i) => i.id === e.event.id)
                 );
-              }
-            }
-            dateClick={
-              // istanbul ignore next
-              (e) => {
-                const currentDaysAgenda = props.agendaData?.filter((i: any) => {
+              }}
+              dayCellContent={(e) => {
+                setViewType(e.view.type as viewTypeEnum);
+                const currentDate = e.date.getTime();
+                const showedHoliday = props.customHolidays?.filter((i: any) => {
                   const start = Date.parse(i.start);
                   const end = Date.parse(i.end);
-                  if (start - e.date.getTime() >= ONE_DAY_MS) {
+                  if (start - currentDate >= ONE_DAY_MS) {
                     return false;
-                  } else if (end - e.date.getTime() <= 0) {
+                  } else if (end - currentDate <= 0) {
                     return false;
                   } else {
                     return true;
                   }
                 });
-                props.onDateSelect(e.date.toLocaleString(), currentDaysAgenda);
+                return (
+                  <div
+                    style={{
+                      visibility: "hidden",
+                    }}
+                    className={"dayTopContainer"}
+                  >
+                    <div style={{ float: "right", color: "rgb(51,51,51)" }}>
+                      {e.isToday ? (
+                        <span className="todaySpan">{e.date.getDate()}</span>
+                      ) : (
+                        e.date.getDate()
+                      )}
+                      日
+                    </div>
+                    {!!showedHoliday?.length && (
+                      <div
+                        className="holidayContainer"
+                        style={{
+                          width: holidayWidth,
+                        }}
+                      >
+                        <Tooltip
+                          title={showedHoliday
+                            .map((i: any) => i.name?.trim())
+                            .join(" ")}
+                          placement="topLeft"
+                        >
+                          {showedHoliday
+                            .map((i: any) => i.name?.trim())
+                            .join(" ")}
+                        </Tooltip>
+                      </div>
+                    )}
+                  </div>
+                );
+              }}
+              eventClick={
+                // istanbul ignore next
+                (e) => {
+                  props.onAgendaSelect(
+                    agendaData?.find((i) => i.id === e.event.id)
+                  );
+                }
               }
-            }
-          ></FullCalendar>
-        }
-      </div>
+              dateClick={
+                // istanbul ignore next
+                (e) => {
+                  const currentDaysAgenda = props.agendaData?.filter(
+                    (i: any) => {
+                      const start = Date.parse(i.start);
+                      const end = Date.parse(i.end);
+                      if (start - e.date.getTime() >= ONE_DAY_MS) {
+                        return false;
+                      } else if (end - e.date.getTime() <= 0) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    }
+                  );
+                  props.onDateSelect(
+                    e.date.toLocaleString(),
+                    currentDaysAgenda
+                  );
+                }
+              }
+            ></FullCalendar>
+          }
+        </div>
+      </customDayViewContext.Provider>
     </>
   );
 }
