@@ -80,6 +80,104 @@ describe("packVarTemplateData", () => {
         },
       },
     ],
+    [
+      {
+        id: "instanceParams",
+        name: "instanceParams",
+        templateId: "instanceId",
+        params: {
+          query: [{ page: 1 }],
+          fields: {
+            name: true,
+          },
+          modelId: "HOST",
+        },
+        templateData: {
+          id: "instanceParams",
+          name: "instanceParams",
+          isStream: true,
+          read: {
+            dataSource: "list",
+            parameter: {
+              url: "/api/{{modelId}}/edit",
+              extra: {
+                query: "{{query}}",
+              },
+              fields: "{{fields}}",
+            },
+            transform: true,
+          },
+          write: {},
+        },
+      },
+      (str) => `\\{\\{\\s*${str}\\s*\\}\\}`,
+      {
+        id: "instanceParams",
+        isStream: true,
+        name: "instanceParams",
+        read: {
+          dataSource: "list",
+          iterator: undefined,
+          parameter: {
+            fields: { name: true },
+            extra: {
+              query: [{ page: 1 }],
+            },
+            url: "/api/HOST/edit",
+          },
+          transform: true,
+        },
+        write: {
+          dataSource: undefined,
+          iterator: undefined,
+          parameter: undefined,
+          transform: undefined,
+        },
+      },
+    ],
+    [
+      {
+        id: "pluginData",
+        name: "pluginData",
+        templateId: "pluginId",
+        params: {
+          parameter: {
+            instanceId: "abc",
+            fields: {
+              name: true,
+            },
+          },
+        },
+        templateData: {
+          id: "instanceParams",
+          name: "instanceParams",
+          isStream: true,
+          read: {
+            dataSource: "list",
+            parameter: "{{parameter}}",
+          },
+          write: {},
+        },
+      },
+      (str) => `\\{\\{\\s*${str}\\s*\\}\\}`,
+      {
+        id: "pluginData",
+        isStream: true,
+        name: "pluginData",
+        read: {
+          dataSource: "list",
+          iterator: undefined,
+          parameter: { fields: { name: true }, instanceId: "abc" },
+          transform: undefined,
+        },
+        write: {
+          dataSource: undefined,
+          iterator: undefined,
+          parameter: undefined,
+          transform: undefined,
+        },
+      },
+    ],
   ])("should work", (formData, placeholderFn, result) => {
     expect(packVarTemplateData(formData, placeholderFn)).toEqual(result);
   });
