@@ -9,6 +9,18 @@ window.ResizeObserver = jest.fn().mockImplementation(() => ({
 }));
 export const mockDayData = [
   {
+    id: "event133",
+    calendarId: "cal2",
+    title: "Weekly mee6578979579690ting",
+    start: "2022-10-09T12:00:00",
+    end: "2022-10-09T13:29:00",
+    backgroundColor: "yellow",
+    task: {
+      a: "1",
+      b: "2",
+    },
+  },
+  {
     id: "event1",
     calendarId: "cal2",
     title: "Weekly meeting",
@@ -93,6 +105,7 @@ describe("TestTest", () => {
     const calendaeRef = createRef<any>();
     const mockAgendaSelect = jest.fn();
     const mockDateSelect = jest.fn();
+    const mockOnQuickSwitchDate = jest.fn();
     const wrapper = mount(
       <AgendaCalendar
         onAgendaSelect={mockAgendaSelect}
@@ -100,6 +113,7 @@ describe("TestTest", () => {
         customHolidays={mockHolidayData}
         ref={calendaeRef}
         agendaData={mockDayData}
+        onQuickSwitchDate={mockOnQuickSwitchDate}
         afterTitleBrick={{
           useBrick: {
             brick: "span",
@@ -123,6 +137,12 @@ describe("TestTest", () => {
     buttons.at(1).simulate("click");
     expect(titleDiv.text()).toBe("2022年10月");
     wrapper.find(".eventCell").at(0).simulate("click");
+
+    calendaeRef.current.getApi().changeView("customDay");
+    calendaeRef.current.getApi().gotoDate(1665244800000);
+    wrapper.update();
+    wrapper.find(".customDayEventsDiv").at(0).simulate("click");
+
     wrapper.unmount();
   });
 });
