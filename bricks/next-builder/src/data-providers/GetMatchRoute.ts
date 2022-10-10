@@ -11,7 +11,7 @@ export function GetMatchRoute({
   previewUrl,
 }: GetMatchRouteParams): RouteConf {
   return routesList
-    .sort((a, b) => Number(b.exact) - Number(a.exact))
+    .sort((a, b) => Number(!!b.exact) - Number(!!a.exact))
     .find((route) => {
       return matchPath(previewUrl, {
         path: route.path,

@@ -35,6 +35,29 @@ describe("GetMatchRoute", () => {
           },
           {
             path: "/next/my-app/route-1",
+            exact: undefined,
+          },
+          {
+            path: "/next/my-app/route-1/page-1",
+            exact: true,
+          },
+        ] as RouteConf[],
+        previewUrl: "/next/my-app/route-1/page-1",
+      },
+      {
+        path: "/next/my-app/route-1/page-1",
+        exact: true,
+      },
+    ],
+    [
+      {
+        routesList: [
+          {
+            path: "/next/my-app/page-1",
+            exact: true,
+          },
+          {
+            path: "/next/my-app/route-1",
             exact: false,
           },
           {
