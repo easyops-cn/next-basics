@@ -195,25 +195,29 @@ export function WorkbenchComponentSelect({
         <div className={styles.componentSelect}>
           <Tabs centered size="small">
             {componentList &&
-              Object.entries(componentList).map(([k, v]) => (
-                <Tabs.TabPane tab={i18nTransform[k]} key={k}>
-                  <div className={styles.searchWrapper}>
-                    <Input
-                      placeholder={`Search for ${k}`}
-                      onChange={(e) => handleFilterChange(e, k)}
-                    ></Input>
-                  </div>
-                  <ComponentList
-                    key={k}
-                    componentType={k}
-                    componentList={v}
-                    q={filterValue[k]}
-                    storyList={storyList}
-                    isShowSuggest={isShowSuggest}
-                    onActionClick={onActionClick}
-                  />
-                </Tabs.TabPane>
-              ))}
+              // 组件库暂时不展示"片段"这个tab
+              // Object.entries(componentList).map(([k, v]) => (
+              Object.entries(componentList)
+                .filter(([k]) => k !== "snippet")
+                .map(([k, v]) => (
+                  <Tabs.TabPane tab={i18nTransform[k]} key={k}>
+                    <div className={styles.searchWrapper}>
+                      <Input
+                        placeholder={`Search for ${k}`}
+                        onChange={(e) => handleFilterChange(e, k)}
+                      ></Input>
+                    </div>
+                    <ComponentList
+                      key={k}
+                      componentType={k}
+                      componentList={v}
+                      q={filterValue[k]}
+                      storyList={storyList}
+                      isShowSuggest={isShowSuggest}
+                      onActionClick={onActionClick}
+                    />
+                  </Tabs.TabPane>
+                ))}
           </Tabs>
         </div>
       </WorkbenchTreeDndContext.Provider>
