@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.185.5...@next-bricks/next-builder@1.186.0) (2022-10-10)
+
+
+### Features
+
+* 隐藏组件库snippet tab ([91ce674](https://github.com/easyops-cn/next-basics/commit/91ce67447d9dc33dffb6b096376396f7f8f53117))
+
+
+
+
+
 ## [1.185.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.185.4...@next-bricks/next-builder@1.185.5) (2022-09-30)
 
 **Note:** Version bump only for package @next-bricks/next-builder
