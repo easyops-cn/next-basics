@@ -65,3 +65,4 @@ import "./shared/components/contract-auto-complete";
 // !Lazy: import "./workbench-brick-context-menu";
 // !Lazy: import "./workbench-data-tree";
 // !Lazy: import "./workbench-cache-action";
+import "./data-providers/GetMatchRoute";
