@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.187.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.186.0...@next-bricks/next-builder@1.187.0) (2022-10-10)
+
+
+### Features
+
+* get match-route provider ([725169a](https://github.com/easyops-cn/next-basics/commit/725169a814d9677e28e2632e76c077991ce15308))
+* update code ([192f8fc](https://github.com/easyops-cn/next-basics/commit/192f8fce6fff6d743d45f7bc4ead2e68374d940a))
+
+
+
+
+
 # [1.186.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.185.5...@next-bricks/next-builder@1.186.0) (2022-10-10)
 
 
