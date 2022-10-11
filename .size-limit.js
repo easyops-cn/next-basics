@@ -17,6 +17,13 @@ module.exports = sizeLimit({
     developers: "193 KB",
     forms: "605 KB",
   },
+  chunks: {
+    "*": "50 KB",
+    "next-builder": "65 KB",
+  },
+  workers: {
+    "*": "50 KB",
+  },
   templates: {
     "*": "5 KB",
   },
