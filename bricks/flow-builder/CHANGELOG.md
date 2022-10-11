@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.2...@next-bricks/flow-builder@1.21.3) (2022-10-11)
+
+
+### Bug Fixes
+
+* 修复 json 类型数据时，替换错误问题 ([ad381e7](https://github.com/easyops-cn/next-basics/commit/ad381e7e11073e75ad82108bfc94c8658250941e))
+
+
+
+
+
 ## [1.21.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.1...@next-bricks/flow-builder@1.21.2) (2022-10-09)
 
 
