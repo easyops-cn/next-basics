@@ -50,13 +50,13 @@ class CustomView extends React.Component {
           <div className="customDayContainer">
             <div className="customTimeZoneContainerDiv">
               {TIME_ZONE.map((i, index) => (
-                <span
-                  className="customTimeZoneSpan"
+                <div
+                  className="customTimeZoneDiv"
                   key={index}
                   style={index === 23 ? { borderRight: "1px solid" } : {}}
                 >
                   {i}
-                </span>
+                </div>
               ))}
             </div>
             <div className="customDayEventsContainerDiv">
