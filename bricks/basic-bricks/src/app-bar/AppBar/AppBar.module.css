@@ -3,9 +3,12 @@
   position: fixed;
   left: var(--menu-bar-width);
   right: 0;
-  height: var(--app-bar-height);
   background: var(--app-bar-bg);
   box-shadow: var(--app-bar-shadow);
+}
+
+.appBarContent {
+  height: var(--app-bar-height);
   display: flex;
   justify-content: space-between;
   align-items: center;

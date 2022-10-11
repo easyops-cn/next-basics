@@ -6,6 +6,7 @@ import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
 import { AppBar } from "./AppBar";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
+import { AppBarTips } from "../AppBarTips/AppBarTips";
 
 jest.mock("@next-sdk/user-service-sdk");
 jest.mock("@next-sdk/air-admin-service-sdk");
@@ -112,5 +113,24 @@ describe("AppBar", () => {
       await (global as any).flushPromises();
     });
     expect(CustomerApi_getExpiration).toHaveBeenCalled();
+  });
+
+  it("should render tipslist", async () => {
+    const wrapper = mount(<AppBar pageTitle="" breadcrumb={null} />);
+    window.dispatchEvent(
+      new CustomEvent("app.bar.tips", {
+        detail: [
+          {
+            text: "hello world",
+          },
+        ],
+      })
+    );
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    expect(wrapper.html()).toMatchInlineSnapshot(
+      `"<div class=\\"appBar\\" id=\\"app-bar\\"><div style=\\"width: 100%; line-height: 26px; padding: 6px 20px; background: rgb(241, 245, 197); overflow: hidden; text-overflow: ellipsis; line-clamp: 1;\\">hello world</div><div class=\\"appBarContent\\"><div class=\\"titleContainer\\"><div>LaunchpadButton</div><div class=\\"ant-divider ant-divider-vertical\\" style=\\"height: 24px; margin: 0px 16px; top: 0px;\\" role=\\"separator\\"></div><div>AppBarBreadcrumb</div></div><div class=\\"actionsContainer\\"><div>AppDocumentLink</div><div></div></div></div></div>"`
+    );
   });
 });

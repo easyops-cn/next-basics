@@ -3,7 +3,7 @@ import styles from "./SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
 import * as SideBarComponent from "./SidebarMenu";
-import { SidebarSubMenu } from "@next-core/brick-types";
+import { SidebarSubMenu, NavTip } from "@next-core/brick-types";
 import { ReactComponent as FixedSvg } from "../images/fixed.svg";
 import { ReactComponent as ToFixedSvg } from "../images/toFixed.svg";
 import classNames from "classnames";
@@ -47,6 +47,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const [showFirstUsedTooltip, setShowFirstUsedTooltip] = useState<boolean>(
     !storage.getItem(SIDE_BAR_HAS_BEEN_USED)
   );
+  const [tipList, setTipList] = useState<NavTip[]>([]);
 
   const [showContentShadow, setShowContentShadow] = useState<boolean>(true);
   const [sidebarContentHeight, setSidebarContentHeight] = useState<number>(0);
@@ -128,12 +129,36 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     }
   }, [contentContainerRef, sidebarContentHeight]);
 
+  const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
+    const list = e.detail ?? [];
+    const top = `calc(var(--app-bar-height) + ${list.length * 38}px)`;
+    const sideBarElement = document.getElementsByTagName(
+      "frame-bricks.side-bar"
+    );
+    sideBarElement.length &&
+      ((sideBarElement[0] as HTMLElement).style.top = top);
+    setTipList(list);
+  }) as EventListener;
+
+  React.useEffect(() => {
+    window.addEventListener("app.bar.tips", handleShowTips);
+    return () => {
+      window.removeEventListener("app.bar.tips", handleShowTips);
+    };
+  }, []);
+
   return (
     <div
       className={classNames(styles.sideBarContainer, {
         [styles.hovered]: expandedState === ExpandedState.Hovered,
         [styles.expanded]: expandedState === ExpandedState.Expanded,
       })}
+      style={{
+        top: `calc(var(--app-bar-height) + ${tipList.length * 38}px)`,
+        height: `calc(100vh - var(--app-bar-height) + 1px - ${
+          tipList.length * 38
+        }px)`,
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       data-testid="side-bar"

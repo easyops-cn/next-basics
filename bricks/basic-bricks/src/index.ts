@@ -47,3 +47,4 @@ import "./app-document-link";
 import "./flex-layout";
 import "./general-popup";
 import "./app-bar-logo";
+import "./app-bar-wrapper";
