@@ -86,13 +86,6 @@
   }
 }
 
-.sideBarContainer.hovered {
-  position: fixed !important;
-  top: calc(var(--app-bar-height) + 1px);
-  left: 0;
-  bottom: 0;
-}
-
 .sideBarContainer.expanded,
 .sideBarContainer.hovered {
   width: var(--side-bar-width);

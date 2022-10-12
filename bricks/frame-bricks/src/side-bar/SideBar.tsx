@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import styles from "./SideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { NS_FRAME_BRICKS, K } from "../i18n/constants";
@@ -132,11 +132,8 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
     const list = e.detail ?? [];
     const top = `calc(var(--app-bar-height) + ${list.length * 38}px)`;
-    const sideBarElement = document.getElementsByTagName(
-      "frame-bricks.side-bar"
-    );
-    sideBarElement.length &&
-      ((sideBarElement[0] as HTMLElement).style.top = top);
+
+    wrapperDOM.style.top = top;
     setTipList(list);
   }) as EventListener;
 
@@ -147,6 +144,12 @@ export function SideBar(props: SideBarProps): React.ReactElement {
     };
   }, []);
 
+  const sidebarHeight = useMemo(() => {
+    return `calc(100vh - var(--app-bar-height) + 1px - ${
+      tipList.length * 38
+    }px)`;
+  }, [tipList]);
+
   return (
     <div
       className={classNames(styles.sideBarContainer, {
@@ -154,10 +157,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
         [styles.expanded]: expandedState === ExpandedState.Expanded,
       })}
       style={{
-        top: `calc(var(--app-bar-height) + ${tipList.length * 38}px)`,
-        height: `calc(100vh - var(--app-bar-height) + 1px - ${
-          tipList.length * 38
-        }px)`,
+        height: sidebarHeight,
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

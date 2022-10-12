@@ -61,7 +61,9 @@ export function AppBar({
     const list = e.detail ?? [];
     const marginTop = `calc(var(--app-bar-height) + ${list.length * 38}px)`;
     const mainElement = document.getElementById("main-mount-point");
-    const iframeMainElement = document.getElementById("main-mount-point");
+    const iframeMainElement = document.getElementById(
+      "legacy-iframe-mount-point"
+    );
     mainElement && (mainElement.style.marginTop = marginTop);
     iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
     setTipList(list);
