@@ -1,6 +1,6 @@
 import React from "react";
 import { Divider } from "antd";
-import { BreadcrumbItemConf } from "@next-core/brick-types";
+import { BreadcrumbItemConf, NavTip } from "@next-core/brick-types";
 import { getAuth, getRuntime } from "@next-core/brick-kit";
 import { CustomerApi_getExpiration } from "@next-sdk/air-admin-service-sdk";
 import { LaunchpadButton } from "../LaunchpadButton/LaunchpadButton";
@@ -8,6 +8,7 @@ import { AppBarBreadcrumb } from "../AppBarBreadcrumb/AppBarBreadcrumb";
 import { AppDocumentLink } from "../AppDocumentLink/AppDocumentLink";
 import { AppSetting } from "../AppSetting/AppSetting";
 import { processLiscenseExpires } from "../License-notification/LicenseNotification";
+import { AppBarTips } from "../AppBarTips/AppBarTips";
 import styles from "./AppBar.module.css";
 
 interface AppBarProps {
@@ -23,6 +24,8 @@ export function AppBar({
   documentId,
   noCurrentApp,
 }: AppBarProps): React.ReactElement {
+  const [tipList, setTipList] = React.useState<NavTip[]>([]);
+
   const hideLaunchpadButton = React.useMemo(
     () => getRuntime().getFeatureFlags()["hide-launchpad-button"],
     []
@@ -54,24 +57,51 @@ export function AppBar({
     })();
   }, [username]);
 
+  const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
+    const list = e.detail ?? [];
+    const marginTop = `calc(var(--app-bar-height) + ${list.length * 38}px)`;
+    const mainElement = document.getElementById("main-mount-point");
+    const iframeMainElement = document.getElementById(
+      "legacy-iframe-mount-point"
+    );
+    mainElement && (mainElement.style.marginTop = marginTop);
+    iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
+    setTipList(list);
+  }) as EventListener;
+
+  React.useEffect(() => {
+    window.addEventListener("app.bar.tips", handleShowTips);
+    return () => {
+      window.removeEventListener("app.bar.tips", handleShowTips);
+    };
+  }, []);
+
   return (
     <div className={styles.appBar} id="app-bar">
-      <div className={styles.titleContainer}>
-        {!hideLaunchpadButton && (
-          <>
-            <LaunchpadButton />
-            <Divider
-              type="vertical"
-              style={{ height: 24, margin: "0 16px", top: 0 }}
-            />
-          </>
-        )}
+      {tipList.map((item: NavTip, index: number) => {
+        return <AppBarTips key={index} text={item.text} info={item.info} />;
+      })}
+      <div className={styles.appBarContent}>
+        <div className={styles.titleContainer}>
+          {!hideLaunchpadButton && (
+            <>
+              <LaunchpadButton />
+              <Divider
+                type="vertical"
+                style={{ height: 24, margin: "0 16px", top: 0 }}
+              />
+            </>
+          )}
 
-        <AppBarBreadcrumb breadcrumb={breadcrumb} noCurrentApp={noCurrentApp} />
-      </div>
-      <div className={styles.actionsContainer}>
-        <AppDocumentLink documentId={documentId} />
-        <AppSetting />
+          <AppBarBreadcrumb
+            breadcrumb={breadcrumb}
+            noCurrentApp={noCurrentApp}
+          />
+        </div>
+        <div className={styles.actionsContainer}>
+          <AppDocumentLink documentId={documentId} />
+          <AppSetting />
+        </div>
       </div>
     </div>
   );
