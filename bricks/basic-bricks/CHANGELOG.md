@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.200.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.200.0...@next-bricks/basic-bricks@1.200.1) (2022-10-12)
+
+
+### Bug Fixes
+
+* **general-modal:** When the component does not have a footer or a header , an error is reported ([7ba3e32](https://github.com/easyops-cn/next-basics/commit/7ba3e32f4ba7ce126d9b5c3c40acc47600a2667d))
+
+
+
+
+
 # [1.200.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.199.0...@next-bricks/basic-bricks@1.200.0) (2022-10-12)
 
 
