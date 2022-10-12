@@ -17,6 +17,7 @@ describe("packVarTemplateData", () => {
           instanceId: "abcbd",
           projectId: "ccd3",
           objectId: undefined,
+          if: "<%$if%>",
         },
         templateData: {
           id: "cmdbInstanceData",
@@ -24,6 +25,8 @@ describe("packVarTemplateData", () => {
           isStream: true,
           read: {
             dataSource: "list",
+            dataSourceType: "contract",
+            condition: "{{if}}",
             parameter: {
               instanceId: "{{instanceId}}",
               objectId: "{{objectId}}",
@@ -42,6 +45,8 @@ describe("packVarTemplateData", () => {
         name: "varData",
         read: {
           dataSource: "list",
+          condition: "<%$if%>",
+          dataSourceType: "contract",
           iterator: undefined,
           parameter: {
             instanceId: "abcbd",
@@ -52,7 +57,9 @@ describe("packVarTemplateData", () => {
           },
         },
         write: {
+          condition: undefined,
           dataSource: undefined,
+          dataSourceType: undefined,
           iterator: undefined,
           parameter: undefined,
           transform: undefined,

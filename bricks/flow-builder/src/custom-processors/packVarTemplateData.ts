@@ -20,6 +20,8 @@ interface Template {
 
 interface Operate {
   dataSource?: string;
+  dataSourceType?: string;
+  condition?: string;
   parameter?: any;
   iterator?: any;
   transform?: any;
@@ -86,11 +88,15 @@ export function packVarTemplateData(
   const processFields = (data: Operate = {}): Operate => {
     return {
       dataSource: data.dataSource,
-      ...["parameter", "iterator", "transform"].reduce((obj: Operate, key) => {
-        const value = data[key as keyof Operate];
-        obj[key as keyof Operate] = replaceContent(value);
-        return obj;
-      }, {}),
+      dataSourceType: data.dataSourceType,
+      ...["parameter", "iterator", "transform", "condition"].reduce(
+        (obj: Operate, key) => {
+          const value = data[key as keyof Operate];
+          obj[key as keyof Operate] = replaceContent(value);
+          return obj;
+        },
+        {}
+      ),
     };
   };
 
