@@ -79,11 +79,15 @@ export function GeneralModal(props: GeneralModalProps): React.ReactElement {
         }
         setBodyHeightHandlerRef.current = () => {
           setTimeout(() => {
+            const headerHeight =
+                modalHeaderRef.current?.getBoundingClientRect().height || 0,
+              footerHeight =
+                modalFooterRef.current?.getBoundingClientRect().height || 0;
             setBodyHeight(
               window.innerHeight -
                 fullscreenMargin * 2 -
-                modalHeaderRef.current.getBoundingClientRect().height -
-                modalFooterRef.current.getBoundingClientRect().height
+                headerHeight -
+                footerHeight
             );
           });
         };
