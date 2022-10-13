@@ -7,28 +7,14 @@ export function AppBarWrapper({
   displayCenter = false,
 }): React.ReactElement {
   const [tipList, setTipList] = React.useState<NavTip[]>([]);
+  const [appbarHeight, setAppbarHeight] = React.useState<string>(
+    `var(--app-bar-height)`
+  );
 
   const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
     const list = e.detail ?? [];
-    const marginTop = `${list.length * 38}px`;
-    const isUseHomepageBaseModule =
-      document.getElementsByTagName("base-layout.tpl-homepage-base-module")
-        .length > 0 ||
-      document.getElementsByTagName("base-layout.tpl-homepage-base-module-cmdb")
-        .length > 0;
-    if (isUseHomepageBaseModule) {
-      const navElement = document.getElementsByTagName(
-        "base-layout.tpl-navigation-bar-widget"
-      );
-      navElement.length &&
-        ((navElement[0] as HTMLElement).style.marginTop = marginTop);
-    } else {
-      const view = document.getElementsByTagName(
-        "base-layout.tpl-micro-view-with-breadcrumb"
-      )?.[0];
-      view && ((view as HTMLElement).style.marginTop = marginTop);
-    }
     setTipList(list);
+    setAppbarHeight(`calc(var(--app-bar-height) + ${list.length * 38}px)`);
   }) as EventListener;
 
   React.useEffect(() => {
@@ -37,10 +23,6 @@ export function AppBarWrapper({
       window.removeEventListener("app.bar.tips", handleShowTips);
     };
   }, []);
-
-  const appbarHeight = React.useMemo(() => {
-    return `calc(var(--app-bar-height) + ${tipList.length * 38}px)`;
-  }, [tipList]);
 
   return (
     <div
