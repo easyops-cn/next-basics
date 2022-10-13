@@ -21,7 +21,7 @@ describe("getStepTreeData", () => {
           id: "step1",
           type: "switch",
           name: "step1",
-          next: "step5",
+          next: "step3",
           children: ["branch1", "branch2"],
           config: {
             startAt: "branch1",
@@ -50,9 +50,10 @@ describe("getStepTreeData", () => {
         },
         {
           id: "step3",
-          type: "task",
+          type: "choice",
           name: "step3",
           next: "step5",
+          pre: "step1",
         },
         {
           id: "step5",
@@ -124,7 +125,7 @@ describe("getStepTreeData", () => {
             config: { startAt: "branch1" },
             id: "step1",
             name: "step1",
-            next: "step5",
+            next: "step3",
             type: "switch",
           },
           icon: {
@@ -137,6 +138,25 @@ describe("getStepTreeData", () => {
           id: "step1",
           key: "step1",
           name: "step1",
+        },
+        {
+          data: {
+            id: "step3",
+            name: "step3",
+            next: "step5",
+            pre: "step1",
+            type: "choice",
+          },
+          icon: {
+            color: "var(--palette-amber-6)",
+            icon: "control",
+            lib: "antd",
+            theme: "outlined",
+          },
+          iconTooltip: "choice",
+          id: "step3",
+          key: "step3",
+          name: "step3",
         },
         {
           data: {

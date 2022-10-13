@@ -28,6 +28,10 @@ function getIcon(type: StepType): MenuIcon {
       icon = "interaction";
       color = "var(--palette-blue-6)";
       break;
+    case "choice":
+      icon = "control";
+      color = "var(--palette-amber-6)";
+      break;
     case "parallel":
       icon = "apartment";
       color = "var(--palette-teal-6)";
