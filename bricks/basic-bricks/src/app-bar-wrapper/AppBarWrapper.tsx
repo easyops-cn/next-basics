@@ -38,27 +38,38 @@ export function AppBarWrapper({
     };
   }, []);
 
+  const appbarHeight = React.useMemo(() => {
+    return `calc(var(--app-bar-height) + ${tipList.length * 38}px)`;
+  }, [tipList]);
+
   return (
     <div
-      className="app-bar"
+      className="app-bar-container"
       style={{
-        position: isFixed ? "fixed" : "absolute",
+        height: appbarHeight,
       }}
     >
-      {tipList.map((item: NavTip, index: number) => {
-        return <AppBarTips key={index} text={item.text} info={item.info} />;
-      })}
       <div
-        className="app-bar-content"
+        className="app-bar"
         style={{
-          justifyContent: displayCenter ? "space-around" : "space-between",
+          position: isFixed ? "fixed" : "absolute",
         }}
       >
-        <div className="leftContainer">
-          <slot name="leftContainer"></slot>
-        </div>
-        <div className="rightContainer">
-          <slot name="rightContainer"></slot>
+        {tipList.map((item: NavTip, index: number) => {
+          return <AppBarTips key={index} text={item.text} info={item.info} />;
+        })}
+        <div
+          className="app-bar-content"
+          style={{
+            justifyContent: displayCenter ? "space-around" : "space-between",
+          }}
+        >
+          <div className="leftContainer">
+            <slot name="leftContainer"></slot>
+          </div>
+          <div className="rightContainer">
+            <slot name="rightContainer"></slot>
+          </div>
         </div>
       </div>
     </div>

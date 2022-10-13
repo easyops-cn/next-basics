@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrickWrapper, UpdatingElement } from "@next-core/brick-kit";
+import { BrickWrapper, UpdatingElement, property } from "@next-core/brick-kit";
 import { AppBarWrapper } from "./AppBarWrapper";
 import styles from "./AppBarWrapper.shadow.css";
 
@@ -14,6 +14,16 @@ import styles from "./AppBarWrapper.shadow.css";
  */
 export class AppBarWrapperElement extends UpdatingElement {
   private _shadowRoot: ShadowRoot;
+
+  @property({
+    type: Boolean,
+  })
+  isFixed: boolean;
+
+  @property({
+    type: Boolean,
+  })
+  displayCenter: boolean;
 
   constructor() {
     super();
@@ -38,7 +48,10 @@ export class AppBarWrapperElement extends UpdatingElement {
         <>
           <style>{styles}</style>
           <BrickWrapper>
-            <AppBarWrapper />
+            <AppBarWrapper
+              isFixed={this.isFixed}
+              displayCenter={this.displayCenter}
+            />
           </BrickWrapper>
         </>,
         this._shadowRoot
