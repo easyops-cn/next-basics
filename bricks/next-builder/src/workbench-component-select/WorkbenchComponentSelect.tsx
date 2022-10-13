@@ -319,10 +319,19 @@ function ComponentList({
     [initGroup, storyList, config.brickLibrarySort]
   );
 
+  const handleSetWrapperTop = (): void => {
+    if (refWrapper.current) {
+      const { top } = refWrapper.current.getBoundingClientRect();
+      refWrapper.current.style.height = `calc(100vh - ${top || 280}px)`;
+      refWrapper.current.style.overflow = "auto";
+    }
+  };
+
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       const { width } = refWrapper.current.getBoundingClientRect();
       setColumnNumber(Math.round(width / 140));
+      handleSetWrapperTop();
     });
     resizeObserver.observe(refWrapper.current);
     return () => {
@@ -355,11 +364,7 @@ function ComponentList({
   }, [suggestList, componentList, q, getRenderData]);
 
   useEffect(() => {
-    if (refWrapper.current) {
-      const { top } = refWrapper.current.getBoundingClientRect();
-      refWrapper.current.style.height = `calc(100vh - ${top || 280}px)`;
-      refWrapper.current.style.overflow = "auto";
-    }
+    handleSetWrapperTop();
   }, [group, list]);
 
   const handlePanelChange = (keys: string[]): void => {

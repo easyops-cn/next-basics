@@ -19,9 +19,10 @@ export function AppBarTips({
         lineHeight: "26px",
         padding: "6px 20px",
         background: "#f1f5c5",
+        color: "#000",
         overflow: "hidden",
         textOverflow: "ellipsis",
-        lineClamp: 1,
+        whiteSpace: "nowrap",
       }}
     >
       {text}

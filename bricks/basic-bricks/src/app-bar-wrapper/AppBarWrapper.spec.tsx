@@ -9,7 +9,7 @@ describe("AppBarWrapper", () => {
       <AppBarWrapper isFixed={true} displayCenter={true} />
     );
     expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<div class=\\"app-bar\\" style=\\"position: fixed;\\"><div class=\\"app-bar-content\\" style=\\"justify-content: space-around;\\"><div class=\\"leftContainer\\"><slot name=\\"leftContainer\\"></slot></div><div class=\\"rightContainer\\"><slot name=\\"rightContainer\\"></slot></div></div></div>"`
+      `"<div class=\\"app-bar-container\\"><div class=\\"app-bar\\" style=\\"position: fixed;\\"><div class=\\"app-bar-content\\" style=\\"justify-content: space-around;\\"><div class=\\"leftContainer\\"><slot name=\\"leftContainer\\"></slot></div><div class=\\"rightContainer\\"><slot name=\\"rightContainer\\"></slot></div></div></div></div>"`
     );
   });
 });
