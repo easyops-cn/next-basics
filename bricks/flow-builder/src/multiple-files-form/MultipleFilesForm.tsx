@@ -2,6 +2,7 @@ import React, { useImperativeHandle, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../i18n/constants";
 import { Form, Upload, Button, FormInstance } from "antd";
+import { icon } from "@next-core/brick-kit";
 import { UploadOutlined } from "@ant-design/icons";
 import { UploadFile, UploadChangeParam } from "antd/es/upload/interface";
 import { isNil } from "lodash";

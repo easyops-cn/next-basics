@@ -1,4 +1,5 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
+import { getAuth } from "@next-core/brick-kit";
 import { CloudUploadOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import { UploadChangeParam } from "antd/lib/upload";
@@ -73,6 +74,8 @@ export function UploadFiles(props: UploadFilesProps): React.ReactElement {
       return false;
     }
   };
+
+  const csrfToken = useMemo(() => getAuth().csrfToken, []);
 
   const handleOnChange = (info: UploadChangeParam): void => {
     const { status } = info.file;
@@ -165,6 +168,7 @@ export function UploadFiles(props: UploadFilesProps): React.ReactElement {
           multiple={!!multiple}
           beforeUpload={handleBeforeUpload}
           onChange={handleOnChange}
+          {...(csrfToken ? { headers: { "X-CSRF-Token": csrfToken } } : {})}
           {...restProps}
         >
           <p className="ant-upload-drag-icon">

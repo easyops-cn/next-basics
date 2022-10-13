@@ -28,10 +28,14 @@ const url = `api/gateway/object_store.object_store.PutObject/api/v1/objectStore/
 describe("UploadFilesV2", () => {
   it("should work", async () => {
     const onChange = jest.fn();
+    jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({ csrfToken: "abcde" });
     const wrapper = mount(
       <UploadFilesV2 url={url} value={fileList} onChange={onChange} />
     );
     await Promise.resolve();
+    expect(wrapper.find(Upload).prop("headers")).toEqual({
+      "X-CSRF-Token": "abcde",
+    });
     expect(wrapper.find(".ant-upload-list-item").length).toBe(1);
     wrapper.find(Upload).invoke("onChange")({
       file: {

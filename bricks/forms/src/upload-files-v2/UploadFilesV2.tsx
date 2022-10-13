@@ -1,6 +1,6 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useMemo } from "react";
 import { uniqueId, map, findIndex, some, isEqual } from "lodash";
-import { useCurrentTheme } from "@next-core/brick-kit";
+import { getAuth, useCurrentTheme } from "@next-core/brick-kit";
 import update from "immutability-helper";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -260,6 +260,8 @@ export function RealUploadFile(
     props.onRemove?.(e);
   };
 
+  const csrfToken = useMemo(() => getAuth().csrfToken, []);
+
   const uploadProps = {
     className: classNames({
       [styles.uploadContainerDisplayNone]:
@@ -273,6 +275,7 @@ export function RealUploadFile(
     data: props.data,
     name: props.uploadName,
     action: props.url,
+    ...(csrfToken ? { headers: { "X-CSRF-Token": csrfToken } } : {}),
     accept: props.accept,
     listType: "text",
     fileList,
