@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.201.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.200.3...@next-bricks/basic-bricks@1.201.0) (2022-10-13)
+
+
+### Bug Fixes
+
+* **basic-bricks:** fix anchor没传anchorList时报错问题 ([600dd09](https://github.com/easyops-cn/next-basics/commit/600dd09cbed15a51c52192095504545d47eb3826))
+
+
+### Features
+
+* **basic-bricks:** getNewUIStatus适用模板里增加两个 ([d2cd542](https://github.com/easyops-cn/next-basics/commit/d2cd5429c0ecb5356d715ae141b5fd2a604152e7))
+
+
+
+
+
 ## [1.200.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.200.2...@next-bricks/basic-bricks@1.200.3) (2022-10-13)
 
 
