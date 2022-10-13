@@ -61,7 +61,7 @@ export function GeneralAnchor(props: GeneralAnchorProps): React.ReactElement {
     const sharpMatcherRegx = /#([\S ]+)$/;
     const initHash =
       location.hash !== ""
-        ? props?.anchorList.find((item) => item.href.includes(location.hash))
+        ? props?.anchorList?.find((item) => item.href.includes(location.hash))
             ?.href
         : "";
     if (initHash) {

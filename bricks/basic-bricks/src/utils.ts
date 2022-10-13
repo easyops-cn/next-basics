@@ -9,7 +9,6 @@ export function getNewUIStatus(isSetPageTitleStyle?: boolean): boolean {
     "base-layout.tpl-base-page-module",
     "base-layout.tpl-base-page-module-cmdb",
     "base-layout.tpl-homepage-base-module",
-    "base-layout.tpl-base-page-module-cmdb",
     "base-layout.tpl-homepage-base-module-cmdb",
   ];
   if (
