@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.187.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.187.1...@next-bricks/next-builder@1.187.2) (2022-10-13)
+
+
+### Bug Fixes
+
+* fix app-bar-tips style ([4d95984](https://github.com/easyops-cn/next-basics/commit/4d95984d6eb132d166f44b2046cd9ea9e0505e3b))
+
+
+
+
+
 ## [1.187.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.187.0...@next-bricks/next-builder@1.187.1) (2022-10-12)
 
 **Note:** Version bump only for package @next-bricks/next-builder
