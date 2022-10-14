@@ -32,6 +32,9 @@ describe("getStepTreeData", () => {
           name: "branch1",
           type: "branch",
           children: ["step2"],
+          config: {
+            startAt: "step2",
+          },
           parent: "step1",
         },
         {
@@ -40,6 +43,9 @@ describe("getStepTreeData", () => {
           type: "branch",
           children: ["step3"],
           parent: "step1",
+          config: {
+            startAt: "step3",
+          },
         },
         {
           id: "step2",
@@ -86,8 +92,8 @@ describe("getStepTreeData", () => {
                     end: true,
                     id: "step2",
                     name: "step2",
-                    type: "task",
                     parent: "branch1",
+                    type: "task",
                   },
                   icon: {
                     color: "var(--palette-cyan-6)",
@@ -103,6 +109,7 @@ describe("getStepTreeData", () => {
               ],
               data: {
                 children: ["step2"],
+                config: { startAt: "step2" },
                 id: "branch1",
                 name: "branch1",
                 parent: "step1",
@@ -118,6 +125,66 @@ describe("getStepTreeData", () => {
               id: "branch1",
               key: "branch1",
               name: "branch1",
+            },
+            {
+              children: [
+                {
+                  data: {
+                    id: "step3",
+                    name: "step3",
+                    next: "step5",
+                    pre: "step1",
+                    type: "choice",
+                  },
+                  icon: {
+                    color: "var(--palette-amber-6)",
+                    icon: "control",
+                    lib: "antd",
+                    theme: "outlined",
+                  },
+                  iconTooltip: "choice",
+                  id: "step3",
+                  key: "step3",
+                  name: "step3",
+                },
+                {
+                  data: {
+                    end: true,
+                    id: "step5",
+                    name: "step5",
+                    pre: "step3",
+                    type: "task",
+                  },
+                  icon: {
+                    color: "var(--palette-cyan-6)",
+                    icon: "forward",
+                    lib: "antd",
+                    theme: "outlined",
+                  },
+                  iconTooltip: "task",
+                  id: "step5",
+                  key: "step5",
+                  name: "step5",
+                },
+              ],
+              data: {
+                children: ["step3"],
+                config: { startAt: "step3" },
+                id: "branch2",
+                name: "branch2",
+                parent: "step1",
+                type: "branch",
+              },
+              icon: {
+                color: "var(--palette-yellow-6)",
+                icon: "node-expand",
+                lib: "antd",
+                theme: "outlined",
+              },
+              iconTooltip: "branch",
+              id: "branch2",
+              key: "branch2",
+              name: "branch2",
             },
           ],
           data: {
@@ -163,8 +230,8 @@ describe("getStepTreeData", () => {
             end: true,
             id: "step5",
             name: "step5",
-            type: "task",
             pre: "step3",
+            type: "task",
           },
           icon: {
             color: "var(--palette-cyan-6)",
@@ -181,5 +248,36 @@ describe("getStepTreeData", () => {
     ],
   ])("should work", (rootId, data, result) => {
     expect(getStepTreeData(rootId, data)).toEqual(result);
+  });
+
+  it("should console error msg", () => {
+    const spyOnConsoleError = jest.spyOn(console, "error");
+    getStepTreeData("step1", [
+      {
+        id: "step1",
+        name: "step1",
+        type: "switch",
+        children: ["branch1", "step2"],
+        config: {
+          startAt: "branch1",
+        },
+      },
+      {
+        id: "branch1",
+        name: "branch1",
+        type: "branch",
+        parent: "step1",
+      },
+      {
+        id: "step2",
+        name: "step2",
+        type: "task",
+        parent: "step2",
+      },
+    ]);
+
+    expect(spyOnConsoleError).toBeCalledWith(
+      "The children of switch and parallel can only be `branch` nodes, but current node type is `task`"
+    );
   });
 });
