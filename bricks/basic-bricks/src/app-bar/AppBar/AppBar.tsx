@@ -10,6 +10,8 @@ import { AppSetting } from "../AppSetting/AppSetting";
 import { processLiscenseExpires } from "../License-notification/LicenseNotification";
 import { AppBarTips } from "../AppBarTips/AppBarTips";
 import styles from "./AppBar.module.css";
+import { JsonStorage } from "@next-core/brick-utils";
+import moment from "moment";
 
 interface AppBarProps {
   pageTitle: string;
@@ -25,6 +27,7 @@ export function AppBar({
   noCurrentApp,
 }: AppBarProps): React.ReactElement {
   const [tipList, setTipList] = React.useState<NavTip[]>([]);
+  const storage = new JsonStorage(localStorage);
 
   const hideLaunchpadButton = React.useMemo(
     () => getRuntime().getFeatureFlags()["hide-launchpad-button"],
@@ -58,16 +61,20 @@ export function AppBar({
   }, [username]);
 
   const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
-    const list = e.detail ?? [];
-    const marginTop = `calc(var(--app-bar-height) + ${list.length * 38}px)`;
-    const mainElement = document.getElementById("main-mount-point");
-    const iframeMainElement = document.getElementById(
-      "legacy-iframe-mount-point"
-    );
-    mainElement && (mainElement.style.marginTop = marginTop);
-    iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
+    // 可关闭的tip，用户关闭后过一天才会重新显示
+    const list = (e.detail ?? []).filter((item) => {
+      const isTipClosing =
+        item.closable &&
+        storage.getItem(item.tipKey) &&
+        moment().unix() <= storage.getItem(item.tipKey);
+      return !isTipClosing;
+    });
     setTipList(list);
   }) as EventListener;
+
+  const handleCloseTips = (targetKey: string) => {
+    setTipList(tipList.filter((item) => item.tipKey !== targetKey));
+  };
 
   React.useEffect(() => {
     window.addEventListener("app.bar.tips", handleShowTips);
@@ -76,10 +83,31 @@ export function AppBar({
     };
   }, []);
 
+  React.useEffect(() => {
+    const marginTop = `calc(var(--app-bar-height) + ${tipList.length * 38}px)`;
+    const mainElement = document.getElementById("main-mount-point");
+    const iframeMainElement = document.getElementById(
+      "legacy-iframe-mount-point"
+    );
+    mainElement && (mainElement.style.marginTop = marginTop);
+    iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
+  }, [tipList]);
+
   return (
     <div className={styles.appBar} id="app-bar">
-      {tipList.map((item: NavTip, index: number) => {
-        return <AppBarTips key={index} text={item.text} info={item.info} />;
+      {tipList.map((item: NavTip) => {
+        return (
+          <AppBarTips
+            key={item.tipKey}
+            tipKey={item.tipKey}
+            text={item.text}
+            info={item.info}
+            isCenter={item.isCenter}
+            backgroundColor={item.backgroundColor}
+            closable={item.closable}
+            onClose={handleCloseTips}
+          />
+        );
       })}
       <div className={styles.appBarContent}>
         <div className={styles.titleContainer}>

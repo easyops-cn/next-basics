@@ -1,6 +1,8 @@
 import React from "react";
 import { NavTip } from "@next-core/brick-types";
 import { AppBarTips } from "../app-bar/AppBarTips/AppBarTips";
+import { JsonStorage } from "@next-core/brick-utils";
+import moment from "moment";
 
 export function AppBarWrapper({
   isFixed = true,
@@ -11,11 +13,28 @@ export function AppBarWrapper({
     `var(--app-bar-height)`
   );
 
+  const storage = new JsonStorage(localStorage);
+
   const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
     const list = e.detail ?? [];
-    setTipList(list);
-    setAppbarHeight(`calc(var(--app-bar-height) + ${list.length * 38}px)`);
+    // 可关闭的tip，用户关闭后过一天才会重新显示
+    const res = list.filter((item) => {
+      const isTipClosing =
+        item.closable &&
+        storage.getItem(item.tipKey) &&
+        moment().unix() <= storage.getItem(item.tipKey);
+      return !isTipClosing;
+    });
+    setTipList(res);
   }) as EventListener;
+
+  const handleCloseTips = (targetKey: string) => {
+    setTipList(tipList.filter((item) => item.tipKey !== targetKey));
+  };
+
+  React.useEffect(() => {
+    setAppbarHeight(`calc(var(--app-bar-height) + ${tipList.length * 38}px)`);
+  }, [tipList]);
 
   React.useEffect(() => {
     window.addEventListener("app.bar.tips", handleShowTips);
@@ -37,8 +56,19 @@ export function AppBarWrapper({
           position: isFixed ? "fixed" : "absolute",
         }}
       >
-        {tipList.map((item: NavTip, index: number) => {
-          return <AppBarTips key={index} text={item.text} info={item.info} />;
+        {tipList.map((item: NavTip) => {
+          return (
+            <AppBarTips
+              key={item.tipKey}
+              tipKey={item.tipKey}
+              text={item.text}
+              info={item.info}
+              isCenter={item.isCenter}
+              backgroundColor={item.backgroundColor}
+              closable={item.closable}
+              onClose={handleCloseTips}
+            />
+          );
         })}
         <div
           className="app-bar-content"
