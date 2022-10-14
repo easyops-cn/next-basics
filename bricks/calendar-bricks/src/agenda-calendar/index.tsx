@@ -43,6 +43,15 @@ export class AgendaCalendarElement extends UpdatingElement {
   @property({ attribute: false })
   customHolidays: customHolidayType[];
 
+  @property({ attribute: false })
+  firstDay: number;
+
+  @property({ attribute: false })
+  agendaCollapsed = false;
+
+  @property({ attribute: false })
+  showEventCount = true;
+
   afterTitleBrick?: {
     useBrick: UseBrickConf;
     data: unknown;
@@ -128,6 +137,9 @@ export class AgendaCalendarElement extends UpdatingElement {
             afterQuickSwitchBrick={this.afterQuickSwitchBrick}
             ref={this._calendarRef}
             displayDate={this.displayDate}
+            firstDay={this.firstDay}
+            agendaCollapsed={this.agendaCollapsed}
+            showEventCount={this.showEventCount}
           />
         </BrickWrapper>,
         this

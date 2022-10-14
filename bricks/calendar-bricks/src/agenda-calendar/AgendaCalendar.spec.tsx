@@ -113,6 +113,7 @@ describe("TestTest", () => {
         customHolidays={mockHolidayData}
         ref={calendaeRef}
         agendaData={mockDayData}
+        showEventCount={true}
         onQuickSwitchDate={mockOnQuickSwitchDate}
         afterTitleBrick={{
           useBrick: {
