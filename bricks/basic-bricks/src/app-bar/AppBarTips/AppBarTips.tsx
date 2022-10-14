@@ -42,7 +42,7 @@ export function AppBarTips({
         lineHeight: "26px",
         padding: "6px 20px",
         backgroundColor: backgroundColor,
-        color: "var(--color-strong-text)",
+        color: "var(--antd-text-color)",
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
@@ -73,6 +73,7 @@ export function AppBarTips({
         >
           <GeneralIcon
             icon={{ lib: "antd", icon: "close", theme: "outlined" }}
+            style={{ display: "flex", alignItems: "center", height: "100%" }}
           />
         </div>
       ) : null}
