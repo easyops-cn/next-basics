@@ -23,7 +23,7 @@ import {
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
-import defaultBrickIconSvg from "../images/defaultBrickIcon.svg";
+import { BuildFilled } from "@ant-design/icons";
 import { debounce, compact, isEmpty } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
@@ -601,7 +601,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
         />
       );
     }
-    return <GeneralIcon icon={{ imgSrc: defaultBrickIconSvg }} />;
+    return <BuildFilled />;
   };
 
   const handleActionClick = (
