@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.265.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.265.4...@next-bricks/presentational-bricks@1.265.5) (2022-10-14)
+
+
+### Bug Fixes
+
+* upload file with csrf token ([5890b5b](https://github.com/easyops-cn/next-basics/commit/5890b5b747d87a0c3dfeca90caa04c05eab1fc4e))
+
+
+
+
+
 ## [1.265.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.265.3...@next-bricks/presentational-bricks@1.265.4) (2022-09-23)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
