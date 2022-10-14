@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.202.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.201.0...@next-bricks/basic-bricks@1.202.0) (2022-10-14)
+
+
+### Features
+
+* support license expire tip ([#1667](https://github.com/easyops-cn/next-basics/issues/1667)) ([b7b0d8f](https://github.com/easyops-cn/next-basics/commit/b7b0d8fab472961550e5f822f47cd87881aeb6ad))
+
+
+
+
+
 # [1.201.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.200.3...@next-bricks/basic-bricks@1.201.0) (2022-10-13)
 
 
