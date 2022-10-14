@@ -23,7 +23,7 @@ import {
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
-import { BuildFilled } from "@ant-design/icons";
+import { SettingFilled } from "@ant-design/icons";
 import { debounce, compact, isEmpty } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
@@ -577,31 +577,39 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
   const getIcon = (data: Partial<BrickOptionItem>): React.ReactElement => {
     if (data.icon) {
       return (
-        <GeneralIcon
-          icon={data.icon}
-          style={{
-            fontSize: 20,
-          }}
-        />
+        <div className={styles.icon}>
+          <GeneralIcon
+            icon={data.icon}
+            style={{
+              fontSize: 20,
+            }}
+          />
+        </div>
       );
     }
     if (data.thumbnail) {
       return (
-        <img
-          style={{
-            width: "auto",
-            height: "100%",
-          }}
-          src={
-            // Prepend public_root if the thumbnail is not an absolute url.
-            /^(?:https?|data):|^\//.test(data.thumbnail)
-              ? data.thumbnail
-              : `${window.PUBLIC_ROOT ?? ""}${data.thumbnail}`
-          }
-        />
+        <div className={styles.icon}>
+          <img
+            style={{
+              width: "auto",
+              height: "100%",
+            }}
+            src={
+              // Prepend public_root if the thumbnail is not an absolute url.
+              /^(?:https?|data):|^\//.test(data.thumbnail)
+                ? data.thumbnail
+                : `${window.PUBLIC_ROOT ?? ""}${data.thumbnail}`
+            }
+          />
+        </div>
       );
     }
-    return <BuildFilled />;
+    return (
+      <div className={styles.defaultIcon}>
+        <SettingFilled />
+      </div>
+    );
   };
 
   const handleActionClick = (
@@ -628,7 +636,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
       onDragStart={handleDragStart}
       onDragEnd={componentData?.onDragEnd}
     >
-      <div className={styles.icon}>{getIcon(componentData)}</div>
+      {getIcon(componentData)}
       <div className={styles.name}>{componentData.title}</div>
     </div>
   );

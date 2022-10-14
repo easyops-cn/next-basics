@@ -42,8 +42,22 @@
   }
 }
 
-.componentItem:hover .icon {
+.componentItem:hover .icon,
+.componentItem:hover .defaultIcon {
   transform: scale(1.2);
+}
+
+.defaultIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  width: 100%;
+  font-size: 37px;
+  background: rgb(255, 255, 255);
+  color: rgb(100, 120, 182);
+  border-radius: 6px;
+  transition: all 0.3s ease 0s;
 }
 
 .name {
