@@ -19,6 +19,7 @@ import {
   customDayViewContext,
   viewTypeEnum,
 } from "./component/agendaCalendarContext";
+import moment from "moment";
 const weekNameMap = {
   "0": "周日",
   "1": "周一",
@@ -49,6 +50,9 @@ export interface calendarProps {
   agendaColor?: string;
   agendaData?: agendaDataType[];
   customHolidays?: customHolidayType[];
+  firstDay?: number;
+  agendaCollapsed?: boolean;
+  showEventCount?: boolean;
   onDateSelect(date: string, data: any): void;
   onAgendaSelect(data: any): void;
   onQuickSwitchDate(viewType: string, type: string, data: any): void;
@@ -200,15 +204,28 @@ export function CalendarRender(props: calendarProps, ref: any) {
           {
             <FullCalendar
               ref={fullCalendarRef}
+              handleWindowResize={true}
+              dayPopoverFormat={{
+                month: "numeric",
+                year: "numeric",
+                day: "numeric",
+              }}
+              moreLinkContent={
+                // istanbul ignore next
+                (e) => {
+                  return `还有${e.num}项`;
+                }
+              }
               events={eventSource as any}
               initialView={viewTypeEnum.DAY_GRID_MONTH}
+              firstDay={props.firstDay}
               dayHeaderContent={(e) => {
                 return <div>{(weekNameMap as any)[e.dow]}</div>;
               }}
               plugins={[dayGridPlugin, interactionPlugin, customDayViewPlugin]}
               // selectable={true}//控制月，周视图的日期是否可选。暂时不需要
               initialDate={props.displayDate}
-              dayMaxEvents={true}
+              dayMaxEvents={props.agendaCollapsed}
               eventContent={(e) => {
                 return (
                   <div
@@ -224,16 +241,36 @@ export function CalendarRender(props: calendarProps, ref: any) {
                 setViewType(e.view.type as viewTypeEnum);
                 const currentDate = e.date.getTime();
                 const showedHoliday = props.customHolidays?.filter((i: any) => {
-                  const start = Date.parse(i.start);
-                  const end = Date.parse(i.end);
-                  if (start - currentDate >= ONE_DAY_MS) {
-                    return false;
-                  } else if (end - currentDate <= 0) {
-                    return false;
-                  } else {
+                  const start = parseInt(moment(i.start).format("x"));
+                  const end = parseInt(moment(i.end).format("x"));
+                  if (start === currentDate && end === currentDate) {
                     return true;
+                  } else {
+                    if (start - currentDate >= ONE_DAY_MS) {
+                      return false;
+                    } else if (end - currentDate <= 0) {
+                      return false;
+                    } else {
+                      return true;
+                    }
                   }
                 });
+                let eventCount = 0;
+                if (props.showEventCount) {
+                  props.agendaData.map((i) => {
+                    const start = parseInt(moment(i.start).format("x"));
+                    const end = parseInt(moment(i.end).format("x"));
+                    if (
+                      (start === currentDate && end === currentDate) ||
+                      !(
+                        start - currentDate >= ONE_DAY_MS ||
+                        end - currentDate <= 0
+                      )
+                    ) {
+                      eventCount += 1;
+                    }
+                  });
+                }
                 return (
                   <div
                     style={{
@@ -241,13 +278,18 @@ export function CalendarRender(props: calendarProps, ref: any) {
                     }}
                     className={"dayTopContainer"}
                   >
-                    <div style={{ float: "right", color: "rgb(51,51,51)" }}>
-                      {e.isToday ? (
-                        <span className="todaySpan">{e.date.getDate()}</span>
-                      ) : (
-                        e.date.getDate()
+                    <div className="dayTopFlexDiv">
+                      <div>
+                        {e.isToday ? (
+                          <span className="todaySpan">{e.date.getDate()}</span>
+                        ) : (
+                          e.date.getDate()
+                        )}
+                        日
+                      </div>
+                      {!!eventCount && (
+                        <div className="eventCountDiv">{`${eventCount}项`}</div>
                       )}
-                      日
                     </div>
                     {!!showedHoliday?.length && (
                       <div
