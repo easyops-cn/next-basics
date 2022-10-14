@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.203.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.202.0...@next-bricks/basic-bricks@1.203.0) (2022-10-14)
+
+
+### Features
+
+* update appbar tip style ([eb45ac9](https://github.com/easyops-cn/next-basics/commit/eb45ac933a9ccbc5eb0b5ceec34dde45b15b06ed))
+
+
+
+
+
 # [1.202.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.201.0...@next-bricks/basic-bricks@1.202.0) (2022-10-14)
 
 
