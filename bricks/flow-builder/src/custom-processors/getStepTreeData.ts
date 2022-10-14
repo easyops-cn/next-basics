@@ -59,7 +59,8 @@ function getIcon(type: StepType): MenuIcon {
 function getChildren(
   stepIds: string[],
   stepMap: Map<string, StepItem>,
-  startAt: string
+  startAt: string,
+  parentType: StepType
 ): StepTreeNodeData[] {
   const treeList: StepTreeNodeData[] = [];
 
@@ -68,9 +69,25 @@ function getChildren(
     // eslint-disable-next-line no-console
     console.error(`no start node specified in step of ${stepIds.join(",")}`);
   }
-  const startNode = stepMap.get(startAt || stepIds[0]);
 
-  const stageList = getStageList(startNode, stepMap);
+  let stageList;
+  // switch / parallel 下的 branch 特殊处理
+  if (["switch", "parallel"].includes(parentType)) {
+    stageList = stepIds.map((id) => {
+      const data = stepMap.get(id);
+      if (data.type !== "branch") {
+        // eslint-disable-next-line no-console
+        console.error(
+          `The children of switch and parallel can only be \`branch\` nodes, but current node type is \`${data.type}\``
+        );
+      }
+      return data;
+    });
+  } else {
+    const startNode = stepMap.get(startAt || stepIds[0]);
+
+    stageList = getStageList(startNode, stepMap);
+  }
 
   stageList?.forEach((curStepData) => {
     if (curStepData) {
@@ -86,7 +103,8 @@ function getChildren(
               children: getChildren(
                 curStepData.children,
                 stepMap,
-                curStepData.config?.startAt
+                curStepData.config?.startAt,
+                curStepData.type
               ),
             }
           : {}),
@@ -146,7 +164,12 @@ export function getStepTreeData(
       iconTooltip: item.type,
       ...(!isEmpty(item.children)
         ? {
-            children: getChildren(item.children, stepMap, item.config?.startAt),
+            children: getChildren(
+              item.children,
+              stepMap,
+              item.config?.startAt,
+              item.type
+            ),
           }
         : {}),
     };
