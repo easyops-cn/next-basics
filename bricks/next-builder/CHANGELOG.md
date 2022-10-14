@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.189.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.188.0...@next-bricks/next-builder@1.189.0) (2022-10-14)
+
+
+### Features
+
+* support workbenchComponentSelect default brick icon ([9f21e64](https://github.com/easyops-cn/next-basics/commit/9f21e64dd8c0830e14fc3e2d05a72789b14f6915))
+
+
+
+
+
 # [1.188.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.187.2...@next-bricks/next-builder@1.188.0) (2022-10-14)
 
 
