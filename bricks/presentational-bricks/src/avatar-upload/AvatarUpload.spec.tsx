@@ -2,6 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import { Upload, Modal } from "antd";
 import { http } from "@next-core/brick-http";
+import * as brickKit from "@next-core/brick-kit";
 import { AvatarUpload } from "./AvatarUpload";
 
 jest.mock("react-avatar-editor", () => {
@@ -26,7 +27,13 @@ const props = {
 
 describe("AvatarUpload", () => {
   it("should work", () => {
+    jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({ csrfToken: "abcde" });
     const wrapper = mount(<AvatarUpload {...props} />);
+
+    expect(wrapper.find(Upload).prop("headers")).toEqual({
+      "X-CSRF-Token": "abcde",
+    });
+
     // wrapper.find("Button").simulate("click")
     wrapper.find(Upload).invoke("beforeUpload")(
       {

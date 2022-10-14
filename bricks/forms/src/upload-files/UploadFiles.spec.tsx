@@ -1,5 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
+import * as brickKit from "@next-core/brick-kit";
 import { Upload } from "antd";
 import { render } from "@testing-library/react";
 
@@ -39,6 +40,24 @@ describe("UploadFiles", () => {
     );
     const asFragment = result.asFragment;
     expect(asFragment()).toBeTruthy();
+  });
+
+  it("should upload with csrfToken", () => {
+    jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({ csrfToken: "abcde" });
+
+    const wrapper = mount(
+      <UploadFiles
+        url={url}
+        name="attachment"
+        onChange={jest.fn}
+        onSuccess={jest.fn()}
+        onError={jest.fn()}
+      />
+    );
+
+    expect(wrapper.find(Upload).prop("headers")).toEqual({
+      "X-CSRF-Token": "abcde",
+    });
   });
 
   describe("upload test", () => {
