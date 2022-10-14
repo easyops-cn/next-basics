@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.2...@next-bricks/calendar-bricks@0.1.3) (2022-10-14)
+
+
+### Bug Fixes
+
+*  日程日历构件补充展示一天的日程数量、自定义开始日期 refs DESKTOP-267 ([ac38f1c](https://github.com/easyops-cn/next-basics/commit/ac38f1cb69afceaa14ef4b0b36c7f10887bb0333))
+
+
+
+
+
 ## [0.1.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/calendar-bricks@0.1.1...@next-bricks/calendar-bricks@0.1.2) (2022-10-11)
 
 
