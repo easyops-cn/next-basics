@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { generalVideoSvg } from "../images";
 
 export const GeneralVideoStory: Story = {
   storyId: "presentational-bricks.general-video",
@@ -14,8 +15,7 @@ export const GeneralVideoStory: Story = {
     zh: "播放视频或预览视频",
   },
   icon: {
-    lib: "fa",
-    icon: "bell",
+    imgSrc: generalVideoSvg,
   },
   conf: [
     {
