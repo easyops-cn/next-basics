@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { taskCalendarSvg } from "../images";
 export const TaskCalendarStory: Story = {
   storyId: "time.task-calendar",
   category: "data-view",
@@ -14,9 +14,7 @@ export const TaskCalendarStory: Story = {
     zh: "在日历中展示相关数据",
   },
   icon: {
-    lib: "easyops",
-    category: "default",
-    icon: "calendar",
+    imgSrc: taskCalendarSvg,
   },
   conf: [
     {
