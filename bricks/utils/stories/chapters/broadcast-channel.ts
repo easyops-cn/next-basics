@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { broadcastChannelSvg } from "../images";
 export const broadcastChanel: Story = {
   storyId: "utils.broadcast-channel",
   category: "other",
@@ -14,8 +14,7 @@ export const broadcastChanel: Story = {
     zh: "创建一个广播频道，可以允许在浏览器同源的标签页（或 iframes）之间进行基本的通信。",
   },
   icon: {
-    lib: "fa",
-    icon: "broadcast-tower",
+    imgSrc: broadcastChannelSvg,
   },
   conf: [
     {
