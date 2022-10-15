@@ -20,4 +20,10 @@ export { default as generalHotkeysSvg } from "./basic-bricks.general-hotkeys.svg
 export { default as generalNotificationSvg } from "./basic-bricks.general-notification.svg";
 export { default as generalTimerSvg } from "./basic-bricks.general-timer.svg";
 export { default as generalTitleSvg } from "./basic-bricks.general-title.svg";
-export { default as subMenuFilterSvg } from "./basic-bricks.sub-menu-filter.svg";
+export { default as indexCardSvg } from "./basic-bricks.index-card.svg";
+export { default as menuBarSvg } from "./basic-bricks.menu-bar .svg";
+export { default as mutipleColumnsCardSvg } from "./basic-bricks.multiple-columns-card.svg";
+export { default as printButtonSvg } from "./basic-bricks.print-button.svg";
+export { default as redirectToSvg } from "./basic-bricks.redirect-to.svg";
+export { default as scriptBrickSvg } from "./basic-bricks.script-brick.svg";
+export { default as subMenuSvg } from "./basic-bricks.sub-menu.svg";

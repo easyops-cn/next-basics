@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { redirectToSvg } from "../images";
 
 export const redirectToStory: Story = {
   storyId: "basic-bricks.redirect-to",
@@ -14,8 +15,7 @@ export const redirectToStory: Story = {
     zh: "用于重定向的工具构件",
   },
   icon: {
-    lib: "fa",
-    icon: "external-link-square-alt",
+    imgSrc: redirectToSvg,
   },
   conf: {},
 };

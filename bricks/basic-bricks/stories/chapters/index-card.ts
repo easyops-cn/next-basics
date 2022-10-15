@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { indexCardSvg } from "../images";
 
 export const indexCardStory: Story = {
   storyId: "basic-bricks.index-card",
@@ -15,8 +16,7 @@ export const indexCardStory: Story = {
     zh: "页面容器，注意与micro-app的区别",
   },
   icon: {
-    lib: "fa",
-    icon: "bowling-ball",
+    imgSrc: indexCardSvg,
   },
   conf: {
     brick: "basic-bricks.index-card",
