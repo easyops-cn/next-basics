@@ -27,4 +27,5 @@ export { default as printButtonSvg } from "./basic-bricks.print-button.svg";
 export { default as redirectToSvg } from "./basic-bricks.redirect-to.svg";
 export { default as scriptBrickSvg } from "./basic-bricks.script-brick.svg";
 export { default as subMenuSvg } from "./basic-bricks.sub-menu.svg";
+export { default as subMenuFilterSvg } from "./basic-bricks.sub-menu-filter.svg";
 export { default as transformAgentSvg } from "./basic-bricks.transform-agent.svg";
