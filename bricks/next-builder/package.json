@@ -24,7 +24,7 @@
   "sideEffects": true,
   "devDependencies": {
     "@next-core/storyboard-function-types": "^0.2.9",
-    "@next-libs/basic-components": "^3.6.0",
+    "@next-libs/basic-components": "^4.0.0",
     "@next-libs/cmdb-instances": "^6.45.1",
     "@next-libs/code-editor-components": "^4.1.6",
     "@next-libs/forms": "^3.2.30",
