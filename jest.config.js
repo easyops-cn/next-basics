@@ -1,7 +1,12 @@
 const { jestConfigFactory } = require("@next-core/jest-config-factory");
 
 module.exports = {
-  ...jestConfigFactory(),
+  ...jestConfigFactory({
+    transformModulePatterns: [
+      // Transform patterns like `@next-libs/basic-components/EmptyResult`
+      "@(?:next-)?libs/[^/]+/[^./]+(?:\\.js)?$",
+    ],
+  }),
   coverageThreshold: {
     global: {
       statements: 88,

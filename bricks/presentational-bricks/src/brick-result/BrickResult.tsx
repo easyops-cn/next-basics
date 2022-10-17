@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
 import { Result } from "antd";
 import { ResultStatusType } from "antd/lib/result";
-import { EmptyResult, EmptyResultStatus } from "@next-libs/basic-components";
+import { EmptyResultStatus } from "@next-libs/basic-components/EmptyResultStatus";
 import {
   BrickResultStatus,
   IllustrationsStatus,

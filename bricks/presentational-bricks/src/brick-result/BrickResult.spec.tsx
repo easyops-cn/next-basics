@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { BrickResult } from "./BrickResult";
 import { BrickResultStatus } from "../interfaces/brick-result";
-import { EmptyResultStatus } from "@next-libs/basic-components";
+import { EmptyResultStatus } from "@next-libs/basic-components/EmptyResultStatus";
 import {
   useFeatureFlags,
   getRuntime,
