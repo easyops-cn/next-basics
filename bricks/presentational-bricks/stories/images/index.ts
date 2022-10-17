@@ -46,3 +46,11 @@ export { default as infoDisplayCardListSvg } from "./presentational-bricks.info-
 export { default as logDisplaySvg } from "./presentational-bricks.log-display.svg";
 export { default as markdownEditorSvg } from "./presentational-bricks.markdown-editor.svg";
 export { default as rankTableSvg } from "./presentational-bricks.rank-table.svg";
+export { default as brickDisplayStructsSvg } from "./presentational-bricks.brick-display-structs.svg";
+export { default as brickInputSvg } from "./presentational-bricks.brick-input.svg";
+export { default as calendarSvg } from "./presentational-bricks.calendar.svg";
+export { default as dynamicContentSvg } from "./presentational-bricks.dynamic-content.svg";
+export { default as generalVideoSvg } from "./presentational-bricks.general-video.svg";
+export { default as tableTransferSvg } from "./presentational-bricks.table-transfer.svg";
+export { default as templateBreadcrumbSvg } from "./presentational-bricks.template-breadcrumb.svg";
+export { default as textCollapseSvg } from "./presentational-bricks.text-collapse.svg";

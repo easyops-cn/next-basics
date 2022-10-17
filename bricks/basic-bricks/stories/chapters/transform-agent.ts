@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { transformAgentSvg } from "../images";
 
 export const transformAgentStory: Story = {
   storyId: "basic-bricks.transform-agent",
@@ -15,8 +16,7 @@ export const transformAgentStory: Story = {
     zh: "一个代理构件支持将一些构件的属性转换并赋值给其它构件",
   },
   icon: {
-    lib: "fa",
-    icon: "th",
+    imgSrc: transformAgentSvg,
   },
   conf: {
     brick: "div",

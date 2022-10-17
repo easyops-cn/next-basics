@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { calendarSvg } from "../images";
 
 export const CalendarStory: Story = {
   storyId: "presentational-bricks.calendar",
@@ -14,8 +15,7 @@ export const CalendarStory: Story = {
     zh: "按照日历形式展示数据的容器",
   },
   icon: {
-    lib: "antd",
-    icon: "calendar",
+    imgSrc: calendarSvg,
   },
   conf: [
     {

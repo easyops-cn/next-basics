@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { generalClipboardSvg } from "../images";
 export const generalClipboard: Story = {
   storyId: "utils.general-clipboard",
   category: "other",
@@ -14,8 +14,7 @@ export const generalClipboard: Story = {
     zh: "可以存放剪贴板数据，可使用本地存储记录相关数据，并使用深度值比较来发起变更事件。",
   },
   icon: {
-    lib: "fa",
-    icon: "clipboard",
+    imgSrc: generalClipboardSvg,
   },
   conf: [
     {

@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { brickInputSvg } from "../images";
 
 export const BrickInputStory: Story = {
   storyId: "presentational-bricks.brick-input",
@@ -14,8 +15,7 @@ export const BrickInputStory: Story = {
     zh: "输入框，只发起事件不更新url，注意与brick-general-search的区别",
   },
   icon: {
-    lib: "fa",
-    icon: "pencil-alt",
+    imgSrc: brickInputSvg,
   },
   conf: {
     brick: "presentational-bricks.brick-input",

@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { menuBarSvg } from "../images";
 
 export const menuBarStory: Story = {
   storyId: "basic-bricks.menu-bar",
@@ -14,8 +15,7 @@ export const menuBarStory: Story = {
     zh: "点击后注意左侧菜单即为效果图，点击浏览器返回",
   },
   icon: {
-    lib: "fa",
-    icon: "indent",
+    imgSrc: menuBarSvg,
   },
   conf: {
     brick: "basic-bricks.micro-app",

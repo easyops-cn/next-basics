@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { mutipleColumnsCardSvg } from "../images";
 
 export const multipleColumnsCardStory: Story = {
   storyId: "basic-bricks.multiple-columns-card",
@@ -15,8 +16,7 @@ export const multipleColumnsCardStory: Story = {
     zh: "支持多列布局的容器,推荐使用 `basic-bricks.easy-view`",
   },
   icon: {
-    lib: "fa",
-    icon: "columns",
+    imgSrc: mutipleColumnsCardSvg,
   },
   conf: [
     {

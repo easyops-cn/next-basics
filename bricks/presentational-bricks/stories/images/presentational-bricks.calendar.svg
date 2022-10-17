@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.calendar</title>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图九" transform="translate(-442.000000, -517.000000)">
+            <g id="presentational-bricks.calendar" transform="translate(442.000000, 517.000000)">
+                <rect id="矩形" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-18" transform="translate(11.000000, 7.000000)">
+                    <g id="编组-16" transform="translate(0.000000, 8.000000)" fill="#778DC3">
+                        <rect id="矩形备份-76" x="0" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-77" x="12" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-78" x="24" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-79" x="36" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-80" x="48" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-81" x="60" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-82" x="72" y="0" width="10" height="1" rx="0.5"></rect>
+                    </g>
+                    <g id="编组-15" transform="translate(0.000000, 16.000000)" fill="#D6DBEC">
+                        <rect id="矩形备份-76" x="0" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-77" x="12" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-78" x="24" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-79" x="36" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-80" x="48" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-81" x="60" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-82" x="72" y="0" width="10" height="1" rx="0.5"></rect>
+                    </g>
+                    <g id="编组-11" transform="translate(0.000000, 24.000000)" fill="#D6DBEC">
+                        <rect id="矩形备份-116" x="0" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-117" x="12" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-118" x="24" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-119" x="36" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-120" x="48" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-121" x="60" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-122" x="72" y="0" width="10" height="1" rx="0.5"></rect>
+                    </g>
+                    <g id="编组-12" transform="translate(0.000000, 32.000000)" fill="#D6DBEC">
+                        <rect id="矩形备份-123" x="0" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-124" x="12" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-125" x="24" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-126" x="36" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-127" x="48" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-128" x="60" y="0" width="10" height="1" rx="0.5"></rect>
+                        <rect id="矩形备份-129" x="72" y="0" width="10" height="1" rx="0.5"></rect>
+                    </g>
+                    <g id="编组-13">
+                        <g id="编组-19" transform="translate(0.000000, 40.000000)">
+                            <rect id="矩形备份-130" fill="#D6DBEC" x="0" y="0" width="10" height="1" rx="0.5"></rect>
+                            <rect id="矩形备份-131" fill="#D6DBEC" x="12" y="0" width="10" height="1" rx="0.5"></rect>
+                            <rect id="矩形备份-132" fill="#D6DBEC" x="24" y="0" width="10" height="1" rx="0.5"></rect>
+                            <rect id="矩形备份-133" fill="#D6DBEC" x="36" y="0" width="10" height="1" rx="0.5"></rect>
+                            <rect id="矩形备份-134" fill="#F4F5F9" x="48" y="0" width="10" height="1" rx="0.5"></rect>
+                            <rect id="矩形备份-135" fill="#F4F5F9" x="60" y="0" width="10" height="1" rx="0.5"></rect>
+                            <rect id="矩形备份-136" fill="#F4F5F9" x="72" y="0" width="10" height="1" rx="0.5"></rect>
+                        </g>
+                        <text id="二" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#778DC3">
+                            <tspan x="14" y="6">二</tspan>
+                        </text>
+                        <text id="一" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#778DC3">
+                            <tspan x="2" y="6">一</tspan>
+                        </text>
+                        <text id="三" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#778DC3">
+                            <tspan x="26" y="6">三</tspan>
+                        </text>
+                        <text id="四" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#778DC3">
+                            <tspan x="38" y="6">四</tspan>
+                        </text>
+                        <text id="五" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#778DC3">
+                            <tspan x="50" y="6">五</tspan>
+                        </text>
+                        <text id="六" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#778DC3">
+                            <tspan x="62" y="6">六</tspan>
+                        </text>
+                        <text id="七" font-family="PingFang-SC-Medium, PingFang SC" font-size="6" font-weight="400" fill="#778DC3">
+                            <tspan x="74" y="6">七</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { printButtonSvg } from "../images";
 
 export const printButtonStory: Story = {
   storyId: "basic-bricks.print-button",
@@ -14,8 +15,7 @@ export const printButtonStory: Story = {
     zh: "触发打开浏览器的打印窗口",
   },
   icon: {
-    lib: "fa",
-    icon: "print",
+    imgSrc: printButtonSvg,
   },
   conf: {
     brick: "basic-bricks.print-button",

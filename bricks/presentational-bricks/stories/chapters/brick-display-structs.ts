@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { brickDisplayStructsSvg } from "../images";
 
 export const BrickDisplayStructsStory: Story = {
   storyId: "presentational-bricks.brick-display-structs",
@@ -9,7 +10,7 @@ export const BrickDisplayStructsStory: Story = {
     en: "Text Conversion - Automatically Convert Structures or Arrays",
     zh: "文本转换-自动转换结构体或数组",
   },
-  icon: { lib: "fa", icon: "cube" },
+  icon: { imgSrc: brickDisplayStructsSvg },
   description: {
     en: "stringify to display struct data or one field of it",
     zh: "可将结构体（数组）数据以字符串的形式展示，或只展示其中的一个字段",
