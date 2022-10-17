@@ -14,9 +14,16 @@ import {
  * @noInheritDoc
  */
 export class EventAgentElement extends UpdatingElement {
+  /**
+   * @detail `unknown`
+   * @description 事件被触发。
+   */
   @event({ type: "event.trigger" })
   private _eventTrigger: EventEmitter;
 
+  /**
+   * @description 触发一次事件，传递的参数为事件详情。
+   */
   @method()
   trigger(detail: unknown): void {
     this._eventTrigger.emit(detail);
