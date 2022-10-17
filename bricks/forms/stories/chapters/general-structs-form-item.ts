@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { generalStructsFormItem } from "../images";
 
 export const structsFormItemStory: Story = {
   storyId: "forms.general-structs-form-item",
@@ -14,8 +15,7 @@ export const structsFormItemStory: Story = {
     zh: "添加/编辑结构体",
   },
   icon: {
-    lib: "fa",
-    icon: "pen",
+    imgSrc: generalStructsFormItem,
   },
   conf: [
     {
