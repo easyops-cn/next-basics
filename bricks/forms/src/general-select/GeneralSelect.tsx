@@ -109,6 +109,10 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     setCheckedValue(props.value);
   }, [props.value]);
 
+  useEffect(() => {
+    setOptions(props.options);
+  }, [props.options]);
+
   const handleChange = (newValue: any): void => {
     props.onChange?.(newValue);
     const newValueV2 =
