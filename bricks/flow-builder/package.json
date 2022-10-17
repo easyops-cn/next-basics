@@ -32,9 +32,9 @@
   "devDependencies": {
     "@next-libs/basic-components": "^3.6.0",
     "@next-libs/code-display-components": "^2.0.2",
-    "@next-libs/code-editor-components": "^4.1.4",
-    "@next-libs/forms": "^3.2.29",
-    "@next-libs/visual-builder": "^1.2.2",
+    "@next-libs/code-editor-components": "^4.1.6",
+    "@next-libs/forms": "^3.2.30",
+    "@next-libs/visual-builder": "^1.2.4",
     "@next-sdk/cmdb-sdk": "^2.1.1",
     "file-saver": "^2.0.5",
     "immutability-helper": "^3.1.1"
