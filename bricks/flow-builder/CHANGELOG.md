@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.7...@next-bricks/flow-builder@1.21.8) (2022-10-17)
+
+
+### Bug Fixes
+
+* update @next-libs/basic-components which supports better tree shaking ([978ed44](https://github.com/easyops-cn/next-basics/commit/978ed44894c883cce93958c714c70b831d921b73))
+
+
+
+
+
 ## [1.21.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.6...@next-bricks/flow-builder@1.21.7) (2022-10-14)
 
 

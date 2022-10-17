@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.189.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.189.1...@next-bricks/next-builder@1.189.2) (2022-10-17)
+
+
+### Bug Fixes
+
+* update @next-libs/basic-components which supports better tree shaking ([978ed44](https://github.com/easyops-cn/next-basics/commit/978ed44894c883cce93958c714c70b831d921b73))
+
+
+
+
+
 ## [1.189.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.189.0...@next-bricks/next-builder@1.189.1) (2022-10-17)
 
 **Note:** Version bump only for package @next-bricks/next-builder

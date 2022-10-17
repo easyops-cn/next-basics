@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.205.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.205.0...@next-bricks/basic-bricks@1.205.1) (2022-10-17)
+
+
+### Bug Fixes
+
+* update @next-libs/basic-components which supports better tree shaking ([978ed44](https://github.com/easyops-cn/next-basics/commit/978ed44894c883cce93958c714c70b831d921b73))
+
+
+
+
+
 # [1.205.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.204.0...@next-bricks/basic-bricks@1.205.0) (2022-10-17)
 
 

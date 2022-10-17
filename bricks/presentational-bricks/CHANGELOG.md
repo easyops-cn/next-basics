@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.266.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.266.1...@next-bricks/presentational-bricks@1.266.2) (2022-10-17)
+
+
+### Bug Fixes
+
+* update @next-libs/basic-components which supports better tree shaking ([978ed44](https://github.com/easyops-cn/next-basics/commit/978ed44894c883cce93958c714c70b831d921b73))
+
+
+
+
+
 ## [1.266.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.266.0...@next-bricks/presentational-bricks@1.266.1) (2022-10-17)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
