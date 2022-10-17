@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.237.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.236.0...@next-bricks/forms@1.237.0) (2022-10-17)
+
+
+### Features
+
+* **forms:** forms.select支持使用后端搜索 ([af2a893](https://github.com/easyops-cn/next-basics/commit/af2a8936e3d86ddc80e740f519b2a4219bb3935d))
+
+
+
+
+
 # [1.236.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.235.4...@next-bricks/forms@1.236.0) (2022-10-17)
 
 
