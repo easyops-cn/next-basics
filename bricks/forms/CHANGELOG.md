@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.236.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.235.4...@next-bricks/forms@1.236.0) (2022-10-17)
+
+
+### Features
+
+* update form brick icon ([75d6d32](https://github.com/easyops-cn/next-basics/commit/75d6d326a4143718c593f03caabafa31e0e45c9b))
+
+
+
+
+
 ## [1.235.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.235.3...@next-bricks/forms@1.235.4) (2022-10-17)
 
 
