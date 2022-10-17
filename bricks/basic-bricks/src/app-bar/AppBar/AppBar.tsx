@@ -84,13 +84,17 @@ export function AppBar({
   }, []);
 
   React.useEffect(() => {
-    const marginTop = `calc(var(--app-bar-height) + ${tipList.length * 38}px)`;
-    const mainElement = document.getElementById("main-mount-point");
-    const iframeMainElement = document.getElementById(
-      "legacy-iframe-mount-point"
-    );
-    mainElement && (mainElement.style.marginTop = marginTop);
-    iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
+    if (tipList.length) {
+      const marginTop = `calc(var(--app-bar-height) + ${
+        tipList.length * 38
+      }px)`;
+      const mainElement = document.getElementById("main-mount-point");
+      const iframeMainElement = document.getElementById(
+        "legacy-iframe-mount-point"
+      );
+      mainElement && (mainElement.style.marginTop = marginTop);
+      iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
+    }
   }, [tipList]);
 
   return (
