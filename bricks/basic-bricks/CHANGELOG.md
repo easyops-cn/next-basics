@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.204.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.203.0...@next-bricks/basic-bricks@1.204.0) (2022-10-17)
+
+
+### Features
+
+* update basic-bricks brick icon ([89b004b](https://github.com/easyops-cn/next-basics/commit/89b004b0045e2841359648f313fcd1278283a0b0))
+* update basic-bricks brick icon ([db8f175](https://github.com/easyops-cn/next-basics/commit/db8f175c46b6e3b544098ac32983e93122df2606))
+* update basic-bricks brick icon ([66fed51](https://github.com/easyops-cn/next-basics/commit/66fed510a02706b0e380b7573764eef209a516b0))
+
+
+
+
+
 # [1.203.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.202.0...@next-bricks/basic-bricks@1.203.0) (2022-10-14)
 
 

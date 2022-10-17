@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.3.1...@next-bricks/time@1.4.0) (2022-10-17)
+
+
+### Features
+
+* update time bricks icon ([aedd1c9](https://github.com/easyops-cn/next-basics/commit/aedd1c928bedce485050c528c8dc0f72a2e2fc3d))
+
+
+
+
+
 ## [1.3.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.3.0...@next-bricks/time@1.3.1) (2022-04-12)
 
 
