@@ -15,7 +15,7 @@ import {
   GeneralComplexOption,
   FormItemElement,
 } from "@next-libs/forms";
-import { UseBrickConf } from "@next-core/brick-types";
+import { UseBrickConf, UseBackendConf } from "@next-core/brick-types";
 
 export interface ComplexOption<T = string | number> {
   label: string;
@@ -324,6 +324,17 @@ export class GeneralSelectElement extends FormItemElement {
   suffixBrickStyle: React.CSSProperties = {};
 
   /**
+   * @required false
+   * @default -
+   * @description 后端搜索
+   * @group advancedFormItem
+   */
+  @property({
+    attribute: false,
+  })
+  useBackend: UseBackendConf;
+
+  /**
    * @detail `any`
    * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值
    */
@@ -401,6 +412,7 @@ export class GeneralSelectElement extends FormItemElement {
             formElement={this.getFormElement()}
             name={this.name}
             options={options}
+            fields={this.fields}
             groupBy={this.groupBy}
             label={this.label}
             labelTooltip={this.labelTooltip}
@@ -425,6 +437,7 @@ export class GeneralSelectElement extends FormItemElement {
             onFocus={this._handleFocus}
             onBlur={this._handleBlur}
             onSearch={this._handleSearch}
+            useBackend={this.useBackend}
             onDebounceSearch={this._handleDebounceSearch}
             debounceSearchDelay={this.debounceSearchDelay}
             helpBrick={this.helpBrick}
