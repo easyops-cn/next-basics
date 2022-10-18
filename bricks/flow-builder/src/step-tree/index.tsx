@@ -78,6 +78,20 @@ export class StepTreeElement extends UpdatingElement {
   @event({ type: "node.leave" })
   private _nodeLeaveEvent: EventEmitter<void>;
 
+  @event({ type: "context.menu" })
+  private _nodeContextMenuEvent: EventEmitter<unknown>;
+
+  private _contextMenuFactory =
+    (node: StepTreeNodeData) => (e: React.MouseEvent) => {
+      e.preventDefault();
+      this._nodeContextMenuEvent.emit({
+        active: true,
+        node: node?.data,
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+
   private _nodeLeaveFactory = () => () => {
     this._nodeLeaveEvent.emit();
   };
@@ -122,6 +136,7 @@ export class StepTreeElement extends UpdatingElement {
               nodeClickFactory: this._nodeClickFactory,
               mouseEnterFactory: this._nodeEnterFactory,
               mouseLeaveFactory: this._nodeLeaveFactory,
+              contextMenuFactory: this._contextMenuFactory,
               matchNode: this._matchNode,
             }}
           >
