@@ -3,411 +3,225 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.357.20](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.19...@next-bricks/developers@1.357.20) (2022-10-17)
+## [1.357.21](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.20...@next-bricks/developers@1.357.21) (2022-10-18)
 
+**Note:** Version bump only for package @next-bricks/developers
+
+## [1.357.20](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.19...@next-bricks/developers@1.357.20) (2022-10-17)
 
 ### Bug Fixes
 
-* update @next-libs/basic-components which supports better tree shaking ([978ed44](https://github.com/easyops-cn/next-basics/commit/978ed44894c883cce93958c714c70b831d921b73))
-
-
-
-
+- update @next-libs/basic-components which supports better tree shaking ([978ed44](https://github.com/easyops-cn/next-basics/commit/978ed44894c883cce93958c714c70b831d921b73))
 
 ## [1.357.19](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.18...@next-bricks/developers@1.357.19) (2022-10-17)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.357.18](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.17...@next-bricks/developers@1.357.18) (2022-09-23)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.357.17](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.16...@next-bricks/developers@1.357.17) (2022-09-14)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.357.16](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.15...@next-bricks/developers@1.357.16) (2022-09-13)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.357.15](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.14...@next-bricks/developers@1.357.15) (2022-09-09)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.357.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.13...@next-bricks/developers@1.357.14) (2022-09-09)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.357.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.12...@next-bricks/developers@1.357.13) (2022-09-07)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.357.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.11...@next-bricks/developers@1.357.12) (2022-09-06)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.357.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.10...@next-bricks/developers@1.357.11) (2022-08-16)
-
 
 ### Bug Fixes
 
-* 修复不导出的挂件不在开发者中心展示 ([75db9f2](https://github.com/easyops-cn/next-basics/commit/75db9f2aec32f6a09dbaaaa6a2e2ad30add44034))
-
-
-
-
+- 修复不导出的挂件不在开发者中心展示 ([75db9f2](https://github.com/easyops-cn/next-basics/commit/75db9f2aec32f6a09dbaaaa6a2e2ad30add44034))
 
 ## [1.357.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.9...@next-bricks/developers@1.357.10) (2022-08-05)
 
-
 ### Bug Fixes
 
-* don't show the document if don't export ([d52db07](https://github.com/easyops-cn/next-basics/commit/d52db07c9e3604f44dbe125cdcb0e4076c746bb1))
-
-
-
-
+- don't show the document if don't export ([d52db07](https://github.com/easyops-cn/next-basics/commit/d52db07c9e3604f44dbe125cdcb0e4076c746bb1))
 
 ## [1.357.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.8...@next-bricks/developers@1.357.9) (2022-07-27)
 
-
 ### Bug Fixes
 
-* fix style ([0d3e841](https://github.com/easyops-cn/next-basics/commit/0d3e84150e7225446d8181fd62f4b1e079ce9f08))
-
-
-
-
+- fix style ([0d3e841](https://github.com/easyops-cn/next-basics/commit/0d3e84150e7225446d8181fd62f4b1e079ce9f08))
 
 ## [1.357.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.7...@next-bricks/developers@1.357.8) (2022-07-20)
 
-
 ### Bug Fixes
 
-* brick-demo dark mode ([181a9dd](https://github.com/easyops-cn/next-basics/commit/181a9dd7ceaf2ccc70d0989b808b222e2ec7785c))
-
-
-
-
+- brick-demo dark mode ([181a9dd](https://github.com/easyops-cn/next-basics/commit/181a9dd7ceaf2ccc70d0989b808b222e2ec7785c))
 
 ## [1.357.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.6...@next-bricks/developers@1.357.7) (2022-07-15)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.357.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.5...@next-bricks/developers@1.357.6) (2022-07-14)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.357.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.4...@next-bricks/developers@1.357.5) (2022-07-14)
-
 
 ### Bug Fixes
 
-* **BrickDocument:** change logic of convertMarkdownLinkToHtmlLink to do all processing in one call ([e9685ab](https://github.com/easyops-cn/next-basics/commit/e9685aba4b59e0b140b07c08ca151edd2f9eb3c6))
-
-
-
-
+- **BrickDocument:** change logic of convertMarkdownLinkToHtmlLink to do all processing in one call ([e9685ab](https://github.com/easyops-cn/next-basics/commit/e9685aba4b59e0b140b07c08ca151edd2f9eb3c6))
 
 ## [1.357.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.3...@next-bricks/developers@1.357.4) (2022-07-13)
 
-
 ### Bug Fixes
 
-* fix anchor regexp ([d780c09](https://github.com/easyops-cn/next-basics/commit/d780c095884efb6da2e847e3d13bfa6b371fdda4))
-
-
-
-
+- fix anchor regexp ([d780c09](https://github.com/easyops-cn/next-basics/commit/d780c095884efb6da2e847e3d13bfa6b371fdda4))
 
 ## [1.357.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.2...@next-bricks/developers@1.357.3) (2022-07-12)
 
-
 ### Bug Fixes
 
-* **BrickDocument:** fix interface extended links ([8dd7c2a](https://github.com/easyops-cn/next-basics/commit/8dd7c2a26f581269337da81b9a9cfad62c831fad))
-
-
-
-
+- **BrickDocument:** fix interface extended links ([8dd7c2a](https://github.com/easyops-cn/next-basics/commit/8dd7c2a26f581269337da81b9a9cfad62c831fad))
 
 ## [1.357.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.1...@next-bricks/developers@1.357.2) (2022-07-11)
 
-
 ### Bug Fixes
 
-* doc refine ([930a901](https://github.com/easyops-cn/next-basics/commit/930a9013f1f6422bc8e019c1f78486bb01b2615e))
-
-
-
-
+- doc refine ([930a901](https://github.com/easyops-cn/next-basics/commit/930a9013f1f6422bc8e019c1f78486bb01b2615e))
 
 ## [1.357.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.0...@next-bricks/developers@1.357.1) (2022-07-08)
 
-
 ### Bug Fixes
 
-* support external view ([d388aec](https://github.com/easyops-cn/next-basics/commit/d388aecb7f15376b5e47cfdea4bb12ac065e6a79))
-
-
-
-
+- support external view ([d388aec](https://github.com/easyops-cn/next-basics/commit/d388aecb7f15376b5e47cfdea4bb12ac065e6a79))
 
 # [1.357.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.356.0...@next-bricks/developers@1.357.0) (2022-07-07)
 
-
 ### Features
 
-* **BrickDocument:** add support for description of enum and interface ([158774f](https://github.com/easyops-cn/next-basics/commit/158774f0548144b3fce94736e087aadc35f643df))
-
-
-
-
+- **BrickDocument:** add support for description of enum and interface ([158774f](https://github.com/easyops-cn/next-basics/commit/158774f0548144b3fce94736e087aadc35f643df))
 
 # [1.356.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.7...@next-bricks/developers@1.356.0) (2022-07-05)
 
-
 ### Features
 
-* **BrickDocument:** add support for extendedTypes and indexSignature ([2873b43](https://github.com/easyops-cn/next-basics/commit/2873b432bea5905eb60e6016a29a6b0b3475abda))
-
-
-
-
+- **BrickDocument:** add support for extendedTypes and indexSignature ([2873b43](https://github.com/easyops-cn/next-basics/commit/2873b432bea5905eb60e6016a29a6b0b3475abda))
 
 ## [1.355.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.6...@next-bricks/developers@1.355.7) (2022-06-29)
 
-
 ### Bug Fixes
 
-* some optimization ([63299b9](https://github.com/easyops-cn/next-basics/commit/63299b985d933805d79e30bd83bb768745815d39))
-
-
-
-
+- some optimization ([63299b9](https://github.com/easyops-cn/next-basics/commit/63299b985d933805d79e30bd83bb768745815d39))
 
 ## [1.355.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.5...@next-bricks/developers@1.355.6) (2022-06-22)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.355.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.4...@next-bricks/developers@1.355.5) (2022-06-21)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.355.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.3...@next-bricks/developers@1.355.4) (2022-06-20)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.355.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.2...@next-bricks/developers@1.355.3) (2022-06-17)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.355.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.1...@next-bricks/developers@1.355.2) (2022-06-15)
-
 
 ### Bug Fixes
 
-* refine document view ([4bd948b](https://github.com/easyops-cn/next-basics/commit/4bd948be91bbeb26cfb39c3cf26c18c8e3efd2b5))
-
-
-
-
+- refine document view ([4bd948b](https://github.com/easyops-cn/next-basics/commit/4bd948be91bbeb26cfb39c3cf26c18c8e3efd2b5))
 
 ## [1.355.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.355.0...@next-bricks/developers@1.355.1) (2022-06-10)
 
-
 ### Bug Fixes
 
-* fix illustration img style ([d8670fd](https://github.com/easyops-cn/next-basics/commit/d8670fd6bfe125a74907db4f535737cc0eacfd1d))
-
-
-
-
+- fix illustration img style ([d8670fd](https://github.com/easyops-cn/next-basics/commit/d8670fd6bfe125a74907db4f535737cc0eacfd1d))
 
 # [1.355.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.354.1...@next-bricks/developers@1.355.0) (2022-06-07)
 
-
 ### Bug Fixes
 
-* 修改获取插画标签颜色的规则 ([0321db1](https://github.com/easyops-cn/next-basics/commit/0321db19bf8aadd05794364327b76db3a7707a43))
-
+- 修改获取插画标签颜色的规则 ([0321db1](https://github.com/easyops-cn/next-basics/commit/0321db19bf8aadd05794364327b76db3a7707a43))
 
 ### Features
 
-* add resources to illustration lib of developers ([f1919b2](https://github.com/easyops-cn/next-basics/commit/f1919b27b0bc057cf047d5d1fedb7fe20e31ed2c))
-
-
-
-
+- add resources to illustration lib of developers ([f1919b2](https://github.com/easyops-cn/next-basics/commit/f1919b27b0bc057cf047d5d1fedb7fe20e31ed2c))
 
 ## [1.354.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.354.0...@next-bricks/developers@1.354.1) (2022-06-02)
 
-
 ### Bug Fixes
 
-* doc refine ([c3a259d](https://github.com/easyops-cn/next-basics/commit/c3a259db5396c5a88c6ebb62745e6a54fd0fcf76))
-
-
-
-
+- doc refine ([c3a259d](https://github.com/easyops-cn/next-basics/commit/c3a259db5396c5a88c6ebb62745e6a54fd0fcf76))
 
 # [1.354.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.3...@next-bricks/developers@1.354.0) (2022-05-17)
 
-
 ### Features
 
-* **Preview:**  preview support dark theme ([1549bed](https://github.com/easyops-cn/next-basics/commit/1549bedf67664a6e5f8794e7f303f8fb67a3f26e))
-
-
-
-
+- **Preview:** preview support dark theme ([1549bed](https://github.com/easyops-cn/next-basics/commit/1549bedf67664a6e5f8794e7f303f8fb67a3f26e))
 
 ## [1.353.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.2...@next-bricks/developers@1.353.3) (2022-05-07)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.353.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.1...@next-bricks/developers@1.353.2) (2022-04-06)
-
 
 ### Bug Fixes
 
-* **developers.illustration-card-list:** 修改图片尺寸使视觉统一  Closes DESIGNER_ROUTINE-546 ([439ebbe](https://github.com/easyops-cn/next-basics/commit/439ebbe05a82fda748325b5a2183cacdb8739079))
-* **developers.illustration-card-list:** 修改图片尺寸使视觉统一  Closes DESIGNER_ROUTINE-546 ([bf8af56](https://github.com/easyops-cn/next-basics/commit/bf8af566788b715fb176e28af19acc425e60c2c2))
-
-
-
-
+- **developers.illustration-card-list:** 修改图片尺寸使视觉统一 Closes DESIGNER_ROUTINE-546 ([439ebbe](https://github.com/easyops-cn/next-basics/commit/439ebbe05a82fda748325b5a2183cacdb8739079))
+- **developers.illustration-card-list:** 修改图片尺寸使视觉统一 Closes DESIGNER_ROUTINE-546 ([bf8af56](https://github.com/easyops-cn/next-basics/commit/bf8af566788b715fb176e28af19acc425e60c2c2))
 
 ## [1.353.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.353.0...@next-bricks/developers@1.353.1) (2022-03-09)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 # [1.353.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.352.4...@next-bricks/developers@1.353.0) (2022-03-03)
-
 
 ### Features
 
-* developer center support show widget brick ([b0c0cb9](https://github.com/easyops-cn/next-basics/commit/b0c0cb9546162e57765dac76d45af65ec0d056a3))
-* update unit test ([ad3b33d](https://github.com/easyops-cn/next-basics/commit/ad3b33d70cb7fed0be88b0ce4852be1742a4b4ee))
-
-
-
-
+- developer center support show widget brick ([b0c0cb9](https://github.com/easyops-cn/next-basics/commit/b0c0cb9546162e57765dac76d45af65ec0d056a3))
+- update unit test ([ad3b33d](https://github.com/easyops-cn/next-basics/commit/ad3b33d70cb7fed0be88b0ce4852be1742a4b4ee))
 
 ## [1.352.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.352.3...@next-bricks/developers@1.352.4) (2022-02-23)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.352.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.352.2...@next-bricks/developers@1.352.3) (2022-02-21)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.352.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.352.1...@next-bricks/developers@1.352.2) (2022-02-18)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 ## [1.352.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.352.0...@next-bricks/developers@1.352.1) (2022-02-18)
 
 **Note:** Version bump only for package @next-bricks/developers
 
-
-
-
-
 # [1.352.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.6...@next-bricks/developers@1.352.0) (2022-01-27)
-
 
 ### Features
 
-* brick-illustration adapt to dark theme and illustrationCard, provider-get-illustrations filter dark theme ([86576b9](https://github.com/easyops-cn/next-basics/commit/86576b9fd691462a6230d993e0438cf836c220f9))
-
-
-
-
+- brick-illustration adapt to dark theme and illustrationCard, provider-get-illustrations filter dark theme ([86576b9](https://github.com/easyops-cn/next-basics/commit/86576b9fd691462a6230d993e0438cf836c220f9))
 
 ## [1.351.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.5...@next-bricks/developers@1.351.6) (2022-01-21)
 
 **Note:** Version bump only for package @next-bricks/developers
-
-
-
-
 
 ## [1.351.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.351.4...@next-bricks/developers@1.351.5) (2022-01-13)
 

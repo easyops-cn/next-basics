@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.10](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.9...@next-bricks/flow-builder@1.21.10) (2022-10-18)
+
+### Features
+
+- support context menu ([f752e1c](https://github.com/easyops-cn/next-basics/commit/f752e1c7d72f55c4432be027f8386a8838aa52ed))
+
 ## [1.21.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.8...@next-bricks/flow-builder@1.21.9) (2022-10-18)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
