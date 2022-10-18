@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Upload, Button, message, Avatar, Modal } from "antd";
 import AvatarEditor from "react-avatar-editor";
 import { NS_PRESENTATIONAL_BRICKS, K } from "../i18n/constants";
 import { AvatarProps } from "antd/lib/avatar";
-import { handleHttpError, getAuth } from "@next-core/brick-kit";
+import { handleHttpError } from "@next-core/brick-kit";
 import { http } from "@next-core/brick-http";
 import style from "./style.module.css";
 
@@ -46,8 +46,6 @@ export function AvatarUpload(props: UploadProps): React.ReactElement {
     return false;
   };
 
-  const csrfToken = useMemo(() => getAuth().csrfToken, []);
-
   const showAvatar = (src: string): React.ReactElement => {
     const avatarProps: AvatarProps = {
       size: props.size,
@@ -72,7 +70,6 @@ export function AvatarUpload(props: UploadProps): React.ReactElement {
           ref={uploadRef}
           action={action}
           beforeUpload={handleBeforeUpload}
-          {...(csrfToken ? { headers: { "X-CSRF-Token": csrfToken } } : {})}
           showUploadList={false}
         >
           <Avatar {...avatarProps}></Avatar>

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, useState, useMemo } from "react";
+import React, { ReactElement, ReactNode, useState } from "react";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { Upload, Modal, message, Input, Button } from "antd";
 import { UploadFile, RcFile } from "antd/lib/upload/interface";
@@ -22,7 +22,7 @@ import { useTranslation } from "react-i18next";
 import { NS_FORMS, K } from "../i18n/constants";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { MenuIcon, UserInfo } from "@next-core/brick-types";
-import { getAuth, useCurrentTheme } from "@next-core/brick-kit";
+import { getRuntime, useCurrentTheme } from "@next-core/brick-kit";
 import { ReactComponent as ImageUpload } from "./image-upload.svg";
 import { UploadImgValue } from "../interfaces";
 import { ReactComponent as ImageUploadDark } from "./image-upload-dark.svg";
@@ -549,8 +549,6 @@ export function RealUploadImg(
     typeProps = textProps;
   }
 
-  const csrfToken = useMemo(() => getAuth().csrfToken, []);
-
   const uploadProps = {
     className: classNames({
       [styles.uploadContainerDisplayNone]:
@@ -561,7 +559,6 @@ export function RealUploadImg(
 
     method: "put",
     action,
-    ...(csrfToken ? { headers: { "X-CSRF-Token": csrfToken } } : {}),
     data: uploadData,
     listType: props.listType,
     fileList: imageList,
