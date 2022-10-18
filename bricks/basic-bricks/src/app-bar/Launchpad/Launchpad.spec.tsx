@@ -27,6 +27,7 @@ jest.mock("../LaunchpadService", () => {
         desktops: [],
         siteSort: [],
       }),
+      init: (): any => ({}),
     },
   };
 });

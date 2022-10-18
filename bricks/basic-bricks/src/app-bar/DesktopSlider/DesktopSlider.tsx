@@ -70,10 +70,10 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
     type: "custom",
   });
 
-  let desktops: DesktopData[];
+  let desktops: DesktopData[] = [];
   let validItems = props.microApps;
 
-  if (props.desktops && props.desktops.length > 0) {
+  if (typeof props?.desktops === "object" && props.desktops.length > 0) {
     validItems = [];
 
     const id2app = props.microApps.reduce((acc, app) => {
@@ -137,7 +137,7 @@ export function DesktopSlider(props: DesktopSliderProps): React.ReactElement {
       }))
       // ignore empty desktops
       .filter((desktop) => desktop.items.length > 0);
-  } else {
+  } else if (!props.desktops) {
     // 如果没有定义桌面列表（例如本地开发模式），则自动按数量切割。
     desktops = chunk(props.microApps, columns * rows).map(mapItemToDesktop);
   }
