@@ -41,7 +41,7 @@ export function AppBarTips({
     return () => {
       closeBtn?.removeEventListener("click", handleClose);
     };
-  }, []);
+  }, [closeBtnRef]);
 
   return (
     <div
