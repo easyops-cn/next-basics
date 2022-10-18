@@ -47,6 +47,26 @@ function getStepType(type: StepType): string {
   }
 }
 
+function walkSteps(
+  steps: StepItem[],
+  startAt: string,
+  callback: (item: StepItem) => void
+): void {
+  let startId = startAt;
+  while (startId) {
+    const find = steps?.find((item) => item.id === startId);
+    if (find) {
+      callback(find);
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `The current id \`${startId}\` is not found in the step list`
+      );
+    }
+    startId = find?.next;
+  }
+}
+
 export function getFlowGraph(data: OriginData, startId: string): GraphData {
   const rootId = "root";
   const rootNode = {
@@ -57,17 +77,13 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
   const edges = [] as GraphEdges[];
   const groupEdges = [] as GraphEdges[];
 
-  let findId = startId;
-
-  while (findId) {
+  walkSteps(data.steps, startId, (item) => {
     edges.push({
       source: rootId,
-      target: findId,
+      target: item.id,
       type: "include",
     });
-
-    findId = data.steps?.find((item) => item.id === findId)?.next;
-  }
+  });
 
   data.steps?.forEach((item) => {
     nodes.push({
@@ -88,7 +104,15 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
     }
 
     if (childrenFLow.includes(item.type) && !isEmpty(item.children)) {
-      item.children.forEach((c) => {
+      const sortChildren = [];
+      if (item.config?.startAt) {
+        walkSteps(data.steps, item.config.startAt, (item) => {
+          sortChildren.push(item.id);
+        });
+      } else {
+        sortChildren.push(...item.children);
+      }
+      sortChildren.forEach((c) => {
         groupEdges.push({
           source: item.id,
           target: c,

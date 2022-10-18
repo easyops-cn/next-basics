@@ -32,8 +32,12 @@ describe("getFlowGraph", () => {
             dst: "step2.1",
           },
           {
-            dst: "step3",
+            dst: "step2.5",
             src: "branch2",
+          },
+          {
+            src: "step2.5",
+            dst: "step3",
           },
           {
             dst: "step5",
@@ -64,7 +68,10 @@ describe("getFlowGraph", () => {
             id: "branch2",
             name: "branch2",
             type: "branch",
-            children: ["step3"],
+            children: ["step3", "step2.5"],
+            config: {
+              startAt: "step2.5",
+            },
           },
           {
             id: "step2",
@@ -77,6 +84,11 @@ describe("getFlowGraph", () => {
             type: "task",
             name: "step2.1",
             end: true,
+          },
+          {
+            id: "step2.5",
+            type: "task",
+            name: "step2.5",
           },
           {
             id: "step3",
@@ -100,12 +112,13 @@ describe("getFlowGraph", () => {
           { source: "root", target: "step5", type: "include" },
           { source: "start", target: "step1", type: "dagre" },
           { source: "step2", target: "step2.1", type: "dagre" },
+          { source: "step2.5", target: "step3", type: "dagre" },
           { source: "step1", target: "step5", type: "dagre" },
           { source: "step1", target: "branch1", type: "container" },
           { source: "step1", target: "branch2", type: "container" },
           { source: "branch1", target: "step2", type: "group" },
           { source: "branch1", target: "step2.1", type: "group" },
-          { source: "branch2", target: "step3", type: "group" },
+          { source: "branch2", target: "step2.5", type: "group" },
         ],
         nodes: [
           { id: "root", type: "node" },
@@ -140,10 +153,13 @@ describe("getFlowGraph", () => {
           },
           {
             data: {
-              children: ["step3"],
+              children: ["step3", "step2.5"],
               id: "branch2",
               name: "branch2",
               type: "branch",
+              config: {
+                startAt: "step2.5",
+              },
             },
             id: "branch2",
             name: "branch2",
@@ -159,6 +175,12 @@ describe("getFlowGraph", () => {
             data: { end: true, id: "step2.1", name: "step2.1", type: "task" },
             id: "step2.1",
             name: "step2.1",
+            type: "node",
+          },
+          {
+            data: { id: "step2.5", name: "step2.5", type: "task" },
+            id: "step2.5",
+            name: "step2.5",
             type: "node",
           },
           {

@@ -19,6 +19,7 @@ export interface ContextOfWorkbenchTree {
   onActionClick?(detail: ActionClickDetail): void;
   activeKey?: string;
   nodeClickFactory?: (data: StepTreeNodeData) => (event: MouseEvent) => void;
+  contextMenuFactory?(node?: StepTreeNodeData): (event: MouseEvent) => void;
   mouseEnterFactory?: (data: StepTreeNodeData) => () => void;
   mouseLeaveFactory?: () => () => void;
   matchNode?: (node: StepTreeNodeData, lowerTrimmedQuery?: string) => boolean;

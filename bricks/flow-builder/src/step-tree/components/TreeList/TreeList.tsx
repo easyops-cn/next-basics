@@ -61,6 +61,7 @@ export function TreeNode({
     onActionClick,
     mouseEnterFactory,
     mouseLeaveFactory,
+    contextMenuFactory,
   } = useContext(WorkbenchTreeContext);
 
   const { q } = useContext(TreeListContext);
@@ -84,6 +85,14 @@ export function TreeNode({
     [mouseLeaveFactory]
   );
 
+  const onContextMenu = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      contextMenuFactory?.(node)?.(e);
+    },
+    [contextMenuFactory, node]
+  );
+
   return (
     <li>
       <Link
@@ -96,6 +105,7 @@ export function TreeNode({
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        onContextMenu={onContextMenu}
       >
         <span className={styles.treeIndent}>
           {[...Array(level - 1)].map((_, i) => {
