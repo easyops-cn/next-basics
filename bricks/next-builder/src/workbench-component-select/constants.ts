@@ -135,20 +135,32 @@ const layoutGroup = [
 
 const widgetGroup = [
   {
-    key: "list",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LIST}`),
+    key: "list-info",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LIST_INFO}`),
   },
   {
-    key: "card-list",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_LIST}`),
+    key: "card-info",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_INFO}`),
+  },
+  {
+    key: "card-statistic",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_STATISTIC}`),
   },
   {
     key: "entry",
     text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_ENTRY}`),
   },
   {
-    key: "num",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NUMBER}`),
+    key: "feedback",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FEEDBACK}`),
+  },
+  {
+    key: "navigation",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NAVIGATION}`),
+  },
+  {
+    key: "layout",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LAYOUT}`),
   },
 ];
 
