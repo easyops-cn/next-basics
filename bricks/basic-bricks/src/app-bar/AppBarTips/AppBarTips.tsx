@@ -36,10 +36,10 @@ export function AppBarTips({
 
   React.useEffect(() => {
     const closeBtn = closeBtnRef.current;
-    closeBtn.addEventListener("click", handleClose);
+    closeBtn?.addEventListener("click", handleClose);
 
     return () => {
-      closeBtn.removeEventListener("click", handleClose);
+      closeBtn?.removeEventListener("click", handleClose);
     };
   }, []);
 
