@@ -41,7 +41,6 @@ beforeAll(() => {
 });
 
 describe("UploadImg", () => {
-  jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({ csrfToken: "abcde" });
   it("should work", async () => {
     const onChange = jest.fn();
     const wrapper = mount(
@@ -56,10 +55,6 @@ describe("UploadImg", () => {
       />
     );
     expect(wrapper.find(Input.TextArea).text()).toBe("desc");
-
-    expect(wrapper.find(Upload).prop("headers")).toEqual({
-      "X-CSRF-Token": "abcde",
-    });
     wrapper.find(Input.TextArea).invoke("onChange")({
       target: {
         value: "",
