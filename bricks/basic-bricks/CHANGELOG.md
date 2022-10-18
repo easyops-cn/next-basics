@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.208.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.207.0...@next-bricks/basic-bricks@1.208.0) (2022-10-18)
+
+
+### Features
+
+* fix appBar margin style ([2e6e044](https://github.com/easyops-cn/next-basics/commit/2e6e0447fc0a0c0dce9dfcc059d8398447d59cdf))
+
+
+
+
+
 # [1.207.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.206.0...@next-bricks/basic-bricks@1.207.0) (2022-10-18)
 
 
