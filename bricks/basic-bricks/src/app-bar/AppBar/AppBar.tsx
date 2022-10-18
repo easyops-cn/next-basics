@@ -84,18 +84,14 @@ export function AppBar({
   }, []);
 
   React.useEffect(() => {
-    if (tipList.length) {
-      const marginTop = `calc(var(--app-bar-height) + ${
-        tipList.length * 38
-      }px)`;
-      const mainElement = document.getElementById("main-mount-point");
-      const iframeMainElement = document.getElementById(
-        "legacy-iframe-mount-point"
-      );
-      mainElement && (mainElement.style.marginTop = marginTop);
-      iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
-    }
-  }, [tipList]);
+    const marginTop = `calc(var(--app-bar-height) + ${tipList.length * 38}px)`;
+    const mainElement = document.getElementById("main-mount-point");
+    const iframeMainElement = document.getElementById(
+      "legacy-iframe-mount-point"
+    );
+    mainElement && (mainElement.style.marginTop = marginTop);
+    iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
+  });
 
   return (
     <div className={styles.appBar} id="app-bar">
