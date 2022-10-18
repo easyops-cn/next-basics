@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.238.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.238.0...@next-bricks/forms@1.238.1) (2022-10-18)
+
+
+### Reverts
+
+* Revert "fix(): upload file with csrf token" ([f46d4a5](https://github.com/easyops-cn/next-basics/commit/f46d4a5ad74116ebded1a377899c9d2366a2b501))
+
+
+
+
+
 # [1.238.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.237.2...@next-bricks/forms@1.238.0) (2022-10-18)
 
 

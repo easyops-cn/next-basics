@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.12](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.11...@next-bricks/flow-builder@1.21.12) (2022-10-18)
+
+
+### Reverts
+
+* Revert "fix(): upload file with csrf token" ([f46d4a5](https://github.com/easyops-cn/next-basics/commit/f46d4a5ad74116ebded1a377899c9d2366a2b501))
+
+
+
+
+
 ## [1.21.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.10...@next-bricks/flow-builder@1.21.11) (2022-10-18)
 
 **Note:** Version bump only for package @next-bricks/flow-builder
