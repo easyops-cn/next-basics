@@ -146,7 +146,9 @@ export function MyDesktop(props: MyDesktopProps, ref: any): React.ReactElement {
       ref={deskContainerRef}
       style={{
         flex: 1,
-        padding: `0 ${props.arrowWidthPercent / props.desktopCount}%`,
+        padding: `0 ${
+          props.desktopCount ? props.arrowWidthPercent / props.desktopCount : 10
+        }%`,
       }}
     >
       {!!recentlyVisitedList?.length && renderRecentlyVisited}

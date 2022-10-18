@@ -73,12 +73,6 @@ export function DesktopCell(props: DesktopCellProps): React.ReactElement {
   const handleAppClick = () => {
     const app = (props.item as DesktopItemApp).app;
     launchpadService.pushVisitor("app", app);
-    if (app.standaloneMode) {
-      const url = getHistory().createHref({
-        pathname: app.homepage,
-      });
-      location.replace(url);
-    }
   };
 
   const handleCustomClick = () => {

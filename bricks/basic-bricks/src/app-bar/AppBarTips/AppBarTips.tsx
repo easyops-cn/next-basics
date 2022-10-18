@@ -26,11 +26,22 @@ export function AppBarTips({
   closable,
   onClose,
 }: AppBarTipsProps): React.ReactElement {
-  const handleClose = () => {
+  const closeBtnRef = React.createRef<HTMLDivElement>();
+
+  const handleClose = (): void => {
     // 1天内不再提示
     storage.setItem(tipKey, moment().unix() + 86400);
     onClose(tipKey);
   };
+
+  React.useEffect(() => {
+    const closeBtn = closeBtnRef.current;
+    closeBtn.addEventListener("click", handleClose);
+
+    return () => {
+      closeBtn.removeEventListener("click", handleClose);
+    };
+  }, []);
 
   return (
     <div
@@ -65,7 +76,7 @@ export function AppBarTips({
       </div>
       {closable ? (
         <div
-          onClick={handleClose}
+          ref={closeBtnRef}
           style={{
             paddingLeft: "20px",
             cursor: "pointer",
