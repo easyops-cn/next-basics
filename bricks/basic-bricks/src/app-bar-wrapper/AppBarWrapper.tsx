@@ -43,6 +43,15 @@ export function AppBarWrapper({
     };
   }, []);
 
+  React.useEffect(() => {
+    const mainElement = document.getElementById("main-mount-point");
+    const iframeMainElement = document.getElementById(
+      "legacy-iframe-mount-point"
+    );
+    mainElement && (mainElement.style.marginTop = "0");
+    iframeMainElement && (iframeMainElement.style.marginTop = "0");
+  }, []);
+
   return (
     <div
       className="app-bar-container"
