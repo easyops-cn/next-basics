@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.207.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.206.0...@next-bricks/basic-bricks@1.207.0) (2022-10-18)
+
+
+### Features
+
+* fix launchpad desktops bug and nav style ([4c9e9d5](https://github.com/easyops-cn/next-basics/commit/4c9e9d5d319d9fa1066b4aa4b2f8a5d0581e7fe9))
+* update unit test ([095828c](https://github.com/easyops-cn/next-basics/commit/095828c60f780baa5174c91143579109e1498cd2))
+
+
+
+
+
 # [1.206.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.205.2...@next-bricks/basic-bricks@1.206.0) (2022-10-18)
 
 
