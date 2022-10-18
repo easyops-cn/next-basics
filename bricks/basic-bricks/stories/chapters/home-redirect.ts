@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const homeRedirectStory: Story = {
   storyId: "basic-bricks.home-redirect",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "steve",
   deprecated: true,

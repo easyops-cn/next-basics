@@ -3,7 +3,7 @@ import { microViewSvg } from "../images";
 
 export const microViewStory: Story = {
   storyId: "basic-bricks.micro-view",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "steve",
   text: {

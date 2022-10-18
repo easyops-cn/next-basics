@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { generalTimerSvg } from "../images";
 export const generalTimerStory: Story = {
   storyId: "basic-bricks.general-timer",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "cyril",
   text: {

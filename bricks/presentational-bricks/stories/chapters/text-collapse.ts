@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { textCollapseSvg } from "../images";
 export const TextCollapseStory: Story = {
   storyId: "presentational-bricks.text-collapse",
-  category: "data-view",
+  category: "text",
   type: "brick",
   author: "julielai",
   text: {

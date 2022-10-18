@@ -4,7 +4,7 @@ import { cmdbInstanceSelectPancel } from "../images";
 
 export const cmdbInstanceSelectPanelStory: Story = {
   storyId: "forms.cmdb-instance-select-panel",
-  category: "form-input",
+  category: "form-input-business",
   type: "brick",
   author: "cyril",
   text: {

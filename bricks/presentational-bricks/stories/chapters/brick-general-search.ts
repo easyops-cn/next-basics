@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { brickGeneralSearchSvg } from "../images";
 export const BrickGeneralSearchStory: Story = {
   storyId: "presentational-bricks.brick-general-search",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "lynette",
   text: {

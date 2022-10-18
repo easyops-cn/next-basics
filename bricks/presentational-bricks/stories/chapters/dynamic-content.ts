@@ -3,7 +3,7 @@ import { dynamicContentSvg } from "../images";
 
 export const DynamicContentStory: Story = {
   storyId: "presentational-bricks.dynamic-content",
-  category: "value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "lynette",
   text: {

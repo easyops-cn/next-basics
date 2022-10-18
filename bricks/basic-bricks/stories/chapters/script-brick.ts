@@ -4,7 +4,7 @@ import { scriptBrickSvg } from "../images";
 
 export const scriptBrickStory: Story = {
   storyId: "basic-bricks.script-brick",
-  category: "data-convert",
+  category: "other",
   type: "brick",
   author: "alren",
   deprecated: true,

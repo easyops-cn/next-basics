@@ -5,7 +5,7 @@ export const dynamicFormItemStory: Story = {
   deprecated: true,
   storyId: "forms.dynamic-form-item",
   type: "brick",
-  category: "form-input",
+  category: "form-input-advanced",
   author: "jo",
   text: {
     en: "Dynamic Add or Remove form Item",

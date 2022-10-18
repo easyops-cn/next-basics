@@ -3,7 +3,7 @@ import { cmdbObjectAttrValue } from "../images";
 
 export const cmdbObjectAttrValueStory: Story = {
   storyId: "forms.cmdb-object-attr-value",
-  category: "form-input",
+  category: "form-input-business",
   type: "brick",
   author: "dophi",
   text: {

@@ -3,7 +3,7 @@ import { generalButtonSvg } from "../images";
 
 export const generalButtonStory: Story = {
   storyId: "basic-bricks.general-button",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "jo",
   text: {
