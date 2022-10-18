@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { advanceSetting } from "../images";
 export const advanceSettingStory: Story = {
   storyId: "forms.advance-setting",
-  category: "form-input",
+  category: "form-input-advanced",
   type: "brick",
   author: "momo",
   text: {

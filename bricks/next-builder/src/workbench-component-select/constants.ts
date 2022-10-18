@@ -33,40 +33,64 @@ export const i18nTransform: Record<string, string> = {
 
 const brickGroup = [
   {
-    key: "layout",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LAYOUT}`),
+    key: "form-input-basic",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM_INPUT_BASIC}`),
   },
   {
-    key: "card",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD}`),
+    key: "form-input-advanced",
+    text: i18next.t(
+      `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM_INPUT_ADVANCED}`
+    ),
   },
   {
-    key: "general-tables",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_GENERAL_TABLES}`),
+    key: "form-input-business",
+    text: i18next.t(
+      `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM_INPUT_BUSINESS}`
+    ),
   },
   {
-    key: "description",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DESCRIPTION}`),
+    key: "interact-basic",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_INTERACT_BASIC}`),
+  },
+  {
+    key: "form",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM}`),
+  },
+  {
+    key: "text",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_TEXT}`),
+  },
+  {
+    key: "card-info",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_INFO}`),
+  },
+  {
+    key: "card-statistic",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_STATISTIC}`),
+  },
+  {
+    key: "display-component",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DISPLAY_COMPONENT}`),
   },
   {
     key: "chart",
     text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CHART}`),
   },
   {
-    key: "value-mapping",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_VALUE_MAPPING}`),
+    key: "topology",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_TOPOLOGY}`),
   },
   {
-    key: "data-view",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_VIEW}`),
+    key: "data-transform",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_TRANSFORM}`),
   },
   {
-    key: "form-input",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM_INPUT}`),
+    key: "container-display",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CONTAINER_DISPLAY}`),
   },
   {
-    key: "navigation",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NAVIGATION}`),
+    key: "container-layout",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CONTAINER_LAYOUT}`),
   },
   {
     key: "feedback-and-tooltip",
@@ -75,20 +99,22 @@ const brickGroup = [
     ),
   },
   {
-    key: "data-convert",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_DATA_CONVERT}`),
+    key: "navigation",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NAVIGATION}`),
   },
   {
-    key: "topology",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_TOPOLOGY}`),
+    key: "big-screen-content",
+    text: i18next.t(
+      `${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_BIG_SCREEN_CONTENT}`
+    ),
+  },
+  {
+    key: "big-screen-layout",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_BIG_SCREEN_LAYOUT}`),
   },
   {
     key: "other",
     text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_OTHER}`),
-  },
-  {
-    key: "template",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.TEMPLATE}`),
   },
 ];
 
@@ -109,20 +135,32 @@ const layoutGroup = [
 
 const widgetGroup = [
   {
-    key: "list",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LIST}`),
+    key: "list-info",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LIST_INFO}`),
   },
   {
-    key: "card-list",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_LIST}`),
+    key: "card-info",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_INFO}`),
+  },
+  {
+    key: "card-statistic",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_CARD_STATISTIC}`),
   },
   {
     key: "entry",
     text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_ENTRY}`),
   },
   {
-    key: "num",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NUMBER}`),
+    key: "feedback",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FEEDBACK}`),
+  },
+  {
+    key: "navigation",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_NAVIGATION}`),
+  },
+  {
+    key: "layout",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_LAYOUT}`),
   },
 ];
 

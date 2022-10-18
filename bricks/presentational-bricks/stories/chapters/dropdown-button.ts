@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { dropdownButtonSvg } from "../images";
 export const DropdownButtonStory: Story = {
   storyId: "presentational-bricks.dropdown-button",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "astrid",
   text: {

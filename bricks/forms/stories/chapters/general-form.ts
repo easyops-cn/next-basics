@@ -3,7 +3,7 @@ import { generalFormSvg } from "../images";
 export const story: Story = {
   storyId: "forms.general-form",
   type: "brick",
-  category: "form-input",
+  category: "form-input-basic",
   author: "steve",
   text: {
     en: "General Form",

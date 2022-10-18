@@ -3,7 +3,7 @@ import { tableTransferSvg } from "../images";
 
 export const TableTransferStory: Story = {
   storyId: "presentational-bricks.table-transfer",
-  category: "layout",
+  category: "container-display",
   type: "brick",
   author: "ann",
   text: {

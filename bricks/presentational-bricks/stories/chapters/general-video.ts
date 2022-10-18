@@ -3,7 +3,7 @@ import { generalVideoSvg } from "../images";
 
 export const GeneralVideoStory: Story = {
   storyId: "presentational-bricks.general-video",
-  category: "data-view",
+  category: "display-component",
   type: "brick",
   author: "alren",
   text: {

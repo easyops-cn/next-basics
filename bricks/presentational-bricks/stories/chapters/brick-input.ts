@@ -3,7 +3,7 @@ import { brickInputSvg } from "../images";
 
 export const BrickInputStory: Story = {
   storyId: "presentational-bricks.brick-input",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "momo",
   text: {

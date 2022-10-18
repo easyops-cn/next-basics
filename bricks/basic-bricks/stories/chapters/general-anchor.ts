@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { generalAnchorSvg } from "../images";
 export const generalAnchorStory: Story = {
   storyId: "basic-bricks.general-anchor",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "astrid",
   text: {

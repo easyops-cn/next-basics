@@ -3,7 +3,7 @@ import { cmdbInstanceSelectSvg } from "../images";
 export const cmdbInstanceSelectStory: Story = {
   storyId: "forms.cmdb-instance-select",
   type: "brick",
-  category: "form-input",
+  category: "form-input-business",
   author: "jo",
   text: {
     en: "Cmdb Instance Select",

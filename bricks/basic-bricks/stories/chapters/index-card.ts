@@ -3,7 +3,7 @@ import { indexCardSvg } from "../images";
 
 export const indexCardStory: Story = {
   storyId: "basic-bricks.index-card",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "william",
   text: {

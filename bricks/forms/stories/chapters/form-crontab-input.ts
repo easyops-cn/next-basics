@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { crontabInput } from "../images";
 export const crontabInputStory: Story = {
   storyId: "forms.crontab-input",
-  category: "form-input",
+  category: "form-input-business",
   type: "brick",
   author: "jo",
   text: {

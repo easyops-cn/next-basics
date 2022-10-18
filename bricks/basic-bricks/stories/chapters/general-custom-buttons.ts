@@ -3,7 +3,7 @@ import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
 import { generalCustomButtonsSvg } from "../images";
 export const generalCustomButtonsStory: Story = {
   storyId: "basic-bricks.general-custom-buttons",
-  category: "interact-baisc",
+  category: "interact-basic",
   type: "brick",
   author: "ice",
   text: {

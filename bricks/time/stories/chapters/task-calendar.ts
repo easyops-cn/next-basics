@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { taskCalendarSvg } from "../images";
 export const TaskCalendarStory: Story = {
   storyId: "time.task-calendar",
-  category: "data-view",
+  category: "display-component",
   type: "brick",
   author: "nlicroshan",
   text: {

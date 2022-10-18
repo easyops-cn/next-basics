@@ -3,7 +3,7 @@ import { calendarSvg } from "../images";
 
 export const CalendarStory: Story = {
   storyId: "presentational-bricks.calendar",
-  category: "form-input",
+  category: "display-component",
   type: "brick",
   author: "Alex",
   text: {
