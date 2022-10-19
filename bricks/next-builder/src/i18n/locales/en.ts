@@ -137,7 +137,7 @@ const locale: Locale = {
   [K.BRICK_CATEGORY_CARD_LIST]: "Card List",
   [K.BRICK_CATEGORY_ENTRY]: "Entry Card",
   [K.BRICK_CATEGORY_NUMBER]: "Statistics Number",
-  [K.BRICK_CATEGORY_LIST_INFO]: "List Info",
+  [K.BRICK_CATEGORY_LIST_INFO]: "Info List",
   [K.BRICK_CATEGORY_FEEDBACK]: "Feedback",
   [K.CONTRACT_OPTIONS_TIPS_PREFIX]: "Only the first",
   [K.CONTRACT_OPTIONS_TIPS_SUFFIX]:
