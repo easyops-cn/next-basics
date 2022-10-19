@@ -126,6 +126,62 @@ export interface CascaderProps extends BasicProps {
   fieldNames?: FieldNamesType;
 }
 
+export interface EditorProps {
+  /**
+   * 占位符
+   */
+  placeholder?: string;
+  /**
+   * 语言模式
+   */
+  mode?: string;
+  /**
+   * 最小行数
+   */
+  minLines?: number;
+  /**
+   * 最大行数
+   */
+  maxLines?: number;
+  /**
+   * 主题
+   */
+  theme?: string;
+
+  /**
+   * 显示左侧区域槽
+   */
+  showGutter?: boolean;
+  /**
+   * 只读模式
+   */
+  readOnly?: boolean;
+  /**
+   * 显示行数
+   */
+  showLineNumbers?: boolean;
+  /**
+   * 显示复制按钮
+   */
+  showCopyButton?: boolean;
+  /**
+   * 显示展开按钮
+   */
+  showExpandButton?: boolean;
+  /**
+   * 是否开启自动补全
+   */
+  enableLiveAutocompletion?: boolean;
+  /**
+   * 显示打印边距
+   */
+  printMargin?: boolean;
+  /**
+   * 自定义自动补全
+   */
+  customCompleters?: string[];
+}
+
 export interface InputColumn {
   // type: ComponentType.INPUT;
   type: "input";
@@ -154,6 +210,11 @@ export interface CascaderColumn {
   // type: ComponentType.CASCADER;
   type: "cascader";
   props: CascaderProps;
+}
+
+export interface EditorColumn {
+  type: "editor";
+  props: EditorProps;
 }
 
 export interface BasicColumn {
@@ -198,4 +259,5 @@ export type Column = BasicColumn &
     | InputPasswordColumn
     | SelectColumn
     | CascaderColumn
+    | EditorColumn
   );
