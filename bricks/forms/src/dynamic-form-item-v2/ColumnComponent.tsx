@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { FormListFieldData } from "antd/lib/form/FormList";
 import { Column, ComponentType, SelectProps } from "../interfaces";
+import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Cascader, Form, Input, InputNumber, Select } from "antd";
 import _, { groupBy, isEqual, isNil, partial } from "lodash";
 import { getRealValue } from "./util";
@@ -229,6 +230,49 @@ export function ColumnComponent(
             options={options}
             showSearch={showSearch}
             fieldNames={fieldNames}
+          />
+        </Form.Item>
+      );
+    }
+
+    case "editor": {
+      const {
+        placeholder,
+        mode,
+        minLines = 2,
+        maxLines = 2,
+        readOnly,
+        showLineNumbers,
+        showCopyButton,
+        showExpandButton = true,
+        printMargin = false,
+        enableLiveAutocompletion,
+        customCompleters,
+        theme,
+        showGutter,
+      } = column.props || {};
+
+      return (
+        <Form.Item
+          {...restField}
+          label={labelNode}
+          name={[fieldName, name]}
+          rules={rules}
+        >
+          <CodeEditorItem
+            placeholder={placeholder}
+            mode={mode}
+            enableLiveAutocompletion={enableLiveAutocompletion}
+            minLines={minLines}
+            maxLines={maxLines}
+            showGutter={showGutter}
+            readOnly={readOnly}
+            showLineNumbers={showLineNumbers}
+            showCopyButton={showCopyButton}
+            showExpandButton={showExpandButton}
+            printMargin={printMargin}
+            theme={theme}
+            customCompleters={customCompleters}
           />
         </Form.Item>
       );

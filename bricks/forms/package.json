@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@next-core/custom-antd-styles": "^1.24.13",
+    "@next-libs/code-editor-components": "4.1.5",
     "@next-libs/basic-components": "^4.0.0",
     "@next-libs/clipboard": "^3.0.2",
     "@next-libs/cmdb-instances": "^6.45.1",

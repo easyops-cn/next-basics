@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Cascader, Form, Input, InputNumber, Select } from "antd";
 import { ColumnComponent } from "./ColumnComponent";
+import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Column, ComponentType } from "../interfaces";
 
 const field = {
@@ -53,6 +54,15 @@ const cascaderColumn = {
   type: "cascader",
   props: {
     options: [{ label: "a", value: "a" }],
+  },
+} as Column;
+
+const editorColumn = {
+  name: "editor",
+  label: "editor",
+  type: "editor",
+  props: {
+    mode: "yaml",
   },
 } as Column;
 
@@ -123,6 +133,14 @@ describe("ColumnComponent", () => {
       <ColumnComponent column={cascaderColumn} field={field} />
     );
     expect(wrapper.find(Cascader)).toHaveLength(1);
+  });
+
+  it("editor should work", () => {
+    const wrapper = shallow(
+      <ColumnComponent column={editorColumn} field={field} />
+    );
+
+    expect(wrapper.find(CodeEditorItem)).toHaveLength(1);
   });
 
   it("label should work", () => {
