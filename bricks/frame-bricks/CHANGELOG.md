@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.6.1...@next-bricks/frame-bricks@1.6.2) (2022-10-19)
+
+
+### Bug Fixes
+
+* liscense style bug fix ([a72af8c](https://github.com/easyops-cn/next-basics/commit/a72af8c08231303ebec1133d36e55f3ead9cb24e))
+
+
+
+
+
 ## [1.6.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.6.0...@next-bricks/frame-bricks@1.6.1) (2022-10-17)
 
 
