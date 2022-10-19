@@ -28,8 +28,10 @@ export function AppBarWrapper({
     setTipList(res);
   }) as EventListener;
 
-  const handleCloseTips = (targetKey: string) => {
-    setTipList(tipList.filter((item) => item.tipKey !== targetKey));
+  const handleCloseTips = (targetKey: string): void => {
+    const list = tipList.filter((item) => item.tipKey !== targetKey);
+    setTipList(list);
+    window.dispatchEvent(new CustomEvent("app.bar.tips", { detail: list }));
   };
 
   React.useEffect(() => {
@@ -48,8 +50,8 @@ export function AppBarWrapper({
     const iframeMainElement = document.getElementById(
       "legacy-iframe-mount-point"
     );
-    mainElement && (mainElement.style.marginTop = "0");
-    iframeMainElement && (iframeMainElement.style.marginTop = "0");
+    mainElement && (mainElement.style.marginTop = "");
+    iframeMainElement && (iframeMainElement.style.marginTop = "");
   }, []);
 
   return (
