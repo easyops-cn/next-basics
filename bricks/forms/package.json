@@ -1,6 +1,6 @@
 {
   "name": "@next-bricks/forms",
-  "version": "1.238.1",
+  "version": "1.239.0",
   "description": "> TODO: description",
   "homepage": "https://github.com/easyops-cn/next-basics/tree/master/bricks/forms",
   "license": "GPL-3.0",
@@ -29,10 +29,10 @@
   },
   "devDependencies": {
     "@next-core/custom-antd-styles": "^1.24.13",
-    "@next-libs/code-editor-components": "4.1.5",
     "@next-libs/basic-components": "^4.0.0",
     "@next-libs/clipboard": "^3.0.2",
     "@next-libs/cmdb-instances": "^6.45.1",
+    "@next-libs/code-editor-components": "4.1.5",
     "@next-libs/crontab": "^2.0.3",
     "@next-libs/forms": "^3.2.30",
     "@next-libs/user-components": "^0.1.1",
