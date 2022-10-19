@@ -13,11 +13,6 @@ export const eventAgentStory: Story = {
     en: "Use the event agent to handle callbacks by events.",
     zh: "使用事件代理来处理回调。",
   },
-  icon: {
-    lib: "antd",
-    theme: "outlined",
-    icon: "interaction",
-  },
   conf: [
     {
       brick: "basic-bricks.event-agent",
