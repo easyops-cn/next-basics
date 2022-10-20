@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.210.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.210.1...@next-bricks/basic-bricks@1.210.2) (2022-10-20)
+
+
+### Bug Fixes
+
+* appbar-tip兼容menu-bar场景的样式 ([5f7ded5](https://github.com/easyops-cn/next-basics/commit/5f7ded5b08c4ac16f6a3c78fbe4259283126edab))
+
+
+
+
+
 ## [1.210.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.210.0...@next-bricks/basic-bricks@1.210.1) (2022-10-20)
 
 
