@@ -644,33 +644,23 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
   if (componentData.layerType === "brick" && componentData.type === "brick") {
     return (
       <div className={styles.brickItem}>
+        {itemElem}
         <div className={styles.actionWrapper}>
-          <span
-            className={styles.badge}
-            title={t(K.DOCUMENT)}
+          <div
+            className={styles.action}
             onClick={(e) => handleActionClick("document", componentData, e)}
           >
-            <GeneralIcon
-              icon={{
-                lib: "easyops",
-                category: "app",
-                icon: "next-documents",
-              }}
-            />
-          </span>
+            文档
+          </div>
           {isShowSnippets && (
-            <span
-              className={styles.badge}
-              title={t(K.SNIPPET)}
+            <div
+              className={styles.action}
               onClick={(e) => handleActionClick("snippet", componentData, e)}
             >
-              <GeneralIcon
-                icon={{ lib: "antd", icon: "thunderbolt", theme: "outlined" }}
-              />
-            </span>
+              模板
+            </div>
           )}
         </div>
-        {itemElem}
       </div>
     );
   }

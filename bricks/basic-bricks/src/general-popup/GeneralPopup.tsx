@@ -14,6 +14,7 @@ export interface GeneralPopupProps {
   popupTitle?: string;
   popupWidth?: React.CSSProperties["width"];
   popupHeight?: React.CSSProperties["height"];
+  closePopup?: () => void;
 }
 
 export function GeneralPopup({
@@ -22,6 +23,7 @@ export function GeneralPopup({
   popupWidth,
   popupHeight,
   visible,
+  closePopup,
 }: GeneralPopupProps): React.ReactElement {
   const popupRef = useRef<HTMLDivElement>();
   const headerRef = useRef<HTMLDivElement>();
@@ -50,6 +52,19 @@ export function GeneralPopup({
 
   const handleMouseDown = (e: MouseEvent): void => {
     e.stopPropagation();
+    const paths = e.composedPath() as HTMLElement[];
+    for (const path of paths) {
+      if (path.nodeName.toLowerCase() === "#document-fragment") {
+        break;
+      }
+      if (
+        path.nodeName.toLowerCase() === "span" &&
+        path.className.includes("anticon anticon-close")
+      ) {
+        closePopup?.();
+        return;
+      }
+    }
     setIsMove(true);
     curPointRef.current = {
       offsetX: e.offsetX,
@@ -88,18 +103,18 @@ export function GeneralPopup({
   }, [popupId, storage]);
 
   useEffect(() => {
-    if (popupRef.current) {
+    const popupElement = popupRef.current;
+    if (popupElement) {
       setPointerPosition(initPos());
       /**
        * Antd Select构件在shadow dom会出现异常的情况
        * 具体可参见: https://github.com/ant-design/ant-design/issues/28012
        * 采用原生事件监听可避免该种情况发生
        */
-      headerRef.current.addEventListener("mousedown", handleMouseDown);
+      popupElement.addEventListener("mousedown", handleMouseDown);
     }
     return () => {
-      headerRef.current &&
-        headerRef.current.removeEventListener("mousedown", handleMouseDown);
+      popupElement?.removeEventListener("mousedown", handleMouseDown);
     };
   }, [visible, initPos]);
 
