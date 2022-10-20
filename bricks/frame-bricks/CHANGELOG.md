@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.6.2...@next-bricks/frame-bricks@1.6.3) (2022-10-20)
+
+
+### Bug Fixes
+
+* fix sidebar margin bug & update style ([ea3dc31](https://github.com/easyops-cn/next-basics/commit/ea3dc31e359b637bcffc8fda706f950e6a6554e7))
+
+
+
+
+
 ## [1.6.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.6.1...@next-bricks/frame-bricks@1.6.2) (2022-10-19)
 
 
