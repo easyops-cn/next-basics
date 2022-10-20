@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.192.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.191.1...@next-bricks/next-builder@1.192.0) (2022-10-20)
+
+
+### Features
+
+* update componentSelect style and fix popup bug ([db99a68](https://github.com/easyops-cn/next-basics/commit/db99a68ef2782111136ca6ebbc644892ada1876c))
+* update unit test ([bd1c192](https://github.com/easyops-cn/next-basics/commit/bd1c1927035ebf593d2310bb54b284c15327716e))
+
+
+
+
+
 ## [1.191.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.191.0...@next-bricks/next-builder@1.191.1) (2022-10-20)
 
 **Note:** Version bump only for package @next-bricks/next-builder
