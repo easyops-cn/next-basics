@@ -38,3 +38,4 @@ import "./upload-files-v2";
 import "./lazy-bricks";
 // !Lazy: import "./dynamic-form-item-v2";
 import "./general-input-number-range";
+import "./general-link";
