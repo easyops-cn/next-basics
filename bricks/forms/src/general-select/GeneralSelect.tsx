@@ -152,8 +152,6 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
             setLoading(false);
           }
         })();
-      } else {
-        setOptions(props.options);
       }
     },
     [props.useBackend, props.fields]
