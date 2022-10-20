@@ -73,7 +73,9 @@ export function AppBar({
   }) as EventListener;
 
   const handleCloseTips = (targetKey: string) => {
-    setTipList(tipList.filter((item) => item.tipKey !== targetKey));
+    const list = tipList.filter((item) => item.tipKey !== targetKey);
+    setTipList(list);
+    window.dispatchEvent(new CustomEvent("app.bar.tips", { detail: list }));
   };
 
   React.useEffect(() => {
