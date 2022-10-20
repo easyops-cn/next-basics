@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.239.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.239.1...@next-bricks/forms@1.239.2) (2022-10-20)
+
+
+### Bug Fixes
+
+* 修复select无法搜索问题 ([d43edd9](https://github.com/easyops-cn/next-basics/commit/d43edd9edeac73a868026f1464713c5f09c06b85))
+
+
+
+
+
 ## [1.239.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.239.0...@next-bricks/forms@1.239.1) (2022-10-20)
 
 **Note:** Version bump only for package @next-bricks/forms
