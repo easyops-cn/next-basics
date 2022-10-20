@@ -83,7 +83,7 @@ export function AppBar({
       "legacy-iframe-mount-point"
     );
     if (tipList.length) {
-      marginTop = `calc(var(--app-bar-height) + ${tipList.length * 38}px)`;
+      marginTop = `calc(var(--app-bar-height) + ${tipList.length * 32}px)`;
     }
     mainElement && (mainElement.style.marginTop = marginTop);
     iframeMainElement && (iframeMainElement.style.marginTop = marginTop);
