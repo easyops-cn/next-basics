@@ -54,15 +54,17 @@ export function GeneralPopup({
     e.stopPropagation();
     const paths = e.composedPath() as HTMLElement[];
     for (const path of paths) {
-      if (path.nodeName.toLowerCase() === "#document-fragment") {
-        break;
-      }
-      if (
-        path.nodeName.toLowerCase() === "span" &&
-        path.className.includes("anticon anticon-close")
-      ) {
-        closePopup?.();
-        return;
+      if (path.nodeName) {
+        if (path.nodeName.toLowerCase() === "#document-fragment") {
+          break;
+        }
+        if (
+          path.nodeName.toLowerCase() === "span" &&
+          path.className.includes("anticon anticon-close")
+        ) {
+          closePopup?.();
+          return;
+        }
       }
     }
     setIsMove(true);

@@ -223,7 +223,7 @@ describe("WorkbenchComponentSelect", () => {
 
     fireEvent.mouseOver(screen.getByText("折叠容器V2"));
 
-    fireEvent.click(brickElement.parentElement.querySelectorAll(".badge")[1]);
+    fireEvent.click(brickElement.parentElement.querySelectorAll(".action")[1]);
 
     expect(screen.getByText(/基本折叠容器v2/i)).toBeInTheDocument();
   });
