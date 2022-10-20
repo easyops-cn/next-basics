@@ -12,6 +12,7 @@ import { JsonStorage } from "@next-libs/storage";
 import { SideBarElement } from "./index";
 import ResizeObserver from "rc-resize-observer";
 import { debounce } from "lodash";
+import moment from "moment";
 
 interface SideBarProps {
   menu?: SidebarSubMenu;
@@ -130,8 +131,14 @@ export function SideBar(props: SideBarProps): React.ReactElement {
   }, [contentContainerRef, sidebarContentHeight]);
 
   const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
-    const list = e.detail ?? [];
-    const top = `calc(var(--app-bar-height) + ${list.length * 38}px)`;
+    const list = (e.detail ?? []).filter((item) => {
+      const isTipClosing =
+        item.closable &&
+        storage.getItem(item.tipKey) &&
+        moment().unix() <= storage.getItem(item.tipKey);
+      return !isTipClosing;
+    });
+    const top = `calc(var(--app-bar-height) + ${list.length * 32}px)`;
 
     wrapperDOM.style.top = top;
     setTipList(list);
@@ -146,7 +153,7 @@ export function SideBar(props: SideBarProps): React.ReactElement {
 
   const sidebarHeight = useMemo(() => {
     return `calc(100vh - var(--app-bar-height) + 1px - ${
-      tipList.length * 38
+      tipList.length * 32
     }px)`;
   }, [tipList]);
 

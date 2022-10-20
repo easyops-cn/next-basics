@@ -51,7 +51,7 @@ export function AppBarTips({
         boxSizing: "border-box",
         width: "100%",
         lineHeight: "26px",
-        padding: "6px 20px",
+        padding: "3px 20px",
         backgroundColor: backgroundColor,
         color: "var(--antd-text-color)",
         overflow: "hidden",
@@ -65,6 +65,7 @@ export function AppBarTips({
           <a
             style={{
               marginLeft: 10,
+              color: "#1A7AFF",
             }}
             href={info.url}
             target="_blank"
@@ -80,6 +81,7 @@ export function AppBarTips({
           style={{
             paddingLeft: "20px",
             cursor: "pointer",
+            color: "#8C8C8C",
           }}
         >
           <GeneralIcon
