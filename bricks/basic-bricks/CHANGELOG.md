@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.211.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.211.0...@next-bricks/basic-bricks@1.211.1) (2022-10-20)
+
+
+### Bug Fixes
+
+* fix popup move bug ([db86278](https://github.com/easyops-cn/next-basics/commit/db862780bb98c3def27d298634c4345975661734))
+
+
+
+
+
 # [1.211.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.210.2...@next-bricks/basic-bricks@1.211.0) (2022-10-20)
 
 
