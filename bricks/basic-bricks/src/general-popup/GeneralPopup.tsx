@@ -65,13 +65,18 @@ export function GeneralPopup({
           closePopup?.();
           return;
         }
+        if (
+          path.nodeName.toLowerCase() === "div" &&
+          path.className.includes("header")
+        ) {
+          setIsMove(true);
+          curPointRef.current = {
+            offsetX: e.offsetX,
+            offsetY: e.offsetY,
+          };
+        }
       }
     }
-    setIsMove(true);
-    curPointRef.current = {
-      offsetX: e.offsetX,
-      offsetY: e.offsetY,
-    };
   };
 
   const handleMouseMove = (e: MouseEvent): void => {
