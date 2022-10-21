@@ -46,7 +46,7 @@ export function AppBarTips({
 
   return (
     <div
-      style={{ backgroundColor: theme === "dark-v2" ? "#29292D" : "#fffff" }}
+      style={{ backgroundColor: theme === "dark-v2" ? "#29292D" : "#ffffff" }}
     >
       <div
         style={{

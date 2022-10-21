@@ -130,7 +130,7 @@ describe("AppBar", () => {
       await (global as any).flushPromises();
     });
     expect(wrapper.html()).toMatchInlineSnapshot(
-      `"<div class=\\"appBar\\" id=\\"app-bar\\"><div><div style=\\"display: flex; justify-content: space-between; box-sizing: border-box; width: 100%; line-height: 26px; padding: 3px 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;\\"><div>hello world</div></div></div><div class=\\"appBarContent\\"><div class=\\"titleContainer\\"><div>LaunchpadButton</div><div class=\\"ant-divider ant-divider-vertical\\" style=\\"height: 24px; margin: 0px 16px; top: 0px;\\" role=\\"separator\\"></div><div>AppBarBreadcrumb</div></div><div class=\\"actionsContainer\\"><div>AppDocumentLink</div><div></div></div></div></div>"`
+      `"<div class=\\"appBar\\" id=\\"app-bar\\"><div style=\\"background-color: rgb(255, 255, 255);\\"><div style=\\"display: flex; justify-content: space-between; box-sizing: border-box; width: 100%; line-height: 26px; padding: 3px 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;\\"><div>hello world</div></div></div><div class=\\"appBarContent\\"><div class=\\"titleContainer\\"><div>LaunchpadButton</div><div class=\\"ant-divider ant-divider-vertical\\" style=\\"height: 24px; margin: 0px 16px; top: 0px;\\" role=\\"separator\\"></div><div>AppBarBreadcrumb</div></div><div class=\\"actionsContainer\\"><div>AppDocumentLink</div><div></div></div></div></div>"`
     );
   });
 });
