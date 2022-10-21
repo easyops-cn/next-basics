@@ -22,6 +22,7 @@ import {
   getRuntime,
   httpErrorToString,
   authenticate,
+  handleHttpError,
 } from "@next-core/brick-kit";
 import loginPng from "../images/login.png";
 import { debounce, omit, assign } from "lodash";
@@ -198,13 +199,7 @@ export function GeneralSignup(props: GeneralSignupProps): React.ReactElement {
       }
       message.success(t(K.REGISTER_SUCCESS));
     } catch (error) {
-      Modal.error({
-        title: t(K.REGISTER_FAILED),
-        content:
-          isCommonSignup && !hideInvite
-            ? t(K.WRONG_VERIFICATION_CODE)
-            : t(K.WRONG_INVITE_CODE),
-      });
+      handleHttpError(error);
     }
   };
 
