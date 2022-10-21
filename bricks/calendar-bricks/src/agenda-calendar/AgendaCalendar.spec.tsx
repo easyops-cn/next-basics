@@ -14,7 +14,6 @@ export const mockDayData = [
     title: "Weekly mee6578979579690ting",
     start: "2022-10-09T12:00:00",
     end: "2022-10-09T13:29:00",
-    backgroundColor: "yellow",
     task: {
       a: "1",
       b: "2",
@@ -114,6 +113,7 @@ describe("TestTest", () => {
         ref={calendaeRef}
         agendaData={mockDayData}
         showEventCount={true}
+        agendaRandomColor={false}
         onQuickSwitchDate={mockOnQuickSwitchDate}
         afterTitleBrick={{
           useBrick: {
@@ -143,7 +143,9 @@ describe("TestTest", () => {
     calendaeRef.current.getApi().gotoDate(1665244800000);
     wrapper.update();
     wrapper.find(".customDayEventsDiv").at(0).simulate("click");
-
+    wrapper.setProps({
+      agendaRandomColor: true,
+    });
     wrapper.unmount();
   });
 });

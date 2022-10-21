@@ -53,7 +53,13 @@ class CustomView extends React.Component {
                 <div
                   className="customTimeZoneDiv"
                   key={index}
-                  style={index === 23 ? { borderRight: "1px solid" } : {}}
+                  style={
+                    index === 23
+                      ? {
+                          borderRight: "1px solid var(--fc-border-color, #ddd)",
+                        }
+                      : {}
+                  }
                 >
                   {i}
                 </div>
