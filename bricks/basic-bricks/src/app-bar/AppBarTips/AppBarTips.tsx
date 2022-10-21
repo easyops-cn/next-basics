@@ -1,3 +1,4 @@
+import { getCurrentTheme } from "@next-core/brick-kit";
 import { JsonStorage } from "@next-core/brick-utils";
 import { GeneralIcon } from "@next-libs/basic-components";
 import moment from "moment";
@@ -27,7 +28,7 @@ export function AppBarTips({
   onClose,
 }: AppBarTipsProps): React.ReactElement {
   const closeBtnRef = React.createRef<HTMLDivElement>();
-
+  const theme = getCurrentTheme();
   const handleClose = (): void => {
     // 1天内不再提示
     storage.setItem(tipKey, moment().unix() + 86400);
@@ -45,51 +46,55 @@ export function AppBarTips({
 
   return (
     <div
-      style={{
-        display: "flex",
-        justifyContent: isCenter ? "center" : "space-between",
-        boxSizing: "border-box",
-        width: "100%",
-        lineHeight: "26px",
-        padding: "3px 20px",
-        backgroundColor: backgroundColor,
-        color: "var(--antd-text-color)",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-      }}
+      style={{ backgroundColor: theme === "dark-v2" ? "#29292D" : "#ffffff" }}
     >
-      <div>
-        {text}
-        {info ? (
-          <a
+      <div
+        style={{
+          display: "flex",
+          justifyContent: isCenter ? "center" : "space-between",
+          boxSizing: "border-box",
+          width: "100%",
+          lineHeight: "26px",
+          padding: "3px 20px",
+          backgroundColor: backgroundColor,
+          color: "var(--antd-text-color)",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <div>
+          {text}
+          {info ? (
+            <a
+              style={{
+                marginLeft: 10,
+                color: "#1A7AFF",
+              }}
+              href={info.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {info.label}
+            </a>
+          ) : null}
+        </div>
+        {closable ? (
+          <div
+            ref={closeBtnRef}
             style={{
-              marginLeft: 10,
-              color: "#1A7AFF",
+              paddingLeft: "20px",
+              cursor: "pointer",
+              color: "#8C8C8C",
             }}
-            href={info.url}
-            target="_blank"
-            rel="noreferrer"
           >
-            {info.label}
-          </a>
+            <GeneralIcon
+              icon={{ lib: "antd", icon: "close", theme: "outlined" }}
+              style={{ display: "flex", alignItems: "center", height: "100%" }}
+            />
+          </div>
         ) : null}
       </div>
-      {closable ? (
-        <div
-          ref={closeBtnRef}
-          style={{
-            paddingLeft: "20px",
-            cursor: "pointer",
-            color: "#8C8C8C",
-          }}
-        >
-          <GeneralIcon
-            icon={{ lib: "antd", icon: "close", theme: "outlined" }}
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
-          />
-        </div>
-      ) : null}
     </div>
   );
 }
