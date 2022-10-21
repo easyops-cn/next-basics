@@ -11,7 +11,7 @@ describe("SubMenu", () => {
           type: "default",
           text: "基本信息",
           to: "/contract/subMenu",
-          exact: true
+          exact: true,
         },
         {
           type: "group",
@@ -19,17 +19,22 @@ describe("SubMenu", () => {
           items: [
             {
               text: "所在机柜",
-              to: "/contract/subMenu/host"
+              to: "/contract/subMenu/host",
             },
             {
               text: "运维人员",
-              to: "/contract/subMenu/person"
-            }
-          ]
-        }
-      ]
+              to: "/contract/subMenu/person",
+            },
+          ],
+        },
+      ],
     };
-    const wrapper = shallow(<SubMenu dataSource={dataSource} />);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(
+      <SubMenu
+        dataSource={dataSource}
+        topOperationConf={{ useBrick: { brick: "span" } }}
+      />
+    );
+    expect(wrapper.find(".header").children().length).toBe(2);
   });
 });

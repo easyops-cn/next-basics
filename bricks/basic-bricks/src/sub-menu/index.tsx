@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrickWrapper, property, UpdatingElement } from "@next-core/brick-kit";
 import { SubMenu } from "./SubMenu";
-import { SidebarMenu } from "@next-core/brick-types";
+import { SidebarMenu, UseBrickConf } from "@next-core/brick-types";
 
 /**
  * @id basic-bricks.sub-menu
@@ -25,6 +25,18 @@ export class SubMenuElement extends UpdatingElement {
    * @description 数据源
    */
   @property({ attribute: false }) dataSource: SidebarMenu;
+
+  /**
+   * @kind { useBrick: UseBrickConf }
+   * @required false
+   * @default -
+   * @description 菜单顶部操作按钮
+   */
+  @property({
+    attribute: false,
+  })
+  topOperationConf: { useBrick: UseBrickConf };
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -41,7 +53,10 @@ export class SubMenuElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <SubMenu dataSource={this.dataSource} />
+          <SubMenu
+            dataSource={this.dataSource}
+            topOperationConf={this.topOperationConf}
+          />
         </BrickWrapper>,
         this
       );
