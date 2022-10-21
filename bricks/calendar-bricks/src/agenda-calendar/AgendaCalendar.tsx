@@ -53,6 +53,7 @@ export interface calendarProps {
   firstDay?: number;
   agendaCollapsed?: boolean;
   showEventCount?: boolean;
+  agendaRandomColor?: boolean;
   onDateSelect(date: string, data: any): void;
   onAgendaSelect(data: any): void;
   onQuickSwitchDate(viewType: string, type: string, data: any): void;
@@ -65,6 +66,19 @@ export interface calendarProps {
     data?: any;
   };
 }
+
+export const lightThemeColor = [
+  "#4F70EF",
+  "#02C3D5",
+  "#A74DFC",
+  "#FFCA36",
+  "#FE5C2F",
+  "#1B63DB",
+  "#FD5DB7",
+  "#21C935",
+  "#634EE1",
+  "#FEA800",
+];
 
 export function CalendarRender(props: calendarProps, ref: any) {
   const { afterTitleBrick, afterQuickSwitchBrick, agendaData } = props;
@@ -112,14 +126,36 @@ export function CalendarRender(props: calendarProps, ref: any) {
     }
   }, [viewType]);
   const eventSource = useMemo(() => {
-    return props.agendaData?.map((i) => ({
-      ...i,
-      backgroundColor: i.backgroundColor || props.agendaColor,
-    }));
-  }, [props.agendaData]);
+    let index = 0;
+    return props.agendaData?.map((i) => {
+      let bgColor = i.backgroundColor;
+      if (!bgColor) {
+        if (props.agendaRandomColor) {
+          if (index === 10) {
+            index = 0; //使用的随机颜色的数量为10个，当第10个颜色被分配完时，重新从第一个颜色开始分配。
+          }
+          bgColor = lightThemeColor[index];
+          index += 1;
+        } else {
+          bgColor = props.agendaColor;
+        }
+      }
+      return {
+        ...i,
+        backgroundColor: bgColor,
+      };
+    });
+  }, [props.agendaData, props.agendaRandomColor]);
 
   const handleCustomDayEventClick = (date: string, e: EventRenderRange) => {
-    props.onAgendaSelect(agendaData?.find((i) => i.id === e.def.publicId));
+    props.onAgendaSelect({
+      id: e.def.publicId,
+      start: e.instance.range.start.toISOString(),
+      end: e.instance.range.end.toISOString(),
+      backgroundColor: e.def.ui.backgroundColor,
+      title: e.def.title,
+      ...e.def.extendedProps,
+    });
   };
   const handleQuickSwitch = (type: string) => {
     if (type === "today") {
@@ -316,9 +352,14 @@ export function CalendarRender(props: calendarProps, ref: any) {
               eventClick={
                 // istanbul ignore next
                 (e) => {
-                  props.onAgendaSelect(
-                    agendaData?.find((i) => i.id === e.event.id)
-                  );
+                  props.onAgendaSelect({
+                    id: e.event._def.publicId,
+                    start: e.event._instance.range.start.toISOString(),
+                    end: e.event._instance.range.end.toISOString(),
+                    backgroundColor: e.event._def.ui.backgroundColor,
+                    title: e.event._def.title,
+                    ...e.event._def.extendedProps,
+                  });
                 }
               }
               dateClick={
