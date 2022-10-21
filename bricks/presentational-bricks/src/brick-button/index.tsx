@@ -20,7 +20,7 @@ class BrickButtonElement extends HTMLElement {
     ReactDOM.unmountComponentAtNode(this);
   }
 
-  private _handleOnClick = (e: React.MouseEvent) => {
+  private _handleOnClick = (e: React.MouseEvent): void => {
     this.dispatchEvent(new CustomEvent("button.click", e));
   };
 
