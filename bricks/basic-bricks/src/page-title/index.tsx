@@ -16,7 +16,6 @@ import { PageTitle } from "./PageTitle";
  */
 export class PageTitleElement extends UpdatingElement {
   /**
-   * @kind string
    * @required true
    * @default -
    * @description 页面标题
