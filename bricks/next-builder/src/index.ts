@@ -46,6 +46,7 @@ import "./data-providers/GetProviderOfStoryboard";
 import "./data-providers/GetTypeDeclarations";
 import "./data-providers/GetTypeDeclarationsOfFn";
 import "./custom-processors/getWorkbenchRouteTree";
+import "./custom-processors/getWorkbenchDataTree";
 // !Lazy: import "./workbench-action";
 // !Lazy: import "./workbench-action-list";
 // !Lazy: import "./workbench-sidebar";
