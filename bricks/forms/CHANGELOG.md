@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.240.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.239.3...@next-bricks/forms@1.240.0) (2022-10-24)
+
+
+### Features
+
+* formbuilder添加general-link组件 Refs:FORM_BUILDER-140 ([feac5be](https://github.com/easyops-cn/next-basics/commit/feac5be3a8d8d8fb92f872a8d15d3876f6b8b473))
+
+
+
+
+
 ## [1.239.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.239.2...@next-bricks/forms@1.239.3) (2022-10-21)
 
 **Note:** Version bump only for package @next-bricks/forms
