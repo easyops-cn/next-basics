@@ -46,6 +46,10 @@
   flex: 1;
 }
 
+.unreachable {
+  opacity: 0.3;
+}
+
 .nodeAction,
 .nodeAction:hover,
 .nodeLabelRow .nodeLabel {

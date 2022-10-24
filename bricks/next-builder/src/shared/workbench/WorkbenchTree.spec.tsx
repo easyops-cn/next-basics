@@ -59,6 +59,7 @@ test("WorkbenchTree with nodes", async () => {
           {
             key: 2,
             name: "n-2",
+            unreachable: true,
           },
           {
             key: 3,
@@ -110,6 +111,10 @@ test("WorkbenchTree with nodes", async () => {
       ) as HTMLElement
     ).style.paddingLeft
   ).toEqual("23px");
+
+  expect(
+    (firstLevelLinks[1].querySelector(".nodeLabel") as HTMLElement).classList
+  ).toContain("unreachable");
 
   expect(onMouseEnter).not.toBeCalled();
   fireEvent.mouseEnter(firstLevelLinks[1]);

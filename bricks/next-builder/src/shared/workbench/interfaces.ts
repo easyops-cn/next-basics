@@ -23,6 +23,7 @@ export interface WorkbenchNodeData<T = unknown> {
   isContainer?: boolean;
   originKey?: string;
   parentPath?: string;
+  unreachable?: boolean;
 }
 
 export interface WorkbenchTreeAction {

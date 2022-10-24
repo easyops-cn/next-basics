@@ -282,6 +282,7 @@ export function WorkbenchBrickTree({
               : ["bricks", "custom-template", "snippet"].includes(rootNode.type)
               ? children
               : null,
+          unreachable: node.$$unreachable,
         };
       }
 

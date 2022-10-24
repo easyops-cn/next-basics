@@ -615,7 +615,9 @@ function TreeNode({
             : { ...pick(node.link, ["to", "href"]) })}
         >
           <span
-            className={styles.nodeLabel}
+            className={classNames(styles.nodeLabel, {
+              [styles.unreachable]: node.unreachable,
+            })}
             style={{
               paddingLeft: nodePaddingLeft,
               color: node.labelColor,
