@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.195.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.194.0...@next-bricks/next-builder@1.195.0) (2022-10-24)
+
+
+### Features
+
+* new processor: getWorkbenchDataTree ([f84eebf](https://github.com/easyops-cn/next-basics/commit/f84eebfe38bdc0fca1bdcd3cf576ee0611211d51))
+
+
+
+
+
 # [1.194.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.193.0...@next-bricks/next-builder@1.194.0) (2022-10-24)
 
 
