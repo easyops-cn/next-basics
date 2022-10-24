@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.193.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.192.2...@next-bricks/next-builder@1.193.0) (2022-10-24)
+
+
+### Features
+
+* mark unreachable node ([762bd74](https://github.com/easyops-cn/next-basics/commit/762bd749f90b9edeb3beb3e23a528bdeb71ebbcf))
+
+
+
+
+
 ## [1.192.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.192.1...@next-bricks/next-builder@1.192.2) (2022-10-24)
 
 **Note:** Version bump only for package @next-bricks/next-builder
