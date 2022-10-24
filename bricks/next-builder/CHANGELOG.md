@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.194.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.193.0...@next-bricks/next-builder@1.194.0) (2022-10-24)
+
+
+### Features
+
+* component select style update ([5a3abf8](https://github.com/easyops-cn/next-basics/commit/5a3abf8969e0c11b0eb954a6494f243fc04f08b4))
+
+
+
+
+
 # [1.193.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.192.2...@next-bricks/next-builder@1.193.0) (2022-10-24)
 
 
