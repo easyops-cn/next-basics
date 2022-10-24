@@ -6,9 +6,8 @@ import React, {
   useMemo,
   useContext,
 } from "react";
-import { Input, Tabs, Collapse } from "antd";
+import { Input, Tabs, Collapse, Popover } from "antd";
 import { useTranslation } from "react-i18next";
-import { CSSTransition } from "react-transition-group";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import {
   suggest,
@@ -30,11 +29,11 @@ import ResizeObserver from "resize-observer-polyfill";
 import { adjustBrickSort, getSnippetsOfBrickMap } from "./processor";
 import styles from "./WorkbenchComponentSelect.module.css";
 import classNames from "classnames";
-import { NS_NEXT_BUILDER, K } from "../i18n/constants";
 import {
   WorkbenchTreeDndContext,
   useWorkbenchTreeDndContext,
 } from "../shared/workbench/WorkbenchTreeDndContext";
+import { TooltipPlacement } from "antd/lib/tooltip";
 
 interface ComponentSelectProps {
   brickList: BrickOptionItem[];
@@ -422,77 +421,18 @@ interface ComponentGroupProps extends groupItem {
   onActionClick?: ComponentSelectProps["onActionClick"];
 }
 
-const findItemElement = (elem: HTMLElement): HTMLElement => {
-  while (elem) {
-    if (elem.className === styles.brickItem) {
-      return elem;
-    }
-
-    elem = elem.parentElement;
-  }
-};
-
 function ComponentGroup({
   componentType,
   children,
   columnNumber,
   onActionClick,
 }: ComponentGroupProps): React.ReactElement {
-  const { t } = useTranslation(NS_NEXT_BUILDER);
-  const [curIndex, setCurIndex] = useState<number>(-1);
-  const [show, setShow] = useState(false);
-  const [snippetsOfSelfBrick, setSnippetsOfSelfBrick] = useState([]);
-  const [snippetsOfScene, setSnippetsOfScene] = useState([]);
-  const [arrowOffset, setArrowOffset] = useState(0);
-  const { snippetsOfBrickMap } = useContext(ComponentSelectContext);
-
   const handleActionClick = (
     type: string,
     data: BrickOptionItem,
-    index: number,
     e: React.MouseEvent
   ): void => {
-    if (type === "snippet") {
-      setCurIndex(index);
-      const snippetsMap = snippetsOfBrickMap.get(data.id);
-      setSnippetsOfSelfBrick(snippetsMap?.get(SnippetType.SelfBrick));
-      setSnippetsOfScene(snippetsMap?.get(SnippetType.Scene));
-      const brickItemElem = findItemElement(e.target as HTMLElement);
-      if (brickItemElem) {
-        const { width } = brickItemElem.getBoundingClientRect();
-        const cursor = index - Math.floor(index / columnNumber) * columnNumber;
-        // 15px 为项目之间的间距
-        const position = width * (cursor + 1) + cursor * 15 - width / 2;
-        setArrowOffset(position);
-      }
-      setShow(true);
-    }
     onActionClick?.(type, data, e);
-  };
-
-  const renderSnippetsGroup = (
-    snippets: BrickOptionItem[],
-    title: string
-  ): React.ReactElement => {
-    return (
-      <>
-        <span style={{ padding: "0 12px" }}>{title}</span>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
-          }}
-        >
-          {snippets.map((row) => (
-            <ComponentItem
-              key={row.id}
-              {...row}
-              onDragEnd={() => setShow(false)}
-            />
-          ))}
-        </div>
-      </>
-    );
   };
 
   return (
@@ -504,52 +444,13 @@ function ComponentGroup({
         gridTemplateColumns: `repeat(${columnNumber}, 1fr)`,
       }}
     >
-      {children.map((item, index) => (
+      {children.map((item) => (
         <ComponentItem
           key={item.id}
           {...item}
-          onActionClick={(type, data, e) =>
-            handleActionClick(type, data, index, e)
-          }
+          onActionClick={(type, data, e) => handleActionClick(type, data, e)}
         />
       ))}
-      {componentType === "brick" && (
-        <CSSTransition
-          in={show}
-          timeout={300}
-          unmountOnExit
-          classNames={{
-            enter: styles.slideEnter,
-            exit: styles.slideExit,
-          }}
-        >
-          <div
-            className={styles.popover}
-            style={{
-              gridRowStart: Math.floor(curIndex / columnNumber) + 2,
-              gridColumn: `span ${columnNumber}`,
-            }}
-          >
-            <span
-              className={styles.close}
-              onClick={() => setShow(false)}
-            ></span>
-            <span
-              className={styles.arrow}
-              style={{
-                left: arrowOffset,
-              }}
-            />
-            {!isEmpty(snippetsOfSelfBrick) &&
-              renderSnippetsGroup(
-                snippetsOfSelfBrick,
-                t(K.SELF_BRICK_SNIPPETS)
-              )}
-            {!isEmpty(snippetsOfScene) &&
-              renderSnippetsGroup(snippetsOfScene, t(K.SCENE_SNIPPETS))}
-          </div>
-        </CSSTransition>
-      )}
     </div>
   );
 }
@@ -561,7 +462,12 @@ interface ComponentItemProps extends Partial<BrickOptionItem> {
 
 function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
   const { snippetsOfBrickMap } = useContext(ComponentSelectContext);
-  const { t } = useTranslation(NS_NEXT_BUILDER);
+  const itemElementRef = useRef<HTMLDivElement>();
+  const [snippetsOfSelfBrick, setSnippetsOfSelfBrick] = useState([]);
+  const [snippetsOfScene, setSnippetsOfScene] = useState([]);
+  const [popoverPlacement, setPopoverPlacement] =
+    useState<TooltipPlacement>("top");
+  const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
   const { onDragStart } = useWorkbenchTreeDndContext();
   const handleDragStart = (e: React.DragEvent): void => {
     setDragImage(e, componentData.title);
@@ -574,7 +480,10 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
     onDragStart(null, null);
   };
 
-  const getIcon = (data: Partial<BrickOptionItem>): React.ReactElement => {
+  const getIcon = (
+    data: Partial<BrickOptionItem>,
+    isDraggable: boolean
+  ): React.ReactElement => {
     if (data.icon) {
       return (
         <div className={styles.icon}>
@@ -595,6 +504,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
               width: "auto",
               height: "100%",
             }}
+            draggable={isDraggable}
             src={
               // Prepend public_root if the thumbnail is not an absolute url.
               /^(?:https?|data):|^\//.test(data.thumbnail)
@@ -612,14 +522,6 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
     );
   };
 
-  const handleActionClick = (
-    type: string,
-    data: any,
-    e: React.MouseEvent
-  ): void => {
-    componentData.onActionClick?.(type, data, e);
-  };
-
   const isShowSnippets = useMemo(() => {
     const snippetsMap = snippetsOfBrickMap.get(componentData.id);
     return !(
@@ -628,42 +530,104 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
     );
   }, [componentData.id, snippetsOfBrickMap]);
 
-  const itemElem = (
+  const handleMouseOver = (): void => {
+    const brickItemElem = itemElementRef.current;
+    if (brickItemElem) {
+      const { width, right } = brickItemElem.getBoundingClientRect();
+      const windowWidth = document.body.clientWidth;
+      if (windowWidth - width < right) {
+        setPopoverPlacement("topRight");
+      }
+    }
+  };
+
+  const dragStartListener = (): void => {
+    setPopoverOpen(false);
+  };
+
+  useEffect(() => {
+    const snippetsMap = snippetsOfBrickMap.get(componentData.id);
+    setSnippetsOfSelfBrick(snippetsMap?.get(SnippetType.SelfBrick));
+    setSnippetsOfScene(snippetsMap?.get(SnippetType.Scene));
+    window.addEventListener("dragstart", dragStartListener);
+    return () => {
+      window.removeEventListener("dragstart", dragStartListener);
+    };
+  }, []);
+
+  const itemElem = (isDraggable = true): React.ReactElement => (
     <div
-      draggable="true"
+      ref={itemElementRef}
+      draggable={isDraggable}
       className={styles.componentItem}
+      style={{
+        cursor: isDraggable ? "grab" : "not-allowed",
+      }}
       title={componentData.description || componentData.title}
-      onDragStart={handleDragStart}
-      onDragEnd={componentData?.onDragEnd}
+      onMouseOver={handleMouseOver}
+      onDragStart={isDraggable ? handleDragStart : null}
+      onDragEnd={isDraggable ? componentData?.onDragEnd : null}
     >
-      {getIcon(componentData)}
+      {getIcon(componentData, isDraggable)}
       <div className={styles.name}>{componentData.title}</div>
     </div>
   );
 
+  const renderSnippetsGroup = (
+    snippets: BrickOptionItem[]
+  ): React.ReactElement => {
+    return (
+      <div
+        className={styles.popoverContent}
+        style={{
+          gridTemplateColumns: `repeat(${
+            snippets.length >= 3 ? 3 : snippets.length
+          }, 142px)`,
+        }}
+      >
+        {snippets.map((row) => (
+          <ComponentItem key={row.id} {...row} />
+        ))}
+      </div>
+    );
+  };
+
   if (componentData.layerType === "brick" && componentData.type === "brick") {
     return (
       <div className={styles.brickItem}>
-        {itemElem}
+        {isShowSnippets ? (
+          <Popover
+            title="示例(可拖拽)"
+            placement={popoverPlacement}
+            onVisibleChange={setPopoverOpen}
+            visible={popoverOpen}
+            content={
+              <>
+                {!isEmpty(snippetsOfSelfBrick) &&
+                  renderSnippetsGroup(snippetsOfSelfBrick)}
+                {!isEmpty(snippetsOfScene) &&
+                  renderSnippetsGroup(snippetsOfScene)}
+              </>
+            }
+          >
+            {itemElem(false)}
+          </Popover>
+        ) : (
+          itemElem(true)
+        )}
         <div className={styles.actionWrapper}>
           <div
             className={styles.action}
-            onClick={(e) => handleActionClick("document", componentData, e)}
+            onClick={(e) =>
+              componentData.onActionClick("document", componentData as any, e)
+            }
           >
             文档
           </div>
-          {isShowSnippets && (
-            <div
-              className={styles.action}
-              onClick={(e) => handleActionClick("snippet", componentData, e)}
-            >
-              模板
-            </div>
-          )}
         </div>
       </div>
     );
   }
 
-  return itemElem;
+  return itemElem(true);
 }
