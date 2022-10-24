@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneralLink should work 1`] = `
+<FormItemWrapper
+  icon={
+    Object {
+      "lib": "antd",
+      "theme": "outlined",
+      "type": "file-search",
+    }
+  }
+  label="aaa"
+  native={true}
+  tooltip="tips.."
+  url="/url"
+>
+  <Tooltip
+    arrowPointAtCenter={false}
+    autoAdjustOverflow={true}
+    mouseEnterDelay={0.1}
+    mouseLeaveDelay={0.1}
+    placement="top"
+    title="tips.."
+    transitionName="zoom-big-fast"
+  >
+    <Link
+      className=""
+      icon={
+        Object {
+          "lib": "antd",
+          "theme": "outlined",
+          "type": "file-search",
+        }
+      }
+      label="aaa"
+      native={true}
+      to="/url"
+    >
+      <GeneralIcon
+        icon={
+          Object {
+            "lib": "antd",
+            "theme": "outlined",
+            "type": "file-search",
+          }
+        }
+        style={Object {}}
+      />
+      <span
+        className={null}
+        style={
+          Object {
+            "borderBottomColor": undefined,
+          }
+        }
+      />
+    </Link>
+  </Tooltip>
+</FormItemWrapper>
+`;
+
+exports[`GeneralLink should work 2`] = `
+<FormItemWrapper
+  icon={
+    Object {
+      "lib": "antd",
+      "theme": "outlined",
+      "type": "file-search",
+    }
+  }
+  label="aaa"
+  native={false}
+  tooltip="tips.."
+  url="/url"
+>
+  <Tooltip
+    arrowPointAtCenter={false}
+    autoAdjustOverflow={true}
+    mouseEnterDelay={0.1}
+    mouseLeaveDelay={0.1}
+    placement="top"
+    title="tips.."
+    transitionName="zoom-big-fast"
+  >
+    <Link
+      className=""
+      icon={
+        Object {
+          "lib": "antd",
+          "theme": "outlined",
+          "type": "file-search",
+        }
+      }
+      label="aaa"
+      native={false}
+      to="/url"
+    >
+      <GeneralIcon
+        icon={
+          Object {
+            "lib": "antd",
+            "theme": "outlined",
+            "type": "file-search",
+          }
+        }
+        style={Object {}}
+      />
+      <span
+        className={null}
+        style={
+          Object {
+            "borderBottomColor": undefined,
+          }
+        }
+      />
+    </Link>
+  </Tooltip>
+</FormItemWrapper>
+`;
+
+exports[`GeneralLink target="_blank" should have external-link icon 1`] = `
+<FormItemWrapper
+  label="aaa"
+  target="_blank"
+  url="/url"
+>
+  <span>
+    <Link
+      className=""
+      label="aaa"
+      target="_blank"
+      to="/url"
+    >
+      <span
+        className={null}
+        style={
+          Object {
+            "borderBottomColor": undefined,
+          }
+        }
+      />
+    </Link>
+    <span
+      className="externalIcon"
+    >
+      <GeneralIcon
+        icon={
+          Object {
+            "icon": "external-link-alt",
+            "lib": "fa",
+          }
+        }
+      />
+    </span>
+  </span>
+</FormItemWrapper>
+`;
