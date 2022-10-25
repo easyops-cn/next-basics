@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.358.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.23...@next-bricks/developers@1.358.0) (2022-10-25)
+
+
+### Features
+
+* update rich-editor-NB snippet ([c3b69f5](https://github.com/easyops-cn/next-basics/commit/c3b69f53bcf2ba4c883d37dc39149f7e18e6d603))
+* update rich-editor-NB snippet ([353cd13](https://github.com/easyops-cn/next-basics/commit/353cd13d3a137b4965d5a1e8294662db27ae65bc))
+
+
+
+
+
 ## [1.357.23](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.22...@next-bricks/developers@1.357.23) (2022-10-25)
 
 **Note:** Version bump only for package @next-bricks/developers
