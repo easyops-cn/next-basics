@@ -94,6 +94,9 @@ export interface BuildProjectOfTemplatesParams {
 
   // The instanceId of a project.
   projectId: string;
+
+  // When used in standalone app, the assets public path may include version.
+  version?: string;
 }
 
 export enum DocType {
@@ -134,6 +137,7 @@ export interface ProcessedCustomTemplateState extends CustomTemplateState {
 export async function BuildProjectOfTemplates({
   appId,
   projectId,
+  version,
 }: BuildProjectOfTemplatesParams): Promise<BuildInfoForProjectOfTemplates> {
   const templatesGraphReq = InstanceGraphApi_traverseGraphV2(
     getBaseGraphParams({
@@ -211,7 +215,8 @@ export async function BuildProjectOfTemplates({
           appId,
           internalTemplateNames,
         }) as BrickConfInTemplate[],
-        appId
+        appId,
+        version
       ),
     })
   );

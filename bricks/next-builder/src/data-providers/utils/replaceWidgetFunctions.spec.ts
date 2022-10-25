@@ -43,4 +43,10 @@ describe("replaceWidgetFunctions", () => {
   ])("should work", (input, output) => {
     expect(replaceWidgetFunctions(input, "test-app")).toEqual(output);
   });
+
+  test("with version", () => {
+    expect(
+      replaceWidgetFunctions('<% IMG.get("my.png") %>', "test-app", "1.2.3")
+    ).toEqual('<% __WIDGET_IMG__("test-app","1.2.3").get("my.png") %>');
+  });
 });

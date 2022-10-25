@@ -6,11 +6,20 @@ import {
   PreevaluateResult,
 } from "@next-core/brick-utils";
 
-export function replaceWidgetFunctions<T>(data: T, appId: string): T {
+export function replaceWidgetFunctions<T>(
+  data: T,
+  appId: string,
+  version?: string
+): T {
   const stringifyAppId = JSON.stringify(appId);
   const patterns = new Map<string, string>([
     ["FN", `__WIDGET_FN__[${stringifyAppId}]`],
-    ["IMG", `__WIDGET_IMG__(${stringifyAppId})`],
+    [
+      "IMG",
+      `__WIDGET_IMG__(${stringifyAppId}${
+        version ? `,${JSON.stringify(version)}` : ""
+      })`,
+    ],
     ["I18N", `__WIDGET_I18N__(${stringifyAppId})`],
   ]);
   const keywords = [...patterns.keys()];
