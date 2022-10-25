@@ -492,6 +492,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
             style={{
               fontSize: 20,
             }}
+            noPublicRoot
           />
         </div>
       );
@@ -509,7 +510,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
               // Prepend public_root if the thumbnail is not an absolute url.
               /^(?:https?|data):|^\//.test(data.thumbnail)
                 ? data.thumbnail
-                : `${window.PUBLIC_ROOT ?? ""}${data.thumbnail}`
+                : `${getRuntime().getBasePath()}${data.thumbnail}`
             }
           />
         </div>
