@@ -29,12 +29,14 @@ test("getWorkbenchRouteTree", () => {
       path: "${APP.homepage}/2/a",
       type: "bricks",
       parent: [{ id: "r-2" }],
+      if: "<% false %>",
     },
     {
       id: "r-2-b",
       path: "${APP.homepage}/2/b",
       type: "redirect",
       parent: [{ id: "r-2" }],
+      if: "<% FLAGS['disabled'] %>",
     },
     {
       id: "r-0",
@@ -68,6 +70,7 @@ test("getWorkbenchRouteTree", () => {
             "children": undefined,
             "data": Object {
               "id": "r-2-a",
+              "if": "<% false %>",
               "parent": Array [
                 Object {
                   "id": "r-2",
@@ -85,11 +88,13 @@ test("getWorkbenchRouteTree", () => {
             "key": "r-2-a",
             "link": undefined,
             "name": "/2/a",
+            "unreachable": true,
           },
           Object {
             "children": undefined,
             "data": Object {
               "id": "r-2-b",
+              "if": "<% FLAGS['disabled'] %>",
               "parent": Array [
                 Object {
                   "id": "r-2",
@@ -138,7 +143,7 @@ test("getWorkbenchRouteTree with link", () => {
         type: "bricks",
       },
     ],
-    null,
+    undefined,
     (id, type) => ({ to: `/type/${type}/id/${id}` })
   );
   expect(tree).toEqual([
