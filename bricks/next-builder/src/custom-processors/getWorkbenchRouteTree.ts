@@ -1,5 +1,7 @@
 import { getRuntime } from "@next-core/brick-kit";
 import { BuilderRouteNode } from "@next-core/brick-types";
+import { computeConstantCondition } from "@next-core/brick-utils";
+import { pipes } from "@next-core/pipes";
 import type { WorkbenchNodeData } from "../shared/workbench/interfaces";
 
 export function getWorkbenchRouteTree(
@@ -15,6 +17,7 @@ export function getWorkbenchRouteTree(
   const routeIds = new Set(routes.map((route) => route.id));
   const cachedChildren = new Map<string | number, WorkbenchNodeData[]>();
   const routeNodeMap = new Map<string, WorkbenchNodeData>();
+  const nodeMap = new Map<string, BuilderRouteNode>();
 
   for (const route of routes) {
     const node: WorkbenchNodeData = {
@@ -42,6 +45,7 @@ export function getWorkbenchRouteTree(
     node.link = linkFn?.(route.id, route.type, route.instanceId);
 
     routeNodeMap.set(route.id, node);
+    nodeMap.set(route.id, route);
 
     if (!route.parent?.length) {
       tree.push(node);
@@ -65,6 +69,34 @@ export function getWorkbenchRouteTree(
   for (const routeId of routeIds) {
     const node = routeNodeMap.get(routeId);
     node.children = cachedChildren.get(node.key);
+  }
+
+  function markUnreachable(
+    node: WorkbenchNodeData,
+    parentIsUnreachable?: boolean
+  ): void {
+    if (parentIsUnreachable) {
+      node.unreachable = true;
+    } else {
+      const route = nodeMap.get(node.key as string);
+      if (route.if) {
+        const check = { if: pipes.yaml(route.if as string) };
+        computeConstantCondition(check);
+        if (check.if === false) {
+          node.unreachable = true;
+        }
+      }
+    }
+
+    if (Array.isArray(node.children)) {
+      for (const child of node.children) {
+        markUnreachable(child, node.unreachable);
+      }
+    }
+  }
+
+  for (const node of tree) {
+    markUnreachable(node);
   }
 
   return tree;
