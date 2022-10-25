@@ -30,10 +30,12 @@ export const story: Story = {
           },
           events: {
             "editor.change": {
-              action: "console.log",
+              action: "message.info",
+              args: ["编辑器内容变化"],
             },
             "editor.blur": {
-              action: "console.log",
+              action: "message.info",
+              args: ["编辑器失焦"],
             },
           },
         },
@@ -55,13 +57,18 @@ export const story: Story = {
           properties: {
             type: "inline",
             data: "<p>rich editor</p>",
+            useEasyImage: {
+              bucketName: "lytest",
+            },
           },
           events: {
             "editor.change": {
-              action: "console.log",
+              action: "message.info",
+              args: ["编辑器内容变化"],
             },
             "editor.blur": {
-              action: "console.log",
+              action: "message.info",
+              args: ["编辑器失焦"],
             },
           },
         },
