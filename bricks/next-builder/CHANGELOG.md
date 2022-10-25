@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.195.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.195.0...@next-bricks/next-builder@1.195.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* no public root for component images ([fb67e93](https://github.com/easyops-cn/next-basics/commit/fb67e930a0d51be2982940741887b0099b2bd648))
+
+
+
+
+
 # [1.195.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.194.0...@next-bricks/next-builder@1.195.0) (2022-10-24)
 
 
