@@ -2,7 +2,7 @@ import React from "react";
 import AceEditor, { IAceOptions } from "react-ace";
 import { message } from "antd";
 import { assign } from "lodash";
-import { BrickConf } from "@next-core/brick-types";
+import { BrickConf, SnippetConf } from "@next-core/brick-types";
 import { Clipboard } from "@next-libs/clipboard";
 
 import yaml from "js-yaml";
@@ -14,8 +14,8 @@ import "brace/theme/monokai";
 import cssStyle from "./style.module.css";
 
 interface BrickEditorProps {
-  defaultConf: BrickConf;
-  onConfChange: (conf: BrickConf) => void;
+  defaultConf: BrickConf | BrickConf[];
+  onConfChange: (conf: BrickConf | BrickConf[]) => void;
   aceSetOptions?: IAceOptions;
   mode: string;
 }

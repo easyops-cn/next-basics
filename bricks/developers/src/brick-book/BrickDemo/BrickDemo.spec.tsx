@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { getHistory } from "@next-core/brick-kit";
-import { BrickConf, Action } from "@next-core/brick-types";
+import { BrickConf, Action, SnippetConf } from "@next-core/brick-types";
 import { BrickDemo } from "./BrickDemo";
 import { BrickActions } from "../../components/BrickActions/BrickActions";
 
@@ -14,7 +14,7 @@ jest.mock("@next-core/brick-kit");
 });
 
 interface FakeStory {
-  defaultConf: BrickConf;
+  defaultConf: BrickConf | SnippetConf;
   actions?: Action[];
 }
 
@@ -34,5 +34,64 @@ describe("BrickDemo", () => {
         "modified",
       ]);
     }).not.toThrow();
+  });
+
+  it("should work with new snippet demo", () => {
+    const wrapper = shallow(
+      <BrickDemo
+        {...{
+          defaultConf: {
+            bricks: { brick: "fake-brick-of-correct" },
+            title: {
+              en: "fake-brick",
+              zh: "fake-brick",
+            },
+            actions: [
+              {
+                method: "fakeMethod",
+                text: "fake-action",
+              },
+            ],
+          },
+        }}
+      />
+    );
+    expect(wrapper.find(BrickActions).props().actions).toMatchObject([
+      {
+        method: "fakeMethod",
+        text: "fake-action",
+      },
+    ]);
+  });
+
+  it("should work with new snippet demo with multiple bricks", () => {
+    const wrapper = shallow(
+      <BrickDemo
+        {...{
+          defaultConf: {
+            bricks: [
+              { brick: "fake-brick-of-correct" },
+              { brick: "fake-brick-of-correct-2" },
+            ],
+            title: {
+              en: "fake-brick",
+              zh: "fake-brick",
+            },
+          },
+          actions: [
+            {
+              method: "fakeMethod",
+              text: "fake-action",
+            },
+          ],
+        }}
+      />
+    );
+    expect(wrapper.find(BrickActions).props().actions).toMatchObject([
+      {
+        method: "fakeMethod",
+        text: "fake-action",
+      },
+    ]);
   });
 });

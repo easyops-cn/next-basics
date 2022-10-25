@@ -7,41 +7,103 @@ import {
 import { BrickActions } from "../../components/BrickActions/BrickActions";
 import { BrickEditor } from "../../components/BrickEditor/BrickEditor";
 import styles from "./BrickDemo.module.css";
-import { Action, StoryConf } from "@next-core/brick-types";
+import { i18nText } from "@next-core/brick-kit";
+import {
+  Action,
+  StoryConf,
+  SnippetConf,
+  BrickConf,
+} from "@next-core/brick-types";
 import { GeneralIcon } from "@next-libs/basic-components";
 import classNames from "classnames";
 import ReactMarkdown from "react-markdown";
 import style from "../../components/BrickDoc/BrickDoc.module.css";
 
 interface BrickDemoProps {
-  defaultConf: StoryConf;
+  defaultConf: StoryConf | SnippetConf;
   mode: string;
   actions?: Action[];
 }
 
+declare type DemoConf = {
+  editorConf: BrickConf | BrickConf[];
+  previewConf: BrickConf;
+  description: {
+    title: string;
+    message?: string;
+  };
+  actions?: Action[];
+};
+// 兼容新的SnippetConf格式
+function getAdjustedConf(defaultConf: StoryConf | SnippetConf): DemoConf {
+  let adjustedConf: DemoConf;
+  // 新格式里必须有bricks
+  if ((defaultConf as SnippetConf).bricks) {
+    const snippetConf = defaultConf as SnippetConf;
+    const bricks = [].concat(snippetConf.bricks).filter(Boolean);
+    adjustedConf = {
+      editorConf: bricks,
+      // previewConf需要多包一层div以保证最外层是单个brick
+      previewConf:
+        bricks.length > 1
+          ? { brick: "div", slots: { "": { type: "bricks", bricks: bricks } } }
+          : bricks[0],
+      description: {
+        title: i18nText(snippetConf.title),
+        message: i18nText(snippetConf.message),
+      },
+      actions: snippetConf.actions,
+    };
+  } else {
+    const storyConf = { ...(defaultConf as StoryConf) };
+    const description = storyConf.description;
+    delete storyConf.description;
+    adjustedConf = {
+      previewConf: storyConf,
+      editorConf: storyConf,
+      description,
+    };
+  }
+  return adjustedConf;
+}
+
 export function BrickDemo(props: BrickDemoProps): React.ReactElement {
+  const [adjustedConf, setAdjustedconf] = useState(
+    getAdjustedConf(props.defaultConf)
+  );
   const previewRef = React.useRef<BrickPreviewRef>(null);
-  const [conf, setConf] = React.useState(props.defaultConf);
-  const [description, setDescription] = useState(null);
+  const [previewConf, setPreviewConf] = React.useState(
+    adjustedConf.previewConf
+  );
+  const [editorConf, setEditorConf] = React.useState(adjustedConf.editorConf);
+  const [description, setDescription] = useState(adjustedConf.description);
+  const [actions, setActions] = useState(adjustedConf.actions);
 
   useEffect(() => {
-    setDescription(props?.defaultConf?.description);
+    setAdjustedconf(getAdjustedConf(props.defaultConf));
   }, [props.defaultConf]);
 
+  useEffect(() => {
+    setPreviewConf(adjustedConf.previewConf);
+    setEditorConf(adjustedConf.editorConf);
+    setDescription(adjustedConf.description);
+    setActions(adjustedConf.actions);
+  }, [adjustedConf]);
+
   const BrickEditorMemoized = React.useCallback(() => {
-    const defaultConf = { ...props.defaultConf };
-    delete defaultConf.description;
+    // const defaultConf = { ...adjustedConf };
+    // delete defaultConf.description;
     return (
       <BrickEditor
-        defaultConf={defaultConf}
-        onConfChange={setConf}
+        defaultConf={editorConf}
+        onConfChange={setEditorConf}
         mode={props.mode}
       />
     );
-  }, [props.defaultConf, props.mode]);
+  }, [editorConf, props.mode]);
   const handleActionClick = (method: string, args: any[]): void => {
     /* istanbul ignore if */
-    if (conf.portal) {
+    if (previewConf.portal) {
       /* istanbul ignore if */
       if (previewRef.current?.portal.firstChild) {
         (previewRef.current.portal.firstChild as any)[method](...args);
@@ -67,8 +129,11 @@ export function BrickDemo(props: BrickDemoProps): React.ReactElement {
 
   return (
     <Card className={styles.demoContainer} bordered={false}>
-      <BrickPreview conf={conf} ref={previewRef} />
-      <BrickActions actions={props.actions} onActionClick={handleActionClick} />
+      <BrickPreview conf={previewConf} ref={previewRef} />
+      <BrickActions
+        actions={actions || props.actions}
+        onActionClick={handleActionClick}
+      />
       <Collapse bordered={false} defaultActiveKey={["2"]}>
         <Collapse.Panel
           showArrow={false}
