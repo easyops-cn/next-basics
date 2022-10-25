@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.196.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.195.1...@next-bricks/next-builder@1.196.0) (2022-10-25)
+
+
+### Features
+
+* building widgets with version ([22d9e43](https://github.com/easyops-cn/next-basics/commit/22d9e430c8711f3e809436f8430df6b4a4249ead))
+
+
+
+
+
 ## [1.195.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.195.0...@next-bricks/next-builder@1.195.1) (2022-10-25)
 
 
