@@ -2,6 +2,7 @@ import { Story } from "../../../interfaces";
 
 export const story: Story = {
   storyId: "rich-editor.easy-editor",
+  category: "form-input-advanced",
   type: "brick",
   author: "jo",
   text: {
@@ -18,35 +19,57 @@ export const story: Story = {
   },
   conf: [
     {
-      brick: "rich-editor.easy-editor",
-      properties: {
-        data: "<p>rich editor</p>",
-        useEasyImage: {
-          bucketName: "lytest",
+      bricks: [
+        {
+          brick: "rich-editor.easy-editor",
+          properties: {
+            data: "<p>rich editor</p>",
+            useEasyImage: {
+              bucketName: "lytest",
+            },
+          },
+          events: {
+            "editor.change": {
+              action: "console.log",
+            },
+            "editor.blur": {
+              action: "console.log",
+            },
+          },
         },
+      ],
+      snippetId: "rich-editor.easy-editor[basic]",
+      title: {
+        en: "Basic Easy Editor",
+        zh: "基本富文本编辑",
       },
-      events: {
-        "editor.change": {
-          action: "console.log",
-        },
-        "editor.blur": {
-          action: "console.log",
-        },
+      message: {
+        en: "Basic use",
+        zh: "基本使用",
       },
     },
     {
-      brick: "rich-editor.easy-editor",
-      properties: {
-        type: "inline",
-        data: "<p>rich editor</p>",
-      },
-      events: {
-        "editor.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "rich-editor.easy-editor",
+          properties: {
+            type: "inline",
+            data: "<p>rich editor</p>",
+          },
+          events: {
+            "editor.change": {
+              action: "console.log",
+            },
+            "editor.blur": {
+              action: "console.log",
+            },
+          },
         },
-        "editor.blur": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "rich-editor.easy-editor[inline]",
+      title: {
+        en: "Inline Easy Editor",
+        zh: "单行富文本编辑",
       },
     },
   ],
