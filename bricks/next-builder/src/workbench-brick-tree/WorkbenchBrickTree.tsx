@@ -148,7 +148,8 @@ export function WorkbenchBrickTree({
       }
 
       function getChildren(
-        node: WorkbenchRuntimeNode
+        node: WorkbenchRuntimeNode,
+        parentIsUnreachable: boolean
       ): WorkbenchNodeData<WorkbenchBrickTreeNode>[] {
         const groups = new Map<
           string,
@@ -166,7 +167,7 @@ export function WorkbenchBrickTree({
             ? relatedEdges[relatedEdges.length - 1].sort
             : 0;
         node.$nextChildSort = typeof maxSort === "number" ? maxSort + 1 : 1;
-
+        const unreachable = parentIsUnreachable || node.$$unreachable;
         for (const edge of relatedEdges) {
           let group = groups.get(edge.mountPoint);
           if (!group) {
@@ -185,11 +186,12 @@ export function WorkbenchBrickTree({
                 parent: node,
               },
               children: [],
+              unreachable,
             };
             groups.set(edge.mountPoint, group);
           }
           const childNode = nodes.find((node) => node.$$uid === edge.child);
-          group.children.push(getEntityNode(childNode));
+          group.children.push(getEntityNode(childNode, unreachable));
         }
 
         for (const group of groups.values()) {
@@ -204,7 +206,8 @@ export function WorkbenchBrickTree({
       }
 
       function getEntityNode(
-        node: WorkbenchRuntimeNode
+        node: WorkbenchRuntimeNode,
+        parentIsUnreachable?: boolean
       ): WorkbenchNodeData<WorkbenchBrickTreeNode> {
         let icon = "question";
         let color: string;
@@ -251,7 +254,7 @@ export function WorkbenchBrickTree({
               break;
           }
         }
-        const children = getChildren(node);
+        const children = getChildren(node, parentIsUnreachable);
         const getAliasName = (node: WorkbenchRuntimeNode): string => {
           const brick = node.brick as string;
           return node.alias ? node.alias : brick ? brick.split(".").pop() : "";
@@ -282,7 +285,7 @@ export function WorkbenchBrickTree({
               : ["bricks", "custom-template", "snippet"].includes(rootNode.type)
               ? children
               : null,
-          unreachable: node.$$unreachable,
+          unreachable: parentIsUnreachable || node.$$unreachable,
         };
       }
 
