@@ -22,7 +22,7 @@ export function SubMenu({
             <span className={style.headerTitle}>{dataSource.title}</span>
           </div>
 
-          {topOperationConf.useBrick && (
+          {topOperationConf?.useBrick && (
             <BrickAsComponent
               useBrick={topOperationConf.useBrick}
             ></BrickAsComponent>
