@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.211.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.211.5...@next-bricks/basic-bricks@1.211.6) (2022-10-25)
+
+
+### Bug Fixes
+
+* **subMenu:** fix topOperationConf undefined ([bdc2f3f](https://github.com/easyops-cn/next-basics/commit/bdc2f3f9bdd3748fcd5e02203f0211c45de808b8))
+
+
+
+
+
 ## [1.211.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.211.4...@next-bricks/basic-bricks@1.211.5) (2022-10-24)
 
 
