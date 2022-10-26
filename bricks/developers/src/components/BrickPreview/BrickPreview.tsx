@@ -23,15 +23,18 @@ function LegacyBrickPreview(
   ref: React.Ref<BrickPreviewRef>
 ): React.ReactElement {
   // const { containerRef, portalRef } = ref;
-  const bricksConf = conf as StoryConf[];
-  if (bricksConf.length > 1) {
-    conf = {
-      brick: "div",
-      slots: { "": { type: "bricks", bricks: bricksConf } },
-    };
-  } else if (bricksConf.length === 1) {
-    conf = bricksConf[0];
+  // 如果conf是数组，外面需要多包一层div
+  if (Array.isArray(conf)) {
+    if (conf.length > 1) {
+      conf = {
+        brick: "div",
+        slots: { "": { type: "bricks", bricks: conf } },
+      };
+    } else if (conf.length === 1) {
+      conf = conf[0];
+    }
   }
+
   const containerRef = useRef(null);
   const portalRef = useRef(null);
   const bgRef = useRef(null);
