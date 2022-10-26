@@ -18,23 +18,32 @@ export const generalTitleStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.general-title",
-      properties: {
-        mainTitle: "2021.08.22 12:24:22",
-        description: '编辑了"publicDev_1"属性：服务信息',
-        titleSuffixBrick: {
-          useBrick: [
-            {
-              brick: "presentational-bricks.brick-tag",
-              properties: {
-                color: "red",
-                showCard: false,
-                showTagCircle: true,
-                tagList: ["告警中"],
-              },
+      bricks: [
+        {
+          brick: "basic-bricks.general-title",
+          properties: {
+            mainTitle: "2021.08.22 12:24:22",
+            description: '编辑了"publicDev_1"属性：服务信息',
+            titleSuffixBrick: {
+              useBrick: [
+                {
+                  brick: "presentational-bricks.brick-tag",
+                  properties: {
+                    color: "red",
+                    showCard: false,
+                    showTagCircle: true,
+                    tagList: ["告警中"],
+                  },
+                },
+              ],
             },
-          ],
+          },
         },
+      ],
+      snippetId: "basic-bricks.general-title[basic]",
+      title: {
+        en: "Basic General Title",
+        zh: "基础标题",
       },
     },
   ],

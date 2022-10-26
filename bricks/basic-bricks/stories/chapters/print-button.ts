@@ -17,15 +17,26 @@ export const printButtonStory: Story = {
   icon: {
     imgSrc: printButtonSvg,
   },
-  conf: {
-    brick: "basic-bricks.print-button",
-    properties: {
-      prefixTitle: "IT资源统计大屏",
-      backgroundColor: "rgb(0, 249, 253)",
-      color: "white",
-      border: "none",
-      bottom: "15px",
-      right: "10px",
+  conf: [
+    {
+      bricks: [
+        {
+          brick: "basic-bricks.print-button",
+          properties: {
+            prefixTitle: "IT资源统计大屏",
+            backgroundColor: "rgb(0, 249, 253)",
+            color: "white",
+            border: "none",
+            bottom: "15px",
+            right: "10px",
+          },
+        },
+      ],
+      snippetId: "basic-bricks.print-button[basic]",
+      title: {
+        en: "Basic Print Button",
+        zh: "基础打印按钮",
+      },
     },
-  },
+  ],
 };

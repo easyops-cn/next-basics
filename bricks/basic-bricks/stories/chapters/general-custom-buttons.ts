@@ -19,52 +19,129 @@ export const generalCustomButtonsStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "基本用法",
-        message: "将多个button组合在一起。",
-      },
-      brick: "basic-bricks.general-custom-buttons",
-      properties: {
-        dataset: {
-          testid: "basic-usage-demo",
-        },
-        alignment: "end",
-        customButtons: [
-          {
-            text: "新建",
-            buttonType: "primary",
-            icon: {
-              lib: "antd",
-              icon: "plus-circle",
-              theme: "outlined",
+      bricks: [
+        {
+          description: {
+            title: "基本用法",
+            message: "将多个button组合在一起。",
+          },
+          brick: "basic-bricks.general-custom-buttons",
+          properties: {
+            dataset: {
+              testid: "basic-usage-demo",
             },
-            eventName: "button-create",
+            alignment: "end",
+            customButtons: [
+              {
+                text: "新建",
+                buttonType: "primary",
+                icon: {
+                  lib: "antd",
+                  icon: "plus-circle",
+                  theme: "outlined",
+                },
+                eventName: "button-create",
+              },
+              {
+                text: "导入",
+                icon: "import",
+                eventName: "button-import",
+              },
+              {
+                text: "导出",
+                icon: "export",
+                eventName: "button-export",
+              },
+            ],
           },
-          {
-            text: "导入",
-            icon: "import",
-            eventName: "button-import",
+          events: {
+            "button-create": {
+              action: "message.success",
+              args: ["点击了新建按钮"],
+            },
+            "button-import": {
+              action: "message.success",
+              args: ["点击了导入按钮"],
+            },
+            "button-export": {
+              action: "message.success",
+              args: ["点击了导出按钮"],
+            },
           },
-          {
-            text: "导出",
-            icon: "export",
-            eventName: "button-export",
-          },
-        ],
+        },
+      ],
+      snippetId: "basic-bricks.general-custom-buttons[basic]",
+      title: {
+        en: "Basic General Custom Buttons",
+        zh: "基础自定义按钮组",
       },
-      events: {
-        "button-create": {
-          action: "message.success",
-          args: ["点击了新建按钮"],
+    },
+    {
+      bricks: [
+        {
+          brick: "basic-bricks.general-custom-buttons",
+          events: {
+            "instance.topology.other": {
+              action: "message.info",
+              args: ["click other button"],
+            },
+            "instance.topology.saveAs": {
+              action: "message.info",
+              args: ["click save button"],
+            },
+            "instance.topology.update": {
+              action: "message.info",
+              args: ["click update button"],
+            },
+          },
+          properties: {
+            alignment: "end",
+            customButtons: [
+              {
+                buttonShape: "circle",
+                buttonType: "icon",
+                eventName: "instance.topology.update",
+                icon: "plus",
+                isDropdown: false,
+                tooltip: "Add",
+                tooltipPlacement: "left",
+              },
+              {
+                buttonShape: "circle",
+                buttonType: "icon",
+                eventName: "instance.topology.update",
+                icon: "save",
+                isDropdown: false,
+                tooltip: "Save",
+                tooltipPlacement: "left",
+              },
+              {
+                eventName: "instance.topology.other",
+                icon: "search",
+                isDropdown: true,
+                text: "Detail",
+                tooltip: "Open Detail in New Window",
+                tooltipPlacement: "left",
+              },
+              {
+                color: "var(--theme-red-color)",
+                eventName: "instance.topology.other",
+                icon: "delete",
+                isDropdown: true,
+                text: "Delete",
+                tooltip: "删除",
+                tooltipPlacement: "right",
+              },
+            ],
+            isMoreButton: true,
+            moreButtonShape: "icon",
+          },
         },
-        "button-import": {
-          action: "message.success",
-          args: ["点击了导入按钮"],
-        },
-        "button-export": {
-          action: "message.success",
-          args: ["点击了导出按钮"],
-        },
+      ],
+      snippetId: "basic-bricks.general-custom-buttons[more-btn]",
+      title: {
+        en: "General Custom Buttons with More Button",
+        zh: "带moreButton的自定义按钮组",
       },
     },
     {
@@ -130,68 +207,81 @@ export const generalCustomButtonsStory: Story = {
       },
     },
     {
-      description: {
-        title: "组合按钮1",
-        message:
-          '位置为页面的右上角区域。使用形态为图标+文字按钮，默认放置三个，其中一个为主按钮，放于所有按钮的最左侧；≥3 的情况下，默认展示出两个，其他按钮用下拉按钮收起，收纳在"···"的更多按钮中。',
-      },
-      brick: "basic-bricks.general-custom-buttons",
-      properties: {
-        dataset: {
-          testid: "default-dropdown-demo",
-        },
-        alignment: "end",
-        customButtons: [
-          {
-            text: "新建",
-            buttonType: "primary",
-            icon: {
-              lib: "antd",
-              icon: "plus-circle",
-              theme: "outlined",
+      bricks: [
+        {
+          description: {
+            title: "组合按钮1",
+            message:
+              '位置为页面的右上角区域。使用形态为图标+文字按钮，默认放置三个，其中一个为主按钮，放于所有按钮的最左侧；≥3 的情况下，默认展示出两个，其他按钮用下拉按钮收起，收纳在"···"的更多按钮中。',
+          },
+          brick: "basic-bricks.general-custom-buttons",
+          properties: {
+            dataset: {
+              testid: "default-dropdown-demo",
             },
-            eventName: "button-create",
-            testId: "create",
+            alignment: "end",
+            customButtons: [
+              {
+                text: "新建",
+                buttonType: "primary",
+                icon: {
+                  lib: "antd",
+                  icon: "plus-circle",
+                  theme: "outlined",
+                },
+                eventName: "button-create",
+                testId: "create",
+              },
+              {
+                text: "搜索",
+                icon: "search",
+                eventName: "button-search",
+                testId: "search",
+              },
+              {
+                isDropdown: true,
+                text: "权限管理",
+                icon: "user",
+                eventName: "button-permission",
+                testId: "permission",
+              },
+              {
+                isDropdown: true,
+                text: "环境设置",
+                icon: {
+                  lib: "antd",
+                  icon: "global",
+                  theme: "outlined",
+                },
+                eventName: "button-setting",
+                testId: "setting",
+              },
+            ],
           },
-          {
-            text: "搜索",
-            icon: "search",
-            eventName: "button-search",
-            testId: "search",
-          },
-          {
-            isDropdown: true,
-            text: "权限管理",
-            icon: "user",
-            eventName: "button-permission",
-            testId: "permission",
-          },
-          {
-            isDropdown: true,
-            text: "环境设置",
-            icon: {
-              lib: "antd",
-              icon: "global",
-              theme: "outlined",
+          events: {
+            "button-create": {
+              action: "message.info",
+              args: ["click create button"],
             },
-            eventName: "button-setting",
-            testId: "setting",
+            "button-search": {
+              action: "message.info",
+              args: ["click search button"],
+            },
+            "button-permission": {
+              action: "message.info",
+              args: ["click permission button"],
+            },
+            "button-setting": {
+              action: "message.info",
+              args: ["click setting button"],
+            },
           },
-        ],
-      },
-      events: {
-        "button-create": {
-          action: "console.log",
         },
-        "button-search": {
-          action: "console.log",
-        },
-        "button-permission": {
-          action: "console.log",
-        },
-        "button-setting": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "basic-bricks.general-custom-buttons[dropdown-btn]",
+      title: {
+        en: "General Custom Buttons with Dropdown Button",
+        zh: "带下拉按钮的自定义按钮组",
       },
     },
     {
@@ -741,40 +831,51 @@ export const generalCustomButtonsStory: Story = {
       },
     },
     {
-      description: {
-        title: "特殊样式：拉伸按钮",
-        message: "alignment为stretch时，拉伸按钮",
-      },
-      brick: "basic-bricks.general-custom-buttons",
-      properties: {
-        isMoreButton: false,
-        alignment: "stretch",
-        customButtons: [
-          {
-            isDropdown: true,
-            text: "编辑",
-            icon: {
-              lib: "fa",
-              icon: "edit",
-              prefix: "fas",
+      bricks: [
+        {
+          description: {
+            title: "特殊样式：拉伸按钮",
+            message: "alignment为stretch时，拉伸按钮",
+          },
+          brick: "basic-bricks.general-custom-buttons",
+          properties: {
+            isMoreButton: false,
+            alignment: "stretch",
+            customButtons: [
+              {
+                isDropdown: true,
+                text: "编辑",
+                icon: {
+                  lib: "fa",
+                  icon: "edit",
+                  prefix: "fas",
+                },
+                eventName: "instance.edit",
+              },
+              {
+                isDropdown: true,
+                text: "删除",
+                icon: "delete",
+                eventName: "instance.delete",
+              },
+            ],
+          },
+          events: {
+            "instance.edit": {
+              action: "message.info",
+              args: ["click edit button"],
             },
-            eventName: "instance.edit",
+            "instance.delete": {
+              action: "message.info",
+              args: ["click delete button"],
+            },
           },
-          {
-            isDropdown: true,
-            text: "删除",
-            icon: "delete",
-            eventName: "instance.delete",
-          },
-        ],
-      },
-      events: {
-        "instance.edit": {
-          action: "console.log",
         },
-        "instance.delete": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "basic-bricks.general-custom-buttons[stretch]",
+      title: {
+        en: "Stretch General Custom Buttons",
+        zh: "stretch样式自定义按钮组",
       },
     },
     {

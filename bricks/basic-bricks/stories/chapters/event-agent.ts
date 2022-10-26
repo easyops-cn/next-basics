@@ -15,24 +15,45 @@ export const eventAgentStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.event-agent",
-      properties: {
-        id: "my-event-agent",
-      },
-      events: {
-        "event.trigger": [
-          {
-            if: '<% EVENT.detail.type === "success" %>',
-            action: "message.success",
-            args: ["<% EVENT.detail.message %>"],
+      bricks: [
+        {
+          brick: "basic-bricks.event-agent",
+          properties: {
+            id: "my-event-agent",
           },
-          {
-            if: '<% EVENT.detail.type === "error" %>',
-            action: "message.error",
-            args: ["<% EVENT.detail.message %>"],
+          events: {
+            "event.trigger": [
+              {
+                if: '<% EVENT.detail.type === "success" %>',
+                action: "message.success",
+                args: ["<% EVENT.detail.message %>"],
+              },
+              {
+                if: '<% EVENT.detail.type === "error" %>',
+                action: "message.error",
+                args: ["<% EVENT.detail.message %>"],
+              },
+            ],
           },
-        ],
+        },
+      ],
+      snippetId: "basic-bricks.event-agent[basic]",
+      title: {
+        en: "Basic Event Agent",
+        zh: "基础时间代理",
       },
+      actions: [
+        {
+          text: "dispatch()",
+          method: "trigger",
+          args: [
+            {
+              type: "success",
+              message: "Good",
+            },
+          ],
+        },
+      ],
     },
     {
       brick: "basic-bricks.general-button",

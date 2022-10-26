@@ -18,171 +18,182 @@ export const subMenuFilterStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.sub-menu-filter",
-      events: {
-        "menu.search": {
-          action: "console.log",
-        },
-        "menu.select": {
-          action: "console.log",
-        },
-      },
-      properties: {
-        defaultOpenKeys: ["diy"],
-        defaultSelectedKeys: ["C++"],
-        menuItems: [
-          {
-            count: 100,
-            icon: {
-              icon: "cube",
-              lib: "fa",
+      bricks: [
+        {
+          brick: "basic-bricks.sub-menu-filter",
+          events: {
+            "menu.search": {
+              action: "message.info",
+              args: ["menu search"],
             },
-            key: "All",
-            title: "全部",
-            type: "item",
+            "menu.select": {
+              action: "message.info",
+              args: ["menu select"],
+            },
           },
-          {
-            items: [
+          properties: {
+            defaultOpenKeys: ["diy"],
+            defaultSelectedKeys: ["C++"],
+            menuItems: [
               {
-                count: 60,
+                count: 100,
                 icon: {
                   icon: "cube",
                   lib: "fa",
                 },
-                key: "Java",
-                title: "Java",
+                key: "All",
+                title: "全部",
+                type: "item",
               },
               {
-                count: 10,
-                icon: {
-                  icon: "cube",
-                  lib: "fa",
-                },
-                key: "Go",
-                title: "Go",
-              },
-              {
-                count: 10,
-                icon: {
-                  icon: "cube",
-                  lib: "fa",
-                },
-                key: "cc",
-                title: "Cc",
-              },
-              {
-                count: 10,
-                icon: {
-                  icon: "cube",
-                  lib: "fa",
-                },
-                key: "Python",
-                title: "Python",
-              },
-            ],
-            key: "built-in-template",
-            title: "内置模板",
-            type: "group",
-          },
-          {
-            items: [
-              {
-                icon: {
-                  category: "model",
-                  icon: "app",
-                  lib: "easyops",
-                },
                 items: [
                   {
-                    count: 5,
-                    key: "C++",
-                    title: "C++",
+                    count: 60,
+                    icon: {
+                      icon: "cube",
+                      lib: "fa",
+                    },
+                    key: "Java",
+                    title: "Java",
                   },
-                  {
-                    count: 5,
-                    key: "C",
-                    title: "C",
-                  },
-                ],
-                key: "standard",
-                title: "标准模板",
-                type: "subMenu",
-              },
-              {
-                icon: {
-                  icon: "cube",
-                  lib: "fa",
-                },
-                items: [
                   {
                     count: 10,
                     icon: {
                       icon: "cube",
                       lib: "fa",
                     },
-                    key: "iyuyan",
-                    title: "易语言",
+                    key: "Go",
+                    title: "Go",
+                  },
+                  {
+                    count: 10,
+                    icon: {
+                      icon: "cube",
+                      lib: "fa",
+                    },
+                    key: "cc",
+                    title: "Cc",
+                  },
+                  {
+                    count: 10,
+                    icon: {
+                      icon: "cube",
+                      lib: "fa",
+                    },
+                    key: "Python",
+                    title: "Python",
                   },
                 ],
-                key: "diy",
-                title: "个性化模板c",
-                type: "subMenu",
+                key: "built-in-template",
+                title: "内置模板",
+                type: "group",
+              },
+              {
+                items: [
+                  {
+                    icon: {
+                      category: "model",
+                      icon: "app",
+                      lib: "easyops",
+                    },
+                    items: [
+                      {
+                        count: 5,
+                        key: "C++",
+                        title: "C++",
+                      },
+                      {
+                        count: 5,
+                        key: "C",
+                        title: "C",
+                      },
+                    ],
+                    key: "standard",
+                    title: "标准模板",
+                    type: "subMenu",
+                  },
+                  {
+                    icon: {
+                      icon: "cube",
+                      lib: "fa",
+                    },
+                    items: [
+                      {
+                        count: 10,
+                        icon: {
+                          icon: "cube",
+                          lib: "fa",
+                        },
+                        key: "iyuyan",
+                        title: "易语言",
+                      },
+                    ],
+                    key: "diy",
+                    title: "个性化模板c",
+                    type: "subMenu",
+                  },
+                ],
+                key: "customTemplate",
+                title: "自定义模板",
+                type: "group",
               },
             ],
-            key: "customTemplate",
-            title: "自定义模板",
-            type: "group",
-          },
-        ],
-        multiple: false,
-        selectable: true,
-        suffixBrick: {
-          useBrick: {
-            brick: "presentational-bricks.brick-conditional-display",
-            properties: {
-              dataSource: "<% DATA.count %>",
-              rules: [
-                {
-                  condition: {
-                    $lte: 60,
-                  },
-                  style: {
-                    backgroundColor: "var(--theme-red-color)",
-                    color: "rgba(255, 255, 255, 1)",
-                  },
-                },
-                {
-                  condition: {
-                    $and: [
-                      {
-                        $gt: 60,
-                        $lte: 85,
+            multiple: false,
+            selectable: true,
+            suffixBrick: {
+              useBrick: {
+                brick: "presentational-bricks.brick-conditional-display",
+                properties: {
+                  dataSource: "<% DATA.count %>",
+                  rules: [
+                    {
+                      condition: {
+                        $lte: 60,
                       },
-                    ],
-                  },
-                  style: {
-                    backgroundColor: "var(--theme-orange-color)",
-                    color: "rgba(255, 255, 255, 1)",
-                  },
-                },
-                {
-                  condition: {
-                    $and: [
-                      {
-                        $gt: 85,
-                        $lte: 100,
+                      style: {
+                        backgroundColor: "var(--theme-red-color)",
+                        color: "rgba(255, 255, 255, 1)",
                       },
-                    ],
-                  },
-                  style: {
-                    backgroundColor: "var(--theme-green-color)",
-                    color: "rgba(255, 255, 255, 1)",
-                  },
+                    },
+                    {
+                      condition: {
+                        $and: [
+                          {
+                            $gt: 60,
+                            $lte: 85,
+                          },
+                        ],
+                      },
+                      style: {
+                        backgroundColor: "var(--theme-orange-color)",
+                        color: "rgba(255, 255, 255, 1)",
+                      },
+                    },
+                    {
+                      condition: {
+                        $and: [
+                          {
+                            $gt: 85,
+                            $lte: 100,
+                          },
+                        ],
+                      },
+                      style: {
+                        backgroundColor: "var(--theme-green-color)",
+                        color: "rgba(255, 255, 255, 1)",
+                      },
+                    },
+                  ],
                 },
-              ],
+              },
             },
           },
         },
+      ],
+      snippetId: "basic-bricks.sub-menu-filter[basic]",
+      title: {
+        en: "Basic Sub Menu Filter",
+        zh: "基础搜索能力二级菜单",
       },
     },
   ],

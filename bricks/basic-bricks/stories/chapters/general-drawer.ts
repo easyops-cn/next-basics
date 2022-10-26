@@ -18,6 +18,115 @@ export const generalDrawerStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "basic-bricks.general-drawer",
+          properties: {
+            customTitle: "预览",
+            id: "title-demo2",
+            maskClosable: true,
+            width: 750,
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "presentational-bricks.brick-descriptions",
+                  properties: {
+                    column: 2,
+                    descriptionTitle: "基本信息",
+                    itemList: [
+                      {
+                        label: "名称",
+                        text: "easyops",
+                      },
+                      {
+                        label: "环境类型",
+                        text: "无",
+                      },
+                      {
+                        label: "授权模式",
+                        text: "clientCert",
+                      },
+                      {
+                        label: "服务供应商",
+                      },
+                    ],
+                    showCard: false,
+                  },
+                },
+                {
+                  brick: "presentational-bricks.brick-descriptions",
+                  properties: {
+                    column: 2,
+                    descriptionTitle: "集群规格",
+                    itemList: [
+                      {
+                        label: "集群来源",
+                        text: "导入",
+                      },
+                      {
+                        label: "Manter节点数量",
+                        text: "3个",
+                      },
+                      {
+                        label: "可分配CPU",
+                        text: "12 Cores",
+                      },
+                      {
+                        label: "可分配内存",
+                        text: "44.8GIB",
+                      },
+                    ],
+                    showCard: false,
+                    style: {
+                      marginTop: "20px",
+                    },
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+            headerRight: {
+              bricks: [
+                {
+                  brick: "basic-bricks.general-custom-buttons",
+                  properties: {
+                    customButtons: [
+                      {
+                        buttonType: "link",
+                        icon: {
+                          color: "#167be0",
+                          icon: "share-alt",
+                          lib: "fa",
+                          prefix: "fas",
+                        },
+                        isDropdown: false,
+                        tooltip: "分享",
+                        tooltipPlacement: "bottom",
+                      },
+                    ],
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
+        },
+      ],
+      snippetId: "basic-bricks.general-drawer[basic]",
+      title: {
+        en: "Basic General Drawer",
+        zh: "基础抽屉",
+      },
+      actions: [
+        {
+          text: "open()",
+          method: "open",
+        },
+      ],
+    },
+    {
       description: {
         title: "承载表单等操作场景",
         message:

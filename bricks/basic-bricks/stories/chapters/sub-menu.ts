@@ -20,6 +20,137 @@ export const subMenuStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "basic-bricks.sub-menu",
+          properties: {
+            dataSource: {
+              menuItems: [
+                {
+                  exact: true,
+                  icon: {
+                    icon: "cube",
+                    lib: "fa",
+                  },
+                  text: "工具库",
+                  to: "/developers/brick-book/atom/sub-menu",
+                  type: "default",
+                },
+                {
+                  items: [
+                    {
+                      icon: {
+                        category: "model",
+                        icon: "host",
+                        lib: "easyops",
+                      },
+                      text: "主机",
+                      to: "/developers/brick-book/atom/sub-menu/1",
+                    },
+                    {
+                      icon: {
+                        category: "model",
+                        icon: "docker-image",
+                        lib: "easyops",
+                      },
+                      text: "Docker",
+                      to: "/developers/brick-book/atom/sub-menu/2",
+                    },
+                  ],
+                  title: "平台资源",
+                  type: "group",
+                },
+                {
+                  items: [
+                    {
+                      icon: {
+                        category: "model",
+                        icon: "admin",
+                        lib: "easyops",
+                      },
+                      text: "开发负责人",
+                      to: "/developers/brick-book/atom/sub-menu/3",
+                    },
+                    {
+                      icon: {
+                        category: "model",
+                        icon: "admin",
+                        lib: "easyops",
+                      },
+                      text: "运维负责人",
+                      to: "/developers/brick-book/atom/sub-menu/4",
+                    },
+                    {
+                      icon: {
+                        category: "model",
+                        icon: "admin",
+                        lib: "easyops",
+                      },
+                      text: "测试负责人",
+                      to: "/developers/brick-book/atom/sub-menu/5",
+                    },
+                  ],
+                  title: "负责人",
+                  type: "group",
+                },
+                {
+                  items: [
+                    {
+                      icon: {
+                        category: "model",
+                        icon: "app",
+                        lib: "easyops",
+                      },
+                      items: [
+                        {
+                          items: [
+                            {
+                              text: "被调方",
+                              to: "/developers/brick-book/atom/sub-menu/6",
+                            },
+                          ],
+                          title: "被调方",
+                          type: "subMenu",
+                        },
+                        {
+                          text: "被调方",
+                          to: "/developers/brick-book/atom/sub-menu/7",
+                        },
+                      ],
+                      title: "被调方",
+                      type: "subMenu",
+                    },
+                    {
+                      icon: {
+                        category: "model",
+                        icon: "app",
+                        lib: "easyops",
+                      },
+                      items: [
+                        {
+                          text: "被调方",
+                          to: "/developers/brick-book/atom/sub-menu/8",
+                        },
+                      ],
+                      title: "被调方",
+                      type: "subMenu",
+                    },
+                  ],
+                  title: "调用关系",
+                  type: "group",
+                },
+              ],
+            },
+          },
+        },
+      ],
+      snippetId: "basic-bricks.sub-menu[basic]",
+      title: {
+        en: "Basic Sub Menu",
+        zh: "基础二级子菜单",
+      },
+    },
+    {
       brick: "basic-bricks.micro-app",
       slots: {
         subMenu: {

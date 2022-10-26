@@ -251,39 +251,48 @@ export const popoverContainerStory: Story = {
       },
     },
     {
-      brick: "basic-bricks.popover-container",
-      properties: {
-        showIcon: "never",
-        triggerByIcon: false,
-        placement: "top",
-        trigger: "hover",
-        style: {
-          display: "inline-block",
-        },
-        displayBrick: {
-          useBrick: {
-            brick: "presentational-bricks.brick-value-mapping",
-            properties: {
-              showTagCircle: true,
-              value: 0,
-              mapping: {
-                0: { text: "紧急", color: "red" },
+      bricks: [
+        {
+          brick: "basic-bricks.popover-container",
+          properties: {
+            showIcon: "never",
+            triggerByIcon: false,
+            placement: "top",
+            trigger: "hover",
+            style: {
+              display: "inline-block",
+            },
+            displayBrick: {
+              useBrick: {
+                brick: "presentational-bricks.brick-value-mapping",
+                properties: {
+                  showTagCircle: true,
+                  value: 0,
+                  mapping: {
+                    0: { text: "紧急", color: "red" },
+                  },
+                },
+              },
+            },
+            popoverContentStyle: {
+              width: 160,
+              height: 20,
+            },
+            popoverBrick: {
+              useBrick: {
+                brick: "div",
+                properties: {
+                  textContent: "紧急：cpu.util大于 70%",
+                },
               },
             },
           },
         },
-        popoverContentStyle: {
-          width: 160,
-          height: 20,
-        },
-        popoverBrick: {
-          useBrick: {
-            brick: "div",
-            properties: {
-              textContent: "紧急：cpu.util大于 70%",
-            },
-          },
-        },
+      ],
+      snippetId: "basic-bricks.popover-container[basic]",
+      title: {
+        en: "Basic Popover Container",
+        zh: "基础气泡卡片容器",
       },
     },
   ],

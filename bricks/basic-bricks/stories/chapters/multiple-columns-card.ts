@@ -20,46 +20,55 @@ export const multipleColumnsCardStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.multiple-columns-card",
-      properties: {
-        gridColumns: ["200px", 1, 2],
-      },
-      slots: {
-        content: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "div",
-              properties: {
-                textContent: "主机",
-                style: {
-                  "line-height": "200px",
-                  "text-align": "center",
+      bricks: [
+        {
+          brick: "basic-bricks.multiple-columns-card",
+          properties: {
+            gridColumns: ["200px", 1, 2],
+          },
+          slots: {
+            content: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "div",
+                  properties: {
+                    textContent: "主机",
+                    style: {
+                      "line-height": "200px",
+                      "text-align": "center",
+                    },
+                  },
                 },
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                textContent: "应用",
-                style: {
-                  "line-height": "200px",
-                  "text-align": "center",
+                {
+                  brick: "div",
+                  properties: {
+                    textContent: "应用",
+                    style: {
+                      "line-height": "200px",
+                      "text-align": "center",
+                    },
+                  },
                 },
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                textContent: "集群",
-                style: {
-                  "line-height": "200px",
-                  "text-align": "center",
+                {
+                  brick: "div",
+                  properties: {
+                    textContent: "集群",
+                    style: {
+                      "line-height": "200px",
+                      "text-align": "center",
+                    },
+                  },
                 },
-              },
+              ],
             },
-          ],
+          },
         },
+      ],
+      snippetId: "basic-bricks.multiple-columns-card[basic]",
+      title: {
+        en: "Basic Multiple Columns Card",
+        zh: "基础带边框多列布局容器",
       },
     },
     {

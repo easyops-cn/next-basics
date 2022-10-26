@@ -19,83 +19,101 @@ export const generalCardStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.general-card",
-      properties: {
-        configProps: {
-          title: "卡片标题",
-        },
-        hasExtraSlot: true,
-      },
-      slots: {
-        content: {
-          bricks: [
-            {
-              brick: "div",
-              properties: {
-                textContent: "内容",
-              },
+      bricks: [
+        {
+          brick: "basic-bricks.general-card",
+          properties: {
+            configProps: {
+              title: "卡片标题",
             },
-          ],
-          type: "bricks",
-        },
-        extra: {
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              events: {
-                "general.button.click": {
-                  action: "console.log",
+            hasExtraSlot: true,
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "div",
+                  properties: {
+                    textContent: "内容",
+                  },
                 },
-              },
-              properties: {
-                buttonIcon: "plus",
-                buttonShape: "circle",
-                buttonType: "icon",
-              },
+              ],
+              type: "bricks",
             },
-          ],
-          type: "bricks",
+            extra: {
+              bricks: [
+                {
+                  brick: "basic-bricks.general-button",
+                  events: {
+                    "general.button.click": {
+                      action: "console.log",
+                    },
+                  },
+                  properties: {
+                    buttonIcon: "plus",
+                    buttonShape: "circle",
+                    buttonType: "icon",
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
         },
+      ],
+      snippetId: "basic-bricks.general-card[extra]",
+      title: {
+        en: "General Card with Extra Slot",
+        zh: "带extra插槽的通用卡片",
       },
     },
     {
-      brick: "basic-bricks.general-card",
-      properties: {
-        cardTitle: "标题",
-      },
-      slots: {
-        content: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "div",
-              properties: {
-                textContent: "内容",
-              },
-            },
-          ],
-        },
-        titleSuffix: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "presentational-bricks.general-tooltip",
-              properties: {
-                type: "popover",
-                content: [
-                  "名称：APP",
-                  "创建时间：2020-01-02",
-                  "修改时间：2020-01-22",
-                  "描述：测试应用",
-                ],
-                icon: {
-                  lib: "fa",
-                  icon: "info-circle",
+      bricks: [
+        {
+          brick: "basic-bricks.general-card",
+          properties: {
+            cardTitle: "标题",
+          },
+          slots: {
+            content: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "div",
+                  properties: {
+                    textContent: "内容",
+                  },
                 },
-              },
+              ],
             },
-          ],
+            titleSuffix: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "presentational-bricks.general-tooltip",
+                  properties: {
+                    type: "popover",
+                    content: [
+                      "名称：APP",
+                      "创建时间：2020-01-02",
+                      "修改时间：2020-01-22",
+                      "描述：测试应用",
+                    ],
+                    icon: {
+                      lib: "fa",
+                      icon: "info-circle",
+                    },
+                  },
+                },
+              ],
+            },
+          },
         },
+      ],
+      snippetId: "basic-bricks.general-card[title-suffix]",
+      title: {
+        en: "General Card with Title Suffix Slot",
+        zh: "带titleSuffix插槽的通用卡片",
       },
     },
     {

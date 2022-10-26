@@ -99,12 +99,21 @@ export const advancedListContainerStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.advanced-list-container",
-      properties: mockProps,
-      events: {
-        "item.click": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "basic-bricks.advanced-list-container",
+          properties: mockProps,
+          events: {
+            "item.click": {
+              action: "console.log",
+            },
+          },
         },
+      ],
+      snippetId: "basic-bricks.advanced-list-container[basic]",
+      title: {
+        en: "Basic Advanced List Container",
+        zh: "基础动态纵向列表容器",
       },
     },
   ],

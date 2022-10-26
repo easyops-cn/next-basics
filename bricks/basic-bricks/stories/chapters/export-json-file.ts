@@ -19,49 +19,36 @@ export const exportJsonFileStory: Story = {
   },
   conf: [
     {
-      brick: "div",
-      slots: {
-        "": {
-          bricks: [
-            {
-              bg: true,
-              brick: "basic-bricks.export-json-file",
-              events: {
-                "json-file.export.failed": {
-                  action: "console.log",
-                },
-                "json-file.export.success": {
-                  action: "console.log",
-                },
-              },
-              properties: {
-                id: "export-dashboard",
-                data: "export content",
-                fileName: "test.json",
-              },
+      bricks: [
+        {
+          brick: "basic-bricks.export-json-file",
+          bg: true,
+          events: {
+            "json-file.export.failed": {
+              action: "console.log",
             },
-            {
-              brick: "basic-bricks.general-button",
-              events: {
-                "general.button.click": [
-                  {
-                    method: "export",
-                    target: "#export-dashboard",
-                  },
-                ],
-              },
-              properties: {
-                buttonIcon: {
-                  icon: "export",
-                  lib: "antd",
-                },
-                buttonName: "导出",
-              },
+            "json-file.export.success": {
+              action: "console.log",
             },
-          ],
-          type: "bricks",
+          },
+          properties: {
+            data: "export content",
+            fileName: "test.json",
+            id: "export-dashboard",
+          },
         },
+      ],
+      snippetId: "basic-bricks.export-json-file[basic]",
+      title: {
+        en: "Export JSON File",
+        zh: "导出JSON文件",
       },
+      actions: [
+        {
+          text: "export()",
+          method: "export",
+        },
+      ],
     },
   ],
 };
