@@ -26,8 +26,7 @@ interface BrickDemoProps {
 }
 
 declare type DemoConf = {
-  editorConf: BrickConf | BrickConf[];
-  previewConf: BrickConf;
+  previewConf: StoryConf | StoryConf[];
   description: {
     title: string;
     message?: string;
@@ -42,12 +41,7 @@ function getAdjustedConf(defaultConf: StoryConf | SnippetConf): DemoConf {
     const snippetConf = defaultConf as SnippetConf;
     const bricks = [].concat(snippetConf.bricks).filter(Boolean);
     adjustedConf = {
-      editorConf: bricks,
-      // previewConf需要多包一层div以保证最外层是单个brick
-      previewConf:
-        bricks.length > 1
-          ? { brick: "div", slots: { "": { type: "bricks", bricks: bricks } } }
-          : bricks[0],
+      previewConf: bricks,
       description: {
         title: i18nText(snippetConf.title),
         message: i18nText(snippetConf.message),
@@ -60,7 +54,6 @@ function getAdjustedConf(defaultConf: StoryConf | SnippetConf): DemoConf {
     delete storyConf.description;
     adjustedConf = {
       previewConf: storyConf,
-      editorConf: storyConf,
       description,
     };
   }
@@ -75,7 +68,6 @@ export function BrickDemo(props: BrickDemoProps): React.ReactElement {
   const [previewConf, setPreviewConf] = React.useState(
     adjustedConf.previewConf
   );
-  const [editorConf, setEditorConf] = React.useState(adjustedConf.editorConf);
   const [description, setDescription] = useState(adjustedConf.description);
   const [actions, setActions] = useState(adjustedConf.actions);
 
@@ -85,7 +77,6 @@ export function BrickDemo(props: BrickDemoProps): React.ReactElement {
 
   useEffect(() => {
     setPreviewConf(adjustedConf.previewConf);
-    setEditorConf(adjustedConf.editorConf);
     setDescription(adjustedConf.description);
     setActions(adjustedConf.actions);
   }, [adjustedConf]);
@@ -95,15 +86,18 @@ export function BrickDemo(props: BrickDemoProps): React.ReactElement {
     // delete defaultConf.description;
     return (
       <BrickEditor
-        defaultConf={editorConf}
-        onConfChange={setEditorConf}
+        defaultConf={previewConf}
+        onConfChange={setPreviewConf}
         mode={props.mode}
       />
     );
-  }, [editorConf, props.mode]);
+  }, [previewConf, props.mode]);
   const handleActionClick = (method: string, args: any[]): void => {
     /* istanbul ignore if */
-    if (previewConf.portal) {
+    if (
+      (previewConf as StoryConf).portal ||
+      (previewConf as StoryConf[])[0]?.portal
+    ) {
       /* istanbul ignore if */
       if (previewRef.current?.portal.firstChild) {
         (previewRef.current.portal.firstChild as any)[method](...args);

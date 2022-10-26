@@ -2,7 +2,7 @@ import React from "react";
 import AceEditor, { IAceOptions } from "react-ace";
 import { message } from "antd";
 import { assign } from "lodash";
-import { BrickConf, SnippetConf } from "@next-core/brick-types";
+import { BrickConf } from "@next-core/brick-types";
 import { Clipboard } from "@next-libs/clipboard";
 
 import yaml from "js-yaml";

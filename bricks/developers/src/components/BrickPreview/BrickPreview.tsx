@@ -6,11 +6,11 @@ import {
   httpErrorToString,
 } from "@next-core/brick-kit";
 import { LocationContext } from "@next-core/brick-kit/dist/types/core/exports";
-import { StoryConf } from "@next-core/brick-types";
+import { StoryConf, SnippetConf } from "@next-core/brick-types";
 import styles from "./BrickPreview.module.css";
 
 interface BrickPreviewProps {
-  conf: StoryConf;
+  conf: StoryConf | StoryConf[];
 }
 
 export interface BrickPreviewRef {
@@ -23,6 +23,15 @@ function LegacyBrickPreview(
   ref: React.Ref<BrickPreviewRef>
 ): React.ReactElement {
   // const { containerRef, portalRef } = ref;
+  const bricksConf = conf as StoryConf[];
+  if (bricksConf.length > 1) {
+    conf = {
+      brick: "div",
+      slots: { "": { type: "bricks", bricks: bricksConf } },
+    };
+  } else if (bricksConf.length === 1) {
+    conf = bricksConf[0];
+  }
   const containerRef = useRef(null);
   const portalRef = useRef(null);
   const bgRef = useRef(null);
