@@ -77,7 +77,7 @@ const locale: Locale = {
   [K.BRICK_CATEGORY_FORM_INPUT_ADVANCED]: "Advanced Form Input",
   [K.BRICK_CATEGORY_FORM_INPUT_BUSINESS]: "Business Form Input",
   [K.BRICK_CATEGORY_INTERACT_BASIC]: "Basic Interact",
-  [K.BRICK_CATEGORY_FORM]: "Form",
+  [K.BRICK_CATEGORY_TABLE]: "TABLE",
   [K.BRICK_CATEGORY_TEXT]: "Text",
   [K.BRICK_CATEGORY_CARD_INFO]: "Info Card",
   [K.BRICK_CATEGORY_CARD_STATISTIC]: "Statistic Card",

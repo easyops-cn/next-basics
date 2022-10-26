@@ -53,8 +53,8 @@ const brickGroup = [
     text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_INTERACT_BASIC}`),
   },
   {
-    key: "form",
-    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_FORM}`),
+    key: "table",
+    text: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK_CATEGORY_TABLE}`),
   },
   {
     key: "text",

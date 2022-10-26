@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 import { brickTableSvg } from "../images";
 export const BrickTableStory: Story = {
   storyId: "presentational-bricks.brick-table",
-  category: "form",
+  category: "table",
   type: "brick",
   author: "lynette",
   text: {
