@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.212.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.212.0...@next-bricks/basic-bricks@1.212.1) (2022-10-26)
+
+
+### Bug Fixes
+
+* **launchpad:** standalone mode render error ([645f1b6](https://github.com/easyops-cn/next-basics/commit/645f1b6418d719cce1b733ded368f4afd9c40ac6))
+
+
+
+
+
 # [1.212.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.211.8...@next-bricks/basic-bricks@1.212.0) (2022-10-26)
 
 
