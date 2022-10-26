@@ -67,7 +67,7 @@ export function GeneralPopup({
         }
         if (
           path.nodeName.toLowerCase() === "div" &&
-          path.className.includes("header")
+          path.className.includes("general-popup-header")
         ) {
           setIsMove(true);
           curPointRef.current = {
@@ -147,7 +147,7 @@ export function GeneralPopup({
           transform: `translate(${pointerPosition[0]}px, ${pointerPosition[1]}px)`,
         }}
       >
-        <div className="header" ref={headerRef}>
+        <div className="general-popup-header" ref={headerRef}>
           <span className="title">{popupTitle}</span>
           <span className="close">
             <GeneralIcon

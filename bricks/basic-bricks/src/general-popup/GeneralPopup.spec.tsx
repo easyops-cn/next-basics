@@ -70,7 +70,9 @@ describe("GeneralPopup", () => {
       "translate(200px, 50px)"
     );
 
-    const headerElement = baseElement.getElementsByClassName("header");
+    const headerElement = baseElement.getElementsByClassName(
+      "general-popup-header"
+    );
 
     const event = new MouseEvent("mousedown", {
       bubbles: true,
