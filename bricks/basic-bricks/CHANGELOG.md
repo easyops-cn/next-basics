@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.212.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.211.8...@next-bricks/basic-bricks@1.212.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* general-popup drag bug fix ([7a8a2ef](https://github.com/easyops-cn/next-basics/commit/7a8a2ef0c718877f52f2740da9483d41a8a7c50f))
+
+
+### Features
+
+* update unit test ([c16e9c9](https://github.com/easyops-cn/next-basics/commit/c16e9c9fd9b222e4e1d290a93f1069aa80583473))
+
+
+
+
+
 ## [1.211.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.211.7...@next-bricks/basic-bricks@1.211.8) (2022-10-25)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
