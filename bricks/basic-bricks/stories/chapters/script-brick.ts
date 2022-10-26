@@ -21,6 +21,30 @@ export const scriptBrickStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "basic-bricks.script-brick",
+          events: {
+            "script.execute": {
+              action: "message.info",
+              args: ["excute script"],
+            },
+          },
+        },
+      ],
+      snippetId: "basic-bricks.script-brick[basic]",
+      title: {
+        en: "Basic Script Brick",
+        zh: "基础自定义函数转换",
+      },
+      actions: [
+        {
+          text: "execute()",
+          method: "execute",
+        },
+      ],
+    },
+    {
       brick: "div",
       slots: {
         "": {

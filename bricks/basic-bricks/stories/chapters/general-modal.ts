@@ -19,79 +19,51 @@ export const generalModalStory: Story = {
   conf: [
     {
       description: {
-        title: "",
-        message:
-          "全局完成类操作置于弹窗底部，使用文字按钮，一个主按钮，放于所有按钮的最右侧。",
+        title: "基本使用",
       },
       brick: "div",
       slots: {
         content: {
-          type: "bricks",
           bricks: [
             {
               brick: "basic-bricks.general-button",
+              events: {
+                "general.button.click": {
+                  method: "open",
+                  target: "#origin",
+                },
+              },
               properties: {
                 buttonName: "点击弹出模态框",
-              },
-              events: {
-                "general.button.click": {
-                  target: "#origin",
-                  method: "open",
-                },
-              },
-            },
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "点击弹出模态框，带 footer slot",
-              },
-              events: {
-                "general.button.click": {
-                  target: "#withSlot",
-                  method: "open",
-                },
               },
             },
             {
               brick: "basic-bricks.general-modal",
-              slots: {
-                content: {
-                  type: "bricks",
-                  bricks: [
-                    {
-                      brick: "h3",
-                      properties: {
-                        textContent: "modal content",
-                      },
-                    },
-                  ],
+              events: {
+                "basic-bricks.general-modal.cancel": {
+                  action: "message.info",
+                  args: ["cancel modal"],
+                },
+                "basic-bricks.general-modal.confirm": {
+                  action: "message.info",
+                  args: ["confirm modal"],
+                },
+                "modal.close": {
+                  action: "message.info",
+                  args: ["close modal"],
+                },
+                "modal.open": {
+                  action: "message.info",
+                  args: ["open modal"],
                 },
               },
               properties: {
                 id: "origin",
-                okText: "Save",
                 modalTitle: "Modal Title",
+                okText: "Save",
               },
-              events: {
-                "basic-bricks.general-modal.cancel": {
-                  action: "console.log",
-                },
-                "basic-bricks.general-modal.confirm": {
-                  action: "console.log",
-                },
-                "modal.open": {
-                  action: "console.log",
-                },
-                "modal.close": {
-                  action: "console.log",
-                },
-              },
-            },
-            {
-              brick: "basic-bricks.general-modal",
               slots: {
                 content: {
-                  type: "bricks",
                   bricks: [
                     {
                       brick: "h3",
@@ -100,217 +72,253 @@ export const generalModalStory: Story = {
                       },
                     },
                   ],
-                },
-                footer: {
                   type: "bricks",
-                  bricks: [
-                    {
-                      brick: "basic-bricks.general-button",
-                      properties: {
-                        buttonType: "danger",
-                        buttonName: "Delete",
-                      },
-                      events: {
-                        "general.button.click": [
-                          {
-                            action: "console.log",
-                          },
-                          {
-                            target: "#withSlot",
-                            method: "close",
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-              properties: {
-                id: "withSlot",
-                modalTitle: "Modal Title",
-                enableFooterSlot: true,
-              },
-              events: {
-                "basic-bricks.general-modal.cancel": {
-                  action: "console.log",
-                },
-                "basic-bricks.general-modal.confirm": {
-                  action: "console.log",
-                },
-                "modal.open": {
-                  action: "console.log",
-                },
-                "modal.close": {
-                  action: "console.log",
                 },
               },
             },
           ],
+          type: "bricks",
         },
       },
     },
     {
-      description: {
-        title: "标题相关：对齐方式、图标、标题后自定义构件",
-        message: "图标来源可以为src(httpSrc/DataSrc)或平台的图标库",
-      },
-      brick: "div",
-      slots: {
-        content: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "点击弹出模态框",
-              },
-              events: {
-                "general.button.click": {
-                  target: "#title-customized",
-                  method: "open",
-                },
-              },
+      bricks: [
+        {
+          description: {
+            title: "",
+            message:
+              "全局完成类操作置于弹窗底部，使用文字按钮，一个主按钮，放于所有按钮的最右侧。",
+          },
+          brick: "basic-bricks.general-modal",
+          events: {
+            "basic-bricks.general-modal.cancel": {
+              action: "message.info",
+              args: ["modal cancel"],
             },
-            {
-              brick: "basic-bricks.general-modal",
-              slots: {
-                headerExtra: {
-                  bricks: [
-                    {
-                      brick: "presentational-bricks.brick-tag",
-                      properties: {
-                        color: "var(--color-warning)",
-                        showCard: false,
-                        tagList: ["警告"],
-                        tagStyle: {
-                          marginLeft: "-4px",
-                        },
-                      },
-                    },
-                  ],
-                  type: "bricks",
-                },
-                content: {
-                  type: "bricks",
-                  bricks: [
-                    {
-                      brick: "h3",
-                      properties: {
-                        textContent: "modal content",
-                      },
-                    },
-                  ],
-                },
-              },
-              properties: {
-                id: "title-customized",
-                okText: "Save",
-                modalTitle: "Modal Title",
-                titleAlign: "center",
-                titleIcon: {
-                  lib: "antd",
-                  icon: "warning",
-                  theme: "outlined",
-                  color: "var(--color-warning)",
-                },
-              },
-              events: {
-                "basic-bricks.general-modal.cancel": {
-                  action: "console.log",
-                },
-                "basic-bricks.general-modal.confirm": {
-                  action: "console.log",
-                },
-                "modal.open": {
-                  action: "console.log",
-                },
-                "modal.close": {
-                  action: "console.log",
-                },
-              },
+            "basic-bricks.general-modal.confirm": {
+              action: "message.info",
+              args: ["modal confirm"],
             },
-          ],
+            "modal.close": {
+              action: "message.info",
+              args: ["modal close"],
+            },
+            "modal.open": {
+              action: "message.info",
+              args: ["modal open"],
+            },
+          },
+          properties: {
+            enableFooterSlot: true,
+            id: "withSlot",
+            modalTitle: "Modal Title",
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "h3",
+                  properties: {
+                    textContent: "modal content",
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+            footer: {
+              bricks: [
+                {
+                  brick: "basic-bricks.general-button",
+                  events: {
+                    "general.button.click": [
+                      {
+                        action: "console.log",
+                      },
+                      {
+                        method: "close",
+                        target: "#withSlot",
+                      },
+                    ],
+                  },
+                  properties: {
+                    buttonName: "Delete",
+                    buttonType: "danger",
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
         },
+      ],
+      snippetId: "basic-bricks.general-modal[footer]",
+      title: {
+        en: "General Modal with Footer Slot",
+        zh: "带footer的模态框",
       },
+      actions: [
+        {
+          text: "open()",
+          method: "open",
+        },
+      ],
     },
     {
-      description: {
-        title: "全屏模式",
-      },
-      brick: "div",
-      slots: {
-        content: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "点击弹出模态框",
-              },
-              events: {
-                "general.button.click": {
-                  target: "#fullscreen-mode",
-                  method: "open",
-                },
-              },
+      bricks: [
+        {
+          description: {
+            title: "标题相关：对齐方式、图标、标题后自定义构件",
+            message: "图标来源可以为src(httpSrc/DataSrc)或平台的图标库",
+          },
+          brick: "basic-bricks.general-modal",
+          events: {
+            "basic-bricks.general-modal.cancel": {
+              action: "message.info",
+              args: ["modal cancel"],
             },
-            {
-              brick: "basic-bricks.general-modal",
-              slots: {
-                content: {
-                  type: "bricks",
-                  bricks: [
-                    {
-                      brick: "h3",
-                      properties: {
-                        textContent: "modal content",
-                      },
-                    },
-                    {
-                      brick: "p",
-                      properties: {
-                        textContent: "some content...",
-                      },
-                    },
-                    {
-                      brick: "p",
-                      properties: {
-                        textContent: "some content...",
-                      },
-                    },
-                    {
-                      brick: "p",
-                      properties: {
-                        textContent: "some content...",
-                      },
-                    },
-                  ],
-                },
-              },
-              properties: {
-                id: "fullscreen-mode",
-                okText: "Save",
-                modalTitle: "Modal Title",
-                fullscreen: true,
-              },
-              events: {
-                "basic-bricks.general-modal.cancel": {
-                  action: "console.log",
-                },
-                "basic-bricks.general-modal.confirm": {
-                  action: "console.log",
-                },
-                "modal.open": {
-                  action: "console.log",
-                },
-                "modal.close": {
-                  action: "console.log",
-                },
-              },
+            "basic-bricks.general-modal.confirm": {
+              action: "message.info",
+              args: ["modal confirm"],
             },
-          ],
+            "modal.close": {
+              action: "message.info",
+              args: ["modal close"],
+            },
+            "modal.open": {
+              action: "message.info",
+              args: ["modal open"],
+            },
+          },
+          properties: {
+            id: "title-customized",
+            modalTitle: "Modal Title",
+            okText: "Save",
+            titleAlign: "center",
+            titleIcon: {
+              color: "var(--color-warning)",
+              icon: "warning",
+              lib: "antd",
+              theme: "outlined",
+            },
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "h3",
+                  properties: {
+                    textContent: "modal content",
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+            headerExtra: {
+              bricks: [
+                {
+                  brick: "presentational-bricks.brick-tag",
+                  properties: {
+                    color: "var(--color-warning)",
+                    showCard: false,
+                    tagList: ["警告"],
+                    tagStyle: {
+                      marginLeft: "-4px",
+                    },
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
         },
+      ],
+      snippetId: "basic-bricks.general-modal[custom-title]",
+      title: {
+        en: "General Modal with Custom Title",
+        zh: "带自定义标题的模态框",
       },
+      actions: [
+        {
+          text: "open()",
+          method: "open",
+        },
+      ],
+    },
+    {
+      bricks: [
+        {
+          description: {
+            title: "全屏模式",
+          },
+          brick: "basic-bricks.general-modal",
+          events: {
+            "basic-bricks.general-modal.cancel": {
+              action: "message.info",
+              args: ["modal cancel"],
+            },
+            "basic-bricks.general-modal.confirm": {
+              action: "message.info",
+              args: ["modal confirm"],
+            },
+            "modal.close": {
+              action: "message.info",
+              args: ["modal close"],
+            },
+            "modal.open": {
+              action: "message.info",
+              args: ["modal open"],
+            },
+          },
+          properties: {
+            fullscreen: true,
+            id: "fullscreen-mode",
+            modalTitle: "Modal Title",
+            okText: "Save",
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "h3",
+                  properties: {
+                    textContent: "modal content",
+                  },
+                },
+                {
+                  brick: "p",
+                  properties: {
+                    textContent: "some content...",
+                  },
+                },
+                {
+                  brick: "p",
+                  properties: {
+                    textContent: "some content...",
+                  },
+                },
+                {
+                  brick: "p",
+                  properties: {
+                    textContent: "some content...",
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
+        },
+      ],
+      snippetId: "basic-bricks.general-modal[full-screen]",
+      title: {
+        en: "Full Screen General Modal",
+        zh: "全屏模态框",
+      },
+      actions: [
+        {
+          text: "open()",
+          method: "open",
+        },
+      ],
     },
   ],
 };

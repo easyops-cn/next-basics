@@ -18,22 +18,41 @@ export const generalHotkeysStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.general-hotkeys",
-      properties: {
-        hotkeysConfig: [
-          {
-            key: "command+s",
-            eventName: "hotkey.save",
+      bricks: [
+        {
+          brick: "basic-bricks.general-hotkeys",
+          properties: {
+            hotkeysConfig: [
+              {
+                key: "command+s",
+                eventName: "hotkey.save",
+              },
+              {
+                key: "command+b",
+                eventName: "hotkey.build",
+              },
+            ],
           },
-          {
-            key: "command+b",
-            eventName: "hotkey.build",
+          events: {
+            "hotkey.save": [
+              {
+                action: "message.info",
+                args: ["save"],
+              },
+            ],
+            "hotkey.build": [
+              {
+                action: "message.info",
+                args: ["build"],
+              },
+            ],
           },
-        ],
-      },
-      events: {
-        "hotkey.save": [{ action: "console.log" }],
-        "hotkey.build": [{ action: "console.log" }],
+        },
+      ],
+      snippetId: "basic-bricks.general-hotkeys[basic]",
+      title: {
+        en: "Basic General Hotkeys",
+        zh: "基础通用快捷键",
       },
     },
   ],

@@ -18,50 +18,68 @@ export const generalAnchorStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "基本",
-        message: "",
-      },
-      brick: "basic-bricks.general-anchor",
-      properties: {
-        anchorList: [
-          {
-            title: "应用资源",
-            href: "http://192.168.100.162/next/resource-monitor#saas-monitor",
+      bricks: [
+        {
+          description: {
+            title: "基本",
+            message: "",
           },
-          {
-            title: "平台资源",
-            href: "http://192.168.100.162/next/resource-monitor#paas-monitor",
+          brick: "basic-bricks.general-anchor",
+          properties: {
+            anchorList: [
+              {
+                title: "应用资源",
+                href: "http://192.168.100.162/next/resource-monitor#saas-monitor",
+              },
+              {
+                title: "平台资源",
+                href: "http://192.168.100.162/next/resource-monitor#paas-monitor",
+              },
+              {
+                title: "基础设施",
+                href: "http://192.168.100.162/next/resource-monitor#iaas-monitor",
+              },
+            ],
           },
-          {
-            title: "基础设施",
-            href: "http://192.168.100.162/next/resource-monitor#iaas-monitor",
-          },
-        ],
+        },
+      ],
+      snippetId: "basic-bricks.general-anchor[basic]",
+      title: {
+        en: "Basic General Anchor",
+        zh: "基础锚点",
       },
     },
     {
-      description: {
-        title: "`type`为`radio`",
-        message: "用于某些特定场景，有固定的样式",
-      },
-      brick: "basic-bricks.general-anchor",
-      properties: {
-        type: "radio",
-        anchorList: [
-          {
-            title: "应用资源",
-            href: "http://192.168.100.162/next/resource-monitor#saas-monitor",
+      bricks: [
+        {
+          description: {
+            title: "`type`为`radio`",
+            message: "用于某些特定场景，有固定的样式",
           },
-          {
-            title: "平台资源",
-            href: "http://192.168.100.162/next/resource-monitor#paas-monitor",
+          brick: "basic-bricks.general-anchor",
+          properties: {
+            type: "radio",
+            anchorList: [
+              {
+                title: "应用资源",
+                href: "http://192.168.100.162/next/resource-monitor#saas-monitor",
+              },
+              {
+                title: "平台资源",
+                href: "http://192.168.100.162/next/resource-monitor#paas-monitor",
+              },
+              {
+                title: "基础设施",
+                href: "http://192.168.100.162/next/resource-monitor#iaas-monitor",
+              },
+            ],
           },
-          {
-            title: "基础设施",
-            href: "http://192.168.100.162/next/resource-monitor#iaas-monitor",
-          },
-        ],
+        },
+      ],
+      snippetId: "basic-bricks.general-anchor[radio]",
+      title: {
+        en: "Radio General Anchor",
+        zh: "radio样式锚点",
       },
     },
   ],

@@ -17,48 +17,49 @@ export const menuBarStory: Story = {
   icon: {
     imgSrc: menuBarSvg,
   },
-  conf: {
-    brick: "basic-bricks.micro-app",
-    slots: {
-      subMenu: {
-        type: "bricks",
-        bricks: [
-          {
-            brick: "basic-bricks.menu-bar",
-            properties: {
-              menu: {
-                title: "IP网段管理",
-                menuItems: [
-                  {
-                    type: "default",
-                    text: "基本信息",
-                    to: "/developers/brick-book/menu-bar",
-                    exact: true,
-                  },
-                  {
-                    type: "group",
-                    title: "资源关系",
-                    items: [
-                      {
-                        text: "所在机柜",
-                        to: "/developers/brick-book/menu-bar/1",
-                      },
-                      {
-                        text: "运维人员",
-                        to: "/developers/brick-book/menu-bar/2",
-                      },
-                    ],
-                  },
-                ],
-              },
-              collapsed: false,
-              dataset: {
-                testid: "basic-usage-demo-menu",
-              },
+  conf: [
+    {
+      bricks: [
+        {
+          brick: "basic-bricks.menu-bar",
+          properties: {
+            collapsed: false,
+            dataset: {
+              testid: "basic-usage-demo-menu",
+            },
+            menu: {
+              menuItems: [
+                {
+                  exact: true,
+                  text: "基本信息",
+                  to: "/developers/brick-book/menu-bar",
+                  type: "default",
+                },
+                {
+                  items: [
+                    {
+                      text: "所在机柜",
+                      to: "/developers/brick-book/menu-bar/1",
+                    },
+                    {
+                      text: "运维人员",
+                      to: "/developers/brick-book/menu-bar/2",
+                    },
+                  ],
+                  title: "资源关系",
+                  type: "group",
+                },
+              ],
+              title: "IP网段管理",
             },
           },
-        ],
+        },
+      ],
+      snippetId: "basic-bricks.menu-bar[basic]",
+      title: {
+        en: "Basic Menu Bar",
+        zh: "基础一级左侧菜单",
       },
     },
-  },
+  ],
 };

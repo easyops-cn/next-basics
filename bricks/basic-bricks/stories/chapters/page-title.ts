@@ -16,20 +16,37 @@ export const pageTitleStory: Story = {
   icon: {
     imgSrc: pageTitleSvg,
   },
-  conf: {
-    brick: "basic-bricks.micro-view",
-    slots: {
-      titleBar: {
-        type: "bricks",
-        bricks: [
-          {
-            brick: "basic-bricks.page-title",
-            properties: {
-              pageTitle: "Hello World",
+  conf: [
+    {
+      brick: "basic-bricks.micro-view",
+      slots: {
+        titleBar: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "basic-bricks.page-title",
+              properties: {
+                pageTitle: "Hello World",
+              },
             },
-          },
-        ],
+          ],
+        },
       },
     },
-  },
+    {
+      bricks: [
+        {
+          brick: "basic-bricks.page-title",
+          properties: {
+            pageTitle: "Hello World",
+          },
+        },
+      ],
+      snippetId: "basic-bricks.page-title[basic]",
+      title: {
+        en: "Basic Page Title",
+        zh: "基础页面标题",
+      },
+    },
+  ],
 };

@@ -62,6 +62,45 @@ export const generalNotificationStory: Story = {
         },
       },
     },
+    {
+      bricks: [
+        {
+          brick: "basic-bricks.general-notification",
+          events: {
+            "general.notification.click": {
+              action: "message.info",
+              args: ["notification click"],
+            },
+            "general.notification.close": {
+              action: "message.info",
+              args: ["notification close"],
+            },
+          },
+          properties: {
+            description: "Notification Description.",
+            duration: 3,
+            icon: "smile",
+            iconStyle: {
+              color: "red",
+              textAlign: "center",
+            },
+            message: "Notification Title",
+            placement: "topRight",
+          },
+        },
+      ],
+      snippetId: "basic-bricks.general-notification[basic]",
+      title: {
+        en: "Basic General Notification",
+        zh: "基础通知提醒框",
+      },
+      actions: [
+        {
+          text: "open()",
+          method: "open",
+        },
+      ],
+    },
   ],
   previewColumns: 1,
 };
