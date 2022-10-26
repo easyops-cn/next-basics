@@ -229,10 +229,6 @@ export const ModalConfirmStory: Story = {
               ],
             },
           },
-          description: {
-            title: "基本",
-            message: "各种类型的确认对话框",
-          },
         },
       ],
     },
