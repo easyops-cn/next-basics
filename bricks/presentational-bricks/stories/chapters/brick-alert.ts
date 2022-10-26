@@ -18,34 +18,59 @@ export const BrickAlertStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.brick-alert",
-      properties: {
-        type: "success",
-        message: "tool executed successfully",
+      snippetId: "presentational-bricks.brick-alert[success-tips]",
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-alert",
+          properties: {
+            type: "success",
+            message: "tool executed successfully",
+          },
+        },
+      ],
+      title: {
+        en: "Success alert",
+        zh: "成功提示",
       },
     },
     {
-      brick: "presentational-bricks.brick-alert",
-      properties: {
-        type: "info",
-        message: "Today is Tuesday",
-        showIcon: true,
+      snippetId: "presentational-bricks.brick-alert[info-tips-with-icon]",
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-alert",
+          properties: {
+            type: "success",
+            message: "tool executed successfully",
+          },
+        },
+      ],
+      title: {
+        en: "Info alert with icon",
+        zh: "带图标正常提示",
       },
     },
     {
-      description: {
-        title: "不再提示",
-        message:
-          "当 `closable` 为true，`localStorageKey` 不为空时，以页面 url 为命名空间，控制提示在当前路径关闭后不再显示。可通过设置 `stripLocalStorageUrlSuffix` 为true关闭url命名空间，使提示的关闭全局有效",
+      snippetId: "presentational-bricks.brick-alert[warn-tips-with-close]",
+      message: {
+        en: "",
+        zh: "当 `closable` 为true，`localStorageKey` 不为空时，以页面 url 为命名空间，控制提示在当前路径关闭后不再显示。可通过设置 `stripLocalStorageUrlSuffix` 为true关闭url命名空间，使提示的关闭全局有效",
       },
-      brick: "presentational-bricks.brick-alert",
-      properties: {
-        type: "warning",
-        message: "Today is Tuesday",
-        showIcon: true,
-        closable: true,
-        localStorageKey: "",
-        stripLocalStorageUrlSuffix: true,
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-alert",
+          properties: {
+            type: "warning",
+            message: "Today is Tuesday",
+            showIcon: true,
+            closable: true,
+            localStorageKey: "",
+            stripLocalStorageUrlSuffix: true,
+          },
+        },
+      ],
+      title: {
+        en: "Warn Alert with close",
+        zh: "警告提示带关闭按钮",
       },
     },
     {
@@ -58,91 +83,98 @@ export const BrickAlertStory: Story = {
       },
     },
     {
-      description: {
-        title: "",
-        message:
-          "本示例额外使用了通过target改变具体构件属性的知识点，具体可查看[设置指定构件属性方式](/next-docs/docs/brick-next/events#custom-handlers-properties)",
+      snippetId: "presentational-bricks.brick-alert[with-slot]",
+      message: {
+        en: "",
+        zh: "本示例额外使用了通过target改变具体构件属性的知识点，具体可查看[设置指定构件属性方式](/next-docs/docs/brick-next/events#custom-handlers-properties)",
       },
-      brick: "presentational-bricks.brick-alert",
-      properties: {
-        id: "pseudoSlot",
-        type: "info",
-        message: "Today is Tuesday",
-        showIcon: true,
-        enableDescSlot: true,
+      title: {
+        zh: "带插槽提示",
+        en: "Alert with slots",
       },
-      slots: {
-        description: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "div",
-              slots: {
-                "": {
-                  type: "bricks",
-                  bricks: [
-                    {
-                      brick: "strong",
-                      properties: {
-                        textContent: "Temperature: ",
-                      },
-                    },
-                    {
-                      brick: "span",
-                      properties: {
-                        textContent: "24°C",
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-            {
-              brick: "div",
-              slots: {
-                "": {
-                  type: "bricks",
-                  bricks: [
-                    {
-                      brick: "strong",
-                      properties: {
-                        textContent: "Weather: ",
-                      },
-                    },
-                    {
-                      brick: "span",
-                      properties: {
-                        textContent: "not bad",
-                      },
-                    },
-                    {
-                      brick: "basic-bricks.general-button",
-                      properties: {
-                        style: {
-                          marginTop: "12px",
-                        },
-                        buttonName: "hello-button",
-                        buttonIcon: "search",
-                        buttonType: "primary",
-                      },
-                      events: {
-                        "general.button.click": {
-                          target: "#pseudoSlot",
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-alert",
+          properties: {
+            type: "info",
+            message: "Today is Tuesday",
+            showIcon: true,
+            enableDescSlot: true,
+          },
+          slots: {
+            description: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "div",
+                  slots: {
+                    "": {
+                      type: "bricks",
+                      bricks: [
+                        {
+                          brick: "strong",
                           properties: {
-                            message: "Time flies...",
-                            type: "warning",
-                            enableDescSlot: false,
+                            textContent: "Temperature: ",
                           },
                         },
-                      },
+                        {
+                          brick: "span",
+                          properties: {
+                            textContent: "24°C",
+                          },
+                        },
+                      ],
                     },
-                  ],
+                  },
                 },
-              },
+                {
+                  brick: "div",
+                  slots: {
+                    "": {
+                      type: "bricks",
+                      bricks: [
+                        {
+                          brick: "strong",
+                          properties: {
+                            textContent: "Weather: ",
+                          },
+                        },
+                        {
+                          brick: "span",
+                          properties: {
+                            textContent: "not bad",
+                          },
+                        },
+                        {
+                          brick: "basic-bricks.general-button",
+                          properties: {
+                            style: {
+                              marginTop: "12px",
+                            },
+                            buttonName: "hello-button",
+                            buttonIcon: "search",
+                            buttonType: "primary",
+                          },
+                          events: {
+                            "general.button.click": {
+                              target: "#pseudoSlot",
+                              properties: {
+                                message: "Time flies...",
+                                type: "warning",
+                                enableDescSlot: false,
+                              },
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
             },
-          ],
+          },
         },
-      },
+      ],
     },
     {
       description: {

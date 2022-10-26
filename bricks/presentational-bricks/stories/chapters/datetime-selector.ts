@@ -18,60 +18,78 @@ export const DatetimeSelectorStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "默认时间范围选项",
+      snippetId: "presentational-bricks.datetime-selector[normal]",
+      title: {
+        zh: "基础默认时间范围选项",
+        en: "",
       },
-      brick: "presentational-bricks.datetime-selector",
-      properties: {
-        from: "<% QUERY.from || 'now/d' %>",
-        to: "<% QUERY.to %>",
-      },
-      events: {
-        "datetime.selected.v2": {
-          action: "console.log",
+      bricks: [
+        {
+          description: {
+            title: "默认时间范围选项",
+          },
+          brick: "presentational-bricks.datetime-selector",
+          properties: {
+            from: "<% QUERY.from || 'now/d' %>",
+            to: "<% QUERY.to %>",
+          },
+          events: {
+            "datetime.selected.v2": {
+              action: "console.log",
+            },
+            "datetime.selected.v3": {
+              action: "console.log",
+            },
+          },
         },
-        "datetime.selected.v3": {
-          action: "console.log",
-        },
-      },
+      ],
     },
     {
-      description: {
-        title: "自定义时间范围选项",
+      snippetId: "presentational-bricks.datetime-selector[custom]",
+      title: {
+        zh: "自定义时间范围选项",
+        en: "",
       },
-      brick: "presentational-bricks.datetime-selector",
-      properties: {
-        shouldUpdateUrlParams: false,
-        from: "<% QUERY.from || 'now/d' %>",
-        to: "<% QUERY.to %>",
-        type: "custom",
-        customTimeRange: [
-          {
-            range: "now-1h",
-            text: "近1小时",
+      bricks: [
+        {
+          description: {
+            title: "自定义时间范围选项",
           },
-          {
-            range: "now-1d",
-            text: "近24小时",
+          brick: "presentational-bricks.datetime-selector",
+          properties: {
+            shouldUpdateUrlParams: false,
+            from: "<% QUERY.from || 'now/d' %>",
+            to: "<% QUERY.to %>",
+            type: "custom",
+            customTimeRange: [
+              {
+                range: "now-1h",
+                text: "近1小时",
+              },
+              {
+                range: "now-1d",
+                text: "近24小时",
+              },
+              {
+                range: "now/d",
+                text: "今天",
+              },
+              {
+                range: "now-7d",
+                text: "近7天",
+              },
+              {
+                range: "now-30d",
+                text: "近30天",
+              },
+              {
+                range: "now-1y",
+                text: "近一年",
+              },
+            ],
           },
-          {
-            range: "now/d",
-            text: "今天",
-          },
-          {
-            range: "now-7d",
-            text: "近7天",
-          },
-          {
-            range: "now-30d",
-            text: "近30天",
-          },
-          {
-            range: "now-1y",
-            text: "近一年",
-          },
-        ],
-      },
+        },
+      ],
     },
   ],
 };

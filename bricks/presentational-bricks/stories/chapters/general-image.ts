@@ -19,15 +19,24 @@ export const GeneralImageStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "基本用法",
+      snippetId: "presentational-bricks.general-image[normal]",
+      title: {
+        en: "基本图片展示构件",
+        zh: "",
       },
-      brick: "presentational-bricks.general-image",
-      properties: {
-        imgSrc:
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-        imgWidth: 200,
-      },
+      bricks: [
+        {
+          description: {
+            title: "基本用法",
+          },
+          brick: "presentational-bricks.general-image",
+          properties: {
+            imgSrc:
+              "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            imgWidth: 200,
+          },
+        },
+      ],
     },
     {
       description: {

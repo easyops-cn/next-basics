@@ -18,85 +18,103 @@ export const GeneralCarouselStory: Story = {
   },
   conf: [
     {
-      brick: "basic-bricks.general-card",
-      slots: {
-        content: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "presentational-bricks.general-carousel",
-              properties: {
-                carouselStyle: {
-                  width: "500px",
-                },
-                autoplay: false,
-                components: [
-                  {
-                    brick: "presentational-bricks.markdown-display",
-                    properties: {
-                      dataSource: "![](http://placekitten.com/g/400/200)",
-                    },
-                  },
-                  {
-                    brick: "presentational-bricks.markdown-display",
-                    properties: {
-                      dataSource: "文字内容1",
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        },
+      snippetId: "presentational-bricks.general-carousel[normal]",
+      title: {
+        en: "",
+        zh: "基础的轮播图",
       },
+      bricks: [
+        {
+          brick: "basic-bricks.general-card",
+          slots: {
+            content: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "presentational-bricks.general-carousel",
+                  properties: {
+                    carouselStyle: {
+                      width: "500px",
+                    },
+                    autoplay: false,
+                    components: [
+                      {
+                        brick: "presentational-bricks.markdown-display",
+                        properties: {
+                          dataSource: "![](http://placekitten.com/g/400/200)",
+                        },
+                      },
+                      {
+                        brick: "presentational-bricks.markdown-display",
+                        properties: {
+                          dataSource: "文字内容1",
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
     },
     {
-      brick: "basic-bricks.general-card",
-      slots: {
-        content: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "presentational-bricks.general-carousel",
-              properties: {
-                autoplay: true,
-                dots: false,
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                carouselStyle: {
-                  width: "500px",
-                },
-                components: [
-                  {
-                    brick: "div",
-                    properties: {
-                      textContent: "文字内容1",
-                    },
-                  },
-                  {
-                    brick: "div",
-                    properties: {
-                      textContent: "文字内容2",
-                    },
-                  },
-                  {
-                    brick: "div",
-                    properties: {
-                      textContent: "文字内容3",
-                    },
-                  },
-                  {
-                    brick: "div",
-                    properties: {
-                      textContent: "文字内容4",
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        },
+      snippetId: "presentational-bricks.general-carousel[autoplay]",
+      title: {
+        zh: "定时轮播图",
+        en: "",
       },
+      bricks: [
+        {
+          brick: "basic-bricks.general-card",
+          slots: {
+            content: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "presentational-bricks.general-carousel",
+                  properties: {
+                    autoplay: true,
+                    dots: false,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    carouselStyle: {
+                      width: "500px",
+                    },
+                    components: [
+                      {
+                        brick: "div",
+                        properties: {
+                          textContent: "文字内容1",
+                        },
+                      },
+                      {
+                        brick: "div",
+                        properties: {
+                          textContent: "文字内容2",
+                        },
+                      },
+                      {
+                        brick: "div",
+                        properties: {
+                          textContent: "文字内容3",
+                        },
+                      },
+                      {
+                        brick: "div",
+                        properties: {
+                          textContent: "文字内容4",
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
     },
     {
       brick: "basic-bricks.general-card",

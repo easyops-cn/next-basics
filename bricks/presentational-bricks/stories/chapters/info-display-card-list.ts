@@ -231,54 +231,63 @@ export const InfoDisplayCardList: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.info-display-card-list",
-      properties: {
-        dataSource: infoList,
-        optionConf: {
-          useBrick: {
-            brick: "basic-bricks.general-custom-buttons",
-            properties: {
-              isMoreButton: true,
-              alignment: "end",
-              moreButtonShape: "no",
-              moreBtnIcon: {
-                lib: "antd",
-                icon: "more",
-                theme: "outlined",
-              },
-              customButtons: [
-                {
-                  isDropdown: true,
-                  text: "编辑",
-                  icon: "edit",
-                  color: "#8c8c8c",
-                  eventName: "instance.edit",
+      snippetId: "presentational-bricks.info-display-card-list[normal]",
+      title: {
+        en: "",
+        zh: "基础信息展示卡片列表",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.info-display-card-list",
+          properties: {
+            dataSource: infoList,
+            optionConf: {
+              useBrick: {
+                brick: "basic-bricks.general-custom-buttons",
+                properties: {
+                  isMoreButton: true,
+                  alignment: "end",
+                  moreButtonShape: "no",
+                  moreBtnIcon: {
+                    lib: "antd",
+                    icon: "more",
+                    theme: "outlined",
+                  },
+                  customButtons: [
+                    {
+                      isDropdown: true,
+                      text: "编辑",
+                      icon: "edit",
+                      color: "#8c8c8c",
+                      eventName: "instance.edit",
+                    },
+                    {
+                      isDropdown: true,
+                      text: "删除",
+                      icon: "delete",
+                      color: "#E02020",
+                      eventName: "instance.delete",
+                    },
+                  ],
                 },
-                {
-                  isDropdown: true,
-                  text: "删除",
-                  icon: "delete",
-                  color: "#E02020",
-                  eventName: "instance.delete",
+                transform: {
+                  dataSource: "<% DATA %>",
                 },
-              ],
-            },
-            transform: {
-              dataSource: "<% DATA %>",
-            },
-            events: {
-              "instance.edit": {
-                action: "console.log",
-                args: ["<% EVENT.detail %>"],
-              },
-              "instance.delete": {
-                action: "console.log",
-                args: ["<% EVENT.detail %>"],
+                events: {
+                  "instance.edit": {
+                    action: "console.log",
+                    args: ["<% EVENT.detail %>"],
+                  },
+                  "instance.delete": {
+                    action: "console.log",
+                    args: ["<% EVENT.detail %>"],
+                  },
+                },
               },
             },
           },
         },
-      },
+      ],
     },
     {
       brick: "presentational-bricks.info-display-card-list",

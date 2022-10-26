@@ -18,35 +18,71 @@ export const BrickHumanizeTimeStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.brick-humanize-time",
-      properties: {
-        value: 1571017058,
-        formatter: "full",
+      snippetId: "presentational-bricks.brick-humanize-time[full]",
+      title: {
+        en: "Humanize time(full)",
+        zh: "人性化时间展示(完整)",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-humanize-time",
+          properties: {
+            value: 1571017058,
+            formatter: "full",
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.brick-humanize-time",
-      properties: {
-        value: 1571017058,
-        formatter: "accurate",
-        isCostTime: true,
+      snippetId: "presentational-bricks.brick-humanize-time[accurate]",
+      title: {
+        en: "Humanize time(accurate)",
+        zh: "人性化时间展示(精确)",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-humanize-time",
+          properties: {
+            value: 1571017058,
+            formatter: "accurate",
+            isCostTime: true,
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.brick-humanize-time",
-      properties: {
-        value: 1571017058000,
-        isMicrosecond: true,
-        formatter: "relative",
+      snippetId: "presentational-bricks.brick-humanize-time[accurate]",
+      title: {
+        en: "Humanize time(relative)",
+        zh: "人性化时间展示(相对)",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-humanize-time",
+          properties: {
+            value: 1571017058000,
+            isMicrosecond: true,
+            formatter: "relative",
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.brick-humanize-time",
-      properties: {
-        value: 1000,
-        formatter: "relative",
-        isCostTime: true,
+      snippetId: "presentational-bricks.brick-humanize-time[cost]",
+      title: {
+        en: "Humanize time(cost)",
+        zh: "人性化时间展示(耗时)",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-humanize-time",
+          properties: {
+            value: 1000,
+            formatter: "relative",
+            isCostTime: true,
+          },
+        },
+      ],
     },
     {
       brick: "presentational-bricks.brick-humanize-time",
@@ -67,12 +103,21 @@ export const BrickHumanizeTimeStory: Story = {
       },
     },
     {
-      brick: "presentational-bricks.brick-humanize-time",
-      properties: {
-        value: "2020-02-27 16:36",
-        inputFormat: "YYYY-MM-DD",
-        outputFormat: "YYYY-MM-DD",
+      snippetId: "presentational-bricks.brick-humanize-time[format]",
+      title: {
+        en: "Humanize time(format)",
+        zh: "人性化时间展示(格式化)",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-humanize-time",
+          properties: {
+            value: "2020-02-27 16:36",
+            inputFormat: "YYYY-MM-DD",
+            outputFormat: "YYYY-MM-DD",
+          },
+        },
+      ],
     },
   ],
   previewColumns: 2,

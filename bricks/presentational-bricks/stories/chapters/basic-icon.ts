@@ -33,38 +33,45 @@ export const BasicIconStory: Story = {
       },
     },
     {
-      description: {
-        title:
-          "设置renderBg为true渲染图标背景，配置bg, bgSize, bgBorderRadius设置图标背景样式",
-      },
-      brick: "presentational-bricks.basic-icon",
-      properties: {
-        icon: {
-          lib: "antd",
-          icon: "smile",
-          theme: "outlined",
-          color: "#167be0",
+      snippetId: "presentational-bricks.basic-icon[with-arguments]",
+      bricks: [
+        {
+          brick: "presentational-bricks.basic-icon",
+          properties: {
+            icon: {
+              lib: "antd",
+              icon: "smile",
+              theme: "outlined",
+              color: "#167be0",
+            },
+            size: "24px",
+            renderBg: true,
+            bg: "#ebf3fd",
+            bgSize: "48px",
+            bgBorderRadius: "3px",
+          },
         },
-        size: "24px",
-        renderBg: true,
-        bg: "#ebf3fd",
-        bgSize: "48px",
-        bgBorderRadius: "3px",
+      ],
+      title: {
+        en: "基础图标(带基本参数)",
+        zh: "basic-icon(with base argumnts)",
       },
     },
     {
-      description: {
-        title: "设置imgSrc,imgStyle配置图片图标",
-      },
       brick: "presentational-bricks.basic-icon",
       properties: {
         icon: {
-          imgSrc: "http://placekitten.com/g/400/200",
+          imgSrc: basicIconSvg,
           imgStyle: {
             borderRadius: "10px",
           },
         },
         size: "100px",
+      },
+      snippetId: "presentational-bricks.basic-icon[with-imgSrc]",
+      title: {
+        zh: "基础图标(带imgSrc)",
+        en: "basic-icon(with imgSrc)",
       },
     },
   ],

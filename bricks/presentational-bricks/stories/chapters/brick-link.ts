@@ -18,21 +18,64 @@ export const BrickLinkStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.brick-link",
-      properties: {
-        dataset: { testid: "basic-usage-demo" },
-        label: "aaa",
-        url: "/resources/123",
-        target: "_blank",
+      snippetId: "presentational-bricks.brick-link[normal]",
+      title: {
+        zh: "通用链接",
+        en: "",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-link",
+          properties: {
+            dataset: { testid: "basic-usage-demo" },
+            label: "aaa",
+            url: "/resources/123",
+            target: "_blank",
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.brick-link",
-      properties: {
-        label: "外链跳转",
-        href: "https://www.baidu.com",
-        target: "_blank",
+      snippetId: "presentational-bricks.brick-link[outside]",
+      title: {
+        zh: "通用链接(外部跳转)",
+        en: "",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-link",
+          properties: {
+            label: "外链跳转",
+            href: "https://www.baidu.com",
+            target: "_blank",
+          },
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.brick-link[with-icon-events]",
+      title: {
+        zh: "通用链接(带图标事件)",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-link",
+          properties: {
+            label: "查看",
+            icon: {
+              lib: "antd",
+              type: "file-search",
+              theme: "outlined",
+            },
+          },
+          events: {
+            "link.click": {
+              action: "console.log",
+            },
+          },
+        },
+      ],
     },
     {
       brick: "presentational-bricks.brick-link",

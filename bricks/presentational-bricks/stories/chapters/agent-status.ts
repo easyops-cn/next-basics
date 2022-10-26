@@ -19,28 +19,64 @@ export const AgentStatusStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.agent-status",
-      properties: {
-        value: "正常",
+      snippetId: "presentational-bricks.agent-status[normal]",
+      title: {
+        zh: "正常",
+        en: "normall",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.agent-status",
+          properties: {
+            value: "正常",
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.agent-status",
-      properties: {
-        value: "异常",
+      snippetId: "presentational-bricks.agent-status[error]",
+      title: {
+        zh: "异常",
+        en: "error",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.agent-status",
+          properties: {
+            value: "异常",
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.agent-status",
-      properties: {
-        value: "未安装",
+      snippetId: "presentational-bricks.agent-status[not-instanlled]",
+      title: {
+        zh: "未安装",
+        en: "not-installed",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.agent-status",
+          properties: {
+            value: "未安装",
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.agent-status",
-      properties: {
-        value: "已卸载",
+      snippetId: "presentational-bricks.agent-status[uninstalled]",
+      title: {
+        zh: "已卸载",
+        en: "uninstalled",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.agent-status",
+          properties: {
+            value: "已卸载",
+          },
+        },
+      ],
     },
   ],
   previewColumns: 2,

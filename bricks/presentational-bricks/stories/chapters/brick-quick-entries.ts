@@ -18,45 +18,55 @@ export const BrickQuickEntriesStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.brick-quick-entries",
-      properties: {
-        row: 2,
-        column: 2,
-        links: [
-          {
-            icon: {
-              lib: "antd",
-              type: "number",
-            },
-            text: "单值构件",
-            target: "/developers/brick-book/atom/single-value",
-          },
-          {
-            icon: {
-              lib: "antd",
-              type: "line-chart",
-            },
-            text: "趋势图构件",
-            target: "/developers/brick-book/atom/trend-chart",
-          },
-          {
-            icon: {
-              lib: "antd",
-              type: "pie-chart",
-            },
-            text: "饼图构件",
-            target: "/developers/brick-book/atom/pie-chart",
-          },
-          {
-            icon: {
-              lib: "antd",
-              type: "table",
-            },
-            text: "多实例指标表",
-            target: "developers/brick-book/business/instances-metrics-table",
-          },
-        ],
+      snippetId: "presentational-bricks.brick-quick-entries[normal]",
+      title: {
+        zh: "快速入口",
+        en: "",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-quick-entries",
+          properties: {
+            row: 2,
+            column: 2,
+            links: [
+              {
+                icon: {
+                  lib: "antd",
+                  type: "number",
+                },
+                text: "单值构件",
+                target: "/developers/brick-book/atom/single-value",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  type: "line-chart",
+                },
+                text: "趋势图构件",
+                target: "/developers/brick-book/atom/trend-chart",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  type: "pie-chart",
+                },
+                text: "饼图构件",
+                target: "/developers/brick-book/atom/pie-chart",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  type: "table",
+                },
+                text: "多实例指标表",
+                target:
+                  "developers/brick-book/business/instances-metrics-table",
+              },
+            ],
+          },
+        },
+      ],
     },
     {
       brick: "presentational-bricks.brick-quick-entries",
@@ -112,297 +122,310 @@ export const BrickQuickEntriesStory: Story = {
       },
     },
     {
-      description: {
-        title: "图表",
-        message: "结合图表使用,达到多图表效果",
+      snippetId: "presentational-bricks.brick-quick-entries[with-chart]",
+      message: {
+        zh: "结合图表使用,达到多图表效果",
+        en: "",
       },
-      brick: "presentational-bricks.brick-quick-entries",
-      properties: {
-        row: 1,
-        column: 2,
-        useBrick: [
-          {
-            brick: "chart-v2.line-chart",
-            events: {
-              "chart-v2.click": {
-                action: "console.log",
-              },
-            },
-            properties: {
-              style: {
-                padding: "0 20px",
-              },
-              height: 250,
-              xField: "month",
-              yField: "temperature",
-              groupField: "city",
-              showPoint: true,
-              data: [
-                {
-                  month: "Jan",
-                  city: "Tokyo",
-                  temperature: 7,
-                },
-                {
-                  month: "Jan",
-                  city: "London",
-                  temperature: 3.9,
-                },
-                {
-                  month: "Feb",
-                  city: "Tokyo",
-                  temperature: 6.9,
-                },
-                {
-                  month: "Feb",
-                  city: "London",
-                  temperature: 4.2,
-                },
-                {
-                  month: "Mar",
-                  city: "Tokyo",
-                  temperature: 9.5,
-                },
-                {
-                  month: "Mar",
-                  city: "London",
-                  temperature: 5.7,
-                },
-                {
-                  month: "Apr",
-                  city: "Tokyo",
-                  temperature: 14.5,
-                },
-                {
-                  month: "Apr",
-                  city: "London",
-                  temperature: 8.5,
-                },
-                {
-                  month: "May",
-                  city: "Tokyo",
-                  temperature: 18.4,
-                },
-                {
-                  month: "May",
-                  city: "London",
-                  temperature: 11.9,
-                },
-                {
-                  month: "Jun",
-                  city: "Tokyo",
-                  temperature: 21.5,
-                },
-                {
-                  month: "Jun",
-                  city: "London",
-                  temperature: 15.2,
-                },
-                {
-                  month: "Jul",
-                  city: "Tokyo",
-                  temperature: 25.2,
-                },
-                {
-                  month: "Jul",
-                  city: "London",
-                  temperature: 17,
-                },
-                {
-                  month: "Aug",
-                  city: "Tokyo",
-                  temperature: 26.5,
-                },
-                {
-                  month: "Aug",
-                  city: "London",
-                  temperature: 16.6,
-                },
-                {
-                  month: "Sep",
-                  city: "Tokyo",
-                  temperature: 23.3,
-                },
-                {
-                  month: "Sep",
-                  city: "London",
-                  temperature: 14.2,
-                },
-                {
-                  month: "Oct",
-                  city: "Tokyo",
-                  temperature: 18.3,
-                },
-                {
-                  month: "Oct",
-                  city: "London",
-                  temperature: 10.3,
-                },
-                {
-                  month: "Nov",
-                  city: "Tokyo",
-                  temperature: 13.9,
-                },
-                {
-                  month: "Nov",
-                  city: "London",
-                  temperature: 6.6,
-                },
-                {
-                  month: "Dec",
-                  city: "Tokyo",
-                  temperature: 9.6,
-                },
-                {
-                  month: "Dec",
-                  city: "London",
-                  temperature: 4.8,
-                },
-              ],
-            },
-          },
-          {
-            brick: "chart-v2.line-chart",
-            events: {
-              "chart-v2.click": {
-                action: "console.log",
-              },
-            },
-            properties: {
-              style: {
-                padding: "0 20px",
-              },
-              height: 250,
-              xField: "month",
-              yField: "temperature",
-              groupField: "city",
-              showPoint: true,
-              data: [
-                {
-                  month: "Jan",
-                  city: "Tokyo",
-                  temperature: 7,
-                },
-                {
-                  month: "Jan",
-                  city: "London",
-                  temperature: 3.9,
-                },
-                {
-                  month: "Feb",
-                  city: "Tokyo",
-                  temperature: 6.9,
-                },
-                {
-                  month: "Feb",
-                  city: "London",
-                  temperature: 4.2,
-                },
-                {
-                  month: "Mar",
-                  city: "Tokyo",
-                  temperature: 9.5,
-                },
-                {
-                  month: "Mar",
-                  city: "London",
-                  temperature: 5.7,
-                },
-                {
-                  month: "Apr",
-                  city: "Tokyo",
-                  temperature: 14.5,
-                },
-                {
-                  month: "Apr",
-                  city: "London",
-                  temperature: 8.5,
-                },
-                {
-                  month: "May",
-                  city: "Tokyo",
-                  temperature: 18.4,
-                },
-                {
-                  month: "May",
-                  city: "London",
-                  temperature: 11.9,
-                },
-                {
-                  month: "Jun",
-                  city: "Tokyo",
-                  temperature: 21.5,
-                },
-                {
-                  month: "Jun",
-                  city: "London",
-                  temperature: 15.2,
-                },
-                {
-                  month: "Jul",
-                  city: "Tokyo",
-                  temperature: 25.2,
-                },
-                {
-                  month: "Jul",
-                  city: "London",
-                  temperature: 17,
-                },
-                {
-                  month: "Aug",
-                  city: "Tokyo",
-                  temperature: 26.5,
-                },
-                {
-                  month: "Aug",
-                  city: "London",
-                  temperature: 16.6,
-                },
-                {
-                  month: "Sep",
-                  city: "Tokyo",
-                  temperature: 23.3,
-                },
-                {
-                  month: "Sep",
-                  city: "London",
-                  temperature: 14.2,
-                },
-                {
-                  month: "Oct",
-                  city: "Tokyo",
-                  temperature: 18.3,
-                },
-                {
-                  month: "Oct",
-                  city: "London",
-                  temperature: 10.3,
-                },
-                {
-                  month: "Nov",
-                  city: "Tokyo",
-                  temperature: 13.9,
-                },
-                {
-                  month: "Nov",
-                  city: "London",
-                  temperature: 6.6,
-                },
-                {
-                  month: "Dec",
-                  city: "Tokyo",
-                  temperature: 9.6,
-                },
-                {
-                  month: "Dec",
-                  city: "London",
-                  temperature: 4.8,
-                },
-              ],
-            },
-          },
-        ],
+      title: {
+        zh: "快速入口(图表)",
+        en: "",
       },
+      bricks: [
+        {
+          description: {
+            title: "图表",
+            message: "结合图表使用,达到多图表效果",
+          },
+          brick: "presentational-bricks.brick-quick-entries",
+          properties: {
+            row: 1,
+            column: 2,
+            useBrick: [
+              {
+                brick: "chart-v2.line-chart",
+                events: {
+                  "chart-v2.click": {
+                    action: "console.log",
+                  },
+                },
+                properties: {
+                  style: {
+                    padding: "0 20px",
+                  },
+                  height: 250,
+                  xField: "month",
+                  yField: "temperature",
+                  groupField: "city",
+                  showPoint: true,
+                  data: [
+                    {
+                      month: "Jan",
+                      city: "Tokyo",
+                      temperature: 7,
+                    },
+                    {
+                      month: "Jan",
+                      city: "London",
+                      temperature: 3.9,
+                    },
+                    {
+                      month: "Feb",
+                      city: "Tokyo",
+                      temperature: 6.9,
+                    },
+                    {
+                      month: "Feb",
+                      city: "London",
+                      temperature: 4.2,
+                    },
+                    {
+                      month: "Mar",
+                      city: "Tokyo",
+                      temperature: 9.5,
+                    },
+                    {
+                      month: "Mar",
+                      city: "London",
+                      temperature: 5.7,
+                    },
+                    {
+                      month: "Apr",
+                      city: "Tokyo",
+                      temperature: 14.5,
+                    },
+                    {
+                      month: "Apr",
+                      city: "London",
+                      temperature: 8.5,
+                    },
+                    {
+                      month: "May",
+                      city: "Tokyo",
+                      temperature: 18.4,
+                    },
+                    {
+                      month: "May",
+                      city: "London",
+                      temperature: 11.9,
+                    },
+                    {
+                      month: "Jun",
+                      city: "Tokyo",
+                      temperature: 21.5,
+                    },
+                    {
+                      month: "Jun",
+                      city: "London",
+                      temperature: 15.2,
+                    },
+                    {
+                      month: "Jul",
+                      city: "Tokyo",
+                      temperature: 25.2,
+                    },
+                    {
+                      month: "Jul",
+                      city: "London",
+                      temperature: 17,
+                    },
+                    {
+                      month: "Aug",
+                      city: "Tokyo",
+                      temperature: 26.5,
+                    },
+                    {
+                      month: "Aug",
+                      city: "London",
+                      temperature: 16.6,
+                    },
+                    {
+                      month: "Sep",
+                      city: "Tokyo",
+                      temperature: 23.3,
+                    },
+                    {
+                      month: "Sep",
+                      city: "London",
+                      temperature: 14.2,
+                    },
+                    {
+                      month: "Oct",
+                      city: "Tokyo",
+                      temperature: 18.3,
+                    },
+                    {
+                      month: "Oct",
+                      city: "London",
+                      temperature: 10.3,
+                    },
+                    {
+                      month: "Nov",
+                      city: "Tokyo",
+                      temperature: 13.9,
+                    },
+                    {
+                      month: "Nov",
+                      city: "London",
+                      temperature: 6.6,
+                    },
+                    {
+                      month: "Dec",
+                      city: "Tokyo",
+                      temperature: 9.6,
+                    },
+                    {
+                      month: "Dec",
+                      city: "London",
+                      temperature: 4.8,
+                    },
+                  ],
+                },
+              },
+              {
+                brick: "chart-v2.line-chart",
+                events: {
+                  "chart-v2.click": {
+                    action: "console.log",
+                  },
+                },
+                properties: {
+                  style: {
+                    padding: "0 20px",
+                  },
+                  height: 250,
+                  xField: "month",
+                  yField: "temperature",
+                  groupField: "city",
+                  showPoint: true,
+                  data: [
+                    {
+                      month: "Jan",
+                      city: "Tokyo",
+                      temperature: 7,
+                    },
+                    {
+                      month: "Jan",
+                      city: "London",
+                      temperature: 3.9,
+                    },
+                    {
+                      month: "Feb",
+                      city: "Tokyo",
+                      temperature: 6.9,
+                    },
+                    {
+                      month: "Feb",
+                      city: "London",
+                      temperature: 4.2,
+                    },
+                    {
+                      month: "Mar",
+                      city: "Tokyo",
+                      temperature: 9.5,
+                    },
+                    {
+                      month: "Mar",
+                      city: "London",
+                      temperature: 5.7,
+                    },
+                    {
+                      month: "Apr",
+                      city: "Tokyo",
+                      temperature: 14.5,
+                    },
+                    {
+                      month: "Apr",
+                      city: "London",
+                      temperature: 8.5,
+                    },
+                    {
+                      month: "May",
+                      city: "Tokyo",
+                      temperature: 18.4,
+                    },
+                    {
+                      month: "May",
+                      city: "London",
+                      temperature: 11.9,
+                    },
+                    {
+                      month: "Jun",
+                      city: "Tokyo",
+                      temperature: 21.5,
+                    },
+                    {
+                      month: "Jun",
+                      city: "London",
+                      temperature: 15.2,
+                    },
+                    {
+                      month: "Jul",
+                      city: "Tokyo",
+                      temperature: 25.2,
+                    },
+                    {
+                      month: "Jul",
+                      city: "London",
+                      temperature: 17,
+                    },
+                    {
+                      month: "Aug",
+                      city: "Tokyo",
+                      temperature: 26.5,
+                    },
+                    {
+                      month: "Aug",
+                      city: "London",
+                      temperature: 16.6,
+                    },
+                    {
+                      month: "Sep",
+                      city: "Tokyo",
+                      temperature: 23.3,
+                    },
+                    {
+                      month: "Sep",
+                      city: "London",
+                      temperature: 14.2,
+                    },
+                    {
+                      month: "Oct",
+                      city: "Tokyo",
+                      temperature: 18.3,
+                    },
+                    {
+                      month: "Oct",
+                      city: "London",
+                      temperature: 10.3,
+                    },
+                    {
+                      month: "Nov",
+                      city: "Tokyo",
+                      temperature: 13.9,
+                    },
+                    {
+                      month: "Nov",
+                      city: "London",
+                      temperature: 6.6,
+                    },
+                    {
+                      month: "Dec",
+                      city: "Tokyo",
+                      temperature: 9.6,
+                    },
+                    {
+                      month: "Dec",
+                      city: "London",
+                      temperature: 4.8,
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      ],
     },
     {
       description: {

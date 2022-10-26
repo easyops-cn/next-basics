@@ -18,137 +18,143 @@ export const RankTableStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "基础用法",
+      snippetId: "presentational-bricks.rank-table[normal]",
+      title: {
+        en: "",
+        zh: "基础排名表格",
       },
-      brick: "presentational-bricks.rank-table",
-      properties: {
-        rowKey: "id",
-        showCard: true,
-        header: {
-          title: "Top10",
-        },
-        columns: [
-          {
-            title: "Name",
-            dataIndex: "name",
-            key: "name",
-          },
-          {
-            title: "Age",
-            dataIndex: "age",
-            key: "age",
-          },
-          {
-            dataIndex: "address",
-            key: "address",
-            headerBrick: {
-              useBrick: {
-                brick: "presentational-bricks.general-tooltip",
-                properties: {
-                  icon: {
-                    lib: "fa",
-                    icon: "info-circle",
+      bricks: [
+        {
+          brick: "presentational-bricks.rank-table",
+          properties: {
+            rowKey: "id",
+            showCard: true,
+            header: {
+              title: "Top10",
+            },
+            columns: [
+              {
+                title: "Name",
+                dataIndex: "name",
+                key: "name",
+              },
+              {
+                title: "Age",
+                dataIndex: "age",
+                key: "age",
+              },
+              {
+                dataIndex: "address",
+                key: "address",
+                headerBrick: {
+                  useBrick: {
+                    brick: "presentational-bricks.general-tooltip",
+                    properties: {
+                      icon: {
+                        lib: "fa",
+                        icon: "info-circle",
+                      },
+                      content: "这是一个 tooltips",
+                      text: "Address",
+                    },
                   },
-                  content: "这是一个 tooltips",
-                  text: "Address",
                 },
               },
-            },
-          },
-          {
-            title: "Tags",
-            key: "tags",
-            dataIndex: "tags",
-            useBrick: {
-              brick: "presentational-bricks.brick-tag",
-              transform: {
-                tagList: "@{cellData}",
-              },
-              properties: {
-                showCard: false,
-                configProps: {
-                  color: "var(--color-brand)",
+              {
+                title: "Tags",
+                key: "tags",
+                dataIndex: "tags",
+                useBrick: {
+                  brick: "presentational-bricks.brick-tag",
+                  transform: {
+                    tagList: "@{cellData}",
+                  },
+                  properties: {
+                    showCard: false,
+                    configProps: {
+                      color: "var(--color-brand)",
+                    },
+                  },
                 },
               },
+            ],
+            dataSource: {
+              list: [
+                {
+                  id: "1",
+                  name: "John Brown",
+                  age: 32,
+                  address: "New York No. 1 Lake Park",
+                  tags: ["nice", "good"],
+                },
+                {
+                  id: "2",
+                  name: "Jim Green",
+                  age: 42,
+                  address: "London No. 2 Lake Park",
+                  tags: ["loser", "bad"],
+                },
+                {
+                  id: "3",
+                  name: "Joe Black",
+                  age: 32,
+                  address: "Sidney No. 3 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+                {
+                  id: "4",
+                  name: "Jim Red",
+                  age: 34,
+                  address: "Sidney No. 4 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+                {
+                  id: "5",
+                  name: "Mathéo Girard",
+                  age: 35,
+                  address: "Sidney No. 5 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+                {
+                  id: "6",
+                  name: "Camille Roy",
+                  age: 36,
+                  address: "Sidney No. 6 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+                {
+                  id: "7",
+                  name: "Troy Owens",
+                  age: 37,
+                  address: "Sidney No. 7 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+                {
+                  id: "8",
+                  name: "Marie Cole",
+                  age: 38,
+                  address: "Sidney No. 8 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+                {
+                  id: "9",
+                  name: "Jennifer Young",
+                  age: 38,
+                  address: "Sidney No. 8 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+                {
+                  id: "10",
+                  name: "Clinton Cruz",
+                  age: 38,
+                  address: "Sidney No. 8 Lake Park",
+                  tags: ["teacher", "lucky", "lay"],
+                },
+              ],
             },
           },
-        ],
-        dataSource: {
-          list: [
-            {
-              id: "1",
-              name: "John Brown",
-              age: 32,
-              address: "New York No. 1 Lake Park",
-              tags: ["nice", "good"],
-            },
-            {
-              id: "2",
-              name: "Jim Green",
-              age: 42,
-              address: "London No. 2 Lake Park",
-              tags: ["loser", "bad"],
-            },
-            {
-              id: "3",
-              name: "Joe Black",
-              age: 32,
-              address: "Sidney No. 3 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-            {
-              id: "4",
-              name: "Jim Red",
-              age: 34,
-              address: "Sidney No. 4 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-            {
-              id: "5",
-              name: "Mathéo Girard",
-              age: 35,
-              address: "Sidney No. 5 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-            {
-              id: "6",
-              name: "Camille Roy",
-              age: 36,
-              address: "Sidney No. 6 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-            {
-              id: "7",
-              name: "Troy Owens",
-              age: 37,
-              address: "Sidney No. 7 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-            {
-              id: "8",
-              name: "Marie Cole",
-              age: 38,
-              address: "Sidney No. 8 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-            {
-              id: "9",
-              name: "Jennifer Young",
-              age: 38,
-              address: "Sidney No. 8 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-            {
-              id: "10",
-              name: "Clinton Cruz",
-              age: 38,
-              address: "Sidney No. 8 Lake Park",
-              tags: ["teacher", "lucky", "lay"],
-            },
-          ],
         },
-      },
+      ],
     },
     {
       description: {

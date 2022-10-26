@@ -12,12 +12,23 @@ export const TemplateBreadcrumbStory: Story = {
   icon: {
     imgSrc: templateBreadcrumbSvg,
   },
-  conf: {
-    brick: "presentational-bricks.template-breadcrumb",
-    properties: {
-      dataSource: {
-        key1: "value1",
+  conf: [
+    {
+      snippetId: "presentational-bricks.template-breadcrumb[normal]",
+      title: {
+        en: "",
+        zh: "基础自定义面包屑",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.template-breadcrumb",
+          properties: {
+            dataSource: {
+              key1: "value1",
+            },
+          },
+        },
+      ],
     },
-  },
+  ],
 };

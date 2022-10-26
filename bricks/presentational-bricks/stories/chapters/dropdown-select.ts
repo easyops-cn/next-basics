@@ -18,37 +18,43 @@ export const DropdownSelectStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "单选示例",
+      snippetId: "presentational-bricks.dropdown-select[normal]",
+      title: {
+        zh: "基础单选示例",
+        en: "",
       },
-      brick: "presentational-bricks.dropdown-select",
-      properties: {
-        options: [
-          {
-            label: "应用1",
+      bricks: [
+        {
+          brick: "presentational-bricks.dropdown-select",
+          properties: {
+            options: [
+              {
+                label: "应用1",
+                value: "aaaa",
+                content: "描述1",
+              },
+              {
+                label: "应用2",
+                value: "bbbb",
+                content: "描述2",
+              },
+              {
+                label: "应用3",
+                value: "cccc",
+                content: "描述3",
+              },
+            ],
+            placeholder: "请选择",
             value: "aaaa",
-            content: "描述1",
+            labelFontSize: "16px",
           },
-          {
-            label: "应用2",
-            value: "bbbb",
-            content: "描述2",
+          events: {
+            "select.change": {
+              action: "console.info",
+            },
           },
-          {
-            label: "应用3",
-            value: "cccc",
-            content: "描述3",
-          },
-        ],
-        placeholder: "请选择",
-        value: "aaaa",
-        labelFontSize: "16px",
-      },
-      events: {
-        "select.change": {
-          action: "console.info",
         },
-      },
+      ],
     },
     {
       description: {

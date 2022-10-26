@@ -18,25 +18,34 @@ export const EntryCardItemStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.entry-card-item",
-      properties: {
-        dataSource: {
-          id: "1",
-          name: "卡片标题",
-          iconColor: "cyan",
-          icon: {
-            lib: "easyops",
-            category: "model",
-            icon: "app",
+      snippetId: "presentational-bricks.entry-card-item[normal]",
+      title: {
+        zh: "基础入口卡片项",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.entry-card-item",
+          properties: {
+            dataSource: {
+              id: "1",
+              name: "卡片标题",
+              iconColor: "cyan",
+              icon: {
+                lib: "easyops",
+                category: "model",
+                icon: "app",
+              },
+            },
+            fields: {
+              cardTitle: "name",
+              icon: "icon",
+              iconColor: "iconColor",
+            },
+            urlTemplate: "/#{id}",
           },
         },
-        fields: {
-          cardTitle: "name",
-          icon: "icon",
-          iconColor: "iconColor",
-        },
-        urlTemplate: "/#{id}",
-      },
+      ],
     },
     {
       brick: "presentational-bricks.entry-card-item",

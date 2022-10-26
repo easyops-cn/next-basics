@@ -18,62 +18,71 @@ export const GeneralListStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.general-list",
-      properties: {
-        isCardList: true,
+      snippetId: "presentational-bricks.general-list[normal]",
+      title: {
+        zh: "基础列表布局",
+        en: "",
       },
-      slots: {
-        items: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "#ffffff",
-                  height: "200px",
-                  borderRadius: "5px",
-                  border: "1px solid #ccc",
-                  display: "grid",
-                  alignItems: "center",
-                  justifyItems: "center",
+      bricks: [
+        {
+          brick: "presentational-bricks.general-list",
+          properties: {
+            isCardList: true,
+          },
+          slots: {
+            items: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "div",
+                  properties: {
+                    style: {
+                      background: "#ffffff",
+                      height: "200px",
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                      display: "grid",
+                      alignItems: "center",
+                      justifyItems: "center",
+                    },
+                    textContent: "这是自定义的卡片",
+                  },
                 },
-                textContent: "这是自定义的卡片",
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "#ffffff",
-                  height: "200px",
-                  borderRadius: "5px",
-                  border: "1px solid #ccc",
-                  display: "grid",
-                  alignItems: "center",
-                  justifyItems: "center",
+                {
+                  brick: "div",
+                  properties: {
+                    style: {
+                      background: "#ffffff",
+                      height: "200px",
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                      display: "grid",
+                      alignItems: "center",
+                      justifyItems: "center",
+                    },
+                    textContent: "这是自定义的卡片",
+                  },
                 },
-                textContent: "这是自定义的卡片",
-              },
-            },
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  background: "#ffffff",
-                  height: "200px",
-                  borderRadius: "5px",
-                  border: "1px solid #ccc",
-                  display: "grid",
-                  alignItems: "center",
-                  justifyItems: "center",
+                {
+                  brick: "div",
+                  properties: {
+                    style: {
+                      background: "#ffffff",
+                      height: "200px",
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                      display: "grid",
+                      alignItems: "center",
+                      justifyItems: "center",
+                    },
+                    textContent: "这是自定义的卡片",
+                  },
                 },
-                textContent: "这是自定义的卡片",
-              },
+              ],
             },
-          ],
+          },
         },
-      },
+      ],
     },
   ],
 };

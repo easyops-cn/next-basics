@@ -18,10 +18,19 @@ export const MarkdownDisplayStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.markdown-display",
-      properties: {
-        value: "### 三级标题\n- 列表1\n- 列表2\n- 列表3",
+      snippetId: "presentational-bricks.markdown-display[normal]",
+      title: {
+        en: "",
+        zh: "基础Markdown信息展示",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.markdown-display",
+          properties: {
+            value: "### 三级标题\n- 列表1\n- 列表2\n- 列表3",
+          },
+        },
+      ],
     },
   ],
   previewColumns: 2,
