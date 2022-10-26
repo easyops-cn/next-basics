@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.359.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.358.0...@next-bricks/developers@1.359.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* 判断conf为数组 ([cb1a428](https://github.com/easyops-cn/next-basics/commit/cb1a4289ecf5b87ae1367423a12286075674463c))
+* 调整逻辑, preview支持多个bricks ([96c066a](https://github.com/easyops-cn/next-basics/commit/96c066a0b305f2a533d97e05f65ddcdaba057f1d))
+
+
+### Features
+
+* developers构件适应新的文档格式 ([787092d](https://github.com/easyops-cn/next-basics/commit/787092da38d16c5dc06b37626dcbaa44b360ca40))
+
+
+
+
+
 # [1.358.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.357.23...@next-bricks/developers@1.358.0) (2022-10-25)
 
 
