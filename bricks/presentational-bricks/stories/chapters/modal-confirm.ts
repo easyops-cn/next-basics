@@ -20,215 +20,209 @@ export const ModalConfirmStory: Story = {
     {
       snippetId: "presentational-bricks.modal-confirm[normal]",
       title: {
-        en: "",
-        zh: "基础确认对话框",
+        en: "Confirm modal",
+        zh: "确认弹窗",
       },
       bricks: [
         {
-          brick: "div",
-          slots: {
-            "": {
-              type: "bricks",
-              bricks: [
-                {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonName: "Confirm",
-                  },
-                  events: {
-                    "general.button.click": {
-                      target:
-                        "presentational-bricks\\.modal-confirm#confirmModal",
-                      method: "open",
-                    },
-                  },
-                },
-                {
-                  brick: "presentational-bricks.modal-confirm",
-                  properties: {
-                    id: "confirmModal",
-                    modalTitle: "普通确认框",
-                    content: "是否执行此操作",
-                  },
-                  events: {
-                    "confirm.ok": {
-                      action: "console.info",
-                    },
-                    "confirm.cancel": {
-                      action: "console.info",
-                    },
-                  },
-                },
-                {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonName: "Info",
-                  },
-                  events: {
-                    "general.button.click": {
-                      target: "presentational-bricks\\.modal-confirm#infoModal",
-                      method: "open",
-                    },
-                  },
-                },
-                {
-                  brick: "presentational-bricks.modal-confirm",
-                  properties: {
-                    id: "infoModal",
-                    type: "info",
-                    dataSource: {
-                      name: "测试程序包",
-                      version: "1.0.0",
-                    },
-                    modalTitle: "info",
-                    content: "#{name}更新中",
-                  },
-                  events: {
-                    "confirm.ok": {
-                      action: "console.info",
-                    },
-                    "confirm.cancel": {
-                      action: "console.info",
-                    },
-                  },
-                },
-                {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonName: "Delete",
-                  },
-                  events: {
-                    "general.button.click": {
-                      target:
-                        "presentational-bricks\\.modal-confirm#deleteModal",
-                      method: "open",
-                    },
-                  },
-                },
-                {
-                  brick: "presentational-bricks.modal-confirm",
-                  properties: {
-                    id: "deleteModal",
-                    dataSource: {
-                      name: "测试程序包",
-                      version: "1.0.0",
-                    },
-                    modalTitle: "删除提示确认框",
-                    content:
-                      "请确认后在下方输入<strong>pipeline</strong>来解锁确定按钮",
-                    isDelete: true,
-                    expect: "pipeline",
-                  },
-                  events: {
-                    "confirm.ok": {
-                      action: "console.info",
-                    },
-                    "confirm.cancel": {
-                      action: "console.info",
-                    },
-                  },
-                },
-                {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonName: "Success",
-                  },
-                  events: {
-                    "general.button.click": {
-                      target:
-                        "presentational-bricks\\.modal-confirm#successModal",
-                      method: "open",
-                    },
-                  },
-                },
-                {
-                  brick: "presentational-bricks.modal-confirm",
-                  properties: {
-                    id: "successModal",
-                    type: "success",
-                    dataSource: {
-                      name: "测试程序包",
-                      version: "1.0.0",
-                    },
-                    modalTitle: "success",
-                    content: "#{name}更新成功",
-                  },
-                  events: {
-                    "confirm.ok": {
-                      action: "console.info",
-                    },
-                    "confirm.cancel": {
-                      action: "console.info",
-                    },
-                  },
-                },
-                {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonName: "Error",
-                  },
-                  events: {
-                    "general.button.click": {
-                      target:
-                        "presentational-bricks\\.modal-confirm#errorModal",
-                      method: "open",
-                    },
-                  },
-                },
-                {
-                  brick: "presentational-bricks.modal-confirm",
-                  properties: {
-                    id: "errorModal",
-                    type: "error",
-                    dataSource: {
-                      name: "测试程序包",
-                      version: "1.0.0",
-                    },
-                    modalTitle: "error",
-                    content: "#{name}更新失败",
-                  },
-                  events: {
-                    "confirm.ok": {
-                      action: "console.info",
-                    },
-                    "confirm.cancel": {
-                      action: "console.info",
-                    },
-                  },
-                },
-                {
-                  brick: "basic-bricks.general-button",
-                  properties: {
-                    buttonName: "Warning",
-                  },
-                  events: {
-                    "general.button.click": {
-                      target:
-                        "presentational-bricks\\.modal-confirm#warningModal",
-                      method: "open",
-                    },
-                  },
-                },
-                {
-                  brick: "presentational-bricks.modal-confirm",
-                  properties: {
-                    id: "warningModal",
-                    type: "warning",
-                    modalTitle: "warning",
-                    content: "补丁更新警告",
-                  },
-                  events: {
-                    "confirm.ok": {
-                      action: "console.info",
-                    },
-                    "confirm.cancel": {
-                      action: "console.info",
-                    },
-                  },
-                },
-              ],
+          brick: "presentational-bricks.modal-confirm",
+          properties: {
+            id: "confirmModal",
+            modalTitle: "普通确认框",
+            content: "是否执行此操作",
+          },
+          events: {
+            "confirm.ok": {
+              action: "console.info",
+            },
+            "confirm.cancel": {
+              action: "console.info",
             },
           },
+        },
+      ],
+      actions: [
+        {
+          text: "Open Modal",
+          method: "open",
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.modal-confirm[info]",
+      title: {
+        en: "Info modal",
+        zh: "提醒弹窗",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.modal-confirm",
+          properties: {
+            id: "infoModal",
+            type: "info",
+            dataSource: {
+              name: "测试程序包",
+              version: "1.0.0",
+            },
+            modalTitle: "info",
+            content: "#{name}更新中",
+          },
+          events: {
+            "confirm.ok": {
+              action: "console.info",
+            },
+            "confirm.cancel": {
+              action: "console.info",
+            },
+          },
+        },
+      ],
+      actions: [
+        {
+          text: "Open Modal",
+          method: "open",
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.modal-confirm[delete]",
+      title: {
+        en: "Delete modal",
+        zh: "删除弹窗",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.modal-confirm",
+          properties: {
+            id: "deleteModal",
+            dataSource: {
+              name: "测试程序包",
+              version: "1.0.0",
+            },
+            modalTitle: "删除提示确认框",
+            content:
+              "请确认后在下方输入<strong>pipeline</strong>来解锁确定按钮",
+            isDelete: true,
+            expect: "pipeline",
+          },
+          events: {
+            "confirm.ok": {
+              action: "console.info",
+            },
+            "confirm.cancel": {
+              action: "console.info",
+            },
+          },
+        },
+      ],
+      actions: [
+        {
+          text: "Open Modal",
+          method: "open",
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.modal-confirm[success]",
+      title: {
+        en: "Success modal",
+        zh: "成功弹窗",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.modal-confirm",
+          properties: {
+            id: "successModal",
+            type: "success",
+            dataSource: {
+              name: "测试程序包",
+              version: "1.0.0",
+            },
+            modalTitle: "success",
+            content: "#{name}更新成功",
+          },
+          events: {
+            "confirm.ok": {
+              action: "console.info",
+            },
+            "confirm.cancel": {
+              action: "console.info",
+            },
+          },
+        },
+      ],
+      actions: [
+        {
+          text: "Open Modal",
+          method: "open",
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.modal-confirm[error]",
+      title: {
+        en: "Error modal",
+        zh: "异常弹窗",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.modal-confirm",
+          properties: {
+            id: "errorModal",
+            type: "error",
+            dataSource: {
+              name: "测试程序包",
+              version: "1.0.0",
+            },
+            modalTitle: "error",
+            content: "#{name}更新失败",
+          },
+          events: {
+            "confirm.ok": {
+              action: "console.info",
+            },
+            "confirm.cancel": {
+              action: "console.info",
+            },
+          },
+        },
+      ],
+      actions: [
+        {
+          text: "Open Modal",
+          method: "open",
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.modal-confirm[warn]",
+      title: {
+        en: "Error modal",
+        zh: "告警弹窗",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.modal-confirm",
+          properties: {
+            id: "warningModal",
+            type: "warning",
+            modalTitle: "warning",
+            content: "补丁更新警告",
+          },
+          events: {
+            "confirm.ok": {
+              action: "console.info",
+            },
+            "confirm.cancel": {
+              action: "console.info",
+            },
+          },
+        },
+      ],
+      actions: [
+        {
+          text: "Open Modal",
+          method: "open",
         },
       ],
     },
