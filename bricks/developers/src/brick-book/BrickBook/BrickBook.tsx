@@ -8,7 +8,12 @@ import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import { useTranslation } from "react-i18next";
 import { getRuntime, i18nText } from "@next-core/brick-kit";
-import { Story, StoryDoc, BrickConf } from "@next-core/brick-types";
+import {
+  Story,
+  StoryDoc,
+  BrickConf,
+  SnippetConf,
+} from "@next-core/brick-types";
 import { Link } from "@next-libs/basic-components";
 import { JsonStorage } from "@next-libs/storage";
 import { BrickDoc } from "../../components/BrickDoc/BrickDoc";
@@ -45,7 +50,9 @@ export function BrickBook({
 }: BrickBookProps): React.ReactElement {
   const story = findStoryById(storyId, storyType, stories);
   const actions = story ? story.actions : null;
-  const confList: BrickConf[] = [].concat(story?.conf).filter(Boolean);
+  const confList: (BrickConf | SnippetConf)[] = []
+    .concat(story?.conf)
+    .filter(Boolean);
   const developerStorage = storage.getItem(NS_DEVELOPERS) ?? {};
 
   const { t } = useTranslation(NS_DEVELOPERS);

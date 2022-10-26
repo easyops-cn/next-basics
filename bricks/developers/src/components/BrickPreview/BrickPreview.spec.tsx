@@ -44,6 +44,51 @@ describe("BrickPreview", () => {
     );
   });
 
+  it("should render with bricks array", async () => {
+    const conf: BrickConf[] = [
+      {
+        brick: "span",
+        properties: {
+          title: "hello",
+        },
+      },
+      {
+        brick: "span",
+        properties: {
+          title: "hello2",
+        },
+      },
+    ];
+    const previewRef = React.createRef<BrickPreviewRef>();
+    mount(<BrickPreview conf={conf} ref={previewRef} />);
+    await (global as any).flushPromises();
+    expect(previewRef.current.container.firstChild.firstChild).toHaveProperty(
+      "title",
+      "hello"
+    );
+    expect(
+      previewRef.current.container.firstChild.firstChild.nextSibling
+    ).toHaveProperty("title", "hello2");
+  });
+
+  it("should render with bricks array, but only one item", async () => {
+    const conf: BrickConf[] = [
+      {
+        brick: "span",
+        properties: {
+          title: "hello",
+        },
+      },
+    ];
+    const previewRef = React.createRef<BrickPreviewRef>();
+    mount(<BrickPreview conf={conf} ref={previewRef} />);
+    await (global as any).flushPromises();
+    expect(previewRef.current.container.firstChild).toHaveProperty(
+      "title",
+      "hello"
+    );
+  });
+
   it("should render 'bg: true' to bg-mount-point", async () => {
     const conf: BrickConf = {
       brick: "div",

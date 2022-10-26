@@ -6,11 +6,11 @@ import {
   httpErrorToString,
 } from "@next-core/brick-kit";
 import { LocationContext } from "@next-core/brick-kit/dist/types/core/exports";
-import { StoryConf } from "@next-core/brick-types";
+import { StoryConf, SnippetConf } from "@next-core/brick-types";
 import styles from "./BrickPreview.module.css";
 
 interface BrickPreviewProps {
-  conf: StoryConf;
+  conf: StoryConf | StoryConf[];
 }
 
 export interface BrickPreviewRef {
@@ -23,6 +23,18 @@ function LegacyBrickPreview(
   ref: React.Ref<BrickPreviewRef>
 ): React.ReactElement {
   // const { containerRef, portalRef } = ref;
+  // 如果conf是数组，外面需要多包一层div
+  if (Array.isArray(conf)) {
+    if (conf.length > 1) {
+      conf = {
+        brick: "div",
+        slots: { "": { type: "bricks", bricks: conf } },
+      };
+    } else if (conf.length === 1) {
+      conf = conf[0];
+    }
+  }
+
   const containerRef = useRef(null);
   const portalRef = useRef(null);
   const bgRef = useRef(null);

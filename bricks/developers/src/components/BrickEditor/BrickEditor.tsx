@@ -14,8 +14,8 @@ import "brace/theme/monokai";
 import cssStyle from "./style.module.css";
 
 interface BrickEditorProps {
-  defaultConf: BrickConf;
-  onConfChange: (conf: BrickConf) => void;
+  defaultConf: BrickConf | BrickConf[];
+  onConfChange: (conf: BrickConf | BrickConf[]) => void;
   aceSetOptions?: IAceOptions;
   mode: string;
 }
