@@ -40,7 +40,6 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
 
   React.useEffect((): (() => void) => {
     let timer: NodeJS.Timeout;
-    launchpadService.init();
     const pollingRunningAppStatus = async (): Promise<void> => {
       try {
         await runtime.reloadMicroApps({
@@ -74,6 +73,7 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
     if (window.STANDALONE_MICRO_APPS) {
       startFetchLaunchpadInfo();
     } else {
+      launchpadService.init();
       pollingRunningAppStatus();
     }
 
