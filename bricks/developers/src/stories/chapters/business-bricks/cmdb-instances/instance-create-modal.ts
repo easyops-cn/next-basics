@@ -17,59 +17,40 @@ export const story: Story = {
     lib: "fa",
     icon: "plus-square",
   },
-  conf: {
-    brick: "div",
-    slots: {
-      content: {
-        type: "bricks",
-        bricks: [
-          {
-            brick: "basic-bricks.general-custom-buttons",
-            properties: {
-              alignment: "start",
-              customButtons: [
-                {
-                  text: "Open Modal",
-                  buttonType: "primary",
-                  eventName: "query1.click",
-                },
-              ],
-            },
-            events: {
-              "query1.click": [
-                {
-                  target: "#modal-v2",
-                  method: "openModal",
-                },
-              ],
-            },
-          },
-          {
-            brick: "cmdb-instances.instance-create-modal",
-            properties: {
-              objectId: "HOST",
-              id: "modal-v2",
-              title: "单实例创建模态框",
-              attributeKeys: ["hostname", "ip"],
-            },
-            events: {
-              "create.single.success": {
-                action: "console.log",
-              },
-              "create.single.failed": {
-                action: "console.warn",
-              },
-            },
-          },
-        ],
-      },
-    },
-  },
-  actions: [
+  conf: [
     {
-      text: "Open Modal",
-      method: "openModal",
+      snippetId: "cmdb-instances.instance-create-modal[normal]",
+      title: {
+        en: "Basic use",
+        zh: "基础使用",
+      },
+      bricks: [
+        {
+          brick: "cmdb-instances.instance-create-modal",
+          properties: {
+            objectId: "HOST",
+            id: "modal-v2",
+            title: "单实例创建模态框",
+            attributeKeys: ["hostname", "ip"],
+          },
+          events: {
+            "create.single.success": {
+              action: "console.log",
+            },
+            "create.single.failed": {
+              action: "console.warn",
+            },
+          },
+        },
+      ],
+      actions: [
+        {
+          text: "Open Modal",
+          method: "openModal",
+        },
+      ],
     },
   ],
+
   doc: docMD,
 };

@@ -20,21 +20,30 @@ export const story: Story = {
   },
   conf: [
     {
-      brick: "cmdb-instances.cmdb-instances-import",
-      properties: {
-        objectId: "HOST",
+      snippetId: "cmdb-instances.cmdb-instances-import[normal]",
+      title: {
+        en: "Basic use",
+        zh: "基础使用",
       },
-      events: {
-        "import.cancel": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "cmdb-instances.cmdb-instances-import",
+          properties: {
+            objectId: "HOST",
+          },
+          events: {
+            "import.cancel": {
+              action: "console.log",
+            },
+            "import.success.ok": {
+              action: "console.log",
+            },
+            "import.error.ok": {
+              action: "console.log",
+            },
+          },
         },
-        "import.success.ok": {
-          action: "console.log",
-        },
-        "import.error.ok": {
-          action: "console.log",
-        },
-      },
+      ],
     },
     {
       description: {
