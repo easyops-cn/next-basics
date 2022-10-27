@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.240.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.240.2...@next-bricks/forms@1.240.3) (2022-10-27)
+
+
+### Bug Fixes
+
+* **general-form:** fix forceUpdate not correctly updating form items in forms.general-form-item ([df9e103](https://github.com/easyops-cn/next-basics/commit/df9e1030a645e44eb196d1a29495183119f3bc1f))
+
+
+
+
+
 ## [1.240.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.240.1...@next-bricks/forms@1.240.2) (2022-10-26)
 
 **Note:** Version bump only for package @next-bricks/forms
