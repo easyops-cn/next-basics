@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.361.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.360.0...@next-bricks/developers@1.361.0) (2022-10-27)
+
+
+### Features
+
+* update visit-history-NB snippets ([03aa8e8](https://github.com/easyops-cn/next-basics/commit/03aa8e82f3941d0848242cc5acf85a134b1e9a89))
+
+
+
+
+
 # [1.360.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.359.1...@next-bricks/developers@1.360.0) (2022-10-27)
 
 
