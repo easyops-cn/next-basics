@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.241.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.240.3...@next-bricks/forms@1.241.0) (2022-10-27)
+
+
+### Features
+
+* BRICK_STORE-3123 日期选择器增加快捷筛选时间能力  refs BRICK_STORE-3123 ([540374c](https://github.com/easyops-cn/next-basics/commit/540374c06486af2aa661b0b4ae560bd13b1b5256))
+* update forms-NB snippets ([5b106ea](https://github.com/easyops-cn/next-basics/commit/5b106eaf8e7e68b735702213b9ad6ee4efa1be32))
+* update forms-NB snippets ([2caeab0](https://github.com/easyops-cn/next-basics/commit/2caeab0915f8294baf63dc503e70e34e2102a839))
+
+
+
+
+
 ## [1.240.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.240.2...@next-bricks/forms@1.240.3) (2022-10-27)
 
 
