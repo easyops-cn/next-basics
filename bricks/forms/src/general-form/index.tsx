@@ -294,7 +294,6 @@ export class GeneralFormElement
               // Manually trigger to render validation messages.
               node._render();
               renderedElementSet.add(node);
-              this._forceUpdateSlot(node, renderedElementSet);
             }
           });
         });
@@ -313,11 +312,15 @@ export class GeneralFormElement
     ) {
       // Manually trigger to render validation messages.
       (element as any)._render?.();
-    } else {
-      element.childNodes.forEach((child) => {
-        this._forceUpdateChild(child as HTMLElement, renderedElementSet);
-      });
+
+      if (element.nodeName !== "FORMS.GENERAL-FORM-ITEM") {
+        return;
+      }
     }
+
+    element.childNodes.forEach((child) => {
+      this._forceUpdateChild(child as HTMLElement, renderedElementSet);
+    });
   }
 
   /* istanbul ignore next */
