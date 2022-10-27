@@ -18,107 +18,120 @@ export const CardItemStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.card-item",
-      description: {
-        title:
-          "卡片布局为 `icon-small-align-left` 类型，小尺寸 icon 位于左边。",
-        message:
-          "可以配置 `operate`,`topRightOperate`,`bottomRightOperate` 等操作区的插槽。适用场景：用户可凭借图标颜色来区分不同卡片，图标具有分类意义（区分类型／状态）而存在。",
+      snippetId: "presentational-bricks.card-item[normal]",
+      title: {
+        zh: "通用卡片项",
+        en: "",
       },
-      properties: {
-        style: {
-          width: "300px",
-        },
-        iconColor: "geekblue",
-        cardLayoutType: "icon-small-align-left",
-        urlTemplate: "/#{id}",
-        fields: {
-          cardTitle: "name",
-          cardSubtitle: "cardSubtitle",
-          descriptionList: "descriptionList",
-        },
-        icon: {
-          lib: "fa",
-          icon: "chart-pie",
-        },
-        dataSource: {
-          id: "1",
-          name: "标题在这里",
-          cardSubtitle: "副标题文字",
-          descriptionList:
-            "这里是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的辅助说明文字。",
-        },
+      message: {
+        zh: "可以配置 `operate`,`topRightOperate`,`bottomRightOperate` 等操作区的插槽。适用场景：用户可凭借图标颜色来区分不同卡片，图标具有分类意义（区分类型／状态）而存在。",
+        en: "",
       },
-      slots: {
-        operate: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "主按钮",
-                buttonShape: "round",
-                buttonType: "primary",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
+      bricks: [
+        {
+          brick: "presentational-bricks.card-item",
+          description: {
+            title:
+              "卡片布局为 `icon-small-align-left` 类型，小尺寸 icon 位于左边。",
+            message:
+              "可以配置 `operate`,`topRightOperate`,`bottomRightOperate` 等操作区的插槽。适用场景：用户可凭借图标颜色来区分不同卡片，图标具有分类意义（区分类型／状态）而存在。",
+          },
+          properties: {
+            style: {
+              width: "300px",
             },
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "次按钮",
-                buttonType: "link",
-                buttonShape: "round",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
+            iconColor: "geekblue",
+            cardLayoutType: "icon-small-align-left",
+            urlTemplate: "/#{id}",
+            fields: {
+              cardTitle: "name",
+              cardSubtitle: "cardSubtitle",
+              descriptionList: "descriptionList",
             },
-          ],
-        },
-        bottomRightOperate: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-custom-buttons",
-              properties: {
-                isMoreButton: true,
-                moreButtonShape: "no",
-                customButtons: [
-                  {
-                    isDropdown: true,
-                    text: "设为默认",
-                    icon: "setting",
-                    eventName: "instance.set.default",
+            icon: {
+              lib: "fa",
+              icon: "chart-pie",
+            },
+            dataSource: {
+              id: "1",
+              name: "标题在这里",
+              cardSubtitle: "副标题文字",
+              descriptionList:
+                "这里是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的辅助说明文字。",
+            },
+          },
+          slots: {
+            operate: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "basic-bricks.general-button",
+                  properties: {
+                    buttonName: "主按钮",
+                    buttonShape: "round",
+                    buttonType: "primary",
+                    buttonSize: "small",
                   },
-                  {
-                    isDropdown: true,
-                    text: "删除",
-                    icon: "delete",
-                    color: "#E02020",
-                    eventName: "instance.delete",
+                  events: {
+                    "general.button.click": {
+                      action: "console.log",
+                    },
                   },
-                ],
-              },
-              events: {
-                "instance.set.default": {
-                  action: "console.log",
                 },
-                "instance.delete": {
-                  action: "console.log",
+                {
+                  brick: "basic-bricks.general-button",
+                  properties: {
+                    buttonName: "次按钮",
+                    buttonType: "link",
+                    buttonShape: "round",
+                    buttonSize: "small",
+                  },
+                  events: {
+                    "general.button.click": {
+                      action: "console.log",
+                    },
+                  },
                 },
-              },
+              ],
             },
-          ],
+            bottomRightOperate: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "basic-bricks.general-custom-buttons",
+                  properties: {
+                    isMoreButton: true,
+                    moreButtonShape: "no",
+                    customButtons: [
+                      {
+                        isDropdown: true,
+                        text: "设为默认",
+                        icon: "setting",
+                        eventName: "instance.set.default",
+                      },
+                      {
+                        isDropdown: true,
+                        text: "删除",
+                        icon: "delete",
+                        color: "#E02020",
+                        eventName: "instance.delete",
+                      },
+                    ],
+                  },
+                  events: {
+                    "instance.set.default": {
+                      action: "console.log",
+                    },
+                    "instance.delete": {
+                      action: "console.log",
+                    },
+                  },
+                },
+              ],
+            },
+          },
         },
-      },
+      ],
     },
     {
       brick: "presentational-bricks.card-item",
@@ -462,71 +475,79 @@ export const CardItemStory: Story = {
       },
     },
     {
-      brick: "presentational-bricks.card-item",
-      description: {
-        title: "可配置角标和图片图标",
-        message:
-          "角标可选颜色 `tagConfig.color` 以及文字 `tagConfig.text` 等信息。图片图标需要配置 `showImg` 和对应的图片资源地址 `imgSrc`",
+      snippetId: "presentational-bricks.card-item[with-right-tag]",
+      title: {
+        zh: "可配置角标和图片图标",
+        en: "",
       },
-      properties: {
-        style: {
-          width: "300px",
-        },
-        cardLayoutType: "block-icon-align-left",
-        urlTemplate: "/#{id}",
-        fields: {
-          cardTitle: "name",
-          descriptionList: "descriptionList",
-        },
-        dataSource: {
-          id: "1",
-          name: "标题在这里",
-          descriptionList:
-            "http://chphl pgkk boli faa iihall/15 55 5onetab.html",
-        },
-        tagConfig: {
-          text: "已审批",
-          color: "blue",
-          triangle: false,
-        },
-        showImg: true,
-        imgSrc:
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      message: {
+        zh: "角标可选颜色 `tagConfig.color` 以及文字 `tagConfig.text` 等信息。图片图标需要配置 `showImg` 和对应的图片资源地址 `imgSrc`",
+        en: "",
       },
-      slots: {
-        operate: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "编辑",
-                buttonIcon: "edit",
-                buttonSize: "small",
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
+      bricks: [
+        {
+          brick: "presentational-bricks.card-item",
+          properties: {
+            style: {
+              width: "300px",
             },
-            {
-              brick: "basic-bricks.general-button",
-              properties: {
-                buttonName: "了解详情",
-                buttonType: "text",
-                buttonSize: "small",
-                fadedText: true,
-              },
-              events: {
-                "general.button.click": {
-                  action: "console.log",
-                },
-              },
+            cardLayoutType: "block-icon-align-left",
+            urlTemplate: "/#{id}",
+            fields: {
+              cardTitle: "name",
+              descriptionList: "descriptionList",
             },
-          ],
+            dataSource: {
+              id: "1",
+              name: "标题在这里",
+              descriptionList:
+                "http://chphl pgkk boli faa iihall/15 55 5onetab.html",
+            },
+            tagConfig: {
+              text: "已审批",
+              color: "blue",
+              triangle: false,
+            },
+            showImg: true,
+            imgSrc:
+              "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          },
+          slots: {
+            operate: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "basic-bricks.general-button",
+                  properties: {
+                    buttonName: "编辑",
+                    buttonIcon: "edit",
+                    buttonSize: "small",
+                  },
+                  events: {
+                    "general.button.click": {
+                      action: "console.log",
+                    },
+                  },
+                },
+                {
+                  brick: "basic-bricks.general-button",
+                  properties: {
+                    buttonName: "了解详情",
+                    buttonType: "text",
+                    buttonSize: "small",
+                    fadedText: true,
+                  },
+                  events: {
+                    "general.button.click": {
+                      action: "console.log",
+                    },
+                  },
+                },
+              ],
+            },
+          },
         },
-      },
+      ],
     },
   ],
 };

@@ -24,6 +24,78 @@ export const BrickTagStory: Story = {
   },
   conf: [
     {
+      snippetId: "presentational-bricks.brick-tag[normal]",
+      title: {
+        zh: "基本",
+        en: "",
+      },
+      message: {
+        zh: "标签支持多彩标签、可选择标签、可删除标签。",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-tag",
+          properties: {
+            color: "green",
+            showCard: true,
+            showTagCircle: true,
+            tagList: ["Active", "Normal"],
+          },
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.brick-tag[disabled-with-close]",
+      title: {
+        zh: "禁用可删除标签",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-tag",
+          properties: {
+            showCard: false,
+            closable: true,
+            tagList: [
+              {
+                key: "p1",
+                label: "紧急变更",
+                disabled: true,
+              },
+              {
+                key: "p2",
+                label: "计划变更",
+                disabled: true,
+              },
+              {
+                key: "p3",
+                label: "发布流程",
+              },
+              {
+                key: "p4",
+                label: "发布流程",
+              },
+              {
+                key: "p5",
+                label: "发布计划",
+              },
+              {
+                key: "p6",
+                label: "测试计划",
+              },
+            ],
+          },
+          events: {
+            "tag.close": {
+              action: "console.log",
+              args: ["${EVENT.detail}"],
+            },
+          },
+        },
+      ],
+    },
+    {
       description: {
         title: "基本",
         message: "标签支持多彩标签、可选择标签、可删除标签。",

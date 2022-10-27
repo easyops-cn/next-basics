@@ -11,12 +11,10 @@ import { BrickConditionalDisplayStory } from "./brick-conditional-display";
 import { BrickDescriptionsStory } from "./brick-descriptions";
 import { BrickDisplayStructsStory } from "./brick-display-structs";
 import { BrickDividerStory } from "./brick-divider";
-import { BrickFormStory } from "./brick-form";
 import { BrickGeneralSearchStory } from "./brick-general-search";
 import { BrickHumanizeTimeStory } from "./brick-humanize-time";
 import { BrickInputStory } from "./brick-input";
 import { BrickLinkStory } from "./brick-link";
-import { BrickPlaceholderStory } from "./brick-placeholder";
 import { BrickQuickEntriesStory } from "./brick-quick-entries";
 import { BrickRateStory } from "./brick-rate";
 import { BrickResultStory } from "./brick-result";
@@ -53,7 +51,6 @@ import { LogDisplayStory } from "./log-display";
 import { MarkdownDisplayStory } from "./markdown-display";
 import { MarkdownEditorStory } from "./markdown-editor";
 import { ModalConfirmStory } from "./modal-confirm";
-import { SingleFieldEditStory } from "./single-field-edit";
 import { StatisticCardStory } from "./statistic-card";
 import { TemplateBreadcrumbStory } from "./template-breadcrumb";
 import { BrickIllustrationStory } from "./brick-illustration";
@@ -77,12 +74,10 @@ export const Chapters = [
   BrickDescriptionsStory,
   BrickDisplayStructsStory,
   BrickDividerStory,
-  BrickFormStory,
   BrickGeneralSearchStory,
   BrickHumanizeTimeStory,
   BrickInputStory,
   BrickLinkStory,
-  BrickPlaceholderStory,
   BrickQuickEntriesStory,
   BrickRateStory,
   BrickResultStory,
@@ -119,7 +114,6 @@ export const Chapters = [
   MarkdownDisplayStory,
   MarkdownEditorStory,
   ModalConfirmStory,
-  SingleFieldEditStory,
   StatisticCardStory,
   TemplateBreadcrumbStory,
   TextCollapseStory,

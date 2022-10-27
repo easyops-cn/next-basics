@@ -19,45 +19,63 @@ export const CodeEditorStory: Story = {
   },
   conf: [
     {
-      brick: "code-bricks.code-editor",
-      properties: {
-        mode: "yaml",
-        theme: "monokai",
-        maxLines: "Infinity",
-        value: '- a: "b"\n- c: "d"',
-        exportFileName: "content.txt",
+      snippetId: "code-bricks.code-editor[yaml]",
+      title: {
+        zh: "代码编辑器(yaml模式)",
+        en: "",
       },
-      events: {
-        "code.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "code-bricks.code-editor",
+          properties: {
+            mode: "yaml",
+            theme: "monokai",
+            maxLines: "Infinity",
+            value: '- a: "b"\n- c: "d"',
+            exportFileName: "content.txt",
+          },
+          events: {
+            "code.change": {
+              action: "console.log",
+            },
+            "editor.blur": {
+              action: "console.log",
+            },
+            "error.change": {
+              action: "console.log",
+            },
+          },
         },
-        "editor.blur": {
-          action: "console.log",
-        },
-        "error.change": {
-          action: "console.log",
-        },
-      },
+      ],
     },
     {
-      brick: "code-bricks.code-editor",
-      properties: {
-        mode: "json",
-        theme: "tomorrow",
-        maxLines: 10,
-        value: '{\n  "a": "b"\n}',
+      snippetId: "code-bricks.code-editor[json]",
+      title: {
+        zh: "代码编辑器(json模式)",
+        en: "",
       },
-      events: {
-        "code.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "code-bricks.code-editor",
+          properties: {
+            mode: "json",
+            theme: "tomorrow",
+            maxLines: 10,
+            value: '{\n  "a": "b"\n}',
+          },
+          events: {
+            "code.change": {
+              action: "console.log",
+            },
+            "editor.blur": {
+              action: "console.log",
+            },
+            "error.change": {
+              action: "console.log",
+            },
+          },
         },
-        "editor.blur": {
-          action: "console.log",
-        },
-        "error.change": {
-          action: "console.log",
-        },
-      },
+      ],
     },
     {
       brick: "forms.general-form",

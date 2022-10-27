@@ -18,16 +18,34 @@ export const LogDisplayStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.log-display",
-      properties: {
-        value: "[2019.12.09]: easyops 执行了相关操作",
+      snippetId: "presentational-bricks.log-display[normal]",
+      title: {
+        en: "",
+        zh: "基础日志内容展示",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.log-display",
+          properties: {
+            value: "[2019.12.09]: easyops 执行了相关操作",
+          },
+        },
+      ],
     },
     {
-      brick: "presentational-bricks.log-display",
-      properties: {
-        loadingIcon: true,
+      snippetId: "presentational-bricks.log-display[load]",
+      title: {
+        en: "",
+        zh: "日志内容展示加载",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.log-display",
+          properties: {
+            loadingIcon: true,
+          },
+        },
+      ],
     },
   ],
 };

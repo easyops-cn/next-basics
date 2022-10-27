@@ -18,6 +18,22 @@ export const BrickDividerStory: Story = {
   },
   conf: [
     {
+      snippetId: "presentational-bricks.brick-divider[normal]",
+      title: {
+        zh: "Basic divider",
+        en: "基础分割线",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-divider",
+          properties: {
+            dividerTitle: "标题",
+            orientation: "center",
+          },
+        },
+      ],
+    },
+    {
       brick: "presentational-bricks.brick-divider",
     },
     {

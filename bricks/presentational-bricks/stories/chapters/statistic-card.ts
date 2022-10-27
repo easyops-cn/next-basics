@@ -19,18 +19,27 @@ export const StatisticCardStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.statistic-card",
-      properties: {
-        cardTitle: "今日构建",
-        value: 99,
-        icon: {
-          lib: "fa",
-          icon: "clock",
-        },
-        url: "/list",
-        tip: "敬请期待",
-        disabled: true,
+      snippetId: "presentational-bricks.statistic-card[normal]",
+      title: {
+        zh: "基础统计卡片",
+        en: "",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.statistic-card",
+          properties: {
+            cardTitle: "今日构建",
+            value: 99,
+            icon: {
+              lib: "fa",
+              icon: "clock",
+            },
+            url: "/list",
+            tip: "敬请期待",
+            disabled: true,
+          },
+        },
+      ],
     },
   ],
   previewColumns: 2,

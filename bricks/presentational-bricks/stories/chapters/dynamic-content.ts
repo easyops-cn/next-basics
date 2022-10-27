@@ -19,13 +19,22 @@ export const DynamicContentStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.dynamic-content",
-      properties: {
-        dataSource: {
-          total: 100,
-        },
-        dynamicContent: "共 #{total} 条",
+      snippetId: "presentational-bricks.dynamic-content[normal]",
+      title: {
+        zh: "基础模板动态内容",
+        en: "",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.dynamic-content",
+          properties: {
+            dataSource: {
+              total: 100,
+            },
+            dynamicContent: "共 #{total} 条",
+          },
+        },
+      ],
     },
     {
       brick: "presentational-bricks.dynamic-content",

@@ -18,33 +18,42 @@ export const DropdownButtonStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.dropdown-button",
-      properties: {
-        leftButtonIcon: "reload",
-        buttonName: "Dropdown",
-        options: [
-          {
-            label: "item1",
-            value: "test",
+      snippetId: "presentational-bricks.dropdown-button[normal]",
+      title: {
+        zh: "基础带下拉框的按钮",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.dropdown-button",
+          properties: {
+            leftButtonIcon: "reload",
+            buttonName: "Dropdown",
+            options: [
+              {
+                label: "item1",
+                value: "test",
+              },
+              {
+                label: "item2",
+                value: "test2",
+              },
+            ],
           },
-          {
-            label: "item2",
-            value: "test2",
+          events: {
+            "select.change": {
+              action: "console.log",
+            },
+            "left.button.click": {
+              action: "console.log",
+            },
           },
-        ],
-      },
-      events: {
-        "select.change": {
-          action: "console.log",
+          description: {
+            title: "基本",
+            message: "",
+          },
         },
-        "left.button.click": {
-          action: "console.log",
-        },
-      },
-      description: {
-        title: "基本",
-        message: "",
-      },
+      ],
     },
     {
       brick: "presentational-bricks.dropdown-button",

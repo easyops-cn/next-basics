@@ -18,51 +18,87 @@ export const BrickResultStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.brick-result",
-      properties: {
-        status: "success",
-        customTitle: "tool executed successfully",
+      snippetId: "presentational-bricks.brick-result[success]",
+      title: {
+        zh: "成功结果",
+        en: "",
       },
-    },
-    {
-      brick: "presentational-bricks.brick-result",
-      properties: {
-        status: "info",
-        customTitle: "Today is Tuesday",
-        subTitle: "2019/10/29 21:35",
-      },
-    },
-    {
-      brick: "presentational-bricks.brick-result",
-      properties: {
-        status: "warning",
-        customTitle: "Rainy day",
-        subTitle: "Tomorrow will be fine",
-        icon: "question",
-      },
-    },
-    {
-      brick: "presentational-bricks.brick-result",
-      properties: {
-        status: "404",
-        customTitle: "HTTP 404",
-      },
-      slots: {
-        content: {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "div",
-              properties: {
-                style: {
-                  textAlign: "center",
-                },
-                textContent: "This is a slot",
-              },
-            },
-          ],
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-result",
+          properties: {
+            status: "success",
+            customTitle: "tool executed successfully",
+          },
         },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.brick-result[info]",
+      title: {
+        zh: "普通结果",
+        en: "",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-result",
+          properties: {
+            status: "info",
+            customTitle: "Today is Tuesday",
+            subTitle: "2019/10/29 21:35",
+          },
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.brick-result[warn]",
+      title: {
+        zh: "警告结果",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-result",
+          properties: {
+            status: "warning",
+            customTitle: "Rainy day",
+            subTitle: "Tomorrow will be fine",
+            icon: "question",
+          },
+        },
+      ],
+    },
+    {
+      snippetId: "presentational-bricks.brick-result[404-with-slot]",
+      title: {
+        zh: "404(with-slot)",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-result",
+          properties: {
+            status: "404",
+            customTitle: "HTTP 404",
+          },
+          slots: {
+            content: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "div",
+                  properties: {
+                    style: {
+                      textAlign: "center",
+                    },
+                    textContent: "This is a slot",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
     },
     {
       brick: "presentational-bricks.brick-result",

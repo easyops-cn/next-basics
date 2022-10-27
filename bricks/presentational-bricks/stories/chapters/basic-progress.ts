@@ -18,28 +18,46 @@ export const BasicProgressStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.basic-progress",
-      properties: {
-        value: 75,
-        text: "75%",
-        colorMap: [
-          { progress: 60, color: "red" },
-          { progress: 80, color: "orange" },
-          { progress: 100, color: "red" },
-        ],
-        description: "描述",
-        type: "circle",
+      snippetId: "presentational-bricks.basic-progress[circle]",
+      bricks: [
+        {
+          brick: "presentational-bricks.basic-progress",
+          properties: {
+            value: 75,
+            text: "75%",
+            colorMap: [
+              { progress: 60, color: "red" },
+              { progress: 80, color: "orange" },
+              { progress: 100, color: "red" },
+            ],
+            description: "描述",
+            type: "circle",
+          },
+        },
+      ],
+      title: {
+        zh: "圆形进度条",
+        en: "circle progress",
       },
     },
     {
-      brick: "presentational-bricks.basic-progress",
-      properties: {
-        value: 75,
-        configProps: {
-          strokeColor: "yellow",
+      snippetId: "presentational-bricks.basic-progress[line]",
+      bricks: [
+        {
+          brick: "presentational-bricks.basic-progress",
+          properties: {
+            value: 75,
+            configProps: {
+              strokeColor: "yellow",
+            },
+            type: "line",
+            fontSize: "10px",
+          },
         },
-        type: "line",
-        fontSize: "10px",
+      ],
+      title: {
+        zh: "线性进度条",
+        en: "line progress",
       },
     },
   ],

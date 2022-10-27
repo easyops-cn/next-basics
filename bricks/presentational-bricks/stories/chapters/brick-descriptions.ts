@@ -18,36 +18,45 @@ export const BrickDescriptionsStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.brick-descriptions",
-      properties: {
-        itemList: [
-          {
-            text: "Lynette",
-            label: "UserName",
-          },
-          {
-            text: "18",
-            label: "Age",
-          },
-          {
-            label: "Tags",
-            useBrick: {
-              brick: "presentational-bricks.brick-tag",
-              properties: {
-                tagList: "<% DATA.tags %>",
-                configProps: {
-                  color: "orange",
-                },
-                showCard: false,
+      snippetId: "presentational-bricks.brick-descriptions[normal]",
+      text: {
+        zh: "描述列表",
+        en: "Description list",
+      },
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-descriptions",
+          properties: {
+            itemList: [
+              {
+                text: "Lynette",
+                label: "UserName",
               },
+              {
+                text: "18",
+                label: "Age",
+              },
+              {
+                label: "Tags",
+                useBrick: {
+                  brick: "presentational-bricks.brick-tag",
+                  properties: {
+                    tagList: "<% DATA.tags %>",
+                    configProps: {
+                      color: "orange",
+                    },
+                    showCard: false,
+                  },
+                },
+              },
+            ],
+            descriptionTitle: "User Info",
+            dataSource: {
+              tags: ["user", "admin"],
             },
           },
-        ],
-        descriptionTitle: "User Info",
-        dataSource: {
-          tags: ["user"],
         },
-      },
+      ],
     },
     {
       brick: "presentational-bricks.brick-descriptions",

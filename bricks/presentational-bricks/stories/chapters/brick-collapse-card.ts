@@ -38,58 +38,67 @@ export const BrickCollapseCardStory: Story = {
       },
     },
     {
-      brick: "presentational-bricks.brick-collapse-card",
-      properties: {
-        expandInactiveText: "展开",
-        expandInactiveIcon: "down",
-        expandActiveText: "收起",
-        expandActiveIcon: "up",
-        isActive: true,
-        titleWithIconAndDesc: true,
-        cardTitle: "容器管理-闲置资源采集",
-        descriptionList: [
-          {
-            label: "作者",
-            text: "defalutUser",
-          },
-          {
-            label: "分类",
-            text: "容器管理",
-          },
-        ],
-        titleIcon: {
-          lib: "easyops",
-          category: "agile",
-          icon: "easy-now",
-        },
+      snippetId: "presentational-bricks.brick-collapse-card[normal]",
+      title: {
+        zh: "详情折叠",
+        en: "Collapse card",
       },
-      slots: {
-        content: {
-          bricks: [
-            {
-              brick: "presentational-bricks.brick-descriptions",
-              properties: {
-                showCard: false,
-                itemList: [
-                  {
-                    label: "版本信息",
-                    text: "1.0.10",
-                  },
-                  {
-                    label: "版本作者",
-                    text: "defaultUser",
-                  },
-                  {
-                    label: "脚本信息",
-                    text: "python",
-                  },
-                ],
+      bricks: [
+        {
+          brick: "presentational-bricks.brick-collapse-card",
+          properties: {
+            expandInactiveText: "展开",
+            expandInactiveIcon: "down",
+            expandActiveText: "收起",
+            expandActiveIcon: "up",
+            isActive: true,
+            titleWithIconAndDesc: true,
+            cardTitle: "容器管理-闲置资源采集",
+            descriptionList: [
+              {
+                label: "作者",
+                text: "defalutUser",
               },
+              {
+                label: "分类",
+                text: "容器管理",
+              },
+            ],
+            titleIcon: {
+              lib: "easyops",
+              category: "agile",
+              icon: "easy-now",
             },
-          ],
-          type: "bricks",
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "presentational-bricks.brick-descriptions",
+                  properties: {
+                    showCard: false,
+                    itemList: [
+                      {
+                        label: "版本信息",
+                        text: "1.0.10",
+                      },
+                      {
+                        label: "版本作者",
+                        text: "defaultUser",
+                      },
+                      {
+                        label: "脚本信息",
+                        text: "python",
+                      },
+                    ],
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
         },
-      },
+      ],
     },
   ],
 };

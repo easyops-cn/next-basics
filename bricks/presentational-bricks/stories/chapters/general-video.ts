@@ -19,13 +19,22 @@ export const GeneralVideoStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.general-video",
-      properties: {
-        source:
-          "http://cdn.uwintech.cn/data/brick_next/1.创建第1个Micro-App.mp4",
-        preview: true,
-        height: 150,
+      snippetId: "presentational-bricks.general-video[normal]",
+      title: {
+        en: "",
+        zh: "基础播放视频或预览视频",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.general-video",
+          properties: {
+            source:
+              "http://cdn.uwintech.cn/data/brick_next/1.创建第1个Micro-App.mp4",
+            preview: true,
+            height: 150,
+          },
+        },
+      ],
     },
     {
       brick: "presentational-bricks.general-video",

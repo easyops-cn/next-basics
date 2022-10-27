@@ -18,68 +18,77 @@ export const BrickValueMappingStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "映射为多彩标签",
-        message: "同时可以设置是否触发点击事件",
+      snippetId: "presentational-bricks.brick-value-mapping[normal]",
+      title: {
+        zh: "映射为多彩标签",
+        en: "",
       },
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "presentational-bricks.brick-value-mapping",
-              properties: {
-                showTagCircle: true,
-                mapping: {
-                  failed: {
-                    color: "red",
-                    text: "失败",
-                  },
-                  success: {
-                    color: "green",
-                    text: "正常",
-                  },
-                  warning: {
-                    color: "orange",
-                    text: "异常",
+      message: {
+        zh: "同时可以设置是否触发点击事件",
+        en: "",
+      },
+      bricks: [
+        {
+          brick: "div",
+          slots: {
+            content: {
+              type: "bricks",
+              bricks: [
+                {
+                  brick: "presentational-bricks.brick-value-mapping",
+                  properties: {
+                    showTagCircle: true,
+                    mapping: {
+                      failed: {
+                        color: "red",
+                        text: "失败",
+                      },
+                      success: {
+                        color: "green",
+                        text: "正常",
+                      },
+                      warning: {
+                        color: "orange",
+                        text: "异常",
+                      },
+                    },
+                    value: "success",
                   },
                 },
-                value: "success",
-              },
+                {
+                  brick: "presentational-bricks.brick-value-mapping",
+                  events: {
+                    "brick-value-mapping.click": [
+                      {
+                        action: "console.log",
+                        args: ["<% EVENT.detail %>"],
+                      },
+                    ],
+                  },
+                  properties: {
+                    style: {
+                      marginTop: "10px",
+                    },
+                    triggerClickEvent: true,
+                    showTagCircle: false,
+                    mapping: {
+                      warning: {
+                        color: "red-inverse",
+                        text: "紧急",
+                      },
+                      safe: {
+                        color: "green-inverse",
+                        text: "正常",
+                      },
+                    },
+                    value: "warning",
+                  },
+                },
+              ],
             },
-            {
-              brick: "presentational-bricks.brick-value-mapping",
-              events: {
-                "brick-value-mapping.click": [
-                  {
-                    action: "console.log",
-                    args: ["<% EVENT.detail %>"],
-                  },
-                ],
-              },
-              properties: {
-                style: {
-                  marginTop: "10px",
-                },
-                triggerClickEvent: true,
-                showTagCircle: false,
-                mapping: {
-                  warning: {
-                    color: "red-inverse",
-                    text: "紧急",
-                  },
-                  safe: {
-                    color: "green-inverse",
-                    text: "正常",
-                  },
-                },
-                value: "warning",
-              },
-            },
-          ],
+          },
         },
-      },
+      ],
     },
     {
       description: {

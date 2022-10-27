@@ -18,39 +18,57 @@ export const MarkdownEditorStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.markdown-editor",
-      description: {
-        title: "单独使用",
+      snippetId: "presentational-bricks.markdown-editor[normal]",
+      title: {
+        en: "",
+        zh: "基础Markdown编辑构件",
       },
-      properties: {
-        value: "### 三级标题\n- 列表1\n- 列表2\n- 列表3",
-      },
-      events: {
-        "markdown.value.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "presentational-bricks.markdown-editor",
+          description: {
+            title: "单独使用",
+          },
+          properties: {
+            value: "### 三级标题\n- 列表1\n- 列表2\n- 列表3",
+          },
+          events: {
+            "markdown.value.change": {
+              action: "console.log",
+            },
+          },
         },
-      },
+      ],
     },
     {
-      brick: "presentational-bricks.markdown-editor",
-      description: {
-        title: "支持粘贴上传图片",
-        message:
-          "需要设置 `supportUploadImg` 和 `bucketName`，其中 `bucketName` 请与后台同学商量创建",
+      snippetId: "presentational-bricks.markdown-editor[upload-img]",
+      title: {
+        en: "",
+        zh: "Markdown编辑构件(支持上传图片)",
       },
-      properties: {
-        value: "### 可以粘贴上传图片\n",
-        supportUploadImg: true,
-        bucketName: "lytest",
-      },
-      events: {
-        "markdown.value.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "presentational-bricks.markdown-editor",
+          description: {
+            title: "支持粘贴上传图片",
+            message:
+              "需要设置 `supportUploadImg` 和 `bucketName`，其中 `bucketName` 请与后台同学商量创建",
+          },
+          properties: {
+            value: "### 可以粘贴上传图片\n",
+            supportUploadImg: true,
+            bucketName: "lytest",
+          },
+          events: {
+            "markdown.value.change": {
+              action: "console.log",
+            },
+            "image.upload": {
+              action: "console.log",
+            },
+          },
         },
-        "image.upload": {
-          action: "console.log",
-        },
-      },
+      ],
     },
     {
       brick: "forms.general-form",

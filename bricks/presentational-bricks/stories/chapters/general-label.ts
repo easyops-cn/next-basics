@@ -18,38 +18,56 @@ export const GeneralLabelStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.general-label",
-      properties: {
-        suffixIcon: {
-          lib: "antd",
-          icon: "calendar",
-          theme: "outlined",
-          color: "#0071eb",
-        },
-        text: "2020-03-14",
+      snippetId: "presentational-bricks.general-label[suffix-icon]",
+      title: {
+        zh: "文本信息展示(后置图标)",
+        en: "",
       },
-      events: {
-        "label.click": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "presentational-bricks.general-label",
+          properties: {
+            suffixIcon: {
+              lib: "antd",
+              icon: "calendar",
+              theme: "outlined",
+              color: "#0071eb",
+            },
+            text: "2020-03-14",
+          },
+          events: {
+            "label.click": {
+              action: "console.log",
+            },
+          },
         },
-      },
+      ],
     },
     {
-      brick: "presentational-bricks.general-label",
-      properties: {
-        prefixIcon: {
-          lib: "antd",
-          icon: "tag",
-          theme: "outlined",
-        },
-        text: "1.0.0",
-        url: "/1",
+      snippetId: "presentational-bricks.general-label[prefix-icon]",
+      title: {
+        zh: "文本信息展示(前置图标)",
+        en: "",
       },
-      events: {
-        "label.click": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "presentational-bricks.general-label",
+          properties: {
+            prefixIcon: {
+              lib: "antd",
+              icon: "tag",
+              theme: "outlined",
+            },
+            text: "1.0.0",
+            url: "/1",
+          },
+          events: {
+            "label.click": {
+              action: "console.log",
+            },
+          },
         },
-      },
+      ],
     },
   ],
   previewColumns: 2,

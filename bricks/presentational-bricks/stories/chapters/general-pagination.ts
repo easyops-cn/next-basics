@@ -18,13 +18,22 @@ export const GeneralPaginationStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.general-pagination",
-      properties: {
-        page: "${query.page=1|number}",
-        pageSize: "${query.pageSize=10|number}",
-        total: 100,
-        dataset: { testid: "basic-usage-pagination-demo" },
+      snippetId: "presentational-bricks.general-pagination[normal]",
+      title: {
+        en: "",
+        zh: "基础分页",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.general-pagination",
+          properties: {
+            page: "${query.page=1|number}",
+            pageSize: "${query.pageSize=10|number}",
+            total: 100,
+            dataset: { testid: "basic-usage-pagination-demo" },
+          },
+        },
+      ],
     },
   ],
 };

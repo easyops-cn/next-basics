@@ -4,6 +4,8 @@ lazyBricks:
   - brick-code-display
   - card-item
   - brick-collapse-card
+  - brick-placeholder
+  - single-field-edit
 
   - group: bricks-use-form-and-markdown
     bricks:

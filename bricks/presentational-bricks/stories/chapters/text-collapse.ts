@@ -18,11 +18,20 @@ export const TextCollapseStory: Story = {
   },
   conf: [
     {
-      brick: "presentational-bricks.text-collapse",
-      properties: {
-        text: "This is a text-collapse.",
-        line: 1,
+      snippetId: "presentational-bricks.text-collapse",
+      title: {
+        en: "",
+        zh: "基础可折叠文本",
       },
+      bricks: [
+        {
+          brick: "presentational-bricks.text-collapse",
+          properties: {
+            text: "This is a text-collapse.",
+            line: 1,
+          },
+        },
+      ],
     },
   ],
 };
