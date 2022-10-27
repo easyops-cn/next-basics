@@ -131,16 +131,19 @@ export function WorkbenchTree({
   const findNode = (
     nodes: WorkbenchNodeData[],
     id: string,
-    nodeKey: string
+    nodeKey: string,
+    node: WorkbenchNodeData = null
   ): WorkbenchNodeData => {
-    return nodes.find((item) => {
+    for (const item of nodes) {
       if ((item.data as Record<string, unknown>)[nodeKey] === id) {
-        return item;
+        node = item;
       }
       if (item.children) {
-        return findNode(item.children, id, nodeKey);
+        node = findNode(item.children, id, nodeKey, node);
       }
-    });
+      if (node) break;
+    }
+    return node;
   };
 
   const getDragState = (
