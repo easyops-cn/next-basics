@@ -11,7 +11,12 @@ import {
 } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
 
-import { TimeRangePicker, TimeRange, RangeType } from "./TimeRangePicker";
+import {
+  TimeRangePicker,
+  TimeRange,
+  RangeType,
+  presetRangeType,
+} from "./TimeRangePicker";
 import { NS_FORMS, K } from "../i18n/constants";
 
 /**
@@ -97,6 +102,15 @@ export class TimeRangePickerElement extends FormItemElement {
   @property({ attribute: false })
   emitChangeOnInit = true;
 
+  /**
+   * @group other
+   * @required false
+   * @default  []
+   * @description 预设时间范围快捷选择；设置了属性selectNearDays时，属性presetRanges不生效；属性rangeType为week时，presetRanges的值只能为本周、本月、本季度、今年，属性rangeType为month、quarter、year时，以此类推
+   */
+  @property({ attribute: false })
+  presetRanges: presetRangeType[] = [];
+
   unequal = (
     rule: any,
     value: TimeRange,
@@ -181,6 +195,18 @@ export class TimeRangePickerElement extends FormItemElement {
         case "hmTime":
           format = `HH:mm`;
           break;
+        case "week": //week,month,quarter,year 不设置format，使用ant.design RangePicker的默认format
+          format = "";
+          break;
+        case "month":
+          format = "";
+          break;
+        case "quarter":
+          format = "";
+          break;
+        case "year":
+          format = "";
+          break;
       }
 
       ReactDOM.render(
@@ -208,6 +234,7 @@ export class TimeRangePickerElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             emitChangeOnInit={this.emitChangeOnInit}
             selectNearDays={this.selectNearDays}
+            presetRanges={this.presetRanges}
           />
         </BrickWrapper>,
         this

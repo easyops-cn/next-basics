@@ -5,6 +5,7 @@ import {
   TimeRangePicker,
   RealTimeRangePicker,
   RefTimeRangePicker,
+  presetRangeType,
 } from "./TimeRangePicker";
 import moment from "moment";
 
@@ -68,6 +69,7 @@ describe("TimeRangePicker", () => {
           endTime: "2020-03-16 12:34:56",
         }}
         emitChangeOnInit={true}
+        presetRanges={[presetRangeType.Today, presetRangeType.ThisWeek]}
       />
     );
     expect(wrapper.find(DatePicker.RangePicker)).toHaveLength(1);
