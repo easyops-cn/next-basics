@@ -67,3 +67,4 @@ import "./shared/components/contract-auto-complete";
 // !Lazy: import "./workbench-data-tree";
 // !Lazy: import "./workbench-cache-action";
 import "./data-providers/GetMatchRoute";
+import "./data-providers/CreateRouteWithTheme";
