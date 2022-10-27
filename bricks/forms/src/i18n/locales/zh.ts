@@ -124,6 +124,11 @@ const locale: Locale = {
   [K.PLEASE_INPUT_ATTRIBUTE_DESCRIPTION]: "请输入属性说明",
   [K.VALIDATION_FAILED]: "{{label}}校验失败",
   [K.PLACEHOLDER_SYSTEM_ONLY_DISPLAYS]: "系统只显示4位小数",
+  [K.TODAY]: "今天",
+  [K.THIS_WEEK]: "本周",
+  [K.THIS_MONTH]: "本月",
+  [K.THIS_QUARTER]: "本季度",
+  [K.THIS_YEAR]: "今年",
 };
 
 export default locale;

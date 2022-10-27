@@ -59,6 +59,30 @@ describe("forms.time-range-picker", () => {
     document.body.removeChild(element);
     await jest.runAllTimers();
     expect(unmountComponentAtNode).toBeCalled();
+    element.rangeType = "week";
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(spyOnRender).toBeCalled();
+    document.body.removeChild(element);
+    await jest.runAllTimers();
+    element.rangeType = "month";
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(spyOnRender).toBeCalled();
+    document.body.removeChild(element);
+    await jest.runAllTimers();
+    element.rangeType = "quarter";
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(spyOnRender).toBeCalled();
+    document.body.removeChild(element);
+    await jest.runAllTimers();
+    element.rangeType = "year";
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(spyOnRender).toBeCalled();
+    document.body.removeChild(element);
+    await jest.runAllTimers();
   });
 
   it("should trigger event", async () => {

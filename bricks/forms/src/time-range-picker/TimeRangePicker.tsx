@@ -1,5 +1,5 @@
 import React from "react";
-import { uniqueId, isEmpty } from "lodash";
+import { uniqueId, isEmpty, difference } from "lodash";
 import { useTranslation } from "react-i18next";
 import Icon from "@ant-design/icons";
 import { TimePicker, Input, DatePicker } from "antd";
@@ -9,6 +9,7 @@ import moment from "moment";
 import { NS_FORMS, K } from "../i18n/constants";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import styles from "./TimeRangePicker.module.css";
+import i18n from "i18next";
 
 export interface TimeRange {
   startTime: string;
@@ -19,8 +20,22 @@ const INIT_TIME_RANGE: TimeRange = {
   startTime: "00:00:00",
   endTime: "23:59:59",
 };
-
-export type RangeType = "time" | "date" | "dateTime" | "hmTime";
+export enum presetRangeType {
+  Today = "今天",
+  ThisWeek = "本周",
+  ThisMonth = "本月",
+  ThisQuarter = "本季度",
+  ThisYear = "今年",
+}
+export type RangeType =
+  | "time"
+  | "date"
+  | "dateTime"
+  | "hmTime"
+  | "week"
+  | "month"
+  | "quarter"
+  | "year";
 
 interface TimeRangePickerProps extends FormItemWrapperProps {
   value?: TimeRange;
@@ -29,12 +44,61 @@ interface TimeRangePickerProps extends FormItemWrapperProps {
   onChange?: (range: TimeRange) => void;
   emitChangeOnInit?: boolean;
   selectNearDays?: number;
+  presetRanges?: presetRangeType[];
 }
 
 type RealTimeRangePickerProps = Omit<
   TimeRangePickerProps,
   keyof FormItemWrapperProps
 >;
+presetRangeType.Today;
+
+const presetRangeMap = {
+  [presetRangeType.Today]: {
+    [i18n.t(`${NS_FORMS}:${K.TODAY}`)]: [moment().startOf("day"), moment()],
+  },
+  [presetRangeType.ThisWeek]: {
+    [i18n.t(`${NS_FORMS}:${K.THIS_WEEK}`)]: [
+      moment().startOf("week"),
+      moment().endOf("week"),
+    ],
+  },
+  [presetRangeType.ThisMonth]: {
+    [i18n.t(`${NS_FORMS}:${K.THIS_MONTH}`)]: [
+      moment().startOf("month"),
+      moment().endOf("month"),
+    ],
+  },
+  [presetRangeType.ThisQuarter]: {
+    [i18n.t(`${NS_FORMS}:${K.THIS_QUARTER}`)]: [
+      moment().startOf("quarter"),
+      moment().endOf("quarter"),
+    ],
+  },
+  [presetRangeType.ThisYear]: {
+    [i18n.t(`${NS_FORMS}:${K.THIS_YEAR}`)]: [
+      moment().startOf("year"),
+      moment().endOf("year"),
+    ],
+  },
+};
+const rangeRules = {
+  date: [] as presetRangeType[],
+  dateTime: [] as presetRangeType[],
+  week: [presetRangeType.Today],
+  month: [presetRangeType.Today, presetRangeType.ThisWeek],
+  quarter: [
+    presetRangeType.Today,
+    presetRangeType.ThisWeek,
+    presetRangeType.ThisMonth,
+  ],
+  year: [
+    presetRangeType.Today,
+    presetRangeType.ThisWeek,
+    presetRangeType.ThisMonth,
+    presetRangeType.ThisQuarter,
+  ],
+};
 
 export function RealTimeRangePicker(
   props: RealTimeRangePickerProps,
@@ -117,7 +181,19 @@ export function RealTimeRangePicker(
       />
     </Input.Group>
   );
-
+  const presetRange = React.useMemo(() => {
+    const rangeResult = {};
+    if (!props.selectNearDays && !times.includes(rangeType)) {
+      const compliantRanges = difference(
+        props.presetRanges,
+        (rangeRules as any)[rangeType]
+      );
+      for (const i of compliantRanges) {
+        Object.assign(rangeResult, presetRangeMap[i]);
+      }
+    }
+    return rangeResult;
+  }, [rangeType, props.selectNearDays, props.presetRanges]);
   const rangeChange = (
     dates: RangeValue<moment.Moment>,
     dateStrings: [string, string]
@@ -125,8 +201,8 @@ export function RealTimeRangePicker(
     setStartTime(dates?.[0]);
     setEndTime(dates?.[1]);
     props.onChange?.({
-      startTime: dates?.[0].format(props.format),
-      endTime: dates?.[1].format(props.format),
+      startTime: dates?.[0].format(props.format || "YYYY-MM-DD"), //week,month,quarter,year 的format为""，比如rangeType为quarter，直接返回2022-Q3的这种格式的数据，目前看起来还不是平台通用的，还是先默认转换成"YYYY-MM-DD"
+      endTime: dates?.[1].format(props.format || "YYYY-MM-DD"),
     });
   };
 
@@ -165,11 +241,13 @@ export function RealTimeRangePicker(
     <DatePicker.RangePicker
       style={{ width: 400 }}
       showTime={rangeType === "dateTime"}
+      picker={rangeType as any}
       value={
         !isEmpty(props.value?.startTime) || !isEmpty(props.value?.endTime)
           ? [startTime, endTime]
           : []
       }
+      ranges={presetRange as any}
       format={props.format}
       onChange={rangeChange}
       onOpenChange={onOpenChange}
@@ -198,6 +276,7 @@ export function TimeRangePicker(
         onChange={props.onChange}
         emitChangeOnInit={props.emitChangeOnInit}
         selectNearDays={props.selectNearDays}
+        presetRanges={props.presetRanges}
       />
     </FormItemWrapper>
   );

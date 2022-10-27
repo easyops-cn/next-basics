@@ -137,6 +137,11 @@ const locale: Locale = {
   [K.VALIDATION_FAILED]: "{{label}} validation failed",
   [K.PLACEHOLDER_SYSTEM_ONLY_DISPLAYS]:
     "The system only displays 4 decimal places",
+  [K.TODAY]: "Today",
+  [K.THIS_WEEK]: "This Week",
+  [K.THIS_MONTH]: "This Month",
+  [K.THIS_QUARTER]: "This Quarter",
+  [K.THIS_YEAR]: "This Year",
 };
 
 export default locale;
