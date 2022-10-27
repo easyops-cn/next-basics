@@ -100,6 +100,7 @@ export interface BuilderContainerProps extends BuilderContextMenuProps {
   initialClipboardNodeType?: string;
   initialCanvasIndex?: number;
   initialStoryboardQuery?: string;
+  builderContainerStyle?: React.CSSProperties;
   onNodeAdd?: (event: CustomEvent<EventDetailOfNodeAdd>) => void;
   onSnippetApply?: (event: CustomEvent<EventDetailOfSnippetApply>) => void;
   onNodeReorder?: (event: CustomEvent<EventDetailOfNodeReorder>) => void;
@@ -156,6 +157,7 @@ export function LegacyBuilderContainer(
     initialClipboardNodeType,
     initialCanvasIndex,
     initialStoryboardQuery,
+    builderContainerStyle,
     onNodeAdd,
     onSnippetApply,
     onNodeReorder,
@@ -442,7 +444,15 @@ export function LegacyBuilderContainer(
           className={styles.builderOverlay}
           onClick={handleClickOverlay}
         ></div>
-        <div className={styles.builderContainer}>
+        <div
+          className={styles.builderContainer}
+          style={
+            builderContainerStyle ?? {
+              height: "calc(100vh - 80px)",
+              margin: "50px 0 0 50px",
+            }
+          }
+        >
           <BuilderToolbar />
           <div className={styles.builderBodyWrapper}>
             <BuilderToolbox
