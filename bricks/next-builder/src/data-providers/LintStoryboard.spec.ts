@@ -1,33 +1,40 @@
-import {
-  LintStoryboard,
-  LintStoryboardParams,
-  StoryboardError,
-} from "./LintStoryboard";
+import type { StoryboardError } from "./chunks/doLintStoryboard";
+import { LintStoryboard, LintStoryboardParams } from "./LintStoryboard";
 
 describe("LintStoryboard", () => {
   it.each<[LintStoryboardParams, StoryboardError[]]>([
     [
       {
         storyboard: {
-          app: null,
+          app: null as any,
           routes: [
             {
               path: "/hello",
               bricks: [
                 {
                   brick: "my.any-brick",
+                  events: {
+                    click: {
+                      target: "basic-bricks\\.general-modal",
+                      method: "open",
+                    },
+                  },
                 },
               ],
             },
           ],
         },
       },
-      [],
+      [
+        expect.objectContaining({
+          code: "TAG_NAME_AS_TARGET",
+        }),
+      ],
     ],
     [
       {
         storyboard: {
-          app: null,
+          app: null as any,
           routes: [
             {
               path: "/hello",
