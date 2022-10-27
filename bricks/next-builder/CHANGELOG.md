@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.200.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.200.1...@next-bricks/next-builder@1.200.2) (2022-10-27)
+
+
+### Bug Fixes
+
+* **lint:** do not warn multiple times for the same reason ([ffe43cd](https://github.com/easyops-cn/next-basics/commit/ffe43cd80c8d97ac7bca087ad3519ab6079b84a3))
+
+
+
+
+
 ## [1.200.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.200.0...@next-bricks/next-builder@1.200.1) (2022-10-27)
 
 
