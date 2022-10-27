@@ -185,6 +185,14 @@ export class BuilderContainerElement extends UpdatingElement {
   @property()
   containerForContextModal: string;
 
+  /**
+   * @description builder自定义样式
+   */
+  @property({
+    attribute: false,
+  })
+  builderContainerStyle: React.CSSProperties;
+
   @event({
     type: "node.add",
   })
@@ -690,6 +698,7 @@ export class BuilderContainerElement extends UpdatingElement {
                 initialClipboardNodeType={this.clipboardNodeType}
                 initialCanvasIndex={this.canvasIndex}
                 initialStoryboardQuery={this.storyboardQuery}
+                builderContainerStyle={this.builderContainerStyle}
                 onNodeAdd={this._handleNodeAdd}
                 onSnippetApply={this._handleSnippetApply}
                 onNodeReorder={this._handleNodeReorder}
