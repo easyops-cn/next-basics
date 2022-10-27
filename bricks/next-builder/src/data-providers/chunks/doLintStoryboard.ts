@@ -39,7 +39,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       case "EventHandler": {
         const { target } = node.raw as CustomBrickEventHandler;
         if (typeof target === "string") {
-          if (invalidTargetRegExp.test(target)) {
+          if (target !== "_self" && invalidTargetRegExp.test(target)) {
             errors.push({
               type: "error",
               code: "TAG_NAME_AS_TARGET",

@@ -41,6 +41,12 @@ describe("LintStoryboard", () => {
               bricks: [
                 {
                   brick: "basic-bricks.script-brick",
+                  events: {
+                    click: {
+                      target: "_self",
+                      method: "open",
+                    },
+                  },
                 },
               ],
             },
