@@ -3,6 +3,7 @@ import docMD from "../../../docs/basic-providers/no-op.md";
 
 export const story: Story = {
   storyId: "basic-providers.provider-no-op",
+  category: "other",
   type: "brick",
   author: "steve",
   text: {
