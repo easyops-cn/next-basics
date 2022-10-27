@@ -20,21 +20,30 @@ export const story: Story = {
   },
   conf: [
     {
-      brick: "cmdb-instances.cmdb-instances-export",
-      properties: {
-        objectId: "_MICROAPP_CONTAINER",
+      snippetId: "cmdb-instances.cmdb-instances-export[normal]",
+      title: {
+        en: "Base use",
+        zh: "基础使用",
       },
-      events: {
-        "export.cancel": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "cmdb-instances.cmdb-instances-export",
+          properties: {
+            objectId: "HOST",
+          },
+          events: {
+            "export.cancel": {
+              action: "console.log",
+            },
+            "export.success": {
+              action: "console.log",
+            },
+            "export.error": {
+              action: "console.log",
+            },
+          },
         },
-        "export.success": {
-          action: "console.log",
-        },
-        "export.error": {
-          action: "console.log",
-        },
-      },
+      ],
     },
     {
       description: {
@@ -64,7 +73,7 @@ export const story: Story = {
               brick: "cmdb-instances.cmdb-instances-export",
               properties: {
                 id: "cmdb-instances-export-modal",
-                objectId: "_MICROAPP_CONTAINER",
+                objectId: "HOST",
                 modalMode: true,
               },
               events: {

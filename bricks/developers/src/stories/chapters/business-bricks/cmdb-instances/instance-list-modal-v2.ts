@@ -19,6 +19,47 @@ export const story: Story = {
   },
   conf: [
     {
+      snippetId: "cmdb-instances.instance-list-modal-v2[normal]",
+      title: {
+        en: "Basic use",
+        zh: "基础使用",
+      },
+      bricks: [
+        {
+          brick: "cmdb-instances.instance-list-modal-v2",
+          lifeCycle: {
+            useResolves: [
+              {
+                useProvider: "providers-of-cmdb.cmdb-object-api-get-object-ref",
+                name: "objectList",
+                args: [{ ref_object: "HOST" }],
+                field: "data",
+              },
+            ],
+          },
+          properties: {
+            id: "modal-v2",
+            objectId: "HOST",
+            modalTitle: "查看实例",
+            presetConfigs: {
+              query: { ip: { $like: "%100.1%" }, _agentStatus: "正常" },
+            },
+          },
+          events: {
+            "cmdb-instances.modal-v2.selection-change": {
+              action: "console.info",
+            },
+          },
+        },
+      ],
+      actions: [
+        {
+          text: "open Modal",
+          method: "open",
+        },
+      ],
+    },
+    {
       brick: "div",
       slots: {
         content: {

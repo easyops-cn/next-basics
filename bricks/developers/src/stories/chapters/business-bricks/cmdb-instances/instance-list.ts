@@ -17,19 +17,30 @@ export const story: Story = {
     lib: "fa",
     icon: "list",
   },
-  conf: {
-    brick: "cmdb-instances.instance-list",
-    properties: {
-      objectId: "HOST",
-      detailUrlTemplates: {
-        HOST: "/cmdb-instances/#{objectId}/instance/#{instanceId}",
+  conf: [
+    {
+      snippetId: "cmdb-instances.instance-list[normal]",
+      title: {
+        en: "Basic use",
+        zh: "基础使用",
       },
-      events: {
-        "read.selection.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "cmdb-instances.instance-list",
+          properties: {
+            objectId: "HOST",
+            detailUrlTemplates: {
+              HOST: "/cmdb-instances/#{objectId}/instance/#{instanceId}",
+            },
+            events: {
+              "read.selection.change": {
+                action: "console.log",
+              },
+            },
+          },
         },
-      },
+      ],
     },
-  },
+  ],
   doc: docMD,
 };

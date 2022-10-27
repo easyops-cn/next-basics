@@ -7,41 +7,49 @@ export const story: Story = {
   author: "ice",
   text: {
     en: "CMDB Object Tree",
-    zh: "CMDB 模型对象树"
+    zh: "CMDB 模型对象树",
   },
   icon: { lib: "fa", icon: "tree" },
   description: {
     en: "display cmdb object as tree, by its category accordingly",
-    zh: "根据分类，使用树的方式来展示 CMDB 模型对象"
+    zh: "根据分类，使用树的方式来展示 CMDB 模型对象",
   },
-  conf: {
-    brick: "div",
-    properties: {
-      backgroundColor: "white"
-    },
-    slots: {
-      content: {
-        type: "bricks",
-        bricks: [
-          {
-            brick: "providers-of-cmdb.cmdb-object-api-get-object-all",
-            bg: true
+  conf: [
+    {
+      snippetId: "cmdb-object.object-tree[normal]",
+      title: {
+        en: "Basic use",
+        zh: "基础用法",
+      },
+      bricks: [
+        {
+          brick: "div",
+          properties: {
+            backgroundColor: "white",
           },
-          {
-            brick: "cmdb-object.object-tree",
-            lifeCycle: {
-              useResolves: [
+          slots: {
+            content: {
+              type: "bricks",
+              bricks: [
                 {
-                  name: "objectList",
-                  field: "data",
-                  provider: "providers-of-cmdb\\.cmdb-object-api-get-object-all"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  },
-  doc
+                  brick: "cmdb-object.object-tree",
+                  lifeCycle: {
+                    useResolves: [
+                      {
+                        name: "objectList",
+                        field: "data",
+                        useProvider:
+                          "providers-of-cmdb.cmdb-object-api-get-object-all",
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  ],
+  doc,
 };
