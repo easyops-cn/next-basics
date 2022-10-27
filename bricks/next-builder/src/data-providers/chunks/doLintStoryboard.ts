@@ -30,20 +30,14 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   const errors: StoryboardError[] = [];
   const ast = parseStoryboard(storyboard);
+  let usingScriptBrick = false;
   traverseStoryboard(ast, (node) => {
     switch (node.type) {
       case "Brick": {
         const { brick } = node.raw;
         if (typeof brick === "string") {
           if (brick === "basic-bricks.script-brick") {
-            errors.push({
-              type: "error",
-              code: "SCRIPT_BRICK",
-              message: {
-                zh: "您正在使用 `basic-bricks.script-brick`，而它被认为不可维护、兼容性差。请使用微应用函数或自定义处理函数来代替。",
-                en: "You're using `basic-bricks.script-brick` which is considered unmaintainable and poorly compatible. Please use storyboard functions or custom processors instead.",
-              },
-            });
+            usingScriptBrick = true;
           } else if (
             providerBrickRegExp.test(brick) &&
             !warnedProviders.has(brick)
@@ -110,6 +104,17 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         warnedUsingCtxTemplates.push(`${tpl.name}: ${contexts.join(", ")}`);
       }
     }
+  }
+
+  if (usingScriptBrick) {
+    errors.push({
+      type: "error",
+      code: "SCRIPT_BRICK",
+      message: {
+        zh: "您正在使用 `basic-bricks.script-brick`，而它被认为不可维护、兼容性差。请使用微应用函数或自定义处理函数来代替。",
+        en: "You're using `basic-bricks.script-brick` which is considered unmaintainable and poorly compatible. Please use storyboard functions or custom processors instead.",
+      },
+    });
   }
 
   if (warnedTargets.size > 0) {
