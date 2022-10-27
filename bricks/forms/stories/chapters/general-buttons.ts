@@ -16,23 +16,34 @@ export const generalButtonStory: Story = {
   icon: {
     imgSrc: generalButtonsSvg,
   },
-  conf: {
-    brick: "forms.general-buttons",
-    properties: {
-      showCancelButton: true,
-      submitText: "提交",
-      cancelText: "取消",
-      dataset: {
-        testid: "basic-usage-demo",
+  conf: [
+    {
+      bricks: [
+        {
+          brick: "forms.general-buttons",
+          properties: {
+            showCancelButton: true,
+            submitText: "提交",
+            cancelText: "取消",
+            dataset: {
+              testid: "basic-usage-demo",
+            },
+          },
+          events: {
+            "submit.button.click": {
+              action: "console.log",
+            },
+            "cancel.button.click": {
+              action: "console.log",
+            },
+          },
+        },
+      ],
+      snippetId: "forms.general-buttons[basic]",
+      title: {
+        en: "Basic General Buttons",
+        zh: "基础表单提交按钮",
       },
     },
-    events: {
-      "submit.button.click": {
-        action: "console.log",
-      },
-      "cancel.button.click": {
-        action: "console.log",
-      },
-    },
-  },
+  ],
 };

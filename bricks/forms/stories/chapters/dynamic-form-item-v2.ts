@@ -19,6 +19,135 @@ export const DynamicFormItemV2Story: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.dynamic-form-item-v2",
+          events: {
+            "item.change": [
+              {
+                action: "console.log",
+                args: ["item.change", "${event.detail}"],
+              },
+            ],
+            "row.add": [
+              {
+                action: "console.log",
+                args: ["row.add", "${event.detail}"],
+              },
+            ],
+            "row.remove": [
+              {
+                action: "console.log",
+                args: ["row.remove", "${event.detail}"],
+              },
+            ],
+          },
+          properties: {
+            columns: [
+              {
+                name: "input",
+                props: {
+                  allowClear: true,
+                  placeholder: "input",
+                },
+                rules: [
+                  {
+                    message: "input为必填项",
+                    required: true,
+                  },
+                ],
+                type: "input",
+              },
+              {
+                name: "inputNumber",
+                props: {
+                  max: 9,
+                  min: 1,
+                  placeholder: "inputNumber",
+                },
+                type: "inputNumber",
+              },
+              {
+                name: "inputPassword",
+                props: {
+                  placeholder: "inputPassword",
+                },
+                type: "inputPassword",
+              },
+              {
+                name: "select",
+                props: {
+                  allowClear: true,
+                  options: [
+                    {
+                      label: "aa",
+                      value: "kaa",
+                    },
+                    {
+                      label: "bb",
+                      value: "kbb",
+                    },
+                    {
+                      label: "cc",
+                      value: "kcc",
+                    },
+                  ],
+                  placeholder: "select",
+                },
+                type: "select",
+              },
+              {
+                name: "cascader",
+                props: {
+                  allowClear: false,
+                  expandTrigger: "hover",
+                  options: [
+                    {
+                      children: [
+                        {
+                          children: [
+                            {
+                              label: "xihu",
+                              value: "xihu",
+                            },
+                          ],
+                          label: "hangzhou",
+                          value: "hangzhou",
+                        },
+                      ],
+                      label: "zhejiang",
+                      value: "zhejiang",
+                    },
+                    {
+                      children: [
+                        {
+                          label: "guangzhou",
+                          value: "guangzhou",
+                        },
+                      ],
+                      label: "guangdong",
+                      value: "guangdong",
+                    },
+                  ],
+                  popupPlacement: "topLeft",
+                  showSearch: true,
+                },
+                type: "cascader",
+              },
+            ],
+            label: "动态表单项v2",
+            name: "dynamic",
+            required: true,
+          },
+        },
+      ],
+      snippetId: "dynamic-form-item-v2[basic]",
+      title: {
+        en: "Basic Dynamic Form Item V2",
+        zh: "基础动态表单项V2",
+      },
+    },
+    {
       description: {
         title: "基本用法",
         message: "混合多种表单类型",

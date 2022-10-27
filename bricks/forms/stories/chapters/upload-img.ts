@@ -18,15 +18,24 @@ export const uploadImgStory: Story = {
   },
   conf: [
     {
-      brick: "forms.upload-img",
-      properties: {
-        maxNumber: 1,
-        bucketName: "lytest",
-      },
-      events: {
-        "upload.img.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "forms.upload-img",
+          properties: {
+            maxNumber: 1,
+            bucketName: "lytest",
+          },
+          events: {
+            "upload.img.change": {
+              action: "console.log",
+            },
+          },
         },
+      ],
+      snippetId: "forms.upload-img[basic]",
+      title: {
+        en: "Basic Upload Img",
+        zh: "基础上传图片",
       },
     },
     {

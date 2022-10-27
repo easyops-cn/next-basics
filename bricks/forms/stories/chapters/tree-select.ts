@@ -18,59 +18,68 @@ export const TreeSelectStory: Story = {
   },
   conf: [
     {
-      brick: "forms.tree-select",
-      properties: {
-        name: "node",
-        label: "节点",
-        value: "0-0-0",
-        showSearch: true,
-        placeholder: "请选择节点",
-        searchPlaceholder: "请输入节点名",
-        treeNodeFilterProp: "title",
-        treeData: [
-          {
-            title: "Node1",
-            value: "0-0",
-            key: "0-0",
-            children: [
+      bricks: [
+        {
+          brick: "forms.tree-select",
+          properties: {
+            name: "node",
+            label: "节点",
+            value: "0-0-0",
+            showSearch: true,
+            placeholder: "请选择节点",
+            searchPlaceholder: "请输入节点名",
+            treeNodeFilterProp: "title",
+            treeData: [
               {
-                title: "Child Node1",
-                value: "0-0-0",
-                key: "0-0-0",
+                title: "Node1",
+                value: "0-0",
+                key: "0-0",
+                children: [
+                  {
+                    title: "Child Node1",
+                    value: "0-0-0",
+                    key: "0-0-0",
+                  },
+                ],
+              },
+              {
+                title: "Node2",
+                value: "0-1",
+                key: "0-1",
+                children: [
+                  {
+                    title: "Child Node2",
+                    value: "0-1-0",
+                    key: "0-1-0",
+                  },
+                  {
+                    title: "Child Node3",
+                    value: "0-1-1",
+                    key: "0-1-1",
+                  },
+                  {
+                    title: "Child Node4",
+                    value: "0-1-2",
+                    key: "0-1-2",
+                  },
+                ],
               },
             ],
+            inputBoxStyle: {
+              width: "200px",
+            },
           },
-          {
-            title: "Node2",
-            value: "0-1",
-            key: "0-1",
-            children: [
-              {
-                title: "Child Node2",
-                value: "0-1-0",
-                key: "0-1-0",
-              },
-              {
-                title: "Child Node3",
-                value: "0-1-1",
-                key: "0-1-1",
-              },
-              {
-                title: "Child Node4",
-                value: "0-1-2",
-                key: "0-1-2",
-              },
-            ],
+          events: {
+            "treeSelect.change": {
+              action: "console.log",
+            },
           },
-        ],
-        inputBoxStyle: {
-          width: "200px",
         },
-      },
-      events: {
-        "treeSelect.change": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.tree-select[basic]",
+      title: {
+        en: "Basic Tree Select",
+        zh: "基础树选择器",
       },
     },
     {

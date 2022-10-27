@@ -18,105 +18,132 @@ export const GeneralRadioStory: Story = {
   },
   conf: [
     {
-      brick: "forms.general-radio",
-      properties: {
-        dataset: { testid: "basic-usage-demo" },
-        name: "city",
-        label: "城市",
-        value: "Shanghai",
-        options: ["Shanghai", "Beijing", "Chengdu"],
-      },
-      events: {
-        "general.radio.change": {
-          action: "console.log",
-          args: ["city1", "<% EVENT.detail %>"],
+      bricks: [
+        {
+          brick: "forms.general-radio",
+          properties: {
+            dataset: { testid: "basic-usage-demo" },
+            name: "city",
+            label: "城市",
+            value: "Shanghai",
+            options: ["Shanghai", "Beijing", "Chengdu"],
+          },
+          events: {
+            "general.radio.change": {
+              action: "console.log",
+              args: ["city1", "<% EVENT.detail %>"],
+            },
+          },
         },
+      ],
+      snippetId: "forms.general-radio[basic]",
+      title: {
+        en: "Basic General Radio",
+        zh: "基础单选框",
       },
     },
     {
-      brick: "forms.general-radio",
-      properties: {
-        name: "city",
-        label: "城市",
-        value: "Shanghai",
-        type: "button",
-        options: [
-          {
-            label: "上海",
+      bricks: [
+        {
+          brick: "forms.general-radio",
+          properties: {
+            name: "city",
+            label: "城市",
             value: "Shanghai",
+            type: "button",
+            options: [
+              {
+                label: "上海",
+                value: "Shanghai",
+              },
+              {
+                label: "北京",
+                value: "Beijing",
+              },
+              {
+                label: "成都",
+                value: "Chengdu",
+              },
+            ],
           },
-          {
-            label: "北京",
-            value: "Beijing",
+          events: {
+            "general.radio.change": {
+              action: "console.log",
+              args: ["city2", "<% EVENT.detail %>"],
+            },
           },
-          {
-            label: "成都",
-            value: "Chengdu",
-          },
-        ],
-      },
-      events: {
-        "general.radio.change": {
-          action: "console.log",
-          args: ["city2", "<% EVENT.detail %>"],
         },
+      ],
+      snippetId: "forms.general-radio[button]",
+      title: {
+        en: "Button General Radio",
+        zh: "按钮单选框",
       },
     },
     {
-      brick: "forms.general-radio",
-      description: {
-        title: "当type = default时，给radio设置图标",
-      },
-      events: {
-        "general.radio.change": {
-          action: "console.log",
-          args: ["city3", "<% EVENT.detail %>"],
-        },
-      },
-      properties: {
-        label: "城市",
-        name: "city",
-        options: [
-          {
-            label: "上海",
-            value: "Shanghai",
-            icon: {
-              icon: "bar-chart",
-              lib: "antd",
-              theme: "outlined",
-              iconStyle: {
-                color: "blue",
-                fontSize: "18px",
-              },
+      bricks: [
+        {
+          brick: "forms.general-radio",
+          description: {
+            title: "当type = default时，给radio设置图标",
+          },
+          events: {
+            "general.radio.change": {
+              action: "console.log",
+              args: ["city3", "<% EVENT.detail %>"],
             },
           },
-          {
-            icon: {
-              imgSrc:
-                "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-              imgStyle: {
-                objectFit: "cover",
-                borderRadius: "50%",
+          properties: {
+            label: "城市",
+            name: "city",
+            options: [
+              {
+                label: "上海",
+                value: "Shanghai",
+                icon: {
+                  icon: "bar-chart",
+                  lib: "antd",
+                  theme: "outlined",
+                  iconStyle: {
+                    color: "blue",
+                    fontSize: "18px",
+                  },
+                },
               },
-            },
-            label: "北京",
+              {
+                icon: {
+                  imgSrc:
+                    "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+                  imgStyle: {
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                  },
+                },
+                label: "北京",
+                value: "Beijing",
+              },
+              {
+                label: "成都",
+                value: "Chengdu",
+                icon: {
+                  color: {
+                    endColor: "var(--palette-blue-6)",
+                    startColor: "var(--palette-red-6)",
+                  },
+                  icon: "aim",
+                  lib: "antd",
+                  theme: "outlined",
+                },
+              },
+            ],
             value: "Beijing",
           },
-          {
-            label: "成都",
-            value: "Chengdu",
-            icon: {
-              color: {
-                endColor: "var(--palette-blue-6)",
-                startColor: "var(--palette-red-6)",
-              },
-              icon: "aim",
-              lib: "antd",
-              theme: "outlined",
-            },
-          },
-        ],
-        value: "Beijing",
+        },
+      ],
+      snippetId: "forms.general-radio[with-icon]",
+      title: {
+        en: "General Radio with Icon",
+        zh: "带图标选项的单选框",
       },
     },
     {
@@ -226,55 +253,64 @@ export const GeneralRadioStory: Story = {
       },
     },
     {
-      description: {
-        title: "使用图标按钮样式",
-      },
-      brick: "forms.general-radio",
-      events: {
-        "general.radio.change": {
-          action: "console.log",
-          args: ["<% EVENT.detail %>"],
+      bricks: [
+        {
+          description: {
+            title: "使用图标按钮样式",
+          },
+          brick: "forms.general-radio",
+          events: {
+            "general.radio.change": {
+              action: "console.log",
+              args: ["<% EVENT.detail %>"],
+            },
+          },
+          properties: {
+            label: "图表",
+            name: "chart",
+            options: [
+              {
+                icon: {
+                  lib: "antd",
+                  icon: "area-chart",
+                  theme: "outlined",
+                },
+                value: "area-chart",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  icon: "bar-chart",
+                  theme: "outlined",
+                },
+                value: "bar-chart",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  icon: "pie-chart",
+                  theme: "outlined",
+                },
+                value: "pie-chart",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  icon: "radar-chart",
+                  theme: "outlined",
+                },
+                value: "radar-chart",
+              },
+            ],
+            type: "button",
+            value: "Shanghai",
+          },
         },
-      },
-      properties: {
-        label: "图表",
-        name: "chart",
-        options: [
-          {
-            icon: {
-              lib: "antd",
-              icon: "area-chart",
-              theme: "outlined",
-            },
-            value: "area-chart",
-          },
-          {
-            icon: {
-              lib: "antd",
-              icon: "bar-chart",
-              theme: "outlined",
-            },
-            value: "bar-chart",
-          },
-          {
-            icon: {
-              lib: "antd",
-              icon: "pie-chart",
-              theme: "outlined",
-            },
-            value: "pie-chart",
-          },
-          {
-            icon: {
-              lib: "antd",
-              icon: "radar-chart",
-              theme: "outlined",
-            },
-            value: "radar-chart",
-          },
-        ],
-        type: "button",
-        value: "Shanghai",
+      ],
+      snippetId: "forms.general-radio[icon-button]",
+      title: {
+        en: "Icon Button General Radio",
+        zh: "图标按钮单选框",
       },
     },
     {
@@ -361,50 +397,59 @@ export const GeneralRadioStory: Story = {
       },
     },
     {
-      description: {
-        title: "使用icon类型样式案例",
-      },
-      brick: "forms.general-radio",
-      events: {
-        "general.radio.change": {
-          action: "console.log",
-          args: ["<% EVENT.detail %>"],
-        },
-      },
-      properties: {
-        label: "图标",
-        name: "icon",
-        options: [
-          {
-            icon: {
-              lib: "antd",
-              icon: "area-chart",
-              theme: "outlined",
+      bricks: [
+        {
+          description: {
+            title: "使用icon类型样式案例",
+          },
+          brick: "forms.general-radio",
+          events: {
+            "general.radio.change": {
+              action: "console.log",
+              args: ["<% EVENT.detail %>"],
             },
-            label: "area-chart",
+          },
+          properties: {
+            label: "图标",
+            name: "icon",
+            options: [
+              {
+                icon: {
+                  lib: "antd",
+                  icon: "area-chart",
+                  theme: "outlined",
+                },
+                label: "area-chart",
+                value: "area-chart",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  icon: "bar-chart",
+                  theme: "outlined",
+                },
+                label: "bar-chart",
+                value: "bar-chart",
+              },
+              {
+                icon: {
+                  lib: "antd",
+                  icon: "pie-chart",
+                  theme: "outlined",
+                },
+                label: "pie-chart",
+                value: "pie-chart",
+              },
+            ],
+            type: "icon",
             value: "area-chart",
           },
-          {
-            icon: {
-              lib: "antd",
-              icon: "bar-chart",
-              theme: "outlined",
-            },
-            label: "bar-chart",
-            value: "bar-chart",
-          },
-          {
-            icon: {
-              lib: "antd",
-              icon: "pie-chart",
-              theme: "outlined",
-            },
-            label: "pie-chart",
-            value: "pie-chart",
-          },
-        ],
-        type: "icon",
-        value: "area-chart",
+        },
+      ],
+      snippetId: "forms.general-radio[icon]",
+      title: {
+        en: "Icon General Radio",
+        zh: "图标单选框",
       },
     },
     {

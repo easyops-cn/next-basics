@@ -16,26 +16,37 @@ export const generalInputNumberStory: Story = {
   icon: {
     imgSrc: generalInputNumberSvg,
   },
-  conf: {
-    brick: "forms.general-input-number",
-    properties: {
-      name: "count",
-      label: "数量",
-      value: "12",
-      placeholder: "请填写数量",
+  conf: [
+    {
+      bricks: [
+        {
+          brick: "forms.general-input-number",
+          properties: {
+            name: "count",
+            label: "数量",
+            value: "12",
+            placeholder: "请填写数量",
+          },
+          events: {
+            "general.input.change": {
+              action: "console.log",
+              args: ["count", "${EVENT.detail}"],
+            },
+            "general.input.press.enter": {
+              action: "console.log",
+              args: ["${EVENT.detail.key}", "${EVENT.detail.keyCode}"],
+            },
+            "general.input.blur": {
+              action: "console.log",
+            },
+          },
+        },
+      ],
+      snippetId: "forms.general-input-number[basic]",
+      title: {
+        en: "Basic General Input Number",
+        zh: "基础数字输入框",
+      },
     },
-    events: {
-      "general.input.change": {
-        action: "console.log",
-        args: ["count", "${EVENT.detail}"],
-      },
-      "general.input.press.enter": {
-        action: "console.log",
-        args: ["${EVENT.detail.key}", "${EVENT.detail.keyCode}"],
-      },
-      "general.input.blur": {
-        action: "console.log",
-      },
-    },
-  },
+  ],
 };

@@ -18,22 +18,31 @@ export const iconSelectStory: Story = {
   },
   conf: [
     {
-      brick: "forms.icon-select",
-      properties: {
-        value: {
-          icon: "car",
-          lib: "antd",
-          theme: "outlined",
-          color: "cyan",
+      bricks: [
+        {
+          brick: "forms.icon-select",
+          properties: {
+            value: {
+              icon: "car",
+              lib: "antd",
+              theme: "outlined",
+              color: "cyan",
+            },
+            dataset: {
+              testid: "basic-usage-demo",
+            },
+          },
+          events: {
+            "icon.change": {
+              action: "console.log",
+            },
+          },
         },
-        dataset: {
-          testid: "basic-usage-demo",
-        },
-      },
-      events: {
-        "icon.change": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.icon-select[basic]",
+      title: {
+        en: "Basic Icon Select",
+        zh: "基础图标选择器",
       },
     },
     {

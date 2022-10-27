@@ -18,6 +18,29 @@ export const timeRangePickerStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.time-range-picker",
+          events: {
+            "time.range.change": {
+              action: "console.log",
+            },
+          },
+          properties: {
+            label: "hello",
+            name: "time",
+            rangeType: "time",
+            required: true,
+          },
+        },
+      ],
+      snippetId: "forms.time-range-picker[basic]",
+      title: {
+        en: "Basic Time Range Picker",
+        zh: "基础时间段选择器",
+      },
+    },
+    {
       brick: "forms.general-form",
       properties: {
         values: {

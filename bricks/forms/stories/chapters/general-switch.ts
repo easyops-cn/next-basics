@@ -18,6 +18,28 @@ export const generalSwitch: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.general-switch",
+          events: {
+            "general.switch.change": {
+              action: "console.log",
+            },
+          },
+          properties: {
+            label: "启用采集",
+            name: "enabled",
+            size: "default",
+          },
+        },
+      ],
+      snippetId: "forms.general-switch[basic]",
+      title: {
+        en: "Basic General Switch",
+        zh: "基础开关",
+      },
+    },
+    {
       brick: "forms.general-form",
       properties: {
         values: {
