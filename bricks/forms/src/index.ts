@@ -39,3 +39,4 @@ import "./lazy-bricks";
 // !Lazy: import "./dynamic-form-item-v2";
 import "./general-input-number-range";
 import "./general-link";
+import "./cmdb-cascader";
