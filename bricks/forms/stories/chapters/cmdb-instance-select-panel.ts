@@ -77,6 +77,7 @@ export const cmdbInstanceSelectPanelStory: Story = {
         values: {
           instanceIdList: [CMDB_APP_INSTANCE_ID],
         },
+        id: "panel-form",
       },
       slots: {
         items: {
@@ -121,7 +122,7 @@ export const cmdbInstanceSelectPanelStory: Story = {
               },
               events: {
                 "submit.button.click": {
-                  target: "forms\\.general-form",
+                  target: "#panel-form",
                   method: "validate",
                 },
               },

@@ -41,7 +41,7 @@ export const GeneralModalStory: Story = {
                       },
                       {
                         method: "close",
-                        target: "forms\\.general-modal",
+                        target: "#modal-form-1",
                       },
                     ],
                   },

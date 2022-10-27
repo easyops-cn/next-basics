@@ -154,11 +154,11 @@ export const cmdbInstanceSelectStory: Story = {
           brick: "forms.cmdb-instance-select",
           properties: {
             name: "instanceIds",
-            label: "选择服务节点(自定义query)",
-            objectId: "_SERVICENODE",
+            label: "选择主机(自定义query)",
+            objectId: "HOST",
             mode: "multiple",
             instanceQuery: {
-              "MYSQL_SERVICE.instanceId": "592f2cad471bf",
+              "owner.name": "easyops",
             },
           },
         },
@@ -224,13 +224,13 @@ export const cmdbInstanceSelectStory: Story = {
         {
           brick: "forms.cmdb-instance-select",
           properties: {
-            name: "issue",
+            name: "host",
             allowClear: true,
             label: "自定义label(其他状态)",
-            objectId: "_ISSUE",
-            labelTemplate: "#{name}：#{title}",
+            objectId: "HOST",
+            labelTemplate: "#{ip}(#{hostname})",
             fields: {
-              label: ["name", "title"],
+              label: ["ip", "hostname"],
             },
           },
           description: {
