@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.198.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.197.1...@next-bricks/next-builder@1.198.0) (2022-10-27)
+
+
+### Bug Fixes
+
+* typo ([1a93868](https://github.com/easyops-cn/next-basics/commit/1a9386897640c529904e5b3ba155d8144c96d67f))
+
+
+### Features
+
+* delete unused file and add builderContainerStyle ([63b2215](https://github.com/easyops-cn/next-basics/commit/63b2215913be932d9cf170f5a543fc3a69594d9a))
+
+
+
+
+
 ## [1.197.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.197.0...@next-bricks/next-builder@1.197.1) (2022-10-26)
 
 **Note:** Version bump only for package @next-bricks/next-builder

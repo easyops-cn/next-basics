@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.6.5...@next-bricks/frame-bricks@1.7.0) (2022-10-27)
+
+
+### Features
+
+* delete unused file and add builderContainerStyle ([63b2215](https://github.com/easyops-cn/next-basics/commit/63b2215913be932d9cf170f5a543fc3a69594d9a))
+
+
+
+
+
 ## [1.6.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.6.4...@next-bricks/frame-bricks@1.6.5) (2022-10-26)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
