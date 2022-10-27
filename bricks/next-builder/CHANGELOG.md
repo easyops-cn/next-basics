@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.200.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.200.0...@next-bricks/next-builder@1.200.1) (2022-10-27)
+
+
+### Bug Fixes
+
+* refine lint storyboard ([5fce5aa](https://github.com/easyops-cn/next-basics/commit/5fce5aa5de33db9f365149d10d4e602576bf2ac4))
+
+
+
+
+
 # [1.200.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.199.1...@next-bricks/next-builder@1.200.0) (2022-10-27)
 
 
