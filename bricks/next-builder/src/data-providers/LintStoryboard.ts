@@ -1,33 +1,21 @@
-import { I18nData, Storyboard } from "@next-core/brick-types";
-import { createProviderClass, scanStoryboard } from "@next-core/brick-utils";
+import { Storyboard } from "@next-core/brick-types";
+import { createProviderClass } from "@next-core/brick-utils";
+import type { StoryboardError } from "./chunks/doLintStoryboard";
 
 export interface LintStoryboardParams {
   storyboard: Storyboard;
 }
 
-export type StoryboardErrorCode = "SCRIPT_BRICK";
-
-export interface StoryboardError {
-  type?: "warn" | "error";
-  code: StoryboardErrorCode;
-  message: I18nData;
-}
-
-export function LintStoryboard({
+export async function LintStoryboard({
   storyboard,
-}: LintStoryboardParams): StoryboardError[] {
-  const { bricks } = scanStoryboard(storyboard);
-  const errors: StoryboardError[] = [];
-  if (bricks.includes("basic-bricks.script-brick")) {
-    errors.push({
-      code: "SCRIPT_BRICK",
-      message: {
-        zh: "您正在使用 `basic-bricks.script-brick`，而它被认为不可维护、兼容性差。请使用微应用函数或自定义处理函数来代替。",
-        en: "You're using `basic-bricks.script-brick` which is considered unmaintainable and poorly compatible. Please use storyboard functions or custom processors instead.",
-      },
-    });
-  }
-  return errors;
+}: LintStoryboardParams): Promise<StoryboardError[]> {
+  // `require("crypto").createHash("sha1").update(packageName).digest("hex").substr(0, 4)`
+  // returns "2a2a" when `packageName` is "next-builder".
+  const { doLintStoryboard } = await import(
+    /* webpackChunkName: "chunks/lintStoryboard.2a2a" */
+    "./chunks/doLintStoryboard"
+  );
+  return doLintStoryboard(storyboard);
 }
 
 customElements.define(
