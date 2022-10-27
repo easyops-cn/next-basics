@@ -18,25 +18,34 @@ export const generalTimePickerStory: Story = {
   },
   conf: [
     {
-      brick: "forms.general-time-picker",
-      properties: {
-        configProps: {
-          format: "HH:mm",
-          minuteStep: 5,
+      bricks: [
+        {
+          brick: "forms.general-time-picker",
+          properties: {
+            configProps: {
+              format: "HH:mm",
+              minuteStep: 5,
+            },
+            name: "time",
+            label: "hello",
+            placeholder: "when",
+            value: "09:14:30",
+          },
+          events: {
+            "general.time.change": {
+              action: "console.log",
+              args: ["time", "${EVENT.detail}"],
+            },
+            "general.time.close": {
+              action: "console.log",
+            },
+          },
         },
-        name: "time",
-        label: "hello",
-        placeholder: "when",
-        value: "09:14:30",
-      },
-      events: {
-        "general.time.change": {
-          action: "console.log",
-          args: ["time", "${EVENT.detail}"],
-        },
-        "general.time.close": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.general-time-picker[basic]",
+      title: {
+        en: "Basic General Time Picker",
+        zh: "基础时间选择器",
       },
     },
     {

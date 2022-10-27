@@ -18,6 +18,42 @@ export const UploadFilesV2Story: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.upload-files-v2",
+          events: {
+            "upload.files.change": {
+              action: "console.log",
+              args: ["${EVENT.detail}"],
+            },
+            "upload.files.error": {
+              action: "console.log",
+              args: ["${EVENT.detail}"],
+            },
+            "upload.files.remove": {
+              action: "console.log",
+              args: ["${EVENT.detail}"],
+            },
+          },
+          properties: {
+            autoUpload: true,
+            label: "文件",
+            maxNumber: 2,
+            method: "put",
+            name: "files",
+            required: true,
+            uploadButtonName: "上传",
+            url: "api/gateway/object_store.object_store.PutObject/api/v1/objectStore/bucket/lytest/object",
+          },
+        },
+      ],
+      snippetId: "forms.upload-files-v2[basic]",
+      title: {
+        en: "Basic Upload Files V2",
+        zh: "基础自定义存储上传文件",
+      },
+    },
+    {
       description: {
         title: "自动上传",
         message: "可以获取到接口的返回信息。",

@@ -211,132 +211,142 @@ export const story: Story = {
       },
     },
     {
-      description: {
-        title: "动态表单",
-        message: "通过表单子项的notRender属性和setNotRender方法，实现动态表单",
-      },
-      brick: "forms.general-form",
-      events: {
-        "validate.error": {
-          action: "console.warn",
-          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
-        },
-        "validate.success": {
-          action: "console.log",
-          args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
-        },
-      },
-      properties: {
-        name: "hello",
-        values: {
-          change: "descriptionA",
-          username: "easyops",
-        },
-      },
-      slots: {
-        items: {
-          bricks: [
-            {
-              brick: "forms.general-input",
-              properties: {
-                label: "用户名",
-                message: {
-                  pattern:
-                    "只能包含小写字母、数字和-，且要以字母开头，不能超过64个字符",
-                  required: "用户名为必填项",
-                },
-                name: "username",
-                pattern: "^[a-z][-a-z0-9]{0,63}$",
-                placeholder: "请输入用户名",
-                required: true,
-              },
+      bricks: [
+        {
+          description: {
+            title: "动态表单",
+            message:
+              "通过表单子项的notRender属性和setNotRender方法，实现动态表单",
+          },
+          brick: "forms.general-form",
+          events: {
+            "validate.error": {
+              action: "console.warn",
+              args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
             },
-            {
-              brick: "forms.general-radio",
-              events: {
-                "general.radio.change": [
-                  {
-                    args: ["<% EVENT.detail !== 'descriptionA' %>"],
-                    method: "setNotRender",
-                    target: "#descriptionA",
+            "validate.success": {
+              action: "console.log",
+              args: ["<% EVENT.type %>", "<% EVENT.detail %>"],
+            },
+          },
+          properties: {
+            name: "hello",
+            values: {
+              change: "descriptionA",
+              username: "easyops",
+            },
+          },
+          slots: {
+            items: {
+              bricks: [
+                {
+                  brick: "forms.general-input",
+                  properties: {
+                    label: "用户名",
+                    message: {
+                      pattern:
+                        "只能包含小写字母、数字和-，且要以字母开头，不能超过64个字符",
+                      required: "用户名为必填项",
+                    },
+                    name: "username",
+                    pattern: "^[a-z][-a-z0-9]{0,63}$",
+                    placeholder: "请输入用户名",
+                    required: true,
                   },
-                  {
-                    args: ["<% EVENT.detail !== 'descriptionB' %>"],
-                    method: "setNotRender",
-                    target: "#descriptionB",
+                },
+                {
+                  brick: "forms.general-radio",
+                  events: {
+                    "general.radio.change": [
+                      {
+                        args: ["<% EVENT.detail !== 'descriptionA' %>"],
+                        method: "setNotRender",
+                        target: "#descriptionA",
+                      },
+                      {
+                        args: ["<% EVENT.detail !== 'descriptionB' %>"],
+                        method: "setNotRender",
+                        target: "#descriptionB",
+                      },
+                    ],
                   },
-                ],
-              },
-              properties: {
-                label: "动态切换",
-                name: "change",
-                options: ["descriptionA", "descriptionB"],
-              },
-            },
-            {
-              brick: "forms.general-text-area",
-              properties: {
-                autoSize: {
-                  maxRows: 8,
-                  minRows: 3,
-                },
-                id: "descriptionA",
-                label: "描述A",
-                max: 10,
-                message: {
-                  max: "最长长度限制，10",
-                  required: "请输入内容",
-                },
-                name: "descriptionA",
-                placeholder: "请填写描述",
-                required: true,
-                value: "This is a long description",
-              },
-            },
-            {
-              brick: "forms.general-select",
-              properties: {
-                hidden: true,
-                id: "descriptionB",
-                inputBoxStyle: {
-                  width: "100%",
-                },
-                label: "描述B",
-                name: "descriptionB",
-                notRender: true,
-                options: [
-                  {
-                    label: "男",
-                    value: "male",
+                  properties: {
+                    label: "动态切换",
+                    name: "change",
+                    options: ["descriptionA", "descriptionB"],
                   },
-                  {
-                    label: "女",
-                    value: "female",
+                },
+                {
+                  brick: "forms.general-text-area",
+                  properties: {
+                    autoSize: {
+                      maxRows: 8,
+                      minRows: 3,
+                    },
+                    id: "descriptionA",
+                    label: "描述A",
+                    max: 10,
+                    message: {
+                      max: "最长长度限制，10",
+                      required: "请输入内容",
+                    },
+                    name: "descriptionA",
+                    placeholder: "请填写描述",
+                    required: true,
+                    value: "This is a long description",
                   },
-                ],
-                placeholder: "请填写描述",
-                required: true,
-              },
-            },
-            {
-              brick: "forms.general-buttons",
-              events: {
-                "cancel.button.click": {
-                  action: "console.log",
                 },
-                "submit.button.click": {
-                  action: "console.log",
+                {
+                  brick: "forms.general-select",
+                  properties: {
+                    hidden: true,
+                    id: "descriptionB",
+                    inputBoxStyle: {
+                      width: "100%",
+                    },
+                    label: "描述B",
+                    name: "descriptionB",
+                    notRender: true,
+                    options: [
+                      {
+                        label: "男",
+                        value: "male",
+                      },
+                      {
+                        label: "女",
+                        value: "female",
+                      },
+                    ],
+                    placeholder: "请填写描述",
+                    required: true,
+                  },
                 },
-              },
-              properties: {
-                cancelText: "取消",
-                showCancelButton: true,
-                submitText: "提交",
-              },
+                {
+                  brick: "forms.general-buttons",
+                  events: {
+                    "cancel.button.click": {
+                      action: "console.log",
+                    },
+                    "submit.button.click": {
+                      action: "console.log",
+                    },
+                  },
+                  properties: {
+                    cancelText: "取消",
+                    showCancelButton: true,
+                    submitText: "提交",
+                  },
+                },
+              ],
+              type: "bricks",
             },
-          ],
-          type: "bricks",
+          },
         },
+      ],
+      snippetId: "forms.general-form[dynamic]",
+      title: {
+        en: "Dynamic General Checkbox",
+        zh: "动态表单",
       },
     },
     {

@@ -18,68 +18,123 @@ export const cmdbInstanceSelectPanelStory: Story = {
   icon: {
     imgSrc: cmdbInstanceSelectPancel,
   },
-  conf: {
-    brick: "forms.general-form",
-    properties: {
-      values: {
-        instanceIdList: [CMDB_APP_INSTANCE_ID],
-      },
-    },
-    slots: {
-      items: {
-        type: "bricks",
-        bricks: [
-          {
-            brick: "forms.cmdb-instance-select-panel",
-            properties: {
-              objectId: "APP",
-              label: "选择应用",
-              name: "instanceIdList",
-              instanceQuery: {
-                $or: [{ name: { $like: "%cmdb%" } }],
-              },
-              addButtonText: "点击选择实例",
-              fields: ["name", "memo", "cloud"],
+  conf: [
+    {
+      bricks: [
+        {
+          brick: "forms.cmdb-instance-select-panel",
+          events: {
+            "instance.select.change": {
+              action: "message.info",
+              args: ["select.change"],
             },
-            lifeCycle: {
-              useResolves: [
+            "instance.select.change.v2": {
+              action: "message.info",
+              args: ["select.change.v2"],
+            },
+          },
+          lifeCycle: {
+            useResolves: [
+              {
+                args: [
+                  {
+                    ref_object: "APP",
+                  },
+                ],
+                field: "data",
+                name: "objectList",
+                useProvider: "providers-of-cmdb.cmdb-object-api-get-object-ref",
+              },
+            ],
+          },
+          properties: {
+            addButtonText: "点击选择实例",
+            fields: ["name", "memo", "cloud"],
+            instanceQuery: {
+              $or: [
                 {
-                  name: "objectList",
-                  field: "data",
-                  useProvider:
-                    "providers-of-cmdb.cmdb-object-api-get-object-ref",
-                  args: [{ ref_object: "APP" }],
+                  name: {
+                    $like: "%cmdb%",
+                  },
                 },
               ],
             },
-            events: {
-              "instance.select.change": {
-                action: "console.log",
-              },
-              "instance.select.change.v2": {
-                action: "console.log",
-              },
-            },
+            label: "选择应用",
+            name: "instanceIdList",
+            objectId: "APP",
           },
-          {
-            brick: "forms.general-buttons",
-            properties: {
-              submitText: "提交",
-            },
-            events: {
-              "submit.button.click": {
-                target: "forms\\.general-form",
-                method: "validate",
-              },
-            },
-          },
-        ],
+        },
+      ],
+      snippetId: "forms.cmdb-instance-select-panel[basic]",
+      title: {
+        en: "Basic CMDB Instance Select Panel",
+        zh: "基础CMDB实例选择",
       },
     },
-    events: {
-      "validate.success": {
-        action: "console.log",
+    {
+      brick: "forms.general-form",
+      properties: {
+        values: {
+          instanceIdList: [CMDB_APP_INSTANCE_ID],
+        },
+        id: "panel-form",
+      },
+      slots: {
+        items: {
+          type: "bricks",
+          bricks: [
+            {
+              brick: "forms.cmdb-instance-select-panel",
+              properties: {
+                objectId: "APP",
+                label: "选择应用",
+                name: "instanceIdList",
+                instanceQuery: {
+                  $or: [{ name: { $like: "%cmdb%" } }],
+                },
+                addButtonText: "点击选择实例",
+                fields: ["name", "memo", "cloud"],
+              },
+              lifeCycle: {
+                useResolves: [
+                  {
+                    name: "objectList",
+                    field: "data",
+                    useProvider:
+                      "providers-of-cmdb.cmdb-object-api-get-object-ref",
+                    args: [{ ref_object: "APP" }],
+                  },
+                ],
+              },
+              events: {
+                "instance.select.change": {
+                  action: "console.log",
+                },
+                "instance.select.change.v2": {
+                  action: "console.log",
+                },
+              },
+            },
+            {
+              brick: "forms.general-buttons",
+              properties: {
+                submitText: "提交",
+              },
+              events: {
+                "submit.button.click": {
+                  target: "#panel-form",
+                  method: "validate",
+                },
+              },
+            },
+          ],
+        },
+      },
+      events: {
+        "validate.success": {
+          action: "console.log",
+        },
       },
     },
-  },
+  ],
 };

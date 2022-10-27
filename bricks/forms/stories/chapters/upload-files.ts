@@ -18,6 +18,64 @@ export const UploadFilesStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.upload-files",
+          events: {
+            "upload.files.change": [
+              {
+                properties: {
+                  disabled: "<% EVENT.detail.fileList.length === 0 %>",
+                },
+                target: "#upload-files-button",
+              },
+              {
+                action: "console.log",
+              },
+            ],
+            "upload.files.failed": [
+              {
+                action: "message.error",
+                args: ["上传失败"],
+              },
+              {
+                action: "console.log",
+              },
+            ],
+            "upload.files.success": [
+              {
+                action: "message.success",
+                args: ["上传成功"],
+              },
+              {
+                action: "console.log",
+              },
+            ],
+          },
+          properties: {
+            data: {
+              "keys[0]": "instanceId",
+            },
+            id: "upload-files",
+            name: "attachment",
+            style: {
+              marginTop: "20px",
+            },
+            text: {
+              hint: "文件大小最多10M，支持扩展名：.json",
+              main: "请点击或拖拽仪表盘文件到此区域",
+            },
+            url: "api/gateway/cmdb.instance.ImportInstanceWithJson/import/object/_DASHBOARD/instance/json",
+          },
+        },
+      ],
+      snippetId: "forms.upload-files[basic]",
+      title: {
+        en: "Basic Upload Files",
+        zh: "基础上传文件",
+      },
+    },
+    {
       brick: "div",
       slots: {
         "": {

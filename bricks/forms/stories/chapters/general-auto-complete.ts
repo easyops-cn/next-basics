@@ -18,6 +18,35 @@ export const autoCompleteStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.general-auto-complete",
+          events: {
+            "general.auto-complete.change": {
+              action: "console.log",
+              args: ["auto-complete", "<% EVENT.detail %>"],
+            },
+          },
+          properties: {
+            dataset: {
+              testid: "basic-usage-demo",
+            },
+            label: "二级分类",
+            labelTooltip: "auto complete",
+            name: "category",
+            options: ["网络设备", "存储", "IP管理"],
+            placeholder: "请输入",
+            required: true,
+          },
+        },
+      ],
+      snippetId: "forms.general-auto-complete[basic]",
+      title: {
+        en: "Basic General Auto Complete",
+        zh: "基础带候选项的输入框",
+      },
+    },
+    {
       brick: "forms.general-form",
       description: {
         title: "基本使用",

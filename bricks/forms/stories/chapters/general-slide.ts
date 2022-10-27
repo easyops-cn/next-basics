@@ -18,32 +18,50 @@ export const generalSlideStory: Story = {
   },
   conf: [
     {
-      brick: "forms.general-slide",
-      properties: {
-        value: 30,
-      },
-      events: {
-        "slider.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "forms.general-slide",
+          properties: {
+            value: 30,
+          },
+          events: {
+            "slider.change": {
+              action: "console.log",
+            },
+            "slider.after.change": {
+              action: "console.log",
+            },
+          },
         },
-        "slider.after.change": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.general-slide[basic]",
+      title: {
+        en: "Basic General Slide",
+        zh: "基础滑动输入条",
       },
     },
     {
-      brick: "forms.general-slide",
-      properties: {
-        value: [30, 40],
-        range: true,
-      },
-      events: {
-        "slider.change": {
-          action: "console.log",
+      bricks: [
+        {
+          brick: "forms.general-slide",
+          properties: {
+            value: [30, 40],
+            range: true,
+          },
+          events: {
+            "slider.change": {
+              action: "console.log",
+            },
+            "slider.after.change": {
+              action: "console.log",
+            },
+          },
         },
-        "slider.after.change": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.general-slide[range]",
+      title: {
+        en: "Range General Slide",
+        zh: "范围滑动输入条",
       },
     },
     {

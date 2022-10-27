@@ -18,53 +18,62 @@ export const generalCascaderStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "单独使用的场景",
-      },
-      brick: "forms.general-cascader",
-      properties: {
-        name: "city",
-        placeholder: "自定义自定名",
-        fieldNames: { label: "name", value: "code", children: "items" },
-        options: [
-          {
-            code: "zhejiang",
-            name: "Zhejiang",
-            items: [
+      bricks: [
+        {
+          description: {
+            title: "单独使用的场景",
+          },
+          brick: "forms.general-cascader",
+          properties: {
+            name: "city",
+            placeholder: "自定义自定名",
+            fieldNames: { label: "name", value: "code", children: "items" },
+            options: [
               {
-                code: "hangzhou",
-                name: "Hangzhou",
+                code: "zhejiang",
+                name: "Zhejiang",
                 items: [
                   {
-                    code: "xihu",
-                    name: "West Lake",
+                    code: "hangzhou",
+                    name: "Hangzhou",
+                    items: [
+                      {
+                        code: "xihu",
+                        name: "West Lake",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                code: "jiangsu",
+                name: "Jiangsu",
+                items: [
+                  {
+                    code: "nanjing",
+                    name: "Nanjing",
+                    items: [
+                      {
+                        code: "zhonghuamen",
+                        name: "Zhong Hua Men",
+                      },
+                    ],
                   },
                 ],
               },
             ],
           },
-          {
-            code: "jiangsu",
-            name: "Jiangsu",
-            items: [
-              {
-                code: "nanjing",
-                name: "Nanjing",
-                items: [
-                  {
-                    code: "zhonghuamen",
-                    name: "Zhong Hua Men",
-                  },
-                ],
-              },
-            ],
+          events: {
+            "cascader.change": {
+              action: "console.log",
+            },
           },
-        ],
-      },
-      events: {
-        "cascader.change": {
-          action: "console.log",
         },
+      ],
+      snippetId: "forms.general-cascader[basic]",
+      title: {
+        en: "Basic General Cascader",
+        zh: "基础级联选择器",
       },
     },
     {

@@ -17,6 +17,82 @@ export const GeneralModalStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.general-modal",
+          properties: {
+            id: "modal-form-1",
+            modalTitle: "编辑信息",
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "forms.general-form",
+                  events: {
+                    "validate.error": {
+                      action: "console.warn",
+                      args: ["${EVENT.type}", "${EVENT.detail}"],
+                    },
+                    "validate.success": [
+                      {
+                        action: "console.log",
+                        args: ["${EVENT.type}", "${EVENT.detail}"],
+                      },
+                      {
+                        method: "close",
+                        target: "#modal-form-1",
+                      },
+                    ],
+                  },
+                  properties: {
+                    values: {
+                      level: "high",
+                    },
+                  },
+                  slots: {
+                    items: {
+                      bricks: [
+                        {
+                          brick: "forms.general-input",
+                          properties: {
+                            label: "年龄",
+                            name: "age",
+                            placeholder: "请输入年龄",
+                            required: true,
+                          },
+                        },
+                        {
+                          brick: "forms.general-input",
+                          properties: {
+                            label: "级别",
+                            name: "level",
+                          },
+                        },
+                      ],
+                      type: "bricks",
+                    },
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
+        },
+      ],
+      snippetId: "forms.general-modal[basic]",
+      title: {
+        en: "Basic General Modal",
+        zh: "基础表单通用模态框",
+      },
+      actions: [
+        {
+          text: "open()",
+          method: "open",
+        },
+      ],
+    },
+    {
       description: {
         title: "",
         message:

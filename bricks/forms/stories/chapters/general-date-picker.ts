@@ -18,24 +18,33 @@ export const datePickerStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "基本都用法",
-      },
-      brick: "forms.general-date-picker",
-      properties: {
-        name: "date",
-        label: "hello",
-        placeholder: "when",
-        value: "2019-10-01",
-        inputBoxStyle: {
-          width: 300,
+      bricks: [
+        {
+          description: {
+            title: "基本都用法",
+          },
+          brick: "forms.general-date-picker",
+          properties: {
+            name: "date",
+            label: "hello",
+            placeholder: "when",
+            value: "2019-10-01",
+            inputBoxStyle: {
+              width: 300,
+            },
+          },
+          events: {
+            "general.date.change": {
+              action: "console.log",
+              args: ["date", "<% EVENT.detail %>"],
+            },
+          },
         },
-      },
-      events: {
-        "general.date.change": {
-          action: "console.log",
-          args: ["date", "<% EVENT.detail %>"],
-        },
+      ],
+      snippetId: "forms.general-date-picker[basic]",
+      title: {
+        en: "Basic General Date Picker",
+        zh: "基础日期选择框",
       },
     },
     {

@@ -18,59 +18,61 @@ export const userGroupSelectStory: Story = {
   },
   conf: [
     {
-      description: {
-        title: "基本用法",
-      },
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "forms.user-or-user-group-select",
-              properties: {
-                style: {
-                  width: "500px",
-                },
-              },
-              events: {
-                "user.group.change": {
-                  action: "console.log",
-                },
-              },
+      bricks: [
+        {
+          description: {
+            title: "基本用法",
+          },
+          brick: "forms.user-or-user-group-select",
+          events: {
+            "user.group.change": {
+              action: "console.log",
             },
-          ],
+          },
+          properties: {
+            mergeUseAndUserGroup: true,
+            name: "username",
+            staticList: ["easyops"],
+            style: {
+              width: "500px",
+            },
+            value: ["easyops"],
+          },
         },
+      ],
+      snippetId: "forms.user-or-user-group-select[basic]",
+      title: {
+        en: "Basic User or User Group Select",
+        zh: "基础用户(组)选择器",
       },
     },
     {
-      description: {
-        title: "支持白名单配置",
-      },
-      brick: "div",
-      slots: {
-        "": {
-          type: "bricks",
-          bricks: [
-            {
-              brick: "forms.user-or-user-group-select",
-              properties: {
-                style: {
-                  width: "500px",
-                },
-                name: "username",
-                mergeUseAndUserGroup: true,
-                value: ["easyops"],
-                staticList: ["easyops"],
-              },
-              events: {
-                "user.group.change": {
-                  action: "console.log",
-                },
-              },
+      bricks: [
+        {
+          description: {
+            title: "支持白名单配置",
+          },
+          brick: "forms.user-or-user-group-select",
+          events: {
+            "user.group.change": {
+              action: "console.log",
             },
-          ],
+          },
+          properties: {
+            mergeUseAndUserGroup: true,
+            name: "username",
+            staticList: ["easyops"],
+            style: {
+              width: "500px",
+            },
+            value: ["easyops"],
+          },
         },
+      ],
+      snippetId: "forms.user-or-user-group-select[blank-list]",
+      title: {
+        en: "User or User Group Select with Blank List",
+        zh: "带白名单配置的基础用户(组)选择器",
       },
     },
     {

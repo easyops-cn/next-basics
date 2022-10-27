@@ -18,6 +18,23 @@ export const informMethodsFormStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.inform-methods-form",
+          properties: {
+            label: "通知方式",
+            name: "inform_methods",
+            required: true,
+          },
+        },
+      ],
+      snippetId: "forms.inform-methods-form[basic]",
+      title: {
+        en: "Basic Inform Methods Form",
+        zh: "基础通知方式多选框",
+      },
+    },
+    {
       brick: "forms.general-form",
       properties: {
         values: {

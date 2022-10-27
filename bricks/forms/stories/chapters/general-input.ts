@@ -18,70 +18,97 @@ export const generalInputStory: Story = {
   },
   conf: [
     {
-      brick: "forms.general-input",
-      description: {
-        title: "基本使用",
-      },
-      properties: {
-        name: "username",
-        type: "text",
-        label: "用户名",
-        value: "test",
-        placeholder: "请输入用户名",
-      },
-      events: {
-        "general.input.change": {
-          action: "console.log",
-          args: ["username", "<% EVENT.detail %>"],
+      bricks: [
+        {
+          brick: "forms.general-input",
+          description: {
+            title: "基本使用",
+          },
+          properties: {
+            name: "username",
+            type: "text",
+            label: "用户名",
+            value: "test",
+            placeholder: "请输入用户名",
+          },
+          events: {
+            "general.input.change": {
+              action: "console.log",
+              args: ["username", "<% EVENT.detail %>"],
+            },
+            "general.input.blur": {
+              action: "console.log",
+            },
+          },
         },
-        "general.input.blur": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.general-input[basic]",
+      title: {
+        en: "Basic General Input",
+        zh: "基础输入框",
       },
     },
     {
-      brick: "forms.general-input",
-      description: {
-        title: "复制按钮",
-      },
-      properties: {
-        name: "email",
-        type: "email",
-        label: "邮箱",
-        value: "",
-        placeholder: "请输入邮箱地址",
-        copyButton: true,
-      },
-      events: {
-        "general.input.change": {
-          action: "console.log",
-          args: ["username", "<% EVENT.detail %>"],
+      bricks: [
+        {
+          brick: "forms.general-input",
+          description: {
+            title: "复制按钮",
+          },
+          properties: {
+            name: "email",
+            type: "email",
+            label: "邮箱",
+            value: "",
+            placeholder: "请输入邮箱地址",
+            copyButton: true,
+          },
+          events: {
+            "general.input.change": {
+              action: "console.log",
+              args: ["username", "<% EVENT.detail %>"],
+            },
+            "general.input.blur": {
+              action: "console.log",
+            },
+          },
         },
-        "general.input.blur": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.general-input[copyable]",
+      title: {
+        en: "Copyable General Input",
+        zh: "可复制输入框",
       },
     },
     {
-      brick: "forms.general-input",
-      description: {
-        title: "密码框",
-      },
-      properties: {
-        name: "password",
-        type: "password",
-        label: "密码",
-        value: "123456",
-        placeholder: "请输入密码",
-      },
-      events: {
-        "general.input.change": {
-          action: "console.log",
-          args: ["username", "<% EVENT.detail %>"],
+      bricks: [
+        {
+          brick: "forms.general-input",
+          description: {
+            title: "密码框",
+          },
+          properties: {
+            name: "password",
+            type: "password",
+            label: "密码",
+            value: "123456",
+            placeholder: "请输入密码",
+          },
+          events: {
+            "general.input.change": {
+              action: "console.log",
+              args: ["username", "<% EVENT.detail %>"],
+            },
+            "general.input.blur": {
+              action: "console.log",
+            },
+          },
         },
-        "general.input.blur": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.general-input[password]",
+      title: {
+        en: "Password General Input",
+        zh: "密码输入框",
       },
     },
     {
@@ -125,27 +152,36 @@ export const generalInputStory: Story = {
       },
     },
     {
-      brick: "forms.general-input",
-      description: {
-        title: "前缀，后缀",
-      },
-      properties: {
-        name: "url",
-        type: "url",
-        label: "url",
-        value: "",
-        placeholder: "请输入url",
-        addonBefore: "Http://",
-        addonAfter: ".com",
-      },
-      events: {
-        "general.input.change": {
-          action: "console.log",
-          args: ["username", "<% EVENT.detail %>"],
+      bricks: [
+        {
+          brick: "forms.general-input",
+          description: {
+            title: "前缀，后缀",
+          },
+          properties: {
+            name: "url",
+            type: "url",
+            label: "url",
+            value: "",
+            placeholder: "请输入url",
+            addonBefore: "Http://",
+            addonAfter: ".com",
+          },
+          events: {
+            "general.input.change": {
+              action: "console.log",
+              args: ["username", "<% EVENT.detail %>"],
+            },
+            "general.input.blur": {
+              action: "console.log",
+            },
+          },
         },
-        "general.input.blur": {
-          action: "console.log",
-        },
+      ],
+      snippetId: "forms.general-input[with-addon]",
+      title: {
+        en: "General Input with Addon",
+        zh: "带前后缀的输入框",
       },
     },
   ],

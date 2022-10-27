@@ -18,6 +18,34 @@ export const inputWithUnitStory: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          brick: "forms.input-with-unit",
+          events: {
+            "general.input-with-unit.change": {
+              action: "console.log",
+            },
+          },
+          properties: {
+            inputBoxStyle: {
+              width: "400px",
+            },
+            label: "间隔时间",
+            name: "interval",
+            placeholder: "please input a number",
+            required: true,
+            unit: "s",
+            unitType: "time",
+          },
+        },
+      ],
+      snippetId: "forms.input-with-unit[basic]",
+      title: {
+        en: "Basic Input with Unit",
+        zh: "基础带单位选择输入框",
+      },
+    },
+    {
       brick: "forms.general-form",
       properties: {
         values: {
