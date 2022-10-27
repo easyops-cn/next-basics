@@ -265,12 +265,7 @@ export function WorkbenchTree({
         ? normalizeNode.find((item) => item.key === curNode.originKey)
         : curNode;
       const curNodeData = realCurNode.data as Record<string, unknown>;
-
-      if (overNode.isContainer) {
-        curNodeData.path = realOverNode.parentPath || realOverNode.path;
-      } else {
-        curNodeData.path = "";
-      }
+      curNodeData.path = realOverNode.parentPath || realOverNode.path;
 
       dropEmit({
         nodes: filterNodes(normalizeNode),
