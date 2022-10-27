@@ -54,5 +54,39 @@ export const broadcastChanel: Story = {
         },
       },
     },
+    {
+      bricks: [
+        {
+          brick: "utils.broadcast-channel",
+          events: {
+            "channel.message": {
+              action: "console.log",
+              args: ["channel.message:", "<% EVENT.detail %>"],
+            },
+          },
+          portal: true,
+          properties: {
+            channelName: "developers:test-broadcast-channel",
+            id: "test-broadcast-channel",
+          },
+        },
+      ],
+      snippetId: "utils.broadcast-channel[basic]",
+      title: {
+        en: "Basic Broadcast Channel",
+        zh: "基础广播频道",
+      },
+      actions: [
+        {
+          text: "postMessage()",
+          method: "postMessage",
+          args: [
+            {
+              hello: "world",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
