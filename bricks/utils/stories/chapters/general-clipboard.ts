@@ -53,5 +53,38 @@ export const generalClipboard: Story = {
         },
       },
     },
+    {
+      bricks: [
+        {
+          brick: "utils.general-clipboard",
+          events: {
+            "clipboard.change": {
+              action: "console.log",
+            },
+          },
+          portal: true,
+          properties: {
+            id: "test-general-clipboard",
+            storageKey: "developers:test-general-clipboard",
+          },
+        },
+      ],
+      snippetId: "utils.general-clipboard[basic]",
+      title: {
+        en: "Basic General Clipboard",
+        zh: "基础普通剪切板",
+      },
+      actions: [
+        {
+          text: "setClipboardImmediately()",
+          args: [
+            {
+              hello: "world",
+            },
+          ],
+          method: "setClipboardImmediately",
+        },
+      ],
+    },
   ],
 };
