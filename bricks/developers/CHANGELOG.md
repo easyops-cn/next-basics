@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.360.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.359.1...@next-bricks/developers@1.360.0) (2022-10-27)
+
+
+### Features
+
+* update agile-NB snippets ([a4f059b](https://github.com/easyops-cn/next-basics/commit/a4f059bc53738284c8e7f8fc774fa0873757bcc6))
+
+
+
+
+
 ## [1.359.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.359.0...@next-bricks/developers@1.359.1) (2022-10-27)
 
 **Note:** Version bump only for package @next-bricks/developers
