@@ -81,6 +81,9 @@ describe("LintStoryboard", () => {
                     },
                   },
                 },
+                {
+                  brick: "basic-bricks.script-brick",
+                },
               ],
             },
           ],
