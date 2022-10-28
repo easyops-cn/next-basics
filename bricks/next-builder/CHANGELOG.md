@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.203.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.202.0...@next-bricks/next-builder@1.203.0) (2022-10-28)
+
+
+### Features
+
+* createThemePage only create snippet ([72b38b0](https://github.com/easyops-cn/next-basics/commit/72b38b0450c3ece71919beab3154a6ddac074788))
+
+
+
+
+
 # [1.202.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.201.0...@next-bricks/next-builder@1.202.0) (2022-10-28)
 
 
