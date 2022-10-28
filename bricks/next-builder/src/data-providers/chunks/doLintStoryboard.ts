@@ -29,8 +29,9 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const warnedProviders = new Set<string>();
 
   const errors: StoryboardError[] = [];
-  const ast = parseStoryboard(storyboard);
   let usingScriptBrick = false;
+
+  const ast = parseStoryboard(storyboard);
   traverseStoryboard(ast, (node) => {
     switch (node.type) {
       case "Brick": {

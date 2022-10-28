@@ -107,6 +107,7 @@ export function DataView({
       const formValue = {
         name: contextValue?.name,
         type: ContextType.VALUE,
+        track: contextValue?.track,
         ...safeDumpFields({
           value: contextValue?.value,
           if: contextValue?.if,
@@ -116,7 +117,8 @@ export function DataView({
       settingItemForm.setFieldsValue(formValue);
     } else {
       const formValue = {
-        name: contextValue?.name,
+        name: contextValue.name,
+        track: contextValue.track,
         ...((contextValue.resolve as SelectorProviderResolveConf).provider
           ? {
               type: ContextType.SELECTOR_RESOLVE,
@@ -124,7 +126,7 @@ export function DataView({
                 .provider,
             }
           : (
-              contextValue?.resolve as UseProviderResolveConf
+              contextValue.resolve as UseProviderResolveConf
             ).useProvider?.includes("@")
           ? {
               type: ContextType.FLOW_API,
@@ -142,8 +144,9 @@ export function DataView({
           if: contextValue.if,
           resolveIf: contextValue.resolve.if,
           transform: contextValue.resolve.transform,
+          lazy: contextValue.resolve.lazy,
           onReject: contextValue.resolve.onReject,
-          onChange: contextValue?.onChange,
+          onChange: contextValue.onChange,
         }),
       };
       settingItemForm.setFieldsValue(formValue);

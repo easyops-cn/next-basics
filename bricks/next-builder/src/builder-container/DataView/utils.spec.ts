@@ -72,9 +72,11 @@ describe("computeItemToSubmit", () => {
         value: "age: 18",
         name: "userInfo",
         onChange: 'target: "#id"\nproperties:\n  a: 1',
+        track: true,
       },
       {
         name: "userInfo",
+        track: true,
         value: {
           age: 18,
         },
@@ -99,6 +101,7 @@ describe("computeItemToSubmit", () => {
         name: "new",
         onChange: '- target: "#id"\n  properties:\n    a: 1',
         onReject: "transform:\n  value: <% DATA.message %>",
+        lazy: true,
       },
       {
         value: [],
@@ -108,6 +111,7 @@ describe("computeItemToSubmit", () => {
           useProvider: "provider-a",
           if: "<% QUERY.page > 0 %>",
           args: ["P-1"],
+          lazy: true,
           transform: {
             value: "<% DATA %>",
           },

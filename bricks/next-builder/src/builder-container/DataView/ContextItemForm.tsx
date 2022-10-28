@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Input, Radio, Form, AutoComplete, FormItemProps } from "antd";
+import { Input, Radio, Form, AutoComplete, FormItemProps, Switch } from "antd";
 import {
   computeItemToSubmit,
   ContextItemFormValue,
@@ -225,8 +225,14 @@ export function ContextItemForm({
           >
             {getCodeEditorItem("value")}
           </Form.Item>
+          <Form.Item valuePropName="checked" {...getFormItemProps("lazy")}>
+            <Switch />
+          </Form.Item>
         </>
       )}
+      <Form.Item valuePropName="checked" {...getFormItemProps("track")}>
+        <Switch />
+      </Form.Item>
       <Form.Item {...getFormItemProps("if")}>
         {getCodeEditorItem("if")}
       </Form.Item>
