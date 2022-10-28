@@ -192,7 +192,7 @@ export class BrickTreeElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  searchBrick: { useBrick: UseBrickConf };
+  afterSearchBrick: { useBrick: UseBrickConf };
 
   /**
    * @kind boolean
@@ -261,7 +261,7 @@ export class BrickTreeElement extends UpdatingElement {
             onCheck={this._handleCheck}
             checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}
-            searchBrick={this.searchBrick}
+            afterSearchBrick={this.afterSearchBrick}
             showSpecificationTitleStyle={this.showSpecificationTitleStyle}
             defaultExpandAll={this.defaultExpandAll}
             deselectable={this.deselectable}

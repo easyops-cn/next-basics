@@ -42,8 +42,6 @@ import "./general-list";
 // !Lazy: import "./modal-confirm";
 import "./brick-quick-entries";
 import "./collapsible-card-item";
-// !Lazy: import "./single-field-edit";
-// !Lazy: import "./brick-placeholder";
 import "./general-carousel";
 import "./agent-status";
 import "./dynamic-content";

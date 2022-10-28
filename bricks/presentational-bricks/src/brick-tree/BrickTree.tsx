@@ -181,7 +181,7 @@ export interface BrickTreeProps {
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ): void;
   suffixBrick?: { useBrick: UseBrickConf };
-  searchBrick?: { useBrick: UseBrickConf };
+  afterSearchBrick?: { useBrick: UseBrickConf };
   showSpecificationTitleStyle?: boolean;
   defaultExpandAll?: boolean;
   deselectable?: boolean;
@@ -201,7 +201,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
     checkAllEnabled,
     checkedFilterConfig: { field, value, operator } = {},
     suffixBrick,
-    searchBrick,
+    afterSearchBrick,
     showSpecificationTitleStyle,
     defaultExpandAll,
     deselectable,
@@ -370,9 +370,9 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
             style={{ marginBottom: 8 }}
             data-testid="search-input"
           />
-          {!isEmpty(searchBrick?.useBrick) && (
+          {!isEmpty(afterSearchBrick?.useBrick) && (
             <BrickAsComponent
-              useBrick={searchBrick?.useBrick}
+              useBrick={afterSearchBrick?.useBrick}
             ></BrickAsComponent>
           )}
         </div>
