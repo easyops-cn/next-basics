@@ -38,10 +38,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         if (typeof brick === "string") {
           if (brick === "basic-bricks.script-brick") {
             usingScriptBrick = true;
-          } else if (
-            providerBrickRegExp.test(brick) &&
-            !warnedProviders.has(brick)
-          ) {
+          } else if (providerBrickRegExp.test(brick)) {
             warnedProviders.add(brick);
           }
         }
@@ -50,11 +47,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       case "EventHandler": {
         const { target } = node.raw as CustomBrickEventHandler;
         if (typeof target === "string") {
-          if (
-            target !== "_self" &&
-            tagNameAsTargetRegExp.test(target) &&
-            !warnedTargets.has(target)
-          ) {
+          if (target !== "_self" && tagNameAsTargetRegExp.test(target)) {
             warnedTargets.add(target);
           }
         }
@@ -67,7 +60,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const warnedUsingCtxTemplates: string[] = [];
   if (Array.isArray(customTemplates)) {
     for (const tpl of customTemplates) {
-      const contexts: string[] = [];
+      const contexts = new Set<string>();
       visitStoryboardExpressions(
         [tpl.bricks, tpl.state],
         (node, parent) => {
@@ -82,26 +75,28 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
                 !memberNode.computed &&
                 memberNode.property.type === "Identifier"
               ) {
-                contexts.push(`CTX.${memberNode.property.name}`);
+                contexts.add(`CTX.${memberNode.property.name}`);
               } else if (
                 memberNode.computed &&
                 (memberNode.property as any).type === "Literal" &&
                 typeof (memberNode.property as any).value === "string"
               ) {
-                contexts.push(`CTX[${(memberNode.property as any).raw}]`);
+                contexts.add(`CTX[${(memberNode.property as any).raw}]`);
               } else {
-                contexts.push(`CTX[...]`);
+                contexts.add(`CTX[...]`);
               }
             } else {
-              contexts.push("CTX");
+              contexts.add("CTX");
             }
           }
         },
         "CTX"
       );
 
-      if (contexts.length > 0) {
-        warnedUsingCtxTemplates.push(`${tpl.name}: ${contexts.join(", ")}`);
+      if (contexts.size > 0) {
+        warnedUsingCtxTemplates.push(
+          `${tpl.name}: ${[...contexts].join(", ")}`
+        );
       }
     }
   }
