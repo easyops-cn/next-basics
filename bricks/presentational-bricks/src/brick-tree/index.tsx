@@ -184,6 +184,17 @@ export class BrickTreeElement extends UpdatingElement {
   suffixBrick: { useBrick: UseBrickConf };
 
   /**
+   * @kind {useBrick:[UseBrickConf](http://docs.developers.easyops.cn/docs/api-reference/brick-types.usebrickconf)}
+   * @required false
+   * @default -
+   * @description 搜索框右边的自定义项，当`searchable`为true时生效
+   */
+  @property({
+    attribute: false,
+  })
+  searchBrick: { useBrick: UseBrickConf };
+
+  /**
    * @kind boolean
    * @required false
    * @default `false`
@@ -250,6 +261,7 @@ export class BrickTreeElement extends UpdatingElement {
             onCheck={this._handleCheck}
             checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}
+            searchBrick={this.searchBrick}
             showSpecificationTitleStyle={this.showSpecificationTitleStyle}
             defaultExpandAll={this.defaultExpandAll}
             deselectable={this.deselectable}

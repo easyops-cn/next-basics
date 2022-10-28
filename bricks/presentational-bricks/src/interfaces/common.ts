@@ -3,6 +3,7 @@ export interface EasyopsEmptyProps {
   description?: string;
   imageStyle?: React.CSSProperties;
   illustration?: IllustrationProps;
+  noImage?: boolean;
 }
 
 export interface IllustrationProps {
