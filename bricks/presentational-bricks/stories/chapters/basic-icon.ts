@@ -53,8 +53,8 @@ export const BasicIconStory: Story = {
         },
       ],
       title: {
-        en: "基础图标(带基本参数)",
-        zh: "basic-icon(with base argumnts)",
+        en: "basic-icon(with base argumnts)",
+        zh: "基础图标(带基本参数)",
       },
     },
     {
