@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.202.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.201.0...@next-bricks/next-builder@1.202.0) (2022-10-28)
+
+
+### Features
+
+* support setting track and lazy in context ([c21ec6f](https://github.com/easyops-cn/next-basics/commit/c21ec6f0c9292f3a9cac771717bcad1b8e493562))
+
+
+
+
+
 # [1.201.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.200.3...@next-bricks/next-builder@1.201.0) (2022-10-28)
 
 
