@@ -19,6 +19,7 @@ interface contextItemBaseConf {
   value?: string;
   if?: string;
   onChange?: string;
+  track?: boolean;
 }
 
 interface contextItemValueConf extends contextItemBaseConf {
@@ -29,6 +30,7 @@ interface contextResolveBaseConf extends contextItemBaseConf {
   resolveIf?: string;
   args?: string;
   transform?: string;
+  lazy?: boolean;
 }
 
 interface contextItemResolveConf extends contextResolveBaseConf {
@@ -139,6 +141,7 @@ export function computeItemToSubmit(
     }
     return {
       name: contextValue.name,
+      track: contextValue.track,
       ...computedFields,
     };
   } else {
@@ -177,10 +180,12 @@ export function computeItemToSubmit(
         args: computedFields.args,
         transform: computedFields.transform,
         onReject: computedFields.onReject,
+        lazy: contextValue.lazy,
       },
       value: computedFields.value,
       if: computedFields.if,
       onChange: computedFields.onChange,
+      track: contextValue.track,
     };
   }
 }

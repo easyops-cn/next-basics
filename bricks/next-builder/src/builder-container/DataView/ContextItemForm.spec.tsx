@@ -27,6 +27,7 @@ describe("ContextItemForm", () => {
       <Component
         data={{
           name: "data-a",
+          track: true,
           resolve: {
             useProvider: "provider-a",
             args: ["arg1"],
@@ -44,7 +45,7 @@ describe("ContextItemForm", () => {
         onContextItemUpdate={onContextItemUpdate}
       />
     );
-    expect(wrapper.find(Form.Item).length).toBe(10);
+    expect(wrapper.find(Form.Item).length).toBe(12);
 
     mockUseBuilderUIContext.mockReturnValue({
       providerList: ["provider-a", "provider-b"],
@@ -99,14 +100,14 @@ describe("ContextItemForm", () => {
         value: "value",
       },
     } as RadioChangeEvent);
-    expect(wrapper.find(Form.Item).length).toBe(5);
+    expect(wrapper.find(Form.Item).length).toBe(6);
     wrapper.setProps({
       data: {
         name: "data-b",
         value: "<% QUERY.objectId %>",
       },
     });
-    expect(wrapper.find(Form.Item).length).toBe(5);
+    expect(wrapper.find(Form.Item).length).toBe(6);
     expect(wrapper.find(Radio).children().length).toBe(3);
 
     wrapper.setProps({
@@ -118,6 +119,7 @@ describe("ContextItemForm", () => {
           args: "- arg1\n",
           if: "false\n",
           transform: "value: <% DATA %>\n",
+          lazy: true,
         },
       },
     });
