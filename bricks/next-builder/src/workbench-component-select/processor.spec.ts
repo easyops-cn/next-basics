@@ -617,6 +617,9 @@ describe("processor", () => {
               },
             },
           ],
+          thumbnail: {
+            imgSrc: "../images/default.svg",
+          },
         },
         {
           id: "presentational-bricks-widgets.card-item-with-description-drawer",
@@ -807,6 +810,9 @@ describe("processor", () => {
             "basic-bricks.general-button",
             "presentational-bricks.brick-link",
           ],
+          thumbnail: {
+            imgSrc: "../images/default.svg",
+          },
         },
         {
           id: "presentational-bricks-widgets.general-search-no-update-query",
@@ -852,6 +858,21 @@ describe("processor", () => {
               "selfBrick",
               [
                 {
+                  id: "basic-bricks.general-button[default]",
+                  title: "默认按钮",
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-button",
+                      properties: {
+                        buttonType: "default",
+                      },
+                    },
+                  ],
+                  thumbnail: {
+                    imgSrc: "../images/default.svg",
+                  },
+                },
+                {
                   id: "basic-bricks.general-button[primary]",
                   title: "主按钮",
                   bricks: [
@@ -863,62 +884,11 @@ describe("processor", () => {
                     },
                   ],
                 },
-                {
-                  id: "basic-bricks.general-button[default]",
-                  title: "默认按钮",
-                  bricks: [
-                    {
-                      brick: "basic-bricks.general-button",
-                      properties: {
-                        buttonType: "default",
-                      },
-                    },
-                  ],
-                },
               ],
             ],
             [
               "scene",
               [
-                {
-                  id: "basic-bricks-widgets.general-button-mix",
-                  title: "混合按钮",
-                  bricks: [
-                    {
-                      brick: "basic-bricks.general-card",
-                      slots: {
-                        "": {
-                          type: "bricks",
-                          bricks: [
-                            {
-                              brick: "basic-bricks.general-button",
-                              properties: {
-                                buttonType: "primary",
-                              },
-                            },
-                            {
-                              brick: "basic-bricks.general-custom-buttons",
-                              properties: {
-                                alignment: "end",
-                                customButtons: [
-                                  {
-                                    buttonType: "primary",
-                                    eventName: "button-create",
-                                    text: "新建",
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    },
-                  ],
-                  useInBricks: [
-                    "basic-bricks.general-custom-buttons",
-                    "basic-bricks.general-button",
-                  ],
-                },
                 {
                   id: "presentational-bricks-widgets.card-item-with-description-drawer",
                   title: "带描述抽屉的卡片项",
@@ -1111,6 +1081,48 @@ describe("processor", () => {
                     "basic-bricks.general-button",
                     "presentational-bricks.brick-link",
                   ],
+                  thumbnail: {
+                    imgSrc: "../images/default.svg",
+                  },
+                },
+                {
+                  id: "basic-bricks-widgets.general-button-mix",
+                  title: "混合按钮",
+                  bricks: [
+                    {
+                      brick: "basic-bricks.general-card",
+                      slots: {
+                        "": {
+                          type: "bricks",
+                          bricks: [
+                            {
+                              brick: "basic-bricks.general-button",
+                              properties: {
+                                buttonType: "primary",
+                              },
+                            },
+                            {
+                              brick: "basic-bricks.general-custom-buttons",
+                              properties: {
+                                alignment: "end",
+                                customButtons: [
+                                  {
+                                    buttonType: "primary",
+                                    eventName: "button-create",
+                                    text: "新建",
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                  useInBricks: [
+                    "basic-bricks.general-custom-buttons",
+                    "basic-bricks.general-button",
+                  ],
                 },
               ],
             ],
@@ -1186,6 +1198,9 @@ describe("processor", () => {
               [
                 {
                   id: "presentational-bricks-widgets.card-item-with-description-drawer",
+                  thumbnail: {
+                    imgSrc: "../images/default.svg",
+                  },
                   title: "带描述抽屉的卡片项",
                   bricks: [
                     {
