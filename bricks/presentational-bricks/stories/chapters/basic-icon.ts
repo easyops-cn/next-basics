@@ -58,16 +58,20 @@ export const BasicIconStory: Story = {
       },
     },
     {
-      brick: "presentational-bricks.basic-icon",
-      properties: {
-        icon: {
-          imgSrc: basicIconSvg,
-          imgStyle: {
-            borderRadius: "10px",
+      bricks: [
+        {
+          brick: "presentational-bricks.basic-icon",
+          properties: {
+            icon: {
+              imgSrc: basicIconSvg,
+              imgStyle: {
+                borderRadius: "10px",
+              },
+            },
+            size: "100px",
           },
         },
-        size: "100px",
-      },
+      ],
       snippetId: "presentational-bricks.basic-icon[with-imgSrc]",
       title: {
         zh: "基础图标(带imgSrc)",
