@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { brickTagSvg } from "../images";
+import { brickTagDisabledWithCloseSvg } from "../images";
+import { brickTagNormalSvg } from "../images";
 export const BrickTagStory: Story = {
   storyId: "presentational-bricks.brick-tag",
   category: "display-component",
@@ -33,6 +35,9 @@ export const BrickTagStory: Story = {
         zh: "标签支持多彩标签、可选择标签、可删除标签。",
         en: "",
       },
+      thumbnail: {
+        imgSrc: brickTagNormalSvg,
+      },
       bricks: [
         {
           brick: "presentational-bricks.brick-tag",
@@ -50,6 +55,9 @@ export const BrickTagStory: Story = {
       title: {
         zh: "禁用可删除标签",
         en: "",
+      },
+      thumbnail: {
+        imgSrc: brickTagDisabledWithCloseSvg,
       },
       bricks: [
         {
@@ -97,7 +105,7 @@ export const BrickTagStory: Story = {
     },
     {
       description: {
-        title: "基本",
+        title: "多种颜色",
         message: "标签支持多彩标签、可选择标签、可删除标签。",
       },
       brick: "div",

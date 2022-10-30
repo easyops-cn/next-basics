@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { generalLabelSvg } from "../images";
+import { generalLabelPrefixIconSvg } from "../images";
 export const GeneralLabelStory: Story = {
   storyId: "presentational-bricks.general-label",
   category: "text",
@@ -22,6 +23,9 @@ export const GeneralLabelStory: Story = {
       title: {
         zh: "文本信息展示(后置图标)",
         en: "",
+      },
+      thumbnail: {
+        imgSrc: generalLabelPrefixIconSvg,
       },
       bricks: [
         {

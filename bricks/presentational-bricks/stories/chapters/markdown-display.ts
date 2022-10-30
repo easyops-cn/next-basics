@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { markdownDisplaySvg } from "../images";
+import { markdownDisplayNormalSvg } from "../images";
 export const MarkdownDisplayStory: Story = {
   storyId: "presentational-bricks.markdown-display",
   category: "text",
@@ -22,6 +23,9 @@ export const MarkdownDisplayStory: Story = {
       title: {
         en: "",
         zh: "基础Markdown信息展示",
+      },
+      thumbnail: {
+        imgSrc: markdownDisplayNormalSvg,
       },
       bricks: [
         {

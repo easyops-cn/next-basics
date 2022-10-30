@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickIllustrationSvg } from "../images";
+import { brickIllustrationGuideSvg } from "../images";
 export const BrickIllustrationStory: Story = {
   storyId: "presentational-bricks.brick-illustration",
   category: "feedback-and-tooltip",
@@ -27,6 +28,9 @@ export const BrickIllustrationStory: Story = {
       message: {
         zh: "此类型插画一般与`header`属性配合使用,`mode: guide`",
         en: "",
+      },
+      thumbnail: {
+        imgSrc: brickIllustrationGuideSvg,
       },
       bricks: [
         {

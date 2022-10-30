@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { brickTableSvg } from "../images";
+import { brickTableNormalSvg } from "../images";
+import { brickTableDraggableSortSvg } from "../images";
 export const BrickTableStory: Story = {
   storyId: "presentational-bricks.brick-table",
   category: "table",
@@ -26,6 +28,9 @@ export const BrickTableStory: Story = {
       message: {
         zh: "注意对表格数据进行筛选时，需将页码恢复为第一页",
         en: "",
+      },
+      thumbnail: {
+        imgSrc: brickTableNormalSvg,
       },
       bricks: [
         {
@@ -845,6 +850,9 @@ export const BrickTableStory: Story = {
       title: {
         zh: "展开和排序",
         en: "",
+      },
+      thumbnail: {
+        imgSrc: brickTableDraggableSortSvg,
       },
       bricks: [
         {

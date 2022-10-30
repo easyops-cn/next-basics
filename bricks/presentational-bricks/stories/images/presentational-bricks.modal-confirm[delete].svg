@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks-widgets.delete-confirm-modal</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="105" height="55" rx="4"></rect>
+        <rect id="path-3" x="0" y="0" width="93" height="43" rx="2"></rect>
+        <filter x="-15.1%" y="-23.3%" width="130.1%" height="165.1%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.6   0 0 0 0 0.6   0 0 0 0 0.6  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图七" transform="translate(-1072.000000, -1786.000000)">
+            <g id="presentational-bricks-widgets.delete-confirm-modal" transform="translate(1072.000000, 1786.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="矩形备份-46"></g>
+                <g id="编组-11" mask="url(#mask-2)">
+                    <g transform="translate(6.000000, 6.000000)">
+                        <g id="矩形备份-46" stroke="none" fill="none">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        </g>
+                        <rect id="矩形备份-76" stroke="#F4F5F9" stroke-width="1" fill="none" x="18.5" y="20.5" width="69" height="9" rx="1"></rect>
+                        <rect id="矩形备份-104" stroke="none" fill="#F24C25" fill-rule="evenodd" x="6" y="4" width="9" height="9" rx="4.5"></rect>
+                        <rect id="矩形" stroke="none" fill="#D6DBEC" fill-rule="evenodd" x="19" y="5" width="40" height="7" rx="1"></rect>
+                        <rect id="矩形备份-22" stroke="none" fill="#F4F5F9" fill-rule="evenodd" x="73" y="33" width="14" height="6" rx="1"></rect>
+                        <rect id="矩形备份-24" stroke="none" fill="#D6DBEC" fill-rule="evenodd" x="57" y="33" width="14" height="6" rx="1"></rect>
+                        <g id="编组-7" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(19.000000, 14.000000)">
+                            <rect id="矩形" fill="#D6DBEC" x="0" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份" fill="#D6DBEC" x="2" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-2" fill="#D6DBEC" x="4" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-3" fill="#D6DBEC" x="8" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-6" fill="#D6DBEC" x="10" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-7" fill="#D6DBEC" x="6" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-8" fill="#D6DBEC" x="12" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-9" fill="#D6DBEC" x="14" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-10" fill="#D6DBEC" x="16" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-11" fill="#D6DBEC" x="18" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-12" fill="#D6DBEC" x="20" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-13" fill="#D6DBEC" x="22" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-14" fill="#F24C25" x="24" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-18" fill="#F24C25" x="30" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-30" fill="#D6DBEC" x="36" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-33" fill="#D6DBEC" x="42" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-36" fill="#D6DBEC" x="48" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-15" fill="#F24C25" x="26" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-28" fill="#D6DBEC" x="32" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-31" fill="#D6DBEC" x="38" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-34" fill="#D6DBEC" x="44" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-37" fill="#D6DBEC" x="50" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-16" fill="#F24C25" x="28" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-29" fill="#D6DBEC" x="34" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-32" fill="#D6DBEC" x="40" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-35" fill="#D6DBEC" x="46" y="0" width="1" height="4"></rect>
+                            <rect id="矩形备份-38" fill="#D6DBEC" x="52" y="0" width="1" height="4"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

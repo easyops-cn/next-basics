@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickLinkSvg } from "../images";
+import { brickLinkNormalSvg } from "../images";
 export const BrickLinkStory: Story = {
   storyId: "presentational-bricks.brick-link",
   category: "text",
@@ -22,6 +23,9 @@ export const BrickLinkStory: Story = {
       title: {
         zh: "通用链接",
         en: "",
+      },
+      thumbnail: {
+        imgSrc: brickLinkNormalSvg,
       },
       bricks: [
         {

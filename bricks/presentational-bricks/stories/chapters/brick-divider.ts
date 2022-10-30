@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickDividerSvg } from "../images";
+import { brickDividerNormalSvg } from "../images";
 export const BrickDividerStory: Story = {
   storyId: "presentational-bricks.brick-divider",
   category: "container-display",
@@ -22,6 +23,9 @@ export const BrickDividerStory: Story = {
       title: {
         zh: "Basic divider",
         en: "基础分割线",
+      },
+      thumbnail: {
+        imgSrc: brickDividerNormalSvg,
       },
       bricks: [
         {

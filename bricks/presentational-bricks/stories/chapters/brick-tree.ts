@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickTreeSvg } from "../images";
+import { brickTreeNormalSvg } from "../images";
 export const BrickTreeStory: Story = {
   storyId: "presentational-bricks.brick-tree",
   type: "brick",
@@ -26,6 +27,9 @@ export const BrickTreeStory: Story = {
       message: {
         zh: "checkedKeys和configProps.checkable实现多选，expandedKeys可以设置默认展开项，configProps.showIcon设置是否显示图标（图标需要在dataSource中维护）",
         en: "",
+      },
+      thumbnail: {
+        imgSrc: brickTreeNormalSvg,
       },
       bricks: [
         {

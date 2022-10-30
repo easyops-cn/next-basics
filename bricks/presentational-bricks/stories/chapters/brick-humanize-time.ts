@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickHumanizeTimeSvg } from "../images";
+import { brickHumanizeTimeFullSvg } from "../images";
 export const BrickHumanizeTimeStory: Story = {
   storyId: "presentational-bricks.brick-humanize-time",
   category: "data-transform",
@@ -22,6 +23,9 @@ export const BrickHumanizeTimeStory: Story = {
       title: {
         en: "Humanize time(full)",
         zh: "人性化时间展示(完整)",
+      },
+      thumbnail: {
+        imgSrc: brickHumanizeTimeFullSvg,
       },
       bricks: [
         {
