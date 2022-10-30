@@ -1,6 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { easyViewSvg } from "../images";
-
+import { easyViewGridAreasSvg } from "../images";
+import { easyViewGridTemplateAreasSvg } from "../images";
 export const easyViewStory: Story = {
   storyId: "basic-bricks.easy-view",
   category: "container-layout",
@@ -206,6 +207,9 @@ export const easyViewStory: Story = {
         en: "Easy View Dividing By Grid Areas",
         zh: "由gridAreas划分区域的easy-view",
       },
+      thumbnail: {
+        imgSrc: easyViewGridAreasSvg,
+      },
     },
     {
       bricks: [
@@ -286,6 +290,9 @@ export const easyViewStory: Story = {
       title: {
         en: "Easy View Dividing By Grid Template Areas",
         zh: "由grid-template-areas划分区域的easy-view",
+      },
+      thumbnail: {
+        imgSrc: easyViewGridTemplateAreasSvg,
       },
     },
   ],

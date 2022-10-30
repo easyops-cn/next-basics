@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="107px" height="59px" viewBox="0 0 107 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>basic-bricks-widgets.general-custom-buttons-with-dropdown-button</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="49" height="22" rx="1"></rect>
+        <filter x="-28.6%" y="-45.5%" width="157.1%" height="227.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.6   0 0 0 0 0.6   0 0 0 0 0.6  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图七" transform="translate(-48.000000, -1391.000000)">
+            <g id="basic-bricks-widgets.general-custom-buttons-with-dropdown-button" transform="translate(48.000000, 1391.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-10" transform="translate(7.000000, 9.000000)">
+                    <g id="编组-8">
+                        <rect id="矩形" fill="#1A7AFF" x="0" y="0" width="28" height="12" rx="1"></rect>
+                        <rect id="矩形备份" stroke="#D6DBEC" x="32" y="0" width="28" height="12" rx="1"></rect>
+                        <rect id="矩形备份-2" stroke="#D6DBEC" x="64" y="0" width="28" height="12" rx="1"></rect>
+                        <polyline id="路径-2" stroke="#778DC3" stroke-linecap="round" stroke-linejoin="round" transform="translate(85.200000, 6.000000) rotate(-270.000000) translate(-85.200000, -6.000000) " points="83.4 3 87 6 83.4 9"></polyline>
+                    </g>
+                    <g id="编组-9" transform="translate(43.000000, 16.000000)">
+                        <g id="矩形备份-104">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <rect id="矩形" fill="#D6DBEC" x="2" y="2" width="45" height="8" rx="1"></rect>
+                        <rect id="矩形备份-4" fill="#F4F5F9" x="2" y="12" width="45" height="8" rx="1"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
