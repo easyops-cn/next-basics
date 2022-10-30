@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { generalButtonsSvg } from "../images";
+import { generalButtonsBasicSvg } from "../images";
 export const generalButtonStory: Story = {
   storyId: "forms.general-buttons",
   type: "brick",
@@ -40,6 +41,9 @@ export const generalButtonStory: Story = {
         },
       ],
       snippetId: "forms.general-buttons[basic]",
+      thumbnail: {
+        imgSrc: generalButtonsBasicSvg,
+      },
       title: {
         en: "Basic General Buttons",
         zh: "基础表单提交按钮",

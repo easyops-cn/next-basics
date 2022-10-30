@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
 import { generalRadioSvg } from "../images";
+import { generalRadioBasicSvg } from "../images";
+import { generalRadioButtonSvg } from "../images";
+import { generalRadioIconSvg } from "../images";
+import { generalRadioWithIconSvg } from "../images";
 export const GeneralRadioStory: Story = {
   storyId: "forms.general-radio",
   category: "form-input-basic",
@@ -41,6 +45,9 @@ export const GeneralRadioStory: Story = {
         en: "Basic General Radio",
         zh: "基础单选框",
       },
+      thumbnail: {
+        imgSrc: generalRadioBasicSvg,
+      },
     },
     {
       bricks: [
@@ -78,6 +85,9 @@ export const GeneralRadioStory: Story = {
       title: {
         en: "Button General Radio",
         zh: "按钮单选框",
+      },
+      thumbnail: {
+        imgSrc: generalRadioButtonSvg,
       },
     },
     {
@@ -144,6 +154,9 @@ export const GeneralRadioStory: Story = {
       title: {
         en: "General Radio with Icon",
         zh: "带图标选项的单选框",
+      },
+      thumbnail: {
+        imgSrc: generalRadioWithIconSvg,
       },
     },
     {
@@ -450,6 +463,9 @@ export const GeneralRadioStory: Story = {
       title: {
         en: "Icon General Radio",
         zh: "图标单选框",
+      },
+      thumbnail: {
+        imgSrc: generalRadioIconSvg,
       },
     },
     {
