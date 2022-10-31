@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.244.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.243.0...@next-bricks/forms@1.244.0) (2022-10-31)
+
+
+### Features
+
+* **select:** useBackend支持默认值搜索 ([6fbbb79](https://github.com/easyops-cn/next-basics/commit/6fbbb79b62a9422a6ea004adb3aa63bfd120ce5e))
+
+
+
+
+
 # [1.243.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.242.1...@next-bricks/forms@1.243.0) (2022-10-31)
 
 
