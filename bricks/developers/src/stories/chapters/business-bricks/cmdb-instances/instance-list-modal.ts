@@ -299,7 +299,7 @@ export const story: Story = {
   },
   actions: [
     {
-      text: "open()",
+      text: "Open Modal",
       method: "open",
     },
   ],

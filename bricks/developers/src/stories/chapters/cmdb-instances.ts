@@ -329,7 +329,7 @@ const chapter: Chapter = {
       },
       actions: [
         {
-          text: "open()",
+          text: "Open Modal",
           method: "open",
         },
         {

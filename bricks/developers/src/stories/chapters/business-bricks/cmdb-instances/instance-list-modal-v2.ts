@@ -54,7 +54,7 @@ export const story: Story = {
       ],
       actions: [
         {
-          text: "open Modal",
+          text: "Open Modal",
           method: "open",
         },
       ],

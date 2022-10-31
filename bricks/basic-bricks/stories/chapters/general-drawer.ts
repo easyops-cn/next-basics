@@ -123,7 +123,7 @@ export const generalDrawerStory: Story = {
       thumbnail: generalDrawerBasicSvg,
       actions: [
         {
-          text: "open()",
+          text: "Open Drawer",
           method: "open",
         },
       ],

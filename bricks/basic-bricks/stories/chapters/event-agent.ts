@@ -44,7 +44,7 @@ export const eventAgentStory: Story = {
       },
       actions: [
         {
-          text: "dispatch()",
+          text: "Trigger Event",
           method: "trigger",
           args: [
             {

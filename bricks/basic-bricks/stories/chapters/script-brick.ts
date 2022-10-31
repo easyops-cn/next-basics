@@ -39,7 +39,7 @@ export const scriptBrickStory: Story = {
       },
       actions: [
         {
-          text: "execute()",
+          text: "Execute Script",
           method: "execute",
         },
       ],

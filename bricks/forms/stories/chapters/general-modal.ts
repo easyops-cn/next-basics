@@ -87,7 +87,7 @@ export const GeneralModalStory: Story = {
       },
       actions: [
         {
-          text: "open()",
+          text: "Open Modal",
           method: "open",
         },
       ],
