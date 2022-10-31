@@ -24,9 +24,7 @@ export const BrickResultStory: Story = {
         zh: "成功结果",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickResultSuccessSvg,
-      },
+      thumbnail: brickResultSuccessSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-result",

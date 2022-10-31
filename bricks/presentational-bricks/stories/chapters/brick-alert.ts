@@ -34,9 +34,7 @@ export const BrickAlertStory: Story = {
         en: "Success alert",
         zh: "成功提示",
       },
-      thumbnail: {
-        imgSrc: brickAlertSuccessTipsSvg,
-      },
+      thumbnail: brickAlertSuccessTipsSvg,
     },
     {
       snippetId: "presentational-bricks.brick-alert[info-tips-with-icon]",
@@ -77,9 +75,7 @@ export const BrickAlertStory: Story = {
         en: "Warn Alert with close",
         zh: "警告提示带关闭按钮",
       },
-      thumbnail: {
-        imgSrc: brickAlertWarnTipsWithCloseSvg,
-      },
+      thumbnail: brickAlertWarnTipsWithCloseSvg,
     },
     {
       brick: "presentational-bricks.brick-alert",

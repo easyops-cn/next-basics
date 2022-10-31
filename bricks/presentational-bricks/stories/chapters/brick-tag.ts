@@ -35,9 +35,7 @@ export const BrickTagStory: Story = {
         zh: "标签支持多彩标签、可选择标签、可删除标签。",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickTagNormalSvg,
-      },
+      thumbnail: brickTagNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-tag",
@@ -56,9 +54,7 @@ export const BrickTagStory: Story = {
         zh: "禁用可删除标签",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickTagDisabledWithCloseSvg,
-      },
+      thumbnail: brickTagDisabledWithCloseSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-tag",

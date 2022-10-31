@@ -24,9 +24,7 @@ export const BrickQuickEntriesStory: Story = {
         zh: "快速入口",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickQuickEntriesNormalSvg,
-      },
+      thumbnail: brickQuickEntriesNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-quick-entries",

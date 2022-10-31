@@ -29,9 +29,7 @@ export const BrickTableStory: Story = {
         zh: "注意对表格数据进行筛选时，需将页码恢复为第一页",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickTableNormalSvg,
-      },
+      thumbnail: brickTableNormalSvg,
       bricks: [
         {
           description: {
@@ -851,9 +849,7 @@ export const BrickTableStory: Story = {
         zh: "展开和排序",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickTableDraggableSortSvg,
-      },
+      thumbnail: brickTableDraggableSortSvg,
       bricks: [
         {
           description: {

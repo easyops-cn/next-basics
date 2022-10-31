@@ -29,9 +29,7 @@ export const BrickIllustrationStory: Story = {
         zh: "此类型插画一般与`header`属性配合使用,`mode: guide`",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickIllustrationGuideSvg,
-      },
+      thumbnail: brickIllustrationGuideSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-illustration",

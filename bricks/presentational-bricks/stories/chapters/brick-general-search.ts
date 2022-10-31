@@ -25,9 +25,7 @@ export const BrickGeneralSearchStory: Story = {
         en: "Search input(not update url)",
         zh: "搜索框(不更新url)",
       },
-      thumbnail: {
-        imgSrc: brickGeneralSearchNotUpdateUrlSvg,
-      },
+      thumbnail: brickGeneralSearchNotUpdateUrlSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-general-search",
@@ -49,9 +47,7 @@ export const BrickGeneralSearchStory: Story = {
         en: "Search input(update url)",
         zh: "搜索框(更新url)",
       },
-      thumbnail: {
-        imgSrc: brickGeneralSearchUpdateUrlSvg,
-      },
+      thumbnail: brickGeneralSearchUpdateUrlSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-general-search",

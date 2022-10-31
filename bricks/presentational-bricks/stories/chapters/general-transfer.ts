@@ -24,9 +24,7 @@ export const GeneralTransferStory: Story = {
         en: "",
         zh: "基础双栏穿梭选择框",
       },
-      thumbnail: {
-        imgSrc: generalTransferNormalSvg,
-      },
+      thumbnail: generalTransferNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.general-transfer",

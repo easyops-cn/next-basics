@@ -24,9 +24,7 @@ export const BrickValueMappingStory: Story = {
         zh: "映射为多彩标签",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickValueMappingNormalSvg,
-      },
+      thumbnail: brickValueMappingNormalSvg,
       message: {
         zh: "同时可以设置是否触发点击事件",
         en: "",

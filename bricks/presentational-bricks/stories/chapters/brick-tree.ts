@@ -28,9 +28,7 @@ export const BrickTreeStory: Story = {
         zh: "checkedKeys和configProps.checkable实现多选，expandedKeys可以设置默认展开项，configProps.showIcon设置是否显示图标（图标需要在dataSource中维护）",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickTreeNormalSvg,
-      },
+      thumbnail: brickTreeNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-tree",

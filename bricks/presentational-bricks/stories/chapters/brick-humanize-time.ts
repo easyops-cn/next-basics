@@ -24,9 +24,7 @@ export const BrickHumanizeTimeStory: Story = {
         en: "Humanize time(full)",
         zh: "人性化时间展示(完整)",
       },
-      thumbnail: {
-        imgSrc: brickHumanizeTimeFullSvg,
-      },
+      thumbnail: brickHumanizeTimeFullSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-humanize-time",

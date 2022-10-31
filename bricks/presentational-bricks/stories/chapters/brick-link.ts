@@ -24,9 +24,7 @@ export const BrickLinkStory: Story = {
         zh: "通用链接",
         en: "",
       },
-      thumbnail: {
-        imgSrc: brickLinkNormalSvg,
-      },
+      thumbnail: brickLinkNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-link",

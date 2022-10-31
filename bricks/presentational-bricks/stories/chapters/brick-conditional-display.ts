@@ -24,9 +24,7 @@ export const BrickConditionalDisplayStory: Story = {
         zh: "条件展示文本",
         en: "Conditional display text",
       },
-      thumbnail: {
-        imgSrc: brickConditionalDisplayNormalSvg,
-      },
+      thumbnail: brickConditionalDisplayNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-conditional-display",

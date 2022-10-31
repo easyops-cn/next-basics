@@ -24,9 +24,7 @@ export const MarkdownDisplayStory: Story = {
         en: "",
         zh: "基础Markdown信息展示",
       },
-      thumbnail: {
-        imgSrc: markdownDisplayNormalSvg,
-      },
+      thumbnail: markdownDisplayNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.markdown-display",

@@ -24,9 +24,7 @@ export const DatetimeSelectorStory: Story = {
         zh: "基础默认时间范围选项",
         en: "",
       },
-      thumbnail: {
-        imgSrc: dateTimeSelectorNormalSvg,
-      },
+      thumbnail: dateTimeSelectorNormalSvg,
       bricks: [
         {
           description: {

@@ -24,9 +24,7 @@ export const BrickDescriptionsStory: Story = {
         zh: "描述列表",
         en: "Description list",
       },
-      thumbnail: {
-        imgSrc: brickDescriptionsNormalSvg,
-      },
+      thumbnail: brickDescriptionsNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-descriptions",

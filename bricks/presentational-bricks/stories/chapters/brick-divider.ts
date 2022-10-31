@@ -24,9 +24,7 @@ export const BrickDividerStory: Story = {
         zh: "Basic divider",
         en: "基础分割线",
       },
-      thumbnail: {
-        imgSrc: brickDividerNormalSvg,
-      },
+      thumbnail: brickDividerNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-divider",

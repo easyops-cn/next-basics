@@ -26,9 +26,7 @@ export const ModalConfirmStory: Story = {
         en: "Confirm modal",
         zh: "确认弹窗",
       },
-      thumbnail: {
-        imgSrc: modalConfirmNormalSvg,
-      },
+      thumbnail: modalConfirmNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.modal-confirm",
@@ -60,9 +58,7 @@ export const ModalConfirmStory: Story = {
         en: "Info modal",
         zh: "提醒弹窗",
       },
-      thumbnail: {
-        imgSrc: modalConfirmInfoSvg,
-      },
+      thumbnail: modalConfirmInfoSvg,
       bricks: [
         {
           brick: "presentational-bricks.modal-confirm",
@@ -99,9 +95,7 @@ export const ModalConfirmStory: Story = {
         en: "Delete modal",
         zh: "删除弹窗",
       },
-      thumbnail: {
-        imgSrc: modalConfirmDeleteSvg,
-      },
+      thumbnail: modalConfirmDeleteSvg,
       bricks: [
         {
           brick: "presentational-bricks.modal-confirm",
