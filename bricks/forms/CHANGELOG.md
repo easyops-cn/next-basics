@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.242.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.242.0...@next-bricks/forms@1.242.1) (2022-10-31)
+
+
+### Bug Fixes
+
+* ObjectAttrStruct弹窗点击遮罩层不能关闭  Closes INSTANCE-3094 ([d060934](https://github.com/easyops-cn/next-basics/commit/d0609344b6824d35f2947bf76459372eedb5ec35))
+
+
+
+
+
 # [1.242.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.241.0...@next-bricks/forms@1.242.0) (2022-10-28)
 
 
