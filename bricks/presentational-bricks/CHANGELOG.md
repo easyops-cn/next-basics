@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.268.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.268.0...@next-bricks/presentational-bricks@1.268.1) (2022-10-31)
+
+
+### Bug Fixes
+
+* 给brickTree增加afterSearchBrick ([aa5621d](https://github.com/easyops-cn/next-basics/commit/aa5621dffcd86d430644a6cc3a21e2afa264dc0d))
+* 给brickTree增加searchBrick ([6ae438d](https://github.com/easyops-cn/next-basics/commit/6ae438dbd2da97a1e45255dbfd633da850875402))
+
+
+
+
+
 # [1.268.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.267.7...@next-bricks/presentational-bricks@1.268.0) (2022-10-28)
 
 

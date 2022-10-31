@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.204.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.203.0...@next-bricks/next-builder@1.204.0) (2022-10-31)
+
+
+### Features
+
+* update snippet processor ([407a455](https://github.com/easyops-cn/next-basics/commit/407a4558b0d600d9d1aba1cfc6af0827cfb912a8))
+
+
+
+
+
 # [1.203.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.202.0...@next-bricks/next-builder@1.203.0) (2022-10-28)
 
 
