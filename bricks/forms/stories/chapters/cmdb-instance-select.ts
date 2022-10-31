@@ -1,5 +1,10 @@
 import { Story } from "@next-core/brick-types";
 import { cmdbInstanceSelectSvg } from "../images";
+import { cmdbInstanceSelectCustomLabelSvg } from "../images";
+import { cmdbInstanceSelectBasicSvg } from "../images";
+import { cmdbInstanceSelectCustomQuerySvg } from "../images";
+import { cmdbInstanceSelectCustomStyleSvg } from "../images";
+import { cmdbInstanceSelectMultiSvg } from "../images";
 export const cmdbInstanceSelectStory: Story = {
   storyId: "forms.cmdb-instance-select",
   type: "brick",
@@ -44,6 +49,7 @@ export const cmdbInstanceSelectStory: Story = {
         en: "Basic CMDB Instance Select",
         zh: "基础CMDB实例下拉框",
       },
+      thumbnail: cmdbInstanceSelectBasicSvg,
     },
     {
       brick: "forms.general-select",
@@ -117,6 +123,7 @@ export const cmdbInstanceSelectStory: Story = {
         en: "CMDB Instance Select with Custom Label",
         zh: "带自定义字段的CMDB实例下拉框",
       },
+      thumbnail: cmdbInstanceSelectCustomLabelSvg,
     },
     {
       bricks: [
@@ -147,6 +154,7 @@ export const cmdbInstanceSelectStory: Story = {
         en: "Multi CMDB Instance Select",
         zh: "多选CMDB实例下拉框",
       },
+      thumbnail: cmdbInstanceSelectMultiSvg,
     },
     {
       bricks: [
@@ -168,6 +176,7 @@ export const cmdbInstanceSelectStory: Story = {
         en: "CMDB Instance Select with Custom Query",
         zh: "带自定义query的CMDB实例下拉框",
       },
+      thumbnail: cmdbInstanceSelectCustomQuerySvg,
     },
     {
       brick: "forms.cmdb-instance-select",
@@ -253,6 +262,7 @@ export const cmdbInstanceSelectStory: Story = {
         en: "CMDB Instance Select with Custom Style",
         zh: "带自定义样式的CMDB实例下拉框",
       },
+      thumbnail: cmdbInstanceSelectCustomStyleSvg,
     },
   ],
   previewColumns: 2,

@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { generalAutoCompleteSvg } from "../images";
+import { generalAutoCompleteBasicSvg } from "../images";
 export const autoCompleteStory: Story = {
   storyId: "forms.general-auto-complete",
   category: "form-input-basic",
@@ -45,6 +46,7 @@ export const autoCompleteStory: Story = {
         en: "Basic General Auto Complete",
         zh: "基础带候选项的输入框",
       },
+      thumbnail: generalAutoCompleteBasicSvg,
     },
     {
       brick: "forms.general-form",

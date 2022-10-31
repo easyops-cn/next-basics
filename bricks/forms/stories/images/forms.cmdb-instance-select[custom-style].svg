@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="57px" viewBox="0 0 105 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>forms-widgets.cmdb-instance-select-extra-search-key</title>
+    <defs>
+        <rect id="path-1" x="1" y="0" width="69" height="10" rx="1"></rect>
+        <rect id="path-2" x="0" y="0" width="71" height="22" rx="1"></rect>
+        <filter x="-19.7%" y="-45.5%" width="139.4%" height="227.3%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.6   0 0 0 0 0.6   0 0 0 0 0.6  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图八" transform="translate(-455.000000, -503.000000)">
+            <g id="forms-widgets.cmdb-instance-select-extra-search-key" transform="translate(455.000000, 503.000000)">
+                <rect id="矩形备份-46" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="编组-8" transform="translate(17.000000, 11.000000)">
+                    <rect id="矩形备份-5" fill="#D6DBEC" x="4" y="3" width="48" height="4" rx="1"></rect>
+                    <g id="矩形备份-76">
+                        <use stroke="#1A7AFF" stroke-width="2" xlink:href="#path-1"></use>
+                        <rect stroke="#C6DEFF" stroke-width="1" x="0.5" y="-0.5" width="70" height="11" rx="1"></rect>
+                    </g>
+                    <g id="通用图标/search-Line" transform="translate(60.000000, 1.500000)">
+                        <rect id="矩形" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="7" height="7"></rect>
+                        <path d="M6.21796875,5.84130859 L4.44267578,4.06601562 C4.71816406,3.70986328 4.8671875,3.27441406 4.8671875,2.81640625 C4.8671875,2.26816406 4.65322266,1.75410156 4.26630859,1.36650391 C3.87939453,0.97890625 3.36396484,0.765625 2.81640625,0.765625 C2.26884766,0.765625 1.75341797,0.979589844 1.36650391,1.36650391 C0.97890625,1.75341797 0.765625,2.26816406 0.765625,2.81640625 C0.765625,3.36396484 0.979589844,3.87939453 1.36650391,4.26630859 C1.75341797,4.65390625 2.26816406,4.8671875 2.81640625,4.8671875 C3.27441406,4.8671875 3.70917969,4.71816406 4.06533203,4.44335938 L5.840625,6.21796875 C5.8625,6.23984375 5.89804687,6.23984375 5.91992187,6.21796875 L6.21796875,5.92060547 C6.23984375,5.89873047 6.23984375,5.86318359 6.21796875,5.84130859 Z M3.89921875,3.89921875 C3.609375,4.18837891 3.22519531,4.34765625 2.81640625,4.34765625 C2.40761719,4.34765625 2.0234375,4.18837891 1.73359375,3.89921875 C1.44443359,3.609375 1.28515625,3.22519531 1.28515625,2.81640625 C1.28515625,2.40761719 1.44443359,2.02275391 1.73359375,1.73359375 C2.0234375,1.44443359 2.40761719,1.28515625 2.81640625,1.28515625 C3.22519531,1.28515625 3.61005859,1.44375 3.89921875,1.73359375 C4.18837891,2.0234375 4.34765625,2.40761719 4.34765625,2.81640625 C4.34765625,3.22519531 4.18837891,3.61005859 3.89921875,3.89921875 Z" id="形状" fill="#595959"></path>
+                    </g>
+                    <g id="编组-9" transform="translate(0.000000, 12.000000)">
+                        <g id="矩形备份-104">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        </g>
+                        <rect id="矩形" fill-opacity="0.3" fill="#52C41A" x="2" y="2" width="67" height="8" rx="1"></rect>
+                        <rect id="矩形备份-4" fill="#F4F5F9" x="2" y="12" width="67" height="8" rx="1"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

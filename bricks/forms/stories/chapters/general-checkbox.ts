@@ -1,5 +1,10 @@
 import { Story } from "@next-core/brick-types";
 import { generalCheckboxSvg } from "../images";
+import { generalCheckboxBasicSvg } from "../images";
+import { generalCheckboxGroupSvg } from "../images";
+import { generalCheckboxIconSvg } from "../images";
+import { generalCheckboxMultiColumnSvg } from "../images";
+import { generalCheckboxWithIconSvg } from "../images";
 export const GeneralCheckboxStory: Story = {
   storyId: "forms.general-checkbox",
   type: "brick",
@@ -40,6 +45,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Basic General Checkbox",
         zh: "基础多选框",
       },
+      thumbnail: generalCheckboxBasicSvg,
     },
     {
       bricks: [
@@ -164,6 +170,7 @@ export const GeneralCheckboxStory: Story = {
         en: "General Checkbox with Icon",
         zh: "带图标选项的多选框",
       },
+      thumbnail: generalCheckboxWithIconSvg,
     },
     {
       bricks: [
@@ -196,6 +203,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Multi Column General Checkbox",
         zh: "多列多选框",
       },
+      thumbnail: generalCheckboxMultiColumnSvg,
     },
     {
       bricks: [
@@ -252,6 +260,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Group General Checkbox",
         zh: "分组多选框",
       },
+      thumbnail: generalCheckboxGroupSvg,
     },
     {
       bricks: [
@@ -309,6 +318,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Icon General Checkbox",
         zh: "图标类型多选框",
       },
+      thumbnail: generalCheckboxIconSvg,
     },
     {
       bricks: [
