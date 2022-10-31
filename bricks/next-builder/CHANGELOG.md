@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.204.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.1...@next-bricks/next-builder@1.204.2) (2022-10-31)
+
+
+### Bug Fixes
+
+* fix create-route-with-theme ([beaf29e](https://github.com/easyops-cn/next-basics/commit/beaf29eaf63f0b0609a974956d775f246642666c))
+* fix search box overlapping with transparent nodes ([dd5560b](https://github.com/easyops-cn/next-basics/commit/dd5560b8fd58fb6a3b88dd7a5589da335f561704))
+
+
+
+
+
 ## [1.204.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.0...@next-bricks/next-builder@1.204.1) (2022-10-31)
 
 
