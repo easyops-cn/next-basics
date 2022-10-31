@@ -3,6 +3,7 @@
   top: 0;
   background-color: rgb(37, 37, 38);
   padding: 5px 10px 10px;
+  z-index: 1;
 }
 
 .tree {

@@ -8,6 +8,7 @@ import {
   SlotConf,
   Contract,
   StoryboardMeta,
+  CustomTemplate,
 } from "@next-core/brick-types";
 import {
   isObject,
@@ -17,7 +18,7 @@ import {
 } from "@next-core/brick-utils";
 import { safeLoad, JSON_SCHEMA } from "js-yaml";
 import { get, isEmpty } from "lodash";
-import { BuildInfoV2, StoryboardToBuild } from "./interfaces";
+import { BuildInfoV2, StoryboardToBuild, TemplateNode } from "./interfaces";
 import { ContractCenterApi_batchSearchContract } from "@next-sdk/next-builder-sdk";
 import {
   ScanBricksAndTemplates,
@@ -48,17 +49,7 @@ export async function buildStoryboardV2(
 
   const routes = buildRoutes(data.routeList, ctx);
 
-  const customTemplates = data.templateList?.map((template) => ({
-    name: template.templateId,
-    proxy: template.proxy,
-    state: template.state,
-    bricks: buildBricks(template.children, ctx) as BrickConfInTemplate[],
-    ...(keepIds
-      ? {
-          [symbolForNodeId]: template.id,
-        }
-      : undefined),
-  }));
+  const customTemplates = builderCustomTemplates(data.templateList, ctx);
 
   const menus = data.menus?.map(normalizeMenu);
 
@@ -142,6 +133,23 @@ export async function buildStoryboardV2(
     },
     dependsAll: data.dependsAll,
   };
+}
+
+export function builderCustomTemplates(
+  templates: TemplateNode[],
+  ctx: BuildContext = {}
+): CustomTemplate[] {
+  return templates?.map((template) => ({
+    name: template.templateId,
+    proxy: template.proxy,
+    state: template.state,
+    bricks: buildBricks(template.children, ctx) as BrickConfInTemplate[],
+    ...(ctx?.keepIds
+      ? {
+          [symbolForNodeId]: template.id,
+        }
+      : undefined),
+  }));
 }
 
 export function buildRoutes(
