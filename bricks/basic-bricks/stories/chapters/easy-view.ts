@@ -207,9 +207,7 @@ export const easyViewStory: Story = {
         en: "Easy View Dividing By Grid Areas",
         zh: "由gridAreas划分区域的easy-view",
       },
-      thumbnail: {
-        imgSrc: easyViewGridAreasSvg,
-      },
+      thumbnail: easyViewGridAreasSvg,
     },
     {
       bricks: [
@@ -291,9 +289,7 @@ export const easyViewStory: Story = {
         en: "Easy View Dividing By Grid Template Areas",
         zh: "由grid-template-areas划分区域的easy-view",
       },
-      thumbnail: {
-        imgSrc: easyViewGridTemplateAreasSvg,
-      },
+      thumbnail: easyViewGridTemplateAreasSvg,
     },
   ],
 };

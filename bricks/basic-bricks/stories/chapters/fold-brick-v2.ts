@@ -51,9 +51,7 @@ export const foldBrickV2Story: Story = {
         en: "Basic Fold Brick V2",
         zh: "基础折叠容器",
       },
-      thumbnail: {
-        imgSrc: foldBrickV2BasicSvg,
-      },
+      thumbnail: foldBrickV2BasicSvg,
     },
     {
       bricks: [
@@ -87,9 +85,7 @@ export const foldBrickV2Story: Story = {
         en: "Primary Fold Brick V2",
         zh: "Primary折叠容器",
       },
-      thumbnail: {
-        imgSrc: foldBrickV2PrimarySvg,
-      },
+      thumbnail: foldBrickV2PrimarySvg,
     },
     {
       bricks: [
@@ -155,9 +151,7 @@ export const foldBrickV2Story: Story = {
         en: "Fold Brick V2 with Divider",
         zh: "带分割线的折叠容器",
       },
-      thumbnail: {
-        imgSrc: foldBrickV2DividerSvg,
-      },
+      thumbnail: foldBrickV2DividerSvg,
     },
   ],
   previewColumns: 2,

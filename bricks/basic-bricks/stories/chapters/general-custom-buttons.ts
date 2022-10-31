@@ -78,9 +78,7 @@ export const generalCustomButtonsStory: Story = {
         en: "Basic General Custom Buttons",
         zh: "基础自定义按钮组",
       },
-      thumbnail: {
-        imgSrc: generalCustomButtonsBasicSvg,
-      },
+      thumbnail: generalCustomButtonsBasicSvg,
     },
     {
       bricks: [
@@ -149,9 +147,7 @@ export const generalCustomButtonsStory: Story = {
         en: "General Custom Buttons with More Button",
         zh: "带moreButton的自定义按钮组",
       },
-      thumbnail: {
-        imgSrc: generalCustomButtonsMoreBtnSvg,
-      },
+      thumbnail: generalCustomButtonsMoreBtnSvg,
     },
     {
       description: {
@@ -292,9 +288,7 @@ export const generalCustomButtonsStory: Story = {
         en: "General Custom Buttons with Dropdown Button",
         zh: "带下拉按钮的自定义按钮组",
       },
-      thumbnail: {
-        imgSrc: generalCustomButtonsDropdownBtnSvg,
-      },
+      thumbnail: generalCustomButtonsDropdownBtnSvg,
     },
     {
       description: {
@@ -889,9 +883,7 @@ export const generalCustomButtonsStory: Story = {
         en: "Stretch General Custom Buttons",
         zh: "stretch样式自定义按钮组",
       },
-      thumbnail: {
-        imgSrc: generalCustomButtonsStretchSvg,
-      },
+      thumbnail: generalCustomButtonsStretchSvg,
     },
     {
       description: {

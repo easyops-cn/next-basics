@@ -53,9 +53,7 @@ export const generalButtonStory: Story = {
         en: "Baisc General Button",
         zh: "基础按钮",
       },
-      thumbnail: {
-        imgSrc: generalButtonBasicSvg,
-      },
+      thumbnail: generalButtonBasicSvg,
     },
     {
       bricks: [
@@ -110,9 +108,7 @@ export const generalButtonStory: Story = {
         en: "Primary General Button",
         zh: "primary样式按钮",
       },
-      thumbnail: {
-        imgSrc: generalButtonPrimarySvg,
-      },
+      thumbnail: generalButtonPrimarySvg,
     },
     {
       bricks: [
@@ -140,9 +136,7 @@ export const generalButtonStory: Story = {
         en: "Icon General Button",
         zh: "图标按钮",
       },
-      thumbnail: {
-        imgSrc: generalButtonIconSvg,
-      },
+      thumbnail: generalButtonIconSvg,
     },
     {
       bricks: [
@@ -230,9 +224,7 @@ export const generalButtonStory: Story = {
         en: "Link General Button",
         zh: "link按钮",
       },
-      thumbnail: {
-        imgSrc: generalButtonLinkSvg,
-      },
+      thumbnail: generalButtonLinkSvg,
     },
     {
       bricks: [
@@ -257,9 +249,7 @@ export const generalButtonStory: Story = {
         en: "danger General Button",
         zh: "danger类型按钮",
       },
-      thumbnail: {
-        imgSrc: generalButtonDangerSvg,
-      },
+      thumbnail: generalButtonDangerSvg,
     },
   ],
   previewColumns: 2,
