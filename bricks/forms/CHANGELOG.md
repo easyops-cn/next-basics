@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.244.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.244.0...@next-bricks/forms@1.244.1) (2022-10-31)
+
+
+### Bug Fixes
+
+* **select:** 设置useBackend onValueChangeArgs为非必填 ([f4d8577](https://github.com/easyops-cn/next-basics/commit/f4d857725481051fd5d9951d218549e702d6b7db))
+
+
+
+
+
 # [1.244.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.243.0...@next-bricks/forms@1.244.0) (2022-10-31)
 
 
