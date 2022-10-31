@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { brickAlertSvg } from "../images";
+import { brickAlertSuccessTipsSvg } from "../images";
+import { brickAlertWarnTipsWithCloseSvg } from "../images";
 export const BrickAlertStory: Story = {
   storyId: "presentational-bricks.brick-alert",
   category: "feedback-and-tooltip",
@@ -32,6 +34,7 @@ export const BrickAlertStory: Story = {
         en: "Success alert",
         zh: "成功提示",
       },
+      thumbnail: brickAlertSuccessTipsSvg,
     },
     {
       snippetId: "presentational-bricks.brick-alert[info-tips-with-icon]",
@@ -72,6 +75,7 @@ export const BrickAlertStory: Story = {
         en: "Warn Alert with close",
         zh: "警告提示带关闭按钮",
       },
+      thumbnail: brickAlertWarnTipsWithCloseSvg,
     },
     {
       brick: "presentational-bricks.brick-alert",

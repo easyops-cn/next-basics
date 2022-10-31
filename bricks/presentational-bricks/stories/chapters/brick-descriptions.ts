@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickDescriptionsSvg } from "../images";
+import { brickDescriptionsNormalSvg } from "../images";
 export const BrickDescriptionsStory: Story = {
   storyId: "presentational-bricks.brick-descriptions",
   category: "text",
@@ -23,6 +24,7 @@ export const BrickDescriptionsStory: Story = {
         zh: "描述列表",
         en: "Description list",
       },
+      thumbnail: brickDescriptionsNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-descriptions",

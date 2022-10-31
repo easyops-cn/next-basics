@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks-widgets.value-mapping-tag</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="105" height="55" rx="4"></rect>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图七" transform="translate(-1072.000000, -202.000000)">
+            <g id="presentational-bricks-widgets.value-mapping-tag" transform="translate(1072.000000, 202.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="矩形备份-46"></g>
+                <g id="编组-6" mask="url(#mask-2)">
+                    <g transform="translate(16.000000, 16.000000)">
+                        <rect id="矩形备份-50" fill-opacity="0.12" fill="#52C41A" fill-rule="evenodd" x="0" y="0" width="73" height="24" rx="12"></rect>
+                        <circle id="椭圆形" fill="#52C41A" fill-rule="evenodd" cx="15" cy="12" r="3"></circle>
+                        <text id="标签" fill="none" font-family="PingFangSC-Regular, PingFang SC" font-size="16" font-weight="normal">
+                            <tspan x="27" y="18" fill="#52C41A">标签</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

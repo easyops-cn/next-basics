@@ -18,7 +18,7 @@ export const TextCollapseStory: Story = {
   },
   conf: [
     {
-      snippetId: "presentational-bricks.text-collapse",
+      snippetId: "presentational-bricks.text-collapse[normal]",
       title: {
         en: "",
         zh: "基础可折叠文本",

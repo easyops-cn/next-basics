@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks-widgets.snipped-of-brick-result</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="105" height="55" rx="4"></rect>
+    </defs>
+    <g id="nora" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-构件概览图七" transform="translate(-573.000000, -1588.000000)">
+            <g id="presentational-bricks-widgets.snipped-of-brick-result" transform="translate(573.000000, 1588.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="矩形备份-46"></g>
+                <g id="presentational-bricks.brick-result" mask="url(#mask-2)">
+                    <g transform="translate(31.000000, 9.000000)" id="编组-5">
+                        <rect id="矩形备份-43" fill="#1A7AFF" x="8" y="32" width="12" height="5" rx="1"></rect>
+                        <rect id="矩形备份-43" stroke="#D6DBEC" x="22" y="32" width="12" height="5" rx="1"></rect>
+                        <rect id="矩形备份-71" fill="#F4F5F9" x="0" y="19" width="44" height="4" rx="1"></rect>
+                        <rect id="矩形备份-71" fill="#F4F5F9" x="6" y="25" width="32" height="4" rx="1"></rect>
+                        <path d="M21.96875,0 C17.5703125,0 14,3.5703125 14,7.96875 C14,12.3671875 17.5703125,15.9375 21.96875,15.9375 C26.3671875,15.9375 29.9375,12.3671875 29.9375,7.96875 C29.9375,3.5703125 26.3671875,0 21.96875,0 Z M26.534375,5.9046875 L21.378125,11.0609375 C21.1390625,11.3 20.7796875,11.33125 20.5015625,11.171875 C20.453125,11.140625 20.40625,11.1078125 20.3578125,11.0609375 L17.3953125,8.096875 C17.1171875,7.8171875 17.1171875,7.35625 17.3953125,7.0765625 C17.6734375,6.796875 18.1359375,6.796875 18.415625,7.0765625 L20.86875,9.53125 L25.515625,4.884375 C25.79375,4.60625 26.25625,4.60625 26.5359375,4.884375 C26.821875,5.1640625 26.821875,5.6171875 26.534375,5.9046875 Z" id="形状" fill="#52C41A" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

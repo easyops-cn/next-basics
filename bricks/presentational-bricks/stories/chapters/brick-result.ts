@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickResultSvg } from "../images";
+import { brickResultSuccessSvg } from "../images";
 export const BrickResultStory: Story = {
   storyId: "presentational-bricks.brick-result",
   category: "feedback-and-tooltip",
@@ -23,6 +24,7 @@ export const BrickResultStory: Story = {
         zh: "成功结果",
         en: "",
       },
+      thumbnail: brickResultSuccessSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-result",

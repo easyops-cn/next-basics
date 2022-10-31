@@ -1,5 +1,8 @@
 import { Story } from "@next-core/brick-types";
 import { modalConfirmSvg } from "../images";
+import { modalConfirmNormalSvg } from "../images";
+import { modalConfirmInfoSvg } from "../images";
+import { modalConfirmDeleteSvg } from "../images";
 export const ModalConfirmStory: Story = {
   storyId: "presentational-bricks.modal-confirm",
   category: "feedback-and-tooltip",
@@ -23,6 +26,7 @@ export const ModalConfirmStory: Story = {
         en: "Confirm modal",
         zh: "确认弹窗",
       },
+      thumbnail: modalConfirmNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.modal-confirm",
@@ -54,6 +58,7 @@ export const ModalConfirmStory: Story = {
         en: "Info modal",
         zh: "提醒弹窗",
       },
+      thumbnail: modalConfirmInfoSvg,
       bricks: [
         {
           brick: "presentational-bricks.modal-confirm",
@@ -90,6 +95,7 @@ export const ModalConfirmStory: Story = {
         en: "Delete modal",
         zh: "删除弹窗",
       },
+      thumbnail: modalConfirmDeleteSvg,
       bricks: [
         {
           brick: "presentational-bricks.modal-confirm",

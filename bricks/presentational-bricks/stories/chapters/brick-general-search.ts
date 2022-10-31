@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { brickGeneralSearchSvg } from "../images";
+import { brickGeneralSearchUpdateUrlSvg } from "../images";
+import { brickGeneralSearchNotUpdateUrlSvg } from "../images";
 export const BrickGeneralSearchStory: Story = {
   storyId: "presentational-bricks.brick-general-search",
   category: "interact-basic",
@@ -23,6 +25,7 @@ export const BrickGeneralSearchStory: Story = {
         en: "Search input(not update url)",
         zh: "搜索框(不更新url)",
       },
+      thumbnail: brickGeneralSearchNotUpdateUrlSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-general-search",
@@ -44,6 +47,7 @@ export const BrickGeneralSearchStory: Story = {
         en: "Search input(update url)",
         zh: "搜索框(更新url)",
       },
+      thumbnail: brickGeneralSearchUpdateUrlSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-general-search",

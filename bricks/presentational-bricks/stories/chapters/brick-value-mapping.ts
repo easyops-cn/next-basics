@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickValueMappingSvg } from "../images";
+import { brickValueMappingNormalSvg } from "../images";
 export const BrickValueMappingStory: Story = {
   storyId: "presentational-bricks.brick-value-mapping",
   category: "data-transform",
@@ -23,6 +24,7 @@ export const BrickValueMappingStory: Story = {
         zh: "映射为多彩标签",
         en: "",
       },
+      thumbnail: brickValueMappingNormalSvg,
       message: {
         zh: "同时可以设置是否触发点击事件",
         en: "",

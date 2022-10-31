@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { brickConditionalDisplaySvg } from "../images";
+import { brickConditionalDisplayNormalSvg } from "../images";
 export const BrickConditionalDisplayStory: Story = {
   storyId: "presentational-bricks.brick-conditional-display",
   category: "data-transform",
@@ -23,6 +24,7 @@ export const BrickConditionalDisplayStory: Story = {
         zh: "条件展示文本",
         en: "Conditional display text",
       },
+      thumbnail: brickConditionalDisplayNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-conditional-display",
