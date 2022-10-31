@@ -69,7 +69,9 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   suffixBrick?: UseBrickConf;
   suffixBrickStyle?: React.CSSProperties;
   onSearch?: (value: string) => void;
-  useBackend?: UseBackendConf;
+  useBackend?: UseBackendConf & {
+    onValueChangeArgs?: any[] | ((...args: any[]) => any[]);
+  };
   onDebounceSearch?: (value: string) => void;
   debounceSearchDelay?: number;
   size?: "small" | "middle" | "large";
@@ -78,8 +80,13 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   filterByLabelAndValue?: boolean;
 }
 
+// TODO(alex): 需要去掉`providers-of-cmdb.cmdb-object-api-list`，这里判断是为了开发者中心构件demo显示需要。
 const isSearchable = (value: UseBackendConf): value is UseBackendConf => {
-  return typeof value?.provider === "string" && value?.provider.includes("@");
+  return (
+    typeof value?.provider === "string" &&
+    (value?.provider.includes("@") ||
+      value?.provider === "providers-of-cmdb.cmdb-object-api-list")
+  );
 };
 
 export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
@@ -96,7 +103,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
   const [loading, setLoading] = useState(false);
-  const request = useProvider();
+  const request = useProvider({ cache: false });
   React.useEffect(() => {
     if (suffixBrick) {
       // eslint-disable-next-line no-console
@@ -131,31 +138,50 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   }, [props.onDebounceSearch, props.debounceSearchDelay]);
 
   const handleSearchQuery = useMemo(
-    () => (value: string) => {
-      if (isSearchable(props.useBackend)) {
-        const { provider, args, transform = (data) => data } = props.useBackend;
-        (async () => {
-          try {
-            setLoading(true);
-            const actualArgs = applyArgs(args, value);
-            const result = await request.query(provider, actualArgs);
-            const transformedData = transform(result);
-            const actualData = formatOptions(
-              transformedData as unknown as GeneralOption[],
-              props.fields as any
+    () =>
+      (value = "", type: "valueChange" | "search") => {
+        if (isSearchable(props.useBackend)) {
+          const {
+            provider,
+            args,
+            onValueChangeArgs,
+            transform = (data) => data,
+          } = props.useBackend;
+          (async () => {
+            try {
+              setLoading(true);
+              const actualArgs = applyArgs(
+                type === "search" ? args : onValueChangeArgs,
+                value
+              );
+              const result = await request.query(provider, actualArgs);
+              const transformedData = transform(result);
+              const actualData = formatOptions(
+                transformedData as unknown as GeneralOption[],
+                props.fields as any
+              );
+              setOptions(actualData);
+              setLoading(false);
+            } catch (e) {
+              handleHttpError(e);
+            } finally {
+              setLoading(false);
+            }
+          })();
+        } else {
+          // eslint-disable-next-line no-console
+          props?.useBackend?.provider &&
+            console.error(
+              `Please use "contract api" instead of "${props?.useBackend?.provider}".`
             );
-            setOptions([...actualData]);
-            setLoading(false);
-          } catch (e) {
-            handleHttpError(e);
-          } finally {
-            setLoading(false);
-          }
-        })();
-      }
-    },
-    [props.useBackend, props.fields]
+        }
+      },
+    [props.useBackend, props.fields, props.value]
   );
+
+  useEffect(() => {
+    handleSearchQuery(props.value, "valueChange");
+  }, [props.value, props.fields, props.useBackend]);
 
   const handleDebounceBackendSearch = useMemo(() => {
     return debounce(handleSearchQuery, props.debounceSearchDelay || 300);
@@ -164,7 +190,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   const handleSearch = (value: string): void => {
     props.onSearch?.(value);
     handleDebounceSearch?.(value);
-    handleDebounceBackendSearch(value);
+    handleDebounceBackendSearch(value, "search");
   };
 
   const searchProps = props.showSearch
@@ -222,7 +248,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
       <Select
         className={(suffix || suffixBrick) && style.suffixBrickSelect}
         {...searchProps}
-        value={props.name && props.formElement ? undefined : props.value}
+        value={props.name && props.formElement ? undefined : checkedValue}
         size={props.size}
         disabled={props.disabled}
         defaultActiveFirstOption={false}
@@ -241,6 +267,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         dropdownStyle={{ padding: "2px" }}
         notFoundContent={<EasyopsEmpty {...emptyProps} />}
         loading={loading}
+        onFocus={() => handleSearchQuery("", "search")}
       >
         {props.groupBy
           ? getOptsGroups(options, props.groupBy)

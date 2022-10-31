@@ -272,5 +272,42 @@ export const generalSelecttStory: Story = {
         },
       },
     },
+    {
+      brick: "forms.general-select",
+      events: {
+        "general.select.change": {
+          action: "console.log",
+          args: ["模型", "<% EVENT.detail %>"],
+        },
+      },
+      description: {
+        title: "后端搜索",
+        message:
+          "后端搜索，默认Debounce为`300ms`（只能使用契约类型的provider）",
+      },
+      properties: {
+        dataset: {
+          testid: "basic-usage-demo",
+        },
+        inputBoxStyle: {
+          width: 120,
+        },
+        label: "模型",
+        name: "model",
+        placeholder: "请选择模型",
+        fields: {
+          label: "name",
+          value: "objectId",
+        },
+        value: "USER",
+        useBackend: {
+          provider: "providers-of-cmdb.cmdb-object-api-list",
+          args: "<% (q) => [{ q: `${q}` , page: 1, page_size: 10 }] %>",
+          onValueChangeArgs:
+            "<% (q) => [{ objectIds: `${q}`,page: 1, page_size: 10 }] %>",
+          transform: "<% (data) => data.list %>",
+        },
+      },
+    },
   ],
 };
