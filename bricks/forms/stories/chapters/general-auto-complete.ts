@@ -46,9 +46,7 @@ export const autoCompleteStory: Story = {
         en: "Basic General Auto Complete",
         zh: "基础带候选项的输入框",
       },
-      thumbnail: {
-        imgSrc: generalAutoCompleteBasicSvg,
-      },
+      thumbnail: generalAutoCompleteBasicSvg,
     },
     {
       brick: "forms.general-form",

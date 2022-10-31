@@ -45,9 +45,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Basic General Checkbox",
         zh: "基础多选框",
       },
-      thumbnail: {
-        imgSrc: generalCheckboxBasicSvg,
-      },
+      thumbnail: generalCheckboxBasicSvg,
     },
     {
       bricks: [
@@ -172,9 +170,7 @@ export const GeneralCheckboxStory: Story = {
         en: "General Checkbox with Icon",
         zh: "带图标选项的多选框",
       },
-      thumbnail: {
-        imgSrc: generalCheckboxWithIconSvg,
-      },
+      thumbnail: generalCheckboxWithIconSvg,
     },
     {
       bricks: [
@@ -207,9 +203,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Multi Column General Checkbox",
         zh: "多列多选框",
       },
-      thumbnail: {
-        imgSrc: generalCheckboxMultiColumnSvg,
-      },
+      thumbnail: generalCheckboxMultiColumnSvg,
     },
     {
       bricks: [
@@ -266,9 +260,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Group General Checkbox",
         zh: "分组多选框",
       },
-      thumbnail: {
-        imgSrc: generalCheckboxGroupSvg,
-      },
+      thumbnail: generalCheckboxGroupSvg,
     },
     {
       bricks: [
@@ -326,9 +318,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Icon General Checkbox",
         zh: "图标类型多选框",
       },
-      thumbnail: {
-        imgSrc: generalCheckboxIconSvg,
-      },
+      thumbnail: generalCheckboxIconSvg,
     },
     {
       bricks: [

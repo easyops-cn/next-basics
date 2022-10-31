@@ -41,9 +41,7 @@ export const generalButtonStory: Story = {
         },
       ],
       snippetId: "forms.general-buttons[basic]",
-      thumbnail: {
-        imgSrc: generalButtonsBasicSvg,
-      },
+      thumbnail: generalButtonsBasicSvg,
       title: {
         en: "Basic General Buttons",
         zh: "基础表单提交按钮",

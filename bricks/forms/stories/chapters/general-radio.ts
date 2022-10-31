@@ -45,9 +45,7 @@ export const GeneralRadioStory: Story = {
         en: "Basic General Radio",
         zh: "基础单选框",
       },
-      thumbnail: {
-        imgSrc: generalRadioBasicSvg,
-      },
+      thumbnail: generalRadioBasicSvg,
     },
     {
       bricks: [
@@ -86,9 +84,7 @@ export const GeneralRadioStory: Story = {
         en: "Button General Radio",
         zh: "按钮单选框",
       },
-      thumbnail: {
-        imgSrc: generalRadioButtonSvg,
-      },
+      thumbnail: generalRadioButtonSvg,
     },
     {
       bricks: [
@@ -155,9 +151,7 @@ export const GeneralRadioStory: Story = {
         en: "General Radio with Icon",
         zh: "带图标选项的单选框",
       },
-      thumbnail: {
-        imgSrc: generalRadioWithIconSvg,
-      },
+      thumbnail: generalRadioWithIconSvg,
     },
     {
       brick: "forms.general-form",
@@ -464,9 +458,7 @@ export const GeneralRadioStory: Story = {
         en: "Icon General Radio",
         zh: "图标单选框",
       },
-      thumbnail: {
-        imgSrc: generalRadioIconSvg,
-      },
+      thumbnail: generalRadioIconSvg,
     },
     {
       brick: "forms.general-radio",
