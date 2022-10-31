@@ -180,7 +180,8 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   );
 
   useEffect(() => {
-    handleSearchQuery(props.value, "valueChange");
+    props?.useBackend?.onValueChangeArgs &&
+      handleSearchQuery(props.value, "valueChange");
   }, [props.value, props.fields, props.useBackend]);
 
   const handleDebounceBackendSearch = useMemo(() => {
