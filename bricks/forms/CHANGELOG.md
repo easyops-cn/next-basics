@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.243.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.242.1...@next-bricks/forms@1.243.0) (2022-10-31)
+
+
+### Bug Fixes
+
+* fix forms-NB snippet thumbnail ([335a2fa](https://github.com/easyops-cn/next-basics/commit/335a2faef577d07acb2421c0c2e52955f51811d5))
+
+
+### Features
+
+* update forms bricks snippet icon ([97c617a](https://github.com/easyops-cn/next-basics/commit/97c617a70e00dd09c7cb294232a1219940cc1d06))
+
+
+
+
+
 ## [1.242.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.242.0...@next-bricks/forms@1.242.1) (2022-10-31)
 
 
