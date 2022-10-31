@@ -1,6 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
 import { generalCustomButtonsSvg } from "../images";
+import { generalCustomButtonsBasicSvg } from "../images";
+import { generalCustomButtonsDropdownBtnSvg } from "../images";
+import { generalCustomButtonsMoreBtnSvg } from "../images";
+import { generalCustomButtonsStretchSvg } from "../images";
 export const generalCustomButtonsStory: Story = {
   storyId: "basic-bricks.general-custom-buttons",
   category: "interact-basic",
@@ -75,6 +78,7 @@ export const generalCustomButtonsStory: Story = {
         en: "Basic General Custom Buttons",
         zh: "基础自定义按钮组",
       },
+      thumbnail: generalCustomButtonsBasicSvg,
     },
     {
       bricks: [
@@ -143,6 +147,7 @@ export const generalCustomButtonsStory: Story = {
         en: "General Custom Buttons with More Button",
         zh: "带moreButton的自定义按钮组",
       },
+      thumbnail: generalCustomButtonsMoreBtnSvg,
     },
     {
       description: {
@@ -283,6 +288,7 @@ export const generalCustomButtonsStory: Story = {
         en: "General Custom Buttons with Dropdown Button",
         zh: "带下拉按钮的自定义按钮组",
       },
+      thumbnail: generalCustomButtonsDropdownBtnSvg,
     },
     {
       description: {
@@ -877,6 +883,7 @@ export const generalCustomButtonsStory: Story = {
         en: "Stretch General Custom Buttons",
         zh: "stretch样式自定义按钮组",
       },
+      thumbnail: generalCustomButtonsStretchSvg,
     },
     {
       description: {

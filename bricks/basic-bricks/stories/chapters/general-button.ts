@@ -1,6 +1,10 @@
 import { Story } from "@next-core/brick-types";
 import { generalButtonSvg } from "../images";
-
+import { generalButtonPrimarySvg } from "../images";
+import { generalButtonBasicSvg } from "../images";
+import { generalButtonDangerSvg } from "../images";
+import { generalButtonIconSvg } from "../images";
+import { generalButtonLinkSvg } from "../images";
 export const generalButtonStory: Story = {
   storyId: "basic-bricks.general-button",
   category: "interact-basic",
@@ -49,6 +53,7 @@ export const generalButtonStory: Story = {
         en: "Baisc General Button",
         zh: "基础按钮",
       },
+      thumbnail: generalButtonBasicSvg,
     },
     {
       bricks: [
@@ -103,6 +108,7 @@ export const generalButtonStory: Story = {
         en: "Primary General Button",
         zh: "primary样式按钮",
       },
+      thumbnail: generalButtonPrimarySvg,
     },
     {
       bricks: [
@@ -130,6 +136,7 @@ export const generalButtonStory: Story = {
         en: "Icon General Button",
         zh: "图标按钮",
       },
+      thumbnail: generalButtonIconSvg,
     },
     {
       bricks: [
@@ -217,6 +224,7 @@ export const generalButtonStory: Story = {
         en: "Link General Button",
         zh: "link按钮",
       },
+      thumbnail: generalButtonLinkSvg,
     },
     {
       bricks: [
@@ -241,6 +249,7 @@ export const generalButtonStory: Story = {
         en: "danger General Button",
         zh: "danger类型按钮",
       },
+      thumbnail: generalButtonDangerSvg,
     },
   ],
   previewColumns: 2,
