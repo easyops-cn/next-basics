@@ -223,7 +223,7 @@ describe("GeneralSelect", () => {
   });
 
   it("should update value", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <GeneralSelect
         options={formatOptions(["good", "better"])}
         value="good"
