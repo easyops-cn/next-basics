@@ -95,9 +95,13 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       );
 
       if (contexts.size > 0) {
-        warnedUsingCtxTemplates.push(
-          `${tpl.name}: ${[...contexts].join(", ")}`
-        );
+        const limited = [...contexts];
+        const max = 3;
+        if (limited.length > max) {
+          limited.splice(max, limited.length - max);
+          limited.push("...");
+        }
+        warnedUsingCtxTemplates.push(`${tpl.name}: ${limited.join(", ")}`);
       }
     }
   }
