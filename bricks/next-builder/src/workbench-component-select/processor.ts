@@ -48,6 +48,7 @@ export function getSnippetsOfBrickMap(
   const brickMap = new Map();
 
   snippetList?.forEach((item) => {
+    const hasThumbnail = item.thumbnail;
     if (item.useInBricks) {
       item.useInBricks?.forEach((brick) => {
         const find = brickMap.get(brick);
@@ -57,7 +58,9 @@ export function getSnippetsOfBrickMap(
           const sceneSnippets = find.get(SnippetType.Scene);
 
           sceneSnippets
-            ? sceneSnippets.push(item)
+            ? hasThumbnail
+              ? sceneSnippets.unshift(item)
+              : sceneSnippets.push(item)
             : find.set(SnippetType.Scene, [item]);
         }
       });
@@ -69,7 +72,9 @@ export function getSnippetsOfBrickMap(
       } else {
         const selfSnippets = find.get(SnippetType.SelfBrick);
         selfSnippets
-          ? selfSnippets.push(item)
+          ? hasThumbnail
+            ? selfSnippets.unshift(item)
+            : selfSnippets.push(item)
           : find.set(SnippetType.SelfBrick, [item]);
       }
     }
