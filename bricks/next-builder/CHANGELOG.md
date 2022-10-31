@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.204.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.0...@next-bricks/next-builder@1.204.1) (2022-10-31)
+
+
+### Bug Fixes
+
+* limit ctx warnings ([33f2024](https://github.com/easyops-cn/next-basics/commit/33f2024ff4d9fa058af42f95c0bf30fd24df61a7))
+
+
+
+
+
 # [1.204.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.203.0...@next-bricks/next-builder@1.204.0) (2022-10-31)
 
 
