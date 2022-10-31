@@ -436,6 +436,7 @@ export function LegacyObjectAttrStructForm(
             ? i18n.t(`${NS_FORMS}:${K.TITLE_ADD_STRUCTURE_ITEM}`)
             : i18n.t(`${NS_FORMS}:${K.TITLE_EDIT_STRUCTURE_ITEM}`)
         }
+        maskClosable={false}
         visible={addStructModalVisible}
         onOk={handleAddStructConfirm}
         onCancel={() => {
