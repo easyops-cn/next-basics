@@ -227,6 +227,7 @@ describe("minimalStoryboardAssembly", () => {
             [symbolForNodeId]: "R-01",
             path: "/a",
             type: "bricks",
+            iid: "instance-r01",
             providers: ["p1"],
             bricks: [
               {
@@ -262,6 +263,7 @@ describe("minimalStoryboardAssembly", () => {
                         [symbolForNodeId]: "R-04",
                         path: "/a/d",
                         type: "bricks",
+                        iid: "instance-r04",
                         bricks: [],
                       },
 
@@ -269,6 +271,7 @@ describe("minimalStoryboardAssembly", () => {
                         [symbolForNodeId]: "R-05",
                         path: "/a/e",
                         type: "bricks",
+                        iid: "instance-r05",
                         bricks: [],
                       },
                     ],
@@ -289,6 +292,7 @@ describe("minimalStoryboardAssembly", () => {
             [symbolForNodeId]: "R-02",
             path: "/b",
             type: "routes",
+            iid: "instance-r02",
             permissionsPreCheck: [
               "<% `cmdb:${QUERY.objectId}_instance_create` %>",
             ],
@@ -298,6 +302,7 @@ describe("minimalStoryboardAssembly", () => {
                 [symbolForNodeId]: "R-03",
                 path: "/b/c",
                 type: "bricks",
+                iid: "instance-r03",
                 bricks: [
                   {
                     [symbolForNodeId]: "B-03",

@@ -209,6 +209,7 @@ describe("WorkbenchWorker", () => {
       storyboard: {
         brick: "page-a",
         path: "/page-a",
+        iid: "route-a",
         bricks: [
           { brick: "brick-b", iid: "brick-b" },
           { brick: "brick-c", iid: "brick-c" },
