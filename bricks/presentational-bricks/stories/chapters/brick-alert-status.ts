@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const BrickAlertStatusStory: Story = {
   storyId: "presentational-bricks.brick-alert-status",
-  category: "value-mapping",
+  category: "data-transform",
   type: "brick",
   author: "ice",
   text: {
