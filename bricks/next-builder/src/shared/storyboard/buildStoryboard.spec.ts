@@ -234,6 +234,7 @@ describe("buildStoryboard", () => {
           {
             path: "/a",
             type: "bricks",
+            iid: "instance-r01",
             providers: ["p1"],
             bricks: [
               {
@@ -254,11 +255,13 @@ describe("buildStoryboard", () => {
                       {
                         path: "/a/d",
                         type: "bricks",
+                        iid: "instance-r04",
                         bricks: [],
                       },
                       {
                         path: "/a/e",
                         type: "bricks",
+                        iid: "instance-r05",
                         bricks: [],
                       },
                     ],
@@ -271,6 +274,7 @@ describe("buildStoryboard", () => {
           {
             path: "/b",
             type: "routes",
+            iid: "instance-r02",
             permissionsPreCheck: [
               "<% `cmdb:${QUERY.objectId}_instance_create` %>",
             ],
@@ -278,6 +282,7 @@ describe("buildStoryboard", () => {
               {
                 path: "/b/c",
                 type: "bricks",
+                iid: "instance-r03",
                 bricks: [{ iid: "instance-b03", brick: "o" }],
               },
             ],

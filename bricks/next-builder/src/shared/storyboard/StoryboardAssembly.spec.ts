@@ -460,6 +460,7 @@ describe("StoryboardAssembly", () => {
             {
               path: "/a",
               type: "bricks",
+              iid: "instance-r01",
               providers: ["p1"],
               segues: undefined,
               bricks: [
@@ -483,12 +484,14 @@ describe("StoryboardAssembly", () => {
                         {
                           path: "/a/d",
                           type: "bricks",
+                          iid: "instance-r04",
                           bricks: [],
                         },
 
                         {
                           path: "/a/e",
                           type: "bricks",
+                          iid: "instance-r05",
                           bricks: [],
                         },
                       ],
@@ -503,6 +506,7 @@ describe("StoryboardAssembly", () => {
             {
               path: "/b",
               type: "routes",
+              iid: "instance-r02",
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
@@ -519,6 +523,7 @@ describe("StoryboardAssembly", () => {
                 {
                   path: "/b/c",
                   type: "bricks",
+                  iid: "instance-r03",
                   bricks: [{ iid: "instance-b03", brick: "o" }],
                 },
               ],
@@ -663,6 +668,7 @@ describe("StoryboardAssembly", () => {
             {
               path: "/a",
               type: "bricks",
+              iid: "instance-r01",
               providers: ["p1"],
               segues: undefined,
               bricks: [{ iid: "instance-b02", brick: "n" }],
@@ -671,6 +677,7 @@ describe("StoryboardAssembly", () => {
             {
               path: "/b",
               type: "routes",
+              iid: "instance-r02",
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
@@ -687,6 +694,7 @@ describe("StoryboardAssembly", () => {
                 {
                   path: "/b/c",
                   type: "bricks",
+                  iid: "instance-r03",
                   bricks: [{ iid: "instance-b03", brick: "o" }],
                 },
               ],
@@ -712,6 +720,7 @@ describe("StoryboardAssembly", () => {
               [symbolForNodeId]: "R-01",
               path: "/a",
               type: "bricks",
+              iid: "instance-r01",
               segues: undefined,
               providers: ["p1"],
               bricks: [
@@ -749,6 +758,7 @@ describe("StoryboardAssembly", () => {
                           [symbolForNodeId]: "R-04",
                           path: "/a/d",
                           type: "bricks",
+                          iid: "instance-r04",
                           bricks: [],
                         },
 
@@ -756,6 +766,7 @@ describe("StoryboardAssembly", () => {
                           [symbolForNodeId]: "R-05",
                           path: "/a/e",
                           type: "bricks",
+                          iid: "instance-r05",
                           bricks: [],
                         },
                       ],
@@ -776,6 +787,7 @@ describe("StoryboardAssembly", () => {
               [symbolForNodeId]: "R-02",
               path: "/b",
               type: "routes",
+              iid: "instance-r02",
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
@@ -785,6 +797,7 @@ describe("StoryboardAssembly", () => {
                   [symbolForNodeId]: "R-03",
                   path: "/b/c",
                   type: "bricks",
+                  iid: "instance-r03",
                   bricks: [
                     {
                       [symbolForNodeId]: "B-03",
@@ -1011,6 +1024,7 @@ describe("StoryboardAssembly", () => {
             {
               path: "/a",
               type: "bricks",
+              iid: "instance-r01",
               providers: ["p1"],
               segues: undefined,
               bricks: [
@@ -1034,12 +1048,14 @@ describe("StoryboardAssembly", () => {
                         {
                           path: "/a/d",
                           type: "bricks",
+                          iid: "instance-r04",
                           bricks: [],
                         },
 
                         {
                           path: "/a/e",
                           type: "bricks",
+                          iid: "instance-r05",
                           bricks: [],
                         },
                       ],
@@ -1054,6 +1070,7 @@ describe("StoryboardAssembly", () => {
             {
               path: "/b",
               type: "routes",
+              iid: "instance-r02",
               permissionsPreCheck: [
                 "<% `cmdb:${QUERY.objectId}_instance_create` %>",
               ],
@@ -1070,6 +1087,7 @@ describe("StoryboardAssembly", () => {
                 {
                   path: "/b/c",
                   type: "bricks",
+                  iid: "instance-r03",
                   bricks: [{ iid: "instance-b03", brick: "o" }],
                 },
               ],

@@ -232,6 +232,7 @@ describe("buildStoryboardV2", () => {
           {
             path: "/a",
             type: "bricks",
+            iid: "instance-r01",
             providers: ["p1"],
             bricks: [
               {
@@ -252,11 +253,13 @@ describe("buildStoryboardV2", () => {
                       {
                         path: "/a/d",
                         type: "bricks",
+                        iid: "instance-r04",
                         bricks: [],
                       },
                       {
                         path: "/a/e",
                         type: "bricks",
+                        iid: "instance-r05",
                         bricks: [],
                       },
                     ],
@@ -269,6 +272,7 @@ describe("buildStoryboardV2", () => {
           {
             path: "/b",
             type: "routes",
+            iid: "instance-r02",
             permissionsPreCheck: [
               "<% `cmdb:${QUERY.objectId}_instance_create` %>",
             ],
@@ -276,6 +280,7 @@ describe("buildStoryboardV2", () => {
               {
                 path: "/b/c",
                 type: "bricks",
+                iid: "instance-r03",
                 bricks: [{ iid: "instance-b03", brick: "o" }],
               },
             ],
@@ -391,6 +396,7 @@ describe("buildStoryboardV2", () => {
             id: "R-01",
             path: "/a",
             type: "bricks",
+            instanceId: "instance-r01",
             permissionsPreCheck:
               '["<% `cmdb:${QUERY.objectId}_instance_create` %>"]',
             children: [
@@ -433,6 +439,7 @@ describe("buildStoryboardV2", () => {
           {
             path: "/a",
             type: "bricks",
+            iid: "instance-r01",
             permissionsPreCheck: [
               "<% `cmdb:${QUERY.objectId}_instance_create` %>",
             ],
@@ -527,6 +534,7 @@ describe("buildStoryboardV2", () => {
             id: "R-01",
             path: "/a",
             type: "bricks",
+            instanceId: "instance-r01",
             parent: [], // Empty parent also works.
             providers: '["p1"]',
             segues: null as unknown as string,
@@ -570,6 +578,7 @@ describe("buildStoryboardV2", () => {
             [symbolForNodeId]: "R-01",
             path: "/a",
             type: "bricks",
+            iid: "instance-r01",
             providers: ["p1"],
             bricks: [
               {
@@ -614,6 +623,7 @@ describe("buildStoryboardV2", () => {
             id: "R-01",
             path: "/a",
             type: "bricks",
+            instanceId: "instance-r01",
             providers: '["p1"]',
             children: [
               {
@@ -666,6 +676,7 @@ describe("buildStoryboardV2", () => {
             path: "/a",
             providers: ["p1"],
             type: "bricks",
+            iid: "instance-r01",
             segues: undefined,
             bricks: [
               {
@@ -703,6 +714,7 @@ describe("buildStoryboardV2", () => {
             id: "R-01",
             path: "/a",
             type: "bricks",
+            instanceId: "instance-r01",
             providers: '["p1"]',
             children: [
               {
@@ -820,6 +832,7 @@ describe("buildStoryboardV2", () => {
             providers: ["p1"],
             segues: undefined,
             type: "bricks",
+            iid: "instance-r01",
             [symbolForNodeId]: "R-01",
           },
         ],
@@ -833,6 +846,7 @@ describe("buildStoryboardV2", () => {
             id: "R-01",
             path: "/a",
             type: "bricks",
+            instanceId: "instance-r01",
             providers: '["p1"]',
             children: [
               {
@@ -896,6 +910,7 @@ describe("buildStoryboardV2", () => {
             providers: ["p1"],
             segues: undefined,
             type: "bricks",
+            iid: "instance-r01",
             [symbolForNodeId]: "R-01",
           },
         ],
@@ -997,6 +1012,7 @@ describe("buildStoryboardV2", () => {
             providers: ["p1"],
             segues: undefined,
             type: "bricks",
+            iid: "instance-r01",
           },
         ],
       },
