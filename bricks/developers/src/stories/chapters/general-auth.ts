@@ -16,7 +16,8 @@ const chapter: Chapter = {
         brick: "general-auth.general-login",
         events: {
           "login.success": {
-            action: "console.warn",
+            action: "message.warn",
+            args: ["Login Success"],
           },
         },
       },
@@ -37,7 +38,8 @@ const chapter: Chapter = {
         brick: "general-auth.general-logout",
         events: {
           "logout.success": {
-            action: "console.warn",
+            action: "message.warn",
+            args: ["Logout Success"],
           },
         },
       },
