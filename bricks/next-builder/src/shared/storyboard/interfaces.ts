@@ -37,6 +37,7 @@ export interface PreStoryboardAssemblyOptions {
 }
 
 export interface StoryboardAssemblyParams extends StoryboardAssemblyParamsBase {
+  keepDeadConditions?: boolean;
   options?: BuildOptions;
 }
 
