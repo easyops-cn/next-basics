@@ -655,6 +655,51 @@ describe("StoryboardAssembly", () => {
       },
     ],
     [
+      { projectId: "test-project", keepDeadConditions: false },
+      {
+        projectId: "P-239",
+        storyboard: {
+          routes: [
+            {
+              path: "/a",
+              type: "bricks",
+              providers: ["p1"],
+              segues: undefined,
+              bricks: [{ iid: "instance-b02", brick: "n" }],
+            },
+
+            {
+              path: "/b",
+              type: "routes",
+              permissionsPreCheck: [
+                "<% `cmdb:${QUERY.objectId}_instance_create` %>",
+              ],
+              context: [
+                {
+                  name: "ttttt",
+                  resolve: {
+                    useProvider: "easyops.api.cmdb.instance@PostSearch:1.1.0",
+                    args: ["APP"],
+                  },
+                },
+              ],
+              routes: [
+                {
+                  path: "/b/c",
+                  type: "bricks",
+                  bricks: [{ iid: "instance-b03", brick: "o" }],
+                },
+              ],
+            },
+          ],
+
+          meta: expect.anything(),
+
+          dependsAll: false,
+        },
+      },
+    ],
+    [
       {
         projectId: "test-project",
         options: { keepIds: true },
@@ -1120,7 +1165,12 @@ describe("StoryboardAssembly", () => {
       },
     ],
   ])("StoryboardAssembly(%j) should work", async (params, result) => {
-    expect(await StoryboardAssembly(params)).toEqual(result);
+    expect(
+      await StoryboardAssembly({
+        keepDeadConditions: true,
+        ...params,
+      })
+    ).toEqual(result);
   });
 
   it("should throw error if some of requests failed", () => {
