@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.204.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.3...@next-bricks/next-builder@1.204.4) (2022-11-01)
+
+
+### Bug Fixes
+
+* fix workbench icon style ([3b086c8](https://github.com/easyops-cn/next-basics/commit/3b086c8d50a79a0e347a52764c20f20d840612cd))
+* remove unreachable conditions ([a33c093](https://github.com/easyops-cn/next-basics/commit/a33c09314972cdd980bdbfa8697de1cd9bea4c3d))
+
+
+
+
+
 ## [1.204.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.2...@next-bricks/next-builder@1.204.3) (2022-11-01)
 
 
