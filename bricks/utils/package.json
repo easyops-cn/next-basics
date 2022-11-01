@@ -30,6 +30,6 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "broadcast-channel": "^4.18.0"
+    "broadcast-channel": "^4.18.1"
   }
 }
