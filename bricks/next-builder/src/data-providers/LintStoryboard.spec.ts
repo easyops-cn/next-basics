@@ -42,6 +42,7 @@ describe("LintStoryboard", () => {
                       another: "<% CTX['xyz'] %>",
                       dynamic: "<% CTX[fly] %>",
                       more: "<% CTX.more %>",
+                      using: "<% TPL.abc %>",
                     },
                   },
                 ],
@@ -62,6 +63,10 @@ describe("LintStoryboard", () => {
         expect.objectContaining({
           code: "USING_CTX_IN_TPL",
           list: ["tpl-bad: CTX.abc, CTX['xyz'], CTX[...], ..."],
+        }),
+        expect.objectContaining({
+          code: "USING_TPL_VAR_IN_TPL",
+          list: ["tpl-bad: TPL.abc"],
         }),
       ],
     ],
