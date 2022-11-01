@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.269.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.269.0...@next-bricks/presentational-bricks@1.269.1) (2022-11-01)
+
+
+### Bug Fixes
+
+* add new afterSubtitle slot for card-item Refs:ITSERVICE_NEXT-4901 ([8e77732](https://github.com/easyops-cn/next-basics/commit/8e77732375c44881049474525ce3b7c8776c479a))
+
+
+
+
+
 # [1.269.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.268.1...@next-bricks/presentational-bricks@1.269.0) (2022-10-31)
 
 
