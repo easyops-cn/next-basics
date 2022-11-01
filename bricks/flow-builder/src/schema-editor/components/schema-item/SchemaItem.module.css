@@ -54,3 +54,9 @@
     background: transparent;
   }
 }
+
+html[data-theme="dark-v2"] {
+  .highlight {
+    background: var(--color-fill-bg-container-3);
+  }
+}
