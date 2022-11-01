@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.204.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.2...@next-bricks/next-builder@1.204.3) (2022-11-01)
+
+
+### Bug Fixes
+
+* warn using TPL variables in templates ([dce9853](https://github.com/easyops-cn/next-basics/commit/dce9853f4a0f068d62dbcac0b4cf32edd0cdd9d2))
+
+
+
+
+
 ## [1.204.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.1...@next-bricks/next-builder@1.204.2) (2022-10-31)
 
 
