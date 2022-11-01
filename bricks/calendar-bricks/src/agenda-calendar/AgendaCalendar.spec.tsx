@@ -2,6 +2,8 @@ import React, { createRef } from "react";
 import { AgendaCalendar } from "./AgendaCalendar";
 import { shallow, mount } from "enzyme";
 import { Button, Tooltip } from "antd";
+import { install, InstalledClock } from "lolex";
+
 window.ResizeObserver = jest.fn().mockImplementation(() => ({
   disconnect: jest.fn(),
   observe: jest.fn(),
@@ -100,6 +102,15 @@ export const mockHolidayData: any[] = [
 ];
 
 describe("TestTest", () => {
+  let clock: InstalledClock;
+
+  beforeEach(() => {
+    clock = install({ now: +new Date("2022-10-10 17:20:00") });
+  });
+  afterEach(() => {
+    clock.uninstall();
+  });
+
   it("should work", () => {
     const calendaeRef = createRef<any>();
     const mockAgendaSelect = jest.fn();
