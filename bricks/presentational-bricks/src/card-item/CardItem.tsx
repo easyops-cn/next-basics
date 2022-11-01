@@ -294,6 +294,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         <div className="titleWrapper">
           {titleWithOperateArea}
           {props.cardSubtitle && subtitle}
+          <slot id="afterSubtitleSlot" name="afterSubtitle" />
         </div>
       </div>
       {(!isNil(descriptionList) || alwaysShowDescription) && description()}
@@ -346,6 +347,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         <div className="titleWrapper">
           {titleWithOperateArea}
           {props.cardSubtitle && subtitle}
+          <slot id="afterSubtitleSlot" name="afterSubtitle" />
           {(!isNil(descriptionList) || alwaysShowDescription) &&
             description(20)}
         </div>
