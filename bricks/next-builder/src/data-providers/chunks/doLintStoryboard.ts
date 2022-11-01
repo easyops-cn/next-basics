@@ -13,7 +13,8 @@ export type StoryboardErrorCode =
   | "SCRIPT_BRICK"
   | "TAG_NAME_AS_TARGET"
   | "PROVIDER_AS_BRICK"
-  | "USING_CTX_IN_TPL";
+  | "USING_CTX_IN_TPL"
+  | "USING_TPL_VAR_IN_TPL";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -59,13 +60,16 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   const { customTemplates } = storyboard.meta ?? {};
   const warnedUsingCtxTemplates: string[] = [];
+  const warnedUsingTplVarTemplates: string[] = [];
   if (Array.isArray(customTemplates)) {
     for (const tpl of customTemplates) {
       const contexts = new Set<string>();
+      const tplVariables = new Set<string>();
       visitStoryboardExpressions(
         [tpl.bricks, tpl.state],
         (node, parent) => {
-          if (node.name === "CTX") {
+          if (node.name === "CTX" || node.name === "TPL") {
+            const collection = node.name === "CTX" ? contexts : tplVariables;
             const memberParent = parent[parent.length - 1];
             if (
               memberParent?.node.type === "MemberExpression" &&
@@ -76,32 +80,40 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
                 !memberNode.computed &&
                 memberNode.property.type === "Identifier"
               ) {
-                contexts.add(`CTX.${memberNode.property.name}`);
+                collection.add(`${node.name}.${memberNode.property.name}`);
               } else if (
                 memberNode.computed &&
                 (memberNode.property as any).type === "Literal" &&
                 typeof (memberNode.property as any).value === "string"
               ) {
-                contexts.add(`CTX[${(memberNode.property as any).raw}]`);
+                collection.add(
+                  `${node.name}[${(memberNode.property as any).raw}]`
+                );
               } else {
-                contexts.add(`CTX[...]`);
+                collection.add(`${node.name}[...]`);
               }
             } else {
-              contexts.add("CTX");
+              collection.add(node.name);
             }
           }
         },
-        "CTX"
+        {
+          matchExpressionString(value) {
+            return value.includes("CTX") || value.includes("TPL");
+          },
+        }
       );
 
       if (contexts.size > 0) {
-        const limited = [...contexts];
-        const max = 3;
-        if (limited.length > max) {
-          limited.splice(max, limited.length - max);
-          limited.push("...");
-        }
-        warnedUsingCtxTemplates.push(`${tpl.name}: ${limited.join(", ")}`);
+        warnedUsingCtxTemplates.push(
+          `${tpl.name}: ${limit(contexts, 3).join(", ")}`
+        );
+      }
+
+      if (tplVariables.size > 0) {
+        warnedUsingTplVarTemplates.push(
+          `${tpl.name}: ${limit(tplVariables, 3).join(", ")}`
+        );
       }
     }
   }
@@ -153,5 +165,26 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     });
   }
 
+  if (warnedUsingTplVarTemplates.length > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_TPL_VAR_IN_TPL",
+      message: {
+        zh: `您正在模板中使用 TPL 变量，它已废弃，建议统一修改为 STATE，它覆盖 TPL 的所有能力，同时支持追踪更新等特性：`,
+        en: `You're using TPL variables in templates, which is deprecated. Please use STATE instead, which covers all capabilities of TPL, while supports auto track and more:`,
+      },
+      list: warnedUsingTplVarTemplates,
+    });
+  }
+
   return errors;
+}
+
+function limit(list: Set<string>, max: number): string[] {
+  const limited = [...list];
+  if (limited.length > max) {
+    limited.splice(max, limited.length - max);
+    limited.push("...");
+  }
+  return limited;
 }
