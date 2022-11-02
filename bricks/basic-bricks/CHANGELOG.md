@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.215.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.214.1...@next-bricks/basic-bricks@1.215.0) (2022-11-02)
+
+
+### Features
+
+* update bricks category ([ddf087b](https://github.com/easyops-cn/next-basics/commit/ddf087b4903b4e20630f2189a4b7d699bba9880b))
+* update snippet actions text & add general-modal snippet ([c89e1ba](https://github.com/easyops-cn/next-basics/commit/c89e1baa1eecaf69c4f2241efaac35847c5c3fb2))
+
+
+
+
+
 ## [1.214.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.214.0...@next-bricks/basic-bricks@1.214.1) (2022-11-02)
 
 

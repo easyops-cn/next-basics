@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.362.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.361.0...@next-bricks/developers@1.362.0) (2022-11-02)
+
+
+### Features
+
+* update bricks category ([ddf087b](https://github.com/easyops-cn/next-basics/commit/ddf087b4903b4e20630f2189a4b7d699bba9880b))
+* update snippet actions text ([5ff10e3](https://github.com/easyops-cn/next-basics/commit/5ff10e38a0a04bbda98e47eec4d9eea7fe1df1db))
+* update snippet actions text & add general-modal snippet ([c89e1ba](https://github.com/easyops-cn/next-basics/commit/c89e1baa1eecaf69c4f2241efaac35847c5c3fb2))
+
+
+
+
+
 # [1.361.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.360.0...@next-bricks/developers@1.361.0) (2022-10-27)
 
 

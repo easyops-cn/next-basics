@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/utils@1.2.3...@next-bricks/utils@1.3.0) (2022-11-02)
+
+
+### Features
+
+* update snippet actions text & add general-modal snippet ([c89e1ba](https://github.com/easyops-cn/next-basics/commit/c89e1baa1eecaf69c4f2241efaac35847c5c3fb2))
+
+
+
+
+
 ## [1.2.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/utils@1.2.2...@next-bricks/utils@1.2.3) (2022-11-01)
 
 **Note:** Version bump only for package @next-bricks/utils

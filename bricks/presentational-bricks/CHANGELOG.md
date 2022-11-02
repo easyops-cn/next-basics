@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.270.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.269.1...@next-bricks/presentational-bricks@1.270.0) (2022-11-02)
+
+
+### Features
+
+* update bricks category ([ddf087b](https://github.com/easyops-cn/next-basics/commit/ddf087b4903b4e20630f2189a4b7d699bba9880b))
+
+
+
+
+
 ## [1.269.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.269.0...@next-bricks/presentational-bricks@1.269.1) (2022-11-01)
 
 

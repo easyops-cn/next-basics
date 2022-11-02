@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.245.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.244.1...@next-bricks/forms@1.245.0) (2022-11-02)
+
+
+### Bug Fixes
+
+* 使用useBackend不需要启用前端搜索过滤 ([6fb0b36](https://github.com/easyops-cn/next-basics/commit/6fb0b3629a22eaebe6c8fefae5c13b1f54dc5698))
+
+
+### Features
+
+* update snippet actions text & add general-modal snippet ([c89e1ba](https://github.com/easyops-cn/next-basics/commit/c89e1baa1eecaf69c4f2241efaac35847c5c3fb2))
+
+
+
+
+
 ## [1.244.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.244.0...@next-bricks/forms@1.244.1) (2022-10-31)
 
 
