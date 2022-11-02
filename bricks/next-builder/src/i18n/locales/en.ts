@@ -154,6 +154,12 @@ const locale: Locale = {
   [K.DOCUMENT]: "Document",
   [K.SELF_BRICK_SNIPPETS]: "Single brick snippets",
   [K.SCENE_SNIPPETS]: "Scene snippets",
+  [K.ANALYZING]: "Analyzing...",
+  [K.EVERYTHING_IS_OK]: "Everything is OK.",
+  [K.THERE_ARE_PROBLEMS]: "🚨 There are problems!",
+  [K.VIEW_PROBLEMATIC_BRICK]: "View problematic brick",
+  [K.VIEW_PROBLEMATIC_ROUTE]: "View problematic route",
+  [K.VIEW_PROBLEMATIC_TEMPLATE]: "View problematic template",
 };
 
 export default locale;
