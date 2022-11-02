@@ -267,6 +267,7 @@ export class LaunchpadService {
           localeName: app.localeName,
           id: app.id,
           homepage: app.homepage,
+          currentVersion: app.currentVersion,
           standaloneMode: (app as MicroApp & { standaloneMode: boolean })
             .standaloneMode,
         } as MicroApp,
