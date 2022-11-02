@@ -2,6 +2,7 @@ lazyBricks:
   - builder-container
   - event-config-form
   - search-tree
+  - storyboard-lint-result
   - group: function-debugger
     bricks:
       - function-debugger-sidebar

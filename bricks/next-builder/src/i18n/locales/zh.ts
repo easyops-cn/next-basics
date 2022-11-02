@@ -148,6 +148,12 @@ const locale: Locale = {
   [K.DOCUMENT]: "文档",
   [K.SELF_BRICK_SNIPPETS]: "构件片段",
   [K.SCENE_SNIPPETS]: "场景片段",
+  [K.ANALYZING]: "分析中...",
+  [K.EVERYTHING_IS_OK]: "一切正常。",
+  [K.THERE_ARE_PROBLEMS]: "🚨 有一些问题！",
+  [K.VIEW_PROBLEMATIC_BRICK]: "查看有问题的构件",
+  [K.VIEW_PROBLEMATIC_ROUTE]: "查看有问题的路由",
+  [K.VIEW_PROBLEMATIC_TEMPLATE]: "查看有问题的模板",
 };
 
 export default locale;
