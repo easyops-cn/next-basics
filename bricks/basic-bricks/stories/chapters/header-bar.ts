@@ -1,7 +1,7 @@
 import { Story } from "@next-core/brick-types";
 export const headerBarStory: Story = {
   storyId: "basic-bricks.header-bar",
-  category: "layout",
+  category: "navigation",
   type: "brick",
   author: "zekunpan",
   text: {

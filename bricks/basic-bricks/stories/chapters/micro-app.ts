@@ -2,7 +2,7 @@ import { Story } from "@next-core/brick-types";
 
 export const microAppStory: Story = {
   storyId: "basic-bricks.micro-app",
-  category: "layout",
+  category: "container-layout",
   type: "brick",
   author: "steve",
   deprecated: true,

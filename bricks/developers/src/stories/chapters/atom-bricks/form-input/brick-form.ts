@@ -5,6 +5,7 @@ export const story: Story = {
   storyId: "presentational-bricks.brick-form",
   type: "brick",
   author: "jo",
+  category: "form-input-basic",
   text: {
     en: "Brick Form (Legacy)",
     zh: "表单",
