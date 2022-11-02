@@ -18,6 +18,7 @@ export interface ResizableBoxProps {
   minSpace?: number;
   boxStyle?: React.CSSProperties;
   boxStyleWhenNotResizing?: React.CSSProperties;
+  resizable?: boolean;
 }
 
 export type ResizeDirection = "left" | "right";
@@ -35,6 +36,7 @@ export function ResizableBox({
   minSpace,
   boxStyle,
   boxStyleWhenNotResizing,
+  resizable,
 }: ResizableBoxProps): React.ReactElement {
   const storage = useMemo(
     () =>
@@ -65,6 +67,7 @@ export function ResizableBox({
 
   const handleResizerMouseDown = useCallback(
     (event: MouseEvent) => {
+      if (!resizable) return;
       // Prevent text selecting.
       event.preventDefault();
       setResizerStatus({
@@ -73,7 +76,7 @@ export function ResizableBox({
       });
       setResized(false);
     },
-    [size]
+    [size, resizable]
   );
 
   useEffect(() => {
@@ -95,6 +98,7 @@ export function ResizableBox({
     }
 
     const handleResizerMouseMove = (event: MouseEvent): void => {
+      if (!resizable) return;
       setResized(true);
       debouncedSetSize(
         Math.max(
@@ -110,6 +114,7 @@ export function ResizableBox({
     };
 
     const handleResizerMouseUp = (): void => {
+      if (!resizable) return;
       setResizerStatus(null);
     };
 
@@ -126,6 +131,7 @@ export function ResizableBox({
     refinedMinSpace,
     resizeStatus,
     debouncedSetSize,
+    resizable,
   ]);
 
   useEffect(() => {
@@ -148,7 +154,12 @@ export function ResizableBox({
       >
         <slot name="content" />
       </div>
-      <div className={classNames("bar", resizeDirection)} ref={refBar}>
+      <div
+        className={classNames("bar", resizeDirection, {
+          hoverBar: resizable,
+        })}
+        ref={refBar}
+      >
         {/* Use a fullscreen mask to keep cursor status when dragging the resizer. */}
         <div className="mask" />
       </div>

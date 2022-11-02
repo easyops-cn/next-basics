@@ -26,6 +26,9 @@ export class ResizableBoxElement extends UpdatingElement {
   @property({ type: Number })
   minSize: number;
 
+  @property({ type: Boolean })
+  resizable: boolean;
+
   @property({ type: Number })
   minSpace: number;
 
@@ -68,6 +71,7 @@ export class ResizableBoxElement extends UpdatingElement {
               minSpace={this.minSpace}
               boxStyle={this.boxStyle}
               boxStyleWhenNotResizing={this.boxStyleWhenNotResizing}
+              resizable={this.resizable}
             />
           </BrickWrapper>
         </>,
