@@ -24,6 +24,29 @@ import { viewTypeEnum } from "./component/agendaCalendarContext";
  * 1.x.0: 新增构件 `calendar-bricks.agenda-calendar`
  * @docKind brick
  * @noInheritDoc
+ * @memo
+ * ```typescript
+ * export interface agendaDataType {
+ * start: string;
+ * end: string;
+ * id: string;
+ * title?: string;
+ * taskData?: any;
+ * backgroundColor?: string;
+ * }
+ *
+ * export interface customHolidayType {
+ * start: string;
+ * end: string;
+ * name: string;
+ * }
+ *
+ * export enum viewTypeEnum {
+ * DAY_GRID_MONTH = "dayGridMonth",
+ * DAY_GRID_WEEK = "dayGridWeek",
+ * CUSTOM_DAY = "customDay",
+ * }
+ *```
  */
 export class AgendaCalendarElement extends UpdatingElement {
   /**
