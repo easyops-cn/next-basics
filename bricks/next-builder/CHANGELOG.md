@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.205.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.5...@next-bricks/next-builder@1.205.0) (2022-11-02)
+
+
+### Features
+
+* new brick: storyboard-lint-result ([39d160c](https://github.com/easyops-cn/next-basics/commit/39d160c9df86dcc6c9e5ca9eb2d2b86f1a4c4d6e))
+
+
+
+
+
 ## [1.204.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.204.4...@next-bricks/next-builder@1.204.5) (2022-11-02)
 
 **Note:** Version bump only for package @next-bricks/next-builder
