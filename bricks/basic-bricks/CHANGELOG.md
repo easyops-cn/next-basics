@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.0...@next-bricks/basic-bricks@1.215.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* **launchpad:** fix visitor standalone img error ([4e1acee](https://github.com/easyops-cn/next-basics/commit/4e1aceea3bdd316fd869ecb5c4878af6d30beec5))
+
+
+
+
+
 # [1.215.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.214.1...@next-bricks/basic-bricks@1.215.0) (2022-11-02)
 
 
