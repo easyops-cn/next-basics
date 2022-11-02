@@ -98,6 +98,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     tokenSeparators,
     hiddenCheckedValueSuffix,
     emptyProps,
+    showSearch,
     filterByLabelAndValue,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
@@ -169,8 +170,8 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
             }
           })();
         } else {
-          // eslint-disable-next-line no-console
           props?.useBackend?.provider &&
+            // eslint-disable-next-line no-console
             console.error(
               `Please use "contract api" instead of "${props?.useBackend?.provider}".`
             );
@@ -194,16 +195,22 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
     handleDebounceBackendSearch(value, "search");
   };
 
-  const searchProps = props.showSearch
-    ? {
-        showSearch: true,
-        filterOption: (input: string, option: any) => {
+  const searchProps = useMemo(() => {
+    const filterOption = isSearchable(props.useBackend)
+      ? true
+      : (input: string, option: any) => {
           return filterSearch(input, option, filterByLabelAndValue);
-        },
-      }
-    : {
-        showSearch: false,
-      };
+        };
+    return showSearch
+      ? {
+          showSearch: true,
+          filterOption,
+        }
+      : {
+          showSearch: false,
+        };
+  }, [filterByLabelAndValue, showSearch, props.useBackend]);
+
   const showSuffix = (op: GeneralComplexOption) =>
     hiddenCheckedValueSuffix ? op.value !== checkedValue : true;
   const getOptions = (options: GeneralComplexOption[]) => {
@@ -268,7 +275,10 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
         dropdownStyle={{ padding: "2px" }}
         notFoundContent={<EasyopsEmpty {...emptyProps} />}
         loading={loading}
-        onFocus={() => handleSearchQuery("", "search")}
+        onFocus={() => {
+          props.onFocus?.();
+          handleSearchQuery("", "search");
+        }}
       >
         {props.groupBy
           ? getOptsGroups(options, props.groupBy)

@@ -192,6 +192,7 @@ describe("GeneralSelect", () => {
 
   it("backend search should work", async () => {
     const mockSearch = jest.fn();
+    const onFocus = jest.fn();
 
     const wrapper = mount(
       <GeneralSelect
@@ -206,8 +207,12 @@ describe("GeneralSelect", () => {
           transform: (data) => data.list,
         }}
         onSearch={mockSearch}
+        onFocus={onFocus}
       />
     );
+    expect(wrapper.find(Select).prop("filterOption")).toBe(undefined);
+    wrapper.find(Select).invoke("onFocus")(null);
+    expect(onFocus).toHaveBeenCalled();
 
     wrapper.find(Select).invoke("onSearch")("c");
     jest.advanceTimersByTime(300);
