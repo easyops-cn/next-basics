@@ -157,9 +157,7 @@ export class PopoverContainerElement extends UpdatingElement {
   data: any;
 
   /**
-   * @kind hover|click
    * @required false
-   * @default click
    * @description 触发行为
    * @group basic
    */
