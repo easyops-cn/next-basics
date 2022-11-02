@@ -23,7 +23,6 @@
   width: 4px;
   top: 0;
   bottom: 0;
-  cursor: col-resize;
 }
 
 .left {
@@ -34,7 +33,8 @@
   right: -2px;
 }
 
-.bar:hover {
+.hoverBar:hover {
+  cursor: col-resize;
   background: #007fd4;
   transition: background 0.1s 0.3ms ease-out;
 }
