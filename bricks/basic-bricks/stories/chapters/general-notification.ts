@@ -96,7 +96,7 @@ export const generalNotificationStory: Story = {
       },
       actions: [
         {
-          text: "open()",
+          text: "Open Notification",
           method: "open",
         },
       ],

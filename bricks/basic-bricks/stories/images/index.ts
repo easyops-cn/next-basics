@@ -44,3 +44,4 @@ export { default as generalCustomButtonsDropdownBtnSvg } from "./basic-bricks.ge
 export { default as generalCustomButtonsMoreBtnSvg } from "./basic-bricks.general-custom-buttons[more-btn].svg";
 export { default as generalCustomButtonsStretchSvg } from "./basic-bricks.general-custom-buttons[stretch].svg";
 export { default as generalDrawerBasicSvg } from "./basic-bricks.general-drawer[basic].svg";
+export { default as generalModalBasicSvg } from "./basic-bricks.general-modal[basic].svg";

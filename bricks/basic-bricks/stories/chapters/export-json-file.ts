@@ -45,7 +45,7 @@ export const exportJsonFileStory: Story = {
       },
       actions: [
         {
-          text: "export()",
+          text: "Export JSON File",
           method: "export",
         },
       ],

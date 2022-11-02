@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { generalModalSvg } from "../images";
+import { generalModalBasicSvg } from "../images";
 export const generalModalStory: Story = {
   storyId: "basic-bricks.general-modal",
   category: "container-display",
@@ -84,6 +85,61 @@ export const generalModalStory: Story = {
     {
       bricks: [
         {
+          brick: "basic-bricks.general-modal",
+          events: {
+            "basic-bricks.general-modal.cancel": {
+              action: "message.info",
+              args: ["cancel modal"],
+            },
+            "basic-bricks.general-modal.confirm": {
+              action: "message.info",
+              args: ["confirm modal"],
+            },
+            "modal.close": {
+              action: "message.info",
+              args: ["close modal"],
+            },
+            "modal.open": {
+              action: "message.info",
+              args: ["open modal"],
+            },
+          },
+          properties: {
+            id: "origin",
+            modalTitle: "Modal Title",
+            okText: "Save",
+          },
+          slots: {
+            content: {
+              bricks: [
+                {
+                  brick: "h3",
+                  properties: {
+                    textContent: "modal content",
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
+        },
+      ],
+      snippetId: "basic-bricks.general-modal[basic]",
+      title: {
+        en: "Basic General Modal",
+        zh: "基础模态框",
+      },
+      actions: [
+        {
+          text: "Open Modal",
+          method: "open",
+        },
+      ],
+      thumbnail: generalModalBasicSvg,
+    },
+    {
+      bricks: [
+        {
           description: {
             title: "",
             message:
@@ -158,7 +214,7 @@ export const generalModalStory: Story = {
       },
       actions: [
         {
-          text: "open()",
+          text: "Open Modal",
           method: "open",
         },
       ],
@@ -239,7 +295,7 @@ export const generalModalStory: Story = {
       },
       actions: [
         {
-          text: "open()",
+          text: "Open Modal",
           method: "open",
         },
       ],
@@ -315,7 +371,7 @@ export const generalModalStory: Story = {
       },
       actions: [
         {
-          text: "open()",
+          text: "Open Modal",
           method: "open",
         },
       ],

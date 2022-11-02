@@ -78,7 +78,7 @@ export const broadcastChanel: Story = {
       },
       actions: [
         {
-          text: "postMessage()",
+          text: "Post Message",
           method: "postMessage",
           args: [
             {

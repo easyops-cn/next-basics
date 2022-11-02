@@ -76,7 +76,7 @@ export const generalClipboard: Story = {
       },
       actions: [
         {
-          text: "setClipboardImmediately()",
+          text: "Set Clipboard",
           args: [
             {
               hello: "world",
