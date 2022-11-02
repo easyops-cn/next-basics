@@ -40,7 +40,15 @@ import { NS_FORMS, K } from "../i18n/constants";
 *  endTime: string;
 *}
 
-*export type RangeType = "time" | "date" | "dateTime" | "hmTime";
+*export type RangeType = "time" | "date" | "dateTime" | "hmTime" | "week" | "month" | "quarter" | "year";
+
+*export enum presetRangeType {
+*  Today = "今天",
+*  ThisWeek = "本周",
+*  ThisMonth = "本月",
+*  ThisQuarter = "本季度",
+*  ThisYear = "今年",
+*}
 *```
 */
 export class TimeRangePickerElement extends FormItemElement {

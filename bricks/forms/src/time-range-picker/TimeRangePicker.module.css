@@ -11,3 +11,12 @@
     margin-right: 0;
   }
 }
+
+:global(.ant-picker-dropdown
+    .ant-picker-range-wrapper
+    .ant-picker-footer
+    .ant-picker-ranges
+    .ant-picker-preset
+    > .ant-tag-blue) {
+  background: none;
+}
