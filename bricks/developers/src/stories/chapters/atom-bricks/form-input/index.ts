@@ -1,5 +1,4 @@
 import { Chapter } from "../../../interfaces";
-import { story as brickForm } from "./brick-form";
 import { story as codeEditorLegacy } from "./code-editor-legacy";
 import cmdbInstancesInputForm from "./cmdb-instances-input-form";
 import cmdbInstancesFilterForm from "./cmdb-instances-filter-form";
@@ -16,7 +15,6 @@ export const chapter: Chapter = {
     cmdbInstancesInputForm,
     cmdbInstancesFilterForm,
     cmdbInstancesFilterDisplay,
-    brickForm,
     codeEditorLegacy,
     dynamicFormInputItem,
   ],
