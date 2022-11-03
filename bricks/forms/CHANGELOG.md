@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.245.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.0...@next-bricks/forms@1.245.1) (2022-11-03)
+
+
+### Bug Fixes
+
+* forms.time-range-pick快速筛选的按钮样式背景颜色修改  refs BRICK_STORE-3133 ([a03f24e](https://github.com/easyops-cn/next-basics/commit/a03f24efe2bf98753c1009aa9fc40ca16299cbb5))
+
+
+
+
+
 # [1.245.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.244.1...@next-bricks/forms@1.245.0) (2022-11-02)
 
 
