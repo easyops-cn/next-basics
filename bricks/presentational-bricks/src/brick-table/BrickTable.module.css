@@ -72,6 +72,9 @@ html[data-theme="dark"] {
         }
       }
     }
+    :global(.ant-table-row-selected td) {
+      background: var(--antd-table-cell-fixed-body-bg) !important;
+    }
   }
 }
 
