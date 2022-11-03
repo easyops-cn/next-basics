@@ -117,37 +117,6 @@ describe("LintStoryboard", () => {
           ],
         }),
         expect.objectContaining({
-          code: "PROVIDER_AS_BRICK",
-          list: ["providers-of-any.any-brick", "my.provider-get-something"],
-          details: [
-            {
-              message: "providers-of-any.any-brick",
-              meta: {
-                root: {
-                  type: "route",
-                  alias: "hello",
-                  instanceId: "r-1",
-                },
-                brick: {
-                  instanceId: "b-2",
-                },
-              },
-            },
-            {
-              message: "my.provider-get-something",
-              meta: {
-                root: {
-                  type: "template",
-                  templateId: "tpl-bad",
-                },
-                brick: {
-                  instanceId: "b-4",
-                },
-              },
-            },
-          ],
-        }),
-        expect.objectContaining({
           code: "USING_CTX_IN_TPL",
           list: [
             "tpl-bad: CTX.abc, CTX['xyz'], CTX[...], ...",
@@ -187,6 +156,37 @@ describe("LintStoryboard", () => {
                 root: {
                   type: "template",
                   templateId: "tpl-bad",
+                },
+              },
+            },
+          ],
+        }),
+        expect.objectContaining({
+          code: "PROVIDER_AS_BRICK",
+          list: ["providers-of-any.any-brick", "my.provider-get-something"],
+          details: [
+            {
+              message: "providers-of-any.any-brick",
+              meta: {
+                root: {
+                  type: "route",
+                  alias: "hello",
+                  instanceId: "r-1",
+                },
+                brick: {
+                  instanceId: "b-2",
+                },
+              },
+            },
+            {
+              message: "my.provider-get-something",
+              meta: {
+                root: {
+                  type: "template",
+                  templateId: "tpl-bad",
+                },
+                brick: {
+                  instanceId: "b-4",
                 },
               },
             },
