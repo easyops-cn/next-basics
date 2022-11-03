@@ -3,64 +3,12 @@ import { MenuIcon } from "@next-core/brick-types";
 import { isEmpty } from "lodash";
 import { StepItem, StepType, StepTreeNodeData } from "../interfaces";
 
-function getIcon(type: StepType): MenuIcon {
-  let icon = "question";
-  let color: string;
-
-  switch (type) {
-    case "task":
-      icon = "forward";
-      color = "var(--palette-cyan-6)";
-      break;
-    case "branch":
-      icon = "node-expand";
-      color = "var(--palette-yellow-6)";
-      break;
-    case "switch":
-      icon = "rollback";
-      color = "var(--palette-indigo-6)";
-      break;
-    case "map":
-      icon = "retweet";
-      color = "var(--palette-orange-6)";
-      break;
-    case "iterator":
-      icon = "interaction";
-      color = "var(--palette-blue-6)";
-      break;
-    case "choice":
-      icon = "control";
-      color = "var(--palette-amber-6)";
-      break;
-    case "parallel":
-      icon = "apartment";
-      color = "var(--palette-teal-6)";
-      break;
-    case "success":
-      icon = "check-square";
-      color = "var(--palette-green-6)";
-      break;
-    case "failed":
-      icon = "close-square";
-      color = "var(--palette-red-6)";
-      break;
-    case "pass":
-      icon = "rise";
-      color = "var(--palette-purple-6)";
-  }
-  return {
-    lib: "antd",
-    theme: "outlined",
-    icon,
-    color,
-  };
-}
-
 function getChildren(
   stepIds: string[],
   stepMap: Map<string, StepItem>,
   startAt: string,
-  parentType: StepType
+  parentType: StepType,
+  getIconFn: (type: string) => MenuIcon
 ): StepTreeNodeData[] {
   const treeList: StepTreeNodeData[] = [];
 
@@ -96,7 +44,7 @@ function getChildren(
         id: curStepData.id,
         name: curStepData.name,
         iconTooltip: curStepData.type,
-        icon: getIcon(curStepData.type),
+        icon: getIconFn?.(curStepData.type),
         data: curStepData,
         ...(!isEmpty(curStepData.children)
           ? {
@@ -104,7 +52,8 @@ function getChildren(
                 curStepData.children,
                 stepMap,
                 curStepData.config?.startAt,
-                curStepData.type
+                curStepData.type,
+                getIconFn
               ),
             }
           : {}),
@@ -135,7 +84,8 @@ function getStageList(
 
 export function getStepTreeData(
   rootId: string,
-  stepList: StepItem[]
+  stepList: StepItem[],
+  getIconFn: (type: string) => MenuIcon
 ): StepTreeNodeData[] {
   const startNode = stepList.find((item) => item.id === rootId);
   if (!startNode) return [];
@@ -160,7 +110,7 @@ export function getStepTreeData(
       name: item.name,
       id: item.id,
       data: item,
-      icon: getIcon(item.type),
+      icon: getIconFn?.(item.type),
       iconTooltip: item.type,
       ...(!isEmpty(item.children)
         ? {
@@ -168,7 +118,8 @@ export function getStepTreeData(
               item.children,
               stepMap,
               item.config?.startAt,
-              item.type
+              item.type,
+              getIconFn
             ),
           }
         : {}),

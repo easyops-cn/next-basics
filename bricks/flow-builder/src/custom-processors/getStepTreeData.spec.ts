@@ -1,4 +1,6 @@
 import { getStepTreeData } from "./getStepTreeData";
+import { MenuIcon } from "@next-core/brick-types";
+import { StepType } from "../interfaces";
 
 jest.mock("@next-core/brick-kit", () => ({
   getRuntime: () => ({
@@ -7,6 +9,35 @@ jest.mock("@next-core/brick-kit", () => ({
 }));
 
 describe("getStepTreeData", () => {
+  const getIcon = (type: StepType): MenuIcon => {
+    let icon;
+    let color;
+
+    switch (type) {
+      case "task":
+        icon = "forward";
+        color = "var(--palette-cyan-6)";
+        break;
+      case "branch":
+        icon = "node-expand";
+        color = "var(--palette-yellow-6)";
+        break;
+      case "choice":
+        icon = "control";
+        color = "var(--palette-amber-6)";
+        break;
+      case "switch":
+        icon = "rollback";
+        color = "var(--palette-indigo-6)";
+        break;
+    }
+    return {
+      lib: "antd",
+      theme: "outlined",
+      icon,
+      color,
+    };
+  };
   it.each([
     [
       "root",
@@ -69,6 +100,7 @@ describe("getStepTreeData", () => {
           pre: "step3",
         },
       ],
+      getIcon,
       [
         {
           data: { id: "root", name: "start", next: "step1", type: "task" },
@@ -246,35 +278,39 @@ describe("getStepTreeData", () => {
         },
       ],
     ],
-  ])("should work", (rootId, data, result) => {
-    expect(getStepTreeData(rootId, data)).toEqual(result);
+  ])("should work", (rootId, data, fn, result) => {
+    expect(getStepTreeData(rootId, data, fn)).toEqual(result);
   });
 
   it("should console error msg", () => {
     const spyOnConsoleError = jest.spyOn(console, "error");
-    getStepTreeData("step1", [
-      {
-        id: "step1",
-        name: "step1",
-        type: "switch",
-        children: ["branch1", "step2"],
-        config: {
-          startAt: "branch1",
+    getStepTreeData(
+      "step1",
+      [
+        {
+          id: "step1",
+          name: "step1",
+          type: "switch",
+          children: ["branch1", "step2"],
+          config: {
+            startAt: "branch1",
+          },
         },
-      },
-      {
-        id: "branch1",
-        name: "branch1",
-        type: "branch",
-        parent: "step1",
-      },
-      {
-        id: "step2",
-        name: "step2",
-        type: "task",
-        parent: "step2",
-      },
-    ]);
+        {
+          id: "branch1",
+          name: "branch1",
+          type: "branch",
+          parent: "step1",
+        },
+        {
+          id: "step2",
+          name: "step2",
+          type: "task",
+          parent: "step2",
+        },
+      ],
+      getIcon
+    );
 
     expect(spyOnConsoleError).toBeCalledWith(
       "The children of switch and parallel can only be `branch` nodes, but current node type is `task`"
