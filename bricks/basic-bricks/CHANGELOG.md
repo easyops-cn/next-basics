@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.2...@next-bricks/basic-bricks@1.215.3) (2022-11-03)
+
+
+### Bug Fixes
+
+* 修复resizable-box Bug,设置resizable属性默认值,兼容默认情况 ([b08b6fa](https://github.com/easyops-cn/next-basics/commit/b08b6fa95276c3b9d03c05b43e1550595811a9e3))
+
+
+
+
+
 ## [1.215.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.1...@next-bricks/basic-bricks@1.215.2) (2022-11-02)
 
 
