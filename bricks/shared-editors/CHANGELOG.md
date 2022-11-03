@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.5.3...@next-bricks/shared-editors@1.5.4) (2022-11-03)
+
+**Note:** Version bump only for package @next-bricks/shared-editors
+
+
+
+
+
 ## [1.5.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/shared-editors@1.5.2...@next-bricks/shared-editors@1.5.3) (2021-08-12)
 
 **Note:** Version bump only for package @next-bricks/shared-editors
