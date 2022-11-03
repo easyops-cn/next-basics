@@ -1,5 +1,5 @@
 import { i18nText } from "@next-core/brick-kit";
-import { GeneralIcon, Link } from "@next-libs/basic-components";
+import { Link } from "@next-libs/basic-components";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import type {
