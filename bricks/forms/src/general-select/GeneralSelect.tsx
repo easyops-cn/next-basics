@@ -197,7 +197,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
 
   const searchProps = useMemo(() => {
     const filterOption = isSearchable(props.useBackend)
-      ? true
+      ? false
       : (input: string, option: any) => {
           return filterSearch(input, option, filterByLabelAndValue);
         };
