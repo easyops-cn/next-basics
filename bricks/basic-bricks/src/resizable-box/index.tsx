@@ -26,8 +26,8 @@ export class ResizableBoxElement extends UpdatingElement {
   @property({ type: Number })
   minSize: number;
 
-  @property({ type: Boolean })
-  resizable: boolean;
+  @property({ attribute: false })
+  resizable = true;
 
   @property({ type: Number })
   minSpace: number;
