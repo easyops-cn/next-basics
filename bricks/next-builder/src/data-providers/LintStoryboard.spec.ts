@@ -25,6 +25,10 @@ describe("LintStoryboard", () => {
                       target: "forms\\.general-modal",
                       method: "close",
                     },
+                    enter: {
+                      action: "context.assign",
+                      args: ["good"],
+                    },
                   },
                 },
                 {
@@ -54,6 +58,24 @@ describe("LintStoryboard", () => {
                     brick: "my.provider-get-something",
                     iid: "b-4",
                     bg: true,
+                  },
+                ],
+              },
+              {
+                name: "tpl-bad-2",
+                bricks: [
+                  {
+                    brick: "any-brick",
+                    events: {
+                      click: [
+                        {
+                          action: "context.replace",
+                        },
+                        {
+                          action: "context.assign",
+                        },
+                      ],
+                    },
                   },
                 ],
               },
@@ -127,7 +149,10 @@ describe("LintStoryboard", () => {
         }),
         expect.objectContaining({
           code: "USING_CTX_IN_TPL",
-          list: ["tpl-bad: CTX.abc, CTX['xyz'], CTX[...], ..."],
+          list: [
+            "tpl-bad: CTX.abc, CTX['xyz'], CTX[...], ...",
+            "tpl-bad-2: context.replace, context.assign",
+          ],
           details: [
             {
               message: "tpl-bad",
@@ -136,6 +161,16 @@ describe("LintStoryboard", () => {
                 root: {
                   type: "template",
                   templateId: "tpl-bad",
+                },
+              },
+            },
+            {
+              message: "tpl-bad-2",
+              messageSuffix: ": context.replace, context.assign",
+              meta: {
+                root: {
+                  type: "template",
+                  templateId: "tpl-bad-2",
                 },
               },
             },
@@ -183,12 +218,82 @@ describe("LintStoryboard", () => {
                   brick: "basic-bricks.script-brick",
                   iid: "b-2",
                 },
+                {
+                  brick: "my.any-brick",
+                  iid: "b-3",
+                  events: {
+                    click: {
+                      action: "oops" as any,
+                    },
+                    dblclick: [
+                      {
+                        useProvider: "my.any-provider",
+                      },
+                      {
+                        target: "#my-target",
+                      },
+                      {
+                        act: "handleHttpError",
+                      },
+                    ] as any[],
+                  },
+                },
               ],
             },
           ],
         },
       },
       [
+        expect.objectContaining({
+          code: "UNKNOWN_EVENT_ACTION",
+          details: [
+            {
+              message: "action: oops",
+              meta: {
+                root: {
+                  type: "route",
+                  alias: "hello",
+                  instanceId: "r-1",
+                },
+                brick: {
+                  instanceId: "b-3",
+                },
+              },
+            },
+          ],
+        }),
+        expect.objectContaining({
+          code: "UNKNOWN_EVENT_HANDLER",
+          details: [
+            {
+              message:
+                'Missing `method` or `properties`: {"target":"#my-target"}',
+              meta: {
+                root: {
+                  type: "route",
+                  alias: "hello",
+                  instanceId: "r-1",
+                },
+                brick: {
+                  instanceId: "b-3",
+                },
+              },
+            },
+            {
+              message: '{"act":"handleHttpError"}',
+              meta: {
+                root: {
+                  type: "route",
+                  alias: "hello",
+                  instanceId: "r-1",
+                },
+                brick: {
+                  instanceId: "b-3",
+                },
+              },
+            },
+          ],
+        }),
         expect.objectContaining({
           code: "SCRIPT_BRICK",
           details: [

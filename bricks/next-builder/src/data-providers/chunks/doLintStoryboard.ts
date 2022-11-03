@@ -1,6 +1,6 @@
 import type {
   BrickConf,
-  CustomBrickEventHandler,
+  BuiltinBrickEventHandler,
   CustomTemplate,
   I18nData,
   Storyboard,
@@ -12,13 +12,28 @@ import {
   visitStoryboardExpressions,
 } from "@next-core/brick-utils";
 
+// https://github.com/type-challenges/type-challenges/issues/18153
+type UnionToFnIntersection<T> = (
+  T extends unknown ? (arg: () => T) => unknown : never
+) extends (arg: infer P) => unknown
+  ? P
+  : never;
+type UnionToTuple<
+  T,
+  A extends unknown[] = []
+> = UnionToFnIntersection<T> extends () => infer R
+  ? UnionToTuple<Exclude<T, R>, [R, ...A]>
+  : A;
+
 export type StoryboardErrorCode =
   | "SCRIPT_BRICK"
   | "TAG_NAME_AS_TARGET"
   | "PROVIDER_AS_BRICK"
   | "MISUSE_OF_PORTAL_BRICK"
   | "USING_CTX_IN_TPL"
-  | "USING_TPL_VAR_IN_TPL";
+  | "USING_TPL_VAR_IN_TPL"
+  | "UNKNOWN_EVENT_ACTION"
+  | "UNKNOWN_EVENT_HANDLER";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -51,6 +66,92 @@ export interface LintDetailMeta {
 }
 
 export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
+  const builtinActions = new Set([
+    "history.push",
+    "history.replace",
+    "history.goBack",
+    "history.goForward",
+
+    // Extended History
+    "history.reload",
+    "history.pushQuery",
+    "history.replaceQuery",
+    "history.pushAnchor",
+    // "history.replaceAnchor",
+
+    // Overridden History
+    "history.block",
+    "history.unblock",
+
+    // Segues
+    "segue.push",
+    "segue.replace",
+
+    // Alias
+    "alias.push",
+    "alias.replace",
+
+    // localStorage
+    "localStorage.setItem",
+    "localStorage.removeItem",
+
+    // sessionStorage
+    "sessionStorage.setItem",
+    "sessionStorage.removeItem",
+
+    // Iframe
+    "legacy.go",
+
+    // Browser method
+    "location.reload",
+    "location.assign",
+    "window.open",
+    "event.preventDefault",
+    "console.log",
+    "console.error",
+    "console.warn",
+    "console.info",
+
+    // Antd message
+    "message.success",
+    "message.error",
+    "message.info",
+    "message.warn",
+
+    // `handleHttpError`
+    "handleHttpError",
+
+    // Storyboard context
+    "context.assign",
+    "context.replace",
+    "context.refresh",
+    "context.load",
+
+    // Update template state
+    "state.update",
+    "state.refresh",
+    "state.load",
+
+    // Find related tpl and dispatch event.
+    "tpl.dispatchEvent",
+
+    // Websocket event
+    "message.subscribe",
+    "message.unsubscribe",
+
+    // Theme and mode.
+    "theme.setDarkTheme",
+    "theme.setLightTheme",
+    "theme.setTheme",
+    "mode.setDashboardMode",
+    "mode.setDefaultMode",
+    "menu.clearMenuTitleCache",
+    "menu.clearMenuCache",
+    "preview.debug",
+
+    // Analytics
+    "analytics.event",
+  ] as UnionToTuple<BuiltinBrickEventHandler["action"]>);
   const tagNameAsTargetRegExp = /^[-\w]+(\\\.[-\w]+)*$/;
   const providerBrickRegExp = /^providers-of-/;
   const customProviderBrickRegExp = /\.provider-/;
@@ -65,9 +166,23 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const warnedTargets = new Map<string, LintDetailMeta>();
   const warnedProviders = new Map<string, LintDetailMeta>();
   const warnedPortalBricks = new Map<string, LintDetailMeta>();
+  const usingCtxActionsInTemplate = new Map<string, Set<string>>();
+  const unknownEventActions = new Map<string, LintDetailMeta>();
+  const unknownEventHandlers = new Map<string, LintDetailMeta>();
 
   const errors: StoryboardError[] = [];
   const usingScriptBrick: LintDetail[] = [];
+
+  const addMeta = (
+    map: Map<string, LintDetailMeta>,
+    message: string,
+    node: StoryboardNode,
+    path: StoryboardNode[]
+  ): void => {
+    if (!map.has(message)) {
+      map.set(message, getMetaByPath(path.concat(node)));
+    }
+  };
 
   const ast = parseStoryboard(storyboard);
   traverseStoryboard(ast, (node, path) => {
@@ -86,21 +201,74 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
               meta,
             });
           } else if (providerBrickRegExp.test(brick)) {
-            warnedProviders.set(brick, getMetaByPath(path.concat(node)));
+            addMeta(warnedProviders, brick, node, path);
           } else if (bg && customProviderBrickRegExp.test(brick)) {
-            warnedProviders.set(brick, getMetaByPath(path.concat(node)));
+            addMeta(warnedProviders, brick, node, path);
           } else if (portalBricks.has(brick) && !portal) {
-            warnedPortalBricks.set(brick, getMetaByPath(path.concat(node)));
+            addMeta(warnedPortalBricks, brick, node, path);
           }
         }
         break;
       }
       case "EventHandler": {
-        const { target } = node.raw as CustomBrickEventHandler;
-        if (typeof target === "string") {
-          if (target !== "_self" && tagNameAsTargetRegExp.test(target)) {
-            warnedTargets.set(target, getMetaByPath(path.concat(node)));
+        const { target, targetRef, action, useProvider, method, properties } =
+          node.raw as {
+            target?: string;
+            targetRef?: string;
+            action?: BuiltinBrickEventHandler["action"];
+            useProvider?: string;
+            method?: unknown;
+            properties?: unknown;
+          };
+        const isBuiltinAction = typeof action === "string";
+        if (isBuiltinAction) {
+          switch (action) {
+            case "context.assign":
+            case "context.load":
+            case "context.refresh":
+            case "context.replace": {
+              const meta = getMetaByPath(path.concat(node));
+              if (meta.root?.type === "template") {
+                let list = usingCtxActionsInTemplate.get(meta.root.templateId);
+                if (!list) {
+                  usingCtxActionsInTemplate.set(
+                    meta.root.templateId,
+                    (list = new Set())
+                  );
+                }
+                list.add(action);
+              }
+              break;
+            }
+            default:
+              // Unknown actions.
+              if (!builtinActions.has(action)) {
+                addMeta(unknownEventActions, `action: ${action}`, node, path);
+              }
           }
+        } else if (typeof target === "string") {
+          // Tag name as target.
+          if (target !== "_self" && tagNameAsTargetRegExp.test(target)) {
+            addMeta(warnedTargets, target, node, path);
+          }
+        }
+        // Unknown event handlers.
+        let reason = "";
+        if (
+          !(
+            isBuiltinAction ||
+            typeof useProvider === "string" ||
+            ((target || targetRef) &&
+              ((reason = "Missing `method` or `properties`: "),
+              method || properties))
+          )
+        ) {
+          addMeta(
+            unknownEventHandlers,
+            limitString(`${reason}${JSON.stringify(node.raw)}`, 100),
+            node,
+            path
+          );
         }
         break;
       }
@@ -153,6 +321,13 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         }
       );
 
+      const usingCtxActions = usingCtxActionsInTemplate.get(tpl.name);
+      if (usingCtxActions) {
+        for (const action of usingCtxActions) {
+          contexts.add(action);
+        }
+      }
+
       for (const [collection, warned] of [
         [contexts, warnedUsingCtxTemplates],
         [tplVariables, warnedUsingTplVarTemplates],
@@ -171,6 +346,38 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         }
       }
     }
+  }
+
+  if (unknownEventActions.size > 0) {
+    errors.push({
+      type: "error",
+      code: "UNKNOWN_EVENT_ACTION",
+      message: {
+        zh: "您正在使用一些未知的事件动作：",
+        en: "You're using unknown event actions:",
+      },
+      list: [...unknownEventActions.keys()],
+      details: [...unknownEventActions.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
+  }
+
+  if (unknownEventHandlers.size > 0) {
+    errors.push({
+      type: "error",
+      code: "UNKNOWN_EVENT_HANDLER",
+      message: {
+        zh: "您正在使用一些未知的事件处理器：",
+        en: "You're using unknown event handlers:",
+      },
+      list: [...unknownEventHandlers.keys()],
+      details: [...unknownEventHandlers.entries()].map(([message, meta]) => ({
+        message,
+        meta,
+      })),
+    });
   }
 
   if (usingScriptBrick.length > 0) {
@@ -306,4 +513,11 @@ function limit(list: Set<string>, max: number): string[] {
     limited.push("...");
   }
   return limited;
+}
+
+function limitString(string: string, max: number): string {
+  if (string.length > max) {
+    return `${string.substring(0, max - 3)}...`;
+  }
+  return string;
 }
