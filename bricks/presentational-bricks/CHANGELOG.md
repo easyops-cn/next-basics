@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.270.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.270.0...@next-bricks/presentational-bricks@1.270.1) (2022-11-03)
+
+
+### Bug Fixes
+
+* **brick-table:** 修复table组件选中后，单元格背景透明的问题 ([86726d0](https://github.com/easyops-cn/next-basics/commit/86726d0eec4b6eccc936426797e07392d2fb9208))
+
+
+
+
+
 # [1.270.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.269.1...@next-bricks/presentational-bricks@1.270.0) (2022-11-02)
 
 
