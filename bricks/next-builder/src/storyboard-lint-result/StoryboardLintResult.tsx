@@ -1,6 +1,6 @@
 import { i18nText } from "@next-core/brick-kit";
 import { Link } from "@next-libs/basic-components";
-import React, { useContext } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type {
   LintDetail,
@@ -70,8 +70,9 @@ export function StoryboardLintSummary({
   message,
   details,
 }: StoryboardError): React.ReactElement {
+  const [expanded, setExpanded] = useState(false);
   const max = 5;
-  const overflow = (details?.length ?? 0) - max;
+  const overflow = expanded ? 0 : (details?.length ?? 0) - max;
   const clampedDetails = overflow > 0 ? details.slice(0, max - 1) : details;
   return (
     <li className={`${styles.item} ${styles[type]}`}>
@@ -80,7 +81,17 @@ export function StoryboardLintSummary({
         {clampedDetails?.map((item, index) => (
           <StoryboardLintDetail key={index} {...item} />
         ))}
-        {overflow > 0 && <li>{`And ${overflow + 1} more...`}</li>}
+        {overflow > 0 && (
+          <li>
+            <a
+              className={styles.link}
+              role="button"
+              onClick={() => {
+                setExpanded(true);
+              }}
+            >{`And ${overflow + 1} more...`}</a>
+          </li>
+        )}
       </ul>
     </li>
   );

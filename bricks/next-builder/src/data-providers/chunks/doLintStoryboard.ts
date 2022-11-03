@@ -408,6 +408,36 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     });
   }
 
+  if (warnedUsingCtxTemplates.length > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_CTX_IN_TPL",
+      message: {
+        zh: "您正在模板中使用 CTX，这破坏了模板的封装性，建议配置为 STATE，并在外部通过属性传递给模板：",
+        en: "You're using CTX in templates, which breaks the encapsulation of templates. Please use STATE instead, and pass in externally through properties:",
+      },
+      list: warnedUsingCtxTemplates.map(
+        (detail) => `${detail.message}${detail.messageSuffix}`
+      ),
+      details: warnedUsingCtxTemplates,
+    });
+  }
+
+  if (warnedUsingTplVarTemplates.length > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_TPL_VAR_IN_TPL",
+      message: {
+        zh: "您正在模板中使用 TPL 变量，它已废弃，建议统一修改为 STATE，它覆盖 TPL 的所有能力，同时支持追踪更新等特性：",
+        en: "You're using TPL variables in templates, which is deprecated. Please use STATE instead, which covers all capabilities of TPL, while supports auto track and more:",
+      },
+      list: warnedUsingTplVarTemplates.map(
+        (detail) => `${detail.message}${detail.messageSuffix}`
+      ),
+      details: warnedUsingTplVarTemplates,
+    });
+  }
+
   if (warnedProviders.size > 0) {
     errors.push({
       type: "warn",
@@ -437,36 +467,6 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         message,
         meta,
       })),
-    });
-  }
-
-  if (warnedUsingCtxTemplates.length > 0) {
-    errors.push({
-      type: "warn",
-      code: "USING_CTX_IN_TPL",
-      message: {
-        zh: "您正在模板中使用 CTX，这破坏了模板的封装性，建议配置为 STATE，并在外部通过属性传递给模板：",
-        en: "You're using CTX in templates, which breaks the encapsulation of templates. Please use STATE instead, and pass in externally through properties:",
-      },
-      list: warnedUsingCtxTemplates.map(
-        (detail) => `${detail.message}${detail.messageSuffix}`
-      ),
-      details: warnedUsingCtxTemplates,
-    });
-  }
-
-  if (warnedUsingTplVarTemplates.length > 0) {
-    errors.push({
-      type: "warn",
-      code: "USING_TPL_VAR_IN_TPL",
-      message: {
-        zh: "您正在模板中使用 TPL 变量，它已废弃，建议统一修改为 STATE，它覆盖 TPL 的所有能力，同时支持追踪更新等特性：",
-        en: "You're using TPL variables in templates, which is deprecated. Please use STATE instead, which covers all capabilities of TPL, while supports auto track and more:",
-      },
-      list: warnedUsingTplVarTemplates.map(
-        (detail) => `${detail.message}${detail.messageSuffix}`
-      ),
-      details: warnedUsingTplVarTemplates,
     });
   }
 
