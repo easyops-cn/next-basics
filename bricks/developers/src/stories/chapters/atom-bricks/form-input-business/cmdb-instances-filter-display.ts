@@ -7,6 +7,7 @@ const story: Story = {
   storyId: "cmdb-instances.cmdb-instances-filter-display",
   type: "template",
   author: "cyril",
+  category: "form-input-business",
   text: {
     en: "cmdb instances filter display",
     zh: "CMDB 实例动态选择展示项",

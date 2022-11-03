@@ -10,9 +10,9 @@ const story: Story = {
     en: "Dynamic Add or Remove Input Item",
     zh: "动态的输入表单项",
   },
+  category: "form-input-advanced",
   description: {
-    en:
-      "Form Item Data Is An Array, And Each Row Can Be Added Or Deleted Dynamically",
+    en: "Form Item Data Is An Array, And Each Row Can Be Added Or Deleted Dynamically",
     zh: "表单项是数组形式的结构，可以动态增加或删除每一行",
   },
   icon: {

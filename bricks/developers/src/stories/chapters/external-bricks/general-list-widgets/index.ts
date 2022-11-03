@@ -4,9 +4,9 @@ import { story as generalCardList } from "./general-card-list";
 import { story as collapsibleCardList } from "./collapsible-card-list";
 import { story as searchableCardList } from "./searchable-card-list";
 export const chapter: Chapter = {
-  category: "card",
+  category: "general-list-widgets",
   title: {
-    en: "card",
+    en: "general-list-widgets",
     zh: "卡片列表",
   },
   stories: [

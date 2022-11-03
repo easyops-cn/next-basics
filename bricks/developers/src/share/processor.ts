@@ -10,6 +10,7 @@ import {
 } from "@next-core/brick-types";
 import { atomBook } from "../stories/chapters/atom-bricks";
 import { businessBook } from "../stories/chapters/business-bricks";
+import { externalBook } from "../stories/chapters/external-bricks";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
 
 export interface BrickRecord {
@@ -69,7 +70,7 @@ export const getAllStoryListV2 = (
   const storyList: BrickRecord[] = [];
   let books: Chapter[] = [];
   fields = fields || {};
-  const externalBook: Chapter[] = [];
+  const otherBook: Chapter[] = [];
   const groups = cloneDeep(categoryGroups);
   groups.forEach((menu) => {
     if (menu.group === "atom") {
@@ -84,7 +85,6 @@ export const getAllStoryListV2 = (
 
     if (menu.group === "business") {
       menu.items.forEach((item) => {
-        // atomBook.
         if (!businessBook.some((book) => book.category === item.category)) {
           businessBook.push({ ...item, stories: [] });
         }
@@ -93,11 +93,38 @@ export const getAllStoryListV2 = (
       return;
     }
 
-    externalBook.push(...menu.items);
+    if (menu.group === "widget") {
+      menu.items.forEach((item) => {
+        if (!externalBook.some((book) => book.category === item.category)) {
+          externalBook.push({ ...item, stories: [] });
+        }
+      });
+
+      return;
+    }
+
+    otherBook.push(...menu.items);
   });
-  books = [...atomBook, ...businessBook, ...externalBook];
+
+  books = [
+    ...atomBook,
+    ...businessBook,
+    ...externalBook,
+    ...otherBook,
+    {
+      title: { en: "no-category", zh: "未分类构件" },
+      category: "no-category",
+      stories: [],
+    },
+    {
+      title: { en: "old-category", zh: "旧分类构件" },
+      category: "old-category",
+      stories: [],
+    },
+  ];
+
   stories.forEach((story) => {
-    const finder = books.find((book) =>
+    let finder = books.find((book) =>
       story.layerType === "widget"
         ? book.category === story.storyId.split(".")[0]
         : book.category === story.category
@@ -113,6 +140,13 @@ export const getAllStoryListV2 = (
         finder.stories[index] = story;
       }
     } else {
+      // brick with no `categroy` Or brick with old `category` and `category` isn't included in `atomBook`
+      finder = books.find((book) =>
+        !story.category
+          ? book.category === "no-category"
+          : book.category === "old-category"
+      );
+      finder.stories.push(story);
       // eslint-disable-next-line no-console
       console.warn(
         "Cannot match category  `%s` of `%s`  with any existed category. %o",

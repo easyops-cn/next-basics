@@ -5,17 +5,18 @@ export const story: Story = {
   storyId: "general-tables.front-search-table",
   type: "template",
   author: "lynette",
+  category: "table-widgets",
   text: {
     en: "Front end search table",
-    zh: "前端搜索表格"
+    zh: "前端搜索表格",
   },
   description: {
     en: "Front end search table",
-    zh: "通用的前端搜索表格"
+    zh: "通用的前端搜索表格",
   },
   icon: {
     lib: "fa",
-    icon: "table"
+    icon: "table",
   },
   conf: [
     {
@@ -23,28 +24,28 @@ export const story: Story = {
       params: {
         tableProps: {
           id: "table1",
-          rowKey: "id"
+          rowKey: "id",
         },
         toolbarBricks: [
           {
             brick: "basic-bricks.general-button",
             properties: {
-              buttonName: "设置显示列"
+              buttonName: "设置显示列",
             },
             events: {
               "general.button.click": {
-                action: "console.log"
-              }
-            }
-          }
+                action: "console.log",
+              },
+            },
+          },
         ],
         afterSearchBricks: [
           {
             brick: "presentational-bricks.datetime-selector",
             properties: {
-              from: "now/d"
-            }
-          }
+              from: "now/d",
+            },
+          },
         ],
         belowSearchBricks: [
           {
@@ -55,41 +56,41 @@ export const story: Story = {
                 { key: "dev", label: "开发" },
                 { key: "test", label: "测试" },
                 { key: "prerelease", label: "预发布" },
-                { key: "prod", label: "生产" }
+                { key: "prod", label: "生产" },
               ],
               multipleCheck: false,
               configProps: {
-                color: "#108ee9"
+                color: "#108ee9",
               },
               default: "dev",
               showCard: false,
               tagStyle: {
-                marginBottom: 0
-              }
+                marginBottom: 0,
+              },
             },
             events: {
               "checked.update": {
-                action: "console.log"
-              }
-            }
-          }
+                action: "console.log",
+              },
+            },
+          },
         ],
         columns: [
           {
             title: "Name",
             dataIndex: "name",
-            key: "name"
+            key: "name",
           },
           {
             title: "Age",
             dataIndex: "age",
-            key: "age"
+            key: "age",
           },
           {
             title: "Address",
             dataIndex: "address",
-            key: "address"
-          }
+            key: "address",
+          },
         ],
         frontSearchFilterKeys: ["name", "age", "address"],
         dataSource: {
@@ -98,55 +99,55 @@ export const story: Story = {
               id: "1",
               name: "John Brown",
               age: 32,
-              address: "New York No. 1 Lake Park"
+              address: "New York No. 1 Lake Park",
             },
             {
               id: "2",
               name: "Jim Green",
               age: 42,
-              address: "London No. 1 Lake Park"
+              address: "London No. 1 Lake Park",
             },
             {
               id: "3",
               name: "Joe Black",
               age: 32,
-              address: "Sidney No. 1 Lake Park"
-            }
+              address: "Sidney No. 1 Lake Park",
+            },
           ],
           page: 1,
           pageSize: 10,
-          total: 3
-        }
-      }
+          total: 3,
+        },
+      },
     },
     {
       template: "general-tables.front-search-table",
       params: {
         tableProps: {
           id: "table2",
-          rowKey: "id"
+          rowKey: "id",
         },
         cardProps: {
           configProps: {
-            title: "标题栏"
-          }
+            title: "标题栏",
+          },
         },
         columns: [
           {
             title: "Name",
             dataIndex: "name",
-            key: "name"
+            key: "name",
           },
           {
             title: "Age",
             dataIndex: "age",
-            key: "age"
+            key: "age",
           },
           {
             title: "Address",
             dataIndex: "address",
-            key: "address"
-          }
+            key: "address",
+          },
         ],
         shouldUpdateUrlParams: false,
         frontSearchFilterKeys: ["name", "age", "address"],
@@ -156,21 +157,21 @@ export const story: Story = {
               id: "1",
               name: "John Brown",
               age: 32,
-              address: "New York No. 1 Lake Park"
+              address: "New York No. 1 Lake Park",
             },
             {
               id: "2",
               name: "Jim Green",
               age: 42,
-              address: "London No. 1 Lake Park"
-            }
+              address: "London No. 1 Lake Park",
+            },
           ],
           page: 1,
           pageSize: 10,
-          total: 2
-        }
-      }
-    }
+          total: 2,
+        },
+      },
+    },
   ],
-  doc: docMD
+  doc: docMD,
 };

@@ -1,21 +1,17 @@
 import { Chapter } from "../../../interfaces";
-import { story as codeEditorLegacy } from "./code-editor-legacy";
 import cmdbInstancesInputForm from "./cmdb-instances-input-form";
 import cmdbInstancesFilterForm from "./cmdb-instances-filter-form";
 import cmdbInstancesFilterDisplay from "./cmdb-instances-filter-display";
-import dynamicFormInputItem from "./dynamic-form-input-item";
 
 export const chapter: Chapter = {
-  category: "form-input",
+  category: "form-input-business",
   title: {
-    en: "form input",
-    zh: "表单输入",
+    en: "form input business",
+    zh: "业务构件表单输入",
   },
   stories: [
     cmdbInstancesInputForm,
     cmdbInstancesFilterForm,
     cmdbInstancesFilterDisplay,
-    codeEditorLegacy,
-    dynamicFormInputItem,
   ],
 };
