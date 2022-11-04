@@ -9,6 +9,7 @@ export const story: Story = {
     en: "cmdb query adapter",
     zh: "cmdb query 转换provider",
   },
+  category: "data-transform",
   description: {
     en: "",
     zh: "用于转换cmdb query，自动清洗空值／undefined／null等非法值",

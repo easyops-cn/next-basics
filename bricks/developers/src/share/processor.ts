@@ -84,7 +84,6 @@ export const getAllStoryListV2 = (
 
     if (menu.group === "business") {
       menu.items.forEach((item) => {
-        // atomBook.
         if (!businessBook.some((book) => book.category === item.category)) {
           businessBook.push({ ...item, stories: [] });
         }
@@ -95,24 +94,34 @@ export const getAllStoryListV2 = (
 
     externalBook.push(...menu.items);
   });
-  books = [...atomBook, ...businessBook, ...externalBook];
+
+  books = [
+    ...atomBook,
+    ...businessBook,
+    ...externalBook,
+    {
+      title: { en: "no-match-category", zh: "未匹配分类" },
+      category: "no-match-category",
+      stories: [],
+    },
+  ];
+
   stories.forEach((story) => {
-    const finder = books.find((book) =>
+    let finder = books.find((book) =>
       story.layerType === "widget"
         ? book.category === story.storyId.split(".")[0]
         : book.category === story.category
     );
-    if (finder) {
-      !finder.stories && (finder.stories = []);
-      const index = finder.stories.findIndex(
-        (v) => v.storyId === story.storyId
-      );
-      if (index === -1) {
-        finder.stories.push(story);
-      } else {
-        finder.stories[index] = story;
-      }
+    !finder &&
+      (finder = books.find((book) => book.category === "no-match-category"));
+    !finder.stories && (finder.stories = []);
+    const index = finder.stories.findIndex((v) => v.storyId === story.storyId);
+    if (index === -1) {
+      finder.stories.push(story);
     } else {
+      finder.stories[index] = story;
+    }
+    if (finder.category === "no-match-category") {
       // eslint-disable-next-line no-console
       console.warn(
         "Cannot match category  `%s` of `%s`  with any existed category. %o",

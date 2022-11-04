@@ -2,10 +2,10 @@ import { Chapter } from "../../../interfaces";
 import { story as providerQueryAdapter } from "./provider-query-adapter";
 
 export const chapter: Chapter = {
-  category: "data-convert",
+  category: "data-transform",
   title: {
-    en: "data-convert",
-    zh: "数据转换工具",
+    en: "data transform",
+    zh: "信息自动转换",
   },
   stories: [providerQueryAdapter],
 };

@@ -5,6 +5,7 @@ const story: Story = {
   storyId: "cmdb-instances.cmdb-instances-filter-form",
   type: "brick",
   author: "cyril",
+  category: "form-input-business",
   text: {
     en: "cmdb instances filter form",
     zh: "CMDB 实例动态选择表单项",

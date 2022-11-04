@@ -5,6 +5,7 @@ export const story: Story = {
   storyId: "general-list.general-card-list",
   type: "template",
   author: "lynette",
+  category: "other",
   text: {
     en: "general card list",
     zh: "通用卡片列表",
@@ -189,24 +190,21 @@ export const story: Story = {
             id: "1",
             title: "消息订阅",
             subtitle: "自动发现实例关系",
-            desc:
-              "chrome-extension://chphl pgkk boli fa imnlloiipkdnihall/onetab.html",
+            desc: "chrome-extension://chphl pgkk boli fa imnlloiipkdnihall/onetab.html",
             iconColor: "geekblue",
           },
           {
             id: "2",
             title: "消息订阅",
             subtitle: "自动发现实例关系",
-            desc:
-              "chrome-extension://chphl pgkk boli fa imnlloiipkdnihall/onetab.html",
+            desc: "chrome-extension://chphl pgkk boli fa imnlloiipkdnihall/onetab.html",
             iconColor: "green",
           },
           {
             id: "3",
             title: "消息订阅",
             subtitle: "自动发现实例关系",
-            desc:
-              "chrome-extension://chphl pgkk boli fa imnlloiipkdnihall/onetab.html",
+            desc: "chrome-extension://chphl pgkk boli fa imnlloiipkdnihall/onetab.html",
             iconColor: "cyan",
           },
         ],
@@ -228,8 +226,7 @@ export const story: Story = {
           {
             id: "1",
             name: "标题1",
-            desc:
-              "这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的描述信息啦啦啦",
+            desc: "这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的描述信息啦啦啦",
             iconColor: "red",
             icon: {
               lib: "fa",
@@ -249,8 +246,7 @@ export const story: Story = {
           {
             id: "3",
             name: "标题3",
-            desc:
-              "这是一段很长很长很长很长很长很长很长很长很长很长很长很长的描述信息啦啦啦",
+            desc: "这是一段很长很长很长很长很长很长很长很长很长很长很长很长的描述信息啦啦啦",
             iconColor: "cyan",
             icon: {
               lib: "fa",

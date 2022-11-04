@@ -7,13 +7,13 @@ export const story: Story = {
   storyId: "cmdb-instances.cmdb-instances-input-form",
   type: "brick",
   author: "cyril",
+  category: "form-input-business",
   text: {
     en: "cmdb-instances-input-form",
     zh: "CMDB 实例输入表单项",
   },
   description: {
-    en:
-      "select instances by the instance list or pasting an attribute value list",
+    en: "select instances by the instance list or pasting an attribute value list",
     zh: "通过实例列表或粘贴某属性的值列表来选择实例",
   },
   icon: {

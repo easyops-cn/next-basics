@@ -5,17 +5,18 @@ export const story: Story = {
   storyId: "general-tables.searchable-table",
   type: "template",
   author: "lynette",
+  category: "other",
   text: {
     en: "Searchable table",
-    zh: "可搜索表格"
+    zh: "可搜索表格",
   },
   description: {
     en: "General searchable table",
-    zh: "通用的带搜索框的表格"
+    zh: "通用的带搜索框的表格",
   },
   icon: {
     lib: "fa",
-    icon: "table"
+    icon: "table",
   },
   conf: {
     brick: "div",
@@ -34,10 +35,10 @@ export const story: Story = {
                   pageSize: "${query.pageSize=10|number}",
                   system: "deploy",
                   query: "${query.q=}",
-                  ctime_order: "${query.order=}"
-                }
-              ]
-            }
+                  ctime_order: "${query.order=}",
+                },
+              ],
+            },
           },
           {
             template: "general-tables.searchable-table",
@@ -46,22 +47,22 @@ export const story: Story = {
                 {
                   brick: "basic-bricks.general-button",
                   properties: {
-                    buttonName: "设置显示列"
+                    buttonName: "设置显示列",
                   },
                   events: {
                     "general.button.click": {
-                      action: "console.log"
-                    }
-                  }
-                }
+                      action: "console.log",
+                    },
+                  },
+                },
               ],
               afterSearchBricks: [
                 {
                   brick: "presentational-bricks.datetime-selector",
                   properties: {
-                    from: "now/d"
-                  }
-                }
+                    from: "now/d",
+                  },
+                },
               ],
               belowSearchBricks: [
                 {
@@ -72,26 +73,26 @@ export const story: Story = {
                       { key: "dev", label: "开发" },
                       { key: "test", label: "测试" },
                       { key: "prerelease", label: "预发布" },
-                      { key: "prod", label: "生产" }
+                      { key: "prod", label: "生产" },
                     ],
                     multipleCheck: false,
                     configProps: {
-                      color: "#108ee9"
+                      color: "#108ee9",
                     },
                     default: "dev",
                     showCard: false,
                     tagStyle: {
-                      marginBottom: 0
-                    }
+                      marginBottom: 0,
+                    },
                   },
                   events: {
                     "checked.update": [
                       {
-                        action: "console.log"
-                      }
-                    ]
-                  }
-                }
+                        action: "console.log",
+                      },
+                    ],
+                  },
+                },
               ],
               columns: [
                 {
@@ -103,62 +104,63 @@ export const story: Story = {
                     brick: "presentational-bricks.brick-humanize-time",
                     properties: {
                       secondsTimestamp: true,
-                      formatter: "accurate"
+                      formatter: "accurate",
                     },
                     transform: {
-                      value: "@{cellData}"
-                    }
-                  }
+                      value: "@{cellData}",
+                    },
+                  },
                 },
                 {
                   title: "任务来源",
                   dataIndex: "topic",
-                  key: "topic"
+                  key: "topic",
                 },
                 {
                   title: "部署应用",
                   dataIndex: "target_name",
-                  key: "target_name"
+                  key: "target_name",
                 },
                 {
                   title: "执行用户",
                   key: "operator",
-                  dataIndex: "operator"
+                  dataIndex: "operator",
                 },
                 {
                   title: "任务状态",
                   key: "status",
-                  dataIndex: "status"
-                }
+                  dataIndex: "status",
+                },
               ],
               fields: {
                 ascend: "asc",
                 descend: "desc",
-                rowKey: "event_id"
+                rowKey: "event_id",
               },
               tableProps: {
                 configProps: {
-                  rowSelection: true
-                }
+                  rowSelection: true,
+                },
               },
               tableEvents: {
                 "select.update": {
-                  action: "console.log"
-                }
-              }
+                  action: "console.log",
+                },
+              },
             },
             lifeCycle: {
               useResolves: [
                 {
                   name: "dataSource",
-                  provider: "providers-of-notify\\.oplog-api-list-operation-log"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
+                  provider:
+                    "providers-of-notify\\.oplog-api-list-operation-log",
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
   },
-  doc: docMD
+  doc: docMD,
 };
