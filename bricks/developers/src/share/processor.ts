@@ -112,27 +112,16 @@ export const getAllStoryListV2 = (
         ? book.category === story.storyId.split(".")[0]
         : book.category === story.category
     );
-    if (finder) {
-      !finder.stories && (finder.stories = []);
-      const index = finder.stories.findIndex(
-        (v) => v.storyId === story.storyId
-      );
-      if (index === -1) {
-        finder.stories.push(story);
-      } else {
-        finder.stories[index] = story;
-      }
+    !finder &&
+      (finder = books.find((book) => book.category === "no-match-category"));
+    !finder.stories && (finder.stories = []);
+    const index = finder.stories.findIndex((v) => v.storyId === story.storyId);
+    if (index === -1) {
+      finder.stories.push(story);
     } else {
-      // bricks with no `categroy` Or bricks with old `category`
-      finder = books.find((book) => book.category === "no-match-category");
-      const index = finder.stories.findIndex(
-        (v) => v.storyId === story.storyId
-      );
-      if (index === -1) {
-        finder.stories.push(story);
-      } else {
-        finder.stories[index] = story;
-      }
+      finder.stories[index] = story;
+    }
+    if (finder.category === "no-match-category") {
       // eslint-disable-next-line no-console
       console.warn(
         "Cannot match category  `%s` of `%s`  with any existed category. %o",

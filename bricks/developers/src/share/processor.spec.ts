@@ -206,6 +206,9 @@ describe("getAllStoryListV2", () => {
     expect(getAllStoryListV2(categoryGroups, stories)).toEqual([
       {
         id: "fake-story-of-correct",
+        category: undefined,
+        icon: undefined,
+        subTitle: undefined,
         type: "brick",
         title: "Fake Story of Correct Zh",
         description: "Fake description of Correct Zh",
@@ -213,6 +216,9 @@ describe("getAllStoryListV2", () => {
       },
       {
         id: "fake-story-of-slots",
+        category: undefined,
+        icon: undefined,
+        subTitle: undefined,
         type: "brick",
         title: "Fake Story of Slots Zh",
         description: "Fake description of Slots Zh",
@@ -220,6 +226,9 @@ describe("getAllStoryListV2", () => {
       },
       {
         id: "fake-story-of-slots-invalid",
+        category: undefined,
+        icon: undefined,
+        subTitle: undefined,
         type: "brick",
         title: "Fake Story of Slots Invalid Zh",
         description: "~",
@@ -227,6 +236,9 @@ describe("getAllStoryListV2", () => {
       },
       {
         id: "fake-story-of-empty",
+        category: undefined,
+        icon: undefined,
+        subTitle: undefined,
         type: "brick",
         title: "Fake Story of Empty Zh",
         description: "~",
@@ -234,6 +246,7 @@ describe("getAllStoryListV2", () => {
       },
       {
         id: "presentational-bricks.general-list",
+        icon: undefined,
         type: "brick",
         title: "general-list",
         subTitle: "alex",
@@ -256,6 +269,9 @@ describe("getAllStoryListV2", () => {
       },
       {
         id: "fake-story-of-business",
+        category: undefined,
+        icon: undefined,
+        subTitle: undefined,
         type: "template",
         title: "Fake Story of Correct Zh",
         description: "~",
@@ -270,6 +286,16 @@ describe("getAllStoryListV2", () => {
         icon: undefined,
         tags: ["内置挂件"],
         type: "brick",
+      },
+      {
+        subTitle: "lynette",
+        category: "no-match-category",
+        title: "no matched",
+        description: "~",
+        id: undefined,
+        icon: undefined,
+        tags: ["未匹配分类"],
+        type: undefined,
       },
     ]);
 
