@@ -10,7 +10,6 @@ import {
 } from "@next-core/brick-types";
 import { atomBook } from "../stories/chapters/atom-bricks";
 import { businessBook } from "../stories/chapters/business-bricks";
-import { externalBook } from "../stories/chapters/external-bricks";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
 
 export interface BrickRecord {
@@ -70,7 +69,7 @@ export const getAllStoryListV2 = (
   const storyList: BrickRecord[] = [];
   let books: Chapter[] = [];
   fields = fields || {};
-  const otherBook: Chapter[] = [];
+  const externalBook: Chapter[] = [];
   const groups = cloneDeep(categoryGroups);
   groups.forEach((menu) => {
     if (menu.group === "atom") {
@@ -93,32 +92,16 @@ export const getAllStoryListV2 = (
       return;
     }
 
-    if (menu.group === "widget") {
-      menu.items.forEach((item) => {
-        if (!externalBook.some((book) => book.category === item.category)) {
-          externalBook.push({ ...item, stories: [] });
-        }
-      });
-
-      return;
-    }
-
-    otherBook.push(...menu.items);
+    externalBook.push(...menu.items);
   });
 
   books = [
     ...atomBook,
     ...businessBook,
     ...externalBook,
-    ...otherBook,
     {
-      title: { en: "no-category", zh: "未分类构件" },
-      category: "no-category",
-      stories: [],
-    },
-    {
-      title: { en: "old-category", zh: "旧分类构件" },
-      category: "old-category",
+      title: { en: "no-match-category", zh: "未匹配分类" },
+      category: "no-match-category",
       stories: [],
     },
   ];
@@ -140,13 +123,16 @@ export const getAllStoryListV2 = (
         finder.stories[index] = story;
       }
     } else {
-      // brick with no `categroy` Or brick with old `category` and `category` isn't included in `atomBook`
-      finder = books.find((book) =>
-        !story.category
-          ? book.category === "no-category"
-          : book.category === "old-category"
+      // bricks with no `categroy` Or bricks with old `category`
+      finder = books.find((book) => book.category === "no-match-category");
+      const index = finder.stories.findIndex(
+        (v) => v.storyId === story.storyId
       );
-      finder.stories.push(story);
+      if (index === -1) {
+        finder.stories.push(story);
+      } else {
+        finder.stories[index] = story;
+      }
       // eslint-disable-next-line no-console
       console.warn(
         "Cannot match category  `%s` of `%s`  with any existed category. %o",

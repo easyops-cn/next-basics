@@ -5,7 +5,7 @@ export const story: Story = {
   storyId: "general-tables.searchable-table",
   type: "template",
   author: "lynette",
-  category: "table-widgets",
+  category: "other",
   text: {
     en: "Searchable table",
     zh: "可搜索表格",

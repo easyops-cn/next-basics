@@ -5,7 +5,7 @@ export const story: Story = {
   storyId: "general-tables.front-search-table",
   type: "template",
   author: "lynette",
-  category: "table-widgets",
+  category: "other",
   text: {
     en: "Front end search table",
     zh: "前端搜索表格",

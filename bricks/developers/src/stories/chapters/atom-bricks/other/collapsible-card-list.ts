@@ -5,7 +5,7 @@ export const story: Story = {
   storyId: "general-list.collapsible-card-list",
   type: "template",
   author: "lynette",
-  category: "general-list-widgets",
+  category: "other",
   text: {
     en: "collapsible card list",
     zh: "折叠卡片列表",

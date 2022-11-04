@@ -12,7 +12,6 @@ import {
 } from "@next-core/brick-types";
 import { atomBook } from "../stories/chapters/atom-bricks";
 import { businessBook } from "../stories/chapters/business-bricks";
-import { externalBook } from "../stories/chapters/external-bricks";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
 import {
   BrickRecord,
@@ -22,15 +21,13 @@ import {
   getAllStoryListV2,
 } from "../share/processor";
 
-const ALL_BOOKS = []
-  .concat(atomBook, businessBook, externalBook)
-  .map((book) => ({
-    ...book,
-    stories: book.stories.map((story: Story) => ({
-      ...story,
-      category: book.category,
-    })),
-  }));
+const ALL_BOOKS = [].concat(atomBook, businessBook).map((book) => ({
+  ...book,
+  stories: book.stories.map((story: Story) => ({
+    ...story,
+    category: book.category,
+  })),
+}));
 
 export function findStoryById(
   id: string,
@@ -106,10 +103,8 @@ export const listBrickStory = (
     books = atomBook;
   } else if (storyType === "business") {
     books = businessBook;
-  } else if (storyType === "widget") {
-    books = externalBook;
   } else {
-    books = [...atomBook, ...businessBook, ...externalBook];
+    books = [...atomBook, ...businessBook];
   }
   books.forEach((chapter) => {
     chapter.stories.forEach((story) => {
@@ -156,8 +151,6 @@ export const categoryList = (storyType: string): Promise<string[]> => {
     books = atomBook;
   } else if (storyType === "business") {
     books = businessBook;
-  } else if (storyType === "widget") {
-    books = externalBook;
   }
   const categoryList = books.map((book: Chapter) => i18nText(book.title));
   return Promise.resolve(categoryList);
@@ -183,7 +176,7 @@ export const categoryMenu = (): Promise<SidebarMenu> => {
     },
   ];
   let i = 1;
-  [atomBook, businessBook, externalBook].forEach((books) => {
+  [atomBook, businessBook].forEach((books) => {
     books.forEach((book: Chapter) => {
       const title = i18nText(book.title);
       (menuItems[i] as SidebarMenuGroup).items.push({

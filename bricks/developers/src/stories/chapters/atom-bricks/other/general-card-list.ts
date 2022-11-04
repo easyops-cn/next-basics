@@ -5,7 +5,7 @@ export const story: Story = {
   storyId: "general-list.general-card-list",
   type: "template",
   author: "lynette",
-  category: "general-list-widgets",
+  category: "other",
   text: {
     en: "general card list",
     zh: "通用卡片列表",

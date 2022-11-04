@@ -5,7 +5,7 @@ export const story: Story = {
   storyId: "general-list.searchable-card-list",
   type: "template",
   author: "lynette",
-  category: "general-list-widgets",
+  category: "other",
   text: {
     en: "searchable-card-list",
     zh: "可搜索卡片列表",
