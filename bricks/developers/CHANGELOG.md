@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.363.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.362.2...@next-bricks/developers@1.363.0) (2022-11-04)
+
+
+### Features
+
+* update developers processor ([e2a9d50](https://github.com/easyops-cn/next-basics/commit/e2a9d50978b840e1e759bf5dd390e11bd5b332a3))
+* update Developers Processor ([49afc67](https://github.com/easyops-cn/next-basics/commit/49afc67a2eba1e7aa4567a906a6dc05f9ef603eb))
+
+
+
+
+
 ## [1.362.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.362.1...@next-bricks/developers@1.362.2) (2022-11-03)
 
 **Note:** Version bump only for package @next-bricks/developers
