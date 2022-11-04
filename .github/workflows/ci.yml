@@ -59,6 +59,8 @@ jobs:
 
     - name: Codecov
       uses: codecov/codecov-action@v3
+      with:
+        directory: bricks
 
     - uses: easyops-cn/actions-next-publish-from-tags@master
       with:
