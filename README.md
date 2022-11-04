@@ -1,7 +1,7 @@
 # Next Basics
 
 [![CI Status](https://github.com/easyops-cn/next-basics/workflows/CI/badge.svg?event=push)](https://github.com/easyops-cn/next-basics/actions?query=workflow%3ACI)
-[![Coverage Status](https://coveralls.io/repos/github/easyops-cn/next-basics/badge.svg?branch=master)](https://coveralls.io/github/easyops-cn/next-basics?branch=master)
+[![Coverage Status](https://codecov.io/gh/easyops-cn/next-basics/branch/master/graph/badge.svg?token=OTUDHCM2LP)](https://codecov.io/gh/easyops-cn/next-basics)
 
 Generated from template [easyops-cn/next-template-repo].
 

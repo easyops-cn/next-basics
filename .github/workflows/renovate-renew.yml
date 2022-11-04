@@ -54,23 +54,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
-      if: ${{ steps.match-commit.outputs.result }}
-
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
-      if: ${{ steps.match-commit.outputs.result }}
-
-    - uses: actions/cache@v3
-      id: yarn-cache
-      with:
-        path: |
-          ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          node_modules
-          */*/node_modules
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+        cache: yarn
       if: ${{ steps.match-commit.outputs.result }}
 
     - uses: easyops-cn/actions-next-renew@master
