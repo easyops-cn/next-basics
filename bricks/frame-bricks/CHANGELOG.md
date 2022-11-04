@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.7.1...@next-bricks/frame-bricks@1.7.2) (2022-11-04)
+
+
+### Bug Fixes
+
+* 修复下拉按钮跟随滚动条滑动问题 refs BRICK_STORE-3125 ([d67bdef](https://github.com/easyops-cn/next-basics/commit/d67bdef9b9d93aea7d87ae1b2d7eea295e114744))
+
+
+
+
+
 ## [1.7.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.7.0...@next-bricks/frame-bricks@1.7.1) (2022-11-03)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
