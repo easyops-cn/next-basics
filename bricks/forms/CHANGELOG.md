@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.245.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.4...@next-bricks/forms@1.245.5) (2022-11-07)
+
+
+### Bug Fixes
+
+* 修复设置property后render异常问题 ([2ff6728](https://github.com/easyops-cn/next-basics/commit/2ff672822642f0e17bd32b801e55b82d1298d1d2))
+
+
+
+
+
 ## [1.245.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.3...@next-bricks/forms@1.245.4) (2022-11-04)
 
 **Note:** Version bump only for package @next-bricks/forms
