@@ -2,16 +2,21 @@ import React from "react";
 import { mount, shallow } from "enzyme";
 import { Select } from "antd";
 import { formatOptions } from "@next-libs/forms";
-import { GeneralSelect, match, filterSearch } from "./GeneralSelect";
+import {
+  GeneralSelect,
+  match,
+  filterSearch,
+  GeneralSelectLegacy,
+} from "./GeneralSelect";
 import * as kit from "@next-core/brick-kit";
 
-const mockQuery = jest.fn().mockImplementation((q) =>
+const mockQuery = jest.fn().mockImplementation((provider, query) =>
   Promise.resolve({
     list: [
       { label: "A", value: "a" },
       { label: "B", value: "b" },
       { label: "C", value: "c" },
-    ].filter((v) => v.value.includes(q)),
+    ].filter((v) => v.value.includes(query[0])),
   })
 );
 jest.spyOn(kit, "useProvider").mockReturnValue({
@@ -23,14 +28,15 @@ describe("GeneralSelect", () => {
   it("should execute change method", async () => {
     const handleChange = jest.fn();
     const handleChangeV2 = jest.fn();
+    const options = [
+      { label: "other", value: "other" },
+      { label: "one", value: "one" },
+    ];
 
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         name="gender"
-        options={[
-          { label: "other", value: "other" },
-          { label: "one", value: "one" },
-        ]}
+        options={options}
         label="hello"
         placeholder="who"
         value="world"
@@ -41,7 +47,7 @@ describe("GeneralSelect", () => {
 
     wrapper.find(Select).invoke("onChange")("one", null);
     await (global as any).flushPromises();
-    expect(handleChange).toBeCalledWith("one");
+    expect(handleChange).toBeCalledWith("one", options);
     await (global as any).flushPromises();
     expect(handleChangeV2).toBeCalledWith({ label: "one", value: "one" });
     wrapper.setProps({
@@ -49,12 +55,12 @@ describe("GeneralSelect", () => {
     });
     wrapper.find(Select).invoke("onChange")("one", null);
     await (global as any).flushPromises();
-    expect(handleChange).toBeCalledWith("one");
+    expect(handleChange).toBeCalledWith("one", options);
   });
 
   it("should render suffix brick", () => {
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         name="gender"
         options={
           [
@@ -106,7 +112,7 @@ describe("GeneralSelect", () => {
   });
   it("should render EasyopsEmpty", () => {
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         name="gender"
         suffixBrick={{
           brick: "presentational-bricks.brick-value-mapping",
@@ -147,7 +153,7 @@ describe("GeneralSelect", () => {
     const handleDebounceSearch = jest.fn();
 
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         name="gender"
         options={[
           { label: "other", value: "other" },
@@ -173,7 +179,7 @@ describe("GeneralSelect", () => {
     const handleSearch = jest.fn();
 
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         name="gender"
         options={[
           { label: "other", value: "other" },
@@ -194,8 +200,8 @@ describe("GeneralSelect", () => {
     const mockSearch = jest.fn();
     const onFocus = jest.fn();
 
-    const wrapper = mount(
-      <GeneralSelect
+    const wrapper = shallow(
+      <GeneralSelectLegacy
         options={[
           { label: "A", value: "a" },
           { label: "B", value: "a" },
@@ -219,7 +225,7 @@ describe("GeneralSelect", () => {
     await (global as any).flushPromises();
 
     wrapper.update();
-    expect(wrapper.find(".ant-select").length).toBe(1);
+    expect(wrapper.find(Select.Option).length).toBe(1);
     expect(mockQuery).toHaveBeenCalledWith("easyopsapi.cmdb@search:1.0.0", [
       "c",
       { page: 1 },
@@ -246,7 +252,7 @@ describe("GeneralSelect", () => {
 
   it("should render group options", () => {
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         name="city"
         options={
           [
@@ -267,7 +273,7 @@ describe("GeneralSelect", () => {
   });
   it("popoverPositionType should work", () => {
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         options={[
           { label: "苹果", value: "apple" },
           { label: "水", value: "water" },
@@ -306,7 +312,7 @@ describe("GeneralSelect", () => {
   it("should work when filterByLabelAndValue", () => {
     const mockSearch = jest.fn();
     const wrapper = shallow(
-      <GeneralSelect
+      <GeneralSelectLegacy
         options={[
           { label: "one", value: 1 },
           { label: "two", value: 2 },

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { UseBackendConf, UseBrickConf } from "@next-core/brick-types";
 import {
   BrickAsComponent,
@@ -55,7 +55,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   value?: any;
   inputBoxStyle?: React.CSSProperties;
   dropdownMatchSelectWidth?: boolean;
-  onChange?: (value: any) => void;
+  onChange?: (value: any, options: GeneralComplexOption[]) => void;
   onChangeV2?: (value: any) => void;
   allowClear?: boolean;
   showSearch?: boolean;
@@ -89,7 +89,10 @@ const isSearchable = (value: UseBackendConf): value is UseBackendConf => {
   );
 };
 
-export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
+export function GeneralSelectLegacy(
+  props: GeneralSelectProps,
+  ref: any
+): React.ReactElement {
   const {
     suffix,
     suffixStyle,
@@ -104,6 +107,7 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
   const [loading, setLoading] = useState(false);
+  const shouldTriggerOnValueChangeArgs = useRef(true);
   const request = useProvider({ cache: false });
   React.useEffect(() => {
     if (suffixBrick) {
@@ -122,7 +126,8 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   }, [props.options]);
 
   const handleChange = (newValue: any): void => {
-    props.onChange?.(newValue);
+    shouldTriggerOnValueChangeArgs.current = false;
+    props.onChange?.(newValue, options);
     const newValueV2 =
       props.mode === "multiple"
         ? options.filter((item) => newValue.includes(item.value))
@@ -182,7 +187,9 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
 
   useEffect(() => {
     props?.useBackend?.onValueChangeArgs &&
+      shouldTriggerOnValueChangeArgs.current &&
       handleSearchQuery(props.value, "valueChange");
+    shouldTriggerOnValueChangeArgs.current = true;
   }, [props.value, props.fields, props.useBackend]);
 
   const handleDebounceBackendSearch = useMemo(() => {
@@ -252,38 +259,47 @@ export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
   };
 
   return (
+    <Select
+      ref={ref}
+      className={(suffix || suffixBrick) && style.suffixBrickSelect}
+      {...searchProps}
+      value={checkedValue}
+      size={props.size}
+      disabled={props.disabled}
+      defaultActiveFirstOption={false}
+      mode={props.mode as "multiple" | "tags"}
+      placeholder={props.placeholder}
+      onChange={handleChange}
+      onMouseEnter={setTooltip}
+      dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
+      allowClear={props.allowClear}
+      style={props.inputBoxStyle}
+      onSearch={handleSearch}
+      tokenSeparators={tokenSeparators}
+      {...(props.popoverPositionType === "parent"
+        ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
+        : {})}
+      dropdownStyle={{ padding: "2px" }}
+      notFoundContent={<EasyopsEmpty {...emptyProps} />}
+      loading={loading}
+      onFocus={() => {
+        props.onFocus?.();
+        handleSearchQuery("", "search");
+      }}
+    >
+      {props.groupBy
+        ? getOptsGroups(options, props.groupBy)
+        : getOptions(options)}
+    </Select>
+  );
+}
+
+export const RefGeneralSelectLegacy = React.forwardRef(GeneralSelectLegacy);
+
+export function GeneralSelect(props: GeneralSelectProps): React.ReactElement {
+  return (
     <FormItemWrapper {...props}>
-      <Select
-        className={(suffix || suffixBrick) && style.suffixBrickSelect}
-        {...searchProps}
-        value={props.name && props.formElement ? undefined : checkedValue}
-        size={props.size}
-        disabled={props.disabled}
-        defaultActiveFirstOption={false}
-        mode={props.mode as "multiple" | "tags"}
-        placeholder={props.placeholder}
-        onChange={handleChange}
-        onMouseEnter={setTooltip}
-        dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}
-        allowClear={props.allowClear}
-        style={props.inputBoxStyle}
-        onSearch={handleSearch}
-        tokenSeparators={tokenSeparators}
-        {...(props.popoverPositionType === "parent"
-          ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
-          : {})}
-        dropdownStyle={{ padding: "2px" }}
-        notFoundContent={<EasyopsEmpty {...emptyProps} />}
-        loading={loading}
-        onFocus={() => {
-          props.onFocus?.();
-          handleSearchQuery("", "search");
-        }}
-      >
-        {props.groupBy
-          ? getOptsGroups(options, props.groupBy)
-          : getOptions(options)}
-      </Select>
+      <RefGeneralSelectLegacy {...props} />
     </FormItemWrapper>
   );
 }

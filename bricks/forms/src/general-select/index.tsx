@@ -371,7 +371,12 @@ export class GeneralSelectElement extends FormItemElement {
   @event({ type: "general.select.debounceSearch" })
   private _debounceSearchEvent: EventEmitter<string>;
 
-  private _handleChange = (value: any): void => {
+  private _handleChange = (
+    value: any,
+    options: GeneralComplexOption[]
+  ): void => {
+    this.value = value;
+    this.options = options;
     Promise.resolve().then(() => {
       this.changeEvent.emit(value);
     });
