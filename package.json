@@ -14,7 +14,7 @@
     "postbuild": "npm run size-limit",
     "size-limit": "size-limit",
     "serve": "brick-container-serve",
-    "test": "lerna run test --",
+    "test": "next-jest",
     "test:ci": "lerna run test:ci --",
     "test:gc": "lerna run test --",
     "yo": "brick-scripts",
