@@ -317,4 +317,13 @@ describe("LaunchpadService", () => {
 
     expect(spyOnGetLaunchpadInfo).toBeCalledTimes(1);
   });
+
+  it("should not syncValidRecentlyVisitor when window.STANDALONE_MICRO_APPS was true", async () => {
+    window.STANDALONE_MICRO_APPS = true;
+    const service = new LaunchpadService();
+    await service.setAllVisitors([{ id: "app-1" }, { id: "app-2" }]);
+    await service.syncValidRecentlyVisitor();
+    const visitors = service.getAllVisitors();
+    expect(visitors.length).toBe(2);
+  });
 });

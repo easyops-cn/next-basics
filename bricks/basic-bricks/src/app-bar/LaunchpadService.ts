@@ -163,6 +163,10 @@ export class LaunchpadService {
   }
 
   syncValidRecentlyVisitor() {
+    if (window.STANDALONE_MICRO_APPS) {
+      // standalone模式时，刷新页面不会请求launchpad数据，拿不全microApps和customList，所以 syncValidRecentlyVisitor 直接返回
+      return;
+    }
     const visitors = this.getAllVisitors();
     const result = visitors.filter((v) => {
       if (v.type === "app") {
