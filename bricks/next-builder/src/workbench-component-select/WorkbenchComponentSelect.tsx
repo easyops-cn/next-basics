@@ -284,9 +284,6 @@ function ComponentList({
             )
           ) {
             result.push(brick);
-            if (result.length === 12) {
-              break;
-            }
           }
         }
       } else {
