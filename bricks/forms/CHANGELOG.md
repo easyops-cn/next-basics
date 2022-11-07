@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.245.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.5...@next-bricks/forms@1.245.6) (2022-11-07)
+
+
+### Bug Fixes
+
+* select去掉契约限制 refs CD-3119 ([23dca31](https://github.com/easyops-cn/next-basics/commit/23dca314caf85ffe86f38ad98ee0682043c6ab20))
+
+
+
+
+
 ## [1.245.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.4...@next-bricks/forms@1.245.5) (2022-11-07)
 
 
