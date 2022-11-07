@@ -82,11 +82,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
 
 // TODO(alex): 需要去掉`providers-of-cmdb.cmdb-object-api-list`，这里判断是为了开发者中心构件demo显示需要。
 const isSearchable = (value: UseBackendConf): value is UseBackendConf => {
-  return (
-    typeof value?.provider === "string" &&
-    (value?.provider.includes("@") ||
-      value?.provider === "providers-of-cmdb.cmdb-object-api-list")
-  );
+  return typeof value?.provider === "string";
 };
 
 export function GeneralSelectLegacy(
