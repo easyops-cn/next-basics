@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.205.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.205.3...@next-bricks/next-builder@1.205.4) (2022-11-07)
+
+
+### Bug Fixes
+
+* fix VB workbench search bricks bug ([49034eb](https://github.com/easyops-cn/next-basics/commit/49034eb4c07aabd24eda4e57380acc8b40ea6236))
+
+
+
+
+
 ## [1.205.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.205.2...@next-bricks/next-builder@1.205.3) (2022-11-04)
 
 **Note:** Version bump only for package @next-bricks/next-builder

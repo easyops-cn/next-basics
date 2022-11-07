@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.5...@next-bricks/basic-bricks@1.215.6) (2022-11-07)
+
+
+### Bug Fixes
+
+* 修复standalone模式下, launchpad最近访问只有一个的问题 ([56ca564](https://github.com/easyops-cn/next-basics/commit/56ca564272d716450ff46e453cc7163706be7410))
+
+
+
+
+
 ## [1.215.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.4...@next-bricks/basic-bricks@1.215.5) (2022-11-04)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
