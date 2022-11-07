@@ -81,9 +81,11 @@ export function WorkbenchDataTree({
           deepMatch(node.name, lowerTrimmedQuery) ||
           (!!matchNodeDataFields?.length &&
             deepMatch(
-              matchNodeDataFields === "*"
-                ? node.data
-                : pick(node.data, matchNodeDataFields),
+              Object.values(
+                matchNodeDataFields === "*"
+                  ? node.data
+                  : pick(node.data, matchNodeDataFields)
+              ),
               lowerTrimmedQuery
             )),
       }}
