@@ -44,7 +44,7 @@ describe("basic-bricks.home-redirect", () => {
     expect(spyOnReplace).toBeCalledWith("/search");
   });
 
-  it("should do nothing if app has no homepage", async () => {
+  it("should do nothing if no specific redirectUrl and app has no homepage", async () => {
     element.appId = "no-homepage";
     await jest.runAllTimers();
     expect(spyOnReplace).not.toBeCalled();
@@ -63,28 +63,6 @@ describe("basic-bricks.home-redirect", () => {
     expect(spyOnReplace).toBeCalledWith("/some-homepage");
   });
 
-  it("should redicect to specific url if app not found, standalone mode", async () => {
-    window.STANDALONE_MICRO_APPS = true;
-    delete window.location;
-    window.location = {
-      origin: location.origin,
-      replace: jest.fn(),
-      reload: jest.fn(),
-      assign: jest.fn(),
-    } as unknown as Location;
-
-    element.appId = "not-found";
-    element.redirectUrl = "/some-homepage";
-    await jest.runAllTimers();
-    expect(window.location.replace).toBeCalledWith("some-homepage");
-  });
-
-  it("should redicect to specific url", async () => {
-    element.redirectUrl = "/some-homepage2";
-    await jest.runAllTimers();
-    expect(spyOnReplace).toBeCalledWith("/some-homepage2");
-  });
-
   it("should redicect to specific url, standalone mode", async () => {
     window.STANDALONE_MICRO_APPS = true;
     delete window.location;
@@ -95,8 +73,37 @@ describe("basic-bricks.home-redirect", () => {
       assign: jest.fn(),
     } as unknown as Location;
 
-    element.redirectUrl = "/some-homepage3/haha";
+    element.appId = "search";
+    element.redirectUrl = "/some-homepage";
     await jest.runAllTimers();
-    expect(window.location.replace).toBeCalledWith("some-homepage3/haha");
+    expect(window.location.replace).toBeCalledWith("some-homepage");
+  });
+
+  it("should redicect to app, standalone mode", async () => {
+    window.STANDALONE_MICRO_APPS = true;
+    delete window.location;
+    window.location = {
+      origin: location.origin,
+      replace: jest.fn(),
+      reload: jest.fn(),
+      assign: jest.fn(),
+    } as unknown as Location;
+    element.appId = "search";
+    await jest.runAllTimers();
+    expect(window.location.replace).toBeCalledWith("search");
+  });
+
+  it("should do nothing if no specific redirectUrl and app has no homepage, standalone mode", async () => {
+    window.STANDALONE_MICRO_APPS = true;
+    element.appId = "no-homepage";
+    await jest.runAllTimers();
+    expect(spyOnReplace).not.toBeCalled();
+  });
+
+  it("should do nothing if no specific redirectUrl and app not found, standalone mode", async () => {
+    window.STANDALONE_MICRO_APPS = true;
+    element.appId = "not-found";
+    await jest.runAllTimers();
+    expect(spyOnReplace).not.toBeCalled();
   });
 });

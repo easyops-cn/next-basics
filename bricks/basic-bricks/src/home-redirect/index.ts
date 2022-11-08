@@ -51,16 +51,19 @@ export class HomeRedirectElement extends UpdatingElement {
 
   protected _render(): void {
     if (this.isConnected && (this.appId || this.redirectUrl)) {
+      // standalone 模式下，redirectUrl 优先级更高。普通模式下，appId 优先级更高
       const apps = getRuntime().getMicroApps({ excludeInstalling: true });
       const app = apps.find((item) => item.id === this.appId);
-      if (app && app.homepage) {
-        getHistory().replace(app.homepage);
-      } else if (this.redirectUrl) {
-        // 找不到app，则fallback到指定跳转url
-        if (window.STANDALONE_MICRO_APPS) {
-          window.location.replace(this.redirectUrl.replace(/^\/*/, ""));
-        } else {
-          getHistory().replace(this.redirectUrl);
+      const appHomepage = app && app.homepage ? app.homepage : "";
+      if (window.STANDALONE_MICRO_APPS) {
+        const realUrl = this.redirectUrl || appHomepage;
+        if (realUrl) {
+          window.location.replace(realUrl.replace(/^\/*/, ""));
+        }
+      } else {
+        const realUrl = appHomepage || this.redirectUrl;
+        if (realUrl) {
+          getHistory().replace(realUrl);
         }
       }
     }
