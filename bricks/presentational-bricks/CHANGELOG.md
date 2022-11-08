@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.270.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.270.4...@next-bricks/presentational-bricks@1.270.5) (2022-11-08)
+
+
+### Bug Fixes
+
+* 改变toolTip的icon的间距 ([93837bf](https://github.com/easyops-cn/next-basics/commit/93837bf528838f2d6a1d775143ddcb4700402630))
+
+
+
+
+
 ## [1.270.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.270.3...@next-bricks/presentational-bricks@1.270.4) (2022-11-07)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
