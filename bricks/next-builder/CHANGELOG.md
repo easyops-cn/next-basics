@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.206.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.205.6...@next-bricks/next-builder@1.206.0) (2022-11-08)
+
+
+### Features
+
+* lint storyboard add INSTALLED_APPS ([0d75809](https://github.com/easyops-cn/next-basics/commit/0d75809513284bf1a9384ec64c6041233b09de42))
+* update unit test ([d6aebab](https://github.com/easyops-cn/next-basics/commit/d6aebab990a72335c84e49a6845acb1efd014942))
+
+
+
+
+
 ## [1.205.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.205.5...@next-bricks/next-builder@1.205.6) (2022-11-08)
 
 
