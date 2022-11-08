@@ -6,7 +6,7 @@
 
 .iconContainer {
   position: relative;
-  top: -1px;
+  top: 0px;
   color: var(--color-brand);
 }
 
