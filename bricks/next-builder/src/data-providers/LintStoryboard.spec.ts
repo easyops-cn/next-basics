@@ -34,6 +34,9 @@ describe("LintStoryboard", () => {
                 {
                   brick: "providers-of-any.any-brick",
                   iid: "b-2",
+                  properties: {
+                    textContent: "<% INSTALLED_APPS.has(CTX.a ? 'a' : 'b') %>",
+                  },
                 },
               ],
             },
@@ -191,6 +194,14 @@ describe("LintStoryboard", () => {
               },
             },
           ],
+        }),
+        expect.objectContaining({
+          code: "INSTALLED_APPS_USE_DYNAMIC_ARG",
+          type: "error",
+          message: {
+            zh: "您在项目中使用了 INSTALLED_APPS.has 表达式, 并且使用了动态参数, 这将可能引起错误; 请将入参修改为静态参数, 例如: INSTALLED_APPS.has('xxx')",
+            en: "You're using INSTALLED_APPS.has in project with dynamic arguments, it could be get the error result. Please use INSTALLED_APPS.has with static arguments, for example: INSTALLED_APPS.has('xxx')",
+          },
         }),
       ],
     ],
