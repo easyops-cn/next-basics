@@ -286,8 +286,6 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const warnedUsingCtxTemplates: LintDetail[] = [];
   const warnedUsingTplVarTemplates: LintDetail[] = [];
   let installedAppsUseDynamicArguments = false;
-  const contexts = new Set<string>();
-  const tplVariables = new Set<string>();
 
   visitStoryboardExpressions(
     [storyboard.routes, menus],
@@ -307,6 +305,8 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (Array.isArray(customTemplates)) {
     for (const tpl of customTemplates) {
+      const contexts = new Set<string>();
+      const tplVariables = new Set<string>();
       visitStoryboardExpressions(
         [tpl.bricks, tpl.state],
         (node, parent) => {
@@ -483,7 +483,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
 
   if (installedAppsUseDynamicArguments) {
     errors.push({
-      type: "warn",
+      type: "error",
       code: "INSTALLED_APPS_USE_DYNAMIC_ARG",
       message: {
         zh: "您在项目中使用了 INSTALLED_APPS.has 表达式, 并且使用了动态参数, 这将可能引起错误; 请将入参修改为静态参数, 例如: INSTALLED_APPS.has('xxx')",
@@ -591,8 +591,8 @@ function visitInstalledAppsFactory(
     ) {
       const args = callParent.node.arguments as unknown as EstreeLiteral[];
       if (
-        (args.length > 0 && args[0].type !== "Literal") ||
-        typeof args[0].value !== "string"
+        args.length > 0 &&
+        (args[0].type !== "Literal" || typeof args[0].value !== "string")
       ) {
         return true;
       }
