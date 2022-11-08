@@ -1,3 +1,4 @@
+import { Identifier } from "@babel/types";
 import type {
   BrickConf,
   BuiltinBrickEventHandler,
@@ -10,6 +11,8 @@ import {
   type StoryboardNode,
   traverseStoryboard,
   visitStoryboardExpressions,
+  EstreeLiteral,
+  EstreeParent,
 } from "@next-core/brick-utils";
 
 // https://github.com/type-challenges/type-challenges/issues/18153
@@ -33,7 +36,8 @@ export type StoryboardErrorCode =
   | "USING_CTX_IN_TPL"
   | "USING_TPL_VAR_IN_TPL"
   | "UNKNOWN_EVENT_ACTION"
-  | "UNKNOWN_EVENT_HANDLER";
+  | "UNKNOWN_EVENT_HANDLER"
+  | "INSTALLED_APPS_USE_DYNAMIC_ARG";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -64,6 +68,9 @@ export interface LintDetailMeta {
     instanceId: string;
   };
 }
+
+const INSTALLED_APPS = "INSTALLED_APPS";
+const HAS = "has";
 
 export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const builtinActions = new Set([
@@ -275,48 +282,52 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     }
   });
 
-  const { customTemplates } = storyboard.meta ?? {};
+  const { customTemplates, menus } = storyboard.meta ?? {};
   const warnedUsingCtxTemplates: LintDetail[] = [];
   const warnedUsingTplVarTemplates: LintDetail[] = [];
+  let installedAppsUseDynamicArguments = false;
+  const contexts = new Set<string>();
+  const tplVariables = new Set<string>();
+
+  visitStoryboardExpressions(
+    [storyboard.routes, menus],
+    (node, parent) => {
+      !installedAppsUseDynamicArguments &&
+        (installedAppsUseDynamicArguments = visitInstalledAppsFactory(
+          node,
+          parent
+        ));
+    },
+    {
+      matchExpressionString(value) {
+        return value.includes("INSTALLED_APPS");
+      },
+    }
+  );
+
   if (Array.isArray(customTemplates)) {
     for (const tpl of customTemplates) {
-      const contexts = new Set<string>();
-      const tplVariables = new Set<string>();
       visitStoryboardExpressions(
         [tpl.bricks, tpl.state],
         (node, parent) => {
-          if (node.name === "CTX" || node.name === "TPL") {
-            const collection = node.name === "CTX" ? contexts : tplVariables;
-            const memberParent = parent[parent.length - 1];
-            if (
-              memberParent?.node.type === "MemberExpression" &&
-              memberParent.key === "object"
-            ) {
-              const memberNode = memberParent.node;
-              if (
-                !memberNode.computed &&
-                memberNode.property.type === "Identifier"
-              ) {
-                collection.add(`${node.name}.${memberNode.property.name}`);
-              } else if (
-                memberNode.computed &&
-                (memberNode.property as any).type === "Literal" &&
-                typeof (memberNode.property as any).value === "string"
-              ) {
-                collection.add(
-                  `${node.name}[${(memberNode.property as any).raw}]`
-                );
-              } else {
-                collection.add(`${node.name}[...]`);
-              }
-            } else {
-              collection.add(node.name);
-            }
-          }
+          visitCTXOrTPLFatctory(
+            node,
+            parent,
+            node.name === "CTX" ? contexts : tplVariables
+          );
+          !installedAppsUseDynamicArguments &&
+            (installedAppsUseDynamicArguments = visitInstalledAppsFactory(
+              node,
+              parent
+            ));
         },
         {
           matchExpressionString(value) {
-            return value.includes("CTX") || value.includes("TPL");
+            return (
+              value.includes("CTX") ||
+              value.includes("TPL") ||
+              value.includes("INSTALLED_APPS")
+            );
           },
         }
       );
@@ -470,6 +481,17 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     });
   }
 
+  if (installedAppsUseDynamicArguments) {
+    errors.push({
+      type: "warn",
+      code: "INSTALLED_APPS_USE_DYNAMIC_ARG",
+      message: {
+        zh: "您在项目中使用了 INSTALLED_APPS.has 表达式, 并且使用了动态参数, 这将可能引起错误; 请将入参修改为静态参数, 例如: INSTALLED_APPS.has('xxx')",
+        en: "You're using INSTALLED_APPS.has in project with dynamic arguments, it could be get the error result. Please use INSTALLED_APPS.has with static arguments, for example: INSTALLED_APPS.has('xxx')",
+      },
+    });
+  }
+
   return errors;
 }
 
@@ -520,4 +542,60 @@ function limitString(string: string, max: number): string {
     return `${string.substring(0, max - 3)}...`;
   }
   return string;
+}
+
+function visitCTXOrTPLFatctory(
+  node: Identifier,
+  parent: EstreeParent,
+  collection: Set<string>
+): void {
+  if (node.name === "CTX" || node.name === "TPL") {
+    const memberParent = parent[parent.length - 1];
+    if (
+      memberParent?.node.type === "MemberExpression" &&
+      memberParent.key === "object"
+    ) {
+      const memberNode = memberParent.node;
+      if (!memberNode.computed && memberNode.property.type === "Identifier") {
+        collection.add(`${node.name}.${memberNode.property.name}`);
+      } else if (
+        memberNode.computed &&
+        (memberNode.property as any).type === "Literal" &&
+        typeof (memberNode.property as any).value === "string"
+      ) {
+        collection.add(`${node.name}[${(memberNode.property as any).raw}]`);
+      } else {
+        collection.add(`${node.name}[...]`);
+      }
+    } else {
+      collection.add(node.name);
+    }
+  }
+}
+
+function visitInstalledAppsFactory(
+  node: Identifier,
+  parent: EstreeParent
+): boolean {
+  if (node.name === INSTALLED_APPS) {
+    const memberParent = parent[parent.length - 1];
+    const callParent = parent[parent.length - 2];
+    if (
+      callParent?.node.type === "CallExpression" &&
+      callParent?.key === "callee" &&
+      memberParent?.node.type === "MemberExpression" &&
+      memberParent.key === "object" &&
+      !memberParent.node.computed &&
+      memberParent.node.property.type === "Identifier" &&
+      memberParent.node.property.name === HAS
+    ) {
+      const args = callParent.node.arguments as unknown as EstreeLiteral[];
+      if (
+        (args.length > 0 && args[0].type !== "Literal") ||
+        typeof args[0].value !== "string"
+      ) {
+        return true;
+      }
+    }
+  }
 }
