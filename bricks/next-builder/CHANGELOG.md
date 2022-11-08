@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.205.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.205.5...@next-bricks/next-builder@1.205.6) (2022-11-08)
+
+
+### Bug Fixes
+
+* fix workbench-data-tree search bug ([c422e57](https://github.com/easyops-cn/next-basics/commit/c422e579de981d8450a583e76d4c9ddb0117de92))
+* fix workbench-data-tree search bug ([b39ae63](https://github.com/easyops-cn/next-basics/commit/b39ae632db24f93392b8f53554b9d2fa7952dc42))
+
+
+
+
+
 ## [1.205.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.205.4...@next-bricks/next-builder@1.205.5) (2022-11-07)
 
 **Note:** Version bump only for package @next-bricks/next-builder
