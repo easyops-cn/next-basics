@@ -15,7 +15,7 @@ import {
 import { ContextConf } from "@next-core/brick-types";
 import { scanContextsInAny } from "../builder-container/DataView/scanContextsInStoryboard";
 import { deepMatch } from "../builder-container/utils/deepMatch";
-import { pick } from "lodash";
+import { omit, pick } from "lodash";
 
 export interface WorkbenchDataTreeProps extends ContextOfWorkbenchTree {
   trees: WorkbenchNodeData[];
@@ -82,9 +82,12 @@ export function WorkbenchDataTree({
           (!!matchNodeDataFields?.length &&
             deepMatch(
               Object.values(
-                matchNodeDataFields === "*"
-                  ? node.data
-                  : pick(node.data, matchNodeDataFields)
+                omit(
+                  (matchNodeDataFields === "*"
+                    ? node.data
+                    : pick(node.data, matchNodeDataFields)) as object,
+                  ["$key"]
+                )
               ),
               lowerTrimmedQuery
             )),
