@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.7...@next-bricks/basic-bricks@1.215.8) (2022-11-08)
+
+
+### Bug Fixes
+
+* 修复standalone模式下, home-redirect不生效的问题 ([66403b7](https://github.com/easyops-cn/next-basics/commit/66403b752c865f6995c547418ef5c4388fb154f9))
+
+
+
+
+
 ## [1.215.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.6...@next-bricks/basic-bricks@1.215.7) (2022-11-07)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
