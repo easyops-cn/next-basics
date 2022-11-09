@@ -21,11 +21,13 @@ export interface ResizableBoxProps {
   resizable?: boolean;
 }
 
-export type ResizeDirection = "left" | "right";
+export type ResizeDirection = "left" | "right" | "top" | "bottom";
 
 interface ResizerStatus {
   startWidth: number;
+  startHeigh: number;
   startX: number;
+  startY: number;
 }
 
 export function ResizableBox({
@@ -65,6 +67,11 @@ export function ResizableBox({
     []
   );
 
+  const isVerticalDirection = useMemo(
+    () => ["top", "bottom"].includes(resizeDirection),
+    [resizeDirection]
+  );
+
   const handleResizerMouseDown = useCallback(
     (event: MouseEvent) => {
       if (!resizable) return;
@@ -72,7 +79,9 @@ export function ResizableBox({
       event.preventDefault();
       setResizerStatus({
         startWidth: size,
+        startHeigh: size,
         startX: event.clientX,
+        startY: event.clientY,
       });
       setResized(false);
     },
@@ -99,18 +108,22 @@ export function ResizableBox({
 
     const handleResizerMouseMove = (event: MouseEvent): void => {
       if (!resizable) return;
-      setResized(true);
-      debouncedSetSize(
-        Math.max(
-          refinedMinSize,
-          Math.min(
+
+      const modifiedSize = isVerticalDirection
+        ? Math.min(
+            document.documentElement.clientHeight - refinedMinSpace,
+            resizeStatus.startHeigh +
+              (event.clientY - resizeStatus.startY) *
+                (resizeDirection === "top" ? -1 : 1)
+          )
+        : Math.min(
             document.documentElement.clientWidth - refinedMinSpace,
             resizeStatus.startWidth +
               (event.clientX - resizeStatus.startX) *
                 (resizeDirection === "left" ? -1 : 1)
-          )
-        )
-      );
+          );
+      setResized(true);
+      debouncedSetSize(Math.max(refinedMinSize, modifiedSize));
     };
 
     const handleResizerMouseUp = (): void => {
@@ -132,6 +145,7 @@ export function ResizableBox({
     resizeStatus,
     debouncedSetSize,
     resizable,
+    isVerticalDirection,
   ]);
 
   useEffect(() => {
@@ -147,7 +161,7 @@ export function ResizableBox({
           resizing: !!resizeStatus,
         })}
         style={{
-          width: size,
+          ...(isVerticalDirection ? { height: size } : { width: size }),
           ...boxStyle,
           ...(resizeStatus ? null : boxStyleWhenNotResizing),
         }}
