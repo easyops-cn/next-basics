@@ -248,6 +248,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           component,
           valueSuffix,
           cellStatus,
+          cellStyle = {},
           titleUseBrick,
           headerBrick,
           colSpanKey,
@@ -322,7 +323,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
             );
           };
         }
-        if (cellStatus || colSpanKey || rowSpanKey) {
+        if (cellStatus || colSpanKey || rowSpanKey || cellStyle) {
           const innerRender = columnConf.render;
           columnConf.render = (value, item, index) => {
             return {
@@ -330,7 +331,10 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
               props: {
                 colSpan: item[colSpanKey],
                 rowSpan: item[rowSpanKey],
-                style: cellStatus && getCellStyle(cellStatus, item, value),
+                style: {
+                  ...(cellStatus ? getCellStyle(cellStatus, item, value) : {}),
+                  ...cellStyle,
+                },
               },
             };
           };
