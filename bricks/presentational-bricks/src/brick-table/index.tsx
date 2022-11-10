@@ -103,6 +103,10 @@ export interface CustomColumn extends ColumnProps<Record<string, any>> {
    */
   cellStatus?: CellStatusProps;
   /**
+   * 设置列的每个单元格样式
+   */
+  cellStyle?: React.CSSProperties;
+  /**
    * [已废弃]支持为某列的标题自定义展示构件，可通过 DATA.title 获取标题文本
    */
   titleUseBrick?: UseBrickConf;
