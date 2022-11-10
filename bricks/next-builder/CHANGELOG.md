@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.207.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.206.0...@next-bricks/next-builder@1.207.0) (2022-11-10)
+
+
+### Features
+
+* support VB previewer toggle theme ([2aa042f](https://github.com/easyops-cn/next-basics/commit/2aa042f90f8b2aa74cca95fdc880c68183e93243))
+
+
+
+
+
 # [1.206.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.205.6...@next-bricks/next-builder@1.206.0) (2022-11-08)
 
 
