@@ -13,6 +13,7 @@ import classNames from "classnames";
 import type {
   BuilderBrickNode,
   BuilderSnippetNode,
+  SiteTheme,
   Storyboard,
 } from "@next-core/brick-types";
 import type {
@@ -38,7 +39,8 @@ import {
   useBuilderDataManager,
 } from "@next-core/editor-bricks-helper";
 import { omit } from "lodash";
-import { getRuntime } from "@next-core/brick-kit";
+import { batchSetAppsLocalTheme, getRuntime } from "@next-core/brick-kit";
+import { JsonStorage } from "@next-core/brick-utils";
 
 export interface PreviewContainerProps {
   previewUrl: string;
@@ -83,6 +85,7 @@ export interface PreviewContainerRef {
   reload(): void;
   capture(): void;
   resize(): void;
+  toggleTheme(): void;
   manager: BuilderDataManager;
 }
 
@@ -164,6 +167,9 @@ export function LegacyPreviewContainer(
 
   const [previewStarted, setPreviewStarted] = useState(false);
   const openerWindow: Window = previewOnNewWindow ? window.opener : window;
+
+  const storage = new JsonStorage(localStorage);
+  const LOCAL_STORAGE_APPS_THEME_KEY = "apps-theme";
 
   const previewOrigin = useMemo(() => {
     const url = new URL(previewUrl, location.origin);
@@ -446,6 +452,18 @@ export function LegacyPreviewContainer(
     [previewOrigin, previewSettings, snippetGraphData]
   );
 
+  const toggleTheme = () => {
+    const res = {} as Record<string, SiteTheme>;
+    const store = storage.getItem(LOCAL_STORAGE_APPS_THEME_KEY) as Record<
+      string,
+      SiteTheme
+    >;
+    const curTheme =
+      store && Object.keys(store).includes(appId) ? store[appId] : "light";
+    res[appId] = (curTheme === "dark-v2" ? "light" : "dark-v2") as SiteTheme;
+    batchSetAppsLocalTheme(res);
+  };
+
   const reload = useCallback(() => {
     iframeRef.current.contentWindow.postMessage(
       {
@@ -551,6 +569,7 @@ export function LegacyPreviewContainer(
     resize,
     manager,
     excuteProxyMethod,
+    toggleTheme,
   }));
 
   useEffect(() => {
