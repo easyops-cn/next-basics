@@ -170,6 +170,11 @@ export class PreviewContainerElement extends UpdatingElement {
   }
 
   @method()
+  toggleTheme(): void {
+    this._previewContainerRef.current.toggleTheme();
+  }
+
+  @method()
   refresh(
     appId: string,
     storyboardPatch: Partial<Storyboard>,
