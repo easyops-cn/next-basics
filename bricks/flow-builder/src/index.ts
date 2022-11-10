@@ -23,3 +23,5 @@ import "./custom-processors/getStepTreeData";
 import "./custom-processors/getFlowGraph";
 import "./custom-processors/packVarTemplateData";
 import "./custom-processors/replacePlaceholder";
+import "./variable-list";
+import "./variable-item";
