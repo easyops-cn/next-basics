@@ -35,8 +35,8 @@ html[data-theme="dark-v2"] .propList {
 .blankCube {
   display: inline-block;
   vertical-align: middle;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
 }
 
 .ellipsis {
