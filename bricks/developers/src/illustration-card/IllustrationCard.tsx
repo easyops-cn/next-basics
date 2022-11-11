@@ -80,6 +80,7 @@ export function IllustrationCardList({
             name={v.name}
             category={v.category}
             color={v.color}
+            style={{ paddingTop: "1px" }}
           />
         );
       })}
