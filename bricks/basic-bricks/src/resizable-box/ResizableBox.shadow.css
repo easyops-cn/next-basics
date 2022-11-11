@@ -1,11 +1,15 @@
 :host {
   display: block;
-  height: 100%;
   position: relative;
 }
 
 :host([hidden]) {
   display: none;
+}
+
+:host([resize-direction="left"]),
+:host([resize-direction="right"]) {
+  height: 100%;
 }
 
 *,
@@ -25,6 +29,22 @@
   bottom: 0;
 }
 
+.top.bar,
+.bottom.bar {
+  position: absolute;
+  height: 4px;
+  left: 0;
+  width: 100%;
+}
+
+.top {
+  top: -2px;
+}
+
+.bottom: {
+  bottom: -2px;
+}
+
 .left {
   left: -2px;
 }
@@ -37,6 +57,11 @@
   cursor: col-resize;
   background: #007fd4;
   transition: background 0.1s 0.3ms ease-out;
+
+  &.top,
+  &.bottom {
+    cursor: row-resize;
+  }
 }
 
 .mask {

@@ -1,0 +1,53 @@
+.variableInternalType {
+  font-style: italic;
+}
+
+.variableArray {
+  .variableArrayLength {
+    color: var(--palette-gray-7);
+  }
+}
+
+.variableType {
+  color: #0f9960;
+  font-style: italic;
+}
+
+.variablePropName {
+  color: #565656;
+  font-style: italic;
+}
+
+.variableString {
+  color: rgb(196, 26, 22);
+}
+
+.variableFunction {
+  font-style: italic;
+}
+
+.stringWrap .variableStringFull {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.variablePrimitive {
+  color: rgb(28, 0, 207);
+}
+
+.variableNil {
+  color: var(--palette-gray-7);
+}
+
+html[data-theme="dark-v2"] {
+  .variablePropName {
+    color: rgb(169, 169, 169);
+  }
+  .variableString {
+    color: rgb(233, 63, 59);
+  }
+
+  .variablePrimitive {
+    color: hsl(252, 100%, 75%);
+  }
+}
