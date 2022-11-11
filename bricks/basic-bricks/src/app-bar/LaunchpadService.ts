@@ -320,7 +320,14 @@ export class LaunchpadService {
         const find = curMicroApps.find((item) => item.id === row.id) || {};
         return {
           ...row,
-          ...pick(find, ["name", "icons", "localeName", "homepage"]),
+          ...pick(find, [
+            "name",
+            "icons",
+            "localeName",
+            "homepage",
+            "currentVersion",
+            "standaloneMode",
+          ]),
         };
       }),
     }));
