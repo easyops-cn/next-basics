@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.23...@next-bricks/flow-builder@1.22.0) (2022-11-11)
+
+
+### Bug Fixes
+
+* fix style ([ab401fb](https://github.com/easyops-cn/next-basics/commit/ab401fb1ee0af4a20981433c53595522c16f99b9))
+
+
+### Features
+
+* add varibel display ([c39794c](https://github.com/easyops-cn/next-basics/commit/c39794c06fecdd666360243b8adfa60f36526137))
+
+
+
+
+
 ## [1.21.23](https://github.com/easyops-cn/next-basics/compare/@next-bricks/flow-builder@1.21.22...@next-bricks/flow-builder@1.21.23) (2022-11-07)
 
 **Note:** Version bump only for package @next-bricks/flow-builder

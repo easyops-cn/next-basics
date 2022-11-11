@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.216.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.9...@next-bricks/basic-bricks@1.216.0) (2022-11-11)
+
+
+### Bug Fixes
+
+* launchpad sitemap click and icon error ([3008f6e](https://github.com/easyops-cn/next-basics/commit/3008f6e644e25b2839ec546778cc9420e616a09a))
+
+
+### Features
+
+* resizable box support top/bottom direction ([4139cb9](https://github.com/easyops-cn/next-basics/commit/4139cb90546d4986b1c8dd628a6dc625e907ae95))
+
+
+
+
+
 ## [1.215.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.8...@next-bricks/basic-bricks@1.215.9) (2022-11-08)
 
 

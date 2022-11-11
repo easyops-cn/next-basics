@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.271.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.270.5...@next-bricks/presentational-bricks@1.271.0) (2022-11-11)
+
+
+### Features
+
+* **brick-table:** support column backgroundColor Refs: EASY_AGILE-865 ([4e86d43](https://github.com/easyops-cn/next-basics/commit/4e86d436edf1d6819bee44447fcc6f360e066455))
+
+
+
+
+
 ## [1.270.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.270.4...@next-bricks/presentational-bricks@1.270.5) (2022-11-08)
 
 
