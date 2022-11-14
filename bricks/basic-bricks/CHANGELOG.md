@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.218.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.217.0...@next-bricks/basic-bricks@1.218.0) (2022-11-14)
+
+
+### Features
+
+* support setting gap for grid-layout ([f373414](https://github.com/easyops-cn/next-basics/commit/f3734140ff7bf65043c3bae8e0eab034c3368aad))
+
+
+
+
+
 # [1.217.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.216.0...@next-bricks/basic-bricks@1.217.0) (2022-11-14)
 
 
