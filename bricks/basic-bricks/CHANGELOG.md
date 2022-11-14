@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.217.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.216.0...@next-bricks/basic-bricks@1.217.0) (2022-11-14)
+
+
+### Features
+
+* **SubMenuFilter:** add suffixBrickTriggerByHover property ([3f91c86](https://github.com/easyops-cn/next-basics/commit/3f91c86d28921c8041bfd4b55390c7540400d992))
+
+
+
+
+
 # [1.216.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.215.9...@next-bricks/basic-bricks@1.216.0) (2022-11-11)
 
 
