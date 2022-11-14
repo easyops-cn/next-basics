@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.218.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.218.0...@next-bricks/basic-bricks@1.218.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* 暴露display为常用属性 refs BRICK_STORE-3129 ([cdf8f4c](https://github.com/easyops-cn/next-basics/commit/cdf8f4c3fd8275dc027c1c892e24ae858647137b))
+
+
+
+
+
 # [1.218.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.217.0...@next-bricks/basic-bricks@1.218.0) (2022-11-14)
 
 
