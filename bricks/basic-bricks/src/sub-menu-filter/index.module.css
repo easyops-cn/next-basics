@@ -63,6 +63,14 @@
       &:not(:global(.ant-menu-item-selected)):active {
         background-color: var(--sub-menu-brick-item-active-bg);
       }
+      .triggerByHover {
+        display: none;
+      }
+      &:hover {
+        .triggerByHover {
+          display: inline-block;
+        }
+      }
     }
 
     :global(.ant-menu-item-selected) {

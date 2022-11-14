@@ -205,6 +205,18 @@ export class SubMenuFilterElement extends UpdatingElement {
   })
   accordion = false;
 
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description suffixBrick是否hover才显示
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  suffixBrickTriggerByHover = false;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -265,6 +277,7 @@ export class SubMenuFilterElement extends UpdatingElement {
             accordion={this.accordion}
             defaultOpenKeys={this.defaultOpenKeys}
             defaultSelectedKeys={this.defaultSelectedKeys}
+            suffixBrickTriggerByHover={this.suffixBrickTriggerByHover}
           />
         </BrickWrapper>,
         this
