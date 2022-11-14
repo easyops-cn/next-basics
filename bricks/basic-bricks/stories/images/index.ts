@@ -45,3 +45,9 @@ export { default as generalCustomButtonsMoreBtnSvg } from "./basic-bricks.genera
 export { default as generalCustomButtonsStretchSvg } from "./basic-bricks.general-custom-buttons[stretch].svg";
 export { default as generalDrawerBasicSvg } from "./basic-bricks.general-drawer[basic].svg";
 export { default as generalModalBasicSvg } from "./basic-bricks.general-modal[basic].svg";
+export { default as containerCardTitleSvg } from "./basic-bricks.general-text[containerCardTitle].svg";
+export { default as mainSvg } from "./basic-bricks.general-text[main].svg";
+export { default as auxiliaryTextSvg } from "./basic-bricks.general-text[auxiliaryText].svg";
+export { default as bannerTitleSvg } from "./basic-bricks.general-text[bannerTitle].svg";
+export { default as categoryTitleSvg } from "./basic-bricks.general-text[categoryTitle].svg";
+export { default as textSvg } from "./basic-bricks.general-text.svg";

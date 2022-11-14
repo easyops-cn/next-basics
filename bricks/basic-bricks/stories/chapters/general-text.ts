@@ -1,10 +1,10 @@
 import { Story } from "@next-core/brick-types";
-import { generalButtonSvg } from "../images";
-import { generalButtonPrimarySvg } from "../images";
-import { generalButtonBasicSvg } from "../images";
-import { generalButtonDangerSvg } from "../images";
-import { generalButtonIconSvg } from "../images";
-import { generalButtonLinkSvg } from "../images";
+import { mainSvg } from "../images";
+import { containerCardTitleSvg } from "../images";
+import { auxiliaryTextSvg } from "../images";
+import { bannerTitleSvg } from "../images";
+import { categoryTitleSvg } from "../images";
+import { textSvg } from "../images";
 export const generalTextStory: Story = {
   storyId: "basic-bricks.general-text",
   category: "interact-basic",
@@ -19,7 +19,7 @@ export const generalTextStory: Story = {
     zh: "通用文本",
   },
   icon: {
-    imgSrc: generalButtonSvg,
+    imgSrc: textSvg,
   },
   conf: [
     {
@@ -42,7 +42,7 @@ export const generalTextStory: Story = {
         en: "Container Card Title",
         zh: "容器卡片标题",
       },
-      thumbnail: generalButtonBasicSvg,
+      thumbnail: containerCardTitleSvg,
     },
     {
       bricks: [
@@ -61,7 +61,7 @@ export const generalTextStory: Story = {
         en: "main",
         zh: "正文",
       },
-      thumbnail: generalButtonBasicSvg,
+      thumbnail: mainSvg,
     },
     {
       bricks: [
@@ -80,7 +80,7 @@ export const generalTextStory: Story = {
         en: "Auxiliary Text",
         zh: "辅助文字	",
       },
-      thumbnail: generalButtonBasicSvg,
+      thumbnail: auxiliaryTextSvg,
     },
     {
       bricks: [
@@ -102,7 +102,7 @@ export const generalTextStory: Story = {
         en: "Banner Title",
         zh: "banner标题",
       },
-      thumbnail: generalButtonBasicSvg,
+      thumbnail: bannerTitleSvg,
     },
     {
       bricks: [
@@ -119,12 +119,12 @@ export const generalTextStory: Story = {
           },
         },
       ],
-      snippetId: "basic-bricks.general-button[bannerTitle]",
+      snippetId: "basic-bricks.general-button[categoryTitle]",
       title: {
         en: "Category Title",
         zh: "分类标题",
       },
-      thumbnail: generalButtonBasicSvg,
+      thumbnail: categoryTitleSvg,
     },
   ],
   previewColumns: 2,
