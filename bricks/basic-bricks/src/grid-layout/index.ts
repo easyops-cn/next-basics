@@ -140,6 +140,14 @@ export class GridLayoutElement extends UpdatingElement {
   })
   responsive?: ResponsiveSettings;
 
+  /**
+   * @kind string
+   * @default "var(--page-card-gap)"
+   * @description 子元素之间的间距
+   */
+  @property()
+  gap: string;
+
   constructor() {
     super();
 
@@ -153,8 +161,6 @@ export class GridLayoutElement extends UpdatingElement {
 
     this._mountPoint = document.createElement("div");
     this._mountPoint.style.display = "grid";
-    this._mountPoint.style.gridGap = "var(--page-card-gap)";
-    this._mountPoint.style.gap = "var(--page-card-gap)";
 
     const slot = document.createElement("slot");
     slot.name = "items";
@@ -224,11 +230,15 @@ export class GridLayoutElement extends UpdatingElement {
       const rows = layout.rows || 1;
       const columnSpan = layout.columnSpan || 1;
       const rowSpan = layout.rowSpan || 1;
+      const gap = this.gap ?? "var(--page-card-gap)";
 
       this._mountPoint.style.gridTemplateColumns =
         this.templateColumns || (columns === 1 ? "" : `repeat(${columns},1fr)`);
       this._mountPoint.style.gridTemplateRows =
         rows === 1 ? "" : `repeat(${rows},1fr)`;
+      this._mountPoint.style.gridGap = gap;
+      this._mountPoint.style.gap = gap;
+
       this.style.gridColumn = columnSpan === 1 ? "" : `span ${columnSpan}`;
       this.style.gridRow = rowSpan === 1 ? "" : `span ${rowSpan}`;
     }
