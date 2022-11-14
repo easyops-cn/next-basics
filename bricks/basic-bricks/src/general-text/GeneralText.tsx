@@ -6,6 +6,7 @@ interface GeneralTextProps {
   fontSize?: CSSProperties["fontSize"];
   fontWeight?: CSSProperties["fontWeight"];
   lineHeight?: CSSProperties["lineHeight"];
+  display?: CSSProperties["display"];
   customStyle?: CSSProperties;
 }
 
@@ -17,6 +18,7 @@ export function GeneralText(props: GeneralTextProps): React.ReactElement {
         fontSize: props.fontSize,
         fontWeight: props.fontWeight,
         lineHeight: props.lineHeight,
+        display: props.display,
         ...props.customStyle,
       }}
     >

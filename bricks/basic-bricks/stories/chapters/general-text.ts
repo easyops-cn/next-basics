@@ -31,9 +31,7 @@ export const generalTextStory: Story = {
             fontSize: "var(--card-title-font-size)",
             color: "var(--color-header-text)",
             fontWeight: "var(--font-weight-500)",
-            customStyle: {
-              display: "block",
-            },
+            display: "block",
           },
         },
       ],
@@ -91,9 +89,7 @@ export const generalTextStory: Story = {
             fontSize: "var(--special-title-font-size-small)",
             color: "var(--color-header-text)",
             fontWeight: "var(--font-weight-500)",
-            customStyle: {
-              display: "block",
-            },
+            display: "block",
           },
         },
       ],
@@ -113,9 +109,7 @@ export const generalTextStory: Story = {
             fontSize: "var(--sub-title-font-size-small)",
             color: "var(--color-secondary-text)",
             fontWeight: "var(--font-weight-400)",
-            customStyle: {
-              display: "block",
-            },
+            display: "block",
           },
         },
       ],
