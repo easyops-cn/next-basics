@@ -29,17 +29,22 @@ describe("basic-bricks.grid-layout", () => {
     document.body.appendChild(element);
     await (global as any).flushPromises();
 
-    const mountPoint = element.shadowRoot.querySelector("div");
+    const mountPoint = (element.shadowRoot as ShadowRoot).querySelector(
+      "div"
+    ) as HTMLDivElement;
     expect(mountPoint.style.gridTemplateColumns).toBe("");
+    expect(mountPoint.style.gap).toBe("var(--page-card-gap)");
 
     expect(element.style.gridColumn).toBe("span 4");
     expect(element.style.gridRow).toBe("span 5");
 
     Object.assign(element, {
       templateColumns: "1fr 400px",
+      gap: "1px",
     });
     await (global as any).flushPromises();
     expect(mountPoint.style.gridTemplateColumns).toBe("1fr 400px");
+    expect(mountPoint.style.gap).toBe("1px");
 
     document.body.removeChild(element);
     await (global as any).flushPromises();
