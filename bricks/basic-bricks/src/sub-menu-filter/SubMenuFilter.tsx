@@ -40,7 +40,7 @@ function isSubMenu(item: SubMenuFilterItem): item is SubMenuFilterGroup {
 
 function getSubMenuKeys(items: SubMenuFilterItem[]): string[] {
   let subMenuKeys: string[] = [];
-  items.map((item) => {
+  items?.map((item) => {
     item.type === "subMenu" && subMenuKeys.push(item.key);
     if ((item as SubMenuFilterGroup)?.items) {
       subMenuKeys = subMenuKeys.concat(
@@ -66,6 +66,7 @@ export interface SubMenuFilterProps {
   inlineIndent?: number;
   transparentBackground?: boolean;
   accordion?: boolean;
+  suffixBrickTriggerByHover?: boolean;
 }
 
 export function SubMenuFilter({
@@ -83,6 +84,7 @@ export function SubMenuFilter({
   inlineIndent,
   transparentBackground,
   accordion,
+  suffixBrickTriggerByHover,
 }: SubMenuFilterProps): React.ReactElement {
   const [menuItems, setMenuItems] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
@@ -115,7 +117,13 @@ export function SubMenuFilter({
   const renderItemExtra = (item: Record<string, any>): ReactElement => {
     return (
       suffixBrick?.useBrick && (
-        <BrickAsComponent useBrick={suffixBrick.useBrick} data={item} />
+        <span
+          className={classNames({
+            [style.triggerByHover]: suffixBrickTriggerByHover,
+          })}
+        >
+          <BrickAsComponent useBrick={suffixBrick.useBrick} data={item} />
+        </span>
       )
     );
   };
