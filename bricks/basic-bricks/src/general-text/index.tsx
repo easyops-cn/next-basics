@@ -13,9 +13,19 @@ import { GeneralText } from "./GeneralText";
  */
 export class GeneralTextElement extends UpdatingElement {
   /**
+   * @default ''
+   * @required false
+   * @description 字体文本
+   * @group basic
+   */
+  @property({ type: String })
+  text: string;
+
+  /**
    * @default 14px
    * @required false
    * @description 字体大小
+   * @group basic
    */
   @property({ type: String })
   fontSize: CSSProperties["fontSize"];
@@ -24,6 +34,7 @@ export class GeneralTextElement extends UpdatingElement {
    * @default normal
    * @required false
    * @description 字体粗细
+   * @group basic
    */
   @property({ type: String })
   fontWeight: CSSProperties["fontWeight"];
@@ -32,6 +43,7 @@ export class GeneralTextElement extends UpdatingElement {
    * @default black
    * @required false
    * @description 字体颜色
+   * @group basic
    */
   @property({ type: String })
   color: CSSProperties["color"];
@@ -40,6 +52,7 @@ export class GeneralTextElement extends UpdatingElement {
    * @default 14px
    * @required false
    * @description 字体行高
+   * @group basic
    */
   @property({ type: String })
   lineHeight: CSSProperties["lineHeight"];
@@ -48,22 +61,25 @@ export class GeneralTextElement extends UpdatingElement {
    * @default left
    * @required false
    * @description 字体对齐方式
+   * @group basic
    */
   @property({ type: String })
   textAlign: CSSProperties["textAlign"];
 
   /**
-   * @default ''
+   * @default inline
    * @required false
-   * @description 字体文本
+   * @description 显示类型, 在文字构件中常用inline inline-block block,其余类型请查看[相关文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display)
+   * @group basic
    */
   @property({ type: String })
-  text: string;
+  display: CSSProperties["display"];
 
   /**
    * @default 使用自定义样式,将会覆盖默认样式
    * @required false
    * @description 自定义样式
+   * @group ui
    */
   @property({
     attribute: false,
@@ -89,6 +105,7 @@ export class GeneralTextElement extends UpdatingElement {
             color={this.color}
             lineHeight={this.lineHeight}
             text={this.text}
+            display={this.display}
             customStyle={this.customStyle}
           />
         </BrickWrapper>,
