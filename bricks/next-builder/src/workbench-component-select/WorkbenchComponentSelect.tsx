@@ -6,8 +6,7 @@ import React, {
   useMemo,
   useContext,
 } from "react";
-import { Input, Tabs, Collapse, Popover } from "antd";
-import { useTranslation } from "react-i18next";
+import { Input, Collapse, Popover } from "antd";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import {
   suggest,
@@ -22,7 +21,7 @@ import {
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
-import { SettingFilled } from "@ant-design/icons";
+import { SearchOutlined, SettingFilled } from "@ant-design/icons";
 import { debounce, compact, isEmpty } from "lodash";
 import { GeneralIcon } from "@next-libs/basic-components";
 import ResizeObserver from "resize-observer-polyfill";
@@ -34,6 +33,7 @@ import {
   useWorkbenchTreeDndContext,
 } from "../shared/workbench/WorkbenchTreeDndContext";
 import { TooltipPlacement } from "antd/lib/tooltip";
+import classnames from "classnames";
 
 interface ComponentSelectProps {
   brickList: BrickOptionItem[];
@@ -97,6 +97,10 @@ export function WorkbenchComponentSelect({
   onDrag,
 }: ComponentSelectProps): React.ReactElement {
   const [filterValue, setFilterValue] = useState<Record<string, string>>({});
+  const [curComponentType, setCurComponentType] = useState<string>("");
+  const [curComponentList, setCurComponentList] = useState<BrickOptionItem[]>(
+    []
+  );
   const [componentList, setComponetList] =
     useState<Record<string, BrickOptionItem[]>>();
   const { config } = useMemo(() => getRuntime().getCurrentApp(), []);
@@ -126,6 +130,11 @@ export function WorkbenchComponentSelect({
     },
     [setValue]
   );
+
+  const handleChangeTabs = useCallback((k: string, v: BrickOptionItem[]) => {
+    setCurComponentType(k);
+    setCurComponentList(v);
+  }, []);
 
   const getBrickTransfromByType = useCallback(
     (brickList: BrickOptionItem[]): Record<string, BrickOptionItem[]> => {
@@ -174,6 +183,12 @@ export function WorkbenchComponentSelect({
   const handleOnDragEnd = (): void => onDrag(false);
 
   useEffect(() => {
+    if (!componentList || Object.keys(componentList).length <= 0) return;
+    const [k, v] = Object.entries(componentList)[0];
+    handleChangeTabs(k, v);
+  }, [componentList]);
+
+  useEffect(() => {
     window.addEventListener("dragend", handleOnDragEnd);
     return () => {
       window.removeEventListener("dragend", handleOnDragEnd);
@@ -192,32 +207,42 @@ export function WorkbenchComponentSelect({
         }}
       >
         <div className={styles.componentSelect}>
-          <Tabs centered size="small">
-            {componentList &&
-              // 组件库暂时不展示"片段"这个tab
-              // Object.entries(componentList).map(([k, v]) => (
-              Object.entries(componentList)
+          {curComponentType && (
+            <div className={styles.searchWrapper}>
+              <Input
+                placeholder={`Search for ${curComponentType}`}
+                onChange={(e) => handleFilterChange(e, curComponentType)}
+                suffix={<SearchOutlined />}
+              ></Input>
+            </div>
+          )}
+          {componentList && (
+            <div className={styles.tabBtnWrapper}>
+              {Object.entries(componentList)
+                // 组件库暂时不展示"片段"这个tab
                 .filter(([k]) => k !== "snippet")
                 .map(([k, v]) => (
-                  <Tabs.TabPane tab={i18nTransform[k]} key={k}>
-                    <div className={styles.searchWrapper}>
-                      <Input
-                        placeholder={`Search for ${k}`}
-                        onChange={(e) => handleFilterChange(e, k)}
-                      ></Input>
-                    </div>
-                    <ComponentList
-                      key={k}
-                      componentType={k}
-                      componentList={v}
-                      q={filterValue[k]}
-                      storyList={storyList}
-                      isShowSuggest={isShowSuggest}
-                      onActionClick={onActionClick}
-                    />
-                  </Tabs.TabPane>
+                  <div
+                    onClick={() => handleChangeTabs(k, v)}
+                    key={k}
+                    className={classnames(styles.tabBtn, {
+                      [styles.tabBtnSelected]: curComponentType === k,
+                    })}
+                  >
+                    {i18nTransform[k]}
+                  </div>
                 ))}
-          </Tabs>
+            </div>
+          )}
+          <ComponentList
+            key={curComponentType}
+            componentType={curComponentType}
+            componentList={curComponentList}
+            q={filterValue[curComponentType]}
+            storyList={storyList}
+            isShowSuggest={isShowSuggest}
+            onActionClick={onActionClick}
+          />
         </div>
       </WorkbenchTreeDndContext.Provider>
     </ComponentSelectContext.Provider>
@@ -242,7 +267,7 @@ function ComponentList({
   onActionClick,
 }: ComponentListProps): React.ReactElement {
   const initGroup = useCallback((): groupItem[] => {
-    return suggest[componentType].length > 0 && isShowSuggest
+    return suggest[componentType]?.length > 0 && isShowSuggest
       ? suggestGroup.concat(defaultGroup[componentType] ?? [])
       : defaultGroup[componentType] ?? [];
   }, [componentType, isShowSuggest]);
@@ -336,7 +361,7 @@ function ComponentList({
   });
 
   useEffect(() => {
-    if (suggest[componentType].length) {
+    if (suggest[componentType]?.length) {
       setSuggestList(
         suggest[componentType].map((item) => {
           const originData = componentList.find(
@@ -579,7 +604,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
         className={styles.popoverContent}
         style={{
           gridTemplateColumns: `repeat(${
-            snippets.length >= 3 ? 3 : snippets.length
+            snippets?.length >= 3 ? 3 : snippets.length
           }, 142px)`,
         }}
       >
