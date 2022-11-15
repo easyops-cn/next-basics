@@ -260,12 +260,21 @@ export class GridLayoutElement extends UpdatingElement {
       this.style.gridColumn = columnSpan === 1 ? "" : `span ${columnSpan}`;
       this.style.gridRow = rowSpan === 1 ? "" : `span ${rowSpan}`;
       if (this.showGridBorder) {
-        document.documentElement.style.setProperty(
+        this.style.setProperty(
           "--grid-border-color",
           this.gridBorderColor ?? "#454547"
         );
-        this.gap = "0";
-        this.className = styles.gridBorder;
+        this.className =
+          parseInt(this.gap) === 0
+            ? styles.gridBorder
+            : styles.gridBorderWithGap;
+      } else {
+        if (this.style.getPropertyValue("--grid-border-color")) {
+          this.style.removeProperty("--grid-border-color");
+        }
+        if (this.className) {
+          this.removeAttribute("className");
+        }
       }
     }
   }
