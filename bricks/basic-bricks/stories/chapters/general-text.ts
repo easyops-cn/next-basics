@@ -1,10 +1,10 @@
 import { Story } from "@next-core/brick-types";
-import { mainSvg } from "../images";
+import { generalTextMainSvg } from "../images";
 import { containerCardTitleSvg } from "../images";
-import { auxiliaryTextSvg } from "../images";
-import { bannerTitleSvg } from "../images";
-import { categoryTitleSvg } from "../images";
-import { textSvg } from "../images";
+import { generalTextAuxiliaryTextSvg } from "../images";
+import { generalTextBannerTitleSvg } from "../images";
+import { generalTextCategoryTitleSvg } from "../images";
+import { generalTextSvg } from "../images";
 export const generalTextStory: Story = {
   storyId: "basic-bricks.general-text",
   category: "interact-basic",
@@ -19,7 +19,7 @@ export const generalTextStory: Story = {
     zh: "通用文本",
   },
   icon: {
-    imgSrc: textSvg,
+    imgSrc: generalTextSvg,
   },
   conf: [
     {
@@ -59,7 +59,7 @@ export const generalTextStory: Story = {
         en: "main",
         zh: "正文",
       },
-      thumbnail: mainSvg,
+      thumbnail: generalTextMainSvg,
     },
     {
       bricks: [
@@ -78,7 +78,7 @@ export const generalTextStory: Story = {
         en: "Auxiliary Text",
         zh: "辅助文字	",
       },
-      thumbnail: auxiliaryTextSvg,
+      thumbnail: generalTextAuxiliaryTextSvg,
     },
     {
       bricks: [
@@ -98,7 +98,7 @@ export const generalTextStory: Story = {
         en: "Banner Title",
         zh: "banner标题",
       },
-      thumbnail: bannerTitleSvg,
+      thumbnail: generalTextBannerTitleSvg,
     },
     {
       bricks: [
@@ -118,7 +118,7 @@ export const generalTextStory: Story = {
         en: "Category Title",
         zh: "分类标题",
       },
-      thumbnail: categoryTitleSvg,
+      thumbnail: generalTextCategoryTitleSvg,
     },
   ],
   previewColumns: 2,
