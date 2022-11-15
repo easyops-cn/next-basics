@@ -264,16 +264,24 @@ export class GridLayoutElement extends UpdatingElement {
           "--grid-border-color",
           this.gridBorderColor ?? "#454547"
         );
-        this.className =
+        this.classList.add(
           parseInt(this.gap) === 0
             ? styles.gridBorder
-            : styles.gridBorderWithGap;
+            : styles.gridBorderWithGap
+        );
       } else {
         if (this.style.getPropertyValue("--grid-border-color")) {
           this.style.removeProperty("--grid-border-color");
         }
-        if (this.className) {
-          this.removeAttribute("className");
+        const keys = Array.from(this.classList).filter(
+          (item) =>
+            item.startsWith("gridBorderWithGap") ||
+            item.startsWith("gridBorder")
+        );
+        if (keys.length) {
+          keys.forEach((item) => {
+            this.classList.remove(item);
+          });
         }
       }
     }
