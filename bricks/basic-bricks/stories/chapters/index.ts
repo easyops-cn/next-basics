@@ -35,6 +35,7 @@ import { generalTitleStory } from "./general-title";
 import { flexLayoutStory } from "./flex-layout";
 import { eventAgentStory } from "./event-agent";
 import { generalTextStory } from "./general-text";
+import { generalHeadingStory } from "./general-heading";
 export const Chapters = [
   advanceListContainerStory,
   advancedListContainerStory,
@@ -73,4 +74,5 @@ export const Chapters = [
   flexLayoutStory,
   eventAgentStory,
   generalTextStory,
+  generalHeadingStory,
 ];
