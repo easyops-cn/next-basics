@@ -36,6 +36,7 @@ export async function getStoriesJSON(info?: installInfo) {
         "layerType",
         "type",
         "originData.isExport",
+        "icon",
       ],
     });
   }
