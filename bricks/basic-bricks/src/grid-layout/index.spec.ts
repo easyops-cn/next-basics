@@ -52,6 +52,31 @@ describe("basic-bricks.grid-layout", () => {
     expect(mediaEventTarget.removeEventListener).not.toBeCalled();
   });
 
+  it("should show gridBorder ", async () => {
+    const element = document.createElement("basic-bricks.grid-layout");
+    Object.assign(element, {
+      showGridBorder: true,
+      gap: "0",
+    });
+    // Always waiting for async `(dis)connectedCallback`
+    await (global as any).flushPromises();
+    document.body.appendChild(element);
+    await (global as any).flushPromises();
+    expect(element.className).toBe("gridBorder");
+  });
+
+  it("should show gridBorderWithGap ", async () => {
+    const element = document.createElement("basic-bricks.grid-layout");
+    Object.assign(element, {
+      showGridBorder: true,
+    });
+    // Always waiting for async `(dis)connectedCallback`
+    await (global as any).flushPromises();
+    document.body.appendChild(element);
+    await (global as any).flushPromises();
+    expect(element.className).toBe("gridBorderWithGap");
+  });
+
   it("should be responsive", async () => {
     const element = document.createElement("basic-bricks.grid-layout");
     Object.assign(element, {
