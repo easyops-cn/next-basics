@@ -1,5 +1,5 @@
 import { UpdatingElement, property } from "@next-core/brick-kit";
-
+import styles from "./gridLayout.module.css";
 // ** Set a :host display style (e.g. block, inline-block, flex)
 //    unless you prefer the default of inline. **
 // ** Add a :host display style that respects the hidden attribute. **
@@ -148,6 +148,24 @@ export class GridLayoutElement extends UpdatingElement {
   @property()
   gap: string;
 
+  /**
+   * @kind Boolean
+   * @default false
+   * @description 网格布局边框
+   */
+  @property({
+    type: Boolean,
+  })
+  showGridBorder: boolean;
+
+  /**
+   * @kind string
+   * @default #454547
+   * @description 网格布局边框颜色
+   */
+  @property()
+  gridBorderColor: string;
+
   constructor() {
     super();
 
@@ -241,6 +259,14 @@ export class GridLayoutElement extends UpdatingElement {
 
       this.style.gridColumn = columnSpan === 1 ? "" : `span ${columnSpan}`;
       this.style.gridRow = rowSpan === 1 ? "" : `span ${rowSpan}`;
+      if (this.showGridBorder) {
+        document.documentElement.style.setProperty(
+          "--grid-border-color",
+          this.gridBorderColor ?? "#454547"
+        );
+        this.gap = "0";
+        this.className = styles.gridBorder;
+      }
     }
   }
 }
