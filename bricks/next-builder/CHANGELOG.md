@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.209.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.208.0...@next-bricks/next-builder@1.209.0) (2022-11-15)
+
+
+### Features
+
+* support VB show select brick icon ([8664c84](https://github.com/easyops-cn/next-basics/commit/8664c84e9545b808351c0756f2657d0e4c6f090b))
+
+
+
+
+
 # [1.208.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.207.0...@next-bricks/next-builder@1.208.0) (2022-11-14)
 
 
