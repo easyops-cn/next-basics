@@ -28,7 +28,7 @@ export const generalHeadingStory: Story = {
         {
           brick: "basic-bricks.general-heading",
           properties: {
-            text: "h1标题",
+            text: "一级标题",
             type: "h1",
           },
         },
@@ -36,7 +36,7 @@ export const generalHeadingStory: Story = {
       snippetId: "basic-bricks.general-heading[h1]",
       title: {
         en: "h1 heading",
-        zh: "h1标题",
+        zh: "一级标题",
       },
       thumbnail: generalHeadingH1,
     },
@@ -45,7 +45,7 @@ export const generalHeadingStory: Story = {
         {
           brick: "basic-bricks.general-heading",
           properties: {
-            text: "h2标题",
+            text: "二级标题",
             type: "h2",
           },
         },
@@ -53,7 +53,7 @@ export const generalHeadingStory: Story = {
       snippetId: "basic-bricks.general-heading[h2]",
       title: {
         en: "h2 heading",
-        zh: "h2标题",
+        zh: "二级标题",
       },
       thumbnail: generalHeadingH2,
     },
@@ -62,7 +62,7 @@ export const generalHeadingStory: Story = {
         {
           brick: "basic-bricks.general-heading",
           properties: {
-            text: "h3标题",
+            text: "三级标题",
             type: "h3",
           },
         },
@@ -70,7 +70,7 @@ export const generalHeadingStory: Story = {
       snippetId: "basic-bricks.general-heading[h3]",
       title: {
         en: "h3 heading",
-        zh: "h3标题",
+        zh: "三级标题",
       },
       thumbnail: generalHeadingH3,
     },
@@ -79,7 +79,7 @@ export const generalHeadingStory: Story = {
         {
           brick: "basic-bricks.general-heading",
           properties: {
-            text: "h4标题",
+            text: "四级标题",
             type: "h4",
           },
         },
@@ -87,7 +87,7 @@ export const generalHeadingStory: Story = {
       snippetId: "basic-bricks.general-heading[h4]",
       title: {
         en: "h4 heading",
-        zh: "h4标题",
+        zh: "四级标题",
       },
       thumbnail: generalHeadingH4,
     },
@@ -96,15 +96,15 @@ export const generalHeadingStory: Story = {
         {
           brick: "basic-bricks.general-heading",
           properties: {
-            text: "h5标题",
+            text: "五级标题",
             type: "h5",
           },
         },
       ],
       snippetId: "basic-bricks.general-heading[h5]",
       title: {
-        en: "h5标题 heading",
-        zh: "h5标题",
+        en: "h5 heading",
+        zh: "五级标题",
       },
       thumbnail: generalHeadingH5,
     },
@@ -113,7 +113,7 @@ export const generalHeadingStory: Story = {
         {
           brick: "basic-bricks.general-heading",
           properties: {
-            text: "h6标题",
+            text: "六级标题",
             type: "h6",
           },
         },
@@ -121,7 +121,7 @@ export const generalHeadingStory: Story = {
       snippetId: "basic-bricks.general-heading[h6]",
       title: {
         en: "h6 heading",
-        zh: "h6标题",
+        zh: "六级标题",
       },
       thumbnail: generalHeadingH6,
     },
