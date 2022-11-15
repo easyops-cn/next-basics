@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.219.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.218.2...@next-bricks/basic-bricks@1.219.0) (2022-11-15)
+
+
+### Features
+
+* 原生标题构件 refs BRICK_STORE-3130 ([b211958](https://github.com/easyops-cn/next-basics/commit/b2119585ac3cccf06d0c38599a6ab4c86a30203a))
+
+
+
+
+
 ## [1.218.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.218.1...@next-bricks/basic-bricks@1.218.2) (2022-11-15)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
