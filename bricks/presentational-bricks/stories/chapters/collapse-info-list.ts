@@ -6,8 +6,8 @@ export const CostTimeStory: Story = {
   type: "brick",
   author: "dophijing",
   text: {
-    en: "Collapse info list",
-    zh: "折叠展示列表",
+    en: "Simple collapse info list",
+    zh: "折叠信息展示列表",
   },
   description: {
     en: "For a streamlined display of collapsed information",
