@@ -80,3 +80,4 @@ export { default as markdownDisplayNormalSvg } from "./presentational-bricks.mar
 export { default as modalConfirmNormalSvg } from "./presentational-bricks.modal-confirm[normal].svg";
 export { default as modalConfirmDeleteSvg } from "./presentational-bricks.modal-confirm[delete].svg";
 export { default as modalConfirmInfoSvg } from "./presentational-bricks.modal-confirm[info].svg";
+export { default as CollapseInfoListSvg } from "./presentational-bricks.collapse-info-list.svg";
