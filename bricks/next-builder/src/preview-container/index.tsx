@@ -189,6 +189,16 @@ export class PreviewContainerElement extends UpdatingElement {
   }
 
   @method()
+  back(): void {
+    this._previewContainerRef.current.back();
+  }
+
+  @method()
+  forward(): void {
+    this._previewContainerRef.current.forward();
+  }
+
+  @method()
   capture(): void {
     this._previewContainerRef.current.capture();
   }

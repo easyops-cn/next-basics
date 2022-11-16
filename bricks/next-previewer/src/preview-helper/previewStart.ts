@@ -154,6 +154,8 @@ export function previewStart(
     getHistory().reload();
   };
 
+  const history = getHistory();
+
   window.addEventListener(
     "message",
     ({ data, origin }: MessageEvent<PreviewMessageToPreviewer>) => {
@@ -238,6 +240,12 @@ export function previewStart(
           case "reload":
             location.reload();
             break;
+          case "back":
+            history.goBack();
+            break;
+          case "forward":
+            history.goForward();
+            break;
           case "capture":
             capture(data.maxWidth, data.maxHeight).then(
               (screenshot) => {
@@ -302,8 +310,6 @@ export function previewStart(
       },
     });
   });
-
-  const history = getHistory();
 
   let previewPageMatch = true;
   const sendLocationChange = (loc: PluginLocation): void => {
