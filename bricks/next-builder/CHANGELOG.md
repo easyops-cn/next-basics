@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.210.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.209.0...@next-bricks/next-builder@1.210.0) (2022-11-17)
+
+
+### Features
+
+* support VB preview route back and forward ([8d976b0](https://github.com/easyops-cn/next-basics/commit/8d976b0a5bee4f9c16cd16f3af06eeda23744a59))
+
+
+
+
+
 # [1.209.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.208.0...@next-bricks/next-builder@1.209.0) (2022-11-15)
 
 

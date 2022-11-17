@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.11.13...@next-bricks/next-previewer@1.12.0) (2022-11-17)
+
+
+### Features
+
+* support VB preview route back and forward ([8d976b0](https://github.com/easyops-cn/next-basics/commit/8d976b0a5bee4f9c16cd16f3af06eeda23744a59))
+
+
+
+
+
 ## [1.11.13](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.11.12...@next-bricks/next-previewer@1.11.13) (2022-11-07)
 
 **Note:** Version bump only for package @next-bricks/next-previewer
