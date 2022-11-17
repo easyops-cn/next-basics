@@ -42,7 +42,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-libs/basic-components": "^4.0.3",
+    "@next-libs/basic-components": "^5.0.0",
     "@next-libs/code-display-components": "^2.0.4",
     "@next-libs/code-editor-components": "^4.7.4",
     "@next-libs/forms": "^3.3.3",
