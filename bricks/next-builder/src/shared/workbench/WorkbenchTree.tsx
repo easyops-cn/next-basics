@@ -521,7 +521,7 @@ function TreeNode({
     return Object.assign(commomStyle, style);
   }, [isDragActive, isDragElement, dragStatus]);
 
-  const handleCollapse = useCallback((event: React.MouseEvent) => {
+  const handleCollapse = useCallback((event: React.MouseEvent | MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
     setCollapseClicked(true);
@@ -533,12 +533,12 @@ function TreeNode({
     event.stopPropagation();
   }, []);
 
-  const onClick = useCallback(
-    (e: React.MouseEvent) => {
+  const onLinkClick = useCallback(
+    (e: MouseEvent) => {
       if (isContainer) {
         handleCollapse(e);
       } else {
-        return clickFactory?.(node)(e);
+        return clickFactory?.(node)?.();
       }
     },
     [clickFactory, handleCollapse, isContainer, node]
@@ -600,7 +600,7 @@ function TreeNode({
           onMouseLeave={onMouseLeave}
           onContextMenu={onContextMenu}
           noEmptyHref
-          onClick={onClick}
+          onClick={onLinkClick}
           {...(skipNotify
             ? {
                 to: {
