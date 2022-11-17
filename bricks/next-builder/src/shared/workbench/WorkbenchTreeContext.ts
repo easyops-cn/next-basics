@@ -1,4 +1,4 @@
-import { createContext, type MouseEvent, useContext } from "react";
+import { createContext, useContext } from "react";
 import type { WorkbenchNodeData } from "./interfaces";
 import { dragStatusEnum } from "./WorkbenchTreeDndContext";
 
@@ -19,10 +19,12 @@ export interface ContextOfWorkbenchTree {
   collapsible?: boolean;
   collapsedNodes?: (string | number)[];
   nodeKey?: string;
-  clickFactory?(node: WorkbenchNodeData): (event: MouseEvent) => void;
+  clickFactory?(node: WorkbenchNodeData): () => void;
   mouseEnterFactory?(node: WorkbenchNodeData): () => void;
   mouseLeaveFactory?(node: WorkbenchNodeData): () => void;
-  contextMenuFactory?(node?: WorkbenchNodeData): (event: MouseEvent) => void;
+  contextMenuFactory?(
+    node?: WorkbenchNodeData
+  ): (event: React.MouseEvent) => void;
   matchNode?(node: WorkbenchNodeData, lowerTrimmedQuery?: string): boolean;
   onNodeToggle?(nodeId: string | number, collapsed: boolean): void;
   getCollapsedId?(node: WorkbenchNodeData): string | number;

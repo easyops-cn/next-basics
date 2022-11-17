@@ -73,14 +73,7 @@ export function WorkbenchBrickTree({
   const clickFactory = useCallback(
     ({ data }: WorkbenchNodeData<WorkbenchBrickTreeNode>) => {
       return isNormalNode(data)
-        ? (event: React.MouseEvent) => {
-            // Q: It's weird that we MUST stop propagation here.
-            // Or this listener will be called twice.
-            // This may be a known issue of React 16 with shadow DOM,
-            // which is hopefully fixed in react 17.
-            // And a potential workaround for react 16:
-            // https://github.com/facebook/react/issues/9242#issuecomment-534096832
-            event.stopPropagation();
+        ? () => {
             manager.nodeClick(data);
           }
         : null;
