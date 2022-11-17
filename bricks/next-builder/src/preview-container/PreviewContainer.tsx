@@ -22,6 +22,8 @@ import type {
   PreviewMessageContainerProxyMethod,
   PreviewMessageContainerStartPreview,
   PreviewMessageContainerToggleInspecting,
+  PreviewMessageContainerForward,
+  PreviewMessageContainerBack,
   PreviewMessageContainerUpdatePreviewRoute,
   PreviewMessageContainerUpdatePreviewUrl,
   PreviewMessageFromContainer,
@@ -86,6 +88,8 @@ export interface PreviewContainerRef {
   capture(): void;
   resize(): void;
   toggleTheme(): void;
+  back(): void;
+  forward(): void;
   manager: BuilderDataManager;
 }
 
@@ -464,6 +468,26 @@ export function LegacyPreviewContainer(
     batchSetAppsLocalTheme(res);
   };
 
+  const back = useCallback(() => {
+    iframeRef.current.contentWindow.postMessage(
+      {
+        sender: "preview-container",
+        type: "back",
+      } as PreviewMessageContainerBack,
+      previewOrigin
+    );
+  }, [previewOrigin]);
+
+  const forward = useCallback(() => {
+    iframeRef.current.contentWindow.postMessage(
+      {
+        sender: "preview-container",
+        type: "forward",
+      } as PreviewMessageContainerForward,
+      previewOrigin
+    );
+  }, [previewOrigin]);
+
   const reload = useCallback(() => {
     iframeRef.current.contentWindow.postMessage(
       {
@@ -570,6 +594,8 @@ export function LegacyPreviewContainer(
     manager,
     excuteProxyMethod,
     toggleTheme,
+    back,
+    forward,
   }));
 
   useEffect(() => {

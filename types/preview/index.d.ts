@@ -112,6 +112,8 @@ export type PreviewMessageToPreviewer =
   | PreviewMessageContainerBuilderHoverOnContext
   | PreviewMessageContainerBuilderSelectBrick
   | PreviewMessageContainerToggleInspecting
+  | PreviewMessageContainerBack
+  | PreviewMessageContainerForward
   | PreviewMessageContainerRefresh
   | PreviewMessageContainerReload
   | PreviewMessageContainerCapture
@@ -264,6 +266,16 @@ export interface PreviewMessageContainerToggleInspecting
   sender: "preview-container";
   type: "toggle-inspecting";
   enabled: boolean;
+}
+
+export interface PreviewMessageContainerBack extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "back";
+}
+
+export interface PreviewMessageContainerForward extends PreviewBaseMessage {
+  sender: "preview-container";
+  type: "forward";
 }
 
 export interface PreviewMessageContainerRefresh extends PreviewBaseMessage {

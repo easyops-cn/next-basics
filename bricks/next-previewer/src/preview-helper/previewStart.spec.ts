@@ -30,6 +30,8 @@ const history = {
     }
   },
   reload: jest.fn(),
+  goForward: jest.fn(),
+  goBack: jest.fn(),
 } as any;
 jest.spyOn(kit, "getHistory").mockReturnValue(history);
 jest.spyOn(kit.developHelper, "updateStoryboard").mockImplementation();
@@ -489,5 +491,25 @@ describe("previewStart", () => {
       undefined,
       { formSchema: {}, fieldList: [] }
     );
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "back",
+      },
+    } as any);
+
+    expect(history.goBack).toBeCalledTimes(1);
+
+    listener({
+      origin: "http://localhost:8081",
+      data: {
+        sender: "preview-container",
+        type: "forward",
+      },
+    } as any);
+
+    expect(history.goForward).toBeCalledTimes(1);
   });
 });
