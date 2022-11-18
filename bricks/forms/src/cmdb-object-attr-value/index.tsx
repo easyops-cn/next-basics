@@ -272,6 +272,8 @@ export class CmdbObjectAttrValueElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             onChange={this.handleChange}
             valueType={this.valueType}
             placeholder={this.placeholder}

@@ -328,6 +328,8 @@ export class DynamicFormItemElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             value={this.value}
             manualEditedValue={this.manualEditedValue}
             required={this.required}

@@ -252,6 +252,8 @@ export class UploadFilesV2Element extends FormItemElement {
             autoUpload={this.autoUpload}
             name={this.name}
             label={this.label}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             required={this.required}
             url={this.url}
             method={this.method}

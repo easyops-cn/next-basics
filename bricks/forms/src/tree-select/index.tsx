@@ -242,6 +242,8 @@ export class TreeSelectElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             required={this.required}
             pattern={this.pattern}
             message={this.message}

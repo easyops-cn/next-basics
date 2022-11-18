@@ -151,6 +151,8 @@ export class DynamicUserSelectItemElement extends FormItemElement {
             srcObjectId={this.srcObjectId}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             value={this.value}
             required={this.required}
             message={this.message}

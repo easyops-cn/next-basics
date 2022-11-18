@@ -419,6 +419,8 @@ export class GeneralSelectElement extends FormItemElement {
             groupBy={this.groupBy}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             mode={this.mode}
             placeholder={this.placeholder}
             value={this.value}

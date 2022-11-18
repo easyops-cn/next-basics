@@ -139,6 +139,8 @@ export class GeneralFormItemElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             required={this.required}
             message={this.message}
             pattern={this.pattern}
@@ -151,6 +153,7 @@ export class GeneralFormItemElement extends FormItemElement {
             onChange={this._handleChange}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            className="important-formItem"
           />
         </BrickWrapper>,
         this._mountPoint

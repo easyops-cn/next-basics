@@ -320,6 +320,8 @@ export class CmdbInstanceSelectElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             mode={this.mode}
             placeholder={this.placeholder}
             required={this.required}
