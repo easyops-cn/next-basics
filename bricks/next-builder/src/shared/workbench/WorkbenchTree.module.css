@@ -1,9 +1,16 @@
 .searchBox {
   position: sticky;
   top: 0;
-  background-color: rgb(37, 37, 38);
+  background-color: #181818;
   padding: 5px 10px 10px;
   z-index: 1;
+  :global(.ant-input-affix-wrapper) {
+    background-color: #181818;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    :global(input.ant-input) {
+      background-color: #181818;
+    }
+  }
 }
 
 .tree {
@@ -26,18 +33,18 @@
 
 .nodeLabelRow:hover,
 .nodeLabelRow.hover {
-  background-color: #2a2d2e;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .nodeLabelRow:focus {
   outline-width: 1px;
   outline-style: solid;
   outline-offset: -1px;
-  outline-color: #007fd4;
+  outline-color: #1a7aff;
 }
 
 .nodeLabelRow.active:focus {
-  background-color: #094771;
+  background-color: #1a7aff;
 }
 
 .nodeLabel {
@@ -66,7 +73,7 @@
 }
 
 .nodeLabelRow.active {
-  background-color: #37373d;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .nodeIconWrapper {

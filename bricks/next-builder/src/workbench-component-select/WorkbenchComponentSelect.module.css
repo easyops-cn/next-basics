@@ -196,7 +196,7 @@
     padding: 0 12px;
     background: rgba(255, 255, 255, 0.08);
     margin-right: 8px;
-    border-radius: 2px;
+    border-radius: 6px;
     cursor: pointer;
   }
   .tabBtnSelected {
