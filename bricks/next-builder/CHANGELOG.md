@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.212.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.211.0...@next-bricks/next-builder@1.212.0) (2022-11-18)
+
+
+### Features
+
+* update workbench tabs style ([6a52be9](https://github.com/easyops-cn/next-basics/commit/6a52be9d9c63a5eb5cbdca48bb74829e24d48662))
+
+
+
+
+
 # [1.211.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.210.1...@next-bricks/next-builder@1.211.0) (2022-11-18)
 
 
