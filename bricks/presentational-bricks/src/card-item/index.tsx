@@ -622,7 +622,7 @@ export class CardItemElement extends UpdatingElement {
             shape={this.shape}
             useLinkBehavior={this.useLinkBehavior}
             disabledLink={mutableProps.disabledLink}
-            onClick={this._handleClick}
+            cardItemClickEventEmitter={this.cardItemClick}
           />
         </BrickWrapper>,
         this._mountPoint,

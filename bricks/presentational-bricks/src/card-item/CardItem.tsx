@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { isArray, map, isNil, find } from "lodash";
 import { CardLayoutType, Color } from "./index";
 import { CardProps } from "antd/lib/card";
+import { EventEmitter } from "@next-core/brick-kit";
 
 interface CardItemProps {
   cardLayoutType?: CardLayoutType;
@@ -47,7 +48,7 @@ interface CardItemProps {
   shape?: "circle" | "square" | "round-square";
   useLinkBehavior?: boolean;
   disabledLink?: boolean;
-  onClick?: () => void;
+  cardItemClickEventEmitter?: EventEmitter<any>;
 }
 
 export function CardItem(props: CardItemProps): React.ReactElement {
@@ -157,7 +158,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         }
       ) as HTMLElement;
       if (!disabledLink && foundCardListContainerArea) {
-        props.onClick?.();
+        props.cardItemClickEventEmitter?.emit(props.dataSource);
       }
     };
     cardItemWrapperRef.current?.addEventListener(
@@ -170,7 +171,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         handleCardItemInnerClick
       );
     };
-  }, [props.onClick, disabledLink]);
+  }, [props.cardItemClickEventEmitter, props.dataSource, disabledLink]);
 
   const avatarImg = (size: number): React.ReactElement => (
     <span
