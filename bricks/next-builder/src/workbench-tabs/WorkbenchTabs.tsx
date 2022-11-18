@@ -90,34 +90,36 @@ export function WorkbenchTabs({
             role="menuitem"
             ref={tab.key === initialActiveTabKey ? activeTabCallback : null}
           >
-            <span className={styles.tabIcon}>
-              {tab.icon?.lib === "text" ? (
-                <WorkbenchTextIcon icon={tab.icon} />
+            <div className={styles.tabContent}>
+              <span className={styles.tabIcon}>
+                {tab.icon?.lib === "text" ? (
+                  <WorkbenchTextIcon icon={tab.icon} />
+                ) : (
+                  <GeneralIcon icon={tab.icon} />
+                )}
+              </span>
+              <span className={styles.tabName}>{tab.name}</span>
+              {historyBlocked && tab.key === internalActiveTabKey ? (
+                <span className={styles.modifiedIcon}></span>
               ) : (
-                <GeneralIcon icon={tab.icon} />
-              )}
-            </span>
-            <span className={styles.tabName}>{tab.name}</span>
-            {historyBlocked && tab.key === internalActiveTabKey ? (
-              <span className={styles.modifiedIcon}></span>
-            ) : (
-              <WorkbenchMiniActionBar
-                className={styles.actionsBar}
-                data={tab}
-                actions={[
-                  {
-                    action: "close",
-                    title: "Close",
-                    icon: {
-                      lib: "antd",
-                      theme: "outlined",
-                      icon: "close",
+                <WorkbenchMiniActionBar
+                  className={styles.actionsBar}
+                  data={tab}
+                  actions={[
+                    {
+                      action: "close",
+                      title: "Close",
+                      icon: {
+                        lib: "antd",
+                        theme: "outlined",
+                        icon: "close",
+                      },
                     },
-                  },
-                ]}
-                onActionClick={onActionClick}
-              />
-            )}
+                  ]}
+                  onActionClick={onActionClick}
+                />
+              )}
+            </div>
           </li>
         ))}
       </ul>

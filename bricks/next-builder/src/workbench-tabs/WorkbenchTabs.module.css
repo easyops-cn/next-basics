@@ -17,7 +17,6 @@
 .tab {
   display: flex;
   align-items: center;
-  border-right: 1px solid rgb(37, 37, 38);
   background-color: #323237;
   color: rgba(255, 255, 255, 0.5);
   height: 35px;
@@ -25,8 +24,30 @@
   min-width: fit-content;
   flex-shrink: 0;
   cursor: pointer;
-  padding-left: 10px;
   user-select: none;
+}
+
+.tabContent {
+  display: flex;
+  width: 100%;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tabs li:first-child .tabContent {
+  border-left: none;
+}
+
+.tabs li:last-child:not(.active) .tabContent {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.active .tabContent {
+  border-left: none;
+}
+
+.active + li .tabContent {
+  border-left: none;
 }
 
 .active {
