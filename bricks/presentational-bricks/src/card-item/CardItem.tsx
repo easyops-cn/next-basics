@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { Card, Avatar } from "antd";
-import { GeneralIcon } from "@next-libs/basic-components";
+import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
 import classNames from "classnames";
-import { isArray, map, isNil } from "lodash";
+import { isArray, map, isNil, find } from "lodash";
 import { CardLayoutType, Color } from "./index";
 import { CardProps } from "antd/lib/card";
 
@@ -17,6 +17,7 @@ interface CardItemProps {
   iconStyle?: Record<string, any>;
   dataSource: Record<string, any>;
   url?: string;
+  href?: string;
   showTag?: boolean;
   hideOperate?: boolean;
   tagText?: string;
@@ -44,6 +45,9 @@ interface CardItemProps {
   showImg?: boolean;
   imgSize?: number;
   shape?: "circle" | "square" | "round-square";
+  useLinkBehavior?: boolean;
+  disabledLink?: boolean;
+  onClick?: () => void;
 }
 
 export function CardItem(props: CardItemProps): React.ReactElement {
@@ -63,6 +67,11 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     reverseBgColor,
     shape,
     onlyOperateSlot,
+    url,
+    href,
+    target,
+    disabledLink,
+    useLinkBehavior,
   } = props;
   const hasBottomSlot =
     cardLayoutType === CardLayoutType.ICON_AS_BACKGROUND
@@ -122,6 +131,46 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       )}
     </>
   );
+
+  const cardItemWrapperRef = useRef<HTMLDivElement>();
+  useEffect(() => {
+    const handleCardItemInnerClick = (e: MouseEvent) => {
+      const foundOperatingArea = find(
+        e.composedPath(),
+        (element: HTMLElement) => {
+          return (
+            element.classList &&
+            element.classList.value.includes("operateContainer")
+          );
+        }
+      ) as HTMLElement;
+      if (foundOperatingArea) {
+        e.preventDefault();
+        return;
+      }
+      const foundCardListContainerArea = find(
+        e.composedPath(),
+        (element: HTMLElement) => {
+          return (
+            element.classList && element.classList.value.includes("cardItem")
+          );
+        }
+      ) as HTMLElement;
+      if (!disabledLink && foundCardListContainerArea) {
+        props.onClick?.();
+      }
+    };
+    cardItemWrapperRef.current?.addEventListener(
+      "click",
+      handleCardItemInnerClick
+    );
+    return () => {
+      cardItemWrapperRef.current?.removeEventListener(
+        "click",
+        handleCardItemInnerClick
+      );
+    };
+  }, [props.onClick, disabledLink]);
 
   const avatarImg = (size: number): React.ReactElement => (
     <span
@@ -421,5 +470,13 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     }
   };
 
-  return getCardNode();
+  return useLinkBehavior ? (
+    <Link to={url} href={href} target={target} disabled={disabledLink}>
+      <div data-testid="card-item-wrapper" ref={cardItemWrapperRef}>
+        {getCardNode()}
+      </div>
+    </Link>
+  ) : (
+    getCardNode()
+  );
 }

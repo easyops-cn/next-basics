@@ -3,6 +3,15 @@ import { shallow } from "enzyme";
 import { CardItem } from "./CardItem";
 import { CardLayoutType } from "./index";
 import { Avatar } from "antd";
+import { Link } from "@next-libs/basic-components";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { createHistory, getHistory } from "@next-core/brick-kit";
+
+createHistory();
+
+beforeEach(() => {
+  getHistory().push("/home");
+});
 
 describe("CardItem", () => {
   it("should work", () => {
@@ -25,6 +34,7 @@ describe("CardItem", () => {
           name: "k8s",
         }}
         url="/"
+        useLinkBehavior={false}
       />
     );
     expect(wrapper.find(".descList").children()).toHaveLength(2);
@@ -51,6 +61,7 @@ describe("CardItem", () => {
           name: "k8s",
         }}
         url="/"
+        useLinkBehavior={false}
       />
     );
     expect(wrapper.find(".descList").length).toBe(0);
@@ -77,6 +88,7 @@ describe("CardItem", () => {
           name: "k8s",
         }}
         url="/"
+        useLinkBehavior={false}
       />
     );
     expect(wrapper.find(".descList").length).toBe(0);
@@ -103,6 +115,7 @@ describe("CardItem", () => {
           name: "k8s",
         }}
         url="/"
+        useLinkBehavior={false}
       />
     );
     expect(wrapper.find(".descList").length).toBe(0);
@@ -124,10 +137,45 @@ describe("CardItem", () => {
           imgSrc: "/test.png",
         }}
         url="/"
+        useLinkBehavior={false}
       />
     );
     expect(wrapper.find(".descList").length).toBe(0);
     expect(wrapper.find(".desc").length).toBe(1);
     expect(wrapper.find(Avatar).length).toBe(1);
+  });
+});
+
+test("should work when useLinkBehavior is true and url isn't empty", () => {
+  render(
+    <CardItem
+      cardLayoutType={CardLayoutType.ICON_ALIGN_MIDDLE}
+      cardTitle="k8s"
+      descriptionList="描述信息"
+      showImg={true}
+      imgSize={32}
+      dataSource={{
+        id: "1",
+        name: "k8s",
+        imgSrc: "/test.png",
+      }}
+      url="/xxx"
+      useLinkBehavior
+    />
+  );
+  expect(screen.getByTestId("card-item-wrapper")).toBeTruthy();
+  fireEvent.click(screen.getByTestId("card-item-wrapper"), {
+    button: 0,
+  });
+  expect(getHistory().location).toMatchObject({
+    pathname: "/xxx",
+    search: "",
+  });
+  fireEvent.click(screen.getByTestId("card-item-wrapper").childNodes[0], {
+    button: 0,
+  });
+  expect(getHistory().location).toMatchObject({
+    pathname: "/xxx",
+    search: "",
   });
 });
