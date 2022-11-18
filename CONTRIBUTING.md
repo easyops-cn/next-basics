@@ -66,13 +66,13 @@ you can:
 
 `yarn test`
 
-测试指定目录或文件：`yarn test path/to/your/spec-file`。
+Test specified directories or files: `yarn test path/to/your/spec-file`.
 
-注意：
+Notice:
 
-- 现在启用 NX 缓存后，相关文件没有变化时，如果重复执行构建或测试都可能命中缓存。
-- 测试覆盖率报告现在将存放在各自的子包内（`bricks/*`, `libs/*`）。
-- 为了节省缓存空间，测试覆盖率默认使用轻量化的格式，如果需要在本地查看可视化的报告（html），给测试命令加上 `--coverageReporters=lcov` 即可。
+- Now we use NX for cache, it maybe hit the cache when building or testing if relevant files are not changed.
+- Code coverage report will be put into sub-packages (`bricks/*`, `lihs/*`).
+- In order to save the disk usage of cache, the coverage reporter is set to a lightweigt one by default. To see a visualization report (html), please set `--coverageReporters=lcov` in your test command.
 
 ## Create New Brick Packages or New Bricks in Existed Packages
 
@@ -141,6 +141,14 @@ yarn serve --server https://uat.easyops.local
 ## 测试
 
 `yarn test`
+
+测试指定目录或文件：`yarn test path/to/your/spec-file`。
+
+注意：
+
+- 现在启用 NX 缓存后，相关文件没有变化时，如果重复执行构建或测试都可能命中缓存。
+- 测试覆盖率报告现在将存放在各自的子包内（`bricks/*`, `libs/*`）。
+- 为了节省缓存空间，测试覆盖率默认使用轻量化的格式，如果需要在本地查看可视化的报告（html），给测试命令加上 `--coverageReporters=lcov` 即可。
 
 ## 创建新的构件或构件包
 
