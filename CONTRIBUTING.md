@@ -66,6 +66,14 @@ you can:
 
 `yarn test`
 
+测试指定目录或文件：`yarn test path/to/your/spec-file`。
+
+注意：
+
+- 现在启用 NX 缓存后，相关文件没有变化时，如果重复执行构建或测试都可能命中缓存。
+- 测试覆盖率报告现在将存放在各自的子包内（`bricks/*`, `libs/*`）。
+- 为了节省缓存空间，测试覆盖率默认使用轻量化的格式，如果需要在本地查看可视化的报告（html），给测试命令加上 `--coverageReporters=lcov` 即可。
+
 ## Create New Brick Packages or New Bricks in Existed Packages
 
 `yarn yo`
