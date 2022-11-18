@@ -22,4 +22,21 @@ describe("VariableItem", () => {
       '{id: "abc"}'
     );
   });
+
+  it("should expand with object", () => {
+    const { container, debug } = render(
+      <VariableItem
+        propValue={{
+          name: "flowList",
+          data: { id: "abc", extra: { test: "bbc" } },
+        }}
+        expand
+        standalone
+      />
+    );
+
+    debug();
+
+    expect(container.querySelector(".propItem")).toHaveClass("expanded");
+  });
 });

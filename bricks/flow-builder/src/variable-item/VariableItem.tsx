@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../i18n/constants";
 import { CaretDownOutlined, CaretRightOutlined } from "@ant-design/icons";
@@ -12,14 +12,20 @@ interface VariableItemProps {
   propValue: any;
   propName?: string;
   standalone?: boolean;
+  expand?: boolean;
 }
 
 export function VariableItem({
   propValue,
   propName,
   standalone,
+  expand,
 }: VariableItemProps): React.ReactElement {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(expand);
+
+  useEffect(() => {
+    setExpanded(expand);
+  }, [expand]);
 
   const handleClick = React.useCallback(() => {
     setExpanded(!expanded);
@@ -54,7 +60,9 @@ export function VariableItem({
         </span>
         <VariableDisplay value={propValue} expanded={expanded} />
       </div>
-      {hasChildren && expanded && <VariableList value={propValue} />}
+      {hasChildren && expanded && (
+        <VariableList value={propValue} expand={expand} />
+      )}
     </>
   );
 }

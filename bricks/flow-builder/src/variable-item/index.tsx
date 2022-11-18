@@ -24,6 +24,11 @@ export class VariableItemElement extends UpdatingElement {
   })
   standalone: boolean;
 
+  @property({
+    type: Boolean,
+  })
+  expand: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -46,6 +51,7 @@ export class VariableItemElement extends UpdatingElement {
             propName={this.propName}
             propValue={this.propValue}
             standalone={this.standalone}
+            expand={this.expand}
           />
         </BrickWrapper>,
         this

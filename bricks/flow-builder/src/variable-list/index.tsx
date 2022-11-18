@@ -17,6 +17,11 @@ export class VariableListElement extends UpdatingElement {
   })
   value: any[] | Record<string, any>;
 
+  @property({
+    type: Boolean,
+  })
+  expand: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -35,7 +40,7 @@ export class VariableListElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <VariableList value={this.value} />
+          <VariableList value={this.value} expand={this.expand} />
         </BrickWrapper>,
         this
       );
