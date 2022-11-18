@@ -14,6 +14,8 @@ html[data-theme="dark-v2"] .propList {
 
 .propList,
 .propItem {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+    "monospace";
   list-style: none;
   font-size: 14px;
   color: var(--var-code-color);

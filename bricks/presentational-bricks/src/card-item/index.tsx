@@ -421,6 +421,15 @@ export class CardItemElement extends UpdatingElement {
    */
   @property({ attribute: false }) shape: "circle" | "square" | "round-square";
 
+  /**
+   * @required true
+   * @default true
+   * @description 卡片是否使用a标签实现点击
+   * @group basic
+   */
+  @property({ attribute: false })
+  useLinkBehavior = true;
+
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -440,61 +449,63 @@ export class CardItemElement extends UpdatingElement {
   connectedCallback(): void {
     this.style.display = "inline-block";
 
-    this.addEventListener("click", (e) => {
-      const foundOperatingArea = find(
-        e.composedPath(),
-        (element: HTMLElement) => {
-          return (
-            element.classList &&
-            element.classList.value.includes("operateContainer")
-          );
-        }
-      ) as HTMLElement;
-      if (foundOperatingArea) {
-        return;
-      }
-      const disabledField = get(this.fields, "disabled");
-      const disabled =
-        this.disabled ||
-        (disabledField ? get(this.dataSource, disabledField) : false);
-      if (disabled) {
-        return;
-      }
-      const foundCardListContainerArea = find(
-        e.composedPath(),
-        (element: HTMLElement) => {
-          return (
-            element.classList && element.classList.value.includes("cardItem")
-          );
-        }
-      ) as HTMLElement;
-      // Todo(lynette): shadow dom中link的跳转会刷新整个页面，所以先这样处理。Issue：https://github.com/facebook/react/issues/9242
-      if (foundCardListContainerArea) {
-        this._handleClick();
-        if (this.href) {
-          const a = document.createElement("a");
-          a.href = this.href;
-          if (this.target && this.target !== "_self") {
-            window.open(this.href, this.target);
-          } else {
-            a.click();
+    if (!this.useLinkBehavior) {
+      this.addEventListener("click", (e) => {
+        const foundOperatingArea = find(
+          e.composedPath(),
+          (element: HTMLElement) => {
+            return (
+              element.classList &&
+              element.classList.value.includes("operateContainer")
+            );
           }
-        } else {
-          const url =
-            this.url ||
-            (this.urlTemplate &&
-              parseTemplate(this.urlTemplate, this.dataSource));
-          if (url) {
-            const history = getHistory();
+        ) as HTMLElement;
+        if (foundOperatingArea) {
+          return;
+        }
+        const disabledField = get(this.fields, "disabled");
+        const disabled =
+          this.disabled ||
+          (disabledField ? get(this.dataSource, disabledField) : false);
+        if (disabled) {
+          return;
+        }
+        const foundCardListContainerArea = find(
+          e.composedPath(),
+          (element: HTMLElement) => {
+            return (
+              element.classList && element.classList.value.includes("cardItem")
+            );
+          }
+        ) as HTMLElement;
+        // Todo(lynette): shadow dom中link的跳转会刷新整个页面，所以先这样处理。Issue：https://github.com/facebook/react/issues/9242
+        if (foundCardListContainerArea) {
+          this._handleClick();
+          if (this.href) {
+            const a = document.createElement("a");
+            a.href = this.href;
             if (this.target && this.target !== "_self") {
-              window.open(url, this.target);
+              window.open(this.href, this.target);
             } else {
-              history.push(url);
+              a.click();
+            }
+          } else {
+            const url =
+              this.url ||
+              (this.urlTemplate &&
+                parseTemplate(this.urlTemplate, this.dataSource));
+            if (url) {
+              const history = getHistory();
+              if (this.target && this.target !== "_self") {
+                window.open(url, this.target);
+              } else {
+                history.push(url);
+              }
             }
           }
         }
-      }
-    });
+      });
+    }
     this._render();
   }
 
@@ -508,6 +519,7 @@ export class CardItemElement extends UpdatingElement {
       const mutableProps = {
         target: this.target,
         url: this.url,
+        href: this.href,
         disabled: this.disabled,
         cardTitle: this.cardTitle,
         cardSubtitle: this.cardSubtitle,
@@ -525,8 +537,15 @@ export class CardItemElement extends UpdatingElement {
         tagColor: this.tagConfig?.color || "blue",
         tagTriangle: this.tagConfig?.triangle !== false,
         imgSrc: this.imgSrc,
+        disabledLink: false,
       };
       if (this.dataSource) {
+        if (this.useLinkBehavior) {
+          const disabledField = get(this.fields, "disabled");
+          mutableProps.disabledLink =
+            this.disabled ||
+            (disabledField ? get(this.dataSource, disabledField) : false);
+        }
         if (this.urlTemplate) {
           mutableProps.url = parseTemplate(this.urlTemplate, this.dataSource);
         }
@@ -576,6 +595,7 @@ export class CardItemElement extends UpdatingElement {
             dataSource={this.dataSource}
             target={mutableProps.target}
             url={mutableProps.url}
+            href={mutableProps.href}
             showTag={mutableProps.showTag}
             hideOperate={mutableProps.hideOperate}
             tagText={mutableProps.tagText}
@@ -600,6 +620,9 @@ export class CardItemElement extends UpdatingElement {
             showImg={this.showImg}
             imgSize={this.imgSize}
             shape={this.shape}
+            useLinkBehavior={this.useLinkBehavior}
+            disabledLink={mutableProps.disabledLink}
+            cardItemClickEventEmitter={this.cardItemClick}
           />
         </BrickWrapper>,
         this._mountPoint,

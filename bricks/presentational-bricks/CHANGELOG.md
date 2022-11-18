@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.273.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.273.0...@next-bricks/presentational-bricks@1.273.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* **presentational-bricks:** 修复cartItem构件无法抛出点击事件问题 Refs:EASY_AGILE-873 ([bbcb4a5](https://github.com/easyops-cn/next-basics/commit/bbcb4a50b714b6ed37ae82d6e7c5cab567cc3451))
+
+
+
+
+
+# [1.273.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.272.0...@next-bricks/presentational-bricks@1.273.0) (2022-11-18)
+
+
+### Features
+
+* **presentational-bricks:** cartItem构件跳转支持a标签行为 Refs:EASY_AGILE-873 ([f5c0a8b](https://github.com/easyops-cn/next-basics/commit/f5c0a8b4a0d8430dbe8b5d579355fefd40b14592))
+
+
+
+
+
 # [1.272.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.271.0...@next-bricks/presentational-bricks@1.272.0) (2022-11-16)
 
 
