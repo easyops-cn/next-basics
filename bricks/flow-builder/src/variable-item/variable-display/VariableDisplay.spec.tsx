@@ -42,8 +42,7 @@ describe("VariableDisplay", () => {
   });
 
   it("should work for function value", () => {
-    const { container, debug } = render(<VariableDisplay value={() => 0} />);
-    debug();
+    const { container } = render(<VariableDisplay value={() => 0} />);
     expect(container.querySelector("span")).toHaveClass("variableFunction");
 
     expect(container.textContent).toBe("ƒ");
