@@ -163,6 +163,8 @@ export class CmdbInstanceSelectPanelElement extends FormItemElement {
             formElement={this.getFormElement()}
             name={this.name}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             required={this.required}
             message={this.message}
             validator={this.validator}

@@ -237,6 +237,8 @@ export class GeneralSlideElement extends FormItemElement {
             formElement={this.getFormElement()}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             name={this.name}
             value={this.value}
             required={this.required}

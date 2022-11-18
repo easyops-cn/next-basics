@@ -193,6 +193,8 @@ export class GeneralInputNumberRangeElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             placeholder={this.placeholder}
             required={this.required}
             readOnly={this.readOnly}

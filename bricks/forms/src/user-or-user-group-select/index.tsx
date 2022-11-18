@@ -205,6 +205,8 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             objectList={this.objectList}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             message={this.message}
             required={this.required}
             validator={this.validator}

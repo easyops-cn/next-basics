@@ -268,6 +268,8 @@ export class GeneralCascaderElement extends FormItemElement {
             formElement={this.getFormElement()}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             name={this.name}
             value={this.value}
             options={this.options}

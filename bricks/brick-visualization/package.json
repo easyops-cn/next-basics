@@ -35,7 +35,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-libs/visual-builder": "^1.2.18"
+    "@next-libs/visual-builder": "^1.2.19"
   },
   "peerDependencies": {
     "@next-dll/ace": "*"

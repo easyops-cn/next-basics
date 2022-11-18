@@ -240,6 +240,8 @@ export class UploadImgElement extends FormItemElement {
             formElement={this.getFormElement()}
             name={this.name}
             label={this.label}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             value={this.value}
             placeholder={this.placeholder}
             autoSize={this.autoSize}

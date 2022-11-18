@@ -109,6 +109,8 @@ export class GeneralSwitchElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             size={this.size}
             required={this.required}
             message={this.message}

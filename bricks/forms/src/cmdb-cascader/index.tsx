@@ -150,6 +150,8 @@ export class CmdbCascaderElement extends FormItemElement {
             formElement={this.getFormElement()}
             name={this.name}
             label={this.label}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             labelTooltip={this.labelTooltip}
             placeholder={this.placeholder}
             inputBoxStyle={this.inputBoxStyle}

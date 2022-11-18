@@ -108,16 +108,6 @@ export class GeneralLinkElement extends FormItemElement {
   dataSource: Record<string, any>;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description label颜色
-   * @group ui
-   */
-  @property()
-  labelColor: string;
-
-  /**
    * @kind boolean
    * @required false
    * @default -
@@ -229,6 +219,8 @@ export class GeneralLinkElement extends FormItemElement {
             value={this.value}
             text={this.text}
             label={this.label}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             url={this.url}
             target={this.target}
             href={this.href}
@@ -241,7 +233,6 @@ export class GeneralLinkElement extends FormItemElement {
             iconAlign={this.iconAlign}
             hideExternalIcon={this.hideExternalIcon}
             underLine={this.underLine}
-            labelColor={this.labelColor}
             labelTooltip={this.labelTooltip}
             notRender={this.notRender}
             helpBrick={this.helpBrick}

@@ -205,6 +205,8 @@ export class GeneralRadioElement extends FormItemElement {
             name={this.name}
             label={this.label}
             labelTooltip={this.labelTooltip}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             required={this.required}
             options={formatOptions(this.options)}
             value={this.value}

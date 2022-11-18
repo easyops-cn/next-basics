@@ -400,6 +400,8 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             name={this.name}
             formElement={this.getFormElement()}
             label={this.label}
+            labelColor={this.labelColor}
+            labelBold={this.labelBold}
             value={this.value}
             modalVisible={this.isVisible}
             container={this._mountPoint}
