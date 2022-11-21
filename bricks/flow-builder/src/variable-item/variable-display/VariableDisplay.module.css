@@ -26,7 +26,7 @@
   font-style: italic;
 }
 
-.stringWrap .variableStringFull {
+.stringWrap.variableStringFull {
   white-space: pre-wrap;
   word-break: break-word;
 }

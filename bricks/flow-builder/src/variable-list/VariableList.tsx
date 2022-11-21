@@ -7,12 +7,13 @@ import { VariableItem } from "../variable-item/VariableItem";
 interface PropListProps {
   value: any[] | Record<string, any>;
   expand?: boolean;
+  ellipsis?: boolean;
 }
 
 export function VariableList(props: PropListProps): React.ReactElement {
   const { t } = useTranslation(NS_FLOW_BUILDER);
 
-  const { value, expand } = props;
+  const { value, expand, ellipsis } = props;
   return (
     <ul className={styles.propList}>
       {Array.isArray(value)
@@ -20,6 +21,7 @@ export function VariableList(props: PropListProps): React.ReactElement {
             <VariableItem
               key={index}
               expand={expand}
+              ellipsis={ellipsis}
               propName={String(index)}
               propValue={item}
             />
@@ -28,6 +30,7 @@ export function VariableList(props: PropListProps): React.ReactElement {
             <VariableItem
               key={entry[0]}
               expand={expand}
+              ellipsis={ellipsis}
               propName={entry[0]}
               propValue={entry[1]}
             />
