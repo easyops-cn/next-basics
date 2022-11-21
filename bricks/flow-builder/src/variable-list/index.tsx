@@ -22,6 +22,11 @@ export class VariableListElement extends UpdatingElement {
   })
   expand: boolean;
 
+  @property({
+    attribute: false,
+  })
+  ellipsis = true;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -40,7 +45,11 @@ export class VariableListElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <VariableList value={this.value} expand={this.expand} />
+          <VariableList
+            value={this.value}
+            expand={this.expand}
+            ellipsis={this.ellipsis}
+          />
         </BrickWrapper>,
         this
       );

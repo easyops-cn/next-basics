@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { NS_FLOW_BUILDER, K } from "../../i18n/constants";
+import { VariableContext } from "../constants";
 import styles from "./VariableDisplay.module.css";
 
 export function isObject(value: unknown): value is Record<string, any> {
@@ -12,6 +13,7 @@ interface VariableDisplayProps<T = any> {
   value: T;
   minimal?: boolean;
   expanded?: boolean;
+  ellipsis?: boolean;
 }
 
 export function VariableDisplay(
@@ -130,11 +132,18 @@ export function StringDisplay({
   value,
   minimal,
 }: VariableDisplayProps<string>): React.ReactElement {
+  const context = useContext(VariableContext);
+
   if (minimal) {
     return <span className={styles.variableString}>{`"${value}"`}</span>;
   }
   return (
-    <span className={styles.variableStringFull}>
+    <span
+      className={classNames(
+        { [styles.stringWrap]: !context?.ellipsis },
+        styles.variableStringFull
+      )}
+    >
       <span className={styles.variablePunctuation}>{'"'}</span>
       <span className={styles.variableString} title={value}>
         {value}
