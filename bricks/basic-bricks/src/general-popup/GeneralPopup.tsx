@@ -103,8 +103,8 @@ export function GeneralPopup({
   const initPos = useCallback(() => {
     const { innerWidth, innerHeight } = window;
     const initPostion = [
-      innerWidth / 2 - popupRef.current.offsetWidth / 2,
-      innerHeight / 2 - popupRef.current.offsetHeight / 2,
+      Math.floor((innerWidth - popupRef.current.offsetWidth) / 2),
+      Math.floor((innerHeight - popupRef.current.offsetHeight) / 2),
     ];
     return popupId ? storage.getItem(popupId) ?? initPostion : initPostion;
   }, [popupId, storage]);
