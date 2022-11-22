@@ -56,6 +56,13 @@ describe("CrontabInput", () => {
     });
 
     expect(wrapper.find(".formatText").text()).toEqual("");
+
+    const wrapper1 = mount(
+      <CrontabInput value="6 * * * *" disabledSet={["minute"]} />
+    );
+    expect(
+      wrapper1.find(".crontabContainer").childAt(0).childAt(1).prop("disabled")
+    ).toBe(true);
   });
 
   it("should trigger change event", () => {
