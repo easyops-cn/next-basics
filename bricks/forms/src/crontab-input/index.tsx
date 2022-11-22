@@ -7,7 +7,7 @@ import {
   EventEmitter,
 } from "@next-core/brick-kit";
 import { FormItemElement } from "@next-libs/forms";
-import { CrontabInput } from "./CrontabInput";
+import { CrontabInput, CrontabType } from "./CrontabInput";
 
 /**
  * @id forms.crontab-input
@@ -49,6 +49,15 @@ export class CrontabInputElement extends FormItemElement {
    */
   @property()
   value: string;
+
+  /**
+   * @kind CrontabType[]
+   * @required false
+   * @default []
+   * @description 需要disabled的的输入框 "minute" | "hour" | "date" | "month" | "dow"
+   */
+  @property({ attribute: false })
+  disabledSet: CrontabType[] = [];
 
   /**
    * @kind boolean
@@ -98,6 +107,7 @@ export class CrontabInputElement extends FormItemElement {
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
+            disabledSet={this.disabledSet}
           />
         </BrickWrapper>,
         this
