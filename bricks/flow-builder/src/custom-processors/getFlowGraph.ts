@@ -53,7 +53,9 @@ function walkSteps(
   callback: (item: StepItem) => void
 ): void {
   let startId = startAt;
-  while (startId) {
+  const traversedNode: string[] = [];
+  while (startId && !traversedNode.includes(startId)) {
+    traversedNode.push(startId);
     const find = steps?.find((item) => item.id === startId);
     if (find) {
       callback(find);

@@ -72,7 +72,9 @@ function getStageList(
 
   let node = rootStep;
 
-  while (stepMap.get(node.next)) {
+  const traversedNode: string[] = [];
+  while (stepMap.get(node.next) && !traversedNode.includes(node.next)) {
+    traversedNode.push(node.next);
     const data = stepMap.get(node.next);
     nodeList.push(data);
 
