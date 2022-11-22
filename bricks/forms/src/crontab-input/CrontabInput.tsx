@@ -33,7 +33,7 @@ function CrontabInputItem(
   const [{ minute, hour, date, month, dow }, setChange] = useCrontab(
     props.value
   );
-  const { disabledSet } = props;
+  const { disabledSet = [] } = props;
   const [humanizeCrontab, setHumanizeCrontab] = useState("");
 
   const triggerChange = (type: string, value: string) => {
