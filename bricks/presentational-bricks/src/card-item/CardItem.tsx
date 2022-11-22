@@ -232,6 +232,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
         ) : (
           <div
             className="desc"
+            title={descriptionList}
             style={{
               height:
                 descMaxLine *
