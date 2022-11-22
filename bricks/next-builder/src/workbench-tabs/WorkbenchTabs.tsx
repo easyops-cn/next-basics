@@ -16,6 +16,7 @@ export interface WorkbenchTabsProps {
   tabs?: WorkbenchTabConf[];
   activeTabKey?: string | number;
   historyBlocked?: boolean;
+  closeDisabled?: boolean;
   onTabClose?(tab: WorkbenchTabConf): void;
   onTabClick?(tab: WorkbenchTabConf): void;
 }
@@ -31,6 +32,7 @@ export function WorkbenchTabs({
   tabs,
   activeTabKey,
   historyBlocked,
+  closeDisabled,
   onTabClose,
   onTabClick,
 }: WorkbenchTabsProps): React.ReactElement {
@@ -99,7 +101,8 @@ export function WorkbenchTabs({
                 )}
               </span>
               <span className={styles.tabName}>{tab.name}</span>
-              {historyBlocked && tab.key === internalActiveTabKey ? (
+              {closeDisabled ? null : historyBlocked &&
+                tab.key === internalActiveTabKey ? (
                 <span className={styles.modifiedIcon}></span>
               ) : (
                 <WorkbenchMiniActionBar

@@ -102,6 +102,14 @@ test("WorkbenchTabs should work", () => {
     screen.queryAllByRole("menuitem")[1].querySelector(".modifiedIcon")
   ).not.toBe(null);
 
+  // Mark close disabled.
+  rerender(<WorkbenchTabs tabs={tabs} activeTabKey={1} closeDisabled />);
+
+  expect(screen.queryAllByRole("button")).toHaveLength(0);
+  expect(
+    screen.queryAllByRole("menuitem")[0].querySelector(".modifiedIcon")
+  ).toBe(null);
+
   // Let `setTimeout` to work.
   jest.runAllTimers();
 });
