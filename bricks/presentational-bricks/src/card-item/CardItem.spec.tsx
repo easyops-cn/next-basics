@@ -3,7 +3,6 @@ import { shallow } from "enzyme";
 import { CardItem } from "./CardItem";
 import { CardLayoutType } from "./index";
 import { Avatar } from "antd";
-import { Link } from "@next-libs/basic-components";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { createHistory, getHistory } from "@next-core/brick-kit";
 
@@ -163,15 +162,7 @@ test("should work when useLinkBehavior is true and url isn't empty", () => {
       useLinkBehavior
     />
   );
-  expect(screen.getByTestId("card-item-wrapper")).toBeTruthy();
-  fireEvent.click(screen.getByTestId("card-item-wrapper"), {
-    button: 0,
-  });
-  expect(getHistory().location).toMatchObject({
-    pathname: "/xxx",
-    search: "",
-  });
-  fireEvent.click(screen.getByTestId("card-item-wrapper").childNodes[0], {
+  fireEvent.click(screen.getByRole("link"), {
     button: 0,
   });
   expect(getHistory().location).toMatchObject({
