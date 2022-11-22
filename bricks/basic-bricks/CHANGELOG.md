@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.220.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.220.0...@next-bricks/basic-bricks@1.220.1) (2022-11-22)
+
+
+### Bug Fixes
+
+* **general-popup:** fix blur when open in certain width or height view ([9c49241](https://github.com/easyops-cn/next-basics/commit/9c49241f2f69abccc57273fcc06be8dc557e5059))
+
+
+
+
+
 # [1.220.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.219.1...@next-bricks/basic-bricks@1.220.0) (2022-11-18)
 
 
