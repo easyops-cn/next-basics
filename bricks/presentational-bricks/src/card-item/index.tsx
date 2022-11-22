@@ -441,10 +441,10 @@ export class CardItemElement extends UpdatingElement {
   }
 
   // istanbul ignore next
-  private _handleClick(): void {
+  private _handleClick = (): void => {
     const data = this.dataSource;
     this.cardItemClick.emit(data);
-  }
+  };
 
   connectedCallback(): void {
     this.style.display = "inline-block";
@@ -454,10 +454,7 @@ export class CardItemElement extends UpdatingElement {
         const foundOperatingArea = find(
           e.composedPath(),
           (element: HTMLElement) => {
-            return (
-              element.classList &&
-              element.classList.value.includes("operateContainer")
-            );
+            return element.classList?.contains("operateContainer");
           }
         ) as HTMLElement;
         if (foundOperatingArea) {
@@ -473,9 +470,7 @@ export class CardItemElement extends UpdatingElement {
         const foundCardListContainerArea = find(
           e.composedPath(),
           (element: HTMLElement) => {
-            return (
-              element.classList && element.classList.value.includes("cardItem")
-            );
+            return element.classList?.contains("cardItem");
           }
         ) as HTMLElement;
         // Todo(lynette): shadow dom中link的跳转会刷新整个页面，所以先这样处理。Issue：https://github.com/facebook/react/issues/9242
@@ -622,7 +617,7 @@ export class CardItemElement extends UpdatingElement {
             shape={this.shape}
             useLinkBehavior={this.useLinkBehavior}
             disabledLink={mutableProps.disabledLink}
-            cardItemClickEventEmitter={this.cardItemClick}
+            onClick={this._handleClick}
           />
         </BrickWrapper>,
         this._mountPoint,

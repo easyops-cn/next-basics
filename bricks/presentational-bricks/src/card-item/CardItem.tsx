@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useCallback } from "react";
 import { Card, Avatar } from "antd";
 import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { MenuIcon } from "@next-core/brick-types";
@@ -6,7 +6,6 @@ import classNames from "classnames";
 import { isArray, map, isNil, find } from "lodash";
 import { CardLayoutType, Color } from "./index";
 import { CardProps } from "antd/lib/card";
-import { EventEmitter } from "@next-core/brick-kit";
 
 interface CardItemProps {
   cardLayoutType?: CardLayoutType;
@@ -48,7 +47,7 @@ interface CardItemProps {
   shape?: "circle" | "square" | "round-square";
   useLinkBehavior?: boolean;
   disabledLink?: boolean;
-  cardItemClickEventEmitter?: EventEmitter<any>;
+  onClick?: () => void;
 }
 
 export function CardItem(props: CardItemProps): React.ReactElement {
@@ -73,6 +72,7 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     target,
     disabledLink,
     useLinkBehavior,
+    onClick,
   } = props;
   const hasBottomSlot =
     cardLayoutType === CardLayoutType.ICON_AS_BACKGROUND
@@ -132,46 +132,6 @@ export function CardItem(props: CardItemProps): React.ReactElement {
       )}
     </>
   );
-
-  const cardItemWrapperRef = useRef<HTMLDivElement>();
-  useEffect(() => {
-    const handleCardItemInnerClick = (e: MouseEvent) => {
-      const foundOperatingArea = find(
-        e.composedPath(),
-        (element: HTMLElement) => {
-          return (
-            element.classList &&
-            element.classList.value.includes("operateContainer")
-          );
-        }
-      ) as HTMLElement;
-      if (foundOperatingArea) {
-        e.preventDefault();
-        return;
-      }
-      const foundCardListContainerArea = find(
-        e.composedPath(),
-        (element: HTMLElement) => {
-          return (
-            element.classList && element.classList.value.includes("cardItem")
-          );
-        }
-      ) as HTMLElement;
-      if (!disabledLink && foundCardListContainerArea) {
-        props.cardItemClickEventEmitter?.emit(props.dataSource);
-      }
-    };
-    cardItemWrapperRef.current?.addEventListener(
-      "click",
-      handleCardItemInnerClick
-    );
-    return () => {
-      cardItemWrapperRef.current?.removeEventListener(
-        "click",
-        handleCardItemInnerClick
-      );
-    };
-  }, [props.cardItemClickEventEmitter, props.dataSource, disabledLink]);
 
   const avatarImg = (size: number): React.ReactElement => (
     <span
@@ -472,11 +432,33 @@ export function CardItem(props: CardItemProps): React.ReactElement {
     }
   };
 
+  const handleNativeClick = useCallback(
+    (e: MouseEvent | React.MouseEvent) => {
+      const foundOperatingArea = find(
+        (e as MouseEvent).composedPath(),
+        (element: HTMLElement) => {
+          return element.classList?.contains("operateContainer");
+        }
+      ) as HTMLElement;
+      if (foundOperatingArea) {
+        e.preventDefault();
+        return;
+      }
+      onClick?.();
+    },
+    [onClick]
+  );
+
   return useLinkBehavior ? (
-    <Link to={url} href={href} target={target} disabled={disabledLink}>
-      <div data-testid="card-item-wrapper" ref={cardItemWrapperRef}>
-        {getCardNode()}
-      </div>
+    <Link
+      to={url}
+      href={href}
+      target={target}
+      disabled={disabledLink}
+      onClick={handleNativeClick}
+      useNativeEvent
+    >
+      {getCardNode()}
     </Link>
   ) : (
     getCardNode()
