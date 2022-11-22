@@ -24,6 +24,10 @@ jest.spyOn(kit, "useProvider").mockReturnValue({
 } as any);
 
 jest.spyOn(kit, "useProvider");
+
+const mockHandleHttpError = jest.fn();
+jest.spyOn(kit, "handleHttpError").mockImplementation(mockHandleHttpError);
+
 describe("GeneralSelect", () => {
   it("should execute change method", async () => {
     const handleChange = jest.fn();
@@ -199,6 +203,7 @@ describe("GeneralSelect", () => {
   it("backend search should work", async () => {
     const mockSearch = jest.fn();
     const onFocus = jest.fn();
+    const transform = jest.fn().mockImplementation((data) => data.list);
 
     const wrapper = shallow(
       <GeneralSelectLegacy
@@ -210,7 +215,7 @@ describe("GeneralSelect", () => {
         useBackend={{
           provider: "easyopsapi.cmdb@search:1.0.0",
           args: (q) => [q, { page: 1 }],
-          transform: (data) => data.list,
+          transform,
         }}
         onSearch={mockSearch}
         onFocus={onFocus}
@@ -220,17 +225,40 @@ describe("GeneralSelect", () => {
     wrapper.find(Select).invoke("onFocus")(null);
     expect(onFocus).toHaveBeenCalled();
 
+    // search
     wrapper.find(Select).invoke("onSearch")("c");
     jest.advanceTimersByTime(300);
     await (global as any).flushPromises();
 
     wrapper.update();
+    expect(transform).toHaveBeenCalled();
     expect(wrapper.find(Select.Option).length).toBe(1);
     expect(mockQuery).toHaveBeenCalledWith("easyopsapi.cmdb@search:1.0.0", [
       "c",
       { page: 1 },
     ]);
     expect(mockSearch).toHaveBeenCalledWith("c");
+
+    // test return undefined
+    transform.mockClear();
+    mockQuery.mockReturnValueOnce(undefined);
+    wrapper.find(Select).invoke("onSearch")("a");
+    jest.advanceTimersByTime(300);
+    await (global as any).flushPromises();
+
+    wrapper.update();
+    expect(transform).not.toBeCalled();
+
+    // test rejected
+    transform.mockClear();
+    mockQuery.mockRejectedValueOnce(new Error("error"));
+    wrapper.find(Select).invoke("onSearch")("b");
+    jest.advanceTimersByTime(300);
+    await (global as any).flushPromises();
+
+    wrapper.update();
+    expect(transform).not.toBeCalled();
+    expect(mockHandleHttpError).toHaveBeenCalled();
   });
 
   it("should update value", () => {
