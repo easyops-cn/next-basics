@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import ReactDOM from "react-dom";
 import {
   BrickWrapper,
@@ -6,8 +6,12 @@ import {
   property,
   event,
   EventEmitter,
+  method,
 } from "@next-core/brick-kit";
-import { WorkbenchComponentSelect } from "./WorkbenchComponentSelect";
+import {
+  ComponentSelectRef,
+  WorkbenchComponentSelect,
+} from "./WorkbenchComponentSelect";
 import { BrickOptionItem } from "../builder-container/interfaces";
 import { Story } from "@next-core/brick-types";
 
@@ -20,6 +24,8 @@ import { Story } from "@next-core/brick-types";
  * @noInheritDoc
  */
 export class WorkbenchComponentSelectElement extends UpdatingElement {
+  private _selectRef = createRef<ComponentSelectRef>();
+
   @property({
     attribute: false,
   })
@@ -42,6 +48,11 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
 
   @event({ type: "on.drag" })
   onDragEmit: EventEmitter<{ isDrag: boolean }>;
+
+  @method()
+  getSnippetByBrick(id: string): BrickOptionItem[] {
+    return this._selectRef.current.getSnippetByBrick(id);
+  }
 
   private _handleOnDrag = (isDrag: boolean): void => {
     this.onDragEmit.emit({
@@ -68,6 +79,7 @@ export class WorkbenchComponentSelectElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <WorkbenchComponentSelect
+            ref={this._selectRef}
             brickList={this.brickList}
             storyList={this.storyList}
             isShowSuggest={this.isShowSuggest ?? true}
