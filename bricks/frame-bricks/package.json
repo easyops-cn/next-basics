@@ -40,7 +40,7 @@
   },
   "sideEffects": true,
   "devDependencies": {
-    "@next-libs/basic-components": "^5.1.0",
+    "@next-libs/basic-components": "^5.2.0",
     "@next-libs/storage": "^2.0.4"
   }
 }
