@@ -5,6 +5,8 @@ import React, {
   useRef,
   useMemo,
   useContext,
+  useImperativeHandle,
+  forwardRef,
 } from "react";
 import { Input, Collapse, Popover } from "antd";
 import { BrickOptionItem } from "../builder-container/interfaces";
@@ -89,13 +91,21 @@ function transformInfo(
   return brick;
 }
 
-export function WorkbenchComponentSelect({
-  brickList,
-  storyList,
-  isShowSuggest = true,
-  onActionClick,
-  onDrag,
-}: ComponentSelectProps): React.ReactElement {
+export interface ComponentSelectRef {
+  snippetMap: Map<string, Map<SnippetType, BrickOptionItem[]>>;
+  getSnippetByBrick: (id: string) => BrickOptionItem[];
+}
+
+export function ComponentSelect(
+  {
+    brickList,
+    storyList,
+    isShowSuggest = true,
+    onActionClick,
+    onDrag,
+  }: ComponentSelectProps,
+  ref: React.Ref<ComponentSelectRef>
+): React.ReactElement {
   const [filterValue, setFilterValue] = useState<Record<string, string>>({});
   const [curComponentType, setCurComponentType] = useState<string>("");
   const [curComponentList, setCurComponentList] = useState<BrickOptionItem[]>(
@@ -177,6 +187,22 @@ export function WorkbenchComponentSelect({
     () => getSnippetsOfBrickMap(componentList?.snippet),
     [componentList]
   );
+
+  const getSnippetByBrick = useCallback(
+    (id: string) => {
+      const snippetsMap = snippetsOfBrickMap.get(id);
+      return [
+        ...(snippetsMap?.get(SnippetType.SelfBrick) ?? []),
+        ...(snippetsMap?.get(SnippetType.Scene) ?? []),
+      ];
+    },
+    [snippetsOfBrickMap]
+  );
+
+  useImperativeHandle(ref, () => ({
+    snippetMap: snippetsOfBrickMap,
+    getSnippetByBrick,
+  }));
 
   const handleOnDragStart = (): void => onDrag(true);
 
@@ -654,3 +680,5 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
 
   return itemElem(true);
 }
+
+export const WorkbenchComponentSelect = forwardRef(ComponentSelect);
