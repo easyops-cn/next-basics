@@ -33,7 +33,8 @@ export function packVarTemplateData(
   formData: FormData,
   placeholderFn: PlaceholderFn
 ): Template {
-  const processFields = (data: Operate = {}): Operate => {
+  const processFields = (fieldData: Operate): Operate => {
+    const data = fieldData ?? {};
     return {
       dataSource: data.dataSource,
       dataSourceType: data.dataSourceType,
