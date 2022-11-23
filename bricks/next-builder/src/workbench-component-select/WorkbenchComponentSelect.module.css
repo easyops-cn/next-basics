@@ -198,6 +198,9 @@
     margin-right: 8px;
     border-radius: 6px;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .tabBtnSelected {
     background: #3f75dd;
