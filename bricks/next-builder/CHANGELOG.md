@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.215.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.214.0...@next-bricks/next-builder@1.215.0) (2022-11-23)
+
+
+### Features
+
+* **workbench-tabs:** set closeDisabled by each tab ([1304193](https://github.com/easyops-cn/next-basics/commit/1304193d1b74f6f8b79527d6e1bbee14c47aebc7))
+
+
+
+
+
 # [1.214.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.213.2...@next-bricks/next-builder@1.214.0) (2022-11-23)
 
 
