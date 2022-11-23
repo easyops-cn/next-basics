@@ -68,7 +68,8 @@ export class SideBarElement extends UpdatingElement {
       this.style.display = "block";
       this.style.transition =
         "width var(--side-bar-collapse-transition-duration) var(--side-bar-collapse-transition-timing-function)";
-      this.style.position = "sticky";
+      this.style.position = "fixed";
+      this.style.left = "0px";
       this.style.top = "var(--app-bar-height)";
       this.style.zIndex = "999";
     }
