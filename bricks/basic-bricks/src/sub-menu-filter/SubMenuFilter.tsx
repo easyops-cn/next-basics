@@ -6,19 +6,21 @@ import {
   EasyopsIcon,
   MenuIcon,
 } from "@next-core/brick-types";
-import { GeneralIcon } from "@next-libs/basic-components";
+import { GeneralIcon, Link } from "@next-libs/basic-components";
 import { Menu, Input } from "antd";
 import { uniq, cloneDeep } from "lodash";
 import style from "./index.module.css";
 import { SelectParam } from "antd/lib/menu";
 import { BrickAsComponent } from "@next-core/brick-kit";
 import classNames from "classnames";
+import { LocationDescriptor } from "history";
 
 export interface SubMenuFilterSimpleItem {
   title: string;
   key: string;
   type?: "item";
   icon: MenuIcon;
+  to?: LocationDescriptor;
 }
 
 export interface SubMenuFilterGroup {
@@ -134,11 +136,23 @@ export function SubMenuFilter({
     return (
       <Menu.Item key={String(item.key)} title={item.title}>
         <div className={style.itemContainerInner}>
-          <div className={style.menuItemMainPart}>
-            {renderIcon(item)}
-            <span className={style.menuItemText}>{item.title}</span>
-          </div>
-          {renderItemExtra(item)}
+          {item.to ? (
+            <Link to={item.to} className={style.blockLink}>
+              <div className={style.menuItemMainPart}>
+                {renderIcon(item)}
+                <span className={style.menuItemText}>{item.title}</span>
+              </div>
+              {renderItemExtra(item)}
+            </Link>
+          ) : (
+            <>
+              <div className={style.menuItemMainPart}>
+                {renderIcon(item)}
+                <span className={style.menuItemText}>{item.title}</span>
+              </div>
+              {renderItemExtra(item)}
+            </>
+          )}
         </div>
       </Menu.Item>
     );
