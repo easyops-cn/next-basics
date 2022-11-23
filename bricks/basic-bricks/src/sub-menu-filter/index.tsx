@@ -48,6 +48,7 @@ import { UseBrickConf } from "@next-core/brick-types";
 *  key: string;
 *  type?: "item";
 *  icon: MenuIcon;
+*  to?: LocationDescriptor
 *}
 
 *export interface SubMenuFilterGroup {
