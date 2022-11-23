@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.220.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.220.2...@next-bricks/basic-bricks@1.220.3) (2022-11-23)
+
+
+### Bug Fixes
+
+* standalone模式下,实际上发行版肯定会带cmdb-account-setting,暂时忽略app安装的判断 ([2796ab4](https://github.com/easyops-cn/next-basics/commit/2796ab44a975dc78bf0da28bce2886ebbc30eac1))
+
+
+
+
+
 ## [1.220.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.220.1...@next-bricks/basic-bricks@1.220.2) (2022-11-22)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
