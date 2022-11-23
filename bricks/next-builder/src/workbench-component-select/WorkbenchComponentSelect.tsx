@@ -541,6 +541,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
               fontSize: 20,
             }}
             noPublicRoot
+            imageLoading="lazy"
           />
         </div>
       );
@@ -560,6 +561,7 @@ function ComponentItem(componentData: ComponentItemProps): React.ReactElement {
                 ? data.thumbnail
                 : `${getRuntime().getBasePath()}${data.thumbnail}`
             }
+            loading="lazy"
           />
         </div>
       );
