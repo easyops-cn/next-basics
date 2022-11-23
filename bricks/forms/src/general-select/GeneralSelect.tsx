@@ -15,7 +15,7 @@ import {
   GeneralComplexOption,
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
-import { debounce, groupBy } from "lodash";
+import { debounce, groupBy, isNil } from "lodash";
 import { GeneralOption } from "@next-libs/forms/dist/types/interfaces";
 
 export const setTooltip = (event: React.MouseEvent) => {
@@ -157,13 +157,13 @@ export function GeneralSelectLegacy(
                 value
               );
               const result = await request.query(provider, actualArgs);
+              if (isNil(result)) return;
               const transformedData = transform(result);
               const actualData = formatOptions(
                 transformedData as unknown as GeneralOption[],
                 props.fields as any
               );
               setOptions(actualData);
-              setLoading(false);
             } catch (e) {
               handleHttpError(e);
             } finally {
@@ -184,6 +184,7 @@ export function GeneralSelectLegacy(
   useEffect(() => {
     props?.useBackend?.onValueChangeArgs &&
       shouldTriggerOnValueChangeArgs.current &&
+      !isNil(props.value) &&
       handleSearchQuery(props.value, "valueChange");
     shouldTriggerOnValueChangeArgs.current = true;
   }, [props.value, props.fields, props.useBackend]);
