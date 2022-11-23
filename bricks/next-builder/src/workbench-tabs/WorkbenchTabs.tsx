@@ -26,6 +26,7 @@ export interface WorkbenchTabConf {
   name: string;
   icon?: MenuIcon | TextIcon;
   type?: string;
+  closeDisabled?: boolean;
 }
 
 export function WorkbenchTabs({
@@ -101,7 +102,7 @@ export function WorkbenchTabs({
                 )}
               </span>
               <span className={styles.tabName}>{tab.name}</span>
-              {closeDisabled ? null : historyBlocked &&
+              {closeDisabled || tab.closeDisabled ? null : historyBlocked &&
                 tab.key === internalActiveTabKey ? (
                 <span className={styles.modifiedIcon}></span>
               ) : (
