@@ -48,11 +48,12 @@ export function AppSetting(): React.ReactElement {
       getRuntime().getFeatureFlags()["next-hide-my-account"];
     const isEnable =
       !hideMyAccountEnabled &&
-      getRuntime()
-        .getMicroApps()
-        .some((item) => {
-          return item.id === "cmdb-account-setting";
-        });
+      (window.STANDALONE_MICRO_APPS ||
+        getRuntime()
+          .getMicroApps()
+          .some((item) => {
+            return item.id === "cmdb-account-setting";
+          }));
     setAccountEntry(isEnable);
   }, []);
 
@@ -171,6 +172,7 @@ export function AppSetting(): React.ReactElement {
                 <Menu.Item
                   onClick={handleRedirectToMe}
                   className={styles.dropdownMenuItem}
+                  data-testid="menu-account-entry"
                 >
                   <GeneralIcon
                     icon={{
