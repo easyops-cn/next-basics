@@ -38,14 +38,11 @@ jest.spyOn(brickKit, "getAuth").mockReturnValue({
 
 const getFeatureFlags = jest.fn().mockReturnValue({});
 const getCurrentTheme = jest.fn().mockReturnValue("light");
-const getMicroApps = jest
-  .fn()
-  .mockReturnValueOnce([])
-  .mockReturnValue([
-    {
-      id: "cmdb-account-setting",
-    },
-  ]);
+// const getMicroApps = jest.fn().mockReturnValueOnce([]).mockReturnValue([{
+//   id: "cmdb-account-setting",
+// }])
+
+const getMicroApps = jest.fn();
 
 jest.spyOn(brickKit, "getRuntime").mockReturnValue({
   getBrandSettings: () => ({
@@ -71,9 +68,17 @@ window.location = {
 } as unknown as Location;
 
 describe("AppBar", () => {
+  beforeEach(() => {
+    getMicroApps.mockImplementation(() => [
+      {
+        id: "cmdb-account-setting",
+      },
+    ]);
+  });
   afterEach(() => {
     document.title = "";
     window.NO_AUTH_GUARD = false;
+    window.STANDALONE_MICRO_APPS = false;
   });
 
   it("should render default avatar", () => {
@@ -178,6 +183,40 @@ describe("AppBar", () => {
     const dropdown = wrapper.find(Dropdown);
     const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
     expect(submenu.find('[data-testid="menu-item-logout"]').length).toBe(0);
+  });
+
+  it("should show account", async () => {
+    const wrapper = mount(<AppSetting />);
+    const dropdown = wrapper.find(Dropdown);
+    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
+    expect(submenu.find('[data-testid="menu-account-entry"]').length).toBe(1);
+  });
+
+  it("should hide account if has no cmdb-account-setting", async () => {
+    getMicroApps.mockImplementation(() => []);
+    const wrapper = mount(<AppSetting />);
+    const dropdown = wrapper.find(Dropdown);
+    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
+    expect(submenu.find('[data-testid="menu-account-entry"]').length).toBe(0);
+  });
+
+  it("should show account even if has no cmdb-account-setting, standalone mode", async () => {
+    window.STANDALONE_MICRO_APPS = true;
+    getMicroApps.mockImplementation(() => []);
+    const wrapper = mount(<AppSetting />);
+    const dropdown = wrapper.find(Dropdown);
+    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
+    expect(submenu.find('[data-testid="menu-account-entry"]').length).toBe(1);
+  });
+
+  it("should hide account if flag is set", async () => {
+    getFeatureFlags.mockImplementation(() => ({
+      "next-hide-my-account": true,
+    }));
+    const wrapper = mount(<AppSetting />);
+    const dropdown = wrapper.find(Dropdown);
+    const submenu = shallow(<div>{dropdown.prop("overlay")}</div>);
+    expect(submenu.find('[data-testid="menu-account-entry"]').length).toBe(0);
   });
 
   it("should not hide logout", async () => {
