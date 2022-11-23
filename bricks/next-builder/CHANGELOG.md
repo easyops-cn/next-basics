@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.214.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.213.2...@next-bricks/next-builder@1.214.0) (2022-11-23)
+
+
+### Features
+
+* WorkbenchCompoentnSelect support getSnippetByBrick method ([9d2841a](https://github.com/easyops-cn/next-basics/commit/9d2841a14af056a0068d94c38a70ca8dbef9724a))
+
+
+
+
+
 ## [1.213.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.213.1...@next-bricks/next-builder@1.213.2) (2022-11-23)
 
 
