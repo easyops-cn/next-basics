@@ -1,7 +1,5 @@
 .sideBarContainer {
-  position: sticky;
-  top: calc(var(--app-bar-height) + 1px);
-  height: calc(100vh - var(--app-bar-height) + 1px);
+  position: fixed;
   display: flex;
   flex-direction: column;
   width: var(--side-bar-collapsed-width);
