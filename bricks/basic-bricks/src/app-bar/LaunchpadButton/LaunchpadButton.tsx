@@ -52,6 +52,19 @@ export function LaunchpadButton(): React.ReactElement {
     getRuntime().toggleLaunchpadEffect(visible);
   }, [visible]);
 
+  useEffect(() => {
+    if (window.STANDALONE_MICRO_APPS) {
+      const preFetchLaunchpadInfo = async (): Promise<void> => {
+        await launchpadService.fetchLaunchpadInfo();
+      };
+      if (typeof window.requestIdleCallback === "function") {
+        window.requestIdleCallback(preFetchLaunchpadInfo);
+      } else {
+        setTimeout(preFetchLaunchpadInfo);
+      }
+    }
+  }, []);
+
   return (
     <>
       <a role="button" className={styles.launchpadLink} onClick={openLaunchpad}>

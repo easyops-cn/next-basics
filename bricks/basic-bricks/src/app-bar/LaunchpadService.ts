@@ -43,7 +43,7 @@ export class LaunchpadService {
     desktops: [],
     siteSort: [],
   };
-  public isFetching = window.STANDALONE_MICRO_APPS;
+  public isFetching = false;
   constructor() {
     this.storage = new JsonStorage(localStorage);
 
@@ -91,7 +91,9 @@ export class LaunchpadService {
     return result;
   }
 
-  async fetchLaunchpadInfo(): Promise<void> {
+  async fetchLaunchpadInfo(): Promise<boolean> {
+    if (this.isFetching) return false;
+    this.isFetching = true;
     const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null);
 
     for (const storyboard of launchpadInfo.storyboards) {
@@ -125,6 +127,7 @@ export class LaunchpadService {
     } as unknown as LaunchpadBaseInfo;
     this.initValue();
     this.isFetching = false;
+    return true;
   }
 
   getBaseInfo() {
