@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.222.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.221.1...@next-bricks/basic-bricks@1.222.0) (2022-11-24)
+
+
+### Features
+
+* pre fetch launchpad info in standalone app ([080dfeb](https://github.com/easyops-cn/next-basics/commit/080dfebb42279042fc883545e02012197dc509e6))
+* support cancelIdleCallback ([4be0924](https://github.com/easyops-cn/next-basics/commit/4be0924ded9ed63290038bc0e30417b4d6eef38f))
+
+
+
+
+
 ## [1.221.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.221.0...@next-bricks/basic-bricks@1.221.1) (2022-11-24)
 
 
