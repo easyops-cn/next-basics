@@ -40,6 +40,7 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
 
   React.useEffect((): (() => void) => {
     let timer: NodeJS.Timeout;
+    let fetchLaunchpadTimer: NodeJS.Timer;
     const pollingRunningAppStatus = async (): Promise<void> => {
       try {
         await runtime.reloadMicroApps({
@@ -61,10 +62,24 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
     };
 
     const startFetchLaunchpadInfo = async (): Promise<void> => {
-      try {
-        await launchpadService.fetchLaunchpadInfo();
+      const updateState = (): void => {
+        clearInterval(fetchLaunchpadTimer);
         setLoading(false);
         setMicroApps(getFilterMicroApps());
+      };
+      try {
+        const hadFetch = await launchpadService.fetchLaunchpadInfo();
+        if (microApps.length) return;
+        if (hadFetch) {
+          updateState();
+        } else {
+          setLoading(true);
+          fetchLaunchpadTimer = setInterval(() => {
+            if (!launchpadService.isFetching) {
+              updateState();
+            }
+          }, 300);
+        }
       } catch (error) {
         props.onWillClose();
         handleHttpError(error);
@@ -77,7 +92,10 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
       pollingRunningAppStatus();
     }
 
-    return (): void => clearTimeout(timer);
+    return (): void => {
+      clearTimeout(timer);
+      clearInterval(fetchLaunchpadTimer);
+    };
   }, []);
 
   React.useEffect(() => {

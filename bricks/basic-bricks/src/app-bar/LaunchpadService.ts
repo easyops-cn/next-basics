@@ -34,6 +34,7 @@ export class LaunchpadService {
   private microApps: MicroApp[] = [];
   private customList: DesktopItemCustom[] = [];
   private maxVisitorLength = 7;
+  private preFetchId: any;
   private baseInfo: LaunchpadBaseInfo = {
     settings: {
       columns: 7,
@@ -43,7 +44,7 @@ export class LaunchpadService {
     desktops: [],
     siteSort: [],
   };
-  public isFetching = window.STANDALONE_MICRO_APPS;
+  public isFetching = false;
   constructor() {
     this.storage = new JsonStorage(localStorage);
 
@@ -91,7 +92,27 @@ export class LaunchpadService {
     return result;
   }
 
-  async fetchLaunchpadInfo(): Promise<void> {
+  async preFetchLaunchpadInfo(): Promise<void> {
+    if (window.STANDALONE_MICRO_APPS) {
+      const preFetchLaunchpadInfo = async (): Promise<void> => {
+        await this.fetchLaunchpadInfo();
+      };
+      if (typeof window.requestIdleCallback === "function") {
+        this.preFetchId = window.requestIdleCallback(preFetchLaunchpadInfo);
+      } else {
+        this.preFetchId = setTimeout(preFetchLaunchpadInfo);
+      }
+    }
+  }
+
+  async fetchLaunchpadInfo(): Promise<boolean> {
+    if (typeof window.cancelIdleCallback === "function") {
+      cancelIdleCallback(this.preFetchId);
+    } else {
+      clearTimeout(this.preFetchId);
+    }
+    if (this.isFetching) return false;
+    this.isFetching = true;
     const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null);
 
     for (const storyboard of launchpadInfo.storyboards) {
@@ -125,13 +146,14 @@ export class LaunchpadService {
     } as unknown as LaunchpadBaseInfo;
     this.initValue();
     this.isFetching = false;
+    return true;
   }
 
-  getBaseInfo() {
+  getBaseInfo(): LaunchpadBaseInfo {
     return this.baseInfo;
   }
 
-  getFavoritesLength() {
+  getFavoritesLength(): number {
     return this.favoriteList.length;
   }
 
