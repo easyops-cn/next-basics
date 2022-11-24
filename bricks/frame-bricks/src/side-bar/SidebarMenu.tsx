@@ -88,53 +88,61 @@ export function SidebarMenu(props: SidebarMenuProps): React.ReactElement {
     item: SidebarMenuGroup,
     showEmptyIcon?: boolean
   ): React.ReactNode => {
-    return (
-      <Menu.ItemGroup
-        key={item.key}
-        className={style.groupWrapper}
-        title={
-          <span>
-            <i
-              className={classNames(style.menuItemIcon, style.groupTitlePoint, {
-                [style.hideGroupTitlePoint]: !collapsed || showEmptyIcon,
-              })}
-            ></i>
-            <span className={classNames(style.menuText, style.groupText)}>
-              {item.title}
+    if (item.items?.length > 0) {
+      return (
+        <Menu.ItemGroup
+          key={item.key}
+          className={style.groupWrapper}
+          title={
+            <span>
+              <i
+                className={classNames(
+                  style.menuItemIcon,
+                  style.groupTitlePoint,
+                  {
+                    [style.hideGroupTitlePoint]: !collapsed || showEmptyIcon,
+                  }
+                )}
+              ></i>
+              <span className={classNames(style.menuText, style.groupText)}>
+                {item.title}
+              </span>
             </span>
-          </span>
-        }
-      >
-        {item.items.map((innerItem) =>
-          renderMenuItem(innerItem, showEmptyIcon)
-        )}
-      </Menu.ItemGroup>
-    );
+          }
+        >
+          {item.items.map((innerItem) =>
+            renderMenuItem(innerItem, showEmptyIcon)
+          )}
+        </Menu.ItemGroup>
+      );
+    }
   };
 
   const renderSubMenu = (item: SidebarMenuGroup): React.ReactNode => {
-    return (
-      <Menu.SubMenu
-        key={item.key}
-        className={style.subMenuWrapper}
-        title={
-          <span>
-            {item.icon && (
-              <i className={style.menuItemIcon}>
-                <GeneralIcon icon={item.icon} size={14} />
-              </i>
-            )}
-            <span
-              className={classNames(style.menuText, style.subMenuTitleText)}
-            >
-              {item.title}
+    if (item.items?.length > 0) {
+      return (
+        <Menu.SubMenu
+          key={item.key}
+          className={style.subMenuWrapper}
+          title={
+            <span>
+              {item.icon && (
+                <i className={style.menuItemIcon}>
+                  <GeneralIcon icon={item.icon} size={14} />
+                </i>
+              )}
+              <span
+                className={classNames(style.menuText, style.subMenuTitleText)}
+              >
+                {item.title}
+              </span>
             </span>
-          </span>
-        }
-      >
-        {item.items.map((innerItem) => renderMenuItem(innerItem, true))}
-      </Menu.SubMenu>
-    );
+          }
+        >
+          {item.items.map((innerItem) => renderMenuItem(innerItem, true))}
+        </Menu.SubMenu>
+      );
+    }
   };
 
   const renderMenuItem = (

@@ -85,6 +85,11 @@ const sideBarMenuItem = [
     ],
   },
   {
+    type: "group",
+    title: "empty-group-should-not-render",
+    items: [],
+  },
+  {
     type: "default",
     text: "page-3",
   },

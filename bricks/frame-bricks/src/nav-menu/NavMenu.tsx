@@ -122,36 +122,40 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
   };
 
   const renderGroupMenu = (item: SidebarMenuGroups): React.ReactNode => {
-    return (
-      <Menu.ItemGroup
-        key={item.key}
-        className={style.groupWrapper}
-        title={
-          item.useBrick
-            ? renderBrickCom(item)
-            : renderSpanCom(item, style.groupText)
-        }
-      >
-        {item.items?.map((innerItem) => renderMenuItem(innerItem))}
-      </Menu.ItemGroup>
-    );
+    if (item.items?.length > 0) {
+      return (
+        <Menu.ItemGroup
+          key={item.key}
+          className={style.groupWrapper}
+          title={
+            item.useBrick
+              ? renderBrickCom(item)
+              : renderSpanCom(item, style.groupText)
+          }
+        >
+          {item.items?.map((innerItem) => renderMenuItem(innerItem))}
+        </Menu.ItemGroup>
+      );
+    }
   };
 
   const renderSubMenu = (item: SidebarMenuGroups): React.ReactNode => {
-    return (
-      <Menu.SubMenu
-        key={item.key}
-        className={style.subMenuWrapper}
-        popupClassName={style.popupWrapper}
-        title={
-          item.useBrick
-            ? renderBrickCom(item)
-            : renderSpanCom(item, style.subMenuTitleText)
-        }
-      >
-        {item.items?.map((innerItem) => renderMenuItem(innerItem))}
-      </Menu.SubMenu>
-    );
+    if (item.items?.length > 0) {
+      return (
+        <Menu.SubMenu
+          key={item.key}
+          className={style.subMenuWrapper}
+          popupClassName={style.popupWrapper}
+          title={
+            item.useBrick
+              ? renderBrickCom(item)
+              : renderSpanCom(item, style.subMenuTitleText)
+          }
+        >
+          {item.items.map((innerItem) => renderMenuItem(innerItem))}
+        </Menu.SubMenu>
+      );
+    }
   };
 
   const renderMenuItem = (
