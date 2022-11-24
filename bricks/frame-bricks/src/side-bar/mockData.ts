@@ -67,6 +67,16 @@ export const menuData1 = {
       ],
     },
     {
+      type: "group",
+      title: "empty-group-should-not-render",
+      items: [],
+    },
+    {
+      type: "subMenu",
+      title: "empty-subMenu-should-not-render",
+      items: [],
+    },
+    {
       type: "subMenu",
       title: "subMenu",
       icon: {
