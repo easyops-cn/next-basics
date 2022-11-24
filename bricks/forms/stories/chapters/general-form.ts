@@ -18,6 +18,77 @@ export const story: Story = {
   },
   conf: [
     {
+      bricks: [
+        {
+          description: {
+            title: "基础表单",
+            message: "基础用法",
+          },
+          brick: "forms.general-form",
+          events: {
+            "validate.error": {
+              action: "message.warn",
+              args: ["<% EVENT.type %>"],
+            },
+            "validate.success": {
+              action: "message.info",
+              args: ["<% EVENT.type %>"],
+            },
+          },
+          properties: {
+            name: "basic-form",
+            values: {
+              nickname: "lucy",
+              username: "easyops",
+            },
+          },
+          slots: {
+            items: {
+              bricks: [
+                {
+                  brick: "forms.general-input",
+                  properties: {
+                    label: "用户名",
+                    labelTooltip: "一些帮助信息",
+                    name: "username",
+                    placeholder: "请输入用户名",
+                    required: true,
+                  },
+                },
+                {
+                  brick: "forms.general-select",
+                  properties: {
+                    helpBrick: "这里是一些说明信息",
+                    inputBoxStyle: {
+                      width: "100%",
+                    },
+                    label: "昵称",
+                    name: "nickname",
+                    options: ["jack", "lucy"],
+                    placeholder: "请输入密码",
+                  },
+                },
+                {
+                  brick: "forms.general-buttons",
+                  properties: {
+                    cancelText: "取消",
+                    showCancelButton: true,
+                    submitText: "提交",
+                  },
+                },
+              ],
+              type: "bricks",
+            },
+          },
+        },
+      ],
+      snippetId: "forms.general-form[basic]",
+      title: {
+        en: "Basic General Form",
+        zh: "基础表单",
+      },
+    },
+    {
       brick: "div",
       slots: {
         "": {
@@ -205,7 +276,7 @@ export const story: Story = {
         },
       },
       description: {
-        title: "普通表单",
+        title: "非动态表单",
         message:
           "非动态表单，包含了多种常见表单子项，例如 普通输入框、多行输入框、下拉选择、时间选择、用户选择、密码等",
       },
@@ -345,7 +416,7 @@ export const story: Story = {
       ],
       snippetId: "forms.general-form[dynamic]",
       title: {
-        en: "Dynamic General Checkbox",
+        en: "Dynamic General Form",
         zh: "动态表单",
       },
     },
