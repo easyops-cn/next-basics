@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.1...@next-bricks/next-builder@1.215.2) (2022-11-24)
+
+
+### Bug Fixes
+
+* lazy image loading ([baa24fa](https://github.com/easyops-cn/next-basics/commit/baa24fa4f787d9db2641b0a0e2a40c1a1e60937a))
+
+
+
+
+
 ## [1.215.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.0...@next-bricks/next-builder@1.215.1) (2022-11-23)
 
 **Note:** Version bump only for package @next-bricks/next-builder
