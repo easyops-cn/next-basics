@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.11...@next-bricks/forms@1.246.0) (2022-11-24)
+
+
+### Features
+
+* update snippet ([d5dbcaf](https://github.com/easyops-cn/next-basics/commit/d5dbcafd31250c08effc2bd153fc1c3fc88d1a21))
+
+
+
+
+
 ## [1.245.11](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.10...@next-bricks/forms@1.245.11) (2022-11-23)
 
 **Note:** Version bump only for package @next-bricks/forms
