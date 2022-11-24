@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.8.1...@next-bricks/frame-bricks@1.8.2) (2022-11-24)
+
+
+### Bug Fixes
+
+* items为空时不渲染group或者submenu ([5617812](https://github.com/easyops-cn/next-basics/commit/56178124755f95d4182683f9a42167bd0850c878))
+
+
+
+
+
 ## [1.8.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.8.0...@next-bricks/frame-bricks@1.8.1) (2022-11-23)
 
 **Note:** Version bump only for package @next-bricks/frame-bricks
