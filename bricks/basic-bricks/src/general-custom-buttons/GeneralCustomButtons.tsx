@@ -2,11 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { MenuIcon } from "@next-core/brick-types";
 import { Icon as LegacyIcon } from "@ant-design/compatible";
-import {
-  DownOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { DownOutlined, SettingOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Tooltip } from "antd";
 import { MenuInfo } from "rc-menu/lib/interface";
 import { isEmpty } from "lodash";
@@ -272,7 +268,15 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
               {moreBtnIcon && typeof moreBtnIcon === "object" && (
                 <GeneralIcon icon={moreBtnIcon} />
               )}
-              {!moreBtnIcon && <EllipsisOutlined />}
+              {!moreBtnIcon && (
+                <GeneralIcon
+                  icon={{
+                    lib: "easyops",
+                    category: "default",
+                    icon: "more",
+                  }}
+                />
+              )}
             </Button>
           ) : dropdownBtnType === "link" ? (
             <Button
