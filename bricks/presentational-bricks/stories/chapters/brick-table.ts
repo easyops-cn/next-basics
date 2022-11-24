@@ -22,7 +22,7 @@ export const BrickTableStory: Story = {
     {
       snippetId: "presentational-bricks.brick-table[normal]",
       title: {
-        zh: "基础用法",
+        zh: "基础表格",
         en: "",
       },
       message: {
@@ -38,14 +38,8 @@ export const BrickTableStory: Story = {
           },
           brick: "presentational-bricks.brick-table",
           properties: {
-            dataset: { testid: "basic-demo" },
             rowKey: "id",
-            shouldUpdateUrlParams: false,
-            rowDisabledConfig: {
-              field: "name",
-              value: "John Brown",
-              operator: "$eq",
-            },
+            showCard: false,
             rowSelection: true,
             hiddenColumns: ["name"],
             columns: [
@@ -91,59 +85,6 @@ export const BrickTableStory: Story = {
                   },
                 },
               },
-              {
-                title: "操作",
-                key: "operate",
-                dataIndex: "operate",
-                useBrick: [
-                  {
-                    brick: "presentational-bricks.brick-link",
-                    properties: {
-                      dataSource: "<% DATA.rowData %>",
-                      notToJumpWhenEmpty: true,
-                      label: "查看",
-                    },
-                    events: {
-                      "link.click": {
-                        action: "console.log",
-                      },
-                    },
-                  },
-                  {
-                    brick: "presentational-bricks.brick-link",
-                    properties: {
-                      dataSource: "<% DATA.rowData %>",
-                      notToJumpWhenEmpty: true,
-                      label: "订阅警报",
-                      style: {
-                        marginLeft: "8px",
-                      },
-                    },
-                    events: {
-                      "link.click": {
-                        action: "console.log",
-                      },
-                    },
-                  },
-                  {
-                    brick: "presentational-bricks.brick-link",
-                    properties: {
-                      dataSource: "<% DATA.rowData %>",
-                      notToJumpWhenEmpty: true,
-                      label: "删除",
-                      labelColor: "red",
-                      style: {
-                        marginLeft: "8px",
-                      },
-                    },
-                    events: {
-                      "link.click": {
-                        action: "console.log",
-                      },
-                    },
-                  },
-                ],
-              },
             ],
             dataSource: {
               list: [
@@ -161,80 +102,10 @@ export const BrickTableStory: Story = {
                   address: "London No. 1 Lake Park",
                   tags: ["loser", "bad"],
                 },
-                {
-                  id: "3",
-                  name: "Joe Black",
-                  age: 32,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "4",
-                  name: "Joe Black",
-                  age: 34,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "5",
-                  name: "Joe Black",
-                  age: 35,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "6",
-                  name: "Joe Black",
-                  age: 36,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "7",
-                  name: "Joe Black",
-                  age: 37,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "8",
-                  name: "Joe Black",
-                  age: 38,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "9",
-                  name: "Joe Black",
-                  age: 39,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "10",
-                  name: "Joe Black",
-                  age: 40,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "11",
-                  name: "Joe Black",
-                  age: 41,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
-                {
-                  id: "12",
-                  name: "Joe Black",
-                  age: 42,
-                  address: "Sidney No. 1 Lake Park",
-                  tags: ["teacher", "lucky", "lay"],
-                },
               ],
               page: 1,
               pageSize: 10,
-              total: 12,
+              total: 2,
             },
           },
           events: {
