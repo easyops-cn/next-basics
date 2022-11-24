@@ -22,6 +22,7 @@ export interface CrontabInputProps
 
 export interface CrontabInputItemProps {
   value?: string;
+  disabledSet?: CrontabType[];
   onChange?: (value: string) => void;
 }
 
@@ -32,7 +33,7 @@ function CrontabInputItem(
   const [{ minute, hour, date, month, dow }, setChange] = useCrontab(
     props.value
   );
-
+  const { disabledSet = [] } = props;
   const [humanizeCrontab, setHumanizeCrontab] = useState("");
 
   const triggerChange = (type: string, value: string) => {
@@ -66,27 +67,52 @@ function CrontabInputItem(
     <div className={style.crontabContainer} ref={ref}>
       <div>
         <label>{i18n.t(`${NS_FORMS}:${K.MINUTE}`, "分钟")} </label>
-        <Input name="minute" onChange={handleChange} value={minute} />
+        <Input
+          disabled={disabledSet.includes("minute")}
+          name="minute"
+          onChange={handleChange}
+          value={minute}
+        />
       </div>
 
       <div>
         <label>{i18n.t(`${NS_FORMS}:${K.HOUR}`, "小时")}</label>
-        <Input name="hour" onChange={handleChange} value={hour} />
+        <Input
+          disabled={disabledSet.includes("hour")}
+          name="hour"
+          onChange={handleChange}
+          value={hour}
+        />
       </div>
 
       <div>
         <label>{i18n.t(`${NS_FORMS}:${K.DAY}`, "天")}</label>
-        <Input name="date" onChange={handleChange} value={date} />
+        <Input
+          disabled={disabledSet.includes("date")}
+          name="date"
+          onChange={handleChange}
+          value={date}
+        />
       </div>
 
       <div>
         <label>{i18n.t(`${NS_FORMS}:${K.MONTH}`, "月")}</label>
-        <Input name="month" onChange={handleChange} value={month} />
+        <Input
+          disabled={disabledSet.includes("month")}
+          name="month"
+          onChange={handleChange}
+          value={month}
+        />
       </div>
 
       <div>
         <label>{i18n.t(`${NS_FORMS}:${K.WEEK}`, "星期")}</label>
-        <Input name="dow" onChange={handleChange} value={dow} />
+        <Input
+          disabled={disabledSet.includes("dow")}
+          name="dow"
+          onChange={handleChange}
+          value={dow}
+        />
       </div>
       <div className={style.formatText}>{humanizeCrontab}</div>
     </div>
@@ -127,7 +153,11 @@ export function CrontabInput(props: CrontabInputProps): React.ReactElement {
           : builtInValidator
       }
     >
-      <CrontabInputWrapper value={props.value} onChange={props.onChange} />
+      <CrontabInputWrapper
+        value={props.value}
+        disabledSet={props.disabledSet}
+        onChange={props.onChange}
+      />
     </FormItemWrapper>
   );
 }

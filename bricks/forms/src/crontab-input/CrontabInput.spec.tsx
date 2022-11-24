@@ -56,6 +56,13 @@ describe("CrontabInput", () => {
     });
 
     expect(wrapper.find(".formatText").text()).toEqual("");
+
+    const wrapper1 = mount(
+      <CrontabInput value="6 * * * *" disabledSet={["minute"]} />
+    );
+    expect(
+      wrapper1.find(".crontabContainer").childAt(0).childAt(1).prop("disabled")
+    ).toBe(true);
   });
 
   it("should trigger change event", () => {
@@ -72,5 +79,20 @@ describe("CrontabInput", () => {
     });
 
     expect(changeFn).toHaveBeenCalledWith("3 2 5 * *");
+
+    wrapper.find("Input[name='date']").invoke("onChange")({
+      target: {
+        value: "5",
+        name: "month",
+      },
+    });
+    expect(changeFn).toHaveBeenCalledWith("3 2 5 5 *");
+    wrapper.find("Input[name='date']").invoke("onChange")({
+      target: {
+        value: "5",
+        name: "dow",
+      },
+    });
+    expect(changeFn).toHaveBeenCalledWith("3 2 5 5 5");
   });
 });
