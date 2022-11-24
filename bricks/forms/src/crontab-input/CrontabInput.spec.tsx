@@ -87,5 +87,12 @@ describe("CrontabInput", () => {
       },
     });
     expect(changeFn).toHaveBeenCalledWith("3 2 5 5 *");
+    wrapper.find("Input[name='date']").invoke("onChange")({
+      target: {
+        value: "5",
+        name: "dow",
+      },
+    });
+    expect(changeFn).toHaveBeenCalledWith("3 2 5 5 5");
   });
 });
