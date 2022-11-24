@@ -34,6 +34,7 @@ export class LaunchpadService {
   private microApps: MicroApp[] = [];
   private customList: DesktopItemCustom[] = [];
   private maxVisitorLength = 7;
+  private preFetchId: any;
   private baseInfo: LaunchpadBaseInfo = {
     settings: {
       columns: 7,
@@ -91,7 +92,25 @@ export class LaunchpadService {
     return result;
   }
 
+  async preFetchLaunchpadInfo(): Promise<void> {
+    if (window.STANDALONE_MICRO_APPS) {
+      const preFetchLaunchpadInfo = async (): Promise<void> => {
+        await this.fetchLaunchpadInfo();
+      };
+      if (typeof window.requestIdleCallback === "function") {
+        this.preFetchId = window.requestIdleCallback(preFetchLaunchpadInfo);
+      } else {
+        this.preFetchId = setTimeout(preFetchLaunchpadInfo);
+      }
+    }
+  }
+
   async fetchLaunchpadInfo(): Promise<boolean> {
+    if (typeof window.cancelIdleCallback === "function") {
+      cancelIdleCallback(this.preFetchId);
+    } else {
+      clearTimeout(this.preFetchId);
+    }
     if (this.isFetching) return false;
     this.isFetching = true;
     const launchpadInfo = await LaunchpadApi_getLaunchpadInfo(null);
@@ -130,11 +149,11 @@ export class LaunchpadService {
     return true;
   }
 
-  getBaseInfo() {
+  getBaseInfo(): LaunchpadBaseInfo {
     return this.baseInfo;
   }
 
-  getFavoritesLength() {
+  getFavoritesLength(): number {
     return this.favoriteList.length;
   }
 

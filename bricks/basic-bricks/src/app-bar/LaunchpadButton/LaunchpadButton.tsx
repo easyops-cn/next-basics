@@ -53,16 +53,7 @@ export function LaunchpadButton(): React.ReactElement {
   }, [visible]);
 
   useEffect(() => {
-    if (window.STANDALONE_MICRO_APPS) {
-      const preFetchLaunchpadInfo = async (): Promise<void> => {
-        await launchpadService.fetchLaunchpadInfo();
-      };
-      if (typeof window.requestIdleCallback === "function") {
-        window.requestIdleCallback(preFetchLaunchpadInfo);
-      } else {
-        setTimeout(preFetchLaunchpadInfo);
-      }
-    }
+    launchpadService.preFetchLaunchpadInfo();
   }, []);
 
   return (
