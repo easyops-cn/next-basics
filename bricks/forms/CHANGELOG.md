@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.246.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.246.0...@next-bricks/forms@1.246.1) (2022-11-24)
+
+
+### Bug Fixes
+
+* 增加disabledSet默认值 refs ARTIFACT-466 ([2ad7822](https://github.com/easyops-cn/next-basics/commit/2ad7822065d50e138506d9c5761e6773be1b0088))
+* 增加可禁用input框选项 refs ARTIFACT-466 ([1794522](https://github.com/easyops-cn/next-basics/commit/179452281d6941fa7c12b9961ceb5fe479de58d4))
+
+
+
+
+
 # [1.246.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.245.11...@next-bricks/forms@1.246.0) (2022-11-24)
 
 
