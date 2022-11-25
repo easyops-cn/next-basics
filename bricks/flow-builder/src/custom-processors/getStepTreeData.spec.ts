@@ -368,6 +368,106 @@ describe("getStepTreeData", () => {
         },
       ],
     ],
+    [
+      "ch1",
+      [
+        {
+          id: "ch1",
+          type: "choice",
+          name: "ch1",
+          config: {
+            choice: [{ expr: "<% a == b %>", next: "task1" }],
+            default: "ch2",
+          },
+        },
+        {
+          id: "task1",
+          type: "task",
+          name: "task1",
+        },
+        {
+          id: "ch2",
+          type: "choice",
+          name: "ch2",
+          config: {
+            choice: [{ expr: "<% c==d %>", next: "task2" }],
+          },
+        },
+        {
+          id: "task2",
+          type: "task",
+          name: "task2",
+        },
+      ],
+      getIcon,
+      [
+        {
+          data: {
+            config: {
+              choice: [{ expr: "<% a == b %>", next: "task1" }],
+              default: "ch2",
+            },
+            id: "ch1",
+            name: "ch1",
+            type: "choice",
+          },
+          icon: {
+            color: "var(--palette-amber-6)",
+            icon: "control",
+            lib: "antd",
+            theme: "outlined",
+          },
+          iconTooltip: "choice",
+          id: "ch1",
+          key: "ch1",
+          name: "ch1",
+        },
+        {
+          data: { id: "task1", name: "task1", type: "task" },
+          icon: {
+            color: "var(--palette-cyan-6)",
+            icon: "forward",
+            lib: "antd",
+            theme: "outlined",
+          },
+          iconTooltip: "task",
+          id: "task1",
+          key: "task1",
+          name: "task1",
+        },
+        {
+          data: {
+            config: { choice: [{ expr: "<% c==d %>", next: "task2" }] },
+            id: "ch2",
+            name: "ch2",
+            type: "choice",
+          },
+          icon: {
+            color: "var(--palette-amber-6)",
+            icon: "control",
+            lib: "antd",
+            theme: "outlined",
+          },
+          iconTooltip: "choice",
+          id: "ch2",
+          key: "ch2",
+          name: "ch2",
+        },
+        {
+          data: { id: "task2", name: "task2", type: "task" },
+          icon: {
+            color: "var(--palette-cyan-6)",
+            icon: "forward",
+            lib: "antd",
+            theme: "outlined",
+          },
+          iconTooltip: "task",
+          id: "task2",
+          key: "task2",
+          name: "task2",
+        },
+      ],
+    ],
   ])("should work", (rootId, data, fn, result) => {
     expect(getStepTreeData(rootId, data, fn)).toEqual(result);
   });

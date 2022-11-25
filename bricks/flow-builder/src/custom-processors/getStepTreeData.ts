@@ -95,12 +95,19 @@ export function getStepTreeData(
   const startNode = stepList.find((item) => item.id === rootId);
   if (!startNode) return [];
 
+  const isolatedNodeList: StepTreeNodeData[] = [];
   const stepMap = new Map<string, StepItem>();
   stepList.forEach((item) => {
     /* istanbul ignore if */
-    if (!item.next && !item.pre && !item.parent) {
-      // eslint-disable-next-line no-console
-      console.warn(`${item.id} is isolated node`);
+    if (!item.next && !item.pre && !item.parent && item.id !== startNode.id) {
+      isolatedNodeList.push({
+        key: item.id,
+        name: item.name,
+        id: item.id,
+        data: item,
+        icon: getIconFn?.(item.type),
+        iconTooltip: item.type,
+      });
     }
     stepMap.set(item.id, item);
   });
@@ -132,6 +139,8 @@ export function getStepTreeData(
 
     treeList.push(treeData);
   });
+
+  treeList.push(...isolatedNodeList);
 
   return treeList;
 }

@@ -76,6 +76,7 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
     type: "node",
   };
   const nodes = [] as GraphNode[];
+  const isolatedNodes = [] as GraphNode[];
   const edges = [] as GraphEdges[];
   const groupEdges = [] as GraphEdges[];
 
@@ -88,6 +89,10 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
   });
 
   data.steps?.forEach((item) => {
+    if (!item.next && !item.pre && !item.parent && item.id !== startId) {
+      isolatedNodes.push(item);
+    }
+
     nodes.push({
       id: item.id,
       name: item.name,
@@ -122,6 +127,14 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
         });
       });
     }
+  });
+
+  isolatedNodes.forEach((item) => {
+    edges.push({
+      source: rootId,
+      target: item.id,
+      type: "include",
+    });
   });
 
   data.relations?.forEach((item) => {
