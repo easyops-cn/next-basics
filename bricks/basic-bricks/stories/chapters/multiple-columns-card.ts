@@ -6,14 +6,13 @@ export const multipleColumnsCardStory: Story = {
   category: "container-layout",
   type: "brick",
   author: "jo",
-  deprecated: true,
   text: {
     en: "Multi Column Layout Container with Border",
     zh: "带边框多列布局容器",
   },
   description: {
     en: "support multiple columns card",
-    zh: "支持多列布局的容器,推荐使用 `basic-bricks.easy-view`",
+    zh: "支持多列布局的容器",
   },
   icon: {
     imgSrc: mutipleColumnsCardSvg,
