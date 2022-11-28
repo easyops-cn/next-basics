@@ -26,7 +26,7 @@ describe("getGraphTreeByBuilderData", () => {
           brick: "tpl-page-base-page-module-1",
           type: "brick",
           instanceId: "abc",
-          alias: "tpl-page-base-page-module-1",
+          displayName: "base-page-module",
           $$uid: 2,
           $$matchedSelectors: ["tpl-page-base-page-module-1"],
           $$normalized: {

@@ -534,7 +534,7 @@ function TreeNode({
   }, []);
 
   const onLinkClick = useCallback(
-    (e: MouseEvent) => {
+    (e: MouseEvent | React.MouseEvent) => {
       if (isContainer) {
         handleCollapse(e);
       } else {

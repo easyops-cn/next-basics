@@ -49,7 +49,7 @@ export interface PreviewMessageBuilderHoverOnMain
 }
 
 export interface HighLightNode {
-  iid: numner;
+  iid: string;
   alias: string;
 }
 

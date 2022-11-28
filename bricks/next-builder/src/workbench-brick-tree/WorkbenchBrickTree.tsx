@@ -248,16 +248,20 @@ export function WorkbenchBrickTree({
           }
         }
         const children = getChildren(node, parentIsUnreachable);
-        const getAliasName = (node: WorkbenchRuntimeNode): string => {
+        const getDisplayName = (node: WorkbenchRuntimeNode): string => {
           const brick = node.brick as string;
-          return node.alias ? node.alias : brick ? brick.split(".").pop() : "";
+          return (
+            node.displayName ||
+            node.alias ||
+            (brick ? brick.split(".").pop() : "")
+          );
         };
         const name =
           node.type === "custom-template"
             ? node.templateId
             : node.type === "snippet"
             ? node.snippetId
-            : getAliasName(node);
+            : getDisplayName(node);
         return {
           key: node.$$uid,
           name,
