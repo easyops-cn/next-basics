@@ -11,6 +11,7 @@ export function normalizeBuilderData(
     Object.entries(node).filter((item) => {
       if (
         item[0].startsWith("$") ||
+        item[0] === "displayName" ||
         item[1] === undefined ||
         item[1] === null ||
         item[1] === ""

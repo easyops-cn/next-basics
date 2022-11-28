@@ -54,7 +54,7 @@ export function sendHighlightBrick(
         highlightNode.type === "custom-template"
       ) {
         iid = highlightNode.instanceId;
-        alias = highlightNode.alias;
+        alias = highlightNode.displayName || highlightNode.alias;
       } else if (highlightNode.type === "bricks") {
         // root
         window.postMessage({
@@ -87,7 +87,7 @@ export function sendHighlightBricks(
     type: "hover-on-context",
     highlightNodes: nodes.map((node) => ({
       iid: node.instanceId,
-      alias: node.alias,
+      alias: node.displayName || node.alias,
     })),
   } as PreviewMessageBuilderHoverOnContext);
 }
