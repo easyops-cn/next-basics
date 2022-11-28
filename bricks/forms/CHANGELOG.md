@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.246.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.246.1...@next-bricks/forms@1.246.2) (2022-11-28)
+
+
+### Bug Fixes
+
+* 可编辑表格组件支持禁用行操作 Refs:EASY_AGILE-889 ([d1669e1](https://github.com/easyops-cn/next-basics/commit/d1669e17034c278af0f5d57271fe7a966ff4c9e5))
+
+
+
+
+
 ## [1.246.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.246.0...@next-bricks/forms@1.246.1) (2022-11-24)
 
 

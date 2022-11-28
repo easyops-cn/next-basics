@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.1](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.19.0...@next-types/preview@1.19.1) (2022-11-28)
+
+
+### Bug Fixes
+
+* use displayName instead of alias ([853a536](https://github.com/easyops-cn/next-basics/commit/853a536eedbf0ba06f53370dd2fa6a3ff6d40866))
+
+
+
+
+
 # [1.19.0](https://github.com/easyops-cn/next-basics/compare/@next-types/preview@1.18.3...@next-types/preview@1.19.0) (2022-11-17)
 
 

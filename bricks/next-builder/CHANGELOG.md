@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.3...@next-bricks/next-builder@1.215.4) (2022-11-28)
+
+
+### Bug Fixes
+
+* use displayName instead of alias ([853a536](https://github.com/easyops-cn/next-basics/commit/853a536eedbf0ba06f53370dd2fa6a3ff6d40866))
+
+
+
+
+
 ## [1.215.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.2...@next-bricks/next-builder@1.215.3) (2022-11-24)
 
 **Note:** Version bump only for package @next-bricks/next-builder

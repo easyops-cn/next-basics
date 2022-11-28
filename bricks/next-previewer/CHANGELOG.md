@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.12.0...@next-bricks/next-previewer@1.12.1) (2022-11-28)
+
+**Note:** Version bump only for package @next-bricks/next-previewer
+
+
+
+
+
 # [1.12.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.11.13...@next-bricks/next-previewer@1.12.0) (2022-11-17)
 
 
