@@ -7,7 +7,10 @@ import {
   EventEmitter,
   method,
 } from "@next-core/brick-kit";
-import { GeneralStructsFormItem } from "./GeneralStructsFormItem";
+import {
+  GeneralStructsFormItem,
+  RowOperationConfig,
+} from "./GeneralStructsFormItem";
 import { FormItemElement } from "@next-libs/forms";
 import style from "./index.shadow.less";
 import { clone, pullAt } from "lodash";
@@ -25,6 +28,14 @@ import { clone, pullAt } from "lodash";
  *  placeholder
  *  pattern
  * @memo
+ * 
+ * ### RowOperationConfig
+
+ *| property                    | type        | required | default | description |
+ *| -------------------------   | ---------   | -------- | ------- | ----------- |
+ *| rowUniqueKey                | `string`    | true     | -       | 表格行唯一key  |
+ *| disabledEditBtnRowValues    | `string[]`  | -        | -       | 禁用编辑操作的行唯一值 |
+ *| disabledDeleteBtnRowValues  | `string[]`  | -        | -       | 禁用删除操作的行唯一值 |
  */
 export class GeneralStructsFormItemElement extends FormItemElement {
   private _mountPoint: HTMLElement;
@@ -217,6 +228,16 @@ export class GeneralStructsFormItemElement extends FormItemElement {
     attribute: false,
   })
   structInnerTableColumnsOrder: string[];
+
+  /**
+   * @group basicFormItem
+   * @required false
+   * @description 表格中行操作配置
+   */
+  @property({
+    attribute: false,
+  })
+  rowOperationConfig: RowOperationConfig;
 
   constructor() {
     super();
@@ -420,6 +441,7 @@ export class GeneralStructsFormItemElement extends FormItemElement {
             wrapperCol={this.wrapperCol}
             structItemShowRenderFN={this.structItemShowRenderFN}
             structInnerTableColumnsOrder={this.structInnerTableColumnsOrder}
+            rowOperationConfig={this.rowOperationConfig}
           />
         </BrickWrapper>,
         this._mountPoint
