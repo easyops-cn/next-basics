@@ -8,6 +8,13 @@ import { Button, Table, Modal } from "antd";
 import { FormItemWrapper, FormItemWrapperProps } from "@next-libs/forms";
 import { set } from "antd";
 import { isObject, isFunction, isEmpty } from "lodash";
+
+export interface RowOperationConfig {
+  rowUniqueKey: string;
+  disabledEditBtnRowValues?: string[];
+  disabledDeleteBtnRowValues?: string[];
+}
+
 export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   name: string;
   modalVisible: boolean;
@@ -26,6 +33,7 @@ export interface GeneralStructsFormItemProps extends FormItemWrapperProps {
   editModalTitle?: string;
   structItemShowRenderFN?: () => any;
   structInnerTableColumnsOrder?: string[];
+  rowOperationConfig?: RowOperationConfig;
 }
 
 export function GeneralStructsFormItem(
@@ -50,6 +58,7 @@ export function GeneralStructsFormItem(
     editModalTitle,
     structItemShowRenderFN,
     structInnerTableColumnsOrder,
+    rowOperationConfig,
   } = props;
   const footer = (
     <>
@@ -84,16 +93,25 @@ export function GeneralStructsFormItem(
       record: Record<string, unknown>,
       index: number
     ) {
+      const rowUniqueValue = record[rowOperationConfig?.rowUniqueKey];
+      const editBtnDisabled =
+        rowOperationConfig?.disabledEditBtnRowValues?.includes(rowUniqueValue);
+      const deleteBtnDisabled =
+        rowOperationConfig?.disabledDeleteBtnRowValues?.includes(
+          rowUniqueValue
+        );
       return (
         <>
           <Button
             type="link"
+            disabled={editBtnDisabled}
             icon={<EditOutlined />}
             className="editItem"
             data-row-index={index}
           ></Button>
           <Button
             type="link"
+            disabled={deleteBtnDisabled}
             icon={<DeleteOutlined />}
             className="deleteItem"
             data-row-index={index}
