@@ -7,6 +7,16 @@ import React, {
 } from "react";
 import { JsonStorage, debounceByAnimationFrame } from "@next-core/brick-utils";
 import { GeneralIcon } from "@next-libs/basic-components";
+import moment from "moment";
+import { getCssPropertyValue } from "@next-core/brick-kit";
+
+export enum OpenDirection {
+  LeftTop = "leftTop",
+  LeftBottom = "leftBottom",
+  RightTop = "rightTop",
+  RightBottom = "rightBottom",
+  Center = "center",
+}
 
 export interface GeneralPopupProps {
   popupId?: string;
@@ -15,7 +25,11 @@ export interface GeneralPopupProps {
   popupWidth?: React.CSSProperties["width"];
   popupHeight?: React.CSSProperties["height"];
   closePopup?: () => void;
+  dragHeaderStyle?: Record<string, any>;
+  openDirection?: OpenDirection;
 }
+
+let headerHeight = parseInt(getCssPropertyValue("--app-bar-height")) || 56;
 
 export function GeneralPopup({
   popupId,
@@ -23,6 +37,8 @@ export function GeneralPopup({
   popupWidth,
   popupHeight,
   visible,
+  dragHeaderStyle,
+  openDirection,
   closePopup,
 }: GeneralPopupProps): React.ReactElement {
   const popupRef = useRef<HTMLDivElement>();
@@ -32,7 +48,8 @@ export function GeneralPopup({
     offsetX: 0,
     offsetY: 0,
   });
-  const [pointerPosition, setPointerPosition] = useState<Array<number>>([]);
+  const [position, setPosition] = useState<Array<number>>([]);
+  const jsonStorage = React.useMemo(() => new JsonStorage(localStorage), []);
 
   const storage = useMemo(
     () =>
@@ -45,8 +62,26 @@ export function GeneralPopup({
     [popupId]
   );
 
+  const handleShowTips = ((e: CustomEvent<NavTip[]>): void => {
+    const list = (e.detail ?? []).filter((item) => {
+      const isTipClosing =
+        item.closable &&
+        jsonStorage.getItem(item.tipKey) &&
+        moment().unix() <= jsonStorage.getItem(item.tipKey);
+      return !isTipClosing;
+    });
+    headerHeight += list.length * 32;
+  }) as EventListener;
+
+  useEffect(() => {
+    window.addEventListener("app.bar.tips", handleShowTips);
+    return () => {
+      window.removeEventListener("app.bar.tips", handleShowTips);
+    };
+  }, []);
+
   const debouncedSetPoint = useMemo(
-    () => debounceByAnimationFrame(setPointerPosition),
+    () => debounceByAnimationFrame(setPosition),
     []
   );
 
@@ -96,23 +131,41 @@ export function GeneralPopup({
 
   const handleMouseUp = (): void => {
     setIsMove(false);
-    popupId &&
-      storage.setItem(popupId, [pointerPosition[0], pointerPosition[1]]);
+    popupId && storage.setItem(popupId, [position[0], position[1]]);
   };
 
   const initPos = useCallback(() => {
-    const { innerWidth, innerHeight } = window;
-    const initPostion = [
-      Math.floor((innerWidth - popupRef.current.offsetWidth) / 2),
-      Math.floor((innerHeight - popupRef.current.offsetHeight) / 2),
-    ];
-    return popupId ? storage.getItem(popupId) ?? initPostion : initPostion;
-  }, [popupId, storage]);
+    let initPostion: Array<number> = [];
+    if (visible && popupRef.current) {
+      const { innerWidth, innerHeight } = window;
+      const { offsetWidth, offsetHeight } = popupRef.current;
+
+      const map: { [key in OpenDirection]: Array<number> } = {
+        [OpenDirection.LeftTop]: [0, headerHeight],
+        [OpenDirection.LeftBottom]: [0, innerHeight - offsetHeight],
+        [OpenDirection.RightTop]: [innerWidth - offsetWidth, headerHeight],
+
+        [OpenDirection.RightBottom]: [
+          innerWidth - offsetWidth,
+          innerHeight - offsetHeight,
+        ],
+
+        [OpenDirection.Center]: [
+          Math.floor((innerWidth - offsetWidth) / 2),
+          Math.floor((innerHeight - offsetHeight) / 2),
+        ],
+      };
+
+      initPostion = map[openDirection || OpenDirection.Center];
+      return popupId ? storage.getItem(popupId) ?? initPostion : initPostion;
+    }
+    return initPostion;
+  }, [popupId, storage, headerHeight, popupRef?.current?.offsetHeight]);
 
   useEffect(() => {
     const popupElement = popupRef.current;
     if (popupElement) {
-      setPointerPosition(initPos());
+      setPosition(initPos());
       /**
        * Antd Select构件在shadow dom会出现异常的情况
        * 具体可参见: https://github.com/ant-design/ant-design/issues/28012
@@ -144,10 +197,14 @@ export function GeneralPopup({
         className="GeneralPopup"
         ref={popupRef}
         style={{
-          transform: `translate(${pointerPosition[0]}px, ${pointerPosition[1]}px)`,
+          transform: `translate(${position[0]}px, ${position[1]}px)`,
         }}
       >
-        <div className="general-popup-header" ref={headerRef}>
+        <div
+          className="general-popup-header"
+          ref={headerRef}
+          style={dragHeaderStyle}
+        >
           <span className="title">{popupTitle}</span>
           <span className="close">
             <GeneralIcon
