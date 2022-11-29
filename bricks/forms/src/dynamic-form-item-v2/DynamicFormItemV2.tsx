@@ -104,6 +104,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
             {(fields, { add, remove }) => (
               <>
                 {fields.map(({ key, name, ...restField }) => {
+                  const showLabel = hasLabel && name === 0;
                   const rowValue = value?.[name];
 
                   return (
@@ -131,6 +132,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
                                 rowValue,
                                 name,
                               ]),
+                              [style.inLabelRow]: showLabel,
                             },
                           ])}
                           disabled={getRealValue(disabledRemoveButton, [
