@@ -29,6 +29,10 @@
     padding: 0;
     padding-left: 4px;
 
+    &.inLabelRow {
+      margin-top: 30px;
+    }
+
     &:hover {
       color: var(--color-auxiliary-text);
     }

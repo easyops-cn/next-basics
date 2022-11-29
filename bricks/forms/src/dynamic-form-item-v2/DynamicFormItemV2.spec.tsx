@@ -41,6 +41,7 @@ describe("DynamicFormItemV2", () => {
 
     wrapper.find(".addRowBtn").at(0).simulate("click");
     expect(wrapper.find("Row.row")).toHaveLength(1);
+    expect(wrapper.find("Row.row .inLabelRow")).toHaveLength(columns.length);
     expect(wrapper.find("Row.row").find("ColumnComponent")).toHaveLength(2);
     expect(onChange).lastCalledWith([{}]);
     expect(onAdd).lastCalledWith({ detail: {}, index: 0 });
