@@ -7,7 +7,7 @@ import {
   method,
 } from "@next-core/brick-kit";
 import styles from "./style.shadow.css";
-import { GeneralPopup } from "./GeneralPopup";
+import { GeneralPopup, OpenDirection } from "./GeneralPopup";
 
 /**
  * @id basic-bricks.general-popup
@@ -51,6 +51,14 @@ export class GeneralPopupElement extends UpdatingElement {
   popupTitle: string;
 
   /**
+   * @default center
+   * @required false
+   * @description 弹窗打开位置
+   */
+  @property({ type: String })
+  openDirection: OpenDirection;
+
+  /**
    * @kind boolean
    * @required -
    * @default false
@@ -61,6 +69,17 @@ export class GeneralPopupElement extends UpdatingElement {
     type: Boolean,
   })
   isVisible: boolean;
+
+  /**
+   * @required false
+   * @default -
+   * @description 用于设置 popup head的样式
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  dragHeaderStyle: Record<string, any>;
 
   /**
    * @description 显示弹窗
@@ -114,6 +133,8 @@ export class GeneralPopupElement extends UpdatingElement {
               popupTitle={this.popupTitle}
               visible={this.isVisible}
               closePopup={this.closePopup}
+              openDirection={this.openDirection}
+              dragHeaderStyle={this.dragHeaderStyle}
             />
           </BrickWrapper>
         </>,
