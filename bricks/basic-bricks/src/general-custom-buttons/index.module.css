@@ -92,8 +92,8 @@
   border-radius: 16px;
 
   &:hover {
-    color: var(--antd-btn-special-icon-type-hover-color);
-    background: var(--antd-btn-special-icon-type-hover-bg);
+    color: var(--antd-btn-special-icon-type-hover-color) !important;
+    background: var(--antd-btn-special-icon-type-hover-bg) !important;
   }
 
   &[disabled] {

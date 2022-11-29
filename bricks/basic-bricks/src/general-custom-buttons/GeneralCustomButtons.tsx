@@ -34,6 +34,7 @@ interface AdminButtonProps {
   dropdownPlacement?: DropdownPlacement;
   dropdownBtnType?: "default" | "link";
   onDropdownVisibleChange: (visible: boolean) => void;
+  moreButtonStyle?: React.CSSProperties;
 }
 
 const AvailableButtonTypeSet = new Set([
@@ -76,6 +77,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
       dropdownBtnText,
       alignment,
       dropdownBtnType,
+      moreButtonStyle,
     } = this.props;
     const propsButtons = buttonConfigs.filter((btn) => !btn.hide);
     const buttons = propsButtons
@@ -245,6 +247,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
           {isMoreButton ? (
             <Button
               type={moreButtonType}
+              style={{ ...moreButtonStyle }}
               icon={
                 moreBtnIcon &&
                 typeof moreBtnIcon === "string" && (

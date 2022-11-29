@@ -227,6 +227,18 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   dropdownPlacement?: DropdownPlacement;
 
   /**
+   * @kind React.CSSProperties
+   * @required -
+   * @default -
+   * @description 适用于按钮的isMoreButton为true时候，需要自定义一些样式更多按钮的样式。
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  moreButtonStyle: React.CSSProperties;
+
+  /**
    * @detail "boolean"
    * @description dropdown是否显示
    */
@@ -300,6 +312,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
           dropdownPlacement={this.dropdownPlacement}
           dropdownBtnType={this.dropdownBtnType}
           onDropdownVisibleChange={this.handleDropdownVisibleChange}
+          moreButtonStyle={this.moreButtonStyle}
         />,
         this
       );
