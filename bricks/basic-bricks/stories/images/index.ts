@@ -58,3 +58,4 @@ export { default as generalHeadingH3 } from "./basic-bricks.general-heading[h3].
 export { default as generalHeadingH4 } from "./basic-bricks.general-heading[h4].svg";
 export { default as generalHeadingH5 } from "./basic-bricks.general-heading[h5].svg";
 export { default as generalHeadingH6 } from "./basic-bricks.general-heading[h6].svg";
+export { default as generalPopupSvg } from "./basic-bricks.general-popup.svg";
