@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.246.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.246.3...@next-bricks/forms@1.246.4) (2022-11-29)
+
+
+### Bug Fixes
+
+* 修复展示label时按钮位置不正确 ([67cf1b3](https://github.com/easyops-cn/next-basics/commit/67cf1b3fbcc7285517121e9542143976e5250675))
+
+
+
+
+
 ## [1.246.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.246.2...@next-bricks/forms@1.246.3) (2022-11-29)
 
 **Note:** Version bump only for package @next-bricks/forms
