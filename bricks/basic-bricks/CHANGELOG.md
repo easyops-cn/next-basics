@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.222.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.222.2...@next-bricks/basic-bricks@1.222.3) (2022-11-29)
+
+
+### Bug Fixes
+
+* basic-bricks.general-custom-buttons增加moreButtonStyle属性  refs ORCHESTRATION-218 ([cd70d20](https://github.com/easyops-cn/next-basics/commit/cd70d204227e136ca423a22923ec0dda96d61efd))
+
+
+
+
+
 ## [1.222.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.222.1...@next-bricks/basic-bricks@1.222.2) (2022-11-25)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
