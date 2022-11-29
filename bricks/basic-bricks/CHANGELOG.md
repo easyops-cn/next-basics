@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.223.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.222.4...@next-bricks/basic-bricks@1.223.0) (2022-11-29)
+
+
+### Features
+
+* **GeneralPopup:** support openDirection ([2f35e8a](https://github.com/easyops-cn/next-basics/commit/2f35e8a97998bc0f25cc398205327890b39962b0))
+
+
+
+
+
 ## [1.222.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.222.3...@next-bricks/basic-bricks@1.222.4) (2022-11-29)
 
 
