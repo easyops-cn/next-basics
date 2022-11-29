@@ -84,7 +84,10 @@
     }
   }
 }
-
+.dropdown {
+  color: var(--color-brand) !important;
+  background: var(--antd-btn-special-icon-type-hover-bg) !important;
+}
 .moreIconButton {
   background: var(--antd-btn-special-icon-type-bg);
   color: var(--antd-btn-special-icon-type-color);
@@ -92,7 +95,7 @@
   border-radius: 16px;
 
   &:hover {
-    color: var(--antd-btn-special-icon-type-hover-color) !important;
+    color: var(--color-brand-hover) !important;
     background: var(--antd-btn-special-icon-type-hover-bg) !important;
   }
 

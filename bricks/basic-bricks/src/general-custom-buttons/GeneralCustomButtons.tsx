@@ -36,7 +36,9 @@ interface AdminButtonProps {
   onDropdownVisibleChange: (visible: boolean) => void;
   moreButtonStyle?: React.CSSProperties;
 }
-
+interface GeneralCustomButtonsState {
+  dropdownVisible: boolean;
+}
 const AvailableButtonTypeSet = new Set([
   "primary",
   "ghost",
@@ -47,10 +49,16 @@ const AvailableButtonTypeSet = new Set([
   "danger",
 ]);
 
-export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
+export class GeneralCustomButtons extends React.Component<
+  AdminButtonProps,
+  GeneralCustomButtonsState
+> {
   constructor(props: AdminButtonProps) {
     super(props);
     this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.state = {
+      dropdownVisible: false,
+    };
   }
 
   handleMenuClick(info: MenuInfo) {
@@ -61,6 +69,7 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
   }
 
   onDropdownVisibleChange = (visible: boolean) => {
+    this.setState({ dropdownVisible: visible });
     this.props.onDropdownVisibleChange(visible);
   };
 
@@ -264,6 +273,9 @@ export class GeneralCustomButtons extends React.Component<AdminButtonProps> {
                 },
                 {
                   [style.moreIconButton]: moreButtonShape === "icon",
+                },
+                {
+                  [style.dropdown]: this.state.dropdownVisible,
                 }
               )}
               data-testid="dropdown-trigger"
