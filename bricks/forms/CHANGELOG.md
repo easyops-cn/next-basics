@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.246.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.246.4...@next-bricks/forms@1.246.5) (2022-11-30)
+
+
+### Bug Fixes
+
+* **GeneralSelect:** emptyOption repeat ([4ee6ce0](https://github.com/easyops-cn/next-basics/commit/4ee6ce0f24ad40c80596e3cb5de6d43fb1162fa9))
+
+
+
+
+
 ## [1.246.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.246.3...@next-bricks/forms@1.246.4) (2022-11-29)
 
 
