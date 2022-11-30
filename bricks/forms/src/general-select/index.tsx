@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { isEmpty } from "lodash";
+import { isEmpty, uniqBy } from "lodash";
 import {
   BrickWrapper,
   property,
@@ -324,6 +324,18 @@ export class GeneralSelectElement extends FormItemElement {
   suffixBrickStyle: React.CSSProperties = {};
 
   /**
+   * @kind object
+   * @required false
+   * @default -
+   * @description 设置下拉框容器的样式
+   * @group advancedFormItem
+   */
+  @property({
+    attribute: false,
+  })
+  dropdownStyle: React.CSSProperties = {};
+
+  /**
    * @required false
    * @default -
    * @description 后端搜索
@@ -405,9 +417,12 @@ export class GeneralSelectElement extends FormItemElement {
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
-      const options = (
-        isEmpty(this.emptyOption) ? [] : [this.emptyOption]
-      ).concat(formatOptions(this.options, this.fields as any));
+      const options = uniqBy(
+        (isEmpty(this.emptyOption) ? [] : [this.emptyOption]).concat(
+          formatOptions(this.options, this.fields as any)
+        ),
+        "value"
+      );
       ReactDOM.render(
         <BrickWrapper>
           <GeneralSelect
@@ -455,6 +470,7 @@ export class GeneralSelectElement extends FormItemElement {
             popoverPositionType={this.popoverPositionType}
             {...(this.mode === "tags" ? { pattern: this.pattern } : {})}
             filterByLabelAndValue={this.filterByLabelAndValue}
+            dropdownStyle={this.dropdownStyle}
           />
         </BrickWrapper>,
         this

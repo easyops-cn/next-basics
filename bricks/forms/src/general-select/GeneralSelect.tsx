@@ -78,6 +78,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   tokenSeparators?: string[];
   popoverPositionType?: "default" | "parent";
   filterByLabelAndValue?: boolean;
+  dropdownStyle?: React.CSSProperties;
 }
 
 // TODO(alex): 需要去掉`providers-of-cmdb.cmdb-object-api-list`，这里判断是为了开发者中心构件demo显示需要。
@@ -276,7 +277,7 @@ export function GeneralSelectLegacy(
       {...(props.popoverPositionType === "parent"
         ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
         : {})}
-      dropdownStyle={{ padding: "2px" }}
+      dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
       notFoundContent={<EasyopsEmpty {...emptyProps} />}
       loading={loading}
       onFocus={() => {
