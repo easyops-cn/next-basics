@@ -45,38 +45,18 @@ export interface LabeledValue {
 * 1.145.0:新增属性 `isGroup``optionGroups`，支持选项分组
 * @excludesInherit
 *  placeholder
-*  pattern 
+*  pattern
 * @memo
 
 * > Tips: 多选框与 general-form 结合使用时，通过 value 设置初始值是无效的，需要在 general-form [values](developers/brick-book/brick/forms.general-form) 属性中设置初始值。
 */
 export class GeneralCheckboxElement extends FormItemElement {
   /**
-   * @kind CheckboxType
-   * @required false
-   * @default default
-   * @description 	多选框样式类型(不支持分组复选框）
-   * @group basicFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  type: CheckboxType = "default";
-  /**
-   * @kind string
-   * @required true
-   * @default -
-   * @description 多选框字段名
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare name: string;
-
-  /**
    * @kind string
    * @required false
    * @default -
    * @description 多选框字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
 
@@ -85,7 +65,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default -
    * @description 多选框选项表
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
@@ -97,12 +77,33 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required -
    * @default -
    * @description 输入框当前选中始值
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
   })
   value: CheckboxValueType[];
+
+  /**
+   * @kind CheckboxType
+   * @required false
+   * @default default
+   * @description 	多选框样式类型(不支持分组复选框）
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  type: CheckboxType = "default";
+
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 多选框字段名
+   * @group basicFormItem
+   */
+  @property({ attribute: false }) declare name: string;
 
   /**
    * @kind string

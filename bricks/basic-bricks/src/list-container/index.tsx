@@ -19,18 +19,6 @@ import { ListContainer } from "./ListContainer";
  */
 export class ListContainerElement extends UpdatingElement {
   /**
-   * @kind UseBrickConf
-   * @required true
-   * @default []
-   * @description 使用的子构件配置,具体查阅[UseBrickConf](/next-docs/docs/micro-app/brick-use-brick)
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  useBrick: UseBrickConf;
-
-  /**
    * @kind `any[]`
    * @required true
    * @default []
@@ -43,8 +31,31 @@ export class ListContainerElement extends UpdatingElement {
   data: any[] = [];
 
   /**
-   * @description 数据项的 key，不设置默认使用 index
+   * @kind UseBrickConf
+   * @required true
+   * @default []
+   * @description 使用的子构件配置,具体查阅[UseBrickConf](/next-docs/docs/micro-app/brick-use-brick)
    * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  useBrick: UseBrickConf;
+
+  /**
+   * @kind Record<string, any>
+   * @default -
+   * @description 容器本身默认是 grid 布局，可以设置额外的样式。
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  extraContainerStyle?: React.CSSProperties;
+
+  /**
+   * @description 数据项的 key，不设置默认使用 index
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -61,17 +72,6 @@ export class ListContainerElement extends UpdatingElement {
     attribute: false,
   })
   gap?: string | number;
-
-  /**
-   * @kind Record<string, any>
-   * @default -
-   * @description 容器本身默认是 grid 布局，可以设置额外的样式。
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  extraContainerStyle?: React.CSSProperties;
 
   /**
    * @kind Record<string, any>

@@ -49,6 +49,7 @@ export class GeneralButtonsElement extends FormItemElement {
    * @required false
    * @default -
    * @description 提交按钮的文字，不设置则不显示提交按钮
+   * @group basic
    */
   @property()
   submitText: string;
@@ -57,7 +58,30 @@ export class GeneralButtonsElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default `false`
+   * @description 显示取消按钮
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  showCancelButton: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 取消按钮的文字，不设置则不显示取消按钮
+   * @group basic
+   */
+  @property()
+  cancelText: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default `false`
    * @description 点击确定按钮后自动禁用
+   * @group advanced
    */
   @property({ type: Boolean })
   disableAfterClick: boolean;
@@ -71,6 +95,7 @@ export class GeneralButtonsElement extends FormItemElement {
    * @required false
    * @default `false`
    * @description 按钮加载动画
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -82,6 +107,7 @@ export class GeneralButtonsElement extends FormItemElement {
    * @required false
    * @default `false`
    * @description 禁用提交按钮
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -93,6 +119,7 @@ export class GeneralButtonsElement extends FormItemElement {
    * @required false
    * @default -
    * @description 提交按钮文字提示
+   * @group advanced
    */
   @property()
   submitTooltip: string;
@@ -102,6 +129,7 @@ export class GeneralButtonsElement extends FormItemElement {
    * @required -
    * @default `"primary"`
    * @description 提交按钮的类型
+   * @group basic
    */
   @property({
     // Ensure `layout` is `FormLayout`.
@@ -122,29 +150,10 @@ export class GeneralButtonsElement extends FormItemElement {
   submitType: ButtonType;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default `false`
-   * @description 显示取消按钮
-   */
-  @property({
-    type: Boolean,
-  })
-  showCancelButton: boolean;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 取消按钮的文字，不设置则不显示取消按钮
-   */
-  @property()
-  cancelText: string;
-
-  /**
    * @kind `"default" | "primary" | "ghost" | "dashed" | "danger" | "link"`
    * @default `"link"`
    * @description 取消按钮的类型
+   * @group advanced
    */
   @property({
     // Ensure `layout` is `FormLayout`.

@@ -26,6 +26,15 @@ export interface LinkInfo {
 export class BrickHumanizeTimeElement extends UpdatingElement {
   /**
    * @required false
+   * @description 时间截，或字符串，当为字符串时，应提供时间格式 `inputFormat`
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  value: number | string;
+  /**
+   * @required false
    * @description 字符串的时间格式，如 "YYYY-MM-DD", [时间格式参照表](https://dayjs.gitee.io/docs/zh-CN/parse/string-format)
    * @group basic
    */
@@ -39,6 +48,17 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
    */
   @property()
   outputFormat: string;
+
+  /**
+   * @required false
+   * @default false
+   * @description 是否展示为耗费时间，例如：'1 个月 20 天'
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  isCostTime: boolean;
 
   connectedCallback(): void {
     // istanbul ignore else
@@ -114,16 +134,6 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
   fields: { value: string };
 
   /**
-   * @required false
-   * @description 时间截，或字符串，当为字符串时，应提供时间格式 `inputFormat`
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  value: number | string;
-
-  /**
    * @kind "full" | "default" | "relative" | "future" | "accurate" | "auto"
    * @required false
    * @description 枚举值：full, default, relative, future, accurate, auto [类型链接](https://github.com/easyops-cn/next-libs/blob/207fe7ee3ac010ab860c23cd062216c8ca612f0c/libs/datetime/src/humanizeTime.ts#L9)
@@ -138,7 +148,7 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
    * @required false
    * @default false
    * @description value 值的单位是否为毫秒
-   * @group basic
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -147,19 +157,8 @@ export class BrickHumanizeTimeElement extends UpdatingElement {
 
   /**
    * @required false
-   * @default false
-   * @description 是否展示为耗费时间，例如：'1 个月 20 天'
-   * @group basic
-   */
-  @property({
-    type: Boolean,
-  })
-  isCostTime: boolean;
-
-  /**
-   * @required false
    * @description 跳转链接，默认为空
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,

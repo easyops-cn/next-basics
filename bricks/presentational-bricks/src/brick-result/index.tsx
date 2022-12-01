@@ -28,14 +28,6 @@ export class BrickResultElement extends UpdatingElement {
   private _mountPoint: HTMLElement;
 
   /**
-   * @required false
-   * @description 主标题文字
-   * @group basic
-   */
-  @property()
-  customTitle: string;
-
-  /**
    * @required true
    * @default -
    * @description 结果的状态, 决定图标和颜色
@@ -43,6 +35,14 @@ export class BrickResultElement extends UpdatingElement {
    */
   @property({ attribute: false })
   status: BrickResultStatus | EmptyResultStatus | IllustrationsStatus;
+
+  /**
+   * @required false
+   * @description 主标题文字
+   * @group basic
+   */
+  @property()
+  customTitle: string;
 
   /**
    * @required false
@@ -74,6 +74,7 @@ export class BrickResultElement extends UpdatingElement {
    * @default true
    * @required false
    * @description 在插画库的default分类下，使用新版本的图标替换default分类下图标
+   * @group other
    */
   @property({ attribute: false })
   useNewIllustration = true;
@@ -81,7 +82,7 @@ export class BrickResultElement extends UpdatingElement {
   /**
    * @required false
    * @description status为EmptyResultStatus时，设置插画的尺寸
-   * @group basic
+   * @group other
    */
   @property()
   emptyResultSize: IconSize;

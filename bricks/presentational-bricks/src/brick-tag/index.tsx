@@ -56,6 +56,13 @@ export class BrickTagElement extends UpdatingElement {
   @event({ type: "tag.click" }) tagClick: EventEmitter<TagListType>;
 
   /**
+   * @description 标签前的 label
+   * @group basic
+   */
+  @property()
+  label?: string;
+
+  /**
    * @description 标签列表
    * @group basic
    */
@@ -67,7 +74,7 @@ export class BrickTagElement extends UpdatingElement {
   /**
    * @default false
    * @description 是否在标签内显示小圆点
-   * @group ui
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -84,40 +91,11 @@ export class BrickTagElement extends UpdatingElement {
   showCard? = true;
 
   /**
-   * @description 数据源，通过 useResolves 从后台接口获取
-   * @deprecated
-   * @group other
-   */
-  @property({
-    attribute: false,
-  })
-  dataSource?: Record<string, any>;
-
-  /**
    * @description 标签的颜色配置，当 `componentType=Tag` 且 `closable!=true` 时才有效，除了提供内置八种主题色，也支持直接赋色值（如 `#f5f5f5`）使用
-   * @group ui
+   * @group basic
    */
   @property()
   color?: string | Color;
-
-  /**
-   * @default "Tag"
-   * @description 组件类型，对应 ant-design 中的基本标签和可选中标签
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  componentType?: TagTypeProps;
-
-  /**
-   * @description componentType 为`CheckableTag`的时候默认选中的标签 key
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  default?: string | string[];
 
   /**
    * @description 是否能多选，多选场景下右上角会有小圆点提示
@@ -129,13 +107,14 @@ export class BrickTagElement extends UpdatingElement {
   multipleCheck? = true;
 
   /**
-   * @description 标签是否可以取消单选，在 `componentType` 为 `CheckableTag` 且 `multipleCheck` 为 `false` 时生效。
-   * @group basic
+   * @description 数据源，通过 useResolves 从后台接口获取
+   * @deprecated
+   * @group advanced
    */
   @property({
     attribute: false,
   })
-  cancelable? = true;
+  dataSource?: Record<string, any>;
 
   /**
    * @default false
@@ -148,8 +127,36 @@ export class BrickTagElement extends UpdatingElement {
   closable?: boolean;
 
   /**
+   * @default "Tag"
+   * @description 组件类型，对应 ant-design 中的基本标签和可选中标签
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  componentType?: TagTypeProps;
+
+  /**
+   * @description componentType 为`CheckableTag`的时候默认选中的标签 key
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  default?: string | string[];
+
+  /**
+   * @description 标签是否可以取消单选，在 `componentType` 为 `CheckableTag` 且 `multipleCheck` 为 `false` 时生效。
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  cancelable? = true;
+
+  /**
    * @description ant-design 相关配置项, [具体查阅](https://ant.design/components/tag-cn/#Tag) ，只有在 componentType=Tag 时才有效
-   * @group other
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -165,7 +172,7 @@ export class BrickTagElement extends UpdatingElement {
 
   /**
    * @description 标签的 tooltip 相关配置项, [具体查阅](https://ant.design/components/tooltip-cn/#API)
-   * @group other
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -173,16 +180,9 @@ export class BrickTagElement extends UpdatingElement {
   tooltipProps?: TooltipProps;
 
   /**
-   * @description 标签前的 label
-   * @group basic
-   */
-  @property()
-  label?: string;
-
-  /**
    * @description 这里可以规定从 dataSource 中的哪个字段取标签渲染的数据，例如 dataSource 返回的数据为 [{key:"1"},{key:"2"}]，则可写成 {label: "key", key: "key"}
    * @deprecated
-   * @group other
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -237,7 +237,7 @@ export class BrickTagElement extends UpdatingElement {
 
   /**
    * @description 最后一个tag后面使用子构件，具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf)
-   * @group other
+   * @group advanced
    */
   @property({
     attribute: false,

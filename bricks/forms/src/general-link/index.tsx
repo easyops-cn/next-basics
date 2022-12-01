@@ -30,13 +30,13 @@ export class GeneralLinkElement extends FormItemElement {
    */
   @property({ attribute: false }) declare name: string;
   /**
-   * @group basicFormItem
+   * @group basic
    * @required false
    * @description 表单项字段说明
    */
   @property({ attribute: false }) declare label: string;
   /**
-   * @group basicFormItem
+   * @group basic
    * @default false
    * @description 链接的文字
    */
@@ -50,7 +50,7 @@ export class GeneralLinkElement extends FormItemElement {
    * @required false
    * @default -
    * @description 链接的文字
-   * @group basicFormItem
+   * @group basic
    */
   @property()
   text: string;
@@ -60,7 +60,7 @@ export class GeneralLinkElement extends FormItemElement {
    * @required false
    * @default -
    * @description 链接的 URL
-   * @group basicFormItem
+   * @group basic
    */
   @property()
   url: string;
@@ -80,20 +80,42 @@ export class GeneralLinkElement extends FormItemElement {
    * @required false
    * @default -
    * @description 当将其配置成 `_blank` 时，默认在 label 后添加 external-link-alt icon
-   * @group basicFormItem
+   * @group basic
    */
   @property()
   target: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否隐藏target为_blank时label后的icon
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  hideExternalIcon: boolean;
 
   /**
    * @kind string
    * @required false
    * @default -
    * @description 提示
-   * @group basicFormItem
+   * @group basic
    */
   @property()
   tooltip: string;
+
+  /**
+   * @group basic
+   * @default false
+   * @description 是否禁止
+   */
+  @property({
+    type: Boolean,
+  })
+  disabled: boolean;
 
   /**
    * @kind Record<string, any>
@@ -129,27 +151,6 @@ export class GeneralLinkElement extends FormItemElement {
   })
   icon: MenuIcon;
 
-  /**
-   * @group basicFormItem
-   * @default false
-   * @description 是否禁止
-   */
-  @property({
-    type: Boolean,
-  })
-  disabled: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 是否隐藏target为_blank时label后的icon
-   * @group ui
-   */
-  @property({
-    type: Boolean,
-  })
-  hideExternalIcon: boolean;
   /**
    * @kind boolean
    * @required false

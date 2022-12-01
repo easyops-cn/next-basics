@@ -62,7 +62,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否右上角有操作区 slot
-   * @group basic
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -70,7 +70,7 @@ export class GeneralCardElement extends UpdatingElement {
   hasExtraSlot: boolean;
 
   /**
-   * @group basic
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -82,7 +82,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default true
    * @description footer滚动到窗口外时，是否需要将footer固定在窗口底部
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -94,6 +94,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 右上角的操作按钮列表，可自定义指定该按钮的名字，按钮点击后发出的事件等
+   * @group advanced
    */
   @property({ attribute: false }) operationButtons: OperationButton[] = [];
 
@@ -102,6 +103,7 @@ export class GeneralCardElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 完全透传给 antd 的 Card 属性，详见：[Card](https://ant.design/components/card-cn/#Card)
+   * @group advanced
    */
   @property({ attribute: false }) configProps: CardProps;
 

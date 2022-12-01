@@ -64,6 +64,55 @@ export interface DescriptionItem {
  */
 export class CardItemElement extends UpdatingElement {
   /**
+   * @required false
+   * @default "icon-as-background"
+   * @description 卡片布局类型，具体样式看 Demo
+   * @group basic
+   */
+  @property()
+  cardLayoutType: CardLayoutType;
+
+  /**
+   * @required false
+   * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
+   * @group other
+   */
+  @property({
+    attribute: false,
+  })
+  fields: {
+    cardTitle?: string;
+    cardSubtitle?: string;
+    descriptionList?: string;
+    icon?: string;
+    iconColor?: string;
+    iconStyle?: string;
+    iconSize?: string;
+    iconOffsetX?: string;
+    iconOffsetY?: string;
+    iconOpacity?: string;
+    disabled?: string;
+  };
+
+  /**
+   * @required true
+   * @description 卡片信息数据源
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  dataSource: Record<string, any>;
+
+  /**
+   * @required false
+   * @description 卡片跳转 url，支持模版变量
+   * @group basic
+   */
+  @property()
+  urlTemplate: string;
+
+  /**
    * @detail
    * @description 点击的 card-item 触发的事件，tips:点击卡片会先判断事件监听器能否传播到 class="listContainer cardListContainer"元素，是则触发自身的\_handleClick 方法触发事件，否则不会触发事件。
    */
@@ -92,15 +141,6 @@ export class CardItemElement extends UpdatingElement {
     type: Boolean,
   })
   private onlyOperateSlot: boolean;
-
-  /**
-   * @required false
-   * @default "icon-as-background"
-   * @description 卡片布局类型，具体样式看 Demo
-   * @group basic
-   */
-  @property()
-  cardLayoutType: CardLayoutType;
 
   /**
    * @required false
@@ -151,14 +191,6 @@ export class CardItemElement extends UpdatingElement {
 
   /**
    * @required false
-   * @description 卡片跳转 url，支持模版变量
-   * @group basic
-   */
-  @property()
-  urlTemplate: string;
-
-  /**
-   * @required false
    * @description 卡片跳转 url， url 优先于 urlTemplate 执行
    * @group basic
    */
@@ -180,38 +212,6 @@ export class CardItemElement extends UpdatingElement {
    */
   @property()
   target: string;
-
-  /**
-   * @required true
-   * @description 卡片信息数据源
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  dataSource: Record<string, any>;
-
-  /**
-   * @required false
-   * @description 字段映射, 跟 dataSource 一起使用来获得运行时 cardTitle、cardSubtitle、descriptionList、icon、iconColor、iconStyle、iconSize、iconOffsetX、iconOffsetY、iconOpacity、disabled
-   * @group other
-   */
-  @property({
-    attribute: false,
-  })
-  fields: {
-    cardTitle?: string;
-    cardSubtitle?: string;
-    descriptionList?: string;
-    icon?: string;
-    iconColor?: string;
-    iconStyle?: string;
-    iconSize?: string;
-    iconOffsetX?: string;
-    iconOffsetY?: string;
-    iconOpacity?: string;
-    disabled?: string;
-  };
 
   /**
    * @required false

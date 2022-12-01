@@ -36,6 +36,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 警告提示内容
+   * @group basic
    */
   @property()
   message: string;
@@ -45,6 +46,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 标题样式，对message插槽有效
+   * @group ui
    */
   @property({ attribute: false })
   messageStyle: CSSProperties = {};
@@ -54,6 +56,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 警告提示的辅助性文字介绍
+   * @group basic
    */
   @property()
   description: string;
@@ -63,6 +66,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 指定警告提示的样式，有四种选择 success、info、warning、error
+   * @group basic
    */
   @property()
   type: AlertType;
@@ -72,6 +76,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 是否显示辅助图标
+   * @group basic
    */
   @property({ type: Boolean })
   showIcon: boolean;
@@ -81,6 +86,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 是否显示关闭按钮
+   * @group basic
    */
   @property({ type: Boolean })
   closable: boolean;
@@ -90,6 +96,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否启用 description 插槽点，启用后属性 `description` 无效
+   * @group advanced
    */
   @property({ type: Boolean })
   enableDescSlot: boolean;
@@ -99,6 +106,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否启用 message 插槽点，启用后属性 `message` 无效
+   * @group advanced
    */
   @property({ type: Boolean })
   enableMessageSlot: boolean;
@@ -108,6 +116,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否启用 action 插槽点
+   * @group advanced
    */
   @property({ type: Boolean })
   enableActionSlot: boolean;
@@ -117,6 +126,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 当设置该属性时，且 `closable` 为真，用户点击关闭后写入 localStorage(浏览器存储), 之后就不再显示该警告提示。以页面 url 为命名空间，注意同一页面下该值的唯一性。
+   * @group advanced
    */
   @property()
   localStorageKey: string;
@@ -126,6 +136,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 搭配`localStorageKey`使用，为true时，关闭localStorageKey的url命名空间。
+   * @group advanced
    */
   @property({ type: Boolean })
   stripLocalStorageUrlSuffix: boolean;

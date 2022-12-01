@@ -89,11 +89,6 @@ export class BrickValueMappingElement extends UpdatingElement {
    * @group basic
    */
   @property() value?: string | number;
-  /**
-   * @description 替代 `data` 属性，click 事件时传出的数据
-   * @group basic
-   */
-  @property({ attribute: false }) dataSource?: Record<string, any>;
 
   /**
    * @description [已废弃]字段映射, 跟 dataSource 一起使用来获得运行时 value
@@ -113,7 +108,7 @@ export class BrickValueMappingElement extends UpdatingElement {
   >;
   /**
    * @description 显示文字旁边的小圈圈，按照平台规范通常表示状态的标签可设置为 true
-   * @group ui
+   * @group basic
    */
   @property({
     type: Boolean,
@@ -121,16 +116,22 @@ export class BrickValueMappingElement extends UpdatingElement {
   showTagCircle?: boolean;
 
   /**
+   * @description 替代 `data` 属性，click 事件时传出的数据
+   * @group basic
+   */
+  @property({ attribute: false }) dataSource?: Record<string, any>;
+
+  /**
    * @default false
    * @description 是否触发点击事件
-   * @group basic
+   * @group other
    */
   @property({ type: Boolean })
   triggerClickEvent?: boolean;
 
   /**
    * @description 配置跳转链接，在 `triggerClickEvent` 为 false 生效
-   * @group basic
+   * @group other
    */
   @property({ attribute: false })
   link?: LinkProps;

@@ -46,28 +46,95 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 下拉框字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
-
-  /**
-   * @kind string
-   * @required true
-   * @default -
-   * @description 模型 id
-   * @group basicFormItem
-   */
-  @property()
-  objectId: string;
 
   /**
    * @kind string
    * @required false
    * @default -
    * @description 下拉框初始值
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) value: string;
+
+  /**
+   * @kind string
+   * @required true
+   * @default -
+   * @description 模型 id
+   * @group basic
+   */
+  @property()
+  objectId: string;
+
+  /**
+   * @kind `object | array`
+   * @required false
+   * @default -
+   * @description 下拉框选项的过滤条件， 参数同 InstanceApi.postSearch 中的 query， 其中内置了关键字搜索的过滤条件，再根据用户输入合并 query 最终格式为 `$and: [internalQuery， userQuery]`
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  instanceQuery: CmdbInstanceSelectProps["instanceQuery"];
+
+  /**
+   * @kind `{label: string[]|string, value?: string]}`
+   * @required false
+   * @default {label: name , value: instanceId}
+   * @description 自定义 select 下拉选项的 label 和 value 字段， 默认 label 显示为模型的 name 值，value 为 instanceId
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  fields: CmdbInstanceSelectProps["fields"];
+
+  /**
+   * @kind string
+   * @required false
+   * @default
+   * @description 可自定义`label` 显示的模板
+   * @group basic
+   */
+  @property({ attribute: false })
+  labelTemplate: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 支持清除选项
+   * @group basic
+   */
+  @property({
+    type: Boolean,
+  })
+  allowClear: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 下拉框占位说明
+   * @group basic
+   */
+  @property({ attribute: false }) declare placeholder: string;
+
+  /**
+   * @kind `object`
+   * @required false
+   * @default -
+   * @description 输入框样式
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle: React.CSSProperties = {};
 
   /**
    * @kind boolean
@@ -88,15 +155,6 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 下拉框占位说明
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) declare placeholder: string;
-
-  /**
    * @kind `multiple | tags`
    * @required false
    * @default -
@@ -105,54 +163,6 @@ export class CmdbInstanceSelectElement extends FormItemElement {
    */
   @property()
   mode: string;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 支持清除选项
-   * @group basicFormItem
-   */
-  @property({
-    type: Boolean,
-  })
-  allowClear: boolean;
-
-  /**
-   * @kind `object`
-   * @required false
-   * @default -
-   * @description 输入框样式
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle: React.CSSProperties = {};
-
-  /**
-   * @kind `{label: string[]|string, value?: string]}`
-   * @required false
-   * @default {label: name , value: instanceId}
-   * @description 自定义 select 下拉选项的 label 和 value 字段， 默认 label 显示为模型的 name 值，value 为 instanceId
-   * @group basicFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  fields: CmdbInstanceSelectProps["fields"];
-
-  /**
-   * @kind `object | array`
-   * @required false
-   * @default -
-   * @description 下拉框选项的过滤条件， 参数同 InstanceApi.postSearch 中的 query， 其中内置了关键字搜索的过滤条件，再根据用户输入合并 query 最终格式为 `$and: [internalQuery， userQuery]`
-   * @group basicFormItem
-   */
-  @property({
-    attribute: false,
-  })
-  instanceQuery: CmdbInstanceSelectProps["instanceQuery"];
 
   firstRender = true;
 
@@ -231,15 +241,6 @@ export class CmdbInstanceSelectElement extends FormItemElement {
   @property({ type: Boolean })
   showSearchTip?: boolean;
 
-  /**
-   * @kind string
-   * @required false
-   * @default
-   * @description 可自定义`label` 显示的模板
-   * @group advancedFormItem
-   */
-  @property({ attribute: false })
-  labelTemplate: string;
   /**
    * @kind boolean
    * @required false

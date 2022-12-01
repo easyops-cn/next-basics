@@ -86,6 +86,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind number
    * @default -
    * @description 	网格布局列数（各列等宽）
+   * @group basic
    */
   @property({
     type: Number,
@@ -96,6 +97,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind number
    * @default auto
    * @description 自己在父级网格中所占列数
+   * @group basic
    */
   @property({
     type: Number,
@@ -106,6 +108,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind number
    * @default 1
    * @description 	网格布局行数，通常不需设置，各行高度由内容决定。设置为 > 1 时，各行高度相同。
+   * @group basic
    */
   @property({
     type: Number,
@@ -116,6 +119,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind number
    * @default 1
    * @description 自己在父级网格中所占行数
+   * @group basic
    */
   @property({
     type: Number,
@@ -126,6 +130,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind string
    * @default -
    * @description 	网格布局模板列，即 CSS 的 gridTemplateColumns，优先于 `columns`。
+   * @group basic
    */
   @property()
   templateColumns?: string;
@@ -134,6 +139,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind ResponsiveSettings
    * @default 1
    * @description 响应式布局设置
+   * @group basic
    */
   @property({
     attribute: false,
@@ -144,6 +150,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind string
    * @default "var(--page-card-gap)"
    * @description 子元素之间的间距
+   * @group basic
    */
   @property()
   gap: string;
@@ -152,6 +159,7 @@ export class GridLayoutElement extends UpdatingElement {
    * @kind Boolean
    * @default false
    * @description 网格布局边框
+   * @group basic
    */
   @property({
     type: Boolean,

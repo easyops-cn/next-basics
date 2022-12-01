@@ -35,13 +35,13 @@ export class GeneralSwitchElement extends FormItemElement {
   /**
    * @required false
    * @description 表单项字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
 
   /**
    * @description 初始值
-   * @group basicFormItem
+   * @group basic
    */
   @property({ type: Boolean })
   value?: boolean;
@@ -49,7 +49,7 @@ export class GeneralSwitchElement extends FormItemElement {
   /**
    * @default false
    * @description 是否禁用
-   * @group basicFormItem
+   * @group basic
    */
   @property({ type: Boolean })
   disabled?: boolean;

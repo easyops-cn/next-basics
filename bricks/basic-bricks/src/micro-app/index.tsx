@@ -53,7 +53,7 @@ export class MicroViewElement extends UpdatingElement {
    * @required -
    * @default -
    * @description 设置 banner 标题。如果要使用复杂的标题构件，请使用插槽 `bannerTitleBar`
-   * @group basic
+   * @group other
    */
   @property()
   bannerPageTitle: string;
