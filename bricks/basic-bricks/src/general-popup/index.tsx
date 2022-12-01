@@ -79,7 +79,18 @@ export class GeneralPopupElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  dragHeaderStyle: Record<string, any>;
+  dragHeaderStyle: Record<string, any> = {};
+
+  /**
+   * @required false
+   * @default -
+   * @description 用于设置 popup wrapper的样式
+   * @group ui
+   */
+  @property({
+    attribute: false,
+  })
+  dragWrapperStyle: Record<string, any> = {};
 
   /**
    * @description 显示弹窗
@@ -135,6 +146,7 @@ export class GeneralPopupElement extends UpdatingElement {
               closePopup={this.closePopup}
               openDirection={this.openDirection}
               dragHeaderStyle={this.dragHeaderStyle}
+              dragWrapperStyle={this.dragWrapperStyle}
             />
           </BrickWrapper>
         </>,

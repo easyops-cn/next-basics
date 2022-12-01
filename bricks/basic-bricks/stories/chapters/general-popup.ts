@@ -46,6 +46,9 @@ export const generalPopupStory: Story = {
             dragHeaderStyle: {
               background: "#E0E4E5",
             },
+            dragWrapperStyle: {
+              border: "none",
+            },
             openDirection: "rightTop",
           },
           slots: {

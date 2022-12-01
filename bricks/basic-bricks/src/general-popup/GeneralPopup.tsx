@@ -26,6 +26,7 @@ export interface GeneralPopupProps {
   popupHeight?: React.CSSProperties["height"];
   closePopup?: () => void;
   dragHeaderStyle?: Record<string, any>;
+  dragWrapperStyle?: Record<string, any>;
   openDirection?: OpenDirection;
 }
 
@@ -38,6 +39,7 @@ export function GeneralPopup({
   popupHeight,
   visible,
   dragHeaderStyle,
+  dragWrapperStyle,
   openDirection,
   closePopup,
 }: GeneralPopupProps): React.ReactElement {
@@ -198,6 +200,7 @@ export function GeneralPopup({
         ref={popupRef}
         style={{
           transform: `translate(${position[0]}px, ${position[1]}px)`,
+          ...dragWrapperStyle,
         }}
       >
         <div
