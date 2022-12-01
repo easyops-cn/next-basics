@@ -40,15 +40,25 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default -
    * @description 输入框字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 输入框初始值
+   * @group basic
+   */
+  @property()
+  value: string;
   /**
    * @kind string
    * @required false
    * @default -
    * @description 输入框占位说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -62,21 +72,11 @@ export class GeneralInputElement extends FormItemElement {
   @property({ type: Boolean }) declare required: boolean;
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 输入框初始值
-   * @group basicFormItem
-   */
-  @property()
-  value: string;
-
-  /**
    * @kind boolean
    * @required false
    * @default -
    * @description 是否禁用
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false })
   disabled: boolean;
@@ -96,7 +96,7 @@ export class GeneralInputElement extends FormItemElement {
    * @required false
    * @default
    * @description 输入框样式
-   * @group ui
+   * @group basic
    */
   @property({
     attribute: false,
@@ -111,6 +111,15 @@ export class GeneralInputElement extends FormItemElement {
    * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
+
+  /**
+   * @kind string
+   * @required false
+   * @default text
+   * @description 输入框类型,可输入password/email或者其他
+   * @group basic
+   */
+  @property({ attribute: false }) type: string;
 
   /**
    * @kind number
@@ -147,15 +156,6 @@ export class GeneralInputElement extends FormItemElement {
     type: Number,
   })
   maxLength: number;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 输入框类型,可输入password/email或者其他
-   * @group basicFormItem
-   */
-  @property({ attribute: false }) type: string;
 
   /**
    * @kind string

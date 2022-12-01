@@ -56,7 +56,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default -
    * @description 单选框字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
 
@@ -64,7 +64,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required true
    * @default -
    * @description 单选框选项表
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
@@ -76,7 +76,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required true
    * @default -
    * @description 单选框当前选中始值
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false })
   value: any;
@@ -104,7 +104,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default  false
    * @description 是否禁用
-   * @group basicFormItem
+   * @group basic
    */
   @property({ type: Boolean })
   disabled: boolean;
@@ -114,7 +114,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default default
    * @description 	单选框样式类型
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,

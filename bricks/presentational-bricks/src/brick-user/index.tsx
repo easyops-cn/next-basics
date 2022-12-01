@@ -33,6 +33,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 用户名或用户 instanceId
+   * @group basic
    */
   @property({ attribute: false })
   userNameOrId: string;
@@ -42,6 +43,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 用户头像 url
+   * @group ui
    */
   @property()
   iconUrl: string;
@@ -51,6 +53,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否隐藏头像
+   * @group basic
    */
   @property({ type: Boolean })
   hideAvatar: boolean;
@@ -60,6 +63,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否隐藏用户名
+   * @group basic
    */
   @property({ type: Boolean })
   hideUsername: boolean;
@@ -69,6 +73,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default "default"
    * @description 设置头像的大小
+   * @group ui
    */
   @property({ attribute: false })
   size: "large" | "small" | "default" = "default";
@@ -78,6 +83,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default "circle"
    * @description 指定头像的形状
+   * @group ui
    */
   @property()
   shape: "circle" | "square";
@@ -105,6 +111,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default 0
    * @description icon间距
+   * @group ui
    */
   @property({ attribute: false })
   iconMargin: number | string;

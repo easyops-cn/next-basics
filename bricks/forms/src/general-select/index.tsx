@@ -51,14 +51,14 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 选择框字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
 
   /**
    * @required true
    * @description 候选项列表
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
@@ -66,11 +66,20 @@ export class GeneralSelectElement extends FormItemElement {
   options: GeneralOption[];
 
   /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 选择框占位说明
+   * @group basic
+   */
+  @property({ attribute: false }) declare placeholder: string;
+
+  /**
    * @kind string|number|string[]|number[]
    * @required false
    * @default -
    * @description 选择框初始值
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
@@ -81,18 +90,10 @@ export class GeneralSelectElement extends FormItemElement {
    * @kind boolean
    * @required false
    * @default -
-   * @description basicFormItem
-   */
-  @property({ type: Boolean }) declare required: boolean;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 选择框占位说明
+   * @description 是否必填
    * @group basicFormItem
    */
-  @property({ attribute: false }) declare placeholder: string;
+  @property({ type: Boolean }) declare required: boolean;
 
   /**
    * @kind { useBrick: UseBrickConf }
@@ -113,7 +114,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 选择框模式
-   * @group basicFormItem
+   * @group advancedFormItem
    */
   @property()
   mode: string;
@@ -132,7 +133,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default
    * @description 输入框样式
-   * @group ui
+   * @group basic
    */
   @property({
     attribute: false,
@@ -144,7 +145,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default true
    * @description 支持清除选项
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
@@ -156,7 +157,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default false
    * @description 是否禁用
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     type: Boolean,

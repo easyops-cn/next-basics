@@ -41,30 +41,6 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   placeholder: string;
 
   /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否更新 url 参数
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  shouldUpdateUrlParams = true;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否对输入框剔除前后空格
-   * @group basic
-   */
-  @property({
-    type: Boolean,
-  })
-  shouldTrimQuery: boolean;
-
-  /**
    * @kind string
    * @required false
    * @default -
@@ -89,11 +65,35 @@ export class BrickGeneralSearchElement extends UpdatingElement {
   defaultArgs: { field: string; value: any }[];
 
   /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否更新 url 参数
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  shouldUpdateUrlParams = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否对输入框剔除前后空格
+   * @group advanced
+   */
+  @property({
+    type: Boolean,
+  })
+  shouldTrimQuery: boolean;
+
+  /**
    * @kind string
    * @required false
    * @default "q"
    * @description 当 `shouldUpdateUrlParams` 为真时，将以该值为 key 更新到 url 上
-   * @group basic
+   * @group advanced
    */
   @property()
   qField: string;
@@ -103,7 +103,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default false
    * @description 是否禁用自动聚焦
-   * @group basic
+   * @group advanced
    */
   @property({
     type: Boolean,
@@ -115,7 +115,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default 'all'
    * @description 搜索类型
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -137,7 +137,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default 0
    * @description 默认延迟时间
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,

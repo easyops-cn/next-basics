@@ -157,13 +157,13 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
 
   /**
    * @description 按钮事件的 detail
-   * @group basic
+   * @group advanced
    */
   @property({ attribute: false }) dataSource?: any;
 
   /**
    * @description 点击按钮后自动禁用
-   * @group basic
+   * @group advanced
    */
   @property({ type: Boolean })
   disableAfterClick?: boolean;

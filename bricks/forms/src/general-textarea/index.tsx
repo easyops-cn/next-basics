@@ -33,13 +33,13 @@ export class GeneralTextAreaElement extends FormItemElement {
   /**
    * @required false
    * @description 下拉框字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
 
   /**
    * @description 初始值
-   * @group basicFormItem
+   * @group basic
    */
   @property()
   value?: string;
@@ -47,7 +47,7 @@ export class GeneralTextAreaElement extends FormItemElement {
   /**
    * @required false
    * @description 下拉框占位说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
 
@@ -61,12 +61,28 @@ export class GeneralTextAreaElement extends FormItemElement {
   /**
    * @default false
    * @description 是否禁用
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     type: Boolean,
   })
   disabled?: boolean;
+
+  /**
+   * @description 自适应内容高度，或自配置
+   * @group basic
+   */
+  @property({ attribute: false })
+  autoSize?: boolean | AutoSizeType;
+
+  /**
+   * @description 输入框样式
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle?: React.CSSProperties;
 
   /**
    * @required false
@@ -81,13 +97,6 @@ export class GeneralTextAreaElement extends FormItemElement {
    * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
-
-  /**
-   * @description 自适应内容高度，或自配置
-   * @group ui
-   */
-  @property({ attribute: false })
-  autoSize?: boolean | AutoSizeType;
 
   /**
    * @description 最小长度
@@ -106,15 +115,6 @@ export class GeneralTextAreaElement extends FormItemElement {
     type: Number,
   })
   max?: number;
-
-  /**
-   * @description 输入框样式
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle?: React.CSSProperties;
 
   /**
    * @description 输入变化时被触发，`event.detail` 为当前值

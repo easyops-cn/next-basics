@@ -410,6 +410,28 @@ export class BrickTableElement extends UpdatingElement {
 
   /**
    * @required false
+   * @default true
+   * @description 是否显示外层卡片
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  showCard = true;
+
+  /**
+   * @required false
+   * @default -
+   * @description 表格行是否可选择，具体查阅：[rowSelection](https://ant.design/components/table-cn/#rowSelection)
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  rowSelection: false | TableRowSelection<any>;
+
+  /**
+   * @required false
    * @default "key"
    * @description 指定每一行的 key，不指定则默认为索引 index。强烈建议设置该属性，否则在某些情况下可能行为不如预期。
    * @group basic
@@ -450,17 +472,6 @@ export class BrickTableElement extends UpdatingElement {
     attribute: false,
   })
   filters: Record<string, string[]>;
-
-  /**
-   * @required false
-   * @default true
-   * @description 是否显示外层卡片
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  showCard = true;
 
   /**
    * @required false
@@ -571,7 +582,7 @@ export class BrickTableElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 优化渲染的列（输入对应的 dataIndex），针对配置了 useBrick 的列。当前 antd 在更新 state 的时候，会全量渲染单元格，如果确定某一列在后续操作中不需要重新渲染，例如仅作为展示的单元格，可通过该属性设置以优化性能。注意，在树形表格中，当某一列内包含展开/收起按钮，则不应该设置该列。
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -682,7 +693,7 @@ export class BrickTableElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 设置相关字段取自哪里，具体描述见下表
-   * @group basic
+   * @group advanced
    */
   @property({
     __unstable_doNotDecorate: true,
@@ -874,16 +885,6 @@ export class BrickTableElement extends UpdatingElement {
     attribute: false,
   })
   pagination: false | TablePaginationConfig;
-
-  /**
-   * @required false
-   * @default -
-   * @description 表格行是否可选择，具体查阅：[rowSelection](https://ant.design/components/table-cn/#rowSelection)
-   */
-  @property({
-    attribute: false,
-  })
-  rowSelection: false | TableRowSelection<any>;
 
   /**
    * @required false

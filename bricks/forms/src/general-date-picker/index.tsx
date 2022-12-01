@@ -36,14 +36,14 @@ export class GeneralDatePickerElement extends FormItemElement {
   /**
    * @description 日期选择框字段说明
    * @required false
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
 
   /**
    * @required false
    * @description 日期选择框初始值
-   * @group basicFormItem
+   * @group basic
    */
   @property()
   value: string;
@@ -51,9 +51,38 @@ export class GeneralDatePickerElement extends FormItemElement {
   /**
    * @required false
    * @description 日期选择框占位说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
+
+  /**
+   * @description 设置选择器类型
+   * @group basic
+   */
+  @property({ attribute: false })
+  picker?: "date" | "week" = "date";
+
+  /**
+   * @description 不可选择的日期
+   * @group basic
+   */
+  @property({ attribute: false })
+  disabledDate?: DisabledDateType;
+  /**
+   * @description 是否禁用
+   * @group basic
+   */
+  @property({ type: Boolean })
+  disabled?: boolean;
+
+  /**
+   * @description 输入框样式
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle?: CSSProperties;
 
   /**
    * @required false
@@ -68,15 +97,6 @@ export class GeneralDatePickerElement extends FormItemElement {
    * @group basicFormItem
    */
   @property({ attribute: false }) declare message: Record<string, string>;
-
-  /**
-   * @description 输入框样式
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle?: CSSProperties;
 
   /**
    * @description 是否显示时间, 当设为 `true` 时, 请同时设置 `format` 为 `YYYY-MM-DD HH:mm:ss` 使其也显示具体时，分，秒 的时间
@@ -95,26 +115,6 @@ export class GeneralDatePickerElement extends FormItemElement {
     attribute: false,
   })
   format?: string;
-
-  /**
-   * @description 设置选择器类型
-   * @group basicFormItem
-   */
-  @property({ attribute: false })
-  picker?: "date" | "week" = "date";
-
-  /**
-   * @description 不可选择的日期
-   * @group basicFormItem
-   */
-  @property({ attribute: false })
-  disabledDate?: DisabledDateType;
-  /**
-   * @description 是否禁用
-   * @group basicFormItem
-   */
-  @property({ type: Boolean })
-  disabled?: boolean;
 
   /**
    * @description 	日期变化时触发

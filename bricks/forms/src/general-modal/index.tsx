@@ -62,6 +62,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default -
    * @description 表单模态框标题
+   * @group basic
    */
   @property()
   modalTitle: string;
@@ -71,6 +72,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default `"520px"`
    * @description 表单模态框宽度
+   * @group basic
    */
   @property({
     attribute: false,
@@ -82,7 +84,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default -
    * @description 标题图标
-   * @group basic
+   * @group advanced
    */
   @property({ attribute: false }) titleIcon?: MenuIcon | SrcIcon;
 
@@ -91,6 +93,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default -
    * @description 打开和关闭弹窗事件的 `detail` 的数据源
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -102,6 +105,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default `"确定"`
    * @description 模态框确认按钮文字
+   * @group basic
    */
   @property()
   okText: string;
@@ -111,6 +115,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default `false`
    * @description 是否禁用确认按钮
+   * @group basic
    */
   @property({ type: Boolean })
   okDisabled: boolean;
@@ -130,6 +135,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default -
    * @description 点击打开模态框的按钮文字
+   * @group advanced
    */
   @property()
   btnText: string;
@@ -139,6 +145,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default `false`
    * @description 点击确定按钮后自动禁用
+   * @group advanced
    */
   @property({ type: Boolean })
   disableAfterClick: boolean;

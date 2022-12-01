@@ -54,13 +54,16 @@ export class ModalConfirmElement extends UpdatingElement {
   @property() content: string;
 
   /**
-   * @kind string
+   * @kind "info" | "success" | "error" | "warning" | "confirm"
    * @required false
-   * @default -
-   * @description 模态框的额外内容，支持模板和 HTML（自动消毒）
+   * @default confirm
+   * @description 对话框类型
    * @group basic
    */
-  @property() extraContent: string;
+  @property({
+    attribute: false,
+  })
+  type: ModalConfirmProps["type"] = "confirm";
 
   /**
    * @kind Record<string, any>
@@ -82,18 +85,6 @@ export class ModalConfirmElement extends UpdatingElement {
   contentBrick: { useBrick: UseBrickConf };
 
   // -------------------------------- ui --------------------------------
-
-  /**
-   * @kind "info" | "success" | "error" | "warning" | "confirm"
-   * @required false
-   * @default confirm
-   * @description 对话框类型
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  type: ModalConfirmProps["type"] = "confirm";
 
   /**
    * @kind string
@@ -183,6 +174,15 @@ export class ModalConfirmElement extends UpdatingElement {
   @property({ attribute: false }) cancelButtonProps?: ButtonProps;
 
   // -------------------------------- other --------------------------------
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 模态框的额外内容，支持模板和 HTML（自动消毒）
+   * @group other
+   */
+  @property() extraContent: string;
 
   /**
    * @kind boolean

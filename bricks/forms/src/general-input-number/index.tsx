@@ -33,14 +33,14 @@ export class GeneralInputNumberElement extends FormItemElement {
   /**
    * @required false
    * @description 数字输入框字段说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare label: string;
 
   /**
    * @required false
    * @description 数字输入框初始值
-   * @group basicFormItem
+   * @group basic
    */
   @property({
     attribute: false,
@@ -50,9 +50,15 @@ export class GeneralInputNumberElement extends FormItemElement {
   /**
    * @required false
    * @description 数字输入框占位说明
-   * @group basicFormItem
+   * @group basic
    */
   @property({ attribute: false }) declare placeholder: string;
+
+  /**
+   * @description 是否禁用
+   * @group basic
+   */
+  @property({ type: Boolean }) disabled?: boolean;
 
   /**
    * @required false
@@ -62,6 +68,15 @@ export class GeneralInputNumberElement extends FormItemElement {
   @property({ type: Boolean }) declare required: boolean;
 
   /**
+   * @description 输入框样式
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  inputBoxStyle?: React.CSSProperties;
+
+  /**
    * @required false
    * @description 校验文本信息
    * @group basicFormItem
@@ -69,25 +84,10 @@ export class GeneralInputNumberElement extends FormItemElement {
   @property({ attribute: false }) declare message: Record<string, string>;
 
   /**
-   * @description 是否禁用
-   * @group basicFormItem
-   */
-  @property({ type: Boolean }) disabled?: boolean;
-
-  /**
    * @description 是否只读
    * @group basicFormItem
    */
   @property({ type: Boolean }) readOnly?: boolean;
-
-  /**
-   * @description 输入框样式
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  inputBoxStyle?: React.CSSProperties;
 
   /**
    * @description 数字输框入步长

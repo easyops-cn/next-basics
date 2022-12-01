@@ -79,12 +79,62 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮 icon，支持的 [icon 图标库](developers/icon) 和 [MenuIcon配置](/next-docs/docs/api-reference/brick-types.menuicon#menuicon-interface)，另外如果是 antd 图标库可以直接引用图标名称配置 { "lib": "antd", "icon": "edit" }与 "edit"等价
-   * @group ui
+   * @group basic
    */
   @property({
     attribute: false,
   })
   buttonIcon: any;
+
+  /**
+   * @kind ButtonType
+   * @required false
+   * @default -
+   * @description 按钮类型  ButtonType(`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon"|"text"`)
+   * @group basic
+   */
+  @property()
+  buttonType: ButtonType;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 按钮的 tooltip
+   * @group basic
+   */
+  @property()
+  tooltip: string;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default false
+   * @description 是否禁用按钮
+   * @group basic
+   */
+  @property({ type: Boolean })
+  disabled: boolean;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
+   * @description 禁用按钮的 tooltip
+   * @group basic
+   */
+  @property()
+  disabledTooltip: string;
+
+  /**
+   * @kind TooltipConfig
+   * @required false
+   * @default -
+   * @description tooltip的配置,配置属性见TooltipConfig
+   * @group basic
+   */
+  @property({ attribute: false })
+  tooltipConfig: TooltipConfig;
 
   /**
    * @kind string
@@ -101,7 +151,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 是否使用原生 <a> 标签，通常用于外链的跳转
-   * @group basic
+   * @group advanced
    */
   @property()
   buttonHref: string;
@@ -111,7 +161,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 跳转的 target，例如可以设置为"_blank"
-   * @group basic
+   * @group advanced
    */
   @property()
   target: string;
@@ -121,7 +171,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default {}
    * @description 替代之前 detail 属性，用法相同。暂存的数据在事件传出时使用
-   * @group basic
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -132,11 +182,23 @@ export class GeneralButtonElement extends UpdatingElement {
    * @kind boolean
    * @required false
    * @default false
-   * @description 是否禁用按钮
-   * @group basic
+   * @description 点击按钮后自动禁用
+   * @group advanced
    */
   @property({ type: Boolean })
-  disabled: boolean;
+  disableAfterClick: boolean;
+
+  /**
+   * @kind ButtonProps
+   * @required -
+   * @default -
+   * @description 完全透传给 antd 的 Button 属性
+   * @group advanced
+   */
+  @property({
+    attribute: false,
+  })
+  buttonProps: ButtonProps & { icon?: string };
 
   /**
    * @kind boolean
@@ -149,16 +211,6 @@ export class GeneralButtonElement extends UpdatingElement {
     type: Boolean,
   })
   loading: boolean;
-
-  /**
-   * @kind ButtonType
-   * @required false
-   * @default -
-   * @description 按钮类型  ButtonType(`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon"|"text"`)
-   * @group ui
-   */
-  @property()
-  buttonType: ButtonType;
 
   /**
    * @kind boolean
@@ -191,36 +243,6 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonSize: "small" | "large";
 
   /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 按钮的 tooltip
-   * @group basic
-   */
-  @property()
-  tooltip: string;
-
-  /**
-   * @kind string
-   * @required false
-   * @default -
-   * @description 禁用按钮的 tooltip
-   * @group basic
-   */
-  @property()
-  disabledTooltip: string;
-
-  /**
-   * @kind TooltipConfig
-   * @required false
-   * @default -
-   * @description tooltip的配置,配置属性见TooltipConfig
-   * @group basic
-   */
-  @property({ attribute: false })
-  tooltipConfig: TooltipConfig;
-
-  /**
    * @kind boolean
    * @required false
    * @default false
@@ -229,28 +251,6 @@ export class GeneralButtonElement extends UpdatingElement {
    */
   @property({ type: Boolean })
   fadedText: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default false
-   * @description 点击按钮后自动禁用
-   * @group basic
-   */
-  @property({ type: Boolean })
-  disableAfterClick: boolean;
-
-  /**
-   * @kind ButtonProps
-   * @required -
-   * @default -
-   * @description 完全透传给 antd 的 Button 属性
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  buttonProps: ButtonProps & { icon?: string };
 
   /**
    * @kind React.CSSProperties
@@ -270,7 +270,6 @@ export class GeneralButtonElement extends UpdatingElement {
    * @default {}
    * @deprecated
    * @description [已废弃]按钮点击事件传出的内容。当用于列表类构件，例如 `brick-table` 中，可通过传入传入 `detail` 来识别不通的行进行操作处理。
-   * @group basic
    */
   @property({
     attribute: false,

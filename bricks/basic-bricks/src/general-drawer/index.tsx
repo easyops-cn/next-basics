@@ -61,15 +61,26 @@ export class GeneralDrawerElement extends UpdatingElement {
    */
   @property()
   customTitle: string;
+
   /**
    * @kind boolean
    * @required false
    * @default -
-   * @description 是否显示loading效果
+   * @description 点击蒙层是否允许关闭
    * @group basic
    */
   @property({ type: Boolean })
-  loading: boolean;
+  maskClosable: boolean;
+
+  /**
+   * @kind number
+   * @required false
+   * @default -
+   * @description 宽度
+   * @group basic
+   */
+  @property({ attribute: false })
+  width: number | string;
 
   /**
    * @kind boolean
@@ -84,22 +95,23 @@ export class GeneralDrawerElement extends UpdatingElement {
   /**
    * @kind boolean
    * @required false
-   * @default -
-   * @description 点击蒙层是否允许关闭
-   * @group basic
-   */
-  @property({ type: Boolean })
-  maskClosable: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
    * @default false
    * @description 是否提供 `footer` 插槽
    * @group basic
    */
   @property({ type: Boolean })
   hasFooter: boolean;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default -
+   * @description 是否显示loading效果
+   * @group ui
+   */
+  @property({ type: Boolean })
+  loading: boolean;
+
   /**
    * @kind boolean
    * @required false
@@ -109,16 +121,6 @@ export class GeneralDrawerElement extends UpdatingElement {
    */
   @property({ attribute: false })
   mask = true;
-
-  /**
-   * @kind number
-   * @required false
-   * @default -
-   * @description 宽度
-   * @group ui
-   */
-  @property({ attribute: false })
-  width: number | string;
 
   /**
    * @kind Record<string, any>

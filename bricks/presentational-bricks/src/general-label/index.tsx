@@ -26,13 +26,6 @@ import { MenuIcon } from "@next-core/brick-types";
  */
 export class GeneralLabelElement extends UpdatingElement {
   /**
-   * @detail any
-   * @description 点击 label 触发的事件，详情为编排者输入的 dataSource
-   */
-  @event({ type: "label.click" })
-  labelClick: EventEmitter<any>;
-
-  /**
    * @required false
    * @description 文字内容
    * @group basic
@@ -71,15 +64,23 @@ export class GeneralLabelElement extends UpdatingElement {
   /**
    * @required false
    * @description 是否使用原生 <a> 标签，通常用于外链的跳转
-   * @group basic
+   * @group advanced
    */
   @property()
   href: string;
 
   /**
+   * @detail any
+   * @description 点击 label 触发的事件，详情为编排者输入的 dataSource
+   * @group advanced
+   */
+  @event({ type: "label.click" })
+  labelClick: EventEmitter<any>;
+
+  /**
    * @required false
    * @description `label.click`事件的传出的数据
-   * @group other
+   * @group advanced
    */
   @property({
     attribute: false,
@@ -90,7 +91,7 @@ export class GeneralLabelElement extends UpdatingElement {
    * @required false
    * @description `label.click`事件的详情
    * @deprecated
-   * @group other
+   * @group advanced
    */
   @property({
     attribute: false,

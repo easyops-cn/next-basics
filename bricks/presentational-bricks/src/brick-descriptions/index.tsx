@@ -67,6 +67,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 描述列表的标题，显示在最顶部
+   * @group basic
    */
   @property()
   descriptionTitle: string;
@@ -76,6 +77,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 描述列表项，扩展自 ant-design DescriptionItem 相关配置项，额外扩展项如下，其他项查阅：[DescriptionItem](https://ant.design/components/descriptions-cn/#DescriptionItem)
+   * @group basic
    */
   @property({
     attribute: false,
@@ -87,7 +89,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default true
    * @description 是否显示卡片
-   * @group ui
+   * @group basic
    */
   @property({
     attribute: false,
@@ -99,7 +101,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default 3
    * @description 一行的 DescriptionItems 数量，可以写成像素值或支持响应式的对象写法 { xs: 8, sm: 16, md: 24}
-   * @group ui
+   * @group basic
    */
   @property({
     attribute: false,

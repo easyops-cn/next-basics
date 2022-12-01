@@ -42,6 +42,18 @@ import { ActionType } from "rc-trigger/lib/interface";
  * @noInheritDoc
  */
 export class PopoverContainerElement extends UpdatingElement {
+  // 整体数据，可以配置整体数据，也可以单独配置数据
+  /**
+   * @kind any
+   * @required false
+   * @default false
+   * @description 整体数据，如果展示构件和弹出框构件数据都来自于同一个 provider，可以直接配置 data，如果来源不一样，可以分别配置 CustomBrick.data
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  data: any;
   /**
    * @kind CustomBrick
    * @required true
@@ -85,28 +97,61 @@ export class PopoverContainerElement extends UpdatingElement {
   popoverIcon: MenuIcon;
 
   /**
-   * @kind Record<string,any>
-   * @required false
-   * @default {width:200px}
-   * @description popover 内容区域的样式，默认给了 200 的宽度。由于我们的弹出框拥有自定义构件的能力，在第一次点击之前，popover 是不知道所渲染构件的宽高，可能发生错位的问题。可以通过设置宽高来解决问题。注意，根据不同的`placement`需要按需调整宽度/高度。[详见](https://github.com/ant-design/ant-design/issues/3545)
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  popoverContentStyle: Record<string, any>;
-
-  /**
    * @kind top|left|right|bottom|topLeft|topRight|bottomLeft|bottomRight|leftTop|leftBottom|rightTop|rightBottom
    * @required false
    * @default bottom
    * @description 气泡框位置。注意设置该属性的时候可能需要调整`popoverContentStyle`。
-   * @group ui
+   * @group basic
    */
   @property({
     attribute: false,
   })
   placement: TooltipPlacement;
+
+  /**
+   * @required false
+   * @default -
+   * @description 触发方式
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  trigger: ActionType | ActionType[];
+
+  /**
+   * @required false
+   * @description 触发行为
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  triggerByIcon = true;
+
+  /**
+   * @kind boolean
+   * @required false
+   * @default true
+   * @description 是否显示 popover 的默认背景
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  showPopoverBg = true;
+
+  /**
+   * @kind Record<string,any>
+   * @required false
+   * @default {width:200px}
+   * @description popover 内容区域的样式，默认给了 200 的宽度。由于我们的弹出框拥有自定义构件的能力，在第一次点击之前，popover 是不知道所渲染构件的宽高，可能发生错位的问题。可以通过设置宽高来解决问题。注意，根据不同的`placement`需要按需调整宽度/高度。[详见](https://github.com/ant-design/ant-design/issues/3545)
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  popoverContentStyle: Record<string, any>;
 
   /**
    * @kind "always"|"hover"|"never"
@@ -133,40 +178,6 @@ export class PopoverContainerElement extends UpdatingElement {
   zIndex: number;
 
   /**
-   * @required false
-   * @default -
-   * @description 触发方式
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  trigger: ActionType | ActionType[];
-
-  // 整体数据，可以配置整体数据，也可以单独配置数据
-  /**
-   * @kind any
-   * @required false
-   * @default false
-   * @description 整体数据，如果展示构件和弹出框构件数据都来自于同一个 provider，可以直接配置 data，如果来源不一样，可以分别配置 CustomBrick.data
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  data: any;
-
-  /**
-   * @required false
-   * @description 触发行为
-   * @group basic
-   */
-  @property({
-    attribute: false,
-  })
-  triggerByIcon = true;
-
-  /**
    * @kind {useBrick:UseBrickConf;data?:any}
    * @required false
    * @default false
@@ -177,18 +188,6 @@ export class PopoverContainerElement extends UpdatingElement {
     type: Boolean,
   })
   visible: boolean;
-
-  /**
-   * @kind boolean
-   * @required false
-   * @default true
-   * @description 是否显示 popover 的默认背景
-   * @group ui
-   */
-  @property({
-    attribute: false,
-  })
-  showPopoverBg = true;
 
   /**
    * @kind boolean
