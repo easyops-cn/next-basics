@@ -717,7 +717,7 @@ export const BrickTableStory: Story = {
     {
       snippetId: "presentational-bricks.brick-table[draggable-sort]",
       title: {
-        zh: "展开和排序",
+        zh: "拖动排序",
         en: "",
       },
       thumbnail: brickTableDraggableSortSvg,
@@ -1330,13 +1330,13 @@ export const BrickTableStory: Story = {
       ],
     },
     {
-      snippetId: "presentational-bricks.brick-table[expand-and-sort]",
+      snippetId: "presentational-bricks.brick-table[processor]",
       title: {
-        zh: "使用 flattenTreeDataListAndCalcRowSpan custom processor 平铺树形结构列表，并计算行合并",
+        zh: "使用processor",
         en: "",
       },
       message: {
-        zh: "以上示例使用了 `PROCESSORS` 加工函数，具体可查看 [Custom Processors](/next-docs/docs/brick-next/custom-processors)",
+        zh: "使用 flattenTreeDataListAndCalcRowSpan custom processor 平铺树形结构列表，并计算行合并, 使用的 `PROCESSORS` 加工函数，具体可查看 [Custom Processors](/next-docs/docs/brick-next/custom-processors)",
         en: "",
       },
       bricks: [

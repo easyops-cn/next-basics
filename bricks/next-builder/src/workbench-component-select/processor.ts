@@ -55,13 +55,23 @@ export function getSnippetsOfBrickMap(
         if (!find) {
           brickMap.set(brick, new Map([[SnippetType.Scene, [item]]]));
         } else {
-          const sceneSnippets = find.get(SnippetType.Scene);
+          const sceneSnippets = find.get(
+            SnippetType.Scene
+          ) as Array<BrickOptionItem>;
 
-          sceneSnippets
-            ? hasThumbnail
-              ? sceneSnippets.unshift(item)
-              : sceneSnippets.push(item)
-            : find.set(SnippetType.Scene, [item]);
+          if (sceneSnippets) {
+            if (hasThumbnail) {
+              const lastNoThumbnailIndex =
+                sceneSnippets.findIndex((item) => !item.thumbnail) !== -1
+                  ? sceneSnippets.findIndex((item) => !item.thumbnail)
+                  : sceneSnippets.length;
+              sceneSnippets.splice(lastNoThumbnailIndex, 0, item);
+            } else {
+              sceneSnippets.push(item);
+            }
+          } else {
+            find.set(SnippetType.Scene, [item]);
+          }
         }
       });
     } else if (item.bricks) {
@@ -70,12 +80,23 @@ export function getSnippetsOfBrickMap(
       if (!find) {
         brickMap.set(brick, new Map([[SnippetType.SelfBrick, [item]]]));
       } else {
-        const selfSnippets = find.get(SnippetType.SelfBrick);
-        selfSnippets
-          ? hasThumbnail
-            ? selfSnippets.unshift(item)
-            : selfSnippets.push(item)
-          : find.set(SnippetType.SelfBrick, [item]);
+        const selfSnippets = find.get(
+          SnippetType.SelfBrick
+        ) as Array<BrickOptionItem>;
+
+        if (selfSnippets) {
+          if (hasThumbnail) {
+            const lastNoThumbnailIndex =
+              selfSnippets.findIndex((item) => !item.thumbnail) !== -1
+                ? selfSnippets.findIndex((item) => !item.thumbnail)
+                : selfSnippets.length;
+            selfSnippets.splice(lastNoThumbnailIndex, 0, item);
+          } else {
+            selfSnippets.push(item);
+          }
+        } else {
+          find.set(SnippetType.SelfBrick, [item]);
+        }
       }
     }
   });
