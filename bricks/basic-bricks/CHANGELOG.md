@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.223.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.223.1...@next-bricks/basic-bricks@1.223.2) (2022-12-01)
+
+
+### Bug Fixes
+
+* **popup:** add wrapper style ([939f6ac](https://github.com/easyops-cn/next-basics/commit/939f6acb394fdbde25df500a5f7515d0f4362b76))
+
+
+
+
+
 ## [1.223.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.223.0...@next-bricks/basic-bricks@1.223.1) (2022-11-29)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
