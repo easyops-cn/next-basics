@@ -1,4 +1,5 @@
 import * as kit from "@next-core/brick-kit";
+import { RuntimeApi_searchMicroAppStandalone } from "@next-sdk/micro-app-standalone-sdk";
 import "./";
 
 jest.spyOn(kit, "getRuntime").mockReturnValue({
@@ -16,6 +17,12 @@ const spyOnReplace = jest.fn();
 jest.spyOn(kit, "getHistory").mockReturnValue({
   replace: spyOnReplace,
 } as any);
+
+jest.mock("@next-sdk/micro-app-standalone-sdk");
+const mockSearchMicroAppStandalone =
+  RuntimeApi_searchMicroAppStandalone as jest.MockedFunction<
+    typeof RuntimeApi_searchMicroAppStandalone
+  >;
 
 const location = window.location;
 
@@ -88,13 +95,34 @@ describe("basic-bricks.home-redirect", () => {
       reload: jest.fn(),
       assign: jest.fn(),
     } as unknown as Location;
+    mockSearchMicroAppStandalone.mockResolvedValueOnce({
+      list: [
+        {
+          appId: "search",
+          currentVersion: "1.0.1",
+          installStatus: "ok",
+          homepage: "/search",
+        },
+      ],
+      total: 1,
+    });
     element.appId = "search";
     await jest.runAllTimers();
-    expect(window.location.replace).toBeCalledWith("search");
+    expect(mockSearchMicroAppStandalone).toBeCalledWith({
+      query: { appId: "search", installStatus: { $ne: "running" } },
+      fields: ["appId", "homepage", "installStatus"],
+    });
+    expect(spyOnReplace).not.toBeCalled();
   });
 
   it("should do nothing if no specific redirectUrl and app has no homepage, standalone mode", async () => {
     window.STANDALONE_MICRO_APPS = true;
+    mockSearchMicroAppStandalone.mockResolvedValueOnce({
+      list: [
+        { appId: "no-homepage", currentVersion: "1.0.1", installStatus: "ok" },
+      ],
+      total: 1,
+    });
     element.appId = "no-homepage";
     await jest.runAllTimers();
     expect(spyOnReplace).not.toBeCalled();
@@ -102,6 +130,10 @@ describe("basic-bricks.home-redirect", () => {
 
   it("should do nothing if no specific redirectUrl and app not found, standalone mode", async () => {
     window.STANDALONE_MICRO_APPS = true;
+    mockSearchMicroAppStandalone.mockResolvedValueOnce({
+      list: [],
+      total: 0,
+    });
     element.appId = "not-found";
     await jest.runAllTimers();
     expect(spyOnReplace).not.toBeCalled();
