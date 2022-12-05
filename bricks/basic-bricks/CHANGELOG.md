@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.224.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.224.0...@next-bricks/basic-bricks@1.224.1) (2022-12-05)
+
+
+### Bug Fixes
+
+* 修复standalone模式下, 兼容之前的defaultApp的配置 ([9e9c57e](https://github.com/easyops-cn/next-basics/commit/9e9c57eff243dd872a91d54ba3d0a9611e488d8e))
+
+
+
+
+
 # [1.224.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.223.2...@next-bricks/basic-bricks@1.224.0) (2022-12-01)
 
 
