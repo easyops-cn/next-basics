@@ -85,7 +85,14 @@ jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
       instanceId: "y-1",
       type: "brick",
       brick: "easy-view",
-      properties: '{"gridTemplateAreas":[["left","right"]]}',
+      properties:
+        '{"gridTemplateAreas":[["left","right"]],"useChildren":"[content]"}',
+    },
+    {
+      instanceId: "y-1-1",
+      type: "brick",
+      brick: "div",
+      mountPoint: "[content]",
     },
   ],
   edges: [
@@ -107,6 +114,11 @@ jest.spyOn(window.customElements, "define").mockImplementation(() => void 0);
     {
       in: "y-1",
       out: "y",
+      out_name: "children",
+    },
+    {
+      in: "y-1-1",
+      out: "y-1",
       out_name: "children",
     },
   ],
@@ -389,6 +401,18 @@ describe("GetBrickLibrary", () => {
                     "right",
                   ],
                 ],
+                "useChildren": "[content]",
+              },
+              "slots": Object {
+                "[content]": Object {
+                  "bricks": Array [
+                    Object {
+                      "brick": "div",
+                      "iid": "y-1-1",
+                    },
+                  ],
+                  "type": "bricks",
+                },
               },
             },
           ],

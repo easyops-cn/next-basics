@@ -176,12 +176,17 @@ function buildRoute(node: BuilderRouteNode, ctx: BuildContext = {}): RouteConf {
  */
 export function buildBricks(
   nodes: BuilderBrickNode[],
-  ctx?: BuildContext
+  ctx?: BuildContext,
+  isSnippet = false
 ): BrickConf[] {
-  return nodes ? nodes.map((node) => buildBrick(node, ctx)) : [];
+  return nodes ? nodes.map((node) => buildBrick(node, ctx, isSnippet)) : [];
 }
 
-function buildBrick(node: BuilderBrickNode, ctx?: BuildContext): BrickConf {
+function buildBrick(
+  node: BuilderBrickNode,
+  ctx?: BuildContext,
+  isSnippet = false
+): BrickConf {
   const brickConf = brickNodeToBrickConf(node, ctx);
   if (node.type === "brick") {
     if (node.children?.length > 0) {
@@ -189,7 +194,7 @@ function buildBrick(node: BuilderBrickNode, ctx?: BuildContext): BrickConf {
       const useChildrenMap = new Map<string, BrickConf[]>();
       for (const child of node.children) {
         const mountPoint = child.mountPoint ?? "";
-        if (/^\[\w+\]$/.test(mountPoint)) {
+        if (/^\[\w+\]$/.test(mountPoint) && !isSnippet) {
           let bricks = useChildrenMap.get(mountPoint);
           if (!bricks) {
             useChildrenMap.set(mountPoint, (bricks = []));

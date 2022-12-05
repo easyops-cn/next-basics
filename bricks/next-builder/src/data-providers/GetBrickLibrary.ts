@@ -205,7 +205,7 @@ export async function GetBrickLibrary(
           category: item.category,
           description: i18nText(item.description),
           thumbnail: item.thumbnail,
-          bricks: buildBricks(item.children),
+          bricks: buildBricks(item.children, {}, true),
           layerType: item.layerType,
           nodeId: item.id,
           $searchTextPool: (item.text
