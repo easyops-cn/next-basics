@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.215.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.6...@next-bricks/next-builder@1.215.7) (2022-12-05)
+
+
+### Bug Fixes
+
+* use snippet transform useChildren ([cb525d3](https://github.com/easyops-cn/next-basics/commit/cb525d31ac0721c310aab3597ca0d19bdaec9ea4))
+
+
+
+
+
 ## [1.215.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.5...@next-bricks/next-builder@1.215.6) (2022-12-01)
 
 
