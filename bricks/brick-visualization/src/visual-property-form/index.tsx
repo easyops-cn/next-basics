@@ -104,6 +104,16 @@ export class VisualPropertyFormElement extends UpdatingElement {
   sharedPropertyList: PropertyType[];
 
   /**
+   * @required -
+   * @default -
+   * @description 子组件mountPoint列表
+   */
+  @property({
+    attribute: false,
+  })
+  childMountPointList: string[];
+
+  /**
    * @description 菜单设置点击事件
    */
   @event({ type: "menu.setting.click" })
@@ -192,6 +202,7 @@ export class VisualPropertyFormElement extends UpdatingElement {
             hiddenPropsCategory={this.hiddenPropsCategory}
             brickProperties={this.brickProperties}
             brickInfo={this.brickInfo}
+            childMountPointList={this.childMountPointList}
             emptyConfig={this.emptyConfig}
             menuSettingClick={this._handleMenuSettingClick}
             onValuesChange={this._handleValuesChange}

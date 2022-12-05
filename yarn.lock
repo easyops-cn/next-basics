@@ -2767,6 +2767,18 @@
     classnames "^2.3.2"
     file-saver "^2.0.5"
 
+"@next-libs/code-editor-components@^4.8.0":
+  version "4.8.0"
+  resolved "https://registry.npmjs.org/@next-libs/code-editor-components/-/code-editor-components-4.8.0.tgz#f3cae8ac41e86a3a11958b4ba610881e1468d0e5"
+  integrity sha512-7OKsvPbiB6SK+X24jKzCTIVAUdkUs+LsBBKJN+uoQBSvCLaFr2Vk4xr8EG9Vj6JI/VvUXMp9WpF/Elk/7SX3yQ==
+  dependencies:
+    "@next-libs/basic-components" "^5.2.0"
+    "@next-libs/clipboard" "^3.0.4"
+    "@next-libs/forms" "^3.3.6"
+    ajv "^6.12.6"
+    classnames "^2.3.2"
+    file-saver "^2.0.5"
+
 "@next-libs/crontab@^2.0.5":
   version "2.0.5"
   resolved "https://registry.npmjs.org/@next-libs/crontab/-/crontab-2.0.5.tgz#5f880b54d13fe63503369605642e2698f9eedc54"
@@ -2826,6 +2838,17 @@
   dependencies:
     "@next-libs/basic-components" "^5.2.0"
     "@next-libs/code-editor-components" "^4.7.8"
+    "@next-libs/forms" "^3.3.6"
+    "@types/react-color" "^3.0.6"
+    react-color "^2.19.3"
+
+"@next-libs/visual-builder@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.3.0.tgz#22bb5315e8419f7ece04f09f12d5138d21654c05"
+  integrity sha512-lMthusAP2ioz1FMlweQeFSGsFXySVY0FCKimArgJ8UeufeU76dy4cVyARuLa58iaZ+4gK4QVMNcIoiTlK0Z7Iw==
+  dependencies:
+    "@next-libs/basic-components" "^5.2.0"
+    "@next-libs/code-editor-components" "^4.8.0"
     "@next-libs/forms" "^3.3.6"
     "@types/react-color" "^3.0.6"
     react-color "^2.19.3"
