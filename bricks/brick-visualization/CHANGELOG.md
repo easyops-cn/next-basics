@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.13.14...@next-bricks/brick-visualization@1.14.0) (2022-12-05)
+
+
+### Features
+
+* update package.json ([6cf4486](https://github.com/easyops-cn/next-basics/commit/6cf4486c5eab68073f810e1aaaee9cdf799e050a))
+* **visualPropertyForm:** add childMountPointList ([0c42463](https://github.com/easyops-cn/next-basics/commit/0c42463076a6526846c47015a1b696b8293de07e))
+
+
+
+
+
 ## [1.13.14](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.13.13...@next-bricks/brick-visualization@1.13.14) (2022-11-29)
 
 **Note:** Version bump only for package @next-bricks/brick-visualization
