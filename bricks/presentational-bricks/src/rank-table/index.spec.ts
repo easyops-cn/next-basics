@@ -30,6 +30,7 @@ const props: any = {
       title: "Address",
       dataIndex: "address",
       key: "address",
+      sorter: true,
     },
     {
       title: "Operate",
