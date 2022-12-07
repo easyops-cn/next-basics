@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.225.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.224.1...@next-bricks/basic-bricks@1.225.0) (2022-12-07)
+
+
+### Features
+
+* **layout:** 添加sub-menu作为三级菜单时的样式 ([2e1d110](https://github.com/easyops-cn/next-basics/commit/2e1d110749e4d7cef38d6419a2d688ccc249573c))
+
+
+
+
+
 ## [1.224.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.224.0...@next-bricks/basic-bricks@1.224.1) (2022-12-05)
 
 
