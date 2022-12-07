@@ -36,6 +36,15 @@ export class SubMenuElement extends UpdatingElement {
     attribute: false,
   })
   topOperationConf: { useBrick: UseBrickConf };
+  /**
+   * @default
+   * @required false
+   * @description 是否作为页面三级菜单出现，如果为true，菜单高度为100%
+   */
+  @property({
+    type: Boolean,
+  })
+  isThirdLevel: boolean;
 
   connectedCallback(): void {
     // istanbul ignore else
@@ -56,6 +65,7 @@ export class SubMenuElement extends UpdatingElement {
           <SubMenu
             dataSource={this.dataSource}
             topOperationConf={this.topOperationConf}
+            isThirdLevel={this.isThirdLevel}
           />
         </BrickWrapper>,
         this

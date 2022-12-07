@@ -44,7 +44,6 @@
       margin: 0;
       border-radius: 6px;
       width: 100%;
-
       &:after {
         content: none;
       }
@@ -64,6 +63,13 @@
 
     :global(.ant-menu-submenu-title) {
       margin: 0;
+    }
+  }
+  &.isThirdLevel {
+    border-radius: 0;
+    height: 100%;
+    .header {
+      font-size: 16px;
     }
   }
 }
