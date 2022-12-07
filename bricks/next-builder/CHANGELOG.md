@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.216.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.7...@next-bricks/next-builder@1.216.0) (2022-12-07)
+
+
+### Features
+
+* **workbenchsideBar:** add titleToolbar ([023b128](https://github.com/easyops-cn/next-basics/commit/023b128a3c6b839dd384cff30741da86f3f91ff8))
+
+
+
+
+
 ## [1.215.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.215.6...@next-bricks/next-builder@1.215.7) (2022-12-05)
 
 
