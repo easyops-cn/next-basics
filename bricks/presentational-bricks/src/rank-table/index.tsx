@@ -4,16 +4,14 @@ import {
   BrickWrapper,
   event,
   EventEmitter,
-  getHistory,
-  method,
   property,
   UpdatingElement,
 } from "@next-core/brick-kit";
 import { RankTable } from "./RankTable";
 import { ColumnProps, TablePaginationConfig, TableProps } from "antd/lib/table";
-import { cloneDeep, find, forEach, get, isEmpty, isNil, map } from "lodash";
+import { cloneDeep, get, isNil, map } from "lodash";
 import { UseBrickConf } from "@next-core/brick-types";
-import { SorterResult } from "antd/lib/table/interface";
+import { SorterResult, SortOrder } from "antd/lib/table/interface";
 
 export interface CustomColumn extends ColumnProps<Record<string, any>> {
   /**
@@ -291,7 +289,7 @@ export class RankTableElement extends UpdatingElement {
   sort: string;
 
   /**
-   * @kind string | number
+   * @kind  descend' | 'ascend' | null
    * @required false
    * @default -
    * @description 升序/降序，可以设置成 ${QUERY.order}。
@@ -299,7 +297,7 @@ export class RankTableElement extends UpdatingElement {
   @property({
     attribute: false,
   })
-  order: string | number;
+  order: SortOrder;
 
   private _handleOnChange = (
     pagination: TablePaginationConfig,
@@ -343,6 +341,26 @@ export class RankTableElement extends UpdatingElement {
           (column.dataIndex as string) ?? column.key
         );
       });
+    }
+    // 初始化列排序
+    if (columns?.length) {
+      if (this.sortable) {
+        columns = columns.map((item) => {
+          if (isNil(item.key)) {
+            item.key = item.dataIndex as string;
+          }
+          if (item.sorter) {
+            item.sortOrder =
+              this.sort === item.key && !isNil(this.order) ? this.order : null;
+          }
+          return item;
+        });
+      } else {
+        columns = map(columns, (item) => {
+          item.sorter = false;
+          return item;
+        });
+      }
     }
     return columns;
   }
