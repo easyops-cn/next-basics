@@ -125,7 +125,11 @@ export class TimeRangePickerElement extends FormItemElement {
     callback: (err?: any) => void
   ): void => {
     try {
-      if (value.startTime === value.endTime) {
+      if (
+        value.startTime &&
+        value.endTime &&
+        value.startTime === value.endTime
+      ) {
         throw new Error(rule.message);
       }
       callback();

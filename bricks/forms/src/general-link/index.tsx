@@ -59,6 +59,16 @@ export class GeneralLinkElement extends FormItemElement {
    * @kind string
    * @required false
    * @default -
+   * @description 链接文字颜色
+   * @group basicFormItem
+   */
+  @property()
+  textColor: string;
+
+  /**
+   * @kind string
+   * @required false
+   * @default -
    * @description 链接的 URL
    * @group basic
    */
@@ -221,6 +231,7 @@ export class GeneralLinkElement extends FormItemElement {
             text={this.text}
             label={this.label}
             labelColor={this.labelColor}
+            textColor={this.textColor}
             labelBold={this.labelBold}
             url={this.url}
             target={this.target}
