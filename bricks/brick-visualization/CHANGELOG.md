@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.14.0...@next-bricks/brick-visualization@1.14.1) (2022-12-08)
+
+
+### Bug Fixes
+
+* fix generalPopup and componentSelect bug ([e12a425](https://github.com/easyops-cn/next-basics/commit/e12a42536774c2a547e72582ac34ff94458802c2))
+
+
+
+
+
 # [1.14.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/brick-visualization@1.13.14...@next-bricks/brick-visualization@1.14.0) (2022-12-05)
 
 
