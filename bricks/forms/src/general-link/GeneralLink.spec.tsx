@@ -77,7 +77,7 @@ describe("GeneralLink", () => {
         }}
         target="_blank"
         underLine={true}
-        labelColor={"red"}
+        textColor={"red"}
       />
     );
     expect(wrapper.find("Link").childAt(1).props().icon).toEqual({
