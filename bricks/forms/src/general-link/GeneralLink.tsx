@@ -25,6 +25,7 @@ export interface GeneralLinkProps
   hideExternalIcon?: boolean;
   underLine?: boolean;
   labelColor?: string;
+  textColor?: string;
 }
 
 export function GeneralLink(props: GeneralLinkProps): React.ReactElement {
@@ -57,8 +58,8 @@ export function GeneralLink(props: GeneralLinkProps): React.ReactElement {
     <span
       className={props.underLine ? cssStyle.underLine : null}
       style={{
-        borderBottomColor: props.labelColor,
-        ...(props.labelColor ? { color: props.labelColor } : {}),
+        borderBottomColor: props.textColor,
+        ...(props.textColor ? { color: props.textColor } : {}),
       }}
     >
       {text}
