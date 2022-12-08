@@ -22,7 +22,7 @@
   font-weight: var(--font-weight-500);
 }
 
-.close {
+.general-popup-close-btn {
   cursor: pointer;
   color: var(--antd-text-color-secondary);
   &:hover {

@@ -206,3 +206,9 @@
     background: #3f75dd;
   }
 }
+
+.noDataTips {
+  text-align: center;
+  padding: 20px;
+  color: gray;
+}
