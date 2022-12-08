@@ -22,10 +22,21 @@ export const suggest: suggestType = {
   formItem: [],
 };
 
+export const componetSortConf: Record<string, number> = {
+  brick: 1,
+  widget: 2,
+  snippet: 3,
+  layout: 4,
+  customTemplate: 5,
+  customSnippet: 6,
+  formItem: 7,
+};
+
 export const i18nTransform: Record<string, string> = {
   brick: i18next.t(`${NS_NEXT_BUILDER}:${K.BRICK}`),
   layout: i18next.t(`${NS_NEXT_BUILDER}:${K.LAYOUT}`),
   customTemplate: i18next.t(`${NS_NEXT_BUILDER}:${K.CUSTOMTEMPLATE}`),
+  customSnippet: i18next.t(`${NS_NEXT_BUILDER}:${K.CUSTOMSNIPPET}`),
   widget: i18next.t(`${NS_NEXT_BUILDER}:${K.WIDGET}`),
   snippet: i18next.t(`${NS_NEXT_BUILDER}:${K.SNIPPET}`),
   formItem: i18next.t(`${NS_NEXT_BUILDER}:${K.FORMITEM}`),

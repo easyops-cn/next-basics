@@ -88,16 +88,12 @@ export function GeneralPopup({
   );
 
   const handleMouseDown = (e: MouseEvent): void => {
-    e.stopPropagation();
     const paths = e.composedPath() as HTMLElement[];
     for (const path of paths) {
       if (path.nodeName) {
-        if (path.nodeName.toLowerCase() === "#document-fragment") {
-          break;
-        }
         if (
           path.nodeName.toLowerCase() === "span" &&
-          path.className.includes("anticon anticon-close")
+          path.className.includes("general-popup-close-btn")
         ) {
           closePopup?.();
           return;
@@ -116,25 +112,28 @@ export function GeneralPopup({
     }
   };
 
-  const handleMouseMove = (e: MouseEvent): void => {
-    if (isMove) {
-      const { width, height } = popupRef.current.getBoundingClientRect();
-      const { innerWidth, innerHeight } = window;
-      const maxX = innerWidth - width;
-      const maxY = innerHeight - height;
-      const pointX = e.clientX - curPointRef.current.offsetX;
-      const pointY = e.clientY - curPointRef.current.offsetY;
-      debouncedSetPoint([
-        pointX <= 0 ? 0 : pointX >= maxX ? maxX : pointX,
-        pointY <= 0 ? 0 : pointY >= maxY ? maxY : pointY,
-      ]);
-    }
-  };
+  const handleMouseMove = useCallback(
+    (e: MouseEvent): void => {
+      if (isMove) {
+        const { width, height } = popupRef.current.getBoundingClientRect();
+        const { innerWidth, innerHeight } = window;
+        const maxX = innerWidth - width;
+        const maxY = innerHeight - height;
+        const pointX = e.clientX - curPointRef.current.offsetX;
+        const pointY = e.clientY - curPointRef.current.offsetY;
+        debouncedSetPoint([
+          pointX <= 0 ? 0 : pointX >= maxX ? maxX : pointX,
+          pointY <= 0 ? 0 : pointY >= maxY ? maxY : pointY,
+        ]);
+      }
+    },
+    [debouncedSetPoint, isMove]
+  );
 
-  const handleMouseUp = (): void => {
+  const handleMouseUp = useCallback((): void => {
     setIsMove(false);
     popupId && storage.setItem(popupId, [position[0], position[1]]);
-  };
+  }, [popupId, position, storage]);
 
   const initPos = useCallback(() => {
     let initPostion: Array<number> = [];
@@ -162,7 +161,7 @@ export function GeneralPopup({
       return popupId ? storage.getItem(popupId) ?? initPostion : initPostion;
     }
     return initPostion;
-  }, [popupId, storage, headerHeight, popupRef?.current?.offsetHeight]);
+  }, [visible, openDirection, popupId, storage]);
 
   useEffect(() => {
     const popupElement = popupRef.current;
@@ -191,7 +190,7 @@ export function GeneralPopup({
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isMove]);
+  }, [isMove, handleMouseUp, handleMouseMove]);
 
   return (
     visible && (
@@ -209,7 +208,7 @@ export function GeneralPopup({
           style={dragHeaderStyle}
         >
           <span className="title">{popupTitle}</span>
-          <span className="close">
+          <span className="general-popup-close-btn">
             <GeneralIcon
               icon={{
                 icon: "close",

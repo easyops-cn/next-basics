@@ -2842,10 +2842,10 @@
     "@types/react-color" "^3.0.6"
     react-color "^2.19.3"
 
-"@next-libs/visual-builder@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.3.0.tgz#22bb5315e8419f7ece04f09f12d5138d21654c05"
-  integrity sha512-lMthusAP2ioz1FMlweQeFSGsFXySVY0FCKimArgJ8UeufeU76dy4cVyARuLa58iaZ+4gK4QVMNcIoiTlK0Z7Iw==
+"@next-libs/visual-builder@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.npmjs.org/@next-libs/visual-builder/-/visual-builder-1.3.1.tgz#aeb5007a73e046545e3c111dc5998edd369e4648"
+  integrity sha512-0lq16OltH51r41PHlXxZVu+QLHwxNDuzz3Rer+Y7JHV9QPC4Ks5kT2jBG5bxxkwg95eDIlOg4ew5mqwJR9Rn+Q==
   dependencies:
     "@next-libs/basic-components" "^5.2.0"
     "@next-libs/code-editor-components" "^4.8.0"

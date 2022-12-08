@@ -149,6 +149,7 @@ const locale: Locale = {
   [K.SNIPPET]: "Snippet",
   [K.TEMPLATE]: "Template",
   [K.CUSTOMTEMPLATE]: "Custom template",
+  [K.CUSTOMSNIPPET]: "Custom snippet",
   [K.LAYOUT]: "Layout",
   [K.FORMITEM]: "FORMITEM",
   [K.DOCUMENT]: "Document",

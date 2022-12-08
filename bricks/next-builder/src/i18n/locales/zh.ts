@@ -143,6 +143,7 @@ const locale: Locale = {
   [K.SNIPPET]: "片段",
   [K.TEMPLATE]: "业务模板",
   [K.CUSTOMTEMPLATE]: "自定义模板",
+  [K.CUSTOMSNIPPET]: "自定义片段",
   [K.LAYOUT]: "布局",
   [K.FORMITEM]: "表单项",
   [K.DOCUMENT]: "文档",

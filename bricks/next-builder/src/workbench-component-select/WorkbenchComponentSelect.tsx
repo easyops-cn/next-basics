@@ -20,6 +20,7 @@ import {
   ComponentSelectContext,
   defaultBlankListOfBricks,
   SnippetType,
+  componetSortConf,
 } from "./constants";
 import { i18nText, getRuntime } from "@next-core/brick-kit";
 import { Story } from "@next-core/brick-types";
@@ -106,7 +107,7 @@ export function ComponentSelect(
   }: ComponentSelectProps,
   ref: React.Ref<ComponentSelectRef>
 ): React.ReactElement {
-  const [filterValue, setFilterValue] = useState<Record<string, string>>({});
+  const [filterValue, setFilterValue] = useState<string>("");
   const [curComponentType, setCurComponentType] = useState<string>("");
   const [curComponentList, setCurComponentList] = useState<BrickOptionItem[]>(
     []
@@ -126,17 +127,14 @@ export function ComponentSelect(
   );
 
   const setValue = useRef(
-    debounce((v: string, type: string) => {
-      setFilterValue({
-        ...filterValue,
-        [type]: v,
-      });
+    debounce((v: string) => {
+      setFilterValue(v);
     }, 300)
   ).current;
 
   const handleFilterChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>, type: string): void => {
-      setValue(e.target.value, type);
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setValue(e.target.value);
     },
     [setValue]
   );
@@ -154,9 +152,11 @@ export function ComponentSelect(
       );
       filterBricks.forEach((item) => {
         if (item.layerType !== undefined && item.layerType !== "brick") {
-          obj[item.layerType]
-            ? obj[item.layerType].push(item)
-            : (obj[item.layerType] = [item]);
+          const key =
+            item.layerType === null && item.type === "snippet"
+              ? "customSnippet"
+              : item.layerType;
+          obj[key] ? obj[key].push(item) : (obj[key] = [item]);
         }
         // don't show legacy template
         else if (item.type !== "template") {
@@ -236,8 +236,8 @@ export function ComponentSelect(
           {curComponentType && (
             <div className={styles.searchWrapper}>
               <Input
-                placeholder={`Search for ${curComponentType}`}
-                onChange={(e) => handleFilterChange(e, curComponentType)}
+                placeholder={`Search for component`}
+                onChange={(e) => handleFilterChange(e)}
                 suffix={<SearchOutlined />}
               ></Input>
             </div>
@@ -245,6 +245,7 @@ export function ComponentSelect(
           {componentList && (
             <div className={styles.tabBtnWrapper}>
               {Object.entries(componentList)
+                .sort((a, b) => componetSortConf[a[0]] - componetSortConf[b[0]])
                 // 组件库暂时不展示"片段"这个tab
                 .filter(([k]) => k !== "snippet")
                 .map(([k, v]) => (
@@ -264,7 +265,7 @@ export function ComponentSelect(
             key={curComponentType}
             componentType={curComponentType}
             componentList={curComponentList}
-            q={filterValue[curComponentType]}
+            q={filterValue}
             storyList={storyList}
             isShowSuggest={isShowSuggest}
             onActionClick={onActionClick}
@@ -420,7 +421,10 @@ function ComponentList({
 
   return (
     <div ref={refWrapper}>
-      {group?.length > 0 ? (
+      {group?.every((item) => item.children?.length === 0) &&
+      list.length === 0 ? (
+        <div className={styles.noDataTips}>No Data</div>
+      ) : group?.length > 0 ? (
         <Collapse
           ghost
           activeKey={activePanels}
