@@ -262,19 +262,30 @@ describe("GeneralSelect", () => {
   });
 
   it("should update value", () => {
+    const onOptionDataChange = jest.fn();
     const wrapper = mount(
       <GeneralSelect
         options={formatOptions(["good", "better"])}
         value="good"
         popoverPositionType="parent"
+        onOptionDataChange={onOptionDataChange}
       />
     );
 
     expect(wrapper.find(Select).prop("value")).toBe("good");
+    expect(onOptionDataChange).toHaveBeenLastCalledWith({
+      label: "good",
+      value: "good",
+    });
+
     wrapper.setProps({
       value: "better",
     });
     wrapper.update();
+    expect(onOptionDataChange).toHaveBeenLastCalledWith({
+      label: "better",
+      value: "better",
+    });
     expect(wrapper.find(Select).prop("value")).toBe("better");
   });
 
