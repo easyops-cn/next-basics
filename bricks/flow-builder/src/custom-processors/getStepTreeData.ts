@@ -12,12 +12,6 @@ function getChildren(
 ): StepTreeNodeData[] {
   const treeList: StepTreeNodeData[] = [];
 
-  /* istanbul ignore if */
-  if (!startAt) {
-    // eslint-disable-next-line no-console
-    console.error(`no start node specified in step of ${stepIds.join(",")}`);
-  }
-
   let stageList;
   // switch / parallel 下的 branch 特殊处理
   if (["switch", "parallel"].includes(parentType)) {
@@ -64,6 +58,10 @@ function getChildren(
   return treeList;
 }
 
+function checkRecurringNode(stageList: StepItem[][], step: StepItem): boolean {
+  return stageList?.some((stage) => stage?.some((item) => item.id === step.id));
+}
+
 function getStageList(
   rootStep: StepItem,
   stepMap: Map<string, StepItem>
@@ -95,52 +93,51 @@ export function getStepTreeData(
   const startNode = stepList.find((item) => item.id === rootId);
   if (!startNode) return [];
 
-  const isolatedNodeList: StepTreeNodeData[] = [];
   const stepMap = new Map<string, StepItem>();
+  const topLevelNodes = new Set<StepItem>([startNode]);
   stepList.forEach((item) => {
     /* istanbul ignore if */
-    if (!item.next && !item.pre && !item.parent && item.id !== startNode.id) {
-      isolatedNodeList.push({
+    if (!item.pre && !item.parent) {
+      topLevelNodes.add(item);
+    }
+    stepMap.set(item.id, item);
+  });
+
+  const stageList: StepItem[][] = [];
+  topLevelNodes.forEach((startNode) => {
+    // 检查该节点是否已经存在其他步骤中
+    if (!checkRecurringNode(stageList, startNode)) {
+      stageList.push(getStageList(startNode, stepMap));
+    }
+  });
+
+  const treeList: StepTreeNodeData[] = [];
+
+  stageList.forEach((stage) => {
+    stage.forEach((item) => {
+      const treeData = {
         key: item.id,
         name: item.name,
         id: item.id,
         data: item,
         icon: getIconFn?.(item.type),
         iconTooltip: item.type,
-      });
-    }
-    stepMap.set(item.id, item);
+        ...(!isEmpty(item.children)
+          ? {
+              children: getChildren(
+                item.children,
+                stepMap,
+                item.config?.startAt,
+                item.type,
+                getIconFn
+              ),
+            }
+          : {}),
+      };
+
+      treeList.push(treeData);
+    });
   });
-
-  const stageList = getStageList(startNode, stepMap);
-
-  const treeList: StepTreeNodeData[] = [];
-
-  stageList.forEach((item) => {
-    const treeData = {
-      key: item.id,
-      name: item.name,
-      id: item.id,
-      data: item,
-      icon: getIconFn?.(item.type),
-      iconTooltip: item.type,
-      ...(!isEmpty(item.children)
-        ? {
-            children: getChildren(
-              item.children,
-              stepMap,
-              item.config?.startAt,
-              item.type,
-              getIconFn
-            ),
-          }
-        : {}),
-    };
-
-    treeList.push(treeData);
-  });
-
-  treeList.push(...isolatedNodeList);
 
   return treeList;
 }

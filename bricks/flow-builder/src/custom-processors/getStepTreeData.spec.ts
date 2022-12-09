@@ -301,7 +301,7 @@ describe("getStepTreeData", () => {
           id: "step2",
           name: "step2",
           type: "task",
-          next: "step2",
+          parent: "branch1",
         },
       ],
       getIcon,
@@ -314,7 +314,7 @@ describe("getStepTreeData", () => {
                   data: {
                     id: "step2",
                     name: "step2",
-                    next: "step2",
+                    parent: "branch1",
                     type: "task",
                   },
                   icon: {
