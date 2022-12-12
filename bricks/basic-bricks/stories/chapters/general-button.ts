@@ -5,6 +5,9 @@ import { generalButtonBasicSvg } from "../images";
 import { generalButtonDangerSvg } from "../images";
 import { generalButtonIconSvg } from "../images";
 import { generalButtonLinkSvg } from "../images";
+import { generalButtonDisabledSvg } from "../images";
+import { generalButtonFadedTextSvg } from "../images";
+import { generalButtonTextSvg } from "../images";
 export const generalButtonStory: Story = {
   storyId: "basic-bricks.general-button",
   category: "interact-basic",
@@ -80,6 +83,7 @@ export const generalButtonStory: Story = {
         en: "disabled General Button",
         zh: "禁用按钮",
       },
+      thumbnail: generalButtonDisabledSvg,
     },
     {
       bricks: [
@@ -167,6 +171,7 @@ export const generalButtonStory: Story = {
         en: "Text General Button",
         zh: "文字按钮",
       },
+      thumbnail: generalButtonTextSvg,
     },
     {
       bricks: [
@@ -199,6 +204,7 @@ export const generalButtonStory: Story = {
         en: "Faded Text General Button",
         zh: "淡化文字按钮",
       },
+      thumbnail: generalButtonFadedTextSvg,
     },
     {
       bricks: [

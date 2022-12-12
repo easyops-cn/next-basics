@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-
+import { eventAgentBasicSvg } from "../images";
 export const eventAgentStory: Story = {
   storyId: "basic-bricks.event-agent",
   category: "other",
@@ -42,6 +42,7 @@ export const eventAgentStory: Story = {
         en: "Basic Event Agent",
         zh: "基础时间代理",
       },
+      thumbnail: eventAgentBasicSvg,
       actions: [
         {
           text: "Trigger Event",

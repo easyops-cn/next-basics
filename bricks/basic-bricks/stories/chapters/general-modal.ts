@@ -1,6 +1,9 @@
 import { Story } from "@next-core/brick-types";
 import { generalModalSvg } from "../images";
 import { generalModalBasicSvg } from "../images";
+import { generalModalCustomTitleSvg } from "../images";
+import { generalModalFooterSvg } from "../images";
+import { generalModalFullScreenSvg } from "../images";
 export const generalModalStory: Story = {
   storyId: "basic-bricks.general-modal",
   category: "container-display",
@@ -218,6 +221,7 @@ export const generalModalStory: Story = {
           method: "open",
         },
       ],
+      thumbnail: generalModalFooterSvg,
     },
     {
       bricks: [
@@ -299,6 +303,7 @@ export const generalModalStory: Story = {
           method: "open",
         },
       ],
+      thumbnail: generalModalCustomTitleSvg,
     },
     {
       bricks: [
@@ -375,6 +380,7 @@ export const generalModalStory: Story = {
           method: "open",
         },
       ],
+      thumbnail: generalModalFullScreenSvg,
     },
   ],
 };

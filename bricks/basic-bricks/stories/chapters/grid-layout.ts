@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { gridLayoutSvg } from "../images";
+import { gridLayoutBasicSvg } from "../images";
 export const gridLayoutStory: Story = {
   storyId: "basic-bricks.grid-layout",
   category: "container-layout",
@@ -112,6 +113,7 @@ export const gridLayoutStory: Story = {
         en: "Basic Grid Layout",
         zh: "基础网格布局",
       },
+      thumbnail: gridLayoutBasicSvg,
     },
   ],
 };

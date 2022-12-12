@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { generalAnchorSvg } from "../images";
+import { generalAnchorBasicSvg } from "../images";
+import { generalAnchorRadioSvg } from "../images";
 export const generalAnchorStory: Story = {
   storyId: "basic-bricks.general-anchor",
   category: "interact-basic",
@@ -48,6 +50,7 @@ export const generalAnchorStory: Story = {
         en: "Basic General Anchor",
         zh: "基础锚点",
       },
+      thumbnail: generalAnchorBasicSvg,
     },
     {
       bricks: [
@@ -81,6 +84,7 @@ export const generalAnchorStory: Story = {
         en: "Radio General Anchor",
         zh: "radio样式锚点",
       },
+      thumbnail: generalAnchorRadioSvg,
     },
   ],
   previewColumns: 1,

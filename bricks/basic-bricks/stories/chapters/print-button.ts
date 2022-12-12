@@ -1,6 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { printButtonSvg } from "../images";
-
+import { printButtonBasicSvg } from "../images";
 export const printButtonStory: Story = {
   storyId: "basic-bricks.print-button",
   category: "other",
@@ -37,6 +37,7 @@ export const printButtonStory: Story = {
         en: "Basic Print Button",
         zh: "基础打印按钮",
       },
+      thumbnail: printButtonBasicSvg,
     },
   ],
 };

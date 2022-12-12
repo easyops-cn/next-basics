@@ -1,6 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { subMenuSvg } from "../images";
-
+import { subMenuBasicSvg } from "../images";
 export const subMenuStory: Story = {
   storyId: "basic-bricks.sub-menu",
   category: "navigation",
@@ -149,6 +149,7 @@ export const subMenuStory: Story = {
         en: "Basic Sub Menu",
         zh: "基础二级子菜单",
       },
+      thumbnail: subMenuBasicSvg,
     },
     {
       brick: "basic-bricks.micro-app",

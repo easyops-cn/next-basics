@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { generalHotkeysSvg } from "../images";
+import { generalHotkeysBasicSvg } from "../images";
 export const generalHotkeysStory: Story = {
   storyId: "basic-bricks.general-hotkeys",
   category: "interact-basic",
@@ -54,6 +55,7 @@ export const generalHotkeysStory: Story = {
         en: "Basic General Hotkeys",
         zh: "基础通用快捷键",
       },
+      thumbnail: generalHotkeysBasicSvg,
     },
   ],
 };

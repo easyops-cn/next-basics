@@ -3,6 +3,7 @@ import { foldBrickV2Svg } from "../images";
 import { foldBrickV2BasicSvg } from "../images";
 import { foldBrickV2DividerSvg } from "../images";
 import { foldBrickV2PrimarySvg } from "../images";
+import { foldBrickV2NoIconSvg } from "../images";
 export const foldBrickV2Story: Story = {
   storyId: "basic-bricks.fold-brick-v2",
   category: "container-display",
@@ -120,6 +121,7 @@ export const foldBrickV2Story: Story = {
         en: "Fold Brick V2 without icon",
         zh: "无展开图标的折叠容器",
       },
+      thumbnail: foldBrickV2NoIconSvg,
     },
     {
       bricks: [

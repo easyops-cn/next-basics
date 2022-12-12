@@ -1,7 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { CMDB_HOST_INSTANCE_ID } from "../constants";
 import { scriptBrickSvg } from "../images";
-
+import { scriptBrickBasicSvg } from "../images";
 export const scriptBrickStory: Story = {
   storyId: "basic-bricks.script-brick",
   category: "other",
@@ -43,6 +43,7 @@ export const scriptBrickStory: Story = {
           method: "execute",
         },
       ],
+      thumbnail: scriptBrickBasicSvg,
     },
     {
       brick: "div",

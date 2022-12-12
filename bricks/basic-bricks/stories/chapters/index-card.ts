@@ -1,6 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { indexCardSvg } from "../images";
-
+import { indexCardBasicSvg } from "../images";
 export const indexCardStory: Story = {
   storyId: "basic-bricks.index-card",
   category: "container-layout",
@@ -79,6 +79,7 @@ export const indexCardStory: Story = {
         en: "Basic Index Card",
         zh: "基础页面容器",
       },
+      thumbnail: indexCardBasicSvg,
     },
   ],
 };

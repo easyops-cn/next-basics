@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { generalNotificationSvg } from "../images";
+import { generalNotificationBasicSvg } from "../images";
 export const generalNotificationStory: Story = {
   storyId: "basic-bricks.general-notification",
   category: "feedback-and-tooltip",
@@ -100,6 +101,7 @@ export const generalNotificationStory: Story = {
           method: "open",
         },
       ],
+      thumbnail: generalNotificationBasicSvg,
     },
   ],
   previewColumns: 1,

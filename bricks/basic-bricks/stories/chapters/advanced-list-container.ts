@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { advancedListContainerSvg } from "../images";
+import { advancedListContainerBasicSvg } from "../images";
 const mockProps = {
   showCard: true,
   data: {
@@ -115,6 +116,7 @@ export const advancedListContainerStory: Story = {
         en: "Basic Advanced List Container",
         zh: "基础动态纵向列表容器",
       },
+      thumbnail: advancedListContainerBasicSvg,
     },
   ],
 };

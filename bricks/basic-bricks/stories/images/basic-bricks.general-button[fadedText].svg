@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="55px" viewBox="0 0 105 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>basic-bricks.general-button[fadedText]</title>
+    <defs>
+        <linearGradient x1="1.28821746%" y1="58.4155161%" x2="100%" y2="41.5844839%" id="linearGradient-1">
+            <stop stop-color="#1A7AFF" offset="0%"></stop>
+            <stop stop-color="#6BB3FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="snippet截图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="snippet" transform="translate(-96.000000, -757.000000)">
+            <g id="basic-bricks.general-button[fadedText]" transform="translate(96.000000, 757.000000)">
+                <rect id="矩形备份-22" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="1.通用/1.Buttons按钮/带图标的按钮/亮色/主按钮-默认" transform="translate(13.500000, 11.500000)">
+                    <rect id="fill" fill="url(#linearGradient-1)" x="0" y="0" width="78" height="32" rx="6"></rect>
+                    <g id="编组" transform="translate(14.000000, 5.000000)">
+                        <text id="新建" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#FFFFFF">
+                            <tspan x="20" y="15">新建</tspan>
+                        </text>
+                        <g id="通用图标/plus-circle" transform="translate(0.000000, 4.000000)">
+                            <rect id="矩形" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="14" height="14"></rect>
+                            <path d="M9.515625,6.5625 L7.4375,6.5625 L7.4375,4.484375 C7.4375,4.42421875 7.38828125,4.375 7.328125,4.375 L6.671875,4.375 C6.61171875,4.375 6.5625,4.42421875 6.5625,4.484375 L6.5625,6.5625 L4.484375,6.5625 C4.42421875,6.5625 4.375,6.61171875 4.375,6.671875 L4.375,7.328125 C4.375,7.38828125 4.42421875,7.4375 4.484375,7.4375 L6.5625,7.4375 L6.5625,9.515625 C6.5625,9.57578125 6.61171875,9.625 6.671875,9.625 L7.328125,9.625 C7.38828125,9.625 7.4375,9.57578125 7.4375,9.515625 L7.4375,7.4375 L9.515625,7.4375 C9.57578125,7.4375 9.625,7.38828125 9.625,7.328125 L9.625,6.671875 C9.625,6.61171875 9.57578125,6.5625 9.515625,6.5625 Z" id="路径" fill="#FFFFFF"></path>
+                            <path d="M7,0.875 C3.61757813,0.875 0.875,3.61757813 0.875,7 C0.875,10.3824219 3.61757813,13.125 7,13.125 C10.3824219,13.125 13.125,10.3824219 13.125,7 C13.125,3.61757813 10.3824219,0.875 7,0.875 Z M7,12.0859375 C4.19179688,12.0859375 1.9140625,9.80820312 1.9140625,7 C1.9140625,4.19179688 4.19179688,1.9140625 7,1.9140625 C9.80820312,1.9140625 12.0859375,4.19179688 12.0859375,7 C12.0859375,9.80820312 9.80820312,12.0859375 7,12.0859375 Z" id="形状" fill="#FFFFFF"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
