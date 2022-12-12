@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { inputWithUnit } from "../images";
+import { inputWithUnit, inputWithUnitBasicSvg } from "../images";
 export const inputWithUnitStory: Story = {
   storyId: "forms.input-with-unit",
   category: "form-input-basic",
@@ -44,6 +44,7 @@ export const inputWithUnitStory: Story = {
         en: "Basic Input with Unit",
         zh: "基础带单位选择输入框",
       },
+      thumbnail: inputWithUnitBasicSvg,
     },
     {
       brick: "forms.general-form",

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalCascader } from "../images";
+import { generalCascader, generalCascaderBasicSvg } from "../images";
 export const generalCascaderStory: Story = {
   storyId: "forms.general-cascader",
   category: "form-input-basic",
@@ -75,6 +75,7 @@ export const generalCascaderStory: Story = {
         en: "Basic General Cascader",
         zh: "基础级联选择器",
       },
+      thumbnail: generalCascaderBasicSvg,
     },
     {
       description: {

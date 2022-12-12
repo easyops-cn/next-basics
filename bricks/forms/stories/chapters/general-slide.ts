@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { generalSlide } from "../images";
+import {
+  generalSlide,
+  generalSlideBasicSvg,
+  generalSlideRangeSvg,
+} from "../images";
 export const generalSlideStory: Story = {
   storyId: "forms.general-slide",
   category: "form-input-basic",
@@ -39,6 +43,7 @@ export const generalSlideStory: Story = {
         en: "Basic General Slide",
         zh: "基础滑动输入条",
       },
+      thumbnail: generalSlideBasicSvg,
     },
     {
       bricks: [
@@ -63,6 +68,7 @@ export const generalSlideStory: Story = {
         en: "Range General Slide",
         zh: "范围滑动输入条",
       },
+      thumbnail: generalSlideRangeSvg,
     },
     {
       brick: "div",

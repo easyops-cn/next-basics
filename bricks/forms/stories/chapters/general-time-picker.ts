@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalTimePickerSvg } from "../images";
+import { generalTimePickerBasicSvg, generalTimePickerSvg } from "../images";
 export const generalTimePickerStory: Story = {
   storyId: "forms.general-time-picker",
   type: "brick",
@@ -47,6 +47,7 @@ export const generalTimePickerStory: Story = {
         en: "Basic General Time Picker",
         zh: "基础时间选择器",
       },
+      thumbnail: generalTimePickerBasicSvg,
     },
     {
       brick: "forms.general-form",

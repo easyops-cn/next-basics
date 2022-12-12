@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { generalSelectSvg } from "../images";
+import {
+  generalSelectBasicSvg,
+  generalSelectMultiSvg,
+  generalSelectSvg,
+} from "../images";
 export const generalSelecttStory: Story = {
   storyId: "forms.general-select",
   category: "form-input-basic",
@@ -60,6 +64,7 @@ export const generalSelecttStory: Story = {
         en: "Basic General Select",
         zh: "基础下拉选择器",
       },
+      thumbnail: generalSelectBasicSvg,
     },
     {
       bricks: [
@@ -107,6 +112,7 @@ export const generalSelecttStory: Story = {
         en: "Multi General Select",
         zh: "多选下拉选择器",
       },
+      thumbnail: generalSelectMultiSvg,
     },
     {
       brick: "forms.general-select",

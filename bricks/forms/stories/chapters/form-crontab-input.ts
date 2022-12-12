@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { crontabInput } from "../images";
+import { crontabInput, crontabInputBasicSvg } from "../images";
 export const crontabInputStory: Story = {
   storyId: "forms.crontab-input",
   category: "form-input-business",
@@ -38,6 +38,7 @@ export const crontabInputStory: Story = {
         en: "Basic Crontab Input",
         zh: "基础定时器任务输入",
       },
+      thumbnail: crontabInputBasicSvg,
     },
     {
       brick: "forms.general-form",

@@ -1,6 +1,9 @@
 import { Story } from "@next-core/brick-types";
 import { CMDB_APP_INSTANCE_ID } from "../constants";
-import { cmdbInstanceSelectPancel } from "../images";
+import {
+  cmdbInstanceSelectPancel,
+  cmdbInstanceSelectPanelBasicSvg,
+} from "../images";
 
 export const cmdbInstanceSelectPanelStory: Story = {
   storyId: "forms.cmdb-instance-select-panel",
@@ -70,6 +73,7 @@ export const cmdbInstanceSelectPanelStory: Story = {
         en: "Basic CMDB Instance Select Panel",
         zh: "基础CMDB实例选择",
       },
+      thumbnail: cmdbInstanceSelectPanelBasicSvg,
     },
     {
       brick: "forms.general-form",

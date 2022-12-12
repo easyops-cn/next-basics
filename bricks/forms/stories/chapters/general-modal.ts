@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalModalSvg } from "../images";
+import { generalModalBasicSvg, generalModalSvg } from "../images";
 export const GeneralModalStory: Story = {
   storyId: "forms.general-modal",
   category: "form-input-advanced",
@@ -85,6 +85,7 @@ export const GeneralModalStory: Story = {
         en: "Basic General Modal",
         zh: "基础表单通用模态框",
       },
+      thumbnail: generalModalBasicSvg,
       actions: [
         {
           text: "Open Modal",

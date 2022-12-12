@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalTextareaSvg } from "../images";
+import { generalTextareaBasicSvg, generalTextareaSvg } from "../images";
 export const generalTextareaStory: Story = {
   storyId: "forms.general-textarea",
   category: "form-input-basic",
@@ -53,6 +53,7 @@ export const generalTextareaStory: Story = {
         en: "Basic General TextArea",
         zh: "基础多行文本输入框",
       },
+      thumbnail: generalTextareaBasicSvg,
     },
     {
       brick: "forms.general-form",

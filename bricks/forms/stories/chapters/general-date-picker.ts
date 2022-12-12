@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalDatePickerSvg } from "../images";
+import { generalDatePickerBasicSvg, generalDatePickerSvg } from "../images";
 export const datePickerStory: Story = {
   storyId: "forms.general-date-picker",
   category: "form-input-basic",
@@ -46,6 +46,7 @@ export const datePickerStory: Story = {
         en: "Basic General Date Picker",
         zh: "基础日期选择框",
       },
+      thumbnail: generalDatePickerBasicSvg,
     },
     {
       description: {

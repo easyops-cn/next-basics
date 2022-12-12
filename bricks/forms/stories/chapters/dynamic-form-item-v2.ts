@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { dynamicFormItemV2 } from "../images";
+import { dynamicFormItemV2, dynamicFormItemV2BasicSvg } from "../images";
 
 export const DynamicFormItemV2Story: Story = {
   storyId: "forms.dynamic-form-item-v2",
@@ -146,6 +146,7 @@ export const DynamicFormItemV2Story: Story = {
         en: "Basic Dynamic Form Item V2",
         zh: "基础动态表单项V2",
       },
+      thumbnail: dynamicFormItemV2BasicSvg,
     },
     {
       description: {
