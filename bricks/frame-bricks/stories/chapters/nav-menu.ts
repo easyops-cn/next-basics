@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { navMenuNormalSvg } from "../images";
 
 export const NavMenuStory: Story = {
   storyId: "frame-bricks.nav-menu",
@@ -16,6 +17,7 @@ export const NavMenuStory: Story = {
         en: "",
         zh: "基础导航栏",
       },
+      thumbnail: navMenuNormalSvg,
       bricks: [
         {
           brick: "frame-bricks.nav-menu",
