@@ -1,4 +1,10 @@
 import { Story } from "@next-core/brick-types";
+import {
+  agentStatusErrorSvg,
+  agentStatusNormalSvg,
+  agentStatusNotInstalledSvg,
+  agentStatusUninstalledSvg,
+} from "../images";
 
 export const AgentStatusStory: Story = {
   storyId: "presentational-bricks.agent-status",
@@ -32,6 +38,7 @@ export const AgentStatusStory: Story = {
           },
         },
       ],
+      thumbnail: agentStatusNormalSvg,
     },
     {
       snippetId: "presentational-bricks.agent-status[error]",
@@ -47,9 +54,10 @@ export const AgentStatusStory: Story = {
           },
         },
       ],
+      thumbnail: agentStatusErrorSvg,
     },
     {
-      snippetId: "presentational-bricks.agent-status[not-instanlled]",
+      snippetId: "presentational-bricks.agent-status[not-installed]",
       title: {
         zh: "未安装",
         en: "not-installed",
@@ -62,6 +70,7 @@ export const AgentStatusStory: Story = {
           },
         },
       ],
+      thumbnail: agentStatusNotInstalledSvg,
     },
     {
       snippetId: "presentational-bricks.agent-status[uninstalled]",
@@ -77,6 +86,7 @@ export const AgentStatusStory: Story = {
           },
         },
       ],
+      thumbnail: agentStatusUninstalledSvg,
     },
   ],
   previewColumns: 2,

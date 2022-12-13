@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalTooltipSvg } from "../images";
+import { generalTooltipDisplayBrickSvg, generalTooltipSvg } from "../images";
 import { generalTooltipNormalSvg } from "../images";
 export const GeneralTooltipStory: Story = {
   storyId: "presentational-bricks.general-tooltip",
@@ -76,6 +76,7 @@ export const GeneralTooltipStory: Story = {
         zh: "使用displayBrick自定义展示内容",
         en: "",
       },
+      thumbnail: generalTooltipDisplayBrickSvg,
       bricks: [
         {
           brick: "presentational-bricks.general-tooltip",

@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { markdownEditorSvg } from "../images";
+import {
+  markdownEditorNormalSvg,
+  markdownEditorSvg,
+  markdownEditorUploadImgSvg,
+} from "../images";
 export const MarkdownEditorStory: Story = {
   storyId: "presentational-bricks.markdown-editor",
   category: "form-input-advanced",
@@ -23,6 +27,7 @@ export const MarkdownEditorStory: Story = {
         en: "",
         zh: "基础Markdown编辑构件",
       },
+      thumbnail: markdownEditorNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.markdown-editor",
@@ -46,6 +51,7 @@ export const MarkdownEditorStory: Story = {
         en: "",
         zh: "Markdown编辑构件(支持上传图片)",
       },
+      thumbnail: markdownEditorUploadImgSvg,
       bricks: [
         {
           brick: "presentational-bricks.markdown-editor",

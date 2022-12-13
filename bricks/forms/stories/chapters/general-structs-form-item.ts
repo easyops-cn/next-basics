@@ -1,5 +1,8 @@
 import { Story } from "@next-core/brick-types";
-import { generalStructsFormItem } from "../images";
+import {
+  generalStructsFormItem,
+  generalStructsFormItemBasicSvg,
+} from "../images";
 
 export const structsFormItemStory: Story = {
   storyId: "forms.general-structs-form-item",
@@ -117,6 +120,7 @@ export const structsFormItemStory: Story = {
         en: "Basic General Structs Form Item",
         zh: "基础可编辑表格",
       },
+      thumbnail: generalStructsFormItemBasicSvg,
     },
     {
       brick: "forms.general-form",

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { timeRangePicker } from "../images";
+import { timeRangePicker, timeRangePickerBasicSvg } from "../images";
 export const timeRangePickerStory: Story = {
   storyId: "forms.time-range-picker",
   category: "form-input-basic",
@@ -39,6 +39,7 @@ export const timeRangePickerStory: Story = {
         en: "Basic Time Range Picker",
         zh: "基础时间段选择器",
       },
+      thumbnail: timeRangePickerBasicSvg,
     },
     {
       brick: "forms.general-form",

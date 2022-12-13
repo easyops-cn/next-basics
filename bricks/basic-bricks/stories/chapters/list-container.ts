@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { listContainerSvg } from "../images";
+import { listContainerBasicSvg } from "../images";
+import { listContainerExtraStyleSvg } from "../images";
 export const listContainerStory: Story = {
   storyId: "basic-bricks.list-container",
   category: "container-layout",
@@ -37,6 +39,7 @@ export const listContainerStory: Story = {
         en: "Basic List Container",
         zh: "基础动态构件列表容器",
       },
+      thumbnail: listContainerBasicSvg,
     },
     {
       bricks: [
@@ -66,6 +69,7 @@ export const listContainerStory: Story = {
         en: "The container itself is a grid layout by default, and you can set additional styles",
         zh: "容器本身默认是 grid 布局，可以设置额外的样式",
       },
+      thumbnail: listContainerExtraStyleSvg,
     },
   ],
 };

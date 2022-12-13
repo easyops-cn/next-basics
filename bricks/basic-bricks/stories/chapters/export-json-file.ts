@@ -1,6 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { CMDB_HOST_INSTANCE_ID } from "../constants";
 import { exportJsonFileSvg } from "../images";
+import { exportJsonFileBasicSvg } from "../images";
 export const exportJsonFileStory: Story = {
   storyId: "basic-bricks.export-json-file",
   category: "other",
@@ -43,6 +44,7 @@ export const exportJsonFileStory: Story = {
         en: "Export JSON File",
         zh: "导出JSON文件",
       },
+      thumbnail: exportJsonFileBasicSvg,
       actions: [
         {
           text: "Export JSON File",

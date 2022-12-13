@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { dateTimeSelectorSvg } from "../images";
+import { datetimeSelectorCustomSvg, dateTimeSelectorSvg } from "../images";
 import { dateTimeSelectorNormalSvg } from "../images";
 export const DatetimeSelectorStory: Story = {
   storyId: "presentational-bricks.datetime-selector",
@@ -52,6 +52,7 @@ export const DatetimeSelectorStory: Story = {
         zh: "自定义时间范围选项",
         en: "",
       },
+      thumbnail: datetimeSelectorCustomSvg,
       bricks: [
         {
           description: {

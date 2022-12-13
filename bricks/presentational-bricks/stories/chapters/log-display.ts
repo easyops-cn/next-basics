@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { logDisplaySvg } from "../images";
+import {
+  logDisplayLoadSvg,
+  logDisplayNormalSvg,
+  logDisplaySvg,
+} from "../images";
 export const LogDisplayStory: Story = {
   storyId: "presentational-bricks.log-display",
   category: "display-component",
@@ -23,6 +27,7 @@ export const LogDisplayStory: Story = {
         en: "",
         zh: "基础日志内容展示",
       },
+      thumbnail: logDisplayNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.log-display",
@@ -38,6 +43,7 @@ export const LogDisplayStory: Story = {
         en: "",
         zh: "日志内容展示加载",
       },
+      thumbnail: logDisplayLoadSvg,
       bricks: [
         {
           brick: "presentational-bricks.log-display",

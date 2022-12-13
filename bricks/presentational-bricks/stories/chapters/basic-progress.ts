@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { basicProgressSvg } from "../images";
+import {
+  basicProgressCircleSvg,
+  basicProgressLineSvg,
+  basicProgressSvg,
+} from "../images";
 export const BasicProgressStory: Story = {
   storyId: "presentational-bricks.basic-progress",
   category: "display-component",
@@ -39,6 +43,7 @@ export const BasicProgressStory: Story = {
         zh: "圆形进度条",
         en: "circle progress",
       },
+      thumbnail: basicProgressCircleSvg,
     },
     {
       snippetId: "presentational-bricks.basic-progress[line]",
@@ -59,6 +64,7 @@ export const BasicProgressStory: Story = {
         zh: "线性进度条",
         en: "line progress",
       },
+      thumbnail: basicProgressLineSvg,
     },
   ],
 };

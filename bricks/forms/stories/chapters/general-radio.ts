@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalRadioSvg } from "../images";
+import { generalRadioIconButtonSvg, generalRadioSvg } from "../images";
 import { generalRadioBasicSvg } from "../images";
 import { generalRadioButtonSvg } from "../images";
 import { generalRadioIconSvg } from "../images";
@@ -319,6 +319,7 @@ export const GeneralRadioStory: Story = {
         en: "Icon Button General Radio",
         zh: "图标按钮单选框",
       },
+      thumbnail: generalRadioIconButtonSvg,
     },
     {
       brick: "forms.general-form",

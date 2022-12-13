@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="105px" height="59px" viewBox="0 0 105 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>presentational-bricks.modal-confirm[success]</title>
+    <defs>
+        <rect id="path-1" x="18" y="8" width="72" height="39" rx="1"></rect>
+        <filter x="-19.4%" y="-25.6%" width="138.9%" height="171.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.6   0 0 0 0 0.6   0 0 0 0 0.6  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="snippet截图" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="snippet" transform="translate(-8484.000000, -23.000000)">
+            <g id="presentational-bricks.modal-confirm[success]" transform="translate(8484.000000, 23.000000)">
+                <rect id="矩形备份-52" x="0" y="0" width="105" height="55" rx="4"></rect>
+                <g id="矩形">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <rect id="矩形备份-48" fill="#1A7AFF" x="72" y="36" width="14" height="6" rx="1"></rect>
+                <rect id="矩形备份-49" fill="#F4F5F9" x="38" y="25" width="48" height="4" rx="1"></rect>
+                <rect id="矩形备份-50" fill="#D6DBEC" x="38" y="15" width="26" height="6" rx="1"></rect>
+                <g id="通用图标/Warning-Circle-Line" transform="translate(22.000000, 12.000000)">
+                    <rect id="矩形" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="12" height="12"></rect>
+                    <path d="M6,0.75 C8.89921875,0.75 11.25,3.10078125 11.25,6 C11.25,8.89921875 8.89921875,11.25 6,11.25 C3.10078125,11.25 0.75,8.89921875 0.75,6 C0.75,3.10078125 3.10078125,0.75 6,0.75 Z M6,1.640625 C3.59296875,1.640625 1.640625,3.59296875 1.640625,6 C1.640625,8.40703125 3.59296875,10.359375 6,10.359375 C8.40703125,10.359375 10.359375,8.40703125 10.359375,6 C10.359375,3.59296875 8.40703125,1.640625 6,1.640625 Z M8.19140625,4.13671875 C8.26757812,4.13671875 8.31210937,4.2234375 8.26640625,4.28554687 L5.7984375,7.70742187 C5.64960937,7.91484375 5.34140625,7.91484375 5.19257812,7.70742187 L3.73242187,5.68242187 C3.68789062,5.6203125 3.73242187,5.53359375 3.80859375,5.53359375 L4.35820312,5.53359375 C4.47890625,5.53359375 4.59140625,5.5921875 4.66171875,5.68945312 L5.49609375,6.84726562 L7.33828125,4.29257812 C7.40859375,4.19414062 7.52226562,4.13671875 7.64179687,4.13671875 Z" id="形状结合" fill="#52C41A"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

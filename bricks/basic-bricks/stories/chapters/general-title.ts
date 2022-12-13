@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { generalTitleSvg } from "../images";
+import { generalTitleBasicSvg } from "../images";
 export const generalTitleStory: Story = {
   storyId: "basic-bricks.general-title",
   category: "text",
@@ -45,6 +46,7 @@ export const generalTitleStory: Story = {
         en: "Basic General Title",
         zh: "基础标题",
       },
+      thumbnail: generalTitleBasicSvg,
     },
   ],
 };

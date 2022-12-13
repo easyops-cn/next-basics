@@ -1,5 +1,10 @@
 import { Story } from "@next-core/brick-types";
-import { generalCheckboxSvg } from "../images";
+import {
+  generalCheckboxCustomIconSvg,
+  generalCheckboxDisabledSvg,
+  generalCheckboxItemColorSvg,
+  generalCheckboxSvg,
+} from "../images";
 import { generalCheckboxBasicSvg } from "../images";
 import { generalCheckboxGroupSvg } from "../images";
 import { generalCheckboxIconSvg } from "../images";
@@ -74,6 +79,7 @@ export const GeneralCheckboxStory: Story = {
         en: "General Checkbox with Disabled Item",
         zh: "带禁用项的多选框",
       },
+      thumbnail: generalCheckboxDisabledSvg,
     },
     {
       bricks: [
@@ -112,6 +118,7 @@ export const GeneralCheckboxStory: Story = {
         en: "General Checkbox with Color Item",
         zh: "选项带颜色的多选框",
       },
+      thumbnail: generalCheckboxItemColorSvg,
     },
     {
       bricks: [
@@ -377,6 +384,7 @@ export const GeneralCheckboxStory: Story = {
         en: "Custom Icon General Checkbox",
         zh: "自定义图标类型多选框",
       },
+      thumbnail: generalCheckboxCustomIconSvg,
     },
   ],
 };

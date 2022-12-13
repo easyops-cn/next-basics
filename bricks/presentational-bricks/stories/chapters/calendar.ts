@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { calendarSvg } from "../images";
+import { calendarNormalSvg, calendarSvg, calendarWithTagSvg } from "../images";
 
 export const CalendarStory: Story = {
   storyId: "presentational-bricks.calendar",
@@ -24,6 +24,7 @@ export const CalendarStory: Story = {
         zh: "基础日历",
         en: "",
       },
+      thumbnail: calendarNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.calendar",
@@ -102,6 +103,7 @@ export const CalendarStory: Story = {
         zh: "基础日历(带tag标记)",
         en: "",
       },
+      thumbnail: calendarWithTagSvg,
       bricks: [
         {
           brick: "presentational-bricks.calendar",

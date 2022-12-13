@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalListSvg } from "../images";
+import { generalListNormalSvg, generalListSvg } from "../images";
 export const GeneralListStory: Story = {
   storyId: "presentational-bricks.general-list",
   category: "container-layout",
@@ -23,6 +23,7 @@ export const GeneralListStory: Story = {
         zh: "基础列表布局",
         en: "",
       },
+      thumbnail: generalListNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.general-list",

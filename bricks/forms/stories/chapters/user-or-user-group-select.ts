@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { userOrUserGroupSelectSvg } from "../images";
+import {
+  userOrUserGroupSelectBasicSvg,
+  userOrUserGroupSelectBlankListSvg,
+  userOrUserGroupSelectSvg,
+} from "../images";
 export const userGroupSelectStory: Story = {
   storyId: "forms.user-or-user-group-select",
   type: "brick",
@@ -45,6 +49,7 @@ export const userGroupSelectStory: Story = {
         en: "Basic User or User Group Select",
         zh: "基础用户(组)选择器",
       },
+      thumbnail: userOrUserGroupSelectBasicSvg,
     },
     {
       bricks: [
@@ -74,6 +79,7 @@ export const userGroupSelectStory: Story = {
         en: "User or User Group Select with Blank List",
         zh: "带白名单配置的基础用户(组)选择器",
       },
+      thumbnail: userOrUserGroupSelectBlankListSvg,
     },
     {
       description: {

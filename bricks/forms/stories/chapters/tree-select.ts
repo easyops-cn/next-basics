@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { treeSelect } from "../images";
+import { treeSelect, treeSelectBasicSvg } from "../images";
 export const TreeSelectStory: Story = {
   storyId: "forms.tree-select",
   type: "brick",
@@ -81,6 +81,7 @@ export const TreeSelectStory: Story = {
         en: "Basic Tree Select",
         zh: "基础树选择器",
       },
+      thumbnail: treeSelectBasicSvg,
     },
     {
       brick: "forms.tree-select",

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { iconSelect } from "../images";
+import { iconSelect, iconSelectBasicSvg } from "../images";
 export const iconSelectStory: Story = {
   storyId: "forms.icon-select",
   category: "form-input-basic",
@@ -44,6 +44,7 @@ export const iconSelectStory: Story = {
         en: "Basic Icon Select",
         zh: "基础图标选择器",
       },
+      thumbnail: iconSelectBasicSvg,
     },
     {
       brick: "forms.icon-select",

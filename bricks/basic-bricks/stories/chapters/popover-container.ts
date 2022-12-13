@@ -1,5 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { popoverContainerSvg } from "../images";
+import { popoverContainerBasicSvg } from "../images";
 export const popoverContainerStory: Story = {
   storyId: "basic-bricks.popover-container",
   category: "container-display",
@@ -294,6 +295,7 @@ export const popoverContainerStory: Story = {
         en: "Basic Popover Container",
         zh: "基础气泡卡片容器",
       },
+      thumbnail: popoverContainerBasicSvg,
     },
   ],
 };

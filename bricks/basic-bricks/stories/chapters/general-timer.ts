@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { generalTimerSvg } from "../images";
+import { generalTimerBasicSvg } from "../images";
+import { generalTimerCustomEventSvg } from "../images";
 export const generalTimerStory: Story = {
   storyId: "basic-bricks.general-timer",
   category: "interact-basic",
@@ -40,6 +42,7 @@ export const generalTimerStory: Story = {
         en: "Write a scheduled task in the general timer. timing event",
         zh: "在general-timer.timing-event写定时任务",
       },
+      thumbnail: generalTimerBasicSvg,
     },
     {
       bricks: [
@@ -66,6 +69,7 @@ export const generalTimerStory: Story = {
         en: "Define the event through the property eventName",
         zh: "通过属性eventName定义事件",
       },
+      thumbnail: generalTimerCustomEventSvg,
     },
   ],
 };

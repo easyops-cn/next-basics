@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { brickCollapseCardSvg } from "../images";
+import { brickCollapseCardNormalSvg, brickCollapseCardSvg } from "../images";
 export const BrickCollapseCardStory: Story = {
   storyId: "presentational-bricks.brick-collapse-card",
   category: "text",
@@ -43,6 +43,7 @@ export const BrickCollapseCardStory: Story = {
         zh: "详情折叠",
         en: "Collapse card",
       },
+      thumbnail: brickCollapseCardNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-collapse-card",

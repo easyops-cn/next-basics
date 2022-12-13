@@ -1,5 +1,10 @@
 import { Story } from "@next-core/brick-types";
-import { brickHumanizeTimeSvg } from "../images";
+import {
+  brickHumanizeTimeAccurateSvg,
+  brickHumanizeTimeCostSvg,
+  brickHumanizeTimeFormatSvg,
+  brickHumanizeTimeSvg,
+} from "../images";
 import { brickHumanizeTimeFullSvg } from "../images";
 export const BrickHumanizeTimeStory: Story = {
   storyId: "presentational-bricks.brick-humanize-time",
@@ -51,9 +56,10 @@ export const BrickHumanizeTimeStory: Story = {
           },
         },
       ],
+      thumbnail: brickHumanizeTimeAccurateSvg,
     },
     {
-      snippetId: "presentational-bricks.brick-humanize-time[accurate]",
+      snippetId: "presentational-bricks.brick-humanize-time[relative]",
       title: {
         en: "Humanize time(relative)",
         zh: "人性化时间展示(相对)",
@@ -85,6 +91,7 @@ export const BrickHumanizeTimeStory: Story = {
           },
         },
       ],
+      thumbnail: brickHumanizeTimeCostSvg,
     },
     {
       brick: "presentational-bricks.brick-humanize-time",
@@ -120,6 +127,7 @@ export const BrickHumanizeTimeStory: Story = {
           },
         },
       ],
+      thumbnail: brickHumanizeTimeFormatSvg,
     },
   ],
   previewColumns: 2,

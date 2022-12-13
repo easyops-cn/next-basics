@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { informMethodsForm } from "../images";
+import { informMethodsForm, informMethodsFormBasicSvg } from "../images";
 export const informMethodsFormStory: Story = {
   storyId: "forms.inform-methods-form",
   category: "form-input-business",
@@ -33,6 +33,7 @@ export const informMethodsFormStory: Story = {
         en: "Basic Inform Methods Form",
         zh: "基础通知方式多选框",
       },
+      thumbnail: informMethodsFormBasicSvg,
     },
     {
       brick: "forms.general-form",

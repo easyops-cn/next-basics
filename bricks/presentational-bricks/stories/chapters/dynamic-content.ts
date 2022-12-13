@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { dynamicContentSvg } from "../images";
+import { dynamicContentNormalSvg, dynamicContentSvg } from "../images";
 
 export const DynamicContentStory: Story = {
   storyId: "presentational-bricks.dynamic-content",
@@ -24,6 +24,7 @@ export const DynamicContentStory: Story = {
         zh: "基础模板动态内容",
         en: "",
       },
+      thumbnail: dynamicContentNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.dynamic-content",

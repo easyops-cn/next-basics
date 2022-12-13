@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { dynamicGridContainerSvg } from "../images";
+import {
+  dynamicGridContainerNormalSvg,
+  dynamicGridContainerSvg,
+  dynamicGridContainerWithInfoSvg,
+} from "../images";
 export const DynamicGridContainerStory: Story = {
   storyId: "presentational-bricks.dynamic-grid-container",
   category: "container-layout",
@@ -23,6 +27,7 @@ export const DynamicGridContainerStory: Story = {
         zh: "基础动态网格布局",
         en: "",
       },
+      thumbnail: dynamicGridContainerNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.dynamic-grid-container",
@@ -79,6 +84,7 @@ export const DynamicGridContainerStory: Story = {
         zh: "动态网格布局(负责场景)",
         en: "",
       },
+      thumbnail: dynamicGridContainerWithInfoSvg,
       bricks: [
         {
           brick: "presentational-bricks.dynamic-grid-container",

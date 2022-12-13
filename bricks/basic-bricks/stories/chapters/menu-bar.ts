@@ -1,6 +1,6 @@
 import { Story } from "@next-core/brick-types";
 import { menuBarSvg } from "../images";
-
+import { menuBarBasicSvg } from "../images";
 export const menuBarStory: Story = {
   storyId: "basic-bricks.menu-bar",
   category: "navigation",
@@ -60,6 +60,7 @@ export const menuBarStory: Story = {
         en: "Basic Menu Bar",
         zh: "基础一级左侧菜单",
       },
+      thumbnail: menuBarBasicSvg,
     },
   ],
 };

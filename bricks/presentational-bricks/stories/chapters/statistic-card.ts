@@ -1,4 +1,5 @@
 import { Story } from "@next-core/brick-types";
+import { statisticCardNormalSvg } from "../images";
 
 export const StatisticCardStory: Story = {
   storyId: "presentational-bricks.statistic-card",
@@ -24,6 +25,7 @@ export const StatisticCardStory: Story = {
         zh: "基础统计卡片",
         en: "",
       },
+      thumbnail: statisticCardNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.statistic-card",

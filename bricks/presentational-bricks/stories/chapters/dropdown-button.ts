@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { dropdownButtonSvg } from "../images";
+import { dropdownButtonNormalSvg, dropdownButtonSvg } from "../images";
 export const DropdownButtonStory: Story = {
   storyId: "presentational-bricks.dropdown-button",
   category: "interact-basic",
@@ -23,6 +23,7 @@ export const DropdownButtonStory: Story = {
         zh: "基础带下拉框的按钮",
         en: "",
       },
+      thumbnail: dropdownButtonNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.dropdown-button",

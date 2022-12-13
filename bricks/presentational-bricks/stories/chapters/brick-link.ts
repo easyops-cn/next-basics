@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { brickLinkSvg } from "../images";
+import {
+  brickLinkOutsideSvg,
+  brickLinkSvg,
+  brickLinkWithIconEventsSvg,
+} from "../images";
 import { brickLinkNormalSvg } from "../images";
 export const BrickLinkStory: Story = {
   storyId: "presentational-bricks.brick-link",
@@ -43,6 +47,7 @@ export const BrickLinkStory: Story = {
         zh: "通用链接(外部跳转)",
         en: "",
       },
+      thumbnail: brickLinkOutsideSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-link",
@@ -60,6 +65,7 @@ export const BrickLinkStory: Story = {
         zh: "通用链接(带图标事件)",
         en: "",
       },
+      thumbnail: brickLinkWithIconEventsSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-link",

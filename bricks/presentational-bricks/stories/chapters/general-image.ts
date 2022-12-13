@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalImageSvg } from "../images";
+import { generalImageNormalSvg, generalImageSvg } from "../images";
 export const GeneralImageStory: Story = {
   storyId: "presentational-bricks.general-image",
   category: "display-component",
@@ -24,6 +24,7 @@ export const GeneralImageStory: Story = {
         en: "基本图片展示构件",
         zh: "",
       },
+      thumbnail: generalImageNormalSvg,
       bricks: [
         {
           description: {

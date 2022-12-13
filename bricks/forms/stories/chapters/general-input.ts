@@ -1,5 +1,11 @@
 import { Story } from "@next-core/brick-types";
-import { generalInputSvg } from "../images";
+import {
+  generalInputBasicSvg,
+  generalInputCopyableSvg,
+  generalInputPasswordSvg,
+  generalInputSvg,
+  generalInputWithAddonSvg,
+} from "../images";
 export const generalInputStory: Story = {
   storyId: "forms.general-input",
   category: "form-input-basic",
@@ -47,6 +53,7 @@ export const generalInputStory: Story = {
         en: "Basic General Input",
         zh: "基础输入框",
       },
+      thumbnail: generalInputBasicSvg,
     },
     {
       bricks: [
@@ -79,6 +86,7 @@ export const generalInputStory: Story = {
         en: "Copyable General Input",
         zh: "可复制输入框",
       },
+      thumbnail: generalInputCopyableSvg,
     },
     {
       bricks: [
@@ -110,6 +118,7 @@ export const generalInputStory: Story = {
         en: "Password General Input",
         zh: "密码输入框",
       },
+      thumbnail: generalInputPasswordSvg,
     },
     {
       brick: "forms.general-form",
@@ -183,6 +192,7 @@ export const generalInputStory: Story = {
         en: "General Input with Addon",
         zh: "带前后缀的输入框",
       },
+      thumbnail: generalInputWithAddonSvg,
     },
   ],
 };

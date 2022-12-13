@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { generalCarouselSvg } from "../images";
+import {
+  generalCarouselAutoplaySvg,
+  generalCarouselNormalSvg,
+  generalCarouselSvg,
+} from "../images";
 export const GeneralCarouselStory: Story = {
   storyId: "presentational-bricks.general-carousel",
   category: "container-display",
@@ -23,6 +27,7 @@ export const GeneralCarouselStory: Story = {
         en: "",
         zh: "基础的轮播图",
       },
+      thumbnail: generalCarouselNormalSvg,
       bricks: [
         {
           brick: "basic-bricks.general-card",
@@ -65,6 +70,7 @@ export const GeneralCarouselStory: Story = {
         zh: "定时轮播图",
         en: "",
       },
+      thumbnail: generalCarouselAutoplaySvg,
       bricks: [
         {
           brick: "basic-bricks.general-card",

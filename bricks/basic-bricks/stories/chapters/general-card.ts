@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { generalCardSvg } from "../images";
+import { generalCardExtraSvg } from "../images";
+import { generalCardTitleSuffixSvg } from "../images";
 export const generalCardStory: Story = {
   storyId: "basic-bricks.general-card",
   category: "container-display",
@@ -66,6 +68,7 @@ export const generalCardStory: Story = {
         en: "General Card with Extra Slot",
         zh: "带extra插槽的通用卡片",
       },
+      thumbnail: generalCardExtraSvg,
     },
     {
       bricks: [
@@ -115,6 +118,7 @@ export const generalCardStory: Story = {
         en: "General Card with Title Suffix Slot",
         zh: "带titleSuffix插槽的通用卡片",
       },
+      thumbnail: generalCardTitleSuffixSvg,
     },
     {
       brick: "basic-bricks.general-card",

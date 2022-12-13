@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { brickIllustrationSvg } from "../images";
+import { brickIllustrationFeedbackSvg, brickIllustrationSvg } from "../images";
 import { brickIllustrationGuideSvg } from "../images";
 export const BrickIllustrationStory: Story = {
   storyId: "presentational-bricks.brick-illustration",
@@ -74,6 +74,7 @@ export const BrickIllustrationStory: Story = {
           },
         },
       ],
+      thumbnail: brickIllustrationFeedbackSvg,
     },
   ],
 };

@@ -1,5 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { flexLayoutSvg } from "../images";
+import { flexLayoutBasicSvg } from "../images";
+import { flexLayoutGapSvg } from "../images";
 export const flexLayoutStory: Story = {
   storyId: "basic-bricks.flex-layout",
   category: "container-layout",
@@ -59,6 +61,7 @@ export const flexLayoutStory: Story = {
         },
       ],
       snippetId: "basic-bricks.flex-layout[basic]",
+      thumbnail: flexLayoutBasicSvg,
       title: {
         en: "Basic Flex Layout",
         zh: "基础flex布局",
@@ -145,6 +148,7 @@ export const flexLayoutStory: Story = {
         },
       ],
       snippetId: "basic-bricks.flex-layout[gap]",
+      thumbnail: flexLayoutGapSvg,
       title: {
         en: "Flex Layout with gap",
         zh: "使用gap的flex布局",

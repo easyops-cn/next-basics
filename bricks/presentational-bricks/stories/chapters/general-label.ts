@@ -24,7 +24,6 @@ export const GeneralLabelStory: Story = {
         zh: "文本信息展示(后置图标)",
         en: "",
       },
-      thumbnail: generalLabelPrefixIconSvg,
       bricks: [
         {
           brick: "presentational-bricks.general-label",
@@ -51,6 +50,7 @@ export const GeneralLabelStory: Story = {
         zh: "文本信息展示(前置图标)",
         en: "",
       },
+      thumbnail: generalLabelPrefixIconSvg,
       bricks: [
         {
           brick: "presentational-bricks.general-label",

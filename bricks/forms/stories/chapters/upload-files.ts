@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { uploadFiles } from "../images";
+import { uploadFiles, uploadFilesBasicSvg } from "../images";
 export const UploadFilesStory: Story = {
   storyId: "forms.upload-files",
   type: "brick",
@@ -74,6 +74,7 @@ export const UploadFilesStory: Story = {
         en: "Basic Upload Files",
         zh: "基础上传文件",
       },
+      thumbnail: uploadFilesBasicSvg,
     },
     {
       brick: "div",

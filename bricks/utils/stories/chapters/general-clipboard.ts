@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalClipboardSvg } from "../images";
+import { generalClipboardBasicSvg, generalClipboardSvg } from "../images";
 export const generalClipboard: Story = {
   storyId: "utils.general-clipboard",
   category: "other",
@@ -74,6 +74,7 @@ export const generalClipboard: Story = {
         en: "Basic General Clipboard",
         zh: "基础普通剪切板",
       },
+      thumbnail: generalClipboardBasicSvg,
       actions: [
         {
           text: "Set Clipboard",

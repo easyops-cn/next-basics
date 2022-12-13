@@ -1,6 +1,7 @@
 import { Story } from "@next-core/brick-types";
 import { microViewSvg } from "../images";
-
+import { microViewBasicSvg } from "../images";
+import { microViewWithBannerSvg } from "../images";
 export const microViewStory: Story = {
   storyId: "basic-bricks.micro-view",
   category: "container-layout",
@@ -78,6 +79,7 @@ export const microViewStory: Story = {
         en: "Basic Micro View",
         zh: "基础通用页面视图容器",
       },
+      thumbnail: microViewBasicSvg,
     },
     {
       bricks: [
@@ -194,6 +196,7 @@ export const microViewStory: Story = {
         en: "Micro View with Banner Slot",
         zh: "带Banner插槽的通用页面视图容器",
       },
+      thumbnail: microViewWithBannerSvg,
     },
   ],
 };

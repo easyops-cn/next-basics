@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { brickAlertSvg } from "../images";
+import {
+  brickAlertInfoTipsWithIconSvg,
+  brickAlertSvg,
+  brickAlertWithSlotSvg,
+} from "../images";
 import { brickAlertSuccessTipsSvg } from "../images";
 import { brickAlertWarnTipsWithCloseSvg } from "../images";
 export const BrickAlertStory: Story = {
@@ -51,6 +55,7 @@ export const BrickAlertStory: Story = {
         en: "Info alert with icon",
         zh: "带图标正常提示",
       },
+      thumbnail: brickAlertInfoTipsWithIconSvg,
     },
     {
       snippetId: "presentational-bricks.brick-alert[warn-tips-with-close]",
@@ -88,6 +93,7 @@ export const BrickAlertStory: Story = {
     },
     {
       snippetId: "presentational-bricks.brick-alert[with-slot]",
+      thumbnail: brickAlertWithSlotSvg,
       message: {
         en: "",
         zh: "本示例额外使用了通过target改变具体构件属性的知识点，具体可查看[设置指定构件属性方式](/next-docs/docs/brick-next/events#custom-handlers-properties)",

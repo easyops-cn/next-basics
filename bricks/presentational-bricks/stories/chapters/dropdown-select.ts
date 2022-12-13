@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { dropdownSelectSvg } from "../images";
+import { dropdownSelectNormalSvg, dropdownSelectSvg } from "../images";
 export const DropdownSelectStory: Story = {
   storyId: "presentational-bricks.dropdown-select",
   category: "navigation",
@@ -23,6 +23,7 @@ export const DropdownSelectStory: Story = {
         zh: "基础单选示例",
         en: "",
       },
+      thumbnail: dropdownSelectNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.dropdown-select",

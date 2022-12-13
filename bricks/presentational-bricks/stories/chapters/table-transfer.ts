@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { tableTransferSvg } from "../images";
+import { tableTransferNormalSvg, tableTransferSvg } from "../images";
 
 export const TableTransferStory: Story = {
   storyId: "presentational-bricks.table-transfer",
@@ -24,6 +24,7 @@ export const TableTransferStory: Story = {
         en: "",
         zh: "基础表格穿梭选择框（支持拖拽排序)",
       },
+      thumbnail: tableTransferNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.table-transfer",
