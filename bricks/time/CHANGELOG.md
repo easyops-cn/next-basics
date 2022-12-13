@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.6.3...@next-bricks/time@1.7.0) (2022-12-13)
+
+
+### Features
+
+* update time snippet icon ([56e4789](https://github.com/easyops-cn/next-basics/commit/56e4789700c6ff1da825ddad41a4dddf0bfdb82f))
+
+
+
+
+
 ## [1.6.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/time@1.6.2...@next-bricks/time@1.6.3) (2022-11-07)
 
 **Note:** Version bump only for package @next-bricks/time

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.8.2...@next-bricks/frame-bricks@1.9.0) (2022-12-13)
+
+
+### Features
+
+* update frame-brick snippet icon ([7263f2a](https://github.com/easyops-cn/next-basics/commit/7263f2ae1219acd58ec335c402f9fd018c6b2b8f))
+
+
+
+
+
 ## [1.8.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/frame-bricks@1.8.1...@next-bricks/frame-bricks@1.8.2) (2022-11-24)
 
 
