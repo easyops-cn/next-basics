@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { basicIconSvg } from "../images";
+import {
+  basicIconSvg,
+  basicIconWithArgumentsSvg,
+  basicIconWithImgSrcSvg,
+} from "../images";
 export const BasicIconStory: Story = {
   storyId: "presentational-bricks.basic-icon",
   category: "display-component",
@@ -56,6 +60,7 @@ export const BasicIconStory: Story = {
         en: "basic-icon(with base argumnts)",
         zh: "基础图标(带基本参数)",
       },
+      thumbnail: basicIconWithArgumentsSvg,
     },
     {
       bricks: [
@@ -77,6 +82,7 @@ export const BasicIconStory: Story = {
         zh: "基础图标(带imgSrc)",
         en: "basic-icon(with imgSrc)",
       },
+      thumbnail: basicIconWithImgSrcSvg,
     },
   ],
 };

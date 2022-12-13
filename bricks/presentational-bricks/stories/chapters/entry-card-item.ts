@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { entryCardItemSvg } from "../images";
+import { entryCardItemNormalSvg, entryCardItemSvg } from "../images";
 export const EntryCardItemStory: Story = {
   storyId: "presentational-bricks.entry-card-item",
   category: "card-info",
@@ -23,6 +23,7 @@ export const EntryCardItemStory: Story = {
         zh: "基础入口卡片项",
         en: "",
       },
+      thumbnail: entryCardItemNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.entry-card-item",

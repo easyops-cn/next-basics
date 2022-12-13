@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { brickQuickEntriesSvg } from "../images";
+import { brickQuickEntriesSvg, brickQuickEntriesWithChartSvg } from "../images";
 import { brickQuickEntriesNormalSvg } from "../images";
 export const BrickQuickEntriesStory: Story = {
   storyId: "presentational-bricks.brick-quick-entries",
@@ -133,6 +133,7 @@ export const BrickQuickEntriesStory: Story = {
         zh: "快速入口(图表)",
         en: "",
       },
+      thumbnail: brickQuickEntriesWithChartSvg,
       bricks: [
         {
           description: {

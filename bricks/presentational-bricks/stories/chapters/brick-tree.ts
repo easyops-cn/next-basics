@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { brickTreeSvg } from "../images";
+import { brickTreeFilterSvg, brickTreeSvg } from "../images";
 import { brickTreeNormalSvg } from "../images";
 export const BrickTreeStory: Story = {
   storyId: "presentational-bricks.brick-tree",
@@ -188,6 +188,7 @@ export const BrickTreeStory: Story = {
         zh: "在某些场景下我们只需要计数部分节点，如此处需要过滤掉属于分类的节点，可以设置checkedFilterConfig进行筛选",
         en: "",
       },
+      thumbnail: brickTreeFilterSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-tree",

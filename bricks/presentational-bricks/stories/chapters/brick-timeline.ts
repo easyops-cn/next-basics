@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { brickTimelineSvg } from "../images";
+import {
+  brickTimelineBaseSvg,
+  brickTimelineExtensionSvg,
+  brickTimelineSvg,
+} from "../images";
 export const BrickTimelineStory: Story = {
   storyId: "presentational-bricks.brick-timeline",
   category: "display-component",
@@ -23,6 +27,7 @@ export const BrickTimelineStory: Story = {
         zh: "基础时间轴",
         en: "",
       },
+      thumbnail: brickTimelineBaseSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-timeline",
@@ -90,6 +95,7 @@ export const BrickTimelineStory: Story = {
         zh: "基础时间轴(带时间)",
         en: "",
       },
+      thumbnail: brickTimelineExtensionSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-timeline",

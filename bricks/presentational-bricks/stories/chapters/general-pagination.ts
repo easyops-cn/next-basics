@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { generalPaginationSvg } from "../images";
+import { generalPaginationNormalSvg, generalPaginationSvg } from "../images";
 export const GeneralPaginationStory: Story = {
   storyId: "presentational-bricks.general-pagination",
   category: "navigation",
@@ -19,6 +19,7 @@ export const GeneralPaginationStory: Story = {
   conf: [
     {
       snippetId: "presentational-bricks.general-pagination[normal]",
+      thumbnail: generalPaginationNormalSvg,
       title: {
         en: "",
         zh: "基础分页",

@@ -141,7 +141,7 @@ export const DynamicFormItemV2Story: Story = {
           },
         },
       ],
-      snippetId: "dynamic-form-item-v2[basic]",
+      snippetId: "forms.dynamic-form-item-v2[basic]",
       title: {
         en: "Basic Dynamic Form Item V2",
         zh: "基础动态表单项V2",

@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { templateBreadcrumbSvg } from "../images";
+import { templateBreadcrumbNormalSvg, templateBreadcrumbSvg } from "../images";
 export const TemplateBreadcrumbStory: Story = {
   storyId: "presentational-bricks.template-breadcrumb",
   category: "navigation",
@@ -19,6 +19,7 @@ export const TemplateBreadcrumbStory: Story = {
         en: "",
         zh: "基础自定义面包屑",
       },
+      thumbnail: templateBreadcrumbNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.template-breadcrumb",

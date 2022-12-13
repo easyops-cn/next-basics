@@ -1,5 +1,10 @@
 import { Story } from "@next-core/brick-types";
-import { brickResultSvg } from "../images";
+import {
+  brickResult404WithSlotSvg,
+  brickResultInfoSvg,
+  brickResultSvg,
+  brickResultWarnSvg,
+} from "../images";
 import { brickResultSuccessSvg } from "../images";
 export const BrickResultStory: Story = {
   storyId: "presentational-bricks.brick-result",
@@ -41,6 +46,7 @@ export const BrickResultStory: Story = {
         zh: "普通结果",
         en: "",
       },
+      thumbnail: brickResultInfoSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-result",
@@ -58,6 +64,7 @@ export const BrickResultStory: Story = {
         zh: "警告结果",
         en: "",
       },
+      thumbnail: brickResultWarnSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-result",
@@ -76,6 +83,7 @@ export const BrickResultStory: Story = {
         zh: "404(with-slot)",
         en: "",
       },
+      thumbnail: brickResult404WithSlotSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-result",

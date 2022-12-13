@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { textCollapseSvg } from "../images";
+import { textCollapseNormalSvg, textCollapseSvg } from "../images";
 export const TextCollapseStory: Story = {
   storyId: "presentational-bricks.text-collapse",
   category: "text",
@@ -23,6 +23,7 @@ export const TextCollapseStory: Story = {
         en: "",
         zh: "基础可折叠文本",
       },
+      thumbnail: textCollapseNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.text-collapse",

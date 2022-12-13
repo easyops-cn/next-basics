@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { cardItemSvg } from "../images";
+import {
+  cardItemNormalSvg,
+  cardItemSvg,
+  cardItemWithRightTagSvg,
+} from "../images";
 export const CardItemStory: Story = {
   storyId: "presentational-bricks.card-item",
   category: "card-info",
@@ -27,6 +31,7 @@ export const CardItemStory: Story = {
         zh: "可以配置 `operate`,`topRightOperate`,`bottomRightOperate` 等操作区的插槽。适用场景：用户可凭借图标颜色来区分不同卡片，图标具有分类意义（区分类型／状态）而存在。",
         en: "",
       },
+      thumbnail: cardItemNormalSvg,
       bricks: [
         {
           brick: "presentational-bricks.card-item",
@@ -484,6 +489,7 @@ export const CardItemStory: Story = {
         zh: "角标可选颜色 `tagConfig.color` 以及文字 `tagConfig.text` 等信息。图片图标需要配置 `showImg` 和对应的图片资源地址 `imgSrc`",
         en: "",
       },
+      thumbnail: cardItemWithRightTagSvg,
       bricks: [
         {
           brick: "presentational-bricks.card-item",
