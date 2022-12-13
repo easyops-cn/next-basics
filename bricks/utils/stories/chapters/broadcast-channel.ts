@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { broadcastChannelSvg } from "../images";
+import { broadcastChannelBasicSvg, broadcastChannelSvg } from "../images";
 export const broadcastChanel: Story = {
   storyId: "utils.broadcast-channel",
   category: "other",
@@ -76,6 +76,7 @@ export const broadcastChanel: Story = {
         en: "Basic Broadcast Channel",
         zh: "基础广播频道",
       },
+      thumbnail: broadcastChannelBasicSvg,
       actions: [
         {
           text: "Post Message",
