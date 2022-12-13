@@ -1,5 +1,5 @@
 import { Story } from "@next-core/brick-types";
-import { taskCalendarSvg } from "../images";
+import { taskCalendarBasicSvg, taskCalendarSvg } from "../images";
 export const TaskCalendarStory: Story = {
   storyId: "time.task-calendar",
   category: "display-component",
@@ -144,6 +144,7 @@ export const TaskCalendarStory: Story = {
         en: "Basic use",
         zh: "基本使用",
       },
+      thumbnail: taskCalendarBasicSvg,
     },
   ],
 };
