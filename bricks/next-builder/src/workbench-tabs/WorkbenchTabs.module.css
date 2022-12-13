@@ -35,7 +35,7 @@
 }
 
 .tabs li:first-child .tabContent {
-  border-left: none;
+  border-left: 1px solid transparent;
 }
 
 .tabs li:last-child:not(.active) .tabContent {
@@ -43,11 +43,11 @@
 }
 
 .active .tabContent {
-  border-left: none;
+  border-left: 1px solid transparent;
 }
 
 .active + li .tabContent {
-  border-left: none;
+  border-left: 1px solid transparent;
 }
 
 .active {
