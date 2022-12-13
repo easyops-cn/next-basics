@@ -71,6 +71,14 @@ export class BrickTreeElement extends UpdatingElement {
   >;
 
   /**
+   * @detail React.Key[]
+   * @description 展开事件
+   */
+  @event({ type: "tree.expand", cancelable: true }) treeExpand: EventEmitter<
+    React.Key[]
+  >;
+
+  /**
    * @kind BrickTreeNodeProps[]
    * @required true
    * @default -
@@ -242,6 +250,10 @@ export class BrickTreeElement extends UpdatingElement {
     this.treeCheck.emit(checkedKeys);
   };
 
+  private _handleExpand = (expandedKeys: React.Key[]) => {
+    this.treeExpand.emit(expandedKeys);
+  };
+
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
@@ -258,6 +270,7 @@ export class BrickTreeElement extends UpdatingElement {
             searchParent={this.searchParent}
             checkAllEnabled={this.checkAllEnabled}
             onSelect={this._handleSelect}
+            onExpand={this._handleExpand}
             onCheck={this._handleCheck}
             checkedFilterConfig={this.checkedFilterConfig}
             suffixBrick={this.suffixBrick}

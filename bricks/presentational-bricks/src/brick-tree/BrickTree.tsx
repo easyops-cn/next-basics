@@ -180,6 +180,7 @@ export interface BrickTreeProps {
       | React.Key[]
       | { checked: React.Key[]; halfChecked: React.Key[] }
   ): void;
+  onExpand?(expandedKeys: React.Key[]): void;
   suffixBrick?: { useBrick: UseBrickConf };
   afterSearchBrick?: { useBrick: UseBrickConf };
   showSpecificationTitleStyle?: boolean;
@@ -358,6 +359,7 @@ export function BrickTree(props: BrickTreeProps): React.ReactElement {
 
   const onExpand = (expandedKeys: React.Key[]) => {
     setExpandedKeys(expandedKeys);
+    props.onExpand(expandedKeys);
   };
 
   return (
