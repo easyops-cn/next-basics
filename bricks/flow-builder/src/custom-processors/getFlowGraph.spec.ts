@@ -324,6 +324,152 @@ describe("getFlowGraph", () => {
         root: "root",
       },
     ],
+    [
+      {
+        relations: [
+          {
+            src: "name",
+            dst: "stepabc",
+          },
+          {
+            src: "stepabc",
+            dst: "stepabc1",
+          },
+          {
+            dst: "step02",
+            src: "step01",
+          },
+          {
+            dst: "step03",
+            src: "step02",
+          },
+        ],
+        steps: [
+          {
+            name: "name",
+            next: "stepabc",
+            type: "pass",
+            id: "name",
+          },
+          {
+            id: "stepabc",
+            name: "stepabc",
+            pre: "name",
+            next: "stepabc1",
+            type: "pass",
+          },
+          {
+            id: "stepabc1",
+            name: "stepabc1",
+            pre: "stepabc",
+            type: "pass",
+          },
+          {
+            id: "step01",
+            name: "步骤01",
+            next: "step02",
+            type: "pass",
+          },
+          {
+            id: "step02",
+            name: "步骤02",
+            next: "step03",
+            pre: "step01",
+            type: "pass",
+          },
+          {
+            id: "step03",
+            name: "步骤03",
+            pre: "step02",
+            next: "",
+            type: "pass",
+          },
+        ],
+      },
+      "name",
+      {
+        edges: [
+          { source: "root", target: "name", type: "include" },
+          { source: "root", target: "stepabc", type: "include" },
+          { source: "root", target: "stepabc1", type: "include" },
+          { source: "root", target: "step01", type: "include" },
+          { source: "root", target: "step02", type: "include" },
+          { source: "root", target: "step03", type: "include" },
+          { source: "name", target: "stepabc", type: "dagre" },
+          { source: "stepabc", target: "stepabc1", type: "dagre" },
+          { source: "step01", target: "step02", type: "dagre" },
+          { source: "step02", target: "step03", type: "dagre" },
+        ],
+        nodes: [
+          { id: "root", type: "node" },
+          {
+            data: { id: "name", name: "name", next: "stepabc", type: "pass" },
+            id: "name",
+            name: "name",
+            type: "node",
+          },
+          {
+            data: {
+              id: "stepabc",
+              name: "stepabc",
+              next: "stepabc1",
+              pre: "name",
+              type: "pass",
+            },
+            id: "stepabc",
+            name: "stepabc",
+            type: "node",
+          },
+          {
+            data: {
+              id: "stepabc1",
+              name: "stepabc1",
+              pre: "stepabc",
+              type: "pass",
+            },
+            id: "stepabc1",
+            name: "stepabc1",
+            type: "node",
+          },
+          {
+            data: {
+              id: "step01",
+              name: "步骤01",
+              next: "step02",
+              type: "pass",
+            },
+            id: "step01",
+            name: "步骤01",
+            type: "node",
+          },
+          {
+            data: {
+              id: "step02",
+              name: "步骤02",
+              next: "step03",
+              pre: "step01",
+              type: "pass",
+            },
+            id: "step02",
+            name: "步骤02",
+            type: "node",
+          },
+          {
+            data: {
+              id: "step03",
+              name: "步骤03",
+              next: "",
+              pre: "step02",
+              type: "pass",
+            },
+            id: "step03",
+            name: "步骤03",
+            type: "node",
+          },
+        ],
+        root: "root",
+      },
+    ],
   ])("should work", (data, startId, result) => {
     expect(getFlowGraph(data, startId)).toEqual(result);
   });
