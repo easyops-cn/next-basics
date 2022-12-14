@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.216.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.1...@next-bricks/next-builder@1.216.2) (2022-12-14)
+
+
+### Bug Fixes
+
+* fix vb workbench tabs style ([d47fcfc](https://github.com/easyops-cn/next-basics/commit/d47fcfcb0466a6ad1d04b5e34427fd6bddbc83a9))
+
+
+
+
+
 ## [1.216.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.0...@next-bricks/next-builder@1.216.1) (2022-12-08)
 
 
