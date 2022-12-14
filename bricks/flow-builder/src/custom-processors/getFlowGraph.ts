@@ -1,6 +1,7 @@
 import { getRuntime } from "@next-core/brick-kit";
 import { isEmpty } from "lodash";
 import { StepItem, StepType } from "../interfaces";
+import { getStageList, checkRecurringNode } from "./getStepTreeData";
 
 interface Relation {
   dst: string;
@@ -76,23 +77,42 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
     type: "node",
   };
   const nodes = [] as GraphNode[];
-  const isolatedNodes = [] as GraphNode[];
   const edges = [] as GraphEdges[];
   const groupEdges = [] as GraphEdges[];
 
-  walkSteps(data.steps, startId, (item) => {
-    edges.push({
-      source: rootId,
-      target: item.id,
-      type: "include",
+  const { steps = [], relations = [] } = data;
+
+  const stepMap = new Map<string, StepItem>();
+  const startNode = steps.find((item) => item.id == startId);
+  const topLevelNodes = new Set<StepItem>([startNode]);
+
+  steps.forEach((item) => {
+    /* istanbul ignore if */
+    if (!item.pre && !item.parent) {
+      topLevelNodes.add(item);
+    }
+    stepMap.set(item.id, item);
+  });
+
+  const stageList: StepItem[][] = [];
+  topLevelNodes.forEach((startNode) => {
+    // 检查该节点是否已经存在其他步骤中
+    if (!checkRecurringNode(stageList, startNode)) {
+      stageList.push(getStageList(startNode, stepMap));
+    }
+  });
+
+  stageList.forEach((stage) => {
+    stage.forEach((item) => {
+      edges.push({
+        source: rootId,
+        target: item.id,
+        type: "include",
+      });
     });
   });
 
-  data.steps?.forEach((item) => {
-    if (!item.next && !item.pre && !item.parent && item.id !== startId) {
-      isolatedNodes.push(item);
-    }
-
+  steps?.forEach((item) => {
     nodes.push({
       id: item.id,
       name: item.name,
@@ -129,18 +149,12 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
     }
   });
 
-  isolatedNodes.forEach((item) => {
-    edges.push({
-      source: rootId,
-      target: item.id,
-      type: "include",
-    });
-  });
+  relations?.forEach((item) => {
+    const findList = groupEdges.filter((e) => e.source === item.src);
 
-  data.relations?.forEach((item) => {
-    const source = groupEdges.find((e) => e.source === item.src);
-    const target = groupEdges.find((e) => e.target === item.dst);
-    if (!(source && target)) {
+    if (
+      !(findList.length && findList.some((find) => find.target === item.dst))
+    ) {
       edges.push({
         source: item.src,
         target: item.dst,

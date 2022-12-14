@@ -58,11 +58,14 @@ function getChildren(
   return treeList;
 }
 
-function checkRecurringNode(stageList: StepItem[][], step: StepItem): boolean {
+export function checkRecurringNode(
+  stageList: StepItem[][],
+  step: StepItem
+): boolean {
   return stageList?.some((stage) => stage?.some((item) => item.id === step.id));
 }
 
-function getStageList(
+export function getStageList(
   rootStep: StepItem,
   stepMap: Map<string, StepItem>
 ): StepItem[] {
