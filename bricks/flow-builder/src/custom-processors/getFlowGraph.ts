@@ -83,8 +83,12 @@ export function getFlowGraph(data: OriginData, startId: string): GraphData {
   const { steps = [], relations = [] } = data;
 
   const stepMap = new Map<string, StepItem>();
+  const topLevelNodes = new Set<StepItem>([]);
   const startNode = steps.find((item) => item.id == startId);
-  const topLevelNodes = new Set<StepItem>([startNode]);
+
+  if (startNode) {
+    topLevelNodes.add(startNode);
+  }
 
   steps.forEach((item) => {
     /* istanbul ignore if */

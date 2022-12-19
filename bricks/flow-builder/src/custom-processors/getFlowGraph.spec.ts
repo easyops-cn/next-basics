@@ -470,6 +470,14 @@ describe("getFlowGraph", () => {
         root: "root",
       },
     ],
+    [
+      {
+        relations: [],
+        steps: [],
+      },
+      undefined,
+      { edges: [], nodes: [{ id: "root", type: "node" }], root: "root" },
+    ],
   ])("should work", (data, startId, result) => {
     expect(getFlowGraph(data, startId)).toEqual(result);
   });
