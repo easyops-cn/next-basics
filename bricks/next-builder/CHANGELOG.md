@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.216.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.2...@next-bricks/next-builder@1.216.3) (2022-12-20)
+
+
+### Bug Fixes
+
+* fix brick tree not query route brick ([f9721c2](https://github.com/easyops-cn/next-basics/commit/f9721c2201acf8c25b70a68eaa8d3f1690b4f19b))
+
+
+
+
+
 ## [1.216.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.1...@next-bricks/next-builder@1.216.2) (2022-12-14)
 
 
