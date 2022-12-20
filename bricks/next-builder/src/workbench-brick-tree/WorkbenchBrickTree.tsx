@@ -415,10 +415,7 @@ function matchBrickNode(
           }
         : isSnippetNode(node.data)
         ? node.name
-        : [
-            node.name,
-            isBrickNode(node.data) ? node.data.$$normalized : node.data.path,
-          ],
+        : [node.name, node.data.$$normalized],
       lowerTrimmedQuery
     )
   );
