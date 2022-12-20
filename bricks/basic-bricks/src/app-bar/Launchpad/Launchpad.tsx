@@ -69,7 +69,6 @@ export function Launchpad(props: LaunchpadProps): React.ReactElement {
       };
       try {
         const hadFetch = await launchpadService.fetchLaunchpadInfo();
-        if (microApps.length) return;
         if (hadFetch) {
           updateState();
         } else {
