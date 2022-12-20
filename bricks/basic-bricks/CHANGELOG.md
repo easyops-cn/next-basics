@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.226.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.226.0...@next-bricks/basic-bricks@1.226.1) (2022-12-20)
+
+
+### Bug Fixes
+
+* launchpad first render still loading ([21b9aa4](https://github.com/easyops-cn/next-basics/commit/21b9aa42e38d7957726d0539f101a0f1f53e05d9))
+
+
+
+
+
 # [1.226.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.225.1...@next-bricks/basic-bricks@1.226.0) (2022-12-13)
 
 
