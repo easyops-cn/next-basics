@@ -246,6 +246,7 @@ function LegacyWorkbenchCacheAction(
       ).$$uid;
       const nodeUids = edges
         .filter((item) => item.parent === parentUid)
+        .sort((a, b) => a.sort - b.sort)
         .map((item) => item.child)
         .concat(nodeUid);
       manager.nodeAdd({
