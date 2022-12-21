@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.217.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.4...@next-bricks/next-builder@1.217.0) (2022-12-21)
+
+
+### Features
+
+* support VB lint storyboard ([#1928](https://github.com/easyops-cn/next-basics/issues/1928)) ([aa833a7](https://github.com/easyops-cn/next-basics/commit/aa833a704130653cac3a32a288ab77a6145dff13))
+
+
+
+
+
 ## [1.216.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.3...@next-bricks/next-builder@1.216.4) (2022-12-21)
 
 
