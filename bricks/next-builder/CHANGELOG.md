@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.216.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.3...@next-bricks/next-builder@1.216.4) (2022-12-21)
+
+
+### Bug Fixes
+
+* add brick after move, sort was error ([98172ff](https://github.com/easyops-cn/next-basics/commit/98172ffeeca864631bbbaf5d897796ae8ccb0268))
+
+
+
+
+
 ## [1.216.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.2...@next-bricks/next-builder@1.216.3) (2022-12-20)
 
 
