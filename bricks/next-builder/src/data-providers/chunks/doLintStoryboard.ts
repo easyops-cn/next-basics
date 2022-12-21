@@ -2,7 +2,9 @@ import { Identifier } from "@babel/types";
 import type {
   BrickConf,
   BuiltinBrickEventHandler,
+  ContextConf,
   CustomTemplate,
+  CustomTemplateState,
   I18nData,
   Storyboard,
 } from "@next-core/brick-types";
@@ -37,7 +39,9 @@ export type StoryboardErrorCode =
   | "USING_TPL_VAR_IN_TPL"
   | "UNKNOWN_EVENT_ACTION"
   | "UNKNOWN_EVENT_HANDLER"
-  | "INSTALLED_APPS_USE_DYNAMIC_ARG";
+  | "INSTALLED_APPS_USE_DYNAMIC_ARG"
+  | "USING_ONCHANGE_IN_CTX"
+  | "USING_USERESOLVE_IN_BRICK_LIFECYCLE";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -71,6 +75,11 @@ export interface LintDetailMeta {
 
 const INSTALLED_APPS = "INSTALLED_APPS";
 const HAS = "has";
+const ACTIONS_BETTER_REPLACED_BY_TRACK = [
+  "context.replace",
+  "context.assign",
+  "state.update",
+] as unknown as BuiltinBrickEventHandler["action"][];
 
 export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const builtinActions = new Set([
@@ -176,6 +185,8 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const usingCtxActionsInTemplate = new Map<string, Set<string>>();
   const unknownEventActions = new Map<string, LintDetailMeta>();
   const unknownEventHandlers = new Map<string, LintDetailMeta>();
+  const usingWarnedOnChangeInCtxOrState = new Map<string, LintDetailMeta>();
+  const usingUseResolveInBrickLifeCycle = new Map<string, LintDetailMeta>();
 
   const errors: StoryboardError[] = [];
   const usingScriptBrick: LintDetail[] = [];
@@ -275,6 +286,32 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
             limitString(`${reason}${JSON.stringify(node.raw)}`, 100),
             node,
             path
+          );
+        }
+        break;
+      }
+      case "Context": {
+        const { name } = node.raw as ContextConf | CustomTemplateState;
+        if (node.onChange?.length) {
+          const isWarned = node.onChange.every(
+            (item) =>
+              ACTIONS_BETTER_REPLACED_BY_TRACK.includes(item.raw?.action) ||
+              (item.raw?.target && item.raw?.properties)
+          );
+          isWarned &&
+            addMeta(usingWarnedOnChangeInCtxOrState, name, node, path);
+        }
+        break;
+      }
+      case "ResolveLifeCycle": {
+        if (node.resolves?.length) {
+          node.resolves.forEach((item) =>
+            addMeta(
+              usingUseResolveInBrickLifeCycle,
+              item.raw?.useProvider || item.raw?.provider || item.raw?.ref,
+              node,
+              path
+            )
           );
         }
         break;
@@ -489,6 +526,42 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         zh: "您在项目中使用了 INSTALLED_APPS.has 表达式, 并且使用了动态参数, 这将可能引起错误; 请将入参修改为静态参数, 例如: INSTALLED_APPS.has('xxx')",
         en: "You're using INSTALLED_APPS.has in project with dynamic arguments, it could be get the error result. Please use INSTALLED_APPS.has with static arguments, for example: INSTALLED_APPS.has('xxx')",
       },
+    });
+  }
+
+  if (usingWarnedOnChangeInCtxOrState.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_ONCHANGE_IN_CTX",
+      message: {
+        zh: "您在 Context 或 State 的 onChange 中使用了 context.replace 或 set brick properties 等事件处理器, 请使用 track context 或 track state 代替:",
+        en: "You are using an event handler such as context.replace or set brick properties in onChange of context or state. Please use track Context or track State instead:",
+      },
+      list: [...usingWarnedOnChangeInCtxOrState.keys()],
+      details: [...usingWarnedOnChangeInCtxOrState.entries()].map(
+        ([message, meta]) => ({
+          message,
+          meta,
+        })
+      ),
+    });
+  }
+
+  if (usingUseResolveInBrickLifeCycle.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_USERESOLVE_IN_BRICK_LIFECYCLE",
+      message: {
+        zh: "您在 lifeCycle 中使用了 useResolve 获取数据, 建议您使用 context 或 state 代替:",
+        en: "You are using useResolve in lifeCycle. Please use context or state instead:",
+      },
+      list: [...usingUseResolveInBrickLifeCycle.keys()],
+      details: [...usingUseResolveInBrickLifeCycle.entries()].map(
+        ([message, meta]) => ({
+          message,
+          meta,
+        })
+      ),
     });
   }
 
