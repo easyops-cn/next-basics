@@ -1,0 +1,36 @@
+.cardHead {
+  font-size: 16px;
+  padding: 6px 20px;
+  background: #333335;
+  display: flex;
+  justify-content: space-between;
+}
+.cardHead h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.toolItem {
+  cursor: pointer;
+  margin: 6px 0;
+}
+.toolItem span {
+  margin-left: 6px;
+}
+.danger {
+  color: red;
+}
+.cardBody {
+  align-items: left;
+  background: #1e1e1e;
+  display: grid;
+  justify-items: left;
+  padding: 20px;
+}
+.normal {
+  font-size: 14px;
+}
+.heighlight {
+  color: #587fff;
+  font-size: 14px;
+  margin: 0 6px;
+}
