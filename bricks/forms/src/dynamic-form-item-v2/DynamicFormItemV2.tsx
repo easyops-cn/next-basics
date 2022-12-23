@@ -25,6 +25,7 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   onChange?: (value: Record<string, any>[]) => void;
   onAdd?: (value: { detail: Record<string, any>; index: number }) => void;
   onRemove?: (value: { detail: Record<string, any>; index: number }) => void;
+  onInputBlur?: (value: { rowIndex: number; name: string }) => void;
   hideRemoveButton?:
     | boolean
     | ((row: Record<string, any>, index: number) => boolean);
@@ -55,6 +56,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
       onChange,
       onAdd,
       onRemove,
+      onInputBlur,
       hideRemoveButton,
       disabledRemoveButton,
       hideAddButton,
@@ -76,6 +78,10 @@ const LegacyDynamicFormItemV2 = forwardRef(
       allValues: DynamicFormValue
     ): void => {
       onChange?.(allValues?.[FORM_LIST_NAME]);
+    };
+
+    const handleInputBlur = (rowIndex: number, name: string): void => {
+      onInputBlur?.({ rowIndex, name });
     };
 
     const hasLabel = useMemo(
@@ -120,6 +126,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
                             column={column}
                             formValue={value}
                             field={{ key, name, ...restField }}
+                            handleInputBlur={handleInputBlur}
                           />
                         </Col>
                       ))}
@@ -189,6 +196,7 @@ export function DynamicFormItemV2(
     onChange,
     onAdd,
     onRemove,
+    onInputBlur,
     disabledRemoveButton,
     hideRemoveButton,
     hideAddButton,
@@ -227,6 +235,7 @@ export function DynamicFormItemV2(
         onChange={onChange}
         onAdd={onAdd}
         onRemove={onRemove}
+        onInputBlur={onInputBlur}
         disabledRemoveButton={disabledRemoveButton}
         hideRemoveButton={hideRemoveButton}
         hideAddButton={hideAddButton}

@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import { Cascader, Form, Input, InputNumber, Select } from "antd";
 import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
-import { Column, ComponentType } from "../interfaces";
+import { Column } from "../interfaces";
 
 const field = {
   name: 0,
@@ -63,6 +63,34 @@ const editorColumn = {
   type: "editor",
   props: {
     mode: "yaml",
+  },
+} as Column;
+
+const selectColumnWithTwoDimensionalOptions = {
+  name: "select",
+  label: "select",
+  // type: ComponentType.SELECT,
+  type: "select",
+  props: {
+    options: [
+      [{ label: "a", value: "a" }],
+      [{ label: "b", value: "b" }],
+      [{ label: "c", value: "c" }],
+    ],
+  },
+} as Column;
+
+const cascaderColumnWithTwoDimensionalOptions = {
+  name: "cascader",
+  label: "cascader",
+  // type: ComponentType.CASCADER,
+  type: "cascader",
+  props: {
+    options: [
+      [{ label: "a", value: "a" }],
+      [{ label: "b", value: "b" }],
+      [{ label: "c", value: "c" }],
+    ],
   },
 } as Column;
 
@@ -253,5 +281,54 @@ describe("ColumnComponent", () => {
       rowIndex,
       rowValue: formValue[rowIndex],
     });
+  });
+
+  it("select with two dimensional options should work", () => {
+    const wrapper = shallow(
+      <ColumnComponent
+        column={selectColumnWithTwoDimensionalOptions}
+        field={field}
+      />
+    );
+    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(wrapper.find(Select.Option)).toHaveLength(3);
+    expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
+
+    wrapper.setProps({
+      column: {
+        ...selectColumnWithTwoDimensionalOptions,
+        props: {
+          ...selectColumnWithTwoDimensionalOptions.props,
+          groupBy: "label",
+          popoverPositionType: "parent",
+        },
+      },
+    });
+    wrapper.update();
+    expect(wrapper.find(Select.Option)).toHaveLength(3);
+    expect(wrapper.find(Select.OptGroup)).toHaveLength(1);
+
+    expect(wrapper.find(Select).prop("filterOption")).toBeFalsy();
+    wrapper.setProps({
+      column: {
+        ...selectColumnWithTwoDimensionalOptions,
+        props: {
+          ...selectColumnWithTwoDimensionalOptions.props,
+          showSearch: true,
+        },
+      },
+    });
+    wrapper.update();
+    expect(wrapper.find(Select).prop("filterOption")).not.toBeFalsy();
+  });
+
+  it("cascader with two dimensional options should work", () => {
+    const wrapper = shallow(
+      <ColumnComponent
+        column={cascaderColumnWithTwoDimensionalOptions}
+        field={field}
+      />
+    );
+    expect(wrapper.find(Cascader)).toHaveLength(1);
   });
 });

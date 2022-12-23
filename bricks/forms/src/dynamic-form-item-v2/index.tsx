@@ -118,6 +118,18 @@ export class DynamicFormItemV2Element extends FormItemElement {
     this.removeEvent.emit(value);
   };
 
+  /**
+   * @detail value: { rowIndex: number, name: string }
+   * @description input类型表单项失焦时触发，返回所在行rowIndex，以及该输入框的name
+   */
+  @event({ type: "input.blur" }) inputBlurEvent: EventEmitter;
+  private _handleInputBlur = (value: {
+    rowIndex: number;
+    name: string;
+  }): void => {
+    this.inputBlurEvent.emit(value);
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -156,6 +168,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
             onChange={this._handleChange}
             onAdd={this._handleAdd}
             onRemove={this._handleRemove}
+            onInputBlur={this._handleInputBlur}
             hideRemoveButton={this.hideRemoveButton}
             disabledRemoveButton={this.disabledRemoveButton}
             hideAddButton={this.hideAddButton}

@@ -76,7 +76,9 @@ export interface SelectProps extends BasicProps {
   /**
    * 候选项列表
    */
-  options: GeneralComplexOption<string | number>[];
+  options:
+    | GeneralComplexOption<string | number>[]
+    | GeneralComplexOption<string | number>[][];
   /**
    * 支持搜索
    */
@@ -107,7 +109,7 @@ export interface CascaderProps extends BasicProps {
   /**
    * 候选项
    */
-  options: CascaderOptionType[];
+  options: CascaderOptionType[] | CascaderOptionType[][];
   /**
    * 次级菜单的展开方式，可选 `click` 和 `hover`
    */

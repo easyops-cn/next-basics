@@ -1,10 +1,12 @@
 import React, { useMemo } from "react";
 import { FormListFieldData } from "antd/lib/form/FormList";
-import { Column, ComponentType, SelectProps } from "../interfaces";
+import { Column, SelectProps } from "../interfaces";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Cascader, Form, Input, InputNumber, Select } from "antd";
 import _, { groupBy, isEqual, isNil, partial } from "lodash";
 import { getRealValue } from "./util";
+import { GeneralComplexOption } from "@next-libs/forms";
+import { CascaderOptionType } from "antd/lib/cascader";
 
 interface ColumnComponentProps {
   column: Column;
@@ -12,10 +14,11 @@ interface ColumnComponentProps {
   rowIndex?: number;
   formValue?: Record<string, any>[];
   hasLabel?: boolean;
+  handleInputBlur: (rowIndex: number, name: string) => void;
 }
 
 const getOptions = (options: SelectProps["options"]): React.ReactNode => {
-  return options.map((op) => (
+  return (options as GeneralComplexOption<string | number>[]).map((op) => (
     <Select.Option key={op.value} value={op.value} label={op.label}>
       {op.label}
     </Select.Option>
@@ -30,7 +33,7 @@ const getOptsGroups = (
 
   return optsGroup.map(([label, options]) => (
     <Select.OptGroup key={label} label={label}>
-      {getOptions(options)}
+      {getOptions(options as GeneralComplexOption<string | number>[])}
     </Select.OptGroup>
   ));
 };
@@ -38,7 +41,8 @@ const getOptsGroups = (
 export function ColumnComponent(
   props: ColumnComponentProps
 ): React.ReactElement {
-  const { column, field, rowIndex, hasLabel, formValue } = props;
+  const { column, field, rowIndex, hasLabel, formValue, handleInputBlur } =
+    props;
   const { label, name } = column;
   const { name: fieldName, ...restField } = field;
 
@@ -105,6 +109,7 @@ export function ColumnComponent(
             type={type}
             maxLength={maxLength}
             allowClear={allowClear}
+            onBlur={() => handleInputBlur(rowIndex, name)}
           />
         </Form.Item>
       );
@@ -155,13 +160,13 @@ export function ColumnComponent(
         placeholder,
         allowClear,
         mode,
-        options = [],
         showSearch,
         groupBy,
         tokenSeparators,
         maxTagCount,
         popoverPositionType,
       } = column.props || {};
+      let { options = [] } = column.props || {};
       const searchProps = showSearch
         ? {
             showSearch: true,
@@ -174,6 +179,10 @@ export function ColumnComponent(
         : {
             showSearch: false,
           };
+
+      if (Array.isArray(options[rowIndex])) {
+        options = options[rowIndex] as GeneralComplexOption<string | number>[];
+      }
 
       return (
         <Form.Item
@@ -197,7 +206,12 @@ export function ColumnComponent(
               : {})}
             {...searchProps}
           >
-            {groupBy ? getOptsGroups(options, groupBy) : getOptions(options)}
+            {groupBy
+              ? getOptsGroups(
+                  options as GeneralComplexOption<string | number>[],
+                  groupBy
+                )
+              : getOptions(options as GeneralComplexOption<string | number>[])}
           </Select>
         </Form.Item>
       );
@@ -206,12 +220,16 @@ export function ColumnComponent(
       const {
         placeholder,
         allowClear,
-        options,
         expandTrigger,
         popupPlacement,
         showSearch,
         fieldNames,
       } = column.props || {};
+      let { options = [] } = column.props || {};
+
+      if (Array.isArray(options[rowIndex])) {
+        options = options[rowIndex] as CascaderOptionType[];
+      }
 
       return (
         <Form.Item
