@@ -6,6 +6,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { Popover, Empty } from "antd";
+import { cloneDeep, uniqueId } from "lodash";
 
 export interface TextShow {
   show: string;
@@ -16,6 +17,7 @@ export interface DataSource {
   title: string;
   textArray: TextShow[][];
   visible?: boolean;
+  uid?: string;
 }
 
 interface BusinessRuleProps {
@@ -26,27 +28,29 @@ interface BusinessRuleProps {
 
 export function BusinessRule(props: BusinessRuleProps): React.ReactElement {
   const { handleEdit, handleDelete } = props;
-  const [dataSource, setDataSource] = useState(props.dataSource);
+  const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
-    dataSource.forEach((item) => {
+    if (!props.dataSource) {
+      return;
+    }
+    const _dataSource = cloneDeep(props.dataSource);
+    _dataSource.forEach((item) => {
+      item.uid = uniqueId("event_");
       item.visible = false;
     });
-    setDataSource([...dataSource]);
-  }, [props.dataSource]);
-
-  useEffect(() => {
+    setDataSource(_dataSource);
     const fn = () => {
-      dataSource.forEach((item) => {
+      _dataSource.forEach((item) => {
         item.visible = false;
       });
-      setDataSource([...dataSource]);
+      setDataSource([..._dataSource]);
     };
     document.addEventListener("click", fn, true);
     return () => {
       document.removeEventListener("click", fn, true);
     };
-  }, []);
+  }, [props.dataSource]);
 
   const getText = (textArray: TextShow[][]) => {
     return textArray?.map((item: TextShow[], index: number) => {
@@ -65,9 +69,9 @@ export function BusinessRule(props: BusinessRuleProps): React.ReactElement {
   };
 
   const getCard = () => {
-    return dataSource?.map((item, index) => {
+    return dataSource?.map((item) => {
       return (
-        <div key={index} className={styles.cardWrap}>
+        <div key={item.uid} className={styles.cardWrap}>
           <div className={styles.cardHead}>
             <h4>{item.title}</h4>
             <div className={styles.cardTool}>
