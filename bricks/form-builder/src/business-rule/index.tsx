@@ -7,7 +7,7 @@ import {
   EventEmitter,
   property,
 } from "@next-core/brick-kit";
-import { BusinessRule, TextShow } from "./BusinessRule";
+import { BusinessRule, DataSource } from "./BusinessRule";
 
 /**
  * @id form-builder.business-rule
@@ -19,13 +19,10 @@ import { BusinessRule, TextShow } from "./BusinessRule";
  */
 export class BusinessRuleElement extends UpdatingElement {
   @property({ attribute: false })
-  ruleTitle: string;
+  dataSource: DataSource[];
 
   @property({ attribute: false })
-  dataSource: unknown;
-
-  @property({ attribute: false })
-  textArray: [TextShow[]];
+  eventDataSource: unknown;
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -58,9 +55,8 @@ export class BusinessRuleElement extends UpdatingElement {
       ReactDOM.render(
         <BrickWrapper>
           <BusinessRule
-            ruleTitle={this.ruleTitle}
             dataSource={this.dataSource}
-            textArray={this.textArray}
+            eventDataSource={this.eventDataSource}
             handleEdit={this.businessEdit}
             handleDelete={this.businessDelete}
           />

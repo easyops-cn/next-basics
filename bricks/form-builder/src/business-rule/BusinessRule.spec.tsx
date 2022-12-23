@@ -11,19 +11,23 @@ import {
 } from "@ant-design/icons";
 
 const props = {
-  ruleTitle: "xx",
-  textArray: [
-    [
-      {
-        text: "xxx",
-        show: "normal",
-      },
-      {
-        text: "xxx",
-        show: "hightlight",
-      },
-    ],
-  ] as any,
+  dataSource: [
+    {
+      ruleTitle: "xx",
+      textArray: [
+        [
+          {
+            text: "xxx",
+            show: "normal",
+          },
+          {
+            text: "xxx",
+            show: "hightlight",
+          },
+        ],
+      ],
+    },
+  ],
   handleEdit: jest.fn(),
   handleDelete: jest.fn(),
 };
