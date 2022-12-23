@@ -21,9 +21,6 @@ export class BusinessRuleElement extends UpdatingElement {
   @property({ attribute: false })
   dataSource: DataSource[];
 
-  @property({ attribute: false })
-  eventDataSource: unknown;
-
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -56,7 +53,6 @@ export class BusinessRuleElement extends UpdatingElement {
         <BrickWrapper>
           <BusinessRule
             dataSource={this.dataSource}
-            eventDataSource={this.eventDataSource}
             handleEdit={this.businessEdit}
             handleDelete={this.businessDelete}
           />

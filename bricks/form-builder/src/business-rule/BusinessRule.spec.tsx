@@ -13,7 +13,7 @@ import {
 const props = {
   dataSource: [
     {
-      ruleTitle: "xx",
+      title: "xx",
       textArray: [
         [
           {
@@ -36,7 +36,7 @@ describe("BusinessRule", () => {
   it("should work", () => {
     render(<BusinessRule {...props} />);
     fireEvent.click(screen.getByTestId("my-brick"));
-    expect(screen.getByTestId("my-brick")).toHaveTextContent("xxxxxxxx");
+    expect(screen.getByTestId("my-brick")).toHaveTextContent("xxxxxx");
   });
 
   it("should work", () => {
