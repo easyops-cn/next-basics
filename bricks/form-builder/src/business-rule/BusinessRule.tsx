@@ -13,55 +13,40 @@ export interface TextShow {
 }
 
 export interface DataSource {
-  ruleTitle: string;
+  title: string;
   textArray: TextShow[][];
+  visible?: boolean;
 }
 
 interface BusinessRuleProps {
   dataSource?: DataSource[];
-  eventDataSource?: any;
   handleEdit: (dataSource: any) => void;
   handleDelete: (dataSource: any) => void;
 }
 
 export function BusinessRule(props: BusinessRuleProps): React.ReactElement {
-  const { dataSource, eventDataSource, handleEdit, handleDelete } = props;
-  const [visible, setVisible] = useState(false);
+  const { handleEdit, handleDelete } = props;
+  const [dataSource, setDataSource] = useState(props.dataSource);
+
+  useEffect(() => {
+    dataSource.forEach((item) => {
+      item.visible = false;
+    });
+    setDataSource([...dataSource]);
+  }, [props.dataSource]);
 
   useEffect(() => {
     const fn = () => {
-      setVisible(false);
+      dataSource.forEach((item) => {
+        item.visible = false;
+      });
+      setDataSource([...dataSource]);
     };
     document.addEventListener("click", fn, true);
     return () => {
       document.removeEventListener("click", fn, true);
     };
   }, []);
-
-  const toolContent = (
-    <>
-      <div
-        className={styles.toolItem}
-        onClick={() => {
-          setVisible(false);
-          handleEdit && handleEdit(eventDataSource);
-        }}
-      >
-        <EditOutlined />
-        <span>编辑</span>
-      </div>
-      <div
-        className={`${styles.toolItem} ${styles.danger}`}
-        onClick={() => {
-          setVisible(false);
-          handleDelete && handleDelete(eventDataSource);
-        }}
-      >
-        <DeleteOutlined />
-        <span>删除</span>
-      </div>
-    </>
-  );
 
   const getText = (textArray: TextShow[][]) => {
     return textArray?.map((item: TextShow[], index: number) => {
@@ -84,10 +69,44 @@ export function BusinessRule(props: BusinessRuleProps): React.ReactElement {
       return (
         <div key={index} className={styles.cardWrap}>
           <div className={styles.cardHead}>
-            <h4>{item.ruleTitle}</h4>
+            <h4>{item.title}</h4>
             <div className={styles.cardTool}>
-              <Popover content={toolContent} visible={visible} trigger="click">
-                <EllipsisOutlined onClick={() => setVisible(!visible)} />
+              <Popover
+                content={
+                  <>
+                    <div
+                      className={styles.toolItem}
+                      onClick={() => {
+                        item.visible = false;
+                        setDataSource([...dataSource]);
+                        handleEdit && handleEdit(item);
+                      }}
+                    >
+                      <EditOutlined />
+                      <span>编辑</span>
+                    </div>
+                    <div
+                      className={`${styles.toolItem} ${styles.danger}`}
+                      onClick={() => {
+                        item.visible = false;
+                        setDataSource([...dataSource]);
+                        handleDelete && handleDelete(item);
+                      }}
+                    >
+                      <DeleteOutlined />
+                      <span>删除</span>
+                    </div>
+                  </>
+                }
+                visible={item.visible}
+                trigger="click"
+              >
+                <EllipsisOutlined
+                  onClick={() => {
+                    item.visible = !item.visible;
+                    setDataSource([...dataSource]);
+                  }}
+                />
               </Popover>
             </div>
           </div>
