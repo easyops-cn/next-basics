@@ -6,8 +6,9 @@ import { Cascader, Form, Input, InputNumber, Select } from "antd";
 import _, { groupBy, isEqual, isNil, partial } from "lodash";
 import { getRealValue } from "./util";
 import { GeneralComplexOption } from "@next-libs/forms";
-import { CascaderOptionType } from "antd/lib/cascader";
-
+import style from "./ColumnComponent.module.css";
+import { UseBrickConf } from "@next-core/brick-types";
+import { BrickAsComponent } from "@next-core/brick-kit";
 interface ColumnComponentProps {
   column: Column;
   field: FormListFieldData;
@@ -17,23 +18,40 @@ interface ColumnComponentProps {
   handleInputBlur: (rowIndex: number, name: string) => void;
 }
 
-const getOptions = (options: SelectProps["options"]): React.ReactNode => {
+const getOptions = (
+  options: SelectProps["options"],
+  suffix: UseBrickConf,
+  suffixStyle: React.CSSProperties
+): React.ReactNode => {
   return (options as GeneralComplexOption<string | number>[]).map((op) => (
     <Select.Option key={op.value} value={op.value} label={op.label}>
-      {op.label}
+      <div className={style.option}>
+        <span className={style.label}>{op.label}</span>
+        {suffix && suffix.useBrick && (
+          <div className={style.suffixContainer} style={suffixStyle}>
+            <BrickAsComponent useBrick={suffix.useBrick} data={op} />
+          </div>
+        )}
+      </div>
     </Select.Option>
   ));
 };
 
 const getOptsGroups = (
   options: SelectProps["options"],
-  category: string
+  category: string,
+  suffix: UseBrickConf,
+  suffixStyle: React.CSSProperties
 ): React.ReactNode => {
   const optsGroup = Object.entries(groupBy(options, category));
 
   return optsGroup.map(([label, options]) => (
     <Select.OptGroup key={label} label={label}>
-      {getOptions(options as GeneralComplexOption<string | number>[])}
+      {getOptions(
+        options as GeneralComplexOption<string | number>[],
+        suffix,
+        suffixStyle
+      )}
     </Select.OptGroup>
   ));
 };
@@ -165,6 +183,8 @@ export function ColumnComponent(
         tokenSeparators,
         maxTagCount,
         popoverPositionType,
+        suffix,
+        suffixStyle,
       } = column.props || {};
       let { options = [] } = column.props || {};
       const searchProps = showSearch
@@ -192,6 +212,7 @@ export function ColumnComponent(
           rules={rules}
         >
           <Select
+            className={suffix && style.suffixBrickSelect}
             style={{ width: "100%" }}
             placeholder={placeholder}
             disabled={disabled}
@@ -209,9 +230,15 @@ export function ColumnComponent(
             {groupBy
               ? getOptsGroups(
                   options as GeneralComplexOption<string | number>[],
-                  groupBy
+                  groupBy,
+                  suffix,
+                  suffixStyle
                 )
-              : getOptions(options as GeneralComplexOption<string | number>[])}
+              : getOptions(
+                  options as GeneralComplexOption<string | number>[],
+                  suffix,
+                  suffixStyle
+                )}
           </Select>
         </Form.Item>
       );
@@ -220,16 +247,12 @@ export function ColumnComponent(
       const {
         placeholder,
         allowClear,
+        options,
         expandTrigger,
         popupPlacement,
         showSearch,
         fieldNames,
       } = column.props || {};
-      let { options = [] } = column.props || {};
-
-      if (Array.isArray(options[rowIndex])) {
-        options = options[rowIndex] as CascaderOptionType[];
-      }
 
       return (
         <Form.Item

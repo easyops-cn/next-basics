@@ -80,17 +80,39 @@ const selectColumnWithTwoDimensionalOptions = {
   },
 } as Column;
 
-const cascaderColumnWithTwoDimensionalOptions = {
-  name: "cascader",
-  label: "cascader",
-  // type: ComponentType.CASCADER,
-  type: "cascader",
+const selectColumnWithSuffix = {
+  name: "select",
+  label: "select",
+  // type: ComponentType.SELECT,
+  type: "select",
   props: {
     options: [
       [{ label: "a", value: "a" }],
       [{ label: "b", value: "b" }],
       [{ label: "c", value: "c" }],
     ],
+    suffix: {
+      useBrick: {
+        brick: "presentational-bricks.brick-value-mapping",
+        properties: {
+          mapping: {
+            "0": {
+              color: "green",
+              text: "生产",
+            },
+            "1": {
+              color: "cyan",
+              text: "开发",
+            },
+            "2": {
+              color: "orange",
+              text: "测试",
+            },
+          },
+          value: "<% DATA.type %>",
+        },
+      },
+    },
   },
 } as Column;
 
@@ -322,13 +344,11 @@ describe("ColumnComponent", () => {
     expect(wrapper.find(Select).prop("filterOption")).not.toBeFalsy();
   });
 
-  it("cascader with two dimensional options should work", () => {
+  it("select with suffix should work", () => {
     const wrapper = shallow(
-      <ColumnComponent
-        column={cascaderColumnWithTwoDimensionalOptions}
-        field={field}
-      />
+      <ColumnComponent column={selectColumnWithSuffix} field={field} />
     );
-    expect(wrapper.find(Cascader)).toHaveLength(1);
+    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(wrapper.find(".suffixContainer")).toHaveLength(3);
   });
 });

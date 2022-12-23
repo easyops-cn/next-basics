@@ -1,0 +1,32 @@
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+  }
+}
+
+.suffixBrickSelect {
+  :global {
+    .ant-select-selection-selected-value {
+      width: 100%;
+    }
+  }
+}
+
+.itemOption {
+  border-radius: 6px;
+}
+
+:global(.ant-select-selector) .suffixContainer {
+  margin-top: -1px;
+}
+:global(.ant-select-item-option-selected:not(.ant-select-item-option-disabled)) {
+  color: var(--color-brand);
+  background-color: var(--v8-top-menu-item-selected-bg);
+}
