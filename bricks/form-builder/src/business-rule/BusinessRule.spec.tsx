@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BusinessRule } from "./BusinessRule";
 import { shallow, mount } from "enzyme";
-import { Popover } from "antd";
+import { Popover, Empty } from "antd";
 import {
   EllipsisOutlined,
   EditOutlined,
@@ -47,5 +47,14 @@ describe("BusinessRule", () => {
     wrapper.find(DeleteOutlined).simulate("click");
     expect(props.handleEdit).toBeCalled();
     expect(props.handleDelete).toBeCalled();
+  });
+
+  it("should Empty work", () => {
+    const newProps = {
+      ...props,
+      dataSource: null,
+    };
+    const wrapper = mount(<BusinessRule {...newProps} />);
+    expect(wrapper.find(Empty).length).toBe(1);
   });
 });
