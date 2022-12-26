@@ -56,6 +56,9 @@ export class InformMethodsFormElement extends FormItemElement {
   protected _render(): void {
     // istanbul ignore else
     if (this.isConnected) {
+      if (this.notRender) {
+        return;
+      }
       ReactDOM.render(
         <BrickWrapper>
           <InformMethodsForm
