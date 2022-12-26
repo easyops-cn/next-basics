@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.249.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.249.0...@next-bricks/forms@1.249.1) (2022-12-26)
+
+
+### Bug Fixes
+
+* **InformMethodsForm:**  fix notRender ([e5940ff](https://github.com/easyops-cn/next-basics/commit/e5940ff4ac8f65fb371b0f83ddf76ed620ecb49f))
+
+
+
+
+
 # [1.249.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.248.0...@next-bricks/forms@1.249.0) (2022-12-13)
 
 
