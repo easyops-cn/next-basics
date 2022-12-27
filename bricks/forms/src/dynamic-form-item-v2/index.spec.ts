@@ -52,5 +52,14 @@ describe("forms.dynamic-form-item-v2", () => {
         ][0] as CustomEvent
       ).type
     ).toEqual("row.remove");
+
+    props.onInputBlur();
+    expect(
+      (
+        sypOnDispatchEvent.mock.calls[
+          sypOnDispatchEvent.mock.calls.length - 1
+        ][0] as CustomEvent
+      ).type
+    ).toEqual("input.blur");
   });
 });
