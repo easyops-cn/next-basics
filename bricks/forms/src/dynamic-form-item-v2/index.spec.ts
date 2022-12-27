@@ -62,4 +62,16 @@ describe("forms.dynamic-form-item-v2", () => {
       ).type
     ).toEqual("input.blur");
   });
+
+  it("method can work", () => {
+    const element = document.createElement("forms.dynamic-form-item-v2") as any;
+    element.upperRef = { current: { columns: [], setColumns: jest.fn() } };
+    element.updateOptions({ rowIndex: "all", name: "select", options: [] });
+    element.updateOptions({
+      rowIndex: 1,
+      name: "select",
+      options: [{ value: "1", label: "" }],
+    });
+    element.updateOptions({ rowIndex: "all", name: "select", options: [] });
+  });
 });
