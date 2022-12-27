@@ -5,10 +5,12 @@ import {
   property,
   event,
   EventEmitter,
+  method,
 } from "@next-core/brick-kit";
 import { DynamicFormItemV2 } from "./DynamicFormItemV2";
 import { FormItemElement } from "@next-libs/forms";
-import { Column } from "../interfaces";
+import { Column, SelectProps } from "../interfaces";
+import lodash from "lodash";
 
 /**
  * @id forms.dynamic-form-item-v2
@@ -126,9 +128,67 @@ export class DynamicFormItemV2Element extends FormItemElement {
   private _handleInputBlur = (value: {
     rowIndex: number;
     name: string;
+    value: string;
   }): void => {
     this.inputBlurEvent.emit(value);
   };
+
+  private upperRef = React.createRef();
+
+  /**
+   *
+   * @description 当select表单项配置的props.options为二维数组时,用于更新指定的options; 若传入的options为null,则表示删除该options; 若传入的rowIndex为'all',则表示全覆盖更新
+   */
+  @method()
+  updateOptions(args: {
+    rowIndex: number | number[] | "all";
+    name: string;
+    options: SelectProps["options"];
+  }): void {
+    const { rowIndex, name, options } = args;
+    const { columns, setColumns } = this.upperRef.current;
+    const cloneOptions =
+      lodash.cloneDeep(columns).find((item) => item.name === name)?.props
+        ?.options || [];
+    if (
+      Array.isArray(rowIndex) &&
+      options.every((i) => Array.isArray(i) || i === null)
+    ) {
+      // 批量覆盖
+      options.map((item, index) => {
+        if (item !== null) {
+          cloneOptions[rowIndex[index]] = item;
+        } else {
+          cloneOptions.splice(rowIndex[index], 1);
+        }
+      });
+    } else if (
+      typeof rowIndex === "number" &&
+      (options === null ||
+        (Array.isArray(options) &&
+          !options.some((i) => Array.isArray(i) || i === null)))
+    ) {
+      // 单次覆盖
+      if (options !== null) {
+        cloneOptions[rowIndex] = options;
+      } else {
+        cloneOptions.splice(rowIndex, 1);
+      }
+    }
+    setColumns(
+      columns.map((item) =>
+        item.name === name
+          ? {
+              ...item,
+              props: {
+                ...item.props,
+                options: rowIndex === "all" ? options : cloneOptions,
+              },
+            }
+          : item
+      )
+    );
+  }
 
   connectedCallback(): void {
     // Don't override user's style settings.
@@ -173,6 +233,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
             disabledRemoveButton={this.disabledRemoveButton}
             hideAddButton={this.hideAddButton}
             disabledAddButton={this.disabledAddButton}
+            upperRef={this.upperRef}
           />
         </BrickWrapper>,
         this

@@ -15,7 +15,7 @@ interface ColumnComponentProps {
   rowIndex?: number;
   formValue?: Record<string, any>[];
   hasLabel?: boolean;
-  handleInputBlur: (rowIndex: number, name: string) => void;
+  handleInputBlur: (rowIndex: number, name: string, value: string) => void;
 }
 
 const getOptions = (
@@ -127,7 +127,9 @@ export function ColumnComponent(
             type={type}
             maxLength={maxLength}
             allowClear={allowClear}
-            onBlur={() => handleInputBlur(rowIndex, name)}
+            onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+              handleInputBlur(rowIndex, name, e.target.value)
+            }
           />
         </Form.Item>
       );
