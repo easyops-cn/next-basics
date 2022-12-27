@@ -81,6 +81,17 @@ describe("ConditionalFormat", () => {
     expect(wrapper.find(Modal).props().visible).toBeFalsy();
   });
 
+  it("should cancel work", () => {
+    const wrapper = mount(<ConditionalFormatAdapter {...props} />);
+    wrapper.find(PlusOutlined).at(0).simulate("click");
+    wrapper.update();
+    wrapper.find(Modal).find(Select).invoke("onChange")(["1"]);
+    wrapper.update();
+    wrapper.find(Modal).invoke("onCancel")();
+    wrapper.update();
+    expect(wrapper.find(Modal).props().visible).toBeFalsy();
+  });
+
   it("should PlusOutlined1 work", () => {
     const newProps = {
       ...props,
@@ -129,5 +140,44 @@ describe("ConditionalFormat", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...props} />);
     wrapper.find(DeleteOutlined).at(0).invoke("onClick")();
     expect(wrapper.find(DeleteOutlined).length).toBe(2);
+  });
+
+  it("should noGroup work", () => {
+    const newProps = {
+      ...props,
+      value: {
+        groups: [
+          {
+            canditions: [
+              {
+                op: "and",
+                operation: "contain",
+                origin: "表单项1",
+                value: "aaa",
+              },
+              {
+                op: "and",
+                operation: "contain",
+                origin: "表单项1",
+                value: "aaa",
+              },
+            ],
+          },
+          {
+            canditions: [
+              {
+                origin: "表单项1",
+                operation: "equal",
+                value: "bbba",
+                op: "and",
+              },
+            ],
+          },
+        ],
+        op: "and",
+      },
+    };
+    const wrapper = mount(<ConditionalFormatAdapter {...newProps} />);
+    expect(wrapper.find(Modal).props().visible).toBeFalsy();
   });
 });

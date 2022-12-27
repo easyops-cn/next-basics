@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import styles from "./ConditionalFormat.module.css";
 import { Modal, Select, Input } from "antd";
-import { uniqueId, cloneDeep } from "lodash";
+import { uniqueId, cloneDeep, isEmpty, isNil } from "lodash";
 
 interface ConditionalFormatProps extends FormItemWrapperProps {
   value?: any;
@@ -58,18 +58,23 @@ export function ConditionalFormat(
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [origin, setOrigin] = useState("");
   const groupNumRef = useRef(0);
-
   useEffect(() => {
-    if (!value) return;
+    if (isEmpty(value) || isNil(value)) {
+      setGroupCanditions({
+        groups: [],
+        op: "and",
+      });
+      return;
+    }
     const _value = cloneDeep(value);
     _value.groups?.forEach((group: Group) => {
-      group.groupId = uniqueId("group_");
+      group.groupId = group.groupId ?? uniqueId("group_");
       group.canditions?.forEach((candition: Candition) => {
-        candition.canditionId = uniqueId("candition_");
+        candition.canditionId = candition.canditionId ?? uniqueId("candition_");
       });
     });
-    setGroupCanditions(cloneDeep(_value));
-  }, []);
+    setGroupCanditions(_value);
+  }, [value]);
 
   const addFilterCandition = (groupNum?: number) => {
     groupNumRef.current = groupNum;
