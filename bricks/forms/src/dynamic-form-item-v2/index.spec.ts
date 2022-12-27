@@ -63,15 +63,46 @@ describe("forms.dynamic-form-item-v2", () => {
     ).toEqual("input.blur");
   });
 
-  it("method can work", () => {
+  it("method updateOptions should work", () => {
     const element = document.createElement("forms.dynamic-form-item-v2") as any;
-    element.upperRef = { current: { columns: [], setColumns: jest.fn() } };
+    element.upperRef = {
+      current: {
+        columns: [
+          {
+            name: "select",
+            type: "select",
+            props: {
+              options: [
+                { label: "aa", value: "aa" },
+                { label: "bb", value: "bb" },
+              ],
+            },
+          },
+        ],
+        setColumns: jest.fn(),
+      },
+    };
+
     element.updateOptions({ rowIndex: "all", name: "select", options: [] });
+
     element.updateOptions({
       rowIndex: 1,
       name: "select",
-      options: [{ value: "1", label: "" }],
+      options: [{ value: "1", label: "1" }],
     });
-    element.updateOptions({ rowIndex: "all", name: "select", options: [] });
+
+    element.updateOptions({
+      rowIndex: 1,
+      name: "select",
+      options: null,
+    });
+
+    element.updateOptions({
+      rowIndex: [0, 1],
+      name: "select",
+      options: [null, [{ label: "3", value: "3" }]],
+    });
+
+    expect(element.upperRef.current.setColumns).toBeCalledTimes(4);
   });
 });
