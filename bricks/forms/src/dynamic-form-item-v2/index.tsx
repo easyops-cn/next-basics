@@ -7,8 +7,11 @@ import {
   EventEmitter,
   method,
 } from "@next-core/brick-kit";
-import { DynamicFormItemV2 } from "./DynamicFormItemV2";
-import { FormItemElement } from "@next-libs/forms";
+import {
+  DynamicFormItemV2,
+  upperDynamicFormItemV2Ref,
+} from "./DynamicFormItemV2";
+import { FormItemElement, GeneralComplexOption } from "@next-libs/forms";
 import { Column, SelectProps } from "../interfaces";
 import lodash from "lodash";
 
@@ -133,7 +136,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
     this.inputBlurEvent.emit(value);
   };
 
-  private upperRef = React.createRef();
+  private upperRef = React.createRef<upperDynamicFormItemV2Ref>();
 
   /**
    *
@@ -148,11 +151,15 @@ export class DynamicFormItemV2Element extends FormItemElement {
     const { rowIndex, name, options } = args;
     const { columns, setColumns } = this.upperRef.current;
     const cloneOptions =
-      lodash.cloneDeep(columns).find((item) => item.name === name)?.props
-        ?.options || [];
+      (
+        lodash.cloneDeep(columns).find((item) => item.name === name)
+          ?.props as SelectProps
+      )?.options || [];
     if (
       Array.isArray(rowIndex) &&
-      options.every((i) => Array.isArray(i) || i === null)
+      (options as GeneralComplexOption<string | number>[]).every(
+        (i) => Array.isArray(i) || i === null
+      )
     ) {
       // 批量覆盖
       options.map((item, index) => {
@@ -170,7 +177,9 @@ export class DynamicFormItemV2Element extends FormItemElement {
     ) {
       // 单次覆盖
       if (options !== null) {
-        cloneOptions[rowIndex] = options;
+        cloneOptions[rowIndex] = options as GeneralComplexOption<
+          string | number
+        >[];
       } else {
         cloneOptions.splice(rowIndex, 1);
       }
@@ -186,7 +195,7 @@ export class DynamicFormItemV2Element extends FormItemElement {
               },
             }
           : item
-      )
+      ) as Column[]
     );
   }
 

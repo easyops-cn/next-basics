@@ -194,8 +194,13 @@ const LegacyDynamicFormItemV2 = forwardRef(
   }
 );
 
+export interface upperDynamicFormItemV2Ref {
+  columns: Column[];
+  setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
+}
+
 interface DynamicFormItemV2Props extends LegacyDynamicFormItemV2Props {
-  upperRef: any;
+  upperRef: Ref<upperDynamicFormItemV2Ref>;
 }
 
 export function DynamicFormItemV2(
