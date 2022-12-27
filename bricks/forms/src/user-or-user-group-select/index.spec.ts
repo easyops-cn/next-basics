@@ -22,6 +22,23 @@ describe("forms.user-or-user-group-select", () => {
     expect(unmountComponentAtNode).toBeCalled();
   });
 
+  it("should not create a custom element", async () => {
+    const element = document.createElement(
+      "forms.user-or-user-group-select"
+    ) as any;
+    element.notRender = true;
+    spyOnRender.mockClear();
+    // Always waiting for async `(dis)connectedCallback`
+    await jest.runAllTimers();
+    expect(spyOnRender).not.toBeCalled();
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    expect(spyOnRender).not.toBeCalled();
+    document.body.removeChild(element);
+    await jest.runAllTimers();
+    expect(unmountComponentAtNode).toBeCalled();
+  });
+
   it("should trigger event", async () => {
     const element = document.createElement(
       "forms.user-or-user-group-select"
