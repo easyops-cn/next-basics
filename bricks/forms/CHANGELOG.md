@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.250.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.249.2...@next-bricks/forms@1.250.0) (2022-12-28)
+
+
+### Bug Fixes
+
+* update ts type ([bb7bc55](https://github.com/easyops-cn/next-basics/commit/bb7bc551f5d7801271e60f17ce5d3eeffb778bd0))
+
+
+### Features
+
+* support dynamic-form-item-v2 select&cascader property options[][], support input.blur event ([5d1f921](https://github.com/easyops-cn/next-basics/commit/5d1f9210c18a42b02d6ae3bef4ad75738835eb4e))
+* support input.blur events emit value & support method to update select options ([28e2ec1](https://github.com/easyops-cn/next-basics/commit/28e2ec173789f8b03eb946b1c00aed5e67f90b3b))
+* support select type column suffix ([8b915da](https://github.com/easyops-cn/next-basics/commit/8b915da27bcdc9dc4081102ffba9f6a375b77794))
+
+
+
+
+
 ## [1.249.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.249.1...@next-bricks/forms@1.249.2) (2022-12-27)
 
 

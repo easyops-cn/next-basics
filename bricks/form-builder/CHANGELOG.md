@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/form-builder@0.2.0...@next-bricks/form-builder@0.2.1) (2022-12-28)
+
+
+### Bug Fixes
+
+* 修复条件为空初始化显示错误 Refs:FORM_BUILDER-179 ([ebf7bd2](https://github.com/easyops-cn/next-basics/commit/ebf7bd2ca80b2d03db2e497192d08c3c6b201e3a))
+
+
+
+
+
 # [0.2.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/form-builder@0.1.3...@next-bricks/form-builder@0.2.0) (2022-12-26)
 
 
