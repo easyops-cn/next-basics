@@ -57,7 +57,7 @@ describe("DynamicFormItemV2", () => {
     wrapper.update();
     wrapper.find(".addRowBtn").at(0).simulate("click");
     expect(onAdd).lastCalledWith({
-      detail: { input: undefined, select: undefined },
+      detail: { input: "a", select: undefined },
       index: 0,
     });
   });

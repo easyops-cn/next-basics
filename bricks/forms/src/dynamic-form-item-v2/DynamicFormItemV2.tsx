@@ -218,13 +218,17 @@ export function DynamicFormItemV2(
     disabledAddButton,
     upperRef,
   } = props;
-  const [columns, setColumns] = React.useState(props.columns);
+  const [columns, setColumns] = React.useState<Column[]>([]);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
 
   useImperativeHandle(upperRef, () => ({
     columns: columns,
     setColumns: setColumns,
   }));
+
+  useEffect(() => {
+    setColumns(props.columns);
+  }, [props.columns]);
 
   const validators = [
     {
