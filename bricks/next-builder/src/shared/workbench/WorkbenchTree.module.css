@@ -1,14 +1,39 @@
+.searchBox,
+[data-override-theme="light"] .searchBox {
+  --search-box-background: #fff;
+}
+html[data-theme="dark-v2"] .searchBox,
+[data-override-theme="dark-v2"] .searchBox {
+  --search-box-background: #181818;
+}
+.tree,
+[data-override-theme="light"] .tree {
+  --search-box-background: #fff;
+  --node-color: #595959;
+  --node-color-focus: #595959;
+  --node-background-focus: #e0eeff;
+  --node-icon-background-hover: #fff;
+}
+html[data-theme="dark-v2"] .tree,
+[data-override-theme="dark-v2"] .tree {
+  --search-box-background: #181818;
+  --node-color: #c5c5c5;
+  --node-color-focus: #fff;
+  --node-background-focus: #1a7aff;
+  --node-icon-background-hover: rgba(90, 93, 94, 0.31);
+}
+
 .searchBox {
   position: sticky;
   top: 0;
-  background-color: #181818;
+  background-color: var(--search-box-background);
   padding: 5px 10px 10px;
   z-index: 1;
   :global(.ant-input-affix-wrapper) {
-    background-color: #181818;
+    background-color: var(--search-box-background);
     border: 1px solid rgba(255, 255, 255, 0.2);
     :global(input.ant-input) {
-      background-color: #181818;
+      background-color: var(--search-box-background);
     }
   }
 }
@@ -40,11 +65,11 @@
   outline-width: 1px;
   outline-style: solid;
   outline-offset: -1px;
-  outline-color: #1a7aff;
+  outline-color: var(--node-background-focus);
 }
 
 .nodeLabelRow.active:focus {
-  background-color: #1a7aff;
+  background-color: var(--node-background-focus);
 }
 
 .nodeLabel {
@@ -61,11 +86,11 @@
 .nodeAction,
 .nodeAction:hover,
 .nodeLabelRow .nodeLabel {
-  color: #c5c5c5;
+  color: var(--node-color);
 }
 
 .nodeLabelRow:focus .nodeLabel {
-  color: #fff;
+  color: var(--node-color-focus);
 }
 
 .nodeLabelRow.matched .nodeLabel {
@@ -109,7 +134,7 @@
 
 .nodeLabelRow.collapsible .nodeIcon:hover,
 .nodeLabelRow.collapsible .collapseIcon:hover {
-  background-color: rgba(90, 93, 94, 0.31);
+  background-color: var(--node-icon-background-hover);
 }
 
 .nodeName {

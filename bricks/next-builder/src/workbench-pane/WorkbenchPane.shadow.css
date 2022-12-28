@@ -1,5 +1,11 @@
 :host {
   display: block;
+  --pane-color: #595959;
+}
+
+:host-context(html[data-theme="dark-v2"]),
+:host-context([data-override-theme="dark-v2"]) {
+  --pane-color: #ccc;
 }
 
 :host([hidden]) {
@@ -15,7 +21,7 @@
 .pane {
   display: flex;
   flex-direction: column;
-  color: #ccc;
+  color: var(--pane-color);
   height: 100%;
 }
 

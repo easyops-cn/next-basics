@@ -1,8 +1,19 @@
 :host {
+  --sidebar-background: #fff;
+  --title-container-background: #fff;
+  --title-container-color: #595959;
   display: block;
-  background-color: #181818;
   outline-color: rgba(83, 89, 93, 0.5);
+  background-color: var(--sidebar-background);
   height: 100%;
+}
+
+:host-context(html[data-theme="dark-v2"]),
+:host-context([data-override-theme="dark-v2"]) {
+  --sidebar-background: #181818;
+  --title-container-background: #181818;
+  --title-container-color: rgb(187, 187, 187);
+  background-color: var(--sidebar-background);
 }
 
 :host([hidden]) {
@@ -24,8 +35,8 @@
 .title-container {
   display: flex;
   padding: 0 8px 8px 8px;
-  color: rgb(187, 187, 187);
-  background: #181818;
+  color: var(--title-container-color);
+  background: var(--title-container-background);
 }
 
 .title-label {

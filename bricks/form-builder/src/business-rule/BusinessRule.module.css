@@ -1,7 +1,18 @@
+.card,
+[data-override-theme="light"] .card {
+  --card-head-background: #fff;
+  --card-body-background: #fff;
+}
+
+html[data-theme="dark-v2"] .card,
+[data-override-theme="dark-v2"] .card {
+  --card-head-background: #333335;
+  --card-body-background: #1e1e1e;
+}
 .cardHead {
   font-size: 16px;
   padding: 6px 20px;
-  background: #333335;
+  background: var(--card-head-background);
   display: flex;
   justify-content: space-between;
 }
@@ -21,7 +32,7 @@
 }
 .cardBody {
   align-items: left;
-  background: #1e1e1e;
+  background: var(--card-body-background);
   display: grid;
   justify-items: left;
   padding: 20px;

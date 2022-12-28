@@ -121,7 +121,7 @@ export function BusinessRule(props: BusinessRuleProps): React.ReactElement {
   };
 
   return (
-    <div data-testid="my-brick">
+    <div data-testid="my-brick" className={styles.card}>
       {dataSource && dataSource.length > 0 && getCard()}
       {(!dataSource || (dataSource && dataSource.length === 0)) && <Empty />}
     </div>

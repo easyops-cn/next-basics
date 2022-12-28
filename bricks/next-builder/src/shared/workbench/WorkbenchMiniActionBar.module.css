@@ -14,14 +14,23 @@
 }
 
 .action:hover {
+  background-color: #fff;
+}
+html[data-theme="dark-v2"] .action:hover,
+[data-override-theme="dark-v2"] .action:hover {
   background-color: rgba(90, 93, 94, 0.31);
 }
 
 .action,
 .action:hover {
+  color: #595959;
+}
+html[data-theme="dark-v2"] .action,
+[data-override-theme="dark-v2"] .action,
+html[data-theme="dark-v2"] .action:hover,
+[data-override-theme="dark-v2"] .action:hover {
   color: #c5c5c5;
 }
-
 .disabled,
 .disabled:hover {
   color: var(--color-disabled-text);
