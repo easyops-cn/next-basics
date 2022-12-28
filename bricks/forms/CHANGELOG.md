@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.251.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.251.0...@next-bricks/forms@1.251.1) (2022-12-28)
+
+
+### Bug Fixes
+
+* fix dynamic-form-item-v2 bug ([fec5526](https://github.com/easyops-cn/next-basics/commit/fec552636f4d840d4de43c6eba9a5f01fb5ccf51))
+
+
+
+
+
 # [1.251.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.250.0...@next-bricks/forms@1.251.0) (2022-12-28)
 
 
