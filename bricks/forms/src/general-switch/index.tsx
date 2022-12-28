@@ -56,6 +56,7 @@ export class GeneralSwitchElement extends FormItemElement {
 
   /**
    * @description 开关大小
+   * @enums "default"|"small"
    * @group ui
    */
   @property({ attribute: false })

@@ -58,6 +58,7 @@ export class ModalConfirmElement extends UpdatingElement {
    * @required false
    * @default confirm
    * @description 对话框类型
+   * @enums "info"|"success"|"error"|"warning"|"confirm"
    * @group basic
    */
   @property({
@@ -121,6 +122,7 @@ export class ModalConfirmElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 确定按钮类型
+   * @enums "link"|"default"|"primary"|"ghost"|"dashed"|"danger"
    * @group buttonAndInteract
    */
   @property() okType: ButtonType;

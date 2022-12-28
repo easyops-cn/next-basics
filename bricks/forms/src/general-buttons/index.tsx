@@ -129,6 +129,7 @@ export class GeneralButtonsElement extends FormItemElement {
    * @required -
    * @default `"primary"`
    * @description 提交按钮的类型
+   * @enums "default"|"primary"|"ghost"|"dashed"|"danger"|"link"
    * @group basic
    */
   @property({
@@ -153,6 +154,7 @@ export class GeneralButtonsElement extends FormItemElement {
    * @kind `"default" | "primary" | "ghost" | "dashed" | "danger" | "link"`
    * @default `"link"`
    * @description 取消按钮的类型
+   * @enums "default"|"primary"|"ghost"|"dashed"|"danger"|"link"
    * @group advanced
    */
   @property({

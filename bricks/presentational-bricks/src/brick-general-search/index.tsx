@@ -149,6 +149,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default default
    * @description 尺寸大小，可选`default、small、large、extraLarge`
+   * @enums "small"|"default"|"large"|"extraLarge"
    * @group ui
    */
   @property({
@@ -161,6 +162,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required false
    * @default default
    * @description 形状，可选`default、round`
+   * @enums "round"|"default";
    * @group ui
    */
   @property({
@@ -197,6 +199,7 @@ export class BrickGeneralSearchElement extends UpdatingElement {
    * @required "defalut"
    * @default true
    * @description 按类型搜索框样式
+   * @enums "defalut"|"radio"
    * @group ui
    */
   @property({

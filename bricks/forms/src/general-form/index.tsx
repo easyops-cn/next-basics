@@ -86,6 +86,7 @@ export class GeneralFormElement
    * @required false
    * @default horizontal
    * @description 表单布局
+   * @enums 'horizontal'|'vertical'|'inline'
    * @group ui
    */
   @property({

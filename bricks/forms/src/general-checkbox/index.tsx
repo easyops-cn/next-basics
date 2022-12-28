@@ -89,6 +89,7 @@ export class GeneralCheckboxElement extends FormItemElement {
    * @required false
    * @default default
    * @description 	多选框样式类型(不支持分组复选框）
+   * @enums "default"|"icon"
    * @group basic
    */
   @property({

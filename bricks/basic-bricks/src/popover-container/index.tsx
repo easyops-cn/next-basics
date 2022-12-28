@@ -101,6 +101,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default bottom
    * @description 气泡框位置。注意设置该属性的时候可能需要调整`popoverContentStyle`。
+   * @enums "top"|"left"|"right"|"bottom"|"topLeft"|"topRight"|"bottomLeft"|"bottomRight"|"leftTop"|"leftBottom"|"rightTop"|"rightBottom"
    * @group basic
    */
   @property({
@@ -158,6 +159,7 @@ export class PopoverContainerElement extends UpdatingElement {
    * @required false
    * @default hover
    * @description 在什么时候显示 Icon
+   * @enums "always"|"hover"|"never"
    * @group ui
    */
   @property({

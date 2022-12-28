@@ -254,6 +254,7 @@ export class RankTableElement extends UpdatingElement {
    * @kind "default"|"small"
    * @required false
    * @default default
+   * @enums "default"|"small"
    * @description 根据容器的不同调整样式
    */
   @property({ attribute: false })

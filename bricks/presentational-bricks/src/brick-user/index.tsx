@@ -73,6 +73,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default "default"
    * @description 设置头像的大小
+   * @enums "large"|"small"|"default"
    * @group ui
    */
   @property({ attribute: false })
@@ -83,6 +84,7 @@ export class BrickUserElement extends UpdatingElement {
    * @required false
    * @default "circle"
    * @description 指定头像的形状
+   * @enums "circle"|"square"
    * @group ui
    */
   @property()

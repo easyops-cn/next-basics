@@ -113,6 +113,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default horizontal
    * @description 描述布局
+   * @enums "horizontal"|"vertical"
    * @group ui
    */
   @property({
@@ -137,6 +138,7 @@ export class BrickDescriptionsElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 设置列表的大小。可以设置为 middle 、small, 或不填（只有设置 bordered={true} 生效）
+   * @enums "default"|"middle"|"small"
    * @group ui
    */
   @property({
