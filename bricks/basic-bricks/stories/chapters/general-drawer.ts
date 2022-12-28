@@ -26,7 +26,7 @@ export const generalDrawerStory: Story = {
             customTitle: "预览",
             id: "title-demo2",
             maskClosable: true,
-            width: 750,
+            width: 1000,
           },
           slots: {
             content: {
