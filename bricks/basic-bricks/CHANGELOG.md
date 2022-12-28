@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.227.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.226.2...@next-bricks/basic-bricks@1.227.0) (2022-12-28)
+
+
+### Features
+
+* add enums in bricks ([15ffdf9](https://github.com/easyops-cn/next-basics/commit/15ffdf908fe8950f188dcc769b37b4d81f62121e))
+
+
+
+
+
 ## [1.226.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.226.1...@next-bricks/basic-bricks@1.226.2) (2022-12-28)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks

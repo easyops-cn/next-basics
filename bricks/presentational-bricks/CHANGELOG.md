@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.277.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.276.1...@next-bricks/presentational-bricks@1.277.0) (2022-12-28)
+
+
+### Features
+
+* add enums in bricks ([15ffdf9](https://github.com/easyops-cn/next-basics/commit/15ffdf908fe8950f188dcc769b37b4d81f62121e))
+
+
+
+
+
 ## [1.276.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.276.0...@next-bricks/presentational-bricks@1.276.1) (2022-12-13)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
