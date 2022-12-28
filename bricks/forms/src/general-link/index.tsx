@@ -177,6 +177,7 @@ export class GeneralLinkElement extends FormItemElement {
    * @default link
    * @required false
    * @description 链接类型：默认链接 - link 和 文本链接 - text
+   * @enums "link"|"text"
    * @group ui
    */
   @property({
@@ -188,6 +189,7 @@ export class GeneralLinkElement extends FormItemElement {
    * @default left
    * @required false
    * @description 链接图标位置：左边 - left 右边 - right
+   * @enums "left"|"right"
    * @group ui
    */
   @property({

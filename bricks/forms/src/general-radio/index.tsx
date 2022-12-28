@@ -114,6 +114,7 @@ export class GeneralRadioElement extends FormItemElement {
    * @required false
    * @default default
    * @description 	单选框样式类型
+   * @enums "button"|"default"|"icon"|"icon-circle"|"icon-square"|"custom"
    * @group basic
    */
   @property({
@@ -125,7 +126,8 @@ export class GeneralRadioElement extends FormItemElement {
    * @kind "large" | "middle" | "small"
    * @required false
    * @default -
-   * @description 	大小，只对按钮样式生效
+   * @description 大小，只对按钮样式生效
+   * @enums "large"|"middle"|"small"
    * @group ui
    */
   @property({

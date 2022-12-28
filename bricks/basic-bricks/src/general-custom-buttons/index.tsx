@@ -150,6 +150,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   /**
    * @default "center"
    * @description 对齐方式
+   * @enums "start"|"center"|"end"|"stretch
    * @group basic
    */
   @property()
@@ -193,6 +194,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
 
   /**
    * @description isMoreButton 为 true 时更多按钮的样式，通常使用 icon 类型
+   * @enums "circle"|"no"|"rectangle"|"icon"
    * @group moreButton
    */
   @property() moreButtonShape?: "circle" | "no" | "rectangle" | "icon";
@@ -206,6 +208,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
 
   /**
    * @description dropdown按钮的类型
+   * @enums "default"|"link"
    * @group dropdownButton
    */
   @property({ attribute: false })
@@ -221,6 +224,7 @@ export class GeneralCustomButtonsElement extends UpdatingElement {
   /**
    * @default "bottomRight"
    * @description dropdown 的弹出位置
+   * @enums "bottomRight"|"topLeft"|"topCenter"|"topRight"|"bottomLeft"|"bottomCenter"
    * @group dropdownButton
    */
   @property()

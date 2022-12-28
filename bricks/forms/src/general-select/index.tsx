@@ -114,6 +114,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default -
    * @description 选择框模式
+   * @enums "multiple"|"tags"
    * @group advancedFormItem
    */
   @property()
@@ -193,6 +194,7 @@ export class GeneralSelectElement extends FormItemElement {
    * @required false
    * @default middle
    * @description 选择框大小
+   * @enums "small"|"middle"|"large"
    * @group advanced
    */
   @property()

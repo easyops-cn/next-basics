@@ -91,6 +91,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮类型  ButtonType(`"link" | "default" | "primary" | "ghost" | "dashed" | "danger" | "icon"|"text"`)
+   * @enums "link"|"default"|"primary"|"ghost"|"dashed"|"danger"|"icon"|"text"
    * @group basic
    */
   @property()
@@ -227,6 +228,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮形状，支持圆形、椭圆形，不设置为默认方形
+   * @enums "circle"|"round"
    * @group ui
    */
   @property()
@@ -237,6 +239,7 @@ export class GeneralButtonElement extends UpdatingElement {
    * @required false
    * @default -
    * @description 按钮大小，支持大、小，不设置为默认中
+   * @enums "small"|"large"
    * @group ui
    */
   @property()

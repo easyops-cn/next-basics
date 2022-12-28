@@ -165,6 +165,7 @@ export class GeneralModalElement extends FormItemElement {
    * @required false
    * @default `"primary"`
    * @description 模态框确认按钮类型
+   * @enums "link"|"default"|"primary"|"ghost"|"dashed"|"danger"
    * @group advanced
    */
   @property()

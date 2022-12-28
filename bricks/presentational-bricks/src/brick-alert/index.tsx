@@ -66,6 +66,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required true
    * @default -
    * @description 指定警告提示的样式，有四种选择 success、info、warning、error
+   * @enums "success"|"error"|"info"|"warning"
    * @group basic
    */
   @property()
@@ -176,6 +177,7 @@ export class BrickAlertElement extends UpdatingElement {
    * @required false
    * @default -
    * @description icon大小，为big时使用大图标，否则为根据是否有描述来渲染大小的默认图标
+   * @enums "big"|"small"|"default"
    * @group advanced
    */
   @property()
