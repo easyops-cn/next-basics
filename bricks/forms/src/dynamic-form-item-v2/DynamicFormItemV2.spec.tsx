@@ -56,7 +56,10 @@ describe("DynamicFormItemV2", () => {
     wrapper.setProps({ columns: _columns });
     wrapper.update();
     wrapper.find(".addRowBtn").at(0).simulate("click");
-    expect(onAdd).lastCalledWith({ detail: { input: "a" }, index: 0 });
+    expect(onAdd).lastCalledWith({
+      detail: { input: undefined, select: undefined },
+      index: 0,
+    });
   });
 
   it("disabled & hide button should work", () => {

@@ -1,3 +1,4 @@
+import { UseBrickConf } from "@next-core/brick-types";
 import { GeneralComplexOption } from "@next-libs/forms";
 import {
   CascaderExpandTrigger,
@@ -76,7 +77,9 @@ export interface SelectProps extends BasicProps {
   /**
    * 候选项列表
    */
-  options: GeneralComplexOption<string | number>[];
+  options:
+    | GeneralComplexOption<string | number>[]
+    | GeneralComplexOption<string | number>[][];
   /**
    * 支持搜索
    */
@@ -97,6 +100,14 @@ export interface SelectProps extends BasicProps {
    * 下拉选项的渲染方式
    */
   popoverPositionType?: "default" | "parent";
+  /**
+   * 支持在文本后添加自定义构件 具体查看 [UseBrickConf](/next-docs/docs/api-reference/brick-types.usesinglebrickconf
+   */
+  suffix?: UseBrickConf;
+  /**
+   * 设置后置构件容器的样式
+   */
+  suffixStyle?: React.CSSProperties;
 }
 
 export interface CascaderProps extends BasicProps {
@@ -107,7 +118,7 @@ export interface CascaderProps extends BasicProps {
   /**
    * 候选项
    */
-  options: CascaderOptionType[];
+  options: CascaderOptionType[] | CascaderOptionType[][];
   /**
    * 次级菜单的展开方式，可选 `click` 和 `hover`
    */

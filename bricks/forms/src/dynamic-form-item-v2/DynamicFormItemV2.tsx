@@ -25,6 +25,11 @@ interface LegacyDynamicFormItemV2Props extends FormItemWrapperProps {
   onChange?: (value: Record<string, any>[]) => void;
   onAdd?: (value: { detail: Record<string, any>; index: number }) => void;
   onRemove?: (value: { detail: Record<string, any>; index: number }) => void;
+  onInputBlur?: (value: {
+    rowIndex: number;
+    name: string;
+    value: string;
+  }) => void;
   hideRemoveButton?:
     | boolean
     | ((row: Record<string, any>, index: number) => boolean);
@@ -55,6 +60,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
       onChange,
       onAdd,
       onRemove,
+      onInputBlur,
       hideRemoveButton,
       disabledRemoveButton,
       hideAddButton,
@@ -76,6 +82,14 @@ const LegacyDynamicFormItemV2 = forwardRef(
       allValues: DynamicFormValue
     ): void => {
       onChange?.(allValues?.[FORM_LIST_NAME]);
+    };
+
+    const handleInputBlur = (
+      rowIndex: number,
+      name: string,
+      value: string
+    ): void => {
+      onInputBlur?.({ rowIndex, name, value });
     };
 
     const hasLabel = useMemo(
@@ -120,6 +134,7 @@ const LegacyDynamicFormItemV2 = forwardRef(
                             column={column}
                             formValue={value}
                             field={{ key, name, ...restField }}
+                            handleInputBlur={handleInputBlur}
                           />
                         </Col>
                       ))}
@@ -179,7 +194,14 @@ const LegacyDynamicFormItemV2 = forwardRef(
   }
 );
 
-interface DynamicFormItemV2Props extends LegacyDynamicFormItemV2Props {}
+export interface upperDynamicFormItemV2Ref {
+  columns: Column[];
+  setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
+}
+
+interface DynamicFormItemV2Props extends LegacyDynamicFormItemV2Props {
+  upperRef: Ref<upperDynamicFormItemV2Ref>;
+}
 
 export function DynamicFormItemV2(
   props: DynamicFormItemV2Props
@@ -189,12 +211,20 @@ export function DynamicFormItemV2(
     onChange,
     onAdd,
     onRemove,
+    onInputBlur,
     disabledRemoveButton,
     hideRemoveButton,
     hideAddButton,
     disabledAddButton,
+    upperRef,
   } = props;
+  const [columns, setColumns] = React.useState(props.columns);
   const DynamicFormItemV2Ref = useRef<LegacyDynamicFormItemV2Ref>();
+
+  useImperativeHandle(upperRef, () => ({
+    columns: columns,
+    setColumns: setColumns,
+  }));
 
   const validators = [
     {
@@ -223,10 +253,11 @@ export function DynamicFormItemV2(
     >
       <LegacyDynamicFormItemV2
         ref={DynamicFormItemV2Ref}
-        columns={props.columns}
+        columns={columns}
         onChange={onChange}
         onAdd={onAdd}
         onRemove={onRemove}
+        onInputBlur={onInputBlur}
         disabledRemoveButton={disabledRemoveButton}
         hideRemoveButton={hideRemoveButton}
         hideAddButton={hideAddButton}
