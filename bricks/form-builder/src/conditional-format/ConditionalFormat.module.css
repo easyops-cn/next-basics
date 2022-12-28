@@ -40,10 +40,10 @@
 .customHr:hover .groupClose {
   display: block;
 }
-.canditionDelete {
+.conditionDelete {
   margin-left: 8px;
 }
-.canditionDelete:hover {
+.conditionDelete:hover {
   color: red;
   cursor: pointer;
 }
