@@ -18,20 +18,20 @@ interface ConditionalFormatProps extends FormItemWrapperProps {
   operationOptions?: { label: string; value: string }[];
 }
 
-interface Candition {
+interface Condition {
   origin: string;
   operation: string;
   value: string;
   op: string;
-  canditionId?: string;
+  conditionId?: string;
 }
 
 interface Group {
   groupId: string;
-  canditions: Candition[];
+  conditions: Condition[];
 }
 
-interface GroupCandition {
+interface GroupCondition {
   groups: Group[];
   op?: string;
 }
@@ -51,16 +51,16 @@ export function ConditionalFormat(
   props: ConditionalFormatProps
 ): React.ReactElement {
   const { originOptions, operationOptions, onChange, value } = props;
-  const [groupCanditions, setGroupCanditions] = useState({
+  const [groupConditions, setGroupConditions] = useState({
     groups: [],
     op: "and",
-  } as GroupCandition);
+  } as GroupCondition);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [origin, setOrigin] = useState("");
   const groupNumRef = useRef(0);
   useEffect(() => {
     if (isEmpty(value) || isNil(value)) {
-      setGroupCanditions({
+      setGroupConditions({
         groups: [],
         op: "and",
       });
@@ -69,14 +69,14 @@ export function ConditionalFormat(
     const _value = cloneDeep(value);
     _value.groups?.forEach((group: Group) => {
       group.groupId = group.groupId ?? uniqueId("group_");
-      group.canditions?.forEach((candition: Candition) => {
-        candition.canditionId = candition.canditionId ?? uniqueId("candition_");
+      group.conditions?.forEach((condition: Condition) => {
+        condition.conditionId = condition.conditionId ?? uniqueId("condition_");
       });
     });
-    setGroupCanditions(_value);
+    setGroupConditions(_value);
   }, [value]);
 
-  const addFilterCandition = (groupNum?: number) => {
+  const addFilterCondition = (groupNum?: number) => {
     groupNumRef.current = groupNum;
     setIsModalOpen(true);
   };
@@ -84,41 +84,41 @@ export function ConditionalFormat(
   const getGroup = () => {
     return {
       groupId: uniqueId("group_"),
-      canditions: [] as Candition[],
+      conditions: [] as Condition[],
     };
   };
 
-  const updateGroupCanditions = () => {
-    const cloneData = cloneDeep(groupCanditions);
-    setGroupCanditions(cloneData);
+  const updateGroupConditions = () => {
+    const cloneData = cloneDeep(groupConditions);
+    setGroupConditions(cloneData);
     onChange(cloneData);
   };
 
   const addGroup = () => {
-    if (groupCanditions.groups.length === 0) {
-      groupCanditions.groups = [getGroup(), getGroup()];
+    if (groupConditions.groups.length === 0) {
+      groupConditions.groups = [getGroup(), getGroup()];
     } else {
-      groupCanditions.groups.push(getGroup());
+      groupConditions.groups.push(getGroup());
     }
-    updateGroupCanditions();
+    updateGroupConditions();
   };
 
   const handleModalOk = () => {
     setIsModalOpen(false);
-    const createNewCanditions = {
+    const createNewConditions = {
       origin,
       operation: operationOptions[0].value,
       value: "",
       op: opOptions[0].value,
-      canditionId: uniqueId("candition_"),
+      conditionId: uniqueId("condition_"),
     };
-    if (groupCanditions.groups.length === 0) {
-      groupCanditions.groups.push(getGroup());
+    if (groupConditions.groups.length === 0) {
+      groupConditions.groups.push(getGroup());
     }
-    groupCanditions.groups[groupNumRef.current].canditions.push(
-      createNewCanditions
+    groupConditions.groups[groupNumRef.current].conditions.push(
+      createNewConditions
     );
-    updateGroupCanditions();
+    updateGroupConditions();
   };
 
   const handleCancel = () => {
@@ -131,102 +131,102 @@ export function ConditionalFormat(
 
   const deleteGroup = (index: number) => {
     const deleteNum = index + 1;
-    groupCanditions.groups.splice(deleteNum, 1);
-    updateGroupCanditions();
+    groupConditions.groups.splice(deleteNum, 1);
+    updateGroupConditions();
   };
 
   const handleGroupOpChange = (value: string) => {
-    groupCanditions.op = value;
-    updateGroupCanditions();
+    groupConditions.op = value;
+    updateGroupConditions();
   };
 
-  const handleCanditionChange = (
+  const handleConditionChange = (
     value: string,
     groupNum: number,
-    canditionNum: number
+    conditionNum: number
   ) => {
-    groupCanditions.groups[groupNum].canditions[canditionNum].operation = value;
-    updateGroupCanditions();
+    groupConditions.groups[groupNum].conditions[conditionNum].operation = value;
+    updateGroupConditions();
   };
 
-  const handleCanditionOpChange = (value: string, groupNum: number) => {
-    groupCanditions.groups[groupNum].canditions.forEach((item) => {
+  const handleConditionOpChange = (value: string, groupNum: number) => {
+    groupConditions.groups[groupNum].conditions.forEach((item) => {
       item.op = value;
     });
-    updateGroupCanditions();
+    updateGroupConditions();
   };
 
-  const handleCanditionValueChange = (
+  const handleConditionValueChange = (
     e: any,
     groupNum: number,
-    canditionNum: number
+    conditionNum: number
   ) => {
-    groupCanditions.groups[groupNum].canditions[canditionNum].value =
+    groupConditions.groups[groupNum].conditions[conditionNum].value =
       e.target.value;
-    updateGroupCanditions();
+    updateGroupConditions();
   };
 
-  const deleteCandition = (groupNum: number, canditionNum: number) => {
-    groupCanditions.groups[groupNum].canditions.splice(canditionNum, 1);
-    updateGroupCanditions();
+  const deleteCondition = (groupNum: number, conditionNum: number) => {
+    groupConditions.groups[groupNum].conditions.splice(conditionNum, 1);
+    updateGroupConditions();
   };
 
-  const getGroupCanditions = useMemo(() => {
-    return groupCanditions.groups.map((group: Group, i: number) => {
+  const getGroupConditions = useMemo(() => {
+    return groupConditions.groups.map((group: Group, i: number) => {
       return (
         <>
-          {group.canditions.map((candition: Candition, index: number) => {
+          {group.conditions.map((condition: Condition, index: number) => {
             return (
               <>
-                <div key={candition.canditionId} className={styles.group}>
+                <div key={condition.conditionId} className={styles.group}>
                   {index === 0 && <span className={styles.groupSpan}>当</span>}
                   {index !== 0 && (
                     <span className={styles.groupSpan}>
                       <Select
-                        value={candition.op}
-                        onChange={(value) => handleCanditionOpChange(value, i)}
+                        value={condition.op}
+                        onChange={(value) => handleConditionOpChange(value, i)}
                         options={opOptions}
                         style={{ width: "60px" }}
                         bordered={false}
                       />
                     </span>
                   )}
-                  <span className={styles.groupOrigin}>{candition.origin}</span>
+                  <span className={styles.groupOrigin}>{condition.origin}</span>
                   <Select
-                    value={candition.operation}
-                    onChange={(value) => handleCanditionChange(value, i, index)}
+                    value={condition.operation}
+                    onChange={(value) => handleConditionChange(value, i, index)}
                     options={operationOptions}
                     style={{ width: "120px" }}
                     bordered={false}
                   />
                   <Input
                     style={{ width: "160px" }}
-                    value={candition.value}
-                    onChange={(e) => handleCanditionValueChange(e, i, index)}
+                    value={condition.value}
+                    onChange={(e) => handleConditionValueChange(e, i, index)}
                   />
                   <DeleteOutlined
-                    className={styles.canditionDelete}
-                    onClick={() => deleteCandition(i, index)}
+                    className={styles.conditionDelete}
+                    onClick={() => deleteCondition(i, index)}
                   />
                 </div>
               </>
             );
           })}
-          {groupCanditions.groups.length > 1 && (
+          {groupConditions.groups.length > 1 && (
             <div
               className={styles.conditionalItem}
-              onClick={() => addFilterCandition(i)}
+              onClick={() => addFilterCondition(i)}
             >
               <PlusOutlined />
               条件
             </div>
           )}
-          {i !== groupCanditions.groups.length - 1 && (
+          {i !== groupConditions.groups.length - 1 && (
             <div>
               <div className={styles.customHr}>
                 <div className={styles.groupSelect}>
                   <Select
-                    value={groupCanditions.op}
+                    value={groupConditions.op}
                     onChange={handleGroupOpChange}
                     options={opOptions}
                     style={{ width: "60px" }}
@@ -245,16 +245,16 @@ export function ConditionalFormat(
         </>
       );
     });
-  }, [groupCanditions]);
+  }, [groupConditions]);
 
   return (
     <div>
-      <div>{getGroupCanditions}</div>
+      <div>{getGroupConditions}</div>
       <div className={styles.conditionalWrap}>
-        {groupCanditions.groups.length < 2 && (
+        {groupConditions.groups.length < 2 && (
           <div
             className={styles.conditionalItem}
-            onClick={() => addFilterCandition(0)}
+            onClick={() => addFilterCondition(0)}
           >
             <PlusOutlined />
             添加筛选条件

@@ -29,16 +29,16 @@ const props = {
   value: {
     groups: [
       {
-        canditions: [
+        conditions: [
           {
-            canditionId: "candition_39",
+            conditionId: "condition_39",
             op: "and",
             operation: "contain",
             origin: "表单项1",
             value: "aaa",
           },
           {
-            canditionId: "candition_40",
+            conditionId: "condition_40",
             op: "and",
             operation: "contain",
             origin: "表单项1",
@@ -48,13 +48,13 @@ const props = {
         groupId: "group_38",
       },
       {
-        canditions: [
+        conditions: [
           {
             origin: "表单项1",
             operation: "equal",
             value: "bbba",
             op: "and",
-            canditionId: "candition_41",
+            conditionId: "condition_41",
           },
         ],
         groupId: "group_40",
@@ -123,7 +123,7 @@ describe("ConditionalFormat", () => {
     expect(wrapper.find(DeleteOutlined).length).toBe(0);
   });
 
-  it("should handleCanditionOpChange work", () => {
+  it("should handleConditionOpChange work", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...props} />);
     wrapper.find(Select).at(0).invoke("onChange")(["and", 0], null);
     wrapper.find(Select).at(1).invoke("onChange")(["or", 0], null);
@@ -136,7 +136,7 @@ describe("ConditionalFormat", () => {
     expect(wrapper.find(DeleteOutlined).length).toBe(3);
   });
 
-  it("should deleteCandition work", () => {
+  it("should deleteCondition work", () => {
     const wrapper = mount(<ConditionalFormatAdapter {...props} />);
     wrapper.find(DeleteOutlined).at(0).invoke("onClick")();
     expect(wrapper.find(DeleteOutlined).length).toBe(2);
@@ -148,7 +148,7 @@ describe("ConditionalFormat", () => {
       value: {
         groups: [
           {
-            canditions: [
+            conditions: [
               {
                 op: "and",
                 operation: "contain",
@@ -164,7 +164,7 @@ describe("ConditionalFormat", () => {
             ],
           },
           {
-            canditions: [
+            conditions: [
               {
                 origin: "表单项1",
                 operation: "equal",
