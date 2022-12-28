@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { Cascader, Form, Input, InputNumber, Select } from "antd";
 import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
@@ -310,10 +310,11 @@ describe("ColumnComponent", () => {
       <ColumnComponent
         column={selectColumnWithTwoDimensionalOptions}
         field={field}
+        rowIndex={0}
       />
     );
     expect(wrapper.find(Select)).toHaveLength(1);
-    expect(wrapper.find(Select.Option)).toHaveLength(3);
+    expect(wrapper.find(Select.Option)).toHaveLength(1);
     expect(wrapper.find(Select.OptGroup)).toHaveLength(0);
 
     wrapper.setProps({
@@ -327,7 +328,7 @@ describe("ColumnComponent", () => {
       },
     });
     wrapper.update();
-    expect(wrapper.find(Select.Option)).toHaveLength(3);
+    expect(wrapper.find(Select.Option)).toHaveLength(1);
     expect(wrapper.find(Select.OptGroup)).toHaveLength(1);
 
     expect(wrapper.find(Select).prop("filterOption")).toBeFalsy();
@@ -350,5 +351,18 @@ describe("ColumnComponent", () => {
     );
     expect(wrapper.find(Select)).toHaveLength(1);
     expect(wrapper.find(".suffixContainer")).toHaveLength(3);
+  });
+
+  it("input.blur event handler should be called", () => {
+    const handleInputBlur = jest.fn();
+    const wrapper = shallow(
+      <ColumnComponent
+        column={inputColumn}
+        field={field}
+        handleInputBlur={handleInputBlur}
+      />
+    );
+    wrapper.find(Input).simulate("blur");
+    expect(handleInputBlur).toBeCalled();
   });
 });

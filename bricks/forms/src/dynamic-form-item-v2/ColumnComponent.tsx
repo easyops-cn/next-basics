@@ -128,7 +128,7 @@ export function ColumnComponent(
             maxLength={maxLength}
             allowClear={allowClear}
             onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-              handleInputBlur(rowIndex, name, e.target.value)
+              handleInputBlur(rowIndex, name, e?.target?.value)
             }
           />
         </Form.Item>
