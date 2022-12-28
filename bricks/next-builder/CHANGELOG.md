@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.218.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.217.0...@next-bricks/next-builder@1.218.0) (2022-12-28)
+
+
+### Features
+
+* vb左侧面板对应构件新增浅色主题色 ([#1937](https://github.com/easyops-cn/next-basics/issues/1937)) ([36c737d](https://github.com/easyops-cn/next-basics/commit/36c737db38b007565aa0a56189792349abf568bd))
+
+
+
+
+
 # [1.217.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.216.4...@next-bricks/next-builder@1.217.0) (2022-12-21)
 
 
