@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.251.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.251.1...@next-bricks/forms@1.251.2) (2022-12-29)
+
+
+### Bug Fixes
+
+* forms.general-select补充无边框样式。 refs DEVOPS_MANAGEMENT-774 ([f5fba9a](https://github.com/easyops-cn/next-basics/commit/f5fba9aad2c65b2a6f6cad4022cfd910faf79904))
+
+
+
+
+
 ## [1.251.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.251.0...@next-bricks/forms@1.251.1) (2022-12-28)
 
 
