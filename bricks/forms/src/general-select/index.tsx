@@ -350,6 +350,16 @@ export class GeneralSelectElement extends FormItemElement {
   useBackend: UseBackendConf;
 
   /**
+   * @required false
+   * @default true
+   * @description 无边框样式
+   */
+  @property({
+    attribute: false,
+  })
+  bordered = true;
+
+  /**
    * @detail `any`
    * @description 下拉选中变化时被触发，`event.detail` 为当前选择项的值
    */
@@ -485,6 +495,7 @@ export class GeneralSelectElement extends FormItemElement {
             {...(this.mode === "tags" ? { pattern: this.pattern } : {})}
             filterByLabelAndValue={this.filterByLabelAndValue}
             dropdownStyle={this.dropdownStyle}
+            bordered={this.bordered}
           />
         </BrickWrapper>,
         this
