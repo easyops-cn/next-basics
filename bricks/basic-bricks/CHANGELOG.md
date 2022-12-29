@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.227.0...@next-bricks/basic-bricks@1.227.1) (2022-12-29)
+
+
+### Bug Fixes
+
+* general-custom-buttons下拉框的hover样式去掉 refs DEVOPS_MANAGEMENT-752 ([d0e0bff](https://github.com/easyops-cn/next-basics/commit/d0e0bff36d3fd537639bfee7e2fbe8bf434b9450))
+
+
+
+
+
 # [1.227.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.226.2...@next-bricks/basic-bricks@1.227.0) (2022-12-28)
 
 
