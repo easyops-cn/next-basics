@@ -57,6 +57,7 @@ export { default as generalCheckboxDisabledSvg } from "./forms.general-checkbox[
 export { default as generalCheckboxItemColorSvg } from "./forms.general-checkbox[item-color].svg";
 export { default as generalDatePickerBasicSvg } from "./forms.general-date-picker[basic].svg";
 export { default as generalFormDynamicSvg } from "./forms.general-form[dynamic].svg";
+export { default as generalFormBasicSvg } from "./forms.general-form[basic].svg";
 export { default as generalInputNumberBasicSvg } from "./forms.general-input-number[basic].svg";
 export { default as generalInputBasicSvg } from "./forms.general-input[basic].svg";
 export { default as generalInputCopyableSvg } from "./forms.general-input[copyable].svg";

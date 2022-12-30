@@ -1,5 +1,17 @@
 import { Story } from "@next-core/brick-types";
-import { brickTableSvg } from "../images";
+import {
+  brickTableColumnsAlignSvg,
+  brickTableContentScrollSvg,
+  brickTableExpandAndSortSvg,
+  brickTableExpandIconDemoSvg,
+  brickTableFrontEndSearchSvg,
+  brickTablePageChangeAndCheckSvg,
+  brickTableProcessorSvg,
+  brickTableRowColSpanSvg,
+  brickTableStatusAndFilterSvg,
+  brickTableSvg,
+  brickTableTreeSvg,
+} from "../images";
 import { brickTableNormalSvg } from "../images";
 import { brickTableDraggableSortSvg } from "../images";
 export const BrickTableStory: Story = {
@@ -131,6 +143,7 @@ export const BrickTableStory: Story = {
         zh: "展开和排序",
         en: "",
       },
+      thumbnail: brickTableExpandAndSortSvg,
       bricks: [
         {
           description: {
@@ -284,6 +297,7 @@ export const BrickTableStory: Story = {
         zh: "自定义展开图标",
         en: "",
       },
+      thumbnail: brickTableExpandIconDemoSvg,
       bricks: [
         {
           description: {
@@ -412,6 +426,7 @@ export const BrickTableStory: Story = {
         zh: "单元格状态和筛选展示",
         en: "",
       },
+      thumbnail: brickTableStatusAndFilterSvg,
       bricks: [
         {
           description: {
@@ -547,6 +562,7 @@ export const BrickTableStory: Story = {
         zh: "树形数据展示",
         en: "",
       },
+      thumbnail: brickTableTreeSvg,
       bricks: [
         {
           description: {
@@ -788,6 +804,7 @@ export const BrickTableStory: Story = {
         zh: "前端搜索",
         en: "",
       },
+      thumbnail: brickTableFrontEndSearchSvg,
       message: {
         zh: "前端搜索需要搭配构件的 `filterSourceData` 方法使用",
       },
@@ -902,6 +919,7 @@ export const BrickTableStory: Story = {
         zh: "内容滚动",
         en: "",
       },
+      thumbnail: brickTableContentScrollSvg,
       message: {
         zh: "当宽度过小时，内容滑动显示",
       },
@@ -977,6 +995,7 @@ export const BrickTableStory: Story = {
         zh: "设置单元格内容垂直对齐方式",
         en: "",
       },
+      thumbnail: brickTableColumnsAlignSvg,
       bricks: [
         {
           description: {
@@ -1126,6 +1145,7 @@ export const BrickTableStory: Story = {
         zh: "跨页勾选",
         en: "",
       },
+      thumbnail: brickTablePageChangeAndCheckSvg,
       message: {
         zh: "实现跨页勾选需要在url更新时不触发页面重新渲染，并在页码和页数变化的事件中手动触发数据源更新。",
       },
@@ -1247,6 +1267,7 @@ export const BrickTableStory: Story = {
         zh: "行列合并",
         en: "",
       },
+      thumbnail: brickTableRowColSpanSvg,
       bricks: [
         {
           description: {
@@ -1335,6 +1356,7 @@ export const BrickTableStory: Story = {
         zh: "使用processor",
         en: "",
       },
+      thumbnail: brickTableProcessorSvg,
       message: {
         zh: "使用 flattenTreeDataListAndCalcRowSpan custom processor 平铺树形结构列表，并计算行合并, 使用的 `PROCESSORS` 加工函数，具体可查看 [Custom Processors](/next-docs/docs/brick-next/custom-processors)",
         en: "",

@@ -3,6 +3,7 @@ import {
   brickHumanizeTimeAccurateSvg,
   brickHumanizeTimeCostSvg,
   brickHumanizeTimeFormatSvg,
+  brickHumanizeTimeRelativeSvg,
   brickHumanizeTimeSvg,
 } from "../images";
 import { brickHumanizeTimeFullSvg } from "../images";
@@ -64,6 +65,7 @@ export const BrickHumanizeTimeStory: Story = {
         en: "Humanize time(relative)",
         zh: "人性化时间展示(相对)",
       },
+      thumbnail: brickHumanizeTimeRelativeSvg,
       bricks: [
         {
           brick: "presentational-bricks.brick-humanize-time",
