@@ -21,8 +21,8 @@ export const GeneralImageStory: Story = {
     {
       snippetId: "presentational-bricks.general-image[normal]",
       title: {
-        en: "基本图片展示构件",
-        zh: "",
+        en: "Basic picture display components",
+        zh: "基本图片展示构件",
       },
       thumbnail: generalImageNormalSvg,
       bricks: [

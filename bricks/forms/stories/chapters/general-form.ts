@@ -1,5 +1,9 @@
 import { Story } from "@next-core/brick-types";
-import { generalFormDynamicSvg, generalFormSvg } from "../images";
+import {
+  generalFormDynamicSvg,
+  generalFormSvg,
+  generalFormBasicSvg,
+} from "../images";
 export const story: Story = {
   storyId: "forms.general-form",
   type: "brick",
@@ -87,6 +91,7 @@ export const story: Story = {
         en: "Basic General Form",
         zh: "基础表单",
       },
+      thumbnail: generalFormBasicSvg,
     },
     {
       brick: "div",
