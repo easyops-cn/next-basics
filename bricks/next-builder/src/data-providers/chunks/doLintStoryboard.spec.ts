@@ -143,10 +143,29 @@ const storyboard = {
             portal: false,
             ref: "view",
           },
+          {
+            bg: false,
+            brick: "basic-bricks.general-button",
+            properties: {
+              buttonName: "to new",
+              buttonType: "link",
+              buttonUrl: "<% PATH %>",
+              dataset: {
+                testid: "new link",
+              },
+            },
+          },
         ],
         name: "tpl-page-test",
       },
       {
+        state: [
+          {
+            name: "tplTestData",
+            path: "<% PATH[SOME_PROP] %>",
+            value: "<% PATH.projectId %>",
+          },
+        ],
         bricks: [],
         name: "tpl-test-1",
       },
@@ -253,6 +272,37 @@ const result = [
             type: "route",
             alias: "测试",
             instanceId: "5eb75014e908e",
+          },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_WARNED_EXPRESSION_IN_TEMPLATE",
+    message: {
+      zh: "您正在模板中使用 QUERY 和 PATH 等变量，建议修改为从外部传入相关数据:",
+      en: "You are using QUERY, PATH and other variables in the custom-template. Please pass in parameters from outside instead:",
+    },
+    list: ["tpl-page-test: PATH", "tpl-test-1: PATH[...], PATH.projectId"],
+    details: [
+      {
+        message: "tpl-page-test",
+        messageSuffix: ": PATH",
+        meta: {
+          root: {
+            type: "template",
+            templateId: "tpl-page-test",
+          },
+        },
+      },
+      {
+        message: "tpl-test-1",
+        messageSuffix: ": PATH[...], PATH.projectId",
+        meta: {
+          root: {
+            templateId: "tpl-test-1",
+            type: "template",
           },
         },
       },

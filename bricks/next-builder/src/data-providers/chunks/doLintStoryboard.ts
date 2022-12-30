@@ -41,7 +41,8 @@ export type StoryboardErrorCode =
   | "UNKNOWN_EVENT_HANDLER"
   | "INSTALLED_APPS_USE_DYNAMIC_ARG"
   | "USING_ONCHANGE_IN_CTX"
-  | "USING_USERESOLVE_IN_BRICK_LIFECYCLE";
+  | "USING_USERESOLVE_IN_BRICK_LIFECYCLE"
+  | "USING_WARNED_EXPRESSION_IN_TEMPLATE";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -322,6 +323,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const { customTemplates, menus } = storyboard.meta ?? {};
   const warnedUsingCtxTemplates: LintDetail[] = [];
   const warnedUsingTplVarTemplates: LintDetail[] = [];
+  const usingWarnedExpressionInTemplate: LintDetail[] = [];
   let installedAppsUseDynamicArguments = false;
 
   visitStoryboardExpressions(
@@ -344,6 +346,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     for (const tpl of customTemplates) {
       const contexts = new Set<string>();
       const tplVariables = new Set<string>();
+      const warnedExpressionInTpl = new Set<string>();
       visitStoryboardExpressions(
         [tpl.bricks, tpl.state],
         (node, parent) => {
@@ -357,13 +360,16 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
               node,
               parent
             ));
+          visitTemplateExpressionFactory(node, parent, warnedExpressionInTpl);
         },
         {
           matchExpressionString(value) {
             return (
               value.includes("CTX") ||
               value.includes("TPL") ||
-              value.includes("INSTALLED_APPS")
+              value.includes("INSTALLED_APPS") ||
+              value.includes("QUERY") ||
+              value.includes("PATH")
             );
           },
         }
@@ -379,6 +385,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
       for (const [collection, warned] of [
         [contexts, warnedUsingCtxTemplates],
         [tplVariables, warnedUsingTplVarTemplates],
+        [warnedExpressionInTpl, usingWarnedExpressionInTemplate],
       ] as const) {
         if (collection.size > 0) {
           warned.push({
@@ -565,6 +572,21 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     });
   }
 
+  if (usingWarnedExpressionInTemplate.length > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_WARNED_EXPRESSION_IN_TEMPLATE",
+      message: {
+        zh: "您正在模板中使用 QUERY 和 PATH 等变量，建议修改为从外部传入相关数据:",
+        en: "You are using QUERY, PATH and other variables in the custom-template. Please pass in parameters from outside instead:",
+      },
+      list: usingWarnedExpressionInTemplate.map(
+        (detail) => `${detail.message}${detail.messageSuffix}`
+      ),
+      details: usingWarnedExpressionInTemplate,
+    });
+  }
+
   return errors;
 }
 
@@ -669,6 +691,35 @@ function visitInstalledAppsFactory(
       ) {
         return true;
       }
+    }
+  }
+}
+
+function visitTemplateExpressionFactory(
+  node: Identifier,
+  parent: EstreeParent,
+  collection: Set<string>
+): void {
+  if (node.name === "QUERY" || node.name === "PATH") {
+    const memberParent = parent[parent.length - 1];
+    if (
+      memberParent?.node.type === "MemberExpression" &&
+      memberParent.key === "object"
+    ) {
+      const memberNode = memberParent.node;
+      if (!memberNode.computed && memberNode.property.type === "Identifier") {
+        collection.add(`${node.name}.${memberNode.property.name}`);
+      } else if (
+        memberNode.computed &&
+        (memberNode.property as any).type === "Literal" &&
+        typeof (memberNode.property as any).value === "string"
+      ) {
+        collection.add(`${node.name}[${(memberNode.property as any).raw}]`);
+      } else {
+        collection.add(`${node.name}[...]`);
+      }
+    } else {
+      collection.add(node.name);
     }
   }
 }
