@@ -138,3 +138,15 @@ export { default as statisticCardNormalSvg } from "./presentational-bricks.stati
 export { default as tableTransferNormalSvg } from "./presentational-bricks.table-transfer[normal].svg";
 export { default as templateBreadcrumbNormalSvg } from "./presentational-bricks.template-breadcrumb[normal].svg";
 export { default as textCollapseNormalSvg } from "./presentational-bricks.text-collapse[normal].svg";
+export { default as brickHumanizeTimeRelativeSvg } from "./presentational-bricks.brick-humanize-time[relative].svg";
+export { default as brickTableColumnsAlignSvg } from "./presentational-bricks.brick-table[columns-align].svg";
+export { default as brickTableContentScrollSvg } from "./presentational-bricks.brick-table[content-scroll].svg";
+export { default as brickTableExpandAndSortSvg } from "./presentational-bricks.brick-table[expand-and-sort].svg";
+export { default as brickTableExpandIconDemoSvg } from "./presentational-bricks.brick-table[expand-icon-demo].svg";
+export { default as brickTableFrontEndSearchSvg } from "./presentational-bricks.brick-table[front-end-search].svg";
+export { default as brickTablePageChangeAndCheckSvg } from "./presentational-bricks.brick-table[page-change-and-check].svg";
+export { default as brickTableProcessorSvg } from "./presentational-bricks.brick-table[processor].svg";
+export { default as brickTableRowColSpanSvg } from "./presentational-bricks.brick-table[row-col-span].svg";
+export { default as brickTableStatusAndFilterSvg } from "./presentational-bricks.brick-table[status-and-filter].svg";
+export { default as brickTableTreeSvg } from "./presentational-bricks.brick-table[tree].svg";
+export { default as generalLabelSuffixIconSvg } from "./presentational-bricks.general-label[suffix-icon].svg";
