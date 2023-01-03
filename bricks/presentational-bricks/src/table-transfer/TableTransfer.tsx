@@ -103,7 +103,7 @@ export function filterOptions(
 ) {
   const fields = columns.map((col) => get(col, "dataIndex"));
   return fields.some((field) =>
-    get(item, field).toLowerCase().includes(value.toLowerCase())
+    get(item, field)?.toLowerCase().includes(value.toLowerCase())
   );
 }
 export function TableTransfer(props: TableTransferProps): React.ReactElement {
