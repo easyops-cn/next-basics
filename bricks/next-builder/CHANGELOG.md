@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.220.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.219.0...@next-bricks/next-builder@1.220.0) (2023-01-03)
+
+
+### Features
+
+* support doLintStoryboard to scan old providers-of-xxx ([691688c](https://github.com/easyops-cn/next-basics/commit/691688c8c73c0f76152fae6b1eeb3a9800aff8a0))
+
+
+
+
+
 # [1.219.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.218.1...@next-bricks/next-builder@1.219.0) (2022-12-30)
 
 
