@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.277.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.277.1...@next-bricks/presentational-bricks@1.277.2) (2023-01-03)
+
+
+### Bug Fixes
+
+* **table-transfer:** 修复当dataIndex指定字段数值不存在时,undefined无法执行toLowerCase方法,造成构件错误. ([b4c2a4e](https://github.com/easyops-cn/next-basics/commit/b4c2a4ed43bc95956e1fb3ea3561942cdbd0cfd6))
+
+
+
+
+
 ## [1.277.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.277.0...@next-bricks/presentational-bricks@1.277.1) (2022-12-30)
 
 **Note:** Version bump only for package @next-bricks/presentational-bricks
