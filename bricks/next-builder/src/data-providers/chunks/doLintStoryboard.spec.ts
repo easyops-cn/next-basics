@@ -61,7 +61,7 @@ const storyboard = {
                 transform: {
                   "a-property": "",
                 },
-                useProvider: "your-provider",
+                useProvider: "providers-of-cmdb.instance-xxx",
               },
             ],
           },
@@ -75,6 +75,22 @@ const storyboard = {
               {
                 action: "message.info",
                 args: ["click button"],
+              },
+              {
+                useProvider: "providers-of-cmdb.instance-api-xxx",
+                callback: {
+                  success: [
+                    {
+                      action: "message.success",
+                      args: ["请求成功"],
+                    },
+                  ],
+                  error: [
+                    {
+                      action: "handleHttpError",
+                    },
+                  ],
+                },
               },
             ],
           },
@@ -260,10 +276,10 @@ const result = [
       zh: "您在 lifeCycle 中使用了 useResolve 获取数据, 建议您使用 context 或 state 代替:",
       en: "You are using useResolve in lifeCycle. Please use context or state instead:",
     },
-    list: ["your-provider"],
+    list: ["providers-of-cmdb.instance-xxx"],
     details: [
       {
-        message: "your-provider",
+        message: "providers-of-cmdb.instance-xxx",
         meta: {
           brick: {
             instanceId: "5eb8291903957",
@@ -303,6 +319,46 @@ const result = [
           root: {
             templateId: "tpl-test-1",
             type: "template",
+          },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_OLD_PROVODERS_IN_USEPROVIDER",
+    message: {
+      zh: "您在 useProvider 中调用了旧版的 Providers-of-xxx, 建议修改为直接调用契约:",
+      en: "You are calling the old provider-of-xxx in useProvider. Please call the contract directly instead:",
+    },
+    list: [
+      "providers-of-cmdb.instance-xxx",
+      "providers-of-cmdb.instance-api-xxx",
+    ],
+    details: [
+      {
+        message: "providers-of-cmdb.instance-xxx",
+        meta: {
+          brick: {
+            instanceId: "5eb8291903957",
+          },
+          root: {
+            instanceId: "5eb75014e908e",
+            type: "route",
+            alias: "测试",
+          },
+        },
+      },
+      {
+        message: "providers-of-cmdb.instance-api-xxx",
+        meta: {
+          brick: {
+            instanceId: "5ed931cf38aad",
+          },
+          root: {
+            instanceId: "5eb75014e908e",
+            type: "route",
+            alias: "测试",
           },
         },
       },

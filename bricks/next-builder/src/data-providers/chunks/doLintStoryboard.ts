@@ -7,6 +7,7 @@ import type {
   CustomTemplateState,
   I18nData,
   Storyboard,
+  UseProviderResolveConf,
 } from "@next-core/brick-types";
 import {
   parseStoryboard,
@@ -42,7 +43,8 @@ export type StoryboardErrorCode =
   | "INSTALLED_APPS_USE_DYNAMIC_ARG"
   | "USING_ONCHANGE_IN_CTX"
   | "USING_USERESOLVE_IN_BRICK_LIFECYCLE"
-  | "USING_WARNED_EXPRESSION_IN_TEMPLATE";
+  | "USING_WARNED_EXPRESSION_IN_TEMPLATE"
+  | "USING_OLD_PROVODERS_IN_USEPROVIDER";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -188,6 +190,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const unknownEventHandlers = new Map<string, LintDetailMeta>();
   const usingWarnedOnChangeInCtxOrState = new Map<string, LintDetailMeta>();
   const usingUseResolveInBrickLifeCycle = new Map<string, LintDetailMeta>();
+  const usingOldProvidersInUseProvider = new Map<string, LintDetailMeta>();
 
   const errors: StoryboardError[] = [];
   const usingScriptBrick: LintDetail[] = [];
@@ -289,6 +292,9 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
             path
           );
         }
+        if (providerBrickRegExp.test(useProvider)) {
+          addMeta(usingOldProvidersInUseProvider, useProvider, node, path);
+        }
         break;
       }
       case "Context": {
@@ -314,6 +320,13 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
               path
             )
           );
+        }
+        break;
+      }
+      case "Resolvable": {
+        const { useProvider } = node.raw as UseProviderResolveConf;
+        if (providerBrickRegExp.test(useProvider)) {
+          addMeta(usingOldProvidersInUseProvider, useProvider, node, path);
         }
         break;
       }
@@ -584,6 +597,24 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         (detail) => `${detail.message}${detail.messageSuffix}`
       ),
       details: usingWarnedExpressionInTemplate,
+    });
+  }
+
+  if (usingOldProvidersInUseProvider.size > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_OLD_PROVODERS_IN_USEPROVIDER",
+      message: {
+        zh: "您在 useProvider 中调用了旧版的 Providers-of-xxx, 建议修改为直接调用契约:",
+        en: "You are calling the old provider-of-xxx in useProvider. Please call the contract directly instead:",
+      },
+      list: [...usingOldProvidersInUseProvider.keys()],
+      details: [...usingOldProvidersInUseProvider.entries()].map(
+        ([message, meta]) => ({
+          message,
+          meta,
+        })
+      ),
     });
   }
 
