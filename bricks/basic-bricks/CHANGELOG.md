@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.227.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.227.1...@next-bricks/basic-bricks@1.227.2) (2023-01-04)
+
+
+### Bug Fixes
+
+* support setting linear-gradient via css variables ([8cf35d0](https://github.com/easyops-cn/next-basics/commit/8cf35d092997a94b8fe17d98610078c221bd74de))
+
+
+
+
+
 ## [1.227.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.227.0...@next-bricks/basic-bricks@1.227.1) (2022-12-29)
 
 
