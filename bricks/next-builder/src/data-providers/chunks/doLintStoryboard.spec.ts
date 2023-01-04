@@ -74,7 +74,7 @@ const storyboard = {
             "general.button.click": [
               {
                 action: "message.info",
-                args: ["click button"],
+                args: ["${EVENT.detail}"],
               },
               {
                 useProvider: "providers-of-cmdb.instance-api-xxx",
@@ -182,7 +182,20 @@ const storyboard = {
             value: "<% PATH.projectId %>",
           },
         ],
-        bricks: [],
+        bricks: [
+          {
+            bg: false,
+            brick: "basic-bricks.general-button",
+            properties: {
+              buttonName: "to new",
+              buttonType: "link",
+              buttonUrl: "${PATH}",
+              dataset: {
+                testid: "new link",
+              },
+            },
+          },
+        ],
         name: "tpl-test-1",
       },
       {
@@ -359,6 +372,37 @@ const result = [
             instanceId: "5eb75014e908e",
             type: "route",
             alias: "测试",
+          },
+        },
+      },
+    ],
+  },
+  {
+    type: "warn",
+    code: "USING_INJECT",
+    message: {
+      zh: "您正在使用参数注入写法, 如 ${xxx} 或 @{xxx}, 建议修改为表达式:",
+      en: "You are using the parameter injection method, such as ${xxx} or @{xxx}. Please use the expression instead:",
+    },
+    list: ["测试: ${EVENT.detail}", "tpl-test-1: ${PATH}"],
+    details: [
+      {
+        message: "测试",
+        messageSuffix: ": ${EVENT.detail}",
+        meta: {
+          root: {
+            instanceId: "5eb75014e908e",
+            type: "route",
+          },
+        },
+      },
+      {
+        message: "tpl-test-1",
+        messageSuffix: ": ${PATH}",
+        meta: {
+          root: {
+            templateId: "tpl-test-1",
+            type: "template",
           },
         },
       },

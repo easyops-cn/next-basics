@@ -17,6 +17,7 @@ import {
   EstreeLiteral,
   EstreeParent,
 } from "@next-core/brick-utils";
+import { cloneDeep } from "lodash";
 
 // https://github.com/type-challenges/type-challenges/issues/18153
 type UnionToFnIntersection<T> = (
@@ -44,7 +45,8 @@ export type StoryboardErrorCode =
   | "USING_ONCHANGE_IN_CTX"
   | "USING_USERESOLVE_IN_BRICK_LIFECYCLE"
   | "USING_WARNED_EXPRESSION_IN_TEMPLATE"
-  | "USING_OLD_PROVODERS_IN_USEPROVIDER";
+  | "USING_OLD_PROVODERS_IN_USEPROVIDER"
+  | "USING_INJECT";
 
 export interface StoryboardError {
   type: "warn" | "error";
@@ -174,6 +176,8 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
   const tagNameAsTargetRegExp = /^[-\w]+(\\\.[-\w]+)*$/;
   const providerBrickRegExp = /^providers-of-/;
   const customProviderBrickRegExp = /\.provider-/;
+  const injectExp = /[$@]\{.*?\}/;
+  const routePathExp = /^\$\{APP\.homepage\}/;
   const portalBricks = new Set([
     "basic-bricks.delete-confirm-modal",
     "basic-bricks.general-drawer",
@@ -333,10 +337,12 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     }
   });
 
+  const { routes } = storyboard ?? {};
   const { customTemplates, menus } = storyboard.meta ?? {};
   const warnedUsingCtxTemplates: LintDetail[] = [];
   const warnedUsingTplVarTemplates: LintDetail[] = [];
   const usingWarnedExpressionInTemplate: LintDetail[] = [];
+  const usingInject: LintDetail[] = [];
   let installedAppsUseDynamicArguments = false;
 
   visitStoryboardExpressions(
@@ -355,11 +361,45 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
     }
   );
 
+  if (Array.isArray(routes)) {
+    for (const route of routes) {
+      const injects = new Set<string>();
+      visitStoryboardExpressions(
+        [route],
+        // eslint-disable-next-line
+        (node) => {},
+        {
+          matchExpressionString: (value) => true,
+          visitNonExpressionString(value) {
+            if (injectExp.test(value) && !routePathExp.test(value)) {
+              injects.add(value);
+            }
+          },
+        }
+      );
+      for (const [collection, warned] of [[injects, usingInject]] as const) {
+        if (collection.size > 0) {
+          warned.push({
+            message: route.alias,
+            messageSuffix: `: ${limit(collection, 3).join(", ")}`,
+            meta: {
+              root: {
+                type: "route",
+                instanceId: route.iid,
+              },
+            },
+          });
+        }
+      }
+    }
+  }
+
   if (Array.isArray(customTemplates)) {
     for (const tpl of customTemplates) {
       const contexts = new Set<string>();
       const tplVariables = new Set<string>();
       const warnedExpressionInTpl = new Set<string>();
+      const injects = new Set<string>();
       visitStoryboardExpressions(
         [tpl.bricks, tpl.state],
         (node, parent) => {
@@ -376,14 +416,11 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
           visitTemplateExpressionFactory(node, parent, warnedExpressionInTpl);
         },
         {
-          matchExpressionString(value) {
-            return (
-              value.includes("CTX") ||
-              value.includes("TPL") ||
-              value.includes("INSTALLED_APPS") ||
-              value.includes("QUERY") ||
-              value.includes("PATH")
-            );
+          matchExpressionString: (value) => true,
+          visitNonExpressionString(value) {
+            if (injectExp.test(value)) {
+              injects.add(value);
+            }
           },
         }
       );
@@ -399,6 +436,7 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
         [contexts, warnedUsingCtxTemplates],
         [tplVariables, warnedUsingTplVarTemplates],
         [warnedExpressionInTpl, usingWarnedExpressionInTemplate],
+        [injects, usingInject],
       ] as const) {
         if (collection.size > 0) {
           warned.push({
@@ -615,6 +653,21 @@ export function doLintStoryboard(storyboard: Storyboard): StoryboardError[] {
           meta,
         })
       ),
+    });
+  }
+
+  if (usingInject.length > 0) {
+    errors.push({
+      type: "warn",
+      code: "USING_INJECT",
+      message: {
+        zh: "您正在使用参数注入写法, 如 ${xxx} 或 @{xxx}, 建议修改为表达式:",
+        en: "You are using the parameter injection method, such as ${xxx} or @{xxx}. Please use the expression instead:",
+      },
+      list: usingInject.map(
+        (detail) => `${detail.message}${detail.messageSuffix}`
+      ),
+      details: usingInject,
     });
   }
 
