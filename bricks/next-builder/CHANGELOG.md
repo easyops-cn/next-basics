@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.221.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.221.0...@next-bricks/next-builder@1.221.1) (2023-01-04)
+
+
+### Bug Fixes
+
+* **build-project-of-templates:** replace widget keywords in state ([ffca5b9](https://github.com/easyops-cn/next-basics/commit/ffca5b91748c7c8cd0f3ab5e47b4a1d1b9bcbfb2))
+
+
+
+
+
 # [1.221.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.220.0...@next-bricks/next-builder@1.221.0) (2023-01-04)
 
 
