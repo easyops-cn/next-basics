@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.221.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.220.0...@next-bricks/next-builder@1.221.0) (2023-01-04)
+
+
+### Features
+
+* support doLintStoryboard to scan ${} inject ([#1953](https://github.com/easyops-cn/next-basics/issues/1953)) ([4c0e360](https://github.com/easyops-cn/next-basics/commit/4c0e360ee576cd713260da3e153e0a68f0f33d53))
+
+
+
+
+
 # [1.220.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.219.0...@next-bricks/next-builder@1.220.0) (2023-01-03)
 
 
