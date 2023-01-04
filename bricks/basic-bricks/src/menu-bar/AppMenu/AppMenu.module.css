@@ -44,7 +44,7 @@
 
   &:hover {
     color: var(--antd-menu-title-color);
-    background-color: var(--antd-menu-item-hover);
+    background: var(--antd-menu-item-hover);
   }
 }
 
@@ -85,7 +85,7 @@
     border-radius: 6px;
 
     &:not(:global(.ant-menu-item-selected)):hover {
-      background-color: var(--antd-menu-item-hover);
+      background: var(--antd-menu-item-hover);
     }
 
     > a {
@@ -98,7 +98,7 @@
   }
 
   :global(.ant-menu-item-selected) {
-    background-color: var(--antd-menu-item-selected-bg);
+    background: var(--antd-menu-item-selected-bg);
 
     > a {
       color: var(--antd-menu-color);

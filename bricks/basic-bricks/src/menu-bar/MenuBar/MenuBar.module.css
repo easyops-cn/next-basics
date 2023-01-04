@@ -6,7 +6,7 @@
   bottom: 0;
   width: var(--menu-bar-width);
   color: #fff;
-  background-color: var(--antd-menu-bg);
+  background: var(--antd-menu-bg);
   box-shadow: var(--antd-menu-shadow);
   transition: var(--launchpad-backdrop-transition);
   display: flex;
