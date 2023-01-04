@@ -33,7 +33,7 @@ export class BrickResultElement extends UpdatingElement {
    * @description 结果的状态, 决定图标和颜色
    * @group basic
    */
-  @property({ attribute: false })
+  @property({ type: String })
   status: BrickResultStatus | EmptyResultStatus | IllustrationsStatus;
 
   /**

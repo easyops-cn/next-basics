@@ -60,8 +60,8 @@ export function IllustrationWrapper(
   const miscSettings = getRuntime().getMiscSettings();
   const isSupportedApp =
     ((miscSettings["supportedNewIllustrationApps"] || []) as any).includes(
-      app.id
-    ) || !!app.config?.supportNewIllustrations;
+      app?.id
+    ) || !!app?.config?.supportNewIllustrations;
 
   const image = React.useMemo(() => {
     let illustrationConfig: IllustrationProps = { name, category, theme };
