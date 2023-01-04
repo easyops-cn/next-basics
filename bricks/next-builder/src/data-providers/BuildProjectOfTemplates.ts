@@ -207,14 +207,16 @@ export async function BuildProjectOfTemplates({
     (item) => ({
       name: `${appId}.${item.templateId}`,
       proxy: getCleanProxy(item.proxy),
-      state: item.state
-        ? (getCleanState(item.state) as CustomTemplateState[])
-        : undefined,
-      bricks: replaceWidgetFunctions(
-        buildBricks(item.children, {
-          appId,
-          internalTemplateNames,
-        }) as BrickConfInTemplate[],
+      ...replaceWidgetFunctions(
+        {
+          state: item.state
+            ? (getCleanState(item.state) as CustomTemplateState[])
+            : undefined,
+          bricks: buildBricks(item.children, {
+            appId,
+            internalTemplateNames,
+          }) as BrickConfInTemplate[],
+        },
         appId,
         version
       ),

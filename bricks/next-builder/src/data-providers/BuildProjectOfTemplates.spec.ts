@@ -129,6 +129,7 @@ const consoleError = jest
               state: `[
                 {
                   "name": "myState",
+                  "if": "<% FN.abc() %>",
                   "value": "any data"
                 },
                 {
@@ -407,7 +408,7 @@ describe("BuildProjectOfTemplates", () => {
 }`,
           },
           {
-            path: "dist/index.33a01be4.js",
+            path: "dist/index.4a11c8e8.js",
             content: expect.stringContaining(`
 Object(n.getRuntime)().registerCustomTemplate("app-1.template-t", {
   "bricks": [
@@ -498,6 +499,7 @@ Object(n.getRuntime)().registerCustomTemplate("app-1.template-u", {
   "state": [
     {
       "name": "myState",
+      "if": "<% __WIDGET_FN__[\\"app-1\\"].abc() %>",
       "value": "any data"
     },
     {
@@ -985,7 +987,7 @@ Object(n.getRuntime)().registerWidgetI18n("app-1", {
 }`,
           },
           {
-            path: "dist/index.7431f3eb.js",
+            path: "dist/index.17cef4c4.js",
             content: expect.stringContaining(
               'registerCustomTemplate("app-2.template-t",'
             ),
