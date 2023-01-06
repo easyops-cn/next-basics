@@ -126,6 +126,12 @@ export interface CustomColumn extends ColumnProps<Record<string, any>> {
    * 每条记录的控制行合并的值的 key
    */
   rowSpanKey?: string;
+  /**
+   * 自定义筛选菜单
+   */
+  filterDropdownBrick?: {
+    useBrick: UseBrickConf;
+  };
 }
 
 export interface CellStatusProps {

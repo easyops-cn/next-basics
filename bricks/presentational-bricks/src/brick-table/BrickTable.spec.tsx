@@ -420,6 +420,14 @@ describe("BrickTable", () => {
       {
         title: "版本",
         dataIndex: "version",
+        filterDropdownBrick: {
+          useBrick: {
+            brick: "div",
+            properties: {
+              textContent: "test",
+            },
+          },
+        },
       },
     ];
     const onDrag = jest.fn();

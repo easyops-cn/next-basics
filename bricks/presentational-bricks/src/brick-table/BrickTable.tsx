@@ -253,6 +253,7 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           headerBrick,
           colSpanKey,
           rowSpanKey,
+          filterDropdownBrick,
           ...columnConf
         } = column;
         if (headerBrick?.useBrick || titleUseBrick) {
@@ -274,6 +275,14 @@ export function BrickTable(props: BrickTableProps): React.ReactElement {
           }
 
           columnConf.title = getCustomHeader(useBrick, data);
+        }
+
+        if (filterDropdownBrick?.useBrick) {
+          columnConf.filterDropdown = (
+            <BrickAsComponent
+              useBrick={filterDropdownBrick.useBrick}
+            ></BrickAsComponent>
+          );
         }
 
         if (useBrick || component) {
