@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.279.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.278.0...@next-bricks/presentational-bricks@1.279.0) (2023-01-06)
+
+
+### Features
+
+* **basic-and-presentational:** 表格新增自定义筛选菜单 ([4f8b21e](https://github.com/easyops-cn/next-basics/commit/4f8b21e9ec94765a11533ecde8200727add08e6f))
+
+
+
+
+
 # [1.278.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.277.2...@next-bricks/presentational-bricks@1.278.0) (2023-01-04)
 
 
