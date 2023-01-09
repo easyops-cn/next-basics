@@ -2374,6 +2374,24 @@
     compare-versions "^5.0.1"
     minimatch "^3.1.2"
 
+"@next-core/brick-kit@^2.159.3":
+  version "2.159.4"
+  resolved "https://registry.npmjs.org/@next-core/brick-kit/-/brick-kit-2.159.4.tgz#bb1ba47ce1e9144651938baa7aa5897fed8e100d"
+  integrity sha512-6oR7FWpqgV+sxbqARFtPC9+j33GZpYtjDcx4z6GnsDkPm3Q3flCt2pte1vcKhp32oExUlIX9J1We8QwcxT+ceA==
+  dependencies:
+    "@next-core/brick-types" "^2.82.3"
+    "@next-core/color-theme" "^0.4.8"
+    "@next-core/supply" "^1.0.91"
+    "@next-sdk/api-gateway-sdk" "^2.3.0"
+    "@next-sdk/auth-sdk" "^1.0.0"
+    "@next-sdk/cmdb-sdk" "^2.1.1"
+    "@next-sdk/micro-app-sdk" "^2.5.0"
+    "@next-sdk/micro-app-standalone-sdk" "^1.0.1"
+    "@next-sdk/user-service-sdk" "^2.1.1"
+    "@ungap/event-target" "^0.2.3"
+    compare-versions "^5.0.1"
+    minimatch "^3.1.2"
+
 "@next-core/brick-scripts@^3.0.6":
   version "3.0.6"
   resolved "https://registry.npmjs.org/@next-core/brick-scripts/-/brick-scripts-3.0.6.tgz#689d5c38ade22d347a7a1f3d7ee110530e4e68c4"
@@ -2392,7 +2410,7 @@
     request "^2.88.2"
     request-promise-native "^1.0.9"
 
-"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.82.2":
+"@next-core/brick-types@^2.16.0", "@next-core/brick-types@^2.82.2", "@next-core/brick-types@^2.82.3":
   version "2.82.2"
   resolved "https://registry.npmjs.org/@next-core/brick-types/-/brick-types-2.82.2.tgz#7b58b8ebb929fe5200ab63252694b95ceb8d6a20"
   integrity sha512-JQx1Py/G8jpFRw+HUZaSYw7X4arR/LxNkSWsW3w39/V4+LUUS27Xp11dKXk3ThCTbiNV3x2g2b3YBuiVfmKoyw==
@@ -2615,6 +2633,13 @@
   integrity sha512-ssn6sZ1V3olcKsPEcN+LlQxRcv2wqFQiVo8Pf3s1zd901ZhUI6YAbxD2O8Q9tkSGPULJtvd8cYdVddc2JjEyoQ==
   dependencies:
     "@next-core/brick-types" "^2.82.2"
+
+"@next-core/supply@^1.0.91":
+  version "1.0.91"
+  resolved "https://registry.npmjs.org/@next-core/supply/-/supply-1.0.91.tgz#7000e8b887fedf3365ffc11fba1cdbe76242d0ac"
+  integrity sha512-QddJE7waZYEJJaNf7FxAfXg7/atNt2wGARtPWu4cbtQKhvahd3g1DyG5bm1puQHOf8LlaIMh3oLTiLa78HqJ6Q==
+  dependencies:
+    "@next-core/brick-types" "^2.82.3"
 
 "@next-core/typedoc-plugin-filter-inherit@^1.2.5":
   version "1.2.5"
