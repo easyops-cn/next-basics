@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.221.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.221.1...@next-bricks/next-builder@1.221.2) (2023-01-09)
+
+
+### Bug Fixes
+
+* 修复浅色模式下树节点active无背景色标记 ([b652d77](https://github.com/easyops-cn/next-basics/commit/b652d77e1725289128f2ec8d321cf2fd5275d8c6))
+
+
+
+
+
 ## [1.221.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-builder@1.221.0...@next-bricks/next-builder@1.221.1) (2023-01-04)
 
 
