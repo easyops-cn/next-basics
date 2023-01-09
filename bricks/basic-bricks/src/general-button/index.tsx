@@ -235,15 +235,15 @@ export class GeneralButtonElement extends UpdatingElement {
   buttonShape: "circle" | "round";
 
   /**
-   * @kind small | large
+   * @kind xs | small | large
    * @required false
    * @default -
-   * @description 按钮大小，支持大、小，不设置为默认中
-   * @enums "small"|"large"
+   * @description 按钮大小，支持大、小、较小、不设置为默认中
+   * @enums "xs" | "small"| "large"
    * @group ui
    */
   @property()
-  buttonSize: "small" | "large";
+  buttonSize: "xs" | "small" | "large";
 
   /**
    * @kind boolean

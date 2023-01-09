@@ -24,7 +24,7 @@ interface LegacyGeneralButtonProps {
   buttonDanger?: boolean;
   buttonIcon?: string;
   buttonShape?: "circle" | "round";
-  buttonSize?: "small" | "large";
+  buttonSize?: "xs" | "small" | "large";
   buttonProps?: ButtonProps & { icon?: string };
   buttonUrl?: string;
   buttonHref?: string;
@@ -69,6 +69,9 @@ export function GeneralButton({
         [styles.fadedText]: fadedText && buttonType === "text",
       })}
       style={{
+        ...(buttonSize == "xs"
+          ? { height: "22px", lineHeight: "11px", fontSize: "11px" }
+          : null),
         ...buttonStyle,
         ...(disabled
           ? {
@@ -77,7 +80,7 @@ export function GeneralButton({
           : null),
       }}
       shape={buttonShape}
-      size={buttonSize}
+      size={buttonSize !== "xs" ? buttonSize : null}
       onClick={onClick}
       type={buttonType}
       danger={buttonDanger}
