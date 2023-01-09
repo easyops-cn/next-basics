@@ -1,6 +1,6 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
-import { Cascader, Form, Input, InputNumber, Select } from "antd";
+import { AutoComplete, Cascader, Form, Input, InputNumber, Select } from "antd";
 import { ColumnComponent } from "./ColumnComponent";
 import { CodeEditorItem } from "@next-libs/code-editor-components";
 import { Column } from "../interfaces";
@@ -63,6 +63,15 @@ const editorColumn = {
   type: "editor",
   props: {
     mode: "yaml",
+  },
+} as Column;
+
+const autoCompleteColumn = {
+  name: "autoComplete",
+  label: "autoComplete",
+  type: "autoComplete",
+  props: {
+    options: [{ label: "a", value: "a" }],
   },
 } as Column;
 
@@ -191,6 +200,13 @@ describe("ColumnComponent", () => {
     );
 
     expect(wrapper.find(CodeEditorItem)).toHaveLength(1);
+  });
+
+  it("autoComplete should work", () => {
+    const wrapper = mount(
+      <ColumnComponent column={autoCompleteColumn} field={field} />
+    );
+    expect(wrapper.find(AutoComplete)).toHaveLength(1);
   });
 
   it("label should work", () => {

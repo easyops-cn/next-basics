@@ -7,6 +7,7 @@ import {
 } from "antd/lib/cascader";
 import { Rule, RuleObject } from "antd/lib/form";
 import { StoreValue } from "antd/lib/form/interface";
+import { OptionType } from ".";
 
 export enum ComponentType {
   INPUT = "input",
@@ -193,6 +194,17 @@ export interface EditorProps {
   customCompleters?: string[];
 }
 
+export interface AutoCompleteProps extends BasicProps {
+  /**
+   * 是否支持清除
+   */
+  allowClear?: boolean;
+  /**
+   * 候选项
+   */
+  options: string[] | OptionType[];
+}
+
 export interface InputColumn {
   // type: ComponentType.INPUT;
   type: "input";
@@ -226,6 +238,11 @@ export interface CascaderColumn {
 export interface EditorColumn {
   type: "editor";
   props: EditorProps;
+}
+
+export interface AutoCompleteColumn {
+  type: "autoComplete";
+  props: AutoCompleteProps;
 }
 
 export interface BasicColumn {
@@ -271,4 +288,5 @@ export type Column = BasicColumn &
     | SelectColumn
     | CascaderColumn
     | EditorColumn
+    | AutoCompleteColumn
   );

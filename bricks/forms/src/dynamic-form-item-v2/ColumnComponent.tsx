@@ -9,6 +9,7 @@ import { GeneralComplexOption } from "@next-libs/forms";
 import style from "./ColumnComponent.module.css";
 import { UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
+import { AutoCompleteItem } from "./autoCompleteItem";
 interface ColumnComponentProps {
   column: Column;
   field: FormListFieldData;
@@ -320,6 +321,27 @@ export function ColumnComponent(
         </Form.Item>
       );
     }
+
+    case "autoComplete": {
+      const { placeholder, allowClear, options } = column.props || {};
+
+      return (
+        <Form.Item
+          {...restField}
+          label={labelNode}
+          name={[fieldName, name]}
+          rules={rules}
+        >
+          <AutoCompleteItem
+            options={options}
+            disabled={disabled}
+            allowClear={allowClear}
+            placeholder={placeholder}
+          />
+        </Form.Item>
+      );
+    }
+
     default: {
       return null;
     }
