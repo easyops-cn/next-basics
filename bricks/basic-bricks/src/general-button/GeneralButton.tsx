@@ -80,7 +80,7 @@ export function GeneralButton({
           : null),
       }}
       shape={buttonShape}
-      size={buttonSize !== "xs" ? buttonSize : "middle"}
+      size={buttonSize !== "xs" ? buttonSize : null}
       onClick={onClick}
       type={buttonType}
       danger={buttonDanger}
