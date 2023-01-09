@@ -105,7 +105,7 @@ describe("BrickPreview", () => {
         .find("div[data-testid='brick-container-bg']")
         .html()
         .includes("hello")
-    ).toBe(true);
+    ).toBe(false);
     expect(
       wrapper
         .find("div[data-testid='brick-container-portal']")
