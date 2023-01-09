@@ -1,5 +1,5 @@
 import { developHelper, getHistory, getRuntime } from "@next-core/brick-kit";
-import { formDataProperties } from "@next-core/brick-kit/dist/types/core/CustomForms/ExpandCustomForm";
+import { FormDataProperties } from "@next-core/brick-kit/dist/types/core/CustomForms/ExpandCustomForm";
 import type {
   BrickConf,
   CustomTemplate,
@@ -218,7 +218,7 @@ export function previewStart(
                 developHelper.updateFormPreviewSettings(
                   options.appId,
                   options.formId,
-                  data.storyboardPatch as formDataProperties
+                  data.storyboardPatch as FormDataProperties
                 );
               }
               getHistory().reload();
