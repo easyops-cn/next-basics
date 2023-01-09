@@ -40,5 +40,36 @@ describe("GeneralAutoComplete", () => {
       { label: "1", value: "1" },
       { label: "2", value: "2" },
     ]);
+
+    wrapper.setProps({
+      options: [
+        {
+          label: "a",
+          options: [
+            { label: "a1", value: "a1" },
+            { label: "a2", value: "a2" },
+          ],
+        },
+        {
+          label: "b",
+          options: [
+            { label: "b1", value: "b1" },
+            { label: "b2", value: "b2" },
+          ],
+        },
+      ],
+    });
+    wrapper.update();
+    const autoComplete2 = wrapper.find(AutoComplete).first();
+    autoComplete2.invoke("onSearch" as any)("b");
+    expect(wrapper.find(AutoComplete).prop("options")).toEqual([
+      {
+        label: "b",
+        options: [
+          { label: "b1", value: "b1" },
+          { label: "b2", value: "b2" },
+        ],
+      },
+    ]);
   });
 });
