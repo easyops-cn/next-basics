@@ -9,7 +9,7 @@ const unmountComponentAtNode = jest
   .mockImplementation(() => null);
 
 describe("basic-bricks.flex-layout", () => {
-  it("should create a custom element", () => {
+  it("should create a custom-element", () => {
     const element = document.createElement("basic-bricks.flex-layout");
     expect(spyOnRender).not.toBeCalled();
     document.body.appendChild(element);
