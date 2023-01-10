@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.253.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.252.0...@next-bricks/forms@1.253.0) (2023-01-10)
+
+
+### Features
+
+* 图片上传构件forms.upload-img支持多张图片进行上传 refs EASY_HUB-430 ([e5930d1](https://github.com/easyops-cn/next-basics/commit/e5930d1f67dd75e2a5390e68aa7973867991454c))
+
+
+
+
+
 # [1.252.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.251.3...@next-bricks/forms@1.252.0) (2023-01-10)
 
 
