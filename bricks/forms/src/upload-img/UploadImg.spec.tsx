@@ -26,7 +26,24 @@ const fileList = [
     url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
   },
 ];
-
+const fileListOne = [
+  {
+    uid: "12344",
+    size: 1234,
+    type: "image/png",
+    name: "image1",
+    status: "done",
+    url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ1.png",
+  },
+  {
+    uid: "12345",
+    size: 1234,
+    type: "image/png",
+    name: "image2",
+    status: "done",
+    url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ2.png",
+  },
+];
 beforeAll(() => {
   // Mocking Image.prototype.src to call the onload
   // callbacks depending on the src passed to it
@@ -681,5 +698,34 @@ describe("UploadImg", () => {
       lib: "easyops",
     });
     spyOnUseCurrentTheme.mockRestore();
+  });
+  it("should work when multiple is true", async () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <UploadImg
+        listType="picture-card"
+        onChange={onChange}
+        bucketName="monitor"
+        showMentions={true}
+        hideUploadButton={true}
+        multiple={true}
+      />
+    );
+    wrapper.find(Upload).invoke("onChange")({
+      file: {
+        uid: "123",
+        size: 1234,
+        type: "image/png",
+        name: "image.png",
+        status: "done",
+        response: {
+          data: {
+            objectName: "image.png",
+          },
+        },
+      },
+      fileList: [...fileList, ...fileListOne],
+    });
+    expect(wrapper.find(".ant-upload-list-item").length).toBe(3);
   });
 });

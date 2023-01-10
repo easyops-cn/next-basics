@@ -193,6 +193,16 @@ export class UploadImgElement extends FormItemElement {
   })
   showMentions?: boolean;
 
+  /**
+   * @default false
+   * @description 是否支持选定的多张图片
+   * @group other
+   */
+  @property({
+    type: Boolean,
+  })
+  multiple?: boolean;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -268,6 +278,7 @@ export class UploadImgElement extends FormItemElement {
             getPreview={this.getPreview}
             showMentions={this.showMentions}
             labelTooltip={this.labelTooltip}
+            multiple={this.multiple}
           />
         </BrickWrapper>,
         this
