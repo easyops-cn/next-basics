@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.252.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.251.3...@next-bricks/forms@1.252.0) (2023-01-10)
+
+
+### Features
+
+* support dynamic-form-item-v2 autoComplete item ([dca22d3](https://github.com/easyops-cn/next-basics/commit/dca22d36eb8e8b9e8fb80390d57412760dcc7cf7))
+
+
+
+
+
 ## [1.251.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.251.2...@next-bricks/forms@1.251.3) (2022-12-30)
 
 **Note:** Version bump only for package @next-bricks/forms

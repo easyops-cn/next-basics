@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.228.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.227.2...@next-bricks/basic-bricks@1.228.0) (2023-01-10)
+
+
+### Bug Fixes
+
+* update basic-bricks version tag ([cfa37a0](https://github.com/easyops-cn/next-basics/commit/cfa37a06dcd8528b62a71635eb7d5bcf205a5ca6))
+
+
+### Features
+
+* 给button添加xs的size ([22814e5](https://github.com/easyops-cn/next-basics/commit/22814e57ba61151f06e9366aa191fe5ccf0301f6))
+* 给button添加xs的尺寸 ([99851ad](https://github.com/easyops-cn/next-basics/commit/99851ad9a08a2fe41fe4f431968e9eddad9663b4))
+
+
+
+
+
 ## [1.227.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.227.1...@next-bricks/basic-bricks@1.227.2) (2023-01-04)
 
 
