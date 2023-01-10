@@ -51,6 +51,7 @@ interface UploadImgProps extends FormItemWrapperProps {
   useFullUrlPath?: boolean;
   getPreview?: boolean;
   showMentions?: boolean;
+  multiple?: boolean;
 }
 
 interface ImageItem {
@@ -192,23 +193,42 @@ export function RealUploadImg(
           ],
         });
       } else {
-        setImageList(
-          update(newFileList, {
-            [newFileList.length - 1]: { $set: newFile },
-          })
+        const isMultiple = props.multiple;
+        const newFileIndex = newFileList.findIndex(
+          (f) => f.uid === newFile.uid
         );
-
-        handleValueChange({
-          images: update(value?.images || [], {
-            $push: [
-              {
-                ...(props.getPreview ? { preview: newFile.preview } : {}),
-                url: newFile.url,
-                name: newFile.name,
-              },
-            ],
-          }),
+        const updateList = update(newFileList, {
+          [newFileIndex > -1 ? newFileIndex : newFileList.length - 1]: {
+            $set: newFile,
+          },
         });
+        setImageList(updateList);
+        if (isMultiple) {
+          // 一次选择多个图片上传的时候，每个图片还是分开上传的，Upload组件的onChange方法会调用多次；比如选择两张图片，第一张上传完成，第二张还在上传中，
+          // 这时候第一张图片的onChange事件执行到了这里面，如果这时候就直接调用handleValueChange函数，会执行props.onChange，props.onChange又更新了构件的value属性，这会更新state的imageList（这里面并不包含第二张图片的信息），从而更新了Upload组件的fileList属性，Upload组件的onChange 事件仅会作用于在列表中的文件，因而 fileList 不存在对应文件时后续事件会被忽略，所以第二张图片不会上传成功；因此做这个限制(!some(newFileList, ["status", "uploading"]))。
+          !some(newFileList, ["status", "uploading"]) &&
+            handleValueChange({
+              images: update([], {
+                $push: updateList.map((f) => ({
+                  ...(props.getPreview ? { preview: f.preview } : {}),
+                  url: transformResponseToUrl(f.response.data.objectName),
+                  name: f.name,
+                })),
+              }),
+            });
+        } else {
+          handleValueChange({
+            images: update(value?.images || [], {
+              $push: [
+                {
+                  ...(props.getPreview ? { preview: newFile.preview } : {}),
+                  url: newFile.url,
+                  name: newFile.name,
+                },
+              ],
+            }),
+          });
+        }
       }
     } else {
       if (props.maxNumber === 1) {
@@ -558,6 +578,7 @@ export function RealUploadImg(
     }),
 
     method: "put",
+    multiple: props.multiple,
     action,
     data: uploadData,
     listType: props.listType,
@@ -568,6 +589,7 @@ export function RealUploadImg(
     beforeUpload: handleBeforeUpload,
     supportServerRender: true,
     disabled,
+    maxCount: props.maxNumber,
   };
 
   return (
@@ -632,6 +654,7 @@ export function UploadImg(props: UploadImgProps): React.ReactElement {
         useFullUrlPath={props.useFullUrlPath}
         getPreview={props.getPreview}
         showMentions={props.showMentions}
+        multiple={props.multiple}
       />
     </FormItemWrapper>
   );
