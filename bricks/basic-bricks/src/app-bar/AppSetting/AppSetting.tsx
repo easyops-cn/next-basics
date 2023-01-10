@@ -21,6 +21,7 @@ export function AppSetting(): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
   const currentApp = useCurrentApp();
   const username = getAuth().username;
+  const userShowValue = getAuth().userShowValue;
   const currentLang = i18next.language?.split("-")[0];
   const { appsTheme }: Record<string, any> = getRuntime().getMiscSettings();
   const theme = getCurrentTheme();
@@ -160,6 +161,15 @@ export function AppSetting(): React.ReactElement {
     []
   );
 
+  const getUsername = () => {
+    if (userShowValue?.length) {
+      return (
+        userShowValue[0] +
+        (userShowValue[1] ? "(" + userShowValue[1] + ")" : "")
+      );
+    }
+    return username;
+  };
   return (
     <div>
       {window.NO_AUTH_GUARD ? (
@@ -250,7 +260,7 @@ export function AppSetting(): React.ReactElement {
         >
           <Button type="link">
             <Avatar {...avatarProps}>{username.substr(0, 1)}</Avatar>
-            {username}
+            <span data-id="username-text">{getUsername()}</span>
             <DownOutlined />
           </Button>
         </Dropdown>

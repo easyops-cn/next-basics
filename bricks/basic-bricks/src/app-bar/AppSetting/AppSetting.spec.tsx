@@ -34,6 +34,7 @@ jest.spyOn(brickKit, "getHistory").mockReturnValue({
 
 jest.spyOn(brickKit, "getAuth").mockReturnValue({
   username: "tester",
+  userShowValue: ["easyops", "carrel"],
 });
 
 const getFeatureFlags = jest.fn().mockReturnValue({});
@@ -132,6 +133,19 @@ describe("AppBar", () => {
     expect(spyOnHistoryPush).toBeCalledWith("/account-setting");
   });
 
+  it("should render when userShowValue is exist", () => {
+    const wrapper = shallow(<AppSetting />);
+    expect(wrapper.find('[data-id="username-text"]').text()).toBe(
+      "easyops(carrel)"
+    );
+
+    jest.spyOn(brickKit, "getAuth").mockReturnValue({
+      username: "easyops",
+      userShowValue: [],
+    });
+    const wrapper1 = shallow(<AppSetting />);
+    expect(wrapper1.find('[data-id="username-text"]').text()).toBe("easyops");
+  });
   it("should render when user is not logged in.", () => {
     jest.spyOn(brickKit, "getAuth").mockReturnValueOnce({
       username: undefined,
