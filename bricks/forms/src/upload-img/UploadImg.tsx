@@ -211,7 +211,9 @@ export function RealUploadImg(
               images: update([], {
                 $push: updateList.map((f) => ({
                   ...(props.getPreview ? { preview: f.preview } : {}),
-                  url: transformResponseToUrl(f.response.data.objectName),
+                  url: f.response
+                    ? transformResponseToUrl(f.response.data.objectName)
+                    : f.url,
                   name: f.name,
                 })),
               }),
