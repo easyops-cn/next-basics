@@ -168,9 +168,7 @@ export function AppSetting(): React.ReactElement {
         (userShowValue[1] ? "(" + userShowValue[1] + ")" : "")
       );
     }
-    if (!userShowValue || !userShowValue?.length) {
-      return username;
-    }
+    return username;
   };
   return (
     <div>
@@ -262,7 +260,7 @@ export function AppSetting(): React.ReactElement {
         >
           <Button type="link">
             <Avatar {...avatarProps}>{username.substr(0, 1)}</Avatar>
-            {getUsername()}
+            <span data-id="username-text">{getUsername()}</span>
             <DownOutlined />
           </Button>
         </Dropdown>
