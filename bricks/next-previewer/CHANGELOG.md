@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.12.1...@next-bricks/next-previewer@1.12.2) (2023-01-11)
+
+
+### Bug Fixes
+
+* 修复FormDataProperties引入问题 refs USER-4 ([1f7116f](https://github.com/easyops-cn/next-basics/commit/1f7116f6f3e45065e33e69656636a18bb746eaa7))
+
+
+
+
+
 ## [1.12.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/next-previewer@1.12.0...@next-bricks/next-previewer@1.12.1) (2022-11-28)
 
 **Note:** Version bump only for package @next-bricks/next-previewer

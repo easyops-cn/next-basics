@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.0...@next-bricks/basic-bricks@1.228.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* 修复app-setting名称显示问题 refs USER-4 ([0e53d76](https://github.com/easyops-cn/next-basics/commit/0e53d763636a18da3c6fb2475635f192f5459365))
+* 修改review的代码, 补充单元测试 refs USER-4 ([739c594](https://github.com/easyops-cn/next-basics/commit/739c594de1a9b0ee87ff4132bc80efdf83c8e1bd))
+
+
+
+
+
 # [1.228.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.227.2...@next-bricks/basic-bricks@1.228.0) (2023-01-10)
 
 
