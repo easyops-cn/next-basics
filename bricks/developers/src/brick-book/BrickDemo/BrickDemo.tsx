@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Collapse, Card, Spin } from "antd";
+import { Collapse, Card } from "antd";
 import {
   BrickPreview,
   BrickPreviewRef,
-  processConf,
 } from "../../components/BrickPreview/BrickPreview";
 import { BrickActions } from "../../components/BrickActions/BrickActions";
 import { BrickEditor } from "../../components/BrickEditor/BrickEditor";
 import styles from "./BrickDemo.module.css";
-import { i18nText, getRuntime } from "@next-core/brick-kit";
+import { i18nText } from "@next-core/brick-kit";
 import {
   Action,
   StoryConf,
@@ -66,13 +65,11 @@ export function BrickDemo(props: BrickDemoProps): React.ReactElement {
     getAdjustedConf(props.defaultConf)
   );
   const previewRef = React.useRef<BrickPreviewRef>(null);
-  const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [previewConf, setPreviewConf] = React.useState(
     adjustedConf.previewConf
   );
   const [description, setDescription] = useState(adjustedConf.description);
   const [actions, setActions] = useState(adjustedConf.actions);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setAdjustedconf(getAdjustedConf(props.defaultConf));
@@ -83,14 +80,6 @@ export function BrickDemo(props: BrickDemoProps): React.ReactElement {
     setDescription(adjustedConf.description);
     setActions(adjustedConf.actions);
   }, [adjustedConf]);
-
-  useEffect(() => {
-    if (window.STANDALONE_MICRO_APPS) {
-      const previewRender = (iframeRef.current.contentWindow as any)
-        ._preview_render;
-      previewRender?.({ conf: processConf(previewConf) });
-    }
-  }, [previewConf]);
 
   const BrickEditorMemoized = React.useCallback(() => {
     // const defaultConf = { ...adjustedConf };
@@ -132,30 +121,9 @@ export function BrickDemo(props: BrickDemoProps): React.ReactElement {
     );
   };
 
-  const handleIframeLoad = async (): Promise<void> => {
-    const contentWindow = iframeRef.current.contentWindow;
-    const previewRender = (contentWindow as any)._preview_render;
-    await previewRender({ conf: processConf(previewConf) });
-
-    iframeRef.current.height =
-      contentWindow.document.body.scrollHeight + 80 + "px";
-    setLoading(false);
-  };
-
   return (
     <Card className={styles.demoContainer} bordered={false}>
-      {window.STANDALONE_MICRO_APPS ? (
-        <Spin spinning={loading} tip="Loading...">
-          <iframe
-            src={`${getRuntime().getBasePath()}preview.html`}
-            ref={iframeRef}
-            onLoad={handleIframeLoad}
-            className={styles.previewContainer}
-          />
-        </Spin>
-      ) : (
-        <BrickPreview conf={previewConf} ref={previewRef} />
-      )}
+      <BrickPreview conf={previewConf} ref={previewRef} />
       <BrickActions
         actions={actions || props.actions}
         onActionClick={handleActionClick}

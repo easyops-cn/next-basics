@@ -56,13 +56,6 @@
   }
 }
 
-.previewContainer {
-  border: none;
-  width: 100%;
-  padding: 15px;
-  overflow: auto;
-}
-
 html[data-theme="dark-v2"] {
   .demoContainer {
     background: var(--color-fill-bg-base-4);
