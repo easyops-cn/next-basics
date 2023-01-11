@@ -107,7 +107,7 @@ export function BrickEditor({
   React.useEffect(() => {
     const content = serialize(defaultConf);
     setConfString(content);
-  }, [mode]);
+  }, [defaultConf, mode]);
 
   return (
     <div

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Collapse, Card } from "antd";
+import { GeneralIcon } from "@next-libs/basic-components";
+import classNames from "classnames";
+import ReactMarkdown from "react-markdown";
+import { Action, StoryConf, SnippetConf } from "@next-core/brick-types";
+import { getAdjustedConf } from "../../share/processor";
 import {
   BrickPreview,
   BrickPreviewRef,
@@ -7,57 +12,13 @@ import {
 import { BrickActions } from "../../components/BrickActions/BrickActions";
 import { BrickEditor } from "../../components/BrickEditor/BrickEditor";
 import styles from "./BrickDemo.module.css";
-import { i18nText } from "@next-core/brick-kit";
-import {
-  Action,
-  StoryConf,
-  SnippetConf,
-  BrickConf,
-} from "@next-core/brick-types";
-import { GeneralIcon } from "@next-libs/basic-components";
-import classNames from "classnames";
-import ReactMarkdown from "react-markdown";
+
 import style from "../../components/BrickDoc/BrickDoc.module.css";
 
 interface BrickDemoProps {
   defaultConf: StoryConf | SnippetConf;
   mode: string;
   actions?: Action[];
-}
-
-declare type DemoConf = {
-  previewConf: StoryConf | StoryConf[];
-  description: {
-    title: string;
-    message?: string;
-  };
-  actions?: Action[];
-};
-// 兼容新的SnippetConf格式
-function getAdjustedConf(defaultConf: StoryConf | SnippetConf): DemoConf {
-  let adjustedConf: DemoConf;
-  // 新格式里必须有bricks
-  if ((defaultConf as SnippetConf).bricks) {
-    const snippetConf = defaultConf as SnippetConf;
-    const bricks = [].concat(snippetConf.bricks).filter(Boolean);
-    adjustedConf = {
-      previewConf: bricks,
-      description: {
-        title: i18nText(snippetConf.title),
-        message: i18nText(snippetConf.message),
-      },
-      actions: snippetConf.actions,
-    };
-  } else {
-    const storyConf = { ...(defaultConf as StoryConf) };
-    const description = storyConf.description;
-    delete storyConf.description;
-    adjustedConf = {
-      previewConf: storyConf,
-      description,
-    };
-  }
-  return adjustedConf;
 }
 
 export function BrickDemo(props: BrickDemoProps): React.ReactElement {
