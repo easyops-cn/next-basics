@@ -4,7 +4,6 @@ import { mount } from "enzyme";
 import { NavMenu } from "./NavMenu";
 import { SidebarMenuItem } from "@next-core/brick-types";
 import * as brickKit from "@next-core/brick-kit";
-import { title } from "process";
 
 jest.spyOn(brickKit, "getHistory").mockReturnValue({
   location: {
