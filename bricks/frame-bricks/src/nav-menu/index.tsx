@@ -34,6 +34,16 @@ export class NavMenuElement extends UpdatingElement {
   })
   selectedKeys: string[];
 
+  /**
+   * @required false
+   * @default -
+   * @description 是否在hover菜单项的时候显示tooltip
+   */
+  @property({
+    type: Boolean,
+  })
+  showTooltip: boolean;
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -52,7 +62,10 @@ export class NavMenuElement extends UpdatingElement {
     if (this.isConnected) {
       ReactDOM.render(
         <BrickWrapper>
-          <NavMenu menuItems={this.menu?.menuItems ?? []} />
+          <NavMenu
+            menuItems={this.menu?.menuItems ?? []}
+            showTooltip={this.showTooltip}
+          />
         </BrickWrapper>,
         this
       );

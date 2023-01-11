@@ -28,6 +28,7 @@ interface SidebarMenuProps {
   menuItems?: SidebarMenuItem[];
   isCustom?: boolean;
   selectedKeys?: string[];
+  showTooltip?: boolean;
 }
 
 function isDivider(item: SidebarMenuItem) {
@@ -46,7 +47,7 @@ function isSubMenu(
 }
 
 export function NavMenu(props: SidebarMenuProps): React.ReactElement {
-  const { menuItems } = props;
+  const { menuItems, showTooltip } = props;
 
   const history = getHistory();
   const [location, setLocation] = useState<Location>(history.location);
@@ -113,7 +114,7 @@ export function NavMenu(props: SidebarMenuProps): React.ReactElement {
     return (
       <Menu.Item
         key={item.key}
-        title={item.text}
+        title={showTooltip ? item.text : ""}
         className={style.simpleMenuItem}
       >
         {item.useBrick ? renderBrickCom(item) : renderLinkCom(item)}

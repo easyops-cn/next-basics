@@ -4,6 +4,7 @@ import { mount } from "enzyme";
 import { NavMenu } from "./NavMenu";
 import { SidebarMenuItem } from "@next-core/brick-types";
 import * as brickKit from "@next-core/brick-kit";
+import { title } from "process";
 
 jest.spyOn(brickKit, "getHistory").mockReturnValue({
   location: {
@@ -125,5 +126,19 @@ describe("NavMenu", () => {
     const wrapper = mount(<NavMenu menuItems={sideBarMenuItem} />);
 
     expect(wrapper.find(Menu.Divider).length).toBe(1);
+  });
+
+  it("property `ShowTooltip` should decide whether to show item tooltip ", () => {
+    const wrapper = mount(
+      <NavMenu menuItems={sideBarMenuItem} showTooltip={true} />
+    );
+
+    expect(wrapper.find(Menu.Item).get(0).props["title"]).toBe("page-3");
+
+    wrapper.setProps({
+      showTooltip: false,
+    });
+
+    expect(wrapper.find(Menu.Item).get(0).props["title"]).toBe("");
   });
 });
