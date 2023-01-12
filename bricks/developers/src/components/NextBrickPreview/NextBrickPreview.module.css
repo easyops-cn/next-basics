@@ -1,0 +1,7 @@
+.previewContainer {
+  border: none;
+  width: 100%;
+  padding: 15px;
+  overflow: auto;
+  transition: height 0.3s ease-in;
+}

@@ -7,9 +7,12 @@ import {
   CategoryGroup,
   StoryDoc,
   MenuIcon,
+  StoryConf,
+  SnippetConf,
 } from "@next-core/brick-types";
 import { atomBook } from "../stories/chapters/atom-bricks";
 import { businessBook } from "../stories/chapters/business-bricks";
+import { DemoConf } from "../interfaces";
 import { K, NS_DEVELOPERS } from "../i18n/constants";
 
 export interface BrickRecord {
@@ -174,3 +177,32 @@ export const getAllStoryListV2 = (
   });
   return storyList;
 };
+
+// 兼容新的SnippetConf格式
+export function getAdjustedConf(
+  defaultConf: StoryConf | SnippetConf
+): DemoConf {
+  let adjustedConf: DemoConf;
+  // 新格式里必须有bricks
+  if ((defaultConf as SnippetConf).bricks) {
+    const snippetConf = defaultConf as SnippetConf;
+    const bricks = [].concat(snippetConf.bricks).filter(Boolean);
+    adjustedConf = {
+      previewConf: bricks,
+      description: {
+        title: i18nText(snippetConf.title),
+        message: i18nText(snippetConf.message),
+      },
+      actions: snippetConf.actions,
+    };
+  } else {
+    const storyConf = { ...(defaultConf as StoryConf) };
+    const description = storyConf.description;
+    delete storyConf.description;
+    adjustedConf = {
+      previewConf: storyConf,
+      description,
+    };
+  }
+  return adjustedConf;
+}

@@ -9,6 +9,23 @@ import { LocationContext } from "@next-core/brick-kit/dist/types/core/exports";
 import { StoryConf, SnippetConf } from "@next-core/brick-types";
 import styles from "./BrickPreview.module.css";
 
+export function processConf(
+  conf: BrickPreviewProps["conf"]
+): BrickPreviewProps["conf"] {
+  if (Array.isArray(conf)) {
+    if (conf.length > 1) {
+      return {
+        brick: "div",
+        slots: { "": { type: "bricks", bricks: conf } },
+      };
+    } else if (conf.length === 1) {
+      return conf[0];
+    }
+  }
+
+  return conf;
+}
+
 interface BrickPreviewProps {
   conf: StoryConf | StoryConf[];
 }
@@ -24,16 +41,7 @@ function LegacyBrickPreview(
 ): React.ReactElement {
   // const { containerRef, portalRef } = ref;
   // 如果conf是数组，外面需要多包一层div
-  if (Array.isArray(conf)) {
-    if (conf.length > 1) {
-      conf = {
-        brick: "div",
-        slots: { "": { type: "bricks", bricks: conf } },
-      };
-    } else if (conf.length === 1) {
-      conf = conf[0];
-    }
-  }
+  const config = processConf(conf);
 
   const containerRef = useRef(null);
   const portalRef = useRef(null);
@@ -71,7 +79,7 @@ function LegacyBrickPreview(
         failed: false,
       };
       try {
-        const mutableConf = cloneDeep(conf);
+        const mutableConf = cloneDeep(config);
         await developHelper.asyncProcessBrick(mutableConf);
         await developHelper.loadDynamicBricksInBrickConf(mutableConf);
         await fakeLocationContext.mountBrick(
@@ -121,7 +129,7 @@ function LegacyBrickPreview(
       developHelper.checkoutTplContext(null);
     };
     process();
-  }, [conf]);
+  }, [config]);
 
   return (
     <div className={styles.previewContainer}>

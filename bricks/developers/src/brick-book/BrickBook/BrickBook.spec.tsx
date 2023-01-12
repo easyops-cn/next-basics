@@ -18,6 +18,7 @@ jest.mock("@next-libs/basic-components", () => ({
 const applyPageTitle = jest.fn();
 (getRuntime as jest.Mock).mockReturnValue({
   applyPageTitle,
+  getFeatureFlags: jest.fn().mockReturnValue({}),
 });
 
 (i18nText as jest.MockedFunction<typeof i18nText>).mockImplementation(

@@ -1,4 +1,4 @@
-import { getAllStoryListV2 } from "./processor";
+import { getAllStoryListV2, getAdjustedConf } from "./processor";
 import i18next from "i18next";
 
 jest.mock("../stories/chapters/atom-bricks");
@@ -300,5 +300,57 @@ describe("getAllStoryListV2", () => {
     ]);
 
     expect(consoleWarn).toHaveBeenCalled();
+  });
+});
+
+describe("getAdjustedConf", () => {
+  it.each([
+    [
+      {
+        brick: "basic.general-button",
+        description: {
+          title: "按钮",
+          message: "通用按钮",
+        },
+        properties: {
+          name: "查看",
+        },
+      },
+      {
+        description: { message: "通用按钮", title: "按钮" },
+        previewConf: {
+          brick: "basic.general-button",
+          properties: { name: "查看" },
+        },
+      },
+    ],
+    [
+      {
+        snippetId: "basic.general-button[basic]",
+        title: {
+          en: "basic",
+          zh: "基本",
+        },
+        message: {
+          en: "one primary button",
+          zh: "一个初级按钮",
+        },
+        bricks: [
+          {
+            brick: "basic.general-button",
+            properties: { name: "查看" },
+          },
+        ],
+      },
+      {
+        actions: undefined,
+        description: { message: "一个初级按钮", title: "基本" },
+        previewConf: [
+          { brick: "basic.general-button", properties: { name: "查看" } },
+        ],
+      },
+    ],
+  ])("should work", (conf, result) => {
+    expect(getAdjustedConf(conf)).toEqual(result);
   });
 });

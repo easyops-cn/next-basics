@@ -21,6 +21,8 @@ import { findStoryById } from "../../providers-of-brick-story/processor";
 import { getStoryTitle } from "../../share/processor";
 import { K, NS_DEVELOPERS } from "../../i18n/constants";
 import { BrickDemo } from "../BrickDemo/BrickDemo";
+import { getAdjustedConf } from "../../share/processor";
+import { NextBrickDemo } from "../../components/NextBrickDemo/NextBrickDemo";
 import { BrickDocument } from "../../brick-document/BrickDocument";
 
 import cssStyle from "./style.module.css";
@@ -58,6 +60,12 @@ export function BrickBook({
   const { t } = useTranslation(NS_DEVELOPERS);
 
   const [mode, setMode] = React.useState(developerStorage.mode ?? "json");
+
+  const enableNewBrickPreview = React.useMemo(
+    () => getRuntime().getFeatureFlags()["developers-brick-preview"],
+    []
+  );
+
   React.useEffect(() => {
     if (story && !notToSetPageTitle) {
       getRuntime().applyPageTitle(i18nText(story.text));
@@ -77,6 +85,8 @@ export function BrickBook({
 
   const title = getStoryTitle(story);
   const description = i18nText(story.description) || "";
+
+  const adjustedConfList = confList.map((conf) => getAdjustedConf(conf));
 
   return (
     <>
@@ -124,14 +134,23 @@ export function BrickBook({
             gridTemplateColumns: `repeat(${story.previewColumns || 1}, 1fr)`,
           }}
         >
-          {confList.map((item, i) => (
-            <BrickDemo
-              key={`${storyId}-${i}`}
+          {enableNewBrickPreview ? (
+            <NextBrickDemo
+              storyId={storyId}
+              confList={adjustedConfList}
               mode={mode}
-              defaultConf={item}
-              actions={actions}
+              activeTabIndex={0}
             />
-          ))}
+          ) : (
+            confList.map((item, i) => (
+              <BrickDemo
+                key={`${storyId}-${i}`}
+                mode={mode}
+                defaultConf={item}
+                actions={actions}
+              />
+            ))
+          )}
         </div>
       </section>
       <section className={cssStyle.sectionTitle}>
