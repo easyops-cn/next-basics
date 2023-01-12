@@ -2826,6 +2826,13 @@
   dependencies:
     "@next-libs/basic-components" "^5.2.0"
 
+"@next-libs/forms@^3.3.7":
+  version "3.3.7"
+  resolved "https://registry.npmjs.org/@next-libs/forms/-/forms-3.3.7.tgz#059d82ab98e5667ab99f583e923c14ab8be0585a"
+  integrity sha512-GXUGRaTrwPX15A9iZ45p9xca9FH4AHA56hrBybS/G1Poiy8dmifRuhW1TT8juDej8raFEhBnF/rXlZ+D7HvPxA==
+  dependencies:
+    "@next-libs/basic-components" "^5.2.0"
+
 "@next-libs/hooks@^2.2.2":
   version "2.2.2"
   resolved "https://registry.npmjs.org/@next-libs/hooks/-/hooks-2.2.2.tgz#c667a2fd0da5328494654816d279cfaa27ace4d2"
