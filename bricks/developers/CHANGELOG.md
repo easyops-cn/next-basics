@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.364.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.363.6...@next-bricks/developers@1.364.0) (2023-01-12)
+
+
+### Bug Fixes
+
+* brick preview ([abaa7ec](https://github.com/easyops-cn/next-basics/commit/abaa7ecdf0fc0e824f8f6b3309ec72ba1430871c))
+* refactor preview ([9988470](https://github.com/easyops-cn/next-basics/commit/99884707fba3b027787e33386054147a7f60e8ce))
+
+
+### Features
+
+* developer support iframe preview in standalone ([bfe43c9](https://github.com/easyops-cn/next-basics/commit/bfe43c9435453ac76453548f6150d1f1490484af))
+
+
+
+
+
 ## [1.363.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/developers@1.363.5...@next-bricks/developers@1.363.6) (2023-01-11)
 
 **Note:** Version bump only for package @next-bricks/developers
