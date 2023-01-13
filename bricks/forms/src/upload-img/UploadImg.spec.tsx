@@ -1,15 +1,17 @@
 import React from "react";
 import { mount } from "enzyme";
 import { act } from "react-dom/test-utils";
-import { Upload, Modal, message, Input, Mentions } from "antd";
+import { Upload, Modal, message, Input, Mentions, Button } from "antd";
 import { RcFile } from "antd/lib/upload/interface";
-import { http } from "@next-core/brick-http";
+import { http, fetch } from "@next-core/brick-http";
 import * as brickKit from "@next-core/brick-kit";
 import { GeneralIcon } from "@next-libs/basic-components";
 import { UploadImg } from "./UploadImg";
 import * as kit from "@next-core/brick-kit";
+import { at } from "lodash";
 jest.mock("@next-core/brick-http");
 
+const spyOnFetch = fetch as jest.Mock;
 const map = new Map([["irelia", { name: "irelia", user_icon: "/irelia.ico" }]]);
 jest.spyOn(kit, "getRuntime").mockReturnValue({
   getAllUserMapAsync: jest.fn().mockResolvedValue(map),
@@ -706,7 +708,7 @@ describe("UploadImg", () => {
         listType="picture-card"
         onChange={onChange}
         bucketName="monitor"
-        showMentions={true}
+        showTextarea={true}
         hideUploadButton={true}
         multiple={true}
       />
@@ -727,5 +729,75 @@ describe("UploadImg", () => {
       fileList: [...fileList, ...fileListOne],
     });
     expect(wrapper.find(".ant-upload-list-item").length).toBe(3);
+  });
+
+  it("should work when useLinkToUpload is true", async () => {
+    const onChange = jest.fn();
+    spyOnFetch
+      .mockImplementationOnce((url: string) => {
+        return new Promise((resolve, reject) => {
+          resolve({
+            blob: () =>
+              new Promise((blobResolve, blobReject) => {
+                blobResolve(new Blob(["11111"], { type: "image/gif" }));
+              }),
+          });
+        });
+      })
+      .mockImplementationOnce((url: string) => {
+        return new Promise((resolve, reject) => {
+          reject("error");
+        });
+      });
+    const wrapper = mount(
+      <UploadImg
+        listType="picture-card"
+        onChange={onChange}
+        bucketName="monitor"
+        showTextarea={true}
+        hideUploadButton={true}
+        multiple={true}
+        useLinkToUpload={true}
+      />
+    );
+    expect(wrapper.find(".useLinkContainer").length).toBe(1);
+    expect(wrapper.find(Input.TextArea).length).toBe(2);
+    wrapper.find(Input.TextArea).at(1).invoke("onChange")({
+      target: {
+        value: "https://img95.699pic.com/photo/40218/6897.gif_wh860.gif",
+      },
+    });
+    await act(async () => {
+      message.error = jest.fn();
+      jest.spyOn(http, "put").mockResolvedValueOnce({
+        data: {
+          objectName: "newImage.png",
+        },
+      });
+
+      wrapper.find(".useLinkContainer").find(Button).simulate("click");
+      await (global as any).flushPromises();
+    });
+
+    wrapper.find(Input.TextArea).at(1).invoke("onChange")({
+      target: {
+        value: "https://img95.699pic.com/photo/40218/6897.gif_wh860.gif",
+      },
+    });
+    await act(async () => {
+      message.error = jest.fn();
+      jest.spyOn(http, "put").mockResolvedValueOnce({
+        data: {
+          objectName: "newImage.png",
+        },
+      });
+
+      wrapper.find(".useLinkContainer").find(Button).simulate("click");
+      await (global as any).flushPromises();
+      expect(message.error).toBeCalledWith("图片查找失败");
+    });
+    await (global as any).flushPromises();
+    wrapper.update();
+    expect(wrapper.find(".ant-upload-list-item").length).toBe(1);
   });
 });

@@ -142,6 +142,11 @@ const locale: Locale = {
   [K.THIS_MONTH]: "This Month",
   [K.THIS_QUARTER]: "This Quarter",
   [K.THIS_YEAR]: "This Year",
+  [K.USE_LINK_TO_UPLOAD]: "Use link to upload",
+  [K.USE_LINK_TO_UPLOAD_PLACEHOLDER]:
+    "Please enter a link to the picture. Multiple links are separated by a new line",
+  [K.UPLOAD_IMG_NUMBER_LIMIT]:
+    "Only {{maxNumber}} image can be uploaded at most",
 };
 
 export default locale;

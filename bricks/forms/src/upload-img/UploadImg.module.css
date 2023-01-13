@@ -11,8 +11,10 @@
     display: block;
   }
 
-  :global(.ant-upload-list-picture-card-container
-      .ant-upload-list-item-list-type-picture-card) {
+  :global(
+      .ant-upload-list-picture-card-container
+        .ant-upload-list-item-list-type-picture-card
+    ) {
     background: var(--antd-upload-list-type-picture-card-bg);
   }
 
@@ -274,4 +276,14 @@
     background-color: var(--color-brand);
     vertical-align: middle;
   }
+}
+
+.useLinkContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.linkTextArea {
+  margin-right: 20px;
 }
