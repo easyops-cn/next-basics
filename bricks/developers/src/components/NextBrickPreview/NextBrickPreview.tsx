@@ -16,6 +16,7 @@ import styles from "./NextBrickPreview.module.css";
 
 interface NextBrickPreviewProps {
   conf: StoryConf | StoryConf[];
+  onFinish?: () => void;
 }
 
 export interface BrickPreviewRef {
@@ -24,21 +25,26 @@ export interface BrickPreviewRef {
 }
 
 export function LegacyNextBrickPreview(
-  { conf }: NextBrickPreviewProps,
+  { conf, onFinish }: NextBrickPreviewProps,
   ref: React.Ref<BrickPreviewRef>
 ): React.ReactElement {
   const { t } = useTranslation(NS_DEVELOPERS);
   const iframeRef = useRef<HTMLIFrameElement>();
   const [loading, setLoading] = useState(true);
 
-  const renderBrick = useCallback(async (conf: StoryConf | StoryConf[]) => {
-    const contentWindow = iframeRef.current.contentWindow;
-    const previewRender = (contentWindow as any)._preview_render;
-    await previewRender({ conf: processConf(conf) });
+  const renderBrick = useCallback(
+    async (conf: StoryConf | StoryConf[]) => {
+      const contentWindow = iframeRef.current.contentWindow;
+      const previewRender = (contentWindow as any)._preview_render;
+      await previewRender({ conf: processConf(conf) });
 
-    iframeRef.current.height =
-      contentWindow.document.body.scrollHeight + 80 + "px";
-  }, []);
+      iframeRef.current.height =
+        contentWindow.document.body.scrollHeight + 80 + "px";
+
+      onFinish?.();
+    },
+    [onFinish]
+  );
 
   React.useImperativeHandle(ref, () => ({
     get container() {

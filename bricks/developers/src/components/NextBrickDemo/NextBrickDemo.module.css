@@ -37,6 +37,11 @@
         background-color: var(--antd-tabs-title-selected-color);
       }
     }
+
+    .loadingIcon {
+      position: absolute;
+      right: -2px;
+    }
   }
 }
 
