@@ -203,6 +203,16 @@ export class UploadImgElement extends FormItemElement {
   })
   multiple?: boolean;
 
+  /**
+   * @default false
+   * @description 是否支持使用链接上传图片
+   * @group other
+   */
+  @property({
+    type: Boolean,
+  })
+  useLinkToUpload?: boolean;
+
   connectedCallback(): void {
     // istanbul ignore else
     if (!this.style.display) {
@@ -279,6 +289,7 @@ export class UploadImgElement extends FormItemElement {
             showMentions={this.showMentions}
             labelTooltip={this.labelTooltip}
             multiple={this.multiple}
+            useLinkToUpload={this.useLinkToUpload}
           />
         </BrickWrapper>,
         this

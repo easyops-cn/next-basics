@@ -129,6 +129,10 @@ const locale: Locale = {
   [K.THIS_MONTH]: "本月",
   [K.THIS_QUARTER]: "本季度",
   [K.THIS_YEAR]: "今年",
+  [K.USE_LINK_TO_UPLOAD]: "通过链接上传",
+  [K.USE_LINK_TO_UPLOAD_PLACEHOLDER]:
+    "请输入图片的链接，多个链接之间用换行分隔",
+  [K.UPLOAD_IMG_NUMBER_LIMIT]: "最多只能上传 {{maxNumber}} 张图片",
 };
 
 export default locale;

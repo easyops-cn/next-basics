@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, useState } from "react";
+import React, { ReactElement, ReactNode, useMemo, useState } from "react";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import { Upload, Modal, message, Input, Button } from "antd";
 import { UploadFile, RcFile } from "antd/lib/upload/interface";
@@ -28,6 +28,8 @@ import { UploadImgValue } from "../interfaces";
 import { ReactComponent as ImageUploadDark } from "./image-upload-dark.svg";
 import { FileUtils } from "../utils";
 import { Mentions } from "@next-libs/user-components";
+import { fetch } from "@next-core/brick-http";
+import i18n from "i18next";
 interface UploadImgProps extends FormItemWrapperProps {
   listType?: "picture" | "picture-card" | "text";
   fileList?: {
@@ -52,12 +54,47 @@ interface UploadImgProps extends FormItemWrapperProps {
   getPreview?: boolean;
   showMentions?: boolean;
   multiple?: boolean;
+  useLinkToUpload?: boolean;
 }
 
 interface ImageItem {
   url?: string;
   uid?: string;
   [propName: string]: any;
+}
+
+function getFileFromUrl(url: string): Promise<{
+  file: File;
+  previewUrl: string;
+}> {
+  return new Promise((resolve, reject) => {
+    fetch(url).then(
+      (res) => {
+        res.blob().then((e) => {
+          // istanbul ignore if
+          if (!e.type.startsWith("image/")) {
+            message.error("仅支持上传图片文件");
+            reject(new Error("仅支持上传图片文件"));
+          }
+          const reader = new FileReader();
+          reader.readAsDataURL(e);
+          reader.onload = () => {
+            const file = new File(
+              [e],
+              `${uniqueId("img-")}-${new Date().getTime()}.${e.type}`,
+              { type: e.type }
+            );
+            resolve({ file, previewUrl: reader.result as string });
+          };
+          reader.onerror = (error) => reject(error);
+        });
+      },
+      (error) => {
+        message.error("图片查找失败");
+        reject(error);
+      }
+    );
+  });
 }
 
 function getImageDetail(file: File): Promise<{
@@ -134,6 +171,11 @@ export function RealUploadImg(
     width?: number;
     quality?: number;
   }>();
+  const [uploadLinks, setUploadLinks] = useState<string[]>([]);
+  const [linkTextAreaVaule, setLinkTextAreaVaule] = useState("");
+  const exceededMaxNumberLimit = useMemo(() => {
+    return !(!props.maxNumber || imageList?.length < props.maxNumber);
+  }, [imageList, props.maxNumber]);
   const theme = useCurrentTheme();
 
   const buttonIcon: MenuIcon = {
@@ -345,6 +387,8 @@ export function RealUploadImg(
 
   const filesPasted = (e): void => {
     const items = e.clipboardData.items;
+    const currentFileList: ImageItem[] = [];
+    const currentDoneFileList: ImageItem[] = [];
     forEach(items, async (item) => {
       const file = item.getAsFile();
       if (file?.type.startsWith("image/")) {
@@ -373,7 +417,12 @@ export function RealUploadImg(
         };
 
         const oldList = cloneDeep(imageList);
-        handleFilesChange(fileInfo, [...oldList, fileInfo], false);
+        handleFilesChange(
+          fileInfo,
+          [...oldList, ...currentFileList, fileInfo],
+          false
+        );
+        props.multiple && currentFileList.push(fileInfo);
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
@@ -389,7 +438,12 @@ export function RealUploadImg(
 
           fileInfo.status = "done";
           fileInfo.url = transformResponseToUrl(response.objectName);
-          handleFilesChange(fileInfo, [...oldList, fileInfo], true);
+          handleFilesChange(
+            fileInfo,
+            [...oldList, ...currentDoneFileList, fileInfo],
+            true
+          );
+          props.multiple && currentDoneFileList.push(fileInfo);
           setDisabled(false);
         } catch (err) {
           message.error("上传失败");
@@ -403,6 +457,67 @@ export function RealUploadImg(
   const handleTextChange = (e: any): void => {
     handleValueChange({
       text: e.target.value,
+    });
+  };
+  const handleLinkTextChange = (e: any): void => {
+    const links = (e.target.value?.split(/\n/) || []).filter(
+      (v: string) => v.length
+    );
+    setLinkTextAreaVaule(e.target.value);
+    setUploadLinks([...links]);
+  };
+  const handleUseLinkToUpload = (): void => {
+    setUploadLinks([]);
+    setLinkTextAreaVaule("");
+    const currentFileList: ImageItem[] = [];
+    const currentDoneFileList: ImageItem[] = [];
+    forEach(uploadLinks, async (item) => {
+      if (disabled) {
+        message.error("还有附件正在上传，请稍候再试。");
+        return;
+      }
+      const oldList = cloneDeep(imageList);
+      try {
+        const fileData = await getFileFromUrl(item);
+        const file: File & { lastModifiedDate?: string | number } =
+          fileData.file;
+        const fileInfo: ImageItem = {
+          originFileObj: fileData,
+          type: file.type,
+          name: file.name,
+          size: file.size,
+          lastModified: file.lastModified,
+          lastModifiedDate: file.lastModifiedDate,
+          uid: uniqueId("-img"),
+          status: "uploading",
+          percent: 100,
+          preview: fileData.previewUrl,
+        };
+        handleFilesChange(
+          fileInfo,
+          [...oldList, ...currentFileList, fileInfo],
+          false
+        );
+        props.multiple && currentFileList.push(fileInfo);
+        setDisabled(true);
+
+        const response = await ObjectStoreApi_putObject(props.bucketName, {
+          file: file,
+        });
+        fileInfo.status = "done";
+        fileInfo.url = transformResponseToUrl(response.objectName);
+        handleFilesChange(
+          fileInfo,
+          [...oldList, ...currentDoneFileList, fileInfo],
+          true
+        );
+        props.multiple && currentDoneFileList.push(fileInfo);
+        setDisabled(false);
+      } catch (err) {
+        message.error("上传失败");
+        setImageList(oldList);
+        setDisabled(false);
+      }
     });
   };
   const handleMentionsChange = (value: string): void => {
@@ -617,7 +732,31 @@ export function RealUploadImg(
           placeholder={props.placeholder}
         />
       )}
-
+      {props.useLinkToUpload && (
+        <div className={styles.useLinkContainer}>
+          <Input.TextArea
+            className={styles.linkTextArea}
+            placeholder={
+              exceededMaxNumberLimit
+                ? i18n.t(`${NS_FORMS}:${K.UPLOAD_IMG_NUMBER_LIMIT}`, {
+                    maxNumber: props.maxNumber,
+                  })
+                : t(K.USE_LINK_TO_UPLOAD_PLACEHOLDER)
+            }
+            onChange={handleLinkTextChange}
+            value={linkTextAreaVaule}
+            disabled={exceededMaxNumberLimit}
+          ></Input.TextArea>
+          {
+            <Button
+              onClick={handleUseLinkToUpload}
+              disabled={exceededMaxNumberLimit || !uploadLinks.length}
+            >
+              {t(K.USE_LINK_TO_UPLOAD)}
+            </Button>
+          }
+        </div>
+      )}
       {props.uploadDraggable ? (
         <Upload.Dragger {...uploadProps}>{uploadNode()}</Upload.Dragger>
       ) : (
@@ -657,6 +796,7 @@ export function UploadImg(props: UploadImgProps): React.ReactElement {
         getPreview={props.getPreview}
         showMentions={props.showMentions}
         multiple={props.multiple}
+        useLinkToUpload={props.useLinkToUpload}
       />
     </FormItemWrapper>
   );
