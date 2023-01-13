@@ -3,8 +3,9 @@ import React, { createRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Action, StoryConf } from "@next-core/brick-types";
 import classNames from "classnames";
-import { Collapse } from "antd";
+import { Collapse, Spin } from "antd";
 import ReactMarkdown from "react-markdown";
+import { LoadingOutlined } from "@ant-design/icons";
 import { NS_DEVELOPERS, K } from "../../i18n/constants";
 import {
   NextBrickPreview,
@@ -42,6 +43,8 @@ export function NextBrickDemo(props: NextBrickDemoProps): React.ReactElement {
     confList[tabIndex] ?? ({} as DemoConf)
   );
 
+  const [refresh, setRefresh] = useState<boolean>(false);
+
   const previewRef = createRef<BrickPreviewRef>();
 
   const handleActionClick = (method: string, args: any[]): void => {
@@ -68,22 +71,20 @@ export function NextBrickDemo(props: NextBrickDemoProps): React.ReactElement {
   const handleTabClick = (curConf: DemoConf, index: number): void => {
     if (index === tabIndex) return;
 
+    setRefresh(true);
     setConf(curConf);
     setTabIndex(index);
   };
-
-  useEffect(() => {
-    setTabIndex(0);
-  }, [storyId, confList]);
 
   useEffect(() => {
     setTabIndex(activeTabIndex);
   }, [activeTabIndex]);
 
   useEffect(() => {
-    const value = confList[tabIndex] ?? ({} as DemoConf);
+    const value = confList[0] ?? ({} as DemoConf);
+    setTabIndex(0);
     setConf(value);
-  }, [confList, tabIndex]);
+  }, [confList]);
 
   const BrickEditorMemoized = React.useCallback(() => {
     return (
@@ -120,11 +121,20 @@ export function NextBrickDemo(props: NextBrickDemoProps): React.ReactElement {
             onClick={() => handleTabClick(item, index)}
           >
             {item.description?.title || t(K.DEMO, { index: index + 1 })}
+            <span className={styles.loadingIcon}>
+              {refresh && tabIndex === index && <LoadingOutlined />}
+            </span>
           </span>
         ))}
       </div>
 
-      <NextBrickPreview conf={conf.previewConf} ref={previewRef} />
+      <Spin spinning={refresh} indicator={null}>
+        <NextBrickPreview
+          conf={conf.previewConf}
+          ref={previewRef}
+          onFinish={() => setRefresh(false)}
+        />
+      </Spin>
 
       <BrickActions
         actions={conf.actions ?? props.actions}
