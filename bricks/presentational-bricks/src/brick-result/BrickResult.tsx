@@ -57,6 +57,7 @@ const emptyResultStatusMap: {
 
 export function BrickResult(props: BrickResultProps): React.ReactElement {
   const emptyResultStatus = Object.values(EmptyResultStatus);
+  const brickResultStatus = Object.values(BrickResultStatus);
   const icon = props.icon ? <LegacyIcon type={props.icon} /> : "";
 
   return emptyResultStatus.includes(props.status as EmptyResultStatus) ? (
@@ -87,7 +88,7 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
     >
       <slot id="content" name="content"></slot>
     </Result>
-  ) : (
+  ) : brickResultStatus.includes(props.status as BrickResultStatus) ? (
     <Result
       title={props.title}
       subTitle={props.subTitle}
@@ -96,5 +97,5 @@ export function BrickResult(props: BrickResultProps): React.ReactElement {
     >
       <slot id="content" name="content"></slot>
     </Result>
-  );
+  ) : null;
 }

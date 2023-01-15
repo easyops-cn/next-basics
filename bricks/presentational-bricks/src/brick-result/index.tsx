@@ -30,7 +30,7 @@ export class BrickResultElement extends UpdatingElement {
   /**
    * @required true
    * @default -
-   * @description 结果的状态, 决定图标和颜色
+   * @description 结果的状态, 决定图标和颜色；设置的值必须符合类型要求，否则返回空元素
    * @group basic
    */
   @property({ type: String })
