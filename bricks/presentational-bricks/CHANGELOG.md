@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.279.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.1...@next-bricks/presentational-bricks@1.279.2) (2023-01-15)
+
+
+### Bug Fixes
+
+* presentational-bricks.brick-result的status的属性值不符合类型要求时构件直接报错 refs GS_SEC_PRO-22 ([3f05910](https://github.com/easyops-cn/next-basics/commit/3f05910a1eaa5d5b4df66071969c80217ceeb4c6))
+
+
+
+
+
 ## [1.279.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/presentational-bricks@1.279.0...@next-bricks/presentational-bricks@1.279.1) (2023-01-15)
 
 
