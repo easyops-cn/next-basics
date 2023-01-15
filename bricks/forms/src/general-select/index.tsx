@@ -21,6 +21,7 @@ export interface ComplexOption<T = string | number> {
   label: string;
   value: T;
 }
+export type maxTagCountType = "responsive" | number;
 /**
  * @id forms.general-select
  * @name forms.general-select
@@ -85,6 +86,17 @@ export class GeneralSelectElement extends FormItemElement {
     attribute: false,
   })
   value: any;
+
+  /**
+   * @kind maxTagCountType
+   * @required false
+   * @description 最多显示多少个 tag，响应式模式会对性能产生损耗
+   * @group basic
+   */
+  @property({
+    attribute: false,
+  })
+  maxTagCount: maxTagCountType;
 
   /**
    * @kind boolean
@@ -496,6 +508,7 @@ export class GeneralSelectElement extends FormItemElement {
             filterByLabelAndValue={this.filterByLabelAndValue}
             dropdownStyle={this.dropdownStyle}
             bordered={this.bordered}
+            maxTagCount={this.maxTagCount}
           />
         </BrickWrapper>,
         this
