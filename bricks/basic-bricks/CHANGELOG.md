@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.1...@next-bricks/basic-bricks@1.228.2) (2023-01-15)
+
+
+### Bug Fixes
+
+* 更改general-list间距及面包屑高度 ([6226192](https://github.com/easyops-cn/next-basics/commit/6226192b3753c520808cd753609cb41cf186964c))
+
+
+
+
+
 ## [1.228.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.0...@next-bricks/basic-bricks@1.228.1) (2023-01-11)
 
 

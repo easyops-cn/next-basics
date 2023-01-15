@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.253.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.2...@next-bricks/forms@1.253.3) (2023-01-15)
+
+
+### Bug Fixes
+
+* 图片上传构件forms.upload-img支持使用链接上传 refs BRICK_STORE-3211 ([c32d9f2](https://github.com/easyops-cn/next-basics/commit/c32d9f2abbcfb3d754de6f58d16658f3097aeb1c))
+
+
+
+
+
 ## [1.253.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.1...@next-bricks/forms@1.253.2) (2023-01-12)
 
 **Note:** Version bump only for package @next-bricks/forms
