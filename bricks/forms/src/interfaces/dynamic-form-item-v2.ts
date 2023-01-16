@@ -203,6 +203,10 @@ export interface AutoCompleteProps extends BasicProps {
    * 候选项
    */
   options: string[] | OptionType[];
+  /**
+   * 是否为追加模式
+   */
+  isAppendMode?: boolean;
 }
 
 export interface InputColumn {
