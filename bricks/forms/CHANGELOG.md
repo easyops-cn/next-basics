@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.253.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.3...@next-bricks/forms@1.253.4) (2023-01-16)
+
+
+### Bug Fixes
+
+* general-select增加maxTagCount属性 refs BRICK_STORE-3223 ([a9abf5f](https://github.com/easyops-cn/next-basics/commit/a9abf5f5d274340f42b3db283cd453ac86923dde))
+
+
+
+
+
 ## [1.253.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.2...@next-bricks/forms@1.253.3) (2023-01-15)
 
 
