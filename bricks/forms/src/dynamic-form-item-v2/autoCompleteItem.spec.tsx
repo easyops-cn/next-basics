@@ -112,14 +112,13 @@ describe("GeneralAutoComplete", () => {
     autoComplete.invoke("onChange" as any)("username");
     expect(handleChange).toBeCalledWith("username");
 
-    wrapper.setProps({
-      value: "test",
-    });
-    wrapper.update();
-    autoComplete.invoke("onChange" as any)("test");
-    expect(handleChange).toBeCalledWith("test");
+    autoComplete.invoke("onChange" as any)("d");
+    expect(handleChange).toBeCalledWith("cd");
 
     autoComplete.invoke("onChange" as any)(undefined);
     expect(handleChange).toBeCalledWith("");
+
+    autoComplete.invoke("onSelect" as any)("g");
+    expect(handleChange).toBeCalledWith("cg");
   });
 });
