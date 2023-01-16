@@ -13,7 +13,7 @@
   > .searchInput {
     padding-left: 12px;
     padding-right: 36px;
-    border-radius: 6px;
+    border-radius: 3px;
     min-width: 220px;
   }
   > .searchBtn {
@@ -27,7 +27,11 @@
 }
 
 .largeSearchInputContainer {
-  :global(.ant-btn:not(.ant-btn-circle):not(.ant-btn-circle-outline).ant-btn-icon-only) {
+  :global(
+      .ant-btn:not(.ant-btn-circle):not(
+          .ant-btn-circle-outline
+        ).ant-btn-icon-only
+    ) {
     padding-right: 20px;
     padding-left: 20px;
     width: 58px;
