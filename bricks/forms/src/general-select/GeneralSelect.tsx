@@ -17,7 +17,7 @@ import {
 import style from "./GeneralSelect.module.css";
 import { debounce, groupBy, isNil, isEqual } from "lodash";
 import { GeneralOption } from "@next-libs/forms/dist/types/interfaces";
-
+import { maxTagCountType } from "./index";
 export const setTooltip = (event: React.MouseEvent) => {
   const target = event?.target as HTMLDivElement;
   if (target?.offsetWidth < target?.scrollWidth) {
@@ -81,6 +81,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   filterByLabelAndValue?: boolean;
   dropdownStyle?: React.CSSProperties;
   bordered?: boolean;
+  maxTagCount?: maxTagCountType;
 }
 
 // TODO(alex): 需要去掉`providers-of-cmdb.cmdb-object-api-list`，这里判断是为了开发者中心构件demo显示需要。
@@ -293,6 +294,7 @@ export function GeneralSelectLegacy(
       {...searchProps}
       value={checkedValue}
       size={props.size}
+      maxTagCount={props.maxTagCount}
       disabled={props.disabled}
       defaultActiveFirstOption={false}
       mode={props.mode as "multiple" | "tags"}
