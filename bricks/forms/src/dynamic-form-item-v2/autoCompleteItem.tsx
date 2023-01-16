@@ -67,7 +67,7 @@ export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
       ) {
         onChange(e);
       } else {
-        onChange((value ?? "").concat(e));
+        onChange(value.concat(e));
       }
     } else {
       onChange("");
