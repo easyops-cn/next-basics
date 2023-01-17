@@ -54,7 +54,7 @@
 .header-container,
 .banner-header-container {
   display: none;
-  margin-bottom: var(--page-title-margin-bottom);
+  margin: 9px 0;
   justify-content: flex-start;
   align-items: center;
   position: relative;

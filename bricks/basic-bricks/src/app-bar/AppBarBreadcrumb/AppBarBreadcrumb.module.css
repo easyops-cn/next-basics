@@ -1,6 +1,7 @@
 .breadcrumbContainer {
   display: flex;
   height: 22px;
+  align-items: center;
 }
 
 .workspaceButton {
