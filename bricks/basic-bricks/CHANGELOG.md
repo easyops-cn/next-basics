@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.2...@next-bricks/basic-bricks@1.228.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* 修改面包屑及micro-app样式 ([2b119fe](https://github.com/easyops-cn/next-basics/commit/2b119fe8edb2304e9f3f06a7ed8daaad883d117c))
+
+
+
+
+
 ## [1.228.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.1...@next-bricks/basic-bricks@1.228.2) (2023-01-15)
 
 
