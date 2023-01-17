@@ -82,6 +82,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   dropdownStyle?: React.CSSProperties;
   bordered?: boolean;
   maxTagCount?: maxTagCountType;
+  defaultActiveFirstOption?: boolean;
 }
 
 // TODO(alex): 需要去掉`providers-of-cmdb.cmdb-object-api-list`，这里判断是为了开发者中心构件demo显示需要。
@@ -104,6 +105,7 @@ export function GeneralSelectLegacy(
     showSearch,
     filterByLabelAndValue,
     onOptionDataChange,
+    defaultActiveFirstOption = false,
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
@@ -296,7 +298,7 @@ export function GeneralSelectLegacy(
       size={props.size}
       maxTagCount={props.maxTagCount}
       disabled={props.disabled}
-      defaultActiveFirstOption={false}
+      defaultActiveFirstOption={defaultActiveFirstOption}
       mode={props.mode as "multiple" | "tags"}
       placeholder={props.placeholder}
       onChange={handleChange}
