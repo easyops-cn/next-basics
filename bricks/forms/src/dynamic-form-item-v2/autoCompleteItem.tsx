@@ -6,7 +6,8 @@ interface AutoCompleteProps {
   options: string[] | OptionType[];
   disabled?: boolean;
   allowClear?: boolean;
-  placeholder: React.ReactNode;
+  placeholder?: React.ReactNode;
+  isAppendMode?: boolean;
   value?: string;
   onChange?: (value: string) => void;
 }
@@ -32,7 +33,8 @@ function filterOptions(value: string, options: OptionType[]): OptionType[] {
 }
 
 export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
-  const { disabled, allowClear, placeholder, value, onChange } = props;
+  const { disabled, allowClear, placeholder, isAppendMode, value, onChange } =
+    props;
 
   const originalOptions: OptionType[] = useMemo(
     () =>
@@ -56,6 +58,22 @@ export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
     setOptions(originalOptions);
   }, [originalOptions]);
 
+  const handleAppendChange = (e: string) => {
+    if (e) {
+      if (
+        e === value ||
+        value === undefined ||
+        Math.abs(e?.length - value?.length) >= 1
+      ) {
+        onChange(e);
+      } else {
+        onChange(value.concat(e));
+      }
+    } else {
+      onChange("");
+    }
+  };
+
   return (
     <AutoComplete
       options={options}
@@ -63,8 +81,11 @@ export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
       allowClear={allowClear}
       placeholder={placeholder}
       value={value}
-      onSearch={onSearch}
-      onChange={onChange}
+      onSelect={
+        isAppendMode ? (e) => value && e && onChange(value.concat(e)) : null
+      }
+      onSearch={isAppendMode ? null : onSearch}
+      onChange={isAppendMode ? handleAppendChange : onChange}
     />
   );
 }

@@ -323,7 +323,8 @@ export function ColumnComponent(
     }
 
     case "autoComplete": {
-      const { placeholder, allowClear, options } = column.props || {};
+      const { placeholder, allowClear, options, isAppendMode } =
+        column.props || {};
 
       return (
         <Form.Item
@@ -337,6 +338,7 @@ export function ColumnComponent(
             disabled={disabled}
             allowClear={allowClear}
             placeholder={placeholder}
+            isAppendMode={isAppendMode}
           />
         </Form.Item>
       );
