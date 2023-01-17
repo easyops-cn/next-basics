@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.254.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.254.0...@next-bricks/forms@1.254.1) (2023-01-17)
+
+
+### Bug Fixes
+
+* **forms:** 下拉框构件添加默认高亮第一个选项的配置 ([f5341d2](https://github.com/easyops-cn/next-basics/commit/f5341d2855ed0b70ba7b1e9a889db186c63e4ab6))
+
+
+
+
+
 # [1.254.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.4...@next-bricks/forms@1.254.0) (2023-01-17)
 
 
