@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.254.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.4...@next-bricks/forms@1.254.0) (2023-01-17)
+
+
+### Features
+
+* support dynamic-form-item autoComplete append mode ([7f857a4](https://github.com/easyops-cn/next-basics/commit/7f857a4286055b3aea99e15cf447696ed6ed1954))
+
+
+
+
+
 ## [1.253.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.253.3...@next-bricks/forms@1.253.4) (2023-01-16)
 
 
