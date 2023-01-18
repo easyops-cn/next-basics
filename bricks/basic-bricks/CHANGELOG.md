@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.4](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.3...@next-bricks/basic-bricks@1.228.4) (2023-01-18)
+
+
+### Bug Fixes
+
+* 手动更改custom-antd-styles依赖 ([4292ab6](https://github.com/easyops-cn/next-basics/commit/4292ab69052005a51493e77ee75461d91fd1e86b))
+
+
+
+
+
 ## [1.228.3](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.2...@next-bricks/basic-bricks@1.228.3) (2023-01-17)
 
 
