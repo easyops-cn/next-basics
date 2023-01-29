@@ -122,5 +122,8 @@ describe("GeneralAutoComplete", () => {
 
     autoComplete.invoke("onSelect" as any)("g");
     expect(handleChange).toBeCalledWith("cg");
+
+    autoComplete.invoke("onSelect" as any)(undefined);
+    expect(handleChange).toHaveBeenCalledTimes(4);
   });
 });
