@@ -47,6 +47,8 @@ export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
     [props.options]
   );
   const [options, setOptions] = React.useState(originalOptions);
+  const [nodeId, setNodeId] = React.useState("");
+  const [node, setNode] = React.useState<HTMLInputElement>();
 
   const onSearch = (v: string) => {
     const q = v.trim().toLowerCase();
@@ -57,6 +59,10 @@ export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
   React.useEffect(() => {
     setOptions(originalOptions);
   }, [originalOptions]);
+
+  React.useEffect(() => {
+    setNode(document.getElementById(nodeId) as HTMLInputElement);
+  }, [nodeId]);
 
   const handleAppendChange = (e: string) => {
     if (e) {
@@ -74,6 +80,16 @@ export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
     }
   };
 
+  const handleAppendSelect = (e: string) => {
+    if (!value || !e) return;
+    onChange(
+      value
+        .slice(0, node?.selectionStart ?? value.length)
+        .concat(e)
+        .concat(value.slice(node?.selectionStart ?? value.length))
+    );
+  };
+
   return (
     <AutoComplete
       options={options}
@@ -81,11 +97,10 @@ export function AutoCompleteItem(props: AutoCompleteProps): React.ReactElement {
       allowClear={allowClear}
       placeholder={placeholder}
       value={value}
-      onSelect={
-        isAppendMode ? (e) => value && e && onChange(value.concat(e)) : null
-      }
+      onSelect={isAppendMode ? handleAppendSelect : null}
       onSearch={isAppendMode ? null : onSearch}
       onChange={isAppendMode ? handleAppendChange : onChange}
+      onFocus={(e) => setNodeId(e.target.id)}
     />
   );
 }
