@@ -118,7 +118,12 @@ describe("GeneralAutoComplete", () => {
     autoComplete.invoke("onChange" as any)(undefined);
     expect(handleChange).toBeCalledWith("");
 
+    autoComplete.invoke("onFocus" as any)({ target: { id: "testId" } });
+
     autoComplete.invoke("onSelect" as any)("g");
     expect(handleChange).toBeCalledWith("cg");
+
+    autoComplete.invoke("onSelect" as any)(undefined);
+    expect(handleChange).toHaveBeenCalledTimes(4);
   });
 });
