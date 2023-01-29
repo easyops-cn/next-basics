@@ -237,12 +237,18 @@ describe("processor tst", () => {
       const result = processFormInitvalue(initValue);
       expect(result).toEqual({
         fields: [
-          { description: "是否需要通知", name: "needNotify", type: "bool" },
+          {
+            description: "是否需要通知",
+            name: "needNotify",
+            type: "bool",
+            fieldPath: ["needNotify"],
+          },
           {
             description: "标签",
             name: "labels",
             required: true,
             type: "DeployLabel",
+            fieldPath: ["labels"],
           },
           {
             description: "策略列表",
@@ -251,12 +257,18 @@ describe("processor tst", () => {
                 description: "packageId",
                 name: "packageId",
                 type: "package_id",
+                fieldPath: ["strategyList", "packageId"],
               },
             ],
             name: "strategyList",
             type: "object",
+            fieldPath: ["strategyList"],
           },
-          { ref: "TrackData.instanceId", required: true },
+          {
+            ref: "TrackData.instanceId",
+            required: true,
+            fieldPath: ["TrackData.instanceId"],
+          },
         ],
         name: "request",
         type: "object",
@@ -302,8 +314,14 @@ describe("processor tst", () => {
             name: "needNotify",
             type: "bool",
             description: "是否需要通知",
+            fieldPath: ["needNotify"],
           },
-          { name: "labels", type: "DeployLabel", description: "标签" },
+          {
+            name: "labels",
+            type: "DeployLabel",
+            description: "标签",
+            fieldPath: ["labels"],
+          },
           {
             name: "strategyList",
             type: "object",
@@ -312,12 +330,15 @@ describe("processor tst", () => {
                 name: "packageId",
                 type: "package_id",
                 description: "packageId",
+                fieldPath: ["strategyList", "packageId"],
               },
             ],
             description: "策略列表",
+            fieldPath: ["strategyList"],
           },
           {
             ref: "TrackData.instanceId",
+            fieldPath: ["TrackData.instanceId"],
           },
         ],
       });
@@ -365,8 +386,14 @@ describe("processor tst", () => {
             type: "bool",
             description: "是否需要通知",
             default: true,
+            fieldPath: ["needNotify"],
           },
-          { name: "labels", type: "DeployLabel", description: "标签" },
+          {
+            name: "labels",
+            type: "DeployLabel",
+            description: "标签",
+            fieldPath: ["labels"],
+          },
           {
             name: "strategyList",
             type: "object",
@@ -375,12 +402,15 @@ describe("processor tst", () => {
                 name: "packageId",
                 type: "package_id",
                 description: "packageId",
+                fieldPath: ["strategyList", "packageId"],
               },
             ],
             description: "策略列表",
+            fieldPath: ["strategyList"],
           },
           {
             ref: "TrackData.instanceId",
+            fieldPath: ["TrackData.instanceId"],
           },
         ],
       });
@@ -412,16 +442,23 @@ describe("processor tst", () => {
 
       expect(result).toEqual({
         fields: [
-          { description: "是否需要通知", name: "needNotify", type: "bool" },
+          {
+            description: "是否需要通知",
+            name: "needNotify",
+            type: "bool",
+            fieldPath: ["needNotify"],
+          },
           {
             description: "标签",
             name: "labels",
             required: true,
             type: "DeployLabel",
+            fieldPath: ["labels"],
           },
           {
             ref: "TrackData.*",
             refRequired: ["TrackData.instanceId", "TrackData.name"],
+            fieldPath: ["TrackData.*"],
           },
         ],
         name: "request",

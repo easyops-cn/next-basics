@@ -11,6 +11,7 @@ import {
   SchemaItemProperty,
   AddedSchemaFormItem,
   SchemaRootNodeProperty,
+  MetaData,
 } from "../interfaces";
 import { numberTypeList } from "../constants";
 import { innerTypeList } from "../constants";
@@ -78,27 +79,20 @@ export function processItemData(
 
 export function processFields(
   list: SchemaItemProperty[],
-  {
-    requiredList,
-    defaultData,
-  }: {
-    requiredList: string[];
-    defaultData: Record<string, unknown>;
-  },
+  { requiredList, defaultData, fieldPath }: MetaData,
   result: SchemaItemProperty[]
 ): void {
   list?.forEach((item) => {
+    const path = fieldPath.concat(item.name || item.ref);
+    const id = path.join(".");
     const property = {
       ...omit(item, "fields"),
-      ...(requiredList.includes(item.name) || requiredList.includes(item.ref)
-        ? { required: true }
-        : {}),
-      ...(!isNil(defaultData[item.name])
-        ? { default: defaultData[item.name] }
-        : {}),
+      ...(requiredList.includes(id) ? { required: true } : {}),
+      ...(!isNil(defaultData[id]) ? { default: defaultData[id] } : {}),
       ...(item.ref && item.ref.endsWith(".*")
-        ? { refRequired: getRefRequiredFields(item.ref, requiredList) }
+        ? { refRequired: getRefRequiredFields(id, requiredList) }
         : {}),
+      fieldPath: path,
     } as SchemaItemProperty;
 
     result.push(property);
@@ -107,7 +101,7 @@ export function processFields(
       property.fields = [];
       processFields(
         item.fields,
-        { requiredList, defaultData },
+        { requiredList, defaultData, fieldPath: path },
         property.fields
       );
     }
@@ -130,7 +124,11 @@ export function processFormInitvalue(
     result.required = true;
   }
 
-  processFields(data.fields, { requiredList, defaultData }, result.fields);
+  processFields(
+    data.fields,
+    { requiredList, defaultData, fieldPath: [] },
+    result.fields
+  );
 
   return result;
 }
@@ -149,20 +147,14 @@ export function collectImport(
 
 export function collectFields(
   list: SchemaItemProperty[],
-  {
-    requiredList,
-    defaultData,
-    importSet,
-  }: {
-    requiredList: string[];
-    defaultData: Record<string, unknown>;
-    importSet: Set<string>;
-  },
+  { requiredList, defaultData, importSet, fieldPath }: MetaData,
   result: SchemaItemProperty[]
 ): void {
   list?.forEach((item) => {
+    const path = fieldPath.concat(item.name || item.ref);
+    const id = path.join(".");
     if (item.required) {
-      requiredList.push(item.name || item.ref);
+      requiredList.push(id);
     }
 
     if (item.refRequired) {
@@ -170,13 +162,19 @@ export function collectFields(
     }
 
     if (!isNil(item.default)) {
-      defaultData[item.name] = item.default;
+      defaultData[id] = item.default;
     }
 
     collectImport(item, importSet);
 
     const property = {
-      ...omit(item, ["fields", "required", "refRequired", "default"]),
+      ...omit(item, [
+        "fields",
+        "required",
+        "refRequired",
+        "default",
+        "fieldPath",
+      ]),
     } as SchemaItemProperty;
 
     result.push(property);
@@ -186,7 +184,7 @@ export function collectFields(
       property.fields = [];
       collectFields(
         item.fields,
-        { requiredList, defaultData, importSet },
+        { requiredList, defaultData, importSet, fieldPath: path },
         property.fields
       );
     }
@@ -214,7 +212,7 @@ export function processFormData(
 
   collectFields(
     data.fields,
-    { requiredList, defaultData, importSet },
+    { requiredList, defaultData, importSet, fieldPath: [] },
     result.fields
   );
 
@@ -230,7 +228,7 @@ export function getRefRequiredFields(
   ref = "",
   requiredList: string[]
 ): string[] {
-  const model = ref.split(".")[0];
+  const model = ref.split(".").splice(-2)[0];
 
   return requiredList?.filter((item) => item.includes(model));
 }
