@@ -207,10 +207,24 @@ export class GeneralCheckboxElement extends FormItemElement {
     Record<string, any>
   >;
 
+  /**
+   * @detail `any[] | boolean`
+   * @description 复选框变化时触发，`event.detail` 为当前选中的值列表
+   */
+  @event({ type: "general.checkbox.change.v2" }) changeEventV2: EventEmitter<
+    Record<string, any>
+  >;
+
   private _handleChange = (value: CheckboxValueType[]): void => {
     this.value = value;
     Promise.resolve().then(() => {
       this.changeEvent.emit(value);
+    });
+  };
+
+  private _handleChangeV2 = (value: any): void => {
+    Promise.resolve().then(() => {
+      this.changeEventV2.emit(value);
     });
   };
 
@@ -241,6 +255,7 @@ export class GeneralCheckboxElement extends FormItemElement {
             validator={this.validator}
             notRender={this.notRender}
             onChange={this._handleChange}
+            onChangeV2={this._handleChangeV2}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}

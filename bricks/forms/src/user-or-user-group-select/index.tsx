@@ -171,6 +171,18 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
     });
   };
 
+  /**
+   * @detail `string[]|{selectedUser: string[],selectedUserGroup: string[]}`
+   * @description 当选择用户变化时触发
+   */
+  @event({ type: "user.group.change.v2" }) changeEventV2: EventEmitter<any>;
+
+  private _handleChangeV2 = (value: any) => {
+    Promise.resolve().then(() => {
+      this.changeEventV2.emit(value);
+    });
+  };
+
   private _mergeUseAndUserGroup = (
     originValue: UserOrUserGroupSelectValue
   ): string[] | UserOrUserGroupSelectValue => {
@@ -219,6 +231,7 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
             hideAddMeQuickly={this.hideAddMeQuickly}
             hideSelectByCMDB={this.hideSelectByCMDB}
             onChange={this._handleChange}
+            onChangeV2={this._handleChangeV2}
             optionsMode={this.optionsMode}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}

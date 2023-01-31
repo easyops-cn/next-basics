@@ -15,6 +15,7 @@ export interface GeneralCheckboxProps extends FormItemWrapperProps {
   value?: CheckboxValueType[] | CheckboxValueType;
   colSpan?: number;
   onChange?: (value: CheckboxValueType[] | CheckboxValueType) => void;
+  onChangeV2?: (value: any) => void;
   optionGroups?: OptionGroup[];
   isGroup?: boolean;
   text?: string;
@@ -45,6 +46,7 @@ export interface IconCheckboxProps {
   disabled?: boolean;
   isCustom?: boolean;
   onChange?: (checkList: any[]) => void;
+  onChangeV2?: (checkList: any[]) => void;
 }
 export function IconCheckbox(props: IconCheckboxProps) {
   const {
@@ -234,6 +236,20 @@ export function GeneralCheckboxItem(
     e.stopPropagation();
   };
 
+  const handleChange = (checkList: any[]): void => {
+    let _options = options as IconCheckboxItem[];
+    _options = optionGroups
+      ? optionGroups.reduce(
+          (before, after) => [...before, ...after.options],
+          []
+        )
+      : _options;
+    const newValueV2 = _options?.filter((item) =>
+      checkList.includes(item.value)
+    );
+    props.onChangeV2?.(newValueV2);
+    onChange?.(checkList);
+  };
   const groupOnChange = (
     groupValue: CheckboxValueType[],
     groupKey: string
@@ -244,6 +260,13 @@ export function GeneralCheckboxItem(
       ? uniq((value ?? []).concat(optionKeys))
       : value.filter((v) => !optionKeys.includes(v));
     onChange(newValue);
+    const _options = optionGroups.reduce(
+      (before, after) => [...before, ...after.options],
+      []
+    );
+    props.onChangeV2?.(
+      _options.filter((item) => newValue.includes(item.value))
+    );
   };
 
   const getCheckboxGroup = (
@@ -310,7 +333,7 @@ export function GeneralCheckboxItem(
         value={value}
         isCustom={props.isCustom}
         disabled={disabled}
-        onChange={onChange}
+        onChange={handleChange}
       />
     );
   }
@@ -318,7 +341,7 @@ export function GeneralCheckboxItem(
     <Checkbox.Group
       className={styles.generalCheckBox}
       value={value as CheckboxValueType[]}
-      onChange={onChange}
+      onChange={handleChange}
       style={{ width: "100%" }}
       data-testid="checkbox-form-item"
       {...inputProps}

@@ -20,6 +20,11 @@ describe("forms.general-cascader", () => {
     ].children.props.onChange();
     await (global as any).flushPromises();
     expect(spyOnDispatch).toBeCalled();
+    spyOnRender.mock.calls[spyOnRender.mock.calls.length - 1][0][
+      "props"
+    ].children.props.onChangeV2();
+    await (global as any).flushPromises();
+    expect(spyOnDispatch).toBeCalled();
     document.body.removeChild(element);
     expect(unmountComponentAtNode).toBeCalled();
   });
