@@ -31,7 +31,6 @@ export interface GeneralCascaderProps extends FormItemWrapperProps {
   style?: React.CSSProperties;
   suffixIcon?: string;
   onChange?: (value: string[], selectedOptions: CascaderOptionType[]) => void;
-  onChangeV2?: (selectedOptions: CascaderOptionType[]) => void;
   limit?: number;
   onLoadingData?: (targetOption: CascaderOptionType[]) => void;
 }
@@ -148,10 +147,9 @@ export function LegacyGeneralCascader(
         size={size}
         style={props.style}
         suffixIcon={suffixIcon && <LegacyIcon type={suffixIcon} />}
-        onChange={(value, selectedOptions) => {
-          props.onChangeV2?.(selectedOptions);
-          props.onChange?.(value, selectedOptions);
-        }}
+        onChange={(value, selectedOptions) =>
+          props.onChange?.(value, selectedOptions)
+        }
         loadData={handleLoadingData}
         displayRender={handlerDisplayRender}
       />

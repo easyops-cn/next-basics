@@ -172,12 +172,14 @@ export class UserOrUserGroupSelectElement extends FormItemElement {
   };
 
   /**
-   * @detail `string[]|{selectedUser: string[],selectedUserGroup: string[]}`
+   * @detail `string[]`
    * @description 当选择用户变化时触发
    */
-  @event({ type: "user.group.change.v2" }) changeEventV2: EventEmitter<any>;
+  @event({ type: "user.group.change.v2" }) changeEventV2: EventEmitter<
+    string[]
+  >;
 
-  private _handleChangeV2 = (value: any) => {
+  private _handleChangeV2 = (value: string[]) => {
     Promise.resolve().then(() => {
       this.changeEventV2.emit(value);
     });

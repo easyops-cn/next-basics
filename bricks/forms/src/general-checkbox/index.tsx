@@ -208,11 +208,11 @@ export class GeneralCheckboxElement extends FormItemElement {
   >;
 
   /**
-   * @detail `any[] | boolean`
+   * @detail `CheckboxOptionType[]`
    * @description 复选框变化时触发，`event.detail` 为当前选中的值列表
    */
   @event({ type: "general.checkbox.change.v2" }) changeEventV2: EventEmitter<
-    Record<string, any>
+    CheckboxOptionType[]
   >;
 
   private _handleChange = (value: CheckboxValueType[]): void => {
@@ -222,7 +222,7 @@ export class GeneralCheckboxElement extends FormItemElement {
     });
   };
 
-  private _handleChangeV2 = (value: any): void => {
+  private _handleChangeV2 = (value: CheckboxOptionType[]): void => {
     Promise.resolve().then(() => {
       this.changeEventV2.emit(value);
     });
