@@ -57,5 +57,15 @@ describe("forms.user-or-user-group-select", () => {
       selectedUser: ["tester"],
       selectedUserGroup: ["test group"],
     });
+
+    element._handleChangeV2([
+      { label: "tester", value: "tester" },
+      { label: "test group", value: "test-group" },
+    ]);
+    await (global as any).flushPromises();
+    expect((dispatchEvent.mock.calls[1][0] as CustomEvent).detail).toEqual([
+      { label: "tester", value: "tester" },
+      { label: "test group", value: "test-group" },
+    ]);
   });
 });

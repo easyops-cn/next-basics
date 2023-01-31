@@ -54,10 +54,12 @@ describe("GeneralCheckbox", () => {
 
   it("should work with isGroup", () => {
     const handleChange = jest.fn();
+    const handleChangeV2 = jest.fn();
     const wrapper = mount(
       <GeneralCheckbox
         isGroup={true}
         onChange={handleChange}
+        onChangeV2={handleChangeV2}
         optionGroups={[
           {
             name: "水果",
