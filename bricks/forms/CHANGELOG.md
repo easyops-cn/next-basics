@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.256.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.255.0...@next-bricks/forms@1.256.0) (2023-01-31)
+
+
+### Bug Fixes
+
+* 代码类型调整，去除cascader的onchangeV2 ([559a5e8](https://github.com/easyops-cn/next-basics/commit/559a5e854e5c31d4d6f387d4f449c53a2e224cbf))
+* 值为null不应该拉取接口 && state更新异常 ([2b3e6d2](https://github.com/easyops-cn/next-basics/commit/2b3e6d23f454bf4c7eb7d30b573c7e919259bbfb))
+
+
+### Features
+
+* 含有options的表单构件支持onchangeV2传入全量值 ([3d8e7c3](https://github.com/easyops-cn/next-basics/commit/3d8e7c30a7e5022cf86cdd86371cb355dc56ce9b))
+
+
+
+
+
 # [1.255.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.254.1...@next-bricks/forms@1.255.0) (2023-01-29)
 
 
