@@ -3,6 +3,7 @@ import { Form, Modal, Select, Radio, InputNumber } from "antd";
 import { mount, shallow } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { AddPropertyModal } from "./AddPropertyModal";
+import { RefRequiredItem } from "../ref-required-item/RefRequiredItem";
 import { Link } from "@next-libs/basic-components";
 
 jest.mock("@next-libs/basic-components", () => {
@@ -13,6 +14,13 @@ jest.mock("@next-libs/basic-components", () => {
   };
 });
 
+jest.mock("../ref-required-item/RefRequiredItem", () => {
+  return {
+    RefRequiredItem: function RefRequiredItem(props: any) {
+      return <div id="ref-required">{props.prefix}</div>;
+    },
+  };
+});
 describe("AddPropertyModal", () => {
   it("should work", () => {
     const props = {
@@ -162,6 +170,34 @@ describe("AddPropertyModal", () => {
     expect(wrapper.find(Form).prop("form").getFieldValue("enum")).toEqual([
       10, 20, 30,
     ]);
+
+    wrapper.setProps({
+      initValue: {
+        ref: "Plugin.*",
+        fieldPath: ["instance", "Plugin"],
+      },
+    });
+
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    expect(wrapper.find("#ref-required").text()).toEqual("instance");
+
+    wrapper.setProps({
+      isEdit: false,
+      initValue: {
+        ref: "Agent.*",
+        fieldPath: ["data"],
+      },
+    });
+    await act(async () => {
+      await (global as any).flushPromises();
+    });
+    wrapper.update();
+
+    expect(wrapper.find("#ref-required").text()).toEqual("data");
   });
 
   it("should work with response root node", async () => {

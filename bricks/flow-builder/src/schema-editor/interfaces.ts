@@ -21,6 +21,7 @@ export interface SchemaItemProperty
   extends Omit<SchemaRootNodeProperty, "required" | "default"> {
   required?: boolean;
   refRequired?: string[];
+  fieldPath?: string[];
   default?: string | number;
   validate?: ValidateField;
   validateRule?: ValidateField;
@@ -70,4 +71,11 @@ export interface EditorOfContext {
   ): void;
   showModelDefinition?(modelDefinition: ModelDefinition, traceId: string): void;
   hideModelDefinition?(traceId: string): void;
+}
+
+export interface MetaData {
+  requiredList: string[];
+  defaultData: Record<string, unknown>;
+  importSet?: Set<string>;
+  fieldPath: string[];
 }

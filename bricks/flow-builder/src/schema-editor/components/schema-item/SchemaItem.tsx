@@ -73,7 +73,11 @@ export function SchemaItem({
   };
 
   const openCreateModal = (): void => {
-    onModal?.({} as SchemaItemProperty, false, traceId);
+    onModal?.(
+      { fieldPath: itemData.fieldPath } as SchemaItemProperty,
+      false,
+      traceId
+    );
   };
 
   const displayName = useMemo(

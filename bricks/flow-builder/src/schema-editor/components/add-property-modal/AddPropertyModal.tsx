@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { NS_FLOW_BUILDER, K } from "../../../i18n/constants";
 import { Modal, Form, Input, Select, Radio, Switch, InputNumber } from "antd";
@@ -247,6 +247,13 @@ export function AddPropertyModal({
     [t]
   );
 
+  const getRefPrefix = useCallback(() => {
+    const fieldPath = form.getFieldValue("fieldPath");
+
+    const parentPath = isEdit ? fieldPath?.slice(0, -1) : fieldPath;
+    return parentPath?.join(".");
+  }, [form, isEdit]);
+
   const requiredFormItem = useMemo(
     () => (
       <Form.Item
@@ -261,7 +268,10 @@ export function AddPropertyModal({
           getFieldValue("origin") === "reference" &&
           getFieldValue("ref")?.includes(".*") ? (
             <Form.Item name="refRequired" label={t(K.REQUIRED_LABEL)}>
-              <RefRequiredItem model={getFieldValue("ref").split(".")[0]} />
+              <RefRequiredItem
+                model={getFieldValue("ref").split(".")[0]}
+                prefix={getRefPrefix()}
+              />
             </Form.Item>
           ) : (
             <Form.Item
@@ -275,7 +285,7 @@ export function AddPropertyModal({
         }
       </Form.Item>
     ),
-    [t]
+    [getRefPrefix, t]
   );
 
   const showWrapperFormItem = useMemo(() => {
