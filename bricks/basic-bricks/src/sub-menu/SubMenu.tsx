@@ -3,7 +3,7 @@ import { Sidebar, GeneralIcon } from "@next-libs/basic-components";
 import style from "./index.module.css";
 import { SidebarMenu, UseBrickConf } from "@next-core/brick-types";
 import { BrickAsComponent } from "@next-core/brick-kit";
-
+import { Tooltip } from "antd";
 interface SubMenuProps {
   dataSource: SidebarMenu;
   topOperationConf?: { useBrick: UseBrickConf };
@@ -15,6 +15,19 @@ export function SubMenu({
   topOperationConf,
   isThirdLevel,
 }: SubMenuProps): React.ReactElement {
+  const thirdLevelHeaderTitle = React.useRef();
+  const [isShowTooltip, setIsShowTooltip] = React.useState(false);
+  React.useEffect(() => {
+    const thirdLevelHeaderTitleRef = thirdLevelHeaderTitle?.current;
+    if (
+      isThirdLevel &&
+      thirdLevelHeaderTitleRef?.scrollHeight >
+        thirdLevelHeaderTitleRef?.offsetHeight
+    ) {
+      setIsShowTooltip(true);
+    }
+  }, []);
+
   return (
     <div
       className={`${style.subMenuContainer} ${
@@ -25,7 +38,21 @@ export function SubMenu({
         <div className={style.header}>
           <div>
             <GeneralIcon icon={dataSource.icon} />
-            <span className={style.headerTitle}>{dataSource.title}</span>
+            {isThirdLevel ? (
+              <Tooltip
+                placement="bottomLeft"
+                title={isShowTooltip ? dataSource.title : ""}
+              >
+                <span
+                  ref={thirdLevelHeaderTitle}
+                  className={style.isThirdLevelHeaderTitle}
+                >
+                  {dataSource.title}
+                </span>
+              </Tooltip>
+            ) : (
+              <span className={style.headerTitle}>{dataSource.title}</span>
+            )}
           </div>
 
           {topOperationConf?.useBrick && (
