@@ -287,6 +287,22 @@ describe("GeneralSelect", () => {
       value: "better",
     });
     expect(wrapper.find(Select).prop("value")).toBe("better");
+
+    wrapper.setProps({
+      value: ["better", "good"],
+      mode: "multiple",
+    });
+    wrapper.update();
+    expect(onOptionDataChange).toHaveBeenLastCalledWith([
+      {
+        label: "better",
+        value: "better",
+      },
+      {
+        label: "good",
+        value: "good",
+      },
+    ]);
   });
 
   it("should render group options", () => {
