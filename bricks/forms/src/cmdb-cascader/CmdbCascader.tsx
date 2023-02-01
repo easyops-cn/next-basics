@@ -22,6 +22,7 @@ export interface FieldCMDBCascaderProps {
 export interface CMDBCascaderProps extends FormItemWrapperProps {
   value: CMDBInstance[];
   onChange?: (value: CMDBCascaderProps["value"]) => void;
+  onChangeV2: (value: CascaderOptionType[]) => void;
   objectIdPath: FieldCMDBCascaderProps["objectIdPath"] | string[];
   disabled?: boolean;
   placeholder?: string;
@@ -381,12 +382,20 @@ export function CmdbCascader(props: CMDBCascaderProps) {
     selectedOptions?: CascaderOptionType[]
   ) => {
     Promise.resolve().then(() => {
-      props.onChange &&
+      props.onChangeV2?.(
+        selectedOptions.map((item) => {
+          delete item.children;
+          return item;
+        })
+      );
+      return (
+        props.onChange &&
         props.onChange(
           selectedOptions
             .map((option) => option["_instance"])
             .filter((instance) => !!instance)
-        );
+        )
+      );
     });
   };
 

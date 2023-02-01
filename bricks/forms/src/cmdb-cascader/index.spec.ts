@@ -28,4 +28,15 @@ describe("forms.cmdb-cascader", () => {
     element.handleChange("xxx");
     expect(fn).toBeCalled();
   });
+
+  it("handleChangeV2 event", async () => {
+    const fn = jest.fn();
+    const element = document.createElement("forms.cmdb-cascader");
+    // Always waiting for async `(dis)connectedCallback`
+    document.body.appendChild(element);
+    await jest.runAllTimers();
+    element.addEventListener("forms.cmdb-cascader.change.v2", fn);
+    element.handleChangeV2("xxx");
+    expect(fn).toBeCalled();
+  });
 });
