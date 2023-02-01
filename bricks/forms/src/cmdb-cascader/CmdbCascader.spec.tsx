@@ -598,9 +598,11 @@ describe("CmdbCascader", () => {
       },
     ];
     const fn = jest.fn();
+    const fnV2 = jest.fn();
     const wrapper = shallow(
       <CmdbCascader
         onChange={fn}
+        onChangeV2={fnV2}
         objectIdPath={objectIdPath}
         value={[{ instanceId: "a" }, { instanceId: "b" }, { instanceId: "c" }]}
       />
@@ -630,5 +632,6 @@ describe("CmdbCascader", () => {
     });
     wrapper.update();
     expect(fn).toBeCalledTimes(1);
+    expect(fnV2).toBeCalledTimes(1);
   });
 });

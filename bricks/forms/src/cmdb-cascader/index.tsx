@@ -127,6 +127,17 @@ export class CmdbCascaderElement extends FormItemElement {
     this.changeEvent.emit(value);
   };
 
+  /**
+   * @detail `{[key: string]: any}`
+   * @description 选项改变时触发
+   */
+  @event({ type: "forms.cmdb-cascader.change.v2" })
+  changeEventV2: EventEmitter;
+  handleChangeV2 = (value: valueCMDBCascaderProp[]): void => {
+    this.value = value;
+    this.changeEventV2.emit(value);
+  };
+
   connectedCallback(): void {
     // Don't override user's style settings.
     // istanbul ignore else
@@ -161,6 +172,7 @@ export class CmdbCascaderElement extends FormItemElement {
             validator={this.validator}
             notRender={this.notRender}
             onChange={this.handleChange}
+            onChangeV2={this.handleChangeV2}
             helpBrick={this.helpBrick}
             labelBrick={this.labelBrick}
             labelCol={this.labelCol}
