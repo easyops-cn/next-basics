@@ -15,7 +15,7 @@ import {
   GeneralComplexOption,
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
-import { debounce, groupBy, isNil, isEqual } from "lodash";
+import { debounce, groupBy, isNil, isEqual, keyBy } from "lodash";
 import { GeneralOption } from "@next-libs/forms/dist/types/interfaces";
 import { maxTagCountType } from "./index";
 export const setTooltip = (event: React.MouseEvent) => {
@@ -57,7 +57,9 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   dropdownMatchSelectWidth?: boolean;
   onChange?: (value: any, options: GeneralComplexOption[]) => void;
   onChangeV2?: (value: any) => void;
-  onOptionDataChange?: (data: GeneralComplexOption) => void;
+  onOptionDataChange?: (
+    data: GeneralComplexOption | GeneralComplexOption[]
+  ) => void;
   allowClear?: boolean;
   showSearch?: boolean;
   disabled?: boolean;
@@ -111,7 +113,7 @@ export function GeneralSelectLegacy(
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
   const [loading, setLoading] = useState(false);
   const shouldTriggerOnValueChangeArgs = useRef(true);
-  const curOptionData = useRef<GeneralComplexOption>();
+  const curOptionData = useRef<GeneralComplexOption | GeneralComplexOption[]>();
   const request = useProvider({ cache: false });
   React.useEffect(() => {
     if (suffixBrick) {
@@ -130,8 +132,18 @@ export function GeneralSelectLegacy(
   }, [props.options]);
 
   useEffect(() => {
-    if (Array.isArray(checkedValue)) {
-      // Todo(nlicro) 多选支持该事件
+    if (props.mode === "multiple") {
+      const optionDataMap = keyBy(options, "value");
+      const preOptionDataMap = keyBy(curOptionData.current, "value");
+
+      const newOptionsData = checkedValue?.map(
+        (v) => optionDataMap[v] || preOptionDataMap[v]
+      );
+
+      if (!isEqual(curOptionData.current, newOptionsData)) {
+        curOptionData.current = newOptionsData;
+        onOptionDataChange?.(newOptionsData);
+      }
       return;
     } else {
       const newOptionData = options?.find((v) => v.value === checkedValue);
