@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.6](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.5...@next-bricks/basic-bricks@1.228.6) (2023-02-01)
+
+
+### Bug Fixes
+
+* 解决launchpad没有使用cdn的问题 ([5c93246](https://github.com/easyops-cn/next-basics/commit/5c932463ebb5372a4fffd81a929aecf21868e055))
+
+
+
+
+
 ## [1.228.5](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.4...@next-bricks/basic-bricks@1.228.5) (2023-02-01)
 
 **Note:** Version bump only for package @next-bricks/basic-bricks
