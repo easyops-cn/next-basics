@@ -9,8 +9,8 @@ export function getImageUrl(app: MicroApp, defaultAppIcon: string): string {
             ? // 如果是独立打包模式
               app.standaloneMode
               ? // 如果是独立打包模式下的standalone app, 则使用 PUBLIC_ROOT 再去掉末尾的 '-/'
-                // 例如: sa-static/-/my-app/versions/1.1.1/webroot/-/micro-apps/my-app/large.png （没设置cdn）
-                // 例如: https://cdn-air.uwintech.cn/next/sa-static/-/my-app/versions/1.1.1/webroot/-/micro-apps/my-app/large.png （设置了cdn）
+                // 例如: sa-static/my-app/versions/1.1.1/webroot/-/micro-apps/my-app/large.png （没设置cdn）
+                // 例如: https://cdn-air.uwintech.cn/next/sa-static/my-app/versions/1.1.1/webroot/-/micro-apps/my-app/large.png （设置了cdn）
                 `${window.PUBLIC_ROOT.replace(/-\/$/, "")}${app.id}/versions/${
                   app.currentVersion
                 }/webroot/-/micro-apps/${app.id}/${app.icons.large}`
