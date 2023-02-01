@@ -241,7 +241,7 @@ export function RealTimeRangePicker(
     <DatePicker.RangePicker
       style={{ width: 400 }}
       showTime={rangeType === "dateTime"}
-      picker={rangeType as any}
+      picker={rangeType === "dateTime" ? "date" : rangeType}
       value={
         !isEmpty(props.value?.startTime) || !isEmpty(props.value?.endTime)
           ? [startTime, endTime]
