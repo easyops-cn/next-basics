@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.256.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.0...@next-bricks/forms@1.256.1) (2023-02-01)
+
+
+### Bug Fixes
+
+* 修复时间区间选择器在dateTime模式下，点击了月份无法选择日期，Refs: NEXT_BUILDER-2529 ([551c2fb](https://github.com/easyops-cn/next-basics/commit/551c2fb5bfba01ae68684eb6754cd9d47babb67f))
+
+
+
+
+
 # [1.256.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.255.0...@next-bricks/forms@1.256.0) (2023-01-31)
 
 
