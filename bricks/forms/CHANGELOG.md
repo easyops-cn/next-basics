@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.257.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.1...@next-bricks/forms@1.257.0) (2023-02-01)
+
+
+### Features
+
+* cmdb-cascader支持onchangeV2，Refs: FORM_BUILDER-203 ([175fbb5](https://github.com/easyops-cn/next-basics/commit/175fbb56ad2f71c276f91f205097b32e7c6ceb04))
+
+
+
+
+
 ## [1.256.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.0...@next-bricks/forms@1.256.1) (2023-02-01)
 
 
