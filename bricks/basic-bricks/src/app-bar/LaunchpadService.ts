@@ -35,6 +35,7 @@ export class LaunchpadService {
   private customList: DesktopItemCustom[] = [];
   private maxVisitorLength = 7;
   private preFetchId: any;
+  private fetched = false;
   private baseInfo: LaunchpadBaseInfo = {
     settings: {
       columns: 7,
@@ -93,7 +94,8 @@ export class LaunchpadService {
   }
 
   async preFetchLaunchpadInfo(): Promise<void> {
-    if (window.STANDALONE_MICRO_APPS) {
+    if (window.STANDALONE_MICRO_APPS && !this.fetched) {
+      this.fetched = true;
       const preFetchLaunchpadInfo = async (): Promise<void> => {
         await this.fetchLaunchpadInfo();
       };
