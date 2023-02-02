@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.257.0...@next-bricks/forms@1.258.0) (2023-02-02)
+
+
+### Features
+
+* optionDataChangeEvent 支持多选 ([17b34d1](https://github.com/easyops-cn/next-basics/commit/17b34d1dfa0e9239a63ed0d23f71b831acce1d1e))
+
+
+
+
+
 # [1.257.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.256.1...@next-bricks/forms@1.257.0) (2023-02-01)
 
 
