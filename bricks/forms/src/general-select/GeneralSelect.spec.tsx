@@ -9,6 +9,7 @@ import {
   GeneralSelectLegacy,
 } from "./GeneralSelect";
 import * as kit from "@next-core/brick-kit";
+import { EasyopsEmpty } from "@next-core/brick-kit";
 
 const mockQuery = jest.fn().mockImplementation((provider, query) =>
   Promise.resolve({
@@ -216,6 +217,11 @@ describe("GeneralSelect", () => {
           provider: "easyopsapi.cmdb@search:1.0.0",
           args: (q) => [q, { page: 1 }],
           transform,
+          emptyConfig: {
+            loading: { description: "loading" },
+            success: { description: "success" },
+            error: { description: "error" },
+          },
         }}
         onSearch={mockSearch}
         onFocus={onFocus}
@@ -224,6 +230,9 @@ describe("GeneralSelect", () => {
     expect(wrapper.find(Select).prop("filterOption")).toBe(undefined);
     wrapper.find(Select).invoke("onFocus")(null);
     expect(onFocus).toHaveBeenCalled();
+    expect(wrapper.find(Select).prop("notFoundContent")).toStrictEqual(
+      <EasyopsEmpty description={"loading"} />
+    );
 
     // search
     wrapper.find(Select).invoke("onSearch")("c");
@@ -231,6 +240,9 @@ describe("GeneralSelect", () => {
     await (global as any).flushPromises();
 
     wrapper.update();
+    expect(wrapper.find(Select).prop("notFoundContent")).toStrictEqual(
+      <EasyopsEmpty description={"success"} />
+    );
     expect(transform).toHaveBeenCalled();
     expect(wrapper.find(Select.Option).length).toBe(1);
     expect(mockQuery).toHaveBeenCalledWith("easyopsapi.cmdb@search:1.0.0", [
@@ -257,6 +269,9 @@ describe("GeneralSelect", () => {
     await (global as any).flushPromises();
 
     wrapper.update();
+    expect(wrapper.find(Select).prop("notFoundContent")).toStrictEqual(
+      <EasyopsEmpty description={"error"} />
+    );
     expect(transform).not.toBeCalled();
     expect(mockHandleHttpError).toHaveBeenCalled();
   });
