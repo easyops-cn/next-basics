@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.259.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.258.0...@next-bricks/forms@1.259.0) (2023-02-03)
+
+
+### Bug Fixes
+
+* **general-select:** 当mode是multiple类型，value是string类型报错 ([2036a31](https://github.com/easyops-cn/next-basics/commit/2036a31471c2d9ec53d230c6f23856b6ff12fafa))
+
+
+### Features
+
+* support general-auto-complete append mode ([6975027](https://github.com/easyops-cn/next-basics/commit/6975027065dd022b7ff64c4a7f5b1bdad44ce60f))
+* useBackend支持配置不同请求状态的插画 ([5426520](https://github.com/easyops-cn/next-basics/commit/542652049be66f483e06b398fb085e4f2ced6082))
+
+
+
+
+
 # [1.258.0](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.257.0...@next-bricks/forms@1.258.0) (2023-02-02)
 
 
