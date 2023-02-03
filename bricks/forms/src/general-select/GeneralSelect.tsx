@@ -46,6 +46,8 @@ const applyArgs = (args: any[] | ((query: string) => any[]), query: string) => {
   return args;
 };
 
+type RequestStatus = "loading" | "success" | "error";
+
 export interface GeneralSelectProps extends FormItemWrapperProps {
   options: GeneralComplexOption[];
   fields?: Partial<GeneralComplexOption>;
@@ -74,6 +76,7 @@ export interface GeneralSelectProps extends FormItemWrapperProps {
   onSearch?: (value: string) => void;
   useBackend?: UseBackendConf & {
     onValueChangeArgs?: any[] | ((...args: any[]) => any[]);
+    emptyConfig?: Partial<Record<RequestStatus, EasyopsEmptyProps>>;
   };
   onDebounceSearch?: (value: string) => void;
   debounceSearchDelay?: number;
@@ -111,7 +114,7 @@ export function GeneralSelectLegacy(
   } = props;
   const [checkedValue, setCheckedValue] = useState(props.value);
   const [options, setOptions] = useState<GeneralComplexOption[]>(props.options);
-  const [loading, setLoading] = useState(false);
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>();
   const shouldTriggerOnValueChangeArgs = useRef(true);
   const curOptionData = useRef<GeneralComplexOption | GeneralComplexOption[]>();
   const request = useProvider({ cache: false });
@@ -195,7 +198,7 @@ export function GeneralSelectLegacy(
           } = props.useBackend;
           (async () => {
             try {
-              setLoading(true);
+              setRequestStatus("loading");
               const actualArgs = applyArgs(
                 type === "search" ? args : onValueChangeArgs,
                 value
@@ -207,11 +210,11 @@ export function GeneralSelectLegacy(
                 transformedData as unknown as GeneralOption[],
                 props.fields as any
               );
+              setRequestStatus("success");
               setOptions(actualData);
             } catch (e) {
+              setRequestStatus("error");
               handleHttpError(e);
-            } finally {
-              setLoading(false);
             }
           })();
         } else {
@@ -301,6 +304,14 @@ export function GeneralSelectLegacy(
     ));
   };
 
+  const notFoundContent = useMemo(() => {
+    const _emptyProps =
+      (isSearchable(props.useBackend) &&
+        props.useBackend.emptyConfig?.[requestStatus]) ||
+      emptyProps;
+    return <EasyopsEmpty {..._emptyProps} />;
+  }, [emptyProps, requestStatus, props.useBackend]);
+
   return (
     <Select
       ref={ref}
@@ -324,8 +335,8 @@ export function GeneralSelectLegacy(
         ? { getPopupContainer: (triggerNode) => triggerNode.parentElement }
         : {})}
       dropdownStyle={{ padding: "2px", ...props.dropdownStyle }}
-      notFoundContent={<EasyopsEmpty {...emptyProps} />}
-      loading={loading}
+      notFoundContent={notFoundContent}
+      loading={requestStatus === "loading"}
       bordered={props.bordered}
       onFocus={() => {
         props.onFocus?.();
