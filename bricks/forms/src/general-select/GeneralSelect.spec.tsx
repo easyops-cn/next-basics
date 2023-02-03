@@ -303,6 +303,17 @@ describe("GeneralSelect", () => {
         value: "good",
       },
     ]);
+    wrapper.setProps({
+      value: "better",
+      mode: "multiple",
+    });
+    wrapper.update();
+    expect(onOptionDataChange).toHaveBeenLastCalledWith([
+      {
+        label: "better",
+        value: "better",
+      },
+    ]);
   });
 
   it("should render group options", () => {
