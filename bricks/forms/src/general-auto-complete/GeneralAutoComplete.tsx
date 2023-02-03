@@ -33,11 +33,22 @@ interface GeneralAutoCompleteProps extends FormItemWrapperProps {
   onChange?: (value: SelectValue) => void;
   placeholder?: string;
   disabled?: boolean;
+  isAppendMode?: boolean;
 }
 
 export function GeneralAutoComplete(
   props: GeneralAutoCompleteProps
 ): React.ReactElement {
+  const {
+    value,
+    onChange,
+    isAppendMode,
+    name,
+    placeholder,
+    formElement,
+    inputBoxStyle,
+    disabled,
+  } = props;
   const { t } = useTranslation(NS_FORMS);
   const originalOptions: OptionType[] = useMemo(
     () =>
@@ -50,6 +61,8 @@ export function GeneralAutoComplete(
     [props.options]
   );
   const [options, setOptions] = React.useState(originalOptions);
+  const [nodeId, setNodeId] = React.useState("");
+  const [node, setNode] = React.useState<HTMLInputElement>();
 
   const onSearch = (v: string) => {
     const q = v.trim().toLowerCase();
@@ -61,16 +74,44 @@ export function GeneralAutoComplete(
     setOptions(originalOptions);
   }, [originalOptions]);
 
+  React.useEffect(() => {
+    setNode(document.getElementById(nodeId) as HTMLInputElement);
+  }, [nodeId]);
+
+  const handleAppendChange = (e: string) => {
+    if (e) {
+      if (e === value || !value || Math.abs(e?.length - value?.length) >= 1) {
+        onChange(e);
+      } else {
+        onChange(value.concat(e));
+      }
+    } else {
+      onChange("");
+    }
+  };
+
+  const handleAppendSelect = (e: string) => {
+    if (!value || !e) return;
+    onChange(
+      value
+        .slice(0, node?.selectionStart ?? value.length)
+        .concat(e)
+        .concat(value.slice(node?.selectionStart ?? value.length))
+    );
+  };
+
   return (
     <FormItemWrapper {...props}>
       <AutoComplete
-        value={props.name && props.formElement ? undefined : props.value}
+        value={name && formElement ? undefined : value}
         options={options}
-        style={{ width: 200, ...props.inputBoxStyle }}
-        placeholder={props.placeholder}
-        onChange={props.onChange}
-        onSearch={onSearch}
-        disabled={props.disabled}
+        style={{ width: 200, ...inputBoxStyle }}
+        placeholder={placeholder}
+        onChange={isAppendMode ? handleAppendChange : onChange}
+        onSearch={isAppendMode ? null : onSearch}
+        disabled={disabled}
+        onSelect={isAppendMode ? handleAppendSelect : null}
+        onFocus={(e) => setNodeId(e.target.id)}
       />
     </FormItemWrapper>
   );
