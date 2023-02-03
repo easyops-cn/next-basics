@@ -136,9 +136,9 @@ export function GeneralSelectLegacy(
       const optionDataMap = keyBy(options, "value");
       const preOptionDataMap = keyBy(curOptionData.current, "value");
 
-      const newOptionsData = checkedValue?.map(
-        (v) => optionDataMap[v] || preOptionDataMap[v]
-      );
+      const newOptionsData = []
+        .concat(checkedValue ?? [])
+        .map((v) => optionDataMap[v] || preOptionDataMap[v]);
 
       if (!isEqual(curOptionData.current, newOptionsData)) {
         curOptionData.current = newOptionsData;
