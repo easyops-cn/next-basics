@@ -8,9 +8,17 @@ import {
   getBrickDocs,
 } from "./processor";
 import i18next from "i18next";
+import * as brickKit from "@next-core/brick-kit";
 
 jest.mock("../stories/chapters/atom-bricks");
 jest.mock("../stories/chapters/business-bricks");
+
+const mockGetFeatureFlags = jest.fn().mockReturnValue({
+  "developers-brick-preview": false,
+});
+jest.spyOn(brickKit, "getRuntime").mockReturnValue({
+  getFeatureFlags: mockGetFeatureFlags,
+} as any);
 
 describe("providers-of-brick-story", () => {
   it("findStoryById should be ok", () => {

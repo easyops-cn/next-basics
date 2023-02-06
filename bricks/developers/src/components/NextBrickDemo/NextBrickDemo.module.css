@@ -1,7 +1,7 @@
 .tab {
   margin-right: 10px;
   border-bottom: 1px solid var(--antd-tabs-title-border-color);
-  padding-left: 16px;
+  margin-left: 16px;
   white-space: nowrap;
   overflow-x: auto;
   scrollbar-width: none;

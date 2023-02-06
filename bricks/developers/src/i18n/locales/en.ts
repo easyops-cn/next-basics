@@ -47,6 +47,7 @@ const locale: Locale = {
   [K.RESPONSE_SAMPLE]: "Response Sample",
   [K.COPY_SUCCESS]: "Copy success",
   [K.DEMO]: "Demo {{index}}",
+  [K.MOVED_BY_DRAGGING]: "Moved by dragging",
 };
 
 export default locale;
