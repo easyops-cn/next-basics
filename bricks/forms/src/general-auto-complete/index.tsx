@@ -82,13 +82,6 @@ export class GeneralAutoCompleteElement extends FormItemElement {
 
   /**
    * @required false
-   * @description 是否为append模式
-   * @group basicFormItem
-   */
-  @property({ type: Boolean }) declare isAppendMode: boolean;
-
-  /**
-   * @required false
    * @description 输入框样式
    * @group ui
    */
@@ -146,7 +139,6 @@ export class GeneralAutoCompleteElement extends FormItemElement {
             labelCol={this.labelCol}
             wrapperCol={this.wrapperCol}
             disabled={this.disabled}
-            isAppendMode={this.isAppendMode}
           />
         </BrickWrapper>,
         this
