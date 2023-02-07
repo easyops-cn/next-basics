@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.259.2](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.1...@next-bricks/forms@1.259.2) (2023-02-07)
+
+
+### Bug Fixes
+
+* 修复cmdb cascader无法获取value值 ([c317645](https://github.com/easyops-cn/next-basics/commit/c31764527ff54aa6eca3d19ca4f5a86b25e39d3c))
+
+
+
+
+
 ## [1.259.1](https://github.com/easyops-cn/next-basics/compare/@next-bricks/forms@1.259.0...@next-bricks/forms@1.259.1) (2023-02-06)
 
 **Note:** Version bump only for package @next-bricks/forms
