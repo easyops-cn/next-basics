@@ -24,6 +24,12 @@ describe("utils", () => {
     expect(isShowNewUI).toBeTruthy();
   });
 
+  it("should work with no route data", () => {
+    currentRouteFn.mockReturnValueOnce(undefined);
+
+    expect(getNewUIStatus()).toEqual(false);
+  });
+
   it("getNewUIStatus with ui8.0 and isTplBasePage is true", () => {
     const isShowNewUI = getNewUIStatus(true);
     expect(isShowNewUI).toBeTruthy();
