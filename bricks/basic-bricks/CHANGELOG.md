@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.7...@next-bricks/basic-bricks@1.228.8) (2023-02-07)
+
+
+### Bug Fixes
+
+* compatible with no route data ([09c3519](https://github.com/easyops-cn/next-basics/commit/09c3519108d9380bd6655507042ef906d000738a))
+
+
+
+
+
 ## [1.228.7](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.6...@next-bricks/basic-bricks@1.228.7) (2023-02-02)
 
 
