@@ -1,5 +1,5 @@
 /* istanbul ignore file temporary */
-import React, { createRef, useEffect, useState } from "react";
+import React, { createRef, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Action, StoryConf } from "@next-core/brick-types";
 import classNames from "classnames";
@@ -108,6 +108,10 @@ export function NextBrickDemo(props: NextBrickDemoProps): React.ReactElement {
     );
   };
 
+  const handleFinish = useCallback(() => {
+    setRefresh(false);
+  }, []);
+
   return (
     <div className={styles.demoContainer}>
       <div className={styles.tab}>
@@ -132,7 +136,7 @@ export function NextBrickDemo(props: NextBrickDemoProps): React.ReactElement {
         <NextBrickPreview
           conf={conf.previewConf}
           ref={previewRef}
-          onFinish={() => setRefresh(false)}
+          onFinish={handleFinish}
         />
       </Spin>
 
