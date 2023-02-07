@@ -1,7 +1,7 @@
 import React from "react";
 import { act } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { CmdbCascader } from "./CmdbCascader";
+import { CascaderWrapper } from "./CmdbCascader";
 import { shallow, mount } from "enzyme";
 import { FormItemWrapper } from "@next-libs/forms";
 import {
@@ -463,29 +463,29 @@ const props = {
 
 describe("CmdbCascader", () => {
   it("should work", () => {
-    const wrapper = shallow(<CmdbCascader {...props} />);
-    expect(wrapper.find(FormItemWrapper).length).toBe(1);
+    const wrapper = shallow(<CascaderWrapper {...props} />);
+    expect(wrapper.find(FormItemWrapper).length).toBe(0);
   });
 
   it("test objectIdPath is string array", () => {
     const wrapper = shallow(
-      <CmdbCascader objectIdPath={["AGENT_PLUGIN"]} value={[]} />
+      <CascaderWrapper objectIdPath={["AGENT_PLUGIN"]} value={[]} />
     );
-    expect(wrapper.find(FormItemWrapper).length).toBe(1);
+    expect(wrapper.find(FormItemWrapper).length).toBe(0);
   });
 
   it("test level length is 0", () => {
     const wrapper = mount(
-      <CmdbCascader
+      <CascaderWrapper
         objectIdPath={[]}
         value={[{ instanceId: "a" }, { instanceId: "b" }, { instanceId: "c" }]}
       />
     );
-    expect(wrapper.find(FormItemWrapper).length).toBe(1);
+    expect(wrapper.find(FormItemWrapper).length).toBe(0);
   });
 
   it("test cascaderValue is not empty", async () => {
-    const wrapper = mount(<CmdbCascader {...props} />);
+    const wrapper = mount(<CascaderWrapper {...props} />);
     const objectIdPath = [
       {
         objectId: "APP",
@@ -501,7 +501,7 @@ describe("CmdbCascader", () => {
       },
     ];
     const wrapper1 = mount(
-      <CmdbCascader
+      <CascaderWrapper
         objectIdPath={objectIdPath}
         value={[{ instanceId: "a" }, { instanceId: "b" }, { instanceId: "c" }]}
       />
@@ -529,7 +529,7 @@ describe("CmdbCascader", () => {
       },
     ];
     const wrapper = shallow(
-      <CmdbCascader
+      <CascaderWrapper
         objectIdPath={objectIdPath}
         value={[{ instanceId: "a" }, { instanceId: "b" }, { instanceId: "c" }]}
       />
@@ -560,7 +560,7 @@ describe("CmdbCascader", () => {
       },
     ];
     const wrapper = shallow(
-      <CmdbCascader
+      <CascaderWrapper
         objectIdPath={objectIdPath}
         value={[{ instanceId: "a" }, { instanceId: "b" }, { instanceId: "c" }]}
       />
@@ -600,7 +600,7 @@ describe("CmdbCascader", () => {
     const fn = jest.fn();
     const fnV2 = jest.fn();
     const wrapper = shallow(
-      <CmdbCascader
+      <CascaderWrapper
         onChange={fn}
         onChangeV2={fnV2}
         objectIdPath={objectIdPath}
