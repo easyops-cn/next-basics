@@ -25,3 +25,4 @@ import "./custom-processors/packVarTemplateData";
 import "./custom-processors/replacePlaceholder";
 import "./variable-list";
 import "./variable-item";
+import "./custom-processors/changeCase";
