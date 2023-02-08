@@ -2858,6 +2858,14 @@
     "@next-sdk/cmdb-sdk" "^3.2.0"
     "@next-sdk/user-service-sdk" "^2.1.5"
 
+"@next-libs/hooks@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.npmjs.org/@next-libs/hooks/-/hooks-2.2.3.tgz#8e2802a6e6de9ebb2d83984744fd42bfd594767d"
+  integrity sha512-zyodycEq2ILbpq9hBgW6gEQPnseyXoXo3Jmih0+c9F15Q+9CNHhkhSJdJuN/+NHhKICedPIR476VndkpQvi7EA==
+  dependencies:
+    "@next-sdk/cmdb-sdk" "^3.2.0"
+    "@next-sdk/user-service-sdk" "^2.1.5"
+
 "@next-libs/storage@^2.0.4":
   version "2.0.4"
   resolved "https://registry.npmjs.org/@next-libs/storage/-/storage-2.0.4.tgz#2f323ef1ae569940962c3f1561140f7b588f859f"
