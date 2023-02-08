@@ -49,7 +49,8 @@
     "@next-libs/visual-builder": "^1.2.22",
     "@next-sdk/cmdb-sdk": "^2.1.1",
     "file-saver": "^2.0.5",
-    "immutability-helper": "^3.1.1"
+    "immutability-helper": "^3.1.1",
+    "change-case": "^4.1.2"
   },
   "peerDependencies": {
     "@next-dll/ace": "*"
