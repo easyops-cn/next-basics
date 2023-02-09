@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.228.9](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.8...@next-bricks/basic-bricks@1.228.9) (2023-02-09)
+
+
+### Bug Fixes
+
+* 增加showkey开关 refs USER-8 ([abfe0cd](https://github.com/easyops-cn/next-basics/commit/abfe0cd31407845aff8cfbd59465864dbe4c1fbe))
+* 调整featureFlags代码位置 refs USER-8 ([05d09e2](https://github.com/easyops-cn/next-basics/commit/05d09e202ba81876159198b57a15453cc0748c90))
+
+
+
+
+
 ## [1.228.8](https://github.com/easyops-cn/next-basics/compare/@next-bricks/basic-bricks@1.228.7...@next-bricks/basic-bricks@1.228.8) (2023-02-07)
 
 
