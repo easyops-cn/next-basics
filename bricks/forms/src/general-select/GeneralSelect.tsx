@@ -15,7 +15,7 @@ import {
   GeneralComplexOption,
 } from "@next-libs/forms";
 import style from "./GeneralSelect.module.css";
-import { debounce, groupBy, isNil, isEqual } from "lodash";
+import { debounce, groupBy, isNil, isEqual, trim } from "lodash";
 import { GeneralOption } from "@next-libs/forms/dist/types/interfaces";
 import { maxTagCountType } from "./index";
 export const setTooltip = (event: React.MouseEvent) => {
@@ -122,7 +122,9 @@ export function GeneralSelectLegacy(
     }
   }, [suffixBrick]);
   React.useEffect(() => {
-    setCheckedValue(props.value);
+    const _value =
+      props.mode === "multiple" && !trim(props.value) ? [] : props.value;
+    setCheckedValue(_value);
   }, [props.value]);
 
   useEffect(() => {
