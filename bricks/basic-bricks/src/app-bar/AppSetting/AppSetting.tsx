@@ -17,6 +17,9 @@ import { UserAdminApi_getUserInfoV2 } from "@next-sdk/user-service-sdk";
 import { NS_BASIC_BRICKS, K } from "../../i18n/constants";
 import styles from "./AppSetting.module.css";
 
+const featureFlags = getRuntime().getFeatureFlags();
+const userShowValueFlag = featureFlags["user-show-value"];
+
 export function AppSetting(): React.ReactElement {
   const { t } = useTranslation(NS_BASIC_BRICKS);
   const currentApp = useCurrentApp();
@@ -162,7 +165,7 @@ export function AppSetting(): React.ReactElement {
   );
 
   const getUsername = () => {
-    if (userShowValue?.length) {
+    if (userShowValue?.length && userShowValueFlag) {
       return (
         userShowValue[0] +
         (userShowValue[1] ? "(" + userShowValue[1] + ")" : "")
